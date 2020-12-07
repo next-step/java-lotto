@@ -35,10 +35,11 @@ class LottoGameTest {
 
         LottoTickets lottoTickets = lottoTicketCreatable.createTickets(1);
         List<Integer> lastWeeksWinningNumbers = Arrays.asList(1, 31, 35, 22, 5, 6);
+        int bonusNumber = 5;
 
         // when
-        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
-        LottoGame expectLottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
+        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
+        LottoGame expectLottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
 
         // then
         assertThat(lottoGame).isEqualTo(expectLottoGame);

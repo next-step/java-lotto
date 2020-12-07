@@ -6,6 +6,7 @@ public class InputView {
 
     private final static String PURCHASE_PRICE_MESSAGE = "구매입 금액을 입력하세요.";
     private final static String LAST_WEEKS_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력 하세요.";
+    private final static String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력 하세요.";
 
     public static int inputPrice() {
         System.out.println(PURCHASE_PRICE_MESSAGE);
@@ -21,6 +22,14 @@ public class InputView {
         String[] split = scanner.nextLine().split(",");
 
         return parseInts(split);
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println(BONUS_NUMBER_MESSAGE);
+
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextInt();
     }
 
     private static void printLastWeeksWinningNumbersMessage() {

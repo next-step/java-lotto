@@ -21,7 +21,9 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("===========");
         for (Rank rank : lottoResult.getResult().keySet()) {
-            System.out.println(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + ") - " + lottoResult.getResult().get(rank).intValue() + "개");
+            System.out.println(rank.getCountOfMatch() + "개 일치(" + rank.getWinningMoney() + ") - " + lottoResult.getResult().get(rank) + "개");
         }
+
+        System.out.println("총 수익률은 " + lottoResult.getProfitRatio() + "입니다.");
     }
 }

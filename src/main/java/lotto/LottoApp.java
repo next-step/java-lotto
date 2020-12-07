@@ -16,7 +16,9 @@ public class LottoApp {
         OutputView.printTicketList(lottoTickets, purchasePrice);
 
         List<Integer> lastWeeksWinningNumbers = InputView.inputLastWeeksWinningNumbers();
-        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
+        int bonusNumber = InputView.inputBonusNumber();
+
+        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
         OutputView.printResult(lottoGame.getLottoResult());
     }
 }

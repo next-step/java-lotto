@@ -8,31 +8,48 @@ public class LottoGame {
     private final LottoTickets lottoTickets;
     private final List<Integer> lastWeeksWinningNumbers;
     private final LottoResult lottoResult;
+    private final int bonusNumber;
 
-    public LottoGame(LottoTickets lottoTickets, List<Integer> lastWeeksWinningNumbers) {
+    public LottoGame(LottoTickets lottoTickets, List<Integer> lastWeeksWinningNumbers, int bonusNumber) {
         lottoResult = new LottoResult(lottoTickets.size());
         this.lottoTickets = lottoTickets;
         this.lastWeeksWinningNumbers = lastWeeksWinningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoResult getLottoResult() {
         for (int lottoTicketIndex = 0; lottoTicketIndex < lottoTickets.size(); lottoTicketIndex++) {
-            findCountOfMatch(lottoTicketIndex);
+            saveCountOfMatch(lottoTicketIndex);
         }
 
         return lottoResult;
     }
 
-    private void findCountOfMatch(int lottoTicketIndex) {
+    private void saveCountOfMatch(int lottoTicketIndex) {
         int countOfMatch = 0;
         List<Integer> ticketNumbers = lottoTickets.getLottoTicket(lottoTicketIndex).getTicket();
+
         for (Integer lastWeeksWinningNumber : lastWeeksWinningNumbers) {
-            if (ticketNumbers.contains(lastWeeksWinningNumber)) {
-                countOfMatch++;
-            }
+            countOfMatch = getCountOfMatch(countOfMatch, ticketNumbers, lastWeeksWinningNumber);
         }
 
-        lottoResult.saveLottoResult(countOfMatch);
+        lottoResult.saveLottoResult(countOfMatch, isMatchBonus(countOfMatch, ticketNumbers));
+    }
+
+    private int getCountOfMatch(int countOfMatch, List<Integer> ticketNumbers, Integer lastWeeksWinningNumber) {
+        if (ticketNumbers.contains(lastWeeksWinningNumber)) {
+            countOfMatch++;
+        }
+
+        return countOfMatch;
+    }
+
+    private boolean isMatchBonus(int countOfMatch, List<Integer> ticketNumbers) {
+        if (countOfMatch == 5) {
+            return ticketNumbers.contains(bonusNumber);
+        }
+
+        return false;
     }
 
     @Override

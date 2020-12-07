@@ -19,7 +19,7 @@ class RankTest {
         // then
         assertThatThrownBy(() -> {
             // when
-            Rank.valueOf(countOfMatch);
+            Rank.valueOf(countOfMatch, false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,7 +33,7 @@ class RankTest {
         // then
         assertThatThrownBy(() -> {
             // when
-            Rank.valueOf(countOfMatch);
+            Rank.valueOf(countOfMatch, false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,7 +42,7 @@ class RankTest {
     @ValueSource(ints = {2, 1, 0})
     void 맞춘_개수가_3미만_이면_MISS(int countOfMatch) {
         // when
-        Rank rank = Rank.valueOf(countOfMatch);
+        Rank rank = Rank.valueOf(countOfMatch, false);
 
         // then
         assertThat(rank).isEqualTo(Rank.MISS);
@@ -54,10 +54,10 @@ class RankTest {
         int countOfMatch = 3;
 
         // when
-        Rank rank = Rank.valueOf(countOfMatch);
+        Rank rank = Rank.valueOf(countOfMatch, false);
 
         // then
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -66,10 +66,10 @@ class RankTest {
         int countOfMatch = 4;
 
         // when
-        Rank rank = Rank.valueOf(countOfMatch);
+        Rank rank = Rank.valueOf(countOfMatch, false);
 
         // then
-        assertThat(rank).isEqualTo(Rank.THIRD);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -78,10 +78,10 @@ class RankTest {
         int countOfMatch = 5;
 
         // when
-        Rank rank = Rank.valueOf(countOfMatch);
+        Rank rank = Rank.valueOf(countOfMatch, false);
 
         // then
-        assertThat(rank).isEqualTo(Rank.SECOND);
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -90,9 +90,37 @@ class RankTest {
         int countOfMatch = 6;
 
         // when
-        Rank rank = Rank.valueOf(countOfMatch);
+        Rank rank = Rank.valueOf(countOfMatch, false);
 
         // then
         assertThat(rank).isEqualTo(Rank.FIRST);
+    }
+
+    @DisplayName(value = "5개가 맞고, 보너스 번호가 맞으면 SECOND 반환")
+    @Test
+    void 보너스_당첨_테스트() {
+        // given
+        int countOfMatch = 5;
+        boolean matchBonus = true;
+
+        // when
+        Rank rank = Rank.valueOf(countOfMatch, true);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @DisplayName(value = "5개가 맞고, 보너스 번호가 틀리면 THIRD 반환")
+    @Test
+    void 보너스_비당첨_테스트() {
+        // given
+        int countOfMatch = 5;
+        boolean matchBonus = false;
+
+        // when
+        Rank rank = Rank.valueOf(countOfMatch, false);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class LottoResult {
 
-    private static final int PRICE_PER_SHEET = 1000;
+    private static final int PRICE_PER_SHEET = 1_000;
 
     private final Map<Rank, Integer> result = new LinkedHashMap<>();
     private final int purchasePrice;
@@ -20,8 +20,8 @@ public class LottoResult {
         }
     }
 
-    public void saveLottoResult(int countOfMatch) {
-        Rank rank = Rank.valueOf(countOfMatch);
+    public void saveLottoResult(int countOfMatch, boolean matchBonus) {
+        Rank rank = Rank.valueOf(countOfMatch, matchBonus);
         result.put(rank, result.get(rank) + 1);
     }
 
