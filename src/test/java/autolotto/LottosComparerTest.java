@@ -18,7 +18,7 @@ public class LottosComparerTest {
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 
         LottosComparer lottosComparer = new LottosComparer(lotto, winningNumbers);
-        assertEquals(lottosComparer.getMatchingCount("6") == 1);
+        assertEquals(lottosComparer.getMatchingCount(6) == 1);
 
     }
 }
