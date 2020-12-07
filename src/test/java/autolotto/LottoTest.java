@@ -1,5 +1,6 @@
 package autolotto;
 
+import autolotto.model.Lotto;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -12,7 +13,7 @@ public class LottoTest {
     public void isValidLottoNumbers(){
         Lotto lotto = new Lotto();
         for (int i = 0; i < 6; i++) {
-            assertTrue(1 <= lotto.get(i) && lotto.get(i) <= 45);
+            assertTrue(1 <= lotto.getNumbers(i) && lotto.getNumbers(i) <= 45);
         }
     }
 }
