@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 public class LottosComparerTest {
 
     @Test
-    @DisplayName("로또번호가 모두 일치됬을 때 제대로 체크하는가")
+    @DisplayName("로또번호가 일치됬을 때 제대로 체크하는가")
     public void compareLottos(){
         Lotto lotto = new Lotto();
         StringBuilder lottoNumbers = lotto.getNumber(0);
