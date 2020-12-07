@@ -1,5 +1,6 @@
-package domain;
+package calculator.domain;
 
+import calculator.domain.CalculatorOperand;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +17,7 @@ public class TestOperand {
     void createWithInvalidOperandAndOccurredRuntimeException() {
         assertThatThrownBy(() -> {
             CalculatorOperand calculatorOperand = new CalculatorOperand("-1");
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
