@@ -18,7 +18,7 @@ public class LottoTickets {
                 .filter(rank -> !rank.equals(Rank.NOTHING))
                 .collect(Collectors.toList());
 
-        return LottoPrize.of(resultRanks);
+        return new LottoPrize(resultRanks);
     }
 
     public int size() {

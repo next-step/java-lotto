@@ -1,26 +1,34 @@
 package lotto.domain;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoPrize {
-    private final Map<Rank, Long> result;
+    private final Map<Rank, Long> result = new Hashtable<>();
 
-    LottoPrize(Map<Rank, Long> result) {
-        this.result = result;
+    public LottoPrize(final List<Rank> ranks) {
+        result.put(Rank.FIRST, 0L);
+        result.put(Rank.SECOND, 0L);
+        result.put(Rank.THIRD, 0L);
+        result.put(Rank.FOURTH, 0L);
+
+        for (Rank rank : ranks) {
+            result.put(rank, LottoPrize.countRank(rank, ranks));
+        }
     }
 
-    public static LottoPrize of(final List<Rank> ranks) {
-        Map<Rank, Long> result = ranks.stream()
-                .collect(Collectors.toMap(
-                        rank -> rank,
-                        rank -> LottoPrize.countRank(rank, ranks),
-                        (existing, replacement) -> existing));
-
-        return new LottoPrize(result);
-    }
+//    public static LottoPrize of(final List<Rank> ranks) {
+//        Map<Rank, Long> result = ranks.stream()
+//                .collect(Collectors.toMap(
+//                        rank -> rank,
+//                        rank -> LottoPrize.countRank(rank, ranks),
+//                        (existing, replacement) -> existing));
+//
+//        return new LottoPrize(result);
+//    }
 
     public Double calculateProfitRate(Money originalMoney) {
         Money totalPrize = sumOfPrizes();

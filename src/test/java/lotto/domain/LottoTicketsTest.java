@@ -3,10 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.domain.LottoTicketFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,9 +23,8 @@ class LottoTicketsTest {
         List<LottoTicket> boughtTickets = Arrays.asList(LOTTO_TICKET_123456, LOTTO_TICKET_101112131415);
         LottoTickets lottoTickets = new LottoTickets(boughtTickets);
 
-        Map<Rank, Long> expectedResult = new Hashtable<>();
-        expectedResult.put(Rank.FIRST, 1L);
+        List<Rank> ranks = Collections.singletonList(Rank.FIRST);
 
-        assertThat(lottoTickets.checkResult(LOTTO_TICKET_123456)).isEqualTo(new LottoPrize(expectedResult));
+        assertThat(lottoTickets.checkResult(LOTTO_TICKET_123456)).isEqualTo(new LottoPrize(ranks));
     }
 }

@@ -19,13 +19,10 @@ class LottoPrizeTest {
     @Test
     void createTest() {
         List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FIRST);
-        Map<Rank, Long> expected = new Hashtable<>();
-        expected.put(Rank.FIRST, 2L);
-        expected.put(Rank.SECOND, 1L);
 
-        LottoPrize lottoPrize = LottoPrize.of(ranks);
+        LottoPrize lottoPrize = new LottoPrize(ranks);
 
-        assertThat(lottoPrize).isEqualTo(new LottoPrize(expected));
+        assertThat(lottoPrize).isEqualTo(new LottoPrize(ranks));
     }
 
     @DisplayName("수익률을 계산할 수 있다.")
@@ -33,7 +30,7 @@ class LottoPrizeTest {
     @MethodSource("calculateProfitRateTestResource")
     void calculateProfitRateTest(List<Rank> ranks, Double expectedProfitRate) {
         Money money = new Money(40000L);
-        LottoPrize lottoPrize = LottoPrize.of(ranks);
+        LottoPrize lottoPrize = new LottoPrize(ranks);
 
         assertThat(lottoPrize.calculateProfitRate(money)).isEqualTo(expectedProfitRate);
     }
