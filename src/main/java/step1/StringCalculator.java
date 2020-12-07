@@ -1,6 +1,8 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
@@ -31,16 +33,41 @@ public class StringCalculator {
      * @return 덧셈 결과
      */
     private int getSum(String input) {
-        if (input.matches("^[0-9]+$")) {
+        if (isOnlyNumber(input)) {
             return Integer.parseInt(input);
         }
         return getSumOfNumbers(getSplitNumbers(input));
     }
 
+    /**
+     * 입력 받은 문자열이 숫자로만 이루어져 있는지 확인하는 메소드
+     * @param input 입력 받은 문자열
+     * @return 숫자로만 이루어져있는지 여부
+     */
+    private boolean isOnlyNumber(String input) {
+        return input.matches("^[0-9]+$");
+    }
+
+    /**
+     * 입력받은 문자열을 구분자로 분리하는 메소드
+     * @param input 입력 받은 문자열
+     * @return 분리된 문자 배열
+     */
     private String[] getSplitNumbers(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
         return input.split("[,:]");
     }
 
+    /***
+     * 분리된 숫자들의 합계 반환하는 메소드
+     * @param numbers 구분자로 분리된 숫자 배열
+     * @return 숫자들의 합계
+     */
     private int getSumOfNumbers(String[] numbers) {
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)

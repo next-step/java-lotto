@@ -67,6 +67,10 @@ class StringCalculatorTest {
     void input_split_with_custom_delimiter() {
         int result = stringCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+
+
+        result = stringCalculator.splitAndSum("//&\n3&5&7");
+        assertThat(result).isEqualTo(15);
     }
 
     @Test
