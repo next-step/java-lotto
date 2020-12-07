@@ -7,6 +7,7 @@ import java.util.List;
 
 public class LottoResult {
     private static List<Rank> ranks = new ArrayList<>();
+    private static final int MIN_MATCH_COUNT = 3;
 
     public LottoResult(Lotto winningLotto, List<Lotto> buyLottoList) {
         for (Lotto lotto : buyLottoList) {
@@ -19,7 +20,7 @@ public class LottoResult {
     }
 
     public static void addRank(int matchCount) {
-        if (matchCount >= 3) {
+        if (matchCount >= MIN_MATCH_COUNT) {
             ranks.add(Rank.rank(matchCount));
         }
     }
