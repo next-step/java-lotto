@@ -20,4 +20,8 @@ public class LottoTickets {
 
         return LottoPrize.of(resultRanks);
     }
+
+    public int size() {
+        return this.lottoTickets.size();
+    }
 }

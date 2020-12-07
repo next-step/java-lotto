@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketsFactoryTest {
@@ -14,7 +12,7 @@ class LottoTicketsFactoryTest {
         Money money = new Money(10001L);
         int expectedSize = 10;
 
-        List<LottoTicket> lottoTickets = LottoTicketsFactory.createAuto(money);
+        LottoTickets lottoTickets = LottoTicketsFactory.createAuto(money);
 
         assertThat(lottoTickets.size()).isEqualTo(expectedSize);
     }

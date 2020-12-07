@@ -36,7 +36,7 @@
 - LottoTicketsFactory(class)
     - LottoTickets를 생성하는 객체
     - [X] Moeny를 인수로 받아 구매가능한 최대 수의 LottoTicket 컬렉션을 반환한다.
-    - [ ] LottoTikcets 일급 컬렉션을 반환하도록 리팩토링
+    - [X] LottoTikcets 일급 컬렉션을 반환하도록 리팩토링
 - LottoTickets(class)
     - LottoTicket 일급 컬렉션
     - [X] 속한 LottoTicket 컬렉션을 기반으로 LottoPrize를 계산할 수 있다.
