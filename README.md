@@ -15,6 +15,7 @@
 
 * 보너스볼 입력
 * 당첨통계에 보너스볼 일치 2등 추가 
+* 로또번호 유효성검증 추가
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
