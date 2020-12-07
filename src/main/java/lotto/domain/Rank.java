@@ -6,17 +6,17 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, new BigDecimal("2000000000")),
-    SECOND(5, new BigDecimal("1500000")),
-    THIRD(4, new BigDecimal("50000")),
-    FOURTH(3, new BigDecimal("5000"));
+    FIRST(6, new Money(2000000000L)),
+    SECOND(5, new Money(1500000L)),
+    THIRD(4, new Money(50000L)),
+    FOURTH(3, new Money(5000L));
 
     private final int numberOfMatchedNumber;
-    private final BigDecimal prizeAmount;
+    private final Money money;
 
-    Rank(int numberOfMatchedNumber, BigDecimal prizeAmount) {
+    Rank(int numberOfMatchedNumber, Money money) {
         this.numberOfMatchedNumber = numberOfMatchedNumber;
-        this.prizeAmount = prizeAmount;
+        this.money = money;
     }
 
     public static Rank find(final int numberOfMatchedNumber) {
@@ -24,6 +24,10 @@ public enum Rank {
                 .filter(rank -> isSameMatchedNumber(numberOfMatchedNumber, rank))
                 .findAny()
                 .orElseThrow(() -> new NotExistLottoPrizeException("해당하는 당첨결과가 없습니다."));
+    }
+
+    public Money multiply(final Long count) {
+        return this.money.multiply(count);
     }
 
     private static boolean isSameMatchedNumber(int numberOfMatchedNumber, Rank rank) {

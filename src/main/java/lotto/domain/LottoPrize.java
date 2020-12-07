@@ -22,7 +22,17 @@ public class LottoPrize {
         return new LottoPrize(result);
     }
 
-    private static long countRank(Rank target, List<Rank> ranks) {
+    public Money calculateProfit(Money originalMoney) {
+        Money totalPrize = new Money(0L);
+
+        result.forEach((rank, count) -> {
+            Money totalPrizeOfRank = rank.multiply(count);
+        });
+
+        return null;
+    }
+
+    private static Long countRank(Rank target, List<Rank> ranks) {
         return ranks.stream()
                 .filter(rank -> rank.equals(target))
                 .count();

@@ -5,22 +5,27 @@ import lotto.domain.exceptions.InvalidMoneyException;
 import java.util.Objects;
 
 public class Money {
-    private static final int LOTTO_TICKET_PRICE = 1000;
+    private static final Long MIN_VALUE = 0L;
+    private static final Long LOTTO_TICKET_PRICE = 1000L;
 
-    private final int amount;
+    private final Long amount;
 
-    public Money(final int amount) {
+    public Money(final Long amount) {
         validate(amount);
 
         this.amount = amount;
     }
 
-    public int howManyLottoTickets() {
+    public Long howManyLottoTickets() {
         return this.amount / LOTTO_TICKET_PRICE;
     }
 
-    private void validate(final int amount) {
-        if (amount < LOTTO_TICKET_PRICE) {
+    public Money multiply(final Long count) {
+        return new Money(count);
+    }
+
+    private void validate(final Long amount) {
+        if (amount <= MIN_VALUE) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
         }
     }
@@ -30,7 +35,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return amount == money.amount;
+        return Objects.equals(amount, money.amount);
     }
 
     @Override

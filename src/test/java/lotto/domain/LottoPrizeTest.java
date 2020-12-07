@@ -23,4 +23,15 @@ class LottoPrizeTest {
 
         assertThat(lottoPrize).isEqualTo(new LottoPrize(expected));
     }
+
+    @DisplayName("수익률을 계산할 수 있다.")
+    @Test
+    void calculateProfitTest() {
+        Money money = new Money(40000L);
+        List<Rank> ranks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FIRST);
+        LottoPrize lottoPrize = LottoPrize.of(ranks);
+        Money expectedProfit = new Money(1L);
+
+        assertThat(lottoPrize.calculateProfit(money)).isEqualTo(expectedProfit);
+    }
 }
