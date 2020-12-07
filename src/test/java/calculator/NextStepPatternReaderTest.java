@@ -5,10 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("넥스트스탭 패턴 판독기(NextStepPatternReader) 테스트")
 public class NextStepPatternReaderTest {
@@ -46,5 +44,27 @@ public class NextStepPatternReaderTest {
 
         // then
         assertThat(read).isEqualTo(Numbers.of(first, second));
+    }
+
+    @DisplayName("숫자 이외의 값을 전달하는 경우 예외처리를 한다.")
+    @Test
+    void notAllowNoneNumber() {
+        // given
+        String value = "a,b,c";
+        PatternReader patternReader = new NextStepPatternReader();
+
+        // when / then
+        assertThrows(RuntimeException.class, () -> patternReader.read(value));
+    }
+
+    @DisplayName("음수를 전달하는 경우 예외처리를 한다.")
+    @Test
+    void notAllowNegative() {
+        // given
+        String value = "-1,5,3";
+        PatternReader patternReader = new NextStepPatternReader();
+
+        // when / then
+        assertThrows(RuntimeException.class, () -> patternReader.read(value));
     }
 }
