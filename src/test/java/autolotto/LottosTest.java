@@ -1,9 +1,14 @@
 package autolotto;
 
+import autolotto.exception.BeShortOfMoneyException;
+import autolotto.model.Lottos;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.Scanner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottosTest {
 
@@ -13,8 +18,8 @@ public class LottosTest {
         Lottos lottos = new Lottos(14000);
         Lottos lottos2 = new Lottos(13500);
 
-        assertEquals(lottos.getLottoCount(),14);
-        assertEquals(lottos2.getLottoCount(),13);
+        assertEquals(lottos.getLottosCount(),14);
+        assertEquals(lottos2.getLottosCount(),13);
     }
 
     @Test
