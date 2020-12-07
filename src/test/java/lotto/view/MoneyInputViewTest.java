@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Money;
 import lotto.domain.exceptions.InvalidMoneyException;
+import lotto.view.exceptions.NotEnoughMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,5 +29,13 @@ class MoneyInputViewTest {
     void invalidInputTest(String invalidValue) {
         assertThatThrownBy(() -> new MoneyInputView(invalidValue))
                 .isInstanceOf(InvalidMoneyException.class);
+    }
+
+    @DisplayName("로또를 1장도 사지 못할 금액 객체 생성 시도 시 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "999", "-125"})
+    void notEnoughMoneyTest(String notEnoughValue) {
+        assertThatThrownBy(() -> new MoneyInputView(notEnoughValue))
+                .isInstanceOf(NotEnoughMoneyException.class);
     }
 }
