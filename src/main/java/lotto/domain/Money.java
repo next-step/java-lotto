@@ -20,12 +20,20 @@ public class Money {
         return this.amount / LOTTO_TICKET_PRICE;
     }
 
-    public Money multiply(final Long count) {
-        return new Money(count);
+    public Money multiplyCount(final Long count) {
+        return new Money(count * this.amount);
+    }
+
+    public Money plus(final Money thatMoney) {
+        return new Money(this.amount + thatMoney.amount);
+    }
+
+    public Money divide(final Money thatMoney) {
+        return new Money(this.amount - thatMoney.amount);
     }
 
     private void validate(final Long amount) {
-        if (amount <= MIN_VALUE) {
+        if (amount < MIN_VALUE) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
         }
     }
@@ -41,5 +49,12 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "amount=" + amount +
+                '}';
     }
 }

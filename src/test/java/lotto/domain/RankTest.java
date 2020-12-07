@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.exceptions.NotExistLottoPrizeException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,5 +34,14 @@ class RankTest {
     @ValueSource(ints = {-1, 2, 7})
     void findFailTest(int invalidValue) {
         assertThatThrownBy(() -> Rank.find(invalidValue)).isInstanceOf(NotExistLottoPrizeException.class);
+    }
+
+    @DisplayName("복수의 랭크에 대한 상금 합산 연산이 가능하다.")
+    @Test
+    void multiplyPrizeTest() {
+        Long count = 3L;
+        Money expectedMoney = new Money(2000000000L * 3L);
+
+        assertThat(Rank.FIRST.multiplyPrize(count)).isEqualTo(expectedMoney);
     }
 }

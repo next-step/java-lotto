@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.exceptions.NotExistLottoPrizeException;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
@@ -26,8 +25,8 @@ public enum Rank {
                 .orElseThrow(() -> new NotExistLottoPrizeException("해당하는 당첨결과가 없습니다."));
     }
 
-    public Money multiply(final Long count) {
-        return this.money.multiply(count);
+    public Money multiplyPrize(final Long count) {
+        return this.money.multiplyCount(count);
     }
 
     private static boolean isSameMatchedNumber(int numberOfMatchedNumber, Rank rank) {

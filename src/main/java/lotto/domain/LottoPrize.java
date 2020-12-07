@@ -25,11 +25,12 @@ public class LottoPrize {
     public Money calculateProfit(Money originalMoney) {
         Money totalPrize = new Money(0L);
 
-        result.forEach((rank, count) -> {
-            Money totalPrizeOfRank = rank.multiply(count);
-        });
+        for (Rank rank : this.result.keySet()) {
+            Money totalPrizeOfRank = rank.multiplyPrize(this.result.get(rank));
+            totalPrize = totalPrize.plus(totalPrizeOfRank);
+        }
 
-        return null;
+        return totalPrize.divide(originalMoney);
     }
 
     private static Long countRank(Rank target, List<Rank> ranks) {
