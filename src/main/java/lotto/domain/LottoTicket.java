@@ -33,6 +33,17 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
+    public long getMatchingScore(WinningCondition winningCondition) {
+        return getLottoNumbers().stream()
+                .filter(n -> winningCondition.getWinningNumbers()
+                        .contains(n.toInt())).count();
+    }
+
+    public boolean getMatchBonus(WinningCondition winningCondition) {
+        return getLottoNumbers().stream()
+                .anyMatch(n -> n.toInt() == winningCondition.getBonusNumber());
+    }
+
     @Override
     public String toString() {
         return "[" + lottoNumbers.stream()

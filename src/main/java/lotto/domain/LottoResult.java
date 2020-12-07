@@ -47,14 +47,8 @@ public class LottoResult {
     }
 
     private static void getSingleLottoResult(LottoTicket lottoTicket, WinningCondition winningCondition) {
-        long matchingScore = lottoTicket.getLottoNumbers()
-                .stream()
-                .filter(n -> winningCondition.getWinningNumbers()
-                        .contains(n.toInt())).count();
-
-        final boolean matchBonus = lottoTicket.getLottoNumbers()
-                .stream()
-                .anyMatch(n -> n.toInt() == winningCondition.getBonusNumber());
+        long matchingScore = lottoTicket.getMatchingScore(winningCondition);
+        final boolean matchBonus = lottoTicket.getMatchBonus(winningCondition);
 
         saveLottoResult(Long.valueOf(matchingScore).intValue(), matchBonus);
     }
