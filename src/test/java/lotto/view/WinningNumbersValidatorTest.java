@@ -1,19 +1,11 @@
 package lotto.view;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningNumbersValidatorTest {
 
-    private Validator validator;
-
-    @BeforeEach
-    private void initWinningNumbersValidator() {
-
-        // given
-        validator = new WinningNumbersValidator();
-    }
+    private final Validator validator = new WinningNumbersValidator();
 
     @Test
     @DisplayName("유효한 값 입력 시 유효성 검사 성공 확인")

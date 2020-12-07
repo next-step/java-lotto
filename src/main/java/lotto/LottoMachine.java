@@ -1,12 +1,13 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottoes;
-import lotto.domain.WinningRecord;
+import lotto.domain.WinningCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+public final class LottoMachine {
 
     public static final int LOTTO_SIZE = 6;
 
@@ -29,9 +30,9 @@ public class LottoMachine {
         outputView.showPurchasedLottoes(lottoes);
 
         Lotto winningLotto = inputView.inputWinningNumbers();
-        WinningRecord record = new WinningRecord(winningLotto);
-        record.record(lottoes);
+        LottoNumber bonusBall = inputView.inputBonusBall();
 
-        outputView.showStatistics(record, purchaseCount * PAY);
+        WinningCount winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
+        outputView.showStatistics(winningCount, purchaseCount * PAY);
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,33 +9,58 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningCountTest {
 
-    private WinningCount winningCount;
+    private final WinningCount winningCount;
 
-    @BeforeEach
-    public void init() {
+    public WinningCountTest() {
+
         // given
-         winningCount = new WinningCount();
+        Lottoes lottoes = new Lottoes(
+                Arrays.asList(
+                        Arrays.asList(6, 7, 8, 9, 10, 11),
+                        Arrays.asList(1, 2, 6, 7, 8, 9),
+                        Arrays.asList(1, 2, 4, 7, 8, 9),
+                        Arrays.asList(1, 2, 5, 6, 7, 8)
+                )
+        );
 
-        // when
-        winningCount.increaseCount(3);
-        winningCount.increaseCount(3);
-        winningCount.increaseCount(4);
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusBall = new LottoNumber(7);
+
+        winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
     }
 
     @Test
     @DisplayName("당첨 결과 증가 테스트")
     public void increaseCountTest() {
 
+        // when
+        long matchCountOfFifth = winningCount.getMatchCount(Rank.FIFTH);
+        long matchCountOfFourth = winningCount.getMatchCount(Rank.FOURTH);
+
         // then
-        assertThat(winningCount.getMatchCount(3)).isEqualTo(2);
-        assertThat(winningCount.getMatchCount(4)).isEqualTo(1);
+        assertThat(matchCountOfFifth).isEqualTo(2);
+        assertThat(matchCountOfFourth).isEqualTo(1);
     }
 
     @Test
     @DisplayName("총 당첨 상금 계산 테스트")
     public void calculatePrizeTest() {
 
+        // when
+        long prize = winningCount.calculatePrize();
+
         // then
-        assertThat(winningCount.calculatePrize()).isEqualTo(60_000);
+        assertThat(prize).isEqualTo(60_000);
+    }
+
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    public void calculateEarnTest() {
+
+        // when
+        double earnRate = winningCount.calculateEarnRate(4000);
+
+        // then
+        assertThat(earnRate).isEqualTo(15.0);
     }
 }

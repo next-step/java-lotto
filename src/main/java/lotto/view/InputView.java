@@ -6,22 +6,23 @@ import java.util.stream.Collectors;
 
 import lotto.LottoMachine;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
-public class InputView {
+public final class InputView {
 
-    protected static final String ASK_PAID = "구입금액을 입력해 주세요.";
+    static final String DELIMITER = ",";
 
-    protected static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ASK_PAID = "구입금액을 입력해 주세요.";
 
-    protected static final String INPUT_VALUE_IS = "\n입력한 값은 ";
+    private static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
-    protected static final String INPUT_VALUE_SUFFIX = " 입니다";
+    private static final String ASK_BONUS_BALL = "보너스 볼을 입력해주세요.";
 
-    protected static final String BLANK = " ";
+    private static final String INPUT_VALUE_MESSAGE = "\n입력한 값은 %s 입니다";
 
-    protected static final String EMPTY = "";
+    private static final String BLANK = " ";
 
-    protected static final String COMMA = ",";
+    private static final String EMPTY = "";
 
     private final Scanner scanner;
 
@@ -36,20 +37,26 @@ public class InputView {
     }
 
     public int inputPurchaseCount() {
-        String amount = input(ASK_PAID, paidValidator);
+        final String amount = input(ASK_PAID, paidValidator);
+
         return Integer.parseInt(amount) / LottoMachine.PAY;
     }
 
     public Lotto inputWinningNumbers() {
-        String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
+        final String winningNumbers = input(ASK_WINNING_NUMBERS, numbersValidator);
+
         return new Lotto(
-                Arrays.stream(winningNumbers.split(COMMA))
+                Arrays.stream(winningNumbers.split(DELIMITER))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );
     }
 
-    protected String input(String message, Validator validator) {
+    public LottoNumber inputBonusBall() {
+        return new LottoNumber(input(ASK_BONUS_BALL, new Validator()));
+    }
+
+    private String input(final String message, final Validator validator) {
         System.out.println(message);
 
         String input = scanner.nextLine().replace(BLANK, EMPTY);
@@ -60,14 +67,13 @@ public class InputView {
         return input;
     }
 
-    protected boolean isValid(Validator validator, String input) {
+    private boolean isValid(final Validator validator, final String input) {
         try {
             validator.validate(input);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage() + INPUT_VALUE_IS + input + INPUT_VALUE_SUFFIX);
+            System.out.println(e.getMessage() + String.format(INPUT_VALUE_MESSAGE, input));
             return false;
         }
-
         return true;
     }
 }

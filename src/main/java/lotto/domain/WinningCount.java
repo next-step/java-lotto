@@ -1,37 +1,34 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
-public class WinningCount {
+public final class WinningCount {
 
-    private final Map<Integer, Integer> counts;
+    private final Map<Rank, Long> counts;
 
-    public WinningCount() {
-        this.counts = new HashMap<>();
+    public WinningCount(Map<Rank, Long> counts) {
+        this.counts = Collections.unmodifiableMap(counts);
     }
 
-    public void increaseCount(int matchCount) {
-        counts.putIfAbsent(matchCount, 0);
-
-        int value = counts.get(matchCount);
-
-        counts.put(matchCount, value + 1);
+    public long getMatchCount(final Rank rank) {
+        return counts.getOrDefault(rank, 0L);
     }
 
-    public int getMatchCount(int matchCount) {
-        return counts.getOrDefault(matchCount, 0);
-    }
+    public long calculatePrize() {
+        long totalPrize = 0L;
 
-    public int calculatePrize() {
-        int totalPrize = 0;
-
-        for (int matchCount : counts.keySet()) {
-            int winningCount = counts.get(matchCount);
-            int prize = Rank.getRankingPrize(matchCount);
+        for (Rank rank : counts.keySet()) {
+            long winningCount = counts.get(rank);
+            long prize = rank.getPrize();
             totalPrize += (prize * winningCount);
         }
 
         return totalPrize;
+    }
+
+    public double calculateEarnRate(int paid) {
+        long totalPrize = calculatePrize();
+        return (double) totalPrize / paid;
     }
 }
