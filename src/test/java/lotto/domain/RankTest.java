@@ -29,11 +29,11 @@ class RankTest {
         );
     }
 
-    @DisplayName("존재하지 않는 당첨 결과를 찾으려는 경우 예외 발생")
+    @DisplayName("존재하지 않는 당첨 결과를 찾으려는 경우 꽝 반환")
     @ParameterizedTest
-    @ValueSource(ints = {-1, 2, 7})
+    @ValueSource(ints = {-1, 0, 2, 7})
     void findFailTest(int invalidValue) {
-        assertThatThrownBy(() -> Rank.find(invalidValue)).isInstanceOf(NotExistLottoPrizeException.class);
+        assertThat(Rank.find(invalidValue)).isEqualTo(Rank.NOTHING);
     }
 
     @DisplayName("복수의 랭크에 대한 상금 합산 연산이 가능하다.")

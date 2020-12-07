@@ -23,4 +23,11 @@ public class LottoTicketFixtures {
                     new LottoNumber(6), new LottoNumber(7), new LottoNumber(8)
             )
     );
+
+    public static final LottoTicket LOTTO_TICKET_101112131415 = new LottoTicket(
+            Arrays.asList(
+                    new LottoNumber(10), new LottoNumber(11), new LottoNumber(12),
+                    new LottoNumber(13), new LottoNumber(14), new LottoNumber(15)
+            )
+    );
 }

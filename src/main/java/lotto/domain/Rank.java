@@ -8,7 +8,8 @@ public enum Rank {
     FIRST(6, new Money(2000000000L)),
     SECOND(5, new Money(1500000L)),
     THIRD(4, new Money(50000L)),
-    FOURTH(3, new Money(5000L));
+    FOURTH(3, new Money(5000L)),
+    NOTHING(0, new Money(0L));
 
     private final int numberOfMatchedNumber;
     private final Money money;
@@ -22,7 +23,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> isSameMatchedNumber(numberOfMatchedNumber, rank))
                 .findAny()
-                .orElseThrow(() -> new NotExistLottoPrizeException("해당하는 당첨결과가 없습니다."));
+                .orElse(NOTHING);
     }
 
     public Money multiplyPrize(final Long count) {
