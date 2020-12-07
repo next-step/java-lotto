@@ -3,6 +3,7 @@ package step3.VO;
 import java.util.Objects;
 
 public class LottoNumber {
+    public final static int maxNumber = 45;
     private final int number;
 
     public LottoNumber(int inputNumber) {
@@ -11,7 +12,6 @@ public class LottoNumber {
     }
 
     private void validate(int inputNumber) {
-        int maxNumber = 45;
         int minNumber = 1;
         if (inputNumber < minNumber || inputNumber > maxNumber) {
             throw new IllegalArgumentException("로또 번호는 1과 45 사이의 숫자로 구성되어 있어야 합니다.");

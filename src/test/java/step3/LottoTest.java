@@ -13,7 +13,7 @@ public class LottoTest {
     void createTest() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lotto lotto = new Lotto(lottoGenerator);
-        assertThat(lotto.numberList.size()).isEqualTo(6);
+        assertThat(lotto.numberList).hasSize(LottoGenerator.lottoSize);
     }
 
     @Test
