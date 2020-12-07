@@ -19,6 +19,10 @@ public class LottoPrize {
         return totalPrize.divide(originalMoney);
     }
 
+    public Map<Rank, Long> getResult() {
+        return result;
+    }
+
     private void initDefaultResult() {
         result.put(Rank.FIRST, 0L);
         result.put(Rank.SECOND, 0L);
