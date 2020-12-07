@@ -2,6 +2,8 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.VO.Lottos;
+import step3.View.ResultView;
 import step3.VO.Money;
 
 public class DomainTest {

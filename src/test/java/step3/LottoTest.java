@@ -2,9 +2,7 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import step3.VO.Lotto;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

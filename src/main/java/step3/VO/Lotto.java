@@ -1,6 +1,8 @@
-package step3;
+package step3.VO;
 
-import step3.VO.LottoNumber;
+import step3.LottoGenerator;
+import step3.ResultNumber;
+import step3.Statistic;
 
 import java.util.List;
 import java.util.Objects;

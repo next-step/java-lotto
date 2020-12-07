@@ -1,5 +1,7 @@
-package step3;
+package step3.VO;
 
+import step3.LottoGenerator;
+import step3.VO.Lotto;
 import step3.VO.Money;
 
 import java.util.ArrayList;

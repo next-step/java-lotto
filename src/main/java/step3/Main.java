@@ -1,5 +1,8 @@
 package step3;
 
+import step3.VO.Lottos;
+import step3.View.InputView;
+import step3.View.ResultView;
 import step3.VO.LottoNumber;
 import step3.VO.Money;
 

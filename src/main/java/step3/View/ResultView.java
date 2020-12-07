@@ -1,5 +1,9 @@
-package step3;
+package step3.View;
 
+import step3.VO.Lotto;
+import step3.VO.Lottos;
+import step3.RewardBoard;
+import step3.Statistic;
 import step3.VO.LottoNumber;
 import step3.VO.Money;
 
