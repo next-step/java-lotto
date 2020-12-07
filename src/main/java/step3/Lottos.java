@@ -1,16 +1,19 @@
 package step3;
 
+import step3.VO.Money;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public Lottos(int money, LottoGenerator lottoGenerator) {
-        for (int i = 1; i <= getLottoCnt(money); i++) {
+    public Lottos(Money money, LottoGenerator lottoGenerator) {
+        for (int i = 1; i <= money.getLottoCnt(); i++) {
             buyLotto(lottoGenerator);
         }
     }
+
     public void checkResult() {
         for (Lotto lotto: this.lottoList) {
             lotto.checkReward();
@@ -19,10 +22,6 @@ public class Lottos {
 
     private void buyLotto(LottoGenerator lottoGenerator){
         lottoList.add(new Lotto(lottoGenerator));
-    }
-
-    public int getLottoCnt(int money) {
-        return money / 1000;
     }
 
     public List<Lotto> getLottoList(){

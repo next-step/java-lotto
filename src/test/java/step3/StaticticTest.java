@@ -2,6 +2,7 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.VO.Money;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -12,7 +13,9 @@ public class StaticticTest {
     void statisticTest() {
         FixedNumberGenerator fourWinningsGenerator = new FixedNumberGenerator();
         fourWinningsGenerator.setNumber("1,3,5,7,10,12");
-        int money = 6500;
+        int inputMoney = 6500;
+
+        Money money = new Money(inputMoney);
         Lottos lottos = Main.settingLottos(money, fourWinningsGenerator);
 
         ResultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
@@ -21,9 +24,9 @@ public class StaticticTest {
         lottos.checkResult();
 
         // 예상 결과값 계산
-        int lottoCnt = money / 1000;
+        int lottoCnt = inputMoney / Money.lottoPrice;
         int fourWinningReward = RewardBoard.getReward(2).getReward();
         int totalReward = lottoCnt * fourWinningReward;
-        assertThat(Statistic.getMargin(money)).isEqualTo((float)totalReward/money);
+        assertThat(Statistic.getMargin(money)).isEqualTo((float)totalReward/inputMoney);
     }
 }

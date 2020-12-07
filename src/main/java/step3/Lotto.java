@@ -1,5 +1,7 @@
 package step3;
 
+import step3.VO.LottoNumber;
+
 import java.util.List;
 import java.util.Objects;
 

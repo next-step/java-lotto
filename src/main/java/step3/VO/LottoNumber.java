@@ -1,4 +1,4 @@
-package step3;
+package step3.VO;
 
 import java.util.Objects;
 

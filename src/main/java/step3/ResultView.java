@@ -1,5 +1,8 @@
 package step3;
 
+import step3.VO.LottoNumber;
+import step3.VO.Money;
+
 import java.util.StringJoiner;
 
 public class ResultView {
@@ -16,7 +19,7 @@ public class ResultView {
         System.out.println("[" + numberString.toString() + "]");
     }
 
-    public static void printResult(int money) {
+    public static void printResult(Money money) {
         System.out.println("당첨 통계");
         System.out.println("------------------");
 

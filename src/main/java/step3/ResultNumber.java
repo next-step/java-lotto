@@ -1,6 +1,6 @@
 package step3;
 
-import com.sun.glass.ui.Clipboard;
+import step3.VO.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,7 +20,7 @@
 - LottoNumber 
     - Lotto 숫자 VO
 
-- WinningNumber :
+- ResultNumber :
     - 생성자 : 당첨 번호 및 보너스볼 저장
     - checkWinningCnt : 당첨 숫자 갯수 return
     

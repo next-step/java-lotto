@@ -2,12 +2,13 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.VO.Money;
 
 public class DomainTest {
     @Test
     @DisplayName("전체 도메인 테스트")
     void MainTest(){
-        int money = 10000;
+        Money money = new Money(10000);
         FixedNumberGenerator fixedWinningsGenerator = new FixedNumberGenerator();
         fixedWinningsGenerator.setNumber("1,3,5,7,10,12");
 

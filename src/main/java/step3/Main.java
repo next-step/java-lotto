@@ -1,12 +1,15 @@
 package step3;
 
+import step3.VO.LottoNumber;
+import step3.VO.Money;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        int money = InputView.getMoney();
+        Money money = new Money(InputView.getMoney());
 
         LottoGenerator lottoGenerator = new LottoGenerator();
 
@@ -21,7 +24,7 @@ public class Main {
         ResultView.printResult(money);
     }
 
-    public static Lottos settingLottos(int money, LottoGenerator lottoGenerator) {
+    public static Lottos settingLottos(Money money, LottoGenerator lottoGenerator) {
         Lottos lottos = new Lottos(money, lottoGenerator);
 
         ResultView.printLottoCnt(lottos.getLottosCnt());
