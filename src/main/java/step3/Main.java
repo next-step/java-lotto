@@ -38,14 +38,4 @@ public class Main {
 
         return lottos;
     }
-
-    public List<LottoNumber> getResultNumberList(String resultString) {
-        List<LottoNumber> numberList = new ArrayList<>();
-
-        for (String number : resultString.split(", ")) {
-            numberList.add(new LottoNumber(Integer.parseInt(number)));
-        }
-
-        return numberList;
-    }
 }
