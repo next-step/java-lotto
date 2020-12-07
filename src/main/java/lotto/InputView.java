@@ -16,15 +16,16 @@ public class InputView {
         return buyPrice;
     }
 
-    public static LottoWinner inputWinnerLottoNumber() {
+    public static Lotto inputWinnerLottoNumber() {
         System.out.println(LOTTO_WINNER_NUMBER_INPUT_MESSAGE);
-        String[] inputNumbers = scanner.next().replaceAll(" ", "").split(",");
-        int bonusNumber = inputWinnerBonusLottoNumber();
-        return new LottoWinner(Arrays.stream(inputNumbers).mapToInt(Integer::parseInt).toArray(), bonusNumber);
+        LottoNumber[] inputNumbers = Arrays.stream(scanner.next().replaceAll(" ", "").split(",")).map(LottoNumber::new).toArray(LottoNumber[]::new);
+        LottoNumber bonusNumber = inputWinnerBonusLottoNumber();
+        Lotto lotto = new Lotto(inputNumbers, bonusNumber);
+        return new Lotto(inputNumbers, bonusNumber);
     }
 
-    public static int inputWinnerBonusLottoNumber() {
+    public static LottoNumber inputWinnerBonusLottoNumber() {
         System.out.println(LOTTO_WINNER_BONUS_NUMBER_INPUT_MESSAGE);
-        return Integer.parseInt(scanner.next());
+        return new LottoNumber(Integer.parseInt(scanner.next()));
     }
 }

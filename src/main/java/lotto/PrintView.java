@@ -7,12 +7,10 @@ import java.util.List;
 public class PrintView {
 
     public static final String LOTTO_BUY_QTY_MESSAGE = "개를 구매했습니다.";
-    public static final int MATCH_MIN_CNT = 3;
-    public static final int MATCH_MAX_CNT = 6;
 
     public static void printLottoNumber(List<Lotto> lottoList) {
         for(Lotto lotto : lottoList){
-            System.out.println(lotto.getLottoNumbers());
+            System.out.println(lotto.getLottoNumbers().toString());
         }
 
     }
@@ -27,9 +25,6 @@ public class PrintView {
         .forEach(r -> {
             System.out.println(printBallMatchCnt(r)+r.getWinnnerPrice()+"원)- "+LottoGameService.getLottoMatchStatistics(rankList, r)+"개");
         });
-//        for(int i = MATCH_MIN_CNT; i<= MATCH_MAX_CNT; i++){
-//            System.out.println(Rank.valueOf(i, false).getMatchCnt()+"개 일치 ("+Rank.valueOf(i, false).getWinnnerPrice()+"원)- "+LottoGameService.getLottoMatchStatistics(rankList, i)+"개");
-//        }
     }
 
     public static String printBallMatchCnt(Rank rank) {

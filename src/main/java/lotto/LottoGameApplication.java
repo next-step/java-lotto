@@ -9,7 +9,7 @@ public class LottoGameApplication {
         LottoTicket lottoTicket = LottoGameService.buyLotto(buyPrice);
         PrintView.printBuyLottoQty(lottoTicket.getLottoList().size());
         PrintView.printLottoNumber(lottoTicket.getLottoList());
-        LottoWinner lottoWinner = InputView.inputWinnerLottoNumber();
+        Lotto lottoWinner = InputView.inputWinnerLottoNumber();
         List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);
         PrintView.printLottoStatistics(lottoRank);
         PrintView.printWinnerLate(lottoRank);

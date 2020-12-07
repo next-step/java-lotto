@@ -35,10 +35,10 @@ public class LottoGameService {
         return buyLotto;
     }
 
-    public static int getLottoMatchStatistics(List<Rank> rankList, Rank rank){
+    public static int getLottoMatchStatistics(List<Rank> rankList, Rank matchRank){
         int matchLottoCnt = 0;
-        for(Rank r : rankList){
-            matchLottoCnt = r.equals(rank) ? ++matchLottoCnt : matchLottoCnt;
+        for(Rank rank : rankList){
+            matchLottoCnt = rank.equals(matchRank) ? ++matchLottoCnt : matchLottoCnt;
         }
         return matchLottoCnt;
     }
