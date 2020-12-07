@@ -36,10 +36,10 @@ public class ResultView {
 
     public static void printWinningCntResult(int index, Statistic statistic) {
         //
-        int winningCnt = RewardBoard.getWinningCntByRank(index+1);
+        int winningCnt = statistic.getWinningCntByRank(index+1);
 
         if (index != 1) {
-            int rank = RewardBoard.getRankByWinningCnt(winningCnt, false);
+            int rank = statistic.getRankByWinningCnt(winningCnt, false);
             System.out.println((winningCnt) + "개 일치 (" + RewardBoard.getReward(rank).getReward() + "원)- " + statistic.getResultByIndex(index) + "개");
         }
 

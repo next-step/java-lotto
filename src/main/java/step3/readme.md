@@ -33,8 +33,7 @@
     - 함수 
         - recordResult : Lottos의 결과 기록 (호출할 때마다 초기화)     
         - getMargin : 기록된 결과를 바탕으로 수익률 계산
+        - getRankByWinningCnt : 당첨 갯수에 따른 등수 return
         
 - RewardBoard (enum) 
     - 등수에 따른 당첨 금액 return 
-    - 함수 
-        - getRankByWinningCnt : 당첨 갯수에 따른 등수 return 
