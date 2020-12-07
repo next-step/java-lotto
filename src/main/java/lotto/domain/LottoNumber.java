@@ -16,6 +16,10 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     private void validate(final int value) {
         if (value <= MIN_SIZE || value > MAX_SIZE) {
             throw new InvalidLottoNumberException("유효하지 않은 LottoNumber 입니다.");

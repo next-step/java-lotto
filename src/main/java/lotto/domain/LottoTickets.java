@@ -24,4 +24,8 @@ public class LottoTickets {
     public int size() {
         return this.lottoTickets.size();
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return new ArrayList<>(lottoTickets);
+    }
 }

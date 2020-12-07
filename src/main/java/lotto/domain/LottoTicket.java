@@ -27,6 +27,10 @@ public class LottoTicket {
         return matchedNumbers.size();
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
+    }
+
     int size() {
         return this.lottoNumbers.size();
     }

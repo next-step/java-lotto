@@ -58,7 +58,7 @@
 - BoughtHistoryOutputView
     - 로또 티켓 컬렉션을 사용자에게 보여줄 수 있다.
     - [X] 구매한 금액으로 구매할 수 있는 최대의 LottoTicket 수를 사용자에게 보여줄 수 있다.
-    - [ ] 구매한 LottoTickets를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
+    - [X] 구매한 LottoTickets를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
 - StatisticsOutputView
     - 로또 당첨 결과(당첨 티켓 수, 수익률)을 사용자에게 보여줄 수 있다.
     - [ ] LottoPrize를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
