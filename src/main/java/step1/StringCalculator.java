@@ -70,7 +70,15 @@ public class StringCalculator {
      */
     private int getSumOfNumbers(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
+                .mapToInt(number -> {
+                    if (Integer.parseInt(number) < 0) {
+                        throw new RuntimeException();
+                    }
+                    try {
+                        return Integer.parseInt(number);
+                    } catch (RuntimeException e) {
+                        throw new RuntimeException();
+                    }
+                }).sum();
     }
 }

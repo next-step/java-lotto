@@ -74,9 +74,12 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("음수를 전달할 경우 예외 발생 여부 테스트")
+    @DisplayName("음수 또는 숫자 이외의 값을 전달할 경우 예외 발생 여부 테스트")
     void input_negative() {
         assertThatThrownBy(() -> stringCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> stringCalculator.splitAndSum("1,string,3"))
                 .isInstanceOf(RuntimeException.class);
     }
 }
