@@ -15,7 +15,7 @@ public class LottoNumber {
     private static ArrayList<LottoNumber> lottoNumbersCache = new ArrayList<>();
 
     static {
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(i -> {
                     LottoNumber lottoNumber = new LottoNumber(i);
                     lottoNumberCache.put(i, lottoNumber);
