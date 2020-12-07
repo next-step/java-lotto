@@ -1,8 +1,7 @@
 package step3.VO;
 
 import step3.LottoGenerator;
-import step3.VO.Lotto;
-import step3.VO.Money;
+import step3.Statistic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,9 @@ public class Lottos {
         }
     }
 
-    public void checkResult() {
+    public void checkResult(Statistic statistic) {
         for (Lotto lotto: this.lottoList) {
-            lotto.checkReward();
+            lotto.checkReward(statistic);
         }
     }
 

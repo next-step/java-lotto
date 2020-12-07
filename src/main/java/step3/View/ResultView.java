@@ -23,28 +23,28 @@ public class ResultView {
         System.out.println("[" + numberString.toString() + "]");
     }
 
-    public static void printResult(Money money) {
+    public static void printResult(Money money, Statistic statistic) {
         System.out.println("당첨 통계");
         System.out.println("------------------");
 
-        for (int i = Statistic.results.length - 2; i >= 0; i --) {
-            printWinningCntResult(i);
+        for (int i = statistic.getResultLength() - 2; i >= 0; i --) {
+            printWinningCntResult(i, statistic);
         }
 
-        System.out.println("총 수익률은 " + Statistic.getMargin(money) + "입니다.");
+        System.out.println("총 수익률은 " + statistic.getMargin(money) + "입니다.");
     }
 
-    public static void printWinningCntResult(int index) {
+    public static void printWinningCntResult(int index, Statistic statistic) {
         //
         int winningCnt = RewardBoard.getWinningCntByRank(index+1);
 
         if (index != 1) {
             int rank = RewardBoard.getRankByWinningCnt(winningCnt, false);
-            System.out.println((winningCnt) + "개 일치 (" + RewardBoard.getReward(rank).getReward() + "원)- " + Statistic.results[index].toString() + "개");
+            System.out.println((winningCnt) + "개 일치 (" + RewardBoard.getReward(rank).getReward() + "원)- " + statistic.getResultByIndex(index) + "개");
         }
 
         if (index == 1) {
-            System.out.println("5개 일치, 보너스 볼 일치 (" + RewardBoard.getReward(2).getReward() + "원)- " + Statistic.results[index].toString() + "개");
+            System.out.println("5개 일치, 보너스 볼 일치 (" + RewardBoard.getReward(2).getReward() + "원)- " + statistic.getResultByIndex(index) + "개");
         }
     }
 

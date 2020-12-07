@@ -27,9 +27,10 @@ public class LottoTest {
         ResultNumber.settingLottoResultNumber("1, 3, 5, 7, 9, 10");
         ResultNumber.settingLottoBonusNumber("11");
 
-        lotto.checkReward();
+        Statistic statistic = new Statistic();
+        lotto.checkReward(statistic);
 
         // Statistic.results[1] = 2등 갯수
-        assertThat(Statistic.results[1]).isEqualTo(1);
+        assertThat(statistic.getResultByIndex(1)).isEqualTo(1);
     }
 }

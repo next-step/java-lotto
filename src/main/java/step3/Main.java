@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         Money money = new Money(InputView.getMoney());
 
         LottoGenerator lottoGenerator = new LottoGenerator();
@@ -21,13 +21,14 @@ public class Main {
         ResultNumber.settingLottoResultNumber(InputView.getResultNumber());
         ResultNumber.settingLottoBonusNumber(InputView.getBonusNumber());
 
-        lottos.checkResult();
+        Statistic statistic = new Statistic();
+        lottos.checkResult(statistic);
 
         // 결과 출력
-        ResultView.printResult(money);
+        ResultView.printResult(money, statistic);
     }
 
-    public static Lottos settingLottos(Money money, LottoGenerator lottoGenerator) {
+    public Lottos settingLottos(Money money, LottoGenerator lottoGenerator) {
         Lottos lottos = new Lottos(money, lottoGenerator);
 
         ResultView.printLottoCnt(lottos.getLottosCnt());
@@ -37,7 +38,7 @@ public class Main {
         return lottos;
     }
 
-    public static List<LottoNumber> getResultNumberList(String resultString) {
+    public List<LottoNumber> getResultNumberList(String resultString) {
         List<LottoNumber> numberList = new ArrayList<>();
 
         for (String number : resultString.split(", ")) {

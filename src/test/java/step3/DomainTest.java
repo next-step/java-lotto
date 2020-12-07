@@ -14,14 +14,17 @@ public class DomainTest {
         FixedNumberGenerator fixedWinningsGenerator = new FixedNumberGenerator();
         fixedWinningsGenerator.setNumber("1,3,5,7,10,12");
 
-        Lottos lottos = Main.settingLottos(money, fixedWinningsGenerator);
+        Main main = new Main();
+
+        Lottos lottos = main.settingLottos(money, fixedWinningsGenerator);
 
         ResultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
         ResultNumber.settingLottoBonusNumber("12");
 
-        lottos.checkResult();
+        Statistic statistic = new Statistic();
+        lottos.checkResult(statistic);
 
         // 결과 출력
-        ResultView.printResult(money);
+        ResultView.printResult(money, statistic);
     }
 }
