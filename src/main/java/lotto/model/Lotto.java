@@ -1,17 +1,29 @@
 package lotto.model;
 
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Lotto {
     private final LottoTickets lottoTickets;
     private final int ticketPrice = 1000;
-    private final int ticketCount;
+    private Map<String, Integer> ticketCountMap;
 
     public Lotto(int money, String[] manualNumbers){
-        this.ticketCount = money / ticketPrice;
+        this.ticketCountMap = new HashMap<>();
+        this.ticketCountMap.put("AUTO",(money / ticketPrice) - manualNumbers.length);
+        this.ticketCountMap.put("MANUAL", manualNumbers.length);
 
-        this.lottoTickets = LottoTickets.of(ticketCount-manualNumbers.length, manualNumbers);
+        this.lottoTickets = LottoTickets.of(this.ticketCountMap.get("AUTO"), manualNumbers);
+    }
+
+    public int getAutoTicketCount(){
+        return ticketCountMap.get("AUTO");
+    }
+
+    public int getManualTicketCount(){
+        return ticketCountMap.get("MANUAL");
     }
 
     public LottoTickets getLottoTickets(){
