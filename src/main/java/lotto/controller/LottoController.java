@@ -8,15 +8,17 @@ import lotto.view.ResultView;
 
 import java.util.*;
 
-public class LottoView {
+public class LottoController {
     public static void main(String[] args){
         InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+
         int money = inputView.buyLotto();
         int manualCount = inputView.inputManualCount();
         String[] manualNumbers = inputView.inputManualLottoNumber(manualCount);
 
         Lotto lotto = new Lotto(money,manualNumbers);
-        System.out.println("수동으로"+manualCount+"장, 자동으로 "+(lotto.getLottoTickets().getTicketCount()-manualCount)+"개를 구매했습니다.");
+        resultView.printNumberOfLottos(lotto);
         inputView.printLottoNumbers(lotto.getLottoTickets());
 
         Set<Integer> preNumbers = inputView.inputPreWinningNumber();
@@ -24,7 +26,7 @@ public class LottoView {
         WinningCheckor winningCheckor = new WinningCheckor(preNumbers, bonusNumber);
         EnumMap<Rank, Integer> winningStatics = winningCheckor.makeStatics(lotto.getLottoTickets());
 
-        ResultView resultView = new ResultView();
+
         EnumMap<Rank, Integer> results = resultView.showWinningResult(winningStatics);
         double price = lotto.resultBenefit(results);
         resultView.printBenefits(price, money);
