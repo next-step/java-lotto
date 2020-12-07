@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
@@ -29,5 +30,43 @@ class StringCalculatorTest {
 
         result = stringCalculator.splitAndSum("  ");
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("숫자 하나 입력하는 경우 테스트")
+    void input_only_one_number() {
+        int result = stringCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+
+        result = stringCalculator.splitAndSum("132");
+        assertThat(result).isEqualTo(132);
+    }
+
+    @Test
+    @DisplayName("구분자가 쉼표인 경우 테스트")
+    void input_split_with_comma() {
+        int result = stringCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("구분자가 쉼표 또는 콜론인 경우 테스트")
+    void input_split_with_comma_or_colon() {
+        int result = stringCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("구분자가 커스텀 구분자인 경우 테스트")
+    void input_split_with_custom_delimiter() {
+        int result = stringCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수를 전달할 경우 예외 발생 여부 테스트")
+    void input_negative() {
+        assertThatThrownBy(() -> stringCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
