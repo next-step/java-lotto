@@ -28,8 +28,8 @@ public class Money {
         return new Money(this.amount + thatMoney.amount);
     }
 
-    public Money divide(final Money thatMoney) {
-        return new Money(this.amount - thatMoney.amount);
+    public Double divide(final Money thatMoney) {
+        return this.amount.doubleValue() / thatMoney.amount.doubleValue();
     }
 
     private void validate(final Long amount) {

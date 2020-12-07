@@ -22,7 +22,13 @@ public class LottoPrize {
         return new LottoPrize(result);
     }
 
-    public Money calculateProfit(Money originalMoney) {
+    public Double calculateProfitRate(Money originalMoney) {
+        Money totalPrize = sumOfPrizes();
+
+        return totalPrize.divide(originalMoney);
+    }
+
+    private Money sumOfPrizes() {
         Money totalPrize = new Money(0L);
 
         for (Rank rank : this.result.keySet()) {
@@ -30,7 +36,7 @@ public class LottoPrize {
             totalPrize = totalPrize.plus(totalPrizeOfRank);
         }
 
-        return totalPrize.divide(originalMoney);
+        return totalPrize;
     }
 
     private static Long countRank(Rank target, List<Rank> ranks) {
