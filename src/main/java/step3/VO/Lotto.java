@@ -14,9 +14,9 @@ public class Lotto {
         this.numberList = lottoGenerator.getLottoNumbers();
     }
 
-    public void checkReward(Statistic statistic) {
-        int winningCnt = ResultNumber.checkLottoResult(this.numberList);
-        boolean bonusResult = ResultNumber.checkBonusResult(this.numberList);
+    public void checkReward(Statistic statistic, ResultNumber resultNumber) {
+        int winningCnt = resultNumber.checkLottoResult(this.numberList);
+        boolean bonusResult = resultNumber.checkBonusResult(this.numberList);
 
         statistic.recordLottoResult(winningCnt, bonusResult);
     }

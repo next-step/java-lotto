@@ -23,12 +23,13 @@ public class LottoTest {
         fixedNumberGenerator.setNumber("1,3,5,7,9,11");
 
         Lotto lotto = new Lotto(fixedNumberGenerator);
-
-        ResultNumber.settingLottoResultNumber("1, 3, 5, 7, 9, 10");
-        ResultNumber.settingLottoBonusNumber("11");
-
         Statistic statistic = new Statistic();
-        lotto.checkReward(statistic);
+        ResultNumber resultNumber = new ResultNumber();
+
+        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 9, 10");
+        resultNumber.settingLottoBonusNumber("11");
+
+        lotto.checkReward(statistic, resultNumber);
 
         // Statistic.results[1] = 2등 갯수
         assertThat(statistic.getResultByIndex(1)).isEqualTo(1);

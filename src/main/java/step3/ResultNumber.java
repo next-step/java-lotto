@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultNumber {
-    private static List<LottoNumber> resultNumberList = new ArrayList<>();
-    private static LottoNumber bonusNumber;
+    private List<LottoNumber> resultNumberList = new ArrayList<>();
+    private LottoNumber bonusNumber;
 
-    public static void settingLottoResultNumber(String resultString) {
+    public void settingLottoResultNumber(String resultString) {
         resultNumberList = new ArrayList<>();
         for (String number : resultString.split(", ")) {
             resultNumberList.add(new LottoNumber(Integer.parseInt(number)));
         }
     }
 
-    public static void settingLottoBonusNumber(String inputBonusNumber) {
+    public void settingLottoBonusNumber(String inputBonusNumber) {
         bonusNumber = new LottoNumber(Integer.parseInt(inputBonusNumber));
     }
 
-    public static int checkLottoResult(List<LottoNumber> lottoNumberList) {
+    public int checkLottoResult(List<LottoNumber> lottoNumberList) {
         int winningNumber = 0;
 
         for (LottoNumber i : resultNumberList) {
@@ -29,14 +29,14 @@ public class ResultNumber {
         return winningNumber;
     }
 
-    private static int checkNumberContain(List<LottoNumber> lottoNumberList, LottoNumber lottoNumber) {
+    private int checkNumberContain(List<LottoNumber> lottoNumberList, LottoNumber lottoNumber) {
         if (lottoNumberList.contains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    public static boolean checkBonusResult(List<LottoNumber> lottoNumberList) {
+    public boolean checkBonusResult(List<LottoNumber> lottoNumberList) {
         return lottoNumberList.contains(bonusNumber);
     }
 }

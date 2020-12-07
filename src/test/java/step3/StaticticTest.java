@@ -21,12 +21,13 @@ public class StaticticTest {
         Main main = new Main();
 
         Lottos lottos = main.settingLottos(money, fourWinningsGenerator);
-
-        ResultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
-        ResultNumber.settingLottoBonusNumber("12");
-
         Statistic statistic = new Statistic();
-        lottos.checkResult(statistic);
+        ResultNumber resultNumber = new ResultNumber();
+
+        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
+        resultNumber.settingLottoBonusNumber("12");
+
+        lottos.checkResult(statistic, resultNumber);
 
         // 예상 결과값 계산
         int lottoCnt = inputMoney / Money.lottoPrice;

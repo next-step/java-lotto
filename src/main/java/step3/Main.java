@@ -17,12 +17,13 @@ public class Main {
         LottoGenerator lottoGenerator = new LottoGenerator();
 
         Lottos lottos = settingLottos(money, lottoGenerator);
+        ResultNumber resultNumber = new ResultNumber();
 
-        ResultNumber.settingLottoResultNumber(InputView.getResultNumber());
-        ResultNumber.settingLottoBonusNumber(InputView.getBonusNumber());
+        resultNumber.settingLottoResultNumber(InputView.getResultNumber());
+        resultNumber.settingLottoBonusNumber(InputView.getBonusNumber());
 
         Statistic statistic = new Statistic();
-        lottos.checkResult(statistic);
+        lottos.checkResult(statistic, resultNumber);
 
         // 결과 출력
         ResultView.printResult(money, statistic);
