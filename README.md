@@ -61,7 +61,7 @@
     - [X] 구매한 LottoTickets를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
 - StatisticsOutputView
     - 로또 당첨 결과(당첨 티켓 수, 수익률)을 사용자에게 보여줄 수 있다.
-    - [ ] LottoPrize를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
+    - [X] LottoPrize를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
 - MoneyInputView
     - 사용자가 구매할 로또 금액을 입력받을 수 있다.
     - [ ] 1000원 이하의 금액을 입력할 경우 예외를 발생시킨다.
