@@ -47,6 +47,9 @@ class StringCalculatorTest {
     void input_split_with_comma() {
         int result = stringCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
+
+        result = stringCalculator.splitAndSum("3,5");
+        assertThat(result).isEqualTo(8);
     }
 
     @Test
@@ -54,6 +57,9 @@ class StringCalculatorTest {
     void input_split_with_comma_or_colon() {
         int result = stringCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
+
+        result = stringCalculator.splitAndSum("10:2,4");
+        assertThat(result).isEqualTo(16);
     }
 
     @Test

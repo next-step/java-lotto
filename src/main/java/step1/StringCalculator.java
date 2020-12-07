@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.Arrays;
+
 public class StringCalculator {
 
     /**
@@ -32,6 +34,16 @@ public class StringCalculator {
         if (input.matches("^[0-9]+$")) {
             return Integer.parseInt(input);
         }
-        return 0;
+        return getSumOfNumbers(getSplitNumbers(input));
+    }
+
+    private String[] getSplitNumbers(String input) {
+        return input.split("[,:]");
+    }
+
+    private int getSumOfNumbers(String[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
