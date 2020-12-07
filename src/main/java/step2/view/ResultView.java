@@ -39,10 +39,10 @@ public class ResultView {
         while (iterator.hasNext()) {
             LottoNumber lottoNumber = iterator.next();
             System.out.print("" + lottoNumber.getNumber());
-            checklottoNumbersLastIterator(iterator);
+            checkLottoNumbersLastIterator(iterator);
         }
     }
-    private static void checklottoNumbersLastIterator(Iterator iterator) {
+    private static void checkLottoNumbersLastIterator(Iterator iterator) {
         if (iterator.hasNext()) {
             System.out.print(", ");
         }
