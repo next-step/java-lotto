@@ -9,8 +9,9 @@ public class ValidationUtil {
 	}
 
 	static void checkNotANumberAndNegative(String value) {
-		if (isNotANumber(value) || isNegative(value))
+		if (isNotNumber(value) || isNegative(value)) {
 			throw new RuntimeException(MSG_NOT_A_NUMBER_OR_NEGATIVE);
+		}
 	}
 
 	private static boolean isNegative(String value) {
@@ -18,13 +19,10 @@ public class ValidationUtil {
 		return num < 0;
 	}
 
-	private static boolean isNotANumber(String value) {
-		if (value == null) {
-			return true;
-		}
+	private static boolean isNotNumber(String value) {
 		try {
 			Integer.parseInt(value);
-		} catch (NumberFormatException nfe) {
+		} catch (Exception e) {
 			return true;
 		}
 		return false;
