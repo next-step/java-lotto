@@ -24,6 +24,8 @@ public final class InputView {
 
     private static final String ASK_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 
+    private static final String ASK_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+
     private static final String ASK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
     private static final String ASK_BONUS_BALL = "보너스 볼을 입력해주세요.";
@@ -41,26 +43,35 @@ public final class InputView {
     }
 
     public int inputPurchaseCount() {
-        final String amount = input(ASK_PAID, new PaidValidator());
+        final String amount = printMessageAndInput(ASK_PAID, new PaidValidator());
 
         return Integer.parseInt(amount) / LottoMachine.PAY;
     }
 
     public int inputManualLottoCount() {
-        return Integer.parseInt(input(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator()));
+        return Integer
+                .parseInt(printMessageAndInput(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator()));
     }
 
     public Lottoes inputManualLottoes(int manualCount) {
+        System.out.println(ASK_MANUAL_LOTTO_NUMBERS);
+
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            lottoes.add(inputWinningNumbers());
+            lottoes.add(inputLottoNumbers());
         }
 
         return new Lottoes(lottoes);
     }
 
     public Lotto inputWinningNumbers() {
-        final String winningNumbers = input(ASK_WINNING_NUMBERS, new LottoValidator());
+        System.out.println(ASK_WINNING_NUMBERS);
+
+        return inputLottoNumbers();
+    }
+
+    public Lotto inputLottoNumbers() {
+        final String winningNumbers = input(new LottoValidator());
 
         return new Lotto(
                 Arrays.stream(winningNumbers.split(DELIMITER))
@@ -70,12 +81,16 @@ public final class InputView {
     }
 
     public LottoNumber inputBonusBall() {
-        return new LottoNumber(input(ASK_BONUS_BALL, new LottoNumberValidator()));
+        return new LottoNumber(printMessageAndInput(ASK_BONUS_BALL, new LottoNumberValidator()));
     }
 
-    private String input(final String message, final Validator validator) {
+    private String printMessageAndInput(final String message, final Validator validator) {
         System.out.println(message);
 
+        return input(validator);
+    }
+
+    private String input(final Validator validator) {
         String input = scanner.nextLine().replace(BLANK, EMPTY);
         while (!isValid(validator, input)) {
             input = scanner.nextLine();
