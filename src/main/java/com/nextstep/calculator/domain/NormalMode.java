@@ -8,10 +8,13 @@ public class NormalMode implements Mode {
     private static final String DEFAULT_SEPARATOR = "[:,]";
 
     @Override
-    public Numbers parseToNumbers(String value) {
-        List<Number> numbers = Arrays.stream(value.split(DEFAULT_SEPARATOR))
+    public Numbers parseToNumbers(final String value) {
+        return new Numbers(separateNumbers(value));
+    }
+
+    private List<Number> separateNumbers(final String value) {
+        return Arrays.stream(value.split(DEFAULT_SEPARATOR))
                 .map(Number::of)
                 .collect(Collectors.toList());
-        return new Numbers(numbers);
     }
 }
