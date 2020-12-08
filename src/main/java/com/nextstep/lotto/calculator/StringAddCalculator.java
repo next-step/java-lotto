@@ -7,6 +7,10 @@ public class StringAddCalculator {
         if (source == null || "".equals(source)) {
             return ZERO;
         }
-        return 1;
+        return parseInt(source);
+    }
+
+    private static int parseInt(String number) {
+        return Integer.parseInt(number);
     }
 }
