@@ -16,7 +16,11 @@ public class OutputView {
         System.out.println(WINNING_TICKET_COMMENT);
     }
 
-    public static void printStatistics(Money money, LottoPrize lottoPrize) {
+    public static void printHowManyLottoTickets(final Money money) {
+        System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(money));
+    }
+
+    public static void printStatistics(final Money money, final LottoPrize lottoPrize) {
         System.out.println(STATISTICS_HEADER);
         StatisticsOutputView.parseLottoPrize(lottoPrize);
         StatisticsOutputView.parseProfit(money, lottoPrize);
