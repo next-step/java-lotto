@@ -68,6 +68,23 @@ class StringAddCalculatorTest {
 		);
 	}
 
+	@DisplayName("'//'와 '\\n' 문자 사이에 커스텀 구분자를 지정")
+	@ParameterizedTest
+	@MethodSource("argCustomDelimiter")
+	void splitCustomDelimiter(String input, int expected) {
+
+		assertSplitAndSumMethod(input, expected);
+
+	}
+
+	public static Stream<Arguments> argCustomDelimiter() {
+		return Stream.of(
+			Arguments.of("//@\n0@1@2", 3),
+			Arguments.of("//!\n1!2!3", 6),
+			Arguments.of("//#\n3#4#5", 12)
+		);
+	}
+
 	private void assertSplitAndSumMethod(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
