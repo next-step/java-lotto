@@ -8,7 +8,7 @@ import lotto.domain.WinningCount;
 
 public final class OutputView {
 
-    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     private static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
 
@@ -18,8 +18,8 @@ public final class OutputView {
 
     private static final String SECOND_STATISTICS_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
 
-    public void showPurchaseCount(final int count) {
-        System.out.println(count + PURCHASE_MESSAGE);
+    public void showPurchaseCount(final int manualLottoCount, final int automaticLottoCount) {
+        System.out.printf(PURCHASE_MESSAGE, manualLottoCount, automaticLottoCount);
     }
 
     public void showPurchasedLottoes(final Lottoes lottoes) {
