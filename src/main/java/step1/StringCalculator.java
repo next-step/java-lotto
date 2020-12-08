@@ -13,7 +13,7 @@ public class StringCalculator {
      */
     public int splitAndSum(String input) {
         if (isNullOrBlank(input)) {
-            return 0;
+            return Constants.ZERO;
         }
         return getSum(input);
     }
@@ -45,7 +45,7 @@ public class StringCalculator {
      * @return 숫자로만 이루어져있는지 여부
      */
     private boolean isOnlyNumber(String input) {
-        return input.matches("^[0-9]+$");
+        return input.matches(Constants.REGEX_IF_ONLY_NUMBERS);
     }
 
     /**
@@ -54,13 +54,13 @@ public class StringCalculator {
      * @return 분리된 문자 배열
      */
     private String[] getSplitNumbers(String input) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile(Constants.REGEX_CUSTOM_DELIMITER).matcher(input);
 
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(Constants.POSITION_OF_CUSTOM_DELIMITER);
+            return matcher.group(Constants.POSITION_OF_INPUT).split(customDelimiter);
         }
-        return input.split("[,:]");
+        return input.split(Constants.REGEX_BASIC_DELIMITER);
     }
 
     /***
@@ -71,7 +71,7 @@ public class StringCalculator {
     private int getSumOfNumbers(String[] numbers) {
         return Arrays.stream(numbers)
                 .mapToInt(number -> {
-                    if (Integer.parseInt(number) < 0) {
+                    if (Integer.parseInt(number) < Constants.ZERO) {
                         throw new RuntimeException();
                     }
                     try {
