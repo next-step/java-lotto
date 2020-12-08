@@ -38,9 +38,9 @@ public class StringAddCalculator {
 			.sum();
 	}
 
-	private static String parseInput(String input,List<String> delimiters) {
+	private static String parseInput(String input, List<String> delimiters) {
 		Matcher m = Pattern.compile(REGEX_FIND_CUSTOM_DELIMITER).matcher(input);
-		if(m.find()){
+		if (m.find()) {
 			String customDelimiter = m.group(1);
 			delimiters.add(customDelimiter);
 			return m.group(2);
