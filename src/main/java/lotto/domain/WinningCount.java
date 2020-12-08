@@ -5,7 +5,7 @@ import java.util.Map;
 
 public final class WinningCount {
 
-    public static final long DEFAULT_COUNT = 0L;
+    private static final long DEFAULT_COUNT = 0L;
 
     private final Map<Rank, Long> counts;
 
