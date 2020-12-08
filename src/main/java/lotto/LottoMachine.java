@@ -23,7 +23,7 @@ public final class LottoMachine {
         this.outputView = new OutputView();
     }
 
-    public void purchase() {
+    public void purchaseAndCheck() {
         int totalLottoCount = inputView.inputPurchaseCount();
         int manualLottoCount = inputView.inputManualLottoCount();
         int autoLottoCount = totalLottoCount - manualLottoCount;
