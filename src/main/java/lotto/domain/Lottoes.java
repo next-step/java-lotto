@@ -14,8 +14,8 @@ public final class Lottoes {
         this.lottoes = purchaseLottoes(count);
     }
 
-    public Lottoes(final List<List<Integer>> lottoes) {
-        this.lottoes = Collections.unmodifiableList(lottoNumbersListToLottoes(lottoes));
+    public Lottoes(final List<Lotto> lottoes) {
+        this.lottoes = Collections.unmodifiableList(lottoes);
     }
 
     public List<Lotto> getLottoes() {
@@ -37,11 +37,5 @@ public final class Lottoes {
         }
 
         return Collections.unmodifiableList(newLottoes);
-    }
-
-    private List<Lotto> lottoNumbersListToLottoes(final List<List<Integer>> lottoes) {
-        return lottoes.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
     }
 }

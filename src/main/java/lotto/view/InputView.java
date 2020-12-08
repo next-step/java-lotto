@@ -1,12 +1,15 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.LottoMachine;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottoes;
 import lotto.domain.validator.LottoCountValidator;
 import lotto.domain.validator.LottoNumberValidator;
 import lotto.domain.validator.LottoValidator;
@@ -45,6 +48,15 @@ public final class InputView {
 
     public int inputManualLottoCount() {
         return Integer.parseInt(input(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator()));
+    }
+
+    public Lottoes  inputManualLottoes(int manualCount) {
+        List<Lotto> lottoes = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            lottoes.add(inputWinningNumbers());
+        }
+
+        return new Lottoes(lottoes);
     }
 
     public Lotto inputWinningNumbers() {

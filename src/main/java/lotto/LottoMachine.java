@@ -27,10 +27,10 @@ public final class LottoMachine {
         int manualLottoCount = inputView.inputManualLottoCount();
         int autoLottoCount = totalLottoCount - manualLottoCount;
 
-        Lottoes manualLottoes = new Lottoes(manualLottoCount);
+        Lottoes manualLottoes = inputView.inputManualLottoes(manualLottoCount);
         Lottoes autoLottoes = new Lottoes(autoLottoCount);
 
-        outputView.showPurchaseCount(manualLottoCount,autoLottoCount);
+        outputView.showPurchaseCount(manualLottoCount, autoLottoCount);
         outputView.showPurchasedLottoes(autoLottoes);
 
         Lotto winningLotto = inputView.inputWinningNumbers();

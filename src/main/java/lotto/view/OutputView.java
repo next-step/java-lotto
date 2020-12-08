@@ -28,19 +28,22 @@ public final class OutputView {
         }
     }
 
-    public void showStatistics(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final int paid) {
+    public void showStatistics(final WinningCount manualWinningCount,
+                               final WinningCount autoWinningCount, final int paid) {
         System.out.println(STATISTICS_MESSAGE);
         showMatchingCounts(manualWinningCount, autoWinningCount);
         showEarnRate(manualWinningCount, autoWinningCount, paid);
     }
 
-    private void showMatchingCounts(final WinningCount manualWinningCount, final WinningCount autoWinningCount) {
+    private void showMatchingCounts(final WinningCount manualWinningCount,
+                                    final WinningCount autoWinningCount) {
         for (Rank rank : Rank.values()) {
             showMatchingCount(manualWinningCount, autoWinningCount, rank);
         }
     }
 
-    private void showMatchingCount(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final Rank rank) {
+    private void showMatchingCount(final WinningCount manualWinningCount,
+                                   final WinningCount autoWinningCount, final Rank rank) {
         String message = DEFAULT_STATISTICS_MESSAGE;
 
         if (rank.equals(Rank.SECOND)) {
@@ -52,7 +55,8 @@ public final class OutputView {
                 , manualWinningCount.getMatchCount(rank) + autoWinningCount.getMatchCount(rank));
     }
 
-    private void showEarnRate(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final int paid) {
+    private void showEarnRate(final WinningCount manualWinningCount,
+                              final WinningCount autoWinningCount, final int paid) {
         double manualEarn = manualWinningCount.calculateEarnRate(paid);
         double autoEarn = autoWinningCount.calculateEarnRate(paid);
         double earn = manualEarn + autoEarn;
