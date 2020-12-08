@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
 
@@ -83,6 +84,16 @@ class StringAddCalculatorTest {
 			Arguments.of("//!\n1!2!3", 6),
 			Arguments.of("//#\n3#4#5", 12)
 		);
+	}
+
+	@DisplayName("문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw")
+	@ParameterizedTest
+	@ValueSource(strings = {"1,2,-3", "1,-2,-3", "-1,-2,-3", "a,2,3", "1,a,3", "1,2,a", "a,b,c", "-1,-2,a"})
+	void passNaNOrNegative(String input) {
+		assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> {
+				StringAddCalculator.splitAndSum(input);
+			}).withMessage(ValidationUtil.MSG_NOT_A_NUMBER_OR_NEGATIVE);
 	}
 
 	private void assertSplitAndSumMethod(String input, int expected) {

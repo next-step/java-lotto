@@ -30,6 +30,9 @@ public class StringAddCalculator {
 	}
 
 	private static int sum(String[] tokens) {
+		for (String token : tokens) {
+			ValidationUtil.checkNotANumberAndNegative(token);
+		}
 		return Arrays.stream(tokens)
 			.mapToInt(Integer::parseInt)
 			.sum();
