@@ -44,7 +44,13 @@ public final class InputView {
     }
 
     public int inputManualLottoCount() {
-        return Integer.parseInt(input(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator()));
+        String count = input(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator());
+
+        if (count == null || count.isEmpty()) {
+            return 0;
+        }
+
+        return Integer.parseInt(count);
     }
 
     public Lotto inputWinningNumbers() {
