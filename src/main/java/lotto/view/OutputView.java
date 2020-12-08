@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoPrize;
+import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 
 public class OutputView {
@@ -12,12 +13,16 @@ public class OutputView {
         System.out.println(MONEY_INPUT_COMMENT);
     }
 
-    public static void printWinningTicketInput() {
-        System.out.println(WINNING_TICKET_COMMENT);
-    }
-
     public static void printHowManyLottoTickets(final Money money) {
         System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(money));
+    }
+
+    public static void printBoughtLottoTickets(final LottoTickets lottoTickets) {
+        System.out.println(BoughtHistoryOutputView.parseLottoTickets(lottoTickets));
+    }
+
+    public static void printWinningTicketInput() {
+        System.out.println(WINNING_TICKET_COMMENT);
     }
 
     public static void printStatistics(final Money money, final LottoPrize lottoPrize) {
