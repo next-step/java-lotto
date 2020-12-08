@@ -28,12 +28,12 @@ public final class InputView {
 
     private final PaidValidator paidValidator;
 
-    private final WinningNumbersValidator numbersValidator;
+    private final LottoValidator numbersValidator;
 
     public InputView() {
         this.scanner = new Scanner(System.in);
         this.paidValidator = new PaidValidator();
-        this.numbersValidator = new WinningNumbersValidator();
+        this.numbersValidator = new LottoValidator();
     }
 
     public int inputPurchaseCount() {

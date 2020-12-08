@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import lotto.LottoMachine;
 
-public final class WinningNumbersValidator extends Validator {
+public final class LottoValidator extends Validator {
 
     static final String NOT_NUMBER_OR_COMMA_MESSAGE = "숫자,콤마, 공백만 입력할 수 있습니다!";
 

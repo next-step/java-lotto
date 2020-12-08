@@ -3,9 +3,9 @@ package lotto.view;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningNumbersValidatorTest {
+class LottoValidatorTest {
 
-    private final Validator validator = new WinningNumbersValidator();
+    private final Validator validator = new LottoValidator();
 
     @Test
     @DisplayName("유효한 값 입력 시 유효성 검사 성공 확인")
@@ -17,13 +17,13 @@ class WinningNumbersValidatorTest {
     @DisplayName("숫자 혹은 콤마가 아닌 문자열을 입력 시 IllegalArgumentException 발생 테스트")
     public void inputNotNumericOrCommaStringTest() {
         ValidatorUtils.assertValidation(validator, "숫자 혹은 콤마가 아닙니다",
-                WinningNumbersValidator.NOT_NUMBER_OR_COMMA_MESSAGE);
+                LottoValidator.NOT_NUMBER_OR_COMMA_MESSAGE);
     }
 
     @Test
     @DisplayName("정해진 사이즈보다 큰 문자열을 입력 시 IllegalArgumentException 발생 테스트")
     public void outOfBoundTest() {
         ValidatorUtils.assertValidation(validator, "1,2,3,4,5,6,7",
-                WinningNumbersValidator.SIZE_NOT_MATCH);
+                LottoValidator.SIZE_NOT_MATCH);
     }
 }
