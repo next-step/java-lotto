@@ -17,7 +17,7 @@ class ExpressionSplitterTest {
     @ValueSource(strings = {"1,2", "5,6,7"})
     public void split1(String expression) {
         List<String> result = ExpressionSplitter.split(expression);
-        assertThat(result).isEqualTo(Arrays.asList(expression.split(",")));
+        assertThat(result).isEqualTo(Arrays.asList(expression.split(Delimiter.COMMA.getType())));
     }
 
     @DisplayName("쉼표 또는 콜론 구분자에 따라 쪼갠다.")
@@ -25,7 +25,7 @@ class ExpressionSplitterTest {
     @ValueSource(strings = {"1,2:3", "5:6:7"})
     public void split2(String expression) {
         List<String> result = ExpressionSplitter.split(expression);
-        assertThat(result).isEqualTo(Arrays.asList(expression.split(",|:")));
+        assertThat(result).isEqualTo(Arrays.asList(expression.split(Delimiter.joinTypes())));
     }
 
     @DisplayName("custom 구분자에 따라 쪼갠다.")

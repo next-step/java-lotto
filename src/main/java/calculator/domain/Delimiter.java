@@ -18,4 +18,8 @@ public enum Delimiter {
                 .map(delimiter -> String.valueOf(delimiter.type))
                 .collect(Collectors.joining(TYPE_DIVISION));
     }
+
+    public String getType() {
+        return type;
+    }
 }
