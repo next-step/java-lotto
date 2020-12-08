@@ -5,6 +5,8 @@ import java.util.Map;
 
 public final class WinningCount {
 
+    public static final long DEFAULT_COUNT = 0L;
+
     private final Map<Rank, Long> counts;
 
     public WinningCount(Map<Rank, Long> counts) {
@@ -12,7 +14,7 @@ public final class WinningCount {
     }
 
     public long getMatchCount(final Rank rank) {
-        return counts.getOrDefault(rank, 0L);
+        return counts.getOrDefault(rank, DEFAULT_COUNT);
     }
 
     public long calculatePrize() {
@@ -25,10 +27,5 @@ public final class WinningCount {
         }
 
         return totalPrize;
-    }
-
-    public double calculateEarnRate(int paid) {
-        long totalPrize = calculatePrize();
-        return (double) totalPrize / paid;
     }
 }

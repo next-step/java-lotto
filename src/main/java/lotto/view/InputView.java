@@ -50,7 +50,7 @@ public final class InputView {
         return Integer.parseInt(input(ASK_MANUAL_LOTTO_COUNT, new LottoCountValidator()));
     }
 
-    public Lottoes  inputManualLottoes(int manualCount) {
+    public Lottoes inputManualLottoes(int manualCount) {
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
             lottoes.add(inputWinningNumbers());
