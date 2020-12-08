@@ -14,6 +14,13 @@ public class ModeSelector {
         this.value = value;
     }
 
+    public Mode select() {
+        if (isCustom()) {
+            return new CustomMode(matcher.group(2), matcher.group(1));
+        }
+        return new NormalMode(value);
+    }
+
     boolean isCustom() {
         return matcher.find();
     }
