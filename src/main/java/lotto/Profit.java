@@ -1,13 +1,14 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Profit {
 
 
-    public static double getLottoGameProfit(LottoTicket lottoTicket){
+    public static double getLottoGameProfit(List<Rank> lottoRankList){
         double totalWinnerPriceAmt = 0;
-        for(Rank rank : lottoTicket.getLottoRankList()){
+        for(Rank rank : lottoRankList){
             totalWinnerPriceAmt += rank.getWinnnerPrice();
         }
         double lottoBuyAmt = LottoGameService.getLottoBuyAmt();

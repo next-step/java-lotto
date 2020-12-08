@@ -7,6 +7,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
     public static final String LOTTO_WINNER_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String LOTTO_WINNER_BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String LOTTO_BUY_AMT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
 
     public static int inputBuyLottoPrice() {
@@ -15,9 +16,16 @@ public class InputView {
         return buyPrice;
     }
 
-    public static LottoWinner inputWinnerLottoNumber() {
+    public static Lotto inputWinnerLottoNumber() {
         System.out.println(LOTTO_WINNER_NUMBER_INPUT_MESSAGE);
-        String[] inputNumbers = scanner.next().replaceAll(" ", "").split(",");
-        return new LottoWinner(Arrays.stream(inputNumbers).mapToInt(Integer::parseInt).toArray());
+        LottoNumber[] inputNumbers = Arrays.stream(scanner.next().replaceAll(" ", "").split(",")).map(LottoNumber::new).toArray(LottoNumber[]::new);
+        LottoNumber bonusNumber = inputWinnerBonusLottoNumber();
+        Lotto lotto = new Lotto(inputNumbers, bonusNumber);
+        return new Lotto(inputNumbers, bonusNumber);
+    }
+
+    public static LottoNumber inputWinnerBonusLottoNumber() {
+        System.out.println(LOTTO_WINNER_BONUS_NUMBER_INPUT_MESSAGE);
+        return new LottoNumber(Integer.parseInt(scanner.next()));
     }
 }

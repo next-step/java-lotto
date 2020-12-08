@@ -9,6 +9,10 @@ public class LottoGameService {
     private static int lottoBuyCnt = 0;
     private static LottoTicket buyLotto;
 
+    public LottoGameService(LottoTicket lottoTicket) {
+        buyLotto = lottoTicket;
+    }
+
     public static void setLottoBuyAmt(int lottoBuyAmt) {
         LottoGameService.lottoBuyAmt = lottoBuyAmt;
     }
@@ -31,18 +35,11 @@ public class LottoGameService {
         return buyLotto;
     }
 
-    public static int getLottoMatchStatistics(List<Rank> rankList, int matchCnt){
+    public static int getLottoMatchStatistics(List<Rank> rankList, Rank matchRank){
         int matchLottoCnt = 0;
         for(Rank rank : rankList){
-            matchLottoCnt = getMatchRankLottoCnt(rank.getMatchCnt(), matchCnt);
+            matchLottoCnt = rank.equals(matchRank) ? ++matchLottoCnt : matchLottoCnt;
         }
         return matchLottoCnt;
-    }
-
-    public static int getMatchRankLottoCnt(int matchCnt, int matchLottoCnt) {
-        if(matchCnt == matchLottoCnt){
-            return 1;
-        }
-        return 0;
     }
 }

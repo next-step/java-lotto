@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class LottoGameApplication {
 
     public static void main(String[] args){
@@ -7,10 +9,10 @@ public class LottoGameApplication {
         LottoTicket lottoTicket = LottoGameService.buyLotto(buyPrice);
         PrintView.printBuyLottoQty(lottoTicket.getLottoList().size());
         PrintView.printLottoNumber(lottoTicket.getLottoList());
-        LottoWinner lottoWinner = InputView.inputWinnerLottoNumber();
-        lottoTicket = lottoWinner.matchingWinnerNumber(lottoTicket);
-        PrintView.printLottoStatistics(lottoTicket.getLottoRankList());
-        PrintView.printWinnerLate(lottoTicket);
+        Lotto lottoWinner = InputView.inputWinnerLottoNumber();
+        List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);
+        PrintView.printLottoStatistics(lottoRank);
+        PrintView.printWinnerLate(lottoRank);
 
     }
 }
