@@ -1,9 +1,6 @@
 package lotto.application;
 
-import lotto.domain.LottoTicketCreatePolicy;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoTicketsFactory;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,5 +12,11 @@ public class LottoRunner {
 
         LottoTickets lottoTickets = LottoTicketsFactory.createAuto(money);
         OutputView.printBoughtLottoTickets(lottoTickets);
+
+        OutputView.printWinningTicketInput();
+        LottoTicket winningTicket = InputView.getWinningTicket();
+
+        LottoPrize lottoPrize = lottoTickets.checkResult(winningTicket);
+        OutputView.printStatistics(money, lottoPrize);
     }
 }

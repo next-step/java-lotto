@@ -27,7 +27,9 @@ public class OutputView {
 
     public static void printStatistics(final Money money, final LottoPrize lottoPrize) {
         System.out.println(STATISTICS_HEADER);
-        StatisticsOutputView.parseLottoPrize(lottoPrize);
-        StatisticsOutputView.parseProfit(money, lottoPrize);
+        String prizeResult = StatisticsOutputView.parseLottoPrize(lottoPrize);
+        System.out.println(prizeResult);
+        String profitRate = StatisticsOutputView.parseProfit(money, lottoPrize);
+        System.out.println(profitRate);
     }
 }
