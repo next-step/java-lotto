@@ -276,3 +276,25 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
   * 구매한 복권 개수를 출력한다.
   * 당첨 통계를 출력한다.
 * LotteryGameManager class를 구현한다.
+
+----
+# [3단계 - 3단계 - 로또(2등)](https://edu.nextstep.camp/s/MNii0Puk/ls/a5KEHckU)
+## 2단계 미반영 피드백
+- [x] `LotteryGame`에서 `AutoBuyBehaviro`대신 `BuyBehavir` 사용하기
+- [ ] `LotteryWinning` 클래스에서 `LotteryResult`를 제공
+- [x] `lotteryResultMap` 접근자 `package private`에서 `private`으로 개선
+- [x] 사용하지 않는 코드 삭제
+- [x] `SortedSet`대신 `Set`으로 구체적인 클래스로 선언하기 보단 상위 클래스로 선언하여 유연하게 설정
+- [x] `TreeSet` 초기화 간소화
+- [ ] `LotteryTicket`의 생성자 또는 정적 팩토리 메서드를 구현하여 전략을 주입하고 
+`LotteryTicket` 클래스가 자동 로또와 같은 객체를 제공해 주는 방향으로 구현한다면 전략 자체가 자동 번호 발급의 역할만 할수 있을것 같습니다 !
+- [x] 코드 중복 제거 (힌트는 주 / 부 생성자 사용)
+    ```
+    if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
+                throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
+            }
+    ```
+## 기능 요구 사항
+## 프로그래밍 요구사항
+## 기능 목록 및 commit 로그 요구사항
+

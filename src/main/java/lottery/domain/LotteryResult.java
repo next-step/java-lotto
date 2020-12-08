@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class LotteryResult {
-    Map<LotteryValue, Integer> lotteryResultMap;
+    private Map<LotteryValue, Integer> lotteryResultMap;
     private final LotteryWinning winningTicket;
 
     public LotteryResult(String winnerNumbers) {

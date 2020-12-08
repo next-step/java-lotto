@@ -1,11 +1,11 @@
 package lottery.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
     public static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
-//    private final List<LotteryNumber> lotteryNumbers;
-    private final SortedSet<LotteryNumber> lotteryNumbers;
+    private final Set<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
@@ -17,52 +17,22 @@ public class LotteryTicket {
             throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
         }
 
-        this.lotteryNumbers = new TreeSet<>();
-//        this.lotteryNumbers = new ArrayList<>();
-        for (LotteryNumber number : lotteryNumbers) {
-            this.lotteryNumbers.add(new LotteryNumber(number.getNumber()));
-        }
-
-//        Collections.sort(this.lotteryNumbers);
+        this.lotteryNumbers = new TreeSet<>(lotteryNumbers);
     }
 
     public LotteryTicket(int[] numbers) {
-//        this.lotteryNumbers = new ArrayList<>();
-        this.lotteryNumbers = new TreeSet<>();
-        LotteryNumber lotteryNumber;
-        for(int number : numbers) {
-            lotteryNumber = new LotteryNumber(number);
-            this.lotteryNumbers.add(lotteryNumber);
-        }
-        if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
-            throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
-        }
-//        Collections.sort(this.lotteryNumbers);
+        this(Arrays.stream(numbers).mapToObj(number -> new LotteryNumber(number)).collect(Collectors.toList()));
     }
 
     public LotteryTicket(String[] numbers) {
-//        lotteryNumbers = new ArrayList<>();
-        this.lotteryNumbers = new TreeSet<>();
-        LotteryNumber lotteryNumber;
-        for(String number : numbers) {
-            lotteryNumber = new LotteryNumber(Integer.parseInt(number.trim()));
-            lotteryNumbers.add(lotteryNumber);
-        }
-
-        if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
-            throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
-        }
-//        Collections.sort(this.lotteryNumbers);
+        this(Arrays.stream(numbers).map(number -> new LotteryNumber(Integer.parseInt(number.trim()))).collect(Collectors.toList()));
     }
 
     public LotteryTicket(String winningNumbers) {
         this(winningNumbers.replace(" ", "").split(","));
     }
 
-//    public List<LotteryNumber> getLotteryNumbers() {
-//        return this.lotteryNumbers;
-//    }
-    public SortedSet<LotteryNumber> getLotteryNumbers() {
+    public Set<LotteryNumber> getLotteryNumbers() {
         return this.lotteryNumbers;
     }
 

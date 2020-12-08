@@ -19,7 +19,7 @@ public class LotteryGame {
         return cost / this.price;
     }
 
-    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, AutoBuyBehavior behavior) {
+    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, BuyBehavior behavior) {
         return behavior.buyLotteryTickets(this.pickCounts, numberOfTickets);
     }
 
