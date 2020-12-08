@@ -35,7 +35,7 @@ public class LottoStore {
         return this.winningLottoMoney.findBenefitByFee(this.fee);
     }
 
-    public List<Integer> getWinNumbers() {
+    public List<LottoNo> getWinNumbers() {
         return this.winningLottoNumber.getNumbers();
     }
 

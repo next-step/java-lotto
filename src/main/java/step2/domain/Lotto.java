@@ -2,33 +2,38 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> numbers = new ArrayList<>();
 
     public Lotto() {
-        this.numbers = new ArrayList<>();
         createLottoNumber();
     }
 
     public Lotto(List<Integer> lottoNumbers) {
-        numbers = new ArrayList<>(lottoNumbers);
+        for (Integer lottoNumber : lottoNumbers) {
+            this.numbers.add(LottoNo.create(lottoNumber));
+        }
     }
 
     private void createLottoNumber() {
-        List<Integer> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
+        List<LottoNo> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
         Collections.shuffle(allLottoNumber);
-        this.numbers.addAll(allLottoNumber.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT));
-        Collections.sort(this.numbers);
+        List<LottoNo> lottoNos = allLottoNumber.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT);
+        lottoNos.sort(Comparator.comparingInt(LottoNo::getNumber));
+        this.numbers.addAll(lottoNos);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNo> getNumbers() {
         return this.numbers;
     }
 
-    public boolean isContains(Integer winNumber) {
+    public boolean isContains(LottoNo winNumber) {
         return this.numbers.contains(winNumber);
     }
 

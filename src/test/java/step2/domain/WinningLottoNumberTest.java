@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,7 +23,14 @@ class WinningLottoNumberTest {
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
 
         assertThat(winningLottoNumber.getNumbers().size()).isEqualTo(6);
-        assertThat(winningLottoNumber.getNumbers()).containsAll(list);
+
+        List<Integer> collect = winningLottoNumber.getNumbers()
+                .stream()
+                .map(lottoNo -> lottoNo.getNumber())
+                .collect(Collectors.toList());
+
+
+        assertThat(collect).containsAll(list);
     }
 
     @ParameterizedTest
@@ -49,6 +57,5 @@ class WinningLottoNumberTest {
 
         assertThatThrownBy(() -> winningLottoNumber.addBonusNumber(10))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 }
