@@ -40,9 +40,9 @@ public class LottoResult {
                 .reduce(0L, Double::sum);
     }
 
-    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets, WinningCondition winningCodition) {
+    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets, WinningCondition winningCondition) {
         LottoResult lottoResult = new LottoResult(lottoTickets.size());
-        lottoTickets.forEach(lottoTicket -> getSingleLottoResult(lottoTicket, winningCodition));
+        lottoTickets.forEach(lottoTicket -> getSingleLottoResult(lottoTicket, winningCondition));
         return lottoResult;
     }
 
