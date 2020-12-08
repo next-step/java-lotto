@@ -16,10 +16,10 @@ public class WinningCountTest {
         // given
         Lottoes lottoes = new Lottoes(
                 Arrays.asList(
-                        Arrays.asList(6, 7, 8, 9, 10, 11),
-                        Arrays.asList(1, 2, 6, 7, 8, 9),
-                        Arrays.asList(1, 2, 4, 7, 8, 9),
-                        Arrays.asList(1, 2, 5, 6, 7, 8)
+                        new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)),
+                        new Lotto(Arrays.asList(1, 2, 6, 7, 8, 9)),
+                        new Lotto(Arrays.asList(1, 2, 4, 7, 8, 9)),
+                        new Lotto(Arrays.asList(1, 2, 5, 6, 7, 8))
                 )
         );
 
