@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StatisticsOutputView {
     private static final String PROFIT_HEADER = "총 수익률은 ";
     private static final String POSITIVE_PROFIT_FOOTER = "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
-    private static final String NEGATIVE_PROFIT_FOOTER = "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String NEGATIVE_PROFIT_FOOTER = "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String LOTTO_PRIZE_SEPARATOR = "- ";
     private static final String PRIZE_UNIT = "개\n";
 
