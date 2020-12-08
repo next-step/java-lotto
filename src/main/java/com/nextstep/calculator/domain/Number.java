@@ -1,4 +1,6 @@
-package com.nextstep.calculator;
+package com.nextstep.calculator.domain;
+
+import com.nextstep.calculator.domain.exceptions.InvalidNumberException;
 
 import java.util.Objects;
 
@@ -6,7 +8,17 @@ public class Number {
     private final String value;
 
     public Number(final String value) {
+        validate(value);
         this.value = value;
+    }
+
+    private void validate(final String value) {
+        if (value == null) {
+            throw new InvalidNumberException("null은 Number로 전환할 수 없습니다.");
+        }
+        if (value.trim().isEmpty()) {
+            throw new InvalidNumberException("빈 값은 Number로 전환할 수 없습니다.");
+        }
     }
 
     @Override
