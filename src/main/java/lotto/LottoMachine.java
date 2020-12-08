@@ -25,16 +25,19 @@ public final class LottoMachine {
     public void purchase() {
         int totalLottoCount = inputView.inputPurchaseCount();
         int manualLottoCount = inputView.inputManualLottoCount();
-        int automaticLottoCount = totalLottoCount - manualLottoCount;
+        int autoLottoCount = totalLottoCount - manualLottoCount;
 
-        Lottoes lottoes = new Lottoes(automaticLottoCount);
-        outputView.showPurchaseCount(manualLottoCount,automaticLottoCount);
-        outputView.showPurchasedLottoes(lottoes);
+        Lottoes manualLottoes = new Lottoes(manualLottoCount);
+        Lottoes autoLottoes = new Lottoes(autoLottoCount);
+
+        outputView.showPurchaseCount(manualLottoCount,autoLottoCount);
+        outputView.showPurchasedLottoes(autoLottoes);
 
         Lotto winningLotto = inputView.inputWinningNumbers();
         LottoNumber bonusBall = inputView.inputBonusBall();
 
-        WinningCount winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
-        outputView.showStatistics(winningCount, totalLottoCount * PAY);
+        WinningCount manualWinningCount = manualLottoes.countWinLotto(winningLotto, bonusBall);
+        WinningCount autoWinningCount = manualLottoes.countWinLotto(winningLotto, bonusBall);
+        outputView.showStatistics(manualWinningCount, autoWinningCount, totalLottoCount * PAY);
     }
 }

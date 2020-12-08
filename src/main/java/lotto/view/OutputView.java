@@ -28,19 +28,19 @@ public final class OutputView {
         }
     }
 
-    public void showStatistics(final WinningCount winningCount, final int paid) {
+    public void showStatistics(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final int paid) {
         System.out.println(STATISTICS_MESSAGE);
-        showMatchingCounts(winningCount);
-        showEarnRate(winningCount, paid);
+        showMatchingCounts(manualWinningCount, autoWinningCount);
+        showEarnRate(manualWinningCount, autoWinningCount, paid);
     }
 
-    private void showMatchingCounts(final WinningCount winningCount) {
+    private void showMatchingCounts(final WinningCount manualWinningCount, final WinningCount autoWinningCount) {
         for (Rank rank : Rank.values()) {
-            showMatchingCount(winningCount, rank);
+            showMatchingCount(manualWinningCount, autoWinningCount, rank);
         }
     }
 
-    private void showMatchingCount(final WinningCount winningCount, final Rank rank) {
+    private void showMatchingCount(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final Rank rank) {
         String message = DEFAULT_STATISTICS_MESSAGE;
 
         if (rank.equals(Rank.SECOND)) {
@@ -49,11 +49,14 @@ public final class OutputView {
 
         System.out.printf(message, rank.getMatchCount()
                 , rank.getPrize()
-                , winningCount.getMatchCount(rank));
+                , manualWinningCount.getMatchCount(rank) + autoWinningCount.getMatchCount(rank));
     }
 
-    private void showEarnRate(final WinningCount winningCount, final int paid) {
-        double earn = winningCount.calculateEarnRate(paid);
+    private void showEarnRate(final WinningCount manualWinningCount, final WinningCount autoWinningCount, final int paid) {
+        double manualEarn = manualWinningCount.calculateEarnRate(paid);
+        double autoEarn = autoWinningCount.calculateEarnRate(paid);
+        double earn = manualEarn + autoEarn;
+
         System.out.printf(EARN_RATE_MESSAGE, earn, EarnRate.getExplanationMessage(earn));
     }
 }
