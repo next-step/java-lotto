@@ -26,4 +26,11 @@ class LottoValidatorTest {
         ValidatorUtils.assertValidation(validator, "1,2,3,4,5,6,7",
                 LottoValidator.SIZE_NOT_MATCH);
     }
+
+    @Test
+    @DisplayName("중복된 숫자 입력 시 IllegalArgumentException 발생 테스트")
+    public void checkDuplicateNumber_duplicateNumbers_ExceptionThrown() {
+        ValidatorUtils.assertValidation(validator, "1,2,3,4,4,5",
+                String.format(LottoValidator.HAS_DUPLICATE_NUMBER, "4"));
+    }
 }
