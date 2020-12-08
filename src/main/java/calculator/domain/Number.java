@@ -22,4 +22,8 @@ public class Number {
             throw new IllegalArgumentException("음수입니다.");
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }

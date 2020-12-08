@@ -1,29 +1,17 @@
 package calculator.domain;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringAddCalculator {
+    private static final int INIT_NUMBER = 0;
+
     public static int splitAndSum(String expression) {
         if (isNullOrEmpty(expression)) {
-            return 0;
+            return INIT_NUMBER;
         }
 
-        if (expression.contains(":") || expression.contains(",")) {
-            return Arrays.stream(expression.split(",|:"))
-                    .mapToInt(Integer::parseInt)
-                    .sum();
-        }
-
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return Arrays.stream(m.group(2).split(customDelimiter))
-                    .mapToInt(Integer::parseInt)
-                    .sum();
-        }
-        return Integer.parseInt(expression);
+        return ExpressionSplitter.split(expression).stream()
+                .map(Number::new)
+                .mapToInt(Number::getValue)
+                .sum();
     }
 
     private static boolean isNullOrEmpty(String expression) {
