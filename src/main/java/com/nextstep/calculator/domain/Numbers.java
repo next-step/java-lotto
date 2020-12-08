@@ -23,6 +23,11 @@ public class Numbers {
         }
     }
 
+    public Number sum() {
+        return numbers.stream()
+                .reduce(Number.of("0"), Number::plus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
