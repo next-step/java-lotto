@@ -53,4 +53,25 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }
+
+    public int getNotAutoBuyCount() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요");
+        return scanner.nextInt();
+
+    }
+
+    public List<List<Integer>> getNotAutoNumbers(int notAutoBuyCount) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int count = 0; count < notAutoBuyCount; count++){
+            String winNumberString = scanner.next();
+            stringFormatValid(winNumberString);
+            lottos.add(stringToInt(split(winNumberString)));
+        }
+
+        return lottos;
+    }
 }

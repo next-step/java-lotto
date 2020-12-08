@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 
     private final List<LottoNo> numbers = new ArrayList<>();
+    private final boolean isAuto;
 
     public Lotto() {
+        this.isAuto = true;
         createLottoNumber();
     }
 
@@ -19,6 +19,7 @@ public class Lotto {
         for (Integer lottoNumber : lottoNumbers) {
             this.numbers.add(LottoNo.create(lottoNumber));
         }
+        this.isAuto = false;
     }
 
     private void createLottoNumber() {
@@ -39,5 +40,9 @@ public class Lotto {
 
     public boolean isContainsBonusNumber(int bonusNumber) {
         return this.numbers.contains(bonusNumber);
+    }
+
+    public boolean isAuto() {
+        return this.isAuto;
     }
 }

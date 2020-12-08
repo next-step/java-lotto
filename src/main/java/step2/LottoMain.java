@@ -32,7 +32,9 @@ public class LottoMain {
 
     private void buyLotto() {
         int fee = inputView.getFee();
-        List<LottoDTO> lottoDTOS = lottoController.buyLotto(fee);
+        int notAutoBuyCount = inputView.getNotAutoBuyCount();
+        List<List<Integer>> notAutoNumbers = inputView.getNotAutoNumbers(notAutoBuyCount);
+        List<LottoDTO> lottoDTOS = lottoController.buyLotto(fee, notAutoNumbers);
         resultView.showBoughtLotto(lottoDTOS);
     }
 

@@ -18,6 +18,18 @@ public class SoldLotto {
         this.soldLotto.add(lotto);
     }
 
+    public static SoldLotto of(int autoCount, List<List<Integer>> notAutoNumbers) {
+        SoldLotto soldLotto = new SoldLotto(autoCount);
+        for (List<Integer> notAutoNumber : notAutoNumbers) {
+            soldLotto.addSoldLotto(notAutoNumber);
+        }
+        return soldLotto;
+    }
+
+    private void addSoldLotto(List<Integer> notAutoNumber) {
+        this.soldLotto.add(new Lotto(notAutoNumber));
+    }
+
     public List<Lotto> getSoldLotto() {
         return Collections.unmodifiableList(soldLotto);
     }

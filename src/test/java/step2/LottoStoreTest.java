@@ -17,16 +17,8 @@ class LottoStoreTest {
     @DisplayName("천원보다 낮은 금액을 입력한 경우 IllegalArgumentException 발생함..")
     void buyLotto_isNotEnoughFee_IllegalArgumentException() {
         LottoStore lottoStore = new LottoStore();
-        assertThatThrownBy(() -> lottoStore.buy(990))
+        assertThatThrownBy(() -> lottoStore.buy(990, null))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("로또 구매를 요청한 경우 천원당 하나의 로또를 반환함.")
-    void buyLotto() {
-        LottoStore lottoStore = new LottoStore();
-        assertThat(lottoStore.buy(1000).size()).isEqualTo(1);
-        assertThat(lottoStore.buy(3000).size()).isEqualTo(3);
     }
 
     @Test
@@ -42,7 +34,7 @@ class LottoStoreTest {
 
     @Test
     @DisplayName("숫자가 아닌 값이나 로또 범위를 초과하는 값을 입력할 경우 Exception이 발생한다.")
-    void initWinningNumber_isNotNumberAndIsNotLottoNumber_Exception() {
+    void initWinNumbes_isNotNumberAndisNotLottoNumber_Exception() {
         LottoStore lottoStore = new LottoStore();
         List<Integer> list = Arrays.asList(0,1,2,3,5,46);
 

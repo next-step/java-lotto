@@ -17,14 +17,6 @@ public class LottoController {
         this.lottoStore = new LottoStore();
     }
 
-    public List<LottoDTO> buyLotto(int fee) {
-
-        return lottoStore.buy(fee)
-                .stream()
-                .map(lotto -> LottoDTO.from(lotto))
-                .collect(Collectors.toList());
-    }
-
     public void initWinNumbers(List<Integer> winningNumbers) {
         lottoStore.initWinNumbers(winningNumbers);
     }
@@ -39,5 +31,12 @@ public class LottoController {
 
     public void addBonusNumber(int bonusNumber) {
         lottoStore.addBonusNumber(bonusNumber);
+    }
+
+    public List<LottoDTO> buyLotto(int fee, List<List<Integer>> notAutoNumbers) {
+        return lottoStore.buy(fee, notAutoNumbers)
+                .stream()
+                .map(lotto -> LottoDTO.from(lotto))
+                .collect(Collectors.toList());
     }
 }

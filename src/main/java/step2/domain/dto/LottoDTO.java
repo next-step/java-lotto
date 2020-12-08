@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class LottoDTO {
 
     private List<LottoNo> numbers;
+    private boolean isAuto;
 
     public List<Integer> getNumbers() {
         return this.numbers.stream()
@@ -18,10 +19,14 @@ public class LottoDTO {
 
     protected LottoDTO(Lotto lotto) {
         this.numbers = lotto.getNumbers();
+        this.isAuto = lotto.isAuto();
     }
 
     public static LottoDTO from(Lotto lotto) {
         return new LottoDTO(lotto);
     }
 
+    public boolean isAuto() {
+        return this.isAuto;
+    }
 }
