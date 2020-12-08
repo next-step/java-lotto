@@ -1,11 +1,15 @@
 package com.nextstep.calculator.domain;
 
+import com.nextstep.calculator.domain.exceptions.InvalidNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CustomModeTest {
     private static final String SAMPLE_SEPARATOR = "-";
@@ -28,5 +32,15 @@ class CustomModeTest {
         CustomMode customMode = new CustomMode(SAMPLE_SEPARATOR);
 
         assertThat(customMode.parseToNumbers(value)).isEqualTo(expected);
+    }
+
+    @DisplayName("커스텀 구분자 외 구분자로 구분된 문자열 파싱 시도 시 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1-5,2"})
+    void parseToNumbersFailTest(String invalidValue) {
+        CustomMode customMode = new CustomMode(SAMPLE_SEPARATOR);
+
+        assertThatThrownBy(() -> customMode.parseToNumbers(invalidValue))
+                .isInstanceOf(InvalidNumberException.class);
     }
 }
