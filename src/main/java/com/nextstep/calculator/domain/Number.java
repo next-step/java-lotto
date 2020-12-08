@@ -23,6 +23,10 @@ public class Number {
         return new Number(this.value + thatNumber.value);
     }
 
+    public Integer getValue() {
+        return value;
+    }
+
     private static Integer parseSafely(final String value) {
         try {
             return Integer.parseInt(value);
