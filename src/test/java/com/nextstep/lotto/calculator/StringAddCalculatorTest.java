@@ -36,4 +36,11 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(source);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource({"'//;\n1;2;3',6", "'//#\n1#2#3',6"})
+    public void splitAndSum_custom_구분자(String source, int expected) {
+        int result = StringAddCalculator.splitAndSum(source);
+        assertThat(result).isEqualTo(expected);
+    }
 }
