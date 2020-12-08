@@ -14,10 +14,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class CustomModeTest {
     private static final String SAMPLE_SEPARATOR = "-";
 
-    @DisplayName("커스텀 구분자로 사용할 문자를 인자로 전달해서 객체를 생성할 수 있다.")
+    @DisplayName("커스텀 구분자로 사용할 문자열과 나눌 문자열을 인자로 전달해서 객체를 생성할 수 있다.")
     @Test
     void createTest() {
-        assertThat(new CustomMode(SAMPLE_SEPARATOR)).isNotNull();
+        String value = "1-23-4";
+
+        assertThat(new CustomMode(value, SAMPLE_SEPARATOR)).isNotNull();
     }
 
     @DisplayName("커스텀 구분자로 구분된 Numbers로 변환할 수 있다.")
@@ -29,18 +31,18 @@ class CustomModeTest {
                         Number.of("4"), Number.of("5"), Number.of("6"))
         );
 
-        CustomMode customMode = new CustomMode(SAMPLE_SEPARATOR);
+        CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
 
-        assertThat(customMode.parseToNumbers(value)).isEqualTo(expected);
+        assertThat(customMode.parseToNumbers()).isEqualTo(expected);
     }
 
     @DisplayName("커스텀 구분자 외 구분자로 구분된 문자열 파싱 시도 시 예외 발생")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1-5,2"})
     void parseToNumbersFailTest(String invalidValue) {
-        CustomMode customMode = new CustomMode(SAMPLE_SEPARATOR);
+        CustomMode customMode = new CustomMode(invalidValue, SAMPLE_SEPARATOR);
 
-        assertThatThrownBy(() -> customMode.parseToNumbers(invalidValue))
+        assertThatThrownBy(customMode::parseToNumbers)
                 .isInstanceOf(InvalidNumberException.class);
     }
 }

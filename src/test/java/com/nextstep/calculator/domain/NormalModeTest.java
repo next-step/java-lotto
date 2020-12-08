@@ -19,9 +19,9 @@ class NormalModeTest {
     @ParameterizedTest
     @MethodSource("toNumbersTestResource")
     void toNumbersTest(String value, Numbers expected) {
-        Mode mode = new NormalMode();
+        Mode mode = new NormalMode(value);
 
-        assertThat(mode.parseToNumbers(value)).isEqualTo(expected);
+        assertThat(mode.parseToNumbers()).isEqualTo(expected);
     }
     public static Stream<Arguments> toNumbersTestResource() {
         return Stream.of(
@@ -45,8 +45,8 @@ class NormalModeTest {
     @ParameterizedTest
     @ValueSource(strings = {"1.2.3.4.5", "1-2-3-4-5", "1,2:3.4"})
     void toNumbersFailTest(String invalidValue) {
-        Mode mode = new NormalMode();
+        Mode mode = new NormalMode(invalidValue);
 
-        assertThatThrownBy(() -> mode.parseToNumbers(invalidValue)).isInstanceOf(InvalidNumberException.class);
+        assertThatThrownBy(mode::parseToNumbers).isInstanceOf(InvalidNumberException.class);
     }
 }
