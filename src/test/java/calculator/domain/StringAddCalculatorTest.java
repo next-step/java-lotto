@@ -1,18 +1,18 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
-    @Test
-    public void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = StringAddCalculator.splitAndSum("");
+    @NullAndEmptySource
+    @ParameterizedTest
+    public void splitAndSum_null_또는_빈문자(String expression) {
+        int result = StringAddCalculator.splitAndSum(expression);
         assertThat(result).isEqualTo(0);
     }
 
