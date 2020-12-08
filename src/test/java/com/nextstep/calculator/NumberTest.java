@@ -30,4 +30,11 @@ class NumberTest {
     void createFailByInvalidValue(String invalidValue) {
         assertThatThrownBy(() -> new Number(invalidValue)).isInstanceOf(InvalidNumberException.class);
     }
+
+    @DisplayName("양수로 변환할 수 없을 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "sdnqkldq"})
+    void parseFailTest(String notPositiveNumber) {
+        assertThatThrownBy(() -> new Number(notPositiveNumber)).isInstanceOf(InvalidNumberException.class);
+    }
 }

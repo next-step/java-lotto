@@ -5,11 +5,27 @@ import com.nextstep.calculator.domain.exceptions.InvalidNumberException;
 import java.util.Objects;
 
 public class Number {
-    private final String value;
+    private final Integer value;
 
     public Number(final String value) {
         validate(value);
-        this.value = value;
+        Integer parsedNumber = parseSafely(value);
+        validatePositive(parsedNumber);
+        this.value = parsedNumber;
+    }
+
+    private Integer parseSafely(final String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException("숫자로 변환할 수 없는 유형입니다.");
+        }
+    }
+
+    private void validatePositive(final Integer number) {
+        if (number < 0) {
+            throw new InvalidNumberException("양수와 0만 Number 전환 가능합니다.");
+        }
     }
 
     private void validate(final String value) {
