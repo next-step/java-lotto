@@ -9,7 +9,7 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int money){
+    public Lottos(int money) {
         if (money < 1000) {
             throw new BeShortOfMoneyException("1000원보다 작은 돈으로는 복권을 살 수 없습니다.");
         }
@@ -19,7 +19,7 @@ public class Lottos {
         }
     }
 
-    public int getLottosCount(){
+    public int getLottosCount() {
         return lottos.size();
     }
 

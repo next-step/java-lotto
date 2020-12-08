@@ -10,7 +10,7 @@ import autolotto.view.ResultView;
 
 public class LottoController {
 
-    public static void playLotto(){
+    public static void playLotto() {
         int purchaseAmount = InputView.inputMoney();
         Buyer buyer = new Buyer(purchaseAmount);
 
@@ -23,7 +23,6 @@ public class LottoController {
         ResultView.viewStatistic(lottosComparer);
         float profitRate = ProfitCalculator.calculate(purchaseAmount, lottosComparer);
         ResultView.viewProfitRate(profitRate);
-
 
     }
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class LottosComparer {
 
-    private final HashMap<Integer,Integer> matchingNumbers= new HashMap<Integer, Integer>(){
+    private final HashMap<Integer,Integer> matchingNumbers= new HashMap<Integer, Integer>() {
         {
             for (int i = 3; i < 7; i++) {
                 put(i,0);
@@ -14,7 +14,7 @@ public class LottosComparer {
 
     private int matchingCount;
 
-    public LottosComparer(Lottos lottos, String winningNumbers){
+    public LottosComparer(Lottos lottos, String winningNumbers) {
         for (int i = 0; i < lottos.getLottosCount(); i++) {
             compareLotto(lottos.getLotto(i),winningNumbers);
         }
@@ -24,7 +24,7 @@ public class LottosComparer {
         return matchingNumbers.get(matchingNumber);
     }
 
-    private void compareLotto(Lotto lotto, String winningNumbers){
+    private void compareLotto(Lotto lotto, String winningNumbers) {
         for (int i = 0; i < 6; i++) {
             checkMatchingNumber(lotto.getNumbers(i), winningNumbers);
         }
@@ -36,7 +36,7 @@ public class LottosComparer {
         matchingCount = 0;
     }
 
-    private void checkMatchingNumber(int lottoNumber, String winningNumber){
+    private void checkMatchingNumber(int lottoNumber, String winningNumber) {
         String[] splitWinningNumber = winningNumber.split(", ");
 
         for (int i = 0; i < 6; i++) {
@@ -44,7 +44,7 @@ public class LottosComparer {
         }
     }
 
-    private void compareNumber(int lottoNumber, int winningNumber){
+    private void compareNumber(int lottoNumber, int winningNumber) {
         if (winningNumber == lottoNumber) {
             matchingCount++;
         }

@@ -18,8 +18,8 @@ public class ProfitCalculator {
         return profit / (float)money;
     }
 
-    private static void addProfit(int matchingNumber, int matchingCount){
-        switch (matchingNumber){
+    private static void addProfit(int matchingNumber, int matchingCount) {
+        switch (matchingNumber) {
             case 3 :
                 profit += THREE_MATCH_PROFIT * matchingCount;
                 break;

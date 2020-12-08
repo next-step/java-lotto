@@ -21,7 +21,7 @@ public class WinningNumbers {
         }
     }
 
-    private void checkNotNumber(int number){
+    private void checkNotNumber(int number) {
         if ( number < 1 || 45 < number) {
             throw new IsNotScopeInTheNumber("당첨번호는 1부터 45까지의 수만 가능합니다");
         }
