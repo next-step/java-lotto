@@ -7,14 +7,23 @@ import java.util.Objects;
 public class Number {
     private final Integer value;
 
-    public Number(final String value) {
+    Number(final Integer value) {
+        this.value = value;
+    }
+
+    public static Number of(final String value) {
         validate(value);
         Integer parsedNumber = parseSafely(value);
         validatePositive(parsedNumber);
-        this.value = parsedNumber;
+
+        return new Number(parsedNumber);
     }
 
-    private Integer parseSafely(final String value) {
+    public Number plus(Number thatNumber) {
+        return new Number(this.value + thatNumber.value);
+    }
+
+    private static Integer parseSafely(final String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -22,13 +31,13 @@ public class Number {
         }
     }
 
-    private void validatePositive(final Integer number) {
+    private static void validatePositive(final Integer number) {
         if (number < 0) {
             throw new InvalidNumberException("양수와 0만 Number 전환 가능합니다.");
         }
     }
 
-    private void validate(final String value) {
+    private static void validate(final String value) {
         if (value == null) {
             throw new InvalidNumberException("null은 Number로 전환할 수 없습니다.");
         }
