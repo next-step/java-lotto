@@ -3,8 +3,10 @@ package com.nextstep.lotto.calculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     private static int ZERO = 0;
@@ -42,5 +44,12 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자(String source, int expected) {
         int result = StringAddCalculator.splitAndSum(source);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "3,2,-4"})
+    public void splitAndSum_negative(String source) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(source))
+                .isInstanceOf(RuntimeException.class);
     }
 }

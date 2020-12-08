@@ -47,6 +47,10 @@ public class StringAddCalculator {
     }
 
     private static int parseInt(String number) {
-        return Integer.parseInt(number);
+        int result = Integer.parseInt(number);
+        if (result < 0) {
+            throw new RuntimeException(result + " is negative value");
+        }
+        return result;
     }
 }
