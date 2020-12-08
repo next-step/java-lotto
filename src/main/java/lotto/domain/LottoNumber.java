@@ -8,8 +8,6 @@ public final class LottoNumber {
 
     public static final int UPPER_BOUND = 45;
 
-    static final String OUT_BOUND_MESSAGE = "숫자는 1 ~ 45 사이의 값을 가져야 합니다!";
-
     private final int number;
 
     public LottoNumber(final String number) {
@@ -17,10 +15,6 @@ public final class LottoNumber {
     }
 
     public LottoNumber(final int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND) {
-            throw new IllegalArgumentException(OUT_BOUND_MESSAGE);
-        }
-
         this.number = number;
     }
 

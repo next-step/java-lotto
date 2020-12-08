@@ -53,7 +53,7 @@ public final class InputView {
     }
 
     public LottoNumber inputBonusBall() {
-        return new LottoNumber(input(ASK_BONUS_BALL, new Validator()));
+        return new LottoNumber(input(ASK_BONUS_BALL, new LottoNumberValidator()));
     }
 
     private String input(final String message, final Validator validator) {
