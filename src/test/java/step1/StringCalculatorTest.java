@@ -4,7 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,47 +23,40 @@ class StringCalculatorTest {
         stringCalculator = new StringCalculator();
     }
 
-    @Test
+    static Stream<String> blankStrings() {
+        return Stream.of(null, "", "       ");
+    }
+
+    @ParameterizedTest
     @DisplayName("빈 문자열 또는 null을 입력하는 경우 결과값으로 0을 반환하는지 테스트")
-    void input_blank_or_null() {
-        int result = stringCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = stringCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(0);
-
-        result = stringCalculator.splitAndSum("  ");
+    @MethodSource("blankStrings")
+    void input_blank_or_null(final String input) {
+        int result = stringCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("숫자 하나 입력하는 경우 테스트")
-    void input_only_one_number() {
-        int result = stringCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
-
-        result = stringCalculator.splitAndSum("132");
-        assertThat(result).isEqualTo(132);
+    @CsvSource(value = {"1|1", "132|132"}, delimiter = '|')
+    void input_only_one_number(String input, int expected) {
+        int result = stringCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("구분자가 쉼표인 경우 테스트")
-    void input_split_with_comma() {
-        int result = stringCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
-
-        result = stringCalculator.splitAndSum("3,5");
-        assertThat(result).isEqualTo(8);
+    @CsvSource(value = {"1,2|3", "3,5|8"}, delimiter = '|')
+    void input_split_with_comma(String input, int expected) {
+        int result = stringCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("구분자가 쉼표 또는 콜론인 경우 테스트")
-    void input_split_with_comma_or_colon() {
-        int result = stringCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
-
-        result = stringCalculator.splitAndSum("10:2,4");
-        assertThat(result).isEqualTo(16);
+    @CsvSource(value = {"1,2:3|6", "10:2,4|16"}, delimiter = '|')
+    void input_split_with_comma_or_colon(String input, int expected) {
+        int result = stringCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
