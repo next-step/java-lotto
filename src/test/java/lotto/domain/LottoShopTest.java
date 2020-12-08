@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoShopTest {
 
-    private static final int LOTTO_PRICE = 1_000;
 
     @ParameterizedTest
     @CsvSource(value = {"5000:3", "3000:1", "12000:6"}, delimiter = ':')
@@ -26,7 +25,7 @@ public class LottoShopTest {
         LottoTicket ticket = shop.purchaseTicket(Money.from(purchasePrice), manualLottoQuantity);
 
         //Then
-        assertThat(ticket).isEqualTo(LottoTicket.of(purchasePrice / LOTTO_PRICE, manualLottoQuantity));
+        assertThat(ticket).isEqualTo(LottoTicket.of(purchasePrice / LottoShop.LOTTO_PRICE, manualLottoQuantity));
     }
 
     @ParameterizedTest

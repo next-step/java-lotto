@@ -10,11 +10,11 @@ import java.util.stream.IntStream;
 public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.rangeClosed(MIN, MAX)
                 .forEach(i -> numbers.put(i, new LottoNumber(i)));
     }
 
