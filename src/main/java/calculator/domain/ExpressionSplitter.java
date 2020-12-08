@@ -16,6 +16,6 @@ public class ExpressionSplitter {
             String customDelimiter = m.group(DELIMITER_INDEX);
             return Arrays.asList(m.group(EXPRESSION_INDEX).split(customDelimiter));
         }
-        return Arrays.asList(expression.split(",|:"));
+        return Arrays.asList(expression.split(Delimiter.joinTypes()));
     }
 }
