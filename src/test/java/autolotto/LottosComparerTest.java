@@ -21,7 +21,7 @@ public class LottosComparerTest {
         lottoNumbers.append(lotto.getNumbers(0));
 
         for (int i = 1; i < 6; i++) {
-            lottoNumbers.append(", " + lotto.getNumbers(i));
+            lottoNumbers.append(", ").append(lotto.getNumbers(i));
         }
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers.toString());
 
