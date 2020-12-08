@@ -19,8 +19,10 @@ public class StaticticTest {
         Money money = new Money(inputMoney);
 
         Main main = new Main();
+        Lottos lottos = new Lottos();
 
-        Lottos lottos = main.settingLottos(money, fourWinningsGenerator);
+        main.buyAutoLottos(lottos, money, fourWinningsGenerator);
+
         Statistic statistic = new Statistic();
         ResultNumber resultNumber = new ResultNumber();
 

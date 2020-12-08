@@ -10,7 +10,7 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public Lottos(Money money, LottoGenerator lottoGenerator) {
+    public void buyAutoLotto(Money money, LottoGenerator lottoGenerator) {
         for (int i = 1; i <= money.getLottoCnt(); i++) {
             buyLotto(lottoGenerator);
         }

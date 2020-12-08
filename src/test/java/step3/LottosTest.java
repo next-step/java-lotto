@@ -13,7 +13,8 @@ public class LottosTest {
     void lottosCreateTest() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Money money = new Money(6500);
-        Lottos lottos = new Lottos(money, lottoGenerator);
+        Lottos lottos = new Lottos();
+        lottos.buyAutoLotto(money, lottoGenerator);
 
         assertThat(lottos.getLottoList().size()).isEqualTo(6500/Money.lottoPrice);
     }

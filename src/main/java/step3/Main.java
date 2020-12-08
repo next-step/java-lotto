@@ -16,7 +16,11 @@ public class Main {
 
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        Lottos lottos = settingLottos(money, lottoGenerator);
+        Lottos lottos = new Lottos();
+
+
+        buyAutoLottos(lottos, money, lottoGenerator);
+
         ResultNumber resultNumber = new ResultNumber();
 
         resultNumber.settingLottoResultNumber(InputView.getResultNumber());
@@ -29,13 +33,10 @@ public class Main {
         ResultView.printResult(money, statistic);
     }
 
-    public Lottos settingLottos(Money money, LottoGenerator lottoGenerator) {
-        Lottos lottos = new Lottos(money, lottoGenerator);
+    public void buyAutoLottos(Lottos lottos, Money money, LottoGenerator lottoGenerator) {
+        lottos.buyAutoLotto(money, lottoGenerator);
 
         ResultView.printLottoCnt(lottos.getLottosCnt());
-
         ResultView.printLottoList(lottos);
-
-        return lottos;
     }
 }

@@ -16,7 +16,9 @@ public class DomainTest {
 
         Main main = new Main();
 
-        Lottos lottos = main.settingLottos(money, fixedWinningsGenerator);
+        Lottos lottos = new Lottos();
+        main.buyAutoLottos(lottos, money, fixedWinningsGenerator);
+
         Statistic statistic = new Statistic();
         ResultNumber resultNumber = new ResultNumber();
 
