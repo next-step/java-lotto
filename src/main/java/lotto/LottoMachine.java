@@ -1,9 +1,10 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoChecker;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
-import lotto.domain.WinningCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -35,9 +36,9 @@ public final class LottoMachine {
 
         Lotto winningLotto = inputView.inputWinningNumbers();
         LottoNumber bonusBall = inputView.inputBonusBall();
+        LottoChecker lottoChecker = new LottoChecker(winningLotto, bonusBall);
 
-        WinningCount manualWinningCount = manualLottoes.countWinLotto(winningLotto, bonusBall);
-        WinningCount autoWinningCount = manualLottoes.countWinLotto(winningLotto, bonusBall);
-        outputView.showStatistics(manualWinningCount, autoWinningCount, totalLottoCount * PAY);
+        LottoResult result = new LottoResult(lottoChecker, manualLottoes, autoLottoes);
+        outputView.showStatistics(result, totalLottoCount * PAY);
     }
 }

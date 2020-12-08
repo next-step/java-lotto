@@ -2,9 +2,9 @@ package lotto.view;
 
 import lotto.domain.EarnRate;
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
 import lotto.domain.Rank;
-import lotto.domain.WinningCount;
 
 public final class OutputView {
 
@@ -28,22 +28,19 @@ public final class OutputView {
         }
     }
 
-    public void showStatistics(final WinningCount manualWinningCount,
-                               final WinningCount autoWinningCount, final int paid) {
+    public void showStatistics(final LottoResult lottoResult, final int paid) {
         System.out.println(STATISTICS_MESSAGE);
-        showMatchingCounts(manualWinningCount, autoWinningCount);
-        showEarnRate(manualWinningCount, autoWinningCount, paid);
+        showMatchingCounts(lottoResult);
+        showEarnRate(lottoResult, paid);
     }
 
-    private void showMatchingCounts(final WinningCount manualWinningCount,
-                                    final WinningCount autoWinningCount) {
+    private void showMatchingCounts(LottoResult lottoResult) {
         for (Rank rank : Rank.values()) {
-            showMatchingCount(manualWinningCount, autoWinningCount, rank);
+            showMatchingCount(lottoResult, rank);
         }
     }
 
-    private void showMatchingCount(final WinningCount manualWinningCount,
-                                   final WinningCount autoWinningCount, final Rank rank) {
+    private void showMatchingCount(LottoResult lottoResult, Rank rank) {
         String message = DEFAULT_STATISTICS_MESSAGE;
 
         if (rank.equals(Rank.SECOND)) {
@@ -52,14 +49,12 @@ public final class OutputView {
 
         System.out.printf(message, rank.getMatchCount()
                 , rank.getPrize()
-                , manualWinningCount.getMatchCount(rank) + autoWinningCount.getMatchCount(rank));
+                , lottoResult.getManualWinningCount().getMatchCount(rank) +
+                        lottoResult.getAutoWinningCount().getMatchCount(rank));
     }
 
-    private void showEarnRate(final WinningCount manualWinningCount,
-                              final WinningCount autoWinningCount, final int paid) {
-        double manualEarn = manualWinningCount.calculateEarnRate(paid);
-        double autoEarn = autoWinningCount.calculateEarnRate(paid);
-        double earn = manualEarn + autoEarn;
+    private void showEarnRate(LottoResult lottoResult, int paid) {
+        double earn = lottoResult.calculateEarn(paid);
 
         System.out.printf(EARN_RATE_MESSAGE, earn, EarnRate.getExplanationMessage(earn));
     }
