@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
@@ -16,14 +20,18 @@ public class LottoMachineTest {
     @Test
     public void lottoRandomCreateNumberTest() {
         //Given
-        LottoMachine machine = (int capacity) -> Lotto.of(new HashSet<>(Arrays.asList(1, 3, 5, 6, 7, 8)));
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7);
+        List<LottoNumber> expectedLottoNumber = lottoNumbers.stream()
+                                        .map(LottoNumber::from)
+                                        .collect(Collectors.toList());
+
+        LottoMachine machine = (int capacity) -> Lotto.of(new HashSet<>(lottoNumbers));
 
         //When
         Lotto lotto = machine.createLotto(LOTTO_FIX_SIZE);
 
         //Then
         assertThat(lotto.getLottoNumbers()).hasSize(LOTTO_FIX_SIZE);
-        assertThat(lotto.getLottoNumbers()).contains(LottoNumber.from(1), LottoNumber.from(3), LottoNumber.from(5),
-                                                    LottoNumber.from(6), LottoNumber.from(7), LottoNumber.from(8));
+        assertThat(lotto.getLottoNumbers()).containsAll(expectedLottoNumber);
     }
 }

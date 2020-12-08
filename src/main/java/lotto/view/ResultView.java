@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoPrice;
-import lotto.domain.Lottos;
-import lotto.domain.PrizeInformation;
-import lotto.domain.Reward;
+import lotto.domain.*;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -14,16 +11,20 @@ public class ResultView {
 
     private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
-    public static void outputPurchaseQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public static void outputPurchaseQuantity(LottoTicket ticket) {
+        System.out.println("수동으로 " + ticket.getManualQuantity() + "장, 자동으로 " + ticket.getAutoQuantity() + "개를 구매했습니다.");
     }
 
     public static void outputLottos(Lottos lottos) {
         IntStream.range(0, lottos.quantity())
-                .forEach(i -> System.out.println(lottos.getLotto(i).stream()
-                                                            .map(lottonumber -> lottonumber.getNumber())
-                                                            .sorted()
-                                                            .collect(Collectors.toList())));
+                .forEach(i -> System.out.println(
+                                    lottos.getLotto(i)
+                                            .stream()
+                                            .map(LottoNumber::getNumber)
+                                            .sorted()
+                                            .collect(Collectors.toList())
+                                )
+                        );
     }
 
     public static void outputPrizeStatistics(Reward reward) {
@@ -41,7 +42,7 @@ public class ResultView {
     }
 
 
-    public static void outputTotalEarningRate(Reward reward, LottoPrice purchasePrice) {
+    public static void outputTotalEarningRate(Reward reward, Money purchasePrice) {
         System.out.println("총 수익률은 " + FORMAT.format(reward.earningRate(purchasePrice.getPurchasePrice())) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

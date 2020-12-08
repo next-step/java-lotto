@@ -1,16 +1,13 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Reward matchPrizeNumber(PrizeLotto prizeLotto) {
         List<PrizeInformation> prizeInformations = lottos.stream()
@@ -25,6 +22,14 @@ public class Lottos {
 
     public Set<LottoNumber> getLotto(int index) {
         return lottos.get(index).getLottoNumbers();
+    }
+
+    public void addLotto(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
+    public void addAllLottos(List<Lotto> lottos){
+        this.lottos.addAll(lottos);
     }
 
 }

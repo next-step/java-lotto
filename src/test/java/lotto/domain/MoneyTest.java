@@ -10,15 +10,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoPriceTest {
+public class MoneyTest {
 
     @Test
     public void createLottoPriceInstanceTest() {
         //Given & When
-        LottoPrice lottoPrice = LottoPrice.from(1000);
+        Money money = Money.from(1000);
 
         //Then
-        assertThat(lottoPrice).isNotNull();
+        assertThat(money).isNotNull();
     }
 
     @DisplayName("로또 금액보다 더 낮은 금액으로 구매할 경우 예외 테스트")
@@ -26,7 +26,7 @@ public class LottoPriceTest {
     @CsvSource(value = {"800:200", "500:500", "150:850"}, delimiter = ':')
     public void notValidLottoPriceTest(int purchasePrice, int insufficientAmount) {
         assertThatThrownBy(() ->
-            LottoPrice.from(purchasePrice)
+            Money.from(purchasePrice)
         ).isInstanceOf(NotValidLottoPriceException.class)
           .hasMessage(insufficientAmount + ErrorMessage.NOT_VALID_PRICE.getMessage());
     }

@@ -1,23 +1,27 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
 
-    private static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
+    private LottoMachine lottoMachine;
 
-    public Lottos purchase(LottoPrice lottoPrice, LottoMachine machine) {
-        int quantity = lottoPrice.getPurchasePrice() / LOTTO_PRICE;
-        return createLotto(quantity, machine);
+    public LottoShop(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
-    private Lottos createLotto(int quantity, LottoMachine machine) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(Lotto.createLottoNumber(machine));
+    public LottoTicket purchaseTicket(Money money, int manualLottoQuantity) {
+        return LottoTicket.of(money.getPurchasePrice() / LOTTO_PRICE, manualLottoQuantity);
+    }
+
+    public Lottos purchaseLottos(LottoTicket ticket, List<Lotto> manualLottos) {
+        Lottos lottos = new Lottos();
+        lottos.addAllLottos(manualLottos);
+        for (int i = 0; i < ticket.getAutoQuantity(); i++) {
+            lottos.addLotto(Lotto.createLottoNumber(lottoMachine));
         }
-
-        return new Lottos(lottos);
+        return lottos;
     }
+
 }
