@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 public class NumberValidator extends Validator {
 
@@ -7,7 +7,7 @@ public class NumberValidator extends Validator {
     static final String NOT_POSITIVE_NUMBER = "이 숫자는 양수가 아닙니다!";
 
     @Override
-    protected void validate(String input) {
+    public void validate(String input) {
         super.validate(input);
         checkNumeric(input);
     }

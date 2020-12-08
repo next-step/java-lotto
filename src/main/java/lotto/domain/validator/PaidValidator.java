@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 import lotto.LottoMachine;
 

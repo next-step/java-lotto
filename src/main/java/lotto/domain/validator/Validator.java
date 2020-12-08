@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 public class Validator {
 
@@ -8,7 +8,7 @@ public class Validator {
 
     static final String EMPTY = "";
 
-    protected void validate(final String input) {
+    public void validate(final String input) {
         checkNull(input);
         checkBlank(input);
     }

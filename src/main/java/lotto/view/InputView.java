@@ -7,10 +7,15 @@ import java.util.stream.Collectors;
 import lotto.LottoMachine;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.validator.LottoCountValidator;
+import lotto.domain.validator.LottoNumberValidator;
+import lotto.domain.validator.LottoValidator;
+import lotto.domain.validator.PaidValidator;
+import lotto.domain.validator.Validator;
 
 public final class InputView {
 
-    static final String DELIMITER = ",";
+    public static final String DELIMITER = ",";
 
     private static final String ASK_PAID = "구입금액을 입력해 주세요.";
 

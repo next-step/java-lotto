@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lotto.LottoMachine;
+import lotto.view.InputView;
 
 public final class LottoValidator extends Validator {
 
@@ -18,7 +19,7 @@ public final class LottoValidator extends Validator {
     private static final Pattern NUMBER_AND_COMMA_PATTERN = Pattern.compile("([0-9]?,?)+");
 
     @Override
-    protected void validate(final String input) {
+    public void validate(final String input) {
         super.validate(input);
         checkNumberAndComma(input);
         checkSize(input);

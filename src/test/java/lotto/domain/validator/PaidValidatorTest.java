@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
