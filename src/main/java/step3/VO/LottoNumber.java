@@ -3,7 +3,7 @@ package step3.VO;
 import java.util.Objects;
 
 public class LottoNumber {
-    public final static int maxNumber = 45;
+    public static final int maxNumber = 45;
     private final int number;
 
     public LottoNumber(int inputNumber) {

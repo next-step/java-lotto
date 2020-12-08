@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-    public final static int lottoSize = 6;
+    public static final int lottoSize = 6;
     public final List<Integer> numbers;
 
     public LottoGenerator(){
