@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,6 +22,14 @@ class LottoTest {
 	void of(List<Integer> numbers) {
 
 		assertThat(Lotto.of(numbers)).isInstanceOf(Lotto.class);
+
+	}
+
+	@DisplayName("of 메서드에 LottoGenerator 형태의 파라미터를 전달하면 Lotto객체를 생성할 수 있다.")
+	@Test
+	void ofGenerator() {
+
+		assertThat(Lotto.of(new LottoAutoGenerator())).isInstanceOf(Lotto.class);
 
 	}
 

@@ -8,6 +8,7 @@ public class Lotto {
 	public static final int LOTTO_START_NUMBER = 1;
 	public static final int LOTTO_END_NUMBER = 45;
 	public static final int LOTTO_NUMBER_LENGTH = 6;
+	public static final int LOTTO_PRICE = 1000;
 
 	private final List<Integer> numbers;
 
@@ -33,6 +34,10 @@ public class Lotto {
 		return new Lotto(numbers);
 	}
 
+	public static Lotto of(LottoGenerator lottoGenerator) {
+		return new Lotto(lottoGenerator.generate());
+	}
+
 	private boolean validateNumbers(List<Integer> numbers) {
 		return numbers.stream()
 			.allMatch(num -> num >= LOTTO_START_NUMBER && num <= LOTTO_END_NUMBER);
@@ -40,5 +45,13 @@ public class Lotto {
 
 	public List<Integer> getNumbers() {
 		return numbers;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("Lotto{");
+		sb.append("numbers=").append(numbers);
+		sb.append('}');
+		return sb.toString();
 	}
 }
