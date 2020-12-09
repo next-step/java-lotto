@@ -1,5 +1,9 @@
-package lotto;
+package lotto.infra;
 
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.infra.NextStepLottoMachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
