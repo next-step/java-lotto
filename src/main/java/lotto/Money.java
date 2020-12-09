@@ -25,6 +25,10 @@ public class Money {
         return new Money(value);
     }
 
+    public static Money zero() {
+        return valueOf(MIN_VALUE);
+    }
+
     public Money plus(final Money other) {
         return valueOf(amount.add(other.amount));
     }
