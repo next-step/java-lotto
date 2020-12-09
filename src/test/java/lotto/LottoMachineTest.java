@@ -15,19 +15,39 @@ public class LottoMachineTest {
 
     @BeforeEach
     void setUp() {
-        lottoMachine = money -> LottoTickets.of(Arrays.asList(
-                LottoTicket.of(1, 2, 3, 4, 5, 6),
-                LottoTicket.of(2, 3, 4, 5, 6, 7),
-                LottoTicket.of(3, 4, 5, 6, 7, 8)));
+        lottoMachine = new LottoMachine() {
+            @Override
+            public LottoTickets automatic(final long amount) {
+                return LottoTickets.of(Arrays.asList(
+                        LottoTicket.of(1, 2, 3, 4, 5, 6),
+                        LottoTicket.of(2, 3, 4, 5, 6, 7),
+                        LottoTicket.of(3, 4, 5, 6, 7, 8)));
+            }
+
+            @Override
+            public LottoTicket manual(final String numbers) {
+                return LottoTicket.of(1, 2, 3, 4, 5, 6);
+            }
+        };
     }
 
-    @DisplayName("로또 티켓을 생성할 수 있다.")
+    @DisplayName("자동 로또 티켓을 생성할 수 있다.")
     @Test
-    void generate() {
+    void automatic() {
         // when
-        LottoTickets lottoTickets = lottoMachine.generate(Money.valueOf(10));
+        LottoTickets lottoTickets = lottoMachine.automatic(10);
 
         // then
         assertThat(lottoTickets).isNotNull();
+    }
+
+    @DisplayName("수동 로또 티켓을 생성할 수 있다.")
+    @Test
+    void manual() {
+        // when
+        LottoTicket lottoTicket = lottoMachine.manual("1,2,3,4,5,6");
+
+        // then
+        assertThat(lottoTicket).isNotNull();
     }
 }

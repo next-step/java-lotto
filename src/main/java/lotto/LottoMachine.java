@@ -1,5 +1,8 @@
 package lotto;
 
 public interface LottoMachine {
-    LottoTickets generate(Money money);
+
+    LottoTickets automatic(long amount);
+
+    LottoTicket manual(String numbers);
 }
