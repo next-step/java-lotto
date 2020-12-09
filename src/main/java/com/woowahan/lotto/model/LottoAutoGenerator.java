@@ -15,9 +15,8 @@ public class LottoAutoGenerator implements LottoGenerator {
 	}
 
 	@Override
-	public Lotto generate() {
+	public List<Integer> generate() {
 		Collections.shuffle(lottoEnableNumbers);
-		List<Integer> choiceNumbers = lottoEnableNumbers.subList(0, Lotto.LOTTO_NUMBER_LENGTH);
-		return Lotto.of(choiceNumbers);
+		return lottoEnableNumbers.subList(0, Lotto.LOTTO_NUMBER_LENGTH);
 	}
 }
