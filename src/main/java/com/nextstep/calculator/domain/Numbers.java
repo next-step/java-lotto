@@ -18,7 +18,7 @@ public class Numbers {
         if (numbers == null) {
             throw new InvalidNumbersException("null로 객체를 생성할 수 없습니다.");
         }
-        if (numbers.size() == 0) {
+        if (numbers.isEmpty()) {
             throw new InvalidNumbersException("한 개 이상의 Number가 있어야만 합니다.");
         }
     }
