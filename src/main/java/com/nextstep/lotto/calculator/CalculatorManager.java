@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class CalculatorManager {
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String TARGET = "\\n";
+    private static final String REPLACEMENT = "\n";
 
     public static void main(String[] args) {
         new CalculatorManager().run();
@@ -18,7 +20,7 @@ public class CalculatorManager {
     private String input() {
         System.out.print("Input : ");
         String source = SCANNER.nextLine();
-        return source.replace("\\n", "\n");
+        return source.replace(TARGET, REPLACEMENT);
     }
 
     private void output(int result) {
