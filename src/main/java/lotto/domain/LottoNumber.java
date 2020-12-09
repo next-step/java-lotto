@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.domain.validator.LottoNumberValidator;
+
 public final class LottoNumber {
 
     public static final int LOWER_BOUND = 1;
@@ -16,6 +18,10 @@ public final class LottoNumber {
 
     public LottoNumber(final int number) {
         this.number = number;
+
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
+            throw new IllegalArgumentException(LottoNumberValidator.OUT_BOUND_MESSAGE);
+        }
     }
 
     public int getNumber() {
