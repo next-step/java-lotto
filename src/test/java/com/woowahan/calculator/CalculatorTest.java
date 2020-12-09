@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class StringAddCalculatorTest {
+class CalculatorTest {
 
 	@DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
 	@ParameterizedTest
@@ -92,12 +92,14 @@ class StringAddCalculatorTest {
 	void passNaNOrNegative(String input) {
 		assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(() -> {
-				StringAddCalculator.splitAndSum(input);
+				Calculator calculator = new Calculator(input);
+				calculator.splitAndSum();
 			}).withMessage(ValidationUtil.MSG_NOT_A_NUMBER_OR_NEGATIVE);
 	}
 
 	private void assertSplitAndSumMethod(String input, int expected) {
-		int result = StringAddCalculator.splitAndSum(input);
+		Calculator calculator = new Calculator(input);
+		int result = calculator.splitAndSum();
 		assertThat(result).isEqualTo(expected);
 	}
 }
