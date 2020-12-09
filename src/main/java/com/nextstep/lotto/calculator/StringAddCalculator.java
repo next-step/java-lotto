@@ -15,12 +15,12 @@ public class StringAddCalculator {
     private static int addNumbers(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
-            result += parseInt(number);
+            result += parsePositiveInt(number);
         }
         return result;
     }
 
-    private static int parseInt(String number) {
+    private static int parsePositiveInt(String number) {
         int result = Integer.parseInt(number);
         if (result < 0) {
             throw new RuntimeException(result + " is negative value");
