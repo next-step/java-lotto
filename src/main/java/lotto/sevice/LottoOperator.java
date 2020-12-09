@@ -22,6 +22,7 @@ public class LottoOperator {
     public void operator(){
         int money = inputView.getMoney();
         LottoList lottoList = lottoService.issueLotto(money);
+        resultView.printLotto(lottoList);
         int[] winningNumbers = inputView.getWinningNumbers();
         LottoRecord result = lottoService.lottoGame(lottoList, winningNumbers);
         resultView.printRecord(result);

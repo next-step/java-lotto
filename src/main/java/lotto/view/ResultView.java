@@ -2,7 +2,15 @@ package lotto.view;
 
 import lotto.domain.LottoRecord;
 
+import java.util.Arrays;
+
+import lotto.domain.LottoList;
+
 public class ResultView {
+
+    public void printLotto(LottoList list){
+        list.getLottoList().stream().forEach(l -> System.out.println(Arrays.toString(l.getLotto())));
+    }
 
     public void printRecord(LottoRecord record){
         System.out.println("당첨 통계");
