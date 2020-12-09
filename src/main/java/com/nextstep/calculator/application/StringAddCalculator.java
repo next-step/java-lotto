@@ -7,10 +7,7 @@ import com.nextstep.calculator.domain.Numbers;
 
 public class StringAddCalculator {
     public static Integer splitAndSum(final String value) {
-        if (value == null) {
-            return 0;
-        }
-        if (value.isEmpty()) {
+        if (value == null || value.isEmpty()) {
             return 0;
         }
 
