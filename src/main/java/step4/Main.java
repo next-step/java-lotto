@@ -1,13 +1,9 @@
-package step3;
+package step4;
 
-import step3.VO.Lottos;
-import step3.View.InputView;
-import step3.View.ResultView;
-import step3.VO.LottoNumber;
-import step3.VO.Money;
-
-import java.util.ArrayList;
-import java.util.List;
+import step4.VO.Lottos;
+import step4.VO.Money;
+import step4.View.InputView;
+import step4.View.ResultView;
 
 public class Main {
 
