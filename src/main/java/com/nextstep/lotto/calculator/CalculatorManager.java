@@ -3,6 +3,8 @@ package com.nextstep.lotto.calculator;
 import java.util.Scanner;
 
 public class CalculatorManager {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         new CalculatorManager().run();
     }
@@ -13,14 +15,13 @@ public class CalculatorManager {
         output(result);
     }
 
-    public String input() {
-        Scanner scanner = new Scanner(System.in);
+    private String input() {
         System.out.print("Input : ");
         String temp = scanner.nextLine();
         return temp.replace("\\n", "\n");
     }
 
-    public void output(int result) {
+    private void output(int result) {
         System.out.println("Output : " + result);
     }
 }
