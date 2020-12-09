@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.woowahan.lotto.constant.Message;
 
 public class Lotto {
+
 	public static final int LOTTO_START_NUMBER = 1;
 	public static final int LOTTO_END_NUMBER = 45;
 	public static final int LOTTO_NUMBER_LENGTH = 6;
