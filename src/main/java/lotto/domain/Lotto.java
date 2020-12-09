@@ -18,9 +18,6 @@ public class Lotto {
         while(tempSet.size() < 6){
             tempSet.add(random.nextInt(44)+1);
         }
-        // int[] temp = Arrays.stream(tempSet.toArray(Integer[]::new))
-        //             .mapToInt(Integer::intValue)
-        //             .toArray(); 
 
         int[] temp = tempSet.stream()
         .mapToInt(Integer::intValue)

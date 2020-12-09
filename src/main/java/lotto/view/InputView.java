@@ -19,12 +19,11 @@ public class InputView {
     public int[] getWinningNumbers(){
         Scanner sc = new Scanner(System.in);
         int[] winningNumbers = new int[6];
-        // String winningNumber;
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumber = sc.nextLine();
         winningNumbers = convertWinningNumbers(winningNumber);
-
+        validateWinningNumber(winningNumbers);
         return winningNumbers;
     }
 
@@ -38,5 +37,15 @@ public class InputView {
         if(money < 1000){
             throw new IllegalArgumentException("금액을 1000원 단위로 입력해주세요");
         }
+    }
+
+    public void validateWinningNumber(int[] winningNumbers){
+        Arrays.stream(winningNumbers)
+                .forEach(n -> {
+                    if (n < 0 || n > 45){
+                        throw new IllegalArgumentException(String.format("%s는 알맞지않은 번호 입니다.", n));
+                    }
+                });
+
     }
 }
