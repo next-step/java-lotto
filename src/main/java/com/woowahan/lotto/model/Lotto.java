@@ -1,6 +1,7 @@
 package com.woowahan.lotto.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.woowahan.lotto.constant.Message;
 
@@ -14,7 +15,9 @@ public class Lotto {
 
 	private Lotto(List<Integer> numbers) {
 		validateParameter(numbers);
-		this.numbers = numbers;
+		this.numbers = numbers.stream()
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	private void validateParameter(List<Integer> numbers) {
