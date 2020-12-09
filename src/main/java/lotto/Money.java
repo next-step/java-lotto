@@ -33,9 +33,9 @@ public class Money {
         return valueOf(amount.add(other.amount));
     }
 
-    public long divide(final Money other) {
+    public int divide(final Money other) {
         return amount.divide(other.amount, RoundingMode.DOWN)
-                .longValue();
+                .intValue();
     }
 
     public double profitRate(final Money other) {

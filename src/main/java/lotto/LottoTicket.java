@@ -10,12 +10,18 @@ public class LottoTicket {
 
     public static final Money PRICE = Money.valueOf(1000);
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     private LottoTicket(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public static LottoTicket of(final String... lottoNumbers) {
+        return Arrays.stream(lottoNumbers)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
     }
 
     public static LottoTicket of(final int... lottoNumbers) {

@@ -21,4 +21,8 @@ public class LottoTickets {
                 .map(lottoTicket -> lottoTicket.match(winning))
                 .collect(Collectors.toList());
     }
+
+    public int count() {
+        return lottoTickets.size();
+    }
 }

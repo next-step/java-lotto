@@ -53,11 +53,11 @@ public class MoneyTest {
             "400,100,4",
             "5500,1000,5"
     })
-    void divide(long first, long second, long expected) {
+    void divide(long first, long second, int expected) {
         // when
         Money money = Money.valueOf(first);
         Money other = Money.valueOf(second);
-        long divide = money.divide(other);
+        int divide = money.divide(other);
 
         // then
         assertThat(divide).isEqualTo(expected);

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_VALUE = 1;
 
@@ -16,6 +16,10 @@ public class LottoNumber {
 
     private LottoNumber(final int value) {
         this.value = value;
+    }
+
+    public static LottoNumber valueOf(final String value) {
+        return valueOf(Integer.parseInt(value));
     }
 
     public static LottoNumber valueOf(final int value) {
@@ -37,5 +41,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(final LottoNumber lottoNumber) {
+        return value - lottoNumber.value;
     }
 }
