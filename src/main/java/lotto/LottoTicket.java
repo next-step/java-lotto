@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
+    public static final Money PRICE = Money.valueOf(1000);
+
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
