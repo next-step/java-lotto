@@ -13,4 +13,8 @@ public class PurchaseResponse {
     public static PurchaseResponse of(final LottoTickets lottoTickets) {
         return new PurchaseResponse(lottoTickets);
     }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
+    }
 }
