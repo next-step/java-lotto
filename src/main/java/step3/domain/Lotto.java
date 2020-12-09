@@ -13,6 +13,10 @@ public class Lotto {
             lotto.add(LottoNumber.of(lottoNumber.getNumber()));
         }
 
+        validateLottoSize();
+    }
+
+    private void validateLottoSize() {
         if (this.lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 값이어야 합니다.");
         }
