@@ -1,5 +1,7 @@
 package step1;
 
+import com.sun.tools.internal.jxc.ap.Const;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -72,15 +74,32 @@ public class StringCalculator {
      */
     private int getSumOfNumbers(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(number -> {
-                    if (Integer.parseInt(number) < Constants.ZERO) {
-                        throw new RuntimeException();
-                    }
-                    try {
-                        return Integer.parseInt(number);
-                    } catch (RuntimeException e) {
-                        throw new RuntimeException();
-                    }
-                }).sum();
+                .mapToInt(number -> getOnlyPositiveNumber(convertToInteger(number)))
+                .sum();
+    }
+
+    /**
+     * 각 숫자를 Integer로 변환하는 메소드 (숫자가 아닌 값을 전달하였는지 체크 & 예외 발생)
+     * @param number 개별 숫자자
+     * @return Integer로 변환한 숫자
+     */
+    private int convertToInteger(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(Constants.IS_NOT_VALID_INPUT);
+        }
+    }
+
+    /**
+     * 각 숫자가 아닌지 판별하여 숫자를 반환하는 메소드 (음수인 경우 예외 발생)
+     * @param number convertToInteger 에서 Integer로 변환된 숫자
+     * @return 숫자 반환
+     */
+    private int getOnlyPositiveNumber(int number) {
+        if (number < Constants.ZERO) {
+            throw new RuntimeException(Constants.IS_NOT_VALID_INPUT);
+        }
+        return number;
     }
 }

@@ -70,13 +70,11 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(15);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("음수 또는 숫자 이외의 값을 전달할 경우 예외 발생 여부 테스트")
-    void input_negative() {
-        assertThatThrownBy(() -> stringCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
-
-        assertThatThrownBy(() -> stringCalculator.splitAndSum("1,string,3"))
-                .isInstanceOf(RuntimeException.class);
+    @ValueSource(strings = {"-1,2,3", "1,string,3"})
+    void input_negative(String value) {
+        assertThatThrownBy(() -> stringCalculator.splitAndSum(value))
+                .isInstanceOf(RuntimeException.class).hasMessageContaining(Constants.IS_NOT_VALID_INPUT);
     }
 }
