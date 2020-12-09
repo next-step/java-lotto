@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,11 +29,16 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
+        validateLottoNumber(number);
         LottoNumber lottoNumber = lottoNumberCache.get(number);
-        if (lottoNumber == null) {
-            throw new IllegalArgumentException("로또 번호 범위 벗어남");
-        }
         return lottoNumber;
+    }
+
+    private static void validateLottoNumber(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            String msg = MessageFormat.format("로또 번호는 {0}에서 {1}사이 숫자 입니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+            throw new IllegalArgumentException(msg);
+        }
     }
 
     public int getNumber() {
