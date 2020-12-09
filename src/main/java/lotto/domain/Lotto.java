@@ -8,7 +8,14 @@ import java.util.Set;
 public class Lotto {
     private int[] lotto;
 
+    public Lotto(int[] lotto){
+        this.lotto = lotto;
+    }
+
     public Lotto(){
+    }
+
+    public Lotto createLotto(){
         Set<Integer> tempSet = new HashSet<>();
         Random random = new Random();
         while(tempSet.size() < 6){
@@ -19,14 +26,12 @@ public class Lotto {
         .mapToInt(Integer::intValue)
         .toArray(); 
 
-        this.lotto = temp;
-    }
-
-    public Lotto(int[] lotto){
-        this.lotto = lotto;
+        Lotto lotto = new Lotto(temp);
+        return lotto;
     }
 
     public int[] getLotto(){
         return lotto;
     }
+    
 }

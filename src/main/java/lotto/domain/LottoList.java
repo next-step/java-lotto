@@ -18,7 +18,7 @@ public class LottoList {
     public LottoList createLottoList(int size){
         List<Lotto> tempList = new ArrayList<>();
         for(int i = 0; i < size; i++){
-            Lotto lotto = new Lotto();
+            Lotto lotto = new Lotto().createLotto();
             tempList.add(lotto);
         }
         LottoList lottoList = new LottoList(tempList);
