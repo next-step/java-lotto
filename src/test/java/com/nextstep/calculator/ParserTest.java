@@ -1,4 +1,4 @@
-package com.nextstep.lotto.calculator;
+package com.nextstep.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

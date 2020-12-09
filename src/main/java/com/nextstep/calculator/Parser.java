@@ -1,4 +1,4 @@
-package com.nextstep.lotto.calculator;
+package com.nextstep.calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

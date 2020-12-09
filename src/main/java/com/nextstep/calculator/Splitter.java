@@ -1,4 +1,4 @@
-package com.nextstep.lotto.calculator;
+package com.nextstep.calculator;
 
 public class Splitter {
     private static final String DEFAULT_DELIMITER = "[,:]";

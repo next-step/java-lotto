@@ -1,4 +1,4 @@
-package com.nextstep.lotto.calculator;
+package com.nextstep.calculator;
 
 public class StringAddCalculator {
     private static final int ZERO = 0;
