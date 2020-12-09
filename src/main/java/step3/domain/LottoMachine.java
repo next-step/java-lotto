@@ -23,8 +23,7 @@ public class LottoMachine {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> extractionLottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
 
-        LottoNumberComparator comp = new LottoNumberComparator();
-        Collections.sort(extractionLottoNumbers, comp);
+        Collections.sort(extractionLottoNumbers);
 
         return new Lotto(extractionLottoNumbers);
     }
