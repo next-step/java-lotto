@@ -10,6 +10,7 @@ import lotto.domain.LottoList;
 import lotto.domain.LottoRecord;
 
 public class LottoService {
+    public static final int WON = 1000;
 
     public  LottoRecord lottoGame(final LottoList lottoList, final int[] winningNumbers){
         LottoRecord resultList = checkLotto(lottoList, winningNumbers);
@@ -20,7 +21,9 @@ public class LottoService {
 
     public LottoList issueLotto(final int money){
         List<Lotto> tempList = new ArrayList<>();
-        for(int i = 0; i < money/1000; i++){
+        final int lottoSize = money/WON;
+
+        for(int i = 0; i < lottoSize; i++){
             Lotto lotto = new Lotto();
             tempList.add(lotto);
         }
