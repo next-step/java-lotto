@@ -11,7 +11,7 @@ public class CalculatorManager {
 
     public void run() {
         String source = input();
-        int result = StringAddCalculator.splitAndSum(source);
+        int result = StringAddCalculator.sum(source);
         output(result);
     }
 

@@ -8,7 +8,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_REGEX = "//(.)\n(.*)";
     private static final Pattern PATTERN = Pattern.compile(CUSTOM_REGEX);
 
-    public static int splitAndSum(String source) {
+    public static int sum(String source) {
         if (source == null || "".equals(source)) {
             return ZERO;
         }
