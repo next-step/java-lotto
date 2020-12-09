@@ -22,7 +22,7 @@ class LottoTotalNumberUtilsTest {
         int size = lottoTotalNumbers.size();
 
         // then
-        assertThat(size).isEqualTo(45);
+        assertThat(size).isEqualTo(LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM);
     }
 
     @DisplayName(value = "로또를 선택하기 위한 1 ~ 45의 숫자가 모두 있는지 확인")
@@ -34,7 +34,7 @@ class LottoTotalNumberUtilsTest {
 
         // when
         List<Integer> expected = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM; i <= LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM; i++) {
             expected.add(i);
         }
 
