@@ -3,7 +3,7 @@ package com.nextstep.lotto.calculator;
 import java.util.Scanner;
 
 public class CalculatorManager {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         new CalculatorManager().run();
