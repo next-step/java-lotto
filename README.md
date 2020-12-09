@@ -125,4 +125,4 @@
     
 - `로또 분석기(LottoAnalyzer)`
     - `로또 티켓(LottoTicket)`의 결과를 분석하는 역할을 한다.
-    - [ ] 판독한 `등수(Rank)`들로 `로또 결과(LottoReport)`로 만든다.
+    - [X] `등수(Ranks)`들로 `로또 결과(LottoReport)`로 만든다.
