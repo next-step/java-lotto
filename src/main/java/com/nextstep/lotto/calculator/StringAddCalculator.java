@@ -12,30 +12,30 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        CalculatorItem item = parse(source);
+        CalculatorVo item = parse(source);
         return addItem(item);
     }
 
-    private static CalculatorItem parse(String source) {
+    private static CalculatorVo parse(String source) {
         if(!source.matches(CUSTOM_REGEX)) {
-            return new CalculatorItem(source);
+            return new CalculatorVo(source);
         }
         return parseCalculatorItem(source);
     }
 
-    private static CalculatorItem parseCalculatorItem(String source) {
+    private static CalculatorVo parseCalculatorItem(String source) {
         Pattern pattern = Pattern.compile(CUSTOM_REGEX);
         Matcher matcher = pattern.matcher(source);
-        CalculatorItem item = null;
+        CalculatorVo item = null;
         if (matcher.find()) {
             String delimiter = matcher.group(1);
             String numbers = matcher.group(2);
-            item = new CalculatorItem(numbers, delimiter);
+            item = new CalculatorVo(numbers, delimiter);
         }
         return item;
     }
 
-    private static int addItem(CalculatorItem item) {
+    private static int addItem(CalculatorVo item) {
         String source = item.getNumbers();
         String delimiter = item.getDelimiter();
         String[] numbers = source.split(delimiter);

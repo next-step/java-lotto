@@ -1,16 +1,16 @@
 package com.nextstep.lotto.calculator;
 
-public class CalculatorItem {
+public class CalculatorVo {
     private static final String DEFAULT_DELIMITER = "[,:]";
 
     private String numbers;
     private String delimiter;
 
-    public CalculatorItem(String numbers) {
+    public CalculatorVo(String numbers) {
         this(numbers, DEFAULT_DELIMITER);
     }
 
-    public CalculatorItem(String numbers, String delimiter) {
+    public CalculatorVo(String numbers, String delimiter) {
         this.numbers = numbers;
         this.delimiter = delimiter;
     }
