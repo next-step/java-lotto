@@ -32,7 +32,7 @@ public class Calculator {
 		return input.split(String.join(DELIMITER_JOINER, delimiters));
 	}
 
-	private static int sum(String[] tokens) {
+	private int sum(String[] tokens) {
 		for (String token : tokens) {
 			ValidationUtil.checkNotANumberAndNegative(token);
 		}
