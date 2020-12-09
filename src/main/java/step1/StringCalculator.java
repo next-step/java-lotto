@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    
+    private static final Pattern pattern = Pattern.compile(Constants.REGEX_CUSTOM_DELIMITER);
 
     /**
      * 문자열 덧셈 계산기의 핵심 메소드
@@ -54,7 +56,7 @@ public class StringCalculator {
      * @return 분리된 문자 배열
      */
     private String[] getSplitNumbers(String input) {
-        Matcher matcher = Pattern.compile(Constants.REGEX_CUSTOM_DELIMITER).matcher(input);
+        Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
             String customDelimiter = matcher.group(Constants.POSITION_OF_CUSTOM_DELIMITER);
