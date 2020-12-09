@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,23 +15,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoResultTest {
 
-	List<Lotto> lottos;
-
-	@BeforeEach
-	void setup() {
-		lottos = Arrays.asList(
-			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-			Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)),
-			Lotto.of(Arrays.asList(21, 22, 23, 24, 25, 26))
-		);
-	}
-
 	@DisplayName("anlalyze메서드를 통해 WinNumberInput값을 받아 매칭결과를 확인할 수 있다.")
 	@ParameterizedTest
 	@MethodSource("argMatchResult")
 	void matchResult(WinNumberInput input, Map<LottoResultType, Integer> expected) {
+
+		List<Lotto> lottos = Arrays.asList(
+			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+			Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)),
+			Lotto.of(Arrays.asList(21, 22, 23, 24, 25, 26))
+		);
 		LottoResult lottoResult = LottoResult.analyze(input, lottos);
 		Map<LottoResultType, Integer> result = lottoResult.getResults();
+
 		assertThat(result).isEqualTo(expected);
 	}
 
