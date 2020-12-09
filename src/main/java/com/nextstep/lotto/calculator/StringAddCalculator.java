@@ -13,24 +13,22 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        CalculatorVo item = parse(source);
-        return addItem(item);
+        Splitter item = parse(source);
+        return addNumbers(item);
     }
 
-    private static CalculatorVo parse(String source) {
+    private static Splitter parse(String source) {
         Matcher matcher = PATTERN.matcher(source);
         if (matcher.find()) {
             String delimiter = matcher.group(1);
             String numbers = matcher.group(2);
-            return new CalculatorVo(numbers, delimiter);
+            return new Splitter(numbers, delimiter);
         }
-        return new CalculatorVo(source);
+        return new Splitter(source);
     }
 
-    private static int addItem(CalculatorVo item) {
-        String source = item.getNumbers();
-        String delimiter = item.getDelimiter();
-        String[] numbers = source.split(delimiter);
+    private static int addNumbers(Splitter splitter) {
+        String[] numbers = splitter.split();
         int result = 0;
         for (String number : numbers) {
             result += parseInt(number);
