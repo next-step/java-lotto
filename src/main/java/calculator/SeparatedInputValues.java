@@ -13,7 +13,7 @@ public class SeparatedInputValues {
 			.collect(Collectors.toList());
 	}
 
-	public static SeparatedInputValues ofSplit(String targetText, String separator) {
+	public static SeparatedInputValues ofSeparator(String targetText, String separator) {
 		return new SeparatedInputValues(targetText, separator);
 	}
 

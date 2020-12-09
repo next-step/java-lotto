@@ -8,7 +8,7 @@ public class InputValue {
 	}
 
 	public int getValue() {
-		return value;
+		return this.value;
 	}
 
 	private int parseInteger(String text) {
