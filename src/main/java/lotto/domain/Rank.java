@@ -28,7 +28,7 @@ public enum Rank {
         return profit;
     }
 
-    public static Rank getProfitByMatchingScore(int countOfMatch, boolean matchBonus) {
+    public static Rank getRankByMatchingScore(int countOfMatch, boolean matchBonus) {
 
         if (getBonusRank(countOfMatch, matchBonus)) return SECOND;
 

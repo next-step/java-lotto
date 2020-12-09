@@ -28,7 +28,7 @@ public class LottoResult {
 
     public static void saveLottoResult(int matchingScore, boolean matchBonus) {
         if (matchingScore > 2) {
-            Rank rank = Rank.getProfitByMatchingScore(matchingScore, matchBonus);
+            Rank rank = Rank.getRankByMatchingScore(matchingScore, matchBonus);
             result.put(rank, result.get(rank) + 1);
         }
     }
