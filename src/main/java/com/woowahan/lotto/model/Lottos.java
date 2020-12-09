@@ -30,12 +30,4 @@ public class Lottos {
 	public List<Lotto> getLottos() {
 		return lottos;
 	}
-
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder("Lottos{");
-		sb.append("lottos=").append(lottos);
-		sb.append('}');
-		return sb.toString();
-	}
 }

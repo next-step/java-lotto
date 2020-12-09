@@ -50,12 +50,4 @@ public class Lotto {
 	public List<Integer> getNumbers() {
 		return numbers;
 	}
-
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder("Lotto{");
-		sb.append("numbers=").append(numbers);
-		sb.append('}');
-		return sb.toString();
-	}
 }

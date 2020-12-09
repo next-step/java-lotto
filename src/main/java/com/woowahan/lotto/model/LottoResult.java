@@ -42,10 +42,6 @@ public class LottoResult {
 		results.put(resultType, ++value);
 	}
 
-	public List<Lotto> getLottos() {
-		return lottos;
-	}
-
 	public Map<LottoResultType, Integer> getResults() {
 		return results;
 	}
@@ -66,12 +62,4 @@ public class LottoResult {
 		return (double)totalReward / (double)purchaseAmount;
 	}
 
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder("LottoResult{");
-		sb.append("lottos=").append(lottos);
-		sb.append(", results=").append(results);
-		sb.append('}');
-		return sb.toString();
-	}
 }
