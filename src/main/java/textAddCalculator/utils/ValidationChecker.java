@@ -1,11 +1,14 @@
 package textAddCalculator.utils;
 
 public class ValidationChecker {
+    private static final int ZERO = 0;
+
+    private ValidationChecker() {
+    }
+
     public static boolean isEmptyOrNull(String inputValue) {
-        if(inputValue == null || inputValue.isEmpty()) {
-            return true;
-        }
-        return false;
+        return inputValue == null || inputValue.isEmpty();
+
     }
 
     public static void exceptionCheck(String[] inputValue) {
@@ -16,7 +19,7 @@ public class ValidationChecker {
     }
 
     private static void checkNegative(String negative) {
-        if(Integer.parseInt(negative) < 0) {
+        if(Integer.parseInt(negative) < ZERO) {
             throw new RuntimeException("음수가 입력되었습니다.");
         }
     }
