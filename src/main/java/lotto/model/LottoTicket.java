@@ -8,7 +8,6 @@ public class LottoTicket {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static String ticketType = "AUTO";
-    //private String ticketType = "AUTO";
 
     private final List<Integer> ticketNumbers;
 
@@ -37,12 +36,11 @@ public class LottoTicket {
         }
 
     }
-
     public List<Integer> getTicketNumbers(){
         return Collections.unmodifiableList(ticketNumbers);
     }
+
     public String getTicketType(){
         return ticketType;
     }
-
 }

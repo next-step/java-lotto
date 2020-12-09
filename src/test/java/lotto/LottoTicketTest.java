@@ -43,4 +43,17 @@ public class LottoTicketTest {
                 }).withMessage("로또 번호는 1~45 사이 입니다.");
 
     }
+
+    @Test
+    @DisplayName("로또 티켓 구분 테스트")
+    public void typeTest(){
+        List<Integer> autoTicket = Arrays.asList(1,2,3,4,5,6);
+        LottoTicket lottoTicket = new LottoTicket(autoTicket);
+        assertThat(lottoTicket.getTicketType()).isEqualTo("AUTO");
+
+        String manualTicket = "1,2,3,4,5,6";
+        LottoTicket mTicket = LottoTicket.of(manualTicket);
+        assertThat(mTicket.getTicketType()).isEqualTo("MANUAL");
+
+    }
 }
