@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class StringAddCalculator {
 	public static int splitAndSum(String text) {
