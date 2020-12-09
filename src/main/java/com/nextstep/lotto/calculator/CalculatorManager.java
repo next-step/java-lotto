@@ -17,8 +17,8 @@ public class CalculatorManager {
 
     private String input() {
         System.out.print("Input : ");
-        String temp = scanner.nextLine();
-        return temp.replace("\\n", "\n");
+        String source = scanner.nextLine();
+        return source.replace("\\n", "\n");
     }
 
     private void output(int result) {
