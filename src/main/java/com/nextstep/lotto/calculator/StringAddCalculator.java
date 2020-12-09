@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final int ZERO = 0;
     private static final String CUSTOM_REGEX = "//(.)\n(.*)";
+    private static final Pattern pattern = Pattern.compile(CUSTOM_REGEX);
 
     public static int splitAndSum(String source) {
         if (source == null || "".equals(source)) {
@@ -24,7 +25,6 @@ public class StringAddCalculator {
     }
 
     private static CalculatorVo parseCalculatorItem(String source) {
-        Pattern pattern = Pattern.compile(CUSTOM_REGEX);
         Matcher matcher = pattern.matcher(source);
         CalculatorVo item = null;
         if (matcher.find()) {
