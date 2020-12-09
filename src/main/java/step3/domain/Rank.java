@@ -1,4 +1,4 @@
-package step3;
+package step3.domain;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
