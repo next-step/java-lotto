@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
@@ -64,12 +63,8 @@ public class WinningCountTest {
     @DisplayName("수익률 계산 테스트")
     public void calculateEarnTest() {
 
-        Lottoes autoLottoes = new Lottoes(0, new Lottoes(new ArrayList<>()));
-
-        LottoResult result = new LottoResult(checker, manualLottoes, autoLottoes);
-
         // when
-        double earnRate = result.calculateEarn(4000);
+        double earnRate = (double) winningCount.calculatePrize() / 4000;
 
         // then
         assertThat(earnRate).isEqualTo(15.0);

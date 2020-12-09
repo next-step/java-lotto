@@ -2,9 +2,9 @@ package lotto.view;
 
 import lotto.domain.EarnRate;
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
 import lotto.domain.Rank;
+import lotto.domain.WinningCount;
 
 public final class OutputView {
 
@@ -28,33 +28,32 @@ public final class OutputView {
         }
     }
 
-    public void showStatistics(final LottoResult lottoResult, final int paid) {
+    public void showStatistics(final WinningCount winningCount, final int paid) {
         System.out.println(STATISTICS_MESSAGE);
-        showMatchingCounts(lottoResult);
-        showEarnRate(lottoResult, paid);
+        showMatchingCounts(winningCount);
+        showEarnRate(winningCount, paid);
     }
 
-    private void showMatchingCounts(LottoResult lottoResult) {
+    private void showMatchingCounts(final WinningCount winningCount) {
         for (Rank rank : Rank.values()) {
-            showMatchingCount(lottoResult, rank);
+            showMatchingCount(winningCount, rank);
         }
     }
 
-    private void showMatchingCount(LottoResult lottoResult, Rank rank) {
+    private void showMatchingCount(final WinningCount winningCount, final Rank rank) {
         String message = DEFAULT_STATISTICS_MESSAGE;
 
         if (rank.equals(Rank.SECOND)) {
             message = SECOND_STATISTICS_MESSAGE;
         }
 
-        System.out.printf(message, rank.getMatchCount()
-                , rank.getPrize()
-                , lottoResult.getManualWinningCount().getMatchCount(rank) +
-                        lottoResult.getAutoWinningCount().getMatchCount(rank));
+        System.out.printf(message, rank.getMatchCount(),
+                rank.getPrize(),
+                winningCount.getMatchCount(rank));
     }
 
-    private void showEarnRate(LottoResult lottoResult, int paid) {
-        double earn = lottoResult.calculateEarn(paid);
+    private void showEarnRate(final WinningCount winningCount, int paid) {
+        double earn = (double) winningCount.calculatePrize() / paid;
 
         System.out.printf(EARN_RATE_MESSAGE, earn, EarnRate.getExplanationMessage(earn));
     }
