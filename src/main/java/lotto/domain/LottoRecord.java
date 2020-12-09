@@ -1,6 +1,9 @@
 package lotto.domain;
 
 public class LottoRecord {
+    public static final int WON = 1000;
+    public static final int NULL = 0;
+
     private int countThree = 0;
     private int countFour = 0;
     private int countFive = 0;
@@ -45,22 +48,22 @@ public class LottoRecord {
     }
 
     public void calculatorProfit(int size){
-        int money = size * 1000;
+        int money = size * WON;
         int temp = 0;
 
-        if(countThree != 0){
+        if (countThree != NULL) {
             temp += countThree * 5000;
         }
 
-        if(countFour != 0){
+        if (countFour != NULL) {
             temp += countFour * 50000;
         }
 
-        if(countFive != 0){
+        if (countFive != NULL) {
             temp += countFive * 1500000;
         }
 
-        if(countSix != 0){
+        if (countSix != NULL) {
             temp += countSix * 200000000;
         }
 

@@ -14,20 +14,14 @@ public class LottoService {
 
     public  LottoRecord lottoGame(final LottoList lottoList, final int[] winningNumbers){
         LottoRecord resultList = checkLotto(lottoList, winningNumbers);
-        resultList.calculatorProfit(lottoList.getLottoList().size());
+        resultList.calculatorProfit(lottoList.getLottoSize());
         
         return resultList;
     }
 
     public LottoList issueLotto(final int money){
-        List<Lotto> tempList = new ArrayList<>();
         final int lottoSize = money/WON;
-
-        for(int i = 0; i < lottoSize; i++){
-            Lotto lotto = new Lotto();
-            tempList.add(lotto);
-        }
-        LottoList lottoList = new LottoList(tempList);
+        LottoList lottoList = new LottoList().createLottoList(lottoSize);
 
         return lottoList;
     }

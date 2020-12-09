@@ -8,10 +8,6 @@ import java.util.Set;
 public class Lotto {
     private int[] lotto;
 
-    public int[] getLotto(){
-        return lotto;
-    }
-
     public Lotto(){
         Set<Integer> tempSet = new HashSet<>();
         Random random = new Random();
@@ -28,5 +24,9 @@ public class Lotto {
 
     public Lotto(int[] lotto){
         this.lotto = lotto;
+    }
+
+    public int[] getLotto(){
+        return lotto;
     }
 }
