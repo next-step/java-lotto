@@ -38,6 +38,19 @@ public class Money {
                 .longValue();
     }
 
+    public double profitRate(final Money other) {
+        return this.amount.divide(other.amount, 2, RoundingMode.DOWN)
+                .doubleValue();
+    }
+
+    public Money multiply(final int value) {
+        return multiply(BigDecimal.valueOf(value));
+    }
+
+    public Money multiply(final BigDecimal count) {
+        return valueOf(amount.multiply(count));
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -49,10 +62,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public double profitRate(final Money other) {
-        return this.amount.divide(other.amount, 2, RoundingMode.DOWN)
-                .doubleValue();
     }
 }

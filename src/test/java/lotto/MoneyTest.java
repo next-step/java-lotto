@@ -1,7 +1,6 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -62,6 +61,22 @@ public class MoneyTest {
 
         // then
         assertThat(divide).isEqualTo(expected);
+    }
+
+    @DisplayName("금액을 곱할 수 있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1000,2,2000",
+            "400,100,40000",
+            "5500,10,55000"
+    })
+    void multiply(long value, int count, long expected) {
+        // when
+        Money money = Money.valueOf(value);
+        Money multiply = money.multiply(count);
+
+        // then
+        assertThat(multiply).isEqualTo(Money.valueOf(expected));
     }
 
     @DisplayName("수익률을 구할 수 있다.")
