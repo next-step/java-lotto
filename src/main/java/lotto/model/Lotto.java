@@ -8,22 +8,11 @@ import java.util.Map;
 public class Lotto {
     private final LottoTickets lottoTickets;
     private final int ticketPrice = 1000;
-    private Map<String, Integer> ticketCountMap;
+    private int ticketCount;
 
     public Lotto(int money, String[] manualNumbers){
-        this.ticketCountMap = new HashMap<>();
-        this.ticketCountMap.put("AUTO",(money / ticketPrice) - manualNumbers.length);
-        this.ticketCountMap.put("MANUAL", manualNumbers.length);
-
-        this.lottoTickets = LottoTickets.of(this.ticketCountMap.get("AUTO"), manualNumbers);
-    }
-
-    public int getAutoTicketCount(){
-        return ticketCountMap.get("AUTO");
-    }
-
-    public int getManualTicketCount(){
-        return ticketCountMap.get("MANUAL");
+        this.ticketCount = money / ticketPrice;
+        this.lottoTickets = LottoTickets.of(ticketCount - manualNumbers.length, manualNumbers);
     }
 
     public LottoTickets getLottoTickets(){

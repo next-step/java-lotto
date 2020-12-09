@@ -33,9 +33,6 @@ public class LottoTickets {
             LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
             tickets.add(new LottoTicket(lottoNumberMaker.makeNumber()));
         }
-
-
-
         return new LottoTickets(tickets);
     }
 

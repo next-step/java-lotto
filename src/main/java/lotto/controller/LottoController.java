@@ -18,7 +18,7 @@ public class LottoController {
         String[] manualNumbers = inputView.inputManualLottoNumber(manualCount);
 
         Lotto lotto = new Lotto(money,manualNumbers);
-        resultView.printNumberOfLottos(lotto);
+        resultView.printNumberOfLottos(lotto, manualCount);
         inputView.printLottoNumbers(lotto.getLottoTickets());
 
         Set<Integer> preNumbers = inputView.inputPreWinningNumber();

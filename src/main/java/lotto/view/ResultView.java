@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoTickets;
 import lotto.model.Rank;
 
 import java.util.EnumMap;
@@ -17,8 +18,9 @@ public class ResultView {
         return winningStatics;
     }
 
-    public void printNumberOfLottos(Lotto lotto){
-        System.out.println("수동으로"+lotto.getManualTicketCount()+"장, 자동으로 "+lotto.getAutoTicketCount()+"개를 구매했습니다.");
+    public void printNumberOfLottos(Lotto lotto, int manualCount){
+        int autoCount = lotto.getLottoTickets().getTicketCount() - manualCount;
+        System.out.println("수동으로"+autoCount+"장, 자동으로 "+manualCount+"개를 구매했습니다.");
 
     }
 

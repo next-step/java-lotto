@@ -4,9 +4,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static String ticketType = "AUTO";
+    //private String ticketType = "AUTO";
+
     private final List<Integer> ticketNumbers;
 
     public LottoTicket(List<Integer> ticketNumbers){
@@ -19,6 +22,7 @@ public class LottoTicket {
         List<Integer> manualLottos;
         List<String> strNumbers = Arrays.asList(Arrays.stream(manualNumbers.split(",")).map(String::trim).toArray(String[]::new));
         manualLottos = strNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
+        ticketType = "MANUAL";
         return new LottoTicket(manualLottos);
     }
 
@@ -37,4 +41,8 @@ public class LottoTicket {
     public List<Integer> getTicketNumbers(){
         return Collections.unmodifiableList(ticketNumbers);
     }
+    public String getTicketType(){
+        return ticketType;
+    }
+
 }
