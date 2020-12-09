@@ -12,9 +12,9 @@ public class StringAddCalculator {
         if (source == null || "".equals(source)) {
             return ZERO;
         }
-
-        Splitter item = parse(source);
-        return addNumbers(item);
+        Splitter splitter = parse(source);
+        String[] numbers = splitter.split();
+        return addNumbers(numbers);
     }
 
     private static Splitter parse(String source) {
@@ -27,8 +27,7 @@ public class StringAddCalculator {
         return new Splitter(source);
     }
 
-    private static int addNumbers(Splitter splitter) {
-        String[] numbers = splitter.split();
+    private static int addNumbers(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
             result += parseInt(number);
