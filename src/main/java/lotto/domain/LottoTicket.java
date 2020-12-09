@@ -33,15 +33,14 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public long getMatchingScore(WinningCondition winningCondition) {
+    public long getMatchingScore(List<Integer> winningNumbers) {
         return getLottoNumbers().stream()
-                .filter(n -> winningCondition.getWinningNumbers()
-                        .contains(n.toInt())).count();
+                .filter(n -> winningNumbers.contains(n.toInt())).count();
     }
 
-    public boolean getMatchBonus(WinningCondition winningCondition) {
+    public boolean getMatchBonus(int bonusNumber) {
         return getLottoNumbers().stream()
-                .anyMatch(n -> n.toInt() == winningCondition.getBonusNumber());
+                .anyMatch(n -> n.toInt() == bonusNumber);
     }
 
     @Override

@@ -47,8 +47,8 @@ public class LottoResult {
     }
 
     private static void getSingleLottoResult(LottoTicket lottoTicket, WinningCondition winningCondition) {
-        long matchingScore = lottoTicket.getMatchingScore(winningCondition);
-        final boolean matchBonus = lottoTicket.getMatchBonus(winningCondition);
+        long matchingScore = lottoTicket.getMatchingScore(winningCondition.getWinningNumbers());
+        final boolean matchBonus = lottoTicket.getMatchBonus(winningCondition.getBonusNumber());
 
         saveLottoResult(Long.valueOf(matchingScore).intValue(), matchBonus);
     }
