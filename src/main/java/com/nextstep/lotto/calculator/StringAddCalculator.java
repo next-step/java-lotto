@@ -18,21 +18,13 @@ public class StringAddCalculator {
     }
 
     private static CalculatorVo parse(String source) {
-        if(!source.matches(CUSTOM_REGEX)) {
-            return new CalculatorVo(source);
-        }
-        return parseCalculatorItem(source);
-    }
-
-    private static CalculatorVo parseCalculatorItem(String source) {
         Matcher matcher = PATTERN.matcher(source);
-        CalculatorVo item = null;
         if (matcher.find()) {
             String delimiter = matcher.group(1);
             String numbers = matcher.group(2);
-            item = new CalculatorVo(numbers, delimiter);
+            return new CalculatorVo(numbers, delimiter);
         }
-        return item;
+        return new CalculatorVo(source);
     }
 
     private static int addItem(CalculatorVo item) {
