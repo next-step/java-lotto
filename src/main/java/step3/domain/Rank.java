@@ -25,6 +25,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-
+        return null;
     }
 }
