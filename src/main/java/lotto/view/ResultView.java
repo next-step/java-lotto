@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ResultView {
     public void printTickets(int manualLottoCount, int autoLottoTicketCount) {
-        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoTicketCount + "을 구매했습니다 :)");
+        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoTicketCount + "장을 구매했습니다 :)");
     }
 
     public void printLottoTickets(List<LottoTicket> lottoTickets) {
