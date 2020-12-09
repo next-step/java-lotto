@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +64,7 @@ public class WinningCountTest {
     @DisplayName("수익률 계산 테스트")
     public void calculateEarnTest() {
 
-        Lottoes autoLottoes = new Lottoes(0);
+        Lottoes autoLottoes = new Lottoes(0, new Lottoes(new ArrayList<>()));
 
         LottoResult result = new LottoResult(checker, manualLottoes, autoLottoes);
 

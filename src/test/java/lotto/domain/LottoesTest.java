@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,7 @@ public class LottoesTest {
     public void purchaseCountTest() {
 
         // when
-        Lottoes lottoes = new Lottoes(3);
+        Lottoes lottoes = new Lottoes(3, new Lottoes(new ArrayList<>()));
 
         // then
         assertThat(lottoes.getLottoes().size()).isEqualTo(3);

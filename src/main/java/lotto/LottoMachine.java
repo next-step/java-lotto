@@ -29,16 +29,16 @@ public final class LottoMachine {
         int autoLottoCount = totalLottoCount - manualLottoCount;
 
         Lottoes manualLottoes = inputView.inputManualLottoes(manualLottoCount);
-        Lottoes autoLottoes = new Lottoes(autoLottoCount);
+        Lottoes lottoes = new Lottoes(autoLottoCount, manualLottoes);
 
         outputView.showPurchaseCount(manualLottoCount, autoLottoCount);
-        outputView.showPurchasedLottoes(autoLottoes);
+        outputView.showPurchasedLottoes(lottoes);
 
         Lotto winningLotto = inputView.inputWinningNumbers();
         LottoNumber bonusBall = inputView.inputBonusBall();
         LottoChecker lottoChecker = new LottoChecker(winningLotto, bonusBall);
 
-        LottoResult result = new LottoResult(lottoChecker, manualLottoes, autoLottoes);
+        LottoResult result = new LottoResult(lottoChecker, manualLottoes, lottoes);
         outputView.showStatistics(result, totalLottoCount * PAY);
     }
 }

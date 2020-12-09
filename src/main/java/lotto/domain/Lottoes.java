@@ -8,8 +8,12 @@ public final class Lottoes {
 
     private final List<Lotto> lottoes;
 
-    public Lottoes(final int count) {
-        this.lottoes = purchaseLottoes(count);
+    public Lottoes(final int count, Lottoes manualLottoes) {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.addAll(manualLottoes.getLottoes());
+        lottoList.addAll(purchaseLottoes(count));
+
+        this.lottoes = Collections.unmodifiableList(lottoList);
     }
 
     public Lottoes(final List<Lotto> lottoes) {
@@ -27,6 +31,6 @@ public final class Lottoes {
             newLottoes.add(new Lotto());
         }
 
-        return Collections.unmodifiableList(newLottoes);
+        return newLottoes;
     }
 }
