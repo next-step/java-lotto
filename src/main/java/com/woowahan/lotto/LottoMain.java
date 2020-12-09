@@ -17,5 +17,6 @@ public class LottoMain {
 		ResultView.printResult(LottoReport.reportLottos(lottos));
 		WinNumberInput winNumberInput = WinNumberInput.of(WinNumberInputView.getWinNumber());
 		LottoResult result = LottoResult.analyze(winNumberInput, lottos.getLottos());
+		ResultView.printResult(LottoReport.reportLottoResult(result));
 	}
 }

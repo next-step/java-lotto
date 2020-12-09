@@ -1,6 +1,8 @@
 package com.woowahan.lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.woowahan.lotto.constant.Message;
 
@@ -32,4 +34,13 @@ public enum LottoResultType {
 		return matchCount;
 	}
 
+	public long getReward() {
+		return reward;
+	}
+
+	public static List<LottoResultType> getReportTargets() {
+		return Arrays.stream(LottoResultType.values())
+			.filter(type -> type.getReward() > 0)
+			.collect(Collectors.toList());
+	}
 }

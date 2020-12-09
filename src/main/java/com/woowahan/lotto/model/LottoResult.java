@@ -50,6 +50,22 @@ public class LottoResult {
 		return results;
 	}
 
+	public long getTotalReward() {
+		return results.entrySet()
+			.stream()
+			.mapToLong(entry -> {
+				LottoResultType resultType = entry.getKey();
+				int matchCount = entry.getValue();
+				return resultType.getReward() * matchCount;
+			}).sum();
+	}
+
+	public double getEarnRate() {
+		long totalReward = getTotalReward();
+		long purchaseAmount = this.lottos.size() * Lotto.LOTTO_PRICE;
+		return (double)totalReward / (double)purchaseAmount;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder("LottoResult{");

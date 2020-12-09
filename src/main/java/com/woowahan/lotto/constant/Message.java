@@ -10,4 +10,7 @@ public class Message {
 	public static final String MSG_REQUEST_LOTTO_WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.(콤마로 구분)";
 	public static final String MSG_NULL_OR_EMPTY = "입력된 값이 비어있습니다.";
 	public static final String MSG_NOT_FOUND_RESULT_TYPE = "결과 타입을 찾을 수 없습니다.";
+	public static final String MSG_WIN_STATISTICS_TITLE = "당첨 통계\n---------\n";
+	public static final String MSG_WIN_STATISTICS = "%d개 일치 (%d원)- %d개\n";
+	public static final String MSG_EARN_RATE = "총 수익률은 %.1f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 }
