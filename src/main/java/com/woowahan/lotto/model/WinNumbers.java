@@ -66,6 +66,10 @@ public class WinNumbers {
 		return numbers;
 	}
 
+	public int getBonusNumber() {
+		return bonusNumber;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder("WinNumbers{");
