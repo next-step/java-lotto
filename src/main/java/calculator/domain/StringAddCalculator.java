@@ -6,8 +6,8 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		SeparatedInputValuesFactory factory = new SeparatedInputValuesFactory(text);
-		return factory.getSeparatedInputValues().sum();
+		Separator separator = new Separator(text);
+		return SeparatedInputValues.ofSeparator(separator).sum();
 	}
 
 	private static boolean isNullOrEmpty(String text) {

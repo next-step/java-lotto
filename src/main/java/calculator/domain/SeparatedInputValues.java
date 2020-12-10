@@ -1,20 +1,20 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SeparatedInputValues {
 	private final List<InputValue> separatedInputValue;
 
-	public SeparatedInputValues(String targetText, String separator) {
-		this.separatedInputValue = Arrays.stream(targetText.split(separator))
+	public SeparatedInputValues(List<String> separatedInputText) {
+		this.separatedInputValue = separatedInputText
+			.stream()
 			.map(InputValue::new)
 			.collect(Collectors.toList());
 	}
 
-	public static SeparatedInputValues ofSeparator(String targetText, String separator) {
-		return new SeparatedInputValues(targetText, separator);
+	public static SeparatedInputValues ofSeparator(Separator separator) {
+		return new SeparatedInputValues(separator.getSeparatedText());
 	}
 
 
