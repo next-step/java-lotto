@@ -14,9 +14,9 @@ public class LottosComparer {
 
     private int matchingCount;
 
-    public LottosComparer(Lottos lottos, String winningNumbers) {
+    public LottosComparer(Lottos lottos, Lotto lotto) {
         for (int i = 0; i < lottos.getLottosCount(); i++) {
-            compareLotto(lottos.getLotto(i),winningNumbers);
+            compareLotto(lottos.getLotto(i),lotto);
         }
     }
 
@@ -24,7 +24,7 @@ public class LottosComparer {
         return matchingNumbers.get(matchingNumber);
     }
 
-    private void compareLotto(Lotto lotto, String winningNumbers) {
+    private void compareLotto(Lotto lotto, Lotto winningNumbers) {
         for (int i = 0; i < 6; i++) {
             checkMatchingNumber(lotto.getNumber(i), winningNumbers);
         }
@@ -36,11 +36,10 @@ public class LottosComparer {
         matchingCount = 0;
     }
 
-    private void checkMatchingNumber(int lottoNumber, String winningNumber) {
-        String[] splitWinningNumber = winningNumber.split(", ");
+    private void checkMatchingNumber(int lottoNumber, Lotto winningNumber) {
 
         for (int i = 0; i < 6; i++) {
-            compareNumber(lottoNumber, Integer.parseInt(splitWinningNumber[i]));
+            compareNumber(lottoNumber, winningNumber.getNumber(i));
         }
     }
 

@@ -1,5 +1,7 @@
 package autolotto.model;
 
+import autolotto.exception.IsNotSixNumberException;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +24,12 @@ public class Lotto {
         }
 
         Collections.sort(numbers);
+    }
+
+    public Lotto(String[] splitNumbers) {
+        for (int i = 0; i < splitNumbers.length; i++) {
+            numbers.add(Integer.parseInt(splitNumbers[i]));
+        }
     }
 
     public int getNumber(int index){

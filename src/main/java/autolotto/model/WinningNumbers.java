@@ -5,11 +5,10 @@ import autolotto.exception.IsNotSixNumberException;
 
 public class WinningNumbers {
 
-    private final String numbers;
+    private final Lotto numbers;
 
     public WinningNumbers(String stringNumbers) throws NumberFormatException {
 
-        numbers = stringNumbers;
         String[] splitNumbers = stringNumbers.split(", ");
 
         if (splitNumbers.length != 6) {
@@ -19,6 +18,8 @@ public class WinningNumbers {
         for (String winningNumber : splitNumbers) {
             this.checkNotNumber(Integer.parseInt(winningNumber));
         }
+
+        numbers = new Lotto(splitNumbers);
     }
 
     private void checkNotNumber(int number) {
@@ -27,7 +28,7 @@ public class WinningNumbers {
         }
     }
 
-    public String getNumbers() {
+    public Lotto getNumbers() {
         return numbers;
     }
 }
