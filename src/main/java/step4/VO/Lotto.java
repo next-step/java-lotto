@@ -10,8 +10,8 @@ import java.util.Objects;
 public class Lotto {
     public final List<LottoNumber> numberList;
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.numberList = lottoGenerator.getLottoNumbers();
+    public Lotto(List<LottoNumber> numberList) {
+        this.numberList = numberList;
     }
 
     public void checkReward(Statistic statistic, ResultNumber resultNumber) {

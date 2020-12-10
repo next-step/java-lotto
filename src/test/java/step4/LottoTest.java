@@ -12,7 +12,7 @@ public class LottoTest {
     @DisplayName("로또 생성 테스트")
     void createTest() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto lotto = new Lotto(lottoGenerator);
+        Lotto lotto = new Lotto(lottoGenerator.getLottoNumbers());
         assertThat(lotto.numberList).hasSize(LottoGenerator.lottoSize);
     }
 
@@ -22,7 +22,7 @@ public class LottoTest {
         FixedNumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
         fixedNumberGenerator.setNumber("1,3,5,7,9,11");
 
-        Lotto lotto = new Lotto(fixedNumberGenerator);
+        Lotto lotto = new Lotto(fixedNumberGenerator.getLottoNumbers());
         Statistic statistic = new Statistic();
         ResultNumber resultNumber = new ResultNumber();
 

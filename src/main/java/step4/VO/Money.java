@@ -25,6 +25,10 @@ public class Money {
         return totalReward / money;
     }
 
+    public boolean compareMoney(int inputMoney) {
+        return inputMoney > money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -34,7 +34,7 @@ public class ResultNumberTest {
         FixedNumberGenerator fixedNumberGenerator = new FixedNumberGenerator();
         fixedNumberGenerator.setNumber("1,3,5,7,9,11");
 
-        return new Lotto(fixedNumberGenerator);
+        return new Lotto(fixedNumberGenerator.getLottoNumbers());
     }
 
 }
