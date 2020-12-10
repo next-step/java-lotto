@@ -1,10 +1,11 @@
 package autolotto.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LottosComparer {
 
-    private final HashMap<Integer,Integer> matchingNumbers = new HashMap<Integer, Integer>() {
+    private final Map<Integer,Integer> matchingNumbers = new HashMap<Integer, Integer>() {
         {
             for (int i = 3; i < 7; i++) {
                 put(i,0);
