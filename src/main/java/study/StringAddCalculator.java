@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private final static String DELIMITER = "[,:]";
+    private final static String PATTERN = "//(.)\n(.*)";
 
     public static int splitAndSum(String string) {
         if (isNull(string) || isEmpty(string)) {
@@ -27,8 +29,8 @@ public class StringAddCalculator {
     }
 
     private static List<String> split(String string) {
-        List<String> strings = Arrays.asList(string.split("[,:]"));
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(string);
+        List<String> strings = Arrays.asList(string.split(DELIMITER));
+        Matcher matcher = Pattern.compile(PATTERN).matcher(string);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             strings = Arrays.asList(matcher.group(2).split(customDelimiter));
