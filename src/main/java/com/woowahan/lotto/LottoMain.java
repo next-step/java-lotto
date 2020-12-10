@@ -1,6 +1,5 @@
 package com.woowahan.lotto;
 
-import com.woowahan.lotto.model.BonusNumber;
 import com.woowahan.lotto.model.LottoResult;
 import com.woowahan.lotto.model.Lottos;
 import com.woowahan.lotto.model.PurchaseInput;
@@ -15,12 +14,9 @@ public class LottoMain {
 		PurchaseInput purchaseInput = PurchaseInput.of(InputView.getPurchaseAmount());
 		Lottos lottos = Lottos.purchase(purchaseInput);
 		ResultView.printResult(LottoReport.reportLottos(lottos));
-		WinNumbers winNumbers = WinNumbers.of(InputView.getWinNumber());
-		BonusNumber bonusNumber = BonusNumber.of(InputView.getBonusNumber());
+		WinNumbers winNumbers = WinNumbers.of(InputView.getWinNumber(), InputView.getBonusNumber());
 		LottoResult result = LottoResult.analyze(winNumbers, lottos.getLottos());
 		ResultView.printResult(LottoReport.reportLottoResult(result));
-
-		System.out.println(bonusNumber);
-
+		System.out.println(winNumbers);
 	}
 }

@@ -12,12 +12,30 @@ public class WinNumbers {
 	private static final String DELIMITER_WIN_NUMBER = ",";
 
 	private List<Integer> numbers;
+	private int bonusNumber;
 
-	public WinNumbers(String input) {
-		List<String> result = validateWinNumber(input);
+	public WinNumbers(String winNumbers, String bonusNumber) {
+		List<String> result = validateWinNumber(winNumbers);
 		this.numbers = result.stream()
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+
+		validateBonusNumber(bonusNumber, this.numbers);
+		this.bonusNumber = Integer.parseInt(bonusNumber);
+	}
+
+	private void validateBonusNumber(String bonusNumber, List<Integer> numbers) {
+		if (ValidationUtil.isNotNumber(bonusNumber) || ValidationUtil.isWrongNumber(bonusNumber)) {
+			throw new IllegalArgumentException(Message.MSG_WRONG_BONUS_NUMBER);
+		}
+		if (findDuplicateNumber(bonusNumber, numbers)) {
+			throw new IllegalArgumentException(Message.MSG_WRONG_DUPLICATE);
+		}
+	}
+
+	private boolean findDuplicateNumber(String bonusNumber, List<Integer> numbers) {
+		return numbers.stream()
+			.anyMatch(number -> Integer.toString(number).equals(bonusNumber));
 	}
 
 	private List<String> validateWinNumber(String input) {
@@ -40,11 +58,20 @@ public class WinNumbers {
 			.collect(Collectors.toList());
 	}
 
-	public static WinNumbers of(String input) {
-		return new WinNumbers(input);
+	public static WinNumbers of(String winNumbers, String bonusNumber) {
+		return new WinNumbers(winNumbers, bonusNumber);
 	}
 
 	public List<Integer> getNumbers() {
 		return numbers;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("WinNumbers{");
+		sb.append("numbers=").append(numbers);
+		sb.append(", bonusNumber=").append(bonusNumber);
+		sb.append('}');
+		return sb.toString();
 	}
 }

@@ -56,10 +56,10 @@ class LottoReportTest {
 
 	public static Stream<Arguments> argReportLottoResult() {
 		return Stream.of(
-			Arguments.of(WinNumbers.of("1,2,3,43,44,45")),
-			Arguments.of(WinNumbers.of("1,2,11,12,13,14")),
-			Arguments.of(WinNumbers.of("21,22,23,24,25,31")),
-			Arguments.of(WinNumbers.of("1,2,3,4,5,6"))
+			Arguments.of(WinNumbers.of("1,2,3,43,44,45", "10")),
+			Arguments.of(WinNumbers.of("1,2,11,12,13,14", "45")),
+			Arguments.of(WinNumbers.of("21,22,23,24,25,31", "1")),
+			Arguments.of(WinNumbers.of("1,2,3,4,5,6", "45"))
 		);
 	}
 }

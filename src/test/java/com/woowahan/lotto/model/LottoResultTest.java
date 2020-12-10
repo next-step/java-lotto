@@ -69,10 +69,10 @@ class LottoResultTest {
 		result4.put(LottoResultType.SIX_MATCH, 1);
 
 		return Stream.of(
-			Arguments.of(WinNumbers.of("1,2,3,43,44,45"), result1),
-			Arguments.of(WinNumbers.of("1,2,11,12,13,14"), result2),
-			Arguments.of(WinNumbers.of("21,22,23,24,25,31"), result3),
-			Arguments.of(WinNumbers.of("1,2,3,4,5,6"), result4)
+			Arguments.of(WinNumbers.of("1,2,3,43,44,45", "10"), result1),
+			Arguments.of(WinNumbers.of("1,2,11,12,13,14", "7"), result2),
+			Arguments.of(WinNumbers.of("21,22,23,24,25,31", "1"), result3),
+			Arguments.of(WinNumbers.of("1,2,3,4,5,6", "45"), result4)
 		);
 	}
 }
