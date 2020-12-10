@@ -31,6 +31,11 @@ public class CustomMode implements Mode {
     }
 
     @Override
+    public String extractSeparateTarget() {
+        return this.value;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

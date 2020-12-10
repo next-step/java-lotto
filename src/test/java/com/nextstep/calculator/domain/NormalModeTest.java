@@ -60,4 +60,13 @@ class NormalModeTest {
 
         assertThat(mode.extractSeparator()).isEqualTo(expected);
     }
+
+    @DisplayName("나눠야 할 문자열을 받을 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:3:4:5,6", "1:2:3:4", "1"})
+    void extractSeparateTargetTest(String value) {
+        Mode mode = new NormalMode(value);
+
+        assertThat(mode.extractSeparateTarget()).isEqualTo(value);
+    }
 }

@@ -23,6 +23,11 @@ public class NormalMode implements Mode {
         return DEFAULT_SEPARATOR;
     }
 
+    @Override
+    public String extractSeparateTarget() {
+        return this.value;
+    }
+
     private List<Number> separateNumbers(final String value) {
         return Arrays.stream(value.split(DEFAULT_SEPARATOR))
                 .map(Number::of)

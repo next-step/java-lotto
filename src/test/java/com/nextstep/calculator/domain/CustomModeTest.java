@@ -31,6 +31,15 @@ class CustomModeTest {
         assertThat(customMode.extractSeparator()).isEqualTo(SAMPLE_SEPARATOR);
     }
 
+    @DisplayName("나눠야 할 문자열을 추출할 수 있다.")
+    @Test
+    void extractSeparateTargetTest() {
+        String value = "1-23-4";
+
+        CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
+        assertThat(customMode.extractSeparateTarget()).isEqualTo(value);
+    }
+
     @DisplayName("커스텀 구분자로 구분된 Numbers로 변환할 수 있다.")
     @Test
     void parseToNumbersTest() {
