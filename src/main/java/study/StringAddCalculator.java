@@ -22,6 +22,10 @@ public class StringAddCalculator {
         return string == null;
     }
 
+    private static boolean isNegative(int number) {
+        return number < 0;
+    }
+
     private static List<String> split(String string) {
         List<String> strings = Arrays.asList(string.split("[,:]"));
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(string);
@@ -34,6 +38,12 @@ public class StringAddCalculator {
 
     private static int stringsSum(List<String> strings) {
         return strings.stream()
-                .mapToInt(Integer::parseInt).sum();
+                .mapToInt(s -> {
+                    int number = Integer.parseInt(s);
+                    if (isNegative(number)) {
+                        throw new RuntimeException();
+                    }
+                    return number;
+                }).sum();
     }
 }
