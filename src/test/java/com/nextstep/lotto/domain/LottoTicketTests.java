@@ -66,19 +66,19 @@ class LottoTicketTests {
         );
     }
 
-    @DisplayName("LottoTicket끼리 일치하는 LottoNumber의 수를 계산할 수 있다.")
+    @DisplayName("LottoTicket끼리 비교하여 Rank를 계산할 수 있다.")
     @ParameterizedTest
-    @MethodSource("howManyMatchTestResource")
-    void howManyMatchTest(LottoTicket thatLottoTicket, int expectedMatchNumber) {
+    @MethodSource("calculateRankTestResource")
+    void calculateRankTest(LottoTicket thatLottoTicket, Rank expected) {
         LottoTicket lottoTicket = new LottoTicket(normalLottoNumbers);
 
-        assertThat(lottoTicket.howManyMatch(thatLottoTicket)).isEqualTo(expectedMatchNumber);
+        assertThat(lottoTicket.calculateRank(thatLottoTicket)).isEqualTo(expected);
     }
-    public static Stream<Arguments> howManyMatchTestResource() {
+    public static Stream<Arguments> calculateRankTestResource() {
         return Stream.of(
-                Arguments.of(LOTTO_TICKET_123456, 6),
-                Arguments.of(LOTTO_TICKET_234567, 5),
-                Arguments.of(LOTTO_TICKET_345678, 4)
+                Arguments.of(LOTTO_TICKET_123456, Rank.FIRST),
+                Arguments.of(LOTTO_TICKET_234567, Rank.SECOND),
+                Arguments.of(LOTTO_TICKET_345678, Rank.THIRD)
         );
     }
 }

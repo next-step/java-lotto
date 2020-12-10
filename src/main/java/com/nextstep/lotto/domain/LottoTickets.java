@@ -13,8 +13,7 @@ public class LottoTickets {
 
     public LottoPrize checkResult(LottoTicket winningTicket) {
         List<Rank> resultRanks = lottoTickets.stream()
-                .map(winningTicket::howManyMatch)
-                .map(Rank::find)
+                .map(winningTicket::calculateRank)
                 .filter(rank -> !rank.equals(Rank.NOTHING))
                 .collect(Collectors.toList());
 

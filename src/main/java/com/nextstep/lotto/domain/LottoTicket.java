@@ -20,11 +20,8 @@ public class LottoTicket {
         return createPolicy.create();
     }
 
-    public int howManyMatch(LottoTicket thatTicket) {
-        List<LottoNumber> matchedNumbers = lottoNumbers.stream()
-                .filter(thatTicket::isContains)
-                .collect(Collectors.toList());
-        return matchedNumbers.size();
+    public Rank calculateRank(LottoTicket thatLottoTicket) {
+        return Rank.find(countMatchedNumbers(thatLottoTicket));
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -33,6 +30,13 @@ public class LottoTicket {
 
     int size() {
         return this.lottoNumbers.size();
+    }
+
+    private int countMatchedNumbers(LottoTicket thatTicket) {
+        List<LottoNumber> matchedNumbers = lottoNumbers.stream()
+                .filter(thatTicket::isContains)
+                .collect(Collectors.toList());
+        return matchedNumbers.size();
     }
 
     private boolean isContains(LottoNumber lottoNumber) {
