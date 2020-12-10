@@ -15,7 +15,7 @@ public class LottoResult {
 		this.results = new HashMap<>();
 		Arrays.stream(LottoResultType.values())
 			.forEach(resultType -> results.put(resultType, 0));
-		compareWinNumber(winNumbers, lottos);
+		compareWinNumber(winNumbers);
 	}
 
 	public static LottoResult analyze(
@@ -25,16 +25,22 @@ public class LottoResult {
 		return new LottoResult(winInput, lottos);
 	}
 
-	private void compareWinNumber(WinNumbers winInput, List<Lotto> lottos) {
+	private void compareWinNumber(WinNumbers winInput) {
 		List<Integer> winNumbers = winInput.getNumbers();
-		for (Lotto lotto : lottos) {
+		int bonusNumber = winInput.getBonusNumber();
+		for (Lotto lotto : this.lottos) {
 			List<Integer> lottoNumbers = lotto.getNumbers();
 			int matchCount = (int)lottoNumbers.stream()
 				.filter(winNumbers::contains)
 				.count();
-			LottoResultType resultType = LottoResultType.getResultTypeByMatchCount(matchCount);
+			boolean isBonusMatch = matchCount == 5 && compareBonusNumber(lottoNumbers, bonusNumber);
+			LottoResultType resultType = LottoResultType.findResultType(matchCount, isBonusMatch);
 			increaseCntByResultType(resultType);
 		}
+	}
+
+	private boolean compareBonusNumber(List<Integer> lottoNumbers, int bonusNumber) {
+		return lottoNumbers.stream().anyMatch(number -> bonusNumber == number);
 	}
 
 	private void increaseCntByResultType(LottoResultType resultType) {

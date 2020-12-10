@@ -18,4 +18,8 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
+	public static String getBonusNumber() {
+		System.out.println(Message.MSG_REQUEST_LOTTO_BONUS_NUMBER);
+		return scanner.nextLine();
+	}
 }

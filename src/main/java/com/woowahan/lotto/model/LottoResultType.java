@@ -7,25 +7,29 @@ import java.util.stream.Collectors;
 import com.woowahan.lotto.constant.Message;
 
 public enum LottoResultType {
-	ZERO_MATCH(0, 0),
-	ONE_MATCH(1, 0),
-	TWO_MATCH(2, 0),
-	THREE_MATCH(3, 5000L),
-	FOUR_MATCH(4, 50000L),
-	FIVE_MATCH(5, 1500000L),
-	SIX_MATCH(6, 2000000000L);
+	ZERO_MATCH(0, false, 0),
+	ONE_MATCH(1, false, 0),
+	TWO_MATCH(2, false, 0),
+	THREE_MATCH(3, false, 5000L),
+	FOUR_MATCH(4, false, 50000L),
+	FIVE_MATCH(5, false, 1500000L),
+	FIVE_MATCH_AND_BONUS(5, true, 30000000L),
+	SIX_MATCH(6, false, 2000000000L);
 
 	private final int matchCount;
+	private final boolean isBonusMatch;
 	private final long reward;
 
-	LottoResultType(int matchCount, long reward) {
+	LottoResultType(int matchCount, boolean isBonusMatch, long reward) {
 		this.matchCount = matchCount;
+		this.isBonusMatch = isBonusMatch;
 		this.reward = reward;
 	}
 
-	public static LottoResultType getResultTypeByMatchCount(int matchCount) {
+	public static LottoResultType findResultType(int matchCount, boolean isBonusMatch) {
 		return Arrays.stream(LottoResultType.values())
-			.filter(resultType -> matchCount == resultType.getMatchCount())
+			.filter(resultType -> matchCount == resultType.getMatchCount()
+				&& isBonusMatch == resultType.isBonusMatch())
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(Message.MSG_NOT_FOUND_RESULT_TYPE));
 	}
@@ -36,6 +40,10 @@ public enum LottoResultType {
 
 	public long getReward() {
 		return reward;
+	}
+
+	public boolean isBonusMatch() {
+		return isBonusMatch;
 	}
 
 	public static List<LottoResultType> getReportTargets() {

@@ -47,19 +47,27 @@ class LottoReportTest {
 		String result = LottoReport.reportLottoResult(lottoResult);
 
 		for (LottoResultType resultType : LottoResultType.getReportTargets()) {
-			assertThat(result).contains(String.format(Message.MSG_WIN_STATISTICS
-				, resultType.getMatchCount()
-				, resultType.getReward()
-				, results.get(resultType)));
+			assertThat(result).contains(combineMsg(results, resultType));
 		}
+	}
+
+	private String combineMsg(Map<LottoResultType, Integer> results, LottoResultType resultType) {
+		String msg = Message.MSG_WIN_STATISTICS;
+		if (LottoResultType.FIVE_MATCH_AND_BONUS.equals(resultType)) {
+			msg = Message.MSG_WIN_BONUS_STATISTICS;
+		}
+		return String.format(msg
+			, resultType.getMatchCount()
+			, resultType.getReward()
+			, results.get(resultType));
 	}
 
 	public static Stream<Arguments> argReportLottoResult() {
 		return Stream.of(
-			Arguments.of(WinNumbers.of("1,2,3,43,44,45")),
-			Arguments.of(WinNumbers.of("1,2,11,12,13,14")),
-			Arguments.of(WinNumbers.of("21,22,23,24,25,31")),
-			Arguments.of(WinNumbers.of("1,2,3,4,5,6"))
+			Arguments.of(WinNumbers.of("1,2,3,43,44,45", "10")),
+			Arguments.of(WinNumbers.of("1,2,11,12,13,14", "45")),
+			Arguments.of(WinNumbers.of("21,22,23,24,25,31", "1")),
+			Arguments.of(WinNumbers.of("1,2,3,4,5,6", "45"))
 		);
 	}
 }

@@ -38,7 +38,11 @@ public class ValidationUtil {
 			return true;
 		}
 		return numbers.stream()
-			.anyMatch(str -> Integer.parseInt(str) > Lotto.LOTTO_END_NUMBER
-				|| Integer.parseInt(str) < Lotto.LOTTO_START_NUMBER);
+			.anyMatch(ValidationUtil::isWrongNumber);
+	}
+
+	public static boolean isWrongNumber(String numberString) {
+		return Integer.parseInt(numberString) > Lotto.LOTTO_END_NUMBER
+			|| Integer.parseInt(numberString) < Lotto.LOTTO_START_NUMBER;
 	}
 }

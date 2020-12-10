@@ -99,4 +99,15 @@ class ValidationUtilTest {
 		);
 	}
 
+	@DisplayName("isWrongNumber 메서드에 1에서 45사이가 아닌 숫자인 문자가 전달되면 true를 반환한다.")
+	@ParameterizedTest
+	@ValueSource(strings = {"0", "46", "-1", "-45"})
+	void isWrongNumber(String value) {
+
+		boolean expected = true;
+		boolean result = ValidationUtil.isWrongNumber(value);
+
+		assertThat(result).isEqualTo(expected);
+	}
+
 }
