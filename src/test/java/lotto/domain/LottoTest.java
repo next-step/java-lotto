@@ -2,9 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import textAddCalculator.utils.ValidationChecker;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoTest {
@@ -32,6 +34,13 @@ public class LottoTest {
         lotto = new Lotto(Arrays.asList(5,4,3,2,6,1));
         assertThat(lotto.getNums().get(0)).isEqualTo(1);
         assertThat(lotto.getNums().get(5)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("로또 생성시 유효셩검사 test")
+    void validationLottoTest() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(5,47,3,2,6,1)))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }

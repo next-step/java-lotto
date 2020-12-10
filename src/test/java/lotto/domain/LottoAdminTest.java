@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.utils.ValidationChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoAdminTest {
     private LottoAdmin lottoAdmin = new LottoAdmin(Arrays.asList(1,2,3,4,5,6));
@@ -33,6 +35,20 @@ public class LottoAdminTest {
     void splitLottoStringTest() {
         LottoAdmin splitLottoAdmin = new LottoAdmin("1, 2, 3, 4, 5, 6");
         assertThat(lottoAdmin.equals(splitLottoAdmin)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("입력값 유효성검사(문자) test")
+    void validationStringTest() {
+        assertThatThrownBy(() -> new LottoAdmin("1, 2, 3, e, 5, 6"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("입력값 유효성검사(음수) test")
+    void validationMinusNumTest() {
+        assertThatThrownBy(() -> new LottoAdmin("1, 2, 3, -4, 5, 6"))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }

@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import lotto.utils.ValidationChecker;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
     private static final int LOTTO_NUMS = 6;
@@ -16,6 +16,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> nums) {
+        ValidationChecker.checkValidNumber(nums);
         shuffleAndSort(nums);
     }
 

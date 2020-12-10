@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import lotto.utils.ValidationChecker;
+
 public class LottoAdmin {
     private Lotto winningLotto;
 
@@ -21,7 +23,8 @@ public class LottoAdmin {
     }
 
     private List<Integer> splitInputLotto(String lotto) {
-         return Arrays.stream(lotto.split(", ")).map(Integer::parseInt).collect(Collectors.toList());
+        ValidationChecker.isEmptyOrNull(lotto);
+         return Arrays.stream(lotto.split(", ")).filter(value -> ValidationChecker.exceptionCheck(value)).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     public Rank calculateRank(Lotto lotto) {
