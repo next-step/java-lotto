@@ -1,12 +1,9 @@
 package com.nextstep.lotto.domain;
 
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoPrize {
-    private final Map<Rank, Long> result = new Hashtable<>();
+    private final Map<Rank, Long> result = new HashMap<>();
 
     public LottoPrize(final List<Rank> ranks) {
         initDefaultResult();
