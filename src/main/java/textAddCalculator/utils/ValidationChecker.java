@@ -1,6 +1,7 @@
 package textAddCalculator.utils;
 
 public class ValidationChecker {
+
     private static final int ZERO = 0;
 
     private ValidationChecker() {
@@ -19,6 +20,7 @@ public class ValidationChecker {
     }
 
     private static void checkNegative(String negative) {
+
         if(Integer.parseInt(negative) < ZERO) {
             throw new RuntimeException("음수가 입력되었습니다.");
         }
