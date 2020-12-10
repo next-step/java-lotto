@@ -9,7 +9,7 @@ import lotto.view.OutputView;
 public class Main {
     public static void main(String[] args) {
 
-        long money = InputView.inputMoney();
+        String money = InputView.inputMoney();
         Lottos lottos = Shop.buyLottos(money);
         OutputView.printPurchaseLottos(lottos);
 
@@ -19,6 +19,6 @@ public class Main {
             result.add(lottoAdmin.calculateRank(lotto));
         }
         OutputView.printWinningStatistics(result);
-        OutputView.printWinningRatio(result, money);
+        OutputView.printWinningRatio(result, Long.parseLong(money));
     }
 }
