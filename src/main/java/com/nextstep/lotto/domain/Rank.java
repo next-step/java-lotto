@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
     NOTHING(0, new Money(0L), ""),
-    THIRD(4, new Money(50000L), "4개 일치 (50000원)"),
-    FOURTH(3, new Money(5000L), "3개 일치 (5000원)"),
-    SECOND(5, new Money(1500000L), "5개 일치 (1500000원)"),
-    FIRST(6, new Money(2000000000L), "6개 일치 (2000000000원)");
+    FOURTH(3, new Money(5_000L), "3개 일치 (5000원)"),
+    THIRD(4, new Money(50_000L), "4개 일치 (50000원)"),
+    SECOND(5, new Money(1_500_000L), "5개 일치 (1500000원)"),
+    FIRST(6, new Money(2_000_000_000L), "6개 일치 (2000000000원)");
 
     private final int numberOfMatchedNumber;
     private final Money money;
