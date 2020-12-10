@@ -4,16 +4,25 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
     private static final int LOTTO_NUMS = 6;
     private List<Integer> nums;
-    private List<Integer> numberRange = Numbers.getNumbers();
 
     public Lotto() {
-        Collections.shuffle(numberRange);
-        nums = numberRange.stream().limit(LOTTO_NUMS).collect(Collectors.toList());
-        Collections.sort(nums);
+        List<Integer> nums = Numbers.getNumbers();
+        shuffleAndSort(nums);
+    }
+
+    public Lotto(List<Integer> nums) {
+        shuffleAndSort(nums);
+    }
+
+    private void shuffleAndSort(List<Integer> nums) {
+        Collections.shuffle(nums);
+        this.nums = nums.stream().limit(LOTTO_NUMS).collect(Collectors.toList());
+        Collections.sort(this.nums);
     }
 
     public List<Integer> getNums() {
@@ -32,4 +41,9 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(nums);
     }
+
+    public boolean contains(int num) {
+        return nums.contains(num);
+    }
+
 }
