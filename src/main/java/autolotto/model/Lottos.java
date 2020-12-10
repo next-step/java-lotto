@@ -23,4 +23,17 @@ public class Lottos {
     public Lotto getLotto(int index) {
         return lottos.get(index);
     }
+
+    public void matchLotto(int LottoIndex, Lotto lotto, LottosComparer lottosComparer){
+        for (int i = 0; i < 6; i++) {
+
+            checkMatchingNumber(lotto.getNumber(i), this.lottos.get(LottoIndex), lottosComparer);
+        }
+
+        lottosComparer.addMatchingNumbers();
+    }
+
+    private void checkMatchingNumber(int lottoNumber, Lotto winningNumber, LottosComparer lottosComparer) {
+            winningNumber.matchNumber(lottoNumber, lottosComparer);
+    }
 }

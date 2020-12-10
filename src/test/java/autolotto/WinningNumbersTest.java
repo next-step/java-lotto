@@ -3,10 +3,9 @@ package autolotto;
 import autolotto.exception.IsNotScopeInTheNumber;
 import autolotto.exception.IsNotSixNumberException;
 import autolotto.model.WinningNumbers;
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningNumbersTest {

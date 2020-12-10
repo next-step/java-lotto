@@ -1,9 +1,6 @@
 package autolotto.controller;
 
-import autolotto.model.Buyer;
-import autolotto.model.LottosComparer;
-import autolotto.model.ProfitCalculator;
-import autolotto.model.WinningNumbers;
+import autolotto.model.*;
 import autolotto.view.InputView;
 import autolotto.view.LottoVeiw;
 import autolotto.view.ResultView;

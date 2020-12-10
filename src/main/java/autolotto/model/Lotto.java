@@ -27,8 +27,8 @@ public class Lotto {
     }
 
     public Lotto(String[] splitNumbers) {
-        for (int i = 0; i < splitNumbers.length; i++) {
-            numbers.add(Integer.parseInt(splitNumbers[i]));
+        for (String splitNumber : splitNumbers) {
+            numbers.add(Integer.parseInt(splitNumber));
         }
     }
 
@@ -38,5 +38,17 @@ public class Lotto {
 
     public List<Integer> getNumberList(){
         return Collections.unmodifiableList(this.numbers);
+    }
+
+    public void matchNumber(int lottoNumber, LottosComparer lottosComparer){
+        for (int i = 0; i < 6; i++) {
+            compareNumber(lottoNumber, this.numbers.get(i), lottosComparer);
+        }
+    }
+
+    private void compareNumber(int lottoNumber, int winningNumber, LottosComparer lottosComparer){
+        if (winningNumber == lottoNumber) {
+            lottosComparer.addMatchingCount();
+        }
     }
 }

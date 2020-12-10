@@ -2,8 +2,9 @@ package autolotto;
 
 import autolotto.model.Buyer;
 import autolotto.model.Lottos;
-import org.junit.Test;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 

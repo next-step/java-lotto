@@ -1,8 +1,8 @@
 package autolotto;
 
 import autolotto.model.*;
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,7 +24,6 @@ public class LottosComparerTest {
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers.toString());
 
         LottosComparer lottosComparer = new LottosComparer(lottos, winningNumbers.getNumbers());
-
         assertEquals(lottosComparer.getMatchingCount(6),1);
 
     }
