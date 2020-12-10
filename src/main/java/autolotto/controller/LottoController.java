@@ -10,10 +10,6 @@ import autolotto.view.ResultView;
 
 public class LottoController {
 
-    public static void main(String[] args) {
-        playLotto();
-    }
-
     public static void playLotto() {
         int purchaseAmount = InputView.inputMoney();
         Buyer buyer = new Buyer(purchaseAmount);
