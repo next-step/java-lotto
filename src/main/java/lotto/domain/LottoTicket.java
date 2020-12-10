@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -53,5 +50,9 @@ public class LottoTicket {
                 .filter(winning::contains)
                 .count();
         return Rank.countOf(matchCount);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 }

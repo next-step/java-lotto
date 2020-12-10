@@ -13,4 +13,8 @@ public class ReportResponse {
     public static ReportResponse of(final LottoReport lottoReport) {
         return new ReportResponse(lottoReport);
     }
+
+    public LottoReport getLottoReport() {
+        return lottoReport;
+    }
 }

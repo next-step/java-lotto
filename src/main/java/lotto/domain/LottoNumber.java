@@ -30,6 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return CACHE.computeIfAbsent(value, LottoNumber::new);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

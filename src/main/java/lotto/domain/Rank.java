@@ -28,7 +28,15 @@ public enum Rank {
         return match == count;
     }
 
+    public int getMatch() {
+        return match;
+    }
+
     public Money getReward() {
         return reward;
+    }
+
+    public boolean isWinning() {
+        return UN_RANK != this;
     }
 }
