@@ -28,9 +28,8 @@ public class LottoPrize {
     }
 
     private void updateResult(final List<Rank> ranks) {
-        for (Rank rank : ranks) {
-            result.put(rank, countRank(rank, ranks));
-        }
+        ranks.stream().filter(it -> it != Rank.NOTHING)
+                .forEach(it -> result.put(it, countRank(it, ranks)));
     }
 
     private Money sumOfPrizes() {

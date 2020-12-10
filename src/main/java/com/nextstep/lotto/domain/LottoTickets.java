@@ -14,7 +14,6 @@ public class LottoTickets {
     public LottoPrize checkResult(LottoTicket winningTicket) {
         List<Rank> resultRanks = lottoTickets.stream()
                 .map(winningTicket::calculateRank)
-                .filter(rank -> !rank.equals(Rank.NOTHING))
                 .collect(Collectors.toList());
 
         return new LottoPrize(resultRanks);
