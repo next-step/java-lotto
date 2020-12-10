@@ -1,7 +1,7 @@
 package lotto.application;
 
-import lotto.domain.LottoAnalyzer;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoReport;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.dto.PurchaseResponse;
@@ -22,6 +22,7 @@ public class LottoService {
 
     public ReportResponse report(LottoTickets lottoTickets, String winningNumbers) {
         LottoTicket winning = lottoMachine.manual(winningNumbers);
-        return ReportResponse.of(LottoAnalyzer.analyze(lottoTickets, winning));
+        LottoReport report = LottoReport.of(lottoTickets.match(winning));
+        return ReportResponse.of(report);
     }
 }
