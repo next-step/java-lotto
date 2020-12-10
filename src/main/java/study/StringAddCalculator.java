@@ -26,13 +26,12 @@ public class StringAddCalculator {
     }
 
     private static List<String> split(String string) {
-        List<String> strings = Arrays.asList(string.split(DELIMITER));
         Matcher matcher = Pattern.compile(PATTERN).matcher(string);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            strings = Arrays.asList(matcher.group(2).split(customDelimiter));
+            return Arrays.asList(matcher.group(2).split(customDelimiter));
         }
-        return strings;
+        return Arrays.asList(string.split(DELIMITER));
     }
 
     private static List<Integer> toInts(List<String> strings) {
