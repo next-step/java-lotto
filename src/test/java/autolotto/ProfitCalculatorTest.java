@@ -5,14 +5,14 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ProfitCalculatorTest {
 
     @Test
     @DisplayName("수익률 계산을 제대로 하는가")
     public void calculateProfit(){
-        Lottos lottos = new Lottos(1000);
+        Money money = new Money(1000);
+        Lottos lottos = new Lottos(money);
         StringBuilder lottoNumbers = new StringBuilder();
         Lotto lotto = lottos.getLotto(0);
 

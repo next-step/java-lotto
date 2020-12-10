@@ -9,12 +9,9 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int money) {
-        if (money < 1000) {
-            throw new NotEnoughMoneyException("1000원보다 작은 돈으로는 복권을 살 수 없습니다.");
-        }
+    public Lottos(Money money) {
 
-        for (int i = 0; i < (money / 1000); i++) {
+        for (int i = 0; i < money.getBuyableLotto(); i++) {
             lottos.add(new Lotto());
         }
     }

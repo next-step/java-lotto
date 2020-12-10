@@ -1,11 +1,11 @@
 package autolotto.model;
 
 public class Buyer {
-    private final int money;
+    private final Money money;
     private Lottos lottos;
 
     public Buyer(int money) {
-        this.money = money;
+        this.money = new Money(money);
     }
 
     public void buyLottos() {
