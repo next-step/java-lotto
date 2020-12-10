@@ -8,8 +8,9 @@ public class Buyer {
         this.money = new Money(money);
     }
 
-    public void buyLottos() {
-        lottos = new Lottos(money);
+    public Lottos buyLottos() {
+        this.lottos = new Lottos(money);
+        return this.lottos;
     }
 
     public Lottos getLottos() {

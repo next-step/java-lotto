@@ -10,7 +10,6 @@ public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(Money money) {
-
         for (int i = 0; i < money.getBuyableLotto(); i++) {
             lottos.add(new Lotto());
         }
@@ -24,16 +23,11 @@ public class Lottos {
         return lottos.get(index);
     }
 
-    public void matchLotto(int LottoIndex, Lotto lotto, LottosComparer lottosComparer){
-        for (int i = 0; i < 6; i++) {
-
-            checkMatchingNumber(lotto.getNumber(i), this.lottos.get(LottoIndex), lottosComparer);
+    public void matchLotto(Lotto winningNumber, MatchingNumbers matchingNumbers){
+        for (Lotto lotto : lottos) {
+            lotto.matchCount(winningNumber);
+            matchingNumbers.putMatchingNumbers(lotto.isProfitable());
         }
-
-        lottosComparer.addMatchingNumbers();
     }
 
-    private void checkMatchingNumber(int lottoNumber, Lotto winningNumber, LottosComparer lottosComparer) {
-            winningNumber.matchNumber(lottoNumber, lottosComparer);
-    }
 }

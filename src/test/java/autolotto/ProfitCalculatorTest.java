@@ -24,9 +24,8 @@ public class ProfitCalculatorTest {
         }
 
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers.toString());
-
-
-        LottosComparer lottosComparer = new LottosComparer(lottos, winningNumbers.getNumbers());
-        assertEquals(200000.0, ProfitCalculator.calculate(10000,lottosComparer), 0.0);
+        MatchingNumbers matchingNumbers = new MatchingNumbers();
+        lottos.matchLotto(winningNumbers.getNumbers(), matchingNumbers);
+        assertEquals(200000.0, ProfitCalculator.calculate(10000, matchingNumbers), 0.0);
     }
 }

@@ -11,14 +11,15 @@ public class LottoController {
         int purchaseAmount = InputView.inputMoney();
         Buyer buyer = new Buyer(purchaseAmount);
 
-        buyer.buyLottos();
-        LottoVeiw.viewLottos(buyer.getLottos());
+        Lottos lottos = buyer.buyLottos();
+        LottoVeiw.viewLottos(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers());
-        LottosComparer lottosComparer = new LottosComparer(buyer.getLottos(), winningNumbers.getNumbers());
+        MatchingNumbers matchingNumbers = new MatchingNumbers();
+        lottos.matchLotto(winningNumbers.getNumbers(), matchingNumbers);
 
-        ResultView.viewStatistic(lottosComparer);
-        float profitRate = ProfitCalculator.calculate(purchaseAmount, lottosComparer);
+        ResultView.viewStatistic(matchingNumbers);
+        float profitRate = ProfitCalculator.calculate(purchaseAmount, matchingNumbers);
         ResultView.viewProfitRate(profitRate);
 
     }

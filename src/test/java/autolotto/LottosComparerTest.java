@@ -22,9 +22,10 @@ public class LottosComparerTest {
             lottoNumbers.append(", ").append(lotto.getNumber(i));
         }
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers.toString());
+        MatchingNumbers matchingNumbers = new MatchingNumbers();
+        lottos.matchLotto(winningNumbers.getNumbers(), matchingNumbers);
 
-        LottosComparer lottosComparer = new LottosComparer(lottos, winningNumbers.getNumbers());
-        assertEquals(lottosComparer.getMatchingCount(6),1);
+        assertEquals(matchingNumbers.getMatchingCount(6),1);
 
     }
 }

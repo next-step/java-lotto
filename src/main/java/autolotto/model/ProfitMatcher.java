@@ -14,7 +14,7 @@ public class ProfitMatcher {
         }
     };
 
-    public static float getMatchProfit(int matchingNumber, int matchingCount){
+    public static int getMatchProfit(int matchingNumber, int matchingCount){
         return matchProfitList.get(matchingNumber) * matchingCount;
     }
 

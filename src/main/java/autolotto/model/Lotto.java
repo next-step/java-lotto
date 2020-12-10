@@ -1,14 +1,12 @@
 package autolotto.model;
 
-import autolotto.exception.IsNotSixNumberException;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
     private final List<Integer> numbers = new ArrayList<>();
+    private int matchCount;
 
     public Lotto() {
         LottoNumbersGenerator.setLottoNumbers(numbers);
@@ -28,15 +26,35 @@ public class Lotto {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public void matchNumber(int lottoNumber, LottosComparer lottosComparer){
-        for (int i = 0; i < 6; i++) {
-            compareNumber(lottoNumber, this.numbers.get(i), lottosComparer);
+    public void matchCount(Lotto winningNumber){
+        for (int lottoNumber : this.numbers) {
+            compareNumber(lottoNumber, winningNumber);
+        }
+
+
+    }
+
+    public int isProfitable(){
+        if (3 < matchCount && matchCount < 7) {
+            return matchCount;
+        }
+        return 0;
+    }
+
+    public void refreshMatchCount(){
+        this.matchCount = 0;
+    }
+
+    private void compareNumber(int lottoNumber, Lotto winningNumbers) {
+        for (int winningNumber : winningNumbers.numbers){
+            matchNumber(lottoNumber, winningNumber);
         }
     }
 
-    private void compareNumber(int lottoNumber, int winningNumber, LottosComparer lottosComparer){
+    private void matchNumber(int lottoNumber, int winningNumber){
         if (winningNumber == lottoNumber) {
-            lottosComparer.addMatchingCount();
+            matchCount++;
         }
+
     }
 }
