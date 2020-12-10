@@ -8,9 +8,10 @@ import java.util.stream.Stream;
 
 public class LottoSeller {
     private static final int LOTTO_PRICE = 1000;
-    private static final int MAX_NUMBER = 45;
     private static final int LOTTO_START_IDX = 0;
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final List<Integer> TOTAL_NUMBERS = Stream.iterate(1, i -> i + 1)
+            .limit(45).collect(Collectors.toList());
 
     private LottoSeller(){}
 
@@ -29,15 +30,9 @@ public class LottoSeller {
     }
 
     private static List<Integer> getRandomNumbers() {
-        List<Integer> lottoNumbers = createLottoNumbers();
-        Collections.shuffle(lottoNumbers);
-        List<Integer> collectedNumbers = lottoNumbers.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
+        Collections.shuffle(TOTAL_NUMBERS);
+        List<Integer> collectedNumbers = TOTAL_NUMBERS.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
         Collections.sort(collectedNumbers);
         return collectedNumbers;
-    }
-
-    private static List<Integer> createLottoNumbers() {
-        return Stream.iterate(1, i -> i + 1)
-                .limit(MAX_NUMBER).collect(Collectors.toList());
     }
 }
