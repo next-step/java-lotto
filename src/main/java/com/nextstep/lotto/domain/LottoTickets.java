@@ -19,11 +19,11 @@ public class LottoTickets {
         return new LottoPrize(resultRanks);
     }
 
-    public int size() {
-        return this.lottoTickets.size();
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
+    }
+
+    int size() {
+        return this.lottoTickets.size();
     }
 }

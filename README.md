@@ -122,5 +122,5 @@
 - [X] Rank 내 숫자 리터럴 표현을 가독성이 좋도록 개선
 - [X] Rank 내 금액과 설명을 한군데서 관리할 수 있도록 검토
 - [X] Rank enum의 객체 선언 순서가 의미가 있도록 재정렬
-- [ ] assertJ 기능 적극 활용하기
-- [ ] LottoTickets 일급 컬렉션에서 LottoPrize에 대한 임의의 수정 가하지 않도록 수정
+- [X] assertJ 기능 적극 활용하기
+- [X] LottoTickets 일급 컬렉션에서 LottoPrize에 대한 임의의 수정 가하지 않도록 수정

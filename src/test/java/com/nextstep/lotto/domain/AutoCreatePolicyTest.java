@@ -14,6 +14,6 @@ class AutoCreatePolicyTest {
         AutoCreatePolicy autoCreatePolicy = new AutoCreatePolicy();
         LottoTicket lottoTicket = autoCreatePolicy.create();
 
-        assertThat(lottoTicket.size()).isEqualTo(expectedSize);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(expectedSize);
     }
 }
