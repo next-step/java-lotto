@@ -11,19 +11,7 @@ public class Lotto {
     private final List<Integer> numbers = new ArrayList<>();
 
     public Lotto() {
-        List<Integer> tempNumbers = new ArrayList<>();
-
-        for (int i = 1; i <= 45; i++) {
-            tempNumbers.add(i);
-        }
-
-        Collections.shuffle(tempNumbers);
-
-        for (int i = 0; i < 6; i++) {
-            numbers.add(tempNumbers.get(i));
-        }
-
-        Collections.sort(numbers);
+        LottoNumbersGenerator.setLottoNumbers(numbers);
     }
 
     public Lotto(String[] splitNumbers) {
