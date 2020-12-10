@@ -13,4 +13,12 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
+
+    public LottoStatistics getStatistics(List<Integer> winningNumbers) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        for (Lotto lotto : lottos) {
+            lottoStatistics.addCount(lotto.getWinning(winningNumbers));
+        }
+        return lottoStatistics;
+    }
 }

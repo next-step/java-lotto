@@ -13,8 +13,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public LottoWinning getWinning(List<Integer> winningNumbers) {
+        return LottoWinning.select(winningNumbers, numbers);
     }
 
     @Override

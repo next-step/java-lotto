@@ -1,7 +1,6 @@
 package com.nextstep.lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -45,7 +44,6 @@ public class LottoStatisticsTest {
         }
         double rate = (double)lottoWinning.getWinningPrice() * 5 / 5000;
         rate = new BigDecimal(rate).setScale(2, RoundingMode.DOWN).doubleValue();
-        System.out.println(rate);
         assertThat(lottoStatistics.profitRate()).isEqualTo(rate);
     }
 
