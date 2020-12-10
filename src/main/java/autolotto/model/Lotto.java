@@ -24,7 +24,7 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public int getNumbers(int index){
+    public int getNumber(int index){
         return this.numbers.get(index);
     }
 

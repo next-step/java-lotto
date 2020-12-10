@@ -26,7 +26,7 @@ public class LottosComparer {
 
     private void compareLotto(Lotto lotto, String winningNumbers) {
         for (int i = 0; i < 6; i++) {
-            checkMatchingNumber(lotto.getNumbers(i), winningNumbers);
+            checkMatchingNumber(lotto.getNumber(i), winningNumbers);
         }
 
         if (3 < matchingCount && matchingCount < 7) {

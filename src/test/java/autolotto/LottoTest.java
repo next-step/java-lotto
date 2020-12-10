@@ -13,7 +13,7 @@ public class LottoTest {
     public void isValidLottoNumbers(){
         Lotto lotto = new Lotto();
         for (int i = 0; i < 6; i++) {
-            assertTrue(1 <= lotto.getNumbers(i) && lotto.getNumbers(i) <= 45);
+            assertTrue(1 <= lotto.getNumber(i) && lotto.getNumber(i) <= 45);
         }
     }
 }
