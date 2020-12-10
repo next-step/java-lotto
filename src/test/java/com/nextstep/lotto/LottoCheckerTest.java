@@ -18,8 +18,8 @@ public class LottoCheckerTest {
     @ParameterizedTest
     @MethodSource
     void checkHitCount(List<Integer> collectNumbers, int expected) {
-        LottoChecker lottoChecker = new LottoChecker(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int count = lottoChecker.checkCount(collectNumbers);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int count = LottoChecker.checkCount(winningNumbers, collectNumbers);
         assertThat(count).isEqualTo(expected);
     }
 
