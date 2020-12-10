@@ -9,8 +9,7 @@ public class LottoSeller {
     public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_START_IDX = 0;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<Integer> TOTAL_NUMBERS = Stream.iterate(1, i -> i + 1)
-            .limit(45).collect(Collectors.toList());
+    private static final int LOTTO_MAX_COUNT = 45;
 
     private LottoSeller(){}
 
@@ -28,9 +27,15 @@ public class LottoSeller {
     }
 
     private static List<Integer> getRandomNumbers() {
-        Collections.shuffle(TOTAL_NUMBERS);
-        List<Integer> collectedNumbers = TOTAL_NUMBERS.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
+        List<Integer> totalNumbers = getTotalNumbers();
+        Collections.shuffle(totalNumbers);
+        List<Integer> collectedNumbers = totalNumbers.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
         Collections.sort(collectedNumbers);
         return collectedNumbers;
+    }
+
+    private static List<Integer> getTotalNumbers() {
+        return Stream.iterate(1, i -> i + 1)
+                .limit(LOTTO_MAX_COUNT).collect(Collectors.toList());
     }
 }
