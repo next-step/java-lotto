@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 public class StringAddCalculator {
     private final static String DELIMITER = "[,:]";
     private final static String PATTERN = "//(.)\n(.*)";
+    private final static int ZERO = 0;
+    private final static int FIRST = 1;
+    private final static int SECOND = 2;
 
     public static int splitAndSum(String string) {
         if (isNull(string) || isEmpty(string)) {
@@ -28,8 +31,8 @@ public class StringAddCalculator {
     private static List<String> split(String string) {
         Matcher matcher = Pattern.compile(PATTERN).matcher(string);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return Arrays.asList(matcher.group(2).split(customDelimiter));
+            String customDelimiter = matcher.group(FIRST);
+            return Arrays.asList(matcher.group(SECOND).split(customDelimiter));
         }
         return Arrays.asList(string.split(DELIMITER));
     }
@@ -40,10 +43,10 @@ public class StringAddCalculator {
 
     private static int sum(List<Integer> numbers) {
         return numbers.stream()
-                .mapToInt(StringAddCalculator::isNotNegativeNumber).sum();
+                .mapToInt(StringAddCalculator::toNotNegativeNumber).sum();
     }
 
-    private static int isNotNegativeNumber(int number) {
+    private static int toNotNegativeNumber(int number) {
         if (isNegative(number)) {
             throw new RuntimeException();
         }
@@ -51,6 +54,6 @@ public class StringAddCalculator {
     }
 
     private static boolean isNegative(int number) {
-        return number < 0;
+        return number < ZERO;
     }
 }
