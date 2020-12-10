@@ -31,7 +31,7 @@ public class Separator {
 	}
 
 	private boolean isValidation() {
-		return this.inputTextMatcher.find();
+		return this.inputTextMatcher.matches();
 	}
 
 	private Matcher getMatcher(String inputText) {

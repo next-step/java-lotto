@@ -7,7 +7,9 @@ public class StringAddCalculator {
 		}
 
 		Separator separator = new Separator(text);
-		return SeparatedInputValues.ofSeparator(separator).sum();
+		SeparatedInputValues separatedInputValues = SeparatedInputValues.ofSeparator(separator.getSeparatedText());
+
+		return separatedInputValues.sum();
 	}
 
 	private static boolean isNullOrEmpty(String text) {
