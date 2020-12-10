@@ -111,3 +111,16 @@
 - WinningTicketInputView
     - 사용자로부터 당첨 티켓 로또 번호들을 입력받을 수 있다.
     - [X] 입력받은 문자열로 당첨 티켓 도메인을 생성할 수 있다.
+
+## Step2. 피드백 반영
+- [ ] 로또 숫자 관리를 중복해서 하지 않도록 개선 (힌트: LottoNumber 캐싱 활용)
+- [X] 상수 사용 시 경계값 범위의 의미가 같도록 개선
+- [ ] HashTable을 굳이 쓸 이유가..?
+- [ ] LottoPrize의 static 메서드에 대한 고민
+- [ ] LottoTicket 간 서로 비교하는 메서드 네이밍 고민
+- [ ] LottoTicket 간 비교 후 Rank를 반환하는 게 어떤지 고민
+- [ ] Rank 내 숫자 리터럴 표현을 가독성이 좋도록 개선
+- [ ] Rank 내 금액과 설명을 한군데서 관리할 수 있도록 검토
+- [ ] Rank enum의 객체 선언 순서가 의미가 있도록 재정렬
+- [ ] assertJ 기능 적극 활용하기
+- [ ] LottoTickets 일급 컬렉션에서 LottoPrize에 대한 임의의 수정 가하지 않도록 수정
