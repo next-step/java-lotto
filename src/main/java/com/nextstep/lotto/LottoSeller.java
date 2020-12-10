@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoSeller {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_START_IDX = 0;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final List<Integer> TOTAL_NUMBERS = Stream.iterate(1, i -> i + 1)
