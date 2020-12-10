@@ -13,10 +13,10 @@ public class NormalMode implements Mode {
         this.value = value;
     }
 
-    @Override
-    public Numbers parseToNumbers() {
-        return new Numbers(separateNumbers(value));
-    }
+//    @Override
+//    public Numbers parseToNumbers() {
+//        return new Numbers(separateNumbers(value));
+//    }
 
     @Override
     public String extractSeparator() {
@@ -28,9 +28,9 @@ public class NormalMode implements Mode {
         return this.value;
     }
 
-    private List<Number> separateNumbers(final String value) {
-        return Arrays.stream(value.split(DEFAULT_SEPARATOR))
-                .map(Number::of)
-                .collect(Collectors.toList());
-    }
+//    private List<Number> separateNumbers(final String value) {
+//        return Arrays.stream(value.split(DEFAULT_SEPARATOR))
+//                .map(Number::of)
+//                .collect(Collectors.toList());
+//    }
 }
