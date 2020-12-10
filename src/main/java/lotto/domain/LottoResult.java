@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoResult {
     final static int PRICE = 1000;
 
-    private final Map<Rank, Integer> result;
+    private static Map<Rank, Integer> result;
     private final int payment;
 
     public LottoResult(int lottoTickets) {
@@ -26,9 +26,9 @@ public class LottoResult {
         return getProfit() / payment;
     }
 
-    public void saveLottoResult(int matchingScore, boolean matchBonus) {
+    public static void saveLottoResult(int matchingScore, boolean matchBonus) {
         if (matchingScore > 2) {
-            Rank rank = Rank.getProfitByMatchingScore(matchingScore, matchBonus);
+            Rank rank = Rank.getRankByMatchingScore(matchingScore, matchBonus);
             result.put(rank, result.get(rank) + 1);
         }
     }
@@ -40,9 +40,16 @@ public class LottoResult {
                 .reduce(0L, Double::sum);
     }
 
-    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets) {
+    public static LottoResult getLottoResult(List<LottoTicket> lottoTickets, WinningCondition winningCondition) {
         LottoResult lottoResult = new LottoResult(lottoTickets.size());
-        lottoTickets.forEach(lottoTicket -> Scanner.scan(lottoTicket, lottoResult));
+        lottoTickets.forEach(lottoTicket -> getSingleLottoResult(lottoTicket, winningCondition));
         return lottoResult;
+    }
+
+    private static void getSingleLottoResult(LottoTicket lottoTicket, WinningCondition winningCondition) {
+        long matchingScore = lottoTicket.getMatchingScore(winningCondition.getWinningNumbers());
+        final boolean matchBonus = lottoTicket.getMatchBonus(winningCondition.getBonusNumber());
+
+        saveLottoResult(Long.valueOf(matchingScore).intValue(), matchBonus);
     }
 }

@@ -1,31 +1,26 @@
 package lotto;
 
-import lotto.domain.Calculator;
-import lotto.domain.Generator;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.Scanner;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 import java.util.List;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
+        ConsoleView consoleView = new ConsoleView();
+        LottoMachine lottoMachine = new LottoMachine();
 
-        Calculator calculator = new Calculator();
-        Generator generator = new Generator();
+        int payment = consoleView.getPayment();
+        int manualLottoCount = consoleView.getManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = consoleView.getManualLottoNumbers(manualLottoCount);
 
-        int ticketCount = calculator.calculateLottoTicket(inputView.inputPayment());
-        resultView.printTickets(ticketCount);
-        List<LottoTicket> lottoTickets = generator.generateLottoTickets(ticketCount);
-        resultView.printLottoTickets(lottoTickets);
+        int autoLottoTicketCount = lottoMachine.buyLotto(payment, manualLottoCount);
+        consoleView.printTickets(manualLottoCount, autoLottoTicketCount);
 
-        Scanner.newScanner(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
-        LottoResult lottoResult = LottoResult.getLottoResult(lottoTickets);
-        resultView.printLottoResult(lottoResult);
+        List<LottoTicket> lottoTickets = lottoMachine.getLotto(autoLottoTicketCount, manualLottoNumbers);
+        consoleView.printLottoTickets(lottoTickets);
+
+        LottoResultReader lottoResultReader = new LottoResultReader(consoleView);
+        lottoResultReader.readResult(lottoTickets);
     }
 }

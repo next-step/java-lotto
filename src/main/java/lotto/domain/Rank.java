@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
 
@@ -27,11 +28,11 @@ public enum Rank {
         return profit;
     }
 
-    public static Rank getProfitByMatchingScore(int countOfMatch, boolean matchBonus) {
+    public static Rank getRankByMatchingScore(int countOfMatch, boolean matchBonus) {
 
         if (getBonusRank(countOfMatch, matchBonus)) return SECOND;
 
-        return Arrays.stream(values())
+        return bonusNotMatchedRank().stream()
                 .filter(r -> r.getMatchingScore() == countOfMatch)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(countOfMatch + "개 일치한 경우는 없습니다."));
@@ -41,6 +42,9 @@ public enum Rank {
         return countOfMatch == 5 && matchBonus;
     }
 
+    public static List<Rank> bonusNotMatchedRank() {
+        return Arrays.asList(FIRST, THIRD, FOURTH, FIFTH);
+    }
 
     @Override
     public String toString() {
