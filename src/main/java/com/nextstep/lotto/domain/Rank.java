@@ -3,20 +3,26 @@ package com.nextstep.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(0, new Money(0L), ""),
-    FOURTH(3, new Money(5_000L), "3개 일치 (5000원)"),
-    THIRD(4, new Money(50_000L), "4개 일치 (50000원)"),
-    SECOND(5, new Money(1_500_000L), "5개 일치 (1500000원)"),
-    FIRST(6, new Money(2_000_000_000L), "6개 일치 (2000000000원)");
+    NOTHING(0, 0L),
+    FOURTH(3, 5_000L),
+    THIRD(4, 50_000L),
+    SECOND(5, 1_500_000L),
+    FIRST(6, 2_000_000_000L);
+
+    private static final String DESCRIPTION_HEADER = "개 일치 (";
+    private static final String DESCRIPTION_FOOTER = "원)";
 
     private final int numberOfMatchedNumber;
     private final Money money;
     private final String description;
 
-    Rank(int numberOfMatchedNumber, Money money, String description) {
-        this.numberOfMatchedNumber = numberOfMatchedNumber;
-        this.money = money;
-        this.description = description;
+    Rank(Integer numberOfMatchedNumber, Long moneyValue) {
+      this.numberOfMatchedNumber = numberOfMatchedNumber;
+      this.money = new Money(moneyValue);
+      this.description = numberOfMatchedNumber.toString() +
+              DESCRIPTION_HEADER +
+              moneyValue.toString() +
+              DESCRIPTION_FOOTER;
     }
 
     public static Rank find(final int numberOfMatchedNumber) {
