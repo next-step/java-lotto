@@ -10,7 +10,7 @@ public class ShopTest {
     @Test
     @DisplayName("로또 구매 test")
     void purchaseLottoTest() {
-        Lottos purchasedLottos = Shop.buyLottos(13_000);
+        Lottos purchasedLottos = Shop.buyLottos("13000");
         assertThat(purchasedLottos.getLottos().size()).isEqualTo(13);
     }
 }

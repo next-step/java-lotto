@@ -22,13 +22,13 @@ public class ValidationChecker {
         return true;
     }
 
-    public static void checkNegative(String negative) {
+    private static void checkNegative(String negative) {
         if(Integer.parseInt(negative) < ZERO) {
             throw new RuntimeException("음수가 입력되었습니다.");
         }
     }
 
-    public static void checkChar(String character) {
+    private static void checkChar(String character) {
         try {
             Integer.parseInt(character);
         } catch (NumberFormatException nfe) {
