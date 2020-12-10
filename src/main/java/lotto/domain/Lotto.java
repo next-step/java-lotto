@@ -1,25 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_NUMS = 6;
     private List<Integer> nums;
+    private List<Integer> numberRange = Numbers.getNumbers();
 
-    private Lotto() {
-        List<Integer> numArr = new ArrayList<>();
-        for(int i = 1; i<46; i++) {
-            numArr.add(i);
-        }
-        Collections.shuffle(numArr);
-        nums = numArr.stream().limit(6).collect(Collectors.toList());
-    }
-
-    public static Lotto of() {
-        return new Lotto();
+    public Lotto() {
+        Collections.shuffle(numberRange);
+        nums = numberRange.stream().limit(LOTTO_NUMS).collect(Collectors.toList());
     }
 
     public List<Integer> getNums() {
