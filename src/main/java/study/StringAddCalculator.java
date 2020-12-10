@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private final static String DELIMITER = "[,:]";
@@ -13,7 +14,7 @@ public class StringAddCalculator {
         if (isNull(string) || isEmpty(string)) {
             return 0;
         }
-        return stringsSum(split(string));
+        return sum(toInts(split(string)));
     }
 
     private static boolean isEmpty(String string) {
@@ -22,10 +23,6 @@ public class StringAddCalculator {
 
     private static boolean isNull(String string) {
         return string == null;
-    }
-
-    private static boolean isNegative(int number) {
-        return number < 0;
     }
 
     private static List<String> split(String string) {
@@ -38,14 +35,23 @@ public class StringAddCalculator {
         return strings;
     }
 
-    private static int stringsSum(List<String> strings) {
-        return strings.stream()
-                .mapToInt(s -> {
-                    int number = Integer.parseInt(s);
-                    if (isNegative(number)) {
-                        throw new RuntimeException();
-                    }
-                    return number;
-                }).sum();
+    private static List<Integer> toInts(List<String> strings) {
+        return strings.stream().map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private static int sum(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(StringAddCalculator::isNotNegativeNumber).sum();
+    }
+
+    private static int isNotNegativeNumber(int number) {
+        if (isNegative(number)) {
+            throw new RuntimeException();
+        }
+        return number;
+    }
+
+    private static boolean isNegative(int number) {
+        return number < 0;
     }
 }
