@@ -33,8 +33,11 @@ public class DomainTest {
         }
 
         lottos.buyManualLottos(manualLottoNumbersList);
+
+        // 자동발권
         main.buyAutoLottos(lottos, money, fixedWinningsGenerator);
 
+        // 당첨 결과
         Statistic statistic = new Statistic();
         ResultNumber resultNumber = new ResultNumber();
 
