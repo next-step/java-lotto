@@ -20,7 +20,7 @@ public class LottoSellerTest {
     @DisplayName("로또 발급 기능")
     @Test
     void buyLotto() {
-        List<Lotto> lottos = LottoSeller.buy(10);
+        Lottos lottos = LottoSeller.buy(10);
         assertThat(lottos.size()).isEqualTo(10);
     }
 }

@@ -1,6 +1,5 @@
 package com.nextstep.lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +18,8 @@ public class LottoSeller {
         return price / LOTTO_PRICE;
     }
 
-    public static List<Lotto> buy(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-
+    public static Lottos buy(int count) {
+        Lottos lottos = new Lottos();
         for (int ix = 0; ix < count ; ix ++ ) {
             List<Integer> randomNumbers = getRandomNumbers();
             lottos.add(new Lotto(randomNumbers));
