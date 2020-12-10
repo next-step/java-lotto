@@ -29,6 +29,6 @@ public class Lotto {
     }
 
     public List<Integer> getNumberList(){
-        return this.numbers;
+        return Collections.unmodifiableList(this.numbers);
     }
 }
