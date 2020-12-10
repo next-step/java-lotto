@@ -8,6 +8,6 @@ public class ProfitCalculator {
         for (int i = 3; i < 7; i++) {
             profit = ProfitMatcher.getMatchProfit(i, lottosComparer.getMatchingCount(i));
         }
-        return profit / money;
+        return profit / (float)money;
     }
 }
