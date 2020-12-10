@@ -20,7 +20,6 @@ public class MatchingNumbers {
     }
 
     public int getMatchingCount(int matchingNumber) {
-        System.out.println(numbers.get(matchingNumber));
         return numbers.get(matchingNumber);
     }
 
