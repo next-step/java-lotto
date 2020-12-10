@@ -29,7 +29,7 @@ public class LottoPrize {
 
     private void updateResult(final List<Rank> ranks) {
         for (Rank rank : ranks) {
-            result.put(rank, LottoPrize.countRank(rank, ranks));
+            result.put(rank, countRank(rank, ranks));
         }
     }
 
@@ -44,7 +44,7 @@ public class LottoPrize {
         return totalPrize;
     }
 
-    private static Long countRank(Rank target, List<Rank> ranks) {
+    private Long countRank(Rank target, List<Rank> ranks) {
         return ranks.stream()
                 .filter(rank -> rank.equals(target))
                 .count();
