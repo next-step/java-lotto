@@ -1,9 +1,6 @@
 package autolotto;
 
-import autolotto.model.Lotto;
-import autolotto.model.Lottos;
-import autolotto.model.LottosComparer;
-import autolotto.model.WinningNumbers;
+import autolotto.model.*;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -14,7 +11,8 @@ public class LottosComparerTest {
     @Test
     @DisplayName("로또번호가 일치됬을 때 제대로 체크하는가")
     public void compareLottos(){
-        Lottos lottos = new Lottos(1000);
+        Money money = new Money(1000);
+        Lottos lottos = new Lottos(money);
         StringBuilder lottoNumbers = new StringBuilder();
         Lotto lotto = lottos.getLotto(0);
 
