@@ -8,8 +8,8 @@ public class Shop {
 
     private Shop() {}
 
-    public static Lottos buyLottos(int money) {
-        int lottoCount = money / LOTTO_PRICE;
+    public static Lottos buyLottos(long money) {
+        long lottoCount = money / LOTTO_PRICE;
         return new Lottos(Stream.generate(() -> new Lotto(Numbers.getNumbers())).limit(lottoCount).collect(Collectors.toList()));
     }
 }
