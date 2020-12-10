@@ -1,9 +1,12 @@
 package com.nextstep.lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoStatistics {
+    private int totalCount = 0;
     private Map<LottoWinning, Integer> result = new HashMap<>();
 
     public void addCount(LottoWinning lottoWinning) {
@@ -12,6 +15,7 @@ public class LottoStatistics {
             count = result.get(lottoWinning);
         }
         result.put(lottoWinning, count + 1);
+        totalCount++;
     }
 
     public int getCount(LottoWinning lottoWinning) {
@@ -19,5 +23,20 @@ public class LottoStatistics {
             return result.get(lottoWinning);
         }
         return 0;
+    }
+
+    public double profitRate() {
+        int totalPrice = totalCount * LottoSeller.LOTTO_PRICE;
+        double totalProfit = getTotalProfit();
+        double profitRate = totalProfit / totalPrice;
+        return new BigDecimal(profitRate).setScale(2, RoundingMode.DOWN).doubleValue();
+    }
+
+    private double getTotalProfit() {
+        return result.entrySet().stream().mapToDouble(entry -> {
+            LottoWinning lottoWinning = entry.getKey();
+            int count = entry.getValue();
+            return (double)lottoWinning.getWinningPrice() * count;
+        }).sum();
     }
 }
