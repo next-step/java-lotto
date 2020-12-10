@@ -2,6 +2,8 @@ package study;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
@@ -21,7 +23,13 @@ public class StringAddCalculator {
     }
 
     private static List<String> split(String string) {
-        return Arrays.asList(string.split("[,:]"));
+        List<String> strings = Arrays.asList(string.split("[,:]"));
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(string);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            strings = Arrays.asList(matcher.group(2).split(customDelimiter));
+        }
+        return strings;
     }
 
     private static int stringsSum(List<String> strings) {
