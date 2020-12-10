@@ -3,7 +3,6 @@ package com.nextstep.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -19,7 +18,7 @@ public class LottoCheckerTest {
     @MethodSource
     void checkHitCount(List<Integer> collectNumbers, int expected) {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int count = LottoChecker.checkCount(winningNumbers, collectNumbers);
+        int count = LottoChecker.checkHitCount(winningNumbers, collectNumbers);
         assertThat(count).isEqualTo(expected);
     }
 
