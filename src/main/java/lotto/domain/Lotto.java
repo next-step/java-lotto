@@ -13,6 +13,7 @@ public class Lotto {
     public Lotto() {
         Collections.shuffle(numberRange);
         nums = numberRange.stream().limit(LOTTO_NUMS).collect(Collectors.toList());
+        Collections.sort(nums);
     }
 
     public List<Integer> getNums() {
