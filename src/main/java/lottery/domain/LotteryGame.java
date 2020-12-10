@@ -1,6 +1,8 @@
 package lottery.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryGame {
 
@@ -20,7 +22,10 @@ public class LotteryGame {
     }
 
     public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, BuyBehavior behavior) {
-        return behavior.buyLotteryTickets(this.pickCounts, numberOfTickets);
+        return IntStream.range(0, numberOfTickets)
+                .boxed()
+                .map(Integer -> LotteryTicketFactory.createLotteryTicket(behavior))
+                .collect(Collectors.toList());
     }
 
     public LotteryResult matchLotteryTickets(String winningNumbers, List<LotteryTicket> lotteryTickets) {

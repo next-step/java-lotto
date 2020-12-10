@@ -21,14 +21,16 @@ public class TestLotteryGame {
     void setUp() {
         autoBuyBehavior = new AutoBuyBehavior() {
             @Override
-            public List<LotteryTicket> buyLotteryTickets(int pickCounts, int numberOfTickets) {
-                List<LotteryTicket> lotteryTickets = new ArrayList<>();
-                LotteryTicket lotteryTicket;
-                for(int i = 0; i < numberOfTickets; i++) {
-                    lotteryTicket = new LotteryTicket(new int[]{5, 1, 4, 3, 2, 6});
-                    lotteryTickets.add(lotteryTicket);
-                }
-                return lotteryTickets;
+            public List<LotteryNumber> getLotteryNumbers(int pickCounts) {
+                Collections.shuffle(lotteryAllNumbers);
+                return new ArrayList<>(Arrays.asList(
+                        new LotteryNumber(5),
+                        new LotteryNumber(1),
+                        new LotteryNumber(4),
+                        new LotteryNumber(3),
+                        new LotteryNumber(2),
+                        new LotteryNumber(6)
+                ));
             }
         };
 
