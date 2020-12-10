@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lotto = new LinkedHashSet<>();
 
     public Lotto(List<LottoNumber> numbers) {

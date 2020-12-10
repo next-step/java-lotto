@@ -1,9 +1,7 @@
 package step3.domain;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -13,14 +11,12 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     private int number;
     private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
-    private static ArrayList<LottoNumber> lottoNumbersCache = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(i -> {
                     LottoNumber lottoNumber = new LottoNumber(i);
                     lottoNumberCache.put(i, lottoNumber);
-                    lottoNumbersCache.add(lottoNumber);
                 });
     }
 
@@ -43,10 +39,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public int getNumber() {
         return this.number;
-    }
-
-    public static List<LottoNumber> getLottoNumbers() {
-        return lottoNumbersCache;
     }
 
     @Override
