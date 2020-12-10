@@ -14,10 +14,14 @@ public class StringAddCalculator {
     private final static int SECOND = 2;
 
     public static int splitAndSum(String string) {
-        if (isNull(string) || isEmpty(string)) {
+        if (isUnusable(string)) {
             return 0;
         }
         return sum(toInts(split(string)));
+    }
+
+    private static boolean isUnusable(String string) {
+        return isNull(string) || isEmpty(string);
     }
 
     private static boolean isEmpty(String string) {
