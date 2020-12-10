@@ -5,8 +5,8 @@ import com.nextstep.lotto.domain.exceptions.InvalidLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int MIN_SIZE = 1;
-    private static final int MAX_SIZE = 45;
+    static final int MIN_SIZE = 1;
+    static final int MAX_SIZE = 45;
 
     private final int value;
 
