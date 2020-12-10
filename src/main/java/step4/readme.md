@@ -1,39 +1,82 @@
 <Class 목록>
 - 당첨 숫자 갯수를 저장하는 것에서 등수를 저장하도록 전체적으로 변경하였습니다.
 
-- Lottos 
-    - 생성자 : money금액에 따라 로또 생성 
-        - param :
-            - int money
-            - LottoGenerator lottoGenerator : 로또 번호 추출 
-    - 함수
-        - checkResult : List<Lotto> 당첨 결과 입력
-        - buyLotto : 로또 생성 
-        - getLottoCnt : 금액에 따른 로또 갯수 계산
-        - getLottoCnt : 현재 로또 갯수  
-        
-- Lotto 
-    - 생성자 : 해당 로또 등수 저장 
-    - 함수 
-        - checkReward : 해당 로또 등수 Statistic에 기록
+- VO
+    - Lottos 
+        - parameter : List<Lotto> lottoList
+        - function
+            - buyAutoLottos : 자동 발권 로직
+            - getAutoLottoCnt : 로또 자동 발권 갯수 계산 
+            - buyManualLottos : 수동 발권 로직
+            - checkResult : 당첨 결과 비교
+            - getLottoList 
+            - getLottosCnt : lottoList 길이 계산
+            
+    - Lotto 
+        - parameter : List<LottoNumber> numberList
+        - function 
+            - checkReward : 해당 로또 등수 Statistic에 기록
+    
+    - LottoNumber
+        - parameter 
+            - int maxNumber(static): 로또 최대 숫자 
+            - int number 
+        - function  
+            - validate : 숫자 검증 
+            
+    - ManualLottoCnt
+        - parameter
+            - int lottoCnt : 수동 로또 갯수 
+        - function
+            - validate : 검증
 
-- LottoNumber 
-    - Lotto 숫자 VO
+    - ManualLottoNumbers
+        - parameter
+            - List<LottoNumber> manualLottoNumbers : 로또 수동 발권 번호
+        - function
+            - changeStringToList : 입력받은 로또 번호 형변환
+            - validate : 입력받은 로또 번호 검증
 
-- ResultNumber :
-    - 생성자 : 당첨 번호 및 보너스볼 저장
-    - checkWinningCnt : 당첨 숫자 갯수 return
+    - Money
+        - parameter
+            - int lottoPrice : 로또 1장 금액 
+            - int money 
+        - function
+            - validate : 검증 
+            - getLottoCnt : 금액으로 살 수 있는 로또 갯수 계산 
+            - getMarginByMoney : 수익률 계산
+            - compareMoney : 금액 비교
+
+
+- ResultNumber 
+    - parameter
+        - List<LottoNumber> resultNumberList : 당첨 번호 리스트 
+        - int bonusNumber : 보너스 번호
+    - function
+        - settingLottoResultNumber : 당첨 번호 등록
+        - settingLottoBonusNumber : 보너스 번호 등록
+        - checkLottoResult : 당첨 갯수 확인 
+        - checkNumberContain : 당첨 번호 확인
+        - checkBonusResult : 보너스 번호 확인
     
 - LottoGenarator 
-    - 생성자 : 로또 숫자 할당 범위 지정 
-    - 함수 
-        - getLottoNumberts : 로또 번호 할당
+    - parameter 
+        - int lottoSize : 로또 1개당 숫자 갯수 
+        - List<Integer> numbers : 로또 번호 Pool 
+    - function 
+        - getLottoNumbers : 로또 번호 발급
         
 - Statistic :
-    - 함수 
-        - recordResult : Lottos의 결과 기록 (호출할 때마다 초기화)     
-        - getMargin : 기록된 결과를 바탕으로 수익률 계산
-        - getRankByWinningCnt : 당첨 갯수에 따른 등수 return
+    - parameter 
+        - Integer[] results : 1등 ~ 6등 현황
+        - Map<Integer, RewardBoard> rankMap : 등수별 당첨 갯수
+    - function 
+        - getMargin : 현황 기반 마진률 계산
+        - getResultByIndex : 해당 등수의 로또 갯수
+        - getResultLength : 등수 list length
+        - recordLottoResult : 당첨 갯수에 따른 등수 현황 update 
+        - getRankByWinningCnt : 당첨 갯수 기반 등수 
+        - getWinningCntByRank : 등수 별 당첨 갯수 
         
 - RewardBoard (enum) 
     - 등수에 따른 당첨 금액 return 
