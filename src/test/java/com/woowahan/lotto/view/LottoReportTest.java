@@ -19,7 +19,7 @@ import com.woowahan.lotto.model.LottoResult;
 import com.woowahan.lotto.model.LottoResultType;
 import com.woowahan.lotto.model.Lottos;
 import com.woowahan.lotto.model.PurchaseInput;
-import com.woowahan.lotto.model.WinNumberInput;
+import com.woowahan.lotto.model.WinNumbers;
 
 class LottoReportTest {
 
@@ -35,7 +35,7 @@ class LottoReportTest {
 	@DisplayName("reportLottoResult 당첨 통계 문자열을 얻을 수 있고, 3개 이상 매칭된 결과 리포트 값이 포함된다.")
 	@ParameterizedTest
 	@MethodSource("argReportLottoResult")
-	void reportLottoResult(WinNumberInput input) {
+	void reportLottoResult(WinNumbers input) {
 		List<Lotto> lottos = Arrays.asList(
 			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
 			Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)),
@@ -56,10 +56,10 @@ class LottoReportTest {
 
 	public static Stream<Arguments> argReportLottoResult() {
 		return Stream.of(
-			Arguments.of(WinNumberInput.of("1,2,3,43,44,45")),
-			Arguments.of(WinNumberInput.of("1,2,11,12,13,14")),
-			Arguments.of(WinNumberInput.of("21,22,23,24,25,31")),
-			Arguments.of(WinNumberInput.of("1,2,3,4,5,6"))
+			Arguments.of(WinNumbers.of("1,2,3,43,44,45")),
+			Arguments.of(WinNumbers.of("1,2,11,12,13,14")),
+			Arguments.of(WinNumbers.of("21,22,23,24,25,31")),
+			Arguments.of(WinNumbers.of("1,2,3,4,5,6"))
 		);
 	}
 }

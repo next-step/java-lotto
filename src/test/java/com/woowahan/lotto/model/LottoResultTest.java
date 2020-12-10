@@ -18,7 +18,7 @@ class LottoResultTest {
 	@DisplayName("anlalyze메서드를 통해 WinNumberInput값을 받아 매칭결과를 확인할 수 있다.")
 	@ParameterizedTest
 	@MethodSource("argMatchResult")
-	void matchResult(WinNumberInput input, Map<LottoResultType, Integer> expected) {
+	void matchResult(WinNumbers input, Map<LottoResultType, Integer> expected) {
 
 		List<Lotto> lottos = Arrays.asList(
 			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
@@ -69,10 +69,10 @@ class LottoResultTest {
 		result4.put(LottoResultType.SIX_MATCH, 1);
 
 		return Stream.of(
-			Arguments.of(WinNumberInput.of("1,2,3,43,44,45"), result1),
-			Arguments.of(WinNumberInput.of("1,2,11,12,13,14"), result2),
-			Arguments.of(WinNumberInput.of("21,22,23,24,25,31"), result3),
-			Arguments.of(WinNumberInput.of("1,2,3,4,5,6"), result4)
+			Arguments.of(WinNumbers.of("1,2,3,43,44,45"), result1),
+			Arguments.of(WinNumbers.of("1,2,11,12,13,14"), result2),
+			Arguments.of(WinNumbers.of("21,22,23,24,25,31"), result3),
+			Arguments.of(WinNumbers.of("1,2,3,4,5,6"), result4)
 		);
 	}
 }

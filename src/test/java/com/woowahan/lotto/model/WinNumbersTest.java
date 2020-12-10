@@ -9,15 +9,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import com.woowahan.lotto.constant.Message;
 
-class WinNumberInputTest {
+class WinNumbersTest {
 
-	@DisplayName("of 메서드는 로또번호에 만족하는 6개의 숫자가 쉼표로 구분되는 하나의 문자열을 받으면 WinNumberInput 객체를 생성한다.")
+	@DisplayName("of 메서드는 로또번호에 만족하는 6개의 숫자가 쉼표로 구분되는 하나의 문자열을 받으면 WinNumbers 객체를 생성한다.")
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2,3,4,5,6", "45, 44, 43, 42, 41, 40", "1, 15, 25, 35, 40, 45"})
 	void of(String value) {
 
-		WinNumberInput result = WinNumberInput.of(value);
-		assertThat(result).isInstanceOf(WinNumberInput.class);
+		WinNumbers result = WinNumbers.of(value);
+		assertThat(result).isInstanceOf(WinNumbers.class);
 	}
 
 	@DisplayName("of 메서드에 숫자가 아닌 문자 또는 null 또는 empty문자를 전달하면 IllegalArgumentException이 발생한다.")
@@ -26,7 +26,7 @@ class WinNumberInputTest {
 	void ofNotNumber(String value) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				WinNumberInput.of(value);
+				WinNumbers.of(value);
 			}).withMessage(Message.MSG_NULL_OR_EMPTY);
 	}
 
@@ -36,7 +36,7 @@ class WinNumberInputTest {
 	void ofLength(String value) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				WinNumberInput.of(value);
+				WinNumbers.of(value);
 			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
 	}
 
@@ -46,7 +46,7 @@ class WinNumberInputTest {
 	void ofHasNotNumber(String value) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				WinNumberInput.of(value);
+				WinNumbers.of(value);
 			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
 	}
 
@@ -56,7 +56,7 @@ class WinNumberInputTest {
 	void ofHasWrongNumber(String value) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				WinNumberInput.of(value);
+				WinNumbers.of(value);
 			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
 	}
 

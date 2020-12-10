@@ -10,23 +10,23 @@ public class LottoResult {
 	private final List<Lotto> lottos;
 	private final Map<LottoResultType, Integer> results;
 
-	private LottoResult(WinNumberInput winInput, List<Lotto> lottos) {
+	private LottoResult(WinNumbers winNumbers, List<Lotto> lottos) {
 		this.lottos = lottos;
 		this.results = new HashMap<>();
 		Arrays.stream(LottoResultType.values())
 			.forEach(resultType -> results.put(resultType, 0));
-		compareWinNumber(winInput, lottos);
+		compareWinNumber(winNumbers, lottos);
 	}
 
 	public static LottoResult analyze(
-		WinNumberInput winInput,
+		WinNumbers winInput,
 		List<Lotto> lottos
 	) {
 		return new LottoResult(winInput, lottos);
 	}
 
-	private void compareWinNumber(WinNumberInput winInput, List<Lotto> lottos) {
-		List<Integer> winNumbers = winInput.getWinNumbers();
+	private void compareWinNumber(WinNumbers winInput, List<Lotto> lottos) {
+		List<Integer> winNumbers = winInput.getNumbers();
 		for (Lotto lotto : lottos) {
 			List<Integer> lottoNumbers = lotto.getNumbers();
 			int matchCount = (int)lottoNumbers.stream()

@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 import com.woowahan.lotto.constant.Message;
 import com.woowahan.lotto.util.ValidationUtil;
 
-public class WinNumberInput {
+public class WinNumbers {
 
 	private static final String DELIMITER_WIN_NUMBER = ",";
 
-	private List<Integer> winNumbers;
+	private List<Integer> numbers;
 
-	public WinNumberInput(String input) {
+	public WinNumbers(String input) {
 		List<String> result = validateWinNumber(input);
-		this.winNumbers = result.stream()
+		this.numbers = result.stream()
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
@@ -40,11 +40,11 @@ public class WinNumberInput {
 			.collect(Collectors.toList());
 	}
 
-	public static WinNumberInput of(String input) {
-		return new WinNumberInput(input);
+	public static WinNumbers of(String input) {
+		return new WinNumbers(input);
 	}
 
-	public List<Integer> getWinNumbers() {
-		return winNumbers;
+	public List<Integer> getNumbers() {
+		return numbers;
 	}
 }
