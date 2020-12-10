@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.domain.validator.LottoNumberValidator;
+
 public final class LottoNumber {
 
     public static final int LOWER_BOUND = 1;
 
     public static final int UPPER_BOUND = 45;
-
-    static final String OUT_BOUND_MESSAGE = "숫자는 1 ~ 45 사이의 값을 가져야 합니다!";
 
     private final int number;
 
@@ -17,11 +17,11 @@ public final class LottoNumber {
     }
 
     public LottoNumber(final int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND) {
-            throw new IllegalArgumentException(OUT_BOUND_MESSAGE);
-        }
-
         this.number = number;
+
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
+            throw new IllegalArgumentException(LottoNumberValidator.OUT_BOUND_MESSAGE);
+        }
     }
 
     public int getNumber() {

@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.domain.validator;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;

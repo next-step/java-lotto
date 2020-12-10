@@ -11,22 +11,28 @@ public class WinningCountTest {
 
     private final WinningCount winningCount;
 
+    private final LottoChecker checker;
+
+    private final Lottoes manualLottoes;
+
     public WinningCountTest() {
 
         // given
-        Lottoes lottoes = new Lottoes(
+        manualLottoes = new Lottoes(
                 Arrays.asList(
-                        Arrays.asList(6, 7, 8, 9, 10, 11),
-                        Arrays.asList(1, 2, 6, 7, 8, 9),
-                        Arrays.asList(1, 2, 4, 7, 8, 9),
-                        Arrays.asList(1, 2, 5, 6, 7, 8)
+                        new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)),
+                        new Lotto(Arrays.asList(1, 2, 6, 7, 8, 9)),
+                        new Lotto(Arrays.asList(1, 2, 4, 7, 8, 9)),
+                        new Lotto(Arrays.asList(1, 2, 5, 6, 7, 8))
                 )
         );
 
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = new LottoNumber(7);
 
-        winningCount = lottoes.countWinLotto(winningLotto, bonusBall);
+        checker = new LottoChecker(winningLotto, bonusBall);
+
+        winningCount = checker.countWinningLottoes(manualLottoes);
     }
 
     @Test
@@ -58,7 +64,7 @@ public class WinningCountTest {
     public void calculateEarnTest() {
 
         // when
-        double earnRate = winningCount.calculateEarnRate(4000);
+        double earnRate = (double) winningCount.calculatePrize() / 4000;
 
         // then
         assertThat(earnRate).isEqualTo(15.0);

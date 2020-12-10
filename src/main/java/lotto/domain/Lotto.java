@@ -11,6 +11,8 @@ import lotto.NumberPool;
 
 public final class Lotto {
 
+    public static final String SIZE_NOI_MATCH_ERROR = "로또 사이즈가 6이 아닙니다!";
+
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -19,6 +21,10 @@ public final class Lotto {
 
     public Lotto() {
         this.lottoNumbers = NumberPool.getLottoNumbers();
+
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException(SIZE_NOI_MATCH_ERROR);
+        }
     }
 
     public Set<LottoNumber> getNumbers() {
