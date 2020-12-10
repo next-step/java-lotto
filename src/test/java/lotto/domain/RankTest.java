@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -31,5 +32,17 @@ public class RankTest {
 
         // then
         assertThat(reward).isEqualTo(Money.valueOf(amount));
+    }
+
+    @DisplayName("당첨된 등 수 인지 확인할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"FIRST,true", "SECOND,true", "THIRD,true", "FOURTH,true", "UN_RANK,false"})
+    void isWinning(String value, boolean expected) {
+        // when
+        Rank rank = Rank.valueOf(value);
+        boolean winning = rank.isWinning();
+
+        // then
+        assertThat(winning).isEqualTo(expected);
     }
 }
