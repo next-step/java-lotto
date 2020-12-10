@@ -13,11 +13,6 @@ public class NormalMode implements Mode {
         this.value = value;
     }
 
-//    @Override
-//    public Numbers parseToNumbers() {
-//        return new Numbers(separateNumbers(value));
-//    }
-
     @Override
     public String extractSeparator() {
         return DEFAULT_SEPARATOR;
@@ -27,10 +22,4 @@ public class NormalMode implements Mode {
     public String extractSeparateTarget() {
         return this.value;
     }
-
-//    private List<Number> separateNumbers(final String value) {
-//        return Arrays.stream(value.split(DEFAULT_SEPARATOR))
-//                .map(Number::of)
-//                .collect(Collectors.toList());
-//    }
 }

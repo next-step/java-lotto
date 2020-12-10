@@ -39,28 +39,4 @@ class CustomModeTest {
         CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
         assertThat(customMode.extractSeparateTarget()).isEqualTo(value);
     }
-
-//    @DisplayName("커스텀 구분자로 구분된 Numbers로 변환할 수 있다.")
-//    @Test
-//    void parseToNumbersTest() {
-//        String value = "1-2-3-4-5-6";
-//        Numbers expected = new Numbers(
-//                Arrays.asList(Number.of("1"), Number.of("2"), Number.of("3"),
-//                        Number.of("4"), Number.of("5"), Number.of("6"))
-//        );
-//
-//        CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
-//
-//        assertThat(customMode.parseToNumbers()).isEqualTo(expected);
-//    }
-//
-//    @DisplayName("커스텀 구분자 외 구분자로 구분된 문자열 파싱 시도 시 예외 발생")
-//    @ParameterizedTest
-//    @ValueSource(strings = {"1,2,3,4,5", "1-5,2"})
-//    void parseToNumbersFailTest(String invalidValue) {
-//        CustomMode customMode = new CustomMode(invalidValue, SAMPLE_SEPARATOR);
-//
-//        assertThatThrownBy(customMode::parseToNumbers)
-//                .isInstanceOf(InvalidNumberException.class);
-//    }
 }

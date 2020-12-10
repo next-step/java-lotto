@@ -14,17 +14,6 @@ public class CustomMode implements Mode {
         this.customSeparator = customSeparator;
     }
 
-//    @Override
-//    public Numbers parseToNumbers() {
-//        return new Numbers(separateNumbers(value));
-//    }
-//
-//    private List<Number> separateNumbers(final String value) {
-//        return Arrays.stream(value.split(customSeparator))
-//                .map(Number::of)
-//                .collect(Collectors.toList());
-//    }
-
     @Override
     public String extractSeparator() {
         return this.customSeparator;
