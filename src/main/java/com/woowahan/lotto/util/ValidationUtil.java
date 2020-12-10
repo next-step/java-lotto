@@ -41,8 +41,8 @@ public class ValidationUtil {
 			.anyMatch(ValidationUtil::isWrongNumber);
 	}
 
-	public static boolean isWrongNumber(String str) {
-		return Integer.parseInt(str) > Lotto.LOTTO_END_NUMBER
-			|| Integer.parseInt(str) < Lotto.LOTTO_START_NUMBER;
+	public static boolean isWrongNumber(String numberString) {
+		return Integer.parseInt(numberString) > Lotto.LOTTO_END_NUMBER
+			|| Integer.parseInt(numberString) < Lotto.LOTTO_START_NUMBER;
 	}
 }

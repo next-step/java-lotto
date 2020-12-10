@@ -34,11 +34,11 @@ public class LottoReport {
 	}
 
 	private static String getResultByResultType(Map<LottoResultType, Integer> results, LottoResultType resultType) {
-		String msg = Message.MSG_WIN_STATISTICS;
+		String message = Message.MSG_WIN_STATISTICS;
 		if (LottoResultType.FIVE_MATCH_AND_BONUS.equals(resultType)) {
-			msg = Message.MSG_WIN_BONUS_STATISTICS;
+			message = Message.MSG_WIN_BONUS_STATISTICS;
 		}
-		return String.format(msg
+		return String.format(message
 			, resultType.getMatchCount()
 			, resultType.getReward()
 			, results.get(resultType));

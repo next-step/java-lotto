@@ -72,10 +72,10 @@ public class WinNumbers {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder("WinNumbers{");
-		sb.append("numbers=").append(numbers);
-		sb.append(", bonusNumber=").append(bonusNumber);
-		sb.append('}');
-		return sb.toString();
+		final StringBuilder builder = new StringBuilder("WinNumbers{");
+		builder.append("numbers=").append(numbers);
+		builder.append(", bonusNumber=").append(bonusNumber);
+		builder.append('}');
+		return builder.toString();
 	}
 }
