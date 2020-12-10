@@ -18,23 +18,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        validate(countOfMatch);
-
-        if (matchBonus) {
-            return SECOND;
-        }
-
-        for (Rank value : values()) {
-            if (value.countOfMatch == countOfMatch) {
-                if (countOfMatch == 5) {
-                    return THIRD;
-                }
-
-                return value;
-            }
-        }
-        
-        return MISS;
+        return null;
     }
 
     private static void validate(int countOfMatch) {
