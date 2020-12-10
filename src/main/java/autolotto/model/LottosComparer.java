@@ -14,9 +14,9 @@ public class LottosComparer {
     };
     private int matchingCount;
 
-    public LottosComparer(Lottos lottos, Lotto lotto) {
+    public LottosComparer(Lottos lottos, Lotto winningLotto) {
         for (int i = 0; i < lottos.getLottosCount(); i++) {
-            lottos.matchLotto(i,lotto, this);
+            lottos.matchLotto(i,winningLotto, this);
         }
     }
 
