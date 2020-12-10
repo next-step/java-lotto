@@ -18,6 +18,11 @@ public class NormalMode implements Mode {
         return new Numbers(separateNumbers(value));
     }
 
+    @Override
+    public String extractSeparator() {
+        return DEFAULT_SEPARATOR;
+    }
+
     private List<Number> separateNumbers(final String value) {
         return Arrays.stream(value.split(DEFAULT_SEPARATOR))
                 .map(Number::of)

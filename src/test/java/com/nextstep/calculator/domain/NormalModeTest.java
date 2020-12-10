@@ -2,6 +2,7 @@ package com.nextstep.calculator.domain;
 
 import com.nextstep.calculator.domain.exceptions.InvalidNumberException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -48,5 +49,15 @@ class NormalModeTest {
         Mode mode = new NormalMode(invalidValue);
 
         assertThatThrownBy(mode::parseToNumbers).isInstanceOf(InvalidNumberException.class);
+    }
+
+    @DisplayName("구분자로 사용될 문자열을 받을 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2:3:4:5,6", "1:2:3:4", "1"})
+    void extractSeparatorTest(String value) {
+        Mode mode = new NormalMode(value);
+        String expected = "[:,]";
+
+        assertThat(mode.extractSeparator()).isEqualTo(expected);
     }
 }

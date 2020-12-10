@@ -26,6 +26,11 @@ public class CustomMode implements Mode {
     }
 
     @Override
+    public String extractSeparator() {
+        return this.customSeparator;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
