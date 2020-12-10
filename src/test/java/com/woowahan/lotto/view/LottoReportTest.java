@@ -47,11 +47,19 @@ class LottoReportTest {
 		String result = LottoReport.reportLottoResult(lottoResult);
 
 		for (LottoResultType resultType : LottoResultType.getReportTargets()) {
-			assertThat(result).contains(String.format(Message.MSG_WIN_STATISTICS
-				, resultType.getMatchCount()
-				, resultType.getReward()
-				, results.get(resultType)));
+			assertThat(result).contains(combineMsg(results, resultType));
 		}
+	}
+
+	private String combineMsg(Map<LottoResultType, Integer> results, LottoResultType resultType) {
+		String msg = Message.MSG_WIN_STATISTICS;
+		if (LottoResultType.FIVE_MATCH_AND_BONUS.equals(resultType)) {
+			msg = Message.MSG_WIN_BONUS_STATISTICS;
+		}
+		return String.format(msg
+			, resultType.getMatchCount()
+			, resultType.getReward()
+			, results.get(resultType));
 	}
 
 	public static Stream<Arguments> argReportLottoResult() {

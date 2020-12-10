@@ -17,6 +17,5 @@ public class LottoMain {
 		WinNumbers winNumbers = WinNumbers.of(InputView.getWinNumber(), InputView.getBonusNumber());
 		LottoResult result = LottoResult.analyze(winNumbers, lottos.getLottos());
 		ResultView.printResult(LottoReport.reportLottoResult(result));
-		System.out.println(winNumbers);
 	}
 }
