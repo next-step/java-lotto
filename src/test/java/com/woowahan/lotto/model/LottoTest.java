@@ -35,9 +35,9 @@ class LottoTest {
 
 	public static Stream<Arguments> argOf() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(LottoNo.of(1), LottoNo.of(10), LottoNo.of(20), LottoNo.of(30), LottoNo.of(40), LottoNo.of(45))),
-			Arguments.of(Arrays.asList(LottoNo.of(2), LottoNo.of(5), LottoNo.of(15), LottoNo.of(25), LottoNo.of(35), LottoNo.of(40))),
-			Arguments.of(Arrays.asList(LottoNo.of(3), LottoNo.of(7), LottoNo.of(17), LottoNo.of(27), LottoNo.of(37), LottoNo.of(42)))
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(1, 10, 20, 30, 40, 45))),
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(2, 5, 15, 25, 35, 40))),
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(3, 7, 17, 27, 37, 42)))
 		);
 	}
 
@@ -53,9 +53,9 @@ class LottoTest {
 
 	public static Stream<Arguments> argOfWrongSize() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(LottoNo.of(1), LottoNo.of(10), LottoNo.of(20), LottoNo.of(30), LottoNo.of(40))),
-			Arguments.of(Arrays.asList(LottoNo.of(2), LottoNo.of(5), LottoNo.of(15), LottoNo.of(25), LottoNo.of(35), LottoNo.of(40), LottoNo.of(45))),
-			Arguments.of(Arrays.asList(LottoNo.of(3), LottoNo.of(7), LottoNo.of(17), LottoNo.of(27), LottoNo.of(37), LottoNo.of(42), LottoNo.of(43), LottoNo.of(45)))
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(1, 10, 20, 30, 40))),
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(2, 5, 15, 25, 35, 40, 45))),
+			Arguments.of(LottoTestUtil.convertLottoNo(Arrays.asList(3, 7, 17, 27, 37, 42, 43, 45)))
 		);
 	}
 }
