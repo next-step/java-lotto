@@ -24,6 +24,10 @@ public class LottoNumbers {
 		return this.lottoNumbers.get(index).equals(lottoNumber);
 	}
 
+	public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -41,5 +45,9 @@ public class LottoNumbers {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
+	}
+
+	public int isContainsCount(LottoNumbers resultLottoNumbers) {
+		return (int) resultLottoNumbers.lottoNumbers.stream().filter(this::isContainsLottoNumber).count();
 	}
 }

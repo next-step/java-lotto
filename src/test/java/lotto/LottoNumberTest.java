@@ -29,7 +29,7 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("createNumbers")
 	void 로또_최대_번호_테스트(List<Integer> numbers) {
-		assertThatThrownBy(() -> newLottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 숫자는 6을 초과할수 없습니다.");
+		assertThatThrownBy(() -> GenerateLottoNumber.manual(numbers)).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 숫자는 6을 초과할수 없습니다.");
 	}
 
 	public static Stream<Arguments> createNumbers() {
@@ -42,8 +42,8 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("sortNumbers")
 	void 로또_정렬_TEST(List<Integer> targetList, List<Integer> resultList) {
-		LottoNumbers targetLottoNumbers = newLottoNumbers(targetList);
-		LottoNumbers resultLottoNumbers = newLottoNumbers(resultList);
+		LottoNumbers targetLottoNumbers = GenerateLottoNumber.manual(targetList);
+		LottoNumbers resultLottoNumbers = GenerateLottoNumber.manual(resultList);
 		assertThat(targetLottoNumbers).isEqualTo(resultLottoNumbers);
 
 		IntStream.range(0, targetList.size()).forEach(i -> {
@@ -56,9 +56,5 @@ public class LottoNumberTest {
 		return Stream.of(
 			Arguments.of(Arrays.asList(2, 1, 4, 3, 6, 5), Arrays.asList(1, 2, 3, 4, 5, 6))
 		);
-	}
-
-	private LottoNumbers newLottoNumbers(List<Integer> numbers) {
-		return numbers.stream().map(LottoNumber::new).collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
 	}
 }
