@@ -1,14 +1,11 @@
 package lotto;
 
-import lotto.model.Lotto;
+
 import lotto.model.LottoTicket;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.model.TicketType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,12 +45,12 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 구분 테스트")
     public void typeTest(){
         List<Integer> autoTicket = Arrays.asList(1,2,3,4,5,6);
-        LottoTicket lottoTicket = new LottoTicket(autoTicket);
-        assertThat(lottoTicket.getTicketType()).isEqualTo("AUTO");
+        LottoTicket lottoTicket = new LottoTicket(autoTicket, TicketType.AUTO);
+        assertThat(lottoTicket.getTicketType().getTicketTypeName()).isEqualTo("자동");
 
         String manualTicket = "1,2,3,4,5,6";
         LottoTicket mTicket = LottoTicket.of(manualTicket);
-        assertThat(mTicket.getTicketType()).isEqualTo("MANUAL");
+        assertThat(mTicket.getTicketType().getTicketTypeName()).isEqualTo("수동");
 
     }
 }

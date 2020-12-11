@@ -7,13 +7,20 @@ public class LottoTicket {
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
-    private static String ticketType = "AUTO";
+    private TicketType ticketType = TicketType.AUTO;
+
 
     private final List<Integer> ticketNumbers;
 
     public LottoTicket(List<Integer> ticketNumbers){
         checkNumbers(ticketNumbers);
         this.ticketNumbers = ticketNumbers;
+    }
+
+    public LottoTicket(List<Integer> ticketNumbers, TicketType ticketType){
+        checkNumbers(ticketNumbers);
+        this.ticketNumbers = ticketNumbers;
+        this.ticketType = ticketType;
 
     }
 
@@ -21,8 +28,7 @@ public class LottoTicket {
         List<Integer> manualLottos;
         List<String> strNumbers = Arrays.asList(Arrays.stream(manualNumbers.split(",")).map(String::trim).toArray(String[]::new));
         manualLottos = strNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
-        ticketType = "MANUAL";
-        return new LottoTicket(manualLottos);
+        return new LottoTicket(manualLottos, TicketType.MANUAL);
     }
 
     public void checkNumbers(List<Integer> lottoNumbers){
@@ -40,7 +46,8 @@ public class LottoTicket {
         return Collections.unmodifiableList(ticketNumbers);
     }
 
-    public String getTicketType(){
+    public TicketType getTicketType(){
         return ticketType;
     }
+
 }
