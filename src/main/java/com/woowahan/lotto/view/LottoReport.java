@@ -8,14 +8,12 @@ import com.woowahan.lotto.model.EarnType;
 import com.woowahan.lotto.model.Lotto;
 import com.woowahan.lotto.model.LottoResult;
 import com.woowahan.lotto.model.LottoResultType;
-import com.woowahan.lotto.model.Lottos;
 
 public class LottoReport {
 
-	public static String reportLottos(Lottos lottos) {
-		List<Lotto> allLottos = lottos.getLottos();
-		StringBuilder result = new StringBuilder(String.format(Message.MSG_PURCHASE_LOTTO_CNT, allLottos.size()));
-		for (Lotto lotto : allLottos) {
+	public static String reportLottos(List<Lotto> lottos) {
+		StringBuilder result = new StringBuilder(String.format(Message.MSG_PURCHASE_LOTTO_CNT, lottos.size()));
+		for (Lotto lotto : lottos) {
 			result.append(lotto.getNumbers())
 				.append(Message.MSG_LINE_BREAK);
 		}

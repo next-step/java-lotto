@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import com.woowahan.lotto.constant.Message;
 import com.woowahan.lotto.model.Lotto;
+import com.woowahan.lotto.model.LottoNo;
 import com.woowahan.lotto.model.LottoResult;
 import com.woowahan.lotto.model.LottoResultType;
 import com.woowahan.lotto.model.Lottos;
@@ -27,7 +28,7 @@ class LottoReportTest {
 	@Test
 	void reportLottos() {
 		Lottos lottos = Lottos.purchase(PurchaseInput.of("10000"));
-		String result = LottoReport.reportLottos(lottos);
+		String result = LottoReport.reportLottos(lottos.getLottos());
 
 		assertThat(result).contains(String.format(Message.MSG_PURCHASE_LOTTO_CNT, 10));
 	}
@@ -37,9 +38,9 @@ class LottoReportTest {
 	@MethodSource("argReportLottoResult")
 	void reportLottoResult(WinNumbers input) {
 		List<Lotto> lottos = Arrays.asList(
-			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-			Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)),
-			Lotto.of(Arrays.asList(21, 22, 23, 24, 25, 26))
+			Lotto.of(Arrays.asList(LottoNo.of(1), LottoNo.of(2), LottoNo.of(3), LottoNo.of(4), LottoNo.of(5), LottoNo.of(6))),
+			Lotto.of(Arrays.asList(LottoNo.of(11), LottoNo.of(12), LottoNo.of(13), LottoNo.of(14), LottoNo.of(15), LottoNo.of(16))),
+			Lotto.of(Arrays.asList(LottoNo.of(21), LottoNo.of(22), LottoNo.of(23), LottoNo.of(24), LottoNo.of(25), LottoNo.of(26)))
 		);
 		LottoResult lottoResult = LottoResult.analyze(input, lottos);
 		Map<LottoResultType, Integer> results = lottoResult.getResults();
