@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.ValidationChecker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,19 +14,22 @@ public class LottoAdminTest {
     @Test
     @DisplayName("1등 당첨 test")
     void firstWinningTest() {
-        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(6,5,4,3,2,1)))).isEqualTo(Rank.FIRST);
+        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(6,5,4,3,2,1))))
+                .isEqualTo(Rank.FIRST);
     }
 
     @Test
     @DisplayName("3등 당첨 test")
     void thirdWinningTest() {
-        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(11,5,9,3,8,1)))).isEqualTo(Rank.FORTH);
+        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(11,5,9,3,8,1))))
+                .isEqualTo(Rank.FORTH);
     }
 
     @Test
     @DisplayName("미당첨 test")
     void notWinningTest() {
-        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(11,43,9,26,8,15)))).isEqualTo(Rank.MISS);
+        assertThat(lottoAdmin.calculateRank(new Lotto(Arrays.asList(11,43,9,26,8,15))))
+                .isEqualTo(Rank.MISS);
     }
 
     @Test

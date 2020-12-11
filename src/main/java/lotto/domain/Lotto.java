@@ -1,32 +1,56 @@
 package lotto.domain;
 
 import lotto.utils.ValidationChecker;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class Lotto {
     private static final int LOTTO_NUMS = 6;
-    private List<Integer> nums;
+    private static final String DELIMITER = ", ";
+    private Set<Number> nums;
+    private List<Number> candidateNumbers = Number.initialNumber();
 
     public Lotto() {
-        List<Integer> nums = Numbers.getNumbers();
-        shuffleAndSort(nums);
+        this.nums = shuffleAndSort();
     }
 
-    public Lotto(List<Integer> nums) {
-        ValidationChecker.checkValidNumber(nums);
-        shuffleAndSort(nums);
+    public Lotto(List<Integer> inputNums) {
+        candidateNumbers = inputNums.stream()
+                            .map(number -> Number.of(number)).collect(Collectors.toList());
+        this.nums = shuffleAndSort();
     }
 
-    private void shuffleAndSort(List<Integer> nums) {
-        Collections.shuffle(nums);
-        this.nums = nums.stream().limit(LOTTO_NUMS).collect(Collectors.toList());
-        Collections.sort(this.nums);
+    public Lotto(String inputNums) {
+        candidateNumbers = splitLotto(inputNums);
+        this.nums = shuffleAndSort();
     }
 
-    public List<Integer> getNums() {
+    private List<Number> splitLotto(String nums) {
+        ValidationChecker.isEmptyOrNull(nums);
+        return Arrays.stream(nums.split(DELIMITER))
+                .map(num -> Number.of(num)).collect(Collectors.toList());
+    }
+
+    private Set<Number> shuffleAndSort() {
+        Collections.shuffle(candidateNumbers);
+        Collections.sort(candidateNumbers.stream()
+                .limit(LOTTO_NUMS).collect(Collectors.toList()), new Comparator<Number>() {
+            @Override
+            public int compare(Number o1, Number o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        return new HashSet<>(candidateNumbers.stream().collect(Collectors.toSet()));
+    }
+
+    public long getMatchNums(Lotto lotto) {
+        return lotto.nums.stream().
+                filter(n -> this.nums.contains(n)).count();
+    }
+
+    public Set<Number> getNums() {
         return nums;
     }
 
@@ -42,9 +66,4 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(nums);
     }
-
-    public boolean contains(int num) {
-        return nums.contains(num);
-    }
-
 }
