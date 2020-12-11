@@ -15,7 +15,7 @@ public class Parser {
     public static final int EXPRESSION_GROUP = 2;
     public static final int SEPARATOR_GROUP = 1;
 
-    public List<Integer> parseToNumbers(String exp) {
+    public static List<Integer> parseToNumbers(String exp) {
         if (Validator.isBlank(exp)) {
             return returnNone();
         }
@@ -28,13 +28,13 @@ public class Parser {
         return splitWhenNumberIsNaturalNumberList(exp);
     }
 
-    private List<Integer> returnNone() {
+    private static List<Integer> returnNone() {
         final List<Integer> numbers = new ArrayList<>();
         numbers.add(NONE);
         return numbers;
     }
 
-    protected List<Integer> splitWhenNumberIsNaturalNumber(final String exp) {
+    protected static List<Integer> splitWhenNumberIsNaturalNumber(final String exp) {
         if (Validator.isNaturalNumber(exp)) {
             final List<Integer> numbers = new ArrayList<>();
             numbers.add(parseInt(exp));
@@ -44,17 +44,17 @@ public class Parser {
         throw new RuntimeException(TEXT_ERR_INVALID_STRING);
     }
 
-    private int parseInt(final String exp) {
+    private static int parseInt(final String exp) {
         return Integer.parseInt(exp);
     }
 
-    protected List<Integer> splitWhenNumberIsNaturalNumberList(final String exp) {
+    protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String exp) {
         final Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(exp);
 
         if (matcher.find()) {
             return Arrays.stream(matcher.group(EXPRESSION_GROUP)
                 .split(matcher.group(SEPARATOR_GROUP)))
-                .map(this::parseInt)
+                .map(Parser::parseInt)
                 .collect(Collectors.toList());
         }
 
@@ -63,7 +63,7 @@ public class Parser {
 
         return expList.stream()
             .filter(Validator::isNaturalNumber)
-            .map(this::parseInt)
+            .map(Parser::parseInt)
             .collect(Collectors.toList());
     }
 }

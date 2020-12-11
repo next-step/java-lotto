@@ -22,9 +22,7 @@ class ParserTest {
     @MethodSource("invalidString")
     @DisplayName("빈 문자열을 제공할 시 0을 반환하는지 확인하는 테스트")
     void checkReturnValueIsZeroWhenGivenInputStrIsBlank(final String exp) {
-        final Parser parser = new Parser();
-
-        final List<Integer> numbers = parser.parseToNumbers(exp);
+        final List<Integer> numbers = Parser.parseToNumbers(exp);
 
         final int onlyOne = 1;
         assertEquals(numbers.size(), onlyOne);
@@ -36,9 +34,7 @@ class ParserTest {
     @Test
     @DisplayName("Null 제공할 시 0을 반환하는지 확인하는 테스트")
     void checkReturnValueIsZeroWhenGivenNull() {
-        final Parser parser = new Parser();
-
-        final List<Integer> numbers = parser.parseToNumbers(null);
+        final List<Integer> numbers = Parser.parseToNumbers(null);
 
         final int onlyOne = 1;
         assertEquals(numbers.size(), onlyOne);
@@ -59,9 +55,7 @@ class ParserTest {
     @ValueSource(strings = {"1", "2", "8", "9"})
     @DisplayName("입력 문자열이 1자리 자연수일 때 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenGivenNaturalNumber(final String exp) {
-        final Parser parser = new Parser();
-
-        final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumber(exp);
+        final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumber(exp);
         final int expectedValue = Integer.parseInt(exp);
 
         assertEquals(numbers.get(0), expectedValue);
@@ -72,9 +66,7 @@ class ParserTest {
     @DisplayName("입력 문자열이 1자리 자연수가 아닐 때 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
         assertThatThrownBy(() -> {
-            final Parser parser = new Parser();
-
-            final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumber(exp);
+            final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumber(exp);
             final int expectedValue = Integer.parseInt(exp);
 
             assertEquals(numbers.get(0), expectedValue);
@@ -86,10 +78,9 @@ class ParserTest {
     @ValueSource(strings = {"1:2", "8,7", "1,2:3", "3:2,1", "4,5,6", "7:8:9"})
     @DisplayName("콤마, 콜론을 기준으로 잘라 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenSplitCommaAndColon(final String exp) {
-        final Parser parser = new Parser();
         final String[] splitStrings = exp.split(",|:");
 
-        final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumberList(exp);
+        final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumberList(exp);
 
         assertEquals(splitStrings.length, numbers.size());
 
@@ -108,8 +99,7 @@ class ParserTest {
             final String customDelimiter = matcher.group(1);
             final String[] tokens = matcher.group(2).split(customDelimiter);
 
-            Parser parser = new Parser();
-            final List<Integer> integers = parser.splitWhenNumberIsNaturalNumberList(exp);
+            final List<Integer> integers = Parser.splitWhenNumberIsNaturalNumberList(exp);
 
             for (int i = 0; i < integers.size(); i++) {
                 assertEquals(integers.get(i), Integer.parseInt(tokens[i]));
