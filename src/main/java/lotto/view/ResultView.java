@@ -54,7 +54,7 @@ public class ResultView {
     private static List<Rank> getSortedRanks() {
         return Arrays.stream(Rank.values())
                 .filter(Rank::isWinning)
-                .sorted(Comparator.comparing(Rank::getMatch))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
