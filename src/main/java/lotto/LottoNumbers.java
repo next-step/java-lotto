@@ -5,19 +5,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
-		verifyNumbersSize(lottoNumbers.size());
 		this.lottoNumbers = lottoNumbers.stream()
 			.sorted(LottoNumber::isGraterThanNumber).collect(Collectors.toList());
-	}
-
-	private void verifyNumbersSize(int size) {
-		if (size > MAX_LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException("로또 숫자는 6을 초과할수 없습니다.");
-		}
 	}
 
 	public boolean isEqualsNumberOfIndex(int index, LottoNumber lottoNumber) {
@@ -25,7 +17,11 @@ public class LottoNumbers {
 	}
 
 	public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
-		return lottoNumbers.contains(lottoNumber);
+		return this.lottoNumbers.contains(lottoNumber);
+	}
+
+	public int isContainsCount(LottoNumbers resultLottoNumbers) {
+		return (int) resultLottoNumbers.lottoNumbers.stream().filter(this::isContainsLottoNumber).count();
 	}
 
 	@Override
@@ -45,9 +41,5 @@ public class LottoNumbers {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
-	}
-
-	public int isContainsCount(LottoNumbers resultLottoNumbers) {
-		return (int) resultLottoNumbers.lottoNumbers.stream().filter(this::isContainsLottoNumber).count();
 	}
 }

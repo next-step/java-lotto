@@ -7,7 +7,7 @@ public class LottoResult {
 		this.rank = Rank.ofMatchesCount(matchesCount);
 	}
 
-	public Rank getRank() {
-		return rank;
+	public boolean isMatchesRank(Rank rank) {
+		return this.rank.equals(rank);
 	}
 }

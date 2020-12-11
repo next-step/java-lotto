@@ -6,29 +6,26 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoCompareTest {
+class LottoResultsTest {
 
 	@DisplayName("일치 수에 따라 등수를 가져온다")
 	@Test
 	void 로또_결과() {
 		LottoResult lottoResult = new LottoResult(6);
-		assertThat(lottoResult.getRank()).isEqualTo(Rank.WINNER);
+		assertThat(lottoResult.isMatchesRank(Rank.WINNER)).isTrue();
 	}
 
 	@DisplayName("로또 번호가 일치하는 수에 따라서 등수를 나타내는 기능 테스트")
 	@ParameterizedTest
 	@MethodSource("sortNumbers")
-	void 로또_등_TEST(LottoNumbers targetLotto, Rank rank) {
+	void 로또_등수_TEST(LottoNumbers targetLotto, Rank rank) {
 		LottoNumbers lastWeekLottoNumbers = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
-		assertThat(new LottoResult(targetLotto.isContainsCount(lastWeekLottoNumbers)).getRank()).isEqualTo(rank);
+		assertThat(new LottoResult(targetLotto.isContainsCount(lastWeekLottoNumbers)).isMatchesRank(rank)).isTrue();
 	}
 
 	public static Stream<Arguments> sortNumbers() {
@@ -39,4 +36,24 @@ class LottoCompareTest {
 			Arguments.of(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)), Rank.FIVE)
 		);
 	}
+
+	@DisplayName("지난 주 당첨 번호와 비교해서 예측하는 당첨 통계와 일치하는지?")
+	@Test
+	void 당첨_통계_테스트() {
+		LottoNumbers lastWeekLottoNumber = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
+
+		LottoTicket lottoTicket = new LottoTicket();
+		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43)));
+		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 41, 42, 43)));
+		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)));
+
+
+		LottoResults lottoResults = lottoTicket.generateWinningResult(lastWeekLottoNumber);
+
+		assertThat(lottoResults.askCountOfRank(Rank.FOURTH)).isEqualTo(1);
+		assertThat(lottoResults.askCountOfRank(Rank.WINNER)).isEqualTo(1);
+		assertThat(lottoResults.askCountOfRank(Rank.FIVE)).isEqualTo(2);
+	}
+
 }

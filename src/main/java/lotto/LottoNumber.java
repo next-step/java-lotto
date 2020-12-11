@@ -3,22 +3,10 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
-	public static final int MAX_LOTTO_NUMBER = 45;
 	private final int number;
 
 	public LottoNumber(int number) {
-		checkRangeOfNumber(number);
 		this.number = number;
-	}
-
-	private void checkRangeOfNumber(int number) {
-		if (verifyNumber(number)) {
-			throw new IllegalArgumentException("기준치를 초과하였습니다.");
-		}
-	}
-
-	private boolean verifyNumber(int number) {
-		return number > MAX_LOTTO_NUMBER;
 	}
 
 	public int isGraterThanNumber(LottoNumber targetNumber) {

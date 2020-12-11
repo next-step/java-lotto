@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -20,7 +19,7 @@ public class LottoNumberTest {
 	@DisplayName("로또 번호는 1~45까지 생성 가능 하다.")
 	@Test
 	void 로또_번호_생성_테스트() {
-		assertThatThrownBy(() -> new LottoNumber(46))
+		assertThatThrownBy(() -> GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 4, 5, 46)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("기준치를 초과하였습니다.");
 	}
