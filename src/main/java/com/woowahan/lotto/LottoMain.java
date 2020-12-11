@@ -11,7 +11,7 @@ import com.woowahan.lotto.view.ResultView;
 public class LottoMain {
 
 	public static void main(String[] args) {
-		PurchaseInput purchaseInput = PurchaseInput.of(InputView.getPurchaseAmount());
+		PurchaseInput purchaseInput = PurchaseInput.of(InputView.getPurchaseAmount(), InputView.getManualNumbers());
 		Lottos lottos = Lottos.purchase(purchaseInput);
 		ResultView.printResult(LottoReport.reportLottos(lottos.getLottos()));
 		WinNumbers winNumbers = WinNumbers.of(InputView.getWinNumber(), InputView.getBonusNumber());

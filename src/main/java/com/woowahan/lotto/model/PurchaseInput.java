@@ -1,26 +1,58 @@
 package com.woowahan.lotto.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.woowahan.lotto.constant.Message;
 import com.woowahan.lotto.util.ValidationUtil;
 
 public class PurchaseInput {
+	private static final String DELIMITER_WIN_NUMBER = ",";
 
 	private final int purchaseAmount;
+	private final List<List<LottoNo>> manualNumbers = new ArrayList<>();
 
-	private PurchaseInput(String purchaseAmount) {
-		validate(purchaseAmount);
+	private PurchaseInput(String purchaseAmount, List<String> stringLottos) {
+		validatePurchaseAmount(purchaseAmount);
 		this.purchaseAmount = Integer.parseInt(purchaseAmount);
+		for (String stringLotto : stringLottos) {
+			this.manualNumbers.add(validateStringLotto(stringLotto));
+		}
 	}
 
-	public static PurchaseInput of(String purchaseAmount) {
-		return new PurchaseInput(purchaseAmount);
+	private List<LottoNo> validateStringLotto(String stringLotto) {
+		if (ValidationUtil.isNullOrEmpty(stringLotto)) {
+			throw new IllegalArgumentException(Message.MSG_NULL_OR_EMPTY);
+		}
+		List<String> result = parseStringLotto(stringLotto);
+		if (result.size() != Lotto.LOTTO_NUMBER_LENGTH
+			|| ValidationUtil.hasNotNumber(result)
+			|| ValidationUtil.hasWrongNumber(result)) {
+			throw new IllegalArgumentException(Message.MSG_WRONG_NUMBER);
+		}
+		return result.stream()
+			.map(numberString -> LottoNo.of(Integer.parseInt(numberString)))
+			.collect(Collectors.toList());
 	}
 
-	private void validate(String value) {
+	private List<String> parseStringLotto(String input) {
+		String[] splitNames = input.split(DELIMITER_WIN_NUMBER);
+		return Arrays.stream(splitNames)
+			.map(String::trim)
+			.collect(Collectors.toList());
+	}
+
+	public static PurchaseInput of(String purchaseAmount, List<String> stringLottos) {
+		return new PurchaseInput(purchaseAmount, stringLottos);
+	}
+
+	private void validatePurchaseAmount(String value) {
 		if (ValidationUtil.isNotNumber(value)
 			|| ValidationUtil.isZeroOrNegative(value)
 			|| ValidationUtil.existRemainder(Integer.parseInt(value), Lotto.LOTTO_PRICE)) {
-			throw new IllegalArgumentException(Message.MSG_WRONG_NUMBER);
+			throw new IllegalArgumentException(Message.MSG_WRONG_AMOUNT);
 		}
 	}
 

@@ -47,7 +47,7 @@ public class WinNumbers {
 		if (result.size() != Lotto.LOTTO_NUMBER_LENGTH
 			|| ValidationUtil.hasNotNumber(result)
 			|| ValidationUtil.hasWrongNumber(result)) {
-			throw new IllegalArgumentException(Message.MSG_WRONG_WIN_NUMBER);
+			throw new IllegalArgumentException(Message.MSG_WRONG_NUMBER);
 		}
 		return result;
 	}

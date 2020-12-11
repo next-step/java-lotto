@@ -54,7 +54,7 @@ class WinNumbersTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				WinNumbers.of(winNumbers, bonusNumber);
-			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
+			}).withMessage(Message.MSG_WRONG_NUMBER);
 	}
 
 	public static Stream<Arguments> argOfLength() {
@@ -71,7 +71,7 @@ class WinNumbersTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				WinNumbers.of(winNumbers, bonusNumber);
-			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
+			}).withMessage(Message.MSG_WRONG_NUMBER);
 	}
 
 	public static Stream<Arguments> argOfHasNotNumber() {
@@ -89,7 +89,7 @@ class WinNumbersTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				WinNumbers.of(winNumbers, bonusNumber);
-			}).withMessage(Message.MSG_WRONG_WIN_NUMBER);
+			}).withMessage(Message.MSG_WRONG_NUMBER);
 	}
 
 	public static Stream<Arguments> argOfHasWrongNumber() {
