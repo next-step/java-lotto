@@ -11,8 +11,8 @@ public class WinNumbers {
 
 	private static final String DELIMITER_WIN_NUMBER = ",";
 
-	private List<LottoNo> numbers;
-	private LottoNo bonusNumber;
+	private final List<LottoNo> numbers;
+	private final LottoNo bonusNumber;
 
 	public WinNumbers(String winNumbers, String bonusNumber) {
 		List<String> result = validateWinNumber(winNumbers);

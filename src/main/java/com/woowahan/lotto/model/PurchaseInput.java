@@ -5,7 +5,7 @@ import com.woowahan.lotto.util.ValidationUtil;
 
 public class PurchaseInput {
 
-	private int purchaseAmount;
+	private final int purchaseAmount;
 
 	private PurchaseInput(String purchaseAmount) {
 		validate(purchaseAmount);
