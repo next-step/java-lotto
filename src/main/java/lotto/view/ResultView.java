@@ -18,9 +18,13 @@ public class ResultView {
         return winningStatics;
     }
 
-    public void printNumberOfLottos(Lotto lotto, int manualCount){
+/*    public void printNumberOfLottos(Lotto lotto, int manualCount){
         int autoCount = lotto.getLottoTickets().getTicketCount() - manualCount;
         System.out.println("수동으로"+autoCount+"장, 자동으로 "+manualCount+"개를 구매했습니다.");
+
+    }*/
+    public void printNumberOfLottos(Long autoCount, int manualCount){
+        System.out.println("수동으로"+manualCount+"장, 자동으로 "+autoCount+"개를 구매했습니다.");
 
     }
 
