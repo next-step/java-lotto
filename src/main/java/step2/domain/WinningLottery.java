@@ -40,9 +40,13 @@ public class WinningLottery {
     private int convertNumber(String number) {
         int convertedNumber = Integer.parseInt(number);
 
-        if (convertedNumber >= 1 && convertedNumber <= 45) {
+        if (convertedNumber < 1 || convertedNumber > 45) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_INVALID_RANGE);
         }
         return convertedNumber;
+    }
+
+    public Lottery getWinningLottery() {
+        return this.winningLottery;
     }
 }
