@@ -33,6 +33,7 @@ public class InputView {
     public void showInputWinningMessage() {
         System.out.println();
         System.out.println(Constants.INPUT_WINNING_NUMBERS_MSG);
+        scanner.nextLine();
     }
 
     /**
@@ -40,6 +41,6 @@ public class InputView {
      * @return 사용자에게 입력받은 당첨 번호 배열
      */
     public String[] getWinningNumbers() {
-        return scanner.nextLine().split(Constants.COMMA_DELIMITER);
+        return scanner.nextLine().replaceAll("\\s+","").split(",");
     }
 }
