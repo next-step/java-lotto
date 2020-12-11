@@ -4,8 +4,6 @@ import java.util.List;
 
 public class ValidationChecker {
     private static final int ZERO = 0;
-    private static final int START_NUM = 1;
-    private static final int END_NUM = 45;
 
     private ValidationChecker() {
     }
@@ -34,13 +32,5 @@ public class ValidationChecker {
         } catch (NumberFormatException nfe) {
             throw new RuntimeException("문자가 입력되었습니다.");
         }
-    }
-
-    public static void checkValidNumber(List<Integer> nums) {
-        nums.stream().forEach(num -> {
-            if (num < START_NUM || num > END_NUM) {
-                throw new RuntimeException("로또 범위를 초과한 수가 입력되었습니다.");
-            }
-        });
     }
 }

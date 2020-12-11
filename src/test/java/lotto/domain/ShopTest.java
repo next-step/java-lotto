@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShopTest {
@@ -10,7 +12,7 @@ public class ShopTest {
     @Test
     @DisplayName("로또 구매 test")
     void purchaseLottoTest() {
-        Lottos purchasedLottos = Shop.buyLottos("13000");
-        assertThat(purchasedLottos.getLottos().size()).isEqualTo(13);
+        List<Lotto> purchasedLottos = Shop.buyLottos("13000");
+        assertThat(purchasedLottos.size()).isEqualTo(13);
     }
 }

@@ -17,15 +17,11 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank of(int matchNums) {
+    public static Rank of(long matchNums) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchNums == matchNums)
                 .findAny()
                 .orElse(MISS);
-    }
-
-    public int getMatchNums() {
-        return matchNums;
     }
 
     public int getWinningMoney() {
