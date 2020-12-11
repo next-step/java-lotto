@@ -18,8 +18,8 @@ public class Result {
         return result;
     }
 
-    public double getTotalWinningPrice() {
-        return result.stream().mapToDouble(rank -> rank.getWinningMoney()).sum();
+    public long getTotalWinningPrice() {
+        return result.stream().mapToLong(rank -> rank.getWinningMoney()).sum();
     }
 
     public String getWinningRatio(long purchasedPrice) {
