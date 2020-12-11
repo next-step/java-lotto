@@ -28,9 +28,10 @@ public class Lotto {
                 .map(Number::of).collect(Collectors.toSet());
     }
 
-    public Rank calculateRank(Lotto lotto) {
+    public Rank calculateRank(Lotto lotto, Number bounsNum) {
+        boolean isBonus = lotto.nums.contains(bounsNum);
         lotto.nums.retainAll(this.nums);
-        return Rank.of(lotto.nums.size());
+        return Rank.of(lotto.nums.size(), isBonus);
     }
 
     public Set<Number> getNums() {
