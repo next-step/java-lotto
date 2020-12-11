@@ -13,7 +13,7 @@ public class LottoMain {
 	public static void main(String[] args) {
 		PurchaseInput purchaseInput = PurchaseInput.of(InputView.getPurchaseAmount(), InputView.getManualNumbers());
 		Lottos lottos = Lottos.purchase(purchaseInput);
-		ResultView.printResult(LottoReport.reportLottos(lottos.getLottos()));
+		ResultView.printResult(LottoReport.reportLottos(lottos.getLottos(), purchaseInput.getManualLottoCount()));
 		WinNumbers winNumbers = WinNumbers.of(InputView.getWinNumber(), InputView.getBonusNumber());
 		LottoResult result = LottoResult.analyze(winNumbers, lottos.getLottos());
 		ResultView.printResult(LottoReport.reportLottoResult(result));

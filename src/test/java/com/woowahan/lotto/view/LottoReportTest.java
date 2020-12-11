@@ -24,13 +24,15 @@ import com.woowahan.lotto.model.WinNumbers;
 
 class LottoReportTest {
 
-	@DisplayName("reportLottos 메소드를 통해 10000원의 입력값을 전달해만든 Lottos객체를 전달하면 '10개를 구매했습니다.' 메세지가 포함된다.")
+	@DisplayName("reportLottos 메소드를 통해 10000원의 입력값을 전달해만든 Lottos객체를 전달하면 '수동으로 3장, 자동으로 7개를 구매했습니다.\n.' 메세지가 포함된다.")
 	@Test
 	void reportLottos() {
+		PurchaseInput purchaseInput = PurchaseInput.of("10000", Arrays.asList("1,2,3,4,5,6", "40,41,42,43,44,45"));
 		Lottos lottos = Lottos.purchase(PurchaseInput.of("10000", Arrays.asList("1,2,3,4,5,6", "40,41,42,43,44,45")));
-		String result = LottoReport.reportLottos(lottos.getLottos());
+		int manualCnt = purchaseInput.getManualLottoCount();
+		String result = LottoReport.reportLottos(lottos.getLottos(), manualCnt);
 
-		assertThat(result).contains(String.format(Message.MSG_PURCHASE_LOTTO_CNT, 10));
+		assertThat(result).contains(String.format(Message.MSG_PURCHASE_LOTTO_CNT, manualCnt, 10 - manualCnt));
 	}
 
 	@DisplayName("reportLottoResult 당첨 통계 문자열을 얻을 수 있고, 3개 이상 매칭된 결과 리포트 값이 포함된다.")

@@ -11,8 +11,9 @@ import com.woowahan.lotto.model.LottoResultType;
 
 public class LottoReport {
 
-	public static String reportLottos(List<Lotto> lottos) {
-		StringBuilder result = new StringBuilder(String.format(Message.MSG_PURCHASE_LOTTO_CNT, lottos.size()));
+	public static String reportLottos(List<Lotto> lottos, int manualCount) {
+		StringBuilder result = new StringBuilder(
+			String.format(Message.MSG_PURCHASE_LOTTO_CNT, manualCount, lottos.size() - manualCount));
 		for (Lotto lotto : lottos) {
 			result.append(lotto.getNumbers())
 				.append(Message.MSG_LINE_BREAK);
