@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Parser {
     private static final int NONE = 0;
-    private static final String NUMBERS_SEPARATORS = ",|:";
+    private static final String DEFAULT_SEPARATORS = ",|:";
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final String TEXT_ERR_INVALID_STRING = "[error] : An invalid string was entered.";
     public static final int EXPRESSION_GROUP = 2;
@@ -52,18 +52,33 @@ public class Parser {
         final Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(exp);
 
         if (matcher.find()) {
-            return Arrays.stream(matcher.group(EXPRESSION_GROUP)
-                .split(matcher.group(SEPARATOR_GROUP)))
-                .map(Parser::parseInt)
-                .collect(Collectors.toList());
+            return parseToIntListFromMatcher(matcher);
         }
 
-        final List<String> expList = Arrays.stream(exp.split(NUMBERS_SEPARATORS))
+        final List<String> expList = Arrays.stream(exp.split(DEFAULT_SEPARATORS))
             .collect(Collectors.toList());
 
-        return expList.stream()
-            .filter(Validator::isNaturalNumber)
-            .map(Parser::parseInt)
+        return parserToIntListFromExpList(expList);
+    }
+
+    private static List<Integer> parseToIntListFromMatcher(final Matcher matcher) {
+        return Arrays.stream(matcher.group(EXPRESSION_GROUP)
+            .split(matcher.group(SEPARATOR_GROUP)))
+            .map(Parser::parseToIntOnlyNaturalNumber)
             .collect(Collectors.toList());
+    }
+
+    private static List<Integer> parserToIntListFromExpList(final List<String> expList) {
+        return expList.stream()
+            .map(Parser::parseToIntOnlyNaturalNumber)
+            .collect(Collectors.toList());
+    }
+
+    private static int parseToIntOnlyNaturalNumber(final String exp) {
+        if (Validator.isNaturalNumber(exp)) {
+            return Parser.parseInt(exp);
+        }
+
+        throw new RuntimeException(TEXT_ERR_INVALID_STRING);
     }
 }

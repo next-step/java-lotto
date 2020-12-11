@@ -91,6 +91,25 @@ class ParserTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"-1:2", "-8,-7", "-1,-2:-3"})
+    @DisplayName("음수가 포함된 표현식을 콤마, 콜론을 기준으로 자르는 경우를 확인하는 테스트")
+    void checkReturnListFromNegativeExpWhenSplitCommaAndColon(final String exp) {
+        final String[] splitStrings = exp.split(",|:");
+
+        assertThatThrownBy(() -> {
+            final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumberList(exp);
+
+            assertEquals(splitStrings.length, numbers.size());
+
+            for (int i = 0; i < numbers.size(); i++) {
+                int expectedNumber = Integer.parseInt(splitStrings[i]);
+                assertEquals(numbers.get(i), expectedNumber);
+            }
+        })
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//@\n4@5@6", "//!\n7!8!9", "//A\n1A2A3A4A5", "// \n1 2 3 4 5"})
     @DisplayName("원하는 식별자를 기준으로 잘라 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenSplitCustomRegex(final String exp) {
@@ -105,6 +124,26 @@ class ParserTest {
             for (int i = 0; i < integers.size(); i++) {
                 assertEquals(integers.get(i), Integer.parseInt(tokens[i]));
             }
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;-2;3", "//@\n-4@5@6", "//!\n7!8!-9", "//A\n-1A-2A-3A-4A-5", "// \n1 2 -3 4 -5"})
+    @DisplayName("음수가 포한된 수식을 원하는 식별자를 기준으로 자르는 경우를 확인하는 테스트")
+    void checkReturnListFromNegativeExpWhenSplitCustomRegex(final String exp) {
+        final Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(exp);
+
+        if (matcher.find()) {
+            assertThatThrownBy(() -> {
+                final String customDelimiter = matcher.group(1);
+                final String[] tokens = matcher.group(2).split(customDelimiter);
+
+                final List<Integer> integers = Parser.splitWhenNumberIsNaturalNumberList(exp);
+
+                for (int i = 0; i < integers.size(); i++) {
+                    assertEquals(integers.get(i), Integer.parseInt(tokens[i]));
+                }
+            }).isInstanceOf(RuntimeException.class);
         }
     }
 }
