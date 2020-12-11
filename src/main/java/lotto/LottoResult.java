@@ -12,7 +12,7 @@ public class LottoResult {
     }
 
     public void addPlace(LottoPlace place) {
-        placeCountMap.compute(place, (k, count) -> count == null || count == 0 ? 1 : count + 1);
+        placeCountMap.compute(place, (k, count) -> Utils.defaultIfNull(count) + 1);
     }
 
     public int getWinningPrize() {
@@ -27,8 +27,7 @@ public class LottoResult {
     }
 
     public int getWinnerPlaceCount(LottoPlace place) {
-        Integer count = placeCountMap.get(place);
-        return count == null ? 0 : count;
+        return placeCountMap.getOrDefault(place, 0);
     }
 
 }

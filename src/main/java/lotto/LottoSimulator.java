@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoSimulator {
 
-    private static final int LOTTO_GAME_PRICE = 1000;
+    public static final int LOTTO_GAME_PRICE = 1000;
 
     private LottoNumberGenerator numberGenerator;
     private List<LottoGame> boughtLottoGames;
@@ -27,13 +27,13 @@ public class LottoSimulator {
         return boughtLottoGames;
     }
 
-    public LottoResult getWinnerResult(List<Integer> winningNumbers) {
-        LottoGame.validateNumbers(winningNumbers);
+    public LottoResult getWinnerResult(List<LottoNumber> winningNumbers) {
+        LottoGame winningGame = new LottoGame(winningNumbers);
 
         LottoResult lottoResult = new LottoResult(cost);
 
         for (LottoGame lottoGame : boughtLottoGames) {
-            LottoPlace place = lottoGame.getMatchedPlace(winningNumbers);
+            LottoPlace place = lottoGame.getMatchedPlace(winningGame);
 
             lottoResult.addPlace(place);
         }

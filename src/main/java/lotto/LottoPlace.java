@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoPlace {
 
@@ -21,11 +23,18 @@ public enum LottoPlace {
         this.prize = prize;
     }
 
-    public static LottoPlace[] getWinnerPlaces() {
+    public static List<LottoPlace> getWinnerPlaces() {
         return Arrays.stream(values())
                 .filter(lottoPlace -> lottoPlace.place > 0)
                 .sorted(Comparator.comparingInt(lottoPlace -> lottoPlace.place))
-                .toArray(LottoPlace[]::new);
+                .collect(Collectors.toList());
+    }
+
+    public static LottoPlace findByNumMatchedOrNone(int numMatched) {
+        return Arrays.stream(values())
+                .filter(lottoPlace -> lottoPlace.getNumMatched() == numMatched)
+                .findFirst()
+                .orElse(LottoPlace.MATCHED_NONE);
     }
 
     public int getNumMatched() {
