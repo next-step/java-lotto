@@ -1,9 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -38,6 +36,12 @@ public class LottoTickets {
 
     public int getTicketCount() {
         return lottoTickets.size();
+    }
+
+    public Long getAutoTicketCount(){
+        return lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.getTicketType()
+                        .equals(TicketType.AUTO)).count();
     }
 
     public LottoTicket oneOf(int count) {

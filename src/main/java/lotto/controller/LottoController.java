@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.Rank;
-import lotto.model.WinningCheckor;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,7 +16,8 @@ public class LottoController {
         String[] manualNumbers = inputView.inputManualLottoNumber(manualCount);
 
         Lotto lotto = new Lotto(money,manualNumbers);
-        resultView.printNumberOfLottos(lotto, manualCount);
+        Long autoCount = lotto.getLottoTickets().getAutoTicketCount();
+        resultView.printNumberOfLottos(autoCount, manualCount);
         inputView.printLottoNumbers(lotto.getLottoTickets());
 
         Set<Integer> preNumbers = inputView.inputPreWinningNumber();
