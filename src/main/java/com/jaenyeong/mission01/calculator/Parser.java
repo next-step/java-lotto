@@ -11,23 +11,27 @@ public class Parser {
     private static final String TEXT_ERR_INVALID_STRING = "[error] : An invalid string was entered.";
 
     public List<Integer> parseToNumbers(String exp) {
-        final List<Integer> numbers = new ArrayList<>();
-
         if (Validator.isBlank(exp)) {
-            numbers.add(NONE);
-            return numbers;
+            return returnNone();
         }
 
         exp = exp.trim();
         if (Validator.isOneDigit(exp)) {
-            return splitWhenNumberIsNaturalNumber(exp, numbers);
+            return splitWhenNumberIsNaturalNumber(exp);
         }
 
         return splitWhenNumberIsNaturalNumberList(exp);
     }
 
-    protected List<Integer> splitWhenNumberIsNaturalNumber(final String exp, final List<Integer> numbers) {
+    private List<Integer> returnNone() {
+        final List<Integer> numbers = new ArrayList<>();
+        numbers.add(NONE);
+        return numbers;
+    }
+
+    protected List<Integer> splitWhenNumberIsNaturalNumber(final String exp) {
         if (Validator.isNaturalNumber(exp)) {
+            final List<Integer> numbers = new ArrayList<>();
             numbers.add(parseInt(exp));
             return numbers;
         }
@@ -35,7 +39,7 @@ public class Parser {
         throw new RuntimeException(TEXT_ERR_INVALID_STRING);
     }
 
-    private int parseInt(String exp) {
+    private int parseInt(final String exp) {
         return Integer.parseInt(exp);
     }
 

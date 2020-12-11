@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -59,9 +58,8 @@ class ParserTest {
     @DisplayName("입력 문자열이 1자리 자연수일 때 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenGivenNaturalNumber(final String exp) {
         final Parser parser = new Parser();
-        List<Integer> numbers = new ArrayList<>();
 
-        numbers = parser.splitWhenNumberIsNaturalNumber(exp, numbers);
+        final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumber(exp);
         final int expectedValue = Integer.parseInt(exp);
 
         assertEquals(numbers.get(0), expectedValue);
@@ -73,9 +71,8 @@ class ParserTest {
     void checkReturnListWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
         assertThatThrownBy(() -> {
             final Parser parser = new Parser();
-            List<Integer> numbers = new ArrayList<>();
 
-            numbers = parser.splitWhenNumberIsNaturalNumber(exp, numbers);
+            final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumber(exp);
             final int expectedValue = Integer.parseInt(exp);
 
             assertEquals(numbers.get(0), expectedValue);
@@ -88,7 +85,6 @@ class ParserTest {
     @DisplayName("콤마, 콜론을 기준으로 잘라 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenSplitCommaAndColon(final String exp) {
         final Parser parser = new Parser();
-
         final String[] splitStrings = exp.split(",|:");
 
         final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumberList(exp);
