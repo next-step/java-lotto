@@ -9,8 +9,11 @@ public class GenerateLottoNumber {
 
 	public static LottoNumbers manual(List<Integer> manualNumbers) {
 		verifyNumbers(manualNumbers);
+		return generateLottoNumbers(manualNumbers);
+	}
 
-		return manualNumbers.stream()
+	private static LottoNumbers generateLottoNumbers(List<Integer> targetNumbers) {
+		return targetNumbers.stream()
 			.map(LottoNumber::new)
 			.sorted(LottoNumber::isGraterThanNumber)
 			.collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
