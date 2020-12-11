@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-	public static final int MAX_NUMBERS_SIZE = 6;
+	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -15,7 +15,7 @@ public class LottoNumbers {
 	}
 
 	private void verifyNumbersSize(int size) {
-		if (size > MAX_NUMBERS_SIZE) {
+		if (size > MAX_LOTTO_NUMBERS_SIZE) {
 			throw new IllegalArgumentException("로또 숫자는 6을 초과할수 없습니다.");
 		}
 	}

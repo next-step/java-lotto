@@ -3,6 +3,7 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
+	public static final int MAX_LOTTO_NUMBER = 45;
 	private final int number;
 
 	public LottoNumber(int number) {
@@ -17,7 +18,7 @@ public class LottoNumber {
 	}
 
 	private boolean verifyNumber(int number) {
-		return number > 45;
+		return number > MAX_LOTTO_NUMBER;
 	}
 
 	public int isGraterThanNumber(LottoNumber targetNumber) {
