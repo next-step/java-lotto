@@ -14,6 +14,10 @@ public class LottoNumbers {
 		return numbers;
 	}
 
+	public boolean isContainsLottoNumber(LottoNumber baseNumber) {
+		return this.numbers.contains(baseNumber);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

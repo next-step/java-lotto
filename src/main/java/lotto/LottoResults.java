@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoResults {
@@ -8,6 +9,12 @@ public class LottoResults {
 
 	public LottoResults(List<LottoResult> results) {
 		this.results = results;
+	}
+
+	public static LottoResults compareTicketAndWinner(LottoTicket lottoTicket, LottoWinnerNumbers winningNumber) {
+		return new LottoResults(lottoTicket.stream()
+			.map(lottoNumbers -> LottoResult.compareNumbers(lottoNumbers, winningNumber))
+			.collect(Collectors.toList()));
 	}
 
 	public int askCountOfRank(Rank rankType) {

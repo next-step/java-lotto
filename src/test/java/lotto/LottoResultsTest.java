@@ -25,8 +25,8 @@ class LottoResultsTest {
 	@MethodSource("sortNumbers")
 	void 로또_등수_TEST(LottoNumbers targetLotto, Rank rank) {
 		LottoNumbers lastWeekLottoNumbers = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
-		LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(lastWeekLottoNumbers);
-		assertThat(lottoWinnerNumber.matchesResult(targetLotto).isMatchesRank(rank)).isTrue();
+		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(lastWeekLottoNumbers);
+		assertThat(LottoResult.compareNumbers(targetLotto, lottoWinnerNumbers).isMatchesRank(rank)).isTrue();
 	}
 
 	public static Stream<Arguments> sortNumbers() {
@@ -50,8 +50,8 @@ class LottoResultsTest {
 		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)));
 
 
-		LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(winnerNumber);
-		LottoResults lottoResults = lottoTicket.resultOfWinnerNumber(lottoWinnerNumber);
+		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber);
+		LottoResults lottoResults = LottoResults.compareTicketAndWinner(lottoTicket, lottoWinnerNumbers);
 
 		assertThat(lottoResults.askCountOfRank(Rank.FOURTH)).isEqualTo(1);
 		assertThat(lottoResults.askCountOfRank(Rank.WINNER)).isEqualTo(1);
