@@ -1,6 +1,8 @@
-package stringaddcalculator;
+package stringaddcalculator.view;
 
 import java.util.Scanner;
+
+import stringaddcalculator.domain.StringAddCalculator;
 
 /**
  * @author : byungkyu

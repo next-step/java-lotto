@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package stringaddcalculator.domain;
 
 /**
  * @author : byungkyu

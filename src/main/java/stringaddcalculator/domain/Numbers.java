@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package stringaddcalculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
