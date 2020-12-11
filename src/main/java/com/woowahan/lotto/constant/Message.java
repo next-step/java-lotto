@@ -17,4 +17,6 @@ public class Message {
 	public static final String MSG_WIN_BONUS_STATISTICS = "%d개 일치, 보너스 볼 일치(%d원) -%d개\n";
 	public static final String MSG_EARN_RATE = "총 수익률은 %.1f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 	public static final String MSG_REQUEST_LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+	public static final String MSG_REQUEST_MANUAL_CNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String MSG_REQUEST_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
 }
