@@ -10,24 +10,40 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
     private Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+    private Number bonus = Number.of(7);
 
     @Test
     @DisplayName("1등 당첨 test")
     void firstWinningTest() {
-        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(6,5,4,3,2,1))))
+        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(6,5,4,3,2,1)), bonus))
                 .isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("4등 당첨 test")
+    void fourthWinningTest() {
+        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(11,5,9,3,8,1)), bonus))
+                .isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("2등 당첨 test")
+    void secondWinningTest() {
+        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(7,5,4,3,2,1)), bonus))
+                .isEqualTo(Rank.SECOND);
     }
 
     @Test
     @DisplayName("3등 당첨 test")
     void thirdWinningTest() {
-        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(11,5,9,3,8,1))))
-                .isEqualTo(Rank.FORTH);
+        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(7,5,4,3,2,1)), bonus))
+                .isEqualTo(Rank.THIRD);
     }
+
     @Test
     @DisplayName("미당첨 test")
     void notWinningTest() {
-        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(11,43,9,26,8,15))))
+        assertThat(winningLotto.calculateRank(new Lotto(Arrays.asList(11,43,9,26,8,15)), bonus))
                 .isEqualTo(Rank.MISS);
     }
 
