@@ -67,14 +67,14 @@ public class WinningLottoTest {
     @DisplayName("보너스 번호가 맞는 지 확인할 수 있다.")
     @ParameterizedTest
     @CsvSource(value = {"6,false", "7,true", "8,false"})
-    void isBonus(int value, boolean expected) {
+    void matchBonus(int value, boolean expected) {
         // given
         LottoNumber bonus = LottoNumber.valueOf(value);
 
         // when
-        boolean isBonus = winningLotto.isBonus(bonus);
+        boolean matchBonus = winningLotto.matchBonus(bonus);
 
         // then
-        assertThat(isBonus).isEqualTo(expected);
+        assertThat(matchBonus).isEqualTo(expected);
     }
 }

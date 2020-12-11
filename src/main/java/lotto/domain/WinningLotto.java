@@ -25,7 +25,7 @@ public class WinningLotto {
         return winningTicket.contains(lottoNumber);
     }
 
-    public boolean isBonus(final LottoNumber bonus) {
+    public boolean matchBonus(final LottoNumber bonus) {
         return this.bonus.equals(bonus);
     }
 }
