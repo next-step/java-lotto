@@ -65,18 +65,19 @@ public class LottoTicketTest {
         assertThat(contains).isEqualTo(expected);
     }
 
-    @DisplayName("당첨 로또 번호와 비교해서 등수를 구할 수 있다.")
+    @DisplayName("당첨 로또와 비교해서 등수를 구할 수 있다.")
     @ParameterizedTest
     @CsvSource(value = {
             "FIRST,1,2,3,4,5,6",
             "SECOND,2,3,4,5,6,7",
-            "THIRD,3,4,5,6,7,8,",
-            "FOURTH,4,5,6,7,8,9",
+            "THIRD,2,3,4,5,6,8",
+            "FOURTH,3,4,5,6,7,8,",
+            "FIFTH,4,5,6,7,8,9",
             "UN_RANK,5,6,7,8,9,10",
     })
     void match(String expected, int num1, int num2, int num3, int num4, int num5, int num6) {
         // given
-        LottoTicket winning = lottoTicket;
+        WinningLotto winningLotto = WinningLotto.of(lottoTicket, LottoNumber.valueOf(7));
         LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(
                 LottoNumber.valueOf(num1),
                 LottoNumber.valueOf(num2),
@@ -87,6 +88,6 @@ public class LottoTicketTest {
         ));
 
         // when / then
-        assertThat(lottoTicket.match(winning)).isEqualTo(Rank.valueOf(expected));
+        assertThat(lottoTicket.match(winningLotto)).isEqualTo(Rank.valueOf(expected));
     }
 }

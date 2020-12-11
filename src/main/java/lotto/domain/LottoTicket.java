@@ -32,11 +32,13 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Rank match(final LottoTicket winning) {
+    public Rank match(final WinningLotto winningLotto) {
         int matchCount = (int) lottoNumbers.stream()
-                .filter(winning::contains)
+                .filter(winningLotto::contains)
                 .count();
-        return Rank.countOf(matchCount);
+        boolean matchBonus = lottoNumbers.stream()
+                .anyMatch(winningLotto::matchBonus);
+        return Rank.countOf(matchCount, matchBonus);
     }
 
     public List<LottoNumber> getLottoNumbers() {
