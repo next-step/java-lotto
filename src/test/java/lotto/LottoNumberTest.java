@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,11 +43,6 @@ public class LottoNumberTest {
 		LottoNumbers targetLottoNumbers = GenerateLottoNumber.manual(targetList);
 		LottoNumbers resultLottoNumbers = GenerateLottoNumber.manual(resultList);
 		assertThat(targetLottoNumbers).isEqualTo(resultLottoNumbers);
-
-		IntStream.range(0, targetList.size()).forEach(i -> {
-			assertThat(targetLottoNumbers.isEqualsNumberOfIndex(i, new LottoNumber(i + 1))).isTrue();
-			assertThat(resultLottoNumbers.isEqualsNumberOfIndex(i, new LottoNumber(i + 1))).isTrue();
-		});
 	}
 
 	public static Stream<Arguments> sortNumbers() {

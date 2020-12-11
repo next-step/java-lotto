@@ -5,23 +5,19 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-	private final List<LottoNumber> lottoNumbers;
+	private final List<LottoNumber> numbers;
 
-	public LottoNumbers(List<LottoNumber> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers.stream()
+	public LottoNumbers(List<LottoNumber> numbers) {
+		this.numbers = numbers.stream()
 			.sorted(LottoNumber::isGraterThanNumber).collect(Collectors.toList());
 	}
 
-	public boolean isEqualsNumberOfIndex(int index, LottoNumber lottoNumber) {
-		return this.lottoNumbers.get(index).equals(lottoNumber);
-	}
-
 	public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
-		return this.lottoNumbers.contains(lottoNumber);
+		return this.numbers.contains(lottoNumber);
 	}
 
-	public int isContainsCount(LottoNumbers resultLottoNumbers) {
-		return (int) resultLottoNumbers.lottoNumbers.stream().filter(this::isContainsLottoNumber).count();
+	public int isContainsCount(LottoNumbers winningNumber) {
+		return (int) winningNumber.numbers.stream().filter(this::isContainsLottoNumber).count();
 	}
 
 	@Override
@@ -30,8 +26,8 @@ public class LottoNumbers {
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoNumbers that = (LottoNumbers) o;
 
-		for (LottoNumber element : that.lottoNumbers) {
-			if (!this.lottoNumbers.contains(element)) {
+		for (LottoNumber element : that.numbers) {
+			if (!this.numbers.contains(element)) {
 				return false;
 			}
 		}
@@ -40,6 +36,6 @@ public class LottoNumbers {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lottoNumbers);
+		return Objects.hash(numbers);
 	}
 }
