@@ -19,8 +19,16 @@ public class WinningLottery {
 
     private List<Integer> convertToInteger(String[] winningNumbers) {
         return Arrays.stream(winningNumbers)
-                    .map(Integer::parseInt)
+                    .map(this::convertNumber)
                     .collect(Collectors.toList());
     }
 
+    private int convertNumber(String number) {
+        int convertedNumber = Integer.parseInt(number);
+
+        if (convertedNumber >= 1 && convertedNumber <= 45) {
+            throw new IllegalArgumentException(Constants.WINNING_NUMBER_INVALID_RANGE);
+        }
+        return convertedNumber;
+    }
 }

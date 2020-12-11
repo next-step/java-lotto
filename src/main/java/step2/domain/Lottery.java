@@ -13,6 +13,10 @@ public class Lottery {
         Util.getShuffled(selectedNumbers);
     }
 
+    public Lottery(List<Integer> winningNumber) {
+        this.selectedNumbers = winningNumber;
+    }
+
     public List<Integer> getSelectedNumbers() {
         return this.selectedNumbers;
     }
