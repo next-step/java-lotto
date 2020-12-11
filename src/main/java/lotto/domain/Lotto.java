@@ -1,58 +1,40 @@
 package lotto.domain;
 
-import lotto.utils.ValidationChecker;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class Lotto {
-    private static final int LOTTO_NUMS = 6;
+
     private static final String DELIMITER = ", ";
     private Set<Number> nums;
-    private List<Number> candidateNumbers = Number.initialNumber();
 
     public Lotto() {
-        this.nums = shuffleAndSort();
+        this.nums = Number.initialNumber();
     }
 
     public Lotto(List<Integer> inputNums) {
-        candidateNumbers = inputNums.stream()
-                            .map(number -> Number.of(number)).collect(Collectors.toList());
-        this.nums = shuffleAndSort();
+        this.nums = inputNums.stream()
+                            .map(Number::of)
+                            .collect(Collectors.toSet());
     }
 
     public Lotto(String inputNums) {
-        candidateNumbers = splitLotto(inputNums);
-        this.nums = shuffleAndSort();
+        this.nums = splitLotto(inputNums);
     }
 
-    private List<Number> splitLotto(String nums) {
-        ValidationChecker.isEmptyOrNull(nums);
+    private Set<Number> splitLotto(String nums) {
         return Arrays.stream(nums.split(DELIMITER))
-                .map(num -> Number.of(num)).collect(Collectors.toList());
+                .map(Number::of).collect(Collectors.toSet());
     }
 
-    private Set<Number> shuffleAndSort() {
-        Collections.shuffle(candidateNumbers);
-        candidateNumbers = candidateNumbers.stream()
-                .limit(LOTTO_NUMS).collect(Collectors.toList());
-        Collections.sort(candidateNumbers, new Comparator<Number>() {
-            @Override
-            public int compare(Number o1, Number o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        return new HashSet<>(candidateNumbers.stream().collect(Collectors.toSet()));
+    public Rank calculateRank(Lotto lotto) {
+        lotto.nums.retainAll(this.nums);
+        return Rank.of(lotto.nums.size());
     }
 
-    public long getMatchNums(Lotto lotto) {
-        return lotto.nums.stream().
-                filter(n -> this.nums.contains(n)).count();
-    }
-
-    public List<Number> getNumbers() {
-        return candidateNumbers;
+    public Set<Number> getNums() {
+        return nums;
     }
 
     @Override
