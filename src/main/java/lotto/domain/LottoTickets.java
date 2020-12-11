@@ -17,9 +17,9 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public List<Rank> match(final LottoTicket winning) {
+    public List<Rank> match(final WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.match(winning))
+                .map(lottoTicket -> lottoTicket.match(winningLotto))
                 .collect(Collectors.toList());
     }
 
