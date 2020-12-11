@@ -12,27 +12,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("주어진 문자열을 구분자를 사용해 숫자 리스트로 파싱하는 Parser 클래스 테스트")
 class ParserTest {
-
-    @ParameterizedTest
-    @MethodSource("invalidString")
-    @DisplayName("빈 문자열을 제공할 시 true 반환 테스트")
-    void checkReturnListSizeWhenGivenInputStrIsBlank(final String exp) {
-        final Parser parser = new Parser();
-
-        assertTrue(parser.isBlank(exp));
-    }
-
-    @Test
-    @DisplayName("Null 제공할 시 true 반환 테스트")
-    void checkReturnListSizeWhenGivenNull() {
-        final Parser parser = new Parser();
-
-        assertTrue(parser.isBlank(null));
-    }
 
     @ParameterizedTest
     @MethodSource("invalidString")
@@ -69,24 +52,6 @@ class ParserTest {
             Arguments.of("   "),
             Arguments.of("           ")
         );
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1", "2", "8", "9"})
-    @DisplayName("입력 문자열이 1자리 자연수일 때 확인하는 테스트")
-    void checkNaturalNumber(final String numbers) {
-        final Parser parser = new Parser();
-
-        assertTrue(parser.isNaturalNumber(numbers));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1", "10", "a", ""})
-    @DisplayName("입력 문자열이 1자리 자연수가 아닐 때 확인하는 테스트")
-    void checkNaturalNumberWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
-        final Parser parser = new Parser();
-
-        assertFalse(parser.isNaturalNumber(exp));
     }
 
     @ParameterizedTest
