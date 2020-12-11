@@ -1,11 +1,21 @@
-package step2;
+package step2.domain;
+
+import step2.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
 
-    private static List<Lottery> lotteryList;
+    private List<Lottery> lotteryList;
+
+    public LottoGame() {
+
+    }
+
+    public LottoGame(int money) {
+        this.buy(money);
+    }
 
     /**
      * 입력받은 구입 금액만큼 로또를 구입하는 메소드
@@ -44,5 +54,9 @@ public class LottoGame {
      */
     public int getNumberOfLottery(int money) {
         return money / 1000;
+    }
+
+    public List<Lottery> getLotteryList() {
+        return this.lotteryList;
     }
 }
