@@ -32,13 +32,16 @@ public class OutputView {
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- "
                             + winningResult.stream().
-                                filter(rank -> rank == Rank.FORTH).count() + "개");
+                                filter(rank -> rank == Rank.FIFTH).count() + "개");
         System.out.println("4개 일치 (50000원)- "
                             + winningResult.stream().
-                                filter(rank -> rank == Rank.THIRD).count() + "개");
+                                filter(rank -> rank == Rank.FORTH).count() + "개");
         System.out.println("5개 일치 (1500000원)- "
                             + winningResult.stream().
-                                filter(rank -> rank == Rank.SECOND).count() + "개");
+                                filter(rank -> rank == Rank.THIRD).count() + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- "
+                            + winningResult.stream().
+                            filter(rank -> rank == Rank.SECOND).count() + "개");
         System.out.println("6개 일치 (2000000000원)- "
                             + winningResult.stream().
                                 filter(rank -> rank == Rank.FIRST).count() + "개");
