@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.ValidationChecker;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -10,6 +8,7 @@ import java.util.stream.IntStream;
 public class Number implements Comparable<Number>{
     private static final int START_NUM = 1;
     private static final int END_NUM = 45;
+    private static final int LOTTO_NUMS = 6;
     private static Map<Integer, Number> number = new HashMap<>();
     private int num;
 
@@ -22,21 +21,30 @@ public class Number implements Comparable<Number>{
     }
 
     public static Number of(String sDigit) {
-        ValidationChecker.exceptionCheck(sDigit);
+        if(sDigit == null || sDigit.isEmpty()) {
+            throw new RuntimeException("입력된 내용이 없습니다.");
+        }
         return of(Integer.parseInt(sDigit));
     }
 
     public static Number of(int digit) {
-        return number.get(digit);
+        return Optional.ofNullable(number.get(digit))
+                .orElseThrow(RuntimeException::new);
     }
 
     public int getNum() {
         return num;
     }
 
-    public static List<Number> initialNumber() {
-        return IntStream.rangeClosed(START_NUM, END_NUM).
-                mapToObj(i -> number.get(i)).collect(Collectors.toList());
+    public static Set<Number> initialNumber() {
+        List<Number> initLotto = IntStream.rangeClosed(START_NUM, END_NUM)
+                                .mapToObj(i -> number.get(i))
+                                .collect(Collectors.toList());
+        Collections.shuffle(initLotto);
+        initLotto = initLotto.stream()
+                    .limit(LOTTO_NUMS)
+                    .collect(Collectors.toList()); //6개 짜르기
+        return new HashSet<>(initLotto);
     }
 
     @Override
@@ -54,8 +62,6 @@ public class Number implements Comparable<Number>{
 
     @Override
     public int compareTo(Number number) {
-        if (this.num < number.num) return -1;
-        if (this.num == number.num) return 0;
-        return 1;
+        return this.num - number.num;
     }
 }
