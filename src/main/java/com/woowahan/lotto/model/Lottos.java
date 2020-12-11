@@ -9,19 +9,27 @@ public class Lottos {
 
 	private Lottos(PurchaseInput inputResult) {
 		this.lottos = new ArrayList<>();
-		purchaseLottos(inputResult);
+		purchaseManualLottos(inputResult);
+		purchaseAutoLottos(inputResult);
 	}
 
 	public static Lottos purchase(PurchaseInput inputResult) {
 		return new Lottos(inputResult);
 	}
 
-	private int getPurchaseCnt(PurchaseInput input) {
-		return input.getPurchaseAmount() / Lotto.LOTTO_PRICE;
+	private int getAutoPurchaseCnt(PurchaseInput input) {
+		return input.getAutoPurchaseAmount() / Lotto.LOTTO_PRICE;
 	}
 
-	private void purchaseLottos(PurchaseInput input) {
-		int lottoCnt = getPurchaseCnt(input);
+	private void purchaseManualLottos(PurchaseInput input) {
+		List<List<LottoNo>> manualNumbers = input.getManualNumbers();
+		for (List<LottoNo> lottoNumber : manualNumbers) {
+			this.lottos.add(Lotto.of(lottoNumber));
+		}
+	}
+
+	private void purchaseAutoLottos(PurchaseInput input) {
+		int lottoCnt = getAutoPurchaseCnt(input);
 		for (int i = 0; i < lottoCnt; i++) {
 			this.lottos.add(Lotto.of(new LottoAutoGenerator()));
 		}

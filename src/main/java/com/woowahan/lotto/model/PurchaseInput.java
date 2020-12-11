@@ -56,8 +56,20 @@ public class PurchaseInput {
 		}
 	}
 
-	public int getPurchaseAmount() {
-		return purchaseAmount;
+	public int getAutoPurchaseAmount() {
+		return this.purchaseAmount - getManualPurchaseAmount();
+	}
+
+	public int getManualPurchaseAmount() {
+		return Lotto.LOTTO_PRICE * getManualLottoCount();
+	}
+
+	public int getManualLottoCount() {
+		return this.manualNumbers.size();
+	}
+
+	public List<List<LottoNo>> getManualNumbers() {
+		return manualNumbers;
 	}
 
 	@Override
