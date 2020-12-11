@@ -59,8 +59,11 @@
        - 로또 구입
 5. Lottery
    - 각 로또(복권) 정보를 관리
-6. Shuffle
+6. Util
    - 로또 공을 shuffle하여 자동으로 로또 번호를 생성
+   - 로또 공을 sort하여 로또 번호를 확정
+7. WinningLottery
+   - 당첨 번호로 생성된 로또 관리
 
 ### TDD로 구현하기
 #### 1. 1단계 - Util 성격의 기능이 TDD로 도전하기 좋다. (Input과 Output이 명확하기 때문)
@@ -68,6 +71,9 @@
 - 입력 받은 구입 금액이 1000원 이상인지 확인
 - 당첨 번호가 6개 입력된 건지 확인
 - 당첨 번호의 range가 1~45인지 확인
+#### 2. 2단계 - 테스트 가능한 부분에 대해 TDD로 도전한다.
+- 당첨 번호를 split하여 당첨 번호 객체?를 생성
+- 수익률을 계산
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
