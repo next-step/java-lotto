@@ -35,8 +35,9 @@ public class Lotto {
 
     private Set<Number> shuffleAndSort() {
         Collections.shuffle(candidateNumbers);
-        Collections.sort(candidateNumbers.stream()
-                .limit(LOTTO_NUMS).collect(Collectors.toList()), new Comparator<Number>() {
+        candidateNumbers = candidateNumbers.stream()
+                .limit(LOTTO_NUMS).collect(Collectors.toList());
+        Collections.sort(candidateNumbers, new Comparator<Number>() {
             @Override
             public int compare(Number o1, Number o2) {
                 return o1.compareTo(o2);
@@ -50,8 +51,8 @@ public class Lotto {
                 filter(n -> this.nums.contains(n)).count();
     }
 
-    public Set<Number> getNums() {
-        return nums;
+    public List<Number> getNumbers() {
+        return candidateNumbers;
     }
 
     @Override
