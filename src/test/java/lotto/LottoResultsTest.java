@@ -1,5 +1,12 @@
 package lotto;
 
+import lotto.domain.GenerateLottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinnerNumbers;
+import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,5 +1,13 @@
 package lotto;
 
+import lotto.domain.LottoMessage;
+import lotto.domain.LottoPrice;
+import lotto.domain.LottoResults;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinnerNumbers;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
 public class LottoApplication {
 
 	public static void main(String[] args) {
