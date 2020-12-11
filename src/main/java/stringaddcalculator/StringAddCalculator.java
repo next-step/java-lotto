@@ -6,10 +6,16 @@ package stringaddcalculator;
  * @description :
  **/
 public class StringAddCalculator {
+
 	public static int splitAndSum(String input) {
-		if (input != null && input != "") {
-			return Integer.parseInt(input);
-		}
-		return 0;
+
+		String target = isNullOrEmpty(input) ? "0" : input;
+		Numbers numbers = new Numbers(target);
+		return numbers.sum();
 	}
+
+	private static boolean isNullOrEmpty(String input) {
+		return input == null || input.isEmpty();
+	}
+
 }
