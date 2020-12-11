@@ -1,17 +1,17 @@
 package com.nextstep.calculator.application;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringCalculatorTest {
-    @Test
-    public void splitAndSum_null_또는_빈문자() {
-        int result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = StringAddCalculator.splitAndSum("");
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void splitAndSum_null_또는_빈문자(String invalidValue) {
+        int result = StringAddCalculator.splitAndSum(invalidValue);
         assertThat(result).isEqualTo(0);
     }
 

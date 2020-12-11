@@ -14,13 +14,12 @@ public class NormalMode implements Mode {
     }
 
     @Override
-    public Numbers parseToNumbers() {
-        return new Numbers(separateNumbers(value));
+    public String extractSeparator() {
+        return DEFAULT_SEPARATOR;
     }
 
-    private List<Number> separateNumbers(final String value) {
-        return Arrays.stream(value.split(DEFAULT_SEPARATOR))
-                .map(Number::of)
-                .collect(Collectors.toList());
+    @Override
+    public String extractSeparateTarget() {
+        return this.value;
     }
 }

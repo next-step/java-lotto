@@ -43,3 +43,84 @@
 - StringCalculator(class)
     - 문자열 덧셈 계산을 수행하는 객체
     - [X] 주어진 테스트 케이스를 충족하는지 확인
+
+## Step1. 피드백
+### Todo-list
+- [X] 성격이 비슷한 검증문 합치기
+- [X] Mode 추상화의 동작 고민하기 (모드를 선택만 할 것인지, 실제 동작까지 진행할 것인지)
+- [X] Numbers 오브젝트의 size 메서드 대신 더 직관적인 네이밍의 메서드 사용해보기
+- [X] JUnit5 기능을 활용해서 하드코딩 된 테스트 케이스 제거
+
+## Step2. 로또(자동)
+### 제약조건
+- 로또 한장의 금액은 1000원이다.
+- 로또를 구매할 가격을 입력하면 구매 가능한 최대한의 로또 티켓을 발행한다.
+- 로또는 자동으로만 구매 가능하다.
+
+### Todo-list
+- LottoNumber(class)
+    - 로또에서 사용될 로또 번호를 안전하게 래핑하는 오브젝트
+    - [X] 숫자를 인수로 받아서 오브젝트를 생성할 수 있다.
+    - [X] 숫자의 범위는 1 ~ 45를 벗어날 수 없다.
+- LottoTicket(class)
+    - 로또 번호 일급 컬렉션
+    - [X] LottoNumber 컬렉션을 인자로 받아서 오브젝트를 생성할 수 있다.
+    - [X] 컬렉션 크기가 중복 없이 6이어야만 한다.
+    - [X] LottoTicket 간 일치하는 LottoNumber의 개수를 계산할 수 있다.
+    - [X] 생성 정책에 따라 알맞는 LottoTicket을 생성할 수 있다.
+- LottoTicketCreatePolicy(interface)
+    - LottoTicket을 생성하는 방법을 정의하는 인터페이스
+- AutoCreatePolicy(class)
+    - LottoTicketCreatePolicy의 구현체
+    - [X] 자동으로 정합성을 지킨 LottoTicket을 만들고 반환한다.
+- StaticCreatePolicy(class)
+    - LottoTicketCreatePolicy의 구현체
+    - [X] 6자리의 숫자 컬렉션을 인자로 받아서 LottoTicket을 생성한다.
+- LottoTicketsFactory(class)
+    - LottoTickets를 생성하는 객체
+    - [X] Moeny를 인수로 받아 구매가능한 최대 수의 LottoTicket 컬렉션을 반환한다.
+    - [X] LottoTikcets 일급 컬렉션을 반환하도록 리팩토링
+- LottoTickets(class)
+    - LottoTicket 일급 컬렉션
+    - [X] 속한 LottoTicket 컬렉션을 기반으로 LottoPrize를 계산할 수 있다.
+- Money(class)
+    - LottoTicket을 구매하기 위한 자원 오브젝트
+    - [X] 숫자를 인수로 받아서 객체를 생성할 수 있다.
+    - [X] 인수로 받은 숫자가 0 이상인지 정합성을 검증한다.
+    - [X] 구매할 수 있는 최대의 LottoTicket 수를 계산할 수 있다.
+    - [X] Long 타입과 곱셈 연산이 가능하다.
+- Rank(enum)
+    - Lotto 당첨 결과를 보여주기 위한 오브젝트
+    - [X] 맞춘 LottoNumber 수를 인수로 받아서 알맞는 상품 금액을 알려줄 수 있다.
+    - [X] 해당 랭크가 여러개 있을 때의 상금 총합을 계산할 수 있다.
+    - [X] 당첨 결과가 없을 경우 꽝을 반환한다.
+- LottoPrize(class)
+    - 로또 당첨 결과를 통합적으로 관리하는 오브젝트
+    - [X] Rank 컬렉션을 인자로 받아 Rank 별로 몇개가 있는지 관리한다.
+    - [X] 수익률을 계산할 수 있다.
+- BoughtHistoryOutputView
+    - 로또 티켓 컬렉션을 사용자에게 보여줄 수 있다.
+    - [X] 구매한 금액으로 구매할 수 있는 최대의 LottoTicket 수를 사용자에게 보여줄 수 있다.
+    - [X] 구매한 LottoTickets를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
+- StatisticsOutputView
+    - 로또 당첨 결과(당첨 티켓 수, 수익률)을 사용자에게 보여줄 수 있다.
+    - [X] LottoPrize를 인자로 받아서 출력형식에 맞는 String으로 변환한다.
+- MoneyInputView
+    - 사용자가 구매할 로또 금액을 입력받을 수 있다.
+    - [X] 1000원 이하의 금액을 입력할 경우 예외를 발생시킨다.
+- WinningTicketInputView
+    - 사용자로부터 당첨 티켓 로또 번호들을 입력받을 수 있다.
+    - [X] 입력받은 문자열로 당첨 티켓 도메인을 생성할 수 있다.
+
+## Step2. 피드백 반영
+- [X] 로또 숫자 관리를 중복해서 하지 않도록 개선 (힌트: LottoNumber 캐싱 활용)
+- [X] 상수 사용 시 경계값 범위의 의미가 같도록 개선
+- [X] HashTable을 굳이 쓸 이유가..?
+- [X] LottoPrize의 static 메서드에 대한 고민
+- [X] LottoTicket 간 서로 비교하는 메서드 네이밍 고민
+- [X] LottoTicket 간 비교 후 Rank를 반환하는 게 어떤지 고민
+- [X] Rank 내 숫자 리터럴 표현을 가독성이 좋도록 개선
+- [X] Rank 내 금액과 설명을 한군데서 관리할 수 있도록 검토
+- [X] Rank enum의 객체 선언 순서가 의미가 있도록 재정렬
+- [X] assertJ 기능 적극 활용하기
+- [X] LottoTickets 일급 컬렉션에서 LottoPrize에 대한 임의의 수정 가하지 않도록 수정

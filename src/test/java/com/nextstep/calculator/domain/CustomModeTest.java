@@ -22,27 +22,21 @@ class CustomModeTest {
         assertThat(new CustomMode(value, SAMPLE_SEPARATOR)).isNotNull();
     }
 
-    @DisplayName("커스텀 구분자로 구분된 Numbers로 변환할 수 있다.")
+    @DisplayName("구분자로 사용될 문자열을 추출할 수 있다.")
     @Test
-    void parseToNumbersTest() {
-        String value = "1-2-3-4-5-6";
-        Numbers expected = new Numbers(
-                Arrays.asList(Number.of("1"), Number.of("2"), Number.of("3"),
-                        Number.of("4"), Number.of("5"), Number.of("6"))
-        );
+    void extractSeparatorTest() {
+        String value = "1-23-4";
 
         CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
-
-        assertThat(customMode.parseToNumbers()).isEqualTo(expected);
+        assertThat(customMode.extractSeparator()).isEqualTo(SAMPLE_SEPARATOR);
     }
 
-    @DisplayName("커스텀 구분자 외 구분자로 구분된 문자열 파싱 시도 시 예외 발생")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "1-5,2"})
-    void parseToNumbersFailTest(String invalidValue) {
-        CustomMode customMode = new CustomMode(invalidValue, SAMPLE_SEPARATOR);
+    @DisplayName("나눠야 할 문자열을 추출할 수 있다.")
+    @Test
+    void extractSeparateTargetTest() {
+        String value = "1-23-4";
 
-        assertThatThrownBy(customMode::parseToNumbers)
-                .isInstanceOf(InvalidNumberException.class);
+        CustomMode customMode = new CustomMode(value, SAMPLE_SEPARATOR);
+        assertThat(customMode.extractSeparateTarget()).isEqualTo(value);
     }
 }
