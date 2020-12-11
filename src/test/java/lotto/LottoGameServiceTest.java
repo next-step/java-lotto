@@ -1,6 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -23,26 +22,26 @@ public class LottoGameServiceTest {
 
     @Test
     public void getMatchLottoCntTest() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7).stream().map(LottoNumber::new).collect(Collectors.toList());
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7).stream().map(LottoNumber::from).collect(Collectors.toList());
+        Lotto lotto = Lotto.from(lottoNumbers);
         int[] winnerLottoNumbersArr = {1,2,3,4,5,6};
-        LottoNumber[] winnerLottoNumbers = Arrays.stream(winnerLottoNumbersArr).boxed().map(LottoNumber::new).toArray(LottoNumber[]::new);
+        LottoNumber[] winnerLottoNumbers = Arrays.stream(winnerLottoNumbersArr).boxed().map(LottoNumber::from).toArray(LottoNumber[]::new);
         int bonusLottoNumber = 7;
-        Lotto lottoWinner = new Lotto(winnerLottoNumbers, new LottoNumber(bonusLottoNumber));
+        LottoWinner lottoWinner = LottoWinner.of(winnerLottoNumbers, LottoNumber.from(bonusLottoNumber));
         assertThat(lottoWinner.getMatchLottoCnt(lotto)).isEqualTo(5);
     }
 
     @Test
     public void getLottoMatchStatisticsTest() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7).stream().map(LottoNumber::new).collect(Collectors.toList());
-        Lotto lotto = new Lotto(lottoNumbers);
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7).stream().map(LottoNumber::from).collect(Collectors.toList());
+        Lotto lotto = Lotto.from(lottoNumbers);
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto);
         LottoTicket lottoTicket = new LottoTicket(lottoList);
         int[] winnerLottoNumbersArr = {1,2,3,4,5,6};
-        LottoNumber[] winnerLottoNumbers = Arrays.stream(winnerLottoNumbersArr).boxed().map(LottoNumber::new).toArray(LottoNumber[]::new);
+        LottoNumber[] winnerLottoNumbers = Arrays.stream(winnerLottoNumbersArr).boxed().map(LottoNumber::from).toArray(LottoNumber[]::new);
         int bonusLottoNumber = 7;
-        Lotto lottoWinner = new Lotto(winnerLottoNumbers, new LottoNumber(bonusLottoNumber));
+        LottoWinner lottoWinner = LottoWinner.of(winnerLottoNumbers, LottoNumber.from(bonusLottoNumber));
         List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);
         Rank rank = Rank.SECOND;
         assertThat(LottoGameService.getLottoMatchStatistics(lottoRank, rank)).isEqualTo(1);

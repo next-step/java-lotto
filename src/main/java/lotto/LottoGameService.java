@@ -23,12 +23,10 @@ public class LottoGameService {
 
     public static LottoTicket buyLotto(int lottoBuyAmt){
         setLottoBuyAmt(lottoBuyAmt);
-        int lottoQty = 0;
-        lottoQty = lottoBuyAmt/lottoPrice;
-        lottoBuyCnt = lottoQty;
+        lottoBuyCnt = lottoBuyAmt/lottoPrice;
         List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i< lottoBuyCnt; i++){
-            Lotto lotto = new Lotto(true);
+            Lotto lotto = Lotto.from(true);
             lottoList.add(lotto);
         }
         buyLotto = new LottoTicket(lottoList);

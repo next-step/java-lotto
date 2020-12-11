@@ -7,11 +7,10 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
-    private final List<LottoNumber> initlottoNumber = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNumber::new).collect(Collectors.toList());
-    private final List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusLottoNumber;
+    private final List<LottoNumber> initlottoNumber = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNumber::from).collect(Collectors.toList());
+    public final List<LottoNumber> lottoNumbers;
 
-    public Lotto(boolean auto) {
+    private Lotto(boolean auto) {
         if(auto){
             lottoNumbers = autoGenerateLottoNumber();
         }else{
@@ -21,13 +20,24 @@ public class Lotto {
 
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(LottoNumber[] winnerLotto, LottoNumber bonusLottoNumber) {
+    private Lotto(LottoNumber[] winnerLotto) {
         this.lottoNumbers = Arrays.stream(winnerLotto).collect(Collectors.toList());
-        this.bonusLottoNumber = bonusLottoNumber;
+    }
+
+    public static Lotto from(List<LottoNumber> lottoNumbers){
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto from(boolean auto){
+        return new Lotto(auto);
+    }
+
+    public static Lotto of(LottoNumber[] winnerLotto){
+        return new Lotto(winnerLotto);
     }
 
     public List<LottoNumber> autoGenerateLottoNumber() {
@@ -42,32 +52,15 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public List<Rank> matchingWinnerNumber(LottoTicket lottoTicket){
-        List<Rank> lottoRankList = new ArrayList<>();
-        for(Lotto lotto : lottoTicket.getLottoList()){
-            int matchCnt = getMatchLottoCnt(lotto);
-            lottoRankList.add(Rank.valueOf(matchCnt, isContainBonusNumber(lotto, bonusLottoNumber)));
-        }
-        return lottoRankList;
+    public boolean isContainLottoNumber(LottoNumber lottoNumber){
+        return this.lottoNumbers.stream().filter(n -> n.toString().equals(lottoNumber.toString())).findFirst().isPresent();
     }
 
-    public int getMatchLottoCnt(Lotto lotto) {
-        return this.lottoNumbers.stream().mapToInt(i -> {
-            return judgeWinnerNumber(lotto, i);
-        }).sum();
-    }
-
-    private static Integer judgeWinnerNumber(Lotto lotto, LottoNumber i) {
-        if(isContainBonusNumber(lotto, i)){
+    public Integer judgeWinnerNumber(LottoNumber lottoNumber) {
+        if(isContainLottoNumber(lottoNumber)){
             return 1;
         }
         return 0;
     }
-
-    private static boolean isContainBonusNumber(Lotto lotto, LottoNumber bonusLottoNumber){
-
-        return lotto.getLottoNumbers().stream().filter(n -> n.toString().equals(bonusLottoNumber.toString())).findFirst().isPresent();
-    }
-
 
 }
