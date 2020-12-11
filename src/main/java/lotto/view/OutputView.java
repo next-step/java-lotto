@@ -3,7 +3,10 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.Result;
+import lotto.domain.Number;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +18,10 @@ public class OutputView {
 
     }
     private static void printLottoNums(Lotto lotto) {
+        List<Number> sortLotto = new ArrayList<>(lotto.getNums());
+        Collections.sort(sortLotto);
         System.out.println("["
-                + lotto.getNumbers().stream()
+                + sortLotto.stream()
                 .map(number -> String.valueOf(number.getNum())).collect(Collectors.joining(", "))
                 + "]");
     }
