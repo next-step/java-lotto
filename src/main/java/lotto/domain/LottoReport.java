@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoReport {
@@ -21,11 +22,9 @@ public class LottoReport {
     }
 
     public static LottoReport of(final List<Rank> ranks) {
-        Map<Rank, Integer> rankMap = new HashMap<>();
-        ranks.forEach(rank -> {
-            Integer count = rankMap.getOrDefault(rank, DEFAULT_COUNT);
-            rankMap.put(rank, count + ADD_COUNT);
-        });
+        Map<Rank, Integer> rankMap = ranks.stream()
+                .collect(Collectors.groupingBy(Function.identity(),
+                        Collectors.summingInt(x -> ADD_COUNT)));
         return new LottoReport(rankMap);
     }
 
