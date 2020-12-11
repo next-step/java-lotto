@@ -33,4 +33,16 @@ public class ResultTest {
         result.add(Rank.FORTH);
         assertThat(result.getWinningRatio(14000)).isEqualTo("0.36");
     }
+
+    @Test
+    @DisplayName("동일한 순위 여러번 당첨 test")
+    void duplicateWinningTest() {
+        result.add(Rank.FIRST);
+        result.add(Rank.FIRST);
+        result.add(Rank.FIRST);
+        result.add(Rank.FIRST);
+        result.add(Rank.FIRST);
+        result.add(Rank.FIRST);
+        assertThat(result.getTotalWinningPrice()).isEqualTo(12_000_000_000D);
+    }
 }

@@ -24,7 +24,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public int getWinningMoney() {
+    public double getWinningMoney() {
         return winningMoney;
     }
 }
