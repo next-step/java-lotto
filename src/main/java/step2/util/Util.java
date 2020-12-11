@@ -14,7 +14,9 @@ public class Util {
         for (int i = 0; i < 6; i++) {
             selectedNumbers.add(lottoNumbers.get(i));
         }
+    }
 
+    public static void getSorted(List<Integer> selectedNumbers) {
         Collections.sort(selectedNumbers);
     }
 }
