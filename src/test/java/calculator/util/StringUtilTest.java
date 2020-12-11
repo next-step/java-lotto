@@ -1,6 +1,5 @@
 package calculator.util;
 
-import calculator.util.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +14,13 @@ class StringUtilTest {
     @Test
     @DisplayName("문자열을 숫자로 변환하는 테스트")
     void text_To_Int_Test() {
+        // given
         String[] texts = {"1", "2", "3"};
+
+        // when
         List<Integer> numbers = StringUtil.textToInt(texts);
 
+        // then
         assertThat(numbers.size()).isEqualTo(3);
         assertEquals(1 , numbers.get(0));
     }

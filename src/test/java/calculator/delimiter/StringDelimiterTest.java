@@ -1,6 +1,5 @@
 package calculator.delimiter;
 
-import calculator.delimiter.StringDelimiter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +23,13 @@ class StringDelimiterTest {
     @Test
     @DisplayName("커스텀 구분자를 포함한 문자열 분리 테스트")
     void split_by_custom_delimiter_test() {
+        // given
         String text = "//;\n1;2;3";
+
+        // when
         String[] result = StringDelimiter.splitByDelimiter(text);
+
+        // then
         assertEquals(3, result.length);
     }
 
