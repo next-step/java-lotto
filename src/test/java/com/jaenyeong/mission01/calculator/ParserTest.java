@@ -91,10 +91,11 @@ class ParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;2;3", "//?\\n4?5?6", "//!\\n7!8!9", "//A\\n1A2A3A4A5", "// \\n1 2 3 4 5"})
+    @ValueSource(strings = {"//;\n1;2;3", "//@\n4@5@6", "//!\n7!8!9", "//A\n1A2A3A4A5", "// \n1 2 3 4 5"})
     @DisplayName("원하는 식별자를 기준으로 잘라 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenSplitCustomRegex(final String exp) {
         final Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(exp);
+
         if (matcher.find()) {
             final String customDelimiter = matcher.group(1);
             final String[] tokens = matcher.group(2).split(customDelimiter);

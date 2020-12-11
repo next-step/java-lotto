@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Parser {
     private static final int NONE = 0;
     private static final String NUMBERS_SEPARATORS = ",|:";
-    private static final String CUSTOM_SEPARATOR = "//(.)\\n(.*)";
+    private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final String TEXT_ERR_INVALID_STRING = "[error] : An invalid string was entered.";
     public static final int EXPRESSION_GROUP = 2;
     public static final int SEPARATOR_GROUP = 1;
