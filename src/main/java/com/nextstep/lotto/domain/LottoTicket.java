@@ -21,7 +21,8 @@ public class LottoTicket {
     }
 
     public Rank calculateRank(LottoTicket thatLottoTicket) {
-        return Rank.find(countMatchedNumbers(thatLottoTicket));
+        // TODO: 임시 데이터 삽입(hasBonus)
+        return Rank.find(countMatchedNumbers(thatLottoTicket), false);
     }
 
     public List<LottoNumber> getLottoNumbers() {
