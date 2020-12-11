@@ -18,8 +18,7 @@ public class GenerateLottoNumber {
 
 	private static void verifyNumbers(List<Integer> manualNumbers) {
 		verifyNumbersSize(manualNumbers.size());
-		verifyAllowMaxNumber(manualNumbers);
-
+		manualNumbers.forEach(GenerateLottoNumber::checkRangeOfNumber);
 	}
 
 	private static void verifyNumbersSize(int size) {
@@ -28,17 +27,9 @@ public class GenerateLottoNumber {
 		}
 	}
 
-	private static void verifyAllowMaxNumber(List<Integer> manualNumbers) {
-		manualNumbers.forEach(GenerateLottoNumber::checkRangeOfNumber);
-	}
-
 	private static void checkRangeOfNumber(int number) {
-		if (verifyNumber(number)) {
+		if (number > MAX_LOTTO_NUMBER) {
 			throw new IllegalArgumentException("기준치를 초과하였습니다.");
 		}
-	}
-
-	private static boolean verifyNumber(int number) {
-		return number > MAX_LOTTO_NUMBER;
 	}
 }
