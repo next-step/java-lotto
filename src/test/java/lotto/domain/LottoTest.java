@@ -17,7 +17,7 @@ public class LottoTest {
     @DisplayName("로또 생성 test")
     void createLottoTest() {
         lotto = new Lotto();
-        assertThat(lotto.getNums().size()).isEqualTo(6);
+        assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
@@ -32,8 +32,8 @@ public class LottoTest {
     @DisplayName("로또 sorting test")
     void sortingLottoTest() {
         lotto = new Lotto(Arrays.asList(5,4,3,2,6,1));
-        assertThat(new ArrayList<>(lotto.getNums()).get(1)).isEqualTo(Number.of(1));
-        assertThat(new ArrayList<>(lotto.getNums()).get(5)).isEqualTo(Number.of(6));
+        assertThat(lotto.getNumbers().get(1)).isEqualTo(Number.of(1));
+        assertThat(lotto.getNumbers().get(5)).isEqualTo(Number.of(6));
     }
 
     @Test
