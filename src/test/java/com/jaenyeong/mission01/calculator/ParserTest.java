@@ -96,7 +96,7 @@ class ParserTest {
         final Parser parser = new Parser();
         List<Integer> numbers = new ArrayList<>();
 
-        numbers = parser.bindingWhenNumberIsNaturalNumber(exp, numbers);
+        numbers = parser.splitWhenNumberIsNaturalNumber(exp, numbers);
         final int expectedValue = Integer.parseInt(exp);
 
         assertEquals(numbers.get(0), expectedValue);
@@ -110,11 +110,29 @@ class ParserTest {
             final Parser parser = new Parser();
             List<Integer> numbers = new ArrayList<>();
 
-            numbers = parser.bindingWhenNumberIsNaturalNumber(exp, numbers);
+            numbers = parser.splitWhenNumberIsNaturalNumber(exp, numbers);
             final int expectedValue = Integer.parseInt(exp);
 
             assertEquals(numbers.get(0), expectedValue);
         })
             .isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1:2", "8,7", "1,2:3", "3:2,1", "4,5,6", "7:8:9"})
+    @DisplayName("콤마, 콜론을 기준으로 잘라 반환 리스트를 확인하는 테스트")
+    void checkReturnListWhenSplitCommaAndColon(final String exp) {
+        final Parser parser = new Parser();
+
+        final String[] splitStrings = exp.split(",|:");
+
+        final List<Integer> numbers = parser.splitWhenNumberIsNaturalNumberList(exp);
+
+        assertEquals(splitStrings.length, numbers.size());
+
+        for (int i = 0; i < numbers.size(); i++) {
+            int expectedNumber = Integer.parseInt(splitStrings[i]);
+            assertEquals(numbers.get(i), expectedNumber);
+        }
     }
 }
