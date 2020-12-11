@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 public class LottoMessage {
 	private static final String MESSAGE = "%s개 일치 (%s원)- %s개";
-	private static final String RATE_MESSAGE = "총 수익률은 %1$,.2f 입니다.";
+	private static final String RATE_MESSAGE = "총 수익률은 %1$,.2f입니다.";
 
 	public static String purchasedTickets(LottoTicket lottoTicket) {
 		return lottoTicket.stream()
@@ -21,11 +21,11 @@ public class LottoMessage {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public static String totalProfit(int buyMoney, LottoResults lottoResults) {
+	public static String totalProfit(LottoPrice lottoPrice, LottoResults lottoResults) {
 		Integer totalPrizeMoney = lottoResults.getLottoResults()
 			.map(LottoResult::getRankAmountMoney)
 			.reduce(0, Integer::sum);
 
-		return String.format(RATE_MESSAGE, (double) totalPrizeMoney / buyMoney);
+		return String.format(RATE_MESSAGE, lottoPrice.totalPrizeMoneyRate(totalPrizeMoney));
 	}
 }

@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LottoWinnerNumbers {
 	private final LottoNumbers winnerNumbers;
 
@@ -16,10 +12,6 @@ public class LottoWinnerNumbers {
 	}
 
 	public static LottoWinnerNumbers ofUser(String input) {
-		List<Integer> userInputWinnerNumber = Arrays.stream(input.split(","))
-			.map(String::trim)
-			.map(Integer::parseInt).collect(Collectors.toList());
-
-		return new LottoWinnerNumbers(GenerateLottoNumber.manual(userInputWinnerNumber));
+		return new LottoWinnerNumbers(GenerateLottoNumber.ofInput(input));
 	}
 }

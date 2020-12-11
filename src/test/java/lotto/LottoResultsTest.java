@@ -31,30 +31,30 @@ class LottoResultsTest {
 	@ParameterizedTest
 	@MethodSource("sortNumbers")
 	void 로또_등수_TEST(LottoNumbers targetLotto, Rank rank) {
-		LottoNumbers lastWeekLottoNumbers = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
+		LottoNumbers lastWeekLottoNumbers = GenerateLottoNumber.ofInput("8, 21, 23, 41, 42, 43");
 		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(lastWeekLottoNumbers);
 		assertThat(LottoResult.compareNumbers(targetLotto, lottoWinnerNumbers).isMatchesRank(rank)).isTrue();
 	}
 
 	public static Stream<Arguments> sortNumbers() {
 		return Stream.of(
-			Arguments.of(GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43)), Rank.WINNER),
-			Arguments.of(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 41, 42, 43)), Rank.FOURTH),
-			Arguments.of(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIVE),
-			Arguments.of(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)), Rank.FIVE)
+			Arguments.of(GenerateLottoNumber.ofInput("8, 21, 23, 41, 42, 43"), Rank.WINNER),
+			Arguments.of(GenerateLottoNumber.ofInput("1, 2, 3, 41, 42, 43"), Rank.FOURTH),
+			Arguments.of(GenerateLottoNumber.ofInput("1, 2, 3, 4, 5, 6"), Rank.FIVE),
+			Arguments.of(GenerateLottoNumber.ofInput("6, 7, 8, 9, 10"), Rank.FIVE)
 		);
 	}
 
 	@DisplayName("지난 주 당첨 번호와 비교해서 예측하는 당첨 통계와 일치하는지?")
 	@Test
 	void 당첨_통계_테스트() {
-		LottoNumbers winnerNumber = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
+		LottoNumbers winnerNumber = GenerateLottoNumber.ofInput("8, 21, 23, 41, 42, 43");
 
 		LottoTicket lottoTicket = new LottoTicket();
-		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43)));
-		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 41, 42, 43)));
-		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)));
+		lottoTicket.add(GenerateLottoNumber.ofInput("8, 21, 23, 41, 42, 43"));
+		lottoTicket.add(GenerateLottoNumber.ofInput("1, 2, 3, 41, 42, 43"));
+		lottoTicket.add(GenerateLottoNumber.ofInput("1, 2, 3, 4, 5, 6"));
+		lottoTicket.add(GenerateLottoNumber.ofInput("6, 7, 8, 9, 10"));
 
 
 		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber);

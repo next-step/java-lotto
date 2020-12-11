@@ -12,7 +12,7 @@ public class LottoPrice {
 		return this.purchaseCost / PRICE_PER_TICKET;
 	}
 
-	public int purchaseCost() {
-		return purchaseCost;
+	public double totalPrizeMoneyRate(int totalPrizeMoney) {
+		return (double) totalPrizeMoney / this.purchaseCost;
 	}
 }

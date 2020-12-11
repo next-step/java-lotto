@@ -20,6 +20,6 @@ public class LottoApplication {
 		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser(InputView.askToUserLastWeekWinnerNumber());
 		LottoResults lottoResults = LottoResults.compareTicketAndWinner(purchasedLottoTicket, lottoWinnerNumbers);
 		OutputView.printMessage(LottoMessage.winningStatistics(lottoResults));
-		OutputView.printMessage(LottoMessage.totalProfit(lottoPrice.purchaseCost(), lottoResults));
+		OutputView.printMessage(LottoMessage.totalProfit(lottoPrice, lottoResults));
 	}
 }
