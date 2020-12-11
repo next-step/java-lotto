@@ -1,9 +1,6 @@
 package lotto.model;
 
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class Lotto {
     private final LottoTickets lottoTickets;
