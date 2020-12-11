@@ -2,9 +2,10 @@ package lotto.application;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoReport;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLotto;
 import lotto.dto.PurchaseResponse;
+import lotto.dto.ReportRequest;
 import lotto.dto.ReportResponse;
 
 public class LottoService {
@@ -20,9 +21,12 @@ public class LottoService {
         return PurchaseResponse.of(lottoTickets);
     }
 
-    public ReportResponse report(LottoTickets lottoTickets, String winningNumbers) {
-        LottoTicket winning = lottoMachine.manual(winningNumbers);
-        LottoReport report = LottoReport.of(lottoTickets.match(winning));
+    public ReportResponse report(final ReportRequest reportRequest) {
+        WinningLotto winningLotto = lottoMachine.winning(
+                reportRequest.getWinningNumbers(),
+                reportRequest.getBonusNumber());
+        LottoTickets lottoTickets = reportRequest.getLottoTickets();
+        LottoReport report = LottoReport.of(lottoTickets.match(winningLotto));
         return ReportResponse.of(report);
     }
 }
