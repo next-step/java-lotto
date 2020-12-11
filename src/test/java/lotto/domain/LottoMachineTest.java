@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,14 +19,43 @@ public class LottoMachineTest {
             @Override
             public LottoTickets automatic(final long amount) {
                 return LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(1, 2, 3, 4, 5, 6),
-                        LottoTicket.of(2, 3, 4, 5, 6, 7),
-                        LottoTicket.of(3, 4, 5, 6, 7, 8)));
+                        LottoTicket.of(Arrays.asList(
+                                LottoNumber.valueOf(1),
+                                LottoNumber.valueOf(2),
+                                LottoNumber.valueOf(3),
+                                LottoNumber.valueOf(4),
+                                LottoNumber.valueOf(5),
+                                LottoNumber.valueOf(6))
+                        ),
+                        LottoTicket.of(Arrays.asList(
+                                LottoNumber.valueOf(2),
+                                LottoNumber.valueOf(3),
+                                LottoNumber.valueOf(4),
+                                LottoNumber.valueOf(5),
+                                LottoNumber.valueOf(6),
+                                LottoNumber.valueOf(7))
+                        ),
+                        LottoTicket.of(Arrays.asList(
+                                LottoNumber.valueOf(3),
+                                LottoNumber.valueOf(4),
+                                LottoNumber.valueOf(5),
+                                LottoNumber.valueOf(6),
+                                LottoNumber.valueOf(7),
+                                LottoNumber.valueOf(8))
+                        )
+                ));
             }
 
             @Override
             public LottoTicket manual(final String numbers) {
-                return LottoTicket.of(1, 2, 3, 4, 5, 6);
+                return LottoTicket.of(Arrays.asList(
+                        LottoNumber.valueOf(1),
+                        LottoNumber.valueOf(2),
+                        LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4),
+                        LottoNumber.valueOf(5),
+                        LottoNumber.valueOf(6))
+                );
             }
         };
     }

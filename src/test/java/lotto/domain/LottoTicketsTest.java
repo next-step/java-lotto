@@ -20,9 +20,30 @@ public class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         lottoTickets = LottoTickets.of(Arrays.asList(
-                LottoTicket.of(1, 2, 3, 4, 5, 6),
-                LottoTicket.of(2, 3, 4, 5, 6, 7),
-                LottoTicket.of(3, 4, 5, 6, 7, 8)
+                LottoTicket.of(Arrays.asList(
+                        LottoNumber.valueOf(1),
+                        LottoNumber.valueOf(2),
+                        LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4),
+                        LottoNumber.valueOf(5),
+                        LottoNumber.valueOf(6))
+                ),
+                LottoTicket.of(Arrays.asList(
+                        LottoNumber.valueOf(2),
+                        LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4),
+                        LottoNumber.valueOf(5),
+                        LottoNumber.valueOf(6),
+                        LottoNumber.valueOf(7))
+                ),
+                LottoTicket.of(Arrays.asList(
+                        LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4),
+                        LottoNumber.valueOf(5),
+                        LottoNumber.valueOf(6),
+                        LottoNumber.valueOf(7),
+                        LottoNumber.valueOf(8))
+                )
         ));
     }
 
@@ -30,7 +51,14 @@ public class LottoTicketsTest {
     @Test
     void match() {
         // given
-        LottoTicket winning = LottoTicket.of(1, 2, 3, 4, 5, 6);
+        LottoTicket winning = LottoTicket.of(Arrays.asList(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))
+        );
 
         // when
         List<Rank> ranks = lottoTickets.match(winning);

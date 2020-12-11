@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -13,18 +12,6 @@ public class LottoTicket {
 
     private LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
-    }
-
-    public static LottoTicket of(final String... lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
-    }
-
-    public static LottoTicket of(final int... lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
     }
 
     public static LottoTicket of(final List<LottoNumber> lottoNumbers) {

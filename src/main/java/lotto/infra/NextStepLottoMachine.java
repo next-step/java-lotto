@@ -3,6 +3,7 @@ package lotto.infra;
 import lotto.domain.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,16 +23,16 @@ public class NextStepLottoMachine implements LottoMachine {
     public LottoTickets automatic(final long amount) {
         Money purchase = Money.valueOf(amount);
         int count = purchase.divide(LottoTicket.PRICE);
-        return createTickets(count);
+        return createAutoTickets(count);
     }
 
-    private LottoTickets createTickets(final int count) {
+    private LottoTickets createAutoTickets(final int count) {
         return IntStream.range(0, count)
-                .mapToObj(ignore -> createTicket())
+                .mapToObj(ignore -> createAutoTicket())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::of));
     }
 
-    private LottoTicket createTicket() {
+    private LottoTicket createAutoTicket() {
         Collections.shuffle(CACHE);
         List<LottoNumber> shuffledNumber = new ArrayList<>(CACHE.subList(0, LottoTicket.LOTTO_NUMBER_COUNT));
         Collections.sort(shuffledNumber);
@@ -40,6 +41,12 @@ public class NextStepLottoMachine implements LottoMachine {
 
     @Override
     public LottoTicket manual(final String numbers) {
-        return LottoTicket.of(numbers.split(DELIMITER));
+        return LottoTicket.of(createManualLottoNumbers(numbers));
+    }
+
+    private List<LottoNumber> createManualLottoNumbers(final String numbers) {
+        return Arrays.stream(numbers.split(DELIMITER))
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
     }
 }
