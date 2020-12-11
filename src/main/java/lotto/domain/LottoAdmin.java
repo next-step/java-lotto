@@ -1,11 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import lotto.utils.ValidationChecker;
 
 public class LottoAdmin {
     private Lotto winningLotto;
@@ -18,21 +14,12 @@ public class LottoAdmin {
         this.winningLotto = new Lotto(nums);
     }
 
-    public LottoAdmin(String lotto) {
-        this.winningLotto = new Lotto(splitInputLotto(lotto));
-    }
-
-    private List<Integer> splitInputLotto(String lotto) {
-        ValidationChecker.isEmptyOrNull(lotto);
-         return Arrays.stream(lotto.split(", ")).filter(value -> ValidationChecker.exceptionCheck(value)).map(Integer::parseInt).collect(Collectors.toList());
+    public LottoAdmin(String nums) {
+        this.winningLotto = new Lotto(nums);
     }
 
     public Rank calculateRank(Lotto lotto) {
-        int result = 0;
-        for(Integer num : lotto.getNums()) {
-            result += winningLotto.contains(num) ? 1 : 0;
-        }
-        return Rank.of(result);
+        return Rank.of(winningLotto.getMatchNums(lotto));
     }
 
     @Override

@@ -2,8 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import textAddCalculator.utils.ValidationChecker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,8 +32,8 @@ public class LottoTest {
     @DisplayName("로또 sorting test")
     void sortingLottoTest() {
         lotto = new Lotto(Arrays.asList(5,4,3,2,6,1));
-        assertThat(lotto.getNums().get(0)).isEqualTo(1);
-        assertThat(lotto.getNums().get(5)).isEqualTo(6);
+        assertThat(new ArrayList<>(lotto.getNums()).get(1)).isEqualTo(Number.of(1));
+        assertThat(new ArrayList<>(lotto.getNums()).get(5)).isEqualTo(Number.of(6));
     }
 
     @Test
