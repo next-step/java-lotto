@@ -4,21 +4,21 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private List<Number> numbers;
-    private Delimiter delimiter;
-
-    public StringCalculator(String value) {
-        delimiter = new Delimiter(value);
-        this.numbers = delimiter.numbers(value);
+    public static int add(String expression) {
+        List<Number> numbers = getNumbers(expression);
+        return add(numbers);
     }
 
-    public int add() {
-        Number result = numbers.stream()
-              .reduce((x, y) -> {
-                  x.add(y);
-                  return x;
-              }).get();
+    private static List<Number> getNumbers(String expression) {
+        Delimiter delimiter = new Delimiter(expression);
+        return delimiter.numbers(expression);
+    }
 
-        return result.getNumber();
+    private static int add(List<Number> numbers) {
+        return numbers.stream()
+              .reduce((x, y) -> {
+                    x.add(y);
+                    return x;
+              }).get().getNumber();
     }
 }

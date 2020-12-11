@@ -2,7 +2,6 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +41,6 @@ public class NumberTest {
         x.add(y);
 
         //then
-        assertEquals(x.getNumber(), 4);
+        assertThat(x).isEqualTo(new Number("4"));
     }
 }

@@ -1,16 +1,15 @@
 package calculator;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Delimiter {
+
+    private static final Pattern CUSTOM_PATTERN2 = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_PATTERN = "[,|:]";
-    private static final String CUSTOM_PATTERN = "(//.\n).+";
-    private static final String CUSTOM_DELIMITER_PREFIX = "//";
-    private static final String CUSTOM_DELIMITER_POSTFIX = "\n";
-    private static final String EMPTY = "";
 
     private final String delimiter;
 
@@ -19,12 +18,12 @@ public class Delimiter {
     }
 
     private String determineDelimiter(String value) {
-        if (!isStartWithCustomPattern(value)) {
-            return DEFAULT_PATTERN;
+        Matcher matcher = getMatcher(value);
+        if (matcher.matches()) {
+            return matcher.group(1);
         }
 
-        return value.substring(0, value.indexOf(CUSTOM_DELIMITER_POSTFIX))
-              .replaceAll(CUSTOM_DELIMITER_PREFIX, EMPTY);
+        return DEFAULT_PATTERN;
     }
 
     public List<Number> numbers(String value) {
@@ -37,14 +36,15 @@ public class Delimiter {
     }
 
     private String getExpression(String value) {
-        if (isStartWithCustomPattern(value)) {
-            return value.substring(value.indexOf(CUSTOM_DELIMITER_POSTFIX) + 1);
+        Matcher matcher = getMatcher(value);
+        if (matcher.matches()) {
+            return matcher.group(2);
         }
 
         return value;
     }
 
-    private boolean isStartWithCustomPattern(String value) {
-        return Pattern.matches(CUSTOM_PATTERN, value);
+    private Matcher getMatcher(String value) {
+        return CUSTOM_PATTERN2.matcher(value);
     }
 }

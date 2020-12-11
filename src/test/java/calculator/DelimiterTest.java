@@ -1,5 +1,6 @@
 package calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -33,6 +34,6 @@ public class DelimiterTest {
         List<Number> numbers = delimiter.numbers(value);
 
         //then
-        assertEquals(numbers.size(), 3);
+        assertThat(numbers.size()).isEqualTo(3);
     }
 }
