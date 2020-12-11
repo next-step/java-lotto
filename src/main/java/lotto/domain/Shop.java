@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,10 +12,12 @@ public class Shop {
 
     private Shop() {}
 
-    public static Lottos buyLottos(String money) {
+    public static List<Lotto> buyLottos(String money) {
         isEmptyOrNull(money);
         exceptionCheck(money);
         long lottoCount = Long.parseLong(money) / LOTTO_PRICE;
-        return new Lottos(Stream.generate(() -> new Lotto(Numbers.getNumbers())).limit(lottoCount).collect(Collectors.toList()));
+        return Stream.generate(() -> new Lotto())
+                .limit(lottoCount)
+                .collect(Collectors.toList());
     }
 }

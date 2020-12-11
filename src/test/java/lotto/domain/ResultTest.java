@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
-    //수익률 계산 test
-    // 결과 비교 test
     private Result result;
 
     @BeforeEach
@@ -23,8 +21,10 @@ public class ResultTest {
         result.add(Rank.FIRST);
         result.add(Rank.FIRST);
         result.add(Rank.FIRST);
-        assertThat(result.getResult().get(Rank.FIRST)).isEqualTo(3);
-        assertThat(result.getResult().get(Rank.FORTH)).isEqualTo(1);
+        assertThat(result.getResult().stream()
+                    .filter(rank -> rank == Rank.FIRST).count()).isEqualTo(3);
+        assertThat(result.getResult().stream()
+                    .filter(rank -> rank == Rank.FORTH).count()).isEqualTo(1);
     }
 
     @Test
