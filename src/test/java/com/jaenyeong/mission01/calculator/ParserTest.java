@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -94,6 +96,24 @@ class ParserTest {
         for (int i = 0; i < numbers.size(); i++) {
             int expectedNumber = Integer.parseInt(splitStrings[i]);
             assertEquals(numbers.get(i), expectedNumber);
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\\n1;2;3", "//?\\n4?5?6", "//!\\n7!8!9", "//A\\n1A2A3A4A5", "// \\n1 2 3 4 5"})
+    @DisplayName("원하는 식별자를 기준으로 잘라 반환 리스트를 확인하는 테스트")
+    void checkReturnListWhenSplitCustomRegex(final String exp) {
+        final Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(exp);
+        if (matcher.find()) {
+            final String customDelimiter = matcher.group(1);
+            final String[] tokens = matcher.group(2).split(customDelimiter);
+
+            Parser parser = new Parser();
+            final List<Integer> integers = parser.splitWhenNumberIsNaturalNumberList(exp);
+
+            for (int i = 0; i < integers.size(); i++) {
+                assertEquals(integers.get(i), Integer.parseInt(tokens[i]));
+            }
         }
     }
 }
