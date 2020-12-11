@@ -1,18 +1,30 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class GenerateLottoNumber {
 	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
 	public static final int MAX_LOTTO_NUMBER = 45;
 
 	public static LottoNumbers manual(List<Integer> manualNumbers) {
-		verifyNumbers(manualNumbers);
 		return generateLottoNumbers(manualNumbers);
 	}
 
+	public static LottoNumbers auto() {
+		List<Integer> autoNumber = new ArrayList<>();
+		IntStream.range(0, MAX_LOTTO_NUMBER).forEach(i -> autoNumber.add(i + 1));
+		Collections.shuffle(autoNumber);
+		ArrayList<Integer> shuffledAutoNumbers = new ArrayList<>(autoNumber.subList(0, MAX_LOTTO_NUMBERS_SIZE));
+
+		return generateLottoNumbers(shuffledAutoNumbers);
+	}
+
 	private static LottoNumbers generateLottoNumbers(List<Integer> targetNumbers) {
+		verifyNumbers(targetNumbers);
 		return targetNumbers.stream()
 			.map(LottoNumber::new)
 			.sorted(LottoNumber::isGraterThanNumber)

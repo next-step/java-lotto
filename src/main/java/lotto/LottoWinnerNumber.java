@@ -8,11 +8,16 @@ public class LottoWinnerNumber {
 	}
 
 	public LottoResult matchesResult(LottoNumbers targetNumbers) {
-		int count = Math.toIntExact(targetNumbers.getNumbers().stream().filter(this::isContainsLottoNumber).count());
+		int count = Math.toIntExact(targetNumbers.getNumbers()
+			.stream()
+			.filter(this::isContainsLottoNumber)
+			.count());
 		return new LottoResult(count);
 	}
 
 	public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
-		return this.winnerNumber.getNumbers().contains(lottoNumber);
+		return this.winnerNumber
+			.getNumbers()
+			.contains(lottoNumber);
 	}
 }

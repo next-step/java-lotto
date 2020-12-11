@@ -32,4 +32,9 @@ public class LottoNumbers {
 	public int hashCode() {
 		return Objects.hash(numbers);
 	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(numbers);
+	}
 }
