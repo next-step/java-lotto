@@ -11,6 +11,9 @@ public class Splitter {
     private Splitter() {
     }
 
+    private Splitter() {
+    }
+  
     public static String[] split(String inputValue) {
         Matcher m = pattern.matcher(inputValue);
         if(m.find()) {
