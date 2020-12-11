@@ -6,9 +6,13 @@ import java.util.regex.Pattern;
 
 public class Splitter {
     private final static String REGEX = ",|:";
+    private static Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
+    private Splitter() {
+    }
+  
     public static String[] split(String inputValue) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputValue);
+        Matcher m = pattern.matcher(inputValue);
         if(m.find()) {
             return m.group(2).split(m.group(1));
         }

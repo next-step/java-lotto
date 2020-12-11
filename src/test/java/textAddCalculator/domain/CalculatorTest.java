@@ -1,6 +1,7 @@
 package textAddCalculator.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +16,8 @@ public class CalculatorTest {
     }
 
     @Test
-    public void splitAndSum_null_또는_빈문자() {
+    @DisplayName("null 또는 빈문자 계산")
+    public void splitAndSum_nullOrEmpty() {
         int result = calculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
 
@@ -24,30 +26,35 @@ public class CalculatorTest {
     }
 
     @Test
-    public void splitAndSum_숫자하나() throws Exception { ;
+    @DisplayName("숫자하나 계산")
+    public void splitAndSumOneNumber() throws Exception { ;
         int result = calculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void splitAndSum_쉼표구분자() throws Exception {
+    @DisplayName("쉼표 구분자 test")
+    public void splitAndSumCommaDelimiter() throws Exception {
         int result = calculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+    @DisplayName("쉼표 or 콜론 구분자 test")
+    public void splitAndSumCommaColonDelimiter() throws Exception {
         int result = calculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
-    public void splitAndSum_custom_구분자() throws Exception {
+    @DisplayName("custom 구분자 test")
+    public void splitAndSumCustomDelimiter() throws Exception {
         int result = calculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
+    @DisplayName("음수 입력 test")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> calculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
