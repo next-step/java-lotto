@@ -1,33 +1,42 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 
-import java.util.Arrays;;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printPurchaseLottos(Lottos lottos) {
-        System.out.println(lottos.getCount() + "개를 구매했습니다.");
-        lottos.getLottos().stream().forEach(lotto -> printLottoNums(lotto));
+    public static void printPurchaseLottos(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
+        lottos.stream().forEach(lotto -> printLottoNums(lotto));
 
     }
     private static void printLottoNums(Lotto lotto) {
-        System.out.println("[" + lotto.getNums().stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
+        System.out.println("["
+                + lotto.getNumbers().stream()
+                .map(number -> String.valueOf(number.getNum())).collect(Collectors.joining(", "))
+                + "]");
     }
 
     public static void printWinningStatistics(Result result) {
-        Map<Rank, Integer> winningResult = result.getResult();
+        List<Rank> winningResult = result.getResult();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Rank.values())
-                .forEach(rank -> System.out.println(rank.getMatchNums() + "개 일치 ("
-                                                    + rank.getWinningMoney() + ")-"
-                                                    + winningResult.get(rank) + "개"));
+        System.out.println("3개 일치 (5000원)- "
+                            + winningResult.stream().
+                                filter(rank -> rank == Rank.FORTH).count() + "개");
+        System.out.println("4개 일치 (50000원)- "
+                            + winningResult.stream().
+                                filter(rank -> rank == Rank.THIRD).count() + "개");
+        System.out.println("5개 일치 (1500000원)- "
+                            + winningResult.stream().
+                                filter(rank -> rank == Rank.SECOND).count() + "개");
+        System.out.println("6개 일치 (2000000000원)- "
+                            + winningResult.stream().
+                                filter(rank -> rank == Rank.FIRST).count() + "개");
     }
 
     public static void printWinningRatio(Result result, long purchasedPrice) {
