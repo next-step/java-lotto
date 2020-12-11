@@ -11,16 +11,16 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        String money = InputView.inputMoney();
+        Long money = InputView.inputMoney();
         List<Lotto> lottos = Shop.buyLottos(money);
         OutputView.printPurchaseLottos(lottos);
 
-        LottoAdmin lottoAdmin = new LottoAdmin(InputView.inputWinningLotto());
+        Lotto winningLotto = new Lotto(InputView.inputWinningLotto());
         Result result = new Result();
         for(Lotto lotto : lottos) {
-            result.add(lottoAdmin.calculateRank(lotto));
+            result.add(winningLotto.calculateRank(lotto));
         }
         OutputView.printWinningStatistics(result);
-        OutputView.printWinningRatio(result, Long.parseLong(money));
+        OutputView.printWinningRatio(result, money);
     }
 }
