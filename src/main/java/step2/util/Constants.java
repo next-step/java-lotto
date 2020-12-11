@@ -11,4 +11,6 @@ public class Constants {
      public static final String OPEN_BRACKET = "[";
      public static final String CLOSE_BRACKET = "]";
      public static final String COMMA_DELIMITER = ", ";
+     public static final String WINNING_NUMBER_MUST_BE_6 = "당첨 번호는 6개여야만 합니다.";
+     public static final int WINNING_NUMBER_LENGTH = 6;
 }

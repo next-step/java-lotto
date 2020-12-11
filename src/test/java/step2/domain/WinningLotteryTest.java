@@ -19,6 +19,6 @@ class WinningLotteryTest {
         String winningNumber = "1, 2, 3, 4, 5, 6, 7, 8";
         assertThatThrownBy(() -> winningLottery = new WinningLottery(winningNumber.split(Constants.COMMA_DELIMITER)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호는 6개여야만 합니다.");
+                .hasMessageContaining(Constants.WINNING_NUMBER_MUST_BE_6);
     }
 }
