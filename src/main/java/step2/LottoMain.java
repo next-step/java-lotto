@@ -1,6 +1,7 @@
 package step2;
 
 import step2.domain.LottoGame;
+import step2.domain.WinningLottery;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -16,5 +17,10 @@ public class LottoMain {
         lottoGame = new LottoGame(money);
 
         resultView.showPurchasedLottery(lottoGame.getLotteryList());
+        inputView.showInputWinningMessage();
+
+        String[] winningNumbers = inputView.getWinningNumbers();
+        WinningLottery winningLottery = new WinningLottery(winningNumbers);
+
     }
 }

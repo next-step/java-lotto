@@ -14,4 +14,5 @@ public class Constants {
      public static final String WINNING_NUMBER_MUST_BE_6 = "당첨 번호는 6개여야만 합니다.";
      public static final int WINNING_NUMBER_LENGTH = 6;
      public static final String WINNING_NUMBER_INVALID_RANGE = "당첨 번호는 1 이상 45 이하의 범위여야합니다.";
+     public static final String INPUT_WINNING_NUMBERS_MSG = "지난 주 당첨 번호를 입력해주세요.";
 }
