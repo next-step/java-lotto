@@ -44,6 +44,13 @@ public class NextStepLottoMachine implements LottoMachine {
         return LottoTicket.of(createManualLottoNumbers(numbers));
     }
 
+    @Override
+    public WinningLotto winning(final String winningNumbers, final String bonusNumber) {
+        LottoTicket winningTicket = LottoTicket.of(createManualLottoNumbers(winningNumbers));
+        LottoNumber bonus = LottoNumber.valueOf(bonusNumber);
+        return WinningLotto.of(winningTicket, bonus);
+    }
+
     private List<LottoNumber> createManualLottoNumbers(final String numbers) {
         return Arrays.stream(numbers.split(DELIMITER))
                 .map(LottoNumber::valueOf)

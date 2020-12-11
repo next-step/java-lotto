@@ -3,6 +3,7 @@ package lotto.infra;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,5 +45,20 @@ public class NextStepLottoMachineTest {
 
         // then
         assertThat(manual).isNotNull();
+    }
+
+    @DisplayName("당첨 티켓과 보너스번호를 추가로 받아 우승 로또를 만들 수 있다.")
+    @Test
+    void winning() {
+        // given
+        String winningNumbers = "1, 2, 3, 4, 5, 6";
+        String bonusNumber = "7";
+
+        // when
+        WinningLotto winning = nextStepLottoMachine.winning(winningNumbers, bonusNumber);
+
+
+        // then
+        assertThat(winning).isNotNull();
     }
 }
