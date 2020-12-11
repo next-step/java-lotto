@@ -1,6 +1,6 @@
-package calculator;
+package calculator.util;
 
-import org.junit.jupiter.api.Assertions;
+import calculator.util.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StringUtilTest {
+class StringUtilTest {
 
     @Test
     @DisplayName("문자열을 숫자로 변환하는 테스트")
