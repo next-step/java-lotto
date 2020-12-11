@@ -49,13 +49,13 @@ public class GenerateLottoNumber {
 
 	private static void verifyNumbersSize(int size) {
 		if (size > MAX_LOTTO_NUMBERS_SIZE) {
-			throw new IllegalArgumentException("로또 숫자는 6을 초과할수 없습니다.");
+			throw new IllegalArgumentException("로또 숫자개수는 6을 초과할수 없습니다.");
 		}
 	}
 
 	private static void checkRangeOfNumber(int number) {
 		if (number > MAX_LOTTO_NUMBER) {
-			throw new IllegalArgumentException("기준치를 초과하였습니다.");
+			throw new IllegalArgumentException("기준 범위를 초과하였습니다.");
 		}
 	}
 }
