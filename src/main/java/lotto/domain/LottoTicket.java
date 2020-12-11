@@ -9,10 +9,10 @@ public class LottoTicket {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    private LottoTicket(final Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public static LottoTicket of(final String... lottoNumbers) {
@@ -28,13 +28,13 @@ public class LottoTicket {
     }
 
     public static LottoTicket of(final List<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> removedDuplication = new HashSet<>(lottoNumbers);
+        Set<LottoNumber> removedDuplication = new LinkedHashSet<>(lottoNumbers);
         int size = removedDuplication.size();
         if (size != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(
-                    String.format("로또 티켓의 로또 번호는 %d개 입니다. (입력 수: %d", LOTTO_NUMBER_COUNT, lottoNumbers.size()));
+                    String.format("로또 티켓의 로또 번호는 %d개 입니다. (입력 수: %d", LOTTO_NUMBER_COUNT, size));
         }
-        return new LottoTicket(lottoNumbers);
+        return new LottoTicket(removedDuplication);
     }
 
     public boolean contains(final int value) {
