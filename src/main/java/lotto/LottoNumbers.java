@@ -2,22 +2,16 @@ package lotto;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 	private final List<LottoNumber> numbers;
 
 	public LottoNumbers(List<LottoNumber> numbers) {
-		this.numbers = numbers.stream()
-			.sorted(LottoNumber::isGraterThanNumber).collect(Collectors.toList());
+		this.numbers = numbers;
 	}
 
-	public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
-		return this.numbers.contains(lottoNumber);
-	}
-
-	public int isContainsCount(LottoNumbers winningNumber) {
-		return (int) winningNumber.numbers.stream().filter(this::isContainsLottoNumber).count();
+	public List<LottoNumber> getNumbers() {
+		return numbers;
 	}
 
 	@Override

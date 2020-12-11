@@ -39,7 +39,7 @@ public class LottoNumberTest {
 	@DisplayName("순서가 다른 로또 숫자 그룹이 서로 일치하는지 확인")
 	@ParameterizedTest
 	@MethodSource("sortNumbers")
-	void 로또_정렬_TEST(List<Integer> targetList, List<Integer> resultList) {
+	void 로또_그룹_일치_TEST(List<Integer> targetList, List<Integer> resultList) {
 		LottoNumbers targetLottoNumbers = GenerateLottoNumber.manual(targetList);
 		LottoNumbers resultLottoNumbers = GenerateLottoNumber.manual(resultList);
 		assertThat(targetLottoNumbers).isEqualTo(resultLottoNumbers);

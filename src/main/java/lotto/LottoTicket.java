@@ -5,10 +5,9 @@ import java.util.stream.Collectors;
 
 public class LottoTicket extends ArrayList<LottoNumbers> {
 
-	public LottoResults generateWinningResult(LottoNumbers winningNumber) {
+	public LottoResults resultOfWinnerNumber(LottoWinnerNumber winningNumber) {
 		return new LottoResults(this.stream()
-			.map(lottoNumbers -> lottoNumbers.isContainsCount(winningNumber))
-			.map(LottoResult::new)
+			.map(winningNumber::matchesResult)
 			.collect(Collectors.toList()));
 	}
 }

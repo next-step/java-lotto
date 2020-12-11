@@ -25,7 +25,8 @@ class LottoResultsTest {
 	@MethodSource("sortNumbers")
 	void 로또_등수_TEST(LottoNumbers targetLotto, Rank rank) {
 		LottoNumbers lastWeekLottoNumbers = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
-		assertThat(new LottoResult(targetLotto.isContainsCount(lastWeekLottoNumbers)).isMatchesRank(rank)).isTrue();
+		LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(lastWeekLottoNumbers);
+		assertThat(lottoWinnerNumber.matchesResult(targetLotto).isMatchesRank(rank)).isTrue();
 	}
 
 	public static Stream<Arguments> sortNumbers() {
@@ -40,7 +41,7 @@ class LottoResultsTest {
 	@DisplayName("지난 주 당첨 번호와 비교해서 예측하는 당첨 통계와 일치하는지?")
 	@Test
 	void 당첨_통계_테스트() {
-		LottoNumbers lastWeekLottoNumber = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
+		LottoNumbers winnerNumber = GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43));
 
 		LottoTicket lottoTicket = new LottoTicket();
 		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(8, 21, 23, 41, 42, 43)));
@@ -49,7 +50,8 @@ class LottoResultsTest {
 		lottoTicket.add(GenerateLottoNumber.manual(Arrays.asList(6, 7, 8, 9, 10)));
 
 
-		LottoResults lottoResults = lottoTicket.generateWinningResult(lastWeekLottoNumber);
+		LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(winnerNumber);
+		LottoResults lottoResults = lottoTicket.resultOfWinnerNumber(lottoWinnerNumber);
 
 		assertThat(lottoResults.askCountOfRank(Rank.FOURTH)).isEqualTo(1);
 		assertThat(lottoResults.askCountOfRank(Rank.WINNER)).isEqualTo(1);

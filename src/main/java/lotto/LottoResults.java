@@ -4,15 +4,15 @@ import java.util.List;
 
 public class LottoResults {
 
-	private final List<LottoResult> lottoResults;
+	private final List<LottoResult> results;
 
-	public LottoResults(List<LottoResult> lottoResults) {
-		this.lottoResults = lottoResults;
+	public LottoResults(List<LottoResult> results) {
+		this.results = results;
 	}
 
 	public int askCountOfRank(Rank rankType) {
-		return (int) this.lottoResults.stream()
-			.filter(lottoResult -> lottoResult.isMatchesRank(rankType))
-			.count();
+		return Math.toIntExact(this.results.stream()
+			.filter(result -> result.isMatchesRank(rankType))
+			.count());
 	}
 }
