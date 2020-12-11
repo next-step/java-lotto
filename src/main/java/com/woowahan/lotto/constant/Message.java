@@ -19,4 +19,5 @@ public class Message {
 	public static final String MSG_REQUEST_LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 	public static final String MSG_REQUEST_MANUAL_CNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 	public static final String MSG_REQUEST_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
+	public static final String MSG_WRONG_MANUAL_CNT = "수동으로 구매할 로또 수가 구입금액보다 클 수 없습니다.";
 }

@@ -165,4 +165,21 @@ class PurchaseInputTest {
 		);
 	}
 
+	@DisplayName("구입 금액보다 수동로또수가 크면 IllegalArgumentException이 발생한다.")
+	@ParameterizedTest
+	@MethodSource("argOfOverManual")
+	void ofOverManual(String amount, List<String> manualNumbers) {
+		assertThatExceptionOfType(IllegalArgumentException.class)
+			.isThrownBy(() -> {
+				PurchaseInput.of(amount, manualNumbers);
+			}).withMessage(Message.MSG_WRONG_MANUAL_CNT);
+	}
+
+	public static Stream<Arguments> argOfOverManual() {
+		return Stream.of(
+			Arguments.of("1000", Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,45")),
+			Arguments.of("2000", Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,45", "3,7,9,4,5,45"))
+		);
+	}
+
 }

@@ -20,6 +20,13 @@ public class PurchaseInput {
 		for (String stringLotto : stringLottos) {
 			this.manualNumbers.add(validateStringLotto(stringLotto));
 		}
+		validateManualCnt();
+	}
+
+	private void validateManualCnt() {
+		if (this.purchaseAmount - getManualPurchaseAmount() < 0) {
+			throw new IllegalArgumentException(Message.MSG_WRONG_MANUAL_CNT);
+		}
 	}
 
 	private List<LottoNo> validateStringLotto(String stringLotto) {
