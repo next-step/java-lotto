@@ -10,4 +10,8 @@ public class LottoResult {
 	public boolean isMatchesRank(Rank rank) {
 		return this.rank.equals(rank);
 	}
+
+	public int getRankAmountMoney() {
+		return this.rank.getAmountMoney();
+	}
 }
