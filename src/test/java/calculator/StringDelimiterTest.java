@@ -20,4 +20,12 @@ class StringDelimiterTest {
         assertEquals(3, result.length);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자를 포함한 문자열 분리 테스트")
+    void split_by_custom_delimiter_test() {
+        String text = "//;\n1;2;3";
+        String[] result = StringDelimiter.splitByDelimiter(text);
+        assertEquals(3, result.length);
+    }
+
 }
