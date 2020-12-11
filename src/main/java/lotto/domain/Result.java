@@ -23,6 +23,6 @@ public class Result {
     }
 
     public String getWinningRatio(long purchasedPrice) {
-        return String.format(DIGIT, getTotalWinningPrice() / purchasedPrice);
+        return String.format(DIGIT, getTotalWinningPrice() / (double) purchasedPrice);
     }
 }
