@@ -10,5 +10,5 @@ public class Constants {
      public static final String OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG = "개를 구매했습니다.";
      public static final String OPEN_BRACKET = "[";
      public static final String CLOSE_BRACKET = "]";
-     public static final String JOINING_DELIMITER = ", ";
+     public static final String COMMA_DELIMITER = ", ";
 }

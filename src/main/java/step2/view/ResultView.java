@@ -23,7 +23,7 @@ public class ResultView {
 
     private void printEachLottery(Lottery lottery) {
         System.out.print(Constants.OPEN_BRACKET);
-        System.out.print(lottery.getSelectedNumbers().stream().map(Object::toString).collect(Collectors.joining(Constants.JOINING_DELIMITER)));
+        System.out.print(lottery.getSelectedNumbers().stream().map(Object::toString).collect(Collectors.joining(Constants.COMMA_DELIMITER)));
         System.out.println(Constants.CLOSE_BRACKET);
     }
 
