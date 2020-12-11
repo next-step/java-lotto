@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("주어진 문자열을 구분자를 사용해 숫자 리스트로 파싱하는 Parser 클래스 테스트")
 class ParserTest {
@@ -67,5 +69,52 @@ class ParserTest {
             Arguments.of("   "),
             Arguments.of("           ")
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "8", "9"})
+    @DisplayName("입력 문자열이 1자리 자연수일 때 확인하는 테스트")
+    void checkNaturalNumber(final String numbers) {
+        final Parser parser = new Parser();
+
+        assertTrue(parser.isNaturalNumber(numbers));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "10", "a", ""})
+    @DisplayName("입력 문자열이 1자리 자연수가 아닐 때 확인하는 테스트")
+    void checkNaturalNumberWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
+        final Parser parser = new Parser();
+
+        assertFalse(parser.isNaturalNumber(exp));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "8", "9"})
+    @DisplayName("입력 문자열이 1자리 자연수일 때 반환 리스트를 확인하는 테스트")
+    void checkReturnListWhenGivenNaturalNumber(final String exp) {
+        final Parser parser = new Parser();
+        List<Integer> numbers = new ArrayList<>();
+
+        numbers = parser.bindingWhenNumberIsNaturalNumber(exp, numbers);
+        final int expectedValue = Integer.parseInt(exp);
+
+        assertEquals(numbers.get(0), expectedValue);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "10", "a", ""})
+    @DisplayName("입력 문자열이 1자리 자연수가 아닐 때 반환 리스트를 확인하는 테스트")
+    void checkReturnListWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
+        assertThatThrownBy(() -> {
+            final Parser parser = new Parser();
+            List<Integer> numbers = new ArrayList<>();
+
+            numbers = parser.bindingWhenNumberIsNaturalNumber(exp, numbers);
+            final int expectedValue = Integer.parseInt(exp);
+
+            assertEquals(numbers.get(0), expectedValue);
+        })
+            .isInstanceOf(RuntimeException.class);
     }
 }

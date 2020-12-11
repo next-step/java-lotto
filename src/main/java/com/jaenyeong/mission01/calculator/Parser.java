@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    public static final int NONE = 0;
+    private static final int NONE = 0;
+    private static final String ONLY_NATURAL_NUMBER_EXP = "^[0-9]$";
+    private static final String TEXT_ERR_INVALID_STRING = "[error] : An invalid string was entered.";
 
-    public List<Integer> parseToNumbers(final String exp) {
+    public List<Integer> parseToNumbers(String exp) {
         final List<Integer> numbers = new ArrayList<>();
 
         if (isBlank(exp)) {
@@ -14,10 +16,32 @@ public class Parser {
             return numbers;
         }
 
+        exp = exp.trim();
+        if (isOneDigit(exp)) {
+            return bindingWhenNumberIsNaturalNumber(exp, numbers);
+        }
+
         return numbers;
     }
 
     protected boolean isBlank(final String exp) {
         return (exp == null) || (exp.trim().isEmpty());
+    }
+
+    protected boolean isOneDigit(final String exp) {
+        return (exp.length() == 1);
+    }
+
+    protected List<Integer> bindingWhenNumberIsNaturalNumber(final String exp, final List<Integer> numbers) {
+        if (isNaturalNumber(exp)) {
+            numbers.add(Integer.parseInt(exp));
+            return numbers;
+        }
+
+        throw new RuntimeException(TEXT_ERR_INVALID_STRING);
+    }
+
+    protected boolean isNaturalNumber(final String exp) {
+        return exp.matches(ONLY_NATURAL_NUMBER_EXP);
     }
 }
