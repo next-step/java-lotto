@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,44 +7,36 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringParser {
-	public static List<Integer> parse(String input) {
-		if (isEmptyString(input)) {
-			return Collections.singletonList(0);
+
+	private static final String DEFAULT_DELIMITER = ",|:";
+	private static final String CUSTOM_DELIMITER_REGX = "//(.)\n(.*)";
+	private static final int DELIMITER_INDEX = 1;
+	private static final int SPLIT_TARGET_TEXT_INDEX = 2;
+
+	public static ParsedNumbers parse(String input) {
+		if (StringUtils.isEmpty(input)) {
+			return new ParsedNumbers(new ParsedNumber());
 		}
-		return splitToIntList(input);
+		return new ParsedNumbers(parseToNumberList(input));
 	}
 
-	private static boolean isEmptyString(String input) {
-		return StringUtils.isEmpty(input);
-	}
-
-	private static List<Integer> splitToIntList(String input) {
+	private static List<ParsedNumber> parseToNumberList(String input) {
 		return splitString(input).stream()
-			.map(StringParser::parseToInt)
+			.map(ParsedNumber::new)
 			.collect(Collectors.toList());
 	}
 
 	private static List<String> splitString(String input) {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+		Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGX).matcher(input);
+		String delimiter = DEFAULT_DELIMITER;
 		if (m.find()) {
-			return splitByCustomDelimiter(m.group(1), m.group(2));
+			delimiter = m.group(DELIMITER_INDEX);
+			input = m.group(SPLIT_TARGET_TEXT_INDEX);
 		}
-		return splitByCommaOrColon(input);
+		return splitByCustomDelimiter(delimiter, input);
 	}
 
-	private static List<String> splitByCommaOrColon(String input) {
-		return Arrays.asList(input.split(",|:"));
-	}
-
-	private static List<String> splitByCustomDelimiter(String delimiter, String input) {
-		return Arrays.asList(input.split(delimiter));
-	}
-
-	private static int parseToInt(String number) {
-		int parsedInt = Integer.parseInt(number);
-		if (parsedInt < 0) {
-			throw new RuntimeException();
-		}
-		return parsedInt;
+	private static List<String> splitByCustomDelimiter(String delimiter, String targetText) {
+		return Arrays.asList(targetText.split(delimiter));
 	}
 }
