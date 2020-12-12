@@ -56,4 +56,9 @@ public class LottoTicket {
     private void throwException() {
         throw new IllegalArgumentException("6개의 로또 번호를 입력해주세요");
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
