@@ -23,6 +23,30 @@ class NumberTest {
     }
 
     @Test
+    @DisplayName("Number 제로(0) 값 생성")
+    void create_zero_number_test() {
+        // given
+        Number number = Number.zero();
+
+        // when & then
+        assertThat(number).isEqualTo(Number.of("0"));
+    }
+
+
+    @Test
+    @DisplayName("두개의 Number 값 더하기")
+    void number_plus_test() {
+        // given
+        Number number = Number.of("2");
+
+        // when
+        Number result = number.plus(Number.of("3"));
+
+        // then
+        assertThat(result.getValue()).isEqualTo(5);
+    }
+
+    @Test
     @DisplayName("음수가 포함된 문자열 입력시 예외 발생")
     void negative_input_check_test() {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
