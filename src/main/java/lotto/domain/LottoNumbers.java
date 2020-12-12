@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 public class LottoNumbers {
 	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
-	private Set<LottoNumber> numbers;
+	private LinkedHashSet<LottoNumber> numbers;
 
 	public LottoNumbers(List<LottoNumber> numbers) {
 		addLottoNumbersAll(numbers);
@@ -16,14 +15,10 @@ public class LottoNumbers {
 
 	private void addLottoNumbersAll(List<LottoNumber> numbers) {
 		this.numbers = Optional.of(numbers)
-			.map(HashSet::new)
+			.map(LinkedHashSet::new)
 			.filter(lottoNumbers -> verifyDuplicate(lottoNumbers.size(), numbers.size()))
 			.filter(lottoNumbers -> verifyNumbersSize(lottoNumbers.size()))
 			.orElseThrow(IllegalArgumentException::new);
-	}
-
-	public Set<LottoNumber> getNumbers() {
-		return this.numbers;
 	}
 
 	private boolean verifyDuplicate(int base, int target) {

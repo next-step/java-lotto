@@ -17,7 +17,9 @@ public class LottoApplication {
 		LottoTicket purchasedLottoTicket = LottoTicket.purchase(lottoPrice.purchaseTicketAmount());
 		OutputView.printMessage(LottoMessage.purchasedTickets(purchasedLottoTicket));
 
-		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser(InputView.askToUserLastWeekWinnerNumber());
+		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser(
+			InputView.askToUserLastWeekWinnerNumber(),
+			InputView.askToUserBonusNumber());
 		LottoResult lottoResult = LottoResult.compareTicketAndWinner(purchasedLottoTicket, lottoWinnerNumbers);
 		OutputView.printMessage(LottoMessage.winningStatistics(lottoResult));
 		OutputView.printMessage(LottoMessage.totalProfit(lottoPrice, lottoResult));

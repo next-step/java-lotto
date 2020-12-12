@@ -47,7 +47,7 @@ public enum Rank {
 
 	public static Stream<Rank> greaterThanCountZeroAndSortedAmount() {
 		return Arrays.stream(values())
-			.sorted(Comparator.comparingInt(Rank::getMatchesCount))
+			.sorted(Comparator.comparingInt(Rank::getAmountMoney))
 			.filter(target -> target.getAmountMoney() > 0);
 	}
 
