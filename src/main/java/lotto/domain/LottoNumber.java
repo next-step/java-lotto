@@ -13,6 +13,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String numberValue) {
+        this(Integer.parseInt(numberValue));
+    }
+
     private void validate(int number) {
         if (number >= MIN_NUMBER && number <= MAX_NUMBER) {
             return;
