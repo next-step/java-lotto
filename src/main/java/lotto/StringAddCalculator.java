@@ -18,7 +18,7 @@ public class StringAddCalculator {
 		return sum(inputText.split(DEFAULT_DELIMITER));
 	}
 
-	private static Integer sum(String[] tokens) {
+	private static int sum(String[] tokens) {
 		Integer result = 0;
 		for (String input : tokens) {
 			result += validateNumber(convertInteger(input));
