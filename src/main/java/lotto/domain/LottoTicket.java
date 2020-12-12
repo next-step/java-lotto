@@ -1,15 +1,15 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoTicket {
 	private final List<LottoNumbers> lottoNumbers;
 
 	public LottoTicket(List<LottoNumbers> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
 	public static LottoTicket purchase(int numberOfTicket) {
@@ -18,7 +18,7 @@ public class LottoTicket {
 		return new LottoTicket(lottoNumbers);
 	}
 
-	public Stream<LottoNumbers> stream() {
-		return lottoNumbers.stream();
+	public List<LottoNumbers> getLottoNumbers() {
+		return lottoNumbers;
 	}
 }

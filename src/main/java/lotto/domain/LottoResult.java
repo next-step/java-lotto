@@ -15,7 +15,14 @@ public class LottoResult {
 	}
 
 	public static LottoResult compareTicketAndWinner(LottoTicket lottoTicket, LottoWinnerNumbers lottoWinnerNumbers) {
-		return new LottoResult(lottoTicket.stream().collect(groupingBy(lottoNumbers -> matchesRank(lottoNumbers, lottoWinnerNumbers), HashMap::new, Collectors.counting())));
+		return new LottoResult(lottoTicket
+			.getLottoNumbers()
+			.stream()
+			.collect(
+				groupingBy(
+					lottoNumbers -> matchesRank(lottoNumbers, lottoWinnerNumbers),
+					HashMap::new,
+					Collectors.counting())));
 	}
 
 	public static Rank matchesRank(LottoNumbers targetNumbers, LottoWinnerNumbers lottoWinnerNumbers) {

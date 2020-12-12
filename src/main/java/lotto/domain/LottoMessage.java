@@ -7,7 +7,8 @@ public class LottoMessage {
 	private static final String RATE_MESSAGE = "총 수익률은 %1$,.2f입니다.";
 
 	public static String purchasedTickets(LottoTicket lottoTicket) {
-		return lottoTicket.stream()
+		return lottoTicket.getLottoNumbers()
+			.stream()
 			.map(String::valueOf)
 			.collect(Collectors.joining("\n"));
 	}
