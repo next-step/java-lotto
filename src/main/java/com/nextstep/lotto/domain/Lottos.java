@@ -14,6 +14,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    public int count() {
+        return lottos.size();
+    }
+
     public LottoStatistics getStatistics(String winningNumberString) {
         List<Integer> winningNumbers = parseToList(winningNumberString);
         LottoStatistics lottoStatistics = new LottoStatistics();
