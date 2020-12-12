@@ -30,10 +30,7 @@ public class Main {
         lottos.buyManualLottos(manualLottoNumbersList);
         buyAutoLottos(lottos, money, lottoGenerator);
 
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoResultNumber(InputView.getResultNumber());
-        resultNumber.settingLottoBonusNumber(InputView.getBonusNumber());
+        ResultNumber resultNumber = new ResultNumber(InputView.getResultNumber(), InputView.getBonusNumber());
 
         Statistic statistic = new Statistic();
         lottos.checkResult(statistic, resultNumber);

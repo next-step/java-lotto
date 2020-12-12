@@ -24,10 +24,7 @@ public class LottoTest {
 
         Lotto lotto = new Lotto(fixedNumberGenerator.getLottoNumbers());
         Statistic statistic = new Statistic();
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 9, 10");
-        resultNumber.settingLottoBonusNumber("11");
+        ResultNumber resultNumber = new ResultNumber("1, 3, 5, 7, 9, 10", "11");
 
         lotto.checkReward(statistic, resultNumber);
 

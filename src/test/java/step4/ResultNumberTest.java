@@ -10,9 +10,7 @@ public class ResultNumberTest {
     @Test
     @DisplayName("Result Number Test")
     void CheckResultNumberTest() {
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 9, 11");
+        ResultNumber resultNumber = new ResultNumber("1, 3, 5, 7, 9, 11", "11");
 
         Lotto lotto = getLotto();
         assertThat(resultNumber.checkLottoResult(lotto.numberList)).isEqualTo(6);
@@ -21,9 +19,7 @@ public class ResultNumberTest {
     @Test
     @DisplayName("Result bonus number test")
     void CheckBonusNumberTest() {
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoBonusNumber("11");
+        ResultNumber resultNumber = new ResultNumber("1, 3, 5, 7, 9, 11", "11");
 
         Lotto lotto = getLotto();
         assertThat(resultNumber.checkBonusResult(lotto.numberList)).isTrue();

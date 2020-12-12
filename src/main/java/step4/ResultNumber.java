@@ -9,14 +9,19 @@ public class ResultNumber {
     private List<LottoNumber> resultNumberList = new ArrayList<>();
     private LottoNumber bonusNumber;
 
-    public void settingLottoResultNumber(String resultString) {
+    public ResultNumber(String resultString, String inputBonusNumber) {
+        settingLottoResultNumber(resultString);
+        settingLottoBonusNumber(inputBonusNumber);
+    }
+
+    private void settingLottoResultNumber(String resultString) {
         resultNumberList = new ArrayList<>();
         for (String number : resultString.split(", ")) {
             resultNumberList.add(new LottoNumber(Integer.parseInt(number)));
         }
     }
 
-    public void settingLottoBonusNumber(String inputBonusNumber) {
+    private void settingLottoBonusNumber(String inputBonusNumber) {
         bonusNumber = new LottoNumber(Integer.parseInt(inputBonusNumber));
     }
 

@@ -24,10 +24,7 @@ public class StaticticTest {
         main.buyAutoLottos(lottos, money, fourWinningsGenerator);
 
         Statistic statistic = new Statistic();
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
-        resultNumber.settingLottoBonusNumber("12");
+        ResultNumber resultNumber = new ResultNumber("1, 3, 5, 7, 10, 11", "12");
 
         lottos.checkResult(statistic, resultNumber);
 
