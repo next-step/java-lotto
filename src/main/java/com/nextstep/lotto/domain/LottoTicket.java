@@ -40,7 +40,7 @@ public class LottoTicket {
         return matchedNumbers.size();
     }
 
-    private boolean isContains(LottoNumber lottoNumber) {
+    boolean isContains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
