@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -30,5 +30,14 @@ public enum LottoRank {
 
 	public int getEarnings() {
 		return earnings;
+	}
+
+	public static boolean isNotNoting(LottoRank rank) {
+		return rank != NOTHING;
+	}
+
+	@Override
+	public String toString() {
+		return matchCount + "개 일치 (" + earnings + "원)";
 	}
 }

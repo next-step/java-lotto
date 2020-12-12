@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,5 +46,10 @@ public class LottoNumber {
 			isValid = isValid && numbers.get(i) > numbers.get(i-1);
 		}
 		return isValid;
+	}
+
+	@Override
+	public String toString() {
+		return this.numbers.toString();
 	}
 }

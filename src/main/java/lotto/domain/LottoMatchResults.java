@@ -1,7 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoMatchResults {
 	private Map<LottoRank, Integer> results;
@@ -33,5 +34,17 @@ public class LottoMatchResults {
 
 	public double getEarningRate() {
 		return (double) this.getTotalEarnings() / this.payment;
+	}
+
+	public boolean isLoss() {
+		return this.getEarningRate() < 1;
+	}
+
+	@Override
+	public String toString() {
+		return this.results.keySet().stream()
+			.filter(LottoRank::isNotNoting)
+			.map(rank -> rank.toString() + "- " + results.get(rank) + "개")
+			.collect(Collectors.joining("\n"));
 	}
 }

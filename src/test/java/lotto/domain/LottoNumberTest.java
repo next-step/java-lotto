@@ -1,15 +1,14 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumberTest {
-	private List<Integer> numbers;
+
 	@Test
 	@DisplayName("로또 번호는 6개의 숫자여야 한다")
 	void generatedLottoNumberSizeTest() {

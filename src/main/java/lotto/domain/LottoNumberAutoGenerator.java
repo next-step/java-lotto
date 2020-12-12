@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,13 +17,17 @@ public class LottoNumberAutoGenerator{
 
 	public static LottoNumber generate() {
 		shuffle();
-		List<Integer> lottoNumbers = LOTTO_TOTAL_NUMBERS.subList(0, 6);
+		List<Integer> lottoNumbers = subList();
 		sort(lottoNumbers);
 		return new LottoNumber(lottoNumbers);
 	}
 
 	private static void shuffle() {
 		Collections.shuffle(LOTTO_TOTAL_NUMBERS);
+	}
+
+	private static List<Integer> subList() {
+		return new ArrayList<>(LOTTO_TOTAL_NUMBERS.subList(0, 6));
 	}
 
 	private static void sort(List<Integer> numbers) {
