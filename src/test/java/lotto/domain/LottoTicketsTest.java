@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,30 +18,9 @@ public class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         lottoTickets = LottoTickets.of(Arrays.asList(
-                LottoTicket.of(Arrays.asList(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6))
-                ),
-                LottoTicket.of(Arrays.asList(
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6),
-                        LottoNumber.valueOf(7))
-                ),
-                LottoTicket.of(Arrays.asList(
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6),
-                        LottoNumber.valueOf(7),
-                        LottoNumber.valueOf(8))
-                )
+                createLottoTicket(1, 2, 3, 4, 5, 6),
+                createLottoTicket(2, 3, 4, 5, 6, 7),
+                createLottoTicket(3, 4, 5, 6, 7, 8)
         ));
     }
 
@@ -51,14 +28,7 @@ public class LottoTicketsTest {
     @Test
     void match() {
         // given
-        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6))
-        );
+        LottoTicket winningTicket = createLottoTicket(1, 2, 3, 4, 5, 6);
         WinningLotto winningLotto = WinningLotto.of(winningTicket, LottoNumber.valueOf(7));
 
         // when
@@ -66,5 +36,11 @@ public class LottoTicketsTest {
 
         // then
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.FOURTH);
+    }
+
+    private LottoTicket createLottoTicket(final int... value) {
+        return Arrays.stream(value)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
     }
 }

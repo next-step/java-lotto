@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,56 +20,27 @@ public class LottoMachineTest {
             @Override
             public LottoTickets automatic(final long amount) {
                 return LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(
-                                LottoNumber.valueOf(1),
-                                LottoNumber.valueOf(2),
-                                LottoNumber.valueOf(3),
-                                LottoNumber.valueOf(4),
-                                LottoNumber.valueOf(5),
-                                LottoNumber.valueOf(6))
-                        ),
-                        LottoTicket.of(Arrays.asList(
-                                LottoNumber.valueOf(2),
-                                LottoNumber.valueOf(3),
-                                LottoNumber.valueOf(4),
-                                LottoNumber.valueOf(5),
-                                LottoNumber.valueOf(6),
-                                LottoNumber.valueOf(7))
-                        ),
-                        LottoTicket.of(Arrays.asList(
-                                LottoNumber.valueOf(3),
-                                LottoNumber.valueOf(4),
-                                LottoNumber.valueOf(5),
-                                LottoNumber.valueOf(6),
-                                LottoNumber.valueOf(7),
-                                LottoNumber.valueOf(8))
-                        )
+                        createLottoTicket(1, 2, 3, 4, 5, 6),
+                        createLottoTicket(2, 3, 4, 5, 6, 7),
+                        createLottoTicket(3, 4, 5, 6, 7, 8)
                 ));
             }
 
             @Override
             public LottoTicket manual(final String numbers) {
-                return LottoTicket.of(Arrays.asList(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6))
-                );
+                return createLottoTicket(1, 2, 3, 4, 5, 6);
             }
 
             @Override
             public WinningLotto winning(final String winningNumbers, final String bonusNumber) {
-                LottoTicket winningTicket = LottoTicket.of(Arrays.asList(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6))
-                );
+                LottoTicket winningTicket = createLottoTicket(1, 2, 3, 4, 5, 6);
                 return WinningLotto.of(winningTicket, LottoNumber.valueOf(7));
+            }
+
+            private LottoTicket createLottoTicket(final int... value) {
+                return Arrays.stream(value)
+                        .mapToObj(LottoNumber::valueOf)
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
             }
         };
     }

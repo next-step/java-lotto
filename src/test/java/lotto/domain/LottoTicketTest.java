@@ -8,9 +8,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,14 +22,7 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setup() {
-        lottoTicket = LottoTicket.of(Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6))
-        );
+        lottoTicket = createLottoTicket(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("로또 티켓은 6개의 로또번호로 만들어진다.")
@@ -50,7 +44,7 @@ public class LottoTicketTest {
         assertThrows(IllegalArgumentException.class, () -> LottoTicket.of(
                 Arrays.stream(values)
                         .mapToObj(LottoNumber::valueOf)
-                        .collect(Collectors.toList()))
+                        .collect(toList()))
         );
     }
 
@@ -77,19 +71,18 @@ public class LottoTicketTest {
     })
     void matchCount(int expected, int num1, int num2, int num3, int num4, int num5, int num6) {
         // given
-        LottoTicket other = LottoTicket.of(Arrays.asList(
-                LottoNumber.valueOf(num1),
-                LottoNumber.valueOf(num2),
-                LottoNumber.valueOf(num3),
-                LottoNumber.valueOf(num4),
-                LottoNumber.valueOf(num5),
-                LottoNumber.valueOf(num6)
-        ));
+        LottoTicket other = createLottoTicket(num1, num2, num3, num4, num5, num6);
 
         // when
         int match = lottoTicket.match(other);
 
         // then
         assertThat(match).isEqualTo(expected);
+    }
+
+    private LottoTicket createLottoTicket(int... values) {
+        return Arrays.stream(values)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(collectingAndThen(toList(), LottoTicket::of));
     }
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -22,13 +24,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        winningTicket = LottoTicket.of(Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6)));
+        winningTicket = createLottoTicket(1, 2, 3, 4, 5, 6);
         winningLotto = WinningLotto.of(winningTicket, LottoNumber.valueOf(7));
     }
 
@@ -90,19 +86,18 @@ public class WinningLottoTest {
     })
     void match(int num1, int num2, int num3, int num4, int num5, int num6, String value) {
         // given
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(
-                LottoNumber.valueOf(num1),
-                LottoNumber.valueOf(num2),
-                LottoNumber.valueOf(num3),
-                LottoNumber.valueOf(num4),
-                LottoNumber.valueOf(num5),
-                LottoNumber.valueOf(num6)
-        ));
+        LottoTicket lottoTicket = createLottoTicket(num1, num2, num3, num4, num5, num6);
 
         // when
         Rank rank = winningLotto.match(lottoTicket);
 
         // then
         assertThat(rank).isEqualTo(Rank.valueOf(value));
+    }
+
+    private LottoTicket createLottoTicket(int... values) {
+        return Arrays.stream(values)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(collectingAndThen(toList(), LottoTicket::of));
     }
 }
