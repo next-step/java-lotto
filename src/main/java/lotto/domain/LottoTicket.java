@@ -22,14 +22,14 @@ public class LottoTicket {
         }
     }
 
-    private void throwException() {
-        throw new IllegalArgumentException("6개의 로또 번호를 입력해주세요");
-    }
-
     public int matchCount(LottoTicket lastWinningTicket) {
         HashSet<LottoNumber> compareLottoTicket = new HashSet<>(this.lottoNumbers);
         compareLottoTicket.retainAll(lastWinningTicket.lottoNumbers);
 
         return compareLottoTicket.size();
+    }
+
+    private void throwException() {
+        throw new IllegalArgumentException("6개의 로또 번호를 입력해주세요");
     }
 }
