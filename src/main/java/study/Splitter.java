@@ -6,11 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Splitter {
-    private final static String DELIMITER = "[,:]";
-    private final static String PATTERN = "//(.)\n(.*)";
+    private static final String DELIMITER = "[,:]";
+    private static final String PATTERN = "//(.)\n(.*)";
     private static final Pattern CUSTOM_PATTERN = Pattern.compile(PATTERN);
-    private final static int CUSTOM_DELIMITER_INDEX = 1;
-    private final static int MATCHER_STRING_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int MATCHER_STRING_INDEX = 2;
 
     protected static List<String> split(String string) {
         Matcher matcher = CUSTOM_PATTERN.matcher(string);

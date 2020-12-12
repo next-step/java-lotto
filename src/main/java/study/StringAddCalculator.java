@@ -3,7 +3,7 @@ package study;
 import java.util.List;
 
 public class StringAddCalculator {
-    private final static int DEFAULT_VALUE = 0;
+    private static final int DEFAULT_VALUE = 0;
 
     public static int splitAndSum(String string) {
         CalculatorInput calculatorInput = new CalculatorInput(string);
