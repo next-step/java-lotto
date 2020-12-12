@@ -36,7 +36,7 @@ class InputStringTest {
 
     @ParameterizedTest
     @MethodSource("generateSplitData")
-    @DisplayName("구분자를 가지고 잘라줌")
+    @DisplayName("split 기능 테스트")
     void split(String input, String[] expected) {
         InputString inputString = new InputString(input);
         Assertions.assertArrayEquals(inputString.split(), expected);
