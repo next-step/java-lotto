@@ -16,7 +16,11 @@ public class LottoRunner {
         OutputView.printWinningTicketInput();
         // TODO: WinningTicket을 받아서 처리하는 부분에서 BonusNumber도 처리할 수 있도록 변경되야 함
         LottoTicket winningTicket = InputView.getWinningTicket();
-        WinningTicket tempWinningTicketForTest = new WinningTicket(winningTicket, new LottoNumber(10));
+
+        OutputView.printBonusNumberInput();
+        LottoNumber bonusNumber = InputView.getBonusNumber();
+
+        WinningTicket tempWinningTicketForTest = new WinningTicket(winningTicket, bonusNumber);
 
         LottoPrize lottoPrize = lottoTickets.checkResult(tempWinningTicketForTest);
         OutputView.printStatistics(money, lottoPrize);

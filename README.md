@@ -161,4 +161,6 @@
 - BonusNumberInputView(class)
   - [X] 보너스 번호를 사용자로부터 입력받을 수 있도록 기능 추가
 - OutputView(class)
-  - [ ] 사용자에게 보너스 번호를 요청할 수 있도록 문구 출력 기능 추가
+  - [X] 사용자에게 보너스 번호를 요청할 수 있도록 문구 출력 기능 추가
+- StatisticsOutputView
+  - [ ] 당첨 종합 결과에 2등 내용을 포함해서 보여주도록 변경
