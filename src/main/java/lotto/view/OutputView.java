@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printPurchaseLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printPurchaseLottos(List<Lotto> lottos, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + (lottos.size() - manualLottoCount) + "개를 구매했습니다.");
         lottos.stream().forEach(lotto -> printLottoNums(lotto));
-
     }
+
     private static void printLottoNums(Lotto lotto) {
         List<Number> sortLotto = new ArrayList<>(lotto.getNums());
         Collections.sort(sortLotto);
@@ -24,10 +24,12 @@ public class OutputView {
                 + sortLotto.stream()
                 .map(number -> String.valueOf(number.getNum())).collect(Collectors.joining(", "))
                 + "]");
+        System.out.println();
     }
 
     public static void printWinningStatistics(Result result) {
         List<Rank> winningResult = result.getResult();
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- "

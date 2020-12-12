@@ -13,8 +13,12 @@ public class Main {
     public static void main(String[] args) {
 
         Long money = InputView.inputMoney();
-        List<Lotto> lottos = Shop.buyLottos(money);
-        OutputView.printPurchaseLottos(lottos);
+        Long manualLottoCount = InputView.inputManualLottoCount();
+
+        List<String> manualLottos = InputView.inputManualLotto(manualLottoCount);
+
+        List<Lotto> lottos = Shop.buyLottos(money, manualLottos);
+        OutputView.printPurchaseLottos(lottos, manualLottos.size());
 
         Lotto winningLotto = new Lotto(InputView.inputWinningLotto());
         Number BounsNum = Number.of(InputView.inputBounsNumber());
