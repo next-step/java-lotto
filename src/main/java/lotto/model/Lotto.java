@@ -2,15 +2,14 @@ package lotto.model;
 
 import java.util.EnumMap;
 
-
 public class Lotto {
     private final LottoTickets lottoTickets;
     private final int ticketPrice = 1000;
-    private final int ticketCount;
+    private int ticketCount;
 
-    public Lotto(int money){
+    public Lotto(int money, String[] manualNumbers){
         this.ticketCount = money / ticketPrice;
-        this.lottoTickets = LottoTickets.of(ticketCount);
+        this.lottoTickets = LottoTickets.of(ticketCount - manualNumbers.length, manualNumbers);
     }
 
     public LottoTickets getLottoTickets(){

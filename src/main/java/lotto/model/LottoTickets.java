@@ -18,9 +18,30 @@ public class LottoTickets {
         }
         return new LottoTickets(tickets);
     }
+    public static LottoTickets of(int ticketCount, String[] manualNumbers) {
+        List<LottoTicket> tickets = new ArrayList<>();
+
+        //수동번호
+        for (int i = 0; i < manualNumbers.length; i++) {
+            tickets.add(LottoTicket.of(manualNumbers[i]));
+        }
+
+        //자동번호
+        for (int i = 0; i < ticketCount; i++) {
+            LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
+            tickets.add(new LottoTicket(lottoNumberMaker.makeNumber()));
+        }
+        return new LottoTickets(tickets);
+    }
 
     public int getTicketCount() {
         return lottoTickets.size();
+    }
+
+    public Long getAutoTicketCount(){
+        return lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.getTicketType()
+                        .equals(TicketType.AUTO)).count();
     }
 
     public LottoTicket oneOf(int count) {
