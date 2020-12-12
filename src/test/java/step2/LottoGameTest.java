@@ -60,17 +60,29 @@ class LottoGameTest {
         assertThat(lotteryList.size()).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @Test
     @DisplayName("구매한 로또 묶음 당첨 여부 테스트")
-    @MethodSource("lotteryList")
-    void winning_test(List<Lottery> lotteryList) {
+    void winning_test() {
+        Lottery[] lotteries = {
+                new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lottery(Arrays.asList(2, 3, 4, 5, 6, 7)),
+                new Lottery(Arrays.asList(3, 4, 5, 6, 7, 8)),
+                new Lottery(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                new Lottery(Arrays.asList(6, 7, 8, 9, 10, 45))
+        };
+        List<Lottery> lotteryList = Arrays.asList(lotteries);
+
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
         Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
+
+        String [] matchedValues = new String[lotteryList.size()];
+
+        for (int i = 0; i < lotteryList.size(); i++) {
+            matchedValues[i] = Integer.toString(matchedResult.get(lotteryList.get(i)));
+        }
+
         assertThat(
-                matchedResult.values()
-                                .stream()
-                                .map(Object::toString)
-                                .collect(Collectors.joining(","))
+                String.join(",", matchedValues)
         ).isEqualTo("6,5,4,3,1");
     }
 }
