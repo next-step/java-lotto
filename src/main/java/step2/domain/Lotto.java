@@ -23,7 +23,6 @@ public class Lotto {
             throw new IllegalArgumentException("같은 숫자가 포함돼 있습니다.");
         }
 
-
         return new Lotto(lottoNumbers);
     }
 
