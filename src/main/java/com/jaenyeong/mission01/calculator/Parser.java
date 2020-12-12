@@ -42,10 +42,10 @@ public class Parser {
             return parseToIntListFromMatcher(matcher);
         }
 
-        final List<String> expList = Arrays.stream(expression.split(DEFAULT_SEPARATORS))
+        final List<String> expressionList = Arrays.stream(expression.split(DEFAULT_SEPARATORS))
             .collect(Collectors.toList());
 
-        return parserToIntListFromExpList(expList);
+        return parserToIntListFromExpList(expressionList);
     }
 
     private static List<Integer> parseToIntListFromMatcher(final Matcher matcher) {
@@ -55,8 +55,8 @@ public class Parser {
             .collect(Collectors.toList());
     }
 
-    private static List<Integer> parserToIntListFromExpList(final List<String> expList) {
-        return expList.stream()
+    private static List<Integer> parserToIntListFromExpList(final List<String> expressionList) {
+        return expressionList.stream()
             .map(Parser::parseToIntOnlyNaturalNumber)
             .collect(Collectors.toList());
     }
