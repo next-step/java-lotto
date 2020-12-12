@@ -12,7 +12,7 @@ public class OutputView {
         System.out.println(lottoTickets.size() + "개를 구매했습니다.");
         lottoTickets.forEach(lottoTicket -> System.out.println(lottoNumbersToString(lottoTicket.getLottoNumbers())));
     }
-    
+
     private static String lottoNumbersToString(List<LottoNumber> lottoNumbers) {
         return Arrays.toString(lottoNumbers.stream()
                 .mapToInt(LottoNumber::getValue)
