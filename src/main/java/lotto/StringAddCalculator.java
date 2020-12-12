@@ -13,7 +13,9 @@ public class StringAddCalculator {
 			.orElse("");
 		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
 		if (m.find()) {
-			return sum(m.group(2).split(m.group(1)));
+			String delimiter = m.group(1);
+			String expression = m.group(2);
+			return sum(expression.split(delimiter));
 		}
 		return sum(inputText.split(DEFAULT_DELIMITER));
 	}
