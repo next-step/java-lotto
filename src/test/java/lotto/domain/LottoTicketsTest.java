@@ -51,7 +51,7 @@ public class LottoTicketsTest {
     @Test
     void match() {
         // given
-        LottoTicket winning = LottoTicket.of(Arrays.asList(
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
@@ -59,11 +59,12 @@ public class LottoTicketsTest {
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6))
         );
+        WinningLotto winningLotto = WinningLotto.of(winningTicket, LottoNumber.valueOf(7));
 
         // when
-        List<Rank> ranks = lottoTickets.match(winning);
+        List<Rank> ranks = lottoTickets.match(winningLotto);
 
         // then
-        assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD);
+        assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.FOURTH);
     }
 }

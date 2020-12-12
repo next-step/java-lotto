@@ -5,18 +5,22 @@ import lotto.domain.LottoTickets;
 public class ReportRequest {
 
     private final LottoTickets lottoTickets;
-    private final String winningLottoNumbers;
+    private final WinningRequest winningRequest;
 
-    public ReportRequest(final LottoTickets lottoTickets, final String winningLottoNumbers) {
+    public ReportRequest(final LottoTickets lottoTickets, final WinningRequest winningRequest) {
         this.lottoTickets = lottoTickets;
-        this.winningLottoNumbers = winningLottoNumbers;
+        this.winningRequest = winningRequest;
     }
 
     public LottoTickets getLottoTickets() {
         return lottoTickets;
     }
 
-    public String getWinningLottoNumbers() {
-        return winningLottoNumbers;
+    public String getWinningNumbers() {
+        return winningRequest.getWinningNumbers();
+    }
+
+    public String getBonusNumber() {
+        return winningRequest.getBonusNumbers();
     }
 }

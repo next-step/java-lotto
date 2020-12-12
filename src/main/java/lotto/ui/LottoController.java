@@ -14,11 +14,11 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public PurchaseResponse purchase(PurchaseRequest request) {
+    public PurchaseResponse purchase(final PurchaseRequest request) {
         return lottoService.create(request.getAmount());
     }
 
-    public ReportResponse report(ReportRequest reportRequest) {
-        return lottoService.report(reportRequest.getLottoTickets(), reportRequest.getWinningLottoNumbers());
+    public ReportResponse report(final ReportRequest reportRequest) {
+        return lottoService.report(reportRequest);
     }
 }

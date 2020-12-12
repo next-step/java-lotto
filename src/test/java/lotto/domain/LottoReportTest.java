@@ -51,7 +51,7 @@ public class LottoReportTest {
         double rate = fourth.profitRate();
 
         // then
-        assertThat(rate).isEqualTo(1.66);
+        assertThat(rate).isEqualTo(16.66);
     }
 
 }
