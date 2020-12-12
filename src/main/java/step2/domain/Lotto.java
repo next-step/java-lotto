@@ -57,7 +57,7 @@ public class Lotto {
         return this.numbers.contains(winNumber);
     }
 
-    public boolean isContainsBonusNumber(int bonusNumber) {
+    public boolean isContainsBonusNumber(LottoNo bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
 

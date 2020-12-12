@@ -37,7 +37,7 @@ public class WinningLottoNumber {
         return this.winningNumbers.getNumbers().contains(bonusNumber);
     }
 
-    public int getBonusNumber() {
-        return this.bonusNumber.getNumber();
+    public LottoNo getBonusNumber() {
+        return this.bonusNumber;
     }
 }

@@ -39,6 +39,7 @@ class WinningLottoNumberTest {
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(winningNumber);
 
         assertThat(winningLottoNumber.findIsMatchNumberCount(Lotto.create(Arrays.asList(5,6,7,8,9,10)))).isEqualTo(1);
+        assertThat(winningLottoNumber.findIsMatchNumberCount(Lotto.create(Arrays.asList(1,2,3,4,5,45)))).isEqualTo(6);
     }
 
 
