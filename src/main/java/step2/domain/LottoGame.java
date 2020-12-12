@@ -6,12 +6,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
     private List<Lottery> lotteryList;
 
     private Map<Lottery, Integer> matchedResult;
+
+    public static Map<Integer, Integer> prizeMoney;
+
+    private int profit;
+
+    static {
+        prizeMoney = new HashMap<>();
+        prizeMoney.put(3, 5000);
+        prizeMoney.put(4, 50000);
+        prizeMoney.put(5, 1500000);
+        prizeMoney.put(6, 2000000000);
+    }
 
     public LottoGame() {
 
@@ -79,5 +92,30 @@ public class LottoGame {
         }
 
         return matchedResult;
+    }
+
+    /**
+     * 수익률을 계산하는 메소드
+     * @param money 구입 금액
+     * @param matchedResult 로또 매칭 결과
+     * @return 수익률
+     */
+    public float calculateProfit(int money, Map<Lottery, Integer> matchedResult) {
+        this.profit = getProfit(matchedResult);
+        return (float) (this.profit / money);
+    }
+
+    /**
+     * 총 당첨 금액을 계산하는 메소드
+     * @param matchedResult 로또 매칭 결과
+     * @return 당첨 금액
+     */
+    private int getProfit(Map<Lottery, Integer> matchedResult) {
+        int money = 0;
+
+        for (int count : matchedResult.values()) {
+            money += prizeMoney.getOrDefault(count, 0);
+        }
+        return money;
     }
 }
