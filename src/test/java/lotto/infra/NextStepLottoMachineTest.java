@@ -8,11 +8,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("넥스트 스탭 로또 기계(LottoMachine) 테스트")
 public class NextStepLottoMachineTest {
@@ -41,6 +43,21 @@ public class NextStepLottoMachineTest {
         // then
         assertThat(lottoTickets.count()).isEqualTo(expected);
         System.out.println(lottoTickets);
+    }
+
+    @DisplayName("구매 금액이 수동 로또 금액보다 낮을 경우 예외처리 한다")
+    @ParameterizedTest
+    @ValueSource(longs = {500, 2900})
+    void cantGenerate(long amount) {
+        // given
+        List<String> manualNumbers = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "2, 3, 4, 5, 6, 7",
+                "3, 4, 5, 6, 7, 8"
+        );
+
+        // when / then
+        assertThrows(IllegalArgumentException.class, () -> nextStepLottoMachine.generate(amount, manualNumbers));
     }
 
     @DisplayName("당첨 티켓과 보너스번호를 추가로 받아 우승 로또를 만들 수 있다.")

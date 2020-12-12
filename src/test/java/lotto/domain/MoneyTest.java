@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -78,6 +77,25 @@ public class MoneyTest {
 
         // then
         assertThat(multiply).isEqualTo(Money.valueOf(expected));
+    }
+
+    @DisplayName("특정 금액보다 모자란지 확인 할 수있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1000,800,false",
+            "1000,1500,true",
+            "1000,1000,false"
+    })
+    void isLessThen(long amount, long other, boolean expected) {
+        // given
+        Money money = Money.valueOf(amount);
+        Money required = Money.valueOf(other);
+
+        // when
+        boolean lessThen = money.isLessThen(required);
+
+        // then
+        assertThat(lessThen).isEqualTo(expected);
     }
 
     @DisplayName("수익률을 구할 수 있다.")
