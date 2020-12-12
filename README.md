@@ -20,6 +20,11 @@
 + 입력,출력을 하는 기능 
 + 입력과 출력이 이루어지는 메인 클래스 기능
 
+### 구현한 클래스 설명
++ InputString : 입력값 Wrapping (validation, split 등) input 문자열 처리 담당
++ StringAddCalculator : StringCalculator의 구현체로 문자열 덧셈 계산 담당
++ InputView, OutputView : Input, Ouput View를 담당
++ StringAddCalculatorMain : 프로그램 실행을 담당 
 
 ## Step2
 
