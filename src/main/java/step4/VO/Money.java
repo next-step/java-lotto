@@ -26,7 +26,7 @@ public class Money {
     }
 
     public boolean compareMoney(int inputMoney) {
-        return inputMoney > money;
+        return inputMoney > getLottoCnt();
     }
 
     @Override
