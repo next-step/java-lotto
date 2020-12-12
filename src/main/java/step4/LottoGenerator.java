@@ -8,13 +8,13 @@ import java.util.List;
 
 public class LottoGenerator {
     public static final int lottoSize = 6;
-    public final List<Integer> numbers;
+    public final List<LottoNumber> numbers;
 
     public LottoGenerator(){
         numbers = new ArrayList<>();
 
         for (int i = 1; i <= LottoNumber.maxNumber; i++) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
     }
 
@@ -23,7 +23,7 @@ public class LottoGenerator {
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < lottoSize ; i++) {
-            lottoNumbers.add(new LottoNumber(numbers.get(i)));
+            lottoNumbers.add(numbers.get(i));
         }
         return lottoNumbers;
     }
