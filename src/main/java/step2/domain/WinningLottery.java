@@ -15,7 +15,7 @@ public class WinningLottery {
      * @param winningNumbers 입력 받은 당첨 번호 문자열
      */
     public WinningLottery(String[] winningNumbers) {
-        if (winningNumbers.length != Constants.WINNING_NUMBER_LENGTH) {
+        if (winningNumbers.length != Constants.LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_MUST_BE_6);
         }
         winningLottery = new Lottery(convertToInteger(winningNumbers));
@@ -40,7 +40,7 @@ public class WinningLottery {
     private int convertNumber(String number) {
         int convertedNumber = Integer.parseInt(number);
 
-        if (convertedNumber < 1 || convertedNumber > 45) {
+        if (convertedNumber < Constants.LOTTO_BALL_START_NUMBER || convertedNumber > Constants.LOTTO_BALL_END_NUMBER) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_INVALID_RANGE);
         }
         return convertedNumber;

@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Util {
-    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
+    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(Constants.LOTTO_BALL_START_NUMBER,Constants.LOTTO_BALL_END_NUMBER)
+                                                                .boxed()
+                                                                .collect(Collectors.toList());
 
     public static void getShuffled(List<Integer> selectedNumbers) {
         Collections.shuffle(lottoNumbers);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Constants.LOTTO_NUMBERS_LENGTH; i++) {
             selectedNumbers.add(lottoNumbers.get(i));
         }
     }

@@ -2,18 +2,12 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.Lottery;
 import step2.domain.WinningLottery;
 
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 
 class LotteryTest {
 

@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.util.Constants;
 import step2.util.Util;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Lottery {
     public Lottery() {
         Util.getShuffled(selectedNumbers);
         Util.getSorted(selectedNumbers);
-        this.matched = 0;
+        this.matched = Constants.INIT_MATCHED;
     }
 
     public Lottery(List<Integer> winningNumber) {
