@@ -15,7 +15,7 @@ public enum Delimiter {
 
     public static String joinTypes() {
         return Arrays.stream(values())
-                .map(delimiter -> String.valueOf(delimiter.type))
+                .map(delimiter -> delimiter.type)
                 .collect(Collectors.joining(TYPE_DIVISION));
     }
 

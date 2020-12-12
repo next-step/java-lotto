@@ -9,8 +9,8 @@ public class StringAddCalculator {
         }
 
         return ExpressionSplitter.split(expression).stream()
-                .map(Number::new)
-                .mapToInt(Number::getValue)
+                .map(PositiveNumber::new)
+                .mapToInt(PositiveNumber::getValue)
                 .sum();
     }
 
