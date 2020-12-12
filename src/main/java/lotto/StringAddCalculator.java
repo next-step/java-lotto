@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-	private static String DEFAULT_DELIMITER = ",|:";
+	private static final String DEFAULT_DELIMITER = ",|:";
 
 	public static int splitAndSum(String inputText) {
 		String text = Optional.ofNullable(inputText)
