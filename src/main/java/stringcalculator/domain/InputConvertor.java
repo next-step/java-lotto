@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class InputConvertor {
 
-    public static final String REGEX = ",|:";
-    private static Pattern compile = Pattern.compile("//(.)\n(.*)");
+    private static final String REGEX = ",|:";
+    private static final Pattern compile = Pattern.compile("//(.)\n(.*)");
 
     public static List<Integer> convert(String input) {
         if (isNullOrEmpty(input)) {
@@ -25,9 +25,19 @@ public class InputConvertor {
         List<Integer> result = new ArrayList<>();
         for (String token : tokens) {
             int number = Integer.parseInt(token);
+            validNumber(number);
             result.add(number);
         }
         return result;
+    }
+
+    private static void validNumber(int number) {
+        if(isNagativeNumber(number))
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+    }
+
+    private static boolean isNagativeNumber(int number) {
+        return number < 0;
     }
 
     private static String[] getTokens(String input) {

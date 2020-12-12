@@ -3,6 +3,7 @@ package stringcalculator.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
@@ -39,10 +40,21 @@ class InputConvertorTest {
         assertThat(integerList).contains(1, 2, 3);
     }
 
-
     @Test
     void inputCustomSeparatorTest() {
         List<Integer> integerList = InputConvertor.convert("//;\n1;2;3");
         assertThat(integerList).contains(1, 2);
+    }
+
+    @Test
+    public void inputNegativeTest() throws Exception {
+        assertThatThrownBy(() -> InputConvertor.convert("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void inputNonNumberTest() throws Exception {
+        assertThatThrownBy(() -> InputConvertor.convert("-,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }

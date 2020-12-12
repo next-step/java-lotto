@@ -16,6 +16,6 @@ public class StringAddApp {
         List<Integer> integers = InputConvertor.convert(input);
         int result = Adder.add(integers);
 
-        System.out.println(String.format("결과는 %d 입니다.", result));
+        System.out.printf("결과는 %d 입니다.%n", result);
     }
 }
