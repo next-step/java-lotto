@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -41,22 +40,5 @@ public class LottoTest {
                 Arguments.of(new Lotto(Arrays.asList(11,12,13,4,5,6)), LottoWinning.WIN_5TH),
                 Arguments.of(new Lotto(Arrays.asList(11,12,13,14,5,6)), LottoWinning.RETIRE)
         );
-    }
-
-    @Test
-    void subList() {
-        List<Integer> list = new ArrayList<>();
-
-        list.add(1);
-        list.add(1);
-
-        List<Integer> subList = list.subList(0, 2);
-
-
-
-        for ( int ix = 0 ; ix < 10 ; ix ++ ) {
-            System.out.println(list);
-            System.out.println(subList);
-        }
     }
 }

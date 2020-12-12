@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LottoStatistics {
     private int totalCount = 0;
-    private Map<LottoWinning, Integer> result = new HashMap<>();
+    private final Map<LottoWinning, Integer> result = new HashMap<>();
 
     public void addCount(LottoWinning lottoWinning) {
         int count = 0;

@@ -23,7 +23,7 @@ public class LottoSeller {
 
     public static Lottos buy(int count) {
         Lottos lottos = new Lottos();
-        for (int ix = 0; ix < count ; ix ++ ) {
+        for (int i = 0; i < count ; i ++ ) {
             List<Integer> randomNumbers = getRandomNumbers();
             lottos.add(new Lotto(randomNumbers));
         }
@@ -33,7 +33,6 @@ public class LottoSeller {
     private static List<Integer> getRandomNumbers() {
         List<Integer> totalNumbers = getTotalNumbers();
         Collections.shuffle(totalNumbers);
-        ArrayList<Integer> list;
         List<Integer> collectedNumbers = totalNumbers.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
         Collections.sort(collectedNumbers);
         return collectedNumbers;
