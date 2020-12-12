@@ -11,19 +11,19 @@ class StringAddCalculatorTest {
 
     @NullAndEmptySource
     @ParameterizedTest
-    public void splitAndSum_null_또는_빈문자(String expression) {
+    void splitAndSum_null_또는_빈문자(String expression) {
         int result = StringAddCalculator.splitAndSum(expression);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 
     @Test
-    public void splitAndSum_숫자하나() {
+    void splitAndSum_숫자하나() {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void splitAndSum_negative() {
+    void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
