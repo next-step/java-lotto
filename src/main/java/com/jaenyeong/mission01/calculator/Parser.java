@@ -18,17 +18,17 @@ public class Parser {
     private Parser() {
     }
 
-    public static List<Integer> parseToNumbers(String exp) {
-        if (Validator.isBlank(exp)) {
+    public static List<Integer> parseToNumbers(String expression) {
+        if (Validator.isBlank(expression)) {
             return returnNone();
         }
 
-        exp = exp.trim();
-        if (Validator.isOneDigit(exp)) {
-            return splitWhenNumberIsNaturalNumber(exp);
+        expression = expression.trim();
+        if (Validator.isOneDigit(expression)) {
+            return splitWhenNumberIsNaturalNumber(expression);
         }
 
-        return splitWhenNumberIsNaturalNumberList(exp);
+        return splitWhenNumberIsNaturalNumberList(expression);
     }
 
     private static List<Integer> returnNone() {
@@ -37,10 +37,10 @@ public class Parser {
         return numbers;
     }
 
-    protected static List<Integer> splitWhenNumberIsNaturalNumber(final String exp) {
-        if (Validator.isNaturalNumber(exp)) {
+    protected static List<Integer> splitWhenNumberIsNaturalNumber(final String expression) {
+        if (Validator.isNaturalNumber(expression)) {
             final List<Integer> numbers = new ArrayList<>();
-            numbers.add(parseInt(exp));
+            numbers.add(parseInt(expression));
             return numbers;
         }
 
@@ -51,14 +51,14 @@ public class Parser {
         return Integer.parseInt(exp);
     }
 
-    protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String exp) {
-        final Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(exp);
+    protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String expression) {
+        final Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(expression);
 
         if (matcher.find()) {
             return parseToIntListFromMatcher(matcher);
         }
 
-        final List<String> expList = Arrays.stream(exp.split(DEFAULT_SEPARATORS))
+        final List<String> expList = Arrays.stream(expression.split(DEFAULT_SEPARATORS))
             .collect(Collectors.toList());
 
         return parserToIntListFromExpList(expList);
@@ -77,9 +77,9 @@ public class Parser {
             .collect(Collectors.toList());
     }
 
-    private static int parseToIntOnlyNaturalNumber(final String exp) {
-        if (Validator.isNaturalNumber(exp)) {
-            return Parser.parseInt(exp);
+    private static int parseToIntOnlyNaturalNumber(final String expression) {
+        if (Validator.isNaturalNumber(expression)) {
+            return Parser.parseInt(expression);
         }
 
         throw new RuntimeException(TEXT_ERR_INVALID_STRING);
