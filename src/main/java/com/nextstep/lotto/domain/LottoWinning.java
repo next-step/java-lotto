@@ -33,7 +33,6 @@ public enum LottoWinning {
     }
 
     private static long getMatchedCount(List<Integer> winningNumbers, List<Integer> collectNumbers) {
-        collectNumbers.retainAll(winningNumbers);
         return collectNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();

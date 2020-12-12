@@ -1,5 +1,6 @@
 package com.nextstep.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,6 @@ public class RandomNumberFactory {
 
     private static List<Integer> getShuffleNumbers() {
         Collections.shuffle(TOTAL_NUMBERS);
-        return TOTAL_NUMBERS.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
+        return new ArrayList<>(TOTAL_NUMBERS.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT));
     }
 }

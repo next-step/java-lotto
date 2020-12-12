@@ -1,6 +1,5 @@
 package com.nextstep.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,10 +7,10 @@ import java.util.stream.Stream;
 public class Lottos {
     private static final String DELIMITER = ",";
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public int count() {

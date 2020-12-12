@@ -1,6 +1,7 @@
 package com.nextstep.lotto.domain;
 
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoSeller {
     public static final int LOTTO_PRICE = 1000;
@@ -15,11 +16,9 @@ public class LottoSeller {
     }
 
     public static Lottos buy(int count) {
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < count ; i ++ ) {
-            List<Integer> randomNumbers = RandomNumberFactory.createRandomNumbers();
-            lottos.add(new Lotto(randomNumbers));
-        }
-        return lottos;
+        return  Stream.generate(RandomNumberFactory::createRandomNumbers)
+                .limit(count)
+                .map(Lotto::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 }
