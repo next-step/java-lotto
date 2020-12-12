@@ -1,4 +1,4 @@
-package com.nextstep.lotto;
+package com.nextstep.lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

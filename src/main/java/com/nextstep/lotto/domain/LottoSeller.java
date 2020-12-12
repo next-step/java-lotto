@@ -1,5 +1,6 @@
-package com.nextstep.lotto;
+package com.nextstep.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class LottoSeller {
     private static List<Integer> getRandomNumbers() {
         List<Integer> totalNumbers = getTotalNumbers();
         Collections.shuffle(totalNumbers);
+        ArrayList<Integer> list;
         List<Integer> collectedNumbers = totalNumbers.subList(LOTTO_START_IDX, LOTTO_NUMBER_COUNT);
         Collections.sort(collectedNumbers);
         return collectedNumbers;
