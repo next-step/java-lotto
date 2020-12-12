@@ -6,16 +6,14 @@ import java.util.*;
 
 public class LotteryResult {
     private Map<LotteryValue, Integer> lotteryResultMap;
-    private final LotteryWinning winningTicket;
 
-    public LotteryResult(String winnerNumbers) {
+    public LotteryResult() {
         lotteryResultMap = new LinkedHashMap<LotteryValue, Integer>(){{
             put(LotteryValue.FORTH_PLACE, 0);
             put(LotteryValue.THIRD_PLACE, 0);
             put(LotteryValue.SECOND_PLACE, 0);
             put(LotteryValue.FIRST_PLACE, 0);
         }};
-        winningTicket = new LotteryWinning(winnerNumbers);
     }
 
     public Map<LotteryValue, Integer> getLotteryResultMap() {
@@ -30,14 +28,7 @@ public class LotteryResult {
         return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount), 3, RoundingMode.HALF_EVEN);
     }
 
-    public LotteryResult match(List<LotteryTicket> lotteryTickets) {
-        for (LotteryTicket lotteryTicket : lotteryTickets) {
-            this.addLotteryResult(this.winningTicket.getCountsMatched(lotteryTicket));
-        }
-        return this;
-    }
-
-    protected void addLotteryResult(int key) {
+    protected void updateLotteryResult(int key) {
         LotteryValue resultKey = LotteryValue.findByAmount(key);
         if (resultKey.equals(LotteryValue.MISS)) {
             return;

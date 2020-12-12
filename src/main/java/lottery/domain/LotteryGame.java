@@ -29,8 +29,7 @@ public class LotteryGame {
     }
 
     public LotteryResult matchLotteryTickets(String winningNumbers, List<LotteryTicket> lotteryTickets) {
-        LotteryResult lotteryResult = new LotteryResult(winningNumbers);
-        return lotteryResult.match(lotteryTickets);
+        return new LotteryWinning(winningNumbers).getLotteryResult(lotteryTickets);
     }
 
     @Override

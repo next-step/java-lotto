@@ -15,7 +15,7 @@ public class TestLotteryResult {
     @Test
     void update() {
         LotteryResult lotteryResult = new LotteryResult("1,2,3,4,5,6");
-        lotteryResult.addLotteryResult(3);
+        lotteryResult.updateLotteryResult(3);
         assertThat(lotteryResult.getLotteryResultMap().get(LotteryValue.FORTH_PLACE)).isEqualTo(1);
     }
 }

@@ -1,9 +1,6 @@
 package lottery;
 
-import lottery.domain.AutoBuyBehavior;
-import lottery.domain.LotteryGame;
-import lottery.domain.LotteryResult;
-import lottery.domain.LotteryTicket;
+import lottery.domain.*;
 import lottery.view.InputViewLotteryGame;
 import lottery.view.ResultViewLotteryGame;
 
@@ -11,20 +8,22 @@ import java.util.List;
 
 public class LotteryGameManager {
     public static void main(String[] args) {
-        String purchaseAmount = InputViewLotteryGame.getUserInvestAmount();
+        int purchaseAmount = Integer.parseInt(InputViewLotteryGame.getUserInvestAmount());
 
         LotteryGame lotteryGame = new LotteryGame(1000,6);
-        int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(Integer.parseInt(purchaseAmount));
+        int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(purchaseAmount);
         ResultViewLotteryGame.displayNumberOfTickets(numberOfTicketsToBuy);
 
         List<LotteryTicket> purchasedTickets = lotteryGame.buyLotteryTickets(
                 numberOfTicketsToBuy,
                 new AutoBuyBehavior());
+
         ResultViewLotteryGame.displayPurchasedTickets(purchasedTickets);
 
         String lotteryWinningNumbers = InputViewLotteryGame.getWinningNumbers();
-        LotteryResult lotteryResult = lotteryGame.matchLotteryTickets(lotteryWinningNumbers, purchasedTickets);
-
-        ResultViewLotteryGame.displayLotteryResult(lotteryResult, Integer.parseInt(purchaseAmount));
+        LotteryWinning lotteryWinning = new LotteryWinning(lotteryWinningNumbers);
+        ResultViewLotteryGame.displayLotteryResult(
+                lotteryWinning.getLotteryResult(purchasedTickets),
+                purchaseAmount);
     }
 }

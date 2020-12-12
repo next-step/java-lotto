@@ -281,7 +281,7 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
 # [3단계 - 3단계 - 로또(2등)](https://edu.nextstep.camp/s/MNii0Puk/ls/a5KEHckU)
 ## 2단계 미반영 피드백
 - [x] `LotteryGame`에서 `AutoBuyBehaviro`대신 `BuyBehavir` 사용하기
-- [ ] `LotteryWinning` 클래스에서 `LotteryResult`를 제공
+- [x] `LotteryWinning` 클래스에서 `LotteryResult`를 제공
 - [x] `lotteryResultMap` 접근자 `package private`에서 `private`으로 개선
 - [x] 사용하지 않는 코드 삭제
 - [x] `SortedSet`대신 `Set`으로 구체적인 클래스로 선언하기 보단 상위 클래스로 선언하여 유연하게 설정
