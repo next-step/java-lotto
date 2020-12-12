@@ -29,25 +29,18 @@ class WinningLottoNumberTest {
                 .map(lottoNo -> lottoNo.getNumber())
                 .collect(Collectors.toList());
 
-
         assertThat(collect).containsAll(list);
     }
 
-    @ParameterizedTest
-    @MethodSource("isNotMatchLottoNumbers_ShouldIllegalArgumentException")
-    @DisplayName(value = "잘못된 숫자 리스트를 입력하면 IllegalArgumentException 발생")
-    void numberValid_IllegalArgumentException(List<Integer> numbers) {
-        assertThatThrownBy(() -> new WinningLottoNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+    @Test
+    @DisplayName(value = "우승번호와 구입한 로또를 비교하여 맞는 개수를 찾음.")
+    void findIsMatchNumberCount() {
+        List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,45);
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(winningNumber);
+
+        assertThat(winningLottoNumber.findIsMatchNumberCount(Lotto.create(Arrays.asList(5,6,7,8,9,10)))).isEqualTo(1);
     }
 
-    private static Stream<Arguments> isNotMatchLottoNumbers_ShouldIllegalArgumentException() {
-        return Stream.of(
-                Arguments.of(Lists.newArrayList(1,2,3,4,5,46)),
-                Arguments.of(Lists.newArrayList(0,2,3,4,5,45)),
-                Arguments.of(Lists.newArrayList(1,2,3,4,5))
-        );
-    }
 
     @Test
     @DisplayName("당첨번호와 겹치는 보너스 숫자를 입력하면 Exception을 발생시킴.")

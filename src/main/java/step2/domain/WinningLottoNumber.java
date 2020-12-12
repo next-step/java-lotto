@@ -3,32 +3,19 @@ package step2.domain;
 import java.util.*;
 
 public class WinningLottoNumber {
-    private final List<LottoNo> winningNumbers = new ArrayList<>();
-    private BonusNumber bonusNumber;
+    private final Lotto winningNumbers;
+    private LottoNo bonusNumber;
 
     public WinningLottoNumber(List<Integer> winningNumbers) {
-        for (Integer winningNumber : winningNumbers) {
-            this.winningNumbers.add(LottoNo.create(winningNumber));
-        }
-        numberValid();
-    }
-
-    private void numberValid() {
-        if (isNotMatchNumberCount()) {
-            throw new IllegalArgumentException("6개의 숫자를 입력하세요.");
-        }
-    }
-
-    private boolean isNotMatchNumberCount() {
-        return this.winningNumbers.size() != LottoConstant.NEED_COUNT;
+        this.winningNumbers = Lotto.create(winningNumbers);
     }
 
     public List<LottoNo> getNumbers() {
-        return this.winningNumbers;
+        return this.winningNumbers.getNumbers();
     }
 
     public long findIsMatchNumberCount(Lotto lotto) {
-        return this.winningNumbers.stream()
+        return this.winningNumbers.getNumbers().stream()
                 .filter(winNumber -> isContains(winNumber, lotto))
                 .count();
     }
@@ -43,11 +30,11 @@ public class WinningLottoNumber {
             throw new IllegalArgumentException("당첨번호와 겹치지 않는 숫자를 입력하세요.");
         }
 
-        this.bonusNumber = BonusNumber.getInstance(bonusNumber);
+        this.bonusNumber = LottoNo.create(bonusNumber);
     }
 
     private boolean isContainsWinningNumber(LottoNo bonusNumber) {
-        return this.winningNumbers.contains(bonusNumber);
+        return this.winningNumbers.getNumbers().contains(bonusNumber);
     }
 
     public int getBonusNumber() {

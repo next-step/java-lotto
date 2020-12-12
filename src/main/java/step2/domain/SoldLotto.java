@@ -27,7 +27,7 @@ public class SoldLotto {
     }
 
     private void addSoldLotto(List<Integer> notAutoNumber) {
-        this.soldLotto.add(new Lotto(notAutoNumber));
+        this.soldLotto.add(Lotto.create(notAutoNumber));
     }
 
     public List<Lotto> getSoldLotto() {

@@ -16,7 +16,7 @@ class WinningLottoMoneyTest {
     @DisplayName(value = "WinningLottoMeney 생성 및 당첨 데이터 확인")
     void create() {
         List<Integer> list = Arrays.asList(1,2,3,4,5,6);
-        Lotto lotto = new Lotto(list);
+        Lotto lotto = Lotto.create(list);
         SoldLotto soldLotto = new SoldLotto(lotto);
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
         winningLottoNumber.addBonusNumber(10);
@@ -30,7 +30,7 @@ class WinningLottoMoneyTest {
     @DisplayName(value = "로또 결과를 기준으로 이익을 계산함.")
     void findBenefit() {
         List<Integer> list = Arrays.asList(1,2,3,4,5,6);
-        Lotto lotto = new Lotto(list);
+        Lotto lotto = Lotto.create(list);
         SoldLotto soldLotto = new SoldLotto(lotto);
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(list);
         winningLottoNumber.addBonusNumber(10);

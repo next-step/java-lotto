@@ -15,11 +15,31 @@ public class Lotto {
         createLottoNumber();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public static Lotto create(List<Integer> lottoNumbers) {
+        if (isNotLottoCount(lottoNumbers)) {
+            throw new IllegalArgumentException("6자리의 숫자를 입력해 주세요.");
+        }
+        if (isSameNumber(lottoNumbers)) {
+            throw new IllegalArgumentException("같은 숫자가 포함돼 있습니다.");
+        }
+
+
+        return new Lotto(lottoNumbers);
+    }
+
+    private static boolean isSameNumber(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream().distinct().count() != LottoConstant.NEED_COUNT;
+    }
+
+    private Lotto(List<Integer> lottoNumbers) {
         for (Integer lottoNumber : lottoNumbers) {
             this.numbers.add(LottoNo.create(lottoNumber));
         }
         this.isAuto = false;
+    }
+
+    private static boolean isNotLottoCount(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() != LottoConstant.NEED_COUNT;
     }
 
     private void createLottoNumber() {
