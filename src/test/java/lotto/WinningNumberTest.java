@@ -3,35 +3,40 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WinningNumberTest {
 
-	private List<Integer> winningNumbers = Arrays.asList(3, 6, 8, 11, 19, 28);
+	private WinningNumber winningNumbers;
+
+	@BeforeEach
+	void setUp() {
+		winningNumbers = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
+	}
 
 	@Test
 	void matchThreeNumberTest() {
-		WinningNumber winNumber = new WinningNumber(winningNumbers);
-		assertThat(winNumber.match(Arrays.asList(4, 6, 11, 19, 39, 42))).isEqualTo(3);
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(4, 6, 11, 19, 39, 42));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.FOURTH);
 	}
 
 	@Test
 	void matchFourNumberTest() {
-		WinningNumber winNumber = new WinningNumber(winningNumbers);
-		assertThat(winNumber.match(Arrays.asList(6, 8, 11, 19, 39, 42))).isEqualTo(4);
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(6, 8, 11, 19, 39, 42));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.THIRD);
 	}
 
 	@Test
 	void matchFiveNumberTest() {
-		WinningNumber winNumber = new WinningNumber(winningNumbers);
-		assertThat(winNumber.match(Arrays.asList(3, 6, 11, 19, 28, 42))).isEqualTo(5);
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 11, 19, 28, 42));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.SECOND);
 	}
 
 	@Test
 	void matchSixNumberTest() {
-		WinningNumber winNumber = new WinningNumber(winningNumbers);
-		assertThat(winNumber.match(Arrays.asList(3, 6, 8, 11, 19, 28))).isEqualTo(6);
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.FIRST);
 	}
 }
