@@ -1,44 +1,18 @@
 package study;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
-    private final static String DELIMITER = "[,:]";
-    private final static String PATTERN = "//(.)\n(.*)";
-    private final static int ZERO = 0;
-    private final static int FIRST = 1;
-    private final static int SECOND = 2;
+    private final static int DEFAULT_VALUE = 0;
 
     public static int splitAndSum(String string) {
-        if (isUnusable(string)) {
-            return 0;
+        CalculatorInput calculatorInput = new CalculatorInput(string);
+        if (calculatorInput.isUnusable()) {
+            return DEFAULT_VALUE;
         }
-        return sum(toInts(split(string)));
-    }
-
-    private static boolean isUnusable(String string) {
-        return isNull(string) || isEmpty(string);
-    }
-
-    private static boolean isEmpty(String string) {
-        return string.isEmpty();
-    }
-
-    private static boolean isNull(String string) {
-        return string == null;
-    }
-
-    private static List<String> split(String string) {
-        Matcher matcher = Pattern.compile(PATTERN).matcher(string);
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(FIRST);
-            return Arrays.asList(matcher.group(SECOND).split(customDelimiter));
-        }
-        return Arrays.asList(string.split(DELIMITER));
+        List<String> strings = Splitter.split(string);
+        return sum(toInts(strings));
     }
 
     private static List<Integer> toInts(List<String> strings) {
@@ -58,6 +32,6 @@ public class StringAddCalculator {
     }
 
     private static boolean isNegative(int number) {
-        return number < ZERO;
+        return number < DEFAULT_VALUE;
     }
 }
