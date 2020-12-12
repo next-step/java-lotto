@@ -13,8 +13,8 @@ public class SeparatedInputValues {
 			.collect(Collectors.toList());
 	}
 
-	public static SeparatedInputValues ofSeparator(Separator separator) {
-		return new SeparatedInputValues(separator.getSeparatedText());
+	public static SeparatedInputValues ofSeparator(List<String> separator) {
+		return new SeparatedInputValues(separator);
 	}
 
 
