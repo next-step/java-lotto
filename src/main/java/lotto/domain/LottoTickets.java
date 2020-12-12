@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private static final Integer TICKET_PRICE = 1_000;
+    public static final Integer TICKET_PRICE = 1_000;
     private final int ticketCount;
     private final List<LottoTicket> lottoTickets;
 
@@ -12,20 +15,34 @@ public class LottoTickets {
         this.lottoTickets = issueTickets(new RandomTicketMachine());
     }
 
-    public LottoTickets(int ticketCount, TicketMachine ticketMachine) {
-        this.ticketCount = ticketCount;
-        this.lottoTickets = issueTickets(ticketMachine);
+    LottoTickets(List<LottoTicket> lottoTickets) {
+        this.ticketCount = lottoTickets.size();
+        this.lottoTickets = lottoTickets;
+    }
+
+    public MatchResult match(LottoTicket lastWinningTicket) {
+        Map<Integer, Integer> matchResult = lottoTickets.stream()
+              .map(lottoTicket -> lottoTicket.matchCount(lastWinningTicket))
+              .collect(Collectors.toMap(Function.identity(), s -> 1, Integer::sum));
+        return new MatchResult(matchResult);
     }
 
     private int toTicketCount(int money) {
+        validateMoney(money);
+        return money / TICKET_PRICE;
+    }
+
+    private void validateMoney(int money) {
         if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("금액이 부족합니다.");
         }
-
-        return money / TICKET_PRICE;
     }
 
     private List<LottoTicket> issueTickets(TicketMachine ticketMachine) {
         return ticketMachine.issue(this.ticketCount);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }
