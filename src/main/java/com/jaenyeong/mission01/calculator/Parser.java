@@ -23,16 +23,12 @@ public class Parser {
 
     public static List<Integer> parseToNumbers(String expression) {
         if (Validator.isBlank(expression)) {
-            return returnNone();
+            final List<Integer> numbers = new ArrayList<>();
+            numbers.add(NONE);
+            return numbers;
         }
 
         return splitWhenNumberIsNaturalNumberList(expression);
-    }
-
-    private static List<Integer> returnNone() {
-        final List<Integer> numbers = new ArrayList<>();
-        numbers.add(NONE);
-        return numbers;
     }
 
     protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String expression) {
