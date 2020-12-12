@@ -155,10 +155,10 @@
       - [X] 보너스 넘버가 LottoTicket에 포함된 경우 예외 발생
   - [X] 일반 LottoTicket과 비교하여 당첨 여부를 확인할 수 있다.
 - LottoRunner(class)
-  - [ ] 당첨 티켓을 받을 때 보너스 번호도 받아서 WinningTicket을 만들 수 있도록 기능 개선
+  - [X] 당첨 티켓을 받을 때 보너스 번호도 받아서 WinningTicket을 만들 수 있도록 기능 개선
 - InputView(class)
-  - [ ] 보너스 번호를 사용자로부터 입력받을 수 있도록 기능 추가
+  - [X] 보너스 번호를 사용자로부터 입력받을 수 있도록 기능 추가
 - BonusNumberInputView(class)
-  - [ ] 보너스 번호를 사용자로부터 입력받을 수 있도록 기능 추가
+  - [X] 보너스 번호를 사용자로부터 입력받을 수 있도록 기능 추가
 - OutputView(class)
   - [ ] 사용자에게 보너스 번호를 요청할 수 있도록 문구 출력 기능 추가

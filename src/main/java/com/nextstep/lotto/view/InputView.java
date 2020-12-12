@@ -18,4 +18,9 @@ public class InputView {
         WinningTicketInputView winningInputView = new WinningTicketInputView(SCANNER.nextLine());
         return winningInputView.parseToLottoTicket();
     }
+
+    public static LottoNumber getBonusNumber() {
+        BonusNumberInputView bonusNumberInputView = new BonusNumberInputView(SCANNER.nextInt());
+        return bonusNumberInputView.parseToBonusNumber();
+    }
 }
