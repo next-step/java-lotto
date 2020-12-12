@@ -15,6 +15,9 @@ public class LottoSeller {
     private LottoSeller(){}
 
     public static int count(int price) {
+        if (price < LOTTO_PRICE) {
+            throw new IllegalArgumentException("price is too less");
+        }
         return price / LOTTO_PRICE;
     }
 
