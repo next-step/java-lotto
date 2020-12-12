@@ -34,7 +34,7 @@ public class StringAddCalculator {
 		return Integer.parseInt(input);
 	}
 
-	private static Integer validateNumber(Integer value) {
+	private static Integer validateNumber(int value) {
 		if (value < 0) {
 			throw new RuntimeException();
 		}
