@@ -9,7 +9,8 @@ public class StringAddCalculator {
 	private static String DEFAULT_DELIMITER = ",|:";
 
 	public static int splitAndSum(String inputText) {
-		inputText = Optional.ofNullable(inputText).map(String::valueOf).orElse("");
+		String text = Optional.ofNullable(inputText)
+			.orElse("");
 		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
 		if (m.find()) {
 			return sum(m.group(2).split(m.group(1)));
