@@ -9,10 +9,11 @@ public class Shop {
 
     private Shop() {}
 
-    public static List<Lotto> buyLottos(Long money) {
-        long lottoCount = money / LOTTO_PRICE;
-        return Stream.generate(() -> new Lotto())
-                .limit(lottoCount)
-                .collect(Collectors.toList());
+    public static List<Lotto> buyLottos(Long money, List<String> manualLottos) {
+        long autoLottoCount = (money / LOTTO_PRICE) - manualLottos.size();
+        return Stream.concat(
+                manualLottos.stream().map(lotto -> new Lotto(lotto)),
+                Stream.generate(() -> new Lotto()).limit(autoLottoCount)
+                ).collect(Collectors.toList());
     }
 }
