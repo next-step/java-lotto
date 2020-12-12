@@ -12,7 +12,7 @@ public class Splitter {
     private final static int CUSTOM_DELIMITER_INDEX = 1;
     private final static int MATCHER_STRING_INDEX = 2;
 
-    static List<String> split(String string) {
+    protected static List<String> split(String string) {
         Matcher matcher = CUSTOM_PATTERN.matcher(string);
         if (matcher.find()) {
             String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
