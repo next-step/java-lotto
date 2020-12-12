@@ -1,7 +1,6 @@
 package study;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private final static int DEFAULT_VALUE = 0;
@@ -11,11 +10,7 @@ public class StringAddCalculator {
         if (calculatorInput.isUnusable()) {
             return DEFAULT_VALUE;
         }
-        return sum(toInts(calculatorInput.strings()));
-    }
-
-    private static List<Integer> toInts(List<String> strings) {
-        return strings.stream().map(Integer::parseInt).collect(Collectors.toList());
+        return sum(calculatorInput.ints());
     }
 
     private static int sum(List<Integer> numbers) {

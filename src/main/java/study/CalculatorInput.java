@@ -1,6 +1,7 @@
 package study;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CalculatorInput {
     private final String calculatorString;
@@ -9,7 +10,11 @@ public class CalculatorInput {
         calculatorString = string;
     }
 
-    protected List<String> strings() {
+    protected List<Integer> ints() {
+        return strings().stream().map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private List<String> strings() {
         return Splitter.split(calculatorString);
     }
 
