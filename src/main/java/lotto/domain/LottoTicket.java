@@ -32,15 +32,6 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Rank match(final WinningLotto winningLotto) {
-        int matchCount = (int) lottoNumbers.stream()
-                .filter(winningLotto::contains)
-                .count();
-        boolean matchBonus = lottoNumbers.stream()
-                .anyMatch(winningLotto::matchBonus);
-        return Rank.countOf(matchCount, matchBonus);
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
