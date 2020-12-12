@@ -13,12 +13,23 @@ public class LottoResults {
 		}
 	}
 
+	public void addResult(LottoRank rank) {
+		int updatedCount = this.results.get(rank) + 1;
+		this.results.put(rank, updatedCount);
+	}
+
 	public int getResultCount(LottoRank place) {
 		return this.results.get(place);
 	}
 
-	public void addResult(LottoRank rank) {
-		int updatedCount = this.results.get(rank) + 1;
-		this.results.put(rank, updatedCount);
+	public long getTotalEarnings() {
+		return this.results.keySet()
+			.stream()
+			.mapToLong(rank -> rank.calculateEarnings(results.get(rank)))
+			.sum();
+	}
+
+	public double getEarningRate(int payment) {
+		return (double) this.getTotalEarnings() / payment;
 	}
 }

@@ -17,6 +17,7 @@ public class LottoRunnerTest {
 	@BeforeEach
 	void setUp() {
 		lottoNumbers = Arrays.asList(new LottoNumber(Arrays.asList(3, 6, 11, 28, 30, 31)) // 4개 일치
+			, new LottoNumber(Arrays.asList(1, 2, 40, 41, 42, 45)) // 0개 일치
 			, new LottoNumber(Arrays.asList(1, 2, 40, 41, 42, 44)) // 0개 일치
 			, new LottoNumber(Arrays.asList(1, 5, 11, 19, 28, 40)) // 3개 일치
 			, new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28))); // 6개 일치
@@ -44,10 +45,20 @@ public class LottoRunnerTest {
 	@Test
 	@DisplayName("N개의 로또 횟차에 대한 총 당첨금액의 합을 알 수 있어야한다.")
 	void winningResultPriceTest() {
+		LottoRunner runner = new LottoRunner(lottoNumbers);
+		LottoResults results = runner.run(winningNumber);
+		long totalEarnings = LottoRank.FOURTH.getEarnings() + LottoRank.THIRD.getEarnings() + LottoRank.FIRST.getEarnings();
+		assertThat(results.getTotalEarnings()).isEqualTo(totalEarnings);
 	}
 
 	@Test
 	@DisplayName("N개의 로또 횟차에 대한 총 당첨금액과 구매금액을 통해 수익률을 구할 수 있어야한다.")
 	void winningResultEarningsRateTest() {
+		LottoRunner runner = new LottoRunner(lottoNumbers);
+		LottoResults results = runner.run(winningNumber);
+		long totalEarnings = LottoRank.FOURTH.getEarnings() + LottoRank.THIRD.getEarnings() + LottoRank.FIRST.getEarnings();
+		int payment = 5000;
+
+		assertThat(results.getEarningRate(payment)).isEqualTo((double) totalEarnings / payment);
 	}
 }
