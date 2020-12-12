@@ -2,16 +2,17 @@ package com.jaenyeong.mission01.calculator;
 
 import java.util.List;
 
+import static com.jaenyeong.mission01.calculator.UI.inputExpression;
+import static com.jaenyeong.mission01.calculator.UI.printResultNumber;
+
 public class StringAddCalculator {
 
     public static void calculate() {
-        Output.printTextExpression();
-
-        final String inputExpression = Input.text();
+        final String inputExpression = inputExpression();
 
         final int resultSum = splitAndSum(inputExpression);
 
-        Output.printResultNumber(resultSum);
+        printResultNumber(resultSum);
     }
 
     protected static int splitAndSum(final String inputExpression) {
