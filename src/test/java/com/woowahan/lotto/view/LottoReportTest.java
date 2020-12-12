@@ -29,10 +29,10 @@ class LottoReportTest {
 	void reportLottos() {
 		PurchaseInput purchaseInput = PurchaseInput.of("10000", Arrays.asList("1,2,3,4,5,6", "40,41,42,43,44,45"));
 		Lottos lottos = Lottos.purchase(PurchaseInput.of("10000", Arrays.asList("1,2,3,4,5,6", "40,41,42,43,44,45")));
-		int manualCnt = purchaseInput.getManualLottoCount();
-		String result = LottoReport.reportLottos(lottos.getLottos(), manualCnt);
+		int manualCount = purchaseInput.getManualLottoCount();
+		String result = LottoReport.reportLottos(lottos.getLottos(), manualCount);
 
-		assertThat(result).contains(String.format(Message.MSG_PURCHASE_LOTTO_CNT, manualCnt, 10 - manualCnt));
+		assertThat(result).contains(String.format(Message.MSG_PURCHASE_LOTTO_COUNT, manualCount, 10 - manualCount));
 	}
 
 	@DisplayName("reportLottoResult 당첨 통계 문자열을 얻을 수 있고, 3개 이상 매칭된 결과 리포트 값이 포함된다.")

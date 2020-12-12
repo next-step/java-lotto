@@ -172,7 +172,7 @@ class PurchaseInputTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
 				PurchaseInput.of(amount, manualNumbers);
-			}).withMessage(Message.MSG_WRONG_MANUAL_CNT);
+			}).withMessage(Message.MSG_WRONG_MANUAL_COUNT);
 	}
 
 	public static Stream<Arguments> argOfOverManual() {

@@ -27,7 +27,7 @@ public class InputView {
 	}
 
 	public static List<String> getManualNumbers() {
-		System.out.println(Message.MSG_REQUEST_MANUAL_CNT);
+		System.out.println(Message.MSG_REQUEST_MANUAL_COUNT);
 		int manualCount = Integer.parseInt(scanner.nextLine());
 		System.out.println(Message.MSG_REQUEST_MANUAL_LOTTO);
 		return IntStream.range(0, manualCount)

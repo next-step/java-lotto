@@ -35,7 +35,7 @@ public class LottoResult {
 				.count();
 			boolean isBonusMatch = matchCount == 5 && compareBonusNumber(lottoNumbers, bonusNumber);
 			LottoResultType resultType = LottoResultType.findResultType(matchCount, isBonusMatch);
-			increaseCntByResultType(resultType);
+			increaseCountByResultType(resultType);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class LottoResult {
 		return lottoNumbers.stream().anyMatch(bonusNumber::equals);
 	}
 
-	private void increaseCntByResultType(LottoResultType resultType) {
+	private void increaseCountByResultType(LottoResultType resultType) {
 		Integer value = results.get(resultType);
 		results.put(resultType, ++value);
 	}

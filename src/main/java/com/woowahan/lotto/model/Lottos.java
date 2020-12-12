@@ -17,7 +17,7 @@ public class Lottos {
 		return new Lottos(inputResult);
 	}
 
-	private int getAutoPurchaseCnt(PurchaseInput input) {
+	private int getAutoPurchaseCount(PurchaseInput input) {
 		return input.getAutoPurchaseAmount() / Lotto.LOTTO_PRICE;
 	}
 
@@ -29,8 +29,8 @@ public class Lottos {
 	}
 
 	private void purchaseAutoLottos(PurchaseInput input) {
-		int lottoCnt = getAutoPurchaseCnt(input);
-		for (int i = 0; i < lottoCnt; i++) {
+		int lottoCount = getAutoPurchaseCount(input);
+		for (int i = 0; i < lottoCount; i++) {
 			this.lottos.add(Lotto.of(new LottoAutoGenerator()));
 		}
 	}

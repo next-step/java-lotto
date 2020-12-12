@@ -13,7 +13,7 @@ public class LottoReport {
 
 	public static String reportLottos(List<Lotto> lottos, int manualCount) {
 		StringBuilder result = new StringBuilder(
-			String.format(Message.MSG_PURCHASE_LOTTO_CNT, manualCount, lottos.size() - manualCount));
+			String.format(Message.MSG_PURCHASE_LOTTO_COUNT, manualCount, lottos.size() - manualCount));
 		for (Lotto lotto : lottos) {
 			result.append(lotto.getNumbers())
 				.append(Message.MSG_LINE_BREAK);
