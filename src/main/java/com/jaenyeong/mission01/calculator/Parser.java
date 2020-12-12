@@ -48,10 +48,6 @@ public class Parser {
         final List<String> expressionList = Arrays.stream(expression.split(DEFAULT_SEPARATORS))
             .collect(Collectors.toList());
 
-        return parseToIntListFromExpList(expressionList);
-    }
-
-    private static List<Integer> parseToIntListFromExpList(final List<String> expressionList) {
         return expressionList.stream()
             .map(Parser::parseToIntOnlyNaturalNumber)
             .collect(Collectors.toList());
