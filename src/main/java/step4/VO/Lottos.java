@@ -22,9 +22,9 @@ public class Lottos {
         return money.getLottoCnt()-lottoList.size();
     }
 
-    public void buyManualLottos(List<ManualLottoNumbers> manualLottoNumbersList) {
-        for (ManualLottoNumbers manualLottoNumbers: manualLottoNumbersList) {
-            lottoList.add(new Lotto(manualLottoNumbers.getManualLottoNumbers()));
+    public void buyManualLottos(List<Lotto> manualLottoNumbersList) {
+        for (Lotto manualLottoNumbers: manualLottoNumbersList) {
+            lottoList.add(new Lotto(manualLottoNumbers.getNumberList()));
         }
     }
 

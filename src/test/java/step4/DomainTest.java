@@ -2,11 +2,10 @@ package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step4.VO.Lotto;
 import step4.VO.Lottos;
 import step4.VO.ManualLottoCnt;
-import step4.VO.ManualLottoNumbers;
 import step4.VO.Money;
-import step4.View.InputView;
 import step4.View.ResultView;
 
 import java.util.ArrayList;
@@ -20,6 +19,9 @@ public class DomainTest {
         FixedNumberGenerator fixedWinningsGenerator = new FixedNumberGenerator();
         fixedWinningsGenerator.setNumber("1,3,5,7,10,12");
 
+        FixedNumberGenerator manualLottoNumbers = new FixedNumberGenerator();
+        manualLottoNumbers.setNumber("1,3,5,6,9,11");
+
         Main main = new Main();
 
         Lottos lottos = new Lottos();
@@ -27,9 +29,9 @@ public class DomainTest {
         // 수동 발권 로직
         ManualLottoCnt manualCnt = new ManualLottoCnt(3, money);
 
-        List<ManualLottoNumbers> manualLottoNumbersList = new ArrayList<>();
+        List<Lotto> manualLottoNumbersList = new ArrayList<>();
         for(int i = 0; i < manualCnt.getManualLottoCnt(); i++) {
-            manualLottoNumbersList.add(new ManualLottoNumbers("1, 3, 5, 6, 9, 11"));
+            manualLottoNumbersList.add(new Lotto(manualLottoNumbers.getLottoNumbers()));
         }
 
         lottos.buyManualLottos(manualLottoNumbersList);

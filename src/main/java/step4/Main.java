@@ -1,9 +1,6 @@
 package step4;
 
-import step4.VO.Lottos;
-import step4.VO.ManualLottoCnt;
-import step4.VO.ManualLottoNumbers;
-import step4.VO.Money;
+import step4.VO.*;
 import step4.View.InputView;
 import step4.View.ResultView;
 
@@ -24,10 +21,10 @@ public class Main {
         // 수동 발권 갯수 입력
         ManualLottoCnt manualCnt = new ManualLottoCnt(InputView.getManualLotto(), money);
 
-        List<ManualLottoNumbers> manualLottoNumbersList = new ArrayList<>();
+        List<Lotto> manualLottoNumbersList = new ArrayList<>();
         for(int i = 0; i < manualCnt.getManualLottoCnt(); i++) {
             // 수동 발권 번호 입력
-            manualLottoNumbersList.add(new ManualLottoNumbers(InputView.getManualLottoNumbers()));
+            manualLottoNumbersList.add(new Lotto(InputView.getManualLottoNumbers()));
         }
 
         lottos.buyManualLottos(manualLottoNumbersList);

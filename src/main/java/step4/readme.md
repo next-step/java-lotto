@@ -30,13 +30,6 @@
         - function
             - validate : 검증
 
-    - ManualLottoNumbers
-        - parameter
-            - List<LottoNumber> manualLottoNumbers : 로또 수동 발권 번호
-        - function
-            - changeStringToList : 입력받은 로또 번호 형변환
-            - validate : 입력받은 로또 번호 검증
-
     - Money
         - parameter
             - int lottoPrice : 로또 1장 금액 
