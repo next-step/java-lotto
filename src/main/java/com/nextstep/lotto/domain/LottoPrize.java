@@ -25,6 +25,7 @@ public class LottoPrize {
         result.put(Rank.SECOND, 0L);
         result.put(Rank.THIRD, 0L);
         result.put(Rank.FOURTH, 0L);
+        result.put(Rank.FIFTH, 0L);
     }
 
     private void updateResult(final List<Rank> ranks) {

@@ -16,7 +16,12 @@ public class LottoRunner {
         OutputView.printWinningTicketInput();
         LottoTicket winningTicket = InputView.getWinningTicket();
 
-        LottoPrize lottoPrize = lottoTickets.checkResult(winningTicket);
+        OutputView.printBonusNumberInput();
+        LottoNumber bonusNumber = InputView.getBonusNumber();
+
+        WinningTicket tempWinningTicketForTest = new WinningTicket(winningTicket, bonusNumber);
+
+        LottoPrize lottoPrize = lottoTickets.checkResult(tempWinningTicketForTest);
         OutputView.printStatistics(money, lottoPrize);
     }
 }

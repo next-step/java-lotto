@@ -3,48 +3,62 @@ package com.nextstep.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(0, 0L),
-    FOURTH(3, 5_000L),
-    THIRD(4, 50_000L),
-    SECOND(5, 1_500_000L),
-    FIRST(6, 2_000_000_000L);
-
-    private static final String DESCRIPTION_HEADER = "개 일치 (";
-    private static final String DESCRIPTION_FOOTER = "원)";
+    NOTHING(0, 0L, 1),
+    FIFTH(3, 5_000L, 2),
+    FOURTH(4, 50_000L, 3),
+    THIRD(5, 1_500_000L, 4),
+    SECOND(5, 30_000_000L, 5),
+    FIRST(6, 2_000_000_000L, 6);
 
     private final int numberOfMatchedNumber;
     private final Money money;
-    private final String description;
+    private final int rankValue;
 
-    Rank(Integer numberOfMatchedNumber, Long moneyValue) {
+    Rank(final Integer numberOfMatchedNumber, final Long moneyValue, final int rankValue) {
       this.numberOfMatchedNumber = numberOfMatchedNumber;
       this.money = new Money(moneyValue);
-      this.description = numberOfMatchedNumber.toString() +
-              DESCRIPTION_HEADER +
-              moneyValue.toString() +
-              DESCRIPTION_FOOTER;
+      this.rankValue = rankValue;
     }
 
-    public static Rank find(final int numberOfMatchedNumber) {
-        return Arrays.stream(Rank.values())
+    public static Rank find(final int numberOfMatchedNumber, final boolean hasBonus) {
+        Rank candidateRank = Arrays.stream(Rank.values())
                 .filter(rank -> isSameMatchedNumber(numberOfMatchedNumber, rank))
                 .findAny()
                 .orElse(NOTHING);
+        return confirmRank(candidateRank, hasBonus);
     }
 
     public Money multiplyPrize(final Long count) {
         return this.money.multiplyCount(count);
     }
 
-    public String getDescription() {
-        return description;
+    public Long getMoneyValue() {
+        return money.getAmount();
     }
 
     public int getNumberOfMatchedNumber() {
         return numberOfMatchedNumber;
     }
 
-    private static boolean isSameMatchedNumber(int numberOfMatchedNumber, Rank rank) {
+    public int getRankValue() {
+        return rankValue;
+    }
+
+    private static boolean isSameMatchedNumber(final int numberOfMatchedNumber, final Rank rank) {
         return rank.numberOfMatchedNumber == numberOfMatchedNumber;
+    }
+
+    private static Rank confirmRank(final Rank candidateRank, final boolean hasBonus) {
+        if (candidateRank == Rank.THIRD || candidateRank == Rank.SECOND) {
+            return judgeIsSecond(hasBonus);
+        }
+        return candidateRank;
+    }
+
+    private static Rank judgeIsSecond(final boolean hasBonus) {
+        if (hasBonus) {
+            return Rank.SECOND;
+        }
+        return Rank.THIRD;
     }
 }

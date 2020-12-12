@@ -36,11 +36,11 @@ class LottoPrizeTest {
         return Stream.of(
                 Arguments.of(
                         Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FIRST),
-                        100037.5
+                        100750.0
                 ),
                 Arguments.of(
                         Arrays.asList(Rank.FOURTH, Rank.FOURTH),
-                        0.25
+                        2.5
                 )
         );
     }

@@ -10,7 +10,7 @@ public class LottoNumber {
 
     private final int value;
 
-    LottoNumber(final int value) {
+    public LottoNumber(final int value) {
         validate(value);
 
         this.value = value;

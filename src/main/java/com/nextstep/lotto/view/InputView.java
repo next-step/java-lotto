@@ -1,5 +1,6 @@
 package com.nextstep.lotto.view;
 
+import com.nextstep.lotto.domain.LottoNumber;
 import com.nextstep.lotto.domain.LottoTicket;
 import com.nextstep.lotto.domain.Money;
 
@@ -16,5 +17,10 @@ public class InputView {
     public static LottoTicket getWinningTicket() {
         WinningTicketInputView winningInputView = new WinningTicketInputView(SCANNER.nextLine());
         return winningInputView.parseToLottoTicket();
+    }
+
+    public static LottoNumber getBonusNumber() {
+        BonusNumberInputView bonusNumberInputView = new BonusNumberInputView(SCANNER.nextInt());
+        return bonusNumberInputView.parseToBonusNumber();
     }
 }

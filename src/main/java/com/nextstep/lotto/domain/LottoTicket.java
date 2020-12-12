@@ -20,26 +20,18 @@ public class LottoTicket {
         return createPolicy.create();
     }
 
-    public Rank calculateRank(LottoTicket thatLottoTicket) {
-        return Rank.find(countMatchedNumbers(thatLottoTicket));
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
-    int size() {
-        return this.lottoNumbers.size();
-    }
-
-    private int countMatchedNumbers(LottoTicket thatTicket) {
+    int countMatchedNumbers(LottoTicket thatTicket) {
         List<LottoNumber> matchedNumbers = lottoNumbers.stream()
                 .filter(thatTicket::isContains)
                 .collect(Collectors.toList());
         return matchedNumbers.size();
     }
 
-    private boolean isContains(LottoNumber lottoNumber) {
+    boolean isContains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 

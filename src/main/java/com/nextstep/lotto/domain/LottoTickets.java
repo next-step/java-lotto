@@ -11,7 +11,7 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public LottoPrize checkResult(LottoTicket winningTicket) {
+    public LottoPrize checkResult(WinningTicket winningTicket) {
         List<Rank> resultRanks = lottoTickets.stream()
                 .map(winningTicket::calculateRank)
                 .collect(Collectors.toList());
