@@ -3,27 +3,21 @@ package com.nextstep.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(0, 0L),
-    FIFTH(3, 5_000L),
-    FOURTH(4, 50_000L),
-    THIRD(5, 1_500_000L),
-    SECOND(5, 30_000_000L),
-    FIRST(6, 2_000_000_000L);
-
-    private static final String DESCRIPTION_HEADER = "개 일치 (";
-    private static final String DESCRIPTION_FOOTER = "원)";
+    NOTHING(0, 0L, 1),
+    FIFTH(3, 5_000L, 2),
+    FOURTH(4, 50_000L, 3),
+    THIRD(5, 1_500_000L, 4),
+    SECOND(5, 30_000_000L, 5),
+    FIRST(6, 2_000_000_000L, 6);
 
     private final int numberOfMatchedNumber;
     private final Money money;
-    private final String description;
+    private final int rankValue;
 
-    Rank(final Integer numberOfMatchedNumber, final Long moneyValue) {
+    Rank(final Integer numberOfMatchedNumber, final Long moneyValue, final int rankValue) {
       this.numberOfMatchedNumber = numberOfMatchedNumber;
       this.money = new Money(moneyValue);
-      this.description = numberOfMatchedNumber.toString() +
-              DESCRIPTION_HEADER +
-              moneyValue.toString() +
-              DESCRIPTION_FOOTER;
+      this.rankValue = rankValue;
     }
 
     public static Rank find(final int numberOfMatchedNumber, final boolean hasBonus) {
@@ -38,12 +32,16 @@ public enum Rank {
         return this.money.multiplyCount(count);
     }
 
-    public String getDescription() {
-        return description;
+    public Long getMoneyValue() {
+        return money.getAmount();
     }
 
     public int getNumberOfMatchedNumber() {
         return numberOfMatchedNumber;
+    }
+
+    public int getRankValue() {
+        return rankValue;
     }
 
     private static boolean isSameMatchedNumber(final int numberOfMatchedNumber, final Rank rank) {

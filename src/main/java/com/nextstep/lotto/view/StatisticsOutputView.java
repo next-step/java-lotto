@@ -19,9 +19,33 @@ public class StatisticsOutputView {
         Map<Rank, Long> prizeResult = lottoPrize.getResult();
 
         return prizeResult.keySet().stream()
-                .sorted(Comparator.comparingInt(Rank::getNumberOfMatchedNumber))
-                .map(rank -> rank.getDescription() + LOTTO_PRIZE_SEPARATOR + prizeResult.get(rank) + PRIZE_UNIT)
+                .sorted(Comparator.comparingInt(Rank::getRankValue))
+                .map(rank -> parseRankDescription(rank) + LOTTO_PRIZE_SEPARATOR + prizeResult.get(rank) + PRIZE_UNIT)
                 .collect(Collectors.joining());
+    }
+
+    public static String parseRankDescription(Rank rank) {
+        String normalRankHeader = "개 일치 (";
+        String normalRankFooter = "원)";
+
+        if (rank == Rank.SECOND) {
+            return parseSecondRankDescription();
+        }
+
+        return rank.getNumberOfMatchedNumber() +
+                normalRankHeader +
+                rank.getMoneyValue() +
+                normalRankFooter;
+    }
+
+    public static String parseSecondRankDescription() {
+        String secondRankHeader = "개 일치, 보너스 볼 일치(";
+        String secondRankFooter = "원)";
+
+        return Rank.SECOND.getNumberOfMatchedNumber() +
+                secondRankHeader +
+                Rank.SECOND.getMoneyValue() +
+                secondRankFooter;
     }
 
     public static String parseProfit(Money money, LottoPrize lottoPrize) {

@@ -32,6 +32,10 @@ public class Money {
         return this.amount.doubleValue() / thatMoney.amount.doubleValue();
     }
 
+    public Long getAmount() {
+        return amount;
+    }
+
     private void validate(final Long amount) {
         if (amount < MIN_VALUE) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
