@@ -39,23 +39,19 @@ public class Parser {
         final Matcher matcher = PATTERN_COMPILE_BY_CUSTOM.matcher(expression);
 
         if (matcher.find()) {
-            return parseToIntListFromMatcher(matcher);
+            return Arrays.stream(matcher.group(EXPRESSION_GROUP)
+                .split(matcher.group(SEPARATOR_GROUP)))
+                .map(Parser::parseToIntOnlyNaturalNumber)
+                .collect(Collectors.toList());
         }
 
         final List<String> expressionList = Arrays.stream(expression.split(DEFAULT_SEPARATORS))
             .collect(Collectors.toList());
 
-        return parserToIntListFromExpList(expressionList);
+        return parseToIntListFromExpList(expressionList);
     }
 
-    private static List<Integer> parseToIntListFromMatcher(final Matcher matcher) {
-        return Arrays.stream(matcher.group(EXPRESSION_GROUP)
-            .split(matcher.group(SEPARATOR_GROUP)))
-            .map(Parser::parseToIntOnlyNaturalNumber)
-            .collect(Collectors.toList());
-    }
-
-    private static List<Integer> parserToIntListFromExpList(final List<String> expressionList) {
+    private static List<Integer> parseToIntListFromExpList(final List<String> expressionList) {
         return expressionList.stream()
             .map(Parser::parseToIntOnlyNaturalNumber)
             .collect(Collectors.toList());
