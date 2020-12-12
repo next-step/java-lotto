@@ -20,13 +20,6 @@ public enum Rank {
 		this.amountMoney = amountMoney;
 	}
 
-	public static Rank ofMatchesCount(int matchesCount) {
-		return Stream.of(values())
-			.filter(target -> target.getMatchesCount() == matchesCount)
-			.findFirst()
-			.orElse(MISS);
-	}
-
 	public static Rank ofMatchesCount(int matchesCount, boolean hasBonus) {
 		return Stream.of(values())
 			.filter(target -> target.getMatchesCount() == matchesCount)

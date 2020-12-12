@@ -21,10 +21,6 @@ public class LottoWinnerNumbers {
 		return checkNumber.isContainsLottoNumber(this.bonusBall);
 	}
 
-	public static LottoWinnerNumbers ofUser(String input) {
-		return new LottoWinnerNumbers(LottoNumberGenerator.ofInput(input));
-	}
-
 	public static LottoWinnerNumbers ofUser(String input, String bonusBall) {
 		return new LottoWinnerNumbers(LottoNumberGenerator.ofInput(input), new LottoNumber(bonusBall));
 	}
