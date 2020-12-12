@@ -59,7 +59,7 @@ public class LottoTicketTest {
     @CsvSource(value = {"6,true", "7,false", "8,false"})
     void contains(int value, boolean expected) {
         // when
-        boolean contains = lottoTicket.contains(value);
+        boolean contains = lottoTicket.contains(LottoNumber.valueOf(value));
 
         // then
         assertThat(contains).isEqualTo(expected);

@@ -24,10 +24,6 @@ public class LottoTicket {
         return new LottoTicket(removedDuplication);
     }
 
-    public boolean contains(final int value) {
-        return contains(LottoNumber.valueOf(value));
-    }
-
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

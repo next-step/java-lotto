@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.domain.LottoReport;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +17,10 @@ public class LottoReportTest {
 
     @BeforeEach
     void setUp() {
-        lottoReport = LottoReport.of(Rank.FIRST, Rank.SECOND, Rank.THIRD);
+        lottoReport = LottoReport.of(Arrays.asList(
+                Rank.FIRST,
+                Rank.SECOND,
+                Rank.THIRD));
     }
 
     @DisplayName("로도 결과는 등수들로 이루어진다.")
@@ -45,7 +48,10 @@ public class LottoReportTest {
     @Test
     void profitRate() {
         // given
-        LottoReport fourth = LottoReport.of(Rank.FOURTH, Rank.UN_RANK, Rank.UN_RANK);
+        LottoReport fourth = LottoReport.of(Arrays.asList(
+                Rank.FOURTH,
+                Rank.UN_RANK,
+                Rank.UN_RANK));
 
         // when
         double rate = fourth.profitRate();
