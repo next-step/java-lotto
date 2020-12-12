@@ -1,20 +1,18 @@
 package stringcalculator;
 
-import stringcalculator.domain.Adder;
-import stringcalculator.domain.InputConvertor;
+import stringcalculator.domain.StringAddCalculator;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class StringAddApp {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         System.out.print("수식을 입력하세요. (예 1,2:3) >> ");
 
-        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-
-        List<Integer> integers = InputConvertor.convert(input);
-        int result = Adder.add(integers);
+        int result = StringAddCalculator.splitAndSum(input);
 
         System.out.printf("결과는 %d 입니다.%n", result);
     }

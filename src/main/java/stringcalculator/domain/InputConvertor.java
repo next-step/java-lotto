@@ -53,6 +53,6 @@ public class InputConvertor {
     }
 
     private static boolean isNullOrEmpty(String input) {
-        return input == null || input.isEmpty();
+        return input == null || input.trim().isEmpty();
     }
 }
