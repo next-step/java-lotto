@@ -5,11 +5,12 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public enum Rank {
-	WINNER(6, 2_000_000_000),
-	SECOND(5, 15_000_000),
-	THIRD(4, 50_000),
-	FOURTH(3, 5000),
-	FIVE(0, 0);
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 15_000_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5000),
+	MISS(0, 0);
 
 	private final int matchesCount;
 	private final int amountMoney;
@@ -23,7 +24,25 @@ public enum Rank {
 		return Stream.of(values())
 			.filter(target -> target.getMatchesCount() == matchesCount)
 			.findFirst()
-			.orElse(FIVE);
+			.orElse(MISS);
+	}
+
+	public static Rank ofMatchesCount(int matchesCount, boolean hasBonus) {
+		return Stream.of(values())
+			.filter(target -> target.getMatchesCount() == matchesCount)
+			.filter(target -> !target.equals(SECOND))
+			.findFirst()
+			.map(rank -> {
+				if (determineBonus(hasBonus, rank)) {
+					return SECOND;
+				}
+				return rank;
+			})
+			.orElse(MISS);
+	}
+
+	private static boolean determineBonus(boolean hasBonus, Rank rank) {
+		return rank.equals(THIRD) && hasBonus;
 	}
 
 	public static Stream<Rank> greaterThanCountZeroAndSortedAmount() {

@@ -11,9 +11,22 @@ class BonusBallTest {
 	@Test
 	void 보너스볼_테스트() {
 		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser("8, 21, 23, 41, 42, 43", "7");
+		LottoNumbers containBonus = LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 7");
+		LottoNumbers notContainBonus = LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 1");
 
 		assertThat(lottoWinnerNumbers.getMatchCount(LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43"))).isEqualTo(6);
 		assertThat(lottoWinnerNumbers.hasBonusBall(new LottoNumber(7))).isTrue();
 
+		assertThat(LottoResult.matchesRank(containBonus, lottoWinnerNumbers)).isEqualTo(Rank.SECOND);
+		assertThat(LottoResult.matchesRank(notContainBonus, lottoWinnerNumbers)).isEqualTo(Rank.THIRD);
+
+	}
+
+	@DisplayName("2등 판단 테스트")
+	@Test
+	void 보너스_등수_테스트() throws Exception {
+		assertThat(Rank.ofMatchesCount(3, true)).isEqualTo(Rank.FIFTH);
+		assertThat(Rank.ofMatchesCount(5, true)).isEqualTo(Rank.SECOND);
+		assertThat(Rank.ofMatchesCount(5, false)).isEqualTo(Rank.THIRD);
 	}
 }

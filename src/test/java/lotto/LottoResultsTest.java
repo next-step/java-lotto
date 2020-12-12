@@ -31,10 +31,10 @@ class LottoResultsTest {
 
 	public static Stream<Arguments> sortNumbers() {
 		return Stream.of(
-			Arguments.of(LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43"), Rank.WINNER),
-			Arguments.of(LottoNumberGenerator.ofInput("1, 2, 3, 41, 42, 43"), Rank.FOURTH),
-			Arguments.of(LottoNumberGenerator.ofInput("1, 2, 3, 4, 5, 6"), Rank.FIVE),
-			Arguments.of(LottoNumberGenerator.ofInput("6, 7, 8, 9, 10"), Rank.FIVE)
+			Arguments.of(LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43"), Rank.FIRST),
+			Arguments.of(LottoNumberGenerator.ofInput("1, 2, 3, 41, 42, 43"), Rank.FIFTH),
+			Arguments.of(LottoNumberGenerator.ofInput("1, 2, 3, 4, 5, 6"), Rank.MISS),
+			Arguments.of(LottoNumberGenerator.ofInput("6, 7, 8, 9, 10"), Rank.MISS)
 		);
 	}
 
@@ -54,9 +54,9 @@ class LottoResultsTest {
 		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber);
 		LottoResult lottoResults = LottoResult.compareTicketAndWinner(lottoTicket1, lottoWinnerNumbers);
 
-		assertThat(lottoResults.askCountOfRank(Rank.FOURTH)).isEqualTo(1);
-		assertThat(lottoResults.askCountOfRank(Rank.WINNER)).isEqualTo(1);
-		assertThat(lottoResults.askCountOfRank(Rank.FIVE)).isEqualTo(2);
+		assertThat(lottoResults.askCountOfRank(Rank.FIFTH)).isEqualTo(1);
+		assertThat(lottoResults.askCountOfRank(Rank.FIRST)).isEqualTo(1);
+		assertThat(lottoResults.askCountOfRank(Rank.MISS)).isEqualTo(2);
 	}
 
 }
