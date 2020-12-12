@@ -47,29 +47,11 @@ public class NextStepLottoMachine implements LottoMachine {
                 .forEach(ignore -> lottoTickets.add(createAutoTicket()));
     }
 
-    @Override
-    public LottoTickets automatic(final long amount) {
-        Money purchase = Money.valueOf(amount);
-        int count = purchase.divide(LottoTicket.PRICE);
-        return createAutoTickets(count);
-    }
-
-    private LottoTickets createAutoTickets(final int count) {
-        return IntStream.range(0, count)
-                .mapToObj(ignore -> createAutoTicket())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::of));
-    }
-
     private LottoTicket createAutoTicket() {
         Collections.shuffle(CACHE);
         List<LottoNumber> shuffledNumber = new ArrayList<>(CACHE.subList(0, LottoTicket.LOTTO_NUMBER_COUNT));
         Collections.sort(shuffledNumber);
         return LottoTicket.of(shuffledNumber);
-    }
-
-    @Override
-    public LottoTicket manual(final String numbers) {
-        return createLottoTicket(numbers);
     }
 
     @Override

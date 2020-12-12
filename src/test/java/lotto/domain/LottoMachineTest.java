@@ -19,19 +19,6 @@ public class LottoMachineTest {
     @BeforeEach
     void setUp() {
         lottoMachine = new LottoMachine() {
-            @Override
-            public LottoTickets automatic(final long amount) {
-                return LottoTickets.of(Arrays.asList(
-                        createLottoTicket(1, 2, 3, 4, 5, 6),
-                        createLottoTicket(2, 3, 4, 5, 6, 7),
-                        createLottoTicket(3, 4, 5, 6, 7, 8)
-                ));
-            }
-
-            @Override
-            public LottoTicket manual(final String numbers) {
-                return createLottoTicket(1, 2, 3, 4, 5, 6);
-            }
 
             @Override
             public LottoTickets generate(final long amount, final List<String> manualNumbers) {
@@ -56,24 +43,14 @@ public class LottoMachineTest {
         };
     }
 
-    @DisplayName("자동 로또 티켓을 생성할 수 있다.")
+    @DisplayName("로또 티켓을 생성할 수 있다.")
     @Test
-    void automatic() {
+    void generate() {
         // when
-        LottoTickets lottoTickets = lottoMachine.automatic(10);
+        LottoTickets lottoTickets = lottoMachine.generate(10, new ArrayList<>());
 
         // then
         assertThat(lottoTickets).isNotNull();
-    }
-
-    @DisplayName("수동 로또 티켓을 생성할 수 있다.")
-    @Test
-    void manual() {
-        // when
-        LottoTicket lottoTicket = lottoMachine.manual("1, 2, 3, 4, 5, 6");
-
-        // then
-        assertThat(lottoTicket).isNotNull();
     }
 
     @DisplayName("당첨 로또를 생성할 수 있다.")
@@ -88,15 +65,5 @@ public class LottoMachineTest {
 
         // then
         assertThat(winningLotto).isNotNull();
-    }
-
-    @DisplayName("로또 티켓을 생성할 수 있다.")
-    @Test
-    void generate() {
-        // when
-        LottoTickets lottoTickets = lottoMachine.generate(10, new ArrayList<>());
-
-        // then
-        assertThat(lottoTickets).isNotNull();
     }
 }
