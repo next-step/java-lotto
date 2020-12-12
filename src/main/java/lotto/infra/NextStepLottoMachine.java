@@ -20,6 +20,34 @@ public class NextStepLottoMachine implements LottoMachine {
     }
 
     @Override
+    public LottoTickets generate(final long amount, final List<String> manualNumbers) {
+        int manualTicketCount = manualNumbers.size();
+        int autoTicketCount = ticketCount(amount) - manualTicketCount;
+        return createLottoTickets(manualNumbers, autoTicketCount);
+    }
+
+    private int ticketCount(final long amount) {
+        Money purchase = Money.valueOf(amount);
+        return purchase.divide(LottoTicket.PRICE);
+    }
+
+    private LottoTickets createLottoTickets(final List<String> manualNumbers, final int autoTicketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        addManualTickets(manualNumbers, lottoTickets);
+        addAutoTickets(autoTicketCount, lottoTickets);
+        return LottoTickets.of(lottoTickets);
+    }
+
+    private void addManualTickets(final List<String> manualNumbers, final List<LottoTicket> lottoTickets) {
+        manualNumbers.forEach(manualNumber -> lottoTickets.add(createLottoTicket(manualNumber)));
+    }
+
+    private void addAutoTickets(final int autoTicketCount, final List<LottoTicket> lottoTickets) {
+        IntStream.range(0, autoTicketCount)
+                .forEach(ignore -> lottoTickets.add(createAutoTicket()));
+    }
+
+    @Override
     public LottoTickets automatic(final long amount) {
         Money purchase = Money.valueOf(amount);
         int count = purchase.divide(LottoTicket.PRICE);
@@ -41,19 +69,19 @@ public class NextStepLottoMachine implements LottoMachine {
 
     @Override
     public LottoTicket manual(final String numbers) {
-        return LottoTicket.of(createManualLottoNumbers(numbers));
+        return createLottoTicket(numbers);
     }
 
     @Override
     public WinningLotto winning(final String winningNumbers, final String bonusNumber) {
-        LottoTicket winningTicket = LottoTicket.of(createManualLottoNumbers(winningNumbers));
+        LottoTicket winningTicket = createLottoTicket(winningNumbers);
         LottoNumber bonus = LottoNumber.valueOf(bonusNumber);
         return WinningLotto.of(winningTicket, bonus);
     }
 
-    private List<LottoNumber> createManualLottoNumbers(final String numbers) {
+    private LottoTicket createLottoTicket(final String numbers) {
         return Arrays.stream(numbers.split(DELIMITER))
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
     }
 }

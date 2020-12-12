@@ -7,6 +7,11 @@ import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,5 +65,24 @@ public class NextStepLottoMachineTest {
 
         // then
         assertThat(winning).isNotNull();
+    }
+
+    @DisplayName("구매 가능한 만큼 수동과 자동으로 로또 티켓을 생성할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"10000,10", "8500,8", "3000,3"})
+    void generate(long amount, int expected) {
+        // given
+        List<String> manualNumbers = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "2, 3, 4, 5, 6, 7",
+                "3, 4, 5, 6, 7, 8"
+        );
+
+        // when
+        LottoTickets lottoTickets = nextStepLottoMachine.generate(amount, manualNumbers);
+
+        // then
+        assertThat(lottoTickets.count()).isEqualTo(expected);
+        System.out.println(lottoTickets);
     }
 }

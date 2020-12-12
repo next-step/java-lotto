@@ -30,4 +30,11 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
     }
+
+    @Override
+    public String toString() {
+        return "LottoTickets{" +
+                "lottoTickets=" + lottoTickets +
+                '}';
+    }
 }

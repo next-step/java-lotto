@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +31,15 @@ public class LottoMachineTest {
             @Override
             public LottoTicket manual(final String numbers) {
                 return createLottoTicket(1, 2, 3, 4, 5, 6);
+            }
+
+            @Override
+            public LottoTickets generate(final long amount, final List<String> manualNumbers) {
+                return LottoTickets.of(Arrays.asList(
+                        createLottoTicket(1, 2, 3, 4, 5, 6),
+                        createLottoTicket(2, 3, 4, 5, 6, 7),
+                        createLottoTicket(3, 4, 5, 6, 7, 8)
+                ));
             }
 
             @Override
@@ -77,5 +88,15 @@ public class LottoMachineTest {
 
         // then
         assertThat(winningLotto).isNotNull();
+    }
+
+    @DisplayName("로또 티켓을 생성할 수 있다.")
+    @Test
+    void generate() {
+        // when
+        LottoTickets lottoTickets = lottoMachine.generate(10, new ArrayList<>());
+
+        // then
+        assertThat(lottoTickets).isNotNull();
     }
 }
