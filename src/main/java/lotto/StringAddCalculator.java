@@ -8,10 +8,13 @@ public class StringAddCalculator {
 
 	private static final String DEFAULT_DELIMITER = ",|:";
 
+	private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+
+	private static Matcher m;
+
 	public static int splitAndSum(String inputText) {
-		String text = Optional.ofNullable(inputText)
-			.orElse("");
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
+		String text = Optional.ofNullable(inputText).orElse("");
+		m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
 		if (m.find()) {
 			String delimiter = m.group(1);
 			String expression = m.group(2);
@@ -21,22 +24,22 @@ public class StringAddCalculator {
 	}
 
 	private static int sum(String[] tokens) {
-		Integer result = 0;
+		int result = 0;
 		for (String input : tokens) {
-			result += validateNumber(convertInteger(input));
+			result += isPositiveNumber(convertInteger(input));
 		}
 		return result;
 
 	}
 
-	private static Integer convertInteger(String input) {
-		if (input.isEmpty()) {
+	private static int convertInteger(String input) {
+		if (input == null || input.isEmpty()) {
 			return 0;
 		}
 		return Integer.parseInt(input);
 	}
 
-	private static Integer validateNumber(int value) {
+	private static int isPositiveNumber(int value) {
 		if (value < 0) {
 			throw new RuntimeException();
 		}
