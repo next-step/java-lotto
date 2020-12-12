@@ -15,7 +15,7 @@ public class LottoController {
     }
 
     public PurchaseResponse purchase(final PurchaseRequest request) {
-        return lottoService.create(request.getAmount());
+        return lottoService.create(request.getAmount(), request.getManualNumbers());
     }
 
     public ReportResponse report(final ReportRequest reportRequest) {

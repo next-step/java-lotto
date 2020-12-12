@@ -8,6 +8,8 @@ import lotto.dto.PurchaseResponse;
 import lotto.dto.ReportRequest;
 import lotto.dto.ReportResponse;
 
+import java.util.List;
+
 public class LottoService {
 
     private final LottoMachine lottoMachine;
@@ -16,9 +18,9 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public PurchaseResponse create(long amount) {
-        LottoTickets lottoTickets = lottoMachine.automatic(amount);
-        return PurchaseResponse.of(lottoTickets);
+    public PurchaseResponse create(long amount, final List<String> manualNumbers) {
+        LottoTickets lottoTickets = lottoMachine.generate(amount, manualNumbers);
+        return PurchaseResponse.of(lottoTickets, manualNumbers.size());
     }
 
     public ReportResponse report(final ReportRequest reportRequest) {

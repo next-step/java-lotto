@@ -12,11 +12,16 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     private static final String LINE_BREAK = "\n";
+
+    private static final String LOTTO_TICKET_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
+
     private static final String LOTTO_TICKET_FORMAT = "[%s]";
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private static final String REWARD = "당첨 통계";
+
+    private static final String REWARD_DIVIDER = "---------";
 
     private static final String RANK_FORMAT = "%d개 일치 (%s원)- %d개";
 
@@ -27,6 +32,10 @@ public class ResultView {
     private static final String PROFIT_RATE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void print(final PurchaseResponse purchaseResponse) {
+        System.out.println(String.format(
+                LOTTO_TICKET_COUNT_FORMAT,
+                purchaseResponse.getManualTicketCount(),
+                purchaseResponse.getAutoTicketCount()));
         LottoTickets lottoTickets = purchaseResponse.getLottoTickets();
         String ticketsForm = lottoTickets.getLottoTickets()
                 .stream()
@@ -46,6 +55,7 @@ public class ResultView {
 
     public static void print(final ReportResponse reportResponse) {
         System.out.println(REWARD);
+        System.out.println(REWARD_DIVIDER);
         LottoReport lottoReport = reportResponse.getLottoReport();
         printRanks(getSortedRanks(), lottoReport);
         printProfitRate(lottoReport.profitRate());
