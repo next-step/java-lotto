@@ -26,6 +26,9 @@ public class LottoMain {
 
         WinningLottery winningLottery = new WinningLottery(winningNumbers);
 
-        Map<Lottery, Integer> result = lottoGame.matchLottery(lottoGame.getLotteryList(),winningLottery);
+        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lottoGame.getLotteryList(),winningLottery);
+        float profitRate = lottoGame.calculateProfit(money, matchedResult);
+
+        resultView.showResult(matchedResult, profitRate);
     }
 }
