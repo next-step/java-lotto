@@ -10,15 +10,22 @@ public class LottoStore {
     private SoldLotto soldLotto;
     private WinningLottoMoney winningLottoMoney;
 
-    public List<Lotto> buy(int fee) {
+    public List<Lotto> buy(int fee, List<List<Integer>> notAutoNumbers) {
         this.fee = Fee.getInstance(fee);
-        int buyCount = this.fee.getBuyCount();
-
-        return buyLotto(buyCount);
+        int autoCount = getAutoCount(notAutoNumbers);
+        return buyLotto(autoCount, notAutoNumbers);
     }
 
-    private List<Lotto> buyLotto(int buyCount) {
-        this.soldLotto = new SoldLotto(buyCount);
+    private int getAutoCount(List<List<Integer>> notAutoNumbers) {
+        int autoCount = this.fee.getBuyCount() - notAutoNumbers.size();
+        if (autoCount < LottoConstant.ZERO) {
+            throw new IllegalArgumentException("구입금액이 부족합니다.");
+        }
+        return autoCount;
+    }
+
+    private List<Lotto> buyLotto(int autoCount, List<List<Integer>> notAutoNumbers) {
+        this.soldLotto = SoldLotto.of(autoCount, notAutoNumbers);
         return this.soldLotto.getSoldLotto();
     }
 
@@ -35,12 +42,11 @@ public class LottoStore {
         return this.winningLottoMoney.findBenefitByFee(this.fee);
     }
 
-    public List<Integer> getWinNumbers() {
+    public List<LottoNo> getWinNumbers() {
         return this.winningLottoNumber.getNumbers();
     }
 
     public void addBonusNumber(int bonusNumber) {
         this.winningLottoNumber.addBonusNumber(bonusNumber);
     }
-
 }

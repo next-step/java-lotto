@@ -3,68 +3,41 @@ package step2.domain;
 import java.util.*;
 
 public class WinningLottoNumber {
-    private final List<Integer> winningNumbers = new ArrayList<>();
-    private BonusNumber bonusNumber;
+    private final Lotto winningNumbers;
+    private LottoNo bonusNumber;
 
-    public WinningLottoNumber(List<Integer> winNumberString) {
-        this.winningNumbers.addAll(winNumberString);
-        numberValid();
+    public WinningLottoNumber(List<Integer> winningNumbers) {
+        this.winningNumbers = Lotto.create(winningNumbers);
     }
 
-    private void numberValid() {
-        if (isEmpty()) {
-            throw new IllegalArgumentException("잘못된 데이터를 입력했습니다.");
-        }
-
-        if (isNotMatchNumberCount()) {
-            throw new IllegalArgumentException("6개의 숫자를 입력하세요.");
-        }
-
-        Optional<Integer> isNotLottoNumber = this.winningNumbers.stream().filter(number -> isNotLottoNumber(number)).findAny();
-        if (isNotLottoNumber.isPresent()) {
-            throw new IllegalArgumentException("잘못된 당첨번호를 입력하였습니다.");
-        }
-    }
-
-    private boolean isEmpty() {
-        return Objects.isNull(this.winningNumbers) || this.winningNumbers.isEmpty();
-    }
-
-    private boolean isNotMatchNumberCount() {
-        return this.winningNumbers.size() != LottoConstant.NEED_COUNT;
-    }
-
-    private boolean isNotLottoNumber(int number) {
-        return number < LottoConstant.START_NO || number > LottoConstant.END_NO;
-    }
-
-    public List<Integer> getNumbers() {
-        return this.winningNumbers;
+    public List<LottoNo> getNumbers() {
+        return this.winningNumbers.getNumbers();
     }
 
     public long findIsMatchNumberCount(Lotto lotto) {
-        return this.winningNumbers.stream()
+        return this.winningNumbers.getNumbers().stream()
                 .filter(winNumber -> isContains(winNumber, lotto))
                 .count();
     }
 
-    private boolean isContains(Integer winNumber, Lotto lotto) {
+    private boolean isContains(LottoNo winNumber, Lotto lotto) {
         return lotto.isContains(winNumber);
     }
 
     public void addBonusNumber(int bonusNumber) {
-        if (isContainsWinningNumber(bonusNumber)) {
+        LottoNo bonusLottoNo = LottoNo.create(bonusNumber);
+        if (isContainsWinningNumber(bonusLottoNo)) {
             throw new IllegalArgumentException("당첨번호와 겹치지 않는 숫자를 입력하세요.");
         }
 
-        this.bonusNumber = BonusNumber.getInstance(bonusNumber);
+        this.bonusNumber = LottoNo.create(bonusNumber);
     }
 
-    private boolean isContainsWinningNumber(int bonusNumber) {
-        return this.winningNumbers.contains(bonusNumber);
+    private boolean isContainsWinningNumber(LottoNo bonusNumber) {
+        return this.winningNumbers.getNumbers().contains(bonusNumber);
     }
 
-    public int getBonusNumber() {
-        return this.bonusNumber.getNumber();
+    public LottoNo getBonusNumber() {
+        return this.bonusNumber;
     }
 }

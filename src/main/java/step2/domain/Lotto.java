@@ -2,37 +2,66 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> numbers = new ArrayList<>();
+    private final boolean isAuto;
 
     public Lotto() {
-        this.numbers = new ArrayList<>();
+        this.isAuto = true;
         createLottoNumber();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        numbers = new ArrayList<>(lottoNumbers);
+    public static Lotto create(List<Integer> lottoNumbers) {
+        if (isNotLottoCount(lottoNumbers)) {
+            throw new IllegalArgumentException("6자리의 숫자를 입력해 주세요.");
+        }
+        if (isSameNumber(lottoNumbers)) {
+            throw new IllegalArgumentException("같은 숫자가 포함돼 있습니다.");
+        }
+
+        return new Lotto(lottoNumbers);
+    }
+
+    private static boolean isSameNumber(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream().distinct().count() != LottoConstant.NEED_COUNT;
+    }
+
+    private Lotto(List<Integer> lottoNumbers) {
+        for (Integer lottoNumber : lottoNumbers) {
+            this.numbers.add(LottoNo.create(lottoNumber));
+        }
+        this.isAuto = false;
+    }
+
+    private static boolean isNotLottoCount(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() != LottoConstant.NEED_COUNT;
     }
 
     private void createLottoNumber() {
-        List<Integer> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
+        List<LottoNo> allLottoNumber = LottoNumberGenerator.LOTTO_GENERATOR;
         Collections.shuffle(allLottoNumber);
-        this.numbers.addAll(allLottoNumber.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT));
-        Collections.sort(this.numbers);
+        List<LottoNo> lottoNos = allLottoNumber.subList(LottoConstant.ZERO, LottoConstant.NEED_COUNT);
+        lottoNos.sort(Comparator.comparingInt(LottoNo::getNumber));
+        this.numbers.addAll(lottoNos);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNo> getNumbers() {
         return this.numbers;
     }
 
-    public boolean isContains(Integer winNumber) {
+    public boolean isContains(LottoNo winNumber) {
         return this.numbers.contains(winNumber);
     }
 
-    public boolean isContainsBonusNumber(int bonusNumber) {
+    public boolean isContainsBonusNumber(LottoNo bonusNumber) {
         return this.numbers.contains(bonusNumber);
+    }
+
+    public boolean isAuto() {
+        return this.isAuto;
     }
 }

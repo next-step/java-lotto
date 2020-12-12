@@ -10,7 +10,12 @@ import java.util.Map;
 public class ResultView {
 
     public void showBoughtLotto(List<LottoDTO> lottoDTOS) {
-        System.out.println(lottoDTOS.size() + "개를 구매했습니다.");
+        long notAutoCount = lottoDTOS.stream().filter(lottoDTO -> !lottoDTO.isAuto()).count();
+        long autoCount = lottoDTOS.stream().filter(lottoDTO -> lottoDTO.isAuto()).count();
+
+        System.out.println();
+        System.out.println("수동으로 " + notAutoCount +"장, 자동으로 " + autoCount + "개를 구매했습니다.");
+
         for (LottoDTO lottoDTO : lottoDTOS) {
             System.out.println(lottoDTO.getNumbers());
         }
