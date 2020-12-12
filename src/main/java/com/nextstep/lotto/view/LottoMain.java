@@ -12,8 +12,8 @@ public class LottoMain {
         int price = InputView.inputPrice();
         int buyCount = LottoSeller.count(price);
         Lottos lottos = LottoSeller.buy(buyCount);
-        OutputView.printBuy(buyCount, lottos);
+        ResultView.printBuy(buyCount, lottos);
         String winnerNumbers = InputView.inputWinnerNumbers();
-        OutputView.printStatistics(lottos.getStatistics(winnerNumbers));
+        ResultView.printStatistics(lottos.getStatistics(winnerNumbers));
     }
 }

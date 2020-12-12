@@ -4,7 +4,7 @@ import com.nextstep.lotto.domain.LottoStatistics;
 import com.nextstep.lotto.domain.LottoWinning;
 import com.nextstep.lotto.domain.Lottos;
 
-public class OutputView {
+public class ResultView {
 
     public static void printStatistics(LottoStatistics lottoStatistics) {
         System.out.println("당첨 통계");
