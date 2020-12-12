@@ -39,10 +39,7 @@ class RankTest {
         return Stream.of(
                 Arguments.of(-1, false),
                 Arguments.of(0, false),
-                Arguments.of(2, false),
-                Arguments.of(7, false),
-                Arguments.of(3, true),
-                Arguments.of(6, true)
+                Arguments.of(7, false)
         );
     }
 

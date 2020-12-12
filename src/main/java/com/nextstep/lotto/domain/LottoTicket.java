@@ -21,7 +21,7 @@ public class LottoTicket {
     }
 
     public Rank calculateRank(LottoTicket thatLottoTicket) {
-        // TODO: 임시 데이터 삽입(hasBonus)
+        // TODO: 제거 예정
         return Rank.find(countMatchedNumbers(thatLottoTicket), false);
     }
 
@@ -29,11 +29,7 @@ public class LottoTicket {
         return new ArrayList<>(lottoNumbers);
     }
 
-    int size() {
-        return this.lottoNumbers.size();
-    }
-
-    private int countMatchedNumbers(LottoTicket thatTicket) {
+    int countMatchedNumbers(LottoTicket thatTicket) {
         List<LottoNumber> matchedNumbers = lottoNumbers.stream()
                 .filter(thatTicket::isContains)
                 .collect(Collectors.toList());

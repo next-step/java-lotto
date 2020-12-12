@@ -13,6 +13,13 @@ public class WinningTicket {
         this.bonusNumber = bonusNumber;
     }
 
+    public Rank calculateRank(LottoTicket candidateTicket) {
+        return Rank.find(
+                candidateTicket.countMatchedNumbers(lottoTicket),
+                candidateTicket.isContains(bonusNumber)
+        );
+    }
+
     private void validate(final LottoTicket lottoTicket, final LottoNumber bonusNumber) {
         if (lottoTicket.isContains(bonusNumber)) {
             throw new InvalidWinningTicketException("보너스 넘버는 당첨티켓 내의 로또 번호와 중복될 수 없습니다.");
