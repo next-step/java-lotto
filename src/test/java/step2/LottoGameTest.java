@@ -85,8 +85,8 @@ class LottoGameTest {
 
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
         Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
-        float profitRate = lottoGame.calculateProfit(matchedResult);
+        float profitRate = lottoGame.calculateProfit(5000 ,matchedResult);
 
-        assertThat(profitRate).isEqualTo(2.0);
+        assertThat(profitRate).isEqualTo(2.0f);
     }
 }
