@@ -2,10 +2,7 @@ package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step4.VO.Lotto;
-import step4.VO.Lottos;
-import step4.VO.ManualLottoCnt;
-import step4.VO.Money;
+import step4.VO.*;
 import step4.View.ResultView;
 
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class DomainTest {
             manualLottoNumbersList.add(new Lotto(manualLottoNumbers.getLottoNumbers()));
         }
 
-        lottos.buyManualLottos(manualLottoNumbersList);
+        LottoStore.buyManualLottos(lottos, manualLottoNumbersList);
 
         // 자동발권
         main.buyAutoLottos(lottos, money, fixedWinningsGenerator);

@@ -27,7 +27,7 @@ public class Main {
             manualLottoNumbersList.add(new Lotto(InputView.getManualLottoNumbers()));
         }
 
-        lottos.buyManualLottos(manualLottoNumbersList);
+        LottoStore.buyManualLottos(lottos, manualLottoNumbersList);
         buyAutoLottos(lottos, money, lottoGenerator);
 
         ResultNumber resultNumber = new ResultNumber(InputView.getResultNumber(), InputView.getBonusNumber());
@@ -40,7 +40,7 @@ public class Main {
     }
 
     public void buyAutoLottos(Lottos lottos, Money money, LottoGenerator lottoGenerator) {
-        lottos.buyAutoLottos(money, lottoGenerator);
+        LottoStore.buyAutoLottos(lottos, money, lottoGenerator);
 
         ResultView.printLottoCnt(lottos.getLottosCnt());
         ResultView.printLottoList(lottos);

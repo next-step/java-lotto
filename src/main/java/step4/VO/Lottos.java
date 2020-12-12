@@ -11,21 +11,8 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public void buyAutoLottos(Money money, LottoGenerator lottoGenerator) {
-        int autoCnt = getAutoLottoCnt(money);
-        for (int i = 1; i <= autoCnt; i++) {
-            buyAutoLotto(lottoGenerator);
-        }
-    }
-
-    private int getAutoLottoCnt(Money money) {
+    public int getAutoLottoCnt(Money money) {
         return money.getLottoCnt()-lottoList.size();
-    }
-
-    public void buyManualLottos(List<Lotto> manualLottoNumbersList) {
-        for (Lotto manualLottoNumbers: manualLottoNumbersList) {
-            lottoList.add(new Lotto(manualLottoNumbers.getNumberList()));
-        }
     }
 
     public void checkResult(Statistic statistic, ResultNumber resultNumber) {
@@ -34,8 +21,8 @@ public class Lottos {
         }
     }
 
-    private void buyAutoLotto(LottoGenerator lottoGenerator){
-        lottoList.add(new Lotto(lottoGenerator.getLottoNumbers()));
+    public void inputLotto(Lotto lotto){
+        lottoList.add(lotto);
     }
 
     public List<Lotto> getLottoList(){
