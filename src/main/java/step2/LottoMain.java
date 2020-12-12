@@ -1,9 +1,12 @@
 package step2;
 
+import step2.domain.Lottery;
 import step2.domain.LottoGame;
 import step2.domain.WinningLottery;
 import step2.view.InputView;
 import step2.view.ResultView;
+
+import java.util.Map;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -20,7 +23,9 @@ public class LottoMain {
         inputView.showInputWinningMessage();
 
         String[] winningNumbers = inputView.getWinningNumbers();
+
         WinningLottery winningLottery = new WinningLottery(winningNumbers);
 
+        Map<Lottery, Integer> result = lottoGame.matchLottery(lottoGame.getLotteryList(),winningLottery);
     }
 }

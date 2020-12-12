@@ -3,11 +3,15 @@ package step2.domain;
 import step2.util.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
     private List<Lottery> lotteryList;
+
+    private Map<Lottery, Integer> matchedResult;
 
     public LottoGame() {
 
@@ -58,5 +62,22 @@ public class LottoGame {
 
     public List<Lottery> getLotteryList() {
         return this.lotteryList;
+    }
+
+    /**
+     * 로또들의 당첨 결과를 Map으로 리턴하는 메소드
+     * @param generatedLotteries 현재 생성된 복권 리스트
+     * @param winningLottery 당첨 복권
+     * @return 각 복권들의 당첨 결과 Map
+     */
+    public Map<Lottery, Integer> matchLottery(List<Lottery> generatedLotteries, WinningLottery winningLottery) {
+        matchedResult = new HashMap<>();
+
+        for (Lottery lotto : generatedLotteries) {
+            lotto.match(winningLottery);
+            matchedResult.put(lotto, lotto.getMatched());
+        }
+
+        return matchedResult;
     }
 }
