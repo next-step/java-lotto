@@ -54,12 +54,7 @@ public class LottoNumbers {
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoNumbers that = (LottoNumbers) o;
 
-		for (LottoNumber element : that.numbers) {
-			if (!this.numbers.contains(element)) {
-				return false;
-			}
-		}
-		return true;
+		return this.numbers.containsAll(that.numbers);
 	}
 
 	@Override
