@@ -15,9 +15,9 @@ public class MatchResultTest {
     void create() {
         //given
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(3,1);
-        result.put(6,2);
-        result.put(2,3);
+        result.put(3, 1);
+        result.put(6, 2);
+        result.put(2, 3);
 
         //when
         MatchResult matchResult = new MatchResult(result);
@@ -43,6 +43,6 @@ public class MatchResultTest {
 
         //when
         BigDecimal profit = matchResult.calculateProfit();
-        assertThat(profit).isEqualTo(BigDecimal.valueOf(5_000.0 / 14_000));
+        assertThat(profit).isEqualTo(new BigDecimal(5_000.0 / 14_000));
     }
 }
