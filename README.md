@@ -74,6 +74,7 @@
 #### 2. 2단계 - 테스트 가능한 부분에 대해 TDD로 도전한다.
 - 당첨 번호를 split하여 당첨 번호 객체?를 생성
 - 수익률을 계산
+- 로또 당첨 여부를 계산
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

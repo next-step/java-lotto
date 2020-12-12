@@ -15,28 +15,13 @@ import step2.util.Constants;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class LottoGameTest {
 
     private LottoGame lottoGame;
-
-    private static Lottery[] lotteries = {
-            new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Lottery(Arrays.asList(2, 3, 4, 5, 6, 7)),
-            new Lottery(Arrays.asList(3, 4, 5, 6, 7, 8)),
-            new Lottery(Arrays.asList(4, 5, 6, 7, 8, 9)),
-            new Lottery(Arrays.asList(6, 7, 8, 9, 10, 45))
-    };
-
-    static List<Lottery> lotteryList() {
-        return Arrays.asList(lotteries);
-    }
 
     @BeforeEach
     void create_instance() {
@@ -84,5 +69,24 @@ class LottoGameTest {
         assertThat(
                 String.join(",", matchedValues)
         ).isEqualTo("6,5,4,3,1");
+    }
+
+    @Test
+    @DisplayName("당첨 수익률 계산 테스트")
+    void calculate_profit() {
+        Lottery[] lotteries = {
+                new Lottery(Arrays.asList(1, 2, 3, 22, 34, 36)),
+                new Lottery(Arrays.asList(10, 15, 20, 25, 30, 35)),
+                new Lottery(Arrays.asList(1, 2, 6, 7, 8, 11, 12)),
+                new Lottery(Arrays.asList(11, 12, 13, 14, 15, 16)),
+                new Lottery(Arrays.asList(22, 24, 26, 39, 40, 45))
+        };
+        List<Lottery> lotteryList = Arrays.asList(lotteries);
+
+        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
+        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
+        float profitRate = lottoGame.calculateProfit(matchedResult);
+
+        assertThat(profitRate).isEqualTo(2.0);
     }
 }
