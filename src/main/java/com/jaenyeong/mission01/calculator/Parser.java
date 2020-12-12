@@ -15,6 +15,9 @@ public class Parser {
     public static final int EXPRESSION_GROUP = 2;
     public static final int SEPARATOR_GROUP = 1;
 
+    private Parser() {
+    }
+
     public static List<Integer> parseToNumbers(String exp) {
         if (Validator.isBlank(exp)) {
             return returnNone();
