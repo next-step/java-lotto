@@ -27,4 +27,17 @@ class LottoTicketFactoryTest {
             assertThat(lottoNumbers.get(number)).isEqualTo(new LottoNumber(number + 1));
         }
     }
+
+    @DisplayName("랜덤으로 돌려 6개 숫자를 뽑아 크기 순으로 정렬한다.")
+    @Test
+    void make_LottoTicket() {
+        List<LottoNumber> lottoNumbers = lottoTicketFactory.makeLottoTicket().getLottoNumbers();
+
+        assertThat(lottoNumbers).hasSize(6);
+
+        for (int index = 1; index < 6; index++) {
+            assertThat(lottoNumbers.get(index - 1).getValue() < lottoNumbers.get(index).getValue()).isTrue();
+        }
+
+    }
 }

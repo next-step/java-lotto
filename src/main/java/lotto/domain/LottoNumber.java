@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
     private final static int LOTTO_START_NUMBER = 1;
     private final static int LOTTO_END_NUMBER = 45;
+
     private final int value;
 
     public LottoNumber(int value) {
@@ -16,6 +17,10 @@ public class LottoNumber {
         if (LOTTO_START_NUMBER > value || value > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException("숫자는 1부터 45까지여야 합니다.");
         }
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override
