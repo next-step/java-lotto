@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.Lottery;
+import step2.domain.WinningLottery;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,5 +26,15 @@ class LotteryTest {
                         .stream()
                         .allMatch(number -> number >= 1 && number <= 45)
         ).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("한 개의 로또 당첨 여부 테스트")
+    void match_with_winning_lottery() {
+        Lottery lottery = new Lottery(Arrays.asList(1,2,3,4,5,6));
+        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
+
+        lottery.match(winningLottery);
+        assertThat(lottery.getMatched()).isEqualTo(6);
     }
 }
