@@ -21,7 +21,8 @@ public class LotteryGameManager {
         ResultViewLotteryGame.displayPurchasedTickets(purchasedTickets);
 
         String lotteryWinningNumbers = InputViewLotteryGame.getWinningNumbers();
-        LotteryWinning lotteryWinning = new LotteryWinning(lotteryWinningNumbers);
+        String lotteryBonusNumber = InputViewLotteryGame.getBonusNumber();
+        LotteryWinning lotteryWinning = new LotteryWinning(lotteryWinningNumbers, lotteryBonusNumber);
         ResultViewLotteryGame.displayLotteryResult(
                 lotteryWinning.getLotteryResult(purchasedTickets),
                 purchaseAmount);

@@ -96,27 +96,4 @@ public class TestLotteryGame {
                         Arrays.asList(new LotteryTicket(new int[]{5, 1, 4, 3, 2, 6}))
                 ));
     }
-
-    @Test
-    @DisplayName("로또 게임 결과 로또 당첨번호와 맞지 않는 경우")
-    void matchNoNumbersWithOneLotteryTickets() {
-        assertThat(dummyLotteryGame.matchLotteryTickets("7,8,9,10,11,12", dummyOneLotteryTicket))
-                .isEqualTo(new LotteryResult("7,8,9,10,11,12"));
-    }
-
-    @Test
-    @DisplayName("로또 게임 결과 로또 당첨번호와 3개 일치하는 경우")
-    void matchThreeNumbersWithOneLotteryTickets() {
-        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,10,11,12", dummyOneLotteryTicket)
-                .getLotteryResultMap().get(LotteryValue.FORTH_PLACE))
-                .isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("로또 게임 결과 로또 당첨번호와 6개가 2개의 티켓에서 일치하는 경우")
-    void matchSixNumbersWithMultiLotteryTickets() {
-        assertThat(dummyLotteryGame.matchLotteryTickets("1,2,3,4,5,6", dummyLotteryTickets)
-                .getLotteryResultMap().get(LotteryValue.FIRST_PLACE))
-                .isEqualTo(2);
-    }
 }

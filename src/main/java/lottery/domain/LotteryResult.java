@@ -9,6 +9,7 @@ public class LotteryResult {
 
     public LotteryResult() {
         lotteryResultMap = new LinkedHashMap<LotteryValue, Integer>(){{
+            put(LotteryValue.FIFTH_PLACE, 0);
             put(LotteryValue.FORTH_PLACE, 0);
             put(LotteryValue.THIRD_PLACE, 0);
             put(LotteryValue.SECOND_PLACE, 0);
@@ -28,12 +29,19 @@ public class LotteryResult {
         return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount), 3, RoundingMode.HALF_EVEN);
     }
 
-    protected void updateLotteryResult(int key) {
+    protected void updateLotteryResult(int key, boolean isMatchedBonusNumber) {
         LotteryValue resultKey = LotteryValue.findByAmount(key);
+        if (isSecondPlace(key, isMatchedBonusNumber)) {
+            resultKey = LotteryValue.SECOND_PLACE;
+        }
         if (resultKey.equals(LotteryValue.MISS)) {
             return;
         }
         this.lotteryResultMap.replace(resultKey, lotteryResultMap.get(resultKey) + 1);
+    }
+
+    private boolean isSecondPlace(int key, boolean isMatchedBonusNumber) {
+        return (key == LotteryValue.THIRD_PLACE.getPlace() && isMatchedBonusNumber);
     }
 
     @Override

@@ -28,10 +28,6 @@ public class LotteryGame {
                 .collect(Collectors.toList());
     }
 
-    public LotteryResult matchLotteryTickets(String winningNumbers, List<LotteryTicket> lotteryTickets) {
-        return new LotteryWinning(winningNumbers).getLotteryResult(lotteryTickets);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

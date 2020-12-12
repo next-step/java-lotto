@@ -1,16 +1,17 @@
 package lottery.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 
 public class LotteryWinning {
     private final LotteryTicket winningTicket;
+    private final LotteryNumber bonusNumber;
     private LotteryResult lotteryResult;
 
-    public LotteryWinning(String winningNumbers) {
+    public LotteryWinning(String winningNumbers, String bonusNumber) {
         this.winningTicket = new LotteryTicket(winningNumbers);
+        this.bonusNumber = new LotteryNumber(Integer.parseInt(bonusNumber));
         lotteryResult = new LotteryResult();
     }
 
@@ -22,15 +23,20 @@ public class LotteryWinning {
         return matchCount;
     }
 
-    public LotteryResult getLotteryResult(List<LotteryTicket> lotteryTickets) {
-        for (LotteryTicket lotteryTicket : lotteryTickets) {
-            lotteryResult.updateLotteryResult(this.getCountsMatched(lotteryTicket));
+    public boolean isMatchedBonusNumber(LotteryTicket lotteryTicket) {
+        if (lotteryTicket.getLotteryNumbers().contains(this.bonusNumber)) {
+            return true;
         }
-        return lotteryResult;
+        return false;
     }
 
-    public BigDecimal getProfit(int purchaseAmount) {
-        return lotteryResult.getProfit(purchaseAmount);
+    public LotteryResult getLotteryResult(List<LotteryTicket> lotteryTickets) {
+        for (LotteryTicket lotteryTicket : lotteryTickets) {
+            lotteryResult.updateLotteryResult(
+                    this.getCountsMatched(lotteryTicket),
+                    isMatchedBonusNumber(lotteryTicket));
+        }
+        return lotteryResult;
     }
 
     @Override

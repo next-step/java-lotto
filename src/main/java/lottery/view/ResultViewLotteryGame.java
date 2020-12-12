@@ -42,7 +42,11 @@ public final class ResultViewLotteryGame {
 
         for (LotteryValue key : lotteryResult.getLotteryResultMap().keySet()) {
             stringBuilder.append(key.getPlace());
-            stringBuilder.append("개 일치 (");
+            stringBuilder.append("개 일치");
+            if (key == LotteryValue.SECOND_PLACE) {
+                stringBuilder.append(", 보너스 볼 일치");
+            }
+            stringBuilder.append("(");
             stringBuilder.append(key.getAmount());
             stringBuilder.append("원)- ");
             stringBuilder.append(lotteryResult.getLotteryResultMap().get(key));
