@@ -5,22 +5,31 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 public class Number {
+
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final int ZERO = 0;
     private int number;
+
+    public Number(int number) {
+        this.number = number;
+    }
 
     public Number(String numberValue) {
         validate(numberValue);
         this.number = convertToInt(numberValue);
     }
 
-    public void add(Number y) {
-        this.number += y.number;
+    public Number add(Number y) {
+        int sum = y.add(this.number);
+        return new Number(sum);
+    }
+
+    private int add(int number) {
+        return this.number + number;
     }
 
     /**
-     * empty or null - pass. (0으로 인식)
-     * not a number, number < 0 - throw exception
+     * empty or null - pass. (0으로 인식) not a number, number < 0 - throw exception
      */
     private void validate(String numberValue) {
         if (StringUtils.isBlank(numberValue)) {

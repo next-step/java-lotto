@@ -1,6 +1,6 @@
 package calculator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class StringCalculatorTest {
         int actual = StringCalculator.add(value);
 
         //then
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @DisplayName("사용자구분자 계산")
@@ -31,7 +31,7 @@ public class StringCalculatorTest {
         int actual = StringCalculator.add(value);
 
         //then
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @DisplayName("빈값 계산")
@@ -45,6 +45,6 @@ public class StringCalculatorTest {
         int actual = StringCalculator.add(value);
 
         //then
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 }
