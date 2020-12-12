@@ -13,6 +13,10 @@ public class StringParser {
 	private static final int DELIMITER_INDEX = 1;
 	private static final int SPLIT_TARGET_TEXT_INDEX = 2;
 
+	private StringParser() {
+		throw new AssertionError();
+	}
+
 	public static ParsedNumbers parse(String input) {
 		if (StringUtils.isEmpty(input)) {
 			return new ParsedNumbers(new ParsedNumber());
