@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoMessage;
 import lotto.domain.LottoPrice;
-import lotto.domain.LottoResults;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerNumbers;
 import lotto.view.InputView;
@@ -18,8 +18,8 @@ public class LottoApplication {
 		OutputView.printMessage(LottoMessage.purchasedTickets(purchasedLottoTicket));
 
 		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser(InputView.askToUserLastWeekWinnerNumber());
-		LottoResults lottoResults = LottoResults.compareTicketAndWinner(purchasedLottoTicket, lottoWinnerNumbers);
-		OutputView.printMessage(LottoMessage.winningStatistics(lottoResults));
-		OutputView.printMessage(LottoMessage.totalProfit(lottoPrice, lottoResults));
+		LottoResult lottoResult = LottoResult.compareTicketAndWinner(purchasedLottoTicket, lottoWinnerNumbers);
+		OutputView.printMessage(LottoMessage.winningStatistics(lottoResult));
+		OutputView.printMessage(LottoMessage.totalProfit(lottoPrice, lottoResult));
 	}
 }

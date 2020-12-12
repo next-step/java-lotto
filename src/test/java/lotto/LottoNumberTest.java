@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.GenerateLottoNumber;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,16 +20,16 @@ public class LottoNumberTest {
 	@DisplayName("로또 번호는 1~45까지 생성 가능 하다.")
 	@Test
 	void 로또_번호_생성_테스트() {
-		assertThatThrownBy(() -> GenerateLottoNumber.manual(Arrays.asList(1, 2, 3, 4, 5, 46)))
+		assertThatThrownBy(() -> LottoNumberGenerator.manual(Arrays.asList(1, 2, 3, 4, 5, 46)))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("기준치를 초과하였습니다.");
+			.hasMessage("기준 범위를 초과하였습니다.");
 	}
 
 	@DisplayName("로또 티켓에서 로또 번호는 최대 6개이다.")
 	@ParameterizedTest
 	@MethodSource("createNumbers")
 	void 로또_최대_번호_테스트(List<Integer> numbers) {
-		assertThatThrownBy(() -> GenerateLottoNumber.manual(numbers)).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 숫자는 6을 초과할수 없습니다.");
+		assertThatThrownBy(() -> LottoNumberGenerator.manual(numbers)).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 숫자개수는 6을 초과할수 없습니다.");
 	}
 
 	public static Stream<Arguments> createNumbers() {
@@ -42,8 +42,8 @@ public class LottoNumberTest {
 	@ParameterizedTest
 	@MethodSource("sortNumbers")
 	void 로또_그룹_일치_TEST(List<Integer> targetList, List<Integer> resultList) {
-		LottoNumbers targetLottoNumbers = GenerateLottoNumber.manual(targetList);
-		LottoNumbers resultLottoNumbers = GenerateLottoNumber.manual(resultList);
+		LottoNumbers targetLottoNumbers = LottoNumberGenerator.manual(targetList);
+		LottoNumbers resultLottoNumbers = LottoNumberGenerator.manual(resultList);
 		assertThat(targetLottoNumbers).isEqualTo(resultLottoNumbers);
 	}
 

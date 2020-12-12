@@ -1,13 +1,24 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class LottoTicket extends ArrayList<LottoNumbers> {
+public class LottoTicket {
+	private final List<LottoNumbers> lottoNumbers;
+
+	public LottoTicket(List<LottoNumbers> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
 
 	public static LottoTicket purchase(int numberOfTicket) {
-		LottoTicket purchasedTicket = new LottoTicket();
-		IntStream.range(0, numberOfTicket).forEach(amount -> purchasedTicket.add(GenerateLottoNumber.auto()));
-		return purchasedTicket;
+		List<LottoNumbers> lottoNumbers = new ArrayList<>();
+		IntStream.range(0, numberOfTicket).forEach(amount -> lottoNumbers.add(LottoNumberGenerator.auto()));
+		return new LottoTicket(lottoNumbers);
+	}
+
+	public Stream<LottoNumbers> stream() {
+		return lottoNumbers.stream();
 	}
 }

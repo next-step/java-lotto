@@ -12,20 +12,16 @@ public class LottoMessage {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public static String winningStatistics(LottoResults lottoResults) {
+	public static String winningStatistics(LottoResult lottoResult) {
 		return Rank.greaterThanCountZeroAndSortedAmount()
 			.map(target -> String.format(MESSAGE,
 				target.getMatchesCount(),
 				target.getAmountMoney(),
-				lottoResults.askCountOfRank(target)))
+				lottoResult.askCountOfRank(target)))
 			.collect(Collectors.joining("\n"));
 	}
 
-	public static String totalProfit(LottoPrice lottoPrice, LottoResults lottoResults) {
-		Integer totalPrizeMoney = lottoResults.getLottoResults()
-			.map(LottoResult::getRankAmountMoney)
-			.reduce(0, Integer::sum);
-
-		return String.format(RATE_MESSAGE, lottoPrice.totalPrizeMoneyRate(totalPrizeMoney));
+	public static String totalProfit(LottoPrice lottoPrice, LottoResult lottoResult) {
+		return String.format(RATE_MESSAGE, lottoPrice.totalPrizeMoneyRate(lottoResult.totalAmountMoney()));
 	}
 }
