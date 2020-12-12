@@ -14,4 +14,5 @@ class ValidationUtilTest {
     void checkText(String text) {
         assertEquals(true,  ValidationUtil.isBlank(text));
     }
+
 }
