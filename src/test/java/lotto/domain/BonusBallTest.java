@@ -14,8 +14,7 @@ class BonusBallTest {
 		LottoNumbers containBonus = LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 7");
 		LottoNumbers notContainBonus = LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 1");
 
-		assertThat(lottoWinnerNumbers.getMatchCount(LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43"))).isEqualTo(6);
-		assertThat(lottoWinnerNumbers.hasBonusBall(new LottoNumber(7))).isTrue();
+		assertThat(lottoWinnerNumbers.hasBonusBall(containBonus)).isTrue();
 
 		assertThat(LottoResult.matchesRank(containBonus, lottoWinnerNumbers)).isEqualTo(Rank.SECOND);
 		assertThat(LottoResult.matchesRank(notContainBonus, lottoWinnerNumbers)).isEqualTo(Rank.THIRD);

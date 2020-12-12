@@ -17,7 +17,7 @@ public class LottoWinnerNumbers {
 		return this.winnerNumbers.getContainsCount(targetNumbers);
 	}
 
-	public boolean hasBonusBall(LottoNumber checkNumber) {
+	public boolean hasBonusBall(LottoNumbers checkNumber) {
 		return this.bonusBall.hasBonusBall(checkNumber);
 	}
 

@@ -8,7 +8,7 @@ public class BonusBall {
 		this.number = new LottoNumber(inputBall);
 	}
 
-	public boolean hasBonusBall(LottoNumber targetNumber) {
-		return this.number.equals(targetNumber);
+	public boolean hasBonusBall(LottoNumbers targetNumber) {
+		return targetNumber.isContainsLottoNumber(this.number);
 	}
 }
