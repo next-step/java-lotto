@@ -44,4 +44,10 @@ public class LottoTicket {
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
+
+    public int match(final LottoTicket other) {
+        return (int) lottoNumbers.stream()
+                .filter(other::contains)
+                .count();
+    }
 }

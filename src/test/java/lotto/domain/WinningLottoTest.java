@@ -77,4 +77,32 @@ public class WinningLottoTest {
         // then
         assertThat(matchBonus).isEqualTo(expected);
     }
+
+    @DisplayName("로또 티켓을 비교하여 등수를 구할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6,FIRST",
+            "2,3,4,5,6,7,SECOND",
+            "2,3,4,5,6,8,THIRD",
+            "3,4,5,6,9,10,FOURTH",
+            "4,5,6,11,12,13,FIFTH,",
+            "1,5,9,10,11,12,UN_RANK"
+    })
+    void match(int num1, int num2, int num3, int num4, int num5, int num6, String value) {
+        // given
+        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(
+                LottoNumber.valueOf(num1),
+                LottoNumber.valueOf(num2),
+                LottoNumber.valueOf(num3),
+                LottoNumber.valueOf(num4),
+                LottoNumber.valueOf(num5),
+                LottoNumber.valueOf(num6)
+        ));
+
+        // when
+        Rank rank = winningLotto.match(lottoTicket);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.valueOf(value));
+    }
 }

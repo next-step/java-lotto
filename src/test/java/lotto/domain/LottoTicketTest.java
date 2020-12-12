@@ -90,4 +90,32 @@ public class LottoTicketTest {
         // when / then
         assertThat(lottoTicket.match(winningLotto)).isEqualTo(Rank.valueOf(expected));
     }
+
+    @DisplayName("다른 로또 티켓과 비교해서 일치하는 번호의 개수를 구할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "6,1,2,3,4,5,6",
+            "5,2,3,4,5,6,7",
+            "5,2,3,4,5,6,8",
+            "4,3,4,5,6,7,8,",
+            "3,4,5,6,7,8,9",
+            "2,5,6,7,8,9,10",
+    })
+    void matchCount(int expected, int num1, int num2, int num3, int num4, int num5, int num6) {
+        // given
+        LottoTicket other = LottoTicket.of(Arrays.asList(
+                LottoNumber.valueOf(num1),
+                LottoNumber.valueOf(num2),
+                LottoNumber.valueOf(num3),
+                LottoNumber.valueOf(num4),
+                LottoNumber.valueOf(num5),
+                LottoNumber.valueOf(num6)
+        ));
+
+        // when
+        int match = lottoTicket.match(other);
+
+        // then
+        assertThat(match).isEqualTo(expected);
+    }
 }
