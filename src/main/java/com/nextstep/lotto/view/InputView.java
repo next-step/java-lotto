@@ -1,5 +1,6 @@
 package com.nextstep.lotto.view;
 
+import com.nextstep.lotto.domain.LottoNumber;
 import com.nextstep.lotto.domain.LottoTicket;
 import com.nextstep.lotto.domain.Money;
 
