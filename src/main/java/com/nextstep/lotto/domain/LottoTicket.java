@@ -20,11 +20,6 @@ public class LottoTicket {
         return createPolicy.create();
     }
 
-    public Rank calculateRank(LottoTicket thatLottoTicket) {
-        // TODO: 제거 예정
-        return Rank.find(countMatchedNumbers(thatLottoTicket), false);
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
