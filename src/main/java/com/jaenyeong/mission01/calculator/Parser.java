@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
+
 public class Parser {
     private static final int NONE = 0;
     private static final String DEFAULT_SEPARATORS = ",|:";
@@ -47,10 +49,6 @@ public class Parser {
         throw new RuntimeException(TEXT_ERR_INVALID_STRING);
     }
 
-    private static int parseInt(final String exp) {
-        return Integer.parseInt(exp);
-    }
-
     protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String expression) {
         final Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(expression);
 
@@ -79,7 +77,7 @@ public class Parser {
 
     private static int parseToIntOnlyNaturalNumber(final String expression) {
         if (Validator.isNaturalNumber(expression)) {
-            return Parser.parseInt(expression);
+            return parseInt(expression);
         }
 
         throw new RuntimeException(TEXT_ERR_INVALID_STRING);
