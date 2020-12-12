@@ -11,8 +11,7 @@ public class StringAddCalculator {
         if (calculatorInput.isUnusable()) {
             return DEFAULT_VALUE;
         }
-        List<String> strings = Splitter.split(string);
-        return sum(toInts(strings));
+        return sum(toInts(calculatorInput.strings()));
     }
 
     private static List<Integer> toInts(List<String> strings) {
