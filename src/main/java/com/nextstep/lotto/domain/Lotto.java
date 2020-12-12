@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         if ( numbers.size() != LOTTO_NUMBER_COUNT ) {
