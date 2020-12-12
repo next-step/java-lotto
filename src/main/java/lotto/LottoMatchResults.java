@@ -3,10 +3,12 @@ package lotto;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class LottoResults {
+public class LottoMatchResults {
 	private Map<LottoRank, Integer> results;
+	private final int payment;
 
-	public LottoResults() {
+	public LottoMatchResults(int payment) {
+		this.payment = payment;
 		this.results = new EnumMap<>(LottoRank.class);
 		for (LottoRank rank : LottoRank.values()) {
 			this.results.put(rank, 0);
@@ -29,7 +31,7 @@ public class LottoResults {
 			.sum();
 	}
 
-	public double getEarningRate(int payment) {
-		return (double) this.getTotalEarnings() / payment;
+	public double getEarningRate() {
+		return (double) this.getTotalEarnings() / this.payment;
 	}
 }
