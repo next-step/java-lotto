@@ -26,11 +26,6 @@ public class Parser {
             return returnNone();
         }
 
-        expression = expression.trim();
-        if (Validator.isOneDigit(expression)) {
-            return splitWhenNumberIsNaturalNumber(expression);
-        }
-
         return splitWhenNumberIsNaturalNumberList(expression);
     }
 
@@ -38,16 +33,6 @@ public class Parser {
         final List<Integer> numbers = new ArrayList<>();
         numbers.add(NONE);
         return numbers;
-    }
-
-    protected static List<Integer> splitWhenNumberIsNaturalNumber(final String expression) {
-        if (Validator.isNaturalNumber(expression)) {
-            final List<Integer> numbers = new ArrayList<>();
-            numbers.add(parseInt(expression));
-            return numbers;
-        }
-
-        throw new RuntimeException(TEXT_ERR_INVALID_STRING);
     }
 
     protected static List<Integer> splitWhenNumberIsNaturalNumberList(final String expression) {

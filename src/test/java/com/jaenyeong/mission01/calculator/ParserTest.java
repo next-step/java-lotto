@@ -55,7 +55,7 @@ class ParserTest {
     @ValueSource(strings = {"1", "2", "8", "9"})
     @DisplayName("입력 문자열이 1자리 자연수일 때 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenGivenNaturalNumber(final String exp) {
-        final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumber(exp);
+        final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumberList(exp);
         final int expectedValue = Integer.parseInt(exp);
 
         assertEquals(numbers.get(0), expectedValue);
@@ -66,7 +66,7 @@ class ParserTest {
     @DisplayName("입력 문자열이 1자리 자연수가 아닐 때 반환 리스트를 확인하는 테스트")
     void checkReturnListWhenGivenWhatIsInvalidNaturalNumber(final String exp) {
         assertThatThrownBy(() -> {
-            final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumber(exp);
+            final List<Integer> numbers = Parser.splitWhenNumberIsNaturalNumberList(exp);
             final int expectedValue = Integer.parseInt(exp);
 
             assertEquals(numbers.get(0), expectedValue);
