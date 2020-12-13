@@ -15,9 +15,22 @@ public class LottoNumbers {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumbers that = (LottoNumbers) o;
+
+        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
-        return "LottoNumbers{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        return lottoNumbers.toString();
     }
 }
