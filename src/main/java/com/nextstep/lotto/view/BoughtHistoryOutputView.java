@@ -14,14 +14,14 @@ public class BoughtHistoryOutputView {
     private static final String LOTTO_NUMBER_SEPARATOR = ", ";
     private static final String LOTTO_TICKET_SEPARATOR = "\n";
 
-    static String getHowManyLottoTickets(Money money) {
-        return money.howManyLottoTickets() + BOUGHT_TICKETS_FOOTER;
-    }
-
     public static String parseLottoTickets(LottoTickets lottoTickets) {
         return lottoTickets.getLottoTickets().stream()
                 .map(lottoTicket -> parseLottoTicket(lottoTicket) + LOTTO_TICKET_SEPARATOR)
                 .collect(Collectors.joining());
+    }
+
+    static String getHowManyLottoTickets(Money money) {
+        return money.howManyLottoTickets() + BOUGHT_TICKETS_FOOTER;
     }
 
     private static String parseLottoTicket(LottoTicket lottoTicket) {
