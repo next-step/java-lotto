@@ -27,6 +27,17 @@ public class InputView {
         return winningNumbers;
     }
 
+    public int getBonusNumber(){
+        Scanner sc = new Scanner(System.in);
+        int[] winningNumbers = new int[1];
+
+        System.out.println("보너스 번호를 입력해주세요.");
+        String winningNumber = sc.nextLine();
+        winningNumbers = convertWinningNumbers(winningNumber);
+        validateWinningNumber(winningNumbers);
+        return winningNumbers[0];
+    }
+
     public int[] convertWinningNumbers(String values){
         String[] value = values.split(",");
         int[] numbers = Arrays.stream(value).mapToInt(Integer::parseInt).toArray();

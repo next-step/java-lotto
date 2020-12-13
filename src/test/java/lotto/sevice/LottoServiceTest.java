@@ -19,9 +19,10 @@ public class LottoServiceTest {
         int[] lottoNumber = {1,2,3,4,5,6};
         Lotto lotto = new Lotto(lottoNumber);
         int[] winning = {1,2,3,4,5,6};
+        int bonus = 2;
     
         LottoList lottoList = new LottoList(List.of(lotto));
-        LottoRecord record = lottoServie.lottoGame(lottoList, winning);
+        LottoRecord record = lottoServie.lottoGame(lottoList, winning, bonus);
         assertThat(record.getCountSix()).isEqualTo(1);
         assertThat(record.getProfit()).isEqualTo(200000);
     }
@@ -38,9 +39,22 @@ public class LottoServiceTest {
         int[] lottoNumber = {1,2,3,4,5,6};
         Lotto lotto = new Lotto(lottoNumber);
         int[] winning = {1,2,3,4,5,6};
+        int bonus = 2;
     
         LottoList lottoList = new LottoList(List.of(lotto));
-        LottoRecord record = lottoServie.checkLotto(lottoList, winning);
+        LottoRecord record = lottoServie.checkLotto(lottoList, winning, bonus);
         assertThat(record.getCountSix()).isEqualTo(1);
+    }
+
+    @Test
+    void check2ndLottoTest(){
+        int[] lottoNumber = {1,2,3,4,5,6};
+        Lotto lotto = new Lotto(lottoNumber);
+        int[] winning = {1,2,3,4,5,9};
+        int bonus = 6;
+    
+        LottoList lottoList = new LottoList(List.of(lotto));
+        LottoRecord record = lottoServie.checkLotto(lottoList, winning, bonus);
+        assertThat(record.getcountFiveAndBonus()).isEqualTo(1);
     }
 }

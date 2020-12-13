@@ -7,6 +7,7 @@ public class LottoRecord {
     private int countThree = 0;
     private int countFour = 0;
     private int countFive = 0;
+    private int countFiveAndBonus = 0;
     private int countSix = 0;
     private int profit = 0;
 
@@ -20,6 +21,10 @@ public class LottoRecord {
 
     public int getCountFive(){
         return countFive;
+    }
+
+    public int getcountFiveAndBonus(){
+        return countFiveAndBonus;
     }
 
     public int getCountSix(){
@@ -43,6 +48,10 @@ public class LottoRecord {
         this.countFive += 1;
     }
 
+    public void setcountFiveAndBonus(){
+        this.countFiveAndBonus += 1;
+    }
+
     public void setCountSix(){
         this.countSix += 1;
     }
@@ -52,19 +61,23 @@ public class LottoRecord {
         int temp = 0;
 
         if (countThree != NULL) {
-            temp += countThree * 5000;
+            temp += countThree * Rank.valueOf(3, false).getWinningMoney();
         }
 
         if (countFour != NULL) {
-            temp += countFour * 50000;
+            temp += countFour * Rank.valueOf(4, false).getWinningMoney();
         }
 
         if (countFive != NULL) {
-            temp += countFive * 1500000;
+            temp += countFive * Rank.valueOf(5, false).getWinningMoney();
+        }
+
+        if (countFiveAndBonus != NULL) {
+            temp += countFiveAndBonus * Rank.valueOf(5, true).getWinningMoney();
         }
 
         if (countSix != NULL) {
-            temp += countSix * 200000000;
+            temp += countSix * Rank.valueOf(6, false).getWinningMoney();
         }
 
         this.profit = temp / money;

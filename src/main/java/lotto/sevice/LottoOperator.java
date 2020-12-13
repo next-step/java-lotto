@@ -24,7 +24,8 @@ public class LottoOperator {
         LottoList lottoList = lottoService.issueLotto(money);
         resultView.printLotto(lottoList);
         int[] winningNumbers = inputView.getWinningNumbers();
-        LottoRecord result = lottoService.lottoGame(lottoList, winningNumbers);
+        int bonusNumber = inputView.getBonusNumber();
+        LottoRecord result = lottoService.lottoGame(lottoList, winningNumbers, bonusNumber);
         resultView.printRecord(result);
         
     }
