@@ -21,7 +21,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" + lottoNumber + '}';
+        return String.valueOf(lottoNumber);
     }
 
     @Override

@@ -3,7 +3,7 @@ package lotto;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-public enum  LottoRank {
+public enum LottoRank {
     NONE(0, () -> 0),
     THREE(3, () -> 5_000),
     FOUR(4, () -> 50_000),
@@ -18,7 +18,7 @@ public enum  LottoRank {
         this.expression = expression;
     }
 
-    private int getWinningCount() {
+    public int getWinningCount() {
         return winningCount;
     }
 
@@ -32,4 +32,6 @@ public enum  LottoRank {
     public long reward() {
         return expression.get();
     }
+
+
 }

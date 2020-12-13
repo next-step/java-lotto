@@ -32,12 +32,11 @@ public class LottoMachineTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void manyGenerate(int price, int expected) {
         //given
-        Lotto lotto = new Lotto();
-        int purchaseQuantity = lotto.purchaseQuantity(price);
+        Lotto lotto = new Lotto(price);
+        int purchaseQuantity = lotto.purchaseQuantity();
 
         //when
         LottoTickets lottoTickets = lottoMachine.generate(purchaseQuantity);
-        System.out.println(lottoTickets);
 
         //then
         Assertions.assertEquals(expected, lottoTickets.lottoTicketCount());

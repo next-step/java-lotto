@@ -17,8 +17,7 @@ public class LottoTicket {
         return lottoTicket.contains(winningNumber);
     }
 
-    @Override
-    public String toString() {
-        return "LottoTicket{" + lottoTicket + "}\n";
+    public List<LottoNumber> getLottoTicket() {
+        return lottoTicket;
     }
 }

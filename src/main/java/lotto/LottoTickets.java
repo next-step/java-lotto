@@ -13,10 +13,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    @Override
-    public String toString() {
-        return "LottoTickets{" +
-                "lottoTickets=" + lottoTickets +
-                '}';
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }

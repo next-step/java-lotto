@@ -15,8 +15,8 @@ public class LottoTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void buyLottos(int price, int expected) throws Exception {
         //when
-        Lotto lotto = new Lotto();
-        int purchaseQuantity = lotto.purchaseQuantity(price);
+        Lotto lotto = new Lotto(price);
+        int purchaseQuantity = lotto.purchaseQuantity();
 
         //then
         assertEquals(expected, purchaseQuantity);
@@ -29,11 +29,11 @@ public class LottoTest {
         int price = 900;
 
         //when
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(price);
 
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lotto.purchaseQuantity(price))
+                .isThrownBy(() -> lotto.purchaseQuantity())
                 .withMessageMatching("1000원 이상의 금액을 입력해야합니다.");
     }
 }
