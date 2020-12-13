@@ -12,8 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LotteryNumbersTest {
 
     @Test
-    void createLotteryNumbers() {
-        final LotteryNumbers lotteryNumbers = new LotteryNumbers();
+    @DisplayName("LottoNumbers 객체 생성 테스트")
+    void createLotteryNumbersAutomatically() {
+        final LotteryNumbers lotteryNumbers = LotteryNumbers.ofAuto();
 
         final List<Integer> lottery = lotteryNumbers.getLotteryNumbers();
 
