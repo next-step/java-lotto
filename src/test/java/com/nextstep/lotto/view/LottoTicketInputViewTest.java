@@ -10,11 +10,11 @@ import static com.nextstep.lotto.domain.LottoTicketFixtures.LOTTO_TICKET_123456;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class WinningTicketInputViewTest {
+class LottoTicketInputViewTest {
     @DisplayName("로또에 당첨 결과 확인에 사용할 당첨 티켓을 반환할 수 있다.")
     @Test
     void createTest() {
-        WinningTicketInputView inputView = new WinningTicketInputView("1, 2, 3, 4, 5, 6");
+        LottoTicketInputView inputView = new LottoTicketInputView("1, 2, 3, 4, 5, 6");
 
         assertThat(inputView.parseToLottoTicket()).isEqualTo(LOTTO_TICKET_123456);
     }
@@ -23,7 +23,7 @@ class WinningTicketInputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "1, 2, 3", "1,2, 3,4, 5,6"})
     void createFailTest(String invalidValue) {
-        assertThatThrownBy(() -> new WinningTicketInputView(invalidValue))
+        assertThatThrownBy(() -> new LottoTicketInputView(invalidValue))
                 .isInstanceOf(InvalidLottoNumbersException.class);
     }
 }

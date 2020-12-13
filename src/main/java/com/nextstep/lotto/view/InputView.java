@@ -15,7 +15,7 @@ public class InputView {
     }
 
     public static LottoTicket getWinningTicket() {
-        WinningTicketInputView winningInputView = new WinningTicketInputView(SCANNER.nextLine());
+        LottoTicketInputView winningInputView = new LottoTicketInputView(SCANNER.nextLine());
         return winningInputView.parseToLottoTicket();
     }
 

@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningTicketInputView {
+public class LottoTicketInputView {
     private final List<Integer> lottoNumbers;
 
-    public WinningTicketInputView(final String userValue) {
+    public LottoTicketInputView(final String userValue) {
         validateValue(userValue);
         List<Integer> lottoNumbers = parseToNumbers(userValue);
         validateLottoNumbers(lottoNumbers);
