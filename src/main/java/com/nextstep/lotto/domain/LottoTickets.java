@@ -3,6 +3,7 @@ package com.nextstep.lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -17,6 +18,14 @@ public class LottoTickets {
                 .collect(Collectors.toList());
 
         return new LottoPrize(resultRanks);
+    }
+
+    public LottoTickets merge(LottoTickets thatTicket) {
+        List<LottoTicket> mergedLottoTickets = Stream.of(this.lottoTickets, thatTicket.lottoTickets)
+                .flatMap(it -> it.stream())
+                .collect(Collectors.toList());
+
+        return new LottoTickets(mergedLottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {

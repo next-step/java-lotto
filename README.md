@@ -188,6 +188,8 @@
   - 당첨 티켓과 로또 티켓간의 일치하는 LottoNumber의 수를 관리하는 클래스
   - [X] 6을 넘길 수 없다.
   - [X] 음수가 존재할 수 없다.
+- LottoTickets(class)
+  - [X] LottoTickets끼리 내용물을 합칠 수 있다.
 - OutputView(class)
   - [ ] 수동으로 구매할 로또 수를 요청하는 메시지를 출력할 수 있다.
   - [ ] 수동으로 구매할 로또 티켓 번호를 요청하는 메시지를 출력할 수 있다.
@@ -195,7 +197,5 @@
   - [ ] 수동으로 구매할 로또 티켓 수를 입력받을 수 있다.
 - WinningTicketInputView(class)
   - [ ] 수동 로또 티켓 입력 재사용 시에도 어색하지 않도록 이름을 변경한다.
-- LottoTickets(class)
-  - [ ] LottoTickets끼리 내용물을 합칠 수 있다.
 - BoughtHistoryOutputView(class)
   - [ ] 수동으로 구매한 로또 티켓수와, 자동으로 구매한 로또 티켓 수를 구분해서 사용자에게 보여줄 수 있다.
