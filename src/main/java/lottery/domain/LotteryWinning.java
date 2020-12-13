@@ -15,6 +15,7 @@ public class LotteryWinning {
     }
 
     public int getCountsMatched(LotteryTicket otherLotteryTicket) {
+        //TODO : winningTicket.getLotteryNumbers().contains(number)에서 contains는 winingTicket으로 구현하는 방향으로 개선 필요
         int matchCount = 0;
         for(LotteryNumber number : otherLotteryTicket.getLotteryNumbers()) {
             matchCount += winningTicket.getLotteryNumbers().contains(number) ? 1 : 0;
