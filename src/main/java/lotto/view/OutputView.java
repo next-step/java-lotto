@@ -22,8 +22,7 @@ public class OutputView {
         Arrays.stream(MatchPrize.values())
                 .filter(matchPrize -> matchPrize != MatchPrize.ZERO)
                 .forEach(matchPrize -> {
-                    stringBuilder.append(matchPrize.getMatchCount()).append("개 일치 (");
-                    stringBuilder.append(matchPrize.getMoney()).append(")- ");
+                    stringBuilder.append(matchPrize.toString());
                     stringBuilder.append(lottoResult.findByKey(matchPrize)).append("개\n");
                 });
 

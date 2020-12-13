@@ -22,8 +22,8 @@ public class LottoGame {
 
     public Map<MatchPrize, Integer> matchNumbers(List<LottoNumber> winningLottoNumbers) {
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
-            int matchCount = lottoTicket.matchWinningLottoNumbers(winningLottoNumbers);
-            lottoResult.put(MatchPrize.valueOf(matchCount), lottoResult.get(MatchPrize.valueOf(matchCount)) + 1);
+            MatchPrize matchPrize = MatchPrize.valueOf(lottoTicket.matchWinningLottoNumbers(winningLottoNumbers));
+            lottoResult.put(matchPrize, lottoResult.get(matchPrize) + 1);
         });
         return lottoResult;
     }

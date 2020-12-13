@@ -16,7 +16,7 @@ public class LottoResult {
 
     public long addTotalMoney() {
         return Arrays.stream(MatchPrize.values())
-                .mapToLong(matchPrize -> matchPrize.getMoney() * result.get(matchPrize))
+                .mapToLong(matchPrize -> matchPrize.multiplyMoney(result.get(matchPrize)))
                 .sum();
     }
 }

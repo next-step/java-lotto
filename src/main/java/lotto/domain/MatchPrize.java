@@ -24,11 +24,13 @@ public enum MatchPrize {
                 .orElse(ZERO);
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public long multiplyMoney(int num) {
+        return money * num;
     }
 
-    public long getMoney() {
-        return money;
+    @Override
+    public String toString() {
+        return matchCount + "개 일치 ("
+                + money + ")- ";
     }
 }
