@@ -18,7 +18,7 @@ public class LotteryNumber {
         this.lotteryNumber = lotteryNumber;
     }
 
-    public static LotteryNumber of(final List<Integer> numbersThatAlreadyExists) {
+    public static LotteryNumber ofAuto(final List<Integer> numbersThatAlreadyExists) {
         final List<Integer> lotteryNumberList = getLotteryNumberList();
 
         if (isValidNumbers(numbersThatAlreadyExists)) {

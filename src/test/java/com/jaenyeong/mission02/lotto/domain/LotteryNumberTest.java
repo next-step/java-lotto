@@ -1,6 +1,5 @@
 package com.jaenyeong.mission02.lotto.domain;
 
-import com.jaenyeong.mission02.lotto.domain.LotteryNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,7 +20,7 @@ class LotteryNumberTest {
     @MethodSource("existsValidLottoNumberList")
     @DisplayName("LottoNumber 객체 생성 테스트")
     void createLotteryNumber(final List<Integer> existsNumbers) {
-        final LotteryNumber lotteryNumber = LotteryNumber.of(existsNumbers);
+        final LotteryNumber lotteryNumber = LotteryNumber.ofAuto(existsNumbers);
 
         final int start = 1;
         final int end = 45;
@@ -44,7 +43,7 @@ class LotteryNumberTest {
     @DisplayName("1부터 45의 숫자를 모두 넘겨 LottoNumber 객체 생성시 실패하는 테스트")
     void createLotteryNumberWhenGivenAllNumbers(final List<Integer> existsNumbers) {
         assertThatThrownBy(() -> {
-            final LotteryNumber lotteryNumber = LotteryNumber.of(existsNumbers);
+            final LotteryNumber lotteryNumber = LotteryNumber.ofAuto(existsNumbers);
         })
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[error] There is no number to choose from list.");
