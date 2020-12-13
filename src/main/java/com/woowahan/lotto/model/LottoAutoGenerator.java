@@ -7,15 +7,15 @@ import java.util.stream.IntStream;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
-	private final List<Integer> lottoEnableNumbers = new ArrayList<>();
+	private final List<LottoNo> lottoEnableNumbers = new ArrayList<>();
 
 	public LottoAutoGenerator() {
-		IntStream.range(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER + 1)
-			.forEach(lottoEnableNumbers::add);
+		IntStream.rangeClosed(LottoNo.LOTTO_START_NUMBER, LottoNo.LOTTO_END_NUMBER)
+			.forEach(number -> lottoEnableNumbers.add(LottoNo.of(number)));
 	}
 
 	@Override
-	public List<Integer> generate() {
+	public List<LottoNo> generate() {
 		Collections.shuffle(lottoEnableNumbers);
 		return lottoEnableNumbers.subList(0, Lotto.LOTTO_NUMBER_LENGTH);
 	}

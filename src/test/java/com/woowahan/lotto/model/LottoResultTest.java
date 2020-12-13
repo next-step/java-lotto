@@ -21,9 +21,9 @@ class LottoResultTest {
 	void matchResult(WinNumbers input, Map<LottoResultType, Integer> expected) {
 
 		List<Lotto> lottos = Arrays.asList(
-			Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-			Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)),
-			Lotto.of(Arrays.asList(21, 22, 23, 24, 25, 26))
+			Lotto.of(LottoTestUtil.convertLottoNo(Arrays.asList(1, 2, 3, 4, 5, 6))),
+			Lotto.of(LottoTestUtil.convertLottoNo(Arrays.asList(11, 12, 13, 14, 15, 16))),
+			Lotto.of(LottoTestUtil.convertLottoNo(Arrays.asList(21, 22, 23, 24, 25, 26)))
 		);
 		LottoResult lottoResult = LottoResult.analyze(input, lottos);
 		Map<LottoResultType, Integer> result = lottoResult.getResults();

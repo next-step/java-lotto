@@ -11,31 +11,32 @@ public class WinNumbers {
 
 	private static final String DELIMITER_WIN_NUMBER = ",";
 
-	private List<Integer> numbers;
-	private int bonusNumber;
+	private final List<LottoNo> numbers;
+	private final LottoNo bonusNumber;
 
 	public WinNumbers(String winNumbers, String bonusNumber) {
 		List<String> result = validateWinNumber(winNumbers);
 		this.numbers = result.stream()
-			.map(Integer::parseInt)
+			.map(numberString -> LottoNo.of(Integer.parseInt(numberString)))
 			.collect(Collectors.toList());
 
-		validateBonusNumber(bonusNumber, this.numbers);
-		this.bonusNumber = Integer.parseInt(bonusNumber);
+		validateBonusNumber(bonusNumber);
+		this.bonusNumber = LottoNo.of(Integer.parseInt(bonusNumber));
 	}
 
-	private void validateBonusNumber(String bonusNumber, List<Integer> numbers) {
+	private void validateBonusNumber(String bonusNumber) {
 		if (ValidationUtil.isNotNumber(bonusNumber) || ValidationUtil.isWrongNumber(bonusNumber)) {
 			throw new IllegalArgumentException(Message.MSG_WRONG_BONUS_NUMBER);
 		}
-		if (findDuplicateNumber(bonusNumber, numbers)) {
+		if (findDuplicateNumber(bonusNumber)) {
 			throw new IllegalArgumentException(Message.MSG_WRONG_DUPLICATE);
 		}
 	}
 
-	private boolean findDuplicateNumber(String bonusNumber, List<Integer> numbers) {
-		return numbers.stream()
-			.anyMatch(number -> Integer.toString(number).equals(bonusNumber));
+	private boolean findDuplicateNumber(String bonusNumber) {
+		LottoNo convertNumber = LottoNo.of(Integer.parseInt(bonusNumber));
+		return this.numbers.stream()
+			.anyMatch(number -> number.equals(convertNumber));
 	}
 
 	private List<String> validateWinNumber(String input) {
@@ -46,7 +47,7 @@ public class WinNumbers {
 		if (result.size() != Lotto.LOTTO_NUMBER_LENGTH
 			|| ValidationUtil.hasNotNumber(result)
 			|| ValidationUtil.hasWrongNumber(result)) {
-			throw new IllegalArgumentException(Message.MSG_WRONG_WIN_NUMBER);
+			throw new IllegalArgumentException(Message.MSG_WRONG_NUMBER);
 		}
 		return result;
 	}
@@ -62,20 +63,11 @@ public class WinNumbers {
 		return new WinNumbers(winNumbers, bonusNumber);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LottoNo> getNumbers() {
 		return numbers;
 	}
 
-	public int getBonusNumber() {
+	public LottoNo getBonusNumber() {
 		return bonusNumber;
-	}
-
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder("WinNumbers{");
-		builder.append("numbers=").append(numbers);
-		builder.append(", bonusNumber=").append(bonusNumber);
-		builder.append('}');
-		return builder.toString();
 	}
 }

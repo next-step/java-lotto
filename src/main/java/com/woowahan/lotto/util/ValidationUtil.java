@@ -2,7 +2,7 @@ package com.woowahan.lotto.util;
 
 import java.util.List;
 
-import com.woowahan.lotto.model.Lotto;
+import com.woowahan.lotto.model.LottoNo;
 
 public class ValidationUtil {
 
@@ -42,7 +42,7 @@ public class ValidationUtil {
 	}
 
 	public static boolean isWrongNumber(String numberString) {
-		return Integer.parseInt(numberString) > Lotto.LOTTO_END_NUMBER
-			|| Integer.parseInt(numberString) < Lotto.LOTTO_START_NUMBER;
+		return Integer.parseInt(numberString) > LottoNo.LOTTO_END_NUMBER
+			|| Integer.parseInt(numberString) < LottoNo.LOTTO_START_NUMBER;
 	}
 }

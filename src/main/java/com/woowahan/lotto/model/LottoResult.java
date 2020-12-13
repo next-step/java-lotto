@@ -26,24 +26,24 @@ public class LottoResult {
 	}
 
 	private void compareWinNumber(WinNumbers winInput) {
-		List<Integer> winNumbers = winInput.getNumbers();
-		int bonusNumber = winInput.getBonusNumber();
+		List<LottoNo> winNumbers = winInput.getNumbers();
+		LottoNo bonusNumber = winInput.getBonusNumber();
 		for (Lotto lotto : this.lottos) {
-			List<Integer> lottoNumbers = lotto.getNumbers();
+			List<LottoNo> lottoNumbers = lotto.getNumbers();
 			int matchCount = (int)lottoNumbers.stream()
 				.filter(winNumbers::contains)
 				.count();
 			boolean isBonusMatch = matchCount == 5 && compareBonusNumber(lottoNumbers, bonusNumber);
 			LottoResultType resultType = LottoResultType.findResultType(matchCount, isBonusMatch);
-			increaseCntByResultType(resultType);
+			increaseCountByResultType(resultType);
 		}
 	}
 
-	private boolean compareBonusNumber(List<Integer> lottoNumbers, int bonusNumber) {
-		return lottoNumbers.stream().anyMatch(number -> bonusNumber == number);
+	private boolean compareBonusNumber(List<LottoNo> lottoNumbers, LottoNo bonusNumber) {
+		return lottoNumbers.stream().anyMatch(bonusNumber::equals);
 	}
 
-	private void increaseCntByResultType(LottoResultType resultType) {
+	private void increaseCountByResultType(LottoResultType resultType) {
 		Integer value = results.get(resultType);
 		results.put(resultType, ++value);
 	}
