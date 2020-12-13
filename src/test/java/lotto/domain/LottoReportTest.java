@@ -1,13 +1,15 @@
 package lotto.domain;
 
-import lotto.domain.LottoReport;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 결과(LottoReport) 테스트")
@@ -17,7 +19,7 @@ public class LottoReportTest {
 
     @BeforeEach
     void setUp() {
-        lottoReport = LottoReport.of(Rank.FIRST, Rank.SECOND, Rank.THIRD);
+        lottoReport = createLottoReport(Rank.FIRST, Rank.SECOND, Rank.THIRD);
     }
 
     @DisplayName("로도 결과는 등수들로 이루어진다.")
@@ -45,13 +47,18 @@ public class LottoReportTest {
     @Test
     void profitRate() {
         // given
-        LottoReport fourth = LottoReport.of(Rank.FOURTH, Rank.UN_RANK, Rank.UN_RANK);
+        LottoReport fourth = createLottoReport(Rank.FOURTH, Rank.UN_RANK, Rank.UN_RANK);
 
         // when
         double rate = fourth.profitRate();
 
         // then
         assertThat(rate).isEqualTo(16.66);
+    }
+
+    private LottoReport createLottoReport(Rank... ranks) {
+        return Arrays.stream(ranks)
+                .collect(collectingAndThen(toList(), LottoReport::of));
     }
 
 }

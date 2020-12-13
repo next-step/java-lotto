@@ -20,16 +20,40 @@ public class NextStepLottoMachine implements LottoMachine {
     }
 
     @Override
-    public LottoTickets automatic(final long amount) {
+    public LottoTickets generate(final long amount, final List<String> manualNumbers) {
         Money purchase = Money.valueOf(amount);
-        int count = purchase.divide(LottoTicket.PRICE);
-        return createAutoTickets(count);
+        int manualTicketCount = manualNumbers.size();
+        validateAmount(purchase, manualTicketCount);
+        int autoTicketCount = ticketCount(purchase) - manualTicketCount;
+        return createLottoTickets(manualNumbers, autoTicketCount);
     }
 
-    private LottoTickets createAutoTickets(final int count) {
-        return IntStream.range(0, count)
-                .mapToObj(ignore -> createAutoTicket())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::of));
+    private void validateAmount(final Money purchase, final int manualTicketCount) {
+        Money required = LottoTicket.PRICE.multiply(manualTicketCount);
+        if (purchase.isLessThen(required)) {
+            throw new IllegalArgumentException(
+                    String.format("수동 로또 티켓 금액이 지불 금액보다 높습니다. (구매 금액: %s, 티켓 금액: %s", purchase, required));
+        }
+    }
+
+    private int ticketCount(final Money purchase) {
+        return purchase.divide(LottoTicket.PRICE);
+    }
+
+    private LottoTickets createLottoTickets(final List<String> manualNumbers, final int autoTicketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        addManualTickets(manualNumbers, lottoTickets);
+        addAutoTickets(autoTicketCount, lottoTickets);
+        return LottoTickets.of(lottoTickets);
+    }
+
+    private void addManualTickets(final List<String> manualNumbers, final List<LottoTicket> lottoTickets) {
+        manualNumbers.forEach(manualNumber -> lottoTickets.add(createLottoTicket(manualNumber)));
+    }
+
+    private void addAutoTickets(final int autoTicketCount, final List<LottoTicket> lottoTickets) {
+        IntStream.range(0, autoTicketCount)
+                .forEach(ignore -> lottoTickets.add(createAutoTicket()));
     }
 
     private LottoTicket createAutoTicket() {
@@ -40,20 +64,15 @@ public class NextStepLottoMachine implements LottoMachine {
     }
 
     @Override
-    public LottoTicket manual(final String numbers) {
-        return LottoTicket.of(createManualLottoNumbers(numbers));
-    }
-
-    @Override
     public WinningLotto winning(final String winningNumbers, final String bonusNumber) {
-        LottoTicket winningTicket = LottoTicket.of(createManualLottoNumbers(winningNumbers));
+        LottoTicket winningTicket = createLottoTicket(winningNumbers);
         LottoNumber bonus = LottoNumber.valueOf(bonusNumber);
         return WinningLotto.of(winningTicket, bonus);
     }
 
-    private List<LottoNumber> createManualLottoNumbers(final String numbers) {
+    private LottoTicket createLottoTicket(final String numbers) {
         return Arrays.stream(numbers.split(DELIMITER))
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::of));
     }
 }

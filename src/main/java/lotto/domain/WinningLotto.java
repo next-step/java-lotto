@@ -28,4 +28,10 @@ public class WinningLotto {
     public boolean matchBonus(final LottoNumber bonus) {
         return this.bonus.equals(bonus);
     }
+
+    public Rank match(final LottoTicket lottoTicket) {
+        int matchCount = lottoTicket.match(winningTicket);
+        boolean matchBonus = lottoTicket.contains(bonus);
+        return Rank.countOf(matchCount, matchBonus);
+    }
 }

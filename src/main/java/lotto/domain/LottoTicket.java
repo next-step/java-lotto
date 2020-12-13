@@ -24,24 +24,24 @@ public class LottoTicket {
         return new LottoTicket(removedDuplication);
     }
 
-    public boolean contains(final int value) {
-        return contains(LottoNumber.valueOf(value));
-    }
-
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Rank match(final WinningLotto winningLotto) {
-        int matchCount = (int) lottoNumbers.stream()
-                .filter(winningLotto::contains)
-                .count();
-        boolean matchBonus = lottoNumbers.stream()
-                .anyMatch(winningLotto::matchBonus);
-        return Rank.countOf(matchCount, matchBonus);
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    public int match(final LottoTicket other) {
+        return (int) lottoNumbers.stream()
+                .filter(other::contains)
+                .count();
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

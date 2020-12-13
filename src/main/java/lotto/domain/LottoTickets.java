@@ -19,7 +19,7 @@ public class LottoTickets {
 
     public List<Rank> match(final WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.match(winningLotto))
+                .map(winningLotto::match)
                 .collect(Collectors.toList());
     }
 
@@ -29,5 +29,12 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTickets{" +
+                "lottoTickets=" + lottoTickets +
+                '}';
     }
 }

@@ -8,6 +8,8 @@ public class Money {
 
     private static final BigDecimal MIN_VALUE = BigDecimal.ZERO;
 
+    private static final int PROFIT_RATE_SCALE = 2;
+
     private final BigDecimal amount;
 
     private Money(final BigDecimal amount) {
@@ -38,17 +40,21 @@ public class Money {
                 .intValue();
     }
 
-    public double profitRate(final Money other) {
-        return this.amount.divide(other.amount, 2, RoundingMode.DOWN)
-                .doubleValue();
-    }
-
     public Money multiply(final int value) {
         return multiply(BigDecimal.valueOf(value));
     }
 
     public Money multiply(final BigDecimal count) {
         return valueOf(amount.multiply(count));
+    }
+
+    public boolean isLessThen(final Money other) {
+        return amount.compareTo(other.amount) < 0;
+    }
+
+    public double profitRate(final Money other) {
+        return this.amount.divide(other.amount, PROFIT_RATE_SCALE, RoundingMode.DOWN)
+                .doubleValue();
     }
 
     @Override
