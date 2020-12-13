@@ -1,6 +1,7 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class LotteryGame {
     protected static final int PRICE = 1_000;
@@ -38,5 +39,13 @@ public class LotteryGame {
 
     protected List<Integer> getLotteryNumbers() {
         return lotteryNumbers.getLotteryNumbers();
+    }
+
+    @Override
+    public String toString() {
+        final StringJoiner stringJoin = new StringJoiner(", ");
+        this.getLotteryNumbers().forEach(number -> stringJoin.add(Integer.toString(number)));
+
+        return "[" + stringJoin + ']';
     }
 }
