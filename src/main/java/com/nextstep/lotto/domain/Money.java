@@ -36,6 +36,10 @@ public class Money {
         return amount;
     }
 
+    public Money minusBoughtLottoTickets(final int numberOfBoughtLottoTickets) {
+        return new Money(this.amount - numberOfBoughtLottoTickets * LOTTO_TICKET_PRICE);
+    }
+
     private void validate(final Long amount) {
         if (amount < MIN_VALUE) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
