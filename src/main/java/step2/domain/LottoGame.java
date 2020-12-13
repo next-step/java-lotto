@@ -3,24 +3,39 @@ package step2.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
     private LottoNumberGenerator lottoNumberGenerator;
+    private LottoNumbers lottoNumbers;
 
-    public LottoGame() {
-        lottoNumberGenerator = new LottoNumberGenerator();
+    public LottoGame(BigDecimal amount, LottoNumberGenerator generator) {
+        lottoNumberGenerator = generator;
+        lottoNumbers = buyLottoNumbers(amount);
     }
 
-    public LottoNumbers buyLottoNumbers(BigDecimal amount) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public Map<Integer, Long> lottoResultMap(String lastWinningNumber) {
+        String[] winningNumbers = lastWinningNumber.split(",");
+        for (String number : winningNumbers) {
+            lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(number)));
+        }
+        return lottoNumbers.winningResultMap();
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    private LottoNumbers buyLottoNumbers(BigDecimal amount) {
+        List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i=0; i<lottoCount(amount); i++) {
-            lottoNumbers.add(buyLottoNumber());
+            numbers.add(buyLottoNumber());
         }
 
-        return new LottoNumbers(lottoNumbers);
+        return new LottoNumbers(numbers);
     }
 
     private int lottoCount(BigDecimal amount) {
