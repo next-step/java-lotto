@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
-    private final static int LOTTO_START_NUMBER = 1;
-    private final static int LOTTO_END_NUMBER = 45;
-    private final static int SPLIT_START_INDEX = 0;
-    private final static int SPLIT_END_INDEX = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int SPLIT_START_INDEX = 0;
+    private static final int SPLIT_END_INDEX = 6;
 
     private final List<LottoNumber> lottoNumbers;
 

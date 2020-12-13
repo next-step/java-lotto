@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
-    private static final int INTI_COUNT = 0;
+    private static final int INIT_COUNT = 0;
 
     private final LottoTickets lottoTickets;
     private final Map<MatchPrize, Integer> lottoResult;
@@ -30,6 +30,6 @@ public class LottoGame {
 
     private void putInitMatchPrize() {
         Arrays.stream(MatchPrize.values())
-                .forEach(matchPrize -> lottoResult.put(matchPrize, INTI_COUNT));
+                .forEach(matchPrize -> lottoResult.put(matchPrize, INIT_COUNT));
     }
 }
