@@ -1,9 +1,9 @@
 package calculator.domain;
 
-public class Number {
+public class PositiveNumber {
     private final int value;
 
-    public Number(String num) {
+    public PositiveNumber(String num) {
         this.value = convertToValue(num);
     }
 
