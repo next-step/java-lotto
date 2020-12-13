@@ -4,14 +4,19 @@ public class OutputView {
     private static final String LOTTO_PURCHASE_QUANTITY_MESSAGE = "%d개를 구매했습니다.";
     private static final String LOTTO_WINNING_MESSAGE = "\n당첨 통계\n" + "---------\n";
     private static final String WINNING_COUNT_MESSAGE = "%d개 일치 (%d원) - %d개\n";
-    private static final String TOTAL_REWARD_MESSAGE = "총 수익률은 %.2f입니다.";
+    private static final String TOTAL_REWARD_MESSAGE = "총 수익률은 %s입니다.";
     private static final StringBuffer STRING_BUFFER = new StringBuffer();
 
-    public static void lottoQuantity(final int quantity) {
+    public static void lottoStatus(LottoTickets lottoTickets) {
+        lottoQuantity(lottoTickets.lottoTicketCount());
+        lottoTickets(lottoTickets);
+    }
+
+    private static void lottoQuantity(final int quantity) {
         System.out.println(String.format(LOTTO_PURCHASE_QUANTITY_MESSAGE, quantity));
     }
 
-    public static void lottoTickets(final LottoTickets lottoTickets) {
+    private static void lottoTickets(final LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
                 .forEach(lottoTicket -> System.out.println(lottoTicket.getLottoTicket()));
     }

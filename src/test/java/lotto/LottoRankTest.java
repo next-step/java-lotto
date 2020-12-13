@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoRankTest {
@@ -26,10 +28,9 @@ public class LottoRankTest {
         //given
         int purchaseAmount = 14_000;
         long totalReward = 5_000;
-        Lotto lotto = new Lotto(purchaseAmount);
 
         //when
-        double rewardRatio = lotto.rewardRatio(totalReward);
+        double rewardRatio = LottoResult.rateCalculation(totalReward, purchaseAmount);
 
         //then
         assertEquals(0.35, rewardRatio);

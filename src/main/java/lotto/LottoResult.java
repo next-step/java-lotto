@@ -26,7 +26,11 @@ public class LottoResult {
         Set<LottoRank> lottoRanks = lottoResults.keySet();
         long totalReward = getTotalReward(lottoRanks);
         long purchaseAmount = getPurchaseAmount(lottoRanks);
-        return totalReward / (double)purchaseAmount;
+        return rateCalculation(totalReward, purchaseAmount);
+    }
+
+    protected static double rateCalculation(long totalReward, double purchaseAmount) {
+        return Math.floor((totalReward / purchaseAmount)*100) / 100;
     }
 
     private long getPurchaseAmount(Set<LottoRank> lottoRanks) {

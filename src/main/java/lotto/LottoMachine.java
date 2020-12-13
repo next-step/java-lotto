@@ -9,10 +9,11 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoMachine {
-    private final static int LOTTO_START_NUMBER = 1;
-    private final static int LOTTO_END_NUMBER = 45;
-    private final static int LOTTO_NUMBER_COUNT = 6;
-    private final static int BASE_INDEX = 0;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int BASE_INDEX = 0;
+    private static final String COMMA = ", ";
     private final List<LottoNumber> lottoNumbers;
 
     public LottoMachine() {
@@ -39,7 +40,7 @@ public class LottoMachine {
     }
 
     public WinningNumber winningNumber(String winningNumberString) {
-        return new WinningNumber(Arrays.stream(winningNumberString.split(", "))
+        return new WinningNumber(Arrays.stream(winningNumberString.split(COMMA))
                 .map(value -> new LottoNumber(Integer.parseInt(value)))
                 .collect(Collectors.toList()));
     }
