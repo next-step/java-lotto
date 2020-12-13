@@ -1,13 +1,13 @@
 package step2;
 
-import step2.domain.Lotto;
+import step2.domain.UserLotto;
 
 import java.util.List;
 
 public class LottoGame {
 
   public static final int LOTTO_PRICE = 1000;
-  private List<Lotto> lottoList;
+  private List<UserLotto> userLottoList;
   private final int amount;
   private final int count;
 

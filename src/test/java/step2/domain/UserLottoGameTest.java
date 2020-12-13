@@ -5,7 +5,7 @@ import step2.LottoGame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGameTest {
+public class UserLottoGameTest {
   @Test
   void constructorTest() {
     LottoGame game = new LottoGame(14000);
