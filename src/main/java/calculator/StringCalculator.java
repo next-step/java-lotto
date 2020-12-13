@@ -7,7 +7,7 @@ import calculator.util.ValidationUtil;
 public class StringCalculator {
 
     public int splitAndSum(String text) {
-        if(ValidationUtil.isBlank(text)){
+        if (ValidationUtil.isBlank(text)) {
             return 0;
         }
 

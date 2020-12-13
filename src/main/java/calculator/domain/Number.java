@@ -14,7 +14,7 @@ public class Number {
     }
 
     private void validatePositiveNumber(int value) {
-        if(value < 0) {
+        if (value < 0) {
             throw new RuntimeException(NEGATIVE_VALUE_INCLUDE_ERROR);
         }
     }

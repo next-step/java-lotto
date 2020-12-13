@@ -14,7 +14,7 @@ public class StringDelimiter {
     public static String[] splitByDelimiter(String text) {
         Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
 
-        if(m.find()) {
+        if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
