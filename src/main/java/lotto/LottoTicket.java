@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LottoTicket {
     private final List<Lotto> lottoList;
@@ -16,6 +17,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket from(List<Lotto> lottoList){
+        validLottoList(lottoList);
         return new LottoTicket(lottoList);
     }
 
@@ -29,5 +31,12 @@ public class LottoTicket {
 
     public int getLottoTicketSize(){
         return lottoList.size();
+    }
+
+
+    public static void validLottoList(List<Lotto> lottoList){
+        if(!Optional.ofNullable(lottoList).isPresent()){
+            throw new IllegalStateException("NULL일 수 없습니다.");
+        }
     }
 }
