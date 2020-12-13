@@ -1,4 +1,4 @@
-package com.jaenyeong.mission02.lotto.domain;
+package com.jaenyeong.mission02.lotto.domain.lottery;
 
 import java.util.*;
 import java.util.stream.Collectors;

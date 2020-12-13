@@ -1,4 +1,4 @@
-package com.jaenyeong.mission02.lotto.domain;
+package com.jaenyeong.mission02.lotto.domain.lottery;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
