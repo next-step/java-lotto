@@ -5,6 +5,7 @@ import java.util.List;
 public class LotteryGame {
     protected static final int PRICE = 1_000;
     private static final int MISS_MATCH = 0;
+    private static final int EMPTY = 0;
     private final LotteryNumbers lotteryNumbers;
 
     private LotteryGame(final LotteryNumbers lotteryNumbers) {
@@ -24,7 +25,7 @@ public class LotteryGame {
     }
 
     public int checkWinTheLottery(final LotteryGame otherGame) {
-        if ((otherGame == null) || (otherGame.getLotteryNumbers().size() <= 0)) {
+        if ((otherGame == null) || (otherGame.getLotteryNumbers().size() == EMPTY)) {
             return MISS_MATCH;
         }
 
