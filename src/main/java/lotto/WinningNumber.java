@@ -12,4 +12,9 @@ public class WinningNumber {
     public boolean contains(LottoNumber lottoNumber) {
         return winningNumber.contains(lottoNumber);
     }
+
+    public int winningCount(LottoTicket lottoTicket) {
+        return (int) winningNumber.stream()
+                .filter(lottoTicket::contains).count();
+    }
 }

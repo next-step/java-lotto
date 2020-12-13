@@ -13,6 +13,10 @@ public class LottoTicket {
         return lottoTicket.size();
     }
 
+    public boolean contains(LottoNumber winningNumber) {
+        return lottoTicket.contains(winningNumber);
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" + lottoTicket + "}\n";
