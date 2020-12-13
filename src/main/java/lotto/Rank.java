@@ -9,6 +9,7 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
+
     private final int countOfMatch;
     private final int winningMoney;
 
@@ -20,32 +21,18 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         validate(countOfMatch);
 
-        if (getRankOfSecond(matchBonus)) {
+        if (matchBonus) {
             return SECOND;
         }
 
-        if (getRankOfFifth(countOfMatch)) {
-            return FIFTH;
-        }
-
-        for (Rank rank : Rank.values()) {
-            return getRankOfEtc(countOfMatch, rank);
-        }
-
-        throw new IllegalArgumentException("일치하는 당첨 개수가 없습니다. 당첨 개수를 확인 해주세요");
+        return getRankOfEtc(countOfMatch);
     }
 
-    private static boolean getRankOfFifth(int countOfMatch) {
-        return countOfMatch == Rank.FIFTH.getCountOfMatch();
-    }
-
-    private static boolean getRankOfSecond(boolean matchBonus) {
-        return matchBonus;
-    }
-
-    private static Rank getRankOfEtc(int countOfMatch, Rank rank) {
-        if (countOfMatch == rank.getCountOfMatch()) {
-            return rank;
+    private static Rank getRankOfEtc(int countOfMatch) {
+        for (Rank rank : values()) {
+            if (countOfMatch == rank.getCountOfMatch()) {
+                return rank;
+            }
         }
 
         return MISS;
