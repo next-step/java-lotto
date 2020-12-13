@@ -44,6 +44,10 @@ public class Money {
         return new Money(this.amount - numberOfBoughtLottoTickets * LOTTO_TICKET_PRICE);
     }
 
+    boolean isEnoughToBuyTicket() {
+        return this.amount >= LOTTO_TICKET_PRICE;
+    }
+
     private void validateCreation(final Long amount) {
         if (amount < POSITIVE_NUMBER_BOUNDARY) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
