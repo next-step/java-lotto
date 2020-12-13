@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 public class InputConvertor {
 
     private static final String REGEX = ",|:";
-    private static final Pattern compile = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern CUSTOM_SPLIT_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int SPLIT_TARGET_INDEX = 2;
 
     public static List<Integer> convert(String input) {
         if (isNullOrEmpty(input)) {
@@ -44,10 +46,10 @@ public class InputConvertor {
         String separatorRegex = REGEX;
         String splitTarget = input;
 
-        Matcher matcher = compile.matcher(input);
+        Matcher matcher = CUSTOM_SPLIT_PATTERN.matcher(input);
         if (matcher.find()) {
-            separatorRegex += ("|" + matcher.group(1));
-            splitTarget = matcher.group(2);
+            separatorRegex += ("|" + matcher.group(CUSTOM_DELIMITER_INDEX));
+            splitTarget = matcher.group(SPLIT_TARGET_INDEX);
         }
         return splitTarget.split(separatorRegex);
     }
