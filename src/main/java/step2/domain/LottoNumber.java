@@ -5,13 +5,22 @@ import java.util.List;
 public class LottoNumber {
 
     private List<Number> numbers;
+    private int count;
 
     public LottoNumber(List<Number> numbers) {
         this.numbers = numbers;
     }
 
+    public void equalCheck(Number number) {
+        if (numbers.contains(number)) count++;
+    }
+
     public List<Number> getNumbers() {
         return numbers;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override
