@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LottoNumberGeneratorTest {
 
     LottoNumberGenerator lottoNumberGenerator;
@@ -19,19 +17,19 @@ class LottoNumberGeneratorTest {
     }
 
     @Test
-    @DisplayName("6자리의 숫자를 생성해주는지 기능 테스트")
+    @DisplayName("로또 숫자인지 기능 테스트 - (6개의 숫자이고, 각 숫자는 1~45이다)")
     void generate_size() {
-        LottoNumber lotto = lottoNumberGenerator.generate();
-        Assertions.assertEquals(lotto.getNumbers().size(), 6);
+        assertionLottoNumberTest(lottoNumberGenerator.generate());
+
     }
 
-    @Test
-    @DisplayName("0~45자리의 숫자를 생성해주는지 기능 테스트")
-    void generate_number() {
-        List<Integer> lottoNumbers = lottoNumberGenerator.generate().getNumbers();
-        for (int i=0; i<lottoNumbers.size(); i++) {
-            Assertions.assertTrue(lottoNumbers.get(i)>0);
-            Assertions.assertTrue(lottoNumbers.get(i)<=45);
+    public static void assertionLottoNumberTest(LottoNumber lottoNumber) {
+        List<Integer> numbers = lottoNumber.getNumbers();
+        Assertions.assertEquals(numbers.size(), 6);
+
+        for (int i=0; i<numbers.size(); i++) {
+            Assertions.assertTrue(numbers.get(i)>0);
+            Assertions.assertTrue(numbers.get(i)<=45);
         }
     }
 }
