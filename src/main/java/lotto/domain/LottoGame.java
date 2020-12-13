@@ -12,24 +12,24 @@ public class LottoGame {
     private static final int INTI_COUNT = 0;
 
     private final LottoTickets lottoTickets;
-    private final Map<MatchPrize, Integer> lottoResults;
+    private final Map<MatchPrize, Integer> lottoResult;
 
     public LottoGame(LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
-        this.lottoResults = new HashMap<>();
+        this.lottoResult = new HashMap<>();
         putInitMatchPrize();
     }
 
     public Map<MatchPrize, Integer> matchNumbers(List<LottoNumber> winningLottoNumbers) {
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
             int matchCount = lottoTicket.matchWinningLottoNumbers(winningLottoNumbers);
-            lottoResults.put(MatchPrize.valueOf(matchCount), lottoResults.get(MatchPrize.valueOf(matchCount)) + 1);
+            lottoResult.put(MatchPrize.valueOf(matchCount), lottoResult.get(MatchPrize.valueOf(matchCount)) + 1);
         });
-        return lottoResults;
+        return lottoResult;
     }
 
     private void putInitMatchPrize() {
         Arrays.stream(MatchPrize.values())
-                .forEach(matchPrize -> lottoResults.put(matchPrize, INTI_COUNT));
+                .forEach(matchPrize -> lottoResult.put(matchPrize, INTI_COUNT));
     }
 }

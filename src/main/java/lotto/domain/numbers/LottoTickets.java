@@ -1,7 +1,5 @@
 package lotto.domain.numbers;
 
-import lotto.domain.numbers.LottoTicket;
-
 import java.util.List;
 
 public class LottoTickets {
