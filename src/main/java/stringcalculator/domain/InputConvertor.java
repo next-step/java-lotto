@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class InputConvertor {
 
-    private static final String REGEX = ",|:";
+    private static final String DEFAULT_SPLIT_REGEX = ",|:";
     private static final Pattern CUSTOM_SPLIT_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_DELIMITER_INDEX = 1;
     private static final int SPLIT_TARGET_INDEX = 2;
@@ -43,15 +43,12 @@ public class InputConvertor {
     }
 
     private static String[] getTokens(String input) {
-        String separatorRegex = REGEX;
-        String splitTarget = input;
-
         Matcher matcher = CUSTOM_SPLIT_PATTERN.matcher(input);
         if (matcher.find()) {
-            separatorRegex += ("|" + matcher.group(CUSTOM_DELIMITER_INDEX));
-            splitTarget = matcher.group(SPLIT_TARGET_INDEX);
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
+            return matcher.group(SPLIT_TARGET_INDEX).split(customDelimiter);
         }
-        return splitTarget.split(separatorRegex);
+        return input.split(DEFAULT_SPLIT_REGEX);
     }
 
     private static boolean isNullOrEmpty(String input) {
