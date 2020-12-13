@@ -13,7 +13,7 @@ public enum Rank {
     private final int numberOfMatchedNumber;
     private final Money money;
 
-    Rank(final Integer numberOfMatchedNumber, final Long moneyValue) {
+    Rank(final int numberOfMatchedNumber, final long moneyValue) {
       this.numberOfMatchedNumber = numberOfMatchedNumber;
       this.money = new Money(moneyValue);
     }
