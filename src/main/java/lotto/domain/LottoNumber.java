@@ -11,6 +11,12 @@ public class LottoNumber {
 		this.number = number;
 	}
 
+	public LottoNumber(String number) {
+		int parseNumber = Integer.parseInt(number);
+		checkRangeOfNumber(parseNumber);
+		this.number = parseNumber;
+	}
+
 	public int isGraterThanNumber(LottoNumber targetNumber) {
 		return this.number - targetNumber.number;
 	}

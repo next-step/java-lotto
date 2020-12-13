@@ -26,8 +26,7 @@ public class LottoResult {
 	}
 
 	public static Rank matchesRank(LottoNumbers targetNumbers, LottoWinnerNumbers lottoWinnerNumbers) {
-		int count = lottoWinnerNumbers.getMatchCount(targetNumbers);
-		return Rank.ofMatchesCount(count);
+		return Rank.ofMatchesCount(lottoWinnerNumbers.getMatchCount(targetNumbers), lottoWinnerNumbers.hasBonusBall(targetNumbers));
 	}
 
 	public int askCountOfRank(Rank rankType) {

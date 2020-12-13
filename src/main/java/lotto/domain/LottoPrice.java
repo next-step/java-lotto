@@ -9,7 +9,14 @@ public class LottoPrice {
 	}
 
 	public int purchaseTicketAmount() {
+		isGraterThanTicketPerPrice();
 		return this.purchaseCost / PRICE_PER_TICKET;
+	}
+
+	private void isGraterThanTicketPerPrice() {
+		if (this.purchaseCost < PRICE_PER_TICKET){
+			throw new IllegalArgumentException("티켓의 가격보다 구매 가격이 낮습니다.");
+		}
 	}
 
 	public double totalPrizeMoneyRate(int totalPrizeMoney) {
