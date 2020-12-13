@@ -1,19 +1,25 @@
 package lotto;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class LottoMachineTest {
-    
+    private static LottoMachine lottoMachine;
+
+    @BeforeAll
+    static void beforeAll() {
+        lottoMachine = new LottoMachine();
+    }
+
     @Test
     @DisplayName("6개의 로또 번호를 가지는 로또 티켓 한장 생성")
     public void generate() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine();
-
         //when
         LottoTicket lottoTicket = lottoMachine.generate();
 
@@ -28,7 +34,6 @@ public class LottoMachineTest {
         //given
         Lotto lotto = new Lotto();
         int purchaseQuantity = lotto.purchaseQuantity(price);
-        LottoMachine lottoMachine = new LottoMachine();
 
         //when
         LottoTickets lottoTickets = lottoMachine.generate(purchaseQuantity);
@@ -36,5 +41,20 @@ public class LottoMachineTest {
 
         //then
         Assertions.assertEquals(expected, lottoTickets.lottoTicketCount());
+    }
+
+    @Test
+    @DisplayName("당첨 번호를 생성한다")
+    public void winningNumber() {
+        //given
+        String winningNumberString = "1, 2, 3, 4, 5, 6";
+
+        //when
+        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumberString);
+
+        //then
+        for (int i = 1; i <= 6; i++) {
+            assertThat(winningNumber.contains(new LottoNumber(i))).isTrue();
+        }
     }
 }

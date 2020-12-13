@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,5 +36,11 @@ public class LottoMachine {
 
     private void lottoNumbersShuffle() {
         Collections.shuffle(lottoNumbers);
+    }
+
+    public WinningNumber winningNumber(String winningNumberString) {
+        return new WinningNumber(Arrays.stream(winningNumberString.split(", "))
+                .map(value -> new LottoNumber(Integer.parseInt(value)))
+                .collect(Collectors.toList()));
     }
 }
