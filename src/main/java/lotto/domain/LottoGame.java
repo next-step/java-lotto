@@ -1,22 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class LottoGame {
-    private final long money;
+    private static final int INTI_COUNT = 0;
 
-    public LottoGame(long money) {
-        this.money = money;
+    private final LottoTickets lottoTickets;
+    private final Map<MatchPrize, Integer> lottoResults;
+
+    public LottoGame(LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets;
+        this.lottoResults = new HashMap<>();
+        putInitMatchPrize();
     }
 
-    public void matchNumbers(String winningNumbers) {
+    public Map<MatchPrize, Integer> matchNumbers(List<LottoNumber> winningLottoNumbers) {
+        lottoTickets.getLottoTickets().forEach(lottoTicket -> {
+            int matchCount = lottoTicket.matchWinningLottoNumbers(winningLottoNumbers);
+            lottoResults.put(MatchPrize.valueOf(matchCount), lottoResults.get(MatchPrize.valueOf(matchCount)) + 1);
+        });
+        return lottoResults;
+    }
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(winningNumbers.split(", "))
-                .map(s -> new LottoNumber(Integer.parseInt(s))).collect(Collectors.toList());
-
-
+    private void putInitMatchPrize() {
+        Arrays.stream(MatchPrize.values())
+                .forEach(matchPrize -> lottoResults.put(matchPrize, INTI_COUNT));
     }
 }
