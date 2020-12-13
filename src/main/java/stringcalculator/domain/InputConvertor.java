@@ -1,10 +1,12 @@
 package stringcalculator.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputConvertor {
 
@@ -22,23 +24,20 @@ public class InputConvertor {
     }
 
     private static List<Integer> convertToIntegerList(String input) {
-        String[] tokens = getTokens(input);
-
-        List<Integer> result = new ArrayList<>();
-        for (String token : tokens) {
-            int number = Integer.parseInt(token);
-            validNumber(number);
-            result.add(number);
-        }
-        return result;
+        return Stream.of(input)
+                .flatMap(inputStream -> Arrays.stream(getTokens(inputStream)))
+                .map(Integer::parseInt)
+                .map(InputConvertor::validNumber)
+                .collect(Collectors.toList());
     }
 
-    private static void validNumber(int number) {
-        if(isNagativeNumber(number))
+    private static Integer validNumber(Integer number) {
+        if(isNegativeNumber(number))
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        return number;
     }
 
-    private static boolean isNagativeNumber(int number) {
+    private static boolean isNegativeNumber(int number) {
         return number < 0;
     }
 
