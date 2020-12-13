@@ -23,8 +23,12 @@ public class LottoShop {
         return LottoTicketsFactory.creatAutoByRemainedMoney(originalMoney, new LottoTickets(staticBoughtLottoTickets));
     }
 
-    int howManyStaticBoughtLottoTickets() {
+    public int howManyStaticBoughtLottoTickets() {
         return staticBoughtLottoTickets.size();
+    }
+
+    public Money getRemainedMoney() {
+        return originalMoney.minusBoughtLottoTickets(staticBoughtLottoTickets.size());
     }
 
     private void validateCanBuy() {

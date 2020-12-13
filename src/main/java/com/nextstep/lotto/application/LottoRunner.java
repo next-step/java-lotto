@@ -4,22 +4,17 @@ import com.nextstep.lotto.domain.*;
 import com.nextstep.lotto.view.InputView;
 import com.nextstep.lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoRunner {
     public static void main(String[] args) {
         Money originalMoney = getMoneyFromUser();
 
         int numberOfStaticLotto = getNumberOfStaticLottoFromUser();
 
-        LottoTickets staticLottoTickets = getStaticLottoTicketsFromUser(numberOfStaticLotto);
-
-        LottoTickets lottoTickets = buyAutoLottoTicketsByRemainMoney(originalMoney, staticLottoTickets);
+        LottoTickets boughtLottoTickets = buyLottoTickets(numberOfStaticLotto, originalMoney);
 
         WinningTicket winningTicket = lotteryWinningTicket();
 
-        showFinalLottoResult(lottoTickets, winningTicket, originalMoney);
+        showFinalLottoResult(boughtLottoTickets, winningTicket, originalMoney);
     }
 
     private static Money getMoneyFromUser() {
@@ -32,24 +27,22 @@ public class LottoRunner {
         return InputView.getNumberOfStaticLotto();
     }
 
-    private static LottoTickets getStaticLottoTicketsFromUser(final int numberOfStaticLotto) {
+    private static LottoTickets buyLottoTickets(
+            final int numberOfStaticLotto, final Money originalMoney
+    ) {
         OutputView.printStaticLottoNumberInput();
-        List<LottoTicket> staticLottoTickets = new ArrayList<>();
+        LottoShop lottoShop = new LottoShop(originalMoney);
         for (int i = 0; i < numberOfStaticLotto; i++) {
             LottoTicket lottoTicket = InputView.getLottoTicket();
-            staticLottoTickets.add(lottoTicket);
+            lottoShop.buyStaticLottoTicket(lottoTicket);
         }
 
-        return new LottoTickets(staticLottoTickets);
-    }
+        LottoTickets lottoTickets = lottoShop.buyAutoLottoTicketsByRemainedMoney();
 
-    private static LottoTickets buyAutoLottoTicketsByRemainMoney(
-            final Money originalMoney, final LottoTickets staticLottoTickets
-    ) {
-        Money remainMoney = originalMoney.minusBoughtLottoTickets(staticLottoTickets.size());
-        OutputView.printHowManyLottoTickets(staticLottoTickets.size(), remainMoney);
+        OutputView.printHowManyLottoTickets(lottoShop.howManyStaticBoughtLottoTickets(), lottoShop.getRemainedMoney());
+        OutputView.printBoughtLottoTickets(lottoTickets);
 
-        return LottoTicketsFactory.creatAutoByRemainedMoney(originalMoney, staticLottoTickets);
+        return lottoTickets;
     }
 
     private static WinningTicket lotteryWinningTicket() {
