@@ -32,7 +32,7 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    int size() {
+    public int size() {
         return this.lottoTickets.size();
     }
 }

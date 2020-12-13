@@ -15,9 +15,7 @@ public class LottoRunner {
 
         LottoTickets staticLottoTickets = getStaticLottoTicketsFromUser(numberOfStaticLotto);
 
-        LottoTickets lottoTickets = buyAutoLottoTicketsByRemainMoney(
-                originalMoney, numberOfStaticLotto, staticLottoTickets
-        );
+        LottoTickets lottoTickets = buyAutoLottoTicketsByRemainMoney(originalMoney, staticLottoTickets);
 
         WinningTicket winningTicket = lotteryWinningTicket();
 
@@ -46,16 +44,12 @@ public class LottoRunner {
     }
 
     private static LottoTickets buyAutoLottoTicketsByRemainMoney(
-            final Money originalMoney, final int numberOfStaticLotto, final LottoTickets staticLottoTickets
+            final Money originalMoney, final LottoTickets staticLottoTickets
     ) {
-        Money remainMoney = originalMoney.minusBoughtLottoTickets(numberOfStaticLotto);
-        OutputView.printHowManyLottoTickets(numberOfStaticLotto, remainMoney);
+        Money remainMoney = originalMoney.minusBoughtLottoTickets(staticLottoTickets.size());
+        OutputView.printHowManyLottoTickets(staticLottoTickets.size(), remainMoney);
 
-        LottoTickets autoLottoTickets = LottoTicketsFactory.createAuto(remainMoney);
-        LottoTickets lottoTickets = staticLottoTickets.merge(autoLottoTickets);
-        OutputView.printBoughtLottoTickets(lottoTickets);
-
-        return lottoTickets;
+        return LottoTicketsFactory.creatAutoByRemainedMoney(originalMoney, staticLottoTickets);
     }
 
     private static WinningTicket lotteryWinningTicket() {
