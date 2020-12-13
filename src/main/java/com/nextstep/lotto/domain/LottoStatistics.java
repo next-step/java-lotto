@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoStatistics {
+    private static final int ZERO = 0;
     private int totalCount = 0;
     private final Map<LottoWinning, Integer> result = new HashMap<>();
 
@@ -26,6 +27,10 @@ public class LottoStatistics {
     }
 
     public double profitRate() {
+        if (result.isEmpty()) {
+            return ZERO;
+        }
+
         int totalPrice = totalCount * LottoSeller.LOTTO_PRICE;
         double totalProfit = getTotalProfit();
         double profitRate = totalProfit / totalPrice;

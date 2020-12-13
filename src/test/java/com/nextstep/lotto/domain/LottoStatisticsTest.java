@@ -1,6 +1,7 @@
 package com.nextstep.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +13,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStatisticsTest {
+    @DisplayName("등록 된 Lotto 개수 0일 때")
+    @Test
+    void profitRateZero() {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        double actual = lottoStatistics.profitRate();
+        assertThat(actual).isEqualTo(0);
+    }
 
     @DisplayName("당첨 복권 계수")
     @ParameterizedTest
