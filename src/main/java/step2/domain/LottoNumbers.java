@@ -6,24 +6,24 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumber;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(List<LottoNumber> lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
     public void checkWinningLotto(Number number) {
-        lottoNumbers.stream()
+        lottoNumber.stream()
                 .forEach(lottoNumber -> lottoNumber.equalCheck(number));
     }
 
-    public Map<Integer, Long> lottoWinningResult() {
-        return lottoNumbers.stream()
+    public Map<Integer, Long> winningResultMap() {
+        return lottoNumber.stream()
                 .collect(Collectors.groupingBy(LottoNumber::getCount, Collectors.counting()));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
@@ -33,16 +33,16 @@ public class LottoNumbers {
 
         LottoNumbers that = (LottoNumbers) o;
 
-        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
+        return lottoNumber != null ? lottoNumber.equals(that.lottoNumber) : that.lottoNumber == null;
     }
 
     @Override
     public int hashCode() {
-        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+        return lottoNumber != null ? lottoNumber.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumber.toString();
     }
 }

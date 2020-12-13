@@ -35,7 +35,7 @@ class LottoNumbersTest {
             lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(winningNumber)));
         }
 
-        Assertions.assertEquals(lottoNumbers.lottoWinningResult().get(expected), 2);
+        Assertions.assertEquals(lottoNumbers.winningResultMap().get(expected), 2);
     }
 
     static Stream<Arguments> generateLottoNumbersData() {
