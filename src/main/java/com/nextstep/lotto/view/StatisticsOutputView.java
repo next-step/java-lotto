@@ -19,7 +19,6 @@ public class StatisticsOutputView {
         Map<Rank, Long> prizeResult = lottoPrize.getResult();
 
         return prizeResult.keySet().stream()
-                .sorted(Comparator.comparingInt(Rank::getRankValue))
                 .map(rank -> parseRankDescription(rank) + LOTTO_PRIZE_SEPARATOR + prizeResult.get(rank) + PRIZE_UNIT)
                 .collect(Collectors.joining());
     }

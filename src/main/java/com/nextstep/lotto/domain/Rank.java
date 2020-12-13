@@ -3,21 +3,19 @@ package com.nextstep.lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(0, 0L, 1),
-    FIFTH(3, 5_000L, 2),
-    FOURTH(4, 50_000L, 3),
-    THIRD(5, 1_500_000L, 4),
-    SECOND(5, 30_000_000L, 5),
-    FIRST(6, 2_000_000_000L, 6);
+    NOTHING(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
     private final int numberOfMatchedNumber;
     private final Money money;
-    private final int rankValue;
 
-    Rank(final Integer numberOfMatchedNumber, final Long moneyValue, final int rankValue) {
+    Rank(final Integer numberOfMatchedNumber, final Long moneyValue) {
       this.numberOfMatchedNumber = numberOfMatchedNumber;
       this.money = new Money(moneyValue);
-      this.rankValue = rankValue;
     }
 
     public static Rank find(final int numberOfMatchedNumber, final boolean hasBonus) {
@@ -38,10 +36,6 @@ public enum Rank {
 
     public int getNumberOfMatchedNumber() {
         return numberOfMatchedNumber;
-    }
-
-    public int getRankValue() {
-        return rankValue;
     }
 
     private static boolean isSameMatchedNumber(final int numberOfMatchedNumber, final Rank rank) {
