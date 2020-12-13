@@ -1,3 +1,5 @@
+package calculator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,6 +14,10 @@ public class StringParser {
 	private static final String CUSTOM_DELIMITER_REGX = "//(.)\n(.*)";
 	private static final int DELIMITER_INDEX = 1;
 	private static final int SPLIT_TARGET_TEXT_INDEX = 2;
+
+	private StringParser() {
+		throw new AssertionError();
+	}
 
 	public static ParsedNumbers parse(String input) {
 		if (StringUtils.isEmpty(input)) {
