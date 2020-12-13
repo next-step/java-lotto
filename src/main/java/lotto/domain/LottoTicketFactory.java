@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.numbers.LottoNumber;
+import lotto.domain.numbers.LottoTicket;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
