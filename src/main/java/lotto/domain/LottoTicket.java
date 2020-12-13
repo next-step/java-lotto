@@ -5,11 +5,17 @@ import java.util.List;
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> LottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        LottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public int matchWinningLottoNumbers(List<LottoNumber> winningNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
@@ -19,6 +25,6 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return LottoNumbers;
+        return lottoNumbers;
     }
 }
