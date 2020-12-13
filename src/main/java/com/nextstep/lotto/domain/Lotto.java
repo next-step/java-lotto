@@ -3,7 +3,7 @@ package com.nextstep.lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -13,8 +13,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public LottoWinning getWinning(List<Integer> winningNumbers) {
-        return LottoWinning.select(winningNumbers, numbers);
+    public LottoWinning getWinning(Lotto winningLotto) {
+        long matchedCount = getMatchedCount(winningLotto);
+        return LottoWinning.select(matchedCount);
+    }
+
+    private long getMatchedCount(Lotto winningLotto) {
+        return this.numbers.stream()
+                .filter(winningLotto.numbers::contains)
+                .count();
     }
 
     @Override

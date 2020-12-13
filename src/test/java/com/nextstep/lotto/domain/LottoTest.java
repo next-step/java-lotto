@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,9 +24,9 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource
     void getWinning(Lotto lotto, LottoWinning expected) {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
-        LottoWinning lottoWinning = lotto.getWinning(winningNumbers);
+        LottoWinning lottoWinning = lotto.getWinning(winningLotto);
         assertThat(lottoWinning).isEqualTo(expected);
 
     }

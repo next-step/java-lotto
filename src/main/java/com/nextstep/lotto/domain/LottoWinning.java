@@ -1,6 +1,5 @@
 package com.nextstep.lotto.domain;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 public enum LottoWinning {
@@ -27,18 +26,7 @@ public enum LottoWinning {
         return winningPrice;
     }
 
-    public static LottoWinning select(List<Integer> winningNumbers, List<Integer> collectNumbers) {
-        long matchedCount = getMatchedCount(winningNumbers, collectNumbers);
-        return select(matchedCount);
-    }
-
-    private static long getMatchedCount(List<Integer> winningNumbers, List<Integer> collectNumbers) {
-        return collectNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-    }
-
-    private static LottoWinning select(long matchedCount) {
+    public static LottoWinning select(long matchedCount) {
         return Stream.of(LottoWinning.values())
                 .filter(lottoWinning -> lottoWinning.matchedCount == matchedCount)
                 .findFirst()
