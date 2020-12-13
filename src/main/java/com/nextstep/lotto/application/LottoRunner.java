@@ -8,7 +8,9 @@ public class LottoRunner {
     public static void main(String[] args) {
         OutputView.printMoneyInput();
         Money money = InputView.getMoney();
-        OutputView.printHowManyLottoTickets(money);
+
+        int temp = 1; // 전체 로직 수정할 때 고칠 것
+        OutputView.printHowManyLottoTickets(temp, money);
 
         LottoTickets lottoTickets = LottoTicketsFactory.createAuto(money);
         OutputView.printBoughtLottoTickets(lottoTickets);

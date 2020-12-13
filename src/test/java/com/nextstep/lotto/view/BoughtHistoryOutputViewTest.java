@@ -9,13 +9,15 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BoughtHistoryOutputViewTest {
-    @DisplayName("Money를 인자로 받아서 구매한 LottoTicket 수 결과 문자열을 반환한다.")
+    @DisplayName("사용자에게 수동으로 구매한 LottoTicket과 자동으로 구매한 LottoTicket의 수를 보여줄 수 있다.")
     @Test
     void getHowManyLottoTicketsTest() {
-        Money money = new Money(10000L);
-        String expected = "10개를 구매했습니다.";
+        int numberOfStaticLottoTickets = 3;
+        Money remainMoney = new Money(10000L);
+        String expected = "수동으로 3장, 자동으로 10개를 구매했습니다.";
 
-        assertThat(BoughtHistoryOutputView.getHowManyLottoTickets(money)).isEqualTo(expected);
+        assertThat(BoughtHistoryOutputView.getHowManyLottoTickets(numberOfStaticLottoTickets, remainMoney))
+                .isEqualTo(expected);
     }
 
     @DisplayName("LottoTickets를 사용자에게 보여줄 수 있다.")

@@ -24,8 +24,8 @@ public class OutputView {
         System.out.println(MONEY_INPUT_COMMENT);
     }
 
-    public static void printHowManyLottoTickets(final Money money) {
-        System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(money));
+    public static void printHowManyLottoTickets(final int numberOfStaticLottoTickets, final Money remainMoney) {
+        System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(numberOfStaticLottoTickets, remainMoney));
     }
 
     public static void printBoughtLottoTickets(final LottoTickets lottoTickets) {
