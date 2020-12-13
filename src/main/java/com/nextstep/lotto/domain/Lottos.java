@@ -17,8 +17,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoStatistics getStatistics(String winningNumberString) {
-        Lotto winningLotto = parseToLotto(winningNumberString);
+    public LottoStatistics getStatistics(String winningNumberString, int bonusNumber) {
+        WinningLotto winningLotto = parseToLotto(winningNumberString, bonusNumber);
         List<LottoWinning> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winnings.add(lotto.getWinning(winningLotto));
@@ -26,13 +26,12 @@ public class Lottos {
         return new LottoStatistics(winnings);
     }
 
-    private Lotto parseToLotto(String winningNumberString) {
+    private WinningLotto parseToLotto(String winningNumberString, int bonusNumber) {
         if ( winningNumberString == null || "".equals(winningNumberString) ) {
             throw new IllegalArgumentException("winning numbers are not allowed empty value");
         }
         String[] numbers = winningNumberString.split(DELIMITER);
-
-        return new Lotto(parseToList(numbers));
+        return new WinningLotto(parseToList(numbers), bonusNumber);
     }
 
     private List<Integer> parseToList(String[] numbers) {

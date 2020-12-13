@@ -13,6 +13,7 @@ public class LottoMain {
         Lottos lottos = LottoSeller.buy(price);
         ResultView.printBuy(lottos);
         String winnerNumbers = InputView.inputWinnerNumbers();
-        ResultView.printStatistics(lottos.getStatistics(winnerNumbers));
+        int bonusNumber = InputView.inputBonusNumber();
+        ResultView.printStatistics(lottos.getStatistics(winnerNumbers, bonusNumber));
     }
 }

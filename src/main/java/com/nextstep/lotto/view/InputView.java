@@ -7,13 +7,22 @@ public class InputView {
 
     public static int inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextInt();
+        return parseInt(SCANNER.nextLine());
     }
 
     public static String inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String line = SCANNER.nextLine();
+        return SCANNER.nextLine();
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = parseInt(SCANNER.nextLine());
         System.out.println();
-        return line;
+        return bonusNumber;
+    }
+
+    private static int parseInt(String line) {
+        return Integer.parseInt(line);
     }
 }

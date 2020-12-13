@@ -23,8 +23,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource
     void getWinning(Lotto lotto, LottoWinning expected) {
-        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
         LottoWinning lottoWinning = lotto.getWinning(winningLotto);
         assertThat(lottoWinning).isEqualTo(expected);
 
@@ -33,6 +32,7 @@ public class LottoTest {
     private static Stream<Arguments> getWinning() {
         return Stream.of(
                 Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,6)), LottoWinning.WIN_1ST),
+                Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,7)), LottoWinning.WIN_2ND),
                 Arguments.of(new Lotto(Arrays.asList(11,2,3,4,5,6)), LottoWinning.WIN_3RD),
                 Arguments.of(new Lotto(Arrays.asList(11,12,3,4,5,6)), LottoWinning.WIN_4TH),
                 Arguments.of(new Lotto(Arrays.asList(11,12,13,4,5,6)), LottoWinning.WIN_5TH),

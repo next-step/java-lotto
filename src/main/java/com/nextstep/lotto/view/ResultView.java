@@ -26,9 +26,16 @@ public class ResultView {
 
     private static void printWinning(LottoWinning lottoWinning, int count) {
         if (LottoWinning.RETIRE != lottoWinning) {
-            System.out.printf("%s개 일치 (%s원)- %s개", lottoWinning.getMatchedCount(), lottoWinning.getWinningPrice(), count);
+            System.out.printf(getPrintWinningFormat(lottoWinning), lottoWinning.getMatchedCount(), lottoWinning.getWinningPrice(), count);
             System.out.println();
         }
+    }
+
+    private static String getPrintWinningFormat(LottoWinning lottoWinning) {
+        if (lottoWinning == LottoWinning.WIN_2ND) {
+            return "%s개 일치, 보너스 볼 일치(%s원)- %s개";
+        }
+        return "%s개 일치 (%s원)- %s개";
     }
 
     public static void printBuy(Lottos lottos) {
