@@ -2,22 +2,20 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.LongStream;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
-    private static final int MONEY_OF_ONE_TICKET = 1000;
-
     private final LottoTicketFactory lottoTicketFactory;
-    private final long numberOfLottoTickets;
+    private final int numberOfLottoTickets;
 
-    public LottoMachine(long money) {
+    public LottoMachine(int numberOfLottoTickets) {
         this.lottoTicketFactory = new LottoTicketFactory();
-        this.numberOfLottoTickets = money / MONEY_OF_ONE_TICKET;
+        this.numberOfLottoTickets = numberOfLottoTickets;
     }
 
     public LottoTickets makeLottoTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        LongStream.range(0, numberOfLottoTickets)
+        IntStream.range(0, numberOfLottoTickets)
                 .forEach(i -> lottoTickets.add(lottoTicketFactory.makeLottoTicket()));
         return new LottoTickets(lottoTickets);
     }

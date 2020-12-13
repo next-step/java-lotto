@@ -2,17 +2,17 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @DisplayName("입력한 금액만큼 로또 티켓들이 생성된다.")
+    @DisplayName("입력받은 수만큼 로또 티켓들이 생성된다.")
     @ParameterizedTest
-    @CsvSource(value = {"13000:13", "2000000000:2000000"}, delimiter = ':')
-    void makeLottoTickets(long money, int expectedSize) {
-        LottoTickets lottoTickets = new LottoMachine(money).makeLottoTickets();
-        assertThat(lottoTickets.getLottoTickets()).hasSize(expectedSize);
+    @ValueSource(ints = {13, 2000000})
+    void makeLottoTickets(int count) {
+        LottoTickets lottoTickets = new LottoMachine(count).makeLottoTickets();
+        assertThat(lottoTickets.getLottoTickets()).hasSize(count);
     }
 }
