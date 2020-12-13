@@ -7,6 +7,10 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        if ( numbers == null ) {
+            throw new IllegalArgumentException("number is not allow null");
+        }
+
         if ( numbers.size() != LOTTO_NUMBER_COUNT ) {
             throw new IllegalArgumentException("number count shoud be " + LOTTO_NUMBER_COUNT);
         }
