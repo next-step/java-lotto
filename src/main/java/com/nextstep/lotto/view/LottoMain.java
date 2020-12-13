@@ -10,9 +10,8 @@ public class LottoMain {
 
     public void run() {
         int price = InputView.inputPrice();
-        int buyCount = LottoSeller.count(price);
-        Lottos lottos = LottoSeller.buy(buyCount);
-        ResultView.printBuy(buyCount, lottos);
+        Lottos lottos = LottoSeller.buy(price);
+        ResultView.printBuy(lottos);
         String winnerNumbers = InputView.inputWinnerNumbers();
         ResultView.printStatistics(lottos.getStatistics(winnerNumbers));
     }

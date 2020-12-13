@@ -31,8 +31,8 @@ public class ResultView {
         }
     }
 
-    public static void printBuy(int buyCount, Lottos lottos) {
-        System.out.println(buyCount + "개를 구매했습니다.");
+    public static void printBuy(Lottos lottos) {
+        System.out.println(lottos.count() + "개를 구매했습니다.");
         System.out.println(lottos.toString());
         System.out.println();
     }
