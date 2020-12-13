@@ -14,7 +14,11 @@
 * LottoResult
   - [ ] LinkedHashMap<>(); => Enum<>(Rank.class)로 변경해라.
 * Rank
-  - [ ] indent는 1단계만 허
+  - [ ] indent는 1단계만 허용
+    * 문제점
+      * throw new IllegalArgumentException("일치하는 당첨 개수가 없습니다. 당첨 개수를 확인 해주세요");
+        의 예외가 필요없는데 return 을 던지기 위해 의미없는 코드를 만듬. getRankOfEtc에서 return MISS이기 때문에 필요없다.
+        validate()에서 하고 있다.
 * LottoGameTest
   - [ ] LottoTickets lottoTickets = lottoTicketCreatable.createTicket(1); 까지 코드와
     LottoTickets lottoTickets = List.of(LottoTicket.newTicket(testTicket));는 뭐가 다른가?
