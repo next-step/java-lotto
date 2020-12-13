@@ -6,8 +6,11 @@ public class LottoGameApplication {
 
     public static void main(String[] args){
         int buyPrice = InputView.inputBuyLottoPrice();
-        LottoTicket lottoTicket = LottoGameService.buyLotto(buyPrice);
-        PrintView.printBuyLottoQty(lottoTicket.getLottoList().size());
+        int manualBuyQty = InputView.inputBuyManualLottoQty();
+        LottoTicket manualBuyLottoTicket = InputView.inputBuyManualLottoNumber(manualBuyQty);
+        LottoTicket autoBuyLottoTicket = LottoGameService.autoBuyLotto(buyPrice, manualBuyLottoTicket);
+        PrintView.printBuyLottoQty(manualBuyLottoTicket, autoBuyLottoTicket);
+        LottoTicket lottoTicket = LottoTicket.of(manualBuyLottoTicket, autoBuyLottoTicket);
         PrintView.printLottoNumber(lottoTicket.getLottoList());
         LottoWinner lottoWinner = InputView.inputWinnerLottoNumber();
         List<Rank> lottoRank = lottoWinner.matchingWinnerNumber(lottoTicket);

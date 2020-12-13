@@ -21,15 +21,15 @@ public class LottoGameService {
         return lottoBuyAmt;
     }
 
-    public static LottoTicket buyLotto(int lottoBuyAmt){
+    public static LottoTicket autoBuyLotto(int lottoBuyAmt, LottoTicket manualBuyLottoTicket){
         setLottoBuyAmt(lottoBuyAmt);
-        lottoBuyCnt = lottoBuyAmt/lottoPrice;
+        lottoBuyCnt = (lottoBuyAmt/lottoPrice)-manualBuyLottoTicket.getLottoTicketSize();
         List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i< lottoBuyCnt; i++){
-            Lotto lotto = Lotto.from(true);
+            Lotto lotto = Lotto.from();
             lottoList.add(lotto);
         }
-        buyLotto = new LottoTicket(lottoList);
+        buyLotto = LottoTicket.from(lottoList);
         return buyLotto;
     }
 

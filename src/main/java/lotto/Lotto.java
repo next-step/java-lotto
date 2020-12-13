@@ -1,6 +1,9 @@
 package lotto;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,14 +13,8 @@ public class Lotto {
     private final List<LottoNumber> initlottoNumber = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNumber::from).collect(Collectors.toList());
     public final List<LottoNumber> lottoNumbers;
 
-    private Lotto(boolean auto) {
-        if(auto){
-            lottoNumbers = autoGenerateLottoNumber();
-        }else{
-        // 수동입력 추후 구현
-            lottoNumbers = new ArrayList<>();
-        }
-
+    private Lotto() {
+        lottoNumbers = autoGenerateLottoNumber();
     }
 
     private Lotto(List<LottoNumber> lottoNumbers) {
@@ -32,8 +29,8 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto from(boolean auto){
-        return new Lotto(auto);
+    public static Lotto from(){
+        return new Lotto();
     }
 
     public static Lotto of(LottoNumber[] winnerLotto){

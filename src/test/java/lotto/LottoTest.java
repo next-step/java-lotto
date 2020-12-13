@@ -8,7 +8,7 @@ public class LottoTest {
 
     @Test
     public void autoGenerateLottoNumberTest() {
-        assertThat(Lotto.from(true).getLottoNumbers()).hasSize(6);
+        assertThat(Lotto.from().getLottoNumbers()).hasSize(6);
     }
 
 }

@@ -6,7 +6,9 @@ import java.util.List;
 
 public class PrintView {
 
-    public static final String LOTTO_BUY_QTY_MESSAGE = "개를 구매했습니다.";
+    public static final String MANUAL_BUY_QTY_VARIABLE = "{m}";
+    public static final String AUTO_BUY_QTY_VARIABLE = "{a}";
+    public static final String LOTTO_BUY_QTY_MESSAGE = "\n수동으로 "+MANUAL_BUY_QTY_VARIABLE+"장, 자동으로 "+AUTO_BUY_QTY_VARIABLE+"개를 구매했습니다.";
 
     public static void printLottoNumber(List<Lotto> lottoList) {
         for(Lotto lotto : lottoList){
@@ -39,8 +41,10 @@ public class PrintView {
         System.out.println("총 수익률은 "+profitRate+"입니다.(기준이 1이기 때문에 결과적으로 "+profitToString(profitRate)+"라는 의미임)");
     }
 
-    public static void printBuyLottoQty(int lottoQty){
-        System.out.println(lottoQty+ LOTTO_BUY_QTY_MESSAGE);
+    public static void printBuyLottoQty(LottoTicket manualBuyLottoTicket, LottoTicket autoBuyLottoTicket){
+        System.out.println(LOTTO_BUY_QTY_MESSAGE
+                .replace(MANUAL_BUY_QTY_VARIABLE, String.valueOf(manualBuyLottoTicket.getLottoTicketSize()))
+                .replace(AUTO_BUY_QTY_VARIABLE, String.valueOf(autoBuyLottoTicket.getLottoTicketSize())));
     }
 
     public static String profitToString(double profitRate) {
