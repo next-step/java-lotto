@@ -34,18 +34,25 @@ public class Numbers {
 	}
 
 	private void checkPositiveNumber(int result) {
-		if(result < 0) throw new RuntimeException("음수는 사용할 수 없습니다.");
+		if (result < 0)
+			throw new RuntimeException("음수는 사용할 수 없습니다.");
 	}
 
 	private String[] split(String target) {
-		String customRegex = "";
-
-		if (isInvalidCustomRegexRange(target)) {
-			customRegex = target.substring(target.indexOf(CUSTOM_REGEX_START) + 2, target.indexOf(CUSTOM_REGEX_END));
-		}
-		String regex = customRegex != "" ? customRegex : REGEX;
+		String regex = extractRegex(target);
 		target = target.substring(target.indexOf(CUSTOM_REGEX_END) + 1);
 		return target.split(regex);
+	}
+
+	private String extractRegex(String target) {
+		if (isInvalidCustomRegexRange(target)) {
+			return combineCustomRegex(target);
+		}
+		return REGEX;
+	}
+
+	private String combineCustomRegex(String target) {
+		return target.substring(target.indexOf(CUSTOM_REGEX_START) + 2, target.indexOf(CUSTOM_REGEX_END));
 	}
 
 	private boolean isInvalidCustomRegexRange(String target) {
