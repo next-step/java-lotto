@@ -5,18 +5,18 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(new MatchedNumberCount(0), 0L),
-    FIFTH(new MatchedNumberCount(3), 5_000L),
-    FOURTH(new MatchedNumberCount(4), 50_000L),
-    THIRD(new MatchedNumberCount(5), 1_500_000L),
-    SECOND(new MatchedNumberCount(5), 30_000_000L),
-    FIRST(new MatchedNumberCount(6), 2_000_000_000L);
+    NOTHING(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
     private final MatchedNumberCount matchedNumberCount;
     private final Money money;
 
-    Rank(final MatchedNumberCount matchedNumberCount, final long moneyValue) {
-      this.matchedNumberCount = matchedNumberCount;
+    Rank(final int matchedNumberCount, final long moneyValue) {
+      this.matchedNumberCount = new MatchedNumberCount(matchedNumberCount);
       this.money = new Money(moneyValue);
     }
 
