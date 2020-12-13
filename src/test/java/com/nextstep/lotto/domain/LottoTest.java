@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
-
     @DisplayName("로또 숫자가 6개가 아닐 경우 예외처리")
     @Test
     void lotto() {
