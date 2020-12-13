@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoResult;
-import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.MatchPrize;
 import lotto.domain.Money;
@@ -13,7 +12,7 @@ public class OutputView {
 
     public static void printLottoTickets(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-        lottoTickets.forEach(lottoTicket -> System.out.println(lottoNumbersToString(lottoTicket.getLottoNumbers())));
+        lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.toString()));
     }
 
     public static void printResults(LottoResult lottoResult, Money money) {
@@ -33,11 +32,5 @@ public class OutputView {
         stringBuilder.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 
         System.out.println(stringBuilder.toString());
-    }
-
-    private static String lottoNumbersToString(List<LottoNumber> lottoNumbers) {
-        return Arrays.toString(lottoNumbers.stream()
-                .mapToInt(LottoNumber::getValue)
-                .toArray());
     }
 }

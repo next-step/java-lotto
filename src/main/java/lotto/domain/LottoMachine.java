@@ -5,7 +5,6 @@ import lotto.domain.numbers.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class LottoMachine {
     private final LottoTicketFactory lottoTicketFactory;
@@ -18,8 +17,9 @@ public class LottoMachine {
 
     public LottoTickets makeLottoTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        IntStream.range(0, numberOfLottoTickets)
-                .forEach(i -> lottoTickets.add(lottoTicketFactory.makeLottoTicket()));
+        for (int index = 0; index < numberOfLottoTickets; index++) {
+            lottoTickets.add(lottoTicketFactory.makeLottoTicket());
+        }
         return new LottoTickets(lottoTickets);
     }
 }
