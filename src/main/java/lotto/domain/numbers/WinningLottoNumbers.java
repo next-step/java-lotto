@@ -9,13 +9,13 @@ public class WinningLottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public WinningLottoNumbers(String winningNumbers) {
+    public WinningLottoNumbers(final String winningNumbers) {
         this.lottoNumbers = Arrays.stream(winningNumbers.split(SPLIT_TEXT))
                 .map(number -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList());
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
+    public boolean isContain(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

@@ -6,11 +6,11 @@ import java.util.Map;
 public class LottoResult {
     private final Map<MatchPrize, Integer> result;
 
-    public LottoResult(Map<MatchPrize, Integer> result) {
+    public LottoResult(final Map<MatchPrize, Integer> result) {
         this.result = result;
     }
 
-    public int findByKey(MatchPrize matchPrize) {
+    public int findByKey(final MatchPrize matchPrize) {
         return result.get(matchPrize);
     }
 

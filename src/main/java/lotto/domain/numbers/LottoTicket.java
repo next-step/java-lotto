@@ -8,18 +8,18 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchWinningLottoNumbers(WinningLottoNumbers winningNumbers) {
+    public int matchWinningLottoNumbers(final WinningLottoNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningNumbers::isContain)
                 .count();
     }
 
-    private void validate(List<LottoNumber> lottoNumbers) {
+    private void validate(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 숫자가 부족합니다.");
         }

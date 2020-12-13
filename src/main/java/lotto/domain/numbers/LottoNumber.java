@@ -8,12 +8,12 @@ public class LottoNumber {
 
     private final int value;
 
-    public LottoNumber(int value) {
+    public LottoNumber(final int value) {
         validate(value);
         this.value = value;
     }
 
-    private void validate(int value) {
+    private void validate(final int value) {
         if (LOTTO_START_NUMBER > value || value > LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(
                     String.format("숫자는 %d부터 %d까지 여야 합니다.", LOTTO_START_NUMBER, LOTTO_END_NUMBER));

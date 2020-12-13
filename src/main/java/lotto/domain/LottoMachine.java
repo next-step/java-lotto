@@ -10,7 +10,7 @@ public class LottoMachine {
     private final LottoTicketFactory lottoTicketFactory;
     private final int numberOfLottoTickets;
 
-    public LottoMachine(int numberOfLottoTickets) {
+    public LottoMachine(final int numberOfLottoTickets) {
         this.lottoTicketFactory = new LottoTicketFactory();
         this.numberOfLottoTickets = numberOfLottoTickets;
     }
