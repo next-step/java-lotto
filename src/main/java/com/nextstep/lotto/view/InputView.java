@@ -23,4 +23,14 @@ public class InputView {
         BonusNumberInputView bonusNumberInputView = new BonusNumberInputView(SCANNER.nextInt());
         return bonusNumberInputView.parseToBonusNumber();
     }
+
+    public static int getNumberOfStaticLotto() {
+        int numberOfStaticLotto = SCANNER.nextInt();
+
+        if (numberOfStaticLotto < 0) {
+
+        }
+
+        return numberOfStaticLotto;
+    }
 }

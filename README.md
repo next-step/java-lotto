@@ -197,6 +197,9 @@
   - [X] 수동으로 구매할 로또 티켓 번호를 요청하는 메시지를 출력할 수 있다.
 - InputView(class)
   - [ ] 수동으로 구매할 로또 티켓 수를 입력받을 수 있다.
+- NumberOfStaticLotto(class)
+  - 사용자로부터 안전하게 수동으로 구매할 로또티켓 수를 입력받기 위한 오브젝트
+  - [ ] 음수로 오브젝트 생성 시도 시 예외가 발생한다.
 - WinningTicketInputView(class)
   - [ ] 수동 로또 티켓 입력 재사용 시에도 어색하지 않도록 이름을 변경한다.
 - BoughtHistoryOutputView(class)
