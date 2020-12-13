@@ -10,8 +10,8 @@ public enum LottoWinning {
     WIN_1ST(6, 2_000_000_000),
     ;
 
-    private int matchedCount;
-    private int winningPrice;
+    private final int matchedCount;
+    private final int winningPrice;
 
     LottoWinning(int matchedCount, int winningPrice) {
         this.matchedCount = matchedCount;
