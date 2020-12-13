@@ -1,5 +1,6 @@
 package com.nextstep.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,11 +19,11 @@ public class Lottos {
 
     public LottoStatistics getStatistics(String winningNumberString) {
         Lotto winningLotto = parseToLotto(winningNumberString);
-        LottoStatistics lottoStatistics = new LottoStatistics();
+        List<LottoWinning> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lottoStatistics.addCount(lotto.getWinning(winningLotto));
+            winnings.add(lotto.getWinning(winningLotto));
         }
-        return lottoStatistics;
+        return new LottoStatistics(winnings);
     }
 
     private Lotto parseToLotto(String winningNumberString) {

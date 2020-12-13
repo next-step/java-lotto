@@ -8,28 +8,37 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoStatisticsTest {
-    @DisplayName("등록 된 Lotto 개수 0일 때")
-    @Test
-    void profitRateZero() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        double actual = lottoStatistics.profitRate();
-        assertThat(actual).isEqualTo(0);
+    @DisplayName("당첨 결과가 null이나 empty일 때 체크")
+    @ParameterizedTest
+    @MethodSource
+    void profitRateEmpty(List<LottoWinning> list) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoStatistics(list));
+    }
+
+    private static Stream<Arguments> profitRateEmpty() {
+        return Stream.of(
+                Arguments.of(new ArrayList<>()),
+                Arguments.of((Object)null)
+        );
     }
 
     @DisplayName("당첨 복권 계수")
     @ParameterizedTest
     @MethodSource
     void countWinning(LottoWinning lottoWinning, int count) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
+        List<LottoWinning> list = new ArrayList<>();
         for ( int ix = 0 ; ix < count ; ix ++ ) {
-            lottoStatistics.addCount(lottoWinning);
+            list.add(lottoWinning);
         }
-
+        LottoStatistics lottoStatistics = new LottoStatistics(list);
         assertThat(lottoStatistics.getCount(lottoWinning)).isEqualTo(count);
     }
 
@@ -46,10 +55,11 @@ public class LottoStatisticsTest {
     @ParameterizedTest
     @MethodSource
     void profitRate(LottoWinning lottoWinning) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
+        List<LottoWinning> list = new ArrayList<>();
         for ( int ix = 0 ; ix < 5 ; ix ++ ) {
-            lottoStatistics.addCount(lottoWinning);
+            list.add(lottoWinning);
         }
+        LottoStatistics lottoStatistics = new LottoStatistics(list);
         double rate = (double)lottoWinning.getWinningPrice() * 5 / 5000;
         rate = new BigDecimal(rate).setScale(2, RoundingMode.DOWN).doubleValue();
         assertThat(lottoStatistics.profitRate()).isEqualTo(rate);

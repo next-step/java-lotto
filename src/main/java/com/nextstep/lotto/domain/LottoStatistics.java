@@ -3,20 +3,25 @@ package com.nextstep.lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private static final int ZERO = 0;
-    private int totalCount = 0;
     private final Map<LottoWinning, Integer> result = new HashMap<>();
 
-    public void addCount(LottoWinning lottoWinning) {
+    public LottoStatistics(List<LottoWinning> lottoWinnings) {
+        if (lottoWinnings == null || lottoWinnings.isEmpty()) {
+            throw new IllegalArgumentException("empty value is invalid");
+        }
+        lottoWinnings.forEach(this::addCount);
+    }
+
+    private void addCount(LottoWinning lottoWinning) {
         int count = 0;
         if (result.containsKey(lottoWinning)) {
             count = result.get(lottoWinning);
         }
         result.put(lottoWinning, count + 1);
-        totalCount++;
     }
 
     public int getCount(LottoWinning lottoWinning) {
@@ -27,14 +32,16 @@ public class LottoStatistics {
     }
 
     public double profitRate() {
-        if (result.isEmpty()) {
-            return ZERO;
-        }
-
-        int totalPrice = totalCount * LottoSeller.LOTTO_PRICE;
+        int totalPrice = getTotalCount() * LottoSeller.LOTTO_PRICE;
         double totalProfit = getTotalProfit();
         double profitRate = totalProfit / totalPrice;
         return new BigDecimal(profitRate).setScale(2, RoundingMode.DOWN).doubleValue();
+    }
+
+    private int getTotalCount() {
+        return result.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private double getTotalProfit() {
