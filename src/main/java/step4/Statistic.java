@@ -1,6 +1,6 @@
-package step3;
+package step4;
 
-import step3.VO.Money;
+import step4.VO.Money;
 
 import java.util.HashMap;
 import java.util.Map;

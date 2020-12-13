@@ -1,8 +1,9 @@
-package step3.VO;
+package step4.VO;
 
-import step3.LottoGenerator;
-import step3.ResultNumber;
-import step3.Statistic;
+import step4.LottoGenerator;
+import step4.ResultNumber;
+import step4.Statistic;
+import step4.View.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,8 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public void buyAutoLotto(Money money, LottoGenerator lottoGenerator) {
-        for (int i = 1; i <= money.getLottoCnt(); i++) {
-            buyLotto(lottoGenerator);
-        }
+    public int getAutoLottoCnt(Money money) {
+        return money.getLottoCnt()-lottoList.size();
     }
 
     public void checkResult(Statistic statistic, ResultNumber resultNumber) {
@@ -22,8 +21,8 @@ public class Lottos {
         }
     }
 
-    private void buyLotto(LottoGenerator lottoGenerator){
-        lottoList.add(new Lotto(lottoGenerator));
+    public void inputLotto(Lotto lotto){
+        lottoList.add(lotto);
     }
 
     public List<Lotto> getLottoList(){

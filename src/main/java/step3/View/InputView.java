@@ -17,6 +17,10 @@ public class InputView {
         return Integer.parseInt(getAnswer("구입금액을 입력해 주세요"));
     }
 
+    public static int getManualLotto(){
+        return Integer.parseInt(getAnswer("수동으로 구매할 로또 수를 입력해 주세요."));
+    }
+
     private static String getAnswer(String text){
         System.out.println(text);
         return scanner.nextLine();

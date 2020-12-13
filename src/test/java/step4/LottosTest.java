@@ -1,9 +1,10 @@
-package step3;
+package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.VO.Lottos;
-import step3.VO.Money;
+import step4.VO.LottoStore;
+import step4.VO.Lottos;
+import step4.VO.Money;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -14,7 +15,7 @@ public class LottosTest {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Money money = new Money(6500);
         Lottos lottos = new Lottos();
-        lottos.buyAutoLotto(money, lottoGenerator);
+        LottoStore.buyAutoLottos(lottos, money, lottoGenerator);
 
         assertThat(lottos.getLottoList().size()).isEqualTo(6500/Money.lottoPrice);
     }

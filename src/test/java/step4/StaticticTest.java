@@ -1,9 +1,9 @@
-package step3;
+package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.VO.Lottos;
-import step3.VO.Money;
+import step4.VO.Lottos;
+import step4.VO.Money;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -24,10 +24,7 @@ public class StaticticTest {
         main.buyAutoLottos(lottos, money, fourWinningsGenerator);
 
         Statistic statistic = new Statistic();
-        ResultNumber resultNumber = new ResultNumber();
-
-        resultNumber.settingLottoResultNumber("1, 3, 5, 7, 10, 11");
-        resultNumber.settingLottoBonusNumber("12");
+        ResultNumber resultNumber = new ResultNumber("1, 3, 5, 7, 10, 11", "12");
 
         lottos.checkResult(statistic, resultNumber);
 
