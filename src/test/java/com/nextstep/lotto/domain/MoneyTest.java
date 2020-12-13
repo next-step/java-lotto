@@ -55,4 +55,24 @@ class MoneyTest {
                 Arguments.of(10, new Money(0L))
         );
     }
+
+    @DisplayName("원금으로 구매할 수 있는 LottoTicket의 수보다 더 많이 구매를 시도할 수 없다.")
+    @Test
+    void minusBoughtLottoTicketsFailByWrongDomainCaseTest() {
+        int exceedValue = 11;
+        Money originalMoney = new Money(10000L);
+
+        assertThatThrownBy(() -> originalMoney.minusBoughtLottoTickets(11))
+                .isInstanceOf(InvalidMoneyException.class);
+    }
+
+    @DisplayName("음수로 LottoTicket을 구매 시도할 수 없다.")
+    @Test
+    void minusBoughtLottoTicketsFailByInvalidValueTest() {
+        int invalidValue = -3;
+        Money originalMoney = new Money(10000L);
+
+        assertThatThrownBy(() -> originalMoney.minusBoughtLottoTickets(invalidValue))
+                .isInstanceOf(InvalidMoneyException.class);
+    }
 }
