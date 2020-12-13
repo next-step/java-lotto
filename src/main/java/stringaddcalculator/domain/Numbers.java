@@ -24,14 +24,13 @@ public class Numbers {
 	}
 
 	private int parser(String str) {
-		int result = 0;
 		try {
-			result = Integer.parseInt(str);
+			int result = Integer.parseInt(str);
 			checkPositiveNumber(result);
+			return result;
 		} catch (NumberFormatException e) {
 			throw new RuntimeException("입력된 숫자가 올바르지 않습니다.");
 		}
-		return result;
 	}
 
 	private void checkPositiveNumber(int result) {
