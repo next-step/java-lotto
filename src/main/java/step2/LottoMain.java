@@ -10,6 +10,7 @@ public class LottoMain {
     String lottoPrice = InputView.getLottoPrice();
     LottoGame game = new LottoGame(Integer.parseInt(lottoPrice));
     OutputView.printLottoCount(game.getCount());
+    OutputView.printLottoList(game.getUserLottoList());
     System.out.println();
 
     String winning = InputView.getWinningNumbers();
