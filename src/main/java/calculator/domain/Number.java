@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Number {
 
     public static final String NEGATIVE_VALUE_INCLUDE_ERROR = "문자열에 음수값이 포함되어 있습니다.";
+    public static final int ZERO = 0;
 
     private final int value;
 
@@ -14,7 +15,7 @@ public class Number {
     }
 
     private void validatePositiveNumber(int value) {
-        if (value < 0) {
+        if (value < ZERO) {
             throw new RuntimeException(NEGATIVE_VALUE_INCLUDE_ERROR);
         }
     }
@@ -24,7 +25,7 @@ public class Number {
     }
 
     public static Number zero() {
-        return new Number(0);
+        return new Number(ZERO);
     }
 
     public Number plus(Number number) {
