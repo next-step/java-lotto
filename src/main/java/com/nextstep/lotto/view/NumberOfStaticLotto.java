@@ -18,4 +18,8 @@ public class NumberOfStaticLotto {
             throw new InvalidNumberOfStaticLottoException("수동 로또 구입은 0장 이상만 가능합니다.");
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }

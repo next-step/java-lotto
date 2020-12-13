@@ -27,10 +27,6 @@ public class InputView {
     public static int getNumberOfStaticLotto() {
         int numberOfStaticLotto = SCANNER.nextInt();
 
-        if (numberOfStaticLotto < 0) {
-
-        }
-
-        return numberOfStaticLotto;
+        return new NumberOfStaticLotto(numberOfStaticLotto).getValue();
     }
 }
