@@ -4,9 +4,8 @@ import java.util.Objects;
 
 public class Number {
 
-    public static final String NEGATIVE_VALUE_INCLUDE_ERROR = "문자열에 음수값이 포함되어 있습니다.";
-    public static final int ZERO = 0;
-
+    private static final String NEGATIVE_VALUE_INCLUDE_ERROR = "문자열에 음수값이 포함되어 있습니다.";
+    private static final int ZERO = 0;
     private final int value;
 
     private Number(int value) {
