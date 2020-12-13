@@ -10,9 +10,9 @@ public enum MatchPrize {
     SIX(6, 2000000000);
 
     private final int matchCount;
-    private final int money;
+    private final long money;
 
-    MatchPrize(int matchCount, int money) {
+    MatchPrize(int matchCount, long money) {
         this.matchCount = matchCount;
         this.money = money;
     }
@@ -28,7 +28,7 @@ public enum MatchPrize {
         return matchCount;
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 }
