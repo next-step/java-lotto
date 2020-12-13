@@ -19,7 +19,7 @@ public class Numbers {
 	public Numbers(String target) {
 		String[] splits = split(target);
 		numbers = Arrays.stream(splits)
-			.map(str -> parser(str))
+			.map(this::parser)
 			.collect(Collectors.toList());
 	}
 
