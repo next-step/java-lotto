@@ -11,30 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-class LottoNumberTest {
+import static step2.domain.LottoNumberTest.generateLottoNumber_1to6;
 
-    LottoNumber lottoNumber;
+class LottoNumbersTest {
+
+    private LottoNumbers lottoNumbers;
 
     @BeforeEach
     void setUp() {
-        lottoNumber = generateLottoNumber_1to6();
+        List<LottoNumber> numbers = new ArrayList<>();
+        numbers.add(generateLottoNumber_1to6());
+        numbers.add(generateLottoNumber_1to6());
+        lottoNumbers = new LottoNumbers(numbers);
     }
 
     @ParameterizedTest
-    @MethodSource("generateLottoData")
-    @DisplayName("로또번호가 1,2,3,4,5,6일 때 당첨번호들과 일치하는 개수 기능 테스트 ")
-    void equal_lottoNumber_count(String input, int expected) {
+    @MethodSource("generateLottoNumbersData")
+    @DisplayName("당첨개수 기능 테스트 (로또(1-6) 2개를 샀을 때, 각각 당첨개수를 2개씩 가지고 있는다)")
+    void check(String input, int expected) {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lottoNumber.equalCheck(new Number(Integer.parseInt(winningNumber)));
+            lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(winningNumber)));
         }
 
-        Assertions.assertEquals(lottoNumber.getCount(), expected);
+        Assertions.assertEquals(lottoNumbers.lottoWinningResult().get(expected), 2);
     }
 
-
-    static Stream<Arguments> generateLottoData() {
+    static Stream<Arguments> generateLottoNumbersData() {
         return Stream.of(
                 Arguments.of("1,2,3,14,15,16", 3),
                 Arguments.of("1,2,3,4,15,16", 4),
@@ -43,11 +47,7 @@ class LottoNumberTest {
         );
     }
 
-    public static LottoNumber generateLottoNumber_1to6() {
-        List<Number> numbers = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
-            numbers.add(new Number(i));
-        }
-        return new LottoNumber(numbers);
-    }
+
+
+
 }
