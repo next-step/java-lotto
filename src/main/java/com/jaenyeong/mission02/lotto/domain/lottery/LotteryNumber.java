@@ -11,8 +11,8 @@ public class LotteryNumber {
     private static final int RANDOM_VALUE = 0;
     private static final int EXIST = 0;
     private static final int EMPTY = 0;
-    public static final String ERR_TEXT_THERE_IS_NOT_NUMBER = "[error] There is no number to choose from list.";
-    public static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
+    private static final String ERR_TEXT_THERE_IS_NOT_NUMBER = "[error] There is no number to choose from list.";
+    private static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
     private final int lotteryNumber;
 
     private LotteryNumber(final int lotteryNumber) {
