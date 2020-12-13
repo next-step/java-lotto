@@ -12,6 +12,7 @@ public class LotteryNumber {
     private static final int EXIST = 0;
     private static final int EMPTY = 0;
     public static final String ERR_TEXT_THERE_IS_NOT_NUMBER = "[error] There is no number to choose from list.";
+    public static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
     private final int lotteryNumber;
 
     private LotteryNumber(final int lotteryNumber) {
@@ -49,6 +50,14 @@ public class LotteryNumber {
 
     private static boolean isEmpty(final List<Integer> numbersIntegers) {
         return numbersIntegers.size() == EMPTY;
+    }
+
+    public static LotteryNumber ofManual(final int givenNumber) {
+        if ((START_NUMBER <= givenNumber) && (givenNumber <= END_NUMBER)) {
+            return new LotteryNumber(givenNumber);
+        }
+
+        throw new IllegalArgumentException(ERR_TEXT_INVALID_NUMBER);
     }
 
     public int getLotteryNumber() {

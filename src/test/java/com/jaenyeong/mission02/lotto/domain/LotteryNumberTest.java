@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,5 +58,28 @@ class LotteryNumberTest {
                 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
                 41, 42, 43, 44, 45))
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 4, 12, 27, 33, 43, 21, 38, 2, 16, 19, 39, 41, 45})
+    @DisplayName("유효한 숫자가 주어진 경우 복권 번호 객체의 생성을 확인하는 테스트")
+    void createLotteryNumberWhenGivenValidNumber(final int givenNumber) {
+        final LotteryNumber lotteryNumber = LotteryNumber.ofManual(givenNumber);
+
+        final int start = 1;
+        final int end = 45;
+
+        assertThat(lotteryNumber.getLotteryNumber()).isBetween(start, end);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 46, 100, -55})
+    @DisplayName("유효하지 않은 숫자가 주어진 경우 복권 번호 객체의 생성을 확인하는 테스트")
+    void createLotteryNumberWhenGivenInvalidNumber(final int givenNumber) {
+        assertThatThrownBy(() -> {
+            final LotteryNumber lotteryNumber = LotteryNumber.ofManual(givenNumber);
+        })
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("[error] This number is not valid.");
     }
 }
