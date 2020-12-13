@@ -29,7 +29,7 @@ public enum  LottoRank {
                 .orElse(LottoRank.NONE);
     }
 
-    public int reward() {
+    public long reward() {
         return expression.get();
     }
 }
