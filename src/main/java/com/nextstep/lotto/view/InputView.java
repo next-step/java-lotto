@@ -14,9 +14,9 @@ public class InputView {
         return moneyInputView.parseMoney();
     }
 
-    public static LottoTicket getWinningTicket() {
-        LottoTicketInputView winningInputView = new LottoTicketInputView(SCANNER.nextLine());
-        return winningInputView.parseToLottoTicket();
+    public static LottoTicket getLottoTicket() {
+        LottoTicketInputView lottoTicketInputView = new LottoTicketInputView(SCANNER.nextLine());
+        return lottoTicketInputView.parseToLottoTicket();
     }
 
     public static LottoNumber getBonusNumber() {
@@ -26,7 +26,12 @@ public class InputView {
 
     public static int getNumberOfStaticLotto() {
         int numberOfStaticLotto = SCANNER.nextInt();
+        eraseEmptyLine();
 
         return new NumberOfStaticLotto(numberOfStaticLotto).getValue();
+    }
+
+    private static void eraseEmptyLine() {
+        SCANNER.nextLine(); // 사용자가 숫자와 함께 입력한 엔터를 없애기 위한 조치
     }
 }
