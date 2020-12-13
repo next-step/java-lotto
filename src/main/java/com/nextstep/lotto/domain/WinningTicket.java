@@ -14,6 +14,7 @@ public class WinningTicket {
     }
 
     public Rank calculateRank(LottoTicket candidateTicket) {
+        System.out.println(candidateTicket.countMatchedNumbers(lottoTicket));
         return Rank.find(
                 candidateTicket.countMatchedNumbers(lottoTicket),
                 candidateTicket.isContains(bonusNumber)

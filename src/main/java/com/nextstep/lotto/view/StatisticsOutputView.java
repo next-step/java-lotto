@@ -4,7 +4,6 @@ import com.nextstep.lotto.domain.LottoPrize;
 import com.nextstep.lotto.domain.Money;
 import com.nextstep.lotto.domain.Rank;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,7 @@ public class StatisticsOutputView {
             return parseSecondRankDescription();
         }
 
-        return rank.getNumberOfMatchedNumber() +
+        return rank.getMatchedNumberCount() +
                 normalRankHeader +
                 rank.getMoneyValue() +
                 normalRankFooter;
@@ -41,7 +40,7 @@ public class StatisticsOutputView {
         String secondRankHeader = "개 일치, 보너스 볼 일치(";
         String secondRankFooter = "원)";
 
-        return Rank.SECOND.getNumberOfMatchedNumber() +
+        return Rank.SECOND.getMatchedNumberCount() +
                 secondRankHeader +
                 Rank.SECOND.getMoneyValue() +
                 secondRankFooter;

@@ -24,11 +24,11 @@ public class LottoTicket {
         return new ArrayList<>(lottoNumbers);
     }
 
-    int countMatchedNumbers(LottoTicket thatTicket) {
+    MatchedNumberCount countMatchedNumbers(LottoTicket thatTicket) {
         List<LottoNumber> matchedNumbers = lottoNumbers.stream()
                 .filter(thatTicket::isContains)
                 .collect(Collectors.toList());
-        return matchedNumbers.size();
+        return new MatchedNumberCount(matchedNumbers.size());
     }
 
     boolean isContains(LottoNumber lottoNumber) {

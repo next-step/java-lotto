@@ -183,11 +183,11 @@
 
 ### Todo-list
 - Rank(class)
-  - [ ] 제약 조건을 지키기 위해 원시 타입 numberOfMatchedNumber를 래퍼 클래스로 대체한다.
+  - [X] 제약 조건을 지키기 위해 원시 타입 numberOfMatchedNumber를 래퍼 클래스로 대체한다.
 - MatchedNumber(class)
   - 당첨 티켓과 로또 티켓간의 일치하는 LottoNumber의 수를 관리하는 클래스
-  - [ ] 6을 넘길 수 없다.
-  - [ ] 음수가 존재할 수 없다.
+  - [X] 6을 넘길 수 없다.
+  - [X] 음수가 존재할 수 없다.
 - OutputView(class)
   - [ ] 수동으로 구매할 로또 수를 요청하는 메시지를 출력할 수 있다.
   - [ ] 수동으로 구매할 로또 티켓 번호를 요청하는 메시지를 출력할 수 있다.
