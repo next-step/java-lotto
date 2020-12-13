@@ -13,9 +13,9 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchWinningLottoNumbers(List<LottoNumber> winningNumbers) {
+    public int matchWinningLottoNumbers(WinningLottoNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningNumbers::isContain)
                 .count();
     }
 

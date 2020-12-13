@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,20 +41,15 @@ class LottoTicketTest {
     @DisplayName("당첨 번호와 비교하여 맞춘 갯수를 리턴한다.")
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
-    void matchWinningLottoNumbers(List<Integer> numbers, int expected) {
-        List<LottoNumber> winningNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        int result = lottoTicket.matchWinningLottoNumbers(winningNumbers);
-
+    void matchWinningLottoNumbers(String numbers, int expected) {
+        int result = lottoTicket.matchWinningLottoNumbers(new WinningLottoNumbers(numbers));
         assertThat(result).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideWinningNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 8, 10, 15, 22, 35), 3),
-                Arguments.of(Arrays.asList(1, 8, 10, 14, 21, 40), 5)
+                Arguments.of("1, 8, 10, 15, 22, 35", 3),
+                Arguments.of("1, 8, 10, 14, 21, 40", 5)
         );
     }
 }

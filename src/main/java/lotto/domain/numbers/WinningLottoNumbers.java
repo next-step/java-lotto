@@ -15,6 +15,10 @@ public class WinningLottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

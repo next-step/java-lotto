@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.numbers.LottoTickets;
+import lotto.domain.numbers.WinningLottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,11 +37,8 @@ class LottoGameTest {
     @DisplayName("발급한 로또 티켓들과 당첨 번호를 비교하여 각 맞춘 갯수들을 저장하여 리턴한다.")
     @Test
     void matchNumbers() {
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        Arrays.asList(1, 8, 10, 14, 21, 40)
-                .forEach(num -> winningNumbers.add(new LottoNumber(num)));
+        Map<MatchPrize, Integer> results = lottoGame.matchNumbers(new WinningLottoNumbers("1, 8, 10, 14, 21, 40"));
 
-        Map<MatchPrize, Integer> results = lottoGame.matchNumbers(winningNumbers);
         assertThat(results.get(MatchPrize.THREE)).isEqualTo(1);
         assertThat(results.get(MatchPrize.FOUR)).isZero();
         assertThat(results.get(MatchPrize.FIVE)).isEqualTo(1);
