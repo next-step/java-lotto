@@ -7,26 +7,26 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private final Map<LottoWinning, Integer> result = new HashMap<>();
+    private final Map<LottoRank, Integer> result = new HashMap<>();
 
-    public LottoStatistics(List<LottoWinning> lottoWinnings) {
-        if (lottoWinnings == null || lottoWinnings.isEmpty()) {
+    public LottoStatistics(List<LottoRank> lottoRanks) {
+        if (lottoRanks == null || lottoRanks.isEmpty()) {
             throw new IllegalArgumentException("empty value is invalid");
         }
-        lottoWinnings.forEach(this::addCount);
+        lottoRanks.forEach(this::addCount);
     }
 
-    private void addCount(LottoWinning lottoWinning) {
+    private void addCount(LottoRank lottoRank) {
         int count = 0;
-        if (result.containsKey(lottoWinning)) {
-            count = result.get(lottoWinning);
+        if (result.containsKey(lottoRank)) {
+            count = result.get(lottoRank);
         }
-        result.put(lottoWinning, count + 1);
+        result.put(lottoRank, count + 1);
     }
 
-    public int getCount(LottoWinning lottoWinning) {
-        if (result.containsKey(lottoWinning)) {
-            return result.get(lottoWinning);
+    public int getCount(LottoRank lottoRank) {
+        if (result.containsKey(lottoRank)) {
+            return result.get(lottoRank);
         }
         return 0;
     }
@@ -46,9 +46,9 @@ public class LottoStatistics {
 
     private double getTotalProfit() {
         return result.entrySet().stream().mapToDouble(entry -> {
-            LottoWinning lottoWinning = entry.getKey();
+            LottoRank lottoRank = entry.getKey();
             int count = entry.getValue();
-            return (double)lottoWinning.getWinningPrice() * count;
+            return (double) lottoRank.getWinningPrice() * count;
         }).sum();
     }
 }

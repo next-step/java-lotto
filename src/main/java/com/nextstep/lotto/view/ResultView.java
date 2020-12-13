@@ -1,7 +1,7 @@
 package com.nextstep.lotto.view;
 
 import com.nextstep.lotto.domain.LottoStatistics;
-import com.nextstep.lotto.domain.LottoWinning;
+import com.nextstep.lotto.domain.LottoRank;
 import com.nextstep.lotto.domain.Lottos;
 
 public class ResultView {
@@ -19,20 +19,20 @@ public class ResultView {
     }
 
     private static void printWinnings(LottoStatistics lottoStatistics) {
-        for (LottoWinning lottoWinning : LottoWinning.values()) {
-            printWinning(lottoWinning, lottoStatistics.getCount(lottoWinning));
+        for (LottoRank lottoRank : LottoRank.values()) {
+            printWinning(lottoRank, lottoStatistics.getCount(lottoRank));
         }
     }
 
-    private static void printWinning(LottoWinning lottoWinning, int count) {
-        if (LottoWinning.RETIRE != lottoWinning) {
-            System.out.printf(getPrintWinningFormat(lottoWinning), lottoWinning.getMatchedCount(), lottoWinning.getWinningPrice(), count);
+    private static void printWinning(LottoRank lottoRank, int count) {
+        if (LottoRank.RETIRE != lottoRank) {
+            System.out.printf(getPrintWinningFormat(lottoRank), lottoRank.getMatchedCount(), lottoRank.getWinningPrice(), count);
             System.out.println();
         }
     }
 
-    private static String getPrintWinningFormat(LottoWinning lottoWinning) {
-        if (lottoWinning == LottoWinning.WIN_2ND) {
+    private static String getPrintWinningFormat(LottoRank lottoRank) {
+        if (lottoRank == LottoRank.WIN_2ND) {
             return "%s개 일치, 보너스 볼 일치(%s원)- %s개";
         }
         return "%s개 일치 (%s원)- %s개";

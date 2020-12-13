@@ -26,7 +26,7 @@ public class LottosTest {
     @DisplayName("Statistic 정상 반환 확인")
     @ParameterizedTest
     @MethodSource
-    void getStatistics(List<Integer> numbers, LottoWinning expected) {
+    void getStatistics(List<Integer> numbers, LottoRank expected) {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(numbers)));
         LottoStatistics statistics = lottos.getStatistics("1,2,3,4,5,6", 7);
 
@@ -35,12 +35,12 @@ public class LottosTest {
 
     private static Stream<Arguments> getStatistics() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoWinning.WIN_1ST),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoWinning.WIN_2ND),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), LottoWinning.WIN_3RD),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), LottoWinning.WIN_4TH),
-                Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), LottoWinning.WIN_5TH),
-                Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), LottoWinning.RETIRE)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoRank.WIN_1ST),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoRank.WIN_2ND),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), LottoRank.WIN_3RD),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), LottoRank.WIN_4TH),
+                Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), LottoRank.WIN_5TH),
+                Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), LottoRank.RETIRE)
         );
     }
 

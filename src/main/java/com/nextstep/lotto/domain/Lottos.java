@@ -19,7 +19,7 @@ public class Lottos {
 
     public LottoStatistics getStatistics(String winningNumberString, int bonusNumber) {
         WinningLotto winningLotto = parseToLotto(winningNumberString, bonusNumber);
-        List<LottoWinning> winnings = new ArrayList<>();
+        List<LottoRank> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winnings.add(lotto.getWinning(winningLotto));
         }

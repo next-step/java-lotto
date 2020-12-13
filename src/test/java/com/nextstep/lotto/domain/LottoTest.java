@@ -22,21 +22,21 @@ public class LottoTest {
     @DisplayName("로또 당첨 확인")
     @ParameterizedTest
     @MethodSource
-    void getWinning(Lotto lotto, LottoWinning expected) {
+    void getWinning(Lotto lotto, LottoRank expected) {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
-        LottoWinning lottoWinning = lotto.getWinning(winningLotto);
-        assertThat(lottoWinning).isEqualTo(expected);
+        LottoRank lottoRank = lotto.getWinning(winningLotto);
+        assertThat(lottoRank).isEqualTo(expected);
 
     }
 
     private static Stream<Arguments> getWinning() {
         return Stream.of(
-                Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,6)), LottoWinning.WIN_1ST),
-                Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,7)), LottoWinning.WIN_2ND),
-                Arguments.of(new Lotto(Arrays.asList(11,2,3,4,5,6)), LottoWinning.WIN_3RD),
-                Arguments.of(new Lotto(Arrays.asList(11,12,3,4,5,6)), LottoWinning.WIN_4TH),
-                Arguments.of(new Lotto(Arrays.asList(11,12,13,4,5,6)), LottoWinning.WIN_5TH),
-                Arguments.of(new Lotto(Arrays.asList(11,12,13,14,5,6)), LottoWinning.RETIRE)
+                Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,6)), LottoRank.WIN_1ST),
+                Arguments.of(new Lotto(Arrays.asList(1,2,3,4,5,7)), LottoRank.WIN_2ND),
+                Arguments.of(new Lotto(Arrays.asList(11,2,3,4,5,6)), LottoRank.WIN_3RD),
+                Arguments.of(new Lotto(Arrays.asList(11,12,3,4,5,6)), LottoRank.WIN_4TH),
+                Arguments.of(new Lotto(Arrays.asList(11,12,13,4,5,6)), LottoRank.WIN_5TH),
+                Arguments.of(new Lotto(Arrays.asList(11,12,13,14,5,6)), LottoRank.RETIRE)
         );
     }
 }

@@ -20,10 +20,10 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoWinning getWinning(WinningLotto winningLotto) {
+    public LottoRank getWinning(WinningLotto winningLotto) {
         long matchedCount = getMatchedCount(winningLotto);
         boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
-        return LottoWinning.select(matchedCount, matchedBonus);
+        return LottoRank.select(matchedCount, matchedBonus);
     }
 
     private long getMatchedCount(Lotto winningLotto) {

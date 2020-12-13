@@ -2,7 +2,7 @@ package com.nextstep.lotto.domain;
 
 import java.util.stream.Stream;
 
-public enum LottoWinning {
+public enum LottoRank {
     RETIRE(0, 0),
     WIN_5TH(3, 5_000),
     WIN_4TH(4, 50_000),
@@ -24,7 +24,7 @@ public enum LottoWinning {
     protected final int matchedCount;
     private final int winningPrice;
 
-    LottoWinning(int matchedCount, int winningPrice) {
+    LottoRank(int matchedCount, int winningPrice) {
         this.matchedCount = matchedCount;
         this.winningPrice = winningPrice;
     }
@@ -41,8 +41,8 @@ public enum LottoWinning {
         return this.matchedCount == matchedCount;
     }
 
-    public static LottoWinning select(long matchedCount, boolean matchedBonus) {
-        return Stream.of(LottoWinning.values())
+    public static LottoRank select(long matchedCount, boolean matchedBonus) {
+        return Stream.of(LottoRank.values())
                 .filter(lottoWinning -> lottoWinning.isMatched(matchedCount, matchedBonus))
                 .findFirst()
                 .orElse(RETIRE);
