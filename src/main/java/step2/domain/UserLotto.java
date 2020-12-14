@@ -21,6 +21,11 @@ public class UserLotto {
     this.matchCount = initMatchCount(winningLotto);
   }
 
+  public boolean hasBonusNo(int bonusNo) {
+    return this.numbers.stream()
+        .anyMatch(number -> number.get() == bonusNo);
+  }
+
   private int initMatchCount(WinningLotto winningLotto) {
     int matchCount = 0;
     for(Number winningNumber : winningLotto.getNumbers()) {
