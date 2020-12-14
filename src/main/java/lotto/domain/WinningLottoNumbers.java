@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
  * @date : 2020/12/14
  * @description :
  **/
-public class WinningLottoNumber {
-	private static final String REGEX = ", ";
+public class WinningLottoNumbers {
+	private static final String REGEX = ",";
 	private static final int LOTTO_TICKET_WINNING_COUNT = 6;
 	private Set<LottoNumber> lottoTicketNumbers;
 
-	public WinningLottoNumber(String arg) {
+	public WinningLottoNumbers(String arg) {
 		lottoTicketNumbers = convertUserInput(arg);
 	}
 
@@ -40,7 +40,8 @@ public class WinningLottoNumber {
 
 	private LottoNumber parser(String str) {
 		try {
-			int result = Integer.parseInt(str);
+			String trimmed = str.trim();
+			int result = Integer.parseInt(trimmed);
 			return new LottoNumber(result);
 		} catch (NumberFormatException e) {
 			throw new RuntimeException("입력된 당첨번호가 올바르지 않습니다.");
@@ -49,5 +50,9 @@ public class WinningLottoNumber {
 
 	private String[] split(String arg) {
 		return arg.split(REGEX);
+	}
+
+	public Set<LottoNumber> getLottoTicketNumbers() {
+		return lottoTicketNumbers;
 	}
 }

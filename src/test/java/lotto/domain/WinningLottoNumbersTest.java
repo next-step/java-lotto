@@ -1,18 +1,15 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import stringaddcalculator.domain.StringAddCalculator;
 
 /**
  * @author : byungkyu
@@ -20,7 +17,7 @@ import stringaddcalculator.domain.StringAddCalculator;
  * @description :
  **/
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class WinningLottoNumberTest {
+public class WinningLottoNumbersTest {
 
 	@Order(1)
 	@DisplayName("1. 당첨 번호는 빈 값을 입력할 수 없다.")
@@ -31,7 +28,7 @@ public class WinningLottoNumberTest {
 	public void inputCannotNullOrEmpty(String arg) {
 
 		assertThatThrownBy(() -> {
-			WinningLottoNumber winningLottoNumber = new WinningLottoNumber(arg);
+			WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(arg);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("지난 주 당첨 번호를 입력해 주세요.");
 	}
@@ -43,7 +40,7 @@ public class WinningLottoNumberTest {
 	public void inputCannotDuplicate(String arg) {
 
 		assertThatThrownBy(() -> {
-			WinningLottoNumber winningLottoNumber = new WinningLottoNumber(arg);
+			WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(arg);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("서로 다른 6개의 당첨 번호를 입력해 주세요.");
 	}

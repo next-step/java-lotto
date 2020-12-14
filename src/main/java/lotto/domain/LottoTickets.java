@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,5 +57,16 @@ public class LottoTickets {
 
 	public int getTicketCount() {
 		return lottoTickets.size();
+	}
+
+	public List<LottoTicket> getLottoTickets() {
+		return lottoTickets;
+	}
+
+	@Override
+	public String toString() {
+		return "LottoTickets{" +
+			"lottoTickets=" + lottoTickets +
+			'}';
 	}
 }

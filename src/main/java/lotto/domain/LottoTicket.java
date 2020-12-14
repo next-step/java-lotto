@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,4 +34,10 @@ public class LottoTicket {
 		return lottoTicketNumbers;
 	}
 
+	@Override
+	public String toString() {
+		return "LottoTicket{" +
+			"lottoTicketNumbers=" + lottoTicketNumbers +
+			'}';
+	}
 }
