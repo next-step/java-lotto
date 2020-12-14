@@ -53,7 +53,7 @@ public class WinningNumberTest {
 	}
 
 	@Test
-	@DisplayName("6개중 5개가 일치하면 3등이어야한다.")
+	@DisplayName("6개중 5개가 일치하고 보너스 숫자가 일치하지 않으면 3등이어야한다.")
 	void matchFiveNumberTest() {
 		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 11, 19, 28, 42));
 		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.THIRD);
@@ -74,10 +74,31 @@ public class WinningNumberTest {
 	}
 
 	@Test
-	@DisplayName("6개중 5개가 일치하고 보너스 숫자가 일치하면 2등이어야한다.")
-	void matchFiveNumberAndBonusTest() {
-		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 11, 19, 28, 45));
-		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.SECOND);
+	@DisplayName("6개중 0개가 일치하고 보너스 숫자가 일치해도 등수가 없어야한다.")
+	void matchZeroNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(39, 40, 41, 42, 43, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.NOTHING);
+	}
+
+	@Test
+	@DisplayName("6개중 1개가 일치하고 보너스 숫자가 일치해도 등수가 없어야한다.")
+	void matchOneNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(11, 40, 41, 42, 43, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.NOTHING);
+	}
+
+	@Test
+	@DisplayName("6개중 2개가 일치하고 보너스 숫자가 일치해도 등수가 없어야한다.")
+	void matchTwoNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 9, 10, 11, 12, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.NOTHING);
+	}
+
+	@Test
+	@DisplayName("6개중 3개가 일치하고 보너스 숫자가 일치해도 5등이어야한다.")
+	void matchThreeNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(4, 6, 11, 19, 39, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.FIFTH);
 	}
 
 	@Test
@@ -85,5 +106,12 @@ public class WinningNumberTest {
 	void matchFourNumberAndBonusTest() {
 		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(6, 8, 11, 19, 39, 45));
 		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.FOURTH);
+	}
+
+	@Test
+	@DisplayName("6개중 5개가 일치하고 보너스 숫자가 일치하면 2등이어야한다.")
+	void matchFiveNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 11, 19, 28, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.SECOND);
 	}
 }
