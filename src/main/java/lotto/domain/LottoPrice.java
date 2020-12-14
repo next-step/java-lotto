@@ -12,29 +12,32 @@ public class LottoPrice {
 	}
 
 	public int getManualCount() {
-		return manualCount;
+		return this.manualCount;
 	}
 
-	public boolean availablePurchaseManualAmount() {
-		return amountMoney < getManualPurchaseAmount();
-	}
-
-	public int availablePurchaseAutoAmount() {
-		return getAutoPurchaseAmount() / PRICE_PER_TICKET;
-	}
-
-	private int getAutoPurchaseAmount() {
-		return this.amountMoney - getManualPurchaseAmount();
-	}
-
-	private int getManualPurchaseAmount() {
+	private int getManualAmount() {
 		return this.manualCount * PRICE_PER_TICKET;
 	}
 
+	public boolean availablePurchaseManualAmount(int nowNumberOfTicket) {
+		return nowNumberOfTicket >= this.manualCount;
+	}
+
+	public boolean availablePurchaseAutoAmount(int nowNumberOfTicket) {
+		return nowNumberOfTicket < getAutoCount();
+	}
+
+	public int getAutoCount() {
+		return (this.amountMoney / PRICE_PER_TICKET) - this.manualCount;
+	}
 
 	private void isGraterThanTicketPerPrice() {
 		if (this.amountMoney < PRICE_PER_TICKET) {
 			throw new IllegalArgumentException("티켓의 가격보다 구매 가격이 낮습니다.");
+		}
+
+		if (this.amountMoney < getManualAmount()) {
+			throw new IllegalArgumentException("수동으로 구매 불가능한 개수 입니다.");
 		}
 	}
 

@@ -12,7 +12,15 @@ public class InputView {
 	}
 
 	public static String askToUserPurchaseNumberOfManual() {
-		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.\n");
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		return in.nextLine();
+	}
+
+	public static void printPleaseInputManuallyNumber() {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+	}
+
+	public static String enterPurchaseManuallyNumber() {
 		return in.nextLine();
 	}
 

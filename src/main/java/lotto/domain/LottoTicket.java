@@ -10,7 +10,7 @@ public class LottoTicket {
 		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public static LottoTicket purchase(PurchaseTicket purchaseTicket) {
+	public static LottoTicket ofPurchase(PurchaseTicket purchaseTicket) {
 		return new LottoTicket(purchaseTicket.getPurchaseLottoNumbers());
 	}
 
