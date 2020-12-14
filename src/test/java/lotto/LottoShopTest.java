@@ -22,7 +22,7 @@ class LottoShopTest {
         int money = 14000;
 
         // when & then
-        assertThat(lottoShop.buyLotto(money).size()).isEqualTo(money / 1000);
+        assertThat(lottoShop.buyLotto(money).getPublishedLottoTicket()).hasSize(money / 1000);
     }
 
     @Test

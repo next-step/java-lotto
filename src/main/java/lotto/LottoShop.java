@@ -21,24 +21,15 @@ public class LottoShop {
         return LottoShop.LottoShopLazyHolder.instance;
     }
 
-    public Set<LottoTicket> buyLotto(int money) {
+    public PublishedLottoTicket buyLotto(int money) {
         validatePriceIsEmpty(money);
         validatePriceIsDivide(money);
 
         LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(money);
         LottoMachine.getInstance();
-        Set<LottoTicket> publishedLottoTickets = publishLottoTicket(lottoTicketCount.getLottoTicketCount());
+        PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.ofLottoTicketCount(lottoTicketCount.getLottoTicketCount());
 
-        return publishedLottoTickets;
-    }
-
-    private Set<LottoTicket> publishLottoTicket(int lottoTicketCount) {
-        Set<LottoTicket> publishedLottoTickets = new HashSet<>();
-        for (int i = 0; i < lottoTicketCount; i++) {
-            Set<LottoNumber> lottoNumbers = LottoMachine.generateLottoNumber();
-            publishedLottoTickets.add(new LottoTicket(lottoNumbers));
-        }
-        return publishedLottoTickets;
+        return publishedLottoTicket;
     }
 
     private void validatePriceIsEmpty(int price) {
