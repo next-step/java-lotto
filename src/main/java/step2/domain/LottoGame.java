@@ -18,7 +18,7 @@ public class LottoGame {
     public LottoResult lottoResultMap(String lastWinningNumber) {
         String[] winningNumbers = lastWinningNumber.split(",");
         for (String number : winningNumbers) {
-            lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(number)));
+            lottoNumbers.checkWinningLotto(new LottoNumber(Integer.parseInt(number)));
         }
         return new LottoResult(lottoNumbers.winningResultMap());
     }

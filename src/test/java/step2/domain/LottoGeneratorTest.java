@@ -24,11 +24,11 @@ class LottoGeneratorTest {
     }
 
     public static void assertionLottoNumberTest(Lotto lotto) {
-        List<Number> numbers = lotto.getNumbers();
-        Assertions.assertEquals(numbers.size(), 6);
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Assertions.assertEquals(lottoNumbers.size(), 6);
 
-        for (int i=0; i<numbers.size(); i++) {
-            Assertions.assertTrue(numbers.get(i).isLotto());
+        for (int i = 0; i< lottoNumbers.size(); i++) {
+            Assertions.assertTrue(lottoNumbers.get(i).isLotto());
         }
     }
 }

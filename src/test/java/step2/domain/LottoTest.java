@@ -30,7 +30,7 @@ class LottoTest {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lotto.equalCheck(new Number(Integer.parseInt(winningNumber)));
+            lotto.equalCheck(new LottoNumber(Integer.parseInt(winningNumber)));
         }
 
         Assertions.assertEquals(lotto.getCount(), expected);
@@ -47,10 +47,10 @@ class LottoTest {
     }
 
     public static Lotto generateLottoNumber_1to6() {
-        List<Number> numbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = START_NUMBER; i <= LOTTO_COUNT; i++) {
-            numbers.add(new Number(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
     }
 }

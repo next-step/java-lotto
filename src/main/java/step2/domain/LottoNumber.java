@@ -3,11 +3,11 @@ package step2.domain;
 import static step2.domain.LottoNumberGenerator.END_NUMBER;
 import static step2.domain.LottoNumberGenerator.START_NUMBER;
 
-public class Number {
+public class LottoNumber {
 
     private int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         this.number = number;
         if (!isLotto()) throw new IllegalArgumentException();
     }
@@ -25,9 +25,9 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Number number1 = (Number) o;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
 
-        return number == number1.number;
+        return number == lottoNumber1.number;
     }
 
     @Override

@@ -32,7 +32,7 @@ class LottoNumbersTest {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(winningNumber)));
+            lottoNumbers.checkWinningLotto(new LottoNumber(Integer.parseInt(winningNumber)));
         }
 
         Assertions.assertEquals(lottoNumbers.winningResultMap().get(expected), 2);
