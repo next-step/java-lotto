@@ -1,24 +1,31 @@
 package calculator;
 
+import calculator.domain.Delimiters;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     private static final String REGEX_POSITIVE_INTEGER = "^[0-9]*$";
-    private static final String REGEX_SPLIT_INPUT = ",|:";
 
     private final String mathExpression;
+    private final Delimiters delimiters;
 
     public StringAddCalculator(String mathExpression) {
         this.mathExpression = mathExpression;
+        this.delimiters = new Delimiters();
     }
 
+    /**
+     * 문자열을 구분자로 나누고 합계를 구합니다.
+     * @return
+     */
     public int splitAndSum() {
         if(this.isZeroInput(mathExpression)) {
             return 0;
         }
-        return this.findSum(mathExpression.split(REGEX_SPLIT_INPUT));
+        return this.findSum(mathExpression.split(this.delimiters.toString()));
     }
 
     /**
