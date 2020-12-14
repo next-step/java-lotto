@@ -29,7 +29,7 @@ public class LottoTicket {
         }
     }
 
-    public Set<LottoNumber> getLottoTicket() {
+    public Set<LottoNumber> getLottoTicketNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
