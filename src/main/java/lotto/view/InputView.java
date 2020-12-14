@@ -22,6 +22,6 @@ public class InputView {
 		List<Integer> winningNumbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
-		return new WinningNumber(winningNumbers);
+		return new WinningNumber(winningNumbers, 45);
 	}
 }

@@ -23,7 +23,7 @@ public class LottoNumbersTest {
 			, new LottoNumber(Arrays.asList(1, 2, 40, 41, 42, 44)) // 0개 일치
 			, new LottoNumber(Arrays.asList(1, 5, 11, 19, 28, 40)) // 3개 일치
 			, new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28))); // 6개 일치
-		winningNumber = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
+		winningNumber = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28), 45);
 		results = new LottoMatchResults(payment);
 	}
 

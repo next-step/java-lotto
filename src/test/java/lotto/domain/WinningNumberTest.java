@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
@@ -13,7 +13,7 @@ public class WinningNumberTest {
 
 	@BeforeEach
 	void setUp() {
-		winningNumbers = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
+		winningNumbers = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28), 45);
 	}
 
 	@Test
@@ -38,5 +38,17 @@ public class WinningNumberTest {
 	void matchSixNumberTest() {
 		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
 		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.FIRST);
+	}
+
+	@Test
+	void BonusNumberExceptionTest() {
+		assertThatThrownBy(() -> new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 60))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void matchFiveNumberAndBonusTest() {
+		LottoNumber lottoNumber = new LottoNumber(Arrays.asList(3, 6, 11, 19, 28, 45));
+		assertThat(winningNumbers.match(lottoNumber)).isEqualTo(LottoRank.SECOND);
 	}
 }
