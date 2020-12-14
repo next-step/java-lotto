@@ -7,6 +7,7 @@ public class InputSplitter {
 
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_PATTERN = ",|:";
+
     public static String[] split(String input) {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
 
