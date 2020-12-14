@@ -14,23 +14,21 @@ public class LottoGenerator {
   public static final int ZERO = 0;
   public static final int LOTTO_NUMBER_LIMIT_SIZE = 6;
 
-  public static List<UserLotto> generateList(int size) {
-    List<UserLotto> userLottoList = new ArrayList<>();
+  public static List<List<Integer>> generateList(int size) {
+    List<List<Integer>> userLottoList = new ArrayList<>();
     for (int i = 0; i < size; i ++) {
       userLottoList.add(generate());
     }
     return userLottoList;
   }
 
-  private static UserLotto generate() {
+  private static List<Integer> generate() {
     List<Integer> lottoNumberList = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
         .boxed()
         .collect(Collectors.toList());
     Collections.shuffle(lottoNumberList);
-    List<Number> numbers = lottoNumberList.subList(ZERO, LOTTO_NUMBER_LIMIT_SIZE).stream()
-        .map(Number::new)
-        .sorted(Comparator.comparing(Number::get))
+    return lottoNumberList.subList(ZERO, LOTTO_NUMBER_LIMIT_SIZE).stream()
+        .sorted()
         .collect(Collectors.toList());
-    return new UserLotto(numbers);
   }
 }

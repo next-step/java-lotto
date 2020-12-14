@@ -1,18 +1,38 @@
 package step2.view;
 
-import step2.domain.UserLotto;
+import step2.enums.LottoWinningEnum;
+import step2.domain.result.LottoResult;
+import step2.domain.result.WinningMatchResult;
 
 import java.util.List;
 
 public class OutputView {
 
+  public static final String BUYING_AMOUNT_STR = "%s개를 구매했습니다.";
+  public static final String WINNING_STATISTICS_STR = "당첨 통계";
+  public static final String DASH_STR = "---------";
+  public static final String WINNING_MATCH_COUNT_STR = "%d개 일치 (%d원)- %d개";
+  public static final String WINNING_EARNING_RATE_STR = "총 수익률은 %,.2f입니다.";
+
   public static void printLottoCount(int count) {
-    System.out.println(count + "개를 구매했습니다.");
+    System.out.println(String.format(BUYING_AMOUNT_STR, count));
   }
 
-  public static void printLottoList(List<UserLotto> userLottoList) {
-    for (UserLotto lotto : userLottoList) {
+  public static void printLottoList(List<List<Integer>> userLottoList) {
+    for (List<Integer> lotto : userLottoList) {
       System.out.println(lotto.toString());
     }
+    System.out.println();
+  }
+
+  public static void printLottoMatchResult(LottoResult results) {
+    System.out.println();
+    System.out.println(WINNING_STATISTICS_STR);
+    System.out.println(DASH_STR);
+    for (WinningMatchResult matchResult : results.getMatchResults()) {
+      LottoWinningEnum lottoWinningEnum = matchResult.getLottoWinningEnum();
+      System.out.println(String.format(WINNING_MATCH_COUNT_STR, lottoWinningEnum.getMatchCount(), lottoWinningEnum.getReward(), matchResult.getLottoMatchSize()));
+    }
+    System.out.println(String.format(WINNING_EARNING_RATE_STR, results.getEarningRate()));
   }
 }
