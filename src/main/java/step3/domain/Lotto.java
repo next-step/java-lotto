@@ -22,15 +22,11 @@ public class Lotto {
         }
     }
 
-    public int match(Lotto winningLotto) {
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : winningLotto.getLotto()) {
-            matchCount += lotto.contains(lottoNumber) ? 1 : 0;
-        }
-        return matchCount;
-    }
-
     public Set<LottoNumber> getLotto() {
         return this.lotto;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lotto.contains(lottoNumber);
     }
 }

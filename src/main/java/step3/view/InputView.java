@@ -24,4 +24,8 @@ public class InputView {
         }
         return numbers;
     }
+
+    public static LottoNumber inputBonusNumber() {
+        return LottoNumber.of(sc.nextInt());
+    }
 }

@@ -25,6 +25,12 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        return null;
+        Rank[] ranks = values();
+        for (Rank rank : ranks) {
+            if (rank.countOfMatch == countOfMatch) {
+                return rank;
+            }
+        }
+        return MISS;
     }
 }

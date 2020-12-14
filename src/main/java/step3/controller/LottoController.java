@@ -2,6 +2,7 @@ package step3.controller;
 
 import step3.domain.Lotto;
 import step3.domain.LottoMachine;
+import step3.domain.WinningLotto;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -20,6 +21,7 @@ public class LottoController {
         ResultView.printLottoNumbers(buyLottoList);
 
         ResultView.printWinNumber();
-        Lotto winningLotto = new Lotto(InputView.inputWinNumber());
+
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinNumber()), InputView.inputBonusNumber());
     }
 }
