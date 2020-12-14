@@ -2,15 +2,22 @@ package com.nextstep.lotto.domain;
 
 import java.util.List;
 
-public class WinningLotto extends Lotto{
+public class WinningLotto {
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        super(numbers);
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("numbers cannot conatins bonus number");
         }
+        this.lotto = new Lotto(numbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    public long getMatchedCount(List<LottoNumber> collectedNumbers) {
+        return collectedNumbers.stream()
+                .filter(lotto.getNumbers()::contains)
+                .count();
     }
 
     public boolean checkBonusNumber(List<LottoNumber> numbers) {

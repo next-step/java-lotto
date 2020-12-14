@@ -20,16 +20,14 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoRank match(WinningLotto winningLotto) {
-        long matchedCount = getMatchedCount(winningLotto);
-        boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
-        return LottoRank.select(matchedCount, matchedBonus);
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 
-    private long getMatchedCount(Lotto winningLotto) {
-        return this.numbers.stream()
-                .filter(winningLotto.numbers::contains)
-                .count();
+    public LottoRank match(WinningLotto winningLotto) {
+        long matchedCount = winningLotto.getMatchedCount(numbers);
+        boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
+        return LottoRank.select(matchedCount, matchedBonus);
     }
 
     @Override
