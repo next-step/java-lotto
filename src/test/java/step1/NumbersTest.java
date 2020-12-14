@@ -27,4 +27,12 @@ public class NumbersTest {
                 .withFailMessage(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
     }
 
+    @Test
+    @DisplayName("가지고 있는 numbers의 합을 구한다.")
+    void addAll() {
+        Integer[] numberArray = {1, 2, 3};
+        Numbers numbers = new Numbers(numberArray);
+
+        assertThat(numbers.addAll()).isEqualTo(6);
+    }
 }

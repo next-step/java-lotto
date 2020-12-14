@@ -2,10 +2,10 @@ package step1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Numbers {
     public static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수를 입력할 수 없습니다.";
+    private static final Integer INITIAL_ANSWER = 0;
 
     private List<Integer> numbers = new ArrayList<>();
 
@@ -13,6 +13,14 @@ public class Numbers {
         for(String string : strings) {
             Integer number = Integer.parseInt(string);
 
+            assertNegative(number);
+
+            numbers.add(number);
+        }
+    }
+
+    public Numbers(Integer[] numberArray) {
+        for(Integer number : numberArray) {
             assertNegative(number);
 
             numbers.add(number);
@@ -27,5 +35,15 @@ public class Numbers {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public Integer addAll() {
+        int result = INITIAL_ANSWER;
+
+        for(Integer number: numbers) {
+            result = result + number;
+        }
+
+        return result;
     }
 }
