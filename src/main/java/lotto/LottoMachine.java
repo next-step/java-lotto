@@ -13,7 +13,7 @@ public class LottoMachine {
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int BASE_INDEX = 0;
-    private static final String COMMA = ", ";
+    private static final String DELIMITER = ", ";
     private final List<LottoNumber> lottoNumbers;
 
     public LottoMachine() {
@@ -40,7 +40,7 @@ public class LottoMachine {
     }
 
     public WinningNumber winningNumber(String winningNumberString) {
-        return new WinningNumber(Arrays.stream(winningNumberString.split(COMMA))
+        return new WinningNumber(Arrays.stream(winningNumberString.split(DELIMITER))
                 .map(value -> new LottoNumber(Integer.parseInt(value)))
                 .collect(Collectors.toList()));
     }
