@@ -11,19 +11,19 @@ public enum Rank {
     MISS(0, 0);
 
     private final int countOfMatch;
-    private final int winningMoney;
+    private final int winningPrize;
 
-    Rank(final int countOfMatch, final int winningMoney) {
+    Rank(final int countOfMatch, final int winningPrize) {
         this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
+        this.winningPrize = winningPrize;
     }
 
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
-    public int getWinningMoney() {
-        return winningMoney;
+    public int getWinningPrize() {
+        return winningPrize;
     }
 
     public static Rank valueOf(final int countOfMatch) {
