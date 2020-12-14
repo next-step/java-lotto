@@ -18,6 +18,7 @@ public class ResultView {
         System.out.println("3개 일치 (5000원) - " + record.getCountThree());
         System.out.println("4개 일치 (50000원) - " + record.getCountFour());
         System.out.println("5개 일치 (1500000원) - " + record.getCountFive());
+        System.out.println("5개 일치 + 보너스 일치 (1500000원) - " + record.getcountFiveAndBonus());
         System.out.println("6개 일치 (200000000원) - " + record.getCountSix());
         System.out.println("총 수익률은 " + record.getProfit() + "입니다.");
     }
