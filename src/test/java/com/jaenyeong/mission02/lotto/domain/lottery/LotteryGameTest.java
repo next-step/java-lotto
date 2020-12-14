@@ -94,7 +94,9 @@ class LotteryGameTest {
         final int missMatch = 0;
         final int allRight = 6;
 
-        assertThat(winningGame.checkWinTheLottery(game)).isBetween(missMatch, allRight);
+        final int countOfMatch = winningGame.checkWinTheLottery(game).getCountOfMatch();
+
+        assertThat(countOfMatch).isBetween(missMatch, allRight);
     }
 
     @ParameterizedTest

@@ -1,12 +1,13 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
+import com.jaenyeong.mission02.lotto.domain.Rank;
+
 import java.util.List;
 import java.util.StringJoiner;
 
 public class LotteryGame {
     protected static final int PRICE = 1_000;
     private static final int MISS_MATCH = 0;
-    private static final int EMPTY = 0;
     private final LotteryNumbers lotteryNumbers;
 
     private LotteryGame(final LotteryNumbers lotteryNumbers) {
@@ -25,16 +26,20 @@ public class LotteryGame {
         return money / PRICE;
     }
 
-    public int checkWinTheLottery(final LotteryGame otherGame) {
-        if ((otherGame == null) || (otherGame.getLotteryNumbers().size() == EMPTY)) {
-            return MISS_MATCH;
+    public Rank checkWinTheLottery(final LotteryGame otherGame) {
+        if (isNotValid(otherGame)) {
+            return Rank.valueOf(MISS_MATCH);
         }
 
         final List<Integer> currentGame = this.lotteryNumbers.getLotteryNumbers();
 
         currentGame.retainAll(otherGame.getLotteryNumbers());
 
-        return currentGame.size();
+        return Rank.valueOf(currentGame.size());
+    }
+
+    private boolean isNotValid(final LotteryGame otherGame) {
+        return (otherGame == null) || (otherGame.getLotteryNumbers().size() == MISS_MATCH);
     }
 
     protected List<Integer> getLotteryNumbers() {
@@ -46,6 +51,6 @@ public class LotteryGame {
         final StringJoiner stringJoin = new StringJoiner(", ");
         this.getLotteryNumbers().forEach(number -> stringJoin.add(Integer.toString(number)));
 
-        return "[" + stringJoin + ']';
+        return "[" + stringJoin + "]";
     }
 }

@@ -30,7 +30,7 @@ public enum Rank {
         return Arrays.stream(values())
             .filter(rank -> compareCountOfMatch(countOfMatch, rank))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("[error] This number is not valid."));
+            .orElse(MISS);
     }
 
     private static boolean compareCountOfMatch(final int countOfMatch, final Rank rank) {
