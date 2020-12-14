@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumberGenerator {
+    private static final int START_NUMBER = 0;
+    private static final int END_NUMBER = 45;
 
     private List<Number> numbers;
 
     public LottoNumberGenerator() {
         this.numbers = new ArrayList<>();
-        for (int i=1; i<=45; i++) numbers.add(new Number(i));
+        for (int i=START_NUMBER; i<=END_NUMBER; i++) numbers.add(new Number(i));
     }
 
     public Lotto generate() {
