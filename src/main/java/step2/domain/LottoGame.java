@@ -86,9 +86,9 @@ public class LottoGame {
     public Map<Lottery, Integer> matchLottery(List<Lottery> generatedLotteries, WinningLottery winningLottery) {
         matchedResult = new HashMap<>();
 
-        for (Lottery lotto : generatedLotteries) {
-            lotto.match(winningLottery);
-            matchedResult.put(lotto, lotto.getMatched());
+        for (Lottery lottery : generatedLotteries) {
+            lottery.match(winningLottery);
+            matchedResult.put(lottery, lottery.getMatched());
         }
 
         return matchedResult;
