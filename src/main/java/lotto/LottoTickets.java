@@ -31,13 +31,24 @@ public class LottoTickets {
 	}
 
 	private LottoTicket generateRandomTicket() {
-		List<Integer> shuffledNumber = new ArrayList<>();
-		for (int i = MINIMUM_OF_AUTO_CREATE_NUMBER; i <= MAXIMUM_OF_AUTO_CREATE_NUMBER; i++) {
-			shuffledNumber.add(i);
-		}
-		Collections.shuffle(shuffledNumber);
-		shuffledNumber = shuffledNumber.subList(0, 6);
+		List<Integer> shuffledNumber = generateRandomNumberBoundary();
 		return generateLottoNumber(shuffledNumber);
+	}
+
+	private List<Integer> generateRandomNumberBoundary() {
+		List<Integer> randomNumberBoundary = new ArrayList<>();
+		for (int i = MINIMUM_OF_AUTO_CREATE_NUMBER; i <= MAXIMUM_OF_AUTO_CREATE_NUMBER; i++) {
+			randomNumberBoundary.add(i);
+		}
+		shuffleRandomNumbers(randomNumberBoundary);
+		return randomNumberBoundary;
+	}
+
+	private List<Integer> shuffleRandomNumbers(List<Integer> randomNumberBoundary) {
+		Collections.shuffle(randomNumberBoundary);
+		randomNumberBoundary = randomNumberBoundary.subList(0, 6);
+		Collections.sort(randomNumberBoundary);
+		return randomNumberBoundary;
 	}
 
 	private LottoTicket generateLottoNumber(List<Integer> shuffledNumber) {
