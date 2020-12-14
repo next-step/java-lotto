@@ -36,19 +36,19 @@ class StringCalculatorTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"0,1=1", "2,999=1001"}, delimiter = '=')
+	@CsvSource(value = {"0,1=1", "2:999=1001"}, delimiter = '=')
 	void sum_숫자두개(String twoNumbers, int expected) {
 		assertThat(stringCalculator.sum(twoNumbers)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"0,1,2=3", "2,1,0,5,1000=1008"}, delimiter = '=')
+	@CsvSource(value = {"0,1:2=3", "2:1:0,5,1000=1008"}, delimiter = '=')
 	void sum_숫자여러개(String multipleNumbers, int expected) {
 		assertThat(stringCalculator.sum(multipleNumbers)).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"5,-1", "0,-1,-5"})
+	@ValueSource(strings = {"5,-1", "0,-1:-5"})
 	void sum_음수_예외발생(String numbers) {
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> stringCalculator.sum(numbers));
 	}
