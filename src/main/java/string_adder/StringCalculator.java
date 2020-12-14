@@ -1,18 +1,31 @@
 package string_adder;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 class StringCalculator {
 
 	private static final String TEXT_EMPTY = "";
 	private static final String DELIMITER_FOR_SPLIT = ":|,";
+	private static final String REGEX_CUSTOM_SEPARATOR = "//(.*)\n(.*)";
 
 	int sum(String text) {
 		if (isZeroReturnTarget(text)) {
 			return 0;
 		}
-		String[] numbers = text.split(DELIMITER_FOR_SPLIT);
-		return sum(numbers);
+
+		String[] numbers = getNumbersBySplit(text);
+ 		return sum(numbers);
+	}
+
+	private String[] getNumbersBySplit(String text) {
+		Matcher m = Pattern.compile(REGEX_CUSTOM_SEPARATOR).matcher(text);
+		if (m.find()) {
+			String customDelimiter = m.group(1);
+			return m.group(2).split(customDelimiter);
+		}
+		return text.split(DELIMITER_FOR_SPLIT);
 	}
 
 	private boolean isZeroReturnTarget(String text) {

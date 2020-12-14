@@ -52,4 +52,11 @@ class StringCalculatorTest {
 	void sum_음수_예외발생(String numbers) {
 		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> stringCalculator.sum(numbers));
 	}
+
+	@Test
+	void sum_커스텀구분자() {
+		assertThat(stringCalculator.sum("//\\+\n1+5")).isEqualTo(6);
+		assertThat(stringCalculator.sum("//;;;\n1;;;5")).isEqualTo(6);
+		assertThat(stringCalculator.sum("//ab\n5ab10")).isEqualTo(15);
+	}
 }
