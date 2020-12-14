@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static step2.domain.LottoNumberGenerator.LOTTO_COUNT;
+import static step2.domain.LottoNumberGenerator.START_NUMBER;
+
 class LottoTest {
 
     Lotto lotto;
@@ -45,7 +48,7 @@ class LottoTest {
 
     public static Lotto generateLottoNumber_1to6() {
         List<Number> numbers = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
+        for (int i = START_NUMBER; i <= LOTTO_COUNT; i++) {
             numbers.add(new Number(i));
         }
         return new Lotto(numbers);
