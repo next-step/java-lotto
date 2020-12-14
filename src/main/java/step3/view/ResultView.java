@@ -1,15 +1,19 @@
 package step3.view;
 
+import step3.domain.LottoResult;
+import step3.domain.Rank;
 import step3.domain.Lotto;
 import step3.domain.LottoNumber;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String PURCHASE_PRICE = "구입금액을 입력해 주세요.";
     private static final String WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private static void printMessage(String message) {
         System.out.println(message);
@@ -48,6 +52,25 @@ public class ResultView {
     public static void printWinNumber() {
         printMessage("");
         printMessage(WIN_NUMBER);
+    }
+
+    public static void printBonusNumber() {
+        printMessage(BONUS_NUMBER);
+    }
+
+    public static void printWinCounts(LottoResult lottoResult) {
+        printMessage("");
+        printMessage("당첨 통계");
+        printMessage("--------");
+
+        for (Rank rank : Rank.values()) {
+            int rankMatchCount = rank.getCountOfMatch();
+            List<Rank> filterRanks = lottoResult.getRanks().stream()
+                    .filter(r -> r.getCountOfMatch() == rankMatchCount)
+                    .collect(Collectors.toList());
+
+            printMessage(rank.getMessage() + " (" + rank.getWinningMoney() + ")원- " + filterRanks.size() + "개");
+        }
     }
 
     public static void printTotalRevenue(BigDecimal totalRevenue) {

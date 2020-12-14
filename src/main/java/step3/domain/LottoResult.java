@@ -7,22 +7,15 @@ import java.util.List;
 
 public class LottoResult {
     private static List<Rank> ranks = new ArrayList<>();
-    private static final int MIN_MATCH_COUNT = 3;
 
     public LottoResult(WinningLotto winningLotto, List<Lotto> buyLottoList) {
         for (Lotto lotto : buyLottoList) {
-            addRank(winningLotto.match(lotto), winningLotto.matchBonus(lotto));
+            ranks.add(Rank.valueOf(winningLotto.match(lotto), winningLotto.matchBonus(lotto)));
         }
     }
 
     public List<Rank> getRanks() {
         return this.ranks;
-    }
-
-    public static void addRank(int matchCount, boolean matchBonus) {
-        if (matchCount >= MIN_MATCH_COUNT) {
-            ranks.add(Rank.valueOf(matchCount, matchBonus));
-        }
     }
 
     public BigDecimal getTotalRevenue(int purchasePrice) {
