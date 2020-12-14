@@ -9,7 +9,7 @@ public class LottoNumbersGenerator {
 		throw new AssertionError();
 	}
 
-	public static LottoNumbers generate(int amount) {
+	public static LottoNumbers generate(long amount) {
 		List<LottoNumber> numbers = new ArrayList<>();
 		for(int i = 0; i < amount; i++) {
 			numbers.add(LottoNumberAutoGenerator.generate());

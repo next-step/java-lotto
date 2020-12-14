@@ -3,18 +3,18 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIRST(6, 2000000000, false),
-	SECOND(5, 30000000, true),
-	THIRD(5, 1500000, false),
-	FOURTH(4, 50000, false),
+	NOTHING(0, 0, false),
 	FIFTH(3, 5000, false),
-	NOTHING(0, 0, false);
+	FOURTH(4, 50000, false),
+	THIRD(5, 1500000, false),
+	SECOND(5, 30000000, true),
+	FIRST(6, 2000000000, false);
 
 	private final int matchCount;
-	private final int earnings;
+	private final long earnings;
 	private final boolean withBonus;
 
-	LottoRank(int matchCount, int earnings, boolean withBonus) {
+	LottoRank(int matchCount, long earnings, boolean withBonus) {
 		this.matchCount = matchCount;
 		this.earnings = earnings;
 		this.withBonus = withBonus;
@@ -38,7 +38,7 @@ public enum LottoRank {
 		return this.earnings * count;
 	}
 
-	public int getEarnings() {
+	public long getEarnings() {
 		return earnings;
 	}
 
@@ -48,6 +48,9 @@ public enum LottoRank {
 
 	@Override
 	public String toString() {
-		return matchCount + "개 일치 (" + earnings + "원)";
+		if (withBonus) {
+			return String.format("%d개 일치, 보너스 볼 일치 (%d원)", matchCount, earnings);
+		}
+		return String.format("%d개 일치, (%d원)", matchCount, earnings);
 	}
 }

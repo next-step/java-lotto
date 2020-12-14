@@ -7,7 +7,7 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		int payment = InputView.scanPayment();
+		long payment = InputView.scanPayment();
 		LottoRunner runner = new LottoRunner(payment);
 		ResultView.printLottoNumbers(runner.getLottoNumbers());
 
