@@ -25,9 +25,9 @@ public class LottoShop {
         validatePriceIsEmpty(money);
         validatePriceIsDivide(money);
 
-        int lottoTicketCount = calculateLottoTicketCount(money);
+        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(money);
         LottoMachine.getInstance();
-        Set<LottoTicket> publishedLottoTickets = publishLottoTicket(lottoTicketCount);
+        Set<LottoTicket> publishedLottoTickets = publishLottoTicket(lottoTicketCount.getLottoTicketCount());
 
         return publishedLottoTickets;
     }
@@ -39,10 +39,6 @@ public class LottoShop {
             publishedLottoTickets.add(new LottoTicket(lottoNumbers));
         }
         return publishedLottoTickets;
-    }
-
-    private int calculateLottoTicketCount(int money) {
-        return money / DEFAULT_LOTTO_PRICE;
     }
 
     private void validatePriceIsEmpty(int price) {
