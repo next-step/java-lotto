@@ -7,19 +7,23 @@ import java.util.Set;
 
 public class LottoResult {
     private static final int ONE_LOTTO_PRICE = 1000;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ADD_COUNT = 1;
+    private static final int DECIMAL_CALCULATION_NUMBER = 100;
+
     private final Map<LottoRank, Integer> lottoResults;
 
     public LottoResult(List<LottoTicket> lottoTickets, WinningNumber winningNumber) {
         HashMap<LottoRank, Integer> results = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = LottoRank.getLottoRank(winningNumber.winningCount(lottoTicket));
-            results.put(lottoRank, results.getOrDefault(lottoRank,0) + 1);
+            results.put(lottoRank, results.getOrDefault(lottoRank,DEFAULT_VALUE) + ADD_COUNT);
         }
         this.lottoResults = results;
     }
 
     public int getResult(LottoRank key) {
-        return lottoResults.getOrDefault(key, 0);
+        return lottoResults.getOrDefault(key, DEFAULT_VALUE);
     }
 
     public double rewardRatio() {
@@ -30,7 +34,7 @@ public class LottoResult {
     }
 
     protected static double rateCalculation(long totalReward, double purchaseAmount) {
-        return Math.floor((totalReward / purchaseAmount)*100) / 100;
+        return Math.floor((totalReward / purchaseAmount) * DECIMAL_CALCULATION_NUMBER) / DECIMAL_CALCULATION_NUMBER;
     }
 
     private long getPurchaseAmount(Set<LottoRank> lottoRanks) {
