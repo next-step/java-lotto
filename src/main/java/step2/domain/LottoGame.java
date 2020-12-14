@@ -40,7 +40,7 @@ public class LottoGame {
      * @return 발급된 로또 용지 묶음
      */
     public List<Lottery> buy(int money) {
-        if (money < 1000) {
+        if (money < Constants.MINIMUM_INPUT_MONEY) {
             throw new IllegalArgumentException(Constants.MONEY_IS_LESS_THAN_1000);
         }
         return makeLotteryList(money);

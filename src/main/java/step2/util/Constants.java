@@ -19,4 +19,5 @@ public class Constants {
     public static final int LOTTO_NUMBERS_LENGTH = 6;
     public static final int LOTTO_BALL_START_NUMBER = 1;
     public static final int LOTTO_BALL_END_NUMBER = 45;
+    public static final int MINIMUM_INPUT_MONEY = 1_000;
 }
