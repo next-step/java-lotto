@@ -21,7 +21,7 @@ public class LottoNumber {
 			.count());
 	}
 
-	private boolean isContains(int number) {
+	public boolean isContains(int number) {
 		return this.numbers.contains(number);
 	}
 

@@ -15,12 +15,12 @@ public class WinningNumber {
 	}
 
 	public LottoRank match(LottoNumber numbers) {
-		return LottoRank.valueOfMatchCount(this.getMatchCount(numbers));
+		return LottoRank.valueOfMatchCountAndMatchBonus(this.matchCount(numbers), this.matchBonus(numbers));
 	}
 
-	private int getMatchCount(LottoNumber number) {
-		return this.winningNumbers.matchCount(number);
-	}
+	private int matchCount(LottoNumber number) { return number.matchCount(this.winningNumbers); }
+
+	private boolean matchBonus(LottoNumber number) { return number.isContains(this.bonusNumber); }
 
 	private void checkValidBonusNumber(int bonusNumber) {
 		if (bonusNumber > MAX_NUMBER || bonusNumber < MIN_NUMBER) {

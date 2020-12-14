@@ -3,23 +3,33 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-	NOTHING(0, 0),
-	FOURTH(3, 5000),
-	THIRD(4, 50000),
-	SECOND(5, 1500000),
-	FIRST(6, 2000000000);
+	FIRST(6, 2000000000, false),
+	SECOND(5, 30000000, true),
+	THIRD(5, 1500000, false),
+	FOURTH(4, 50000, false),
+	FIFTH(3, 5000, false),
+	NOTHING(0, 0, false);
 
 	private final int matchCount;
 	private final int earnings;
+	private final boolean withBonus;
 
-	LottoRank(int matchCount, int earnings) {
+	LottoRank(int matchCount, int earnings, boolean withBonus) {
 		this.matchCount = matchCount;
 		this.earnings = earnings;
+		this.withBonus = withBonus;
 	}
 
-	public static LottoRank valueOfMatchCount(int matchCount) {
+	public static LottoRank valueOfMatchCountAndMatchBonus(int matchCount, boolean isMatchBonus) {
 		return Arrays.stream(LottoRank.values())
-			.filter(rank -> rank.matchCount == matchCount)
+			.filter(rank -> rank.matchCount == matchCount && rank.withBonus && isMatchBonus)
+			.findFirst()
+			.orElse(LottoRank.valueOfMatchCountWithoutBonus(matchCount));
+	}
+
+	public static LottoRank valueOfMatchCountWithoutBonus(int matchCount) {
+		return Arrays.stream(LottoRank.values())
+			.filter(rank -> rank.matchCount == matchCount && !rank.withBonus)
 			.findFirst()
 			.orElse(LottoRank.NOTHING);
 	}

@@ -22,6 +22,9 @@ public class InputView {
 		List<Integer> winningNumbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
-		return new WinningNumber(winningNumbers, 45);
+
+		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+		int bonusNumber = scanner.nextInt();
+		return new WinningNumber(winningNumbers, bonusNumber);
 	}
 }
