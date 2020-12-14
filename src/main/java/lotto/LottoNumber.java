@@ -18,7 +18,7 @@ public class LottoNumber {
 	}
 
 	private void validate(int number) {
-		if(number < MINIMUM_OF_LOTTO_NUMBER || number > MAXIMUM_OF_LOTTO_NUMBER){
+		if (number < MINIMUM_OF_LOTTO_NUMBER || number > MAXIMUM_OF_LOTTO_NUMBER) {
 			throw new IllegalArgumentException("로또 숫자의 범위는 1부터 46까지 입니다.");
 		}
 	}

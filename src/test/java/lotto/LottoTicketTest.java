@@ -2,15 +2,15 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * @author : byungkyu
@@ -30,7 +30,15 @@ public class LottoTicketTest {
 		LottoNumber lottoNumber5 = new LottoNumber(15);
 		LottoNumber lottoNumber6 = new LottoNumber(16);
 
-		lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5,lottoNumber6);
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(lottoNumber1);
+		lottoNumbers.add(lottoNumber2);
+		lottoNumbers.add(lottoNumber3);
+		lottoNumbers.add(lottoNumber4);
+		lottoNumbers.add(lottoNumber5);
+		lottoNumbers.add(lottoNumber6);
+
+		lottoTicket = new LottoTicket(lottoNumbers);
 	}
 
 	@Order(1)
@@ -50,8 +58,15 @@ public class LottoTicketTest {
 		LottoNumber lottoNumber4 = new LottoNumber(14);
 		LottoNumber lottoNumber5 = new LottoNumber(15);
 
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(lottoNumber1);
+		lottoNumbers.add(lottoNumber2);
+		lottoNumbers.add(lottoNumber3);
+		lottoNumbers.add(lottoNumber4);
+		lottoNumbers.add(lottoNumber5);
+
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5);
+			lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
 
@@ -69,8 +84,17 @@ public class LottoTicketTest {
 		LottoNumber lottoNumber6 = new LottoNumber(17);
 		LottoNumber lottoNumber7 = new LottoNumber(18);
 
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(lottoNumber1);
+		lottoNumbers.add(lottoNumber2);
+		lottoNumbers.add(lottoNumber3);
+		lottoNumbers.add(lottoNumber4);
+		lottoNumbers.add(lottoNumber5);
+		lottoNumbers.add(lottoNumber6);
+		lottoNumbers.add(lottoNumber7);
+
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5, lottoNumber6, lottoNumber7);
+			lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
 	}
@@ -86,8 +110,16 @@ public class LottoTicketTest {
 		LottoNumber lottoNumber5 = new LottoNumber(40);
 		LottoNumber lottoNumber6 = new LottoNumber(42);
 
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(lottoNumber1);
+		lottoNumbers.add(lottoNumber2);
+		lottoNumbers.add(lottoNumber3);
+		lottoNumbers.add(lottoNumber4);
+		lottoNumbers.add(lottoNumber5);
+		lottoNumbers.add(lottoNumber6);
+
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5, lottoNumber6);
+			lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 중복될 수 없습니다.");
 	}
