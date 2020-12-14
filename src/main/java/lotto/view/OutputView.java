@@ -22,11 +22,7 @@ public class OutputView {
 
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.MISS)
-                .forEach(rank -> {
-                    stringBuilder.append(rank.getCountOfMatch()).append("개 일치 (");
-                    stringBuilder.append(rank.getWinningMoney()).append(")- ");
-                    stringBuilder.append(lottoResult.findByKey(rank)).append("개\n");
-                });
+                .forEach(rank -> stringBuilder.append(rankToString(rank, lottoResult.findByKey(rank))));
 
         stringBuilder.append("총 수익률은 ");
         stringBuilder.append(money.calculateYield(lottoResult.addTotalMoney()));
@@ -40,5 +36,18 @@ public class OutputView {
                 .mapToInt(LottoNumber::getValue)
                 .toArray());
         System.out.println(numbers);
+    }
+
+    private static String rankToString(Rank rank, int countOfMatchRank) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(rank.getCountOfMatch()).append("개 일치");
+
+        if (rank == Rank.SECOND) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(" (").append(rank.getWinningMoney()).append(")- ");
+        sb.append(countOfMatchRank).append("개\n");
+
+        return sb.toString();
     }
 }
