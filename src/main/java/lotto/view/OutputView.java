@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
     private static final String LOTTO_PURCHASE_QUANTITY_MESSAGE = "%d개를 구매했습니다.";
