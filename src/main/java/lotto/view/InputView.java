@@ -18,4 +18,13 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
+
+    public static int enterBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자로 입력해 주세요.");
+        }
+    }
 }
