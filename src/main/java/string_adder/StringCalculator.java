@@ -5,14 +5,14 @@ class StringCalculator {
 	private static final String TEXT_EMPTY = "";
 
 	int sum(String text) {
-		if (text == null) {
-			return 0;
-		}
-
-		if (text.equals(TEXT_EMPTY)) {
+		if (isZeroReturnTarget(text)) {
 			return 0;
 		}
 
 		return -1;
+	}
+
+	private boolean isZeroReturnTarget(String text) {
+		return text == null || TEXT_EMPTY.equals(text);
 	}
 }
