@@ -8,11 +8,11 @@ import java.util.List;
 public class LottoGame {
 
     public static void main(String[] args) {
-        int money = InputView.inputMoney();
-        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(money);
+        Money lottoMoney = new Money(InputView.inputMoney());
+        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney.getMoney());
 
         LottoShop lottoShop = LottoShop.getInstance();
-        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(money);
+        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney.getMoney());
 
         OutputView.printPublishedLottoResult(lottoTicketCount, publishedLottoTicket);
 
@@ -22,7 +22,7 @@ public class LottoGame {
         LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
 
-        OutputView.printLottoStatics(lottoResult, lottoResult.calculatePrizeRate(money));
+        OutputView.printLottoStatics(lottoResult, lottoResult.calculatePrizeRate(lottoMoney.getMoney()));
     }
 
 }
