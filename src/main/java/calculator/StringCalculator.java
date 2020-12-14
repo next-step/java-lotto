@@ -16,9 +16,6 @@ public class StringCalculator {
 
     private static int add(List<Number> numbers) {
         return numbers.stream()
-              .reduce((x, y) -> {
-                    x.add(y);
-                    return x;
-              }).get().getNumber();
+              .reduce(new Number(0), Number::add).getNumber();
     }
 }

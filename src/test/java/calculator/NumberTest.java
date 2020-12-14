@@ -38,9 +38,9 @@ public class NumberTest {
         Number y = new Number("3");
 
         //when
-        x.add(y);
+        Number actual = x.add(y);
 
         //then
-        assertThat(x).isEqualTo(new Number("4"));
+        assertThat(actual).isEqualTo(new Number(4));
     }
 }
