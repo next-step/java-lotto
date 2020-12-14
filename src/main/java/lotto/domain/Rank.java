@@ -37,7 +37,7 @@ public enum Rank {
             if (matchBonus) return SECOND;
 
             return Arrays.stream(values())
-                            .filter(r -> countOfMatch == r.getCountOfMatch() && false == r.hasMatchBonus())
+                            .filter(r -> countOfMatch == r.getCountOfMatch())
                             .findFirst()
                             .get();
         }

@@ -78,7 +78,7 @@ public class LottoService {
 
     public boolean isMatchBounus(List<Integer> list, int bonusNumber){
         boolean result = false;
-        if (list.stream().filter(e -> list.contains(bonusNumber)).findFirst().get() != null){
+        if (list.stream().anyMatch(n -> n.equals(bonusNumber))){
             result = true;
         }
         return result;

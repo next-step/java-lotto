@@ -23,6 +23,7 @@ public class Lotto {
         }
 
         int[] temp = tempSet.stream()
+        .sorted()
         .mapToInt(Integer::intValue)
         .toArray(); 
 

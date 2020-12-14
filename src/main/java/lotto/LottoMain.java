@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.sevice.LottoOperator;
-import lotto.sevice.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
