@@ -32,7 +32,6 @@ public class Delimiters {
     public String extractCustomDelimiter(String expression) {
         Matcher m = Pattern.compile(Delimiters.REGEX_HAS_CUSTOM_DELIMITER).matcher(expression);
         if (m.find()) {
-            String customDelimiter = m.group(1);
             this.addDelimiter(m.group(1));
             return m.group(2);
         }
