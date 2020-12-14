@@ -17,7 +17,7 @@ class WinningLottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        winningLottoNumbers = new WinningLottoNumbers("1, 2, 3, 4, 5, 6");
+        winningLottoNumbers = new WinningLottoNumbers("1, 2, 3, 4, 5, 6", new LottoNumber(7));
     }
 
     @DisplayName("입력받은 당첨 번호를 쪼개서 리스트 형식으로 만든다.")
@@ -36,5 +36,20 @@ class WinningLottoNumbersTest {
     void isContain(int number) {
         boolean result = winningLottoNumbers.isContain(new LottoNumber(number));
         assertThat(result).isTrue();
+    }
+
+    @DisplayName("번호가 보너스 볼과 일치하면 true 반환.")
+    @Test
+    void isMatchBonusNumber1() {
+        boolean result = winningLottoNumbers.isMatchBonusNumber(new LottoNumber(7));
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("번호가 보너스 볼과 일치하지 않으면 false 반환.")
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 8})
+    void isMatchBonusNumber2(int number) {
+        boolean result = winningLottoNumbers.isMatchBonusNumber(new LottoNumber(number));
+        assertThat(result).isFalse();
     }
 }
