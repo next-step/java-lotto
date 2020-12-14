@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static step2.domain.LottoNumberTest.generateLottoNumber_1to6;
+import static step2.domain.LottoTest.generateLottoNumber_1to6;
 
 class LottoNumbersTest {
 
@@ -19,7 +19,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        List<LottoNumber> numbers = new ArrayList<>();
+        List<Lotto> numbers = new ArrayList<>();
         numbers.add(generateLottoNumber_1to6());
         numbers.add(generateLottoNumber_1to6());
         lottoNumbers = new LottoNumbers(numbers);

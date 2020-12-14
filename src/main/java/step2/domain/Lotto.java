@@ -2,12 +2,12 @@ package step2.domain;
 
 import java.util.List;
 
-public class LottoNumber {
+public class Lotto {
 
     private List<Number> numbers;
     private int count;
 
-    public LottoNumber(List<Number> numbers) {
+    public Lotto(List<Number> numbers) {
         this.numbers = numbers;
     }
 
@@ -28,7 +28,7 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LottoNumber that = (LottoNumber) o;
+        Lotto that = (Lotto) o;
 
         return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
     }

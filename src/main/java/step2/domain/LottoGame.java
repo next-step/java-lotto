@@ -3,7 +3,6 @@ package step2.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoGame {
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
@@ -16,12 +15,12 @@ public class LottoGame {
         lottoNumbers = buyLottoNumbers(amount);
     }
 
-    public Map<Integer, Long> lottoResultMap(String lastWinningNumber) {
+    public LottoResult lottoResultMap(String lastWinningNumber) {
         String[] winningNumbers = lastWinningNumber.split(",");
         for (String number : winningNumbers) {
             lottoNumbers.checkWinningLotto(new Number(Integer.parseInt(number)));
         }
-        return lottoNumbers.winningResultMap();
+        return new LottoResult(lottoNumbers.winningResultMap());
     }
 
     public LottoNumbers getLottoNumbers() {
@@ -29,7 +28,7 @@ public class LottoGame {
     }
 
     private LottoNumbers buyLottoNumbers(BigDecimal amount) {
-        List<LottoNumber> numbers = new ArrayList<>();
+        List<Lotto> numbers = new ArrayList<>();
 
         for (int i=0; i<lottoCount(amount); i++) {
             numbers.add(buyLottoNumber());
@@ -42,7 +41,7 @@ public class LottoGame {
         return amount.divide(LOTTO_PRICE).intValue();
     }
 
-    LottoNumber buyLottoNumber() {
+    Lotto buyLottoNumber() {
         return lottoNumberGenerator.generate();
     }
 }

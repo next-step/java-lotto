@@ -15,9 +15,9 @@ public class LottoNumberGenerator {
         for (int i=1; i<=45; i++) numbers.add(new Number(i));
     }
 
-    public LottoNumber generate() {
+    public Lotto generate() {
         Collections.shuffle(numbers);
-        return new LottoNumber(
+        return new Lotto(
                 numbers.stream()
                         .limit(6)
                         .sorted(Comparator.comparing(Number::getNumber))

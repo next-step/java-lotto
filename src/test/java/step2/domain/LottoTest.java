@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-class LottoNumberTest {
+class LottoTest {
 
-    LottoNumber lottoNumber;
+    Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        lottoNumber = generateLottoNumber_1to6();
+        lotto = generateLottoNumber_1to6();
     }
 
     @ParameterizedTest
@@ -27,10 +27,10 @@ class LottoNumberTest {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lottoNumber.equalCheck(new Number(Integer.parseInt(winningNumber)));
+            lotto.equalCheck(new Number(Integer.parseInt(winningNumber)));
         }
 
-        Assertions.assertEquals(lottoNumber.getCount(), expected);
+        Assertions.assertEquals(lotto.getCount(), expected);
     }
 
 
@@ -43,11 +43,11 @@ class LottoNumberTest {
         );
     }
 
-    public static LottoNumber generateLottoNumber_1to6() {
+    public static Lotto generateLottoNumber_1to6() {
         List<Number> numbers = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
             numbers.add(new Number(i));
         }
-        return new LottoNumber(numbers);
+        return new Lotto(numbers);
     }
 }

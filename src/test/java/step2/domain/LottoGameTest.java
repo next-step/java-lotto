@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static step2.domain.LottoNumberGeneratorTest.assertionLottoNumberTest;
-import static step2.domain.LottoNumberTest.generateLottoNumber_1to6;
+import static step2.domain.LottoGeneratorTest.assertionLottoNumberTest;
+import static step2.domain.LottoTest.generateLottoNumber_1to6;
 
 class LottoGameTest {
 
@@ -39,7 +39,7 @@ class LottoGameTest {
     void winningResult(String input, int expected) {
         when(mockLottoNumberGenerator.generate()).thenReturn(generateLottoNumber_1to6());
         lottoGame = new LottoGame(BigDecimal.valueOf(1000), mockLottoNumberGenerator);
-        Assertions.assertEquals(lottoGame.lottoResultMap(input).get(expected), 1);
+        Assertions.assertEquals(lottoGame.lottoResultMap(input).winningResult(expected), 1);
     }
 
     static Stream<Arguments> generateLottoGameData() {

@@ -1,9 +1,8 @@
 package step2.view;
 
-import step2.domain.LottoNumber;
+import step2.domain.Lotto;
 import step2.domain.LottoNumbers;
-
-import java.util.Map;
+import step2.domain.LottoResult;
 
 public class OutputView {
 
@@ -13,27 +12,21 @@ public class OutputView {
                 .append("개를 구매했습니다.");
         System.out.println(builder.toString());
 
-        for (LottoNumber number : lottoNumbers.getLottoNumber()) {
+        for (Lotto number : lottoNumbers.getLottoNumber()) {
             System.out.println(number);
         }
     }
 
-    public static void outputMessageLottoResult(int amount, Map<Integer, Long> resultMap) {
-        long all =  resultMap.getOrDefault(6,0l);
-        long five =  resultMap.getOrDefault(5,0l);
-        long four =  resultMap.getOrDefault(4,0l);
-        long three =  resultMap.getOrDefault(3,0l);
-        long sum = all * 2000000000l + five * 1500000l + four * 50000l + three * 5000l;
-
+    public static void outputMessageLottoResult(int amount, LottoResult lottoResult) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println("3개 일치 (5000원)-" + three + "개");
-        System.out.println("4개 일치 (50000원)-" + four + "개");
-        System.out.println("5개 일치 (1500000원)-" + five + "개");
-        System.out.println("6개 일치 (2000000000원)-" + all + "개");
+        System.out.println("3개 일치 (5000원)-" + lottoResult.winningResult(3) + "개");
+        System.out.println("4개 일치 (50000원)-" + lottoResult.winningResult(4) + "개");
+        System.out.println("5개 일치 (1500000원)-" + lottoResult.winningResult(5) + "개");
+        System.out.println("6개 일치 (2000000000원)-" + lottoResult.winningResult(6) + "개");
 
-        outputMessageLottoYield(amount,sum);
+        outputMessageLottoYield(amount,lottoResult.winnings());
     }
 
     public static void outputMessageLottoYield(int amount, long sum) {
