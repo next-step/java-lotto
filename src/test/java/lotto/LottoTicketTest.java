@@ -41,7 +41,7 @@ public class LottoTicketTest {
 	}
 
 	@Order(2)
-	@DisplayName("1.2 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 미만 불가")
+	@DisplayName("2.1 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 미만 불가")
 	@Test
 	void lottoNumberIsContainSixNumbersAndCannotLowerSix() {
 		LottoNumber lottoNumber1 = new LottoNumber(1);
@@ -58,7 +58,7 @@ public class LottoTicketTest {
 	}
 
 	@Order(3)
-	@DisplayName("1.3 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 초과 불가")
+	@DisplayName("2.2 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 초과 불가")
 	@Test
 	void lottoNumberIsContainSixNumbersAndCannotOverSix() {
 		LottoNumber lottoNumber1 = new LottoNumber(1);
@@ -73,6 +73,22 @@ public class LottoTicketTest {
 			lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5, lottoNumber6, lottoNumber7);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
+	}
 
+	@Order(3)
+	@DisplayName("3 로또의 숫자들은 중복되지 않는다.")
+	@Test
+	void lottoNumbersCannotDuplicate() {
+		LottoNumber lottoNumber1 = new LottoNumber(1);
+		LottoNumber lottoNumber2 = new LottoNumber(1);
+		LottoNumber lottoNumber3 = new LottoNumber(22);
+		LottoNumber lottoNumber4 = new LottoNumber(33);
+		LottoNumber lottoNumber5 = new LottoNumber(40);
+		LottoNumber lottoNumber6 = new LottoNumber(42);
+
+		assertThatThrownBy(() -> {
+			lottoTicket = new LottoTicket(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,lottoNumber5, lottoNumber6);
+		}).isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("로또 번호는 중복될 수 없습니다.");
 	}
 }
