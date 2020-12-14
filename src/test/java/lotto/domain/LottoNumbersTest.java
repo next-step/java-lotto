@@ -13,15 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
 
-	@DisplayName("기준 범위는 1~45까지 테스트")
-	@ParameterizedTest
-	@ValueSource(ints = {555, -55, -12345})
-	void 로또_숫자_그룹_기준_범위_초과_테스트(int input) {
-		assertThatThrownBy(() -> new LottoNumber(input))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("기준 범위를 초과하였습니다.");
-	}
-
 	@DisplayName("숫자 그룹에 중복된 숫자는 입력 불가능하다.")
 	@Test
 	void 중복_테스트() {

@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class LottoNumbers {
 	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
@@ -49,8 +50,8 @@ public class LottoNumbers {
 		return this.numbers.contains(baseNumber);
 	}
 
-	public long getEqualsCount(LottoNumbers targetNumbers) {
-		Iterator<LottoNumber> target = targetNumbers.numbers.iterator();
+	public long getEqualsCount(Set<LottoNumber> targetNumbers) {
+		Iterator<LottoNumber> target = targetNumbers.iterator();
 		return this.numbers.stream()
 			.filter(number -> number.equals(target.next()))
 			.count();
@@ -62,7 +63,7 @@ public class LottoNumbers {
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoNumbers that = (LottoNumbers) o;
 
-		return this.getEqualsCount(that) == that.numbers.size();
+		return this.getEqualsCount(that.numbers) == that.numbers.size();
 	}
 
 	@Override
