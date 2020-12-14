@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.Number;
 import step2.domain.UserLotto;
 import step2.domain.WinningLotto;
+import step2.enums.LottoWinningEnum;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,10 +32,10 @@ public class LottoResultTest {
         makeUserLotto("15,17,18,24,28,31"));
     LottoResult result = new LottoResult(userLottoList, 5000);
 
-    assertThat(result.getMatchResults().get(0).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(1).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(2).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(3).getLottoMatchSize()).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.THREE_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FOUR_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FIVE_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.SIX_MATCH)).isEqualTo(0);
     assertThat(result.getEarningRate()).isEqualTo(0.0);
   }
 
@@ -50,10 +51,10 @@ public class LottoResultTest {
         makeUserLotto("15,17,18,24,28,31"));
     LottoResult result = new LottoResult(userLottoList, 5000);
 
-    assertThat(result.getMatchResults().get(0).getLottoMatchSize()).isEqualTo(2);
-    assertThat(result.getMatchResults().get(1).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(2).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(3).getLottoMatchSize()).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.THREE_MATCH)).isEqualTo(2);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FOUR_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FIVE_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.SIX_MATCH)).isEqualTo(0);
     assertThat(result.getEarningRate()).isEqualTo(2.0);
   }
 
@@ -69,10 +70,10 @@ public class LottoResultTest {
         makeUserLotto("15,17,18,24,28,31"));
     LottoResult result = new LottoResult(userLottoList, 5000);
 
-    assertThat(result.getMatchResults().get(0).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(1).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(2).getLottoMatchSize()).isEqualTo(0);
-    assertThat(result.getMatchResults().get(3).getLottoMatchSize()).isEqualTo(1);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.THREE_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FOUR_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.FIVE_MATCH)).isEqualTo(0);
+    assertThat(result.getMatchResultMap().get(LottoWinningEnum.SIX_MATCH)).isEqualTo(1);
     assertThat(result.getEarningRate()).isEqualTo(400000.0);
   }
 }

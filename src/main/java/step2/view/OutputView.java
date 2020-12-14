@@ -1,8 +1,6 @@
 package step2.view;
 
-import step2.enums.LottoWinningEnum;
 import step2.domain.result.LottoResult;
-import step2.domain.result.WinningMatchResult;
 
 import java.util.List;
 
@@ -29,10 +27,9 @@ public class OutputView {
     System.out.println();
     System.out.println(WINNING_STATISTICS_STR);
     System.out.println(DASH_STR);
-    for (WinningMatchResult matchResult : results.getMatchResults()) {
-      LottoWinningEnum lottoWinningEnum = matchResult.getLottoWinningEnum();
-      System.out.println(String.format(WINNING_MATCH_COUNT_STR, lottoWinningEnum.getMatchCount(), lottoWinningEnum.getReward(), matchResult.getLottoMatchSize()));
-    }
+    results.getMatchResultMap().keySet().forEach(matchResult -> {
+      System.out.println(String.format(WINNING_MATCH_COUNT_STR, matchResult.getMatchCount(), matchResult.getReward(), results.getMatchResultMap().get(matchResult)));
+    });
     System.out.println(String.format(WINNING_EARNING_RATE_STR, results.getEarningRate()));
   }
 }

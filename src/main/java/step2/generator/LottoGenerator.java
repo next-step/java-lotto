@@ -1,8 +1,5 @@
 package step2.generator;
 
-import step2.domain.Number;
-import step2.domain.UserLotto;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,6 +10,9 @@ public class LottoGenerator {
   public static final int LOTTO_MAX_NUMBER = 45;
   public static final int ZERO = 0;
   public static final int LOTTO_NUMBER_LIMIT_SIZE = 6;
+
+  private LottoGenerator () {
+  }
 
   public static List<List<Integer>> generateList(int size) {
     List<List<Integer>> userLottoList = new ArrayList<>();

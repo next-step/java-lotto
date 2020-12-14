@@ -36,9 +36,10 @@ public class LottoGame {
   }
 
   private UserLotto initUserLotto(List<Integer> userLotto) {
-    return new UserLotto(userLotto.stream()
+    List<Number> numbers = userLotto.stream()
         .map(Number::new)
-        .collect(Collectors.toList()), winningLotto);
+        .collect(Collectors.toList());
+    return new UserLotto(numbers, winningLotto);
   }
 
   public List<UserLotto> getUserLottoList() {
