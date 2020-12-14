@@ -37,11 +37,13 @@ class LottoGameTest {
     @DisplayName("발급한 로또 티켓들과 당첨 번호를 비교하여 각 맞춘 갯수들을 저장하여 리턴한다.")
     @Test
     void matchNumbers() {
-        Map<Rank, Integer> results = lottoGame.matchNumbers(new WinningLottoNumbers("1, 8, 10, 14, 21, 40"));
+        WinningLottoNumbers wLN = new WinningLottoNumbers("1, 8, 10, 14, 21, 40", new LottoNumber(30));
+        Map<Rank, Integer> results = lottoGame.matchNumbers(wLN);
 
         assertThat(results.get(Rank.FIFTH)).isEqualTo(1);
         assertThat(results.get(Rank.FOURTH)).isZero();
-        assertThat(results.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(results.get(Rank.THIRD)).isZero();
+        assertThat(results.get(Rank.SECOND)).isEqualTo(1);
         assertThat(results.get(Rank.FIRST)).isZero();
     }
 }

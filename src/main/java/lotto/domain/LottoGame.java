@@ -21,7 +21,7 @@ public class LottoGame {
 
     public Map<Rank, Integer> matchNumbers(final WinningLottoNumbers winningLottoNumbers) {
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
-            Rank rank = Rank.valueOf(lottoTicket.matchWinningLottoNumbers(winningLottoNumbers));
+            Rank rank = lottoTicket.matchWinningLottoNumbers(winningLottoNumbers);
             lottoResult.put(rank, lottoResult.get(rank) + 1);
         });
         return lottoResult;
