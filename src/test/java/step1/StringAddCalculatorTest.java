@@ -50,6 +50,6 @@ public class StringAddCalculatorTest {
   @Test
   void negativeNumber() {
     assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-        .isInstanceOf(RuntimeException.class);
+        .isInstanceOf(IllegalArgumentException.class);
   }
 }
