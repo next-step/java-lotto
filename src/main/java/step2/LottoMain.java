@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoMain {
 
-  public static final int LOTTO_PRICE = 1000;
+  private static final int LOTTO_PRICE = 1000;
 
   public static void main(String[] args) {
     // 구매 금액 입력 및 구매 가능한 장수 노출
