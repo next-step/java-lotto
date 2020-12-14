@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-//    SECOND(5, 30_000_000),
+    //    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -35,6 +35,10 @@ public enum Rank {
 
     private static boolean compareCountOfMatch(final int countOfMatch, final Rank rank) {
         return countOfMatch == rank.countOfMatch;
+    }
+
+    public boolean isNotMissMatch() {
+        return this != MISS;
     }
 
 //    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
