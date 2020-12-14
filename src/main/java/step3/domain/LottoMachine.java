@@ -6,7 +6,10 @@ import java.util.List;
 
 public class LottoMachine {
     private final int PRICE = 1000;
-    private List<LottoNumber> lottoNumbers;
+    private final int FROM_INDEX = 0;
+    private final int TO_INDEX = 6;
+
+    private List<LottoNumber> lottoNumbers = new ArrayList<>(new LottoNumber().getLottoNumberCache().values());
 
     public List<Lotto> buyLotto(int purchasePrice) {
         int buyCount = purchasePrice / this.PRICE;
@@ -18,16 +21,11 @@ public class LottoMachine {
     }
 
     private Lotto createLotto() {
-        lottoNumbers = new ArrayList<>();
+        Collections.shuffle(lottoNumbers);
+        List<LottoNumber> extractionLottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
 
-        for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
-            int lottoNumber = (int)(Math.random() * 45) + 1;
-            System.out.println(lottoNumber);
-            lottoNumbers.add(LottoNumber.of(lottoNumber));
-        }
+        Collections.sort(extractionLottoNumbers);
 
-        Collections.sort(lottoNumbers);
-
-        return new Lotto(lottoNumbers);
+        return new Lotto(extractionLottoNumbers);
     }
 }

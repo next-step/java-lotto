@@ -20,6 +20,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
                 });
     }
 
+    public LottoNumber() {
+
+    }
+
     private LottoNumber(int number) {
         this.number = number;
     }
@@ -39,6 +43,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public int getNumber() {
         return this.number;
+    }
+
+    public Map<Integer, LottoNumber> getLottoNumberCache() {
+        return lottoNumberCache;
     }
 
     @Override
