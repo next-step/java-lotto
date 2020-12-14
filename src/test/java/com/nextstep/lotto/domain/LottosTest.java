@@ -28,7 +28,7 @@ public class LottosTest {
     @MethodSource
     void getStatistics(List<Integer> numbers, LottoRank expected) {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(numbers)));
-        LottoStatistics statistics = lottos.getStatistics("1,2,3,4,5,6", 7);
+        LottoStatistics statistics = lottos.getStatistics(Arrays.asList(1,2,3,4,5,6), 7);
 
         assertThat(statistics.getCount(expected)).isEqualTo(1);
     }

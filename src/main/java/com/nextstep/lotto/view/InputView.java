@@ -1,8 +1,12 @@
 package com.nextstep.lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
+    private static final String DELIMITER = ",";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputPrice() {
@@ -10,9 +14,16 @@ public class InputView {
         return parseInt(SCANNER.nextLine());
     }
 
-    public static String inputWinnerNumbers() {
+    public static List<Integer> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return SCANNER.nextLine();
+        return parseToList(SCANNER.nextLine());
+    }
+
+    private static List<Integer> parseToList(String winningNumberString) {
+        String[] numbers = winningNumberString.split(DELIMITER);
+        return Stream.of(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public static int inputBonusNumber() {
