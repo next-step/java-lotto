@@ -4,19 +4,19 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<MatchPrize, Integer> result;
+    private final Map<Rank, Integer> result;
 
-    public LottoResult(final Map<MatchPrize, Integer> result) {
+    public LottoResult(final Map<Rank, Integer> result) {
         this.result = result;
     }
 
-    public int findByKey(final MatchPrize matchPrize) {
-        return result.get(matchPrize);
+    public int findByKey(final Rank rank) {
+        return result.get(rank);
     }
 
     public long addTotalMoney() {
-        return Arrays.stream(MatchPrize.values())
-                .mapToLong(matchPrize -> matchPrize.multiplyMoney(result.get(matchPrize)))
+        return Arrays.stream(Rank.values())
+                .mapToLong(rank -> rank.multiplyMoney(result.get(rank)))
                 .sum();
     }
 }

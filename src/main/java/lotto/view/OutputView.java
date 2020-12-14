@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoResult;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
-import lotto.domain.MatchPrize;
+import lotto.domain.Rank;
 import lotto.domain.Money;
 
 import java.util.Arrays;
@@ -20,12 +20,12 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계\n").append("---------\n");
 
-        Arrays.stream(MatchPrize.values())
-                .filter(matchPrize -> matchPrize != MatchPrize.ZERO)
-                .forEach(matchPrize -> {
-                    stringBuilder.append(matchPrize.getMatchCount()).append("개 일치 (");
-                    stringBuilder.append(matchPrize.getMoney()).append(")- ");
-                    stringBuilder.append(lottoResult.findByKey(matchPrize)).append("개\n");
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.MISS)
+                .forEach(rank -> {
+                    stringBuilder.append(rank.getCountOfMatch()).append("개 일치 (");
+                    stringBuilder.append(rank.getWinningMoney()).append(")- ");
+                    stringBuilder.append(lottoResult.findByKey(rank)).append("개\n");
                 });
 
         stringBuilder.append("총 수익률은 ");

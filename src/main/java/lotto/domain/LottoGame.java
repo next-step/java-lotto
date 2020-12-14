@@ -11,7 +11,7 @@ public class LottoGame {
     private static final int INIT_COUNT = 0;
 
     private final LottoTickets lottoTickets;
-    private final Map<MatchPrize, Integer> lottoResult;
+    private final Map<Rank, Integer> lottoResult;
 
     public LottoGame(final LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -19,16 +19,16 @@ public class LottoGame {
         putInitMatchPrize();
     }
 
-    public Map<MatchPrize, Integer> matchNumbers(final WinningLottoNumbers winningLottoNumbers) {
+    public Map<Rank, Integer> matchNumbers(final WinningLottoNumbers winningLottoNumbers) {
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
-            MatchPrize matchPrize = MatchPrize.valueOf(lottoTicket.matchWinningLottoNumbers(winningLottoNumbers));
-            lottoResult.put(matchPrize, lottoResult.get(matchPrize) + 1);
+            Rank rank = Rank.valueOf(lottoTicket.matchWinningLottoNumbers(winningLottoNumbers));
+            lottoResult.put(rank, lottoResult.get(rank) + 1);
         });
         return lottoResult;
     }
 
     private void putInitMatchPrize() {
-        Arrays.stream(MatchPrize.values())
+        Arrays.stream(Rank.values())
                 .forEach(matchPrize -> lottoResult.put(matchPrize, INIT_COUNT));
     }
 }
