@@ -1,8 +1,5 @@
 package lotto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class LottoShop {
 
     private static final String NOT_HAVE_ENOUGH_MONEY_ERROR = "금액은 최소 0이상 이어야 구매 가능합니다.";
