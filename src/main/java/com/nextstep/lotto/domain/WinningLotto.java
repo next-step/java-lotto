@@ -11,7 +11,7 @@ public class WinningLotto {
             throw new IllegalArgumentException("numbers cannot conatins bonus number");
         }
         this.lotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public long getMatchedCount(List<LottoNumber> collectedNumbers) {

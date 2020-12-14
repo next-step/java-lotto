@@ -16,7 +16,7 @@ public class Lotto {
             throw new IllegalArgumentException("number count shoud be " + LOTTO_NUMBER_COUNT);
         }
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

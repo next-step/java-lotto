@@ -1,16 +1,26 @@
 package com.nextstep.lotto.domain;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class LottoNumber {
-    private static final int NUMBER_MIN = 1;
-    private static final int NUMBER_MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+    private static final Map<Integer,LottoNumber> DEFINE_NUMBERS = Stream.iterate(MIN, i -> i + 1)
+            .limit(MAX).collect(Collectors.toMap(Integer::intValue, LottoNumber::new));
 
     private final int number;
 
-    public LottoNumber(int number) {
-        if (number < NUMBER_MIN || number > NUMBER_MAX) {
+    private LottoNumber(int number){
+        this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("number shoud be between 1 and 45");
         }
-        this.number = number;
+        return DEFINE_NUMBERS.get(number);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class WinningLottoTest {
     @Test
     void checkBonusNumber() {
         WinningLotto winningLotto = new WinningLotto(list, 7);
-        List<LottoNumber> checkList = Stream.of(1,2,3,4,5,7).map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> checkList = Stream.of(1,2,3,4,5,7).map(LottoNumber::of).collect(Collectors.toList());
         assertThat(winningLotto.checkBonusNumber(checkList)).isTrue();
     }
 
@@ -32,7 +32,7 @@ public class WinningLottoTest {
     @Test
     void matchedCount() {
         WinningLotto winningLotto = new WinningLotto(list, 7);
-        List<LottoNumber> checkList = Stream.of(1,2,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> checkList = Stream.of(1,2,3,4,5,6).map(LottoNumber::of).collect(Collectors.toList());
         long matchedCount = winningLotto.getMatchedCount(checkList);
         assertThat(matchedCount).isEqualTo(6);
     }

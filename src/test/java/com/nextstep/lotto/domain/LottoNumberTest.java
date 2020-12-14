@@ -12,6 +12,6 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void outOfRange(int source) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(source));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(source));
     }
 }
