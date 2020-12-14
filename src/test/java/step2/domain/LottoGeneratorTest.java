@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static step2.domain.LottoNumberGenerator.LOTTO_COUNT;
+
 class LottoGeneratorTest {
 
     LottoNumberGenerator lottoNumberGenerator;
@@ -25,7 +27,7 @@ class LottoGeneratorTest {
 
     public static void assertionLottoNumberTest(Lotto lotto) {
         List<LottoNumber> lottoNumbers = lotto.getNumbers();
-        Assertions.assertEquals(lottoNumbers.size(), 6);
+        Assertions.assertEquals(lottoNumbers.size(), LOTTO_COUNT);
 
         for (int i = 0; i< lottoNumbers.size(); i++) {
             Assertions.assertTrue(lottoNumbers.get(i).isLotto());
