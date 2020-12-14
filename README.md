@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 문자열 덧셈 계산기 TO-DO 리스트
+
+- [x] 문자열 덧셈을 분리
+- [x] 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정
+- [x] 숫자 이외의 값 또는 음수를 전달할 경우 RuntimeException
+- [x] 분리한 결과를 덧셈
+- [x] 결과를 출력
