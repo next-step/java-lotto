@@ -5,22 +5,34 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step1.Numbers.NEGATIVE_NUMBER_EXCEPTION_MESSAGE;
 
 public class NumbersTest {
-    @Test
-    @DisplayName("string으로 받은 값을 Integer로 파싱한다.")
-    void stringToInteger() {
-        String string = "2";
 
-        assertThat(Numbers.stringToInteger(string)).isEqualTo(2);
+    @Test
+    void new_default() {
+        String[] strings = {"1", "2", "3"};
+        Numbers numbers = new Numbers(strings);
+
+        assertThat(numbers.getNumbers()).containsExactly(1, 2, 3);
     }
 
     @Test
-    @DisplayName("파싱할 문자열 내용이 숫자가 아닌 경우 Exception 처리한다.")
-    void stringToIntegerException() {
-        String string = "test";
+    @DisplayName("음수의 값이 입력될 경우 Exception 처리 한다.")
+    void new_negative() {
+        String[] strings = {"-1", "2", "3"};
 
-        assertThatThrownBy(() -> Numbers.stringToInteger(string))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Numbers(strings))
+                .isInstanceOf(RuntimeException.class)
+                .withFailMessage(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("가지고 있는 numbers의 합을 구한다.")
+    void addAll() {
+        Integer[] numberArray = {1, 2, 3};
+        Numbers numbers = new Numbers(numberArray);
+
+        assertThat(numbers.addAll()).isEqualTo(6);
     }
 }

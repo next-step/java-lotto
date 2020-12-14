@@ -1,14 +1,9 @@
 package step1;
 
-import static step1.Numbers.INIT_VALUE;
-
 public class StringAddCalculator {
-    public int calculate(String input) {
-        if(InputChecker.isNullOrEmpty(input)) {
-            return INIT_VALUE;
-        }
+    private static final Integer INITIAL_ANSWER = 0;
 
-        Numbers numbers = new Numbers(InputParser.parseInput(input));
+    public static Integer calculate(Numbers numbers) {
         return numbers.addAll();
     }
 }

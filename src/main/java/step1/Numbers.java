@@ -1,41 +1,49 @@
 package step1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Numbers {
+    public static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수를 입력할 수 없습니다.";
+    private static final Integer INITIAL_ANSWER = 0;
 
-    static final int INIT_VALUE = 0;
+    private List<Integer> numbers = new ArrayList<>();
 
-    private String[] numberStrings;
+    public Numbers(String[] strings) {
+        for(String string : strings) {
+            Integer number = Integer.parseInt(string);
 
-    public Numbers(String[] numberStrings) {
-        this.numberStrings = numberStrings;
+            assertNegative(number);
+
+            numbers.add(number);
+        }
     }
 
-    public int addAll() {
-        int result = INIT_VALUE;
+    public Numbers(Integer[] numberArray) {
+        for(Integer number : numberArray) {
+            assertNegative(number);
 
-        for(String numberString : numberStrings) {
-            int number = stringToInteger(numberString);
-            checkPositiveNumber(number);
+            numbers.add(number);
+        }
+    }
 
+    private void assertNegative(Integer number) {
+        if(number < 0) {
+            throw new RuntimeException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public Integer addAll() {
+        int result = INITIAL_ANSWER;
+
+        for(Integer number: numbers) {
             result = result + number;
         }
+
         return result;
-    }
-
-    public static Integer stringToInteger(String string) {
-        int integer;
-
-        try {
-            integer = Integer.parseInt(string);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
-        }
-        return integer;
-    }
-
-    private void checkPositiveNumber(int number) {
-        if(number < INIT_VALUE) {
-            throw new RuntimeException("숫자는 0 이상만 입력해주세요.");
-        }
     }
 }
