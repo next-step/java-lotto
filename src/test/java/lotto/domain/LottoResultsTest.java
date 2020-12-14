@@ -49,7 +49,8 @@ class LottoResultsTest {
 		lottoTicket.add(LottoNumberGenerator.ofInput("1, 2, 3, 4, 5, 6"));
 		lottoTicket.add(LottoNumberGenerator.ofInput("6, 7, 8, 9, 10"));
 
-		LottoTicket lottoTicket1 = new LottoTicket(lottoTicket);
+		PurchaseTicket purchaseTicket = new PurchaseTicket(lottoTicket);
+		LottoTicket lottoTicket1 = LottoTicket.purchase(purchaseTicket);
 
 		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber);
 		LottoResult lottoResults = LottoResult.compareTicketAndWinner(lottoTicket1, lottoWinnerNumbers);
