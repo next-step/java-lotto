@@ -3,40 +3,52 @@ package com.nextstep.lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private int totalCount = 0;
-    private final Map<LottoWinning, Integer> result = new HashMap<>();
+    private final Map<LottoRank, Integer> result = new HashMap<>();
 
-    public void addCount(LottoWinning lottoWinning) {
-        int count = 0;
-        if (result.containsKey(lottoWinning)) {
-            count = result.get(lottoWinning);
+    public LottoStatistics(List<LottoRank> lottoRanks) {
+        if (lottoRanks == null || lottoRanks.isEmpty()) {
+            throw new IllegalArgumentException("empty value is invalid");
         }
-        result.put(lottoWinning, count + 1);
-        totalCount++;
+        lottoRanks.forEach(this::addCount);
     }
 
-    public int getCount(LottoWinning lottoWinning) {
-        if (result.containsKey(lottoWinning)) {
-            return result.get(lottoWinning);
+    private void addCount(LottoRank lottoRank) {
+        int count = 0;
+        if (result.containsKey(lottoRank)) {
+            count = result.get(lottoRank);
+        }
+        result.put(lottoRank, count + 1);
+    }
+
+    public int getCount(LottoRank lottoRank) {
+        if (result.containsKey(lottoRank)) {
+            return result.get(lottoRank);
         }
         return 0;
     }
 
     public double profitRate() {
-        int totalPrice = totalCount * LottoSeller.LOTTO_PRICE;
+        int totalPrice = getTotalCount() * LottoSeller.LOTTO_PRICE;
         double totalProfit = getTotalProfit();
         double profitRate = totalProfit / totalPrice;
         return new BigDecimal(profitRate).setScale(2, RoundingMode.DOWN).doubleValue();
     }
 
+    private int getTotalCount() {
+        return result.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     private double getTotalProfit() {
         return result.entrySet().stream().mapToDouble(entry -> {
-            LottoWinning lottoWinning = entry.getKey();
+            LottoRank lottoRank = entry.getKey();
             int count = entry.getValue();
-            return (double)lottoWinning.getWinningPrice() * count;
+            return (double) lottoRank.getWinningPrice() * count;
         }).sum();
     }
 }
