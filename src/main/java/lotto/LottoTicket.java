@@ -17,6 +17,12 @@ public class LottoTicket {
         lottoNumbers = numbers;
     }
 
+    public int countMatchNumbers(LottoTicket otherLottoTicket) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumber -> otherLottoTicket.getLottoTicketNumbers().contains(lottoNumber))
+                .count();
+    }
+
     private void validateBlank(Set<LottoNumber> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
             throw new NullPointerException(NULL_OR_EMPTY_ERROR);

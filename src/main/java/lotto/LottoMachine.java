@@ -34,4 +34,14 @@ public class LottoMachine {
                 .map(number -> LottoNumber.ofNumber(number))
                 .collect(Collectors.toSet());
     }
+
+    public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+        Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers);
+        Set<LottoNumber> lotto = new HashSet<>();
+
+        for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {
+            lotto.add(LottoNumber.ofNumber(deduplicatedManualLottoNumber));
+        }
+        return lotto;
+    }
 }
