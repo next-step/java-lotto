@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @SuppressWarnings("NonAsciiCharacters")
 class StringCalculatorTest {
@@ -45,4 +47,9 @@ class StringCalculatorTest {
 		assertThat(stringCalculator.sum(multipleNumbers)).isEqualTo(expected);
 	}
 
+	@ParameterizedTest
+	@ValueSource(strings = {"5,-1", "0,-1,-5"})
+	void sum_음수_예외발생(String numbers) {
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> stringCalculator.sum(numbers));
+	}
 }

@@ -22,6 +22,14 @@ class StringCalculator {
 	private int sum(String[] numbers) {
 		return Stream.of(numbers)
 				.mapToInt(Integer::parseInt)
+				.peek(this::validateNotNegative)
 				.sum();
+	}
+
+	private void validateNotNegative(int number) {
+		if (number < 0) {
+			String msg = String.format("%s is negative !", number);
+			throw new RuntimeException(msg);
+		}
 	}
 }
