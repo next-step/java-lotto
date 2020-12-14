@@ -29,10 +29,10 @@ public class OutputView {
 
     private static void winning(final LottoResult lottoResult) {
         STRING_BUFFER.append(LOTTO_WINNING_MESSAGE)
-                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.THREE.getWinningCount(), LottoRank.THREE.reward(), lottoResult.getResult(LottoRank.THREE)))
-                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FOUR.getWinningCount(), LottoRank.FOUR.reward(), lottoResult.getResult(LottoRank.FOUR)))
-                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FIVE.getWinningCount(), LottoRank.FIVE.reward(), lottoResult.getResult(LottoRank.FIVE)))
-                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.SIX.getWinningCount(), LottoRank.SIX.reward(), lottoResult.getResult(LottoRank.SIX)));
+                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.THREE.getWinningCount(), LottoRank.THREE.getReward(), lottoResult.getResult(LottoRank.THREE)))
+                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FOUR.getWinningCount(), LottoRank.FOUR.getReward(), lottoResult.getResult(LottoRank.FOUR)))
+                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FIVE.getWinningCount(), LottoRank.FIVE.getReward(), lottoResult.getResult(LottoRank.FIVE)))
+                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.SIX.getWinningCount(), LottoRank.SIX.getReward(), lottoResult.getResult(LottoRank.SIX)));
     }
 
     public static void totalRewardRatio(final LottoResult lottoResult) {

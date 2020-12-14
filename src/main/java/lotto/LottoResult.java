@@ -45,7 +45,7 @@ public class LottoResult {
 
     private long getTotalReward(Set<LottoRank> lottoRanks) {
         return lottoRanks.stream()
-                    .mapToLong(lottoRank -> lottoRank.reward() * lottoResults.get(lottoRank))
+                    .mapToLong(lottoRank -> lottoRank.getReward() * lottoResults.get(lottoRank))
                     .sum();
     }
 }
