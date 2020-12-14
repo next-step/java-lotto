@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.text.MessageFormat;
 import java.util.Objects;

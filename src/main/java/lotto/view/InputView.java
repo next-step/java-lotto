@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.StringSplitter;
+import lotto.util.StringSplitter;
 
 import java.util.List;
 import java.util.Scanner;

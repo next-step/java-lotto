@@ -1,4 +1,4 @@
-package lotto;
+package lotto.util;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ public class StringSplitter {
 
     private static int validatePositiveNumber(String text) {
         int number = Integer.parseInt(text);
-        if(number < ZERO) {
+        if (number < ZERO) {
             throw new RuntimeException(INCLUDE_NEGATIVE_VALUE_ERROR);
         }
         return number;

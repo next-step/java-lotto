@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class LottoShop {
 
@@ -30,13 +30,13 @@ public class LottoShop {
     }
 
     private void validatePriceIsEmpty(int price) {
-        if(price <= ZERO) {
+        if (price <= ZERO) {
             throw new IllegalArgumentException(NOT_HAVE_ENOUGH_MONEY_ERROR);
         }
     }
 
     private void validatePriceIsDivide(int price) {
-        if(price % DEFAULT_LOTTO_PRICE != ZERO) {
+        if (price % DEFAULT_LOTTO_PRICE != ZERO) {
             throw new IllegalArgumentException(NOT_DIVIDE_LOTTO_PRICE_ERROR);
         }
     }
