@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,7 +38,7 @@ public class Expression {
     }
 
     private void initiateCustomOperands(String expression) {
-        Matcher matcher = Pattern.compile(CUSTOM.getRegex()).matcher(expression);
+        Matcher matcher = CUSTOM_PATTERN.matcher(expression);
         if (matcher.find()) {
             String delimiterGroup = matcher.group(DELIMITER_INDEX_FOR_GROUP);
             String[] expressionGroup = matcher.group(EXPRESSION_INDEX_FOR_GROUP).split(delimiterGroup);
@@ -55,7 +54,7 @@ public class Expression {
         );
     }
 
-    public Operands getOperands() {
-        return operands;
+    public int sum() {
+        return operands.sum();
     }
 }
