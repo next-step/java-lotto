@@ -6,17 +6,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
+
     public static final Integer TICKET_PRICE = 1_000;
-    private final int ticketCount;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int money) {
-        this.ticketCount = toTicketCount(money);
-        this.lottoTickets = issueTickets(new RandomTicketMachine());
+    public LottoTickets(int money, TicketMachine ticketMachine) {
+        this.lottoTickets = issueTickets(toTicketCount(money), ticketMachine);
     }
 
     LottoTickets(List<LottoTicket> lottoTickets) {
-        this.ticketCount = lottoTickets.size();
         this.lottoTickets = lottoTickets;
     }
 
@@ -38,8 +36,8 @@ public class LottoTickets {
         }
     }
 
-    private List<LottoTicket> issueTickets(TicketMachine ticketMachine) {
-        return ticketMachine.issue(this.ticketCount);
+    private List<LottoTicket> issueTickets(int ticketCount, TicketMachine ticketMachine) {
+        return ticketMachine.issue(ticketCount);
     }
 
     public List<LottoTicket> getLottoTickets() {

@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class RandomTicketMachine implements TicketMachine {
+
     private static final Integer RANGE_MIN = 1;
     private static final Integer RANGE_MAX = 45;
     private final List<LottoNumber> lottoNumbers;
@@ -22,7 +23,9 @@ public class RandomTicketMachine implements TicketMachine {
     public List<LottoTicket> issue(int ticketCount) {
         return Stream.generate(() -> {
             shuffle();
-            return new LottoTicket(new HashSet<>(this.lottoNumbers.subList(0, 6)));
+            List<LottoNumber> lottoNumbers = this.lottoNumbers.subList(0, 6);
+            Collections.sort(lottoNumbers);
+            return new LottoTicket(new HashSet<>(lottoNumbers));
         })
               .limit(ticketCount)
               .collect(Collectors.toList());

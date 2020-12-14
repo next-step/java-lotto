@@ -3,7 +3,10 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -28,5 +31,15 @@ public class LottoNumberTest {
         assertThatIllegalArgumentException()
               .isThrownBy(() -> new LottoNumber(number))
               .withMessage("1 - 45 사이 숫자를 입력해주세요");
+    }
+
+    @Test
+    void sort() {
+        List<LottoNumber> lottoNumbers = Arrays
+              .asList(new LottoNumber(5), new LottoNumber(3), new LottoNumber(4));
+
+//        Collections.sort(lottoNumbers);
+
+        System.out.println(lottoNumbers);
     }
 }

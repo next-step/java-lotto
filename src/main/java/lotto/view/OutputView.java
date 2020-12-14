@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.MatchCount;
 import lotto.domain.MatchResult;
 
 public class OutputView {
@@ -28,13 +29,15 @@ public class OutputView {
     }
 
     private static void printProfit(BigDecimal profit) {
-        String additionalMessage = profit.compareTo(new BigDecimal(1)) < 0 ? " (기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "";
+        String additionalMessage =
+              profit.compareTo(new BigDecimal(1)) < 0 ? " (기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "";
         System.out.printf("총 수익률은 %.2f입니다." + additionalMessage, profit.doubleValue());
     }
 
     private static void printMatchCounts(TreeMap<Integer, Integer> matchCounts) {
         matchCounts.keySet()
-              .forEach(matchCount -> printMatchCount(matchCount, MatchResult.getMatchPrice(matchCount), matchCounts.get(matchCount)));
+              .forEach(matchCount -> printMatchCount(matchCount, MatchCount.priceMoney(matchCount),
+                    matchCounts.get(matchCount)));
     }
 
     private static void printMatchCount(int matchCount, int matchPrice, int ticketCount) {

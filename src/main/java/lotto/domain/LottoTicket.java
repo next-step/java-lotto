@@ -1,13 +1,17 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 
 public class LottoTicket {
-    private final Integer LOTTO_NUMBER_COUNT = 6;
+
+    private static final Integer LOTTO_NUMBER_COUNT = 6;
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
@@ -16,24 +20,22 @@ public class LottoTicket {
     }
 
     public LottoTicket(String lottoNumberValues) {
-        Set<LottoNumber> lottoNumbers = toSet(lottoNumberValues);
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this(toSet(lottoNumberValues));
     }
 
-    private void validate(String lottoNumbers) {
-        if (StringUtils.isBlank(lottoNumbers)) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
-    }
-
-    private Set<LottoNumber> toSet(String lottoNumbers) {
+    private static Set<LottoNumber> toSet(String lottoNumbers) {
         validate(lottoNumbers);
 
         String[] numberValues = lottoNumbers.replaceAll(" ", "").split(",");
         return Stream.of(numberValues)
               .map(LottoNumber::new)
               .collect(Collectors.toSet());
+    }
+
+    private static void validate(String lottoNumbers) {
+        if (StringUtils.isBlank(lottoNumbers)) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
@@ -47,7 +49,7 @@ public class LottoTicket {
     }
 
     public int matchCount(LottoTicket lastWinningTicket) {
-        HashSet<LottoNumber> compareLottoTicket = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> compareLottoTicket = new HashSet<>(this.lottoNumbers);
         compareLottoTicket.retainAll(lastWinningTicket.lottoNumbers);
 
         return compareLottoTicket.size();
@@ -59,6 +61,8 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        List<LottoNumber> displayList = new ArrayList<>(this.lottoNumbers);
+        Collections.sort(displayList);
+        return displayList.toString();
     }
 }

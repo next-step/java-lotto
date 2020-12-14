@@ -22,7 +22,7 @@ public class LottoTicketsTest {
         int money = 1_000;
 
         //when
-        LottoTickets lottoTickets = new LottoTickets(money);
+        LottoTickets lottoTickets = new LottoTickets(money, new RandomTicketMachine());
 
         //then
         assertThat(lottoTickets).isNotNull();
@@ -36,7 +36,7 @@ public class LottoTicketsTest {
 
         //when, then
         assertThatIllegalArgumentException()
-              .isThrownBy(() -> new LottoTickets(money))
+              .isThrownBy(() -> new LottoTickets(money, new RandomTicketMachine()))
               .withMessage("금액이 부족합니다.");
     }
 
