@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    @DisplayName("맞춘 갯수에 따라 Rank를 리턴한다. 만약 5개일 경우, 보너스볼에 따라 갈린다.")
+    @DisplayName("맞춘 갯수에 따라 Rank를 리턴한다. 만약 5개일 경우, 보너스볼 맞춤 여부에 따라 갈린다.")
     @ParameterizedTest
     @MethodSource("ProvideMatchCounts")
     void confirmRank(int countOfMatch, boolean matchBonus, Rank expectedRank) {
