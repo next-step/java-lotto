@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class PublishedLottoTicket {
@@ -28,4 +29,16 @@ public class PublishedLottoTicket {
         return Collections.unmodifiableSet(publishedLottoTicket);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PublishedLottoTicket that = (PublishedLottoTicket) o;
+        return Objects.equals(publishedLottoTicket, that.publishedLottoTicket);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(publishedLottoTicket);
+    }
 }
