@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +45,7 @@ public class LottoResult {
 
     private long getTotalReward(Set<LottoRank> lottoRanks) {
         return lottoRanks.stream()
-                    .mapToLong(lottoRank -> lottoRank.getReward() * lottoResults.get(lottoRank))
+                    .mapToLong(lottoRank -> lottoRank.getTotalReward(lottoResults.get(lottoRank)))
                     .sum();
     }
 }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -25,10 +25,18 @@ public enum LottoRank {
         return reward;
     }
 
+    public long getTotalReward(int count) {
+        return reward * count;
+    }
+
     public static LottoRank getLottoRank(int winningCount) {
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.getWinningCount() == winningCount)
+                .filter(lottoRank -> lottoRank.isMatchCount(winningCount))
                 .findFirst()
                 .orElse(LottoRank.NONE);
+    }
+
+    private boolean isMatchCount(int winningCount) {
+        return this.winningCount == winningCount;
     }
 }
