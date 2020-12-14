@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
-
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
+
     private LottoNumberGenerator lottoNumberGenerator;
     private LottoNumbers lottoNumbers;
 
