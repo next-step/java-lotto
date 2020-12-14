@@ -28,9 +28,11 @@ public enum MatchPrize {
         return money * num;
     }
 
-    @Override
-    public String toString() {
-        return matchCount + "개 일치 ("
-                + money + ")- ";
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getMoney() {
+        return money;
     }
 }

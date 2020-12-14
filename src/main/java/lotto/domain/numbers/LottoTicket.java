@@ -1,6 +1,5 @@
 package lotto.domain.numbers;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicket {
@@ -23,13 +22,6 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 숫자가 부족합니다.");
         }
-    }
-
-    @Override
-    public String toString() {
-        return Arrays.toString(lottoNumbers.stream()
-                .mapToInt(LottoNumber::getValue)
-                .toArray());
     }
 
     public List<LottoNumber> getLottoNumbers() {
