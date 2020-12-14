@@ -40,15 +40,14 @@ public class LottoTickets {
 		for (int i = MINIMUM_OF_AUTO_CREATE_NUMBER; i <= MAXIMUM_OF_AUTO_CREATE_NUMBER; i++) {
 			randomNumberBoundary.add(i);
 		}
-		shuffleRandomNumbers(randomNumberBoundary);
-		return randomNumberBoundary;
+		return shuffleRandomNumbers(randomNumberBoundary);
 	}
 
 	private List<Integer> shuffleRandomNumbers(List<Integer> randomNumberBoundary) {
 		Collections.shuffle(randomNumberBoundary);
-		randomNumberBoundary = randomNumberBoundary.subList(0, 6);
-		Collections.sort(randomNumberBoundary);
-		return randomNumberBoundary;
+		List<Integer> subList = new ArrayList<>(randomNumberBoundary.subList(0, 6));
+		Collections.sort(subList);
+		return subList;
 	}
 
 	private LottoTicket generateLottoNumber(List<Integer> shuffledNumber) {
