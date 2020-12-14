@@ -21,7 +21,7 @@ public class Lottos {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         List<LottoRank> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            winnings.add(lotto.getWinning(winningLotto));
+            winnings.add(lotto.match(winningLotto));
         }
         return new LottoStatistics(winnings);
     }

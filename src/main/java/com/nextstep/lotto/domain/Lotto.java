@@ -20,7 +20,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoRank getWinning(WinningLotto winningLotto) {
+    public LottoRank match(WinningLotto winningLotto) {
         long matchedCount = getMatchedCount(winningLotto);
         boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
         return LottoRank.select(matchedCount, matchedBonus);

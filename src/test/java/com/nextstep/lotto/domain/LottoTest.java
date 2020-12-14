@@ -24,7 +24,7 @@ public class LottoTest {
     @MethodSource
     void getWinning(Lotto lotto, LottoRank expected) {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7);
-        LottoRank lottoRank = lotto.getWinning(winningLotto);
+        LottoRank lottoRank = lotto.match(winningLotto);
         assertThat(lottoRank).isEqualTo(expected);
 
     }
