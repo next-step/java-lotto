@@ -1,28 +1,28 @@
 package com.nextstep.lotto.domain;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import java.util.Arrays;
 
 public enum Rank {
-    NOTHING(0, 0L, 1),
-    FIFTH(3, 5_000L, 2),
-    FOURTH(4, 50_000L, 3),
-    THIRD(5, 1_500_000L, 4),
-    SECOND(5, 30_000_000L, 5),
-    FIRST(6, 2_000_000_000L, 6);
+    NOTHING(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
-    private final int numberOfMatchedNumber;
+    private final MatchedNumberCount matchedNumberCount;
     private final Money money;
-    private final int rankValue;
 
-    Rank(final Integer numberOfMatchedNumber, final Long moneyValue, final int rankValue) {
-      this.numberOfMatchedNumber = numberOfMatchedNumber;
+    Rank(final int matchedNumberCount, final long moneyValue) {
+      this.matchedNumberCount = new MatchedNumberCount(matchedNumberCount);
       this.money = new Money(moneyValue);
-      this.rankValue = rankValue;
     }
 
-    public static Rank find(final int numberOfMatchedNumber, final boolean hasBonus) {
+    public static Rank find(final MatchedNumberCount matchedNumberCount, final boolean hasBonus) {
         Rank candidateRank = Arrays.stream(Rank.values())
-                .filter(rank -> isSameMatchedNumber(numberOfMatchedNumber, rank))
+                .filter(rank -> isSameMatchedNumber(matchedNumberCount, rank))
                 .findAny()
                 .orElse(NOTHING);
         return confirmRank(candidateRank, hasBonus);
@@ -36,16 +36,12 @@ public enum Rank {
         return money.getAmount();
     }
 
-    public int getNumberOfMatchedNumber() {
-        return numberOfMatchedNumber;
+    public int getMatchedNumberCount() {
+        return matchedNumberCount.getValue();
     }
 
-    public int getRankValue() {
-        return rankValue;
-    }
-
-    private static boolean isSameMatchedNumber(final int numberOfMatchedNumber, final Rank rank) {
-        return rank.numberOfMatchedNumber == numberOfMatchedNumber;
+    private static boolean isSameMatchedNumber(final MatchedNumberCount matchedNumberCount, final Rank rank) {
+        return rank.matchedNumberCount.equals(matchedNumberCount);
     }
 
     private static Rank confirmRank(final Rank candidateRank, final boolean hasBonus) {

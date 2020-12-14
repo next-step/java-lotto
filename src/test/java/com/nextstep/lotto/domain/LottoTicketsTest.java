@@ -46,4 +46,18 @@ class LottoTicketsTest {
                 )
         );
     }
+
+    @DisplayName("LottoTickets 일급 컬렉션끼리 합칠 수 있다.")
+    @Test
+    void mergeTest() {
+        int expectedSize = 4;
+
+        List<LottoTicket> boughtTickets = Arrays.asList(LOTTO_TICKET_123456, LOTTO_TICKET_101112131415);
+        LottoTickets lottoTickets = new LottoTickets(boughtTickets);
+
+        assertThat(lottoTickets.size()).isEqualTo(2);
+        LottoTickets merged = lottoTickets.merge(lottoTickets);
+
+        assertThat(merged.size()).isEqualTo(expectedSize);
+    }
 }

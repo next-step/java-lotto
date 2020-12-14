@@ -4,8 +4,12 @@ import com.nextstep.lotto.domain.exceptions.InvalidMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,5 +37,42 @@ class MoneyTest {
         Money money = new Money(moneyValue);
 
         assertThat(money.howManyLottoTickets()).isEqualTo(numberOfTickets);
+    }
+
+    @DisplayName("구매한 로또 티켓의 수만큼의 금액을 뺀 돈을 계산할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("minusBoughtLottoTicketsTestResource")
+    void minusBoughtLottoTicketsTest(int numberOfBoughtLottoTickets, Money expected) {
+        Money originalMoney = new Money(10000L);
+
+        assertThat(originalMoney.minusBoughtLottoTickets(numberOfBoughtLottoTickets)).isEqualTo(expected);
+    }
+    public static Stream<Arguments> minusBoughtLottoTicketsTestResource() {
+        return Stream.of(
+                Arguments.of(3, new Money(7000L)),
+                Arguments.of(5, new Money(5000L)),
+                Arguments.of(0, new Money(10000L)),
+                Arguments.of(10, new Money(0L))
+        );
+    }
+
+    @DisplayName("원금으로 구매할 수 있는 LottoTicket의 수보다 더 많이 구매를 시도할 수 없다.")
+    @Test
+    void minusBoughtLottoTicketsFailByWrongDomainCaseTest() {
+        int exceedValue = 11;
+        Money originalMoney = new Money(10000L);
+
+        assertThatThrownBy(() -> originalMoney.minusBoughtLottoTickets(11))
+                .isInstanceOf(InvalidMoneyException.class);
+    }
+
+    @DisplayName("음수로 LottoTicket을 구매 시도할 수 없다.")
+    @Test
+    void minusBoughtLottoTicketsFailByInvalidValueTest() {
+        int invalidValue = -3;
+        Money originalMoney = new Money(10000L);
+
+        assertThatThrownBy(() -> originalMoney.minusBoughtLottoTickets(invalidValue))
+                .isInstanceOf(InvalidMoneyException.class);
     }
 }

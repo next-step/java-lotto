@@ -9,13 +9,23 @@ public class OutputView {
     private static final String WINNING_TICKET_COMMENT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String STATISTICS_HEADER = "당첨 통계\n" + "---------";
     private static final String BONUS_NUMBER_INPUT_COMMENT = "보너스 볼을 입력해 주세요.";
+    private static final String STATIC_LOTTO_COUNT_INPUT_COMMENT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String STATIC_LOTTO_NUMBER_INPUT_COMMENT = "수동으로 구매할 번호를 입력해 주세요.";
+
+    public static void printStaticLottoCountInput() {
+        System.out.println(STATIC_LOTTO_COUNT_INPUT_COMMENT);
+    }
+
+    public static void printStaticLottoNumberInput() {
+        System.out.println(STATIC_LOTTO_NUMBER_INPUT_COMMENT);
+    }
 
     public static void printMoneyInput() {
         System.out.println(MONEY_INPUT_COMMENT);
     }
 
-    public static void printHowManyLottoTickets(final Money money) {
-        System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(money));
+    public static void printHowManyLottoTickets(final int numberOfStaticLottoTickets, final Money remainMoney) {
+        System.out.println(BoughtHistoryOutputView.getHowManyLottoTickets(numberOfStaticLottoTickets, remainMoney));
     }
 
     public static void printBoughtLottoTickets(final LottoTickets lottoTickets) {

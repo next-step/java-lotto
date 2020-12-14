@@ -16,30 +16,16 @@ class RankTest {
     @DisplayName("맞춘 LottoNumber 수와 보너스 숫자 여부에 따라 Rank를 찾을 수 있다.")
     @ParameterizedTest
     @MethodSource("findTestResource")
-    void findTest(int numberOfMatchedNumber, boolean hasBonus, Rank expected) {
-        assertThat(Rank.find(numberOfMatchedNumber, hasBonus)).isEqualTo(expected);
+    void findTest(MatchedNumberCount matchedNumberCount, boolean hasBonus, Rank expected) {
+        assertThat(Rank.find(matchedNumberCount, hasBonus)).isEqualTo(expected);
     }
     public static Stream<Arguments> findTestResource() {
         return Stream.of(
-                Arguments.of(6, false, Rank.FIRST),
-                Arguments.of(5, true, Rank.SECOND),
-                Arguments.of(5, false, Rank.THIRD),
-                Arguments.of(4, false, Rank.FOURTH),
-                Arguments.of(3, false, Rank.FIFTH)
-        );
-    }
-
-    @DisplayName("존재하지 않는 당첨 결과를 찾으려는 경우 꽝 반환")
-    @ParameterizedTest
-    @MethodSource("findFailTestResource")
-    void findFailTest(int numberOfMatchedNumber, boolean hasBonus) {
-        assertThat(Rank.find(numberOfMatchedNumber, hasBonus)).isEqualTo(Rank.NOTHING);
-    }
-    public static Stream<Arguments> findFailTestResource() {
-        return Stream.of(
-                Arguments.of(-1, false),
-                Arguments.of(0, false),
-                Arguments.of(7, false)
+                Arguments.of(new MatchedNumberCount(6), false, Rank.FIRST),
+                Arguments.of(new MatchedNumberCount(5), true, Rank.SECOND),
+                Arguments.of(new MatchedNumberCount(5), false, Rank.THIRD),
+                Arguments.of(new MatchedNumberCount(4), false, Rank.FOURTH),
+                Arguments.of(new MatchedNumberCount(3), false, Rank.FIFTH)
         );
     }
 

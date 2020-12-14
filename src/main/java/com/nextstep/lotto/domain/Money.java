@@ -5,13 +5,13 @@ import com.nextstep.lotto.domain.exceptions.InvalidMoneyException;
 import java.util.Objects;
 
 public class Money {
-    private static final Long MIN_VALUE = 0L;
+    private static final Long POSITIVE_NUMBER_BOUNDARY = 0L;
     private static final Long LOTTO_TICKET_PRICE = 1000L;
 
     private final Long amount;
 
     public Money(final Long amount) {
-        validate(amount);
+        validateCreation(amount);
 
         this.amount = amount;
     }
@@ -36,8 +36,20 @@ public class Money {
         return amount;
     }
 
-    private void validate(final Long amount) {
-        if (amount < MIN_VALUE) {
+    public Money minusBoughtLottoTickets(final int numberOfBoughtLottoTickets) {
+        if (numberOfBoughtLottoTickets < POSITIVE_NUMBER_BOUNDARY) {
+            throw new InvalidMoneyException("로또 티켓 구매는 0장 이상으로만 가능합니다.");
+        }
+
+        return new Money(this.amount - numberOfBoughtLottoTickets * LOTTO_TICKET_PRICE);
+    }
+
+    boolean isEnoughToBuyTicket() {
+        return this.amount >= LOTTO_TICKET_PRICE;
+    }
+
+    private void validateCreation(final Long amount) {
+        if (amount < POSITIVE_NUMBER_BOUNDARY) {
             throw new InvalidMoneyException("돈은 0원 이상이어야만 합니다.");
         }
     }

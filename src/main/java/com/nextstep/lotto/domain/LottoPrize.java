@@ -3,7 +3,7 @@ package com.nextstep.lotto.domain;
 import java.util.*;
 
 public class LottoPrize {
-    private final Map<Rank, Long> result = new HashMap<>();
+    private final Map<Rank, Long> result = new LinkedHashMap<>();
 
     public LottoPrize(final List<Rank> ranks) {
         initDefaultResult();
@@ -21,11 +21,11 @@ public class LottoPrize {
     }
 
     private void initDefaultResult() {
-        result.put(Rank.FIRST, 0L);
-        result.put(Rank.SECOND, 0L);
-        result.put(Rank.THIRD, 0L);
-        result.put(Rank.FOURTH, 0L);
         result.put(Rank.FIFTH, 0L);
+        result.put(Rank.FOURTH, 0L);
+        result.put(Rank.THIRD, 0L);
+        result.put(Rank.SECOND, 0L);
+        result.put(Rank.FIRST, 0L);
     }
 
     private void updateResult(final List<Rank> ranks) {
