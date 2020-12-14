@@ -1,20 +1,21 @@
 package edu.nextstep.calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Numbers {
-	private final Number[] numbers;
+	private final List<Number> numbers;
 
 	public Numbers(String[] textSplitResult) {
-		numbers = new Number[textSplitResult.length];
-		for (int i = 0; i < textSplitResult.length; i++) {
-			numbers[i] = Number.createFromString(textSplitResult[i]);
-		}
+		this.numbers = Arrays.stream(textSplitResult)
+			.map(Number::createFromString)
+			.collect(Collectors.toList());
 	}
 
 	public int sumAll() {
-		Number result = Number.createFromInteger(0);
-		for (Number number : numbers) {
-			result = result.sum(number);
-		}
+		Number result = numbers.stream()
+			.reduce(Number.createFromInteger(0), Number::sum);
 		return result.getValue();
 	}
 }

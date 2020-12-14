@@ -1,20 +1,18 @@
-package edu.nextstep.calculator.domain;
+package edu.nextstep.calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import edu.nextstep.calculator.StringAddCalculator;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 @DisplayName("StringAddCalculator: 문자열 덧셈 계산기 기능 통합 테스트. 코스 본문의 TestCase 소스 코드를 그대로 사용함.")
 public class StringAddCalculatorTest {
-	@Test
-	public void splitAndSum_null_또는_빈문자() {
-		int result = StringAddCalculator.splitAndSum(null);
-		assertThat(result).isEqualTo(0);
-
-		result = StringAddCalculator.splitAndSum("");
+	@ParameterizedTest
+	@NullAndEmptySource
+	public void splitAndSum_null_또는_빈문자(String input) {
+		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(0);
 	}
 

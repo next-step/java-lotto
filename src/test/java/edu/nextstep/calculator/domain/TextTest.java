@@ -1,4 +1,4 @@
-package edu.nextstep.calculator.domain.domain;
+package edu.nextstep.calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import edu.nextstep.calculator.domain.Text;
 
 @DisplayName("Text: 사용자가 입력한 문자열 포장한 클래스")
 class TextTest {
