@@ -1,12 +1,17 @@
 package calculator.domain;
 
+import calculator.StringAddCalculator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Delimiters {
 
     private static final String TO_STRING_DELIMITER = "|";
+    private static final String REGEX_HAS_CUSTOM_DELIMITER = "//(.)\n(.*)";
 
     private final List<String> delimiters;
 
@@ -16,6 +21,22 @@ public class Delimiters {
 
     public Delimiters(List<String> delimiters) {
         this.delimiters = delimiters;
+    }
+
+
+    /**
+     * 커스텀구분자가 있으면 추출하여 구분자에 추가한 후 나머지 수식을 반환합니다.
+     * @param expression
+     * @return
+     */
+    public String extractCustomDelimiter(String expression) {
+        Matcher m = Pattern.compile(Delimiters.REGEX_HAS_CUSTOM_DELIMITER).matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            this.addDelimiter(m.group(1));
+            return m.group(2);
+        }
+        return expression;
     }
 
     /**

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class StringAddCalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"|0", "2|2", "2,3|5", "2:3|5","2,3:4|9"}, delimiter = '|')
+    @CsvSource(value = {"|0", "2|2", "2,3|5", "2:3|5", "2,3:4|9"}, delimiter = '|')
     @DisplayName("주어진 문자열을 구분자로 나누고 합계를 구합니다")
     public void splitAndSum(String input, String expected) {
         // given
@@ -38,5 +38,19 @@ public class StringAddCalculatorTest {
         // then
         assertThat(throwable).isInstanceOf(RuntimeException.class)
                              .hasMessageContaining("숫자가 아니거나 음의 값입니다.");
+    }
+
+    @Test
+    @DisplayName("커스텀구분자가 포함된 문자열을 구분자로 나누고 합계를 구합니다")
+    public void splitAndSumCustom() {
+        // given
+        String expression = "//;\n1,2:3;4";
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(expression);
+
+        // when
+        int result = stringAddCalculator.splitAndSum();
+
+        // then
+        assertThat(result).isEqualTo(10);
     }
 }

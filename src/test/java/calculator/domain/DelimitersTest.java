@@ -1,11 +1,11 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DelimitersTest {
 
@@ -18,8 +18,23 @@ public class DelimitersTest {
 
         // when
         delimiters.addDelimiter(input);
-        System.out.println(delimiters.toString());
+
         // then
         assertThat(delimiters.toString()).contains(expected.split(" "));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 추가하는 테스트")
+    public void extractCustomDelimiter() {
+        // given
+        String expression = "//;\n1;2;3";
+        Delimiters delimiters = new Delimiters();
+
+        // when
+        delimiters.extractCustomDelimiter(expression);
+
+        // then
+        assertThat(delimiters.toString()).contains(";");
+
     }
 }

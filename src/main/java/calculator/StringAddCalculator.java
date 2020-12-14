@@ -25,7 +25,8 @@ public class StringAddCalculator {
         if(this.isZeroInput(mathExpression)) {
             return 0;
         }
-        return this.findSum(mathExpression.split(this.delimiters.toString()));
+        String expression = this.delimiters.extractCustomDelimiter(mathExpression);
+        return this.findSum(expression.split(this.delimiters.toString()));
     }
 
     /**
@@ -69,6 +70,6 @@ public class StringAddCalculator {
      * @return
      */
     private boolean isInteger(String stringNumber) {
-        return Pattern.matches(REGEX_POSITIVE_INTEGER, stringNumber);
+        return Pattern.matches(StringAddCalculator.REGEX_POSITIVE_INTEGER, stringNumber);
     }
 }
