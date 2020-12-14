@@ -1,5 +1,8 @@
 package step2.domain;
 
+import static step2.domain.LottoNumberGenerator.END_NUMBER;
+import static step2.domain.LottoNumberGenerator.START_NUMBER;
+
 public class Number {
 
     private int number;
@@ -10,7 +13,7 @@ public class Number {
     }
 
     public boolean isLotto() {
-        return number > 0 && number <= 45;
+        return number >= START_NUMBER && number <= END_NUMBER;
     }
 
     public int getNumber() {
