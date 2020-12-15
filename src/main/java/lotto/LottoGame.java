@@ -19,7 +19,7 @@ public class LottoGame {
 
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine();
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers), InputView.inputBonusBall());
 
         LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
