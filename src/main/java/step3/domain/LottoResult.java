@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int DEFAULT_RANK_VALUE = 1;
 
     private Map<Integer, List<Lotto>> lottoResultMap;
 
@@ -25,8 +26,8 @@ public class LottoResult {
     private void setRankEnumMap(EnumMap<Rank, Integer> enumMap, Integer key) {
         for (Lotto lotto : lottoResultMap.get(key)) {
             Rank rank = Rank.valueOf(key, lotto.isMatchBonus());
-            enumMap.computeIfPresent(rank, (k, v)->v+1);
-            enumMap.putIfAbsent(rank,1);
+            enumMap.computeIfPresent(rank, (k, v)->v+DEFAULT_RANK_VALUE);
+            enumMap.putIfAbsent(rank,DEFAULT_RANK_VALUE);
         }
     }
 
