@@ -20,7 +20,9 @@ public class LottoRunner {
 	}
 
 	public LottoMatchResults match(WinningNumber winningNumber) {
-		return this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
+		this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
+		this.manualLottoNumbers.match(this.lottoMatchResults, winningNumber);
+		return this.lottoMatchResults;
 	}
 
 	public long autoAmountWithoutManual(long payment) {
