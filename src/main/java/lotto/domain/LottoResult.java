@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-
     private static final int EMPTY_KEY_RESULT_COUNT = 0;
     private static final int INITIAL_COUNT = 0;
+
     private final Map<Integer, Integer> sameCountMap;
     private final int buyAmount;
 
