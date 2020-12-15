@@ -44,6 +44,10 @@ public class LottoResult {
 		return earningsRate;
 	}
 
+	public int getTotalPrizeMoney() {
+		return totalPrizeMoney;
+	}
+
 	public void arrangePrize(List<Integer> lottoMatchCountResult, int lottoPricePerSheet) {
 		for (Integer matchCount : lottoMatchCountResult) {
 			calculateLottoPrize(matchCount);
