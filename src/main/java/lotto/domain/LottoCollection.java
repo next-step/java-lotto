@@ -1,20 +1,24 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoCollection {
     private static final int ONE_LOTTO_COST = 1000;
 
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoList;
     private final int buyAmount;
 
     public LottoCollection(int buyAmount, NumberListGenerator numberListGenerator) {
         this.buyAmount = buyAmount;
         int lottoCount = convertLottoCount(buyAmount);
-        for (int i = 0; i < lottoCount; i++) {
-            Set<Integer> generate = numberListGenerator.generate();
-            lottoList.add(new Lotto(generate));
-        }
+
+        lottoList = IntStream
+                .range(0, lottoCount)
+                .mapToObj(i -> new Lotto(numberListGenerator.generate()))
+                .collect(Collectors.toList());
     }
 
     public LottoResult getLottoResult(Lotto winnerLotto) {
