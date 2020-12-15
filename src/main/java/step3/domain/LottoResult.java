@@ -1,27 +1,36 @@
 package step3.domain;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int ALL_WINNINGS =  2000000000;
-    private static final int FIVE_WINNINGS =  1500000;
-    private static final int FOUR_WINNINGS =  50000;
-    private static final int THREE_WINNINGS =  5000;
 
-    private Map<Integer, Long> lottoResultMap;
+    private Map<Integer, List<Lotto>> lottoResultMap;
 
-    public LottoResult(Map<Integer, Long> lottoResultMap) {
+    public LottoResult(Map<Integer, List<Lotto>> lottoResultMap) {
         this.lottoResultMap = lottoResultMap;
     }
 
-    public long winningResult(int count) {
-        return lottoResultMap.getOrDefault(count,0l);
+    public EnumMap<Rank, Integer> winningResult() {
+        EnumMap<Rank, Integer> enumMap = new EnumMap(Rank.class);
+
+        for (Integer key : lottoResultMap.keySet()) {
+            setRankEnumMap(enumMap, key);
+        }
+        return enumMap;
     }
 
-    public long winnings() {
-        return (ALL_WINNINGS * winningResult(6)
-                        + FIVE_WINNINGS * winningResult(5)
-                        + FOUR_WINNINGS * winningResult(4)
-                        + THREE_WINNINGS * winningResult(3));
+    private void setRankEnumMap(EnumMap<Rank, Integer> enumMap, Integer key) {
+        for (Lotto lotto : lottoResultMap.get(key)) {
+            Rank rank = Rank.valueOf(key, lotto.isMatchBonus());
+            enumMap.computeIfPresent(rank, (k, v)->v+1);
+            enumMap.putIfAbsent(rank,1);
+        }
+    }
+
+    public List<Lotto> getLottos(int key) {
+        return lottoResultMap.getOrDefault(key, new ArrayList<>());
     }
 }
