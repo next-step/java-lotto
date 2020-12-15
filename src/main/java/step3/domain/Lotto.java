@@ -4,23 +4,33 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lotto;
     private int count;
+    private boolean matchBonus = false;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNumber> lotto) {
+        this.lotto = lotto;
     }
 
-    public void equalCheck(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) count++;
+    public void equalCheck(LottoNumber lottoNumber, LottoNumber bonusNumber) {
+        if (lotto.contains(lottoNumber)) count++;
+        if (lotto.contains(bonusNumber)) setMatchBonus(true);
     }
 
     public List<LottoNumber> getNumbers() {
-        return lottoNumbers;
+        return lotto;
     }
 
     public int getCount() {
         return count;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
+
+    public void setMatchBonus(boolean matchBonus) {
+        this.matchBonus = matchBonus;
     }
 
     @Override
@@ -28,18 +38,19 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Lotto that = (Lotto) o;
+        Lotto lotto1 = (Lotto) o;
 
-        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
+        return lotto != null ? lotto.equals(lotto1.lotto) : lotto1.lotto == null;
     }
 
     @Override
     public int hashCode() {
-        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+        return lotto != null ? lotto.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lotto.toString() + " " + matchBonus;
+        /*return lotto.toString();*/
     }
 }

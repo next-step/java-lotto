@@ -6,26 +6,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
-import step3.domain.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static step3.domain.LottoTest.generateLottoNumber_1to6;
+import static step3.domain.factory.LottoFactory.produceLotto;
 
-class LottoNumbersTest {
+class LottosTest {
 
-    private LottoNumbers lottoNumbers;
+    private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         List<Lotto> numbers = new ArrayList<>();
-        numbers.add(generateLottoNumber_1to6());
-        numbers.add(generateLottoNumber_1to6());
-        lottoNumbers = new LottoNumbers(numbers);
+        numbers.add(produceLotto("1,2,3,4,5,6"));
+        numbers.add(produceLotto("1,2,3,4,5,6"));
+        lottos = new Lottos(numbers);
     }
 
     @ParameterizedTest
@@ -35,10 +32,10 @@ class LottoNumbersTest {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lottoNumbers.checkWinningLotto(new LottoNumber(Integer.parseInt(winningNumber)));
+            lottos.checkWinningLotto(new LottoNumber(Integer.parseInt(winningNumber)),new LottoNumber(0));
         }
 
-        Assertions.assertEquals(lottoNumbers.winningResultMap().get(expected), 2);
+        Assertions.assertEquals(lottos.winningLottoResult().getLottos(expected).size(), 2);
     }
 
     static Stream<Arguments> generateLottoNumbersData() {
