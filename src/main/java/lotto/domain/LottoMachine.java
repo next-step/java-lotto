@@ -12,9 +12,13 @@ public class LottoMachine {
     private static final String DELIMITER = ", ";
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final String PRICE_ERROR_MESSAGE = "1000원 이상의 금액을 입력해야합니다.";
-    private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LottoMagicNumber.START.get(), LottoMagicNumber.END.get())
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+    private static final List<LottoNumber> lottoNumbers;
+
+    static {
+        lottoNumbers = IntStream.rangeClosed(LottoMagicNumber.START.get(), LottoMagicNumber.END.get())
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     public LottoMachine() {
     }
@@ -41,7 +45,7 @@ public class LottoMachine {
                 .collect(Collectors.toList()));
     }
 
-    public int purchaseQuantity(int price) {
+    protected int purchaseQuantity(int price) {
         if (price < ONE_LOTTO_PRICE) {
             throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
         }
