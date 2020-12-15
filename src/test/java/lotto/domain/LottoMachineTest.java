@@ -56,11 +56,8 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void manyGenerate(int price, int expected) {
-        //given
-        int purchaseQuantity = lottoMachine.purchaseQuantity(price);
-
         //when
-        LottoTickets lottoTickets = lottoMachine.generate(purchaseQuantity);
+        LottoTickets lottoTickets = lottoMachine.generate(price);
 
         //then
         Assertions.assertEquals(expected, lottoTickets.lottoTicketCount());
