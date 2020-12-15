@@ -13,6 +13,10 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
+    public Lotto(Set<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public Set<Integer> getNumbers() {
         return numbers;
     }
