@@ -13,12 +13,9 @@ class PublishedLottoTicketTest {
     @DisplayName("구매한 갯수 만큼 로또 티켓 발행 테스트")
     void publish_lotto_ticket(int count) {
         // given
-        LottoMachine.getInstance();
-
-        // when
         PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.ofLottoTicketCount(count);
 
-        // then
+        // when & then
         assertThat(publishedLottoTicket.getPublishedLottoTicket().size()).isEqualTo(count);
     }
 

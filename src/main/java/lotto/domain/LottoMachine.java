@@ -17,25 +17,14 @@ public class LottoMachine {
                 .boxed().distinct().forEach(lottoNumbers::add);
     }
 
-    private LottoMachine() {
-    }
-
-    private static class LottoMachineLazyHolder {
-        private static final LottoMachine instance = new LottoMachine();
-    }
-
-    public static LottoMachine getInstance() {
-        return LottoMachineLazyHolder.instance;
-    }
-
-    public static Set<LottoNumber> generateLottoNumber() {
+    public Set<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
                 .map(number -> LottoNumber.ofNumber(number))
                 .collect(Collectors.toSet());
     }
 
-    public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+    public Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
         Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers);
         Set<LottoNumber> lotto = new HashSet<>();
 

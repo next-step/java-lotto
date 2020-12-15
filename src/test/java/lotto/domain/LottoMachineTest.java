@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoMachineTest {
+class LottoMachineTest {
 
     @Test
     @DisplayName("로또 머신에서 번호 생성 테스트")
     void generate_lotto_numbers_test() {
         // given
-        LottoMachine.getInstance();
+        LottoMachine lottoMachine = new LottoMachine();
 
         // when & then
-        assertThat(LottoMachine.generateLottoNumber().size()).isEqualTo(6);
+        assertThat(lottoMachine.generateLottoNumber().size()).isEqualTo(6);
     }
 }

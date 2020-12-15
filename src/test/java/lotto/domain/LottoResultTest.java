@@ -19,8 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-    List<Integer> winningLottoNumbers = new ArrayList<>();
-    Set<LottoTicket> lottoTickets = new HashSet<>();
+    private LottoMachine lottoMachine = new LottoMachine();
+    private List<Integer> winningLottoNumbers = new ArrayList<>();
+    private Set<LottoTicket> lottoTickets = new HashSet<>();
 
     @BeforeEach
     void init() {
@@ -29,10 +30,10 @@ class LottoResultTest {
 
     @BeforeEach
     void setLottoTicket() {
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
-        lottoTickets.add(new LottoTicket(LottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
+        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
+        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
+        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
+        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
     }
 
     @ParameterizedTest
@@ -40,7 +41,7 @@ class LottoResultTest {
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
         // given
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();
@@ -54,7 +55,7 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
         // given
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();

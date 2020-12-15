@@ -7,24 +7,12 @@ public class LottoShop {
     private static final int DEFAULT_LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
 
-    private LottoShop() {
-    }
-
-    private static class LottoShopLazyHolder {
-        private static final LottoShop instance = new LottoShop();
-    }
-
-    public static LottoShop getInstance() {
-        return LottoShop.LottoShopLazyHolder.instance;
-    }
-
     public PublishedLottoTicket buyLotto(LottoMoney lottoMoney, LottoTicketCount lottoTicketCount) {
 
         int money = lottoMoney.getMoney();
         validatePriceIsEmpty(money);
         validatePriceIsDivide(money);
 
-        LottoMachine.getInstance();
         PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.ofLottoTicketCount(lottoTicketCount.getLottoTicketCount());
 
         return publishedLottoTicket;

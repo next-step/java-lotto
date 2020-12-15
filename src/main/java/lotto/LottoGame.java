@@ -12,13 +12,14 @@ public class LottoGame {
         LottoMoney lottoMoney = new LottoMoney(InputView.inputMoney());
         LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney);
 
-        LottoShop lottoShop = LottoShop.getInstance();
+        LottoShop lottoShop = new LottoShop();
         PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney, lottoTicketCount);
 
         OutputView.printPublishedLottoResult(lottoTicketCount, publishedLottoTicket);
 
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(LottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        LottoMachine lottoMachine = new LottoMachine();
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
 
         LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);

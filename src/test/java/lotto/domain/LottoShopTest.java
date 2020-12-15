@@ -12,7 +12,7 @@ class LottoShopTest {
 
     @BeforeEach
     void init() {
-        lottoShop = LottoShop.getInstance();
+        lottoShop = new LottoShop();
     }
 
     @Test

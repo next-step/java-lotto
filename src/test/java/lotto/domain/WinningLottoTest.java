@@ -13,9 +13,10 @@ class WinningLottoTest {
     void winning_lotto_number_test() {
         // given
         String numbers = "1,2,3,4,5,6";
+        LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(LottoMachine.createManualLottoNumbers(StringSplitter.splitText(numbers)));
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(StringSplitter.splitText(numbers)));
 
         // then
         assertThat(winningLotto.getWinningLottoTicket().getLottoTicketNumbers().size()).isEqualTo(6);
