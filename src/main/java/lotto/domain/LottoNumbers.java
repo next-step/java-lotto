@@ -31,9 +31,9 @@ public class LottoNumbers {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public LottoNumbers addNumbers(LottoNumbers manualNumbers) {
+	public LottoNumbers addNumbers(LottoNumbers addedNumbers) {
 		List<LottoNumber> newLottoNumbers = new ArrayList<>(this.lottoNumbers);
-		newLottoNumbers.addAll(manualNumbers.lottoNumbers);
+		newLottoNumbers.addAll(addedNumbers.lottoNumbers);
 		return new LottoNumbers(newLottoNumbers);
 	}
 
