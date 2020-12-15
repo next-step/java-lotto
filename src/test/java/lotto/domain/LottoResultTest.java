@@ -1,0 +1,67 @@
+package lotto.domain;
+
+import lotto.util.StringUtil;
+import lotto.util.StringSplitter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class LottoResultTest {
+
+    private LottoMachine lottoMachine = new LottoMachine();
+    private List<Integer> winningLottoNumbers = new ArrayList<>();
+    private Set<LottoTicket> lottoTickets = new HashSet<>();
+
+    @BeforeEach
+    void init() {
+        winningLottoNumbers = StringUtil.textToInt("1,2,3,4,5,6".split(","));
+    }
+
+    @BeforeEach
+    void setLottoTicket() {
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45")));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH"})
+    @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
+    void analyze_lotto_rank(WinningPrize rank) {
+        // given
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
+
+        // when
+        LottoResult lottoResult = LottoResult.getInstance();
+        lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
+
+        // then
+        assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    void calculate_prize_rate() {
+        // given
+        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
+
+        // when
+        LottoResult lottoResult = LottoResult.getInstance();
+        lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
+
+        // then
+        assertThat(lottoResult.calculatePrizeRate(new LottoMoney(5000))).isEqualTo(BigDecimal.valueOf(400311.00).setScale(2, RoundingMode.FLOOR));
+    }
+}
