@@ -20,26 +20,27 @@ class LottoShopTest {
     void buy_lotto_test() {
         // given
         int money = 14000;
+        LottoMoney lottoMoney = new LottoMoney(money);
 
         // when & then
-        assertThat(lottoShop.buyLotto(money).getPublishedLottoTicket()).hasSize(money / 1000);
+        assertThat(lottoShop.buyLotto(lottoMoney).getPublishedLottoTicket()).hasSize(money / 1000);
     }
 
     @Test
     @DisplayName("구매 금액 0 또는 음수 테스트")
     void zero_or_negative_money_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lottoShop.buyLotto(0);
-            lottoShop.buyLotto(-1000);
-        }).withMessageMatching("금액은 최소 0이상 이어야 구매 가능합니다.");
+            lottoShop.buyLotto(new LottoMoney(0));
+            lottoShop.buyLotto(new LottoMoney(-1000));
+        }).withMessageMatching("금액이 부족합니다. 로또를 구매할 수 없습니다.");
     }
 
     @Test
     @DisplayName("구매 금액이 천원 단위가 아닌 경우 테스트")
     void not_divided_by_1000_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lottoShop.buyLotto(500);
-        }).withMessageMatching("지불한 금액이 1000원으로 나누어지지 않습니다.");
+            lottoShop.buyLotto(new LottoMoney(500));
+        }).withMessageMatching("금액이 부족합니다. 로또를 구매할 수 없습니다.");
     }
 
 }

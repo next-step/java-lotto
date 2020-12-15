@@ -20,13 +20,13 @@ public class LottoResult {
         return new LottoResult();
     }
 
-    public BigDecimal calculatePrizeRate(int money) {
+    public BigDecimal calculatePrizeRate(LottoMoney lottoMoney) {
         double totalPrize = lottoPrizeResult.entrySet().stream()
                 .mapToInt(result -> result.getKey().getPrize() * result.getValue())
                 .sum();
 
         BigDecimal reward = BigDecimal.valueOf(totalPrize);
-        BigDecimal amount = BigDecimal.valueOf(money);
+        BigDecimal amount = BigDecimal.valueOf(lottoMoney.getMoney());
 
         return reward.divide(amount, SCALE, RoundingMode.FLOOR);
     }

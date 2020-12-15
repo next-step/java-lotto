@@ -61,6 +61,6 @@ class LottoResultTest {
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
 
         // then
-        assertThat(lottoResult.calculatePrizeRate(5000)).isEqualTo(BigDecimal.valueOf(400311.00).setScale(2, RoundingMode.FLOOR));
+        assertThat(lottoResult.calculatePrizeRate(new LottoMoney(5000))).isEqualTo(BigDecimal.valueOf(400311.00).setScale(2, RoundingMode.FLOOR));
     }
 }

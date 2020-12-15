@@ -10,10 +10,10 @@ public class LottoGame {
 
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.inputMoney());
-        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney.getMoney());
+        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney);
 
         LottoShop lottoShop = LottoShop.getInstance();
-        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney.getMoney());
+        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney);
 
         OutputView.printPublishedLottoResult(lottoTicketCount, publishedLottoTicket);
 
@@ -23,7 +23,7 @@ public class LottoGame {
         LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
 
-        OutputView.printLottoStatics(lottoResult, lottoResult.calculatePrizeRate(lottoMoney.getMoney()));
+        OutputView.printLottoStatics(lottoResult, lottoResult.calculatePrizeRate(lottoMoney));
     }
 
 }

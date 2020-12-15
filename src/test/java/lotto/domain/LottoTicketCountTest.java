@@ -11,10 +11,10 @@ class LottoTicketCountTest {
     @DisplayName("구매한 로또 티켓 갯수 확인")
     void lotto_ticket_count_test() {
         // given
-        int money = 14000;
+        LottoMoney lottoMoney = new LottoMoney(14000);
 
         // when
-        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(money);
+        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney);
 
        // then
         assertThat(lottoTicketCount.getLottoTicketCount()).isEqualTo(14);
