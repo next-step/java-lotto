@@ -2,11 +2,11 @@ package step3;
 
 import step3.domain.LottoGame;
 import step3.domain.LottoNumberGenerator;
+import step3.domain.LottoResult;
 
 import java.math.BigDecimal;
 
-import static step3.view.InputView.inputMessageLastWeekWinningNumber;
-import static step3.view.InputView.inputMessageLottoAmount;
+import static step3.view.InputView.*;
 import static step3.view.OutputView.outputMessageLottoNumbers;
 import static step3.view.OutputView.outputMessageLottoResult;
 
@@ -17,8 +17,8 @@ public class LottoGameMain {
         LottoGame lottoGame = new LottoGame(BigDecimal.valueOf(amount), new LottoNumberGenerator());
         outputMessageLottoNumbers(lottoGame.getLottoNumbers());
 
-        String lastWinningNumber = inputMessageLastWeekWinningNumber();
-        outputMessageLottoResult(amount, lottoGame.lottoResultMap(lastWinningNumber));
+        LottoResult lottoResult = lottoGame.lottoResultMap(inputMessageLastWeekWinningNumber(), inputMessageBonusNumber());
+        outputMessageLottoResult(amount, lottoResult);
     }
 
 
