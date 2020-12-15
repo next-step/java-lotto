@@ -37,14 +37,14 @@ public enum LottoRank {
         return winningPrice;
     }
 
-    protected boolean isMatched(long matchedCount, boolean matchedBonus) {
-        return this.matchedCount == matchedCount;
-    }
-
     public static LottoRank select(long matchedCount, boolean matchedBonus) {
         return Stream.of(LottoRank.values())
                 .filter(lottoWinning -> lottoWinning.isMatched(matchedCount, matchedBonus))
                 .findFirst()
                 .orElse(RETIRE);
+    }
+
+    protected boolean isMatched(long matchedCount, boolean matchedBonus) {
+        return this.matchedCount == matchedCount;
     }
 }

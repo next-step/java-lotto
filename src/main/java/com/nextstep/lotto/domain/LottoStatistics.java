@@ -16,14 +16,6 @@ public class LottoStatistics {
         lottoRanks.forEach(this::addCount);
     }
 
-    private void addCount(LottoRank lottoRank) {
-        int count = 0;
-        if (result.containsKey(lottoRank)) {
-            count = result.get(lottoRank);
-        }
-        result.put(lottoRank, count + 1);
-    }
-
     public int getCount(LottoRank lottoRank) {
         if (result.containsKey(lottoRank)) {
             return result.get(lottoRank);
@@ -36,6 +28,14 @@ public class LottoStatistics {
         double totalProfit = getTotalProfit();
         double profitRate = totalProfit / totalPrice;
         return new BigDecimal(profitRate).setScale(2, RoundingMode.DOWN).doubleValue();
+    }
+
+    private void addCount(LottoRank lottoRank) {
+        int count = 0;
+        if (result.containsKey(lottoRank)) {
+            count = result.get(lottoRank);
+        }
+        result.put(lottoRank, count + 1);
     }
 
     private int getTotalCount() {
