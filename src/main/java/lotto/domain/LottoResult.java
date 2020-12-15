@@ -33,7 +33,7 @@ public class LottoResult {
         return rateCalculation(totalReward, purchaseAmount);
     }
 
-    protected static double rateCalculation(long totalReward, double purchaseAmount) {
+    public static double rateCalculation(long totalReward, double purchaseAmount) {
         return Math.floor((totalReward / purchaseAmount) * DECIMAL_CALCULATION_NUMBER) / DECIMAL_CALCULATION_NUMBER;
     }
 

@@ -7,9 +7,6 @@ import lotto.domain.WinningNumber;
 
 public class LottoGame {
 
-    public LottoGame() {
-    }
-
     public LottoTickets generateLottoTickets(int price, LottoMachine lottoMachine) {
         return lottoMachine.generate(price);
     }

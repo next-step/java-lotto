@@ -20,9 +20,6 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public LottoMachine() {
-    }
-
     public LottoTicket generate() {
         lottoNumbersShuffle();
         return new LottoTicket(new ArrayList<>(lottoNumbers.subList(LottoMagicNumber.BASE_INDEX.get(), LottoMagicNumber.NUMBER_COUNT.get())));
