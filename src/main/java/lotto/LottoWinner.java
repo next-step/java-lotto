@@ -28,8 +28,9 @@ public final class LottoWinner {
     }
 
     public int getMatchLottoCnt(Lotto lotto) {
-        return winnerLotto.getLottoNumbers().stream().mapToInt(lottoNumber -> {
-            return lotto.judgeWinnerNumber(lottoNumber);
-        }).sum();
+        return (int) winnerLotto.getLottoNumbers()
+                .stream()
+                .filter(lotto::isContainLottoNumber)
+                .count();
     }
 }

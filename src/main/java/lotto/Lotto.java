@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
-    private final List<LottoNumber> initlottoNumber = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNumber::from).collect(Collectors.toList());
+    private final static List<LottoNumber> initlottoNumber = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNumber::from).collect(Collectors.toList());
     public final List<LottoNumber> lottoNumbers;
 
     private Lotto() {
@@ -21,8 +21,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private Lotto(LottoNumber[] winnerLotto) {
-        this.lottoNumbers = Arrays.stream(winnerLotto).collect(Collectors.toList());
+    private Lotto(LottoNumber[] lottoNumbers) {
+        validLottoNumberCheck(lottoNumbers);
+        this.lottoNumbers = Arrays.stream(lottoNumbers).collect(Collectors.toList());
+    }
+
+    private void validLottoNumberCheck(LottoNumber[] lottoNumbers) {
+        if(lottoNumbers.length != 6){
+            throw new IllegalStateException("로또번호가 올바르지 않습니다.");
+        }
     }
 
     public static Lotto from(List<LottoNumber> lottoNumbers){
@@ -50,7 +57,7 @@ public class Lotto {
     }
 
     public boolean isContainLottoNumber(LottoNumber lottoNumber){
-        return this.lottoNumbers.stream().filter(n -> n.toString().equals(lottoNumber.toString())).findFirst().isPresent();
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public Integer judgeWinnerNumber(LottoNumber lottoNumber) {

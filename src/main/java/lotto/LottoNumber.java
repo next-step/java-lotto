@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     public static final int LOTTO_MIN_NUMBER = 1;
@@ -30,6 +32,19 @@ public class LottoNumber {
             throw new IllegalArgumentException("로또번호 범위 유효성검증 오류");
         }
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override
