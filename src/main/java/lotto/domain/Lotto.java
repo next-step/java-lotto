@@ -1,19 +1,41 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String NUMBER_DELIMITER = ", ";
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public long matchNumberCnt(Lotto winningLotto) {
-        return numbers.stream()
+    public Lotto(String winNumbers) {
+        String[] split = winNumbers.split(NUMBER_DELIMITER);
+        this.numbers = Arrays.stream(split)
+                .map(it -> {
+                    try {
+                        return Integer.parseInt(it);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("숫자만 입력해 주세요.");
+                    }
+                }).collect(Collectors.toList());
+    }
+
+    public int matchNumberCnt(Lotto winningLotto) {
+        return (int) numbers.stream()
                 .filter(winningLotto.numbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(NUMBER_DELIMITER));
     }
 
     @Override
