@@ -8,33 +8,33 @@ public class LottoGame {
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
 
     private LottoNumberGenerator lottoNumberGenerator;
-    private LottoNumbers lottoNumbers;
+    private Lottos lottos;
 
     public LottoGame(BigDecimal amount, LottoNumberGenerator generator) {
         lottoNumberGenerator = generator;
-        lottoNumbers = buyLottoNumbers(amount);
+        lottos = buyLottoNumbers(amount);
     }
 
-    public LottoResult lottoResultMap(String lastWinningNumber) {
+    public LottoResult lottoResultMap(String lastWinningNumber, int bonusNumber) {
         String[] winningNumbers = lastWinningNumber.split(",");
         for (String number : winningNumbers) {
-            lottoNumbers.checkWinningLotto(new LottoNumber(Integer.parseInt(number)));
+            lottos.checkWinningLotto(new LottoNumber(Integer.parseInt(number)), new LottoNumber(bonusNumber));
         }
-        return new LottoResult(lottoNumbers.winningResultMap());
+        return lottos.winningLottoResult();
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public Lottos getLottoNumbers() {
+        return lottos;
     }
 
-    private LottoNumbers buyLottoNumbers(BigDecimal amount) {
+    private Lottos buyLottoNumbers(BigDecimal amount) {
         List<Lotto> numbers = new ArrayList<>();
 
         for (int i=0; i<lottoCount(amount); i++) {
             numbers.add(buyLottoNumber());
         }
 
-        return new LottoNumbers(numbers);
+        return new Lottos(numbers);
     }
 
     private int lottoCount(BigDecimal amount) {
