@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,23 +13,23 @@ import java.util.stream.Collectors;
 public class WinningLottoNumbers {
 	private static final String REGEX = ",";
 	private static final int LOTTO_TICKET_WINNING_COUNT = 6;
-	private Set<LottoNumber> lottoTicketNumbers;
+	private LottoTicket lottoTicket;
 
 	public WinningLottoNumbers(String arg) {
-		lottoTicketNumbers = convertUserInput(arg);
+		lottoTicket = convertUserInput(arg);
 	}
 
-	private Set<LottoNumber> convertUserInput(String arg) {
+	private LottoTicket convertUserInput(String arg) {
 		validateUserInput(arg);
 		String[] splits = split(arg);
-		Set<LottoNumber> convertedLottoNumbers = Arrays.stream(splits)
+		List<LottoNumber> convertedLottoNumbers = Arrays.stream(splits)
 			.map(str -> parser(str))
-			.collect(Collectors.toSet());
+			.collect(Collectors.toList());
 		validateConvertedLottoNumbers(convertedLottoNumbers);
-		return convertedLottoNumbers;
+		return new LottoTicket(convertedLottoNumbers);
 	}
 
-	private void validateConvertedLottoNumbers(Set<LottoNumber> convertedLottoNumbers) {
+	private void validateConvertedLottoNumbers(List<LottoNumber> convertedLottoNumbers) {
 		if (convertedLottoNumbers.size() != LOTTO_TICKET_WINNING_COUNT)
 			throw new IllegalArgumentException("서로 다른 6개의 당첨 번호를 입력해 주세요.");
 	}
@@ -52,7 +53,7 @@ public class WinningLottoNumbers {
 		return arg.split(REGEX);
 	}
 
-	public Set<LottoNumber> getLottoTicketNumbers() {
-		return lottoTicketNumbers;
+	public LottoTicket getLottoTicket() {
+		return lottoTicket;
 	}
 }

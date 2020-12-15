@@ -40,4 +40,10 @@ public class LottoTicket {
 			"lottoTicketNumbers=" + lottoTicketNumbers +
 			'}';
 	}
+
+	public Long getMatchCount(LottoTicket winnerLottoTicket) {
+		Set<LottoNumber> winnerLottoNumbers = winnerLottoTicket.get();
+		return lottoTicketNumbers.stream().filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
+			.count();
+	}
 }

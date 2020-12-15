@@ -18,8 +18,11 @@ public class LottoTickets {
 	private List<LottoTicket> lottoTickets;
 
 	public LottoTickets(int cash) {
-		lottoTickets = new ArrayList<>();
 		lottoTickets = createTickets(cash);
+	}
+
+	public LottoTickets(List<LottoTicket> customLottoTickets) {
+		lottoTickets = customLottoTickets;
 	}
 
 	private List<LottoTicket> createTickets(int cash) {
@@ -61,6 +64,10 @@ public class LottoTickets {
 
 	public List<LottoTicket> getLottoTickets() {
 		return lottoTickets;
+	}
+
+	public static int getLottoTicketPrice() {
+		return LOTTO_TICKET_PRICE;
 	}
 
 	@Override
