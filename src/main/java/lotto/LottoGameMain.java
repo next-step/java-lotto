@@ -14,7 +14,9 @@ public class LottoGameMain {
         OutputView.printTickets(lottoGame.getLottoTickets());
 
         String winningNumbers = InputView.lastWinningNumbers();
-        MatchResult matchResult = lottoGame.match(winningNumbers);
+        String bonusNumber = InputView.bonusNumber();
+        MatchResult matchResult = lottoGame.match(winningNumbers, bonusNumber);
+
         OutputView.printResults(matchResult);
     }
 }

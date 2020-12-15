@@ -20,12 +20,16 @@ public class LottoTicketsTest {
     void create() {
         //given
         int money = 1_000;
+        FixedTicketMachine ticketMachine = new FixedTicketMachine();
 
         //when
-        LottoTickets lottoTickets = new LottoTickets(money, new RandomTicketMachine());
+        LottoTickets lottoTickets = new LottoTickets(money, ticketMachine);
 
         //then
+        LottoTickets expected = new LottoTickets(ticketMachine.issue(1));
+
         assertThat(lottoTickets).isNotNull();
+        assertThat(lottoTickets).isEqualTo(expected);
     }
 
     @DisplayName("객체생성 - 최소금액 부족")
@@ -57,16 +61,18 @@ public class LottoTicketsTest {
         ));
 
         //when
-        LottoTicket lastWinningTicket = new LottoTicket(new HashSet<>(lottoNumbers.subList(0, 6)));
+        WinningTicket lastWinningTicket = new WinningTicket(new HashSet<>(lottoNumbers.subList(0, 6)), new LottoNumber(45));
         MatchResult result = lottoTickets.match(lastWinningTicket);
 
         //then
-        Map<Integer, Integer> matchResult = new HashMap<>();
-        matchResult.put(6, 1);
-        matchResult.put(5, 2);
-        matchResult.put(4, 0);
-        matchResult.put(3, 1);
-        MatchResult expected = new MatchResult(matchResult);
+        Map<MatchCount, Integer> matchMap = new HashMap<MatchCount, Integer>() {{
+            put(MatchCount.FORTH, 1);
+            put(MatchCount.THIRD, 0);
+            put(MatchCount.SECOND, 2);
+            put(MatchCount.SECOND_WITH_BONUS, 0);
+            put(MatchCount.FIRST, 1);
+        }};
+        MatchResult expected = new MatchResult(matchMap, 5);
 
         assertThat(result).isEqualTo(expected);
     }
