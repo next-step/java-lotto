@@ -78,5 +78,5 @@
 - [X] 보너스볼을 입력받는다.
 - [X] 당첨 번호 WinningLotto 클래스에 2등 관련 보너스볼 추가 및 테스트
 - [X] LottoTicket 클래스에 보너스볼 포함 여부 판단
-- [ ] 로또 2등을 위해 보너스볼을 WinningPrize 클래스에 추가 및 테스트
-- [ ] 당첨 결과 WinningResult 클래스에 보너스볼 체크 추가 및 테스트
+- [X] WinningPrize 클래스에 보너스볼 추가에 따른 2등 당첨 수정
+- [X] WinningResult 클래스에 보너스볼 체크 추가 및 테스트
