@@ -26,4 +26,10 @@ class LottoNumberTest {
 		assertThatThrownBy(() -> new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("equals: LottoNumber 객체의 원시값이 같으면 같은 LottoNumber 객체임.")
+	@Test
+	void equals() {
+		assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+	}
 }

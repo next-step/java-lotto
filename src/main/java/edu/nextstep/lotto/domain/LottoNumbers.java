@@ -15,4 +15,10 @@ public class LottoNumbers {
 			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 	}
+
+	public int countBySame(LottoNumbers other) {
+		return (int)lottoNumbers.stream()
+			.filter(other.lottoNumbers::contains)
+			.count();
+	}
 }
