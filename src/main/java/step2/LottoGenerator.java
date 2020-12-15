@@ -36,16 +36,6 @@ public class LottoGenerator {
         return lottos;
     }
 
-    public static List<Lotto> generateLottos(List<List<Integer>> numbersList) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for(List<Integer> manualLotto : numbersList) {
-            lottos.add(generateLotto(manualLotto));
-        }
-
-        return lottos;
-    }
-
     private static Lotto generateLotto() {
         List<LottoNumber> lottoNumbers = shuffledNumbers().stream()
                 .limit(6)

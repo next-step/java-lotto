@@ -6,13 +6,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.awt.peer.TextAreaPeer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static step2.Lotto.LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE;
 import static step2.Lotto.LOTTO_NUMBERS_DUPLICATE_EXCEPTION_MESSAGE;
 
