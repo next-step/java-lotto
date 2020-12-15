@@ -8,15 +8,14 @@ public class LottoSeller {
 
     private LottoSeller(){}
 
-    private static int count(int price) {
+    public static int count(int price) {
         if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException("price is too less");
         }
         return price / LOTTO_PRICE;
     }
 
-    public static Lottos buy(int price) {
-        int count = count(price);
+    public static Lottos buy(int count) {
         return  Stream.generate(RandomNumberFactory::createRandomNumbers)
                 .limit(count)
                 .map(Lotto::new)

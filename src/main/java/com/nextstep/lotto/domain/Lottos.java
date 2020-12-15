@@ -14,6 +14,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public void addAll(List<Lotto> otherLottos) {
+        lottos.addAll(otherLottos);
+    }
+
     public LottoStatistics getStatistics(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers == null || winningNumbers.isEmpty()) {
             throw new IllegalArgumentException("winning numbers are not allowed empty value");
