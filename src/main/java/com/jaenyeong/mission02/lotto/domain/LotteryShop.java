@@ -12,7 +12,6 @@ public class LotteryShop {
 
     public static List<LotteryGame> buyAutomatically(final int howManyToBuy) {
         final List<LotteryGame> games = new ArrayList<>();
-
         for (int i = 0; i < howManyToBuy; i++) {
             games.add(LotteryGame.ofAuto());
         }
@@ -21,6 +20,8 @@ public class LotteryShop {
     }
 
     public static List<LotteryGame> buyManually(final List<List<Integer>> givenNumbers) {
-        return givenNumbers.stream().map(LotteryGame::ofManual).collect(Collectors.toList());
+        return givenNumbers.stream()
+            .map(LotteryGame::ofManual)
+            .collect(Collectors.toList());
     }
 }
