@@ -2,7 +2,7 @@ package step2;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final String LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "로또 번호는 1 이상 45 이하의 숫자여야 합니다.";
 
     private int lottoNumber;
@@ -20,6 +20,11 @@ public class LottoNumber {
 
     public int getValue() {
         return lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return Integer.compare(this.lottoNumber, lottoNumber.getValue());
     }
 
     @Override
