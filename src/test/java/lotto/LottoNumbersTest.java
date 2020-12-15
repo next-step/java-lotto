@@ -37,19 +37,6 @@ class LottoNumbersTest {
 		return numbers;
 	}
 
-	@ParameterizedTest
-	@ValueSource(ints = {-1, 0, 46})
-	@DisplayName("로또 번호 유효성검사(실패케이스) - 숫자 범위 틀림")
-	void validateNumbers_rangeWrong(int number) {
-		// given
-		List<Integer> lottoNumbers = Arrays.asList(2, 5, 7, 40, 43, number);
-
-		// when & then
-		assertThatThrownBy(() -> LottoNumbers.validateNumbers(lottoNumbers))
-				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("range must in");
-	}
-
 	@Test
 	@DisplayName("로또 번호 유효성검사(실패케이스) - 겹치는 숫자 존재")
 	void validateNumbers_duplicatedNumber() {
@@ -70,16 +57,16 @@ class LottoNumbersTest {
 	@DisplayName("로또 번호 일치하는 숫자들 갖고오는 테스트(일치하는 것이 존재)")
 	void getMatchedNumbers_hasLeastOne(String stringNumbers1, String stringNumbers2, String stringExpected) {
 		// given
-		List<Integer> numbers1 = toIntegerList(stringNumbers1);
-		List<Integer> numbers2 = toIntegerList(stringNumbers2);
+		List<LottoNumber> numbers1 = toLottoNumberList(stringNumbers1);
+		List<LottoNumber> numbers2 = toLottoNumberList(stringNumbers2);
 		LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
 		LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
 
 		// when
-		List<Integer> matchedNumbers = lottoNumbers1.getMatchedNumbers(lottoNumbers2);
+		List<LottoNumber> matchedNumbers = lottoNumbers1.getMatchedLottoNumbers(lottoNumbers2);
 
 		// then
-		List<Integer> expectedNumbers = toIntegerList(stringExpected);
+		List<LottoNumber> expectedNumbers = toLottoNumberList(stringExpected);
 		assertThat(matchedNumbers).containsExactlyElementsOf(expectedNumbers);
 	}
 
@@ -90,21 +77,22 @@ class LottoNumbersTest {
 	@DisplayName("로또 번호 일치하는 숫자들 갖고오는 테스트(일치 없음)")
 	void getMatchedNumbers_noMatched(String stringNumbers1, String stringNumbers2) {
 		// given
-		List<Integer> numbers1 = toIntegerList(stringNumbers1);
-		List<Integer> numbers2 = toIntegerList(stringNumbers2);
+		List<LottoNumber> numbers1 = toLottoNumberList(stringNumbers1);
+		List<LottoNumber> numbers2 = toLottoNumberList(stringNumbers2);
 		LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
 		LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
 
 		// when
-		List<Integer> matchedNumbers = lottoNumbers1.getMatchedNumbers(lottoNumbers2);
+		List<LottoNumber> matchedNumbers = lottoNumbers1.getMatchedLottoNumbers(lottoNumbers2);
 
 		// then
 		assertThat(matchedNumbers).isEmpty();
 	}
 
-	private List<Integer> toIntegerList(String numbers) {
+	private List<LottoNumber> toLottoNumberList(String numbers) {
 		return Arrays.stream(numbers.split(","))
 				.map(Integer::parseInt)
+				.map(LottoNumber::new)
 				.collect(Collectors.toList());
 	}
 }
