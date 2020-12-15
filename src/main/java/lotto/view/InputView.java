@@ -17,7 +17,11 @@ public class InputView {
 	public static long scanPayment() {
 		System.out.println("구매금액을 입력해 주세요.");
 		String payment = scanner.nextLine();
-		return Long.parseLong(payment);
+		try {
+			return Long.parseLong(payment);
+		} catch (Exception e){
+			throw new IllegalArgumentException("구매금액은 숫자를 입력해야 합니다.");
+		}
 	}
 
 	public static WinningNumber scanWinningNumber() {

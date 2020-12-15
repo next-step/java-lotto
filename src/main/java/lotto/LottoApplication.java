@@ -8,17 +8,20 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		long payment = InputView.scanPayment();
-		int manualNumberSize = InputView.scanManualNumberSize();
-		LottoNumbers manualLottoNumbers = InputView.scanManualNumbers(manualNumberSize);
+		try {
+			long payment = InputView.scanPayment();
+			int manualNumberSize = InputView.scanManualNumberSize();
+			LottoNumbers manualLottoNumbers = InputView.scanManualNumbers(manualNumberSize);
 
-		LottoRunner runner = new LottoRunner(payment, manualLottoNumbers);
-		ResultView.printAutoLottoNumbers(manualNumberSize, runner.autoLottoNumbers());
+			LottoRunner runner = new LottoRunner(payment, manualLottoNumbers);
+			ResultView.printAutoLottoNumbers(manualNumberSize, runner.autoLottoNumbers());
+			WinningNumber winningNumber = InputView.scanWinningNumber();
+			runner.match(winningNumber);
 
-		WinningNumber winningNumber = InputView.scanWinningNumber();
-		runner.match(winningNumber);
-
-		ResultView.printMatchResult(runner.getMatchResult());
-		ResultView.printEarningRate(runner.getEarningRate());
+			ResultView.printMatchResult(runner.getMatchResult());
+			ResultView.printEarningRate(runner.getEarningRate());
+		} catch (IllegalArgumentException argumentException) {
+			System.out.println(argumentException.getMessage());
+		}
 	}
 }

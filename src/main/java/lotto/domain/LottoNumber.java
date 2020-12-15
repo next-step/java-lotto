@@ -62,7 +62,7 @@ public class LottoNumber {
 		}
 
 		if (!isValid) {
-			throw new IllegalArgumentException("로또 번호는 정렬되어야 합니다.");
+			throw new IllegalArgumentException("로또 번호는 각자 다른 숫자로 오름차순 정렬되어야 합니다.");
 		}
 	}
 
