@@ -14,7 +14,7 @@ public class WinningStatistics {
     private static final int ADD = 1;
     private final Map<Rank, Integer> lotteryRanksMap;
     private final int buyPrice;
-    private final int prizeMoney;
+    private final long prizeMoney;
     private final List<String> printFormatStatistics;
 
     private WinningStatistics(final Map<Rank, Integer> lotteryRanksMap, final int buyPrice) {
@@ -23,8 +23,8 @@ public class WinningStatistics {
 
         this.prizeMoney = this.lotteryRanksMap.keySet().stream()
             .filter(Rank::isNotMissMatch)
-            .map(Rank::getWinningPrize)
-            .reduce(0, Integer::sum);
+            .mapToLong(Rank::getWinningPrize)
+            .reduce(0L, Long::sum);
 
         printFormatStatistics = this.lotteryRanksMap.keySet().stream()
             .filter(Rank::isNotMissMatch)
@@ -57,7 +57,7 @@ public class WinningStatistics {
         return this.printFormatStatistics;
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 }
