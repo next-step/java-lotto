@@ -6,24 +6,19 @@ import java.util.regex.Pattern;
 public class CustomSeparator implements Separator {
 
     public static final String CUSTOM_SEPARATOR_REGEX = "//(.)\n(.*)";
+    private final Pattern pattern = Pattern.compile(CUSTOM_SEPARATOR_REGEX);
 
     @Override
-    public Tokens split(InputText inputText) {
-        Tokens tokens = new Tokens();
+    public PositiveNumbers split(InputText inputText) {
+        PositiveNumbers positiveNumbers = new PositiveNumbers();
         String text = inputText.getText();
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] values = m.group(2).split(customDelimiter);
-            tokens = new Tokens(getTokens(values));
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            String[] values = matcher.group(2).split(customDelimiter);
+            positiveNumbers = new PositiveNumbers(getTokens(values));
         }
-        return tokens;
-    }
-
-    public static boolean hasCustomSeparator(InputText inputText) {
-        String text = inputText.getText();
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
-        return m.matches();
+        return positiveNumbers;
     }
 
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputTextTest {
+class InputTextTest {
 
     @Test
     void isEmpty_null_또는_빈문자() {

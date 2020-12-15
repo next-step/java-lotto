@@ -1,11 +1,11 @@
 package calculator;
 
 public interface Separator {
-    Tokens split(InputText inputText);
-    default Token[] getTokens(String[] inputTexts) {
-        Token[] values = new Token[inputTexts.length];
+    PositiveNumbers split(InputText inputText);
+    default PositiveNumber[] getTokens(String[] inputTexts) {
+        PositiveNumber[] values = new PositiveNumber[inputTexts.length];
         for (int i = 0; i < inputTexts.length; i++) {
-            values[i] = new Token(inputTexts[i]);
+            values[i] = new PositiveNumber(inputTexts[i]);
         }
         return values;
     }

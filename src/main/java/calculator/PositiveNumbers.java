@@ -2,21 +2,21 @@ package calculator;
 
 import java.util.Arrays;
 
-public class Tokens {
-    private final Token[] values;
+public class PositiveNumbers {
+    private final PositiveNumber[] values;
 
-    public Tokens(Token[] values) {
+    public PositiveNumbers(PositiveNumber[] values) {
         this.values = values;
     }
 
-    public Tokens() {
-        this.values = new Token[0];
+    public PositiveNumbers() {
+        this.values = new PositiveNumber[0];
     }
 
     public int sum() {
         int sum = 0;
-        for (Token token : values) {
-            sum += token.getNumber();
+        for (PositiveNumber positiveNumber : values) {
+            sum += positiveNumber.getNumber();
         }
         return sum;
     }
@@ -26,10 +26,10 @@ public class Tokens {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Tokens tokens = (Tokens) o;
+        PositiveNumbers positiveNumbers = (PositiveNumbers) o;
 
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(values, tokens.values);
+        return Arrays.equals(values, positiveNumbers.values);
     }
 
     @Override

@@ -2,20 +2,20 @@ package calculator;
 
 import java.util.Objects;
 
-public class Token {
+public class PositiveNumber {
 
     public static final String NUMBER_REGEX = "^[0-9]+$";
     private final String token;
     private final int number;
 
-    public Token(String token) {
+    public PositiveNumber(String token) {
         this.token = token;
         if (!this.token.matches(NUMBER_REGEX)) {
-            throw new RuntimeException("숫자 이외의 문자는 입력될 수 없습니다.");
+            throw new IllegalArgumentException("숫자 이외의 문자는 입력될 수 없습니다.");
         }
         int number = Integer.parseInt(this.token);
         if (number < 0) {
-            throw new RuntimeException("음수값은 입력될 수 없습니다.");
+            throw new IllegalArgumentException("음수값은 입력될 수 없습니다.");
         }
         this.number = number;
     }
@@ -29,9 +29,9 @@ public class Token {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Token token1 = (Token) o;
+        PositiveNumber positiveNumber1 = (PositiveNumber) o;
 
-        return Objects.equals(token, token1.token);
+        return Objects.equals(token, positiveNumber1.token);
     }
 
     @Override
