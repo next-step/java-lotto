@@ -25,6 +25,10 @@ public class WinningLotto {
         }
     }
 
+    public boolean isBonusBall(LottoTicket lottoTicket) {
+        return lottoTicket.matchLottoNumber(this.bonusBall);
+    }
+
     public LottoTicket getWinningLottoTicket() {
         return winningLottoTicket;
     }
@@ -42,7 +46,4 @@ public class WinningLotto {
         return Objects.hash(winningLottoTicket);
     }
 
-    public boolean isBonusBall(LottoTicket lottoTicket) {
-        return lottoTicket.matchLottoNumber(this.bonusBall);
-    }
 }

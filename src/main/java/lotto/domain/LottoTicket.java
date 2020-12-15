@@ -39,6 +39,10 @@ public class LottoTicket {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    public boolean matchLottoNumber(LottoNumber bonusBallNumber) {
+        return lottoNumbers.contains(bonusBallNumber) ? true : false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
