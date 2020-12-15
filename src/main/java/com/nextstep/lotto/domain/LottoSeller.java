@@ -16,18 +16,10 @@ public class LottoSeller {
         return price / LOTTO_PRICE;
     }
 
-    private static List<Lotto> createAutoLottos(int count) {
+    public static List<Lotto> buyAutoLottos(int count) {
         return Stream.generate(RandomNumberFactory::createRandomNumbers)
                 .limit(count)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
-    }
-
-    public static Lottos buy(List<Lotto> manualLottos, int autoCount) {
-        List<Lotto> lottos = createAutoLottos(autoCount);
-        if (manualLottos != null && !manualLottos.isEmpty()) {
-            lottos.addAll(manualLottos);
-        }
-        return new Lottos(lottos);
     }
 }

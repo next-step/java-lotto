@@ -25,10 +25,16 @@ public class LottoMain {
         int manualCount = inputWithoutException(() -> InputView.inputManualCount(totalCount));
         int autoCount = totalCount - manualCount;
 
-        List<Lotto> manualLottos = inputManualLottos(manualCount);
-        Lottos lottos = LottoSeller.buy(manualLottos, autoCount);
+        Lottos lottos = buyLottos(manualCount, autoCount);
         ResultView.printBuy(manualCount, autoCount, lottos);
         return lottos;
+    }
+
+    private static Lottos buyLottos(int manualCount, int autoCount) {
+        List<Lotto> manualLottos = inputManualLottos(manualCount);
+        List<Lotto> autoLottos = LottoSeller.buyAutoLottos(autoCount);
+        manualLottos.addAll(autoLottos);
+        return new Lottos(manualLottos);
     }
 
     private static List<Lotto> inputManualLottos(int manualCount) {
@@ -45,7 +51,7 @@ public class LottoMain {
         ResultView.printStatistics(lottos.getStatistics(winningLotto));
     }
 
-    public static <T> T inputWithoutException(Supplier<T> supplier) {
+    private static <T> T inputWithoutException(Supplier<T> supplier) {
         Optional<T> result;
         do {
             result = handleException(supplier);
