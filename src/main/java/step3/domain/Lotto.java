@@ -6,7 +6,7 @@ public class Lotto {
 
     private List<LottoNumber> lotto;
     private int count;
-    private boolean matchBonus = false;
+    private boolean matchBonus;
 
     public Lotto(List<LottoNumber> lotto) {
         this.lotto = lotto;
