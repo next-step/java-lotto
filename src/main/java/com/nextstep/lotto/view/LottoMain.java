@@ -21,9 +21,9 @@ public class LottoMain {
         int totalCount = LottoSeller.count(price);
         int manualCount = InputView.inputManualCount();
         int autoCount = totalCount - manualCount;
+
         List<Lotto> manualLottos = InputView.inputManualLottos(manualCount);
-        Lottos lottos = LottoSeller.buy(autoCount);
-        lottos.addAll(manualLottos);
+        Lottos lottos = LottoSeller.buy(manualLottos, autoCount);
         ResultView.printBuy(manualCount, autoCount, lottos);
         return lottos;
     }

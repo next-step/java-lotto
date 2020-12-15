@@ -1,5 +1,6 @@
 package com.nextstep.lotto.domain;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,10 +16,18 @@ public class LottoSeller {
         return price / LOTTO_PRICE;
     }
 
-    public static Lottos buy(int count) {
-        return  Stream.generate(RandomNumberFactory::createRandomNumbers)
+    private static List<Lotto> createAutoLottos(int count) {
+        return Stream.generate(RandomNumberFactory::createRandomNumbers)
                 .limit(count)
                 .map(Lotto::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .collect(Collectors.toList());
+    }
+
+    public static Lottos buy(List<Lotto> manualLottos, int autoCount) {
+        List<Lotto> lottos = createAutoLottos(autoCount);
+        if (manualLottos != null && !manualLottos.isEmpty()) {
+            lottos.addAll(manualLottos);
+        }
+        return new Lottos(lottos);
     }
 }

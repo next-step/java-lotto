@@ -43,5 +43,4 @@ public class LottosTest {
                 Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), LottoRank.RETIRE)
         );
     }
-
 }
