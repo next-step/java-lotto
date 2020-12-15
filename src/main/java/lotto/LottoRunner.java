@@ -10,7 +10,6 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoRunner {
-
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
 

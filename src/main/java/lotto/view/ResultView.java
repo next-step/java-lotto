@@ -6,7 +6,6 @@ import lotto.domain.LottoWinPrize;
 import java.util.List;
 
 public class ResultView {
-
     private static final String PRINT_WIN_PRIZE_FORMAT = "%d개 일치 (%d원)- %d개\n";
 
     /**

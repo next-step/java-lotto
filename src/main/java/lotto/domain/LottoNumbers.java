@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-
     public static final int DEFAULT_PICK_NUMBER_SIZE = 6;
     public static final int LOTTO_MIN_VALUE = 1;
     public static final int LOTTO_MAX_VALUE = 45;
