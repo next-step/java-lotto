@@ -30,6 +30,4 @@ public class Lotto {
     public int hashCode() {
         return numbers != null ? numbers.hashCode() : 0;
     }
-
-
 }
