@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.LottoWinCalculator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private static final int LOTTO_ONE_TIME_COST = 1000;
     private final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -26,7 +27,7 @@ public class InputView {
      * @return
      */
     private int calculateLottoAmountFromInsertSum(int sum) {
-        return sum / LOTTO_ONE_TIME_COST;
+        return sum / LottoWinCalculator.LOTTO_PRICE;
     }
 
     /**

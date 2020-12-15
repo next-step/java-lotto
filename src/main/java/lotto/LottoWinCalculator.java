@@ -12,7 +12,7 @@ public class LottoWinCalculator {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private Lotto winLottoNumbers;
+    private final Lotto winLottoNumbers;
 
     public LottoWinCalculator(Lotto winLottoNumbers) {
         this.winLottoNumbers = winLottoNumbers;
