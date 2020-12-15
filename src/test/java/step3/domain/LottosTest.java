@@ -21,21 +21,20 @@ class LottosTest {
     void setUp() {
         List<Lotto> numbers = new ArrayList<>();
         numbers.add(produceLotto("1,2,3,4,5,6"));
-        numbers.add(produceLotto("1,2,3,4,5,6"));
         lottos = new Lottos(numbers);
     }
 
     @ParameterizedTest
     @MethodSource("generateLottoNumbersData")
-    @DisplayName("당첨개수 기능 테스트 (로또(1-6) 2개를 샀을 때, 각각 당첨개수를 2개씩 가지고 있는다)")
+    @DisplayName("로또를 구입한 후, 당첨번호와 비교해서 당첨된 개수를 가져오는 기능 테스트")
     void check(String input, int expected) {
         String[] winningNumbers = input.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lottos.checkWinningLotto(new LottoNumber(Integer.parseInt(winningNumber)),new LottoNumber(0));
+            lottos.checkWinningLotto(new LottoNumber(Integer.parseInt(winningNumber)),new LottoNumber(10));
         }
 
-        Assertions.assertEquals(lottos.winningLottoResult().getLottos(expected).size(), 2);
+        Assertions.assertEquals(lottos.winningLottoResult().getLottos(expected).size(),1);
     }
 
     static Stream<Arguments> generateLottoNumbersData() {
