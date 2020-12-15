@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Money {
+public class LottoMoney {
 
-    public static final String NOT_ENOUGH_MONEY_ERROR = "금액이 부족합니다. 로또를 구매할 수 없습니다.";
+    private static final String NOT_ENOUGH_MONEY_ERROR = "금액이 부족합니다. 로또를 구매할 수 없습니다.";
     private static final int LOTTO_PRICE = 1000;
     private final int money;
 
-    public Money(int money) {
+    public LottoMoney(int money) {
         validateMoney(money);
         this.money = money;
     }
@@ -27,8 +27,8 @@ public class Money {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money1 = (Money) o;
-        return money == money1.money;
+        LottoMoney that = (LottoMoney) o;
+        return money == that.money;
     }
 
     @Override
