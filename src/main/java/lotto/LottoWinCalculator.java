@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoWinPrize;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoWinCalculator {
@@ -35,6 +35,18 @@ public class LottoWinCalculator {
         return this.pickedLottoNumbers.stream()
                 .map(lottoNumbers -> lottoNumbers.matchedLottoNumbersCount(this.winLottoNumbers))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 당첨상금 별 갯수를 리턴합니다.
+     * @param matchedCounts
+     * @return
+     */
+    public List<LottoWinPrize> findLottoWinPrize(List<Integer> matchedCounts) {
+        for (int matchedCount : matchedCounts) {
+            LottoWinPrize.addCount(matchedCount);
+        }
+        return Arrays.stream(LottoWinPrize.values()).collect(Collectors.toList());
     }
 
 }
