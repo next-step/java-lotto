@@ -1,5 +1,6 @@
 package lotto.number;
 
+import lotto.TestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -63,8 +63,8 @@ class LottoNumbersTest {
 	@DisplayName("로또 번호 일치하는 숫자들 갖고오는 테스트(일치하는 것이 존재)")
 	void getMatchedNumbers_hasLeastOne(String stringNumbers1, String stringNumbers2, String stringExpected) {
 		// given
-		List<LottoNumber> numbers1 = toLottoNumberList(stringNumbers1);
-		List<LottoNumber> numbers2 = toLottoNumberList(stringNumbers2);
+		List<LottoNumber> numbers1 = TestUtils.toLottoNumberList(stringNumbers1);
+		List<LottoNumber> numbers2 = TestUtils.toLottoNumberList(stringNumbers2);
 		LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
 		LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
 
@@ -72,7 +72,7 @@ class LottoNumbersTest {
 		List<LottoNumber> matchedNumbers = lottoNumbers1.getMatchedLottoNumbers(lottoNumbers2);
 
 		// then
-		List<LottoNumber> expectedNumbers = toLottoNumberList(stringExpected);
+		List<LottoNumber> expectedNumbers = TestUtils.toLottoNumberList(stringExpected);
 		assertThat(matchedNumbers).containsExactlyElementsOf(expectedNumbers);
 	}
 
@@ -83,8 +83,8 @@ class LottoNumbersTest {
 	@DisplayName("로또 번호 일치하는 숫자들 갖고오는 테스트(일치 없음)")
 	void getMatchedNumbers_noMatched(String stringNumbers1, String stringNumbers2) {
 		// given
-		List<LottoNumber> numbers1 = toLottoNumberList(stringNumbers1);
-		List<LottoNumber> numbers2 = toLottoNumberList(stringNumbers2);
+		List<LottoNumber> numbers1 = TestUtils.toLottoNumberList(stringNumbers1);
+		List<LottoNumber> numbers2 = TestUtils.toLottoNumberList(stringNumbers2);
 		LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
 		LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
 
@@ -93,12 +93,5 @@ class LottoNumbersTest {
 
 		// then
 		assertThat(matchedNumbers).isEmpty();
-	}
-
-	private List<LottoNumber> toLottoNumberList(String numbers) {
-		return Arrays.stream(numbers.split(","))
-				.map(Integer::parseInt)
-				.map(LottoNumber::new)
-				.collect(Collectors.toList());
 	}
 }
