@@ -1,7 +1,6 @@
 package com.nextstep.lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -22,10 +21,10 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public LottoRank match(WinningLotto winningLotto) {
-        long matchedCount = winningLotto.getMatchedCount(numbers);
-        boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
-        return LottoRank.select(matchedCount, matchedBonus);
+    public long matchedCount(Lotto otherLotto) {
+        return otherLotto.numbers.stream()
+                .filter(this::contains)
+                .count();
     }
 
     @Override

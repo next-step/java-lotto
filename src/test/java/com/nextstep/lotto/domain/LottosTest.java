@@ -20,8 +20,7 @@ public class LottosTest {
     @DisplayName("Lotto 갯수 확인")
     @Test
     void count() {
-        List<LottoNumber> numbers = toLottoNumbers(1,2,3,4,5,6);
-        List<Lotto> list = Arrays.asList(new Lotto(numbers),new Lotto(numbers));
+        List<Lotto> list = Arrays.asList(toLotto(1,2,3,4,5,6),toLotto(1,2,3,4,5,6));
         Lottos lottos = new Lottos(list);
         assertThat(lottos.count()).isEqualTo(2);
     }
@@ -29,9 +28,9 @@ public class LottosTest {
     @DisplayName("Statistic 정상 반환 확인")
     @ParameterizedTest
     @MethodSource
-    void getStatistics(List<LottoNumber> numbers, LottoRank expected) {
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(numbers)));
-        WinningLotto winningLotto = new WinningLotto(toLottoNumbers(1,2,3,4,5,6),7);
+    void getStatistics(Lotto lotto, LottoRank expected) {
+        Lottos lottos = new Lottos(Collections.singletonList(lotto));
+        WinningLotto winningLotto = new WinningLotto(toLotto(1,2,3,4,5,6),7);
         LottoStatistics statistics = lottos.summarizingLotto(winningLotto);
 
         assertThat(statistics.getCount(expected)).isEqualTo(1);
@@ -39,18 +38,18 @@ public class LottosTest {
 
     private static Stream<Arguments> getStatistics() {
         return Stream.of(
-                Arguments.of(toLottoNumbers(1, 2, 3, 4, 5, 6), LottoRank.WIN_1ST),
-                Arguments.of(toLottoNumbers(1, 2, 3, 4, 5, 7), LottoRank.WIN_2ND),
-                Arguments.of(toLottoNumbers(1, 2, 3, 4, 5, 16), LottoRank.WIN_3RD),
-                Arguments.of(toLottoNumbers(1, 2, 3, 4, 15, 16), LottoRank.WIN_4TH),
-                Arguments.of(toLottoNumbers(1, 2, 3, 14, 15, 16), LottoRank.WIN_5TH),
-                Arguments.of(toLottoNumbers(1, 2, 13, 14, 15, 16), LottoRank.RETIRE)
+                Arguments.of(toLotto(1, 2, 3, 4, 5, 6), LottoRank.WIN_1ST),
+                Arguments.of(toLotto(1, 2, 3, 4, 5, 7), LottoRank.WIN_2ND),
+                Arguments.of(toLotto(1, 2, 3, 4, 5, 16), LottoRank.WIN_3RD),
+                Arguments.of(toLotto(1, 2, 3, 4, 15, 16), LottoRank.WIN_4TH),
+                Arguments.of(toLotto(1, 2, 3, 14, 15, 16), LottoRank.WIN_5TH),
+                Arguments.of(toLotto(1, 2, 13, 14, 15, 16), LottoRank.RETIRE)
         );
     }
 
-    private static List<LottoNumber> toLottoNumbers(int ... numbers) {
+    private static Lotto toLotto(int ... numbers) {
         return IntStream.of(numbers)
                 .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 }

@@ -17,9 +17,15 @@ public class Lottos {
     public LottoStatistics summarizingLotto(WinningLotto winningLotto) {
         List<LottoRank> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            winnings.add(lotto.match(winningLotto));
+            winnings.add(match(winningLotto, lotto));
         }
         return new LottoStatistics(winnings);
+    }
+
+    private LottoRank match(WinningLotto winningLotto, Lotto collectedLotto) {
+        long matchedCount = winningLotto.matchedCount(collectedLotto);
+        boolean matchedBonus = winningLotto.checkBonusNumber(collectedLotto);
+        return LottoRank.select(matchedCount, matchedBonus);
     }
 
     @Override
