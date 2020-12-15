@@ -13,7 +13,7 @@ public class LottoGame {
         LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney);
 
         LottoShop lottoShop = LottoShop.getInstance();
-        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney);
+        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoMoney, lottoTicketCount);
 
         OutputView.printPublishedLottoResult(lottoTicketCount, publishedLottoTicket);
 
