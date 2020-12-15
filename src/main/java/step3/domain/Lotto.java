@@ -50,7 +50,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto.toString() + " " + matchBonus;
-        /*return lotto.toString();*/
+        return lotto.toString();
     }
 }
