@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -63,4 +64,36 @@ public class LottoTest {
 		});
 
 	}
+
+	@Test
+	public void 본전케이스_당첨금_계산_테스트(){
+		LottoResult lottoResult = new LottoResult();
+		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 3, 1, 1, 2, 2, 0, 0, 0, 0));
+		lottoResult.arrangePrize(lottoMatchCountList, 1000);
+		assertThat(lottoResult.getEarningsRate()).isEqualTo(1);
+		assertThat(lottoResult.getThreeMatchCount()).isEqualTo(2);
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(10000);
+	}
+
+	@Test
+	public void 손해케이스_당첨금_계산_테스트_손해(){
+		LottoResult lottoResult = new LottoResult();
+		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 1, 1, 1, 2, 2, 0, 0, 0, 0));
+		lottoResult.arrangePrize(lottoMatchCountList, 1000);
+		assertThat(lottoResult.getEarningsRate()).isEqualTo(0.5);
+		assertThat(lottoResult.getThreeMatchCount()).isEqualTo(1);
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(lottoResult.THREE_MATCH_PRIZE_MONEY);
+	}
+
+	@Test
+	public void 이익케이스_당첨금_계산_테스트(){
+		LottoResult lottoResult = new LottoResult();
+		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 2, 2, 0, 0, 0, 6));
+		lottoResult.arrangePrize(lottoMatchCountList, 1000);
+		assertThat(lottoResult.getEarningsRate()).isEqualTo(200000);
+		assertThat(lottoResult.getSixMatchCount()).isEqualTo(1);
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(lottoResult.SIX_MATCH_PRIZE_MONEY);
+	}
+
+
 }
