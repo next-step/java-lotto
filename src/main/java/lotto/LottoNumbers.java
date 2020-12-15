@@ -3,6 +3,7 @@ package lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class LottoNumbers {
 
@@ -12,6 +13,12 @@ class LottoNumbers {
 	private static final String LOTTO_VALIDATE_SIZE_WRONG = "lottoNumbers size must be %s";
 	private static final String LOTTO_VALIDATE_RANGE_WRONG = "each lottoNumber range must in 1~45";
 	private static final String LOTTO_VALIDATE_DUPLICATED = "lottoNumber is duplicated";
+
+	private final List<Integer> numbers;
+
+	LottoNumbers(List<Integer> numbers) {
+		this.numbers = numbers;
+	}
 
 	static void validateNumbers(List<Integer> lottoNumbers) throws IllegalArgumentException {
 		if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
@@ -34,5 +41,21 @@ class LottoNumbers {
 		if (uniqueNumbers.size() != lottoNumbers.size()) {
 			throw new IllegalArgumentException(LOTTO_VALIDATE_DUPLICATED);
 		}
+	}
+
+	List<Integer> getMatchedNumbers(LottoNumbers otherLottoNumbers) {
+		return this.getNumbers().stream()
+				.filter(number -> hasEqualNumber(otherLottoNumbers, number))
+				.collect(Collectors.toList());
+	}
+
+	private boolean hasEqualNumber(LottoNumbers lottoNumbers, int number) {
+		return lottoNumbers.getNumbers().stream()
+				.anyMatch(integer -> integer == number);
+
+	}
+
+	private List<Integer> getNumbers() {
+		return this.numbers;
 	}
 }
