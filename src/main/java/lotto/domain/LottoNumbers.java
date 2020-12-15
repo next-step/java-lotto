@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBERS_DEFAULT_SIZE = 46;
     private static final int DEFAULT_PICK_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
@@ -26,8 +25,8 @@ public class LottoNumbers {
      * @return
      */
     private List<LottoNumber> createLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumbers.LOTTO_NUMBERS_DEFAULT_SIZE);
-        for (int i = 1; i <= LottoNumbers.LOTTO_NUMBERS_DEFAULT_SIZE; i++) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_MAX_VALUE);
+        for (int i = 1; i <= LottoNumber.LOTTO_MAX_VALUE; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         return lottoNumbers;

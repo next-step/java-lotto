@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_MIN_VALUE = 1;
-    private static final int LOTTO_MAX_VALUE = 46;
+    public static final int LOTTO_MAX_VALUE = 45;
 
     private final int number;
 
@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if(this.isLottoNumber(number)) {
             return number;
         }
-        throw new IllegalArgumentException("로또 숫자는 1 ~ 46 사이의 숫자만 가능합니다.");
+        throw new IllegalArgumentException("로또 숫자는 1 ~ 45 사이의 숫자만 가능합니다.");
     }
 
     /**
