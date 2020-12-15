@@ -15,9 +15,10 @@ class LottoNumbers {
 
 	LottoNumbers(List<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
+		validateNumbers(this.lottoNumbers);
 	}
 
-	static void validateNumbers(List<Integer> lottoNumbers) throws IllegalArgumentException {
+	private static void validateNumbers(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
 		if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
 			String msg = String.format(LOTTO_VALIDATE_SIZE_WRONG, LOTTO_NUMBER_SIZE);
 			throw new IllegalArgumentException(msg);
@@ -26,8 +27,8 @@ class LottoNumbers {
 		validateDuplicated(lottoNumbers);
 	}
 
-	private static void validateDuplicated(List<Integer> lottoNumbers) {
-		Set<Integer> uniqueNumbers = new HashSet<>(lottoNumbers);
+	private static void validateDuplicated(List<LottoNumber> lottoNumbers) {
+		Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
 		if (uniqueNumbers.size() != lottoNumbers.size()) {
 			throw new IllegalArgumentException(LOTTO_VALIDATE_DUPLICATED);
 		}

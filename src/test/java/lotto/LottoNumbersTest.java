@@ -19,32 +19,38 @@ class LottoNumbersTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1, 5})
 	@DisplayName("로또 번호 유효성검사(실패케이스) - 숫자 갯수 틀림")
-	void validateNumbers_sizeWrong(int size) {
+	void constructor_validate_sizeWrong(int size) {
 		// given
-		List<Integer> lottoNumbers = createAscOrderNumberList(size);
+		List<LottoNumber> lottoNumbers = createAscOrderNumberList(size);
 
 		// when & then
-		assertThatThrownBy(() -> LottoNumbers.validateNumbers(lottoNumbers))
+		assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("size must be");
 	}
 
-	private List<Integer> createAscOrderNumberList(int size) {
-		List<Integer> numbers = new ArrayList<>();
+	private List<LottoNumber> createAscOrderNumberList(int size) {
+		List<LottoNumber> numbers = new ArrayList<>();
 		for (int number = 1; number < size + 1; number++) {
-			numbers.add(number);
+			numbers.add(new LottoNumber(number));
 		}
 		return numbers;
 	}
 
 	@Test
 	@DisplayName("로또 번호 유효성검사(실패케이스) - 겹치는 숫자 존재")
-	void validateNumbers_duplicatedNumber() {
+	void constructor_validate_duplicatedNumber() {
 		// given
-		List<Integer> lottoNumbers1 = Arrays.asList(1, 1, 5, 10, 20, 40);
+		List<LottoNumber> lottoNumbers = Arrays.asList(
+				new LottoNumber(1),
+				new LottoNumber(1),
+				new LottoNumber(5),
+				new LottoNumber(20),
+				new LottoNumber(40),
+				new LottoNumber(41));
 
 		// when & then
-		assertThatThrownBy(() -> LottoNumbers.validateNumbers(lottoNumbers1))
+		assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("duplicated");
 	}

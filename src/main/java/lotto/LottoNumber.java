@@ -28,6 +28,11 @@ class LottoNumber {
 	}
 
 	@Override
+	public int hashCode() {
+		return number;
+	}
+
+	@Override
 	public String toString() {
 		return String.format("%d", number);
 	}
