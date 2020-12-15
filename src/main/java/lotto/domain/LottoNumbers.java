@@ -72,4 +72,25 @@ public class LottoNumbers {
     private void shuffleLottoNumbers() {
         Collections.shuffle(this.lottoNumbers);
     }
+
+    /**
+     * 두 로또번호를 비교하여 일치하는 번호의 개수를 반환합니다.
+     * @param comparedLottoNumbers
+     * @return
+     */
+    public int matchedLottoNumbersCount(LottoNumbers comparedLottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                            .filter(lottoNumber -> comparedLottoNumbers.containsLottoNumber(lottoNumber))
+                            .count();
+    }
+
+    /**
+     * 주어진 로또번호가 로또번호 목록에 있는지 확인
+     * @param lottoNumber 
+     * @return
+     */
+    boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.stream().filter(thisLottoNumber -> thisLottoNumber.equals(lottoNumber))
+                                    .count() == 1;
+    }
 }
