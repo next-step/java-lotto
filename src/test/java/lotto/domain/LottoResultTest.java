@@ -42,8 +42,10 @@ class LottoResultTest {
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
         // given
-        int bonusBall = 7;
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers), bonusBall);
+        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .bonusBall(7)
+                .build();
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();
@@ -57,8 +59,10 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
         // given
-        int bonusBall = 7;
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers), bonusBall);
+        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .bonusBall(7)
+                .build();
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();

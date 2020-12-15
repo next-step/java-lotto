@@ -15,10 +15,6 @@ public class WinningLotto {
         this.bonusBall = LottoNumber.ofNumber(bonusBall);
     }
 
-    public static WinningLotto ofLottoNumbers(LottoTicket lottoTicket, int bonusBall) {
-        return new WinningLotto(lottoTicket, bonusBall);
-    }
-
     private void validateBonusBallDuplication(int bonusBall) {
         if (winningLottoTicket.matchLottoNumber(LottoNumber.ofNumber(bonusBall))) {
             throw new IllegalArgumentException(INCLUDE_BONUS_BALL_ERROR);
@@ -31,6 +27,25 @@ public class WinningLotto {
 
     public LottoTicket getWinningLottoTicket() {
         return winningLottoTicket;
+    }
+
+    public static class WinningLottoBuilder {
+        private LottoTicket lottoTicket;
+        private int bonusBall;
+
+        public WinningLottoBuilder winningLottoTicket(LottoTicket lottoTicket) {
+            this.lottoTicket = lottoTicket;
+            return this;
+        }
+
+        public WinningLottoBuilder bonusBall(int bonusBall) {
+            this.bonusBall = bonusBall;
+            return this;
+        }
+
+        public WinningLotto build() {
+            return new WinningLotto(lottoTicket, bonusBall);
+        }
     }
 
     @Override
