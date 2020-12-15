@@ -6,6 +6,7 @@ import com.nextstep.lotto.domain.Lottos;
 import com.nextstep.lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -48,7 +49,7 @@ public class LottoMain {
 
     private static void draw(Lottos lottos) {
         WinningLotto winningLotto = inputWithoutException(InputView::inputWinningLotto);
-        ResultView.printStatistics(lottos.getStatistics(winningLotto));
+        ResultView.printStatistics(lottos.summarizingLotto(winningLotto));
     }
 
     private static <T> T inputWithoutException(Supplier<T> supplier) {

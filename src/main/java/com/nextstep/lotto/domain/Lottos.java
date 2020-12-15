@@ -14,7 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoStatistics getStatistics(WinningLotto winningLotto) {
+    public LottoStatistics summarizingLotto(WinningLotto winningLotto) {
         List<LottoRank> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winnings.add(lotto.match(winningLotto));

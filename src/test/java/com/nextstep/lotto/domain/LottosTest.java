@@ -32,7 +32,7 @@ public class LottosTest {
     void getStatistics(List<LottoNumber> numbers, LottoRank expected) {
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(numbers)));
         WinningLotto winningLotto = new WinningLotto(toLottoNumbers(1,2,3,4,5,6),7);
-        LottoStatistics statistics = lottos.getStatistics(winningLotto);
+        LottoStatistics statistics = lottos.summarizingLotto(winningLotto);
 
         assertThat(statistics.getCount(expected)).isEqualTo(1);
     }
