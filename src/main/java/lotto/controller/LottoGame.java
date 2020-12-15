@@ -1,4 +1,9 @@
-package lotto.domain;
+package lotto.controller;
+
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
+import lotto.domain.WinningNumber;
 
 public class LottoGame {
 
