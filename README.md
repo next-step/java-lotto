@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 목록
-* [ ] 로또 입력
+* [x] 로또 입력
     * 구입 금액 입력
     * 구입 갯수 출력
 * [ ] 로또 생성
