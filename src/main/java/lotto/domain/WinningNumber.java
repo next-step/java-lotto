@@ -8,10 +8,10 @@ public class WinningNumber {
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
 
-	public WinningNumber(List<Integer> winningNumbers, int bonusNumber) {
-		checkValidBonusNumber(bonusNumber);
+	public WinningNumber(LottoNumber winningNumbers, int bonusNumber) {
+		checkValidBonusNumber(winningNumbers, bonusNumber);
 		this.bonusNumber = bonusNumber;
-		this.winningNumbers = new LottoNumber(winningNumbers);
+		this.winningNumbers = winningNumbers;
 	}
 
 	public LottoRank match(LottoNumber numbers) {
@@ -22,9 +22,22 @@ public class WinningNumber {
 
 	private boolean matchBonus(LottoNumber number) { return number.isContains(this.bonusNumber); }
 
-	private void checkValidBonusNumber(int bonusNumber) {
+	private void checkValidBonusNumber(LottoNumber winningNumbers, int bonusNumber) {
+		checkValidRange(bonusNumber);
+		checkValidExist(winningNumbers, bonusNumber);
+	}
+
+	private void checkValidRange(int bonusNumber) {
 		if (bonusNumber > MAX_NUMBER || bonusNumber < MIN_NUMBER) {
 			throw new IllegalArgumentException(String.format("보너스 번호는 %d 과 %d 사이의 숫자여야 합니다.", MIN_NUMBER, MAX_NUMBER));
 		}
 	}
+
+	private void checkValidExist(LottoNumber winningNumbers, int bonusNumber) {
+		if (winningNumbers.isContains(bonusNumber)) {
+			throw new IllegalArgumentException("이미 당첨번호에 포함된 숫자는 보너스 번호일 수 없습니다 .");
+		}
+	}
+
+
 }

@@ -14,7 +14,7 @@ public class WinningNumberTest {
 
 	@BeforeEach
 	void setUp() {
-		winningNumbers = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28), 45);
+		winningNumbers = new WinningNumber(new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28)), 45);
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class WinningNumberTest {
 	@Test
 	@DisplayName("보너스 숫자가 1에서 45사이의 숫자가 아니면 IllegalArgumentException이 발생해야한다.")
 	void BonusNumberExceptionTest() {
-		assertThatThrownBy(() -> new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 60))
+		assertThatThrownBy(() -> new WinningNumber(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), 60))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
