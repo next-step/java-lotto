@@ -15,16 +15,18 @@ public class LottoGame {
   private final int amount;
   private final int count;
   private final WinningLotto winningLotto;
+  private final Number bonusNo;
 
-  public LottoGame(int amount, int count, List<List<Integer>> userLottoList, String winningLotto) {
+  public LottoGame(int amount, int count, List<List<Integer>> userLottoList, String winningLotto, String bonusNo) {
     this.amount = amount;
     this.count = count;
     this.winningLotto = new WinningLotto(winningLotto);
     this.userLottoList = initUserLottoList(userLottoList);
+    this.bonusNo = new Number(bonusNo);
   }
 
   public LottoResult start() {
-    return new LottoResult(userLottoList, amount);
+    return new LottoResult(userLottoList, amount, bonusNo);
   }
 
   private List<UserLotto> initUserLottoList(List<List<Integer>> userLottoList) {
@@ -36,9 +38,10 @@ public class LottoGame {
   }
 
   private UserLotto initUserLotto(List<Integer> userLotto) {
-    return new UserLotto(userLotto.stream()
+    List<Number> numbers = userLotto.stream()
         .map(Number::new)
-        .collect(Collectors.toList()), winningLotto);
+        .collect(Collectors.toList());
+    return new UserLotto(numbers, winningLotto);
   }
 
   public List<UserLotto> getUserLottoList() {

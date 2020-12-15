@@ -23,9 +23,10 @@ public class LottoMain {
 
     // 당첨 번호 입력
     String winningLotto = InputView.getWinningNumbers();
+    String bonusNo = InputView.getBonusNumber();
 
     // 당첨 통계 노출
-    LottoGame game = new LottoGame(lottoPrice, lottoCount, userLottoList, winningLotto);
+    LottoGame game = new LottoGame(lottoPrice, lottoCount, userLottoList, winningLotto, bonusNo);
     LottoResult result = game.start();
     OutputView.printLottoMatchResult(result);
   }

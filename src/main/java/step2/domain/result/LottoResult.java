@@ -1,39 +1,39 @@
 package step2.domain.result;
 
-import step2.enums.LottoWinningEnum;
+import step2.domain.Number;
+import step2.enums.Rank;
 import step2.domain.UserLotto;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
-  private final List<WinningMatchResult> matchResults;
+  private final Map<Rank, Long> matchResultMap;
   private final double earningRate;
 
-  public LottoResult(List<UserLotto> userLottoList, int lottoPrice) {
-    int sum = 0;
-    List<WinningMatchResult> winningMatchResults = new ArrayList<>();
-    for (LottoWinningEnum lottoEnum : LottoWinningEnum.values()) {
-      long lottoMatchSize = getMatchLottoSize(userLottoList, lottoEnum.getMatchCount());
-      sum += lottoMatchSize > 0 ? getTotalReward(lottoEnum.getReward(), lottoMatchSize) : 0;
-      winningMatchResults.add(new WinningMatchResult(lottoEnum, lottoMatchSize));
-    }
-    this.matchResults = winningMatchResults;
-    this.earningRate = sum / (double) lottoPrice;
+  public LottoResult(List<UserLotto> userLottoList, int lottoPrice, Number bonusNo) {
+    this.matchResultMap = initMatchResultMap(userLottoList, bonusNo.get());
+    this.earningRate = initEarningRate(lottoPrice);
   }
 
-  private long getTotalReward(int reward, long lottoMatchSize) {
-    return reward * lottoMatchSize;
-  }
-
-  private long getMatchLottoSize(List<UserLotto> userLottoList, int matchCount) {
+  private Map<Rank, Long> initMatchResultMap(List<UserLotto> userLottoList, int bonusNo) {
     return userLottoList.stream()
-        .filter(lotto -> lotto.getMatchCount() == matchCount)
-        .count();
+          .collect(Collectors.groupingBy(userLotto -> Rank.of(userLotto.getMatchCount(), userLotto.hasBonusNo(bonusNo)),
+              HashMap::new,
+              Collectors.counting())
+          );
   }
 
-  public List<WinningMatchResult> getMatchResults() {
-    return this.matchResults;
+  private double initEarningRate(double lottoPrice) {
+    return this.matchResultMap.keySet().stream()
+        .mapToInt(rank -> (int) (rank.getReward() * this.getMatchResultMap().get(rank)))
+        .sum() / lottoPrice;
+  }
+
+  public Map<Rank, Long> getMatchResultMap() {
+    return this.matchResultMap;
   }
 
   public double getEarningRate() {
