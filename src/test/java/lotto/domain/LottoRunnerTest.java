@@ -3,19 +3,11 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoRunnerTest {
-
-	@Test
-	@DisplayName("N,000원을 전달하면 생성될 로또번호의 수는 N개 여야한다.")
-	void winningResultCountTest() {
-		LottoRunner runner = new LottoRunner(5000);
-		assertThat(runner.autoAmountWithoutManual(5000)).isEqualTo(5);
-	}
 
 	@Test
 	@DisplayName("(총 금액으로 구입할 수 있는 로또) - (수동 로또 리스트의 사이즈) 만큼 자동 생성해야한다.")

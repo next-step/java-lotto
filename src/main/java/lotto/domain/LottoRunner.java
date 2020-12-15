@@ -8,11 +8,6 @@ public class LottoRunner {
 
 	private static final int PRICE_PER_LOTTO_NUMBER = 1000;
 
-	public LottoRunner(long payment) {
-		this.lottoMatchResults = new LottoMatchResults(payment);
-		this.autoLottoNumbers = LottoNumbersGenerator.generate(autoAmountWithoutManual(payment));
-	}
-
 	public LottoRunner(long payment, LottoNumbers manualNumbers) {
 		this.lottoMatchResults = new LottoMatchResults(payment);
 		this.manualLottoNumbers = manualNumbers;
@@ -23,10 +18,6 @@ public class LottoRunner {
 		this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
 		this.manualLottoNumbers.match(this.lottoMatchResults, winningNumber);
 		return this.lottoMatchResults;
-	}
-
-	public long autoAmountWithoutManual(long payment) {
-		return payment / PRICE_PER_LOTTO_NUMBER;
 	}
 
 	public long autoAmountWithManual(long payment, LottoNumbers manualLottoSize) {
