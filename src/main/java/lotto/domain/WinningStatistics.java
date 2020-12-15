@@ -31,12 +31,14 @@ public class WinningStatistics {
 			prizeResult.put(resultKey, prizeResult.getOrDefault(resultKey, 0) + 1);
 			revenue += resultKey.getReward();
 		}
+		fillEmptyResult();
+		prizeSort();
+	}
 
+	private void fillEmptyResult() {
 		for(Prize prize : Prize.values()){
 			putEmptyResult(prize);
 		}
-
-		prizeSort();
 	}
 
 	private void prizeSort() {
@@ -58,8 +60,8 @@ public class WinningStatistics {
 		return prizeResult;
 	}
 
-	public Double getWinningSummary() {
-		int buyPrice = userLottoTickets.getTicketCount() * LottoTickets.getLottoTicketPrice();
-		return Double.parseDouble(String.format("%.2f",revenue / buyPrice));
+	public BigDecimal getWinningSummary() {
+		Double buyPrice = Double.valueOf(userLottoTickets.getTicketCount() * LottoTickets.getLottoTicketPrice());
+		return BigDecimal.valueOf(Double.parseDouble(String.format("%.2f",revenue / buyPrice)));
 	}
 }

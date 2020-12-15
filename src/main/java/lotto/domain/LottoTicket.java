@@ -15,9 +15,6 @@ public class LottoTicket {
 	private List<LottoNumber> lottoTicketNumbers = new ArrayList<>();
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {
-		for(LottoNumber lottoNumber : lottoNumbers){
-			System.out.println("생성중 : " + lottoNumber.getNumber());
-		}
 		validateLottoNumbers(lottoNumbers);
 		lottoNumbers.stream()
 			.forEach(lottoNumber -> addLottoTicketNumber(lottoNumber));

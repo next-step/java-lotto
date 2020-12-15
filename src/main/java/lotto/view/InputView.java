@@ -56,22 +56,4 @@ public class InputView {
 		return new WinningLottoNumbers(winningNumber);
 	}
 
-	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoNumbers winningLottoNumbers) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
-
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
-		winningStatistics.getPrizeResult().entrySet().stream().forEach(prize -> printWinningOne(prize));
-		printWinningAverage(winningStatistics.getWinningSummary());
-	}
-
-	private static void printWinningAverage(double winningSummary) {
-		System.out.println("총 수익률은 " + winningSummary + "입니다.");
-	}
-
-	private static void printWinningOne(Map.Entry<Prize, Integer> prize) {
-		if(prize.getKey() == Prize.NONE) return;
-		Prize prizeKey = prize.getKey();
-		System.out.println(prizeKey.getMatchCount() + "개 일치 (" + prizeKey.getReward() +"원)- " + prize.getValue() + "개");
-	}
 }
