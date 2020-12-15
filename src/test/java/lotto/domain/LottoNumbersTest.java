@@ -23,7 +23,7 @@ public class LottoNumbersTest {
 			, new LottoNumber(Arrays.asList(1, 2, 40, 41, 42, 44)) // 0개 일치
 			, new LottoNumber(Arrays.asList(1, 5, 11, 19, 28, 40)) // 3개 일치
 			, new LottoNumber(Arrays.asList(3, 6, 8, 11, 19, 28))); // 6개 일치
-		winningNumber = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28));
+		winningNumber = new WinningNumber(Arrays.asList(3, 6, 8, 11, 19, 28), 45);
 		results = new LottoMatchResults(payment);
 	}
 
@@ -32,9 +32,9 @@ public class LottoNumbersTest {
 	void winningResultCountTest() {
 		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
+		assertThat(results.getResultCount(LottoRank.FIFTH)).isEqualTo(1);
 		assertThat(results.getResultCount(LottoRank.FOURTH)).isEqualTo(1);
-		assertThat(results.getResultCount(LottoRank.THIRD)).isEqualTo(1);
-		assertThat(results.getResultCount(LottoRank.SECOND)).isEqualTo(0);
+		assertThat(results.getResultCount(LottoRank.THIRD)).isEqualTo(0);
 		assertThat(results.getResultCount(LottoRank.FIRST)).isEqualTo(1);
 	}
 
@@ -43,7 +43,8 @@ public class LottoNumbersTest {
 	void winningResultPriceTest() {
 		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
-		long totalEarnings = LottoRank.FOURTH.getEarnings() + LottoRank.THIRD.getEarnings() + LottoRank.FIRST.getEarnings();
+		long totalEarnings = LottoRank.FIFTH.getEarnings() + LottoRank.FOURTH.getEarnings() + LottoRank.FIRST
+			.getEarnings();
 		assertThat(results.getTotalEarnings()).isEqualTo(totalEarnings);
 	}
 
@@ -52,7 +53,8 @@ public class LottoNumbersTest {
 	void winningResultEarningsRateTest() {
 		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
-		long totalEarnings = LottoRank.FOURTH.getEarnings() + LottoRank.THIRD.getEarnings() + LottoRank.FIRST.getEarnings();
+		long totalEarnings = LottoRank.FIFTH.getEarnings() + LottoRank.FOURTH.getEarnings() + LottoRank.FIRST
+			.getEarnings();
 
 		assertThat(results.getEarningRate()).isEqualTo((double) totalEarnings / payment);
 	}

@@ -5,7 +5,7 @@ import lotto.domain.LottoNumbers;
 
 public class ResultView {
 	public static void printLottoNumbers(LottoNumbers lottoNumbers) {
-		System.out.println(lottoNumbers.getLottoNumbersSize() + "개를 구매했습니다.");
+		System.out.printf("%d개를 구매했습니다.\n", lottoNumbers.getLottoNumbersSize());
 		System.out.println(lottoNumbers.toString());
 	}
 
@@ -13,7 +13,7 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("------------");
 		System.out.println(matchResults.toString());
-		System.out.print("총 수익률은 " + String.format("%.2f", matchResults.getEarningRate()) + "입니다.");
+		System.out.printf("총 수익률은 %.2f 입니다.", matchResults.getEarningRate());
 
 		if (matchResults.isLoss()) {
 			System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임.)");

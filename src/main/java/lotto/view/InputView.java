@@ -10,10 +10,10 @@ import lotto.domain.WinningNumber;
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int scanPayment() {
+	public static long scanPayment() {
 		System.out.println("구매금액을 입력해 주세요.");
 		String payment = scanner.nextLine();
-		return Integer.parseInt(payment);
+		return Long.parseLong(payment);
 	}
 
 	public static WinningNumber scanWinningNumber() {
@@ -22,6 +22,9 @@ public class InputView {
 		List<Integer> winningNumbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
-		return new WinningNumber(winningNumbers);
+
+		System.out.println("보너스 볼을 입력해 주세요.");
+		int bonusNumber = scanner.nextInt();
+		return new WinningNumber(winningNumbers, bonusNumber);
 	}
 }

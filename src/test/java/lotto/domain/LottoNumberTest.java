@@ -24,6 +24,6 @@ public class LottoNumberTest {
 	@Test
 	@DisplayName("생성된 로또 번호는 오름차순으로 정렬되어야한다")
 	void generatedLottoNumberSortTest() {
-		assertThatThrownBy(() -> new LottoNumber(Arrays.asList(3, 2, 1, 4, 5))).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new LottoNumber(Arrays.asList(3, 2, 1, 4, 5, 6))).isInstanceOf(IllegalArgumentException.class);
 	}
 }

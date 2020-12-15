@@ -1,15 +1,20 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberAutoGenerator{
 
-	private static final List<Integer> LOTTO_TOTAL_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-		11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-		35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45);
+	private static final List<Integer> LOTTO_TOTAL_NUMBERS = new ArrayList<>();
+	private static final int MIN_NUMBER = 1;
+	private static final int MAX_NUMBER = 45;
+
+	static {
+		for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+			LOTTO_TOTAL_NUMBERS.add(i);
+		}
+	}
 
 	private LottoNumberAutoGenerator() {
 		throw new AssertionError();

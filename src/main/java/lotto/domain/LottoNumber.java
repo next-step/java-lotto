@@ -10,9 +10,7 @@ public class LottoNumber {
 	private static final int MAX_NUMBER = 45;
 
 	public LottoNumber(List<Integer> numbers) {
-		if (!isValidNumbers(numbers)) {
-			throw new IllegalArgumentException();
-		}
+		isValidNumbers(numbers);
 		this.numbers = Collections.unmodifiableList(numbers);
 	}
 
@@ -23,29 +21,37 @@ public class LottoNumber {
 			.count());
 	}
 
-	private boolean isContains(int number) {
+	public boolean isContains(int number) {
 		return this.numbers.contains(number);
 	}
 
-	private boolean isValidNumbers(List<Integer> numbers) {
-		return this.isValidSize(numbers) && this.isValidRange(numbers) && this.isSorted(numbers);
+	private void isValidNumbers(List<Integer> numbers) {
+		this.checkValidSize(numbers);
+		this.checkValidRange(numbers);
+		this.checkSorted(numbers);
 	}
 
-	private boolean isValidSize(List<Integer> numbers) {
-		return numbers.size() == LOTTO_NUMBERS_SIZE;
+	private void checkValidSize(List<Integer> numbers) {
+		if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+			throw new IllegalArgumentException(String.format("로또 번호는 %d개 여야 합니다.", LOTTO_NUMBERS_SIZE));
+		}
 	}
 
-	private boolean isValidRange(List<Integer> numbers) {
-		return numbers.stream()
-			.allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
+	private void checkValidRange(List<Integer> numbers) {
+		if (numbers.stream().anyMatch(number -> number > MAX_NUMBER || number < MIN_NUMBER)) {
+			throw new IllegalArgumentException(String.format("로또 번호는 %d 과 %d 사이의 숫자여야 합니다.", MIN_NUMBER, MAX_NUMBER));
+		}
 	}
 
-	private boolean isSorted(List<Integer> numbers) {
+	private void checkSorted(List<Integer> numbers) {
 		boolean isValid = true;
 		for (int i = 1; i < numbers.size(); i++) {
 			isValid = isValid && numbers.get(i) > numbers.get(i-1);
 		}
-		return isValid;
+
+		if (!isValid) {
+			throw new IllegalArgumentException("로또 번호는 정렬되어야 합니다.");
+		}
 	}
 
 	@Override
