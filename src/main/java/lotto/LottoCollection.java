@@ -4,9 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.NumberListGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoCollection {
     private final List<Lotto> lottoList = new ArrayList<>();
@@ -31,6 +29,6 @@ public class LottoCollection {
     }
 
     public LottoResult getLottoResult(Lotto winnerLotto) {
-        return new LottoResult();
+        return new LottoResult(lottoList, winnerLotto);
     }
 }

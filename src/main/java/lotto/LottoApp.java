@@ -21,7 +21,7 @@ public class LottoApp {
         LottoResult lottoResult = lottoCollection.getLottoResult(new Lotto(numbers));
 
         ResultView.printLottoNumberList(lottoCollection);
-        ResultView.printStatistics(lottoResult);
+        ResultView.printStatistics(lottoResult, buyAmount);
     }
 
     private static int convertLottoCount(int buyAmount) {
