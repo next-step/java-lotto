@@ -12,6 +12,7 @@ import lotto.domain.WinningNumber;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
+	private static final String DELIMITER_COMMA = ",";
 
 	public static long scanPayment() {
 		System.out.println("구매금액을 입력해 주세요.");
@@ -46,7 +47,7 @@ public class InputView {
 	}
 
 	private static LottoNumber toLottoNumber(String inputNumbers) {
-		List<Integer> numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(","))
+		List<Integer> numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(DELIMITER_COMMA))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 		return new LottoNumber(numbers);

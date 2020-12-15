@@ -15,8 +15,8 @@ public class LottoRunner {
 	}
 
 	public LottoMatchResults match(WinningNumber winningNumber) {
-		this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
 		this.manualLottoNumbers.match(this.lottoMatchResults, winningNumber);
+		this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
 		return this.lottoMatchResults;
 	}
 
