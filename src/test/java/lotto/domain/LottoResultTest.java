@@ -9,13 +9,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoResultTest {
 
     private List<Lotto> lottoList;
     private Lotto winnerLotto;
-    private int buyAmont;
+    private int buyAmount;
 
     @BeforeEach
     void setUp() {
@@ -35,14 +34,14 @@ class LottoResultTest {
         lottoList.add(new Lotto(17, 21, 29, 37, 42, 45));
         lottoList.add(new Lotto(3, 8, 27, 30, 35, 44));
         winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        buyAmont = 14000;
+        buyAmount = 14000;
     }
 
     @Test
     @DisplayName("당첨 갯수별 로또 수 테스트")
     void getSameLottoCount() {
         //when
-        LottoResult lottoResult = new LottoResult(lottoList, winnerLotto);
+        LottoResult lottoResult = new LottoResult(lottoList, winnerLotto, buyAmount);
 
         //then
         assertThat(lottoResult.getSameLottoCount(3)).isEqualTo(1);
@@ -54,7 +53,7 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률 계산 테스트")
     void getRevenueRate() {
-        LottoResult lottoResult = new LottoResult(lottoList, winnerLotto);
-        assertThat(lottoResult.getRevenueRate(buyAmont)).isCloseTo(0.35, offset(0.1d));
+        LottoResult lottoResult = new LottoResult(lottoList, winnerLotto, buyAmount);
+        assertThat(lottoResult.getRevenueRate()).isCloseTo(0.35, offset(0.1d));
     }
 }

@@ -10,23 +10,16 @@ import lotto.ui.ResultView;
 import java.util.Set;
 
 public class LottoApp {
-    public static final int LOTTO_COST = 1000;
 
     public static void main(String[] args) {
         int buyAmount = InputView.scanBuyAmount();
-        int lottoCount = convertLottoCount(buyAmount);
-
         Set<Integer> numbers = InputView.scanWinningNumbers();
 
-        LottoCollection lottoCollection = new LottoCollection(lottoCount, new RandomNumberListGenerator());
+        LottoCollection lottoCollection = new LottoCollection(buyAmount, new RandomNumberListGenerator());
         LottoResult lottoResult = lottoCollection.getLottoResult(new Lotto(numbers));
 
         ResultView.printLottoNumberList(lottoCollection);
-        ResultView.printStatistics(lottoResult, buyAmount);
-    }
-
-    private static int convertLottoCount(int buyAmount) {
-        return buyAmount / LOTTO_COST;
+        ResultView.printStatistics(lottoResult);
     }
 
 }

@@ -14,7 +14,7 @@ class LottoCollectionTest {
 
     @BeforeEach
     void setUp() {
-        lottoCollection = new LottoCollection(14, new FixedNumberListGenerator());
+        lottoCollection = new LottoCollection(14000, new FixedNumberListGenerator());
     }
 
     @Test

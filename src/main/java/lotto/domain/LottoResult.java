@@ -9,8 +9,10 @@ public class LottoResult {
     private static final int EMPTY_KEY_RESULT_COUNT = 0;
     private static final int INITIAL_COUNT = 0;
     private final Map<Integer, Integer> sameCountMap;
+    private final int buyAmount;
 
-    public LottoResult(List<Lotto> lottoList, Lotto winnerLotto) {
+    public LottoResult(List<Lotto> lottoList, Lotto winnerLotto, int buyAmount) {
+        this.buyAmount = buyAmount;
         sameCountMap = new HashMap<>();
 
         for (Lotto lotto : lottoList) {
@@ -35,11 +37,11 @@ public class LottoResult {
         return sameCountMap.get(sameCount);
     }
 
-    public double getRevenueRate(int amount) {
+    public double getRevenueRate() {
         int totalRevenue = 0;
         for (Integer sameCount : sameCountMap.keySet()) {
             totalRevenue += RevenueTable.getRevenue(sameCount);
         }
-        return (double)totalRevenue / amount;
+        return (double)totalRevenue / buyAmount;
     }
 }
