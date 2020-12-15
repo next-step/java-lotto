@@ -15,11 +15,11 @@ public class InputView {
 	private static final String DELIMITER_COMMA = ",";
 
 	public static long scanPayment() {
-		System.out.println("구매금액을 입력해 주세요.");
-		String payment = scanner.nextLine();
 		try {
+			System.out.println("구매금액을 입력해 주세요.");
+			String payment = scanner.nextLine();
 			return Long.parseLong(payment);
-		} catch (Exception e){
+		} catch (NumberFormatException e){
 			throw new IllegalArgumentException("구매금액은 숫자를 입력해야 합니다.");
 		}
 	}
@@ -35,9 +35,14 @@ public class InputView {
 	}
 
 	public static int scanManualNumberSize() {
-		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-		String manualSize = scanner.nextLine();
-		return Integer.parseInt(manualSize);
+		try {
+			System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+			String manualSize = scanner.nextLine();
+			return Integer.parseInt(manualSize);
+		} catch (NumberFormatException e){
+			throw new IllegalArgumentException("수동으로 구매할 로또 수는 숫자를 입력해야 합니다.");
+		}
+
 	}
 
 	public static LottoNumbers scanManualNumbers(int manualSize) {
@@ -51,9 +56,13 @@ public class InputView {
 	}
 
 	private static LottoNumber generateManualLottoNumber(String inputNumbers) {
-		List<Integer> numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(DELIMITER_COMMA))
-			.map(Integer::parseInt)
-			.collect(Collectors.toList());
-		return new LottoNumber(numbers, true);
+		try {
+			List<Integer> numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(DELIMITER_COMMA))
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
+			return new LottoNumber(numbers, true);
+		} catch (NumberFormatException e){
+			throw new IllegalArgumentException("로또번호는 숫자를 입력해야 합니다.");
+		}
 	}
 }
