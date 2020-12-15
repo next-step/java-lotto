@@ -35,4 +35,8 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public int ascendingSort(LottoNumber o2) {
+        return this.lottoNumber - o2.lottoNumber;
+    }
 }

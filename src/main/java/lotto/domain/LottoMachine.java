@@ -22,7 +22,9 @@ public class LottoMachine {
 
     public LottoTicket generate() {
         lottoNumbersShuffle();
-        return new LottoTicket(new ArrayList<>(lottoNumbers.subList(LottoMagicNumber.BASE_INDEX.get(), LottoMagicNumber.NUMBER_COUNT.get())));
+        List<LottoNumber> lottoNumbers = LottoMachine.lottoNumbers.subList(LottoMagicNumber.BASE_INDEX.get(), LottoMagicNumber.NUMBER_COUNT.get());
+        lottoNumbers.sort(LottoNumber::ascendingSort);
+        return new LottoTicket(new ArrayList<>(lottoNumbers));
     }
 
     public LottoTickets generate(int price) {
