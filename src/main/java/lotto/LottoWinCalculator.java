@@ -3,30 +3,18 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinPrize;
+import lotto.domain.Lottos;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoWinCalculator {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
-    private final List<Lotto> pickedLottoNumbers = new ArrayList<>();
-    private LottoNumbers winLottoNumbers;
+    private Lotto winLottoNumbers;
 
-    /**
-     * 발급 된 로또번호를 추가합니다
-     * @param lotto
-     */
-    public void addPickedLottoNumbers(Lotto lotto) {
-        this.pickedLottoNumbers.add(lotto);
-    }
-
-    /**
-     * 당첨번호를 세팅합니다.
-     * @param winLottoNumbers
-     */
-    public void setWinLottoNumbers(LottoNumbers winLottoNumbers) {
+    public LottoWinCalculator(Lotto winLottoNumbers) {
         this.winLottoNumbers = winLottoNumbers;
     }
 
@@ -34,9 +22,8 @@ public class LottoWinCalculator {
      * 당첨상금 별 갯수를 리턴합니다.
      * @return
      */
-    public List<LottoWinPrize> findLottoWinPrize() {
-        List<Integer> matchedCounts = this.calculateMatchedCounts();
-        for (int matchedCount : matchedCounts) {
+    public List<LottoWinPrize> findLottoWinPrize(Lottos lottos) {
+        for (int matchedCount : this.calculateMatchedCounts(lottos)) {
             LottoWinPrize.addCount(matchedCount);
         }
         return Arrays.stream(LottoWinPrize.values()).collect(Collectors.toList());
@@ -46,9 +33,10 @@ public class LottoWinCalculator {
      * 세팅 된 당첨번호와 발급 된 로또번호를 비교하여 각 일치하는 개수를 반환합니다.
      * @return
      */
-    List<Integer> calculateMatchedCounts() {
-        return this.pickedLottoNumbers.stream()
-                .map(lotto -> lotto.getLottoNumbers().matchedLottoNumbersCount(this.winLottoNumbers))
+    List<Integer> calculateMatchedCounts(Lottos lottos) {
+        return lottos.getLottos().stream()
+                .map(lotto -> lotto.getLottoNumbers()
+                        .matchedLottoNumbersCount(this.winLottoNumbers.getLottoNumbers()))
                 .collect(Collectors.toList());
     }
 
