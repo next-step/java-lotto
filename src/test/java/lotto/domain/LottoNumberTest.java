@@ -18,7 +18,7 @@ public class LottoNumberTest {
 			.hasMessage("기준 범위를 초과하였습니다.");
 	}
 
-	@DisplayName("옳바른 로또 번호 테스트")
+	@DisplayName("올바른 로또 번호 테스트")
 	@ParameterizedTest
 	@ValueSource(strings = {"a", "-", "4$%"})
 	void name(String input) {

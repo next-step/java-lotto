@@ -5,23 +5,20 @@ import lotto.domain.LottoPrice;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerNumbers;
-import lotto.domain.PurchaseTicket;
+import lotto.domain.LottoTicketStore;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
 
 public class LottoApplication {
 
 	public static void main(String[] args) {
 		LottoPrice lottoPrice = new LottoPrice(InputView.askToUserPurchaseAmount(), InputView.askToUserPurchaseNumberOfManual());
-		PurchaseTicket purchaseTicket = new PurchaseTicket(lottoPrice);
-
-		InputView.printPleaseInputManuallyNumber();
-		for (int manualPurchaseIndex = 0; manualPurchaseIndex < lottoPrice.getManualCount(); manualPurchaseIndex++) {
-			purchaseTicket.manual(InputView.enterPurchaseManuallyNumber());
-		}
+		List<String> userInputs = InputView.enterPurchaseManuallyNumber(lottoPrice.getManualCount());
 		OutputView.printPurchaseMessage(lottoPrice.getManualCount(), lottoPrice.getAutoCount());
 
-		LottoTicket purchasedLottoTicket = LottoTicket.ofPurchase(purchaseTicket);
+		LottoTicket purchasedLottoTicket = LottoTicketStore.purchaseLottoTicket(lottoPrice, userInputs);
 		OutputView.printMessage(LottoMessage.purchasedTickets(purchasedLottoTicket));
 
 		LottoWinnerNumbers lottoWinnerNumbers = LottoWinnerNumbers.ofUser(

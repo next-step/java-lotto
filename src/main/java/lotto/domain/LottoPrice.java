@@ -20,11 +20,7 @@ public class LottoPrice {
 	}
 
 	public boolean availablePurchaseManualAmount(int nowNumberOfTicket) {
-		return nowNumberOfTicket >= this.manualCount;
-	}
-
-	public boolean availablePurchaseAutoAmount(int nowNumberOfTicket) {
-		return nowNumberOfTicket < getAutoCount();
+		return nowNumberOfTicket > this.manualCount;
 	}
 
 	public int getAutoCount() {
