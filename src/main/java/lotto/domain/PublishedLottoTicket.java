@@ -21,8 +21,8 @@ public class PublishedLottoTicket {
     private void publishLottoTicket(int lottoTicketCounts) {
         LottoMachine lottoMachine = new LottoMachine();
         for (int i = 0; i < lottoTicketCounts; i++) {
-            Set<LottoNumber> lottoNumbers = lottoMachine.generateLottoNumber();
-            this.publishedLottoTicket.add(new LottoTicket(lottoNumbers));
+            LottoTicket lottoTicket = lottoMachine.generateLottoNumber();
+            this.publishedLottoTicket.add(lottoTicket);
         }
     }
 

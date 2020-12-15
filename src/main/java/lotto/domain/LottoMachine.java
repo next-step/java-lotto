@@ -17,20 +17,20 @@ public class LottoMachine {
                 .boxed().distinct().forEach(lottoNumbers::add);
     }
 
-    public Set<LottoNumber> generateLottoNumber() {
+    public LottoTicket generateLottoNumber() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
+        return new LottoTicket(lottoNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
                 .map(number -> LottoNumber.ofNumber(number))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
     }
 
-    public Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+    public LottoTicket createManualLottoNumbers(List<Integer> manualLottoNumbers) {
         Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers);
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {
-            lotto.add(LottoNumber.ofNumber(deduplicatedManualLottoNumber));
+            lottoNumbers.add(LottoNumber.ofNumber(deduplicatedManualLottoNumber));
         }
-        return lotto;
+        return new LottoTicket(lottoNumbers);
     }
 }

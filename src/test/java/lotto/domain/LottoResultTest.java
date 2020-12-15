@@ -30,10 +30,10 @@ class LottoResultTest {
 
     @BeforeEach
     void setLottoTicket() {
-        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"))));
-        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45"))));
-        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"))));
-        lottoTickets.add(new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45"))));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45")));
     }
 
     @ParameterizedTest

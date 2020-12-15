@@ -26,7 +26,7 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 숫자가 6개인지 테스트")
     void lotto_ticket_count() {
         LottoMachine lottoMachine = new LottoMachine();
-        assertThatCode(() -> new LottoTicket(lottoMachine.generateLottoNumber()))
+        assertThatCode(() -> lottoMachine.generateLottoNumber())
                 .doesNotThrowAnyException();
     }
 
@@ -47,8 +47,8 @@ class LottoTicketTest {
     @Test
     @DisplayName("두 로또 번호를 비교해 맞은 개수 반환 테스트")
     void count_match_numbers() {
-        LottoTicket winningLotto = new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
-        LottoTicket compareLotto = new LottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
+        LottoTicket winningLotto = lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
+        LottoTicket compareLotto = lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"));
         assertEquals(4, winningLotto.countMatchNumbers(compareLotto));
     }
 

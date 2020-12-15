@@ -7,12 +7,12 @@ public class WinningLotto {
 
     private final LottoTicket winningLottoTicket;
 
-    private WinningLotto(Set<LottoNumber> lottoNumbers) {
-        this.winningLottoTicket = new LottoTicket(lottoNumbers);
+    private WinningLotto(LottoTicket winningLottoTicket) {
+        this.winningLottoTicket = winningLottoTicket;
     }
 
-    public static WinningLotto ofLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        return new WinningLotto(lottoNumbers);
+    public static WinningLotto ofLottoNumbers(LottoTicket lottoTicket) {
+        return new WinningLotto(lottoTicket);
     }
 
     public LottoTicket getWinningLottoTicket() {

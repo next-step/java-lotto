@@ -12,8 +12,9 @@ class LottoMachineTest {
     void generate_lotto_numbers_test() {
         // given
         LottoMachine lottoMachine = new LottoMachine();
+        LottoTicket lottoTicket = lottoMachine.generateLottoNumber();
 
         // when & then
-        assertThat(lottoMachine.generateLottoNumber().size()).isEqualTo(6);
+        assertThat(lottoTicket.getLottoTicketNumbers().size()).isEqualTo(6);
     }
 }
