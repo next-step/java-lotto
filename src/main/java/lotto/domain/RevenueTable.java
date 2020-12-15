@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class RevenueTable {
     private static final Map<Integer, Integer> revenueMap = new HashMap<>();
+
     static {
         revenueMap.put(3, 5000);
         revenueMap.put(4, 500000);

@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class LottoResult {
 
-    public static final int EMPTY_KEY_RESULT_COUNT = 0;
-    public static final int INITIAL_COUNT = 0;
+    private static final int EMPTY_KEY_RESULT_COUNT = 0;
+    private static final int INITIAL_COUNT = 0;
     private final Map<Integer, Integer> sameCountMap;
 
     public LottoResult(List<Lotto> lottoList, Lotto winnerLotto) {

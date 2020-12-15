@@ -1,17 +1,16 @@
 package lotto.ui;
 
-import lotto.LottoCollection;
+import lotto.domain.LottoCollection;
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-
-import java.util.Set;
 
 public class ResultView {
     public static void printLottoNumberList(LottoCollection lottoCollection) {
-        int lottoCount = lottoCollection.getLottoCount();
-        for (int i = 0; i < lottoCount; i++) {
-            Set<Integer> lottoNumbers = lottoCollection.getLottoNumbers(i);
-            System.out.println(lottoNumbers);
-        }
+        lottoCollection.getLottoList()
+                .stream()
+                .map(Lotto::getSortedNumbers)
+                .forEach(System.out::println);
+
         System.out.println();
     }
 
