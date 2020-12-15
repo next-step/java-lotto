@@ -1,10 +1,12 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoWinPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,5 +34,27 @@ public class LottoWinCalculatorTest {
 
         // then
         assertThat(matchedCounts.get(0)).isEqualTo(Integer.parseInt(expected));
+    }
+
+    @Test
+    @DisplayName("로또 당첨 케이스를 확인하는 테스트")
+    public void findLottoWinPrize() {
+        // given
+        LottoWinCalculator lottoWinCalculator = new LottoWinCalculator();
+        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(1, 2, 3, 30, 40, 46));   // prize 4
+        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 46)); // prize 6
+        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(5, 10, 20, 30, 40, 46)); // prize 5
+        lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 46)));
+
+        List<Integer> expected = Arrays.asList(0, 1, 1, 1);
+
+        // when
+        List<LottoWinPrize> lottoWinPrizes = lottoWinCalculator.findLottoWinPrize();
+
+        // then
+        int i = 0;
+        for (LottoWinPrize lottoWinPrize : lottoWinPrizes) {
+            assertThat(lottoWinPrize.getCount()).isEqualTo(expected.get(i++));
+        }
     }
 }

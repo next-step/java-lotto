@@ -14,14 +14,14 @@ public class LottoRunner {
     private final LottoWinCalculator lottoWinCalculator = new LottoWinCalculator();
 
     public void run() {
-        this.pickLotto();
-        this.win();
+        int lottoAmount = this.pickLotto();
+        this.win(lottoAmount);
     }
 
     /**
      * 구매한 갯수 만큼 로또 번호들을 뽑습니다.
      */
-    private void pickLotto(){
+    private int pickLotto(){
         int payToSum = this.inputView.insertPayToSum();
         this.resultView.printNumberOfPurchasedLotto(payToSum);
 
@@ -31,17 +31,23 @@ public class LottoRunner {
             this.lottoWinCalculator.addPickedLottoNumbers(pickedLottoNumbers);
             this.resultView.printLottoNumbers(pickedLottoNumbers);
         }
+        return payToSum;
     }
 
     /**
      * 당첨번호를 입력하고 결과를 계산하여 출력합니다.
      */
-    private void win() {
-        List<Integer> winLottoNumbers = this.inputView.insertWinLottoNumbers();
-        this.lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(winLottoNumbers));
+    private void win(int lottoAmount) {
+        // 당첨 번호 입력
+        this.lottoWinCalculator.setWinLottoNumbers(
+                new LottoNumbers(this.inputView.insertWinLottoNumbers()));
 
-        List<Integer> matchedCounts = this.lottoWinCalculator.calculateMatchedCounts();
-        List<LottoWinPrize> lottoWinPrizes = this.lottoWinCalculator.findLottoWinPrize(matchedCounts);
+        // 당첨 케이스별 계산 및 출력
+        List<LottoWinPrize> lottoWinPrizes = this.lottoWinCalculator.findLottoWinPrize();
         this.resultView.printWinStatistics(lottoWinPrizes);
+
+        // 수익률 출력
+        this.resultView.printPriceEarningRatio(
+                this.lottoWinCalculator.calculatePriceEarningRatio(lottoWinPrizes, lottoAmount));
     }
 }

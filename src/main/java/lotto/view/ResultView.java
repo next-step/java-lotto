@@ -46,4 +46,14 @@ public class ResultView {
                                 , lottoWinPrize.getCount());
         }
     }
+
+    /**
+     * @param lottoWinPrizes
+     */
+    public void printPriceEarningRatio(double lottoWinPrizes) {
+        System.out.print("총 수익률은 " + lottoWinPrizes + "입니다.");
+        if(lottoWinPrizes < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
 }
