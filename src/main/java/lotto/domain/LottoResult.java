@@ -7,6 +7,7 @@ import java.util.Map;
 public class LottoResult {
 
     public static final int EMPTY_KEY_RESULT_COUNT = 0;
+    public static final int INITIAL_COUNT = 0;
     private final Map<Integer, Integer> sameCountMap;
 
     public LottoResult(List<Lotto> lottoList, Lotto winnerLotto) {
@@ -16,11 +17,15 @@ public class LottoResult {
             int numberCount = lotto.sameNumberCount(winnerLotto);
 
             if (! sameCountMap.containsKey(numberCount))
-                sameCountMap.put(numberCount, 0);
+                sameCountMap.put(numberCount, INITIAL_COUNT);
 
-            Integer integer = sameCountMap.get(numberCount);
-            sameCountMap.put(numberCount, integer + 1);
+            increaseCount(numberCount);
         }
+    }
+
+    private void increaseCount(int numberCount) {
+        Integer matchCount = sameCountMap.get(numberCount);
+        sameCountMap.put(numberCount, matchCount + 1);
     }
 
     public int getSameLottoCount(int sameCount) {
