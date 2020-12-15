@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("LottoNumber: 로또 번호 각각의 원시값을 포장한 클래스")
 class LottoNumberTest {
@@ -15,5 +17,13 @@ class LottoNumberTest {
 			.isNotNull()
 			.isInstanceOf(LottoNumber.class)
 			.hasFieldOrPropertyWithValue("lottoNumber", 1);
+	}
+
+	@DisplayName("생성자: 범위 외의 로또 번호가 들어오면 Exception 발생.")
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 0, 46})
+	public void generate_shouldException(int number) {
+		assertThatThrownBy(() -> new LottoNumber(number))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
