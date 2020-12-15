@@ -10,7 +10,7 @@ public class LottoNumber {
 	private static final int MAX_NUMBER = 45;
 
 	public LottoNumber(List<Integer> numbers) {
-		isValidNumbers(numbers);
+		validateNumbers(numbers);
 		this.numbers = Collections.unmodifiableList(numbers);
 	}
 
@@ -25,7 +25,7 @@ public class LottoNumber {
 		return this.numbers.contains(number);
 	}
 
-	private void isValidNumbers(List<Integer> numbers) {
+	private void validateNumbers(List<Integer> numbers) {
 		this.checkValidSize(numbers);
 		this.checkValidRange(numbers);
 		this.checkSorted(numbers);

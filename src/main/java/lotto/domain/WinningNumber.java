@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningNumber {
 	private final LottoNumber winningNumbers;
 	private final int bonusNumber;
@@ -9,7 +7,7 @@ public class WinningNumber {
 	private static final int MAX_NUMBER = 45;
 
 	public WinningNumber(LottoNumber winningNumbers, int bonusNumber) {
-		checkValidBonusNumber(winningNumbers, bonusNumber);
+		validateBonusNumbers(winningNumbers, bonusNumber);
 		this.bonusNumber = bonusNumber;
 		this.winningNumbers = winningNumbers;
 	}
@@ -22,9 +20,9 @@ public class WinningNumber {
 
 	private boolean matchBonus(LottoNumber number) { return number.isContains(this.bonusNumber); }
 
-	private void checkValidBonusNumber(LottoNumber winningNumbers, int bonusNumber) {
+	private void validateBonusNumbers(LottoNumber winningNumbers, int bonusNumber) {
 		checkValidRange(bonusNumber);
-		checkValidExist(winningNumbers, bonusNumber);
+		checkAlreadyExist(winningNumbers, bonusNumber);
 	}
 
 	private void checkValidRange(int bonusNumber) {
@@ -33,9 +31,9 @@ public class WinningNumber {
 		}
 	}
 
-	private void checkValidExist(LottoNumber winningNumbers, int bonusNumber) {
+	private void checkAlreadyExist(LottoNumber winningNumbers, int bonusNumber) {
 		if (winningNumbers.isContains(bonusNumber)) {
-			throw new IllegalArgumentException("이미 당첨번호에 포함된 숫자는 보너스 번호일 수 없습니다 .");
+			throw new IllegalArgumentException("이미 당첨번호에 포함된 숫자는 보너스 번호가 될 수 없습니다.");
 		}
 	}
 
