@@ -15,7 +15,7 @@ public class LottoTickets {
 	private static final int MINIMUM_OF_AUTO_CREATE_NUMBER = 1;
 	private static final int MAXIMUM_OF_AUTO_CREATE_NUMBER = 46;
 
-	private List<LottoTicket> lottoTickets;
+	private List<LottoTicket> lottoTickets = new ArrayList<>();
 
 	public LottoTickets(int cash) {
 		lottoTickets = createTickets(cash);

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,9 +12,12 @@ import java.util.Set;
  **/
 public class LottoTicket {
 	private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
-	private Set<LottoNumber> lottoTicketNumbers = new HashSet<>();
+	private List<LottoNumber> lottoTicketNumbers = new ArrayList<>();
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {
+		for(LottoNumber lottoNumber : lottoNumbers){
+			System.out.println("생성중 : " + lottoNumber.getNumber());
+		}
 		validateLottoNumbers(lottoNumbers);
 		lottoNumbers.stream()
 			.forEach(lottoNumber -> addLottoTicketNumber(lottoNumber));
@@ -30,7 +34,7 @@ public class LottoTicket {
 		lottoTicketNumbers.add(lottoNumber);
 	}
 
-	public Set<LottoNumber> get() {
+	public List<LottoNumber> get() {
 		return lottoTicketNumbers;
 	}
 
@@ -42,7 +46,7 @@ public class LottoTicket {
 	}
 
 	public Long getMatchCount(LottoTicket winnerLottoTicket) {
-		Set<LottoNumber> winnerLottoNumbers = winnerLottoTicket.get();
+		List<LottoNumber> winnerLottoNumbers = winnerLottoTicket.get();
 		return lottoTicketNumbers.stream().filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
 			.count();
 	}

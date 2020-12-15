@@ -11,8 +11,6 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * @author : byungkyu
@@ -57,7 +55,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.THREE)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningAverage()).isEqualTo(5);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(5);
 	}
 
 	@Order(2)
@@ -69,7 +67,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.FOUR)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningAverage()).isEqualTo(50);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(50);
 	}
 
 	@Order(3)
@@ -81,7 +79,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.FIVE)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningAverage()).isEqualTo(1500);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(1500);
 	}
 
 	@Order(4)
@@ -93,7 +91,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.SIX)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningAverage()).isEqualTo(2000000);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(2000000);
 	}
 
 	@Order(5)

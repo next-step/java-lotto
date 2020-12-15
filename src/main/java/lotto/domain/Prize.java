@@ -22,12 +22,15 @@ public enum Prize {
 		this.reward = reward;
 	}
 
-	public static Prize of(Long count){
+	public static Prize of(Long count) {
 		return Arrays.stream(values()).filter(one -> one.matchCount == count)
 			.findFirst()
 			.orElse(NONE);
 	}
 
+	public int getMatchCount() {
+		return matchCount;
+	}
 	public int getReward() {
 		return reward;
 	}
