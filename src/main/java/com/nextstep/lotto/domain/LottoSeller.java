@@ -11,7 +11,7 @@ public class LottoSeller {
 
     public static int count(int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("price is too less");
+            throw new IllegalArgumentException("최소 구매금액은 " + LOTTO_PRICE + "원 입니다.");
         }
         return price / LOTTO_PRICE;
     }

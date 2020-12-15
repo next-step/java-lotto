@@ -3,6 +3,7 @@ package com.nextstep.lotto.view;
 import com.nextstep.lotto.domain.Lotto;
 import com.nextstep.lotto.domain.LottoSeller;
 import com.nextstep.lotto.domain.Lottos;
+import com.nextstep.lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,7 @@ public class LottoMain {
     }
 
     private static Lottos buy() {
-        int price = inputWithoutException(InputView::inputPrice);
-        int totalCount = LottoSeller.count(price);
+        int totalCount = inputWithoutException(InputView::inputPriceToCount);
         int manualCount = inputWithoutException(() -> InputView.inputManualCount(totalCount));
         int autoCount = totalCount - manualCount;
 
@@ -34,16 +34,15 @@ public class LottoMain {
     private static List<Lotto> inputManualLottos(int manualCount) {
         List<Lotto> manualLottos = new ArrayList<>();
         for ( int i = 0 ; i < manualCount ; i ++ ) {
-            Lotto manualLotto = inputWithoutException(InputView::inputManualLottos);
+            Lotto manualLotto = inputWithoutException(InputView::inputManualLotto);
             manualLottos.add(manualLotto);
         }
         return manualLottos;
     }
 
     private static void draw(Lottos lottos) {
-        List<Integer> winnerNumbers = inputWithoutException(InputView::inputWinnerNumbers);
-        int bonusNumber = inputWithoutException(InputView::inputBonusNumber);
-        ResultView.printStatistics(lottos.getStatistics(winnerNumbers, bonusNumber));
+        WinningLotto winningLotto = inputWithoutException(InputView::inputWinningLotto);
+        ResultView.printStatistics(lottos.getStatistics(winningLotto));
     }
 
     public static <T> T inputWithoutException(Supplier<T> supplier) {

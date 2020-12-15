@@ -14,11 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoStatistics getStatistics(List<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            throw new IllegalArgumentException("winning numbers are not allowed empty value");
-        }
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    public LottoStatistics getStatistics(WinningLotto winningLotto) {
         List<LottoRank> winnings = new ArrayList<>();
         for (Lotto lotto : lottos) {
             winnings.add(lotto.match(winningLotto));

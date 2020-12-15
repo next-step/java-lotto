@@ -1,12 +1,12 @@
 package com.nextstep.lotto.view;
 
 import com.nextstep.lotto.domain.Lotto;
+import com.nextstep.lotto.domain.LottoNumber;
 import com.nextstep.lotto.domain.LottoSeller;
+import com.nextstep.lotto.domain.WinningLotto;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,36 +23,37 @@ public class InputView {
         return manualCount;
     }
 
-    public static Lotto inputManualLottos() {
+    public static Lotto inputManualLotto() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return new Lotto(parseToList(SCANNER.nextLine()));
+        return new Lotto(parseToLottoNumbers(SCANNER.nextLine()));
     }
 
-    public static int inputPrice() {
+    public static int inputPriceToCount() {
         System.out.println("구입금액을 입력해 주세요.");
         int price = parseInt(SCANNER.nextLine());
-        if (price < LottoSeller.LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 구입 금액은 " + LottoSeller.LOTTO_PRICE + "원 입니다.");
-        }
-        return price;
+        return LottoSeller.count(price);
     }
 
-    public static List<Integer> inputWinnerNumbers() {
+    public static WinningLotto inputWinningLotto() {
+        List<LottoNumber> lottoNumbers = inputWinnerNumbers();
+        int bonusNumber = inputBonusNumber();
+        return new WinningLotto(lottoNumbers, bonusNumber);
+    }
+
+    private static List<LottoNumber> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return parseToList(SCANNER.nextLine());
+        return parseToLottoNumbers(SCANNER.nextLine());
     }
 
-    private static List<Integer> parseToList(String winningNumberString) {
+    private static List<LottoNumber> parseToLottoNumbers(String winningNumberString) {
         String[] numbers = winningNumberString.split(DELIMITER);
-        if ( numbers.length != Lotto.LOTTO_NUMBER_COUNT ) {
-            throw new IllegalArgumentException("숫자는 " + Lotto.LOTTO_NUMBER_COUNT + "개만 입력 가능합니다.");
-        }
         return Stream.of(numbers)
                 .map(InputView::parseInt)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
-    public static int inputBonusNumber() {
+    private static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = parseInt(SCANNER.nextLine());
         System.out.println();

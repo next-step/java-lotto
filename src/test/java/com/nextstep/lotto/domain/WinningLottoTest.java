@@ -3,16 +3,16 @@ package com.nextstep.lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningLottoTest {
-    private final List<Integer> list = Arrays.asList(1,2,3,4,5,6);
+    private final List<LottoNumber> list = toLottoNumbers(1,2,3,4,5,6);
 
     @DisplayName("보너스 넘버가 6개 숫자에 포함 될 경우 생성자 예외처리")
     @Test
@@ -35,6 +35,12 @@ public class WinningLottoTest {
         List<LottoNumber> checkList = Stream.of(1,2,3,4,5,6).map(LottoNumber::of).collect(Collectors.toList());
         long matchedCount = winningLotto.getMatchedCount(checkList);
         assertThat(matchedCount).isEqualTo(6);
+    }
+
+    private List<LottoNumber> toLottoNumbers(int ... numbers) {
+        return IntStream.of(numbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
 }

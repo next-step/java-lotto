@@ -6,12 +6,12 @@ public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("numbers cannot conatins bonus number");
+    public WinningLotto(List<LottoNumber> numbers, int bonusNumber) {
+        this.bonusNumber = LottoNumber.of(bonusNumber);
+        if (numbers.contains(this.bonusNumber)) {
+            throw new IllegalArgumentException("보너스 넘버는 당첨 번호에 포함될 수 없습니다.");
         }
         this.lotto = new Lotto(numbers);
-        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public long getMatchedCount(List<LottoNumber> collectedNumbers) {
