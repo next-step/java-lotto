@@ -46,25 +46,28 @@ public class LottoResult {
 
 	public void arrangePrize(List<Integer> lottoMatchCountResult, int lottoPricePerSheet) {
 		for (Integer matchCount : lottoMatchCountResult) {
-			if (matchCount == 3) {
-				threeMatchCount += 1;
-				totalPrizeMoney += THREE_MATCH_PRIZE_MONEY;
-			}
-			if (matchCount == 4) {
-				fourMatchCount += 1;
-				totalPrizeMoney += FOUR_MATCH_PRIZE_MONEY;
-			}
-			if (matchCount == 5) {
-				fiveMatchCount += 1;
-				totalPrizeMoney += FIVE_MATCH_PRIZE_MONEY;
-			}
-			if (matchCount == 6) {
-				sixMatchCount += 1;
-				totalPrizeMoney += SIX_MATCH_PRIZE_MONEY;
-			}
+			calculateLottoPrize(matchCount);
 		}
-
 		earningsRate = (double) totalPrizeMoney / (lottoMatchCountResult.size() * lottoPricePerSheet);
+	}
+
+	private void calculateLottoPrize(Integer matchCount) {
+		if (matchCount == 3) {
+			threeMatchCount += 1;
+			totalPrizeMoney += THREE_MATCH_PRIZE_MONEY;
+		}
+		if (matchCount == 4) {
+			fourMatchCount += 1;
+			totalPrizeMoney += FOUR_MATCH_PRIZE_MONEY;
+		}
+		if (matchCount == 5) {
+			fiveMatchCount += 1;
+			totalPrizeMoney += FIVE_MATCH_PRIZE_MONEY;
+		}
+		if (matchCount == 6) {
+			sixMatchCount += 1;
+			totalPrizeMoney += SIX_MATCH_PRIZE_MONEY;
+		}
 	}
 
 }
