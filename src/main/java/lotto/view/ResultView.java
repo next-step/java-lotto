@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoWinPrize;
 
 import java.util.List;
@@ -18,10 +19,10 @@ public class ResultView {
 
     /**
      * 발급된 로또 번호를 출력합니다.
-     * @param lottoNumbers
+     * @param lotto
      */
-    public void printLottoNumbers(List<Integer> lottoNumbers) {
-        System.out.println(lottoNumbers);
+    public void printLottoNumbers(Lotto lotto) {
+        System.out.println(lotto.getLottoNumbers());
     }
 
     /**

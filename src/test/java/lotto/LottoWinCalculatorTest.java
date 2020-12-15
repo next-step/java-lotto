@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinPrize;
 import org.junit.jupiter.api.DisplayName;
@@ -19,15 +20,17 @@ public class LottoWinCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1 2 3 4 5 6,1", "1 20 3 4 5 6,2", "1 20 30 4 5 6,3", "1 20 30 40 5 6,4"
-            , "1 20 30 40 46 6,5", "1 20 30 40 46 10,6"})
+            , "1 20 30 40 45 6,5", "1 20 30 40 45 10,6"})
     @DisplayName("발급한 로또번호와 당첨번호의 일치하는 갯수를 구하는 테스트")
     public void calculateMatchedCounts(String input, String expected) {
         // given
         LottoWinCalculator lottoWinCalculator = new LottoWinCalculator();
-        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(input.split(" ")).stream()
-                                                .map(Integer::parseInt)
-                                                .collect(Collectors.toList()));
-        lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 46)));
+        lottoWinCalculator.addPickedLottoNumbers(new Lotto(
+                                    Arrays.asList(input.split(" ")).stream()
+                                            .map(Integer::parseInt)
+                                            .collect(Collectors.toList())
+        ));
+        lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 45)));
 
         // when
         List<Integer> matchedCounts = lottoWinCalculator.calculateMatchedCounts();
@@ -41,10 +44,10 @@ public class LottoWinCalculatorTest {
     public void findLottoWinPrize() {
         // given
         LottoWinCalculator lottoWinCalculator = new LottoWinCalculator();
-        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(1, 2, 3, 30, 40, 46));   // prize 4
-        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 46)); // prize 6
-        lottoWinCalculator.addPickedLottoNumbers(Arrays.asList(5, 10, 20, 30, 40, 46)); // prize 5
-        lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 46)));
+        lottoWinCalculator.addPickedLottoNumbers(new Lotto(Arrays.asList(1, 2, 3, 30, 40, 45)));   // prize 4
+        lottoWinCalculator.addPickedLottoNumbers(new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45))); // prize 6
+        lottoWinCalculator.addPickedLottoNumbers(new Lotto(Arrays.asList(5, 10, 20, 30, 40, 45))); // prize 5
+        lottoWinCalculator.setWinLottoNumbers(new LottoNumbers(Arrays.asList(1, 10, 20, 30, 40, 45)));
 
         List<Integer> expected = Arrays.asList(0, 1, 1, 1);
 

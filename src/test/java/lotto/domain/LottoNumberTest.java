@@ -26,7 +26,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"0", "47"})
+    @ValueSource(strings = {"0", "46"})
     @DisplayName("범위 밖의 수로 로또번호 생성시 오류가 발생되는지 테스트")
     public void createLottoNumberOccurredException(String input) {
         // given
@@ -39,6 +39,6 @@ public class LottoNumberTest {
 
         // then
         assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
-                            .hasMessageContaining("로또 숫자는 1 ~ 46 사이의 숫자만 가능합니다.");
+                            .hasMessageContaining("로또 숫자는 1 ~ 45 사이의 숫자만 가능합니다.");
     }
 }

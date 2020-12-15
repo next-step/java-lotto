@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinPrize;
 import lotto.view.InputView;
@@ -14,24 +15,23 @@ public class LottoRunner {
     private final LottoWinCalculator lottoWinCalculator = new LottoWinCalculator();
 
     public void run() {
-        int lottoAmount = this.pickLotto();
+        int lottoAmount = this.makeLottos();
         this.win(lottoAmount);
     }
 
     /**
      * 구매한 갯수 만큼 로또 번호들을 뽑습니다.
      */
-    private int pickLotto(){
-        int payToSum = this.inputView.insertPayToSum();
-        this.resultView.printNumberOfPurchasedLotto(payToSum);
+    private int makeLottos(){
+        int lottoCount = this.inputView.getLottoCount();
+        this.resultView.printNumberOfPurchasedLotto(lottoCount);
 
-        for (int i = 0; i < payToSum; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers();
-            List<Integer> pickedLottoNumbers = lottoNumbers.pickLottoNumber();
-            this.lottoWinCalculator.addPickedLottoNumbers(pickedLottoNumbers);
-            this.resultView.printLottoNumbers(pickedLottoNumbers);
+        for (int i = 0; i < lottoCount; i++) {
+            Lotto lotto = new Lotto();
+            this.lottoWinCalculator.addPickedLottoNumbers(lotto);
+            this.resultView.printLottoNumbers(lotto);
         }
-        return payToSum;
+        return lottoCount;
     }
 
     /**

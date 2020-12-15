@@ -4,9 +4,6 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int LOTTO_MIN_VALUE = 1;
-    public static final int LOTTO_MAX_VALUE = 45;
-
     private final int number;
 
     public LottoNumber(int number) {
@@ -31,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
      * @return
      */
     private boolean isLottoNumber(int number) {
-        return number >= LOTTO_MIN_VALUE && number <= LOTTO_MAX_VALUE;
+        return number >= LottoNumbers.LOTTO_MIN_VALUE && number <= LottoNumbers.LOTTO_MAX_VALUE;
     }
 
     public int getLottoNumber() {

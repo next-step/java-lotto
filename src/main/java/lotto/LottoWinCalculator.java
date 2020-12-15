@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoWinPrize;
 
@@ -10,15 +11,15 @@ public class LottoWinCalculator {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<LottoNumbers> pickedLottoNumbers = new ArrayList<>();
+    private final List<Lotto> pickedLottoNumbers = new ArrayList<>();
     private LottoNumbers winLottoNumbers;
 
     /**
      * 발급 된 로또번호를 추가합니다
-     * @param pickedLottoNumbers
+     * @param lotto
      */
-    public void addPickedLottoNumbers(List<Integer> pickedLottoNumbers) {
-        this.pickedLottoNumbers.add(new LottoNumbers(pickedLottoNumbers));
+    public void addPickedLottoNumbers(Lotto lotto) {
+        this.pickedLottoNumbers.add(lotto);
     }
 
     /**
@@ -47,7 +48,7 @@ public class LottoWinCalculator {
      */
     List<Integer> calculateMatchedCounts() {
         return this.pickedLottoNumbers.stream()
-                .map(lottoNumbers -> lottoNumbers.matchedLottoNumbersCount(this.winLottoNumbers))
+                .map(lotto -> lotto.getLottoNumbers().matchedLottoNumbersCount(this.winLottoNumbers))
                 .collect(Collectors.toList());
     }
 

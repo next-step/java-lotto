@@ -14,7 +14,7 @@ public class InputView {
      * 지불 금액을 입력받아 로또를 몇 개 발급 받을 수 있는지 반환합니다.
      * @return
      */
-    public int insertPayToSum() {
+    public int getLottoCount() {
         System.out.println("구입금액을 입력해 주세요.");
         return this.calculateLottoAmountFromInsertSum(scanner.nextInt());
     }

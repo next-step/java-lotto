@@ -7,12 +7,19 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final int DEFAULT_PICK_NUMBER_SIZE = 6;
+    public static final int DEFAULT_PICK_NUMBER_SIZE = 6;
+    public static final int LOTTO_MIN_VALUE = 1;
+    public static final int LOTTO_MAX_VALUE = 45;
 
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this.lottoNumbers = this.createLottoNumbers();
+        this(LottoNumbers.DEFAULT_PICK_NUMBER_SIZE);
+    }
+
+    public LottoNumbers(int lottoSize) {
+        this.createLottoNumbers();
+        this.lottoNumbers = this.pickLottoNumber(lottoSize);
     }
 
     public LottoNumbers(List<Integer> numbers) {
@@ -21,12 +28,12 @@ public class LottoNumbers {
     }
 
     /**
-     * 로또 번호들을 생성합니다.
+     * 무작위로 뽑을 로또 번호 목록들을 생성합니다.
      * @return
      */
     private List<LottoNumber> createLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_MAX_VALUE);
-        for (int i = 1; i <= LottoNumber.LOTTO_MAX_VALUE; i++) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumbers.LOTTO_MAX_VALUE);
+        for (int i = 1; i <= LottoNumbers.LOTTO_MAX_VALUE; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         return lottoNumbers;
@@ -36,7 +43,7 @@ public class LottoNumbers {
      * 기본값으로 설정된 크기만큼의 로또 번호를 뽑습니다.
      * @return
      */
-    public List<Integer> pickLottoNumber() {
+    private List<LottoNumber> pickLottoNumber() {
         return this.pickLottoNumber(DEFAULT_PICK_NUMBER_SIZE);
     }
 
@@ -45,31 +52,19 @@ public class LottoNumbers {
      * @param amount
      * @return
      */
-    public List<Integer> pickLottoNumber(int amount) {
-        if(!this.canPickLottoNumberSize(amount)) {
-            throw new IllegalArgumentException("뽑으려는 번호의 갯수가 미리 세팅된 로또 번호의 크기보다 큽니다.");
-        }
-        this.shuffleLottoNumbers();
-        return this.lottoNumbers.stream().limit(amount)
+    private List<LottoNumber> pickLottoNumber(int amount) {
+        List<LottoNumber> lottoNumbers = this.createLottoNumbers();
+        this.shuffleLottoNumbers(lottoNumbers);
+        return lottoNumbers.stream().limit(amount)
                                         .sorted()
-                                        .map(LottoNumber::getLottoNumber)
                                         .collect(Collectors.toList());
-    }
-
-    /**
-     * 주어진 수가 미리 세팅 된 로또 번호들의 크기보다 크거나 같아야합니다.
-     * @param amount
-     * @return
-     */
-    private boolean canPickLottoNumberSize(int amount) {
-        return amount <= this.lottoNumbers.size();
     }
 
     /**
      * 로또번호를 무작위로 섞습니다.
      */
-    private void shuffleLottoNumbers() {
-        Collections.shuffle(this.lottoNumbers);
+    private void shuffleLottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.shuffle(lottoNumbers);
     }
 
     /**
@@ -91,5 +86,17 @@ public class LottoNumbers {
     boolean containsLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.stream().filter(thisLottoNumber -> thisLottoNumber.equals(lottoNumber))
                                     .count() == 1;
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList())
+                .toString();
     }
 }
