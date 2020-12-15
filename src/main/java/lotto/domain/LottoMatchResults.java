@@ -6,10 +6,8 @@ import java.util.stream.Collectors;
 
 public class LottoMatchResults {
 	private Map<LottoRank, Integer> results;
-	private final long payment;
 
-	public LottoMatchResults(long payment) {
-		this.payment = payment;
+	public LottoMatchResults() {
 		this.results = new EnumMap<>(LottoRank.class);
 		for (LottoRank rank : LottoRank.values()) {
 			this.results.put(rank, 0);
@@ -30,14 +28,6 @@ public class LottoMatchResults {
 			.stream()
 			.mapToLong(rank -> rank.calculateEarnings(results.get(rank)))
 			.sum();
-	}
-
-	public double getEarningRate() {
-		return (double) this.getTotalEarnings() / this.payment;
-	}
-
-	public boolean isLoss() {
-		return this.getEarningRate() < 1;
 	}
 
 	@Override

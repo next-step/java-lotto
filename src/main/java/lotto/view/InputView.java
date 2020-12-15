@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.ManualLottoNumbers;
+import lotto.domain.LottoNumbers;
 import lotto.domain.WinningNumber;
 
 public class InputView {
@@ -23,7 +23,7 @@ public class InputView {
 	public static WinningNumber scanWinningNumber() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String inputNumbers = scanner.nextLine();
-		LottoNumber winningNumbers = toLottoNumber(inputNumbers);
+		LottoNumber winningNumbers = generateManualLottoNumber(inputNumbers);
 
 		System.out.println("보너스 볼을 입력해 주세요.");
 		int bonusNumber = scanner.nextInt();
@@ -36,20 +36,20 @@ public class InputView {
 		return Integer.parseInt(manualSize);
 	}
 
-	public static ManualLottoNumbers scanManualNumbers(int manualSize) {
+	public static LottoNumbers scanManualNumbers(int manualSize) {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < manualSize; i ++) {
 			String inputNumbers = scanner.nextLine();
-			lottoNumbers.add(toLottoNumber(inputNumbers));
+			lottoNumbers.add(generateManualLottoNumber(inputNumbers));
 		}
-		return new ManualLottoNumbers(lottoNumbers);
+		return new LottoNumbers(lottoNumbers);
 	}
 
-	private static LottoNumber toLottoNumber(String inputNumbers) {
+	private static LottoNumber generateManualLottoNumber(String inputNumbers) {
 		List<Integer> numbers = Arrays.stream(inputNumbers.replaceAll(" ", "").split(DELIMITER_COMMA))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
-		return new LottoNumber(numbers);
+		return new LottoNumber(numbers, true);
 	}
 }

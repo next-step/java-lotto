@@ -2,32 +2,43 @@ package lotto.domain;
 
 public class LottoRunner {
 
-	private AutoLottoNumbers autoLottoNumbers;
-	private ManualLottoNumbers manualLottoNumbers;
+	private final long payment;
+	private LottoNumbers lottoNumbers;
 	private LottoMatchResults lottoMatchResults;
 
 	private static final int PRICE_PER_LOTTO_NUMBER = 1000;
 
-	public LottoRunner(long payment, ManualLottoNumbers manualNumbers) {
-		this.lottoMatchResults = new LottoMatchResults(payment);
-		this.manualLottoNumbers = manualNumbers;
-		this.autoLottoNumbers = LottoNumbersGenerator.generate(autoAmountWithManual(payment, manualNumbers));
+	public LottoRunner(long payment, LottoNumbers manualNumbers) {
+		this.payment = payment;
+		this.lottoNumbers = this.generateNumbers(manualNumbers);
 	}
 
-	public LottoMatchResults match(WinningNumber winningNumber) {
-		this.manualLottoNumbers.match(this.lottoMatchResults, winningNumber);
-		this.autoLottoNumbers.match(this.lottoMatchResults, winningNumber);
+	private LottoNumbers generateNumbers(LottoNumbers manualNumbers) {
+		LottoNumbers autoNumbers = LottoNumbersGenerator.generate(autoGenerableAmount(manualNumbers));
+		return manualNumbers.addNumbers(autoNumbers);
+	}
+
+	public void match(WinningNumber winningNumber) {
+		this.lottoMatchResults = this.lottoNumbers.match(winningNumber);
+	}
+
+	public LottoMatchResults getMatchResult() {
 		return this.lottoMatchResults;
 	}
 
-	public long autoAmountWithManual(long payment, ManualLottoNumbers manualLottoSize) {
-		return payment / PRICE_PER_LOTTO_NUMBER - manualLottoSize.getLottoNumbersSize();
-	}
-	public long totalAmount() {
-		return this.autoLottoNumbers.getLottoNumbersSize() + this.manualLottoNumbers.getLottoNumbersSize();
+	public double getEarningRate() {
+		return (double) this.lottoMatchResults.getTotalEarnings() / this.payment;
 	}
 
-	public AutoLottoNumbers getAutoLottoNumbers() {
-		return this.autoLottoNumbers;
+	public long autoGenerableAmount(LottoNumbers manualNumbers) {
+		return this.payment / PRICE_PER_LOTTO_NUMBER - manualNumbers.getLottoNumbersSize();
+	}
+
+	public LottoNumbers autoLottoNumbers() {
+		return this.lottoNumbers.getAutoLottoNumbers();
+	}
+
+	public long totalLottoNumberAmount() {
+		return this.lottoNumbers.getLottoNumbersSize();
 	}
 }

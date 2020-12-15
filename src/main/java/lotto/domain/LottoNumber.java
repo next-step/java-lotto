@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
+	private final boolean isManual;
 	private final List<Integer> numbers;
 	private static final int LOTTO_NUMBERS_SIZE = 6;
 	private static final int MIN_NUMBER = 1;
@@ -12,6 +13,13 @@ public class LottoNumber {
 	public LottoNumber(List<Integer> numbers) {
 		validateNumbers(numbers);
 		this.numbers = Collections.unmodifiableList(numbers);
+		this.isManual = false;
+	}
+
+	public LottoNumber(List<Integer> numbers, boolean isManual) {
+		validateNumbers(numbers);
+		this.numbers = Collections.unmodifiableList(numbers);
+		this.isManual = isManual;
 	}
 
 	public int matchCount(LottoNumber matchTargetNumber) {
@@ -23,6 +31,10 @@ public class LottoNumber {
 
 	public boolean isContains(int number) {
 		return this.numbers.contains(number);
+	}
+
+	public boolean isAuto() {
+		return !this.isManual;
 	}
 
 	private void validateNumbers(List<Integer> numbers) {
