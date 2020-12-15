@@ -1,11 +1,11 @@
-package lotto;
+package lotto.number;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class LottoNumbers {
+public class LottoNumbers {
 
 	private static final int LOTTO_NUMBER_SIZE = 6;
 	private static final String LOTTO_VALIDATE_SIZE_WRONG = "lottoNumbers size must be %s";
@@ -34,7 +34,7 @@ class LottoNumbers {
 		}
 	}
 
-	List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
+	public List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
 		return this.getLottoNumbers().stream()
 				.filter(number -> hasEqualNumber(otherLottoNumbers, number))
 				.collect(Collectors.toList());

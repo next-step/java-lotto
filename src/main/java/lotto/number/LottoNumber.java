@@ -1,6 +1,6 @@
-package lotto;
+package lotto.number;
 
-class LottoNumber {
+public class LottoNumber {
 
 	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MIN = 1;
 	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MAX = 45;
