@@ -3,12 +3,9 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoGenerator {
@@ -28,23 +25,42 @@ public class LottoGenerator {
         return numbers;
     }
 
-    public static Lotto generateLotto() {
-        Set<LottoNumber> lottoNumbers = shuffledNumbers().stream()
-                .limit(6)
-                .sorted()
-                .collect(Collectors.toSet());
-
-        return new Lotto(lottoNumbers);
-    }
-
     public static List<Lotto> generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
         while(count > 0) {
             lottos.add(generateLotto());
-            --count;
+            count--;
         }
 
         return lottos;
+    }
+
+    public static List<Lotto> generateLottos(List<List<Integer>> numbersList) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for(List<Integer> manualLotto : numbersList) {
+            lottos.add(generateLotto(manualLotto));
+        }
+
+        return lottos;
+    }
+
+    private static Lotto generateLotto() {
+        List<LottoNumber> lottoNumbers = shuffledNumbers().stream()
+                .limit(6)
+                .sorted()
+                .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
+    }
+
+    private static Lotto generateLotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
     }
 }
