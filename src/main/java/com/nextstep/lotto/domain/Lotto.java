@@ -18,8 +18,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public boolean contains(LottoNumber number ) {
+        return numbers.contains(number);
     }
 
     public LottoRank match(WinningLotto winningLotto) {

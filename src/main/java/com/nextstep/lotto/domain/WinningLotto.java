@@ -16,7 +16,7 @@ public class WinningLotto {
 
     public long getMatchedCount(List<LottoNumber> collectedNumbers) {
         return collectedNumbers.stream()
-                .filter(lotto.getNumbers()::contains)
+                .filter(lotto::contains)
                 .count();
     }
 

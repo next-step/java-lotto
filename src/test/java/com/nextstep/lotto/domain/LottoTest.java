@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -29,7 +30,6 @@ public class LottoTest {
         WinningLotto winningLotto = new WinningLotto(toLottoNumbers(1,2,3,4,5,6), 7);
         LottoRank lottoRank = lotto.match(winningLotto);
         assertThat(lottoRank).isEqualTo(expected);
-
     }
 
     private static Stream<Arguments> getWinning() {
@@ -41,6 +41,15 @@ public class LottoTest {
                 Arguments.of(new Lotto(toLottoNumbers(11,12,13,4,5,6)), LottoRank.WIN_5TH),
                 Arguments.of(new Lotto(toLottoNumbers(11,12,13,14,5,6)), LottoRank.RETIRE)
         );
+    }
+
+    @DisplayName("숫자 포함 여부")
+    @ParameterizedTest
+    @CsvSource({"1,true", "7,false"})
+    void contains(int number, boolean expected) {
+        Lotto lotto = new Lotto(toLottoNumbers(1,2,3,4,5,6));
+        LottoNumber lottoNumber = LottoNumber.of(number);
+        assertThat(lotto.contains(lottoNumber)).isEqualTo(expected);
     }
 
     private static List<LottoNumber> toLottoNumbers(int ... numbers) {
