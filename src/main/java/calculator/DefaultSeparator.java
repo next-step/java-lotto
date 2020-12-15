@@ -1,14 +1,16 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class DefaultSeparator implements Separator {
 
-    public static final String SPLIT_REGEX = "[,:]";
+    public static final Pattern SEPARATOR_PATTERN = Pattern.compile("[,:]");
 
     @Override
     public PositiveNumbers split(InputText inputText) {
         String text = inputText.getText();
-        String[] inputTexts = text.split(SPLIT_REGEX);
-        return new PositiveNumbers(getTokens(inputTexts));
+        String[] inputTexts = SEPARATOR_PATTERN.split(text);
+        return new PositiveNumbers(getPositiveNumberArray(inputTexts));
     }
 
 }

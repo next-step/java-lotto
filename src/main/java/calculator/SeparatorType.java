@@ -1,31 +1,30 @@
 package calculator;
 
-import java.util.regex.Matcher;
+import java.util.Arrays;
 import java.util.regex.Pattern;
-
-import static calculator.CustomSeparator.CUSTOM_SEPARATOR_REGEX;
 
 public enum SeparatorType {
 
-    DEFAULT("기본 구분자", new DefaultSeparator()),
-    CUSTOM("사용자정의 구분자", new CustomSeparator());
+    DEFAULT(new DefaultSeparator(), DefaultSeparator.SEPARATOR_PATTERN, "기본 구분자"),
+    CUSTOM(new CustomSeparator(), CustomSeparator.SEPARATOR_PATTERN, "사용자정의 구분자");
 
-    private final String description;
     private final Separator separator;
+    private final Pattern separatorPattern;
+    private final String description;
 
-    SeparatorType(String description, Separator separator) {
-        this.description = description;
+    SeparatorType(Separator separator, Pattern separatorPattern, String description) {
         this.separator = separator;
+        this.separatorPattern = separatorPattern;
+        this.description = description;
     }
 
     public static SeparatorType findByInputText(InputText inputText) {
-        SeparatorType separatorType = SeparatorType.DEFAULT;
-        String text = inputText.getText();
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(text);
-        if (m.matches()) {
-            separatorType = SeparatorType.CUSTOM;
-        }
-        return separatorType;
+        return Arrays.stream(values())
+                .filter(type -> type.separatorPattern
+                        .matcher(inputText.getText())
+                        .matches())
+                .findAny()
+                .orElse(DEFAULT);
     }
 
     public Separator getSeparator() {
