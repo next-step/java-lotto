@@ -36,7 +36,7 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    public int ascendingSort(LottoNumber o2) {
-        return this.lottoNumber - o2.lottoNumber;
+    public int ascendingSort(LottoNumber comparisonObject) {
+        return this.lottoNumber - comparisonObject.lottoNumber;
     }
 }
