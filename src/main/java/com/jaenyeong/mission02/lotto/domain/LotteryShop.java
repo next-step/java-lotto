@@ -4,6 +4,7 @@ import com.jaenyeong.mission02.lotto.domain.lottery.LotteryGame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryShop {
     private LotteryShop() {
@@ -17,5 +18,9 @@ public class LotteryShop {
         }
 
         return games;
+    }
+
+    public static List<LotteryGame> buyManually(final List<List<Integer>> givenNumbers) {
+        return givenNumbers.stream().map(LotteryGame::ofManual).collect(Collectors.toList());
     }
 }
