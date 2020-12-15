@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.domain.LottoMatchResults;
-import lotto.domain.LottoNumbers;
+import lotto.domain.AutoLottoNumbers;
 
 public class ResultView {
-	public static void printLottoNumbers(int manualNumberSize, LottoNumbers lottoNumbers) {
-		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualNumberSize, lottoNumbers.getLottoNumbersSize());
-		System.out.println(lottoNumbers.toString());
+	public static void printLottoNumbers(int manualNumberSize, AutoLottoNumbers autoLottoNumbers) {
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualNumberSize, autoLottoNumbers.getLottoNumbersSize());
+		System.out.println(autoLottoNumbers.toString());
 	}
 
 	public static void printMatchResult(LottoMatchResults matchResults) {

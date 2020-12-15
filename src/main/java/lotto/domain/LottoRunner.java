@@ -2,13 +2,13 @@ package lotto.domain;
 
 public class LottoRunner {
 
-	private LottoNumbers autoLottoNumbers;
-	private LottoNumbers manualLottoNumbers;
+	private AutoLottoNumbers autoLottoNumbers;
+	private ManualLottoNumbers manualLottoNumbers;
 	private LottoMatchResults lottoMatchResults;
 
 	private static final int PRICE_PER_LOTTO_NUMBER = 1000;
 
-	public LottoRunner(long payment, LottoNumbers manualNumbers) {
+	public LottoRunner(long payment, ManualLottoNumbers manualNumbers) {
 		this.lottoMatchResults = new LottoMatchResults(payment);
 		this.manualLottoNumbers = manualNumbers;
 		this.autoLottoNumbers = LottoNumbersGenerator.generate(autoAmountWithManual(payment, manualNumbers));
@@ -20,14 +20,14 @@ public class LottoRunner {
 		return this.lottoMatchResults;
 	}
 
-	public long autoAmountWithManual(long payment, LottoNumbers manualLottoSize) {
+	public long autoAmountWithManual(long payment, ManualLottoNumbers manualLottoSize) {
 		return payment / PRICE_PER_LOTTO_NUMBER - manualLottoSize.getLottoNumbersSize();
 	}
 	public long totalAmount() {
 		return this.autoLottoNumbers.getLottoNumbersSize() + this.manualLottoNumbers.getLottoNumbersSize();
 	}
 
-	public LottoNumbers getAutoLottoNumbers() {
+	public AutoLottoNumbers getAutoLottoNumbers() {
 		return this.autoLottoNumbers;
 	}
 }

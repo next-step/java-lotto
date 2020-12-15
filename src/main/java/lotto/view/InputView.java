@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.ManualLottoNumbers;
 import lotto.domain.WinningNumber;
 
 public class InputView {
@@ -36,14 +36,14 @@ public class InputView {
 		return Integer.parseInt(manualSize);
 	}
 
-	public static LottoNumbers scanManualNumbers(int manualSize) {
+	public static ManualLottoNumbers scanManualNumbers(int manualSize) {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < manualSize; i ++) {
 			String inputNumbers = scanner.nextLine();
 			lottoNumbers.add(toLottoNumber(inputNumbers));
 		}
-		return new LottoNumbers(lottoNumbers);
+		return new ManualLottoNumbers(lottoNumbers);
 	}
 
 	private static LottoNumber toLottoNumber(String inputNumbers) {

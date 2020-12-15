@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumbersTest {
+public class AutoLottoNumbersTest {
 
 	private List<LottoNumber> lottoNumbers;
 	private WinningNumber winningNumber;
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName("N개의 로또 횟차에 대한 당첨금액 별, 당첨 횟 수의 합을 구할 수 있어야한다.")
 	void winningResultCountTest() {
-		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
+		AutoLottoNumbers userNumbers = new AutoLottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
 		assertThat(results.getResultCount(LottoRank.FIFTH)).isEqualTo(1);
 		assertThat(results.getResultCount(LottoRank.FOURTH)).isEqualTo(1);
@@ -41,7 +41,7 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName("N개의 로또 횟차에 대한 총 당첨금액의 합을 알 수 있어야한다.")
 	void winningResultPriceTest() {
-		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
+		AutoLottoNumbers userNumbers = new AutoLottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
 		long totalEarnings = LottoRank.FIFTH.getEarnings() + LottoRank.FOURTH.getEarnings() + LottoRank.FIRST
 			.getEarnings();
@@ -51,7 +51,7 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName("N개의 로또 횟차에 대한 총 당첨금액과 구매금액을 통해 수익률을 구할 수 있어야한다.")
 	void winningResultEarningsRateTest() {
-		LottoNumbers userNumbers = new LottoNumbers(lottoNumbers);
+		AutoLottoNumbers userNumbers = new AutoLottoNumbers(lottoNumbers);
 		results = userNumbers.match(results, winningNumber);
 		long totalEarnings = LottoRank.FIFTH.getEarnings() + LottoRank.FOURTH.getEarnings() + LottoRank.FIRST
 			.getEarnings();
