@@ -15,7 +15,6 @@ public class WinningStatistics {
     private final Map<Rank, Integer> lotteryRanksMap;
     private final int buyPrice;
     private final long prizeMoney;
-    private final List<String> printFormatStatistics;
 
     private WinningStatistics(final Map<Rank, Integer> lotteryRanksMap, final int buyPrice) {
         this.lotteryRanksMap = new EnumMap<>(lotteryRanksMap);
@@ -25,11 +24,6 @@ public class WinningStatistics {
             .filter(Rank::isNotMissMatch)
             .mapToLong(Rank::getWinningPrize)
             .reduce(0L, Long::sum);
-
-        printFormatStatistics = this.lotteryRanksMap.keySet().stream()
-            .filter(Rank::isNotMissMatch)
-            .map(this::parseWinningPrizePrintFormat)
-            .collect(toList());
     }
 
     private String parseWinningPrizePrintFormat(final Rank rank) {
@@ -57,8 +51,11 @@ public class WinningStatistics {
         return lotteryRanksMap.getOrDefault(rank, NONE);
     }
 
-    public List<String> getPrintFormatStatistics() {
-        return this.printFormatStatistics;
+    public List<String> getPrintFormatWinningResultStatistics() {
+        return this.lotteryRanksMap.keySet().stream()
+            .filter(Rank::isNotMissMatch)
+            .map(this::parseWinningPrizePrintFormat)
+            .collect(toList());
     }
 
     public long getPrizeMoney() {
