@@ -1,7 +1,8 @@
 package step2;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -29,5 +30,15 @@ public class Lotto {
         if(numbers.size() != 6) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
+    }
+
+    private boolean contains(LottoNumber number) {
+        return lotto.contains(number);
+    }
+
+    public long getMatchingCount(Lotto targetLotto) {
+        return lotto.stream()
+                .filter(number -> targetLotto.contains(number))
+                .count();
     }
 }

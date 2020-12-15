@@ -55,7 +55,7 @@ public class LottoGenerator {
         return new Lotto(lottoNumbers);
     }
 
-    private static Lotto generateLotto(List<Integer> numbers) {
+    public static Lotto generateLotto(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .sorted()
