@@ -18,6 +18,14 @@ public class LottoNumber {
         }
     }
 
+    public int ascendingSort(LottoNumber comparisonObject) {
+        return this.lottoNumber - comparisonObject.lottoNumber;
+    }
+
+    public boolean isMatchBall(LottoTicket lottoTicket) {
+        return lottoTicket.contains(this);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);
@@ -34,9 +42,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    public int ascendingSort(LottoNumber comparisonObject) {
-        return this.lottoNumber - comparisonObject.lottoNumber;
     }
 }

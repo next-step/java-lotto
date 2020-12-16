@@ -36,6 +36,7 @@ public class OutputView {
                 .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.THREE.getWinningCount(), LottoRank.THREE.getReward(), lottoResult.getResult(LottoRank.THREE)))
                 .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FOUR.getWinningCount(), LottoRank.FOUR.getReward(), lottoResult.getResult(LottoRank.FOUR)))
                 .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FIVE.getWinningCount(), LottoRank.FIVE.getReward(), lottoResult.getResult(LottoRank.FIVE)))
+                .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.FIVE_WITH_BONUS.getWinningCount(), LottoRank.FIVE_WITH_BONUS.getReward(), lottoResult.getResult(LottoRank.FIVE_WITH_BONUS)))
                 .append(String.format(WINNING_COUNT_MESSAGE, LottoRank.SIX.getWinningCount(), LottoRank.SIX.getReward(), lottoResult.getResult(LottoRank.SIX)));
     }
 

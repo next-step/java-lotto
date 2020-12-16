@@ -10,7 +10,11 @@ public class LottoGame {
         return lottoMachine.winningNumber(inputNumber);
     }
 
-    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber) {
-        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber);
+    public LottoNumber generateBonusBall(int inputNumber, LottoMachine lottoMachine, WinningNumber winningNumber) {
+        return lottoMachine.bonusBall(inputNumber, winningNumber);
+    }
+
+    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
+        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
     }
 }
