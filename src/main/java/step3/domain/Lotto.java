@@ -5,16 +5,16 @@ import java.util.List;
 public class Lotto {
 
     private List<LottoNumber> lotto;
-    private int count;
-    private boolean matchBonus;
+    private LottoMatchStatus lottoMatchStatus;
 
     public Lotto(List<LottoNumber> lotto) {
         this.lotto = lotto;
+        this.lottoMatchStatus = new LottoMatchStatus();
     }
 
-    public void equalCheck(LottoNumber lottoNumber, LottoNumber bonusNumber) {
-        if (lotto.contains(lottoNumber)) count++;
-        if (lotto.contains(bonusNumber)) setMatchBonus(true);
+    public void checkLottoMatchCount(LottoNumber lottoNumber, LottoNumber bonusNumber) {
+        if (lotto.contains(lottoNumber)) lottoMatchStatus.increaseCount();
+        if (lotto.contains(bonusNumber)) lottoMatchStatus.setMatchBonus(true);
     }
 
     public List<LottoNumber> getNumbers() {
@@ -22,15 +22,19 @@ public class Lotto {
     }
 
     public int getCount() {
-        return count;
+        return lottoMatchStatus.getCount();
     }
 
     public boolean isMatchBonus() {
-        return matchBonus;
+        return lottoMatchStatus.isMatchBonus();
     }
 
-    public void setMatchBonus(boolean matchBonus) {
-        this.matchBonus = matchBonus;
+    public LottoMatchStatus getLottoMatchStatus() {
+        return lottoMatchStatus;
+    }
+
+    public void setLottoMatchStatus(LottoMatchStatus lottoMatchStatus) {
+        this.lottoMatchStatus = lottoMatchStatus;
     }
 
     @Override
