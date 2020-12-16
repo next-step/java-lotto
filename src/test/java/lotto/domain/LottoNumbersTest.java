@@ -6,19 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
-
-	@DisplayName("기준 범위는 1~45까지 테스트")
-	@ParameterizedTest
-	@ValueSource(ints = {555, -55, -12345})
-	void 로또_숫자_그룹_기준_범위_초과_테스트(int input) {
-		assertThatThrownBy(() -> new LottoNumber(input))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("기준 범위를 초과하였습니다.");
-	}
 
 	@DisplayName("숫자 그룹에 중복된 숫자는 입력 불가능하다.")
 	@Test
@@ -35,5 +28,15 @@ class LottoNumbersTest {
 			Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(8), new LottoNumber(7))))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("로또 숫자개수는 6을 초과할수 없습니다.");
+	}
+
+	@DisplayName("숫자 그룹 자릿수 값 비교 테스트")
+	@Test
+	void 숫자_그룹_비교_테스트() {
+		List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+		List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+		LottoNumbers one = new LottoNumbers(lottoNumbers1);
+		LottoNumbers two = new LottoNumbers(lottoNumbers2);
+		assertThat(one).isEqualTo(two);
 	}
 }

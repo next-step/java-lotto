@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoNumbers;
@@ -42,17 +42,14 @@ class LottoResultsTest {
 	@Test
 	void 당첨_통계_테스트() {
 		LottoNumbers winnerNumber = LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43");
-
 		List<LottoNumbers> lottoTicket = new ArrayList();
 		lottoTicket.add(LottoNumberGenerator.ofInput("8, 21, 23, 41, 42, 43"));
 		lottoTicket.add(LottoNumberGenerator.ofInput("1, 2, 3, 41, 42, 43"));
 		lottoTicket.add(LottoNumberGenerator.ofInput("1, 2, 3, 4, 5, 6"));
 		lottoTicket.add(LottoNumberGenerator.ofInput("6, 7, 8, 9, 10"));
 
-		LottoTicket lottoTicket1 = new LottoTicket(lottoTicket);
-
 		LottoWinnerNumbers lottoWinnerNumbers = new LottoWinnerNumbers(winnerNumber);
-		LottoResult lottoResults = LottoResult.compareTicketAndWinner(lottoTicket1, lottoWinnerNumbers);
+		LottoResult lottoResults = LottoResult.compareTicketAndWinner(new LottoTicket(lottoTicket), lottoWinnerNumbers);
 
 		assertThat(lottoResults.askCountOfRank(Rank.FIFTH)).isEqualTo(1);
 		assertThat(lottoResults.askCountOfRank(Rank.FIRST)).isEqualTo(1);

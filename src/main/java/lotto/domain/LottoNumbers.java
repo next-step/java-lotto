@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class LottoNumbers {
 	public static final int MAX_LOTTO_NUMBERS_SIZE = 6;
@@ -48,13 +50,20 @@ public class LottoNumbers {
 		return this.numbers.contains(baseNumber);
 	}
 
+	public long getEqualsCount(Set<LottoNumber> targetNumbers) {
+		Iterator<LottoNumber> target = targetNumbers.iterator();
+		return this.numbers.stream()
+			.filter(number -> number.equals(target.next()))
+			.count();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoNumbers that = (LottoNumbers) o;
 
-		return this.numbers.containsAll(that.numbers);
+		return this.getEqualsCount(that.numbers) == that.numbers.size();
 	}
 
 	@Override

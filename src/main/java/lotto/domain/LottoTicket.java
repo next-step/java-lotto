@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
 	private final List<LottoNumbers> lottoNumbers;
@@ -12,13 +12,18 @@ public class LottoTicket {
 		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public static LottoTicket purchase(int numberOfTicket) {
-		List<LottoNumbers> lottoNumbers = new ArrayList<>();
-		IntStream.range(0, numberOfTicket).forEach(amount -> lottoNumbers.add(LottoNumberGenerator.auto()));
-		return new LottoTicket(lottoNumbers);
+	public static LottoTicket ofNumbers(List<LottoNumbers> purchaseLottoNumbers) {
+		return new LottoTicket(purchaseLottoNumbers);
 	}
 
 	public List<LottoNumbers> getLottoNumbers() {
-		return lottoNumbers;
+		return this.lottoNumbers;
+	}
+
+	public LottoTicket combine(LottoTicket lottoTicket) {
+		return new LottoTicket(Stream.concat(
+			this.lottoNumbers.stream(),
+			lottoTicket.getLottoNumbers().stream())
+			.collect(Collectors.toList()));
 	}
 }
