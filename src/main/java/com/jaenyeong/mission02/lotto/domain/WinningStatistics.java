@@ -15,6 +15,7 @@ public class WinningStatistics {
     private static final int NONE = 0;
     private static final int ADD = 1;
     private static final int BREAK_EVEN = 1;
+
     private final Map<Rank, Integer> lotteryRanksMap;
     private final int buyPrice;
     private final long prizeMoney;
@@ -67,9 +68,7 @@ public class WinningStatistics {
 
     public String getPrintFormatPrizeRate() {
         float prizeRate = ((float) this.prizeMoney) / this.buyPrice;
-
-        final String textPrizeRate = String.format(WINNING_PRIZE_RATE_PRINT_FORMAT,
-            prizeRate);
+        final String textPrizeRate = String.format(WINNING_PRIZE_RATE_PRINT_FORMAT, prizeRate);
 
         return (prizeRate >= BREAK_EVEN) ? textPrizeRate : textPrizeRate + " " + TEXT_PRIZE_LOSS;
     }
