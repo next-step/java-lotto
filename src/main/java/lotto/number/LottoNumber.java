@@ -1,6 +1,6 @@
 package lotto.number;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MIN = 1;
 	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MAX = 45;
@@ -35,5 +35,10 @@ public class LottoNumber {
 	@Override
 	public String toString() {
 		return String.format("%d", number);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return Integer.compare(this.number, o.number);
 	}
 }
