@@ -8,6 +8,7 @@ import java.util.StringJoiner;
 public class LotteryGame {
     protected static final int PRICE = 1_000;
     private static final int MISS_MATCH = 0;
+    private static final String DELIMITER = ", ";
     private final LotteryNumbers lotteryNumbers;
 
     private LotteryGame(final LotteryNumbers lotteryNumbers) {
@@ -48,7 +49,7 @@ public class LotteryGame {
 
     @Override
     public String toString() {
-        final StringJoiner stringJoin = new StringJoiner(", ");
+        final StringJoiner stringJoin = new StringJoiner(DELIMITER);
         this.getLotteryNumbers().forEach(number -> stringJoin.add(Integer.toString(number)));
 
         return "[" + stringJoin + "]";
