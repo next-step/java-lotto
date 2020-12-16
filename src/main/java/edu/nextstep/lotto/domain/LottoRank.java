@@ -23,6 +23,10 @@ public enum LottoRank {
 			.findFirst();
 	}
 
+	public int getMatchCount() {
+		return matchCount;
+	}
+
 	public long getReward() {
 		return reward;
 	}
