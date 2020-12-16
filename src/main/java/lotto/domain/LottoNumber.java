@@ -4,14 +4,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
+	private final boolean isManual;
 	private final List<Integer> numbers;
 	private static final int LOTTO_NUMBERS_SIZE = 6;
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
 
 	public LottoNumber(List<Integer> numbers) {
-		isValidNumbers(numbers);
+		validateNumbers(numbers);
 		this.numbers = Collections.unmodifiableList(numbers);
+		this.isManual = false;
+	}
+
+	public LottoNumber(List<Integer> numbers, boolean isManual) {
+		validateNumbers(numbers);
+		this.numbers = Collections.unmodifiableList(numbers);
+		this.isManual = isManual;
 	}
 
 	public int matchCount(LottoNumber matchTargetNumber) {
@@ -25,7 +33,11 @@ public class LottoNumber {
 		return this.numbers.contains(number);
 	}
 
-	private void isValidNumbers(List<Integer> numbers) {
+	public boolean isAuto() {
+		return !this.isManual;
+	}
+
+	private void validateNumbers(List<Integer> numbers) {
 		this.checkValidSize(numbers);
 		this.checkValidRange(numbers);
 		this.checkSorted(numbers);
@@ -50,7 +62,7 @@ public class LottoNumber {
 		}
 
 		if (!isValid) {
-			throw new IllegalArgumentException("로또 번호는 정렬되어야 합니다.");
+			throw new IllegalArgumentException("로또 번호는 각자 다른 숫자로 오름차순 정렬되어야 합니다.");
 		}
 	}
 
