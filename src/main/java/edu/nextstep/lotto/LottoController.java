@@ -3,6 +3,7 @@ package edu.nextstep.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.nextstep.lotto.domain.Lotto;
 import edu.nextstep.lotto.domain.LottoNumber;
 import edu.nextstep.lotto.domain.LottoNumbers;
 import edu.nextstep.lotto.domain.Money;
@@ -16,6 +17,7 @@ public class LottoController {
 		int numberOfPurchase = money.howManyPurchase();
 		ResultView.printHowManyPurchase(numberOfPurchase);
 		ResultView.printLottos(getRandomLottoNumbersList(numberOfPurchase));
+		Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
 	}
 
 	protected List<List<Integer>> getRandomLottoNumbersList(int size) {
