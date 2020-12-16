@@ -2,8 +2,10 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author : byungkyu
@@ -13,8 +15,9 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 
 	private static final int LOTTO_TICKET_PRICE = 1000;
-	private static final int MINIMUM_OF_AUTO_CREATE_NUMBER = 1;
-	private static final int MAXIMUM_OF_AUTO_CREATE_NUMBER = 46;
+	private static final List<Integer> numberBoundary = IntStream.rangeClosed(LottoNumber.MINIMUM_OF_LOTTO_NUMBER, LottoNumber.MAXIMUM_OF_LOTTO_NUMBER)
+																	.boxed()
+																	.collect(Collectors.toList());
 
 	private List<LottoTicket> lottoTickets = new ArrayList<>();
 
@@ -29,34 +32,18 @@ public class LottoTickets {
 	private List<LottoTicket> createTickets(int cash) {
 		int ticketCount = cash / LOTTO_TICKET_PRICE;
 		for (int i = 0; i < ticketCount; i++) {
-			lottoTickets.add(generateRandomTicket());
+			lottoTickets.add(new LottoTicket(randomLottoNumbers()));
 		}
 		return lottoTickets;
 	}
 
-	private LottoTicket generateRandomTicket() {
-		List<Integer> shuffledNumber = generateRandomNumberBoundary();
-		return generateLottoNumber(shuffledNumber);
-	}
-
-	private List<Integer> generateRandomNumberBoundary() {
-		List<Integer> randomNumberBoundary = new ArrayList<>();
-		for (int i = MINIMUM_OF_AUTO_CREATE_NUMBER; i <= MAXIMUM_OF_AUTO_CREATE_NUMBER; i++) {
-			randomNumberBoundary.add(i);
-		}
-		return shuffleRandomNumbers(randomNumberBoundary);
-	}
-
-	private List<Integer> shuffleRandomNumbers(List<Integer> randomNumberBoundary) {
-		Collections.shuffle(randomNumberBoundary);
-		List<Integer> subList = new ArrayList<>(randomNumberBoundary.subList(0, 6));
-		Collections.sort(subList);
-		return subList;
-	}
-
-	private LottoTicket generateLottoNumber(List<Integer> shuffledNumber) {
-		List<LottoNumber> lottoNumbers = shuffledNumber.stream().map(LottoNumber::new).collect(Collectors.toList());
-		return new LottoTicket(lottoNumbers);
+	private List<LottoNumber> randomLottoNumbers() {
+		Collections.shuffle(numberBoundary);
+		return numberBoundary.stream()
+			.map(LottoNumber::new)
+			.limit(LottoTicket.LOTTO_TICKET_NUMBER_COUNT)
+			.sorted(Comparator.comparing(LottoNumber::getNumber))
+			.collect(Collectors.toList());
 	}
 
 	public int getTicketCount() {

@@ -1,7 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author : byungkyu
@@ -10,12 +14,16 @@ import java.util.List;
  **/
 public class LottoTicket {
 
-	private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
+	public static final int LOTTO_TICKET_NUMBER_COUNT = 6;
 
 	private List<LottoNumber> lottoTicketNumbers = new ArrayList<>();
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {
 		validateLottoNumbers(lottoNumbers);
+		convertToLottoTicket(lottoNumbers);
+	}
+
+	private void convertToLottoTicket(List<LottoNumber> lottoNumbers) {
 		lottoNumbers.forEach(lottoNumber -> addLottoTicketNumber(lottoNumber));
 	}
 
@@ -46,5 +54,12 @@ public class LottoTicket {
 		return lottoTicketNumbers.stream().
 			filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
 			.count();
+	}
+
+	public static LottoTicket getRandomTicket(){
+
+
+
+		return new LottoTicket(Arrays.asList(new LottoNumber[1]));
 	}
 }
