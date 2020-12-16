@@ -5,7 +5,6 @@ import lotto.domain.LottoGame;
 import lotto.domain.LottoUserRequest;
 import lotto.domain.MatchResult;
 import lotto.domain.machine.ComplexTicketMachine;
-import lotto.domain.machine.RandomTicketMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
