@@ -20,4 +20,14 @@ public class SplitterTest {
 		assertThat(result).containsSequence(1,2,3);
 	}
 
+	@DisplayName("콜론으로 구분된 문자열을 split() 하면 0 이상의 정수 Array 반환")
+	@Test
+	void given_colon_separated_numbers_when_splitter_split_then_return_number_array() {
+		final String input = "1:2:3";
+		InputSplitter colonSplitter = InputSplitterFactory.of(input);
+		int[] result = colonSplitter.split(input);
+
+		assertThat(result).containsSequence(1,2,3);
+	}
+
 }

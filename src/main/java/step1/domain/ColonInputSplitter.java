@@ -1,10 +1,11 @@
 package step1.domain;
 
-public class ColonInputSplitter implements InputSplitter {
+public class ColonInputSplitter extends NumberInputSplitter {
 
 	@Override
-	public int[] split(final String input) {
-		return new int[0];
+	protected String[] doSplit(final String input) {
+		final String COLON_DELIMITER = ":";
+		return input.split(COLON_DELIMITER);
 	}
 
 }
