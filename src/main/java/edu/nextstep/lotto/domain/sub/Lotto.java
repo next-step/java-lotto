@@ -1,4 +1,4 @@
-package edu.nextstep.lotto.domain;
+package edu.nextstep.lotto.domain.sub;
 
 import java.util.List;
 import java.util.Optional;

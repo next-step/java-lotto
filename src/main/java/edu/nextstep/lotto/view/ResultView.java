@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import edu.nextstep.lotto.domain.LottoRank;
+import edu.nextstep.lotto.domain.sub.LottoRank;
 
 public class ResultView {
 

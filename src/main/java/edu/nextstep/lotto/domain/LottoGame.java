@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import edu.nextstep.lotto.domain.sub.Lotto;
+import edu.nextstep.lotto.domain.sub.LottoRank;
+import edu.nextstep.lotto.domain.sub.Lottos;
+
 public class LottoGame {
 	private final Lottos soldLottos;
 	private final Lotto winningLotto;

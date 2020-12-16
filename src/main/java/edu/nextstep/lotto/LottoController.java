@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.nextstep.lotto.domain.LottoGame;
-import edu.nextstep.lotto.domain.LottoNumber;
-import edu.nextstep.lotto.domain.LottoNumbers;
+import edu.nextstep.lotto.domain.sub.LottoNumber;
+import edu.nextstep.lotto.domain.sub.LottoNumbers;
 import edu.nextstep.lotto.domain.Money;
 import edu.nextstep.lotto.util.NumberUtil;
 import edu.nextstep.lotto.view.InputView;

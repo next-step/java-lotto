@@ -1,5 +1,7 @@
 package edu.nextstep.lotto.domain;
 
+import edu.nextstep.lotto.domain.sub.Lotto;
+
 public class Money {
 	private final int money;
 

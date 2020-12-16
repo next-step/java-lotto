@@ -7,6 +7,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import edu.nextstep.lotto.domain.sub.Lotto;
+import edu.nextstep.lotto.domain.sub.LottoRank;
+import edu.nextstep.lotto.domain.sub.Lottos;
+
 @DisplayName("Lottos: Lotto 목록의 일급 콜렉션 클래스")
 class LottosTest {
 	@DisplayName("생성자: 숫자를 파라미터로 받아 Lottos 객체를 정상적으로 생성하여 리턴함")

@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import edu.nextstep.lotto.domain.sub.Lotto;
+import edu.nextstep.lotto.domain.sub.LottoRank;
+
 @DisplayName("Lotto: 로또 한 장에 해당하는 클래스. 내부적으로 LottoNumbers 필드가 있음.")
 class LottoTest {
 	@DisplayName("생성자: Lotto 객체를 정상적으로 생성하여 리턴함")

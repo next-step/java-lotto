@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import edu.nextstep.lotto.domain.sub.LottoRank;
+
 @DisplayName("LottoRank: 당첨 등수를 담고 있는 Enum")
 class LottoRankTest {
 

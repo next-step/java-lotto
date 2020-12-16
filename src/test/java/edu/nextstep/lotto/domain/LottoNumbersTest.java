@@ -12,6 +12,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import edu.nextstep.lotto.domain.sub.LottoNumbers;
+
 @DisplayName("LottoNumbers: LottoNumber 목록의 일급 콜렉션 클래스")
 class LottoNumbersTest {
 	@DisplayName("생성자: LottoNumbers 객체를 정상적으로 생성하여 리턴함")

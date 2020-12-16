@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import edu.nextstep.lotto.domain.sub.LottoRank;
 import edu.nextstep.lotto.util.NumberUtil;
 
 @DisplayName("LottoGame: 구입한 lotto목록이나 당첨번호를 필드로, 당첨통계나 수익률을 계산함.")
