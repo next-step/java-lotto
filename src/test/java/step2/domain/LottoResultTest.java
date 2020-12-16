@@ -1,8 +1,10 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoResult;
+import step2.domain.LottoTier;
 
 import java.util.HashMap;
 import java.util.Map;

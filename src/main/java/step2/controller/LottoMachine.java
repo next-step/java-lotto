@@ -1,4 +1,4 @@
-package step2;
+package step2.controller;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
