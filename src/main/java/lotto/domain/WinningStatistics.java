@@ -18,6 +18,7 @@ public class WinningStatistics {
 	private LottoTicket winnerLottoTicket;
 	private Map<Prize, Integer> prizeResult = new HashMap<>();
 	private int revenue = 0;
+	private static final String DOUBLE_FORMAT = "%.2f";
 
 	public WinningStatistics(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
 		this.userLottoTickets = userLottoTickets;
@@ -62,6 +63,10 @@ public class WinningStatistics {
 
 	public BigDecimal getWinningSummary() {
 		Double buyPrice = Double.valueOf(userLottoTickets.getTicketCount() * LottoTickets.getLottoTicketPrice());
-		return BigDecimal.valueOf(Double.parseDouble(String.format("%.2f",revenue / buyPrice)));
+		return parseWinningSummaryFormat(revenue / buyPrice);
+	}
+
+	public static BigDecimal parseWinningSummaryFormat(Double target){
+		return BigDecimal.valueOf(Double.parseDouble(String.format(DOUBLE_FORMAT,target)));
 	}
 }

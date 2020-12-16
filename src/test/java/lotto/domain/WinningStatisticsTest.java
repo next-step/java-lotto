@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,8 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.THREE)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningSummary()).isEqualTo(5);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(5.0));
+
 	}
 
 	@Order(2)
@@ -67,7 +69,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.FOUR)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningSummary()).isEqualTo(50);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(50.0));
 	}
 
 	@Order(3)
@@ -79,7 +81,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.FIVE)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningSummary()).isEqualTo(1500);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(1500.0));
 	}
 
 	@Order(4)
@@ -91,7 +93,7 @@ public class WinningStatisticsTest {
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().get(Prize.SIX)).isEqualTo(1);
-		assertThat(winningStatistics.getWinningSummary()).isEqualTo(2000000);
+		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(2000000.0));
 	}
 
 	@Order(5)

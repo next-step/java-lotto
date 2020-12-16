@@ -33,16 +33,4 @@ public class WinningLottoNumbersTest {
 			.hasMessageContaining("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
-	@Order(2)
-	@DisplayName("2. 당첨 번호는 서로 다른 숫자만 입력할 수 있다.")
-	@ParameterizedTest
-	@ValueSource(strings = {"1, 2, 3, 4, 5, 5"})
-	public void inputCannotDuplicate(String arg) {
-
-		assertThatThrownBy(() -> {
-			WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(arg);
-		}).isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("서로 다른 6개의 당첨 번호를 입력해 주세요.");
-	}
-
 }

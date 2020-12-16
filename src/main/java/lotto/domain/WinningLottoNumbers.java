@@ -26,13 +26,7 @@ public class WinningLottoNumbers {
 		List<LottoNumber> convertedLottoNumbers = Arrays.stream(splits)
 			.map(str -> parser(str))
 			.collect(Collectors.toList());
-		validateConvertedLottoNumbers(convertedLottoNumbers);
 		return new LottoTicket(convertedLottoNumbers);
-	}
-
-	private void validateConvertedLottoNumbers(List<LottoNumber> convertedLottoNumbers) {
-		if (convertedLottoNumbers.size() != LOTTO_TICKET_WINNING_COUNT)
-			throw new IllegalArgumentException("서로 다른 6개의 당첨 번호를 입력해 주세요.");
 	}
 
 	private void validateUserInput(String arg) {
