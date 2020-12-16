@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum LottoWinPrize {
 
@@ -12,7 +13,6 @@ public enum LottoWinPrize {
 
     private final int matchedCount;
     private final long prize;
-    private int count = 0;
 
     LottoWinPrize(int matchedCount, long prize) {
         this.matchedCount = matchedCount;
@@ -27,17 +27,9 @@ public enum LottoWinPrize {
         return prize;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    private void addCount() {
-        this.count++;
-    }
-
-    public static void addCount(int inputMatchedCount) {
-        Arrays.stream(LottoWinPrize.values())
-                .filter(lottoWinPrize -> lottoWinPrize.getMatchedCount() == inputMatchedCount)
-                .forEach(LottoWinPrize::addCount);
+    public static Optional<LottoWinPrize> getLottoWinPrize(int matchedCount) {
+        return Arrays.stream(LottoWinPrize.values())
+                .filter(lottoWinPrize -> lottoWinPrize.getMatchedCount() == matchedCount)
+                .findFirst();
     }
 }

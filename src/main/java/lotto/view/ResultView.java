@@ -2,9 +2,13 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinPrize;
+import lotto.domain.LottoWinResult;
 import lotto.domain.Lottos;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ResultView {
     private static final String PRINT_WIN_PRIZE_FORMAT = "%d개 일치 (%d원)- %d개\n";
@@ -35,24 +39,24 @@ public class ResultView {
 
     /**
      * 당첨 통계를 출력합니다.
-     * @param lottoWinPrizes
+     * @param lottoWinResult
      */
-    public void printWinStatistics(List<LottoWinPrize> lottoWinPrizes) {
+    public void printWinStatistics(LottoWinResult lottoWinResult) {
         System.out.println("당첨 통계\n---------");
-        this.printWinPrizes(lottoWinPrizes);
+        this.printWinPrizes(lottoWinResult);
     }
 
 
     /**
      * 로또 상금 별 당첨 수 출력
-     * @param lottoWinPrizes 
+     * @param lottoWinResult
      */
-    private void printWinPrizes(List<LottoWinPrize> lottoWinPrizes) {
-        for (LottoWinPrize lottoWinPrize : lottoWinPrizes) {
+    private void printWinPrizes(LottoWinResult lottoWinResult) {
+        for (LottoWinPrize lottoWinPrize : LottoWinPrize.values()) {
             System.out.printf(ResultView.PRINT_WIN_PRIZE_FORMAT
-                                , lottoWinPrize.getMatchedCount()
-                                , lottoWinPrize.getPrize()
-                                , lottoWinPrize.getCount());
+                    , lottoWinPrize.getMatchedCount()
+                    , lottoWinPrize.getPrize()
+                    , lottoWinResult.getCount(lottoWinPrize));
         }
     }
 

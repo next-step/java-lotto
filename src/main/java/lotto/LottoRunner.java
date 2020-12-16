@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinPrize;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -38,11 +35,11 @@ public class LottoRunner {
                 = new LottoWinCalculator(new Lotto(this.inputView.insertWinLottoNumbers()));
 
         // 당첨 케이스별 계산 및 출력
-        List<LottoWinPrize> lottoWinPrizes = lottoWinCalculator.findLottoWinPrize(lottos);
-        this.resultView.printWinStatistics(lottoWinPrizes);
+        LottoWinResult lottoWinResult = lottoWinCalculator.findLottoWinPrize(lottos);
+        this.resultView.printWinStatistics(lottoWinResult);
 
         // 수익률 출력
         this.resultView.printPriceEarningRatio(
-                lottoWinCalculator.calculatePriceEarningRatio(lottoWinPrizes, lottos.size()));
+                lottoWinCalculator.calculatePriceEarningRatio(lottoWinResult, lottos.size()));
     }
 }

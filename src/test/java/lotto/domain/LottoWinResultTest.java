@@ -12,19 +12,20 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoWinPrizeTest {
+class LottoWinResultTest {
 
     @Test
     @DisplayName("일치하는 숫자들을 넣어서 경우의 수 별로 값이 잘 들어갔는지 테스트")
     void addCount() {
         // given
+        LottoWinResult lottoWinResult = new LottoWinResult();
         List<Integer> matchedCounts = Arrays.asList(3, 3, 4, 5, 5, 5);
 
         // when
         for (int matchedCount : matchedCounts) {
-            LottoWinPrize.addCount(matchedCount);
+            lottoWinResult.addWinResultCount(matchedCount);
         }
-        List<Integer> prizeCounts = Arrays.stream(LottoWinPrize.values()).map(LottoWinPrize::getCount)
+        List<Integer> prizeCounts = Arrays.stream(LottoWinPrize.values()).map(lottoWinResult::getCount)
                 .collect(Collectors.toList());
 
         // then

@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinPrize;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,20 +9,22 @@ public class LottoWinCalculator {
     public static final int LOTTO_PRICE = 1000;
 
     private final Lotto winLottoNumbers;
+    private final LottoWinResult lottoWinResult;
 
     public LottoWinCalculator(Lotto winLottoNumbers) {
         this.winLottoNumbers = winLottoNumbers;
+        this.lottoWinResult = new LottoWinResult();
     }
 
     /**
      * 당첨상금 별 갯수를 리턴합니다.
      * @return
      */
-    public List<LottoWinPrize> findLottoWinPrize(Lottos lottos) {
+    public LottoWinResult findLottoWinPrize(Lottos lottos) {
         for (int matchedCount : this.calculateMatchedCounts(lottos)) {
-            LottoWinPrize.addCount(matchedCount);
+            this.lottoWinResult.addWinResultCount(matchedCount);
         }
-        return Arrays.stream(LottoWinPrize.values()).collect(Collectors.toList());
+        return this.lottoWinResult;
     }
 
     /**
@@ -42,21 +41,21 @@ public class LottoWinCalculator {
     /**
      * 수익률을 계산합니다.
      * 총 상금 / (로또 발급 수 * 로또 가격)
-     * @param lottoWinPrizes
+     * @param lottoWinResult
      * @return
      */
-    public double calculatePriceEarningRatio(List<LottoWinPrize> lottoWinPrizes, int lottoAmount) {
-        return calculateTotalPrize(lottoWinPrizes) / lottoAmount / LottoWinCalculator.LOTTO_PRICE;
+    public double calculatePriceEarningRatio(LottoWinResult lottoWinResult, int lottoAmount) {
+        return calculateTotalPrize(lottoWinResult) / lottoAmount / LottoWinCalculator.LOTTO_PRICE;
     }
 
     /**
      * 총 상금을 계산합니다.
-     * @param lottoWinPrizes
+     * @param lottoWinResult
      * @return
      */
-    private int calculateTotalPrize(List<LottoWinPrize> lottoWinPrizes) {
-        return lottoWinPrizes.stream()
-                .mapToInt(lottoWinPrize -> (int) (lottoWinPrize.getPrize() * lottoWinPrize.getCount()))
+    private long calculateTotalPrize(LottoWinResult lottoWinResult) {
+        return Arrays.stream(LottoWinPrize.values())
+                .mapToLong(lottoWinPrize -> lottoWinPrize.getPrize() * lottoWinResult.getCount(lottoWinPrize))
                 .sum();
     }
 

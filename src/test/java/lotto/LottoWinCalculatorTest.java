@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoWinPrize;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,12 +56,12 @@ public class LottoWinCalculatorTest {
         List<Integer> expected = Arrays.asList(0, 1, 1, 1);
 
         // when
-        List<LottoWinPrize> lottoWinPrizes = lottoWinCalculator.findLottoWinPrize(lottos);
+        LottoWinResult lottoWinResult = lottoWinCalculator.findLottoWinPrize(lottos);
 
         // then
         int i = 0;
-        for (LottoWinPrize lottoWinPrize : lottoWinPrizes) {
-            assertThat(lottoWinPrize.getCount()).isEqualTo(expected.get(i++));
+        for (LottoWinPrize lottoWinPrize : LottoWinPrize.values()) {
+            assertThat(lottoWinResult.getCount(lottoWinPrize)).isEqualTo(expected.get(i++));
         }
     }
 }
