@@ -45,8 +45,8 @@ public enum MatchCount {
                     .getOrDefault(matchCount, 0), Integer::sum));
     }
 
-    public static int priceMoney(MatchCount matchCount) {
-        return matchCount.priceMoney;
+    public int calculatePriceMoney(int ticketCount) {
+        return this.priceMoney * ticketCount;
     }
 
     public String printMessage(int ticketCount) {

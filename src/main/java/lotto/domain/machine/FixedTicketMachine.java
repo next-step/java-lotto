@@ -1,5 +1,6 @@
 package lotto.domain.machine;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,17 +19,13 @@ public class FixedTicketMachine implements TicketMachine {
 
     @Override
     public List<LottoTicket> issue(LottoUserRequest lottoUserRequest) {
-        Set<LottoNumber> lottoNumbers = new HashSet<LottoNumber>() {{
-            add(new LottoNumber(1));
-            add(new LottoNumber(2));
-            add(new LottoNumber(3));
-            add(new LottoNumber(4));
-            add(new LottoNumber(5));
-            add(new LottoNumber(6));
-        }};
+        Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(
+              new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+              new LottoNumber(5), new LottoNumber(6)
+        ));
 
         return Stream.generate(() -> new LottoTicket(lottoNumbers))
-              .limit(1)
+              .limit(lottoUserRequest.getTicketCount())
               .collect(Collectors.toList());
     }
 }

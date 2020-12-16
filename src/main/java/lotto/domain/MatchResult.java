@@ -24,14 +24,14 @@ public class MatchResult {
     public BigDecimal calculateProfit() {
         double totalPrice = this.matchCounts.keySet().stream()
               .mapToDouble(
-                    matchCount -> MatchCount.priceMoney(matchCount) * matchTickets(matchCount))
+                    matchCount -> matchCount.calculatePriceMoney(matchTickets(matchCount)))
               .sum();
 
         return new BigDecimal(totalPrice / sumOfTicketPrice(this.ticketCount));
     }
 
     private int sumOfTicketPrice(int ticketCount) {
-        return ticketCount * LottoTickets.TICKET_PRICE;
+        return ticketCount * LottoUserRequest.TICKET_PRICE;
     }
 
     private int matchTickets(MatchCount matchCount) {

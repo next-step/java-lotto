@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class LottoUserRequest {
+    public static final Integer TICKET_PRICE = 1_000;
 
     private final int ticketCount;
     private List<String> manualNumbers;
@@ -25,11 +26,11 @@ public class LottoUserRequest {
 
     private int toTicketCount(int money) {
         validateMoney(money);
-        return money / LottoTickets.TICKET_PRICE;
+        return money / TICKET_PRICE;
     }
 
     private void validateMoney(int money) {
-        if (money < LottoTickets.TICKET_PRICE) {
+        if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("금액이 부족합니다.");
         }
     }
@@ -58,6 +59,10 @@ public class LottoUserRequest {
 
     public List<String> getManualNumbers() {
         return manualNumbers;
+    }
+
+    public int getTicketCount() {
+        return ticketCount;
     }
 
     public int getAutoTicketCount() {
