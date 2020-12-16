@@ -1,9 +1,6 @@
 package step2.view;
 
-import step2.domain.Lotto;
-import step2.domain.LottoNumber;
-import step2.domain.LottoResult;
-import step2.domain.LottoTier;
+import step2.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +22,12 @@ public class OutputView {
         this.viewUtils = new ViewUtils();
     }
 
-    public void printLottos(List<Lotto> lottos) {
-        viewUtils.printLine(String.format(OUTPUT_BUY_COUNT_MESSAGE, lottos.size()));
+    public void printLottos(Lottos lottos, int count) {
+        viewUtils.printLine(String.format(OUTPUT_BUY_COUNT_MESSAGE, count));
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(Lotto lotto : lottos) {
+        for(Lotto lotto : lottos.getValue()) {
             stringBuilder.setLength(0);
 
             Set<LottoNumber> lottoNumbers = lotto.getValue();

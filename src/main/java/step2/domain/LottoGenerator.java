@@ -25,7 +25,7 @@ public class LottoGenerator {
         return numbers;
     }
 
-    public static List<Lotto> generateLottos(int count) {
+    public static Lottos generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
         while(count > 0) {
@@ -33,7 +33,7 @@ public class LottoGenerator {
             count--;
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private static Lotto generateLotto() {

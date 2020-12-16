@@ -1,9 +1,6 @@
 package step2.controller;
 
-import step2.domain.Lotto;
-import step2.domain.LottoGenerator;
-import step2.domain.LottoResult;
-import step2.domain.LottoTier;
+import step2.domain.*;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -24,9 +21,10 @@ public class LottoMachine {
 
     public static void play() {
         int money = inputView.getMoney();
+        int count = calculateLottoCount(money);
 
-        List<Lotto> lottos = LottoGenerator.generateLottos(calculateLottoCount(money));
-        outputView.printLottos(lottos);
+        Lottos lottos = LottoGenerator.generateLottos(count);
+        outputView.printLottos(lottos, count);
 
         Lotto winningLotto = LottoGenerator.generateLotto(inputView.getWinningNumbers());
 
@@ -34,18 +32,11 @@ public class LottoMachine {
         outputView.printResult(result, money);
     }
 
-    private static LottoResult makeLottoResult(List<Lotto> lottos, Lotto winningLotto) {
+    private static LottoResult makeLottoResult(Lottos lottos, Lotto winningLotto) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {
-            int count = 0;
-            for(Lotto lotto : lottos) {
-                if(lottoTier.equals(lotto.getLottoTier(winningLotto))) {
-                    count++;
-                }
-            }
-
-            resultMap.put(lottoTier, count);
+            resultMap.put(lottoTier, lottos.getLottoCountByTier(lottoTier, winningLotto));
         }
 
         return new LottoResult(resultMap);
