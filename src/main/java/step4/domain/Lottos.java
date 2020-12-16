@@ -22,7 +22,7 @@ public class Lottos {
                 .collect(groupingBy(Lotto::getCount)));
     }
 
-    public List<Lotto> getLottoNumber() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 
