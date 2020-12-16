@@ -35,6 +35,7 @@ public class InputView {
             return Collections.emptyList();
         }
 
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
         return Stream.generate(sc::nextLine)
               .limit(manualCount)
               .collect(Collectors.toList());
