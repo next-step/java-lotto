@@ -25,11 +25,16 @@ public class Lottos {
         return this.lottos.size();
     }
 
-
     public WinResults getWinResults(LottoNumbers answer) {
         return new WinResults(
                 this.lottos.stream()
                         .map(item -> item.getWinResult(answer))
                         .collect(Collectors.toList()));
+    }
+
+    @Override
+    public String toString() {
+        return lottos.stream().map(Lotto::toString)
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

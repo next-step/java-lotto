@@ -11,4 +11,9 @@ public class Lotto {
     public WinResult getWinResult(LottoNumbers lottoNumbers) {
         return WinResult.valueOf(this.lottoNumbers.getMatchCount(lottoNumbers));
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

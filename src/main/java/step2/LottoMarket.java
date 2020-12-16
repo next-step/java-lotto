@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,9 +11,10 @@ public class LottoMarket {
 
     public static Lottos purchase(Money money, LottoNumberGenerateStrategy generateStrategy) {
         int purchasableCount = money.divide(LOTTO_PRICE);
-        List<LottoNumbers> lottoNumbers = IntStream.range(0, purchasableCount)
-                .mapToObj(i -> generateStrategy.generateLottoNumbers())
-                .collect(Collectors.toList());
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < purchasableCount; i++) {
+            lottoNumbers.add(generateStrategy.generateLottoNumbers());
+        }
         return new Lottos(lottoNumbers);
     }
 

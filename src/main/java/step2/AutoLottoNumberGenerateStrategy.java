@@ -22,7 +22,7 @@ public class AutoLottoNumberGenerateStrategy implements LottoNumberGenerateStrat
     @Override
     public LottoNumbers generateLottoNumbers() {
         Collections.shuffle(numberCards);
-        List<LottoNumber> picked = numberCards.subList(PICK_START, PICK_END);
+        List<LottoNumber> picked = new ArrayList<>(numberCards.subList(PICK_START, PICK_END));
         Collections.sort(picked);
         return new LottoNumbers(picked);
     }
