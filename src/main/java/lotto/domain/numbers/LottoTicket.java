@@ -18,8 +18,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank matchWinningLottoNumbers(final WinningLottoNumbers winningNumbers) {
-        return Rank.valueOf(calculateMatchCount(winningNumbers), isMatchBonusNumber(winningNumbers));
+    public Rank matchWinningLottoNumbers(final WinningLottoTicket winningLottoTicket) {
+        return Rank.valueOf(calculateMatchCount(winningLottoTicket), isMatchBonusNumber(winningLottoTicket));
     }
 
     public boolean isContain(final LottoNumber lottoNumber) {
@@ -39,15 +39,15 @@ public class LottoTicket {
         }
     }
 
-    private int calculateMatchCount(WinningLottoNumbers winningNumbers) {
+    private int calculateMatchCount(WinningLottoTicket winningLottoTicket) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::isContain)
+                .filter(winningLottoTicket::isContain)
                 .count();
     }
 
-    private boolean isMatchBonusNumber(WinningLottoNumbers winningNumbers) {
+    private boolean isMatchBonusNumber(WinningLottoTicket winningLottoTicket) {
         return lottoNumbers.stream()
-                .map(winningNumbers::isMatchBonusNumber)
+                .map(winningLottoTicket::isMatchBonusNumber)
                 .filter(aBoolean -> aBoolean)
                 .findAny()
                 .orElse(false);

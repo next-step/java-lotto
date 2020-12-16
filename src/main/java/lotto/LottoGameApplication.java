@@ -4,7 +4,7 @@ import lotto.domain.*;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.numbers.LottoTickets;
-import lotto.domain.numbers.WinningLottoNumbers;
+import lotto.domain.numbers.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,14 +17,14 @@ public class LottoGameApplication {
         OutputView.printLottoTickets(lottoTickets);
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
-        WinningLottoNumbers winningLottoNumbers = makeWinningLottoTicket();
-        LottoResult lottoResult = new LottoResult(lottoGame.matchNumbers(winningLottoNumbers));
+        WinningLottoTicket winningLottoTicket = makeWinningLottoTicket();
+        LottoResult lottoResult = new LottoResult(lottoGame.matchNumbers(winningLottoTicket));
         OutputView.printResults(lottoResult, money);
     }
 
-    private static WinningLottoNumbers makeWinningLottoTicket() {
+    private static WinningLottoTicket makeWinningLottoTicket() {
         LottoTicket winningLottoTicket = new LottoTicket(InputView.enterWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(InputView.enterBonusBall());
-        return new WinningLottoNumbers(winningLottoTicket, bonusNumber);
+        return new WinningLottoTicket(winningLottoTicket, bonusNumber);
     }
 }

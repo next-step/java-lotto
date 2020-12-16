@@ -57,7 +57,7 @@ class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("provideWinningTicketAndBonusNumber")
     void matchWinningLottoNumbers(LottoTicket winningTicket, LottoNumber bonusNumber, Rank expectedRank) {
-        Rank result = lottoTicket.matchWinningLottoNumbers(new WinningLottoNumbers(winningTicket, bonusNumber));
+        Rank result = lottoTicket.matchWinningLottoNumbers(new WinningLottoTicket(winningTicket, bonusNumber));
         assertThat(result).isEqualTo(expectedRank);
     }
 

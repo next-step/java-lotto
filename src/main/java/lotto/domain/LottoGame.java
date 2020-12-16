@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.numbers.LottoTickets;
-import lotto.domain.numbers.WinningLottoNumbers;
+import lotto.domain.numbers.WinningLottoTicket;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,9 +19,9 @@ public class LottoGame {
         putInitMatchPrize();
     }
 
-    public Map<Rank, Integer> matchNumbers(final WinningLottoNumbers winningLottoNumbers) {
+    public Map<Rank, Integer> matchNumbers(final WinningLottoTicket winningLottoTicket) {
         lottoTickets.getLottoTickets().forEach(lottoTicket -> {
-            Rank rank = lottoTicket.matchWinningLottoNumbers(winningLottoNumbers);
+            Rank rank = lottoTicket.matchWinningLottoNumbers(winningLottoTicket);
             lottoResult.put(rank, lottoResult.get(rank) + 1);
         });
         return lottoResult;
