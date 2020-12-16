@@ -21,16 +21,11 @@ public class LottoRunner {
     /**
      * 구매한 갯수 만큼 로또 번호들을 뽑습니다.
      */
-    private Lottos makeLottos(){
-        Lottos lottos = new Lottos();
+    private Lottos makeLottos() {
         int lottoCount = this.inputView.getLottoCount();
         this.resultView.printNumberOfPurchasedLotto(lottoCount);
-
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto();
-            this.resultView.printLottoNumbers(lotto);
-            lottos.addLotto(lotto);
-        }
+        Lottos lottos = new Lottos(lottoCount);
+        this.resultView.printLottoNumbers(lottos);
         return lottos;
     }
 

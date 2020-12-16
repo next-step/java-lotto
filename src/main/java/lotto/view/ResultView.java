@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinPrize;
+import lotto.domain.Lottos;
 
 import java.util.List;
 
@@ -22,6 +23,14 @@ public class ResultView {
      */
     public void printLottoNumbers(Lotto lotto) {
         System.out.println(lotto.getLottoNumbers());
+    }
+
+    /**
+     * 발급된 로또 번호들을 출력합니다.
+     * @param lottos
+     */
+    public void printLottoNumbers(Lottos lottos) {
+        lottos.getLottos().stream().forEach(this::printLottoNumbers);
     }
 
     /**

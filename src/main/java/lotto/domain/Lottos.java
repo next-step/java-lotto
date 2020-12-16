@@ -14,6 +14,14 @@ public class Lottos {
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
+    
+    public Lottos(int lottoCount) {
+        this();
+        for (int i = 0; i < lottoCount; i++) {
+            Lotto lotto = new Lotto();
+            this.addLotto(lotto);
+        }
+    }
 
     public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
