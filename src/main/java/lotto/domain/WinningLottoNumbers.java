@@ -10,8 +10,10 @@ import java.util.stream.Collectors;
  * @description :
  **/
 public class WinningLottoNumbers {
+
 	private static final String REGEX = ",";
 	private static final int LOTTO_TICKET_WINNING_COUNT = 6;
+
 	private LottoTicket lottoTicket;
 
 	public WinningLottoNumbers(String arg) {

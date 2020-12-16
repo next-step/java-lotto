@@ -11,7 +11,9 @@ import java.util.Set;
  * @description :
  **/
 public class LottoTicket {
+
 	private static final int LOTTO_TICKET_NUMBER_COUNT = 6;
+
 	private List<LottoNumber> lottoTicketNumbers = new ArrayList<>();
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {

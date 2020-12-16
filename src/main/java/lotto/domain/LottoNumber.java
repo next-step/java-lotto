@@ -8,8 +8,11 @@ import java.util.Objects;
  * @description :
  **/
 public class LottoNumber {
+
 	private static final int MINIMUM_OF_LOTTO_NUMBER = 1;
 	private static final int MAXIMUM_OF_LOTTO_NUMBER = 46;
+	private static final String OUT_OF_LOTTO_NUMBER_BOUNDARY_MESSAGE = "로또 숫자의 범위는 " + MINIMUM_OF_LOTTO_NUMBER + "부터 " + MAXIMUM_OF_LOTTO_NUMBER + "까지 입니다.";
+
 	private final int number;
 
 	public LottoNumber(int number) {
@@ -19,7 +22,7 @@ public class LottoNumber {
 
 	private void validate(int number) {
 		if (number < MINIMUM_OF_LOTTO_NUMBER || number > MAXIMUM_OF_LOTTO_NUMBER) {
-			throw new IllegalArgumentException("로또 숫자의 범위는 1부터 46까지 입니다.");
+			throw new IllegalArgumentException(OUT_OF_LOTTO_NUMBER_BOUNDARY_MESSAGE);
 		}
 	}
 

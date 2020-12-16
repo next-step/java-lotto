@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @description :
  **/
 public enum Prize {
+
 	SIX(6, 2000000000),
 	FIVE(5, 1500000),
 	FOUR(4, 50000),

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * @description :
  **/
 public class LottoTickets {
+
 	private static final int LOTTO_TICKET_PRICE = 1000;
 	private static final int MINIMUM_OF_AUTO_CREATE_NUMBER = 1;
 	private static final int MAXIMUM_OF_AUTO_CREATE_NUMBER = 46;
