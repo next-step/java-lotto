@@ -87,6 +87,7 @@
 + LottoGame : 생성자 LottoGenerator 제거 
     + buyLotto() 메소드에 LottoGenerator 구현체를 보내서 자동 또는 수동 로또를 사도록 기능 추가
 
++ LottoCount : 로또 수동 및 자동 개수를 관리하는 클래스 
 ## Step5
 
 ## 온라인 코드 리뷰 과정
