@@ -15,8 +15,8 @@ public class WinningNumbers {
         return new WinningNumbers(LotteryGame.ofManual(winningNumbers));
     }
 
-    public Rank checkWinTheLottery(final LotteryGame lotteryNumbers) {
-        return this.winningNumbers.checkWinTheLottery(lotteryNumbers);
+    public Rank checkWinTheLotteryWithBonus(final LotteryGame otherLotteryGame, final int bonusNumber) {
+        return this.winningNumbers.checkWinTheLotteryWithBonus(otherLotteryGame, bonusNumber);
     }
 
     @Override

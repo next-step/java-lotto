@@ -47,9 +47,10 @@ public class LotteryRunner {
 
     private List<Rank> searchWinningNumbers(final List<LotteryGame> games) {
         final WinningNumbers winningNumbers = WinningNumbers.of(scanWinningNumbers());
+        final int bonusNumber = scanBonusNumbers();
 
         return games.stream()
-            .map(winningNumbers::checkWinTheLottery)
+            .map(gameNumber -> winningNumbers.checkWinTheLotteryWithBonus(gameNumber, bonusNumber))
             .collect(Collectors.toList());
     }
 

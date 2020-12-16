@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 public class WinningStatistics {
-    private static final String WINNING_PRIZE_PRINT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String WINNING_PRIZE_RATE_PRINT_FORMAT = "총 수익률은 %.2f입니다";
     private static final String TEXT_PRIZE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int NONE = 0;
@@ -31,7 +30,7 @@ public class WinningStatistics {
     }
 
     private String parseWinningPrizePrintFormat(final Rank rank) {
-        return String.format(WINNING_PRIZE_PRINT_FORMAT,
+        return String.format(rank.getPrintFormat(),
             rank.getCountOfMatch(),
             rank.getWinningPrize(),
             numberOfTheRank(rank));
@@ -43,13 +42,6 @@ public class WinningStatistics {
 
         return new WinningStatistics(lotteryRanksMap, buyPrice);
     }
-
-//    public int numberOfGames() {
-//        return lotteryRanksMap.values()
-//            .stream()
-//            .reduce(Integer::sum)
-//            .orElse(NONE);
-//    }
 
     public int numberOfTheRank(final Rank rank) {
         return lotteryRanksMap.getOrDefault(rank, NONE);

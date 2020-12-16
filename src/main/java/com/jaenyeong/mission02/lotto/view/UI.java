@@ -14,6 +14,7 @@ public class UI {
     private static final String TEXT_ENTER_LAST_WEEK_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String TEXT_WINNING_STATISTICS = "당첨 통계";
     private static final String TEXT_UNDER_BAR = "---------";
+    private static final String TEXT_INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
 
     private UI() {
     }
@@ -36,6 +37,11 @@ public class UI {
         System.out.println(TEXT_ENTER_LAST_WEEK_WIN_NUMBERS);
         SCAN.nextLine(); // Parser 클래스에서 stream 사용으로 인하여 삽입
         return parseWinningNumbers(SCAN.nextLine());
+    }
+
+    public static int scanBonusNumbers() {
+        System.out.println(TEXT_INPUT_BONUS_NUMBER);
+        return SCAN.nextInt();
     }
 
     public static void printResultStatistics(final List<String> winningStatistics) {

@@ -19,7 +19,16 @@ class WinningNumbersTest {
         final LotteryGame buyGame = LotteryGame.ofManual(givenNumbers);
         final LotteryGame winningLottery = LotteryGame.ofManual(givenNumbers);
 
-        assertEquals(winningLottery.checkWinTheLottery(buyGame), Rank.FIRST);
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 7), Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("2등 테스트")
+    void secondRankTest() {
+        final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 6), Rank.SECOND);
     }
 
     @Test
@@ -28,7 +37,7 @@ class WinningNumbersTest {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 7));
 
-        assertEquals(winningLottery.checkWinTheLottery(buyGame), Rank.THIRD);
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 8), Rank.THIRD);
     }
 
     @Test
@@ -37,7 +46,7 @@ class WinningNumbersTest {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 9, 7));
 
-        assertEquals(winningLottery.checkWinTheLottery(buyGame), Rank.FOURTH);
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 45), Rank.FOURTH);
     }
 
     @Test
@@ -46,7 +55,7 @@ class WinningNumbersTest {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 14, 9, 7));
 
-        assertEquals(winningLottery.checkWinTheLottery(buyGame), Rank.FIFTH);
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 22), Rank.FIFTH);
     }
 
     @Test
@@ -55,6 +64,6 @@ class WinningNumbersTest {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(11, 12, 13, 14, 15, 16));
 
-        assertEquals(winningLottery.checkWinTheLottery(buyGame), Rank.MISS);
+        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 45), Rank.MISS);
     }
 }

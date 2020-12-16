@@ -27,16 +27,17 @@ public class LotteryGame {
         return money / PRICE;
     }
 
-    public Rank checkWinTheLottery(final LotteryGame otherGame) {
-        if (isNotValid(otherGame)) {
+    public Rank checkWinTheLotteryWithBonus(final LotteryGame userGame, final int bonusNumber) {
+        if (isNotValid(userGame)) {
             return Rank.valueOf(MISS_MATCH);
         }
 
-        final List<Integer> currentGame = this.lotteryNumbers.getLotteryNumbers();
+        final List<Integer> userGameNumbers = userGame.lotteryNumbers.getLotteryNumbers();
+        final boolean bonusMatch = userGameNumbers.contains(bonusNumber);
 
-        currentGame.retainAll(otherGame.getLotteryNumbers());
+        userGameNumbers.retainAll(this.lotteryNumbers.getLotteryNumbers());
 
-        return Rank.valueOf(currentGame.size());
+        return Rank.valueOf(userGameNumbers.size(), bonusMatch);
     }
 
     private boolean isNotValid(final LotteryGame otherGame) {
