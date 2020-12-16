@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-
     public static final String LOTTO_NUMBERS_DUPLICATE_EXCEPTION_MESSAGE = "로또 숫자는 서로 중복되지 않아야 합니다.";
     public static final String LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE = "로또 숫자는 6개로 구성되어야 합니다.";
 
