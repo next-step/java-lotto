@@ -5,7 +5,6 @@ import step2.view.InputView;
 import step2.view.OutputView;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {

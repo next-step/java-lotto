@@ -2,7 +2,6 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.LottoNumber;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static step2.domain.LottoNumber.LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;

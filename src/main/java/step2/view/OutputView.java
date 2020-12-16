@@ -3,7 +3,6 @@ package step2.view;
 import step2.domain.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,7 @@ public class OutputView {
 
             Set<LottoNumber> lottoNumbers = lotto.getValue();
             stringBuilder.append(getLottoNumbersString(lottoNumbers));
+
             viewUtils.printLine(stringBuilder.toString());
         }
     }

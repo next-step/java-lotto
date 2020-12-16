@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step2.domain.Lotto;
-import step2.domain.LottoGenerator;
-import step2.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
