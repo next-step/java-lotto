@@ -18,3 +18,5 @@
 ### Step 2. 로또(수동)
 1. LottoNumbers 구현
 2. Lotto 구현
+    1. 숫자 매칭 확인 구현
+3. 로또 결과(WinResult) 구현
