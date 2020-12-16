@@ -5,13 +5,12 @@ import java.util.Scanner;
 public class ViewUtils {
     private static final String INPUT_NULL_EMPTY_EXCEPTION_MESSAGE = "내용을 입력해주세요.";
 
-    private Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
-    public ViewUtils() {
-        this.scanner = new Scanner(System.in);
+    private ViewUtils() {
     }
 
-    public String nextLine() {
+    public static String nextLine() {
         String input = scanner.nextLine();
 
         if(input == null || input.isEmpty()) {
@@ -21,11 +20,11 @@ public class ViewUtils {
         return input;
     }
 
-    public int nextInt() {
+    public static int nextInt() {
         return Integer.parseInt(nextLine());
     }
 
-    public void printLine(String line) {
+    public static void printLine(String line) {
         System.out.println(line);
     }
 }

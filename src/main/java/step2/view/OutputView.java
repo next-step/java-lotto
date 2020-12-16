@@ -15,14 +15,8 @@ public class OutputView {
     private static final String LOTTO_NUMBER_PREFIX = "[";
     private static final String LOTTO_NUMBER_POSTFIX = "]";
 
-    private final ViewUtils viewUtils;
-
-    public OutputView() {
-        this.viewUtils = new ViewUtils();
-    }
-
     public void printLottos(Lottos lottos, int count) {
-        viewUtils.printLine(String.format(OUTPUT_BUY_COUNT_MESSAGE, count));
+        ViewUtils.printLine(String.format(OUTPUT_BUY_COUNT_MESSAGE, count));
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -32,7 +26,7 @@ public class OutputView {
             Set<LottoNumber> lottoNumbers = lotto.getValue();
             stringBuilder.append(getLottoNumbersString(lottoNumbers));
 
-            viewUtils.printLine(stringBuilder.toString());
+            ViewUtils.printLine(stringBuilder.toString());
         }
     }
 
@@ -46,14 +40,14 @@ public class OutputView {
     }
 
     public void printResult(LottoResult result, int money) {
-        viewUtils.printLine(OUTPUT_WINNING_STATISTICS_MESSAGE);
+        ViewUtils.printLine(OUTPUT_WINNING_STATISTICS_MESSAGE);
 
         Arrays.stream(LottoTier.values())
                 .forEach(tier -> {
                     int tierCount = result.getTierCount(tier);
-                    viewUtils.printLine(String.format(OUTPUT__RESULT_MESSAGE, tier.getMatchingCount(), tier.getPrize(), tierCount));
+                    ViewUtils.printLine(String.format(OUTPUT__RESULT_MESSAGE, tier.getMatchingCount(), tier.getPrize(), tierCount));
                 });
 
-        viewUtils.printLine(String.format(OUTPUT_YIELD_MESSAGE, result.getYield(money)));
+        ViewUtils.printLine(String.format(OUTPUT_YIELD_MESSAGE, result.getYield(money)));
     }
 }

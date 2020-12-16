@@ -9,16 +9,10 @@ public class InputView {
     private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String COMMA = ",";
 
-    private final ViewUtils viewUtils;
-
-    public InputView() {
-        this.viewUtils = new ViewUtils();
-    }
-
     public int getMoney() {
-        viewUtils.printLine(INPUT_MONEY_MESSAGE);
+        ViewUtils.printLine(INPUT_MONEY_MESSAGE);
 
-        return viewUtils.nextInt();
+        return ViewUtils.nextInt();
     }
 
     public List<Integer> getWinningNumbers() {
@@ -31,8 +25,8 @@ public class InputView {
     }
 
     private String getWinningNumberString() {
-        viewUtils.printLine(INPUT_WINNING_LOTTO_MESSAGE);
+        ViewUtils.printLine(INPUT_WINNING_LOTTO_MESSAGE);
 
-        return viewUtils.nextLine();
+        return ViewUtils.nextLine();
     }
 }
