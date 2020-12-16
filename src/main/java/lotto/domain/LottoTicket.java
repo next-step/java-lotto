@@ -40,7 +40,7 @@ public class LottoTicket {
     }
 
     public boolean matchLottoNumber(LottoNumber bonusBallNumber) {
-        return lottoNumbers.contains(bonusBallNumber) ? true : false;
+        return lottoNumbers.contains(bonusBallNumber);
     }
 
     @Override
