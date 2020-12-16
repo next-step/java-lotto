@@ -50,24 +50,25 @@ public class LottoTest {
         }).withMessage(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
     }
 
-    @DisplayName("입력받은 로또와 몇 개의 숫자가 일치하는 지 반환한다.")
+    @DisplayName("입력받은 로또와 비교하여 LottoTier를 반환한다.")
     @ParameterizedTest
     @MethodSource("getTargetNumbers")
-    void getMatchingCount(List<Integer> input, int expected) {
+    void getLottoTier(List<Integer> input, LottoTier expected) {
         Lotto winningLotto = LottoGenerator.generateLotto(Arrays.asList(1, 2, 3, 4 ,5 ,6));
+        Lotto inputLotto = LottoGenerator.generateLotto(input);
 
-        assertThat(winningLotto.getMatchingCount(LottoGenerator.generateLotto(input))).isEqualTo(expected);
+        assertThat(inputLotto.getLottoTier(winningLotto)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getTargetNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), 5),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), 4),
-                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), 3),
-                Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), 2),
-                Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), 1),
-                Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), 0)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoTier.FIRST),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoTier.SECOND),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), LottoTier.THIRD),
+                Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), LottoTier.FOURTH),
+                Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), LottoTier.NONE),
+                Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), LottoTier.NONE),
+                Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), LottoTier.NONE)
         );
     }
 }

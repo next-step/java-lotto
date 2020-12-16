@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,9 +37,19 @@ public class Lotto {
         return lotto.contains(number);
     }
 
-    public long getMatchingCount(Lotto targetLotto) {
+    public LottoTier getLottoTier(Lotto targetLotto) {
+        return LottoTier.getTier(getMatchingCount(targetLotto));
+    }
+
+    private long getMatchingCount(Lotto targetLotto) {
         return lotto.stream()
                 .filter(number -> targetLotto.contains(number))
                 .count();
     }
+
+    public Set<LottoNumber> getValue() {
+        return Collections.unmodifiableSet(lotto);
+    }
+
+
 }

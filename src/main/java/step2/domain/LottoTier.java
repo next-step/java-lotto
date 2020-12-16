@@ -10,21 +10,21 @@ public enum LottoTier {
     FOURTH(3,5_000, matchingCount -> matchingCount == 3),
     NONE(0,0, matchingCount -> matchingCount < 3);
 
-    private final int matchingCount;
+    private final long matchingCount;
     private final int prize;
-    private final Function<Integer, Boolean> isWinning;
+    private final Function<Long, Boolean> isWinning;
 
-    LottoTier(int matchingCount, int prize, Function<Integer, Boolean> isWinning) {
+    LottoTier(long matchingCount, int prize, Function<Long, Boolean> isWinning) {
         this.matchingCount = matchingCount;
         this.prize = prize;
         this.isWinning = isWinning;
     }
 
-    public boolean from(int matchingCount) {
+    public boolean from(long matchingCount) {
         return isWinning.apply(matchingCount);
     }
 
-    public static LottoTier getTier(int matchingCount) {
+    public static LottoTier getTier(long matchingCount) {
         return Arrays.stream(values())
                 .filter(tier -> tier.from(matchingCount))
                 .findFirst()
@@ -33,5 +33,13 @@ public enum LottoTier {
 
     public Integer calculatePrize(Integer count) {
         return count * prize;
+    }
+
+    public long getMatchingCount() {
+        return matchingCount;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
