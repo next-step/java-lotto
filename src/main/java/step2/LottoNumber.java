@@ -2,20 +2,20 @@ package step2;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN = 1;
     private static final int MAX = 45;
 
     private int value;
 
     private LottoNumber(int value) {
-        if(value < MIN || value > MAX){
+        if (value < MIN || value > MAX) {
             throw new IllegalArgumentException("Lotto number is incorrect");
         }
         this.value = value;
     }
 
-    public static LottoNumber of(int value){
+    public static LottoNumber of(int value) {
         return new LottoNumber(value);
     }
 
@@ -30,5 +30,15 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + "";
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return o.value > value ? -1 : 1;
     }
 }
