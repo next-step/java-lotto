@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
+import lotto.model.LOTTO_PRIZE_POLICY;
 import lotto.view.InputView;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +22,6 @@ public class LottoTest {
 		assertThat(lotto.calculateLottoCount(14000)).isEqualTo(14);
 		assertThat(lotto.calculateLottoCount(13500)).isEqualTo(13);
 	}
-
-//	@Test
-//	public void calculateLottoCount_장당_이천오백원_로또_구매_매수_테스트() {
-//		assertThat(lotto.calculateLottoCount(5000,2500)).isEqualTo(2);
-//		assertThat(lotto.calculateLottoCount(7800,2500)).isEqualTo(3);
-//	}
 
 	@Test
 	public void 구매장수에_맞게_6개의_번호의_로또가_뽑혔는지_테스트() {
@@ -54,7 +49,6 @@ public class LottoTest {
 		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 3, 1, 1, 2, 2, 0, 0, 0, 0));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(1);
-		assertThat(lottoResult.getThreeMatchCount()).isEqualTo(2);
 		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(10000);
 	}
 
@@ -64,8 +58,7 @@ public class LottoTest {
 		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 1, 1, 1, 2, 2, 0, 0, 0, 0));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(0.5);
-		assertThat(lottoResult.getThreeMatchCount()).isEqualTo(1);
-		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(lottoResult.THREE_MATCH_PRIZE_MONEY);
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(LOTTO_PRIZE_POLICY.THREE_MATCH_PRIZE.getPrizeMoney());
 	}
 
 	@Test
@@ -74,8 +67,7 @@ public class LottoTest {
 		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 2, 2, 0, 0, 0, 6));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(200000);
-		assertThat(lottoResult.getSixMatchCount()).isEqualTo(1);
-		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(lottoResult.SIX_MATCH_PRIZE_MONEY);
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(LOTTO_PRIZE_POLICY.SIX_MATCH_PRIZE.getPrizeMoney());
 	}
 
 
