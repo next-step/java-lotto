@@ -4,6 +4,7 @@ import lotto.domain.Rank;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
@@ -18,7 +19,11 @@ public class LottoTicket {
     }
 
     public Rank matchWinningLottoNumbers(final WinningLottoNumbers winningNumbers) {
-        return Rank.valueOf(calculateCount(winningNumbers), isMatchBonusNumber(winningNumbers));
+        return Rank.valueOf(calculateMatchCount(winningNumbers), isMatchBonusNumber(winningNumbers));
+    }
+
+    public boolean isContain(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validateSize(final List<LottoNumber> lottoNumbers) {
@@ -34,7 +39,7 @@ public class LottoTicket {
         }
     }
 
-    private int calculateCount(WinningLottoNumbers winningNumbers) {
+    private int calculateMatchCount(WinningLottoNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningNumbers::isContain)
                 .count();
@@ -50,5 +55,18 @@ public class LottoTicket {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

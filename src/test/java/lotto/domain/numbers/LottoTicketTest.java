@@ -11,12 +11,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
+    private static final String SPLIT_TEXT = ", ";
     private LottoTicket lottoTicket;
 
     @BeforeEach
@@ -53,17 +55,26 @@ class LottoTicketTest {
 
     @DisplayName("당첨 번호와 보너스 볼 둘다 비교하여 맞춘 갯수에 따라 Rank를 리턴한다.")
     @ParameterizedTest
-    @MethodSource("provideWinningNumbers")
-    void matchWinningLottoNumbers(String numbers, LottoNumber bonusNumber, Rank expectedRank) {
-        Rank result = lottoTicket.matchWinningLottoNumbers(new WinningLottoNumbers(numbers, bonusNumber));
+    @MethodSource("provideWinningTicketAndBonusNumber")
+    void matchWinningLottoNumbers(LottoTicket winningTicket, LottoNumber bonusNumber, Rank expectedRank) {
+        Rank result = lottoTicket.matchWinningLottoNumbers(new WinningLottoNumbers(winningTicket, bonusNumber));
         assertThat(result).isEqualTo(expectedRank);
     }
 
-    private static Stream<Arguments> provideWinningNumbers() {
+    private static Stream<Arguments> provideWinningTicketAndBonusNumber() {
         return Stream.of(
-                Arguments.of("1, 8, 10, 15, 22, 35", new LottoNumber(30), Rank.FIFTH),
-                Arguments.of("1, 8, 10, 14, 21, 40", new LottoNumber(30), Rank.SECOND),
-                Arguments.of("1, 8, 10, 14, 21, 40", new LottoNumber(22), Rank.THIRD)
+                Arguments.of(new LottoTicket(convertToList("1, 8, 10, 15, 22, 35")),
+                        new LottoNumber(30), Rank.FIFTH),
+                Arguments.of(new LottoTicket(convertToList("1, 8, 10, 14, 21, 40"))
+                        , new LottoNumber(30), Rank.SECOND),
+                Arguments.of(new LottoTicket(convertToList("1, 8, 10, 14, 21, 40"))
+                        , new LottoNumber(22), Rank.THIRD)
         );
+    }
+
+    private static List<LottoNumber> convertToList(String numbers) {
+        return Arrays.stream(numbers.split(SPLIT_TEXT))
+                .map(number -> new LottoNumber(Integer.parseInt(number)))
+                .collect(Collectors.toList());
     }
 }

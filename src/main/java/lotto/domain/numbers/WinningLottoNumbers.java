@@ -1,31 +1,26 @@
 package lotto.domain.numbers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WinningLottoNumbers {
-    private static final String SPLIT_TEXT = ", ";
-
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoTicket winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoNumbers(final String winningNumbers, LottoNumber bonusNumber) {
-        this.lottoNumbers = Arrays.stream(winningNumbers.split(SPLIT_TEXT))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toList());
+    public WinningLottoNumbers(final LottoTicket winningNumbers, LottoNumber bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
     public boolean isContain(final LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return winningNumbers.isContain(lottoNumber);
     }
 
     public boolean isMatchBonusNumber(final LottoNumber lottoNumber) {
         return bonusNumber.equals(lottoNumber);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    private void validateBonusNumber(LottoNumber bonusNumber) {
+        if (winningNumbers.isContain(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호 6개에 보너스 숫자가 포함 되어 있으면 안됩니다.");
+        }
     }
 }
