@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author : byungkyu
@@ -44,8 +42,9 @@ public class LottoTicket {
 	}
 
 	public Long getMatchCount(LottoTicket winnerLottoTicket) {
-		List<LottoNumber> winnerLottoNumbers = winnerLottoTicket.get();
-		return lottoTicketNumbers.stream().filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
+		List<LottoNumber> winnerLottoNumbers = winnerLottoTicket.lottoTicketNumbers;
+		return lottoTicketNumbers.stream().
+			filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
 			.count();
 	}
 }
