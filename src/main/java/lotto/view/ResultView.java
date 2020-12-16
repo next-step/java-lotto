@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ResultView {
-    private static final String PRINT_WIN_PRIZE_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String PRINT_WIN_PRIZE_FORMAT = "%s (%d원)- %d개\n";
 
     /**
      * 구매한 로또의 갯수를 출력합니다.
@@ -54,7 +54,7 @@ public class ResultView {
     private void printWinPrizes(LottoWinResult lottoWinResult) {
         for (LottoWinPrize lottoWinPrize : LottoWinPrize.values()) {
             System.out.printf(ResultView.PRINT_WIN_PRIZE_FORMAT
-                    , lottoWinPrize.getMatchedCount()
+                    , lottoWinPrize.getDescription()
                     , lottoWinPrize.getPrize()
                     , lottoWinResult.getCount(lottoWinPrize));
         }

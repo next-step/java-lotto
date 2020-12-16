@@ -17,7 +17,7 @@ public class InputView {
      */
     public int getLottoCount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return this.calculateLottoAmountFromInsertSum(scanner.nextInt());
+        return this.calculateLottoAmountFromInsertSum(this.scanner.nextInt());
     }
 
     /**
@@ -36,10 +36,19 @@ public class InputView {
      */
     public List<Integer> insertWinLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
-        String nextLine = scanner.nextLine();
+        this.scanner.nextLine();
+        String nextLine = this.scanner.nextLine();
         return Arrays.asList(nextLine.split(",")).stream()
                                         .map(input -> Integer.parseInt(input.trim()))
                                         .collect(Collectors.toList());
+    }
+
+    /**
+     * 보너스 번호를 입력받습니다.
+     * @return
+     */
+    public int insertBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return this.scanner.nextInt();
     }
 }

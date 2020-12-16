@@ -22,7 +22,16 @@ public class Lotto {
     }
 
     public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+        return this.lottoNumbers;
+    }
+
+    /**
+     * 해당 로또번호가 있는지 여부를 반환합니다.
+     * @param lottoNumber
+     * @return
+     */
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.containsLottoNumber(lottoNumber);
     }
 
     @Override
