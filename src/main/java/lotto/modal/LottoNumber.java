@@ -2,8 +2,8 @@ package lotto.modal;
 
 public class LottoNumber {
 
-	private static final int LOTTO_NUMBER_BOUND_MAX = 45;
-	private static final int LOTTO_NUMBER_BOUND_MIN = 1;
+	public static final int LOTTO_NUMBER_BOUND_MAX = 45;
+	public static final int LOTTO_NUMBER_BOUND_MIN = 1;
 
 	private final int number;
 
@@ -11,6 +11,13 @@ public class LottoNumber {
 
 		validationLottoNumber(lottoNumber);
 		this.number = lottoNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "LottoNumber{" +
+			"number=" + number +
+			'}';
 	}
 
 	private void validationLottoNumber(int lottoNumber) {
