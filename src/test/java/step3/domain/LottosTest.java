@@ -6,12 +6,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.domain.generator.LottoManualGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static step3.domain.factory.LottoFactory.produceLotto;
 
 class LottosTest {
 
@@ -20,7 +19,7 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         List<Lotto> numbers = new ArrayList<>();
-        numbers.add(produceLotto("1,2,3,4,5,6"));
+        numbers.add(new LottoManualGenerator().generate("1,2,3,4,5,6"));
         lottos = new Lottos(numbers);
     }
 

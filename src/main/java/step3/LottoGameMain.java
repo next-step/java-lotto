@@ -1,7 +1,7 @@
 package step3;
 
 import step3.domain.LottoGame;
-import step3.domain.LottoNumberGenerator;
+import step3.domain.generator.LottoAutoGenerator;
 import step3.domain.LottoResult;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ public class LottoGameMain {
 
     public static void main(String[] args) {
         int amount = inputMessageLottoAmount();
-        LottoGame lottoGame = new LottoGame(BigDecimal.valueOf(amount), new LottoNumberGenerator());
+        LottoGame lottoGame = new LottoGame(BigDecimal.valueOf(amount), new LottoAutoGenerator());
         outputMessageLottoNumbers(lottoGame.getLottoNumbers());
 
         LottoResult lottoResult = lottoGame.lottoResultMap(inputMessageLastWeekWinningNumber(), inputMessageBonusNumber());

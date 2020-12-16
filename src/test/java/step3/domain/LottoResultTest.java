@@ -4,16 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.LottoResult;
+import step3.domain.generator.LottoManualGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static step3.domain.Rank.*;
-import static step3.domain.factory.LottoFactory.produceLotto;
 
 class LottoResultTest {
 
@@ -23,7 +21,7 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lotto = produceLotto("1,2,3,4,5,6");
+        lotto = new LottoManualGenerator().generate("1,2,3,4,5,6");
         lottos = new ArrayList<>();
     }
 
@@ -37,7 +35,7 @@ class LottoResultTest {
     @Test
     @DisplayName("로또 SECOND 결과 테스트")
     void winningSecondResult() {
-        lotto.setMatchBonus(true);
+        lotto.getLottoMatchStatus().setMatchBonus(true);
         lottoResult = lottoResult(SECOND.getCountOfMatch());
         Assertions.assertTrue(lottoResult.winningResult().containsKey(SECOND));
     }

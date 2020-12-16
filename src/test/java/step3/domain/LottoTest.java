@@ -6,10 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.domain.generator.LottoManualGenerator;
 
 import java.util.stream.Stream;
-
-import static step3.domain.factory.LottoFactory.produceLotto;
 
 class LottoTest {
 
@@ -17,7 +16,7 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = produceLotto("1,2,3,4,5,6");
+        lotto = new LottoManualGenerator().generate("1,2,3,4,5,6");
     }
 
     @ParameterizedTest
@@ -27,7 +26,7 @@ class LottoTest {
         String[] winningNumbers = lottoNumber.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lotto.equalCheck(new LottoNumber(Integer.parseInt(winningNumber)), new LottoNumber(1));
+            lotto.checkLottoMatchCount(new LottoNumber(Integer.parseInt(winningNumber)), new LottoNumber(1));
         }
 
         Assertions.assertEquals(lotto.getCount(), count);
@@ -51,7 +50,7 @@ class LottoTest {
         String[] winningNumbers = lottoNumber.split(",");
 
         for (String winningNumber : winningNumbers) {
-            lotto.equalCheck(new LottoNumber(Integer.parseInt(winningNumber)), new LottoNumber(bonus));
+            lotto.checkLottoMatchCount(new LottoNumber(Integer.parseInt(winningNumber)), new LottoNumber(bonus));
         }
 
         Assertions.assertEquals(lotto.isMatchBonus(), expected);

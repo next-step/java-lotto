@@ -1,7 +1,7 @@
 package step3.domain;
 
-import static step3.domain.LottoNumberGenerator.END_NUMBER;
-import static step3.domain.LottoNumberGenerator.START_NUMBER;
+import static step3.domain.generator.LottoAutoGenerator.END_NUMBER;
+import static step3.domain.generator.LottoAutoGenerator.START_NUMBER;
 
 public class LottoNumber {
 

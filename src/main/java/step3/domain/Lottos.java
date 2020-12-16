@@ -1,8 +1,6 @@
 package step3.domain;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -16,12 +14,12 @@ public class Lottos {
 
     public void checkWinningLotto(LottoNumber number, LottoNumber bonus) {
         lottos.stream()
-                .forEach(lottoNumber -> lottoNumber.equalCheck(number,bonus));
+                .forEach(lottoNumber -> lottoNumber.checkLottoMatchCount(number,bonus));
     }
 
     public LottoResult winningLottoResult() {
         return new LottoResult(lottos.stream()
-                .collect(groupingBy(Lotto::getCount)));
+                .collect(groupingBy(lotto -> lotto.getCount())));
     }
 
     public List<Lotto> getLottoNumber() {
