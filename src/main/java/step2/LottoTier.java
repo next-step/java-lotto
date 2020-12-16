@@ -10,8 +10,8 @@ public enum LottoTier {
     FOURTH(3,5_000, matchingCount -> matchingCount == 3),
     NONE(0,0, matchingCount -> matchingCount < 3);
 
-    private int matchingCount;
-    private int prize;
+    private final int matchingCount;
+    private final int prize;
     private final Function<Integer, Boolean> isWinning;
 
     LottoTier(int matchingCount, int prize, Function<Integer, Boolean> isWinning) {
