@@ -29,14 +29,26 @@ class LottoTicketTest {
 
     @DisplayName("LottoTicket 생성 시 로또 숫자가 6개 아닌 경우, Exception 발생")
     @Test
-    void validate() {
+    void validateSize() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(2));
         lottoNumbers.add(new LottoNumber(5));
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 숫자가 부족합니다.");
+                .hasMessage("로또 번호는 6개만 가능합니다.");
+    }
+
+    @DisplayName("중복된 로또 번호가 있을 경우, Exception 발생")
+    @Test
+    void validateDuplicate() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Arrays.asList(1, 8, 8, 20, 26, 40)
+                .forEach(num -> lottoNumbers.add(new LottoNumber(num)));
+
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 로또 번호가 있습니다.");
     }
 
     @DisplayName("당첨 번호와 보너스 볼 둘다 비교하여 맞춘 갯수에 따라 Rank를 리턴한다.")

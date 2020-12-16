@@ -15,8 +15,9 @@ public class LottoGameApplication {
         OutputView.printLottoTickets(lottoTickets.getLottoTickets());
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
-        WinningLottoNumbers wLN = new WinningLottoNumbers(InputView.enterWinningNumbers(), InputView.enterBonusBall());
-        LottoResult lottoResult = new LottoResult(lottoGame.matchNumbers(wLN));
+        WinningLottoNumbers winningLottoNumbers =
+                new WinningLottoNumbers(InputView.enterWinningNumbers(), InputView.enterBonusBall());
+        LottoResult lottoResult = new LottoResult(lottoGame.matchNumbers(winningLottoNumbers));
         OutputView.printResults(lottoResult, money);
     }
 }
