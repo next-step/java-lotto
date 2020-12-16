@@ -1,21 +1,15 @@
 package step4.view;
 
-import step4.domain.Lotto;
-import step4.domain.LottoResult;
-import step4.domain.Lottos;
-import step4.domain.Rank;
+import step4.domain.*;
 
 import java.util.EnumMap;
 
 public class OutputView {
 
-    public static void outputMessageLottoNumbers(Lottos lottos) {
-        StringBuilder builder = new StringBuilder()
-                .append(lottos.getLottoNumber().size())
-                .append("개를 구매했습니다.");
-        System.out.println(builder.toString());
-
-        for (Lotto number : lottos.getLottoNumber()) {
+    public static void outputMessageLottoNumbers(LottoGame lottoGame) {
+        LottoCount lottoCount = lottoGame.getLottoCount();
+        System.out.println("수동으로 "+lottoCount.getManualCount()+"장, 자동으로 "+lottoCount.getAutoCount()+" 구매했습니다.");
+        for (Lotto number : lottoGame.getLottos().getLottos()) {
             System.out.println(number);
         }
     }
