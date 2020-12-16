@@ -16,4 +16,5 @@
 3. 문자열 덧셈 계산기 구현
 
 ### Step 2. 로또(수동)
-1. Numbers 구현
+1. LottoNumbers 구현
+2. Lotto 구현

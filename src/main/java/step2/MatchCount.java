@@ -2,24 +2,19 @@ package step2;
 
 import java.util.Objects;
 
-public class Num {
+public class MatchCount {
+    private long value;
 
-    private int value;
-
-    private Num(int value) {
+    public MatchCount(long value) {
         this.value = value;
-    }
-
-    public static Num of(int value){
-        return new Num(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Num num = (Num) o;
-        return value == num.value;
+        MatchCount that = (MatchCount) o;
+        return value == that.value;
     }
 
     @Override
