@@ -19,6 +19,24 @@ public class Lotto {
         this.lotto = new HashSet<>(lottoNumbers);
     }
 
+    public LottoTier getLottoTier(Lotto targetLotto) {
+        return LottoTier.getTier(getMatchingCount(targetLotto));
+    }
+
+    private long getMatchingCount(Lotto targetLotto) {
+        return lotto.stream()
+                .filter(number -> targetLotto.contains(number))
+                .count();
+    }
+
+    private boolean contains(LottoNumber number) {
+        return lotto.contains(number);
+    }
+
+    public Set<LottoNumber> getValue() {
+        return Collections.unmodifiableSet(lotto);
+    }
+
     private void assertNumberDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
 
@@ -32,24 +50,4 @@ public class Lotto {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
     }
-
-    private boolean contains(LottoNumber number) {
-        return lotto.contains(number);
-    }
-
-    public LottoTier getLottoTier(Lotto targetLotto) {
-        return LottoTier.getTier(getMatchingCount(targetLotto));
-    }
-
-    private long getMatchingCount(Lotto targetLotto) {
-        return lotto.stream()
-                .filter(number -> targetLotto.contains(number))
-                .count();
-    }
-
-    public Set<LottoNumber> getValue() {
-        return Collections.unmodifiableSet(lotto);
-    }
-
-
 }

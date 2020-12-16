@@ -20,6 +20,7 @@ public class Lottos {
         for(Lotto lotto : lottos) {
             count = countSameTier(lotto.getLottoTier(winningLotto), targetTier, count);
         }
+
         return count;
     }
 
@@ -27,6 +28,7 @@ public class Lottos {
         if(targetTier.equals(resultTier)) {
             count++;
         }
+
         return count;
     }
 
