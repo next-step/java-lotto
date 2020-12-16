@@ -5,15 +5,15 @@ import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.Money;
+import lotto.domain.numbers.LottoTickets;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class OutputView {
 
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-        lottoTickets.forEach(OutputView::printLottoTicket);
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        System.out.println(lottoTickets.getCount() + "개를 구매했습니다.");
+        lottoTickets.getLottoTickets().forEach(OutputView::printLottoTicket);
     }
 
     public static void printResults(LottoResult lottoResult, Money money) {

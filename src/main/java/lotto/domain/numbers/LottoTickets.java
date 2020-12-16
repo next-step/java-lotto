@@ -9,6 +9,10 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public int getCount() {
+        return lottoTickets.size();
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }

@@ -12,7 +12,7 @@ public class LottoGameApplication {
 
         LottoMachine lottoMachine = new LottoMachine(money.computeLottoTickets());
         LottoTickets lottoTickets = lottoMachine.makeLottoTickets();
-        OutputView.printLottoTickets(lottoTickets.getLottoTickets());
+        OutputView.printLottoTickets(lottoTickets);
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
         WinningLottoNumbers winningLottoNumbers =
