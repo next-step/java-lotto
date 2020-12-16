@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.sort;
+
 public class Lotto {
     private static final String NUMBER_DELIMITER = ", ";
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        sort(numbers);
         this.numbers = numbers;
     }
 
@@ -22,7 +25,8 @@ public class Lotto {
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException("숫자만 입력해 주세요.");
                     }
-                }).collect(Collectors.toList());
+                }).sorted()
+                .collect(Collectors.toList());
     }
 
     public int matchNumberCnt(Lotto winningLotto) {

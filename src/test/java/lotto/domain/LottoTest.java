@@ -24,7 +24,7 @@ public class LottoTest {
     void create_with_string_test() {
         String numbers = "2, 43, 53, 11, 41, 42";
         Lotto lotto = new Lotto(numbers);
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(2, 43, 53, 11, 41, 42)));
+        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(2, 11, 41, 42, 43, 53)));
     }
 
     @Test
