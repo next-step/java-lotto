@@ -27,4 +27,8 @@ enum LOTTO_RESULT {
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("cannot find matched LOTTO_RESULT!"));
 	}
+
+	public long getAmount() {
+		return amount;
+	}
 }

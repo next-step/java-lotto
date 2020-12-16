@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class LottoStore {
-	private static final int LOTTO_PRICE = 1000;
+	static final int LOTTO_PRICE = 1000;
 
 	List<LottoNumbers> sell(int money) {
 		validateMoney(money);
