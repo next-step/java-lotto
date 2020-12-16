@@ -1,27 +1,34 @@
 package lotto.modal;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import lotto.util.StringValid;
 
 public class Money {
 
-	public static final int LOTTO_PRICE_MONEY = 1000;
+	private static final int LOTTO_PRICE_MONEY = 1000;
 
 	private final int userMoney;
 
-	private Money() {
-		throw new AssertionError();
-	}
-
 	public Money(String userInputMoney) {
-
 		validationMoney(userInputMoney);
 		this.userMoney = Integer.parseInt(userInputMoney);
 	}
 
-	private void validationMoney(String userInputMoney) throws IllegalArgumentException {
+	public int getRepeatCount() {
+		return this.userMoney / LOTTO_PRICE_MONEY;
+	}
 
+	public BigDecimal getYield(int totalPrize) {
+
+		BigDecimal money = new BigDecimal(this.userMoney);
+		BigDecimal prize = new BigDecimal(totalPrize);
+
+		return prize.divide(money, 2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	private void validationMoney(String userInputMoney) throws IllegalArgumentException {
 		if (StringValid.isEmptyStr(userInputMoney)) {
 			throw new IllegalArgumentException("돈(금액)이 입력되지 않았습니다.");
 		}
@@ -33,10 +40,6 @@ public class Money {
 		if (Integer.parseInt(userInputMoney) < LOTTO_PRICE_MONEY) {
 			throw new IllegalArgumentException("로또 구매 최소 금액은 " + LOTTO_PRICE_MONEY + "원 입니다.");
 		}
-	}
-
-	public int getRepeatCount() {
-		return this.userMoney / LOTTO_PRICE_MONEY;
 	}
 
 	@Override

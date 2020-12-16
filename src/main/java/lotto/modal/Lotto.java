@@ -15,22 +15,18 @@ public class Lotto {
 	private final List<LottoNumber> lotto;
 
 	public Lotto() {
-
 		this(generateRandomLotto());
 	}
 
 	public Lotto(List<LottoNumber> manualLotto) {
-
 		this.lotto = manualLotto;
 	}
 
 	public List<LottoNumber> getLotto() {
-
 		return this.lotto;
 	}
 
 	public static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
-
 		validationLottoNumberList(inputStr);
 
 		return inputStr.stream()
@@ -39,7 +35,6 @@ public class Lotto {
 	}
 
 	private static void validationLottoNumberList(List<String> inputStr) {
-
 		if (inputStr.size() != LOTTO_REQUIRED_COUNT) {
 			throw new IllegalArgumentException();
 		}
@@ -50,7 +45,6 @@ public class Lotto {
 	}
 
 	private static List<LottoNumber> generateRandomLotto() {
-
 		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
 		Collections.sort(resultLotto);
 
@@ -60,24 +54,19 @@ public class Lotto {
 	}
 
 	private static Set<Integer> getRandomSet() {
-
 		Set<Integer> tempLotto = new HashSet<>();
 
 		while (tempLotto.size() != LOTTO_REQUIRED_COUNT) {
-
 			tempLotto.add(generateRandomLottoNumber());
 		}
-
 		return tempLotto;
 	}
 
 	private static int generateRandomLottoNumber() {
-
 		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
 	}
 
 	public int getMatchCount(Lotto compareLotto) {
-
 		int count = 0;
 
 		if (this.equals(compareLotto)) {
@@ -85,19 +74,15 @@ public class Lotto {
 		}
 
 		for (LottoNumber number : this.lotto) {
-
 			count += compareLotto.isContain(number);
 		}
-
 		return count;
 	}
 
 	private int isContain(LottoNumber number) {
-
 		if (this.lotto.contains(number)) {
 			return 1;
 		}
-
 		return 0;
 	}
 
@@ -113,7 +98,6 @@ public class Lotto {
 
 	@Override
 	public int hashCode() {
-
 		return Objects.hash(lotto);
 	}
 

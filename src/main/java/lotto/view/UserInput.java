@@ -11,7 +11,6 @@ public class UserInput {
 	 * @return 유저 입력 값
 	 */
 	public static String userInputString() {
-
 		return UserInput.userSystemInput();
 	}
 
@@ -20,7 +19,6 @@ public class UserInput {
 	 * @return 입력한 문자열
 	 */
 	private static String userSystemInput() {
-
 		return SCANNER.nextLine();
 	}
 }
