@@ -18,8 +18,7 @@ public class LottoTicket {
 
 	public LottoTicket(List<LottoNumber> lottoNumbers) {
 		validateLottoNumbers(lottoNumbers);
-		lottoNumbers.stream()
-			.forEach(lottoNumber -> addLottoTicketNumber(lottoNumber));
+		lottoNumbers.forEach(lottoNumber -> addLottoTicketNumber(lottoNumber));
 	}
 
 	private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
