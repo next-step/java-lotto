@@ -7,7 +7,8 @@ public enum InputSplitterFactory {
 
 	COMMA_SPLITTER(Pattern.compile("([\\d]|[,\\d])*"), new CommaInputSplitter()),
 	COLON_SPLITTER(Pattern.compile("([\\d]|[:\\d])*"), new ColonInputSplitter()),
-	COMMA_COLON_SPLITTER(Pattern.compile("([\\d]|[,|:\\d])*"), new CommaColonInputSplitter());
+	COMMA_COLON_SPLITTER(Pattern.compile("([\\d]|[,|:\\d])*"), new CommaColonInputSplitter()),
+	CUSTOM_SPLITTER(Pattern.compile("//(.)\n(.*)"), new CustomInputSplitter());
 
 	private final Pattern pattern;
 	private final InputSplitter inputSplitter;
