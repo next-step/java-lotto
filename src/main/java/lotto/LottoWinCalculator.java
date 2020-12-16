@@ -37,26 +37,4 @@ public class LottoWinCalculator {
                         .matchedLottoNumbersCount(this.winLottoNumbers.getLottoNumbers()))
                 .collect(Collectors.toList());
     }
-
-    /**
-     * 수익률을 계산합니다.
-     * 총 상금 / (로또 발급 수 * 로또 가격)
-     * @param lottoWinResult
-     * @return
-     */
-    public double calculatePriceEarningRatio(LottoWinResult lottoWinResult, int lottoAmount) {
-        return calculateTotalPrize(lottoWinResult) / lottoAmount / LottoWinCalculator.LOTTO_PRICE;
-    }
-
-    /**
-     * 총 상금을 계산합니다.
-     * @param lottoWinResult
-     * @return
-     */
-    private long calculateTotalPrize(LottoWinResult lottoWinResult) {
-        return Arrays.stream(LottoWinPrize.values())
-                .mapToLong(lottoWinPrize -> lottoWinPrize.getPrize() * lottoWinResult.getCount(lottoWinPrize))
-                .sum();
-    }
-
 }

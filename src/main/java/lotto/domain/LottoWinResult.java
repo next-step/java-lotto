@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.LottoWinCalculator;
+
 import java.util.*;
 
 public class LottoWinResult {
@@ -36,5 +38,26 @@ public class LottoWinResult {
      */
     public int getCount(LottoWinPrize lottoWinPrize) {
         return this.winResultCounts.get(lottoWinPrize);
+    }
+
+
+    /**
+     * 수익률을 계산합니다.
+     * 총 상금 / (로또 발급 수 * 로또 가격)
+     * @param lottoAmount
+     * @return
+     */
+    public double calculatePriceEarningRatio(int lottoAmount) {
+        return calculateTotalPrize() / lottoAmount / LottoWinCalculator.LOTTO_PRICE;
+    }
+
+    /**
+     * 총 상금을 계산합니다.
+     * @return
+     */
+    private long calculateTotalPrize() {
+        return Arrays.stream(LottoWinPrize.values())
+                .mapToLong(lottoWinPrize -> lottoWinPrize.getPrize() * this.getCount(lottoWinPrize))
+                .sum();
     }
 }
