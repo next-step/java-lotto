@@ -13,13 +13,11 @@ public class LottoGame {
 
   private final List<UserLotto> userLottoList;
   private final int amount;
-  private final int count;
   private final WinningLotto winningLotto;
   private final Number bonusNo;
 
-  public LottoGame(int amount, int count, List<List<Integer>> userLottoList, String winningLotto, String bonusNo) {
+  public LottoGame(int amount, List<List<Integer>> userLottoList, String winningLotto, String bonusNo) {
     this.amount = amount;
-    this.count = count;
     this.winningLotto = new WinningLotto(winningLotto);
     this.userLottoList = initUserLottoList(userLottoList);
     this.bonusNo = new Number(bonusNo);

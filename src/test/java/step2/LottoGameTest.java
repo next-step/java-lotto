@@ -14,7 +14,7 @@ public class LottoGameTest {
   @Test
   void constructorTest() {
     List<List<Integer>> userLottoList = Collections.singletonList(Arrays.asList(1, 2, 3, 4, 5, 6));
-    LottoGame game = new LottoGame(1000, 1, userLottoList, "1,2,3,4,5,6", "7");
+    LottoGame game = new LottoGame(1000, userLottoList, "1,2,3,4,5,6", "7");
     int i = 1;
     for(Number number : game.getUserLottoList().get(0).getNumbers()) {
       assertThat(number.get()).isEqualTo(i++);

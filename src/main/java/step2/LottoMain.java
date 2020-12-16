@@ -12,21 +12,24 @@ public class LottoMain {
   private static final int LOTTO_PRICE = 1000;
 
   public static void main(String[] args) {
-    // 구매 금액 입력 및 구매 가능한 장수 노출
-    int lottoPrice = Integer.parseInt(InputView.getLottoPrice());
-    int lottoCount = getLottoCount(lottoPrice);
-    List<List<Integer>> userLottoList = LottoGenerator.generateList(lottoCount);
-    OutputView.printLottoCount(lottoCount);
+    // 구매 금액, 수동 구매수, 수동 구매 번호 입력
+    int lottoPrice = InputView.getLottoPrice();
+    int manualCount = InputView.getManualLottoCount();
+    List<List<Integer>> userLottoList = InputView.getManualLottoNumber(manualCount);
+
+    // 나머지 자동으로 생성
+    int autoCount = getLottoCount(lottoPrice) - manualCount;
+    userLottoList.addAll(LottoGenerator.randomGenerateList(autoCount));
 
     // 구매 금액에 의해 구매된 로또 번호 노출
-    OutputView.printLottoList(userLottoList);
+    OutputView.printLottoList(userLottoList, manualCount, autoCount);
 
     // 당첨 번호 입력
     String winningLotto = InputView.getWinningNumbers();
     String bonusNo = InputView.getBonusNumber();
 
     // 당첨 통계 노출
-    LottoGame game = new LottoGame(lottoPrice, lottoCount, userLottoList, winningLotto, bonusNo);
+    LottoGame game = new LottoGame(lottoPrice, userLottoList, winningLotto, bonusNo);
     LottoResult result = game.start();
     OutputView.printLottoMatchResult(result);
   }

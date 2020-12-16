@@ -13,12 +13,10 @@ public class OutputView {
   private static final String DASH_STR = "---------";
   private static final String WINNING_MATCH_COUNT_STR = "%s (%d원)- %d개";
   private static final String WINNING_EARNING_RATE_STR = "총 수익률은 %,.2f입니다.";
+  private static final String AUTO_MANUAL_LOTTO_COUNT_STR = "수동으로 %d장, 자동으로 %d개를 구매했습니다";
 
-  public static void printLottoCount(int count) {
-    System.out.println(String.format(BUYING_AMOUNT_STR, count));
-  }
-
-  public static void printLottoList(List<List<Integer>> userLottoList) {
+  public static void printLottoList(List<List<Integer>> userLottoList, int manualCount, int autoCount) {
+    System.out.println(String.format(AUTO_MANUAL_LOTTO_COUNT_STR, manualCount, autoCount));
     for (List<Integer> lotto : userLottoList) {
       System.out.println(lotto.toString());
     }
