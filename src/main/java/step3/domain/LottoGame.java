@@ -1,5 +1,7 @@
 package step3.domain;
 
+import step3.domain.generator.LottoAutoGenerator;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +9,11 @@ import java.util.List;
 public class LottoGame {
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
 
-    private LottoNumberGenerator lottoNumberGenerator;
+    private LottoAutoGenerator lottoAutoGenerator;
     private Lottos lottos;
 
-    public LottoGame(BigDecimal amount, LottoNumberGenerator generator) {
-        lottoNumberGenerator = generator;
+    public LottoGame(BigDecimal amount, LottoAutoGenerator generator) {
+        lottoAutoGenerator = generator;
         lottos = buyLottoNumbers(amount);
     }
 
@@ -42,6 +44,6 @@ public class LottoGame {
     }
 
     Lotto buyLottoNumber() {
-        return lottoNumberGenerator.generate();
+        return lottoAutoGenerator.generate();
     }
 }

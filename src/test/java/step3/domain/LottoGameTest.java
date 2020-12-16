@@ -7,30 +7,31 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import step3.domain.generator.LottoAutoGenerator;
+import step3.domain.generator.LottoManualGenerator;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static step3.domain.LottoGeneratorTest.assertionLottoNumberTest;
 import static step3.domain.Rank.*;
-import static step3.domain.factory.LottoFactory.produceLotto;
+import static step3.domain.generator.LottoAutoGeneratorTest.assertionLottoNumberTest;
 
 class LottoGameTest {
 
     private LottoGame lottoGame;
-    private LottoNumberGenerator mockLottoNumberGenerator;
+    private LottoAutoGenerator mockLottoAutoGenerator;
 
     @BeforeEach
     void setUp() {
-        mockLottoNumberGenerator = mock(LottoNumberGenerator.class);
+        mockLottoAutoGenerator = mock(LottoAutoGenerator.class);
     }
 
     @Test
     @DisplayName("로또 1장을 구매하였을 때 로또 번호 조건에 맞는지 기능 테스트 (로또는 6개의 숫자 && 각 숫자는 0~45이다)")
     void buyLottoNumber() {
-        lottoGame = new LottoGame(BigDecimal.valueOf(1000), new LottoNumberGenerator());
+        lottoGame = new LottoGame(BigDecimal.valueOf(1000), new LottoAutoGenerator());
         assertionLottoNumberTest(lottoGame.buyLottoNumber());
     }
 
@@ -38,8 +39,8 @@ class LottoGameTest {
     @MethodSource("generateLottoGameData")
     @DisplayName("로또 1장(1~6)을 구매했을 때 당첨번호 및 보너스번호와 비교하여 랭킹을 가져오는 기능 테스트")
     void winningResult(String input, int bonusNumber, Rank rank) {
-        when(mockLottoNumberGenerator.generate()).thenReturn(produceLotto("1,2,3,4,5,6"));
-        lottoGame = new LottoGame(BigDecimal.valueOf(1000), mockLottoNumberGenerator);
+        when(mockLottoAutoGenerator.generate()).thenReturn(new LottoManualGenerator().generate("1,2,3,4,5,6"));
+        lottoGame = new LottoGame(BigDecimal.valueOf(1000), mockLottoAutoGenerator);
         Assertions.assertTrue(lottoGame.lottoResultMap(input, bonusNumber).winningResult().containsKey(rank));
     }
 
