@@ -32,16 +32,20 @@ class LottoResultTest {
     void setLottoTicket() {
         lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
         lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45")));
+        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7")));
         lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
         lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45")));
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH"})
+    @CsvSource(value = {"FIRST", "SECOND", "THIRD", "FORTH", "FIFTH"})
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
         // given
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = new WinningLotto.Builder()
+                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .bonusBall(7)
+                .build();
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();
@@ -55,13 +59,16 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
         // given
-        WinningLotto winningLotto = WinningLotto.ofLottoNumbers(lottoMachine.createManualLottoNumbers(winningLottoNumbers));
+        WinningLotto winningLotto = new WinningLotto.Builder()
+                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .bonusBall(7)
+                .build();
 
         // when
         LottoResult lottoResult = LottoResult.getInstance();
         lottoResult.analyzeLottoRank(lottoTickets, winningLotto);
 
         // then
-        assertThat(lottoResult.calculatePrizeRate(new LottoMoney(5000))).isEqualTo(BigDecimal.valueOf(400311.00).setScale(2, RoundingMode.FLOOR));
+        assertThat(lottoResult.calculatePrizeRate(new LottoMoney(5000))).isEqualTo(BigDecimal.valueOf(406311.00).setScale(2, RoundingMode.FLOOR));
     }
 }

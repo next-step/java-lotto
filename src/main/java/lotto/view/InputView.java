@@ -8,9 +8,10 @@ import java.util.Scanner;
 public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static final String INPUT_LOTTO_BUY_MONEY_MESSAGE = "LOTTO 구입 금액을 입력해주세요.";
-    public static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 LOTTO 번호를 입력해주세요.";
-    public static final String INVALID_INPUT_ERROR = "문자가 입력되었습니다. 숫자만 입력해주세요.";
+    private static final String INPUT_LOTTO_BUY_MONEY_MESSAGE = "LOTTO 구입 금액을 입력해주세요.";
+    private static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 LOTTO 번호를 입력해주세요.";
+    private static final String INVALID_INPUT_ERROR = "문자가 입력되었습니다. 숫자만 입력해주세요.";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
     }
@@ -43,5 +44,9 @@ public class InputView {
         return number;
     }
 
+    public static int inputBonusBall() {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        return inputNumber();
+    }
 
 }
