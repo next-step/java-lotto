@@ -33,10 +33,6 @@ public class Lotto {
         return lottoMatchStatus;
     }
 
-    public void setLottoMatchStatus(LottoMatchStatus lottoMatchStatus) {
-        this.lottoMatchStatus = lottoMatchStatus;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
