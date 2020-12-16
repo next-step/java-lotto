@@ -11,7 +11,8 @@ public class LottoNumber {
 
 	public static final int MINIMUM_OF_LOTTO_NUMBER = 1;
 	public static final int MAXIMUM_OF_LOTTO_NUMBER = 46;
-	private static final String OUT_OF_LOTTO_NUMBER_BOUNDARY_MESSAGE = "로또 숫자의 범위는 " + MINIMUM_OF_LOTTO_NUMBER + "부터 " + MAXIMUM_OF_LOTTO_NUMBER + "까지 입니다.";
+	private static final String OUT_OF_LOTTO_NUMBER_BOUNDARY_MESSAGE =
+		"로또 숫자의 범위는 " + MINIMUM_OF_LOTTO_NUMBER + "부터 " + MAXIMUM_OF_LOTTO_NUMBER + "까지 입니다.";
 
 	private final int number;
 

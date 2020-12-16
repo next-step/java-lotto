@@ -19,7 +19,7 @@ public class WinningStatistics {
 	private Map<Prize, Integer> prizeResult = new HashMap<>();
 
 	public WinningStatistics(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
-		prizeResult = awards(userLottoTickets,winnerLottoTicket);
+		prizeResult = awards(userLottoTickets, winnerLottoTicket);
 	}
 
 	private Map<Prize, Integer> awards(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
@@ -33,7 +33,7 @@ public class WinningStatistics {
 	}
 
 	private void fillEmptyResult() {
-		for(Prize prize : Prize.values()){
+		for (Prize prize : Prize.values()) {
 			putEmptyResult(prize);
 		}
 	}
@@ -48,7 +48,7 @@ public class WinningStatistics {
 	}
 
 	private void putEmptyResult(Prize prize) {
-		if(!prizeResult.containsKey(prize)){
+		if (!prizeResult.containsKey(prize)) {
 			prizeResult.put(prize, 0);
 		}
 	}
@@ -64,8 +64,7 @@ public class WinningStatistics {
 		return parseWinningSummaryFormat(revenue / buyPrice);
 	}
 
-	public static BigDecimal parseWinningSummaryFormat(Double target){
-		System.out.println("target : " + target);
-		return BigDecimal.valueOf(Double.parseDouble(String.format(DOUBLE_FORMAT,target)));
+	public static BigDecimal parseWinningSummaryFormat(Double target) {
+		return BigDecimal.valueOf(Double.parseDouble(String.format(DOUBLE_FORMAT, target)));
 	}
 }

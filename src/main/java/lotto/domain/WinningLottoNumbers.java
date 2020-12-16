@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
  **/
 public class WinningLottoNumbers {
 
-	private static final String REGEX = ",";
-	private static final int LOTTO_TICKET_WINNING_COUNT = 6;
+	private static final String SPLIT_REGEX = ",";
 
 	private LottoTicket lottoTicket;
 
@@ -22,7 +21,7 @@ public class WinningLottoNumbers {
 
 	private LottoTicket convertUserInput(String arg) {
 		validateUserInput(arg);
-		String[] splits = split(arg);
+		String[] splits = arg.split(SPLIT_REGEX);
 		List<LottoNumber> convertedLottoNumbers = Arrays.stream(splits)
 			.map(str -> parser(str))
 			.collect(Collectors.toList());
@@ -42,10 +41,6 @@ public class WinningLottoNumbers {
 		} catch (NumberFormatException e) {
 			throw new RuntimeException("입력된 당첨번호가 올바르지 않습니다.");
 		}
-	}
-
-	private String[] split(String arg) {
-		return arg.split(REGEX);
 	}
 
 	public LottoTicket getLottoTicket() {

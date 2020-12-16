@@ -15,9 +15,10 @@ import java.util.stream.IntStream;
 public class LottoTickets {
 
 	private static final int LOTTO_TICKET_PRICE = 1000;
-	private static final List<Integer> numberBoundary = IntStream.rangeClosed(LottoNumber.MINIMUM_OF_LOTTO_NUMBER, LottoNumber.MAXIMUM_OF_LOTTO_NUMBER)
-																	.boxed()
-																	.collect(Collectors.toList());
+	private static final List<Integer> numberBoundary = IntStream.rangeClosed(LottoNumber.MINIMUM_OF_LOTTO_NUMBER,
+		LottoNumber.MAXIMUM_OF_LOTTO_NUMBER)
+		.boxed()
+		.collect(Collectors.toList());
 
 	private List<LottoTicket> lottoTickets = new ArrayList<>();
 

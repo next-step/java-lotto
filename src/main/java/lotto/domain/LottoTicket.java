@@ -2,10 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author : byungkyu
@@ -56,9 +53,7 @@ public class LottoTicket {
 			.count();
 	}
 
-	public static LottoTicket getRandomTicket(){
-
-
+	public static LottoTicket getRandomTicket() {
 
 		return new LottoTicket(Arrays.asList(new LottoNumber[1]));
 	}

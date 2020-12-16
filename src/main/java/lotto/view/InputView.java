@@ -1,17 +1,12 @@
 package lotto.view;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.Prize;
 import lotto.domain.WinningLottoNumbers;
-import lotto.domain.WinningStatistics;
 
 /**
  * @author : byungkyu
