@@ -9,10 +9,10 @@ import java.util.Arrays;
  **/
 public enum Prize {
 
-	SIX(6, 2000000000),
-	FIVE(5, 1500000),
-	FOUR(4, 50000),
-	THREE(3, 5000),
+	SIX(6, 2_000_000_000),
+	FIVE(5, 1_500_000),
+	FOUR(4, 50_000),
+	THREE(3, 5_000),
 	NONE(0, 0);
 
 	private int matchCount;
