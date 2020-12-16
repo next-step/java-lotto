@@ -18,6 +18,9 @@ public class LottoGame {
 	}
 
 	public BigDecimal getProfitRatio() {
+		if(soldLottos.size() == 0) {
+			return BigDecimal.ONE;
+		}
 		BigDecimal profit = BigDecimal.valueOf(getResultAsCountingMap()
 			.entrySet()
 			.stream()
