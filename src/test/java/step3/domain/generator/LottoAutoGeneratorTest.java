@@ -27,6 +27,13 @@ public class LottoAutoGeneratorTest {
 
     }
 
+    @Test
+    @DisplayName("가변인수가 0개가 아니면 IllegalArgumentException 발생")
+    void generate_exception() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> lottoGenerator.generate("1,2,3,4,5,6"));
+    }
+
     public static void assertionLottoNumberTest(Lotto lotto) {
         List<LottoNumber> lottoNumbers = lotto.getNumbers();
         Assertions.assertEquals(lottoNumbers.size(), LOTTO_COUNT);

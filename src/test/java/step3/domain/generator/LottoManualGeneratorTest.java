@@ -35,7 +35,7 @@ class LottoManualGeneratorTest {
     }
 
     @Test
-    @DisplayName("가변인수가 들어오지 않으면 IllegalArgumentException 발생")
+    @DisplayName("가변인수가 1개가 아니면 IllegalArgumentException 발생")
     void generate_exception() {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> lottoGenerator.generate());

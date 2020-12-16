@@ -7,5 +7,6 @@ public interface LottoGenerator {
     int START_NUMBER = 1;
     int END_NUMBER = 45;
 
-    Lotto generate(String... numbers);
+    Lotto generate(String... varargs);
+    boolean isNotMatchArgs(String... varargs);
 }

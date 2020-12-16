@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoAutoGenerator implements LottoGenerator {
+    private final int AUTO_VARARGS_SIZE = 0;
 
     private List<LottoNumber> lottoNumbers;
 
@@ -19,7 +20,9 @@ public class LottoAutoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Lotto generate(String... numbers) {
+    public Lotto generate(String... varargs) {
+        if(isNotMatchArgs(varargs)) throw new IllegalArgumentException();
+
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream()
@@ -28,4 +31,8 @@ public class LottoAutoGenerator implements LottoGenerator {
                         .collect(Collectors.toList()));
     }
 
+    @Override
+    public boolean isNotMatchArgs(String... varargs) {
+        return varargs.length != AUTO_VARARGS_SIZE;
+    }
 }
