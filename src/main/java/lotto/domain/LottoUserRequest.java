@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class LottoUserRequest {
-    private final int ticketCounts;
+    private final int ticketCount;
     private Optional<List<String>> manualNumbers;
 
     public LottoUserRequest(int money) {
@@ -13,7 +13,7 @@ public class LottoUserRequest {
     }
 
     public LottoUserRequest(int money, String[] manualTickets) {
-        this.ticketCounts = toTicketCount(money);
+        this.ticketCount = toTicketCount(money);
         this.manualNumbers = toManualTickets(manualTickets);
     }
 
@@ -42,12 +42,32 @@ public class LottoUserRequest {
             return;
         }
 
-        if (this.ticketCounts < manualTickets.length) {
+        if (this.ticketCount < manualTickets.length) {
             throw new IllegalArgumentException("구입가능한 로또 수를 초과했습니다.");
         }
     }
 
-    public boolean includeManualNumbers() {
+    public boolean hasManualIssueTarget() {
         return manualNumbers.isPresent();
+    }
+
+    public boolean hasAutoIssueTarget() {
+        if (!hasManualIssueTarget()) {
+            return true;
+        }
+
+        return this.ticketCount > manualNumbers.get().size();
+    }
+
+    public Optional<List<String>> getManualNumbers() {
+        return manualNumbers;
+    }
+
+    public int getAutoTicketCount() {
+        if (!hasManualIssueTarget()) {
+            return this.ticketCount;
+        }
+
+        return this.ticketCount - manualNumbers.get().size();
     }
 }

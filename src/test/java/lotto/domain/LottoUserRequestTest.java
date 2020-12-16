@@ -15,7 +15,7 @@ public class LottoUserRequestTest {
         LottoUserRequest lottoUserRequest = new LottoUserRequest(money);
 
         //when, then
-        assertThat(lottoUserRequest.includeManualNumbers()).isFalse();
+        assertThat(lottoUserRequest.hasManualIssueTarget()).isFalse();
     }
 
     @DisplayName("구매자 요청 객체 생성 - 일부 수동 생성 case")
@@ -28,6 +28,7 @@ public class LottoUserRequestTest {
         LottoUserRequest lottoUserRequest = new LottoUserRequest(money, manualTicketNumbers);
 
         //when, then
-        assertThat(lottoUserRequest.includeManualNumbers()).isTrue();
+        assertThat(lottoUserRequest.hasManualIssueTarget()).isTrue();
+        assertThat(lottoUserRequest.hasAutoIssueTarget()).isTrue();
     }
 }
