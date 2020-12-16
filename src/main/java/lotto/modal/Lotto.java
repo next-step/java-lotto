@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final Random randomGenerator = new Random();
+	private static final int LOTTO_REQUIRED_COUNT = 6;
 	private final List<LottoNumber> lotto;
 
 	public Lotto() {
@@ -28,21 +29,45 @@ public class Lotto {
 		return this.lotto;
 	}
 
-	private static List<LottoNumber> generateRandomLotto() {
+	public static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
 
-		Set<Integer> tempLotto = new HashSet<>();
+		validationLottoNumberList(inputStr);
 
-		while (tempLotto.size() != 6) {
+		return inputStr.stream()
+			.map(s -> new LottoNumber(Integer.parseInt(s)))
+			.collect(Collectors.toList());
+	}
 
-			tempLotto.add(generateRandomLottoNumber());
+	private static void validationLottoNumberList(List<String> inputStr) {
+
+		if (inputStr.size() != LOTTO_REQUIRED_COUNT) {
+			throw new IllegalArgumentException();
 		}
 
-		List<Integer> resultLotto = new ArrayList<>(tempLotto);
+		if (new HashSet<>(inputStr).size() != LOTTO_REQUIRED_COUNT) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private static List<LottoNumber> generateRandomLotto() {
+
+		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
 		Collections.sort(resultLotto);
 
 		return resultLotto.stream()
 			.map(LottoNumber::new)
 			.collect(Collectors.toList());
+	}
+
+	private static Set<Integer> getRandomSet() {
+		Set<Integer> tempLotto = new HashSet<>();
+
+		while (tempLotto.size() != LOTTO_REQUIRED_COUNT) {
+
+			tempLotto.add(generateRandomLottoNumber());
+		}
+
+		return tempLotto;
 	}
 
 	private static int generateRandomLottoNumber() {
