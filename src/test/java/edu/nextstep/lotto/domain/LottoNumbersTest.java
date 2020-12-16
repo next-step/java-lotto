@@ -33,6 +33,15 @@ class LottoNumbersTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("생성자: 로또 번호가 중복되면 Exception 발생.")
+	@ParameterizedTest
+	@ValueSource(strings = {"1,1,3,4,5,6", "2,3,4,5,6,6"})
+	public void generate_shouldExceptionBecauseDuplicate(String numbers) {
+		List<Integer> intNumbers = splitToIntList(numbers);
+		assertThatThrownBy(() -> new LottoNumbers(intNumbers))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
 	@DisplayName("getRank: Lotto객체가 가진 번호와 당첨번호를 비교해 1,3,4,5등이 되면 LottoRank ENUM을 리턴함. (Optional임)")
 	@ParameterizedTest
 	@CsvSource(value = {
