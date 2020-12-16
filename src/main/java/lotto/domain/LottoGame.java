@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumber;
-
 public class LottoGame {
 
     public LottoTickets generateLottoTickets(int price, LottoMachine lottoMachine) {
