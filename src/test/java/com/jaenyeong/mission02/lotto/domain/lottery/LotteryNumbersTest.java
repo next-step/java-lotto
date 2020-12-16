@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LotteryNumbersTest {
 
     @Test
-    @DisplayName("LottoNumbers 객체 생성 테스트")
+    @DisplayName("LottoNumbers 객체 자동 생성 테스트")
     void createLotteryNumbersAutomatically() {
         final LotteryNumbers lotteryNumbers = LotteryNumbers.ofAuto();
 
@@ -31,8 +31,7 @@ class LotteryNumbersTest {
 
         assertEquals(lottery.size(), max);
 
-        lottery.forEach((lotteryNumber) ->
-            assertThat(lotteryNumber).isBetween(start, end));
+        lottery.forEach((lotteryNumber) -> assertThat(lotteryNumber).isBetween(start, end));
     }
 
     @ParameterizedTest

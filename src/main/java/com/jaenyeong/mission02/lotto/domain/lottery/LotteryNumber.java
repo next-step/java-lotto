@@ -1,55 +1,41 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LotteryNumber {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
+    private static final List<LotteryNumber> LOTTERY_NUMBER_POOL = generateLotteryNumbers();
+    private static final int START_OF_RANGE = 0;
     private static final int RANDOM_VALUE = 0;
-    private static final int EXIST = 0;
-    private static final int EMPTY = 0;
-    private static final String ERR_TEXT_THERE_IS_NOT_NUMBER = "[error] There is no number to choose from list.";
     private static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
+
     private final int lotteryNumber;
 
     private LotteryNumber(final int lotteryNumber) {
         this.lotteryNumber = lotteryNumber;
     }
 
-    public static LotteryNumber ofAuto(final List<Integer> numbersThatAlreadyExists) {
-        final List<Integer> lotteryNumberList = getLotteryNumberList();
-
-        if (isValidNumbers(numbersThatAlreadyExists)) {
-            lotteryNumberList.removeAll(numbersThatAlreadyExists);
-        }
-
-        if (isEmpty(lotteryNumberList)) {
-            throw new IllegalArgumentException(ERR_TEXT_THERE_IS_NOT_NUMBER);
-        }
-
-        Collections.shuffle(lotteryNumberList);
-
-        return new LotteryNumber(lotteryNumberList.get(RANDOM_VALUE));
+    private static List<LotteryNumber> generateLotteryNumbers() {
+        return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+            .mapToObj(LotteryNumber::new)
+            .collect(toList());
     }
 
-    private static List<Integer> getLotteryNumberList() {
-        final List<Integer> numbers = new ArrayList<>();
-        for (int i = START_NUMBER; i <= END_NUMBER; i++) {
-            numbers.add(i);
-        }
-
-        return numbers;
+    public static LotteryNumber ofAuto() {
+        Collections.shuffle(LOTTERY_NUMBER_POOL);
+        return LOTTERY_NUMBER_POOL.get(RANDOM_VALUE);
     }
 
-    private static boolean isValidNumbers(final List<Integer> numbersThatAlreadyExists) {
-        return (numbersThatAlreadyExists != null) && (numbersThatAlreadyExists.size() > EXIST);
-    }
+    public static Set<LotteryNumber> ofAutoNumbers(final int endOfRange) {
+        Collections.shuffle(LOTTERY_NUMBER_POOL);
+        final Set<LotteryNumber> lotteryNumbers = new TreeSet<>(Comparator.comparingInt(LotteryNumber::getLotteryNumber));
+        lotteryNumbers.addAll(LOTTERY_NUMBER_POOL.subList(START_OF_RANGE, endOfRange));
 
-    private static boolean isEmpty(final List<Integer> numbersIntegers) {
-        return numbersIntegers.size() == EMPTY;
+        return lotteryNumbers;
     }
 
     public static LotteryNumber ofManual(final int givenNumber) {

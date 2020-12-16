@@ -13,15 +13,7 @@ public class LotteryNumbers {
     }
 
     public static LotteryNumbers ofAuto() {
-        final List<Integer> existNumbers = new ArrayList<>();
-        final Set<LotteryNumber> lotteryNumbers = new TreeSet<>(Comparator.comparingInt(LotteryNumber::getLotteryNumber));
-
-        while (existNumbers.size() < MAX_NUMBERS_OF_LOTTERY) {
-            final LotteryNumber lotteryNumber = LotteryNumber.ofAuto(existNumbers);
-
-            existNumbers.add(lotteryNumber.getLotteryNumber());
-            lotteryNumbers.add(lotteryNumber);
-        }
+        final Set<LotteryNumber> lotteryNumbers = LotteryNumber.ofAutoNumbers(MAX_NUMBERS_OF_LOTTERY);
 
         return new LotteryNumbers(lotteryNumbers);
     }
