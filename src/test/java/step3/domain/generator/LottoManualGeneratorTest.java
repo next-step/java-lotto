@@ -33,4 +33,11 @@ class LottoManualGeneratorTest {
 
         Assertions.assertEquals(lottoGenerator.generate("1,2,3,4,5,6"),new Lotto(lotto));
     }
+
+    @Test
+    @DisplayName("가변인수가 들어오지 않으면 IllegalArgumentException 발생")
+    void generate_exception() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> lottoGenerator.generate());
+    }
 }
