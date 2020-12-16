@@ -9,7 +9,7 @@ public class LotteryWinning {
     private LotteryResult lotteryResult;
 
     public LotteryWinning(String winningNumbers, String bonusNumber) {
-        this.winningTicket = new LotteryTicket(winningNumbers);
+        this.winningTicket = LotteryTicket.of(winningNumbers);
         this.bonusNumber = new LotteryNumber(Integer.parseInt(bonusNumber));
         lotteryResult = new LotteryResult();
     }

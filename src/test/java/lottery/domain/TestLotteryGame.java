@@ -36,7 +36,7 @@ public class TestLotteryGame {
 
         dummyLotteryGame = new LotteryGame(1000, 6);
 
-        dummyLotteryTicket = new LotteryTicket(Arrays.asList(
+        dummyLotteryTicket = LotteryTicket.of(Arrays.asList(
                 new LotteryNumber(1),
                 new LotteryNumber(2),
                 new LotteryNumber(3),
@@ -93,7 +93,7 @@ public class TestLotteryGame {
     void buyOneLotteryTicket() {
         assertThat(dummyLotteryGame.buyLotteryTickets(1, autoBuyBehavior))
                 .isEqualTo(new ArrayList<>(
-                        Arrays.asList(new LotteryTicket(new int[]{5, 1, 4, 3, 2, 6}))
+                        Arrays.asList(LotteryTicket.of("5,1,4,3,2,6"))
                 ));
     }
 }
