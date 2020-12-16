@@ -1,10 +1,11 @@
 package step1.domain;
 
-public class CommaColonInputSplitter implements InputSplitter {
+public class CommaColonInputSplitter extends NumberInputSplitter {
 
 	@Override
-	public int[] split(final String input) {
-		return new int[0];
+	protected String[] doSplit(final String input) {
+		final String COMMA_OR_COLON_SPLITTER = "[,:]";
+		return input.split(COMMA_OR_COLON_SPLITTER);
 	}
 
 }
