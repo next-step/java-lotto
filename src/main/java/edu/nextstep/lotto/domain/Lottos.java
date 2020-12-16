@@ -21,4 +21,8 @@ public class Lottos {
 			.map(Optional::get)
 			.collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
 	}
+
+	public int size() {
+		return lottos.size();
+	}
 }
