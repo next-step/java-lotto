@@ -1,20 +1,19 @@
 package step4.domain;
 
-import step4.domain.generator.LottoAutoGenerator;
+import step4.domain.generator.LottoGenerator;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LottoGame {
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
 
-    private LottoAutoGenerator lottoAutoGenerator;
+    private LottoCount lottoCount;
     private Lottos lottos;
 
-    public LottoGame(BigDecimal amount, LottoAutoGenerator generator) {
-        lottoAutoGenerator = generator;
-        lottos = buyLottoNumbers(amount);
+    public LottoGame(BigDecimal amount, int manualCount) {
+        lottoCount = new LottoCount(count(amount), manualCount);
+        lottos = new Lottos(new ArrayList<>());
     }
 
     public LottoResult lottoResultMap(String lastWinningNumber, int bonusNumber) {
@@ -25,25 +24,21 @@ public class LottoGame {
         return lottos.winningLottoResult();
     }
 
-    public Lottos getLottoNumbers() {
+    public void buyLotto(LottoGenerator lottoGenerator, String... varargs) {
+        this.lottos.getLottos().add(lottoGenerator.generate(varargs));
+    }
+
+    public LottoCount getLottoCount() {
+        return lottoCount;
+    }
+
+    public Lottos getLottos() {
         return lottos;
     }
 
-    private Lottos buyLottoNumbers(BigDecimal amount) {
-        List<Lotto> numbers = new ArrayList<>();
-
-        for (int i=0; i<lottoCount(amount); i++) {
-            numbers.add(buyLottoNumber());
-        }
-
-        return new Lottos(numbers);
-    }
-
-    private int lottoCount(BigDecimal amount) {
+    private int count(BigDecimal amount) {
         return amount.divide(LOTTO_PRICE).intValue();
     }
 
-    Lotto buyLottoNumber() {
-        return lottoAutoGenerator.generate();
-    }
+
 }

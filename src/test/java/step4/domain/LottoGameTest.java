@@ -23,26 +23,13 @@ import static step4.domain.generator.LottoAutoGeneratorTest.assertionLottoNumber
 class LottoGameTest {
 
     private LottoGame lottoGame;
-    private LottoAutoGenerator mockLottoAutoGenerator;
-
-    @BeforeEach
-    void setUp() {
-        mockLottoAutoGenerator = mock(LottoAutoGenerator.class);
-    }
-
-    @Test
-    @DisplayName("로또 1장을 구매하였을 때 로또 번호 조건에 맞는지 기능 테스트 (로또는 6개의 숫자 && 각 숫자는 0~45이다)")
-    void buyLottoNumber() {
-        lottoGame = new LottoGame(BigDecimal.valueOf(1000), new LottoAutoGenerator());
-        assertionLottoNumberTest(lottoGame.buyLottoNumber());
-    }
 
     @ParameterizedTest
     @MethodSource("generateLottoGameData")
     @DisplayName("로또 1장(1~6)을 구매했을 때 당첨번호 및 보너스번호와 비교하여 랭킹을 가져오는 기능 테스트")
     void winningResult(String input, int bonusNumber, Rank rank) {
-        when(mockLottoAutoGenerator.generate()).thenReturn(new LottoManualGenerator().generate("1,2,3,4,5,6"));
-        lottoGame = new LottoGame(BigDecimal.valueOf(1000), mockLottoAutoGenerator);
+        lottoGame = new LottoGame(BigDecimal.valueOf(1000), 1);
+        lottoGame.buyLotto(new LottoManualGenerator(), "1,2,3,4,5,6");
         Assertions.assertTrue(lottoGame.lottoResultMap(input, bonusNumber).winningResult().containsKey(rank));
     }
 
