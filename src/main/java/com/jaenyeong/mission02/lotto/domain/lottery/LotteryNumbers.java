@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class LotteryNumbers {
     private static final int MAX_NUMBERS_OF_LOTTERY = 6;
-    public static final String ERR_TEXT_INVALID_NUMBERS = "[error] This number list is not valid.";
+    private static final String ERR_TEXT_INVALID_NUMBERS = "[error] This number list is not valid.";
     private final Set<LotteryNumber> lotteryNumbers;
 
     private LotteryNumbers(final Set<LotteryNumber> lotteryNumbers) {
