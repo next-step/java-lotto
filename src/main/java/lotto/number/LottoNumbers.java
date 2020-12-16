@@ -1,8 +1,6 @@
 package lotto.number;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -13,9 +11,15 @@ public class LottoNumbers {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoNumbers(List<LottoNumber> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
+	public LottoNumbers(List<LottoNumber> lottoNumberList) {
+		this.lottoNumbers = toSortedUnmodifiableList(lottoNumberList);
 		validateNumbers(this.lottoNumbers);
+	}
+
+	private static List<LottoNumber> toSortedUnmodifiableList(List<LottoNumber> lottoNumberList) {
+		List<LottoNumber> sortList = new ArrayList<>(lottoNumberList);
+		Collections.sort(sortList);
+		return Collections.unmodifiableList(sortList);
 	}
 
 	private static void validateNumbers(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
@@ -35,17 +39,13 @@ public class LottoNumbers {
 	}
 
 	public List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
-		return this.getLottoNumbers().stream()
+		return this.lottoNumbers.stream()
 				.filter(number -> hasEqualNumber(otherLottoNumbers, number))
 				.collect(Collectors.toList());
 	}
 
 	private boolean hasEqualNumber(LottoNumbers lottoNumbers, LottoNumber lottoNumber) {
-		return lottoNumbers.getLottoNumbers().stream()
+		return lottoNumbers.lottoNumbers.stream()
 				.anyMatch(streamNumber -> streamNumber.equals(lottoNumber));
-	}
-
-	private List<LottoNumber> getLottoNumbers() {
-		return this.lottoNumbers;
 	}
 }
