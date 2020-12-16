@@ -6,9 +6,9 @@ import lotto.util.StringValid;
 
 public class Money {
 
-	public static final int LOTTO_MINIMUM_MONEY = 1000;
+	public static final int LOTTO_PRICE_MONEY = 1000;
 
-	private int userMoney;
+	private final int userMoney;
 
 	private Money() {
 		throw new AssertionError();
@@ -30,9 +30,13 @@ public class Money {
 			throw new IllegalArgumentException("돈(금액) 형식을 잘못 입력하였습니다. 숫자만 입력해 주세요.");
 		}
 
-		if (Integer.parseInt(userInputMoney) < LOTTO_MINIMUM_MONEY) {
-			throw new IllegalArgumentException("로또 구매 최고 금액은 " + LOTTO_MINIMUM_MONEY + "원 입니다.");
+		if (Integer.parseInt(userInputMoney) < LOTTO_PRICE_MONEY) {
+			throw new IllegalArgumentException("로또 구매 최소 금액은 " + LOTTO_PRICE_MONEY + "원 입니다.");
 		}
+	}
+
+	public int getRepeatCount() {
+		return this.userMoney / LOTTO_PRICE_MONEY;
 	}
 
 	@Override

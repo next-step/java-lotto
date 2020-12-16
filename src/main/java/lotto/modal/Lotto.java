@@ -60,6 +60,7 @@ public class Lotto {
 	}
 
 	private static Set<Integer> getRandomSet() {
+
 		Set<Integer> tempLotto = new HashSet<>();
 
 		while (tempLotto.size() != LOTTO_REQUIRED_COUNT) {
@@ -73,21 +74,6 @@ public class Lotto {
 	private static int generateRandomLottoNumber() {
 
 		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Lotto lotto1 = (Lotto)o;
-		return Objects.equals(lotto, lotto1.lotto);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(lotto);
 	}
 
 	public int getMatchCount(Lotto compareLotto) {
@@ -111,6 +97,28 @@ public class Lotto {
 		if (this.lotto.contains(number)) {
 			return 1;
 		}
+
 		return 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto1 = (Lotto)o;
+		return Objects.equals(lotto, lotto1.lotto);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(lotto);
+	}
+
+	@Override
+	public String toString() {
+		return lotto.toString();
 	}
 }

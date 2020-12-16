@@ -7,7 +7,7 @@ public class LottoNumber {
 	public static final int LOTTO_NUMBER_BOUND_MAX = 45;
 	public static final int LOTTO_NUMBER_BOUND_MIN = 1;
 
-	private final int number;
+	private final Integer number;
 
 	public LottoNumber(int lottoNumber) {
 
@@ -23,24 +23,22 @@ public class LottoNumber {
 	}
 
 	@Override
-	public String toString() {
-		return "LottoNumber{" +
-			"number=" + number +
-			'}';
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoNumber that = (LottoNumber)o;
-		return number == that.number;
+		return number.equals(that.number);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
+	}
+
+	@Override
+	public String toString() {
+		return number.toString();
 	}
 }
