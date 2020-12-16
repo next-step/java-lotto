@@ -7,6 +7,10 @@ public class ResultView {
 	public ResultView() {
 	}
 
+	public void printResultUI(LottoResult lottoResult) {
+		printMatchUI(lottoResult);
+		printEarningRateUI(lottoResult.getEarningsRate());
+	}
 	public void printMatchUI(LottoResult lottoResult) {
 		System.out.println(String.format("3개 일치 (%d원)- %d",lottoResult.THREE_MATCH_PRIZE_MONEY, lottoResult.getThreeMatchCount()));
 		System.out.println(String.format("4개 일치 (%d원)- %d",lottoResult.FOUR_MATCH_PRIZE_MONEY, lottoResult.getFourMatchCount()));
@@ -25,10 +29,4 @@ public class ResultView {
 			System.out.println(String.format("총 수익률은 %.2f입니다.(수익이 생겼습니다)", earningRate));
 		}
 	}
-
-	public void printResultUI(LottoResult lottoResult) {
-		printMatchUI(lottoResult);
-		printEarningRateUI(lottoResult.getEarningsRate());
-	}
-
 }
