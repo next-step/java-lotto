@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 
 public enum InputSplitterFactory {
 
-	COMMA_SPLITTER(Pattern.compile("\\d+(,\\d+)*"), new CommaInputSplitter());
+	COMMA_SPLITTER(Pattern.compile("(\\d+)(,\\d+)"), new CommaInputSplitter()),
+	COLON_SPLITTER(Pattern.compile("(\\d+)(:\\d+)"), new ColonInputSplitter());
 
 	private final Pattern pattern;
 	private final InputSplitter inputSplitter;
