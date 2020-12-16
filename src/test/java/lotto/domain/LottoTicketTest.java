@@ -19,10 +19,12 @@ import org.junit.jupiter.api.TestMethodOrder;
  **/
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LottoTicketTest {
-	LottoTicket lottoTicket;
 
-	@BeforeEach
-	void setUp() {
+	@Order(1)
+	@DisplayName("1. 로또 한 장은 6개의 숫자로 이루어져 있다.")
+	@Test
+	void lottoTicketNumberCountIsSix() {
+
 		LottoNumber lottoNumber1 = new LottoNumber(1);
 		LottoNumber lottoNumber2 = new LottoNumber(12);
 		LottoNumber lottoNumber3 = new LottoNumber(13);
@@ -38,13 +40,7 @@ public class LottoTicketTest {
 		lottoNumbers.add(lottoNumber5);
 		lottoNumbers.add(lottoNumber6);
 
-		lottoTicket = new LottoTicket(lottoNumbers);
-	}
-
-	@Order(1)
-	@DisplayName("1. 로또 한 장은 6개의 숫자로 이루어져 있다.")
-	@Test
-	void lottoTicketNumberCountIsSix() {
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		assertThat(lottoTicket.get().size()).isEqualTo(6);
 	}
 
@@ -66,7 +62,7 @@ public class LottoTicketTest {
 		lottoNumbers.add(lottoNumber5);
 
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumbers);
+			LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
 
@@ -94,7 +90,7 @@ public class LottoTicketTest {
 		lottoNumbers.add(lottoNumber7);
 
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumbers);
+			LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
 	}
@@ -119,7 +115,7 @@ public class LottoTicketTest {
 		lottoNumbers.add(lottoNumber6);
 
 		assertThatThrownBy(() -> {
-			lottoTicket = new LottoTicket(lottoNumbers);
+			LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("로또 번호는 중복될 수 없습니다.");
 	}

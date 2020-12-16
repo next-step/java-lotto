@@ -14,26 +14,22 @@ import java.util.stream.Collectors;
  **/
 public class WinningStatistics {
 
-	private LottoTickets userLottoTickets;
-	private LottoTicket winnerLottoTicket;
-	private Map<Prize, Integer> prizeResult = new HashMap<>();
-	private int revenue = 0;
 	private static final String DOUBLE_FORMAT = "%.2f";
 
+	private Map<Prize, Integer> prizeResult = new HashMap<>();
+
 	public WinningStatistics(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
-		this.userLottoTickets = userLottoTickets;
-		this.winnerLottoTicket = winnerLottoTicket;
-		awards();
+		prizeResult = awards(userLottoTickets,winnerLottoTicket);
 	}
 
-	private void awards() {
+	private Map<Prize, Integer> awards(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
 		for (LottoTicket lottoTicket : userLottoTickets.getLottoTickets()) {
 			Prize resultKey = Prize.of(winnerLottoTicket.getMatchCount(lottoTicket));
 			prizeResult.put(resultKey, prizeResult.getOrDefault(resultKey, 0) + 1);
-			revenue += resultKey.getReward();
 		}
 		fillEmptyResult();
 		prizeSort();
+		return prizeResult;
 	}
 
 	private void fillEmptyResult() {
@@ -62,11 +58,14 @@ public class WinningStatistics {
 	}
 
 	public BigDecimal getWinningSummary() {
-		Double buyPrice = Double.valueOf(userLottoTickets.getTicketCount() * LottoTickets.getLottoTicketPrice());
+		int ticketCount = prizeResult.values().stream().mapToInt(Integer::valueOf).sum();
+		int revenue = prizeResult.entrySet().stream().mapToInt(key -> key.getValue() * key.getKey().getReward()).sum();
+		Double buyPrice = Double.valueOf(ticketCount * LottoTickets.getLottoTicketPrice());
 		return parseWinningSummaryFormat(revenue / buyPrice);
 	}
 
 	public static BigDecimal parseWinningSummaryFormat(Double target){
+		System.out.println("target : " + target);
 		return BigDecimal.valueOf(Double.parseDouble(String.format(DOUBLE_FORMAT,target)));
 	}
 }
