@@ -19,7 +19,7 @@ public class Lottos {
 
     public LottoResult winningLottoResult() {
         return new LottoResult(lottos.stream()
-                .collect(groupingBy(lotto -> lotto.getCount())));
+                .collect(groupingBy(Lotto::getCount)));
     }
 
     public List<Lotto> getLottoNumber() {
