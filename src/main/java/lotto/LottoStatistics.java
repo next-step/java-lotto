@@ -37,7 +37,7 @@ class LottoStatistics {
 		return (double) income / (allCount * LottoStore.LOTTO_PRICE);
 	}
 
-	private long calculateAllCount() {
+	long calculateAllCount() {
 		return countResult.values().stream()
 				.mapToLong(value -> value)
 				.sum();
