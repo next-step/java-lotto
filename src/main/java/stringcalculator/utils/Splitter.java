@@ -1,19 +1,23 @@
 package stringcalculator.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Splitter {
     private static final String SEPARATOR = "[,:]";
-    private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_SEPARATOR = Pattern.compile("//(.)\n(.*)");
 
-    public String[] split(String text) {
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR).matcher(text);
-        if(m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+    public List<String> split(String text) {
+        Matcher match = CUSTOM_SEPARATOR.matcher(text);
+        if(match.find()) {
+            String customDelimiter = match.group(1);
+            String matchText = match.group(2);
+            return Arrays.asList(matchText.split(customDelimiter));
         }
 
-        return text.split(SEPARATOR);
+        return Arrays.asList(text.split(SEPARATOR));
     }
 }
