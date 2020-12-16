@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class WinningLotto {
 
@@ -29,16 +28,16 @@ public class WinningLotto {
         return winningLottoTicket;
     }
 
-    public static class WinningLottoBuilder {
+    public static class Builder {
         private LottoTicket lottoTicket;
         private int bonusBall;
 
-        public WinningLottoBuilder winningLottoTicket(LottoTicket lottoTicket) {
+        public Builder winningLottoTicket(LottoTicket lottoTicket) {
             this.lottoTicket = lottoTicket;
             return this;
         }
 
-        public WinningLottoBuilder bonusBall(int bonusBall) {
+        public Builder bonusBall(int bonusBall) {
             this.bonusBall = bonusBall;
             return this;
         }

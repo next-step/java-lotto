@@ -19,7 +19,7 @@ public class LottoGame {
 
         List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine();
-        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+        WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
                 .bonusBall(InputView.inputBonusBall())
                 .build();

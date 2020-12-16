@@ -42,7 +42,7 @@ class LottoResultTest {
     @DisplayName("맞은 번호 수에 따른 등수 테스트 ")
     void analyze_lotto_rank(WinningPrize rank) {
         // given
-        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+        WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
                 .bonusBall(7)
                 .build();
@@ -59,7 +59,7 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculate_prize_rate() {
         // given
-        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+        WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
                 .bonusBall(7)
                 .build();

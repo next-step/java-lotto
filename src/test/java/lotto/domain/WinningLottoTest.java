@@ -21,7 +21,7 @@ class WinningLottoTest {
     @DisplayName("당첨 로또 번호 생성 테스트")
     void winning_lotto_number_test() {
         // given & when
-        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+        WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")))
                 .bonusBall(7)
                 .build();
@@ -36,7 +36,7 @@ class WinningLottoTest {
     @DisplayName("보너스볼 중복 테스트")
     void bonus_ball_duplication_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+            WinningLotto winningLotto = new WinningLotto.Builder()
                     .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")))
                     .bonusBall(6)
                     .build();
@@ -47,7 +47,7 @@ class WinningLottoTest {
     @DisplayName("보너스볼 일치 확인 테스트")
     void bonus_ball_match_test() {
         // given & when
-        WinningLotto winningLotto = new WinningLotto.WinningLottoBuilder()
+        WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 45")))
                 .bonusBall(7)
                 .build();
