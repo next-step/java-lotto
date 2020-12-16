@@ -30,4 +30,8 @@ public enum LottoTier {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public Integer calculatePrize(Integer count) {
+        return count * prize;
+    }
 }

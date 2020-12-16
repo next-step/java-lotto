@@ -48,11 +48,14 @@
   * 로또를 생성하는 유틸성 객체  
   * 로또 하나를 생성하는 책임을 갖는다.
   * Lottomachine에서는 이 객체를 통해 로또 목록을 생성한다.  
-* Rank: 로또 등수 Enum
+* LottoTier: 로또 등수 Enum
   * Enum으로 구성된다. 등수 정보와 금액 정보를 갖는다.  
   * 매칭된 숫자를 입력받아 등수를 반환한다.
 * LottoMachine: 로또 기계 Controller  
   * View로 부터 금액을 받아 LottoGenerator를 통해 로또를 생성하여 출력한다.  
   * View로부터 당첨 번호를 받아 Lotto객체를 통해 결과(Rank)목록을 생성한다.
   * View로 결과를 보내어 출력하도록 한다.
-  
+* LottoResult: 결과 객체  
+  * 등수에 따라 수익금액을 계산한다.  
+  * 구매금액 대비 수익금액을 통해 수익률을 계산한다.  
+  * LottoTier별 당첨 개수 정보를 관리한다.  
