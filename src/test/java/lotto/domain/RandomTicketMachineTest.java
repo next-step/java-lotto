@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +19,6 @@ public class RandomTicketMachineTest {
         List<LottoTicket> lottoTickets = randomTicketMachine.issue(ticketCount);
 
         //then
-        assertEquals(lottoTickets.size(), ticketCount);
+        assertThat(lottoTickets.size()).isEqualTo(ticketCount);
     }
 }

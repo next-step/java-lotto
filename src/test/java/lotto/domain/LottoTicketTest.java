@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,6 +62,6 @@ public class LottoTicketTest {
         int matchCount = userTicket.matchCount(lastWinningTicket);
 
         //then
-        assertEquals(matchCount, expected);
+        assertThat(matchCount).isEqualTo(expected);
     }
 }
