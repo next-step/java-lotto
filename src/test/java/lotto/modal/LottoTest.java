@@ -23,30 +23,45 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("로또: 당첨번호 6개 일치 테스트")
 	void compare1ThLottoTest() {
 
-		List<String> inputStr = Arrays.asList("1", "2", "3", "4", "5", "6");
+		List<LottoNumber> userGetLotto = Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
-		List<LottoNumber> lottoList = Lotto.generateManualLotto(inputStr);
+		Lotto userLott = new Lotto(userGetLotto);
 
-		Lotto lotto = new Lotto(lottoList);
-
-		assertThat(lotto).isEqualTo(compareLotto);
+		assertThat(userLott).isEqualTo(compareLotto);
+		assertThat(userLott.getMatchCount(compareLotto)).isEqualTo(6);
 	}
 
 	@Test
+	@DisplayName("로또: 당첨번호 5개 일치 테스트")
 	void compare2ThLottoTest() {
 
+		List<LottoNumber> userGetLotto = Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "45"));
+		Lotto userLott = new Lotto(userGetLotto);
+
+		assertThat(userLott.getMatchCount(compareLotto)).isEqualTo(5);
 	}
 
 	@Test
+	@DisplayName("로또: 당첨번호 4개 일치 테스트")
 	void compare3ThLottoTest() {
 
+		List<LottoNumber> userGetLotto = Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "5", "37", "45"));
+		Lotto userLott = new Lotto(userGetLotto);
+
+		assertThat(userLott.getMatchCount(compareLotto)).isEqualTo(4);
 	}
 
 	@Test
+	@DisplayName("로또: 당첨번호 3개 일치 테스트")
 	void compare4ThLottoTest() {
 
+		List<LottoNumber> userGetLotto = Lotto.generateManualLotto(Arrays.asList("1", "2", "5", "34", "37", "45"));
+		Lotto userLott = new Lotto(userGetLotto);
+
+		assertThat(userLott.getMatchCount(compareLotto)).isEqualTo(3);
 	}
 
 	@Test

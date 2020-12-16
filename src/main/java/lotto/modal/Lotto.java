@@ -89,4 +89,28 @@ public class Lotto {
 	public int hashCode() {
 		return Objects.hash(lotto);
 	}
+
+	public int getMatchCount(Lotto compareLotto) {
+
+		int count = 0;
+
+		if (this.equals(compareLotto)) {
+			return LOTTO_REQUIRED_COUNT;
+		}
+
+		for (LottoNumber number : this.lotto) {
+
+			count += compareLotto.isContain(number);
+		}
+
+		return count;
+	}
+
+	private int isContain(LottoNumber number) {
+
+		if (this.lotto.contains(number)) {
+			return 1;
+		}
+		return 0;
+	}
 }
