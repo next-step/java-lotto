@@ -1,8 +1,11 @@
 package step1.domain;
 
-public class CommaInputSplitter implements InputSplitter {
+public class CommaInputSplitter extends NumberInputSplitter {
+
 	@Override
-	public int[] split(final String input) {
-		return new int[0];
+	protected String[] doSplit(final String input) {
+		final String COMMA_DELIMITER = ",";
+		return input.split(COMMA_DELIMITER);
 	}
+
 }
