@@ -14,6 +14,17 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Lottos(List<LottoNumbers> numbers) {
+        this.lottos = numbers
+                .stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    public int getCount() {
+        return this.lottos.size();
+    }
+
 
     public WinResults getWinResults(LottoNumbers answer) {
         return new WinResults(
