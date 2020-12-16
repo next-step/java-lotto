@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 public class LottoTicket {
 
     private static final Integer LOTTO_NUMBER_COUNT = 6;
-    private final Set<LottoNumber> lottoNumbers;
+    protected final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
@@ -64,5 +65,22 @@ public class LottoTicket {
         List<LottoNumber> displayList = new ArrayList<>(this.lottoNumbers);
         Collections.sort(displayList);
         return displayList.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

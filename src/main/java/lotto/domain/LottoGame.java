@@ -8,8 +8,8 @@ public class LottoGame {
         this.lottoTickets = new LottoTickets(money, ticketMachine);
     }
 
-    public MatchResult match(String winningNumbers) {
-        LottoTicket winningTicket = new LottoTicket(winningNumbers);
+    public MatchResult match(String winningNumbers, String bonusNumber) {
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
         return lottoTickets.match(winningTicket);
     }
 

@@ -12,22 +12,25 @@ public class MatchResultTest {
 
     @DisplayName("당첨통계 객체 생성")
     @Test
-    void create() {
+    void create2() {
         //given
-        Map<Integer, Integer> result = new HashMap<>();
-        result.put(3, 1);
-        result.put(6, 2);
-        result.put(2, 3);
+        Map<MatchCount, Integer> result = new HashMap<MatchCount, Integer>() {{
+            put(MatchCount.FORTH, 1);
+            put(MatchCount.FIRST, 2);
+            put(MatchCount.SECOND_WITH_BONUS, 3);
+        }};
 
         //when
         MatchResult matchResult = new MatchResult(result);
 
         //then
-        Map<Integer, Integer> matchMap = new HashMap<>();
-        matchMap.put(3, 1);
-        matchMap.put(4, 0);
-        matchMap.put(5, 0);
-        matchMap.put(6, 2);
+        Map<MatchCount, Integer> matchMap = new HashMap<MatchCount, Integer>() {{
+            put(MatchCount.FORTH, 1);
+            put(MatchCount.THIRD, 0);
+            put(MatchCount.SECOND, 0);
+            put(MatchCount.SECOND_WITH_BONUS, 3);
+            put(MatchCount.FIRST, 2);
+        }};
 
         assertThat(matchResult).isEqualTo(new MatchResult(matchMap));
     }
@@ -36,9 +39,10 @@ public class MatchResultTest {
     @Test
     void calculateProfit() {
         //given
-        Map<Integer, Integer> result = new HashMap<>();
-        result.put(3, 1);
-        result.put(0, 13);
+        Map<MatchCount, Integer> result = new HashMap<MatchCount, Integer>() {{
+            put(MatchCount.FORTH, 1);
+            put(MatchCount.MISS, 13);
+        }};
         MatchResult matchResult = new MatchResult(result);
 
         //when
