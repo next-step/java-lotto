@@ -1,13 +1,16 @@
-package lotto.domain;
+package lotto.domain.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.List;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoUserRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RandomTicketMachine2Test {
+public class RandomTicketMachineTest {
 
     private int money;
     private int manualCount;
@@ -15,11 +18,12 @@ public class RandomTicketMachine2Test {
 
     @BeforeEach
     void setUp() {
-        String[] manualTicketNumbers = {"8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
-              "7, 11, 16, 35, 36, 44"};
+        List<String> manualTicketNumbers = Arrays
+              .asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+                    "7, 11, 16, 35, 36, 44");
 
         this.money = 4_000;
-        this.manualCount = manualTicketNumbers.length;
+        this.manualCount = manualTicketNumbers.size();
         this.lottoUserRequest = new LottoUserRequest(money, manualTicketNumbers);
     }
 
@@ -27,17 +31,17 @@ public class RandomTicketMachine2Test {
     @Test
     void hasTarget() {
         //given
-        RandomTicketMachine2 randomTicketMachine2 = new RandomTicketMachine2();
+        RandomTicketMachine ticketMachine = new RandomTicketMachine();
 
         //when, then
-        assertThat(randomTicketMachine2.hasTarget(lottoUserRequest)).isTrue();
+        assertThat(ticketMachine.hasTarget(lottoUserRequest)).isTrue();
     }
 
     @DisplayName("로또티켓 자동 발행")
     @Test
     void issueTickets() {
         //given
-        RandomTicketMachine2 ticketMachine = new RandomTicketMachine2();
+        RandomTicketMachine ticketMachine = new RandomTicketMachine();
 
         //when
         List<LottoTicket> lottoTickets = ticketMachine.issue(lottoUserRequest);

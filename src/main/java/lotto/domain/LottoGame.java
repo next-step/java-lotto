@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.machine.ComplexTicketMachine;
+
 public class LottoGame {
 
     private LottoTickets lottoTickets;
 
-    public LottoGame(int money, TicketMachine ticketMachine) {
-        this.lottoTickets = new LottoTickets(money, ticketMachine);
+    public LottoGame(LottoUserRequest lottoUserRequest, ComplexTicketMachine complexTicketMachine) {
+        this.lottoTickets = new LottoTickets(complexTicketMachine.issue(lottoUserRequest));
     }
 
     public MatchResult match(String winningNumbers, String bonusNumber) {

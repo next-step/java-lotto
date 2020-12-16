@@ -1,29 +1,26 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class LottoUserRequest {
+
     private final int ticketCount;
-    private Optional<List<String>> manualNumbers;
+    private List<String> manualNumbers;
 
     public LottoUserRequest(int money) {
         this(money, null);
     }
 
-    public LottoUserRequest(int money, String[] manualTickets) {
+    public LottoUserRequest(int money, List<String> manualNumbers) {
         this.ticketCount = toTicketCount(money);
-        this.manualNumbers = toManualTickets(manualTickets);
+        this.manualNumbers = toManualNumbers(manualNumbers);
     }
 
-    private Optional<List<String>> toManualTickets(String[] manualTickets) {
-        if (manualTickets == null) {
-            return Optional.empty();
-        }
-
-        validateTicketCount(manualTickets);
-        return Optional.of(Arrays.asList(manualTickets));
+    private List<String> toManualNumbers(List<String> manualNumbers) {
+        validateTicketCount(manualNumbers);
+        return manualNumbers == null ? Collections.emptyList() : manualNumbers;
     }
 
     private int toTicketCount(int money) {
@@ -37,18 +34,18 @@ public class LottoUserRequest {
         }
     }
 
-    private void validateTicketCount(String[] manualTickets) {
+    private void validateTicketCount(List<String> manualTickets) {
         if (manualTickets == null) {
             return;
         }
 
-        if (this.ticketCount < manualTickets.length) {
+        if (this.ticketCount < manualTickets.size()) {
             throw new IllegalArgumentException("구입가능한 로또 수를 초과했습니다.");
         }
     }
 
     public boolean hasManualIssueTarget() {
-        return manualNumbers.isPresent();
+        return !manualNumbers.isEmpty();
     }
 
     public boolean hasAutoIssueTarget() {
@@ -56,18 +53,18 @@ public class LottoUserRequest {
             return true;
         }
 
-        return this.ticketCount > manualNumbers.get().size();
+        return this.ticketCount > manualNumbers.size();
     }
 
-    public Optional<List<String>> getManualNumbers() {
+    public List<String> getManualNumbers() {
         return manualNumbers;
     }
 
     public int getAutoTicketCount() {
-        if (!hasManualIssueTarget()) {
-            return this.ticketCount;
-        }
+        return this.ticketCount - getManualTicketCount();
+    }
 
-        return this.ticketCount - manualNumbers.get().size();
+    public int getManualTicketCount() {
+        return manualNumbers.size();
     }
 }

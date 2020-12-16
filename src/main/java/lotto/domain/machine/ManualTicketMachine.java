@@ -1,11 +1,12 @@
-package lotto.domain;
+package lotto.domain.machine;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoUserRequest;
 
-public class ManualTicketMachine implements TicketMachine2 {
+public class ManualTicketMachine implements TicketMachine {
 
     @Override
     public boolean hasTarget(LottoUserRequest lottoUserRequest) {
@@ -14,13 +15,13 @@ public class ManualTicketMachine implements TicketMachine2 {
 
     @Override
     public List<LottoTicket> issue(LottoUserRequest lottoUserRequest) {
-        Optional<List<String>> maybeManualNumbers = lottoUserRequest.getManualNumbers();
+        List<String> manualNumbers = lottoUserRequest.getManualNumbers();
 
-        if (!maybeManualNumbers.isPresent()) {
+        if (manualNumbers.isEmpty()) {
             return Collections.emptyList();
         }
 
-        return maybeManualNumbers.get().stream()
+        return manualNumbers.stream()
               .map(LottoTicket::new)
               .collect(Collectors.toList());
     }

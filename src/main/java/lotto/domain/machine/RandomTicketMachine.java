@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.machine;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoUserRequest;
 
 public class RandomTicketMachine implements TicketMachine {
 
@@ -20,14 +23,19 @@ public class RandomTicketMachine implements TicketMachine {
     }
 
     @Override
-    public List<LottoTicket> issue(int ticketCount) {
+    public boolean hasTarget(LottoUserRequest lottoUserRequest) {
+        return lottoUserRequest.hasAutoIssueTarget();
+    }
+
+    @Override
+    public List<LottoTicket> issue(LottoUserRequest lottoUserRequest) {
         return Stream.generate(() -> {
             shuffle();
             List<LottoNumber> lottoNumbers = this.lottoNumbers.subList(0, 6);
             Collections.sort(lottoNumbers);
             return new LottoTicket(new HashSet<>(lottoNumbers));
         })
-              .limit(ticketCount)
+              .limit(lottoUserRequest.getAutoTicketCount())
               .collect(Collectors.toList());
     }
 

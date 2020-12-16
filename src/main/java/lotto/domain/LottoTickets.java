@@ -5,15 +5,17 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.domain.machine.TicketMachine;
 
 public class LottoTickets {
 
     public static final Integer TICKET_PRICE = 1_000;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int money, TicketMachine ticketMachine) {
-        this.lottoTickets = issueTickets(toTicketCount(money), ticketMachine);
-    }
+//    @Deprecated
+//    public LottoTickets(int money, TicketMachine ticketMachine) {
+//        this.lottoTickets = issueTickets(toTicketCount(money), ticketMachine);
+//    }
 
     LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -26,20 +28,23 @@ public class LottoTickets {
         return new MatchResult(matchResult);
     }
 
-    private int toTicketCount(int money) {
-        validateMoney(money);
-        return money / TICKET_PRICE;
-    }
-
-    private void validateMoney(int money) {
-        if (money < TICKET_PRICE) {
-            throw new IllegalArgumentException("금액이 부족합니다.");
-        }
-    }
-
-    private List<LottoTicket> issueTickets(int ticketCount, TicketMachine ticketMachine) {
-        return ticketMachine.issue(ticketCount);
-    }
+//    @Deprecated
+//    private int toTicketCount(int money) {
+//        validateMoney(money);
+//        return money / TICKET_PRICE;
+//    }
+//
+//    @Deprecated
+//    private void validateMoney(int money) {
+//        if (money < TICKET_PRICE) {
+//            throw new IllegalArgumentException("금액이 부족합니다.");
+//        }
+//    }
+//
+//    @Deprecated
+//    private List<LottoTicket> issueTickets(int ticketCount, TicketMachine ticketMachine) {
+//        return ticketMachine.issue(ticketCount);
+//    }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;

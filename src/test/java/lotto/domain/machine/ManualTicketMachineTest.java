@@ -1,8 +1,11 @@
-package lotto.domain;
+package lotto.domain.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.List;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoUserRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +17,11 @@ public class ManualTicketMachineTest {
 
     @BeforeEach
     void setUp() {
-        String[] manualTicketNumbers = {"8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
-              "7, 11, 16, 35, 36, 44"};
+        List<String> manualTicketNumbers = Arrays
+              .asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+                    "7, 11, 16, 35, 36, 44");
 
-        this.manualCount = manualTicketNumbers.length;
+        this.manualCount = manualTicketNumbers.size();
         this.lottoUserRequest = new LottoUserRequest(3_000, manualTicketNumbers);
     }
 
