@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-	private static final int LOTTO_NUMBER_SIZE = 6;
+	public static final int LOTTO_NUMBER_SIZE = 6;
 	private static final String LOTTO_VALIDATE_SIZE_WRONG = "lottoNumbers size must be %s";
 	private static final String LOTTO_VALIDATE_DUPLICATED = "lottoNumber is duplicated";
 

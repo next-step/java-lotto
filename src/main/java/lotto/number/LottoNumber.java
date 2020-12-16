@@ -2,8 +2,8 @@ package lotto.number;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MIN = 1;
-	private static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MAX = 45;
+	public static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MIN = 1;
+	public static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MAX = 45;
 	private static final String VALIDATE_MSG_RANGE_WRONG = "each lottoNumber range must in 1~45";
 
 	private final int number;
