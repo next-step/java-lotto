@@ -16,7 +16,7 @@ public class Lotto {
 
 	private static final String COMMA = ",";
 
-	private Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 
 	InputView inputView = new InputView();
 
