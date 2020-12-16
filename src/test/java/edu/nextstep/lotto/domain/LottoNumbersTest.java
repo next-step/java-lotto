@@ -44,7 +44,7 @@ class LottoNumbersTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@DisplayName("getRank: Lotto객체가 가진 번호와 당첨번호를 비교해 1,3,4,5등이 되면 LottoRank ENUM을 리턴함. (Optional임)")
+	@DisplayName("countBySame: 두 LottoNumbers를 비교하여 내부 lottoNumbers끼리 원소가 일치하는 개수를 리턴함")
 	@ParameterizedTest
 	@CsvSource(value = {
 		"1,2,3,5,4,6:1,2,3,4,5,6:6",
@@ -52,7 +52,7 @@ class LottoNumbersTest {
 		"3,4,5,6,1,2:1,2,3,4,7,8:4",
 		"2,3,4,1,5,6:1,2,3,7,8,9:3"
 	}, delimiter = ':')
-	void getRank(String numbersOne, String numbersTow, int expected) {
+	void countBySame(String numbersOne, String numbersTow, int expected) {
 		LottoNumbers numbers1 = new LottoNumbers(splitToIntList(numbersOne));
 		LottoNumbers numbers2 = new LottoNumbers(splitToIntList(numbersTow));
 		assertThat(numbers1.countBySame(numbers2)).isEqualTo(expected);
