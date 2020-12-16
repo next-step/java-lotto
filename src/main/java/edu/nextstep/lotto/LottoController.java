@@ -25,6 +25,7 @@ public class LottoController {
 		LottoGame lottoGame = new LottoGame(purchasedLottoNumbersList, winningNumbers);
 
 		ResultView.printWinningStatistics(lottoGame.getResultAsCountingMap());
+		ResultView.printProfitRatio(lottoGame.getProfitRatio());
 	}
 
 	protected List<List<Integer>> getRandomLottoNumbersList(int size) {
