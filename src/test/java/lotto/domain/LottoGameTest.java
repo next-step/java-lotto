@@ -41,7 +41,7 @@ class LottoGameTest {
     void matchNumbers() {
         WinningLottoTicket winningLottoTicket =
                 new WinningLottoTicket(new LottoTicket(provideWinningNumbers()), new LottoNumber(30));
-        Map<Rank, Integer> results = lottoGame.matchNumbers(winningLottoTicket);
+        Map<Rank, Integer> results = lottoGame.matchNumbers(winningLottoTicket).getResult();
 
         assertThat(results.get(Rank.FIFTH)).isEqualTo(1);
         assertThat(results.get(Rank.FOURTH)).isZero();
