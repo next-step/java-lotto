@@ -25,4 +25,10 @@ public class ResultView {
 			System.out.println(String.format("총 수익률은 %.2f입니다.(수익이 생겼습니다)", earningRate));
 		}
 	}
+
+	public void printResultUI(LottoResult lottoResult) {
+		printMatchUI(lottoResult);
+		printEarningRateUI(lottoResult.getEarningsRate());
+	}
+
 }
