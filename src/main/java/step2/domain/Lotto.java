@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Number> numbers;
+    private List<LottoNumber> lottoNumbers;
     private int count;
 
-    public Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public void equalCheck(Number number) {
-        if (numbers.contains(number)) count++;
+    public void equalCheck(LottoNumber lottoNumber) {
+        if (lottoNumbers.contains(lottoNumber)) count++;
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getNumbers() {
+        return lottoNumbers;
     }
 
     public int getCount() {
@@ -30,16 +30,16 @@ public class Lotto {
 
         Lotto that = (Lotto) o;
 
-        return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
+        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
     }
 
     @Override
     public int hashCode() {
-        return numbers != null ? numbers.hashCode() : 0;
+        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 }

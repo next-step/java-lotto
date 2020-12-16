@@ -12,7 +12,7 @@ public class LottoNumbers {
         this.lotto = lotto;
     }
 
-    public void checkWinningLotto(Number number) {
+    public void checkWinningLotto(LottoNumber number) {
         lotto.stream()
                 .forEach(lottoNumber -> lottoNumber.equalCheck(number));
     }

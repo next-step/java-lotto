@@ -60,6 +60,22 @@
 + LottoGameMain : 실행을 위한 메인클래스 
 
 ## Step3
+### Step2에 이어 추가 기능 요구사항
++ 2등을 위한 추가 번호 하나를 더 추첨 (보너스볼)
++ 당첨 통계에 2등을 추가
+
+### Step3에서 추가되거나 수정된 클래스 설명
++ LottoGenerator : 로또 생성을 위한 인터페이스
+    + LottoManualGenerator : 수동으로 로또를 생성해주는 클래스 
+    + LottoAutoGenerator : 자동으로 로또를 생성해주는 클래스
++ Lotto : matchBonus 필드 추가
++ Lottos : LottoNumbers -> Lotts 네이밍 변경
+    + groupBy 수정 
+        + before(step2) : (일치개수:당첨된로또개수)
+        + after(step3) : (일치개수:당첨된 로또 리스트) - matchBonus가 필요하여 수정함
++ LottoMatchStatus : 로또당첨 상태를 관리하는 클래스
++ LottoResult : EnumMap으로 결과를 리턴하도록 수정
++ Rank : 당첨 랭킹을 이넘으로 관리하도록 수정
 
 ## Step4
 
