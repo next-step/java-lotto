@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,9 +18,7 @@ import stringaddcalculator.domain.StringAddCalculator;
  **/
 public class StringAddCalculatorTest {
 	@ParameterizedTest
-	@NullSource
-	@EmptySource
-	@ValueSource(strings = {""})
+	@NullAndEmptySource
 	public void splitAndSum_null_또는_빈문자(String arg) {
 		int result = StringAddCalculator.splitAndSum(arg);
 		assertThat(result).isEqualTo(0);
