@@ -15,8 +15,7 @@ public class Expression {
 
 	public static final String CALCULATE_SEPARATOR_COMMA = ",";
 	public static final String CALCULATE_SEPARATOR_COLON = ":";
-	public static final String SEPARATOR_ADD_PATTERN = "//(.)\n(.*)";
-	public static final Pattern PATTERN_COMPILE = Pattern.compile(SEPARATOR_ADD_PATTERN);
+	public static final Pattern PATTERN_COMPILE = Pattern.compile("//(.)\n(.*)");
 
 	private final List<Positive> numbers;
 
