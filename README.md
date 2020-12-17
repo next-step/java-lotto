@@ -379,13 +379,13 @@ public enum Rank {
       우선 `InputView`의 호출을 DTO 객체를 활용하여 값을 얻어오는 로칙의 호출을 줄여볼수 있을것 같습니다.
       `new LotteryWinning(lotteryWinningNumbers, lotteryBonusNumber);` 와 같이 도메인 객체를 생성하는 로직은 
       `LotteryGameManager` 보다는 `LotteryGame` 클래스를 통해서 생성하는것도 고려해보시면 좋을것 같아요.
-- [ ] `pickCounts`라는 상태값이 어떤 역할을 하는지 알수 없네요. (필수인지 체크 필요)
+- [x] `pickCounts`라는 상태값이 어떤 역할을 하는지 알수 없네요. (필수인지 체크 필요)
 - [ ] `LotteryGame` 클래스가 조금더 많은 역할을 할 수있으면 좋을것 같아요.
       `price, count` 의 유효성 검사를 `LotteryGame` 가 아닌 `LotteryAmount`와 같은 클래스를 만들어 위임하고, 
       `LotteryGame`이 `LotteryTicket` 에 관련관 상태값을 가질수 있다면 더 많은 책임들을 위임할 수 있지 않을까 생각합니다 !
 - [x] 리스트를 나타내는 `List<LotteryTicket>` 값을 일급 컬렉션으로 만들어보는건 어떨까요 ?
       일급 컬렉션에 대해 학습하는 과정이라고 생각해주시면 좋을것 같습니다. https://jojoldu.tistory.com/412
-- [ ] 2등 로또를 판단하는 로직을 `LotteryResult`에서 구현해주셨네요 👍
+- [x] 2등 로또를 판단하는 로직을 `LotteryResult`에서 구현해주셨네요 👍
       만약 3등, 4등에서도 보너스 번호여부가 추가된다면 `LotteryResult`의 비즈니스 로직이 복잡하게 변할것 같아요.
       `LotteryValue` `Enum`이 보너스 번호 여부를 가지고 있고 그에 따른 판단을 할수 있다면 `LotteryResult`는 로또 결과만을 제공해줄수 있는 클래스가 될것 같습니다.
       설명이 조금 복잡해진것 같은데 당첨 결과를 판단할 수 있는 모든 정보를 `LotteryValue` `Enum`으로 위임시켜보세요 !

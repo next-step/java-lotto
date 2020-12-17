@@ -8,7 +8,7 @@ public enum LotteryValue {
     THIRD_PLACE(5, 1_500_000),
     FORTH_PLACE(4, 50_000),
     FIFTH_PLACE(3, 5_000),
-    MISS(-1, 0);
+    NO_PLACE(-1, 0);
 
     private final int place;
     private final int amount;
@@ -28,6 +28,17 @@ public enum LotteryValue {
     public static LotteryValue findByAmount(int place) {
         return Arrays.stream(LotteryValue.values())
                 .filter(v -> place == v.place)
-                .findFirst().orElse(LotteryValue.MISS);
+                .findFirst().orElse(LotteryValue.NO_PLACE);
+    }
+
+    public static LotteryValue confirmPlace(int key, boolean matchedBonusNumber) {
+        if (key == THIRD_PLACE.getPlace() && matchedBonusNumber) {
+            return SECOND_PLACE;
+        }
+        return findByAmount(key);
+    }
+
+    public static boolean isNoPlace(LotteryValue place) {
+        return place == NO_PLACE;
     }
 }

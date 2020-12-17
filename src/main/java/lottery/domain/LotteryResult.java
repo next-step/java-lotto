@@ -30,18 +30,11 @@ public class LotteryResult {
     }
 
     protected void updateLotteryResult(int key, boolean isMatchedBonusNumber) {
-        LotteryValue resultKey = LotteryValue.findByAmount(key);
-        if (isSecondPlace(key, isMatchedBonusNumber)) {
-            resultKey = LotteryValue.SECOND_PLACE;
-        }
-        if (resultKey.equals(LotteryValue.MISS)) {
+        LotteryValue place = LotteryValue.confirmPlace(key, isMatchedBonusNumber);
+        if (LotteryValue.isNoPlace(place)) {
             return;
         }
-        this.lotteryResultMap.replace(resultKey, lotteryResultMap.get(resultKey) + 1);
-    }
-
-    private boolean isSecondPlace(int key, boolean isMatchedBonusNumber) {
-        return (key == LotteryValue.THIRD_PLACE.getPlace() && isMatchedBonusNumber);
+        this.lotteryResultMap.replace(place, lotteryResultMap.get(place) + 1);
     }
 
     @Override
