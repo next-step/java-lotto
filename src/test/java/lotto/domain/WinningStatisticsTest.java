@@ -52,7 +52,7 @@ public class WinningStatisticsTest {
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		assertThat(winningStatistics.getPrizeResult().get(Prize.THREE)).isEqualTo(1);
+		assertThat(winningStatistics.getPrizeResult().contains(Prize.THREE));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(5.0));
 
 	}
@@ -64,7 +64,7 @@ public class WinningStatisticsTest {
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		assertThat(winningStatistics.getPrizeResult().get(Prize.FOUR)).isEqualTo(1);
+		assertThat(winningStatistics.getPrizeResult().contains(Prize.FOUR));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(50.0));
 	}
 
@@ -75,7 +75,7 @@ public class WinningStatisticsTest {
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		assertThat(winningStatistics.getPrizeResult().get(Prize.FIVE)).isEqualTo(1);
+		assertThat(winningStatistics.getPrizeResult().contains(Prize.FIVE));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(
 			WinningStatistics.parseWinningSummaryFormat(1500.0));
 	}
@@ -87,7 +87,7 @@ public class WinningStatisticsTest {
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		assertThat(winningStatistics.getPrizeResult().get(Prize.SIX)).isEqualTo(1);
+		assertThat(winningStatistics.getPrizeResult().contains(Prize.SIX));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(
 			WinningStatistics.parseWinningSummaryFormat(2000000.0));
 	}
@@ -99,6 +99,6 @@ public class WinningStatisticsTest {
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		assertThat(winningStatistics.getPrizeResult().get(Prize.NONE)).isEqualTo(1);
+		assertThat(winningStatistics.getPrizeResult().contains(Prize.NONE));
 	}
 }
