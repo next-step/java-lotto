@@ -30,4 +30,12 @@ class LottoMoneyTest {
         }).withMessageMatching("금액이 부족합니다. 로또를 구매할 수 없습니다.");
     }
 
+    @Test
+    @DisplayName("1000 단위가 아닌 금액 입력시 예외발생 테스트")
+    void money_not_divide_exception() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new LottoMoney(2500);
+        }).withMessageMatching("지불한 금액이 1000원으로 나누어지지 않습니다.");
+    }
+
 }
