@@ -14,9 +14,11 @@ public class WinningLottoTicket {
 	private static final String SPLIT_REGEX = ",";
 
 	private LottoTicket lottoTicket;
+	private LottoNumber bonusNumber;
 
-	public WinningLottoTicket(String arg) {
-		lottoTicket = convertUserInput(arg);
+	public WinningLottoTicket(String winningNumber, LottoNumber bonusNumber) {
+		lottoTicket = convertUserInput(winningNumber);
+		this.bonusNumber = bonusNumber;
 	}
 
 	private LottoTicket convertUserInput(String arg) {
@@ -45,5 +47,9 @@ public class WinningLottoTicket {
 
 	public LottoTicket getLottoTicket() {
 		return lottoTicket;
+	}
+
+	public LottoNumber getBonusNumber() {
+		return bonusNumber;
 	}
 }

@@ -49,7 +49,8 @@ public class WinningStatisticsTest {
 	@Test
 	public void matchThree() {
 		String winningNumber = "1, 12, 13, 24, 25, 26";
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
+		int bonusNumber = 46;
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.THREE));
@@ -61,7 +62,8 @@ public class WinningStatisticsTest {
 	@Test
 	public void matchFour() {
 		String winningNumber = "1, 12, 13, 14, 25, 26";
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
+		int bonusNumber = 46;
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.FOUR));
@@ -72,7 +74,8 @@ public class WinningStatisticsTest {
 	@Test
 	public void matchFive() {
 		String winningNumber = "1, 12, 13, 14, 15, 26";
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
+		int bonusNumber = 46;
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.FIVE));
@@ -84,7 +87,8 @@ public class WinningStatisticsTest {
 	@Test
 	public void matchSix() {
 		String winningNumber = "1, 12, 13, 14, 15, 16";
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
+		int bonusNumber = 46;
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.SIX));
@@ -96,7 +100,8 @@ public class WinningStatisticsTest {
 	@Test
 	public void inputCannotDuplicate() {
 		String winningNumber = "21, 22, 23, 24, 25, 26";
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber);
+		int bonusNumber = 46;
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.NONE));
