@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
+    private InputView() {
+
+    }
+
     static Scanner sc = new Scanner(System.in);
 
     public static int inputPurchasePrice() {

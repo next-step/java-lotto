@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
+    private ResultView() {
+
+    }
+
     private static final String PURCHASE_PRICE = "구입금액을 입력해 주세요.";
     private static final String WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
