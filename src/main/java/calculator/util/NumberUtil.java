@@ -1,4 +1,4 @@
-package lotto.util;
+package calculator.util;
 
 public class NumberUtil {
 

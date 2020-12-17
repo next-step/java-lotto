@@ -28,10 +28,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        String lottoNumbers = this.numbers.stream().map(String::valueOf).collect(Collectors.joining(","));
-        return "[" +
-                lottoNumbers+
-                ']';
+        String lottoNumbers = this.numbers.stream()
+                                    .map(String::valueOf)
+                                    .collect(Collectors.joining(","));
+        return "[" + lottoNumbers + "]";
     }
 
     /**
@@ -43,7 +43,11 @@ public class Lotto {
 
     public int checkLastWinningNumber(String lastWinnerNumber) {
         int matchNumber = 0;
-        List<Integer> winnerNumbers = Arrays.stream(lastWinnerNumber.split(",")).map(Integer::new).sorted().collect(Collectors.toList());
+        List<Integer> winnerNumbers = Arrays.stream(
+                                            lastWinnerNumber.split(","))
+                                            .map(Integer::new)
+                                            .sorted()
+                                            .collect(Collectors.toList());
         for( int i = 0; i < winnerNumbers.size(); i++) {
             if(this.numbers.get(i).equals( winnerNumbers.get(i))) {
                 matchNumber = matchNumber + 1;

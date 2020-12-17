@@ -1,4 +1,4 @@
-package calculator.view;
+package lotto.view;
 
 public class InputView {
 }
