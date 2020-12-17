@@ -36,6 +36,10 @@ public class LotteryTicket {
         return this.lotteryNumbers;
     }
 
+    public boolean contains(LotteryNumber lotteryNumber) {
+        return this.lotteryNumbers.contains(lotteryNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

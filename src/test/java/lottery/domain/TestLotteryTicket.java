@@ -31,4 +31,16 @@ public class TestLotteryTicket {
         assertThat(lotteryTicket).isEqualTo(LotteryTicket.of("1,2,3,4,5,6"));
         assertThat(lotteryTicket.getLotteryNumbers()).containsSequence(lotteryNumbers);
     }
+
+    @Test
+    void isContainNumbers() {
+        LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
+        assertThat(lotteryTicket.contains(new LotteryNumber(1))).isTrue();
+    }
+
+    @Test
+    void isNotContainNumbers() {
+        LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
+        assertThat(lotteryTicket.contains(new LotteryNumber(7))).isFalse();
+    }
 }

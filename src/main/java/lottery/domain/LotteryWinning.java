@@ -5,31 +5,26 @@ import java.util.Objects;
 public class LotteryWinning {
     private final LotteryTicket winningTicket;
     private final LotteryNumber bonusNumber;
-    private LotteryResult lotteryResult;
 
     public LotteryWinning(String winningNumbers, String bonusNumber) {
         this.winningTicket = LotteryTicket.of(winningNumbers);
         this.bonusNumber = new LotteryNumber(Integer.parseInt(bonusNumber));
-        lotteryResult = new LotteryResult();
     }
 
     public int getCountsMatched(LotteryTicket otherLotteryTicket) {
-        //TODO : winningTicket.getLotteryNumbers().contains(number)에서 contains는 winingTicket으로 구현하는 방향으로 개선 필요
         int matchCount = 0;
         for(LotteryNumber number : otherLotteryTicket.getLotteryNumbers()) {
-            matchCount += winningTicket.getLotteryNumbers().contains(number) ? 1 : 0;
+            matchCount += winningTicket.contains(number) ? 1 : 0;
         }
         return matchCount;
     }
 
     public boolean isMatchedBonusNumber(LotteryTicket lotteryTicket) {
-        if (lotteryTicket.getLotteryNumbers().contains(this.bonusNumber)) {
-            return true;
-        }
-        return false;
+        return lotteryTicket.contains(this.bonusNumber);
     }
 
     public LotteryResult getLotteryResult(LotteryTickets lotteryTickets) {
+        LotteryResult lotteryResult = new LotteryResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             lotteryResult.updateLotteryResult(
                     this.getCountsMatched(lotteryTicket),
