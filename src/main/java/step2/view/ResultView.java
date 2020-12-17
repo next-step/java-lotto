@@ -63,7 +63,7 @@ public class ResultView {
                 .mapToLong(Rank::getWinningMoney)
                 .sum();
 
-        double incomeRate = (income / request.getPurchaseMoney()) * 0.01;
+        double incomeRate = (income / request.getPurchaseMoney()) * 100;
         printMessage("총 수익률은 " + incomeRate + "입니다.");
     }
 }

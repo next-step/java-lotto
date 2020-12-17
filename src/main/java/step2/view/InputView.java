@@ -36,8 +36,8 @@ public class InputView {
         try {
             String input = scanner.nextLine();
             String[] numbers = input.split(",");
-            checkNumber(numbers);
             target = getTargetNumbers(numbers);
+            checkNumber(target);
         } catch (Exception e) {
             throw new IllegalArgumentException("지난주 당첨 번호를 6개 입력하세요", e);
         } finally {
@@ -52,15 +52,17 @@ public class InputView {
         }
     }
 
-    private void checkNumber(String[] numbers) {
-        if (numbers.length != 6) {
+    private void checkNumber(List<Integer> target) {
+        if (target.size() != 6) {
             throw new IllegalArgumentException("6개의 숫자가 필요합니다");
         }
     }
 
     private List<Integer> getTargetNumbers(String[] numbers) {
         return Arrays.stream(numbers)
+                .distinct()
                 .mapToInt(t -> Integer.parseInt(t.trim()))
+                .filter(n -> n > 0 && n < 46)
                 .boxed()
                 .collect(toList());
     }
