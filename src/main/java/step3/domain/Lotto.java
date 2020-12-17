@@ -10,15 +10,15 @@ public class Lotto {
     private final Set<LottoNumber> lotto = new LinkedHashSet<>();
 
     public Lotto(List<LottoNumber> numbers) {
+        validateLottoSize(numbers);
+
         for (LottoNumber lottoNumber : numbers) {
             lotto.add(LottoNumber.of(lottoNumber.getNumber()));
         }
-
-        validateLottoSize();
     }
 
-    private void validateLottoSize() {
-        if (this.lotto.size() != LOTTO_SIZE) {
+    private void validateLottoSize(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 값이어야 합니다.");
         }
     }
