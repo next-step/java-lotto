@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.util.StringSplitter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String INPUT_LOTTO_BUY_MONEY_MESSAGE = "LOTTO 구입 금액을 입력해주세요.";
+    private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 LOTTO 갯수를 입력해주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동 LOTTO 번호를 입력해주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 LOTTO 번호를 입력해주세요.";
     private static final String INVALID_INPUT_ERROR = "문자가 입력되었습니다. 숫자만 입력해주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -19,6 +22,22 @@ public class InputView {
     public static int inputMoney() {
         System.out.println(INPUT_LOTTO_BUY_MONEY_MESSAGE);
         return inputNumber();
+    }
+
+    public static int inputManualLottoCount() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+        return inputNumber();
+    }
+
+    public static List<String> inputManualLottoNumbers(int lottoManualBuyCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+        List<String> manualNumbers = new ArrayList<>();
+
+        for (int i = 0; i < lottoManualBuyCount; i++) {
+            String manualNumber = SCANNER.nextLine();
+            manualNumbers.add(manualNumber);
+        }
+        return manualNumbers;
     }
 
     public static List<Integer> inputWinningLottoNumbers() {
