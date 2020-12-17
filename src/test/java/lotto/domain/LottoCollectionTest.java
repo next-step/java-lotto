@@ -20,7 +20,7 @@ class LottoCollectionTest {
     @Test
     @DisplayName("출력을 위한 로또 번호 조회가 제대로 들어가는지 테스트")
     void lottoCollectionTest() {
-        List<Lotto> lottoList = lottoCollection.getLottoList();
+        List<Lotto> lottoList = lottoCollection.getLottos();
         assertThat(lottoList.get(0).getNumbers()).containsExactlyInAnyOrder(8, 21, 23, 41, 42, 43);
         assertThat(lottoList.get(1).getNumbers()).containsExactlyInAnyOrder(3, 5, 11, 16, 32, 38);
         assertThat(lottoList.get(2).getNumbers()).containsExactlyInAnyOrder(7, 11, 16, 35, 36, 44);
@@ -31,7 +31,7 @@ class LottoCollectionTest {
     @Test
     @DisplayName("전체 로또 뽑은 갯수가 맞는지 확인하는 테스트")
     void getLottoCountTest() {
-        List<Lotto> lottoList = lottoCollection.getLottoList();
+        List<Lotto> lottoList = lottoCollection.getLottos();
         assertThat(lottoList.size()).isEqualTo(14);
     }
 

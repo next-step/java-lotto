@@ -6,7 +6,7 @@ import lotto.domain.LottoResult;
 
 public class ResultView {
     public static void printLottoNumberList(LottoCollection lottoCollection) {
-        lottoCollection.getLottoList()
+        lottoCollection.getLottos()
                 .stream()
                 .map(Lotto::getSortedNumbers)
                 .forEach(System.out::println);
