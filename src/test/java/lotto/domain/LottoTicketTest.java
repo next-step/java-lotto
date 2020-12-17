@@ -16,10 +16,8 @@ import org.junit.jupiter.api.TestMethodOrder;
  * @date : 2020/12/14
  * @description :
  **/
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LottoTicketTest {
 
-	@Order(1)
 	@DisplayName("1. 로또 한 장은 6개의 숫자로 이루어져 있다.")
 	@Test
 	void lottoTicketNumberCountIsSix() {
@@ -43,7 +41,6 @@ public class LottoTicketTest {
 		assertThat(lottoTicket.get().size()).isEqualTo(6);
 	}
 
-	@Order(2)
 	@DisplayName("2.1 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 미만 불가")
 	@Test
 	void lottoNumberIsContainSixNumbersAndCannotLowerSix() {
@@ -67,7 +64,6 @@ public class LottoTicketTest {
 
 	}
 
-	@Order(3)
 	@DisplayName("2.2 로또 한 장은 6개의 숫자로 이루어져 있다. 6개 초과 불가")
 	@Test
 	void lottoNumberIsContainSixNumbersAndCannotOverSix() {
@@ -94,7 +90,6 @@ public class LottoTicketTest {
 			.hasMessageContaining("로또 번호는 6개를 입력할 수 있습니다.");
 	}
 
-	@Order(3)
 	@DisplayName("3 로또의 숫자들은 중복되지 않는다.")
 	@Test
 	void lottoNumbersCannotDuplicate() {

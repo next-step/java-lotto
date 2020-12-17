@@ -9,14 +9,16 @@ import java.util.stream.Collectors;
  * @date : 2020/12/14
  * @description :
  **/
-public class WinningLottoNumbers {
+public class WinningLottoTicket {
 
 	private static final String SPLIT_REGEX = ",";
 
 	private LottoTicket lottoTicket;
+	private LottoNumber bonusNumber;
 
-	public WinningLottoNumbers(String arg) {
-		lottoTicket = convertUserInput(arg);
+	public WinningLottoTicket(String winningNumber, LottoNumber bonusNumber) {
+		lottoTicket = convertUserInput(winningNumber);
+		this.bonusNumber = bonusNumber;
 	}
 
 	private LottoTicket convertUserInput(String arg) {
@@ -39,11 +41,15 @@ public class WinningLottoNumbers {
 			int result = Integer.parseInt(trimmed);
 			return new LottoNumber(result);
 		} catch (NumberFormatException e) {
-			throw new RuntimeException("입력된 당첨번호가 올바르지 않습니다.");
+			throw new IllegalArgumentException("입력된 당첨번호가 올바르지 않습니다.");
 		}
 	}
 
 	public LottoTicket getLottoTicket() {
 		return lottoTicket;
+	}
+
+	public LottoNumber getBonusNumber() {
+		return bonusNumber;
 	}
 }

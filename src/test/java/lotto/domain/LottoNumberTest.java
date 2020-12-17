@@ -14,10 +14,8 @@ import org.junit.jupiter.params.provider.ValueSource;
  * @date : 2020/12/13
  * @description :
  **/
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LottoNumberTest {
 
-	@Order(1)
 	@DisplayName("1. 로또 숫자의 범위는 1부터 46까지 이다")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 10, 20, 30, 40, 46})
@@ -26,7 +24,6 @@ public class LottoNumberTest {
 		assertThat(lottoNumber.getNumber()).isEqualTo(number);
 	}
 
-	@Order(2)
 	@DisplayName("1.1. 로또 숫자의 범위는 1부터 46까지 이다")
 	@ParameterizedTest
 	@ValueSource(ints = {0, 47})
