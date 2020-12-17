@@ -53,8 +53,4 @@ public class LottoTicket {
 			.count();
 	}
 
-	public static LottoTicket getRandomTicket() {
-
-		return new LottoTicket(Arrays.asList(new LottoNumber[1]));
-	}
 }
