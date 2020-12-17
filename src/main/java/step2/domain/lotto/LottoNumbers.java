@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.*;
 
 public final class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
-    private static final long NUMBER_LENGTH = 6;
+    private static final long NUMBER_LENGTH = 6L;
 
     public LottoNumbers(List<Integer> numbers) {
         checkLottoNumbersLength(numbers);
