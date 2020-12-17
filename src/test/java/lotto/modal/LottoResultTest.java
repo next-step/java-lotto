@@ -26,15 +26,29 @@ class LottoResultTest {
 	}
 
 	@Test
+	@DisplayName("로또 결과: 1등 4번, Overflow 테스트")
+	void resultOverYieldSuccessLottoTest() {
+
+		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "45"))));
+		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+
+		LottoResult result = new LottoResult(lottoPackage, winnerLotto);
+
+		assertThat(result.report(new Money("6000"))).isGreaterThan(new BigDecimal(1));
+	}
+
+	@Test
 	@DisplayName("로또 결과: 수익률 1 이상(이익) 테스트")
 	void resultYieldSuccessLottoTest() {
 
 		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "45"))));
 
 		LottoResult result = new LottoResult(lottoPackage, winnerLotto);
-		result.report(new Money("2000"));
 
-		assertThat(result.getYield()).isGreaterThan(new BigDecimal(1));
+		assertThat(result.report(new Money("2000"))).isGreaterThan(new BigDecimal(1));
 	}
 
 	@Test
@@ -48,9 +62,8 @@ class LottoResultTest {
 		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "30", "40", "45"))));
 
 		LottoResult result = new LottoResult(lottoPackage, winnerLotto);
-		result.report(new Money("6000"));
 
-		assertThat(result.getYield()).isLessThan(new BigDecimal(1));
+		assertThat(result.report(new Money("6000"))).isLessThan(new BigDecimal(1));
 	}
 
 	@Test
@@ -58,9 +71,8 @@ class LottoResultTest {
 	void resultYieldZeroLottoTest() {
 
 		LottoResult result = new LottoResult(lottoPackage, winnerLotto);
-		result.report(new Money("1000"));
 
-		assertThat(result.getYield()).isZero();
+		assertThat(result.report(new Money("1000"))).isZero();
 	}
 
 	@Test
@@ -72,3 +84,4 @@ class LottoResultTest {
 		assertThat(result).isNotNull();
 	}
 }
+
