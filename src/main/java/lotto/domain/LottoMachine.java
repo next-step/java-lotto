@@ -12,6 +12,7 @@ public class LottoMachine {
     private static final String DELIMITER = ", ";
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final String PRICE_ERROR_MESSAGE = "1000원 이상의 금액을 입력해야합니다.";
+    private static final String BONUS_NUMBER_ERROR_MESSAGE = "보너스 볼은 당첨 번호들이랑 달라야 합니다.";
     private static final List<LottoNumber> lottoNumbers;
 
     static {
@@ -49,5 +50,13 @@ public class LottoMachine {
             throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
         }
         return price / ONE_LOTTO_PRICE;
+    }
+
+    public LottoNumber bonusBall(int inputNumber, WinningNumber winningNumber) {
+        LottoNumber lottoNumber = new LottoNumber(inputNumber);
+        if (winningNumber.contains(lottoNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_ERROR_MESSAGE);
+        };
+        return lottoNumber;
     }
 }
