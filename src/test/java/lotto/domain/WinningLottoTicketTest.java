@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.ValueSource;
  * @description :
  **/
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class WinningLottoNumbersTest {
+public class WinningLottoTicketTest {
 
 	@Order(1)
 	@DisplayName("1. 당첨 번호는 빈 값을 입력할 수 없다.")
@@ -28,7 +28,7 @@ public class WinningLottoNumbersTest {
 	public void inputCannotNullOrEmpty(String arg) {
 
 		assertThatThrownBy(() -> {
-			WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(arg);
+			WinningLottoTicket winningLottoTicket = new WinningLottoTicket(arg);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("지난 주 당첨 번호를 입력해 주세요.");
 	}

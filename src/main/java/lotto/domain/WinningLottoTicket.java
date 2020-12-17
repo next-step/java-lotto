@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
  * @date : 2020/12/14
  * @description :
  **/
-public class WinningLottoNumbers {
+public class WinningLottoTicket {
 
 	private static final String SPLIT_REGEX = ",";
 
 	private LottoTicket lottoTicket;
 
-	public WinningLottoNumbers(String arg) {
+	public WinningLottoTicket(String arg) {
 		lottoTicket = convertUserInput(arg);
 	}
 

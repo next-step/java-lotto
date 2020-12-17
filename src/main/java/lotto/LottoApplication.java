@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,7 +13,7 @@ import lotto.view.ResultView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		LottoTickets lottoTickets = InputView.requireCash();
-		WinningLottoNumbers winningLottoNumbers = InputView.requireWinningNumber();
-		ResultView.printWinningStatistics(lottoTickets, winningLottoNumbers);
+		WinningLottoTicket winningLottoTicket = InputView.requireWinningNumber();
+		ResultView.printWinningStatistics(lottoTickets, winningLottoTicket);
 	}
 }

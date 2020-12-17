@@ -5,7 +5,7 @@ import java.util.Map;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.WinningLottoTicket;
 import lotto.domain.WinningStatistics;
 
 /**
@@ -16,11 +16,11 @@ import lotto.domain.WinningStatistics;
 public class ResultView {
 	private static final BigDecimal ONE = new BigDecimal(1);
 
-	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoNumbers winningLottoNumbers) {
+	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
+		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
 		winningStatistics.getPrizeResult().entrySet().stream().forEach(prize -> printWinningOne(prize));
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
