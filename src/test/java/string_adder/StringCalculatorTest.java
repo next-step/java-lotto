@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,14 +21,11 @@ class StringCalculatorTest {
 		stringCalculator = new StringCalculator();
 	}
 
-	@Test
-	void sum_null() {
-		assertThat(stringCalculator.sum(null)).isEqualTo(0);
-	}
-
-	@Test
-	void sum_빈문자열() {
-		assertThat(stringCalculator.sum("")).isEqualTo(0);
+	@ParameterizedTest
+	@NullSource
+	@EmptySource
+	void sum_nullOrEmpty(String text) {
+		assertThat(stringCalculator.sum(text)).isEqualTo(0);
 	}
 
 	@ParameterizedTest
