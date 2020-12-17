@@ -4,7 +4,8 @@ public enum LottoMagicNumber {
     START(1),
     END(45),
     NUMBER_COUNT(6),
-    BASE_INDEX(0);
+    BASE_INDEX(0),
+    BASE_PRICE(1000);
 
     private final int magicNumber;
 

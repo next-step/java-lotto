@@ -40,7 +40,7 @@ public class RandomLottoMachineTest {
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> randomLottoMachine.purchaseQuantity(price))
-                .withMessageMatching("1000원 이상의 금액을 입력해야합니다.");
+                .withMessageMatching("자동 로또를 발급하기 위한 최소 금액은 1000원 입니다.");
     }
 
     @Test
