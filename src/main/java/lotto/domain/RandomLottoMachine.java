@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class LottoMachine {
+public class RandomLottoMachine {
     private static final String DELIMITER = ", ";
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final String PRICE_ERROR_MESSAGE = "1000원 이상의 금액을 입력해야합니다.";
@@ -23,7 +23,7 @@ public class LottoMachine {
 
     public LottoTicket generate() {
         lottoNumbersShuffle();
-        List<LottoNumber> lottoNumbers = LottoMachine.lottoNumbers.subList(LottoMagicNumber.BASE_INDEX.get(), LottoMagicNumber.NUMBER_COUNT.get());
+        List<LottoNumber> lottoNumbers = RandomLottoMachine.lottoNumbers.subList(LottoMagicNumber.BASE_INDEX.get(), LottoMagicNumber.NUMBER_COUNT.get());
         lottoNumbers.sort(LottoNumber::ascendingSort);
         return new LottoTicket(new ArrayList<>(lottoNumbers));
     }

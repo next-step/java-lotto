@@ -19,8 +19,8 @@ public class WinningNumberTest {
         LottoTicket lottoTicket = new LottoTicket(Arrays.stream(lottoNumbers.split(", "))
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList()));
-        LottoMachine lottoMachine = new LottoMachine();
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumbers);
+        RandomLottoMachine randomLottoMachine = new RandomLottoMachine();
+        WinningNumber winningNumber = randomLottoMachine.winningNumber(winningNumbers);
 
         //when
         int winningCount = winningNumber.winningCount(lottoTicket);
