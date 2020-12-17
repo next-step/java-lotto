@@ -72,9 +72,9 @@ class CalculatorTest {
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
-	@DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생 테스트")
+	@DisplayName("음수 또는 숫자 외의 문자를 전달할 경우 RuntimeException 예외가 발생 테스트")
 	@ParameterizedTest
-	@ValueSource(strings = {"-1:1,2", "1,-2:3", "4,1:-5"})
+	@ValueSource(strings = {"-1:1,2", "1,-2:3", "4,1:-5", "1,a:3", "b:1:5"})
 	public void test_6(String input) throws Exception {
 		// given
 		// when
