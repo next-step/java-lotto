@@ -9,20 +9,41 @@ public class LottoRunner {
     private final ResultView resultView = new ResultView();
 
     public void run() {
-        Lottos lottos = this.makeLottos();
+        Lottos autoLottos = this.makeLottosAuto();
+        Lottos manualLottos = this.makeLottosManual();
+        Lottos lottos = this.sumMadeLottos(autoLottos, manualLottos);
+
         LottoWinResult lottoWinResult = this.win(lottos);
         this.printResult(lottoWinResult, lottos);
     }
 
     /**
-     * 구매한 갯수 만큼 로또 번호들을 뽑습니다.
+     * 구매한 금액 만큼 로또 번호들을 뽑습니다.
      */
-    private Lottos makeLottos() {
-        int lottoCount = this.inputView.getLottoCount();
-        this.resultView.printNumberOfPurchasedLotto(lottoCount);
-        Lottos lottos = new Lottos(lottoCount);
-        this.resultView.printLottoNumbers(lottos);
-        return lottos;
+    private Lottos makeLottosAuto() {
+        int lottoCount = this.inputView.getAutoLottoCount();
+        return new Lottos(lottoCount);
+    }
+
+    /**
+     * 수동으로 로또 번호들을 뽑습니다.
+     */
+    private Lottos makeLottosManual() {
+        int lottoCount = this.inputView.getManualLottoCount();
+        return this.inputView.getManualLottos(lottoCount);
+    }
+
+    /**
+     * 수동, 자동으로 발급된 로또들을 합치고 번호를 출력합니다.
+     * @param autoLottos
+     * @param manualLottos
+     * @return
+     */
+    private Lottos sumMadeLottos(Lottos autoLottos, Lottos manualLottos) {
+        this.resultView.printNumberOfPurchasedLotto(manualLottos.size(), autoLottos.size());
+        manualLottos.addLottos(autoLottos);
+        this.resultView.printLottoNumbers(manualLottos);
+        return manualLottos;
     }
 
     /**
@@ -31,7 +52,7 @@ public class LottoRunner {
      */
     private LottoWinResult win(Lottos lottos) {
         LottoWinCalculator lottoWinCalculator
-                = new LottoWinCalculator(new Lotto(this.inputView.insertWinLottoNumbers())
+                = new LottoWinCalculator(this.inputView.insertWinLottoNumbers()
                                         , new LottoNumber(this.inputView.insertBonusNumber()));
 
         return lottoWinCalculator.findLottoWinPrize(lottos);
