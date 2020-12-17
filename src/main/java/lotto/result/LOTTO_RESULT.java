@@ -1,4 +1,4 @@
-package lotto;
+package lotto.result;
 
 import lotto.number.LottoNumbers;
 

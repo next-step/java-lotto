@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
+import lotto.result.LOTTO_RESULT;
 
 import java.util.ArrayList;
 import java.util.Arrays;

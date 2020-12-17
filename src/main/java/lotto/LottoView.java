@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.number.LottoNumbers;
+import lotto.result.LottoStatistics;
 
 import java.util.List;
 

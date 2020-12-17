@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.LOTTO_RESULT;
-import lotto.LottoStatistics;
+import lotto.result.LOTTO_RESULT;
+import lotto.result.LottoStatistics;
 import lotto.LottoView;
 import lotto.number.LottoNumbers;
 
