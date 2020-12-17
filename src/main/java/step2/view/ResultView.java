@@ -1,9 +1,9 @@
 package step2.view;
 
 import step2.domain.LottoGame;
-import step2.domain.LottoNumbers;
 import step2.domain.Rank;
 import step2.domain.Request;
+import step2.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.*;
+import static step2.domain.Rank.*;
 
 public class ResultView {
 
@@ -23,10 +24,10 @@ public class ResultView {
         System.out.println(countOfMatch + "개 일치 " + "(" + winningMoney + "원) - " + total + "개");
     }
 
-    public static void printLotto(List<LottoNumbers<Integer>> lottoNumbers, String delimiter) {
+    public static void printLotto(List<LottoNumbers> lottoNumbers, String delimiter) {
         printMessage(lottoNumbers.size() + "개를 구매했습니다.");
-        for (LottoNumbers<Integer> n : lottoNumbers) {
-            printNumbers(n.getLottoNumbers(), delimiter);
+        for (LottoNumbers numbers : lottoNumbers) {
+            printNumbers(numbers.getLottoNumbers(), delimiter);
         }
     }
 
@@ -50,9 +51,9 @@ public class ResultView {
     }
 
     private static void setRankData(Map<Rank, List<Rank>> result) {
-        Arrays.stream(Rank.values())
-                .filter(r -> r != Rank.MISS)
-                .forEach((rank) -> result.computeIfAbsent(rank, r -> new ArrayList<Rank>()));
+        Arrays.stream(values())
+                .filter(r -> r != MISS)
+                .forEach(rank -> result.computeIfAbsent(rank, r -> new ArrayList<>()));
     }
 
     private static void printMargin(Request request, Map<Rank, List<Rank>> rank) {
@@ -62,7 +63,7 @@ public class ResultView {
                 .mapToLong(Rank::getWinningMoney)
                 .sum();
 
-        double incomeRate = (income / request.getPurchaseMoney()) * 100;
+        double incomeRate = (income / request.getPurchaseMoney()) * 0.01;
         printMessage("총 수익률은 " + incomeRate + "입니다.");
     }
 }
