@@ -5,12 +5,11 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 	private static final int ZERO = 0;
-	private static final int ONE = 1;
-	private static final int TWO = 2;
 	private static final String MINUS_SYMBOL = "-";
 	private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 	private static final String SPLIT_PATTERN = "[,:]";
 	private static final String NUMBER_PATTERN = "^[0-9]+$";
+	private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 	private static Matcher matcher;
 
 	public int calculate(String input) {
@@ -18,13 +17,9 @@ public class Calculator {
 			return ZERO;
 		}
 
-		String[] numbers = getSplitNumber(input);
+		String[] numbers = splitNumber(input);
 
 		validateNumbers(numbers);
-
-		if (isOnlyOneNumber(numbers)) {
-			return Integer.parseInt(numbers[ZERO]);
-		}
 
 		return sum(numbers);
 	}
@@ -39,8 +34,8 @@ public class Calculator {
 	/**
 	 * 커스텀 구분자 포함여부 체크
 	 */
-	private boolean includeCustomDelimiter(String input) {
-		matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+	private boolean hasCustomDelimiter(String input) {
+		matcher = pattern.matcher(input);
 		return matcher.find();
 	}
 
@@ -48,15 +43,15 @@ public class Calculator {
 	 * 커스텀 구분자로 split
 	 */
 	private String[] splitUsingCustomDelimiter() {
-		return matcher.group(TWO).split(matcher.group(ONE));
+		return matcher.group(2).split(matcher.group(1));
 	}
 
 	/**
 	 * 커스텀 구분자를 갖고 있는지 아닌지 판단 후 각 유형에 맞게 split 결과 return
 	 */
-	private String[] getSplitNumber(String input) {
+	private String[] splitNumber(String input) {
 		String[] numbers = input.split(SPLIT_PATTERN);
-		if (includeCustomDelimiter(input)) {
+		if (hasCustomDelimiter(input)) {
 			numbers = splitUsingCustomDelimiter();
 		}
 		return numbers;
@@ -82,13 +77,6 @@ public class Calculator {
 		for (String number : numbers) {
 			validateNumber(number);
 		}
-	}
-
-	/**
-	 * 하나의 숫자만 입력한 경우 체크
-	 */
-	private boolean isOnlyOneNumber(String[] numbers) {
-		return numbers.length == ONE;
 	}
 
 	/**
