@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class LottoTest {
+public class LottoGameTest {
 	LottoGame lotto = new LottoGame();
 
 	@DisplayName("로또 구매 개수 계산 테스트")
