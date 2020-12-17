@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.text.MessageFormat;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -46,7 +47,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public Map<Integer, LottoNumber> getLottoNumberCache() {
-        return lottoNumberCache;
+        return Collections.unmodifiableMap(lottoNumberCache);
     }
 
     @Override

@@ -3,6 +3,7 @@ package step3.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -15,7 +16,7 @@ public class LottoResult {
     }
 
     public List<Rank> getRanks() {
-        return this.ranks;
+        return Collections.unmodifiableList(this.ranks);
     }
 
     public BigDecimal getTotalRevenue(int purchasePrice) {

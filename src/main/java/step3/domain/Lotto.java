@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLotto() {
-        return this.lotto;
+        return Collections.unmodifiableSet(this.lotto);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
