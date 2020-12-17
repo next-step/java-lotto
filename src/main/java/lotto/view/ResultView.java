@@ -1,7 +1,11 @@
 package lotto.view;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
@@ -21,7 +25,7 @@ public class ResultView {
 		System.out.println("---------");
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
-		winningStatistics.getPrizeResult().entrySet().stream().forEach(prize -> printWinningOne(prize));
+		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
 
@@ -33,11 +37,15 @@ public class ResultView {
 		System.out.println(sb);
 	}
 
-	private static void printWinningOne(Map.Entry<Prize, Integer> prize) {
-		if (prize.getKey() == Prize.NONE)
-			return;
-		Prize prizeKey = prize.getKey();
-		System.out.println(
-			prizeKey.getMatchCount() + "개 일치 (" + prizeKey.getReward() + "원)- " + prize.getValue() + "개");
+	private static void printWinningStatus(List<Prize> prizeResult) {
+		List<Prize> sortedPrize = Arrays.stream(Prize.values())
+			.sorted(Comparator.comparing(Prize::getMatchCount))
+			.collect(Collectors.toList());
+
+		for(Prize prize : sortedPrize){
+			if (prize == Prize.NONE) continue;
+			System.out.println(prize.getMatchCount() + "개 일치 (" + prize.getReward() + "원)- " + prizeResult.stream()
+																									.filter(result -> result.equals(prize)).count() + "개");
+		}
 	}
 }

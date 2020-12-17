@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author : byungkyu
@@ -35,5 +36,10 @@ public enum Prize {
 
 	public int getReward() {
 		return reward;
+	}
+
+	public boolean isContainMatchCount(int matchCount) {
+		return Arrays.stream(values()).map(prize -> prize.getMatchCount())
+			.collect(Collectors.toList()).contains(matchCount);
 	}
 }
