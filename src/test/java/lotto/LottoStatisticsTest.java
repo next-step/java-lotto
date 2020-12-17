@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.TestUtils.duplicate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -68,13 +69,5 @@ class LottoStatisticsTest {
 
 		// when & then
 		assertThat(lottoStatistics.calculateIncomeRate()).isStrictlyBetween(8.30d, 8.39d);
-	}
-
-	private List<LOTTO_RESULT> duplicate(LOTTO_RESULT lottoResult, int size) {
-		List<LOTTO_RESULT> resultList = new ArrayList<>();
-		for (int i = 0; i < size; i++) {
-			resultList.add(lottoResult);
-		}
-		return resultList;
 	}
 }

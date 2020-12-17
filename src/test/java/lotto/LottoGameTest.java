@@ -1,13 +1,11 @@
 package lotto;
 
-import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +28,7 @@ class LottoGameTest {
 			@Override
 			public LottoNumbers getWinningNumbers() {
 				callList.add("getWinningNumbers");
-				return createLottoNumbers(1, 2, 3, 4, 5, 6);
+				return TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6);
 			}
 		};
 
@@ -58,12 +56,5 @@ class LottoGameTest {
 		// then
 		assertThat(callList)
 				.containsExactly("getMoney", "buyLottoRight", "getWinningNumbers", "statisticsRight");
-	}
-
-	private LottoNumbers createLottoNumbers(int n1, int n2, int n3, int n4, int n5, int n6) {
-		List<LottoNumber> lottoNumberList = Arrays.asList(
-				new LottoNumber(n1), new LottoNumber(n2), new LottoNumber(n3),
-				new LottoNumber(n4), new LottoNumber(n5), new LottoNumber(n6));
-		return new LottoNumbers(lottoNumberList);
 	}
 }
