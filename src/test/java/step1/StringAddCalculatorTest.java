@@ -47,4 +47,10 @@ public class StringAddCalculatorTest {
 			.isInstanceOf(RuntimeException.class);
 	}
 
+	@Test
+	public void splitAndSum_character() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,b,c"))
+			.isInstanceOf(RuntimeException.class);
+	}
+
 }
