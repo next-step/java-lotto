@@ -14,10 +14,10 @@ public class Delimiter {
 
     public static Numbers split(String input) {
         Matcher matcher = pattern.matcher(input);
-        if(matcher.find()) {
+        if (matcher.find()) {
             return splitCustom(matcher);
         }
-       return splitDefault(input);
+        return splitDefault(input);
     }
 
     private static Numbers splitDefault(String input) {

@@ -7,11 +7,11 @@ public final class StringAddCalculator {
     }
 
     public static int splitAndSum(String text) {
-        if(text == null || text.isEmpty()) return ZERO;
+        if (text == null || text.isEmpty()) return ZERO;
 
         Numbers numbers = Delimiter.split(text);
 
-        if(numbers.hasOnlyOneNumber()) {
+        if (numbers.hasOnlyOneNumber()) {
             return numbers.firstNumber();
         }
 

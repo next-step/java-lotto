@@ -24,7 +24,7 @@ public class LottoShopTest {
         LottoShop shop = new LottoShop();
         int money = 700;
         assertThatThrownBy(() -> shop.getLottos(money))
-                .isInstanceOf(NotEnoughMoneyException.class)
+                .isInstanceOf(NotEnoughLottoPurchaseMoneyException.class)
                 .hasMessage("돈이 부족합니다.");
     }
 }

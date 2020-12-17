@@ -17,7 +17,7 @@ public class LottoWinningResults {
     public Map<WinType, Integer> checkWinLotto(List<Lotto> lottos, String winNumbers) {
         Lotto winLotto = new Lotto(winNumbers);
 
-        for(Lotto lotto: lottos) {
+        for (Lotto lotto : lottos) {
             int matchCount = lotto.matchNumberCnt(winLotto);
             int existsWinCount = getWinCount(matchCount);
             results.put(WinType.getByCnt(matchCount), existsWinCount + 1);
@@ -27,7 +27,7 @@ public class LottoWinningResults {
     }
 
     private int getWinCount(int matchCnt) {
-        if(results.get(WinType.getByCnt(matchCnt)) == null) {
+        if (results.get(WinType.getByCnt(matchCnt)) == null) {
             return ZERO;
         }
         return results.get(WinType.getByCnt(matchCnt));

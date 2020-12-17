@@ -18,6 +18,7 @@ public enum WinType {
         this.matchCnt = matchCnt;
         this.desc = desc;
     }
+
     public static WinType getByCnt(int cnt) {
         return Arrays.stream(values())
                 .filter(v -> v.matchCnt == cnt)
