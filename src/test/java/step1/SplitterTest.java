@@ -40,4 +40,14 @@ public class SplitterTest {
 		assertThat(result).containsSequence(1,2,3);
 	}
 
+	@DisplayName("커스텀 구분자로로 구분된 문자열을 split() 하면 0 이상의 정수 Array 반환")
+	@Test
+	void given_custom_delimiter_separated_numbers_when_splitter_split_then_return_number_array() {
+		final String input = "//;\n1;2;3";
+		InputSplitter customSplitter = InputSplitterFactory.of(input);
+		int[] result = customSplitter.split(input);
+
+		assertThat(result).containsSequence(1,2,3);
+	}
+
 }

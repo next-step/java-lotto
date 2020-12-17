@@ -18,6 +18,10 @@ public enum InputSplitterFactory {
 		this.inputSplitter = inputSplitter;
 	}
 
+	public Pattern getPattern() {
+		return pattern;
+	}
+
 	public InputSplitter getInputSplitter() {
 		return inputSplitter;
 	}
