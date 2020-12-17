@@ -6,22 +6,25 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Delimiter {
+    private Delimiter() {
+    }
+
     private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
     public static final String DEFAULT_REGEX = "[,:]";
 
-    public static Numbers split(InputText input) {
-        Matcher matcher = pattern.matcher(input.toString());
+    public static Numbers split(String input) {
+        Matcher matcher = pattern.matcher(input);
         if(matcher.find()) {
             return splitCustom(matcher);
         }
        return splitDefault(input);
     }
 
-    private static Numbers splitDefault(InputText input) {
-        String[] tokens = input.toString().split(DEFAULT_REGEX);
+    private static Numbers splitDefault(String input) {
+        String[] tokens = input.split(DEFAULT_REGEX);
 
         return new Numbers(Arrays.stream(tokens)
-                .map(Integer::parseInt)
+                .map(it -> new PositiveNumber(Integer.parseInt(it)))
                 .collect(Collectors.toList()));
     }
 
@@ -31,7 +34,7 @@ public class Delimiter {
                 .split(customDelimiter);
 
         return new Numbers(Arrays.stream(tokens)
-                .map(Integer::parseInt)
+                .map(it -> new PositiveNumber(Integer.parseInt(it)))
                 .collect(Collectors.toList()));
     }
 }
