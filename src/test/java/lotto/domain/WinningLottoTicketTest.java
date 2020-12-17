@@ -16,10 +16,8 @@ import org.junit.jupiter.params.provider.ValueSource;
  * @date : 2020/12/14
  * @description :
  **/
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WinningLottoTicketTest {
 
-	@Order(1)
 	@DisplayName("1. 당첨 번호는 빈 값을 입력할 수 없다.")
 	@ParameterizedTest
 	@NullSource

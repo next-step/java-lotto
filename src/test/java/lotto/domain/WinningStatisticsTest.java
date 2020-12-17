@@ -17,7 +17,6 @@ import org.junit.jupiter.api.TestMethodOrder;
  * @date : 2020/12/14
  * @description :
  **/
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WinningStatisticsTest {
 
 	LottoTickets lottoTickets;
@@ -46,7 +45,6 @@ public class WinningStatisticsTest {
 		lottoTickets = new LottoTickets(customLottoTickets);
 	}
 
-	@Order(1)
 	@DisplayName("1. 3개일치")
 	@Test
 	public void matchThree() {
@@ -59,7 +57,6 @@ public class WinningStatisticsTest {
 
 	}
 
-	@Order(2)
 	@DisplayName("2. 4개일치")
 	@Test
 	public void matchFour() {
@@ -71,7 +68,6 @@ public class WinningStatisticsTest {
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(50.0));
 	}
 
-	@Order(3)
 	@DisplayName("3. 5개일치")
 	@Test
 	public void matchFive() {
@@ -84,7 +80,6 @@ public class WinningStatisticsTest {
 			WinningStatistics.parseWinningSummaryFormat(1500.0));
 	}
 
-	@Order(4)
 	@DisplayName("4. 6개일치")
 	@Test
 	public void matchSix() {
@@ -97,7 +92,6 @@ public class WinningStatisticsTest {
 			WinningStatistics.parseWinningSummaryFormat(2000000.0));
 	}
 
-	@Order(5)
 	@DisplayName("5. 0개일치")
 	@Test
 	public void inputCannotDuplicate() {

@@ -13,10 +13,8 @@ import org.junit.jupiter.api.TestMethodOrder;
  * @date : 2020/12/14
  * @description :
  **/
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LottoTicketsTest {
 
-	@Order(1)
 	@DisplayName("1. 구입 금액에 해당하는 로또 티켓이 발급된다.")
 	@Test
 	void buyTicket() {
