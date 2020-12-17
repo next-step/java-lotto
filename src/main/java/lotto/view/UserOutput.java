@@ -2,10 +2,10 @@ package lotto.view;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import lotto.modal.Lotto;
 import lotto.modal.LottoRank;
+import lotto.modal.LottoRankCounter;
 
 public class UserOutput {
 
@@ -45,12 +45,12 @@ public class UserOutput {
 		messagePrint(PRINT_LOTTO_WINNER_NUMBER + NEXT_LINE_FLAG);
 	}
 
-	public static void printLottoRankResult(Map<LottoRank, Integer> lottoRankResult) {
+	public static void printLottoRankResult(List<LottoRankCounter> lottoRankCounters) {
 		messagePrint(PRINT_LOTTO_RANK_RESULT_MSG + NEXT_LINE_FLAG);
 
-		lottoRankResult.remove(LottoRank.NOTHING_RANK);
-		for (LottoRank rank : lottoRankResult.keySet()) {
-			messagePrint(rank.getRankMessage() + lottoRankResult.get(rank) + PRINT_LOTTO_RANK_COUNT_MSG);
+		lottoRankCounters.remove(LottoRank.NOTHING_RANK.ordinal());
+		for (LottoRankCounter rank : lottoRankCounters) {
+			messagePrint(rank.getRankMessage() + rank.getCount() + PRINT_LOTTO_RANK_COUNT_MSG);
 		}
 	}
 

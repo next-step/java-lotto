@@ -16,7 +16,7 @@ public class LottoMain {
 
 			LottoResult result = lottoGame.getLottoResult(UserView.getUserInputLotto());
 
-			UserView.printLottoResultRank(result.getLottoRankResult());
+			UserView.printLottoResultRank(result.getLottoRankCounters());
 			UserView.printLottoResultYield(result.report(money));
 		} catch (IllegalArgumentException illegalArgumentException) {
 			UserView.printErrorMsg(illegalArgumentException.getMessage());
