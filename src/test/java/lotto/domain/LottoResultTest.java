@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-    private LottoMachine lottoMachine = new LottoMachine();
+    private LottoMachine lottoMachine = LottoMachine.instance();
     private List<Integer> winningLottoNumbers = new ArrayList<>();
     private Set<LottoTicket> lottoTickets = new HashSet<>();
 
@@ -30,11 +30,11 @@ class LottoResultTest {
 
     @BeforeEach
     void setLottoTicket() {
-        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
-        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45")));
-        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7")));
-        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
-        lottoTickets.add(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45")));
+        lottoTickets.add(lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")));
+        lottoTickets.add(lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,45")));
+        lottoTickets.add(lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,7")));
+        lottoTickets.add(lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45")));
+        lottoTickets.add(lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,43,44,45")));
     }
 
     @ParameterizedTest
@@ -43,7 +43,7 @@ class LottoResultTest {
     void analyze_lotto_rank(WinningPrize rank) {
         // given
         WinningLotto winningLotto = new WinningLotto.Builder()
-                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(winningLottoNumbers))
                 .bonusBall(7)
                 .build();
 
@@ -60,7 +60,7 @@ class LottoResultTest {
     void calculate_prize_rate() {
         // given
         WinningLotto winningLotto = new WinningLotto.Builder()
-                .winningLottoTicket(lottoMachine.createManualLottoNumbers(winningLottoNumbers))
+                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(winningLottoNumbers))
                 .bonusBall(7)
                 .build();
 

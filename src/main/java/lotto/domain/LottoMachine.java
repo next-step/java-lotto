@@ -6,10 +6,11 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    public static final int LOTTO_START_NUMBER = 1;
-    public static final int LOTTO_END_NUMBER = 45;
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private static final List<Integer> lottoNumbers;
+    private static final LottoMachine instance = new LottoMachine();
 
     static {
         lottoNumbers = new ArrayList<>();
@@ -17,20 +18,28 @@ public class LottoMachine {
                 .boxed().distinct().forEach(lottoNumbers::add);
     }
 
-    public LottoTicket generateLottoNumber() {
+    private LottoMachine() {
+    }
+
+    public static LottoMachine instance() {
+        return instance;
+    }
+
+    public LottoTicket generateAutoLottoNumber() {
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(lottoNumbers.subList(0, LOTTO_NUMBER_COUNT).stream()
                 .map(number -> LottoNumber.ofNumber(number))
                 .collect(Collectors.toSet()));
     }
 
-    public LottoTicket createManualLottoNumbers(List<Integer> manualLottoNumbers) {
+    public LottoTicket generateManualLottoNumbers(List<Integer> manualLottoNumbers) {
         Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {
             lottoNumbers.add(LottoNumber.ofNumber(deduplicatedManualLottoNumber));
         }
+
         return new LottoTicket(lottoNumbers);
     }
 }
