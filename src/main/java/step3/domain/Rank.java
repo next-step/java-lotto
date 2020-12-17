@@ -16,7 +16,7 @@ public enum Rank {
     private boolean bonus;
     private String message;
 
-    private Rank(int countOfMatch, int winningMoney, boolean bonus, String message) {
+    Rank(int countOfMatch, int winningMoney, boolean bonus, String message) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
         this.bonus = bonus;
