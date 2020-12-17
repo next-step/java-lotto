@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class LotteryNumber {
+    private static final Map<Integer, LotteryNumber> lotteryNumberPool = new HashMap<>();
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
     private static final List<LotteryNumber> LOTTERY_NUMBER_POOL = generateLotteryNumbers();
@@ -20,8 +21,19 @@ public class LotteryNumber {
 
     private static List<LotteryNumber> generateLotteryNumbers() {
         return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-            .mapToObj(LotteryNumber::new)
+            .mapToObj(LotteryNumber::getFlyweightLotteryNumber)
             .collect(toList());
+    }
+
+    private static LotteryNumber getFlyweightLotteryNumber(final int givenNumber) {
+        final LotteryNumber lotteryNumber = lotteryNumberPool.get(givenNumber);
+        if (lotteryNumber != null) {
+            return lotteryNumber;
+        }
+
+        final LotteryNumber newLotteryNumber = new LotteryNumber(givenNumber);
+        lotteryNumberPool.put(givenNumber, newLotteryNumber);
+        return newLotteryNumber;
     }
 
     public static Set<LotteryNumber> ofAutoNumbers(final int endOfRange) {
@@ -34,7 +46,7 @@ public class LotteryNumber {
 
     public static LotteryNumber ofManual(final int givenNumber) {
         if ((START_NUMBER <= givenNumber) && (givenNumber <= END_NUMBER)) {
-            return new LotteryNumber(givenNumber);
+            return getFlyweightLotteryNumber(givenNumber);
         }
 
         throw new IllegalArgumentException(ERR_TEXT_INVALID_NUMBER);
