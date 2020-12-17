@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.numbers.LottoTickets;
-import lotto.domain.numbers.WinningLottoNumbers;
+import lotto.domain.numbers.WinningLottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,11 +39,20 @@ class LottoGameTest {
     @DisplayName("발급한 로또 티켓들과 당첨 번호를 비교하여 각 맞춘 갯수들을 저장하여 리턴한다.")
     @Test
     void matchNumbers() {
-        Map<MatchPrize, Integer> results = lottoGame.matchNumbers(new WinningLottoNumbers("1, 8, 10, 14, 21, 40"));
+        WinningLottoTicket winningLottoTicket =
+                new WinningLottoTicket(new LottoTicket(provideWinningNumbers()), new LottoNumber(30));
+        Map<Rank, Integer> results = lottoGame.matchNumbers(winningLottoTicket).getResult();
 
-        assertThat(results.get(MatchPrize.THREE)).isEqualTo(1);
-        assertThat(results.get(MatchPrize.FOUR)).isZero();
-        assertThat(results.get(MatchPrize.FIVE)).isEqualTo(1);
-        assertThat(results.get(MatchPrize.SIX)).isZero();
+        assertThat(results.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(results.get(Rank.FOURTH)).isZero();
+        assertThat(results.get(Rank.THIRD)).isZero();
+        assertThat(results.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(results.get(Rank.FIRST)).isZero();
+    }
+
+    private List<LottoNumber> provideWinningNumbers() {
+        return Stream.of(1, 8, 10, 14, 21, 40)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
