@@ -54,6 +54,6 @@ class LottoResultTest {
     @DisplayName("수익률 계산 테스트")
     void getRevenueRate() {
         LottoResult lottoResult = new LottoResult(lottoList, winnerLotto, buyAmount);
-        assertThat(lottoResult.getRevenueRate()).isCloseTo(0.35, offset(0.1d));
+        assertThat(lottoResult.getRewardRate()).isCloseTo(0.35, offset(0.1d));
     }
 }

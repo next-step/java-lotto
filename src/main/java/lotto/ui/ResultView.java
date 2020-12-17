@@ -21,6 +21,6 @@ public class ResultView {
         System.out.printf("4개 일치 (50000원)- %d개\n", result.getSameLottoCount(4));
         System.out.printf("5개 일치 (1500000원)- %d개\n", result.getSameLottoCount(5));
         System.out.printf("6개 일치 (2000000000원)- %d개\n", result.getSameLottoCount(6));
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.getRevenueRate());
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result.getRewardRate());
     }
 }

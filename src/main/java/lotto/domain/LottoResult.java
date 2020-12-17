@@ -5,43 +5,36 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int EMPTY_KEY_RESULT_COUNT = 0;
     private static final int INITIAL_COUNT = 0;
+    private static final int DEFAULT_WINNING_COUNT = 0;
 
-    private final Map<Integer, Integer> sameCountMap;
+    private final Map<WinningCase, Integer> winningCounts = new HashMap<>();
     private final int buyAmount;
 
     public LottoResult(List<Lotto> lottoList, Lotto winnerLotto, int buyAmount) {
         this.buyAmount = buyAmount;
-        sameCountMap = new HashMap<>();
 
-        for (Lotto lotto : lottoList) {
+        lottoList.stream().map(lotto -> {
             int numberCount = lotto.sameNumberCount(winnerLotto);
-
-            if (! sameCountMap.containsKey(numberCount))
-                sameCountMap.put(numberCount, INITIAL_COUNT);
-
-            increaseCount(numberCount);
-        }
+            return new WinningCase(numberCount);
+        }).forEach(winningCase -> {
+            winningCounts.putIfAbsent(winningCase, INITIAL_COUNT);
+            winningCounts.computeIfPresent(winningCase,(key, count) -> ++count);
+        });
     }
 
-    private void increaseCount(int numberCount) {
-        Integer matchCount = sameCountMap.get(numberCount);
-        sameCountMap.put(numberCount, matchCount + 1);
+    public int getTotalReward() {
+        return winningCounts.entrySet().stream()
+                .map((entry) -> entry.getKey().getReward(entry.getValue()))
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     public int getSameLottoCount(int sameCount) {
-        if (! sameCountMap.containsKey(sameCount)) {
-            return EMPTY_KEY_RESULT_COUNT;
-        }
-        return sameCountMap.get(sameCount);
+        return winningCounts.getOrDefault(new WinningCase(sameCount), DEFAULT_WINNING_COUNT);
     }
 
-    public double getRevenueRate() {
-        int totalRevenue = 0;
-        for (Integer sameCount : sameCountMap.keySet()) {
-            totalRevenue += RevenueTable.getRevenue(sameCount);
-        }
-        return (double)totalRevenue / buyAmount;
+    public double getRewardRate() {
+        return (double) getTotalReward() / buyAmount;
     }
 }
