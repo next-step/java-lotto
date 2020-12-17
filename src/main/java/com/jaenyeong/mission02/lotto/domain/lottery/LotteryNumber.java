@@ -10,7 +10,6 @@ public class LotteryNumber {
     private static final int END_NUMBER = 45;
     private static final List<LotteryNumber> LOTTERY_NUMBER_POOL = generateLotteryNumbers();
     private static final int START_OF_RANGE = 0;
-    private static final int RANDOM_VALUE = 0;
     private static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
 
     private final int lotteryNumber;
@@ -23,11 +22,6 @@ public class LotteryNumber {
         return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
             .mapToObj(LotteryNumber::new)
             .collect(toList());
-    }
-
-    public static LotteryNumber ofAuto() {
-        Collections.shuffle(LOTTERY_NUMBER_POOL);
-        return LOTTERY_NUMBER_POOL.get(RANDOM_VALUE);
     }
 
     public static Set<LotteryNumber> ofAutoNumbers(final int endOfRange) {
