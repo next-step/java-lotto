@@ -42,7 +42,7 @@ class StringCalculator {
 	private void validateNotNegative(int number) {
 		if (number < 0) {
 			String msg = String.format("%s is negative !", number);
-			throw new RuntimeException(msg);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 }
