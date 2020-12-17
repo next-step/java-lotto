@@ -4,17 +4,15 @@ import lottery.domain.*;
 import lottery.view.InputViewLotteryGame;
 import lottery.view.ResultViewLotteryGame;
 
-import java.util.List;
-
 public class LotteryGameManager {
     public static void main(String[] args) {
         int purchaseAmount = Integer.parseInt(InputViewLotteryGame.getUserInvestAmount());
 
-        LotteryGame lotteryGame = new LotteryGame(1000,6);
+        LotteryGame lotteryGame = new LotteryGame(1000);
         int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(purchaseAmount);
         ResultViewLotteryGame.displayNumberOfTickets(numberOfTicketsToBuy);
 
-        List<LotteryTicket> purchasedTickets = lotteryGame.buyLotteryTickets(
+        LotteryTickets purchasedTickets = lotteryGame.buyLotteryTickets(
                 numberOfTicketsToBuy,
                 new AutoBuyBehavior());
 

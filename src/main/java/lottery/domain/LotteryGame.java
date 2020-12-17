@@ -7,11 +7,9 @@ import java.util.stream.IntStream;
 public class LotteryGame {
 
     private final int price;
-    private final int pickCounts;
 
-    public LotteryGame(int price, int pickCounts) {
+    public LotteryGame(int price) {
         this.price = price;
-        this.pickCounts = pickCounts;
     }
 
     public int buyNumberOfLotteryTickets(int cost) {
@@ -21,11 +19,11 @@ public class LotteryGame {
         return cost / this.price;
     }
 
-    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, BuyBehavior behavior) {
-        return IntStream.range(0, numberOfTickets)
+    public LotteryTickets buyLotteryTickets(int numberOfTickets, BuyBehavior behavior) {
+        return new LotteryTickets(IntStream.range(0, numberOfTickets)
                 .boxed()
                 .map(Integer -> LotteryTicketFactory.createLotteryTicket(behavior))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @Override
@@ -33,12 +31,11 @@ public class LotteryGame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LotteryGame that = (LotteryGame) o;
-        return price == that.price &&
-                pickCounts == that.pickCounts;
+        return price == that.price;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, pickCounts);
+        return Objects.hash(price);
     }
 }

@@ -1,9 +1,6 @@
 package lottery.view;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryResult;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryValue;
+import lottery.domain.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,8 +15,8 @@ public final class ResultViewLotteryGame {
         System.out.println(stringBuilder);
     }
 
-    public static void displayPurchasedTickets(List<LotteryTicket> purchasedTickets) {
-        for (LotteryTicket lotteryTicket : purchasedTickets) {
+    public static void displayPurchasedTickets(LotteryTickets purchasedTickets) {
+        for (LotteryTicket lotteryTicket : purchasedTickets.getLotteryTickets()) {
             System.out.println("[" + displayTicket(lotteryTicket) + "]");
         }
     }

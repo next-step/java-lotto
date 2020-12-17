@@ -383,7 +383,7 @@ public enum Rank {
 - [ ] `LotteryGame` 클래스가 조금더 많은 역할을 할 수있으면 좋을것 같아요.
       `price, count` 의 유효성 검사를 `LotteryGame` 가 아닌 `LotteryAmount`와 같은 클래스를 만들어 위임하고, 
       `LotteryGame`이 `LotteryTicket` 에 관련관 상태값을 가질수 있다면 더 많은 책임들을 위임할 수 있지 않을까 생각합니다 !
-- [ ] 리스트를 나타내는 `List<LotteryTicket>` 값을 일급 컬렉션으로 만들어보는건 어떨까요 ?
+- [x] 리스트를 나타내는 `List<LotteryTicket>` 값을 일급 컬렉션으로 만들어보는건 어떨까요 ?
       일급 컬렉션에 대해 학습하는 과정이라고 생각해주시면 좋을것 같습니다. https://jojoldu.tistory.com/412
 - [ ] 2등 로또를 판단하는 로직을 `LotteryResult`에서 구현해주셨네요 👍
       만약 3등, 4등에서도 보너스 번호여부가 추가된다면 `LotteryResult`의 비즈니스 로직이 복잡하게 변할것 같아요.

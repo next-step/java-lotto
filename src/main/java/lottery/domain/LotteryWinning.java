@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LotteryWinning {
@@ -30,8 +29,8 @@ public class LotteryWinning {
         return false;
     }
 
-    public LotteryResult getLotteryResult(List<LotteryTicket> lotteryTickets) {
-        for (LotteryTicket lotteryTicket : lotteryTickets) {
+    public LotteryResult getLotteryResult(LotteryTickets lotteryTickets) {
+        for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             lotteryResult.updateLotteryResult(
                     this.getCountsMatched(lotteryTicket),
                     isMatchedBonusNumber(lotteryTicket));
