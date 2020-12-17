@@ -20,7 +20,7 @@ public class Money {
 		return this.userMoney / LOTTO_PRICE_MONEY;
 	}
 
-	public BigDecimal getYield(int totalPrize) {
+	public BigDecimal getYield(long totalPrize) {
 
 		BigDecimal money = new BigDecimal(this.userMoney);
 		BigDecimal prize = new BigDecimal(totalPrize);

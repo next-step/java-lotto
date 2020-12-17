@@ -1,9 +1,11 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import lotto.modal.Lotto;
-import lotto.modal.LottoResult;
+import lotto.modal.LottoRank;
 import lotto.modal.Money;
 
 public class UserView {
@@ -17,9 +19,9 @@ public class UserView {
 		return new Money(getUserInputSystem());
 	}
 
-	public static String getUserInputLotto() {
+	public static Lotto getUserInputLotto() {
 		UserOutput.printUserInputLotto();
-		return getUserInputSystem();
+		return Lotto.generateWinnerLotto(getUserInputSystem());
 	}
 
 	public static void printLottoPackage(List<Lotto> lottoPackage) {
@@ -35,8 +37,11 @@ public class UserView {
 		return UserInput.userInputString();
 	}
 
-	public static void printLottoResult(LottoResult lottoResult) {
-		UserOutput.printLottoRankResult(lottoResult.getLottoRankResult());
-		UserOutput.printLottoYield(lottoResult.getYield());
+	public static void printLottoResultRank(Map<LottoRank, Integer> lottoResult) {
+		UserOutput.printLottoRankResult(lottoResult);
+	}
+
+	public static void printLottoResultYield(BigDecimal yield) {
+		UserOutput.printLottoYield(yield);
 	}
 }
