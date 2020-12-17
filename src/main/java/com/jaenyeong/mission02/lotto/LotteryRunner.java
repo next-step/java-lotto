@@ -13,27 +13,49 @@ import static com.jaenyeong.mission02.lotto.domain.lottery.LotteryGame.howManyBu
 import static com.jaenyeong.mission02.lotto.view.UI.*;
 
 public class LotteryRunner {
-    public static final int BUY_NOTHING = 0;
+    private static final int BUY_NOTHING = 0;
 
     public void running() {
         final int buyPrice = scanBuyPrice();
 
-        final int numberOfBuyGame = howManyBuyGame(buyPrice);
-        printNumberOfBuyGame(numberOfBuyGame);
+        final int numberOfBuyGame = inputNumberOfBuyGame(buyPrice);
 
         if (numberOfBuyGame == BUY_NOTHING) {
             return;
         }
 
+        final List<LotteryGame> games = ticketing(numberOfBuyGame);
+
+        final List<Rank> lotteryRanks = matchWinningNumbers(games);
+
+        printWinningStatistics(lotteryRanks, buyPrice);
+    }
+
+    private int inputNumberOfBuyGame(final int buyPrice) {
+        final int numberOfBuyGame = howManyBuyGame(buyPrice);
+        printNumberOfBuyGame(numberOfBuyGame);
+
+        return numberOfBuyGame;
+    }
+
+    private List<LotteryGame> ticketing(final int numberOfBuyGame) {
         final List<LotteryGame> games = buyAutomatically(numberOfBuyGame);
         printLotteryNumbers(games);
 
-        final WinningNumbers winningNumbers = WinningNumbers.of(scanWinningNumbers());
+        return games;
+    }
 
-        final List<Rank> lotteryRanks = games.stream()
-            .map(winningNumbers::checkWinTheLottery)
+    private List<Rank> matchWinningNumbers(final List<LotteryGame> games) {
+        final List<Integer> inputWinningNumbers = scanWinningNumbers();
+        final int bonusNumber = scanBonusNumbers();
+        final WinningNumbers winningNumbers = WinningNumbers.of(inputWinningNumbers, bonusNumber);
+
+        return games.stream()
+            .map(winningNumbers::matchWinningNumbers)
             .collect(Collectors.toList());
+    }
 
+    private void printWinningStatistics(final List<Rank> lotteryRanks, final int buyPrice) {
         final WinningStatistics winningStatistics = WinningStatistics.of(lotteryRanks, buyPrice);
         printResultStatistics(winningStatistics.getPrintFormatWinningResultStatistics());
         printPrize(winningStatistics.getPrintFormatPrizeRate());

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LotteryNumbersTest {
 
     @Test
-    @DisplayName("LottoNumbers 객체 생성 테스트")
+    @DisplayName("LottoNumbers 객체 자동 생성 테스트")
     void createLotteryNumbersAutomatically() {
         final LotteryNumbers lotteryNumbers = LotteryNumbers.ofAuto();
 
@@ -31,8 +31,7 @@ class LotteryNumbersTest {
 
         assertEquals(lottery.size(), max);
 
-        lottery.forEach((lotteryNumber) ->
-            assertThat(lotteryNumber).isBetween(start, end));
+        lottery.forEach((lotteryNumber) -> assertThat(lotteryNumber).isBetween(start, end));
     }
 
     @ParameterizedTest
@@ -81,5 +80,14 @@ class LotteryNumbersTest {
             Arguments.of(Arrays.asList(10, 20, 30, 40, 15)),
             Arguments.of(Arrays.asList(40, 41))
         );
+    }
+
+    @Test
+    @DisplayName("당첨번호가 주어지는 경우 당첨 수 테스트")
+    void checkMatchWinningNumbers() {
+        final LotteryNumbers lotteryNumbers = LotteryNumbers.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LotteryNumbers winningNumbers = LotteryNumbers.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertEquals(lotteryNumbers.matchWinningNumbers(winningNumbers), 6);
     }
 }

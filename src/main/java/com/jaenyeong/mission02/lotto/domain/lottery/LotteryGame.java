@@ -1,13 +1,12 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
-import com.jaenyeong.mission02.lotto.domain.Rank;
-
 import java.util.List;
 import java.util.StringJoiner;
 
 public class LotteryGame {
     protected static final int PRICE = 1_000;
     private static final int MISS_MATCH = 0;
+    private static final String DELIMITER = ", ";
     private final LotteryNumbers lotteryNumbers;
 
     private LotteryGame(final LotteryNumbers lotteryNumbers) {
@@ -26,20 +25,27 @@ public class LotteryGame {
         return money / PRICE;
     }
 
-    public Rank checkWinTheLottery(final LotteryGame otherGame) {
-        if (isNotValid(otherGame)) {
-            return Rank.valueOf(MISS_MATCH);
-        }
-
-        final List<Integer> currentGame = this.lotteryNumbers.getLotteryNumbers();
-
-        currentGame.retainAll(otherGame.getLotteryNumbers());
-
-        return Rank.valueOf(currentGame.size());
+    public boolean containBonusNumber(final int bonusNumber) {
+        return this.lotteryNumbers
+            .getLotteryNumbers()
+            .contains(bonusNumber);
     }
 
-    private boolean isNotValid(final LotteryGame otherGame) {
-        return (otherGame == null) || (otherGame.getLotteryNumbers().size() == MISS_MATCH);
+    public int matchWinningNumber(final LotteryGame winningNumbers) {
+        if (isNotValid(winningNumbers)) {
+            return MISS_MATCH;
+        }
+
+        return this.lotteryNumbers.matchWinningNumbers(winningNumbers.lotteryNumbers);
+    }
+
+    private boolean isNotValid(final LotteryGame winningNumbers) {
+        return (winningNumbers == null) || (winningNumbersSize(winningNumbers) == MISS_MATCH);
+    }
+
+    private int winningNumbersSize(final LotteryGame winningNumbers) {
+        return winningNumbers.lotteryNumbers
+            .getLotteryNumbersSize();
     }
 
     protected List<Integer> getLotteryNumbers() {
@@ -48,7 +54,7 @@ public class LotteryGame {
 
     @Override
     public String toString() {
-        final StringJoiner stringJoin = new StringJoiner(", ");
+        final StringJoiner stringJoin = new StringJoiner(DELIMITER);
         this.getLotteryNumbers().forEach(number -> stringJoin.add(Integer.toString(number)));
 
         return "[" + stringJoin + "]";

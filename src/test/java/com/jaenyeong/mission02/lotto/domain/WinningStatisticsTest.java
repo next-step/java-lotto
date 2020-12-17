@@ -26,21 +26,22 @@ class WinningStatisticsTest {
     @BeforeEach
     void prepare() {
         final String winningNumber = "1, 2, 3, 4, 5, 6";
-        winningNumbers = WinningNumbers.of(parseWinningNumbers(winningNumber));
+        final int bonusNumber = 8;
+        winningNumbers = WinningNumbers.of(parseWinningNumbers(winningNumber), bonusNumber);
     }
 
     @ParameterizedTest
     @MethodSource("inputStringWhatIsWinningNumbers")
     @DisplayName("WinningStatistics 객체 생성 테스트")
-    void createWinningStatistics(final String givenWinNumbers) {
+    void createWinningStatistics(final String givenWinNumbers, final int bonusNumber) {
         final int buyPrice = 50_000;
         final int numberOfBuyGame = howManyBuyGame(buyPrice);
         final List<LotteryGame> games = buyAutomatically(numberOfBuyGame);
 
-        final WinningNumbers winningNumbers = WinningNumbers.of(parseWinningNumbers(givenWinNumbers));
+        final WinningNumbers winningNumbers = WinningNumbers.of(parseWinningNumbers(givenWinNumbers), bonusNumber);
 
         final List<Rank> lotteryRanks = games.stream()
-            .map(winningNumbers::checkWinTheLottery)
+            .map(winningNumbers::matchWinningNumbers)
             .collect(Collectors.toList());
 
         final WinningStatistics winningStatistics = WinningStatistics.of(lotteryRanks, buyPrice);
@@ -48,11 +49,11 @@ class WinningStatisticsTest {
 
     private static Stream<Arguments> inputStringWhatIsWinningNumbers() {
         return Stream.of(
-            Arguments.of("1, 2, 3, 4, 5, 6"),
-            Arguments.of("7, 18, 22, 36, 44, 15"),
-            Arguments.of("5, 12, 41, 13, 35, 11"),
-            Arguments.of("2, 4, 5, 10, 32, 27"),
-            Arguments.of("1, 9, 7, 43, 14, 28")
+            Arguments.of("1, 2, 3, 4, 5, 6", 26),
+            Arguments.of("7, 18, 22, 36, 44, 15", 26),
+            Arguments.of("5, 12, 41, 13, 35, 11", 26),
+            Arguments.of("2, 4, 5, 10, 32, 27", 26),
+            Arguments.of("1, 9, 7, 43, 14, 28", 26)
         );
     }
 
@@ -62,8 +63,9 @@ class WinningStatisticsTest {
     void checkWinningPrize(final List<List<Integer>> givenWinNumbers) {
         final int buyPrice = 5_000;
         final List<Rank> lotteryRanks = buyManually(givenWinNumbers).stream()
-            .map(winningNumbers::checkWinTheLottery)
+            .map(winningNumbers::matchWinningNumbers)
             .collect(Collectors.toList());
+
         final WinningStatistics winningStatistics = WinningStatistics.of(lotteryRanks, buyPrice);
 
         assertEquals(winningStatistics.getPrizeMoney(), Rank.FIRST.getWinningPrize() + Rank.FIFTH.getWinningPrize());
@@ -85,7 +87,7 @@ class WinningStatisticsTest {
     void checkPrizeTextWhenNotBreakEven(final List<List<Integer>> givenWinNumbers) {
         final int buyPrice = 5_000;
         final List<Rank> lotteryRanks = buyManually(givenWinNumbers).stream()
-            .map(winningNumbers::checkWinTheLottery)
+            .map(winningNumbers::matchWinningNumbers)
             .collect(Collectors.toList());
         final WinningStatistics winningStatistics = WinningStatistics.of(lotteryRanks, buyPrice);
         final String textFormatPrize = winningStatistics.getPrintFormatPrizeRate();

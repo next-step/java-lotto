@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class LotteryNumbers {
     private static final int MAX_NUMBERS_OF_LOTTERY = 6;
-    public static final String ERR_TEXT_INVALID_NUMBERS = "[error] This number list is not valid.";
+    private static final String ERR_TEXT_INVALID_NUMBERS = "[error] This number list is not valid.";
     private final Set<LotteryNumber> lotteryNumbers;
 
     private LotteryNumbers(final Set<LotteryNumber> lotteryNumbers) {
@@ -13,15 +13,7 @@ public class LotteryNumbers {
     }
 
     public static LotteryNumbers ofAuto() {
-        final List<Integer> existNumbers = new ArrayList<>();
-        final Set<LotteryNumber> lotteryNumbers = new TreeSet<>(Comparator.comparingInt(LotteryNumber::getLotteryNumber));
-
-        while (existNumbers.size() < MAX_NUMBERS_OF_LOTTERY) {
-            final LotteryNumber lotteryNumber = LotteryNumber.ofAuto(existNumbers);
-
-            existNumbers.add(lotteryNumber.getLotteryNumber());
-            lotteryNumbers.add(lotteryNumber);
-        }
+        final Set<LotteryNumber> lotteryNumbers = LotteryNumber.ofAutoNumbers(MAX_NUMBERS_OF_LOTTERY);
 
         return new LotteryNumbers(lotteryNumbers);
     }
@@ -45,5 +37,15 @@ public class LotteryNumbers {
             ));
 
         return new LotteryNumbers(lotteryNumbers);
+    }
+
+    public int getLotteryNumbersSize() {
+        return lotteryNumbers.size();
+    }
+
+    public int matchWinningNumbers(final LotteryNumbers winningNumbers) {
+        this.lotteryNumbers.retainAll(winningNumbers.lotteryNumbers);
+
+        return this.lotteryNumbers.size();
     }
 }
