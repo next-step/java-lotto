@@ -94,7 +94,7 @@ class LotteryGameTest {
         final int missMatch = 0;
         final int allRight = 6;
 
-        final int countOfMatch = winningGame.checkWinTheLotteryWithBonus(game, 45).getCountOfMatch();
+        final int countOfMatch = game.matchWinningNumber(winningGame);
 
         assertThat(countOfMatch).isBetween(missMatch, allRight);
     }

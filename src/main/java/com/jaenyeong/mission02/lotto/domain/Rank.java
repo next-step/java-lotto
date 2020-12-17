@@ -21,9 +21,15 @@ public enum Rank {
         this.printFormat = printFormat;
     }
 
-    public static Rank valueOf(final int countOfMatch) {
+    public static Rank valueOf(final boolean matchBonus, final int countOfMatch) {
         return Arrays.stream(values())
             .filter(rank -> compareCountOfMatch(countOfMatch, rank))
+            .map(rank -> {
+                if (isMatchingNumberEqualsFive(rank)) {
+                    return getSecondOrThirdRank(matchBonus);
+                }
+                return rank;
+            })
             .findFirst()
             .orElse(MISS);
     }
@@ -36,20 +42,7 @@ public enum Rank {
         return this != MISS;
     }
 
-    public static Rank valueOf(final int countOfMatch, final boolean matchBonus) {
-        return Arrays.stream(values())
-            .filter(rank -> compareCountOfMatch(countOfMatch, rank))
-            .map(rank -> {
-                if (isMatchingNumberEqualsFive(rank)) {
-                    return getSecondAndThirdRank(matchBonus);
-                }
-                return rank;
-            })
-            .findFirst()
-            .orElse(MISS);
-    }
-
-    private static Rank getSecondAndThirdRank(final boolean matchBonus) {
+    private static Rank getSecondOrThirdRank(final boolean matchBonus) {
         return matchBonus ? SECOND : THIRD;
     }
 

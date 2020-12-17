@@ -1,7 +1,5 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
-import com.jaenyeong.mission02.lotto.domain.Rank;
-
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -27,21 +25,27 @@ public class LotteryGame {
         return money / PRICE;
     }
 
-    public Rank checkWinTheLotteryWithBonus(final LotteryGame userGame, final int bonusNumber) {
-        if (isNotValid(userGame)) {
-            return Rank.valueOf(MISS_MATCH);
-        }
-
-        final List<Integer> userGameNumbers = userGame.lotteryNumbers.getLotteryNumbers();
-        final boolean bonusMatch = userGameNumbers.contains(bonusNumber);
-
-        userGameNumbers.retainAll(this.lotteryNumbers.getLotteryNumbers());
-
-        return Rank.valueOf(userGameNumbers.size(), bonusMatch);
+    public boolean containBonusNumber(final int bonusNumber) {
+        return this.lotteryNumbers
+            .getLotteryNumbers()
+            .contains(bonusNumber);
     }
 
-    private boolean isNotValid(final LotteryGame otherGame) {
-        return (otherGame == null) || (otherGame.getLotteryNumbers().size() == MISS_MATCH);
+    public int matchWinningNumber(final LotteryGame winningNumbers) {
+        if (isNotValid(winningNumbers)) {
+            return MISS_MATCH;
+        }
+
+        return this.lotteryNumbers.matchWinningNumbers(winningNumbers.lotteryNumbers);
+    }
+
+    private boolean isNotValid(final LotteryGame winningNumbers) {
+        return (winningNumbers == null) || (winningNumbersSize(winningNumbers) == MISS_MATCH);
+    }
+
+    private int winningNumbersSize(final LotteryGame winningNumbers) {
+        return winningNumbers.lotteryNumbers
+            .getLotteryNumbersSize();
     }
 
     protected List<Integer> getLotteryNumbers() {

@@ -38,4 +38,14 @@ public class LotteryNumbers {
 
         return new LotteryNumbers(lotteryNumbers);
     }
+
+    public int getLotteryNumbersSize() {
+        return lotteryNumbers.size();
+    }
+
+    public int matchWinningNumbers(final LotteryNumbers winningNumbers) {
+        this.lotteryNumbers.retainAll(winningNumbers.lotteryNumbers);
+
+        return this.lotteryNumbers.size();
+    }
 }

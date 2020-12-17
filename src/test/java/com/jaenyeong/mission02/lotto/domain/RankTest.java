@@ -14,7 +14,7 @@ class RankTest {
         final int countOfMatch = 5;
         final boolean bonusMatch = true;
 
-        final Rank rank = Rank.valueOf(countOfMatch, bonusMatch);
+        final Rank rank = Rank.valueOf(bonusMatch, countOfMatch);
 
         assertEquals(rank, Rank.SECOND);
     }
@@ -25,7 +25,7 @@ class RankTest {
         final int countOfMatch = 5;
         final boolean bonusMatch = false;
 
-        final Rank rank = Rank.valueOf(countOfMatch, bonusMatch);
+        final Rank rank = Rank.valueOf(bonusMatch, countOfMatch);
 
         assertEquals(rank, Rank.THIRD);
     }

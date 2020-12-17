@@ -26,7 +26,7 @@ public class LotteryRunner {
 
         final List<LotteryGame> games = ticketing(numberOfBuyGame);
 
-        final List<Rank> lotteryRanks = searchWinningNumbers(games);
+        final List<Rank> lotteryRanks = matchWinningNumbers(games);
 
         printWinningStatistics(lotteryRanks, buyPrice);
     }
@@ -45,12 +45,13 @@ public class LotteryRunner {
         return games;
     }
 
-    private List<Rank> searchWinningNumbers(final List<LotteryGame> games) {
-        final WinningNumbers winningNumbers = WinningNumbers.of(scanWinningNumbers());
+    private List<Rank> matchWinningNumbers(final List<LotteryGame> games) {
+        final List<Integer> inputWinningNumbers = scanWinningNumbers();
         final int bonusNumber = scanBonusNumbers();
+        final WinningNumbers winningNumbers = WinningNumbers.of(inputWinningNumbers, bonusNumber);
 
         return games.stream()
-            .map(gameNumber -> winningNumbers.checkWinTheLotteryWithBonus(gameNumber, bonusNumber))
+            .map(winningNumbers::matchWinningNumbers)
             .collect(Collectors.toList());
     }
 

@@ -81,4 +81,13 @@ class LotteryNumbersTest {
             Arguments.of(Arrays.asList(40, 41))
         );
     }
+
+    @Test
+    @DisplayName("당첨번호가 주어지는 경우 당첨 수 테스트")
+    void checkMatchWinningNumbers() {
+        final LotteryNumbers lotteryNumbers = LotteryNumbers.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LotteryNumbers winningNumbers = LotteryNumbers.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertEquals(lotteryNumbers.matchWinningNumbers(winningNumbers), 6);
+    }
 }

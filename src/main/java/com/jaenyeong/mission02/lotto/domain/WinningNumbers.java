@@ -5,18 +5,23 @@ import com.jaenyeong.mission02.lotto.domain.lottery.LotteryGame;
 import java.util.List;
 
 public class WinningNumbers {
-    private LotteryGame winningNumbers;
+    private final LotteryGame winningNumbers;
+    private final int bonusNumber;
 
-    private WinningNumbers(final LotteryGame winningNumbers) {
+    private WinningNumbers(final LotteryGame winningNumbers, final int bonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumbers of(final List<Integer> winningNumbers) {
-        return new WinningNumbers(LotteryGame.ofManual(winningNumbers));
+    public static WinningNumbers of(final List<Integer> winningNumbers, final int bonusNumber) {
+        return new WinningNumbers(LotteryGame.ofManual(winningNumbers), bonusNumber);
     }
 
-    public Rank checkWinTheLotteryWithBonus(final LotteryGame otherLotteryGame, final int bonusNumber) {
-        return this.winningNumbers.checkWinTheLotteryWithBonus(otherLotteryGame, bonusNumber);
+    public Rank matchWinningNumbers(final LotteryGame otherLotteryGame) {
+        final boolean matchBonusNumber = otherLotteryGame.containBonusNumber(bonusNumber);
+        final int matchNumberOfWinningNumbers = otherLotteryGame.matchWinningNumber(winningNumbers);
+
+        return Rank.valueOf(matchBonusNumber, matchNumberOfWinningNumbers);
     }
 
     @Override

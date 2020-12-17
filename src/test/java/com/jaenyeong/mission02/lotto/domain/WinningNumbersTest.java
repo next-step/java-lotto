@@ -17,53 +17,53 @@ class WinningNumbersTest {
     void firstRankTest() {
         final List<Integer> givenNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final LotteryGame buyGame = LotteryGame.ofManual(givenNumbers);
-        final LotteryGame winningLottery = LotteryGame.ofManual(givenNumbers);
+        final WinningNumbers winningNumbers = WinningNumbers.of(givenNumbers, 1);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 7), Rank.FIRST);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.FIRST);
     }
 
     @Test
     @DisplayName("2등 테스트")
     void secondRankTest() {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 7));
+        final WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 6), Rank.SECOND);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.SECOND);
     }
 
     @Test
     @DisplayName("3등 테스트")
     void thirdRankTest() {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 7));
+        final WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 8);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 8), Rank.THIRD);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.THIRD);
     }
 
     @Test
     @DisplayName("4등 테스트")
     void fourthRankTest() {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 9, 7));
+        final WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 9, 7), 45);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 45), Rank.FOURTH);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.FOURTH);
     }
 
     @Test
     @DisplayName("5등 테스트")
     void fifthRankTest() {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 14, 9, 7));
+        final WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 14, 9, 7), 22);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 22), Rank.FIFTH);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.FIFTH);
     }
 
     @Test
     @DisplayName("꽝 테스트")
     void missRankTest() {
         final LotteryGame buyGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LotteryGame winningLottery = LotteryGame.ofManual(Arrays.asList(11, 12, 13, 14, 15, 16));
+        final WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(11, 12, 13, 14, 15, 16), 43);
 
-        assertEquals(winningLottery.checkWinTheLotteryWithBonus(buyGame, 45), Rank.MISS);
+        assertEquals(winningNumbers.matchWinningNumbers(buyGame), Rank.MISS);
     }
 }
