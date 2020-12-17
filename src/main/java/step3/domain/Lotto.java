@@ -1,9 +1,6 @@
 package step3.domain;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -14,6 +11,14 @@ public class Lotto {
 
         for (LottoNumber lottoNumber : numbers) {
             lotto.add(LottoNumber.of(lottoNumber.getNumber()));
+        }
+    }
+
+    public Lotto(String lottoNumber) {
+        String[] winNumbers = lottoNumber.split(", ");
+
+        for (int i = 0; i < winNumbers.length; i++) {
+            lotto.add(LottoNumber.of(Integer.parseInt(winNumbers[i])));
         }
     }
 

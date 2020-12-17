@@ -2,8 +2,6 @@ package step3.view;
 
 import step3.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -22,19 +20,12 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static List<LottoNumber> inputWinNumber() {
-        List<LottoNumber> numbers = new ArrayList<>();
-
+    public static String inputWinNumber() {
         System.out.println();
         System.out.println(WIN_NUMBER);
 
         sc.nextLine();
-        String[] winNumbers = sc.nextLine().split(", ");
-
-        for (int i = 0; i < winNumbers.length; i++) {
-            numbers.add(LottoNumber.of(Integer.parseInt(winNumbers[i])));
-        }
-        return numbers;
+        return sc.nextLine();
     }
 
     public static LottoNumber inputBonusNumber() {

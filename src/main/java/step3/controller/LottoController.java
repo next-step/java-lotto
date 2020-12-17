@@ -17,11 +17,12 @@ public class LottoController {
         ResultView.printPurchaseCount(purchaseLottoCount);
         ResultView.printLottoNumbers(buyLottoList);
 
-        List<LottoNumber> winningLottoNumbers = InputView.inputWinNumber();
+
+        Lotto winningLottoNumbers = new Lotto(InputView.inputWinNumber());
 
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoNumbers), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
         LottoResult lottoResult = new LottoResult(winningLotto, buyLottoList);
 
