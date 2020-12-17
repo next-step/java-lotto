@@ -48,4 +48,8 @@ public class LotteryNumbers {
 
         return this.lotteryNumbers.size();
     }
+
+    public boolean containsBonusNumber(final int bonusNumber) {
+        return getLotteryNumbers().contains(bonusNumber);
+    }
 }

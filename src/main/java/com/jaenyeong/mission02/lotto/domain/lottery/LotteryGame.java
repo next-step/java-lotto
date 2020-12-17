@@ -26,9 +26,7 @@ public class LotteryGame {
     }
 
     public boolean containBonusNumber(final int bonusNumber) {
-        return this.lotteryNumbers
-            .getLotteryNumbers()
-            .contains(bonusNumber);
+        return this.lotteryNumbers.containsBonusNumber(bonusNumber);
     }
 
     public int matchWinningNumber(final LotteryGame winningNumbers) {
