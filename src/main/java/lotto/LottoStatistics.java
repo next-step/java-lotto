@@ -6,7 +6,7 @@ public class LottoStatistics {
 
 	private final Map<LOTTO_RESULT, Long> countResult;
 
-	static LottoStatistics create(List<LOTTO_RESULT> lottoResultList) {
+	public static LottoStatistics create(List<LOTTO_RESULT> lottoResultList) {
 		if (lottoResultList.size() == 0) {
 			throw new IllegalArgumentException("lottoResultList is empty!");
 		}
@@ -34,11 +34,11 @@ public class LottoStatistics {
 		this.countResult = Collections.unmodifiableMap(countResult);
 	}
 
-	long getCount(LOTTO_RESULT lottoResult) {
+	public long getCount(LOTTO_RESULT lottoResult) {
 		return countResult.get(lottoResult);
 	}
 
-	double calculateIncomeRate() {
+	public double calculateIncomeRate() {
 		long allCount = calculateAllCount();
 		if (allCount == 0L) {
 			return 0d;
