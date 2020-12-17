@@ -1,17 +1,23 @@
 package lotto.modal;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class LottoNumber {
 
-	public static final int LOTTO_NUMBER_BOUND_MAX = 45;
-	public static final int LOTTO_NUMBER_BOUND_MIN = 1;
+	private static final Random randomGenerator = new Random();
+	private static final int LOTTO_NUMBER_BOUND_MAX = 45;
+	private static final int LOTTO_NUMBER_BOUND_MIN = 1;
 
-	private final Integer number;
-	
+	private final int number;
+
 	public LottoNumber(int lottoNumber) {
 		validationLottoNumber(lottoNumber);
 		this.number = lottoNumber;
+	}
+
+	public static int generateRandomLottoNumber() {
+		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
 	}
 
 	private void validationLottoNumber(int lottoNumber) {
@@ -27,7 +33,7 @@ public class LottoNumber {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoNumber that = (LottoNumber)o;
-		return number.equals(that.number);
+		return number == that.number;
 	}
 
 	@Override
@@ -37,6 +43,6 @@ public class LottoNumber {
 
 	@Override
 	public String toString() {
-		return number.toString();
+		return Integer.toString(this.number);
 	}
 }
