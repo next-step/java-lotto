@@ -10,6 +10,8 @@ public class StringExpression {
     private static final String REGEX = "//(.)\n(.*)";
     private static final String DEFAULT_DELIMITER = ",|:";
 
+    private static final Pattern pattern = Pattern.compile(REGEX);
+
     private final String delimiter;
     private final String items;
 
@@ -31,7 +33,7 @@ public class StringExpression {
     }
 
     private static Optional<StringExpression> createIfExistDelimiter(String source) {
-        Matcher matcher = Pattern.compile(REGEX).matcher(source);
+        Matcher matcher = pattern.matcher(source);
         if (matcher.find()) {
             String delimiter = matcher.group(1);
             String items = matcher.group(2);
