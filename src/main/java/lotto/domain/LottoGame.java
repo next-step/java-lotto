@@ -11,7 +11,7 @@ public class LottoGame {
     }
 
     public LottoNumber generateBonusBall(int inputNumber, LottoMachine lottoMachine, WinningNumber winningNumber) {
-        return lottoMachine.bonusBall(inputNumber, winningNumber);
+        return lottoMachine.CreateBonusBall(inputNumber, winningNumber);
     }
 
     public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {

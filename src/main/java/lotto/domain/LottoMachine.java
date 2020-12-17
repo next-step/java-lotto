@@ -52,7 +52,7 @@ public class LottoMachine {
         return price / ONE_LOTTO_PRICE;
     }
 
-    public LottoNumber bonusBall(int inputNumber, WinningNumber winningNumber) {
+    public LottoNumber CreateBonusBall(int inputNumber, WinningNumber winningNumber) {
         LottoNumber lottoNumber = new LottoNumber(inputNumber);
         if (winningNumber.contains(lottoNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_ERROR_MESSAGE);
