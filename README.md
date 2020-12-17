@@ -1,9 +1,13 @@
 # 로또
-## 진행 방법
-* 로또 요구사항을 파악한다.
-* 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
-* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
-* 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
-
-## 온라인 코드 리뷰 과정
-* [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+## 기능 목록
+[ ] InputView / ResultView 별도로 분리
+[x] LottoMachine 클래스 구현
+    [x] 금액만큼의 LottoTicket 발행
+    [x] 로또 번호 제네레이터 구현
+    [x] 자동 로또 티켓 발행  
+[ ] LottoTicket의 List를 감싼 Wrapper 구현 (LottoTickets)
+[ ] 당첨 번호 발행하는 로직 구현
+[ ] 로또 분석기 구현
+    [ ] LottoTickets, 당첨 번호를 받아 내부의 Ticket들을 이용하여 등수 반환기
+    [ ] 등수 별 금액 및 조건 ENUM
+    [ ] 적립된 등수 및 금액 출력
