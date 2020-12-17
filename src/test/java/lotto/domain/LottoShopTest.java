@@ -4,15 +4,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class LottoShopTest {
 
     private LottoShop lottoShop;
+    private List<String> manualLottoNumbers;
 
     @BeforeEach
     void init() {
         lottoShop = new LottoShop();
+        manualLottoNumbers = Arrays.asList(
+                "1,2,3,4,5,6",
+                "1,2,3,4,5,45",
+                "1,2,3,4,44,45",
+                "1,2,3,43,44,45",
+                "1,2,42,43,44,45");
     }
 
     @Test
@@ -21,10 +31,16 @@ class LottoShopTest {
         // given
         int money = 14000;
         LottoMoney lottoMoney = new LottoMoney(money);
-        LottoTicketCount lottoTicketCount = LottoTicketCount.getInstance(lottoMoney);
+        LottoTicketCount lottoTicketCount = new LottoTicketCount.Builder()
+                .lottoMoney(lottoMoney)
+                .manualLottoCount(manualLottoNumbers.size())
+                .build();
 
-        // when & then
-        assertThat(lottoShop.buyLotto(lottoMoney, lottoTicketCount).getPublishedLottoTicket()).hasSize(money / 1000);
+        // when
+        PublishedLottoTicket publishedLottoTicket = lottoShop.buyLotto(lottoTicketCount, manualLottoNumbers);
+
+        // then
+        assertThat(publishedLottoTicket.getPublishedLottoTicket()).hasSize(money / 1000);
     }
 
     @Test
@@ -32,9 +48,14 @@ class LottoShopTest {
     void zero_or_negative_money_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             LottoMoney zeroMoney = new LottoMoney(0);
-            LottoMoney minusMoney = new LottoMoney(-1000);
-            lottoShop.buyLotto(zeroMoney, LottoTicketCount.getInstance(zeroMoney));
-            lottoShop.buyLotto(minusMoney, LottoTicketCount.getInstance(minusMoney));
+            lottoShop.buyLotto(new LottoTicketCount.Builder()
+                    .lottoMoney(zeroMoney)
+                    .build(), manualLottoNumbers);
+
+            LottoMoney negativeMoney = new LottoMoney(-1000);
+            lottoShop.buyLotto(new LottoTicketCount.Builder()
+                    .lottoMoney(negativeMoney)
+                    .build(), manualLottoNumbers);
         }).withMessageMatching("금액이 부족합니다. 로또를 구매할 수 없습니다.");
     }
 
@@ -43,7 +64,9 @@ class LottoShopTest {
     void not_divided_by_1000_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             LottoMoney notEnoughMoney = new LottoMoney(500);
-            lottoShop.buyLotto(notEnoughMoney, LottoTicketCount.getInstance(notEnoughMoney));
+            lottoShop.buyLotto(new LottoTicketCount.Builder()
+                    .lottoMoney(notEnoughMoney)
+                    .build(), manualLottoNumbers);
         }).withMessageMatching("금액이 부족합니다. 로또를 구매할 수 없습니다.");
     }
 
