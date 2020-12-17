@@ -3,7 +3,7 @@ package step2.domain.lotto;
 import static step2.LottoNumberGenerator.*;
 
 public class LottoNumber {
-    private Integer number;
+    private final Integer number;
 
     public LottoNumber(Integer number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {

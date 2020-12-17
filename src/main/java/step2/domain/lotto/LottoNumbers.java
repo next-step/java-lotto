@@ -1,13 +1,14 @@
 package step2.domain.lotto;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
+import static step2.LottoNumberGenerator.*;
 
 public final class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
-    private static final long NUMBER_LENGTH = 6L;
 
     public LottoNumbers(List<Integer> numbers) {
         checkLottoNumbersLength(numbers);
@@ -15,10 +16,8 @@ public final class LottoNumbers {
     }
 
     private void checkLottoNumbersLength(List<Integer> numbers) {
-        long lottoNumberLength = numbers.stream()
-                .distinct()
-                .count();
-        if (lottoNumberLength != NUMBER_LENGTH) {
+        int lottoNumberLength = new HashSet<>(numbers).size();
+        if (lottoNumberLength != LOTTO_LENGTH) {
             throw new IllegalArgumentException("중복 없는 6개의 숫자가 필요합니다");
         }
     }
