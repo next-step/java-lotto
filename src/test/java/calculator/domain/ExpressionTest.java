@@ -2,8 +2,11 @@ package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -13,14 +16,14 @@ class ExpressionTest {
 
     @DisplayName("유효한 표현식 생성")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "1,2,3", "1:2:3", "1,2:3"})
-    void createExpressionTest(String input) {
+    @MethodSource("provideExpressionAndSum")
+    void createExpressionTest(String expression, int sum) {
         // When
-        Expression expression = new Expression(input);
+        Expression actual = new Expression(expression);
         // Then
         assertAll(
-                () -> assertThat(expression).isNotNull(),
-                () -> assertThat(expression.getOperands()).isNotNull()
+                () -> assertThat(actual).isNotNull(),
+                () -> assertThat(actual.sum()).isEqualTo(sum)
         );
     }
 
@@ -33,7 +36,17 @@ class ExpressionTest {
         // Then
         assertAll(
                 () -> assertThat(expression).isNotNull(),
-                () -> assertThat(expression.getOperands()).isNotNull()
+                () -> assertThat(expression.sum()).isZero()
+        );
+    }
+
+    static Stream<Arguments> provideExpressionAndSum() {
+        final int sum = 6;
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", sum),
+                Arguments.of("1,2,3", sum),
+                Arguments.of("1:2:3", sum),
+                Arguments.of("1,2:3", sum)
         );
     }
 }
