@@ -1,12 +1,15 @@
 package step2.domain;
 
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoNumbers;
+
 import java.util.List;
 import java.util.Map;
 
-import static step2.domain.LottoNumberMachine.*;
+import static step2.LottoNumberGenerator.*;
 
 public class LottoGame {
-    private Lotto<Integer> lotto = new Lotto<>();
+    private Lotto lotto = new Lotto();
     private static final int LOTTO_PRICE = 1000;
 
     public LottoGame(Request request) {
@@ -16,11 +19,11 @@ public class LottoGame {
     private void buyLotto(Request request) {
         int totalQuantity = request.getPurchaseMoney() / LOTTO_PRICE;
         for (int quantity = 1; quantity <= totalQuantity; quantity++) {
-            lotto.addLottoNumber(new LottoNumbers<>(provideLottoNumber()));
+            lotto.addLottoNumber(new LottoNumbers(provideLottoNumbers()));
         }
     }
 
-    public List<LottoNumbers<Integer>> getLotto() {
+    public List<LottoNumbers> getLotto() {
         return lotto.getLotto();
     }
 
