@@ -65,8 +65,9 @@ public class ResultView {
 
         for (Rank rank : Rank.values()) {
             int rankMatchCount = rank.getCountOfMatch();
+            boolean rankMatchBonus = rank.getBonus();
             List<Rank> filterRanks = lottoResult.getRanks().stream()
-                    .filter(r -> r.getCountOfMatch() == rankMatchCount)
+                    .filter(r -> r.getCountOfMatch() == rankMatchCount && r.getBonus() == rankMatchBonus)
                     .collect(Collectors.toList());
 
             printMessage(rank.getMessage() + " (" + rank.getWinningMoney() + ")원- " + filterRanks.size() + "개");
