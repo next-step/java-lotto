@@ -15,55 +15,52 @@ class CalculatorTest {
 	@DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
 	@ParameterizedTest
 	@NullAndEmptySource
-	public void test_1(String input) throws Exception {
-	    // given
+	public void emptyOrNullTest(String input) {
+		// given
 		int expectedResult = 0;
-	    // when
+		// when
 		int actualResult = calculator.calculate(input);
-	    // then
+		// then
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
 	@DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환")
 	@ParameterizedTest
 	@CsvSource({"1,1", "2,2", "3,3"})
-	public void test_2(String input, int expectedResult) throws Exception {
-	    // given
-	    
-	    // when
-	    int actualResult = calculator.calculate(input);
-	    // then
+	public void onlyOneNumberTest(String input, int expectedResult) {
+		// given
+		// when
+		int actualResult = calculator.calculate(input);
+		// then
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
 	@DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
 	@ParameterizedTest
 	@CsvSource(value = {"1,1^2", "2,2^4", "3,3^6"}, delimiter = '^')
-	public void test_3(String input, int expectedResult) throws Exception {
-	    // given
-
-	    // when
+	public void commaSumTest(String input, int expectedResult) {
+		// given
+		// when
 		int actualResult = calculator.calculate(input);
-	    // then
+		// then
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
 	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용 테스트")
 	@ParameterizedTest
 	@CsvSource(value = {"1,1:2^4", "2,2:3^7", "4:3,3^10"}, delimiter = '^')
-	public void test_4(String input, int expectedResult) throws Exception {
-	    // given
-
-	    // when
+	public void commaAndColonTest(String input, int expectedResult) {
+		// given
+		// when
 		int actualResult = calculator.calculate(input);
-	    // then
+		// then
 		assertThat(actualResult).isEqualTo(expectedResult);
 	}
 
 
 	@DisplayName("'//'와 '\\n' 문자 사이에 커스텀 구분자를 지정 테스트")
 	@Test
-	public void test_5() throws Exception {
+	public void customDelimiterTest() {
 		// given
 		int expectedResult = 6;
 		// when
@@ -75,7 +72,7 @@ class CalculatorTest {
 	@DisplayName("음수 또는 숫자 외의 문자를 전달할 경우 RuntimeException 예외가 발생 테스트")
 	@ParameterizedTest
 	@ValueSource(strings = {"-1:1,2", "1,-2:3", "4,1:-5", "1,a:3", "b:1:5"})
-	public void test_6(String input) throws Exception {
+	public void exceptionTest(String input) {
 		// given
 		// when
 		// then
