@@ -1,11 +1,9 @@
-package edu.nextstep.calculator.domain.domain;
+package edu.nextstep.calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import edu.nextstep.calculator.domain.Number;
 
 @DisplayName("Number: 원시값인 int형 숫자 포장 클래스")
 class NumberTest {
