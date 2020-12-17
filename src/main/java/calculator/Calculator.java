@@ -6,8 +6,10 @@ import java.util.regex.Pattern;
 public class Calculator {
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
+	private static final int TWO = 2;
+	private static final String MINUS_SYMBOL = "-";
 	private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
-	private static final String SPLIT_PATTERN = ",|:";
+	private static final String SPLIT_PATTERN = "[,:]";
 	private static final String NUMBER_PATTERN = "^[0-9]+$";
 	private static Matcher matcher;
 
@@ -21,7 +23,7 @@ public class Calculator {
 		validateNumbers(numbers);
 
 		if (isOnlyOneNumber(numbers)) {
-			return Integer.parseInt(numbers[0]);
+			return Integer.parseInt(numbers[ZERO]);
 		}
 
 		return sum(numbers);
@@ -46,7 +48,7 @@ public class Calculator {
 	 * 커스텀 구분자로 split
 	 */
 	private String[] splitUsingCustomDelimiter() {
-		return matcher.group(2).split(matcher.group(1));
+		return matcher.group(TWO).split(matcher.group(ONE));
 	}
 
 	/**
@@ -64,7 +66,7 @@ public class Calculator {
 	 * 음수 또는 숫자 외 문자열 입력 체크
 	 */
 	private void validateNumber(String number) {
-		if (number.startsWith("-")) {
+		if (number.startsWith(MINUS_SYMBOL)) {
 			throw new RuntimeException("음수는 입력이 불가합니다.");
 		}
 
