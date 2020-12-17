@@ -29,21 +29,20 @@ public class LotteryGame {
         return this.lotteryNumbers.containsBonusNumber(bonusNumber);
     }
 
-    public int matchWinningNumber(final LotteryGame winningNumbers) {
+    public int matchWinningNumber(final LotteryNumbers winningNumbers) {
         if (isNotValid(winningNumbers)) {
             return MISS_MATCH;
         }
 
-        return this.lotteryNumbers.matchWinningNumbers(winningNumbers.lotteryNumbers);
+        return this.lotteryNumbers.matchWinningNumbers(winningNumbers);
     }
 
-    private boolean isNotValid(final LotteryGame winningNumbers) {
+    private boolean isNotValid(final LotteryNumbers winningNumbers) {
         return (winningNumbers == null) || (winningNumbersSize(winningNumbers) == MISS_MATCH);
     }
 
-    private int winningNumbersSize(final LotteryGame winningNumbers) {
-        return winningNumbers.lotteryNumbers
-            .getLotteryNumbersSize();
+    private int winningNumbersSize(final LotteryNumbers winningNumbers) {
+        return winningNumbers.getLotteryNumbersSize();
     }
 
     protected List<Integer> getLotteryNumbers() {
