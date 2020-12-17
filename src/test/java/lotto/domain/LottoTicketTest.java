@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberCountNotMatchingException;
 import lotto.util.StringSplitter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 번호 중복 테스트")
     void duplicate_lotto_number_test() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoNumberCountNotMatchingException.class).isThrownBy(() -> {
             // given
             Set<LottoNumber> lottoNumbers = Stream.of(LottoNumber.ofNumber(1), LottoNumber.ofNumber(1),
                     LottoNumber.ofNumber(3), LottoNumber.ofNumber(43), LottoNumber.ofNumber(44), LottoNumber.ofNumber(45))
@@ -34,7 +35,7 @@ class LottoTicketTest {
 
             // when & then
             LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        }).withMessageMatching("로또 넘버 갯수가 중복 되었거나 6개가 아닙니다.");
+        }).withMessageMatching("로또 번호 또는 당첨 번호는 6개를 입력해주세요.");
     }
 
     @Test

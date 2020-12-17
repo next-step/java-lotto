@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberCountNotEnoughException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,7 +35,10 @@ public class LottoMachine {
     }
 
     public LottoTicket generateManualLottoNumbers(List<Integer> manualLottoNumbers) {
-        Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers);
+        Set<Integer> deduplicatedManualLottoNumbers = Optional.ofNullable(manualLottoNumbers)
+                .map(list -> list.stream().collect(Collectors.toSet()))
+                .orElseThrow(LottoNumberCountNotEnoughException::new);
+
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {

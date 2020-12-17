@@ -23,7 +23,7 @@ public class PublishedLottoTicket {
     }
 
     public void publishManualLottoTicket(List<String> manualLottoNumbers) {
-        LottoMachine lottoMachine =  LottoMachine.instance();
+        LottoMachine lottoMachine = LottoMachine.instance();
         for (String lottoNumber : manualLottoNumbers) {
             LottoTicket manualLottoTicket = lottoMachine.generateManualLottoNumbers(StringSplitter.splitText(lottoNumber));
             this.publishedLottoTicket.add(manualLottoTicket);
