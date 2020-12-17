@@ -1,9 +1,10 @@
 package calculator;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Numbers {
 
@@ -21,17 +22,17 @@ public class Numbers {
         StringExpression stringExpression = StringExpression.of(source);
         List<String> strNumbers = stringExpression.split();
 
-        return new Numbers(mapNumbers(strNumbers));
+        return mapNumbers(strNumbers);
     }
 
     private static boolean isBlank(String source) {
         return Objects.isNull(source) || source.isEmpty();
     }
 
-    private static List<Number> mapNumbers(List<String> strNumbers) {
+    private static Numbers mapNumbers(List<String> strNumbers) {
         return strNumbers.stream()
                     .map(Number::of)
-                    .collect(Collectors.toList());
+                    .collect(collectingAndThen(toList(), Numbers::new));
     }
 
     public int sum() {
