@@ -81,7 +81,4 @@ class CalculatorTest {
 		// then
 		assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(RuntimeException.class);
 	}
-
-
-
 }
