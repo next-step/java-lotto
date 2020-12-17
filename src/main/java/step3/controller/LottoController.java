@@ -8,7 +8,6 @@ import java.util.List;
 
 public class LottoController {
     public void start() {
-        ResultView.printPurchasePrice();
         int purchasePrice = InputView.inputPurchasePrice();
 
         LottoMachine lottoMachine = new LottoMachine();
@@ -18,10 +17,8 @@ public class LottoController {
         ResultView.printPurchaseCount(purchaseLottoCount);
         ResultView.printLottoNumbers(buyLottoList);
 
-        ResultView.printWinNumber();
         List<LottoNumber> winningLottoNumbers = InputView.inputWinNumber();
 
-        ResultView.printBonusNumber();
         LottoNumber bonusNumber = InputView.inputBonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoNumbers), bonusNumber);

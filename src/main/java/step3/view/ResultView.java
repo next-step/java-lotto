@@ -15,27 +15,15 @@ public class ResultView {
 
     }
 
-    private static final String PURCHASE_PRICE = "구입금액을 입력해 주세요.";
-    private static final String WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-
-    private static void printMessage(String message) {
-        System.out.println(message);
-    }
-
-    public static void printPurchasePrice() {
-        printMessage(PURCHASE_PRICE);
-    }
-
     public static void printPurchaseCount(int purchaseCount) {
-        printMessage(purchaseCount + "개를 구매했습니다.");
+        System.out.println(purchaseCount + "개를 구매했습니다.");
     }
 
     public static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.print("[");
             printLoopLottoNumbers(lotto);
-            printMessage("]");
+            System.out.println("]");
         }
     }
     private static void printLoopLottoNumbers(Lotto lotto) {
@@ -53,19 +41,10 @@ public class ResultView {
         }
     }
 
-    public static void printWinNumber() {
-        printMessage("");
-        printMessage(WIN_NUMBER);
-    }
-
-    public static void printBonusNumber() {
-        printMessage(BONUS_NUMBER);
-    }
-
     public static void printWinCounts(LottoResult lottoResult) {
-        printMessage("");
-        printMessage("당첨 통계");
-        printMessage("--------");
+        System.out.println("");
+        System.out.println("당첨 통계");
+        System.out.println("--------");
 
         for (Rank rank : Rank.values()) {
             int rankMatchCount = rank.getCountOfMatch();
@@ -74,11 +53,11 @@ public class ResultView {
                     .filter(r -> r.getCountOfMatch() == rankMatchCount && r.getBonus() == rankMatchBonus)
                     .collect(Collectors.toList());
 
-            printMessage(rank.getMessage() + " (" + rank.getWinningMoney() + ")원- " + filterRanks.size() + "개");
+            System.out.println(rank.getMessage() + " (" + rank.getWinningMoney() + ")원- " + filterRanks.size() + "개");
         }
     }
 
     public static void printTotalRevenue(BigDecimal totalRevenue) {
-        printMessage("총 수익률은 " + totalRevenue + "입니다.");
+        System.out.println("총 수익률은 " + totalRevenue + "입니다.");
     }
 }
