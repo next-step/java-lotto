@@ -3,9 +3,12 @@ package lotto.domain;
 import lotto.LottoWinCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,12 +26,12 @@ class LottoWinResultTest {
 
         // when
         for (int matchedCount : matchedCounts) {
-            lottoWinResult.addWinResultCount(matchedCount);
+            lottoWinResult.addWinResultCount(matchedCount, true);
         }
         List<Integer> prizeCounts = Arrays.stream(LottoWinPrize.values()).map(lottoWinResult::getCount)
                 .collect(Collectors.toList());
 
         // then
-        assertThat(prizeCounts).isEqualTo(Arrays.asList(2, 1, 3, 0));
+        assertThat(prizeCounts).isEqualTo(Arrays.asList(2, 1, 0, 3, 0));
     }
 }

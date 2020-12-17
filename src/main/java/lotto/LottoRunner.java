@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoRunner {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
@@ -33,7 +31,8 @@ public class LottoRunner {
      */
     private LottoWinResult win(Lottos lottos) {
         LottoWinCalculator lottoWinCalculator
-                = new LottoWinCalculator(new Lotto(this.inputView.insertWinLottoNumbers()));
+                = new LottoWinCalculator(new Lotto(this.inputView.insertWinLottoNumbers())
+                                        , new LottoNumber(this.inputView.insertBonusNumber()));
 
         return lottoWinCalculator.findLottoWinPrize(lottos);
     }

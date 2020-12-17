@@ -5,15 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoWinCalculatorTest {
 
@@ -24,7 +21,7 @@ public class LottoWinCalculatorTest {
     public void calculateMatchedCounts(String input, String expected) {
         // given
         LottoWinCalculator lottoWinCalculator
-                = new LottoWinCalculator(new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45)));
+                = new LottoWinCalculator(new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45)), new LottoNumber(1));
         Lottos lottos = new Lottos(
                 Arrays.asList(new Lotto(
                                 Arrays.asList(input.split(" ")).stream()
@@ -45,15 +42,16 @@ public class LottoWinCalculatorTest {
     public void findLottoWinPrize() {
         // given
         LottoWinCalculator lottoWinCalculator
-                = new LottoWinCalculator(new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45)));
+                = new LottoWinCalculator(new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45)), new LottoNumber(41));
         Lottos lottos = new Lottos(
                 Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 30, 40, 45)) // prize 4
                         , new Lotto(Arrays.asList(1, 10, 20, 30, 40, 45))   // prize 6
                         ,new Lotto(Arrays.asList(5, 10, 20, 30, 40, 45))    // prize 5
+                        ,new Lotto(Arrays.asList(10, 20, 30, 40, 41, 45))    // prize 5_BONUS
                 )
         );
 
-        List<Integer> expected = Arrays.asList(0, 1, 1, 1);
+        List<Integer> expected = Arrays.asList(0, 1, 1, 1, 1);
 
         // when
         LottoWinResult lottoWinResult = lottoWinCalculator.findLottoWinPrize(lottos);

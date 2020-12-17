@@ -17,8 +17,8 @@ public class LottoWinResult {
      * 입력된 수에 해당하는 당첨 케이스를 찾아서 당첨 케이스의 당첨 수를 증가시킵니다.
      * @param matchedCount
      */
-    public void addWinResultCount(int matchedCount) {
-        LottoWinPrize.getLottoWinPrize(matchedCount)
+    public void addWinResultCount(int matchedCount, boolean isMatchedBonus) {
+        LottoWinPrize.getLottoWinPrize(matchedCount, isMatchedBonus)
                 .ifPresent(this::addWinResultCount);
     }
 
