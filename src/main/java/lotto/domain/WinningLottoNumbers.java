@@ -39,7 +39,7 @@ public class WinningLottoNumbers {
 			int result = Integer.parseInt(trimmed);
 			return new LottoNumber(result);
 		} catch (NumberFormatException e) {
-			throw new RuntimeException("입력된 당첨번호가 올바르지 않습니다.");
+			throw new IllegalArgumentException("입력된 당첨번호가 올바르지 않습니다.");
 		}
 	}
 
