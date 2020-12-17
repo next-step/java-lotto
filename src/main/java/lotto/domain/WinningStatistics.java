@@ -2,13 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,15 +16,20 @@ public class WinningStatistics {
 
 	private List<Prize> prizeResult = new ArrayList<>();
 
-	public WinningStatistics(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
-		prizeResult = awards(userLottoTickets, winnerLottoTicket);
+	public WinningStatistics(LottoTickets userLottoTickets, WinningLottoTicket winningLottoTicket) {
+		prizeResult = awards(userLottoTickets, winningLottoTicket);
 	}
 
-	private List<Prize> awards(LottoTickets userLottoTickets, LottoTicket winnerLottoTicket) {
-		return userLottoTickets.getLottoTickets()
-			.stream()
-			.map(lottoTicket -> Prize.of(lottoTicket.getMatchCount(winnerLottoTicket)))
+	private List<Prize> awards(LottoTickets userLottoTickets, WinningLottoTicket winnerLottoTicket) {
+		return userLottoTickets.getLottoTickets().stream()
+			.map(lottoTicket -> matchTicketToPrize(lottoTicket, winnerLottoTicket))
 			.collect(Collectors.toList());
+	}
+
+	private Prize matchTicketToPrize(LottoTicket lottoTicket, WinningLottoTicket winnerLottoTicket) {
+		return Prize.of(lottoTicket.getMatchCount(winnerLottoTicket.getLottoTicket()),
+			lottoTicket.isMatchBonus(
+				winnerLottoTicket.getBonusNumber()));
 	}
 
 	public List<Prize> getPrizeResult() {

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -51,6 +50,10 @@ public class LottoTicket {
 		return lottoTicketNumbers.stream().
 			filter(lottoNumber -> winnerLottoNumbers.contains(lottoNumber))
 			.count();
+	}
+
+	public boolean isMatchBonus(LottoNumber lottoNumber) {
+		return lottoTicketNumbers.contains(lottoNumber);
 	}
 
 }

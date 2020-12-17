@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author : byungkyu
@@ -10,10 +9,11 @@ import java.util.stream.Collectors;
  **/
 public enum Prize {
 
-	SIX(6, 2_000_000_000),
-	FIVE(5, 1_500_000),
-	FOUR(4, 50_000),
-	THREE(3, 5_000),
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 1_500_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5_000),
 	NONE(0, 0);
 
 	private int matchCount;
@@ -24,10 +24,15 @@ public enum Prize {
 		this.reward = reward;
 	}
 
-	public static Prize of(Long count) {
-		return Arrays.stream(values()).filter(one -> one.matchCount == count)
+	public static Prize of(Long count, boolean isMatchBonus) {
+		return Arrays.stream(values()).filter(prize -> prize.isEqualMatchCount(count))
+			.filter(prize -> !prize.equals(SECOND) || isMatchBonus)
 			.findFirst()
 			.orElse(NONE);
+	}
+
+	private boolean isEqualMatchCount(Long count) {
+		return this.matchCount == count;
 	}
 
 	public int getMatchCount() {
@@ -38,8 +43,4 @@ public enum Prize {
 		return reward;
 	}
 
-	public boolean isContainMatchCount(int matchCount) {
-		return Arrays.stream(values()).map(prize -> prize.getMatchCount())
-			.collect(Collectors.toList()).contains(matchCount);
-	}
 }

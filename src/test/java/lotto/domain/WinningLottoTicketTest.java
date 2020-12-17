@@ -37,8 +37,6 @@ public class WinningLottoTicketTest {
 		String winningNumber = "1,2,3,4,5,6";
 		int bonusNumber = 10;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
-		assertThat(winningLottoTicket.getBonusNumber()).isEqualTo(10);
-
+		assertThat(winningLottoTicket.getBonusNumber()).isEqualTo(new LottoNumber(bonusNumber));
 	}
-
 }

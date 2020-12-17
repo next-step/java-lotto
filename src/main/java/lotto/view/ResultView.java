@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoTickets;
@@ -24,7 +23,7 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket.getLottoTicket());
+		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
 		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
@@ -39,13 +38,24 @@ public class ResultView {
 
 	private static void printWinningStatus(List<Prize> prizeResult) {
 		List<Prize> sortedPrize = Arrays.stream(Prize.values())
-			.sorted(Comparator.comparing(Prize::getMatchCount))
+			.sorted(Comparator.comparing(Prize::getReward))
 			.collect(Collectors.toList());
 
-		for(Prize prize : sortedPrize){
-			if (prize == Prize.NONE) continue;
-			System.out.println(prize.getMatchCount() + "개 일치 (" + prize.getReward() + "원)- " + prizeResult.stream()
-																									.filter(result -> result.equals(prize)).count() + "개");
+		for (Prize prize : sortedPrize) {
+			if (prize == Prize.NONE)
+				continue;
+			System.out.println(
+				prize.getMatchCount() + "개 일치" + matchBonusComment(prize) + "(" + prize.getReward() + ") - "
+					+ prizeResult.stream()
+					.filter(result -> result.equals(prize)).count() + "개");
 		}
 	}
+
+	private static String matchBonusComment(Prize prize) {
+		if (prize == Prize.SECOND) {
+			return ",보너스 볼 일치";
+		}
+		return "";
+	}
+
 }
