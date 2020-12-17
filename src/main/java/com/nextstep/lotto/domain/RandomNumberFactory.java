@@ -14,10 +14,16 @@ public class RandomNumberFactory {
 
     private RandomNumberFactory(){}
 
-    public static List<Integer> createRandomNumbers() {
+    public static List<LottoNumber> createRandomNumbers() {
         List<Integer> shuffleNumbers = getShuffleNumbers();
         Collections.sort(shuffleNumbers);
-        return Collections.unmodifiableList(shuffleNumbers);
+        return Collections.unmodifiableList(toLottoNumberList(shuffleNumbers));
+    }
+
+    private static List<LottoNumber> toLottoNumberList(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> getShuffleNumbers() {

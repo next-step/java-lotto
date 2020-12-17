@@ -18,7 +18,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException("number shoud be between 1 and 45");
+            throw new IllegalArgumentException("숫자는 " + MIN + "에서 " + MAX + "까지만 허용 됩니다.");
         }
         return DEFINE_NUMBERS.get(number);
     }

@@ -1,33 +1,30 @@
 package com.nextstep.lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        if ( numbers == null ) {
-            throw new IllegalArgumentException("number is not allow null");
+    public Lotto(List<LottoNumber> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
+            throw new IllegalArgumentException("숫자는 빈값일 수 없습니다.");
         }
 
-        if ( numbers.size() != LOTTO_NUMBER_COUNT ) {
-            throw new IllegalArgumentException("number count shoud be " + LOTTO_NUMBER_COUNT);
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("숫자는 " + LOTTO_NUMBER_COUNT + "개만 허용됩니다.");
         }
-        this.numbers = numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        this.numbers = numbers;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public boolean contains(LottoNumber number ) {
+        return numbers.contains(number);
     }
 
-    public LottoRank match(WinningLotto winningLotto) {
-        long matchedCount = winningLotto.getMatchedCount(numbers);
-        boolean matchedBonus = winningLotto.checkBonusNumber(numbers);
-        return LottoRank.select(matchedCount, matchedBonus);
+    public long matchedCount(Lotto otherLotto) {
+        return otherLotto.numbers.stream()
+                .filter(this::contains)
+                .count();
     }
 
     @Override

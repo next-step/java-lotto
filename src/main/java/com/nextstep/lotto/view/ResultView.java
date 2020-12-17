@@ -38,8 +38,9 @@ public class ResultView {
         return "%s개 일치 (%s원)- %s개";
     }
 
-    public static void printBuy(Lottos lottos) {
-        System.out.println(lottos.count() + "개를 구매했습니다.");
+    public static void printBuy(int manualCount, int autoCount, Lottos lottos) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manualCount, autoCount);
+        System.out.println();
         System.out.println(lottos.toString());
         System.out.println();
     }

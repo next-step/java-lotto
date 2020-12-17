@@ -1,5 +1,6 @@
 package com.nextstep.lotto.domain;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -8,18 +9,17 @@ public class LottoSeller {
 
     private LottoSeller(){}
 
-    private static int count(int price) {
+    public static int count(int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("price is too less");
+            throw new IllegalArgumentException("최소 구매금액은 " + LOTTO_PRICE + "원 입니다.");
         }
         return price / LOTTO_PRICE;
     }
 
-    public static Lottos buy(int price) {
-        int count = count(price);
-        return  Stream.generate(RandomNumberFactory::createRandomNumbers)
+    public static List<Lotto> buyAutoLottos(int count) {
+        return Stream.generate(RandomNumberFactory::createRandomNumbers)
                 .limit(count)
                 .map(Lotto::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .collect(Collectors.toList());
     }
 }
