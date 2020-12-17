@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoUserRequest;
 import lotto.domain.MatchCount;
 import lotto.domain.MatchResult;
 
@@ -14,13 +15,17 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
+    public static void printTickets(LottoUserRequest lottoUserRequest, LottoTickets lottoTickets) {
+        printTicketCount(lottoUserRequest);
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        System.out.println(lottoTicketList.size() + "개를 구매했습니다.");
 
         for (LottoTicket lottoTicket : lottoTicketList) {
             System.out.println(lottoTicket);
         }
+    }
+
+    private static void printTicketCount(LottoUserRequest lottoUserRequest) {
+        System.out.println("수동으로 " + lottoUserRequest.getManualTicketCount() + "장, 자동으로 " + lottoUserRequest.getAutoTicketCount() + "개를 구매했습니다.");
     }
 
     public static void printResults(MatchResult matchResult) {
@@ -48,14 +53,6 @@ public class OutputView {
     }
 
     private static int compare(MatchCount m1, MatchCount m2) {
-        if (m1.getMatchCount() > m2.getMatchCount()) {
-            return 1;
-        }
-
-        if (m1.getMatchCount() == m2.getMatchCount()) {
-            return 0;
-        }
-
-        return -1;
+        return Integer.compare(m1.getMatchCount(), m2.getMatchCount());
     }
 }

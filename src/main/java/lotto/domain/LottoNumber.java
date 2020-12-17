@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
+    private static final Pattern pattern = Pattern.compile("[0-9]+");
     private static Integer MIN_NUMBER = 1;
     private static Integer MAX_NUMBER = 45;
 
@@ -15,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public LottoNumber(String numberValue) {
-        this(Integer.parseInt(numberValue));
+        this(toIntValue(numberValue));
     }
 
     private void validate(int number) {
@@ -24,6 +25,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
 
         throw new IllegalArgumentException("1 - 45 사이 숫자를 입력해주세요");
+    }
+
+    private static int toIntValue(String numberValue) {
+        if (pattern.matcher(numberValue).matches()) {
+            return Integer.parseInt(numberValue);
+        }
+
+        throw new IllegalArgumentException("숫자를 입력해주세요");
     }
 
     @Override

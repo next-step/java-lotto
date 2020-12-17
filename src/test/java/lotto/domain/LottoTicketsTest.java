@@ -1,47 +1,40 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.machine.ComplexTicketMachine;
+import lotto.domain.machine.FixedTicketMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {
 
-    @DisplayName("객체생성 - 최소금액 충족")
+    @DisplayName("객체생성")
     @Test
     void create() {
         //given
         int money = 1_000;
-        FixedTicketMachine ticketMachine = new FixedTicketMachine();
+        LottoUserRequest lottoUserRequest = new LottoUserRequest(money);
+        ComplexTicketMachine complexTicketMachine = new ComplexTicketMachine(
+              new FixedTicketMachine());
 
         //when
-        LottoTickets lottoTickets = new LottoTickets(money, ticketMachine);
+        LottoTickets lottoTickets = new LottoTickets(complexTicketMachine.issue(lottoUserRequest));
 
         //then
-        LottoTickets expected = new LottoTickets(ticketMachine.issue(1));
+        LottoTickets expected = new LottoTickets(
+              Collections.singletonList(new LottoTicket("1,2,3,4,5,6")));
 
         assertThat(lottoTickets).isNotNull();
         assertThat(lottoTickets).isEqualTo(expected);
-    }
-
-    @DisplayName("객체생성 - 최소금액 부족")
-    @Test
-    void create_lowMoney() {
-        //given
-        int money = 999;
-
-        //when, then
-        assertThatIllegalArgumentException()
-              .isThrownBy(() -> new LottoTickets(money, new RandomTicketMachine()))
-              .withMessage("금액이 부족합니다.");
     }
 
     @DisplayName("당첨번호 매치 결과")
@@ -61,7 +54,8 @@ public class LottoTicketsTest {
         ));
 
         //when
-        WinningTicket lastWinningTicket = new WinningTicket(new HashSet<>(lottoNumbers.subList(0, 6)), new LottoNumber(45));
+        WinningTicket lastWinningTicket = new WinningTicket(
+              new HashSet<>(lottoNumbers.subList(0, 6)), new LottoNumber(45));
         MatchResult result = lottoTickets.match(lastWinningTicket);
 
         //then
