@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2000000000),
     // SECOND(5, 30000000), // 보너스볼 등장 미션부터 활용
@@ -25,11 +27,9 @@ public enum Rank {
     }
 
     public static Rank getRank(long countOfMatch) {
-        for (Rank rank : Rank.values()) {
-            if (rank.getCountOfMatch() == countOfMatch) {
-                return rank;
-            }
-        }
-        return MISS;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .findFirst()
+                .orElse(MISS);
     }
 }
