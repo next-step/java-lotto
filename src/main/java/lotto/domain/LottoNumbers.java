@@ -5,10 +5,10 @@ import lotto.exception.LottoNumberCountNotEnoughException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
@@ -18,7 +18,7 @@ public class LottoNumbers {
 
     private void validateNumbers(List<Integer> numbers) {
         Optional.ofNullable(numbers)
-                .map(list -> list.stream().collect(Collectors.toSet()))
+                .filter(nums -> nums.size() == LOTTO_NUMBER_COUNT)
                 .orElseThrow(LottoNumberCountNotEnoughException::new);
     }
 
