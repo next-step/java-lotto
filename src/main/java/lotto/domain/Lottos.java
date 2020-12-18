@@ -36,9 +36,9 @@ public class Lottos {
         return lottos;
     }
 
-    private List<LottoResultType> findLottoResultType(Lotto winningLottoNumbers) {
+    private List<LottoResultType> findLottoResultType(Lotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLottoNumbers.getNumbers()))
+                .map(lotto -> lotto.findLottoResultType(winningLotto))
                 .collect(Collectors.toList());
     }
 }

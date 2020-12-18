@@ -35,6 +35,12 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    int countMatchedNumbers(LottoNumbers winningLottoNumbers) {
+        return (int) this.numbers.stream()
+                .filter(winningLottoNumbers.numbers::contains)
+                .count();
+    }
+
     List<LottoNumber> getNumbers() {
         return numbers;
     }
