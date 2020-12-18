@@ -13,9 +13,9 @@ public class LottoNumbers {
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumberList) {
+		validateSize(lottoNumberList);
+		validateUnique(lottoNumberList);
 		this.lottoNumbers = toSortedUnmodifiableList(lottoNumberList);
-		validateSize(this.lottoNumbers);
-		validateUnique(this.lottoNumbers);
 	}
 
 	private static List<LottoNumber> toSortedUnmodifiableList(List<LottoNumber> lottoNumberList) {
