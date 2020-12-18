@@ -5,9 +5,10 @@ import java.util.Arrays;
 public enum LottoRank {
 
 	NOTHING_RANK(0, 0),
-	FOURTH_RANK(3, 5_000),
-	THIRD_RANK(4, 50_000),
-	SECOND_RANK(5, 1_500_000),
+	FIFTH_RANK(3, 5_000),
+	FOURTH_RANK(4, 50_000),
+	THIRD_RANK(5, 1_500_000),
+	SECOND_RANK(5, 30_000_000),
 	FIRST_RANK(6, 2_000_000_000);
 
 	private final int matchCount;
@@ -15,15 +16,21 @@ public enum LottoRank {
 	private final String resultMsg;
 
 	LottoRank(int matchCount, int winnerPrize) {
+		String tempResultMsg;
 		this.matchCount = matchCount;
 		this.winnerPrize = winnerPrize;
-		this.resultMsg = matchCount + "개 일치 (" + winnerPrize + "원)-";
+		tempResultMsg = matchCount + "개 일치 (" + winnerPrize + "원)-";
+
+		if (winnerPrize == 30000000) {
+			tempResultMsg = matchCount + "개 일치, 보너스 볼 일치 (" + winnerPrize + "원)-";
+		}
+		this.resultMsg = tempResultMsg;
 	}
 
-	public static LottoRank getRank(int matchCount) {
-
+	public static LottoRank getRank(int matchCount, boolean hasBonusNumber) {
 		return Arrays.stream(values())
 			.filter(lottoRank -> lottoRank.isMatch(matchCount))
+			.filter(lottoRank -> !(lottoRank.equals(THIRD_RANK) && hasBonusNumber))
 			.findFirst()
 			.orElse(NOTHING_RANK);
 	}

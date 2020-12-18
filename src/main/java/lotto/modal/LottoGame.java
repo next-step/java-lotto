@@ -18,7 +18,7 @@ public class LottoGame {
 		return this.lottoPackage;
 	}
 
-	public LottoResult getLottoResult(Lotto winnerLotto) {
+	public LottoResult getLottoResult(WinnerLotto winnerLotto) {
 		return new LottoResult(this.lottoPackage, winnerLotto);
 	}
 
