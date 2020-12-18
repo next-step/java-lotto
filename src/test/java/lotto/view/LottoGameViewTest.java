@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.result.LOTTO_RESULT;
+import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 import lotto.TestUtils;
 import lotto.number.LottoNumbers;
@@ -37,10 +37,10 @@ class LottoGameViewTest {
 	void showStatistics() {
 		// given
 		LottoGameView lottoGameView = new LottoGameView();
-		List<LOTTO_RESULT> lottoResultList = TestUtils.duplicate(LOTTO_RESULT.NOTHING, 100000);
-		lottoResultList.addAll(TestUtils.duplicate(LOTTO_RESULT.MATCHED_THREE,2));
-		lottoResultList.addAll(TestUtils.duplicate(LOTTO_RESULT.MATCHED_FOUR,1));
-		lottoResultList.addAll(TestUtils.duplicate(LOTTO_RESULT.MATCHED_SIX,0));
+		List<LottoResult> lottoResultList = TestUtils.duplicate(LottoResult.NOTHING, 100000);
+		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_THREE,2));
+		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_FOUR,1));
+		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_SIX,0));
 		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
 
 		// when & then
@@ -52,10 +52,10 @@ class LottoGameViewTest {
 	@DisplayName("로또 수익률 메세지 생성시 손해에 따른 추가메세지 확인")
 	void createIncomeRateMessage(boolean isProfit) {
 		// given
-		List<LOTTO_RESULT> lottoResultList = TestUtils.duplicate(LOTTO_RESULT.NOTHING, 40);
-		lottoResultList.add(LOTTO_RESULT.MATCHED_THREE);
+		List<LottoResult> lottoResultList = TestUtils.duplicate(LottoResult.NOTHING, 40);
+		lottoResultList.add(LottoResult.MATCHED_THREE);
 		if (isProfit) {
-			lottoResultList.add(LOTTO_RESULT.MATCHED_FOUR);
+			lottoResultList.add(LottoResult.MATCHED_FOUR);
 		}
 		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
 		LottoGameView lottoGameView = new LottoGameView();

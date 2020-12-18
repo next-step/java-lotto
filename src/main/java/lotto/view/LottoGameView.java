@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.result.LOTTO_RESULT;
+import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 import lotto.LottoView;
 import lotto.number.LottoNumbers;
@@ -24,14 +24,14 @@ public class LottoGameView implements LottoView {
 	public void showStatistics(LottoStatistics lottoStatistics) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LOTTO_RESULT.MATCHED_THREE));
-		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LOTTO_RESULT.MATCHED_FOUR));
-		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LOTTO_RESULT.MATCHED_FIVE));
-		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LOTTO_RESULT.MATCHED_SIX));
+		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_THREE));
+		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_FOUR));
+		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_FIVE));
+		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_SIX));
 		System.out.println(createIncomeRateMessage(lottoStatistics));
 	}
 
-	private String createLottoMatchedCountMessage(LottoStatistics lottoStatistics, LOTTO_RESULT lottoResult) {
+	private String createLottoMatchedCountMessage(LottoStatistics lottoStatistics, LottoResult lottoResult) {
 		return String.format("%s (%,d원)- %d개", lottoResult.getDescription(), lottoResult.getAmount(),
 				lottoStatistics.getCount(lottoResult));
 	}

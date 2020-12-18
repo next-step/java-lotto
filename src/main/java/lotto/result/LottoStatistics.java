@@ -6,15 +6,15 @@ import java.util.*;
 
 public class LottoStatistics {
 
-	private final Map<LOTTO_RESULT, Long> countResult;
+	private final Map<LottoResult, Long> countResult;
 
-	public static LottoStatistics create(List<LOTTO_RESULT> lottoResultList) {
+	public static LottoStatistics create(List<LottoResult> lottoResultList) {
 		if (lottoResultList.size() == 0) {
 			throw new IllegalArgumentException("lottoResultList is empty!");
 		}
 
-		Map<LOTTO_RESULT, Long> countResult = new HashMap<>();
-		for (LOTTO_RESULT key : LOTTO_RESULT.values()) {
+		Map<LottoResult, Long> countResult = new HashMap<>();
+		for (LottoResult key : LottoResult.values()) {
 			long count = countEquals(lottoResultList, key);
 			countResult.put(key, count);
 		}
@@ -28,15 +28,15 @@ public class LottoStatistics {
 				.count();
 	}
 
-	private LottoStatistics(Map<LOTTO_RESULT, Long> countResult) {
-		if (countResult.size() != LOTTO_RESULT.values().length) {
-			throw new IllegalArgumentException("uncounted LOTTO_RESULT is exist!");
+	private LottoStatistics(Map<LottoResult, Long> countResult) {
+		if (countResult.size() != LottoResult.values().length) {
+			throw new IllegalArgumentException("uncounted LottoResult is exist!");
 		}
 
 		this.countResult = Collections.unmodifiableMap(countResult);
 	}
 
-	public long getCount(LOTTO_RESULT lottoResult) {
+	public long getCount(LottoResult lottoResult) {
 		return countResult.get(lottoResult);
 	}
 
@@ -62,7 +62,7 @@ public class LottoStatistics {
 				.sum();
 	}
 
-	private static long multiplyAmount(LOTTO_RESULT lottoResult, long count) {
+	private static long multiplyAmount(LottoResult lottoResult, long count) {
 		return lottoResult.getAmount() * count;
 	}
 }
