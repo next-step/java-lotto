@@ -10,7 +10,6 @@ public class LottoController {
 
     private LottoTicketCount lottoTicketCount;
     private PublishedLottoTicket publishedLottoTicket;
-    private LottoResult lottoResult;
 
     public void startLottoGame() {
         LottoMoney lottoMoney = new LottoMoney(InputView.inputMoney());
@@ -18,9 +17,18 @@ public class LottoController {
 
         OutputView.printPublishedLottoResult(lottoTicketCount, publishedLottoTicket);
 
-        drawLottoResult();
+        LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputWinningLottoNumbers());
 
-        OutputView.printLottoStatics(this.lottoResult, this.lottoResult.calculatePrizeRate(lottoMoney));
+        LottoMachine lottoMachine = LottoMachine.instance();
+        WinningLotto winningLotto = new WinningLotto.Builder()
+                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(winningLottoNumbers))
+                .bonusBall(InputView.inputBonusBall())
+                .build();
+
+        LottoDrawMachine lottoDrawMachine = new LottoDrawMachine();
+        LottoResult lottoResult = lottoDrawMachine.drawLottoResult(winningLotto, publishedLottoTicket);
+
+        OutputView.printLottoStatics(lottoResult, lottoResult.calculatePrizeRate(lottoMoney));
     }
 
     private void buyLottoTicket(LottoMoney lottoMoney) {
@@ -34,18 +42,6 @@ public class LottoController {
         LottoShop lottoShop = new LottoShop();
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
         publishedLottoTicket = lottoShop.buyLotto(lottoTicketCount, manualLottoNumbers);
-    }
-
-    private void drawLottoResult() {
-        LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputWinningLottoNumbers());
-        LottoMachine lottoMachine = LottoMachine.instance();
-        WinningLotto winningLotto = new WinningLotto.Builder()
-                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(winningLottoNumbers))
-                .bonusBall(InputView.inputBonusBall())
-                .build();
-
-        lottoResult = LottoResult.getInstance();
-        lottoResult.analyzeLottoRank(publishedLottoTicket.getPublishedLottoTicket(), winningLotto);
     }
 
 }
