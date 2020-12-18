@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
 import lotto.domain.WinningLottoTicket;
@@ -56,6 +57,24 @@ public class ResultView {
 			return ",보너스 볼 일치";
 		}
 		return "";
+	}
+
+	public static void printTicketCount(int ticketCount) {
+		System.out.println(ticketCount + "개를 구매했습니다.");
+	}
+
+	public static void printTickets(List<LottoTicket> lottoTickets) {
+		for (LottoTicket lottoTicket : lottoTickets) {
+			printLottoTicketNumbers(lottoTicket);
+		}
+	}
+
+	private static void printLottoTicketNumbers(LottoTicket lottoTicket) {
+		List<Integer> numbers = lottoTicket.get().stream()
+			.map(lottoNumber -> lottoNumber.getNumber())
+			.collect(Collectors.toList());
+
+		System.out.println(numbers.toString());
 	}
 
 }

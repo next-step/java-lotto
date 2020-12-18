@@ -13,6 +13,10 @@ import lotto.view.ResultView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		LottoTickets lottoTickets = InputView.requireCash();
+
+		ResultView.printTicketCount(lottoTickets.getTicketCount());
+		ResultView.printTickets(lottoTickets.getLottoTickets());
+
 		WinningLottoTicket winningLottoTicket = InputView.requireWinningNumber();
 		ResultView.printWinningStatistics(lottoTickets, winningLottoTicket);
 	}
