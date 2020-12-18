@@ -1,5 +1,7 @@
 package step2.domain.lotto;
 
+import step2.domain.dto.LottoResultDto;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,10 +36,11 @@ public final class LottoNumbers {
                 .collect(toList());
     }
 
-    public long getEqualNumberCount(List<Integer> targetNumbers) {
-        return lottoNumbers.stream()
+    public LottoResultDto getEqualNumberCount(List<Integer> targetNumbers, Integer bonusNumber) {
+        long countOfMatch = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .filter(targetNumbers::contains)
                 .count();
+        return new LottoResultDto(countOfMatch, getLottoNumbers().contains(bonusNumber));
     }
 }
