@@ -53,6 +53,6 @@ public class OutputView {
     }
 
     private static int compare(MatchCount m1, MatchCount m2) {
-        return Integer.compare(m1.getMatchCount(), m2.getMatchCount());
+        return Integer.compare(m1.getPriceMoney(), m2.getPriceMoney());
     }
 }
