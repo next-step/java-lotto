@@ -1,8 +1,8 @@
 package step2.view;
 
-import step2.domain.LottoGame;
 import step2.domain.Rank;
 import step2.domain.Request;
+import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
@@ -20,8 +20,12 @@ public class ResultView {
         System.out.println(message);
     }
 
-    private static void printResult(long countOfMatch, long winningMoney, int total) {
-        System.out.println(countOfMatch + "개 일치 " + "(" + winningMoney + "원) - " + total + "개");
+    private static void printResult(Rank rank, long countOfMatch, long winningMoney, int total) {
+        String addition = " ";
+        if (rank == SECOND) {
+            addition = ", 보너스 볼 일치";
+        }
+        System.out.println(countOfMatch + "개 일치" + addition + "(" + winningMoney + "원) - " + total + "개");
     }
 
     public static void printLotto(List<LottoNumbers> lottoNumbers, String delimiter) {
@@ -38,15 +42,15 @@ public class ResultView {
         printMessage("[" + result + "]");
     }
 
-    public static void printWinLotto(LottoGame lottoGame, List<Integer> targetNumbers, Request request) {
+    public static void printWinLotto(Lotto lotto, List<Integer> targetNumbers, Integer bonusNumber, Request request) {
         printMessage("당첨 통계");
         printMessage("--------");
-        Map<Rank, List<Rank>> result = lottoGame.getWinLotto(targetNumbers);
+        Map<Rank, List<Rank>> result = lotto.getWinLotto(targetNumbers, bonusNumber);
         setRankData(result);
         result.entrySet()
                 .stream()
-                .sorted(Comparator.comparingLong(entry -> entry.getKey().getCountOfMatch()))
-                .forEach((entry) -> printResult(entry.getKey().getCountOfMatch(), entry.getKey().getWinningMoney(), entry.getValue().size()));
+                .sorted(Comparator.comparingLong(entry -> entry.getKey().getWinningMoney()))
+                .forEach((entry) -> printResult(entry.getKey(), entry.getKey().getCountOfMatch(), entry.getKey().getWinningMoney(), entry.getValue().size()));
         printMargin(request, result);
     }
 
