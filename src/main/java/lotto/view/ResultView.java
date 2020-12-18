@@ -13,6 +13,7 @@ public class ResultView {
     public static final String LOTTO_STATISTICS_MESSAGE = "%,d개 일치 (%,d원)- %,d개%n";
     private static final String EARNINGS_RATIO_MESSAGE = "총 수익률은 %,.2f입니다.\n";
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
+    private static final String LOTTO_SIZE_MESSAGE = "%d개를 구매했습니다.\n";
 
     private ResultView() {
         throw new AssertionError();
@@ -50,5 +51,11 @@ public class ResultView {
 
     private static void printEarningsRatio(double earningsRatio) {
         System.out.printf(EARNINGS_RATIO_MESSAGE, earningsRatio);
+    }
+
+    public static int printPurchasedLottoSize(int purchasedAmount) {
+        int purchasingLottoSize = Math.floorDiv(purchasedAmount, Lotto.PRICE);
+        System.out.printf(LOTTO_SIZE_MESSAGE, purchasingLottoSize);
+        return purchasingLottoSize;
     }
 }

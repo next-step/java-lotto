@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String PURCHASE_LOTTO_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_LOTTO_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String LOTTO_SIZE_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String UNNECESSARY_SPACE_DELIMITER = " ";
     private static final String EMPTY = "";
     private static final String NUMBER_DELIMITER = ",";
@@ -22,9 +21,7 @@ public class InputView {
 
     public static int readPurchasingAmount() {
         System.out.println(PURCHASE_LOTTO_INPUT_MESSAGE);
-        int purchasingLottoSize = Math.floorDiv(readInteger(), Lotto.PRICE);
-        System.out.printf(LOTTO_SIZE_MESSAGE, purchasingLottoSize);
-        return purchasingLottoSize;
+        return readInteger();
     }
 
     public static Lotto readWinningLottoNumbers() {
