@@ -5,10 +5,10 @@ import java.util.Arrays;
 public enum LottoRank {
 
 	NOTHING_RANK(0, 0),
-	FOURTH_RANK(3, 5000),
-	THIRD_RANK(4, 50000),
-	SECOND_RANK(5, 1500000),
-	FIRST_RANK(6, 2000000000);
+	FOURTH_RANK(3, 5_000),
+	THIRD_RANK(4, 50_000),
+	SECOND_RANK(5, 1_500_000),
+	FIRST_RANK(6, 2_000_000_000);
 
 	private final int matchCount;
 	private final int winnerPrize;
