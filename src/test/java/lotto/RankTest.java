@@ -3,38 +3,44 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 class RankTest {
 
+    @DisplayName(value = "맞춘 개수가 0보다 작으면 예외")
     @Test
-    void 맞춘_개수가_0보다_작으면_예외() {
+    void 맞춘_개수는_1보다_작을_수_없다() {
         // given
         int countOfMatch = -1;
 
+
         // then
         assertThatThrownBy(() -> {
+            // when
             Rank.valueOf(countOfMatch, false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName(value = "맞춘 개수가 6보다 크면 예외")
     @Test
-    void 맞춘_개수가_6보다_크면_예외() {
+    void 맞춘_개수는_6보다_클_수_없다() {
         // given
         int countOfMatch = 7;
 
+
         // then
         assertThatThrownBy(() -> {
+            // when
             Rank.valueOf(countOfMatch, false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName(value = "맞춘 개수가 3미만 이면, MISS를 반환")
     @ParameterizedTest
     @ValueSource(ints = {2, 1, 0})
-    void 맞춘_개수가_3개_미만이면_MISS_반환(int countOfMatch) {
+    void 맞춘_개수가_3미만_이면_MISS(int countOfMatch) {
         // when
         Rank rank = Rank.valueOf(countOfMatch, false);
 
@@ -43,11 +49,7 @@ class RankTest {
     }
 
     @Test
-<<<<<<< HEAD
-    void 맞춘_개수가_3개이면_FIFTH_반환() {
-=======
     void 맞춘_개수가_3개_이면_FIFTH() {
->>>>>>> 8626d00... test : 보너스 당첨 안됐을 때 케이스 추가
         // given
         int countOfMatch = 3;
 
@@ -58,17 +60,6 @@ class RankTest {
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
-<<<<<<< HEAD
-    @DisplayName(value = "모든 Rank를 테스트 한다.")
-    @ParameterizedTest
-    @CsvSource()
-    void RankTest() {
-        // given
-
-        // when
-
-        // then
-=======
     @Test
     void 맞춘_개수가_4개_이면_FOURTH() {
         // given
@@ -117,6 +108,5 @@ class RankTest {
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
->>>>>>> 8626d00... test : 보너스 당첨 안됐을 때 케이스 추가
     }
 }
