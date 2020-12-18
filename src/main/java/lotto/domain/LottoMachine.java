@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.LottoNumberCountNotEnoughException;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
