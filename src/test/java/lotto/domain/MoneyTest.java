@@ -23,8 +23,8 @@ class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"13000:7:6", "20000000000:10000000:10000000"}, delimiter = ':')
     void computeLottoTickets(long value, int countOfManualLotto, int expected) {
-        Money money = new Money(value);
-        assertThat(money.getCountOfAutoLottoTickets(countOfManualLotto)).isEqualTo(expected);
+        int countOfAutoLotto = new Money(value).getCountOfAutoLotto(countOfManualLotto);
+        assertThat(countOfAutoLotto).isEqualTo(expected);
     }
 
     @DisplayName("받게 될 총 당첨 금액으로 수익률을 계산한다.")
