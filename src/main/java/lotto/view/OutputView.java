@@ -26,14 +26,14 @@ public class OutputView {
 	}
 
 	public static void printLottoLottery(LottoLottery lottoLottery) {
-		System.out.print("[");
+		System.out.print(Message.START_BRACKET);
 		System.out.print(joinLottoNumber(lottoLottery.getLottoNumbers()));
-		System.out.println("]");
+		System.out.println(Message.END_BRACKET);
 	}
 
 	public static String joinLottoNumber(List<LottoNumber> lottoNumbers) {
 		return lottoNumbers.stream()
 			.map(LottoNumber::toString)
-			.collect(Collectors.joining(","));
+			.collect(Collectors.joining(Message.COMMA));
 	}
 }
