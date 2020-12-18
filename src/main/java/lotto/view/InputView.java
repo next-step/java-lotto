@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ public class InputView {
     private static final String UNNECESSARY_SPACE_DELIMITER = " ";
     private static final String EMPTY = "";
     private static final String NUMBER_DELIMITER = ",";
+    private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
         throw new AssertionError();
@@ -28,6 +30,11 @@ public class InputView {
         System.out.println(WINNING_LOTTO_INPUT_MESSAGE);
         LottoNumbers winningLottoNumbers = new LottoNumbers(convertWinningLottoNumbers(readString()));
         return new Lotto(winningLottoNumbers);
+    }
+
+    public static LottoNumber readBonusLottoNumber() {
+        System.out.println(BONUS_BALL_INPUT_MESSAGE);
+        return new LottoNumber(readInteger());
     }
 
     private static List<Integer> convertWinningLottoNumbers(String numbers) {
