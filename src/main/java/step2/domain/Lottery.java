@@ -12,7 +12,7 @@ public class Lottery {
     private int matched;
 
     public Lottery() {
-        Util.getShuffled(selectedNumbers);
+        selectedNumbers = Util.getShuffled();
         Util.getSorted(selectedNumbers);
         this.matched = Constants.INIT_MATCHED;
     }
