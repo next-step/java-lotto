@@ -9,11 +9,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private final static String BASIC_PATTERN = ",|:";
     private final static String CUSTOM_PATTERN = "\"//(.)\\n(.*)\"";
+
     public static int splitAndSum(String expression) {
         if(isEmpty(expression)) {
             return 0;
-        };
+        }
         String[] splitNumbers = splitExpression(expression);
         int result = sumNumbers(splitNumbers);
         return result;
@@ -36,7 +38,7 @@ public class StringAddCalculator {
             String[] tokens= m.group(2).split(customDelimiter);
             return tokens;
         }
-        return expression.split(",|:");
+        return expression.split(BASIC_PATTERN);
     }
 
     private static boolean isEmpty(String expression) {
