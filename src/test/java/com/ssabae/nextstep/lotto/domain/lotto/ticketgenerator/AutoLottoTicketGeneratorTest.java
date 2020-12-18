@@ -3,8 +3,6 @@ package com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
-import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.AutoLottoTicketGenerator;
-import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 import org.junit.jupiter.api.Test;
 
 /**

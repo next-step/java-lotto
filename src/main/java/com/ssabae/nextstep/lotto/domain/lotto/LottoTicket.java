@@ -24,6 +24,14 @@ public class LottoTicket {
         if (numbers.length != 6) {
             throw new IllegalArgumentException();
         }
+        if (!isDuplicate(numbers)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean isDuplicate(LottoNumber[] numbers) {
+        int length = numbers.length;
+        return Arrays.stream(numbers).distinct().toArray().length == length;
     }
 
     @Override

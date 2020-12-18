@@ -1,7 +1,6 @@
 package com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator;
 
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
-import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 
 /**
  * @author : leesangbae

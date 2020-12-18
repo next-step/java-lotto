@@ -2,7 +2,6 @@ package com.ssabae.nextstep.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +32,7 @@ class WinningNumberTest {
 
     @ParameterizedTest(name = "{displayName}[{index}] - \"{arguments}\"")
     @DisplayName("로또 당첨 번호 생성 실패 Test")
-    @ValueSource(strings = {"-1, 2, 3, 4, 5, 6", "0, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 46"})
+    @ValueSource(strings = {"-1, 2, 3, 4, 5, 6", "0, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 46", "1, 2"})
     void shouldBeExceptionInGenerateWinningNumberTest(String value) {
         assertThatThrownBy(() -> new WinningNumber(value))
                 .isInstanceOf(IllegalArgumentException.class);

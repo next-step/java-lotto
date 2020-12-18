@@ -4,7 +4,6 @@ import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
 import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +23,7 @@ public class LottoTicketMachine {
     }
 
     public LottoTickets buy(Money amount) {
+        validate(amount);
         int count = calculateTicketCount(amount);
         List<LottoTicket> lottoTicketList = Stream.generate(generator::generate)
                 .limit(count)
@@ -31,9 +31,13 @@ public class LottoTicketMachine {
         return new LottoTickets(Collections.unmodifiableList(lottoTicketList));
     }
 
+    private void validate(Money amount) {
+        if (amount.isLessThen(LOTTO_TICKET_PRICE)) {
+            throw new IllegalArgumentException(LOTTO_TICKET_PRICE + "원 이상이여야 합니다.");
+        }
+    }
+
     private int calculateTicketCount(Money amount) {
-        return amount.amount
-                .divide(LOTTO_TICKET_PRICE.amount, 1, BigDecimal.ROUND_UP)
-                .intValue();
+        return (int) (amount.getAmountLongValue() / LOTTO_TICKET_PRICE.getAmountLongValue());
     }
 }

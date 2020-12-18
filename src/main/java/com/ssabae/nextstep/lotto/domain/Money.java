@@ -38,12 +38,12 @@ public class Money {
         return new Money(this.amount.multiply(BigDecimal.valueOf(percent)));
     }
 
-    public Money divide(double percent) {
-        return new Money(this.amount.divide(BigDecimal.valueOf(percent), 2, BigDecimal.ROUND_UP));
-    }
-
     public long getAmountLongValue() {
         return amount.longValue();
+    }
+
+    public boolean isLessThen(Money otherMoney) {
+        return amount.compareTo(otherMoney.amount) < 0;
     }
 
     @Override
@@ -55,11 +55,12 @@ public class Money {
             return false;
         }
         Money money = (Money) o;
-        return Objects.equals(amount, money.amount);
+        return Objects.equals(amount.longValue(), money.amount.longValue());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(amount);
     }
+
 }
