@@ -8,17 +8,17 @@ import java.util.List;
 
 public class LottoMachine {
     private final LottoTicketFactory lottoTicketFactory;
-    private final int numberOfLottoTickets;
+    private final int countOfAutoLottoTickets;
 
-    public LottoMachine(final int numberOfLottoTickets) {
+    public LottoMachine(final int countOfAutoLottoTickets) {
         this.lottoTicketFactory = new LottoTicketFactory();
-        this.numberOfLottoTickets = numberOfLottoTickets;
+        this.countOfAutoLottoTickets = countOfAutoLottoTickets;
     }
 
-    public LottoTickets makeLottoTickets() {
+    public LottoTickets makeAutoLottoTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int index = 0; index < numberOfLottoTickets; index++) {
-            lottoTickets.add(lottoTicketFactory.makeLottoTicket());
+        for (int index = 0; index < countOfAutoLottoTickets; index++) {
+            lottoTickets.add(lottoTicketFactory.makeAutoLottoTicket());
         }
         return new LottoTickets(lottoTickets);
     }

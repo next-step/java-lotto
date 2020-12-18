@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @DisplayName("입력받은 수만큼 로또 티켓들이 생성된다.")
+    @DisplayName("입력받은 수만큼 로또 티켓들이 자동으로 생성된다.")
     @ParameterizedTest
     @ValueSource(ints = {13, 2000000})
     void makeLottoTickets(int count) {
-        LottoTickets lottoTickets = new LottoMachine(count).makeLottoTickets();
-        assertThat(lottoTickets.getLottoTickets()).hasSize(count);
+        LottoTickets autoLottoTickets = new LottoMachine(count).makeAutoLottoTickets();
+        assertThat(autoLottoTickets.getLottoTickets()).hasSize(count);
     }
 }
