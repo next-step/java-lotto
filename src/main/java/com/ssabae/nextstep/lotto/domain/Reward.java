@@ -9,36 +9,48 @@ import java.util.Arrays;
  */
 public enum Reward {
 
-    FIRST(6, 2_000_000_000L),
-    SECOND(5, 1_500_000L),
-    THIRD(4, 50_000L),
-    FOURTH(3, 5_000L),
-    NONE(0, 0L);
+    NONE  (0, Money.won(0L), false),
+    FOURTH(3, Money.won(5_000L), true),
+    THIRD (4, Money.won(50_000L), true),
+    SECOND(5, Money.won(1_500_000L), true),
+    FIRST (6, Money.won(2_000_000_000L), true);
 
     private final int countOfMatch;
-    private final long winningMoney;
+    private final Money winningMoney;
+    private final boolean report;
 
-    Reward(int countOfMatch, long winningMoney) {
+    Reward(int countOfMatch, Money winningMoney, boolean report) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.report = report;
     }
 
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
-    public long getWinningMoney() {
+    public Money getWinningMoney() {
         return winningMoney;
     }
 
+    public boolean isReport() {
+        return report;
+    }
+
     public static Money getWinningMoneyByMatchCount(int countOfMatch) {
-        long winningMoney = Arrays.stream(values())
+        return Arrays.stream(values())
                 .filter(reward -> reward.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(NONE)
                 .winningMoney;
-        return Money.won(winningMoney);
     }
+
+    public static Reward[] getReportableRewards() {
+        return Arrays.stream(values())
+                .filter(Reward::isReport)
+                .toArray(Reward[]::new);
+    }
+
 
 
 }

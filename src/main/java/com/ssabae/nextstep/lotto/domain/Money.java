@@ -16,7 +16,7 @@ public class Money {
     public BigDecimal amount;
 
     private Money(BigDecimal amount) {
-        if (amount.intValue() < 0) {
+        if (amount.longValue() < 0L) {
             throw new IllegalArgumentException("0보다 작은 숫자는 들어올 수 없습니다.");
         }
         this.amount = amount;
@@ -40,6 +40,10 @@ public class Money {
 
     public Money divide(double percent) {
         return new Money(this.amount.divide(BigDecimal.valueOf(percent), 2, BigDecimal.ROUND_UP));
+    }
+
+    public long getAmountLongValue() {
+        return amount.longValue();
     }
 
     @Override

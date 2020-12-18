@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketGenerator;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketMachine;
+import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import com.ssabae.nextstep.lotto.domain.lotto.TestLottoTicketGenerator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,8 @@ class LottoTicketMachineTest {
 
     @Test
     void buyTest() {
-        List<LottoTicket> ticket = lottoTicketMachine.buy(Money.won(13000L));
-        assertThat(ticket.size()).isEqualTo(13);
+        LottoTickets lottoTickets = lottoTicketMachine.buy(Money.won(13000L));
+        List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
+        assertThat(lottoTicketList.size()).isEqualTo(13);
     }
 }

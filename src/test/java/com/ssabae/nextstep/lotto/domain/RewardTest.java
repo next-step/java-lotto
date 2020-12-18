@@ -19,7 +19,7 @@ class RewardTest {
     @DisplayName("로또 1등 당첨 금액 Test")
     void rewardTest() {
         Money money = Reward.getWinningMoneyByMatchCount(6);
-        assertThat(money).isEqualTo(Money.won(Reward.FIRST.getWinningMoney()));
+        assertThat(money).isEqualTo(Reward.FIRST.getWinningMoney());
     }
 
     @ParameterizedTest(name = "{displayName}[{index}] - \"{arguments}\"")
