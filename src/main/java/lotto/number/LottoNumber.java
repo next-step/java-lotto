@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int LOTTO_NUMBER_RANGE_MAX = 45;
 
 	private static final String VALIDATE_MSG_RANGE_WRONG = String.format("each lottoNumber range must in %s~%s",
-			LOTTO_NUMBER_RANGE_MAX, LOTTO_NUMBER_RANGE_MAX);
+			LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX);
 
 	public static final List<Integer> LOTTO_NUMBER_LIST = IntStream
 			.rangeClosed(LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX)
