@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -8,8 +9,8 @@ import java.util.stream.Stream;
 public enum MatchCount {
 
     FIRST(6, 2_000_000_000)
-    , SECOND_WITH_BONUS(5, 30_000_000)
     , SECOND(5, 1_500_000)
+    , SECOND_WITH_BONUS(5, 30_000_000)
     , THIRD(4, 50_000)
     , FORTH(3, 5_000)
     , MISS(0, 0)
@@ -31,11 +32,20 @@ public enum MatchCount {
     }
 
     public static MatchCount getResult(int matchCount, boolean isBonusMatch) {
-        if (SECOND.matchCount == matchCount) {
-            return isBonusMatch ? SECOND_WITH_BONUS : SECOND;
+        MatchCount matchedCount = Arrays.stream(MatchCount.values())
+              .filter(matchCountType -> matchCountType.isSame(matchCount))
+              .findFirst()
+              .orElse(MISS);
+
+        if (matchedCount == SECOND && isBonusMatch) {
+            return SECOND_WITH_BONUS;
         }
 
-        return matchPriceInfo.getOrDefault(matchCount, MISS);
+        return matchedCount;
+    }
+
+    private boolean isSame(int matchCount) {
+        return this.matchCount == matchCount;
     }
 
     public static Map<MatchCount, Integer> result(Map<MatchCount, Integer> matchCounts) {
@@ -57,7 +67,7 @@ public enum MatchCount {
         return this.matchCount + "개 일치 (" + this.priceMoney + "원) - " + ticketCount + "개";
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getPriceMoney() {
+        return priceMoney;
     }
 }
