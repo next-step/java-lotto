@@ -29,13 +29,13 @@ public class LottoGame {
         List<Integer> ticketNumbers = lottoTickets.getLottoTicket(lottoTicketIndex).getTicket();
 
         for (Integer lastWeeksWinningNumber : lastWeeksWinningNumbers.getWinningNumbers()) {
-            countOfMatch = getCountOfMatch(countOfMatch, ticketNumbers, lastWeeksWinningNumber);
+            countOfMatch = sumCountOfMatch(countOfMatch, ticketNumbers, lastWeeksWinningNumber);
         }
 
         lottoResult.saveLottoResult(countOfMatch, isMatchBonus(countOfMatch, ticketNumbers));
     }
 
-    private int getCountOfMatch(int countOfMatch, List<Integer> ticketNumbers, Integer lastWeeksWinningNumber) {
+    private int sumCountOfMatch(int countOfMatch, List<Integer> ticketNumbers, Integer lastWeeksWinningNumber) {
         if (ticketNumbers.contains(lastWeeksWinningNumber)) {
             countOfMatch++;
         }
