@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
 	public static final int LOTTO_NUMBER_SIZE = 6;
-	private static final String LOTTO_VALIDATE_SIZE_WRONG = "lottoNumbers size must be %s";
+	private static final String LOTTO_VALIDATE_SIZE_WRONG =
+			String.format("lottoNumbers size must be %s", LOTTO_NUMBER_SIZE);
 	private static final String LOTTO_VALIDATE_DUPLICATED = "lottoNumber is duplicated";
 
 	private final List<LottoNumber> lottoNumbers;
@@ -14,7 +15,7 @@ public class LottoNumbers {
 	public LottoNumbers(List<LottoNumber> lottoNumberList) {
 		this.lottoNumbers = toSortedUnmodifiableList(lottoNumberList);
 		validateSize(this.lottoNumbers);
-		validateUnique(lottoNumbers);
+		validateUnique(this.lottoNumbers);
 	}
 
 	private static List<LottoNumber> toSortedUnmodifiableList(List<LottoNumber> lottoNumberList) {
@@ -25,8 +26,7 @@ public class LottoNumbers {
 
 	private static void validateSize(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
 		if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-			String msg = String.format(LOTTO_VALIDATE_SIZE_WRONG, LOTTO_NUMBER_SIZE);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalArgumentException(LOTTO_VALIDATE_SIZE_WRONG);
 		}
 	}
 
