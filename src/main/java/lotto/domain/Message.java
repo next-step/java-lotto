@@ -6,4 +6,7 @@ public interface Message {
 	String INVALID_POSITIVE_NUMBER = "양수가 아닙니다.";
 	String PRINT_NUMBER_OF_LOTTO_PURCHASED = "개를 구매했습니다.";
 	String INVALID_BUY_LOTTO = "최소 구매가능 금액은 1000원 입니다.";
+	String INVALID_LOTTO_NUMBER_RANGE = "로또 번호는 1 ~ 45 사이의 값이어야 합니다.";
+	String INVALID_EMPTY_LIST = "List가 비어 있습니다.";
+	String INVALID_LOTTO_NUMBER_COUNT = "로또 숫자는 6개 이어야 합니다.";
 }
