@@ -101,12 +101,25 @@ class RankTest {
     void 보너스_당첨_테스트() {
         // given
         int countOfMatch = 5;
-        boolean matchBonus = true;
 
         // when
         Rank rank = Rank.valueOf(countOfMatch, true);
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @DisplayName(value = "5개가 맞고, 보너스 번호가 틀리면 THIRD 반환")
+    @Test
+    void 보너스_비당첨_테스트() {
+        // given
+        int countOfMatch = 5;
+        boolean matchBonus = false;
+
+        // when
+        Rank rank = Rank.valueOf(countOfMatch, false);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 }
