@@ -19,4 +19,10 @@ public class InputView {
 			throw new IllegalArgumentException(Message.INPUT_NUMBER);
 		}
 	}
+
+	public static String waitInputLastWinNumbers() {
+		System.out.println(Message.INPUT_LAST_WIN_NUMBERS);
+
+		return new Scanner(System.in).nextLine();
+	}
 }

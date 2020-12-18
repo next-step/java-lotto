@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.application.LottoService;
 import lotto.domain.LottoLotteries;
+import lotto.domain.WinLottoNumbers;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,5 +15,7 @@ public class LottoClient {
 
 		LottoLotteries lottoLotteries = lottoService.buyMaxLottoLotteries();
 		OutputView.printLottoLotteriesStatus(lottoLotteries);
+
+		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(InputView.waitInputLastWinNumbers());
 	}
 }
