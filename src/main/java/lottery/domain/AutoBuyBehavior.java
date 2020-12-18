@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,16 +14,7 @@ public class AutoBuyBehavior implements BuyBehavior {
             .map(LotteryNumber::new)
             .collect(Collectors.toList());
 
-    @Override
-    public List<LotteryTicket> buyLotteryTickets(int pickCounts, int numberOfTickets) {
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for(int i = 0; i < numberOfTickets; i++) {
-            lotteryTickets.add(new LotteryTicket(this.getLotteryNumbersByAutomation(pickCounts)));
-        }
-        return lotteryTickets;
-    }
-
-    private List<LotteryNumber> getLotteryNumbersByAutomation(int pickCounts) {
+    public List<LotteryNumber> getLotteryNumbers(int pickCounts) {
         Collections.shuffle(lotteryAllNumbers);
         return lotteryAllNumbers.subList(FROM_INDEX, pickCounts);
     }

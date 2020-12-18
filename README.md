@@ -276,3 +276,133 @@ ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 
   * 구매한 복권 개수를 출력한다.
   * 당첨 통계를 출력한다.
 * LotteryGameManager class를 구현한다.
+
+----
+# [3단계 - 3단계 - 로또(2등)](https://edu.nextstep.camp/s/MNii0Puk/ls/a5KEHckU)
+
+## 2단계 미반영 피드백
+- [x] `LotteryGame`에서 `AutoBuyBehaviro`대신 `BuyBehavir` 사용하기
+- [x] `LotteryWinning` 클래스에서 `LotteryResult`를 제공
+- [x] `lotteryResultMap` 접근자 `package private`에서 `private`으로 개선
+- [x] 사용하지 않는 코드 삭제
+- [x] `SortedSet`대신 `Set`으로 구체적인 클래스로 선언하기 보단 상위 클래스로 선언하여 유연하게 설정
+- [x] `TreeSet` 초기화 간소화
+- [x] 자동 구입에 관한 전략을 구현해주셨는데 한가지 아쉬운 부분은 전략 자체가 `List<LotteryTicket>` 을 제공해주고 있는 부분인것 같아요.
+`LotteryTicket` 클래스가 자동 로또와 같은 객체를 제공해 주는 방향으로 구현한다면 전략 자체가 자동 번호 발급의 역할만 할수 있을것 같습니다 !
+- [x] 코드 중복 제거 (힌트는 주 / 부 생성자 사용)
+    ```
+    if (lotteryNumbers.size() != NUMBER_OF_LOTTERY_NUMBERS) {
+                throw new IllegalArgumentException("중복없는 6개의 숫자가 입력되어야 합니다.");
+            }
+    ```
+
+## 기능 요구 사항
+* 2등을 위해 추가 번호를 하나 더 추첨한다.
+* 당첨 통계에 2등도 추가해야 한다.
+```
+[... 생략 ...]
+
+지난 주 당첨 번호를 입력해 주세요.
+1, 2, 3, 4, 5, 6
+보너스 볼을 입력해 주세요.
+7
+
+당첨 통계
+---------
+3개 일치 (5000원)- 1개
+4개 일치 (50000원)- 0개
+5개 일치 (1500000원)- 0개
+5개 일치, 보너스 볼 일치(30000000원) - 0개
+6개 일치 (2000000000원)- 0개
+총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+```
+
+## 프로그래밍 요구사항
+* 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+* java enum을 적용해 프로그래밍을 구현한다.
+* 규칙 8: 일급 콜렉션을 쓴다.
+* indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+* 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+* 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+* else 예약어를 쓰지 않는다.
+### 힌트
+* 일급 콜렉션을 쓴다.
+* 6개의 숫자 값을 가지는 java collection을 감싸는 객체를 추가해 구현해 본다.
+하드 코딩을 하지 않기 위해 상수 값을 사용하면 많은 상수 값이 발생한다. 자바의 enum을 활용해 상수 값을 제거한다. 즉, enum을 활용해 일치하는 수를 로또 등수로 변경해 본다.
+```
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
+
+    private int countOfMatch;
+    private int winningMoney;
+
+    private Rank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
+    }
+		
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
+        return null;
+    }
+}
+```
+
+## 기능 목록 및 commit 로그 요구사항
+* 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
+* git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
+
+## 구현할 기능 목록 정리
+* 2등을 위해 추가 번호를 하나 더 추첨한다.
+  ```
+  보너스 볼을 입력해 주세요.
+  ```
+* 당첨 통계에 2등도 추가해야 한다.
+  ```
+  5개 일치, 보너스 볼 일치(30000000원) - 0개
+  ```
+## 리뷰어 피드백
+- [x] `contains` 메소드는 LotteryTicket내에 추가해주기
+- [x] `LotteryGameManager`의 구현을 정리하고 싶으신것 같아 간단하게 코멘트 남겨두겠습니다 ㅎㅎㅎ
+      우선 `InputView`의 호출을 DTO 객체를 활용하여 값을 얻어오는 로칙의 호출을 줄여볼수 있을것 같습니다.
+      `new LotteryWinning(lotteryWinningNumbers, lotteryBonusNumber);` 와 같이 도메인 객체를 생성하는 로직은 
+      `LotteryGameManager` 보다는 `LotteryGame` 클래스를 통해서 생성하는것도 고려해보시면 좋을것 같아요.
+- [x] `pickCounts`라는 상태값이 어떤 역할을 하는지 알수 없네요. (필수인지 체크 필요)
+- [x] `LotteryResult` 을 `LotteryWinning`에서 상태값으로 가지고 있을 필요는 없을것 같습니다.
+      사용하고 있는 로직을 확인해주세요 
+- [x] `LotteryGame` 클래스가 조금더 많은 역할을 할 수있으면 좋을것 같아요.
+      `price, count` 의 유효성 검사를 `LotteryGame` 가 아닌 `LotteryAmount`와 같은 클래스를 만들어 위임하고, 
+      `LotteryGame`이 `LotteryTicket` 에 관련관 상태값을 가질수 있다면 더 많은 책임들을 위임할 수 있지 않을까 생각합니다 !
+- [x] 리스트를 나타내는 `List<LotteryTicket>` 값을 일급 컬렉션으로 만들어보는건 어떨까요 ?
+      일급 컬렉션에 대해 학습하는 과정이라고 생각해주시면 좋을것 같습니다. https://jojoldu.tistory.com/412
+- [x] 2등 로또를 판단하는 로직을 `LotteryResult`에서 구현해주셨네요 👍
+      만약 3등, 4등에서도 보너스 번호여부가 추가된다면 `LotteryResult`의 비즈니스 로직이 복잡하게 변할것 같아요.
+      `LotteryValue` `Enum`이 보너스 번호 여부를 가지고 있고 그에 따른 판단을 할수 있다면 `LotteryResult`는 로또 결과만을 제공해줄수 있는 클래스가 될것 같습니다.
+      설명이 조금 복잡해진것 같은데 당첨 결과를 판단할 수 있는 모든 정보를 `LotteryValue` `Enum`으로 위임시켜보세요 !
+- [x] 생성자를 호출하여 `LotteryTicket` 을 만들어 주고 계시는데 `Stream`은 기능단위로 줄바꿈하여 사용하는것을 권장 드려요.
+      람다식 대신 메서드 레퍼런스를 활용할 수 있다면 가독성이 더욱 좋아진답니다 ㅎㅎ
+      https://jinseongsoft.tistory.com/208      
+      추가적으로 생성자가 많아지거나 객체 생성시 특별한 의미를 부여하고자 하는경우 정적 팩토리 메서드 패턴을 활용할 수 있습니다.
+      참고해주시면 좋을것 같아요 !
+      https://johngrib.github.io/wiki/static-factory-method-pattern/
+```
+public LotteryTicket of(int[] numbers) {
+      List<LotteryNumber> lotteryNumbers = Arrays.stream(numbers)
+              .mapToObj(LotteryNumber::new)
+              .collect(Collectors.toList());
+      return new LotteryTicket(lotteryNumbers);
+  }
+```

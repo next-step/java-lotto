@@ -1,31 +1,41 @@
 package lottery.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryGame {
+    private LotteryAmount lotteryAmount;
+    private LotteryWinning lotteryWinning;
+    private LotteryTickets lotteryTickets;
 
-    private final int price;
-    private final int pickCounts;
-
-    public LotteryGame(int price, int pickCounts) {
-        this.price = price;
-        this.pickCounts = pickCounts;
+    public LotteryGame(int price) {
+        this.lotteryAmount = new LotteryAmount(price);
     }
 
-    public int buyNumberOfLotteryTickets(int cost) {
-        if (cost < price) {
-            throw new IllegalArgumentException("로또 1장의 가격은 " + this.price + "입니다.");
-        }
-        return cost / this.price;
+    public int buyNumberOfLotteryTickets() {
+        return lotteryAmount.getAmount();
     }
 
-    public List<LotteryTicket> buyLotteryTickets(int numberOfTickets, AutoBuyBehavior behavior) {
-        return behavior.buyLotteryTickets(this.pickCounts, numberOfTickets);
+    public void buyLotteryTickets(BuyBehavior behavior) {
+        this.lotteryTickets = new LotteryTickets(IntStream.range(0, lotteryAmount.getAmount())
+                .boxed()
+                .map(Integer -> LotteryTicketFactory.createLotteryTicket(behavior))
+                .collect(Collectors.toList()));
     }
 
-    public LotteryResult matchLotteryTickets(String winningNumbers, List<LotteryTicket> lotteryTickets) {
-        LotteryResult lotteryResult = new LotteryResult(winningNumbers);
-        return lotteryResult.match(lotteryTickets);
+    public void createLotteryWiningTicket(String lotteryWiningNumbers, String bunusNumber) {
+        this.lotteryWinning = new LotteryWinning(lotteryWiningNumbers, bunusNumber);
+    }
+
+    public LotteryResult getLotteryResult() {
+        LotteryResult lotteryResult = this.lotteryWinning.getLotteryResult(this.lotteryTickets);
+        lotteryResult.calculateProfit(lotteryAmount);
+        return lotteryResult;
+    }
+
+    public LotteryTickets getLotteryTickets() {
+        return lotteryTickets;
     }
 
     @Override
@@ -33,12 +43,11 @@ public class LotteryGame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LotteryGame that = (LotteryGame) o;
-        return price == that.price &&
-                pickCounts == that.pickCounts;
+        return Objects.equals(lotteryAmount, that.lotteryAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, pickCounts);
+        return Objects.hash(lotteryAmount);
     }
 }

@@ -1,12 +1,8 @@
 package lottery.view;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryResult;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryValue;
+import lottery.domain.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public final class ResultViewLotteryGame {
     public static final double PROFIT_STANDARD = 1.0;
@@ -18,8 +14,8 @@ public final class ResultViewLotteryGame {
         System.out.println(stringBuilder);
     }
 
-    public static void displayPurchasedTickets(List<LotteryTicket> purchasedTickets) {
-        for (LotteryTicket lotteryTicket : purchasedTickets) {
+    public static void displayPurchasedTickets(LotteryTickets purchasedTickets) {
+        for (LotteryTicket lotteryTicket : purchasedTickets.getLotteryTickets()) {
             System.out.println("[" + displayTicket(lotteryTicket) + "]");
         }
     }
@@ -33,7 +29,7 @@ public final class ResultViewLotteryGame {
         return stringBuilder.subSequence(0, stringBuilder.length() - 2).toString();
     }
 
-    public static void displayLotteryResult(LotteryResult lotteryResult, int purchaseAmount) {
+    public static void displayLotteryResult(LotteryResult lotteryResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계");
         stringBuilder.append(System.getProperty("line.separator"));
@@ -42,7 +38,11 @@ public final class ResultViewLotteryGame {
 
         for (LotteryValue key : lotteryResult.getLotteryResultMap().keySet()) {
             stringBuilder.append(key.getPlace());
-            stringBuilder.append("개 일치 (");
+            stringBuilder.append("개 일치");
+            if (key == LotteryValue.SECOND_PLACE) {
+                stringBuilder.append(", 보너스 볼 일치");
+            }
+            stringBuilder.append("(");
             stringBuilder.append(key.getAmount());
             stringBuilder.append("원)- ");
             stringBuilder.append(lotteryResult.getLotteryResultMap().get(key));
@@ -50,7 +50,7 @@ public final class ResultViewLotteryGame {
             stringBuilder.append(System.getProperty("line.separator"));
         }
 
-        BigDecimal profit = lotteryResult.getProfit(purchaseAmount);
+        BigDecimal profit = lotteryResult.getProfit();
         stringBuilder.append("총 수익률은 ");
         stringBuilder.append(profit.toString());
         stringBuilder.append("입니다.");
