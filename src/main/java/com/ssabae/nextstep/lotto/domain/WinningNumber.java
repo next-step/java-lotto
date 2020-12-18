@@ -45,7 +45,7 @@ public class WinningNumber {
 
     private boolean isInBoundOfLottoNumbers(List<Integer> winningNumberList) {
         return winningNumberList.stream()
-                .allMatch(number -> LOTTO_MIN_VALUE < number && number < LOTTO_MAX_VALUE);
+                .allMatch(number -> LOTTO_MIN_VALUE <= number && number <= LOTTO_MAX_VALUE);
     }
 
     public List<Integer> getWinningNumberList() {

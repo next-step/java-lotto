@@ -2,6 +2,7 @@ package com.ssabae.nextstep.lotto.domain;
 
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * @author : leesangbae
@@ -41,4 +42,20 @@ public class Money {
         return new Money(this.amount.divide(BigDecimal.valueOf(percent), 2, BigDecimal.ROUND_UP));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Money money = (Money) o;
+        return Objects.equals(amount, money.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
+    }
 }
