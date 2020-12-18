@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String STATISTICS_TITLE_MESSAGE = "\n당첨 통계\n---------------------";
-    public static final String LOTTO_STATISTICS_MESSAGE = "%,d개 일치 (%,d원)- %,d개%n";
+    private static final String LOTTO_STATISTICS_MESSAGE = "%,d개 일치 (%,d원)- %,d개%n";
+    private static final String LOTTO_BONUS_STATISTICS_MESSAGE = "%,d개 일치, 보너스 볼 일치(%,d원)- %,d개%n";
     private static final String EARNINGS_RATIO_MESSAGE = "총 수익률은 %,.2f입니다.\n";
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
     private static final String LOTTO_SIZE_MESSAGE = "%d개를 구매했습니다.\n";
@@ -45,8 +46,15 @@ public class ResultView {
             int reward = lottoResultType.getReward();
             Map<LottoResultType, Integer> statistics = lottoResult.getStatistics();
             int count = statistics.get(lottoResultType);
-            System.out.printf(LOTTO_STATISTICS_MESSAGE, matchedCount, reward, count);
+            System.out.printf(convertLottoStatisticsMessage(lottoResultType.isBonus()), matchedCount, reward, count);
         }
+    }
+
+    private static String convertLottoStatisticsMessage(boolean isBonus) {
+        if (isBonus) {
+            return LOTTO_BONUS_STATISTICS_MESSAGE;
+        }
+        return LOTTO_STATISTICS_MESSAGE;
     }
 
     private static void printEarningsRatio(double earningsRatio) {
