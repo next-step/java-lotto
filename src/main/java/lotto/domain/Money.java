@@ -10,8 +10,8 @@ public class Money {
         this.value = value;
     }
 
-    public int computeLottoTickets() {
-        return (int) (value / MONEY_OF_ONE_TICKET);
+    public int getCountOfAutoLottoTickets(int countOfManualLottoTicket) {
+        return (int) (value / MONEY_OF_ONE_TICKET) - countOfManualLottoTicket;
     }
 
     public double calculateYield(final long sum) {
