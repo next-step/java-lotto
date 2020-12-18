@@ -17,11 +17,11 @@ public class LottoResultDto {
         this.countOfTicket = countOfTicket;
     }
 
-    public Map<Integer, Integer> getMatchCountMap() {
-        return matchCountMap;
-    }
-
     public int getCountOfTicket() {
         return countOfTicket;
+    }
+
+    public int getCountByMatchCount(int matchCount) {
+        return matchCountMap.getOrDefault(matchCount, 0);
     }
 }

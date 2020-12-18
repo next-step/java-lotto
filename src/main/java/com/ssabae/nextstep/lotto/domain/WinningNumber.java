@@ -1,6 +1,8 @@
 package com.ssabae.nextstep.lotto.domain;
 
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.*;
+import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MAX_VALUE;
+import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MIN_VALUE;
+import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_NUMBER_SIZE;
 
 import java.util.Arrays;
 import java.util.Collections;

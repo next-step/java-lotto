@@ -9,7 +9,6 @@ import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,14 +27,13 @@ class LottoTicketsAnalyzerTest {
         LottoResultDto lottoResultDto = analyzer.convertToDto(dummyLottoTickets, winningNumber);
 
         int countOfTicket = lottoResultDto.getCountOfTicket();
-        Map<Integer, Integer> matchCountMap = lottoResultDto.getMatchCountMap();
 
         assertThat(countOfTicket).isEqualTo(dummyLottoTickets.getLottoTickets().size());
-        assertThat(matchCountMap.get(6)).isEqualTo(1);
-        assertThat(matchCountMap.get(5)).isEqualTo(1);
-        assertThat(matchCountMap.get(4)).isEqualTo(1);
-        assertThat(matchCountMap.get(3)).isEqualTo(1);
-        assertThat(matchCountMap.get(2)).isEqualTo(1);
+        assertThat(lottoResultDto.getCountByMatchCount(6)).isEqualTo(1);
+        assertThat(lottoResultDto.getCountByMatchCount(5)).isEqualTo(1);
+        assertThat(lottoResultDto.getCountByMatchCount(4)).isEqualTo(1);
+        assertThat(lottoResultDto.getCountByMatchCount(3)).isEqualTo(1);
+        assertThat(lottoResultDto.getCountByMatchCount(2)).isEqualTo(1);
     }
 
     private LottoTickets getDummyLottoTickets() {
