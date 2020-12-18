@@ -11,9 +11,12 @@ import java.util.Arrays;
 
 public class OutputView {
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getCount() + "개를 구매했습니다.");
-        lottoTickets.getLottoTickets().forEach(OutputView::printLottoTicket);
+    public static void printLottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manualLottoTickets.getCount(), autoLottoTickets.getCount());
+
+        manualLottoTickets.getLottoTickets().forEach(OutputView::printLottoTicket);
+        autoLottoTickets.getLottoTickets().forEach(OutputView::printLottoTicket);
     }
 
     public static void printResults(LottoResult lottoResult, Money money) {
