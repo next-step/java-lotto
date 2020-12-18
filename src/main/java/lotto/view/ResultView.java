@@ -1,15 +1,18 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoResultType;
 import lotto.domain.Lottos;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String STATISTICS_TITLE_MESSAGE = "\n당첨 통계\n---------------------";
     public static final String LOTTO_STATISTICS_MESSAGE = "%,d개 일치 (%,d원)- %,d개%n";
     private static final String EARNINGS_RATIO_MESSAGE = "총 수익률은 %,.2f입니다.\n";
+    private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
     private ResultView() {
         throw new AssertionError();
@@ -17,8 +20,16 @@ public class ResultView {
 
     public static void printNumbersForLottos(Lottos lottos) {
         lottos.getLottos()
-                .forEach(lotto -> System.out.println(lotto.toString()));
+                .forEach(ResultView::printLottoNumbers);
         System.out.println();
+    }
+
+    private static void printLottoNumbers(Lotto lotto) {
+        String convertedNumbers = lotto.getLottoNumbers()
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
+        System.out.println("[" + convertedNumbers + "]");
     }
 
     public static void printStatisticsForLottos(LottoResult lottoResult) {

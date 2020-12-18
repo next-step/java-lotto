@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -20,13 +21,10 @@ public class Lotto {
         return LottoResultType.findByMatchedCount(matchedCount);
     }
 
-    @Override
-    public String toString() {
-        String convertedNumbers = lottoNumbers.getNumbers()
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        return "[" + convertedNumbers + "]";
+                .collect(Collectors.toList());
     }
 }
