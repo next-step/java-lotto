@@ -20,7 +20,7 @@ public class LottoTicket {
 		List<LottoResult> lottoResultList = this.lottoNumbers.stream()
 				.map(winningNumbers::findMatchedResult)
 				.collect(Collectors.toList());
-		return LottoStatistics.create(lottoResultList);
+		return new LottoStatistics(lottoResultList);
 	}
 
 	public int size() {

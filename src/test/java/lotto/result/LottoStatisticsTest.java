@@ -21,7 +21,7 @@ class LottoStatisticsTest {
 		List<LottoResult> lottoResultList = Collections.emptyList();
 
 		// when & then
-		assertThatThrownBy(() -> LottoStatistics.create(lottoResultList))
+		assertThatThrownBy(() -> new LottoStatistics(lottoResultList))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("empty");
 	}
@@ -38,7 +38,7 @@ class LottoStatisticsTest {
 		lottoResultList.addAll(duplicate(LottoResult.MATCHED_SIX, 5));
 
 		// when
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
 
 		// then
 		assertThat(lottoStatistics.getCount(LottoResult.NOTHING)).isEqualTo(1);
@@ -53,7 +53,7 @@ class LottoStatisticsTest {
 	void calculateIncomeRate_수익률제로() {
 		// given
 		List<LottoResult> lottoResultList = duplicate(LottoResult.NOTHING, 5);
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
 
 		// when & then
 		assertThat(lottoStatistics.calculateIncomeRate()).isEqualTo(0d);
@@ -65,7 +65,7 @@ class LottoStatisticsTest {
 		// given
 		List<LottoResult> lottoResultList = duplicate(LottoResult.NOTHING, 5);
 		lottoResultList.addAll(duplicate(LottoResult.MATCHED_FOUR, 1));
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
 
 		// when & then
 		assertThat(lottoStatistics.calculateIncomeRate()).isStrictlyBetween(8.30d, 8.39d);

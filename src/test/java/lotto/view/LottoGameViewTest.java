@@ -42,7 +42,7 @@ class LottoGameViewTest {
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_THREE,2));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_FOUR,1));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_SIX,0));
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
 
 		// when & then
 		assertDoesNotThrow(() -> lottoGameView.showStatistics(lottoStatistics));
@@ -58,7 +58,7 @@ class LottoGameViewTest {
 		if (isProfit) {
 			lottoResultList.add(LottoResult.MATCHED_FOUR);
 		}
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
 		LottoGameView lottoGameView = new LottoGameView();
 
 		// when

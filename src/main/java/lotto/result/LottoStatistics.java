@@ -8,7 +8,7 @@ public class LottoStatistics {
 
 	private final Map<LottoResult, Long> countResult;
 
-	public static LottoStatistics create(List<LottoResult> lottoResultList) {
+	public LottoStatistics(List<LottoResult> lottoResultList) {
 		if (lottoResultList.isEmpty()) {
 			throw new IllegalArgumentException("lottoResultList is empty!");
 		}
@@ -19,21 +19,13 @@ public class LottoStatistics {
 			countResult.put(key, count);
 		}
 
-		return new LottoStatistics(countResult);
+		this.countResult = Collections.unmodifiableMap(countResult);
 	}
 
 	private static <T> long countEquals(List<T> list, T equalsTarget) {
 		return list.stream()
 				.filter(element -> Objects.equals(element, equalsTarget))
 				.count();
-	}
-
-	private LottoStatistics(Map<LottoResult, Long> countResult) {
-		if (countResult.size() != LottoResult.values().length) {
-			throw new IllegalArgumentException("uncounted LottoResult is exist!");
-		}
-
-		this.countResult = Collections.unmodifiableMap(countResult);
 	}
 
 	public long getCount(LottoResult lottoResult) {
