@@ -42,8 +42,11 @@ class LottoTicketTest {
     @DisplayName("두 로또 번호를 비교해 맞은 개수 반환 테스트")
     void count_match_numbers() {
         // given
-        LottoTicket winningLotto = lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
-        LottoTicket compareLotto = lottoMachine.generateManualLottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"));
+        LottoNumbers winningNumbers = new LottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
+        LottoTicket winningLotto = lottoMachine.generateManualLottoNumbers(winningNumbers);
+
+        LottoNumbers compareNumbers = new LottoNumbers(StringSplitter.splitText("1,2,3,4,44,45"));
+        LottoTicket compareLotto = lottoMachine.generateManualLottoNumbers(compareNumbers);
 
         // when & then
         assertEquals(4, winningLotto.countMatchNumbers(compareLotto));

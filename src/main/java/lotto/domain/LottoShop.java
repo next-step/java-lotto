@@ -10,12 +10,10 @@ public class LottoShop {
     public PublishedLottoTicket buyLotto(LottoTicketCount lottoTicketCount, List<String> manualLottoNumbers) {
         validateManualLottoNumbers(lottoTicketCount, manualLottoNumbers);
 
-        PublishedLottoTicket publishedLottoTicket = new PublishedLottoTicket.Builder()
+        return new PublishedLottoTicket.Builder()
                 .autoLottoTicketCount(lottoTicketCount.getAutoLottoTicketCount())
                 .manualLottoNumbers(manualLottoNumbers)
                 .build();
-
-        return publishedLottoTicket;
     }
 
     private void validateManualLottoNumbers(LottoTicketCount lottoTicketCount, List<String> manualLottoNumbers) {

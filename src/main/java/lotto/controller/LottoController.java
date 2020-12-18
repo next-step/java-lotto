@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     private void drawLottoResult() {
-        List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
+        LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputWinningLottoNumbers());
         LottoMachine lottoMachine = LottoMachine.instance();
         WinningLotto winningLotto = new WinningLotto.Builder()
                 .winningLottoTicket(lottoMachine.generateManualLottoNumbers(winningLottoNumbers))

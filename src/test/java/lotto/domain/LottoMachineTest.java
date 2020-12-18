@@ -27,7 +27,7 @@ class LottoMachineTest {
     void generate_manual_lotto_ticket_test() {
         // given
         LottoMachine lottoMachine = LottoMachine.instance();
-        List<Integer> manualNumbers = StringSplitter.splitText("1,2,3,4,5,6");
+        LottoNumbers manualNumbers = new LottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
 
         // when
         LottoTicket lottoTicket = lottoMachine.generateManualLottoNumbers(manualNumbers);

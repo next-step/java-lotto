@@ -34,11 +34,8 @@ public class LottoMachine {
                 .collect(Collectors.toSet()));
     }
 
-    public LottoTicket generateManualLottoNumbers(List<Integer> manualLottoNumbers) {
-        Set<Integer> deduplicatedManualLottoNumbers = Optional.ofNullable(manualLottoNumbers)
-                .map(list -> list.stream().collect(Collectors.toSet()))
-                .orElseThrow(LottoNumberCountNotEnoughException::new);
-
+    public LottoTicket generateManualLottoNumbers(LottoNumbers manualLottoNumbers) {
+        Set<Integer> deduplicatedManualLottoNumbers = new HashSet<>(manualLottoNumbers.getNumbers());
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (Integer deduplicatedManualLottoNumber : deduplicatedManualLottoNumbers) {

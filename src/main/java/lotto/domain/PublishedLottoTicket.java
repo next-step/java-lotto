@@ -25,7 +25,8 @@ public class PublishedLottoTicket {
     public void publishManualLottoTicket(List<String> manualLottoNumbers) {
         LottoMachine lottoMachine = LottoMachine.instance();
         for (String lottoNumber : manualLottoNumbers) {
-            LottoTicket manualLottoTicket = lottoMachine.generateManualLottoNumbers(StringSplitter.splitText(lottoNumber));
+            LottoNumbers numbers = new LottoNumbers(StringSplitter.splitText(lottoNumber));
+            LottoTicket manualLottoTicket = lottoMachine.generateManualLottoNumbers(numbers);
             this.publishedLottoTicket.add(manualLottoTicket);
         }
     }
