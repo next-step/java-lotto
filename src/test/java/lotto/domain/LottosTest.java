@@ -9,15 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("구입한 모든 `Lotto`를 가진 `Lottos`에 대한 테스트")
 class LottosTest {
-    private static final int MIN_LOTTO_SIZE = Lottos.MIN_LOTTO_SIZE;
-    private static final int INVALID_LOTTO_SIZE = Lottos.MIN_LOTTO_SIZE - 1;
-    private static final int TEST_LOTTO_SIZE = 10;
 
     @DisplayName("`Lottos` 생성")
     @Test
     void createLottoGroupTest() {
         // When
-        Lottos lottos = new Lottos(MIN_LOTTO_SIZE);
+        Lottos lottos = new Lottos(Lottos.MIN_LOTTO_SIZE);
         // Then
         assertThat(lottos).isNotNull();
     }
@@ -25,9 +22,11 @@ class LottosTest {
     @DisplayName("잘못된 사이즈로 생성되는 `Lottos`의 예외 확인")
     @Test
     void checkExceptionWithInvalidLottoSizeTest() {
+        // Given
+        int invalidSize = Lottos.MIN_LOTTO_SIZE - 1;
         // When & Then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Lottos(INVALID_LOTTO_SIZE)
+                () -> new Lottos(invalidSize)
         );
     }
 
@@ -36,7 +35,8 @@ class LottosTest {
     void retrieveStatisticsTest() {
         // Given
         Lotto winningLottoNumbers = new Lotto();
-        Lottos lottos = new Lottos(TEST_LOTTO_SIZE);
+        int testLottoSize = 10;
+        Lottos lottos = new Lottos(testLottoSize);
         // When
         LottoResult lottoResult = lottos.retrieveStatistics(winningLottoNumbers);
         // Then
