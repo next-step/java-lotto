@@ -57,7 +57,7 @@ public class InputView {
 
     private static List<LottoNumber> makeLottoNumbers(String numbers) {
         return Arrays.stream(numbers.split(SPLIT_TEXT))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
+                .map(number -> LottoNumber.of(Integer.parseInt(number)))
                 .collect(Collectors.toList());
     }
 }

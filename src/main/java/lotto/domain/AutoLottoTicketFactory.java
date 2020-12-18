@@ -7,20 +7,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoTicketFactory {
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
+public class AutoLottoTicketFactory {
     private static final int SPLIT_START_INDEX = 0;
     private static final int SPLIT_END_INDEX = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicketFactory() {
-        this.lottoNumbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+    public AutoLottoTicketFactory() {
+        this.lottoNumbers = LottoNumberCache.getLottoNumbers();
     }
 
     public LottoTicket makeAutoLottoTicket() {
