@@ -29,13 +29,17 @@ public class LastWinningNumbers {
         }
 
         for (Integer integer : winningNumbers) {
-            if (integer > LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM) {
-                throw new IllegalArgumentException("지난 주 번호는 45보다 클 수 없습니다.");
-            }
+            validateMinAndMax(integer);
+        }
+    }
 
-            if (integer < LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM) {
-                throw new IllegalArgumentException("지난 주 번호는 1보다 작을 수 없습니다.");
-            }
+    private static void validateMinAndMax(Integer integer) {
+        if (integer > LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM) {
+            throw new IllegalArgumentException("지난 주 번호는 45보다 클 수 없습니다.");
+        }
+
+        if (integer < LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM) {
+            throw new IllegalArgumentException("지난 주 번호는 1보다 작을 수 없습니다.");
         }
     }
 
