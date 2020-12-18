@@ -41,15 +41,15 @@
 * 로또 추첨에 필요한 단위 `Lotto`
     * [ ] `Lotto`의 6자리 번호 `LottoNumbers`를 갖는다.
     * [ ] `Lotto`는 장당 1000원이다.
-    * [ ] `Lotto`의 결과인 `LottoResultType`을 반환한다.
+    * [ ] `Lotto`의 결과인 `LottoRank`을 반환한다.
 * 구입한 모든 `Lotto`를 가진 `Lottos`
     * [ ] 1개 또는 n개의 `Lotto`을 갖는다.
     * [ ] 구입한 `Lottos`의 `LottoResult`(결과)를 제공한다.
-* 로또의 매칭된 결과에 대한 타입 `LottoResultType`
+* 로또의 매칭된 결과에 대한 타입 `LottoRank`
     * [ ] 로또 1등(6개), 2등(5개+보너스), 3등(5개), 4등(4개), 5등(3개) 그리고 낙첨(매칭된 숫자: 2~0개)을 정의한다.
     * [ ] 매칭된 로또 번호에 따른 타입을 반환한다.
 * 모든 로또의 결과 `LottoResult`
-    * [ ] 모든 로또의 `LottoResultType`에 따른 당첨 통계를 반환한다.
+    * [ ] 모든 로또의 `LottoRank`에 따른 당첨 통계를 반환한다.
     * [ ] 모든 로또의 수익률을 반환한다.
 * 로또 게임을 구성할 게임 `LottoGame`
     * [ ] 로또 게임을 시작한다.
