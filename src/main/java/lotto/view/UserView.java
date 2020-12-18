@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import lotto.modal.Lotto;
-import lotto.modal.LottoRankCounter;
 import lotto.modal.Money;
 
 public class UserView {
@@ -36,8 +35,8 @@ public class UserView {
 		return UserInput.userInputString();
 	}
 
-	public static void printLottoResultRank(List<LottoRankCounter> lottoRankCounters) {
-		UserOutput.printLottoRankResult(lottoRankCounters);
+	public static void printLottoResultRank(List<String> lottoRanks) {
+		UserOutput.printLottoRankResult(lottoRanks);
 	}
 
 	public static void printLottoResultYield(BigDecimal yield) {

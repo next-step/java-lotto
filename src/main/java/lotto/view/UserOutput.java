@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import lotto.modal.Lotto;
-import lotto.modal.LottoRank;
-import lotto.modal.LottoRankCounter;
 
 public class UserOutput {
 
@@ -45,13 +43,10 @@ public class UserOutput {
 		messagePrint(PRINT_LOTTO_WINNER_NUMBER + NEXT_LINE_FLAG);
 	}
 
-	public static void printLottoRankResult(List<LottoRankCounter> lottoRankCounters) {
+	public static void printLottoRankResult(List<String> lottoRanks) {
 		messagePrint(PRINT_LOTTO_RANK_RESULT_MSG + NEXT_LINE_FLAG);
 
-		lottoRankCounters.remove(LottoRank.NOTHING_RANK.ordinal());
-		for (LottoRankCounter rank : lottoRankCounters) {
-			messagePrint(rank.getRankMessage() + rank.getCount() + PRINT_LOTTO_RANK_COUNT_MSG);
-		}
+		lottoRanks.forEach(UserOutput::messagePrint);
 	}
 
 	public static void printLottoYield(BigDecimal yield) {
