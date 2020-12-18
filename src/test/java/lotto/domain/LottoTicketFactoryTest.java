@@ -32,7 +32,7 @@ class LottoTicketFactoryTest {
     @DisplayName("랜덤으로 돌려 6개 숫자를 뽑아 크기 순으로 정렬한다.")
     @Test
     void make_LottoTicket() {
-        List<LottoNumber> lottoNumbers = lottoTicketFactory.makeLottoTicket().getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicketFactory.makeAutoLottoTicket().getLottoNumbers();
 
         assertThat(lottoNumbers).hasSize(6);
 

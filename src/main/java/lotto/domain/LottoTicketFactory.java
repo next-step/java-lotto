@@ -23,7 +23,7 @@ public class LottoTicketFactory {
                 .collect(Collectors.toList());
     }
 
-    public LottoTicket makeLottoTicket() {
+    public LottoTicket makeAutoLottoTicket() {
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(splitAndSortNumbers());
     }
