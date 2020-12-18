@@ -89,7 +89,7 @@ class LotteryGameTest {
     @DisplayName("주어진 게임 번호와 현재 번호를 비교하는 테스트")
     void matchWinningNumber(final List<Integer> givenNumbers) {
         final LotteryGame game = LotteryGame.ofManual(givenNumbers);
-        final LotteryGame winningGame = LotteryGame.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LotteryNumbers winningGame = LotteryNumbers.ofManual(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         final int missMatch = 0;
         final int allRight = 6;

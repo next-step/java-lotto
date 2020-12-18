@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.jaenyeong.mission02.lotto.domain.LotteryShop.buyAutomatically;
+import static com.jaenyeong.mission02.lotto.domain.LotteryShop.buyManually;
 import static com.jaenyeong.mission02.lotto.domain.lottery.LotteryGame.howManyBuyGame;
 import static com.jaenyeong.mission02.lotto.view.UI.*;
 
@@ -19,7 +20,6 @@ public class LotteryRunner {
         final int buyPrice = scanBuyPrice();
 
         final int numberOfBuyGame = inputNumberOfBuyGame(buyPrice);
-
         if (numberOfBuyGame == BUY_NOTHING) {
             return;
         }
@@ -32,14 +32,15 @@ public class LotteryRunner {
     }
 
     private int inputNumberOfBuyGame(final int buyPrice) {
-        final int numberOfBuyGame = howManyBuyGame(buyPrice);
-        printNumberOfBuyGame(numberOfBuyGame);
-
-        return numberOfBuyGame;
+        return howManyBuyGame(buyPrice);
     }
 
     private List<LotteryGame> ticketing(final int numberOfBuyGame) {
-        final List<LotteryGame> games = buyAutomatically(numberOfBuyGame);
+        final int numberOfManual = getInputNumberOfManual();
+        final List<LotteryGame> games = buyManually(scanManualNumbers(numberOfManual));
+
+        final int howManyToBuy = numberOfBuyGame - numberOfManual;
+        games.addAll(buyAutomatically(howManyToBuy));
         printLotteryNumbers(games);
 
         return games;

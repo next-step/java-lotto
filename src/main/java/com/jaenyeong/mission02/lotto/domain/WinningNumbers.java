@@ -1,20 +1,21 @@
 package com.jaenyeong.mission02.lotto.domain;
 
 import com.jaenyeong.mission02.lotto.domain.lottery.LotteryGame;
+import com.jaenyeong.mission02.lotto.domain.lottery.LotteryNumbers;
 
 import java.util.List;
 
 public class WinningNumbers {
-    private final LotteryGame winningNumbers;
+    private final LotteryNumbers winningNumbers;
     private final int bonusNumber;
 
-    private WinningNumbers(final LotteryGame winningNumbers, final int bonusNumber) {
+    private WinningNumbers(final LotteryNumbers winningNumbers, final int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public static WinningNumbers of(final List<Integer> winningNumbers, final int bonusNumber) {
-        return new WinningNumbers(LotteryGame.ofManual(winningNumbers), bonusNumber);
+        return new WinningNumbers(LotteryNumbers.ofManual(winningNumbers), bonusNumber);
     }
 
     public Rank matchWinningNumbers(final LotteryGame otherLotteryGame) {
