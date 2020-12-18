@@ -1,11 +1,14 @@
 package lotto.view;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.WinningLottoTicket;
 import lotto.domain.WinningStatistics;
 
 /**
@@ -16,12 +19,12 @@ import lotto.domain.WinningStatistics;
 public class ResultView {
 	private static final BigDecimal ONE = new BigDecimal(1);
 
-	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoNumbers winningLottoNumbers) {
+	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoNumbers.getLottoTicket());
-		winningStatistics.getPrizeResult().entrySet().stream().forEach(prize -> printWinningOne(prize));
+		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
 
@@ -33,11 +36,26 @@ public class ResultView {
 		System.out.println(sb);
 	}
 
-	private static void printWinningOne(Map.Entry<Prize, Integer> prize) {
-		if (prize.getKey() == Prize.NONE)
-			return;
-		Prize prizeKey = prize.getKey();
-		System.out.println(
-			prizeKey.getMatchCount() + "개 일치 (" + prizeKey.getReward() + "원)- " + prize.getValue() + "개");
+	private static void printWinningStatus(List<Prize> prizeResult) {
+		List<Prize> sortedPrize = Arrays.stream(Prize.values())
+			.sorted(Comparator.comparing(Prize::getReward))
+			.collect(Collectors.toList());
+
+		for (Prize prize : sortedPrize) {
+			if (prize == Prize.NONE)
+				continue;
+			System.out.println(
+				prize.getMatchCount() + "개 일치" + matchBonusComment(prize) + "(" + prize.getReward() + ") - "
+					+ prizeResult.stream()
+					.filter(result -> result.equals(prize)).count() + "개");
+		}
 	}
+
+	private static String matchBonusComment(Prize prize) {
+		if (prize == Prize.SECOND) {
+			return ",보너스 볼 일치";
+		}
+		return "";
+	}
+
 }

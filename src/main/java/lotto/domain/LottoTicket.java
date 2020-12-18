@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -53,8 +52,8 @@ public class LottoTicket {
 			.count();
 	}
 
-	public static LottoTicket getRandomTicket() {
-
-		return new LottoTicket(Arrays.asList(new LottoNumber[1]));
+	public boolean isMatchBonus(LottoNumber lottoNumber) {
+		return lottoTicketNumbers.contains(lottoNumber);
 	}
+
 }
