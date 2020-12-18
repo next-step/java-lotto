@@ -2,8 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.model.LOTTO_PRIZE_POLICY;
-import lotto.view.InputView;
+import lotto.model.LottoPrizePolicy;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
 
@@ -58,7 +56,7 @@ public class LottoTest {
 		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 1, 1, 1, 2, 2, 0, 0, 0, 0));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(0.5);
-		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(LOTTO_PRIZE_POLICY.THREE_MATCH_PRIZE.getPrizeMoney());
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(5_000);
 	}
 
 	@Test
@@ -67,7 +65,7 @@ public class LottoTest {
 		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 2, 2, 0, 0, 0, 6));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(200000);
-		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(LOTTO_PRIZE_POLICY.SIX_MATCH_PRIZE.getPrizeMoney());
+		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(2_000_000_000);
 	}
 
 
