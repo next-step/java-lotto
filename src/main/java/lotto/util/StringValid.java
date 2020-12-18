@@ -1,4 +1,4 @@
-package calculator.util;
+package lotto.util;
 
 public class StringValid {
 

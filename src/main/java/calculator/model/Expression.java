@@ -15,13 +15,13 @@ public class Expression {
 
 	public static final String CALCULATE_SEPARATOR_COMMA = ",";
 	public static final String CALCULATE_SEPARATOR_COLON = ":";
+	public static final Pattern USER_ADD_SEPARATOR_FINDER = Pattern.compile("//(.)\n(.*)");
 
 	private final List<Positive> numbers;
 
 	public Expression(String userInputVal) throws IllegalArgumentException {
 
 		validationExpression(userInputVal);
-
 		this.numbers = getPositiveNumbers(userInputVal);
 	}
 
@@ -53,7 +53,7 @@ public class Expression {
 
 	public List<String> splitUserSeparator(String expression) {
 
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+		Matcher m = USER_ADD_SEPARATOR_FINDER.matcher(expression);
 		if (m.find()) {
 
 			String customDelimiter = m.group(1);

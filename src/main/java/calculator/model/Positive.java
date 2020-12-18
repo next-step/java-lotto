@@ -6,13 +6,13 @@ import calculator.util.StringValid;
 
 public class Positive {
 
+	public static final int POSITIVE_CHECK_SUM_ZERO = 0;
 	private final int positiveNumber;
 
 	public Positive(String inputUserVal) throws RuntimeException {
 
 		validationPositive(inputUserVal);
-
-		this.positiveNumber = getNumber(inputUserVal);
+		this.positiveNumber = getStringToNumber(inputUserVal);
 	}
 
 	public int getPositiveNumber() {
@@ -20,7 +20,7 @@ public class Positive {
 		return this.positiveNumber;
 	}
 
-	private int getNumber(String inputUserVal) {
+	private int getStringToNumber(String inputUserVal) {
 
 		return Integer.parseInt(inputUserVal);
 	}
@@ -38,7 +38,7 @@ public class Positive {
 
 	private boolean isNegativeNumber(String inputUserVal) {
 
-		return Integer.parseInt(inputUserVal) < 0;
+		return Integer.parseInt(inputUserVal) < POSITIVE_CHECK_SUM_ZERO;
 	}
 
 	@Override
