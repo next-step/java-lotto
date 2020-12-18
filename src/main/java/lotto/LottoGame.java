@@ -32,7 +32,7 @@ public class LottoGame {
             countOfMatch = sumCountOfMatch(countOfMatch, ticketNumbers, lastWeeksWinningNumber);
         }
 
-        lottoResult.saveLottoResult(countOfMatch, isMatchBonus(countOfMatch, ticketNumbers));
+        lottoResult.saveLottoResult(countOfMatch, bonusNumber.isMatchBonus(countOfMatch, ticketNumbers));
     }
 
     private int sumCountOfMatch(int countOfMatch, List<Integer> ticketNumbers, Integer lastWeeksWinningNumber) {
@@ -41,14 +41,6 @@ public class LottoGame {
         }
 
         return countOfMatch;
-    }
-
-    private boolean isMatchBonus(int countOfMatch, List<Integer> ticketNumbers) {
-        if (countOfMatch == 5) {
-            return ticketNumbers.contains(bonusNumber.getNumber());
-        }
-
-        return false;
     }
 
     @Override

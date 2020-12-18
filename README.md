@@ -25,7 +25,7 @@
 * LottoResult
   - [ ] LinkedHashMap<>(); => Enum<>(Rank.class)로 변경해라.
 * Rank
-  - [ ] indent는 1단계만 허용
+  - [x] indent는 1단계만 허용
   - [x] LinkedHashMap<>(); => EnumMap<>()로 변경해라.
 * Rank
   - [x] indent는 1단계만 허용

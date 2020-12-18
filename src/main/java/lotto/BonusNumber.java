@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class BonusNumber {
 
     private final int number;
@@ -18,6 +20,14 @@ public class BonusNumber {
         }
 
         return new BonusNumber(bonusNumber);
+    }
+
+    public boolean isMatchBonus(int countOfMatch, List<Integer> ticketNumbers) {
+        if (countOfMatch == Rank.SECOND.getCountOfMatch()) {
+            return ticketNumbers.contains(number);
+        }
+
+        return false;
     }
 
     public int getNumber() {
