@@ -1,40 +1,42 @@
 package com.jaenyeong.mission02.lotto.domain.lottery;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class LotteryNumber {
-    private static final Map<Integer, LotteryNumber> LOTTERY_NUMBER_POOL = new HashMap<>();
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
-    private static final List<LotteryNumber> LOTTERY_NUMBER_LIST = generateLotteryNumbers();
+    private static final Map<Integer, LotteryNumber> LOTTERY_NUMBER_POOL;
+    private static final List<LotteryNumber> LOTTERY_NUMBER_LIST;
     private static final int START_OF_RANGE = 0;
     private static final String ERR_TEXT_INVALID_NUMBER = "[error] This number is not valid.";
 
     private final int lotteryNumber;
 
+    static {
+        LOTTERY_NUMBER_POOL = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+            .boxed()
+            .collect(toMap(Function.identity(), LotteryNumber::new));
+
+        LOTTERY_NUMBER_LIST = new ArrayList<>(LOTTERY_NUMBER_POOL.values());
+    }
+
     private LotteryNumber(final int lotteryNumber) {
         this.lotteryNumber = lotteryNumber;
     }
 
-    private static List<LotteryNumber> generateLotteryNumbers() {
-        return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-            .mapToObj(LotteryNumber::getFlyweightLotteryNumber)
-            .collect(toList());
+    private static LotteryNumber getFlyweightLotteryNumber(final int key) {
+        return Optional.ofNullable(LOTTERY_NUMBER_POOL.get(key))
+            .orElseThrow(() -> new IllegalArgumentException(ERR_TEXT_INVALID_NUMBER));
     }
 
-    private static LotteryNumber getFlyweightLotteryNumber(final int givenNumber) {
-        final LotteryNumber lotteryNumber = LOTTERY_NUMBER_POOL.get(givenNumber);
-        if (lotteryNumber != null) {
-            return lotteryNumber;
-        }
-
-        final LotteryNumber newLotteryNumber = new LotteryNumber(givenNumber);
-        LOTTERY_NUMBER_POOL.put(givenNumber, newLotteryNumber);
-        return newLotteryNumber;
-    }
+    // lazy initialize
+//    private static LotteryNumber getFlyweightLotteryNumber(final int key) {
+//        return LOTTERY_NUMBER_POOL.computeIfAbsent(key, LotteryNumber::new);
+//    }
 
     public static Set<LotteryNumber> ofAutoNumbers(final int endOfRange) {
         Collections.shuffle(LOTTERY_NUMBER_LIST);
