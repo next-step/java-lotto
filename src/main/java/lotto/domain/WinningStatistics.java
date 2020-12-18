@@ -22,14 +22,8 @@ public class WinningStatistics {
 
 	private List<Prize> awards(LottoTickets userLottoTickets, WinningLottoTicket winnerLottoTicket) {
 		return userLottoTickets.getLottoTickets().stream()
-			.map(lottoTicket -> matchTicketToPrize(lottoTicket, winnerLottoTicket))
+			.map(userLottoTicket -> winnerLottoTicket.matchPrize(userLottoTicket))
 			.collect(Collectors.toList());
-	}
-
-	private Prize matchTicketToPrize(LottoTicket lottoTicket, WinningLottoTicket winnerLottoTicket) {
-		return Prize.of(lottoTicket.getMatchCount(winnerLottoTicket.getLottoTicket()),
-			lottoTicket.isMatchBonus(
-				winnerLottoTicket.getBonusNumber()));
 	}
 
 	public List<Prize> getPrizeResult() {

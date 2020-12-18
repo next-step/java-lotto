@@ -52,4 +52,9 @@ public class WinningLottoTicket {
 	public LottoNumber getBonusNumber() {
 		return bonusNumber;
 	}
+
+	public Prize matchPrize(LottoTicket userLottoTicket) {
+		return Prize.of(userLottoTicket.getMatchCount(lottoTicket), userLottoTicket.isMatchBonus(bonusNumber));
+
+	}
 }
