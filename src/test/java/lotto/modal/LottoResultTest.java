@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class LottoResultTest {
 
 	private List<Lotto> lottoPackage;
-	private Lotto winnerLotto;
+	private WinnerLotto winnerLotto;
 
 	@BeforeEach
 	void init() {
@@ -22,7 +22,8 @@ class LottoResultTest {
 		lottoPackage = new ArrayList<>();
 		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "10", "20", "30", "40", "45"))));
 
-		winnerLotto = new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+		winnerLotto = new WinnerLotto(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))),
+			new LottoNumber("7"));
 	}
 
 	@Test

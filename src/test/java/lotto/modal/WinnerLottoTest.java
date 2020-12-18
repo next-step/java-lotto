@@ -5,22 +5,12 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinnerLottoTest {
 
 	WinnerLotto winnerLotto;
-
-	@BeforeEach
-	void init() {
-		List<String> inputStr = Arrays.asList("1", "2", "3", "4", "5", "6");
-
-		List<LottoNumber> lottoList = Lotto.generateManualLotto(inputStr);
-
-		winnerLotto = new WinnerLotto(new Lotto(lottoList), new LottoNumber(7));
-	}
 
 	@Test
 	@DisplayName("당첨 로또 객체: 당첨번호 6개 일치 테스트")
