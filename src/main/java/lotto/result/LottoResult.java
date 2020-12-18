@@ -2,7 +2,7 @@ package lotto.result;
 
 import lotto.number.LottoNumbers;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 public enum LottoResult {
 
@@ -24,7 +24,7 @@ public enum LottoResult {
 
 	public static LottoResult findMatchedResult(LottoNumbers tryLottoNumbers, LottoNumbers winningNumbers) {
 		int numberMatchedCount = tryLottoNumbers.getMatchedLottoNumbers(winningNumbers).size();
-		return Stream.of(LottoResult.values())
+		return Arrays.stream(LottoResult.values())
 				.filter(lotto_result -> lotto_result.lottoResultMatcher.isMatched(numberMatchedCount))
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("cannot find matched LottoResult!"));

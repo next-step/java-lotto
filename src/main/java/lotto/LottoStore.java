@@ -31,7 +31,7 @@ public class LottoStore {
 		}
 	}
 
-	static LottoNumbers generateRandomLottoNumbers() {
+	private static LottoNumbers generateRandomLottoNumbers() {
 		List<Integer> uniqueNumbers = createUniqueNumbers();
 		uniqueNumbers = shuffle(uniqueNumbers);
 		List<LottoNumber> lottoNumberList = pickNumbersUntilLottoSize(uniqueNumbers).stream()
@@ -42,7 +42,7 @@ public class LottoStore {
 
 	private static List<Integer> createUniqueNumbers() {
 		return IntStream
-				.range(LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MIN, LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MAX + 1)
+				.rangeClosed(LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MIN, LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MAX)
 				.boxed()
 				.collect(Collectors.toList());
 	}

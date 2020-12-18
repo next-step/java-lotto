@@ -9,7 +9,7 @@ public class LottoStatistics {
 	private final Map<LottoResult, Long> countResult;
 
 	public static LottoStatistics create(List<LottoResult> lottoResultList) {
-		if (lottoResultList.size() == 0) {
+		if (lottoResultList.isEmpty()) {
 			throw new IllegalArgumentException("lottoResultList is empty!");
 		}
 
