@@ -25,10 +25,10 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public WinResults getWinResults(LottoNumbers answer) {
+    public WinResults getWinResults(LottoNumbers answer, LottoNumber bonusNumber) {
         return new WinResults(
                 this.lottos.stream()
-                        .map(item -> item.getWinResult(answer))
+                        .map(item -> item.getWinResult(answer, bonusNumber))
                         .collect(Collectors.toList()));
     }
 

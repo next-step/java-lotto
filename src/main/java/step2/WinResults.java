@@ -27,6 +27,7 @@ public class WinResults {
 
     public Money getWinningMoneySum() {
         return Money.of(this.winResults.stream()
+                .filter(Objects::nonNull)
                 .map(WinResult::getWinningMoney)
                 .reduce(0, Integer::sum));
     }
@@ -49,6 +50,9 @@ public class WinResults {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(winResult.getCountOfMatch());
         stringBuilder.append("개 일치");
+        if (winResult.isBonusMatch()) {
+            stringBuilder.append(", 보너스볼 일치");
+        }
         stringBuilder.append(" ( " + winResult.getWinningMoney() + "원) ");
         stringBuilder.append(" - " + count + "개");
         return stringBuilder.toString();

@@ -8,8 +8,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public WinResult getWinResult(LottoNumbers lottoNumbers) {
-        return WinResult.valueOf(this.lottoNumbers.getMatchCount(lottoNumbers));
+    public WinResult getWinResult(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        return WinResult.valueOf(this.lottoNumbers.getMatchCount(lottoNumbers, bonusNumber));
     }
 
     @Override
