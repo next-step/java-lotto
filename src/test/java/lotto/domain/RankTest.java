@@ -1,30 +1,57 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    @DisplayName("맞춘 갯수에 따라 Rank를 리턴한다. 만약 5개일 경우, 보너스볼 맞춤 여부에 따라 갈린다.")
-    @ParameterizedTest
-    @MethodSource("ProvideMatchCounts")
-    void confirmRank(int countOfMatch, boolean matchBonus, Rank expectedRank) {
-        Rank result = Rank.valueOf(countOfMatch, matchBonus);
-        assertThat(result).isEqualTo(expectedRank);
+    @Test
+    void rank_1등() {
+        Rank result = Rank.valueOf(6, false);
+        assertThat(result).isEqualTo(Rank.FIRST);
     }
 
-    private static Stream<Arguments> ProvideMatchCounts() {
-        return Stream.of(
-                Arguments.of(6, true, Rank.FIRST),
-                Arguments.of(5, true, Rank.SECOND),
-                Arguments.of(5, false, Rank.THIRD),
-                Arguments.of(4, false, Rank.FOURTH)
-        );
+    @Test
+    void rank_2등() {
+        Rank result = Rank.valueOf(5, true);
+        assertThat(result).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    void rank_3등() {
+        Rank result = Rank.valueOf(5, false);
+        assertThat(result).isEqualTo(Rank.THIRD);
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void rank_4등(boolean matchBonus) {
+        Rank result = Rank.valueOf(4, matchBonus);
+        assertThat(result).isEqualTo(Rank.FOURTH);
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void rank_5등(boolean matchBonus) {
+        Rank result = Rank.valueOf(3, matchBonus);
+        assertThat(result).isEqualTo(Rank.FIFTH);
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    void rank_꼴찌(boolean matchBonus) {
+        Rank result = Rank.valueOf(0, matchBonus);
+        assertThat(result).isEqualTo(Rank.MISS);
+    }
+
+    @DisplayName("입력받은 수만큼 해당 당첨금액을 곱한다.")
+    @Test
+    void multiplyMoney() {
+        long result = Rank.FIFTH.multiplyMoney(3);
+        assertThat(result).isEqualTo(15000);
     }
 }
