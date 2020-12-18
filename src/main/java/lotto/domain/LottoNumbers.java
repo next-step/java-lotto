@@ -41,6 +41,11 @@ public class LottoNumbers {
                 .count();
     }
 
+    boolean isBonusMatched(LottoNumber bonusLottoNumber) {
+        return this.numbers.stream()
+                .anyMatch(number -> number.equals(bonusLottoNumber));
+    }
+
     List<LottoNumber> getNumbers() {
         return numbers;
     }

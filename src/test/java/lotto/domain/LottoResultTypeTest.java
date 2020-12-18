@@ -10,12 +10,23 @@ class LottoResultTypeTest {
 
     @DisplayName("로또와 숫자를 매칭한 결과 타입 찾기")
     @Test
-    void findLottoResultTypeTest() {
+    void findLottoResultTypeWithoutBonusTest() {
         // Given
         int matchedCount = LottoResultType.SIX_MATCHED.getMatchedCount();
         // When
-        LottoResultType lottoResultType = LottoResultType.findByMatchedCount(matchedCount);
+        LottoResultType lottoResultType = LottoResultType.findByMatchedCountAndBonus(matchedCount, false);
         // Then
         assertThat(lottoResultType).isEqualTo(LottoResultType.SIX_MATCHED);
+    }
+
+    @DisplayName("로또와 숫자와 보너스를 매칭한 결과 타입 찾기")
+    @Test
+    void findLottoResultTypeWithBonusTest() {
+        // Given
+        int matchedCount = LottoResultType.FIVE_MATCHED.getMatchedCount();
+        // When
+        LottoResultType lottoResultType = LottoResultType.findByMatchedCountAndBonus(matchedCount, true);
+        // Then
+        assertThat(lottoResultType).isEqualTo(LottoResultType.FIVE_AND_BONUS_MATCHED);
     }
 }

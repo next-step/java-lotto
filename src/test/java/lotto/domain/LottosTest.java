@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,16 +36,24 @@ class LottosTest {
     @Test
     void retrieveStatisticsTest() {
         // Given
-        Lotto winningLottoNumbers = new Lotto();
+        Lotto winningLotto = new Lotto();
         int testLottoSize = 10;
         Lottos lottos = new Lottos(testLottoSize);
+        LottoNumber bonusNumber = new LottoNumber(provideBonusNumber(winningLotto));
         // When
-        LottoResult lottoResult = lottos.retrieveStatistics(winningLottoNumbers);
+        LottoResult lottoResult = lottos.retrieveStatistics(winningLotto, bonusNumber);
         // Then
         assertAll(
                 () -> assertThat(lottoResult).isNotNull(),
                 () -> assertThat(lottoResult.getEarningsRatio()).isNotNegative(),
                 () -> assertThat(lottoResult.getStatistics()).isNotNull()
         );
+    }
+
+    private int provideBonusNumber(Lotto winningLotto) {
+        return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                .filter(number -> !winningLotto.getLottoNumbers().contains(number))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 갯수의 숫자로 구성된 당첨 로또입니다."));
     }
 }

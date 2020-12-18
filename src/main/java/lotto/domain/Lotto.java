@@ -16,9 +16,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    LottoResultType findLottoResultType(Lotto winningLotto) {
+    LottoResultType findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         int matchedCount = lottoNumbers.countMatchedNumbers(winningLotto.lottoNumbers);
-        return LottoResultType.findByMatchedCount(matchedCount);
+        boolean isBonus = lottoNumbers.isBonusMatched(bonusLottoNumber);
+        return LottoResultType.findByMatchedCountAndBonus(matchedCount, isBonus);
     }
 
     public List<Integer> getLottoNumbers() {
