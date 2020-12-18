@@ -51,7 +51,7 @@ public class LottoResult {
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {
-        return Math.floorDiv(totalEarningsAmount, getTotalPurchasedPrice());
+        return (double) totalEarningsAmount / getTotalPurchasedPrice();
     }
 
     private int getTotalPurchasedSize() {
