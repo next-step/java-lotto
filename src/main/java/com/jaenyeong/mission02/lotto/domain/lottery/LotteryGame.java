@@ -25,7 +25,7 @@ public class LotteryGame {
         return money / PRICE;
     }
 
-    public boolean containBonusNumber(final int bonusNumber) {
+    public boolean containBonusNumber(final LotteryNumber bonusNumber) {
         return this.lotteryNumbers.containsBonusNumber(bonusNumber);
     }
 
