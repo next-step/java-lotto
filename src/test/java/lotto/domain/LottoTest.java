@@ -23,9 +23,9 @@ class LottoTest {
     @Test
     void createCustomLottoTest() {
         // Given
-        Numbers numbers = new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         // When
-        Lotto customLotto = new Lotto(numbers);
+        Lotto customLotto = new Lotto(lottoNumbers);
         // Then
         assertThat(customLotto).isNotNull();
     }

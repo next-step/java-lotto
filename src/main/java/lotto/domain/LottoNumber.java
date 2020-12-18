@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public class Number {
+public class LottoNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    Number(int number) {
+    LottoNumber(int number) {
         validate(number);
         this.number = number;
     }

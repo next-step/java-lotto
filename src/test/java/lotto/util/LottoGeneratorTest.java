@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.Numbers;
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +17,6 @@ class LottoGeneratorTest {
         // When
         List<Integer> randomNumbers = LottoGenerator.generateRandomNumbers();
         // Then
-        assertThat(randomNumbers.size()).isEqualTo(Numbers.TOTAL_NUMBER_SIZE);
+        assertThat(randomNumbers.size()).isEqualTo(LottoNumbers.TOTAL_NUMBER_SIZE);
     }
 }

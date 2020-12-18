@@ -34,12 +34,12 @@
 
 * 로또를 생성하기 위한 유틸 `LottoGenerator`
     * [ ] `Lotto` 생성을 위한 무작위 번호 6자리 생성한다.
-* 로또를 구성하는 각 번호 `Number`
+* 로또를 구성하는 각 번호 `LottoNumber`
     * [ ] 양의 정수 1부터 45까지 범위의 숫자를 갖는다.
-* 다수의 `Number`를 구성하는 로또 번호 `Numbers`
-    * [ ] 6개의 `Number`를 갖는다.
+* 다수의 `LottoNumber`를 구성하는 로또 번호 `LottoNumbers`
+    * [ ] 6개의 `LottoNumber`를 갖는다.
 * 로또 추첨에 필요한 단위 `Lotto`
-    * [ ] `Lotto`의 6자리 번호 `Numbers`를 갖는다.
+    * [ ] `Lotto`의 6자리 번호 `LottoNumbers`를 갖는다.
     * [ ] `Lotto`는 장당 1000원이다.
     * [ ] `Lotto`의 결과인 `LottoResultType`을 반환한다.
 * 구입한 모든 `Lotto`를 가진 `Lottos`
