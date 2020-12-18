@@ -1,8 +1,10 @@
-package com.ssabae.nextstep.lotto.domain;
+package com.ssabae.nextstep.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ssabae.nextstep.lotto.application.LottoResultDto;
+import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
+import com.ssabae.nextstep.lotto.domain.WinningNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;

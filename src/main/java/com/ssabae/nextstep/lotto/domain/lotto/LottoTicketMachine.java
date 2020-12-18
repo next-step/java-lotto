@@ -1,8 +1,9 @@
 package com.ssabae.nextstep.lotto.domain.lotto;
 
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_TICKET_PRICE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
 import com.ssabae.nextstep.lotto.domain.Money;
+import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,6 @@
-package com.ssabae.nextstep.lotto.domain.lotto;
+package com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator;
+
+import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 
 /**
  * @author : leesangbae

@@ -1,8 +1,8 @@
 package com.ssabae.nextstep.lotto.domain;
 
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MAX_VALUE;
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MIN_VALUE;
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_NUMBER_SIZE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MAX_VALUE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MIN_VALUE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_NUMBER_SIZE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,6 +34,10 @@ public class WinningNumber {
         validate(winningNumberList);
     }
 
+    public List<Integer> getWinningNumberList() {
+        return winningNumberList;
+    }
+
     private void validate(List<Integer> winningNumberList) {
         if (winningNumberList.size() != LOTTO_NUMBER_SIZE) {
             String message = String.format(LOTTO_NUMBER_SIZE_NOT_EQUALS_MESSAGE, LOTTO_NUMBER_SIZE);
@@ -48,9 +52,5 @@ public class WinningNumber {
     private boolean isInBoundOfLottoNumbers(List<Integer> winningNumberList) {
         return winningNumberList.stream()
                 .allMatch(number -> LOTTO_MIN_VALUE <= number && number <= LOTTO_MAX_VALUE);
-    }
-
-    public List<Integer> getWinningNumberList() {
-        return winningNumberList;
     }
 }

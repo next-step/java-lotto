@@ -1,9 +1,11 @@
-package com.ssabae.nextstep.lotto.domain.lotto;
+package com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator;
 
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MAX_VALUE;
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_MIN_VALUE;
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_NUMBER_SIZE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MAX_VALUE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MIN_VALUE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_NUMBER_SIZE;
 
+import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
+import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

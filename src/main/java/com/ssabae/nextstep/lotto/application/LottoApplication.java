@@ -1,11 +1,10 @@
-package com.ssabae.nextstep.lotto;
+package com.ssabae.nextstep.lotto.application;
 
-import com.ssabae.nextstep.lotto.application.LottoResultDto;
 import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
 import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.WinningNumber;
-import com.ssabae.nextstep.lotto.domain.lotto.AutoLottoTicketGenerator;
-import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketGenerator;
+import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.AutoLottoTicketGenerator;
+import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketMachine;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import com.ssabae.nextstep.lotto.view.InputView;
@@ -40,9 +39,5 @@ public class LottoApplication {
         LottoResultDto lottoResultDto = analyzer.convertToDto(lottoTickets, winningNumber);
 
         resultView.report(lottoResultDto);
-    }
-
-    public static void main(String[] args) {
-        new LottoApplication().launch();
     }
 }

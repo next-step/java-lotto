@@ -1,4 +1,4 @@
-package com.ssabae.nextstep.lotto.domain.lotto;
+package com.ssabae.nextstep.lotto;
 
 import com.ssabae.nextstep.lotto.domain.Money;
 
@@ -7,7 +7,7 @@ import com.ssabae.nextstep.lotto.domain.Money;
  * @project : java-lotto
  * @since : 2020-12-18
  */
-public class LottoConstant {
+public class Constant {
 
     public final static int LOTTO_MIN_VALUE = 1;
     public final static int LOTTO_MAX_VALUE = 45;

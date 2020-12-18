@@ -1,6 +1,6 @@
 package com.ssabae.nextstep.lotto.view;
 
-import static com.ssabae.nextstep.lotto.domain.lotto.LottoConstant.LOTTO_TICKET_PRICE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
 import com.ssabae.nextstep.lotto.application.LottoResultDto;
 import com.ssabae.nextstep.lotto.domain.Money;

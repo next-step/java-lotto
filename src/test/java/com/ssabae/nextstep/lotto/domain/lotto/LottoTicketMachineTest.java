@@ -1,12 +1,13 @@
-package com.ssabae.nextstep.lotto.domain;
+package com.ssabae.nextstep.lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
-import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketGenerator;
+import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicketMachine;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
-import com.ssabae.nextstep.lotto.domain.lotto.TestLottoTicketGenerator;
+import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.TestLottoTicketGenerator;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
