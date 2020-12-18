@@ -21,7 +21,7 @@ public class OutputView {
         stringBuilder.append("당첨 통계\n").append("---------\n");
 
         Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.MISS)
+                .filter(Rank::isNotMiss)
                 .forEach(rank -> stringBuilder.append(rankToString(rank, lottoResult.findByKey(rank))));
 
         stringBuilder.append("총 수익률은 ");
@@ -42,7 +42,7 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getCountOfMatch()).append("개 일치");
 
-        if (rank == Rank.SECOND) {
+        if (rank.isSecond()) {
             sb.append(", 보너스 볼 일치");
         }
         sb.append(" (").append(rank.getWinningMoney()).append(")- ");

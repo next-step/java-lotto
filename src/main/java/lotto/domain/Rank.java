@@ -33,6 +33,14 @@ public enum Rank {
         return winningMoney * num;
     }
 
+    public boolean isNotMiss() {
+        return this != Rank.MISS;
+    }
+
+    public boolean isSecond() {
+        return this == Rank.SECOND;
+    }
+
     private static boolean isEqualCountOfMatch(Rank rank, int countOfMatch) {
         return rank.countOfMatch == countOfMatch;
     }
