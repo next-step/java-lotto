@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.result.LottoResult;
-import lotto.result.LottoStatistics;
+import lotto.LottoTicket;
 import lotto.TestUtils;
 import lotto.number.LottoNumbers;
+import lotto.result.LottoResult;
+import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +30,7 @@ class LottoGameViewTest {
 		);
 
 		// when & then
-		assertDoesNotThrow(() -> lottoGameView.showBuyLottoNumbers(lottoNumbersList));
+		assertDoesNotThrow(() -> lottoGameView.showLottoTicket(new LottoTicket(lottoNumbersList)));
 	}
 
 	@Test

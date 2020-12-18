@@ -1,12 +1,6 @@
 package lotto;
 
-import lotto.number.LottoNumbers;
-import lotto.number.WinningNumbers;
-import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 class LottoGame {
 
@@ -22,13 +16,10 @@ class LottoGame {
 
 	void play() {
 		final int money = lottoOption.getMoney();
-		List<LottoNumbers> lottoNumbersList = lottoStore.sell(money);
-		lottoView.showBuyLottoNumbers(lottoNumbersList);
-		WinningNumbers winningNumbers = lottoOption.getWinningNumbers();
-		List<LottoResult> lottoResultList = lottoNumbersList.stream()
-				.map(winningNumbers::findMatchedResult)
-				.collect(Collectors.toList());
-		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
+		LottoTicket lottoTicket = lottoStore.sell(money);
+		lottoView.showLottoTicket(lottoTicket);
+
+		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(lottoOption.getWinningNumbers());
 		lottoView.showStatistics(lottoStatistics);
 	}
 }

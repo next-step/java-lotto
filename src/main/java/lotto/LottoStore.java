@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 public class LottoStore {
 	public static final int LOTTO_PRICE = 1000;
 
-	List<LottoNumbers> sell(int money) {
+	LottoTicket sell(int money) {
 		validateMoney(money);
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < money / LOTTO_PRICE; i++) {
 			lottoNumbers.add(generateRandomLottoNumbers());
 		}
-		return lottoNumbers;
+		return new LottoTicket(lottoNumbers);
 	}
 
 	private static void validateMoney(int money) {

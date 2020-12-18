@@ -19,7 +19,7 @@ class LottoStoreTest {
 		LottoStore lottoStore = new LottoStore();
 
 		// when & then
-		assertThat(lottoStore.sell(money)).hasSize(lottoCount);
+		assertThat(lottoStore.sell(money).size()).isEqualTo(lottoCount);
 	}
 
 	@ParameterizedTest

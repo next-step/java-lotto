@@ -1,9 +1,9 @@
 package lotto.view;
 
+import lotto.LottoTicket;
+import lotto.LottoView;
 import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
-import lotto.LottoView;
-import lotto.number.LottoNumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 public class LottoGameView implements LottoView {
 
 	@Override
-	public void showBuyLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-		List<String> readableLottoNumbers = lottoNumbersList.stream()
-				.map(lottoNumbers -> String.format("[%s]", lottoNumbers.toString()))
+	public void showLottoTicket(LottoTicket lottoTicket) {
+		List<String> readableLottoNumbers = lottoTicket.toStringNumbers()
+				.stream()
+				.map(lottoNumbers -> String.format("[%s]", lottoNumbers))
 				.collect(Collectors.toList());
 
-		System.out.println(String.format("%s개를 구매했습니다.", lottoNumbersList.size()));
+		System.out.println(String.format("%s개를 구매했습니다.", lottoTicket.size()));
 		System.out.println(String.join("\n", readableLottoNumbers));
 	}
 

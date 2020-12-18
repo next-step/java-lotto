@@ -38,11 +38,10 @@ class LottoGameTest {
 
 		LottoView lottoView = new LottoView() {
 			@Override
-			public void showBuyLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-				if (lottoNumbersList.size() == lottoSize) {
+			public void showLottoTicket(LottoTicket lottoTicket) {
+				if (lottoTicket.size() == lottoSize) {
 					callList.add("buyLottoRight");
 				}
-
 			}
 
 			@Override
