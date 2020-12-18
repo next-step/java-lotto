@@ -68,3 +68,46 @@
 13. 10번에 저장한 List값에서 각 우승티켓별 당첨 상금 부분을 더하여 상금 총액에 저장한다.
 14. 저장한 상금총액을 구매한 로또금액으로 나누어 수익률을 구한다.
 15. 수익률을 출력한다.
+
+### 세부 프로세스
+#### LottoShop : 금액과 관련 클래스 (2,3,4)
+- 입력받은 금액이 티켓 1장 이상의 금액일때 LottoTicket 객체를 생성한다.
+- 입력받은 금액을 나눠서 티켓의 갯수를 구한다.
+- 티켓 갯수만큼 티켓 리스트에 티켓 객체를 추가한다.
+
+#### LottoTicket : 한개의 티켓 관련 클래스 (4,8,9)
+- 중복된 번호를 가질 수 없다 (Set으로 구성)
+- 당첨번호가 null 이나 empty일 수 없다.
+- 1~45 자리 수만 가능하다.
+- 6개의 숫자만 가능하다.
+- RandomLottoNumber을 통해 6개의 숫자로 구성된 LottoTicket을 만들 수있다.
+- LottoTicket의 숫자들 중 당첨 번호가 포함되어있을 경우 count 한다.
+
+#### RandomLottoNumber : 로또 번호를 랜덤으로 자동 생성 (4)
+- 1~45 중 6개의 번호를 랜덤으로 생성한다.
+- 생성한 번호의 중복을 피하기 위해 set으로 생성한다.  
+
+#### LottoTickets : LottoTicket을 List로 가지고 있는 클래스 (10,11,12,14)
+- 당첨 등수와 그 상금 등을 넣기 위해 lottoTickets를 arrayList로 만든다.
+- LottoTicket에서 당첨번호를 count 한 값을 WinningRank의 값들과 비교하여 당첨 횟수가 같을 경우 WinningRank의 값을 lottoTickets에 넣는다.
+- WinningRank로 wrapping한 lottoTickets를 HashMap에 winningRanks키의 value로 넣는다.
+- HashMap에 lottoTickets의 각 index 별 상금을 더하고, 그값을 금액 수 만큼 나는 수익률을 반환한다.
+
+#### WinningRank : 일치하는 번호에 대한 상금액(당첨 갯수별) 클래스 (10)
+- enum으로 상금명, 일치번호갯수, 상금을 가지고 있는 클래스
+- 당첨 번호와 일치 갯수를 전달받아 해당 값이 enum에 있는 값인지 확인한다.
+- 값이 있을 경우 enum의 값을 전달한다.
+- 각 상금을 전달하여 수익률을 구할 수 있도록 한다.
+
+#### LottoResult : 동일한 당첨 상금명을 세는 클래스 (13)
+- LottoTickets 클래스의 HashMap 값 중 winningRanks에 있는 값을 받아 각 상금을 획득한 횟수를 count 한다.
+
+#### InputView
+- 구입금액을 입력받을 수 있다.
+- 지난 주 당첨 번호를 입력받을 수 있다.
+
+#### ResultView
+- 구매한 티켓의 개수를 출력할 수 있다. 
+- 구매한 티켓의 번호를 출력할 수 있다.
+- 당첨 개수에 일치하는 티켓 개수를 출력할 수 있다.
+- 총 수익률을 출력할 수 있다. 
