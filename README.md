@@ -7,6 +7,7 @@
     [x] 자동 로또 티켓 발행  
 [ ] LottoTicket의 List를 감싼 Wrapper 구현 (LottoTickets)
 [ ] 당첨 번호 발행하는 로직 구현
+[x] 당첨 번호 발행하는 로직 구현
 [ ] 로또 분석기 구현
     [ ] LottoTickets, 당첨 번호를 받아 내부의 Ticket들을 이용하여 등수 반환기
     [ ] 등수 별 금액 및 조건 ENUM
