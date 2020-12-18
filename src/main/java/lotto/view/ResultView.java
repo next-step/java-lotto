@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoResultType;
+import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
 import java.util.Map;
@@ -41,12 +41,12 @@ public class ResultView {
     }
 
     private static void printStatisticsForLotto(LottoResult lottoResult) {
-        for (LottoResultType lottoResultType : LottoResultType.winningTypes()) {
-            int matchedCount = lottoResultType.getMatchedCount();
-            int reward = lottoResultType.getReward();
-            Map<LottoResultType, Integer> statistics = lottoResult.getStatistics();
-            int count = statistics.get(lottoResultType);
-            System.out.printf(convertLottoStatisticsMessage(lottoResultType.isBonus()), matchedCount, reward, count);
+        for (LottoRank lottoRank : LottoRank.winningTypes()) {
+            int matchedCount = lottoRank.getMatchedCount();
+            int reward = lottoRank.getReward();
+            Map<LottoRank, Integer> statistics = lottoResult.getStatistics();
+            int count = statistics.get(lottoRank);
+            System.out.printf(convertLottoStatisticsMessage(lottoRank.isBonus()), matchedCount, reward, count);
         }
     }
 

@@ -36,7 +36,7 @@ public class Lottos {
         return lottos;
     }
 
-    private List<LottoResultType> findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    private List<LottoRank> findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         return lottos.stream()
                 .map(lotto -> lotto.findLottoResultType(winningLotto, bonusLottoNumber))
                 .collect(Collectors.toList());
