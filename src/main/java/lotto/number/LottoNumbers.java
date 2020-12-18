@@ -37,13 +37,13 @@ public class LottoNumbers {
 		}
 	}
 
-	public List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
+	List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
 		return this.lottoNumbers.stream()
 				.filter(otherLottoNumbers::contains)
 				.collect(Collectors.toList());
 	}
 
-	private boolean contains(LottoNumber lottoNumber) {
+	boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 

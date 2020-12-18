@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.number.LottoNumbers;
+import lotto.number.WinningNumbers;
 import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 
@@ -23,9 +24,9 @@ class LottoGame {
 		final int money = lottoOption.getMoney();
 		List<LottoNumbers> lottoNumbersList = lottoStore.sell(money);
 		lottoView.showBuyLottoNumbers(lottoNumbersList);
-		LottoNumbers winningNumbers = lottoOption.getWinningNumbers();
+		WinningNumbers winningNumbers = lottoOption.getWinningNumbers();
 		List<LottoResult> lottoResultList = lottoNumbersList.stream()
-				.map(lottoNumbers -> LottoResult.findMatchedResult(lottoNumbers, winningNumbers))
+				.map(winningNumbers::findMatchedResult)
 				.collect(Collectors.toList());
 		LottoStatistics lottoStatistics = LottoStatistics.create(lottoResultList);
 		lottoView.showStatistics(lottoStatistics);

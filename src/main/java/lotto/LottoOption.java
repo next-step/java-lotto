@@ -1,9 +1,8 @@
 package lotto;
 
-import lotto.number.LottoNumbers;
+import lotto.number.WinningNumbers;
 
 public interface LottoOption {
 	int getMoney();
-
-	LottoNumbers getWinningNumbers();
+	WinningNumbers getWinningNumbers();
 }
