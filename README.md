@@ -376,14 +376,14 @@ public enum Rank {
   ```
 ## 리뷰어 피드백
 - [x] `contains` 메소드는 LotteryTicket내에 추가해주기
-- [ ] `LotteryGameManager`의 구현을 정리하고 싶으신것 같아 간단하게 코멘트 남겨두겠습니다 ㅎㅎㅎ
+- [x] `LotteryGameManager`의 구현을 정리하고 싶으신것 같아 간단하게 코멘트 남겨두겠습니다 ㅎㅎㅎ
       우선 `InputView`의 호출을 DTO 객체를 활용하여 값을 얻어오는 로칙의 호출을 줄여볼수 있을것 같습니다.
       `new LotteryWinning(lotteryWinningNumbers, lotteryBonusNumber);` 와 같이 도메인 객체를 생성하는 로직은 
       `LotteryGameManager` 보다는 `LotteryGame` 클래스를 통해서 생성하는것도 고려해보시면 좋을것 같아요.
 - [x] `pickCounts`라는 상태값이 어떤 역할을 하는지 알수 없네요. (필수인지 체크 필요)
 - [x] `LotteryResult` 을 `LotteryWinning`에서 상태값으로 가지고 있을 필요는 없을것 같습니다.
       사용하고 있는 로직을 확인해주세요 
-- [ ] `LotteryGame` 클래스가 조금더 많은 역할을 할 수있으면 좋을것 같아요.
+- [x] `LotteryGame` 클래스가 조금더 많은 역할을 할 수있으면 좋을것 같아요.
       `price, count` 의 유효성 검사를 `LotteryGame` 가 아닌 `LotteryAmount`와 같은 클래스를 만들어 위임하고, 
       `LotteryGame`이 `LotteryTicket` 에 관련관 상태값을 가질수 있다면 더 많은 책임들을 위임할 수 있지 않을까 생각합니다 !
 - [x] 리스트를 나타내는 `List<LotteryTicket>` 값을 일급 컬렉션으로 만들어보는건 어떨까요 ?

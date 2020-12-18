@@ -21,7 +21,7 @@ public class LotteryTicket {
     }
 
     public static LotteryTicket of(String numbers) {
-        List<LotteryNumber> lotteryNumbers = Arrays.stream(numbers.trim().split(","))
+        List<LotteryNumber> lotteryNumbers = Arrays.stream(numbers.replaceAll(" ", "").split(","))
                 .map(Integer::parseInt)
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());

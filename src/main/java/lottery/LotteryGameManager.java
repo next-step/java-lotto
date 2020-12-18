@@ -6,23 +6,16 @@ import lottery.view.ResultViewLotteryGame;
 
 public class LotteryGameManager {
     public static void main(String[] args) {
-        int purchaseAmount = Integer.parseInt(InputViewLotteryGame.getUserInvestAmount());
+        LotteryGame lotteryGame = new LotteryGame(Integer.parseInt(InputViewLotteryGame.getUserInvestAmount()));
+        ResultViewLotteryGame.displayNumberOfTickets(lotteryGame.buyNumberOfLotteryTickets());
 
-        LotteryGame lotteryGame = new LotteryGame(1000);
-        int numberOfTicketsToBuy = lotteryGame.buyNumberOfLotteryTickets(purchaseAmount);
-        ResultViewLotteryGame.displayNumberOfTickets(numberOfTicketsToBuy);
+        lotteryGame.buyLotteryTickets(new AutoBuyBehavior());
+        ResultViewLotteryGame.displayPurchasedTickets(lotteryGame.getLotteryTickets());
 
-        LotteryTickets purchasedTickets = lotteryGame.buyLotteryTickets(
-                numberOfTicketsToBuy,
-                new AutoBuyBehavior());
+        lotteryGame.createLotteryWiningTicket(
+                InputViewLotteryGame.getWinningNumbers(),
+                InputViewLotteryGame.getBonusNumber());
 
-        ResultViewLotteryGame.displayPurchasedTickets(purchasedTickets);
-
-        String lotteryWinningNumbers = InputViewLotteryGame.getWinningNumbers();
-        String lotteryBonusNumber = InputViewLotteryGame.getBonusNumber();
-        LotteryWinning lotteryWinning = new LotteryWinning(lotteryWinningNumbers, lotteryBonusNumber);
-        ResultViewLotteryGame.displayLotteryResult(
-                lotteryWinning.getLotteryResult(purchasedTickets),
-                purchaseAmount);
+        ResultViewLotteryGame.displayLotteryResult(lotteryGame.getLotteryResult());
     }
 }
