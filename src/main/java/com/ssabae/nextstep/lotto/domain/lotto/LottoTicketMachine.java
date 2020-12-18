@@ -29,6 +29,8 @@ public class LottoTicketMachine {
     }
 
     private int calculateTicketCount(Money amount) {
-        return amount.amount.divide(LOTTO_TICKET_PRICE.amount, 1, BigDecimal.ROUND_UP).intValue();
+        return amount.amount
+                .divide(LOTTO_TICKET_PRICE.amount, 1, BigDecimal.ROUND_UP)
+                .intValue();
     }
 }

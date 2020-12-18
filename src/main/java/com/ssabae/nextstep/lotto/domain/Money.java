@@ -11,9 +11,13 @@ import java.math.BigDecimal;
 public class Money {
 
     public static Money ZERO = new Money(BigDecimal.valueOf(0));
+
     public BigDecimal amount;
 
-    public Money(BigDecimal amount) {
+    private Money(BigDecimal amount) {
+        if (amount.intValue() < 0) {
+            throw new IllegalArgumentException("0보다 작은 숫자는 들어올 수 없습니다.");
+        }
         this.amount = amount;
     }
 
