@@ -27,6 +27,7 @@ public class LottoGameView implements LottoView {
 		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_THREE));
 		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_FOUR));
 		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_FIVE));
+		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_FIVE_WITH_BONUS));
 		System.out.println(createLottoMatchedCountMessage(lottoStatistics, LottoResult.MATCHED_SIX));
 		System.out.println(createIncomeRateMessage(lottoStatistics));
 	}
