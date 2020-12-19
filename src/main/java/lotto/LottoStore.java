@@ -7,18 +7,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoStore {
 	public static final int LOTTO_PRICE = 1000;
 
-	List<LottoNumbers> sell(int money) {
+	LottoTicket sell(int money) {
 		validateMoney(money);
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < money / LOTTO_PRICE; i++) {
 			lottoNumbers.add(generateRandomLottoNumbers());
 		}
-		return lottoNumbers;
+		return new LottoTicket(lottoNumbers);
 	}
 
 	private static void validateMoney(int money) {
@@ -31,24 +30,17 @@ public class LottoStore {
 		}
 	}
 
-	static LottoNumbers generateRandomLottoNumbers() {
-		List<Integer> uniqueNumbers = createUniqueNumbers();
-		uniqueNumbers = shuffle(uniqueNumbers);
-		List<LottoNumber> lottoNumberList = pickNumbersUntilLottoSize(uniqueNumbers).stream()
+	private static LottoNumbers generateRandomLottoNumbers() {
+		List<Integer> shuffledNumberList = createShuffledLottoNumberList();
+		List<LottoNumber> lottoNumberList = pickNumbersUntilLottoSize(shuffledNumberList)
+				.stream()
 				.map(LottoNumber::new)
 				.collect(Collectors.toList());
 		return new LottoNumbers(lottoNumberList);
 	}
 
-	private static List<Integer> createUniqueNumbers() {
-		return IntStream
-				.range(LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MIN, LottoNumber.LOTTO_NUMBER_RANGE_INCLUSIVE_MAX + 1)
-				.boxed()
-				.collect(Collectors.toList());
-	}
-
-	private static List<Integer> shuffle(List<Integer> numbers) {
-		List<Integer> shuffleList = new ArrayList<>(numbers);
+	private static List<Integer> createShuffledLottoNumberList() {
+		List<Integer> shuffleList = new ArrayList<>(LottoNumber.LOTTO_NUMBER_LIST);
 		Collections.shuffle(shuffleList);
 		return shuffleList;
 	}

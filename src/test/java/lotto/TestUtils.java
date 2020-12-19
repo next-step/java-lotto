@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
-import lotto.result.LOTTO_RESULT;
+import lotto.result.LottoResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +25,8 @@ public class TestUtils {
 		return new LottoNumbers(lottoNumberList);
 	}
 
-	public static List<LOTTO_RESULT> duplicate(LOTTO_RESULT lottoResult, int size) {
-		List<LOTTO_RESULT> resultList = new ArrayList<>();
+	public static List<LottoResult> duplicate(LottoResult lottoResult, int size) {
+		List<LottoResult> resultList = new ArrayList<>();
 		for (int i = 0; i < size; i++) {
 			resultList.add(lottoResult);
 		}

@@ -1,7 +1,6 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,13 +11,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SuppressWarnings("NonAsciiCharacters")
 class LottoStoreTest {
 
-	@Test
-	@DisplayName("로또 번호를 잘 생성하는지 확인하는 테스트, 번호의 유효성 확인은 LottoNumbers 에 의존한다.")
-	void generateLottoNumbers() {
-		// when & then
-		assertThat(LottoStore.generateRandomLottoNumbers()).isNotNull();
-	}
-
 	@ParameterizedTest
 	@CsvSource(value = {"14000,14", "1000,1"})
 	@DisplayName("정상적인 금액으로 로또를 판매했을때 그 금액만큼 로또번호를 주는지 테스트")
@@ -27,7 +19,7 @@ class LottoStoreTest {
 		LottoStore lottoStore = new LottoStore();
 
 		// when & then
-		assertThat(lottoStore.sell(money)).hasSize(lottoCount);
+		assertThat(lottoStore.sell(money).size()).isEqualTo(lottoCount);
 	}
 
 	@ParameterizedTest

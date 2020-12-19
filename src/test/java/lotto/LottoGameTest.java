@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
+import lotto.number.WinningNumbers;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,19 +29,19 @@ class LottoGameTest {
 			}
 
 			@Override
-			public LottoNumbers getWinningNumbers() {
+			public WinningNumbers getWinningNumbers() {
 				callList.add("getWinningNumbers");
-				return TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6);
+				LottoNumbers lottoNumbers = TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6);
+				return new WinningNumbers(lottoNumbers, new LottoNumber(8));
 			}
 		};
 
 		LottoView lottoView = new LottoView() {
 			@Override
-			public void showBuyLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-				if (lottoNumbersList.size() == lottoSize) {
+			public void showLottoTicket(LottoTicket lottoTicket) {
+				if (lottoTicket.size() == lottoSize) {
 					callList.add("buyLottoRight");
 				}
-
 			}
 
 			@Override

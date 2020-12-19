@@ -1,20 +1,32 @@
 package lotto.number;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
-	public static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MIN = 1;
-	public static final int LOTTO_NUMBER_RANGE_INCLUSIVE_MAX = 45;
-	private static final String VALIDATE_MSG_RANGE_WRONG = "each lottoNumber range must in 1~45";
+	private static final int LOTTO_NUMBER_RANGE_MIN = 1;
+	private static final int LOTTO_NUMBER_RANGE_MAX = 45;
+
+	private static final String VALIDATE_MSG_RANGE_WRONG = String.format("each lottoNumber range must in %s~%s",
+			LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX);
+
+	public static final List<Integer> LOTTO_NUMBER_LIST = IntStream
+			.rangeClosed(LOTTO_NUMBER_RANGE_MIN, LOTTO_NUMBER_RANGE_MAX)
+			.boxed()
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 
 	private final int number;
 
 	public LottoNumber(int number) {
-		this.number = number;
 		validate(number);
+		this.number = number;
 	}
 
 	private static void validate(int number) {
-		if (number < LOTTO_NUMBER_RANGE_INCLUSIVE_MIN || number > LOTTO_NUMBER_RANGE_INCLUSIVE_MAX) {
+		if (!LOTTO_NUMBER_LIST.contains(number)) {
 			throw new IllegalArgumentException(VALIDATE_MSG_RANGE_WRONG);
 		}
 	}

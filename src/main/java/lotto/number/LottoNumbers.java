@@ -6,15 +6,16 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
 	public static final int LOTTO_NUMBER_SIZE = 6;
-	private static final String LOTTO_VALIDATE_SIZE_WRONG = "lottoNumbers size must be %s";
+	private static final String LOTTO_VALIDATE_SIZE_WRONG =
+			String.format("lottoNumbers size must be %s", LOTTO_NUMBER_SIZE);
 	private static final String LOTTO_VALIDATE_DUPLICATED = "lottoNumber is duplicated";
 
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<LottoNumber> lottoNumberList) {
+		validateSize(lottoNumberList);
+		validateUnique(lottoNumberList);
 		this.lottoNumbers = toSortedUnmodifiableList(lottoNumberList);
-		validateSize(this.lottoNumbers);
-		validateUnique(lottoNumbers);
 	}
 
 	private static List<LottoNumber> toSortedUnmodifiableList(List<LottoNumber> lottoNumberList) {
@@ -25,8 +26,7 @@ public class LottoNumbers {
 
 	private static void validateSize(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
 		if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-			String msg = String.format(LOTTO_VALIDATE_SIZE_WRONG, LOTTO_NUMBER_SIZE);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalArgumentException(LOTTO_VALIDATE_SIZE_WRONG);
 		}
 	}
 
@@ -37,13 +37,13 @@ public class LottoNumbers {
 		}
 	}
 
-	public List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
+	List<LottoNumber> getMatchedLottoNumbers(LottoNumbers otherLottoNumbers) {
 		return this.lottoNumbers.stream()
 				.filter(otherLottoNumbers::contains)
 				.collect(Collectors.toList());
 	}
 
-	private boolean contains(LottoNumber lottoNumber) {
+	boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
