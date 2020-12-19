@@ -19,15 +19,28 @@ public class ResultView {
 	}
 
 	public static void printMatch(List<LottoMatchResult> lottoResultList, LottoResult lottoResult) {
-//		Collections.sort(lottoResultList);
-//		lottoResultList.removeIf(e -> e < LottoPrizePolicy.getMinMatchCount());
 		List<Integer> matchList = lottoResultList.stream().map(LottoMatchResult::getMatchResult).collect(Collectors.toList());
-		Collections.sort(matchList);
 		matchList.removeIf(e -> e < LottoPrizePolicy.getMinMatchCount());
+		Collections.sort(matchList);
+
 		for (LottoPrizePolicy lottoPrizePolicy : LottoPrizePolicy.values()){
 			int actualMatchCount = hasMatchCount(matchList, lottoPrizePolicy.getMatchCount());
-			System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+			List<LottoMatchResult> bonusMatchResult = hasBonusNumber(lottoResultList, lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.isBonus());
+			printAnalyzeMessage(lottoPrizePolicy, actualMatchCount, bonusMatchResult);
+
 		}
+	}
+
+	private static List<LottoMatchResult> hasBonusNumber(List<LottoMatchResult> lottoResultList, int matchCount, boolean bonus) {
+		return lottoResultList.stream().filter(r -> r.getMatchResult() == matchCount && bonus == true).collect(Collectors.toList());
+	}
+
+	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResults) {
+		if(lottoMatchResults.isEmpty()){
+			System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+			return;
+		}
+		System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount, lottoMatchResults.size()));
 	}
 
 	private static int hasMatchCount(List<Integer> lottoResultList, int matchCount) {

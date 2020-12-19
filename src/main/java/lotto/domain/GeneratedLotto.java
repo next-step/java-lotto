@@ -19,7 +19,7 @@ public class GeneratedLotto {
 		}
 	}
 
-	public GeneratedLotto(String[] inputNumber){
+	public GeneratedLotto(String[] inputNumber) throws IllegalArgumentException{
 		for (int i = 0; i < inputNumber.length; i++) {
 			Integer number = Integer.parseInt(inputNumber[i].trim());
 			lottoNumbers.add(number);
@@ -45,9 +45,7 @@ public class GeneratedLotto {
 
 	@Override
 	public String toString() {
-		return "GeneratedLotto{" +
-				"lottoNumbers=" + lottoNumbers +
-				'}';
+		return ""+lottoNumbers;
 	}
 }
 

@@ -27,7 +27,6 @@ public class Lotto {
 		return generatedLottos;
 	}
 
-
 	public int getMatchCount(GeneratedLotto lastWeekPrizeNumberList, GeneratedLotto generatedLotto) {
 		return GeneratedLotto.countMatchNumber(lastWeekPrizeNumberList, generatedLotto);
 	}

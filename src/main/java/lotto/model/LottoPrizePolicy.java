@@ -34,6 +34,10 @@ public enum LottoPrizePolicy {
 		return prizeMoney;
 	}
 
+	public boolean isBonus() {
+		return isBonus;
+	}
+
 	public static int getPrizeMoney(LottoMatchResult lottoMatchResult, int totalPrizeMoney) {
 		for (LottoPrizePolicy policy : LottoPrizePolicy.values()) {
 			totalPrizeMoney += getPrizeMoneypolicy(policy, lottoMatchResult.getMatchResult(),lottoMatchResult.isHasBonusNumber());
@@ -54,17 +58,6 @@ public enum LottoPrizePolicy {
 				.min(Comparator.comparing(LottoPrizePolicy::getMatchCount))
 				.orElse(THREE_MATCH_PRIZE);
 		return minMatchPolicy.getMatchCount();
-	}
-
-	public static boolean checkBonusNumber(GeneratedLotto generatedLotto, int countOfMatch, int bonusNumber) {
-		boolean isMatchBonus = isMatchBonusNumber(generatedLotto,bonusNumber);
-
-		if(isMatchBonus && FIVE_MATCH_PRIZE.getMatchCount() == countOfMatch){
-
-		}
-
-
-		return false;
 	}
 
 	public static boolean isMatchBonusNumber(GeneratedLotto generatedLotto, int bonusNumber) {
