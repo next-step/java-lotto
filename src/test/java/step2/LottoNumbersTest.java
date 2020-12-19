@@ -52,8 +52,11 @@ public class LottoNumbersTest {
                 LottoNumber.of(11),
                 LottoNumber.of(12)
         );
-        MatchCount expectedMatchCount = new MatchCount(0);
-        assertThat(numbers1.getMatchCount(numbers2)).isEqualTo(expectedMatchCount);
+
+        LottoNumber bonusNumber = LottoNumber.of(40);
+
+        MatchResult expectedMatchCount = new MatchResult(0, false);
+        assertThat(numbers1.getMatchCount(numbers2, bonusNumber)).isEqualTo(expectedMatchCount);
     }
 
     @Test
@@ -75,8 +78,11 @@ public class LottoNumbersTest {
                 LottoNumber.of(11),
                 LottoNumber.of(12)
         );
-        MatchCount expectedMatchCount = new MatchCount(1);
-        assertThat(numbers1.getMatchCount(numbers2)).isEqualTo(expectedMatchCount);
+
+        LottoNumber bonusNumber = LottoNumber.of(40);
+
+        MatchResult expectedMatchCount = new MatchResult(1, false);
+        assertThat(numbers1.getMatchCount(numbers2, bonusNumber)).isEqualTo(expectedMatchCount);
     }
 
     @Test
@@ -98,8 +104,36 @@ public class LottoNumbersTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        MatchCount expectedMatchCount = new MatchCount(6);
-        assertThat(numbers1.getMatchCount(numbers2)).isEqualTo(expectedMatchCount);
+
+        LottoNumber bonusNumber = LottoNumber.of(40);
+
+        MatchResult expectedMatchCount = new MatchResult(6, false);
+        assertThat(numbers1.getMatchCount(numbers2, bonusNumber)).isEqualTo(expectedMatchCount);
+    }
+
+    @Test
+    public void 보너스넘버_매칭_확인() {
+        LottoNumbers myNumber = new LottoNumbers(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(40)
+        );
+
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+
+        LottoNumber bonusNumber = LottoNumber.of(40);
+        MatchResult expectMatchResult = new MatchResult(5, true);
+        assertThat(myNumber.getMatchCount(lottoNumbers, bonusNumber)).isEqualTo(expectMatchResult);
     }
 
 }

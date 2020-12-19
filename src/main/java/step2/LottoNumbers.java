@@ -34,10 +34,11 @@ public class LottoNumbers {
         return Objects.hash(nums);
     }
 
-    public MatchCount getMatchCount(LottoNumbers numbers2) {
-        return new MatchCount(nums.stream()
-                .filter(value -> numbers2.nums.contains(value))
-                .count());
+    public MatchResult getMatchCount(LottoNumbers numbers, LottoNumber bonusNumber) {
+        return new MatchResult(nums.stream()
+                .filter(value -> numbers.nums.contains(value))
+                .count(),
+                nums.contains(bonusNumber));
     }
 
     @Override

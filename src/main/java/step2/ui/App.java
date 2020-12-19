@@ -13,11 +13,12 @@ public class App {
         OutputHandler.print(lottos.toString());
 
         WinNumbers winNumbers = inputHandler.getPreviousWeekWinNumbers();
+        LottoNumber bonusNumber = inputHandler.getBonusNumber();
         OutputHandler.print(System.lineSeparator());
         OutputHandler.print("당첨 통계");
         OutputHandler.print("---------");
 
-        WinResults winResults = lottos.getWinResults(winNumbers.getNumbers());
+        WinResults winResults = lottos.getWinResults(winNumbers.getNumbers(), bonusNumber);
         OutputHandler.print(winResults.getResult());
         Money winningMoney = winResults.getWinningMoneySum();
         OutputHandler.print("총 수익률은 " + RateCalculator.calculate(winningMoney, purchasingMoney) + "입니다");

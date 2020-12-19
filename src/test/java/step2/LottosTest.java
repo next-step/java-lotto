@@ -11,9 +11,11 @@ public class LottosTest {
 
     private LottoNumbers numbers1;
     private LottoNumbers numbers2;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     public void setUp() {
+        bonusNumber = LottoNumber.of(7);
         numbers1 = new LottoNumbers(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
@@ -35,7 +37,7 @@ public class LottosTest {
     @Test
     public void 일등_두번_테스트() {
         Lottos lottos = new Lottos(numbers1, numbers2);
-        LottoNumbers answer =  new LottoNumbers(
+        LottoNumbers answer = new LottoNumbers(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -43,16 +45,49 @@ public class LottosTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        WinResults winResults = lottos.getWinResults(answer);
+        WinResults winResults = lottos.getWinResults(answer, bonusNumber);
         assertThat(winResults).isEqualTo(new WinResults(
                 Arrays.asList(WinResult.FIRST, WinResult.FIRST)
         ));
     }
 
     @Test
+    public void 이등_두번_테스트() {
+        numbers1 = new LottoNumbers(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
+        numbers2 = new LottoNumbers(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
+        Lottos lottos = new Lottos(numbers1, numbers2);
+        LottoNumbers answer = new LottoNumbers(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(45)
+        );
+        WinResults winResults = lottos.getWinResults(answer, bonusNumber);
+        assertThat(winResults).isEqualTo(new WinResults(
+                Arrays.asList(WinResult.SECOND, WinResult.SECOND)
+        ));
+    }
+
+    @Test
     public void 꼴찌_두번_테스트() {
         Lottos lottos = new Lottos(numbers1, numbers2);
-        LottoNumbers answer =  new LottoNumbers(
+        LottoNumbers answer = new LottoNumbers(
                 LottoNumber.of(11),
                 LottoNumber.of(22),
                 LottoNumber.of(33),
@@ -60,10 +95,11 @@ public class LottosTest {
                 LottoNumber.of(15),
                 LottoNumber.of(16)
         );
-        WinResults winResults = lottos.getWinResults(answer);
+        WinResults winResults = lottos.getWinResults(answer, bonusNumber);
         assertThat(winResults).isEqualTo(new WinResults(
                 Arrays.asList(WinResult.MISS, WinResult.MISS)
         ));
     }
+
 
 }
