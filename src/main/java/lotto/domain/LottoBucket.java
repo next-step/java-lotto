@@ -11,16 +11,17 @@ public class LottoBucket {
         this.lottos = new ArrayList<>();
     }
     public void createLotto() {
-        Lotto lotto = new Lotto();
-        lotto.generateNumbers();
+        Lotto lotto = new Lotto().createLotto();
+        addLotto(lotto);
+    }
+    protected void addLotto(Lotto lotto){
         lottos.add(lotto);
     }
-
     public int checkNumberOfLottos() {
         return this.lottos.size();
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return new ArrayList<>(lottos);
     }
 }

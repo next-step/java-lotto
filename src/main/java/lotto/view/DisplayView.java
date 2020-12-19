@@ -2,20 +2,17 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoBucket;
+import lotto.domain.WinningLottoType;
 import lotto.domain.WinningLottos;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DisplayView {
 
-    private static final String INPUT_MONEY_INFO = "구입 금액을 입력해 주세요.";
+
     private static final String NUMBER_OF_LOTTO = "개를 구매 했습니다.";
-
-    private static final String INPUT_LAST_WINNINGNUMBER = "지난 주 당첨 번호를 입력해 주세요. ";
-
-    public static void showInputMoneyInfo(){
-        System.out.println(INPUT_MONEY_INFO);
-    }
 
     public static void exchangeLottoMsg(int numberOfLotto){
         System.out.println(numberOfLotto + NUMBER_OF_LOTTO);
@@ -23,30 +20,29 @@ public class DisplayView {
 
     public static void showLottoBuckets(LottoBucket lottoBucket){
         List<Lotto> lottos = lottoBucket.getLottos();
-        lottos.forEach(System.out::println);
+        lottos.forEach( (lotto) -> {
+            String lottoNumber = lotto.showLottoNumber().stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(",", "[", "]"));
+            println(lottoNumber);
+        });
     }
-
-    public static void showInputLastWinningNumber() {
-        System.out.println(INPUT_LAST_WINNINGNUMBER);
-    }
-
     public static void showWinningStatis(WinningLottos winningLottos){
         println("당첨 통계");
         println("-----------");
-        printlnMatchNumberAndMoney(3,5000,winningLottos.getNumberOfMatchThree());
-        printlnMatchNumberAndMoney(4,50000,winningLottos.getNumberOfMatchFour());
-        printlnMatchNumberAndMoney(5,1500000,winningLottos.getNumberOfMatchFive());
-        printlnMatchNumberAndMoney(6,2000000000,winningLottos.getNumberOfMatchSix());
+        printlnMatchNumberAndMoney(WinningLottoType.MATCH_THREE, winningLottos.getCountByWinningType(WinningLottoType.MATCH_THREE));
+        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FOUR, winningLottos.getCountByWinningType(WinningLottoType.MATCH_FOUR));
+        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FIVE, winningLottos.getCountByWinningType(WinningLottoType.MATCH_FIVE));
+        printlnMatchNumberAndMoney(WinningLottoType.MATCH_SIX, winningLottos.getCountByWinningType(WinningLottoType.MATCH_SIX));
     }
     private static void println(String msg){
         System.out.println(msg);
     }
-    private static void printlnMatchNumberAndMoney(int matchNumber,
-                                                   long amountOfMoney,
-                                                   int matchNumberOfCount){
+
+    private static void printlnMatchNumberAndMoney(WinningLottoType winningLottoType, Integer matchNumberOfCount){
         StringBuilder builder = new StringBuilder();
-        builder.append(matchNumber+"개 일치 ");
-        builder.append("("+amountOfMoney+")");
+        builder.append(winningLottoType.getName()+"개 일치 ");
+        builder.append("("+winningLottoType.getWinnerMoney()+")");
         builder.append("- "+matchNumberOfCount+"개");
         System.out.println(builder.toString());
     }

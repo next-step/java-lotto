@@ -15,32 +15,30 @@ class WinningLottosTest {
 
     @Test
     void getMatchNumber() {
-        int matchingNumberOfCount = winningLottos.addMatchingNumber(3);
-        assertThat(matchingNumberOfCount).isEqualTo( 1);
+        WinningLottoType matchingNumberOfCount = winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
+        assertThat(matchingNumberOfCount.matchCount).isEqualTo( 3);
     }
 
     @Test
     void calculateLottoMoney(){
-        winningLottos.addMatchingNumber(3);
-        winningLottos.addMatchingNumber(4);
-        winningLottos.addMatchingNumber(5);
-        winningLottos.addMatchingNumber(6);
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_FOUR);
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_FIVE);
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_SIX);
         assertThat(winningLottos.amountOfWinning()).isEqualTo(2001555000);
     }
-
     @Test
-    void winningNumberCountCheck(){
-        winningLottos.addMatchingNumber(3);
-        int matchingNumberOfCount = winningLottos.addMatchingNumber(3);
-        assertThat(matchingNumberOfCount).isEqualTo(2);
-        assertThat(winningLottos.getNumberOfMatchFour()).isEqualTo(0);
+    void calculateLottoMoney_LottyType_ZERO(){
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_ZERO);
+        assertThat(winningLottos.amountOfWinning()).isEqualTo(0);
     }
     @Test
     void winningRevenueTest(){
-        winningLottos.addMatchingNumber(3);
+        winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
         float revenue = winningLottos.calcurateRevenue("1000");
         assertThat(revenue).isEqualTo(5);
     }
+
 
     @Test
     void cal(){
