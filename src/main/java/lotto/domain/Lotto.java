@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class Lotto {
 
+    public static final int LOTTO_NUMBER_SIZE = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
