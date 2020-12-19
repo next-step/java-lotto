@@ -14,11 +14,13 @@ public class ResultView {
     private static final String PRINT_WIN_PRIZE_FORMAT = "%s (%d원)- %d개\n";
 
     /**
-     * 구매한 로또의 갯수를 출력합니다.
-     * @param amount
+     * 수동, 자동으로 구매한 로또의 수를 출력합니다
+     * @param manualLottoSize
+     * @param autoLottoSize
      */
-    public void printNumberOfPurchasedLotto(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    public void printNumberOfPurchasedLotto(int manualLottoSize, int autoLottoSize) {
+        System.out.println("수동으로 " + manualLottoSize + "장, "
+                         + "자동으로 " + autoLottoSize + "개를 구매했습니다.");
     }
 
     /**

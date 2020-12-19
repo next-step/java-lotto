@@ -27,6 +27,10 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
