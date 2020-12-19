@@ -1,15 +1,9 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoGame {
 
-    public LottoTickets generateRandomLottoTickets(int price, RandomLottoMachine randomLottoMachine) {
-        return randomLottoMachine.generate(price);
-    }
-
-    public LottoTickets generateFixedLottoTickets(List<String> manualPurchaseLottoNumbers, FixedLottoMachine fixedLottoMachine) {
-        return fixedLottoMachine.generate(manualPurchaseLottoNumbers);
+    public LottoTickets generateLottoTickets(LottoMachine lottoMachine) {
+        return lottoMachine.generates();
     }
 
     public LottoTickets generateMixedLottoTickets(LottoTickets fixedLottoTickets, LottoTickets randomLottoTickets) {

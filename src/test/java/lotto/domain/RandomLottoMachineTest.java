@@ -16,7 +16,7 @@ public class RandomLottoMachineTest {
 
     @BeforeAll
     static void beforeAll() {
-        randomLottoMachine = new RandomLottoMachine();
+        randomLottoMachine = new RandomLottoMachine(1000);
     }
 
 
@@ -58,7 +58,8 @@ public class RandomLottoMachineTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void manyGenerate(int price, int expected) {
         //when
-        LottoTickets lottoTickets = randomLottoMachine.generate(price);
+        LottoMachine lottoMachine = new RandomLottoMachine(price);
+        LottoTickets lottoTickets = lottoMachine.generates();
 
         //then
         Assertions.assertEquals(expected, lottoTickets.lottoTicketCount());
