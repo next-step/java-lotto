@@ -18,8 +18,8 @@ public class LottoTest {
 
 	@Test
 	public void calculateLottoCount_장당_천원_로또_구매_매수_테스트() {
-		assertThat(lottoTVShow.calculateLottoCount(14000)).isEqualTo(14);
-		assertThat(lottoTVShow.calculateLottoCount(13500)).isEqualTo(13);
+		assertThat(lotto.calculateLottoCount(14000)).isEqualTo(14);
+		assertThat(lotto.calculateLottoCount(13500)).isEqualTo(13);
 	}
 
 	@Test

@@ -12,9 +12,9 @@ public class LottoResult {
 	//어떤 기능이 있는지 빠르게 파악할 수 있도록 public 주요 메서드를 상단에 배치
 	public void arrangePrize(List<Integer> lottoMatchCountResult, int lottoPricePerSheet) {
 		for (int matchCount : lottoMatchCountResult) {
-			this.totalPrizeMoney += calculateLottoPrize(matchCount);
+			totalPrizeMoney += calculateLottoPrize(matchCount);
 		}
-		this.earningsRate = (double) totalPrizeMoney / (lottoMatchCountResult.size() * lottoPricePerSheet);
+		earningsRate = (double) totalPrizeMoney / (lottoMatchCountResult.size() * lottoPricePerSheet);
 	}
 
 	private int calculateLottoPrize(int matchCount) {
