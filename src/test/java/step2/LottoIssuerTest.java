@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import step2.domain.Lotto;
 import step2.domain.LottoPrice;
+import step2.domain.Lottos;
 
 public class LottoIssuerTest {
 
@@ -36,5 +37,12 @@ public class LottoIssuerTest {
 		assertThat(one.getNumberOfPurchasesPerUnitPrice()).isEqualTo(expected);
 	}
 
+	@DisplayName("로또 구입금액 단위 이상의 금액 입력시 금액에 따른 갯수의 로또 발급")
+	@Test
+	void given_lotto_paid_when_grater_or_equals_than_unit_price_then_issue_lottos() {
+		LottoPrice lottoPrice = new LottoPrice(1900);
+		Lottos lottos = new Lottos(lottoPrice);
+		assertThat(lottos.size()).isEqualTo(1);
+	}
 
 }
