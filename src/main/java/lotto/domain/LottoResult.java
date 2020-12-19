@@ -15,7 +15,7 @@ public class LottoResult {
         this.buyAmount = buyAmount;
 
         lottoList.stream().map(lotto -> {
-            int numberCount = lotto.sameNumberCount(winnerLotto);
+            int numberCount = lotto.matchNumberCount(winnerLotto);
             return new WinningCase(numberCount);
         }).forEach(winningCase -> {
             winningCounts.putIfAbsent(winningCase, INITIAL_COUNT);

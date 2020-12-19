@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class RandomNumberListGenerator implements NumberListGenerator {
 
     @Override
-    public Set<Integer> generate() {
+    public Set<LottoNumber> generate() {
         List<Integer> collect = IntStream
                 .rangeClosed(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
                 .boxed()
@@ -17,6 +17,7 @@ public class RandomNumberListGenerator implements NumberListGenerator {
 
         return collect.stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 }
