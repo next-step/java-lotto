@@ -9,6 +9,9 @@ public class Calculator {
     }
 
     public int calculate() {
-        return 0;
+        if (inputNumber.isEmpty()) {
+            return 0;
+        }
+        return inputNumber.getNumbers();
     }
 }
