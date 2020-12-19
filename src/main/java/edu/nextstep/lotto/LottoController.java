@@ -21,7 +21,7 @@ public class LottoController {
 
 		List<Integer> winningNumbers = InputView.inputWinningNumbers();
 		int bonusNumber = InputView.inputBonusNumber();
-		LottoGame lottoGame = new LottoGame(purchasedLottoNumbersList, winningNumbers);
+		LottoGame lottoGame = LottoGame.createOf(purchasedLottoNumbersList, winningNumbers, bonusNumber);
 		LottoGameResult lottoGameResult = lottoGame.getResult();
 
 		ResultView.printWinningStatistics(lottoGameResult.getResultMap());
