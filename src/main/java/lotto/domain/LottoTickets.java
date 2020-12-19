@@ -11,12 +11,12 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public int lottoTicketCount() {
-        return lottoTickets.size();
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int lottoTicketCount() {
+        return lottoTickets.size();
     }
 
     public LottoTickets union(LottoTickets randomLottoTickets) {

@@ -9,15 +9,15 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
 
+    public List<LottoNumber> getLottoTicket() {
+        return lottoTicket;
+    }
+
     public int numberCount() {
         return lottoTicket.size();
     }
 
     public boolean contains(LottoNumber winningNumber) {
         return lottoTicket.contains(winningNumber);
-    }
-
-    public List<LottoNumber> getLottoTicket() {
-        return lottoTicket;
     }
 }

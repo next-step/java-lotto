@@ -14,18 +14,18 @@ public class LottoNumber {
         lottoNumber = number;
     }
 
-    private void validation(int number) {
-        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_VALIDATION_MESSAGE);
-        }
-    }
-
     public int ascendingSort(LottoNumber comparisonObject) {
         return this.lottoNumber - comparisonObject.lottoNumber;
     }
 
     public boolean isMatchBall(LottoTicket lottoTicket) {
         return lottoTicket.contains(this);
+    }
+
+    private void validation(int number) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_VALIDATION_MESSAGE);
+        }
     }
 
     @Override

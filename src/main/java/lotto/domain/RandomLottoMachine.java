@@ -28,10 +28,6 @@ public class RandomLottoMachine implements LottoMachine{
                 .collect(Collectors.toList());
     }
 
-    public RandomLottoMachine(int price, int manualLottoCount) {
-        count = purchaseQuantity(calculateRemainingMoney(price, manualLottoCount));
-    }
-
     @Override
     public LottoTicket generate() {
         lottoNumbersShuffle();
@@ -46,6 +42,10 @@ public class RandomLottoMachine implements LottoMachine{
                 .limit(count)
                 .collect(Collectors.toList());
         return new LottoTickets(lottoTickets);
+    }
+
+    public RandomLottoMachine(int price, int manualLottoCount) {
+        count = purchaseQuantity(calculateRemainingMoney(price, manualLottoCount));
     }
 
     public WinningNumber winningNumber(String winningNumberString) {
@@ -77,6 +77,10 @@ public class RandomLottoMachine implements LottoMachine{
         Collections.shuffle(lottoNumbers);
     }
 
+    private int calculateRemainingMoney(int price, int manualPurchaseLottoCount) {
+        return price - (manualPurchaseLottoCount * 1000);
+    }
+
     private LottoNumber stringToLottoNumber(String string) {
         int number = 0;
         try {
@@ -85,9 +89,5 @@ public class RandomLottoMachine implements LottoMachine{
             throw new IllegalArgumentException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
         return new LottoNumber(number);
-    }
-
-    private int calculateRemainingMoney(int price, int manualPurchaseLottoCount) {
-        return price - (manualPurchaseLottoCount * 1000);
     }
 }
