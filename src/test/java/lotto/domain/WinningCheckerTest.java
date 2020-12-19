@@ -20,7 +20,7 @@ public class WinningCheckerTest {
                 new Lotto(Stream.of(3, 4, 22, 36, 39, 45).map(LottoNumber::new).collect(Collectors.toList())),
                 new Lotto(Stream.of(7, 11, 14, 15, 35, 38).map(LottoNumber::new).collect(Collectors.toList()))
         );
-        String winNumbers = "1, 2, 5, 10, 34, 43";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
         String bonumsNumber = "3";
         Lottos lottos = new Lottos(lottolist);
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
@@ -35,7 +35,7 @@ public class WinningCheckerTest {
                 new Lotto(Stream.of(1, 2, 5, 6, 9, 10).map(LottoNumber::new).collect(Collectors.toList())),
                 new Lotto(Stream.of(2, 7, 10, 13, 34, 41).map(LottoNumber::new).collect(Collectors.toList()))
         );
-        String winNumbers = "1, 2, 5, 10, 34, 43";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
         String bonumsNumber = "3";
         Lottos lottos = new Lottos(lottolist);
         Map<WinType, Integer> results = checker.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
@@ -50,7 +50,7 @@ public class WinningCheckerTest {
                 new Lotto(Stream.of(3, 4, 5, 10, 34, 43).map(LottoNumber::new).collect(Collectors.toList())),
                 new Lotto(Stream.of(7, 11, 14, 15, 35, 38).map(LottoNumber::new).collect(Collectors.toList()))
         );
-        String winNumbers = "1, 2, 5, 10, 34, 43";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
         String bonumsNumber = "3";
         Lottos lottos = new Lottos(lottolist);
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
@@ -67,7 +67,7 @@ public class WinningCheckerTest {
         );
 
         Lottos lottos = new Lottos(lottolist);
-        String winNumbers = "1, 2, 5, 10, 34, 43";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
         String bonumsNumber = "3";
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
         assertThat(results).containsEntry(WinType.FIVE_MATCH, 1);
@@ -83,7 +83,7 @@ public class WinningCheckerTest {
         );
 
         Lottos lottos = new Lottos(lottolist);
-        String winNumbers = "1, 2, 5, 10, 34, 43";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
         String bonumsNumber = "3";
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
         assertThat(results).containsEntry(WinType.BONUMS_MATCH, 1);
@@ -99,7 +99,7 @@ public class WinningCheckerTest {
                 new Lotto(Stream.of(7, 11, 14, 15, 35, 2).map(LottoNumber::new).collect(Collectors.toList()))
         );
         Lottos lottos = new Lottos(lottolist);
-        String winNumbers = "7, 11, 14, 15, 35, 2";
+        Lotto winNumbers = new Lotto("1, 2, 4, 6, 9, 10");
         String bonumsNumber = "38";
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers, new LottoNumber(bonumsNumber));
         assertThat(results).containsEntry(WinType.SIX_MATCH, 1);

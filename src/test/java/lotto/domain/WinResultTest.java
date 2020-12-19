@@ -19,8 +19,8 @@ class WinResultTest {
                 new Lotto(Stream.of(3, 4, 9, 11, 24, 43).map(LottoNumber::new).collect(Collectors.toList()))
         );
         int purchasedMoney = 3000;
-        String winNumbers = "1, 2, 5, 10, 34, 43";
-        String bonusNumber = "7";
+        Lotto winNumbers = new Lotto("1, 2, 5, 10, 34, 43");
+        LottoNumber bonusNumber = new LottoNumber("7");
         Lottos lottos = new Lottos(lottoList);
         WinResult result = new WinResult(purchasedMoney, lottos, winNumbers, bonusNumber);
 

@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoShop;
-import lotto.domain.Lottos;
-import lotto.domain.WinResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,9 +13,9 @@ public class LottoApplication {
 
         ResultView.showPurchasedLottos(purchasedLotto);
 
-        String winNumbers = InputView.requestLastWinNumbers();
-        String bonusNumber = InputView.requestBonusNumber();
-        
+        Lotto winNumbers = new Lotto(InputView.requestLastWinNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
+      
         WinResult winResults = new WinResult(money, purchasedLotto, winNumbers, bonusNumber);
 
         ResultView.showResults(winResults);

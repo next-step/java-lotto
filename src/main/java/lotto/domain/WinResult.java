@@ -5,11 +5,11 @@ import java.util.Map;
 public class WinResult {
     private int purchasedMoney;
     private final Lottos purchasedLotto;
-    private final String winNumbers;
-    private final String bonusNumber;
+    private final Lotto winNumbers;
+    private final LottoNumber bonusNumber;
     private final Map<WinType, Integer> winResultMap;
 
-    public WinResult(int purchasedMoney, Lottos purchasedLotto, String winNumbers, String bonusNumber) {
+    public WinResult(int purchasedMoney, Lottos purchasedLotto, Lotto winNumbers, LottoNumber bonusNumber) {
         this.purchasedMoney = purchasedMoney;
         this.purchasedLotto = purchasedLotto;
         this.winNumbers = winNumbers;
@@ -29,6 +29,6 @@ public class WinResult {
 
     private Map<WinType, Integer> getWinResultMap() {
         WinningChecker winningChecker = new WinningChecker();
-        return winningChecker.checkWinLotto(purchasedLotto, winNumbers, new LottoNumber(bonusNumber));
+        return winningChecker.checkWinLotto(purchasedLotto, winNumbers, bonusNumber);
     }
 }

@@ -1,10 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.WinResult;
-
-import java.util.List;
 
 public class ResultView {
     private ResultView() {

@@ -13,8 +13,7 @@ public class WinningChecker {
                 .forEach(it -> results.put(it, ZERO));
     }
 
-    public Map<WinType, Integer> checkWinLotto(Lottos lottos, String winNumbers, LottoNumber bonusNumber) {
-        Lotto winLotto = new Lotto(winNumbers);
+    public Map<WinType, Integer> checkWinLotto(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchCount = lotto.matchNumberCnt(winLotto);
             boolean matchBonus = lotto.haNumber(bonusNumber);
