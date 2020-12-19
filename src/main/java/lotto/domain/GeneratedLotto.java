@@ -42,5 +42,12 @@ public class GeneratedLotto {
 			throw new IllegalArgumentException();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "GeneratedLotto{" +
+				"lottoNumbers=" + lottoNumbers +
+				'}';
+	}
 }
 

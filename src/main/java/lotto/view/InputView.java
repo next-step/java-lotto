@@ -35,6 +35,14 @@ public class InputView {
 
 		return lastWeekPrizeNumbers;
 	}
+	public static int printBonusNumberInput() {
+		print("보너스 볼을 입력해 주세요.");
+		int bonusNumber = scanner.nextInt();
+
+		return bonusNumber;
+	}
+
+
 
 	private static GeneratedLotto validateInputPirzeNumber(String lastWeekPrizeNumber) {
 		return convertStringToInteger(lastWeekPrizeNumber);

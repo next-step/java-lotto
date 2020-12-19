@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.GeneratedLotto;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoResult;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +46,18 @@ public class LottoTest {
 	@Test
 	public void 본전케이스_당첨금_계산_테스트(){
 		LottoResult lottoResult = new LottoResult();
-		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 3, 1, 1, 2, 2, 0, 0, 0, 0));
+		List<LottoMatchResult> lottoMatchCountList = new ArrayList<>();
+		lottoMatchCountList.add(new LottoMatchResult(3, false));
+		lottoMatchCountList.add(new LottoMatchResult(3, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(1);
 		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(10000);
@@ -54,7 +66,17 @@ public class LottoTest {
 	@Test
 	public void 손해케이스_당첨금_계산_테스트_손해(){
 		LottoResult lottoResult = new LottoResult();
-		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(3, 1, 1, 1, 2, 2, 0, 0, 0, 0));
+		List<LottoMatchResult> lottoMatchCountList = new ArrayList<>();
+		lottoMatchCountList.add(new LottoMatchResult(3, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(0.5);
 		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(5_000);
@@ -63,7 +85,17 @@ public class LottoTest {
 	@Test
 	public void 이익케이스_당첨금_계산_테스트(){
 		LottoResult lottoResult = new LottoResult();
-		List<Integer> lottoMatchCountList = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 2, 2, 0, 0, 0, 6));
+		List<LottoMatchResult> lottoMatchCountList = new ArrayList<>();
+		lottoMatchCountList.add(new LottoMatchResult(6, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
+		lottoMatchCountList.add(new LottoMatchResult(1, false));
 		lottoResult.arrangePrize(lottoMatchCountList, 1000);
 		assertThat(lottoResult.getEarningsRate()).isEqualTo(200000);
 		assertThat(lottoResult.getTotalPrizeMoney()).isEqualTo(2_000_000_000);
