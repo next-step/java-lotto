@@ -44,4 +44,19 @@ class CalculatorTest {
         Assertions.assertThat(actual).isEqualTo(results);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {" ;0", "1,2;3", "1,2,3;6", "1,2:3;6"}, delimiter = ';')
+    @DisplayName("숫각 숫자의 합을 반환")
+    void addition_numbers(String input, int actual) throws Exception {
+        //Given
+        InputNumber inputNumber = new InputNumber(input);
+        Calculator calculator = new Calculator(inputNumber);
+
+        //When
+        int results = calculator.calculate();
+
+        //Then
+        Assertions.assertThat(actual).isEqualTo(results);
+    }
+
 }

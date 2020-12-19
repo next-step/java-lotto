@@ -16,7 +16,7 @@ public class InputNumber {
         return input == null || input.trim().isEmpty();
     }
 
-    public int getNumbers() {
+    public int getNumber() {
         return Integer.parseInt(input);
     }
 
@@ -25,4 +25,7 @@ public class InputNumber {
     }
 
 
+    public boolean isOneLength() {
+        return input.length()==1;
+    }
 }

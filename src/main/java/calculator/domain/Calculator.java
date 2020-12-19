@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.List;
+
 public class Calculator {
 
     private final InputNumber inputNumber;
@@ -12,6 +14,15 @@ public class Calculator {
         if (inputNumber.isEmpty()) {
             return 0;
         }
-        return inputNumber.getNumbers();
+        if (inputNumber.isOneLength()) {
+            return inputNumber.getNumber();
+        }
+        return addition(inputNumber.split());
+    }
+
+    private int addition(List<Integer> split) {
+        return split.stream()
+            .reduce(Integer::sum)
+            .orElseThrow(IllegalArgumentException::new);
     }
 }
