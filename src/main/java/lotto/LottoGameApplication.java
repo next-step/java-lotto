@@ -12,11 +12,14 @@ public class LottoGameApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.enterMoney());
 
-        LottoMachine lottoMachine = new LottoMachine(money.computeLottoTickets());
-        LottoTickets lottoTickets = lottoMachine.makeLottoTickets();
-        OutputView.printLottoTickets(lottoTickets);
+        int countOfManualLottoTicket = InputView.enterManualLottoCount();
+        LottoTickets manualLottoTickets = new LottoTickets(InputView.enterManualLottoNumbers(countOfManualLottoTicket));
 
-        LottoGame lottoGame = new LottoGame(lottoTickets);
+        LottoMachine lottoMachine = new LottoMachine(money.getCountOfAutoLotto(countOfManualLottoTicket));
+        LottoTickets autoLottoTickets = lottoMachine.makeAutoLottoTickets();
+        OutputView.printLottoTickets(manualLottoTickets, autoLottoTickets);
+
+        LottoGame lottoGame = new LottoGame(manualLottoTickets, autoLottoTickets);
         WinningLottoTicket winningLottoTicket = makeWinningLottoTicket();
         LottoResult lottoResult = lottoGame.matchNumbers(winningLottoTicket);
         OutputView.printResults(lottoResult, money);
@@ -24,7 +27,7 @@ public class LottoGameApplication {
 
     private static WinningLottoTicket makeWinningLottoTicket() {
         LottoTicket winningLottoTicket = new LottoTicket(InputView.enterWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.enterBonusBall());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.enterBonusBall());
         return new WinningLottoTicket(winningLottoTicket, bonusNumber);
     }
 }

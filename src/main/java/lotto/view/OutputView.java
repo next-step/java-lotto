@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.Money;
 import lotto.domain.numbers.LottoTickets;
+import lotto.domain.LottoResult;
 
 import java.util.Arrays;
 
@@ -24,11 +24,11 @@ public class OutputView {
         stringBuilder.append("당첨 통계\n").append("---------\n");
 
         Arrays.stream(Rank.values())
-                .filter(Rank::isNotMiss)
-                .forEach(rank -> stringBuilder.append(rankToString(rank, lottoResult.findByKey(rank))));
+                .filter(rank -> !rank.isEqual(Rank.MISS))
+                .forEach(rank -> stringBuilder.append(rankToString(rank, lottoResult.sumMatchCount(rank))));
 
         stringBuilder.append("총 수익률은 ");
-        stringBuilder.append(money.calculateYield(lottoResult.addTotalMoney()));
+        stringBuilder.append(money.calculateYield(lottoResult.sumWinningMoney()));
         stringBuilder.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 
         System.out.println(stringBuilder.toString());
@@ -45,7 +45,7 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         sb.append(rank.getCountOfMatch()).append("개 일치");
 
-        if (rank.isSecond()) {
+        if (rank.isEqual(Rank.SECOND)) {
             sb.append(", 보너스 볼 일치");
         }
         sb.append(" (").append(rank.getWinningMoney()).append(")- ");

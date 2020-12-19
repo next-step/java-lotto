@@ -12,47 +12,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
+    private WinningLottoTicket winningLottoTicket;
     private LottoGame lottoGame;
 
     @BeforeEach
     void setUp() {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        List<LottoNumber> lottoNumbers1 = new ArrayList<>();
-        Arrays.asList(1, 8, 10, 14, 21, 30)
-                .forEach(num -> lottoNumbers1.add(new LottoNumber(num)));
-        lottoTickets.add(new LottoTicket(lottoNumbers1));
+        LottoTicket winningTicket = new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 14, 21, 40)));
+        winningLottoTicket = new WinningLottoTicket(winningTicket, LottoNumber.of(30));
 
-        List<LottoNumber> lottoNumbers2 = new ArrayList<>();
-        Arrays.asList(2, 8, 10, 20, 21, 45)
-                .forEach(num -> lottoNumbers2.add(new LottoNumber(num)));
-        lottoTickets.add(new LottoTicket(lottoNumbers2));
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        manualLottoTickets.add(new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 14, 21, 40))));  //1등
+        manualLottoTickets.add(new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 14, 21, 30))));  //2등
+        manualLottoTickets.add(new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 14, 21, 29))));  //3등
 
-        lottoGame = new LottoGame(new LottoTickets(lottoTickets));
+        List<LottoTicket> autoLottoTickets = new ArrayList<>();
+        autoLottoTickets.add(new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 14, 20, 39))));    //4등
+        autoLottoTickets.add(new LottoTicket(LottoNumberConverter.of(Arrays.asList(1, 8, 10, 15, 20, 40))));    //4등
+
+        lottoGame = new LottoGame(new LottoTickets(manualLottoTickets), new LottoTickets(autoLottoTickets));
     }
 
     @DisplayName("발급한 로또 티켓들과 당첨 번호를 비교하여 각 맞춘 갯수들을 저장하여 리턴한다.")
     @Test
     void matchNumbers() {
-        WinningLottoTicket winningLottoTicket =
-                new WinningLottoTicket(new LottoTicket(provideWinningNumbers()), new LottoNumber(30));
         Map<Rank, Integer> results = lottoGame.matchNumbers(winningLottoTicket).getResult();
 
-        assertThat(results.get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(results.get(Rank.FOURTH)).isZero();
-        assertThat(results.get(Rank.THIRD)).isZero();
+        assertThat(results.get(Rank.FIRST)).isEqualTo(1);
         assertThat(results.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(results.get(Rank.FIRST)).isZero();
-    }
-
-    private List<LottoNumber> provideWinningNumbers() {
-        return Stream.of(1, 8, 10, 14, 21, 40)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        assertThat(results.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(results.get(Rank.FOURTH)).isEqualTo(2);
+        assertThat(results.get(Rank.FIFTH)).isZero();
     }
 }

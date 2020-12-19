@@ -1,8 +1,8 @@
 package lotto.domain.numbers;
 
-import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -16,12 +16,9 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public LottoResult getMatchLottoResult(final WinningLottoTicket winningLottoTicket) {
-        LottoResult lottoResult = new LottoResult();
-        lottoTickets.forEach(lottoTicket -> {
-            Rank rank = lottoTicket.matchWinningLottoNumbers(winningLottoTicket);
-            lottoResult.addRank(rank);
-        });
+    public List<Rank> matchWinningLotto(final WinningLottoTicket winningLottoTicket) {
+        List<Rank> lottoResult = new ArrayList<>();
+        lottoTickets.forEach(lottoTicket -> lottoResult.add(lottoTicket.matchWinningLotto(winningLottoTicket)));
         return lottoResult;
     }
 
