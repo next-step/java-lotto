@@ -1,32 +1,27 @@
 package lotto.domain;
 
+import java.text.MessageFormat;
+import java.util.List;
+
 public class LottoShop {
 
-    private static final String NOT_HAVE_ENOUGH_MONEY_ERROR = "금액은 최소 0이상 이어야 구매 가능합니다.";
-    private static final String NOT_DIVIDE_LOTTO_PRICE_ERROR = "지불한 금액이 1000원으로 나누어지지 않습니다.";
-    private static final int DEFAULT_LOTTO_PRICE = 1000;
-    private static final int ZERO = 0;
+    public static final String NOT_MATCH_MANUAL_LOTTO_COUNT_ERROR = "입력한 수동 로또 갯수가 {0}개가 아닙니다.";
 
-    public PublishedLottoTicket buyLotto(LottoMoney lottoMoney, LottoTicketCount lottoTicketCount) {
+    public PublishedLottoTicket buyLotto(LottoTicketCount lottoTicketCount, List<String> manualLottoNumbers) {
+        validateManualLottoNumbers(lottoTicketCount, manualLottoNumbers);
 
-        int money = lottoMoney.getMoney();
-        validatePriceIsEmpty(money);
-        validatePriceIsDivide(money);
-
-        PublishedLottoTicket publishedLottoTicket = PublishedLottoTicket.ofLottoTicketCount(lottoTicketCount.getLottoTicketCount());
-
-        return publishedLottoTicket;
+        return new PublishedLottoTicket.Builder()
+                .autoLottoTicketCount(lottoTicketCount.getAutoLottoTicketCount())
+                .manualLottoNumbers(manualLottoNumbers)
+                .build();
     }
 
-    private void validatePriceIsEmpty(int price) {
-        if (price <= ZERO) {
-            throw new IllegalArgumentException(NOT_HAVE_ENOUGH_MONEY_ERROR);
+    private void validateManualLottoNumbers(LottoTicketCount lottoTicketCount, List<String> manualLottoNumbers) {
+        int manualLottoTicketCount = lottoTicketCount.getManualLottoTicketCount();
+        if (manualLottoTicketCount != manualLottoNumbers.size()) {
+            String msg = MessageFormat.format(NOT_MATCH_MANUAL_LOTTO_COUNT_ERROR, manualLottoTicketCount);
+            throw new IllegalArgumentException(msg);
         }
     }
 
-    private void validatePriceIsDivide(int price) {
-        if (price % DEFAULT_LOTTO_PRICE != ZERO) {
-            throw new IllegalArgumentException(NOT_DIVIDE_LOTTO_PRICE_ERROR);
-        }
-    }
 }

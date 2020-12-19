@@ -38,7 +38,11 @@ public class LottoResult {
     }
 
     private WinningPrize countMatchNumber(LottoTicket lottoTicket, WinningLotto winningLotto) {
-        int matchCount = lottoTicket.countMatchNumbers(winningLotto.getWinningLottoTicket());
+        Optional<LottoTicket> maybeLottoTicket = Optional.ofNullable(lottoTicket);
+        int matchCount = maybeLottoTicket
+                .map(lotto -> lotto.countMatchNumbers(winningLotto.getWinningLottoTicket()))
+                .orElse(0);
+
         WinningPrize winningPrize = WinningPrize.valueOf(matchCount, winningLotto.isBonusBall(lottoTicket));
         return winningPrize;
     }

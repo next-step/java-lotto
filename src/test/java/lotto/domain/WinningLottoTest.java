@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningLottoTest {
 
@@ -14,15 +13,16 @@ class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoMachine = new LottoMachine();
+        lottoMachine = LottoMachine.instance();
     }
 
     @Test
     @DisplayName("당첨 로또 번호 생성 테스트")
     void winning_lotto_number_test() {
         // given & when
+        LottoNumbers lottoNumbers = new LottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
         WinningLotto winningLotto = new WinningLotto.Builder()
-                .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")))
+                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(lottoNumbers))
                 .bonusBall(7)
                 .build();
 
@@ -36,8 +36,9 @@ class WinningLottoTest {
     @DisplayName("보너스볼 중복 테스트")
     void bonus_ball_duplication_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            LottoNumbers lottoNumbers = new LottoNumbers(StringSplitter.splitText("1,2,3,4,5,6"));
             WinningLotto winningLotto = new WinningLotto.Builder()
-                    .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1,2,3,4,5,6")))
+                    .winningLottoTicket(lottoMachine.generateManualLottoNumbers(lottoNumbers))
                     .bonusBall(6)
                     .build();
         }).withMessageMatching("보너스 볼이 당첨 번호에 포함되어 있습니다. 다른 값을 입력하세요.");
@@ -47,14 +48,18 @@ class WinningLottoTest {
     @DisplayName("보너스볼 일치 확인 테스트")
     void bonus_ball_match_test() {
         // given & when
+        LottoNumbers lottoNumbers = new LottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 45"));
         WinningLotto winningLotto = new WinningLotto.Builder()
-                .winningLottoTicket(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 45")))
+                .winningLottoTicket(lottoMachine.generateManualLottoNumbers(lottoNumbers))
                 .bonusBall(7)
                 .build();
 
         // then
-        assertThat(winningLotto.isBonusBall(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 7")))).isTrue();
-        assertThat(winningLotto.isBonusBall(lottoMachine.createManualLottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 8")))).isFalse();
+        LottoNumbers matchTrueNumbers = new LottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 7"));
+        assertThat(winningLotto.isBonusBall(lottoMachine.generateManualLottoNumbers(matchTrueNumbers))).isTrue();
+
+        LottoNumbers matchFalseNumbers = new LottoNumbers(StringSplitter.splitText("1, 2, 3, 4, 5, 8"));
+        assertThat(winningLotto.isBonusBall(lottoMachine.generateManualLottoNumbers(matchFalseNumbers))).isFalse();
     }
 
 }
