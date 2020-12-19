@@ -1,24 +1,22 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoShop;
-import lotto.domain.WinResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
         int money = InputView.requestPurchaseAmount();
 
         LottoShop lottoShop = new LottoShop();
-        List<Lotto> purchasedLotto = lottoShop.getLottos(money);
+        Lottos purchasedLotto = lottoShop.getLottos(money);
 
         ResultView.showPurchasedLottos(purchasedLotto);
 
-        String winNumbers = InputView.requestLastWinNumbers();
-        WinResult winResults = new WinResult(purchasedLotto, winNumbers, money);
+        Lotto winNumbers = new Lotto(InputView.requestLastWinNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
+      
+        WinResult winResults = new WinResult(money, purchasedLotto, winNumbers, bonusNumber);
 
         ResultView.showResults(winResults);
     }

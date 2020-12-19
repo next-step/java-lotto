@@ -5,14 +5,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.sort;
-
 public class Lotto {
     private static final String NUMBER_DELIMITER = ", ";
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        sort(numbers);
+    public Lotto(List<LottoNumber> numbers) {
+        numbers.sort(LottoNumber::isgreaterThan);
         this.numbers = numbers;
     }
 
@@ -21,11 +19,11 @@ public class Lotto {
         this.numbers = Arrays.stream(split)
                 .map(it -> {
                     try {
-                        return Integer.parseInt(it);
+                        return new LottoNumber(Integer.parseInt(it));
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException("숫자만 입력해 주세요.");
                     }
-                }).sorted()
+                }).sorted(LottoNumber::isgreaterThan)
                 .collect(Collectors.toList());
     }
 
@@ -33,6 +31,10 @@ public class Lotto {
         return (int) numbers.stream()
                 .filter(winningLotto.numbers::contains)
                 .count();
+    }
+
+    public boolean haNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
