@@ -8,27 +8,27 @@ public class LottoResult {
     private static final int DEFAULT_VALUE = 0;
     public static final int ADDING_COUNT_VALUE = 1;
 
-    private final Map<LottoResultType, Integer> results = new EnumMap<>(LottoResultType.class);
+    private final Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
 
-    LottoResult(List<LottoResultType> purchasedLottoResultTypes) {
+    LottoResult(List<LottoRank> purchasedLottoRanks) {
         initiate();
-        processStatistics(purchasedLottoResultTypes);
+        processStatistics(purchasedLottoRanks);
     }
 
     private void initiate() {
-        for (LottoResultType lottoResultType : LottoResultType.values()) {
-            results.put(lottoResultType, DEFAULT_VALUE);
+        for (LottoRank lottoRank : LottoRank.values()) {
+            results.put(lottoRank, DEFAULT_VALUE);
         }
     }
 
-    private void processStatistics(List<LottoResultType> lottoResultTypes) {
-        for (LottoResultType lottoResultType : lottoResultTypes) {
-            int count = results.get(lottoResultType) + ADDING_COUNT_VALUE;
-            results.put(lottoResultType, count);
+    private void processStatistics(List<LottoRank> lottoRanks) {
+        for (LottoRank lottoRank : lottoRanks) {
+            int count = results.get(lottoRank) + ADDING_COUNT_VALUE;
+            results.put(lottoRank, count);
         }
     }
 
-    public Map<LottoResultType, Integer> getStatistics() {
+    public Map<LottoRank, Integer> getStatistics() {
         return results;
     }
 
@@ -38,20 +38,20 @@ public class LottoResult {
 
     private int calculateTotalEarningsAmount() {
         int totalEarningsAmount = 0;
-        for (LottoResultType lottoResultType : LottoResultType.winningTypes()) {
-            totalEarningsAmount += calculateEarningAmount(lottoResultType);
+        for (LottoRank lottoRank : LottoRank.winningTypes()) {
+            totalEarningsAmount += calculateEarningAmount(lottoRank);
         }
         return totalEarningsAmount;
     }
 
-    private double calculateEarningAmount(LottoResultType lottoResultType) {
-        int reword = lottoResultType.getReward();
-        int count = results.get(lottoResultType);
+    private double calculateEarningAmount(LottoRank lottoRank) {
+        int reword = lottoRank.getReward();
+        int count = results.get(lottoRank);
         return Math.multiplyExact(reword, count);
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {
-        return Math.floorDiv(totalEarningsAmount, getTotalPurchasedPrice());
+        return (double) totalEarningsAmount / getTotalPurchasedPrice();
     }
 
     private int getTotalPurchasedSize() {

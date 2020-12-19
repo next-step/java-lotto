@@ -6,42 +6,26 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final int PRICE = 1_000;
 
-    private final Numbers numbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-        numbers = new Numbers();
+        lottoNumbers = new LottoNumbers();
     }
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    LottoResultType findLottoResultType(List<Integer> winningNumbers) {
-        return LottoResultType.findByMatchedCount(countMatchedNumbers(winningNumbers));
+    LottoRank findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        int matchedCount = lottoNumbers.countMatchedNumbers(winningLotto.lottoNumbers);
+        boolean isBonus = lottoNumbers.isBonusMatched(bonusLottoNumber);
+        return LottoRank.findByMatchedCountAndBonus(matchedCount, isBonus);
     }
 
-    private int countMatchedNumbers(List<Integer> winningNumbers) {
-        return (int) this.numbers.getNumbers()
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getNumbers()
                 .stream()
-                .map(Number::getNumber)
-                .filter(winningNumbers::contains)
-                .count();
-    }
-
-    List<Integer> getNumbers() {
-        return this.numbers.getNumbers()
-                .stream()
-                .map(Number::getNumber)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        String convertedNumbers = numbers.getNumbers()
-                .stream()
-                .map(Number::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        return "[" + convertedNumbers + "]";
     }
 }

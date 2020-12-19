@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("모든 로또의 결과 `LottoResult`에 대한 테스트")
 class LottoResultTest {
-    private final List<LottoResultType> lottoResultTypes = Arrays.stream(LottoResultType.values()).collect(Collectors.toList());
-    private final LottoResult lottoResult = new LottoResult(lottoResultTypes);
+    private final List<LottoRank> lottoRanks = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
+    private final LottoResult lottoResult = new LottoResult(lottoRanks);
 
     @DisplayName("`LottoResult` 생성")
     @Test
     void createLottoResultTest() {
         // When
-        LottoResult lottoResult = new LottoResult(lottoResultTypes);
+        LottoResult lottoResult = new LottoResult(lottoRanks);
         // Then
         assertThat(lottoResult).isNotNull();
     }
@@ -37,7 +37,7 @@ class LottoResultTest {
     @Test
     void getStatisticsTest() {
         // When
-        Map<LottoResultType, Integer> earningsRatio = lottoResult.getStatistics();
+        Map<LottoRank, Integer> earningsRatio = lottoResult.getStatistics();
         // Then
         assertThat(earningsRatio.values())
                 .hasSize(earningsRatio.values().size())

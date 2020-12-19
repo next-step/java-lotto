@@ -28,17 +28,17 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult retrieveStatistics(Lotto winningLotto) {
-        return new LottoResult(findLottoResultType(winningLotto));
+    public LottoResult retrieveStatistics(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        return new LottoResult(findLottoResultType(winningLotto, bonusLottoNumber));
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    private List<LottoResultType> findLottoResultType(Lotto winningLottoNumbers) {
+    private List<LottoRank> findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLottoNumbers.getNumbers()))
+                .map(lotto -> lotto.findLottoResultType(winningLotto, bonusLottoNumber))
                 .collect(Collectors.toList());
     }
 }

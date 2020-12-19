@@ -34,28 +34,29 @@
 
 * 로또를 생성하기 위한 유틸 `LottoGenerator`
     * [ ] `Lotto` 생성을 위한 무작위 번호 6자리 생성한다.
-* 로또를 구성하는 각 번호 `Number`
+* 로또를 구성하는 각 번호 `LottoNumber`
     * [ ] 양의 정수 1부터 45까지 범위의 숫자를 갖는다.
-* 다수의 `Number`를 구성하는 로또 번호 `Numbers`
-    * [ ] 6개의 `Number`를 갖는다.
+* 다수의 `LottoNumber`를 구성하는 로또 번호 `LottoNumbers`
+    * [ ] 6개의 `LottoNumber`를 갖는다.
 * 로또 추첨에 필요한 단위 `Lotto`
-    * [ ] `Lotto`의 6자리 번호 `Numbers`를 갖는다.
+    * [ ] `Lotto`의 6자리 번호 `LottoNumbers`를 갖는다.
     * [ ] `Lotto`는 장당 1000원이다.
-    * [ ] `Lotto`의 결과인 `LottoResultType`을 반환한다.
+    * [ ] `Lotto`의 결과인 `LottoRank`을 반환한다.
 * 구입한 모든 `Lotto`를 가진 `Lottos`
     * [ ] 1개 또는 n개의 `Lotto`을 갖는다.
     * [ ] 구입한 `Lottos`의 `LottoResult`(결과)를 제공한다.
-* 로또의 매칭된 결과에 대한 타입 `LottoResultType`
-    * [ ] 로또 1등부터 4등(매칭된 숫자: 6~3개) 그리고 낙첨(매칭된 숫자: 2~0개)을 정의한다.
+* 로또의 매칭된 결과에 대한 타입 `LottoRank`
+    * [ ] 로또 1등(6개), 2등(5개+보너스), 3등(5개), 4등(4개), 5등(3개) 그리고 낙첨(매칭된 숫자: 2~0개)을 정의한다.
     * [ ] 매칭된 로또 번호에 따른 타입을 반환한다.
 * 모든 로또의 결과 `LottoResult`
-    * [ ] 모든 로또의 `LottoResultType`에 따른 당첨 통계를 반환한다.
+    * [ ] 모든 로또의 `LottoRank`에 따른 당첨 통계를 반환한다.
     * [ ] 모든 로또의 수익률을 반환한다.
 * 로또 게임을 구성할 게임 `LottoGame`
     * [ ] 로또 게임을 시작한다.
 * 게임에 필요한 정보를 입력받을 `InputView`
     * [ ] 로또 게임에 필요한 `Lotto`의 구입금액을 입력받는다.
     * [ ] 지난 주 `Lotto` 당첨 번호를 입력받는다.
+    * [ ] 보너스 `LottoNumber`를 입력받는다.
 * 게임에 필요한 정보를 출력할 `ResultView`
     * [ ] `Lotto`의 모든 번호를 출력한다.
     * [ ] `Lotto` 당첨의 통계는 '등수별 당첨 갯수', '수익률' 을 출력한다.
