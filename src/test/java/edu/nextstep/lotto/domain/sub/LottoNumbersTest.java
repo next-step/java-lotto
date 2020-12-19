@@ -55,6 +55,17 @@ class LottoNumbersTest {
 		assertThat(numbers1.countBySame(numbers2)).isEqualTo(expected);
 	}
 
+	@DisplayName("contains: 내부 lottoNumbers가 파라미터로 받은 LottoNumber를 포함하는 지 여부를 리턴함")
+	@ParameterizedTest
+	@CsvSource(value = {
+		"1,2,3,5,4,6:6:true",
+		"1,2,4,5,3,6:7:false"
+	}, delimiter = ':')
+	void contains(String numbers, int number, boolean expected) {
+		LottoNumbers lottoNumbers = new LottoNumbers(splitToIntList(numbers));
+		assertThat(lottoNumbers.contains(new LottoNumber(number))).isEqualTo(expected);
+	}
+
 	private List<Integer> splitToIntList(String numbers) {
 		return Arrays.stream(numbers.split(","))
 			.map(Integer::parseInt)

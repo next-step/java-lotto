@@ -26,4 +26,8 @@ public class LottoNumbers {
 			.filter(other.lottoNumbers::contains)
 			.count();
 	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
 }

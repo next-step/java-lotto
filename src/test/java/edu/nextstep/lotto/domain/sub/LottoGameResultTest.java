@@ -23,9 +23,13 @@ class LottoGameResultTest {
 		// 1등.
 		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
 
+		// 2등.
+		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 7));
+		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 7));
+
 		// 3등.
-		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 7));
-		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 7));
+		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 8));
+		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 8));
 
 		// 4등.
 		lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 7, 8));
@@ -48,19 +52,19 @@ class LottoGameResultTest {
 	@Test
 	void getResultAsCountingMap() {
 		assertThat(lottoGameResult.getResultMap())
-			.extractingByKeys(LottoRank.FIRST, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH)
-			.containsExactly(1L, 2L, 3L, 1L);
+			.extractingByKeys(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH)
+			.containsExactly(1L, 2L, 2L, 3L, 1L);
 	}
 
 	@DisplayName("getSoldLottoCount: 판매된 총 로또의 개수를 구함. lottoGameResultMap의 value를 모두 더해서 리턴함.")
 	@Test
 	void getSoldLottoCount() {
-		assertThat(lottoGameResult.getSoldLottoCount()).isEqualTo(10007L);
+		assertThat(lottoGameResult.getSoldLottoCount()).isEqualTo(10009L);
 	}
 
 	@DisplayName("getProfitRatio: '상금 / 구매비용'을 소수점 둘째자리까지 구하고 버림하여 리턴함.")
 	@Test
 	void getProfitRatio() {
-		assertThat(lottoGameResult.getProfitRatio()).hasToString("200.17");
+		assertThat(lottoGameResult.getProfitRatio()).hasToString("206.12");
 	}
 }

@@ -25,16 +25,17 @@ class LottoTest {
 	@DisplayName("getRank: Lotto객체가 가진 번호와 당첨번호를 비교해 결과에 맞는 LottoRank ENUM을 리턴함. (Optional임)")
 	@ParameterizedTest
 	@CsvSource(value = {
-		"1,2,3,4,5,6:1,2,3,4,5,6:FIRST",
-		"1,2,3,4,5,6:1,2,3,4,5,7:THIRD",
-		"1,2,3,4,5,6:1,2,3,4,7,8:FOURTH",
-		"1,2,3,4,5,6:1,2,3,7,8,9:FIFTH",
-		"1,2,3,4,5,6:7,8,9,10,11,12:NONE"
+		"1,2,3,4,5,6:1,2,3,4,5,6:7:FIRST",
+		"1,2,3,4,5,7:1,2,3,4,5,6:7:SECOND",
+		"1,2,3,4,5,8:1,2,3,4,5,6:7:THIRD",
+		"1,2,3,4,7,8:1,2,3,4,5,6:7:FOURTH",
+		"1,2,3,7,8,9:1,2,3,4,5,6:7:FIFTH",
+		"1,2,7,8,9,10:1,2,3,4,5,6:7:NONE"
 	}, delimiter = ':')
-	void getRank(String numbers, String winningNumbers, LottoRank expected) {
+	void getRank(String numbers, String winningNumbers, int bonusNumber, LottoRank expected) {
 		Lotto lotto = new Lotto(splitToIntList(numbers));
 		Lotto winningLotto = new Lotto(splitToIntList(winningNumbers));
-		assertThat(lotto.getRank(winningLotto))
+		assertThat(lotto.getRank(winningLotto, new LottoNumber(bonusNumber)))
 			.isPresent()
 			.hasValue(expected);
 	}

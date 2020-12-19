@@ -31,10 +31,15 @@ class LottosTest {
 			Arrays.asList(1, 2, 3, 4, 5, 6),
 			Arrays.asList(1, 2, 3, 4, 5, 6),
 
+			// 2등.
+			Arrays.asList(1, 2, 3, 4, 5, 7),
+			Arrays.asList(1, 2, 3, 4, 5, 7),
+			Arrays.asList(1, 2, 3, 4, 5, 7),
+
 			// 3등.
-			Arrays.asList(1, 2, 3, 4, 5, 7),
-			Arrays.asList(1, 2, 3, 4, 5, 7),
-			Arrays.asList(1, 2, 3, 4, 5, 7),
+			Arrays.asList(1, 2, 3, 4, 5, 8),
+			Arrays.asList(1, 2, 3, 4, 5, 8),
+			Arrays.asList(1, 2, 3, 4, 5, 8),
 
 			// 4등.
 			Arrays.asList(1, 2, 3, 4, 7, 8),
@@ -46,12 +51,17 @@ class LottosTest {
 			// 5등.
 			Arrays.asList(1, 2, 3, 7, 8, 9),
 
+			// 미당첨
 			Arrays.asList(1, 2, 7, 8, 9, 10)
 		));
 		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-		assertThat(lottos.getResultAsCountingMap(winningLotto))
-			.extractingByKeys(LottoRank.FIRST, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH)
-			.containsExactly(3L, 3L, 5L, 1L);
+		assertThat(lottos.getResultAsCountingMap(winningLotto, new LottoNumber(7)))
+			.extractingByKeys(
+				LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD,
+				LottoRank.FOURTH, LottoRank.FIFTH, LottoRank.NONE)
+			.containsExactly(
+				3L, 3L, 3L,
+				5L, 1L, 1L);
 	}
 }

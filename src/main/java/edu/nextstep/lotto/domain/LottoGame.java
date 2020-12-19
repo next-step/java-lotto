@@ -17,7 +17,7 @@ public class LottoGame {
 		this.soldLottos = new Lottos(soldLottos);
 		this.winningLotto = new Lotto(winningLotto);
 		this.bonusNumber = new LottoNumber(bonusNumber);
-		this.lottoGameResult = new LottoGameResult(this.soldLottos, this.winningLotto);
+		this.lottoGameResult = new LottoGameResult(this.soldLottos, this.winningLotto, this.bonusNumber);
 	}
 
 	public static LottoGame createOf(

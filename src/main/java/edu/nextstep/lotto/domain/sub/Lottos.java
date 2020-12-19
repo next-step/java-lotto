@@ -14,9 +14,9 @@ public class Lottos {
 			.collect(Collectors.toList());
 	}
 
-	public Map<LottoRank, Long> getResultAsCountingMap(Lotto winningLotto) {
+	public Map<LottoRank, Long> getResultAsCountingMap(Lotto winningLotto, LottoNumber bonusNumber) {
 		return lottos.stream()
-			.map(lotto -> lotto.getRank(winningLotto))
+			.map(lotto -> lotto.getRank(winningLotto, bonusNumber))
 			.filter(Optional::isPresent)
 			.map(Optional::get)
 			.collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
