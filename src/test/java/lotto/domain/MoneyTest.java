@@ -19,10 +19,20 @@ class MoneyTest {
                 .hasMessage("로또를 살 수가 없습니다.");
     }
 
+    @DisplayName("입력받은 수동 로또 장 수가 발급받을 수 있는 총 로또 장 수를 초과했을 경우 Exception 발생")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:2", "20000:22"}, delimiter = ':')
+    void getCountOfAutoLotto_false(long value, int countOfManualLotto) {
+        Money money = new Money(value);
+        assertThatThrownBy(() -> money.getCountOfAutoLotto(countOfManualLotto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매할 수 있는 로또 장 수를 초과했습니다.");
+    }
+
     @DisplayName("총 로또 티켓 갯수(1000원당 로또 티켓 한 장)에서 수동 로또 티켓 갯수를 빼서 자동 로또 티켓 갯수를 구한다.")
     @ParameterizedTest
     @CsvSource(value = {"13000:7:6", "20000000000:10000000:10000000"}, delimiter = ':')
-    void computeLottoTickets(long value, int countOfManualLotto, int expected) {
+    void getCountOfAutoLotto(long value, int countOfManualLotto, int expected) {
         int countOfAutoLotto = new Money(value).getCountOfAutoLotto(countOfManualLotto);
         assertThat(countOfAutoLotto).isEqualTo(expected);
     }

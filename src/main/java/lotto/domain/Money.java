@@ -11,7 +11,8 @@ public class Money {
     }
 
     public int getCountOfAutoLotto(int countOfManualLotto) {
-        return (int) (value / MONEY_OF_ONE_TICKET) - countOfManualLotto;
+        validateCount(countOfManualLotto);
+        return getCountOfAllLotto() - countOfManualLotto;
     }
 
     public double calculateYield(final long sum) {
@@ -22,5 +23,15 @@ public class Money {
         if (value < MONEY_OF_ONE_TICKET) {
             throw new IllegalArgumentException("로또를 살 수가 없습니다.");
         }
+    }
+
+    private void validateCount(int count) {
+        if (getCountOfAllLotto() < count) {
+            throw new IllegalArgumentException("구매할 수 있는 로또 장 수를 초과했습니다.");
+        }
+    }
+
+    private int getCountOfAllLotto() {
+        return (int) (value / MONEY_OF_ONE_TICKET);
     }
 }
