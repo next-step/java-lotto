@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
 	public static final int START_LIMIT = 1;
 	public static final int END_LIMIT = 45;
+
 	private final int lottoNumber;
 
 	public LottoNumber(int number) {

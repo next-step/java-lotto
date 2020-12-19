@@ -1,4 +1,4 @@
-package edu.nextstep.lotto.domain;
+package edu.nextstep.lotto.domain.sub;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import edu.nextstep.lotto.domain.sub.LottoNumber;
 
 @DisplayName("LottoNumber: 로또 번호 각각의 원시값을 포장한 클래스")
 class LottoNumberTest {

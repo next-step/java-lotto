@@ -1,4 +1,4 @@
-package edu.nextstep.lotto.domain;
+package edu.nextstep.lotto.domain.sub;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,12 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import edu.nextstep.lotto.domain.sub.LottoRank;
+import edu.nextstep.lotto.domain.LottoGame;
 import edu.nextstep.lotto.util.NumberUtil;
 
-@DisplayName("LottoGame: 구입한 lotto목록이나 당첨번호를 필드로, 당첨통계나 수익률을 계산함.")
-class LottoGameTest {
-	private LottoGame lottoGame;
+@DisplayName("LottoGameResult: 당첨결과나 수익률을 관리하는 클래스.")
+class LottoGameResultTest {
+	private LottoGameResult lottoGameResult;
 
 	@BeforeEach
 	void beforeEach() {
@@ -41,29 +41,26 @@ class LottoGameTest {
 		}
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-		lottoGame = new LottoGame(lottoNumbers, winningNumbers);
-	}
-
-	@DisplayName("생성자: LottoGame 객체를 정상적으로 생성하여 리턴함")
-	@Test
-	void generate() {
-		assertThat(lottoGame)
-			.isNotNull()
-			.isInstanceOf(LottoGame.class)
-			.hasNoNullFieldsOrPropertiesExcept("soldLottos", "winningLotto");
+		lottoGameResult = new LottoGame(lottoNumbers, winningNumbers).getResult();
 	}
 
 	@DisplayName("getResultAsCountingMap: 1,3,4,5등이 각각 몇 개 씩 당첨되었는지 취합하여 map으로 리턴함.")
 	@Test
 	void getResultAsCountingMap() {
-		assertThat(lottoGame.getResultAsCountingMap())
+		assertThat(lottoGameResult.getResultMap())
 			.extractingByKeys(LottoRank.FIRST, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH)
 			.containsExactly(1L, 2L, 3L, 1L);
+	}
+
+	@DisplayName("getSoldLottoCount: 판매된 총 로또의 개수를 구함. lottoGameResultMap의 value를 모두 더해서 리턴함.")
+	@Test
+	void getSoldLottoCount() {
+		assertThat(lottoGameResult.getSoldLottoCount()).isEqualTo(10007L);
 	}
 
 	@DisplayName("getProfitRatio: '상금 / 구매비용'을 소수점 둘째자리까지 구하고 버림하여 리턴함.")
 	@Test
 	void getProfitRatio() {
-		assertThat(lottoGame.getProfitRatio()).hasToString("200.17");
+		assertThat(lottoGameResult.getProfitRatio()).hasToString("200.17");
 	}
 }

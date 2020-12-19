@@ -1,4 +1,4 @@
-package edu.nextstep.lotto.domain;
+package edu.nextstep.lotto.domain.sub;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,8 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import edu.nextstep.lotto.domain.sub.LottoNumbers;
-
 @DisplayName("LottoNumbers: LottoNumber 목록의 일급 콜렉션 클래스")
 class LottoNumbersTest {
 	@DisplayName("생성자: LottoNumbers 객체를 정상적으로 생성하여 리턴함")
@@ -22,8 +20,7 @@ class LottoNumbersTest {
 		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 		assertThat(lottoNumbers)
 			.isNotNull()
-			.isInstanceOf(LottoNumbers.class)
-			.hasNoNullFieldsOrPropertiesExcept("lottoNumbers");
+			.isInstanceOf(LottoNumbers.class);
 	}
 
 	@DisplayName("생성자: 로또 번호가 개수가 지정된 것보다 많거나 적으면 Exception 발생.")

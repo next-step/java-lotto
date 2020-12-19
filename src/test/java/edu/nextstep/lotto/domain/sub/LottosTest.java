@@ -1,4 +1,4 @@
-package edu.nextstep.lotto.domain;
+package edu.nextstep.lotto.domain.sub;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,10 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import edu.nextstep.lotto.domain.sub.Lotto;
-import edu.nextstep.lotto.domain.sub.LottoRank;
-import edu.nextstep.lotto.domain.sub.Lottos;
 
 @DisplayName("Lottos: Lotto 목록의 일급 콜렉션 클래스")
 class LottosTest {
@@ -23,8 +19,7 @@ class LottosTest {
 
 		assertThat(lottos)
 			.isNotNull()
-			.isInstanceOf(Lottos.class)
-			.hasNoNullFieldsOrPropertiesExcept("lottos");
+			.isInstanceOf(Lottos.class);
 	}
 
 	@DisplayName("getResultAsCountingMap: 1,3,4,5등이 각각 몇 개 씩 당첨되었는지 취합하여 map으로 리턴함.")
