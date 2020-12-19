@@ -1,7 +1,5 @@
 package step3.view;
 
-import step3.domain.LottoNumber;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -28,8 +26,8 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public static LottoNumber inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println(BONUS_NUMBER);
-        return LottoNumber.of(sc.nextInt());
+        return sc.nextInt();
     }
 }
