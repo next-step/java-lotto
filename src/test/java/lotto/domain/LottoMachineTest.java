@@ -14,6 +14,6 @@ class LottoMachineTest {
     @ValueSource(ints = {13, 2000000})
     void makeLottoTickets(int count) {
         LottoTickets autoLottoTickets = new LottoMachine(count).makeAutoLottoTickets();
-        assertThat(autoLottoTickets.getLottoTickets()).hasSize(count);
+        assertThat(autoLottoTickets.getCount()).isEqualTo(count);
     }
 }

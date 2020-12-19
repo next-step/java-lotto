@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.result;
+
+import lotto.domain.Rank;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,7 +23,7 @@ public class LottoResult {
         return result.get(rank);
     }
 
-    public long addTotalMoney() {
+    public long sumWinningMoney() {
         return Arrays.stream(Rank.values())
                 .mapToLong(rank -> rank.multiplyMoney(result.get(rank)))
                 .sum();
