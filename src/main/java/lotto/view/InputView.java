@@ -48,7 +48,7 @@ public class InputView {
         return inputCount;
     }
 
-    public static List<String> manualPurchaseLottoNumbers(int count) {
+    public static List<String> manualLottoNumbers(int count) {
         System.out.println(PURCHASE_NUMBERS_MESSAGE);
         List<String> strings = new ArrayList<>();
         while (strings.size() != count) {

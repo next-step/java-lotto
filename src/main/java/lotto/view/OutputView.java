@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
@@ -11,12 +10,12 @@ public class OutputView {
     private static final String WINNING_COUNT_MESSAGE = "%d개 일치 (%d원) - %d개\n";
     private static final String WINNING_COUNT_WITH_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개\n";
     private static final String TOTAL_REWARD_MESSAGE = "총 수익률은 %s입니다.";
+    private static final int ONE_LOTTO_PRICE = 1000;
     private static final StringBuffer STRING_BUFFER = new StringBuffer();
 
-    public static void lottoStatus(LottoGame lottoGame, LottoTickets fixedLottoTickets, LottoTickets randomLottoTickets) {
-        System.out.println(String.format(LOTTO_PURCHASE_QUANTITY_MESSAGE, fixedLottoTickets.lottoTicketCount(), randomLottoTickets.lottoTicketCount()));
-        LottoTickets mixedLottoTickets = lottoGame.generateMixedLottoTickets(fixedLottoTickets, randomLottoTickets);
-        lottoTickets(mixedLottoTickets);
+    public static void lottoStatus(LottoTickets lottoTickets, int price, int manualLottoCount) {
+        System.out.println(String.format(LOTTO_PURCHASE_QUANTITY_MESSAGE, manualLottoCount, (price / ONE_LOTTO_PRICE) - manualLottoCount));
+        lottoTickets(lottoTickets);
     }
 
     public static void LottoEnd(LottoResult lottoResult) {

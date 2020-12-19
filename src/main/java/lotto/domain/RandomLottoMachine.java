@@ -28,8 +28,8 @@ public class RandomLottoMachine implements LottoMachine{
                 .collect(Collectors.toList());
     }
 
-    public RandomLottoMachine(int calculateRemainingMoney) {
-        count = purchaseQuantity(calculateRemainingMoney);
+    public RandomLottoMachine(int price, int manualLottoCount) {
+        count = purchaseQuantity(calculateRemainingMoney(price, manualLottoCount));
     }
 
     @Override
@@ -85,5 +85,9 @@ public class RandomLottoMachine implements LottoMachine{
             throw new IllegalArgumentException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
         }
         return new LottoNumber(number);
+    }
+
+    private int calculateRemainingMoney(int price, int manualPurchaseLottoCount) {
+        return price - (manualPurchaseLottoCount * 1000);
     }
 }

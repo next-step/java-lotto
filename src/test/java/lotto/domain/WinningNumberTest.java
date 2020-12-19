@@ -19,7 +19,7 @@ public class WinningNumberTest {
         LottoTicket lottoTicket = new LottoTicket(Arrays.stream(lottoNumbers.split(", "))
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList()));
-        RandomLottoMachine lottoMachine = new RandomLottoMachine(1000);
+        RandomLottoMachine lottoMachine = new RandomLottoMachine(1000, 0);
         WinningNumber winningNumber = lottoMachine.winningNumber(winningNumbers);
 
         //when

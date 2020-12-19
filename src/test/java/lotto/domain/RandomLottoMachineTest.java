@@ -16,7 +16,7 @@ public class RandomLottoMachineTest {
 
     @BeforeAll
     static void beforeAll() {
-        randomLottoMachine = new RandomLottoMachine(1000);
+        randomLottoMachine = new RandomLottoMachine(1000, 0);
     }
 
 
@@ -58,7 +58,7 @@ public class RandomLottoMachineTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void manyGenerate(int price, int expected) {
         //when
-        LottoMachine lottoMachine = new RandomLottoMachine(price);
+        LottoMachine lottoMachine = new RandomLottoMachine(price, 0);
         LottoTickets lottoTickets = lottoMachine.generates();
 
         //then

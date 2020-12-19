@@ -1,28 +1,33 @@
 package lotto.domain;
 
 public class LottoGame {
+    private final LottoTickets lottoTickets;
+
+    public LottoGame(FixedLottoMachine fixed, RandomLottoMachine random) {
+        lottoTickets = mixedLottoTickets(generateLottoTickets(fixed), generateLottoTickets(random));
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
+    }
 
     public LottoTickets generateLottoTickets(LottoMachine lottoMachine) {
         return lottoMachine.generates();
     }
 
-    public LottoTickets generateMixedLottoTickets(LottoTickets fixedLottoTickets, LottoTickets randomLottoTickets) {
+    public LottoTickets mixedLottoTickets(LottoTickets fixedLottoTickets, LottoTickets randomLottoTickets) {
         return fixedLottoTickets.union(randomLottoTickets);
     }
 
-    public WinningNumber generateWinningNumber(String inputNumber, RandomLottoMachine randomLottoMachine) {
-        return randomLottoMachine.winningNumber(inputNumber);
+    public WinningNumber generateWinningNumber(String inputNumber, FixedLottoMachine fixedLottoMachine) {
+        return fixedLottoMachine.generateWinningLotto(inputNumber);
     }
 
     public LottoNumber generateBonusBall(int inputNumber, RandomLottoMachine randomLottoMachine, WinningNumber winningNumber) {
         return randomLottoMachine.CreateBonusBall(inputNumber, winningNumber);
     }
 
-    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
+    public LottoResult result(WinningNumber winningNumber, LottoNumber bonusBall) {
         return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
-    }
-
-    public int calculateRemainingMoney(int price, int manualPurchaseLottoCount) {
-        return price - (manualPurchaseLottoCount * 1000);
     }
 }

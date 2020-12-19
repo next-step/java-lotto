@@ -29,6 +29,10 @@ public class FixedLottoMachine implements LottoMachine {
                 .collect(Collectors.toList()));
     }
 
+    public WinningNumber generateWinningLotto(String inputNumber) {
+        return new WinningNumber(stringToLottoTicket(inputNumber).getLottoTicket());
+    }
+
     private LottoTicket stringToLottoTicket(String manualPurchaseLottoNumber) {
         this.manualPurchaseLottoNumber = manualPurchaseLottoNumber;
         LottoTicket generate = generate();
