@@ -1,5 +1,9 @@
 package calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class InputNumber {
 
     private final String input;
@@ -15,4 +19,10 @@ public class InputNumber {
     public int getNumbers() {
         return Integer.parseInt(input);
     }
+
+    public List<Integer> split() {
+        return Arrays.stream(input.split("[,:]")).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
+    }
+
+
 }
