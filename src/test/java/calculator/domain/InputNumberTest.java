@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +15,7 @@ class InputNumberTest {
 
 
         //When
-        List<Integer> split = inputNumber.split();
+        List<Integer> split = inputNumber.getNumbers();
 
         //Then
         Assertions.assertThat(split).contains(1);

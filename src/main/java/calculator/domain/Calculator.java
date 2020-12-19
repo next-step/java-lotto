@@ -17,7 +17,7 @@ public class Calculator {
         if (inputNumber.isOneLength()) {
             return inputNumber.getNumber();
         }
-        return addition(inputNumber.split());
+        return addition(inputNumber.getNumbers());
     }
 
     private int addition(List<Integer> split) {
