@@ -28,12 +28,4 @@ public class LottoTest {
             new Lotto(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    void invalid_번호중복체크() {
-        lottoNumbers.add(LottoNumber.of(5));
-        assertThatThrownBy(() -> {
-            new Lotto(lottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
 }
