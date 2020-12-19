@@ -7,6 +7,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(String number) {
+        this.number = Integer.parseInt(number);
+    }
+
     public int isgreaterThan(LottoNumber operand) {
         return this.number - operand.number;
     }

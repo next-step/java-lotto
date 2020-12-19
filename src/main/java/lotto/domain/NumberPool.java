@@ -19,6 +19,6 @@ public class NumberPool {
 
     public List<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numbers);
-        return new ArrayList<LottoNumber>(numbers.subList(FROM_INDEX, TO_INDEX));
+        return new ArrayList<>(numbers.subList(FROM_INDEX, TO_INDEX));
     }
 }
