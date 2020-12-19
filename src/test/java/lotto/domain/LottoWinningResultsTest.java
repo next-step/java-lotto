@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +17,9 @@ public class LottoWinningResultsTest {
     void two_win_lotto_test() {
         LottoWinningResults winningResults = new LottoWinningResults();
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(1,2,4,6,9,10)),
-                new Lotto(Arrays.asList(7,11,14,15,35,38)),
-                new Lotto(Arrays.asList(2,7,10,13,34,41))
+                new Lotto(Stream.of(1,2,4,6,9,10).map(LottoNumber::new).collect(Collectors.toList())),
+                new Lotto(Stream.of(7,11,14,15,35,38).map(LottoNumber::new).collect(Collectors.toList())),
+                new Lotto(Stream.of(2,7,10,13,34,41).map(LottoNumber::new).collect(Collectors.toList()))
         );
         String winNumbers = "1, 2, 5, 10, 34, 43";
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers);
@@ -29,8 +31,8 @@ public class LottoWinningResultsTest {
     void zero_win_lotto_test() {
         LottoWinningResults winningResults = new LottoWinningResults();
         List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(3,4,22,36,39,45)),
-                new Lotto(Arrays.asList(7,11,14,15,35,38))
+                new Lotto(Stream.of(3,4,22,36,39,45).map(LottoNumber::new).collect(Collectors.toList())),
+                new Lotto(Stream.of(7,11,14,15,35,38).map(LottoNumber::new).collect(Collectors.toList()))
         );
         String winNumbers = "1, 2, 5, 10, 34, 43";
         Map<WinType, Integer> results = winningResults.checkWinLotto(lottos, winNumbers);
