@@ -8,11 +8,11 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public enum LottoPrizePolicy {
-	THREE_MATCH_PRIZE(3, 5_000, false),
-	FOUR_MATCH_PRIZE(4, 50_000, false),
-	FIVE_MATCH_PRIZE(5, 1_500_000, false),
+	FIFTH(3, 5_000, false),
+	FOURTH(4, 50_000, false),
+	THIRD(5, 1_500_000, false),
 	SECOND(5, 30_000_000, true),
-	SIX_MATCH_PRIZE(6, 2_000_000_000, false);
+	FIRST(6, 2_000_000_000, false);
 
 	private int matchCount;
 
@@ -56,7 +56,7 @@ public enum LottoPrizePolicy {
 		LottoPrizePolicy minMatchPolicy = Arrays.asList(LottoPrizePolicy.values())
 				.stream()
 				.min(Comparator.comparing(LottoPrizePolicy::getMatchCount))
-				.orElse(THREE_MATCH_PRIZE);
+				.orElse(FIFTH);
 		return minMatchPolicy.getMatchCount();
 	}
 
