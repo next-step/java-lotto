@@ -47,10 +47,8 @@ public class ResultView {
         System.out.println("--------");
 
         for (Rank rank : Rank.values()) {
-            int rankMatchCount = rank.getCountOfMatch();
-            boolean rankMatchBonus = rank.getBonus();
             List<Rank> filterRanks = lottoResult.getRanks().stream()
-                    .filter(r -> r.getCountOfMatch() == rankMatchCount && r.getBonus() == rankMatchBonus)
+                    .filter(r -> r == rank)
                     .collect(Collectors.toList());
 
             System.out.println(rank.getMessage() + " (" + rank.getWinningMoney() + ")원- " + filterRanks.size() + "개");
