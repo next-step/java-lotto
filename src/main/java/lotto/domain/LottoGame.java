@@ -1,20 +1,33 @@
 package lotto.domain;
 
 public class LottoGame {
+    private final LottoTickets lottoTickets;
 
-    public LottoTickets generateLottoTickets(int price, LottoMachine lottoMachine) {
-        return lottoMachine.generate(price);
+    public LottoGame(FixedLottoMachine fixed, RandomLottoMachine random) {
+        lottoTickets = mixedLottoTickets(generateLottoTickets(fixed), generateLottoTickets(random));
     }
 
-    public WinningNumber generateWinningNumber(String inputNumber, LottoMachine lottoMachine) {
-        return lottoMachine.winningNumber(inputNumber);
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 
-    public LottoNumber generateBonusBall(int inputNumber, LottoMachine lottoMachine, WinningNumber winningNumber) {
-        return lottoMachine.bonusBall(inputNumber, winningNumber);
+    public LottoTickets generateLottoTickets(LottoMachine lottoMachine) {
+        return lottoMachine.generates();
     }
 
-    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
+    public LottoTickets mixedLottoTickets(LottoTickets fixedLottoTickets, LottoTickets randomLottoTickets) {
+        return fixedLottoTickets.union(randomLottoTickets);
+    }
+
+    public WinningNumber generateWinningNumber(String inputNumber, FixedLottoMachine fixedLottoMachine) {
+        return fixedLottoMachine.generateWinningLotto(inputNumber);
+    }
+
+    public LottoNumber generateBonusBall(int inputNumber, RandomLottoMachine randomLottoMachine, WinningNumber winningNumber) {
+        return randomLottoMachine.CreateBonusBall(inputNumber, winningNumber);
+    }
+
+    public LottoResult result(WinningNumber winningNumber, LottoNumber bonusBall) {
         return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
     }
 }

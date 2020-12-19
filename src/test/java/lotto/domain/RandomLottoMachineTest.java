@@ -11,12 +11,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoMachineTest {
-    private static LottoMachine lottoMachine;
+public class RandomLottoMachineTest {
+    private static RandomLottoMachine randomLottoMachine;
 
     @BeforeAll
     static void beforeAll() {
-        lottoMachine = new LottoMachine();
+        randomLottoMachine = new RandomLottoMachine(1000, 0);
     }
 
 
@@ -25,7 +25,7 @@ public class LottoMachineTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void buyLottos(int price, int expected) throws Exception {
         //when
-        int purchaseQuantity = lottoMachine.purchaseQuantity(price);
+        int purchaseQuantity = randomLottoMachine.purchaseQuantity(price);
 
         //then
         assertEquals(expected, purchaseQuantity);
@@ -39,15 +39,15 @@ public class LottoMachineTest {
 
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoMachine.purchaseQuantity(price))
-                .withMessageMatching("1000원 이상의 금액을 입력해야합니다.");
+                .isThrownBy(() -> randomLottoMachine.purchaseQuantity(price))
+                .withMessageMatching("자동 로또를 발급하기 위한 최소 금액은 1000원 입니다.");
     }
 
     @Test
     @DisplayName("6개의 로또 번호를 가지는 로또 티켓 한장 생성")
     public void generate() {
         //when
-        LottoTicket lottoTicket = lottoMachine.generate();
+        LottoTicket lottoTicket = randomLottoMachine.generate();
 
         //then
         Assertions.assertEquals(6, lottoTicket.numberCount());
@@ -58,7 +58,8 @@ public class LottoMachineTest {
     @CsvSource(value = {"10000,10","15000,15","1000,1"})
     public void manyGenerate(int price, int expected) {
         //when
-        LottoTickets lottoTickets = lottoMachine.generate(price);
+        LottoMachine lottoMachine = new RandomLottoMachine(price, 0);
+        LottoTickets lottoTickets = lottoMachine.generates();
 
         //then
         Assertions.assertEquals(expected, lottoTickets.lottoTicketCount());
@@ -71,7 +72,7 @@ public class LottoMachineTest {
         String winningNumberString = "1, 2, 3, 4, 5, 6";
 
         //when
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumberString);
+        WinningNumber winningNumber = randomLottoMachine.winningNumber(winningNumberString);
 
         //then
         for (int i = 1; i <= 6; i++) {
@@ -85,11 +86,11 @@ public class LottoMachineTest {
     public void bonusBallIsNotContains(int bonusNumber) {
         //given
         String winningNumberString = "1, 2, 3, 4, 5, 6";
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumberString);
+        WinningNumber winningNumber = randomLottoMachine.winningNumber(winningNumberString);
 
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoMachine.bonusBall(bonusNumber, winningNumber))
+                .isThrownBy(() -> randomLottoMachine.CreateBonusBall(bonusNumber, winningNumber))
                 .withMessageMatching("보너스 볼은 당첨 번호들이랑 달라야 합니다.");
     }
 }
