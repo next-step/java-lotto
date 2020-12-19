@@ -32,4 +32,13 @@ public class InputView {
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
+
+	public static int inputBonusNumber() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+		String input = scanner.nextLine();
+		if (!Pattern.matches("^[0-9]+$", input)) {
+			return inputBonusNumber();
+		}
+		return Integer.parseInt(input);
+	}
 }
