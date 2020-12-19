@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.domain.Calculator;
+import calculator.domain.InputNumber;
 import calculator.view.InputView;
 
 public class CalculatorApplication {
@@ -7,7 +9,10 @@ public class CalculatorApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
 
-        String inputString = inputView.inputStringAdditionCalculator();
-        System.out.println("입력하신 문자열: " + inputString);
+        InputNumber inputString = new InputNumber(inputView.inputStringAdditionCalculator());
+
+        Calculator calculator = new Calculator(inputString);
+
+
     }
 }
