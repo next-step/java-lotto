@@ -5,15 +5,10 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 public class YieldCalculator {
-    private final int purchaseAmount;
-    private final Map<WinType, Integer> winResultMap;
-
-    public YieldCalculator(int purchaseAmount, Map<WinType, Integer> winResultMap) {
-        this.purchaseAmount = purchaseAmount;
-        this.winResultMap = winResultMap;
+    private YieldCalculator() {
     }
 
-    public String calculateYield() {
+    public static String calculateYield(int purchaseAmount, Map<WinType, Integer> winResultMap) {
         int totalWinnings = winResultMap.entrySet().stream()
                 .mapToInt(it -> it.getKey().getWinnings() * it.getValue())
                 .sum();

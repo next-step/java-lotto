@@ -1,30 +1,22 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final String NUMBER_DELIMITER = ", ";
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        numbers.sort(LottoNumber::isgreaterThan);
+        numbers.sort(LottoNumber::isGreaterThan);
         this.numbers = numbers;
     }
 
-    public Lotto(String winNumbers) {
-        String[] split = winNumbers.split(NUMBER_DELIMITER);
-        this.numbers = Arrays.stream(split)
-                .map(it -> {
-                    try {
-                        return new LottoNumber(Integer.parseInt(it));
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("숫자만 입력해 주세요.");
-                    }
-                }).sorted(LottoNumber::isgreaterThan)
+    public static Lotto of(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new)
                 .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
     }
 
     public int matchNumberCnt(Lotto winningLotto) {
@@ -37,11 +29,8 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
-    @Override
-    public String toString() {
-        return numbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(NUMBER_DELIMITER));
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 
     @Override

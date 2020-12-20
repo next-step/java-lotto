@@ -10,6 +10,7 @@ public enum WinType {
     SIX_MATCH(6, 2000000000, "6개 일치 (2000000000원)"),
     NO_MATCH(0, 0, "일치하는 수 없음");
 
+    private static final int MATCH_CNT_FIVE = 5;
     private final int matchCnt;
     private final int winnings;
     private final String desc;
@@ -21,7 +22,7 @@ public enum WinType {
     }
 
     public static WinType valueOf(int cnt, boolean matchBonus) {
-        if(cnt == 5 && matchBonus) {
+        if (cnt == MATCH_CNT_FIVE && matchBonus) {
             return BONUMS_MATCH;
         }
 
@@ -29,7 +30,6 @@ public enum WinType {
                 .filter(v -> v.matchCnt == cnt)
                 .findFirst()
                 .orElse(WinType.NO_MATCH);
-
     }
 
     public int getWinnings() {

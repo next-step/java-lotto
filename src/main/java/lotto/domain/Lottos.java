@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
-    private final NumberPool numberPool = new NumberPool();
 
     public Lottos() {
     }
@@ -16,7 +15,7 @@ public class Lottos {
 
     public Lottos generateLottos(int buyCnt) {
         for (int i = 0; i < buyCnt; i++) {
-            Lotto lotto = new Lotto(numberPool.getLottoNumbers());
+            Lotto lotto = new Lotto(AutoLottoNumberPool.getLottoNumbers());
             lottos.add(lotto);
         }
         return new Lottos(lottos);
@@ -29,17 +28,4 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("");
-        lottos.forEach(numbers ->
-                sb.append("[")
-                        .append(numbers.toString())
-                        .append("]")
-                        .append("\n"));
-        return sb.toString();
-    }
-
-
 }

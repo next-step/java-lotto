@@ -15,8 +15,7 @@ public class YieldCalculatorTest {
         int purchaseAmount = 3000;
         Map<WinType, Integer> winResultMap = new EnumMap<>(WinType.class);
         winResultMap.put(WinType.THREE_MATCH, 1);
-        YieldCalculator calculator = new YieldCalculator(purchaseAmount, winResultMap);
-        String yield = calculator.calculateYield();
+        String yield = YieldCalculator.calculateYield(purchaseAmount, winResultMap);
 
         assertThat(yield).isEqualTo("1.66");
     }
@@ -26,8 +25,7 @@ public class YieldCalculatorTest {
     void yield_zero_test() {
         int purchaseAmount = 3000;
         Map<WinType, Integer> winResultMap = new EnumMap<>(WinType.class);
-        YieldCalculator calculator = new YieldCalculator(purchaseAmount, winResultMap);
-        String yield = calculator.calculateYield();
+        String yield = YieldCalculator.calculateYield(purchaseAmount, winResultMap);
 
         assertThat(yield).isEqualTo("0");
     }

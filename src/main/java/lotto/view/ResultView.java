@@ -1,7 +1,10 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.WinResult;
+
+import java.util.stream.Collectors;
 
 public class ResultView {
     private ResultView() {
@@ -9,7 +12,13 @@ public class ResultView {
 
     public static void showPurchasedLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        System.out.println(lottos.toString());
+        lottos.getLottos().forEach(lotto -> {
+            String numbers = lotto.getNumbers()
+                    .stream()
+                    .map(LottoNumber::toString)
+                    .collect(Collectors.joining(", "));
+            System.out.println("[" + numbers + "]");
+        });
     }
 
     public static void showResults(WinResult winResults) {

@@ -8,6 +8,7 @@ public class WinResult {
     private final Lotto winNumbers;
     private final LottoNumber bonusNumber;
     private final Map<WinType, Integer> winResultMap;
+    private final WinningResultReader winningResultReader = new WinningResultReader();
 
     public WinResult(int purchasedMoney, Lottos purchasedLotto, Lotto winNumbers, LottoNumber bonusNumber) {
         this.purchasedMoney = purchasedMoney;
@@ -23,12 +24,10 @@ public class WinResult {
     }
 
     public String getYeild() {
-        YieldCalculator yieldCalculator = new YieldCalculator(purchasedMoney, getResults());
-        return yieldCalculator.calculateYield();
+        return YieldCalculator.calculateYield(purchasedMoney, winResultMap);
     }
 
     private Map<WinType, Integer> getWinResultMap() {
-        WinningChecker winningChecker = new WinningChecker();
-        return winningChecker.checkWinLotto(purchasedLotto, winNumbers, bonusNumber);
+        return winningResultReader.getWinningResult(purchasedLotto, winNumbers, bonusNumber);
     }
 }

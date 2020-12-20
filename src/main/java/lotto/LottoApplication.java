@@ -14,8 +14,8 @@ public class LottoApplication {
         ResultView.showPurchasedLottos(purchasedLotto);
 
         Lotto winNumbers = new Lotto(InputView.requestLastWinNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
-      
+        LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumber());
+
         WinResult winResults = new WinResult(money, purchasedLotto, winNumbers, bonusNumber);
 
         ResultView.showResults(winResults);

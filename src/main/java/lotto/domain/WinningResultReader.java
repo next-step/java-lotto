@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class WinningChecker {
+public class WinningResultReader {
     private static final int ZERO = 0;
     private final EnumMap<WinType, Integer> results = new EnumMap<>(WinType.class);
 
-    public WinningChecker() {
+    public WinningResultReader() {
         Arrays.stream(WinType.values())
                 .forEach(it -> results.put(it, ZERO));
     }
 
-    public Map<WinType, Integer> checkWinLotto(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+    public Map<WinType, Integer> getWinningResult(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchCount = lotto.matchNumberCnt(winLotto);
             boolean matchBonus = lotto.haNumber(bonusNumber);
@@ -24,9 +24,10 @@ public class WinningChecker {
     }
 
     private int getWinCount(int matchCnt, boolean matchBonus) {
-        if (results.get(WinType.valueOf(matchCnt, matchBonus)) == null) {
+        Integer winCount = results.get(WinType.valueOf(matchCnt, matchBonus));
+        if (winCount == null) {
             return ZERO;
         }
-        return results.get(WinType.valueOf(matchCnt, matchBonus));
+        return winCount;
     }
 }
