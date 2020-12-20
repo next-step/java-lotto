@@ -50,11 +50,15 @@ public class Lottos {
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto) {
-        LottoResult result = new LottoResult(size * LOTTO_PRICE);
+        LottoResult result = new LottoResult(getPurchaseAmount());
         for (Lotto lotto : lottos) {
             LottoRanking ranking = winningLotto.matching(lotto);
             result.addRanking(ranking);
         }
         return result;
+    }
+
+    public int getPurchaseAmount() {
+        return size * LOTTO_PRICE;
     }
 }

@@ -42,19 +42,7 @@ public class LottosTest {
         Lottos lottos = Lottos.purchase(money);
         // then
         assertThat(lottos.size()).isEqualTo(10);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1000})
-    @DisplayName("로또 금액이 0이거나 0보다 적은 경우 예외")
-    void testInvalidPurchaseMoney(int money) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(money));
-    }
-
-    @Test
-    @DisplayName("로또 금액이 1000원 단위가 아닐 경우 예외")
-    void testPurchaseLottoWithoutUnit() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(500));
+        assertThat(lottos.getPurchaseAmount()).isEqualTo(money);
     }
 
     @Test
@@ -68,5 +56,19 @@ public class LottosTest {
         LottoResult result = lottos.getLottoResult(winningLotto);
         // then
         assertThat(result.getYield()).isEqualTo(5.0);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1000})
+    @DisplayName("로또 금액이 0이거나 0보다 적은 경우 예외")
+    void testInvalidPurchaseMoney(int money) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(money));
+    }
+
+    @Test
+    @DisplayName("로또 금액이 1000원 단위가 아닐 경우 예외")
+    void testPurchaseLottoWithoutUnit() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(500));
     }
 }
