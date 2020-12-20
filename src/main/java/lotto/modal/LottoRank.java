@@ -13,18 +13,10 @@ public enum LottoRank {
 
 	private final int matchCount;
 	private final int winnerPrize;
-	private final String resultMsg;
 
 	LottoRank(int matchCount, int winnerPrize) {
-		String tempResultMsg;
 		this.matchCount = matchCount;
 		this.winnerPrize = winnerPrize;
-		tempResultMsg = matchCount + "개 일치 (" + winnerPrize + "원)-";
-
-		if (winnerPrize == 30000000) {
-			tempResultMsg = matchCount + "개 일치, 보너스 볼 일치 (" + winnerPrize + "원)-";
-		}
-		this.resultMsg = tempResultMsg;
 	}
 
 	public static LottoRank getRank(int matchCount, boolean hasBonusNumber) {
@@ -39,12 +31,11 @@ public enum LottoRank {
 		return winnerPrize;
 	}
 
-	public String getRankMessage() {
-		return resultMsg;
+	public int getMatchCount() {
+		return matchCount;
 	}
 
 	private boolean isMatch(int matchCount) {
-
 		return this.matchCount == matchCount;
 	}
 }

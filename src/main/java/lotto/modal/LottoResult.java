@@ -17,8 +17,15 @@ public class LottoResult {
 	public List<String> rankCount() {
 		return Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> !lottoRank.equals(LottoRank.NOTHING_RANK))
-			.map(lottoRank -> lottoRank.getRankMessage() + getRankCount(lottoRank) + PRINT_LOTTO_RANK_COUNT_MSG)
+			.map(lottoRank -> getRankMessage(lottoRank) + getRankCount(lottoRank) + PRINT_LOTTO_RANK_COUNT_MSG)
 			.collect(Collectors.toList());
+	}
+
+	private String getRankMessage(LottoRank lottoRank) {
+		if (lottoRank.equals(LottoRank.SECOND_RANK)) {
+			return lottoRank.getMatchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.getWinnerPrize() + "원)-";
+		}
+		return lottoRank.getMatchCount() + "개 일치(" + lottoRank.getWinnerPrize() + "원)-";
 	}
 
 	private long getRankCount(LottoRank target) {
