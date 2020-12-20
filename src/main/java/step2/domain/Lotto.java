@@ -24,4 +24,9 @@ public class Lotto {
 	public int getMatchCount() {
 		return this.winningNumbers.size();
 	}
+
+	@Override
+	public String toString() {
+		return this.numbers.getSortedList().toString();
+	}
 }

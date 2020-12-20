@@ -1,6 +1,6 @@
 package step2.domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;
@@ -36,7 +36,11 @@ public class LottoNumber {
 
 	@Override
 	public String toString() {
-		return "" + number;
+		return String.valueOf(number);
 	}
 
+	@Override
+	public int compareTo(final LottoNumber compareNumber) {
+		return number - compareNumber.number;
+	}
 }

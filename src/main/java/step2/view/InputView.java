@@ -1,6 +1,9 @@
 package step2.view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import step2.domain.Lotto;
 
 public class InputView {
 

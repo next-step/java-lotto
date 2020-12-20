@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,4 +64,9 @@ public class LottoNumbers {
 		return this.numbers.toString();
 	}
 
+	public List<LottoNumber> getSortedList() {
+		return this.numbers.stream()
+			.sorted()
+			.collect(Collectors.toList());
+	}
 }
