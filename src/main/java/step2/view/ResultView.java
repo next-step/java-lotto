@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.Rank;
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumbers;
 
@@ -42,7 +42,7 @@ public class ResultView {
         printMessage("[" + result + "]");
     }
 
-    public static void printWinLotto(Lotto lotto, List<Integer> targetNumbers, Integer bonusNumber, Request request) {
+    public static void printWinLotto(Lotto lotto, List<Integer> targetNumbers, Integer bonusNumber, LottoRequest lottoRequest) {
         printMessage("당첨 통계");
         printMessage("--------");
         Map<Rank, List<Rank>> result = lotto.getWinLotto(targetNumbers, bonusNumber);
@@ -51,7 +51,7 @@ public class ResultView {
                 .stream()
                 .sorted(Comparator.comparingLong(entry -> entry.getKey().getWinningMoney()))
                 .forEach((entry) -> printResult(entry.getKey(), entry.getKey().getCountOfMatch(), entry.getKey().getWinningMoney(), entry.getValue().size()));
-        printMargin(request, result);
+        printMargin(lottoRequest, result);
     }
 
     private static void setRankData(Map<Rank, List<Rank>> result) {
@@ -60,14 +60,14 @@ public class ResultView {
                 .forEach(rank -> result.computeIfAbsent(rank, r -> new ArrayList<>()));
     }
 
-    private static void printMargin(Request request, Map<Rank, List<Rank>> rank) {
+    private static void printMargin(LottoRequest lottoRequest, Map<Rank, List<Rank>> rank) {
         double income = rank.values()
                 .stream()
                 .flatMap(List::stream)
                 .mapToLong(Rank::getWinningMoney)
                 .sum();
 
-        double incomeRate = (income / request.getPurchaseMoney()) * 100;
+        double incomeRate = (income / lottoRequest.getPurchaseMoney()) * 100;
         printMessage("총 수익률은 " + incomeRate + "입니다.");
     }
 }

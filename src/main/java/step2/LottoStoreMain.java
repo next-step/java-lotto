@@ -1,6 +1,6 @@
 package step2;
 
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 import step2.domain.lotto.Lotto;
 import step2.view.InputView;
 
@@ -11,12 +11,12 @@ import static step2.view.ResultView.*;
 public class LottoStoreMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Request request = inputView.putPurchaseMoney();
+        LottoRequest lottoRequest = inputView.putPurchaseMoney();
 
-        Lotto lotto = new Lotto(request);
+        Lotto lotto = new Lotto(lottoRequest);
         printLotto(lotto.getLotto(), ", ");
 
         List<Integer> targetNumber = inputView.putTargetNumber();
-        printWinLotto(lotto, targetNumber, inputView.putBonusNumber(targetNumber), request);
+        printWinLotto(lotto, targetNumber, inputView.putBonusNumber(targetNumber), lottoRequest);
     }
 }

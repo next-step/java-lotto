@@ -1,9 +1,9 @@
 package step2.domain;
 
-public class Request {
+public class LottoRequest {
     private int purchaseMoney;
 
-    public Request(int purchaseMoney) {
+    public LottoRequest(int purchaseMoney) {
         this.purchaseMoney = purchaseMoney;
     }
 

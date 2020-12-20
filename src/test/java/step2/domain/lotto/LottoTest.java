@@ -1,7 +1,7 @@
 package step2.domain.lotto;
 
 import step2.domain.Rank;
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class LottoTest {
         mockList.add(new LottoNumbers(asList(1, 10, 20, 33, 39, 41))); // 3개 일치
         mockList.add(new LottoNumbers(asList(1, 10, 22, 33, 39, 41))); // 2개 일치
 
-        lotto = new Lotto(new Request(5000)) {
+        lotto = new Lotto(new LottoRequest(5000)) {
             @Override
             List<Rank> getLottoRanks(List<Integer> targetNumbers, Integer bonusNumber) {
                 return mockList.stream()

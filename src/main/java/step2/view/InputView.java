@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,19 +15,19 @@ public class InputView {
         System.out.println(message);
     }
 
-    public Request putPurchaseMoney() {
+    public LottoRequest putPurchaseMoney() {
         printMessage("구입금액을 입력해 주세요.");
-        Request request = null;
+        LottoRequest lottoRequest = null;
         try {
             int money = scanner.nextInt();
             checkMoney(money);
-            request = new Request(money);
+            lottoRequest = new LottoRequest(money);
             scanner.nextLine();
         } catch (Exception e) {
             scanner.close();
             throw new IllegalArgumentException("1,000원 이상의 금액을 숫자로 입력하세요", e);
         }
-        return request;
+        return lottoRequest;
     }
 
     public List<Integer> putTargetNumber() {

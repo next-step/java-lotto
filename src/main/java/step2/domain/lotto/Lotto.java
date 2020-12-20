@@ -1,7 +1,7 @@
 package step2.domain.lotto;
 
 import step2.domain.Rank;
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ public class Lotto {
     private List<LottoNumbers> lotto = new ArrayList<>();
     private static final int LOTTO_PRICE = 1000;
 
-    public Lotto(Request request) {
-        this.buyLotto(request);
+    public Lotto(LottoRequest lottoRequest) {
+        this.buyLotto(lottoRequest);
     }
 
-    private void buyLotto(Request request) {
-        int totalQuantity = request.getPurchaseMoney() / LOTTO_PRICE;
+    private void buyLotto(LottoRequest lottoRequest) {
+        int totalQuantity = lottoRequest.getPurchaseMoney() / LOTTO_PRICE;
         for (int quantity = 0; quantity < totalQuantity; quantity++) {
             lotto.add(new LottoNumbers(provideLottoNumbers()));
         }
