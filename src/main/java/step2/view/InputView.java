@@ -54,6 +54,8 @@ public class InputView {
 			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
 		}
 
+		System.out.println();
+
 		return winNumbers;
 	}
 }
