@@ -5,6 +5,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,13 +22,13 @@ public class ResultView {
     }
 
     public static void printNumbersForLottos(Lottos lottos) {
-        lottos.getLottos()
+        lottos.getLottoNumbersOfLottos()
                 .forEach(ResultView::printLottoNumbers);
         System.out.println();
     }
 
-    private static void printLottoNumbers(Lotto lotto) {
-        String convertedNumbers = lotto.getLottoNumbers()
+    private static void printLottoNumbers(List<Integer> lottoNumbers) {
+        String convertedNumbers = lottoNumbers
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));

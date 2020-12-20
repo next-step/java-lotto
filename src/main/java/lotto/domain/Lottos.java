@@ -32,8 +32,10 @@ public class Lottos {
         return new LottoResult(findLottoResultType(winningLotto, bonusLottoNumber));
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<List<Integer>> getLottoNumbersOfLottos() {
+        return lottos.stream()
+                .map(Lotto::getLottoNumbers)
+                .collect(Collectors.toList());
     }
 
     private List<LottoRank> findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
@@ -29,28 +28,28 @@ public enum LottoRank {
         return Arrays.asList(FIFTH, FORTH, THIRD, SECOND, FIRST);
     }
 
-    private static List<LottoRank> bonusTypes() {
+    private List<LottoRank> bonusTypes() {
         return Arrays.stream(LottoRank.values())
                 .filter(LottoRank::isBonus)
                 .collect(Collectors.toList());
     }
 
-    private static boolean isBonusType(int matchedCount) {
+    private boolean isBonusType(int matchedCount) {
         return bonusTypes().stream()
                 .map(LottoRank::getMatchedCount)
                 .anyMatch(value -> value == matchedCount);
     }
 
-    private static Predicate<LottoRank> getMatchingExpression(int matchedCount, boolean isBonus) {
+    private boolean isMatched(int matchedCount, boolean isBonus) {
         if (isBonusType(matchedCount)) {
-            return lottoResultType -> lottoResultType.matchedCount == matchedCount && lottoResultType.isBonus == isBonus;
+            return this.matchedCount == matchedCount && this.isBonus == isBonus;
         }
-        return lottoResultType -> lottoResultType.matchedCount == matchedCount;
+        return this.matchedCount == matchedCount;
     }
 
     static LottoRank findByMatchedCountAndBonus(int matchedCount, boolean isBonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(getMatchingExpression(matchedCount, isBonus))
+                .filter(lottoRank -> lottoRank.isMatched(matchedCount, isBonus))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("로또가 매칭된 숫자의 범위를 넘어섰습니다."));
     }
