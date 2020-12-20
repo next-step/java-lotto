@@ -3,6 +3,8 @@ package com.ssabae.nextstep.lotto.domain.lotto;
 import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
 import com.ssabae.nextstep.lotto.application.LottoResultDto;
+import com.ssabae.nextstep.lotto.application.LottoResultDto.LottoResultDtoBuilder;
+import com.ssabae.nextstep.lotto.domain.LottoResult;
 import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
 import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.WinningNumber;
@@ -38,7 +40,11 @@ public class LottoTicketMachine {
     }
 
     public LottoResultDto calculateYield(LottoTickets lottoTickets, WinningNumber winningNumber) {
-        return this.analyzer.convertToDto(lottoTickets, winningNumber);
+        LottoResult result = this.analyzer.analyze(lottoTickets, winningNumber);
+        return LottoResultDtoBuilder.builder()
+                .matchCountMap(result.getMatchCountMap())
+                .earnRate(result.calculateEarnRate())
+                .build();
     }
 
     private void validate(Money amount) {

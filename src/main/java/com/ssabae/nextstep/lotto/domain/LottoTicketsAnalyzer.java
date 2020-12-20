@@ -2,12 +2,9 @@ package com.ssabae.nextstep.lotto.domain;
 
 import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
-import com.ssabae.nextstep.lotto.Constant;
-import com.ssabae.nextstep.lotto.application.LottoResultDto;
-import com.ssabae.nextstep.lotto.application.LottoResultDto.LottoResultDtoBuilder;
+import com.ssabae.nextstep.lotto.domain.LottoResult.LottoResultBuilder;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,20 +16,16 @@ import java.util.Map;
  */
 public class LottoTicketsAnalyzer {
 
-    public LottoResultDto convertToDto(LottoTickets lottoTickets, WinningNumber winningNumber) {
+    public LottoResult analyze(LottoTickets lottoTickets, WinningNumber winningNumber) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
 
         Map<Integer, Integer> matchCountMap = mappingCountToMatchCount(lottoTicketList, winningNumber);
-        int countOfTicket = lottoTicketList.size();
 
-        Money spendMoney = LOTTO_TICKET_PRICE.times(countOfTicket);
+        Money spendMoney = LOTTO_TICKET_PRICE.times(lottoTicketList.size());
         Money earnMoney = calculateEarnMoney(matchCountMap);
-        float earnRate = calculateEarnRate(spendMoney, earnMoney);
 
-        return LottoResultDtoBuilder.builder()
+        return LottoResultBuilder.builder()
                 .matchCountMap(matchCountMap)
-                .countOfTicket(countOfTicket)
-                .earnRate(earnRate)
                 .spendMoney(spendMoney)
                 .earnMoney(earnMoney)
                 .build();
@@ -65,8 +58,5 @@ public class LottoTicketsAnalyzer {
         return earnMoney;
     }
 
-    private float calculateEarnRate(Money spendMoney, Money earnMoney) {
-        return (float) earnMoney.amount.longValue() / spendMoney.amount.longValue();
-    }
 
 }
