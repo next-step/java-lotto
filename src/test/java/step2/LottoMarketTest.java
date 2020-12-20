@@ -15,36 +15,14 @@ public class LottoMarketTest {
     );
 
     @Test
-    public void 구매_갯수_테스트(){
-        Lottos lottos = LottoMarket.purchase(Money.of(14000), new LottoNumberGenerateStrategy() {
+    public void 구매테스트(){
+        Lotto lotto = LottoMarket.purchase(new LottoNumberGenerateStrategy() {
             @Override
             public LottoNumbers generateLottoNumbers() {
                 return NUMBERS;
             }
         });
-        assertThat(lottos.getCount()).isEqualTo(14);
-    }
-
-    @Test
-    public void 구매_갯수_테스트2(){
-        Lottos lottos = LottoMarket.purchase(Money.of(999), new LottoNumberGenerateStrategy() {
-            @Override
-            public LottoNumbers generateLottoNumbers() {
-                return NUMBERS;
-            }
-        });
-        assertThat(lottos.getCount()).isEqualTo(0);
-    }
-
-    @Test
-    public void 구매_갯수_테스트3(){
-        Lottos lottos = LottoMarket.purchase(Money.of(1000), new LottoNumberGenerateStrategy() {
-            @Override
-            public LottoNumbers generateLottoNumbers() {
-                return NUMBERS;
-            }
-        });
-        assertThat(lottos.getCount()).isEqualTo(1);
+        assertThat(lotto).isEqualTo(new Lotto(NUMBERS));
     }
 
 }

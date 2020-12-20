@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinNumbers {
+public class InputNumbers {
     private static final String SPLITTER = ", ";
     private List<LottoNumber> numbers;
 
-    public WinNumbers(String text) {
+    public InputNumbers(String text) {
         List<LottoNumber> numbers = Arrays.asList(text.split(SPLITTER))
                 .stream()
                 .map(Integer::parseInt)
