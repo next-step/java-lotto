@@ -1,19 +1,23 @@
 package step2;
 
-import step2.domain.LottoGame;
-import step2.domain.Request;
+import step2.domain.LottoRequest;
+import step2.domain.lotto.Lotto;
 import step2.view.InputView;
+
+import java.util.List;
 
 import static step2.view.ResultView.*;
 
 public class LottoStoreMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Request request = inputView.putPurchaseMoney();
+        LottoRequest lottoRequest = inputView.putPurchaseMoney();
 
-        LottoGame lottoGame = new LottoGame(request);
-        printLotto(lottoGame.getLotto(), ", ");
+        Lotto lotto = new Lotto(lottoRequest);
+        printLotto(lotto.getLotto(), ", ");
 
-        printWinLotto(lottoGame, inputView.putTargetNumber(), request);
+        List<Integer> targetNumber = inputView.putTargetNumber();
+        Integer bonusNumber = inputView.putBonusNumber(targetNumber);
+        printWinLotto(lotto.getWinLotto(targetNumber, bonusNumber), lottoRequest);
     }
 }

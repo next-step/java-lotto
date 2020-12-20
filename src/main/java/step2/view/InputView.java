@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.Request;
+import step2.domain.LottoRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,19 +15,19 @@ public class InputView {
         System.out.println(message);
     }
 
-    public Request putPurchaseMoney() {
+    public LottoRequest putPurchaseMoney() {
         printMessage("구입금액을 입력해 주세요.");
-        Request request = null;
+        LottoRequest lottoRequest = null;
         try {
             int money = scanner.nextInt();
             checkMoney(money);
-            request = new Request(money);
+            lottoRequest = new LottoRequest(money);
             scanner.nextLine();
         } catch (Exception e) {
             scanner.close();
             throw new IllegalArgumentException("1,000원 이상의 금액을 숫자로 입력하세요", e);
         }
-        return request;
+        return lottoRequest;
     }
 
     public List<Integer> putTargetNumber() {
@@ -37,13 +37,35 @@ public class InputView {
             String input = scanner.nextLine();
             String[] numbers = input.split(",");
             target = getTargetNumbers(numbers);
-            checkNumber(target);
+            checkNumber(target, 6);
         } catch (Exception e) {
+            scanner.close();
             throw new IllegalArgumentException("지난주 당첨 번호를 6개 입력하세요", e);
+        }
+        return target;
+    }
+
+    public Integer putBonusNumber(List<Integer> targetNumber) {
+        printMessage("보너스 볼을 입력해 주세요.");
+        List<Integer> bonus = null;
+        Integer bonusNumber = 0;
+        try {
+            bonus = getTargetNumbers(scanner.nextLine());
+            checkNumber(bonus, 1);
+            bonusNumber = bonus.get(0);
+            checkDuplicatedNumber(bonusNumber, targetNumber);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("당첨 번호를 제외한 숫자를 입력하세요", e);
         } finally {
             scanner.close();
         }
-        return target;
+        return bonusNumber;
+    }
+
+    private void checkDuplicatedNumber(Integer bonusNumber, List<Integer> targetNumber) {
+        if (targetNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호와 중복됩니다");
+        }
     }
 
     private void checkMoney(int money) {
@@ -52,13 +74,13 @@ public class InputView {
         }
     }
 
-    private void checkNumber(List<Integer> target) {
-        if (target.size() != 6) {
-            throw new IllegalArgumentException("6개의 숫자가 필요합니다");
+    private void checkNumber(List<Integer> target, int length) {
+        if (target.size() != length) {
+            throw new IllegalArgumentException("1 ~ 45 범위의 " + length + "개의 숫자가 필요합니다");
         }
     }
 
-    private List<Integer> getTargetNumbers(String[] numbers) {
+    private List<Integer> getTargetNumbers(String... numbers) {
         return Arrays.stream(numbers)
                 .distinct()
                 .mapToInt(t -> Integer.parseInt(t.trim()))

@@ -11,12 +11,13 @@ public class RankTest {
     @Test
     @DisplayName("당첨 순위 테스트")
     void rankTest() {
-        assertThat(getRank(6)).isEqualTo(FIRST);
-        assertThat(getRank(5)).isEqualTo(THIRD);
-        assertThat(getRank(4)).isEqualTo(FOURTH);
-        assertThat(getRank(3)).isEqualTo(FIFTH);
-        assertThat(getRank(2)).isEqualTo(MISS);
-        assertThat(getRank(1)).isEqualTo(MISS);
-        assertThat(getRank(0)).isEqualTo(MISS);
+        assertThat(getRank(6, false)).isEqualTo(FIRST);
+        assertThat(getRank(5, true)).isEqualTo(SECOND);
+        assertThat(getRank(5, false)).isEqualTo(THIRD);
+        assertThat(getRank(4, true)).isEqualTo(FOURTH);
+        assertThat(getRank(3, false)).isEqualTo(FIFTH);
+        assertThat(getRank(2, true)).isEqualTo(MISS);
+        assertThat(getRank(1, false)).isEqualTo(MISS);
+        assertThat(getRank(0, true)).isEqualTo(MISS);
     }
 }
