@@ -20,10 +20,15 @@ public class InputView {
     public static LottoNumber scanBonusRepeat(Set<LottoNumber> winningNumbers) {
         while(true) {
             LottoNumber bonus = scanBonus();
-            if (!winningNumbers.contains(bonus)) {
+            if (validBonusNumber(winningNumbers, bonus)) {
                 return bonus;
             }
+            System.out.println("당첨 번호와 보너스 볼의 번호가 중복됩니다. 다시 입력해주세요.");
         }
+    }
+
+    private static boolean validBonusNumber(Set<LottoNumber> winningNumbers, LottoNumber bonus) {
+        return !winningNumbers.contains(bonus);
     }
 
     private static LottoNumber scanBonus() {

@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class LottoResult {
     private static final int INITIAL_COUNT = 0;
+    private static final int DEFAULT_TOTAL_REWARD = 0;
 
     private final Map<Rank, Integer> rankCounts = new HashMap<>();
     private final int buyAmount;
@@ -29,7 +30,7 @@ public class LottoResult {
                         (entry) -> entry.getKey().getWinningMoney() * entry.getValue()
                 )
                 .reduce(Integer::sum)
-                .orElse(0);
+                .orElse(DEFAULT_TOTAL_REWARD);
     }
 
     public int getRankCount(Rank rank) {
