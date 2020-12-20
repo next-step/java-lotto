@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +22,19 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Lottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        this.lottos = new ArrayList<Lotto>() {{
+            addAll(manualLottos);
+            addAll(autoLottos);
+        }};
+    }
+
     public int getCount() {
         return this.lottos.size();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public WinResults getWinResults(LottoNumbers answer, LottoNumber bonusNumber) {
