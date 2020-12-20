@@ -15,7 +15,8 @@ public class Numbers {
     public static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
     private final List<Integer> numbers;
 
-    public Numbers(String[] inputs) {
+    public Numbers(StringSplitor stringSplitor) {
+        String[] inputs = stringSplitor.splitSeparator();
         validateNumbers(inputs);
         numbers = mapNumbers(inputs);
         Collections.unmodifiableList(numbers);
@@ -29,6 +30,7 @@ public class Numbers {
 
     private int parseNumber(String input) {
         try {
+            System.out.println(input);
             int num = Integer.parseInt(input);
             ValidateUtils.validateNegativeNumber(num);
             return num;

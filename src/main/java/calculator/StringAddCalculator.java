@@ -6,28 +6,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    public static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
-    public static final String SPLIT_SEPARATOR = ",:|";
+    private static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
+    private static final int DEFAULT_NUM = 0;
 
     public static int splitAndSum(String input) {
         if (ValidateUtils.isEmpty(input)) {
-            return 0;
+            return DEFAULT_NUM;
         }
 
         if (ValidateUtils.isEmptySeparator(input)) {
             return pasreNumber(input);
         }
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        String[] inputs;
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            inputs = m.group(2).split(customDelimiter);
-        } else {
-            inputs = input.split(SPLIT_SEPARATOR);
-        }
-
-        Numbers numbers = new Numbers(inputs);
+        Numbers numbers = new Numbers(new StringSplitor(input));
         return numbers.sum();
     }
 

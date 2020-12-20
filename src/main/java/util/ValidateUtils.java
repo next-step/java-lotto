@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class ValidateUtils {
     private static final String COMMA_SEPARATOR = ",";
     private static final String COLON_SEPARATOR = ":";
     private static final String VERTICAL_BAR_SEPARATOR = "|";
     private static final String EMPTY_SEPARATOR = "";
+    private static final String CUSTOM_MATCHER = "//(.)\n(.*)";
     private static final String VALID_NEGATIVE_NUMBER_MESSAGE = "음수는 입력 불가능합니다.";
+    private static final int MIN_NUM = 0;
+    private static final int EMPTY_NUM = 0;
 
     public static boolean isEmpty(String input) {
         return input == null || input.isEmpty();
@@ -26,11 +28,11 @@ public class ValidateUtils {
             return false;
         }
 
-        return countSeparators(input) == 0;
+        return countSeparators(input) == EMPTY_NUM;
     }
 
     public static boolean isMatchCustomSeparator(String input) {
-        return Pattern.matches("//(.)\n(.*)", input);
+        return Pattern.matches(CUSTOM_MATCHER, input);
     }
 
     private static int countSeparators(String input) {
@@ -47,7 +49,7 @@ public class ValidateUtils {
     }
 
     public static void validateNegativeNumber(int num) {
-        if (num < 0) {
+        if (num < MIN_NUM) {
             throw new IllegalArgumentException(VALID_NEGATIVE_NUMBER_MESSAGE);
         }
     }

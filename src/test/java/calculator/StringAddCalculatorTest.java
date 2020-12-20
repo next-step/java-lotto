@@ -41,7 +41,7 @@ public class StringAddCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("숫자 컴마(,),콜론(:),수직선(|) 구분자 입력할 경우 숫자의 합을 반환")
-    @CsvSource(value = {"1,2:3#6","3,4:5,6|7:2#27", "1:2,5|8#16"}, delimiter = '#')
+    @CsvSource(value = {"1,2:3#6","3,4:5,6,7:2#27", "1:2,5:8#16"}, delimiter = '#')
     void splitAndSumByMulti(String input, int expected) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
