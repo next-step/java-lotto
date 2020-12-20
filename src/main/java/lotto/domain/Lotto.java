@@ -43,8 +43,8 @@ public class Lotto {
 
     public int countOfMatch(Lotto lotto) {
         long count = lottoNumbers.stream()
-                                 .filter(lotto::contains)
-                                 .count();
+                .filter(lotto::contains)
+                .count();
         return Math.toIntExact(count);
     }
 
