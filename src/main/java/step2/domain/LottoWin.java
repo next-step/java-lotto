@@ -5,9 +5,9 @@ import java.util.Comparator;
 
 public enum LottoWin implements Comparator<LottoWin> {
 
-	MATCH_0(0, 5000),
-	MATCH_1(1, 5000),
-	MATCH_2(2, 5000),
+	MATCH_0(0, 0),
+	MATCH_1(1, 0),
+	MATCH_2(2, 0),
 	MATCH_3(3, 5000),
 	MATCH_4(4, 50000),
 	MATCH_5(5, 1500000),
@@ -41,7 +41,8 @@ public enum LottoWin implements Comparator<LottoWin> {
 	}
 
 	public boolean isNotWin() {
-		return this.matchCount < 3;
+		final int WINNABLE_MATCH_COUNT = 3;
+		return this.matchCount < WINNABLE_MATCH_COUNT;
 	}
 
 	@Override
