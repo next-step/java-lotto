@@ -33,7 +33,7 @@ public class InputNumber {
 
     private String[] splitInput() {
         Matcher m = Pattern.compile("//(.)\\n(.*)")
-            .matcher("//;\n1;2;3");
+            .matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);

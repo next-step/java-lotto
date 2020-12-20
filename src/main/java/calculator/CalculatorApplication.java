@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.domain.Calculator;
+import calculator.domain.StringAddCalculator;
 import calculator.domain.InputNumber;
 import calculator.view.InputView;
 
@@ -11,7 +11,7 @@ public class CalculatorApplication {
 
         InputNumber inputString = new InputNumber(inputView.inputStringAdditionCalculator());
 
-        Calculator calculator = new Calculator(inputString);
+        StringAddCalculator calculator = new StringAddCalculator(inputString);
 
 
     }
