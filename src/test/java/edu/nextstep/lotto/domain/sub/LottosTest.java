@@ -3,6 +3,7 @@ package edu.nextstep.lotto.domain.sub;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,9 +55,9 @@ class LottosTest {
 			// 미당첨
 			Arrays.asList(1, 2, 7, 8, 9, 10)
 		));
-		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-		assertThat(lottos.getResultAsCountingMap(winningLotto, new LottoNumber(7)))
+		assertThat(lottos.getResultAsCountingMap(new WinningLotto(winningLottoNumbers, 7)))
 			.extractingByKeys(
 				LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD,
 				LottoRank.FOURTH, LottoRank.FIFTH, LottoRank.NONE)

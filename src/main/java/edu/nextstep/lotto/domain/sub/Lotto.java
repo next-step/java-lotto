@@ -12,9 +12,9 @@ public class Lotto {
 		this.lottoNumbers = new LottoNumbers(numbers);
 	}
 
-	public Optional<LottoRank> getRank(Lotto winningLotto, LottoNumber bonusNumber) {
+	public Optional<LottoRank> getRank(WinningLotto winningLotto) {
 		return LottoRank.valueOf(
-			lottoNumbers.countBySame(winningLotto.lottoNumbers),
-			lottoNumbers.contains(bonusNumber));
+			lottoNumbers.countBySame(winningLotto.getFirstRankLotto().lottoNumbers),
+			lottoNumbers.contains(winningLotto.getBonusNumber()));
 	}
 }

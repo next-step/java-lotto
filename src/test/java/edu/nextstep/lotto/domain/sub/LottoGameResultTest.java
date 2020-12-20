@@ -45,7 +45,7 @@ class LottoGameResultTest {
 		}
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-		lottoGameResult = LottoGame.createOf(lottoNumbers, winningNumbers, 7).getResult();
+		lottoGameResult = new LottoGame(lottoNumbers, winningNumbers, 7).getResult();
 	}
 
 	@DisplayName("getResultAsCountingMap: 1,3,4,5등이 각각 몇 개 씩 당첨되었는지 취합하여 map으로 리턴함.")

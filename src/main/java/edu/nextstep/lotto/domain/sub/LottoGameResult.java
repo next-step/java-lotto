@@ -6,8 +6,8 @@ import java.util.Map;
 public class LottoGameResult {
 	private final Map<LottoRank, Long> lottoGameResultMap;
 
-	public LottoGameResult(Lottos soldLottos, Lotto winningLotto, LottoNumber bonusNumber) {
-		this.lottoGameResultMap = soldLottos.getResultAsCountingMap(winningLotto, bonusNumber);
+	public LottoGameResult(Lottos soldLottos, WinningLotto winningLotto) {
+		this.lottoGameResultMap = soldLottos.getResultAsCountingMap(winningLotto);
 	}
 
 	public BigDecimal getProfitRatio() {

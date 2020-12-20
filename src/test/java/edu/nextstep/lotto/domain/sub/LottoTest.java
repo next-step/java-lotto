@@ -34,8 +34,8 @@ class LottoTest {
 	}, delimiter = ':')
 	void getRank(String numbers, String winningNumbers, int bonusNumber, LottoRank expected) {
 		Lotto lotto = new Lotto(splitToIntList(numbers));
-		Lotto winningLotto = new Lotto(splitToIntList(winningNumbers));
-		assertThat(lotto.getRank(winningLotto, new LottoNumber(bonusNumber)))
+		WinningLotto winningLotto = new WinningLotto(splitToIntList(winningNumbers), bonusNumber);
+		assertThat(lotto.getRank(winningLotto))
 			.isPresent()
 			.hasValue(expected);
 	}
