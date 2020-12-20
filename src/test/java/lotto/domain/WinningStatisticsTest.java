@@ -18,7 +18,6 @@ public class WinningStatisticsTest {
 
 	LottoWallet lottoWallet;
 
-
 	@BeforeEach
 	void setUp() {
 		LottoNumber lottoNumber1 = new LottoNumber(1);

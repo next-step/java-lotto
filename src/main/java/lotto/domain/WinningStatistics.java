@@ -28,7 +28,8 @@ public class WinningStatistics {
 
 	public BigDecimal getWinningSummary() {
 		int ticketCount = prizeResult.size();
-		int revenue = prizeResult.stream().mapToInt(prize -> prize.getReward()).sum();
+		int revenue = prizeResult.stream()
+			.mapToInt(prize -> prize.getReward()).sum();
 		Double buyPrice = Double.valueOf(ticketCount * LottoTickets.getLottoTicketPrice());
 		return parseWinningSummaryFormat(revenue / buyPrice);
 	}
