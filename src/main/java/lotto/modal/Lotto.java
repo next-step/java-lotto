@@ -33,7 +33,7 @@ public class Lotto {
 		validationLottoNumbers(inputStr);
 
 		return inputStr.stream()
-			.map(s -> new LottoNumber(s))
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 	}
 
