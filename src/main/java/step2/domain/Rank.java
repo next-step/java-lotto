@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.domain.dto.LottoResultDto;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +16,10 @@ public enum Rank {
     private long countOfMatch;
     private int winningMoney;
 
+    // 새로운 인스턴스를 생성하지 않도록 캐싱 전략 적용
+    private static final List<Rank> RANKS_WITHOUT_THIRD = new ArrayList<>(asList(FIRST, SECOND, FOURTH, FIFTH));
+    private static final List<Rank> RANKS_WITHOUT_SECOND = new ArrayList<>(asList(FIRST, THIRD, FOURTH, FIFTH));
+
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
@@ -31,22 +33,17 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank getRank(LottoResultDto lottoResultDto) {
-        return rebuildRanksForBonusNumber(lottoResultDto).stream()
-                .filter(rank -> rank.getCountOfMatch() == lottoResultDto.getCountOfMatch())
+    public static Rank getRank(long countOfMatch, boolean answerOfIncludedBonusNumber) {
+        return getRanksByBonusNumber(answerOfIncludedBonusNumber).stream()
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(MISS); // Optional 이용
     }
 
-    private static List<Rank> rebuildRanksForBonusNumber(LottoResultDto lottoResultDto) {
-        List<Rank> ranks = new ArrayList<>(asList(Rank.values()));
-
-        // 보너스 숫자 여부로 순위를 재가공 한다
-       if (lottoResultDto.isIncludedBonusNumber()) {
-            ranks.remove(THIRD); // 보너스 숫자를 가졌으면, 번호 5개일치 상황때 2등이 된다
-            return ranks;
+    private static List<Rank> getRanksByBonusNumber(boolean answerOfIncludedBonusNumber) {
+        if (answerOfIncludedBonusNumber) {
+            return RANKS_WITHOUT_THIRD; // 보너스 숫자를 가졌으면, 번호 5개일치 상황때 2등이 된다
         }
-        ranks.remove(SECOND); // 보너스 숫자를 안 가졌으면, 번호 5개일치 상황때 3등이 된다
-        return ranks;
+        return RANKS_WITHOUT_SECOND; // 보너스 숫자를 안 가졌으면, 번호 5개일치 상황때 3등이 된다
     }
 }
