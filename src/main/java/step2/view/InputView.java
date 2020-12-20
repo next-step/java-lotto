@@ -1,9 +1,7 @@
 package step2.view;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
-
-import step2.domain.Lotto;
 
 public class InputView {
 
@@ -38,4 +36,24 @@ public class InputView {
 		}
 	}
 
+	public Integer[] inputWinNumbers() {
+		final String WIN_NUMBERS_DELIMITER = ", ";
+		final String messageOfInputWinNumbers = "지난 주 당첨 번호를 입력해 주세요";
+		Integer[] winNumbers;
+
+		System.out.println(messageOfInputWinNumbers);
+
+		final String input = scanner.nextLine();
+
+		try {
+			winNumbers = Arrays.stream(input.split(WIN_NUMBERS_DELIMITER))
+				.mapToInt(Integer::parseInt)
+				.boxed()
+				.toArray(Integer[]::new);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+		}
+
+		return winNumbers;
+	}
 }

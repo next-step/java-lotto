@@ -1,6 +1,9 @@
 package step2.controller;
 
+import step2.domain.LottoMachine;
+import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
+import step2.domain.LottoResults;
 import step2.domain.Lottos;
 import step2.view.InputView;
 import step2.view.OutputView;
@@ -17,8 +20,14 @@ public class LottoRunner {
 
 	public void start() {
 		LottoPrice lottoPrice = new LottoPrice(inputView.inputPurchasePrice());
-		Lottos lottos = new Lottos(lottoPrice);
+		Lottos lottos = LottoMachine.issue(lottoPrice);
 		outputView.printLottos(lottos.getLottos());
+
+		LottoNumbers winLottoNumbers = new LottoNumbers(inputView.inputWinNumbers());
+		LottoResults lottoResults = lottos.result(winLottoNumbers);
+
+		outputView.printWinResult(lottoResults);
+
 	}
 
 }
