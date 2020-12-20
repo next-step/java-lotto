@@ -39,4 +39,10 @@ public class LottosTest {
     void testInvalidPurchaseMoney(int money) {
         assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(money));
     }
+
+    @Test
+    @DisplayName("로또 금액이 1000원 단위가 아닐 경우 예외")
+    void testPurchaseLottoWithoutUnit() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(500));
+    }
 }
