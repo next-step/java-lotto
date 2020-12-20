@@ -15,6 +15,7 @@ public class LottoApp {
     public static void main(String[] args) {
         int buyAmount = InputView.scanBuyAmount();
         Set<LottoNumber> lottoNumbers = InputView.scanWinningNumbers();
+        LottoNumber bonusNumber = InputView.scanBonusRepeat(lottoNumbers);
 
         LottoCollection lottoCollection = new LottoCollection(buyAmount, new RandomLottoNumbersGenerator());
         LottoResult lottoResult = lottoCollection.getLottoResult(new Lotto(lottoNumbers));

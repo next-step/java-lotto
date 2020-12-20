@@ -17,6 +17,21 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
+    public static LottoNumber scanBonusRepeat(Set<LottoNumber> winningNumbers) {
+        while(true) {
+            LottoNumber bonus = scanBonus();
+            if (!winningNumbers.contains(bonus)) {
+                return bonus;
+            }
+        }
+    }
+
+    private static LottoNumber scanBonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+        return new LottoNumber(Integer.parseInt(input));
+    }
+
     public static Set<LottoNumber> scanWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
