@@ -23,6 +23,7 @@ public class StringAddCalculatorTest {
     @Test
     void parseNum() {
         int result = StringAddCalculator.splitAndSum("10");
+        assertThat(result).isEqualTo(10);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringAddCalculator.splitAndSum("10#");
@@ -33,7 +34,7 @@ public class StringAddCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("숫자 컴마(,) 구분자로 입력할 경우 숫자의 합을 반환")
-    @CsvSource(value = {"1,2:3","3,4,5,6,7:25", "1,2,5:8"}, delimiter = ':')
+    @CsvSource(value = {"1,2:3", "3,4,5,6,7:25", "1,2,5:8"}, delimiter = ':')
     void splitAndSumByComma(String input, int expected) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
@@ -41,7 +42,7 @@ public class StringAddCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("숫자 컴마(,),콜론(:),수직선(|) 구분자 입력할 경우 숫자의 합을 반환")
-    @CsvSource(value = {"1,2:3#6","3,4:5,6,7:2#27", "1:2,5:8#16"}, delimiter = '#')
+    @CsvSource(value = {"1,2:3#6", "3,4:5,6,7:2#27", "1:2,5:8#16"}, delimiter = '#')
     void splitAndSumByMulti(String input, int expected) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
