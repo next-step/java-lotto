@@ -10,8 +10,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import step2.domain.Lotto;
+import step2.domain.LottoMachine;
 import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
+import step2.domain.LottoResult;
+import step2.domain.LottoResults;
+import step2.domain.LottoWin;
 import step2.domain.Lottos;
 
 public class LottoIssuerTest {
@@ -37,7 +41,7 @@ public class LottoIssuerTest {
 	@Test
 	void given_lotto_paid_when_grater_or_equals_than_unit_price_then_issue_lottos() {
 		LottoPrice lottoPrice = new LottoPrice(1900);
-		Lottos lottos = new Lottos(lottoPrice);
+		Lottos lottos = LottoMachine.issue(lottoPrice);
 		assertThat(lottos.size()).isEqualTo(1);
 	}
 
@@ -52,7 +56,8 @@ public class LottoIssuerTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1900=1", "2900=2", "1000=1", "3000=3", "4500=4"}, delimiter = '=')
 	void given_lotto_when_size_then_return_match_count(final int source, final int expected) {
-		assertThat(new Lottos(new LottoPrice(source)).size()).isEqualTo(expected);
+		Lottos lottos = LottoMachine.issue(new LottoPrice(source));
+		assertThat(lottos.size()).isEqualTo(expected);
 	}
 
 	@DisplayName("로또 번호와 당첨 번호에 따라 당첨 갯수 확인")
@@ -75,4 +80,22 @@ public class LottoIssuerTest {
 
 		assertThat(lotto.getMatchCount()).isEqualTo(matchCount);
 	}
+
+	@DisplayName("로또 결과 생성")
+	@Test
+	void given_lotto_results_when_has_same_lotto_win_then_return_true() {
+
+		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
+		final Integer[] winNumbers = { 10, 11, 12, 13, 14, 15 };
+		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
+		Lottos lottos = new Lottos(lotto);
+		lottos.confirmWinning(winNumbers);
+
+		LottoResults lottoResults = new LottoResults(lottos);
+
+		LottoResult lottoResult = new LottoResult(LottoWin.MATCH_0);
+		assertThat(lottoResults.has(lottoResult)).isTrue();
+
+	}
+
 }

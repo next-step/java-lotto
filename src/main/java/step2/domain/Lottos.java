@@ -1,22 +1,18 @@
 package step2.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lottos {
 
 	private final List<Lotto> lottos;
 
-	public Lottos(final LottoPrice lottoPrice) {
-		this.lottos = generate(lottoPrice);
+	public Lottos(final Lotto... lottos) {
+		this(Arrays.asList(lottos));
 	}
 
-	private List<Lotto> generate(final LottoPrice lottoPrice) {
-		List<Lotto> lottos = new ArrayList<>(lottoPrice.getNumberOfPurchasesPerUnitPrice());
-		while (lottos.size() < lottoPrice.getNumberOfPurchasesPerUnitPrice()) {
-			lottos.add(new Lotto(LottoNumberGenerator.generate()));
-		}
-		return lottos;
+	public Lottos(final List<Lotto> lottos) {
+		this.lottos = lottos;
 	}
 
 	public int size() {
@@ -25,5 +21,14 @@ public class Lottos {
 
 	public List<Lotto> getLottos() {
 		return lottos;
+	}
+
+	public LottoResults result(final LottoNumbers winLottoNumbers) {
+		this.lottos.forEach(lotto -> lotto.confirmWinning(winLottoNumbers));
+		return new LottoResults(this);
+	}
+
+	public void confirmWinning(final Integer[] winNumbers) {
+		this.lottos.forEach(lotto -> lotto.confirmWinning(winNumbers));
 	}
 }

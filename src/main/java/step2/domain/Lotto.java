@@ -14,6 +14,10 @@ public class Lotto {
 	}
 
 	public void confirmWinning(final Integer... winNumbers) {
+		this.confirmWinning(new LottoNumbers(winNumbers));
+	}
+
+	public void confirmWinning(final LottoNumbers winNumbers) {
 		this.winningNumbers = this.numbers.getWinningNumbers(winNumbers);
 	}
 
@@ -22,6 +26,9 @@ public class Lotto {
 	}
 
 	public int getMatchCount() {
+		if (this.winningNumbers == null) {
+			throw new RuntimeException("아직 당첨 확인이 안되었습니다.");
+		}
 		return this.winningNumbers.size();
 	}
 
