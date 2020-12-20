@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.Number;
+
 import java.util.*;
 
 public class InputView {
@@ -15,7 +17,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputLastWeeksWinningNumbers() {
+    public static List<Number> inputLastWeeksWinningNumbers() {
         printLastWeeksWinningNumbersMessage();
 
         Scanner scanner = new Scanner(System.in);
@@ -37,10 +39,10 @@ public class InputView {
         System.out.println(LAST_WEEKS_WINNING_NUMBERS_MESSAGE);
     }
 
-    private static List<Integer> parseInts(String[] split) {
-        List<Integer> lastWeeksWinningNumbers = new ArrayList<>();
+    private static List<Number> parseInts(String[] split) {
+        List<Number> lastWeeksWinningNumbers = new ArrayList<>();
         for (String s : split) {
-            lastWeeksWinningNumbers.add(Integer.parseInt(s));
+            lastWeeksWinningNumbers.add(Number.newNumber(Integer.parseInt(s)));
         }
         return lastWeeksWinningNumbers;
     }

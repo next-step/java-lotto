@@ -7,12 +7,10 @@ public class LottoGame {
 
     private final LottoTickets lottoTickets;
     private final LastWinningNumbers lastWeeksWinningNumbers;
-    private final BonusNumber bonusNumber;
 
-    public LottoGame(LottoTickets lottoTickets, LastWinningNumbers lastWeeksWinningNumbers, BonusNumber bonusNumber) {
+    public LottoGame(LottoTickets lottoTickets, LastWinningNumbers lastWeeksWinningNumbers) {
         this.lottoTickets = lottoTickets;
         this.lastWeeksWinningNumbers = lastWeeksWinningNumbers;
-        this.bonusNumber = bonusNumber;
     }
 
     public LottoResult getLottoResult() {
@@ -26,21 +24,11 @@ public class LottoGame {
 
     private void saveCountOfMatch(int lottoTicketIndex, LottoResult lottoResult) {
         int countOfMatch = 0;
-        List<Integer> ticketNumbers = lottoTickets.getLottoTicket(lottoTicketIndex).getTicket();
+        List<Number> ticketNumbers = lottoTickets.getLottoTicket(lottoTicketIndex).getTicket();
 
-        for (Integer lastWeeksWinningNumber : lastWeeksWinningNumbers.getWinningNumbers()) {
-            countOfMatch = sumCountOfMatch(countOfMatch, ticketNumbers, lastWeeksWinningNumber);
-        }
+        countOfMatch = lastWeeksWinningNumbers.sumCountOfMatch(ticketNumbers);
 
-        lottoResult.saveLottoResult(countOfMatch, bonusNumber.isMatchBonus(countOfMatch, ticketNumbers));
-    }
-
-    private int sumCountOfMatch(int countOfMatch, List<Integer> ticketNumbers, Integer lastWeeksWinningNumber) {
-        if (ticketNumbers.contains(lastWeeksWinningNumber)) {
-            countOfMatch++;
-        }
-
-        return countOfMatch;
+        lottoResult.saveLottoResult(countOfMatch, lastWeeksWinningNumbers.isMatchBonus(countOfMatch, ticketNumbers));
     }
 
     @Override

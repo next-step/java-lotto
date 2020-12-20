@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
@@ -50,6 +51,10 @@ public enum Rank {
         }
     }
 
+    public boolean equalsMatchCount(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
@@ -58,7 +63,4 @@ public enum Rank {
         return winningMoney;
     }
 
-    public boolean equalsMatchCount(int countOfMatch) {
-        return this.countOfMatch == countOfMatch;
-    }
 }

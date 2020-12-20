@@ -16,7 +16,7 @@ class LottoTotalNumberUtilsTest {
     @Test
     void 로또_전체_번호_크기() {
         // given
-        Collection<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+        List<Number> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
 
         // when
         int size = lottoTotalNumbers.size();
@@ -29,13 +29,13 @@ class LottoTotalNumberUtilsTest {
     @Test
     void 로또_전체_번호_체크() {
         // given
-        List<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+        List<Number> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
         Collections.sort(lottoTotalNumbers);
 
         // when
-        List<Integer> expected = new ArrayList<>();
+        List<Number> expected = new ArrayList<>();
         for (int i = LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM; i <= LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM; i++) {
-            expected.add(i);
+            expected.add(Number.newNumber(i));
         }
 
         // then

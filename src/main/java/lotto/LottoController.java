@@ -13,10 +13,11 @@ public class LottoController {
         LottoTickets lottoTickets = lottoTicketCreatable.createTickets(purchaseCount);
         OutputView.printTicketList(lottoTickets, purchasePrice);
 
-        LastWinningNumbers lastWeeksWinningNumbers = LastWinningNumbers.newWinningNumbers(InputView.inputLastWeeksWinningNumbers());
-        BonusNumber bonusNumber = BonusNumber.newNumber(InputView.inputBonusNumber());
+        LottoTicket inputLastWeeksWinningNumbers = LottoTicket.newTicket(InputView.inputLastWeeksWinningNumbers());
+        Number bonusNumber = Number.newNumber(InputView.inputBonusNumber());
+        LastWinningNumbers lastWeeksWinningNumbers = LastWinningNumbers.newWinningNumbers(inputLastWeeksWinningNumbers, bonusNumber);
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
+        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
         OutputView.printResult(lottoGame.getLottoResult());
     }
 }

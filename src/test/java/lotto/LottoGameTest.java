@@ -13,7 +13,13 @@ class LottoGameTest {
     @Test
     void 로또_결과를_확인() {
         // given
-        List<Integer> testTicket = Arrays.asList(31, 45, 30, 22, 21, 1);
+        List<Number> testTicket = Arrays.asList(Number.newNumber(31),
+                                                Number.newNumber(45),
+                                                Number.newNumber(30),
+                                                Number.newNumber(22),
+                                                Number.newNumber(21),
+                                                Number.newNumber(1));
+
         LottoTicket testLottoTicket = LottoTicket.newTicket(testTicket);
 
         LottoTicketCreatable lottoTicketCreatable = new LottoTicketCreatable() {
@@ -34,12 +40,19 @@ class LottoGameTest {
         };
 
         LottoTickets lottoTickets = lottoTicketCreatable.createTickets(1);
-        LastWinningNumbers lastWeeksWinningNumbers = LastWinningNumbers.newWinningNumbers(Arrays.asList(1, 31, 35, 22, 5, 6));
-        BonusNumber bonusNumber = BonusNumber.newNumber(5);
 
         // when
-        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
-        LottoGame expectLottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers, bonusNumber);
+        LottoTicket lottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(31),
+                                                                        Number.newNumber(45),
+                                                                        Number.newNumber(30),
+                                                                        Number.newNumber(22),
+                                                                        Number.newNumber(21),
+                                                                        Number.newNumber(6)));
+        Number bonusNumber = Number.newNumber(5);
+        LastWinningNumbers lastWeeksWinningNumbers = LastWinningNumbers.newWinningNumbers(lottoTicket, bonusNumber);
+
+        LottoGame lottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
+        LottoGame expectLottoGame = new LottoGame(lottoTickets, lastWeeksWinningNumbers);
 
         // then
         assertThat(lottoGame).isEqualTo(expectLottoGame);

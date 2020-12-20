@@ -1,52 +1,38 @@
 package lotto;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 class LastWinningNumbersTest {
 
+    @DisplayName(value = "당첨번호가 몇개인지 테스트")
     @Test
-    void 지난주_당첨_번호가_6개가_아니면_예외() {
-        // given
-        List<Integer> lastWinningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+    void sumCountOfMatch() {
+        // when
+        LottoTicket lottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(1),
+                                                                        Number.newNumber(2),
+                                                                        Number.newNumber(3),
+                                                                        Number.newNumber(4),
+                                                                        Number.newNumber(5),
+                                                                        Number.newNumber(6)));
+
+        LottoTicket winningLottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(1),
+                                                                                Number.newNumber(2),
+                                                                                Number.newNumber(3),
+                                                                                Number.newNumber(4),
+                                                                                Number.newNumber(5),
+                                                                                Number.newNumber(6)));
+
+        LastWinningNumbers winningNumbers = LastWinningNumbers.newWinningNumbers(winningLottoTicket, Number.newNumber(7));
 
         // when
-        assertThatThrownBy(() -> {
-            LastWinningNumbers.newWinningNumbers(lastWinningNumbers);
-            // then
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
+        int countOfMatch = winningNumbers.sumCountOfMatch(lottoTicket.getTicket());
 
-    @Test
-    void 지난주_당첨_번호가_중복되면_예외() {
-        // given
-        List<Integer> lastWinningNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
-
-        // when
-        assertThatThrownBy(() -> {
-            LastWinningNumbers.newWinningNumbers(lastWinningNumbers);
-            // then
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName(value = "지난 주 당첨 번호가 45보다 크거나 1보다 작으면 예외")
-    @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    void 지난주_당첨_번호의_범위_체크(int number) {
-        // given
-        List<Integer> lastWinningNumbers = Arrays.asList(1, 2, 3, 4, 5, number);
-
-        // when
-        assertThatThrownBy(() -> {
-            LastWinningNumbers.newWinningNumbers(lastWinningNumbers);
-            // then
-        }).isInstanceOf(IllegalArgumentException.class);
+        // then
+        Assertions.assertThat(countOfMatch).isEqualTo(6);
     }
 }

@@ -17,7 +17,12 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_1개_생성() {
         // when
-        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Number> ticket = Arrays.asList(Number.newNumber(1),
+                                            Number.newNumber(2),
+                                            Number.newNumber(3),
+                                            Number.newNumber(4),
+                                            Number.newNumber(5),
+                                            Number.newNumber(6));
         LottoTicket autoTicket = LottoTicket.newTicket(ticket);
 
         // then
@@ -28,7 +33,12 @@ class LottoTicketTest {
     @Test
     void 티켓_데이터_정확성() {
         // given
-        List<Integer> testTicket = Arrays.asList(31, 45, 30, 22, 21, 1);
+        List<Number> testTicket = Arrays.asList(Number.newNumber(31),
+                                                Number.newNumber(45),
+                                                Number.newNumber(30),
+                                                Number.newNumber(22),
+                                                Number.newNumber(21),
+                                                Number.newNumber(1));
         LottoTicket testLottoTicket = LottoTicket.newTicket(testTicket);
 
         // when
@@ -56,7 +66,13 @@ class LottoTicketTest {
     @Test
     void 로또_번호가_6개가_아니면_예외() {
         // given
-        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<Number> ticket = Arrays.asList(Number.newNumber(1),
+                                            Number.newNumber(2),
+                                            Number.newNumber(3),
+                                            Number.newNumber(4),
+                                            Number.newNumber(5),
+                                            Number.newNumber(6),
+                                            Number.newNumber(7));
 
         // when
         assertThatThrownBy(() -> {
@@ -68,21 +84,12 @@ class LottoTicketTest {
     @Test
     void 로또_번호가_중복되면_예외() {
         // given
-        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, 5);
-
-        // when
-        assertThatThrownBy(() -> {
-            LottoTicket.newTicket(ticket);
-            // then
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName(value = "지난 주 당첨 번호가 45보다 크거나 1보다 작으면 예외")
-    @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    void 지난주_당첨_번호의_범위_체크(int number) {
-        // given
-        List<Integer> ticket = Arrays.asList(1, 2, 3, 4, 5, number);
+        List<Number> ticket = Arrays.asList(Number.newNumber(1),
+                                            Number.newNumber(2),
+                                            Number.newNumber(3),
+                                            Number.newNumber(4),
+                                            Number.newNumber(5),
+                                            Number.newNumber(5));
 
         // when
         assertThatThrownBy(() -> {

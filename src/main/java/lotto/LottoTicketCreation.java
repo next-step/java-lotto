@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,16 +19,16 @@ public class LottoTicketCreation implements LottoTicketCreatable {
 
     @Override
     public LottoTicket createTicket() {
-        List<Integer> ticket = createTicketNumber();
+        List<Number> ticket = createTicketNumber();
         Collections.sort(ticket);
 
         return LottoTicket.newTicket(ticket);
     }
 
-    private List<Integer> createTicketNumber() {
-        List<Integer> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+    private List<Number> createTicketNumber() {
+        List<Number> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
 
-        List<Integer> ticket = new ArrayList<>();
+        List<Number> ticket = new ArrayList<>();
         for (int i = 0; i < LottoTicket.LOTTO_TICKET_SIZE; i++) {
             ticket.add(lottoTotalNumbers.get(i));
         }
