@@ -45,4 +45,17 @@ public class LottosTest {
     void testPurchaseLottoWithoutUnit() {
         assertThatIllegalArgumentException().isThrownBy(() -> Lottos.purchase(500));
     }
+
+    @Test
+    @DisplayName("로또 당첨 결과")
+    void testLottoResult() {
+        // given
+        Lottos lottos = new Lottos(1);
+        lottos.add(Lotto.of("1,2,3,4,5,6"));
+        Lotto winningLotto = Lotto.of("1,2,3,14,15,16");
+        // when
+        LottoResult result = lottos.getLottoResult(winningLotto);
+        // then
+        assertThat(result.getYield()).isEqualTo(5.0);
+    }
 }

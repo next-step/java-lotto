@@ -32,6 +32,7 @@ public class Lotto {
     public int[] toArray() {
         return lottoNumbers.stream()
                 .mapToInt(LottoNumber::getValue)
+                .sorted()
                 .toArray();
     }
 

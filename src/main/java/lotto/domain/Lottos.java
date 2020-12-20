@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -30,11 +31,30 @@ public class Lottos {
     public void fillAutoRemaining() {
         int remain = size - lottos.size();
         for (int i = 0; i < remain; i++) {
-            lottos.add(LottoGenerator.shuffleAndGet());
+            add(LottoGenerator.shuffleAndGet());
         }
     }
 
     public int size() {
         return lottos.size();
+    }
+
+    public void forEachLotto(Consumer<Lotto> lottoConsumer) {
+        for (Lotto lotto : lottos) {
+            lottoConsumer.accept(lotto);
+        }
+    }
+
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
+    public LottoResult getLottoResult(Lotto winningLotto) {
+        LottoResult result = new LottoResult(size * LOTTO_PRICE);
+        for (Lotto lotto : lottos) {
+            LottoRanking ranking = LottoRanking.valueOf(lotto.countOfMatch(winningLotto));
+            result.addRanking(ranking);
+        }
+        return result;
     }
 }
