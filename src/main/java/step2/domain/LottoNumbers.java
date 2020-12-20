@@ -10,8 +10,8 @@ public class LottoNumbers {
 	public static final int MAX_SIZE = 6;
 	private final Set<LottoNumber> numbers;
 
-	public LottoNumbers(final Integer... winNumbers) {
-		this(Arrays.stream(winNumbers)
+	public LottoNumbers(final Integer... numbers) {
+		this(Arrays.stream(numbers)
 			.map(LottoNumber::new)
 			.collect(Collectors.toSet()));
 	}
@@ -22,7 +22,7 @@ public class LottoNumbers {
 	}
 
 	private void validateSize(final Set<LottoNumber> numbers) {
-		if (MAX_SIZE != numbers.size()) {
+		if (MAX_SIZE < numbers.size()) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -39,6 +39,23 @@ public class LottoNumbers {
 		Set<LottoNumber> compareNumbers = new HashSet<>(this.numbers);
 		compareNumbers.retainAll(new LottoNumbers(winNumbers).getNumbers());
 		return new LottoNumbers(compareNumbers);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		final LottoNumbers that = (LottoNumbers)o;
+
+		return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return numbers != null ? numbers.hashCode() : 0;
 	}
 
 	@Override

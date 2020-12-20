@@ -2,6 +2,8 @@ package step2;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,4 +55,24 @@ public class LottoIssuerTest {
 		assertThat(new Lottos(new LottoPrice(source)).size()).isEqualTo(expected);
 	}
 
+	@DisplayName("로또 번호와 당첨 번호에 따라 당첨 갯수 확인")
+	@ParameterizedTest
+	@CsvSource(value = {
+		"1,2,3,4,5,6=6",
+		"1,2,3,4,5,9=5",
+		"1,2,3,4,10,11=4",
+		"1,2,3,9,10,11=3",
+	}, delimiter = '=')
+	void given_lotto_when_confirmWinning_return_win_result(final String winNumbersStr, final int matchCount) {
+		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
+		final Integer[] winNumbers = Arrays.stream(winNumbersStr.split(","))
+			.mapToInt(Integer::parseInt)
+			.boxed()
+			.toArray(Integer[]::new);
+		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
+
+		lotto.confirmWinning(winNumbers);
+
+		assertThat(lotto.getMatchCount()).isEqualTo(matchCount);
+	}
 }

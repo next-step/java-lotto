@@ -6,12 +6,12 @@ public class LottoNumber {
 	public static final int MAX_NUMBER = 45;
 	private final int number;
 
-	public LottoNumber(final int number) {
+	public LottoNumber(final Integer number) {
 		validate(number);
 		this.number = number;
 	}
 
-	private void validate(final int number) {
+	private void validate(final Integer number) {
 		if (number < MIN_NUMBER || number > MAX_NUMBER) {
 			throw new IllegalArgumentException();
 		}
