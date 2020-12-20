@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 import static lotto.view.InputView.*;
@@ -10,11 +9,12 @@ import static lotto.view.ResultView.*;
 public class LottoGame {
 
     public void run() {
-        int purchasedAmount = readPurchasingAmount();
-        printPurchasedLottoSize(purchasedAmount);
-        Lottos lottos = new Lottos(purchasedAmount / Lotto.PRICE);
-        printNumbersForLottos(lottos);
-        LottoResult lottoResult = lottos.retrieveStatistics(readWinningLottoNumbers(), readBonusLottoNumber());
-        printStatisticsForLottos(lottoResult);
+        int totalLottoSize = readTotalPurchasingAmount() / Lotto.PRICE;
+        int manualPurchasingSize = readManualPurchasingSize();
+        int automatedPurchasingSize = totalLottoSize - manualPurchasingSize;
+        Lottos lottos = new Lottos(automatedPurchasingSize, readManualPurchasingLottos(manualPurchasingSize));
+        printPurchasedLottoSize(manualPurchasingSize, automatedPurchasingSize);
+        printNumbersOfPurchasedLottos(lottos);
+        printStatisticsForLottos(lottos.retrieveStatistics(readWinningLottoNumbers(), readBonusLottoNumber()));
     }
 }
