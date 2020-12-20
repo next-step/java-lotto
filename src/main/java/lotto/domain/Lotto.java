@@ -37,4 +37,8 @@ public class Lotto {
         resultLottoNumbers.retainAll(compareLottoNumbers);
         return resultLottoNumbers.size();
     }
+
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

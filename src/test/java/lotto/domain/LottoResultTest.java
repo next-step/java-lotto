@@ -33,10 +33,11 @@ class LottoResultTest {
         lottoList.add(new Lotto(3, 8, 27, 30, 35, 44));
 
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         int buyAmount = 14000;
 
-        lottoResult = new LottoResult(lottoList, winnerLotto, buyAmount);
+        lottoResult = new LottoResult(lottoList, winnerLotto, bonusNumber, buyAmount);
     }
 
     @Test

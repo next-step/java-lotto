@@ -39,11 +39,12 @@ class LottoCollectionTest {
     @DisplayName("당첨 번호와 비교하는 테스트")
     void getSameNumberCountTest() {
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoResult lottoResult = lottoCollection.getLottoResult(winnerLotto);
+        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoResult lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
         assertThat(lottoResult.getSameLottoCount(3)).isEqualTo(1);
 
         winnerLotto = new Lotto(1, 2, 3, 4, 5, 14);
-        lottoResult = lottoCollection.getLottoResult(winnerLotto);
+        lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
         assertThat(lottoResult.getSameLottoCount(4)).isEqualTo(1);
     }
 }

@@ -9,9 +9,15 @@ public class LottoCollection {
 
     private final List<Lotto> lottos;
     private final int buyAmount;
+    private final LottoNumber bonus;
 
     public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator) {
+        this(buyAmount, lottoNumbersGenerator, null);
+    }
+
+    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator, LottoNumber bonus) {
         this.buyAmount = buyAmount;
+        this.bonus = bonus;
         int lottoCount = convertLottoCount(buyAmount);
 
         lottos = IntStream
@@ -20,8 +26,8 @@ public class LottoCollection {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult getLottoResult(Lotto winnerLotto) {
-        return new LottoResult(lottos, winnerLotto, buyAmount);
+    public LottoResult getLottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+        return new LottoResult(lottos, winnerLotto, bonusNumber, buyAmount);
     }
 
     public List<Lotto> getLottos() {
