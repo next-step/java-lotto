@@ -10,13 +10,13 @@ public class LottoCollection {
     private final List<Lotto> lottos;
     private final int buyAmount;
 
-    public LottoCollection(int buyAmount, NumberListGenerator numberListGenerator) {
+    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator) {
         this.buyAmount = buyAmount;
         int lottoCount = convertLottoCount(buyAmount);
 
         lottos = IntStream
                 .range(0, lottoCount)
-                .mapToObj(i -> new Lotto(numberListGenerator.generate()))
+                .mapToObj(i -> new Lotto(lottoNumbersGenerator.generate()))
                 .collect(Collectors.toList());
     }
 

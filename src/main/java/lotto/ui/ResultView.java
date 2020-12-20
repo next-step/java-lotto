@@ -2,16 +2,29 @@ package lotto.ui;
 
 import lotto.domain.LottoCollection;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLottoNumberList(LottoCollection lottoCollection) {
         lottoCollection.getLottos()
                 .stream()
                 .map(Lotto::getSortedNumbers)
-                .forEach(System.out::println);
+                .forEach(ResultView::printLottoNumber);
 
         System.out.println();
+    }
+
+    private static void printLottoNumber(List<LottoNumber> lottoNumbers) {
+        List<String> convertedNumbers = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+
+        System.out.println("[" + String.join(", ", convertedNumbers) + "]");
     }
 
     public static void printStatistics(LottoResult result) {

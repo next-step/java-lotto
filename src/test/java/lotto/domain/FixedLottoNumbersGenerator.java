@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FixedNumberListGenerator implements NumberListGenerator {
+public class FixedLottoNumbersGenerator implements LottoNumbersGenerator {
 
     private final Queue<Set<LottoNumber>> numberList;
 
@@ -17,7 +17,7 @@ public class FixedNumberListGenerator implements NumberListGenerator {
                 .collect(Collectors.toSet());
     }
 
-    public FixedNumberListGenerator() {
+    public FixedLottoNumbersGenerator() {
         numberList = new LinkedList<>();
         numberList.add(convertNumberSet(8, 21, 23, 41, 42, 43));
         numberList.add(convertNumberSet(3, 5, 11, 16, 32, 38));

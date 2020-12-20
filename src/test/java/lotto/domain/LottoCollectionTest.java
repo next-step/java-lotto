@@ -14,18 +14,18 @@ class LottoCollectionTest {
 
     @BeforeEach
     void setUp() {
-        lottoCollection = new LottoCollection(14000, new FixedNumberListGenerator());
+        lottoCollection = new LottoCollection(14000, new FixedLottoNumbersGenerator());
     }
 
     @Test
     @DisplayName("출력을 위한 로또 번호 조회가 제대로 들어가는지 테스트")
     void lottoCollectionTest() {
         List<Lotto> lottoList = lottoCollection.getLottos();
-        assertThat(lottoList.get(0).getNumbers()).isEqualTo(FixedNumberListGenerator.convertNumberSet(8, 21, 23, 41, 42, 43));
-        assertThat(lottoList.get(1).getNumbers()).isEqualTo(FixedNumberListGenerator.convertNumberSet(3, 5, 11, 16, 32, 38));
-        assertThat(lottoList.get(2).getNumbers()).isEqualTo(FixedNumberListGenerator.convertNumberSet(7, 11, 16, 35, 36, 44));
-        assertThat(lottoList.get(8).getNumbers()).isEqualTo(FixedNumberListGenerator.convertNumberSet(1, 3, 5, 14, 22, 45));
-        assertThat(lottoList.get(13).getNumbers()).isEqualTo(FixedNumberListGenerator.convertNumberSet(3, 8, 27, 30, 35, 43));
+        assertThat(lottoList.get(0).getNumbers()).isEqualTo(FixedLottoNumbersGenerator.convertNumberSet(8, 21, 23, 41, 42, 43));
+        assertThat(lottoList.get(1).getNumbers()).isEqualTo(FixedLottoNumbersGenerator.convertNumberSet(3, 5, 11, 16, 32, 38));
+        assertThat(lottoList.get(2).getNumbers()).isEqualTo(FixedLottoNumbersGenerator.convertNumberSet(7, 11, 16, 35, 36, 44));
+        assertThat(lottoList.get(8).getNumbers()).isEqualTo(FixedLottoNumbersGenerator.convertNumberSet(1, 3, 5, 14, 22, 45));
+        assertThat(lottoList.get(13).getNumbers()).isEqualTo(FixedLottoNumbersGenerator.convertNumberSet(3, 8, 27, 30, 35, 43));
     }
 
     @Test
