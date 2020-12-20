@@ -20,21 +20,11 @@ import lotto.domain.WinningStatistics;
  **/
 public class ResultView {
 	private static final BigDecimal ONE = new BigDecimal(1);
-/*
-	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
-
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
-		printWinningStatus(winningStatistics.getPrizeResult());
-		printWinningAverage(winningStatistics.getWinningSummary());
-	}*/
 
 	public static void printWinningStatistics(LottoWallet lottoWallet, WinningLottoTicket winningLottoTicket) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		// WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
 		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());

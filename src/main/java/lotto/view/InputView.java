@@ -15,13 +15,6 @@ import lotto.domain.WinningLottoTicket;
  **/
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
-/*
-	public static LottoTickets requireCash() {
-		System.out.println("구입금액을 입력해 주세요.");
-		int cash = scanner.nextInt();
-		LottoTickets lottoTickets = new LottoTickets(cash);
-		return lottoTickets;
-	}*/
 
 	private static int requireCash() {
 		System.out.println("구입금액을 입력해 주세요.");
