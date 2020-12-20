@@ -42,6 +42,10 @@ public class Lotto {
 		return new Lotto(generateUserLotto(userInputLotto));
 	}
 
+	public boolean isContainNumber(LottoNumber bonusNumber) {
+		return this.lotto.contains(bonusNumber);
+	}
+
 	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
 		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
 		return Lotto.generateManualLotto(Arrays.asList(lottoArray));
