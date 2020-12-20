@@ -30,10 +30,10 @@ public class Lotto {
         return unmodifiableList(lotto);
     }
 
-    public Map<Rank, List<Rank>> getWinLotto(List<Integer> targetNumbers, Integer bonusNumber) {
+    public Map<Rank, Long> getWinLotto(List<Integer> targetNumbers, Integer bonusNumber) {
         return getLottoRanks(targetNumbers, bonusNumber).stream()
                 .filter(r -> r != Rank.MISS)
-                .collect(groupingBy(rank -> rank, toList()));
+                .collect(groupingBy(rank -> rank, counting()));
     }
 
     List<Rank> getLottoRanks(List<Integer> targetNumbers, Integer bonusNumber) {

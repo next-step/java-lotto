@@ -1,7 +1,7 @@
 package step2.domain.lotto;
 
-import step2.domain.Rank;
 import step2.domain.LottoRequest;
+import step2.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class LottoTest {
 
         assertThat(lotto.getWinLotto(target, 7))
                 .containsKeys(FIRST, SECOND, THIRD, FOURTH, FIFTH)
-                .containsValues(asList(FIRST), asList(SECOND), asList(THIRD), asList(FOURTH), asList(FIFTH));
+                .containsValues(1L, 1L, 1L, 1L, 1L);
     }
 
     @Test
