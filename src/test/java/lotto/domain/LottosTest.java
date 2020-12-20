@@ -1,8 +1,14 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,24 +17,51 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("구입한 모든 `Lotto`를 가진 `Lottos`에 대한 테스트")
 class LottosTest {
+    private List<Lotto> manualPurchasingLottos;
+
+    @BeforeEach
+    void init() {
+        manualPurchasingLottos = Arrays.asList(generateLotto(), generateLotto(), generateLotto());
+    }
+
+    private Lotto generateLotto() {
+        return new Lotto(new LottoNumbers());
+    }
 
     @DisplayName("`Lottos` 생성")
     @Test
-    void createLottoGroupTest() {
+    void createLottosTest() {
         // When
-        Lottos lottos = new Lottos(Lottos.MIN_LOTTO_SIZE);
+        Lottos lottos = new Lottos(Lottos.MIN_LOTTO_SIZE, manualPurchasingLottos);
         // Then
         assertThat(lottos).isNotNull();
     }
 
-    @DisplayName("잘못된 사이즈로 생성되는 `Lottos`의 예외 확인")
+    @DisplayName("빈 로또가 전달되었을 때 `Lottos` 생성 예외 확인")
     @Test
-    void checkExceptionWithInvalidLottoSizeTest() {
-        // Given
-        int invalidSize = Lottos.MIN_LOTTO_SIZE - 1;
+    void checkExceptionWithEmptyLottosTest() {
         // When & Then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Lottos(invalidSize)
+                () -> new Lottos(0, new ArrayList<>())
+        );
+    }
+
+    @DisplayName("잘못된 사이즈로 자동 생성된 로또가 전달되었을 때 `Lottos` 생성 예외 확인")
+    @Test
+    void checkExceptionWithInvalidAutomatedLottoSizeTest() {
+        // When & Then
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new Lottos(-1, manualPurchasingLottos)
+        );
+    }
+
+    @DisplayName("수동으로 잘못 생성된 로또가 전달되었을 때 `Lottos` 생성 예외 확인")
+    @ParameterizedTest
+    @NullSource
+    void checkExceptionWithInvalidManualLottosTest(ArrayList<Lotto> manualLottos) {
+        // When & Then
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new Lottos(3, manualLottos)
         );
     }
 
@@ -38,7 +71,7 @@ class LottosTest {
         // Given
         Lotto winningLotto = new Lotto();
         int testLottoSize = 10;
-        Lottos lottos = new Lottos(testLottoSize);
+        Lottos lottos = new Lottos(testLottoSize, manualPurchasingLottos);
         LottoNumber bonusNumber = new LottoNumber(provideBonusNumber(winningLotto));
         // When
         LottoResult lottoResult = lottos.retrieveStatistics(winningLotto, bonusNumber);
