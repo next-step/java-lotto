@@ -1,9 +1,6 @@
 package step4.view;
 
-import step4.domain.Lotto;
-import step4.domain.LottoNumber;
-import step4.domain.LottoResult;
-import step4.domain.Rank;
+import step4.domain.*;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -15,17 +12,21 @@ public class ResultView {
 
     }
 
-    public static void printPurchaseCount(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
-    }
-
     public static void printLottoNumbers(List<Lotto> lottoList) {
+        System.out.println("수동으로 " + getLottoCountByType(lottoList, LottoType.MANUAL) + "장, "
+                        + "자동으로 " + getLottoCountByType(lottoList, LottoType.AUTO) + "개를 구매했습니다.");
+
         for (Lotto lotto : lottoList) {
             System.out.print("[");
             printLoopLottoNumbers(lotto);
             System.out.println("]");
         }
     }
+
+    private static long getLottoCountByType(List<Lotto> lottoList, LottoType lottoType) {
+        return lottoList.stream().filter(lotto -> lotto.getLottoType() == lottoType).count();
+    }
+
     private static void printLoopLottoNumbers(Lotto lotto) {
         Iterator<LottoNumber> iterator = lotto.getLotto().iterator();
 

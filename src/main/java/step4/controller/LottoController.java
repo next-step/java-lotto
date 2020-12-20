@@ -14,10 +14,8 @@ public class LottoController {
         List<String> manualNumbersList = InputView.inputManualNumbersList(manualBuyCount);
 
         LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> buyLottoList = lottoMachine.buyLotto(purchasePrice);
+        List<Lotto> buyLottoList = lottoMachine.buyLotto(purchasePrice, manualNumbersList);
 
-        int purchaseLottoCount = buyLottoList.size();
-        ResultView.printPurchaseCount(purchaseLottoCount);
         ResultView.printLottoNumbers(buyLottoList);
 
         Lotto winningLottoNumbers = new Lotto(InputView.inputWinNumber());

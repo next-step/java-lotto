@@ -33,7 +33,6 @@ public class InputView {
         List<String> manualNumbersList = new ArrayList<>();
 
         sc.nextLine();
-
         for (int i = 0; i < manualBuyCount; i++) {
             manualNumbersList.add(sc.nextLine());
         }
@@ -44,8 +43,6 @@ public class InputView {
     public static String inputWinNumber() {
         System.out.println();
         System.out.println(WIN_NUMBER);
-
-        sc.nextLine();
         return sc.nextLine();
     }
 
