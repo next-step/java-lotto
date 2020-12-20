@@ -46,4 +46,11 @@ public class LottoIssuerTest {
 		assertThat(lotto.getNumbers().size()).isEqualTo(6);
 	}
 
+	@DisplayName("로또 여러 장 발급")
+	@ParameterizedTest
+	@CsvSource(value = {"1900=1", "2900=2", "1000=1", "3000=3", "4500=4"}, delimiter = '=')
+	void given_lotto_when_size_then_return_match_count(final int source, final int expected) {
+		assertThat(new Lottos(new LottoPrice(source)).size()).isEqualTo(expected);
+	}
+
 }
