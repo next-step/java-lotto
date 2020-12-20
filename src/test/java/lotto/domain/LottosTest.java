@@ -10,7 +10,7 @@ public class LottosTest {
     @DisplayName("로또 열개 생성")
     void generateLottos() {
         Lottos lottos = new Lottos();
-        Lottos generateLottos = lottos.generateLottos(10);
+        Lottos generateLottos = lottos.generateAutoLottos(10);
         assertThat(generateLottos.size()).isEqualTo(10);
     }
 }

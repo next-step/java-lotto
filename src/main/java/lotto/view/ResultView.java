@@ -12,7 +12,17 @@ public class ResultView {
 
     public static void showPurchasedLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.getLottos().forEach(lotto -> {
+        printLottos(lottos);
+    }
+
+    public static void showPurchasedLottos(Lottos manualLottos, Lottos autoLottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        printLottos(manualLottos);
+        printLottos(autoLottos);
+    }
+
+    private static void printLottos(Lottos manualLottos) {
+        manualLottos.getLottos().forEach(lotto -> {
             String numbers = lotto.getNumbers()
                     .stream()
                     .map(LottoNumber::toString)

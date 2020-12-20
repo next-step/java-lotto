@@ -13,12 +13,16 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos generateLottos(int buyCnt) {
+    public Lottos generateAutoLottos(int buyCnt) {
         for (int i = 0; i < buyCnt; i++) {
             Lotto lotto = new Lotto(AutoLottoNumberPool.getLottoNumbers());
             lottos.add(lotto);
         }
         return new Lottos(lottos);
+    }
+
+    public Lottos generateManualLottos(List<Lotto> manualLottos) {
+        return new Lottos(manualLottos);
     }
 
     public int size() {
@@ -27,5 +31,10 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public Lottos conbine(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
+        return new Lottos(this.lottos);
     }
 }

@@ -1,15 +1,29 @@
 package lotto.domain;
 
-public class LottoShop {
-    private static final int MINIMUM_AMOUNT = 1000;
-    private static final int LOTTO_PRICE = 1000;
-    private final Lottos lottos = new Lottos();
+import java.util.List;
 
-    public Lottos getLottos(int money) {
-        if (money < MINIMUM_AMOUNT) {
-            throw new NotEnoughLottoPurchaseMoneyException("돈이 부족합니다.");
+public class LottoShop {
+    private static final int LOTTO_PRICE = 1000;
+    public static final int ZERO = 0;
+    private final Lottos lottos = new Lottos();
+    private final int autoLottoCount;
+
+    public LottoShop(int money, int manualLottoCount) {
+        if (money < ZERO || money < manualLottoCount * LOTTO_PRICE) {
+            throw new NotEnoughLottoPurchaseMoneyException("구매금액이 부족합니다.");
         }
-        int buyCnt = money / LOTTO_PRICE;
-        return lottos.generateLottos(buyCnt);
+        this.autoLottoCount = (money / LOTTO_PRICE) - manualLottoCount;
+    }
+
+    public Lottos getAutoLottos() {
+        if (autoLottoCount <= ZERO) {
+            throw new NotEnoughLottoPurchaseMoneyException("구매금액이 부족합니다.");
+        }
+        return lottos.generateAutoLottos(autoLottoCount);
+    }
+
+    public Lottos getManualLottos(List<Lotto> manualLottos) {
+        return lottos.generateManualLottos(manualLottos);
     }
 }
+
