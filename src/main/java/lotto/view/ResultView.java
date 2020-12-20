@@ -59,12 +59,20 @@ public class ResultView {
 		return "";
 	}
 
-	public static void printTicketCount(int ticketCount) {
-		System.out.println(ticketCount + "개를 구매했습니다.");
+	public static void printTicket(LottoTickets manualChoiceLottoTickets, LottoTickets autoChoiceLottoTickets) {
+		printTicketCount(manualChoiceLottoTickets, autoChoiceLottoTickets);
+		printLottoTicketsNumbers(manualChoiceLottoTickets);
+		printLottoTicketsNumbers(autoChoiceLottoTickets);
+
 	}
 
-	public static void printTickets(List<LottoTicket> lottoTickets) {
-		for (LottoTicket lottoTicket : lottoTickets) {
+	public static void printTicketCount(LottoTickets manualChoiceLottoTickets, LottoTickets autoChoiceLottoTickets) {
+		System.out.println("수동으로 " + manualChoiceLottoTickets.getTicketCount() + "장, 자동으로 " + autoChoiceLottoTickets.getTicketCount() + "개를 구매했습니다.");
+	}
+
+
+	private static void printLottoTicketsNumbers(LottoTickets lottoTickets) {
+		for(LottoTicket lottoTicket : lottoTickets.getLottoTickets()){
 			printLottoTicketNumbers(lottoTicket);
 		}
 	}
