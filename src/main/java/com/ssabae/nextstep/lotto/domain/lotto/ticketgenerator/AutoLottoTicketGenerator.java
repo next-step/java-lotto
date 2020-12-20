@@ -7,9 +7,11 @@ import static com.ssabae.nextstep.lotto.Constant.LOTTO_NUMBER_SIZE;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : leesangbae
@@ -30,11 +32,11 @@ public class AutoLottoTicketGenerator implements LottoTicketGenerator {
     @Override
     public LottoTicket generate() {
         Collections.shuffle(lottoNumbers);
-        LottoNumber[] lottoNumbers = this.lottoNumbers
+        List<LottoNumber> lottoNumbers = this.lottoNumbers
                 .subList(0, LOTTO_NUMBER_SIZE)
                 .stream()
                 .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .toArray(LottoNumber[]::new);
+                .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
 }

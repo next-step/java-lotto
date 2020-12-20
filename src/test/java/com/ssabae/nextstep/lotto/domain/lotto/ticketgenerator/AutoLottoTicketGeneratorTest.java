@@ -2,6 +2,7 @@ package com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.ssabae.nextstep.lotto.Constant;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class AutoLottoTicketGeneratorTest {
     @Test
     void subListTest() {
         LottoTicket ticket = generator.generate();
-        assertThat(ticket.getNumbers().length).isEqualTo(6);
+        assertThat(ticket.getNumbers().size()).isEqualTo(Constant.LOTTO_NUMBER_SIZE);
     }
 
 }

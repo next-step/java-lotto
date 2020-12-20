@@ -3,14 +3,13 @@ package com.ssabae.nextstep.lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ssabae.nextstep.lotto.application.LottoResultDto;
-import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
-import com.ssabae.nextstep.lotto.domain.WinningNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -54,7 +53,9 @@ class LottoTicketsAnalyzerTest {
     }
 
     private LottoTicket generateLottoTicketByIntArray(int[] lottoNumberArray) {
-        LottoNumber[] objects = Arrays.stream(lottoNumberArray).mapToObj(LottoNumber::of).toArray(LottoNumber[]::new);
+        List<LottoNumber> objects = Arrays.stream(lottoNumberArray)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
         return new LottoTicket(objects);
     }
 }

@@ -1,6 +1,8 @@
 package com.ssabae.nextstep.lotto.domain.lotto;
 
+import com.ssabae.nextstep.lotto.Constant;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : leesangbae
@@ -9,19 +11,19 @@ import java.util.Arrays;
  */
 public class LottoTicket {
 
-    private final LottoNumber[] numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(LottoNumber ...numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    public LottoNumber[] getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    private void validate(LottoNumber[] numbers) {
-        if (numbers.length != 6) {
+    private void validate(List<LottoNumber> numbers) {
+        if (numbers.size() != Constant.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
         if (!isDuplicate(numbers)) {
@@ -29,13 +31,13 @@ public class LottoTicket {
         }
     }
 
-    private boolean isDuplicate(LottoNumber[] numbers) {
-        int length = numbers.length;
-        return Arrays.stream(numbers).distinct().toArray().length == length;
+    private boolean isDuplicate(List<LottoNumber> numbers) {
+        int length = numbers.size();
+        return numbers.stream().distinct().toArray().length == length;
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(numbers);
+        return numbers.toString();
     }
 }
