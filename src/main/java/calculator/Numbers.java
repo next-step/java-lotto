@@ -27,7 +27,6 @@ public class Numbers {
 
     private int parseNumber(String input) {
         try {
-            System.out.println(input);
             int num = Integer.parseInt(input);
             ValidateUtils.validateNegativeNumber(num);
             return num;
