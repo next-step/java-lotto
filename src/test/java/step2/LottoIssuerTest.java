@@ -8,17 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import step2.domain.Lotto;
+import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
 import step2.domain.Lottos;
 
 public class LottoIssuerTest {
-
-	@DisplayName("로또 1장 발급")
-	@Test
-	void given_lotto_when_size_then_return_six() {
-		Lotto lotto = new Lotto();
-		assertThat(lotto.getNumbers().size()).isEqualTo(6);
-	}
 
 	@DisplayName("로또 구입금액 단위 미만의 금액 입력시 익셉션 발생")
 	@Test
@@ -43,6 +37,13 @@ public class LottoIssuerTest {
 		LottoPrice lottoPrice = new LottoPrice(1900);
 		Lottos lottos = new Lottos(lottoPrice);
 		assertThat(lottos.size()).isEqualTo(1);
+	}
+
+	@DisplayName("로또 1장 발급")
+	@Test
+	void given_lotto_when_size_then_return_six() {
+		Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
+		assertThat(lotto.getNumbers().size()).isEqualTo(6);
 	}
 
 }

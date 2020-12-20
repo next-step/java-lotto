@@ -8,13 +8,13 @@ public class Lottos {
 	private final List<Lotto> lottos;
 
 	public Lottos(final LottoPrice lottoPrice) {
-		this.lottos = generate(lottoPrice.getNumberOfPurchasesPerUnitPrice());
+		this.lottos = generate(lottoPrice);
 	}
 
-	private List<Lotto> generate(final int size) {
-		List<Lotto> lottos = new ArrayList<>(size);
-		while (lottos.size() < size) {
-			lottos.add(new Lotto());
+	private List<Lotto> generate(final LottoPrice lottoPrice) {
+		List<Lotto> lottos = new ArrayList<>(lottoPrice.getNumberOfPurchasesPerUnitPrice());
+		while (lottos.size() < lottoPrice.getNumberOfPurchasesPerUnitPrice()) {
+			lottos.add(new Lotto(LottoNumberGenerator.generate()));
 		}
 		return lottos;
 	}
