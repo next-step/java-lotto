@@ -1,11 +1,8 @@
 package com.ssabae.nextstep.lotto.view;
 
-import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
-
 import com.ssabae.nextstep.lotto.application.LottoResultDto;
 import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.Reward;
-import java.math.BigDecimal;
 
 /**
  * @author : leesangbae
@@ -43,7 +40,7 @@ public class ResultView {
         Money winningMoney = reward.getWinningMoney();
         int countByMatchCount = lottoResultDto.getCountByMatchCount(reward.getCountOfMatch());
         String message = String.format(NUMBER_MATCHING_FORMAT_TEXT,
-                countByMatchCount,
+                reward.getCountOfMatch(),
                 winningMoney.getAmountLongValue(),
                 countByMatchCount);
 

@@ -1,7 +1,6 @@
 package com.ssabae.nextstep.lotto.domain.lotto;
 
 import com.ssabae.nextstep.lotto.Constant;
-import java.util.Arrays;
 import java.util.List;
 
 /**

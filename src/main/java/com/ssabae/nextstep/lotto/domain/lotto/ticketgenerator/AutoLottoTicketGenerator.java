@@ -7,7 +7,6 @@ import static com.ssabae.nextstep.lotto.Constant.LOTTO_NUMBER_SIZE;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
