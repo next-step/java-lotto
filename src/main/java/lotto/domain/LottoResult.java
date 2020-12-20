@@ -3,27 +3,32 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoResult {
 
     private final int purchaseAmount;
     private final Map<LottoRanking, Integer> countByRanking = new HashMap<>();
-    private int totalPrize = 0;
 
-    public LottoResult(int purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
+    public LottoResult(int lottoCount) {
+        purchaseAmount = LottoMachine.calculateHowMuch(lottoCount);
     }
 
     public void addRanking(LottoRanking ranking) {
         countByRanking.put(ranking, countByRanking.getOrDefault(ranking, 0) + 1);
-        totalPrize += ranking.getPrize();
     }
 
     public Map<LottoRanking, Integer> getPrizeByRanking() {
         return Collections.unmodifiableMap(countByRanking);
     }
 
-    public double getYield() {
-        return totalPrize * 1.0 / purchaseAmount;
+    public double calculateYield() {
+        return getTotalPrize() * 1.0 / purchaseAmount;
+    }
+
+    private int getTotalPrize() {
+        final AtomicInteger totalPrize = new AtomicInteger();
+        countByRanking.forEach((ranking, count) -> totalPrize.addAndGet(ranking.getPrize() * count));
+        return totalPrize.get();
     }
 }

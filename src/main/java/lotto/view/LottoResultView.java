@@ -25,7 +25,7 @@ public class LottoResultView {
               .filter(ranking -> ranking != LottoRanking.NOT_MATCH)
               .forEach(ranking -> printLottoResultRanking(ranking, prizeByRanking));
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottoResult.getYield());
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottoResult.calculateYield());
     }
 
     private static void printLottoResultRanking(LottoRanking ranking, Map<LottoRanking, Integer> prizeByRanking) {

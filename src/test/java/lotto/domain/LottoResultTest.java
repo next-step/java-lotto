@@ -10,16 +10,16 @@ public class LottoResultTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "10000, FOURTH, 0.5",
-            "10000, THIRD, 5"
+            "10, FOURTH, 0.5",
+            "10, THIRD, 5"
     })
     @DisplayName("로또 수익률")
-    void testGetYield(int purchaseAmount, String ranking, double yield) {
+    void testGetYield(int lottoCount, String ranking, double yield) {
         // given
-        LottoResult result = new LottoResult(purchaseAmount);
+        LottoResult result = new LottoResult(lottoCount);
         // when
         result.addRanking(LottoRanking.valueOf(ranking));
         // then
-        assertThat(result.getYield()).isEqualTo(yield);
+        assertThat(result.calculateYield()).isEqualTo(yield);
     }
 }
