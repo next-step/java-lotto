@@ -29,7 +29,6 @@ public class BuyInfo {
 	}
 
 	public int getAutoAutoTicketCount() {
-		int temp = (cash.getAmount() / LOTTO_TICKET_PRICE) - manualNumbers.getCount();
 		return (cash.getAmount() / LOTTO_TICKET_PRICE) - manualNumbers.getCount();
 	}
 }
