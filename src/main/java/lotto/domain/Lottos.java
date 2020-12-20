@@ -49,10 +49,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public LottoResult getLottoResult(Lotto winningLotto) {
+    public LottoResult getLottoResult(WinningLotto winningLotto) {
         LottoResult result = new LottoResult(size * LOTTO_PRICE);
         for (Lotto lotto : lottos) {
-            LottoRanking ranking = LottoRanking.valueOf(lotto.countOfMatch(winningLotto));
+            LottoRanking ranking = winningLotto.matching(lotto);
             result.addRanking(ranking);
         }
         return result;

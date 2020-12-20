@@ -52,7 +52,7 @@ public class LottosTest {
         // given
         Lottos lottos = new Lottos(1);
         lottos.add(Lotto.of("1,2,3,4,5,6"));
-        Lotto winningLotto = Lotto.of("1,2,3,14,15,16");
+        WinningLotto winningLotto = new WinningLotto(Lotto.of("1,2,3,14,15,16"));
         // when
         LottoResult result = lottos.getLottoResult(winningLotto);
         // then
