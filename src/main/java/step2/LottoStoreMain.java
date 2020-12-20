@@ -17,6 +17,7 @@ public class LottoStoreMain {
         printLotto(lotto.getLotto(), ", ");
 
         List<Integer> targetNumber = inputView.putTargetNumber();
-        printWinLotto(lotto, targetNumber, inputView.putBonusNumber(targetNumber), lottoRequest);
+        Integer bonusNumber = inputView.putBonusNumber(targetNumber);
+        printWinLotto(lotto.getWinLotto(targetNumber, bonusNumber), lottoRequest);
     }
 }

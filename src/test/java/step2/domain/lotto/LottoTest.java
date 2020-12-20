@@ -33,7 +33,7 @@ public class LottoTest {
             @Override
             List<Rank> getLottoRanks(List<Integer> targetNumbers, Integer bonusNumber) {
                 return mockList.stream()
-                        .map(numbers -> Rank.getRank(numbers.getEqualNumberCount(targetNumbers, bonusNumber)))
+                        .map(numbers -> numbers.getRankOfLottoNumbers(targetNumbers, bonusNumber))
                         .collect(toList());
             }
         };

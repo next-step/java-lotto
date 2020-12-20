@@ -1,7 +1,7 @@
 package step2.domain.lotto;
 
-import step2.domain.Rank;
 import step2.domain.LottoRequest;
+import step2.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Lotto {
 
     List<Rank> getLottoRanks(List<Integer> targetNumbers, Integer bonusNumber) {
         return lotto.stream()
-                .map(numbers -> Rank.getRank(numbers.getEqualNumberCount(targetNumbers, bonusNumber)))
+                .map(numbers -> numbers.getRankOfLottoNumbers(targetNumbers, bonusNumber))
                 .collect(toList());
     }
 }

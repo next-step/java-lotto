@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-import step2.domain.dto.LottoResultDto;
+import step2.domain.Rank;
 
 import java.util.HashSet;
 import java.util.List;
@@ -36,11 +36,11 @@ public final class LottoNumbers {
                 .collect(toList());
     }
 
-    public LottoResultDto getEqualNumberCount(List<Integer> targetNumbers, Integer bonusNumber) {
+    public Rank getRankOfLottoNumbers(List<Integer> targetNumbers, Integer bonusNumber) {
         long countOfMatch = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .filter(targetNumbers::contains)
                 .count();
-        return new LottoResultDto(countOfMatch, getLottoNumbers().contains(bonusNumber));
+        return Rank.getRank(countOfMatch, getLottoNumbers().contains(bonusNumber));
     }
 }

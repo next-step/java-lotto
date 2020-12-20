@@ -1,6 +1,5 @@
 package step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.*;
@@ -17,8 +16,8 @@ public enum Rank {
     private int winningMoney;
 
     // 새로운 인스턴스를 생성하지 않도록 캐싱 전략 적용
-    private static final List<Rank> RANKS_WITHOUT_THIRD = new ArrayList<>(asList(FIRST, SECOND, FOURTH, FIFTH));
-    private static final List<Rank> RANKS_WITHOUT_SECOND = new ArrayList<>(asList(FIRST, THIRD, FOURTH, FIFTH));
+    private static final List<Rank> RANKS_WITHOUT_THIRD = asList(FIRST, SECOND, FOURTH, FIFTH);
+    private static final List<Rank> RANKS_WITHOUT_SECOND = asList(FIRST, THIRD, FOURTH, FIFTH);
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
