@@ -9,6 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.Game;
+import lotto.domain.lottoTicketsStrategy.AutoLottoTicketsStrategy;
+import lotto.domain.lottoTicketsStrategy.ManualLottoTicketsStrategy;
+
 /**
  * @author : byungkyu
  * @date : 2020/12/14
@@ -16,28 +20,44 @@ import org.junit.jupiter.api.Test;
  **/
 public class LottoTicketsTest {
 
-	@DisplayName("1. 구입 금액에 해당하는 로또 티켓이 발급된다.")
+	@DisplayName("1. 구입 금액에 해당하는 자동 로또 티켓이 발급된다.")
 	@Test
-	void buyTicket() {
+	void buyAutoTicket() {
 		int cash = 5000;
-		LottoTickets lottoTickets = new LottoTickets(cash);
+		List<String> manualNumbers = new ArrayList<>();
+		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
+
+		Game game = new Game(new AutoLottoTicketsStrategy());
+		LottoTickets lottoTickets = game.play(buyInfo);
 		assertThat(lottoTickets.getTicketCount()).isEqualTo(5);
 	}
 
-	@DisplayName("2. 자동 로또 티켓과 수동 로또 티켓이 발급된다.")
+	@DisplayName("2. 구입 금액에 해당하는 수동 로또 티켓이 발급된다.")
 	@Test
-	void buyTicket22() {
-		int cash = 5000;
+	void buyManualTicket() {
+		int cash = 1000;
+		List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6");
+		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
 
-		List<LottoTicket> customTicket3 = Arrays.asList(new LottoTicket(Arrays.asList(new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(4),
-			new LottoNumber(5),
-			new LottoNumber(6)
-		)));
+		Game game = new Game(new ManualLottoTicketsStrategy());
+		LottoTickets lottoTickets = game.play(buyInfo);
 
-		LottoTickets lottoTickets = new LottoTickets(cash);
-		assertThat(lottoTickets.getTicketCount()).isEqualTo(5);
+		assertThat(lottoTickets.getTicketCount()).isEqualTo(1);
+	}
+
+	@DisplayName("3. 구입 금액에 해당하는 자동, 수동 로또 티켓이 발급된다.")
+	@Test
+	void buyManualAndAutoTicket() {
+		int cash = 3000;
+		List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
+		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
+
+		Game manualGame = new Game(new ManualLottoTicketsStrategy());
+		Game autoGame = new Game(new AutoLottoTicketsStrategy());
+		LottoTickets manualLottoTickets = manualGame.play(buyInfo);
+		LottoTickets autoLottoTickets = autoGame.play(buyInfo);
+
+		assertThat(manualLottoTickets.getTicketCount()).isEqualTo(2);
+		assertThat(autoLottoTickets.getTicketCount()).isEqualTo(1);
 	}
 }
