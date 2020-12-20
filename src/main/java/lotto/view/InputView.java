@@ -39,7 +39,7 @@ public class InputView {
     }
 
     public static List<Lotto> readManualPurchasingLottos(int manualPurchasingSize) {
-        if (manualPurchasingSize == 0) {
+        if (manualPurchasingSize != 0) {
             System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
         }
         List<Lotto> manualLottos = readLottos(manualPurchasingSize);
