@@ -24,7 +24,7 @@ public class LottoRunner {
 		Lottos lottos = LottoMachine.issue(lottoPrice);
 		outputView.printLottos(lottos.getLottos());
 
-		LottoNumbers winLottoNumbers = new LottoNumbers(inputView.inputWinNumbers());
+		LottoNumbers winLottoNumbers = inputView.inputWinNumbers();
 		LottoResults lottoResults = lottos.result(winLottoNumbers);
 
 		outputView.printWinResult(lottoResults);
