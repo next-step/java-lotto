@@ -1,10 +1,7 @@
 package lotto;
 
-import java.util.List;
-
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicketsStrategy;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketsStrategy;
 import lotto.view.BuyInfo;
 
 /**

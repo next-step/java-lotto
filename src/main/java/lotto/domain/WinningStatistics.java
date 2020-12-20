@@ -15,9 +15,18 @@ public class WinningStatistics {
 	private static final String DOUBLE_FORMAT = "%.2f";
 
 	private List<Prize> prizeResult = new ArrayList<>();
+/*
 
 	public WinningStatistics(LottoTickets userLottoTickets, WinningLottoTicket winningLottoTicket) {
 		prizeResult = awards(userLottoTickets, winningLottoTicket);
+	}
+*/
+
+	public WinningStatistics(LottoWallet lottoWallet, WinningLottoTicket winningLottoTicket) {
+		for (LottoTickets lottoTickets : lottoWallet.getLottoTickets()) {
+			lottoTickets.getLottoTickets()
+				.forEach(lottoTicket -> prizeResult.add(winningLottoTicket.matchPrize(lottoTicket)));
+		}
 	}
 
 	private List<Prize> awards(LottoTickets userLottoTickets, WinningLottoTicket winnerLottoTicket) {

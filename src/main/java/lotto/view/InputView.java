@@ -1,12 +1,10 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTickets;
 import lotto.domain.WinningLottoTicket;
 
 /**
@@ -49,7 +47,8 @@ public class InputView {
 		BuyInfo.validateManualLottoCount(cash, manualLottoCount);
 
 		List<String> manualNumbers = new ArrayList<>();
-		if (hasRequireManualNumbers(manualLottoCount)) return manualNumbers;
+		if (hasRequireManualNumbers(manualLottoCount))
+			return manualNumbers;
 
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		manualNumbers.addAll(requireManualNumber(manualLottoCount));
@@ -58,7 +57,7 @@ public class InputView {
 
 	private static List<String> requireManualNumber(int manualLottoCount) {
 		List<String> manualNumbers = new ArrayList<>();
-		for(int i=0; i < manualLottoCount; i++){
+		for (int i = 0; i < manualLottoCount; i++) {
 			manualNumbers.add(scanner.next());
 		}
 		return manualNumbers;

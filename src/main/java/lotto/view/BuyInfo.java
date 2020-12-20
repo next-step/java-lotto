@@ -22,11 +22,8 @@ public class BuyInfo {
 	}
 
 	public static void validateManualLottoCount(int cash, int manualLottoCount) {
-		if(manualLottoCount * LOTTO_TICKET_PRICE > cash) throw new IllegalArgumentException("수동으로 구매할 로또 수가 구입금액 한도를 벗어났습니다.");
-	}
-
-	public Cash getCash() {
-		return cash;
+		if (manualLottoCount * LOTTO_TICKET_PRICE > cash)
+			throw new IllegalArgumentException("수동으로 구매할 로또 수가 구입금액 한도를 벗어났습니다.");
 	}
 
 	public ManualNumbers getManualNumbers() {
@@ -34,6 +31,7 @@ public class BuyInfo {
 	}
 
 	public int getAutoAutoTicketCount() {
+		int temp = (cash.getAmount() / LOTTO_TICKET_PRICE) - manualNumbers.getCount();
 		return (cash.getAmount() / LOTTO_TICKET_PRICE) - manualNumbers.getCount();
 	}
 }

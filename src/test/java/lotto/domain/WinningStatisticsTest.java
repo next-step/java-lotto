@@ -7,10 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * @author : byungkyu
@@ -19,7 +16,8 @@ import org.junit.jupiter.api.TestMethodOrder;
  **/
 public class WinningStatisticsTest {
 
-	LottoTickets lottoTickets;
+	LottoWallet lottoWallet;
+
 
 	@BeforeEach
 	void setUp() {
@@ -42,7 +40,9 @@ public class WinningStatisticsTest {
 
 		List<LottoTicket> customLottoTickets = new ArrayList<>();
 		customLottoTickets.add(lottoTicket);
-		lottoTickets = new LottoTickets(customLottoTickets);
+		LottoTickets lottoTickets = new LottoTickets(customLottoTickets);
+
+		lottoWallet = new LottoWallet(lottoTickets);
 	}
 
 	@DisplayName("1. 3개일치")
@@ -52,7 +52,7 @@ public class WinningStatisticsTest {
 		int bonusNumber = 46;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.FIFTH));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(5.0));
 
@@ -65,7 +65,7 @@ public class WinningStatisticsTest {
 		int bonusNumber = 46;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.FOURTH));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(WinningStatistics.parseWinningSummaryFormat(50.0));
 	}
@@ -77,7 +77,7 @@ public class WinningStatisticsTest {
 		int bonusNumber = 46;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.THIRD));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(
 			WinningStatistics.parseWinningSummaryFormat(1500.0));
@@ -90,7 +90,7 @@ public class WinningStatisticsTest {
 		int bonusNumber = 46;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.FIRST));
 		assertThat(winningStatistics.getWinningSummary()).isEqualTo(
 			WinningStatistics.parseWinningSummaryFormat(2000000.0));
@@ -103,7 +103,7 @@ public class WinningStatisticsTest {
 		int bonusNumber = 46;
 		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		assertThat(winningStatistics.getPrizeResult().contains(Prize.NONE));
 	}
 }

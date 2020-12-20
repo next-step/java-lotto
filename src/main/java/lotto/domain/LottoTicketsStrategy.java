@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 import lotto.view.BuyInfo;
 
 /**

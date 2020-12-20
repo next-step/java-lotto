@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoWallet;
 import lotto.domain.Prize;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.WinningStatistics;
@@ -19,12 +20,22 @@ import lotto.domain.WinningStatistics;
  **/
 public class ResultView {
 	private static final BigDecimal ONE = new BigDecimal(1);
-
+/*
 	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
 		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		printWinningStatus(winningStatistics.getPrizeResult());
+		printWinningAverage(winningStatistics.getWinningSummary());
+	}*/
+
+	public static void printWinningStatistics(LottoWallet lottoWallet, WinningLottoTicket winningLottoTicket) {
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+
+		// WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
@@ -67,12 +78,13 @@ public class ResultView {
 	}
 
 	public static void printTicketCount(LottoTickets manualChoiceLottoTickets, LottoTickets autoChoiceLottoTickets) {
-		System.out.println("수동으로 " + manualChoiceLottoTickets.getTicketCount() + "장, 자동으로 " + autoChoiceLottoTickets.getTicketCount() + "개를 구매했습니다.");
+		System.out.println(
+			"수동으로 " + manualChoiceLottoTickets.getTicketCount() + "장, 자동으로 " + autoChoiceLottoTickets.getTicketCount()
+				+ "개를 구매했습니다.");
 	}
 
-
 	private static void printLottoTicketsNumbers(LottoTickets lottoTickets) {
-		for(LottoTicket lottoTicket : lottoTickets.getLottoTickets()){
+		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
 			printLottoTicketNumbers(lottoTicket);
 		}
 	}

@@ -15,7 +15,7 @@ import lotto.view.BuyInfo;
  * @date : 2020/12/20
  * @description :
  **/
-public class AutoLottoTicketsStrategy implements LottoTicketsStrategy{
+public class AutoLottoTicketsStrategy implements LottoTicketsStrategy {
 
 	@Override
 	public LottoTickets generate(BuyInfo buyInfo) {
@@ -24,7 +24,7 @@ public class AutoLottoTicketsStrategy implements LottoTicketsStrategy{
 
 	private List<LottoTicket> createTickets(BuyInfo buyInfo) {
 		List<LottoTicket> lottoTickets = new ArrayList<>();
-		int ticketCount = buyInfo.getAutoAutoTicketCount() / LOTTO_TICKET_PRICE;
+		int ticketCount = buyInfo.getAutoAutoTicketCount();
 		for (int i = 0; i < ticketCount; i++) {
 			lottoTickets.add(new LottoTicket(randomLottoNumbers()));
 		}
