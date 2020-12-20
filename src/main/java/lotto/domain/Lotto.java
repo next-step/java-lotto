@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +11,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
 
+    private static final String INVALID_INPUT_MESSAGE = "Lotto numbers input cannot be null or empty: %s";
     private static final String LOTTO_NUMBER_SIZE_MESSAGE = "Count of Lotto numbers is less than %s";
 
     private final Set<LottoNumber> lottoNumbers;
@@ -19,6 +22,7 @@ public class Lotto {
     }
 
     public static Lotto of(String input) {
+        checkArgument(StringUtils.isNotBlank(input), INVALID_INPUT_MESSAGE, input);
         String[] parts = input.split(",");
 
         Set<LottoNumber> lottoNumbers = new HashSet<>();
