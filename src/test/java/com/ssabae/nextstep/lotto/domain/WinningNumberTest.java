@@ -2,6 +2,7 @@ package com.ssabae.nextstep.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -24,9 +25,11 @@ class WinningNumberTest {
 
         List<Integer> winningNumberList = winningNumber.getWinningNumberList();
 
-        assertThat(winningNumberList).isNotNull().isNotEmpty();
-        assertThat(winningNumberList.size()).isEqualTo(6);
-        assertThat(winningNumberList).containsExactly(1, 2, 3, 4, 5, 6);
+        assertAll(
+                () -> assertThat(winningNumberList).isNotNull().isNotEmpty(),
+                () -> assertThat(winningNumberList.size()).isEqualTo(6),
+                () -> assertThat(winningNumberList).containsExactly(1, 2, 3, 4, 5, 6)
+        );
     }
 
 

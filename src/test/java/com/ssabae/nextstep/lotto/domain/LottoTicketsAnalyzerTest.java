@@ -1,6 +1,7 @@
 package com.ssabae.nextstep.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
@@ -25,12 +26,13 @@ class LottoTicketsAnalyzerTest {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
         LottoTickets dummyLottoTickets = getDummyLottoTickets();
         LottoResult lottoResult = analyzer.analyze(dummyLottoTickets, winningNumber);
-
-        assertThat(lottoResult.getMatchCountMap().getOrDefault(6, 0)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCountMap().getOrDefault(5, 0)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCountMap().getOrDefault(4, 0)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCountMap().getOrDefault(3, 0)).isEqualTo(1);
-        assertThat(lottoResult.getMatchCountMap().getOrDefault(2, 0)).isEqualTo(1);
+        assertAll(
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(6, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(5, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(4, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(3, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(2, 0)).isEqualTo(1)
+        );
     }
 
     private LottoTickets getDummyLottoTickets() {
