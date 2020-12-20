@@ -5,11 +5,19 @@ import java.util.List;
 
 public class Lottos {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final int size;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(int size) {
         this.size = size;
+    }
+
+    public static Lottos purchase(int money) {
+        Lottos lottos = new Lottos(money / LOTTO_PRICE);
+        lottos.fillAutoRemaining();
+        return lottos;
     }
 
     public void fillAutoRemaining() {
