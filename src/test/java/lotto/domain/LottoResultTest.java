@@ -43,10 +43,11 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨 갯수별 로또 수 테스트")
     void getSameLottoCount() {
-        assertThat(lottoResult.getSameLottoCount(3)).isEqualTo(1);
-        assertThat(lottoResult.getSameLottoCount(4)).isEqualTo(0);
-        assertThat(lottoResult.getSameLottoCount(5)).isEqualTo(0);
-        assertThat(lottoResult.getSameLottoCount(6)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test

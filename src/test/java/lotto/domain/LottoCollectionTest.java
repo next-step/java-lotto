@@ -41,10 +41,10 @@ class LottoCollectionTest {
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
         LottoResult lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
-        assertThat(lottoResult.getSameLottoCount(3)).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
 
         winnerLotto = new Lotto(1, 2, 3, 4, 5, 14);
         lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
-        assertThat(lottoResult.getSameLottoCount(4)).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.FOURTH)).isEqualTo(1);
     }
 }

@@ -32,8 +32,8 @@ public class LottoResult {
                 .orElse(0);
     }
 
-    public int getSameLottoCount(int sameCount) {
-        return rankCounts.getOrDefault(Rank.valueOf(sameCount, false), INITIAL_COUNT);
+    public int getRankCount(Rank rank) {
+        return rankCounts.getOrDefault(rank, INITIAL_COUNT);
     }
 
     public double getRewardRate() {

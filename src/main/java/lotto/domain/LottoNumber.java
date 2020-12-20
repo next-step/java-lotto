@@ -21,13 +21,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber lottoNumber1 = (LottoNumber) o;
-        return Objects.equals(number, lottoNumber1.number);
+        LottoNumber that = (LottoNumber) o;
+        return getNumber() == that.getNumber();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(getNumber());
     }
 
     @Override
