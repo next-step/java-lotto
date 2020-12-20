@@ -11,11 +11,11 @@ public enum LottoRanking {
     NOT_MATCH(0, 0);
 
     private final int countOfMatch;
-    private final int money;
+    private final int prize;
 
-    LottoRanking(int countOfMatch, int money) {
+    LottoRanking(int countOfMatch, int prize) {
         this.countOfMatch = countOfMatch;
-        this.money = money;
+        this.prize = prize;
     }
 
     public static LottoRanking valueOf(int countOfMatch) {
@@ -23,5 +23,9 @@ public enum LottoRanking {
                 .filter(ranking -> ranking.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(NOT_MATCH);
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
