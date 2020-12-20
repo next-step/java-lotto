@@ -12,7 +12,7 @@ public class LottoTest {
     @DisplayName("로또 생성")
     void testCreateLotto() {
         // given
-        String input = "6,2,3,4,5,1";
+        String input = "1,2,3,4,5,6";
         // when
         Lotto lotto = Lotto.of(input);
         // then
@@ -32,7 +32,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("매치 개수")
+    @DisplayName("번호 매칭 개수")
     void testLottoCountOfMatchAll() {
         // given
         Lotto lotto = Lotto.of("1,2,3,4,5,6");
@@ -41,5 +41,16 @@ public class LottoTest {
         int countOfMatch = lotto.countOfMatch(winningLotto);
         // then
         assertThat(countOfMatch).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("로또 번호 배열 정렬해서 반환")
+    void testToArrayInOrder() {
+        // given
+        Lotto lotto = Lotto.of("6,5,4,3,2,1");
+        // when
+        int[] numbers = lotto.toArray();
+        // then
+        assertThat(numbers).isEqualTo(new int[] {1, 2, 3, 4, 5, 6});
     }
 }

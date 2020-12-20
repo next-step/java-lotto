@@ -11,6 +11,17 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottosTest {
 
     @Test
+    @DisplayName("로또 생성")
+    void testCreateLottos() {
+        // given
+        int size = 14;
+        // when
+        Lottos lottos = new Lottos(size);
+        // then
+        assertThat(lottos.size()).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("자동 번호 선택")
     void testFillAutoRemaining() {
         // given
