@@ -10,8 +10,8 @@ public class LottoResult {
 	private static final String PRINT_LOTTO_RANK_COUNT_MSG = "개\n";
 	private final List<LottoRank> ranks;
 
-	public LottoResult(List<Lotto> lottoPackage, WinnerLotto winnerLotto) {
-		this.ranks = LottoRankAggregation(lottoPackage, winnerLotto);
+	public LottoResult(List<LottoRank> ranks) {
+		this.ranks = ranks;
 	}
 
 	public List<String> rankCount() {
@@ -35,12 +35,5 @@ public class LottoResult {
 		return ranks.stream()
 			.mapToLong(LottoRank::getWinnerPrize)
 			.sum();
-	}
-
-	private static List<LottoRank> LottoRankAggregation(List<Lotto> lottoPackage, WinnerLotto winnerLotto) {
-		return lottoPackage.stream()
-			.map(lotto -> LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto)))
-			.filter(lottoRank -> !lottoRank.equals(LottoRank.NOTHING_RANK))
-			.collect(Collectors.toList());
 	}
 }

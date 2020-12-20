@@ -39,10 +39,10 @@ public class Lotto {
 
 	public static Lotto generateWinnerLotto(String userInputLotto) {
 		validationWinnerLotto(userInputLotto);
-		return new Lotto(getInputToLotto(userInputLotto));
+		return new Lotto(generateUserLotto(userInputLotto));
 	}
 
-	private static List<LottoNumber> getInputToLotto(String userInputLotto) {
+	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
 		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
 		return Lotto.generateManualLotto(Arrays.asList(lottoArray));
 	}
