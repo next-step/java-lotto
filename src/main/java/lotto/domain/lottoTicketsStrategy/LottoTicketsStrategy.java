@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottoTicketsStrategy;
 
-import lotto.view.BuyInfo;
+import lotto.domain.LottoTickets;
+import lotto.domain.BuyInfo;
 
 /**
  * @author : byungkyu

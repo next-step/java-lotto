@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.domain.AutoLottoTicketsStrategy;
+import lotto.domain.lottoTicketsStrategy.AutoLottoTicketsStrategy;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWallet;
-import lotto.domain.ManualLottoTicketsStrategy;
+import lotto.domain.lottoTicketsStrategy.ManualLottoTicketsStrategy;
 import lotto.domain.WinningLottoTicket;
-import lotto.view.BuyInfo;
+import lotto.domain.BuyInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.BuyInfo;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLottoTicket;
 

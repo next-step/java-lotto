@@ -1,10 +1,8 @@
-package lotto.view;
+package lotto.domain;
 
 import static lotto.domain.LottoTickets.*;
 
 import java.util.List;
-
-import lotto.domain.ManualNumbers;
 
 /**
  * @author : byungkyu

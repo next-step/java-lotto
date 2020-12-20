@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.enums.Prize;
+
 /**
  * @author : byungkyu
  * @date : 2020/12/14

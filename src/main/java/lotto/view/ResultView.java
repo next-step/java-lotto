@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWallet;
-import lotto.domain.Prize;
+import lotto.domain.enums.Prize;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.WinningStatistics;
 
