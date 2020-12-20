@@ -1,8 +1,7 @@
 package lotto.modal;
 
 public class WinnerLotto {
-	
-	private static final int LOTTO_MATCHED_WINNER_FLAG = 6;
+
 	private final Lotto winnerLotto;
 	private final LottoNumber bonusNumber;
 
@@ -19,7 +18,7 @@ public class WinnerLotto {
 			throw new IllegalArgumentException("당첨번호 or 보너스 번호가 잘못 입력되었습니다.");
 		}
 
-		if (winnerLotto.getLotto().contains(bonusNumber)) {
+		if (winnerLotto.isContainNumber(bonusNumber)) {
 			throw new IllegalArgumentException("당첨번호와 중복된 보너스 번호를 입력햐였습니다.");
 		}
 	}
@@ -28,7 +27,7 @@ public class WinnerLotto {
 		int count = 0;
 
 		if (this.winnerLotto.equals(compareLotto)) {
-			return LOTTO_MATCHED_WINNER_FLAG;
+			return 6;
 		}
 
 		for (LottoNumber number : compareLotto.getLotto()) {
