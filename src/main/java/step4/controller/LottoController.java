@@ -10,6 +10,8 @@ public class LottoController {
     public void start() {
         int purchasePrice = InputView.inputPurchasePrice();
 
+        int manualBuyCount = InputView.inputManualBuyCount();
+
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> buyLottoList = lottoMachine.buyLotto(purchasePrice);
 
