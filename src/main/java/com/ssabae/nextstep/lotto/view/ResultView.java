@@ -22,40 +22,30 @@ public class ResultView {
 
     public void report(LottoResultDto lottoResultDto) {
         printReportHeader();
-
-        int countOfTicket = lottoResultDto.getCountOfTicket();
-        Money spendMoney = LOTTO_TICKET_PRICE.times(countOfTicket);
-        Money earnMoney = Money.ZERO;
         for (Reward reward : Reward.getReportableRewards()) {
-            earnMoney = earnMoney.plus(getWinningAmount(reward, lottoResultDto));
             print(reward, lottoResultDto);
         }
-
-        printReportEarningsRate(spendMoney, earnMoney);
+        printReportEarningsRate(lottoResultDto);
     }
 
     private void printReportHeader() {
         System.out.print(REPORT_HEADER_TEXT);
     }
 
-    private void printReportEarningsRate(Money spendMoney, Money earnMoney) {
-        float rate = spendMoney.amount.divide(earnMoney.amount, BigDecimal.ROUND_UP).floatValue();
+    private void printReportEarningsRate(LottoResultDto lottoResultDto) {
+        float rate = lottoResultDto.getEarnRate();
         String earnText = rate > 1.0f ? PROFIT_TEXT : LOSS_TEXT;
         System.out.printf(EARN_RATE_FORMAT_TEXT, rate, earnText);
     }
 
-    private Money getWinningAmount(Reward reward, LottoResultDto lottoResultDto) {
-        int countByMatchCount = lottoResultDto.getCountByMatchCount(reward.getCountOfMatch());
-        return reward.getWinningMoney().times(countByMatchCount);
-    }
 
     private void print(Reward reward, LottoResultDto lottoResultDto) {
-        int countOfMatch = reward.getCountOfMatch();
-        int countByMatchCount = lottoResultDto.getCountByMatchCount(countOfMatch);
         Money winningMoney = reward.getWinningMoney();
-
+        int countByMatchCount = lottoResultDto.getCountByMatchCount(reward.getCountOfMatch());
         String message = String.format(NUMBER_MATCHING_FORMAT_TEXT,
-                countOfMatch, winningMoney.getAmountLongValue(), countByMatchCount);
+                countByMatchCount,
+                winningMoney.getAmountLongValue(),
+                countByMatchCount);
 
         System.out.println(message);
     }
