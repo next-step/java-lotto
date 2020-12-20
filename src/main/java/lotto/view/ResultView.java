@@ -10,11 +10,6 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void showPurchasedLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        printLottos(lottos);
-    }
-
     public static void showPurchasedLottos(Lottos manualLottos, Lottos autoLottos) {
         System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
         printLottos(manualLottos);

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class LottoNumber {
-
     private static final int MINIMUM_VALUE = 1;
     private static final int MAXIMUM_VALUE = 45;
 

@@ -12,7 +12,7 @@ public class AutoLottoNumberPool {
     private static final int MINIMUM_VALUE = 1;
     private static final int MAXIMUM_VALUE = 45;
 
-    private static final List<LottoNumber> numbers = IntStream.range(MINIMUM_VALUE, MAXIMUM_VALUE + 1)
+    private static final List<LottoNumber> numbers = IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
