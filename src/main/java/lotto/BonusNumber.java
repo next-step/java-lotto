@@ -23,7 +23,7 @@ public class BonusNumber {
     }
 
     public boolean isMatchBonus(int countOfMatch, List<Integer> ticketNumbers) {
-        if (countOfMatch == Rank.SECOND.getCountOfMatch()) {
+        if (Rank.SECOND.equalsMatchCount(countOfMatch)) {
             return ticketNumbers.contains(number);
         }
 

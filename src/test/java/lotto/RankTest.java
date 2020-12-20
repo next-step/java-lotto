@@ -3,7 +3,11 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -114,7 +118,6 @@ class RankTest {
     void 보너스_비당첨_테스트() {
         // given
         int countOfMatch = 5;
-        boolean matchBonus = false;
 
         // when
         Rank rank = Rank.valueOf(countOfMatch, false);
@@ -122,4 +125,5 @@ class RankTest {
         // then
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
+
 }
