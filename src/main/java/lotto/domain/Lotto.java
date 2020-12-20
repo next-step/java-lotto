@@ -11,6 +11,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
 
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final String INVALID_INPUT_MESSAGE = "Lotto numbers input cannot be null or empty: %s";
     private static final String LOTTO_NUMBER_SIZE_MESSAGE = "Count of Lotto numbers is less than %s";
 
@@ -23,7 +24,7 @@ public class Lotto {
 
     public static Lotto of(String input) {
         checkArgument(StringUtils.isNotBlank(input), INVALID_INPUT_MESSAGE, input);
-        String[] parts = input.split(",");
+        String[] parts = input.split(LOTTO_NUMBER_DELIMITER);
 
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (String part : parts) {
