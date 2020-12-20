@@ -6,8 +6,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import calculator.domain.StringAddCalculator;
 import calculator.domain.InputNumber;
 import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -115,6 +113,12 @@ class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void splitAndSum_not_number() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("hello world"))
             .isInstanceOf(RuntimeException.class);
     }
 }

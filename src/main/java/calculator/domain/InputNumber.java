@@ -13,6 +13,9 @@ public class InputNumber {
 
     public InputNumber(String input) {
         this.input = input;
+        if (!isEmpty() && input.contains("-")){
+            throw new RuntimeException("음수를 입력하면 안됩니다.");
+        }
 
     }
 
