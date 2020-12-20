@@ -2,7 +2,10 @@ package com.ssabae.nextstep.lotto.domain.lotto;
 
 import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
+import com.ssabae.nextstep.lotto.application.LottoResultDto;
+import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
 import com.ssabae.nextstep.lotto.domain.Money;
+import com.ssabae.nextstep.lotto.domain.WinningNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +21,11 @@ public class LottoTicketMachine {
 
     private final LottoTicketGenerator generator;
 
+    private final LottoTicketsAnalyzer analyzer;
+
     public LottoTicketMachine(LottoTicketGenerator generator) {
         this.generator = generator;
+        this.analyzer = new LottoTicketsAnalyzer();
     }
 
     public LottoTickets buy(Money amount) {
@@ -29,6 +35,10 @@ public class LottoTicketMachine {
                 .limit(count)
                 .collect(Collectors.toList());
         return new LottoTickets(Collections.unmodifiableList(lottoTicketList));
+    }
+
+    public LottoResultDto calculateYield(LottoTickets lottoTickets, WinningNumber winningNumber) {
+        return this.analyzer.convertToDto(lottoTickets, winningNumber);
     }
 
     private void validate(Money amount) {
