@@ -98,4 +98,20 @@ public class LottoIssuerTest {
 
 	}
 
+	@DisplayName("수익률 계산")
+	@Test
+	void given_lotto_results_when_get_win_price_then_return_price() {
+
+		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
+		final Integer[] winNumbers = { 1, 2, 3, 13, 14, 15 };
+		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
+		Lottos lottos = new Lottos(lotto);
+		lottos.confirmWinning(winNumbers);
+
+		LottoResults lottoResults = new LottoResults(lottos);
+
+		assertThat(lottoResults.getWinPrice()).isEqualTo(5000);
+
+	}
+
 }

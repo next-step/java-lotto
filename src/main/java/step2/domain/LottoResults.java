@@ -10,39 +10,42 @@ public class LottoResults {
 
 	public LottoResults(final Lottos lottos) {
 		this.lottoResults = new TreeSet<>();
+		addResults();
+		matchIncrease(lottos);
+	}
+
+	private void addResults() {
+		for (LottoWin lottoWin : LottoWin.values()) {
+			this.lottoResults.add(new LottoResult(lottoWin));
+		}
+	}
+
+	private void matchIncrease(final Lottos lottos) {
 		for (Lotto lotto : lottos.getLottos()) {
-			addResult(LottoWin.of(lotto.getMatchCount()));
+			increase(lotto);
 		}
 	}
 
-	private void addResult(final LottoWin lottoWin) {
-		LottoResult lottoResult = new LottoResult(lottoWin);
-		lottoResult.increase();
-
-		if (!this.lottoResults.add(lottoResult)) {
-			find(lottoResult).increase();
+	private void increase(final Lotto lotto) {
+		for (LottoResult lottoResult : lottoResults) {
+			lottoResult.increaseIfEqualsMatchCount(lotto.getMatchCount());
 		}
-	}
-
-	private LottoResult find(final LottoResult lottoResult) {
-		return this.lottoResults.stream()
-			.filter(result -> result.equals(lottoResult))
-			.findFirst()
-			.orElseThrow(RuntimeException::new);
-	}
-
-	public Set<LottoResult> getLottoResults() {
-		return lottoResults;
 	}
 
 	public Set<LottoResult> getWinLottoResults() {
 		return this.lottoResults.stream()
 			.filter(LottoResult::isWin)
-			.collect(Collectors.toSet());
+			.collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	public boolean has(final LottoResult lottoResult) {
 		return this.lottoResults.stream()
 			.anyMatch(result -> result.equals(lottoResult));
+	}
+
+	public long getWinPrice() {
+		return getWinLottoResults().stream()
+			.mapToInt(LottoResult::getWinPrice)
+			.sum();
 	}
 }

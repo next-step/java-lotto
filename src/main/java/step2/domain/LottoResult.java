@@ -9,11 +9,6 @@ public class LottoResult implements Comparable<LottoResult> {
 		this.lottoWin = lottoWin;
 	}
 
-	@Override
-	public int compareTo(final LottoResult lottoResult) {
-		return lottoResult.lottoWin.getMatchCount() - this.lottoWin.getMatchCount();
-	}
-
 	public void increase() {
 		this.count++;
 	}
@@ -24,6 +19,13 @@ public class LottoResult implements Comparable<LottoResult> {
 
 	public Integer getPrice() {
 		return lottoWin.getPrice();
+	}
+
+	public Integer getWinPrice() {
+		if (this.isWin()) {
+			return lottoWin.getPrice() * count;
+		}
+		return 0;
 	}
 
 	public int getWinCount() {
@@ -49,5 +51,16 @@ public class LottoResult implements Comparable<LottoResult> {
 	@Override
 	public int hashCode() {
 		return lottoWin != null ? lottoWin.hashCode() : 0;
+	}
+
+	@Override
+	public int compareTo(final LottoResult lottoResult) {
+		return this.lottoWin.getMatchCount() - lottoResult.lottoWin.getMatchCount();
+	}
+
+	public void increaseIfEqualsMatchCount(final int matchCount) {
+		if (this.getMatchCount() == matchCount) {
+			this.increase();
+		}
 	}
 }

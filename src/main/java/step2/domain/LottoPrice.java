@@ -26,4 +26,7 @@ public class LottoPrice {
 		return this.purchasePrice / this.unitPrice;
 	}
 
+	public int getPurchasePrice() {
+		return purchasePrice;
+	}
 }

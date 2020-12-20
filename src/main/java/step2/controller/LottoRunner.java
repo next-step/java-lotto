@@ -3,6 +3,7 @@ package step2.controller;
 import step2.domain.LottoMachine;
 import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
+import step2.domain.LottoProfit;
 import step2.domain.LottoResults;
 import step2.domain.Lottos;
 import step2.view.InputView;
@@ -27,6 +28,7 @@ public class LottoRunner {
 		LottoResults lottoResults = lottos.result(winLottoNumbers);
 
 		outputView.printWinResult(lottoResults);
+		outputView.printProfitRatio(new LottoProfit(lottoPrice, lottoResults));
 
 	}
 
