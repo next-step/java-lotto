@@ -1,8 +1,8 @@
-package lotto.view;
+package com.monds.nextstep.lotto.view;
 
-import lotto.domain.LottoRanking;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import com.monds.nextstep.lotto.domain.LottoRanking;
+import com.monds.nextstep.lotto.domain.LottoResult;
+import com.monds.nextstep.lotto.domain.Lottos;
 
 import java.util.Arrays;
 import java.util.Map;

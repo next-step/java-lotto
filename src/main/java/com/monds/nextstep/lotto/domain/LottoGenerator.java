@@ -1,10 +1,10 @@
-package lotto.domain;
+package com.monds.nextstep.lotto.domain;
 
 import java.util.*;
 
-import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
-import static lotto.domain.LottoNumber.LOTTO_NUMBER_END;
-import static lotto.domain.LottoNumber.LOTTO_NUMBER_START;
+import static com.monds.nextstep.lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
+import static com.monds.nextstep.lotto.domain.LottoNumber.LOTTO_NUMBER_END;
+import static com.monds.nextstep.lotto.domain.LottoNumber.LOTTO_NUMBER_START;
 
 public class LottoGenerator {
 

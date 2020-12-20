@@ -1,4 +1,4 @@
-package lotto.domain;
+package com.monds.nextstep.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;

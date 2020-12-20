@@ -1,4 +1,4 @@
-package lotto.view;
+package com.monds.nextstep.lotto.view;
 
 import java.util.Scanner;
 

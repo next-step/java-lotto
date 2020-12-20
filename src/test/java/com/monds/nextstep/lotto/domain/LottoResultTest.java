@@ -1,4 +1,4 @@
-package lotto.domain;
+package com.monds.nextstep.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

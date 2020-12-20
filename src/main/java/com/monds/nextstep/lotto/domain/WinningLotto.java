@@ -1,4 +1,4 @@
-package lotto.domain;
+package com.monds.nextstep.lotto.domain;
 
 public class WinningLotto {
 
