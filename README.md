@@ -406,3 +406,22 @@ public LotteryTicket of(int[] numbers) {
       return new LotteryTicket(lotteryNumbers);
   }
 ```
+# [4단계 - 로또(수동)](https://edu.nextstep.camp/s/MNii0Puk/ls/uF3PX0mB)
+## 3단계 미반영 피드백
+- [ ] static 으로 이루어진 클래스는 기본 생성자를 private으로 선언하여 객체 생성을 막아보세요.- `LotteryTicketFactory.java`
+      https://ktko.tistory.com/entry/Effective-Java-4-%EA%B0%9D%EC%B2%B4-%EC%83%9D%EC%84%B1%EC%9D%84-%EB%A7%89%EC%9D%84-%EB%95%8C%EB%8A%94-private-%EC%83%9D%EC%84%B1%EC%9E%90%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC?category=753411
+- [ ] 이번 미션을 진행하면서 삼항 연산자 보다는 조건문을 풀어서 사용해보세요 ! (`LotteryWinning.java`)
+- [ ] 매번 Integer.parseInt 코드를 사용하는것 보단 LotteryNumber 의 생성자를 늘려보거나 정적 팩토리 메소드를 사용해보세요 - `LotteryWinning.java`
+      https://johngrib.github.io/wiki/static-factory-method-pattern/
+- [ ] 일반적으로 getXXX 는 객체가 가진 상태값을 반환하는것을 기대하게 되는것 같아요. - `LotteryWinning.java`
+      LotteryResult 는 상태값이 아니니 조금더 의미있는 메소드명을 고민해보면 좋을것 같습니다 ㅎㅎ - `LotteryResult.java`
+- [ ] purchaseAmount에 따라서 profit 값이 자주변경될것 같은데, 상태값으로 가지고 있기보다는 calculateProfit 을 호출하는 시점에 계산하여 전달해주는것이 어떨까요 ?
+
+## 기능 요구 사항
+
+## 프로그래밍 요구사항
+### 힌트
+
+## 기능 목록 및 commit 로그 요구사항
+
+## 구현할 기능 목록 정리
