@@ -1,7 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Stream;
 
 public enum Rank {
 
@@ -11,7 +11,6 @@ public enum Rank {
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
-
 
     private final int countOfMatch;
     private final int winningMoney;
@@ -28,17 +27,10 @@ public enum Rank {
             return SECOND;
         }
 
-        return getRankOfEtc(countOfMatch);
-    }
-
-    private static Rank getRankOfEtc(int countOfMatch) {
-        for (Rank rank : values()) {
-            if (countOfMatch == rank.getCountOfMatch()) {
-                return rank;
-            }
-        }
-
-        return MISS;
+        Stream<Rank> stream = Arrays.stream(values());
+        return stream.filter(rank -> countOfMatch == rank.getCountOfMatch())
+                .findFirst()
+                .orElse(MISS);
     }
 
     private static void validate(int countOfMatch) {
