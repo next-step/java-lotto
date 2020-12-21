@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 	public static final int SIZE = 6;
+
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<Integer> numbers) {
@@ -24,5 +25,9 @@ public class LottoNumbers {
 		return (int)lottoNumbers.stream()
 			.filter(other.lottoNumbers::contains)
 			.count();
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 }

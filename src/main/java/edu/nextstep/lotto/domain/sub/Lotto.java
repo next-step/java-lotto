@@ -5,13 +5,16 @@ import java.util.Optional;
 
 public class Lotto {
 	public static final int PRICE = 1000;
+
 	private final LottoNumbers lottoNumbers;
 
 	public Lotto(List<Integer> numbers) {
 		this.lottoNumbers = new LottoNumbers(numbers);
 	}
 
-	public Optional<LottoRank> getRank(Lotto winningLotto) {
-		return LottoRank.from(lottoNumbers.countBySame(winningLotto.lottoNumbers));
+	public Optional<LottoRank> getRank(WinningLotto winningLotto) {
+		return LottoRank.valueOf(
+			lottoNumbers.countBySame(winningLotto.getFirstRankLotto().lottoNumbers),
+			lottoNumbers.contains(winningLotto.getBonusNumber()));
 	}
 }

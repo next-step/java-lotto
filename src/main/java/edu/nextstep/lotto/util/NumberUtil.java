@@ -1,13 +1,29 @@
 package edu.nextstep.lotto.util;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import edu.nextstep.lotto.domain.sub.LottoNumber;
+import edu.nextstep.lotto.domain.sub.LottoNumbers;
+
 public class NumberUtil {
 
 	private NumberUtil() {
+	}
+
+	public static List<List<Integer>> getRandomLottoNumbersList(int size) {
+		List<List<Integer>> lottoNumbers = new ArrayList<>();
+		for (int i = 0; i < size; i++) {
+			lottoNumbers.add(getRandomLottoNumbers());
+		}
+		return lottoNumbers;
+	}
+
+	private static List<Integer> getRandomLottoNumbers() {
+		return NumberUtil.generateSortedRandomNumber(LottoNumber.START_LIMIT, LottoNumber.END_LIMIT, LottoNumbers.SIZE);
 	}
 
 	public static List<Integer> generateSortedRandomNumber(int start, int end, int size) {
@@ -21,7 +37,7 @@ public class NumberUtil {
 		return randomNumbers;
 	}
 
-	public static void rangeCheck(int start, int end, int size) {
+	private static void rangeCheck(int start, int end, int size) {
 		if (start > end) {
 			throw new IllegalArgumentException("start가 end보다 클 수 없습니다.");
 		}
