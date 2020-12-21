@@ -57,7 +57,7 @@ class LottoGameTest {
         };
         List<Lottery> lotteryList = Arrays.asList(lotteries);
 
-        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
+        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
         Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
 
         String [] matchedValues = new String[lotteryList.size()];
@@ -83,7 +83,7 @@ class LottoGameTest {
         };
         List<Lottery> lotteryList = Arrays.asList(lotteries);
 
-        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
+        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
         Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
         float profitRate = lottoGame.calculateProfit(5000 ,matchedResult);
 

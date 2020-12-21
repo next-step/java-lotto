@@ -37,10 +37,10 @@ public class InputView {
     }
 
     /**
-     * 당첨 번호를 입력받아 문자열 배열로 리턴하는 메소드
-     * @return 사용자에게 입력받은 당첨 번호 배열
+     * 당첨 번호를 입력받아 문자열로 리턴하는 메소드
+     * @return 사용자에게 입력받은 당첨 번호 문자열
      */
-    public String[] getWinningNumbers() {
-        return scanner.nextLine().replaceAll("\\s+","").split(",");
+    public String getWinningNumbers() {
+        return scanner.nextLine();
     }
 }

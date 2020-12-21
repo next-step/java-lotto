@@ -26,7 +26,7 @@ class LotteryTest {
     @DisplayName("한 개의 로또 당첨 여부 테스트")
     void match_with_winning_lottery() {
         Lottery lottery = new Lottery(Arrays.asList(1,2,3,4,5,6));
-        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6".split(","));
+        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
 
         lottery.match(winningLottery);
         assertThat(lottery.getMatched()).isEqualTo(6);

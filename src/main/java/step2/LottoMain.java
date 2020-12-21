@@ -21,7 +21,7 @@ public class LottoMain {
         resultView.showPurchasedLottery(lottoGame.getLotteryList());
         inputView.showInputWinningMessage();
 
-        String[] winningNumbers = inputView.getWinningNumbers();
+        String winningNumbers = inputView.getWinningNumbers();
 
         WinningLottery winningLottery = new WinningLottery(winningNumbers);
 

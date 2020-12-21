@@ -14,11 +14,22 @@ public class WinningLottery {
      * 당첨 복권(당첨 번호를 가진 복권 객체)을 생성하는 생성자
      * @param winningNumbers 입력 받은 당첨 번호 문자열
      */
-    public WinningLottery(String[] winningNumbers) {
-        if (winningNumbers.length != Constants.LOTTO_NUMBERS_LENGTH) {
+    public WinningLottery(String winningNumbers) {
+        String[] splitNumbers = splitNumbers(winningNumbers);
+
+        if (splitNumbers.length != Constants.LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_MUST_BE_6);
         }
-        winningLottery = new Lottery(convertToInteger(winningNumbers));
+        winningLottery = new Lottery(convertToInteger(splitNumbers));
+    }
+
+    /**
+     * 사용자에게 입력받은 당첨번호 문자열을 delimiter를 이용하여 배열로 split하는 메소드
+     * @param winningNumbers 사용자에게 입력받은 문자열
+     * @return 분리된 문자열 배열
+     */
+    private String[] splitNumbers(String winningNumbers) {
+        return winningNumbers.replaceAll("\\s+","").split(",");
     }
 
     /**
