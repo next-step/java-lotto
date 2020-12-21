@@ -49,8 +49,8 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoResult retrieveStatistics(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        return new LottoResult(findLottoResultType(winningLotto, bonusLottoNumber));
+    public LottoResult retrieveStatistics(WinningLotto winningLotto) {
+        return new LottoResult(findLottoRanks(winningLotto));
     }
 
     public List<List<Integer>> getLottoNumbersOfLottos() {
@@ -59,9 +59,9 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoRank> findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    private List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLotto, bonusLottoNumber))
+                .map(winningLotto::match)
                 .collect(Collectors.toList());
     }
 }

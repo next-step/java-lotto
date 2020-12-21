@@ -16,10 +16,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    LottoRank findLottoResultType(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        int matchedCount = lottoNumbers.countMatchedNumbers(winningLotto.lottoNumbers);
-        boolean isBonus = lottoNumbers.isBonusMatched(bonusLottoNumber);
-        return LottoRank.findByMatchedCountAndBonus(matchedCount, isBonus);
+    int countMatchedNumbers(Lotto lotto) {
+        return lottoNumbers.countMatchedNumbers(lotto.lottoNumbers);
+    }
+
+    boolean isBonus(LottoNumber lottoNumber) {
+        return lottoNumbers.isBonusMatched(lottoNumber);
     }
 
     public List<Integer> getLottoNumbers() {

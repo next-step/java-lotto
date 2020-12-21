@@ -69,12 +69,12 @@ class LottosTest {
     @Test
     void retrieveStatisticsTest() {
         // Given
-        Lotto winningLotto = new Lotto();
-        int testLottoSize = 10;
-        Lottos lottos = new Lottos(testLottoSize, manualPurchasingLottos);
-        LottoNumber bonusNumber = new LottoNumber(provideBonusNumber(winningLotto));
+        Lottos lottos = new Lottos(10, manualPurchasingLottos);
+        Lotto lotto = new Lotto();
+        LottoNumber bonusNumber = new LottoNumber(provideBonusNumber(lotto));
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         // When
-        LottoResult lottoResult = lottos.retrieveStatistics(winningLotto, bonusNumber);
+        LottoResult lottoResult = lottos.retrieveStatistics(winningLotto);
         // Then
         assertAll(
                 () -> assertThat(lottoResult).isNotNull(),

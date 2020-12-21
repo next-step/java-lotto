@@ -15,6 +15,6 @@ public class LottoGame {
         Lottos lottos = new Lottos(automatedPurchasingSize, readManualPurchasingLottos(manualPurchasingSize));
         printPurchasedLottoSize(manualPurchasingSize, automatedPurchasingSize);
         printNumbersOfPurchasedLottos(lottos);
-        printStatisticsForLottos(lottos.retrieveStatistics(readWinningLottoNumbers(), readBonusLottoNumber()));
+        printStatisticsForLottos(lottos.retrieveStatistics(readWinningLotto()));
     }
 }

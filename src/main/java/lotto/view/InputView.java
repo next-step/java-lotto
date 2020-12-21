@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +57,11 @@ public class InputView {
     }
 
     private static Lotto convertLotto(String lottoNumbers) {
-        return new Lotto(new LottoNumbers(convertNumbers(lottoNumbers)));
+        return new Lotto(convertLottoNumbers(lottoNumbers));
+    }
+
+    private static LottoNumbers convertLottoNumbers(String lottoNumbers) {
+        return new LottoNumbers(convertNumbers(lottoNumbers));
     }
 
     private static List<Integer> convertNumbers(String numbers) {
@@ -64,6 +69,10 @@ public class InputView {
         return Arrays.stream(convertedNumbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static WinningLotto readWinningLotto() {
+        return new WinningLotto(readWinningLottoNumbers(), readBonusLottoNumber());
     }
 
     public static Lotto readWinningLottoNumbers() {
