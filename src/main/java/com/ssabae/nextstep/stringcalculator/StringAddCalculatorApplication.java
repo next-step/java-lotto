@@ -12,11 +12,9 @@ import com.ssabae.nextstep.stringcalculator.view.UserInputHelper;
 public class StringAddCalculatorApplication {
 
     private final StringAddCalculator calculator;
-    private final UserInputHelper userInputHelper;
 
     public StringAddCalculatorApplication() {
         calculator = new StringAddCalculator();
-        userInputHelper = new UserInputHelper();
     }
 
     public static void main(String[] args) {
@@ -24,7 +22,8 @@ public class StringAddCalculatorApplication {
     }
 
     public void launch() {
-        String userInputValue = userInputHelper.inputString();
+
+        String userInputValue = UserInputHelper.inputString();
         int result = calculator.calculate(userInputValue);
         Printer.printCalculatedResult(result);
     }
