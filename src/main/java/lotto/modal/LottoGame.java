@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class LottoGame {
 
 	private final Money money;
-	private final List<Lotto> lottoPackage;
+	private List<Lotto> lottoPackage;
 
 	public LottoGame(Money userInputMoney) {
 		this.money = userInputMoney;
@@ -18,8 +18,13 @@ public class LottoGame {
 		return this.lottoPackage;
 	}
 
-	public LottoResult getLottoResult(Lotto winnerLotto) {
-		return new LottoResult(this.lottoPackage, winnerLotto);
+	public LottoResult getLottoResult(WinnerLotto winnerLotto) {
+		return this.generateLottoResult(winnerLotto);
+	}
+
+	public void addManualLotto(List<Lotto> manualLotto) {
+		this.lottoPackage = Stream.concat(this.lottoPackage.stream(), manualLotto.stream())
+			.collect(Collectors.toList());
 	}
 
 	private List<Lotto> generateLottoPackage() {
@@ -28,5 +33,12 @@ public class LottoGame {
 		return Stream.generate(Lotto::new)
 			.limit(count)
 			.collect(Collectors.toList());
+	}
+
+	private LottoResult generateLottoResult(WinnerLotto winnerLotto) {
+		return new LottoResult(this.lottoPackage.stream()
+			.map(lotto -> LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto)))
+			.filter(lottoRank -> !lottoRank.equals(LottoRank.NOTHING_RANK))
+			.collect(Collectors.toList()));
 	}
 }

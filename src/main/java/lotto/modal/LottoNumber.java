@@ -16,6 +16,10 @@ public class LottoNumber {
 		this.number = lottoNumber;
 	}
 
+	public LottoNumber(String userInputNumber) {
+		this(Integer.parseInt(userInputNumber));
+	}
+
 	public static int generateRandomLottoNumber() {
 		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
 	}
