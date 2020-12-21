@@ -18,7 +18,7 @@ import lotto.utils.SplitUtils;
 public class ManualLottoTicketsStrategy implements LottoTicketsStrategy {
 
 	@Override
-	public LottoTickets generate(BuyInfo buyInfo) {
+	public LottoTickets play(BuyInfo buyInfo) {
 		ManualNumbers manualNumbers = buyInfo.getManualNumbers();
 
 		List<LottoTicket> collect = manualNumbers.getManualNumbers().stream()

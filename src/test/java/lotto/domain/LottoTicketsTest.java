@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.Game;
 import lotto.domain.lottoTicketsStrategy.AutoLottoTicketsStrategy;
+import lotto.domain.lottoTicketsStrategy.LottoTicketsStrategy;
 import lotto.domain.lottoTicketsStrategy.ManualLottoTicketsStrategy;
 
 /**
@@ -27,8 +27,8 @@ public class LottoTicketsTest {
 		List<String> manualNumbers = new ArrayList<>();
 		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
 
-		Game game = new Game(new AutoLottoTicketsStrategy());
-		LottoTickets lottoTickets = game.play(buyInfo);
+		LottoTicketsStrategy lottoTicketsStrategy = new AutoLottoTicketsStrategy();
+		LottoTickets lottoTickets = lottoTicketsStrategy.play(buyInfo);
 		assertThat(lottoTickets.getTicketCount()).isEqualTo(5);
 	}
 
@@ -39,8 +39,8 @@ public class LottoTicketsTest {
 		List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6");
 		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
 
-		Game game = new Game(new ManualLottoTicketsStrategy());
-		LottoTickets lottoTickets = game.play(buyInfo);
+		LottoTicketsStrategy lottoTicketsStrategy = new ManualLottoTicketsStrategy();
+		LottoTickets lottoTickets = lottoTicketsStrategy.play(buyInfo);
 
 		assertThat(lottoTickets.getTicketCount()).isEqualTo(1);
 	}
@@ -52,10 +52,11 @@ public class LottoTicketsTest {
 		List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
 		BuyInfo buyInfo = new BuyInfo(cash, manualNumbers);
 
-		Game manualGame = new Game(new ManualLottoTicketsStrategy());
-		Game autoGame = new Game(new AutoLottoTicketsStrategy());
-		LottoTickets manualLottoTickets = manualGame.play(buyInfo);
-		LottoTickets autoLottoTickets = autoGame.play(buyInfo);
+		LottoTicketsStrategy manualLottoTicketsStrategy = new ManualLottoTicketsStrategy();
+		LottoTicketsStrategy autoLottoTicketsStrategy = new AutoLottoTicketsStrategy();
+
+		LottoTickets manualLottoTickets = manualLottoTicketsStrategy.play(buyInfo);
+		LottoTickets autoLottoTickets = autoLottoTicketsStrategy.play(buyInfo);
 
 		assertThat(manualLottoTickets.getTicketCount()).isEqualTo(2);
 		assertThat(autoLottoTickets.getTicketCount()).isEqualTo(1);

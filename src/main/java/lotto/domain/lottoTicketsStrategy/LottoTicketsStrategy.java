@@ -9,5 +9,5 @@ import lotto.domain.LottoTickets;
  * @description :
  **/
 public interface LottoTicketsStrategy {
-	LottoTickets generate(BuyInfo buyInfo);
+	LottoTickets play(BuyInfo buyInfo);
 }

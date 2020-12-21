@@ -27,7 +27,7 @@ public class AutoLottoTicketsStrategy implements LottoTicketsStrategy {
 		.collect(Collectors.toList());
 
 	@Override
-	public LottoTickets generate(BuyInfo buyInfo) {
+	public LottoTickets play(BuyInfo buyInfo) {
 		return new LottoTickets(createTickets(buyInfo));
 	}
 
