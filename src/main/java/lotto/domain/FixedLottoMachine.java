@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FixedLottoMachine implements LottoMachine {
-    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "로또 번호는 숫자만 가능합니다. (입력 예시 : 1, 2, 3, 4, 5, 6)";
-    private static final String NUMBER_COUNT_EXCEPTION_MESSAGE = "로또 번호는 %d개만 가능합니다.";
-    private static final int NUMBER_COUNT = 6;
     List<String> manualPurchaseLottoNumbers;
     String manualPurchaseLottoNumber;
 
