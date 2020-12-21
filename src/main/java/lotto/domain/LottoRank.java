@@ -28,16 +28,11 @@ public enum LottoRank {
         return Arrays.asList(FIFTH, FORTH, THIRD, SECOND, FIRST);
     }
 
-    private List<LottoRank> bonusTypes() {
+    static LottoRank findByMatchedCountAndBonus(int matchedCount, boolean isBonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(LottoRank::isBonus)
-                .collect(Collectors.toList());
-    }
-
-    private boolean isBonusType(int matchedCount) {
-        return bonusTypes().stream()
-                .map(LottoRank::getMatchedCount)
-                .anyMatch(value -> value == matchedCount);
+                .filter(lottoRank -> lottoRank.isMatched(matchedCount, isBonus))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("로또가 매칭된 숫자의 범위를 넘어섰습니다."));
     }
 
     private boolean isMatched(int matchedCount, boolean isBonus) {
@@ -47,11 +42,16 @@ public enum LottoRank {
         return this.matchedCount == matchedCount;
     }
 
-    static LottoRank findByMatchedCountAndBonus(int matchedCount, boolean isBonus) {
+    private boolean isBonusType(int matchedCount) {
+        return bonusTypes().stream()
+                .map(LottoRank::getMatchedCount)
+                .anyMatch(value -> value == matchedCount);
+    }
+
+    private List<LottoRank> bonusTypes() {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.isMatched(matchedCount, isBonus))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("로또가 매칭된 숫자의 범위를 넘어섰습니다."));
+                .filter(LottoRank::isBonus)
+                .collect(Collectors.toList());
     }
 
     public int getMatchedCount() {
