@@ -11,6 +11,7 @@ import java.util.List;
  **/
 public class BuyInfo {
 
+	public static final int LOTTO_TICKET_PRICE = 1000;
 	private Cash cash;
 	private ManualNumbers manualNumbers;
 

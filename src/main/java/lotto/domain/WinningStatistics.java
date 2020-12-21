@@ -30,7 +30,7 @@ public class WinningStatistics {
 		int ticketCount = prizeResult.size();
 		int revenue = prizeResult.stream()
 			.mapToInt(prize -> prize.getReward()).sum();
-		Double buyPrice = Double.valueOf(ticketCount * LottoTickets.getLottoTicketPrice());
+		Double buyPrice = Double.valueOf(ticketCount * BuyInfo.LOTTO_TICKET_PRICE);
 		return parseWinningSummaryFormat(revenue / buyPrice);
 	}
 

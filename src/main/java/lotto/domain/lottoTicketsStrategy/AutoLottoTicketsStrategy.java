@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lotto.domain.BuyInfo;
 import lotto.domain.LottoNumber;
@@ -19,6 +20,11 @@ import lotto.domain.LottoTickets;
  * @description :
  **/
 public class AutoLottoTicketsStrategy implements LottoTicketsStrategy {
+
+	public static final List<Integer> NUMBER_BOUNDARY = IntStream.rangeClosed(LottoNumber.MINIMUM_OF_LOTTO_NUMBER,
+		LottoNumber.MAXIMUM_OF_LOTTO_NUMBER)
+		.boxed()
+		.collect(Collectors.toList());
 
 	@Override
 	public LottoTickets generate(BuyInfo buyInfo) {
@@ -35,8 +41,8 @@ public class AutoLottoTicketsStrategy implements LottoTicketsStrategy {
 	}
 
 	private List<LottoNumber> randomLottoNumbers() {
-		Collections.shuffle(numberBoundary);
-		return numberBoundary.stream()
+		Collections.shuffle(NUMBER_BOUNDARY);
+		return NUMBER_BOUNDARY.stream()
 			.map(LottoNumber::new)
 			.limit(LottoTicket.LOTTO_TICKET_NUMBER_COUNT)
 			.sorted(Comparator.comparing(LottoNumber::getNumber))
