@@ -52,6 +52,9 @@
 * 모든 로또의 결과 `LottoResult`
     * [ ] 모든 로또의 `LottoRank`에 따른 당첨 통계를 반환한다.
     * [ ] 모든 로또의 수익률을 반환한다.
+* 당첨 확인을 하기위한 로또 정보를 가진 `WinningLotto`
+    * [ ] 당첨 `Lotto`와 보너스 번호 `LottoNumber`를 가진다.
+    * [ ] 사용자가 구매한 `Lotto`와 매칭하여 당첨 결과 `LottoRank`를 반환한다.
 * 로또 게임을 구성할 게임 `LottoGame`
     * [ ] 로또 게임을 시작한다.
 * 게임에 필요한 정보를 입력받을 `InputView`
