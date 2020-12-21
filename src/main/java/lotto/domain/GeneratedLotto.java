@@ -37,7 +37,7 @@ public class GeneratedLotto {
 	}
 
 	private void validateMaxCount(List<Integer> generatedLotto) {
-		Set<Integer> validateSet = generatedLotto.stream().collect(Collectors.toSet());
+		Set<Integer> validateSet = new HashSet<>(generatedLotto);
 		if (validateSet.size() != LOTTO_NUMBER_MAX_COUNT) {
 			throw new IllegalArgumentException();
 		}
