@@ -5,13 +5,15 @@ public class LottoGame {
 
 	private int lottoGameCount;
 
+	private LottoNumbers lottoNumbers;
+
 	public int calculateLottoCount(int input) {
 		this.lottoGameCount = input/LOTTO_PRICE;
 		return this.lottoGameCount;
 	}
 
 	public LottoNumbers generateLottoNumbers(int lottoGameCount, NumberGenerator numberGenerator) {
-		LottoNumbers lottoNumbers = new LottoNumbers();
+		lottoNumbers = new LottoNumbers();
 		return lottoNumbers.generateLottoNumbers(lottoGameCount, numberGenerator);
 	}
 }
