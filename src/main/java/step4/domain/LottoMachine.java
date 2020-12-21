@@ -3,6 +3,7 @@ package step4.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class LottoMachine {
     private final int PRICE = 1000;
@@ -14,7 +15,11 @@ public class LottoMachine {
     public List<Lotto> buyLotto(int purchasePrice, List<String> manualNumbersList) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        if (manualNumbersList.size() > 0) {
+        int manualNumbersListSize = Optional.ofNullable(manualNumbersList)
+                .map(List::size)
+                .orElse(0);
+
+        if (manualNumbersListSize > 0) {
             buyManualLotto(manualNumbersList, lottoList);
             purchasePrice = buyManualLottoChange(purchasePrice, manualNumbersList);
         }

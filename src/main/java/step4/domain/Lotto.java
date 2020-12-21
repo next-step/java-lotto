@@ -1,9 +1,6 @@
 package step4.domain;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -23,7 +20,10 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
+        int numbersSize = Optional.ofNullable(numbers)
+                            .map(List::size)
+                            .orElse(0);
+        if (numbersSize != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 값이어야 합니다.");
         }
     }
