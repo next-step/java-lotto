@@ -17,12 +17,4 @@ public class LottoGameTest {
 		int actual = lotto.calculateLottoCount(input);
 		assertThat(expected).isEqualTo(actual);
 	}
-
-	@DisplayName("로또 번호 생성 테스트")
-	@Test
-	public void generateLottoNumberTest() {
-		int expected = 6;
-		int actual = lotto.generateLottoNumber().size();
-		assertThat(expected).isEqualTo(actual);
-	}
 }
