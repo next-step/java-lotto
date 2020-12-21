@@ -1,4 +1,4 @@
-package util;
+package calculator.util;
 
 public class ValidateUtils {
     private static final String VALID_NEGATIVE_NUMBER_MESSAGE = "음수는 입력 불가능합니다.";

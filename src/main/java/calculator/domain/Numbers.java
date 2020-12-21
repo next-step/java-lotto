@@ -1,6 +1,6 @@
-package calculator;
+package calculator.domain;
 
-import util.ValidateUtils;
+import calculator.util.ValidateUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 
 public class Numbers {
     private static final String VALID_EMPTY_NUMBERS_MESSAGE = "입력 값이 없습니다.";
-    public static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
+    private static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
+
     private final List<Integer> numbers;
 
     public Numbers(StringSplitor stringSplitor) {
@@ -43,7 +44,7 @@ public class Numbers {
 
     public int sum() {
         return numbers.stream()
-                .mapToInt(i -> i)
+                .mapToInt(Integer::intValue)
                 .sum();
     }
 }
