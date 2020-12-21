@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,15 +14,7 @@ public class LottoWallet {
 	private List<LottoTickets> lottoWallet;
 
 	public LottoWallet(LottoTickets... userLottoTickets) {
-		lottoWallet = splitUserLottoTickets(userLottoTickets);
-	}
-
-	private List<LottoTickets> splitUserLottoTickets(LottoTickets[] userLottoTickets) {
-		lottoWallet = new ArrayList<>();
-		for (LottoTickets lottoTickets : userLottoTickets) {
-			lottoWallet.add(lottoTickets);
-		}
-		return lottoWallet;
+		lottoWallet = Arrays.asList(userLottoTickets);
 	}
 
 	public List<LottoTickets> getLottoTickets() {
