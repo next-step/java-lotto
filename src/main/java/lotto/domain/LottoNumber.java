@@ -8,7 +8,9 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (number < MINIMUM_VALUE || number > MAXIMUM_VALUE) {
-            throw new IllegalArgumentException("1 - 45 사이 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(
+                    String.format("%d - %d 사이 숫자를 입력해 주세요.", MINIMUM_VALUE, MAXIMUM_VALUE)
+            );
         }
         this.number = number;
     }

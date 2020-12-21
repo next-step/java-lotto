@@ -21,4 +21,12 @@ public class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자만 입력해 주세요.");
     }
+
+    @Test
+    @DisplayName("범위(1-45)를 넘어가면 IllegalArgumentException")
+    void IllegalArgumentException() {
+        assertThatThrownBy(() -> new LottoNumber(50))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("1 - 45 사이 숫자를 입력해 주세요.");
+    }
 }
