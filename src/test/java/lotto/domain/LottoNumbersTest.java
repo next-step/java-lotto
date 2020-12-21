@@ -11,7 +11,7 @@ class LottoNumbersTest {
 	@Test
 	public void generateLottoNumbersTest() {
 		int expected = 6;
-		int actual = lottoNumbers.generateLottoNumbers(6, new LottoNumberGenerator()).size();
+		int actual = lottoNumbers.generateLottoNumbers(6, new LottoNumberGenerator()).getLottoNumbers().size();
 		assertThat(expected).isEqualTo(actual);
 	}
 }
