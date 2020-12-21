@@ -1,12 +1,11 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
+import lotto.domain.BuyInfo;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.WinningLottoTicket;
 
 /**
@@ -17,33 +16,9 @@ import lotto.domain.WinningLottoTicket;
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static LottoTickets requireCash() {
+	private static int requireCash() {
 		System.out.println("구입금액을 입력해 주세요.");
-		int cash = scanner.nextInt();
-		LottoTickets lottoTickets = new LottoTickets(cash);
-
-		printTicketCount(lottoTickets.getTicketCount());
-		printTickets(lottoTickets.getLottoTickets());
-
-		return lottoTickets;
-	}
-
-	private static void printTicketCount(int ticketCount) {
-		System.out.println(ticketCount + "개를 구매했습니다.");
-	}
-
-	private static void printTickets(List<LottoTicket> lottoTickets) {
-		for (LottoTicket lottoTicket : lottoTickets) {
-			printLottoTicketNumbers(lottoTicket);
-		}
-	}
-
-	private static void printLottoTicketNumbers(LottoTicket lottoTicket) {
-		List<Integer> numbers = lottoTicket.get().stream()
-			.map(lottoNumber -> lottoNumber.getNumber())
-			.collect(Collectors.toList());
-
-		System.out.println(numbers.toString());
+		return scanner.nextInt();
 	}
 
 	public static WinningLottoTicket requireWinningNumber() {
@@ -54,4 +29,35 @@ public class InputView {
 		return new WinningLottoTicket(winningNumber, new LottoNumber(bonusNumber));
 	}
 
+	public static BuyInfo requireBuyInfo() {
+		int cash = requireCash();
+		List<String> manualNumbers = requireManualNumbers(cash);
+		return new BuyInfo(cash, manualNumbers);
+	}
+
+	private static List<String> requireManualNumbers(int cash) {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		int manualLottoCount = scanner.nextInt();
+		BuyInfo.validateManualLottoCount(cash, manualLottoCount);
+
+		List<String> manualNumbers = new ArrayList<>();
+		if (hasRequireManualNumbers(manualLottoCount))
+			return manualNumbers;
+
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		manualNumbers.addAll(requireManualNumber(manualLottoCount));
+		return manualNumbers;
+	}
+
+	private static List<String> requireManualNumber(int manualLottoCount) {
+		List<String> manualNumbers = new ArrayList<>();
+		for (int i = 0; i < manualLottoCount; i++) {
+			manualNumbers.add(scanner.next());
+		}
+		return manualNumbers;
+	}
+
+	private static boolean hasRequireManualNumbers(int manualLottoCount) {
+		return manualLottoCount < 1;
+	}
 }

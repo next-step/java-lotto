@@ -25,7 +25,8 @@ public enum Prize {
 	}
 
 	public static Prize of(Long count, boolean isMatchBonus) {
-		return Arrays.stream(values()).filter(prize -> prize.isEqualMatchCount(count))
+		return Arrays.stream(values())
+			.filter(prize -> prize.isEqualMatchCount(count))
 			.filter(prize -> !prize.equals(SECOND) || isMatchBonus)
 			.findFirst()
 			.orElse(NONE);

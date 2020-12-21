@@ -3,7 +3,6 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author : byungkyu
@@ -16,20 +15,11 @@ public class WinningStatistics {
 
 	private List<Prize> prizeResult = new ArrayList<>();
 
-	public WinningStatistics(LottoTickets userLottoTickets, WinningLottoTicket winningLottoTicket) {
-		prizeResult = awards(userLottoTickets, winningLottoTicket);
-	}
-
-	private List<Prize> awards(LottoTickets userLottoTickets, WinningLottoTicket winnerLottoTicket) {
-		return userLottoTickets.getLottoTickets().stream()
-			.map(lottoTicket -> matchTicketToPrize(lottoTicket, winnerLottoTicket))
-			.collect(Collectors.toList());
-	}
-
-	private Prize matchTicketToPrize(LottoTicket lottoTicket, WinningLottoTicket winnerLottoTicket) {
-		return Prize.of(lottoTicket.getMatchCount(winnerLottoTicket.getLottoTicket()),
-			lottoTicket.isMatchBonus(
-				winnerLottoTicket.getBonusNumber()));
+	public WinningStatistics(LottoWallet lottoWallet, WinningLottoTicket winningLottoTicket) {
+		for (LottoTickets lottoTickets : lottoWallet.getLottoTickets()) {
+			lottoTickets.getLottoTickets()
+				.forEach(lottoTicket -> prizeResult.add(winningLottoTicket.matchPrize(lottoTicket)));
+		}
 	}
 
 	public List<Prize> getPrizeResult() {
@@ -38,8 +28,10 @@ public class WinningStatistics {
 
 	public BigDecimal getWinningSummary() {
 		int ticketCount = prizeResult.size();
-		int revenue = prizeResult.stream().mapToInt(prize -> prize.getReward()).sum();
-		Double buyPrice = Double.valueOf(ticketCount * LottoTickets.getLottoTicketPrice());
+		int revenue = prizeResult.stream()
+			.mapToInt(prize -> prize.getReward())
+			.sum();
+		Double buyPrice = Double.valueOf(ticketCount * BuyInfo.LOTTO_TICKET_PRICE);
 		return parseWinningSummaryFormat(revenue / buyPrice);
 	}
 

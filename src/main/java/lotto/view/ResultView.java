@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoWallet;
 import lotto.domain.Prize;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.WinningStatistics;
@@ -19,11 +21,11 @@ import lotto.domain.WinningStatistics;
 public class ResultView {
 	private static final BigDecimal ONE = new BigDecimal(1);
 
-	public static void printWinningStatistics(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+	public static void printWinningStatistics(LottoWallet lottoWallet, WinningLottoTicket winningLottoTicket) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		WinningStatistics winningStatistics = new WinningStatistics(lottoTickets, winningLottoTicket);
+		WinningStatistics winningStatistics = new WinningStatistics(lottoWallet, winningLottoTicket);
 		printWinningStatus(winningStatistics.getPrizeResult());
 		printWinningAverage(winningStatistics.getWinningSummary());
 	}
@@ -56,6 +58,33 @@ public class ResultView {
 			return ",보너스 볼 일치";
 		}
 		return "";
+	}
+
+	public static void printTicket(LottoTickets manualChoiceLottoTickets, LottoTickets autoChoiceLottoTickets) {
+		printTicketCount(manualChoiceLottoTickets, autoChoiceLottoTickets);
+		printLottoTicketsNumbers(manualChoiceLottoTickets);
+		printLottoTicketsNumbers(autoChoiceLottoTickets);
+
+	}
+
+	public static void printTicketCount(LottoTickets manualChoiceLottoTickets, LottoTickets autoChoiceLottoTickets) {
+		System.out.println(
+			"수동으로 " + manualChoiceLottoTickets.getTicketCount() + "장, 자동으로 " + autoChoiceLottoTickets.getTicketCount()
+				+ "개를 구매했습니다.");
+	}
+
+	private static void printLottoTicketsNumbers(LottoTickets lottoTickets) {
+		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+			printLottoTicketNumbers(lottoTicket);
+		}
+	}
+
+	private static void printLottoTicketNumbers(LottoTicket lottoTicket) {
+		List<Integer> numbers = lottoTicket.get().stream()
+			.map(lottoNumber -> lottoNumber.getNumber())
+			.collect(Collectors.toList());
+
+		System.out.println(numbers.toString());
 	}
 
 }
