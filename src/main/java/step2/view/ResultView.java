@@ -1,7 +1,6 @@
 package step2.view;
 
 import step2.domain.LottoGame;
-import step2.util.Constants;
 import step2.domain.Lottery;
 
 import java.util.List;
@@ -9,6 +8,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
+
+    private static final String OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG = "개를 구매했습니다.";
+    private static final String OPEN_BRACKET = "[";
+    private static final String CLOSE_BRACKET = "]";
+    private static final String COMMA_DELIMITER = ", ";
+    private static final String RESULT_MESSAGE = "당첨 통계";
+    private static final String RESULT_LINE = "--------------";
+    private static final String LOSS = "손해";
+    private static final String GAIN = "이익";
 
     /**
      * 구입한 복권을 출력하는 메소드
@@ -27,11 +35,11 @@ public class ResultView {
      * @param lottery 개별 복권
      */
     private void printEachLottery(Lottery lottery) {
-        System.out.print(Constants.OPEN_BRACKET);
+        System.out.print(OPEN_BRACKET);
         System.out.print(lottery.getSelectedNumbers().stream()
                                                     .map(Object::toString)
-                                                    .collect(Collectors.joining(Constants.COMMA_DELIMITER)));
-        System.out.println(Constants.CLOSE_BRACKET);
+                                                    .collect(Collectors.joining(COMMA_DELIMITER)));
+        System.out.println(CLOSE_BRACKET);
     }
 
     /**
@@ -39,7 +47,7 @@ public class ResultView {
      * @param size 구입한 복권 개수
      */
     private void printNumberOfPurchased(int size) {
-        System.out.println(size + Constants.OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG);
+        System.out.println(size + OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG);
     }
 
     /**
@@ -63,8 +71,8 @@ public class ResultView {
      */
     private void printResultMessage() {
         System.out.println();
-        System.out.println(Constants.RESULT_MESSAGE);
-        System.out.println(Constants.RESULT_LINE);
+        System.out.println(RESULT_MESSAGE);
+        System.out.println(RESULT_LINE);
     }
 
     /***
@@ -84,9 +92,9 @@ public class ResultView {
      */
     private String getLossOrGain(float profitRate) {
         if (profitRate >= 1) {
-            return Constants.GAIN;
+            return GAIN;
         }
-        return Constants.LOSS;
+        return LOSS;
     }
 
     /**

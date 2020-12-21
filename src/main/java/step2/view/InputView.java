@@ -1,10 +1,11 @@
 package step2.view;
 
-import step2.util.Constants;
-
 import java.util.Scanner;
 
 public class InputView {
+
+    private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String INPUT_WINNING_NUMBERS_MSG = "지난 주 당첨 번호를 입력해주세요.";
 
     private static Scanner scanner;
 
@@ -16,7 +17,7 @@ public class InputView {
      * 사용자 입력 메시지를 출력하는 메소드
      */
     public void showInputMessage() {
-        System.out.println(Constants.INPUT_MONEY_MESSAGE);
+        System.out.println(INPUT_MONEY_MESSAGE);
     }
 
     /**
@@ -32,7 +33,7 @@ public class InputView {
      */
     public void showInputWinningMessage() {
         System.out.println();
-        System.out.println(Constants.INPUT_WINNING_NUMBERS_MSG);
+        System.out.println(INPUT_WINNING_NUMBERS_MSG);
         scanner.nextLine();
     }
 

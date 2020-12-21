@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottery {
+
+    private static final int LOTTO_NUMBERS_LENGTH = 6;
+    private static final int LOTTO_BALL_START_NUMBER = 1;
+    private static final int LOTTO_BALL_END_NUMBER = 45;
     
     private Lottery winningLottery;
 
@@ -17,7 +21,7 @@ public class WinningLottery {
     public WinningLottery(String winningNumbers) {
         String[] splitNumbers = splitNumbers(winningNumbers);
 
-        if (splitNumbers.length != Constants.LOTTO_NUMBERS_LENGTH) {
+        if (splitNumbers.length != LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_MUST_BE_6);
         }
         winningLottery = new Lottery(convertToInteger(splitNumbers));
@@ -51,7 +55,7 @@ public class WinningLottery {
     private int convertNumber(String number) {
         int convertedNumber = Integer.parseInt(number);
 
-        if (convertedNumber < Constants.LOTTO_BALL_START_NUMBER || convertedNumber > Constants.LOTTO_BALL_END_NUMBER) {
+        if (convertedNumber < LOTTO_BALL_START_NUMBER || convertedNumber > LOTTO_BALL_END_NUMBER) {
             throw new IllegalArgumentException(Constants.WINNING_NUMBER_INVALID_RANGE);
         }
         return convertedNumber;

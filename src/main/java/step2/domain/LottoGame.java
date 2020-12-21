@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
+    private static final int MINIMUM_INPUT_MONEY = 1_000;
+
     private List<Lottery> lotteryList;
 
     private Map<Lottery, Integer> matchedResult;
@@ -40,7 +42,7 @@ public class LottoGame {
      * @return 발급된 로또 용지 묶음
      */
     public List<Lottery> buy(int money) {
-        if (money < Constants.MINIMUM_INPUT_MONEY) {
+        if (money < MINIMUM_INPUT_MONEY) {
             throw new IllegalArgumentException(Constants.MONEY_IS_LESS_THAN_1000);
         }
         return makeLotteryList(money);
