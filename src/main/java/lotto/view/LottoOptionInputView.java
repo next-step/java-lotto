@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.LottoOption;
+import lotto.option.LottoOption;
 import lotto.number.WinningNumbers;
 import lotto.view.input.MoneyInputView;
 import lotto.view.input.WinningNumberInputView;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.option;
 
 import lotto.number.WinningNumbers;
 

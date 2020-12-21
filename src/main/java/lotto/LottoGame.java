@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.option.LottoOption;
 import lotto.result.LottoStatistics;
 
 class LottoGame {

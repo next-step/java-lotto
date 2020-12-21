@@ -3,6 +3,7 @@ package lotto;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
+import lotto.option.LottoOption;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
