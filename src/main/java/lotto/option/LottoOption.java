@@ -3,6 +3,6 @@ package lotto.option;
 import lotto.number.WinningNumbers;
 
 public interface LottoOption {
-	int getMoney();
+	LottoMoney getMoney();
 	WinningNumbers getWinningNumbers();
 }

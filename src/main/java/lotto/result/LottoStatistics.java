@@ -1,6 +1,6 @@
 package lotto.result;
 
-import lotto.LottoStore;
+import lotto.option.LottoMoney;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class LottoStatistics {
 		}
 
 		long income = calculateIncome();
-		return (double) income / (allCount * LottoStore.LOTTO_PRICE);
+		return (double) income / (allCount * LottoMoney.LOTTO_PRICE);
 	}
 
 	public long calculateAllCount() {

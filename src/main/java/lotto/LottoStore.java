@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
+import lotto.option.LottoMoney;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,25 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoStore {
-	public static final int LOTTO_PRICE = 1000;
 
-	LottoTicket sell(int money) {
-		validateMoney(money);
+	LottoTicket sell(LottoMoney money) {
 		List<LottoNumbers> lottoNumbers = new ArrayList<>();
-		for (int i = 0; i < money / LOTTO_PRICE; i++) {
+		for (int i = 0; i < money.getLottoBuyCount(); i++) {
 			lottoNumbers.add(generateRandomLottoNumbers());
 		}
 		return new LottoTicket(lottoNumbers);
-	}
-
-	private static void validateMoney(int money) {
-		if (money <= 0) {
-			throw new IllegalArgumentException("money is not positive");
-		}
-
-		if (money % LOTTO_PRICE > 0) {
-			throw new IllegalArgumentException("money change exist");
-		}
 	}
 
 	private static LottoNumbers generateRandomLottoNumbers() {

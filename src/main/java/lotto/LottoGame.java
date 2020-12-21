@@ -16,8 +16,7 @@ class LottoGame {
 	}
 
 	void play() {
-		final int money = lottoOption.getMoney();
-		LottoTicket lottoTicket = lottoStore.sell(money);
+		LottoTicket lottoTicket = lottoStore.sell(lottoOption.getMoney());
 		lottoView.showLottoTicket(lottoTicket);
 
 		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(lottoOption.getWinningNumbers());

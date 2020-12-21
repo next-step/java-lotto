@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.option.LottoMoney;
 import lotto.option.LottoOption;
 import lotto.number.WinningNumbers;
 import lotto.view.input.MoneyInputView;
@@ -16,7 +17,7 @@ public class LottoOptionInputView implements LottoOption {
 	}
 
 	@Override
-	public int getMoney() {
+	public LottoMoney getMoney() {
 		return this.moneyInputView.getMoney();
 	}
 

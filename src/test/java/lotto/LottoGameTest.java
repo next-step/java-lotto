@@ -3,6 +3,7 @@ package lotto;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
+import lotto.option.LottoMoney;
 import lotto.option.LottoOption;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
@@ -24,9 +25,9 @@ class LottoGameTest {
 		List<String> callList = new ArrayList<>();
 		LottoOption lottoOption = new LottoOption() {
 			@Override
-			public int getMoney() {
+			public LottoMoney getMoney() {
 				callList.add("getMoney");
-				return money;
+				return new LottoMoney(money);
 			}
 
 			@Override
