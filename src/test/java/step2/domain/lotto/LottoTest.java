@@ -31,7 +31,7 @@ public class LottoTest {
 
         lotto = new Lotto(new LottoRequest(5000)) {
             @Override
-            List<Rank> getLottoRanks(List<Integer> targetNumbers, Integer bonusNumber) {
+            List<Rank> getLottoRanks(LottoNumbers targetNumbers, LottoNumber bonusNumber) {
                 return mockList.stream()
                         .map(numbers -> numbers.getRankOfLottoNumbers(targetNumbers, bonusNumber))
                         .collect(toList());
@@ -50,7 +50,7 @@ public class LottoTest {
     void lottoRankingTest() {
         List<Integer> target = asList(1, 10, 20, 30, 40, 45);
 
-        assertThat(lotto.getLottoRanks(target, 7)).containsExactly(FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS);
+        assertThat(lotto.getLottoRanks(new LottoNumbers(target), new LottoNumber(7))).containsExactly(FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class LottoTest {
     void winLottoTest() {
         List<Integer> target = asList(1, 10, 20, 30, 40, 45);
 
-        assertThat(lotto.getWinLotto(target, 7))
+        assertThat(lotto.getWinLotto(new LottoNumbers(target), new LottoNumber(7)))
                 .containsKeys(FIRST, SECOND, THIRD, FOURTH, FIFTH)
                 .containsValues(1L, 1L, 1L, 1L, 1L);
     }

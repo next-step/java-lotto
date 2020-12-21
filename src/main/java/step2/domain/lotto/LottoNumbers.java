@@ -36,11 +36,11 @@ public final class LottoNumbers {
                 .collect(toList());
     }
 
-    public Rank getRankOfLottoNumbers(List<Integer> targetNumbers, Integer bonusNumber) {
+    public Rank getRankOfLottoNumbers(LottoNumbers targetNumbers, LottoNumber bonusNumber) {
         long countOfMatch = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
-                .filter(targetNumbers::contains)
+                .filter(n -> targetNumbers.getLottoNumbers().contains(n))
                 .count();
-        return Rank.getRank(countOfMatch, getLottoNumbers().contains(bonusNumber));
+        return Rank.getRank(countOfMatch, this.getLottoNumbers().contains(bonusNumber.getNumber()));
     }
 }
