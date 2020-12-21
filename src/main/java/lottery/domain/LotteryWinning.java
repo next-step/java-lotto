@@ -30,7 +30,7 @@ public class LotteryWinning {
         return lotteryTicket.contains(this.bonusNumber);
     }
 
-    public LotteryResult getLotteryResult(LotteryTickets lotteryTickets) {
+    public LotteryResult analyzeLotteryResult(LotteryTickets lotteryTickets) {
         LotteryResult lotteryResult = new LotteryResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             lotteryResult.updateLotteryResult(

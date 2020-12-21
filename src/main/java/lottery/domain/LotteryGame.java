@@ -29,7 +29,7 @@ public class LotteryGame {
     }
 
     public LotteryResult getLotteryResult() {
-        LotteryResult lotteryResult = this.lotteryWinning.getLotteryResult(this.lotteryTickets);
+        LotteryResult lotteryResult = this.lotteryWinning.analyzeLotteryResult(this.lotteryTickets);
         lotteryResult.calculateProfit(lotteryAmount);
         return lotteryResult;
     }
