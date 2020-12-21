@@ -29,14 +29,13 @@ public class LotteryGame {
     }
 
     public LotteryResult getLotteryResult() {
-        LotteryResult lotteryResult = this.lotteryWinning.analyzeLotteryResult(this.lotteryTickets);
-        lotteryResult.calculateProfit(lotteryAmount);
-        return lotteryResult;
+        return this.lotteryWinning.analyzeLotteryResult(this.lotteryTickets);
     }
 
     public LotteryTickets getLotteryTickets() {
         return lotteryTickets;
     }
+    public LotteryAmount getLotteryAmount() { return lotteryAmount; }
 
     @Override
     public boolean equals(Object o) {

@@ -16,6 +16,8 @@ public class LotteryGameManager {
                 InputViewLotteryGame.getWinningNumbers(),
                 InputViewLotteryGame.getBonusNumber());
 
-        ResultViewLotteryGame.displayLotteryResult(lotteryGame.getLotteryResult());
+        ResultViewLotteryGame.displayLotteryResult(
+                lotteryGame.getLotteryResult(),
+                lotteryGame.getLotteryAmount());
     }
 }

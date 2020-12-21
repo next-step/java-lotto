@@ -29,7 +29,7 @@ public final class ResultViewLotteryGame {
         return stringBuilder.subSequence(0, stringBuilder.length() - 2).toString();
     }
 
-    public static void displayLotteryResult(LotteryResult lotteryResult) {
+    public static void displayLotteryResult(LotteryResult lotteryResult, LotteryAmount lotteryAmount) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계");
         stringBuilder.append(System.getProperty("line.separator"));
@@ -50,7 +50,7 @@ public final class ResultViewLotteryGame {
             stringBuilder.append(System.getProperty("line.separator"));
         }
 
-        BigDecimal profit = lotteryResult.getProfit();
+        BigDecimal profit = lotteryResult.calculateProfit(lotteryAmount);
         stringBuilder.append("총 수익률은 ");
         stringBuilder.append(profit.toString());
         stringBuilder.append("입니다.");

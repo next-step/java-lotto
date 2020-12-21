@@ -415,7 +415,7 @@ public LotteryTicket of(int[] numbers) {
       https://johngrib.github.io/wiki/static-factory-method-pattern/
 - [x] 일반적으로 getXXX 는 객체가 가진 상태값을 반환하는것을 기대하게 되는것 같아요. - `LotteryWinning.java`
       LotteryResult 는 상태값이 아니니 조금더 의미있는 메소드명을 고민해보면 좋을것 같습니다 ㅎㅎ - `LotteryResult.java`
-- [ ] purchaseAmount에 따라서 profit 값이 자주변경될것 같은데, 상태값으로 가지고 있기보다는 calculateProfit 을 호출하는 시점에 계산하여 전달해주는것이 어떨까요 ?
+- [x] purchaseAmount에 따라서 profit 값이 자주변경될것 같은데, 상태값으로 가지고 있기보다는 calculateProfit 을 호출하는 시점에 계산하여 전달해주는것이 어떨까요 ? - `LotteryResult`
 
 ## 기능 요구 사항
 
