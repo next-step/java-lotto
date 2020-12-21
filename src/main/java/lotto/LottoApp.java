@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoCollection;
-import lotto.domain.LottoResult;
-import lotto.domain.RandomNumberListGenerator;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -13,10 +10,11 @@ public class LottoApp {
 
     public static void main(String[] args) {
         int buyAmount = InputView.scanBuyAmount();
-        Set<Integer> numbers = InputView.scanWinningNumbers();
+        Set<LottoNumber> lottoNumbers = InputView.scanWinningNumbers();
+        LottoNumber bonusNumber = InputView.scanBonusRepeat(lottoNumbers);
 
-        LottoCollection lottoCollection = new LottoCollection(buyAmount, new RandomNumberListGenerator());
-        LottoResult lottoResult = lottoCollection.getLottoResult(new Lotto(numbers));
+        LottoCollection lottoCollection = new LottoCollection(buyAmount, new RandomLottoNumbersGenerator());
+        LottoResult lottoResult = lottoCollection.getLottoResult(new Lotto(lottoNumbers), bonusNumber);
 
         ResultView.printLottoNumberList(lottoCollection);
         ResultView.printStatistics(lottoResult);

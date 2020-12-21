@@ -1,50 +1,47 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Integer... numbers) {
+    public Lotto(int... numbers) {
         if (numbers.length != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException();
 
-        this.numbers = Arrays.stream(numbers)
-                .peek(this::validNumber)
+        this.lottoNumbers = Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public Lotto(Set<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getSortedNumbers() {
-        return numbers.stream()
+    public List<LottoNumber> getSortedNumbers() {
+        return lottoNumbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers;
+    public Set<LottoNumber> getNumbers() {
+        return lottoNumbers;
     }
 
-    private void validNumber(Integer number) {
-        if(number < MIN_NUMBER || number > MAX_NUMBER)
-            throw new IllegalArgumentException();
+    public int matchNumberCount(Lotto lotto) {
+        Set<LottoNumber> resultLottoNumbers = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> compareLottoNumbers = lotto.getNumbers();
+        resultLottoNumbers.retainAll(compareLottoNumbers);
+        return resultLottoNumbers.size();
     }
 
-    public int sameNumberCount(Lotto lotto) {
-        Set<Integer> resultNumbers = new HashSet<>(this.numbers);
-        Set<Integer> compareNumbers = lotto.getNumbers();
-        resultNumbers.retainAll(compareNumbers);
-        return resultNumbers.size();
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -9,19 +9,25 @@ public class LottoCollection {
 
     private final List<Lotto> lottos;
     private final int buyAmount;
+    private final LottoNumber bonus;
 
-    public LottoCollection(int buyAmount, NumberListGenerator numberListGenerator) {
+    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator) {
+        this(buyAmount, lottoNumbersGenerator, null);
+    }
+
+    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator, LottoNumber bonus) {
         this.buyAmount = buyAmount;
+        this.bonus = bonus;
         int lottoCount = convertLottoCount(buyAmount);
 
         lottos = IntStream
                 .range(0, lottoCount)
-                .mapToObj(i -> new Lotto(numberListGenerator.generate()))
+                .mapToObj(i -> new Lotto(lottoNumbersGenerator.generate()))
                 .collect(Collectors.toList());
     }
 
-    public LottoResult getLottoResult(Lotto winnerLotto) {
-        return new LottoResult(lottos, winnerLotto, buyAmount);
+    public LottoResult getLottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+        return new LottoResult(lottos, winnerLotto, bonusNumber, buyAmount);
     }
 
     public List<Lotto> getLottos() {

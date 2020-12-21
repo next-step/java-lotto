@@ -1,15 +1,17 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomNumberListGenerator implements NumberListGenerator {
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
 
     @Override
-    public Set<Integer> generate() {
+    public Set<LottoNumber> generate() {
         List<Integer> collect = IntStream
-                .rangeClosed(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
+                .rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
 
@@ -17,6 +19,7 @@ public class RandomNumberListGenerator implements NumberListGenerator {
 
         return collect.stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 }
