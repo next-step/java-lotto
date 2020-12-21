@@ -1,27 +1,27 @@
 package lotto.domain;
 
-import lotto.util.NumberUtil;
-
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningLottos {
     Map<WinningLottoType,Integer> winningTypeCountMap;
 
     public WinningLottos(){
-        winningTypeCountMap = new HashMap<>();
+        this.winningTypeCountMap = initWinningLottoTypeMap();
+    }
+
+    protected Map<WinningLottoType,Integer> initWinningLottoTypeMap(){
+        Map<WinningLottoType,Integer> hashMap = new HashMap<>();
+        WinningLottoType[] winningTypes = WinningLottoType.values();
+        for( int i = 0; i < winningTypes.length; i++ ) {
+            hashMap.put(winningTypes[i],0);
+        }
+        return hashMap;
     }
 
     public WinningLottoType addMatchingNumber(WinningLottoType winningLottoType) {
-        boolean isNotIncludLottoType = winningTypeCountMap.containsKey(winningLottoType) == false;
-        if(isNotIncludLottoType) {
-            winningTypeCountMap.put(winningLottoType,1);
-            return winningLottoType;
-        };
         winningTypeCountMap.put(winningLottoType, winningTypeCountMap.get(winningLottoType)+1);
-
         return winningLottoType;
     }
 
@@ -37,23 +37,17 @@ public class WinningLottos {
         return winningLottoMoney;
     }
 
-    public float calcurateRevenue(String money) {
-        long inputMoney = NumberUtil.stringTolong(money);
-        long winningMoney = this.amountOfWinning();
-        if (winningMoney == 0) {
-           return  0;
+    public BigDecimal calcurateRevenue(String money) {
+        BigDecimal buyMoney = new BigDecimal(money);
+        BigDecimal winningMoney = BigDecimal.valueOf(this.amountOfWinning());
+        if (winningMoney == BigDecimal.ZERO) {
+           return  BigDecimal.ZERO;
         }
-        float revenue =  winningMoney / inputMoney;
+        BigDecimal revenue = winningMoney.divide(buyMoney);
         return revenue;
     }
+    public Integer getWinningLottoTypeByCountMap(WinningLottoType winningLottoType){
+        return this.winningTypeCountMap.get(winningLottoType);
+    }
 
-    public Map<WinningLottoType,Integer> getWinningLottosMap(){
-        return new HashMap<>(winningTypeCountMap);
-    }
-    public int getCountByWinningType( WinningLottoType winningLottoType){
-        if(winningTypeCountMap.containsKey(winningLottoType) == false) {
-            return 0;
-        }
-        return winningTypeCountMap.get(winningLottoType);
-    }
 }

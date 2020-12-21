@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottosTest {
@@ -35,8 +37,8 @@ class WinningLottosTest {
     @Test
     void winningRevenueTest(){
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
-        float revenue = winningLottos.calcurateRevenue("1000");
-        assertThat(revenue).isEqualTo(5);
+        BigDecimal revenue = winningLottos.calcurateRevenue("1000");
+        assertThat(revenue).isEqualTo(BigDecimal.valueOf(5));
     }
 
 

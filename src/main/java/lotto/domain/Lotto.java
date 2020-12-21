@@ -19,9 +19,11 @@ public class Lotto {
         selectedNumber(generateRandomNumbers());
         return this;
     }
+
     public int numberOfLottoCount(){
         return this.numbers.size();
     }
+
     private List<Integer> generateRandomNumbers() {
         List<Integer> randomNumbers = NumberUtil.getLottoNumbers();
 
@@ -29,13 +31,12 @@ public class Lotto {
 
         List<Integer> lottoNumbers = new ArrayList<>();
 
-        for( int i = 0; i < size; i++ ) {
-            lottoNumbers.add(randomNumbers.get(i));
-        }
+        randomNumbers.subList(0, size).stream()
+                .forEach(lottoNumbers::add);
         return lottoNumbers;
     }
 
-    protected Lotto selectedNumber(List<Integer> randomNumbers){
+    protected Lotto selectedNumber(List<Integer> randomNumbers) {
         this.numbers = randomNumbers;
         return this;
     }
@@ -43,13 +44,12 @@ public class Lotto {
 
     public int checkLastWinningNumber(String lastWinnerNumber) {
         int matchNumber = 0;
-        List<Integer> winnerNumbers = Arrays.stream(
-                                            lastWinnerNumber.split(","))
-                                            .map(Integer::new)
-                                            .sorted()
-                                            .collect(Collectors.toList());
+        List<Integer> winnerNumbers = Arrays.stream( lastWinnerNumber.split(","))
+                                            .map(Integer::parseInt).sorted().collect(Collectors.toList());
 
-        List<Integer> sortedNumbers = new ArrayList<>(this.numbers).stream().sorted().collect(Collectors.toList());
+        List<Integer> sortedNumbers = new ArrayList<>(this.numbers).stream()
+                .sorted().collect(Collectors.toList());
+        
         for( int i = 0; i < winnerNumbers.size(); i++) {
             if(sortedNumbers.get(i).equals( winnerNumbers.get(i))) {
                 matchNumber = matchNumber + 1;

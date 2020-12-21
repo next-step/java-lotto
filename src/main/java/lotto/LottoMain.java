@@ -28,6 +28,5 @@ public class LottoMain {
 
         DisplayView.showWinningStatis(winningLottos);
         DisplayView.printRevenu(winningLottos.calcurateRevenue(money));
-
     }
 }
