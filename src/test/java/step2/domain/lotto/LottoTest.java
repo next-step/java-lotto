@@ -29,7 +29,7 @@ public class LottoTest {
         mockList.add(new LottoNumbers(asList(1, 10, 20, 33, 39, 41))); // 3개 일치
         mockList.add(new LottoNumbers(asList(1, 10, 22, 33, 39, 41))); // 2개 일치
 
-        lotto = new Lotto(new LottoRequest(5000)) {
+        lotto = new Lotto(new LottoRequest(5000, asList(new LottoNumbers(asList(2, 3, 11, 12, 22, 33))))) {
             @Override
             List<Rank> getLottoRanks(LottoNumbers targetNumbers, LottoNumber bonusNumber) {
                 return mockList.stream()

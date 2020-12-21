@@ -20,7 +20,7 @@ public final class LottoNumbers {
     private void checkLottoNumbersLength(List<Integer> numbers) {
         int lottoNumberLength = new HashSet<>(numbers).size();
         if (lottoNumberLength != LOTTO_LENGTH) {
-            throw new IllegalArgumentException("중복 없는 6개의 숫자가 필요합니다");
+            throw new IllegalArgumentException("중복 없는 " + LOTTO_LENGTH + "개의 숫자가 필요합니다");
         }
     }
 

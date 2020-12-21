@@ -13,14 +13,15 @@ import static step2.LottoNumberGenerator.*;
 
 public class Lotto {
     private List<LottoNumbers> lotto = new ArrayList<>();
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     public Lotto(LottoRequest lottoRequest) {
         this.buyLotto(lottoRequest);
     }
 
     private void buyLotto(LottoRequest lottoRequest) {
-        int totalQuantity = lottoRequest.getPurchaseMoney() / LOTTO_PRICE;
+        int totalQuantity = lottoRequest.getTotalQuantityForAutomatedPick();
+        lotto.addAll(lottoRequest.getLottoNumbersByManualPick());
         for (int quantity = 0; quantity < totalQuantity; quantity++) {
             lotto.add(new LottoNumbers(provideLottoNumbers()));
         }
