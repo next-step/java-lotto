@@ -1,13 +1,19 @@
 package lotto;
 
-public class Lotto {
-	private final Numbers numbers;
+import java.util.List;
 
-	private Lotto(Numbers numbers) {
-		this.numbers = numbers;
+public class Lotto {
+	private final LottoNumbers lottoNumbers;
+
+	private Lotto(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static Lotto of(List<Integer> numbers) {
+		return new Lotto(LottoNumbers.of(numbers));
 	}
 
 	public static Lotto createRandom() {
-		return new Lotto(Numbers.createRandom());
+		return new Lotto(LottoNumbers.createRandom());
 	}
 }

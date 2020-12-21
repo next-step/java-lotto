@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoTest {
+public class LottosTest {
 
 	@DisplayName("구입 금액을 로또 금액(1000원)으로 최대 로또 구매 수를 구하는지 확인한다.")
 	@ParameterizedTest
@@ -16,16 +16,6 @@ public class LottoTest {
 
 		Lottos lottos = LottoStore.buy(purchaseAmount);
 		assertThat(lottos.size()).isEqualTo(numOfLotto);
-
-		// String input = inputNumbers();
-		// WinningLotto winningLotto = WinningLotto.of(input);
-		// DrawResults results = winningLotto.compare(lottos);
-		//
-		// Prizes prizes = results.getPrizes();
-		// System.out.println(prizes);
-		//
-		// RateOfProfit profit = prizes.calculateRateOfProfit();
-		// System.out.println(profit);
 	}
 
 	@DisplayName("구입 금액이 0이하일 경우 예외처리를 확인한다.")
