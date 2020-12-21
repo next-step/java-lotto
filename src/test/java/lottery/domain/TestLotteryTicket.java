@@ -16,12 +16,12 @@ public class TestLotteryTicket {
     @BeforeEach
     void setUp() {
         lotteryNumbers = new ArrayList<>(Arrays.asList(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(6)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(6)
         ));
     }
 
@@ -35,12 +35,12 @@ public class TestLotteryTicket {
     @Test
     void isContainNumbers() {
         LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
-        assertThat(lotteryTicket.contains(new LotteryNumber(1))).isTrue();
+        assertThat(lotteryTicket.contains(LotteryNumber.of(1))).isTrue();
     }
 
     @Test
     void isNotContainNumbers() {
         LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
-        assertThat(lotteryTicket.contains(new LotteryNumber(7))).isFalse();
+        assertThat(lotteryTicket.contains(LotteryNumber.of(7))).isFalse();
     }
 }

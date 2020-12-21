@@ -8,7 +8,7 @@ public class LotteryWinning {
 
     public LotteryWinning(String winningNumbers, String bonusNumber) {
         this.winningTicket = LotteryTicket.of(winningNumbers);
-        this.bonusNumber = new LotteryNumber(Integer.parseInt(bonusNumber));
+        this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
     public int getCountsMatched(LotteryTicket otherLotteryTicket) {

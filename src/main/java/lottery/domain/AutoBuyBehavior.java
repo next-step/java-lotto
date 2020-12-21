@@ -11,7 +11,7 @@ public class AutoBuyBehavior implements BuyBehavior {
     public static final int FROM_INDEX = 0;
     public static final List<LotteryNumber> lotteryAllNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
             .boxed()
-            .map(LotteryNumber::new)
+            .map(LotteryNumber::of)
             .collect(Collectors.toList());
 
     public List<LotteryNumber> getLotteryNumbers(int pickCounts) {

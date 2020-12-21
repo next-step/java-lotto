@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class TestLotteryGame {
     LotteryGame dummyLotteryGame;
@@ -24,12 +23,12 @@ public class TestLotteryGame {
             public List<LotteryNumber> getLotteryNumbers(int pickCounts) {
                 Collections.shuffle(lotteryAllNumbers);
                 return new ArrayList<>(Arrays.asList(
-                        new LotteryNumber(5),
-                        new LotteryNumber(1),
-                        new LotteryNumber(4),
-                        new LotteryNumber(3),
-                        new LotteryNumber(2),
-                        new LotteryNumber(6)
+                        LotteryNumber.of(5),
+                        LotteryNumber.of(1),
+                        LotteryNumber.of(4),
+                        LotteryNumber.of(3),
+                        LotteryNumber.of(2),
+                        LotteryNumber.of(6)
                 ));
             }
         };
@@ -37,12 +36,12 @@ public class TestLotteryGame {
         dummyLotteryGame = new LotteryGame(1000);
 
         dummyLotteryTicket = LotteryTicket.of(Arrays.asList(
-                new LotteryNumber(1),
-                new LotteryNumber(2),
-                new LotteryNumber(3),
-                new LotteryNumber(4),
-                new LotteryNumber(5),
-                new LotteryNumber(6)
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(6)
         ));
 
         dummyOneLotteryTicket = new ArrayList<>(Arrays.asList(
