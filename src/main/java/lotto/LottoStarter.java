@@ -1,20 +1,31 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoNumbers;
+import lotto.dto.LottoGameResultDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoStarter {
 	public static void main(String[] args) {
 		LottoGame lottoGame = new LottoGame();
-		InputView inputView = new InputView();
-		ResultView resultView = new ResultView();
-		int buyMoney = inputView.printBuyMoneyMessageAndReturnInput();
+
+		int buyMoney = InputView.inputBuyMoneyAndReturnInputValue();
 		int lottoGameCount = lottoGame.calculateLottoCount(buyMoney);
-		resultView.printLottoGameCount(lottoGameCount);
+		ResultView.printLottoGameCount(lottoGameCount);
+
 		LottoNumbers lottoNumbers = lottoGame.generateLottoNumbers(lottoGameCount, new LottoNumberGenerator());
-		resultView.printLottoNumbers(lottoNumbers);
+		ResultView.printLottoNumbers(lottoNumbers);
+
+		LottoNumber winLottoNumber = new LottoNumber(InputView.inputWinLottoNumbersAndReturnInputValue());
+		LottoGameResultDto lottoGameResultDto = lottoGame.generateLottoGameResult(winLottoNumber, lottoNumbers);
+		ResultView.printLottoGameStatistic(lottoGameResultDto);
+		ResultView.printProfitRatio(lottoGameResultDto);
 	}
 }
