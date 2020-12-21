@@ -1,25 +1,18 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class LottoResult {
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final int DEFAULT_VALUE = 0;
-    private static final int ADD_COUNT = 1;
     private static final int DECIMAL_CALCULATION_NUMBER = 100;
 
     private final Map<LottoRank, Integer> lottoResults;
 
-    public LottoResult(List<LottoTicket> lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
-        HashMap<LottoRank, Integer> results = new HashMap<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = LottoRank.getLottoRank(winningNumber.winningCount(lottoTicket), bonusBall.isMatchBall(lottoTicket));
-            results.put(lottoRank, results.getOrDefault(lottoRank,DEFAULT_VALUE) + ADD_COUNT);
-        }
-        this.lottoResults = results;
+    public LottoResult(HashMap<LottoRank, Integer> results) {
+        lottoResults = results;
     }
 
     public int getResult(LottoRank key) {

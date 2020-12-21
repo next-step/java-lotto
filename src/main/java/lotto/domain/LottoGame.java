@@ -24,10 +24,10 @@ public class LottoGame {
     }
 
     public LottoNumber generateBonusBall(int inputNumber, RandomLottoMachine randomLottoMachine, WinningNumber winningNumber) {
-        return randomLottoMachine.CreateBonusBall(inputNumber, winningNumber);
+        return randomLottoMachine.createBonusBall(inputNumber, winningNumber);
     }
 
     public LottoResult result(WinningNumber winningNumber, LottoNumber bonusBall) {
-        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
+        return lottoTickets.createLottoResult(winningNumber, bonusBall);
     }
 }

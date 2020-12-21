@@ -40,7 +40,7 @@ public class RandomLottoMachine implements LottoMachine{
         count = purchaseQuantity(calculateRemainingMoney(price, manualLottoCount));
     }
 
-    public LottoNumber CreateBonusBall(int inputNumber, WinningNumber winningNumber) {
+    public LottoNumber createBonusBall(int inputNumber, WinningNumber winningNumber) {
         LottoNumber lottoNumber = new LottoNumber(inputNumber);
         if (winningNumber.contains(lottoNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_ERROR_MESSAGE);

@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,7 +92,7 @@ public class RandomLottoMachineTest {
 
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> randomLottoMachine.CreateBonusBall(bonusNumber, winningNumber))
+                .isThrownBy(() -> randomLottoMachine.createBonusBall(bonusNumber, winningNumber))
                 .withMessageMatching("보너스 볼은 당첨 번호들이랑 달라야 합니다.");
     }
 }
