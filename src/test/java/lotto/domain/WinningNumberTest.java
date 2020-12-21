@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class WinningNumberTest {
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList()));
         RandomLottoMachine lottoMachine = new RandomLottoMachine(1000, 0);
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumbers);
+        WinningNumber winningNumber = new FixedLottoMachine(new ArrayList<>()).generateWinningLotto(winningNumbers);
 
         //when
         int winningCount = winningNumber.winningCount(lottoTicket);

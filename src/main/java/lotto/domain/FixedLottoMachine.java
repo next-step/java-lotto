@@ -27,7 +27,7 @@ public class FixedLottoMachine implements LottoMachine {
     }
 
     public WinningNumber generateWinningLotto(String inputNumber) {
-        return new WinningNumber(stringToLottoTicket(inputNumber).getLottoTicket());
+        return stringToLottoTicket(inputNumber).getWinningLotto();
     }
 
     private LottoTicket stringToLottoTicket(String manualPurchaseLottoNumber) {

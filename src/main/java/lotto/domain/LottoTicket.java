@@ -13,6 +13,10 @@ public class LottoTicket {
         return lottoTicket;
     }
 
+    public WinningNumber getWinningLotto() {
+        return new WinningNumber(lottoTicket);
+    }
+
     public int numberCount() {
         return lottoTicket.size();
     }

@@ -40,16 +40,6 @@ public class RandomLottoMachine implements LottoMachine{
         count = purchaseQuantity(calculateRemainingMoney(price, manualLottoCount));
     }
 
-    public WinningNumber winningNumber(String winningNumberString) {
-        String[] strings = winningNumberString.split(DELIMITER);
-        if (strings.length != NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format(NUMBER_COUNT_EXCEPTION_MESSAGE, NUMBER_COUNT));
-        }
-        return new WinningNumber(Arrays.stream(strings)
-                .map(this::stringToLottoNumber)
-                .collect(Collectors.toList()));
-    }
-
     public LottoNumber CreateBonusBall(int inputNumber, WinningNumber winningNumber) {
         LottoNumber lottoNumber = new LottoNumber(inputNumber);
         if (winningNumber.contains(lottoNumber)) {

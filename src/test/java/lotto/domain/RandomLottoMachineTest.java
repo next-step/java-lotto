@@ -8,6 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,7 +75,7 @@ public class RandomLottoMachineTest {
         String winningNumberString = "1, 2, 3, 4, 5, 6";
 
         //when
-        WinningNumber winningNumber = randomLottoMachine.winningNumber(winningNumberString);
+        WinningNumber winningNumber = new FixedLottoMachine(new ArrayList<>()).generateWinningLotto(winningNumberString);
 
         //then
         for (int i = 1; i <= 6; i++) {
@@ -86,7 +89,7 @@ public class RandomLottoMachineTest {
     public void bonusBallIsNotContains(int bonusNumber) {
         //given
         String winningNumberString = "1, 2, 3, 4, 5, 6";
-        WinningNumber winningNumber = randomLottoMachine.winningNumber(winningNumberString);
+        WinningNumber winningNumber = new FixedLottoMachine(new ArrayList<>()).generateWinningLotto(winningNumberString);
 
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
