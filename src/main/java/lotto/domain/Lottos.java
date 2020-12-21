@@ -12,7 +12,7 @@ public class Lottos {
 
     public Lottos(int automatedLottoSize, List<Lotto> manualLottos) {
         validate(automatedLottoSize, manualLottos);
-        this.lottos = initiateLottos(automatedLottoSize, manualLottos);
+        this.lottos = Collections.unmodifiableList(initiateLottos(automatedLottoSize, manualLottos));
     }
 
     private void validate(int automatedLottoSize, List<Lotto> manualLottos) {
@@ -55,7 +55,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+        return lottos;
     }
 
     private List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
