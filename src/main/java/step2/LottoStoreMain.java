@@ -6,20 +6,18 @@ import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoNumbers;
 import step2.view.InputView;
 
-import java.util.List;
-
 import static step2.view.ResultView.*;
 
 public class LottoStoreMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        LottoRequest lottoRequest = inputView.putPurchaseMoney();
+        LottoRequest lottoRequest = new LottoRequest(inputView.putPurchaseMoney(), inputView.putLottoNumbersForManualPick());
 
         Lotto lotto = new Lotto(lottoRequest);
-        printLotto(lotto.getLotto(), ", ");
+        printLotto(lotto.getLotto(), ", ", lottoRequest);
 
-        List<Integer> targetNumber = inputView.putTargetNumber();
-        Integer bonusNumber = inputView.putBonusNumber(targetNumber);
-        printWinLotto(lotto.getWinLotto(new LottoNumbers(targetNumber), new LottoNumber(bonusNumber)), lottoRequest);
+        LottoNumbers targetLottoNumbers = inputView.putTargetLottoNumbers();
+        LottoNumber bonusNumber = inputView.putBonusNumber(targetLottoNumbers);
+        printWinLotto(lotto.getWinLotto(targetLottoNumbers, bonusNumber), lottoRequest);
     }
 }

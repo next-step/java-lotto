@@ -26,8 +26,10 @@ public class ResultView {
         System.out.println(countOfMatch + "개 일치" + addition + "(" + winningMoney + "원) - " + total + "개");
     }
 
-    public static void printLotto(List<LottoNumbers> lottoNumbers, String delimiter) {
-        printMessage(lottoNumbers.size() + "개를 구매했습니다.");
+    public static void printLotto(List<LottoNumbers> lottoNumbers, String delimiter, LottoRequest lottoRequest) {
+        printMessage("수동으로 " + lottoRequest.getLottoNumbersByManualPick().size()
+                + "장, 자동으로 " + lottoRequest.getTotalQuantityForAutomatedPick()
+                + "개를 구매했습니다.");
         for (LottoNumbers numbers : lottoNumbers) {
             printNumbers(numbers.getLottoNumbers(), delimiter);
         }
