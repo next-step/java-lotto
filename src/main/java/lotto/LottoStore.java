@@ -16,7 +16,7 @@ public class LottoStore {
 		for (int i = 0; i < money.getLottoBuyCount(); i++) {
 			lottoNumbers.add(generateRandomLottoNumbers());
 		}
-		return new LottoTicket(lottoNumbers);
+		return new LottoTicket(lottoNumbers, Collections.emptyList());
 	}
 
 	private static LottoNumbers generateRandomLottoNumbers() {
