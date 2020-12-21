@@ -36,6 +36,7 @@ public class ResultView {
             checkLottoNumbersLastIterator(iterator);
         }
     }
+    
     private static void checkLottoNumbersLastIterator(Iterator iterator) {
         if (iterator.hasNext()) {
             System.out.print(", ");

@@ -27,12 +27,12 @@ public class LottoResultTest {
 
         lotto = new Lotto(lottoNumbers);
         buyLottoList.add(lotto);
-        winningLotto = new WinningLotto(new Lotto(lottoNumbers), LottoNumber.of(7));
+        winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
     }
 
     @Test
     void LottoResult() {
-        assertThat(new LottoResult(winningLotto, buyLottoList)).isEqualTo(Rank.FIRST);
+        assertThat(new LottoResult(winningLotto, buyLottoList).getRanks()).contains(Rank.FIRST);
     }
 
     @Test
