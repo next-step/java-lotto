@@ -40,7 +40,7 @@ public class Lotto {
 	}
 
 	public int calculateLottoCount(int purchaseAmount) {
-		return purchaseAmount / this.LOTTO_PRICE_PER_SHEET;
+		return purchaseAmount / LOTTO_PRICE_PER_SHEET;
 	}
 
 }
