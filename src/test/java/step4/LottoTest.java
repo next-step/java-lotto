@@ -2,8 +2,8 @@ package step4;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step3.domain.Lotto;
-import step3.domain.LottoNumber;
+import step4.domain.Lotto;
+import step4.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
