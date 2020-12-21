@@ -14,9 +14,7 @@ public final class LottoMachine {
         checkArgument(money > 0, MONEY_ERROR_MESSAGE, money);
         checkArgument(money % LOTTO_PRICE == 0, MONEY_UNIT_MESSAGE, LOTTO_PRICE, money);
 
-        Lottos lottos = new Lottos();
-        lottos.addAuto(money / LOTTO_PRICE);
-        return lottos;
+        return new Lottos(money / LOTTO_PRICE);
     }
 
     public static int calculateHowMuch(int lottoCount) {

@@ -1,17 +1,22 @@
 package com.monds.nextstep.lotto.view;
 
+import com.monds.nextstep.lotto.domain.Lotto;
 import com.monds.nextstep.lotto.domain.LottoRanking;
 import com.monds.nextstep.lotto.domain.LottoResult;
 import com.monds.nextstep.lotto.domain.Lottos;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResultView {
 
     public static void printLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.size());
-        lottos.forEachLotto(lotto -> System.out.println(Arrays.toString(lotto.toArray())));
+        List<Lotto> lottoList = lottos.getAll();
+        for (Lotto lotto : lottoList) {
+            System.out.println(Arrays.toString(lotto.toArray()));
+        }
         System.out.println();
     }
 

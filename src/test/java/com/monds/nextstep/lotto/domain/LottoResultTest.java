@@ -4,6 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
@@ -16,9 +19,10 @@ public class LottoResultTest {
     @DisplayName("로또 수익률")
     void testGetYield(int lottoCount, String ranking, double yield) {
         // given
-        LottoResult result = new LottoResult(lottoCount);
+        Map<LottoRanking, Integer> countByRanking = new HashMap<>();
+        countByRanking.put(LottoRanking.valueOf(ranking), 1);
         // when
-        result.addRanking(LottoRanking.valueOf(ranking));
+        LottoResult result = new LottoResult(lottoCount, countByRanking);
         // then
         assertThat(result.calculateYield()).isEqualTo(yield);
     }

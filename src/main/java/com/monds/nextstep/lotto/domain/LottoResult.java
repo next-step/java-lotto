@@ -1,21 +1,17 @@
 package com.monds.nextstep.lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoResult {
 
     private final int purchaseAmount;
-    private final Map<LottoRanking, Integer> countByRanking = new HashMap<>();
+    private final Map<LottoRanking, Integer> countByRanking;
 
-    public LottoResult(int lottoCount) {
+    public LottoResult(int lottoCount, Map<LottoRanking, Integer> countByRanking) {
         purchaseAmount = LottoMachine.calculateHowMuch(lottoCount);
-    }
-
-    public void addRanking(LottoRanking ranking) {
-        countByRanking.put(ranking, countByRanking.getOrDefault(ranking, 0) + 1);
+        this.countByRanking = countByRanking;
     }
 
     public Map<LottoRanking, Integer> getPrizeByRanking() {

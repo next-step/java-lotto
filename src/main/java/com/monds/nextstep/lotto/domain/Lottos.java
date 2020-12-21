@@ -1,20 +1,15 @@
 package com.monds.nextstep.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.*;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
+    public Lottos(int size) {
         lottos = new ArrayList<>();
-    }
-
-    public void addAuto(int size) {
         for (int i = 0; i < size; i++) {
-            add(LottoGenerator.shuffleAndGet());
+            lottos.add(LottoGenerator.shuffleAndGet());
         }
     }
 
@@ -22,22 +17,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void forEachLotto(Consumer<Lotto> lottoConsumer) {
-        for (Lotto lotto : lottos) {
-            lottoConsumer.accept(lotto);
-        }
-    }
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public List<Lotto> getAll() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto) {
-        LottoResult result = new LottoResult(lottos.size());
+        Map<LottoRanking, Integer> countByRanking = new HashMap<>();
         for (Lotto lotto : lottos) {
             LottoRanking ranking = winningLotto.matching(lotto);
-            result.addRanking(ranking);
+            countByRanking.put(ranking, countByRanking.getOrDefault(ranking, 0) + 1);
         }
-        return result;
+        return new LottoResult(lottos.size(), countByRanking);
     }
 }
