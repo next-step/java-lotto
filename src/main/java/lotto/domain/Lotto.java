@@ -61,5 +61,10 @@ public class Lotto {
         return this.lotto.contains(new LottoNumber(lottoNumber));
     }
 
-
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lotto=" + lotto +
+                '}';
+    }
 }
