@@ -50,4 +50,16 @@ public class Lotto {
             throw new IllegalArgumentException(VALID_DUPLICATE_MESSAGE);
         }
     }
+
+    public int match(List<Integer> winLotto) {
+        return (int) winLotto.stream()
+                .filter(lottoNumber -> containsLottoNumber(lottoNumber))
+                .count();
+    }
+
+    private boolean containsLottoNumber(int lottoNumber) {
+        return this.lotto.contains(new LottoNumber(lottoNumber));
+    }
+
+
 }

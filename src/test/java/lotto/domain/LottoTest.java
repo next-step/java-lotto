@@ -2,9 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
@@ -39,5 +42,14 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(Arrays.asList(8,21,21,41,45,4));
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
+    @DisplayName("로또 번호 매칭")
+    @Test
+    void match() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        int count = lotto.match(Arrays.asList(1,2,9,4,5,6));
+        assertThat(count).isEqualTo(5);
     }
 }
