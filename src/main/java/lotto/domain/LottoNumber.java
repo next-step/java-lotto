@@ -9,7 +9,7 @@ public class LottoNumber {
 		return lottoNumber;
 	}
 
-	public void generate(NumberGenerator lottoNumberGenerator) {
-		this.lottoNumber = lottoNumberGenerator.generateNumbers();
+	public void generate(NumberGenerator numberGenerator) {
+		this.lottoNumber = numberGenerator.generateNumbers();
 	}
 }
