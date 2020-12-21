@@ -1,6 +1,7 @@
 package step2.domain;
 
-import step2.util.Constants;
+import step2.exception.IsInvalidRangeException;
+import step2.exception.NumberMustBeSixException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,9 @@ public class WinningLottery {
     private static final int LOTTO_NUMBERS_LENGTH = 6;
     private static final int LOTTO_BALL_START_NUMBER = 1;
     private static final int LOTTO_BALL_END_NUMBER = 45;
+
+    public static final String WINNING_NUMBER_MUST_BE_6 = "당첨 번호는 6개여야만 합니다.";
+    public static final String WINNING_NUMBER_INVALID_RANGE = "당첨 번호는 1 이상 45 이하의 범위여야합니다.";
     
     private Lottery winningLottery;
 
@@ -22,7 +26,7 @@ public class WinningLottery {
         String[] splitNumbers = splitNumbers(winningNumbers);
 
         if (splitNumbers.length != LOTTO_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(Constants.WINNING_NUMBER_MUST_BE_6);
+            throw new NumberMustBeSixException(WINNING_NUMBER_MUST_BE_6);
         }
         winningLottery = new Lottery(convertToInteger(splitNumbers));
     }
@@ -56,7 +60,7 @@ public class WinningLottery {
         int convertedNumber = Integer.parseInt(number);
 
         if (convertedNumber < LOTTO_BALL_START_NUMBER || convertedNumber > LOTTO_BALL_END_NUMBER) {
-            throw new IllegalArgumentException(Constants.WINNING_NUMBER_INVALID_RANGE);
+            throw new IsInvalidRangeException(WINNING_NUMBER_INVALID_RANGE);
         }
         return convertedNumber;
     }

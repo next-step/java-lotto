@@ -1,16 +1,16 @@
 package step2.domain;
 
-import step2.util.Constants;
+import step2.exception.IsLessThanTheMiminumAmountOfMoneyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 
     private static final int MINIMUM_INPUT_MONEY = 1_000;
+    public static final String MONEY_IS_LESS_THAN_1000 = "구입 금액은 최소 1000원이어야 합니다.";
 
     private List<Lottery> lotteryList;
 
@@ -43,7 +43,7 @@ public class LottoGame {
      */
     public List<Lottery> buy(int money) {
         if (money < MINIMUM_INPUT_MONEY) {
-            throw new IllegalArgumentException(Constants.MONEY_IS_LESS_THAN_1000);
+            throw new IsLessThanTheMiminumAmountOfMoneyException(MONEY_IS_LESS_THAN_1000);
         }
         return makeLotteryList(money);
     }

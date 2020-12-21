@@ -5,15 +5,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.Lottery;
 import step2.domain.LottoGame;
 import step2.domain.WinningLottery;
-import step2.util.Constants;
+import step2.exception.IsLessThanTheMiminumAmountOfMoneyException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step2.domain.LottoGame.MONEY_IS_LESS_THAN_1000;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +33,8 @@ class LottoGameTest {
     @ValueSource(ints = {0, 300, 500, 900})
     void input_money_less_than_1000() {
         assertThatThrownBy(() -> lottoGame.buy(0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(Constants.MONEY_IS_LESS_THAN_1000);
+                .isInstanceOf(IsLessThanTheMiminumAmountOfMoneyException.class)
+                .hasMessageContaining(MONEY_IS_LESS_THAN_1000);
     }
 
     @ParameterizedTest
