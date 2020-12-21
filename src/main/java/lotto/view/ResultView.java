@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -21,13 +22,13 @@ public class ResultView {
     }
 
     public static void printNumbersOfPurchasedLottos(Lottos lottos) {
-        lottos.getLottoNumbersOfLottos()
+        lottos.getLottos()
                 .forEach(ResultView::printLottoNumbers);
         System.out.println();
     }
 
-    private static void printLottoNumbers(List<Integer> lottoNumbers) {
-        String convertedNumbers = lottoNumbers
+    private static void printLottoNumbers(Lotto lotto) {
+        String convertedNumbers = lotto.getLottoNumbers()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));

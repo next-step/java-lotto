@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,10 +54,8 @@ public class Lottos {
         return new LottoResult(findLottoRanks(winningLotto));
     }
 
-    public List<List<Integer>> getLottoNumbersOfLottos() {
-        return lottos.stream()
-                .map(Lotto::getLottoNumbers)
-                .collect(Collectors.toList());
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     private List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
