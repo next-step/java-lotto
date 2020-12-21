@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.util.ValidateUtils;
+import util.ValidateUtils;
 
 public class StringAddCalculator {
     private static final int DEFAULT_NUM = 0;

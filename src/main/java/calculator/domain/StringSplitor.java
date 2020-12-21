@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.util.ValidateUtils;
+import util.ValidateUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
