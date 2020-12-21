@@ -59,6 +59,12 @@ public class LottoNumbers {
 		return this.equals(LottoNumbers.of(numbers));
 	}
 
+	public int compare(LottoNumbers lottoNumbers) {
+		return (int) this.lottoNumbers.stream()
+			.filter(lottoNumbers.lottoNumbers::contains)
+			.count();
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

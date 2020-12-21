@@ -16,4 +16,12 @@ public class Lotto {
 	public static Lotto createRandom() {
 		return new Lotto(LottoNumbers.createRandom());
 	}
+
+	public int compare(Lotto lotto) {
+		return this.lottoNumbers.compare(lotto.lottoNumbers);
+	}
+
+	public boolean isSameLottoNumbers(List<Integer> numbers) {
+		return lottoNumbers.isSameNumbers(numbers);
+	}
 }
