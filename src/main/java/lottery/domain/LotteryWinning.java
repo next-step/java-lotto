@@ -14,7 +14,14 @@ public class LotteryWinning {
     public int getCountsMatched(LotteryTicket otherLotteryTicket) {
         int matchCount = 0;
         for(LotteryNumber number : otherLotteryTicket.getLotteryNumbers()) {
-            matchCount += winningTicket.contains(number) ? 1 : 0;
+            matchCount = countMatchedNumbers(matchCount, number);
+        }
+        return matchCount;
+    }
+
+    private int countMatchedNumbers(int matchCount, LotteryNumber number) {
+        if (winningTicket.contains(number)) {
+            matchCount += 1;
         }
         return matchCount;
     }
