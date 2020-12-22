@@ -6,11 +6,12 @@ import java.util.*;
 
 public class LottoStatistics {
 
+	private static final String VALIDATE_FAIL_EMPTY = "lottoResultList is empty!";
 	private final Map<LottoResult, Long> countResult;
 
 	public LottoStatistics(List<LottoResult> lottoResultList) {
 		if (lottoResultList.isEmpty()) {
-			throw new IllegalArgumentException("lottoResultList is empty!");
+			throw new IllegalArgumentException(VALIDATE_FAIL_EMPTY);
 		}
 
 		Map<LottoResult, Long> countResult = new HashMap<>();
