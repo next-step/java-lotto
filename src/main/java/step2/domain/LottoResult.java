@@ -58,9 +58,18 @@ public class LottoResult implements Comparable<LottoResult> {
 		return this.lottoWin.getMatchCount() - lottoResult.lottoWin.getMatchCount();
 	}
 
-	public void increaseIfEqualsMatchCount(final int matchCount) {
+	public void increaseIfEqualsMatchCount(final int matchCount, final boolean hasBonusNumber) {
+		if (isWinWithBonusBall() && hasBonusNumber) {
+			this.increase();
+			return;
+		}
+
 		if (this.getMatchCount() == matchCount) {
 			this.increase();
 		}
+	}
+
+	public boolean isWinWithBonusBall() {
+		return this.lottoWin.hasBonusBall();
 	}
 }

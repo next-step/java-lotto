@@ -23,12 +23,9 @@ public class Lottos {
 		return lottos;
 	}
 
-	public LottoResults result(final LottoNumbers winLottoNumbers) {
+	public LottoResults result(final LottoNumbers winLottoNumbers, final LottoNumber bonusNumber) {
 		this.lottos.forEach(lotto -> lotto.confirmWinning(winLottoNumbers));
-		return new LottoResults(this);
+		return new LottoResults(this, bonusNumber);
 	}
 
-	public void confirmWinning(final Integer[] winNumbers) {
-		this.lottos.forEach(lotto -> lotto.confirmWinning(winNumbers));
-	}
 }

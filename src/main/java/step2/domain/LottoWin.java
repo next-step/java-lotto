@@ -11,6 +11,7 @@ public enum LottoWin implements Comparator<LottoWin> {
 	MATCH_3(3, 5000),
 	MATCH_4(4, 50000),
 	MATCH_5(5, 1500000),
+	MATCH_5_BONUS(5, 30000000),
 	MATCH_6(6, 2000000000);
 
 	private final int matchCount;
@@ -48,5 +49,9 @@ public enum LottoWin implements Comparator<LottoWin> {
 	@Override
 	public int compare(final LottoWin o1, final LottoWin o2) {
 		return o2.matchCount - o1.matchCount;
+	}
+
+	public boolean hasBonusBall() {
+		return this == LottoWin.MATCH_5_BONUS;
 	}
 }

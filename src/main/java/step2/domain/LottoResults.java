@@ -8,10 +8,10 @@ public class LottoResults {
 
 	private final Set<LottoResult> lottoResults;
 
-	public LottoResults(final Lottos lottos) {
+	public LottoResults(final Lottos lottos, final LottoNumber bonusNumber) {
 		this.lottoResults = new TreeSet<>();
 		addResults();
-		matchIncrease(lottos);
+		matchIncrease(lottos, bonusNumber);
 	}
 
 	private void addResults() {
@@ -20,15 +20,15 @@ public class LottoResults {
 		}
 	}
 
-	private void matchIncrease(final Lottos lottos) {
+	private void matchIncrease(final Lottos lottos, final LottoNumber bonusNumber) {
 		for (Lotto lotto : lottos.getLottos()) {
-			increase(lotto);
+			increase(lotto, bonusNumber);
 		}
 	}
 
-	private void increase(final Lotto lotto) {
+	private void increase(final Lotto lotto, final LottoNumber bonusNumber) {
 		for (LottoResult lottoResult : lottoResults) {
-			lottoResult.increaseIfEqualsMatchCount(lotto.getMatchCount());
+			lottoResult.increaseIfEqualsMatchCount(lotto.getMatchCount(), lotto.matchesBonusNumber(bonusNumber));
 		}
 	}
 

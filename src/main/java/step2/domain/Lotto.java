@@ -13,10 +13,6 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	public void confirmWinning(final Integer... winNumbers) {
-		this.confirmWinning(new LottoNumbers(winNumbers));
-	}
-
 	public void confirmWinning(final LottoNumbers winNumbers) {
 		this.winningNumbers = this.numbers.getWinningNumbers(winNumbers);
 	}
@@ -30,6 +26,10 @@ public class Lotto {
 			throw new RuntimeException("아직 당첨 확인이 안되었습니다.");
 		}
 		return this.winningNumbers.size();
+	}
+
+	public boolean matchesBonusNumber(final LottoNumber bonusNumber) {
+		return this.numbers.getNumbers().contains(bonusNumber);
 	}
 
 	@Override

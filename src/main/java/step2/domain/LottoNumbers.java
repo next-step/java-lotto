@@ -69,4 +69,5 @@ public class LottoNumbers {
 			.sorted()
 			.collect(Collectors.toList());
 	}
+
 }
