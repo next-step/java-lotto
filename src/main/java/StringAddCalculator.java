@@ -3,9 +3,11 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String COMMA = ",";
-    public static final int NUM_LENGTH = 1;
-    public static final String COLON = ":";
+    private static final String COMMA = ",";
+    private static final int NUM_LENGTH = 1;
+    private static final String COLON = ":";
+    private final Pattern numPattern = Pattern.compile("(^[0-9]$)");
+    private final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
     public int splitAndSum(String input) {
         int sum = 0;
@@ -18,7 +20,7 @@ public class StringAddCalculator {
         if (input.length() > NUM_LENGTH && input.contains(COMMA)) {
             return calculatorColonCommaDelimitor(input);
         }
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = customPattern.matcher(input);
         if (m.find()) {
             return calculateMatcherSum(sum, m);
         }
@@ -38,17 +40,19 @@ public class StringAddCalculator {
         int sum = 0;
         String[] numbers = input.split(COMMA);
         for (String num : numbers) {
-            extractException(num);
-            sum += Integer.parseInt(num);
+            int number = Integer.parseInt(num);
+            extractException(number);
+            sum += number;
         }
         return sum;
     }
 
-    private void extractException(String num) {
-        if (Integer.parseInt(num) < 0) {
+    private void extractException(int num) {
+        if (num < 0) {
             throw new RuntimeException("음수가 전달되었습니다.");
         }
-        if (!Pattern.matches("^[0-9]$", num)) {
+        Matcher m = numPattern.matcher(Integer.toString(num));
+        if (!m.find()) {
             throw new NumberFormatException("숫자 이외의 값이 전달되었습니다.");
         }
     }
