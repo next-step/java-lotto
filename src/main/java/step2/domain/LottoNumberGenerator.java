@@ -18,7 +18,7 @@ public class LottoNumberGenerator {
 	public static LottoNumbers generate() {
 		shuffle();
 		return new LottoNumbers(availableLottoNumbers.stream()
-			.limit(LottoNumbers.MAX_SIZE)
+			.limit(LottoNumbers.SIZE)
 			.collect(Collectors.toSet()));
 	}
 

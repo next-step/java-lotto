@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-	public static final int MAX_SIZE = 6;
+	public static final int SIZE = 6;
 	private final Set<LottoNumber> numbers;
 
 	public LottoNumbers(final Integer... numbers) {
@@ -23,7 +23,7 @@ public class LottoNumbers {
 	}
 
 	private void validateSize(final Set<LottoNumber> numbers) {
-		if (MAX_SIZE < numbers.size()) {
+		if (SIZE != numbers.size()) {
 			throw new IllegalArgumentException();
 		}
 	}
