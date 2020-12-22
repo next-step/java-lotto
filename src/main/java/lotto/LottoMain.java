@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.modal.LottoGame;
-import lotto.modal.LottoResult;
-import lotto.modal.Money;
+import lotto.modal.GameManual;
 import lotto.view.UserView;
 
 public class LottoMain {
@@ -10,14 +8,16 @@ public class LottoMain {
 	public static void main(String[] args) {
 
 		try {
-			Money money = UserView.getUserInputMoney();
-			LottoGame lottoGame = new LottoGame(money);
-			UserView.printLottoPackage(lottoGame.getLottoPackage());
+			GameManual gameManual = new GameManual(UserView.inputGameMoney(), UserView.inputManualCount());
 
-			LottoResult result = lottoGame.getLottoResult(UserView.getUserInputLotto());
+			//ManualLotto lotto = ;
+			//Game lottoGame = new Game(money);
+			//UserView.printLottoPackage(lottoGame.getLottoPackage());
 
-			UserView.printLottoResultRank(result.rankCount());
-			UserView.printLottoResultYield(result.report(money));
+			//LottoResult result = lottoGame.getLottoResult(UserView.inputWinnerLotto());
+
+			//UserView.printLottoResultRank(result.rankCount());
+			//UserView.printLottoResultYield(result.report(money));
 		} catch (IllegalArgumentException illegalArgumentException) {
 			UserView.printErrorMsg(illegalArgumentException.getMessage());
 		}
