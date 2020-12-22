@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     StringAddCalculator split;
@@ -37,5 +38,14 @@ public class StringAddCalculatorTest {
     void stringSeperator2() {
         int result = split.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void notNumberException() {
+        assertThatThrownBy(() -> split.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> split.splitAndSum("@,1,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }

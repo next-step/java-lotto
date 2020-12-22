@@ -25,6 +25,12 @@ public class StringAddCalculator {
 
             String[] numbers = input.split(",");
             for (String num : numbers) {
+                if (Integer.parseInt(num) < 0) {
+                    throw new RuntimeException("음수가 전달되었습니다.");
+                }
+                if (!Pattern.matches("^0-9*$", num)) {
+                    throw new RuntimeException("숫자 이외의 값이 전달되었습니다.");
+                }
                 sum += Integer.parseInt(num);
             }
             return sum;
