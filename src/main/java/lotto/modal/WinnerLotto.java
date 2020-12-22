@@ -2,13 +2,13 @@ package lotto.modal;
 
 public class WinnerLotto {
 
-	private final Lotto winnerLotto;
+	private final Lotto winner;
 	private final LottoNumber bonusNumber;
 
 	public WinnerLotto(final Lotto winnerLotto, final LottoNumber bonusNumber) {
 
 		validationWinnerLotto(winnerLotto, bonusNumber);
-		this.winnerLotto = winnerLotto;
+		this.winner = winnerLotto;
 		this.bonusNumber = bonusNumber;
 	}
 
@@ -24,20 +24,13 @@ public class WinnerLotto {
 	}
 
 	public int getMatchCount(Lotto compareLotto) {
-		int count = 0;
-
-		if (this.winnerLotto.equals(compareLotto)) {
-			return 6;
-		}
-
-		for (LottoNumber number : compareLotto.getLotto()) {
-			count += this.isContain(number);
-		}
-		return count;
+		return compareLotto.getLotto().stream()
+			.mapToInt(this::isContain)
+			.sum();
 	}
 
 	public int isContain(LottoNumber number) {
-		if (this.winnerLotto.getLotto().contains(number)) {
+		if (this.winner.getLotto().contains(number)) {
 			return 1;
 		}
 		return 0;
