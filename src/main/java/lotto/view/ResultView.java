@@ -36,11 +36,12 @@ public class ResultView {
 	}
 
 	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResults) {
-		if(lottoMatchResults.isEmpty()){
-			System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+		if(LottoPrizePolicy.SECOND.equals(lottoPrizePolicy)){
+			System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount, lottoMatchResults.size()));
 			return;
 		}
-		System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount, lottoMatchResults.size()));
+		System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+
 	}
 
 	private static int hasMatchCount(List<Integer> lottoResultList, int matchCount) {
@@ -51,8 +52,6 @@ public class ResultView {
 	}
 
 	public static void printEarningRate(double earningRate) {
-		if (earningRate < 1) {
-			System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", earningRate));
-		}
+		System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
 	}
 }

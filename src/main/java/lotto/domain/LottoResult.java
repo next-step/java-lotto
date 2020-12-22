@@ -5,6 +5,7 @@ import lotto.model.LottoPrizePolicy;
 import java.util.List;
 
 public class LottoResult {
+
 	private int totalPrizeMoney = 0;
 
 	private double earningsRate = 0.0;

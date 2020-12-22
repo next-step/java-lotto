@@ -1,12 +1,8 @@
 package lotto.view;
 
-import lotto.domain.GeneratedLotto;
+import lotto.domain.Lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
@@ -22,37 +18,28 @@ public class InputView {
 		print(String.format("%d개를 구매했습니다.", lottoTryCount));
 	}
 
-	public static void printLottoNumber(List<GeneratedLotto> generatedLottoNumbers) {
-		for (GeneratedLotto lottoNumber : generatedLottoNumbers) {
-			print(lottoNumber.toString());
-		}
-	}
-
-	public static GeneratedLotto printLastPrizeInput() {
+	public static Lotto printLastPrizeInput() {
 		print("지난 주 당첨 번호를 입력해 주세요.");
 		String lastWeekPrizeNumber = scanner.next();
-		GeneratedLotto lastWeekPrizeNumbers = validateInputPirzeNumber(lastWeekPrizeNumber);
-
-		return lastWeekPrizeNumbers;
+		return validateInputPirzeNumber(lastWeekPrizeNumber);
 	}
+
 	public static int printBonusNumberInput() {
 		print("보너스 볼을 입력해 주세요.");
-		int bonusNumber = scanner.nextInt();
-
-		return bonusNumber;
+		return scanner.nextInt();
 	}
 
-
-
-	private static GeneratedLotto validateInputPirzeNumber(String lastWeekPrizeNumber) {
+	private static Lotto validateInputPirzeNumber(String lastWeekPrizeNumber) {
 		return convertStringToInteger(lastWeekPrizeNumber);
 	}
 
-	public static GeneratedLotto convertStringToInteger(String lastWeekPrizeNumberInput) throws IllegalArgumentException {
+	public static Lotto convertStringToInteger(String lastWeekPrizeNumberInput) {
 		String[] lastWeekPrizeNumberArr = lastWeekPrizeNumberInput.split(COMMA);
-		GeneratedLotto lastWeekPrizeNumberList = new GeneratedLotto(lastWeekPrizeNumberArr);
-
-		return lastWeekPrizeNumberList;
+		List<Integer> lastWeekPrizeNumber = new ArrayList<>();
+		for (String number : lastWeekPrizeNumberArr) {
+			lastWeekPrizeNumber.add(Integer.parseInt(number.trim()));
+		}
+		return new Lotto(lastWeekPrizeNumber);
 	}
 
 	public static void print(String message) {

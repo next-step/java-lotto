@@ -1,11 +1,10 @@
 package lotto.model;
 
-import lotto.domain.GeneratedLotto;
+import lotto.domain.Lotto;
 import lotto.domain.LottoMatchResult;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public enum LottoPrizePolicy {
 	FIFTH(3, 5_000, false),
@@ -60,8 +59,8 @@ public enum LottoPrizePolicy {
 		return minMatchPolicy.getMatchCount();
 	}
 
-	public static boolean isMatchBonusNumber(GeneratedLotto generatedLotto, int bonusNumber) {
-		return generatedLotto.lottoNumbers.stream().collect(Collectors.toList()).contains(bonusNumber);
+	public static boolean isMatchBonusNumber(Lotto lotto, int bonusNumber) {
+		return lotto.isMatchBonusNumber(bonusNumber);
 	}
 }
 

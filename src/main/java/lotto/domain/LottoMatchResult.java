@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class LottoMatchResult {
 	private int matchResult;
+
 	private boolean hasBonusNumber;
 
 	public LottoMatchResult(int matchResult, boolean hasBonusNumber) {
