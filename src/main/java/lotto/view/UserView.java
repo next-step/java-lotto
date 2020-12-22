@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.modal.GameCondition;
 import lotto.modal.Lotto;
 import lotto.modal.LottoNumber;
 import lotto.modal.WinnerLotto;
@@ -29,8 +30,8 @@ public class UserView {
 		return new WinnerLotto(winnerLotto, bonusNumber);
 	}
 
-	public static void printLottoPackage(List<Lotto> lottoPackage) {
-		UserOutput.printLottoCount(lottoPackage.size());
+	public static void printLottoPackage(GameCondition condition, List<Lotto> lottoPackage) {
+		UserOutput.printLottoCount(condition.getCount(), condition.getRandomCount());
 		UserOutput.printLottoPackage(lottoPackage);
 	}
 
@@ -51,9 +52,11 @@ public class UserView {
 		return userInputString();
 	}
 
-	private static List<Lotto> generateManualLotto(int repeatNumber) {
+	public static List<Lotto> inputManualLotto(int repeatNumber) {
 		List<Lotto> manualLotto = new ArrayList<>();
-		UserOutput.printUserInputManualLotto();
+		if (repeatNumber != 0) {
+			UserOutput.printUserInputManualLotto();
+		}
 		for (int i = 0; i < repeatNumber; i++) {
 			manualLotto.add(Lotto.generateLotto(userInputString()));
 		}

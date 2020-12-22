@@ -8,7 +8,7 @@ import lotto.modal.Lotto;
 public class UserOutput {
 
 	private static final String NEXT_LINE_FLAG = "\n";
-	private static final String PRINT_LOTTO_RANK_RESULT = NEXT_LINE_FLAG + "당첨 통계" + NEXT_LINE_FLAG + "---------";
+	private static final String PRINT_LOTTO_RANK_RESULT = "당첨 통계" + NEXT_LINE_FLAG + "---------";
 	private static final String PRINT_LOTTO_USER_BUY_NUMBER = "개를 구매했습니다.";
 	private static final String PRINT_LOTTO_BUY_MONEY = "구입금액을 입력해 주세요.";
 	private static final String PRINT_LOTTO_WINNER_NUMBER = "지난 주 담청 번호를 입력해 주세요.";
@@ -30,8 +30,8 @@ public class UserOutput {
 		messagePrint(PRINT_LOTTO_BUY_MONEY + NEXT_LINE_FLAG);
 	}
 
-	public static void printLottoCount(int size) {
-		messagePrint(size + PRINT_LOTTO_USER_BUY_NUMBER + NEXT_LINE_FLAG);
+	public static void printLottoCount(int manualCount, int randomCount) {
+		messagePrint("수동으로 " + manualCount + "장, 자동으로 " + randomCount + PRINT_LOTTO_USER_BUY_NUMBER + NEXT_LINE_FLAG);
 	}
 
 	public static void printUserInputBonusNumber() {
@@ -39,7 +39,7 @@ public class UserOutput {
 	}
 
 	public static void printUserInputWinnerLotto() {
-		messagePrint(PRINT_LOTTO_WINNER_NUMBER + NEXT_LINE_FLAG);
+		messagePrint(NEXT_LINE_FLAG + PRINT_LOTTO_WINNER_NUMBER + NEXT_LINE_FLAG);
 	}
 
 	public static void printManualLottoCount() {
@@ -55,7 +55,7 @@ public class UserOutput {
 	}
 
 	public static void printLottoRankResult(List<String> lottoRanks) {
-		messagePrint(PRINT_LOTTO_RANK_RESULT + NEXT_LINE_FLAG);
+		messagePrint(NEXT_LINE_FLAG + PRINT_LOTTO_RANK_RESULT + NEXT_LINE_FLAG);
 		lottoRanks.forEach(UserOutput::messagePrint);
 	}
 
