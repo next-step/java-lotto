@@ -24,6 +24,7 @@ public class ResultView {
 		Map<LottoRank, Long> lottoGameResult = lottoGameResultDto.getLottoGameResult();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
+		printLottoRank(LottoRank.FIFTH, lottoGameResult);
 		printLottoRank(LottoRank.FOURTH, lottoGameResult);
 		printLottoRank(LottoRank.THIRD, lottoGameResult);
 		printLottoRank(LottoRank.SECOND, lottoGameResult);
@@ -33,7 +34,7 @@ public class ResultView {
 
 	private static void printLottoRank(LottoRank lottoRank, Map<LottoRank, Long> lottoGameResult) {
 		long count = lottoGameResult.getOrDefault(lottoRank, 0L);
-		System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getWinningMoney() + "원)- " + count + "개");
+		System.out.println(lottoRank.getCountOfMatch() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "") + " (" + lottoRank.getWinningMoney() + "원)- " + count + "개");
 	}
 
 	private static void printProfitRatio(LottoGameResultDto lottoGameResultDto) {
