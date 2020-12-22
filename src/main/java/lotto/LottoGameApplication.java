@@ -10,19 +10,19 @@ import lotto.view.OutputView;
 
 public class LottoGameApplication {
     public static void main(String[] args) {
-        Money money = new Money(InputView.enterMoney());
+        LottoMoney lottoMoney = new LottoMoney(InputView.enterMoney());
 
         int countOfManualLottoTicket = InputView.enterManualLottoCount();
         LottoTickets manualLottoTickets = new LottoTickets(InputView.enterManualLottoNumbers(countOfManualLottoTicket));
 
-        LottoMachine lottoMachine = new LottoMachine(money.getCountOfAutoLotto(countOfManualLottoTicket));
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney.getCountOfAutoLotto(countOfManualLottoTicket));
         LottoTickets autoLottoTickets = lottoMachine.makeAutoLottoTickets();
         OutputView.printLottoTickets(manualLottoTickets, autoLottoTickets);
 
         LottoGame lottoGame = new LottoGame(manualLottoTickets, autoLottoTickets);
         WinningLottoTicket winningLottoTicket = makeWinningLottoTicket();
         LottoResult lottoResult = lottoGame.matchNumbers(winningLottoTicket);
-        OutputView.printResults(lottoResult, money);
+        OutputView.printResults(lottoResult, lottoMoney);
     }
 
     private static WinningLottoTicket makeWinningLottoTicket() {

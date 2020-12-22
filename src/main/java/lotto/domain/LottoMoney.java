@@ -1,18 +1,19 @@
 package lotto.domain;
 
-public class Money {
+public class LottoMoney {
     private static final long MONEY_OF_ONE_TICKET = 1000;
 
     private final long value;
 
-    public Money(final long value) {
+    public LottoMoney(final long value) {
         validate(value);
         this.value = value;
     }
 
     public int getCountOfAutoLotto(int countOfManualLotto) {
-        validateCount(countOfManualLotto);
-        return getCountOfAllLotto() - countOfManualLotto;
+        int count = getCountOfAllLotto() - countOfManualLotto;
+        validateCount(count);
+        return count;
     }
 
     public double calculateYield(final long sum) {
@@ -26,7 +27,7 @@ public class Money {
     }
 
     private void validateCount(int count) {
-        if (getCountOfAllLotto() < count) {
+        if (count < 0) {
             throw new IllegalArgumentException("구매할 수 있는 로또 장 수를 초과했습니다.");
         }
     }
