@@ -18,19 +18,6 @@ class LottoTest {
 		assertThat(expected).isEqualTo(match.getCount());
 	}
 
-	@DisplayName("로또 NULL값 테스트")
-	@Test
-	public void lottoNullTest() {
-		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(null));
-	}
-
-	@DisplayName("로또 1 ~ 45 사이 숫자 테스트")
-	@Test
-	public void lottoOtherNumberTest() {
-		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(-100, 1, 2, 3, 4, 5)));
-		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1000, 1, 2, 3, 4, 5)));
-	}
-
 	@DisplayName("로또 LottoRank 테스트")
 	@Test
 	public void lottoRankTest() {
