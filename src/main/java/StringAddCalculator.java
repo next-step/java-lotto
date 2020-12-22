@@ -16,7 +16,7 @@ public class StringAddCalculator {
             return sum = Integer.parseInt(input);
         }
         if (input.length() > NUM_LENGTH && input.contains(COMMA)) {
-            return calculatorColonCommaDelimitor(input, sum);
+            return calculatorColonCommaDelimitor(input);
         }
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
@@ -25,16 +25,17 @@ public class StringAddCalculator {
         return sum;
     }
 
-    private int calculatorColonCommaDelimitor(String input, int sum) {
+    private int calculatorColonCommaDelimitor(String input) {
         if (input.contains(COLON)) {
             String[] tokens = input.split(",|:");
-            return getSum(sum, tokens);
+            return getSum(tokens);
         }
 
-        return commaDelimitor(input, sum);
+        return commaDelimitor(input);
     }
 
-    private int commaDelimitor(String input, int sum) {
+    private int commaDelimitor(String input) {
+        int sum = 0;
         String[] numbers = input.split(COMMA);
         for (String num : numbers) {
             extractException(num);
@@ -55,10 +56,11 @@ public class StringAddCalculator {
     private int calculateMatcherSum(int sum, Matcher m) {
         String customDelimiter = m.group(1);
         String[] tokens = m.group(2).split(customDelimiter);
-        return getSum(sum, tokens);
+        return getSum(tokens);
     }
 
-    private int getSum(int sum, String[] tokens) {
+    private int getSum(String[] tokens) {
+        int sum = 0;
         for (String num : tokens) {
             sum += Integer.parseInt(num);
         }
