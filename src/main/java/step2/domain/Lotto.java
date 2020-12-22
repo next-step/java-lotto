@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Set;
+
 public class Lotto {
 
 	private final LottoNumbers numbers;
@@ -12,7 +14,7 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	public LottoNumbers getWinningNumbers(final LottoNumbers winNumbers) {
+	public Set<LottoNumber> getWinningNumbers(final LottoNumbers winNumbers) {
 		return this.numbers.getWinningNumbers(winNumbers);
 	}
 

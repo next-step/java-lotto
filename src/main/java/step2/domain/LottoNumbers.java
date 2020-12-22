@@ -36,10 +36,10 @@ public class LottoNumbers {
 		return numbers.size();
 	}
 
-	public LottoNumbers getWinningNumbers(final LottoNumbers winNumbers) {
+	public Set<LottoNumber> getWinningNumbers(final LottoNumbers winNumbers) {
 		Set<LottoNumber> compareNumbers = new HashSet<>(this.numbers);
 		compareNumbers.retainAll(winNumbers.getNumbers());
-		return new LottoNumbers(compareNumbers);
+		return compareNumbers;
 	}
 
 	@Override
