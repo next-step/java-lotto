@@ -28,15 +28,15 @@ public class ResultView {
 		printLottoRank(LottoRank.THIRD, lottoGameResult);
 		printLottoRank(LottoRank.SECOND, lottoGameResult);
 		printLottoRank(LottoRank.FIRST, lottoGameResult);
+		printProfitRatio(lottoGameResultDto);
 	}
 
 	private static void printLottoRank(LottoRank lottoRank, Map<LottoRank, Long> lottoGameResult) {
-		long count = lottoGameResult.get(lottoRank) == null ? 0L : lottoGameResult.get(lottoRank);
+		long count = lottoGameResult.getOrDefault(lottoRank, 0L);
 		System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getWinningMoney() + "원)- " + count + "개");
 	}
 
-	public static void printProfitRatio(LottoGameResultDto lottoGameResultDto) {
-		BigDecimal profitRatio = lottoGameResultDto.getProfitRatio();
-		System.out.println("총 수익률은 " + profitRatio + "입니다.");
+	private static void printProfitRatio(LottoGameResultDto lottoGameResultDto) {
+		System.out.println("총 수익률은 " + lottoGameResultDto.getProfitRatio() + "입니다.");
 	}
 }
