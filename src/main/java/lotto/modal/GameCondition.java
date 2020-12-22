@@ -5,24 +5,32 @@ import java.util.Objects;
 
 import lotto.util.StringValid;
 
-public class GameManual {
+public class GameCondition {
 
 	private static final int LOTTO_PRICE_MONEY = 1000;
 
 	private final int userMoney;
 	private final int count;
 
-	public GameManual(String money) {
+	public GameCondition(String money) {
 		this(money, "0");
 	}
 
-	public GameManual(String money, String count) {
+	public GameCondition(String money, String count) {
 		this.userMoney = setCheckMoney(money);
 		this.count = setCheckCount(count);
 	}
 
+	public int getCount() {
+		return this.count;
+	}
+
 	public int getRepeatCount() {
 		return this.userMoney / LOTTO_PRICE_MONEY;
+	}
+
+	public int getRandomCount() {
+		return this.getRepeatCount() - this.count;
 	}
 
 	public BigDecimal getYield(long totalPrize) {
@@ -68,7 +76,7 @@ public class GameManual {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		GameManual that = (GameManual)o;
+		GameCondition that = (GameCondition)o;
 		return userMoney == that.userMoney && count == that.count;
 	}
 

@@ -2,16 +2,18 @@ package lotto.modal;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Game {
 
-	private final GameManual money;
 	private List<Lotto> lottoPackage;
 
-	public Game(GameManual money) {
-		this.money = money;
-		//this.lottoPackage = generateLottoPackage();
+	public Game(ManualLotto manualLotto, int randomCount) {
+		lottoPackage = generateLottoPackage(manualLotto, randomCount);
+	}
+
+	private List<Lotto> generateLottoPackage(ManualLotto manualLotto, int randomCount) {
+		ManualLotto randomLotto = new ManualLotto(randomCount);
+		return manualLotto.mergeLotto(randomLotto);
 	}
 
 	public List<Lotto> getLottoPackage() {
@@ -21,20 +23,7 @@ public class Game {
 	public LottoResult getLottoResult(WinnerLotto winnerLotto) {
 		return this.generateLottoResult(winnerLotto);
 	}
-
-	public void addManualLotto(List<Lotto> manualLotto) {
-		this.lottoPackage = Stream.concat(this.lottoPackage.stream(), manualLotto.stream())
-			.collect(Collectors.toList());
-	}
-
-	private List<Lotto> generateLottoPackage() {
-		int count = this.money.getRepeatCount();
-
-		return Stream.generate(Lotto::new)
-			.limit(count)
-			.collect(Collectors.toList());
-	}
-
+	
 	private LottoResult generateLottoResult(WinnerLotto winnerLotto) {
 		return new LottoResult(this.lottoPackage.stream()
 			.map(lotto -> LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto)))
