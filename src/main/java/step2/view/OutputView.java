@@ -4,10 +4,13 @@ import java.util.List;
 
 import step2.domain.Lotto;
 import step2.domain.LottoProfit;
-import step2.domain.LottoResult;
 import step2.domain.LottoResults;
+import step2.domain.LottoWin;
 
 public class OutputView {
+
+	private final String SPACE = " ";
+	private final String NEW_LINE = "\n";
 
 	public void printLottos(final List<Lotto> lottos) {
 		lottos.forEach(System.out::println);
@@ -16,28 +19,44 @@ public class OutputView {
 
 	public void printWinResult(final LottoResults lottoResults) {
 		final String messageOfWinStatisticTitle = "당첨 통계";
-		final String messageFormatMatchCount = "%d개 일치";
-		final String messageFormatPrice = "(%d원)";
-		final String messageFormatWinCount = "%d개";
-		final String SPACE = " ";
-		final String NEW_LINE = "\n";
-		final String PRICE_WIN_COUNT_DELIMITER = "- ";
+
 
 		final StringBuilder statisticOutputBuilder = new StringBuilder();
 		statisticOutputBuilder.append(messageOfWinStatisticTitle).append(NEW_LINE)
 			.append("---------").append(NEW_LINE);
 
-		for (LottoResult lottoResult : lottoResults.getWinLottoResults()) {
-			statisticOutputBuilder
-				.append(String.format(messageFormatMatchCount, lottoResult.getMatchCount())).append(SPACE)
-				.append(String.format(messageFormatPrice, lottoResult.getPrice())).append(PRICE_WIN_COUNT_DELIMITER)
-				.append(String.format(messageFormatWinCount, lottoResult.getWinCount()))
-				.append(NEW_LINE);
+		for (LottoWin lottoWin : LottoWin.values()) {
+			append(statisticOutputBuilder, lottoWin, lottoResults.get(lottoWin));
 		}
 
 		statisticOutputBuilder.setLength(statisticOutputBuilder.length() - 1);
 
 		System.out.println(statisticOutputBuilder.toString());
+	}
+
+	private void append(final StringBuilder statisticOutputBuilder, LottoWin lottoWin, Integer winCount) {
+		if (!lottoWin.isWin()) {
+			return;
+		}
+		final String messageFormatMatchCount = "%d개 일치";
+		final String messageFormatPrice = "(%d원)";
+		final String messageFormatWinCount = "%d개";
+		final String PRICE_WIN_COUNT_DELIMITER = "- ";
+
+		statisticOutputBuilder
+			.append(String.format(messageFormatMatchCount, lottoWin.getMatchCount()));
+
+		if (lottoWin.isWinWithBonusBall()) {
+			statisticOutputBuilder.append(", 보너스 볼 일치");
+		}
+
+		statisticOutputBuilder
+			.append(SPACE)
+			.append(String.format(messageFormatPrice, lottoWin.getPrice()))
+			.append(PRICE_WIN_COUNT_DELIMITER)
+			.append(String.format(messageFormatWinCount, winCount == null ? 0 : winCount))
+			.append(NEW_LINE);
+
 	}
 
 	public void printProfitRatio(final LottoProfit lottoProfit) {
