@@ -8,7 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"1,false,NOTHING", "1,true,NOTHING",
+	@CsvSource(value = {
+			"-1,false,NOTHING", "-5,false,NOTHING",
+			"1,false,NOTHING", "1,true,NOTHING",
 			"2,false,NOTHING", "2,true,NOTHING",
 			"3,false,MATCHED_THREE", "3,true,MATCHED_THREE",
 			"4,false,MATCHED_FOUR", "4,true,MATCHED_FOUR",
