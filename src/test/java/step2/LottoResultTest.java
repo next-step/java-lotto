@@ -25,7 +25,7 @@ public class LottoResultTest {
 		final LottoNumber bonusNumber = new LottoNumber(12);
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getLottoResults()).containsKey(LottoWin.MATCH_3);
 		assertThat(lottoResults.getLottoResults()).hasSize(1);
@@ -40,7 +40,7 @@ public class LottoResultTest {
 		final LottoNumber bonusNumber = new LottoNumber(12);
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getLottoResults()).containsKey(LottoWin.MATCH_4);
 		assertThat(lottoResults.getLottoResults()).hasSize(1);
@@ -55,7 +55,7 @@ public class LottoResultTest {
 		final LottoNumber bonusNumber = new LottoNumber(12);
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getLottoResults()).containsKey(LottoWin.MATCH_5);
 		assertThat(lottoResults.getLottoResults()).hasSize(1);
@@ -70,7 +70,7 @@ public class LottoResultTest {
 		final LottoNumber bonusNumber = new LottoNumber(6);
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getLottoResults()).containsKey(LottoWin.MATCH_5_BONUS);
 		assertThat(lottoResults.getLottoResults()).hasSize(1);
@@ -85,7 +85,7 @@ public class LottoResultTest {
 		final LottoNumber bonusNumber = new LottoNumber(12);
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getLottoResults()).containsKey(LottoWin.MATCH_6);
 		assertThat(lottoResults.getLottoResults()).hasSize(1);
@@ -101,7 +101,7 @@ public class LottoResultTest {
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
 
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(5000);
 	}
@@ -116,7 +116,7 @@ public class LottoResultTest {
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
 
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_3.getPrice());
 	}
@@ -131,7 +131,7 @@ public class LottoResultTest {
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
 
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_5.getPrice());
 	}
@@ -146,7 +146,7 @@ public class LottoResultTest {
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
 
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_5_BONUS.getPrice());
 	}
@@ -161,7 +161,7 @@ public class LottoResultTest {
 		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(lotto);
 
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_6.getPrice());
 	}
@@ -177,7 +177,7 @@ public class LottoResultTest {
 		Lottos lottos = new Lottos(lotto);
 
 		Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
-			LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+			LottoResults lottoResults = new LottoResults(lottos, new LottoNumbers(winNumbers), bonusNumber);
 		});
 	}
 

@@ -23,16 +23,4 @@ public class Lottos {
 		return lottos;
 	}
 
-	public LottoResults result(final LottoNumbers winLottoNumbers, final LottoNumber bonusNumber) {
-		validateBonusNumberDuplication(winLottoNumbers, bonusNumber);
-		this.lottos.forEach(lotto -> lotto.confirmWinning(winLottoNumbers));
-		return new LottoResults(this, bonusNumber);
-	}
-
-	private void validateBonusNumberDuplication(final LottoNumbers winLottoNumbers, final LottoNumber bonusNumber) {
-		if (winLottoNumbers.contains(bonusNumber)) {
-			throw new IllegalArgumentException("보너스 볼 숫자는 당첨 번호 숫자와 중복되어선 안됩니다.");
-		}
-	}
-
 }
