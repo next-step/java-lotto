@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoGame {
+public class Game {
 
-	private final Money money;
+	private final GameManual money;
 	private List<Lotto> lottoPackage;
 
-	public LottoGame(Money userInputMoney) {
-		this.money = userInputMoney;
-		this.lottoPackage = generateLottoPackage();
+	public Game(GameManual money) {
+		this.money = money;
+		//this.lottoPackage = generateLottoPackage();
 	}
 
 	public List<Lotto> getLottoPackage() {

@@ -21,6 +21,10 @@ public class LottoResult {
 			.collect(Collectors.toList());
 	}
 
+	public BigDecimal report(GameManual money) {
+		return money.getYield(totalPrize());
+	}
+
 	private String getRankMessage(LottoRank lottoRank) {
 		if (lottoRank.equals(LottoRank.SECOND_RANK)) {
 			return lottoRank.getMatchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.getWinnerPrize() + "원)-";
@@ -32,10 +36,6 @@ public class LottoResult {
 		return ranks.stream()
 			.filter(lottoRank -> lottoRank.equals(target))
 			.count();
-	}
-
-	public BigDecimal report(Money money) {
-		return money.getYield(totalPrize());
 	}
 
 	private long totalPrize() {
