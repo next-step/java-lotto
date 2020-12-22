@@ -22,6 +22,9 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != LOTTO_NUMBER_SIZE)
+            throw new IllegalArgumentException();
+
         this.lottoNumbers = lottoNumbers;
     }
 
