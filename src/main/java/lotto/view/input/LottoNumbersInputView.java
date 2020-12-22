@@ -50,8 +50,8 @@ class LottoNumbersInputView {
 	}
 
 	private LottoNumbers createLottoNumbers(String input) {
-		input = input.replace(" ", "");
 		List<LottoNumber> lottoNumberList = Arrays.stream(input.split(","))
+				.map(String::trim)
 				.map(Integer::parseInt)
 				.map(LottoNumber::new)
 				.collect(Collectors.toList());
