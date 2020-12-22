@@ -25,4 +25,17 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(1);
     }
 
+    @Test
+    void stringSeperator1() {
+        int result = split.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+        result = split.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void stringSeperator2() {
+        int result = split.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
