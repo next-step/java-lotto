@@ -46,6 +46,6 @@ public class StringAddCalculatorTest {
                 .isInstanceOf(RuntimeException.class);
 
         assertThatThrownBy(() -> split.splitAndSum("@,1,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(NumberFormatException.class);
     }
 }
