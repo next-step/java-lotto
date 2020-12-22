@@ -20,9 +20,10 @@ public class LottoApplication {
 
         Lotto winNumbers = new Lotto(InputView.requestLastWinNumbers());
         LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(winNumbers, bonusNumber);
 
         Lottos purchasedLottos = autoLottos.conbine(manualLottos);
-        WinResult winResults = new WinResult(money, purchasedLottos, winNumbers, bonusNumber);
+        WinResult winResults = new WinResult(money, purchasedLottos, winningLotto);
 
         ResultView.showResults(winResults);
     }
