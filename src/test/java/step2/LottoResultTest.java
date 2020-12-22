@@ -2,6 +2,7 @@ package step2;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -153,7 +154,7 @@ public class LottoResultTest {
 	@Order(10)
 	@DisplayName("상금 계산 - 6개 일치")
 	@Test
-	void given_lotto_results_when_get_win_price_then_return_price() {
+	void given_lotto_results_when_get_win_price_then_return_price_6() {
 		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
 		final Integer[] winNumbers = { 1, 2, 3, 4, 5, 6 };
 		final LottoNumber bonusNumber = new LottoNumber(12);
@@ -163,6 +164,21 @@ public class LottoResultTest {
 		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
 
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_6.getPrice());
+	}
+
+	@Order(11)
+	@DisplayName("로또 보너스 볼과 당첨번호 중복시 익셉션 발생")
+	@Test
+	void given_lotto_when_result_with_duplicated_bonus_number_then_throw_exception() {
+		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
+		final Integer[] winNumbers = { 1, 2, 3, 4, 5, 9 };
+		final LottoNumber bonusNumber = new LottoNumber(9);
+		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
+		Lottos lottos = new Lottos(lotto);
+
+		Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
+			LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
+		});
 	}
 
 }

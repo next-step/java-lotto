@@ -70,4 +70,8 @@ public class LottoNumbers {
 			.collect(Collectors.toList());
 	}
 
+	public boolean contains(final LottoNumber bonusNumber) {
+		return this.getNumbers().contains(bonusNumber);
+	}
+
 }
