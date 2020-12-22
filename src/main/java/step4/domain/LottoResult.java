@@ -9,8 +9,8 @@ import java.util.List;
 public class LottoResult {
     private static List<Rank> ranks = new ArrayList<>();
 
-    public LottoResult(WinningLotto winningLotto, List<Lotto> buyLottoList) {
-        for (Lotto lotto : buyLottoList) {
+    public LottoResult(WinningLotto winningLotto, LottoList buyLottoList) {
+        for (Lotto lotto : buyLottoList.getLottoList()) {
             ranks.add(Rank.valueOf(winningLotto.match(lotto), winningLotto.matchBonus(lotto)));
         }
     }

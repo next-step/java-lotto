@@ -12,8 +12,8 @@ public class LottoMachine {
 
     private List<LottoNumber> lottoNumbers = new ArrayList<>(new LottoNumber().getLottoNumberCache().values());
 
-    public List<Lotto> buyLotto(int purchasePrice, List<String> manualNumbersList) {
-        List<Lotto> lottoList = new ArrayList<>();
+    public LottoList buyLotto(int purchasePrice, List<String> manualNumbersList) {
+        LottoList lottoList = new LottoList();
 
         int manualNumbersListSize = Optional.ofNullable(manualNumbersList)
                 .map(List::size)
@@ -29,17 +29,17 @@ public class LottoMachine {
         return lottoList;
     }
 
-    private void buyManualLotto(List<String> manualNumbersList, List<Lotto> lottoList) {
+    private void buyManualLotto(List<String> manualNumbersList, LottoList lottoList) {
         for (String manualNumbers : manualNumbersList) {
             lottoList.add(new Lotto(manualNumbers, LottoType.MANUAL));
         }
     }
 
-    private int buyManualLottoChange (int purchasePrice, List<String> manualNumbersList) {
+    private int buyManualLottoChange(int purchasePrice, List<String> manualNumbersList) {
         return purchasePrice - (manualNumbersList.size() * this.PRICE);
     }
 
-    private void buyAutoLotto(int purchasePrice, List<Lotto> lottoList) {
+    private void buyAutoLotto(int purchasePrice, LottoList lottoList) {
         int buyCount = purchasePrice / this.PRICE;
         for (int i = 0; i < buyCount; i++) {
             lottoList.add(createLotto());

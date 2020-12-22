@@ -14,6 +14,6 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         List<String> ManualLottoNumbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
-        assertThat(lottoMachine.buyLotto(14000, ManualLottoNumbers)).hasSize(14);
+        assertThat(lottoMachine.buyLotto(14000, ManualLottoNumbers).getLottoList()).hasSize(14);
     }
 }

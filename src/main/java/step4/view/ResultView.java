@@ -12,19 +12,19 @@ public class ResultView {
 
     }
 
-    public static void printLottoNumbers(List<Lotto> lottoList) {
+    public static void printLottoNumbers(LottoList lottoList) {
         System.out.println("수동으로 " + getLottoCountByType(lottoList, LottoType.MANUAL) + "장, "
                         + "자동으로 " + getLottoCountByType(lottoList, LottoType.AUTO) + "개를 구매했습니다.");
 
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList.getLottoList()) {
             System.out.print("[");
             printLoopLottoNumbers(lotto);
             System.out.println("]");
         }
     }
 
-    private static long getLottoCountByType(List<Lotto> lottoList, LottoType lottoType) {
-        return lottoList.stream().filter(lotto -> lotto.getLottoType() == lottoType).count();
+    private static long getLottoCountByType(LottoList lottoList, LottoType lottoType) {
+        return lottoList.getLottoList().stream().filter(lotto -> lotto.getLottoType() == lottoType).count();
     }
 
     private static void printLoopLottoNumbers(Lotto lotto) {
