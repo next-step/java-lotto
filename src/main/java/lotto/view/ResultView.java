@@ -3,14 +3,14 @@ package lotto.view;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoRank;
 import lotto.dto.LottoGameResultDto;
 
 public class ResultView {
-	public static void printLottoNumbers(LottoNumbers lottoNumbers) {
-		for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+	public static void printLottoNumbers(LottoTicket lottoTicket) {
+		for (Lotto lottoNumber : lottoTicket.getLottoTicket()) {
 			System.out.println(lottoNumber);
 		}
 		System.out.println();
@@ -31,15 +31,12 @@ public class ResultView {
 	}
 
 	private static void printLottoRank(LottoRank lottoRank, Map<LottoRank, Long> lottoGameResult) {
-		Long count = lottoGameResult.get(lottoRank);
-		if (count == null) {
-			count = 0L;
-		}
+		long count = lottoGameResult.get(lottoRank) == null ? 0L : lottoGameResult.get(lottoRank);
 		System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getWinningMoney() + "원)- " + count + "개");
 	}
 
 	public static void printProfitRatio(LottoGameResultDto lottoGameResultDto) {
 		BigDecimal profitRatio = lottoGameResultDto.getProfitRatio();
-		System.out.println("총 수익률은 " + profitRatio + "입니다." + ((profitRatio.compareTo(BigDecimal.ONE) == -1) ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : ""));
+		System.out.println("총 수익률은 " + profitRatio + "입니다.");
 	}
 }

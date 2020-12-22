@@ -8,9 +8,9 @@ import lotto.domain.LottoRank;
 public class LottoGameResultDto {
 	private static final int LOTTO_PRICE = 1000;
 
-	private int lottoGameCount;
-	private BigDecimal profitRatio;
-	private Map<LottoRank, Long> lottoGameResult;
+	private final int lottoGameCount;
+	private final BigDecimal profitRatio;
+	private final Map<LottoRank, Long> lottoGameResult;
 
 	public LottoGameResultDto(Map<LottoRank, Long> lottoGameResult, int lottoGameCount) {
 		this.lottoGameResult = lottoGameResult;
@@ -30,7 +30,7 @@ public class LottoGameResultDto {
 		BigDecimal profit = BigDecimal.valueOf(lottoGameResult.entrySet().stream()
 			.mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
 			.sum());
-		BigDecimal loss = BigDecimal.valueOf(lottoGameCount * LOTTO_PRICE);
+		BigDecimal loss = BigDecimal.valueOf((long)lottoGameCount * LOTTO_PRICE);
 		return profit.divide(loss, 2, BigDecimal.ROUND_HALF_UP);
 	}
 }

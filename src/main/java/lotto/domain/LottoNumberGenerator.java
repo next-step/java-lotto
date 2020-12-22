@@ -6,22 +6,24 @@ import java.util.List;
 import java.util.Random;
 
 public class LottoNumberGenerator implements NumberGenerator {
-	private final Random random = new Random();
+	private static final int LOTTO_SIZE = 6;
+	private static final int NUMBER_BOUND = 45;
+	private static final Random random = new Random();
 
 	@Override
 	public List<Integer> generateNumbers() {
-		List<Integer> lottoNumber = new ArrayList<>();
-		while (lottoNumber.size() < 6) {
-			addRandomNumber(lottoNumber);
+		List<Integer> lotto = new ArrayList<>();
+		while (lotto.size() < LOTTO_SIZE) {
+			addRandomNumber(lotto);
 		}
-		Collections.shuffle(lottoNumber);
-		return lottoNumber;
+		Collections.shuffle(lotto);
+		return lotto;
 	}
 
-	private void addRandomNumber(List<Integer> lottoNumber) {
-		int randomNumber = random.nextInt(45) + 1;
-		if (!lottoNumber.contains(randomNumber)) {
-			lottoNumber.add(randomNumber);
+	private void addRandomNumber(List<Integer> lotto) {
+		int randomNumber = random.nextInt(NUMBER_BOUND) + 1;
+		if (!lotto.contains(randomNumber)) {
+			lotto.add(randomNumber);
 		}
 	}
 }
