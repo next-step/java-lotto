@@ -26,4 +26,9 @@ public class ManualLotto {
 			.limit(count)
 			.collect(Collectors.toList());
 	}
+
+	public List<Lotto> mergeLotto(ManualLotto randomLotto) {
+		return Stream.concat(this.lottoBundle.stream(), randomLotto.getLottoBundle().stream())
+			.collect(Collectors.toList());
+	}
 }
