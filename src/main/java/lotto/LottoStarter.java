@@ -3,7 +3,6 @@ package lotto;
 import java.util.Map;
 
 import lotto.domain.LottoGame;
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;

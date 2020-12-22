@@ -1,11 +1,10 @@
 package lotto.view;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoTicket;
 import lotto.dto.LottoGameResultDto;
 
 public class ResultView {
