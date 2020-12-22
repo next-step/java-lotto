@@ -20,7 +20,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void stringOne() throws Exception {
+    void stringOne() {
         int result = split.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
