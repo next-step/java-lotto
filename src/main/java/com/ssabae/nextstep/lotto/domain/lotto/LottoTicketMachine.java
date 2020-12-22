@@ -36,7 +36,7 @@ public class LottoTicketMachine {
         List<LottoTicket> lottoTicketList = Stream.generate(generator::generate)
                 .limit(count)
                 .collect(Collectors.toList());
-        return new LottoTickets(Collections.unmodifiableList(lottoTicketList));
+        return LottoTickets.of(lottoTicketList);
     }
 
     public LottoResultDto calculateYield(LottoTickets lottoTickets, WinningNumber winningNumber) {

@@ -23,7 +23,7 @@ class LottoTicketsAnalyzerTest {
 
     @Test
     void analyzerTest() {
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoTickets dummyLottoTickets = getDummyLottoTickets();
         LottoResult lottoResult = analyzer.analyze(dummyLottoTickets, winningNumber);
         assertAll(
@@ -37,7 +37,7 @@ class LottoTicketsAnalyzerTest {
 
     private LottoTickets getDummyLottoTickets() {
         List<LottoTicket> dummyLottoTicketList = getDummyLottoTicketList();
-        return new LottoTickets(dummyLottoTicketList);
+        return LottoTickets.of(dummyLottoTicketList);
     }
 
     private List<LottoTicket> getDummyLottoTicketList() {

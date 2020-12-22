@@ -3,6 +3,7 @@ package com.ssabae.nextstep.lotto.domain;
 import static com.ssabae.nextstep.lotto.Constant.LOTTO_TICKET_PRICE;
 
 import com.ssabae.nextstep.lotto.domain.LottoResult.LottoResultBuilder;
+import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import java.util.HashMap;
@@ -42,9 +43,9 @@ public class LottoTicketsAnalyzer {
     }
 
     private int getMatchCount(LottoTicket lottoTicket, WinningNumber winningNumber) {
-        List<Integer> winningNumberList = winningNumber.getWinningNumberList();
+        List<LottoNumber> winningNumberList = winningNumber.getWinningNumberList();
         return (int) lottoTicket.getNumbers().stream()
-                .filter(lottoNumber -> winningNumberList.contains(lottoNumber.getNumber()))
+                .filter(winningNumberList::contains)
                 .count();
     }
 

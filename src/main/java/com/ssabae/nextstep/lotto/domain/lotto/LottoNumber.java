@@ -1,5 +1,8 @@
 package com.ssabae.nextstep.lotto.domain.lotto;
 
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MAX_VALUE;
+import static com.ssabae.nextstep.lotto.Constant.LOTTO_MIN_VALUE;
+
 import java.util.Objects;
 
 /**
@@ -8,6 +11,8 @@ import java.util.Objects;
  * @since : 2020-12-18
  */
 public class LottoNumber {
+
+    private final static String LOTTO_NUMBER_OUT_BOUND_MESSAGE = "당첨 번호는 %d~%d 사이여야합니다..";
 
     private final int number;
 
@@ -25,8 +30,9 @@ public class LottoNumber {
     }
 
     private void validate(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException();
+        if (number < LOTTO_MIN_VALUE || number > LOTTO_MAX_VALUE) {
+            String message = String.format(LOTTO_NUMBER_OUT_BOUND_MESSAGE, LOTTO_MIN_VALUE, LOTTO_MAX_VALUE);
+            throw new IllegalArgumentException(message);
         }
     }
 
