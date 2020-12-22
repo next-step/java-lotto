@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.LottoGame;
 import step2.domain.Lottery;
+import step2.domain.Prize;
 
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,7 @@ public class ResultView {
         printResultMessage();
 
         for (int i = 3; i <= 6; i++) {
-            System.out.print(i + "개 일치 (" + LottoGame.prizeMoney.get(i) + ")- ");
+            System.out.println(i + "개 일치 (" + Prize.getWinningMoney(i) + " )- ");
             System.out.println(getOccurrence(matchedResult, i) + "개");
         }
 

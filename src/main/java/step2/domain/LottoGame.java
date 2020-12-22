@@ -16,17 +16,7 @@ public class LottoGame {
 
     private Map<Lottery, Integer> matchedResult;
 
-    public static Map<Integer, Integer> prizeMoney;
-
     private int profit;
-
-    static {
-        prizeMoney = new HashMap<>();
-        prizeMoney.put(3, 5000);
-        prizeMoney.put(4, 50000);
-        prizeMoney.put(5, 1500000);
-        prizeMoney.put(6, 2000000000);
-    }
 
     public LottoGame() {
 
@@ -116,7 +106,7 @@ public class LottoGame {
         int money = 0;
 
         for (int count : matchedResult.values()) {
-            money += prizeMoney.getOrDefault(count, 0);
+            money += Prize.getWinningMoney(count);
         }
         return money;
     }
