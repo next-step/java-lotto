@@ -14,8 +14,6 @@ public class LottoGame {
 
     private List<Lottery> lotteryList;
 
-    private Map<Lottery, Integer> matchedResult;
-
     private int profit;
 
     public LottoGame() {
@@ -76,11 +74,10 @@ public class LottoGame {
      * @return 각 복권들의 당첨 결과 Map
      */
     public Map<Lottery, Integer> matchLottery(List<Lottery> generatedLotteries, WinningLottery winningLottery) {
-        matchedResult = new HashMap<>();
+        Map<Lottery,Integer> matchedResult = new HashMap<>();
 
         for (Lottery lottery : generatedLotteries) {
-            lottery.match(winningLottery);
-            matchedResult.put(lottery, lottery.getMatched());
+            matchedResult.put(lottery, lottery.match(winningLottery));
         }
 
         return matchedResult;

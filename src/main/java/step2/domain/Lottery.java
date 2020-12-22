@@ -7,15 +7,14 @@ import java.util.List;
 
 public class Lottery {
 
-    private static final int INIT_MATCHED = 0;
+    private static final int IS_MATCHED = 1;
+    private static final int IS_NOT_MATCHED = 0;
 
-    private List<Integer> selectedNumbers = new ArrayList<>();
-    private int matched;
+    private List<Integer> selectedNumbers;
 
     public Lottery() {
         selectedNumbers = Util.getShuffled();
         Util.getSorted(selectedNumbers);
-        this.matched = INIT_MATCHED;
     }
 
     public Lottery(List<Integer> winningNumber) {
@@ -33,41 +32,39 @@ public class Lottery {
 
     /**
      * 당첨 번호와 현재 복권을 매칭하는 메소드
-     * @param winningLottery 당첨 로또 번호
+     * @param winningLottery 당첨 로또 번호 ([1,2,3,4,5,6])
      */
-    public void match(WinningLottery winningLottery) {
+    public int match(WinningLottery winningLottery) {
+        int count = 0;
+
         for (int number : winningLottery.getWinningNumbers()) {
-            this.compareNumber(number, this.selectedNumbers);
+            count += this.compareNumber(number, this.selectedNumbers);
         }
+
+        return count;
     }
 
     /**
      * 당첨 번호와 현재 복권의 번호들과 같은지 비교
-     * @param number 당첨 번호
-     * @param selectedNumbers 현재 복권의 숫자들
+     * @param number 당첨 번호 (1)
+     * @param selectedNumbers 현재 복권의 숫자들 ([8, 21, 23, 41, 42, 43])
      */
-    private void compareNumber(int number, List<Integer> selectedNumbers) {
+    private int compareNumber(int number, List<Integer> selectedNumbers) {
+        int count = 0;
+
         for (int selected : selectedNumbers) {
-            isEqual(number, selected);
+            count += getMatched(number, selected);
         }
+
+        return count;
     }
 
     /***
      * 현재 복권의 숫자와 당첨 번호가 같은지 비교하는 메소드
-     * @param number 당첨 번호
-     * @param selected 현재 복권의 번호
+     * @param number 당첨 번호 (1)
+     * @param selected 현재 복권의 번호 (8)
      */
-    private void isEqual(int number, int selected) {
-        if (number == selected) {
-            this.matched++;
-        }
-    }
-
-    /**
-     * 개별 로또의 일치하는 갯수 반환하는 메소드
-     * @return 일치하는 숫자 갯수
-     */
-    public int getMatched() {
-        return this.matched;
+    private int getMatched(int number, int selected) {
+        return (number == selected) ? IS_MATCHED : IS_NOT_MATCHED;
     }
 }

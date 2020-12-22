@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,6 @@ class LotteryTest {
         Lottery lottery = new Lottery(Arrays.asList(1,2,3,4,5,6));
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
 
-        lottery.match(winningLottery);
-        assertThat(lottery.getMatched()).isEqualTo(6);
+        assertThat(lottery.match(winningLottery)).isEqualTo(6);
     }
 }
