@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.LottoTicket;
 import lotto.TestUtils;
 import lotto.number.LottoNumbers;
+import lotto.option.LottoMoney;
 import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.TestUtils.anyMoney;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -35,7 +37,7 @@ class LottoGameViewTest {
 		);
 
 		// when & then
-		assertDoesNotThrow(() -> lottoGameView.showLottoTicket(new LottoTicket(autoNumberList, manualNumberList)));
+		assertDoesNotThrow(() -> lottoGameView.showLottoTicket(new LottoTicket(anyMoney(), autoNumberList, manualNumberList)));
 	}
 
 	@Test
@@ -47,7 +49,8 @@ class LottoGameViewTest {
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_THREE,2));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_FOUR,1));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_SIX,0));
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 
 		// when & then
 		assertDoesNotThrow(() -> lottoGameView.showStatistics(lottoStatistics));
@@ -63,7 +66,8 @@ class LottoGameViewTest {
 		if (isProfit) {
 			lottoResultList.add(LottoResult.MATCHED_FOUR);
 		}
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 		LottoGameView lottoGameView = new LottoGameView();
 
 		// when

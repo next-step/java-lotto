@@ -5,6 +5,7 @@ import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.option.LottoBuyPlan;
 import lotto.option.LottoOption;
+import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +28,7 @@ class LottoGameTest {
 			@Override
 			public WinningNumbers getWinningNumbers() {
 				callList.add("getWinningNumbers");
-				LottoNumbers lottoNumbers = TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6);
+				LottoNumbers lottoNumbers = TestUtils.createLottoNumbers(40, 41, 42, 43, 44, 45);
 				return new WinningNumbers(lottoNumbers, new LottoNumber(8));
 			}
 
@@ -49,7 +50,7 @@ class LottoGameTest {
 
 			@Override
 			public void showStatistics(LottoStatistics lottoStatistics) {
-				if (lottoStatistics != null && lottoStatistics.calculateAllCount() == expectedAllNumbersSize) {
+				if (lottoStatistics != null && lottoStatistics.getCount(LottoResult.NOTHING) == expectedAllNumbersSize) {
 					callList.add("statisticsRight");
 				}
 			}

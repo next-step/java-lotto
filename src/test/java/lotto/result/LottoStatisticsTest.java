@@ -1,5 +1,6 @@
 package lotto.result;
 
+import lotto.TestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.TestUtils.duplicate;
+import static lotto.TestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -21,7 +22,7 @@ class LottoStatisticsTest {
 		List<LottoResult> lottoResultList = Collections.emptyList();
 
 		// when & then
-		assertThatThrownBy(() -> new LottoStatistics(lottoResultList))
+		assertThatThrownBy(() -> new LottoStatistics(lottoResultList, anyMoney()))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("empty");
 	}
@@ -38,7 +39,7 @@ class LottoStatisticsTest {
 		lottoResultList.addAll(duplicate(LottoResult.MATCHED_SIX, 5));
 
 		// when
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList, calculateLottoMoney(lottoResultList));
 
 		// then
 		assertThat(lottoStatistics.getCount(LottoResult.NOTHING)).isEqualTo(1);
@@ -53,7 +54,8 @@ class LottoStatisticsTest {
 	void calculateIncomeRate_수익률제로() {
 		// given
 		List<LottoResult> lottoResultList = duplicate(LottoResult.NOTHING, 5);
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 
 		// when & then
 		assertThat(lottoStatistics.calculateIncomeRate()).isEqualTo(0d);
@@ -65,7 +67,8 @@ class LottoStatisticsTest {
 		// given
 		List<LottoResult> lottoResultList = duplicate(LottoResult.NOTHING, 5);
 		lottoResultList.addAll(duplicate(LottoResult.MATCHED_FOUR, 1));
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 
 		// when & then
 		assertThat(lottoStatistics.calculateIncomeRate()).isStrictlyBetween(8.30d, 8.39d);

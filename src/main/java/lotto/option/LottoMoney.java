@@ -26,4 +26,8 @@ public class LottoMoney {
 	long getLottoBuyCount() {
 		return this.money / LOTTO_PRICE;
 	}
+
+	public double divideByThis(long x) {
+		return (double) x / this.money;
+	}
 }

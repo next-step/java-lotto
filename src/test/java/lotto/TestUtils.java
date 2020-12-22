@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
+import lotto.option.LottoMoney;
 import lotto.result.LottoResult;
 
 import java.util.ArrayList;
@@ -31,5 +32,13 @@ public class TestUtils {
 			resultList.add(lottoResult);
 		}
 		return resultList;
+	}
+
+	public static <T> LottoMoney calculateLottoMoney(List<T> list) {
+		return new LottoMoney(LottoMoney.LOTTO_PRICE * list.size());
+	}
+
+	public static LottoMoney anyMoney() {
+		return new LottoMoney(5000);
 	}
 }

@@ -2,23 +2,25 @@ package lotto;
 
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
+import lotto.option.LottoMoney;
 import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
 	private static final String VALIDATE_FAIL_MSG = "the sum of two lists'size must be at least one";
+	private final LottoMoney buyMoney;
 	private final List<LottoNumbers> autoNumbers;
 	private final List<LottoNumbers> manualNumbers;
 
-	public LottoTicket(List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers) {
+	public LottoTicket(LottoMoney buyMoney, List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers) {
 		validate(autoNumbers, manualNumbers);
-		this.autoNumbers = Collections.unmodifiableList(autoNumbers);
-		this.manualNumbers = Collections.unmodifiableList(manualNumbers);
+		this.buyMoney = buyMoney;
+		this.autoNumbers = autoNumbers;
+		this.manualNumbers = manualNumbers;
 	}
 
 	private static void validate(List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers)
@@ -32,7 +34,7 @@ public class LottoTicket {
 		List<LottoResult> lottoResultList = this.getMergedStream()
 				.map(winningNumbers::findMatchedResult)
 				.collect(Collectors.toList());
-		return new LottoStatistics(lottoResultList);
+		return new LottoStatistics(lottoResultList, this.buyMoney);
 	}
 
 	public List<String> toStringNumbers() {
@@ -43,10 +45,6 @@ public class LottoTicket {
 
 	private Stream<LottoNumbers> getMergedStream() {
 		return Stream.concat(this.autoNumbers.stream(), this.manualNumbers.stream());
-	}
-
-	public int size() { // TODO : remove
-		return this.autoNumbers.size() + this.manualNumbers.size();
 	}
 
 	public int autoNumbersSize() {

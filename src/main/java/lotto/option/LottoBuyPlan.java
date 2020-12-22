@@ -35,6 +35,10 @@ public class LottoBuyPlan {
 		}
 	}
 
+	public LottoMoney getLottoMoney() {
+		return lottoMoney;
+	}
+
 	public List<LottoNumbers> getManualNumbers() {
 		return this.manualNumbers;
 	}

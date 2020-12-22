@@ -16,7 +16,7 @@ class LottoStore {
 		for (long i = 0; i < buyPlan.getAutoCount(); i++) {
 			autoNumberList.add(generateRandomLottoNumbers());
 		}
-		return new LottoTicket(autoNumberList, buyPlan.getManualNumbers());
+		return new LottoTicket(buyPlan.getLottoMoney(), autoNumberList, buyPlan.getManualNumbers());
 	}
 
 	private static LottoNumbers generateRandomLottoNumbers() {

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.TestUtils.anyMoney;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -24,13 +25,13 @@ class LottoTicketTest {
 	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("올바른 생성자 호출")
 	void constructor(int autoSize, int manualSize) {
-		assertDoesNotThrow(() -> new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize)));
+		assertDoesNotThrow(() -> new LottoTicket(anyMoney(), createAnyNumbers(autoSize), createAnyNumbers(manualSize)));
 	}
 
 	@Test
 	@DisplayName("예외가 발생하는 생성자 호출")
 	void constructor_exception() {
-		assertThatThrownBy(() -> new LottoTicket(Collections.emptyList(), Collections.emptyList()))
+		assertThatThrownBy(() -> new LottoTicket(anyMoney(), Collections.emptyList(), Collections.emptyList()))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("must be at least one");
 	}
@@ -39,15 +40,16 @@ class LottoTicketTest {
 	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("객체 내부의 LottoNumbers 갯수가 올바른지 확인")
 	void size(int autoSize, int manualSize) {
-		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
-		assertThat(lottoTicket.size()).isEqualTo(autoSize + manualSize);
+		final LottoTicket lottoTicket = new LottoTicket(anyMoney(), createAnyNumbers(autoSize), createAnyNumbers(manualSize));
+		assertThat(lottoTicket.autoNumbersSize() + lottoTicket.manualNumbersSize())
+				.isEqualTo(autoSize + manualSize);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("객체 내부의 LottoNumbers 갯수와 toStringList 크기가 동일한지 확인")
 	void toStringNumbers(int autoSize, int manualSize) {
-		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
+		final LottoTicket lottoTicket = new LottoTicket(anyMoney(), createAnyNumbers(autoSize), createAnyNumbers(manualSize));
 		assertThat(lottoTicket.toStringNumbers()).hasSize(autoSize + manualSize);
 	}
 
@@ -56,7 +58,7 @@ class LottoTicketTest {
 	@DisplayName("LottoStatistics 를 만들때 객체 내부의 LottoNumbers 의 사이즈와 통계의 갯수가 같은지검증")
 	void compareNumbers(int autoSize, int manualSize) {
 		// given
-		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
+		final LottoTicket lottoTicket = new LottoTicket(anyMoney(), createAnyNumbers(autoSize), createAnyNumbers(manualSize));
 
 		// when
 		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(
