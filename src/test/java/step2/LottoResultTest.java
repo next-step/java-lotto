@@ -92,6 +92,20 @@ public class LottoResultTest {
 	}
 
 	@Order(6)
+	@DisplayName("로또 결과 생성 - N개")
+	@Test
+	void given_lotto_when_lottos_result_then_return_result() {
+		final LottoNumbers winNumbers = new LottoNumbers(1,2,3,4,5,6);
+		final LottoNumber bonusNumber = new LottoNumber(12);
+		Lotto lotto1 = new Lotto(new LottoNumbers(1,2,3,4,5,6));
+		Lotto lotto2 = new Lotto(new LottoNumbers(1,2,3,7,8,9));
+		Lottos lottos = new Lottos(lotto1, lotto2);
+		LottoResults lottoResults = new LottoResults(lottos, winNumbers, bonusNumber);
+
+		assertThat(lottoResults.getLottoResults()).hasSize(2);
+	}
+
+	@Order(7)
 	@DisplayName("상금 계산 - 3개 일치")
 	@Test
 	void given_lotto_results_when_get_win_price_then_return_price_3() {
@@ -106,7 +120,7 @@ public class LottoResultTest {
 		assertThat(lottoResults.getWinPrice()).isEqualTo(5000);
 	}
 
-	@Order(7)
+	@Order(8)
 	@DisplayName("상금 계산 - 4개 일치")
 	@Test
 	void given_lotto_results_when_get_win_price_then_return_price_4() {
@@ -121,7 +135,7 @@ public class LottoResultTest {
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_3.getPrice());
 	}
 
-	@Order(8)
+	@Order(9)
 	@DisplayName("상금 계산 - 5개 일치")
 	@Test
 	void given_lotto_results_when_get_win_price_then_return_price_5() {
@@ -136,7 +150,7 @@ public class LottoResultTest {
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_5.getPrice());
 	}
 
-	@Order(9)
+	@Order(10)
 	@DisplayName("상금 계산 - 5개 보너스 일치")
 	@Test
 	void given_lotto_results_when_get_win_price_then_return_price_5_bonus() {
@@ -151,7 +165,7 @@ public class LottoResultTest {
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_5_BONUS.getPrice());
 	}
 
-	@Order(10)
+	@Order(11)
 	@DisplayName("상금 계산 - 6개 일치")
 	@Test
 	void given_lotto_results_when_get_win_price_then_return_price_6() {
@@ -166,7 +180,7 @@ public class LottoResultTest {
 		assertThat(lottoResults.getWinPrice()).isEqualTo(LottoWin.MATCH_6.getPrice());
 	}
 
-	@Order(11)
+	@Order(12)
 	@DisplayName("로또 보너스 볼과 당첨번호 중복시 익셉션 발생")
 	@Test
 	void given_lotto_when_result_with_duplicated_bonus_number_then_throw_exception() {
