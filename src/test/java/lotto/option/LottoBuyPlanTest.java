@@ -32,7 +32,7 @@ class LottoBuyPlanTest {
 		// when & then
 		assertThatThrownBy(() -> new LottoBuyPlan(money, lottoNumbers))
 				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("must be equal or low");
+				.hasMessageContaining("cannot be over");
 	}
 
 	private List<LottoNumbers> createAnyLottoNumbers(long count) {
