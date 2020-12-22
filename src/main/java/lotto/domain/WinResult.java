@@ -25,6 +25,6 @@ public class WinResult {
     }
 
     private Map<WinType, Integer> getWinResultMap() {
-        return winningLotto.matchWinning(purchasedLotto);
+        return purchasedLotto.matchWinning(winningLotto);
     }
 }
