@@ -12,19 +12,16 @@ public class ResultView {
 
     }
 
-    public static void printLottoNumbers(LottoList lottoList) {
-        System.out.println("수동으로 " + getLottoCountByType(lottoList, LottoType.MANUAL) + "장, "
-                        + "자동으로 " + getLottoCountByType(lottoList, LottoType.AUTO) + "개를 구매했습니다.");
+    public static void printLottoTicketCount(LottoTicketCount lottoTicketCount) {
+        System.out.print("수동으로 " + lottoTicketCount.getManualLottoCount() + "장, " + "자동으로 " + lottoTicketCount.getAutoLottoCount() + "개를 구매했습니다.");
+    }
 
+    public static void printLottoNumbers(LottoList lottoList) {
         for (Lotto lotto : lottoList.getLottoList()) {
             System.out.print("[");
             printLoopLottoNumbers(lotto);
             System.out.println("]");
         }
-    }
-
-    private static long getLottoCountByType(LottoList lottoList, LottoType lottoType) {
-        return lottoList.getLottoList().stream().filter(lotto -> lotto.getLottoType() == lottoType).count();
     }
 
     private static void printLoopLottoNumbers(Lotto lotto) {

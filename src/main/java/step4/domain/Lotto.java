@@ -5,7 +5,6 @@ import java.util.*;
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lotto = new LinkedHashSet<>();
-    private LottoType lottoType;
 
     public Lotto(List<LottoNumber> numbers) {
         ListNumberToLotto(numbers);
@@ -28,12 +27,6 @@ public class Lotto {
         }
     }
 
-    public Lotto(List<LottoNumber> numbers, LottoType lottoType) {
-        ListNumberToLotto(numbers);
-
-        this.lottoType = lottoType;
-    }
-
     public Lotto(String lottoNumber) {
         stringLottoNumberToLotto(lottoNumber);
     }
@@ -46,21 +39,11 @@ public class Lotto {
         }
     }
 
-    public Lotto(String lottoNumber, LottoType lottoType) {
-        stringLottoNumberToLotto(lottoNumber);
-
-        this.lottoType = lottoType;
-    }
-
     public Set<LottoNumber> getLotto() {
         return Collections.unmodifiableSet(this.lotto);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
-    }
-
-    public LottoType getLottoType() {
-        return lottoType;
     }
 }

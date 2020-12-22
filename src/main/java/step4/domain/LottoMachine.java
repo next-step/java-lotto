@@ -3,45 +3,33 @@ package step4.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class LottoMachine {
-    private final int PRICE = 1000;
     private final int FROM_INDEX = 0;
     private final int TO_INDEX = 6;
 
     private List<LottoNumber> lottoNumbers = new ArrayList<>(new LottoNumber().getLottoNumberCache().values());
 
-    public LottoList buyLotto(int purchasePrice, List<String> manualNumbersList) {
+    public LottoList buyLotto(LottoTicketCount lottoTicketCount, List<String> manualNumbersList) {
         LottoList lottoList = new LottoList();
 
-        int manualNumbersListSize = Optional.ofNullable(manualNumbersList)
-                .map(List::size)
-                .orElse(0);
-
-        if (manualNumbersListSize > 0) {
+        if (lottoTicketCount.getManualLottoCount() > 0) {
             buyManualLotto(manualNumbersList, lottoList);
-            purchasePrice = buyManualLottoChange(purchasePrice, manualNumbersList);
         }
 
-        buyAutoLotto(purchasePrice, lottoList);
+        buyAutoLotto(lottoTicketCount.getAutoLottoCount(), lottoList);
 
         return lottoList;
     }
 
     private void buyManualLotto(List<String> manualNumbersList, LottoList lottoList) {
         for (String manualNumbers : manualNumbersList) {
-            lottoList.add(new Lotto(manualNumbers, LottoType.MANUAL));
+            lottoList.add(new Lotto(manualNumbers));
         }
     }
 
-    private int buyManualLottoChange(int purchasePrice, List<String> manualNumbersList) {
-        return purchasePrice - (manualNumbersList.size() * this.PRICE);
-    }
-
-    private void buyAutoLotto(int purchasePrice, LottoList lottoList) {
-        int buyCount = purchasePrice / this.PRICE;
-        for (int i = 0; i < buyCount; i++) {
+    private void buyAutoLotto(int autoTicketCount, LottoList lottoList) {
+        for (int i = 0; i < autoTicketCount; i++) {
             lottoList.add(createLotto());
         }
     }
@@ -49,9 +37,8 @@ public class LottoMachine {
     private Lotto createLotto() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> extractionLottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
-
         Collections.sort(extractionLottoNumbers);
 
-        return new Lotto(extractionLottoNumbers, LottoType.AUTO);
+        return new Lotto(extractionLottoNumbers);
     }
 }
