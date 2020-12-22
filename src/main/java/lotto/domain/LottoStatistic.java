@@ -6,32 +6,34 @@ import java.util.Objects;
 
 public class LottoStatistic {
 
+    private static final int DIVIDE_SCALE = 2;
     private final Map<LottoRank, Integer> statistic;
-    private double profit = Double.NaN;
-    private String profitText = "손해";
 
     public LottoStatistic(Map<LottoRank, Integer> statistic) {
         this.statistic = statistic;
     }
 
-    public double calculateProfit(int amount) {
-        BigDecimal purchaseAmount = new BigDecimal(amount);
-        BigDecimal prizeAmount = new BigDecimal(0);
+    private int sumPrizeAmount() {
+        int sum = 0;
         for (LottoRank rank : statistic.keySet()) {
-            prizeAmount = prizeAmount.add(new BigDecimal(rank.getPrize() * statistic.get(rank)));
+            sum += rank.getPrize() * statistic.get(rank);
         }
-        this.profit = prizeAmount.divide(purchaseAmount, 2, BigDecimal.ROUND_DOWN).doubleValue();
-        if (profit > 1) {
-            this.profitText = "이익이";
-        }
-        return profit;
+        return sum;
+    }
+
+    public double calculateProfit(int amount) {
+        BigDecimal total = new BigDecimal(sumPrizeAmount());
+        BigDecimal purchase = new BigDecimal(amount);
+        return total.divide(purchase, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
     public void print() {
         for (LottoRank rank : statistic.keySet()) {
-            System.out.printf("%d개 일치 (%d) - %d개%n", rank.getMatchingCount(), rank.getPrize(), statistic.get(rank));
+            System.out.printf("%d개 일치 (%d) - %d개%n",
+                    rank.getMatchingCount(),
+                    rank.getPrize(),
+                    statistic.get(rank));
         }
-        System.out.printf("총 수익률은 %1.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", profit, profitText);
     }
 
     @Override

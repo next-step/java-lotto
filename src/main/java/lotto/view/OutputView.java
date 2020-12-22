@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
+import lotto.domain.Profit;
 
 public class OutputView {
 
@@ -25,4 +26,7 @@ public class OutputView {
         statistic.print();
     }
 
+    public void printProfit(Profit profit) {
+        profit.print();
+    }
 }

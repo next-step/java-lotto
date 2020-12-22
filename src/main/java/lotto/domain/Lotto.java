@@ -1,17 +1,14 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 public class Lotto {
 
-    private final Integer[] numbers;
+    private final LottoNumbers numbers;
     private int matchingCount = 0;
 
-    public Lotto(Integer[] numbers) {
+    public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
     }
-
-    public Lotto(Integer[] numbers, int matchingCount) {
+    public Lotto(LottoNumbers numbers, int matchingCount) {
         this.numbers = numbers;
         this.matchingCount = matchingCount;
     }
@@ -20,28 +17,16 @@ public class Lotto {
         return matchingCount;
     }
 
-    private void draw(Lotto luckyLotto, Integer value) {
-        if (luckyLotto.contains(value)) {
-            addWinningNumberCount();
-        }
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
     }
 
-    private boolean contains(Integer value) {
-        return Arrays.asList(numbers).contains(value);
-    }
-
-    private void addWinningNumberCount() {
-        this.matchingCount++;
-    }
-
-    public Lotto drawAutomaticLotto(Lotto luckyLotto) {
-        for (Integer number : numbers) {
-            draw(luckyLotto, number);
-        }
-        return this;
+    public void draw(Lotto luckyLotto) {
+        this.matchingCount = numbers.matchingNumbers(luckyLotto);
     }
 
     public void print() {
-        System.out.println(Arrays.toString(numbers));
+        numbers.print();
     }
+
 }

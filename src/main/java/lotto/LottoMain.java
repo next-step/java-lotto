@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LotteryMachine;
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistic;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,13 +23,15 @@ public class LottoMain {
 
         outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         Integer[] luckyNumbers = inputView.inputLuckyNumbers(new Scanner(System.in));
-        Lotto luckyLotto = new Lotto(luckyNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(luckyNumbers);
+        Lotto luckyLotto = new Lotto(lottoNumbers);
+        lottos.drawLottos(luckyLotto);
 
-        lottos.drawAutomaticLottos(luckyLotto);
         LottoStatistic lottoStatistic = lottos.makeStatistic();
-        lottoStatistic.calculateProfit(amount);
-
         outputView.printStatistic(lottoStatistic);
+
+        Profit profit = new Profit(lottoStatistic.calculateProfit(amount));
+        outputView.printProfit(profit);
 
     }
 

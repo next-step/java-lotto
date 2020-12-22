@@ -26,9 +26,9 @@ public enum LottoRank {
         return prize;
     }
 
-    public static LottoRank findByWinningNumber(int winningNumber) {
+    public static LottoRank findByMatchingCount(int matchingCount) {
         return Arrays.stream(values())
-                .filter(r -> r.matchingCount == winningNumber)
+                .filter(r -> r.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(MISS);
     }

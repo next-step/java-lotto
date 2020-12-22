@@ -16,16 +16,16 @@ public class Lottos {
         return lottoList;
     }
 
-    public void drawAutomaticLottos(Lotto luckyLotto) {
+    public void drawLottos(Lotto luckyLotto) {
         for (Lotto lotto : lottoList) {
-            lotto.drawAutomaticLotto(luckyLotto);
+            lotto.draw(luckyLotto);
         }
     }
 
     public LottoStatistic makeStatistic() {
         Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
-            LottoRank rank = LottoRank.findByWinningNumber(lotto.getMatchingCount());
+            LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
             if (lottoStatisticMap.containsKey(rank)) {
                 lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
                 continue;

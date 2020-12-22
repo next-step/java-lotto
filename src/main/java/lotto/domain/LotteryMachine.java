@@ -23,7 +23,8 @@ public class LotteryMachine {
             Integer[] numbers = LOTTO_NUMBERS.clone();
             Collections.shuffle(Arrays.asList(numbers));
             numbers = Arrays.copyOf(numbers, 6);
-            lottoList.add(new Lotto(numbers));
+            LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+            lottoList.add(new Lotto(lottoNumbers));
         }
         return new Lottos(lottoList);
     }
