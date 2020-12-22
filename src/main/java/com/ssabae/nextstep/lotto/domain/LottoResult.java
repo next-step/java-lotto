@@ -9,11 +9,11 @@ import java.util.Map;
  */
 public class LottoResult {
 
-    private final Map<Integer, Integer> matchCountMap;
+    private final Map<Reward, Integer> matchCountMap;
     private final Money spendMoney;
     private final Money earnMoney;
 
-    public LottoResult(Map<Integer, Integer> matchCountMap,
+    public LottoResult(Map<Reward, Integer> matchCountMap,
             Money spendMoney, Money earnMoney) {
         this.matchCountMap = matchCountMap;
         this.spendMoney = spendMoney;
@@ -24,13 +24,13 @@ public class LottoResult {
         return (float) earnMoney.getAmountLongValue() / spendMoney.getAmountLongValue();
     }
 
-    public Map<Integer, Integer> getMatchCountMap() {
+    public Map<Reward, Integer> getMatchCountMap() {
         return matchCountMap;
     }
 
     public static final class LottoResultBuilder {
 
-        private Map<Integer, Integer> matchCountMap;
+        private Map<Reward, Integer> matchCountMap;
         private Money spendMoney;
         private Money earnMoney;
 
@@ -41,7 +41,7 @@ public class LottoResult {
             return new LottoResultBuilder();
         }
 
-        public LottoResultBuilder matchCountMap(Map<Integer, Integer> matchCountMap) {
+        public LottoResultBuilder matchCountMap(Map<Reward, Integer> matchCountMap) {
             this.matchCountMap = matchCountMap;
             return this;
         }

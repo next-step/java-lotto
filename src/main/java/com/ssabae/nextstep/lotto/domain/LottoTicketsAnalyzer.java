@@ -20,7 +20,7 @@ public class LottoTicketsAnalyzer {
     public LottoResult analyze(LottoTickets lottoTickets, WinningNumber winningNumber) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
 
-        Map<Integer, Integer> matchCountMap = mappingCountToMatchCount(lottoTicketList, winningNumber);
+        Map<Reward, Integer> matchCountMap = mappingCountToMatchCount(lottoTicketList, winningNumber);
 
         Money spendMoney = LOTTO_TICKET_PRICE.times(lottoTicketList.size());
         Money earnMoney = calculateEarnMoney(matchCountMap);
@@ -32,12 +32,15 @@ public class LottoTicketsAnalyzer {
                 .build();
     }
 
-    private Map<Integer, Integer> mappingCountToMatchCount(List<LottoTicket> lottoTicketList, WinningNumber winningNumber) {
-        Map<Integer, Integer> matchCountMap = new HashMap<>();
+    private Map<Reward, Integer> mappingCountToMatchCount(List<LottoTicket> lottoTicketList, WinningNumber winningNumber) {
+        Map<Reward, Integer> matchCountMap = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTicketList) {
             int matchCount = getMatchCount(lottoTicket, winningNumber);
-            Integer countOfMatchCount = matchCountMap.getOrDefault(matchCount, 0);
-            matchCountMap.put(matchCount, countOfMatchCount + 1);
+            boolean isMatchBonus = lottoTicket.contains(winningNumber.getBonesNumber());
+            Reward reward = Reward.matchingToReward(matchCount, isMatchBonus);
+
+            Integer countOfMatchCount = matchCountMap.getOrDefault(reward, 0);
+            matchCountMap.put(reward, countOfMatchCount + 1);
         }
         return matchCountMap;
     }
@@ -49,10 +52,10 @@ public class LottoTicketsAnalyzer {
                 .count();
     }
 
-    private Money calculateEarnMoney(Map<Integer, Integer> matchCountMap) {
+    private Money calculateEarnMoney(Map<Reward, Integer> matchCountMap) {
         Money earnMoney = Money.ZERO;
         for (Reward reward : Reward.getReportableRewards()) {
-            Integer countByMatchCount = matchCountMap.getOrDefault(reward.getCountOfMatch(), 0);
+            Integer countByMatchCount = matchCountMap.getOrDefault(reward, 0);
             Money earnMoneyByReward = reward.getWinningMoney().times(countByMatchCount);
             earnMoney = earnMoney.plus(earnMoneyByReward);
         }

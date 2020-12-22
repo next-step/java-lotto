@@ -1,7 +1,5 @@
 package com.ssabae.nextstep.lotto.domain;
 
-import static com.ssabae.nextstep.lotto.Constant.LOTTO_MAX_VALUE;
-import static com.ssabae.nextstep.lotto.Constant.LOTTO_MIN_VALUE;
 import static com.ssabae.nextstep.lotto.Constant.LOTTO_NUMBER_SIZE;
 
 import com.ssabae.nextstep.lotto.domain.lotto.LottoNumber;
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
 public class WinningNumber {
 
     private final static String LOTTO_NUMBER_SIZE_NOT_EQUALS_MESSAGE = "당첨 번호는 %d개여야 합니.";
-    public static final String NUMBER_SEPARATOR = ",";
+    private final static String NUMBER_SEPARATOR = ",";
 
     private final List<LottoNumber> winningNumberList;
     private final LottoNumber bonesNumber;
@@ -40,6 +38,10 @@ public class WinningNumber {
 
     public List<LottoNumber> getWinningNumberList() {
         return winningNumberList;
+    }
+
+    public LottoNumber getBonesNumber() {
+        return bonesNumber;
     }
 
     private void validate(List<LottoNumber> winningNumberList) {
