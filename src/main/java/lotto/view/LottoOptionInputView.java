@@ -3,23 +3,22 @@ package lotto.view;
 import lotto.number.WinningNumbers;
 import lotto.option.LottoBuyPlan;
 import lotto.option.LottoOption;
-import lotto.view.input.MoneyInputView;
+import lotto.view.input.LottoBuyPlanInputView;
 import lotto.view.input.WinningNumberInputView;
 
 public class LottoOptionInputView implements LottoOption {
 
-	private final MoneyInputView moneyInputView;
+	private final LottoBuyPlanInputView lottoBuyPlanInputView;
 	private final WinningNumberInputView winningNumberInputView;
 
 	public LottoOptionInputView() {
-		this.moneyInputView = new MoneyInputView();
+		this.lottoBuyPlanInputView = new LottoBuyPlanInputView();
 		this.winningNumberInputView = new WinningNumberInputView();
 	}
 
 	@Override
 	public LottoBuyPlan getBuyPlan() {
-		// TODO :
-		throw new UnsupportedOperationException("공사중");
+		return lottoBuyPlanInputView.inputLottoBuyPlan();
 	}
 
 	@Override
