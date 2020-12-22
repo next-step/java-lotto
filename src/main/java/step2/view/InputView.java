@@ -3,6 +3,7 @@ package step2.view;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import step2.domain.LottoNumber;
 import step2.domain.LottoNumbers;
 
 public class InputView {
@@ -61,4 +62,16 @@ public class InputView {
 		return winNumbers;
 	}
 
+	public LottoNumber inputBonusNumber() {
+		final String messageOfInputBonusBall = "보너스 볼을 입력해 주세요.";
+		System.out.println(messageOfInputBonusBall);
+		LottoNumber bonusNumber;
+		try {
+			bonusNumber = new LottoNumber(Integer.parseInt(scanner.nextLine()));
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+		}
+
+		return bonusNumber;
+	}
 }

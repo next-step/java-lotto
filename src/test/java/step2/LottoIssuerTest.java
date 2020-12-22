@@ -2,8 +2,6 @@ package step2;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,11 +9,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import step2.domain.Lotto;
 import step2.domain.LottoMachine;
+import step2.domain.LottoNumber;
 import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
-import step2.domain.LottoResult;
-import step2.domain.LottoResults;
-import step2.domain.LottoWin;
 import step2.domain.Lottos;
 
 public class LottoIssuerTest {
@@ -60,58 +56,14 @@ public class LottoIssuerTest {
 		assertThat(lottos.size()).isEqualTo(expected);
 	}
 
-	@DisplayName("로또 번호와 당첨 번호에 따라 당첨 갯수 확인")
-	@ParameterizedTest
-	@CsvSource(value = {
-		"1,2,3,4,5,6=6",
-		"1,2,3,4,5,9=5",
-		"1,2,3,4,10,11=4",
-		"1,2,3,9,10,11=3",
-	}, delimiter = '=')
-	void given_lotto_when_confirmWinning_return_win_result(final String winNumbersStr, final int matchCount) {
-		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
-		final Integer[] winNumbers = Arrays.stream(winNumbersStr.split(","))
-			.mapToInt(Integer::parseInt)
-			.boxed()
-			.toArray(Integer[]::new);
-		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
-
-		lotto.confirmWinning(winNumbers);
-
-		assertThat(lotto.getMatchCount()).isEqualTo(matchCount);
-	}
-
-	@DisplayName("로또 결과 생성")
+	@DisplayName("보너스 볼 매치")
 	@Test
-	void given_lotto_results_when_has_same_lotto_win_then_return_true() {
+	void given_lotto_when_matches_bonus_number_then_return_true() {
+		final LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+		final LottoNumber bonusNumber = new LottoNumber(6);
+		Lotto lotto = new Lotto(lottoNumbers);
 
-		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
-		final Integer[] winNumbers = { 10, 11, 12, 13, 14, 15 };
-		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
-		Lottos lottos = new Lottos(lotto);
-		lottos.confirmWinning(winNumbers);
-
-		LottoResults lottoResults = new LottoResults(lottos);
-
-		LottoResult lottoResult = new LottoResult(LottoWin.MATCH_0);
-		assertThat(lottoResults.has(lottoResult)).isTrue();
-
-	}
-
-	@DisplayName("수익률 계산")
-	@Test
-	void given_lotto_results_when_get_win_price_then_return_price() {
-
-		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
-		final Integer[] winNumbers = { 1, 2, 3, 13, 14, 15 };
-		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
-		Lottos lottos = new Lottos(lotto);
-		lottos.confirmWinning(winNumbers);
-
-		LottoResults lottoResults = new LottoResults(lottos);
-
-		assertThat(lottoResults.getWinPrice()).isEqualTo(5000);
-
+		assertThat(lotto.matchesBonusNumber(bonusNumber)).isTrue();
 	}
 
 }

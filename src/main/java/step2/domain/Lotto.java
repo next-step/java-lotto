@@ -1,9 +1,10 @@
 package step2.domain;
 
+import java.util.Set;
+
 public class Lotto {
 
 	private final LottoNumbers numbers;
-	private LottoNumbers winningNumbers;
 
 	public Lotto(final LottoNumbers numbers) {
 		this.numbers = numbers;
@@ -13,27 +14,21 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	public void confirmWinning(final Integer... winNumbers) {
-		this.confirmWinning(new LottoNumbers(winNumbers));
+	public Set<LottoNumber> getWinningNumbers(final LottoNumbers winNumbers) {
+		return this.numbers.getWinningNumbers(winNumbers);
 	}
 
-	public void confirmWinning(final LottoNumbers winNumbers) {
-		this.winningNumbers = this.numbers.getWinningNumbers(winNumbers);
+	public int getMatchCount(final LottoNumbers winNumbers) {
+		return this.getWinningNumbers(winNumbers).size();
 	}
 
-	public LottoNumbers getWinningNumbers() {
-		return winningNumbers;
-	}
-
-	public int getMatchCount() {
-		if (this.winningNumbers == null) {
-			throw new RuntimeException("아직 당첨 확인이 안되었습니다.");
-		}
-		return this.winningNumbers.size();
+	public boolean matchesBonusNumber(final LottoNumber bonusNumber) {
+		return this.numbers.getNumbers().contains(bonusNumber);
 	}
 
 	@Override
 	public String toString() {
 		return this.numbers.getSortedList().toString();
 	}
+
 }
