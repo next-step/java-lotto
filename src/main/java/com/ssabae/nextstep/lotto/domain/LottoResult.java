@@ -21,7 +21,7 @@ public class LottoResult {
     }
 
     public float calculateEarnRate() {
-        return (float) earnMoney.amount.longValue() / spendMoney.amount.longValue();
+        return (float) earnMoney.getAmountLongValue() / spendMoney.getAmountLongValue();
     }
 
     public Map<Integer, Integer> getMatchCountMap() {
