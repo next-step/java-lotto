@@ -39,7 +39,6 @@ public class StringAddCalculatorTest {
         int result = split.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
-<<<<<<< HEAD
 
     @Test
     void notNumberException() {
@@ -49,6 +48,4 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> split.splitAndSum("@,1,3"))
                 .isInstanceOf(RuntimeException.class);
     }
-=======
->>>>>>> 1f087d48b98e01e814ed1c6e7b30a7f7decf9080
 }
