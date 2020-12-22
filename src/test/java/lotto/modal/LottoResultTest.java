@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,59 +14,60 @@ class LottoResultTest {
 
 	private List<Lotto> lottoPackage;
 	private WinnerLotto winnerLotto;
-	private LottoGame lottoGame;
+	private Game lottoGame;
 
 	@BeforeEach
 	void init() {
 		lottoPackage = new ArrayList<>();
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "10", "20", "30", "40", "45"))));
 
-		winnerLotto = new WinnerLotto(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))),
+		lottoPackage.add(Lotto.generateLotto("1,10,20,30,40,45"));
+
+		winnerLotto = new WinnerLotto(Lotto.generateLotto("1,2,3,4,5,6"),
 			new LottoNumber("7"));
 
-		lottoGame = new LottoGame(new Money("1000"));
+		lottoGame = new Game(new GameManual("1000", "0"));
 	}
 
 	@Test
 	@DisplayName("로또 결과: 1등 4번, Overflow 테스트")
 	void resultOverYieldSuccessLottoTest() {
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "45"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "6"))));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,45"));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
 		lottoGame.addManualLotto(lottoPackage);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new Money("6000"))).isGreaterThan(new BigDecimal(1));
+		assertThat(result.report(new GameManual("6000", "0"))).isGreaterThan(new BigDecimal(1));
 	}
 
 	@Test
 	@DisplayName("로또 결과: 수익률 1 이상(이익) 테스트")
 	void resultYieldSuccessLottoTest() {
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "4", "5", "45"))));
+		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,45"));
 
 		lottoGame.addManualLotto(lottoPackage);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new Money("2000"))).isGreaterThan(new BigDecimal(1));
+		assertThat(result.report(new GameManual("2000", "0"))).isGreaterThan(new BigDecimal(1));
 	}
 
 	@Test
 	@DisplayName("로또 결과: 수익률 1 이하(손해) 테스트")
 	void resultYieldFailLottoTest() {
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "10", "21", "30", "40", "45"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "10", "21", "30", "40", "45"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "10", "21", "30", "40", "45"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "20", "30", "40", "45"))));
-		lottoPackage.add(new Lotto(Lotto.generateManualLotto(Arrays.asList("1", "2", "3", "30", "40", "45"))));
+		lottoPackage.add(Lotto.generateLotto("1,10,17,30,40,41"));
+		lottoPackage.add(Lotto.generateLotto("1,10,18,31,40,42"));
+		lottoPackage.add(Lotto.generateLotto("1,10,19,32,40,43"));
+		lottoPackage.add(Lotto.generateLotto("1,10,20,33,40,44"));
+		lottoPackage.add(Lotto.generateLotto("1,10,21,34,40,45"));
 		lottoGame.addManualLotto(lottoPackage);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new Money("6000"))).isLessThan(new BigDecimal(1));
+		assertThat(result.report(new GameManual("6000", "0"))).isLessThan(new BigDecimal(1));
 	}
 
 	@Test
@@ -75,7 +75,7 @@ class LottoResultTest {
 	void resultYieldZeroLottoTest() {
 		lottoGame.addManualLotto(lottoPackage);
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
-		assertThat(result.report(new Money("1000"))).isZero();
+		assertThat(result.report(new GameManual("1000", "0"))).isZero();
 	}
 
 	@Test
