@@ -29,7 +29,17 @@ public class Lotto {
 		return this.lotto;
 	}
 
-	public static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
+	public static Lotto generateLotto(String userInputLotto) {
+		validationWinnerLotto(userInputLotto);
+		return new Lotto(generateUserLotto(userInputLotto));
+	}
+
+	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
+		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
+		return Lotto.generateManualLotto(Arrays.asList(lottoArray));
+	}
+
+	private static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
 		validationLottoNumbers(inputStr);
 
 		return inputStr.stream()
@@ -37,18 +47,8 @@ public class Lotto {
 			.collect(Collectors.toList());
 	}
 
-	public static Lotto generateWinnerLotto(String userInputLotto) {
-		validationWinnerLotto(userInputLotto);
-		return new Lotto(generateUserLotto(userInputLotto));
-	}
-
 	public boolean isContainNumber(LottoNumber bonusNumber) {
 		return this.lotto.contains(bonusNumber);
-	}
-
-	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
-		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
-		return Lotto.generateManualLotto(Arrays.asList(lottoArray));
 	}
 
 	private static void validationWinnerLotto(String userInputLotto) {
