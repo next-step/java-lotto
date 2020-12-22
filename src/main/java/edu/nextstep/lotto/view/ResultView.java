@@ -54,4 +54,9 @@ public class ResultView {
 		}
 		System.out.println();
 	}
+
+	public static void printError(String errorMessage) {
+		System.err.println("에러! : [" + errorMessage + "]");
+		System.err.println("에러가 발생하였기에 게임을 처음부터 다시 시작합니다.\n");
+	}
 }

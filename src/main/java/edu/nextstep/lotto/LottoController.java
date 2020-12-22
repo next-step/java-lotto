@@ -27,4 +27,13 @@ public class LottoController {
 		ResultView.printWinningStatistics(lottoGameResult.getResultMap());
 		ResultView.printProfitRatio(lottoGameResult.getProfitRatio());
 	}
+
+	public void playUntilNoError() {
+		try {
+			play();
+		} catch (IllegalArgumentException ex) {
+			ResultView.printError(ex.getMessage());
+			playUntilNoError();
+		}
+	}
 }
