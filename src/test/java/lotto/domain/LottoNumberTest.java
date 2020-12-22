@@ -10,14 +10,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumberTest {
-	LottoNumber lottoNumber = new LottoNumber();
-
 	@DisplayName("로또 번호 생성 테스트")
 	@Test
 	public void generateLottoNumberTest() {
 		List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-		lottoNumber.generate(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		List<Integer> actual = this.lottoNumber.getLottoNumber();
+		NumberGenerator numberGenerator = () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto = new Lotto(numberGenerator.generateNumbers());
+		List<Integer> actual = lotto.getLotto();
 		assertThat(expected).isEqualTo(actual);
 	}
 }
