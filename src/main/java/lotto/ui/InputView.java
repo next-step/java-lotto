@@ -32,18 +32,18 @@ public class InputView {
         return lottos;
     }
 
-    public static LottoNumber scanBonusRepeat(Set<LottoNumber> winningNumbers) {
+    public static LottoNumber scanBonusRepeat(Lotto winningLotto) {
         while(true) {
             LottoNumber bonus = scanBonus();
-            if (validBonusNumber(winningNumbers, bonus)) {
+            if (validBonusNumber(winningLotto, bonus)) {
                 return bonus;
             }
             System.out.println("당첨 번호와 보너스 볼의 번호가 중복됩니다. 다시 입력해주세요.");
         }
     }
 
-    private static boolean validBonusNumber(Set<LottoNumber> winningNumbers, LottoNumber bonus) {
-        return !winningNumbers.contains(bonus);
+    private static boolean validBonusNumber(Lotto winningLotto, LottoNumber bonus) {
+        return !winningLotto.getNumbers().contains(bonus);
     }
 
     private static LottoNumber scanBonus() {
@@ -52,9 +52,9 @@ public class InputView {
         return new LottoNumber(Integer.parseInt(input));
     }
 
-    public static Set<LottoNumber> scanWinningNumbers() {
+    public static Lotto scanWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanLottoNumbers();
+        return new Lotto(scanLottoNumbers());
     }
 
     private static Set<LottoNumber> scanLottoNumbers() {

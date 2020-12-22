@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_COST = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -43,5 +44,9 @@ public class Lotto {
 
     public boolean matchBonus(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public static int convertLottoCount(int buyAmount) {
+        return buyAmount / LOTTO_COST;
     }
 }
