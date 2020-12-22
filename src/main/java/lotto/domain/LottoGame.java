@@ -18,7 +18,7 @@ public class LottoGame {
 		return lottoNumbers.generateLottoNumbers(lottoGameCount, numberGenerator);
 	}
 
-	public Map<LottoRank, Long> generateLottoGameResult(Lotto winLotto, LottoTicket lottoTicket) {
+	public Map<LottoRank, Long> generateLottoGameResult(WinLotto winLotto, LottoTicket lottoTicket) {
 		return lottoTicket.getLottoTicket().stream()
 			.map(lottoNumber -> lottoNumber.rankLotto(winLotto))
 			.collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
