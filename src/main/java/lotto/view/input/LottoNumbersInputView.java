@@ -21,6 +21,9 @@ class LottoNumbersInputView {
 		return instance;
 	}
 
+	private LottoNumbersInputView() {
+	}
+
 	LottoNumbers inputLottoNumbers(String guideMessage) {
 		String input;
 		do {

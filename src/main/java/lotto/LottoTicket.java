@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-	public static final String VALIDATE_FAIL_MSG = "the sum of two lists'size must be at least one";
+	private static final String VALIDATE_FAIL_MSG = "the sum of two lists'size must be at least one";
 	private final List<LottoNumbers> autoNumbers;
 	private final List<LottoNumbers> manualNumbers;
 

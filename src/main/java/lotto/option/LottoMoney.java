@@ -20,7 +20,7 @@ public class LottoMoney {
 		}
 	}
 
-	public long getLottoBuyCount() {
+	long getLottoBuyCount() {
 		return this.money / LOTTO_PRICE;
 	}
 }
