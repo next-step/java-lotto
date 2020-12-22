@@ -15,4 +15,8 @@ public class Money {
 	public int howManyPurchase() {
 		return money / Lotto.PRICE;
 	}
+
+	public boolean hasEnoughToPurchase(int number) {
+		return number * Lotto.PRICE <= money;
+	}
 }

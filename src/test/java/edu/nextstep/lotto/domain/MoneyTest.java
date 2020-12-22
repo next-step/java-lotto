@@ -33,4 +33,11 @@ class MoneyTest {
 	void howManyPurchase(int money, int expected) {
 		assertThat(new Money(money).howManyPurchase()).isEqualTo(expected);
 	}
+
+	@DisplayName("hasEnoughToPurchase: 현재 구입금액에서 수동으로 구매할 로또 수만큼 지불이 가능하면 true, 불가하면 false를 리턴함.")
+	@ParameterizedTest
+	@CsvSource(value = {"10000,5,true", "100,1,false", "10500,11,false"})
+	void hasEnoughToPurchase(int money, int number, boolean expected) {
+		assertThat(new Money(money).hasEnoughToPurchase(number)).isEqualTo(expected);
+	}
 }
