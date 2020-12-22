@@ -18,6 +18,7 @@ public class ResultView {
     private static final String RESULT_LINE = "--------------";
     private static final String LOSS = "손해";
     private static final String GAIN = "이익";
+    private static final int BASIS_OF_PROFIT = 1;
 
     /**
      * 구입한 복권을 출력하는 메소드
@@ -60,7 +61,7 @@ public class ResultView {
         printResultMessage();
 
         for (int i = 3; i <= 6; i++) {
-            System.out.println(i + "개 일치 (" + Prize.getWinningMoney(i) + " )- ");
+            System.out.print(i + "개 일치 (" + Prize.getWinningMoney(i) + ")- ");
             System.out.println(getOccurrence(matchedResult, i) + "개");
         }
 
@@ -83,7 +84,9 @@ public class ResultView {
      * @return 일치하는 복권의 장 수 (개수)
      */
     private int getOccurrence(Map<Lottery, Integer> matchedResult, int number) {
-        return (int) matchedResult.values().stream().filter(count -> number == count).count();
+        return (int) matchedResult.values().stream()
+                                            .filter(count -> number == count)
+                                            .count();
     }
 
     /**
@@ -92,7 +95,7 @@ public class ResultView {
      * @return 손해인지 이익인지 반환
      */
     private String getLossOrGain(float profitRate) {
-        if (profitRate >= 1) {
+        if (profitRate >= BASIS_OF_PROFIT) {
             return GAIN;
         }
         return LOSS;

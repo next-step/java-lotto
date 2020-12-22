@@ -14,8 +14,6 @@ public class LottoGame {
 
     private List<Lottery> lotteryList;
 
-    private int profit;
-
     public LottoGame() {
 
     }
@@ -90,8 +88,7 @@ public class LottoGame {
      * @return 수익률
      */
     public float calculateProfit(int money, Map<Lottery, Integer> matchedResult) {
-        this.profit = getProfit(matchedResult);
-        return (float) (this.profit / money);
+        return (float) (getProfit(matchedResult) / money);
     }
 
     /**
