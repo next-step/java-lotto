@@ -14,9 +14,6 @@ import step2.domain.LottoMachine;
 import step2.domain.LottoNumber;
 import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
-import step2.domain.LottoResult;
-import step2.domain.LottoResults;
-import step2.domain.LottoWin;
 import step2.domain.Lottos;
 
 public class LottoIssuerTest {
@@ -81,34 +78,6 @@ public class LottoIssuerTest {
 		lotto.confirmWinning(winNumbers);
 
 		assertThat(lotto.getMatchCount()).isEqualTo(matchCount);
-	}
-
-	@DisplayName("로또 결과 생성")
-	@Test
-	void given_lotto_results_when_has_same_lotto_win_then_return_true() {
-		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
-		final Integer[] winNumbers = { 10, 11, 12, 13, 14, 15 };
-		final LottoNumber bonusNumber = new LottoNumber(9);
-		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
-		Lottos lottos = new Lottos(lotto);
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
-
-		LottoResult lottoResult = new LottoResult(LottoWin.MATCH_0);
-		assertThat(lottoResults.has(lottoResult)).isTrue();
-	}
-
-	@DisplayName("수익률 계산")
-	@Test
-	void given_lotto_results_when_get_win_price_then_return_price() {
-		final Integer[] lottoNumbers = { 1, 2, 3, 4, 5, 6 };
-		final Integer[] winNumbers = { 1, 2, 3, 13, 14, 15 };
-		final LottoNumber bonusNumber = new LottoNumber(9);
-		Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
-		Lottos lottos = new Lottos(lotto);
-
-		LottoResults lottoResults = lottos.result(new LottoNumbers(winNumbers), bonusNumber);
-
-		assertThat(lottoResults.getWinPrice()).isEqualTo(5000);
 	}
 
 	@DisplayName("보너스 볼 매치")
