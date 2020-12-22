@@ -1,18 +1,32 @@
 package edu.nextstep.lotto.domain.sub;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
 	public static final int START_LIMIT = 1;
 	public static final int END_LIMIT = 45;
+	public static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+	static {
+		for (int i = START_LIMIT; i <= END_LIMIT; i++) {
+			lottoNumbers.put(i, new LottoNumber(i));
+		}
+	}
 
 	private final int lottoNumber;
 
-	public LottoNumber(int number) {
-		if (number < START_LIMIT || number > END_LIMIT) {
+	private LottoNumber(int number) {
+		this.lottoNumber = number;
+	}
+
+	public static LottoNumber of(int number) {
+		LottoNumber lottoNumber = lottoNumbers.get(number);
+		if (lottoNumber == null) {
 			throw new IllegalArgumentException("로또 번호는 " + START_LIMIT + "부터 " + END_LIMIT + " 사이만 가능합니다.");
 		}
-		this.lottoNumber = number;
+		return lottoNumber;
 	}
 
 	@Override

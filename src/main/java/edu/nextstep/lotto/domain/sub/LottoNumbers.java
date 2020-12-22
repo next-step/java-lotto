@@ -17,7 +17,7 @@ public class LottoNumbers {
 			throw new IllegalArgumentException("로또 번호는 중복되게 선택이 불가능합니다.");
 		}
 		this.lottoNumbers = numbers.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 

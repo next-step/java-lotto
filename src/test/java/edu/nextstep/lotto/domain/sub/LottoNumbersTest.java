@@ -63,7 +63,7 @@ class LottoNumbersTest {
 	}, delimiter = ':')
 	void contains(String numbers, int number, boolean expected) {
 		LottoNumbers lottoNumbers = new LottoNumbers(splitToIntList(numbers));
-		assertThat(lottoNumbers.contains(new LottoNumber(number))).isEqualTo(expected);
+		assertThat(lottoNumbers.contains(LottoNumber.of(number))).isEqualTo(expected);
 	}
 
 	private List<Integer> splitToIntList(String numbers) {

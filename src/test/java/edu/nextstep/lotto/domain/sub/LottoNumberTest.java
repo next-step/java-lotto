@@ -12,7 +12,7 @@ class LottoNumberTest {
 	@DisplayName("생성자: LottoNumber 객체를 정상적으로 생성하여 리턴함")
 	@Test
 	void generate() {
-		LottoNumber lottoNumber = new LottoNumber(1);
+		LottoNumber lottoNumber = LottoNumber.of(1);
 		assertThat(lottoNumber)
 			.isNotNull()
 			.isInstanceOf(LottoNumber.class)
@@ -23,13 +23,13 @@ class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 46})
 	public void generate_shouldException(int number) {
-		assertThatThrownBy(() -> new LottoNumber(number))
+		assertThatThrownBy(() -> LottoNumber.of(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("equals: LottoNumber 객체의 원시값이 같으면 같은 LottoNumber 객체임.")
 	@Test
 	void equals() {
-		assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+		assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
 	}
 }
