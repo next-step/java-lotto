@@ -21,7 +21,7 @@ public class LottoStarter {
 		LottoTicket lottoNumbers = lottoGame.generateLottoNumbers(lottoGameCount, new LottoNumberGenerator());
 		ResultView.printLottoNumbers(lottoNumbers);
 
-		Map<LottoRank, Long> lottoGameResult = lottoGame.generateLottoGameResult(new Lotto(InputView.inputWinLottoNumbers()), lottoNumbers);
+		Map<LottoRank, Long> lottoGameResult = lottoGame.generateLottoGameResult(InputView.inputWinLottoNumbers(), lottoNumbers);
 		ResultView.printLottoGameStatistic(new LottoGameResultDto(lottoGameResult, lottoBuyMoney));
 	}
 }
