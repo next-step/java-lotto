@@ -11,7 +11,12 @@ public class InputUtil {
     }
 
     public static String enterLastWinningNumbers() {
-        String lastWinningNumbers = scanner.nextLine();
+        String lastWinningNumbers = scanner.nextLine().trim();
         return lastWinningNumbers;
+    }
+
+    public static String enterBonusNumber() {
+        String bonusNumber = scanner.nextLine().trim();
+        return bonusNumber;
     }
 }

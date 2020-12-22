@@ -25,13 +25,15 @@ public class WinningLottos {
         return winningLottoType;
     }
 
-    public long amountOfWinning() {
+    public BigDecimal amountOfWinning() {
         WinningLottoType[] winningLottoTypes = WinningLottoType.values();
-        long winningLottoMoney = 0;
+        BigDecimal winningLottoMoney = BigDecimal.ZERO;
         for( int i = 0; i < winningLottoTypes.length ; i++ ){
             if(winningTypeCountMap.containsKey(winningLottoTypes[i])) {
-                long typeMoney = winningLottoTypes[i].getWinnerMoney() * winningTypeCountMap.get(winningLottoTypes[i]);
-                winningLottoMoney = winningLottoMoney + typeMoney;
+                long winnerMoney = winningLottoTypes[i].getWinnerMoney();
+                Integer count = winningTypeCountMap.get(winningLottoTypes[i]);
+                BigDecimal typeMoney = new BigDecimal(winnerMoney).multiply(new BigDecimal(count));
+                winningLottoMoney = winningLottoMoney.add(typeMoney);
             }
         }
         return winningLottoMoney;
@@ -39,7 +41,7 @@ public class WinningLottos {
 
     public BigDecimal calcurateRevenue(String money) {
         BigDecimal buyMoney = new BigDecimal(money);
-        BigDecimal winningMoney = BigDecimal.valueOf(this.amountOfWinning());
+        BigDecimal winningMoney = this.amountOfWinning();
         if (winningMoney == BigDecimal.ZERO) {
            return  BigDecimal.ZERO;
         }

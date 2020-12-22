@@ -44,18 +44,22 @@ public class Lotto {
 
     public int checkLastWinningNumber(String lastWinnerNumber) {
         int matchNumber = 0;
-        List<Integer> winnerNumbers = Arrays.stream( lastWinnerNumber.split(","))
-                                            .map(Integer::parseInt).sorted().collect(Collectors.toList());
+        List<Integer> winnerNumbers = NumberUtil.convertStringToIntegerList(lastWinnerNumber);
 
         List<Integer> sortedNumbers = new ArrayList<>(this.numbers).stream()
                 .sorted().collect(Collectors.toList());
-        
+
         for( int i = 0; i < winnerNumbers.size(); i++) {
             if(sortedNumbers.get(i).equals( winnerNumbers.get(i))) {
                 matchNumber = matchNumber + 1;
             }
         }
         return matchNumber;
+    }
+    public boolean checkBonusNumber( BonusNumber bonusNumber){
+        Optional<Integer> matchedBonusNumber = this.numbers.stream()
+                .filter((number) -> bonusNumber.equals(number)).findFirst();
+        return matchedBonusNumber.isPresent();
     }
 
     public List<Integer> showLottoNumber(){

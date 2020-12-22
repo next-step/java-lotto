@@ -37,6 +37,7 @@ public class DisplayView {
         printlnMatchNumberAndMoney(WinningLottoType.MATCH_THREE, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_THREE));
         printlnMatchNumberAndMoney(WinningLottoType.MATCH_FOUR, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FOUR));
         printlnMatchNumberAndMoney(WinningLottoType.MATCH_FIVE, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FIVE));
+        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FIVE_BONUS, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FIVE_BONUS));
         printlnMatchNumberAndMoney(WinningLottoType.MATCH_SIX, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_SIX));
     }
     private static void println(String msg){

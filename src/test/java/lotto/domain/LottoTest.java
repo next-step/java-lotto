@@ -45,10 +45,24 @@ class LottoTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6"})
     void checkLastWinningNumber(String lastWinnerNumber){
-        System.out.println(lastWinnerNumber);
         lotto.selectedNumber(Arrays.asList(1,2,3,8,9,10));
         int matchNumber = lotto.checkLastWinningNumber(lastWinnerNumber);
         assertThat(matchNumber).isEqualTo(3);
     }
 
+    @Test
+    void checkBonusNumber_True( ) {
+        BonusNumber bonusNumber = new BonusNumber(10);
+        lotto.selectedNumber(Arrays.asList(1,2,3,4,5,10));
+        boolean bonusNumberIsExist = lotto.checkBonusNumber(bonusNumber);
+        assertThat(bonusNumberIsExist).isEqualTo(true);
+    }
+
+    @Test
+    void checkBonusNumber_False( ) {
+        BonusNumber bonusNumber = new BonusNumber(22);
+        lotto.selectedNumber(Arrays.asList(1,2,3,4,5,10));
+        boolean bonusNumberIsExist = lotto.checkBonusNumber(bonusNumber);
+        assertThat(bonusNumberIsExist).isEqualTo(false);
+    }
 }

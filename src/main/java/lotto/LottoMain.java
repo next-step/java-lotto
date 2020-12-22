@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLottos;
@@ -23,10 +24,15 @@ public class LottoMain {
         InputView.showInputLastWinningNumber();
         String lastWinningNumbers = InputUtil.enterLastWinningNumbers();
 
+        InputView.showInputBonusNumber();
+        String inputBonusNumber = InputUtil.enterBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber( lastWinningNumbers,inputBonusNumber);
+
         LottoResult lottoResult = new LottoResult(lottoMachine.getLottoBuckets());
-        WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers);
+        WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers, bonusNumber);
 
         DisplayView.showWinningStatis(winningLottos);
         DisplayView.printRevenu(winningLottos.calcurateRevenue(money));
+
     }
 }
