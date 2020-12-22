@@ -36,7 +36,7 @@ public class Lottery {
      * @param winningLottery 당첨 로또 번호
      */
     public void match(WinningLottery winningLottery) {
-        for (int number : winningLottery.getWinningLottery().getSelectedNumbers()) {
+        for (int number : winningLottery.getWinningNumbers()) {
             this.compareNumber(number, this.selectedNumbers);
         }
     }

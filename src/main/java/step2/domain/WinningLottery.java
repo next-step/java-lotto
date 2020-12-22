@@ -65,7 +65,7 @@ public class WinningLottery {
         return convertedNumber;
     }
 
-    public Lottery getWinningLottery() {
-        return this.winningLottery;
+    public List<Integer> getWinningNumbers() {
+        return this.winningLottery.getSelectedNumbers();
     }
 }
