@@ -35,6 +35,12 @@ public class LottoResultView {
 
     private static void printLottoResultRanking(LottoRanking ranking, Map<LottoRanking, Integer> prizeByRanking) {
         Integer count = prizeByRanking.getOrDefault(ranking, 0);
-        System.out.printf("%d개 일치 (%d원)- %d개\n", ranking.getCountOfMatch(), ranking.getPrize(), count);
+        System.out.printf("%d개 일치%s(%d원)- %d개\n",
+                ranking.getCountOfMatch(),
+                ranking == LottoRanking.BONUS
+                        ? ", 보너스 볼 일치"
+                        : " ",
+                ranking.getPrize(),
+                count);
     }
 }

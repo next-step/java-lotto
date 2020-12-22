@@ -13,8 +13,19 @@ public class LottoRankingTest {
         // given
         int countOfMatch = 6;
         // when
-        LottoRanking ranking = LottoRanking.valueOf(countOfMatch);
+        LottoRanking ranking = LottoRanking.valueOf(countOfMatch, false);
         // then
         assertThat(ranking).isEqualTo(LottoRanking.FIRST);
+    }
+
+    @Test
+    @DisplayName("보너스 순위 반환")
+    void testGetBonusLottoRanking() {
+        // given
+        int countOfMatch = 5;
+        // when
+        LottoRanking ranking = LottoRanking.valueOf(countOfMatch, true);
+        // then
+        assertThat(ranking).isEqualTo(LottoRanking.BONUS);
     }
 }
