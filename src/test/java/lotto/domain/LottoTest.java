@@ -52,4 +52,5 @@ public class LottoTest {
         int count = lotto.match(Arrays.asList(1,2,9,4,5,6));
         assertThat(count).isEqualTo(5);
     }
+
 }

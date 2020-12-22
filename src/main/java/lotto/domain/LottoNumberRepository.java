@@ -18,10 +18,14 @@ public class LottoNumberRepository {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        Collections.shuffle(lottoNumber);
-        List<Integer> randomNumbers = lottoNumber.subList(INITIAL_INDEX, TOTAL_LENGTH);
+    public List<Integer> getAutoLottoNumbers() {
+        List<Integer> randomNumbers = getRandonNumbers();
         Collections.sort(randomNumbers);
         return randomNumbers;
+    }
+
+    private List<Integer> getRandonNumbers() {
+        Collections.shuffle(lottoNumber);
+        return lottoNumber.subList(INITIAL_INDEX, TOTAL_LENGTH);
     }
 }

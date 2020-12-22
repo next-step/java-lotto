@@ -2,9 +2,11 @@ package lotto.domain;
 
 import util.ValidateUtils;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -13,6 +15,8 @@ public class Lotto {
     private static final String VALID_EMPTY_MESSAGE = "값이 없습니다.";
     private static final String VALID_DUPLICATE_MESSAGE = "로또 번호는 중복이 불가합니다.";
     private static final int LOTTO_SIZE = 6;
+    private static final String COMMA_SEPARATOR = ",";
+
     private final List<LottoNumber> lotto;
 
     public Lotto(List<Integer> lotto) {
@@ -61,10 +65,20 @@ public class Lotto {
         return this.lotto.contains(new LottoNumber(lottoNumber));
     }
 
+    public List<LottoNumber> getLotto() {
+        return Collections.unmodifiableList(lotto);
+    }
+
     @Override
     public String toString() {
         return "Lotto{" +
                 "lotto=" + lotto +
                 '}';
+    }
+
+    public String getLottoNumbers() {
+        return lotto.stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.number()))
+                .collect(Collectors.joining(COMMA_SEPARATOR));
     }
 }

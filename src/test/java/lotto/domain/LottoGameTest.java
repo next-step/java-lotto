@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoGameTest {
     @Test
     void create() {
-        LottoGame lottoGame = new LottoGame("1000");
+        LottoGame lottoGame = new LottoGame(new LottoCount("15000"));
     }
 
     @ParameterizedTest
@@ -21,7 +21,7 @@ public class LottoGameTest {
     @ValueSource(strings = {"1500", "500", "100", "0", "21235", "2222"})
     void validPurchasinfUnit(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoGame(input);
+            new LottoCount(input);
         })
                 .withMessageContaining("로또 구매 단위는 1000원입니다.");
     }
@@ -31,7 +31,7 @@ public class LottoGameTest {
     @ValueSource(strings = {"1234원", "$12345", "1만원"})
     void validNumber(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoGame(input);
+            new LottoCount(input);
         })
                 .withMessageContaining("금액은 숫자만 입력해주세요.");
     }
@@ -41,18 +41,27 @@ public class LottoGameTest {
     @NullAndEmptySource
     void validNullOrEmpty(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           new LottoGame(input);
+            new LottoCount(input);
         })
                 .withMessageContaining("금액을 다시 입력해주세요");
     }
 
     @Test
     void start() {
-        LottoGame lottoGame = new LottoGame("15000");
+        LottoGame lottoGame = new LottoGame(new LottoCount("5000"));
         lottoGame.start();
-        List<Lotto> lottos = lottoGame.getLottos();
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+        LottoResult lottoResult = lottoGame.getLottoResult();
+        System.out.println(lottoResult.getLottosView());
+    }
+
+    @Test
+    void match() {
+        LottoGame lottoGame = new LottoGame(new LottoCount("15000"));
+        lottoGame.start();
+        LottoResult lottoResult = lottoGame.getLottoResult();
+        System.out.println(lottoResult.getLottosView());
+        List<Integer> matchCounts = lottoGame.match(new WinningLotto("1,2,3,4,5,6"));
+
+        System.out.println(lottoResult.getStatisticsView(matchCounts));
     }
 }
