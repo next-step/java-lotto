@@ -3,7 +3,7 @@ package lotto;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
-import lotto.option.LottoMoney;
+import lotto.option.LottoBuyPlan;
 import lotto.option.LottoOption;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
@@ -18,37 +18,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGameTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"14000,14", "1000,1"})
+	@CsvSource(value = {"14000,10,14", "1000,0,1"})
 	@DisplayName("로또 게임 전체 흐름을 테스트, 당첨 결과는 랜덤이기 때문에 중간 과정에서 인터페이스 호출 확인을 통해 입력 값에 상관이 있음을 확인")
-	void play(int money, int lottoSize) {
+	void play(long money, long manualNumbersSize, long expectedAllNumbersSize) {
 		// given
 		List<String> callList = new ArrayList<>();
 		LottoOption lottoOption = new LottoOption() {
-			@Override
-			public LottoMoney getMoney() {
-				callList.add("getMoney");
-				return new LottoMoney(money);
-			}
-
 			@Override
 			public WinningNumbers getWinningNumbers() {
 				callList.add("getWinningNumbers");
 				LottoNumbers lottoNumbers = TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6);
 				return new WinningNumbers(lottoNumbers, new LottoNumber(8));
 			}
+
+			@Override
+			public LottoBuyPlan getBuyPlan() {
+				callList.add("getBuyPlan");
+				return new LottoBuyPlan(money, createAnyNumbers(manualNumbersSize));
+			}
 		};
 
 		LottoView lottoView = new LottoView() {
 			@Override
 			public void showLottoTicket(LottoTicket lottoTicket) {
-				if (lottoTicket.size() == lottoSize) {
+				long allLottoNumbersSize = lottoTicket.autoNumbersSize() + lottoTicket.manualNumbersSize();
+				if (allLottoNumbersSize == expectedAllNumbersSize) {
 					callList.add("buyLottoRight");
 				}
 			}
 
 			@Override
 			public void showStatistics(LottoStatistics lottoStatistics) {
-				if (lottoStatistics != null && lottoStatistics.calculateAllCount() == lottoSize) {
+				if (lottoStatistics != null && lottoStatistics.calculateAllCount() == expectedAllNumbersSize) {
 					callList.add("statisticsRight");
 				}
 			}
@@ -60,6 +61,14 @@ class LottoGameTest {
 
 		// then
 		assertThat(callList)
-				.containsExactly("getMoney", "buyLottoRight", "getWinningNumbers", "statisticsRight");
+				.containsExactly("getBuyPlan", "buyLottoRight", "getWinningNumbers", "statisticsRight");
+	}
+
+	private List<LottoNumbers> createAnyNumbers(long size) {
+		List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+		for (int i = 0; i < size; i++) {
+			lottoNumbersList.add(TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6));
+		}
+		return lottoNumbersList;
 	}
 }

@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.option.LottoMoney;
-import lotto.option.LottoOption;
 import lotto.number.WinningNumbers;
+import lotto.option.LottoBuyPlan;
+import lotto.option.LottoOption;
 import lotto.view.input.MoneyInputView;
 import lotto.view.input.WinningNumberInputView;
 
@@ -17,8 +17,9 @@ public class LottoOptionInputView implements LottoOption {
 	}
 
 	@Override
-	public LottoMoney getMoney() {
-		return this.moneyInputView.getMoney();
+	public LottoBuyPlan getBuyPlan() {
+		// TODO :
+		throw new UnsupportedOperationException("공사중");
 	}
 
 	@Override

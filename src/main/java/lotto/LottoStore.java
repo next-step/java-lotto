@@ -2,21 +2,21 @@ package lotto;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
-import lotto.option.LottoMoney;
+import lotto.option.LottoBuyPlan;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoStore {
+class LottoStore {
 
-	LottoTicket sell(LottoMoney money) {
-		List<LottoNumbers> lottoNumbers = new ArrayList<>();
-		for (int i = 0; i < money.getLottoBuyCount(); i++) {
-			lottoNumbers.add(generateRandomLottoNumbers());
+	LottoTicket sell(LottoBuyPlan buyPlan) {
+		List<LottoNumbers> autoNumberList = new ArrayList<>();
+		for (long i = 0; i < buyPlan.getAutoCount(); i++) {
+			autoNumberList.add(generateRandomLottoNumbers());
 		}
-		return new LottoTicket(lottoNumbers, Collections.emptyList());
+		return new LottoTicket(autoNumberList, buyPlan.getManualNumbers());
 	}
 
 	private static LottoNumbers generateRandomLottoNumbers() {
