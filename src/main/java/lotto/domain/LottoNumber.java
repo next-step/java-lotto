@@ -1,17 +1,29 @@
 package lotto.domain;
 
 public class LottoNumber {
-    private int number;
+    private static final int MINIMUM_VALUE = 1;
+    private static final int MAXIMUM_VALUE = 45;
+
+    private final int number;
 
     public LottoNumber(int number) {
+        if (number < MINIMUM_VALUE || number > MAXIMUM_VALUE) {
+            throw new IllegalArgumentException(
+                    String.format("%d - %d 사이 숫자를 입력해 주세요.", MINIMUM_VALUE, MAXIMUM_VALUE)
+            );
+        }
         this.number = number;
     }
 
-    public LottoNumber(String number) {
-        this.number = Integer.parseInt(number);
+    public static LottoNumber of(String number) {
+        try {
+            return new LottoNumber(Integer.parseInt(number));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력해 주세요.");
+        }
     }
 
-    public int isgreaterThan(LottoNumber operand) {
+    public int isGreaterThan(LottoNumber operand) {
         return this.number - operand.number;
     }
 
