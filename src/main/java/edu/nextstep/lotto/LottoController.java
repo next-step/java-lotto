@@ -12,6 +12,8 @@ import edu.nextstep.lotto.view.ResultView;
 public class LottoController {
 	public void play() {
 		Money money = new Money(InputView.inputMoney());
+		int numberOfManual = InputView.inputManualPurchaseNumber();
+		money.purchaseLotto(numberOfManual);
 		int numberOfPurchase = money.howManyPurchase();
 
 		ResultView.printHowManyPurchase(numberOfPurchase);

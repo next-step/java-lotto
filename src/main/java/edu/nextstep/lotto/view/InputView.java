@@ -41,4 +41,13 @@ public class InputView {
 		}
 		return Integer.parseInt(input);
 	}
+
+	public static int inputManualPurchaseNumber() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		String input = scanner.nextLine();
+		if (!Pattern.matches("^[0-9]+$", input)) {
+			return inputManualPurchaseNumber();
+		}
+		return Integer.parseInt(input);
+	}
 }
