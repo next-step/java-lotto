@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Objects;
 
-public class Number implements Comparable {
+public class Number implements Comparable<Number> {
 
     private final int value;
 
@@ -27,11 +27,7 @@ public class Number implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return compareTo((Number) o);
-    }
-
-    private int compareTo(Number anotherValue) {
+    public int compareTo(Number anotherValue) {
         return (Integer.compare(this.value, anotherValue.value));
     }
 
