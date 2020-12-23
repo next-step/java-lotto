@@ -20,7 +20,7 @@ public class TestLotteryGame {
     void setUp() {
         autoBuyBehavior = new AutoBuyBehavior() {
             @Override
-            public List<LotteryNumber> getLotteryNumbers(int pickCounts) {
+            public List<LotteryNumber> getLotteryNumbers() {
                 Collections.shuffle(lotteryAllNumbers);
                 return new ArrayList<>(Arrays.asList(
                         LotteryNumber.of(5),
@@ -33,7 +33,7 @@ public class TestLotteryGame {
             }
         };
 
-        dummyLotteryGame = new LotteryGame(1000);
+        dummyLotteryGame = new LotteryGame(1000, 0);
 
         dummyLotteryTicket = LotteryTicket.of(Arrays.asList(
                 LotteryNumber.of(1),
@@ -57,15 +57,15 @@ public class TestLotteryGame {
     @Test
     @DisplayName("게임 규칙(구입가격)을 입력해서 로또 게임을 생성한다.")
     void createLotteryGame() {
-        LotteryGame lotteryGame = new LotteryGame(1000);
+        LotteryGame lotteryGame = new LotteryGame(1000, 0);
         assertThat(lotteryGame)
-                .isEqualTo(new LotteryGame(1000));
+                .isEqualTo(new LotteryGame(1000, 0));
     }
 
     @ParameterizedTest
     @CsvSource({"1000,1","10000,10"})
     void buyNumberOfLotteryTickets(int cost, int expected) {
-        LotteryGame lotteryGame = new LotteryGame(cost);
+        LotteryGame lotteryGame = new LotteryGame(cost, 0);
         assertThat(lotteryGame.buyNumberOfLotteryTickets())
                 .isEqualTo(expected);
     }

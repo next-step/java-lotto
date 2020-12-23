@@ -26,7 +26,7 @@ public class LotteryResult {
         for (LotteryValue key : lotteryResultMap.keySet()) {
             profit += (lotteryResultMap.get(key) * key.getAmount());
         }
-        return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount.getAmount()), 3, RoundingMode.HALF_EVEN);
+        return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount.getAuto()), 3, RoundingMode.HALF_EVEN);
     }
 
     protected void updateLotteryResult(int key, boolean isMatchedBonusNumber) {

@@ -9,23 +9,35 @@ public class LotteryGame {
     private LotteryWinning lotteryWinning;
     private LotteryTickets lotteryTickets;
 
-    public LotteryGame(int price) {
-        this.lotteryAmount = new LotteryAmount(price);
+    public LotteryGame(int price, int numberOfManual) {
+        this.lotteryAmount = new LotteryAmount(price, numberOfManual);
+        this.lotteryTickets = new LotteryTickets();
     }
 
     public int buyNumberOfLotteryTickets() {
-        return lotteryAmount.getAmount();
+        return lotteryAmount.getAuto();
     }
 
-    public void buyLotteryTickets(BuyBehavior behavior) {
-        this.lotteryTickets = new LotteryTickets(IntStream.range(0, lotteryAmount.getAmount())
+    public void buyLotteryTickets(List<String> lotteryNumbersByManual) {
+        buyLotteryTicketBy(new ManualBuyBehavior(), lotteryNumbersByManual);
+        buyLotteryTicketBy(new AutoBuyBehavior(), lotteryAmount.getAuto());
+    }
+
+    private void buyLotteryTicketBy(BuyBehavior behavior, int numberOfBuying) {
+        this.lotteryTickets.concat(new LotteryTickets(IntStream.range(0, numberOfBuying)
                 .boxed()
                 .map(Integer -> LotteryTicketFactory.createLotteryTicket(behavior))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
     }
 
-    public void createLotteryWiningTicket(String lotteryWiningNumbers, String bunusNumber) {
-        this.lotteryWinning = new LotteryWinning(lotteryWiningNumbers, bunusNumber);
+    private void buyLotteryTicketBy(BuyBehavior behavior, List<String> lotteryNumbersByManual) {
+        this.lotteryTickets.concat(new LotteryTickets(lotteryNumbersByManual.stream()
+                .map(s -> LotteryTicketFactory.createLotteryTicketBy(behavior, s))
+                .collect(Collectors.toList())));
+    }
+
+    public void createLotteryWiningTicket(String lotteryWiningNumbers, String bonusNumber) {
+        this.lotteryWinning = new LotteryWinning(lotteryWiningNumbers, bonusNumber);
     }
 
     public LotteryResult getLotteryResult() {

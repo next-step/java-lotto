@@ -4,12 +4,21 @@ import lottery.domain.*;
 import lottery.view.InputViewLotteryGame;
 import lottery.view.ResultViewLotteryGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LotteryGameManager {
     public static void main(String[] args) {
-        LotteryGame lotteryGame = new LotteryGame(Integer.parseInt(InputViewLotteryGame.getUserInvestAmount()));
-        ResultViewLotteryGame.displayNumberOfTickets(lotteryGame.buyNumberOfLotteryTickets());
+        int amountOfMoney = Integer.parseInt(InputViewLotteryGame.getUserInvestAmount());
+        int numberOfManual = Integer.parseInt(InputViewLotteryGame.getNumberOfLotterysByManual());
+        LotteryGame lotteryGame = new LotteryGame(amountOfMoney, numberOfManual);
 
-        lotteryGame.buyLotteryTickets(new AutoBuyBehavior());
+        ResultViewLotteryGame.displayInputLotteryNumbersByManual();
+        List<String> lotteryNumbersByManual = InputViewLotteryGame.getUserLotteryTicketNumbersByManual(numberOfManual);
+
+        ResultViewLotteryGame.displayNumberOfTickets(lotteryGame.getLotteryAmount());
+        lotteryGame.buyLotteryTickets(lotteryNumbersByManual);
+
         ResultViewLotteryGame.displayPurchasedTickets(lotteryGame.getLotteryTickets());
 
         lotteryGame.createLotteryWiningTicket(
