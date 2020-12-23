@@ -18,11 +18,8 @@ public class LottoGenerator {
 
     private LottoGenerator() {}
 
-    private static List<LottoNumber> shuffledNumbers() {
-        List<LottoNumber> numbers = LOTTO_NUMBER_POOL;
-
-        Collections.shuffle(numbers);
-        return numbers;
+    private static void shuffleNumbers() {
+        Collections.shuffle(LOTTO_NUMBER_POOL);
     }
 
     public static Lottos generateLottos(int count) {
@@ -37,7 +34,9 @@ public class LottoGenerator {
     }
 
     private static Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = shuffledNumbers().stream()
+        shuffleNumbers();
+
+        List<LottoNumber> lottoNumbers = LOTTO_NUMBER_POOL.stream()
                 .limit(6)
                 .sorted()
                 .collect(Collectors.toList());
