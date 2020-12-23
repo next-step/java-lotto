@@ -12,13 +12,11 @@ import java.util.stream.Stream;
 
 public class LottoTicket {
 	private static final String VALIDATE_FAIL_MSG = "the sum of two lists'size must be at least one";
-	private final LottoMoney buyMoney;
 	private final List<LottoNumbers> autoNumbers;
 	private final List<LottoNumbers> manualNumbers;
 
-	public LottoTicket(LottoMoney buyMoney, List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers) {
+	public LottoTicket(List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers) {
 		validate(autoNumbers, manualNumbers);
-		this.buyMoney = buyMoney;
 		this.autoNumbers = autoNumbers;
 		this.manualNumbers = manualNumbers;
 	}
@@ -30,11 +28,11 @@ public class LottoTicket {
 		}
 	}
 
-	LottoStatistics compareNumbers(WinningNumbers winningNumbers) {
+	LottoStatistics compareNumbers(WinningNumbers winningNumbers, LottoMoney buyMoney) {
 		List<LottoResult> lottoResultList = this.getMergedStream()
 				.map(winningNumbers::findMatchedResult)
 				.collect(Collectors.toList());
-		return new LottoStatistics(lottoResultList, this.buyMoney);
+		return new LottoStatistics(lottoResultList, buyMoney);
 	}
 
 	public List<String> toStringNumbers() {

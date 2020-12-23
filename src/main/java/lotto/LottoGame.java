@@ -19,7 +19,8 @@ class LottoGame {
 		LottoTicket lottoTicket = lottoStore.sell(lottoOption.getBuyPlan());
 		lottoView.showLottoTicket(lottoTicket);
 
-		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(lottoOption.getWinningNumbers());
+		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(
+				lottoOption.getWinningNumbers(), lottoOption.getBuyPlan().getLottoMoney());
 		lottoView.showStatistics(lottoStatistics);
 	}
 }
