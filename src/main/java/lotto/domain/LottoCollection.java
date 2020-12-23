@@ -2,31 +2,16 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoCollection {
-    private static final int ONE_LOTTO_COST = 1000;
-
     private final List<Lotto> lottos;
-    private final int buyAmount;
-    private final LottoNumber bonus;
 
-    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator) {
-        this(buyAmount, lottoNumbersGenerator, null);
+    public LottoCollection(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public LottoCollection(int buyAmount, LottoNumbersGenerator lottoNumbersGenerator, LottoNumber bonus) {
-        this.buyAmount = buyAmount;
-        this.bonus = bonus;
-        int lottoCount = convertLottoCount(buyAmount);
-
-        lottos = IntStream
-                .range(0, lottoCount)
-                .mapToObj(i -> new Lotto(lottoNumbersGenerator.generate()))
-                .collect(Collectors.toList());
-    }
-
-    public LottoResult getLottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+    public LottoResult getLottoResult(Lotto winnerLotto, LottoNumber bonusNumber, int buyAmount) {
         return new LottoResult(lottos, winnerLotto, bonusNumber, buyAmount);
     }
 
@@ -34,7 +19,9 @@ public class LottoCollection {
         return lottos;
     }
 
-    private static int convertLottoCount(int buyAmount) {
-        return buyAmount / ONE_LOTTO_COST;
+    public static List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        return Stream
+                .concat(manualLottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
     }
 }

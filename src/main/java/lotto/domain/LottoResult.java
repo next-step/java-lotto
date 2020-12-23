@@ -10,10 +10,20 @@ public class LottoResult {
 
     private final Map<Rank, Integer> rankCounts = new HashMap<>();
     private final int buyAmount;
+    private final List<Lotto> lottoList;
+    private final Lotto winnerLotto;
+    private final LottoNumber bonusNumber;
 
     public LottoResult(List<Lotto> lottoList, Lotto winnerLotto, LottoNumber bonusNumber, int buyAmount) {
+        this.lottoList = lottoList;
+        this.winnerLotto = winnerLotto;
+        this.bonusNumber = bonusNumber;
         this.buyAmount = buyAmount;
 
+        buildRankCounts();
+    }
+
+    private void buildRankCounts() {
         lottoList.stream().map(lotto -> {
             int numberCount = lotto.matchNumberCount(winnerLotto);
             boolean matchBonus = lotto.matchBonus(bonusNumber);
@@ -25,10 +35,8 @@ public class LottoResult {
     }
 
     public int getTotalReward() {
-        return rankCounts.entrySet().stream()
-                .map(
-                        (entry) -> entry.getKey().getWinningMoney() * entry.getValue()
-                )
+        return rankCounts.keySet().stream()
+                .map(rank -> rank.getReward(rankCounts.get(rank)))
                 .reduce(Integer::sum)
                 .orElse(DEFAULT_TOTAL_REWARD);
     }

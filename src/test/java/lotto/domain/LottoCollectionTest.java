@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,9 @@ class LottoCollectionTest {
 
     @BeforeEach
     void setUp() {
-        lottoCollection = new LottoCollection(14000, new FixedLottoNumbersGenerator());
+        LottoGenerator lottoGenerator = new LottoGenerator(new FixedLottoNumbersGenerator());
+        List<Lotto> lottos = lottoGenerator.generate(14);
+        lottoCollection = new LottoCollection(lottos);
     }
 
     @Test
@@ -38,13 +41,14 @@ class LottoCollectionTest {
     @Test
     @DisplayName("당첨 번호와 비교하는 테스트")
     void getSameNumberCountTest() {
+        int buyAmount = 14000;
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
-        LottoResult lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
+        LottoResult lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber, buyAmount);
         assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
 
         winnerLotto = new Lotto(1, 2, 3, 4, 5, 14);
-        lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber);
+        lottoResult = lottoCollection.getLottoResult(winnerLotto, bonusNumber, buyAmount);
         assertThat(lottoResult.getRankCount(Rank.FOURTH)).isEqualTo(1);
     }
 }
