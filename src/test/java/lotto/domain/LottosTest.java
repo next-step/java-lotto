@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.*;
 
@@ -9,13 +11,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    @Test
-    @DisplayName("당첨 통계 계산하기")
-    void makeStatistic() {
-        List<LottoNumber> numbers = Arrays.asList(
+    List<LottoNumber> numbers;
+
+    @BeforeEach
+    void init() {
+        numbers = Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         );
+    }
+
+    @Test
+    @DisplayName("당첨 통계 계산하기")
+    void makeStatistic() {
+        LottoNumber bonusNumber = new LottoNumber(7);
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(numbers, 0), new Lotto(numbers, 1), new Lotto(numbers, 2),
                 new Lotto(numbers, 3), new Lotto(numbers, 3),
@@ -24,14 +33,37 @@ public class LottosTest {
                 new Lotto(numbers, 6)
         );
         Lottos lottos = new Lottos(lottoList);
-        LottoStatistic actual = lottos.makeStatistic();
+        LottoStatistic actual = lottos.makeStatistic(bonusNumber);
         Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
         lottoStatisticMap.put(LottoRank.FIRST, 1);
-        lottoStatisticMap.put(LottoRank.SECOND, 2);
-        lottoStatisticMap.put(LottoRank.THIRD, 3);
-        lottoStatisticMap.put(LottoRank.FOURTH, 2);
+        lottoStatisticMap.put(LottoRank.THIRD, 2);
+        lottoStatisticMap.put(LottoRank.FOURTH, 3);
+        lottoStatisticMap.put(LottoRank.FIFTH, 2);
         lottoStatisticMap.put(LottoRank.MISS, 3);
         LottoStatistic expected = new LottoStatistic(lottoStatisticMap);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("당첨 통계에 2등 추가")
+    void makeStatisticAdd2nd() {
+        LottoNumber bonusNumber = new LottoNumber(7);
+        List<LottoNumber> numbersContainsBonus = Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), bonusNumber
+        );
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(numbersContainsBonus, 5),
+                new Lotto(numbersContainsBonus, 5),
+                new Lotto(numbers, 5)
+        );
+        Lottos lottos = new Lottos(lottoList);
+        LottoStatistic actual = lottos.makeStatistic(bonusNumber);
+        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+        lottoStatisticMap.put(LottoRank.SECOND, 2);
+        lottoStatisticMap.put(LottoRank.THIRD, 1);
+        LottoStatistic expected = new LottoStatistic(lottoStatisticMap);
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

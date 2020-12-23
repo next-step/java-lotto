@@ -30,6 +30,16 @@ public class Lottos {
         return new LottoStatistic(lottoStatisticMap);
     }
 
+    public LottoStatistic makeStatistic(LottoNumber bonusNumber) {
+        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+        for (Lotto lotto : lottoList) {
+            boolean matchBonus = lotto.drawBonus(bonusNumber);
+            LottoRank rank = LottoRank.valueOf(lotto.getMatchingCount(), matchBonus);
+            putLottoStatisticMap(lottoStatisticMap, rank);
+        }
+        return new LottoStatistic(lottoStatisticMap);
+    }
+
     private void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
         if (lottoStatisticMap.containsKey(rank)) {
             lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
