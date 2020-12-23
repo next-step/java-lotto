@@ -49,4 +49,8 @@ public class Lotto {
                 .toArray(String[]::new));
     }
 
+    public boolean drawBonus(LottoNumber bonusNumber) {
+        return matchingCount == 5 && numbers.contains(bonusNumber);
+    }
+
 }
