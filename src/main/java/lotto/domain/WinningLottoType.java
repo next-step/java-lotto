@@ -18,6 +18,7 @@ public enum WinningLottoType {
         this.matchCount = matchCount;
         this.winnerMoney = winnerMoney;
     }
+
     public long getWinnerMoney() {
         return winnerMoney;
     }
@@ -25,4 +26,5 @@ public enum WinningLottoType {
     public String getName() {
         return name;
     }
+
 }

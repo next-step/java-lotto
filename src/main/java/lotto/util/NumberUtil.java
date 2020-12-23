@@ -38,7 +38,6 @@ public class NumberUtil {
                 .map(Integer::parseInt).sorted().collect(Collectors.toList());
     }
 
-
     public static int convertStringToInteger(String newbonusNumber) {
         int parseInt = Integer.parseInt(newbonusNumber);
         if (parseInt < 0) {

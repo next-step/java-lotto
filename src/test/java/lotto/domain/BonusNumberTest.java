@@ -10,14 +10,13 @@ class BonusNumberTest {
 
     private BonusNumber bonusNumber;
 
-
-
     @Test
     void createBonusNumber(){
         String lastWinningNumber = "1,2,3,4,5,6";
         String newbonusNumber = "7";
         BonusNumber bonusNumber = new BonusNumber( lastWinningNumber ,newbonusNumber);
-        assertThat(bonusNumber).isEqualTo(new BonusNumber(7));
+        boolean equalsNumber = bonusNumber.equals(new BonusNumber((7)));
+        assertThat(equalsNumber).isEqualTo(true);
     }
 
     @Test
@@ -28,4 +27,5 @@ class BonusNumberTest {
             int bonus = bonusNumber.validBonusNumber(lastWinningNumber,newbonusNumber);
         });
     }
+
 }

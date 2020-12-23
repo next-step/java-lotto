@@ -11,6 +11,7 @@ public class LottoBucket {
     public LottoBucket() {
         this.lottos = new ArrayList<>();
     }
+
     public void createLotto(Lotto lotto) {
         lotto.createLotto();
         addLotto(lotto);
@@ -18,10 +19,6 @@ public class LottoBucket {
 
     protected void addLotto(Lotto lotto){
         lottos.add(lotto);
-    }
-
-    public int validateCreatedLottosSize() {
-        return this.lottos.size();
     }
 
     public List<Lotto> getLottos() {

@@ -32,13 +32,10 @@ public class DisplayView {
     public static void showWinningStatis(WinningLottos winningLottos){
         println("당첨 통계");
         println("-----------");
-        ;
-        //TODO 피드백에서 WinningLottos의 winningTypeCountMap을 활용하여 출력하는 방법이 의도하신게 맞는지 물어보기
-        printlnMatchNumberAndMoney(WinningLottoType.MATCH_THREE, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_THREE));
-        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FOUR, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FOUR));
-        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FIVE, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FIVE));
-        printlnMatchNumberAndMoney(WinningLottoType.MATCH_FIVE_BONUS, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_FIVE_BONUS));
-        printlnMatchNumberAndMoney(WinningLottoType.MATCH_SIX, winningLottos.getWinningLottoTypeByCountMap(WinningLottoType.MATCH_SIX));
+        Map<WinningLottoType, Integer> winningLottoTypeByCountMap = winningLottos.getWinningLottoTypeByCountMap();
+        winningLottoTypeByCountMap.entrySet().forEach( (element) -> {
+            printlnMatchNumberAndMoney(element.getKey(), element.getValue());
+        } );
     }
     private static void println(String msg){
         System.out.println(msg);

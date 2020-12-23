@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,11 +47,11 @@ public class WinningLottos {
         if (winningMoney == BigDecimal.ZERO) {
            return  BigDecimal.ZERO;
         }
-        BigDecimal revenue = winningMoney.divide(buyMoney);
+        BigDecimal revenue = winningMoney.divide(buyMoney,2, RoundingMode.FLOOR);
         return revenue;
     }
-    public Integer getWinningLottoTypeByCountMap(WinningLottoType winningLottoType){
-        return this.winningTypeCountMap.get(winningLottoType);
-    }
 
+    public Map<WinningLottoType, Integer> getWinningLottoTypeByCountMap(){
+        return Collections.unmodifiableMap(this.winningTypeCountMap);
+    }
 }

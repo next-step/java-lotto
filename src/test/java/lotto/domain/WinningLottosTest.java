@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,15 +39,8 @@ class WinningLottosTest {
     void winningRevenueTest(){
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
         BigDecimal revenue = winningLottos.calcurateRevenue("1000");
-        assertThat(revenue).isEqualTo(BigDecimal.valueOf(5));
-    }
-
-
-    @Test
-    void cal(){
-        float a = 100;
-        float b = 20;
-        System.out.println(b/a);
+        BigDecimal validNumber = new BigDecimal(5).setScale(2, RoundingMode.FLOOR);
+        assertThat(revenue).isEqualTo(validNumber);
     }
 
 }

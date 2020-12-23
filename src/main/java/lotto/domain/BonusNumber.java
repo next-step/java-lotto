@@ -20,17 +20,16 @@ public class BonusNumber {
         this.newbonusNumber = validBonusNumber(lastWinningNumber, newbonusNumber);
     }
 
-
     protected int validBonusNumber(String lastWinningNumber, String newbonusNumber){
-        int bonusNumber = NumberUtil.convertStringToInteger(newbonusNumber);
+        int inputBonusNumber = NumberUtil.convertStringToInteger(newbonusNumber);
+        BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);
         List<Integer> lastWinningNumbers = NumberUtil.convertStringToIntegerList(lastWinningNumber);
-        Optional<Integer> anyMatchNumber = lastWinningNumbers.stream()
-                .filter((number) -> number == bonusNumber).findAny();
-        if( anyMatchNumber.isPresent()) {
-            throw new RuntimeException(NUMBER_EXIST_EXCEPTION);
-        }
-        return bonusNumber;
+        Optional.ofNullable(lastWinningNumbers.stream()
+                .filter((number) -> bonusNumber.equals(number)).findAny())
+                .orElseThrow(() -> new IllegalArgumentException(NUMBER_EXIST_EXCEPTION));
+        return inputBonusNumber;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,11 +38,23 @@ public class BonusNumber {
             return newbonusNumber == that.newbonusNumber;
         };
         if(o instanceof Integer) {
-            return this.newbonusNumber == ((Integer) o).intValue();
+            boolean integerIsEqual = this.newbonusNumber == ((Integer) o).intValue();
+            return integerIsEqual;
         }
         return false;
     }
-
+    public boolean notEquals(Object o) {
+        if (this == o) return false;
+        if (o instanceof BonusNumber) {
+            BonusNumber that = (BonusNumber) o;
+            return newbonusNumber != that.newbonusNumber;
+        };
+        if(o instanceof Integer) {
+            boolean integerIsEqual = this.newbonusNumber != ((Integer) o).intValue();
+            return integerIsEqual;
+        }
+        return true;
+    }
 
 }
 

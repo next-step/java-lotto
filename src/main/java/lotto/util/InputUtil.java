@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class InputUtil {
 
+
     private final static Scanner scanner = new Scanner(System.in);
+
+    private InputUtil(){}
 
     public static String inputMoney(){
         return scanner.nextLine();

@@ -50,12 +50,20 @@ public class Lotto {
                 .sorted().collect(Collectors.toList());
 
         for( int i = 0; i < winnerNumbers.size(); i++) {
-            if(sortedNumbers.get(i).equals( winnerNumbers.get(i))) {
-                matchNumber = matchNumber + 1;
-            }
+            Integer number = sortedNumbers.get(i);
+            Integer winnerNumber = winnerNumbers.get(i);
+            matchNumber = getMatchNumber(matchNumber, number, winnerNumber);
         }
         return matchNumber;
     }
+
+    private int getMatchNumber(int matchNumber, Integer number, Integer winnerNumber) {
+        if(number.equals(winnerNumber)) {
+            matchNumber = matchNumber + 1;
+        }
+        return matchNumber;
+    }
+
     public boolean checkBonusNumber( BonusNumber bonusNumber){
         Optional<Integer> matchedBonusNumber = this.numbers.stream()
                 .filter((number) -> bonusNumber.equals(number)).findFirst();

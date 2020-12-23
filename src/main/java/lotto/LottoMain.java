@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningLottos;
+import lotto.domain.*;
 import lotto.util.InputUtil;
 import lotto.view.DisplayView;
 import lotto.view.InputView;
@@ -17,8 +14,9 @@ public class LottoMain {
 
         String money = InputUtil.inputMoney();
 
-        int numberOfLotto = lottoMachine.buyLotto(money);
-        DisplayView.exchangeLottoMsg(numberOfLotto);
+        LottoBucket lottoBucket = lottoMachine.buyLotto(money);
+        int createLottoBucketCount = lottoBucket.getLottos().size();
+        DisplayView.exchangeLottoMsg(createLottoBucketCount);
         DisplayView.showLottoBuckets(lottoMachine.getLottoBuckets());
 
         InputView.showInputLastWinningNumber();
