@@ -22,11 +22,14 @@ public class LottoNumber {
 	}
 
 	public static LottoNumber of(int number) {
-		LottoNumber lottoNumber = lottoNumbers.get(number);
-		if (lottoNumber == null) {
+		if (!isValid(number)) {
 			throw new IllegalArgumentException("로또 번호는 " + START_LIMIT + "부터 " + END_LIMIT + " 사이만 가능합니다.");
 		}
-		return lottoNumber;
+		return lottoNumbers.get(number);
+	}
+
+	public static boolean isValid(int number) {
+		return lottoNumbers.containsKey(number);
 	}
 
 	@Override

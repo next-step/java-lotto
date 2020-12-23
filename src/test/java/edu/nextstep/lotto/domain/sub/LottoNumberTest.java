@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("LottoNumber: 로또 번호 각각의 원시값을 포장한 클래스")
@@ -25,6 +26,13 @@ class LottoNumberTest {
 	public void generate_shouldException(int number) {
 		assertThatThrownBy(() -> LottoNumber.of(number))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("isValid: LottoNumber 객체를 생성하기에 올바른 숫자면 true를 리턴함")
+	@ParameterizedTest
+	@CsvSource(value = {"-1,false", "0,false", "46,false", "1,true", "45,true"})
+	void isValid(int number, boolean expected) {
+		assertThat(LottoNumber.isValid(number)).isEqualTo(expected);
 	}
 
 	@DisplayName("equals: LottoNumber 객체의 원시값이 같으면 같은 LottoNumber 객체임.")

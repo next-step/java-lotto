@@ -41,6 +41,19 @@ class LottoNumbersTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("isValid: LottoNumbers 객체를 생성하기에 올바른 숫자들이면 true를 리턴함")
+	@ParameterizedTest
+	@CsvSource(value = {
+		"1,2,3,4,5,6:true",
+		"1,2,3,4,5:false",
+		"1,1,3,4,5,6:false",
+		"1,2,3,4,5,46:false"
+	}, delimiter = ':')
+	public void isValid(String numbers, boolean expected) {
+		List<Integer> intNumbers = splitToIntList(numbers);
+		assertThat(LottoNumbers.isValid(intNumbers)).isEqualTo(expected);
+	}
+
 	@DisplayName("countBySame: 두 LottoNumbers를 비교하여 내부 lottoNumbers끼리 원소가 일치하는 개수를 리턴함")
 	@ParameterizedTest
 	@CsvSource(value = {
