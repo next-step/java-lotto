@@ -25,13 +25,13 @@ public class LottoMachine {
         Lottos lottos = LottoGenerator.generateLottos(count);
         outputView.printLottos(lottos, count);
 
-        Lotto winningLotto = LottoGenerator.generateLotto(inputView.getWinningNumbers());
+        WinningLotto winningLotto = LottoGenerator.generateWinningLotto(inputView.getWinningNumbers(), inputView.getBonusNumber());
 
         LottoResult result = makeLottoResult(lottos, winningLotto);
         outputView.printResult(result, money);
     }
 
-    private LottoResult makeLottoResult(Lottos lottos, Lotto winningLotto) {
+    private LottoResult makeLottoResult(Lottos lottos, WinningLotto winningLotto) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {

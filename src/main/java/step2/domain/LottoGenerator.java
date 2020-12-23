@@ -52,4 +52,12 @@ public class LottoGenerator {
 
         return new Lotto(lottoNumbers);
     }
+
+    public static WinningLotto generateWinningLotto(List<Integer> numbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        return new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
+    }
 }

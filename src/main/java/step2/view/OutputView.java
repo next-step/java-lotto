@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String OUTPUT_BUY_COUNT_MESSAGE = "%s개를 구매했습니다.";
     private static final String OUTPUT_WINNING_STATISTICS_MESSAGE = "당첨 통계\n---------";
-    private static final String OUTPUT__RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String OUTPUT_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String OUTPUT_SECOND_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String OUTPUT_YIELD_MESSAGE = "총 수익률은 %.2f 입니다.";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String LOTTO_NUMBER_PREFIX = "[";
@@ -45,7 +46,14 @@ public class OutputView {
         Arrays.stream(LottoTier.values())
                 .forEach(tier -> {
                     int tierCount = result.getTierCount(tier);
-                    ViewUtils.printLine(String.format(OUTPUT__RESULT_MESSAGE, tier.getMatchingCount(), tier.getPrize(), tierCount));
+
+                    String message = String.format(OUTPUT_RESULT_MESSAGE, tier.getMatchingCount(), tier.getPrize(), tierCount);
+
+                    if(tier.equals(LottoTier.SECOND)) {
+                        message = String.format(OUTPUT_SECOND_RESULT_MESSAGE, tier.getMatchingCount(), tier.getPrize(), tierCount);
+                    }
+
+                    ViewUtils.printLine(message);
                 });
 
         ViewUtils.printLine(String.format(OUTPUT_YIELD_MESSAGE, result.getYield(money)));
