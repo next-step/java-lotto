@@ -20,7 +20,7 @@ class LottoTicketMachineTest {
 
     @Test
     void buyTest() {
-        LottoTickets lottoTickets = lottoTicketMachine.buy(Money.won(13000L));
+        LottoTickets lottoTickets = lottoTicketMachine.buy(Money.won(13000L), Collections.emptyList());
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         assertThat(lottoTicketList.size()).isEqualTo(13);
     }

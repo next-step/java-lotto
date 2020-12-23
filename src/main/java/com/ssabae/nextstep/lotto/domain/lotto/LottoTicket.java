@@ -17,6 +17,10 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
+    public LottoTicket(String text) {
+        numbers = LottoNumberParser.parse(text);
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers;
     }

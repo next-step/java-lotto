@@ -38,7 +38,7 @@ class LottoTicketsAnalyzerTest {
 
     private LottoTickets getDummyLottoTickets() {
         List<LottoTicket> dummyLottoTicketList = getDummyLottoTicketList();
-        return LottoTickets.of(dummyLottoTicketList);
+        return LottoTickets.of(dummyLottoTicketList, 0);
     }
 
     private List<LottoTicket> getDummyLottoTicketList() {
