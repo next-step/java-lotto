@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.exception.IsLessThanTheMiminumAmountOfMoneyException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +12,15 @@ public class LottoGame {
 
     private List<Lottery> lotteryList;
 
+    private Money money_amount;
+
     public LottoGame() {
 
     }
 
-    public LottoGame(int money) {
-        this.buy(money);
+    public LottoGame(int amount) {
+        this.money_amount = new Money(amount);
+        this.buy(money_amount);
     }
 
     /**
@@ -27,22 +28,17 @@ public class LottoGame {
      * @param money 입력받은 구입 금액
      * @return 발급된 로또 용지 묶음
      */
-    public List<Lottery> buy(int money) {
-        if (money < MINIMUM_INPUT_MONEY) {
-            throw new IsLessThanTheMiminumAmountOfMoneyException(MONEY_IS_LESS_THAN_1000);
-        }
-        return makeLotteryList(money);
+    public List<Lottery> buy(Money money) {
+        return makeLotteryList(money.getNumberOfLottery());
     }
 
     /**
      * 로또 용지 묶음을 만드는 메소드
-     * @param money 입력받은 구입 금액
+     * @param numberOfLottery 구매할 로또 갯수
      * @return 발급된 용지 묶음
      */
-    public List<Lottery> makeLotteryList(int money) {
+    public List<Lottery> makeLotteryList(int numberOfLottery) {
         lotteryList = new ArrayList<>();
-
-        int numberOfLottery = getNumberOfLottery(money);
 
         for (int i = 0; i < numberOfLottery; i++) {
             Lottery lottery = new Lottery();
@@ -50,15 +46,6 @@ public class LottoGame {
         }
 
         return lotteryList;
-    }
-
-    /**
-     * 입력받은 구입 금액으로 살 수 있는 복권 장 수를 얻는 메소드
-     * @param money 입력받은 구입 금액
-     * @return 구입 가능한 복권 장 수
-     */
-    public int getNumberOfLottery(int money) {
-        return money / 1000;
     }
 
     public List<Lottery> getLotteryList() {
