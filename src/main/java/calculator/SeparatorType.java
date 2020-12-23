@@ -5,22 +5,20 @@ import java.util.regex.Pattern;
 
 public enum SeparatorType {
 
-    DEFAULT(new DefaultSeparator(), DefaultSeparator.SEPARATOR_PATTERN, "기본 구분자"),
-    CUSTOM(new CustomSeparator(), CustomSeparator.SEPARATOR_PATTERN, "사용자정의 구분자");
+    DEFAULT(new DefaultSeparator(), "기본 구분자"),
+    CUSTOM(new CustomSeparator(), "사용자정의 구분자");
 
     private final Separator separator;
-    private final Pattern separatorPattern;
     private final String description;
 
-    SeparatorType(Separator separator, Pattern separatorPattern, String description) {
+    SeparatorType(Separator separator, String description) {
         this.separator = separator;
-        this.separatorPattern = separatorPattern;
         this.description = description;
     }
 
     public static SeparatorType findByInputText(InputText inputText) {
         return Arrays.stream(values())
-                .filter(type -> type.separatorPattern
+                .filter(type -> type.separator.getSeparatorPattern()
                         .matcher(inputText.getText())
                         .matches())
                 .findAny()

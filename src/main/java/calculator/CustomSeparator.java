@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class CustomSeparator implements Separator {
 
-    public static final Pattern SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern SEPARATOR_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     @Override
     public PositiveNumbers split(InputText inputText) {
@@ -18,6 +18,11 @@ public class CustomSeparator implements Separator {
             positiveNumbers = new PositiveNumbers(getPositiveNumberArray(values));
         }
         return positiveNumbers;
+    }
+
+    @Override
+    public Pattern getSeparatorPattern() {
+        return SEPARATOR_PATTERN;
     }
 
 }
