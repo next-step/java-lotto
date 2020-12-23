@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import lottery.view.InputViewLotteryGame;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
