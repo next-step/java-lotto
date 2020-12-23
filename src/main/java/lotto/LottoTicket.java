@@ -21,12 +21,12 @@ public class LottoTicket {
     }
 
     private static void validate(List<Number> ticket) {
-        if (ticket.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
+        if (ticket.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_TICKET_SIZE + "개이어야 합니다.");
         }
 
         Set<Number> ticketSet = new HashSet<>(ticket);
-        if (ticketSet.size() != 6) {
+        if (ticketSet.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
