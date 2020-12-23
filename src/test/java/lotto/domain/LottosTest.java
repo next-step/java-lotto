@@ -22,6 +22,18 @@ public class LottosTest {
     }
 
     @Test
+    void orderByKey() {
+        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
+        lottoStatisticMap.put(LottoRank.THIRD, 2);
+        lottoStatisticMap.put(LottoRank.MISS, 3);
+        lottoStatisticMap.put(LottoRank.FIFTH, 2);
+        lottoStatisticMap.put(LottoRank.FIRST, 1);
+        lottoStatisticMap.put(LottoRank.FOURTH, 3);
+        LottoStatistic expected = new LottoStatistic(lottoStatisticMap);
+        expected.toFormattingStringList().forEach(System.out::println);
+    }
+
+    @Test
     @DisplayName("당첨 통계 계산하기")
     void makeStatistic() {
         LottoNumber bonusNumber = new LottoNumber(7);
@@ -34,13 +46,14 @@ public class LottosTest {
         );
         Lottos lottos = new Lottos(lottoList);
         LottoStatistic actual = lottos.makeStatistic(bonusNumber);
-        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
         lottoStatisticMap.put(LottoRank.FIRST, 1);
         lottoStatisticMap.put(LottoRank.THIRD, 2);
         lottoStatisticMap.put(LottoRank.FOURTH, 3);
         lottoStatisticMap.put(LottoRank.FIFTH, 2);
-        lottoStatisticMap.put(LottoRank.MISS, 3);
+        //lottoStatisticMap.put(LottoRank.MISS, 3);
         LottoStatistic expected = new LottoStatistic(lottoStatisticMap);
+        actual.toFormattingStringList().forEach(System.out::println);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -54,15 +67,17 @@ public class LottosTest {
         );
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(numbersContainsBonus, 5),
-                new Lotto(numbersContainsBonus, 5),
-                new Lotto(numbers, 5)
+                new Lotto(numbers, 5),
+                new Lotto(numbersContainsBonus, 5)
         );
         Lottos lottos = new Lottos(lottoList);
         LottoStatistic actual = lottos.makeStatistic(bonusNumber);
-        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
         lottoStatisticMap.put(LottoRank.SECOND, 2);
         lottoStatisticMap.put(LottoRank.THIRD, 1);
         LottoStatistic expected = new LottoStatistic(lottoStatisticMap);
+        actual.toFormattingStringList().forEach(System.out::println);
+        expected.toFormattingStringList().forEach(System.out::println);
         assertThat(actual).isEqualTo(expected);
     }
 

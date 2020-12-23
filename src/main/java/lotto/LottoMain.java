@@ -28,8 +28,11 @@ public class LottoMain {
         List<LottoNumber> lottoNumbers = inputView.inputLuckyNumbers(scanner.nextLine());
         Lotto luckyLotto = new Lotto(lottoNumbers);
         lottos.drawLottos(luckyLotto);
+        outputView.printMessage("보너스 볼을 입력해 주세요.");
+        scanner = new Scanner(System.in);
+        LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
 
-        LottoStatistic lottoStatistic = lottos.makeStatistic();
+        LottoStatistic lottoStatistic = lottos.makeStatistic(bonusNumber);
         outputView.printStatistic(lottoStatistic);
 
         Profit profit = new Profit(lottoStatistic.calculateProfit(amount));

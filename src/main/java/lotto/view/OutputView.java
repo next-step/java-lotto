@@ -4,9 +4,6 @@ import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.Profit;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class OutputView {
 
     public void printMessage(String message) {

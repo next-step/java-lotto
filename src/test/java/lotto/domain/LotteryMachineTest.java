@@ -10,7 +10,7 @@ class LotteryMachineTest {
     @Test
     @DisplayName("구입 금액으로 살 수 있는 로또 갯수 계산")
     void calculateLottoCount() {
-        int lottoCount = LotteryMachine.calculateLottoCount(14_000);
+        int lottoCount = LotteryMachine.calculateLottoCount(14500);
         assertThat(lottoCount).isEqualTo(14);
     }
 

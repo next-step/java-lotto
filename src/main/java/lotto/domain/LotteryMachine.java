@@ -15,7 +15,7 @@ import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
  */
 public class LotteryMachine {
 
-    private static final BigDecimal LOTTO_PRICE = new BigDecimal(1_000);
+    private static final long LOTTO_PRICE = 1_000L;
     private static final Integer[] LOTTO_NUMBERS = IntStream.range(1, 46).boxed().toArray(Integer[]::new);
 
     /**
@@ -24,8 +24,8 @@ public class LotteryMachine {
      * @return 로또 발권 갯수
      */
     public static int calculateLottoCount(long amount) {
-        BigDecimal purchaseAmount = new BigDecimal(amount);
-        return purchaseAmount.divideToIntegralValue(LOTTO_PRICE).intValue();
+        long lottoCount = amount / LOTTO_PRICE;
+        return (int) lottoCount;
     }
 
     /**

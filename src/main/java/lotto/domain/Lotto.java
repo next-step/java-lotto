@@ -50,7 +50,7 @@ public class Lotto {
     }
 
     public boolean drawBonus(LottoNumber bonusNumber) {
-        return matchingCount == 5 && numbers.contains(bonusNumber);
+        return matchingCount == (LOTTO_NUMBERS_SIZE - 1) && numbers.contains(bonusNumber);
     }
 
 }

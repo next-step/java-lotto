@@ -21,19 +21,11 @@ public class Lottos {
         }
     }
 
-    public LottoStatistic makeStatistic() {
-        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
-        for (Lotto lotto : lottoList) {
-            LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
-            putLottoStatisticMap(lottoStatisticMap, rank);
-        }
-        return new LottoStatistic(lottoStatisticMap);
-    }
-
     public LottoStatistic makeStatistic(LottoNumber bonusNumber) {
-        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
         for (Lotto lotto : lottoList) {
             boolean matchBonus = lotto.drawBonus(bonusNumber);
+            //LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
             LottoRank rank = LottoRank.valueOf(lotto.getMatchingCount(), matchBonus);
             putLottoStatisticMap(lottoStatisticMap, rank);
         }
@@ -41,6 +33,8 @@ public class Lottos {
     }
 
     private void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
+        if (rank.equals(LottoRank.MISS))
+            return;
         if (lottoStatisticMap.containsKey(rank)) {
             lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
             return;
