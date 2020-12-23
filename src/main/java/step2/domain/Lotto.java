@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     public LottoTier getLottoTier(Lotto targetLotto) {
-        return LottoTier.getTier(getMatchingCount(targetLotto));
+        return LottoTier.getTier(getMatchingCount(targetLotto), true);
     }
 
     private long getMatchingCount(Lotto targetLotto) {
