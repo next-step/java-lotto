@@ -35,4 +35,9 @@ public class LottoLotteriesTest {
 
 		assertThat(lottoLotteries.getCount()).isEqualTo(3);
 	}
+
+	@Test
+	void getLottoResults_test(){
+
+	}
 }

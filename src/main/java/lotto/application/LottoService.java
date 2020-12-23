@@ -7,19 +7,21 @@ import java.util.stream.IntStream;
 import lotto.domain.LottoLotteries;
 import lotto.domain.LottoLottery;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.Message;
 import lotto.domain.Money;
+import lotto.domain.WinLottoNumbers;
 import lotto.utils.RandomLottoNumberGenerator;
 
 public class LottoService {
-	private final Money money;
+	private final LottoLotteries lottoLotteries;
 
 	public LottoService(Money money) {
-		this.money = money;
+		this.lottoLotteries = buyMaxLottoLotteries(money);
 	}
 
-	public LottoLotteries buyMaxLottoLotteries() {
-		int count = money.buyMax(LottoLottery.getPrice());
+	public LottoLotteries buyMaxLottoLotteries(Money money) {
+		int count = money.buyMax(LottoLottery.LOTTO_PRICE_PER_PIECE);
 		validateBuyLottoLottery(count);
 
 		return buyAutoLottoLotteries(count);
@@ -39,6 +41,14 @@ public class LottoService {
 		return IntStream.range(0, count)
 			.mapToObj(value -> new LottoLottery(getAutoNumbers()))
 			.collect(Collectors.toList());
+	}
+
+	public LottoLotteries getLottoLotteries() {
+		return lottoLotteries;
+	}
+
+	public LottoResults getLottoResults(WinLottoNumbers winLottoNumbers) {
+		return lottoLotteries.getLottoResults(winLottoNumbers);
 	}
 
 	private List<LottoNumber> getAutoNumbers() {

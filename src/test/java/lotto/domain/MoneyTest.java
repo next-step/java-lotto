@@ -17,6 +17,6 @@ class MoneyTest {
 	@Test
 	@DisplayName("입력 받은 가격으로 최대로 구매한 갯수를 반환한다.")
 	void buyMaxTest() {
-		assertThat(money.buyMax(new Price(1000))).isEqualTo(14);
+		assertThat(money.buyMax(LottoLottery.LOTTO_PRICE_PER_PIECE)).isEqualTo(14);
 	}
 }

@@ -10,7 +10,7 @@ public class Money {
 		this.money = money;
 	}
 
-	public int buyMax(Price price) {
-		return money / price.getPrice();
+	public int buyMax(int price) {
+		return money / price;
 	}
 }

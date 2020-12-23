@@ -21,4 +21,10 @@ public class ValidationUtils {
 			throw new IllegalArgumentException(Message.INVALID_EMPTY_LIST);
 		}
 	}
+
+	public static void validateEmpty(String string) {
+		if (Objects.isNull(string) || string.isEmpty()) {
+			throw new IllegalArgumentException(Message.INVALID_EMPTY_STRING);
+		}
+	}
 }
