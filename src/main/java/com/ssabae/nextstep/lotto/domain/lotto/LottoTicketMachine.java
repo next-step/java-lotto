@@ -9,7 +9,6 @@ import com.ssabae.nextstep.lotto.domain.LottoTicketsAnalyzer;
 import com.ssabae.nextstep.lotto.domain.Money;
 import com.ssabae.nextstep.lotto.domain.WinningNumber;
 import com.ssabae.nextstep.lotto.domain.lotto.ticketgenerator.LottoTicketGenerator;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,7 +35,7 @@ public class LottoTicketMachine {
         List<LottoTicket> lottoTicketList = Stream.generate(generator::generate)
                 .limit(count)
                 .collect(Collectors.toList());
-        return new LottoTickets(Collections.unmodifiableList(lottoTicketList));
+        return LottoTickets.of(lottoTicketList);
     }
 
     public LottoResultDto calculateYield(LottoTickets lottoTickets, WinningNumber winningNumber) {

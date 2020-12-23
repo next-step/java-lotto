@@ -1,5 +1,6 @@
 package com.ssabae.nextstep.lotto.application;
 
+import com.ssabae.nextstep.lotto.domain.Reward;
 import java.util.Map;
 
 /**
@@ -9,16 +10,16 @@ import java.util.Map;
  */
 public class LottoResultDto {
 
-    private final Map<Integer, Integer> matchCountMap;
+    private final Map<Reward, Integer> matchCountMap;
     private final float earnRate;
 
-    public LottoResultDto(Map<Integer, Integer> matchCountMap, float earnRate) {
+    public LottoResultDto(Map<Reward, Integer> matchCountMap, float earnRate) {
         this.matchCountMap = matchCountMap;
         this.earnRate = earnRate;
     }
 
-    public int getCountByMatchCount(int matchCount) {
-        return matchCountMap.getOrDefault(matchCount, 0);
+    public int getCountByMatchCount(Reward reward) {
+        return matchCountMap.getOrDefault(reward, 0);
     }
 
     public float getEarnRate() {
@@ -28,7 +29,7 @@ public class LottoResultDto {
 
     public static final class LottoResultDtoBuilder {
 
-        private Map<Integer, Integer> matchCountMap;
+        private Map<Reward, Integer> matchCountMap;
         private float earnRate;
 
         private LottoResultDtoBuilder() {
@@ -38,7 +39,7 @@ public class LottoResultDto {
             return new LottoResultDtoBuilder();
         }
 
-        public LottoResultDtoBuilder matchCountMap(Map<Integer, Integer> matchCountMap) {
+        public LottoResultDtoBuilder matchCountMap(Map<Reward, Integer> matchCountMap) {
             this.matchCountMap = matchCountMap;
             return this;
         }

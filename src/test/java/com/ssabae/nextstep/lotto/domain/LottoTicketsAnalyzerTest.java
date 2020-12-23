@@ -23,29 +23,31 @@ class LottoTicketsAnalyzerTest {
 
     @Test
     void analyzerTest() {
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoTickets dummyLottoTickets = getDummyLottoTickets();
         LottoResult lottoResult = analyzer.analyze(dummyLottoTickets, winningNumber);
         assertAll(
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(6, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(5, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(4, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(3, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(2, 0)).isEqualTo(1)
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FIRST, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.SECOND, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.THIRD, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FOURTH, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FIFTH, 0)).isEqualTo(1),
+                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.NONE, 0)).isEqualTo(1)
         );
     }
 
     private LottoTickets getDummyLottoTickets() {
         List<LottoTicket> dummyLottoTicketList = getDummyLottoTicketList();
-        return new LottoTickets(dummyLottoTicketList);
+        return LottoTickets.of(dummyLottoTicketList);
     }
 
     private List<LottoTicket> getDummyLottoTicketList() {
         List<LottoTicket> dummyLottoTicketList = new ArrayList<>();
         dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 1, 2, 3, 4, 5, 6 }));  // FIRST
-        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 2, 3, 4, 5, 6, 7 }));  // SECOND
-        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 3, 4, 5, 6, 7, 8 }));  // THIRD
-        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 4, 5, 6, 7, 8, 9 }));  // FOURTH
+        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 1, 2, 3, 4, 5, 7 }));  // SECONDS
+        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 2, 3, 4, 5, 6, 8 }));  // THIRD
+        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 3, 4, 5, 6, 7, 8 }));  // FOURTH
+        dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 4, 5, 6, 7, 8, 9 }));  // FIFTH
         dummyLottoTicketList.add(generateLottoTicketByIntArray(new int[]{ 5, 6, 7, 8, 9, 10 })); // NONE
         return dummyLottoTicketList;
     }

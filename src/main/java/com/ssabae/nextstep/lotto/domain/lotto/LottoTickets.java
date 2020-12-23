@@ -12,7 +12,11 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    public static LottoTickets of(List<LottoTicket> lottoTickets) {
+        return new LottoTickets(lottoTickets);
+    }
+
+    private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 

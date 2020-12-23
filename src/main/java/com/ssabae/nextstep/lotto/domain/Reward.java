@@ -9,20 +9,23 @@ import java.util.Arrays;
  */
 public enum Reward {
 
-    NONE  (0, Money.won(0L), false),
-    FOURTH(3, Money.won(5_000L), true),
-    THIRD (4, Money.won(50_000L), true),
-    SECOND(5, Money.won(1_500_000L), true),
-    FIRST (6, Money.won(2_000_000_000L), true);
+    FIRST (6, false, true,  Money.won(2_000_000_000L)),
+    SECOND(5, true,  true,  Money.won(30_000_000L)),
+    THIRD (5, false, true,  Money.won(1_500_000L)),
+    FOURTH(4, false, true,  Money.won(50_000L)),
+    FIFTH (3, false, true,  Money.won(5_000L)),
+    NONE  (0, false, false, Money.won(0L));
 
     private final int countOfMatch;
+    private final boolean conditionOfMatchBonus;
     private final Money winningMoney;
     private final boolean report;
 
-    Reward(int countOfMatch, Money winningMoney, boolean report) {
+    Reward(int countOfMatch, boolean conditionOfMatchBonus, boolean report, Money winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
+        this.conditionOfMatchBonus = conditionOfMatchBonus;
         this.report = report;
+        this.winningMoney = winningMoney;
     }
 
     public int getCountOfMatch() {
@@ -31,6 +34,10 @@ public enum Reward {
 
     public Money getWinningMoney() {
         return winningMoney;
+    }
+
+    public boolean isConditionOfMatchBonus() {
+        return conditionOfMatchBonus;
     }
 
     public boolean isReport() {
@@ -51,6 +58,18 @@ public enum Reward {
                 .toArray(Reward[]::new);
     }
 
+    public static Reward matchingToReward(int matchCount, boolean matchBonus) {
+        return Arrays.stream(values())
+                .filter(reward -> match(reward, matchCount, matchBonus))
+                .findFirst()
+                .orElse(NONE);
+    }
 
-
+    private static boolean match(Reward reward, int matchCount, boolean matchBonus) {
+        if (reward.conditionOfMatchBonus) {
+            return (reward.countOfMatch == matchCount)
+                    && (reward.conditionOfMatchBonus == matchBonus);
+        }
+        return reward.countOfMatch == matchCount;
+    }
 }
