@@ -6,6 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+	private static final String STRING_DELIMITER_REGEX = "[,:]";
+	private static final String CUSTOM_DELIMITER_PATTERN_REGEX = "//(.)\n(.*)";
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN_REGEX);
+	private static final String EMPTY_STRING = "";
+
 	public static int splitAndSum(String text) {
 		if (isEmpty(text)) {
 			return 0;
@@ -23,21 +28,27 @@ public class StringAddCalculator {
 	private static String[] split(String text) {
 		String[] splitString = splitByCustomDelimiter(text);
 
-		if (Objects.isNull(splitString)) {
-			splitString = text.split("[,:]");
+		if (isEmptyArray(splitString)) {
+			splitString = text.split(STRING_DELIMITER_REGEX);
 		}
 
 		return splitString;
 	}
 
 	private static String[] splitByCustomDelimiter(String text) {
-		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
-			return matcher.group(2).split(customDelimiter);
+			String targetString = matcher.group(2);
+
+			return targetString.split(customDelimiter);
 		}
 
-		return null;
+		return new String[0];
+	}
+
+	private static boolean isEmptyArray(String[] strings) {
+		return strings.length == 0;
 	}
 
 	private static int sum(String[] numbers) {
@@ -49,7 +60,7 @@ public class StringAddCalculator {
 	private static int parseValidInt(String text) {
 		int number = parseInt(text);
 
-		validateNumber(number);
+		validatePositiveNumber(number);
 
 		return number;
 	}
@@ -62,7 +73,7 @@ public class StringAddCalculator {
 		}
 	}
 
-	private static void validateNumber(int number) {
+	private static void validatePositiveNumber(int number) {
 		if (number < 0) {
 			throw new IllegalArgumentException("양수만 입력 가능합니다.");
 		}
