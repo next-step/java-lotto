@@ -12,7 +12,10 @@ public class LottosTest {
     @Test
     @DisplayName("당첨 통계 계산하기")
     void makeStatistic() {
-        LottoNumbers numbers = new LottoNumbers(new Integer[]{1, 2, 3, 4, 5, 6});
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+        );
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(numbers, 0), new Lotto(numbers, 1), new Lotto(numbers, 2),
                 new Lotto(numbers, 3), new Lotto(numbers, 3),

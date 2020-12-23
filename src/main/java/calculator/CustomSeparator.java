@@ -21,8 +21,8 @@ public class CustomSeparator implements Separator {
     }
 
     @Override
-    public Pattern getSeparatorPattern() {
-        return SEPARATOR_PATTERN;
+    public boolean match(String text) {
+        return SEPARATOR_PATTERN.matcher(text).matches();
     }
 
 }

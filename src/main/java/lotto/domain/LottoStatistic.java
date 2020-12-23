@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,6 +15,12 @@ public class LottoStatistic {
         this.statistic = statistic;
     }
 
+    public double calculateProfit(long amount) {
+        BigDecimal total = new BigDecimal(sumPrizeAmount());
+        BigDecimal purchase = new BigDecimal(amount);
+        return total.divide(purchase, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+
     private int sumPrizeAmount() {
         int sum = 0;
         for (LottoRank rank : statistic.keySet()) {
@@ -21,19 +29,15 @@ public class LottoStatistic {
         return sum;
     }
 
-    public double calculateProfit(int amount) {
-        BigDecimal total = new BigDecimal(sumPrizeAmount());
-        BigDecimal purchase = new BigDecimal(amount);
-        return total.divide(purchase, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
-    }
-
-    public void print() {
+    public List<String> toFormattingStringList() {
+        List<String> formattingString = new ArrayList<>();
         for (LottoRank rank : statistic.keySet()) {
-            System.out.printf("%d개 일치 (%d) - %d개%n",
+            formattingString.add(String.format("%d개 일치 (%d) - %d개%n",
                     rank.getMatchingCount(),
                     rank.getPrize(),
-                    statistic.get(rank));
+                    statistic.get(rank)));
         }
+        return formattingString;
     }
 
     @Override

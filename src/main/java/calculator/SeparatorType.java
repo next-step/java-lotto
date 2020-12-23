@@ -18,9 +18,7 @@ public enum SeparatorType {
 
     public static SeparatorType findByInputText(InputText inputText) {
         return Arrays.stream(values())
-                .filter(type -> type.separator.getSeparatorPattern()
-                        .matcher(inputText.getText())
-                        .matches())
+                .filter(type -> type.separator.match(inputText.getText()))
                 .findAny()
                 .orElse(DEFAULT);
     }

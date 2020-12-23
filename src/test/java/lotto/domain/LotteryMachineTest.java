@@ -19,7 +19,7 @@ class LotteryMachineTest {
     void issueAutomaticLotto() {
         int lottoCount = 14;
         Lottos actual = LotteryMachine.issueAutomaticLotto(lottoCount);
-        assertThat(actual.getLottoList().size()).isEqualTo(lottoCount);
+        assertThat(actual.getLottoListSize()).isEqualTo(lottoCount);
     }
 
 }
