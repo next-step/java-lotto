@@ -16,28 +16,6 @@ public class LottoController {
 		return LottoNumbers.isValid(numbers);
 	}
 
-	public void play() {
-		Money money = new Money(InputView.inputMoney());
-		int numberOfManual = InputView.inputManualPurchaseNumber();
-		money.purchaseLotto(numberOfManual);
-		List<List<Integer>> manualNumbersList = InputView.inputManualNumbersList(numberOfManual);
-
-		int numberOfPurchase = money.howManyPurchase();
-
-		ResultView.printHowManyPurchase(manualNumbersList.size(), numberOfPurchase);
-
-		List<List<Integer>> purchasedLottoNumbersList = NumberUtil.getRandomLottoNumbersList(numberOfPurchase);
-		ResultView.printLottos(purchasedLottoNumbersList);
-
-		List<Integer> winningNumbers = InputView.inputWinningNumbers();
-		int bonusNumber = InputView.inputBonusNumber();
-		LottoGame lottoGame = new LottoGame(purchasedLottoNumbersList, winningNumbers, bonusNumber);
-		LottoGameResult lottoGameResult = lottoGame.getResult();
-
-		ResultView.printWinningStatistics(lottoGameResult.getResultMap());
-		ResultView.printProfitRatio(lottoGameResult.getProfitRatio());
-	}
-
 	public void playUntilNoError() {
 		try {
 			play();
@@ -45,5 +23,38 @@ public class LottoController {
 			ResultView.printError(ex.getMessage());
 			playUntilNoError();
 		}
+	}
+
+	public void play() {
+		Money money = new Money(InputView.inputMoney());
+		List<List<Integer>> lottoNumbersList = getLottoNumbersList(money);
+
+		LottoGame lottoGame = new LottoGame(
+			lottoNumbersList,
+			InputView.inputWinningNumbers(),
+			InputView.inputBonusNumber());
+
+		LottoGameResult lottoGameResult = lottoGame.getResult();
+		ResultView.printWinningStatistics(lottoGameResult.getResultMap());
+		ResultView.printProfitRatio(lottoGameResult.getProfitRatio());
+	}
+
+	private List<List<Integer>> getLottoNumbersList(Money money) {
+		List<List<Integer>> manualNumbersList = inputManualNumbersList(money);
+		List<List<Integer>> autoNumbersList = generateAutoNumbersList(money);
+		ResultView.printHowManyPurchase(manualNumbersList.size(), autoNumbersList.size());
+		manualNumbersList.addAll(autoNumbersList);
+		ResultView.printLottos(manualNumbersList);
+		return manualNumbersList;
+	}
+
+	private List<List<Integer>> inputManualNumbersList(Money money) {
+		int numberOfManual = InputView.inputManualPurchaseNumber();
+		money.purchaseLotto(numberOfManual);
+		return InputView.inputManualNumbersList(numberOfManual);
+	}
+
+	private List<List<Integer>> generateAutoNumbersList(Money money) {
+		return NumberUtil.getRandomLottoNumbersList(money.howManyPurchase());
 	}
 }
