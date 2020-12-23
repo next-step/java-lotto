@@ -29,7 +29,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("총 수익금액을 계산한다.")
     void getTotalPrize() {
-        assertThat(lottoResult.getTotalPrize()).isEqualTo(2031555000);
+        assertThat(lottoResult.getTotalPrize()).isEqualTo(2_031_555_000);
     }
 
     @Test
@@ -41,6 +41,6 @@ public class LottoResultTest {
     @Test
     @DisplayName("구매금액을 입력받아 수익률을 계산한다.")
     void getYield() {
-        assertThat(lottoResult.getYield(5000)).isEqualTo(406311);
+        assertThat(lottoResult.getYield(5000)).isEqualTo(406_311);
     }
 }
