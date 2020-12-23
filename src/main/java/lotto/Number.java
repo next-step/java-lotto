@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Number implements Comparable<Number> {
 
+    public static final int LOTTO_NUMBER_MINIMUM = 1;
+    public static final int LOTTO_NUMBER_MAXIMUM = 45;
     private final int value;
 
     private Number(int value) {
@@ -11,11 +13,11 @@ public class Number implements Comparable<Number> {
     }
 
     public static Number newNumber(int value) {
-        if (value > LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM) {
+        if (value > LOTTO_NUMBER_MAXIMUM) {
             throw new IllegalArgumentException("로또 번호는 45보다 클 수 없습니다.");
         }
 
-        if (value < LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM) {
+        if (value < LOTTO_NUMBER_MINIMUM) {
             throw new IllegalArgumentException("로또 번호는 1보다 작을 수 없습니다.");
         }
 

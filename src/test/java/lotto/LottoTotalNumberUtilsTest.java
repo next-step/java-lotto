@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +21,7 @@ class LottoTotalNumberUtilsTest {
         int size = lottoTotalNumbers.size();
 
         // then
-        assertThat(size).isEqualTo(LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM);
+        assertThat(size).isEqualTo(Number.LOTTO_NUMBER_MAXIMUM);
     }
 
     @DisplayName(value = "로또를 선택하기 위한 1 ~ 45의 숫자가 모두 있는지 확인")
@@ -34,7 +33,7 @@ class LottoTotalNumberUtilsTest {
 
         // when
         List<Number> expected = new ArrayList<>();
-        for (int i = LottoTotalNumberUtils.LOTTO_NUMBER_MINIMUM; i <= LottoTotalNumberUtils.LOTTO_NUMBER_MAXIMUM; i++) {
+        for (int i = Number.LOTTO_NUMBER_MINIMUM; i <= Number.LOTTO_NUMBER_MAXIMUM; i++) {
             expected.add(Number.newNumber(i));
         }
 
