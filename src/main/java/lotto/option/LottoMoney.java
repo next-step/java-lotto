@@ -27,7 +27,7 @@ public class LottoMoney {
 		return this.money / LOTTO_PRICE;
 	}
 
-	public double divideByThis(long x) {
-		return (double) x / this.money;
+	public double divideByThis(long firstOperand) {
+		return (double) firstOperand / this.money;
 	}
 }

@@ -23,7 +23,7 @@ public class LottoTicket {
 
 	private static void validate(List<LottoNumbers> autoNumbers, List<LottoNumbers> manualNumbers)
 			throws IllegalArgumentException {
-		if (autoNumbers.size() + manualNumbers.size() == 0) {
+		if (autoNumbers.isEmpty() && manualNumbers.isEmpty()) {
 			throw new IllegalArgumentException(VALIDATE_FAIL_MSG);
 		}
 	}
