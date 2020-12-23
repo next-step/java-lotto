@@ -24,7 +24,7 @@ public class LottoController {
 
 		int numberOfPurchase = money.howManyPurchase();
 
-		ResultView.printHowManyPurchase(numberOfPurchase);
+		ResultView.printHowManyPurchase(manualNumbersList.size(), numberOfPurchase);
 
 		List<List<Integer>> purchasedLottoNumbersList = NumberUtil.getRandomLottoNumbersList(numberOfPurchase);
 		ResultView.printLottos(purchasedLottoNumbersList);

@@ -11,8 +11,8 @@ public class ResultView {
 	private ResultView() {
 	}
 
-	public static void printHowManyPurchase(int number) {
-		System.out.println(number + "개를 구매했습니다.");
+	public static void printHowManyPurchase(int manual, int auto) {
+		System.out.println("수동으로 " + manual + "장, 자동으로 " + auto + "개를 구매했습니다.");
 	}
 
 	public static void printLottos(List<List<Integer>> lottos) {
