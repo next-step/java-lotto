@@ -8,7 +8,9 @@ import com.ssabae.nextstep.lotto.domain.lotto.LottoTicket;
 import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
@@ -26,13 +28,14 @@ class LottoTicketsAnalyzerTest {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoTickets dummyLottoTickets = getDummyLottoTickets();
         LottoResult lottoResult = analyzer.analyze(dummyLottoTickets, winningNumber);
+        Map<Reward, Integer> matchCountMap = lottoResult.getMatchCountMap();
         assertAll(
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FIRST, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.SECOND, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.THIRD, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FOURTH, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.FIFTH, 0)).isEqualTo(1),
-                () -> assertThat(lottoResult.getMatchCountMap().getOrDefault(Reward.NONE, 0)).isEqualTo(1)
+                () -> assertThat(matchCountMap.getOrDefault(Reward.FIRST, 0)).isEqualTo(1),
+                () -> assertThat(matchCountMap.getOrDefault(Reward.SECOND, 0)).isEqualTo(1),
+                () -> assertThat(matchCountMap.getOrDefault(Reward.THIRD, 0)).isEqualTo(1),
+                () -> assertThat(matchCountMap.getOrDefault(Reward.FOURTH, 0)).isEqualTo(1),
+                () -> assertThat(matchCountMap.getOrDefault(Reward.FIFTH, 0)).isEqualTo(1),
+                () -> assertThat(matchCountMap.getOrDefault(Reward.NONE, 0)).isEqualTo(1)
         );
     }
 
