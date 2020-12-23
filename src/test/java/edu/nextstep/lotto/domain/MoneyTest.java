@@ -34,10 +34,18 @@ class MoneyTest {
 		assertThat(new Money(money).howManyPurchase()).isEqualTo(expected);
 	}
 
-	@DisplayName("hasEnoughToPurchase: 현재 구입금액에서 수동으로 구매할 로또 수만큼 지불이 가능하면 true, 불가하면 false를 리턴함.")
-	@ParameterizedTest
-	@CsvSource(value = {"10000,5,true", "100,1,false", "10500,11,false"})
-	void hasEnoughToPurchase(int money, int number, boolean expected) {
-		assertThat(new Money(money).hasEnoughToPurchase(number)).isEqualTo(expected);
+	@DisplayName("purchaseLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하여 money를 차감함")
+	@Test
+	void purchaseLotto() {
+		Money money = new Money(2000);
+		money.purchaseLotto(1);
+		assertThat(money).hasFieldOrPropertyWithValue("money", 1000);
+	}
+
+	@DisplayName("purchaseLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하기에 충분치 않으면 예외 발생")
+	@Test
+	void purchaseLotto_shouldException() {
+		assertThatThrownBy(() -> new Money(2000).purchaseLotto(3))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
