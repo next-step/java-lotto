@@ -3,6 +3,7 @@ package edu.nextstep.lotto.view;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import edu.nextstep.lotto.domain.sub.LottoRank;
 
@@ -16,7 +17,11 @@ public class ResultView {
 	}
 
 	public static void printLottos(List<List<Integer>> lottos) {
-		lottos.forEach(System.out::println);
+		lottos.stream()
+			.map(lists -> lists.stream()
+				.sorted()
+				.collect(Collectors.toList()))
+			.forEach(System.out::println);
 		System.out.println();
 	}
 
