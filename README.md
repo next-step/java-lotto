@@ -9,10 +9,12 @@
 ### 모델링
 ##### InputView
 * 구입금액 입력
+* 구매할 수동 로또 장 수 입력
+* 수동 로또 번호 입력(구매한 장 수 만큼)
 * 지난주 당첨번호 입력
 * 보너스 볼 입력
 
-##### LottoTicketFactory
+##### AutoLottoTicketFactory
 * 랜덤으로 LottoNumber 6개 뽑는다
     * Collections.shuffle() 사용
 
@@ -37,7 +39,7 @@
 * 지급한 금액만큼 LottoTicket 여러 장 발급
 
 ##### LottoGame
-* 지난주 당첨번호(보너스 볼도 포함)와 발급한 로또 번호들 모두 비교
+* 지난주 당첨번호(보너스 볼도 포함)와 발급한 로또 번호(수동, 자동)들 모두 비교
 
 ##### Money
 * 발급할 LottoTicket 갯수 계산
@@ -52,6 +54,9 @@
 * 5개 일치하고 보너스 볼도 일치하면 30000000원
 * 6개 일치하면 2000000000원
 * 5개 일치 & 보너스 볼 일치 여부에 따라 2등,3등 판단.
+
+##### LottoResult
+* 모든 LottoTicket 비교한 결과값 저장
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

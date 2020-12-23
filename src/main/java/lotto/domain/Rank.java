@@ -33,6 +33,10 @@ public enum Rank {
         return winningMoney * num;
     }
 
+    public boolean isEqual(Rank rank) {
+        return this == rank;
+    }
+
     private static boolean isEqualCountOfMatch(Rank rank, int countOfMatch) {
         return rank.countOfMatch == countOfMatch;
     }

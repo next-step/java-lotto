@@ -3,13 +3,13 @@ package lotto.domain;
 import lotto.domain.numbers.LottoNumber;
 import lotto.domain.numbers.LottoTicket;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoTicketFactory {
+public class AutoLottoTicketFactory {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private static final int SPLIT_START_INDEX = 0;
@@ -17,13 +17,14 @@ public class LottoTicketFactory {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicketFactory() {
-        this.lottoNumbers = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+    public AutoLottoTicketFactory() {
+        this.lottoNumbers = new ArrayList<>();
+        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+            lottoNumbers.add(LottoNumber.of(number));
+        }
     }
 
-    public LottoTicket makeLottoTicket() {
+    public LottoTicket makeAutoLottoTicket() {
         Collections.shuffle(lottoNumbers);
         return new LottoTicket(splitAndSortNumbers());
     }
@@ -33,9 +34,5 @@ public class LottoTicketFactory {
                 .stream()
                 .sorted(Comparator.comparing(LottoNumber::getValue))
                 .collect(Collectors.toList());
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 }

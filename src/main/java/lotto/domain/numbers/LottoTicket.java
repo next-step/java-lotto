@@ -18,7 +18,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank matchWinningLottoNumbers(final WinningLottoTicket winningLottoTicket) {
+    public Rank matchWinningLotto(final WinningLottoTicket winningLottoTicket) {
         return Rank.valueOf(calculateMatchCount(winningLottoTicket), isMatchBonusNumber(winningLottoTicket));
     }
 
