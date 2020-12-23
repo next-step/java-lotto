@@ -2,7 +2,6 @@ package step2.domain;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public enum LottoTier {
     FIRST(6, 2_000_000_000, (matchingCount, isMatchBonus) -> matchingCount == 6),
