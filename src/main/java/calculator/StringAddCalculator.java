@@ -11,7 +11,7 @@ public class StringAddCalculator {
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_PATTERN_REGEX);
 	private static final String EMPTY_STRING = "";
 
-	public static int splitAndSum(String text) {
+  public static int splitAndSum(String text) {
 		if (isEmpty(text)) {
 			return 0;
 		}
