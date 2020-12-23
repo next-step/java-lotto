@@ -8,7 +8,10 @@ import static com.monds.nextstep.lotto.view.LottoResultView.printLottos;
 
 public class LottoMain {
     public static void main(String[] args) {
-        Lottos lottos = LottoMachine.purchase(purchaseAmount());
+        Lottos lottos = new Lottos.Builder(purchaseAmount())
+                .ifBuyManual(manualLottoCount(), manualLottos())
+                .build();
+
         printLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(

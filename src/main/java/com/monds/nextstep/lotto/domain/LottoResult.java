@@ -10,7 +10,7 @@ public class LottoResult {
     private final Map<LottoRanking, Integer> countByRanking;
 
     public LottoResult(int lottoCount, Map<LottoRanking, Integer> countByRanking) {
-        purchaseAmount = LottoMachine.calculateHowMuch(lottoCount);
+        purchaseAmount = Lottos.calculateHowMuch(lottoCount);
         this.countByRanking = countByRanking;
     }
 
