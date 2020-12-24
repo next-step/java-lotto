@@ -17,21 +17,26 @@ public class Lotto {
 
 	private final List<LottoNumber> lotto;
 
-	public Lotto() {
-		this(generateRandomLotto());
+	private Lotto(List<LottoNumber> manualLotto) {
+		this.lotto = manualLotto;
 	}
 
-	public Lotto(List<LottoNumber> manualLotto) {
-		this.lotto = manualLotto;
+	public static Lotto generateManualLotto(String userInputLotto) {
+		validationWinnerLotto(userInputLotto);
+		return new Lotto(generateUserLotto(userInputLotto));
+	}
+
+	public static Lotto generateRandomLotto() {
+		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
+		Collections.sort(resultLotto);
+
+		return new Lotto(resultLotto.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
 	}
 
 	public List<LottoNumber> getLotto() {
 		return this.lotto;
-	}
-
-	public static Lotto generateLotto(String userInputLotto) {
-		validationWinnerLotto(userInputLotto);
-		return new Lotto(generateUserLotto(userInputLotto));
 	}
 
 	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
@@ -61,15 +66,6 @@ public class Lotto {
 		if (new HashSet<>(inputStr).size() != LOTTO_REQUIRED_COUNT) {
 			throw new IllegalArgumentException();
 		}
-	}
-
-	private static List<LottoNumber> generateRandomLotto() {
-		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
-		Collections.sort(resultLotto);
-
-		return resultLotto.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
 	}
 
 	private static Set<Integer> getRandomSet() {
