@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private static final int MINIMUM_INPUT_MONEY = 1_000;
     public static final String MONEY_IS_LESS_THAN_1000 = "구입 금액은 최소 1000원이어야 합니다.";
 
     private List<Lottery> lotteryList;
