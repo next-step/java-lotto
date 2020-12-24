@@ -27,26 +27,12 @@ public class InputView {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 
         String inputNumber = scanner.nextLine();
-        scanner.close();
 
         String[] inputNumberArray = inputNumber.split(SEPARATOR);
-        inputNumberValid(inputNumberArray);
 
         return Arrays.stream(inputNumberArray)
                 .mapToInt(str -> Integer.parseInt(str.trim()))
                 .boxed()
                 .collect(Collectors.toList());
-    }
-
-    private void inputNumberValid(String[] inputNumberArray) {
-        if(inputNumberArray.length != 6) {
-            throw new IllegalArgumentException("\n 6자리의 숫자를 입력해주세요.");
-        }
-
-        for (String number : inputNumberArray) {
-            if (Integer.parseInt(number) < 0 || Integer.parseInt(number) > 45) {
-                throw new IllegalArgumentException("0보다 크고 46보다 작은 수를 입력해주세요.");
-            }
-        }
     }
 }
