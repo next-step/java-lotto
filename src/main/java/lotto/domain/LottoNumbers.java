@@ -2,24 +2,26 @@ package lotto.domain;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoNumbers {
-	private static final int LOTTO_NUMBER_SIZE = 6;
+	protected static final int LOTTO_NUMBER_SIZE = 6;
 
-	private final Set<LottoNumber> lottoNumbers;
+	private final List<LottoNumber> lottoNumbers;
 
-	private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+	private LottoNumbers(List<LottoNumber> lottoNumbers) {
+		validateDuplicate(lottoNumbers);
 		validateSize(lottoNumbers);
-		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
-	private static void validateSize(Collection<?> lottoNumbers) {
+	private void validateSize(List<LottoNumber> lottoNumbers) {
 		if (Objects.isNull(lottoNumbers) || lottoNumbers.isEmpty()) {
 			throw new IllegalArgumentException("로또 숫자가 없습니다.");
 		}
@@ -28,31 +30,29 @@ public class LottoNumbers {
 		}
 	}
 
-	public static LottoNumbers of(List<Integer> numbers) {
-		validateSize(numbers);
-		validateDuplicate(numbers);
-
-		return numbers.stream()
-			.map(LottoNumber::of)
-			.collect(collectingAndThen(toSet(), LottoNumbers::new));
-	}
-
-	private static void validateDuplicate(List<Integer> lottoNumbers) {
+	private void validateDuplicate(List<LottoNumber> lottoNumbers) {
 		if (new HashSet<>(lottoNumbers).size() < lottoNumbers.size()) {
 			throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
 		}
 	}
 
-	public static LottoNumbers createRandom() {
-		return new LottoNumbers(extractNumbers());
+	public static LottoNumbers of(List<Integer> numbers) {
+		return Optional.ofNullable(numbers)
+			.orElseGet(Collections::emptyList).stream()
+			.map(LottoNumber::of)
+			.collect(collectingAndThen(toList(), LottoNumbers::new));
 	}
 
-	private static Set<LottoNumber> extractNumbers() {
+	public static LottoNumbers createRandom() {
+		return new LottoNumbers(createRandomNumbers());
+	}
+
+	private static List<LottoNumber> createRandomNumbers() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		while (lottoNumbers.size() < LOTTO_NUMBER_SIZE) {
 			lottoNumbers.add(LottoNumber.createRandom());
 		}
-		return lottoNumbers;
+		return new ArrayList<>(lottoNumbers);
 	}
 
 	public boolean isSameNumbers(List<Integer> numbers) {
@@ -63,6 +63,12 @@ public class LottoNumbers {
 		return (int) this.lottoNumbers.stream()
 			.filter(lottoNumbers.lottoNumbers::contains)
 			.count();
+	}
+
+	public int get(int index) {
+		List<LottoNumber> sortedLottoNumbers = new ArrayList<>(this.lottoNumbers);
+		LottoNumber lottoNumber = sortedLottoNumbers.get(index);
+		return lottoNumber.getNumber();
 	}
 
 	@Override

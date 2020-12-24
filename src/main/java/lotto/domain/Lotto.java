@@ -28,4 +28,12 @@ public class Lotto {
 	public boolean isSameLottoNumbers(List<Integer> numbers) {
 		return lottoNumbers.isSameNumbers(numbers);
 	}
+
+	public int getNumber(int index) {
+		return lottoNumbers.get(index);
+	}
+
+	public int size() {
+		return LottoNumbers.LOTTO_NUMBER_SIZE;
+	}
 }

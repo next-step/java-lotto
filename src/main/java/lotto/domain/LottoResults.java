@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public class LottoResults {
 	private final List<LottoResult> lottoResults;
 
 	private LottoResults(List<LottoResult> lottoResults) {
-		this.lottoResults = lottoResults;
+		this.lottoResults = Collections.unmodifiableList(lottoResults);
 	}
 
 	public static LottoResults of(List<LottoResult> lottoResults) {
@@ -19,6 +20,17 @@ public class LottoResults {
 			.map(LottoResult::getMoney)
 			.reduce(0, ((partialResult, money2) -> money2.sum(partialResult)), Integer::sum);
 		return Money.of(sum);
+	}
+
+	public double calculateReturnRate(int money) {
+		ReturnRate returnRate = ReturnRate.calculate(money, this);
+		return returnRate.get();
+	}
+
+	public int count(LottoResult lottoResult) {
+		return (int) lottoResults.stream()
+			.filter(lottoResult::equals)
+			.count();
 	}
 
 	@Override

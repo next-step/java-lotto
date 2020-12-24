@@ -38,6 +38,10 @@ public class LottoNumber {
 		return this.number == number;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

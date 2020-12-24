@@ -31,7 +31,7 @@ public class ReturnRateTest {
 		return Stream.of(
 			Arguments.of(2_000, Collections.singletonList(LottoResult.FIRST),
 				1_000_000),
-			Arguments.of(500_500, Arrays.asList(LottoResult.THIRD, LottoResult.FOURTH),
+			Arguments.of(500_500, Arrays.asList(LottoResult.NONE, LottoResult.THIRD, LottoResult.FOURTH),
 				0.11),
 			Arguments.of(15_000, Collections.singletonList(LottoResult.FOURTH),
 				0.33)

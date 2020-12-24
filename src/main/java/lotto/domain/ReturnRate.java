@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ReturnRate {
 	private static final double MIN_VALUE = 0;
-	private static final int ROUND_POSITION = 100;
+	private static final double ROUND_POSITION = 100;
 
 	private final double returnRate;
 
@@ -14,7 +14,7 @@ public class ReturnRate {
 	}
 
 	private double round(double returnRate) {
-		return (double) Math.round(returnRate * ROUND_POSITION / ROUND_POSITION);
+		return (double) Math.round(returnRate * ROUND_POSITION) / ROUND_POSITION;
 	}
 
 	private void validate(double returnRate) {
@@ -31,6 +31,10 @@ public class ReturnRate {
 		Money sumMoney = lottoResults.sumResultMoney();
 		Money purchaseMoney = Money.of(moneyAmount);
 		return new ReturnRate(sumMoney.divide(purchaseMoney));
+	}
+
+	protected double get() {
+		return returnRate;
 	}
 
 	@Override
