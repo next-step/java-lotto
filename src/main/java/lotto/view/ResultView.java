@@ -13,7 +13,7 @@ public class ResultView {
         System.out.println(request.getTotalAmount() + "개를 구매했습니다.");
 
         for (LottoNumbers lotto : request.getLotto()) {
-            System.out.println(lotto.getLottoNumbers());
+            System.out.println(lotto.convertLottoNumbers());
         }
     }
 

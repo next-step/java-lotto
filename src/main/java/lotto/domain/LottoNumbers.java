@@ -16,7 +16,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> convertLottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());

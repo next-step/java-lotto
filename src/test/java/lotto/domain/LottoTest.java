@@ -15,6 +15,7 @@ class LottoTest {
     List<Integer> list2 = new ArrayList<>();
     List<Integer> target = new ArrayList<>();
     LottoNumbers lottoNumbers;
+
     @BeforeEach
     void setup() {
         list.add(1);
@@ -44,7 +45,7 @@ class LottoTest {
         matchOf.add(Match.getMatchInfo(5));
         matchOf.add(Match.getMatchInfo(3));
 
-        assertThat(lotto.getMatch(lottoNumbers.getLottoNumbers())).isEqualTo(matchOf);
+        assertThat(lotto.getMatch(lottoNumbers.convertLottoNumbers())).isEqualTo(matchOf);
     }
 
     @Test
