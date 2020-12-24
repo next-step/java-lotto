@@ -15,10 +15,18 @@ public class Request {
     private final Lotto lotto = new Lotto();
 
     public Request(int money) {
+        checkMoney(money);
+
         this.money = money;
         this.totalAmount = money / PER_PRICE;
 
         makeAmountLottoNumbers();
+    }
+
+    private void checkMoney(int money) {
+        if(money % 1000 > 0 ) {
+            throw new IllegalArgumentException("천원 단위로 입력해주세요.");
+        }
     }
 
     private void makeAmountLottoNumbers() {
