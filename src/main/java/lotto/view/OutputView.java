@@ -15,7 +15,7 @@ public class OutputView {
     }
 
     public void printLottos(Lottos lottos) {
-        lottos.print();
+        lottos.toStringLottos().forEach(System.out::println);
         System.out.println();
     }
 
@@ -23,10 +23,11 @@ public class OutputView {
         System.out.println();
         printMessage("당첨 통계");
         printMessage("---------");
-        statistic.print();
+        statistic.toFormattingStringList().forEach(System.out::println);
     }
 
     public void printProfit(Profit profit) {
-        profit.print();
+        System.out.println(profit.toFormattingSting());
     }
+
 }

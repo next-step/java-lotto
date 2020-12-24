@@ -1,39 +1,38 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoStatistic {
 
     private static final int DIVIDE_SCALE = 2;
-    private final Map<LottoRank, Integer> statistic;
+    private final SortedMap<LottoRank, Integer> statistic;
 
-    public LottoStatistic(Map<LottoRank, Integer> statistic) {
+    public LottoStatistic(SortedMap<LottoRank, Integer> statistic) {
         this.statistic = statistic;
     }
 
-    private int sumPrizeAmount() {
-        int sum = 0;
+    public double calculateProfit(long amount) {
+        BigDecimal total = new BigDecimal(sumPrizeAmount());
+        BigDecimal purchase = new BigDecimal(amount);
+        return total.divide(purchase, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+
+    private long sumPrizeAmount() {
+        long sum = 0L;
         for (LottoRank rank : statistic.keySet()) {
             sum += rank.getPrize() * statistic.get(rank);
         }
         return sum;
     }
 
-    public double calculateProfit(int amount) {
-        BigDecimal total = new BigDecimal(sumPrizeAmount());
-        BigDecimal purchase = new BigDecimal(amount);
-        return total.divide(purchase, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
-    }
-
-    public void print() {
+    public List<String> toFormattingStringList() {
+        List<String> formattingString = new ArrayList<>();
         for (LottoRank rank : statistic.keySet()) {
-            System.out.printf("%d개 일치 (%d) - %d개%n",
-                    rank.getMatchingCount(),
-                    rank.getPrize(),
-                    statistic.get(rank));
+            formattingString.add(String.format("%d개 일치 %s(%d) - %d개",
+                    rank.getMatchingCount(), rank.getComment(), rank.getPrize(), statistic.get(rank)));
         }
+        return formattingString;
     }
 
     @Override

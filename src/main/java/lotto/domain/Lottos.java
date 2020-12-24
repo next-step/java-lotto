@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+        this.lottoList = Collections.unmodifiableList(lottoList);
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public int getLottoListSize() {
+        return lottoList.size();
     }
 
     public void drawLottos(Lotto luckyLotto) {
@@ -22,20 +21,31 @@ public class Lottos {
         }
     }
 
-    public LottoStatistic makeStatistic() {
-        Map<LottoRank, Integer> lottoStatisticMap = new HashMap<>();
+    public LottoStatistic makeStatistic(LottoNumber bonusNumber) {
+        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
         for (Lotto lotto : lottoList) {
-            LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
-            if (lottoStatisticMap.containsKey(rank)) {
-                lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
-                continue;
-            }
-            lottoStatisticMap.put(rank, 1);
+            boolean matchBonus = lotto.drawBonus(bonusNumber);
+            //LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
+            LottoRank rank = LottoRank.valueOf(lotto.getMatchingCount(), matchBonus);
+            putLottoStatisticMap(lottoStatisticMap, rank);
         }
         return new LottoStatistic(lottoStatisticMap);
     }
 
-    public void print() {
-        lottoList.forEach(Lotto::print);
+    private void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
+        if (rank.equals(LottoRank.MISS))
+            return;
+        if (lottoStatisticMap.containsKey(rank)) {
+            lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
+            return;
+        }
+        lottoStatisticMap.put(rank, 1);
     }
+
+    public List<String> toStringLottos() {
+        return lottoList.stream()
+                .map(Lotto::toStringNumbers)
+                .collect(Collectors.toList());
+    }
+
 }

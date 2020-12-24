@@ -15,8 +15,8 @@ public class Profit {
         }
     }
 
-    public void print() {
-        System.out.printf("총 수익률은 %1.2f입니다.(%s)%n", ratio, profitText);
+    public String toFormattingSting() {
+        return String.format("총 수익률은 %1.2f입니다.(%s)%n", ratio, profitText);
     }
 
 }
