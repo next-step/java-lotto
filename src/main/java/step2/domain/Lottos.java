@@ -14,11 +14,11 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Integer getLottoCountByTier(LottoTier targetTier, Lotto winningLotto) {
+    public Integer getLottoCountByTier(LottoTier targetTier, WinningLotto winningLotto) {
         int count = 0;
 
         for(Lotto lotto : lottos) {
-            count = countSameTier(lotto.getLottoTier(winningLotto), targetTier, count);
+            count = countSameTier(winningLotto.getLottoTier(lotto), targetTier, count);
         }
 
         return count;

@@ -17,9 +17,10 @@ public class LottoResultTest {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         resultMap.put(LottoTier.FIRST, 1);      // 2_000_000_000
-        resultMap.put(LottoTier.SECOND, 1);     // 1_500_000
-        resultMap.put(LottoTier.THIRD, 1);      // 50_000
-        resultMap.put(LottoTier.FOURTH, 1);     // 5_000
+        resultMap.put(LottoTier.SECOND, 1);     // 30_000_000
+        resultMap.put(LottoTier.THIRD, 1);      // 1_500_000
+        resultMap.put(LottoTier.FOURTH, 1);     // 50_000
+        resultMap.put(LottoTier.FIFTH, 1);      // 5_000
         resultMap.put(LottoTier.NONE, 1);       // 0
 
         lottoResult = new LottoResult(resultMap);
@@ -28,7 +29,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("총 수익금액을 계산한다.")
     void getTotalPrize() {
-        assertThat(lottoResult.getTotalPrize()).isEqualTo(2001555000);
+        assertThat(lottoResult.getTotalPrize()).isEqualTo(2_031_555_000);
     }
 
     @Test
@@ -40,6 +41,6 @@ public class LottoResultTest {
     @Test
     @DisplayName("구매금액을 입력받아 수익률을 계산한다.")
     void getYield() {
-        assertThat(lottoResult.getYield(5000)).isEqualTo(400311);
+        assertThat(lottoResult.getYield(5000)).isEqualTo(406_311);
     }
 }

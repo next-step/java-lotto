@@ -18,13 +18,6 @@ public class LottoGenerator {
 
     private LottoGenerator() {}
 
-    private static List<LottoNumber> shuffledNumbers() {
-        List<LottoNumber> numbers = LOTTO_NUMBER_POOL;
-
-        Collections.shuffle(numbers);
-        return numbers;
-    }
-
     public static Lottos generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
@@ -37,9 +30,10 @@ public class LottoGenerator {
     }
 
     private static Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = shuffledNumbers().stream()
+        Collections.shuffle(LOTTO_NUMBER_POOL);
+
+        List<LottoNumber> lottoNumbers = LOTTO_NUMBER_POOL.stream()
                 .limit(6)
-                .sorted()
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);
@@ -48,9 +42,16 @@ public class LottoGenerator {
     public static Lotto generateLotto(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
-                .sorted()
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);
+    }
+
+    public static WinningLotto generateWinningLotto(List<Integer> numbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        return new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
     }
 }

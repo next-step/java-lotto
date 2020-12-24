@@ -18,17 +18,7 @@ public class Lotto {
         this.lotto = new HashSet<>(lottoNumbers);
     }
 
-    public LottoTier getLottoTier(Lotto targetLotto) {
-        return LottoTier.getTier(getMatchingCount(targetLotto));
-    }
-
-    private long getMatchingCount(Lotto targetLotto) {
-        return lotto.stream()
-                .filter(number -> targetLotto.contains(number))
-                .count();
-    }
-
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return lotto.contains(number);
     }
 

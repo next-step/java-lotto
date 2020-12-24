@@ -13,25 +13,25 @@ public class LottoMachine {
     private static OutputView outputView;
     private static LottoMachine lottoMachine;
 
-    private LottoMachine() {
+    public LottoMachine() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
 
-    public static void play() {
+    public void play() {
         int money = inputView.getMoney();
         int count = calculateLottoCount(money);
 
         Lottos lottos = LottoGenerator.generateLottos(count);
         outputView.printLottos(lottos, count);
 
-        Lotto winningLotto = LottoGenerator.generateLotto(inputView.getWinningNumbers());
+        WinningLotto winningLotto = LottoGenerator.generateWinningLotto(inputView.getWinningNumbers(), inputView.getBonusNumber());
 
         LottoResult result = makeLottoResult(lottos, winningLotto);
         outputView.printResult(result, money);
     }
 
-    private static LottoResult makeLottoResult(Lottos lottos, Lotto winningLotto) {
+    private LottoResult makeLottoResult(Lottos lottos, WinningLotto winningLotto) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {
@@ -41,14 +41,7 @@ public class LottoMachine {
         return new LottoResult(resultMap);
     }
 
-    public static int calculateLottoCount(int inputMoney) {
+    public int calculateLottoCount(int inputMoney) {
         return inputMoney / LOTTO_PRICE;
-    }
-
-    public static LottoMachine getInstance() {
-        if(lottoMachine == null) {
-            lottoMachine = new LottoMachine();
-        }
-        return lottoMachine;
     }
 }
