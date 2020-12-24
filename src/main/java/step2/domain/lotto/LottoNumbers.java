@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
-import static step2.LottoNumberGenerator.*;
+import static step2.LottoProvider.*;
 
 public final class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
@@ -20,7 +20,7 @@ public final class LottoNumbers {
     private void checkLottoNumbersLength(List<Integer> numbers) {
         int lottoNumberLength = new HashSet<>(numbers).size();
         if (lottoNumberLength != LOTTO_LENGTH) {
-            throw new IllegalArgumentException("중복 없는 6개의 숫자가 필요합니다");
+            throw new IllegalArgumentException("중복 없는 " + LOTTO_LENGTH + "개의 숫자가 필요합니다");
         }
     }
 
@@ -36,11 +36,11 @@ public final class LottoNumbers {
                 .collect(toList());
     }
 
-    public Rank getRankOfLottoNumbers(List<Integer> targetNumbers, Integer bonusNumber) {
+    public Rank getRankOfLottoNumbers(LottoNumbers targetNumbers, LottoNumber bonusNumber) {
         long countOfMatch = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
-                .filter(targetNumbers::contains)
+                .filter(n -> targetNumbers.getLottoNumbers().contains(n))
                 .count();
-        return Rank.getRank(countOfMatch, getLottoNumbers().contains(bonusNumber));
+        return Rank.getRank(countOfMatch, this.getLottoNumbers().contains(bonusNumber.getNumber()));
     }
 }
