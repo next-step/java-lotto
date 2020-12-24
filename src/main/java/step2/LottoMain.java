@@ -21,12 +21,9 @@ public class LottoMain {
         resultView.showPurchasedLottery(lottoGame.getLotteryList());
         inputView.showInputWinningMessage();
 
-        String winningNumbers = inputView.getWinningNumbers();
+        WinningLottery winningLottery = new WinningLottery(inputView.getWinningNumbers());
 
-        WinningLottery winningLottery = new WinningLottery(winningNumbers);
-
-        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lottoGame.getLotteryList(),winningLottery);
-        float profitRate = lottoGame.calculateProfit(money, matchedResult);
+        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lottoGame.getLotteryList(), winningLottery);
 
         resultView.showResult(matchedResult, profitRate);
     }

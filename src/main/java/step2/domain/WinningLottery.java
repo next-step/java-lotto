@@ -1,6 +1,5 @@
 package step2.domain;
 
-import step2.exception.IsInvalidRangeException;
 import step2.exception.NumberMustBeSixException;
 
 import java.util.Arrays;
@@ -10,8 +9,6 @@ import java.util.stream.Collectors;
 public class WinningLottery {
 
     private static final int LOTTO_NUMBERS_LENGTH = 6;
-    private static final int LOTTO_BALL_START_NUMBER = 1;
-    private static final int LOTTO_BALL_END_NUMBER = 45;
 
     public static final String WINNING_NUMBER_MUST_BE_6 = "당첨 번호는 6개여야만 합니다.";
     public static final String WINNING_NUMBER_INVALID_RANGE = "당첨 번호는 1 이상 45 이하의 범위여야합니다.";
@@ -28,7 +25,8 @@ public class WinningLottery {
         if (splitNumbers.length != LOTTO_NUMBERS_LENGTH) {
             throw new NumberMustBeSixException(WINNING_NUMBER_MUST_BE_6);
         }
-        winningLottery = new Lottery(convertToInteger(splitNumbers));
+
+        winningLottery = new Lottery(makeLottoNumbers(splitNumbers));
     }
 
     /**
@@ -45,27 +43,22 @@ public class WinningLottery {
      * @param winningNumbers 당첨 번호
      * @return 당첨 번호 리스트
      */
-    private List<Integer> convertToInteger(String[] winningNumbers) {
+    private List<LottoNumber> makeLottoNumbers(String[] winningNumbers) {
         return Arrays.stream(winningNumbers)
-                    .map(this::convertNumber)
-                    .collect(Collectors.toList());
+                .map(this::convertToLottoNumbers)
+                .collect(Collectors.toList());
     }
 
     /**
      * 개별 당첨 번호를 숫자로 변환, 올바른 범위에 있는지 검사하는 메소드
      * @param number 개별 당첨 번호
-     * @return 숫자로 변환된 당첨 번호
+     * @return LottoNumber 객체로 변환된 당첨 번호
      */
-    private int convertNumber(String number) {
-        int convertedNumber = Integer.parseInt(number);
-
-        if (convertedNumber < LOTTO_BALL_START_NUMBER || convertedNumber > LOTTO_BALL_END_NUMBER) {
-            throw new IsInvalidRangeException(WINNING_NUMBER_INVALID_RANGE);
-        }
-        return convertedNumber;
+    private LottoNumber convertToLottoNumbers(String number) {
+        return new LottoNumber(Integer.parseInt(number));
     }
 
-    public List<Integer> getWinningNumbers() {
-        return this.winningLottery.getSelectedNumbers();
+    public List<LottoNumber> getWinningNumbers() {
+        return this.winningLottery.getNumbers();
     }
 }

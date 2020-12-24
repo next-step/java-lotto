@@ -1,5 +1,7 @@
 package step2.util;
 
+import step2.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,19 +18,19 @@ public class Util {
                                                                 .boxed()
                                                                 .collect(Collectors.toList());
 
-    public static List<Integer> getShuffled() {
+    public static List<LottoNumber> getShuffled() {
         Collections.shuffle(lottoNumbers);
 
-        List<Integer> selectedNumbers = new ArrayList<>();
+        List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_NUMBERS_LENGTH; i++) {
-            selectedNumbers.add(lottoNumbers.get(i));
+            numbers.add(new LottoNumber(lottoNumbers.get(i)));
         }
 
-        return selectedNumbers;
+        return numbers;
     }
 
-    public static void getSorted(List<Integer> selectedNumbers) {
-        Collections.sort(selectedNumbers);
+    public static void getSorted(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers, new LottoNumber.SortByLottoNumber());
     }
 }

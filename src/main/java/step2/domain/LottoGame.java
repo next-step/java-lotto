@@ -31,8 +31,7 @@ public class LottoGame {
         lotteryList = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottery; i++) {
-            Lottery lottery = new Lottery();
-            lotteryList.add(lottery);
+            lotteryList.add(new Lottery());
         }
 
         return lotteryList;

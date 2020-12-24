@@ -6,6 +6,7 @@ import step2.domain.Prize;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -38,9 +39,13 @@ public class ResultView {
      */
     private void printEachLottery(Lottery lottery) {
         System.out.print(OPEN_BRACKET);
-        System.out.print(lottery.getSelectedNumbers().stream()
-                                                    .map(Object::toString)
-                                                    .collect(Collectors.joining(COMMA_DELIMITER)));
+
+        System.out.print(lottery.getNumbers()
+                .stream()
+                .map(LottoNumber::getNumber)
+                .map(Objects::toString)
+                .collect(Collectors.joining(COMMA_DELIMITER)));
+
         System.out.println(CLOSE_BRACKET);
     }
 
