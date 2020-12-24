@@ -9,15 +9,13 @@ public class Money {
 
 	private final int inputMoney;
 
-	public Money(int money) {
-		validateMoney(money);
+	private Money(int money) {
 		this.inputMoney = money;
 	}
 
-	private void validateMoney(int money) {
-		if (money < LOTTO_PRICE_MONEY) {
-			throw new IllegalArgumentException("로또 구매 최소 금액은 " + LOTTO_PRICE_MONEY + "원 입니다.");
-		}
+	public static Money generateMoney(int money) {
+		validateMoney(money);
+		return new Money(money);
 	}
 
 	public int getBuyCount() {
@@ -27,6 +25,12 @@ public class Money {
 	public BigDecimal getYield(long totalPrize) {
 		BigDecimal money = new BigDecimal(this.inputMoney);
 		return new BigDecimal(totalPrize).divide(money, 2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	private static void validateMoney(int money) {
+		if (money < LOTTO_PRICE_MONEY) {
+			throw new IllegalArgumentException("로또 구매 최소 금액은 " + LOTTO_PRICE_MONEY + "원 입니다.");
+		}
 	}
 
 	@Override
