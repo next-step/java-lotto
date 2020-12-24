@@ -1,49 +1,35 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.groupingBy;
-
 public class Lotto {
-    private final List<LottoNumbers> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this.lottoNumbers = new ArrayList<>();
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = changeNumbersToLottoNumber(lottoNumbers);
     }
 
-    public List<LottoNumbers> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> changeNumbersToLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    /**
-     * 로또 생성 번호 추가
-     * @param lottoNumbers 로또 생성 번호
-     */
-    public void addLottoNumbers(LottoNumbers lottoNumbers) {
-        this.lottoNumbers.add(lottoNumbers);
-    }
-
-    /**
-     * 번호 비교
-     * @param target 지난주 당첨 번호
-     * @return List<Match>
-     */
-    public List<Match> getMatch(List<Integer> target) {
+    public List<Integer> convertLottoNumbers() {
         return lottoNumbers.stream()
-                .map(numbers -> Match.getMatchInfo(numbers.getEqualCount(target)))
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
     /**
-     * 생성된 로또번호와 지난주 당첨번호 비교 후 등급에 속한 리스트 반환
+     * 생성된 로또 번호와 지난주 당첨 번호 중 같은 번호가 있는지 확인 후 갯수 반환
      * @param targetNumbers 지난주 당첨 번호
-     * @return Map<Match, List<Match>>
+     * @return long
      */
-    public Map<Match, List<Match>> getMatchLottoCount(List<Integer> targetNumbers) {
-        return getMatch(targetNumbers).stream()
-                .filter(r -> r != Match.MISS)
-                .sorted(Comparator.comparingLong(Match::getMatchCount))
-                .collect(groupingBy(rank -> rank, Collectors.toList()));
+    public long getEqualCount(List<Integer> targetNumbers) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> targetNumbers.contains(lottoNumber.getNumber()))
+                .count();
     }
 }

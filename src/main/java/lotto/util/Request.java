@@ -1,7 +1,7 @@
 package lotto.util;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
 import lotto.domain.Match;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class Request {
     private final int money;
     private final int totalAmount;
 
-    private final Lotto lotto = new Lotto();
+    private final LottoTicket lottoTicket = new LottoTicket();
 
     public Request(int money) {
         checkMoney(money);
@@ -31,7 +31,7 @@ public class Request {
 
     private void makeAmountLottoNumbers() {
         for (int amount = 0; amount < totalAmount; amount++) {
-            lotto.addLottoNumbers(new LottoNumbers(LottoNumberGenerator.makeLottoNumber()));
+            lottoTicket.addLottoNumbers(new Lotto(LottoNumberGenerator.makeLottoNumber()));
         }
     }
 
@@ -43,11 +43,11 @@ public class Request {
         return totalAmount;
     }
 
-    public List<LottoNumbers> getLotto() {
-        return lotto.getLottoNumbers();
+    public List<Lotto> getLotto() {
+        return lottoTicket.getLottoNumbers();
     }
 
     public Map<Match, List<Match>> getMatchLottoCount(List<Integer> targetNumbers) {
-        return lotto.getMatchLottoCount(targetNumbers);
+        return lottoTicket.getMatchLottoCount(targetNumbers);
     }
 }
