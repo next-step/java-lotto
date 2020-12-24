@@ -7,7 +7,6 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoGame {
-
     public void start() {
         InputView inputView = new InputView();
         int money = inputView.inputMoneyPrint();
@@ -18,6 +17,7 @@ public class LottoGame {
         resultView.buyLottoAndNumbersPrint(request);
 
         List<Integer> inputNumbers = inputView.inputLottoNumbers();
+        new InputValid(inputNumbers);
         resultView.resultPrint(inputNumbers, request);
     }
 }
