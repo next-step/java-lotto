@@ -12,6 +12,7 @@ import lotto.modal.WinnerLotto;
 public class UserView {
 	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String INPUT_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+	private static final String INPUT_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 	private UserView() {
 		throw new AssertionError();
@@ -27,14 +28,12 @@ public class UserView {
 		return UserInput.getNumber();
 	}
 
-	public static String inputManualCount() {
-		UserOutput.printManualLottoCount();
-		return userInputString();
+	public static void printInputLottos() {
+		UserOutput.printLine(INPUT_LOTTO_MESSAGE);
 	}
 
-	public static String inputGameMoney() {
-		UserOutput.getMoney();
-		return userInputString();
+	public static String getLotto() {
+		return UserInput.getString();
 	}
 
 	public static WinnerLotto inputWinnerLotto() {
@@ -74,9 +73,4 @@ public class UserView {
 		}
 		return manualLotto;
 	}
-
-	private static String userInputString() {
-		return UserInput.getString();
-	}
-
 }
