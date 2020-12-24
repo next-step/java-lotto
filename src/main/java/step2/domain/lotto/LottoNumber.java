@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-import static step2.LottoNumberGenerator.*;
+import static step2.LottoProvider.*;
 
 public class LottoNumber {
     private final Integer number;

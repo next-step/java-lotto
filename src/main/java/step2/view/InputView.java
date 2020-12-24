@@ -110,6 +110,7 @@ public class InputView {
             result = Arrays.stream(numbers)
                     .mapToInt(t -> Integer.parseInt(t.trim()))
                     .boxed()
+                    .sorted()
                     .collect(toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("번호 형식이 아닙니다");

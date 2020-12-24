@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
-import static step2.LottoNumberGenerator.*;
+import static step2.LottoProvider.*;
 
 public final class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
