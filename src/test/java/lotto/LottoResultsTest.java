@@ -12,6 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
+import lotto.domain.Money;
+
 public class LottoResultsTest {
 	@DisplayName("상금 총액이 제대로 계산되는지 확인한다.")
 	@ParameterizedTest

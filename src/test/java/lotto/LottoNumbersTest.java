@@ -13,6 +13,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import lotto.domain.LottoNumbers;
+
 public class LottoNumbersTest {
 
 	@DisplayName("6개의 1 ~ 45 숫자가 정상적으로 생성되는지 확인한다.")

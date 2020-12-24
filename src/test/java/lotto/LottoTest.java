@@ -12,6 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+
 public class LottoTest {
 
 	@DisplayName("로또가 정상적으로 생성되는지 확인한다.")

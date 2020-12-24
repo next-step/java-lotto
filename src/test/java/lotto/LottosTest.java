@@ -13,6 +13,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
+import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
+
 public class LottosTest {
 
 	@DisplayName("구입 금액을 로또 금액(1000원)으로 최대 로또 구매 수를 구하는지 확인한다.")
