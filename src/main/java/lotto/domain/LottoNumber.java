@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public class LottoNumber {
-    private final Integer number;
+    private final int number;
 
     public LottoNumber(Integer number) {
         this.number = number;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 }
