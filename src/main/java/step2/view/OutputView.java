@@ -68,13 +68,9 @@ public class OutputView {
 
 		profitOutputBuilder.append(String.format(messageFormatProfitRatio, profitRatio));
 
-		if (profitRatio < PROFIT_CRITERIA) {
-			profitOutputBuilder.append(String.format("(기준이 %d이기 때문에 결과적으로는 손해라는 의미임)",
-				PROFIT_CRITERIA));
-		}
-
-		profitOutputBuilder.append(String.format("(기준이 %d이기 때문에 결과적으로는 이익이라는 의미임)",
-			PROFIT_CRITERIA));
+		final String profitResultText = profitRatio < PROFIT_CRITERIA ? "손해라는" : "이익이라는";
+		profitOutputBuilder.append(String.format("(기준이 %d이기 때문에 결과적으로는 %s 의미임)",
+			PROFIT_CRITERIA, profitResultText));
 
 		System.out.println(profitOutputBuilder.toString());
 	}
