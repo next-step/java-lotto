@@ -12,24 +12,15 @@ public class LottoGame {
 
     private List<Lottery> lotteryList;
 
-    private Money money_amount;
+    private Money money;
 
     public LottoGame() {
 
     }
 
     public LottoGame(int amount) {
-        this.money_amount = new Money(amount);
-        this.buy(money_amount);
-    }
-
-    /**
-     * 입력받은 구입 금액만큼 로또를 구입하는 메소드
-     * @param money 입력받은 구입 금액
-     * @return 발급된 로또 용지 묶음
-     */
-    public List<Lottery> buy(Money money) {
-        return makeLotteryList(money.getNumberOfLottery());
+        this.money = new Money(amount);
+        this.buy(money.getNumberOfLottery());
     }
 
     /**
@@ -37,7 +28,7 @@ public class LottoGame {
      * @param numberOfLottery 구매할 로또 갯수
      * @return 발급된 용지 묶음
      */
-    public List<Lottery> makeLotteryList(int numberOfLottery) {
+    public List<Lottery> buy(int numberOfLottery) {
         lotteryList = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottery; i++) {
