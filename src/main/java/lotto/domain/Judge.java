@@ -1,9 +1,10 @@
 package lotto.domain;
 
 public enum Judge {
-
     PROFIT("이익"),
     LOSS("손해");
+
+    private static final int PROFIT_STANDARD = 1;
 
     private final String judgeMessage;
 
@@ -16,6 +17,6 @@ public enum Judge {
     }
 
     public static Judge judge(double profitRate) {
-        return profitRate > 1 ? PROFIT : LOSS;
+        return profitRate >= PROFIT_STANDARD ? PROFIT : LOSS;
     }
 }
