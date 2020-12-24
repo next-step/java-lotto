@@ -9,11 +9,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static java.util.Arrays.*;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
-import static step2.LottoNumberGenerator.*;
+import static step2.LottoProvider.*;
 import static step2.domain.Rank.*;
 
 public class LottoTest {
@@ -29,7 +31,8 @@ public class LottoTest {
         mockList.add(new LottoNumbers(asList(1, 10, 20, 33, 39, 41))); // 3개 일치
         mockList.add(new LottoNumbers(asList(1, 10, 22, 33, 39, 41))); // 2개 일치
 
-        lotto = new Lotto(new LottoRequest(5000, asList(new LottoNumbers(asList(2, 3, 11, 12, 22, 33))))) {
+        LottoRequest lottoRequest = new LottoRequest(5000, asList(new LottoNumbers(asList(2, 3, 11, 12, 22, 33))));
+        lotto = new Lotto(provideLotto(lottoRequest)) {
             @Override
             List<Rank> getLottoRanks(LottoNumbers targetNumbers, LottoNumber bonusNumber) {
                 return mockList.stream()
@@ -40,9 +43,18 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또(자동) 구매 테스트")
-    void buyLottoTest() {
+    @DisplayName("로또 구매 테스트")
+    void lottoTest() {
         assertThat(lotto.getLotto().size()).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("로또 구매 실패 테스트")
+    void lottoFailTest(List<LottoNumbers> lotto) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(lotto))
+                .withMessageContaining("로또를 구매해 주세요");
     }
 
     @Test
@@ -61,11 +73,5 @@ public class LottoTest {
         assertThat(lotto.getWinLotto(new LottoNumbers(target), new LottoNumber(7)))
                 .containsKeys(FIRST, SECOND, THIRD, FOURTH, FIFTH)
                 .containsValues(1L, 1L, 1L, 1L, 1L);
-    }
-
-    @Test
-    @DisplayName("로또 번호 제공 테스트")
-    void lottoNumberTest() {
-        assertThat(provideLottoNumbers().size()).isEqualTo(6);
     }
 }
