@@ -1,18 +1,17 @@
 package lotto.view;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import lotto.modal.Lotto;
-import lotto.modal.LottoNumber;
+import lotto.modal.Count;
+import lotto.modal.LottoResult;
+import lotto.modal.Lottos;
 import lotto.modal.Money;
-import lotto.modal.WinnerLotto;
 
 public class UserView {
+	private static final String NEXT_LINE = "\n";
 	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String INPUT_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String INPUT_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+	private static final String INPUT_WINNER_MESSAGE = "지난 주 담청 번호를 입력해 주세요.";
+	private static final String INPUT_BONUS_MESSAGE = "보너스 볼을 입력해 주세요.";
 
 	private UserView() {
 		throw new AssertionError();
@@ -36,41 +35,27 @@ public class UserView {
 		return UserInput.getString();
 	}
 
-	public static WinnerLotto inputWinnerLotto() {
-		UserOutput.printUserInputWinnerLotto();
-		Lotto winnerLotto = Lotto.generateLotto(userInputString());
-
-		UserOutput.printUserInputBonusNumber();
-		LottoNumber bonusNumber = new LottoNumber(userInputString());
-
-		return new WinnerLotto(winnerLotto, bonusNumber);
+	public static String getWinnerLotto() {
+		UserOutput.printLine(NEXT_LINE + INPUT_WINNER_MESSAGE);
+		return UserInput.getString();
 	}
 
-	public static void printLottoPackage(Money condition, List<Lotto> lottoPackage) {
-		UserOutput.printLottoCount(condition.getCount(), condition.getRandomCount());
-		UserOutput.printLottoPackage(lottoPackage);
+	public static int getBonusNumber() {
+		UserOutput.printLine(INPUT_BONUS_MESSAGE);
+		return UserInput.getNumber();
 	}
 
-	public static void printLottoResultRank(List<String> lottoRanks) {
-		UserOutput.printLottoRankResult(lottoRanks);
+	public static void printLottos(Lottos lottos, Count count) {
+		UserOutput.printLottoCount(count.manualCount(), count.randomCount());
+		UserOutput.printLottos(lottos.getLottos());
 	}
 
-	public static void printLottoResultYield(BigDecimal yield) {
-		UserOutput.printLottoYield(yield);
+	public static void printResult(LottoResult result, Money money) {
+		UserOutput.printLottoResult(result.reportRank());
+		UserOutput.printLottoYield(result.reportYield(money));
 	}
 
-	public static void printErrorMsg(String message) {
-		UserOutput.printUserErrorMsg(message);
-	}
-
-	public static List<Lotto> inputManualLotto(int repeatNumber) {
-		List<Lotto> manualLotto = new ArrayList<>();
-		if (repeatNumber != 0) {
-			UserOutput.printUserInputManualLotto();
-		}
-		for (int i = 0; i < repeatNumber; i++) {
-			manualLotto.add(Lotto.generateLotto(userInputString()));
-		}
-		return manualLotto;
+	public static void printError(String message) {
+		UserOutput.printLine(message);
 	}
 }

@@ -13,7 +13,12 @@ public class UserInput {
 	 * @return 유저 입력 값
 	 */
 	public static String getString() {
-		return UserInput.systemInput();
+		String inputData = SCANNER.nextLine();
+
+		if (lotto.util.StringValid.isEmptyStr(inputData)) {
+			throw new IllegalArgumentException("값을 입력해 주세요.");
+		}
+		return inputData;
 	}
 
 	/**
