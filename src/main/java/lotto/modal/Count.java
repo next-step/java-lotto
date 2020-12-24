@@ -16,4 +16,16 @@ public class Count {
 			throw new IllegalArgumentException("금액이 부족합니다.");
 		}
 	}
+
+	public int getManualBuyCount() {
+		return this.manualBuyCount;
+	}
+
+	public int getBuyCount() {
+		return this.buyCount;
+	}
+
+	public int getRandomCount() {
+		return this.buyCount - this.manualBuyCount;
+	}
 }
