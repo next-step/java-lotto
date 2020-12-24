@@ -6,6 +6,7 @@ public class lottoIssue {
     public final int amount;
     private Queue<ArrayList> result;
     public int count;
+    private HashMap<Integer, Integer> lottoStats;
 
     public lottoIssue(int amount) {
         this.amount = amount;
@@ -31,14 +32,19 @@ public class lottoIssue {
     }
 
     public void checkLotto(String[] numList) {
+        lottoStats = new HashMap<Integer, Integer>();
         for (ArrayList list: result) {
-            confrimLotto(list, numList);
+            int key = confrimLotto(list, numList);
+            int value = 1;
+            if (lottoStats.containsKey(key)){
+                value = lottoStats.get(key) + 1;
+            }
+            lottoStats.put(key, value);
         }
     }
 
     public int confrimLotto(ArrayList list, String[] numList) {
         count = 0;
-
         for (int i = 0; i < numList.length; i++) {
             verifyNumCount(list, numList, i);
         }
@@ -57,5 +63,9 @@ public class lottoIssue {
 
     public Queue<ArrayList> getResult() {
         return result;
+    }
+
+    public HashMap<Integer, Integer> getLottoStats() {
+        return lottoStats;
     }
 }
