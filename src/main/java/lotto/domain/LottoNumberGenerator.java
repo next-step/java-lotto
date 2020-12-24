@@ -8,11 +8,12 @@ import java.util.Random;
 public class LottoNumberGenerator implements NumberGenerator {
 	private static final int LOTTO_SIZE = 6;
 	private static final int NUMBER_BOUND = 45;
+
 	private static final Random random = new Random();
 
 	@Override
-	public List<Integer> generateNumbers() {
-		List<Integer> lotto = new ArrayList<>();
+	public List<LottoNumber> generateNumbers() {
+		List<LottoNumber> lotto = new ArrayList<>();
 		while (lotto.size() < LOTTO_SIZE) {
 			addRandomNumber(lotto);
 		}
@@ -20,8 +21,8 @@ public class LottoNumberGenerator implements NumberGenerator {
 		return lotto;
 	}
 
-	private void addRandomNumber(List<Integer> lotto) {
-		int randomNumber = random.nextInt(NUMBER_BOUND) + 1;
+	private void addRandomNumber(List<LottoNumber> lotto) {
+		LottoNumber randomNumber = new LottoNumber(random.nextInt(NUMBER_BOUND) + 1);
 		if (!lotto.contains(randomNumber)) {
 			lotto.add(randomNumber);
 		}
