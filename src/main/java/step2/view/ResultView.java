@@ -1,9 +1,6 @@
 package step2.view;
 
-import step2.domain.LottoGame;
-import step2.domain.Lottery;
-import step2.domain.LottoNumber;
-import step2.domain.Prize;
+import step2.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -63,12 +60,12 @@ public class ResultView {
      * @param matchedResult 당첨 결과
      * @param profitRate 수익률
      */
-    public void showResult(Map<Lottery, Integer> matchedResult, double profitRate) {
+    public void showResult(MatchedResult matchedResult, double profitRate) {
         printResultMessage();
 
         for (int i = 3; i <= 6; i++) {
             System.out.print(i + "개 일치 (" + Prize.getWinningMoney(i) + ")- ");
-            System.out.println(getOccurrence(matchedResult, i) + "개");
+            System.out.println(matchedResult.getCount(i) + "개");
         }
 
         printProfitRate(profitRate);
@@ -81,18 +78,6 @@ public class ResultView {
         System.out.println();
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_LINE);
-    }
-
-    /***
-     * 로또 묶음 중 일치하는 장 수 반환하는 메소드
-     * @param matchedResult 일치 여부 map
-     * @param number 몇 개 일치하는지 숫자
-     * @return 일치하는 복권의 장 수 (개수)
-     */
-    private int getOccurrence(Map<Lottery, Integer> matchedResult, int number) {
-        return (int) matchedResult.values().stream()
-                                            .filter(count -> number == count)
-                                            .count();
     }
 
     /**

@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 class LottoGameTest {
 
@@ -31,28 +30,11 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("구매한 로또 묶음 당첨 여부 테스트")
-    void winning_test() {
-        WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
-        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
-
-        String [] matchedValues = new String[lotteryList.size()];
-
-        for (int i = 0; i < lotteryList.size(); i++) {
-            matchedValues[i] = Integer.toString(matchedResult.get(lotteryList.get(i)));
-        }
-
-        assertThat(
-                String.join(",", matchedValues)
-        ).isEqualTo("4,0,3,0,0");
-    }
-
-    @Test
     @DisplayName("당첨 수익률 계산 테스트")
     void calculate_profit() {
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
-        Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
-        double profitRate = lottoGame.calculateProfit(5000 ,matchedResult);
+        MatchedResult matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
+        double profitRate = lottoGame.calculateProfitRate(5000 ,matchedResult);
 
         assertThat(profitRate).isEqualTo(11.0f);
     }

@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Prize {
     FIRST(6, 2_000_000_000),
@@ -28,7 +27,7 @@ public enum Prize {
 
     public static int getWinningMoney(int count) {
         return Arrays.stream(Prize.values())
-                    .filter(matchedCount -> matchedCount.matched == count)
+                    .filter(matchedCount -> matchedCount.getMatched() == count)
                     .findFirst()
                     .orElse(NONE)
                     .getPrizeMoney();

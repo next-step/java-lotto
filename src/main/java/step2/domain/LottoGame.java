@@ -13,11 +13,14 @@ public class LottoGame {
 
     private Money money;
 
-    public LottoGame() {
+    private MatchedResult matchedResult;
 
+    public LottoGame() {
+        this.matchedResult = new MatchedResult();
     }
 
     public LottoGame(int amount) {
+        this.matchedResult = new MatchedResult();
         this.money = new Money(amount);
         this.buy(money.getNumberOfLottery());
     }
@@ -47,11 +50,10 @@ public class LottoGame {
      * @param winningLottery 당첨 복권
      * @return 각 복권들의 당첨 결과 Map
      */
-    public Map<Lottery, Integer> matchLottery(List<Lottery> generatedLotteries, WinningLottery winningLottery) {
-        Map<Lottery,Integer> matchedResult = new HashMap<>();
+    public MatchedResult matchLottery(List<Lottery> generatedLotteries, WinningLottery winningLottery) {
 
         for (Lottery lottery : generatedLotteries) {
-            matchedResult.put(lottery, lottery.match(winningLottery));
+            matchedResult.putMatchedResult(lottery, lottery.match(winningLottery));
         }
 
         return matchedResult;
@@ -63,22 +65,8 @@ public class LottoGame {
      * @param matchedResult 로또 매칭 결과
      * @return 수익률
      */
-    public double calculateProfit(int money, Map<Lottery, Integer> matchedResult) {
-        return (double) getProfit(matchedResult) / money;
+    public double calculateProfitRate(int money, MatchedResult matchedResult) {
+        return (double) matchedResult.getProfit() / money;
     }
 
-    /**
-     * 총 당첨 금액을 계산하는 메소드
-     * @param matchedResult 로또 매칭 결과
-     * @return 당첨 금액
-     */
-    private int getProfit(Map<Lottery, Integer> matchedResult) {
-        int money = 0;
-
-        for (int count : matchedResult.values()) {
-            money += Prize.getWinningMoney(count);
-        }
-
-        return money;
-    }
 }
