@@ -7,12 +7,12 @@ public class Game {
 
 	private List<Lotto> lottoPackage;
 
-	public Game(ManualLotto manualLotto, int randomCount) {
+	public Game(Lottos manualLotto, int randomCount) {
 		lottoPackage = generateLottoPackage(manualLotto, randomCount);
 	}
 
-	private List<Lotto> generateLottoPackage(ManualLotto manualLotto, int randomCount) {
-		ManualLotto randomLotto = new ManualLotto(randomCount);
+	private List<Lotto> generateLottoPackage(Lottos manualLotto, int randomCount) {
+		Lottos randomLotto = new Lottos(randomCount);
 		return manualLotto.mergeLotto(randomLotto);
 	}
 
@@ -23,7 +23,7 @@ public class Game {
 	public LottoResult getLottoResult(WinnerLotto winnerLotto) {
 		return this.generateLottoResult(winnerLotto);
 	}
-	
+
 	private LottoResult generateLottoResult(WinnerLotto winnerLotto) {
 		return new LottoResult(this.lottoPackage.stream()
 			.map(lotto -> LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto)))

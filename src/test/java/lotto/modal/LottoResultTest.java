@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class LottoResultTest {
 
 	private List<Lotto> lottoPackage;
-	private ManualLotto manualLotto;
+	private Lottos manualLotto;
 	private WinnerLotto winnerLotto;
 	private Game lottoGame;
 
@@ -35,12 +35,12 @@ class LottoResultTest {
 		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
 		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,6"));
 
-		manualLotto = new ManualLotto(lottoPackage);
+		manualLotto = new Lottos(lottoPackage);
 		lottoGame = new Game(manualLotto, 0);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new GameCondition("6000"))).isGreaterThan(new BigDecimal(1));
+		assertThat(result.report(new Money("6000"))).isGreaterThan(new BigDecimal(1));
 	}
 
 	@Test
@@ -48,12 +48,12 @@ class LottoResultTest {
 	void resultYieldSuccessLottoTest() {
 		lottoPackage.add(Lotto.generateLotto("1,2,3,4,5,45"));
 
-		manualLotto = new ManualLotto(lottoPackage);
+		manualLotto = new Lottos(lottoPackage);
 		lottoGame = new Game(manualLotto, 0);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new GameCondition("2000", "0"))).isGreaterThan(new BigDecimal(1));
+		assertThat(result.report(new Money("2000", "0"))).isGreaterThan(new BigDecimal(1));
 	}
 
 	@Test
@@ -65,30 +65,30 @@ class LottoResultTest {
 		lottoPackage.add(Lotto.generateLotto("1,10,20,33,40,44"));
 		lottoPackage.add(Lotto.generateLotto("1,10,21,34,40,45"));
 
-		manualLotto = new ManualLotto(lottoPackage);
+		manualLotto = new Lottos(lottoPackage);
 		lottoGame = new Game(manualLotto, 0);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 
-		assertThat(result.report(new GameCondition("6000", "0"))).isLessThan(new BigDecimal(1));
+		assertThat(result.report(new Money("6000", "0"))).isLessThan(new BigDecimal(1));
 	}
 
 	@Test
 	@DisplayName("로또 결과: 수익률 0 테스트")
 	void resultYieldZeroLottoTest() {
-		manualLotto = new ManualLotto(lottoPackage);
+		manualLotto = new Lottos(lottoPackage);
 		lottoGame = new Game(manualLotto, 0);
 
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
-		assertThat(result.report(new GameCondition("1000", "0"))).isZero();
+		assertThat(result.report(new Money("1000", "0"))).isZero();
 	}
 
 	@Test
 	@DisplayName("로또 결과: 로또 결과 객체 생성 테스트")
 	void initLottoResultTest() {
-		manualLotto = new ManualLotto(lottoPackage);
+		manualLotto = new Lottos(lottoPackage);
 		lottoGame = new Game(manualLotto, 0);
-		
+
 		LottoResult result = lottoGame.getLottoResult(winnerLotto);
 		assertThat(result).isNotNull();
 	}

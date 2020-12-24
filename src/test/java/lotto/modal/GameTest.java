@@ -13,7 +13,7 @@ public class GameTest {
 	@DisplayName("로또 게임: 로또 구매 금액 입력 객체 생성 테스트")
 	void initLottoGameTest() {
 
-		Game lottoGame = new Game(new ManualLotto(new ArrayList<Lotto>()), 10);
+		Game lottoGame = new Game(new Lottos(new ArrayList<Lotto>()), 10);
 
 		assertThat(lottoGame).isNotNull();
 		assertThat(lottoGame.getLottoPackage().size()).isEqualTo(10);

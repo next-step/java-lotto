@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ManualLottoTest {
+class LottosTest {
 
 	private List<Lotto> lottoPackage;
 
@@ -25,14 +25,14 @@ class ManualLottoTest {
 	@Test
 	@DisplayName("로또 메뉴얼: 랜덤 로또 생성")
 	void initRandomManualLotto() {
-		ManualLotto randomLotto = new ManualLotto(10);
-		assertThat(randomLotto.getLottoBundle().size()).isEqualTo(10);
+		Lottos randomLotto = new Lottos(10);
+		assertThat(randomLotto.getLottos().size()).isEqualTo(10);
 	}
 
 	@Test
 	@DisplayName("로또 메뉴얼: 유저 로또 생성")
 	void initUserManualLotto() {
-		ManualLotto userLotto = new ManualLotto(lottoPackage);
-		assertThat(userLotto.getLottoBundle()).isSameAs(lottoPackage);
+		Lottos userLotto = new Lottos(lottoPackage);
+		assertThat(userLotto.getLottos()).isSameAs(lottoPackage);
 	}
 }

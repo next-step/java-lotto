@@ -21,7 +21,7 @@ public class LottoResult {
 			.collect(Collectors.toList());
 	}
 
-	public BigDecimal report(GameCondition money) {
+	public BigDecimal report(Money money) {
 		return money.getYield(totalPrize());
 	}
 
