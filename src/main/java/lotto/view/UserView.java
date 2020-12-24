@@ -4,19 +4,36 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.modal.GameCondition;
 import lotto.modal.Lotto;
 import lotto.modal.LottoNumber;
+import lotto.modal.Money;
 import lotto.modal.WinnerLotto;
 
 public class UserView {
+	private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+	private static final String INPUT_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 
 	private UserView() {
 		throw new AssertionError();
 	}
 
+	public static String getMoney() {
+		UserOutput.printLine(INPUT_MONEY_MESSAGE);
+		return UserInput.getString();
+	}
+
+	public static String getCount() {
+		UserOutput.printLine(INPUT_COUNT_MESSAGE);
+		return UserInput.getString();
+	}
+
+	public static String inputManualCount() {
+		UserOutput.printManualLottoCount();
+		return userInputString();
+	}
+
 	public static String inputGameMoney() {
-		UserOutput.printUserInputMoney();
+		UserOutput.getMoney();
 		return userInputString();
 	}
 
@@ -30,7 +47,7 @@ public class UserView {
 		return new WinnerLotto(winnerLotto, bonusNumber);
 	}
 
-	public static void printLottoPackage(GameCondition condition, List<Lotto> lottoPackage) {
+	public static void printLottoPackage(Money condition, List<Lotto> lottoPackage) {
 		UserOutput.printLottoCount(condition.getCount(), condition.getRandomCount());
 		UserOutput.printLottoPackage(lottoPackage);
 	}
@@ -47,11 +64,6 @@ public class UserView {
 		UserOutput.printUserErrorMsg(message);
 	}
 
-	public static String inputManualCount() {
-		UserOutput.printManualLottoCount();
-		return userInputString();
-	}
-
 	public static List<Lotto> inputManualLotto(int repeatNumber) {
 		List<Lotto> manualLotto = new ArrayList<>();
 		if (repeatNumber != 0) {
@@ -64,6 +76,7 @@ public class UserView {
 	}
 
 	private static String userInputString() {
-		return UserInput.inputString();
+		return UserInput.getString();
 	}
+
 }
