@@ -10,12 +10,11 @@ public class LottoGame {
 		if (input <= 0) {
 			return 0;
 		}
-		return input/LOTTO_PRICE;
+		return input / LOTTO_PRICE;
 	}
 
 	public LottoTicket generateLottoNumbers(int lottoGameCount, NumberGenerator numberGenerator) {
-		LottoTicket lottoNumbers = new LottoTicket();
-		return lottoNumbers.generateLottoNumbers(lottoGameCount, numberGenerator);
+		return new LottoTicket(lottoGameCount, numberGenerator);
 	}
 
 	public Map<LottoRank, Long> generateLottoGameResult(WinLotto winLotto, LottoTicket lottoTicket) {
