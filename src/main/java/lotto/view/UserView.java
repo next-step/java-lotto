@@ -17,14 +17,14 @@ public class UserView {
 		throw new AssertionError();
 	}
 
-	public static String getMoney() {
+	public static int getMoney() {
 		UserOutput.printLine(INPUT_MONEY_MESSAGE);
-		return UserInput.getString();
+		return UserInput.getNumber();
 	}
 
-	public static String getCount() {
+	public static int getCount() {
 		UserOutput.printLine(INPUT_COUNT_MESSAGE);
-		return UserInput.getString();
+		return UserInput.getNumber();
 	}
 
 	public static String inputManualCount() {
