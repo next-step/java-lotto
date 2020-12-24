@@ -1,23 +1,24 @@
 package lotto.view;
 
-import lotto.LottoOption;
 import lotto.number.WinningNumbers;
-import lotto.view.input.MoneyInputView;
+import lotto.option.LottoBuyPlan;
+import lotto.option.LottoOption;
+import lotto.view.input.LottoBuyPlanInputView;
 import lotto.view.input.WinningNumberInputView;
 
 public class LottoOptionInputView implements LottoOption {
 
-	private final MoneyInputView moneyInputView;
+	private final LottoBuyPlanInputView lottoBuyPlanInputView;
 	private final WinningNumberInputView winningNumberInputView;
 
 	public LottoOptionInputView() {
-		this.moneyInputView = new MoneyInputView();
+		this.lottoBuyPlanInputView = new LottoBuyPlanInputView();
 		this.winningNumberInputView = new WinningNumberInputView();
 	}
 
 	@Override
-	public int getMoney() {
-		return this.moneyInputView.getMoney();
+	public LottoBuyPlan getBuyPlan() {
+		return lottoBuyPlanInputView.inputLottoBuyPlan();
 	}
 
 	@Override

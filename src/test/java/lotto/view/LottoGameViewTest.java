@@ -23,14 +23,19 @@ class LottoGameViewTest {
 	void showBuyLottoNumbers() {
 		// given
 		LottoGameView lottoGameView = new LottoGameView();
-		List<LottoNumbers> lottoNumbersList = Arrays.asList(
+		List<LottoNumbers> autoNumberList = Arrays.asList(
 				TestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6),
 				TestUtils.createLottoNumbers(16, 11, 12, 13, 14, 15),
 				TestUtils.createLottoNumbers(1, 5, 10, 15, 20, 25)
 		);
 
+		List<LottoNumbers> manualNumberList = Arrays.asList(
+				TestUtils.createLottoNumbers(10, 11, 12, 13, 14, 15),
+				TestUtils.createLottoNumbers(7, 9, 24, 32, 40, 44)
+		);
+
 		// when & then
-		assertDoesNotThrow(() -> lottoGameView.showLottoTicket(new LottoTicket(lottoNumbersList)));
+		assertDoesNotThrow(() -> lottoGameView.showLottoTicket(new LottoTicket(autoNumberList, manualNumberList)));
 	}
 
 	@Test
@@ -42,7 +47,8 @@ class LottoGameViewTest {
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_THREE,2));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_FOUR,1));
 		lottoResultList.addAll(TestUtils.duplicate(LottoResult.MATCHED_SIX,0));
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 
 		// when & then
 		assertDoesNotThrow(() -> lottoGameView.showStatistics(lottoStatistics));
@@ -58,7 +64,8 @@ class LottoGameViewTest {
 		if (isProfit) {
 			lottoResultList.add(LottoResult.MATCHED_FOUR);
 		}
-		LottoStatistics lottoStatistics = new LottoStatistics(lottoResultList);
+		LottoStatistics lottoStatistics =
+				new LottoStatistics(lottoResultList, TestUtils.calculateLottoMoney(lottoResultList));
 		LottoGameView lottoGameView = new LottoGameView();
 
 		// when

@@ -1,16 +1,23 @@
 package lotto.result;
 
-import lotto.LottoStore;
+import lotto.option.LottoMoney;
 
 import java.util.*;
 
 public class LottoStatistics {
 
+	private static final String VALIDATE_FAIL_EMPTY = "lottoResultList is empty!";
 	private final Map<LottoResult, Long> countResult;
+	private final LottoMoney buyMoney;
 
-	public LottoStatistics(List<LottoResult> lottoResultList) {
+	public LottoStatistics(List<LottoResult> lottoResultList, LottoMoney buyMoney) {
+		this.countResult = toCountResult(lottoResultList);
+		this.buyMoney = buyMoney;
+	}
+
+	private Map<LottoResult, Long> toCountResult(List<LottoResult> lottoResultList) {
 		if (lottoResultList.isEmpty()) {
-			throw new IllegalArgumentException("lottoResultList is empty!");
+			throw new IllegalArgumentException(VALIDATE_FAIL_EMPTY);
 		}
 
 		Map<LottoResult, Long> countResult = new HashMap<>();
@@ -19,7 +26,7 @@ public class LottoStatistics {
 			countResult.put(key, count);
 		}
 
-		this.countResult = Collections.unmodifiableMap(countResult);
+		return Collections.unmodifiableMap(countResult);
 	}
 
 	private static <T> long countEquals(List<T> list, T equalsTarget) {
@@ -33,19 +40,8 @@ public class LottoStatistics {
 	}
 
 	public double calculateIncomeRate() {
-		long allCount = calculateAllCount();
-		if (allCount == 0L) {
-			return 0d;
-		}
-
 		long income = calculateIncome();
-		return (double) income / (allCount * LottoStore.LOTTO_PRICE);
-	}
-
-	public long calculateAllCount() {
-		return countResult.values().stream()
-				.mapToLong(value -> value)
-				.sum();
+		return this.buyMoney.divideByThis(income);
 	}
 
 	private long calculateIncome() {

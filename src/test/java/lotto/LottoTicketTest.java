@@ -6,45 +6,65 @@ import lotto.number.WinningNumbers;
 import lotto.result.LottoResult;
 import lotto.result.LottoStatistics;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoTicketTest {
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 5, 10})
+	@CsvSource(value = {"1,0", "0,1", "5,3"})
+	@DisplayName("올바른 생성자 호출")
+	void constructor(int autoSize, int manualSize) {
+		assertDoesNotThrow(() -> new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize)));
+	}
+
+	@Test
+	@DisplayName("예외가 발생하는 생성자 호출")
+	void constructor_exception() {
+		assertThatThrownBy(() -> new LottoTicket(Collections.emptyList(), Collections.emptyList()))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("must be at least one");
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("객체 내부의 LottoNumbers 갯수가 올바른지 확인")
-	void size(int size) {
-		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(size));
-		assertThat(lottoTicket.size()).isEqualTo(size);
+	void size(int autoSize, int manualSize) {
+		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
+		assertThat(lottoTicket.autoNumbersSize() + lottoTicket.manualNumbersSize())
+				.isEqualTo(autoSize + manualSize);
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {0, 5, 10})
+	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("객체 내부의 LottoNumbers 갯수와 toStringList 크기가 동일한지 확인")
-	void toStringNumbers(int size) {
-		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(size));
-		assertThat(lottoTicket.toStringNumbers()).hasSize(size);
+	void toStringNumbers(int autoSize, int manualSize) {
+		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
+		assertThat(lottoTicket.toStringNumbers()).hasSize(autoSize + manualSize);
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {1, 5, 10})
+	@CsvSource(value = {"1,0", "0,1", "5,3"})
 	@DisplayName("LottoStatistics 를 만들때 객체 내부의 LottoNumbers 의 사이즈와 통계의 갯수가 같은지검증")
-	void compareNumbers(int size) {
+	void compareNumbers(int autoSize, int manualSize) {
 		// given
-		LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(size));
+		final LottoTicket lottoTicket = new LottoTicket(createAnyNumbers(autoSize), createAnyNumbers(manualSize));
 
 		// when
 		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(
-				createResultFixedWinningNumber(LottoResult.NOTHING));
+				createResultFixedWinningNumber(LottoResult.NOTHING), TestUtils.anyMoney());
 
 		// then
-		assertThat(lottoStatistics.getCount(LottoResult.NOTHING)).isEqualTo(size);
+		assertThat(lottoStatistics.getCount(LottoResult.NOTHING)).isEqualTo(autoSize + manualSize);
 		assertThat(lottoStatistics.getCount(LottoResult.MATCHED_THREE)).isZero();
 		assertThat(lottoStatistics.getCount(LottoResult.MATCHED_FOUR)).isZero();
 		assertThat(lottoStatistics.getCount(LottoResult.MATCHED_FIVE)).isZero();

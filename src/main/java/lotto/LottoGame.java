@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.option.LottoOption;
 import lotto.result.LottoStatistics;
 
 class LottoGame {
@@ -15,11 +16,11 @@ class LottoGame {
 	}
 
 	void play() {
-		final int money = lottoOption.getMoney();
-		LottoTicket lottoTicket = lottoStore.sell(money);
+		LottoTicket lottoTicket = lottoStore.sell(lottoOption.getBuyPlan());
 		lottoView.showLottoTicket(lottoTicket);
 
-		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(lottoOption.getWinningNumbers());
+		LottoStatistics lottoStatistics = lottoTicket.compareNumbers(
+				lottoOption.getWinningNumbers(), lottoOption.getBuyPlan().getLottoMoney());
 		lottoView.showStatistics(lottoStatistics);
 	}
 }

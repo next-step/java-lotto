@@ -28,7 +28,7 @@ public enum LottoResult {
 				.filter(lotto_result -> lotto_result.lottoResultMatcher
 						.isMatched(numberMatchedCount, isBonusBallMatched))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("cannot find matched LottoResult!"));
+				.orElse(NOTHING);
 	}
 
 	public long getAmount() {
