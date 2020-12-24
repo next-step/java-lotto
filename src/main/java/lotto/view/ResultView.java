@@ -1,7 +1,8 @@
 package lotto.view;
 
+import lotto.domain.InputValid;
 import lotto.domain.Judge;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Match;
 import lotto.util.Request;
 
@@ -12,12 +13,14 @@ public class ResultView {
     public void buyLottoAndNumbersPrint(Request request) {
         System.out.println(request.getTotalAmount() + "개를 구매했습니다.");
 
-        for (LottoNumbers lotto : request.getLotto()) {
+        for (Lotto lotto : request.getLotto()) {
             System.out.println(lotto.convertLottoNumbers());
         }
     }
 
     public void resultPrint(List<Integer> targetNumbers, Request request) {
+        new InputValid(targetNumbers);
+
         System.out.println("당첨 통계");
         System.out.println("--------");
 

@@ -17,7 +17,6 @@ public class LottoGame {
         resultView.buyLottoAndNumbersPrint(request);
 
         List<Integer> inputNumbers = inputView.inputLottoNumbers();
-        new InputValid(inputNumbers);
         resultView.resultPrint(inputNumbers, request);
     }
 }
