@@ -25,7 +25,7 @@ public class LottoTest {
 
 	@DisplayName("2개의 로또의 번호들을 정상적으로 비교하는지 확인한다.")
 	@ParameterizedTest
-	@MethodSource("provideTwoNumbersAndResult")
+	@MethodSource("provideTwoNumbersAndCount")
 	void compareTest(List<Integer> source1, List<Integer> source2, int count) {
 		Lotto lotto1 = Lotto.of(source1);
 		Lotto lotto2 = Lotto.of(source2);
@@ -33,11 +33,31 @@ public class LottoTest {
 		assertThat(lotto1.compare(lotto2)).isEqualTo(count);
 	}
 
-	private static Stream<Arguments> provideTwoNumbersAndResult() {
+	private static Stream<Arguments> provideTwoNumbersAndCount() {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), 6),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), 0),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(45, 44, 43, 1, 2, 3), 3)
+		);
+	}
+
+	@DisplayName("당첨 결과가 정상적으로 동작하는지 확인한다.")
+	@ParameterizedTest
+	@MethodSource("provideTwoNumbersAndResult")
+	void compareResultTest(List<Integer> source1, List<Integer> source2, LottoResult expected) {
+		Lotto lotto1 = Lotto.of(source1);
+		Lotto lotto2 = Lotto.of(source2);
+
+		LottoResult result = lotto1.compareResult(lotto2);
+
+		assertThat(result).isEqualTo(expected);
+	}
+
+	private static Stream<Arguments> provideTwoNumbersAndResult() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), LottoResult.FIRST),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), LottoResult.NONE),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(45, 44, 43, 1, 2, 3), LottoResult.FOURTH)
 		);
 	}
 }

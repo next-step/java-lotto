@@ -56,4 +56,17 @@ public class LottoNumbersTest {
 		assertThatThrownBy(() -> LottoNumbers.of(source))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("숫자 비교를 제대로 카운팅하는지 확인한다.")
+	@Test
+	void compareTest() {
+		List<Integer> source1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> source2 = Arrays.asList(1, 2, 3, 4, 5, 7);
+
+		LottoNumbers lottoNumbers1 = LottoNumbers.of(source1);
+		LottoNumbers lottoNumbers2 = LottoNumbers.of(source2);
+
+		int count = lottoNumbers1.compare(lottoNumbers2);
+		assertThat(count).isEqualTo(5);
+	}
 }

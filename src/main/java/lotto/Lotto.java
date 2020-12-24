@@ -21,6 +21,10 @@ public class Lotto {
 		return this.lottoNumbers.compare(lotto.lottoNumbers);
 	}
 
+	public LottoResult compareResult(Lotto lotto) {
+		return LottoResult.of(compare(lotto));
+	}
+
 	public boolean isSameLottoNumbers(List<Integer> numbers) {
 		return lottoNumbers.isSameNumbers(numbers);
 	}
