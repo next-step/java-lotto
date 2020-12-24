@@ -16,6 +16,7 @@ public class LottoMain {
         inputView.init();
         inputView.showInputMessage();
         int money = inputView.getPurchaseAmount();
+
         LottoGame lottoGame = new LottoGame(money);
 
         resultView.showPurchasedLottery(lottoGame.getLotteryList());
@@ -25,6 +26,6 @@ public class LottoMain {
 
         Map<Lottery, Integer> matchedResult = lottoGame.matchLottery(lottoGame.getLotteryList(), winningLottery);
 
-        resultView.showResult(matchedResult, profitRate);
+        resultView.showResult(matchedResult, lottoGame.calculateProfit(money, matchedResult));
     }
 }

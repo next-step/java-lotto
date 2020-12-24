@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.LottoGame;
 import step2.domain.Lottery;
+import step2.domain.LottoNumber;
 import step2.domain.Prize;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class ResultView {
      * @param matchedResult 당첨 결과
      * @param profitRate 수익률
      */
-    public void showResult(Map<Lottery, Integer> matchedResult, float profitRate) {
+    public void showResult(Map<Lottery, Integer> matchedResult, double profitRate) {
         printResultMessage();
 
         for (int i = 3; i <= 6; i++) {
@@ -99,7 +100,7 @@ public class ResultView {
      * @param profitRate 수익률
      * @return 손해인지 이익인지 반환
      */
-    private String getLossOrGain(float profitRate) {
+    private String getLossOrGain(double profitRate) {
         if (profitRate >= BASIS_OF_PROFIT) {
             return GAIN;
         }
@@ -110,8 +111,8 @@ public class ResultView {
      * 수익률을 출력하는 메소드
      * @param profitRate 수익률
      */
-    private void printProfitRate(float profitRate) {
-        System.out.print("총 수익률은 " + profitRate + "입니다.");
+    private void printProfitRate(double profitRate) {
+        System.out.printf("총 수익률은 %.2f 입니다.", profitRate);
         System.out.println(" (기준이 1이기 때문에 결과적으로는 " + getLossOrGain(profitRate) + "(이)라는 의미임)");
     }
 }

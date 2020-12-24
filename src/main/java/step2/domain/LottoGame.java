@@ -63,8 +63,8 @@ public class LottoGame {
      * @param matchedResult 로또 매칭 결과
      * @return 수익률
      */
-    public float calculateProfit(int money, Map<Lottery, Integer> matchedResult) {
-        return (float) (getProfit(matchedResult) / money);
+    public double calculateProfit(int money, Map<Lottery, Integer> matchedResult) {
+        return (double) getProfit(matchedResult) / money;
     }
 
     /**
@@ -78,6 +78,7 @@ public class LottoGame {
         for (int count : matchedResult.values()) {
             money += Prize.getWinningMoney(count);
         }
+
         return money;
     }
 }
