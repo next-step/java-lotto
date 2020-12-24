@@ -1,10 +1,12 @@
 package lotto;
 
 import lotto.modal.Count;
-import lotto.modal.Game;
+import lotto.modal.Lotto;
+import lotto.modal.LottoNumber;
 import lotto.modal.LottoResult;
 import lotto.modal.Lottos;
 import lotto.modal.Money;
+import lotto.modal.WinnerLotto;
 import lotto.view.UserView;
 
 public class LottoMain {
@@ -14,50 +16,48 @@ public class LottoMain {
 			Money money = getMoney();
 			Count count = getCount(money);
 			Lottos lottos = getLottos(count);
+			UserView.printLottos(lottos, count);
 
-			Game lottoGame = createGame(lottos);
+			WinnerLotto winnerLotto = getWinnerLotto();
+			LottoResult result = getLottoResult(lottos, winnerLotto);
 
-			lottoGameStart(lottoGame);
-		} catch (IllegalArgumentException illegalArgumentException) {
-			UserView.printErrorMsg(illegalArgumentException.getMessage());
+			UserView.printResult(result, money);
+		} catch (IllegalArgumentException exception) {
+			UserView.printError(exception.getMessage());
 		}
 	}
 
 	private static Money getMoney() {
-		return new Money(UserView.getMoney());
+		return Money.generateMoney(UserView.getMoney());
 	}
 
 	private static Count getCount(Money money) {
-		return new Count(UserView.getCount(), money.getBuyCount());
+		return Count.generateCount(UserView.getCount(), money.getBuyCount());
 	}
 
 	private static Lottos getLottos(Count count) {
-		int manualCount = count.getManualBuyCount();
-		Lottos lottos = new Lottos(count.getRandomCount());
+		int manualCount = count.manualCount();
+		Lottos lottos = new Lottos();
 
-		if (manualCount != 0) {
+		if (manualCount <= 0) {
 			UserView.printInputLottos();
 		}
 		for (int i = 0; i < manualCount; i++) {
-			lottos.addLotto(UserView.getLotto());
+			lottos.addManualLotto(UserView.getLotto());
 		}
+		lottos.generateRandomLotto(count.randomCount());
 
 		return lottos;
 	}
 
-	private static void lottoGameStart(Game lottoGame) {
-		UserView.printLottoPackage(condition, lottoGame.getLottoPackage());
+	private static WinnerLotto getWinnerLotto() {
+		Lotto winnerLotto = Lotto.generateManualLotto(UserView.getWinnerLotto());
+		LottoNumber bonusNumber = LottoNumber.generateNumber(UserView.getBonusNumber());
 
-		LottoResult result = lottoGame.getLottoResult(UserView.inputWinnerLotto());
-		UserView.printLottoResultRank(result.rankCount());
-		UserView.printLottoResultYield(result.report(condition));
+		return WinnerLotto.generateWinner(winnerLotto, bonusNumber);
 	}
 
-	private static Game createGame(Lottos manualLotto) {
-		return new Game(manualLotto, condition.getRandomCount());
-	}
-
-	private static Lottos getManualLotto() {
-		return new Lottos(UserView.inputManualLotto(condition.getCount()));
+	private static LottoResult getLottoResult(Lottos lottos, WinnerLotto winnerLotto) {
+		return LottoResult.generateResult(lottos, winnerLotto);
 	}
 }
