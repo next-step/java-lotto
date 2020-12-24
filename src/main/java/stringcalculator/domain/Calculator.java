@@ -2,21 +2,32 @@ package stringcalculator.domain;
 
 import stringcalculator.utils.Parser;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Calculator {
-    private static final int NUMBER_INITIAL = 0;
-    private final String[] numbers;
-    private final Sum sum;
+    private static final int LESS_THAN = 0;
 
-    public Calculator(String[] numbers) {
+    private final List<String> numbers;
+
+    public Calculator(List<String> numbers) {
         this.numbers = numbers;
-        this.sum = new Sum(NUMBER_INITIAL);
     }
 
     public int add() {
-        Arrays.stream(numbers).mapToInt(Parser::parse).forEach(sum::add);
+        int sum = 0;
+        for (String number : numbers) {
+            checkNumber(number);
 
-        return sum.getSum();
+            int numeric = Parser.parse(number);
+            sum += numeric;
+        }
+
+        return sum;
+    }
+
+    private void checkNumber(String number) {
+        if(Parser.parse(number) < LESS_THAN) {
+            throw new RuntimeException("0 이하 숫자는 입력할 수 없습니다.");
+        }
     }
 }

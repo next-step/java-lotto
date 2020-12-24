@@ -4,6 +4,8 @@ import stringcalculator.domain.Calculator;
 import stringcalculator.domain.Text;
 import stringcalculator.utils.Splitter;
 
+import java.util.List;
+
 public class StringAddCalculator {
     private static final int END_NUMBER = 0;
 
@@ -15,7 +17,7 @@ public class StringAddCalculator {
         }
 
         Splitter splitter = new Splitter();
-        String[] numbers = splitter.split(input);
+        List<String> numbers = splitter.split(input);
         Calculator calculator = new Calculator(numbers);
 
         return calculator.add();

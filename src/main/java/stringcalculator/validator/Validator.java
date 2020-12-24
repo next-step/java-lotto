@@ -8,6 +8,6 @@ public class Validator {
     }
 
     public boolean isBlank() {
-        return this.input == null || this.input.isEmpty();
+        return this.input == null || this.input.trim().length() == 0;
     }
 }
