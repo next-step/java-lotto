@@ -1,6 +1,8 @@
 package step2.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -17,22 +19,51 @@ public class InputView {
 
 	public int inputPurchasePrice() {
 		final String messageOfInputPurchasePrice = "구입금액을 입력해 주세요.";
-		final String messageOfResultPurchasePrice = "%d개를 구매했습니다.";
 
 		System.out.println(messageOfInputPurchasePrice);
 
 		int purchaseAmount = parseStringToInteger(scanner.nextLine());
 		validate(purchaseAmount);
 
-		System.out.printf((messageOfResultPurchasePrice) + "%n", purchaseAmount);
+		System.out.println();
 
 		return purchaseAmount;
 	}
 
-	private void validate(final int purchaseAmount) {
-		if (purchaseAmount < 0) {
-			throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+	public List<LottoNumbers> inputManualLottoNumbers() {
+		final String messageOfManualLottoNumbers = "수동으로 구매할 번호를 입력해 주세요.";
+		final String NUMBERS_DELIMITER = ", ";
+		final List<LottoNumbers> lottoNumbers = new ArrayList<>();
+		final List<String> numbersInputs = new ArrayList<>();
+		final int manualCount = inputManualLottoCount();
+
+		System.out.println(messageOfManualLottoNumbers);
+		for (int i = 0; i < manualCount; i++) {
+			numbersInputs.add(scanner.nextLine());
 		}
+
+		for (String numbersInput : numbersInputs) {
+			lottoNumbers.add(new LottoNumbers(convertNumberInputSeparatedByDelimiter(numbersInput, NUMBERS_DELIMITER)));
+		}
+		System.out.println();
+
+		return lottoNumbers;
+	}
+
+	private int inputManualLottoCount() {
+		final String messageOfManualCount = "수동으로 구매할 로또 수를 입력해 주세요.";
+		System.out.println(messageOfManualCount);
+		final int manualLottoCount = parseStringToInteger(scanner.nextLine());
+		System.out.println();
+		return manualLottoCount;
+	}
+
+	private Set<LottoNumber> convertNumberInputSeparatedByDelimiter(final String input, final String delimiter) {
+		Set<LottoNumber> numbers = new HashSet<>();
+		for (String numberStr : input.split(delimiter)) {
+			numbers.add(new LottoNumber(parseStringToInteger(numberStr)));
+		}
+		return numbers;
 	}
 
 	public LottoNumbers inputWinNumbers() {
@@ -43,7 +74,6 @@ public class InputView {
 		System.out.println(messageOfInputWinNumbers);
 
 		final String input = scanner.nextLine();
-
 		for (String numberStr : input.split(WIN_NUMBERS_DELIMITER)) {
 			winNumbers.add(new LottoNumber(parseStringToInteger(numberStr)));
 		}
@@ -64,6 +94,12 @@ public class InputView {
 			return Integer.parseInt(input);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+		}
+	}
+
+	private void validate(final int purchaseAmount) {
+		if (purchaseAmount < 0) {
+			throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
 		}
 	}
 

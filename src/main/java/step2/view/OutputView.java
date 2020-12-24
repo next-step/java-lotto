@@ -4,6 +4,7 @@ import java.util.List;
 
 import step2.domain.Lotto;
 import step2.domain.LottoProfit;
+import step2.domain.LottoPurchase;
 import step2.domain.LottoResults;
 import step2.domain.LottoWin;
 
@@ -76,6 +77,12 @@ public class OutputView {
 			PROFIT_CRITERIA));
 
 		System.out.println(profitOutputBuilder.toString());
+	}
+
+	public void printLottoCount(final LottoPurchase lottoPurchase) {
+		final String messageOfResultPurchasePrice = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+		System.out.printf((messageOfResultPurchasePrice) + "%n", lottoPurchase.getManualLottoCount(),
+			lottoPurchase.getAutoLottoIssueCount());
 	}
 
 }
