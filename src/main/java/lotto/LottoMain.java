@@ -13,18 +13,22 @@ public class LottoMain {
 
 	public static void main(String[] args) {
 		try {
-			Money money = getMoney();
-			Count count = getCount(money);
-			Lottos lottos = getLottos(count);
-			UserView.printLottos(lottos, count);
-
-			WinnerLotto winnerLotto = getWinnerLotto();
-			LottoResult result = getLottoResult(lottos, winnerLotto);
-
-			UserView.printResult(result, money);
+			lottoPlay();
 		} catch (IllegalArgumentException exception) {
 			UserView.printError(exception.getMessage());
 		}
+	}
+
+	private static void lottoPlay() {
+		Money money = getMoney();
+		Count count = getCount(money);
+		Lottos lottos = getLottos(count);
+		UserView.printLottos(lottos, count);
+
+		WinnerLotto winnerLotto = getWinnerLotto();
+		LottoResult result = getLottoResult(lottos, winnerLotto);
+
+		UserView.printResult(result, money);
 	}
 
 	private static Money getMoney() {
