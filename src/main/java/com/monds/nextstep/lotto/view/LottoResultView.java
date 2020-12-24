@@ -12,7 +12,7 @@ import java.util.Map;
 public class LottoResultView {
 
     public static void printLottos(Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottos.getManualCount(), lottos.getAutoCount());
         List<Lotto> lottoList = lottos.getAll();
         for (Lotto lotto : lottoList) {
             System.out.println(Arrays.toString(lotto.toArray()));
@@ -30,7 +30,8 @@ public class LottoResultView {
               .filter(ranking -> ranking != LottoRanking.NOT_MATCH)
               .forEach(ranking -> printLottoResultRanking(ranking, prizeByRanking));
 
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottoResult.calculateYield());
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+                lottoResult.calculateYield());
     }
 
     private static void printLottoResultRanking(LottoRanking ranking, Map<LottoRanking, Integer> prizeByRanking) {

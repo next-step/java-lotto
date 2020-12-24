@@ -7,14 +7,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.monds.nextstep.lotto.domain.LottoErrorMessage.*;
 
 public class LottoNumber {
 
     public static final int LOTTO_NUMBER_START = 1;
     public static final int LOTTO_NUMBER_END = 45;
-    private static final String NUMBER_RANGE_MESSAGE = "Lotto number range %s to %s but was: %s";
-    private static final String INVALID_INPUT_MESSAGE = "Lotto number cannot be null or empty: %s";
-    private static final String PARSING_ERROR_MESSAGE = "Input number is not parsable: %s";
 
     private static final Map<Integer, LottoNumber> NUMBER_BY_VALUE;
 
