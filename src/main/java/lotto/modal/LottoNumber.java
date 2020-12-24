@@ -3,6 +3,8 @@ package lotto.modal;
 import java.util.Objects;
 import java.util.Random;
 
+import lotto.util.StringValid;
+
 public class LottoNumber {
 
 	private static final Random randomGenerator = new Random();
@@ -11,22 +13,33 @@ public class LottoNumber {
 
 	private final int number;
 
-	public LottoNumber(int lottoNumber) {
-		validationLottoNumber(lottoNumber);
+	private LottoNumber(int lottoNumber) {
 		this.number = lottoNumber;
-	}
-
-	public LottoNumber(String userInputNumber) {
-		this(Integer.parseInt(userInputNumber));
 	}
 
 	public static int generateRandomLottoNumber() {
 		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
 	}
 
-	private void validationLottoNumber(int lottoNumber) {
+	public static LottoNumber generateNumber(int bonusNumber) {
+		validateLottoNumber(bonusNumber);
+		return new LottoNumber(bonusNumber);
+	}
+
+	public static LottoNumber generateNumber(String bonusNumber) {
+		validateLottoNumber(bonusNumber);
+		return generateNumber(Integer.parseInt(bonusNumber));
+	}
+
+	private static void validateLottoNumber(int lottoNumber) {
 		if (lottoNumber < LOTTO_NUMBER_BOUND_MIN || lottoNumber > LOTTO_NUMBER_BOUND_MAX) {
 			throw new IllegalArgumentException("Lotto 번호 범위 에러: 1 ~ 45 사이의 값을 입력해 주세요.");
+		}
+	}
+
+	private static void validateLottoNumber(String lottoNumber) {
+		if (StringValid.isNoNNumber(lottoNumber)) {
+			throw new IllegalArgumentException("Lotto 번호 범위 에러: 숫자를 입력해 주세요.");
 		}
 	}
 

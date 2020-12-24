@@ -9,8 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.util.StringValid;
-
 public class Lotto {
 	private static final String LOTTO_NUMBER_SEPARATOR = ",";
 	private static final int LOTTO_REQUIRED_COUNT = 6;
@@ -22,7 +20,6 @@ public class Lotto {
 	}
 
 	public static Lotto generateManualLotto(String userInputLotto) {
-		validationWinnerLotto(userInputLotto);
 		return new Lotto(generateUserLotto(userInputLotto));
 	}
 
@@ -31,7 +28,7 @@ public class Lotto {
 		Collections.sort(resultLotto);
 
 		return new Lotto(resultLotto.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::generateNumber)
 			.collect(Collectors.toList()));
 	}
 
@@ -45,10 +42,10 @@ public class Lotto {
 	}
 
 	private static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
-		validationLottoNumbers(inputStr);
+		validateLottoNumbers(inputStr);
 
 		return inputStr.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::generateNumber)
 			.collect(Collectors.toList());
 	}
 
@@ -56,13 +53,7 @@ public class Lotto {
 		return this.lotto.contains(bonusNumber);
 	}
 
-	private static void validationWinnerLotto(String userInputLotto) {
-		if (StringValid.isEmptyStr(userInputLotto)) {
-			throw new IllegalArgumentException("당첨 로또를 입력해주세요.");
-		}
-	}
-
-	private static void validationLottoNumbers(List<String> inputStr) {
+	private static void validateLottoNumbers(List<String> inputStr) {
 		if (new HashSet<>(inputStr).size() != LOTTO_REQUIRED_COUNT) {
 			throw new IllegalArgumentException();
 		}

@@ -12,7 +12,7 @@ public class WinnerLotto {
 	}
 
 	public static WinnerLotto generateWinner(Lotto winnerLotto, LottoNumber bonusNumber) {
-		validationWinnerLotto(winnerLotto, bonusNumber);
+		validateWinnerLotto(winnerLotto, bonusNumber);
 		return new WinnerLotto(winnerLotto, bonusNumber);
 	}
 
@@ -33,7 +33,7 @@ public class WinnerLotto {
 		return lotto.getLotto().contains(bonusNumber);
 	}
 
-	private static void validationWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
+	private static void validateWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
 
 		if (winnerLotto == null || bonusNumber == null) {
 			throw new IllegalArgumentException("당첨번호 or 보너스 번호가 잘못 입력되었습니다.");
