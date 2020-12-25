@@ -42,7 +42,7 @@ public class LottoTVShow {
 		List<LottoMatchResult> lottoResultList = new ArrayList<>();
 		for (Lotto lotto : buyLottos) {
 			boolean isMatchBonus = LottoPrizePolicy.isMatchBonusNumber(lotto, bonusNumber);
-			int matchCount = lotto.getMatchCount(lastWeekPrizeNumbers, lotto);
+			int matchCount = lastWeekPrizeNumbers.countMatchNumber(lotto);
 			LottoMatchResult lottoMatchResult = new LottoMatchResult(matchCount, isMatchBonus);
 			lottoResultList.add(lottoMatchResult);
 		}
