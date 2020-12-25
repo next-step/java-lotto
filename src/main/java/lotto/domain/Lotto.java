@@ -40,20 +40,12 @@ public class Lotto {
 		return autoLottos;
 	}
 
-	public List<Lotto> generateAutoLottoNumbers(int lottoPayCount) {
-		List<Lotto> purchasedLottos = new ArrayList<>();
-		for (int i = 0; i < lottoPayCount; i++) {
-			purchasedLottos.add(new Lotto(this.getShuffleNumbers()));
-		}
-		return purchasedLottos;
-	}
-
 	public int getMatchCount(Lotto lastWeekPrizeNumberList, Lotto purchasedLotto) {
 		return countMatchNumber(lastWeekPrizeNumberList, purchasedLotto);
 	}
 
-	public List<Lotto> generatePurchagedAutoLotto(int lottoTryCount) {
-		List<Lotto> purchasedLottos = new ArrayList<>();
+	public LottoList generatePurchagedAutoLotto(int lottoTryCount) {
+		LottoList purchasedLottos = new LottoList();
 		for (int i = 0; i < lottoTryCount; i++) {
 			purchasedLottos.add(new Lotto(this.getShuffleNumbers()));
 		}

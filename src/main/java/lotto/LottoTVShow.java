@@ -20,10 +20,10 @@ public class LottoTVShow {
 	public void start() {
 		int lottoTryCount = printIntro();
 		InputView.printPurchaseLottoCount(lottoTryCount);
-		List<Lotto> purchasedLottos = lotto.generatePurchagedAutoLotto(lottoTryCount);
+		LottoList purchasedLottos = lotto.generatePurchagedAutoLotto(lottoTryCount);
 		InputView.printPurchaseLottoNumber(purchasedLottos);
 
-		List<LottoMatchResult> lottoMatchResultList = processLotto(purchasedLottos);
+		LottoMatchResultList lottoMatchResultList = processLotto(purchasedLottos);
 
 		this.lottoResult.arrangePrize(lottoMatchResultList, LOTTO_PRICE_PER_SHEET);
 		ResultView.printResult(lottoMatchResultList, lottoResult);
@@ -34,15 +34,15 @@ public class LottoTVShow {
 		return calculateLottoCount(purchaseAmount);
 	}
 
-	private List<LottoMatchResult> processLotto(List<Lotto> purchasedLottos) {
+	private LottoMatchResultList processLotto(LottoList purchasedLottos) {
 		Lotto lastWeekPrizeNumbers = InputView.printLastPrizeInput();
 		int bonusNumber = InputView.printBonusNumberInput();
 		return this.compareLastWeekPrizeNumberWithPurchasedLottoNumber(lastWeekPrizeNumbers, purchasedLottos, bonusNumber);
 	}
 
-	public List<LottoMatchResult> compareLastWeekPrizeNumberWithPurchasedLottoNumber(Lotto lastWeekPrizeNumbers, List<Lotto> buyLottos, int bonusNumber) {
-		List<LottoMatchResult> lottoResultList = new ArrayList<>();
-		for (Lotto lotto : buyLottos) {
+	public LottoMatchResultList compareLastWeekPrizeNumberWithPurchasedLottoNumber(Lotto lastWeekPrizeNumbers,LottoList purchasedLottos, int bonusNumber) {
+		LottoMatchResultList lottoResultList = new LottoMatchResultList();
+		for (Lotto lotto : purchasedLottos.getLottosList()) {
 			boolean isMatchBonus = LottoPrizePolicy.isMatchBonusNumber(lotto, bonusNumber);
 			int matchCount = lastWeekPrizeNumbers.countMatchNumber(lotto);
 			LottoMatchResult lottoMatchResult = new LottoMatchResult(matchCount, isMatchBonus);

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoList;
 
 import java.util.*;
 
@@ -46,8 +47,8 @@ public class InputView {
 		System.out.println(message);
 	}
 
-	public static void printPurchaseLottoNumber(List<Lotto> purchargedLottos) {
-		for(Lotto lotto : purchargedLottos){
+	public static void printPurchaseLottoNumber(LottoList purchargedLottos) {
+		for(Lotto lotto : purchargedLottos.getLottosList()){
 			System.out.println(lotto.toString());
 		}
 

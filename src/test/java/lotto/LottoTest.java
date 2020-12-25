@@ -21,14 +21,6 @@ public class LottoTest {
 	}
 
 	@Test
-	public void 구매장수에_맞게_6개의_번호의_로또가_뽑혔는지_테스트() {
-		List<Lotto> result = lotto.generateAutoLottoNumbers(2);
-		assertThat(result.size()).isEqualTo(2);
-		Lotto lotto = result.get(0);
-		assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
-	}
-
-	@Test
 	public void 지난주_당첨번호에서_내가_산_로또번호를_비교해서_결과를_확인한다(){
 		Lotto lotto = new Lotto();
 		Lotto buyLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));

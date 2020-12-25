@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.LottoMatchResultList;
 import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoResult;
 import lotto.model.LottoPrizePolicy;
@@ -13,8 +14,8 @@ public class ResultView {
 	public ResultView() {
 	}
 
-	public static void printResult(List<LottoMatchResult> lottoResultList, LottoResult lottoResult) {
-		printMatch(lottoResultList, lottoResult);
+	public static void printResult(LottoMatchResultList lottoResultList, LottoResult lottoResult) {
+		printMatch(lottoResultList.getLottoMatchResults(), lottoResult);
 		printEarningRate(lottoResult.getEarningsRate());
 	}
 
@@ -23,32 +24,30 @@ public class ResultView {
 		matchList.removeIf(e -> e < LottoPrizePolicy.getMinMatchCount());
 		Collections.sort(matchList);
 
+
 		for (LottoPrizePolicy lottoPrizePolicy : LottoPrizePolicy.values()){
-			int actualMatchCount = hasMatchCount(matchList, lottoPrizePolicy.getMatchCount());
-			List<LottoMatchResult> bonusMatchResult = hasBonusNumber(lottoResultList, lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.isBonus());
+			int actualMatchCount = hasMatchCount(lottoPrizePolicy, lottoResultList);
+			List<LottoMatchResult> bonusMatchResult = hasBonusNumber(lottoResultList, lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.isBonus(), lottoPrizePolicy);
 			printAnalyzeMessage(lottoPrizePolicy, actualMatchCount, bonusMatchResult);
 
 		}
 	}
 
-	private static List<LottoMatchResult> hasBonusNumber(List<LottoMatchResult> lottoResultList, int matchCount, boolean bonus) {
-		return lottoResultList.stream().filter(r -> r.getMatchResult() == matchCount && bonus == true).collect(Collectors.toList());
+	private static List<LottoMatchResult> hasBonusNumber(List<LottoMatchResult> lottoResultList, int matchCount, boolean bonus, LottoPrizePolicy lottoPrizePolicy) {
+		return lottoResultList.stream().filter(r -> r.getMatchResult() == matchCount && bonus == true && LottoPrizePolicy.SECOND.equals(lottoPrizePolicy)).collect(Collectors.toList());
 	}
 
 	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResult) {
-		if(LottoPrizePolicy.SECOND.equals(lottoPrizePolicy)){
+		if(LottoPrizePolicy.SECOND.equals(lottoPrizePolicy) && !lottoMatchResult.isEmpty()){
 			System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
 			return;
 		}
 		System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
-
 	}
 
-	private static int hasMatchCount(List<Integer> lottoResultList, int matchCount) {
-		if(lottoResultList.contains(matchCount)){
-			return Collections.frequency(lottoResultList, matchCount);
-		}
-		return 0;
+	private static int hasMatchCount(LottoPrizePolicy lottoPrizePolicy, List<LottoMatchResult> lottoResultList) {
+		List<Integer> matchList = lottoResultList.stream().filter(r -> r.getMatchResult() == lottoPrizePolicy.getMatchCount() && r.isHasBonusNumber() == lottoPrizePolicy.isBonus() ).map(LottoMatchResult::getMatchResult).collect(Collectors.toList());
+		return matchList.size();
 	}
 
 	private static void printEarningRate(double earningRate) {
