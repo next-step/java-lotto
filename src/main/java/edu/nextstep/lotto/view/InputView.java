@@ -63,16 +63,8 @@ public class InputView {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<List<Integer>> lottoNumbersList = new ArrayList<>();
 		for (int i = 0; i < numberOfManualPurchase; i++) {
-			lottoNumbersList.add(inputManualNumbers());
+			lottoNumbersList.add(InputView.inputLottoNumbers());
 		}
 		return lottoNumbersList;
-	}
-
-	private static List<Integer> inputManualNumbers() {
-		List<Integer> lottoNumbers;
-		while (LottoController.isNotValidLottoNumbers(lottoNumbers = InputView.inputLottoNumbers())) {
-			System.err.println("올바른 로또 번호가 아닙니다. 다시 입력해주세요.");
-		}
-		return lottoNumbers;
 	}
 }
