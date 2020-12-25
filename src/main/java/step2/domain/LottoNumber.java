@@ -23,6 +23,11 @@ public class LottoNumber {
         }
     }
 
+    /**
+     * 개별 번호가 올바른 범위에 있는지 검사하는 메소드
+     * @param number 개별 번호
+     * @return LottoNumber 객체로 변환된 당첨 번호
+     */
     public LottoNumber(int number) {
         if (number < LOTTO_BALL_START_NUMBER || number > LOTTO_BALL_END_NUMBER) {
             throw new IsInvalidRangeException(WINNING_NUMBER_INVALID_RANGE);

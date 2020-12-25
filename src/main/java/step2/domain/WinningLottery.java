@@ -39,8 +39,8 @@ public class WinningLottery {
     }
 
     /**
-     * 입력 받은 당첨 번호를 숫자로 변환해주는 메소드
-     * @param winningNumbers 당첨 번호
+     * 입력 받은 당첨 번호 배열을 LottoNumber 리스트로 변환해주는 메소드
+     * @param winningNumbers 당첨 번호 배열
      * @return 당첨 번호 리스트
      */
     private List<LottoNumber> makeLottoNumbers(String[] winningNumbers) {
@@ -50,9 +50,9 @@ public class WinningLottery {
     }
 
     /**
-     * 개별 당첨 번호를 숫자로 변환, 올바른 범위에 있는지 검사하는 메소드
-     * @param number 개별 당첨 번호
-     * @return LottoNumber 객체로 변환된 당첨 번호
+     * 문자열 번호를 LottoNumber 객체로 반환
+     * @param number 당첨 번호
+     * @return LottoNumber
      */
     private LottoNumber convertToLottoNumbers(String number) {
         return new LottoNumber(Integer.parseInt(number));
