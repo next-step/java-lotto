@@ -1,6 +1,7 @@
 package calculator;
 
 public class Number {
+    private static final int CRITICAL_NUMBER = 0;
 
     private final int number;
 
@@ -10,7 +11,7 @@ public class Number {
     }
 
     private void validate(int number) {
-        if (number < 0) {
+        if (number < CRITICAL_NUMBER) {
             throw new IllegalArgumentException("음수는 허용되지 않습니다.");
        }
     }
