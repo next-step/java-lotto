@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -18,6 +15,26 @@ public class LottoTicket {
         validate(ticket);
 
         return new LottoTicket(ticket);
+    }
+
+    public static LottoTicket newTicket() {
+        List<Number> ticket = createTicketNumber();
+        validate(ticket);
+
+        Collections.sort(ticket);
+
+        return new LottoTicket(ticket);
+    }
+
+    private static List<Number> createTicketNumber() {
+        List<Number> lottoTotalNumbers = LottoTotalNumberUtils.getLottoTotalNumbers();
+
+        List<Number> ticket = new ArrayList<>();
+        for (int i = 0; i < LottoTicket.LOTTO_TICKET_SIZE; i++) {
+            ticket.add(lottoTotalNumbers.get(i));
+        }
+
+        return ticket;
     }
 
     private static void validate(List<Number> ticket) {

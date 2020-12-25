@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +13,16 @@ public class LottoTickets {
     }
 
     public static LottoTickets newTickets(List<LottoTicket> ticketList) {
+        return new LottoTickets(ticketList);
+    }
+
+    public static LottoTickets newTickets(int purchaseCount) {
+        List<LottoTicket> ticketList = new ArrayList<>();
+
+        for (int i = 0; i < purchaseCount; i++) {
+            ticketList.add(LottoTicket.newTicket());
+        }
+
         return new LottoTickets(ticketList);
     }
 

@@ -29,40 +29,6 @@ class LottoTicketTest {
         assertThat(autoTicket.size()).isEqualTo(LottoTicket.LOTTO_TICKET_SIZE);
     }
 
-    @DisplayName(value = "티켓 번호가 데이터 정확성 체크")
-    @Test
-    void 티켓_데이터_정확성() {
-        // given
-        List<Number> testTicket = Arrays.asList(Number.newNumber(31),
-                                                Number.newNumber(45),
-                                                Number.newNumber(30),
-                                                Number.newNumber(22),
-                                                Number.newNumber(21),
-                                                Number.newNumber(1));
-        LottoTicket testLottoTicket = LottoTicket.newTicket(testTicket);
-
-        // when
-        LottoTicketCreatable lottoTicketCreatable = new LottoTicketCreatable() {
-            @Override
-            public LottoTicket createTicket() {
-                return testLottoTicket;
-            }
-
-            @Override
-            public LottoTickets createTickets(int purchaseNumber) {
-                List<LottoTicket> ticketList = new ArrayList<>();
-                for (int i = 0; i < purchaseNumber; i++) {
-                    ticketList.add(createTicket());
-                }
-
-                return LottoTickets.newTickets(ticketList);
-            }
-        };
-
-        // then
-        assertThat(lottoTicketCreatable.createTicket()).isEqualTo(testLottoTicket);
-    }
-
     @Test
     void 로또_번호가_6개가_아니면_예외() {
         // given

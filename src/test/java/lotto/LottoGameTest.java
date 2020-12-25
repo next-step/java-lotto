@@ -20,26 +20,7 @@ class LottoGameTest {
                                                 Number.newNumber(21),
                                                 Number.newNumber(1));
 
-        LottoTicket testLottoTicket = LottoTicket.newTicket(testTicket);
-
-        LottoTicketCreatable lottoTicketCreatable = new LottoTicketCreatable() {
-            @Override
-            public LottoTicket createTicket() {
-                return testLottoTicket;
-            }
-
-            @Override
-            public LottoTickets createTickets(int purchaseCount) {
-                List<LottoTicket> ticketList = new ArrayList<>();
-                for (int i = 0; i < purchaseCount; i++) {
-                    ticketList.add(createTicket());
-                }
-
-                return LottoTickets.newTickets(ticketList);
-            }
-        };
-
-        LottoTickets lottoTickets = lottoTicketCreatable.createTickets(1);
+        LottoTickets lottoTickets = LottoTickets.newTickets(List.of(LottoTicket.newTicket(testTicket)));
 
         // when
         LottoTicket lottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(31),
@@ -56,5 +37,28 @@ class LottoGameTest {
 
         // then
         assertThat(lottoGame).isEqualTo(expectLottoGame);
+    }
+
+    @Test
+    void test() {
+        // given
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+
+        System.out.println(list1.toString());
+
+        Integer[] in = {1, 2, 3};
+
+//        List<Integer> list2 = List.of(1, 2, 3);
+        List<Integer> list2 = List.of(in);
+        in[0] = 5;
+
+
+        System.out.println(list2.toString());
+        // when
+
+        // then
     }
 }

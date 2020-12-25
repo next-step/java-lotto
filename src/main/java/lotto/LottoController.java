@@ -5,12 +5,12 @@ import lotto.ui.OutputView;
 
 public class LottoController {
 
-    public static void run(LottoTicketCreatable lottoTicketCreatable) {
+    public static void run() {
         int purchasePrice = InputView.inputPrice();
 
         int purchaseCount = PurchaseNumberCalculation.calculateNumberPurchase(purchasePrice);
 
-        LottoTickets lottoTickets = lottoTicketCreatable.createTickets(purchaseCount);
+        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseCount);
         OutputView.printTicketList(lottoTickets, purchasePrice);
 
         LottoTicket inputLastWeeksWinningNumbers = LottoTicket.newTicket(InputView.inputLastWeeksWinningNumbers());
