@@ -25,16 +25,16 @@ class LottoGameTest {
     @DisplayName("입력받은 구입 금액 만큼 로또 장수를 구매했는지 테스트")
     @CsvSource(value = {"14000:14", "7000:7", "5000:5"}, delimiter = ':')
     void create_lottery_by_input_money(int money, int expected) {
-        List<Lottery> lotteryList = lottoGame.buy(new Money(money).getNumberOfLottery());
-        assertThat(lotteryList.size()).isEqualTo(expected);
+        lottoGame.buy(new Money(money).getNumberOfLottery());
+        assertThat(lottoGame.getLotteryListSize()).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("당첨 수익률 계산 테스트")
     void calculate_profit() {
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
-        MatchedResult matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
-        double profitRate = lottoGame.calculateProfitRate(5000 ,matchedResult);
+        lottoGame.matchLottery(lotteryList, winningLottery);
+        double profitRate = lottoGame.calculateProfitRate(5000 , lottoGame.getMatchedResult().getProfit());
 
         assertThat(profitRate).isEqualTo(11.0f);
     }

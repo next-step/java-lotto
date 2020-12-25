@@ -24,21 +24,21 @@ public class MatchedResultTest {
     @DisplayName("일치하는 복권 갯수를 구하는 테스트 (복권 당첨 등수 테스트)")
     void get_count() {
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,5,6");
-        MatchedResult matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
+        lottoGame.matchLottery(lotteryList, winningLottery);
 
-        assertThat(matchedResult.getCount(Prize.FIRST.getMatched())).isEqualTo(1);
-        assertThat(matchedResult.getCount(Prize.SECOND.getMatched())).isEqualTo(1);
-        assertThat(matchedResult.getCount(Prize.THIRD.getMatched())).isEqualTo(1);
-        assertThat(matchedResult.getCount(Prize.FIRST.getMatched())).isEqualTo(1);
-        assertThat(matchedResult.getCount(Prize.NONE.getMatched())).isEqualTo(1);
+        assertThat(lottoGame.getMatchedResult().getCount(Prize.FIRST.getMatched())).isEqualTo(1);
+        assertThat(lottoGame.getMatchedResult().getCount(Prize.SECOND.getMatched())).isEqualTo(1);
+        assertThat(lottoGame.getMatchedResult().getCount(Prize.THIRD.getMatched())).isEqualTo(1);
+        assertThat(lottoGame.getMatchedResult().getCount(Prize.FIRST.getMatched())).isEqualTo(1);
+        assertThat(lottoGame.getMatchedResult().getCount(Prize.NONE.getMatched())).isEqualTo(1);
     }
 
     @Test
     @DisplayName("당첨 금액 계산 테스트")
     void get_profit() {
         WinningLottery winningLottery = new WinningLottery("1,2,3,4,30,40");
-        MatchedResult matchedResult = lottoGame.matchLottery(lotteryList, winningLottery);
-        assertThat(matchedResult.getProfit()).isEqualTo(55_000);
+        lottoGame.matchLottery(lotteryList, winningLottery);
+        assertThat(lottoGame.getMatchedResult().getProfit()).isEqualTo(55_000);
     }
 
     List<Lottery> make_lottery_list() {

@@ -1,13 +1,10 @@
 package step2;
 
-import step2.domain.Lottery;
 import step2.domain.LottoGame;
-import step2.domain.MatchedResult;
+import step2.domain.Money;
 import step2.domain.WinningLottery;
 import step2.view.InputView;
 import step2.view.ResultView;
-
-import java.util.Map;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -15,20 +12,24 @@ public class LottoMain {
         ResultView resultView = new ResultView();
 
         inputView.init();
-        inputView.showInputMessage();
-        int money = inputView.getPurchaseAmount();
+        inputView.printInputMessage();
+
+        int amount = inputView.getPurchaseAmount();
+        Money money = new Money(amount);
 
         LottoGame lottoGame = new LottoGame(money);
 
-        resultView.showPurchasedLottery(lottoGame.getLotteryList());
-        inputView.showInputWinningMessage();
+        resultView.printNumberOfPurchased(lottoGame.getLotteryListSize());
+        resultView.printPurchasedLotteries(lottoGame.getLotteryList());
 
-        WinningLottery winningLottery = new WinningLottery(inputView.getWinningNumbers());
+        inputView.printInputWinningMessage();
 
-        MatchedResult matchedResult = lottoGame.matchLottery(lottoGame.getLotteryList(), winningLottery);
+        String winningNumbers = inputView.getWinningNumbers();
+        lottoGame.matchLottery(lottoGame.getLotteryList(), new WinningLottery(winningNumbers));
 
-        resultView.showResult(
-                matchedResult,
-                lottoGame.calculateProfitRate(money, matchedResult));
+        resultView.printResult(
+                lottoGame.getMatchedResult(),
+                lottoGame.calculateProfitRate(money.getMoney(), lottoGame.getMatchedResult().getProfit())
+        );
     }
 }

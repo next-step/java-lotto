@@ -20,12 +20,18 @@ public class ResultView {
     private static final int BASIS_OF_PROFIT = 1;
 
     /**
+     * 구입한 복권 장 수를 출력하는 메소드
+     * @param count 구입한 복권 개수
+     */
+    public void printNumberOfPurchased(int count) {
+        System.out.println(count + OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG);
+    }
+
+    /**
      * 구입한 복권을 출력하는 메소드
      * @param lotteryList 자동으로 발행된 복권 리스트
      */
-    public void showPurchasedLottery(List<Lottery> lotteryList) {
-        printNumberOfPurchased(lotteryList.size());
-        
+    public void printPurchasedLotteries(List<Lottery> lotteryList) {
         for (Lottery lottery : lotteryList) {
             printEachLottery(lottery);
         }
@@ -48,19 +54,11 @@ public class ResultView {
     }
 
     /**
-     * 구입한 복권 장 수를 출력하는 메소드
-     * @param size 구입한 복권 개수
-     */
-    private void printNumberOfPurchased(int size) {
-        System.out.println(size + OUTPUT_NUMBER_OF_PURCHASED_LOTTERY_MSG);
-    }
-
-    /**
      * 로또 결과를 출력하는 메소드
      * @param matchedResult 당첨 결과
      * @param profitRate 수익률
      */
-    public void showResult(MatchedResult matchedResult, double profitRate) {
+    public void printResult(MatchedResult matchedResult, double profitRate) {
         printResultMessage();
 
         for (int i = 3; i <= 6; i++) {

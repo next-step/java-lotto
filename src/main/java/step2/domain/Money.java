@@ -26,6 +26,10 @@ public class Money {
         return money / 1000;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

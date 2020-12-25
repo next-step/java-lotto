@@ -16,7 +16,7 @@ public class InputView {
     /**
      * 사용자 입력 메시지를 출력하는 메소드
      */
-    public void showInputMessage() {
+    public void printInputMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
     }
 
@@ -31,7 +31,7 @@ public class InputView {
     /**
      * 사용자 입력 메시지를 출력하는 메소드
      */
-    public void showInputWinningMessage() {
+    public void printInputWinningMessage() {
         System.out.println();
         System.out.println(INPUT_WINNING_NUMBERS_MSG);
         scanner.nextLine();
