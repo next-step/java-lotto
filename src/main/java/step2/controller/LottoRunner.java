@@ -5,6 +5,7 @@ import step2.domain.LottoNumber;
 import step2.domain.LottoNumbers;
 import step2.domain.LottoPrice;
 import step2.domain.LottoProfit;
+import step2.domain.LottoPurchase;
 import step2.domain.LottoResults;
 import step2.domain.Lottos;
 import step2.view.InputView;
@@ -22,7 +23,9 @@ public class LottoRunner {
 
 	public void start() {
 		LottoPrice lottoPrice = new LottoPrice(inputView.inputPurchasePrice());
-		Lottos lottos = LottoMachine.issue(lottoPrice);
+		LottoPurchase lottoPurchase = new LottoPurchase(lottoPrice, inputView.inputManualLottoNumbers());
+		Lottos lottos = LottoMachine.issue(lottoPurchase);
+		outputView.printLottoCount(lottoPurchase);
 		outputView.printLottos(lottos.getLottos());
 
 		LottoNumbers winLottoNumbers = inputView.inputWinNumbers();

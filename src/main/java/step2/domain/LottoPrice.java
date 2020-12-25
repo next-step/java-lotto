@@ -29,4 +29,8 @@ public class LottoPrice {
 	public int getPurchasePrice() {
 		return purchasePrice;
 	}
+
+	public int getUnitPrice() {
+		return unitPrice;
+	}
 }
