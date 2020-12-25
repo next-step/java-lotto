@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoGameTest {
     @Test
     void create() {
-        LottoGame lottoGame = new LottoGame(new LottoCount("15000"));
+        LottoGame lottoGame = new LottoGame();
     }
 
     @ParameterizedTest
@@ -48,16 +48,16 @@ public class LottoGameTest {
 
     @Test
     void start() {
-        LottoGame lottoGame = new LottoGame(new LottoCount("5000"));
-        lottoGame.start();
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.start(new LottoCount("5000"));
         LottoResult lottoResult = lottoGame.getLottoResult();
         System.out.println(lottoResult.getLottosView());
     }
 
     @Test
     void match() {
-        LottoGame lottoGame = new LottoGame(new LottoCount("15000"));
-        lottoGame.start();
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.start(new LottoCount("15000"));
         LottoResult lottoResult = lottoGame.getLottoResult();
         System.out.println(lottoResult.getLottosView());
         List<Integer> matchCounts = lottoGame.match(new WinningLotto("1,2,3,4,5,6"));

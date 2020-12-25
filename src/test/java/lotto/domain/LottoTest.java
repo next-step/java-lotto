@@ -47,7 +47,7 @@ public class LottoTest {
     @Test
     void match() {
         Lotto lotto = new Lotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        int count = lotto.match(Arrays.asList(1, 2, 9, 4, 5, 6));
+        int count = lotto.match(Lotto.of(Arrays.asList(1, 2, 9, 4, 5, 6)));
         assertThat(count).isEqualTo(5);
     }
 

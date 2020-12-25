@@ -51,14 +51,14 @@ public class Lotto {
         }
     }
 
-    public int match(List<Integer> winLotto) {
+    public int match(List<LottoNumber> winLotto) {
         return (int) winLotto.stream()
                 .filter(lottoNumber -> containsLottoNumber(lottoNumber))
                 .count();
     }
 
-    private boolean containsLottoNumber(int lottoNumber) {
-        return this.lotto.contains(new LottoNumber(lottoNumber));
+    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return this.lotto.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLotto() {

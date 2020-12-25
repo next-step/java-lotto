@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoStatistic {
     private static final String RANK_FOUR_REWARD_MESSAGE = "3개 일치 (5000원)- %d개\n";
@@ -10,57 +12,31 @@ public class LottoStatistic {
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int PURCHASE_UNIT = 1000;
 
-    private int firstRankCount;
-    private int secondRankCount;
-    private int thirdRankCount;
-    private int fourRankCount;
     private int lottCount;
+    private Map<Rank, Integer> rankCount = new HashMap<>();
 
     public LottoStatistic(List<Integer> matchCounts, LottoCount lottoCount) {
         lottCount = lottoCount.count();
-        for (int matchCount : matchCounts) {
-            setRankCount(matchCount);
-        }
+        setRankCount(matchCounts);
     }
 
-    private void setRankCount(int matchCount) {
-        Rank rank = Rank.valueOfRank(matchCount);
-        setFirstRankCount(rank);
-        setSecondRankCount(rank);
-        setThirdRankCount(rank);
-        setFourRankCount(rank);
-    }
-
-    private void setFourRankCount(Rank rank) {
-        if (rank.isFour()) {
-            fourRankCount++;
-        }
-    }
-
-    private void setThirdRankCount(Rank rank) {
-        if (rank.isThird()) {
-            thirdRankCount++;
-        }
-    }
-
-    private void setSecondRankCount(Rank rank) {
-        if (rank.isSecond()) {
-            secondRankCount++;
-        }
-    }
-
-    private void setFirstRankCount(Rank rank) {
-        if (rank.isFirst()) {
-            firstRankCount++;
+    public void setRankCount(List<Integer> matchCounts) {
+        for (int count : matchCounts) {
+            Rank rank = Rank.valueOfRank(count);
+            if (rankCount.get(rank) == null) {
+                rankCount.put(rank, 1);
+                continue;
+            }
+            rankCount.put(rank, rankCount.get(rank) + 1);
         }
     }
 
     public StringBuilder message() {
         StringBuilder message = new StringBuilder();
-        message.append(String.format(RANK_FOUR_REWARD_MESSAGE, fourRankCount));
-        message.append(String.format(RANK_THIRD_REWARD_MESSAGE, thirdRankCount));
-        message.append(String.format(RANK_SECOND_REWARD_MESSAGE, secondRankCount));
-        message.append(String.format(RANK_FIRST_REWARD_MESSAGE, firstRankCount));
+        message.append(String.format(RANK_FOUR_REWARD_MESSAGE, rankCount.get(Rank.FOUR)));
+        message.append(String.format(RANK_THIRD_REWARD_MESSAGE, rankCount.get(Rank.THIRD)));
+        message.append(String.format(RANK_SECOND_REWARD_MESSAGE, rankCount.get(Rank.SECOND)));
+        message.append(String.format(RANK_FIRST_REWARD_MESSAGE, rankCount.get(Rank.FIRST)));
         message.append(profitMessage());
         return message;
     }
@@ -74,10 +50,10 @@ public class LottoStatistic {
     }
 
     public int getTotalReward() {
-        return (firstRankCount * Rank.FIRST.getMoney())
-                + (secondRankCount * Rank.SECOND.getMoney())
-                + (thirdRankCount * Rank.THIRD.getMoney())
-                + (fourRankCount * Rank.FOUR.getMoney());
+        return (rankCount.get(Rank.FIRST) * Rank.FIRST.getMoney())
+                + (rankCount.get(Rank.SECOND) * Rank.SECOND.getMoney())
+                + (rankCount.get(Rank.THIRD) * Rank.THIRD.getMoney())
+                + (rankCount.get(Rank.FOUR) * Rank.FOUR.getMoney());
 
 
     }

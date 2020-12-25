@@ -15,13 +15,14 @@ public class WinningLotto {
     private static final String VALID_SEPARAOR_MESSAGE = "구분자 ,가 없습니다.";
     private static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
 
-    private final List<Integer> numbers;
+    private final Lotto lotto;
 
     public WinningLotto(String inputs) {
         validateWinningLotto(inputs);
-        this.numbers = Arrays.stream(inputs.split(COMMA_SEPARATOR))
-                .map(input -> parseNumber(input))
+        List<LottoNumber> numbers = Arrays.stream(inputs.split(COMMA_SEPARATOR))
+                .map(input -> new LottoNumber(parseNumber(input)))
                 .collect(toList());
+        this.lotto = new Lotto(numbers);
     }
 
     private int parseNumber(String input) {
@@ -50,20 +51,20 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return Objects.equals(numbers, that.numbers);
+        return Objects.equals(lotto, that.lotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lotto);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return lotto.getLotto();
     }
 }

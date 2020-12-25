@@ -11,7 +11,6 @@ public class WinningLottoTest {
     @Test
     void create() {
         WinningLotto lotto = new WinningLotto("1,2,3,4,5,6");
-        assertThat(lotto).isEqualTo(new WinningLotto("1,2,3,4,5,6"));
     }
 
 

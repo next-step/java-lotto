@@ -12,9 +12,9 @@ import java.util.List;
 public class LottoGameApplication {
     public static void main(String[] args) {
         LottoCount lottoCount = LottoInputView.getLottoCount();
-        LottoGame lottoGame = new LottoGame(lottoCount);
-        lottoGame.start();
-        
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.start(lottoCount);
+
         LottoResult lottoResult = lottoGame.getLottoResult();
         LottoOutView.show(lottoResult.getLottosView());
 

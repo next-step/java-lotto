@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber{
+public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final String OUT_OF_RANGE_MESSAGE = "로또 번호의 범위를 초과하였습니다.";

@@ -3,17 +3,16 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGame {
-    private Lottos lottos = new Lottos();
-    private LottoNumberRepository lottoNumberRepository = new LottoNumberRepository();
-    private LottoCount lottoCount;
+    private Lottos lottos;
     private LottoResult lottoResult;
 
-    public LottoGame(LottoCount lottoCount) {
-        this.lottoCount = lottoCount;
+    public LottoGame() {
+        this.lottos = new Lottos();
     }
 
 
-    public void start() {
+    public void start(LottoCount lottoCount) {
+        LottoNumberRepository lottoNumberRepository = new LottoNumberRepository();
         for (int i = 0; i < lottoCount.count(); i++) {
             Lotto lotto = new Lotto(lottoNumberRepository.getAutoLottoNumbers());
             lottos.add(lotto);
