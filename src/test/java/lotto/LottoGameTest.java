@@ -2,7 +2,6 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,28 +36,5 @@ class LottoGameTest {
 
         // then
         assertThat(lottoGame).isEqualTo(expectLottoGame);
-    }
-
-    @Test
-    void test() {
-        // given
-        List<Integer> list1 = new ArrayList<>();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-
-        System.out.println(list1.toString());
-
-        Integer[] in = {1, 2, 3};
-
-//        List<Integer> list2 = List.of(1, 2, 3);
-        List<Integer> list2 = List.of(in);
-        in[0] = 5;
-
-
-        System.out.println(list2.toString());
-        // when
-
-        // then
     }
 }
