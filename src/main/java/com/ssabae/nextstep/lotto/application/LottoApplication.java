@@ -9,6 +9,7 @@ import com.ssabae.nextstep.lotto.domain.lotto.LottoTickets;
 import com.ssabae.nextstep.lotto.view.InputView;
 import com.ssabae.nextstep.lotto.view.LottoPrinter;
 import com.ssabae.nextstep.lotto.view.ResultView;
+import java.util.List;
 
 /**
  * @author : leesangbae
@@ -21,14 +22,15 @@ public class LottoApplication {
     private final ResultView resultView;
 
     public LottoApplication() {
-        LottoTicketGenerator generator = new AutoLottoTicketGenerator();
-        this.lottoTicketMachine = new LottoTicketMachine(generator);
+        LottoTicketGenerator autoGenerator = new AutoLottoTicketGenerator();
+        this.lottoTicketMachine = new LottoTicketMachine(autoGenerator);
         this.resultView = new ResultView();
     }
 
     public void launch() {
         Money money = InputView.buyMoneyInput();
-        LottoTickets lottoTickets = lottoTicketMachine.buy(money);
+        List<String> manualTicketStrings = InputView.manualTicketInput();
+        LottoTickets lottoTickets = lottoTicketMachine.buy(money, manualTicketStrings);
 
         LottoPrinter.print(lottoTickets);
 

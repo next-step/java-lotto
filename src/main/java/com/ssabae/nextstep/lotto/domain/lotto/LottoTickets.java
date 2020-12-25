@@ -12,15 +12,23 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public static LottoTickets of(List<LottoTicket> lottoTickets) {
-        return new LottoTickets(lottoTickets);
+    private final int manualTicketCount;
+
+    public static LottoTickets of(List<LottoTicket> lottoTickets, int manualTicketCount) {
+
+        return new LottoTickets(lottoTickets, manualTicketCount);
     }
 
-    private LottoTickets(List<LottoTicket> lottoTickets) {
+    private LottoTickets(List<LottoTicket> lottoTickets, int manualTicketCount) {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
+        this.manualTicketCount = manualTicketCount;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
     }
 }
