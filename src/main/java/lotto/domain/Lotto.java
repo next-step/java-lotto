@@ -24,7 +24,7 @@ public class Lotto {
 	}
 
 	public Lotto(List<Integer> inputNumber) {
-		for (int number : inputNumber) {
+		lottoNumbers.addAll(inputNumber);
 			lottoNumbers.add(number);
 		}
 		validateMaxCount(lottoNumbers);
