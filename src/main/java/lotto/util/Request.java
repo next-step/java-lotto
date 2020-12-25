@@ -2,7 +2,7 @@ package lotto.util;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.Lotto;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class Request {
         return lottoTicket.getLottoNumbers();
     }
 
-    public Map<Match, List<Match>> getMatchLottoCount(List<Integer> targetNumbers) {
+    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers) {
         return lottoTicket.getMatchLottoCount(targetNumbers);
     }
 }

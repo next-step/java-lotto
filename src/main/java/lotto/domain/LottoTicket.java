@@ -29,9 +29,9 @@ public class LottoTicket {
      * @param target 지난주 당첨 번호
      * @return List<Match>
      */
-    public List<Match> getMatch(List<Integer> target) {
+    public List<Rank> getMatch(List<Integer> target) {
         return lottoNumbers.stream()
-                .map(numbers -> Match.getMatchInfo(numbers.getEqualCount(target)))
+                .map(numbers -> Rank.valueOf(numbers.getEqualCount(target)))
                 .collect(Collectors.toList());
     }
 
@@ -40,10 +40,10 @@ public class LottoTicket {
      * @param targetNumbers 지난주 당첨 번호
      * @return Map<Match, List<Match>>
      */
-    public Map<Match, List<Match>> getMatchLottoCount(List<Integer> targetNumbers) {
+    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers) {
         return getMatch(targetNumbers).stream()
-                .filter(r -> r != Match.MISS)
-                .sorted(Comparator.comparingLong(Match::getMatchCount))
+                .filter(r -> r != Rank.MISS)
+                .sorted(Comparator.comparingLong(Rank::getCountOfMatch))
                 .collect(groupingBy(rank -> rank, Collectors.toList()));
     }
 }

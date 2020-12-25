@@ -41,11 +41,11 @@ class LottoTicketTest {
 
     @Test
     void getRank_test() {
-        List<Match> matchOf = new ArrayList<>();
-        matchOf.add(Match.getMatchInfo(5));
-        matchOf.add(Match.getMatchInfo(3));
+        List<Rank> rankOf = new ArrayList<>();
+        rankOf.add(Rank.valueOf(5));
+        rankOf.add(Rank.valueOf(3));
 
-        assertThat(lottoTicket.getMatch(lotto.convertLottoNumbers())).isEqualTo(matchOf);
+        assertThat(lottoTicket.getMatch(lotto.convertLottoNumbers())).isEqualTo(rankOf);
     }
 
     @Test
