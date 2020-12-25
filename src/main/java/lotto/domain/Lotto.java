@@ -70,7 +70,11 @@ public class Lotto {
 		return lastWeekPrizeNumberList.countMatchNumber(generatedLotto);
 	}
 
-	public int countMatchNumber(Lotto generatedLotto) {
+		public int countMatchNumber(Lotto generatedLotto) {
+		return (int) this.lottoNumbers.stream()
+				.filter(number -> generatedLotto.lottoNumbers.contains(number))
+				.count();
+	}
 		int count = 0;
 		for (int number : this.lottoNumbers) {
 			count += countMatchNumber(generatedLotto, number);
