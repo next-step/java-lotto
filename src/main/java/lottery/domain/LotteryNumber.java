@@ -35,8 +35,8 @@ public class LotteryNumber implements Comparable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LotteryNumber that = (LotteryNumber) o;
-        return number == that.number;
+        LotteryNumber number1 = (LotteryNumber) o;
+        return number == number1.number;
     }
 
     @Override
@@ -48,5 +48,10 @@ public class LotteryNumber implements Comparable{
     public int compareTo(Object other) {
         LotteryNumber anotherLotteryNumber = (LotteryNumber) other;
         return this.number - anotherLotteryNumber.number;
+    }
+
+    @Override
+    public String toString() {
+        return "" + number;
     }
 }

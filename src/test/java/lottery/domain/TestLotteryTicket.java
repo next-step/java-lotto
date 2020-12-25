@@ -27,20 +27,20 @@ public class TestLotteryTicket {
 
     @Test
     void createWithStringNumbers() {
-        LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
-        assertThat(lotteryTicket).isEqualTo(LotteryTicket.of("1,2,3,4,5,6"));
+        LotteryTicket lotteryTicket = LotteryTicket.manual("1,2,3,4,5,6");
+        assertThat(lotteryTicket).isEqualTo(LotteryTicket.manual("1,2,3,4,5,6"));
         assertThat(lotteryTicket.getLotteryNumbers()).containsSequence(lotteryNumbers);
     }
 
     @Test
     void isContainNumbers() {
-        LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
+        LotteryTicket lotteryTicket = LotteryTicket.manual("1,2,3,4,5,6");
         assertThat(lotteryTicket.contains(LotteryNumber.of(1))).isTrue();
     }
 
     @Test
     void isNotContainNumbers() {
-        LotteryTicket lotteryTicket = LotteryTicket.of("1,2,3,4,5,6");
+        LotteryTicket lotteryTicket = LotteryTicket.manual("1,2,3,4,5,6");
         assertThat(lotteryTicket.contains(LotteryNumber.of(7))).isFalse();
     }
 }

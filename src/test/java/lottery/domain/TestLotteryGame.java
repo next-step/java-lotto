@@ -15,34 +15,27 @@ public class TestLotteryGame {
     List<LotteryTicket> dummyLotteryTickets;
     List<LotteryTicket> dummyOneLotteryTicket;
     LotteryTicket dummyLotteryTicket;
-    AutoBuyBehavior autoBuyBehavior;
+//    AutoBuyBehavior autoBuyBehavior;
     @BeforeEach
     void setUp() {
-        autoBuyBehavior = new AutoBuyBehavior() {
-            @Override
-            public List<LotteryNumber> getLotteryNumbers() {
-                Collections.shuffle(lotteryAllNumbers);
-                return new ArrayList<>(Arrays.asList(
-                        LotteryNumber.of(5),
-                        LotteryNumber.of(1),
-                        LotteryNumber.of(4),
-                        LotteryNumber.of(3),
-                        LotteryNumber.of(2),
-                        LotteryNumber.of(6)
-                ));
-            }
-        };
+//        autoBuyBehavior = new AutoBuyBehavior() {
+//            @Override
+//            public List<LotteryNumber> getLotteryNumbers() {
+//                Collections.shuffle(lotteryAllNumbers);
+//                return new ArrayList<>(Arrays.asList(
+//                        LotteryNumber.of(5),
+//                        LotteryNumber.of(1),
+//                        LotteryNumber.of(4),
+//                        LotteryNumber.of(3),
+//                        LotteryNumber.of(2),
+//                        LotteryNumber.of(6)
+//                ));
+//            }
+//        };
 
         dummyLotteryGame = new LotteryGame(1000, 0);
 
-        dummyLotteryTicket = LotteryTicket.of(Arrays.asList(
-                LotteryNumber.of(1),
-                LotteryNumber.of(2),
-                LotteryNumber.of(3),
-                LotteryNumber.of(4),
-                LotteryNumber.of(5),
-                LotteryNumber.of(6)
-        ));
+        dummyLotteryTicket = LotteryTicket.manual("1,2,3,4,5,6");
 
         dummyOneLotteryTicket = new ArrayList<>(Arrays.asList(
                 dummyLotteryTicket

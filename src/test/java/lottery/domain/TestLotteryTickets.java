@@ -15,8 +15,8 @@ public class TestLotteryTickets {
     @BeforeEach
     void setUp() {
         dummyTickets = new ArrayList<>(Arrays.asList(
-                LotteryTicket.of("1,2,3,4,5,6"),
-                LotteryTicket.of("7,8,9,10,11,12")
+                LotteryTicket.manual("1,2,3,4,5,6"),
+                LotteryTicket.manual("7,8,9,10,11,12")
         ));
     }
 

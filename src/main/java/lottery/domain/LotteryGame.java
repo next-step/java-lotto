@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.dto.LotteryUserDTO;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,25 +16,30 @@ public class LotteryGame {
         this.lotteryTickets = new LotteryTickets();
     }
 
+    public LotteryGame(LotteryUserDTO lotteryUserDTO) {
+        this.lotteryAmount = new LotteryAmount(lotteryUserDTO.getAmountOfMoney(), lotteryUserDTO.getNumberOfManual());
+        this.lotteryTickets = new LotteryTickets();
+    }
+
     public int buyNumberOfLotteryTickets() {
         return lotteryAmount.getAuto();
     }
 
     public void buyLotteryTickets(List<String> lotteryNumbersByManual) {
-        buyLotteryTicketBy(new ManualBuyBehavior(), lotteryNumbersByManual);
-        buyLotteryTicketBy(new AutoBuyBehavior(), lotteryAmount.getAuto());
+        buyLotteryTicketByManual(lotteryNumbersByManual);
+        buyLotteryTicketByAutomation(lotteryAmount.getAuto());
     }
 
-    private void buyLotteryTicketBy(BuyBehavior behavior, int numberOfBuying) {
+    private void buyLotteryTicketByAutomation(int numberOfBuying) {
         this.lotteryTickets.concat(new LotteryTickets(IntStream.range(0, numberOfBuying)
                 .boxed()
-                .map(Integer -> LotteryTicketFactory.createLotteryTicket(behavior))
+                .map(Integer -> LotteryTicket.auto())
                 .collect(Collectors.toList())));
     }
 
-    private void buyLotteryTicketBy(BuyBehavior behavior, List<String> lotteryNumbersByManual) {
+    private void buyLotteryTicketByManual(List<String> lotteryNumbersByManual) {
         this.lotteryTickets.concat(new LotteryTickets(lotteryNumbersByManual.stream()
-                .map(s -> LotteryTicketFactory.createLotteryTicketBy(behavior, s))
+                .map(lotteryNumbers -> LotteryTicket.manual(lotteryNumbers))
                 .collect(Collectors.toList())));
     }
 

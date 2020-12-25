@@ -483,4 +483,11 @@ public LotteryTicket of(int[] numbers) {
 * 기능을 구현하기 전에 README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 * git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
 ## 구현할 기능 목록 정리
-* to be update....
+* 수동으로 구입을 추가한다.
+## 4단계 미반영 피드백
+- [x] 로또 구입행위를 인터페이스가 아닌 `Lotto`클래스의 책임으로 위임한다.
+- [x] 메소드명 변경 `buyLotteryTicketBy` -> `buyLotteryTicketByManual`
+- [x] 스트림 내부 변수명 의미가지도록 변경
+- [x] `private` 접근 제어자는 외부에서 생성을 막으려고 사용한것입니다.
+      만약 내부에서 생성하는 코드가 추가된 경우 예외를 던지는것이 적절한 행위인지 판단해보시면 좋을것 같아요
+- [x] 로또 사용자 입력에 대한 `DTO` 사용

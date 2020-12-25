@@ -7,7 +7,7 @@ public class LotteryWinning {
     private final LotteryNumber bonusNumber;
 
     public LotteryWinning(String winningNumbers, String bonusNumber) {
-        this.winningTicket = LotteryTicket.of(winningNumbers);
+        this.winningTicket = LotteryTicket.manual(winningNumbers);
         this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 

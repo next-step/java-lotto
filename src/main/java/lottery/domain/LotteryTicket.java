@@ -2,9 +2,18 @@ package lottery.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryTicket {
-    public static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
+    private static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
+    private static final int FROM_INDEX = 0;
+    private static final int END_INCLUSIVE = 45;
+    private static final int START_INCLUSIVE = 1;
+    private static List<LotteryNumber> lotteryAllNumbers = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
+            .boxed()
+            .map(LotteryNumber::of)
+            .collect(Collectors.toList());
+
     private final Set<LotteryNumber> lotteryNumbers;
 
     private LotteryTicket(List<LotteryNumber> lotteryNumbers) {
@@ -20,16 +29,20 @@ public class LotteryTicket {
         this.lotteryNumbers = new TreeSet<>(lotteryNumbers);
     }
 
-    public static LotteryTicket of(String numbers) {
-        List<LotteryNumber> lotteryNumbers = Arrays.stream(numbers.replaceAll(" ", "").split(","))
-                .map(Integer::parseInt)
-                .map(LotteryNumber::of)
-                .collect(Collectors.toList());
-        return new LotteryTicket(lotteryNumbers);
+    
+    public static LotteryTicket auto() {
+        Collections.shuffle(lotteryAllNumbers);
+        return new LotteryTicket(lotteryAllNumbers.subList(FROM_INDEX, NUMBER_OF_LOTTERY_NUMBERS));
     }
 
-    public static LotteryTicket of(List<LotteryNumber> numbers) {
-        return new LotteryTicket(numbers);
+    public static LotteryTicket manual(String numbers) {
+        Collections.sort(lotteryAllNumbers);
+        return new LotteryTicket(Arrays.stream(numbers
+                .replaceAll(" ", "")
+                .split(","))
+                .map(Integer::parseInt)
+                .map(index -> lotteryAllNumbers.get(index - 1))
+                .collect(Collectors.toList()));
     }
 
     public Set<LotteryNumber> getLotteryNumbers() {
@@ -51,5 +64,15 @@ public class LotteryTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lotteryNumbers);
+    }
+
+    @Override
+    public String toString() {
+        String numbers = "";
+        Iterator iter = this.lotteryNumbers.iterator();
+        while(iter.hasNext()) {
+            numbers += (iter.next()+ ", ");
+        }
+        return "LotteryTicket: " + numbers;
     }
 }

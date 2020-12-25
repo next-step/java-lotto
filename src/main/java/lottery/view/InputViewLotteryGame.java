@@ -17,6 +17,10 @@ public final class InputViewLotteryGame {
     }
 
     public static List<String> getUserLotteryTicketNumbersByManual(int numberOfManual) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(stringBuilder);
+
         List<String> lotteryNumbersByManual = new ArrayList<>();
         for (int i = 0; i < numberOfManual; i++) {
             lotteryNumbersByManual.add(SCANNER.nextLine());
