@@ -46,4 +46,10 @@ public class InputView {
 		System.out.println(message);
 	}
 
+	public static void printPurchaseLottoNumber(List<Lotto> purchargedLottos) {
+		for(Lotto lotto : purchargedLottos){
+			System.out.println(lotto.toString());
+		}
+
+	}
 }

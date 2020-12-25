@@ -35,9 +35,9 @@ public class ResultView {
 		return lottoResultList.stream().filter(r -> r.getMatchResult() == matchCount && bonus == true).collect(Collectors.toList());
 	}
 
-	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResults) {
+	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResult) {
 		if(LottoPrizePolicy.SECOND.equals(lottoPrizePolicy)){
-			System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount, lottoMatchResults.size()));
+			System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
 			return;
 		}
 		System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
@@ -51,7 +51,7 @@ public class ResultView {
 		return 0;
 	}
 
-	public static void printEarningRate(double earningRate) {
+	private static void printEarningRate(double earningRate) {
 		System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
 	}
 }
