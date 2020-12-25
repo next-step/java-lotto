@@ -10,7 +10,7 @@ public class LottoNumbers {
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<Integer> numbers) {
-		if (!isValid(numbers)) {
+		if (isNotValid(numbers)) {
 			throw new IllegalArgumentException("올바르지 않은 로또 번호입니다.");
 		}
 		this.lottoNumbers = numbers.stream()
@@ -18,9 +18,9 @@ public class LottoNumbers {
 			.collect(Collectors.toList());
 	}
 
-	public static boolean isValid(List<Integer> numbers) {
-		return new HashSet<>(numbers).size() == SIZE
-			&& numbers.stream().allMatch(LottoNumber::isValid);
+	public static boolean isNotValid(List<Integer> numbers) {
+		return new HashSet<>(numbers).size() != SIZE
+			|| numbers.stream().anyMatch(LottoNumber::isNotValid);
 	}
 
 	public int countBySame(LottoNumbers other) {

@@ -12,8 +12,8 @@ import edu.nextstep.lotto.view.ResultView;
 
 public class LottoController {
 
-	public static boolean isValidLottoNumbers(List<Integer> numbers) {
-		return LottoNumbers.isValid(numbers);
+	public static boolean isNotValidLottoNumbers(List<Integer> numbers) {
+		return LottoNumbers.isNotValid(numbers);
 	}
 
 	public void playUntilNoError() {

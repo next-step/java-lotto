@@ -28,11 +28,11 @@ class LottoNumberTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@DisplayName("isValid: LottoNumber 객체를 생성하기에 올바른 숫자면 true를 리턴함")
+	@DisplayName("isNotValid: LottoNumber 객체를 생성하기에 올바르지 않은 숫자면 true를 리턴함")
 	@ParameterizedTest
-	@CsvSource(value = {"-1,false", "0,false", "46,false", "1,true", "45,true"})
-	void isValid(int number, boolean expected) {
-		assertThat(LottoNumber.isValid(number)).isEqualTo(expected);
+	@CsvSource(value = {"-1,true", "0,true", "46,true", "1,false", "45,false"})
+	void isNotValid(int number, boolean expected) {
+		assertThat(LottoNumber.isNotValid(number)).isEqualTo(expected);
 	}
 
 	@DisplayName("equals: LottoNumber 객체의 원시값이 같으면 같은 LottoNumber 객체임.")

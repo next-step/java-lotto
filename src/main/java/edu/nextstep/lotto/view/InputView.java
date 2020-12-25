@@ -70,7 +70,7 @@ public class InputView {
 
 	private static List<Integer> inputManualNumbers() {
 		List<Integer> lottoNumbers;
-		while (!LottoController.isValidLottoNumbers(lottoNumbers = InputView.inputLottoNumbers())) {
+		while (LottoController.isNotValidLottoNumbers(lottoNumbers = InputView.inputLottoNumbers())) {
 			System.err.println("올바른 로또 번호가 아닙니다. 다시 입력해주세요.");
 		}
 		return lottoNumbers;

@@ -17,13 +17,13 @@ public class Money {
 	}
 
 	public void purchaseLotto(int number) {
-		if(!hasEnoughToPurchase(number)){
+		if(hasNotEnoughToPurchase(number)){
 			throw new IllegalArgumentException("현재 금액이 " + number + "개의 로또를 구매할 만큼 충분하지 않습니다.");
 		}
 		money -= number * Lotto.PRICE;
 	}
 
-	private boolean hasEnoughToPurchase(int number) {
-		return number * Lotto.PRICE <= money;
+	private boolean hasNotEnoughToPurchase(int number) {
+		return number * Lotto.PRICE > money;
 	}
 }
