@@ -16,7 +16,7 @@ public class Money {
 		return money / Lotto.PRICE;
 	}
 
-	public void purchaseLotto(int number) {
+	public void minusByNumberOfLotto(int number) {
 		if(hasNotEnoughToPurchase(number)){
 			throw new IllegalArgumentException("현재 금액이 " + number + "개의 로또를 구매할 만큼 충분하지 않습니다.");
 		}

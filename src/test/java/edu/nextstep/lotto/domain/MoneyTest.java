@@ -34,18 +34,18 @@ class MoneyTest {
 		assertThat(new Money(money).howManyPurchase()).isEqualTo(expected);
 	}
 
-	@DisplayName("purchaseLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하여 money를 차감함")
+	@DisplayName("minusByNumberOfLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하여 money를 차감함")
 	@Test
-	void purchaseLotto() {
+	void minusByNumberOfLotto() {
 		Money money = new Money(2000);
-		money.purchaseLotto(1);
+		money.minusByNumberOfLotto(1);
 		assertThat(money).hasFieldOrPropertyWithValue("money", 1000);
 	}
 
-	@DisplayName("purchaseLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하기에 충분치 않으면 예외 발생")
+	@DisplayName("minusByNumberOfLotto: 현재 money에서 파라미터로 들어온 개수만큼 로또를 구매하기에 충분치 않으면 예외 발생")
 	@Test
-	void purchaseLotto_shouldException() {
-		assertThatThrownBy(() -> new Money(2000).purchaseLotto(3))
+	void minusByNumberOfLotto_shouldException() {
+		assertThatThrownBy(() -> new Money(2000).minusByNumberOfLotto(3))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
