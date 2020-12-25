@@ -8,7 +8,6 @@ public class LottoTotalNumberUtils {
 
     private static final List<Number> lottoTotalNumbers = new ArrayList<>();
 
-
     static {
         for (int i = Number.LOTTO_NUMBER_MINIMUM; i <= Number.LOTTO_NUMBER_MAXIMUM; i++) {
             lottoTotalNumbers.add(Number.newNumber(i));
