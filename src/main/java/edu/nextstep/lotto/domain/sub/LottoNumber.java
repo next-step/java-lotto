@@ -7,11 +7,11 @@ import java.util.Objects;
 public class LottoNumber {
 	public static final int START_LIMIT = 1;
 	public static final int END_LIMIT = 45;
-	public static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
 
 	static {
 		for (int i = START_LIMIT; i <= END_LIMIT; i++) {
-			lottoNumbers.put(i, new LottoNumber(i));
+			LOTTO_NUMBER_MAP.put(i, new LottoNumber(i));
 		}
 	}
 
@@ -25,11 +25,11 @@ public class LottoNumber {
 		if (isNotValid(number)) {
 			throw new IllegalArgumentException("로또 번호는 " + START_LIMIT + "부터 " + END_LIMIT + " 사이만 가능합니다.");
 		}
-		return lottoNumbers.get(number);
+		return LOTTO_NUMBER_MAP.get(number);
 	}
 
 	public static boolean isNotValid(int number) {
-		return !lottoNumbers.containsKey(number);
+		return !LOTTO_NUMBER_MAP.containsKey(number);
 	}
 
 	@Override
