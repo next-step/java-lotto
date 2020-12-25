@@ -79,6 +79,15 @@ class LottoNumbersTest {
 		assertThat(lottoNumbers.contains(LottoNumber.of(number))).isEqualTo(expected);
 	}
 
+	@DisplayName("toList: 일급컬랙션 내부 로또 숫자들을 원시값 목록 그대로 리턴함")
+	@Test
+	void toList() {
+		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+		assertThat(lottoNumbers.toList())
+			.hasSize(6)
+			.containsSequence(1, 2, 3, 4, 5, 6);
+	}
+
 	private List<Integer> splitToIntList(String numbers) {
 		return Arrays.stream(numbers.split(","))
 			.map(Integer::parseInt)

@@ -3,10 +3,11 @@ package edu.nextstep.lotto;
 import java.util.List;
 
 import edu.nextstep.lotto.domain.LottoGame;
+import edu.nextstep.lotto.domain.LottosFactory;
 import edu.nextstep.lotto.domain.Money;
 import edu.nextstep.lotto.domain.sub.LottoGameResult;
 import edu.nextstep.lotto.domain.sub.LottoNumbers;
-import edu.nextstep.lotto.util.NumberUtil;
+import edu.nextstep.lotto.domain.sub.Lottos;
 import edu.nextstep.lotto.view.InputView;
 import edu.nextstep.lotto.view.ResultView;
 
@@ -27,10 +28,10 @@ public class LottoController {
 
 	public void play() {
 		Money money = new Money(InputView.inputMoney());
-		List<List<Integer>> lottoNumbersList = getLottoNumbersList(money);
+		Lottos lottos = getLottoNumbersList(money);
 
 		LottoGame lottoGame = new LottoGame(
-			lottoNumbersList,
+			lottos,
 			InputView.inputWinningNumbers(),
 			InputView.inputBonusNumber());
 
@@ -39,22 +40,17 @@ public class LottoController {
 		ResultView.printProfitRatio(lottoGameResult.getProfitRatio());
 	}
 
-	private List<List<Integer>> getLottoNumbersList(Money money) {
-		List<List<Integer>> manualNumbersList = inputManualNumbersList(money);
-		List<List<Integer>> autoNumbersList = generateAutoNumbersList(money);
-		ResultView.printHowManyPurchase(manualNumbersList.size(), autoNumbersList.size());
-		manualNumbersList.addAll(autoNumbersList);
-		ResultView.printLottos(manualNumbersList);
-		return manualNumbersList;
-	}
-
-	private List<List<Integer>> inputManualNumbersList(Money money) {
+	private Lottos getLottoNumbersList(Money money) {
 		int numberOfManual = InputView.inputManualPurchaseNumber();
-		money.purchaseLotto(numberOfManual);
-		return InputView.inputManualNumbersList(numberOfManual);
-	}
+		money.minusByNumberOfLotto(numberOfManual);
 
-	private List<List<Integer>> generateAutoNumbersList(Money money) {
-		return NumberUtil.getRandomLottoNumbersList(money.howManyPurchase());
+		List<List<Integer>> manualNumbersList = InputView.inputManualNumbersList(numberOfManual);
+
+		Lottos purchasedLottos = LottosFactory.createPurchasedLottos(money, manualNumbersList);
+
+		ResultView.printHowManyPurchase(purchasedLottos.size(), manualNumbersList.size());
+		ResultView.printLottos(purchasedLottos.toList());
+
+		return purchasedLottos;
 	}
 }

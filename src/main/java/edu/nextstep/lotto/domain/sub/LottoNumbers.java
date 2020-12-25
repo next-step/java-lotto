@@ -32,4 +32,10 @@ public class LottoNumbers {
 	public boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
 	}
+
+	public List<Integer> toList() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getLottoNumber)
+			.collect(Collectors.toList());
+	}
 }

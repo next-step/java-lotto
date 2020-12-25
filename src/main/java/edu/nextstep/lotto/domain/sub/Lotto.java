@@ -17,4 +17,8 @@ public class Lotto {
 			lottoNumbers.countBySame(winningLotto.getFirstRankLotto().lottoNumbers),
 			lottoNumbers.contains(winningLotto.getBonusNumber()));
 	}
+
+	public LottoNumbers getLottoNumbers() {
+		return lottoNumbers;
+	}
 }

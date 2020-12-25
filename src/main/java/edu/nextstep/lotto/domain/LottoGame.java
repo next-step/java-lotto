@@ -10,8 +10,8 @@ public class LottoGame {
 	private final Lottos soldLottos;
 	private final WinningLotto winningLotto;
 
-	public LottoGame(List<List<Integer>> soldLottos, List<Integer> firstRankLotto, int bonusNumber) {
-		this.soldLottos = new Lottos(soldLottos);
+	public LottoGame(Lottos soldLottos, List<Integer> firstRankLotto, int bonusNumber) {
+		this.soldLottos = soldLottos;
 		this.winningLotto = new WinningLotto(firstRankLotto, bonusNumber);
 	}
 

@@ -9,16 +9,18 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import edu.nextstep.lotto.domain.sub.Lottos;
+
 @DisplayName("LottoGame: 판매된 로또번호들, 당첨번호, 보너스 숫자를 필드로 가지는 로또 게임 클래스")
 public class LottoGameTest {
 
 	@DisplayName("createOf: LottoGame 객체를 정상적으로 생성하여 리턴함")
 	@Test
 	void createOf() {
-		List<List<Integer>> purchasedLottoNumbersList = Collections.emptyList();
+		Lottos lottos = new Lottos(Collections.emptyList());
 		List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusNumber = 7;
-		assertThat(new LottoGame(purchasedLottoNumbersList, winningLottoNumbers, bonusNumber))
+		assertThat(new LottoGame(lottos, winningLottoNumbers, bonusNumber))
 			.isNotNull()
 			.isInstanceOf(LottoGame.class);
 	}
