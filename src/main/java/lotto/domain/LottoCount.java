@@ -2,13 +2,11 @@ package lotto.domain;
 
 import util.ValidateUtils;
 
-import java.util.List;
-
 public class LottoCount {
     private static final String VALID_EMPTY_MESSAGE = "금액을 다시 입력해주세요";
     private static final String VALID_NUMBER_MESSAGE = "금액은 숫자만 입력해주세요.";
     private static final String VALID_PURCHASE_UNIT_MESSAGE = "로또 구매 단위는 1000원입니다.";
-    private static final String BUY_MESSAGE = "개를 구매했습니다.";
+
     private static final int MIN_PRICE = 1000;
     private static final int MOD_ZERO = 0;
 
@@ -53,10 +51,5 @@ public class LottoCount {
         return count;
     }
 
-    public StringBuilder message() {
-        StringBuilder message = new StringBuilder();
-        message.append(Integer.toString(count));
-        message.append(BUY_MESSAGE);
-        return message;
-    }
+
 }

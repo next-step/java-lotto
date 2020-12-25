@@ -18,7 +18,7 @@ public class WinningLottoTest {
     @DisplayName("로또 번호 매칭")
     @Test
     void matchWithWinningLotto() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = new Lotto(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
         int count = lotto.match(new WinningLotto("1,2,3,4,5,10").getNumbers());
         assertThat(count).isEqualTo(5);
     }
