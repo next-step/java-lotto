@@ -1,24 +1,27 @@
 package lotto.domain;
 
+import lotto.LottoMatchResultList;
 import lotto.model.LottoPrizePolicy;
 
 import java.util.List;
 
 public class LottoResult {
+
 	private int totalPrizeMoney = 0;
 
 	private double earningsRate = 0.0;
 
 	//어떤 기능이 있는지 빠르게 파악할 수 있도록 public 주요 메서드를 상단에 배치
-	public void arrangePrize(List<Integer> lottoMatchCountResult, int lottoPricePerSheet) {
-		for (int matchCount : lottoMatchCountResult) {
-			this.totalPrizeMoney += calculateLottoPrize(matchCount);
+	public void arrangePrize(LottoMatchResultList lottoMatchCountResult, int lottoPricePerSheet) {
+		this.totalPrizeMoney = 0;
+		for (LottoMatchResult lottoResult : lottoMatchCountResult.getLottoMatchResults()) {
+			this.totalPrizeMoney = calculateLottoPrize(lottoResult,this.totalPrizeMoney);
 		}
-		this.earningsRate = (double) totalPrizeMoney / (lottoMatchCountResult.size() * lottoPricePerSheet);
+		earningsRate = (double) this.totalPrizeMoney / (lottoMatchCountResult.getLottoMatchResults().size() * lottoPricePerSheet);
 	}
 
-	private int calculateLottoPrize(int matchCount) {
-		return LottoPrizePolicy.getPrizeMoney(matchCount);
+	private int calculateLottoPrize(LottoMatchResult lottoMatchResult, int totalPrizeMoney) {
+		return LottoPrizePolicy.getPrizeMoney(lottoMatchResult, totalPrizeMoney);
 	}
 
 	public double getEarningsRate() {

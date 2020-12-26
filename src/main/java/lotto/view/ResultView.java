@@ -1,40 +1,56 @@
 package lotto.view;
 
+import lotto.LottoMatchResultList;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoResult;
 import lotto.model.LottoPrizePolicy;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
 	public ResultView() {
 	}
 
-	public void printResult(List<Integer> lottoResultList, LottoResult lottoResult) {
-		printMatch(lottoResultList, lottoResult);
+	public static void printResult(LottoMatchResultList lottoResultList, LottoResult lottoResult) {
+		printMatch(lottoResultList.getLottoMatchResults(), lottoResult);
 		printEarningRate(lottoResult.getEarningsRate());
 	}
 
-	public void printMatch(List<Integer> lottoResultList, LottoResult lottoResult) {
-		Collections.sort(lottoResultList);
-		lottoResultList.removeIf(e -> e < LottoPrizePolicy.getMinMatchCount());
+	public static void printMatch(List<LottoMatchResult> lottoResultList, LottoResult lottoResult) {
+		List<Integer> matchList = lottoResultList.stream().map(LottoMatchResult::getMatchResult).collect(Collectors.toList());
+		matchList.removeIf(e -> e < LottoPrizePolicy.getMinMatchCount());
+		Collections.sort(matchList);
+
+
 		for (LottoPrizePolicy lottoPrizePolicy : LottoPrizePolicy.values()){
-			int actualMatchCount = hasMatchCount(lottoResultList, lottoPrizePolicy.getMatchCount());
-			System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+			int actualMatchCount = hasMatchCount(lottoPrizePolicy, lottoResultList);
+			List<LottoMatchResult> bonusMatchResult = hasBonusNumber(lottoResultList, lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.isBonus(), lottoPrizePolicy);
+			printAnalyzeMessage(lottoPrizePolicy, actualMatchCount, bonusMatchResult);
+
 		}
 	}
 
-	private int hasMatchCount(List<Integer> lottoResultList, int matchCount) {
-		if(lottoResultList.contains(matchCount)){
-			return Collections.frequency(lottoResultList, matchCount);
-		}
-		return 0;
+	private static List<LottoMatchResult> hasBonusNumber(List<LottoMatchResult> lottoResultList, int matchCount, boolean bonus, LottoPrizePolicy lottoPrizePolicy) {
+		return lottoResultList.stream().filter(r -> r.getMatchResult() == matchCount && bonus == true && LottoPrizePolicy.SECOND.equals(lottoPrizePolicy)).collect(Collectors.toList());
 	}
 
-	public void printEarningRate(double earningRate) {
-		if (earningRate < 1) {
-			System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", earningRate));
+	private static void printAnalyzeMessage(LottoPrizePolicy lottoPrizePolicy, int actualMatchCount, List<LottoMatchResult> lottoMatchResult) {
+		if(LottoPrizePolicy.SECOND.equals(lottoPrizePolicy) && !lottoMatchResult.isEmpty()){
+			System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+			return;
 		}
+		System.out.println(String.format("%d개 일치 (%d원)- %d", lottoPrizePolicy.getMatchCount(), lottoPrizePolicy.getPrizeMoney(), actualMatchCount));
+	}
+
+	private static int hasMatchCount(LottoPrizePolicy lottoPrizePolicy, List<LottoMatchResult> lottoResultList) {
+		List<Integer> matchList = lottoResultList.stream().filter(r -> r.getMatchResult() == lottoPrizePolicy.getMatchCount() && r.isHasBonusNumber() == lottoPrizePolicy.isBonus() ).map(LottoMatchResult::getMatchResult).collect(Collectors.toList());
+		return matchList.size();
+	}
+
+	private static void printEarningRate(double earningRate) {
+		System.out.println(String.format("총 수익률은 %.2f입니다.", earningRate));
 	}
 }
