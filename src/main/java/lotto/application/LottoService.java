@@ -9,12 +9,11 @@ import lotto.domain.RandomLottoNumberGenerator;
 import lotto.domain.WinLottoNumbers;
 
 public class LottoService {
-	private final RandomLottoNumberGenerator randomLottoNumberGenerator;
+	private final RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
 	private final LottoLotteries lottoLotteries;
 
 	public LottoService(Money money) {
 		this.lottoLotteries = buyMaxAutoLottoLotteries(money);
-		this.randomLottoNumberGenerator = new RandomLottoNumberGenerator();
 	}
 
 	public LottoLotteries buyMaxAutoLottoLotteries(Money money) {

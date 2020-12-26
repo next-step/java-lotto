@@ -11,4 +11,5 @@ public interface Message {
 	String INVALID_EMPTY_STRING = "문자열이 비어 있습니다.";
 	String INVALID_LOTTO_NUMBER_COUNT = "로또 숫자는 6개 이어야 합니다.";
 	String INPUT_LAST_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.(ex. 1,2,3,4,5,6)";
+	String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
 }

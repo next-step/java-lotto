@@ -34,13 +34,14 @@ public class LottoLotteriesTest {
 				new LottoLottery(LottoNumberUtils.mapToListByComma("21,22,23,24,25,26"))
 			)
 		);
-		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,31,32"));
+		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,31,32"),
+			new LottoNumber(6));
 
 		assertThat(lottoLotteries.checkLottoRanks(winLottoNumbers))
 			.hasSize(3)
 			.containsExactly(
-				LottoRank.THIRD_PLACE,
 				LottoRank.FOURTH_PLACE,
+				LottoRank.FIFTH_PLACE,
 				LottoRank.NONE
 			);
 	}

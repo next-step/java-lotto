@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import lotto.domain.LottoLotteries;
@@ -37,6 +38,7 @@ public class OutputView {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 		Arrays.stream(LottoRank.values())
+			.sorted(Comparator.comparingInt(LottoRank::getPrize))
 			.filter(LottoRank::isNotNone)
 			.forEach(lottoRank -> printLottoResult(lottoResults.findLottoResult(lottoRank)));
 	}

@@ -9,13 +9,13 @@ import lotto.view.OutputView;
 
 public class LottoClient {
 	public static void main(String[] args) {
-		Money money = new Money(InputView.waitInputMoney());
+		Money money = InputView.waitInputMoney();
 
 		LottoService lottoService = new LottoService(money);
 
 		OutputView.printLottoLotteries(lottoService.getLottoLotteries());
 
-		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(InputView.waitInputLastWinNumbers());
+		WinLottoNumbers winLottoNumbers = InputView.waitInputWinLottoNumbers();
 		LottoResults lottoResults = lottoService.getLottoResults(winLottoNumbers);
 
 		OutputView.printLottoResults(lottoResults);
