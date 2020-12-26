@@ -42,12 +42,12 @@ public class LotteryMachine {
      * @param lottoCount 로또 발권 갯수
      * @return 발권된 로또 목록
      */
-    public static Lottos issueAutomaticLotto(LottoCount lottoCount) {
+    public static List<Lotto> issueAutomaticLotto(LottoCount lottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoCount.getCount(); i++) {
             lottoList.add(new Lotto(createLottoNumbers()));
         }
-        return new Lottos(lottoList);
+        return lottoList;
     }
 
     private static List<LottoNumber> createLottoNumbers() {
@@ -63,6 +63,5 @@ public class LotteryMachine {
         Collections.sort(numbers);
         return numbers;
     }
-
 
 }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -9,6 +10,13 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = Collections.unmodifiableList(lottoList);
+    }
+
+    public Lottos(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        List<Lotto> combinedList = Stream.of(manualLottos, automaticLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        this.lottoList = Collections.unmodifiableList(combinedList);
     }
 
     public int getLottoListSize() {

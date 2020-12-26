@@ -1,6 +1,8 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,28 @@ public class InputView {
     public long inputPurchaseAmount() {
         return scanner.nextLong();
     }
+    public int inputManualCount() {
+        return scanner.nextInt();
+    }
+    public int inputBonusNumber() {
+        return scanner.nextInt();
+    }
 
-    public List<LottoNumber> inputLuckyNumbers() {
+    public List<Lotto> inputManualLottos(int manualCount) {
         scanner.nextLine();
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            List<LottoNumber> manualNumbers = getLottoNumbers();
+            lottoList.add(new Lotto(manualNumbers));
+        }
+        return lottoList;
+    }
+
+    public Lotto inputLuckyNumbers() {
+        return new Lotto(getLottoNumbers());
+    }
+
+    private List<LottoNumber> getLottoNumbers() {
         String[] numbers = scanner.nextLine()
                 .replaceAll(EMPTY_REGEX, "")
                 .split(SPLIT_REGEX);
@@ -27,9 +48,4 @@ public class InputView {
         }
         return luckyNumbers;
     }
-
-    public int inputBonusNumber() {
-        return scanner.nextInt();
-    }
-
 }

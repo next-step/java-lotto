@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryMachineTest {
@@ -26,8 +28,12 @@ class LotteryMachineTest {
     @DisplayName("로또 갯수만큼 로또 자동 생산")
     void issueAutomaticLotto() {
         LottoCount lottoCount = new LottoCount(14);
-        Lottos actual = LotteryMachine.issueAutomaticLotto(lottoCount);
-        assertThat(actual.getLottoListSize()).isEqualTo(14);
+        List<Lotto> actual = LotteryMachine.issueAutomaticLotto(lottoCount);
+        assertThat(actual.size()).isEqualTo(14);
     }
 
+    @Test
+    void combineLottos() {
+
+    }
 }
