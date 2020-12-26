@@ -6,11 +6,10 @@ import lotto.Rank;
 
 public class OutputView {
 
-    private static final String PURCHASE_COUNT_MESSAGE = "개를 구매 하였습니다.";
-    private static final int PURCHASE_PER_PRICE = 1000;
+    private static final String PURCHASE_COUNT_MESSAGE = "장을 구매 하였습니다.";
 
-    public static void printTicketList(LottoTickets lottoTickets, int purchasePrice) {
-        System.out.println((purchasePrice / PURCHASE_PER_PRICE) + PURCHASE_COUNT_MESSAGE);
+    public static void printTicketList(LottoTickets lottoTickets, int purchasePrice, int manualPurchaseCount) {
+        System.out.println("수동으로 " + manualPurchaseCount + "장, 자동으로 " + purchasePrice + PURCHASE_COUNT_MESSAGE);
         for (int i = 0; i < lottoTickets.size(); i++) {
             System.out.println(lottoTickets.getLottoTicket(i).getTicket());
         }

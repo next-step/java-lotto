@@ -16,15 +16,28 @@ public class LottoTickets {
         return new LottoTickets(ticketList);
     }
 
-    public static LottoTickets newTickets(int purchaseCount) {
+    public static LottoTickets newTickets(int purchaseCount, List<LottoTicket> manualLottoTicketList) {
         List<LottoTicket> ticketList = new ArrayList<>();
+        autoTicket(purchaseCount, manualLottoTicketList, ticketList);
+        manualTicket(manualLottoTicketList, ticketList);
+
+        return new LottoTickets(ticketList);
+    }
+
+    private static void autoTicket(int purchaseCount, List<LottoTicket> manualLottoTicketList, List<LottoTicket> ticketList) {
+        purchaseCount -= manualLottoTicketList.size();
 
         for (int i = 0; i < purchaseCount; i++) {
             ticketList.add(LottoTicket.newTicket());
         }
-
-        return new LottoTickets(ticketList);
     }
+
+    private static void manualTicket(List<LottoTicket> manualLottoTicketList, List<LottoTicket> ticketList) {
+        if (manualLottoTicketList.size() > 0) {
+            ticketList.addAll(manualLottoTicketList);
+        }
+    }
+
 
     public LottoTicket getLottoTicket(int index) {
         return ticketList.get(index);
