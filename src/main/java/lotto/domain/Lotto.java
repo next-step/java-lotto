@@ -1,36 +1,43 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-	private List<Integer> lotto;
+	private static final int LOTTO_SIZE = 6;
 
-	public Lotto(List<Integer> lotto) {
+	private final List<LottoNumber> lotto;
+
+	public Lotto(List<LottoNumber> lotto) {
+		validateLotto(lotto);
 		this.lotto = lotto;
-		if (lotto == null) {
-			this.lotto = new ArrayList<>();
-		}
 	}
 
-	public List<Integer> getLotto() {
+	public List<LottoNumber> getLotto() {
 		return lotto;
 	}
 
-	private int match(Lotto winLotto) {
-		return (int) lotto.stream()
-			.filter(lotto -> winLotto.lotto.contains(lotto))
-			.count();
+	private void validateLotto(List<LottoNumber> lotto) {
+		if (lotto.size() != LOTTO_SIZE) {
+			throw new IllegalArgumentException("로또는 6자리 숫자만 입력 가능합니다.");
+		}
 	}
 
-	public LottoRank rankLotto(Lotto winLottoNumber) {
-		int sameNumberCount = match(winLottoNumber);
-		return LottoRank.valueOfCount(sameNumberCount);
+	protected MatchResult match(WinLotto winLotto) {
+		int count = (int)lotto.stream()
+			.filter(l -> winLotto.getWinLotto().lotto.contains(l))
+			.count();
+		boolean matchBonus = lotto.contains(winLotto.getBonus());
+		return new MatchResult(count, matchBonus);
+	}
+
+	public LottoRank rankLotto(WinLotto winLotto) {
+		MatchResult matchResult = match(winLotto);
+		return LottoRank.valueOf(matchResult.getCount(), matchResult.isMatchBonus());
 	}
 
 	@Override
 	public String toString() {
-		return "["+lotto.stream().map(lotto -> Integer.toString(lotto)).collect(Collectors.joining(", "))+"]";
+		return "["+lotto.stream().map(lotto -> Integer.toString(lotto.getLottoNumber())).collect(Collectors.joining(", "))+"]";
 	}
 }

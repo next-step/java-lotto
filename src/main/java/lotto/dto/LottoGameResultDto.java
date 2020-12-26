@@ -6,19 +6,17 @@ import java.util.Map;
 import lotto.domain.LottoRank;
 
 public class LottoGameResultDto {
-	private static final int LOTTO_PRICE = 1000;
-
-	private final int lottoGameCount;
-	private final BigDecimal profitRatio;
+	private final int lottoBuyMoney;
+	private final double profitRatio;
 	private final Map<LottoRank, Long> lottoGameResult;
 
-	public LottoGameResultDto(Map<LottoRank, Long> lottoGameResult, int lottoGameCount) {
+	public LottoGameResultDto(Map<LottoRank, Long> lottoGameResult, int lottoBuyMoney) {
 		this.lottoGameResult = lottoGameResult;
-		this.lottoGameCount = lottoGameCount;
+		this.lottoBuyMoney = lottoBuyMoney;
 		this.profitRatio = getProfitRatioValue();
 	}
 
-	public BigDecimal getProfitRatio() {
+	public double getProfitRatio() {
 		return profitRatio;
 	}
 
@@ -26,11 +24,11 @@ public class LottoGameResultDto {
 		return lottoGameResult;
 	}
 
-	private BigDecimal getProfitRatioValue() {
+	private double getProfitRatioValue() {
 		BigDecimal profit = BigDecimal.valueOf(lottoGameResult.entrySet().stream()
 			.mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
 			.sum());
-		BigDecimal loss = BigDecimal.valueOf((long)lottoGameCount * LOTTO_PRICE);
-		return profit.divide(loss, 2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal loss = BigDecimal.valueOf(lottoBuyMoney);
+		return profit.divide(loss, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 }
