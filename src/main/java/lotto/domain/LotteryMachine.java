@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,9 +22,19 @@ public class LotteryMachine {
      * @param amount 입력된 금액
      * @return 로또 발권 갯수
      */
-    public static int calculateLottoCount(long amount) {
+    public static LottoCount calculateLottoCount(long amount) {
         long lottoCount = amount / LOTTO_PRICE;
-        return (int) lottoCount;
+        return new LottoCount((int) lottoCount);
+    }
+
+    /**
+     * 로또 자동 발권 갯수를 구한다.
+     * @param lottoCount 로또 발권 갯수 전체
+     * @param manualCount 수동 발권 갯수
+     * @return 자동 발권 갯수
+     */
+    public static LottoCount calculateAutomaticLottoCount(LottoCount lottoCount, int manualCount) {
+        return new LottoCount(lottoCount.getCount() - manualCount);
     }
 
     /**
@@ -33,9 +42,9 @@ public class LotteryMachine {
      * @param lottoCount 로또 발권 갯수
      * @return 발권된 로또 목록
      */
-    public static Lottos issueAutomaticLotto(int lottoCount) {
+    public static Lottos issueAutomaticLotto(LottoCount lottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < lottoCount.getCount(); i++) {
             lottoList.add(new Lotto(createLottoNumbers()));
         }
         return new Lottos(lottoList);
@@ -54,5 +63,6 @@ public class LotteryMachine {
         Collections.sort(numbers);
         return numbers;
     }
+
 
 }
