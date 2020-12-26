@@ -1,14 +1,15 @@
 package lotto.util;
 
+import lotto.domain.BuyLotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RequestTest {
+class BuyLottoTest {
 
     @Test
     void buyMoneyLotto_test() {
-        Request request = new Request(5000);
-        assertThat(request.getLotto().size()).isEqualTo(5);
+        BuyLotto buyLotto = new BuyLotto(5000);
+        assertThat(buyLotto.getLotto().size()).isEqualTo(5);
     }
 }
