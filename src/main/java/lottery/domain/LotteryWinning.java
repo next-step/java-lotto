@@ -7,14 +7,21 @@ public class LotteryWinning {
     private final LotteryNumber bonusNumber;
 
     public LotteryWinning(String winningNumbers, String bonusNumber) {
-        this.winningTicket = LotteryTicket.of(winningNumbers);
-        this.bonusNumber = new LotteryNumber(Integer.parseInt(bonusNumber));
+        this.winningTicket = LotteryTicket.manual(winningNumbers);
+        this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
     public int getCountsMatched(LotteryTicket otherLotteryTicket) {
         int matchCount = 0;
         for(LotteryNumber number : otherLotteryTicket.getLotteryNumbers()) {
-            matchCount += winningTicket.contains(number) ? 1 : 0;
+            matchCount = countMatchedNumbers(matchCount, number);
+        }
+        return matchCount;
+    }
+
+    private int countMatchedNumbers(int matchCount, LotteryNumber number) {
+        if (winningTicket.contains(number)) {
+            matchCount += 1;
         }
         return matchCount;
     }
@@ -23,7 +30,7 @@ public class LotteryWinning {
         return lotteryTicket.contains(this.bonusNumber);
     }
 
-    public LotteryResult getLotteryResult(LotteryTickets lotteryTickets) {
+    public LotteryResult analyzeLotteryResult(LotteryTickets lotteryTickets) {
         LotteryResult lotteryResult = new LotteryResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             lotteryResult.updateLotteryResult(

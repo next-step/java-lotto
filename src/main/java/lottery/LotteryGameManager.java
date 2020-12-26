@@ -1,21 +1,30 @@
 package lottery;
 
 import lottery.domain.*;
+import lottery.dto.LotteryUserDTO;
 import lottery.view.InputViewLotteryGame;
 import lottery.view.ResultViewLotteryGame;
 
 public class LotteryGameManager {
     public static void main(String[] args) {
-        LotteryGame lotteryGame = new LotteryGame(Integer.parseInt(InputViewLotteryGame.getUserInvestAmount()));
-        ResultViewLotteryGame.displayNumberOfTickets(lotteryGame.buyNumberOfLotteryTickets());
+        LotteryUserDTO lotteryUserDTO = new LotteryUserDTO(
+                Integer.parseInt(InputViewLotteryGame.getUserInvestAmount()),
+                Integer.parseInt(InputViewLotteryGame.getNumberOfLotterysByManual()));
+        LotteryGame lotteryGame = new LotteryGame(lotteryUserDTO);
 
-        lotteryGame.buyLotteryTickets(new AutoBuyBehavior());
+        lotteryGame.buyLotteryTickets(
+                InputViewLotteryGame.getUserLotteryTicketNumbersByManual(
+                        lotteryUserDTO.getNumberOfManual()));
+
+        ResultViewLotteryGame.displayNumberOfTickets(lotteryGame.getLotteryAmount());
         ResultViewLotteryGame.displayPurchasedTickets(lotteryGame.getLotteryTickets());
 
         lotteryGame.createLotteryWiningTicket(
                 InputViewLotteryGame.getWinningNumbers(),
                 InputViewLotteryGame.getBonusNumber());
 
-        ResultViewLotteryGame.displayLotteryResult(lotteryGame.getLotteryResult());
+        ResultViewLotteryGame.displayLotteryResult(
+                lotteryGame.getLotteryResult(),
+                lotteryGame.getLotteryAmount());
     }
 }

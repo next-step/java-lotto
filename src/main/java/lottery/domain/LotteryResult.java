@@ -6,7 +6,6 @@ import java.util.*;
 
 public class LotteryResult {
     private Map<LotteryValue, Integer> lotteryResultMap;
-    private BigDecimal profit;
 
     public LotteryResult() {
         lotteryResultMap = new LinkedHashMap<LotteryValue, Integer>(){{
@@ -16,23 +15,18 @@ public class LotteryResult {
             put(LotteryValue.SECOND_PLACE, 0);
             put(LotteryValue.FIRST_PLACE, 0);
         }};
-        profit = new BigDecimal(0);
     }
 
     public Map<LotteryValue, Integer> getLotteryResultMap() {
         return this.lotteryResultMap;
     }
 
-    public BigDecimal getProfit() {
-        return profit;
-    }
-
-    public void calculateProfit(LotteryAmount purchaseAmount) {
+    public BigDecimal calculateProfit(LotteryAmount purchaseAmount) {
         int profit = 0;
         for (LotteryValue key : lotteryResultMap.keySet()) {
             profit += (lotteryResultMap.get(key) * key.getAmount());
         }
-        this.profit = new BigDecimal(profit).divide(new BigDecimal(purchaseAmount.getAmount()), 3, RoundingMode.HALF_EVEN);
+        return new BigDecimal(profit).divide(new BigDecimal(purchaseAmount.getAuto()), 3, RoundingMode.HALF_EVEN);
     }
 
     protected void updateLotteryResult(int key, boolean isMatchedBonusNumber) {

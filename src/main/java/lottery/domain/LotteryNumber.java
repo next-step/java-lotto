@@ -8,7 +8,7 @@ public class LotteryNumber implements Comparable{
 
     private final int number;
 
-    public LotteryNumber(int number) {
+    private LotteryNumber(int number) {
         if (number < LOTTO_MIN_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 0보다 커야 합니다.");
         }
@@ -16,6 +16,14 @@ public class LotteryNumber implements Comparable{
             throw new IllegalArgumentException("로또 번호는 45보다 작아야 합니다.");
         }
         this.number = number;
+    }
+
+    public static LotteryNumber of(String number) {
+        return new LotteryNumber(Integer.parseInt(number));
+    }
+
+    public static LotteryNumber of (int number) {
+        return new LotteryNumber(number);
     }
 
 
@@ -27,8 +35,8 @@ public class LotteryNumber implements Comparable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LotteryNumber that = (LotteryNumber) o;
-        return number == that.number;
+        LotteryNumber number1 = (LotteryNumber) o;
+        return number == number1.number;
     }
 
     @Override
@@ -40,5 +48,10 @@ public class LotteryNumber implements Comparable{
     public int compareTo(Object other) {
         LotteryNumber anotherLotteryNumber = (LotteryNumber) other;
         return this.number - anotherLotteryNumber.number;
+    }
+
+    @Override
+    public String toString() {
+        return "" + number;
     }
 }

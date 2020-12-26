@@ -7,10 +7,16 @@ import java.math.BigDecimal;
 public final class ResultViewLotteryGame {
     public static final double PROFIT_STANDARD = 1.0;
 
-    public static void displayNumberOfTickets(int numberOfTicketsToBuy) {
+    public static void  displayInputLotteryNumbersByManual() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(numberOfTicketsToBuy)
-                .append("개를 구매했습니다.");
+        stringBuilder.append("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(stringBuilder);
+    }
+
+    public static void displayNumberOfTickets(LotteryAmount lotteryAmount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("수동으로 ").append(lotteryAmount.getManual()).append("장, 자동으로 ")
+                .append(lotteryAmount.getAuto()).append("개를 구매했습니다.");
         System.out.println(stringBuilder);
     }
 
@@ -29,7 +35,7 @@ public final class ResultViewLotteryGame {
         return stringBuilder.subSequence(0, stringBuilder.length() - 2).toString();
     }
 
-    public static void displayLotteryResult(LotteryResult lotteryResult) {
+    public static void displayLotteryResult(LotteryResult lotteryResult, LotteryAmount lotteryAmount) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계");
         stringBuilder.append(System.getProperty("line.separator"));
@@ -50,7 +56,7 @@ public final class ResultViewLotteryGame {
             stringBuilder.append(System.getProperty("line.separator"));
         }
 
-        BigDecimal profit = lotteryResult.getProfit();
+        BigDecimal profit = lotteryResult.calculateProfit(lotteryAmount);
         stringBuilder.append("총 수익률은 ");
         stringBuilder.append(profit.toString());
         stringBuilder.append("입니다.");

@@ -6,21 +6,21 @@ import static org.assertj.core.api.Assertions.*;
 public class TestLotteryNumber {
     @Test
     void create() {
-        LotteryNumber lotteryNumber = new LotteryNumber(1);
-        assertThat(lotteryNumber).isEqualTo(new LotteryNumber(1));
+        LotteryNumber lotteryNumber = LotteryNumber.of(1);
+        assertThat(lotteryNumber).isEqualTo(LotteryNumber.of(1));
     }
 
     @Test
     void createWithLowerMinNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LotteryNumber lotteryNumber = new LotteryNumber(0);
+            LotteryNumber lotteryNumber = LotteryNumber.of(0);
         });
     }
 
     @Test
     void createWithBiggerMaxNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           LotteryNumber lotteryNumber = new LotteryNumber(46);
+           LotteryNumber lotteryNumber = LotteryNumber.of(46);
         });
     }
 }
