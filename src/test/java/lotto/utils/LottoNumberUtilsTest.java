@@ -1,13 +1,15 @@
-package lotto.domain;
+package lotto.utils;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class WinLottoNumbersTest {
+import lotto.domain.LottoNumber;
+
+class LottoNumberUtilsTest {
 	@Test
-	void create_test() {
-		assertThat(new WinLottoNumbers("1,2,3,4,5,6").getWinNumbers())
+	void mapToListByComma_test() {
+		assertThat(LottoNumberUtils.mapToListByComma("1,2,3,4,5,6"))
 			.hasSize(6)
 			.containsExactly(
 				new LottoNumber(1),

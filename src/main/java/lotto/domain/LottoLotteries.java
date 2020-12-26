@@ -26,7 +26,7 @@ public class LottoLotteries {
 		return LottoResultsFactory.create(checkLottoRanks(winLottoNumbers));
 	}
 
-	private List<LottoRank> checkLottoRanks(WinLottoNumbers winLottoNumbers) {
+	List<LottoRank> checkLottoRanks(WinLottoNumbers winLottoNumbers) {
 		return lottoLotteries.stream()
 			.map(lottoLottery -> lottoLottery.checkLottoRank(winLottoNumbers))
 			.collect(Collectors.toList());

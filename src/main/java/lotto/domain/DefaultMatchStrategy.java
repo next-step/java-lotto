@@ -12,11 +12,10 @@ public class DefaultMatchStrategy implements MatchStrategy {
 		return matchCount == countMatches(lottoLottery, winLottoNumbers);
 	}
 
-	private int countMatches(LottoLottery lottoLottery, WinLottoNumbers winLottoNumbers) {
+	private long countMatches(LottoLottery lottoLottery, WinLottoNumbers winLottoNumbers) {
 		return winLottoNumbers.getWinNumbers()
 			.stream()
 			.filter(lottoLottery::contains)
-			.mapToInt(value -> 1)
-			.sum();
+			.count();
 	}
 }
