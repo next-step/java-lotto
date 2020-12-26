@@ -1,40 +1,44 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.DynamicTest.*;
 
 class RankTest {
 
-    @DisplayName(value = "맞춘 개수가 0보다 작으면 예외")
-    @Test
-    void 맞춘_개수는_1보다_작을_수_없다() {
-        // given
-        int countOfMatch = -1;
+    @TestFactory
+    Stream<DynamicTest> 맞춘_개수_예외_테스트() {
+        return Stream.of(
+                dynamicTest("1보다 작으면 예외", () -> {
+                    // given
+                    int countOfMatch = -1;
 
+                    // then
+                    assertThatThrownBy(() -> {
+                        // when
+                        Rank.valueOf(countOfMatch, false);
+                    }).isInstanceOf(IllegalArgumentException.class);
+                }),
 
-        // then
-        assertThatThrownBy(() -> {
-            // when
-            Rank.valueOf(countOfMatch, false);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
+                dynamicTest("6보다 크면 예외", () -> {
+                    // given
+                    int countOfMatch = 7;
 
-    @DisplayName(value = "맞춘 개수가 6보다 크면 예외")
-    @Test
-    void 맞춘_개수는_6보다_클_수_없다() {
-        // given
-        int countOfMatch = 7;
-
-
-        // then
-        assertThatThrownBy(() -> {
-            // when
-            Rank.valueOf(countOfMatch, false);
-        }).isInstanceOf(IllegalArgumentException.class);
+                    // then
+                    assertThatThrownBy(() -> {
+                        // when
+                        Rank.valueOf(countOfMatch, false);
+                    }).isInstanceOf(IllegalArgumentException.class);
+                })
+        );
     }
 
     @DisplayName(value = "맞춘 개수가 3미만 이면, MISS를 반환")
@@ -73,18 +77,6 @@ class RankTest {
     }
 
     @Test
-    void 맞춘_개수가_5개_이면_THIRD() {
-        // given
-        int countOfMatch = 5;
-
-        // when
-        Rank rank = Rank.valueOf(countOfMatch, false);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.THIRD);
-    }
-
-    @Test
     void 맞춘_개수가_6개_이면_FIRST() {
         // given
         int countOfMatch = 6;
@@ -96,29 +88,27 @@ class RankTest {
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName(value = "5개가 맞고, 보너스 번호가 맞으면 SECOND 반환")
-    @Test
-    void 보너스_당첨_테스트() {
-        // given
+    @DisplayName(value = "보너스 번호를 제외하고, 맞춘 번호가 5개일 경우 테스트")
+    @TestFactory
+    Stream<DynamicTest> 맞춘_개수가_5개() {
         int countOfMatch = 5;
 
-        // when
-        Rank rank = Rank.valueOf(countOfMatch, true);
+        return Stream.of(
+                dynamicTest("보너스 번호가 틀리면, THIRD 반환", () -> {
+                    // when
+                    Rank rank = Rank.valueOf(countOfMatch, false);
 
-        // then
-        assertThat(rank).isEqualTo(Rank.SECOND);
-    }
+                    // then
+                    assertThat(rank).isEqualTo(Rank.THIRD);
+                }),
 
-    @DisplayName(value = "5개가 맞고, 보너스 번호가 틀리면 THIRD 반환")
-    @Test
-    void 보너스_비당첨_테스트() {
-        // given
-        int countOfMatch = 5;
+                dynamicTest("보너스 번호가 맞으면, SECOND 반환", () -> {
+                    // when
+                    Rank rank = Rank.valueOf(countOfMatch, true);
 
-        // when
-        Rank rank = Rank.valueOf(countOfMatch, false);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.THIRD);
+                    // then
+                    assertThat(rank).isEqualTo(Rank.SECOND);
+                })
+        );
     }
 }
