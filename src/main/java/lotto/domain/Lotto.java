@@ -19,7 +19,7 @@ public class Lotto {
 
 	private void validateLotto(List<LottoNumber> lotto) {
 		if (lotto.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또는 6자리 숫자만 입력 가능합니다.");
+			throw new IllegalArgumentException("로또는 " + LOTTO_SIZE + "자리 숫자만 입력 가능합니다.");
 		}
 	}
 
