@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = changeNumbersToLottoNumber(lottoNumbers);
+    public Lotto(List<Integer> lotto) {
+        this.lotto = changeNumbersToLottoNumber(lotto);
     }
 
     public List<LottoNumber> changeNumbersToLottoNumber(List<Integer> numbers) {
@@ -17,7 +17,7 @@ public class Lotto {
     }
 
     public List<Integer> convertLottoNumbers() {
-        return lottoNumbers.stream()
+        return lotto.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
@@ -28,7 +28,7 @@ public class Lotto {
      * @return long
      */
     public long getEqualCount(List<Integer> targetNumbers) {
-        return lottoNumbers.stream()
+        return lotto.stream()
                 .filter(lottoNumber -> targetNumbers.contains(lottoNumber.getNumber()))
                 .count();
     }

@@ -7,7 +7,7 @@ public class InputValid {
     private static final int MIN_LOTTO_NUMBER = 0;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private List<Integer> inputNumbers;
+    private final List<Integer> inputNumbers;
 
     public InputValid(List<Integer> inputNumbers) {
         this.inputNumbers = inputNumbers;
