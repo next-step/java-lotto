@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.Request;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,12 +10,13 @@ public class LottoGame {
         InputView inputView = new InputView();
         int money = inputView.inputMoneyPrint();
 
-        Request request = new Request(money);
+        BuyLotto buyLotto = new BuyLotto(money);
 
         ResultView resultView = new ResultView();
-        resultView.buyLottoAndNumbersPrint(request);
+        resultView.buyLottoAndNumbersPrint(buyLotto);
 
         List<Integer> inputNumbers = inputView.inputLottoNumbers();
-        resultView.resultPrint(inputNumbers, request);
+        int inputBonusNumber = inputView.inputLottoBonusNumber();
+        resultView.resultPrint(inputNumbers, inputBonusNumber, buyLotto);
     }
 }

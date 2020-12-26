@@ -1,20 +1,18 @@
-package lotto.util;
+package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
+import lotto.util.LottoNumberGenerator;
 
 import java.util.List;
 import java.util.Map;
 
-public class Request {
+public class BuyLotto {
     private static final int PER_PRICE = 1000;
     private final int money;
     private final int totalAmount;
 
     private final LottoTicket lottoTicket = new LottoTicket();
 
-    public Request(int money) {
+    public BuyLotto(int money) {
         checkMoney(money);
 
         this.money = money;
@@ -47,7 +45,7 @@ public class Request {
         return lottoTicket.getLottoNumbers();
     }
 
-    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers) {
-        return lottoTicket.getMatchLottoCount(targetNumbers);
+    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers, int bonusNumber) {
+        return lottoTicket.getMatchLottoCount(targetNumbers, bonusNumber);
     }
 }

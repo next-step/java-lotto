@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -29,9 +32,9 @@ public class LottoTicket {
      * @param target 지난주 당첨 번호
      * @return List<Match>
      */
-    public List<Rank> getMatch(List<Integer> target) {
+    public List<Rank> getMatch(List<Integer> target, boolean isBonus) {
         return lottoNumbers.stream()
-                .map(numbers -> Rank.valueOf(numbers.getEqualCount(target)))
+                .map(numbers -> Rank.valueOf(numbers.getEqualCount(target), isBonus))
                 .collect(Collectors.toList());
     }
 
@@ -40,8 +43,10 @@ public class LottoTicket {
      * @param targetNumbers 지난주 당첨 번호
      * @return Map<Match, List<Match>>
      */
-    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers) {
-        return getMatch(targetNumbers).stream()
+    public Map<Rank, List<Rank>> getMatchLottoCount(List<Integer> targetNumbers, int bonusNumber) {
+        boolean isBonus = targetNumbers.stream().anyMatch(number -> bonusNumber == number);
+
+        return getMatch(targetNumbers, isBonus).stream()
                 .filter(r -> r != Rank.MISS)
                 .sorted(Comparator.comparingLong(Rank::getCountOfMatch))
                 .collect(groupingBy(rank -> rank, Collectors.toList()));
