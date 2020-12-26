@@ -6,54 +6,57 @@ public class LottoIssue {
     public static final int FROM_INDEX = 0;
     public static final int TO_INDEX = 6;
     private int count;
-    private Queue<ArrayList> result;
+    private List<LottoNumber> resultList;
     private Map<Integer, Integer> issueStats;
 
     public LottoIssue(int count) {
         this.count = count;
     }
 
-    public Queue<ArrayList> publishLottoList() {
-        result = new LinkedList<>();
+    public List<LottoNumber> publishLottoList() {
+        resultList = new ArrayList<>();
         for(int i = 0; i < count; i++) {
-            result.add(generateNumbers());
+            resultList.add(generateNumbers());
         }
-        return result;
+        return resultList;
     }
 
-    private ArrayList<Integer> generateNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private LottoNumber generateNumbers() {
+        LottoNumber numbers = new LottoNumber();
         for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
+            numbers.addNum(i);
         }
-        Collections.shuffle(numbers);
-        ArrayList<Integer> chosenNum = new ArrayList<>(numbers.subList(FROM_INDEX, TO_INDEX));
-        Collections.sort(chosenNum);
-        return chosenNum;
+        numbers.shuffleNumber();
+        numbers.sortSixNumber();
+        return numbers;
     }
 
     public void checkNumber(String[] numbers) {
         issueStats = new HashMap<>();
-        for (ArrayList list: result) {
-            int key = confrimLotto(list, numbers);
-            int value = 1;
-            if (issueStats.containsKey(key)){
-                value = issueStats.get(key) + 1;
-            }
-            issueStats.put(key, value);
+        for (LottoNumber list: resultList) {
+            setIssueStats(numbers, list);
         }
     }
 
-    public int confrimLotto(ArrayList list, String[] numbers) {
+    private void setIssueStats(String[] numbers, LottoNumber list) {
+        int key = confrimLotto(list, numbers);
+        int value = 1;
+        if (issueStats.containsKey(key)){
+            value = issueStats.get(key) + 1;
+        }
+        issueStats.put(key, value);
+    }
+
+    public int confrimLotto(LottoNumber list, String[] numbers) {
         count = 0;
         for (int i = 0; i < numbers.length; i++) {
-            verifyNumCount(list, numbers, i);
+           verifyNumCount(list, numbers, i);
         }
         return count;
     }
 
-    private void verifyNumCount(ArrayList list, String[] numList, int i) {
-        if (list.contains(Integer.parseInt(numList[i]))) {
+    private void verifyNumCount(LottoNumber list, String[] numList, int i) {
+        if (list.getNumber().contains(Integer.parseInt(numList[i]))) {
             ++count;
         }
     }

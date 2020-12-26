@@ -1,6 +1,9 @@
 package lotto.oop.ui;
 
+import lotto.oop.domain.LottoNumber;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -17,9 +20,9 @@ public class InputView {
         System.out.println(this.count + "개를 구매했습니다.");
     }
 
-    public void printLotto(Queue<ArrayList> publishLottoList) {
-        for (ArrayList list: publishLottoList) {
-            System.out.println(list);
+    public void printLotto(List<LottoNumber> publishLottoList) {
+        for (LottoNumber list: publishLottoList) {
+            System.out.println(list.getNumber());
         }
     }
 
