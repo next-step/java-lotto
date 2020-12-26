@@ -1,44 +1,34 @@
 package lotto.domain;
 
 import lotto.util.LottoNumberGenerator;
+import lotto.dto.RequestDTO;
 
 import java.util.List;
 import java.util.Map;
 
 public class BuyLotto {
-    private static final int PER_PRICE = 1000;
-    private final int money;
-    private final int totalAmount;
+    private final RequestDTO requestDTO;
 
     private final LottoTicket lottoTicket = new LottoTicket();
 
     public BuyLotto(int money) {
-        checkMoney(money);
-
-        this.money = money;
-        this.totalAmount = money / PER_PRICE;
+        requestDTO = new RequestDTO(money);
 
         makeAmountLottoNumbers();
     }
 
-    private void checkMoney(int money) {
-        if(money % 1000 > 0 ) {
-            throw new IllegalArgumentException("천원 단위로 입력해주세요.");
-        }
-    }
-
-    private void makeAmountLottoNumbers() {
-        for (int amount = 0; amount < totalAmount; amount++) {
-            lottoTicket.addLottoNumbers(new Lotto(LottoNumberGenerator.makeLottoNumber()));
-        }
-    }
-
     public int getMoney() {
-        return money;
+        return this.requestDTO.getMoney();
     }
 
     public int getTotalAmount() {
-        return totalAmount;
+        return this.requestDTO.getTotalAmount();
+    }
+
+    private void makeAmountLottoNumbers() {
+        for (int amount = 0; amount < requestDTO.getTotalAmount(); amount++) {
+            lottoTicket.addLottoNumbers(new Lotto(LottoNumberGenerator.makeLottoNumber()));
+        }
     }
 
     public List<Lotto> getLotto() {
