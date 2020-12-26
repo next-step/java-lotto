@@ -1,5 +1,7 @@
 package lotto.oop.ui;
 
+import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class InputView {
@@ -13,6 +15,23 @@ public class InputView {
         this.amount = sc.nextInt();
         this.count = this.amount / PIRCE_ONE_LOTTO;
         System.out.println(this.count + "개를 구매했습니다.");
+    }
+
+    public void printLotto(Queue<ArrayList> publishLottoList) {
+        for (ArrayList list: publishLottoList) {
+            System.out.println(list);
+        }
+    }
+
+    public String winngNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+        String numbers = sc.nextLine();
+        return numbers;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public int getCount() {
