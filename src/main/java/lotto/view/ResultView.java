@@ -52,6 +52,6 @@ public class ResultView {
     }
 
     private void resultJudgePrint(double profitRate) {
-        System.out.println("총 수익률은 " + (double) (int)(profitRate*100) / 100 + "입니다.(기준이 1이기 때문에 결과적으로 "+ Judge.judge(profitRate).getJudgeMessage() +")");
+        System.out.println("총 수익률은 " + (double) (int)(profitRate*100) / 100.0 + "입니다.(기준이 1이기 때문에 결과적으로 "+ Judge.judge(profitRate).getJudgeMessage() +")");
     }
 }
