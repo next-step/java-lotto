@@ -1,23 +1,23 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum LottoRank {
-	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
-	FIFTH(3, 5_000),
-	MISS(0, 0);
+	FIRST(6, 2_000_000_000, false),
+	SECOND(5, 30_000_000, true),
+	THIRD(5, 1_500_000, false),
+	FOURTH(4, 50_000, false),
+	FIFTH(3, 5_000, false),
+	MISS(0, 0, false);
 
 	private final int countOfMatch;
 	private final int winningMoney;
+	private final boolean isIncludeBonus;
 
-	LottoRank(int countOfMatch, int winningMoney) {
+	LottoRank(int countOfMatch, int winningMoney, boolean isIncludeBonus) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
+		this.isIncludeBonus = isIncludeBonus;
 	}
 
 	public int getCountOfMatch() {
@@ -28,19 +28,13 @@ public enum LottoRank {
 		return winningMoney;
 	}
 
+	public boolean isIncludeBonus() {
+		return isIncludeBonus;
+	}
+
 	public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-		List<LottoRank> lottoRank = Arrays.stream(LottoRank.values())
-			.filter(lr -> lr.getCountOfMatch() == countOfMatch)
-			.collect(Collectors.toList());
-		if (lottoRank.isEmpty()) {
-			return LottoRank.MISS;
-		}
-		if (lottoRank.size() == 2 && matchBonus) {
-			return lottoRank.get(0);
-		}
-		if (lottoRank.size() == 2) {
-			return lottoRank.get(1);
-		}
-		return lottoRank.get(0);
+		return Arrays.stream(LottoRank.values())
+			.filter(lr -> lr.countOfMatch == countOfMatch && (!lr.isIncludeBonus || matchBonus))
+			.findFirst().orElse(LottoRank.MISS);
 	}
 }
