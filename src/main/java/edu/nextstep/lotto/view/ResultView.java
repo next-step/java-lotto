@@ -3,6 +3,7 @@ package edu.nextstep.lotto.view;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import edu.nextstep.lotto.domain.sub.LottoRank;
 
@@ -11,12 +12,16 @@ public class ResultView {
 	private ResultView() {
 	}
 
-	public static void printHowManyPurchase(int number) {
-		System.out.println(number + "개를 구매했습니다.");
+	public static void printHowManyPurchase(int all, int manual) {
+		System.out.println("수동으로 " + manual + "장, 자동으로 " + (all - manual) + "개를 구매했습니다.");
 	}
 
 	public static void printLottos(List<List<Integer>> lottos) {
-		lottos.forEach(System.out::println);
+		lottos.stream()
+			.map(lists -> lists.stream()
+				.sorted()
+				.collect(Collectors.toList()))
+			.forEach(System.out::println);
 		System.out.println();
 	}
 
@@ -53,5 +58,10 @@ public class ResultView {
 			return;
 		}
 		System.out.println();
+	}
+
+	public static void printError(String errorMessage) {
+		System.err.println("에러! : [" + errorMessage + "]");
+		System.err.println("에러가 발생하였기에 게임을 처음부터 다시 시작합니다.\n");
 	}
 }

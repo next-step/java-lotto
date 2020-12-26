@@ -10,15 +10,17 @@ public class LottoNumbers {
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<Integer> numbers) {
-		if (numbers.size() != SIZE) {
-			throw new IllegalArgumentException("로또 번호의 개수는 " + SIZE + "개만 가능합니다.");
-		}
-		if (new HashSet<>(numbers).size() != SIZE) {
-			throw new IllegalArgumentException("로또 번호는 중복되게 선택이 불가능합니다.");
+		if (isNotValid(numbers)) {
+			throw new IllegalArgumentException("올바르지 않은 로또 번호입니다.");
 		}
 		this.lottoNumbers = numbers.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
+	}
+
+	public static boolean isNotValid(List<Integer> numbers) {
+		return new HashSet<>(numbers).size() != SIZE
+			|| numbers.stream().anyMatch(LottoNumber::isNotValid);
 	}
 
 	public int countBySame(LottoNumbers other) {
@@ -29,5 +31,11 @@ public class LottoNumbers {
 
 	public boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
+	}
+
+	public List<Integer> toList() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getLottoNumber)
+			.collect(Collectors.toList());
 	}
 }

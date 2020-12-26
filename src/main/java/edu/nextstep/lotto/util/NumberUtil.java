@@ -23,18 +23,16 @@ public class NumberUtil {
 	}
 
 	private static List<Integer> getRandomLottoNumbers() {
-		return NumberUtil.generateSortedRandomNumber(LottoNumber.START_LIMIT, LottoNumber.END_LIMIT, LottoNumbers.SIZE);
+		return NumberUtil.generateRandomNumber(LottoNumber.START_LIMIT, LottoNumber.END_LIMIT, LottoNumbers.SIZE);
 	}
 
-	public static List<Integer> generateSortedRandomNumber(int start, int end, int size) {
+	public static List<Integer> generateRandomNumber(int start, int end, int size) {
 		rangeCheck(start, end, size);
 		List<Integer> totalNumbers = IntStream.rangeClosed(start, end)
 			.boxed()
 			.collect(Collectors.toList());
 		Collections.shuffle(totalNumbers);
-		List<Integer> randomNumbers = totalNumbers.subList(0, size);
-		Collections.sort(randomNumbers);
-		return randomNumbers;
+		return totalNumbers.subList(0, size);
 	}
 
 	private static void rangeCheck(int start, int end, int size) {

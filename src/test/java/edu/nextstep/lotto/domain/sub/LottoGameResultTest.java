@@ -41,11 +41,11 @@ class LottoGameResultTest {
 
 		// 미당첨
 		for (int i = 0; i < 10000; i++) {
-			lottoNumbers.add(NumberUtil.generateSortedRandomNumber(7, 45, 6));
+			lottoNumbers.add(NumberUtil.generateRandomNumber(7, 45, 6));
 		}
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-		lottoGameResult = new LottoGame(lottoNumbers, winningNumbers, 7).getResult();
+		lottoGameResult = new LottoGame(new Lottos(lottoNumbers), winningNumbers, 7).getResult();
 	}
 
 	@DisplayName("getResultAsCountingMap: 1,3,4,5등이 각각 몇 개 씩 당첨되었는지 취합하여 map으로 리턴함.")

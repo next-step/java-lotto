@@ -65,4 +65,16 @@ class LottosTest {
 				3L, 3L, 3L,
 				5L, 1L, 1L);
 	}
+
+	@DisplayName("toList: 일급컬랙션 내부 로또들의 숫자들을 원시값 목록 그대로 리턴함")
+	@Test
+	void toList() {
+		Lottos lottos = new Lottos(Arrays.asList(
+			Arrays.asList(1, 2, 3, 6, 5, 4),
+			Arrays.asList(7, 8, 9, 12, 11, 10)
+		));
+		assertThat(lottos.toList()).hasSize(2);
+		assertThat(lottos.toList().get(0)).containsSequence(1, 2, 3, 6, 5, 4);
+		assertThat(lottos.toList().get(1)).containsSequence(7, 8, 9, 12, 11, 10);
+	}
 }

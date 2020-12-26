@@ -25,4 +25,10 @@ public class Lottos {
 	public int size() {
 		return lottos.size();
 	}
+
+	public List<List<Integer>> toList() {
+		return lottos.stream()
+			.map(lotto -> lotto.getLottoNumbers().toList())
+			.collect(Collectors.toList());
+	}
 }

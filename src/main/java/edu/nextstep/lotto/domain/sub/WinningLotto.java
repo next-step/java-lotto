@@ -11,7 +11,7 @@ public class WinningLotto {
 			throw new IllegalArgumentException("보너스 볼은 당첨 번호에 포함되지 않는 번호로 지정해야 합니다.");
 		}
 		this.firstRankLotto = new Lotto(firstRankLotto);
-		this.bonusNumber = new LottoNumber(bonusNumber);
+		this.bonusNumber = LottoNumber.of(bonusNumber);
 	}
 
 	public Lotto getFirstRankLotto() {
