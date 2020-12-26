@@ -11,7 +11,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;     // 로또 번호 크기
     private final List<LottoNumber> numbers;            // 로또 번호 목록
-    private int matchingCount = 0;                      // 매칭된 갯수
+    //private int matchingCount = 0;                      // 매칭된 갯수
 
     public Lotto(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
@@ -22,19 +22,16 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers, int matchingCount) {
         this.numbers = numbers;
-        this.matchingCount = matchingCount;
-    }
-
-    public int getMatchingCount() {
-        return matchingCount;
+        //this.matchingCount = matchingCount;
     }
 
     /**
      * 당첨 번호와 자동 생산된 로또 번호 비교하기
      * @param luckyLotto 당첨 로또
+     * @return 매칭된 갯수
      */
-    public void draw(Lotto luckyLotto) {
-        matchingCount = (int) numbers.stream()
+    public int draw(Lotto luckyLotto) {
+        return (int) numbers.stream()
                 .filter(luckyLotto::contains)
                 .count();
     }
@@ -45,11 +42,11 @@ public class Lotto {
 
     public String toStringNumbers() {
         return Arrays.toString(numbers.stream()
-                .map(LottoNumber::print)
+                .map(LottoNumber::toStringNumber)
                 .toArray(String[]::new));
     }
 
-    public boolean drawBonus(LottoNumber bonusNumber) {
+    public boolean drawBonus(int matchingCount, LottoNumber bonusNumber) {
         return matchingCount == (LOTTO_NUMBERS_SIZE - 1) && numbers.contains(bonusNumber);
     }
 

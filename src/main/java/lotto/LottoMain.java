@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoMain {
 
@@ -15,8 +14,7 @@ public class LottoMain {
         OutputView outputView = new OutputView();
 
         outputView.printMessage("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        long amount = scanner.nextLong();
+        long amount = inputView.inputPurchaseAmount();
         int lottoCount = LotteryMachine.calculateLottoCount(amount);
         outputView.printLottoCount(lottoCount);
 
@@ -24,15 +22,13 @@ public class LottoMain {
         outputView.printLottos(lottos);
 
         outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-        scanner = new Scanner(System.in);
-        List<LottoNumber> lottoNumbers = inputView.inputLuckyNumbers(scanner.nextLine());
+        List<LottoNumber> lottoNumbers = inputView.inputLuckyNumbers();
         Lotto luckyLotto = new Lotto(lottoNumbers);
-        lottos.drawLottos(luckyLotto);
+        //lottos.drawLottos(luckyLotto);
         outputView.printMessage("보너스 볼을 입력해 주세요.");
-        scanner = new Scanner(System.in);
-        LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
+        LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
 
-        LottoStatistic lottoStatistic = lottos.makeStatistic(bonusNumber);
+        LottoStatistic lottoStatistic = lottos.makeStatistic(luckyLotto, bonusNumber);
         outputView.printStatistic(lottoStatistic);
 
         Profit profit = new Profit(lottoStatistic.calculateProfit(amount));

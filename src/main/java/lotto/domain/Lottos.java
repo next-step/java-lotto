@@ -15,24 +15,19 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public void drawLottos(Lotto luckyLotto) {
-        for (Lotto lotto : lottoList) {
-            lotto.draw(luckyLotto);
-        }
-    }
-
-    public LottoStatistic makeStatistic(LottoNumber bonusNumber) {
+    public LottoStatistic makeStatistic(Lotto luckyLotto, LottoNumber bonusNumber) {
         SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
         for (Lotto lotto : lottoList) {
-            boolean matchBonus = lotto.drawBonus(bonusNumber);
-            //LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
-            LottoRank rank = LottoRank.valueOf(lotto.getMatchingCount(), matchBonus);
+            int matchingCount = lotto.draw(luckyLotto);
+            boolean matchBonus = lotto.drawBonus(matchingCount, bonusNumber);
+            //LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
+            LottoRank rank = LottoRank.valueOf(matchingCount, matchBonus);
             putLottoStatisticMap(lottoStatisticMap, rank);
         }
         return new LottoStatistic(lottoStatisticMap);
     }
 
-    private void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
+    public static void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
         if (rank.equals(LottoRank.MISS))
             return;
         if (lottoStatisticMap.containsKey(rank)) {

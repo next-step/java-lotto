@@ -37,8 +37,8 @@ public class LottoTest {
         );
         Lotto luckyLotto = new Lotto(luckyNumbers);
         Lotto lotto = new Lotto(numbers);
-        lotto.draw(luckyLotto);
-        assertThat(lotto.getMatchingCount()).isEqualTo(3);
+        int matchingCount = lotto.draw(luckyLotto);
+        assertThat(matchingCount).isEqualTo(3);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class LottoTest {
         );
         Lotto luckyLotto = new Lotto(luckyNumbers);
         Lotto lotto = new Lotto(numbers);
-        lotto.draw(luckyLotto);
+        int matchingCount = lotto.draw(luckyLotto);
         LottoNumber bonusNumber = new LottoNumber(7);
-        assertThat(lotto.drawBonus(bonusNumber)).isTrue();
+        assertThat(lotto.drawBonus(matchingCount, bonusNumber)).isTrue();
     }
 
 }
