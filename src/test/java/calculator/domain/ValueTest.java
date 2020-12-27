@@ -2,7 +2,6 @@ package calculator.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -23,7 +22,8 @@ public class ValueTest {
     @NullAndEmptySource
     @DisplayName("빈값 및 null 입력 시 return 0")
     void validateNullAndEmpty(String inputValue) {
-        assertThat(value.validateNullAndEmpty(inputValue)).isEqualTo(0);
+        value.validateNullAndEmpty(inputValue);
+        assertThat(value.getNumber()).isEqualTo(0);
     }
 
     @ParameterizedTest
@@ -31,7 +31,7 @@ public class ValueTest {
     @DisplayName("양의정수 이외의 값 입력 시")
     void exceptionInputValue(String inputValue) {
         assertThrows(RuntimeException.class, () -> {
-           value.validatePositiveValue(inputValue);
+           value.validateValue(inputValue);
         });
     }
 }

@@ -5,17 +5,27 @@ import util.Message;
 
 public class Value {
     private static final int ZERO = 0;
-    private int number = 0;
+    private int number;
 
-    public int validateNullAndEmpty(String inputValue) {
-        if(inputValue == null ||inputValue.isEmpty()) {
-            return ZERO;
-        }
-
-        return 1;
+    public int getNumber() {
+        return number;
     }
 
-    public void validatePositiveValue(String inputValue) {
+    public Value() {
+    }
+
+    public Value(String value) {
+        validateValue(value);
+    }
+
+    public void validateNullAndEmpty(String inputValue) {
+        if(inputValue == null || inputValue.isEmpty()) {
+            this.number = ZERO;
+        }
+    }
+
+    public void validateValue(String inputValue) {
+        validateNullAndEmpty(inputValue);
         validateParseInt(inputValue);
         validatePositiveNumber();
     }
