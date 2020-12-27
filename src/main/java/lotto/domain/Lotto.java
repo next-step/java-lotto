@@ -25,11 +25,11 @@ public class Lotto {
 	}
 
 	private List<LottoNumber> getShuffleNumbers() {
-		List<LottoNumber> autoLottos = new ArrayList<>();
-		for (int i = 0; i < LOTTO_NUMBER_MAX_COUNT; i++) {
+		Set<LottoNumber> autoLottos = new HashSet<>();
+		do {
 			autoLottos.add(new LottoNumber());
-		}
-		return autoLottos;
+		} while (autoLottos.size() < LOTTO_NUMBER_MAX_COUNT);
+		return new ArrayList<>(autoLottos);
 	}
 
 	public MatchCount getMatchCount(Lotto lastWeekPrizeNumberList, Lotto purchasedLotto) {
@@ -67,7 +67,7 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "" + lottoNumbers;
+		return "" + lottoNumbers.toString();
 	}
 
 	@Override

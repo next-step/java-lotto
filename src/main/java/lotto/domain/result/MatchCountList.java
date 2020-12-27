@@ -12,4 +12,8 @@ public class MatchCountList {
 	public List<MatchCount> getMatchCounts() {
 		return matchCounts;
 	}
+
+	public int getMatchCountSize() {
+		return matchCounts.size();
+	}
 }

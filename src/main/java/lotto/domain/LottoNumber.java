@@ -16,7 +16,7 @@ public class LottoNumber {
 	}
 
 	public LottoNumber() {
-		this.lottoNumber = new Random().nextInt(TOTAL_LOTTO_NUMBER_MAX + 1);
+		this.lottoNumber = new Random().nextInt(TOTAL_LOTTO_NUMBER_MAX) + 1;
 	}
 
 	public LottoNumber(int lottoNumber) {
@@ -41,5 +41,10 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return "" + lottoNumber;
 	}
 }
