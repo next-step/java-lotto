@@ -18,8 +18,7 @@ public class LottoStarter {
 		int lottoTotalCount = lottoGame.calculateLottoCount(lottoBuyMoney);
 
 		int lottoManualCount = InputView.inputManualCount();
-		lottoGame.validateInput(lottoTotalCount, lottoManualCount);
-		int lottoAutoCount = lottoTotalCount - lottoManualCount;
+		int lottoAutoCount = lottoGame.calculateAutoCount(lottoTotalCount, lottoManualCount);
 
 		LottoTicket lottoTicket = InputView.inputManualLotto(lottoManualCount);
 

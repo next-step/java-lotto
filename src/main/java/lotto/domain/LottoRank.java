@@ -12,12 +12,12 @@ public enum LottoRank {
 
 	private final int countOfMatch;
 	private final int winningMoney;
-	private final boolean isIncludeBonus;
+	private final boolean hasBonus;
 
-	LottoRank(int countOfMatch, int winningMoney, boolean isIncludeBonus) {
+	LottoRank(int countOfMatch, int winningMoney, boolean hasBonus) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
-		this.isIncludeBonus = isIncludeBonus;
+		this.hasBonus = hasBonus;
 	}
 
 	public int getCountOfMatch() {
@@ -28,13 +28,14 @@ public enum LottoRank {
 		return winningMoney;
 	}
 
-	public boolean isIncludeBonus() {
-		return isIncludeBonus;
+	public boolean isHasBonus() {
+		return hasBonus;
 	}
 
 	public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
 		return Arrays.stream(LottoRank.values())
-			.filter(lr -> lr.countOfMatch == countOfMatch && (!lr.isIncludeBonus || matchBonus))
-			.findFirst().orElse(LottoRank.MISS);
+			.filter(lr -> lr.countOfMatch == countOfMatch && (!lr.hasBonus || matchBonus))
+			.findFirst()
+			.orElse(LottoRank.MISS);
 	}
 }

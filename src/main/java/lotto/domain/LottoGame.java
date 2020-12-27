@@ -27,9 +27,10 @@ public class LottoGame {
 			.collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
 	}
 
-	public void validateInput(int lottoTotalCount, int lottoManualCount) {
+	public int calculateAutoCount(int lottoTotalCount, int lottoManualCount) {
 		if (lottoManualCount > lottoTotalCount) {
 			throw new IllegalArgumentException("총 로또구매개수보다 많습니다. (총 로또구매개수 : " + lottoTotalCount + ", 수동 로또구매개수 : " + lottoManualCount);
 		}
+		return lottoTotalCount - lottoManualCount;
 	}
 }
