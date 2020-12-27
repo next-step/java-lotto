@@ -44,9 +44,6 @@ public class WinningLottos {
     public BigDecimal calcurateRevenue(String money) {
         BigDecimal buyMoney = new BigDecimal(money);
         BigDecimal winningMoney = this.amountOfWinning();
-        if (winningMoney == BigDecimal.ZERO) {
-           return  BigDecimal.ZERO;
-        }
         BigDecimal revenue = winningMoney.divide(buyMoney,2, RoundingMode.FLOOR);
         return revenue;
     }

@@ -29,7 +29,7 @@ public class DisplayView {
             println(lottoNumber);
         });
     }
-    public static void showWinningStatis(WinningLottos winningLottos){
+    public static void showWinningStatics(WinningLottos winningLottos){
         println("당첨 통계");
         println("-----------");
         Map<WinningLottoType, Integer> winningLottoTypeByCountMap = winningLottos.getWinningLottoTypeByCountMap();

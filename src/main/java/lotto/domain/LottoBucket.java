@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoBucket {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public LottoBucket() {
         this.lottos = new ArrayList<>();

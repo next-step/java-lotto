@@ -19,9 +19,8 @@ class LottoMachineTest {
     @Test
     void exchangeNumberOfLotto(){
         String money = "14000";
-//        int numberOfLotto = lottoMachine.buyLotto(money);
         LottoBucket lottoBucket = lottoMachine.buyLotto(money);
-        assertThat(lottoBucket.getLottos().size()).isEqualTo(14);
+        assertThat(lottoBucket.getLottos()).hasSize(14);
     }
 
     @Test

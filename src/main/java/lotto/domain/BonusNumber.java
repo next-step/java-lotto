@@ -2,9 +2,8 @@ package lotto.domain;
 
 import lotto.util.NumberUtil;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.List;;
+import java.util.function.Predicate;
 
 public class BonusNumber {
 
@@ -24,9 +23,11 @@ public class BonusNumber {
         int inputBonusNumber = NumberUtil.convertStringToInteger(newbonusNumber);
         BonusNumber bonusNumber = new BonusNumber(inputBonusNumber);
         List<Integer> lastWinningNumbers = NumberUtil.convertStringToIntegerList(lastWinningNumber);
-        Optional.ofNullable(lastWinningNumbers.stream()
-                .filter((number) -> bonusNumber.equals(number)).findAny())
-                .orElseThrow(() -> new IllegalArgumentException(NUMBER_EXIST_EXCEPTION));
+        Predicate<Integer> existBonusNumber = (number) -> bonusNumber.equals(number);
+        boolean duplicateBonusNumber = lastWinningNumbers.stream().anyMatch(existBonusNumber);
+        if(duplicateBonusNumber == true){
+            throw new IllegalArgumentException(NUMBER_EXIST_EXCEPTION);
+        }
         return inputBonusNumber;
     }
 

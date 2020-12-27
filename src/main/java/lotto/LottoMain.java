@@ -29,7 +29,7 @@ public class LottoMain {
         LottoResult lottoResult = new LottoResult(lottoMachine.getLottoBuckets());
         WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers, bonusNumber);
 
-        DisplayView.showWinningStatis(winningLottos);
+        DisplayView.showWinningStatics(winningLottos);
         DisplayView.printRevenu(winningLottos.calcurateRevenue(money));
 
     }
