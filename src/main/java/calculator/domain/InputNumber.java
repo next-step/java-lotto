@@ -1,51 +1,20 @@
 package calculator.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import calculator.StringUtils;
 
 public class InputNumber {
 
-    public static final String DEFAULT_DELEMITER = "[,:]";
-    private final String input;
+    private final int number;
 
-    public InputNumber(String input) {
-        this.input = input;
-        if (!isEmpty() && input.contains("-")){
-            throw new RuntimeException("음수를 입력하면 안됩니다.");
+    public InputNumber(String number) {
+        if (StringUtils.isEmpty(number.trim())) {
+            throw new RuntimeException("input 값이 빈값이면 안됩니다.");
         }
+        this.number = Integer.parseInt(number.trim());
 
-    }
-
-    public boolean isEmpty() {
-        return input == null || input.trim().isEmpty();
     }
 
     public int getNumber() {
-        return Integer.parseInt(input);
-    }
-
-
-    public List<Integer> getNumbers() {
-        return Arrays.stream(splitInput())
-            .map(s -> Integer.parseInt(s.trim()))
-            .collect(Collectors.toList());
-    }
-
-    private String[] splitInput() {
-        Matcher m = Pattern.compile("//(.)\\n(.*)")
-            .matcher(input);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
-        }
-        return input.split(DEFAULT_DELEMITER);
-    }
-
-
-    public boolean isOneLength() {
-        return input.length() == 1;
+        return number;
     }
 }
