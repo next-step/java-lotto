@@ -28,7 +28,7 @@ public class ValueTest {
 
     @ParameterizedTest
     @CsvSource(value = {"value", "-1", "*", "%"})
-    @DisplayName("숫자 이외의 값 입력 시")
+    @DisplayName("양의정수 이외의 값 입력 시")
     void exceptionInputValue(String inputValue) {
         assertThrows(RuntimeException.class, () -> {
            value.validatePositiveValue(inputValue);
