@@ -15,8 +15,24 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
-	public static void printPurchaseLottoCount(int lottoTryCount) {
-		print(String.format("%d개를 구매했습니다.", lottoTryCount));
+	public static int printInputManualLottoCount() {
+		print("수동으로 구매할 로또 수를 입력해 주세요.");
+		return scanner.nextInt();
+	}
+
+	public static LottoList printInputManualLotto(int manualLottoCount) {
+		print("수동으로 구매할 번호를 입력해 주세요.");
+		LottoList lottoList = new LottoList();
+		for (int i = 0; i < manualLottoCount; i++) {
+			String manualInput = scanner.next();
+			Lotto manualLotto = validateInputPirzeNumber(manualInput);
+			lottoList.add(manualLotto);
+		}
+		return lottoList;
+	}
+
+	public static void printPurchaseLottoCount(int autoLottoCount, int manualLottoCount) {
+		print(String.format("수동으로 %d장, 자동으로 %d를 구매했습니다.", manualLottoCount, autoLottoCount));
 	}
 
 	public static Lotto printLastPrizeInput() {

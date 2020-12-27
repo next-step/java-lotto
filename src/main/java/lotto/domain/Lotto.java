@@ -44,12 +44,11 @@ public class Lotto {
 		return countMatchNumber(lastWeekPrizeNumberList, purchasedLotto);
 	}
 
-	public LottoList generatePurchagedAutoLotto(int lottoTryCount) {
-		LottoList purchasedLottos = new LottoList();
+	public LottoList generatePurchagedAutoLotto(int lottoTryCount, LottoList lottoList) {
 		for (int i = 0; i < lottoTryCount; i++) {
-			purchasedLottos.add(new Lotto(this.getShuffleNumbers()));
+			lottoList.add(new Lotto(this.getShuffleNumbers()));
 		}
-		return purchasedLottos;
+		return lottoList;
 	}
 
 	public int countMatchNumber(Lotto lastWeekPrizeNumberList, Lotto purchasedLotto) {

@@ -8,8 +8,7 @@ import lotto.model.LottoPrizePolicy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
+import static lotto.view.InputView.printInputManualLotto;
 
 public class LottoTVShow {
 	private Lotto lotto = new Lotto();
@@ -18,18 +17,27 @@ public class LottoTVShow {
 	private static final int LOTTO_PRICE_PER_SHEET = 1000;
 
 	public void start() {
-		int lottoTryCount = printIntro();
-		InputView.printPurchaseLottoCount(lottoTryCount);
-		LottoList purchasedLottos = lotto.generatePurchagedAutoLotto(lottoTryCount);
-		InputView.printPurchaseLottoNumber(purchasedLottos);
+		int lottoTryCount = printAutoLottoNotice();
+		int manualLottoCount = printManualLottoNotice();
+		int autoLottoCount = lottoTryCount - manualLottoCount;
+		LottoList lottoList = printInputManualLotto(manualLottoCount);
+		InputView.printPurchaseLottoCount(autoLottoCount, manualLottoCount);
 
-		LottoMatchResultList lottoMatchResultList = processLotto(purchasedLottos);
+		lottoList = lotto.generatePurchagedAutoLotto(autoLottoCount, lottoList);
+		InputView.printPurchaseLottoNumber(lottoList);
+
+		LottoMatchResultList lottoMatchResultList = processLotto(lottoList);
 
 		this.lottoResult.arrangePrize(lottoMatchResultList, LOTTO_PRICE_PER_SHEET);
 		ResultView.printResult(lottoMatchResultList, lottoResult);
 	}
 
-	private int printIntro() {
+	private int printManualLottoNotice() {
+		int manualLottoCount = InputView.printInputManualLottoCount();
+		return manualLottoCount;
+	}
+
+	private int printAutoLottoNotice() {
 		int purchaseAmount = InputView.printInputNoticeForPurchaseAmount();
 		return calculateLottoCount(purchaseAmount);
 	}
