@@ -45,7 +45,7 @@ public class Lotto {
      * @param number 입력 숫자
      * @return 포함 여부 (true: 포함, false: 미포함)
      */
-    private boolean contains(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 

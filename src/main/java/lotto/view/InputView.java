@@ -25,7 +25,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<Lotto> inputManualLottos(int manualCount) {
+    public List<Lotto> inputManualLotto(int manualCount) {
         scanner.nextLine();
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {

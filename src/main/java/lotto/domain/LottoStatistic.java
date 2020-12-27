@@ -55,6 +55,17 @@ public class LottoStatistic {
     }
 
     /**
+     * 로또 순위 별 갯수 조회
+     * @param rank 로또 순위
+     * @return 로또 순위 갯수
+     */
+    public int getCountByRank(LottoRank rank) {
+        if (!statistic.containsKey(rank))
+            return 0;
+        return statistic.get(rank);
+    }
+
+    /**
      * 당첨금 합계 구하기
      * @return 당첨금 합계
      */

@@ -71,9 +71,10 @@ public class LottosTest {
         // given
         Lotto luckyLotto = new Lotto(numbers);
         LottoNumber bonusNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(luckyLotto, bonusNumber);
 
         // when
-        LottoStatistic actual = lottos.makeStatistic(luckyLotto, bonusNumber);
+        LottoStatistic actual = lottos.makeStatistic(winningLotto);
 
         // then
         SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();

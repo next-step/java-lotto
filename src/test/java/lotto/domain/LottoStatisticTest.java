@@ -40,17 +40,13 @@ public class LottoStatisticTest {
             actual.putLottoStatisticMap(rank);
         }
 
-        SortedMap<LottoRank, Integer> expectedLottoStatisticMap = new TreeMap<>();
-        expectedLottoStatisticMap.put(LottoRank.FIRST, 1);
-        expectedLottoStatisticMap.put(LottoRank.THIRD, 2);
-        expectedLottoStatisticMap.put(LottoRank.FOURTH, 3);
-        expectedLottoStatisticMap.put(LottoRank.FIFTH, 2);
-        //lottoStatisticMap.put(LottoRank.MISS, 3);
-        LottoStatistic expected = new LottoStatistic(expectedLottoStatisticMap);
-
         // then
         //actual.toFormattingStringList().forEach(System.out::println);
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(actual.getCountByRank(LottoRank.THIRD)).isEqualTo(2);
+        assertThat(actual.getCountByRank(LottoRank.FOURTH)).isEqualTo(3);
+        assertThat(actual.getCountByRank(LottoRank.FIFTH)).isEqualTo(2);
+        assertThat(actual.getCountByRank(LottoRank.MISS)).isEqualTo(0);
 
     }
 

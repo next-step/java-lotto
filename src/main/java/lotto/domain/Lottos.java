@@ -14,15 +14,14 @@ public class Lottos {
 
     /**
      * 당첨 통계 만들기
-     * @param luckyLotto 당첨 번호
-     * @param bonusNumber 보너스 번호
+     * @param winningLotto 우승 로또
      * @return 당첨 통계
      */
-    public LottoStatistic makeStatistic(Lotto luckyLotto, LottoNumber bonusNumber) {
+    public LottoStatistic makeStatistic(WinningLotto winningLotto) {
         LottoStatistic statistic = new LottoStatistic();
         for (Lotto lotto : lottoList) {
-            int matchingCount = lotto.draw(luckyLotto);
-            boolean matchBonus = lotto.drawBonus(matchingCount, bonusNumber);
+            int matchingCount = winningLotto.getMatchingCount(lotto);
+            boolean matchBonus = winningLotto.getMatchBonus(lotto);
             LottoRank rank = LottoRank.valueOf(matchingCount, matchBonus);
             statistic.putLottoStatisticMap(rank);
         }
