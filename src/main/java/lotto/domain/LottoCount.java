@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class LottoCount {
+
     public static final int LOTTO_COUNT_MIN = 1;
     private final int count;
 

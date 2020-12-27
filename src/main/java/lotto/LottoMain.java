@@ -4,7 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoMain {
 
@@ -24,7 +27,11 @@ public class LottoMain {
         outputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> manualLottos = inputView.inputManualLottos(manualCount);
         List<Lotto> automaticLottos = LotteryMachine.issueAutomaticLotto(automaticLottoCount);
-        Lottos lottos = new Lottos(manualLottos, automaticLottos);
+        List<Lotto> combinedList = Stream.of(manualLottos, automaticLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        Lottos lottos = new Lottos(combinedList);
 
         outputView.printLottoCount(manualCount, automaticLottoCount);
         outputView.printLottos(lottos);

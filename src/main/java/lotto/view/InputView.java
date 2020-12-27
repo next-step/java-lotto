@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +11,16 @@ public class InputView {
 
     private static final String SPLIT_REGEX = ",";
     private static final String EMPTY_REGEX = "\\s+";
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public long inputPurchaseAmount() {
         return scanner.nextLong();
     }
+
     public int inputManualCount() {
         return scanner.nextInt();
     }
+
     public int inputBonusNumber() {
         return scanner.nextInt();
     }
@@ -42,10 +43,11 @@ public class InputView {
         String[] numbers = scanner.nextLine()
                 .replaceAll(EMPTY_REGEX, "")
                 .split(SPLIT_REGEX);
-        List<LottoNumber> luckyNumbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            luckyNumbers.add(new LottoNumber(Integer.parseInt(number)));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number)));
         }
-        return luckyNumbers;
+        return lottoNumbers;
     }
+
 }

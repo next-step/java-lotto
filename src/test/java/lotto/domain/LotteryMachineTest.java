@@ -32,8 +32,4 @@ class LotteryMachineTest {
         assertThat(actual.size()).isEqualTo(14);
     }
 
-    @Test
-    void combineLottos() {
-
-    }
 }
