@@ -13,7 +13,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public String print() {
+    public String toStringNumber() {
         return String.valueOf(number);
     }
 

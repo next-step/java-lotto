@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -11,35 +12,20 @@ public class Lottos {
         this.lottoList = Collections.unmodifiableList(lottoList);
     }
 
-    public int getLottoListSize() {
-        return lottoList.size();
-    }
-
-    public void drawLottos(Lotto luckyLotto) {
+    /**
+     * 당첨 통계 만들기
+     * @param winningLotto 우승 로또
+     * @return 당첨 통계
+     */
+    public LottoStatistic makeStatistic(WinningLotto winningLotto) {
+        LottoStatistic statistic = new LottoStatistic();
         for (Lotto lotto : lottoList) {
-            lotto.draw(luckyLotto);
+            int matchingCount = winningLotto.getMatchingCount(lotto);
+            boolean matchBonus = winningLotto.getMatchBonus(lotto);
+            LottoRank rank = LottoRank.valueOf(matchingCount, matchBonus);
+            statistic.putLottoStatisticMap(rank);
         }
-    }
-
-    public LottoStatistic makeStatistic(LottoNumber bonusNumber) {
-        SortedMap<LottoRank, Integer> lottoStatisticMap = new TreeMap<>();
-        for (Lotto lotto : lottoList) {
-            boolean matchBonus = lotto.drawBonus(bonusNumber);
-            //LottoRank rank = LottoRank.findByMatchingCount(lotto.getMatchingCount());
-            LottoRank rank = LottoRank.valueOf(lotto.getMatchingCount(), matchBonus);
-            putLottoStatisticMap(lottoStatisticMap, rank);
-        }
-        return new LottoStatistic(lottoStatisticMap);
-    }
-
-    private void putLottoStatisticMap(Map<LottoRank, Integer> lottoStatisticMap, LottoRank rank) {
-        if (rank.equals(LottoRank.MISS))
-            return;
-        if (lottoStatisticMap.containsKey(rank)) {
-            lottoStatisticMap.put(rank, lottoStatisticMap.get(rank) + 1);
-            return;
-        }
-        lottoStatisticMap.put(rank, 1);
+        return statistic;
     }
 
     public List<String> toStringLottos() {

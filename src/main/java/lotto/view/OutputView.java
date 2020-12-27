@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoStatistic;
 import lotto.domain.Lottos;
 import lotto.domain.Profit;
@@ -10,8 +11,9 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printLottoCount(int lottoCount) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoCount);
+    public void printLottoCount(int manualCount, LottoCount automaticLottoCount) {
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, automaticLottoCount.getCount());
     }
 
     public void printLottos(Lottos lottos) {
