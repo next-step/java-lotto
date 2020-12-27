@@ -12,7 +12,7 @@ public class StringCalculator {
         values = new Values(splitStringDelimiter.splitString(inputValue));
     }
 
-    public int sumValues() {
+    public int sumNumbers() {
         return values.sum();
     }
 }

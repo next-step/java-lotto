@@ -16,7 +16,7 @@ class StringCalculatorTest {
     @DisplayName("전체 통합 테스트")
     void integrationTest(String input,String result) {
         stringCalculator = new StringCalculator(input);
-        assertThat(stringCalculator.sumValues()).isEqualTo(Integer.parseInt(result));
+        assertThat(stringCalculator.sumNumbers()).isEqualTo(Integer.parseInt(result));
     }
 
     @Test
@@ -24,7 +24,7 @@ class StringCalculatorTest {
     void customPatternIntegrationTest() {
         String input = "//;\n1;2;3";
         stringCalculator = new StringCalculator(input);
-        assertThat(stringCalculator.sumValues()).isEqualTo(6);
+        assertThat(stringCalculator.sumNumbers()).isEqualTo(6);
     }
 
 }
