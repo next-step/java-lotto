@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -18,5 +19,11 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public LottoTicket buyLottoTicket() {
+        Collections.shuffle(lottoNumbers);
+
+        return new LottoTicket(this.lottoNumbers.subList(0, LottoTicket.LOTTO_TICKET_NUMBER));
     }
 }
