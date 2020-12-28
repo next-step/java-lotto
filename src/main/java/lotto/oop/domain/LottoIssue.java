@@ -16,19 +16,11 @@ public class LottoIssue {
     public List<LottoNumber> publishLottoList() {
         resultList = new ArrayList<>();
         for(int i = 0; i < count; i++) {
-            resultList.add(generateNumbers());
+            LottoNumber lotto = new LottoNumber();
+            lotto.generateNumbers();
+            resultList.add(lotto);
         }
         return resultList;
-    }
-
-    private LottoNumber generateNumbers() {
-        LottoNumber numbers = new LottoNumber();
-        for (int i = 1; i <= 45; i++) {
-            numbers.addNum(i);
-        }
-        numbers.shuffleNumber();
-        numbers.sortSixNumber();
-        return numbers;
     }
 
     public void checkNumber(String[] numbers) {

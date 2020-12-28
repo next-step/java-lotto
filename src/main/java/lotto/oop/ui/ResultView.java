@@ -34,12 +34,13 @@ public class ResultView {
 
     private void displayGrossReturn(int tree, int four, int five, int six) {
         int earnings = (5000 * tree) + (50000 * four) + (1500000 * five) + (2000000000 * six);
-        double grossReturn = earnings / amount;
+        double grossReturn = (((earnings / (double)amount) - 1) * 100)/100 + 1;
         if (grossReturn < 1.0) {
-            System.out.println("총 수익률은 " + grossReturn + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
+//            System.out.println("총 수익률은 " + grossReturn + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
+            System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임", grossReturn);
         }
-        if (grossReturn == 1.0) {
-            System.out.println("총 수익률은 " + grossReturn + "입니다.");
+        if (grossReturn >= 1.0) {
+            System.out.printf("총 수익률은 %.2f 입니다.", grossReturn);
         }
     }
 }

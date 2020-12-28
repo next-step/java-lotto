@@ -5,13 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
-    public static final int EXTRACT_FROM_FIRST_NUMBER = 0;
-    public static final int EXTRACT_TO_LAST_NUMBER = 6;
+    private static final int EXTRACT_FROM_FIRST_NUMBER = 0;
+    private static final int EXTRACT_TO_LAST_NUMBER = 6;
 
     private List<Integer> number = new ArrayList<>();
 
-    public void addNum(int num) {
-        this.number.add(num);
+    public void generateNumbers() {
+        for (int i = 1; i <= 45; i++) {
+            number.add(i);
+        }
+        shuffleNumber();
+        sortSixNumber();
     }
 
     public void shuffleNumber() {
