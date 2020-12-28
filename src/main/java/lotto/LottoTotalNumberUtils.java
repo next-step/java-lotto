@@ -6,18 +6,16 @@ import java.util.List;
 
 public class LottoTotalNumberUtils {
 
-    private static final List<Integer> lottoTotalNumbers = new ArrayList<>();
-    private static final int LOTTO_NUMBER_MINIMUM = 1;
-    private static final int LOTTO_NUMBER_MAXIMUM = 45;
+    private static final List<Number> lottoTotalNumbers = new ArrayList<>();
 
     static {
-        for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
-            lottoTotalNumbers.add(i);
+        for (int i = Number.LOTTO_NUMBER_MINIMUM; i <= Number.LOTTO_NUMBER_MAXIMUM; i++) {
+            lottoTotalNumbers.add(Number.newNumber(i));
         }
     }
 
-    public static List<Integer> getLottoTotalNumbers() {
-        List<Integer> newLottoTotalNumbers = new ArrayList<>(lottoTotalNumbers);
+    public static List<Number> getLottoTotalNumbers() {
+        List<Number> newLottoTotalNumbers = new ArrayList<>(lottoTotalNumbers);
         Collections.shuffle(newLottoTotalNumbers);
 
         return newLottoTotalNumbers;
