@@ -14,7 +14,6 @@ class WinnerLottoTest {
 
 	@BeforeEach
 	void init() {
-
 		lotto = Lotto.generateManualLotto("1,2,3,4,5,6");
 		bonusNumber = LottoNumber.generateNumber(7);
 		winnerLotto = WinnerLotto.generateWinner(lotto, bonusNumber);
@@ -58,7 +57,6 @@ class WinnerLottoTest {
 	@Test
 	@DisplayName("당첨 로또 객체: 유효성 검사 테스트")
 	void validationTest() {
-
 		// 1. 당첨 Lotto 객체가 null 이 아니여야 한다.
 		// 2. 당첨 보너스 번호가 null 이 아니여야 한다.
 		// 3. 당첨 Lotto 객체와 보너스 번호가 동일한 숫자를 가지면 안된다.
@@ -74,7 +72,6 @@ class WinnerLottoTest {
 	@Test
 	@DisplayName("당첨 로또 객체: 객체 생성 테스트")
 	void initTest() {
-
 		WinnerLotto winnerLottoTest = WinnerLotto.generateWinner(lotto, bonusNumber);
 		assertThat(winnerLottoTest).isNotNull();
 	}
