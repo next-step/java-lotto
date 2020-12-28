@@ -10,10 +10,22 @@ class LottoTest {
 	@Test
 	@DisplayName("로또: 메뉴얼 로또 객체 생성 테스트")
 	void initManualLottoTest() {
-
 		Lotto lotto = Lotto.generateManualLotto("1,3,23,34,35,36");
 
 		assertThat(lotto).isEqualTo(Lotto.generateManualLotto("1,3,23,34,35,36"));
+	}
+
+	@Test
+	@DisplayName("로또: 메뉴얼 로또 객체 실패 생성 테스트")
+	void initManualFailLottoTest() {
+		/*
+		 * 로또 Exception 상황
+		 * 1. 로또 숫자가 6개가 아닐떄
+		 * 2. 로또 숫자 범위가 1 ~ 45 아닐때
+		 */
+		assertThatIllegalArgumentException().isThrownBy(() -> Lotto.generateManualLotto("1,3,23,34,35"));
+		assertThatIllegalArgumentException().isThrownBy(() -> Lotto.generateManualLotto("1,3,23,34,35,49"));
+		assertThatIllegalArgumentException().isThrownBy(() -> Lotto.generateManualLotto("1,3,23,34,35,-45"));
 	}
 
 	@Test
