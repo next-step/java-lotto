@@ -22,7 +22,7 @@ public class LottoNumberGenerator implements NumberGenerator {
 	}
 
 	private void addRandomNumber(List<LottoNumber> lotto) {
-		LottoNumber randomNumber = new LottoNumber(random.nextInt(NUMBER_BOUND) + 1);
+		LottoNumber randomNumber = LottoNumber.of(random.nextInt(NUMBER_BOUND) + 1);
 		if (!lotto.contains(randomNumber)) {
 			lotto.add(randomNumber);
 		}

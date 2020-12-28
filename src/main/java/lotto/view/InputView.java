@@ -62,7 +62,7 @@ public class InputView {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
 		}
-		return new WinLotto(new Lotto(lotto), new LottoNumber(bonus));
+		return new WinLotto(new Lotto(lotto), LottoNumber.of(bonus));
 	}
 
 	private static List<LottoNumber> inputLotto() {
@@ -71,7 +71,7 @@ public class InputView {
 			return Arrays.stream(input.split(DELIMITER))
 				.map(String::trim)
 				.map(Integer::parseInt)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toList());
 		} catch (Exception e) {
 			throw new IllegalArgumentException("숫자만 입력 가능합니다.");
