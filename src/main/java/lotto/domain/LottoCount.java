@@ -13,10 +13,10 @@ public class LottoCount {
     private int count;
 
     public LottoCount(String price) {
-        validatePrice(price);
+        validate(price);
     }
 
-    private void validatePrice(String price) {
+    private void validate(String price) {
         validateEmpty(price);
         validateNumber(price);
     }

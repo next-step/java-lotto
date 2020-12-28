@@ -18,7 +18,7 @@ public class WinningLotto {
     private final Lotto lotto;
 
     public WinningLotto(String inputs) {
-        validateWinningLotto(inputs);
+        validate(inputs);
         List<LottoNumber> numbers = Arrays.stream(inputs.split(COMMA_SEPARATOR))
                 .map(input -> new LottoNumber(parseNumber(input)))
                 .collect(toList());
@@ -34,7 +34,7 @@ public class WinningLotto {
     }
 
 
-    private void validateWinningLotto(String input) {
+    private void validate(String input) {
         validateEmpty(input);
         validateSeparator(input);
     }

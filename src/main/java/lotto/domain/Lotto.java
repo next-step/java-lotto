@@ -16,7 +16,7 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        validateLotto(lotto);
+        validate(lotto);
         this.lotto = lotto;
     }
 
@@ -27,14 +27,14 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    private void validateLotto(List<LottoNumber> lotto) {
+    private void validate(List<LottoNumber> lotto) {
         validateEmpty(lotto);
         validateSize(lotto);
         validateDuplicate(lotto);
     }
 
     private void validateEmpty(List<LottoNumber> lotto) {
-        if (lotto == null || lotto.size() == 0) {
+        if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException(VALID_EMPTY_MESSAGE);
         }
     }
@@ -54,24 +54,16 @@ public class Lotto {
 
     public int match(List<LottoNumber> winLotto) {
         return (int) winLotto.stream()
-                .filter(lottoNumber -> containsLottoNumber(lottoNumber))
+                .filter(lottoNumber -> contains(lottoNumber))
                 .count();
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    private boolean contains(LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
-
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "lotto=" + lotto +
-                '}';
-    }
-
 
 }

@@ -23,11 +23,7 @@ public class LottoStatistic {
     public void setRankCount(List<Integer> matchCounts) {
         for (int count : matchCounts) {
             Rank rank = Rank.valueOfRank(count);
-            if (rankCount.get(rank) == null) {
-                rankCount.put(rank, 1);
-                continue;
-            }
-            rankCount.put(rank, rankCount.get(rank) + 1);
+            rankCount.put(rank, rankCount.getOrDefault(rank,0) + 1);
         }
     }
 
