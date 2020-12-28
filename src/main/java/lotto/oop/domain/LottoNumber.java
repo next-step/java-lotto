@@ -28,6 +28,21 @@ public class LottoNumber {
         this.number = sixNumber;
     }
 
+    public int confrimLotto(LottoNumber list, String[] numbers) {
+        int num = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            num += verifyNumCount(list, numbers, i);
+        }
+        return num;
+    }
+
+    private int verifyNumCount(LottoNumber list, String[] numList, int i) {
+        if (list.getNumber().contains(Integer.parseInt(numList[i]))) {
+            return 1;
+        }
+        return 0;
+    }
+
     public List<Integer> getNumber() {
         return number;
     }

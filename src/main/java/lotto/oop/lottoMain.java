@@ -5,7 +5,10 @@ import lotto.oop.ui.InputView;
 import lotto.oop.ui.ResultView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Queue;
+
+import static java.util.Arrays.*;
 
 public class lottoMain {
     public static final String COMMA = ",";
@@ -17,7 +20,7 @@ public class lottoMain {
         input.printLotto(lottoIssue.publishLottoList());
         String[] numbers = input.winngNumbers().split(COMMA);
         lottoIssue.checkNumber(numbers);
-        ResultView output = new ResultView(lottoIssue.getIssueStats(),input.getAmount());
-        output.displayIssueStats();
+        ResultView output = new ResultView();
+        output.displayIssueStats(lottoIssue.getIssueStats(), input.getAmount());
     }
 }

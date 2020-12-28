@@ -18,6 +18,7 @@ public class LottoIssueTest {
     @Test
     @DisplayName("발행한 로또의 개수 확인")
     public void publishLootListTest() {
-        assertThat(lotto.publishLottoList()).isEqualTo(14);
+        lotto.publishLottoList();
+        assertThat(lotto.getResultList().size()).isEqualTo(14);
     }
 }
