@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## Step2 요구사항
-- [ ] 로또 번호 목록 생성
+- [x] 로또 번호 목록 생성
 - [ ] 로또 번호 자동 생성
 - [ ] 로또 가격만큼 구입 기능
 - [ ] 로또 가격 입력 기능
