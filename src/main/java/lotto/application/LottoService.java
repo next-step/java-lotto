@@ -3,16 +3,17 @@ package lotto.application;
 import lotto.domain.LottoLotteries;
 import lotto.domain.LottoLotteriesFactory;
 import lotto.domain.LottoLottery;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoResults;
 import lotto.domain.Money;
-import lotto.domain.RandomLottoNumberGenerator;
 import lotto.domain.WinLottoNumbers;
 
 public class LottoService {
-	private final RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
+	private final LottoNumberGenerator lottoNumberGenerator;
 	private final LottoLotteries lottoLotteries;
 
-	public LottoService(Money money) {
+	public LottoService(Money money, LottoNumberGenerator lottoNumberGenerator) {
+		this.lottoNumberGenerator = lottoNumberGenerator;
 		this.lottoLotteries = buyMaxAutoLottoLotteries(money);
 	}
 
@@ -23,7 +24,7 @@ public class LottoService {
 	}
 
 	private LottoLotteries buyAutoLottoLotteries(int count) {
-		return LottoLotteriesFactory.createAutoLottoLotteries(count, randomLottoNumberGenerator);
+		return LottoLotteriesFactory.createAutoLottoLotteries(count, lottoNumberGenerator);
 	}
 
 	public LottoLotteries getLottoLotteries() {
@@ -31,6 +32,6 @@ public class LottoService {
 	}
 
 	public LottoResults getLottoResults(WinLottoNumbers winLottoNumbers) {
-		return lottoLotteries.getLottoResults(winLottoNumbers);
+		return lottoLotteries.checkLottoResults(winLottoNumbers);
 	}
 }

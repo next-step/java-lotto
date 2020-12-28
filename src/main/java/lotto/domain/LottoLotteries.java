@@ -22,7 +22,7 @@ public class LottoLotteries {
 		return lottoLotteries;
 	}
 
-	public LottoResults getLottoResults(WinLottoNumbers winLottoNumbers) {
+	public LottoResults checkLottoResults(WinLottoNumbers winLottoNumbers) {
 		return LottoResultsFactory.create(checkLottoRanks(winLottoNumbers));
 	}
 

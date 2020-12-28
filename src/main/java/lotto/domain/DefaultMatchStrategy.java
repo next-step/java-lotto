@@ -9,13 +9,6 @@ public class DefaultMatchStrategy implements MatchStrategy {
 
 	@Override
 	public boolean isMatch(LottoLottery lottoLottery, WinLottoNumbers winLottoNumbers) {
-		return matchCount == countMatches(lottoLottery, winLottoNumbers);
-	}
-
-	private long countMatches(LottoLottery lottoLottery, WinLottoNumbers winLottoNumbers) {
-		return winLottoNumbers.getWinNumbers()
-			.stream()
-			.filter(lottoLottery::contains)
-			.count();
+		return winLottoNumbers.isEqualMatchCount(lottoLottery, matchCount);
 	}
 }

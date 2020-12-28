@@ -12,11 +12,17 @@ public class WinLottoNumbers {
 		this.bonusBallNumber = bonusBallNumber;
 	}
 
-	public List<LottoNumber> getWinNumbers() {
-		return lottoNumbers;
+	public boolean isEqualMatchCount(LottoLottery lottoLottery, int matchCount) {
+		return matchCount == countMatchNumbers(lottoLottery);
 	}
 
-	public LottoNumber getBonusBallNumber() {
-		return bonusBallNumber;
+	private long countMatchNumbers(LottoLottery lottoLottery) {
+		return lottoNumbers.stream()
+			.filter(lottoLottery::contains)
+			.count();
+	}
+
+	public boolean isMatchBonusBallNumber(LottoLottery lottoLottery) {
+		return lottoLottery.contains(bonusBallNumber);
 	}
 }
