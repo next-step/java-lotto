@@ -12,7 +12,7 @@ public class UserOutput {
 	private static final String OUTPUT_BUY_MESSAGE = "개를 구매했습니다.";
 	private static final String OUTPUT_YIELD_LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	private static final String OUTPUT_YIELD_WIN_MESSAGE = "(기준이 1이기 떄문에 결과적으로 이익이라는 의미임)";
-	
+
 	public static void print(final String message) {
 		System.out.print(message);
 	}
@@ -22,6 +22,7 @@ public class UserOutput {
 	}
 
 	public static void printLottoCount(int manualCount, int randomCount) {
+		print(NEXT_LINE);
 		print("수동으로 " + manualCount + "장, 자동으로 " + randomCount + OUTPUT_BUY_MESSAGE + NEXT_LINE);
 	}
 

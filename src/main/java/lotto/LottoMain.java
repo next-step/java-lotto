@@ -43,7 +43,7 @@ public class LottoMain {
 		int manualCount = count.manualCount();
 		Lottos lottos = Lottos.generateLottos();
 
-		if (manualCount <= 0) {
+		if (manualCount > 0) {
 			UserView.printInputLottos();
 		}
 		for (int i = 0; i < manualCount; i++) {
