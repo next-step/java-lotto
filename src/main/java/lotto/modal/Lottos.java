@@ -7,18 +7,26 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-	private final List<Lotto> lottos = new ArrayList<>();
+	private final List<Lotto> lottos;
+
+	public Lottos() {
+		this.lottos = new ArrayList<>();
+	}
+
+	public static Lottos generateLottos() {
+		return new Lottos();
+	}
 
 	public List<Lotto> getLottos() {
 		return this.lottos;
 	}
 
-	public void addManualLotto(String lotto) {
+	public void addManualLottos(String lotto) {
 		this.lottos.add(Lotto.generateManualLotto(lotto));
 	}
 
-	public void generateRandomLotto(int randomCount) {
-		this.lottos.addAll(generateRandomLottos(randomCount));
+	public void addRandomLotto(int lottosCount) {
+		this.lottos.addAll(generateRandomLottos(lottosCount));
 	}
 
 	private List<Lotto> generateRandomLottos(int count) {

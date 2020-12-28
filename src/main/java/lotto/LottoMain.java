@@ -41,15 +41,15 @@ public class LottoMain {
 
 	private static Lottos getLottos(Count count) {
 		int manualCount = count.manualCount();
-		Lottos lottos = new Lottos();
+		Lottos lottos = Lottos.generateLottos();
 
 		if (manualCount <= 0) {
 			UserView.printInputLottos();
 		}
 		for (int i = 0; i < manualCount; i++) {
-			lottos.addManualLotto(UserView.getLotto());
+			lottos.addManualLottos(UserView.getLotto());
 		}
-		lottos.generateRandomLotto(count.randomCount());
+		lottos.addRandomLotto(count.randomCount());
 
 		return lottos;
 	}
