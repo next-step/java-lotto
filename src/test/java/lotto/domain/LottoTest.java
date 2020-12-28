@@ -11,18 +11,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
     @Test
     void create() {
-        Lotto lotto = new Lotto(Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 44)));
+        Lotto lotto = Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 44));
     }
 
     @DisplayName("6개 아닐 경우 예외")
     @Test
     void invalidMaxSize() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 44, 44)));
+            Lotto lotto = Lotto.of(Arrays.asList(8, 21, 23, 41, 42, 44, 44));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Lotto.of(Arrays.asList(41, 42, 44, 44)));
+            Lotto lotto = Lotto.of(Arrays.asList(41, 42, 44, 44));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +30,7 @@ public class LottoTest {
     @Test
     void invalidRange() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Lotto.of(Arrays.asList(8, 21, 23, 41, 45, 46)));
+            Lotto lotto = Lotto.of(Arrays.asList(8, 21, 23, 41, 45, 46));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -38,7 +38,7 @@ public class LottoTest {
     @Test
     void invalidDuplicate() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Lotto.of(Arrays.asList(8, 21, 21, 41, 45, 4)));
+            Lotto lotto = Lotto.of(Arrays.asList(8, 21, 21, 41, 45, 4));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -46,8 +46,8 @@ public class LottoTest {
     @DisplayName("로또 번호 매칭")
     @Test
     void match() {
-        Lotto lotto = new Lotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        int count = lotto.match(Lotto.of(Arrays.asList(1, 2, 9, 4, 5, 6)));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int count = lotto.match(Lotto.of(Arrays.asList(1, 2, 9, 4, 5, 6)).getLotto());
         assertThat(count).isEqualTo(5);
     }
 

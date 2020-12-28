@@ -20,10 +20,11 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public static List<LottoNumber> of(List<Integer> lotto) {
-        return lotto.stream()
+    public static Lotto of(List<Integer> lotto) {
+        List<LottoNumber> lottoNumbers = lotto.stream()
                 .map(number -> new LottoNumber(number))
                 .collect(toList());
+        return new Lotto(lottoNumbers);
     }
 
     private void validateLotto(List<LottoNumber> lotto) {

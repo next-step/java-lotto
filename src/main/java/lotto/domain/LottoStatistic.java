@@ -33,10 +33,10 @@ public class LottoStatistic {
 
     public StringBuilder message() {
         StringBuilder message = new StringBuilder();
-        message.append(String.format(RANK_FOUR_REWARD_MESSAGE, rankCount.get(Rank.FOUR)));
-        message.append(String.format(RANK_THIRD_REWARD_MESSAGE, rankCount.get(Rank.THIRD)));
-        message.append(String.format(RANK_SECOND_REWARD_MESSAGE, rankCount.get(Rank.SECOND)));
-        message.append(String.format(RANK_FIRST_REWARD_MESSAGE, rankCount.get(Rank.FIRST)));
+        message.append(String.format(RANK_FOUR_REWARD_MESSAGE, (rankCount.get(Rank.FOUR) == null) ? 0 : rankCount.get(Rank.FOUR)));
+        message.append(String.format(RANK_THIRD_REWARD_MESSAGE, (rankCount.get(Rank.THIRD) == null) ? 0 : rankCount.get(Rank.THIRD)));
+        message.append(String.format(RANK_SECOND_REWARD_MESSAGE, (rankCount.get(Rank.SECOND) == null) ? 0 : rankCount.get(Rank.SECOND)));
+        message.append(String.format(RANK_FIRST_REWARD_MESSAGE, (rankCount.get(Rank.FIRST) == null) ? 0 : rankCount.get(Rank.FIRST)));
         message.append(profitMessage());
         return message;
     }
@@ -50,12 +50,11 @@ public class LottoStatistic {
     }
 
     public int getTotalReward() {
-        return (rankCount.get(Rank.FIRST) * Rank.FIRST.getMoney())
-                + (rankCount.get(Rank.SECOND) * Rank.SECOND.getMoney())
-                + (rankCount.get(Rank.THIRD) * Rank.THIRD.getMoney())
-                + (rankCount.get(Rank.FOUR) * Rank.FOUR.getMoney());
-
-
+        int total = 0;
+        for (Rank rank : rankCount.keySet()) {
+            total += rankCount.get(rank) * rank.getMoney();
+        }
+        return total;
     }
 
 }
