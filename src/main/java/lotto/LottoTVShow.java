@@ -22,6 +22,11 @@ public class LottoTVShow {
 	private LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult();
 
 	private static final Money LOTTO_PRICE_PER_SHEET = new Money(1000);
+	private LottoBuyCount lottoTotalBuyCount;
+	private LottoBuyCount manualLottoCount;
+	private LottoBuyCount autoLottoCount;
+	private Lotto lotto = new Lotto();
+	private LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult();
 
 	public void start() {
 		LottoList lottoList = processUserInput();
