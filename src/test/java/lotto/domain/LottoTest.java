@@ -10,23 +10,23 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 	WinLotto winLotto = new WinLotto(new Lotto(new ArrayList<>(Arrays.asList(
-		new LottoNumber(1),
-		new LottoNumber(2),
-		new LottoNumber(3),
-		new LottoNumber(4),
-		new LottoNumber(5),
-		new LottoNumber(6)
-	))), new LottoNumber(7));
+		LottoNumber.of(1),
+		LottoNumber.of(2),
+		LottoNumber.of(3),
+		LottoNumber.of(4),
+		LottoNumber.of(5),
+		LottoNumber.of(6)
+	))), LottoNumber.of(7));
 
 	@DisplayName("로또 5개만 구성하는 경우 테스트")
 	@Test
 	public void lottoLengthTest() {
 		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(new ArrayList<>(Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(10),
-			new LottoNumber(11)
+			LottoNumber.of(1),
+			LottoNumber.of(2),
+			LottoNumber.of(3),
+			LottoNumber.of(10),
+			LottoNumber.of(11)
 		))));
 	}
 
@@ -35,12 +35,12 @@ class LottoTest {
 	public void lottoMatchTest() {
 		int expected = 3;
 		Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(8),
-			new LottoNumber(9),
-			new LottoNumber(10)
+			LottoNumber.of(1),
+			LottoNumber.of(2),
+			LottoNumber.of(3),
+			LottoNumber.of(8),
+			LottoNumber.of(9),
+			LottoNumber.of(10)
 		)));
 		MatchResult match = lotto.match(winLotto);
 		assertThat(expected).isEqualTo(match.getCount());
@@ -51,12 +51,12 @@ class LottoTest {
 	public void lottoRankTest() {
 		LottoRank expected = LottoRank.SECOND;
 		Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(
-			new LottoNumber(1),
-			new LottoNumber(2),
-			new LottoNumber(3),
-			new LottoNumber(4),
-			new LottoNumber(5),
-			new LottoNumber(7)
+			LottoNumber.of(1),
+			LottoNumber.of(2),
+			LottoNumber.of(3),
+			LottoNumber.of(4),
+			LottoNumber.of(5),
+			LottoNumber.of(7)
 		)));
 		LottoRank actual = lotto.rankLotto(winLotto);
 		assertThat(expected).isEqualTo(actual);
