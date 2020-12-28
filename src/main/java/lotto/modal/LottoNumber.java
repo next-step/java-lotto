@@ -2,6 +2,7 @@ package lotto.modal;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -52,6 +53,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		if (StringValid.isNoNNumber(lottoNumber)) {
 			throw new IllegalArgumentException("Lotto 번호 범위 에러: 숫자를 입력해 주세요.");
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoNumber that = (LottoNumber)o;
+		return number == that.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
 	}
 
 	@Override

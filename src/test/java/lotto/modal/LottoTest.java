@@ -8,6 +8,18 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
 	@Test
+	@DisplayName("로또: 비교 테스트")
+	void compareLottoTest() {
+		Lotto lotto1 = Lotto.generateManualLotto("1,3,23,34,35,36");
+		Lotto lotto2 = Lotto.generateManualLotto("1,3,23,34,35,36");
+
+		if (lotto1.getLotto().contains(LottoNumber.generateNumber(1))) {
+			System.out.println("why?");
+		}
+		System.out.println(lotto1.compareLottoCount(lotto2));
+	}
+
+	@Test
 	@DisplayName("로또: 메뉴얼 로또 객체 생성 테스트")
 	void initManualLottoTest() {
 		Lotto lotto = Lotto.generateManualLotto("1,3,23,34,35,36");
@@ -32,9 +44,8 @@ class LottoTest {
 	@DisplayName("로또: 랜덤 로또 객체 생성 테스트")
 	void initRandomLottoTest() {
 		Lotto lotto = Lotto.generateRandomLotto();
-		lotto.getLotto()
-			.forEach(System.out::println);
 
 		assertThat(lotto).isNotNull();
 	}
+
 }

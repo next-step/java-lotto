@@ -16,21 +16,12 @@ public class WinnerLotto {
 		return new WinnerLotto(winnerLotto, bonusNumber);
 	}
 
-	public int getMatchCount(Lotto compareLotto) {
-		return compareLotto.getLotto().stream()
-			.mapToInt(this::isContain)
-			.sum();
-	}
-
-	public int isContain(LottoNumber number) {
-		if (this.winner.getLotto().contains(number)) {
-			return 1;
-		}
-		return 0;
+	public int getMatchCount(Lotto lotto) {
+		return lotto.compareLottoCount(this.winner);
 	}
 
 	public boolean isContainBonus(Lotto lotto) {
-		return lotto.getLotto().contains(bonusNumber);
+		return lotto.isContainNumber(bonusNumber);
 	}
 
 	private static void validateWinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {

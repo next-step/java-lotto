@@ -23,17 +23,25 @@ public class Lotto {
 		return new Lotto(LottoNumber.generateRandomNumbers());
 	}
 
+	public int compareLottoCount(Lotto targetLotto) {
+		return targetLotto.getLotto().stream()
+			.mapToInt(this::isContain)
+			.sum();
+	}
+
+	public int isContain(LottoNumber number) {
+		if (isContainNumber(number)) {
+			return 1;
+		}
+		return 0;
+	}
+
 	public boolean isContainNumber(LottoNumber bonusNumber) {
 		return this.lotto.contains(bonusNumber);
 	}
 
-	public List<LottoNumber> getLotto() {
-		return this.lotto;
-	}
-
 	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
 		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
-
 		validateLottoNumbers(lottoArray);
 
 		return Arrays.stream(lottoArray)
@@ -45,6 +53,10 @@ public class Lotto {
 		if (lottoNumber.length != LOTTO_REQUIRED_COUNT) {
 			throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
 		}
+	}
+
+	public List<LottoNumber> getLotto() {
+		return this.lotto;
 	}
 
 	@Override
@@ -66,4 +78,5 @@ public class Lotto {
 	public String toString() {
 		return lotto.toString();
 	}
+
 }
