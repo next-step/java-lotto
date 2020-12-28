@@ -1,12 +1,8 @@
 package lotto.modal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -23,23 +19,8 @@ public class Lotto {
 		return new Lotto(generateUserLotto(userInputLotto));
 	}
 
-	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
-		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
-
-		validateLottoNumbers(lottoArray);
-
-		return Arrays.stream(lottoArray)
-			.map(LottoNumber::generateNumber)
-			.collect(Collectors.toList());
-	}
-
 	public static Lotto generateRandomLotto() {
-		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
-		Collections.sort(resultLotto);
-
-		return new Lotto(resultLotto.stream()
-			.map(LottoNumber::generateNumber)
-			.collect(Collectors.toList()));
+		return new Lotto(LottoNumber.generateRandomNumbers());
 	}
 
 	public boolean isContainNumber(LottoNumber bonusNumber) {
@@ -50,19 +31,20 @@ public class Lotto {
 		return this.lotto;
 	}
 
+	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
+		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
+
+		validateLottoNumbers(lottoArray);
+
+		return Arrays.stream(lottoArray)
+			.map(LottoNumber::generateNumber)
+			.collect(Collectors.toList());
+	}
+
 	private static void validateLottoNumbers(String[] lottoNumber) {
 		if (lottoNumber.length != LOTTO_REQUIRED_COUNT) {
 			throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
 		}
-	}
-
-	private static Set<Integer> getRandomSet() {
-		Set<Integer> tempLotto = new HashSet<>();
-
-		while (tempLotto.size() != LOTTO_REQUIRED_COUNT) {
-			tempLotto.add(LottoNumber.generateRandomLottoNumber());
-		}
-		return tempLotto;
 	}
 
 	@Override

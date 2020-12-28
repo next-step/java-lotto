@@ -15,7 +15,7 @@ class LottoResultTest {
 
 	@BeforeEach
 	void init() {
-		lottos = Lottos.generateLottos();
+		lottos = new Lottos();
 		lottos.addManualLottos("1,10,20,30,40,45");
 
 		winnerLotto = WinnerLotto.generateWinner(
@@ -75,7 +75,7 @@ class LottoResultTest {
 	@Test
 	@DisplayName("로또 결과: 로또 결과 객체 생성 테스트")
 	void initLottoResultTest() {
-		Lottos lottosTest = Lottos.generateLottos();
+		Lottos lottosTest = new Lottos();
 		lottosTest.addRandomLotto(10);
 
 		LottoResult result = LottoResult.generateResult(lottos, winnerLotto);

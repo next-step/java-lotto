@@ -13,10 +13,6 @@ public class Lottos {
 		this.lottos = new ArrayList<>();
 	}
 
-	public static Lottos generateLottos() {
-		return new Lottos();
-	}
-
 	public List<Lotto> getLottos() {
 		return this.lottos;
 	}

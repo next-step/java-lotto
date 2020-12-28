@@ -1,24 +1,26 @@
 package lotto.modal;
 
-import java.util.Objects;
-import java.util.Random;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lotto.util.StringValid;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-	private static final Random randomGenerator = new Random();
+	//private static final Random randomGenerator = new Random();
 	private static final int LOTTO_NUMBER_BOUND_MAX = 45;
 	private static final int LOTTO_NUMBER_BOUND_MIN = 1;
+	private static final List<LottoNumber> RANDOM_NUMBER_GENERATOR =
+		IntStream.rangeClosed(LOTTO_NUMBER_BOUND_MIN, LOTTO_NUMBER_BOUND_MAX)
+			.mapToObj(LottoNumber::generateNumber)
+			.collect(Collectors.toList());
 
 	private final int number;
 
 	private LottoNumber(int lottoNumber) {
 		this.number = lottoNumber;
-	}
-
-	public static int generateRandomLottoNumber() {
-		return randomGenerator.nextInt(LottoNumber.LOTTO_NUMBER_BOUND_MAX) + LottoNumber.LOTTO_NUMBER_BOUND_MIN;
 	}
 
 	public static LottoNumber generateNumber(int bonusNumber) {
@@ -29,6 +31,15 @@ public class LottoNumber {
 	public static LottoNumber generateNumber(String bonusNumber) {
 		validateLottoNumber(bonusNumber);
 		return generateNumber(Integer.parseInt(bonusNumber));
+	}
+
+	public static List<LottoNumber> generateRandomNumbers() {
+		Collections.shuffle(RANDOM_NUMBER_GENERATOR);
+
+		return RANDOM_NUMBER_GENERATOR.stream()
+			.limit(6)
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	private static void validateLottoNumber(int lottoNumber) {
@@ -44,22 +55,12 @@ public class LottoNumber {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		LottoNumber that = (LottoNumber)o;
-		return number == that.number;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(number);
-	}
-
-	@Override
 	public String toString() {
 		return Integer.toString(this.number);
+	}
+
+	@Override
+	public int compareTo(LottoNumber lottoNumber) {
+		return Integer.compare(this.number, lottoNumber.number);
 	}
 }
