@@ -14,7 +14,6 @@ class LottoPrizeAnalysisResultTest {
 
 	@Test
 	public void 본전케이스_당첨금_계산_테스트() {
-		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult();
 		LottoMatchResultList lottoMatchResultList = new LottoMatchResultList();
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(3), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(3), new HasBonusNumber(false)));
@@ -26,6 +25,8 @@ class LottoPrizeAnalysisResultTest {
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
+
+		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult(lottoMatchResultList);
 
 		lottoPrizeAnalysisResult.arrangePrize(lottoMatchResultList, new Money(1000));
 		assertThat(lottoPrizeAnalysisResult.getEarningsRate().getEarningsRate()).isEqualTo(1);
@@ -34,7 +35,6 @@ class LottoPrizeAnalysisResultTest {
 
 	@Test
 	public void 손해케이스_당첨금_계산_테스트_손해() {
-		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult();
 		LottoMatchResultList lottoMatchResultList = new LottoMatchResultList();
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(3), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
@@ -46,6 +46,8 @@ class LottoPrizeAnalysisResultTest {
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
+		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult(lottoMatchResultList);
+
 		lottoPrizeAnalysisResult.arrangePrize(lottoMatchResultList, new Money(1000));
 		assertThat(lottoPrizeAnalysisResult.getEarningsRate().getEarningsRate()).isEqualTo(0.5);
 		assertThat(lottoPrizeAnalysisResult.getTotalPrizeMoney().getMoney()).isEqualTo(5_000);
@@ -53,7 +55,6 @@ class LottoPrizeAnalysisResultTest {
 
 	@Test
 	public void 이익케이스_당첨금_계산_테스트() {
-		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult();
 		LottoMatchResultList lottoMatchResultList = new LottoMatchResultList();
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(6), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
@@ -65,6 +66,8 @@ class LottoPrizeAnalysisResultTest {
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
 		lottoMatchResultList.add(new MatchResultPerLotto(new MatchCount(1), new HasBonusNumber(false)));
+		LottoPrizeAnalysisResult lottoPrizeAnalysisResult = new LottoPrizeAnalysisResult(lottoMatchResultList);
+
 		lottoPrizeAnalysisResult.arrangePrize(lottoMatchResultList, new Money(1000));
 		assertThat(lottoPrizeAnalysisResult.getEarningsRate().getEarningsRate()).isEqualTo(200000);
 		assertThat(lottoPrizeAnalysisResult.getTotalPrizeMoney().getMoney()).isEqualTo(2_000_000_000);

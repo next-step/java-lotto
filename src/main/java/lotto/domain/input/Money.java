@@ -4,16 +4,16 @@ public class Money {
 
 	private int money;
 
+//	public Money() {
+//		this.money = 0;
+//	}
+
 	public Money(int money) {
 		this.money = money;
 	}
 
 	public int getMoney() {
 		return money;
-	}
-
-	public LottoBuyCount calculateLottoCount(Money lottoPricePerSheet) {
-		return new LottoBuyCount(this.money / lottoPricePerSheet.getMoney());
 	}
 
 	public void add(Money prizeMoney) {

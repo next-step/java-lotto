@@ -7,11 +7,14 @@ public class LottoList {
 
 	private List<Lotto> lottoList = new ArrayList<>();
 
-	public LottoList() {
-	}
+	public LottoList(List<Lotto> manualLottoList, int autoLottoCount) {
+		List<Lotto> autoLottoList  = new ArrayList<>();
+		for (int i = 0; i < autoLottoCount; i++) {
+			autoLottoList.add(new Lotto(Lotto.getShuffleNumbers()));
+		}
 
-	public void add(Lotto lotto) {
-		this.lottoList.add(lotto);
+		this.lottoList.addAll(manualLottoList);
+		this.lottoList.addAll(autoLottoList);
 	}
 
 	public List<Lotto> getLottoList() {

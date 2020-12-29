@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.input.LottoBuyCount;
 import lotto.domain.result.HasBonusNumber;
 import lotto.domain.result.MatchCount;
 
@@ -24,7 +23,7 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
-	private List<LottoNumber> getShuffleNumbers() {
+	public static List<LottoNumber> getShuffleNumbers() {
 		Set<LottoNumber> autoLottos = new HashSet<>();
 		do {
 			autoLottos.add(new LottoNumber());
@@ -34,13 +33,6 @@ public class Lotto {
 
 	public MatchCount getMatchCount(Lotto lastWeekPrizeNumberList, Lotto purchasedLotto) {
 		return countMatchNumber(lastWeekPrizeNumberList, purchasedLotto);
-	}
-
-	public LottoList generateAutoLotto(LottoBuyCount autoLottoCount, LottoList lottoList) {
-		for (int i = 0; i < autoLottoCount.getLottoBuyCount(); i++) {
-			lottoList.add(new Lotto(this.getShuffleNumbers()));
-		}
-		return lottoList;
 	}
 
 	public MatchCount countMatchNumber(Lotto lastWeekPrizeNumberList, Lotto purchasedLotto) {

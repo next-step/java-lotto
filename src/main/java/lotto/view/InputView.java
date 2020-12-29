@@ -16,15 +16,15 @@ public class InputView {
 		return new Money(scanner.nextInt());
 	}
 
-	public static LottoBuyCount printInputManualLottoCount() {
+	public static int printInputManualLottoCount() {
 		print("수동으로 구매할 로또 수를 입력해 주세요.");
-		return new LottoBuyCount(scanner.nextInt());
+		return scanner.nextInt();
 	}
 
-	public static LottoList printInputManualLotto(LottoBuyCount manualLottoCount) {
+	public static List<Lotto> printInputManualLotto(int manualLottoCount) {
 		print("수동으로 구매할 번호를 입력해 주세요.");
-		LottoList lottoList = new LottoList();
-		for (int i = 0; i < manualLottoCount.getLottoBuyCount(); i++) {
+		List<Lotto> lottoList = new ArrayList<>();
+		for (int i = 0; i < manualLottoCount; i++) {
 			String manualInput = scanner.next();
 			Lotto manualLotto = validateInputPirzeNumber(manualInput);
 			lottoList.add(manualLotto);
@@ -32,8 +32,8 @@ public class InputView {
 		return lottoList;
 	}
 
-	public static void printPurchaseLottoCount(LottoBuyCount autoLottoCount, LottoBuyCount manualLottoCount) {
-		print(String.format("수동으로 %d장, 자동으로 %d를 구매했습니다.", manualLottoCount.getLottoBuyCount(), autoLottoCount.getLottoBuyCount()));
+	public static void printPurchaseLottoCount(int manualLottoCount, int autoLottoCount) {
+		print(String.format("수동으로 %d장, 자동으로 %d를 구매했습니다.", manualLottoCount, autoLottoCount));
 	}
 
 	public static Lotto printLastPrizeInput() {

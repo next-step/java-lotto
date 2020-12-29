@@ -9,9 +9,9 @@ class LottoBuyCountTest {
 
 	@Test
 	void 수동_자동_로또_구매_개수_확인() {
-		LottoBuyCount lottoTotalBuyCount = new LottoBuyCount(10);
-		LottoBuyCount manualLottoCount = new LottoBuyCount(3);
-		assertThat(lottoTotalBuyCount.getAutoLottoCount(manualLottoCount).getLottoBuyCount()).isEqualTo(7);
+		LottoBuyCount lottoTotalBuyCount = new LottoBuyCount(new Money(10000), 8);
+		assertThat(lottoTotalBuyCount.getAutoLottoCount()).isEqualTo(2);
+		assertThat(lottoTotalBuyCount.getManualLottoCount()).isEqualTo(8);
 
 	}
 }

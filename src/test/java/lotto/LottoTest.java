@@ -12,15 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-	Lotto lotto = new Lotto();
-	LottoTVShow lottoTVShow = new LottoTVShow();
-
-	@Test
-	public void calculateLottoCount_장당_천원_로또_구매_매수_테스트() {
-		assertThat(lottoTVShow.calculateLottoCount(new Money(14000)).getLottoBuyCount()).isEqualTo(14);
-		assertThat(lottoTVShow.calculateLottoCount(new Money(13500)).getLottoBuyCount()).isEqualTo(13);
-	}
-
 	@Test
 	public void 지난주_당첨번호에서_내가_산_로또번호를_비교해서_결과를_확인한다() {
 		Lotto lotto = new Lotto();

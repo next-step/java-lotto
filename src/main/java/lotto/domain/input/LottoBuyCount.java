@@ -1,25 +1,39 @@
 package lotto.domain.input;
 
+import lotto.LottoTVShow;
+
 public class LottoBuyCount {
 
-	private int lottoBuyCount;
+	private int totalBuyCount;
 
-	public LottoBuyCount(int lottoBuyCount) {
-		isPositiveNumber(lottoBuyCount);
-		this.lottoBuyCount = lottoBuyCount;
+	private int autoLottoCount;
+
+	private int manualLottoCount;
+
+
+	public LottoBuyCount(Money purchaseAmount, int manualLottoCount) {
+		int autoMoney = purchaseAmount.getMoney() - (manualLottoCount * LottoTVShow.LOTTO_PRICE_PER_SHEET.getMoney());
+		this.autoLottoCount = isPositiveNumber(autoMoney / LottoTVShow.LOTTO_PRICE_PER_SHEET.getMoney());
+		this.manualLottoCount = isPositiveNumber(manualLottoCount);
+		this.totalBuyCount = autoLottoCount + manualLottoCount;
 	}
 
-	private void isPositiveNumber(int lottoBuyCount) {
-		if(lottoBuyCount < 0){
+	private int isPositiveNumber(int lottoBuyCount) {
+		if (lottoBuyCount < 0) {
 			throw new IllegalArgumentException();
 		}
-	}
-
-	public int getLottoBuyCount() {
 		return lottoBuyCount;
 	}
 
-	public LottoBuyCount getAutoLottoCount(LottoBuyCount manualLottoCount) {
-		return new LottoBuyCount(this.lottoBuyCount - manualLottoCount.lottoBuyCount);
+	public int getTotalBuyCount() {
+		return totalBuyCount;
+	}
+
+	public int getAutoLottoCount() {
+		return autoLottoCount;
+	}
+
+	public int getManualLottoCount() {
+		return manualLottoCount;
 	}
 }
