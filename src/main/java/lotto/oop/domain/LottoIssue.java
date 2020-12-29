@@ -26,12 +26,23 @@ public class LottoIssue {
 
     public void checkNumber(String[] numbers, String bonus) {
         issueStats = new HashMap<>();
+        int[] numberConvertInt = new int[numbers.length];
+        for(int i = 0; i < numbers.length; i++) {
+            numberConvertInt[i] = Integer.parseInt(numbers[i]);
+            vefiryCheckNumber(numberConvertInt, i);
+        }
         for (LottoNumber issuelotto: resultList) {
-            setIssueStats(issuelotto, numbers, bonus);
+            setIssueStats(issuelotto, numberConvertInt, bonus);
         }
     }
 
-    private void setIssueStats(LottoNumber issuelotto, String[] numbers, String bonus) {
+    private void vefiryCheckNumber(int[] numberConvertInt, int i) {
+        if (numberConvertInt[i] >= 46) {
+            throw new IllegalArgumentException("당첨 볼이 46보다 큽니다.");
+        }
+    }
+
+    private void setIssueStats(LottoNumber issuelotto, int[] numbers, String bonus) {
         int key = getKey(issuelotto, numbers, bonus);
         int value = 1;
         if (issueStats.containsKey(key)){
@@ -40,7 +51,7 @@ public class LottoIssue {
         issueStats.put(key, value);
     }
 
-    private int getKey(LottoNumber issuelotto, String[] numbers, String bonus) {
+    private int getKey(LottoNumber issuelotto, int[] numbers, String bonus) {
         int key = 0;
         int num = issuelotto.checkLotto(numbers, bonus);
         if (num == 6) {

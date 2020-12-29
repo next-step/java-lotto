@@ -9,6 +9,7 @@ public class LottoNumber {
     private static final int EXTRACT_TO_LAST_NUMBER = 6;
 
     private List<Integer> number = new ArrayList<>();
+
     private List<Integer> generateNumbers = new ArrayList<>();
     private boolean bonusCheck;
 
@@ -30,7 +31,7 @@ public class LottoNumber {
         this.generateNumbers = sixNumber;
     }
 
-    public int checkLotto(String[] numbers, String bonus) {
+    public int checkLotto(int[] numbers, String bonus) {
         int num = 0;
         for (int i = 0; i < numbers.length; i++) {
             num += verifyNumCount(numbers, i);
@@ -41,11 +42,15 @@ public class LottoNumber {
         return num;
     }
 
-    private int verifyNumCount(String[] numList, int i) {
-        if (getGenerateNumbers().contains(Integer.parseInt(numList[i]))) {
+    private int verifyNumCount(int[] numList, int i) {
+        if (getGenerateNumbers().contains(numList[i])) {
             return 1;
         }
         return 0;
+    }
+
+    public void setGenerateNumbers(List<Integer> generateNumbers) {
+        this.generateNumbers = generateNumbers;
     }
 
     public List<Integer> getGenerateNumbers() {
