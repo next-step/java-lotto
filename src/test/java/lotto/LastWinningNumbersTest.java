@@ -30,7 +30,7 @@ class LastWinningNumbersTest {
         LastWinningNumbers winningNumbers = LastWinningNumbers.newWinningNumbers(winningLottoTicket, Number.newNumber(7));
 
         // when
-        int countOfMatch = winningNumbers.sumCountOfMatch(lottoTicket.getTicket());
+        int countOfMatch = winningNumbers.calculateCountOfMatch(lottoTicket.getTicket());
 
         // then
         Assertions.assertThat(countOfMatch).isEqualTo(6);

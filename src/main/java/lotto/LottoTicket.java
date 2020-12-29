@@ -48,6 +48,24 @@ public class LottoTicket {
         }
     }
 
+    public int calculateCountOfMatch(List<Number> ticketNumbers) {
+        int countOfMatch = 0;
+
+        for (Number winningNumber : ticket) {
+            countOfMatch = contains(ticketNumbers, countOfMatch, winningNumber);
+        }
+
+        return countOfMatch;
+    }
+
+    private int contains(List<Number> ticketNumbers, int countOfMatch, Number winningNumber) {
+        if (ticketNumbers.contains(winningNumber)) {
+            countOfMatch++;
+        }
+
+        return countOfMatch;
+    }
+
     public List<Number> getTicket() {
         return Collections.unmodifiableList(ticket);
     }
