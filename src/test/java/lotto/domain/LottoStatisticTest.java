@@ -11,6 +11,6 @@ public class LottoStatisticTest {
     @Test
     void setRankCount() {
         LottoStatistic statistic = new LottoStatistic(Arrays.asList(3,3,3,4,5,6), new LottoCount("15000"));
-        System.out.println(statistic.message());
+        System.out.println(statistic.rankCount());
     }
 }

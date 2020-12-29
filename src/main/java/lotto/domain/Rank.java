@@ -17,8 +17,8 @@ public enum Rank {
         this.money = money;
     }
 
-    public int getMoney() {
-        return money;
+    public boolean isNothing() {
+        return this == Rank.NOTHING;
     }
 
     public static Rank valueOfRank(int matchCount) {
@@ -30,5 +30,13 @@ public enum Rank {
 
     private boolean sameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }
