@@ -14,11 +14,22 @@ public class LottoResult {
 		this.ranks = ranks;
 	}
 
-	public List<String> rankCount() {
+	public static LottoResult generateResult(Lottos lottos, WinnerLotto winnerLotto) {
+		return new LottoResult(lottos.getLottos().stream()
+			.map(lotto -> LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto)))
+			.filter(lottoRank -> !lottoRank.equals(LottoRank.NOTHING_RANK))
+			.collect(Collectors.toList()));
+	}
+
+	public List<String> reportRank() {
 		return Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> !lottoRank.equals(LottoRank.NOTHING_RANK))
 			.map(lottoRank -> getRankMessage(lottoRank) + getRankCount(lottoRank) + PRINT_LOTTO_RANK_COUNT_MSG)
 			.collect(Collectors.toList());
+	}
+
+	public BigDecimal reportYield(Money money) {
+		return money.getYield(totalPrize());
 	}
 
 	private String getRankMessage(LottoRank lottoRank) {
@@ -32,10 +43,6 @@ public class LottoResult {
 		return ranks.stream()
 			.filter(lottoRank -> lottoRank.equals(target))
 			.count();
-	}
-
-	public BigDecimal report(Money money) {
-		return money.getYield(totalPrize());
 	}
 
 	private long totalPrize() {

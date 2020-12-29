@@ -1,15 +1,9 @@
 package lotto.modal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import lotto.util.StringValid;
 
 public class Lotto {
 	private static final String LOTTO_NUMBER_SEPARATOR = ",";
@@ -17,29 +11,29 @@ public class Lotto {
 
 	private final List<LottoNumber> lotto;
 
-	public Lotto() {
-		this(generateRandomLotto());
-	}
-
-	public Lotto(List<LottoNumber> manualLotto) {
+	private Lotto(List<LottoNumber> manualLotto) {
 		this.lotto = manualLotto;
 	}
 
-	public List<LottoNumber> getLotto() {
-		return this.lotto;
-	}
-
-	public static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
-		validationLottoNumbers(inputStr);
-
-		return inputStr.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
-	}
-
-	public static Lotto generateWinnerLotto(String userInputLotto) {
-		validationWinnerLotto(userInputLotto);
+	public static Lotto generateManualLotto(String userInputLotto) {
 		return new Lotto(generateUserLotto(userInputLotto));
+	}
+
+	public static Lotto generateRandomLotto() {
+		return new Lotto(LottoNumber.generateRandomNumbers());
+	}
+
+	public int compareLottoCount(Lotto targetLotto) {
+		return targetLotto.getLotto().stream()
+			.mapToInt(this::isContain)
+			.sum();
+	}
+
+	public int isContain(LottoNumber number) {
+		if (isContainNumber(number)) {
+			return 1;
+		}
+		return 0;
 	}
 
 	public boolean isContainNumber(LottoNumber bonusNumber) {
@@ -48,37 +42,21 @@ public class Lotto {
 
 	private static List<LottoNumber> generateUserLotto(String userInputLotto) {
 		String[] lottoArray = userInputLotto.replace(" ", "").split(LOTTO_NUMBER_SEPARATOR);
-		return Lotto.generateManualLotto(Arrays.asList(lottoArray));
-	}
+		validateLottoNumbers(lottoArray);
 
-	private static void validationWinnerLotto(String userInputLotto) {
-		if (StringValid.isEmptyStr(userInputLotto)) {
-			throw new IllegalArgumentException("당첨 로또를 입력해주세요.");
-		}
-	}
-
-	private static void validationLottoNumbers(List<String> inputStr) {
-		if (new HashSet<>(inputStr).size() != LOTTO_REQUIRED_COUNT) {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	private static List<LottoNumber> generateRandomLotto() {
-		List<Integer> resultLotto = new ArrayList<>(getRandomSet());
-		Collections.sort(resultLotto);
-
-		return resultLotto.stream()
-			.map(LottoNumber::new)
+		return Arrays.stream(lottoArray)
+			.map(LottoNumber::generateNumber)
 			.collect(Collectors.toList());
 	}
 
-	private static Set<Integer> getRandomSet() {
-		Set<Integer> tempLotto = new HashSet<>();
-
-		while (tempLotto.size() != LOTTO_REQUIRED_COUNT) {
-			tempLotto.add(LottoNumber.generateRandomLottoNumber());
+	private static void validateLottoNumbers(String[] lottoNumber) {
+		if (lottoNumber.length != LOTTO_REQUIRED_COUNT) {
+			throw new IllegalArgumentException("로또 번호가 6개가 아닙니다.");
 		}
-		return tempLotto;
+	}
+
+	public List<LottoNumber> getLotto() {
+		return this.lotto;
 	}
 
 	@Override
@@ -100,4 +78,5 @@ public class Lotto {
 	public String toString() {
 		return lotto.toString();
 	}
+
 }
