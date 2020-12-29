@@ -10,6 +10,7 @@ public class LottoNumber {
 
     private List<Integer> number = new ArrayList<>();
     private List<Integer> generateNumbers = new ArrayList<>();
+    private boolean bonusCheck;
 
     public void generateNumbers() {
         for (int i = 1; i <= 45; i++) {
@@ -29,16 +30,19 @@ public class LottoNumber {
         this.generateNumbers = sixNumber;
     }
 
-    public int checkLotto(String[] numbers) {
+    public int checkLotto(String[] numbers, String bonus) {
         int num = 0;
         for (int i = 0; i < numbers.length; i++) {
             num += verifyNumCount(numbers, i);
+        }
+        if (num == 5) {
+            checkBonusball(bonus);
         }
         return num;
     }
 
     private int verifyNumCount(String[] numList, int i) {
-        if (this.getGenerateNumbers().contains(Integer.parseInt(numList[i]))) {
+        if (getGenerateNumbers().contains(Integer.parseInt(numList[i]))) {
             return 1;
         }
         return 0;
@@ -46,5 +50,15 @@ public class LottoNumber {
 
     public List<Integer> getGenerateNumbers() {
         return generateNumbers;
+    }
+
+    private void checkBonusball(String bonus) {
+        if (getGenerateNumbers().contains(Integer.parseInt(bonus))) {
+            bonusCheck = true;
+        }
+    }
+
+    public boolean getBonusCheck() {
+        return bonusCheck;
     }
 }

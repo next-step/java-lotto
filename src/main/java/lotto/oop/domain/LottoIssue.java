@@ -24,20 +24,45 @@ public class LottoIssue {
         return resultList;
     }
 
-    public void checkNumber(String[] numbers) {
+    public void checkNumber(String[] numbers, String bonus) {
         issueStats = new HashMap<>();
         for (LottoNumber issuelotto: resultList) {
-            setIssueStats(numbers, issuelotto);
+            setIssueStats(issuelotto, numbers, bonus);
         }
     }
 
-    private void setIssueStats(String[] numbers, LottoNumber issuelotto) {
-        int key = issuelotto.checkLotto(numbers);
+    private void setIssueStats(LottoNumber issuelotto, String[] numbers, String bonus) {
+        int key = getKey(issuelotto, numbers, bonus);
         int value = 1;
         if (issueStats.containsKey(key)){
             value = issueStats.get(key) + 1;
         }
         issueStats.put(key, value);
+    }
+
+    private int getKey(LottoNumber issuelotto, String[] numbers, String bonus) {
+        int key = 0;
+        int num = issuelotto.checkLotto(numbers, bonus);
+        if (num == 6) {
+            key = 1;
+        }
+        if (num == 5) {
+            key = checkbonus(issuelotto);
+        }
+        if (num == 4) {
+            key = 4;
+        }
+        if (num == 3) {
+            key = 5;
+        }
+        return key;
+    }
+
+    private int checkbonus(LottoNumber issuelotto) {
+        if (issuelotto.getBonusCheck()) {
+            return 2;
+        }
+        return 3;
     }
 
     public List<LottoNumber> getResultList() {

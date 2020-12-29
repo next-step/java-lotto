@@ -18,8 +18,9 @@ public class lottoMain {
         input.purchaseInfo();
         LottoIssue lottoIssue = new LottoIssue(input.getCount());
         input.printLotto(lottoIssue.publishLottoList());
-        String[] numbers = input.winngNumbers().split(COMMA);
-        lottoIssue.checkNumber(numbers);
+        input.winngNumbersInfo();
+        String[] numbers = input.getWinNumberInfo().get(1).split(COMMA);
+        lottoIssue.checkNumber(numbers, input.getWinNumberInfo().get(2));
         ResultView output = new ResultView();
         output.displayIssueStats(lottoIssue.getIssueStats(), input.getAmount());
     }
