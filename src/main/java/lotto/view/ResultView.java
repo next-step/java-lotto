@@ -8,21 +8,22 @@ import lotto.domain.LottoTicket;
 import lotto.dto.LottoGameResultDto;
 
 public class ResultView {
-	public static void printLottoNumbers(LottoTicket lottoTicket) {
+	public static void printLottoCount(int lottoBuyCount, int lottoGameCount) {
+		System.out.println();
+		System.out.println("수동으로 " + lottoBuyCount + "장, 자동으로 " + lottoGameCount + "개를 구매했습니다.");
+	}
+
+	public static void printLottoTicket(LottoTicket lottoTicket) {
 		for (Lotto lottoNumber : lottoTicket.getLottoTicket()) {
 			System.out.println(lottoNumber);
 		}
-		System.out.println();
-	}
-
-	public static void printLottoGameCount(int lottoGameCount) {
-		System.out.println(lottoGameCount + "개를 구매했습니다.");
 	}
 
 	public static void printLottoGameStatistic(LottoGameResultDto lottoGameResultDto) {
-		Map<LottoRank, Long> lottoGameResult = lottoGameResultDto.getLottoGameResult();
+		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
+		Map<LottoRank, Long> lottoGameResult = lottoGameResultDto.getLottoGameResult();
 		printLottoRank(LottoRank.FIFTH, lottoGameResult);
 		printLottoRank(LottoRank.FOURTH, lottoGameResult);
 		printLottoRank(LottoRank.THIRD, lottoGameResult);

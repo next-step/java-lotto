@@ -13,14 +13,21 @@ import lotto.view.ResultView;
 public class LottoStarter {
 	public static void main(String[] args) {
 		LottoGame lottoGame = new LottoGame();
-		int lottoBuyMoney = InputView.inputByMoney();
-		int lottoGameCount = lottoGame.calculateLottoCount(lottoBuyMoney);
-		ResultView.printLottoGameCount(lottoGameCount);
 
-		LottoTicket lottoNumbers = lottoGame.generateLottoNumbers(lottoGameCount, new LottoNumberGenerator());
-		ResultView.printLottoNumbers(lottoNumbers);
+		int lottoBuyMoney = InputView.inputBuyMoney();
+		int lottoTotalCount = lottoGame.calculateLottoCount(lottoBuyMoney);
 
-		Map<LottoRank, Long> lottoGameResult = lottoGame.generateLottoGameResult(InputView.inputWinLottoNumbers(), lottoNumbers);
+		int lottoManualCount = InputView.inputManualCount();
+		int lottoAutoCount = lottoGame.calculateAutoCount(lottoTotalCount, lottoManualCount);
+
+		LottoTicket lottoTicket = InputView.inputManualLotto(lottoManualCount);
+
+		ResultView.printLottoCount(lottoManualCount, lottoAutoCount);
+
+		lottoTicket.getLottoTicket().addAll(lottoGame.generateLottoNumbers(lottoAutoCount, new LottoNumberGenerator()).getLottoTicket());
+		ResultView.printLottoTicket(lottoTicket);
+
+		Map<LottoRank, Long> lottoGameResult = lottoGame.generateLottoGameResult(InputView.inputWinLotto(), lottoTicket);
 		ResultView.printLottoGameStatistic(new LottoGameResultDto(lottoGameResult, lottoBuyMoney));
 	}
 }

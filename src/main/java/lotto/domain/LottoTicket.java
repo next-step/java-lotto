@@ -10,6 +10,10 @@ public class LottoTicket {
 		return lottoTicket;
 	}
 
+	public LottoTicket(List<Lotto> lottoTicket) {
+		this.lottoTicket = lottoTicket;
+	}
+
 	public LottoTicket(int lottoGameCount, NumberGenerator numberGenerator) {
 		lottoTicket = new ArrayList<>();
 		for (int i = 0; i < lottoGameCount; i++) {
