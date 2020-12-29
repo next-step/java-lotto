@@ -18,4 +18,7 @@ public class Number {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
 }
