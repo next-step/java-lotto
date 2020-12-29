@@ -59,6 +59,10 @@ public class LottoGame {
         return (double) profit / money;
     }
 
+    public int getProfit() {
+        return this.matchedResult.getProfit();
+    }
+
     public List<Lottery> getLotteryList() {
         return this.lotteryList;
     }

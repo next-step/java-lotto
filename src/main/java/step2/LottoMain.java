@@ -29,7 +29,7 @@ public class LottoMain {
 
         resultView.printResult(
                 lottoGame.getMatchedResult(),
-                lottoGame.calculateProfitRate(money.getMoney(), lottoGame.getMatchedResult().getProfit())
+                lottoGame.calculateProfitRate(money.getMoney(), lottoGame.getProfit())
         );
     }
 }
