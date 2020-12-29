@@ -26,14 +26,13 @@ public class LottoIssue {
 
     public void checkNumber(String[] numbers) {
         issueStats = new HashMap<>();
-        for (LottoNumber list: resultList) {
-            setIssueStats(numbers, list);
+        for (LottoNumber issuelotto: resultList) {
+            setIssueStats(numbers, issuelotto);
         }
     }
 
-    private void setIssueStats(String[] numbers, LottoNumber list) {
-        LottoNumber lotto = new LottoNumber();
-        int key = lotto.confrimLotto(list, numbers);
+    private void setIssueStats(String[] numbers, LottoNumber issuelotto) {
+        int key = issuelotto.checkLotto(numbers);
         int value = 1;
         if (issueStats.containsKey(key)){
             value = issueStats.get(key) + 1;

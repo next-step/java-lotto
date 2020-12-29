@@ -32,11 +32,9 @@ public class ResultView {
         double grossReturn = (((earnings / (double)amount) - 1) * 100)/100 + 1;
         if (grossReturn < 1.0) {
            System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
-//            System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임", grossReturn);
         }
         if (grossReturn >= 1.0) {
             System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.");
-//            System.out.printf("총 수익률은 %.2f 입니다.", grossReturn);
         }
     }
 }

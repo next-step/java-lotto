@@ -22,7 +22,7 @@ public class InputView {
 
     public void printLotto(List<LottoNumber> publishLottoList) {
         for (LottoNumber list: publishLottoList) {
-            System.out.println(list.getNumber());
+            System.out.println(list.getGenerateNumbers());
         }
     }
 
