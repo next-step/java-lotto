@@ -7,12 +7,9 @@ import java.util.*;
 
 public class Lotto {
 
-	private List<LottoNumber> lottoNumbers = new ArrayList<>();
-
 	private static final int LOTTO_NUMBER_MAX_COUNT = 6;
 
-	public Lotto() {
-	}
+	private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
 	public Lotto(List<LottoNumber> inputNumber) {
 		lottoNumbers.addAll(inputNumber);
