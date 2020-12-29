@@ -19,8 +19,13 @@ class LottoResultsFactoryTest {
 			LottoRank.THIRD_PLACE
 		);
 
-		assertThat(LottoResultsFactory.create(lottoRanks))
-			.isInstanceOf(LottoResults.class)
-			.isNotNull();
+		LottoResults lottoResults = LottoResultsFactory.create(lottoRanks);
+
+		assertThat(lottoResults.findLottoResult(LottoRank.FIRST_PLACE).getWinnerCount())
+			.isEqualTo(1);
+		assertThat(lottoResults.findLottoResult(LottoRank.FOURTH_PLACE).getWinnerCount())
+			.isEqualTo(2);
+		assertThat(lottoResults.findLottoResult(LottoRank.THIRD_PLACE).getWinnerCount())
+			.isEqualTo(1);
 	}
 }

@@ -1,41 +1,28 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import lotto.utils.ValidationUtils;
 
 public class WinLottoNumbers {
 	private final List<LottoNumber> lottoNumbers;
+	private final LottoNumber bonusBallNumber;
 
-	public WinLottoNumbers(String lottoNumbers) {
-		ValidationUtils.validateEmpty(lottoNumbers);
-		this.lottoNumbers = Collections.unmodifiableList(mapToList(splitByComma(lottoNumbers)));
+	public WinLottoNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusBallNumber) {
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+		this.bonusBallNumber = bonusBallNumber;
 	}
 
-	private String[] splitByComma(String numbers) {
-		return numbers.split(Message.COMMA);
+	public boolean isEqualMatchCount(LottoLottery lottoLottery, int matchCount) {
+		return matchCount == countMatchNumbers(lottoLottery);
 	}
 
-	private List<LottoNumber> mapToList(String[] strings) {
-		return Arrays.stream(strings)
-			.map(String::trim)
-			.map(this::parseInt)
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
+	private long countMatchNumbers(LottoLottery lottoLottery) {
+		return lottoNumbers.stream()
+			.filter(lottoLottery::contains)
+			.count();
 	}
 
-	private int parseInt(String value) {
-		try {
-			return Integer.parseInt(value);
-		} catch (NumberFormatException exception) {
-			throw new IllegalArgumentException(Message.INPUT_NUMBER);
-		}
-	}
-
-	public List<LottoNumber> getWinNumbers() {
-		return lottoNumbers;
+	public boolean isMatchBonusBallNumber(LottoLottery lottoLottery) {
+		return lottoLottery.contains(bonusBallNumber);
 	}
 }

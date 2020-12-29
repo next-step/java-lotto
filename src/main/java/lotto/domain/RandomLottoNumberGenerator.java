@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,6 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 	public List<LottoNumber> generate() {
 		Collections.shuffle(LOTTO_NUMBERS);
 
-		return new ArrayList<>(LOTTO_NUMBERS.subList(0, 6));
+		return new ArrayList<>(LOTTO_NUMBERS.subList(0, LottoLottery.LOTTO_NUMBER_COUNT));
 	}
 }

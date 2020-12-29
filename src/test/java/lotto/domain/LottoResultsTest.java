@@ -15,9 +15,9 @@ class LottoResultsTest {
 	@BeforeEach
 	void setUp() {
 		List<LottoRank> lottoRanks = Arrays.asList(
+			LottoRank.FIFTH_PLACE,
 			LottoRank.FOURTH_PLACE,
-			LottoRank.THIRD_PLACE,
-			LottoRank.THIRD_PLACE,
+			LottoRank.FOURTH_PLACE,
 			LottoRank.NONE,
 			LottoRank.NONE
 		);
@@ -28,9 +28,10 @@ class LottoResultsTest {
 	@Test
 	@DisplayName("LottoRank로 LottoResult를 찾아낸다.")
 	void findLottoResult_test() {
-		LottoResult lottoResult = lottoResults.findLottoResult(LottoRank.THIRD_PLACE);
+		LottoResult lottoResult = lottoResults.findLottoResult(LottoRank.FOURTH_PLACE);
+
 		assertThat(lottoResult.getLottoRank())
-			.isEqualTo(LottoRank.THIRD_PLACE);
+			.isEqualTo(LottoRank.FOURTH_PLACE);
 		assertThat(lottoResult.getWinnerCount())
 			.isEqualTo(2);
 	}

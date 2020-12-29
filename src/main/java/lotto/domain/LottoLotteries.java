@@ -22,11 +22,11 @@ public class LottoLotteries {
 		return lottoLotteries;
 	}
 
-	public LottoResults getLottoResults(WinLottoNumbers winLottoNumbers) {
+	public LottoResults checkLottoResults(WinLottoNumbers winLottoNumbers) {
 		return LottoResultsFactory.create(checkLottoRanks(winLottoNumbers));
 	}
 
-	private List<LottoRank> checkLottoRanks(WinLottoNumbers winLottoNumbers) {
+	List<LottoRank> checkLottoRanks(WinLottoNumbers winLottoNumbers) {
 		return lottoLotteries.stream()
 			.map(lottoLottery -> lottoLottery.checkLottoRank(winLottoNumbers))
 			.collect(Collectors.toList());

@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FOURTH_PLACE(new DefaultMatchStrategy(3), 5000, "3개 일치"),
-	THIRD_PLACE(new DefaultMatchStrategy(4), 50000, "4개 일치"),
-	SECOND_PLACE(new DefaultMatchStrategy(5), 1500000, "5개 일치"),
 	FIRST_PLACE(new DefaultMatchStrategy(6), 2000000000, "6개 일치"),
+	SECOND_PLACE(new BonusBallMatchStrategy(5), 30000000, "5개 일치, 보너스 볼 일치"),
+	THIRD_PLACE(new DefaultMatchStrategy(5), 1500000, "5개 일치"),
+	FOURTH_PLACE(new DefaultMatchStrategy(4), 50000, "4개 일치"),
+	FIFTH_PLACE(new DefaultMatchStrategy(3), 5000, "3개 일치"),
 	NONE(new DefaultMatchStrategy(0), 0, "일치 하지 않음");
 
 	private final MatchStrategy matchStrategy;
