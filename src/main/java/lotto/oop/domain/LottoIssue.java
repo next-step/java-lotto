@@ -7,10 +7,21 @@ public class LottoIssue {
     public static final int TO_INDEX = 6;
     private int count;
 
-    private List<LottoNumber> resultList;
-    private Map<Integer, Integer> issueStats;
+    private List<LottoNumber> resultList = new ArrayList<>();
+    private Map<Rank, Integer> issueStats;
+
+    public LottoIssue() {
+        issueStats = new HashMap<>();
+        issueStats.put(Rank.FIRST, 0);
+        issueStats.put(Rank.SECOND, 0);
+        issueStats.put(Rank.THIRD, 0);
+        issueStats.put(Rank.FOURTH, 0);
+        issueStats.put(Rank.FIFTH, 0);
+        issueStats.put(Rank.MISS, 0);
+    }
 
     public LottoIssue(int count) {
+        this();
         this.count = count;
     }
 
@@ -25,7 +36,6 @@ public class LottoIssue {
     }
 
     public void checkNumber(String[] numbers, String bonus) {
-        issueStats = new HashMap<>();
         int[] numberConvertInt = new int[numbers.length];
         for(int i = 0; i < numbers.length; i++) {
             numberConvertInt[i] = Integer.parseInt(numbers[i]);
@@ -44,29 +54,12 @@ public class LottoIssue {
 
     private void setIssueStats(LottoNumber issuelotto, int[] numbers, String bonus) {
         int key = getKey(issuelotto, numbers, bonus);
-        int value = 1;
-        if (issueStats.containsKey(key)){
-            value = issueStats.get(key) + 1;
-        }
-        issueStats.put(key, value);
+        Rank rank = Rank.valueOf(key, issuelotto.getBonusCheck());
+        issueStats.put(rank, issueStats.get(rank) + 1);
     }
 
     private int getKey(LottoNumber issuelotto, int[] numbers, String bonus) {
-        int key = 0;
-        int num = issuelotto.checkLotto(numbers, bonus);
-        if (num == 6) {
-            key = 1;
-        }
-        if (num == 5) {
-            key = checkbonus(issuelotto);
-        }
-        if (num == 4) {
-            key = 4;
-        }
-        if (num == 3) {
-            key = 5;
-        }
-        return key;
+        return issuelotto.checkLotto(numbers, bonus);
     }
 
     private int checkbonus(LottoNumber issuelotto) {
@@ -80,7 +73,7 @@ public class LottoIssue {
         return resultList;
     }
 
-    public Map<Integer, Integer> getIssueStats() {
+    public Map<Rank, Integer> getIssueStats() {
         return issueStats;
     }
 }

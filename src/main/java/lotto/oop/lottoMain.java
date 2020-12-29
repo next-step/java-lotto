@@ -21,7 +21,7 @@ public class lottoMain {
         input.winngNumbersInfo();
         String[] numbers = input.getWinNumberInfo().get(1).split(COMMA);
         lottoIssue.checkNumber(numbers, input.getWinNumberInfo().get(2));
-        ResultView output = new ResultView();
-        output.displayIssueStats(lottoIssue.getIssueStats(), input.getAmount());
+        ResultView output = new ResultView(lottoIssue.getIssueStats(), input.getAmount());
+        output.displayIssueStats();
     }
 }

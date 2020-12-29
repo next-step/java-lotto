@@ -9,7 +9,6 @@ public class LottoNumber {
     private static final int EXTRACT_TO_LAST_NUMBER = 6;
 
     private List<Integer> number = new ArrayList<>();
-
     private List<Integer> generateNumbers = new ArrayList<>();
     private boolean bonusCheck;
 
@@ -36,9 +35,7 @@ public class LottoNumber {
         for (int i = 0; i < numbers.length; i++) {
             num += verifyNumCount(numbers, i);
         }
-        if (num == 5) {
-            checkBonusball(bonus);
-        }
+        checkBonusball(bonus);
         return num;
     }
 
