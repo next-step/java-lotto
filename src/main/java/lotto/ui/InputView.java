@@ -71,7 +71,7 @@ public class InputView {
             String[] split = scanner.nextLine().split(",");
 
             List<Number> numbers = parseInts(split);
-            LottoTicket lottoTicket = LottoTicket.newTicket(numbers);
+            LottoTicket lottoTicket = LottoTicket.createManualNewTicket(numbers);
             manualLottoTicketList.add(lottoTicket);
         }
 

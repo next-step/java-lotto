@@ -13,14 +13,14 @@ class LastWinningNumbersTest {
     @Test
     void sumCountOfMatch() {
         // when
-        LottoTicket lottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(1),
+        LottoTicket lottoTicket = LottoTicket.createManualNewTicket(Arrays.asList(Number.newNumber(1),
                                                                         Number.newNumber(2),
                                                                         Number.newNumber(3),
                                                                         Number.newNumber(4),
                                                                         Number.newNumber(5),
                                                                         Number.newNumber(6)));
 
-        LottoTicket winningLottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(1),
+        LottoTicket winningLottoTicket = LottoTicket.createManualNewTicket(Arrays.asList(Number.newNumber(1),
                                                                                 Number.newNumber(2),
                                                                                 Number.newNumber(3),
                                                                                 Number.newNumber(4),

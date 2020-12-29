@@ -19,10 +19,10 @@ class LottoGameTest {
                                                 Number.newNumber(21),
                                                 Number.newNumber(1));
 
-        LottoTickets lottoTickets = LottoTickets.newTickets(List.of(LottoTicket.newTicket(testTicket)));
+        LottoTickets lottoTickets = LottoTickets.createManualNewTickets(List.of(LottoTicket.createManualNewTicket(testTicket)));
 
         // when
-        LottoTicket lottoTicket = LottoTicket.newTicket(Arrays.asList(Number.newNumber(31),
+        LottoTicket lottoTicket = LottoTicket.createManualNewTicket(Arrays.asList(Number.newNumber(31),
                                                                         Number.newNumber(45),
                                                                         Number.newNumber(30),
                                                                         Number.newNumber(22),

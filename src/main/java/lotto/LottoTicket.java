@@ -11,13 +11,13 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
-    public static LottoTicket newTicket(List<Number> ticket) {
+    public static LottoTicket createManualNewTicket(List<Number> ticket) {
         validate(ticket);
 
         return new LottoTicket(ticket);
     }
 
-    public static LottoTicket newTicket() {
+    public static LottoTicket createAutoNewTicket() {
         List<Number> ticket = createTicketNumber();
         validate(ticket);
 
