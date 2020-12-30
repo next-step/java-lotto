@@ -12,7 +12,7 @@ public class RandomNumber {
         return lottoNumber.getNumberRange();
     }
 
-    public List<Number> createRandomNumbers(LottoNumber lottoNumber) {
+    public List<Number> createRandomNumbers() {
         Collections.shuffle(getLottoNumbers());
         return lottoNumber.getNumberRange().subList(SUBLIST_START_INDEX, SUBLIST_END_INDEX);
     }

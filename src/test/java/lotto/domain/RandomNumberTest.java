@@ -19,7 +19,6 @@ class RandomNumberTest {
     @Test
     @DisplayName("랜덤 숫자 6자리 확인")
     void createRandomNumbers() {
-        LottoNumber lottoNumber = new LottoNumber();
-        assertThat(randomNumber.createRandomNumbers(lottoNumber)).size().isEqualTo(6);
+        assertThat(randomNumber.createRandomNumbers()).size().isEqualTo(6);
     }
 }

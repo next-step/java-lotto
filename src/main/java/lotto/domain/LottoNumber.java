@@ -10,10 +10,10 @@ public class LottoNumber {
     private List<Number> numberRange = new ArrayList<>();
 
     public LottoNumber() {
-        lottoNumberRangeCreate();
+        createLottoNumberRange();
     }
 
-    private void lottoNumberRangeCreate() {
+    private void createLottoNumberRange() {
        IntStream.rangeClosed(CommonConstants.LOTTO_NUMBER_MIN, CommonConstants.LOTTO_NUMBER_MAX)
                 .boxed().forEach(s -> numberRange.add(new Number(s)));
     }

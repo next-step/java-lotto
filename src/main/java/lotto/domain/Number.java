@@ -4,7 +4,7 @@ import util.CommonConstants;
 import util.CommonException;
 import util.Message;
 
-public class Number {
+public class Number implements Comparable<Number>{
     private int number;
 
     public Number(int number) {
@@ -18,7 +18,8 @@ public class Number {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public int compareTo(Number o) {
+        return Integer.compare(this.number, o.number);
     }
 }
