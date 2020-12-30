@@ -1,7 +1,5 @@
 package util;
 
-import lotto.domain.WinningAmount;
-
 public class CommonException {
 
     public static void RuntimeException(String message) {
