@@ -1,22 +1,23 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoList {
 
-	private List<Lotto> lottosList = new ArrayList<>();
+	private List<Lotto> lottoList = new ArrayList<>();
 
-	public LottoList() {
+	public LottoList(List<Lotto> manualLottoList, int autoLottoCount) {
+		List<Lotto> autoLottoList  = new ArrayList<>();
+		for (int i = 0; i < autoLottoCount; i++) {
+			autoLottoList.add(new Lotto(Lotto.getShuffleNumbers()));
+		}
+
+		this.lottoList.addAll(manualLottoList);
+		this.lottoList.addAll(autoLottoList);
 	}
 
-	public void add(Lotto lotto) {
-		this.lottosList.add(lotto);
-	}
-
-	public List<Lotto> getLottosList() {
-		return lottosList;
+	public List<Lotto> getLottoList() {
+		return lottoList;
 	}
 }

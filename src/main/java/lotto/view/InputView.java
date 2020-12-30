@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
+import lotto.domain.*;
+import lotto.domain.input.LottoBuyCount;
+import lotto.domain.input.Money;
 
 import java.util.*;
 
@@ -10,13 +11,29 @@ public class InputView {
 
 	private static final String COMMA = ",";
 
-	public static int printInputNoticeForPurchaseAmount() {
+	public static Money printInputNoticeForPurchaseAmount() {
 		print("구입금액을 입력해 주세요.");
+		return new Money(scanner.nextInt());
+	}
+
+	public static int printInputManualLottoCount() {
+		print("수동으로 구매할 로또 수를 입력해 주세요.");
 		return scanner.nextInt();
 	}
 
-	public static void printPurchaseLottoCount(int lottoTryCount) {
-		print(String.format("%d개를 구매했습니다.", lottoTryCount));
+	public static List<Lotto> printInputManualLotto(int manualLottoCount) {
+		print("수동으로 구매할 번호를 입력해 주세요.");
+		List<Lotto> lottoList = new ArrayList<>();
+		for (int i = 0; i < manualLottoCount; i++) {
+			String manualInput = scanner.next();
+			Lotto manualLotto = validateInputPirzeNumber(manualInput);
+			lottoList.add(manualLotto);
+		}
+		return lottoList;
+	}
+
+	public static void printPurchaseLottoCount(int manualLottoCount, int autoLottoCount) {
+		print(String.format("수동으로 %d장, 자동으로 %d를 구매했습니다.", manualLottoCount, autoLottoCount));
 	}
 
 	public static Lotto printLastPrizeInput() {
@@ -25,9 +42,9 @@ public class InputView {
 		return validateInputPirzeNumber(lastWeekPrizeNumber);
 	}
 
-	public static int printBonusNumberInput() {
+	public static LottoNumber printBonusNumberInput() {
 		print("보너스 볼을 입력해 주세요.");
-		return scanner.nextInt();
+		return new LottoNumber(scanner.nextInt());
 	}
 
 	private static Lotto validateInputPirzeNumber(String lastWeekPrizeNumber) {
@@ -36,9 +53,9 @@ public class InputView {
 
 	public static Lotto convertStringToInteger(String lastWeekPrizeNumberInput) {
 		String[] lastWeekPrizeNumberArr = lastWeekPrizeNumberInput.split(COMMA);
-		List<Integer> lastWeekPrizeNumber = new ArrayList<>();
+		List<LottoNumber> lastWeekPrizeNumber = new ArrayList<>();
 		for (String number : lastWeekPrizeNumberArr) {
-			lastWeekPrizeNumber.add(Integer.parseInt(number.trim()));
+			lastWeekPrizeNumber.add(new LottoNumber(Integer.parseInt(number.trim())));
 		}
 		return new Lotto(lastWeekPrizeNumber);
 	}
@@ -48,7 +65,7 @@ public class InputView {
 	}
 
 	public static void printPurchaseLottoNumber(LottoList purchargedLottos) {
-		for(Lotto lotto : purchargedLottos.getLottosList()){
+		for(Lotto lotto : purchargedLottos.getLottoList()){
 			System.out.println(lotto.toString());
 		}
 

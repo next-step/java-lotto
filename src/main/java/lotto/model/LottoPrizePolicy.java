@@ -1,65 +1,73 @@
 package lotto.model;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoMatchResult;
+import lotto.domain.LottoNumber;
+import lotto.domain.input.Money;
+import lotto.domain.result.HasBonusNumber;
+import lotto.domain.result.MatchCount;
+import lotto.domain.result.MatchResultPerLotto;
 
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoPrizePolicy {
-	FIFTH(3, 5_000, false),
-	FOURTH(4, 50_000, false),
-	THIRD(5, 1_500_000, false),
-	SECOND(5, 30_000_000, true),
-	FIRST(6, 2_000_000_000, false);
+	FIFTH(new MatchCount(3), new Money(5_000), new BonusPolicy(false)),
+	FOURTH(new MatchCount(4), new Money(50_000), new BonusPolicy(false)),
+	THIRD(new MatchCount(5), new Money(1_500_000), new BonusPolicy(false)),
+	SECOND(new MatchCount(5), new Money(30_000_000), new BonusPolicy(true)),
+	FIRST(new MatchCount(6), new Money(2_000_000_000), new BonusPolicy(false));
 
-	private int matchCount;
+	private MatchCount matchCount;
 
-	private int prizeMoney;
+	private Money prizeMoney;
 
-	private boolean isBonus;
+	private BonusPolicy bonusPolicy;
 
-	LottoPrizePolicy(int matchCount, int prizeMoney, boolean isBonus) {
+	LottoPrizePolicy(MatchCount matchCount, Money prizeMoney, BonusPolicy bonusPolicy) {
 		this.matchCount = matchCount;
 		this.prizeMoney = prizeMoney;
-		this.isBonus = isBonus;
+		this.bonusPolicy = bonusPolicy;
 	}
 
-	public int getMatchCount() {
+	public MatchCount getMatchCount() {
 		return matchCount;
 	}
 
-	public int getPrizeMoney() {
+	public Money getPrizeMoney() {
 		return prizeMoney;
 	}
 
-	public boolean isBonus() {
-		return isBonus;
+	public BonusPolicy getBonusPolicy() {
+		return bonusPolicy;
 	}
 
-	public static int getPrizeMoney(LottoMatchResult lottoMatchResult, int totalPrizeMoney) {
+	public static Money getPrizeMoney(MatchResultPerLotto matchResultPerLotto, Money totalPrizeMoney) {
 		for (LottoPrizePolicy policy : LottoPrizePolicy.values()) {
-			totalPrizeMoney += getPrizeMoneypolicy(policy, lottoMatchResult.getMatchResult(),lottoMatchResult.isHasBonusNumber());
+			Money prizeMoney = getPrizeMoneypolicy(policy, matchResultPerLotto.getMatchCount(), matchResultPerLotto.isHasBonusNumber());
+			totalPrizeMoney.add(prizeMoney);
 		}
 		return totalPrizeMoney;
 	}
 
-	private static int getPrizeMoneypolicy(LottoPrizePolicy policy, int inputMatchCount, boolean hasBonusNumber) {
-		if (policy.getMatchCount() == inputMatchCount && policy.isBonus == hasBonusNumber) {
-			return policy.getPrizeMoney();
+	private static Money getPrizeMoneypolicy(LottoPrizePolicy policy, MatchCount inputMatchCount, HasBonusNumber hasBonusNumber) {
+		if (policy.getMatchCount().getMatchCount() == inputMatchCount.getMatchCount() && policy.getBonusPolicy().isBonusPolicy() == hasBonusNumber.isHasBonusNumber()) {
+			return new Money(policy.getPrizeMoney().getMoney());
 		}
-		return 0;
+		return new Money(0);
 	}
 
-	public static int getMinMatchCount() {
-		LottoPrizePolicy minMatchPolicy = Arrays.asList(LottoPrizePolicy.values())
-				.stream()
-				.min(Comparator.comparing(LottoPrizePolicy::getMatchCount))
-				.orElse(FIFTH);
-		return minMatchPolicy.getMatchCount();
+	public static MatchCount getMinMatchCount() {
+		MatchCount minMatchPolicy = Stream.of(LottoPrizePolicy.values())
+				.map(m -> m.getMatchCount())
+				.collect(Collectors.toList()).stream()
+				.min(Comparator.comparing(MatchCount::getMatchCount))
+				.orElse(FIFTH.getMatchCount());
+
+		return minMatchPolicy;
 	}
 
-	public static boolean isMatchBonusNumber(Lotto lotto, int bonusNumber) {
+	public static HasBonusNumber isMatchBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
 		return lotto.isMatchBonusNumber(bonusNumber);
 	}
 }
