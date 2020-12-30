@@ -24,11 +24,11 @@ public class LottoNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1 16 17 19 24 28:19"}, delimiter = ':')
     @DisplayName("보너스볼 체크")
-    void checkLottoTest(String winNumbers, String bonus) {
+    void checkLottoTest(String winNumbers, int bonus) {
         String[] winNumber = winNumbers.split(" ");
-        int[] winNumbersList = new int[winNumber.length];
-        for(int i = 0; i < winNumber.length; i++) {
-            winNumbersList[i] = Integer.parseInt(winNumber[i]);
+        List<Integer> winNumbersList = new ArrayList<>();
+        for(String num : winNumber) {
+            winNumbersList.add(Integer.parseInt(num));
         }
         List<Integer> generateNumbers = new ArrayList<>();
         generateNumbers.add(1);

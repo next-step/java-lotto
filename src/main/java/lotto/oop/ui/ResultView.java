@@ -3,7 +3,6 @@ package lotto.oop.ui;
 import lotto.oop.domain.Rank;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Map;
 
 public class ResultView {

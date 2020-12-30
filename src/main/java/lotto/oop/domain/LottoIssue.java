@@ -5,7 +5,6 @@ import java.util.*;
 public class LottoIssue {
     public static final int FROM_INDEX = 0;
     public static final int TO_INDEX = 6;
-    private int count;
 
     private List<LottoNumber> resultList = new ArrayList<>();
     private Map<Rank, Integer> issueStats;
@@ -20,12 +19,7 @@ public class LottoIssue {
         issueStats.put(Rank.MISS, 0);
     }
 
-    public LottoIssue(int count) {
-        this();
-        this.count = count;
-    }
-
-    public List<LottoNumber> publishLottoList() {
+    public List<LottoNumber> publishLottoList(int count) {
         resultList = new ArrayList<>();
         for(int i = 0; i < count; i++) {
             LottoNumber lotto = new LottoNumber();
@@ -35,30 +29,28 @@ public class LottoIssue {
         return resultList;
     }
 
-    public void checkNumber(String[] numbers, String bonus) {
-        int[] numberConvertInt = new int[numbers.length];
-        for(int i = 0; i < numbers.length; i++) {
-            numberConvertInt[i] = Integer.parseInt(numbers[i]);
-            vefiryCheckNumber(numberConvertInt, i);
+    public void checkNumber(List<Integer> winNumbers, int bonusNumber) {
+        for(int i = 0; i < winNumbers.size(); i++) {
+            vefiryCheckNumber(winNumbers, i);
         }
         for (LottoNumber issuelotto: resultList) {
-            setIssueStats(issuelotto, numberConvertInt, bonus);
+            setIssueStats(issuelotto, winNumbers, bonusNumber);
         }
     }
 
-    private void vefiryCheckNumber(int[] numberConvertInt, int i) {
-        if (numberConvertInt[i] >= 46) {
+    private void vefiryCheckNumber(List<Integer> winNumbers, int i) {
+        if (winNumbers.get(i) >= 46 || winNumbers.get(i) <= 0) {
             throw new IllegalArgumentException("당첨 볼이 46보다 큽니다.");
         }
     }
 
-    private void setIssueStats(LottoNumber issuelotto, int[] numbers, String bonus) {
+    private void setIssueStats(LottoNumber issuelotto, List<Integer> numbers, int bonus) {
         int key = getKey(issuelotto, numbers, bonus);
         Rank rank = Rank.valueOf(key, issuelotto.getBonusCheck());
         issueStats.put(rank, issueStats.get(rank) + 1);
     }
 
-    private int getKey(LottoNumber issuelotto, int[] numbers, String bonus) {
+    private int getKey(LottoNumber issuelotto, List<Integer> numbers, int bonus) {
         return issuelotto.checkLotto(numbers, bonus);
     }
 
