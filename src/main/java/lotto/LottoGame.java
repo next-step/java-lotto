@@ -26,7 +26,7 @@ public class LottoGame {
         int countOfMatch = 0;
         List<Number> ticketNumbers = lottoTickets.getLottoTicket(lottoTicketIndex).getTicket();
 
-        countOfMatch = lastWeeksWinningNumbers.sumCountOfMatch(ticketNumbers);
+        countOfMatch = lastWeeksWinningNumbers.calculateCountOfMatch(ticketNumbers);
 
         lottoResult.saveLottoResult(countOfMatch, lastWeeksWinningNumbers.isMatchBonus(countOfMatch, ticketNumbers));
     }

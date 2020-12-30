@@ -17,23 +17,27 @@ public class LastWinningNumbers {
         return new LastWinningNumbers(winningNumbers, bonusNumber);
     }
 
-    public int sumCountOfMatch(List<Number> ticketNumbers) {
-        int countOfMatch = 0;
-
-        for (Number winningNumber : winningNumbers.getTicket()) {
-            countOfMatch = contains(ticketNumbers, countOfMatch, winningNumber);
-        }
-
-        return countOfMatch;
+    public int calculateCountOfMatch(List<Number> ticketNumbers) {
+        return winningNumbers.calculateCountOfMatch(ticketNumbers);
     }
 
-    private int contains(List<Number> ticketNumbers, int countOfMatch, Number winningNumber) {
-        if (ticketNumbers.contains(winningNumber)) {
-            countOfMatch++;
-        }
-
-        return countOfMatch;
-    }
+//    public int sumCountOfMatch(List<Number> ticketNumbers) {
+//        int countOfMatch = 0;
+//
+//        for (Number winningNumber : winningNumbers.getTicket()) {
+//            countOfMatch = contains(ticketNumbers, countOfMatch, winningNumber);
+//        }
+//
+//        return countOfMatch;
+//    }
+//
+//    private int contains(List<Number> ticketNumbers, int countOfMatch, Number winningNumber) {
+//        if (ticketNumbers.contains(winningNumber)) {
+//            countOfMatch++;
+//        }
+//
+//        return countOfMatch;
+//    }
 
     public boolean isMatchBonus(int countOfMatch, List<Number> ticketNumbers) {
         if (Rank.SECOND.equalsMatchCount(countOfMatch)) {

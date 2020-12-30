@@ -11,13 +11,13 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
-    public static LottoTicket newTicket(List<Number> ticket) {
+    public static LottoTicket createManualNewTicket(List<Number> ticket) {
         validate(ticket);
 
         return new LottoTicket(ticket);
     }
 
-    public static LottoTicket newTicket() {
+    public static LottoTicket createAutoNewTicket() {
         List<Number> ticket = createTicketNumber();
         validate(ticket);
 
@@ -46,6 +46,24 @@ public class LottoTicket {
         if (ticketSet.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
+    }
+
+    public int calculateCountOfMatch(List<Number> ticketNumbers) {
+        int countOfMatch = 0;
+
+        for (Number winningNumber : ticket) {
+            countOfMatch = contains(ticketNumbers, countOfMatch, winningNumber);
+        }
+
+        return countOfMatch;
+    }
+
+    private int contains(List<Number> ticketNumbers, int countOfMatch, Number winningNumber) {
+        if (ticketNumbers.contains(winningNumber)) {
+            countOfMatch++;
+        }
+
+        return countOfMatch;
     }
 
     public List<Number> getTicket() {

@@ -13,10 +13,10 @@ public class LottoController {
         int manualPurchaseCount = InputView.inputManualPurchaseCount(purchaseCount);
         List<LottoTicket> manualLottoTicketList = InputView.inputManualLottoTicketList(manualPurchaseCount);
 
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseCount, manualLottoTicketList);
+        LottoTickets lottoTickets = LottoTickets.createNewTickets(purchaseCount, manualLottoTicketList);
         OutputView.printTicketList(lottoTickets, purchaseCount, manualPurchaseCount);
 
-        LottoTicket inputLastWeeksWinningNumbers = LottoTicket.newTicket(InputView.inputLastWeeksWinningNumbers());
+        LottoTicket inputLastWeeksWinningNumbers = LottoTicket.createManualNewTicket(InputView.inputLastWeeksWinningNumbers());
         Number bonusNumber = Number.newNumber(InputView.inputBonusNumber());
         LastWinningNumbers lastWeeksWinningNumbers = LastWinningNumbers.newWinningNumbers(inputLastWeeksWinningNumbers, bonusNumber);
 

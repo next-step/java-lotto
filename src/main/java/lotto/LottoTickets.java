@@ -12,27 +12,26 @@ public class LottoTickets {
         this.ticketList = ticketList;
     }
 
-    public static LottoTickets newTickets(List<LottoTicket> ticketList) {
+    public static LottoTickets createManualNewTickets(List<LottoTicket> ticketList) {
         return new LottoTickets(ticketList);
     }
 
-    public static LottoTickets newTickets(int purchaseCount, List<LottoTicket> manualLottoTicketList) {
+    public static LottoTickets createNewTickets(int purchaseCount, List<LottoTicket> manualLottoTicketList) {
         List<LottoTicket> ticketList = new ArrayList<>();
-        autoTicket(purchaseCount, manualLottoTicketList, ticketList);
-        manualTicket(manualLottoTicketList, ticketList);
+        int autoTicketCount = purchaseCount - manualLottoTicketList.size();
+        createAutoTicket(autoTicketCount, ticketList);
+        createManualTicket(manualLottoTicketList, ticketList);
 
         return new LottoTickets(ticketList);
     }
 
-    private static void autoTicket(int purchaseCount, List<LottoTicket> manualLottoTicketList, List<LottoTicket> ticketList) {
-        purchaseCount -= manualLottoTicketList.size();
-
-        for (int i = 0; i < purchaseCount; i++) {
-            ticketList.add(LottoTicket.newTicket());
+    private static void createAutoTicket(int autoTicketCount, List<LottoTicket> ticketList) {
+        for (int i = 0; i < autoTicketCount; i++) {
+            ticketList.add(LottoTicket.createAutoNewTicket());
         }
     }
 
-    private static void manualTicket(List<LottoTicket> manualLottoTicketList, List<LottoTicket> ticketList) {
+    private static void createManualTicket(List<LottoTicket> manualLottoTicketList, List<LottoTicket> ticketList) {
         if (manualLottoTicketList.size() > 0) {
             ticketList.addAll(manualLottoTicketList);
         }

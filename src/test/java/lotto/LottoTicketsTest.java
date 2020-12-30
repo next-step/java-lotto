@@ -18,7 +18,7 @@ class LottoTicketsTest {
     void 여러장의_티켓_구매(int purchaseCount) {
         // given
         List<LottoTicket> manualLottoTicketList = new ArrayList<>();
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseCount, manualLottoTicketList);
+        LottoTickets lottoTickets = LottoTickets.createNewTickets(purchaseCount, manualLottoTicketList);
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(purchaseCount);
@@ -27,7 +27,7 @@ class LottoTicketsTest {
     @DisplayName(value = "수동구매와 자동구매를 한다.")
     @ParameterizedTest
     @ValueSource(ints = {3, 5, 10})
-    void 수동구매와_자동구(int purchaseCount) {
+    void 수동구매와_자동구매(int purchaseCount) {
         // given
         List<LottoTicket> manualLottoTicketList = new ArrayList<>();
 
@@ -39,10 +39,10 @@ class LottoTicketsTest {
         numbers.add(Number.newNumber(5));
         numbers.add(Number.newNumber(6));
 
-        LottoTicket lottoTicket = LottoTicket.newTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.createManualNewTicket(numbers);
         manualLottoTicketList.add(lottoTicket);
 
-        LottoTickets lottoTickets = LottoTickets.newTickets(purchaseCount, manualLottoTicketList);
+        LottoTickets lottoTickets = LottoTickets.createNewTickets(purchaseCount, manualLottoTicketList);
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(purchaseCount);

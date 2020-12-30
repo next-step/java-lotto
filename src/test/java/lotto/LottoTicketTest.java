@@ -27,7 +27,7 @@ class LottoTicketTest {
                                             Number.newNumber(4),
                                             Number.newNumber(5),
                                             Number.newNumber(6));
-        LottoTicket autoTicket = LottoTicket.newTicket(ticket);
+        LottoTicket autoTicket = LottoTicket.createManualNewTicket(ticket);
 
         // then
         assertThat(autoTicket.size()).isEqualTo(LottoTicket.LOTTO_TICKET_SIZE);
@@ -49,7 +49,7 @@ class LottoTicketTest {
 
                     // when
                     assertThatThrownBy(() -> {
-                        LottoTicket.newTicket(ticket);
+                        LottoTicket.createManualNewTicket(ticket);
                         // then
                     }).isInstanceOf(IllegalArgumentException.class);
                 }),
@@ -66,7 +66,7 @@ class LottoTicketTest {
 
                     // when
                     assertThatThrownBy(() -> {
-                        LottoTicket.newTicket(ticket);
+                        LottoTicket.createManualNewTicket(ticket);
                         // then
                     }).isInstanceOf(IllegalArgumentException.class);
                 })
