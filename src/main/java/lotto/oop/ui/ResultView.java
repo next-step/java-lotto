@@ -2,6 +2,8 @@ package lotto.oop.ui;
 
 import lotto.oop.domain.Rank;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 
 public class ResultView {
@@ -24,13 +26,29 @@ public class ResultView {
     }
 
     private void displayGrossReturn() {
-        int earnings = (5000 * result.get(Rank.FIFTH)) + (50000 * result.get(Rank.FOURTH)) + (1500000 * result.get(Rank.THIRD)) + (30000000 * result.get(Rank.SECOND)) + (2000000000 * result.get(Rank.FIRST));
-        double grossReturn = (((earnings / (double)amount) - 1) * 100)/100 + 1;
+        double doubleTotalSum = getDoubleTotalSum();
+        double grossReturn = (((doubleTotalSum / amount) - 1) * 100)/100 + 1;
         if (grossReturn < 1.0) {
            System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
         }
         if (grossReturn >= 1.0) {
             System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.");
         }
+    }
+
+    private double getDoubleTotalSum() {
+        BigDecimal earningAmount = BigDecimal.ZERO;
+        BigDecimal fifthCount = new BigDecimal(Integer.toString(result.get(Rank.FIFTH)));
+        BigDecimal fourthCount = new BigDecimal(Integer.toString(result.get(Rank.FOURTH)));
+        BigDecimal thirdCount =  new BigDecimal(Integer.toString(result.get(Rank.THIRD)));
+        BigDecimal secondCount =  new BigDecimal(Integer.toString(result.get(Rank.SECOND)));
+        BigDecimal firstCount = new BigDecimal(Integer.toString(result.get(Rank.FIRST)));
+        BigDecimal fifth = new BigDecimal("5000");
+        BigDecimal fourth = new BigDecimal("50000");
+        BigDecimal third = new BigDecimal("1500000");
+        BigDecimal second = new BigDecimal("30000000");
+        BigDecimal first = new BigDecimal("2000000000");
+        BigDecimal totalSum = earningAmount.add(fifth.multiply(fifthCount)).add(fourth.multiply(fourthCount)).add(third.multiply(thirdCount)).add(second.multiply(secondCount)).add( first.multiply(firstCount));
+        return totalSum.doubleValue();
     }
 }
