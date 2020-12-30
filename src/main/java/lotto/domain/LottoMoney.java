@@ -28,11 +28,7 @@ public class LottoMoney {
                     validateRemainMoney(loopMoney);
                     validateCoinCharge(loopMoney);
                 });
-        buyPrintf();
-    }
 
-    private void buyPrintf() {
-        System.out.printf("%d개를 구매했습니다. 거스름돈은 %d원 입니다.%n",lottoCoin.getCoin(),remainMoney);
     }
 
     private void validateCoinCharge(int money) {

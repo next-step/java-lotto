@@ -11,4 +11,9 @@ public class Lotto {
         Collections.sort(randomNumbers);
         numbers.addAll(randomNumbers);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
