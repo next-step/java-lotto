@@ -48,18 +48,18 @@ public class LottoNumber {
         return 0;
     }
 
+    private void checkBonusball(int bonus) {
+        if (getGenerateNumbers().contains(bonus)) {
+            bonusCheck = true;
+        }
+    }
+
     public void setGenerateNumbers(List<Integer> generateNumbers) {
         this.generateNumbers = generateNumbers;
     }
 
     public List<Integer> getGenerateNumbers() {
         return generateNumbers;
-    }
-
-    private void checkBonusball(int bonus) {
-        if (getGenerateNumbers().contains(bonus)) {
-            bonusCheck = true;
-        }
     }
 
     public boolean getBonusCheck() {

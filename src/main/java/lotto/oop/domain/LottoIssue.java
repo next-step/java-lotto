@@ -3,20 +3,15 @@ package lotto.oop.domain;
 import java.util.*;
 
 public class LottoIssue {
-    public static final int FROM_INDEX = 0;
-    public static final int TO_INDEX = 6;
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
+    private int amount;
+    private List<LottoNumber> resultList;
+    private IssueStats issueStats;
 
-    private List<LottoNumber> resultList = new ArrayList<>();
-    private Map<Rank, Integer> issueStats;
 
-    public LottoIssue() {
-        issueStats = new HashMap<>();
-        issueStats.put(Rank.FIRST, 0);
-        issueStats.put(Rank.SECOND, 0);
-        issueStats.put(Rank.THIRD, 0);
-        issueStats.put(Rank.FOURTH, 0);
-        issueStats.put(Rank.FIFTH, 0);
-        issueStats.put(Rank.MISS, 0);
+    public LottoIssue(int amount) {
+        this.amount = amount;
     }
 
     public List<LottoNumber> publishLottoList(int count) {
@@ -33,39 +28,23 @@ public class LottoIssue {
         for(int i = 0; i < winNumbers.size(); i++) {
             vefiryCheckNumber(winNumbers, i);
         }
+        issueStats = new IssueStats(amount);
         for (LottoNumber issuelotto: resultList) {
-            setIssueStats(issuelotto, winNumbers, bonusNumber);
+            issueStats.setIssueStats(issuelotto, winNumbers, bonusNumber);
         }
     }
 
     private void vefiryCheckNumber(List<Integer> winNumbers, int i) {
         if (winNumbers.get(i) >= 46 || winNumbers.get(i) <= 0) {
-            throw new IllegalArgumentException("당첨 볼이 46보다 큽니다.");
+            throw new IllegalArgumentException("당첨 볼은 1에서 45값만 유효합니다.");
         }
-    }
-
-    private void setIssueStats(LottoNumber issuelotto, List<Integer> numbers, int bonus) {
-        int key = getKey(issuelotto, numbers, bonus);
-        Rank rank = Rank.valueOf(key, issuelotto.getBonusCheck());
-        issueStats.put(rank, issueStats.get(rank) + 1);
-    }
-
-    private int getKey(LottoNumber issuelotto, List<Integer> numbers, int bonus) {
-        return issuelotto.checkLotto(numbers, bonus);
-    }
-
-    private int checkbonus(LottoNumber issuelotto) {
-        if (issuelotto.getBonusCheck()) {
-            return 2;
-        }
-        return 3;
     }
 
     public List<LottoNumber> getResultList() {
         return resultList;
     }
 
-    public Map<Rank, Integer> getIssueStats() {
+    public IssueStats getIssueStats() {
         return issueStats;
     }
 }
