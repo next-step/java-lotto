@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoList {
@@ -26,6 +25,6 @@ public class LottoList {
     public String toString() {
         return lottoList.stream()
                 .map(Lotto::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .toString();
     }
 }

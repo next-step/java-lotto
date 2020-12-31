@@ -18,9 +18,17 @@ public class Number implements Comparable<Number>{
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public boolean checkWinnerNumber(Number number, Integer winnerNumber) {
+        return winnerNumber == number.getNumber();
+    }
+
     @Override
-    public int compareTo(Number o) {
-        return Integer.compare(this.number, o.number);
+    public int compareTo(Number number) {
+        return Integer.compare(this.number, number.number);
     }
 
     @Override
