@@ -1,13 +1,6 @@
 package lotto.domain;
 
-import lotto.util.NumberUtil;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,12 +23,6 @@ class BonusNumberTest {
         assertThrows( IllegalArgumentException.class,()->{
             int bonus = new BonusNumber(6).validBonusNumber(lastWinningNumber,newbonusNumber);
         });
-    }
-
-    @Test
-    void noEqualTest(){
-        boolean b = new BonusNumber(7).notEquals(new Integer(7));
-        assertThat(b).isEqualTo(false);
     }
 
 

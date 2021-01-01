@@ -14,12 +14,12 @@ public class WinningLottos {
     }
 
     protected Map<WinningLottoType,Integer> initWinningLottoTypeMap(){
-        Map<WinningLottoType,Integer> hashMap = new HashMap<>();
+        Map<WinningLottoType,Integer> resultWinningTypeCount = new HashMap<>();
         WinningLottoType[] winningTypes = WinningLottoType.values();
         for( int i = 0; i < winningTypes.length; i++ ) {
-            hashMap.put(winningTypes[i],0);
+            resultWinningTypeCount.put(winningTypes[i],0);
         }
-        return hashMap;
+        return resultWinningTypeCount;
     }
 
     public WinningLottoType addMatchingNumber(WinningLottoType winningLottoType) {

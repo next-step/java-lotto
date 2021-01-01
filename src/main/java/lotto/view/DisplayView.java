@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBucket;
-import lotto.domain.WinningLottoType;
-import lotto.domain.WinningLottos;
+import lotto.domain.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,9 +20,11 @@ public class DisplayView {
     public static void showLottoBuckets(LottoBucket lottoBucket){
         List<Lotto> lottos = lottoBucket.getLottos();
         lottos.forEach( (lotto) -> {
+
             String lottoNumber = lotto.showLottoNumber().stream()
-                    .map(String::valueOf)
+                    .map( LottoNumber::toString)
                     .collect(Collectors.joining(",", "[", "]"));
+
             println(lottoNumber);
         });
     }
@@ -43,7 +42,7 @@ public class DisplayView {
 
     private static void printlnMatchNumberAndMoney(WinningLottoType winningLottoType, Integer matchNumberOfCount){
         StringBuilder builder = new StringBuilder();
-        builder.append(winningLottoType.getName()+"개 일치 ");
+        builder.append(winningLottoType.getName()+" 일치 ");
         builder.append("("+winningLottoType.getWinnerMoney()+")");
         builder.append("- "+matchNumberOfCount+"개");
         System.out.println(builder.toString());
