@@ -14,7 +14,7 @@ public class LottoGame {
     private LottoWinnerNumber lottoWinnerNumber;
     private LottoStatistics lottoStatistics;
 
-    public void lottoGame() {
+    public void start() {
         changeCoin();
         createLottoNumber();
         createWinnerNumbers();

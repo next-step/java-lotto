@@ -6,6 +6,6 @@ public class LottoApp {
 
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.lottoGame();
+        lottoGame.start();
     }
 }
