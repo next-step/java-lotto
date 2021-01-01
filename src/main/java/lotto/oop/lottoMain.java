@@ -10,8 +10,7 @@ public class lottoMain {
     public static void main(String[] args) {
         InputView input = new InputView();
         input.purchaseInfo();
-        int amount = input.getAmount();
-        LottoIssue lottoIssue = new LottoIssue(amount);
+        LottoIssue lottoIssue = new LottoIssue();
         input.printLotto(lottoIssue.publishLottoList(input.getCount()));
         input.winngNumbersInfo();
         WinNumber winInfo = input.getWinNumberInfo();

@@ -1,8 +1,6 @@
 package lotto.oop.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumber {
     private static final int EXTRACT_FROM_FIRST_NUMBER = 0;

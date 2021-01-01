@@ -31,11 +31,11 @@ public enum Rank {
         if (countOfMatch == 5 && matchBonus == true) {
             return SECOND;
         }
-        if (countOfMatch == 5 || (countOfMatch == 4 && matchBonus == true))
+        if (countOfMatch == 5)
             return THIRD;
-        if (countOfMatch == 4 || (countOfMatch == 3 && matchBonus == true))
+        if (countOfMatch == 4)
             return FOURTH;
-        if (countOfMatch == 3 || (countOfMatch == 2 && matchBonus == true))
+        if (countOfMatch == 3)
             return FIFTH;
         return MISS;
     }

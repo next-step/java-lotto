@@ -12,10 +12,8 @@ public class IssueStats {
     private static final String 삼천만원 = "30000000";
     private static final String 이십억 = "2000000000";
     private final Map<Rank, Integer> result;
-    private int amount;
 
-    public IssueStats(int amount) {
-        this.amount = amount;
+    public IssueStats() {
         result = new HashMap<>();
         result.put(Rank.FIRST, 0);
         result.put(Rank.SECOND, 0);
@@ -32,22 +30,19 @@ public class IssueStats {
     }
 
     public double getDoubleTotalSum() {
-        BigDecimal earningAmount = BigDecimal.ZERO;
-        BigDecimal fifthCount = new BigDecimal(Integer.toString(result.get(Rank.FIFTH)));
-        BigDecimal fourthCount = new BigDecimal(Integer.toString(result.get(Rank.FOURTH)));
-        BigDecimal thirdCount =  new BigDecimal(Integer.toString(result.get(Rank.THIRD)));
-        BigDecimal secondCount =  new BigDecimal(Integer.toString(result.get(Rank.SECOND)));
-        BigDecimal firstCount = new BigDecimal(Integer.toString(result.get(Rank.FIRST)));
-        BigDecimal fifth = new BigDecimal(오천원);
-        BigDecimal fourth = new BigDecimal(오만원);
-        BigDecimal third = new BigDecimal(백오십만원);
-        BigDecimal second = new BigDecimal(삼천만원);
-        BigDecimal first = new BigDecimal(이십억);
-        BigDecimal totalSum = earningAmount.add(fifth.multiply(fifthCount)).add(fourth.multiply(fourthCount)).add(third.multiply(thirdCount)).add(second.multiply(secondCount)).add( first.multiply(firstCount));
-        return totalSum.doubleValue();
+        BigDecimal total = result.entrySet().stream()
+                .map(entry -> BigDecimal.valueOf(entry.getKey().getWinningMoney()).multiply(BigDecimal.valueOf(entry.getValue())))
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+        return total.doubleValue();
     }
 
     public double getGrossReturn() {
+        int amount = 0;
+        for (int count: result.values()) {
+            amount += count;
+        }
+        amount = amount * 1000;
         return (((getDoubleTotalSum() / amount) - 1) * 100) / 100 + 1;
     }
 

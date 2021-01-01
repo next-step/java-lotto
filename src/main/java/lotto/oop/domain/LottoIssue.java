@@ -5,14 +5,8 @@ import java.util.*;
 public class LottoIssue {
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
-    private int amount;
     private List<LottoNumber> resultList;
     private IssueStats issueStats;
-
-
-    public LottoIssue(int amount) {
-        this.amount = amount;
-    }
 
     public List<LottoNumber> publishLottoList(int count) {
         resultList = new ArrayList<>();
@@ -28,7 +22,7 @@ public class LottoIssue {
         for(int i = 0; i < winNumbers.size(); i++) {
             vefiryCheckNumber(winNumbers, i);
         }
-        issueStats = new IssueStats(amount);
+        issueStats = new IssueStats();
         for (LottoNumber issuelotto: resultList) {
             issueStats.setIssueStats(issuelotto, winNumbers, bonusNumber);
         }
