@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private List<Number> numbers = new ArrayList<>();
+    private final List<Number> numbers = new ArrayList<>();
 
 
     public Lotto(List<Number> randomNumbers) {
         Collections.sort(randomNumbers);
-        this.numbers = randomNumbers;
+        numbers.addAll(randomNumbers);
     }
 
     public List<Number> getNumbers() {

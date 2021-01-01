@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class LottoList {
-    private List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoList = new ArrayList<>();
     private final RandomNumber randomNumber = new RandomNumber();
 
     public LottoList() {
     }
 
-    public LottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public LottoList(List<Lotto> lottos) {
+        lottoList.addAll(lottos);
     }
 
     public void createAutoNumber(int coin) {
