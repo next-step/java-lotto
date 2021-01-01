@@ -16,5 +16,4 @@ public class RandomNumber {
         Collections.shuffle(getLottoNumbers());
         return lottoNumber.getNumberRange().subList(SUBLIST_START_INDEX, SUBLIST_END_INDEX);
     }
-
 }

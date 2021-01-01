@@ -6,8 +6,14 @@ import java.util.List;
 
 public class LottoWinnerNumber {
     private static final String COMMA = ",";
-    private final List<Number> winnerNumbers = new ArrayList<>();
+    private List<Number> winnerNumbers = new ArrayList<>();
 
+    public LottoWinnerNumber() {
+    }
+
+    public LottoWinnerNumber(List<Number> winnerNumbers) {
+        this.winnerNumbers = winnerNumbers;
+    }
 
     public void splitStringNumbers(String inputPrizeNumbers) {
         String[] numbers = inputPrizeNumbers.trim().split(COMMA);

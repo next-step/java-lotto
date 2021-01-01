@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningAmountTest {
+class WinnerAmountTest {
 
     @ParameterizedTest
     @CsvSource(value = {"0=0=꽝",
@@ -17,9 +17,9 @@ class WinningAmountTest {
             },delimiter = '=')
     @DisplayName("당첨개수에 따른 결과값")
     void matchCheck(String match, String prize, String message) {
-        WinningAmount winningAmount = WinningAmount.matchCheck(parseInt(match));
-        assertThat(winningAmount.getPrize()).isEqualTo(parseInt(prize));
-        assertThat(winningAmount.getMessage()).isEqualTo(message);
+        WinnerAmount winnerAmount = WinnerAmount.matchCheck(parseInt(match));
+        assertThat(winnerAmount.getPrize()).isEqualTo(parseInt(prize));
+        assertThat(winnerAmount.getMessage()).isEqualTo(message);
     }
 
     private int parseInt(String value) {

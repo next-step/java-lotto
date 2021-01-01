@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import util.CommonException;
-import util.Message;
-
 import java.util.Arrays;
 
-public enum WinningAmount {
+public enum WinnerAmount {
     ZERO(0, 0, "꽝"),
     FIFTH(3, 5000, "3개 일치"),
     FORTH(4, 50000, "4개 일치"),
@@ -16,14 +13,14 @@ public enum WinningAmount {
     private final int prize;
     private final String message;
 
-    WinningAmount(int match, int prize, String message) {
+    WinnerAmount(int match, int prize, String message) {
         this.match = match;
         this.prize = prize;
         this.message = message;
     }
 
-    public static WinningAmount matchCheck(int matchNumber) {
-        return Arrays.stream(WinningAmount.values())
+    public static WinnerAmount matchCheck(int matchNumber) {
+        return Arrays.stream(WinnerAmount.values())
                 .filter(s -> s.match == matchNumber)
                 .findAny()
                 .orElse(ZERO);

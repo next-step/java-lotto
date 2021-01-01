@@ -5,8 +5,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class LottoList {
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private List<Lotto> lottoList = new ArrayList<>();
     private final RandomNumber randomNumber = new RandomNumber();
+
+    public LottoList() {
+    }
+
+    public LottoList(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
 
     public void createAutoNumber(int coin) {
         Stream.iterate(coin, i -> i > 0, i ->  i - 1)
