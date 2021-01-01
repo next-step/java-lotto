@@ -7,7 +7,7 @@ import lotto.domain.LottoWinnerNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoService {
+public class LottoGame {
 
     private LottoMoney lottoMoney;
     private Lottos lottos;

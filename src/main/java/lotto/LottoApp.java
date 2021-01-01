@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.service.LottoService;
+import lotto.service.LottoGame;
 
 public class LottoApp {
 
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService();
-        lottoService.lottoGame();
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.lottoGame();
     }
 }
