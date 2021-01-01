@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinnerNumberTest {
@@ -25,5 +26,13 @@ class LottoWinnerNumberTest {
     void createWinnerNumbers(int number) {
         lottoWinnerNumber.splitStringNumbers("1,2,3,4,5,6");
         assertThat(lottoWinnerNumber.validateContainsNumber(new Number(number))).isTrue();
+    }
+
+    @Test
+    @DisplayName("당첨 번호 입력 값 길이를 검사")
+    void validateInputNumberLength() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoWinnerNumber.splitStringNumbers("1,2,3,4,5,6,7");
+        });
     }
 }

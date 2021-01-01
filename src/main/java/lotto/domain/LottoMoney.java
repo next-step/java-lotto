@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
-    private LottoCoin lottoCoin = new LottoCoin();
+    private final LottoCoin lottoCoin = new LottoCoin();
     private int remainMoney = 0;
 
     public LottoMoney(int money) {
