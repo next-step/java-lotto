@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomNumber {
-    private LottoNumber lottoNumber = new LottoNumber();
+    private final LottoNumber lottoNumber = new LottoNumber();
 
     public List<Number> getLottoNumbers() {
         return lottoNumber.getNumberRange();

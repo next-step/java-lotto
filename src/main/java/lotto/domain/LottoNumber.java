@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private List<Number> numberRange = new ArrayList<>();
+    private final List<Number> numberRange = new ArrayList<>();
 
     public LottoNumber() {
         createLottoNumberRange();

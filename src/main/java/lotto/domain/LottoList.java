@@ -16,7 +16,7 @@ public class LottoList {
     }
 
     public void createAutoNumber(int coin) {
-        Stream.iterate(coin, i -> i > 0, i ->  i - 1)
+        Stream.iterate(coin, index -> index > 0, loopCoin ->  loopCoin - 1)
             .forEach(s -> lottoList.add(new Lotto(randomNumber.createRandomNumbers())));
     }
 
