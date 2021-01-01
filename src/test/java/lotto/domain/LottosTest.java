@@ -5,18 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoListTest {
+class LottosTest {
 
-    private LottoList lottoList;
+    private Lottos lottos;
 
     @BeforeEach
     void setUp() {
-        lottoList = new LottoList();
+        lottos = new Lottos();
     }
 
     @Test
     void createLottoNumber() {
-        lottoList.createAutoNumber(15);
-        assertThat(lottoList.buyLottoCount()).isEqualTo(15);
+        lottos.createAutoNumber(15);
+        assertThat(lottos.buyLottoCount()).isEqualTo(15);
     }
 }

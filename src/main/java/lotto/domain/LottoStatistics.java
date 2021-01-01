@@ -20,10 +20,10 @@ public class LottoStatistics {
             .forEach(winnerAmount -> matchResult.put(winnerAmount, MATCH_DEFAULT_COUNT));
     }
 
-    public void confirmOfLottoNumber(LottoList lottoList, LottoWinnerNumber lottoWinnerNumber) {
+    public void confirmOfLottoNumber(Lottos lottos, LottoWinnerNumber lottoWinnerNumber) {
         matchResultInit();
 
-        lottoList.getLottoList().stream()
+        lottos.getLottoList().stream()
                 .map(Lotto::getNumbers)
                 .forEach(numbers -> matchWinnerAmount(lottoWinnerNumber, numbers));
     }

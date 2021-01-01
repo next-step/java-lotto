@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.LottoList;
+import lotto.domain.Lottos;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoWinnerNumber;
@@ -10,7 +10,7 @@ import lotto.view.ResultView;
 public class LottoService {
 
     private LottoMoney lottoMoney;
-    private LottoList lottoList;
+    private Lottos lottos;
     private LottoWinnerNumber lottoWinnerNumber;
     private LottoStatistics lottoStatistics;
 
@@ -24,7 +24,7 @@ public class LottoService {
 
     private void statistics() {
         lottoStatistics = new LottoStatistics();
-        lottoStatistics.confirmOfLottoNumber(lottoList, lottoWinnerNumber);
+        lottoStatistics.confirmOfLottoNumber(lottos, lottoWinnerNumber);
     }
 
     private void createWinnerNumbers() {
@@ -33,9 +33,9 @@ public class LottoService {
     }
 
     private void createLottoNumber() {
-        lottoList = new LottoList();
-        lottoList.createAutoNumber(lottoMoney.getCoin());
-        ResultView.printBuyLottoNumber(lottoList.getLottoList());
+        lottos = new Lottos();
+        lottos.createAutoNumber(lottoMoney.getCoin());
+        ResultView.printBuyLottoNumber(lottos.getLottoList());
     }
 
     private void changeCoin() {

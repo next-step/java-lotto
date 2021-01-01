@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LottoList {
+public class Lottos {
     private final List<Lotto> lottoList = new ArrayList<>();
     private final RandomNumber randomNumber = new RandomNumber();
 
-    public LottoList() {
+    public Lottos() {
     }
 
-    public LottoList(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         lottoList.addAll(lottos);
     }
 
