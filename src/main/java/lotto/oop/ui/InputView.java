@@ -7,8 +7,7 @@ import java.util.*;
 
 public class InputView {
     public static final String COMMA = ",";
-    public static final int PIRCE_ONE_LOTTO = 1000;
-    private int amount;
+    private Amount amount;
     private int autoCount;
     private int handCount;
 
@@ -18,8 +17,8 @@ public class InputView {
     public void purchaseInfo() {
         System.out.println("구입금액을 입력해 주세요");
         Scanner sc = new Scanner(System.in);
-        this.amount = sc.nextInt();
-        this.autoCount = this.amount / PIRCE_ONE_LOTTO;
+        amount = new Amount(sc.nextInt());
+        this.autoCount = amount.getCount();
         System.out.println();
         handOperatioinInfo();
         autoCount -= handCount;
