@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
      * 6자리의 로또 번호 생성
      * @return List<Integer>
      */
-    public static List<Integer> makeLottoNumber() {
+    public static List<Integer> makeLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<Integer> numbers = new ArrayList<>(LOTTO_NUMBERS.subList(0, LOTTO_LENGTH));
         Collections.sort(numbers);

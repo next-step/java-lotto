@@ -26,11 +26,6 @@ public enum Rank {
         return winningMoney;
     }
 
-    /**
-     * 맞춘 갯수 반환
-     * @param countOfMatch 맞힌 갯수
-     * @return Match
-     */
     public static Rank valueOf(long countOfMatch, boolean isBonus) {
         if(SECOND.countOfMatch == countOfMatch) {
             return isBonus ? SECOND : THIRD;

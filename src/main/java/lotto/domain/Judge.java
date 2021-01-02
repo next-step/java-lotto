@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public enum Judge {
-    PROFIT("이익"),
+    PROFIT("이익이"),
     LOSS("손해");
 
     private static final int PROFIT_STANDARD = 1;
