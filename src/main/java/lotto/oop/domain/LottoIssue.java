@@ -3,8 +3,6 @@ package lotto.oop.domain;
 import java.util.*;
 
 public class LottoIssue {
-    private static final int FROM_INDEX = 0;
-    private static final int TO_INDEX = 6;
     private List<LottoNumber> resultList;
     private IssueStats issueStats;
 
