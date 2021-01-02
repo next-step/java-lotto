@@ -34,12 +34,11 @@ public class LottoWinnerNumber {
     private void createWinnerNumbers(String[] numbers) {
         Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
-        .forEach(number -> winnerNumbers.add(new Number(number)));
+        .forEach(number -> winnerNumbers.add(LottoNumber.of(number)));
     }
 
     public boolean validateContainsNumber(Number number) {
         return winnerNumbers.stream()
-                .map(Number::getNumber)
                 .anyMatch(winnerNumber -> number.checkWinnerNumber(number, winnerNumber));
     }
 }

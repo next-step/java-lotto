@@ -7,7 +7,6 @@ import java.util.List;
 public class Lotto {
     private final List<Number> numbers = new ArrayList<>();
 
-
     public Lotto(List<Number> randomNumbers) {
         Collections.sort(randomNumbers);
         numbers.addAll(randomNumbers);
@@ -15,6 +14,10 @@ public class Lotto {
 
     public List<Number> getNumbers() {
         return numbers;
+    }
+
+    public Number getIndexNumber(int no) {
+        return numbers.get(no);
     }
 
     @Override
