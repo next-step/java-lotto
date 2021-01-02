@@ -49,15 +49,6 @@ public class InputView {
         }
     }
 
-    public List<Integer> convertInt(String result) {
-        List<Integer> number = new ArrayList<>();
-        String[] numberString = result.split(COMMA);
-        for (String value : numberString) {
-            number.add(Integer.parseInt(value));
-        }
-        return number;
-    }
-
     public void printLotto(List<LottoNumber> publishLottoList) {
         for (LottoNumber list: publishLottoList) {
             System.out.println(list.getGenerateNumbers());
