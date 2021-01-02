@@ -1,13 +1,11 @@
 package lotto.oop.domain;
 
-import lotto.oop.domain.LottoIssue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class LottoIssueTest {
     @Test
     @DisplayName("발행한 로또의 개수 확인")
     public void publishLootListTest() {
-        lotto.publishLottoList(14);
+        lotto.publishLottoList(14, input.getHandOperationLotto());
         assertThat(lotto.getResultList().size()).isEqualTo(14);
     }
 

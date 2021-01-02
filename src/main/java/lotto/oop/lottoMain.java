@@ -11,7 +11,7 @@ public class lottoMain {
         InputView input = new InputView();
         input.purchaseInfo();
         LottoIssue lottoIssue = new LottoIssue();
-        input.printLotto(lottoIssue.publishLottoList(input.getCount()));
+        input.printLotto(lottoIssue.publishLottoList(input.getAutoCount(), input.getHandOperationLotto()));
         input.winngNumbersInfo();
         WinNumber winInfo = input.getWinNumberInfo();
         lottoIssue.checkNumber(winInfo.getWinNumbers(), winInfo.getBonusNumber());
