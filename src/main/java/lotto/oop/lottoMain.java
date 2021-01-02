@@ -6,7 +6,6 @@ import lotto.oop.ui.InputView;
 import lotto.oop.ui.ResultView;
 
 public class lottoMain {
-
     public static void main(String[] args) {
         InputView input = new InputView();
         input.purchaseInfo();

@@ -1,14 +1,11 @@
 package lotto.oop.domain;
 
-import lotto.oop.ui.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class LottoNumberTest {
     @CsvSource(value = {"1,16,17,19,24,28:19"}, delimiter = ':')
     @DisplayName("보너스볼 체크")
     void checkLottoTest(String winNumbers, int bonus) {
-        InputView input = new InputView();
+        LottoNumber input = new LottoNumber();
         List<Integer> winNumbersList = input.convertInt(winNumbers);
         List<Integer> generateNumbers = Arrays.asList(3,16,17,19,24,28);
         lotto.setGenerateNumbers(generateNumbers);

@@ -27,7 +27,8 @@ public class LottoNumber {
         number = new ArrayList<>();
         String[] numberString = result.split(COMMA);
         for (String value : numberString) {
-            number.add(Integer.parseInt(value));
+            LottoNo num = new LottoNo(Integer.parseInt(value));
+            number.add(num.getNum());
         }
         Collections.sort(number);
         return number;
