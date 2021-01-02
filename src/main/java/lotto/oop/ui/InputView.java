@@ -28,14 +28,14 @@ public class InputView {
 
     private void handOperatioinInfo() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        Scanner sc1 = new Scanner(System.in);
-        this.handCount = sc1.nextInt();
+        Scanner sc = new Scanner(System.in);
+        this.handCount = sc.nextInt();
+        sc.nextLine();
         System.out.println("");
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> handInputList = new ArrayList<>();
         for(int i = 0; i < handCount; i++) {
-            Scanner sc2 = new Scanner(System.in);
-            String handLotto = sc2.nextLine();
+            String handLotto = sc.nextLine();
             handInputList.add(handLotto);
         }
         convertLotto(handInputList);
@@ -45,16 +45,16 @@ public class InputView {
     private void convertLotto(List<String> handInputList) {
         handOperationLotto = new ArrayList<>();
         for(String number : handInputList) {
-            String[] result = number.split(",");
             LottoNumber lotto = new LottoNumber();
-            lotto.setGenerateNumbers(convertInt(result));
+            lotto.setGenerateNumbers(convertInt(number));
             handOperationLotto.add(lotto);
         }
     }
 
-    private List<Integer> convertInt(String[] result) {
+    public List<Integer> convertInt(String result) {
         List<Integer> number = new ArrayList<>();
-        for (String value : result) {
+        String[] numberString = result.split(COMMA);
+        for (String value : numberString) {
             number.add(Integer.parseInt(value));
         }
         return number;
@@ -71,11 +71,8 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         String numbers = sc.nextLine();
-        String[] splitNumbers = numbers.split(COMMA);
-        List<Integer> numberList = new ArrayList<>();
-        for(String number : splitNumbers) {
-            numberList.add(Integer.parseInt(number));
-        }
+        List<Integer> numberList = convertInt(numbers);
+        System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBall = sc.nextLine();
         winNumberInfo = new WinNumber(numberList, Integer.parseInt(bonusBall));
