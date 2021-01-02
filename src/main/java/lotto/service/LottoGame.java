@@ -10,36 +10,36 @@ import lotto.view.ResultView;
 public class LottoGame {
 
     private LottoMoney lottoMoney;
-    private Lottos lottos;
-    private LottoWinnerNumber lottoWinnerNumber;
-    private LottoStatistics lottoStatistics;
 
     public void start() {
-        changeCoin();
-        createLottoNumber();
-        createWinnerNumbers();
-        statistics();
+        statistics(
+                createLottoNumber(changeCoin(InputView.inputPurchaseAmount())),
+                createWinnerNumbers(InputView.inputPrizeNumbers())
+        );
+    }
+
+    private void statistics(Lottos lottos, LottoWinnerNumber lottoWinnerNumber) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        lottoStatistics.confirmOfLottoNumber(lottos, lottoWinnerNumber);
         ResultView.statistics(lottoStatistics, lottoMoney);
     }
 
-    private void statistics() {
-        lottoStatistics = new LottoStatistics();
-        lottoStatistics.confirmOfLottoNumber(lottos, lottoWinnerNumber);
+    public LottoWinnerNumber createWinnerNumbers(String winnerNumbers) {
+        LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber();
+        lottoWinnerNumber.splitStringNumbers(winnerNumbers);
+        return lottoWinnerNumber;
     }
 
-    private void createWinnerNumbers() {
-        lottoWinnerNumber = new LottoWinnerNumber();
-        lottoWinnerNumber.splitStringNumbers(InputView.inputPrizeNumbers());
-    }
-
-    private void createLottoNumber() {
-        lottos = new Lottos();
-        lottos.createAutoNumber(lottoMoney.getCoin());
+    public Lottos createLottoNumber(int coin) {
+        Lottos lottos = new Lottos();
+        lottos.createAutoNumber(coin);
         ResultView.printBuyLottoNumber(lottos.getLottoList());
+        return lottos;
     }
 
-    private void changeCoin() {
-        lottoMoney = new LottoMoney(InputView.inputPurchaseAmount());
+    public int changeCoin(int money) {
+        lottoMoney = new LottoMoney(money);
         ResultView.printCoinAndRemainMoney(lottoMoney);
+        return lottoMoney.getCoin();
     }
 }

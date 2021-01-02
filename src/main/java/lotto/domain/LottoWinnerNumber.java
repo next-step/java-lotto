@@ -41,4 +41,8 @@ public class LottoWinnerNumber {
         return winnerNumbers.stream()
                 .anyMatch(winnerNumber -> number.checkWinnerNumber(number, winnerNumber));
     }
+
+    public int winnerNumberLength() {
+        return winnerNumbers.size();
+    }
 }
