@@ -1,16 +1,17 @@
 package lotto.oop.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumber {
     private static final int EXTRACT_FROM_FIRST_NUMBER = 0;
     private static final int EXTRACT_TO_LAST_NUMBER = 6;
 
-    private List<Integer> number = new ArrayList<>();
+    private List<Integer> number;
+    private List<Integer> generateNumbers;
+    private boolean bonusCheck;
 
     public void generateNumbers() {
+        number = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             number.add(i);
         }
@@ -25,25 +26,41 @@ public class LottoNumber {
     public void sortSixNumber() {
         List<Integer> sixNumber = new ArrayList<>(this.number.subList(EXTRACT_FROM_FIRST_NUMBER, EXTRACT_TO_LAST_NUMBER));
         Collections.sort(sixNumber);
-        this.number = sixNumber;
+        generateNumbers = new ArrayList<>();
+        generateNumbers = sixNumber;
     }
 
-    public int confrimLotto(LottoNumber list, String[] numbers) {
+    public int checkLotto(List<Integer> numbers, int bonus) {
         int num = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            num += verifyNumCount(list, numbers, i);
+        for (int i = 0; i < numbers.size(); i++) {
+            num += verifyNumCount(numbers, i);
         }
+        checkBonusball(bonus);
         return num;
     }
 
-    private int verifyNumCount(LottoNumber list, String[] numList, int i) {
-        if (list.getNumber().contains(Integer.parseInt(numList[i]))) {
+    private int verifyNumCount(List<Integer> numList, int i) {
+        if (getGenerateNumbers().contains(numList.get(i))) {
             return 1;
         }
         return 0;
     }
 
-    public List<Integer> getNumber() {
-        return number;
+    private void checkBonusball(int bonus) {
+        if (getGenerateNumbers().contains(bonus)) {
+            bonusCheck = true;
+        }
+    }
+
+    public void setGenerateNumbers(List<Integer> generateNumbers) {
+        this.generateNumbers = generateNumbers;
+    }
+
+    public List<Integer> getGenerateNumbers() {
+        return generateNumbers;
+    }
+
+    public boolean getBonusCheck() {
+        return bonusCheck;
     }
 }

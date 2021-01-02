@@ -1,42 +1,32 @@
 package lotto.oop.ui;
 
-import java.util.Map;
+import lotto.oop.domain.IssueStats;
+import lotto.oop.domain.Rank;
 
 public class ResultView {
-    private int treeUnity;
-    private int fourUnity;
-    private int fiveUnity;
-    private int sixUnity;
+    private IssueStats result;
 
-    public void displayIssueStats(Map<Integer, Integer> result, int amount) {
-        treeUnity = result.get(3) == null ? 0 : result.get(3);
-        fourUnity = result.get(4) == null ? 0 : result.get(4);
-        fiveUnity = result.get(5) == null ? 0 : result.get(5);
-        sixUnity = result.get(6) == null ? 0 : result.get(6);
-        displayInfo(amount);
-
+    public ResultView(IssueStats result) {
+        this.result = result;
     }
 
-    private void displayInfo(int amount) {
+    public void displayIssueStats() {
         System.out.println("당첨 통계");
         System.out.println("________");
-        System.out.println("3개 일치 (5,000원)- " + treeUnity + "개");
-        System.out.println("4개 일치 (50,000)- " + fourUnity + "개");
-        System.out.println("5개 일치 (1,500,000원)- " + fiveUnity + "개");
-        System.out.println("6개 일치 (2,000,000,000원)- " + sixUnity + "개");
-        displayGrossReturn(amount);
+        System.out.println("3개 일치 (5,000원)- " + result.checkCount(Rank.FIFTH) + "개");
+        System.out.println("4개 일치 (50,000)- " + result.checkCount(Rank.FOURTH) + "개");
+        System.out.println("5개 일치 (1,500,000원)- " + result.checkCount(Rank.THIRD) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30,000,000원)- " + result.checkCount(Rank.SECOND) + "개");
+        System.out.println("6개 일치 (2,000,000,000원)- " + result.checkCount(Rank.FIRST) + "개");
+        displayGrossReturn();
     }
 
-    private void displayGrossReturn(int amount) {
-        int earnings = (5000 * treeUnity) + (50000 * fourUnity) + (1500000 * fiveUnity) + (2000000000 * sixUnity);
-        double grossReturn = (((earnings / (double)amount) - 1) * 100)/100 + 1;
-        if (grossReturn < 1.0) {
-           System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
-//            System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임", grossReturn);
+    private void displayGrossReturn() {
+        double totalGrossReturn = result.getGrossReturn();
+        String msg = "총 수익률은 " + Math.floor((totalGrossReturn) * 100) / 100.0 + "입니다.";
+        if (totalGrossReturn < 1d) {
+            msg += " (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
-        if (grossReturn >= 1.0) {
-            System.out.println("총 수익률은 " + Math.floor((grossReturn) * 100) / 100.0 + "입니다.");
-//            System.out.printf("총 수익률은 %.2f 입니다.", grossReturn);
-        }
+        System.out.println(msg);
     }
 }
