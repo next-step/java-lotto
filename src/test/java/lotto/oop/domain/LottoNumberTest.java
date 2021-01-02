@@ -35,4 +35,13 @@ public class LottoNumberTest {
         assertThat(lotto.checkLotto(winNumbersList, bonus)).isEqualTo(5);
         assertThat(lotto.getBonusCheck()).isEqualTo(true);
     }
+
+    @Test
+    @DisplayName("수동 로또 넘버를 생성한다.")
+    void checkHandLottoNumber() {
+        assertThatThrownBy(() -> {
+                    new LottoNumber("1,3,5,7,9,11,17");
+                }
+        ).isInstanceOf(ArrayIndexOutOfBoundsException.class);
+    }
 }

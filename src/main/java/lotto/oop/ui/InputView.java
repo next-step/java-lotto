@@ -44,8 +44,7 @@ public class InputView {
     private void convertLotto(List<String> handInputList) {
         handOperationLotto = new ArrayList<>();
         for(String number : handInputList) {
-            LottoNumber lotto = new LottoNumber();
-            lotto.setGenerateNumbers(convertInt(number));
+            LottoNumber lotto = new LottoNumber(number);
             handOperationLotto.add(lotto);
         }
     }
@@ -70,17 +69,17 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         String numbers = sc.nextLine();
-        List<Integer> numberList = convertInt(numbers);
+        LottoNumber Lotto = new LottoNumber(numbers);
+        List<LottoNumber> winLotto = new ArrayList<>();
+        winLotto.add(Lotto);
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBall = sc.nextLine();
-        winNumberInfo = new WinNumber(numberList, Integer.parseInt(bonusBall));
+        winNumberInfo = new WinNumber(winLotto, Integer.parseInt(bonusBall));
         System.out.println();
     }
 
-    public int getAutoCount() {
-        return autoCount.getLottoCount();
-    }
+    public int getAutoCount() { return autoCount.getLottoCount();}
 
     public List<LottoNumber> getHandOperationLotto() {
         return handOperationLotto;
