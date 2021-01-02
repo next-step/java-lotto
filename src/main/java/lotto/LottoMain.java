@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningLottos;
+import lotto.domain.*;
 import lotto.util.InputUtil;
 import lotto.view.DisplayView;
 import lotto.view.InputView;
@@ -16,17 +14,22 @@ public class LottoMain {
 
         String money = InputUtil.inputMoney();
 
-        int numberOfLotto = lottoMachine.buyLotto(money);
-        DisplayView.exchangeLottoMsg(numberOfLotto);
+        LottoBucket lottoBucket = lottoMachine.buyLotto(money);
+        int createLottoBucketCount = lottoBucket.getLottos().size();
+        DisplayView.exchangeLottoMsg(createLottoBucketCount);
         DisplayView.showLottoBuckets(lottoMachine.getLottoBuckets());
 
         InputView.showInputLastWinningNumber();
         String lastWinningNumbers = InputUtil.enterLastWinningNumbers();
 
-        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoBuckets());
-        WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers);
+        InputView.showInputBonusNumber();
+        String inputBonusNumber = InputUtil.enterBonusNumber();
+        BonusNumber bonusNumber = new BonusNumber( lastWinningNumbers,inputBonusNumber);
 
-        DisplayView.showWinningStatis(winningLottos);
+        LottoResult lottoResult = new LottoResult(lottoMachine.getLottoBuckets());
+        WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers, bonusNumber);
+
+        DisplayView.showWinningStatics(winningLottos);
         DisplayView.printRevenu(winningLottos.calcurateRevenue(money));
 
     }

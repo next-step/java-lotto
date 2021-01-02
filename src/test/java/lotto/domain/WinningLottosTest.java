@@ -3,6 +3,9 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottosTest {
@@ -25,26 +28,19 @@ class WinningLottosTest {
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_FOUR);
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_FIVE);
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_SIX);
-        assertThat(winningLottos.amountOfWinning()).isEqualTo(2001555000);
+        assertThat(winningLottos.amountOfWinning()).isEqualTo(new BigDecimal(2001555000));
     }
     @Test
     void calculateLottoMoney_LottyType_ZERO(){
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_ZERO);
-        assertThat(winningLottos.amountOfWinning()).isEqualTo(0);
+        assertThat(winningLottos.amountOfWinning()).isEqualTo(BigDecimal.ZERO);
     }
     @Test
     void winningRevenueTest(){
         winningLottos.addMatchingNumber(WinningLottoType.MATCH_THREE);
-        float revenue = winningLottos.calcurateRevenue("1000");
-        assertThat(revenue).isEqualTo(5);
-    }
-
-
-    @Test
-    void cal(){
-        float a = 100;
-        float b = 20;
-        System.out.println(b/a);
+        BigDecimal revenue = winningLottos.calcurateRevenue("1000");
+        BigDecimal validNumber = new BigDecimal(5).setScale(2, RoundingMode.FLOOR);
+        assertThat(revenue).isEqualTo(validNumber);
     }
 
 }

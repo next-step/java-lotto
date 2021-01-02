@@ -3,63 +3,78 @@ package lotto.domain;
 import lotto.util.NumberUtil;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 
     private final static int size = 6;
-    private List<Integer> numbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        numbers = new ArrayList<>();
+        lottoNumbers = generateRandomNumbersSet();
+    }
+
+    protected Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto createLotto() {
-        selectedNumber(generateRandomNumbers());
+        selectedNumber(generateRandomNumbersSet());
         return this;
     }
+
     public int numberOfLottoCount(){
-        return this.numbers.size();
+        return this.lottoNumbers.size();
     }
-    private List<Integer> generateRandomNumbers() {
+
+    protected Lotto selectedNumber(Set<LottoNumber> randomNumbers) {
+        this.lottoNumbers = randomNumbers;
+        return this;
+    }
+
+    public boolean checkBonusNumber( BonusNumber bonusNumber){
+        boolean containsBonusNumber = this.lottoNumbers.contains(bonusNumber);
+        return containsBonusNumber;
+    }
+
+    public HashSet<LottoNumber> showLottoNumber(){
+        return new HashSet<>(this.lottoNumbers);
+    }
+
+    protected Set<LottoNumber> generateRandomNumbersSet() {
         List<Integer> randomNumbers = NumberUtil.getLottoNumbers();
 
         Collections.shuffle(randomNumbers);
 
-        List<Integer> lottoNumbers = new ArrayList<>();
-
-        for( int i = 0; i < size; i++ ) {
-            lottoNumbers.add(randomNumbers.get(i));
-        }
-        return lottoNumbers;
+        Set<LottoNumber> lottoNumberSet = randomNumbers.subList(0, size).stream()
+                .map(LottoNumber::new).collect(Collectors.toSet());
+        return lottoNumberSet;
     }
 
-    protected Lotto selectedNumber(List<Integer> randomNumbers){
-        this.numbers = randomNumbers;
-        return this;
+    protected int checkLastWinningNumberSet(String lastWinningNumber) {
+        Set<LottoNumber> winnerNumbers = NumberUtil.convertStringToIntegerList(lastWinningNumber).stream()
+                .map(LottoNumber::new).collect(Collectors.toSet());
+        int matchCount = compareMatchCount(winnerNumbers);
+
+        return matchCount;
     }
 
-
-    public int checkLastWinningNumber(String lastWinnerNumber) {
+    private int compareMatchCount(Set<LottoNumber> winnerNumbers) {
         int matchNumber = 0;
-        List<Integer> winnerNumbers = Arrays.stream(
-                                            lastWinnerNumber.split(","))
-                                            .map(Integer::new)
-                                            .sorted()
-                                            .collect(Collectors.toList());
-
-        List<Integer> sortedNumbers = new ArrayList<>(this.numbers).stream().sorted().collect(Collectors.toList());
-        for( int i = 0; i < winnerNumbers.size(); i++) {
-            if(sortedNumbers.get(i).equals( winnerNumbers.get(i))) {
-                matchNumber = matchNumber + 1;
-            }
-        }
+        Iterator<LottoNumber> iterator = winnerNumbers.iterator();
+        while(iterator.hasNext()){
+            LottoNumber lastWinninglottoNumber = iterator.next();
+            matchNumber = matchNumber + containNumber( lastWinninglottoNumber);
+        };
         return matchNumber;
     }
 
-    public List<Integer> showLottoNumber(){
-        return new ArrayList<>(this.numbers);
+    private int containNumber(LottoNumber lastWinninglottoNumber) {
+        boolean contains = this.lottoNumbers.contains(lastWinninglottoNumber);
+        if(contains){
+            return 1;
+        }
+        return 0;
     }
-
 }

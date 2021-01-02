@@ -19,22 +19,22 @@ class LottoMachineTest {
     @Test
     void exchangeNumberOfLotto(){
         String money = "14000";
-        int numberOfLotto = lottoMachine.buyLotto(money);
-        assertThat(numberOfLotto).isEqualTo(14);
+        LottoBucket lottoBucket = lottoMachine.buyLotto(money);
+        assertThat(lottoBucket.getLottos()).hasSize(14);
     }
 
     @Test
     void createLottos(){
-        int createdNumberOfLotto= lottoMachine.createLottos(14);
-        assertThat(createdNumberOfLotto).isEqualTo(14);
+        LottoBucket lottos = lottoMachine.createLottos(14);
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     @Test
     void getLottoBucket(){
-        int lottos = lottoMachine.createLottos(4);
+        LottoBucket lottos = lottoMachine.createLottos(4);
         LottoBucket lottoBuckets = lottoMachine.getLottoBuckets();
         List<Lotto> createdLottos = lottoBuckets.getLottos();
-        assertThat(createdLottos.size()).isEqualTo(lottos);
+        assertThat(createdLottos.size()).isEqualTo(lottos.getLottos().size());
     }
 
 
