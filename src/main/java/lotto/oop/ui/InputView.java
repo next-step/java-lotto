@@ -8,8 +8,8 @@ import java.util.*;
 public class InputView {
     public static final String COMMA = ",";
     private Amount amount;
-    private int autoCount;
-    private int handCount;
+    private Count autoCount;
+    private Count handCount;
 
     private List<LottoNumber> handOperationLotto;
     private WinNumber winNumberInfo;
@@ -18,22 +18,22 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요");
         Scanner sc = new Scanner(System.in);
         amount = new Amount(sc.nextInt());
-        this.autoCount = amount.getCount();
         System.out.println();
         handOperatioinInfo();
-        autoCount -= handCount;
-        System.out.println("수동으로 " + handCount + "개, 자동으로 " + autoCount + "개를 구매했습니다.");
+        int autoLottoCount = amount.getCount() - handCount.getLottoCount();
+        autoCount = new Count(autoLottoCount);
+        System.out.println("수동으로 " + handCount.getLottoCount() + "개, 자동으로 " + autoCount.getLottoCount() + "개를 구매했습니다.");
     }
 
     private void handOperatioinInfo() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        this.handCount = sc.nextInt();
+        handCount = new Count(sc.nextInt());
         sc.nextLine();
         System.out.println("");
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> handInputList = new ArrayList<>();
-        for(int i = 0; i < handCount; i++) {
+        for(int i = 0; i < handCount.getLottoCount(); i++) {
             String handLotto = sc.nextLine();
             handInputList.add(handLotto);
         }
@@ -79,7 +79,7 @@ public class InputView {
     }
 
     public int getAutoCount() {
-        return autoCount;
+        return autoCount.getLottoCount();
     }
 
     public List<LottoNumber> getHandOperationLotto() {

@@ -9,7 +9,6 @@ public class LottoIssue {
     private IssueStats issueStats;
 
     public List<LottoNumber> publishLottoList(int count, List<LottoNumber> handOperationLotto) {
-        resultList = new ArrayList<>();
         resultList = handOperationLotto;
         for(int i = 0; i < count; i++) {
             LottoNumber lotto = new LottoNumber();
