@@ -1,60 +1,48 @@
 package lotto.view;
 
-import lotto.domain.InputValid;
-import lotto.domain.Judge;
-import lotto.domain.Lotto;
-import lotto.domain.Match;
-import lotto.util.Request;
+import lotto.domain.*;
 
 import java.util.*;
 
 public class ResultView {
+    private final Lottos lottos = new Lottos();
 
-    public void buyLottoAndNumbersPrint(Request request) {
-        System.out.println(request.getTotalAmount() + "개를 구매했습니다.");
+    public void buyLottoAndNumbersPrint(int money) {
+        List<Lotto> lottoTickets = lottos.makeLotto(money);
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
 
-        for (Lotto lotto : request.getLotto()) {
-            System.out.println(lotto.convertLottoNumbers());
+        for (Lotto lotto : lottoTickets) {
+            System.out.println(lotto.getLotto());
         }
     }
 
-    public void resultPrint(List<Integer> targetNumbers, Request request) {
-        new InputValid(targetNumbers);
-
-        System.out.println("당첨 통계");
+    public void resultPrint(List<Integer> inputNumbers, int bonusNumber, int money) {
+        System.out.println("\n당첨 통계");
         System.out.println("--------");
 
-        Map<Match, List<Match>> result = request.getMatchLottoCount(targetNumbers);
+        WinningLotto winningLotto = new WinningLotto(inputNumbers, bonusNumber);
+        Map<Rank, List<Rank>> result = lottos.groupByMatchRanks(winningLotto);
         setMatchPrintCount(result);
 
         result.entrySet()
                 .stream()
-                .sorted(Comparator.comparingLong(entry -> entry.getKey().getMatchCount()))
+                .sorted(Comparator.comparingLong(entry -> entry.getKey().getWinningMoney()))
                 .forEach(this::resultMatchPrint);
 
-        profitPrint(request, result);
+        resultJudgePrint(result, money);
     }
 
-    private void setMatchPrintCount(Map<Match, List<Match>> result) {
-        Arrays.stream(Match.values()).filter(match -> match != Match.MISS)
+    private void setMatchPrintCount(Map<Rank, List<Rank>> result) {
+        Arrays.stream(Rank.values()).filter(match -> match != Rank.MISS)
             .forEach(match -> result.computeIfAbsent(match, r -> new ArrayList<>()));
     }
 
-    private void resultMatchPrint(Map.Entry<Match, List<Match>> entry) {
-        System.out.println(entry.getKey().getMatchCount() + "개 일치 " + "(" + entry.getKey().getReward() + "원)- " + entry.getValue().size() + "개");
+    private void resultMatchPrint(Map.Entry<Rank, List<Rank>> entry) {
+        System.out.println(entry.getKey().getCountOfMatch() + "개 일치 " + "(" + entry.getKey().getWinningMoney() + "원)- " + entry.getValue().size() + "개");
     }
 
-    private void profitPrint(Request request, Map<Match, List<Match>> match) {
-        double profit = match.values()
-                .stream()
-                .flatMap(List::stream)
-                .mapToLong(Match::getReward)
-                .sum();
-        double profitRate = profit / request.getMoney();
-        resultJudgePrint(profitRate);
-    }
-
-    private void resultJudgePrint(double profitRate) {
-        System.out.println("총 수익률은 " + (double) (int)(profitRate*100) / 100 + "입니다.(기준이 1이기 때문에 결과적으로 "+ Judge.judge(profitRate).getJudgeMessage() +")");
+    public void resultJudgePrint(Map<Rank, List<Rank>> result, int money) {
+        double profitRate = lottos.calculateProfit(result, money);
+        System.out.println("총 수익률은 " + profitRate + "입니다.(기준이 1이기 때문에 결과적으로 "+ Judge.judge(profitRate).getJudgeMessage() +"라는 의미)");
     }
 }

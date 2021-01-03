@@ -1,22 +1,25 @@
 package lotto.domain;
 
-import lotto.util.Request;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
 
 public class LottoGame {
+
     public void start() {
         InputView inputView = new InputView();
         int money = inputView.inputMoneyPrint();
 
-        Request request = new Request(money);
-
         ResultView resultView = new ResultView();
-        resultView.buyLottoAndNumbersPrint(request);
+        resultView.buyLottoAndNumbersPrint(money);
 
         List<Integer> inputNumbers = inputView.inputLottoNumbers();
-        resultView.resultPrint(inputNumbers, request);
+        int inputBonusNo = inputView.inputLottoBonusNumber();
+        resultView.resultPrint(inputNumbers, inputBonusNo, money);
     }
+
+//    public static Rank matchOfRank(Lotto lotto, WinningLotto winningLotto) {
+//        return winningLotto.match(lotto);
+//    }
 }

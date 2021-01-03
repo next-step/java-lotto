@@ -8,7 +8,7 @@ class LottoNumberGeneratorTest {
 
     @Test
     void createLotto() {
-        System.out.println(LottoNumberGenerator.makeLottoNumber());
-        assertThat(LottoNumberGenerator.makeLottoNumber().size()).isEqualTo(6);
+        System.out.println(LottoNumberGenerator.makeLotto());
+        assertThat(LottoNumberGenerator.makeLotto().size()).isEqualTo(6);
     }
 }

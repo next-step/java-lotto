@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberGenerator {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_LENGTH = 6;
 
     private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
      * 6자리의 로또 번호 생성
      * @return List<Integer>
      */
-    public static List<Integer> makeLottoNumber() {
+    public static List<Integer> makeLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<Integer> numbers = new ArrayList<>(LOTTO_NUMBERS.subList(0, LOTTO_LENGTH));
         Collections.sort(numbers);
