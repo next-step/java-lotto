@@ -68,7 +68,7 @@ public class LottoResult {
         return  statisticView;
     }
 
-    private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {ㅣ느
+    private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {
         return String.format(setRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
     }
 
