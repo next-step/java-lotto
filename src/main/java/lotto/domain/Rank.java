@@ -22,7 +22,7 @@ public enum Rank {
         return this == Rank.NOTHING;
     }
 
-    private boolean isSecond() {
+    public boolean isSecond() {
         return this == Rank.SECOND;
     }
 

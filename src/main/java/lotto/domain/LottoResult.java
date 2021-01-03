@@ -11,6 +11,7 @@ public class LottoResult {
     private static final String END_BRACKET = "]";
     private static final String NEW_LINE = "\n";
     private static final String RANK_REWARD_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String SECOND_RANK_REWARD_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private Lottos lottos;
@@ -67,8 +68,15 @@ public class LottoResult {
         return  statisticView;
     }
 
-    private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {
-        return String.format(RANK_REWARD_MESSAGE, rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
+    private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {ㅣ느
+        return String.format(setRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
+    }
+
+    private String setRankRewardMessage(Rank rank) {
+        if (rank.isSecond()) {
+            return SECOND_RANK_REWARD_MESSAGE;
+        }
+        return RANK_REWARD_MESSAGE;
     }
 
     private String getProfitMessage(LottoStatistic lottoStatistic) {
