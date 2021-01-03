@@ -14,8 +14,10 @@ public class WinningLotto {
     private static final String VALID_INPUT_EMPTY_MESSAGE = "지난 주 당첨번호 입력 값이 없습니다.";
     private static final String VALID_SEPARAOR_MESSAGE = "구분자 ,가 없습니다.";
     private static final String VALID_NO_NUMBER_MESSAGE = "숫자가 아닙니다.";
+    private static final String VALID_DUPLICATE_MESSAGE = "당첨번호와 중복이 불가합니다.";
 
     private final Lotto lotto;
+    private LottoNumber bonus;
 
     public WinningLotto(String inputs) {
         validate(inputs);
@@ -23,6 +25,21 @@ public class WinningLotto {
                 .map(input -> new LottoNumber(parseNumber(input)))
                 .collect(toList());
         this.lotto = new Lotto(numbers);
+    }
+
+    public WinningLotto(String winningInputs, String bonusInput) {
+        this(winningInputs);
+        validateEmpty(bonusInput);
+        LottoNumber bonus = new LottoNumber(parseNumber(bonusInput));
+        validateDuplicate(bonus);
+        this.bonus = bonus;
+    }
+
+    private void validateDuplicate(LottoNumber bonus) {
+        List<LottoNumber> lottoNumbers = this.lotto.getLotto();
+        if (lottoNumbers.contains(bonus)) {
+            throw new IllegalArgumentException(VALID_DUPLICATE_MESSAGE);
+        }
     }
 
     private int parseNumber(String input) {
@@ -66,5 +83,9 @@ public class WinningLotto {
 
     public List<LottoNumber> getNumbers() {
         return lotto.getLotto();
+    }
+
+    public LottoNumber getBonus() {
+        return this.bonus;
     }
 }
