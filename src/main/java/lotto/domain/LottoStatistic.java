@@ -11,14 +11,14 @@ public class LottoStatistic {
     private int lottCount;
     private Map<Rank, Integer> rankCount = new HashMap<>();
 
-    public LottoStatistic(List<Integer> matchCounts, LottoCount lottoCount) {
+    public LottoStatistic(List<MatchResult> matchResults, LottoCount lottoCount) {
         lottCount = lottoCount.count();
-        setRankCount(matchCounts);
+        setRankCount(matchResults);
     }
 
-    public void setRankCount(List<Integer> matchCounts) {
-        for (int count : matchCounts) {
-            Rank rank = Rank.valueOfRank(count);
+    public void setRankCount(List<MatchResult> matchResults) {
+        for (MatchResult matchResult : matchResults) {
+            Rank rank = Rank.valueOfRank(matchResult.matchCount(), matchResult.isBonus());
             rankCount.put(rank, rankCount.getOrDefault(rank,0) + 1);
         }
     }

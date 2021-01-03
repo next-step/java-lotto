@@ -51,4 +51,11 @@ public class LottoTest {
         assertThat(count).isEqualTo(5);
     }
 
+    @DisplayName("보너스 추가")
+    @Test
+    void isBonus() {
+        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.isBonus(new LottoNumber(4))).isTrue();
+    }
+
 }

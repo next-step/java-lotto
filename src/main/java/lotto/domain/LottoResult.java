@@ -57,7 +57,7 @@ public class LottoResult {
         return lottosView;
     }
 
-    public StringBuilder getStatisticsView(List<Integer> matchCounts) {
+    public StringBuilder getStatisticsView(List<MatchResult> matchCounts) {
         LottoStatistic lottoStatistic = new LottoStatistic(matchCounts, lottoCount);
         StringBuilder statisticView = new StringBuilder();
         Arrays.asList(Rank.values()).stream()

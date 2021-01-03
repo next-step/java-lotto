@@ -66,4 +66,7 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 
+    public boolean isBonus(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
 }

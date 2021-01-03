@@ -7,13 +7,24 @@ import java.util.List;
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
 
-    public List<Integer> match(WinningLotto winningLotto) {
-        List<Integer> matchCounts = new ArrayList<>();
+    public List<MatchResult> match(WinningLotto winningLotto) {
+        List<MatchResult> matchResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            matchCounts.add(lotto.match(winningLotto.getNumbers()));
+            int matchCount = lotto.match(winningLotto.getNumbers());
+            boolean isBonus = lotto.isBonus(winningLotto.getBonus());
+            matchResults.add(new MatchResult(matchCount, isBonus));
         }
 
-        return matchCounts;
+        return matchResults;
+    }
+
+    public List<Boolean> isBonus(WinningLotto winningLotto) {
+        List<Boolean> isBonusess = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            isBonusess.add(lotto.isBonus(winningLotto.getBonus()));
+        }
+
+        return isBonusess;
     }
 
     public void add(Lotto lotto) {
