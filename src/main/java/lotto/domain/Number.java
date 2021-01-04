@@ -18,6 +18,10 @@ public class Number implements Comparable<Number>{
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public boolean checkWinnerNumber(Number number, Number winnerNumber) {
         return winnerNumber == number;
     }

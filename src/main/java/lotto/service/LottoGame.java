@@ -14,7 +14,7 @@ public class LottoGame {
     public void start() {
         statistics(
                 createLottoNumber(changeCoin(InputView.inputPurchaseAmount())),
-                createWinnerNumbers(InputView.inputPrizeNumbers())
+                createWinnerNumbers(InputView.inputPrizeNumbers(), InputView.inputBonusNumber())
         );
     }
 
@@ -24,10 +24,8 @@ public class LottoGame {
         ResultView.statistics(lottoStatistics, lottoMoney);
     }
 
-    public LottoWinnerNumber createWinnerNumbers(String winnerNumbers) {
-        LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber();
-        lottoWinnerNumber.splitStringNumbers(winnerNumbers);
-        return lottoWinnerNumber;
+    public LottoWinnerNumber createWinnerNumbers(String winnerNumbers, int BonusNumber) {
+        return new LottoWinnerNumber(winnerNumbers, BonusNumber);
     }
 
     public Lottos createLottoNumber(int coin) {

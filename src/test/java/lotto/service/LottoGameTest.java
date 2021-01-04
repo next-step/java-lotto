@@ -30,7 +30,7 @@ class LottoGameTest {
     @Test
     @DisplayName("당첨 번호 생성 길이 체크 테스트")
     void createWinnerNumbers() {
-        assertThat(lottoGame.createWinnerNumbers("1,2,3,4,5,6").winnerNumberLength()).isEqualTo(6);
+        assertThat(lottoGame.createWinnerNumbers("1,2,3,4,5,6", 6).winnerNumberLength()).isEqualTo(6);
     }
 
 

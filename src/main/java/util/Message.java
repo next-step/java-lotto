@@ -7,4 +7,6 @@ public class Message {
     public static final String LAST_WEEK_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구매금액을 입력해 주세요.";
     public static final String NUMBER_LENGTH_EXCESS = "당첨번호 숫자는 6자리여야 합니다.";
+    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
+    public static final String BONUS_NUMBER_OVERLAP_MESSAGE = "당첨 번호와 보너스 번호가 중복됩니다.";
 }
