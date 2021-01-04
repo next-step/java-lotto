@@ -3,19 +3,19 @@ package lotto.oop.domain;
 import java.util.List;
 
 public class WinNumber {
-    private List<Integer> winNumbers;
-    private int bonusNumber;
+    private LottoNumber winNumbers;
+    private LottoNo bonusNumber;
 
-    public WinNumber(List<Integer> winNumbers, int bonusNumber) {
+    public WinNumber(LottoNumber winNumbers, LottoNo bonusNumber) {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinNumbers() {
-        return winNumbers;
+    public int getBonusNumber() {
+        return bonusNumber.getNum();
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public List<Integer> getWinNumbers() {
+        return winNumbers.getGenerateNumbers();
     }
 }
