@@ -18,7 +18,7 @@ public class ResultView {
         System.out.println(buyLotto.toString());
     }
 
-    public static void statistics(LottoStatistics lottoStatistics, LottoMoney lottoMoney) {
+    public static void statisticsPrint(LottoStatistics lottoStatistics, LottoMoney lottoMoney) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         printWinners(lottoStatistics);

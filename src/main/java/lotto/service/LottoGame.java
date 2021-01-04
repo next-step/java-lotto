@@ -10,18 +10,19 @@ import lotto.view.ResultView;
 public class LottoGame {
 
     private LottoMoney lottoMoney;
+    private LottoStatistics lottoStatistics;
 
     public void start() {
-        statistics(
+        ResultView.statisticsPrint(statistics(
                 createLottoNumber(changeCoin(InputView.inputPurchaseAmount())),
-                createWinnerNumbers(InputView.inputPrizeNumbers(), InputView.inputBonusNumber())
+                createWinnerNumbers(InputView.inputPrizeNumbers(), InputView.inputBonusNumber())),lottoMoney
         );
     }
 
-    private void statistics(Lottos lottos, LottoWinnerNumber lottoWinnerNumber) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
+    public LottoStatistics statistics(Lottos lottos, LottoWinnerNumber lottoWinnerNumber) {
+        lottoStatistics = new LottoStatistics();
         lottoStatistics.confirmOfLottoNumber(lottos, lottoWinnerNumber);
-        ResultView.statistics(lottoStatistics, lottoMoney);
+        return lottoStatistics;
     }
 
     public LottoWinnerNumber createWinnerNumbers(String winnerNumbers, int BonusNumber) {
