@@ -60,8 +60,8 @@ public class LottoGameTest {
         lottoGame.start(new LottoCount("15000"));
         LottoResult lottoResult = lottoGame.getLottoResult();
         System.out.println(lottoResult.getLottosView());
-        List<Integer> matchCounts = lottoGame.match(new WinningLotto("1,2,3,4,5,6"));
+        List<MatchResult> matchResults = lottoGame.match(new WinningLotto("1,2,3,4,5,6", "7"));
 
-        System.out.println(lottoResult.getStatisticsView(matchCounts));
+        System.out.println(lottoResult.getStatisticsView(matchResults));
     }
 }

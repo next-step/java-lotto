@@ -22,7 +22,7 @@ public class LottoGame {
         lottoResult.reportLottos();
     }
 
-    public List<Integer> match(WinningLotto winningLotto) {
+    public List<MatchResult> match(WinningLotto winningLotto) {
         return lottos.match(winningLotto);
     }
 

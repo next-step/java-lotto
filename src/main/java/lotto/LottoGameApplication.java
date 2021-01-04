@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutView;
 
@@ -19,7 +16,7 @@ public class LottoGameApplication {
         LottoOutView.show(lottoResult.getLottosView());
 
         WinningLotto winningLotto = LottoInputView.getWinningLotto();
-        List<Integer> matchCounts = lottoGame.match(winningLotto);
+        List<MatchResult> matchCounts = lottoGame.match(winningLotto);
         LottoOutView.showStatistic(lottoResult.getStatisticsView(matchCounts));
     }
 }

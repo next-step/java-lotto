@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,9 @@ public class LottoResult {
     private static final String START_BRACKET = "[";
     private static final String END_BRACKET = "]";
     private static final String NEW_LINE = "\n";
+    private static final String RANK_REWARD_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String SECOND_RANK_REWARD_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private Lottos lottos;
     private LottoCount lottoCount;
@@ -50,13 +54,32 @@ public class LottoResult {
                 .collect(Collectors.joining(COMMA_SEPARATOR));
     }
 
-
     public StringBuilder getLottosView() {
         return lottosView;
     }
 
-    public StringBuilder getStatisticsView(List<Integer> matchCounts) {
+    public StringBuilder getStatisticsView(List<MatchResult> matchCounts) {
         LottoStatistic lottoStatistic = new LottoStatistic(matchCounts, lottoCount);
-        return lottoStatistic.message();
+        StringBuilder statisticView = new StringBuilder();
+        Arrays.asList(Rank.values()).stream()
+                .filter(rank -> !rank.isNothing())
+                .forEach(rank -> statisticView.append(getRankRewardMessage(lottoStatistic, rank)));
+        statisticView.append(getProfitMessage(lottoStatistic));
+        return  statisticView;
+    }
+
+    private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {
+        return String.format(setRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
+    }
+
+    private String setRankRewardMessage(Rank rank) {
+        if (rank.isSecond()) {
+            return SECOND_RANK_REWARD_MESSAGE;
+        }
+        return RANK_REWARD_MESSAGE;
+    }
+
+    private String getProfitMessage(LottoStatistic lottoStatistic) {
+        return String.format(PROFIT_RATE_MESSAGE, lottoStatistic.calculateProfitRate());
     }
 }

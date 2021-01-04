@@ -16,24 +16,25 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        validateLotto(lotto);
+        validate(lotto);
         this.lotto = lotto;
     }
 
-    public static List<LottoNumber> of(List<Integer> lotto) {
-        return lotto.stream()
+    public static Lotto of(List<Integer> lotto) {
+        List<LottoNumber> lottoNumbers = lotto.stream()
                 .map(number -> new LottoNumber(number))
                 .collect(toList());
+        return new Lotto(lottoNumbers);
     }
 
-    private void validateLotto(List<LottoNumber> lotto) {
+    private void validate(List<LottoNumber> lotto) {
         validateEmpty(lotto);
         validateSize(lotto);
         validateDuplicate(lotto);
     }
 
     private void validateEmpty(List<LottoNumber> lotto) {
-        if (lotto == null || lotto.size() == 0) {
+        if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException(VALID_EMPTY_MESSAGE);
         }
     }
@@ -53,11 +54,11 @@ public class Lotto {
 
     public int match(List<LottoNumber> winLotto) {
         return (int) winLotto.stream()
-                .filter(lottoNumber -> containsLottoNumber(lottoNumber))
+                .filter(lottoNumber -> contains(lottoNumber))
                 .count();
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    private boolean contains(LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
     }
 
@@ -65,12 +66,7 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "lotto=" + lotto +
-                '}';
+    public boolean isBonus(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
-
-
 }
