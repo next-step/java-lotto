@@ -27,6 +27,10 @@ public enum WinnerAmount {
                 .orElse(ZERO);
     }
 
+    public static WinnerAmount matchSecond() {
+        return SECOND;
+    }
+
     public int getPrize() {
         return prize;
     }

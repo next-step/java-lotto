@@ -16,10 +16,6 @@ public class LottoWinnerNumber {
     public LottoWinnerNumber() {
     }
 
-    public LottoWinnerNumber(List<Number> winnerNumbers) {
-        this.winnerNumbers = winnerNumbers;
-    }
-
     public LottoWinnerNumber(String winnerNumbers, int bonusNumber) {
         splitStringNumbers(winnerNumbers);
         this.bonusNumber = overlapCheck(LottoNumber.of(bonusNumber));
@@ -59,7 +55,7 @@ public class LottoWinnerNumber {
         return winnerNumbers.size();
     }
 
-    public Number getBonusNumber() {
-        return LottoNumber.of(bonusNumber.getNumber());
+    public boolean bonusNumberContains(List<Number> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

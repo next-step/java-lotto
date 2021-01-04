@@ -9,6 +9,8 @@ public class LottoStatistics {
     private static final int TWO_DECIMAL = 2;
     private static final int COUNT = 1;
     private static final int MATCH_DEFAULT_COUNT = 0;
+    private static final int MATCH_NUMBER_FIVE_CHECK = 5;
+    private int matchCheckNumber;
     Map<WinnerAmount, Integer> matchResult = new LinkedHashMap<>();
 
     public double rateOfReturn(int winningAmount, int purchaseAmount) {
@@ -29,7 +31,11 @@ public class LottoStatistics {
     }
 
     private void matchWinnerAmount(LottoWinnerNumber lottoWinnerNumber, List<Number> numbers) {
-        mapCount(WinnerAmount.matchCheck(matchLottoNumberCheck(lottoWinnerNumber, numbers)));
+        matchCheckNumber = matchLottoNumberCheck(lottoWinnerNumber, numbers);
+        if(matchCheckNumber == MATCH_NUMBER_FIVE_CHECK && lottoWinnerNumber.bonusNumberContains(numbers)) {
+            mapCount(WinnerAmount.matchSecond());
+        }
+        mapCount(WinnerAmount.matchCheck(matchCheckNumber));
     }
 
     private void mapCount(WinnerAmount winnerAmountObject) {
