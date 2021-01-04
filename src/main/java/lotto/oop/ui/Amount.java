@@ -11,7 +11,7 @@ public class Amount {
         this.amount = money;
     }
 
-    public int getCount() {
-        return amount / PIRCE_ONE_LOTTO;
+    public int substract(Count handCount) {
+        return (amount / PIRCE_ONE_LOTTO) - handCount.getLottoCount();
     }
 }

@@ -1,5 +1,6 @@
 package lotto.oop.ui;
 
+import lotto.oop.domain.LottoNo;
 import lotto.oop.domain.LottoNumber;
 import lotto.oop.domain.WinNumber;
 
@@ -20,7 +21,7 @@ public class InputView {
         amount = new Amount(sc.nextInt());
         System.out.println();
         handOperatioinInfo();
-        int autoLottoCount = amount.getCount() - handCount.getLottoCount();
+        int autoLottoCount = amount.substract(handCount);
         autoCount = new Count(autoLottoCount);
         System.out.println("수동으로 " + handCount.getLottoCount() + "개, 자동으로 " + autoCount.getLottoCount() + "개를 구매했습니다.");
     }
@@ -60,13 +61,11 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         String numbers = sc.nextLine();
-        LottoNumber Lotto = new LottoNumber(numbers);
-        List<LottoNumber> winLotto = new ArrayList<>();
-        winLotto.add(Lotto);
+        LottoNumber winLotto = new LottoNumber(numbers);
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBall = sc.nextLine();
-        winNumberInfo = new WinNumber(winLotto, Integer.parseInt(bonusBall));
+        winNumberInfo = new WinNumber(winLotto, new LottoNo(Integer.parseInt(bonusBall)));
         System.out.println();
     }
 
