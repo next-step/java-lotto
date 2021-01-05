@@ -33,7 +33,7 @@ public class LottoGameTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new LottoCount(input);
         })
-                .withMessageContaining("금액은 숫자만 입력해주세요.");
+                .withMessageContaining("숫자만 입력해주세요.");
     }
 
     @ParameterizedTest
@@ -49,7 +49,9 @@ public class LottoGameTest {
     @Test
     void start() {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.start(new LottoCount("5000"));
+        LottoNumberRepository lottoNumberRepository = new LottoNumberRepository();
+        lottoNumberRepository.add("1,2,3,4,5,6");
+        lottoGame.start(new LottoCount("5000", "3"), lottoNumberRepository);
         LottoResult lottoResult = lottoGame.getLottoResult();
         System.out.println(lottoResult.getLottosView());
     }
@@ -57,7 +59,7 @@ public class LottoGameTest {
     @Test
     void match() {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.start(new LottoCount("15000"));
+        lottoGame.start(new LottoCount("15000"), new LottoNumberRepository());
         LottoResult lottoResult = lottoGame.getLottoResult();
         System.out.println(lottoResult.getLottosView());
         List<MatchResult> matchResults = lottoGame.match(new WinningLotto("1,2,3,4,5,6", "7"));

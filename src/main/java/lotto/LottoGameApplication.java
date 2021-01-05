@@ -9,8 +9,9 @@ import java.util.List;
 public class LottoGameApplication {
     public static void main(String[] args) {
         LottoCount lottoCount = LottoInputView.getLottoCount();
+        LottoNumberRepository lottoNumberRepository = LottoInputView.getLottoNumberRepository(lottoCount);
         LottoGame lottoGame = new LottoGame();
-        lottoGame.start(lottoCount);
+        lottoGame.start(lottoCount, lottoNumberRepository);
 
         LottoResult lottoResult = lottoGame.getLottoResult();
         LottoOutView.show(lottoResult.getLottosView());
