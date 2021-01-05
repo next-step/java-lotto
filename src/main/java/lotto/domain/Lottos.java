@@ -18,15 +18,6 @@ public class Lottos {
         return matchResults;
     }
 
-    public List<Boolean> isBonus(WinningLotto winningLotto) {
-        List<Boolean> isBonusess = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            isBonusess.add(lotto.isBonus(winningLotto.getBonus()));
-        }
-
-        return isBonusess;
-    }
-
     public void add(Lotto lotto) {
         lottos.add(lotto);
     }

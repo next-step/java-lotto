@@ -69,10 +69,10 @@ public class LottoResult {
     }
 
     private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {
-        return String.format(setRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
+        return String.format(getRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
     }
 
-    private String setRankRewardMessage(Rank rank) {
+    private String getRankRewardMessage(Rank rank) {
         if (rank.isSecond()) {
             return SECOND_RANK_REWARD_MESSAGE;
         }
