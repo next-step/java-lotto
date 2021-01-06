@@ -11,7 +11,7 @@ public class LottoStatistics {
     private static final int MATCH_DEFAULT_COUNT = 0;
     private static final int MATCH_NUMBER_FIVE_CHECK = 5;
     private int matchCheckNumber;
-    Map<WinnerAmount, Integer> matchResult = new LinkedHashMap<>();
+    private final Map<WinnerAmount, Integer> matchResult = new LinkedHashMap<>();
 
     public double rateOfReturn(int winningAmount, int purchaseAmount) {
          return BigDecimal.valueOf((double) winningAmount / (double) purchaseAmount).setScale(TWO_DECIMAL,RoundingMode.DOWN).doubleValue();
