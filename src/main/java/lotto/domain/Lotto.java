@@ -21,9 +21,23 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoTicket buyLottoTicket() {
+    public LottoTicket generateLottoTicket() {
         Collections.shuffle(lottoNumbers);
-
         return new LottoTicket(this.lottoNumbers.subList(0, LottoTicket.LOTTO_TICKET_NUMBER));
     }
+
+    private List<LottoTicket> getLottoTicket(int ticketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(generateLottoTicket());
+        }
+        return lottoTickets;
+    }
+
+    public List<LottoTicket> buyLottoTicket(int money) {
+        int ticketCount = LottoTicket.countPurchasable(money);
+        return getLottoTicket(ticketCount);
+    }
+
+
 }

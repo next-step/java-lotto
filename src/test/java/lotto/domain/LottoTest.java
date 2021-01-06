@@ -27,10 +27,24 @@ class LottoTest {
         Lotto lotto = new Lotto();
 
         //When
-        LottoTicket lottoNumbers = lotto.buyLottoTicket();
+        LottoTicket lottoNumbers = lotto.generateLottoTicket();
 
         //Then
         Assertions.assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("Lotto 구입하기")
+    void buy_lotto_ticket() {
+        //Given
+        int money = 14_000;
+        Lotto lotto = new Lotto();
+
+        //When
+        List<LottoTicket> lottoTickets = lotto.buyLottoTicket(money);
+
+        //Then
+        Assertions.assertThat(lottoTickets.size()).isEqualTo(14);
     }
 
 }

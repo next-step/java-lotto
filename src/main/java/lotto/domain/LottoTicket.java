@@ -9,12 +9,17 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     public static final int LOTTO_TICKET_NUMBER = 6;
+    public static final int LOTTO_TICKET_PRICE = 1_000;
     private final List<LottoNumber> list = new ArrayList<>();
 
     public LottoTicket(List<LottoNumber> subList) {
         validateSize(subList);
         validateDuplication(subList);
         this.list.addAll(subList);
+    }
+
+    public static int countPurchasable(int money) {
+        return money / LOTTO_TICKET_PRICE;
     }
 
     private void validateDuplication(List<LottoNumber> subList) {
