@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    private static final String BUY_MESSAGE = "개를 구매했습니다.";
+    private static final String BUY_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String COMMA_SEPARATOR = ",";
     private static final String START_BRACKET = "[";
     private static final String END_BRACKET = "]";
@@ -29,11 +29,8 @@ public class LottoResult {
         lottosView.append(getCreateLottoNumber());
     }
 
-    private StringBuilder getLottoBuyMessage() {
-        StringBuilder message = new StringBuilder();
-        message.append(Integer.toString(lottoCount.count()));
-        message.append(BUY_MESSAGE);
-        return message;
+    private String getLottoBuyMessage() {
+        return String.format(BUY_MESSAGE, lottoCount.manualCount(), lottoCount.autoCount());
     }
 
     public StringBuilder getCreateLottoNumber() {
@@ -65,14 +62,14 @@ public class LottoResult {
                 .filter(rank -> !rank.isNothing())
                 .forEach(rank -> statisticView.append(getRankRewardMessage(lottoStatistic, rank)));
         statisticView.append(getProfitMessage(lottoStatistic));
-        return  statisticView;
+        return statisticView;
     }
 
     private String getRankRewardMessage(LottoStatistic lottoStatistic, Rank rank) {
-        return String.format(setRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
+        return String.format(getRankRewardMessage(rank), rank.getMatchCount(), rank.getMoney(), lottoStatistic.rankCount().getOrDefault(rank, 0));
     }
 
-    private String setRankRewardMessage(Rank rank) {
+    private String getRankRewardMessage(Rank rank) {
         if (rank.isSecond()) {
             return SECOND_RANK_REWARD_MESSAGE;
         }
