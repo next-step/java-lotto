@@ -11,10 +11,8 @@ class LottoNumberTest {
     void create_test() throws Exception {
         //Given
         LottoNumber lottoNumber = new LottoNumber(1);
-
         //When
         Integer number = lottoNumber.getNumber();
-
         //Then
         assertThat(number).isEqualTo(1);
     }

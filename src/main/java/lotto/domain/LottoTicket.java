@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class LottoTicket {
         validateSize(subList);
         validateDuplication(subList);
         this.list.addAll(subList);
+        Collections.sort(this.list);
     }
 
     public static int countPurchasable(int money) {
@@ -42,5 +44,26 @@ public class LottoTicket {
 
     public int size() {
         return this.list.size();
+    }
+
+    public String joiningResult() {
+        return this.list
+            .stream()
+            .map(lottoNumber -> lottoNumber.getNumber().toString())
+            .collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+            "list=" + list +
+            '}';
+    }
+
+    public boolean contain(LottoNumber lottoNumber) {
+        long count = this.list.stream()
+            .filter(lottoNumber1 -> lottoNumber1.equals(lottoNumber))
+            .count();
+        return count > 0;
     }
 }

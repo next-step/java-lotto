@@ -39,5 +39,4 @@ public class Lotto {
         return getLottoTicket(ticketCount);
     }
 
-
 }

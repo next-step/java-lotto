@@ -17,10 +17,8 @@ class LottoTicketTest {
             new LottoNumber(5),
             new LottoNumber(6)
         );
-
         //When
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
         //Then
         Assertions.assertThat(lottoTicket.size()).isEqualTo(6);
     }
@@ -34,7 +32,6 @@ class LottoTicketTest {
             new LottoNumber(4),
             new LottoNumber(5)
         );
-
         //When and Then
         Assertions.assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
@@ -52,7 +49,6 @@ class LottoTicketTest {
             new LottoNumber(5),
             new LottoNumber(5)
         );
-
         //When and Then
         Assertions.assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(lottoNumbers);

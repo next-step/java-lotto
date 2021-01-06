@@ -12,10 +12,8 @@ class LottoTest {
     void generate_lotto_numbers() throws Exception {
         //Given
         Lotto lotto = new Lotto();
-
         //When
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-
         //Then
         Assertions.assertThat(lottoNumbers.size()).isEqualTo(46);
     }
@@ -25,10 +23,8 @@ class LottoTest {
     void validate_lotto_ticket_number() throws Exception {
         //Given
         Lotto lotto = new Lotto();
-
         //When
         LottoTicket lottoNumbers = lotto.generateLottoTicket();
-
         //Then
         Assertions.assertThat(lottoNumbers.size()).isEqualTo(6);
     }
@@ -39,10 +35,8 @@ class LottoTest {
         //Given
         int money = 14_000;
         Lotto lotto = new Lotto();
-
         //When
         List<LottoTicket> lottoTickets = lotto.buyLottoTicket(money);
-
         //Then
         Assertions.assertThat(lottoTickets.size()).isEqualTo(14);
     }
