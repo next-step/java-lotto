@@ -26,7 +26,7 @@ class WinnerAmountTest {
     @Test
     @DisplayName("2등 당첨 확인")
     void secondPlace() {
-        WinnerAmount winnerAmount = WinnerAmount.matchSecond();
+        WinnerAmount winnerAmount = WinnerAmount.SECOND;
         assertThat(winnerAmount.getPrize()).isEqualTo(parseInt("30000000"));
         assertThat(winnerAmount.getMessage()).isEqualTo("5개 일치 보너스 볼 일치");
     }

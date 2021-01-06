@@ -27,8 +27,8 @@ public enum WinnerAmount {
                 .orElse(ZERO);
     }
 
-    public static WinnerAmount matchSecond() {
-        return SECOND;
+    public static boolean validateMatchSecond(int matchCheckNumber) {
+        return matchCheckNumber == WinnerAmount.SECOND.match;
     }
 
     public int getPrize() {
