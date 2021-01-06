@@ -13,6 +13,11 @@ public class InputView {
         return inputIntScanner();
     }
 
+    public static int inputBonusNumber() {
+        System.out.println(Message.INPUT_BONUS_NUMBER_MESSAGE);
+        return inputIntScanner();
+    }
+
     private static int inputIntScanner() {
         return SCANNER.nextInt();
     }

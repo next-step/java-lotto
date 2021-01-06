@@ -10,13 +10,22 @@ import java.util.List;
 
 public class LottoWinnerNumber {
     private static final String COMMA = ",";
-    private List<Number> winnerNumbers = new ArrayList<>();
+    private final List<Number> winnerNumbers = new ArrayList<>();
+    private Number bonusNumber;
 
     public LottoWinnerNumber() {
     }
 
-    public LottoWinnerNumber(List<Number> winnerNumbers) {
-        this.winnerNumbers = winnerNumbers;
+    public LottoWinnerNumber(String winnerNumbers, int bonusNumber) {
+        splitStringNumbers(winnerNumbers);
+        this.bonusNumber = overlapCheck(LottoNumber.of(bonusNumber));
+    }
+
+    private Number overlapCheck(Number bonusNumber) {
+        if(winnerNumbers.contains(bonusNumber)) {
+            CommonException.NumberOverlapException(Message.BONUS_NUMBER_OVERLAP_MESSAGE);
+        }
+        return bonusNumber;
     }
 
     public void splitStringNumbers(String inputPrizeNumbers) {
@@ -44,5 +53,9 @@ public class LottoWinnerNumber {
 
     public int winnerNumberLength() {
         return winnerNumbers.size();
+    }
+
+    public boolean checkBonusNumberContains(List<Number> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

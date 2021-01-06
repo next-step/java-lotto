@@ -27,18 +27,36 @@ class LottoStatisticsTest {
     void confirmOfLottoNumber() {
         // given
         Lottos lottos = new Lottos(asList(
-                new Lotto(asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6))),
-                new Lotto(asList(new Number(7), new Number(8), new Number(9), new Number(10), new Number(11), new Number(12))),
-                new Lotto(asList(new Number(13), new Number(14), new Number(15), new Number(16), new Number(17), new Number(18))),
-                new Lotto(asList(new Number(19), new Number(20), new Number(21), new Number(22), new Number(23), new Number(24)))
+                new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                new Lotto(asList(LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12))),
+                new Lotto(asList(LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16), LottoNumber.of(17), LottoNumber.of(18))),
+                new Lotto(asList(LottoNumber.of(19), LottoNumber.of(20), LottoNumber.of(21), LottoNumber.of(22), LottoNumber.of(23), LottoNumber.of(24)))
         ));
-        LottoWinnerNumber randomNumber = new LottoWinnerNumber(asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)));
+        LottoWinnerNumber randomNumber = new LottoWinnerNumber("1,2,3,4,5,6",7);
 
         // when
         lottoStatistics.confirmOfLottoNumber(lottos,randomNumber);
 
         // then
         assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.FIRST)).isEqualTo(1);
+    }
 
+    @Test
+    @DisplayName("2등 당첨 결과 확인")
+    void secondPlace() {
+        // given
+        Lottos lottos = new Lottos(asList(
+                new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))),
+                new Lotto(asList(LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12))),
+                new Lotto(asList(LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16), LottoNumber.of(17), LottoNumber.of(18))),
+                new Lotto(asList(LottoNumber.of(19), LottoNumber.of(20), LottoNumber.of(21), LottoNumber.of(22), LottoNumber.of(23), LottoNumber.of(24)))
+        ));
+        LottoWinnerNumber randomNumber = new LottoWinnerNumber("1,2,3,4,5,6",7);
+
+        // when
+        lottoStatistics.confirmOfLottoNumber(lottos,randomNumber);
+
+        // then
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.SECOND)).isEqualTo(1);
     }
 }

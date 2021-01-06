@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,9 +18,17 @@ class WinnerAmountTest {
             },delimiter = '=')
     @DisplayName("당첨개수에 따른 결과값")
     void matchCheck(String match, String prize, String message) {
-        WinnerAmount winnerAmount = WinnerAmount.matchCheck(parseInt(match));
+        WinnerAmount winnerAmount = WinnerAmount.matchCheck(parseInt(match), false);
         assertThat(winnerAmount.getPrize()).isEqualTo(parseInt(prize));
         assertThat(winnerAmount.getMessage()).isEqualTo(message);
+    }
+
+    @Test
+    @DisplayName("2등 당첨 확인")
+    void secondPlace() {
+        WinnerAmount winnerAmount = WinnerAmount.SECOND;
+        assertThat(winnerAmount.getPrize()).isEqualTo(parseInt("30000000"));
+        assertThat(winnerAmount.getMessage()).isEqualTo("5개 일치 보너스 볼 일치");
     }
 
     private int parseInt(String value) {
