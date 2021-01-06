@@ -88,4 +88,12 @@ class LottoTest {
                 .map(LottoNumber::new).collect(Collectors.toSet());
         return lottoNumberSet;
     }
+
+    @Test
+    void compareContain(){
+        Set<LottoNumber> set = new HashSet<>();
+        set.add(new LottoNumber(5));
+        boolean contains = set.contains(new BonusNumber(5).getLottoNumber());
+        assertThat(contains).isTrue();
+    }
 }
