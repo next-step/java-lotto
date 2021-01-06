@@ -11,12 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGameTest {
     private LottoGame lottoGame;
-    int count;
 
     @BeforeEach
     void setUp() {
         lottoGame = new LottoGame();
-        int count = 0;
     }
 
     @Test

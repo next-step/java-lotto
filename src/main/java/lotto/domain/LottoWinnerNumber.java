@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LottoWinnerNumber {
     private static final String COMMA = ",";
-    private List<Number> winnerNumbers = new ArrayList<>();
+    private final List<Number> winnerNumbers = new ArrayList<>();
     private Number bonusNumber;
 
     public LottoWinnerNumber() {
