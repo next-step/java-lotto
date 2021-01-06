@@ -1,6 +1,6 @@
 package secondplacelotto.model;
 
-import secondplacelotto.exception.isNotScopeInTheNumberException;
+import secondplacelotto.exception.IsNotScopeInTheNumberException;
 
 public class BonusNumber {
     
@@ -9,7 +9,7 @@ public class BonusNumber {
     
     public BonusNumber(int number){
         if (!(0 < number && number < 46)) {
-           throw new isNotScopeInTheNumberException("보너스번호는 1부터 45까지 가능합니다");
+           throw new IsNotScopeInTheNumberException("보너스번호는 1부터 45까지 가능합니다");
         }
 
         this.number = number;

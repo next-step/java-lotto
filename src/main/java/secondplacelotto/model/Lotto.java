@@ -1,6 +1,6 @@
 package secondplacelotto.model;
 
-import secondplacelotto.exception.isNotScopeInTheNumberException;
+import secondplacelotto.exception.IsNotScopeInTheNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Lotto {
         int winningNumber = Integer.parseInt(stringWinningNumber);
 
         if (!(1 <= winningNumber && winningNumber <= 45)) {
-            throw new isNotScopeInTheNumberException("로또 번호는 1부터 45까지의 숫자만 가능합니다");
+            throw new IsNotScopeInTheNumberException("로또 번호는 1부터 45까지의 숫자만 가능합니다");
         }
 
         return winningNumber;

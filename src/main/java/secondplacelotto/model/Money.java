@@ -1,6 +1,6 @@
 package secondplacelotto.model;
 
-import secondplacelotto.exception.isNotEnoughMoneyException;
+import secondplacelotto.exception.IsNotEnoughMoneyException;
 
 public class Money {
 
@@ -9,7 +9,7 @@ public class Money {
     public Money(int value){
 
         if(value < 1000) {
-            throw new isNotEnoughMoneyException("입력한 돈이 충분하지 않습니다");
+            throw new IsNotEnoughMoneyException("입력한 돈이 충분하지 않습니다");
         }
 
         this.value = value;

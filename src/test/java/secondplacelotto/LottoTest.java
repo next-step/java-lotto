@@ -2,7 +2,7 @@ package secondplacelotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import secondplacelotto.exception.isNotScopeInTheNumberException;
+import secondplacelotto.exception.IsNotScopeInTheNumberException;
 import secondplacelotto.model.Lotto;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,7 +14,7 @@ public class LottoTest {
     public void createLottoException() {
         String[] numbers = {"0","1","2","3","4","5"};
 
-        assertThrows(isNotScopeInTheNumberException.class, () ->
+        assertThrows(IsNotScopeInTheNumberException.class, () ->
                 new Lotto(numbers));
 
     }
