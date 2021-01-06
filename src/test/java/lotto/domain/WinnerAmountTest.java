@@ -18,7 +18,7 @@ class WinnerAmountTest {
             },delimiter = '=')
     @DisplayName("당첨개수에 따른 결과값")
     void matchCheck(String match, String prize, String message) {
-        WinnerAmount winnerAmount = WinnerAmount.matchCheck(parseInt(match));
+        WinnerAmount winnerAmount = WinnerAmount.matchCheck(parseInt(match), false);
         assertThat(winnerAmount.getPrize()).isEqualTo(parseInt(prize));
         assertThat(winnerAmount.getMessage()).isEqualTo(message);
     }

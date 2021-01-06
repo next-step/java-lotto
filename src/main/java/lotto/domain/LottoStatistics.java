@@ -30,11 +30,7 @@ public class LottoStatistics {
     }
 
     private void matchWinnerAmount(LottoWinnerNumber lottoWinnerNumber, List<Number> numbers) {
-        matchCheckNumber = matchLottoNumberCheck(lottoWinnerNumber, numbers);
-        if(WinnerAmount.validateMatchSecond(matchCheckNumber) && lottoWinnerNumber.bonusNumberContains(numbers)) {
-            mapCount(WinnerAmount.SECOND);
-        }
-        mapCount(WinnerAmount.matchCheck(matchCheckNumber));
+        mapCount(WinnerAmount.matchCheck(matchLottoNumberCheck(lottoWinnerNumber, numbers), lottoWinnerNumber.checkBonusNumberContains(numbers)));
     }
 
     private void mapCount(WinnerAmount winnerAmountObject) {

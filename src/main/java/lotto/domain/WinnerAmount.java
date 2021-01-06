@@ -20,15 +20,15 @@ public enum WinnerAmount {
         this.message = message;
     }
 
-    public static WinnerAmount matchCheck(int matchNumber) {
+    public static WinnerAmount matchCheck(int matchNumber, boolean checkResult) {
+        if(checkResult && matchNumber == WinnerAmount.SECOND.match) {
+            return SECOND;
+        }
+
         return Arrays.stream(WinnerAmount.values())
                 .filter(s -> s.match == matchNumber)
                 .findAny()
                 .orElse(ZERO);
-    }
-
-    public static boolean validateMatchSecond(int matchCheckNumber) {
-        return matchCheckNumber == WinnerAmount.SECOND.match;
     }
 
     public int getPrize() {

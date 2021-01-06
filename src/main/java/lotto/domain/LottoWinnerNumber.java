@@ -55,7 +55,7 @@ public class LottoWinnerNumber {
         return winnerNumbers.size();
     }
 
-    public boolean bonusNumberContains(List<Number> numbers) {
+    public boolean checkBonusNumberContains(List<Number> numbers) {
         return numbers.contains(bonusNumber);
     }
 }
