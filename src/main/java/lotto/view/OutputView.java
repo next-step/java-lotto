@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoLotteries;
 import lotto.domain.LottoLottery;
 import lotto.domain.LottoRank;
@@ -41,14 +42,15 @@ public class OutputView {
 	private static void printLottoResult(LottoResult lottoResult) {
 		LottoRank lottoRank = lottoResult.getLottoRank();
 
-		System.out.printf(Message.LOTTO_RESULT_FORMAT, lottoRank.getText(), lottoRank.getPrize(), lottoResult.getWinnerCount());
+		System.out.printf(Message.LOTTO_RESULT_FORMAT, lottoRank.getText(), lottoRank.getPrize(),
+			lottoResult.getWinnerCount());
 	}
 
 	private static void printReturnRate(LottoResults lottoResults) {
 		System.out.printf(Message.LOTTO_RETURN_RATE_FORMAT, lottoResults.calculateReturnRate());
 	}
 
-	public static void printLottoCounts(int manualCount, int autoCount) {
-		System.out.printf(Message.LOTTO_COUNTS_FORMAT, manualCount, autoCount);
+	public static void printLottoCounts(LottoCount lottoCount) {
+		System.out.printf(Message.LOTTO_COUNTS_FORMAT, lottoCount.getManualCount(), lottoCount.getAutoCount());
 	}
 }
