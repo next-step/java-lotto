@@ -58,6 +58,6 @@ public class InputView {
 	private static LottoNumber waitInputBonusNumber() {
 		System.out.println(Message.INPUT_BONUS_BALL_NUMBER);
 
-		return new LottoNumber(waitInputNumber());
+		return LottoNumber.of(waitInputNumber());
 	}
 }

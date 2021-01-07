@@ -13,7 +13,7 @@ class DefaultMatchStrategyTest {
 	@Test
 	void isMatch_true_test() {
 		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,7,8"),
-			new LottoNumber(6));
+			LottoNumber.of(6));
 
 		assertThat(defaultMatchStrategy.isMatch(lottoLottery, winLottoNumbers)).isTrue();
 	}
@@ -21,7 +21,7 @@ class DefaultMatchStrategyTest {
 	@Test
 	void isMatch_false_test() {
 		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,6,8"),
-			new LottoNumber(6));
+			LottoNumber.of(6));
 
 		assertThat(defaultMatchStrategy.isMatch(lottoLottery, winLottoNumbers)).isFalse();
 	}

@@ -14,7 +14,7 @@ class WinLottoNumbersTest {
 
 	@BeforeEach
 	void setUp() {
-		winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,5,6"), new LottoNumber(7));
+		winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,5,6"), LottoNumber.of(7));
 	}
 
 	@Test
