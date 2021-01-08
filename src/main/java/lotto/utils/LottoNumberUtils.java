@@ -24,7 +24,7 @@ public class LottoNumberUtils {
 		return Arrays.stream(strings)
 			.map(String::trim)
 			.map(LottoNumberUtils::parseInt)
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 

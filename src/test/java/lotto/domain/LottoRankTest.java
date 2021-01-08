@@ -13,7 +13,7 @@ class LottoRankTest {
 	void findMatchRank_test() {
 		LottoLottery lottoLottery = new LottoLottery(LottoNumberUtils.mapToListByComma("1,2,3,4,5,6"));
 		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,11,12,13"),
-			new LottoNumber(6));
+			LottoNumber.of(6));
 
 		assertThat(LottoRank.findMatchRank(lottoLottery, winLottoNumbers))
 			.isEqualTo(LottoRank.FIFTH_PLACE);
@@ -31,7 +31,7 @@ class LottoRankTest {
 	void findMatchRank_second_place_test() {
 		LottoLottery lottoLottery = new LottoLottery(LottoNumberUtils.mapToListByComma("1,2,3,4,5,6"));
 		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,5,10"),
-			new LottoNumber(6));
+			LottoNumber.of(6));
 
 		assertThat(LottoRank.findMatchRank(lottoLottery, winLottoNumbers))
 			.isEqualTo(LottoRank.SECOND_PLACE);

@@ -12,4 +12,8 @@ public interface Message {
 	String INVALID_LOTTO_NUMBER_COUNT = "로또 숫자는 6개 이어야 합니다.";
 	String INPUT_LAST_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.(ex. 1,2,3,4,5,6)";
 	String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
+	String LOTTO_COUNTS_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+	String LOTTO_RETURN_RATE_FORMAT = "총 수익률은 %.2f입니다.";
+	String LOTTO_RESULT_FORMAT = "%s (%d원)- %d개\n";
+	String RESULT_STATS = "\n당첨 통계";
 }

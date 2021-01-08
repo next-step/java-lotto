@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoLotteries;
 import lotto.domain.LottoLottery;
 import lotto.domain.LottoRank;
@@ -14,13 +15,8 @@ import lotto.domain.Message;
 public class OutputView {
 
 	public static void printLottoLotteries(LottoLotteries lottoLotteries) {
-		printLottoCount(lottoLotteries.getCount());
 		printLottoLotteries(lottoLotteries.getLottoLotteries());
 		System.out.println();
-	}
-
-	private static void printLottoCount(int count) {
-		System.out.printf(Message.PRINT_NUMBER_OF_LOTTO_PURCHASED, count);
 	}
 
 	private static void printLottoLotteries(List<LottoLottery> lottoLotteries) {
@@ -35,7 +31,7 @@ public class OutputView {
 	}
 
 	private static void printLottoResultsStats(LottoResults lottoResults) {
-		System.out.println("\n당첨 통계");
+		System.out.println(Message.RESULT_STATS);
 		System.out.println("---------");
 		Arrays.stream(LottoRank.values())
 			.sorted(Comparator.comparingInt(LottoRank::getPrize))
@@ -46,10 +42,15 @@ public class OutputView {
 	private static void printLottoResult(LottoResult lottoResult) {
 		LottoRank lottoRank = lottoResult.getLottoRank();
 
-		System.out.printf("%s (%d원)- %d개\n", lottoRank.getText(), lottoRank.getPrize(), lottoResult.getWinnerCount());
+		System.out.printf(Message.LOTTO_RESULT_FORMAT, lottoRank.getText(), lottoRank.getPrize(),
+			lottoResult.getWinnerCount());
 	}
 
 	private static void printReturnRate(LottoResults lottoResults) {
-		System.out.printf("총 수익률은 %.2f입니다.", lottoResults.calculateReturnRate());
+		System.out.printf(Message.LOTTO_RETURN_RATE_FORMAT, lottoResults.calculateReturnRate());
+	}
+
+	public static void printLottoCounts(LottoCount lottoCount) {
+		System.out.printf(Message.LOTTO_COUNTS_FORMAT, lottoCount.getManualCount(), lottoCount.getAutoCount());
 	}
 }

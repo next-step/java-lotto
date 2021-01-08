@@ -35,7 +35,7 @@ public class LottoLotteriesTest {
 			)
 		);
 		WinLottoNumbers winLottoNumbers = new WinLottoNumbers(LottoNumberUtils.mapToListByComma("1,2,3,4,31,32"),
-			new LottoNumber(6));
+			LottoNumber.of(6));
 
 		assertThat(lottoLotteries.checkLottoRanks(winLottoNumbers))
 			.hasSize(3)
