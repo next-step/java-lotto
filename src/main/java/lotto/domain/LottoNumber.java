@@ -5,6 +5,7 @@ import java.util.*;
 public class LottoNumber {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_LENGTH = 6;
     public static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int number;
 
@@ -25,6 +26,17 @@ public class LottoNumber {
     public static LottoNumber of(int number) {
         return Optional.ofNullable(lottoNumbers.get(number))
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public static List<Integer> makeLotto() {
+        List<Integer> autoLottoNumbers = new ArrayList<>();
+        lottoNumbers.forEach((number, lotto) -> autoLottoNumbers.add(number));
+
+        Collections.shuffle(autoLottoNumbers);
+        List<Integer> numbers = new ArrayList<>(autoLottoNumbers.subList(0, LOTTO_LENGTH));
+        Collections.sort(numbers);
+
+        return numbers;
     }
 
     @Override

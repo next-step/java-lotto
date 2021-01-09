@@ -25,4 +25,9 @@ class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.of(1);
         assertThat(LottoNumber.of(1) == lottoNumber).isTrue();
     }
+
+    @Test
+    void makeLottoTest() {
+        assertThat(LottoNumber.makeLotto().size()).isEqualTo(6);
+    }
 }

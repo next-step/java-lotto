@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberGenerator;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,7 +17,7 @@ public class Lottos {
         int autoSize = money / PER_MONEY - manualLottoSize;
 
         for (int i = 0; i < autoSize; i++) {
-            addLotto(new Lotto(LottoNumberGenerator.makeLotto()));
+            addLotto(new Lotto(LottoNumber.makeLotto()));
         }
 
         return this.lottos;
