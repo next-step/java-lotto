@@ -3,14 +3,17 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class WinnerLottoTicketTest {
 
-    @Test
-    void winner_lotto_ticket_validation() throws Exception {
-        //Given
-        String wrongInput = "1,  2, 3, 4, 5";
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "2, 4, 6, 7", "3, 4, 5", "1,2", "1 "})
+    void winner_lotto_ticket_validation(String wrongInput) throws Exception {
+        System.out.println(wrongInput);
         //When
         //Then
         Assertions.assertThatThrownBy(() -> {
@@ -18,10 +21,11 @@ class WinnerLottoTicketTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void winner_match_ticket() throws Exception {
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "1, 2, 3, 4, 5, 7:5", "1, 2, 3, 4, 8, 7:4"
+        ,"1, 2, 3, 9, 8, 7:3"}, delimiter = ':')
+    void winner_match_ticket(String input, int result) throws Exception {
         //Given
-        String input = "1,2,3,4,5,6";
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -32,7 +36,7 @@ class WinnerLottoTicketTest {
         WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(input);
         LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
         //Then
-        Assertions.assertThat(6).isEqualTo(winnerLottoTicket.checkResult(lottoTicket));
+        Assertions.assertThat(result).isEqualTo(winnerLottoTicket.checkResult(lottoTicket));
     }
 
 }

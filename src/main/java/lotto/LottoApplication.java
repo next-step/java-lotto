@@ -1,8 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.WinnerLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,8 +14,8 @@ public class LottoApplication {
         InputView inputView = new InputView();
         Integer input = inputView.inputLottoMoney();
 
-        Lotto lotto = new Lotto();
-        List<LottoTicket> lottoTickets = lotto.buyLottoTicket(input);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoTickets lottoTickets = new LottoTickets(lottoGenerator.buyLottoTicket(input));
 
         OutputView outputView = new OutputView();
         outputView.printLottoTicket(lottoTickets);

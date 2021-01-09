@@ -3,22 +3,24 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class Lotto {
+public class LottoGenerator {
 
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 46;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public Lotto() {
+    public LottoGenerator() {
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
             this.lottoNumbers.add(new LottoNumber(i));
         }
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public LottoTicket generateLottoTicket() {
@@ -27,11 +29,9 @@ public class Lotto {
     }
 
     private List<LottoTicket> getLottoTicket(int ticketCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            lottoTickets.add(generateLottoTicket());
-        }
-        return lottoTickets;
+        return Stream.generate(this::generateLottoTicket)
+            .limit(ticketCount)
+            .collect(Collectors.toList());
     }
 
     public List<LottoTicket> buyLottoTicket(int money) {
