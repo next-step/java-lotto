@@ -23,12 +23,6 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("로또 구매 개수 테스트")
-    void createLotto() {
-        assertThat(lottoGame.createLottoNumber(15).buyLottoCount()).isEqualTo(15);
-    }
-
-    @Test
     @DisplayName("당첨 번호 생성 길이 체크 테스트")
     void createWinnerNumbers() {
         assertThat(lottoGame.createWinnerNumbers("1,2,3,4,5,6", 7).winnerNumberLength()).isEqualTo(6);
@@ -36,7 +30,7 @@ class LottoGameTest {
 
     @Test
     @DisplayName("등수별 당첨 통합 테스트")
-    void winnerSecondIntegration() {
+    void winnerIntegration() {
         LottoStatistics lottoStatistics = lottoGame.statistics(
                 new Lottos(asList(
                         new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
@@ -57,4 +51,36 @@ class LottoGameTest {
         assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.ZERO)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("자동 및 수동 입력 통합 테스트")
+    void manualAndAuto() {
+        Lottos lottos = new Lottos();
+        lottos.combineLotto(
+                new Lottos(asList(
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(8))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(11), LottoNumber.of(10))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(12), LottoNumber.of(11), LottoNumber.of(10))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(13), LottoNumber.of(12), LottoNumber.of(11), LottoNumber.of(10)))
+                )),
+                new Lottos(asList(
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(8))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(11), LottoNumber.of(10))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(12), LottoNumber.of(11), LottoNumber.of(10))),
+                        new Lotto(asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(13), LottoNumber.of(12), LottoNumber.of(11), LottoNumber.of(10)))
+                ))
+        );
+
+        LottoStatistics lottoStatistics = lottoGame.statistics(lottos, lottoGame.createWinnerNumbers("1,2,3,4,5,7", 6));
+
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.FIRST)).isEqualTo(2);
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.SECOND)).isEqualTo(2);
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.THIRD)).isEqualTo(2);
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.FORTH)).isEqualTo(2);
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.FIFTH)).isEqualTo(2);
+        assertThat(lottoStatistics.getMatchResult().get(WinnerAmount.ZERO)).isEqualTo(2);
+    }
 }
