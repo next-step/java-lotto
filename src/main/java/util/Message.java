@@ -9,4 +9,6 @@ public class Message {
     public static final String NUMBER_LENGTH_EXCESS = "당첨번호 숫자는 6자리여야 합니다.";
     public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
     public static final String BONUS_NUMBER_OVERLAP_MESSAGE = "당첨 번호와 보너스 번호가 중복됩니다.";
+    public static final String INPUT_BUY_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_BUY_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 }

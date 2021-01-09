@@ -1,23 +1,18 @@
 package lotto.domain;
 
-import util.CommonConstants;
 import util.CommonException;
 import util.Message;
+import util.Splitter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoWinnerNumber {
-    private static final String COMMA = ",";
     private final List<Number> winnerNumbers = new ArrayList<>();
     private Number bonusNumber;
 
-    public LottoWinnerNumber() {
-    }
-
-    public LottoWinnerNumber(String winnerNumbers, int bonusNumber) {
-        splitStringNumbers(winnerNumbers);
+    public LottoWinnerNumber(String stringWinnerNumbers, int bonusNumber) {
+        winnerNumbers.addAll(Splitter.SplitStringNumbers(stringWinnerNumbers));
         this.bonusNumber = overlapCheck(LottoNumber.of(bonusNumber));
     }
 
@@ -26,24 +21,6 @@ public class LottoWinnerNumber {
             CommonException.NumberOverlapException(Message.BONUS_NUMBER_OVERLAP_MESSAGE);
         }
         return bonusNumber;
-    }
-
-    public void splitStringNumbers(String inputPrizeNumbers) {
-        String[] numbers = inputPrizeNumbers.trim().split(COMMA);
-        validateInputNumber(numbers);
-        createWinnerNumbers(numbers);
-    }
-
-    private void validateInputNumber(String[] numbers) {
-        if(numbers.length != CommonConstants.NUMBER_LENGTH_MAX) {
-            CommonException.IllegalArgumentException(Message.NUMBER_LENGTH_EXCESS);
-        }
-    }
-
-    private void createWinnerNumbers(String[] numbers) {
-        Arrays.stream(numbers)
-        .mapToInt(Integer::parseInt)
-        .forEach(number -> winnerNumbers.add(LottoNumber.of(number)));
     }
 
     public boolean validateContainsNumber(Number number) {
