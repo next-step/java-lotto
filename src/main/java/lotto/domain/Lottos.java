@@ -8,20 +8,27 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Lottos {
-    private static final int PER_MONEY = 1000;
+    public static final int PER_MONEY = 1000;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
     }
 
-    public List<Lotto> makeLotto(int money) {
-        int totalAmount = money / PER_MONEY;
-        for (int i = 0; i < totalAmount; i++) {
+    public List<Lotto> makeLotto(int money, int manualLottoSize) {
+        int autoSize = money / PER_MONEY - manualLottoSize;
+
+        for (int i = 0; i < autoSize; i++) {
             addLotto(new Lotto(LottoNumberGenerator.makeLotto()));
         }
 
         return this.lottos;
+    }
+
+    public void addManualLotto(List<Lotto> manualLotto) {
+        for (Lotto lotto : manualLotto) {
+            addLotto(lotto);
+        }
     }
 
     public List<Rank> matchOfRanks(WinningLotto winningLotto) {
