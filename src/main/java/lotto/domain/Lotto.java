@@ -6,9 +6,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumber.LOTTO_LENGTH;
+
 public class Lotto {
     private final Set<LottoNumber> lotto = new HashSet<>();
-    private static final int LOTTO_LENGTH = 6;
 
     public Lotto(List<Integer> lotto) {
         for (Integer number : lotto) {
