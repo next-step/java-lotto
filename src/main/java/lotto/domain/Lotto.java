@@ -6,13 +6,14 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumber.LOTTO_LENGTH;
+
 public class Lotto {
     private final Set<LottoNumber> lotto = new HashSet<>();
-    private static final int LOTTO_LENGTH = 6;
 
     public Lotto(List<Integer> lotto) {
         for (Integer number : lotto) {
-            this.lotto.add(new LottoNumber(number));
+            this.lotto.add(LottoNumber.of(number));
         }
 
         if(this.lotto.size() != LOTTO_LENGTH) {
@@ -21,14 +22,7 @@ public class Lotto {
     }
 
     public long match(Lotto winningLotto) {
-        long count = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            if (winningLotto.contains(lottoNumber)) {
-                count++;
-            }
-        }
-
-        return count;
+        return lotto.stream().filter(winningLotto::contains).count();
     }
 
     public boolean contains(LottoNumber lottoNumber) {

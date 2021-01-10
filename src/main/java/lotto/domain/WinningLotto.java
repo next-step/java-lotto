@@ -10,7 +10,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> lotto, int bonusNo) {
         this.lotto = new Lotto(lotto);
-        this.bonusNo = new LottoNumber(bonusNo);
+        this.bonusNo = LottoNumber.of(bonusNo);
 
         if(this.lotto.contains(this.bonusNo)) {
             throw new IllegalArgumentException("보너스 번호는 로또번호와 중복될 수 없습니다.");
