@@ -15,16 +15,17 @@ public class LottoNumber {
         }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
-    }
-
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
     }
 
     public static LottoNumber of(int number) {
         return Optional.ofNullable(lottoNumbers.get(number))
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public static LottoNumber of(String number) {
+        return Optional.ofNullable(lottoNumbers.get(Integer.parseInt(number)))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
