@@ -49,12 +49,12 @@ public class Lotto {
     }
 
     protected int checkLastWinningNumberSet(String lastWinningNumber) {
-        Set<LottoNumber> winnerNumbers = NumberUtil.convertStringToIntegerList(lastWinningNumber).stream()
-                .map(LottoNumber::new).collect(Collectors.toSet());
+        Set<LottoNumber> winnerNumbers = NumberUtil.convertStringLottoNumbers(lastWinningNumber);
         int matchCount = compareMatchCount(winnerNumbers);
 
         return matchCount;
     }
+
 
     private int compareMatchCount(Set<LottoNumber> winnerNumbers) {
         int matchNumber = 0;
@@ -78,4 +78,15 @@ public class Lotto {
     public HashSet<LottoNumber> showLottoNumber() {
         return new HashSet<>(this.lottoNumbers);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Lotto)) return false;
+        if(o instanceof Lotto){
+            int matchCount = ((Lotto) o).compareMatchCount(this.lottoNumbers);
+            return matchCount==size? true:false;
+        }
+        return true;
+    }
+
 }

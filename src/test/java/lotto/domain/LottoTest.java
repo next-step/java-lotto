@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.NumberUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,8 +48,6 @@ class LottoTest {
 
     }
 
-
-
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,8,9,6", "1,2,3,8,9,11"})
     void checkLastWinningNumber(String lastWinnerNumber){
@@ -95,5 +94,14 @@ class LottoTest {
         set.add(new LottoNumber(5));
         boolean contains = set.contains(new BonusNumber(5).getLottoNumber());
         assertThat(contains).isTrue();
+    }
+
+    @Test
+    void equalsLotto_Test() {
+        String numbers = "1,2,3,4,5,6";
+        Set<LottoNumber> lottoNumberSet = NumberUtil.convertStringLottoNumbers(numbers);
+        Lotto lotto = new Lotto(lottoNumberSet);
+        Lotto lotto1 = new Lotto(lottoNumberSet);
+        assertThat(lotto).isEqualTo(lotto1);
     }
 }
