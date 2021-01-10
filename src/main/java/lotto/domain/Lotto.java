@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.util.NumberUtil;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -24,7 +23,7 @@ public class Lotto {
         return this;
     }
 
-    public int numberOfLottoCount(){
+    public int numberOfLottoCount() {
         return this.lottoNumbers.size();
     }
 
@@ -33,13 +32,10 @@ public class Lotto {
         return this;
     }
 
-    public boolean checkBonusNumber( BonusNumber bonusNumber){
-        boolean containsBonusNumber = this.lottoNumbers.contains(bonusNumber);
+    public boolean checkBonusNumber(BonusNumber bonusNumber) {
+        LottoNumber bonuslottoNumber = bonusNumber.getLottoNumber();
+        boolean containsBonusNumber = this.lottoNumbers.contains(bonuslottoNumber);
         return containsBonusNumber;
-    }
-
-    public HashSet<LottoNumber> showLottoNumber(){
-        return new HashSet<>(this.lottoNumbers);
     }
 
     protected Set<LottoNumber> generateRandomNumbersSet() {
@@ -53,28 +49,44 @@ public class Lotto {
     }
 
     protected int checkLastWinningNumberSet(String lastWinningNumber) {
-        Set<LottoNumber> winnerNumbers = NumberUtil.convertStringToIntegerList(lastWinningNumber).stream()
-                .map(LottoNumber::new).collect(Collectors.toSet());
+        Set<LottoNumber> winnerNumbers = NumberUtil.convertStringLottoNumbers(lastWinningNumber);
         int matchCount = compareMatchCount(winnerNumbers);
 
         return matchCount;
     }
 
+
     private int compareMatchCount(Set<LottoNumber> winnerNumbers) {
         int matchNumber = 0;
         Iterator<LottoNumber> iterator = winnerNumbers.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             LottoNumber lastWinninglottoNumber = iterator.next();
-            matchNumber = matchNumber + containNumber( lastWinninglottoNumber);
-        };
+            matchNumber = matchNumber + containNumber(lastWinninglottoNumber);
+        }
+        ;
         return matchNumber;
     }
 
     private int containNumber(LottoNumber lastWinninglottoNumber) {
         boolean contains = this.lottoNumbers.contains(lastWinninglottoNumber);
-        if(contains){
+        if (contains) {
             return 1;
         }
         return 0;
     }
+
+    public HashSet<LottoNumber> showLottoNumber() {
+        return new HashSet<>(this.lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Lotto)) return false;
+        if(o instanceof Lotto){
+            int matchCount = ((Lotto) o).compareMatchCount(this.lottoNumbers);
+            return matchCount==size? true:false;
+        }
+        return true;
+    }
+
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import calculator.util.NumberUtil;
 import lotto.domain.*;
 import lotto.util.InputUtil;
 import lotto.view.DisplayView;
@@ -13,10 +14,19 @@ public class LottoMain {
         InputView.showInputMoneyInfo();
 
         String money = InputUtil.inputMoney();
+        lottoMachine.inputMoney(money);
+        DisplayView.showManualLotto();
+        String manualLottoSizeStr = InputUtil.enterManualLottoSize();
+        int manualLottoSizeNumber = NumberUtil.stringToInt(manualLottoSizeStr);
+        DisplayView.inputManualLottoNumber();
 
-        LottoBucket lottoBucket = lottoMachine.buyLotto(money);
-        int createLottoBucketCount = lottoBucket.getLottos().size();
-        DisplayView.exchangeLottoMsg(createLottoBucketCount);
+        for( int i = 0; i<manualLottoSizeNumber ; i++) {
+            String inputManualLottoNumber = InputUtil.inputManualLottoNumber();
+            lottoMachine.buyManualLotto(inputManualLottoNumber);
+        }
+        LottoBucket lottoBucket = lottoMachine.buyAutoLotto();
+
+        DisplayView.exchangeLottoMsg(lottoBucket.countOfManualLotto(),lottoBucket.countOfAutoLotto());
         DisplayView.showLottoBuckets(lottoMachine.getLottoBuckets());
 
         InputView.showInputLastWinningNumber();

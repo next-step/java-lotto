@@ -1,8 +1,12 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,11 +47,21 @@ public class NumberUtil {
         throw new IllegalArgumentException("로또 숫자는 6개 여야합니다.");
     }
 
+    public static Set<LottoNumber> convertStringLottoNumbers(String inputNumbers) {
+        List<Integer> intNumbers = NumberUtil.convertStringToIntegerList(inputNumbers);
+        return intNumbers.stream()
+                .map(LottoNumber::new).collect(Collectors.toSet());
+    }
+
     public static int convertStringToInteger(String newbonusNumber) {
         int parseInt = Integer.parseInt(newbonusNumber);
         if (parseInt < 0) {
             throw new RuntimeException(MINUS_VALUE_ERROR);
         }
         return parseInt;
+    }
+
+    public static long convertBigDecimalToLong(BigDecimal money) {
+        return money.longValue();
     }
 }

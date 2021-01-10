@@ -21,15 +21,13 @@ public enum WinningLottoType {
     }
 
     public static WinningLottoType valueOf(int matchCount, boolean isBonusNumber) {
-        if (matchCount < 3) return MATCH_ZERO;
         if (matchCount == MATCH_FIVE_BONUS.matchCount) {
             return isBonusNumber? MATCH_FIVE_BONUS : MATCH_FIVE;
         }
-        Predicate<WinningLottoType> filterMatchType = (type)-> type.matchCount == matchCount;
         return Arrays.stream(values())
-                .filter( filterMatchType)
+                .filter( (type)-> type.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow( ()-> new IllegalArgumentException("일치하는 타입이 없습니다."));
+                .orElse(MATCH_ZERO);
     }
 
     public long getWinnerMoney() {

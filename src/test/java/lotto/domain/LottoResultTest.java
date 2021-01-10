@@ -14,9 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoResultTest {
 
     private LottoResult lottoResult;
+    private BonusNumber bonusNumber;
     @BeforeEach
     void setup(){
         LottoBucket lottoBucket = new LottoBucket();
+        bonusNumber = new BonusNumber();
         lottoResult = new LottoResult(lottoBucket);
     }
 
@@ -29,11 +31,12 @@ class LottoResultTest {
         Lotto lotto = new Lotto().selectedNumber(lottoNumberSet);
         lottoBucket.addLotto( lotto);
         BonusNumber bonusNumber = new BonusNumber(lastWinningNumbers, inputBonusNumber);
-
         lottoResult = new LottoResult(lottoBucket);
         WinningLottos winningLottos = lottoResult.checkWinningNumbers(lastWinningNumbers, bonusNumber);
         BigDecimal winningMoney = winningLottos.amountOfWinning();
+
         long winnerMoney = WinningLottoType.MATCH_SIX.getWinnerMoney();
+
         assertThat(winningMoney).isEqualTo(new BigDecimal(winnerMoney));
     }
 
