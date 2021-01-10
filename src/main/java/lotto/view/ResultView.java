@@ -10,11 +10,8 @@ public class ResultView {
 
     private static int totalWinningAmount;
 
-    public static void printCoinAndRemainMoney(LottoMoney lottoMoney) {
-        System.out.printf("%d개를 구매했습니다. 거스름돈은 %d원 입니다.%n",lottoMoney.getCoin(),lottoMoney.getRemainMoney());
-    }
-
-    public static void printBuyLottoNumber(List<Lotto> buyLotto) {
+    public static void printBuyLottoNumber(List<Lotto> buyLotto, int manualSize, int autoSize) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator(), manualSize, autoSize);
         System.out.println(buyLotto.toString());
     }
 

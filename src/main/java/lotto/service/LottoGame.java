@@ -1,9 +1,9 @@
 package lotto.service;
 
-import lotto.domain.Lottos;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoWinnerNumber;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -30,15 +30,21 @@ public class LottoGame {
     }
 
     public Lottos createLottoNumber(int coin) {
-        Lottos lottos = new Lottos();
-        lottos.createAutoNumber(coin);
-        ResultView.printBuyLottoNumber(lottos.getLottoList());
-        return lottos;
+        Lottos manualLotto = createManualLotto(coin);
+        Lottos autoLotto = new Lottos();
+        autoLotto.createAutoNumber(coin - manualLotto.getLottoSize());
+        Lottos integrationLotto = new Lottos();
+        integrationLotto.combineLotto(manualLotto, autoLotto);
+        ResultView.printBuyLottoNumber(integrationLotto.getLottoList(), manualLotto.getLottoSize(), autoLotto.getLottoSize());
+        return integrationLotto;
+    }
+
+    public Lottos createManualLotto(int coin) {
+        return new Lottos(InputView.inputBuyManualLotto(coin));
     }
 
     public int changeCoin(int money) {
         lottoMoney = new LottoMoney(money);
-        ResultView.printCoinAndRemainMoney(lottoMoney);
         return lottoMoney.getCoin();
     }
 }
