@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numbers = new ArrayList<>();
+    private List<LottoNumber> numbers = new ArrayList<>();
     private int matchingCount;
 
     public Lotto(){
@@ -16,22 +16,16 @@ public class Lotto {
 
     public Lotto(String[] stringWinningNumbers){
         for (String stringWinningNumber : stringWinningNumbers) {
-            numbers.add(parseInt(stringWinningNumber));
+            numbers.add(new LottoNumber(parseInt(stringWinningNumber)));
         }
     }
 
     private int parseInt(String stringWinningNumber) {
-        int winningNumber = Integer.parseInt(stringWinningNumber);
-
-        if (!(1 <= winningNumber && winningNumber <= 45)) {
-            throw new IsNotScopeInTheNumberException("로또 번호는 1부터 45까지의 숫자만 가능합니다");
-        }
-
-        return winningNumber;
+        return Integer.parseInt(stringWinningNumber);
     }
 
     public void match(Lotto winningNumbers, BonusNumber bonusNumber){
-        for(int lottoNumber : numbers) {
+        for(LottoNumber lottoNumber : numbers) {
             matchWinningNumber(lottoNumber, winningNumbers, bonusNumber);
         }
 
@@ -40,11 +34,21 @@ public class Lotto {
         matchingCount = 0;
     }
 
-    public List<Integer> getNumberList() {
-        return numbers;
+    public String makeViewNumbers() {
+        StringBuilder stringNumbers = new StringBuilder();
+
+        stringNumbers.append("[");
+        stringNumbers.append(numbers.get(0).viewNumber());
+
+        for (int i = 1; i < numbers.size(); i++) {
+            stringNumbers.append(", ").append(numbers.get(i).viewNumber());
+        }
+
+        stringNumbers.append("]");
+        return stringNumbers.toString();
     }
 
-    private void matchWinningNumber(int lottoNumber, Lotto winningNumbers, BonusNumber bonusNumber){
+    private void matchWinningNumber(LottoNumber lottoNumber, Lotto winningNumbers, BonusNumber bonusNumber){
 
         for (int i = 0; i < winningNumbers.numbers.size(); i++) {
             matchLottoNumber(lottoNumber, winningNumbers.numbers.get(i));
@@ -53,11 +57,8 @@ public class Lotto {
         bonusNumber.match(lottoNumber, matchingCount);
     }
 
-    private void matchLottoNumber(int lottoNumber, int winningNumber){
-
-        if (lottoNumber == winningNumber) {
-            matchingCount++;
-        }
+    private void matchLottoNumber(LottoNumber lottoNumber, LottoNumber winningNumber){
+        matchingCount += lottoNumber.matchNumber(winningNumber);
     }
 
 }

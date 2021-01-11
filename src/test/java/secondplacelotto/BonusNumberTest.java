@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import secondplacelotto.exception.IsNotScopeInTheNumberException;
 import secondplacelotto.model.BonusNumber;
+import secondplacelotto.model.Lotto;
+import secondplacelotto.model.LottoNumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +26,8 @@ public class BonusNumberTest {
         BonusNumber bonusNumber = new BonusNumber(34);
 
         assertFalse(bonusNumber.isMatching());
-        bonusNumber.match(34,5);
+        LottoNumber lottoNumber = new LottoNumber(34);
+        bonusNumber.match(lottoNumber,5);
         assertTrue(bonusNumber.isMatching());
     }
 }

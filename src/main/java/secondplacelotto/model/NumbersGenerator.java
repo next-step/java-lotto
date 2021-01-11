@@ -14,10 +14,11 @@ public class NumbersGenerator {
         }
     };
     
-    public static List<Integer> generateLottoNumbers(){
+    public static List<LottoNumber> generateLottoNumbers(){
         Collections.shuffle(number);
 
-        List<Integer> lottoNumbers = new ArrayList<Integer>(){
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        List<Integer> shuffleNumbers = new ArrayList<Integer>(){
             {
                 for (int i = 0; i < 6; i++) {
                     add(number.get(i));
@@ -25,7 +26,11 @@ public class NumbersGenerator {
             }
         };
 
-        Collections.sort(lottoNumbers);
+        Collections.sort(shuffleNumbers);
+
+        for (int lottoNumber : shuffleNumbers) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
         
         return lottoNumbers;
     }

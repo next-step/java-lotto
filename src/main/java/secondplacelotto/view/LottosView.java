@@ -14,6 +14,6 @@ public class LottosView {
     }
 
     private static void viewLotto(Lotto lotto){
-        System.out.println(lotto.getNumberList());
+        System.out.println(lotto.makeViewNumbers());
     }
 }

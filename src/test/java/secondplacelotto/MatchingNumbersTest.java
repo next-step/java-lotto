@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import secondplacelotto.model.BonusNumber;
+import secondplacelotto.model.LottoNumber;
 import secondplacelotto.model.MatchingNumbers;
 
 public class MatchingNumbersTest {
@@ -25,7 +26,8 @@ public class MatchingNumbersTest {
         MatchingNumbers.addMatchingCount("5", bonusNumber);
         assertEquals(MatchingNumbers.getMatchingCount(2), 1);
 
-        bonusNumber.match(38,5);
+        LottoNumber lottoNumber = new LottoNumber(38);
+        bonusNumber.match(lottoNumber,5);
         MatchingNumbers.addMatchingCount("5", bonusNumber);
         assertEquals(MatchingNumbers.getMatchingCount(3), 1);
     }
