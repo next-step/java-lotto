@@ -22,7 +22,6 @@ public class WinnerLottoTicket {
 
     private void validateSize(String[] lottoNumbers) {
         if (lottoNumbers.length != LOTTO_NUMBER) {
-            System.out.printf("Input Size: %d", lottoNumbers.length);
             throw new IllegalArgumentException("입력하신 당첨 번호의 개수가 유효하지 않습니다.");
         }
     }

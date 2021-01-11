@@ -13,7 +13,6 @@ class WinnerLottoTicketTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "2, 4, 6, 7", "3, 4, 5", "1,2", "1 "})
     void winner_lotto_ticket_validation(String wrongInput) throws Exception {
-        System.out.println(wrongInput);
         //When
         //Then
         Assertions.assertThatThrownBy(() -> {

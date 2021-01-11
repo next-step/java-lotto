@@ -10,14 +10,14 @@ import lotto.domain.WinnerLottoTicket;
 
 public class OutputView {
 
-    public void printLottoTicket(LottoTickets lotto) {
-        printBuyingNumber(lotto.size());
-        List<String> lottoTicketString = lotto.getLottoTicketString();
+    public void printLottoTicket(LottoTickets lottoTickets) {
+        printBuyingNumber(lottoTickets.size());
+        List<String> lottoTicketString = lottoTickets.getLottoTicketString();
         printLottoTicketsNumber(lottoTicketString);
     }
 
     public void printLottoResult(WinnerLottoTicket winner, LottoTickets lottoTickets) {
-        Map<LottoPrizeType, List<Integer>> resultMap = lottoTickets.checkResult(winner);
+        Map<LottoPrizeType, Integer> resultMap = lottoTickets.checkResult(winner);
         printWinnerResult(resultMap);
         int reward = calculateReward(resultMap);
         int inputMoney = calculateInputMoney(lottoTickets);
@@ -32,6 +32,7 @@ public class OutputView {
 
     private void printLottoTicketNumber(String lottoTicket) {
         System.out.printf("[ %s ]", lottoTicket);
+        System.out.println();
     }
 
     private void printBuyingNumber(int size) {
@@ -51,21 +52,21 @@ public class OutputView {
         return LottoTicket.LOTTO_TICKET_PRICE * lottoTickets.size();
     }
 
-    private int calculateReward(Map<LottoPrizeType, List<Integer>> resultMap) {
+    private int calculateReward(Map<LottoPrizeType, Integer> resultMap) {
         int reward = 0;
-        for (Entry<LottoPrizeType, List<Integer>> entry : resultMap.entrySet()) {
+        for (Entry<LottoPrizeType, Integer> entry : resultMap.entrySet()) {
             LottoPrizeType key = entry.getKey();
-            reward += key.getPrizeByCount(entry.getValue().size());
+            reward += key.getPrizeByCount(entry.getValue());
         }
         return reward;
     }
 
-    private void printWinnerResult(Map<LottoPrizeType, List<Integer>> resultMap) {
+    private void printWinnerResult(Map<LottoPrizeType, Integer> resultMap) {
         printWinnerResultTitle();
-        for (Entry<LottoPrizeType, List<Integer>> entry : resultMap.entrySet()) {
+        for (Entry<LottoPrizeType, Integer> entry : resultMap.entrySet()) {
             LottoPrizeType key = entry.getKey();
             System.out.printf("%d개 일치 (%d원)- %d\n", key.getMatch(), key.getPrize(),
-                resultMap.get(key).size());
+                resultMap.get(key));
         }
     }
 

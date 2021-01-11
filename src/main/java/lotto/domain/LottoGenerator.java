@@ -25,7 +25,7 @@ public class LottoGenerator {
 
     public LottoTicket generateLottoTicket() {
         Collections.shuffle(lottoNumbers);
-        return new LottoTicket(this.lottoNumbers.subList(0, LottoTicket.LOTTO_TICKET_NUMBER));
+        return new LottoTicket(lottoNumbers.subList(0, LottoTicket.Lotto_NUMBER_COUNT));
     }
 
     private List<LottoTicket> getLottoTicket(int ticketCount) {
