@@ -34,7 +34,7 @@ class WinnerLottoTicketTest {
         WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(input, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
         //Then
-        Assertions.assertThat(result).isEqualTo(winnerLottoTicket.checkResult(lottoTicket));
+        Assertions.assertThat(result).isEqualTo(winnerLottoTicket.getMatchResult(lottoTicket));
     }
 
 

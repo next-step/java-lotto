@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,20 +12,20 @@ public class LottoTickets {
         this.list = list;
     }
 
-    public Map<LottoPrizeType, Integer> checkResult(WinnerLottoTicket winnerLottoTicket) {
-        Map<Integer, List<Integer>> lottoMatchMap = groupingByPrizeWithWinnerLottoTicket(winnerLottoTicket);
-        Map<LottoPrizeType, Integer> resultEnumMap = new EnumMap<>(LottoPrizeType.class);
-        Arrays.stream(LottoPrizeType.values())
-            .forEach(lottoPrizeType -> resultEnumMap.put(lottoPrizeType,
-                lottoMatchMap.getOrDefault(lottoPrizeType.getMatch(), Collections.emptyList())
-                    .size()));
-        return resultEnumMap;
+    public Map<LottoPrizeType, Long> checkResult(WinnerLottoTicket winnerLottoTicket) {
+        List<LottoMatchResult> lottoMatchResults = groupingByPrizeWithWinnerLottoTicket(winnerLottoTicket);
+
+        return lottoMatchResults.stream()
+            .map(lottoMatchResult -> LottoPrizeType.of(lottoMatchResult.getMatchCount(), lottoMatchResult.hasBonusNumber()))
+            .sorted()
+            .collect(Collectors.groupingBy(lottoPrizeType -> lottoPrizeType, Collectors.counting()));
     }
 
-    private Map<Integer, List<Integer>> groupingByPrizeWithWinnerLottoTicket(WinnerLottoTicket winnerLottoTicket) {
+    private List<LottoMatchResult> groupingByPrizeWithWinnerLottoTicket(WinnerLottoTicket winnerLottoTicket) {
         return this.list.stream()
-            .map(winnerLottoTicket::checkResult)
-            .collect(Collectors.groupingBy(integer -> integer));
+            .map(winnerLottoTicket::getMatchResult)
+            .collect(Collectors.toList());
+
     }
 
     public int size() {
