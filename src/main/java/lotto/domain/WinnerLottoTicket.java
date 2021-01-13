@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinnerLottoTicket {
 
@@ -9,15 +11,16 @@ public class WinnerLottoTicket {
     public static final int LOTTO_NUMBER = 6;
 
     private final LottoTicket lottoTicket;
+    private final BonusNumber bonusNumber;
 
-    public WinnerLottoTicket(String inputLottoWinnerNumber) {
+    public WinnerLottoTicket(String inputLottoWinnerNumber, String bonusNumber) {
         String[] lottoNumbers = inputLottoWinnerNumber.split(SPLIT_CONSTANT);
         validateSize(lottoNumbers);
-        List<LottoNumber> list = new ArrayList<>();
-        for (String number : lottoNumbers) {
-            list.add(new LottoNumber(number.trim()));
-        }
-        this.lottoTicket = new LottoTicket(list);
+        List<LottoNumber> collect = Arrays.stream(lottoNumbers)
+            .map(s -> new LottoNumber(s.trim()))
+            .collect(Collectors.toList());
+        this.lottoTicket = new LottoTicket(collect);
+        this.bonusNumber = new BonusNumber(bonusNumber);
     }
 
     private void validateSize(String[] lottoNumbers) {

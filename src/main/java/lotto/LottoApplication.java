@@ -20,7 +20,8 @@ public class LottoApplication {
         OutputView outputView = new OutputView();
         outputView.printLottoTicket(lottoTickets);
         String inputLottoWinnerNumber = inputView.inputLottoWinnerNumber();
-        WinnerLottoTicket lottoTicket = new WinnerLottoTicket(inputLottoWinnerNumber);
+        String bonusNumber = inputView.inputLottoWinnerBonusNumber();
+        WinnerLottoTicket lottoTicket = new WinnerLottoTicket(inputLottoWinnerNumber,bonusNumber);
 
         outputView.printLottoResult(lottoTicket, lottoTickets);
 

@@ -5,25 +5,24 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class WinnerLottoTicketTest {
 
 
     @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 3, 4, 5", "2, 4, 6, 7", "3, 4, 5", "1,2", "1 "})
-    void winner_lotto_ticket_validation(String wrongInput) throws Exception {
+    @CsvSource(value = {"1, 2, 3, 4, 5:1", "2, 4, 6, 7:2", "3, 4, 5:1", "1,2:3", "1:3"}, delimiter = ':')
+    void winner_lotto_ticket_validation(String wrongInput, String bonusNumber) throws Exception {
         //When
         //Then
         Assertions.assertThatThrownBy(() -> {
-            WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(wrongInput);
+            WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(wrongInput, bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "1, 2, 3, 4, 5, 7:5", "1, 2, 3, 4, 8, 7:4"
-        ,"1, 2, 3, 9, 8, 7:3"}, delimiter = ':')
-    void winner_match_ticket(String input, int result) throws Exception {
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:12:6", "1, 2, 3, 4, 5, 7:12:5", "1, 2, 3, 4, 8, 7:12:4"
+        , "1, 2, 3, 9, 8, 7:12:3"}, delimiter = ':')
+    void winner_match_ticket(String input, String bonusNumber, int result) throws Exception {
         //Given
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1),
             new LottoNumber(2),
@@ -32,10 +31,11 @@ class WinnerLottoTicketTest {
             new LottoNumber(5),
             new LottoNumber(6));
         //When
-        WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(input);
+        WinnerLottoTicket winnerLottoTicket = new WinnerLottoTicket(input, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
         //Then
         Assertions.assertThat(result).isEqualTo(winnerLottoTicket.checkResult(lottoTicket));
     }
+
 
 }

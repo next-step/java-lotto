@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## Step3 요구사항
-- [ ] 우승 로또 티켓에 보너스 번호 추가
+- [x] 우승 로또 티켓에 보너스 번호 추가
 - [ ] 2등 체크기능 추가
 - [ ] 2등 보너스번호 입력 추가
 
