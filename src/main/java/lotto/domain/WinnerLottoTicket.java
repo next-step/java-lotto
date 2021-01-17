@@ -28,11 +28,11 @@ public class WinnerLottoTicket {
         }
     }
 
-    public LottoMatchResult getMatchResult(LottoTicket lottoTicket) {
+    public LottoPrizeType getMatchResult(LottoTicket lottoTicket) {
         validateLottoTicket(lottoTicket);
         long count = lottoTicket.countSameNumber(this.lottoTicket);
         boolean contain = lottoTicket.contain(bonusNumber.getLottoNumber());
-        return new LottoMatchResult((int) count, contain);
+        return LottoPrizeType.of((int) count, contain);
     }
 
     private void validateLottoTicket(LottoTicket lottoTicket) {

@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.List;
 import lotto.domain.LottoGenerator;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinnerLottoTicket;
 import lotto.view.InputView;
@@ -21,11 +19,9 @@ public class LottoApplication {
         outputView.printLottoTicket(lottoTickets);
         String inputLottoWinnerNumber = inputView.inputLottoWinnerNumber();
         String bonusNumber = inputView.inputLottoWinnerBonusNumber();
-        WinnerLottoTicket lottoTicket = new WinnerLottoTicket(inputLottoWinnerNumber,bonusNumber);
+        WinnerLottoTicket lottoTicket = new WinnerLottoTicket(inputLottoWinnerNumber, bonusNumber);
 
         outputView.printLottoResult(lottoTicket, lottoTickets);
 
-
     }
-
 }

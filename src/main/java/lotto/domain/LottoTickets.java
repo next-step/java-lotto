@@ -13,18 +13,15 @@ public class LottoTickets {
     }
 
     public Map<LottoPrizeType, Long> checkResult(WinnerLottoTicket winnerLottoTicket) {
-        List<LottoMatchResult> lottoMatchResults = groupingByPrizeWithWinnerLottoTicket(winnerLottoTicket);
-
-        return lottoMatchResults.stream()
-            .map(lottoMatchResult -> LottoPrizeType.of(lottoMatchResult.getMatchCount(), lottoMatchResult.hasBonusNumber()))
-            .sorted()
-            .collect(Collectors.groupingBy(lottoPrizeType -> lottoPrizeType, Collectors.counting()));
+        return groupingByPrizeWithWinnerLottoTicket(winnerLottoTicket);
     }
 
-    private List<LottoMatchResult> groupingByPrizeWithWinnerLottoTicket(WinnerLottoTicket winnerLottoTicket) {
+    private Map<LottoPrizeType, Long> groupingByPrizeWithWinnerLottoTicket(WinnerLottoTicket winnerLottoTicket) {
         return this.list.stream()
             .map(winnerLottoTicket::getMatchResult)
-            .collect(Collectors.toList());
+            .sorted()
+            .collect(Collectors.groupingBy(lottoPrizeType -> lottoPrizeType, Collectors.counting()))
+            ;
 
     }
 
