@@ -4,11 +4,10 @@ import java.util.Arrays;
 
 public enum LottoPrizeType {
     ONE_PRIZE(2_000_000_000, 6),
-    TWO_PRIZE(1_500_000, 5),
-    THREE_PRIZE(50_000, 4),
-    FOUR_PRIZE(5_000, 3),
-    TWO_MATCH(0, 2),
-    ONE_MATCH(0, 1),
+    TWO_PRIZE(3_000_000, 5),
+    THREE_PRIZE(1_500_000, 5),
+    FOUR_PRIZE(50_000, 4),
+    FIVE_PRIZE(5_000, 3),
     NONE(0, 0),
     ;
     private final int prize;
@@ -19,10 +18,13 @@ public enum LottoPrizeType {
         this.match = match;
     }
 
-    public static LottoPrizeType of(int matchCount) {
+    public static LottoPrizeType of(int matchCount, boolean matchBonus) {
         validateMatchCount(matchCount);
+        if (TWO_PRIZE.match(matchCount) && matchBonus) {
+            return TWO_PRIZE;
+        }
         return Arrays.stream(LottoPrizeType.values())
-            .filter(lottoPrizeType -> lottoPrizeType.match(matchCount))
+            .filter(lottoPrizeType -> TWO_PRIZE != lottoPrizeType && lottoPrizeType.match(matchCount))
             .findFirst()
             .orElse(LottoPrizeType.NONE);
     }
@@ -41,8 +43,8 @@ public enum LottoPrizeType {
         return prize;
     }
 
-    public int getPrizeByCount(int count) {
-        return prize * count;
+    public int getPrizeByCount(Long count) {
+        return (int) (prize * count);
     }
 
     public int getMatch() {
