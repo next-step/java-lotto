@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +37,7 @@ class LottoGeneratorTest {
         int money = 14_000;
         LottoGenerator lottoGenerator = new LottoGenerator();
         //When
-        List<LottoTicket> lottoTickets = lottoGenerator.buyLottoTicket(money);
+        List<LottoTicket> lottoTickets = lottoGenerator.buyLottoTicket(money, Collections.emptyList());
         //Then
         Assertions.assertThat(lottoTickets.size()).isEqualTo(14);
     }
