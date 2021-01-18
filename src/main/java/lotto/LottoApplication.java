@@ -11,6 +11,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         Integer input = inputView.inputLottoMoney();
+        Integer inputManualLottoTicketCount = inputView.inputManualLottoTicketCount();
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         LottoTickets lottoTickets = new LottoTickets(lottoGenerator.buyLottoTicket(input));

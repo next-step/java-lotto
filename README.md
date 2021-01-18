@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## Step4 요구샇ㅇ
-- [ ] 수동으로 구입할 로또 수 입력받는 기능
+- [x] 수동으로 구입할 로또 수 입력받는 기능
 - [ ] 수동으로 번호를 입력받는 기능
 - [ ] 입력받은 수동 번호로 로또 구입하는 기능
 
