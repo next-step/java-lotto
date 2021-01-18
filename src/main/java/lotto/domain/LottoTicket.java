@@ -1,13 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoTicket {
 
@@ -23,6 +21,9 @@ public class LottoTicket {
     }
 
     public static int countPurchasable(int money) {
+        if (money < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException("지불하신 금액이 로또 가격보다 적습니다.");
+        }
         return money / LOTTO_TICKET_PRICE;
     }
 
