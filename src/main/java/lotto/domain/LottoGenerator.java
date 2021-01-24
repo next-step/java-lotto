@@ -29,30 +29,34 @@ public class LottoGenerator {
         return new LottoTicket(lottoNumbers.subList(0, LottoTicket.Lotto_NUMBER_COUNT));
     }
 
-    private Stream<LottoTicket> getAutoLottoTicket(int ticketCount) {
+    private List<LottoTicket> getAutoLottoTicket(int ticketCount) {
         return Stream.generate(this::generateLottoTicket)
-            .limit(ticketCount);
+            .limit(ticketCount)
+            .collect(Collectors.toList());
     }
 
     public List<LottoTicket> buyLottoTicket(int money, List<String> inputManualLottoTicketNumber) {
         int ticketCount = LottoTicket.countPurchasable(money);
         validateManualLottoCount(inputManualLottoTicketNumber, ticketCount);
         int autoTicketCount = calculateAutoLottoTicket(ticketCount, inputManualLottoTicketNumber.size());
-        Stream<LottoTicket> list = getManualLottoTicket(inputManualLottoTicketNumber);
-        Stream<LottoTicket> autoLottoTicket = getAutoLottoTicket(autoTicketCount);
-        return Stream.concat(list, autoLottoTicket).collect(Collectors.toList());
+        List<LottoTicket> manualLottoTicket = getManualLottoTicket(inputManualLottoTicketNumber);
+        List<LottoTicket> autoLottoTicket = getAutoLottoTicket(autoTicketCount);
+        return Stream.concat(manualLottoTicket.stream(), autoLottoTicket.stream()).collect(Collectors.toList());
     }
 
-    private Stream<LottoTicket> getManualLottoTicket(List<String> inputManualLottoTicketNumber) {
-        return generateManualLottoTicket(inputManualLottoTicketNumber);
-    }
-
-    private Stream<LottoTicket> generateManualLottoTicket(List<String> inputManualLottoTicketNumber) {
+    private List<LottoTicket> getManualLottoTicket(List<String> inputManualLottoTicketNumber) {
         return inputManualLottoTicketNumber.stream()
-            .map(s -> Arrays.stream(s.split(","))
-                .map(s1 -> new LottoNumber(s1.trim()))
+            .map(manualLottoNumberString -> Arrays.stream(manualLottoNumberString.split(","))
+                .map(manualLottoNumber -> {
+                    try {
+                        return new LottoNumber(manualLottoNumber.trim());
+                    } catch (NumberFormatException exception) {
+                        throw new IllegalArgumentException("로또 수동 입력값으로 숫자가 아닌 값이 입력되었습니다.");
+                    }
+                })
                 .collect(Collectors.toList()))
-            .map(LottoTicket::new);
+            .map(LottoTicket::new)
+            .collect(Collectors.toList());
     }
 
     private int calculateAutoLottoTicket(int ticketCount, int size) {
