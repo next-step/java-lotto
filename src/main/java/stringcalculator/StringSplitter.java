@@ -7,6 +7,9 @@ public class StringSplitter {
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final String NORMAL_SEPARATOR = ",|:";
 
+    private StringSplitter() {
+    }
+
     public static String[] split(String inputText) {
         Matcher matcher = Pattern.compile(CUSTOM_SEPARATOR).matcher(inputText);
         if (matcher.find()) {
