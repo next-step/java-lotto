@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class StringCalculatorTest {
+class SringCalculatorTest {
+
     private StringCalculator calculator;
 
     @BeforeEach
@@ -56,7 +58,22 @@ class StringCalculatorTest {
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     void negative() {
-        assertThatExceptionOfType(RuntimeException.class)
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> calculator.add("-1"));
+    }
+
+
+    @DisplayName(value = "blank 문자열의 경우 0을 반환.")
+    @ParameterizedTest
+    @ValueSource(strings = {"      "})
+    void blank(final String text) {
+        assertThat(calculator.add(text)).isZero();
+    }
+
+    @DisplayName(value = "커스텀구분자와 기본구분자의 혼합의 경우 이를 구별해야 ")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2,3:4"})
+    void mixedDelimeters(final String text) {
+        assertThat(calculator.add(text)).isSameAs(10);
     }
 }
