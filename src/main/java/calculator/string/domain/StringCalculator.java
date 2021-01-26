@@ -20,8 +20,14 @@ public class StringCalculator implements Calculator {
     @Override
     public int calculation() {
         // calculation
+        String splitCase = mergeSymbols();
+        String[] numbers = this.expression.split(splitCase);
+        int result = 0;
+        for (String number : numbers) {
+            result += Integer.parseInt(number);
+        }
 
-        return 3;
+        return result;
     }
 
     public String mergeSymbols() {
