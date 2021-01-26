@@ -15,6 +15,15 @@ public class StringCalculator {
           return Integer.parseInt(text);
         }
 
-        return 1;
+        String [] inputs = text.split(",");
+        int res = 0;
+        for (String input : inputs) {
+            res += Integer.parseInt(input);
+        }
+
+
+
+        return res;
     }
+
 }
