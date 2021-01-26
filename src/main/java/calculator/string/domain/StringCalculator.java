@@ -20,6 +20,16 @@ public class StringCalculator implements Calculator {
     @Override
     public int calculation() {
         // calculation
+
         return 3;
+    }
+
+    public String mergeSymbols() {
+        StringBuilder result = new StringBuilder();
+        for (String symbol : this.splitSymbols) {
+            result.append(symbol).append("|");
+        }
+        result.deleteCharAt(result.length() - 1);
+        return result.toString();
     }
 }
