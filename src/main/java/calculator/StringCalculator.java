@@ -10,6 +10,11 @@ public class StringCalculator {
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
+
+        if (text.length() == 1) {
+          return Integer.parseInt(text);
+        }
+
         return 1;
     }
 }
