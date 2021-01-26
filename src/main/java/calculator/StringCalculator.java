@@ -7,6 +7,9 @@ public class StringCalculator {
     }
 
     public int add (String text) {
-        return 0;
+        if (InputValidator.checkIsNullOrIsEmpty(text)) {
+            return 0;
+        }
+        return 1;
     }
 }
