@@ -5,10 +5,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     public int calculate(final String inputText) {
-        if (inputText == null) {
-            return 0;
-        }
-        if ("".equals(inputText)) {
+        if (nullOrEmpty(inputText)) {
             return 0;
         }
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
@@ -22,6 +19,10 @@ public class StringCalculator {
             return sumNumbers(tokens);
         }
         return Integer.parseInt(inputText);
+    }
+
+    private boolean nullOrEmpty(final String inputText) {
+        return inputText == null || "".equals(inputText);
     }
 
     private int sumNumbers(final String[] tokens) {
