@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class StringCalculator {
     public static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
@@ -12,9 +13,35 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] numbers = splitText(text);
+        String[] numbersSplit = splitText(text);
+        checkPositiveNumber(numbersSplit);
+
+        int[] numbers = StringToIntConverter(numbersSplit);
 
         return sum(numbers);
+    }
+
+    public void checkPositiveNumber (String[] numbers) {
+        for (String number : numbers) {
+            checkNotIntegerNumber(number);
+            checkNotNegativeNumber(number);
+        }
+    }
+
+    private void checkNotIntegerNumber(String number) {
+        if (number == null || number.length() == 0 || !number.chars().allMatch(Character::isDigit)) {
+            throw new RuntimeException("숫자가 아닙니다.");
+        }
+    }
+
+    private void checkNotNegativeNumber(String number) {
+        if (Integer.parseInt(number) < 0)  {
+            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        }
+    }
+
+    private int[] StringToIntConverter(String[] numbers) {
+        return Stream.of(numbers).mapToInt(Integer::parseInt).toArray();
     }
 
     private String[] splitText(String text) {
@@ -34,10 +61,10 @@ public class StringCalculator {
         return false;
     }
 
-    private int sum(String[] numbers) {
+    private int sum(int[] numbers) {
         int result = 0;
-        for (String number : numbers) {
-            result += Integer.parseInt(number);
+        for (int number : numbers) {
+            result += number;
         }
 
         return result;
