@@ -2,6 +2,8 @@ package calculator.string.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator implements Calculator {
     public String expression;
@@ -14,7 +16,6 @@ public class StringCalculator implements Calculator {
     @Override
     public void inputExpression(String expression) {
         this.expression = expression;
-        // call custom symbol method
     }
 
     @Override
@@ -37,5 +38,18 @@ public class StringCalculator implements Calculator {
         }
         result.deleteCharAt(result.length() - 1);
         return result.toString();
+    }
+
+    public String findSymbol() {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return customDelimiter;
+        }
+        return null;
+    }
+
+    public void addSymbol(String newSymbol) {
+        this.splitSymbols.add(newSymbol);
     }
 }
