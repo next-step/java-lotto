@@ -21,7 +21,7 @@ public class StringCalculator {
         return sum(numbers);
     }
 
-    public void checkPositiveNumber (String[] numbers) {
+    public void checkPositiveNumber(String[] numbers) {
         for (String number : numbers) {
             checkNotIntegerNumber(number);
             checkNotNegativeNumber(number);
@@ -35,7 +35,7 @@ public class StringCalculator {
     }
 
     private void checkNotNegativeNumber(String number) {
-        if (Integer.parseInt(number) < 0)  {
+        if (Integer.parseInt(number) < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
     }
@@ -45,13 +45,13 @@ public class StringCalculator {
     }
 
     private String[] splitText(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens = m.group(2).split(customDelimiter);
             return tokens;
         }
-        return text.split(",|:");
+        return text.split(DEFAULT_DELIMITER);
     }
 
     private Boolean checkNotValidInput(String text) {
@@ -66,7 +66,6 @@ public class StringCalculator {
         for (int number : numbers) {
             result += number;
         }
-
         return result;
     }
 }
