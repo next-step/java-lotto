@@ -9,23 +9,28 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] numbers = text.split(",");
+        String[] numbers = splitText(text);
 
         return sum(numbers);
     }
 
-    public Boolean checkNotValidInput(String text) {
+    private String[] splitText(String text) {
+        return text.split(",|:");
+    }
+
+    private Boolean checkNotValidInput(String text) {
         if (text == null || "".equals(text)) {
             return true;
         }
         return false;
     }
 
-    public int sum(String[] numbers) {
+    private int sum(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
             result += Integer.parseInt(number);
         }
+
         return result;
     }
 }
