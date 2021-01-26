@@ -16,9 +16,9 @@ public class StringCalculator {
         return inputText == null || "".equals(inputText);
     }
 
-    private int sumNumbers(final String[] tokens) {
+    private int sum(final String[] numberStrings) {
         int sum = 0;
-        for (final String token : tokens) {
+        for (final String token : numberStrings) {
             int number = Integer.parseInt(token);
             minusNumberThrowsException(number);
             sum += number;
