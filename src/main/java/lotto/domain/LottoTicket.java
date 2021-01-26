@@ -21,6 +21,9 @@ public class LottoTicket {
     }
 
     public static int countPurchasable(int money) {
+        if (money < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException("지불하신 금액이 로또 가격보다 적습니다.");
+        }
         return money / LOTTO_TICKET_PRICE;
     }
 

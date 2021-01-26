@@ -11,8 +11,8 @@ import lotto.domain.WinnerLottoTicket;
 
 public class OutputView {
 
-    public void printLottoTicket(LottoTickets lottoTickets) {
-        printBuyingNumber(lottoTickets.size());
+    public void printLottoTicket(LottoTickets lottoTickets, Integer inputManualLottoTicketCount) {
+        printBuyingCount(lottoTickets.size(), inputManualLottoTicketCount);
         List<String> lottoTicketString = lottoTickets.getLottoTicketString();
         printLottoTicketsNumber(lottoTicketString);
     }
@@ -36,9 +36,6 @@ public class OutputView {
         System.out.println();
     }
 
-    private void printBuyingNumber(int size) {
-        System.out.printf("%d개를 구매했습니다.%n", size);
-    }
 
 
     private void printYieldResult(float yield) {
@@ -103,5 +100,10 @@ public class OutputView {
     private void printWinnerResultTitle() {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
+    }
+
+    public void printBuyingCount(int ticketCount, int manualTicketCount) {
+        System.out
+            .printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualTicketCount, ticketCount - manualTicketCount);
     }
 }

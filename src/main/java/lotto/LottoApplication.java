@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinnerLottoTicket;
@@ -10,13 +11,16 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Integer input = inputView.inputLottoMoney();
+        Integer money = inputView.inputLottoMoney();
+        Integer inputManualLottoTicketCount = inputView.inputManualLottoTicketCount();
+        List<String> inputManualLottoTicketNumber = inputView.inputManualLottoTicketNumber(inputManualLottoTicketCount);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets lottoTickets = new LottoTickets(lottoGenerator.buyLottoTicket(input));
+        LottoTickets lottoTickets = new LottoTickets(
+            lottoGenerator.buyLottoTicket(money, inputManualLottoTicketNumber));
 
         OutputView outputView = new OutputView();
-        outputView.printLottoTicket(lottoTickets);
+        outputView.printLottoTicket(lottoTickets, inputManualLottoTicketCount);
         String inputLottoWinnerNumber = inputView.inputLottoWinnerNumber();
         String bonusNumber = inputView.inputLottoWinnerBonusNumber();
         WinnerLottoTicket lottoTicket = new WinnerLottoTicket(inputLottoWinnerNumber, bonusNumber);
