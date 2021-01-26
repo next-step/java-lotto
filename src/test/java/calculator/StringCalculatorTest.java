@@ -53,6 +53,13 @@ public class StringCalculatorTest {
         assertThat(calculator.add(text)).isSameAs(6);
     }
 
+    @DisplayName(value = "문자열 계산기에 문자를 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @Test
+    void string() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.add("as:df:ds"));
+    }
+
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     void negative() {
