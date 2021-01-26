@@ -1,10 +1,12 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
 
-    public static void main(String[] args) {
 
-    }
 
     public int add (String text) {
         int res = 0;
@@ -16,13 +18,8 @@ public class StringCalculator {
           return Integer.parseInt(text);
         }
 
-        String [] inputs = text.split(",");
-        int res = 0;
-        for (String input : inputs) {
-            res += Integer.parseInt(input);
-        }
-
-
+        res += splitByCustomDelimiter(text);
+        res += splitByDelimiter(text);
 
         return res;
     }

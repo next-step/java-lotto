@@ -23,8 +23,4 @@ public class InputValidator {
         return true;
     }
 
-    public static boolean checkMinusParamInput(String text) {
-        return Integer.parseInt(text) < 0;
-    }
-
 }
