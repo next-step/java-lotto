@@ -1,22 +1,13 @@
 package stringcalculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringCalculator {
     public int calculate(final String inputText) {
         if (nullOrEmpty(inputText)) {
             return 0;
         }
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-            return sumNumbers(tokens);
-        }
-        String[] tokens = inputText.split(",|:");
-        if (tokens.length > 0) {
-            return sumNumbers(tokens);
+        String[] numberStrings = StringSplitter.split(inputText);
+        if (numberStrings.length > 0) {
+            return sum(numberStrings);
         }
         return Integer.parseInt(inputText);
     }
