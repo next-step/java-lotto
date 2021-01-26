@@ -14,9 +14,6 @@ public class StringCalculator {
         }
 
         String[] equations = utility.splitEquation(equation);
-        for (String eq : equations) {
-            System.out.println(eq);
-        }
 
         Validator.validatePositiveNum(equations);
 
