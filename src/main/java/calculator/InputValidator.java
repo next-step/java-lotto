@@ -15,6 +15,15 @@ public class InputValidator {
     }
 
     public static boolean checkMinusParamInput(String text) {
+        try {
+            if(Integer.parseInt(text) > 0);
+        } catch (RuntimeException e) {
+            System.out.println("음수는 연산이 불가합니다.");
+        }
+        return true;
+    }
+
+    public static boolean checkMinusParamInput(String text) {
         return Integer.parseInt(text) < 0;
     }
 
