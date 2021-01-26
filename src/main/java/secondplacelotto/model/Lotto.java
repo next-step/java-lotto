@@ -8,7 +8,6 @@ import java.util.List;
 public class Lotto {
 
     private List<LottoNumber> numbers = new ArrayList<>();
-    private int matchingCount;
 
     public Lotto(){
         numbers = NumbersGenerator.generateLottoNumbers();
@@ -24,14 +23,17 @@ public class Lotto {
         return Integer.parseInt(stringWinningNumber);
     }
 
-    public void match(Lotto winningNumbers, BonusNumber bonusNumber){
-        for(LottoNumber lottoNumber : numbers) {
-            matchWinningNumber(lottoNumber, winningNumbers, bonusNumber);
+    public MatchingNumbers match(MatchingNumbers matchingNumbers, Lotto winningNumbers, BonusNumber bonusNumber){
+        int matchingCount = 0;
+
+        for (LottoNumber lottoNumber : numbers) {
+            matchingCount = matchWinningNumber(lottoNumber, winningNumbers, matchingCount);
+            bonusNumber.match(lottoNumber);
         }
 
-        MatchingNumbers.addMatchingCount(Integer.toString(matchingCount), bonusNumber);
+        ProfitByRank.matchByRank(matchingNumbers, matchingCount, bonusNumber.getBonusStatus());
 
-        matchingCount = 0;
+        return matchingNumbers;
     }
 
     public String makeViewNumbers() {
@@ -48,17 +50,17 @@ public class Lotto {
         return stringNumbers.toString();
     }
 
-    private void matchWinningNumber(LottoNumber lottoNumber, Lotto winningNumbers, BonusNumber bonusNumber){
+    private int matchWinningNumber(LottoNumber lottoNumber, Lotto winningNumbers, int matchingCount){
 
         for (int i = 0; i < winningNumbers.numbers.size(); i++) {
-            matchLottoNumber(lottoNumber, winningNumbers.numbers.get(i));
+            matchingCount += matchLottoNumber(lottoNumber, winningNumbers.numbers.get(i));
         }
 
-        bonusNumber.match(lottoNumber, matchingCount);
+        return matchingCount;
     }
 
-    private void matchLottoNumber(LottoNumber lottoNumber, LottoNumber winningNumber){
-        matchingCount += lottoNumber.matchNumber(winningNumber);
+    private int matchLottoNumber(LottoNumber lottoNumber, LottoNumber winningNumber){
+        return lottoNumber.matchNumber(winningNumber);
     }
 
 }

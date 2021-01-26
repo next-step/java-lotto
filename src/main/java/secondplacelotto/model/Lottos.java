@@ -12,10 +12,15 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void match(Lotto winningNumbers, BonusNumber bonusNumber){
+    public MatchingNumbers match(Lotto winningNumbers, BonusNumber bonusNumber){
+
+        MatchingNumbers matchingNumbers = new MatchingNumbers();
+
         for(Lotto lotto : lottos) {
-            lotto.match(winningNumbers, bonusNumber);
+            lotto.match(matchingNumbers, winningNumbers, bonusNumber);
         }
+
+        return matchingNumbers;
     }
 
     public int getLottosCount() {

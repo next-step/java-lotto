@@ -39,8 +39,8 @@ public class LottosTest {
         lottoList.add(lotto);
         Lottos lottos = new Lottos(lottoList);
 
-        lottos.match(lotto, new BonusNumber(7));
+        MatchingNumbers matchingNumbers = lottos.match(lotto, new BonusNumber(7));
 
-        assertEquals(MatchingNumbers.getMatchingCount(4), 1);
+        assertEquals(matchingNumbers.getMatchingCount("1"), 1);
     }
 }

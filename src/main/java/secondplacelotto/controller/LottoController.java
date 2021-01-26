@@ -23,9 +23,9 @@ public class LottoController {
         BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
 
-        buyer.matchLottos(winningNumbers);
+        MatchingNumbers matchingNumbers = buyer.matchLottos(winningNumbers);
 
-        ResultView.viewStatistics();
-        ResultView.viewProfitRate(ProfitCalculator.calculate(money));
+        ResultView.viewStatistics(matchingNumbers);
+        ResultView.viewProfitRate(ProfitCalculator.calculate(matchingNumbers, money));
     }
 }

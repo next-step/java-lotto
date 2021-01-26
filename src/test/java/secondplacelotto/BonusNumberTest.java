@@ -25,9 +25,9 @@ public class BonusNumberTest {
     public void matchBonusNumber(){
         BonusNumber bonusNumber = new BonusNumber(34);
 
-        assertFalse(bonusNumber.isMatching());
+        assertFalse(bonusNumber.getBonusStatus());
         LottoNumber lottoNumber = new LottoNumber(34);
-        bonusNumber.match(lottoNumber,5);
-        assertTrue(bonusNumber.isMatching());
+        bonusNumber.match(lottoNumber);
+        assertTrue(bonusNumber.getBonusStatus());
     }
 }

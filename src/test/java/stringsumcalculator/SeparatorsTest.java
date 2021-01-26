@@ -1,13 +1,13 @@
 package stringsumcalculator;
 
+import org.junit.jupiter.api.Test;
 import stringsumcalculator.model.Separators;
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeparatorsTest {
 

@@ -16,7 +16,7 @@ public class Buyer {
         return lottos;
     }
 
-    public void matchLottos(WinningNumbers winningNumbers){
-        winningNumbers.match(lottos);
+    public MatchingNumbers matchLottos(WinningNumbers winningNumbers){
+        return winningNumbers.match(lottos);
     }
 }

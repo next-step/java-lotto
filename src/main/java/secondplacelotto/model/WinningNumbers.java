@@ -11,8 +11,8 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public void match(Lottos lottos) {
-        lottos.match(lotto, this.bonusNumber);
+    public MatchingNumbers match(Lottos lottos) {
+        return lottos.match(lotto, this.bonusNumber);
     }
 
 }
