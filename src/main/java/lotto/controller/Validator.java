@@ -9,8 +9,6 @@ public class Validator {
 
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final String FORMAT_REGEX = "[0-9]+(,\\s[0-9]+)*$";
-    private static final int FIRST_RANGE_LOTTO_NUMBER = 0;
-    private static final int END_RANGE_LOTTO_NUMBER = 46;
     private static final String COMMA = ", ";
     private static final int LOTTO_COUNT = 6;
 
@@ -28,31 +26,13 @@ public class Validator {
         List<String> numbers = Arrays.asList(winningNumber.split(COMMA));
         return pattern.matcher(winningNumber).matches()
             && numbers.size() == LOTTO_COUNT
-            && isNumberUnique(numbers)
-            && isNumberInRange(numbers);
+            && NumberUtils.isNumberUnique(numbers)
+            && NumberUtils.isNumberInRange(numbers);
     }
 
-    public boolean isNumberUnique(List<String> numbers) {
-        return numbers
-            .stream()
-            .distinct()
-            .count() == numbers.size();
-    }
-
-    // NumberUtil로..?
-    public boolean isNumberInRange(List<String> numbers) {
-        return numbers
-            .stream()
-            .map(Integer::parseInt)
-            .allMatch(this::checkLottoNumber);
-    }
 
     public boolean validateBonusNumber(String bonusNumber) {
         Integer bonusNumberOrNull = NumberUtils.returnInteger(bonusNumber);
-        return bonusNumberOrNull != null && checkLottoNumber(bonusNumberOrNull);
-    }
-
-    private boolean checkLottoNumber(int num) {
-        return FIRST_RANGE_LOTTO_NUMBER < num && num < END_RANGE_LOTTO_NUMBER;
+        return bonusNumberOrNull != null && NumberUtils.checkLottoNumber(bonusNumberOrNull);
     }
 }
