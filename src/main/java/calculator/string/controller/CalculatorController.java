@@ -1,5 +1,6 @@
 package calculator.string.controller;
 
+import calculator.string.domain.Calculator;
 import calculator.string.domain.StringCalculator;
 import calculator.string.view.Input;
 import calculator.string.view.Output;
@@ -13,7 +14,7 @@ public class CalculatorController {
     }
 
     public int executeCalculator(String expression) {
-        StringCalculator stringCalculator = new StringCalculator();
+        Calculator stringCalculator = new StringCalculator();
         stringCalculator.inputExpression(expression);
         return stringCalculator.calculation();
     }
