@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class SringCalculatorTest {
+class StringCalculatorTest {
 
     private StringCalculator calculator;
 
@@ -60,8 +60,9 @@ class SringCalculatorTest {
     void negative() {
         Assertions.assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> calculator.add("-1"));
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> calculator.add("1:-1"));
     }
-
 
     @DisplayName(value = "blank 문자열의 경우 0을 반환.")
     @ParameterizedTest
@@ -70,10 +71,20 @@ class SringCalculatorTest {
         assertThat(calculator.add(text)).isZero();
     }
 
-    @DisplayName(value = "커스텀구분자와 기본구분자의 혼합의 경우 이를 구별해야 ")
+//    @DisplayName(value = "커스텀구분자와 기본구분자의 혼합의 경우 이를 구별해야 ")
+//    @ParameterizedTest
+//    @ValueSource(strings = {"//;\n1;2,3:4"})
+//    void mixedDelimiters(final String text) {
+//        assertThat(calculator.add(text)).isSameAs(10);
+//    }
+
+    @DisplayName(value = "구분자에 의해 문자열이 입력되는 경우 에러")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2,3:4"})
-    void mixedDelimeters(final String text) {
-        assertThat(calculator.add(text)).isSameAs(10);
+    @ValueSource(strings = {"a,b,c"})
+    void getAlphabet(final String text) {
+        Assertions.assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> calculator.add(text));
     }
+
+
 }
