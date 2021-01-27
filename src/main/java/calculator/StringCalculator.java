@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +11,7 @@ public class StringCalculator {
             return 0;
         }
 
-        if (isOneNumber(text) && InputValidator.checkInvalidInput(text)) {
+        if (isOneNumber(text) && !InputValidator.checkIsInvalidInput(text)) {
             return Integer.parseInt(text);
         }
 
@@ -42,7 +41,7 @@ public class StringCalculator {
         String [] inputs = text.split(",|:");
         int res = 0;
         for (String input : inputs) {
-            if (!InputValidator.checkInvalidInput(input)) {
+            if (InputValidator.checkIsInvalidInput(input)) {
                 throw new RuntimeException();
             }
             res += Integer.parseInt(input);

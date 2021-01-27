@@ -27,8 +27,8 @@ public class InputValidator {
 //
 //        }
 //    }
-    public static boolean checkInvalidInput(String text) {
-        return isNegative(text) && isLetter(text);
+    public static boolean checkIsInvalidInput(String text) {
+        return isNegative(text)||isLetter(text);
     }
 
     public static boolean isNegative (String text) throws RuntimeException {
@@ -36,15 +36,16 @@ public class InputValidator {
         if(input < 0) {
             throw new RuntimeException("음수를 입력하셨습니다.");
         }
-        return true;
+        return false;
     }
 
     public static boolean isLetter (String text) throws RuntimeException {
         try {
             int input = Integer.parseInt(text);
+            return false;
         } catch (Exception e) {
             throw new RuntimeException("입력 형식에 벗어나는 입력입니다.");
         }
-        return true;
+
     }
 }
