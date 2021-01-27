@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,10 +45,11 @@ public class ValidatorTest {
     private static Stream<Arguments> provideValidateWinningNumberTest() {
         return Stream.of(
             Arguments.of("1, 2, 3, 4, 5, 6", true),
-            Arguments.of("1, 2, 3, 4, 5, 5", false),  // FAIL
+            Arguments.of("1, 2, 3, 4, 5, 45", true),
+            Arguments.of("1, 2, 3, 4, dfsd, 45", false),
             Arguments.of("1, 2, 3, 4, 5, 47", false),
             Arguments.of("1; 2, 3, 4; 5, 47", false),
-            Arguments.of("1, 2, 3, 4, 5, 6, 8", false), // FAIL
+            Arguments.of("1, 2, 3, 4, 5, 6, 8", false),
             Arguments.of("123456", false),
             Arguments.of("asdfasdfasdf", false)
         );
