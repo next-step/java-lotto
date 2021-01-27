@@ -1,11 +1,9 @@
 package calculator.string.domain;
 
-import calculator.string.view.Input;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +24,14 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void calculationCustomTest() {
+        int result;
+        calculator.inputExpression("//v\n1v2");
+        result = calculator.calculation();
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
     public void mergeSymbolsTest() {
         calculator.inputExpression("1,2");
         String result = calculator.mergeSymbols();
@@ -34,8 +40,16 @@ public class StringCalculatorTest {
 
     @Test
     public void findSymbolTest() {
-        calculator.inputExpression("//-\n1-2");
-        String result = calculator.findSymbol();
+        String result = calculator.findSymbol("//-\n1-2");
         assertThat(result).isEqualTo("-");
+    }
+
+    @Test
+    public void addSymbolTest() {
+        String sample = "v";
+        calculator.addSymbol(sample);
+        List<String> result = calculator.splitSymbols;
+        List<String> expected = Arrays.asList(":", ",", "v");
+        assertThat(result).isEqualTo(expected);
     }
 }
