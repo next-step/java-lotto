@@ -11,9 +11,9 @@ public class StringCalculator {
             return 0;
         }
 
-        if (isOneNumber(text) && !InputValidator.checkIsInvalidInput(text)) {
-            return Integer.parseInt(text);
-        }
+//        if (isOneNumber(text) && !InputValidator.checkIsInvalidInput(text)) {
+//            return Integer.parseInt(text);
+//        }
 
         if(checkCustomDelimiter(text)) {
             return splitByCustomDelimiter(text);
