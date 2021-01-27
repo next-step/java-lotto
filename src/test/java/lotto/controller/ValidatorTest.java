@@ -38,13 +38,13 @@ public class ValidatorTest {
     @ParameterizedTest
     @MethodSource("provideValidateWinningNumberTest")
     public void validateWinningNumberTest(String winningNumber, boolean expected) {
-        System.out.println(winningNumber);
         assertEquals(expected, validator.validateWinningNumber(winningNumber));
     }
 
     private static Stream<Arguments> provideValidateWinningNumberTest() {
         return Stream.of(
             Arguments.of("1, 2, 3, 4, 5, 6", true),
+            Arguments.of("1, 2, 3, 4, 5, 5", false),
             Arguments.of("1, 2, 3, 4, 5, 45", true),
             Arguments.of("1, 2, 3, 4, dfsd, 45", false),
             Arguments.of("1, 2, 3, 4, 5, 47", false),
