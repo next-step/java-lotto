@@ -6,13 +6,13 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-
     public int add (String text) {
         int res = 0;
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
-        if (isOneNumber(text) && InputValidator.isNumber(text)) {
+
+        if (isOneNumber(text) && InputValidator.checkInvalidInput(text)) {
             return Integer.parseInt(text);
         }
 
@@ -37,12 +37,25 @@ public class StringCalculator {
         }
         return false;
     }
+    
+    private int abc (String text) {
+        String [] inputs = text.split(",|:");
+        int res = 0;
+        for (String input : inputs) {
+            if (!InputValidator.checkInvalidInput(input)) {
+                throw new RuntimeException();
+            }
+            res += Integer.parseInt(input);
+        }
+        return res;
+    }
 
     private int splitByDelimiter(String text) {
         // throw 된 exception 을 처리하는 곳은 어디에?
         String [] inputs = text.split(",|:");
         int res = Arrays.stream(inputs)
-                .filter(input -> InputValidator.checkMinusParamInput(input))
+                //.map(InputValidator::isNegative)
+                .filter(input -> InputValidator.checkInvalidInput(input))
                 .map(Integer::parseInt)
                 .reduce(Integer::sum).get();
         return res;
