@@ -28,18 +28,13 @@ public class InputValidator {
 //        }
 //    }
     public static boolean checkInvalidInput(String text) {
-        try {
-            return isNegative(text) && isLetter(text);
-        } catch (Exception e) {
-            System.out.println("올바른 양의 정수를 입력해주세요.");
-            return false;
-        }
+        return isNegative(text) && isLetter(text);
     }
 
     public static boolean isNegative (String text) throws RuntimeException {
         int input= Integer.parseInt(text);
         if(input < 0) {
-            throw new RuntimeException();
+            throw new RuntimeException("음수를 입력하셨습니다.");
         }
         return true;
     }
@@ -48,7 +43,7 @@ public class InputValidator {
         try {
             int input = Integer.parseInt(text);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException("입력 형식에 벗어나는 입력입니다.");
         }
         return true;
     }

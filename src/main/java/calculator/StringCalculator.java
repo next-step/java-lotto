@@ -38,7 +38,7 @@ public class StringCalculator {
         return false;
     }
     
-    private int abc (String text) {
+    private int splitByDelimiter (String text) {
         String [] inputs = text.split(",|:");
         int res = 0;
         for (String input : inputs) {
@@ -50,16 +50,16 @@ public class StringCalculator {
         return res;
     }
 
-    private int splitByDelimiter(String text) {
-        // throw 된 exception 을 처리하는 곳은 어디에?
-        String [] inputs = text.split(",|:");
-        int res = Arrays.stream(inputs)
-                //.map(InputValidator::isNegative)
-                .filter(input -> InputValidator.checkInvalidInput(input))
-                .map(Integer::parseInt)
-                .reduce(Integer::sum).get();
-        return res;
-    }
+//    private int splitByDelimiter(String text) {
+//        // throw 된 exception 을 처리하는 곳은 어디에?
+//        String [] inputs = text.split(",|:");
+//        int res = Arrays.stream(inputs)
+//                //.map(InputValidator::isNegative)
+//                .filter(input -> InputValidator.checkInvalidInput(input))
+//                .map(Integer::parseInt)
+//                .reduce(Integer::sum).get();
+//        return res;
+//    }
 
     private int splitByCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
