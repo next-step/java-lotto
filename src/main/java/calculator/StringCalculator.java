@@ -7,37 +7,44 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
 
-
     public int add (String text) {
         int res = 0;
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
-
-        if (text.length() == 1) {
-          return Integer.parseInt(text);
+        if (isOneNumber(text) && InputValidator.isNumber(text)) {
+            return Integer.parseInt(text);
         }
 
-        res += splitByCustomDelimiter(text);
-        res += splitByDelimiter(text);
+        if(checkCustomDelimiter(text)) {
+            return splitByCustomDelimiter(text);
+        }
+        return splitByDelimiter(text);
+    }
 
-        return res;
+    private boolean isOneNumber(String text) {
+        String [] inputs = text.split(",|:");
+        if (inputs.length == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCustomDelimiter(String text) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        if (m.find()) {
+            return true;
+        }
+        return false;
     }
 
     private int splitByDelimiter(String text) {
+        // throw 된 exception 을 처리하는 곳은 어디에?
         String [] inputs = text.split(",|:");
         int res = Arrays.stream(inputs)
                 .filter(input -> InputValidator.checkMinusParamInput(input))
                 .map(Integer::parseInt)
                 .reduce(Integer::sum).get();
-//        for (String input : inputs) {
-//            try {
-//                InputValidator.checkMinusParamInput(input);
-//            } catch (RuntimeException e) {
-//                System.out.println("음수는 연산이 불가합니다.");
-//            }
-//            res += Integer.parseInt(input);
-//        }
         return res;
     }
 
