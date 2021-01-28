@@ -1,5 +1,5 @@
 package lotto.domain;
 
-public class Money {
+public class Lotto {
 
 }
