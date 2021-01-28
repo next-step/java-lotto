@@ -1,5 +1,2 @@
-package lotto.domain;
-
-public class WinningNumber {
-
+package lotto.domain;public class WinningNumber {
 }
