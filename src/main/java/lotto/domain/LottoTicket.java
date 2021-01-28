@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class LottoTicket {
     private static final List<Integer> LOTTO_NUMBERS_RANGE = IntStream.range(1, 46).boxed()
             .collect(Collectors.toCollection(ArrayList::new));
     private final List<Integer> pickedNumbers;
+    private Rank rank;
 
     public LottoTicket() {
         pickedNumbers = pickNumbers();
@@ -34,5 +36,17 @@ public class LottoTicket {
 
     public void sortPickedNumbers() {
         Collections.sort(pickedNumbers);
+    }
+
+    public Rank calculateRank(LotteryNumber lotteryNumber) {
+        Set<Integer> intersectionNumbers = new HashSet<>(lotteryNumber.getWinningNumbers());
+        Set<Integer> pickedNumbers = new HashSet<>(this.pickedNumbers);
+        intersectionNumbers.retainAll(pickedNumbers);
+
+        int score = intersectionNumbers.size();
+        boolean hasBonus = pickedNumbers.contains(lotteryNumber.getBonusNumber());
+        rank = Rank.getRank(score, hasBonus);
+
+        return rank;
     }
 }
