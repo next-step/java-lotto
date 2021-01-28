@@ -49,9 +49,10 @@
 - 사용자 입력 출력
 
 ## 클래스 설계
-Enum Class -> Prize 당첨표 3개일치: 5000 , 4개:50000 ...
-Lotto : List 6개 로또 번호 
-LottoGenerator? : lotto 6개 번호 랜덤 생성 후 주입?
-InputView, OutputView : 입출력
-LottoMatcher : 로또 티켓들과 정답 로또 비교 및 정답 로또도 가지고 있어야
-Money : 구입 금액 및 개수 관리
+- Enum Class -> Prize 당첨표 3개일치: 5000 , 4개:50000 ...
+- Lotto : List 6개 로또 번호 
+- LottoGenerator? : lotto 6개 번호 랜덤 생성 후 주입?
+- InputView, OutputView : 입출력
+- LottoMatcher : 로또 티켓들과 정답 로또 비교 및 정답 로또도 가지고 있어야
+- Money : 구입 금액 및 개수 관리
+
