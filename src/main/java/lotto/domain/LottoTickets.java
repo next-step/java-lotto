@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoTickets {
-
-    private List<Lotto> lottoTickets;
+    // 일급 컬렉션:: 컬렉션을 래핑해 컬렉션을 제외한 멤버 변수를 가지지 않는 상태.
+    private final  List<Lotto> lottoTickets;
     private static final int LOTTO_PRICE = 1000;
 
     public LottoTickets(List<Lotto> lottoTickets) {
@@ -13,10 +13,6 @@ public class LottoTickets {
 
     public List<Lotto> getLottoTickets() {
         return lottoTickets;
-    }
-
-    public void setLottoTickets(List<Lotto> lottoTickets) {
-        this.lottoTickets = lottoTickets;
     }
 
     public int getNumberOfTickets() {
