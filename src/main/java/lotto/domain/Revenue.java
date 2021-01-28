@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Revenue {
     THREE_MATCHES(5000, 3, false),
@@ -11,26 +10,41 @@ public enum Revenue {
     SIX_MATCHES(2000000000, 6, false),
     NOTHING(0, 0, false);
 
-    private long revenue;
-    private int matchNum;
-    private boolean bonus;
+    private final long revenue;
+    private final int matchNum;
+    private final Boolean bonus;
 
-    Revenue(long revenue, int matchNum, boolean bonus) {
+    Revenue(long revenue, int matchNum, Boolean bonus) {
         this.revenue = revenue;
         this.matchNum = matchNum;
         this.bonus = bonus;
     }
 
-    public static Revenue checkTheNumberOfMatchingLotto(List<Integer> lottoNumbers,
-        List<Integer> winningNumbers, int bonusNumber) {
-        long matchingCount = winningNumbers.stream()
-            .filter(winningNumber -> lottoNumbers.contains(winningNumber)).count();
-
-        return Arrays.stream(Revenue.values())
-            .filter(revenue -> revenue.matchNum == matchingCount
-                && revenue.bonus == lottoNumbers
-                .contains(bonusNumber))
-            .findFirst()
-            .get();
+    public long getRevenue() {
+        return revenue;
     }
+
+    public boolean getBonus() {
+        return bonus;
+    }
+
+    public int getMatchNum() {
+        return matchNum;
+    }
+
+    public int totalRevenue(int lottoCount) {
+        return (int) revenue * lottoCount;
+    }
+
+    public static Revenue checkTheNumberOfMatchingLotto(Ticket ticket,
+        WinningNumber winningNumber) {
+        long matchingCount = winningNumber.checkTicketAndWinning(ticket);
+        boolean isMatchingWithBonus = winningNumber.checkTicketAndBonus(ticket);
+        return Arrays.stream(Revenue.values())
+            .filter(revenue -> revenue.matchNum == matchingCount)
+            .filter(revenue -> revenue.bonus == isMatchingWithBonus)
+            .findFirst().orElse(NOTHING);
+    }
+
+
 }
