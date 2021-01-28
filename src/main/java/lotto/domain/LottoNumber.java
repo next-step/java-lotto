@@ -5,8 +5,8 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     // 원시값 포장
     //원시값(및 래핑 클래스) 포장이란 원시 타입의 값을 그대로 사용하는 것이 아닌 원시값만을 인스턴스 필드로 가지는 클래스를 사용하는 것
-    public static final int LOWER_BOUND_LOTTO = 1;
-    public static final int UPPER_BOUND_LOTTO = 46;
+    private static final int LOWER_BOUND_LOTTO = 1;
+    private static final int UPPER_BOUND_LOTTO = 46;
     private final int lottoNumber;
 
     public LottoNumber(final int lottoNumber) {

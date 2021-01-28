@@ -6,18 +6,38 @@ import java.util.List;
 
 public class LottoGenerator {
 
-    private static List<Integer> generateLottoNumberArray() {
-        List<Integer> lottoNumArray = new ArrayList<>();
-        for (int i = 0; i < 45; i++) {
-            lottoNumArray.add(i + 1);
+    public static final int LOWER_BOUND_LOTTO = 1;
+    public static final int UPPER_BOUND_LOTTO = 46;
+    public static final int LOTTO_CAPACITY = 6;
+
+    private final List<LottoNumber> possibleLottoNumbers = new ArrayList<>();
+
+    public LottoGenerator() {
+        for (int i = LOWER_BOUND_LOTTO; i < UPPER_BOUND_LOTTO; i++) {
+            possibleLottoNumbers.add(new LottoNumber(i));
         }
-        return lottoNumArray;
     }
 
-    public static List<Lotto> generateLottoNumbers(int numberOfTicket) {
-        List<Integer> lottoNumArray = generateLottoNumberArray();
+    private Lotto generateLottoOneLotto() {
+        Collections.shuffle(possibleLottoNumbers);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int i = 0; i < LOTTO_CAPACITY; i++) {
+            lottoNumbers.add(possibleLottoNumbers.get(i));
+        }
+        return new Lotto(lottoNumbers);
+
+    }
+
+    public List<Lotto> generateLottoTickets(int numberOfTicket) {
+        // 1로또를 만든다
+        // 이 것을 리스트형태로 넘버오브티켓만큼 반복한다
         List<Lotto> lottoTickets = new ArrayList<>();
-        List<Integer> shuffleLottoNumber;
+
+        for(int i = 0; i < numberOfTicket; i++) {
+            Lotto lotto = generateLottoOneLotto();
+            lottoTickets.add(lotto);
+        }
+        return lottoTickets;
 
 //        while(numberOfTicket-- > 0) {
 //            Collections.shuffle(lottoNumArray);
@@ -25,9 +45,8 @@ public class LottoGenerator {
 //            shuffleLottoNumber.remove(0);
 //            lottoTickets.add(new Lotto(shuffleLottoNumber));
 //        }
-
-        return lottoTickets;
     }
+
 
 //    public static List<Lotto> generateLottoNumbers(int numberOfTickets) {
     // lotto 번호를 가진 리스트를 넘버만큼 반복해 생성한다.
