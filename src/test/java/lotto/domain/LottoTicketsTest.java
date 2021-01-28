@@ -15,8 +15,20 @@ class LottoTicketsTest {
     @Test
     void initTest() {
         List<Lotto> Lottos = new ArrayList<Lotto>(){{
-            add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-            add(new Lotto(Arrays.asList(6,7,8,9,10,11)));
+            add(new Lotto(Arrays.asList(new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            )));
+            add(new Lotto(Arrays.asList(new LottoNumber(7),
+                    new LottoNumber(8),
+                    new LottoNumber(9),
+                    new LottoNumber(10),
+                    new LottoNumber(11),
+                    new LottoNumber(12)
+            )));
         }};
         LottoTickets lottoTickets = new LottoTickets(Lottos);
         assertThat(lottoTickets.getLottoTickets()).isEqualTo(Lottos);

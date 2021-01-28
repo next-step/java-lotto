@@ -17,7 +17,15 @@ class LottoTest {
     @DisplayName("로또 번호 저장 테스치")
     @Test
     void 로또_번호_저장() {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        List<LottoNumber> numbers = new ArrayList<>(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+
+                ));
         Lotto lotto = new Lotto(numbers);
         Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
     }
@@ -30,7 +38,13 @@ class LottoTest {
     void lottoNumCountNotQualified() {
 
         Assertions.assertThatThrownBy(() -> {
-            List<Integer> numbers = new ArrayList<>(Arrays.asList(1,3,4,5,6));
+            List<LottoNumber> numbers = new ArrayList<>(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5)
+                    ));
             Lotto lotto = new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
@@ -40,7 +54,14 @@ class LottoTest {
     @Test
     void duplicatedLottoNum() {
         Assertions.assertThatThrownBy(() -> {
-            List<Integer> numbers = new ArrayList<>(Arrays.asList(1,1,1,4,5,6));
+            List<LottoNumber> numbers = new ArrayList<>(Arrays.asList(
+                    new LottoNumber(2),
+                    new LottoNumber(2),
+                    new LottoNumber(2),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            ));
             Lotto lotto = new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
