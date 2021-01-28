@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.List;
 
@@ -12,25 +13,33 @@ public class LottoApplication {
         MatchResult result = new MatchResult();
         // 로또 입력
         // 금액 입력
+        OutputView.printBuy();
         int amount = input.inputAmount();
         // 로또 실행
         // 구매
-        // 번호 당첨
-        int tickets = buyer.matchPriceAndPayment(amount);
-        // TODO : 한 장 만들기. 여러 장 만들기로 바꿔야
-
-        for(int i=0; i<tickets; i++){
-            LottoTicket ticket = LottoGenerator.generateLotto();
-            int matchCount = lotto.matchLotto(ticket); // 몇 개 맞췄는지 반환
-            result.countUpMatch(matchCount);
-        }
-
-        // return result to output view
-        List<Integer> res = result.getResult();
-        Double resRevenue = result.CalculateWinningRevenue();
-        // 결과 출력
-        OutputView.printResult(res);
-        OutputView.printRevenue(resRevenue);
+        // 구매 수량 확인
+        int lottos = buyer.matchPriceAndPayment(amount);
+        OutputView.printBuyerTickets(lottos);
+        // Buy Lotto
+        List<LottoTicket> tickets = buyer.buyLotto(amount);
+        // 구매자 로또 정보 메시지
+        OutputView.printBuyTicketsNumbers(tickets);
+//        // 로또 당첨 번호
+//        OutputView.printLottoMsg();
+//        OutputView.printLottoNumbers(lotto.getLottoTicket());
+//        // 로또 보너스 번호
+//        OutputView.printBonusMsg();
+//        OutputView.printBonusNumber(lotto.getLottoTicket());
+//
+//        // Match Lotto
+//        result.countUpMatch(lotto, tickets);
+//
+//        // return result to output view
+//        List<Integer> res = result.getResult();
+//        Double resRevenue = result.CalculateWinningRevenue();
+//        // 로또 결과 메시지
+//        OutputView.printResult(res);
+//        // 통계 출력 메시지
+//        OutputView.printRevenue(resRevenue);
     }
-
 }

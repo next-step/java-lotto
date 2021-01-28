@@ -8,18 +8,18 @@ public class InputView {
     private static final String BONUS_NUMBER_MSG = "보너스 볼을 입력해 주세요";
     private static Scanner scanner = new Scanner(System.in);
 
-    public Integer inputAmount() {
-        System.out.println(AMOUNT_MSG);
+    public static Integer inputAmount() {
+//        System.out.println(AMOUNT_MSG);
         return scanner.nextInt();
     }
 
-    public String inputLottoNumbers() {
-        System.out.println(LOTTO_NUMBERS_MSG);
+    public static String inputLottoNumbers() {
+//        System.out.println(LOTTO_NUMBERS_MSG);
         return scanner.nextLine();
     }
 
-    public Integer inputBonusNumber() {
-        System.out.println(BONUS_NUMBER_MSG);
+    public static Integer inputBonusNumber() {
+//        System.out.println(BONUS_NUMBER_MSG);
         return scanner.nextInt();
     }
 }

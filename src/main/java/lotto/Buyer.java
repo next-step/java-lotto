@@ -28,31 +28,12 @@ public class Buyer {
 
     }
 
-    public List<List<Integer>> buyLotto(int input) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-
-        List<List<Integer>> lottos = new ArrayList<>();
+    public List<LottoTicket> buyLotto(int input) {
+        List<LottoTicket> lottos = new ArrayList<>();
         int lottoCnt = matchPriceAndPayment(input);
         for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(lottoGenerator.generateLotto());
+            lottos.add(LottoGenerator.generateLotto());
         }
-
         return lottos;
-    }
-
-    public List<Integer> getAnswer(String input) {
-        List<Integer> answerLotto = new ArrayList<>();
-
-        String[] inputs = input.split(", ");
-        for (String s : inputs) {
-            Integer num = Integer.parseInt(s);
-            answerLotto.add(num);
-        }
-
-        return answerLotto;
-    }
-
-    public Integer getBouns(String input) {
-        return Integer.parseInt(input);
     }
 }

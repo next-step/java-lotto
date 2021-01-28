@@ -11,6 +11,7 @@ public class MatchResult {
     private static final int[] PRIZE_REWARDS = {
         5000, 50_000, 1_500_000, 30_000_000, 2_000_000_000
     };
+    private static final int BONUS_REWARD_IDX = 3;
 
     private int tryCount;
     private List<Integer> prizeCount;
@@ -20,10 +21,19 @@ public class MatchResult {
     }
 
     // prizeCount의 input 등수의 카운 올림
-    public void countUpMatch (int input) {
+    public void countUpMatch (Lotto lotto,List<LottoTicket> tickets) {
         // 0 개 맞췄을 때 -1, 임1개 맞추면 prizeCount의 꼴찌(6등) 카운트가 올라
-        if(input-1>=0){
-            prizeCount.set(input, prizeCount.get(input) + 1);
+        for(LottoTicket ticket : tickets) {
+            matchOneTicket(lotto, ticket);
+        }
+    }
+    private void matchOneTicket (Lotto lotto,LottoTicket ticket) {
+        int matchCount = lotto.matchLotto(ticket);
+        if(matchCount == 5 && lotto.matchBonus(ticket)){
+            prizeCount.set(BONUS_REWARD_IDX, prizeCount.get(BONUS_REWARD_IDX) + 1);
+        }
+        else if(matchCount-1>=0){
+            prizeCount.set(matchCount, prizeCount.get(matchCount) + 1);
         }
     }
 
@@ -32,7 +42,7 @@ public class MatchResult {
         this.prizeCount = prizeCount;
     }
 
-//    TODO:
+    //    TODO:
     public List<Integer> getResult() {
         return prizeCount;
     }

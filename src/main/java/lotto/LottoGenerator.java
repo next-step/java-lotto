@@ -12,6 +12,8 @@ public class LottoGenerator {
     private static final int COUNT_LEFT_BOUND = 0;
     private static final int COUNT_RIGHT_BOUND = 5;
 
+    private static final int BONUS_IDX = 6;
+
     private static List<LottoNumber> candidateNumbers = new ArrayList<>();
 
     static {
@@ -22,7 +24,8 @@ public class LottoGenerator {
         }
     }
 
-    public static LottoTicket generateLotto() {
+    // for lotto machine (bonus number)
+    public static LottoTicket generateLotto(LottoNumber bonus) {
         Collections.shuffle(candidateNumbers);
 
         List<LottoNumber> selectedNumbers = candidateNumbers.subList(
@@ -30,6 +33,21 @@ public class LottoGenerator {
         );
         Collections.sort(selectedNumbers);
 
+        return new LottoTicket(selectedNumbers, bonus);
+    }
+    // overload for buyer
+    public static LottoTicket generateLotto() {
+        Collections.shuffle(candidateNumbers);
+
+        List<LottoNumber> selectedNumbers = candidateNumbers.subList(
+                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND
+        );
+        Collections.sort(selectedNumbers);
+
         return new LottoTicket(selectedNumbers);
+    }
+
+    public static LottoNumber generateBonus() {
+        return candidateNumbers.get(BONUS_IDX);
     }
 }
