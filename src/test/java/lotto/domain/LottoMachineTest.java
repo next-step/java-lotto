@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 public class LottoMachineTest {
     static LottoMachine lottoMachine;
 
@@ -25,5 +27,12 @@ public class LottoMachineTest {
     void createLottoTest() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Assertions.assertThat(lottoMachine.createLotto(lottoNumbers).getLottoNumbers()).isEqualTo(lottoNumbers);
+    }
+
+    @Test
+    void createLottoFailureTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
     }
 }
