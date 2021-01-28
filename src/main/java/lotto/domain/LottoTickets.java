@@ -4,19 +4,19 @@ import java.util.List;
 
 public class LottoTickets {
     // 일급 컬렉션:: 컬렉션을 래핑해 컬렉션을 제외한 멤버 변수를 가지지 않는 상태.
-    private final  List<Lotto> lottoTickets;
+    private final  List<PlayersLotto> playersLottoTickets;
     private static final int LOTTO_PRICE = 1000;
 
-    public LottoTickets(List<Lotto> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<PlayersLotto> playersLottoTickets) {
+        this.playersLottoTickets = playersLottoTickets;
     }
 
-    public List<Lotto> getLottoTickets() {
-        return lottoTickets;
+    public List<PlayersLotto> getLottoTickets() {
+        return playersLottoTickets;
     }
 
     public int getNumberOfTickets() {
-        return lottoTickets.size();
+        return playersLottoTickets.size();
     }
 
     public static int countTicketNumberByMoney(int money) {
