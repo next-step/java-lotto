@@ -21,7 +21,7 @@ public class LottoTicketTest {
     @DisplayName("로또번호 6개 생성 테스트")
     @Test
     public void makeRandomNumbersTest() {
-        List<Integer> result = lottoTicket.getLottoNumbers();
+        List<Integer> result = lottoTicket.getPickedNumbers();
         int size = result.size();
         assertThat(size).isEqualTo(LOTTO_NUMBERS_SIZE);
     }
@@ -30,6 +30,6 @@ public class LottoTicketTest {
     @Test
     public void sortLottoNumbersTest() {
         lottoTicket = new LottoTicket(Arrays.asList(6, 5, 4, 3, 2, 1));
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicket.getPickedNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }
