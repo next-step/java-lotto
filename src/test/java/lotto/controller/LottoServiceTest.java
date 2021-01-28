@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,16 +17,27 @@ public class LottoServiceTest {
     private List<LottoTicket> lottoTickets;
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         lottoService = new LottoService();
     }
 
     @DisplayName("로또 구매 개수 확인 테스트")
     @Test
-    public void buyLottoTicketsTest(){
+    public void buyLottoTicketsTest() {
         int numberOfTickets = 5;
         lottoService.buyLottoTickets(numberOfTickets);
         int size = lottoService.getLottoTickets().size();
         assertThat(size).isEqualTo(numberOfTickets);
     }
+
+    @DisplayName("로또 결과 계산 테스트")
+    @Test
+    public void calculateLottoPrizeTest() {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(new LottoTicket(Arrays.asList(1, 12, 23, 34, 25, 16)));
+        lottoTickets.add(new LottoTicket(Arrays.asList(19, 28, 37, 46, 55, 44)));
+        LottoService lottoService = new LottoService(lottoTickets);
+    }
+
+
 }
