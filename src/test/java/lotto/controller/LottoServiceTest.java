@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LotteryNumber;
 import lotto.domain.LottoService;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,8 +36,12 @@ public class LottoServiceTest {
     public void calculateLottoPrizeTest() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         lottoTickets.add(new LottoTicket(Arrays.asList(1, 12, 23, 34, 25, 16)));
-        lottoTickets.add(new LottoTicket(Arrays.asList(19, 28, 37, 46, 55, 44)));
+        lottoTickets.add(new LottoTicket(Arrays.asList(19, 28, 37, 41, 12, 1)));
         LottoService lottoService = new LottoService(lottoTickets);
+
+        LotteryNumber lotteryNumber = new LotteryNumber(Arrays.asList(12, 1, 11, 13, 14, 23), 45);
+        lottoService.recordLotteryNumber(lotteryNumber);
+        lottoService.calculatePrize();
     }
 
 
