@@ -17,11 +17,8 @@ public class Validator {
         return priceOrNull != null && priceOrNull != 0 && priceOrNull % ONE_LOTTO_PRICE == 0;
     }
 
+    // Logic
     public boolean validateWinningNumber(String winningNumber) {
-        // String 받아 올때 " " 없애서 받아오기!
-        //String trimed = winningNumber.replaceAll(" ", "");  // 임시 코드
-        // TODO: length check. 하드 코딩 했음!!! 다른 방법 알아보기!
-        // TODO: unique Number check.
         Pattern pattern = Pattern.compile(FORMAT_REGEX);
         List<String> numbers = Arrays.asList(winningNumber.split(COMMA));
         return pattern.matcher(winningNumber).matches()
@@ -29,7 +26,6 @@ public class Validator {
             && NumberUtils.isNumberUnique(numbers)
             && NumberUtils.isNumberInRange(numbers);
     }
-
 
     public boolean validateBonusNumber(String bonusNumber) {
         Integer bonusNumberOrNull = NumberUtils.returnInteger(bonusNumber);

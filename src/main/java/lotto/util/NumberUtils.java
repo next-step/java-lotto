@@ -1,7 +1,9 @@
 package lotto.util;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NumberUtils {
 
@@ -37,5 +39,17 @@ public class NumberUtils {
 
     public static boolean checkLottoNumber(int num) {
         return FIRST_RANGE_LOTTO_NUMBER < num && num < END_RANGE_LOTTO_NUMBER;
+    }
+
+    public static List<Integer> convertStringToIntegerList(String winningNumber) {
+        return Arrays.stream(winningNumber.split(", "))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+    }
+    public static int convertNullToNumber(Integer value) {
+        if (value == null) {
+            return 0;
+        }
+        return value;
     }
 }
