@@ -1,17 +1,14 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class LottoTest {
+class PlayersLottoTest {
 
 
     @DisplayName("로또 번호 저장 테스치")
@@ -26,8 +23,8 @@ class LottoTest {
                 new LottoNumber(6)
 
                 ));
-        Lotto lotto = new Lotto(numbers);
-        Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
+        PlayersLotto playersLotto = new PlayersLotto(numbers);
+        Assertions.assertThat(playersLotto.getNumbers()).isEqualTo(numbers);
     }
 
     //    @ParameterizedTest
@@ -45,7 +42,7 @@ class LottoTest {
                     new LottoNumber(4),
                     new LottoNumber(5)
                     ));
-            Lotto lotto = new Lotto(numbers);
+            PlayersLotto playersLotto = new PlayersLotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -62,7 +59,7 @@ class LottoTest {
                     new LottoNumber(5),
                     new LottoNumber(6)
             ));
-            Lotto lotto = new Lotto(numbers);
+            PlayersLotto playersLotto = new PlayersLotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
