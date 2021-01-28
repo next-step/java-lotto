@@ -11,12 +11,14 @@ public class MatchResult {
     private static final int[] PRIZE_REWARDS = {
         5000, 50_000, 1_500_000, 30_000_000, 2_000_000_000
     };
+    private static final int MIN_MATCH_BOUND = 3;
     private static final int BONUS_REWARD_IDX = 3;
+    private static final int MAX_MATCH_IDX = 5;
 
-    private int tryCount;
+    private Integer tryCount;
     private List<Integer> prizeCount;
-    public MatchResult() {
-        tryCount = 0;
+    public MatchResult(Integer tryCount) {
+        this.tryCount = tryCount;
         prizeCount = Arrays.asList(new Integer[]{0,0,0,0,0});
     }
 
@@ -29,11 +31,20 @@ public class MatchResult {
     }
     private void matchOneTicket (Lotto lotto,LottoTicket ticket) {
         int matchCount = lotto.matchLotto(ticket);
-        if(matchCount == 5 && lotto.matchBonus(ticket)){
-            prizeCount.set(BONUS_REWARD_IDX, prizeCount.get(BONUS_REWARD_IDX) + 1);
+        // TODO : Enum 적용!!
+        // 6개
+        if(matchCount==6){
+            prizeCount.set(MAX_MATCH_IDX, prizeCount.get(MAX_MATCH_IDX) + 1);
+            return;
         }
-        else if(matchCount-1>=0){
-            prizeCount.set(matchCount, prizeCount.get(matchCount) + 1);
+        if(matchCount==5 && lotto.matchBonus(ticket)){
+            prizeCount.set(BONUS_REWARD_IDX, prizeCount.get(BONUS_REWARD_IDX) + 1);
+            return;
+        }
+        // 3~4개일 떄 & 5개 이고 보너스 x
+        if(matchCount>=MIN_MATCH_BOUND) {
+            prizeCount.set(matchCount-MIN_MATCH_BOUND, prizeCount.get(matchCount-MIN_MATCH_BOUND) + 1);
+            return;
         }
     }
 
@@ -42,7 +53,7 @@ public class MatchResult {
         this.prizeCount = prizeCount;
     }
 
-    //    TODO:
+    //    TODO :
     public List<Integer> getResult() {
         return prizeCount;
     }

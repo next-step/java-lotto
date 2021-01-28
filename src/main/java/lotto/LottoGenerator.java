@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class LottoGenerator {
@@ -29,18 +30,26 @@ public class LottoGenerator {
         Collections.shuffle(candidateNumbers);
 
         List<LottoNumber> selectedNumbers = candidateNumbers.subList(
-            COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND
+            COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
         );
         Collections.sort(selectedNumbers);
 
         return new LottoTicket(selectedNumbers, bonus);
     }
-    // overload for buyer
-    public static LottoTicket generateLotto() {
-        Collections.shuffle(candidateNumbers);
 
-        List<LottoNumber> selectedNumbers = candidateNumbers.subList(
-                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND
+    // overload for buyer
+    public static LottoTicket generateLotto(int j) {
+        List<LottoNumber> candidateNumbers2 = new ArrayList<>();
+        for (int i = VALUE_LEFT_BOUND; i < VALUE_RIHGT_BOUND; i++) {
+            candidateNumbers2.add(
+                new LottoNumber(i)
+            );
+        }
+
+        Collections.shuffle(candidateNumbers2, new Random(j));
+
+        List<LottoNumber> selectedNumbers = candidateNumbers2.subList(
+                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
         );
         Collections.sort(selectedNumbers);
 

@@ -38,7 +38,7 @@ public class OutputView {
             ticketString.append(Integer.toString(ticketNumber));
             ticketString.append(",");
         }
-        ticketString.deleteCharAt(ticketString.lastIndexOf(",")-1);
+        ticketString.deleteCharAt(ticketString.lastIndexOf(","));
         ticketString.append("]");
         System.out.println(ticketString);
     }
@@ -56,7 +56,7 @@ public class OutputView {
             lottoString.append(Integer.toString(lottoNumber));
             lottoString.append(",");
         }
-        lottoString.deleteCharAt(lottoString.lastIndexOf(",")-1);
+        lottoString.deleteCharAt(lottoString.lastIndexOf(","));
         System.out.println(lottoString);
     }
     // 로또 보너스 번호 메시

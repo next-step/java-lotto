@@ -32,7 +32,7 @@ public class Buyer {
         List<LottoTicket> lottos = new ArrayList<>();
         int lottoCnt = matchPriceAndPayment(input);
         for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(LottoGenerator.generateLotto());
+            lottos.add(LottoGenerator.generateLotto(i));
         }
         return lottos;
     }
