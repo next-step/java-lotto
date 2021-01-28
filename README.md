@@ -1,4 +1,4 @@
-# 로또
+# 로또(lotto package)
 
 ## 기능
 
@@ -12,6 +12,24 @@
 * 출력
     * 당첨 통계
     * 수익률
+
+## 구현
+
+- __LottoMain__
+  - LottoMachine 실행
+  - LottoNumbers 받음
+  - LottoCalculation
+
+- __LottoMachine__
+  - 가격 받음 
+  - 로또 갯수 계산
+  - 갯수에 맞는 로또 번호 생성
+  
+- __LottoCalculation__
+  - 로또 당첨 번호 확인
+  - 보너스볼 번호 확인
+  
+- __Lotto__ (일급 컬렉션)
 
 ## 진행 방법
 * 로또 요구사항을 파악한다.
