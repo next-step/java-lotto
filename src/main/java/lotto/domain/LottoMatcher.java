@@ -14,6 +14,14 @@ public class LottoMatcher {
             PrizeBoard.put(prize,0);
         }
     }
+    public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerNumbers) {
+        List<PlayersLotto> playersLottoTickets = lottoTickets.getLottoTickets();
+        for (PlayersLotto lotto : playersLottoTickets) {
+            int matchCnt = getMatchCnt(lotto.getNumbers(), winnerNumbers);
+            Prize prize = getPrizeForEachLotto(matchCnt);
+            addPrizeStatus(prize);
+        }
+    }
 
     public static int getMatchCnt(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
         return (int) lottoNumber.stream()
