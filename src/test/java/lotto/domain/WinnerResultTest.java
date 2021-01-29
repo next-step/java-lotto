@@ -11,23 +11,27 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerResultTest {
-    @DisplayName("1등 1개, 4등 1개")
+    @DisplayName("1등 1개, 2등 1개, 꽝 1개")
     @Test
     void getResult() {
         // given
-        LottoNumbers winningNumbers = createWinningNumbers();
-        List<LottoNumbers> pickedLottoNumbers = new ArrayList<>(createPickedNumbers());
-        WinnerResult winnerResult = new WinnerResult(winningNumbers, pickedLottoNumbers);
+        LottoTicket winningTicket = createWinningTicket();
+        LottoNumber bonusNumber = new LottoNumber(45);
+        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+
+        List<LottoTicket> pickedLottoTickets = new ArrayList<>(createPickedTickets());
+        WinnerResult winnerResult = new WinnerResult(goldenTicket, pickedLottoTickets);
 
         // when
-        EnumMap<Rank, Integer> result = winnerResult.getResult();
+        EnumMap<Rank, Integer> result = winnerResult.getResults();
 
         // then
         assertThat(result.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
-        assertThat(result.getOrDefault(Rank.FOURTH, 0)).isEqualTo(1);
+        assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
+        assertThat(result.getOrDefault(Rank.NONE, 0)).isEqualTo(1);
     }
 
-    private LottoNumbers createWinningNumbers() {
+    private LottoTicket createWinningTicket() {
         List<LottoNumber> lottoNumbersList = Arrays.asList(
                 new LottoNumber(8),
                 new LottoNumber(21),
@@ -36,10 +40,10 @@ public class WinnerResultTest {
                 new LottoNumber(42),
                 new LottoNumber(43)
         );
-        return new LottoNumbers(lottoNumbersList);
+        return new LottoTicket(lottoNumbersList);
     }
 
-    private List<LottoNumbers> createPickedNumbers() {
+    private List<LottoTicket> createPickedTickets() {
         List<LottoNumber> lottoNumberList = Arrays.asList(
                 new LottoNumber(8),
                 new LottoNumber(21),
@@ -53,7 +57,7 @@ public class WinnerResultTest {
                 new LottoNumber(23),
                 new LottoNumber(41),
                 new LottoNumber(42),
-                new LottoNumber(44),
+                new LottoNumber(43),
                 new LottoNumber(45)
         );
         List<LottoNumber> lottoNumberList3 = Arrays.asList(
@@ -64,11 +68,11 @@ public class WinnerResultTest {
                 new LottoNumber(35),
                 new LottoNumber(44)
         );
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-        LottoNumbers lottoNumbers2 = new LottoNumbers(lottoNumberList2);
-        LottoNumbers lottoNumbers3 = new LottoNumbers(lottoNumberList3);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
+        LottoTicket lottoTicket2 = new LottoTicket(lottoNumberList2);
+        LottoTicket lottoTicket3 = new LottoTicket(lottoNumberList3);
         return Arrays.asList(
-                lottoNumbers, lottoNumbers2, lottoNumbers3
+                lottoTicket, lottoTicket2, lottoTicket3
         );
     }
 }
