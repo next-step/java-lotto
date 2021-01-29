@@ -21,7 +21,9 @@ public class LottoTicketGenerator {
 
     public static LottoTicket generateRandomTicket() {
         Collections.shuffle(candidateNumbers);
-        List<LottoNumber> numbers = candidateNumbers.subList(0, TICKET_LENGTH);
+        List<LottoNumber> numbers = new ArrayList<>(
+            candidateNumbers.subList(0, TICKET_LENGTH)
+        );
         Collections.sort(numbers);
 
         return new LottoTicket(numbers);
