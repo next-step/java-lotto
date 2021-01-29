@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.dto.TicketData;
 import lotto.dto.BuyerData;
 import lotto.dto.ScoreBoardData;
-import lotto.dto.ScoreData;
 
 import java.util.stream.Collectors;
 

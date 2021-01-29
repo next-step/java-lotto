@@ -3,7 +3,11 @@ package lotto.domain;
 import lotto.dto.ScoreBoardData;
 import lotto.dto.ScoreData;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoBuyerGenerator.BUY_TICKET_COST;
