@@ -1,11 +1,10 @@
 package lotto.view;
 
-import lotto.LottoScore;
-import lotto.domain.LottoTicket;
-import lotto.dto.LottoTicketCntDTO;
 import lotto.dto.LottoTicketDTO;
+import lotto.dto.LottoTicketCntDTO;
+import lotto.dto.ScoreBoardData;
+import lotto.dto.ScoreData;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -13,13 +12,13 @@ public class OutputView {
     private static final String TICKET_DELIMITER = ", ";
     private static final String TICKET_FMT = "[%s]\n";
 
-    private static final String RESULT_TITLE_MSG = "당첨 통계";
-    private static final String RESULT_DELIMITER_MSG = "---------";
-    private static final String RESULT_MATCH_COUNT_DESCRIBE_MSG = "개 일치";
-    private static final String RESULT_BOUNS_DESCRIBE_MSG = ", 보너스 볼 일치";
+    private static final String SCORE_BOARD_TITLE_MSG = "당첨 통계";
+    private static final String SCORE_BOARD_DELIMITER_MSG = "---------";
+    private static final String SCORE_BOUNS_DESCRIBE_MSG = ", 보너스 볼 일치";
+    private static final String SCORE_MATCH_COUNT_DESCRIBE_MSG = "개 일치";
+    private static final String SCORE_FMT = "%d%s (%d원) - %d개\n";
 
-    private static final String RESULT_SCORE_FMT = "%d%s (%d원) - (%d)개";
-    private static final String RESULT_PROFIT_PERCENT_FMT = "총 수익률은 %.2f 입니다.";
+    private static final String PROFIT_FMT = "총 수익률은 %.2f 입니다.";
 
     public void printTicketCnt(LottoTicketCntDTO dto) {
         System.out.format(TICKET_CNT_FMT, dto.getTicketCnt());
@@ -36,10 +35,27 @@ public class OutputView {
         );
     }
 
-    private String getDescribeMsg(boolean isBonusMatched) {
-        String msg = RESULT_MATCH_COUNT_DESCRIBE_MSG;
+    public void printScoreBoardData(ScoreBoardData scoreBoardData) {
+        System.out.println(SCORE_BOARD_TITLE_MSG);
+        System.out.println(SCORE_BOARD_DELIMITER_MSG);
+
+        for (ScoreData score : scoreBoardData.getScores()) {
+            System.out.format(
+                SCORE_FMT,
+                score.getMatchedCnt(),
+                getScoreDescribeMsg(score.getIsBoundMatched()),
+                score.getReward(),
+                score.getScoreCnt()
+            );
+        }
+
+        System.out.format(PROFIT_FMT, scoreBoardData.getProfit());
+    }
+
+    private String getScoreDescribeMsg(boolean isBonusMatched) {
+        String msg = SCORE_MATCH_COUNT_DESCRIBE_MSG;
         if (isBonusMatched) {
-            msg += RESULT_BOUNS_DESCRIBE_MSG;
+            msg += SCORE_BOUNS_DESCRIBE_MSG;
         }
         return msg;
     }
