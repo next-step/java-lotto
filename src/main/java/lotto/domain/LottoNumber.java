@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.LottoNumberDTO;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -23,6 +25,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < NUM_LEFT_BOUND || number > NUM_RIGHT_BOUND) {
             throw new RuntimeException();
         }
+    }
+
+    public LottoNumberDTO getLottoNumberDTO() {
+        return new LottoNumberDTO(number);
     }
 
     @Override

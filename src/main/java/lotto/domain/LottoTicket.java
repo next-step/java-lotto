@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.dto.LottoNumberDTO;
+import lotto.dto.LottoTicketDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,6 +31,14 @@ public class LottoTicket {
 
     public boolean includeNumber(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public LottoTicketDTO getLottoTicketDTO() {
+        List<LottoNumberDTO> numbersDTO = new ArrayList<>();
+        for (LottoNumber number : numbers) {
+            numbersDTO.add(number.getLottoNumberDTO());
+        }
+        return new LottoTicketDTO(numbersDTO);
     }
 
     @Override
