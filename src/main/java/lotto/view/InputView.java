@@ -11,7 +11,9 @@ public class InputView {
 
     public Integer inputTotalCost() {
         System.out.println(TOTAL_COST_MSG);
-        return scanner.nextInt();
+        Integer totalCost = scanner.nextInt();
+        scanner.nextLine(); // To remove new line character.
+        return totalCost;
     }
 
     public String inputLottoNumbers() {
