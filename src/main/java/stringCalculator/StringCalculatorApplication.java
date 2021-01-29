@@ -11,9 +11,12 @@ public class StringCalculatorApplication {
         OutputHandler outputHandler = new OutputHandler();
         StringCalculator calculator = new StringCalculator();
         String userInput = inputHandler.requestUserInput();
-        System.out.print(userInput);
 
-        outputHandler.printResult(calculator.add(userInput));
-
+        try {
+            outputHandler.printResult(calculator.add(userInput));
+        } catch (RuntimeException ex) {
+            outputHandler.printNegativeNumberError();
+            System.exit(0);
+        }
     }
 }
