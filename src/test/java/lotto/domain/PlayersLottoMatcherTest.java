@@ -21,9 +21,24 @@ class PlayersLottoMatcherTest {
     @DisplayName(value = "로또 티켓의 번호를 입력하면 일치 번호 개수를 출력한다.")
     @Test
     void getLottoTicketCount() {
-        List<Integer> lottoNumber = new ArrayList<>(Arrays.asList(1, 3, 5, 14, 22, 45));
-        List<Integer> winnerNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoMatcher.getMatchCnt(lottoNumber, winnerNumbers)).isEqualTo(3);
+        List<LottoNumber> lottoNumber = new ArrayList<>();
+        lottoNumber.add(new LottoNumber(1));
+        lottoNumber.add(new LottoNumber(3));
+        lottoNumber.add(new LottoNumber(5));
+        lottoNumber.add(new LottoNumber(14));
+        lottoNumber.add(new LottoNumber(22));
+        lottoNumber.add(new LottoNumber(45));
+
+        List<LottoNumber> winnerNumbers = new ArrayList<>();
+        winnerNumbers.add(new LottoNumber(1));
+        winnerNumbers.add(new LottoNumber(2));
+        winnerNumbers.add(new LottoNumber(3));
+        winnerNumbers.add(new LottoNumber(4));
+        winnerNumbers.add(new LottoNumber(5));
+        winnerNumbers.add(new LottoNumber(6));
+
+        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
+        assertThat(lottoMatcher.getMatchCnt(lottoNumber, winnerLotto)).isEqualTo(3);
     }
 
 }
