@@ -33,12 +33,14 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public TicketData getLottoTicketDTO() {
-        List<NumberData> numbersDTO = new ArrayList<>();
+    public TicketData getTicketData() {
+        List<NumberData> numbersData = new ArrayList<>();
         for (LottoNumber number : numbers) {
-            numbersDTO.add(number.getNumberData());
+            numbersData.add(
+                number.getNumberData()
+            );
         }
-        return new TicketData(numbersDTO);
+        return new TicketData(numbersData);
     }
 
     @Override

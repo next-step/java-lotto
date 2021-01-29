@@ -7,8 +7,8 @@ import java.util.Objects;
 public class TicketData {
     private final List<NumberData> numbersData;
 
-    public TicketData(List<NumberData> NumbersData) {
-        this.numbersData = NumbersData;
+    public TicketData(List<NumberData> numbersData) {
+        this.numbersData = numbersData;
     }
 
     public List<Integer> getNumbersData() {

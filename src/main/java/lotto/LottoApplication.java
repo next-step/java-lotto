@@ -27,7 +27,7 @@ public class LottoApplication {
         List<LottoTicket> tickets = new ArrayList<>();
         while (buyer.canBuyTicket()) {
             LottoTicket ticket = buyer.buyTicket();
-            output.printTicket(ticket.getLottoTicketDTO());
+            output.printTicket(ticket.getTicketData());
             tickets.add(ticket);
         }
 

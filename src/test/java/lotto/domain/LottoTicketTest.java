@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.NumberData;
+import lotto.dto.TicketData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,11 +70,30 @@ class LottoTicketTest {
 
     @DisplayName("특정 번호를 포함하고 있지 않은지를 잘 체크하는지 확인")
     @Test
-    void NotIncludeBounsNumber() {
+    void isNotIncludeBounsNumber() {
         assertThat(
             ticket.includeNumber(
                 new LottoNumber(1)
             )
         ).isEqualTo(true);
+    }
+
+    @DisplayName("티켓 데이터를 잘 생성하는지 확인")
+    @Test
+    void getTicketData() {
+        assertThat(
+            ticket.getTicketData()
+        ).isEqualTo(
+            new TicketData(
+                new ArrayList<NumberData>() {{
+                    add(new NumberData(1));
+                    add(new NumberData(2));
+                    add(new NumberData(3));
+                    add(new NumberData(4));
+                    add(new NumberData(5));
+                    add(new NumberData(6));
+                }}
+            )
+        );
     }
 }
