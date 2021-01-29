@@ -28,7 +28,7 @@ public class LottoTicket {
 
     public List<Integer> pickNumbers() {
         Collections.shuffle(LOTTO_NUMBERS_RANGE);
-        return LOTTO_NUMBERS_RANGE.subList(0, PICKED_NUMBERS_SIZE);
+        return new ArrayList<>(LOTTO_NUMBERS_RANGE.subList(0, PICKED_NUMBERS_SIZE));
     }
 
     public List<Integer> getPickedNumbers() {
