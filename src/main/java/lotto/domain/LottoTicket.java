@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 
 public class LottoTicket {
-    private static final int TICKET_LENGTH = 6;
+    public static final int TICKET_LENGTH = 6;
 
     private List<LottoNumber> numbers;
 

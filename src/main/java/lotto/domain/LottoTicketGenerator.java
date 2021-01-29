@@ -7,6 +7,7 @@ import java.util.List;
 
 import static lotto.domain.LottoNumber.NUM_LEFT_BOUND;
 import static lotto.domain.LottoNumber.NUM_RIGHT_BOUND;
+import static lotto.domain.LottoTicket.TICKET_LENGTH;
 
 public class LottoTicketGenerator {
     private static final String MANUAL_NUMBER_DELIMITER = ", ";
@@ -20,7 +21,7 @@ public class LottoTicketGenerator {
 
     public static LottoTicket generateRandomTicket() {
         Collections.shuffle(candidateNumbers);
-        List<LottoNumber> numbers = candidateNumbers.subList(0, 6);
+        List<LottoNumber> numbers = candidateNumbers.subList(0, TICKET_LENGTH);
         Collections.sort(numbers);
 
         return new LottoTicket(numbers);
