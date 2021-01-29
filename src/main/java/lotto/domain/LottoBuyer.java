@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.dto.LottoTicketCntDTO;
+
 import java.util.Objects;
 
 public class LottoBuyer {
@@ -11,14 +11,17 @@ public class LottoBuyer {
         this.ticketCnt = ticketCnt;
     }
 
-    public List<LottoTicket> BuyTickets() {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        while (ticketCnt-- > 0) {
-            lottoTickets.add(
-                LottoTicketGenerator.generateRandomTicket()
-            );
-        }
-        return lottoTickets;
+    public boolean canBuyTicket() {
+        return this.ticketCnt > 0;
+    }
+
+    public LottoTicket buyTicket() {
+        ticketCnt--;
+        return LottoTicketGenerator.generateRandomTicket();
+    }
+
+    public LottoTicketCntDTO getLottoTicketCntDTO() {
+        return new LottoTicketCntDTO(ticketCnt);
     }
 
     @Override
