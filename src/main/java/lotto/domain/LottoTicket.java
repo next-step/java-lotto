@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
+    public static final int PRICE = 1000;
     private static final int PICKED_NUMBERS_SIZE = 6;
     private static final List<Integer> LOTTO_NUMBERS_RANGE = IntStream.range(1, 46).boxed()
             .collect(Collectors.toCollection(ArrayList::new));
