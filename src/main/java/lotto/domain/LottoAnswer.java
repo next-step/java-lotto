@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-
 import java.util.Objects;
 
 public class LottoAnswer {
