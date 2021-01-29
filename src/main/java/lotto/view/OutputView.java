@@ -23,6 +23,6 @@ public class OutputView {
         System.out.printf("5개 일치 (%d원) - %d\n", Rank.THIRD.getReward(), lottoRankingStatus.get(Rank.THIRD));
         System.out.printf("5개 일치, 보너스 볼 일치 (%d원) - %d\n", Rank.SECOND.getReward(), lottoRankingStatus.get(Rank.SECOND));
         System.out.printf("6개 일치 (%d원) - %d\n", Rank.FIRST.getReward(), lottoRankingStatus.get(Rank.FIRST));
-        System.out.printf("총 수익률은 %f 입니다.\n", interestRate);
+        System.out.printf("총 수익률은 %.1f 입니다.\n", interestRate);
     }
 }
