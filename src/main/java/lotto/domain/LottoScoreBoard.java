@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import lotto.dto.LottoGameProfitDTO;
+import lotto.dto.ScoreBoardData;
+import lotto.dto.ScoreData;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoBuyerGenerator.BUY_TICKET_COST;
 
@@ -23,7 +25,18 @@ public class LottoScoreBoard {
         }
     }
 
-    public LottoGameProfitDTO calculateProfit() {
+    public ScoreBoardData getScoreBoardData() {
+        return new ScoreBoardData(
+            scoreBoard.entrySet().stream().filter(
+                board -> board.getKey() != LottoScore.NOTHING
+            ).map(
+                board -> new ScoreData(board.getKey(), board.getValue())
+            ).collect(Collectors.toList()),
+            calculateProfit()
+        );
+    }
+
+    private double calculateProfit() {
         double profit = scoreBoard.entrySet().stream().mapToDouble(
             board -> board.getKey().getReward() * board.getValue()
         ).sum();
@@ -32,9 +45,7 @@ public class LottoScoreBoard {
             board -> board.getValue()
         ).sum();
 
-        return new LottoGameProfitDTO(
-            profit / (cost * BUY_TICKET_COST)
-        );
+        return profit / (cost * BUY_TICKET_COST);
     }
 
     @Override
