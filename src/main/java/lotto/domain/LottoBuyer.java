@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoTicketCntDTO;
+import lotto.dto.BuyerData;
 
 import java.util.Objects;
 
@@ -20,8 +20,8 @@ public class LottoBuyer {
         return LottoTicketGenerator.generateRandomTicket();
     }
 
-    public LottoTicketCntDTO getLottoTicketCntDTO() {
-        return new LottoTicketCntDTO(ticketCnt);
+    public BuyerData getBuyerData() {
+        return new BuyerData(ticketCnt);
     }
 
     @Override

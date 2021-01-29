@@ -1,14 +1,15 @@
 package lotto.view;
 
 import lotto.dto.LottoTicketDTO;
-import lotto.dto.LottoTicketCntDTO;
+import lotto.dto.BuyerData;
 import lotto.dto.ScoreBoardData;
 import lotto.dto.ScoreData;
 
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String TICKET_CNT_FMT = "%d개를 구매했습니다.\n";
+    private static final String BUYER_FMT = "%d개를 구매했습니다.\n";
+
     private static final String TICKET_DELIMITER = ", ";
     private static final String TICKET_FMT = "[%s]\n";
 
@@ -20,8 +21,8 @@ public class OutputView {
 
     private static final String PROFIT_FMT = "총 수익률은 %.2f 입니다.";
 
-    public void printTicketCnt(LottoTicketCntDTO dto) {
-        System.out.format(TICKET_CNT_FMT, dto.getTicketCnt());
+    public void printBuyerData(BuyerData buyerData) {
+        System.out.format(BUYER_FMT, buyerData.getTicketCnt());
     }
 
     public void printTicket(LottoTicketDTO dto) {

@@ -18,8 +18,11 @@ public class LottoApplication {
         InputView input = new InputView();
         OutputView output = new OutputView();
 
-        LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(input.inputTotalCost());
-        output.printTicketCnt(buyer.getLottoTicketCntDTO());
+        // Buy Lotto Tickets
+        LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(
+            input.inputTotalCost()
+        );
+        output.printBuyerData(buyer.getBuyerData());
 
         List<LottoTicket> tickets = new ArrayList<>();
         while (buyer.canBuyTicket()) {
@@ -28,6 +31,7 @@ public class LottoApplication {
             tickets.add(ticket);
         }
 
+        // Make Lotto Answer
         LottoAnswer answer = new LottoAnswer(
             LottoTicketGenerator.generateManualTicket(
                 input.inputAnswerNumbers()
@@ -37,6 +41,7 @@ public class LottoApplication {
             )
         );
 
+        // Play Lotto Game
         LottoGame game = new LottoGame(answer, tickets);
         output.printScoreBoardData(
             game.calcScoreBoard().getScoreBoardData()
