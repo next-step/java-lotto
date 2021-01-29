@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicketDTO {
-    private List<LottoNumberDTO> lottoNumbers;
+    private final List<NumberData> numbersData;
 
-    public LottoTicketDTO(List<LottoNumberDTO> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoTicketDTO(List<NumberData> NumbersData) {
+        this.numbersData = NumbersData;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> getNumbersData() {
         List<Integer> numbers = new ArrayList<>();
-        for (LottoNumberDTO lottoNumber : lottoNumbers) {
+        for (NumberData lottoNumber : numbersData) {
             numbers.add(lottoNumber.getNumber());
         }
         return numbers;
@@ -24,11 +24,11 @@ public class LottoTicketDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicketDTO that = (LottoTicketDTO) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(numbersData, that.numbersData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(numbersData);
     }
 }

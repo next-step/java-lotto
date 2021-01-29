@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoNumberDTO;
+import lotto.dto.NumberData;
 
 import java.util.Objects;
 
@@ -27,8 +27,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public LottoNumberDTO getLottoNumberDTO() {
-        return new LottoNumberDTO(number);
+    public NumberData getNumberData() {
+        return new NumberData(number);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class OutputView {
     public void printTicket(LottoTicketDTO dto) {
         System.out.format(
             TICKET_FMT,
-            dto.getLottoNumbers().stream().map(
+            dto.getNumbersData().stream().map(
                 Object::toString
             ).collect(
                 Collectors.joining(TICKET_DELIMITER)

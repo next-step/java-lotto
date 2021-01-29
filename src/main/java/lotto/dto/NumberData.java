@@ -2,10 +2,10 @@ package lotto.dto;
 
 import java.util.Objects;
 
-public class LottoNumberDTO {
-    private Integer number;
+public class NumberData {
+    private final Integer number;
 
-    public LottoNumberDTO(Integer number) {
+    public NumberData(Integer number) {
         this.number = number;
     }
 
@@ -17,7 +17,7 @@ public class LottoNumberDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumberDTO that = (LottoNumberDTO) o;
+        NumberData that = (NumberData) o;
         return Objects.equals(number, that.number);
     }
 

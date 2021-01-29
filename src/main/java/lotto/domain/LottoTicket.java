@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoNumberDTO;
+import lotto.dto.NumberData;
 import lotto.dto.LottoTicketDTO;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class LottoTicket {
     }
 
     public LottoTicketDTO getLottoTicketDTO() {
-        List<LottoNumberDTO> numbersDTO = new ArrayList<>();
+        List<NumberData> numbersDTO = new ArrayList<>();
         for (LottoNumber number : numbers) {
-            numbersDTO.add(number.getLottoNumberDTO());
+            numbersDTO.add(number.getNumberData());
         }
         return new LottoTicketDTO(numbersDTO);
     }
