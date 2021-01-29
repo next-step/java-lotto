@@ -13,7 +13,7 @@ public class LottoNumbersPicker {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         Random random = new Random();
         while (lottoNumbers.size() < MAX_BOUNDARY_AMOUNT) {
-            int number = random.nextInt(MAX_BOUNDARY_NUMBER);
+            int number = random.nextInt(MAX_BOUNDARY_NUMBER) + 1;
             lottoNumbers.add(new LottoNumber(number));
         }
         List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);

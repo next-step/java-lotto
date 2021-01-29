@@ -11,21 +11,19 @@ public class LottoResult {
         addBonusLottoNumbersCount(goldenTicket, lottoTicket);
     }
 
-    // 보너스 번호 제외하고 카운팅
     private void addNormalLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
         count += goldenTicket.getMatchedNumbersCount(lottoTicket);
-        if (count == WINNER_BALL_COUNT) {   // 1등
-            count++;//7을 만들어준다. 1등
+        if (count == WINNER_BALL_COUNT) {
+            count++;
         }
     }
 
-    //
     private void addBonusLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket myLottoTicket) {
         if (count != BONUS_BALL_COUNT) {
             return;
         }
         if (goldenTicket.containBonusBall(myLottoTicket)) {
-            count++; //6을 만들어준다. 2등
+            count++;
         }
     }
 

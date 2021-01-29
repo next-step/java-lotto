@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinnerResultTest {
+public class WinnerStatisticsTest {
     @DisplayName("1등 1개, 2등 1개, 꽝 1개")
     @Test
     void getResult() {
@@ -20,10 +20,10 @@ public class WinnerResultTest {
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
 
         List<LottoTicket> pickedLottoTickets = new ArrayList<>(createPickedTickets());
-        WinnerResult winnerResult = new WinnerResult(goldenTicket, pickedLottoTickets);
+        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, pickedLottoTickets);
 
         // when
-        EnumMap<Rank, Integer> result = winnerResult.getResults();
+        EnumMap<Rank, Integer> result = winnerStatistics.getResults();
 
         // then
         assertThat(result.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);

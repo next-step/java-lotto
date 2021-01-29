@@ -1,21 +1,33 @@
 package lotto;
 
-import lotto.domain.LottoNumbersPicker;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        // purchaseAmount 입력 받기
+        OutputView outputView = new OutputView();
+        InputView inputView = new InputView();
+        int purchaseAmount = inputView.getPurchaseAmount();
+        int purchaseCount = purchaseAmount / 1_000;
+        outputView.printPurchaseCount(purchaseCount);
 
-        // LottoNumbers n개 생성 ... (n회 반복)
-        LottoTicket lottoTicket = new LottoTicket(LottoNumbersPicker.pick());
+        List<LottoTicket> lottoTickets = IntStream
+                .range(0, purchaseCount)
+                .mapToObj(i -> new LottoTicket(LottoNumbersPicker.pick()))
+                .collect(Collectors.toList());
+        outputView.printLottoTickets(lottoTickets);
 
-        // 당첨 번호 & 보너스볼 입력 받기
+        LottoTicket winningTicket = inputView.getWinningTicket();
+        LottoNumber bonusNumber = inputView.getBonusNumber();
+        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
 
-        // n개 LottoTicket에 대해 getRankComparedWith() 호출 (당첨 통계 내기)
-
-        // 당첨 통계 출력
-
+        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
+        outputView.printStatistics(winnerStatistics, purchaseAmount);
     }
 }
