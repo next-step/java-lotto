@@ -11,6 +11,7 @@ public class LottoMain {
         try {
             int money = InputView.getMoneyToBuyLotto();
             int numberOfTicket = LottoTickets.countTicketNumberByMoney(money);
+            int matchCnt = 0;
             LottoGenerator lottoGenerator = new LottoGenerator();
             // 무작위 로또를 생성해 로또티켓 객체에 생성자 주입
             List<PlayersLotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTickets(numberOfTicket);
@@ -21,12 +22,11 @@ public class LottoMain {
             List<LottoNumber> winningLotto = WinnerLotto.getWinnerLottoWithSplitting(winningLottoNumber);
             LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
             WinnerLotto winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
-//            Arrays.stream(winningLottoNumber.split(", ")).map(Integer::parseInt);
 
-//            for (int i = 0; i < purchasedTickets.getNumberOfTickets(); i++) {
-//
-//            }
-
+            for (int i = 0; i < purchasedTickets.getNumberOfTickets(); i++) {
+                matchCnt = LottoMatcher.getMatchCnt(purchasedTickets.getLottoTickets().get(i).getNumbers(), winnerLotto);
+            }
+            
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
