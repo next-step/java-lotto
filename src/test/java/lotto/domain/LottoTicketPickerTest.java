@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumbersPickerTest {
+class LottoTicketPickerTest {
 
     @DisplayName("pick한 LottoNumber가 총 6개")
     @Test

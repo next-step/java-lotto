@@ -4,26 +4,28 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class WinnerResult {
-    private final EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+    private final EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
     private final int earningsRate;  // 수익률
 
     /**
-     * @param winningNumbers   당첨번호
-     * @param lottoNumbersList 구입한 로또들
+     * @param goldenTicket 당첨 번호 (보너스 볼 포함)
+     * @param lottoTickets 구입한 로또들
      */
-    public WinnerResult(LottoNumbers winningNumbers, List<LottoNumbers> lottoNumbersList) {
-        analyze(winningNumbers, lottoNumbersList);  // 당첨 통계 분석
+    public WinnerResult(final GoldenTicket goldenTicket, final List<LottoTicket> lottoTickets) {
+        analyze(goldenTicket, lottoTickets);  // 당첨 통계 분석
         earningsRate = 0;
     }
 
-    private void analyze(final LottoNumbers winningNumbers, final List<LottoNumbers> lottoNumbersList) {
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            int count = lottoNumbers.getSameNumbersCount(winningNumbers);
-            result.put(Rank.of(count), result.getOrDefault(Rank.of(count), 0) + 1);
+    // TODO: winningTicket은 별도 객체로 분리 (6개의 LottoNumber / 1개의 bonusNumber를 가짐)
+    private void analyze(final GoldenTicket goldenTicket, final List<LottoTicket> pickedLottoTickets) {
+        for (LottoTicket lottoTicket : pickedLottoTickets) {
+            LottoResult result = new LottoResult(goldenTicket, lottoTicket);
+            Rank rank = result.getRank();
+            results.put(rank, results.getOrDefault(rank, 0) + 1);
         }
     }
 
-    public EnumMap<Rank, Integer> getResult() {
-        return result;
+    public EnumMap<Rank, Integer> getResults() {
+        return results;
     }
 }

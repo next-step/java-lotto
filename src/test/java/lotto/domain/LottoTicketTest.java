@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LottoNumbersTest {
+class LottoTicketTest {
 
     @DisplayName("생성자의 인자로 들어온 LottoNumbers의 size가 6이 아니면 예외 발생")
     @Test
@@ -24,6 +24,6 @@ class LottoNumbersTest {
 
         // when & then
         assertThrows(RuntimeException.class,
-                () -> new LottoNumbers(lottoNumbers));
+                () -> new LottoTicket(lottoNumbers));
     }
 }
