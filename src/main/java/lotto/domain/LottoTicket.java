@@ -4,6 +4,7 @@ import lotto.dto.NumberData;
 import lotto.dto.TicketData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,10 +16,19 @@ public class LottoTicket {
     private List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
-        if (numbers.size() != TICKET_LENGTH) {
+        if (!isProperNumberCnt(numbers) || hasDuplicateNumber(numbers)) {
             throw new RuntimeException();
         }
+
         this.numbers = numbers;
+    }
+
+    private boolean isProperNumberCnt(List<LottoNumber> numbers) {
+        return numbers.size() == TICKET_LENGTH;
+    }
+
+    private boolean hasDuplicateNumber(List<LottoNumber> numbers) {
+        return numbers.size() != new HashSet<>(numbers).size();
     }
 
     public int getMatchedCnt(LottoTicket other) {
