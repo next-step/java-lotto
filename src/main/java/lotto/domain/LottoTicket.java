@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.NumberData;
-import lotto.dto.LottoTicketDTO;
+import lotto.dto.TicketData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +33,12 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public LottoTicketDTO getLottoTicketDTO() {
+    public TicketData getLottoTicketDTO() {
         List<NumberData> numbersDTO = new ArrayList<>();
         for (LottoNumber number : numbers) {
             numbersDTO.add(number.getNumberData());
         }
-        return new LottoTicketDTO(numbersDTO);
+        return new TicketData(numbersDTO);
     }
 
     @Override
