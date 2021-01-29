@@ -1,5 +1,8 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketTest {
-    @DisplayName("두 티켓의 같은 값이 몇개 있는지를 잘 반환하는지")
-    @Test
-    void countMatches() {
-        LottoTicket ticket1 = new LottoTicket(
+    private LottoTicket ticket;
+
+    @BeforeEach
+    void setUp() {
+        ticket = new LottoTicket(
             new ArrayList<LottoNumber>() {{
                 add(new LottoNumber(1));
                 add(new LottoNumber(2));
@@ -22,8 +26,24 @@ class LottoTicketTest {
                 add(new LottoNumber(6));
             }}
         );
+    }
 
-        LottoTicket ticket2 = new LottoTicket(
+    @DisplayName("티켓 내의 숫자가 6개가 아닌 경우 예외를 던지는지 확인")
+    @Test
+    void NotMatchedLottoNumbers() {
+        assertThrows(RuntimeException.class, () -> {
+            new LottoTicket(
+                new ArrayList<LottoNumber>() {{
+                    add(new LottoNumber(1));
+                }}
+            );
+        });
+    }
+
+    @DisplayName("두 티켓의 같은 숫자 개수를 잘 반환하는지 확인")
+    @Test
+    void countMatches() {
+        LottoTicket otherTicket = new LottoTicket(
             new ArrayList<LottoNumber>() {{
                 add(new LottoNumber(5));
                 add(new LottoNumber(6));
@@ -34,25 +54,13 @@ class LottoTicketTest {
             }}
         );
 
-        assertThat(
-            ticket1.countMatches(ticket2)
-        ).isEqualTo(2);
+        assertThat(otherTicket.getMatchedCnt(ticket)).isEqualTo(2);
+        assertThat(ticket.getMatchedCnt(otherTicket)).isEqualTo(2);
     }
 
     @DisplayName("특정 번호를 포함하고 있는지를 잘 체크하는지 확인")
     @Test
     void isIncludeNumber() {
-        LottoTicket ticket = new LottoTicket(
-            new ArrayList<LottoNumber>() {{
-                add(new LottoNumber(1));
-                add(new LottoNumber(2));
-                add(new LottoNumber(3));
-                add(new LottoNumber(4));
-                add(new LottoNumber(5));
-                add(new LottoNumber(6));
-            }}
-        );
-
         assertThat(
             ticket.includeNumber(
                 new LottoNumber(1)
@@ -63,17 +71,6 @@ class LottoTicketTest {
     @DisplayName("특정 번호를 포함하고 있지 않은지를 잘 체크하는지 확인")
     @Test
     void NotIncludeBounsNumber() {
-        LottoTicket ticket = new LottoTicket(
-            new ArrayList<LottoNumber>() {{
-                add(new LottoNumber(1));
-                add(new LottoNumber(2));
-                add(new LottoNumber(3));
-                add(new LottoNumber(4));
-                add(new LottoNumber(5));
-                add(new LottoNumber(6));
-            }}
-        );
-
         assertThat(
             ticket.includeNumber(
                 new LottoNumber(1)

@@ -1,18 +1,28 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int NUM_LEFT_BOUND = 1;
-    private static final int NUM_RIHGT_BOUND = 45;
+    public static final int NUM_LEFT_BOUND = 1;
+    public static final int NUM_RIGHT_BOUND = 45;
 
     private Integer number;
 
+    public LottoNumber(String string) {
+        int number = Integer.parseInt(string);
+        checkBounds(number);
+        this.number = number;
+    }
+
     public LottoNumber(int number) {
-        if (number < NUM_LEFT_BOUND || number > NUM_RIHGT_BOUND) {
+        checkBounds(number);
+        this.number = number;
+    }
+
+    private void checkBounds(int number) {
+        if (number < NUM_LEFT_BOUND || number > NUM_RIGHT_BOUND) {
             throw new RuntimeException();
         }
-        this.number = number;
     }
 
     @Override
