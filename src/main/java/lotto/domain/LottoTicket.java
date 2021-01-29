@@ -32,4 +32,9 @@ public class LottoTicket {
     public String toString() {
         return this.lottoNumbers.toString();
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
+    }
 }
