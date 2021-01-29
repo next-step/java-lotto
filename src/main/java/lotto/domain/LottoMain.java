@@ -23,6 +23,7 @@ public class LottoMain {
             LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
             WinnerLotto winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
 
+            LottoMatcher lottoMatcher = new LottoMatcher();
             for (int i = 0; i < purchasedTickets.getNumberOfTickets(); i++) {
                 matchCnt = LottoMatcher.getMatchCnt(purchasedTickets.getLottoTickets().get(i).getNumbers(), winnerLotto);
             }

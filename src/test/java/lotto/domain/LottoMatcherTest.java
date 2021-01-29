@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PlayersLottoMatcherTest {
+class LottoMatcherTest {
 
     private LottoMatcher lottoMatcher;
 
@@ -38,7 +38,27 @@ class PlayersLottoMatcherTest {
         winnerNumbers.add(new LottoNumber(6));
 
         WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
-        assertThat(lottoMatcher.getMatchCnt(lottoNumber, winnerLotto)).isEqualTo(3);
+        assertThat(LottoMatcher.getMatchCnt(lottoNumber, winnerLotto)).isEqualTo(3);
     }
 
+    @Test
+    void getPrizeBoard() {
+    }
+
+    @DisplayName("addPrizeTest")
+    @Test
+    void addPrizeStatus() {
+        Prize prize = Prize.THREE;
+        lottoMatcher.addPrizeStatus(prize);
+        assertThat(lottoMatcher.getPrizeBoard().get(Prize.THREE)).isEqualTo(1);
+    }
+
+    @DisplayName("맞춘 개수에 따른 상 enum 반환")
+    @Test
+    void getPrizeForEachLotto() {
+        int matchedCount = 6;
+
+        assertThat(lottoMatcher.getPrizeForEachLotto(matchedCount)).isEqualTo(Prize.SIX);
+
+    }
 }

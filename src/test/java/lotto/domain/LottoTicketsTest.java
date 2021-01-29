@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PlayersLottoTicketsTest {
+class LottoTicketsTest {
 
     @DisplayName("constructor test")
     @Test
@@ -31,6 +31,7 @@ class PlayersLottoTicketsTest {
             )));
         }};
         LottoTickets lottoTickets = new LottoTickets(playersLottos);
+        LottoMatcher lottoMatcher = new LottoMatcher();
         assertThat(lottoTickets.getLottoTickets()).isEqualTo(playersLottos);
     }
 
