@@ -41,8 +41,8 @@ public class WinnerLotto implements Lotto {
 
     }
 
-    public static List<LottoNumber> getWinnerLottoWithSpliting(String text) {
-        String [] inputs = text.split(DELIMETER);
+    public static List<LottoNumber> getWinnerLottoWithSplitting(String text) {
+        String [] inputs = text.split(DELIMITER);
         List<LottoNumber> winnerLotto = new ArrayList<>();
         for (String input : inputs) {
             Validator.isInteger(input);

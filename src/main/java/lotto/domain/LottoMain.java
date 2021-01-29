@@ -18,7 +18,7 @@ public class LottoMain {
 
             // 지난주 로또 정답을 입력받음
             String winningLottoNumber = InputView.getLottoAnswer();
-            List<LottoNumber> winningLotto = WinnerLotto.getWinnerLottoWithSpliting(winningLottoNumber);
+            List<LottoNumber> winningLotto = WinnerLotto.getWinnerLottoWithSplitting(winningLottoNumber);
             LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
             WinnerLotto winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
 //            Arrays.stream(winningLottoNumber.split(", ")).map(Integer::parseInt);
