@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     private LottoAnswer answer;
@@ -13,12 +13,12 @@ public class LottoGame {
     }
 
     public LottoScoreBoard calcScoreBoard() {
-        List<LottoScore> scores = new ArrayList<>();
-        for (LottoTicket ticket : tickets) {
-            scores.add(
-                answer.calculateScore(ticket)
-            );
-        }
-        return new LottoScoreBoard(scores);
+        return new LottoScoreBoard(
+            tickets.stream().map(
+                ticket -> answer.calculateScore(ticket)
+            ).collect(
+                Collectors.toList()
+            )
+        );
     }
 }

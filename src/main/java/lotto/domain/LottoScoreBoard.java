@@ -20,9 +20,9 @@ public class LottoScoreBoard {
             score -> scoreBoard.put(score, 0)
         );
 
-        for(LottoScore score: scores) {
-            scoreBoard.put(score, scoreBoard.get(score) + 1);
-        }
+        scores.stream().forEach(
+            score -> scoreBoard.put(score, scoreBoard.get(score) + 1)
+        );
     }
 
     public ScoreBoardData getScoreBoardData() {

@@ -39,15 +39,15 @@ public class OutputView {
         System.out.println(SCORE_BOARD_TITLE_MSG);
         System.out.println(SCORE_BOARD_DELIMITER_MSG);
 
-        for (ScoreData score : scoreBoardData.getScores()) {
-            System.out.format(
+        scoreBoardData.getScores().stream().forEach(
+            score -> System.out.format(
                 SCORE_FMT,
                 score.getMatchedCnt(),
                 getScoreDescribeMsg(score.getIsBoundMatched()),
                 score.getReward(),
                 score.getScoreCnt()
-            );
-        }
+            )
+        );
 
         System.out.format(SCORE_PROFIT_FMT, scoreBoardData.getProfit());
     }
