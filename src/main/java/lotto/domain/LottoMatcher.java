@@ -15,6 +15,11 @@ public class LottoMatcher {
         }
     }
     public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerNumbers) {
+        // 들어온 모든 티켓의 리스트에 대해 각 티켓별로 맞춘 수를 구하고 해당 수에 맞는
+        // Prize 를 꼽는다. 해당 Prize 의 EnumMap의 count 를 1 증가시킨다.
+        // 나중에 getPrizeBoard 를 통해 EnumMap 을 리턴하고 OutputView 를 통해 PrizeBoard 를 순회해
+        // 3개: 50000원 ... 등을 출력할 수 있도록 한다
+
         List<PlayersLotto> playersLottoTickets = lottoTickets.getLottoTickets();
         for (PlayersLotto lotto : playersLottoTickets) {
             int matchCnt = getMatchCnt(lotto.getNumbers(), winnerNumbers);
@@ -24,6 +29,7 @@ public class LottoMatcher {
     }
 
     public static int getMatchCnt(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
+        //TODO: 5개 적중 시 보너스 볼을 추가 검증해서 적중수가 5+1지(보너스볼)인지, 6인지를 구분짓는 로직이 필요함.
         return (int) lottoNumber.stream()
             .filter(number -> winnerNumbers.getNumbers().contains(number))
             .count();
