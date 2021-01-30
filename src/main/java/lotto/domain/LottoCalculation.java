@@ -25,9 +25,9 @@ public class LottoCalculation {
     private static void InitialResult() {
         matchResult.put(WinningType.THREE, 0);
         matchResult.put(WinningType.FOUR, 0);
-        matchResult.put(WinningType.SIX, 0);
         matchResult.put(WinningType.FIVE, 0);
         matchResult.put(WinningType.FIVE_BONUS, 0);
+        matchResult.put(WinningType.SIX, 0);
     }
 
     public Boolean isBonusBall(int number, int bonusBallNumber) {
@@ -47,5 +47,16 @@ public class LottoCalculation {
                 .stream()
                 .filter(lotto.getLottoNumbers()::contains)
                 .count();
+    }
+
+    public static float getProfitRate(Map<WinningType, Integer> result, int money) {
+        int totalProfit = 0;
+
+        for (WinningType key : result.keySet()) {
+            Integer value = result.get((key));
+            totalProfit += key.getProfit() * value;
+        }
+
+        return (float) totalProfit / (float) money;
     }
 }
