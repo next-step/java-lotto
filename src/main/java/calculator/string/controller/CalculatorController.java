@@ -9,8 +9,7 @@ public class CalculatorController {
 
     public String prepareCalculator() {
         Output.printInputMessage();
-        String expression = Input.expressionInput();
-        return expression;
+        return Input.expressionInput();
     }
 
     public int executeCalculator(String expression) {

@@ -56,7 +56,6 @@ public class LottoService {
 
     public double getInterestRate() {
         int totalLottoPrice = LottoTicket.PRICE * lottoTickets.size();
-        double interestRate = (double) profit / totalLottoPrice;
-        return interestRate;
+        return (double) profit / totalLottoPrice;
     }
 }

@@ -26,8 +26,7 @@ public class Delimiter {
     }
 
     public String getNewExpression(){
-        String newExpression = m.group(2);
-        return newExpression;
+        return m.group(2);
     }
 
     public String getDelimiters() {
