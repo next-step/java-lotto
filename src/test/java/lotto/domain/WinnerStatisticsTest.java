@@ -15,12 +15,7 @@ public class WinnerStatisticsTest {
     @Test
     void getResult() {
         // given
-        LottoTicket winningTicket = createWinningTicket();
-        LottoNumber bonusNumber = new LottoNumber(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-
-        List<LottoTicket> pickedLottoTickets = new ArrayList<>(createPickedTickets());
-        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, pickedLottoTickets);
+        WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
         EnumMap<Rank, Integer> result = winnerStatistics.getResults();
@@ -29,6 +24,27 @@ public class WinnerStatisticsTest {
         assertThat(result.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
         assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
         assertThat(result.getOrDefault(Rank.NONE, 0)).isEqualTo(1);
+    }
+
+    @DisplayName("3개 구입하여 1등 1개, 2등 1개일 때 수익률을 확인")
+    @Test
+    void getEarningRateTest() {
+        // given
+        WinnerStatistics winnerStatistics = createWinnerStatistics();
+
+        // when
+        double earningRate = winnerStatistics.getEarningRate(3000);
+
+        // then
+        assertThat(earningRate).isEqualTo(676666.66);
+    }
+
+    private WinnerStatistics createWinnerStatistics() {
+        LottoTicket winningTicket = createWinningTicket();
+        LottoNumber bonusNumber = new LottoNumber(45);
+        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+        List<LottoTicket> pickedLottoTickets = new ArrayList<>(createPickedTickets());
+        return new WinnerStatistics(goldenTicket, pickedLottoTickets);
     }
 
     private LottoTicket createWinningTicket() {

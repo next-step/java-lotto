@@ -13,7 +13,7 @@ public class GoldenTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean containBonusBall(final LottoTicket lottoTicket) {
+    public boolean containsBonusBall(final LottoTicket lottoTicket) {
         return lottoTicket.getLottoNumbers().contains(bonusNumber);
     }
 
