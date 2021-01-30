@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum WinningType {
+    NONE(0, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
-    FIVE_DOUBLE(5, 30000000),
+    FIVE_BONUS(5, 30000000),
     SIX(6, 2000000000);
 
     private int value;
@@ -29,11 +30,11 @@ public enum WinningType {
         return profit;
     }
 
-    public static WinningType match(int count, boolean matchBall) {
-        if(FOUR.isEqualCount(count) && matchBall) return FIVE_DOUBLE;
+    public static WinningType match(int count, boolean isBonusBall) {
+        if(FOUR.isEqualCount(count) && isBonusBall) return FIVE_BONUS;
 
         return Arrays.stream(WinningType.values())
                 .filter(lottoCorrectCount -> lottoCorrectCount.isEqualCount(count))
-                .findFirst().get();
+                .findFirst().orElse(NONE);
     }
 }

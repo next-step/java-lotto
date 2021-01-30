@@ -1,7 +1,11 @@
 package lotto.view;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -27,7 +31,11 @@ public class InputView {
 
     public static List<Integer> getWinningNumbers() {
         System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
-        return getCommonLottoNumbers();
+        String buffer = scanner.nextLine();
+        String data = scanner.nextLine();
+//        String[] dataSplit = data.split(", ");
+
+        return getCommonLottoNumbers(data);
     }
 
     public static int getBonusBall() {
@@ -35,10 +43,17 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getCommonLottoNumbers() {
-        return IntStream.range(0, LOTTO_MAX_COUNT)
-                .map(i -> Integer.parseInt(scanner.next().replace(REGEX, "")))
-                .boxed()
-                .collect(toList());
+    public static List<Integer> getCommonLottoNumbers(String data) {
+            String removingSpacesWinnersNo = data.replaceAll(" ", "");
+            return Arrays.stream(removingSpacesWinnersNo.split(","))
+                    .map(InputView::toInt)
+                    .collect(Collectors.toList());
+    }
+
+    public static int toInt(String inputNumbers) {
+        if (!StringUtils.isNumeric(inputNumbers)) {
+            throw new IllegalArgumentException("숫자가 아닙니다.");
+        }
+        return Integer.parseInt(inputNumbers);
     }
 }

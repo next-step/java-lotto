@@ -22,6 +22,10 @@ public class WinningLotto {
                 .count();
     }
 
+    public List<Integer> getWinningLottoNumbers() {
+        return winningLottos;
+    }
+
     public int getBonusBall() {
         return bonusBall;
     }

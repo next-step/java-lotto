@@ -1,12 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
@@ -16,16 +15,21 @@ public class LottoGame {
         List<Lotto> lottos = lottoMachine.start(money);
         ResultView.printPurchaseNumber(lottos.size()); // 개를 구입했습니다.
 
-        // TODO: Lotto 목록 출력
-        ResultView.printGenerateLottos(lottos);
+//        ResultView.printGenerateLottos(lottos); // Lotto 목록 출력
 
         List<Integer> winningLottoNumbers = InputView.getWinningNumbers(); // 당첨 번호를 입력해주세요
-        int bonusBall = InputView.getBonusBall();
-        WinningLotto winningLotto = WinningLotto.generate(new Lotto(winningLottoNumbers), bonusBall);
 
-        // TODO: 로또 결과 계산
-        // TODO: 로또 결과 출력
-        WinningType winningResult =  lottos.result(winningLotto);
-        Output.printResult(winningResult, money);
+        int bonusBall = InputView.getBonusBall(); // 보너스 볼을 입력해 주세요.
+
+        Lotto test = new Lotto(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.generate(test, bonusBall);
+
+        Map<WinningType, Integer> matchResult = LottoCalculation.result(winningLotto, lottos); // 로또 결과 계산
+        for(WinningType key : matchResult.keySet() ){
+            Integer value = matchResult.get((key));
+            System.out.println( String.format("키 : "+key+", 값 : "+value));
+        }
+
+        ResultView.printResult(matchResult, money); // 로또 결과 출력
     }
 }
