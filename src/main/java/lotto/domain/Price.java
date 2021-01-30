@@ -6,6 +6,7 @@ import java.util.List;
 public class Price {
 
     private final int money;
+
     private static final int BASE_PRICE = 1000;
 
     public Price(int money) {
