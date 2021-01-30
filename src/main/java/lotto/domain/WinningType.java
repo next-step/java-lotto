@@ -10,12 +10,20 @@ public enum WinningType {
     FIVE_BONUS(5, 30000000),
     SIX(6, 2000000000);
 
-    private int value;
-    private int profit;
+    private final int value;
+    private final int profit;
 
     WinningType(int value, int profit) {
         this.value = value;
         this.profit = profit;
+    }
+
+    public static WinningType match(int count, boolean isBonusBall) {
+        if (FOUR.isEqualCount(count) && isBonusBall) return FIVE_BONUS;
+
+        return Arrays.stream(WinningType.values())
+                .filter(lottoCorrectCount -> lottoCorrectCount.isEqualCount(count))
+                .findFirst().orElse(NONE);
     }
 
     public boolean isEqualCount(int count) {
@@ -28,13 +36,5 @@ public enum WinningType {
 
     public int getProfit() {
         return profit;
-    }
-
-    public static WinningType match(int count, boolean isBonusBall) {
-        if (FOUR.isEqualCount(count) && isBonusBall) return FIVE_BONUS;
-
-        return Arrays.stream(WinningType.values())
-                .filter(lottoCorrectCount -> lottoCorrectCount.isEqualCount(count))
-                .findFirst().orElse(NONE);
     }
 }
