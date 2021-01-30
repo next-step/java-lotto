@@ -24,18 +24,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-//    public static String getWinningNumbers() {
-//        System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
-//        return scanner.nextLine();
-//    }
-
     public static List<Integer> getWinningNumbers() {
         System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
         String buffer = scanner.nextLine();
-        String data = scanner.nextLine();
-//        String[] dataSplit = data.split(", ");
+        String winningLottoNumber = scanner.nextLine();
 
-        return getCommonLottoNumbers(data);
+        return getCommonLottoNumbers(winningLottoNumber);
     }
 
     public static int getBonusBall() {
@@ -43,11 +37,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getCommonLottoNumbers(String data) {
-            String removingSpacesWinnersNo = data.replaceAll(" ", "");
-            return Arrays.stream(removingSpacesWinnersNo.split(","))
-                    .map(InputView::toInt)
-                    .collect(Collectors.toList());
+    public static List<Integer> getCommonLottoNumbers(String winningLottoNumber) {
+        String removingSpacesWinnersNo = winningLottoNumber.replaceAll(" ", "");
+        return Arrays.stream(removingSpacesWinnersNo.split(","))
+                .map(InputView::toInt)
+                .collect(Collectors.toList());
     }
 
     public static int toInt(String inputNumbers) {
