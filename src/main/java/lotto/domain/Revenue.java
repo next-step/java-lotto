@@ -46,6 +46,4 @@ public enum Revenue {
             .filter(revenue -> revenue.bonus == isMatchingWithBonus)
             .findFirst().orElse(NOTHING);
     }
-
-
 }
