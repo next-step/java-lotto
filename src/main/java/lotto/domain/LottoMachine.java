@@ -6,7 +6,10 @@ import java.util.Random;
 
 public class LottoMachine {
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private static final Random random = new Random();
+    private static final int NUMBER_RANGE = 45;
+    private static final int LOTTO_LENGTH = 6;
+    private final Random random = new Random();
+    private List<Integer> lottos;
 
     public int getLottoTicketNumber(int money) {
         return money / LOTTO_TICKET_PRICE;
@@ -28,16 +31,20 @@ public class LottoMachine {
     }
 
     private List<Integer> generateLottoNumber() {
-        List<Integer> lottos = new ArrayList<>();
-        while (lottos.size() < 6) {
-            int candidateLottoNumber = random.nextInt(45) + 1;
-            if (!lottos.contains(candidateLottoNumber)) {
-                lottos.add(candidateLottoNumber);
-            }
+        lottos = new ArrayList<>();
+        while (lottos.size() < LOTTO_LENGTH) {
+            int candidateLottoNumber = random.nextInt(NUMBER_RANGE) + 1;
+            lottoAdder(candidateLottoNumber);
         }
 
         lottos.sort(Integer::compareTo);
 
         return lottos;
+    }
+
+    private void lottoAdder(int number) {
+        if (!lottos.contains(number)) {
+            lottos.add(number);
+        }
     }
 }
