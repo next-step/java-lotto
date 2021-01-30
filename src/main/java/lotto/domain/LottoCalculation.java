@@ -7,22 +7,22 @@ import java.util.Map;
 public class LottoCalculation {
     private static final Map<WinningType, Integer> matchResult = new HashMap<>();
 
-    public static Map<WinningType, Integer> result(WinningLotto winningLotto, List<Lotto> lottos) {
-        InitialResult();
+    public static Map<WinningType, Integer> calculateResult(WinningLotto winningLotto, List<Lotto> lottos) {
+        initialMatchResult();
 
         for (Lotto lotto : lottos) {
             int count = winningBallMatchNumber(winningLotto, lotto);
             boolean isBonusBall = hasBonusBall(lotto.getLottoNumbers(), winningLotto.getBonusBall());
+
             WinningType winningType = WinningType.match(count, isBonusBall); // 이넘타입 반환
-            if (winningType.getValue() != 0) {
-                matchResult.put(winningType, matchResult.get(winningType) + 1);
-            }
+
+            updateCount(winningType);
         }
 
         return matchResult;
     }
 
-    private static void InitialResult() {
+    private static void initialMatchResult() {
         matchResult.put(WinningType.THREE, 0);
         matchResult.put(WinningType.FOUR, 0);
         matchResult.put(WinningType.FIVE, 0);
@@ -30,16 +30,10 @@ public class LottoCalculation {
         matchResult.put(WinningType.SIX, 0);
     }
 
-    public Boolean isBonusBall(int number, int bonusBallNumber) {
-        return number == bonusBallNumber;
-    }
-
-    public Boolean isWinningBall(int number, List<Integer> winningBalls) {
-        return winningBalls.contains(number);
-    }
-
-    public static boolean hasBonusBall(List<Integer> lotto, int bonusBall) {
-        return lotto.contains(bonusBall);
+    private static void updateCount(WinningType winningType) {
+        if (winningType.getValue() != 0) {
+            matchResult.put(winningType, matchResult.get(winningType) + 1);
+        }
     }
 
     public static int winningBallMatchNumber(WinningLotto winningLotto, Lotto lotto) {
@@ -58,5 +52,13 @@ public class LottoCalculation {
         }
 
         return (float) totalProfit / (float) money;
+    }
+
+    public Boolean isWinningBall(int number, List<Integer> winningBalls) {
+        return winningBalls.contains(number);
+    }
+
+    public static boolean hasBonusBall(List<Integer> lotto, int bonusBall) {
+        return lotto.contains(bonusBall);
     }
 }
