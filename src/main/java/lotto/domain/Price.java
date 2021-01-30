@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Price {
 
-    private int money;
+    private final int money;
     private static final int BASE_PRICE = 1000;
 
     public Price(int money) {
@@ -19,7 +19,7 @@ public class Price {
     public List<Ticket> buyTickets() {
         List<Ticket> tickets = new ArrayList<>();
         int ticketAmount = calculateTickets();
-        for (int i = 1; i < ticketAmount; i++) {
+        for (int i = 0; i < ticketAmount; i++) {
             LottoMachine lottoMachine = new LottoMachine();
             tickets.add(new Ticket(lottoMachine.generateTicket()));
         }
