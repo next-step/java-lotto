@@ -48,9 +48,6 @@ public class LottoMatcher {
 
     public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
         int matchCnt = getMatchCnt(lottoNumber, winnerNumbers);
-//        if(matchCnt < 3) {
-//            throw new IllegalArgumentException("해당 맞춘 수에 대한 상이 없습니다.");
-//        }
         Prize returnPrize = Arrays.stream(Prize.values()).filter(prize -> prize.getMatchedNumber() == matchCnt).findAny().get();
         // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
         if(matchCnt == 5 && lottoNumber.stream().anyMatch(num -> num.getLottoNumber() == winnerNumbers.getBonusBall().getLottoNumber())) {
