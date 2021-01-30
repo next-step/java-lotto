@@ -1,19 +1,12 @@
 package stringCalculator;
 
-import stringCalculator.domain.StringCalculator;
-import stringCalculator.view.InputHandler;
-import stringCalculator.view.OutputHandler;
+import stringCalculator.controller.StringCalculatorController;
 
 public class StringCalculatorApplication {
 
     public static void main(String[] args) {
-        InputHandler inputHandler = new InputHandler();
-        OutputHandler outputHandler = new OutputHandler();
-        StringCalculator calculator = new StringCalculator();
-        String userInput = inputHandler.requestUserInput();
-        System.out.print(userInput);
-
-        outputHandler.printResult(calculator.add(userInput));
-
+        StringCalculatorController stringCalculatorController = new StringCalculatorController();
+        stringCalculatorController.requestInput();
+        stringCalculatorController.calculate();
     }
 }
