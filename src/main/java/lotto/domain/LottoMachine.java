@@ -17,9 +17,8 @@ public class LottoMachine {
 
     public List<Integer> generateTicket() {
         Collections.shuffle(numbers);
-        List<Integer> ticket = numbers.subList(0, 7);
+        List<Integer> ticket = numbers.subList(0, 6);
         Collections.sort(ticket);
         return ticket;
     }
-
 }
