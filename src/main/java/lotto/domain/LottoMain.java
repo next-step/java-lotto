@@ -23,12 +23,10 @@ public class LottoMain {
             WinnerLotto winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
 
             LottoMatcher lottoMatcher = new LottoMatcher();
-            for (int i = 0; i < purchasedTickets.getNumberOfTickets(); i++) {
-                matchCnt = LottoMatcher.getMatchCnt(purchasedTickets.getLottoTickets().get(i).getNumbers(), winnerLotto);
-            }
+            lottoMatcher.checkAllTickets(purchasedTickets,winnerLotto);
 
-            //OutputView.printWinningResult(prizeBoard);
-            //OutputView.printReturnOnInvestment(수익률 계산 결과);
+            OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
+            OutputView.printReturnOnInvestment(3);
             
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

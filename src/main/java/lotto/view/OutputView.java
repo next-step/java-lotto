@@ -22,16 +22,23 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Prize.values()).forEach(value -> {
-            System.out.print(value.getMatchedNumber() + "개 일치");
-            if (value.getCash() == 30000000) {
-                System.out.print(", 보너스 볼 일치");
+            if(value.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
+                System.out.print(value.getMatchedNumber() + "개 일치");
+                printFiveWithBonusBallCase(value);
+                System.out.println(" (" + value.getCash() + "원) - " + prizeBoard.get(value) + "개");
             }
-            System.out.print(" (" + value.getCash() + "원) - " + prizeBoard.get(value) + "개");
+
         });
     }
 
     public static void printReturnOnInvestment(int returnOnInvestment) {
         System.out.println("총 수익률은 " + returnOnInvestment + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
+    private static void printFiveWithBonusBallCase(Prize prize) {
+        if (prize.equals(Prize.FIVE_WITH_BONUS)) {
+            System.out.print(", 보너스 볼 일치");
+        }
     }
 
 }
