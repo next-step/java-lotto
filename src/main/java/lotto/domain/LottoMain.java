@@ -26,7 +26,8 @@ public class LottoMain {
             lottoMatcher.checkAllTickets(purchasedTickets,winnerLotto);
 
             OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
-            OutputView.printReturnOnInvestment(3);
+            int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
+            OutputView.printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
             
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
