@@ -2,26 +2,28 @@ package lotto.controller;
 
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import lotto.util.ValidatorUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class ValidatorTest {
+public class ValidatorUtilsTest {
 
-    private Validator validator;
+    private ValidatorUtils validatorUtils;
 
     @BeforeEach
     void setUp() {
-        validator = new Validator();
+        validatorUtils = new ValidatorUtils();
     }
 
     @DisplayName("정확한 로또 금액 테스트")
     @ParameterizedTest
     @MethodSource("providePriceValidatorTest")
     public void correctPriceValidatorTest(String input, boolean expected) {
-        assertEquals(expected, validator.isPriceValidate(input));
+        assertEquals(expected, validatorUtils.isPriceValidate(input));
     }
 
     private static Stream<Arguments> providePriceValidatorTest() {
@@ -38,7 +40,7 @@ public class ValidatorTest {
     @ParameterizedTest
     @MethodSource("provideValidateWinningNumberTest")
     public void validateWinningNumberTest(String winningNumber, boolean expected) {
-        assertEquals(expected, validator.validateWinningNumber(winningNumber));
+        assertEquals(expected, validatorUtils.validateWinningNumber(winningNumber));
     }
 
     private static Stream<Arguments> provideValidateWinningNumberTest() {
@@ -59,7 +61,7 @@ public class ValidatorTest {
     @ParameterizedTest
     @MethodSource("provideValidateBonusNumberTest")
     public void validateBonusNumberTest(String bonusNumber, boolean expected) {
-        assertEquals(expected, validator.validateBonusNumber(bonusNumber));
+        assertEquals(expected, validatorUtils.validateBonusNumber(bonusNumber));
     }
 
     private static Stream<Arguments> provideValidateBonusNumberTest() {
