@@ -23,15 +23,14 @@ public class OutputView {
     }
 
     public static void printWinningResult(Map<Prize, Integer> prizeBoard) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Prize.values()).forEach(value -> {
-            if (value.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
-                System.out.print(value.getMatchedNumber() + "개 일치");
-                printFiveWithBonusBallCase(value);
-                System.out.println(" (" + value.getCash() + "원) - " + prizeBoard.get(value) + "개");
+        Arrays.stream(Prize.values()).forEach(prize -> {
+            if (prize.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
+                printPrizeCount(prize);
+                checkFiveWithBonusBallCase(prize);
+                printValueAndCount(prize,prizeBoard);
             }
-
         });
     }
 
@@ -39,7 +38,23 @@ public class OutputView {
         System.out.println("총 수익률은 " + returnOnInvestment + "입니다.");
     }
 
-    private static void printFiveWithBonusBallCase(Prize prize) {
+    private static void printPrizeCount(Prize prize) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(prize.getMatchedNumber());
+        stringBuffer.append("개 일치");
+        System.out.print(stringBuffer.toString());
+    }
+    private static void printValueAndCount(Prize prize, Map<Prize, Integer> prizeBoard) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(" (");
+        stringBuffer.append(prize.getCash());
+        stringBuffer.append("원) - ");
+        stringBuffer.append(prizeBoard.get(prize));
+        stringBuffer.append("개");
+        System.out.println(stringBuffer.toString());
+    }
+
+    private static void checkFiveWithBonusBallCase(Prize prize) {
         if (prize.equals(Prize.FIVE_WITH_BONUS)) {
             System.out.print(", 보너스 볼 일치");
         }
