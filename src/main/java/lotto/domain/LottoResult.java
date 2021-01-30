@@ -22,7 +22,7 @@ public class LottoResult {
         if (count != BONUS_BALL_COUNT) {
             return;
         }
-        if (goldenTicket.containBonusBall(myLottoTicket)) {
+        if (goldenTicket.containsBonusBall(myLottoTicket)) {
             count++;
         }
     }
