@@ -20,7 +20,7 @@ public class LottoMachine {
         int lottoTicketNumber = getLottoTicketNumber(money);
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i<lottoTicketNumber; i++) {
+        for (int i = 0; i < lottoTicketNumber; i++) {
             lottos.add(createLotto(generateLottoNumber()));
         }
 
@@ -35,6 +35,8 @@ public class LottoMachine {
                 lottos.add(candidateLottoNumber);
             }
         }
+
+        lottos.sort(Integer::compareTo);
 
         return lottos;
     }
