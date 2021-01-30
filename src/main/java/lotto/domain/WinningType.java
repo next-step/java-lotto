@@ -12,7 +12,7 @@ public enum WinningType {
 
     private int value;
     private int profit;
-    
+
     WinningType(int value, int profit) {
         this.value = value;
         this.profit = profit;
@@ -31,7 +31,7 @@ public enum WinningType {
     }
 
     public static WinningType match(int count, boolean isBonusBall) {
-        if(FOUR.isEqualCount(count) && isBonusBall) return FIVE_BONUS;
+        if (FOUR.isEqualCount(count) && isBonusBall) return FIVE_BONUS;
 
         return Arrays.stream(WinningType.values())
                 .filter(lottoCorrectCount -> lottoCorrectCount.isEqualCount(count))
