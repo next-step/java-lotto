@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +19,15 @@ public class PlayersLotto implements Lotto {
 
     public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public List<Integer> getAsIntegerList() {
+        List<Integer> lottoNumberList = new ArrayList<>();
+        numbers.forEach(lottoNumber -> {
+            lottoNumberList.add(lottoNumber.getLottoNumber());
+        });
+        Collections.sort(lottoNumberList);
+        return lottoNumberList;
     }
 
     private void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {

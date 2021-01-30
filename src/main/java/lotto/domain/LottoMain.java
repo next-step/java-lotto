@@ -15,7 +15,8 @@ public class LottoMain {
             // 무작위 로또를 생성해 로또티켓 객체에 생성자 주입
             List<PlayersLotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTickets(numberOfTicket);
             LottoTickets purchasedTickets = new LottoTickets(generatedPlayersLottoNumbers);
-
+            // 무작위 로또의 값을 출력
+            OutputView.printAllLotto(purchasedTickets);
             // 지난주 로또 정답을 입력받음
             String winningLottoNumber = InputView.getLottoAnswer();
             List<LottoNumber> winningLotto = WinnerLotto.getWinnerLottoWithSplitting(winningLottoNumber);
