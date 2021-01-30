@@ -15,7 +15,6 @@ import lotto.view.OutputHandler;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        // 하드코딩
         Validator validator = new Validator();
         OutputHandler outputHandler = new OutputHandler();
         InputHandler inputHandler = new InputHandler();

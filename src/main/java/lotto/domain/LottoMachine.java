@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
+
     private final List<Integer> numbers;
     private final static int MIN_LOTTO = 1;
     private final static int MAX_LOTTO = 46;

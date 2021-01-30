@@ -9,6 +9,7 @@ public class NumberUtils {
 
     private static final int FIRST_RANGE_LOTTO_NUMBER = 0;
     private static final int END_RANGE_LOTTO_NUMBER = 46;
+    private static final String COMMA = ", ";
 
     public static Integer returnInteger(String string) {
         try {
@@ -42,10 +43,11 @@ public class NumberUtils {
     }
 
     public static List<Integer> convertStringToIntegerList(String winningNumber) {
-        return Arrays.stream(winningNumber.split(", "))
+        return Arrays.stream(winningNumber.split(COMMA))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
+
     public static int convertNullToNumber(Integer value) {
         if (value == null) {
             return 0;

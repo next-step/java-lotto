@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Revenue {
+
     THREE_MATCHES(5000, 3, false),
     FOUR_MATCHES(50000, 4, false),
     FIVE_MATCHES(1500000, 5, false),

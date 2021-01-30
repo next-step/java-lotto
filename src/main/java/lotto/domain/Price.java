@@ -12,10 +12,6 @@ public class Price {
         this.money = money;
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     public int calculateTickets() {
         return money / BASE_PRICE;
     }

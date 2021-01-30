@@ -7,22 +7,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Lotto {
+
     private List<Ticket> tickets = new ArrayList<>();
     private WinningNumber winningNumber;
 
-    public Lotto(WinningNumber winningNumber) {
-        this.winningNumber = winningNumber;
-    }
     public Lotto(WinningNumber winningNumber, List<Ticket> tickets){
         this.winningNumber = winningNumber;
         this.tickets = tickets;
     }
 
     public Lotto() {}
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
 
     public Map<Revenue, Integer> statisticsTicket() {
         Map<Revenue, Integer> revenueMap = new HashMap<>();
