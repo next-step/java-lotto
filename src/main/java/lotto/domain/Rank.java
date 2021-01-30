@@ -10,7 +10,7 @@ public enum Rank {
     THIRD(5, "5개 일치", 1500000L),
     FOURTH(4, "4개 일치", 50000L),
     FIFTH(3, "3개 일치", 5000L),
-    NONE(0, "꽝", 0L), // TODO: NONE 없애기
+    NONE(0, "꽝", 0L),
     ;
 
     private static final Map<Integer, Rank> ranks = new HashMap<>();
