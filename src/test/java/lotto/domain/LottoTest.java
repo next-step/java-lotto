@@ -13,21 +13,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
+
     private Lotto lotto;
-
-    @DisplayName("가격을 기준으로 티켓 개수 테스트")
-    @ParameterizedTest
-    @MethodSource("provideCalculateTicketsTest")
-    public void calculateTicketsTest(int money, int tickets) {
-        assertEquals(tickets, new Price(money).calculateTickets());
-    }
-
-    private static Stream<Arguments> provideCalculateTicketsTest() {
-        return Stream.of(
-            Arguments.of(24000, 24),
-            Arguments.of(1000, 1)
-        );
-    }
 
     @DisplayName("티켓 별 당첨 통계내기 테스트")
     @ParameterizedTest

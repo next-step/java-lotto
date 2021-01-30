@@ -13,10 +13,6 @@ public class Utility {
         SPLIT_BY_CUSTOM_DELIMITER = "//(.)\n(.*)";
     }
 
-    public static boolean isEquationEmpty(String equation) {
-        return equation == null || equation.isEmpty();
-    }
-
     public String[] splitEquation(String equation) {
         Matcher m = Pattern.compile(SPLIT_BY_CUSTOM_DELIMITER).matcher(equation);
         if (m.find()) {
@@ -25,5 +21,4 @@ public class Utility {
         }
         return equation.split(SPLIT_COMMA_COLON);
     }
-
 }

@@ -9,7 +9,7 @@ public class StringCalculator {
     public int add(String equation){
         Utility utility = new Utility();
 
-        if (Utility.isEquationEmpty(equation)) {
+        if (Validator.isEquationEmpty(equation)) {
             return 0;
         }
 
