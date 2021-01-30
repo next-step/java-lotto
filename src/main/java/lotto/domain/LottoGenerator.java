@@ -21,7 +21,7 @@ public class LottoGenerator {
     private PlayersLotto generateLottoOneLotto() {
         Collections.shuffle(possibleLottoNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_CAPACITY; i++) {
+        for (int i = 0; i < LOTTO_CAPACITY; i++) {
             lottoNumbers.add(possibleLottoNumbers.get(i));
         }
         return new PlayersLotto(lottoNumbers);
@@ -33,23 +33,11 @@ public class LottoGenerator {
         // 이 것을 리스트형태로 넘버오브티켓만큼 반복한다
         List<PlayersLotto> playersLottoTickets = new ArrayList<>();
 
-        for(int i = 0; i < numberOfTicket; i++) {
+        for (int i = 0; i < numberOfTicket; i++) {
             PlayersLotto playersLotto = generateLottoOneLotto();
             playersLottoTickets.add(playersLotto);
         }
         return playersLottoTickets;
-
-//        while(numberOfTicket-- > 0) {
-//            Collections.shuffle(lottoNumArray);
-//            shuffleLottoNumber = lottoNumArray.subList(0, 5);
-//            shuffleLottoNumber.remove(0);
-//            lottoTickets.add(new Lotto(shuffleLottoNumber));
-//        }
     }
 
-
-//    public static List<Lotto> generateLottoNumbers(int numberOfTickets) {
-    // lotto 번호를 가진 리스트를 넘버만큼 반복해 생성한다.
-    // 해당 List<Lotto> lottoTickets 를 반환한다.
-//    }
 }

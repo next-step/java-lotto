@@ -25,12 +25,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber o) {
-        if(this.lottoNumber > o.getLottoNumber()) {
+    public int compareTo(LottoNumber lottoObject) {
+        if(this.lottoNumber > lottoObject.getLottoNumber()) {
             return 1; // x에 대해서는 오름차순
         }
-        else if(this.lottoNumber == o.getLottoNumber()) {
-            if(this.lottoNumber < o.getLottoNumber()) { // y에 대해서는 내림차순
+        else if(this.lottoNumber == lottoObject.getLottoNumber()) {
+            if(this.lottoNumber < lottoObject.getLottoNumber()) { // y에 대해서는 내림차순
                 return 1;
             }
         }

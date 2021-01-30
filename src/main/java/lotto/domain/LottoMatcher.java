@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +28,13 @@ public class LottoMatcher {
         }
     }
 
-    public static int getMatchCnt(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
+    public static int getMatchedCount(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
         // DONE: 5개 적중 시 보너스 볼을 추가 검증해서 적중수가 5+1지(보너스볼)인지, 6인지를 구분짓는 로직이 필요함.
         // 여기에서는 갯수만 카운팅 하고 보너스 볼에 대한 로직은 getPrizeForEachLotto 에서 검증하는 것이 맞는것 같아 수정해 보았습니다.
-        int matchCnt = (int) lottoNumber.stream()
+        int matchedCount = (int) lottoNumber.stream()
             .filter(number -> winnerNumbers.getNumbers().contains(number))
             .count();
-        return matchCnt;
+        return matchedCount;
     }
 
     public Map<Prize, Integer> getPrizeBoard() {
@@ -47,7 +46,7 @@ public class LottoMatcher {
     }
 
     public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
-        int matchCnt = getMatchCnt(lottoNumber, winnerNumbers);
+        int matchCnt = getMatchedCount(lottoNumber, winnerNumbers);
         Prize returnPrize = Arrays.stream(Prize.values()).filter(prize -> prize.getMatchedNumber() == matchCnt).findAny().get();
         // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
         if(matchCnt == 5 && lottoNumber.stream().anyMatch(num -> num.getLottoNumber() == winnerNumbers.getBonusBall().getLottoNumber())) {
