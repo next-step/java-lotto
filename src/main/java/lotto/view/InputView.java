@@ -14,7 +14,7 @@ public class InputView {
         String input = scanner.next();
 
         InputValidator.checkNumberValidation(input);
-        Integer price = Integer.valueOf(input);
+        int price = Integer.parseInt(input);
         InputValidator.checkPriceValidation(price);
         return price;
     }
@@ -26,7 +26,7 @@ public class InputView {
         for (String input : winningNumbersInput.split(",")) {
             String winningNumberExceptBlank = input.trim();
             InputValidator.checkNumberValidation(winningNumberExceptBlank);
-            Integer winningNumber = Integer.valueOf(winningNumberExceptBlank);
+            int winningNumber = Integer.parseInt(winningNumberExceptBlank);
             InputValidator.checkLottoNumberValidation(winningNumber);
             winningNumbers.add(winningNumber);
         }
@@ -38,7 +38,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         String input = scanner.next();
         InputValidator.checkNumberValidation(input);
-        Integer bonusNumber = Integer.valueOf(input);
-        return bonusNumber;
+        return Integer.parseInt(input);
     }
 }
