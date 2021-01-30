@@ -27,10 +27,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber lottoObject) {
         if(this.lottoNumber > lottoObject.getLottoNumber()) {
-            return 1; // x에 대해서는 오름차순
+            return 1;
         }
         else if(this.lottoNumber == lottoObject.getLottoNumber()) {
-            if(this.lottoNumber < lottoObject.getLottoNumber()) { // y에 대해서는 내림차순
+            if(this.lottoNumber < lottoObject.getLottoNumber()) {
                 return 1;
             }
         }

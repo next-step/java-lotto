@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,5 +50,32 @@ class WinnerLottoTest {
     void getWinnerLottoWithSplitting() {
         String input = "1, 2, 3, 4, 5, 6";
         assertThat(WinnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+    }
+
+    @DisplayName("duplicated number lotto")
+    @Test
+    void duplicatedLotto() {
+        Assertions.assertThatThrownBy(() -> {
+            expectedLottoNumbers = new ArrayList<>(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(1),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            ));
+            lottoBonusNumber = new LottoNumber(7);
+            winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+    @DisplayName("string input have duplicated number case")
+    @Test
+    void duplicatedLottoNumber() {
+        Assertions.assertThatThrownBy(() -> {
+            LottoNumber bonus = new LottoNumber(6);
+            List<LottoNumber> lotto = WinnerLotto.getWinnerLottoWithSplitting("1, 1, 2, 3, 4, 5");
+            WinnerLotto winnerLotto = new WinnerLotto(bonus,lotto);
+        }).isInstanceOf(IllegalArgumentException.class);
+
     }
 }

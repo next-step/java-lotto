@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class WinnerLotto implements Lotto {
 
@@ -12,8 +10,8 @@ public class WinnerLotto implements Lotto {
 
 
     public WinnerLotto(LottoNumber bonusBall, List<LottoNumber> numbers) {
-        checkSizeOfLotto(numbers);
-        checkDuplicatedNumber(numbers);
+        Validator.checkSizeOfLotto(numbers);
+        Validator.checkDuplicatedNumber(numbers);
         BonusBall = bonusBall;
         this.numbers = numbers;
     }
@@ -24,21 +22,6 @@ public class WinnerLotto implements Lotto {
 
     public LottoNumber getBonusBall() {
         return BonusBall;
-    }
-
-
-    private void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
-        }
-    }
-
-    private void checkDuplicatedNumber(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumbersChecker = new HashSet<>(lottoNumbers);
-        if (lottoNumbersChecker.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
-        }
-
     }
 
     public static List<LottoNumber> getWinnerLottoWithSplitting(String text) {
