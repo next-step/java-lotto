@@ -47,7 +47,7 @@ public class OutputHandler {
         StringBuilder stringBuilder = new StringBuilder();
         for (Ticket ticket : tickets) {
             stringBuilder.append(ticket.toString());
-            stringBuilder.append('\n');
+            stringBuilder.append(Constant.LINE_BREAK);
         }
         return stringBuilder;
     }
@@ -60,14 +60,15 @@ public class OutputHandler {
 
     private StringBuilder createLottoResultString(Map<Revenue, Integer> revenueCluster,
         StringBuilder stringBuilder) {
-        Arrays.stream(Revenue.values()).forEach(revenue -> {
-            stringBuilder.append(revenue.getMatchNum())
-                .append(appendBonusNumber(revenue.getBonus())).append(Constant.CORRECT_NUM)
-                .append(Constant.OPEN_BRACKET)
-                .append(revenue.getRevenue()).append(Constant.MONEY_UNIT)
-                .append(NumberUtils.convertNullToNumber(revenueCluster.get(revenue)))
-                .append(Constant.COUNT);
-        });
+        Arrays.stream(Revenue.values()).filter(revenue -> revenue != Revenue.NOTHING)
+            .forEach(revenue -> {
+                stringBuilder.append(revenue.getMatchNum())
+                    .append(appendBonusNumber(revenue.getBonus()))
+                    .append(Constant.CORRECT_NUM).append(Constant.OPEN_BRACKET)
+                    .append(revenue.getRevenue()).append(Constant.MONEY_UNIT)
+                    .append(NumberUtils.convertNullToNumber(revenueCluster.get(revenue)))
+                    .append(Constant.COUNT);
+            });
         return stringBuilder;
     }
 
