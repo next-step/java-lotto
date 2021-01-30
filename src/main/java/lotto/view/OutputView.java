@@ -2,9 +2,11 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Map;
+
+import lotto.domain.LottoTickets;
+import lotto.domain.PlayersLotto;
 import lotto.domain.Prize;
 
-import java.util.List;
 
 public class OutputView {
 
@@ -12,17 +14,19 @@ public class OutputView {
         System.out.println(numberOfLotto + "개를 구매하셨습니다.");
     }
 
-    public static void printPrizeStatus(List<Prize> myPrizes) {
-        for (Prize p : myPrizes) {
-            System.out.println("wow");
+    public static void printAllLotto(LottoTickets lottoTickets) {
+        System.out.println();
+        for (PlayersLotto lotto : lottoTickets.getLottoTickets()) {
+            System.out.println(lotto.getAsIntegerList());
         }
+        System.out.println();
     }
 
     public static void printWinningResult(Map<Prize, Integer> prizeBoard) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Prize.values()).forEach(value -> {
-            if(value.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
+            if (value.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
                 System.out.print(value.getMatchedNumber() + "개 일치");
                 printFiveWithBonusBallCase(value);
                 System.out.println(" (" + value.getCash() + "원) - " + prizeBoard.get(value) + "개");
