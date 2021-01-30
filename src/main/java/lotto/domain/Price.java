@@ -12,10 +12,6 @@ public class Price {
         this.money = money;
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     public int calculateTickets() {
         return money / BASE_PRICE;
     }
@@ -23,7 +19,7 @@ public class Price {
     public List<Ticket> buyTickets() {
         List<Ticket> tickets = new ArrayList<>();
         int ticketAmount = calculateTickets();
-        for (int i = 1; i < ticketAmount; i++) {
+        for (int i = 0; i < ticketAmount; i++) {
             LottoMachine lottoMachine = new LottoMachine();
             tickets.add(new Ticket(lottoMachine.generateTicket()));
         }
