@@ -3,6 +3,7 @@ package stringCalculator.view;
 import stringCalculator.Constant;
 
 public class OutputHandler {
+
     public void printResult(int result) {
         System.out.println(createResult(result));
     }

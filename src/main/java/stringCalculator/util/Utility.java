@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utility {
+
     private static final String SPLIT_COMMA_COLON;
     private static final String SPLIT_BY_CUSTOM_DELIMITER;
 
