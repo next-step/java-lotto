@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     private void checkValidLottoNumbers(List<Integer> lottoNumbers) {
-        Set<Integer> notDuplicatedNumbers= new HashSet<>(lottoNumbers);
+        Set<Integer> notDuplicatedNumbers = new HashSet<>(lottoNumbers);
         if (notDuplicatedNumbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalArgumentException("(서로 다른) 로또 번호 6개만 가능합니다.");
         }
