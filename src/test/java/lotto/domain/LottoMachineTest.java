@@ -29,7 +29,7 @@ public class LottoMachineTest {
 
     @Test
     void createLottoFailureTest() {
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
+        List<Integer> lottoNumbers = hasBonusBallArrays.asList(1, 2, 3, 3, 5, 6);
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
     }
