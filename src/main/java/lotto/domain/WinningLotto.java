@@ -1,11 +1,10 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private static List<Integer> winningLottos;
-    private int bonusBall;
+    private final List<Integer> winningLottos;
+    private final int bonusBall;
 
     private WinningLotto(Lotto winningLotto, int bonusBall) {
         this.winningLottos = winningLotto.getLottoNumbers();
@@ -29,16 +28,4 @@ public class WinningLotto {
     public int getBonusBall() {
         return bonusBall;
     }
-
-
-//    public LottoResult result(WinningLotto winningLotto) {
-//        return LottoResult.generate(getWinningRank(winningLotto));
-//    }
-//
-//    public List<Rank> getWinningRank(WinningLotto winningLotto) {
-//        return this.lottos.stream()
-//                .filter(winningLotto::isWinningTarget)
-//                .map(lotto -> Rank.match(winningLotto.getWinningCount(lotto), lotto.hasBonusBall(winningLotto.getBonusBall())))
-//                .collect(Collectors.toList());
-//    }
 }
