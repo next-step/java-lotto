@@ -1,33 +1,23 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.controller.LottoController;
+import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        OutputView outputView = new OutputView();
         InputView inputView = new InputView();
-        int purchaseAmount = inputView.getPurchaseAmount();
-        int purchaseCount = purchaseAmount / 1_000;
-        outputView.printPurchaseCount(purchaseCount);
+        OutputView outputView = new OutputView();
+        LottoController lottoController = new LottoController(inputView, outputView);
 
-        List<LottoTicket> lottoTickets = IntStream
-                .range(0, purchaseCount)
-                .mapToObj(i -> new LottoTicket(LottoNumbersPicker.pick()))
-                .collect(Collectors.toList());
-        outputView.printLottoTickets(lottoTickets);
+        // 로또를 구매하고, 확인하는 과정
+        List<LottoTicket> lottoTickets = lottoController.purchaseLottoTickets();
 
-        LottoTicket winningTicket = inputView.getWinningTicket();
-        LottoNumber bonusNumber = inputView.getBonusNumber();
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-
-        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
-        outputView.printStatistics(winnerStatistics, purchaseAmount);
+        // 로또 결과를 보여주는 과정
+        lottoController.getWinner(lottoTickets);
     }
 }
