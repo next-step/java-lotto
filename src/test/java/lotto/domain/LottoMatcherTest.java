@@ -104,7 +104,6 @@ class LottoMatcherTest {
     @DisplayName("로또 티켓에 대한 등수 매칭 검증. 5개의 매칭과 보너스 볼을 적중한 로또티켓 테스트.")
     @Test
     void checkFiveWithBonusTicket() {
-
         PlayersLotto playersLotto1 = new PlayersLotto(Arrays.asList(
             new LottoNumber(1),
             new LottoNumber(2),

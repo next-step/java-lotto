@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
-
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoMain {
 
@@ -27,6 +26,9 @@ public class LottoMain {
             for (int i = 0; i < purchasedTickets.getNumberOfTickets(); i++) {
                 matchCnt = LottoMatcher.getMatchCnt(purchasedTickets.getLottoTickets().get(i).getNumbers(), winnerLotto);
             }
+
+            //OutputView.printWinningResult(prizeBoard);
+            //OutputView.printReturnOnInvestment(수익률 계산 결과);
             
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
