@@ -6,14 +6,9 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
     public int add (String text) {
-        int res = 0;
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
-
-//        if (isOneNumber(text) && !InputValidator.checkIsInvalidInput(text)) {
-//            return Integer.parseInt(text);
-//        }
 
         if(checkCustomDelimiter(text)) {
             return splitByCustomDelimiter(text);
@@ -21,20 +16,9 @@ public class StringCalculator {
         return splitByDelimiter(text);
     }
 
-    private boolean isOneNumber(String text) {
-        String [] inputs = text.split(",|:");
-        if (inputs.length == 1) {
-            return true;
-        }
-        return false;
-    }
-
     private boolean checkCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-        if (m.find()) {
-            return true;
-        }
-        return false;
+        return m.find();
     }
     
     private int splitByDelimiter (String text) {
@@ -48,17 +32,6 @@ public class StringCalculator {
         }
         return res;
     }
-
-//    private int splitByDelimiter(String text) {
-//        // throw 된 exception 을 처리하는 곳은 어디에?
-//        String [] inputs = text.split(",|:");
-//        int res = Arrays.stream(inputs)
-//                //.map(InputValidator::isNegative)
-//                .filter(input -> InputValidator.checkInvalidInput(input))
-//                .map(Integer::parseInt)
-//                .reduce(Integer::sum).get();
-//        return res;
-//    }
 
     private int splitByCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);

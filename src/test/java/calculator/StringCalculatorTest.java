@@ -71,12 +71,6 @@ class StringCalculatorTest {
         assertThat(calculator.add(text)).isZero();
     }
 
-//    @DisplayName(value = "커스텀구분자와 기본구분자의 혼합의 경우 이를 구별해야 ")
-//    @ParameterizedTest
-//    @ValueSource(strings = {"//;\n1;2,3:4"})
-//    void mixedDelimiters(final String text) {
-//        assertThat(calculator.add(text)).isSameAs(10);
-//    }
 
     @DisplayName(value = "구분자에 의해 문자열이 입력되는 경우 에러")
     @ParameterizedTest
