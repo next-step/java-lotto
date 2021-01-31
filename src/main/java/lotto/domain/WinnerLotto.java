@@ -45,13 +45,15 @@ public class WinnerLotto implements Lotto {
         String [] inputs = text.split(DELIMITER);
         List<LottoNumber> winnerLotto = new ArrayList<>();
         for (String input : inputs) {
-            Validator.isInteger(input);
-            Validator.isNegative(input);
-            winnerLotto.add(new LottoNumber(Integer.parseInt(input)));
+            winnerLotto.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
         }
-        if (winnerLotto.size() != LOTTO_NUMBER_SIZE) {
+        checkSizeOfLotto(winnerLotto.size());
+        return winnerLotto;
+    }
+
+    private static void checkSizeOfLotto(int size) {
+        if (size != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또의 숫자는 6개입니다.");
         }
-        return winnerLotto;
     }
 }
