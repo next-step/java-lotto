@@ -1,12 +1,13 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketTest {
     @DisplayName("두 티켓의 같은 값이 몇개 있는지를 잘 반환하는지")

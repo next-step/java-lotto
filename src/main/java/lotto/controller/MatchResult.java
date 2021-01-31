@@ -1,7 +1,8 @@
-package lotto;
+package lotto.controller;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class MatchResult {
     }
 
     // prizeCount의 input 등수의 카운 올림
-    public void countUpMatch (Lotto lotto,List<LottoTicket> tickets) {
+    public void countUpMatch (Lotto lotto, List<LottoTicket> tickets) {
         // 0 개 맞췄을 때 -1, 임1개 맞추면 prizeCount의 꼴찌(6등) 카운트가 올라
         for(LottoTicket ticket : tickets) {
             matchOneTicket(lotto, ticket);

@@ -1,12 +1,11 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
     @DisplayName("범위에 맞지 않는 숫자일 경우 예외를 던진다")

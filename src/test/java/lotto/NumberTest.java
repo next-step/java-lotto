@@ -1,6 +1,9 @@
 package lotto;
 
 import com.sun.tools.javac.util.List;
+import lotto.controller.MatchResult;
+import lotto.domain.Buyer;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

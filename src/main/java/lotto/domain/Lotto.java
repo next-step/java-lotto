@@ -1,6 +1,4 @@
-package lotto;
-
-import java.util.*;
+package lotto.domain;
 
 public class Lotto {
     private static final int VALUE_LEFT_BOUND = 1;
