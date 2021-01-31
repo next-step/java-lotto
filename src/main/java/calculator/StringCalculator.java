@@ -37,10 +37,7 @@ public class StringCalculator {
         String [] inputs = text.split(",|:");
         int res = 0;
         for (String input : inputs) {
-            if (InputValidator.checkIsInvalidInput(input)) {
-                throw new RuntimeException();
-            }
-            res += Integer.parseInt(input);
+            res += InputValidator.validatedInput(input);
         }
         return res;
     }
@@ -52,7 +49,7 @@ public class StringCalculator {
             String[] tokens= m.group(2).split(customDelimiter);
             int res = 0;
             for (String input : tokens) {
-                res += Integer.parseInt(input);
+                res += InputValidator.validatedInput(input);
             }
             return res;
         }
