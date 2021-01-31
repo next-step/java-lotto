@@ -12,7 +12,7 @@ public class LottoCalculation {
 
         for (Lotto lotto : lottos) {
             int count = winningBallMatchNumber(winningLotto, lotto);
-            boolean isBonusBall = hasBonusBall(lotto.getLottoNumbers(), winningLotto.getBonusBall());
+            boolean isBonusBall = hasBonusBall(winningLotto.getBonusBall(), lotto.getLottoNumbers());
 
             WinningType winningType = WinningType.match(count, isBonusBall); // 이넘타입 반환
 
@@ -58,7 +58,7 @@ public class LottoCalculation {
         return winningBalls.contains(number);
     }
 
-    public static boolean hasBonusBall(List<Integer> lotto, int bonusBall) {
+    public static Boolean hasBonusBall(int bonusBall, List<Integer> lotto) {
         return lotto.contains(bonusBall);
     }
 }
