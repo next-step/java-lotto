@@ -1,12 +1,14 @@
 package stringcalculator;
 
+import java.util.Arrays;
+
 public class StringCalculator {
     public int calculate(final String inputText) {
         if (nullOrEmpty(inputText)) {
             return 0;
         }
-        String[] numberStrings = StringSplitter.split(inputText);
-        if (numberStrings.length > 0) {
+        String[] numberStrings = StringParser.split(inputText);
+        if (numberExists(numberStrings)) {
             return sum(numberStrings);
         }
         return Integer.parseInt(inputText);
@@ -16,14 +18,18 @@ public class StringCalculator {
         return inputText == null || "".equals(inputText);
     }
 
+    private boolean numberExists(final String[] numbersString) {
+        return numbersString.length > 0;
+    }
+
     private int sum(final String[] numberStrings) {
-        int sum = 0;
-        for (final String token : numberStrings) {
-            int number = Integer.parseInt(token);
-            minusNumberThrowsException(number);
-            sum += number;
-        }
-        return sum;
+        return Arrays.stream(numberStrings)
+                .map(numberString -> {
+                    int number = Integer.parseInt(numberString);
+                    minusNumberThrowsException(number);
+                    return number;
+                })
+                .reduce(0, Integer::sum);
     }
 
     private void minusNumberThrowsException(final int number) {
