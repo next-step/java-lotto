@@ -2,22 +2,27 @@ package lotto.domain;
 
 import lotto.dto.BuyerData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoBuyer {
     private int autoTicketCnt;
+    private List<LottoTicket> boughtAutoTickets;
 
     public LottoBuyer(int autoTicketCnt) {
         this.autoTicketCnt = autoTicketCnt;
+        boughtAutoTickets = new ArrayList<>();
     }
 
     public boolean canBuyAutoTicket() {
-        return this.autoTicketCnt > 0;
+        return this.autoTicketCnt - boughtAutoTickets.size() > 0;
     }
 
     public LottoTicket buyAutoTicket() {
-        autoTicketCnt--;
-        return LottoTicketGenerator.generateRandomTicket();
+        LottoTicket ticket = LottoTicketGenerator.generateRandomTicket();
+        boughtAutoTickets.add(ticket);
+        return ticket;
     }
 
     public BuyerData getBuyerData() {

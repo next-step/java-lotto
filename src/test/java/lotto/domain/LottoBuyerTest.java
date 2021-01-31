@@ -21,14 +21,14 @@ class LottoBuyerTest {
         assertEquals(buyer.canBuyAutoTicket(), buyStatus);
     }
 
-    @DisplayName("자동 티켓 구매 후, 구매 가능 횟수가 잘 줄었는지 확인")
+    @DisplayName("마지막 자동 티켓 구매 후, 구매가 불가능 해지는지 확인")
     @Test
     void buyAutoTicket() {
         LottoBuyer buyer = new LottoBuyer(1);
 
         buyer.buyAutoTicket();
 
-        assertEquals(buyer, new LottoBuyer(0));
+        assertEquals(buyer.canBuyAutoTicket(), false);
     }
 
     @DisplayName("티켓 구매자의 정보 데이터를 잘 가져오는지 확인")
