@@ -90,11 +90,11 @@ public class LottoMachine {
     }
 
     public static float getProfitRate(Map<WinningType, Integer> result, int money) {
-        int totalProfit = 0;
+        long totalProfit = 0;
 
         for (WinningType key : result.keySet()) {
             Integer value = result.get((key));
-            totalProfit += key.getProfit() * value;
+            totalProfit += (long) key.getProfit() * value;
         }
 
         return (float) totalProfit / (float) money;
