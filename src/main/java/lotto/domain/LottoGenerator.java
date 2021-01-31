@@ -18,23 +18,20 @@ public class LottoGenerator {
         }
     }
 
-    private PlayersLotto generateLottoOneLotto() {
+    private PlayersLotto generateOneLotto() {
         Collections.shuffle(possibleLottoNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_CAPACITY; i++) {
             lottoNumbers.add(possibleLottoNumbers.get(i));
         }
         return new PlayersLotto(lottoNumbers);
-
     }
 
     public List<PlayersLotto> generateLottoTickets(int numberOfTicket) {
-        // 1로또를 만든다
-        // 이 것을 리스트형태로 넘버오브티켓만큼 반복한다
         List<PlayersLotto> playersLottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTicket; i++) {
-            PlayersLotto playersLotto = generateLottoOneLotto();
+            PlayersLotto playersLotto = generateOneLotto();
             playersLottoTickets.add(playersLotto);
         }
         return playersLottoTickets;
