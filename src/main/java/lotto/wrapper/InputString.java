@@ -5,7 +5,7 @@ public class InputString {
     public InputString(String str) {
         this.str = str;
     }
-    public String getString(){
-        return str;
+    public void print(){
+        System.out.println(str);
     }
 }

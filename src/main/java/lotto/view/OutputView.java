@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.wrapper.Count;
+import lotto.wrapper.InputString;
 import lotto.wrapper.Money;
 import lotto.domain.LottoTicket;
 import lotto.wrapper.OutputString;
@@ -9,12 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
-    private static final OutputString BUY_MSG = new OutputString("구입금액을 입력해 주세요.");
-    private static final OutputString AFTER_BUY_MSG = new OutputString("개를 구매했습니다.");
-    private static final OutputString LOTTO_NUMBERS_MSG = new OutputString("지난 주 당첨 번호를 입력해 주세요.");
-    private static final OutputString BONUS_NUMBER_MSG = new OutputString("보너스 볼을 입력해 주세요.");
-    private static final OutputString RESULT_TITLE_MSG = new OutputString("당첨 통계");
-    private static final OutputString RESULT_DELIMITER_MSG = new OutputString("---------");
     private static final List<Money> PRIZE_REWARDS =
             Arrays.asList(new Money(5000),
                     new Money(50_000),
@@ -24,12 +19,12 @@ public class OutputView {
 
     // 구매 메시지
     public static void printBuy() {
-        BUY_MSG.print();
+        Constants.BUY_MSG.print();
     }
 
     public static void printBuyerTickets(Count amount) {
         System.out.printf("%d", amount.getCount());
-        AFTER_BUY_MSG.print();
+        Constants.AFTER_BUY_MSG.print();
     }
 
     // 구매자 로또 정보 메시지
@@ -55,7 +50,7 @@ public class OutputView {
 
     // 로또 당첨 번호 메시지지
     public static void printLottoMsg() {
-        LOTTO_NUMBERS_MSG.print();
+        Constants.LOTTO_NUMBERS_MSG.print();
     }
 
     // 로또 당첨 번호 출력
@@ -72,7 +67,7 @@ public class OutputView {
 
     // 로또 보너스 번호 메시
     public static void printBonusMsg() {
-        BONUS_NUMBER_MSG.print();
+        Constants.BONUS_NUMBER_MSG.print();
     }
 
     // 로또 보너스 번호 출력
@@ -96,8 +91,8 @@ public class OutputView {
     }
 
     public static void printRevenue(Double resRevenue) {
-        RESULT_TITLE_MSG.print();
-        RESULT_DELIMITER_MSG.print();
+        Constants.RESULT_TITLE_MSG.print();
+        Constants.RESULT_DELIMITER_MSG.print();
         System.out.printf("총 수익률은 %f 입니다.", resRevenue);
     }
 

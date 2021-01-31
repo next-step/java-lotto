@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.wrapper.InputString;
 import lotto.wrapper.Money;
 
 import java.util.Scanner;
