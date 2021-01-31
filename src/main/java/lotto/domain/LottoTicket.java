@@ -2,15 +2,22 @@ package lotto.domain;
 
 import lotto.resources.StringResources;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int REQUIRED_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final String[] ticketNumbers){
+        this.lottoNumbers = convertLottoNumbers(ticketNumbers);
         validateSize(lottoNumbers);
+    }
+
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validateSize(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -26,5 +33,12 @@ public class LottoTicket {
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
+    }
+
+    private List<LottoNumber> convertLottoNumbers(String[] winningTicketNumbers){
+        return Arrays
+                .stream(winningTicketNumbers)
+                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
+                .collect(Collectors.toList());
     }
 }
