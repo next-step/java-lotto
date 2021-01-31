@@ -18,15 +18,15 @@ public class InputValidatorTest {
     @DisplayName("checkPriceValidationTest: 로또 구매가능 가격인지 확인")
     @ParameterizedTest
     @ValueSource(ints = {100, 999, 0, 500, 50, 10})
-    void checkPriceValidationTest(int input) {
-        assertThatThrownBy(() -> InputValidator.checkPriceValidation(input))
+    void checkBuyPriceValidationTest(int input) {
+        assertThatThrownBy(() -> InputValidator.checkBuyPriceValidation(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("checkLottoNumberValidationTest: 로또번호가 올바른지 확인 (1~45)")
     @ParameterizedTest
-    @ValueSource(ints = {0, 46, 100})
-    void checkLottoNumberValidationTest(int input) {
+    @ValueSource(strings = {"0", "46", "100"})
+    void checkLottoNumberValidationTest(String input) {
         assertThatThrownBy(() -> InputValidator.checkLottoNumberValidation(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
