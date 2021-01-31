@@ -1,16 +1,23 @@
 package lotto.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BuyerData {
     private final Integer autoTicketCnt;
+    private final List<TicketData> boughtTickets;
 
-    public BuyerData(Integer autoTicketCnt) {
+    public BuyerData(Integer autoTicketCnt, List<TicketData> boughtTickets) {
         this.autoTicketCnt = autoTicketCnt;
+        this.boughtTickets = boughtTickets;
     }
 
     public Integer getAutoTicketCnt() {
         return autoTicketCnt;
+    }
+
+    public List<TicketData> getBoughtTickets() {
+        return boughtTickets;
     }
 
     @Override

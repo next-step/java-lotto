@@ -5,6 +5,7 @@ import lotto.dto.BuyerData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoBuyer {
     private int autoTicketCnt;
@@ -26,7 +27,14 @@ public class LottoBuyer {
     }
 
     public BuyerData getBuyerData() {
-        return new BuyerData(autoTicketCnt);
+        return new BuyerData(
+            autoTicketCnt,
+            boughtAutoTickets.stream().map(
+                ticket -> ticket.getTicketData()
+            ).collect(
+                Collectors.toList()
+            )
+        );
     }
 
     @Override
