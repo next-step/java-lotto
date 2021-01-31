@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.Count;
 import lotto.domain.LottoTicket;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class OutputView {
     public static void printBuy () {
         System.out.println(BUY_MSG);
     }
-    public static void printBuyerTickets (int amount) {
+    public static void printBuyerTickets (Count amount) {
         System.out.printf("%d%s\n", amount, AFTER_BUY_MSG);
     }
     // 구매자 로또 정보 메시지
@@ -72,9 +73,9 @@ public class OutputView {
         System.out.println(RESULT_TITLE_MSG);
         System.out.println(RESULT_DELIMITER_MSG);
     }
-    public static void printResult(List<Integer> result) {
+    public static void printResult(List<Count> result) { // TODO: Count 관련한 부분 수정
         for(int i=0; i<result.size(); i++){
-            // TODO : if i == 3, it is match 5 and bonus.
+            // TODO : if i == 3, it is match 5 and bonus. => 함수를 나누던가 enum하던가
             if(i==3){
                 System.out.printf("%d개 일치 (%d원) - %d개\n",i+3,PRIZE_REWARDS[i],result.get(i));
             }

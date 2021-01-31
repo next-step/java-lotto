@@ -56,7 +56,7 @@ public class LottoTest {
     @DisplayName("당첨 번호 맞는 갯수")
     @Test
     void matchLotto() {
-        ArrayList<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>(
+        ArrayList<LottoNumber> lottoNumbers = new ArrayList<>(
                 Arrays.asList(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
@@ -64,7 +64,7 @@ public class LottoTest {
                         new LottoNumber(5),
                         new LottoNumber(6))
         );
-        ArrayList<LottoNumber> inputNumbers = new ArrayList<LottoNumber>(
+        ArrayList<LottoNumber> inputNumbers = new ArrayList<>(
                 Arrays.asList(new LottoNumber(1),
                         new LottoNumber(2),
                         new LottoNumber(3),
@@ -78,6 +78,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(ticket);
         Integer result = 3;
 
-        assertThat(lotto.matchLotto(input)).isEqualTo(result);
+        assertThat(lotto.matchLotto(input)).isEqualTo(result); // TODO: Count형으로 바꿔주기
     }
 }

@@ -1,5 +1,7 @@
 package lotto.main;
 
+import lotto.Count;
+import lotto.Money;
 import lotto.controller.MatchResult;
 import lotto.domain.Buyer;
 import lotto.domain.Lotto;
@@ -30,11 +32,11 @@ public class LottoApplication {
         // 로또 입력
         // 금액 입력
         OutputView.printBuy();
-        int amount = input.inputAmount();
+        Money amount = input.inputAmount();
         // 로또 실행
         // 구매
         // 구매 수량 확인
-        int lottos = buyer.matchPriceAndPayment(amount);
+        Count lottos = buyer.matchPriceAndPayment(amount);
         OutputView.printBuyerTickets(lottos);
         result = new MatchResult(lottos);
         // Buy Lotto
@@ -55,7 +57,7 @@ public class LottoApplication {
     }
     private static void result () {
         // return result to output view
-        List<Integer> res = result.getResult();
+        List<Count> res = result.getResult();
         Double resRevenue = result.CalculateWinningRevenue();
         // 로또 결과 메시지
         OutputView.printResult(res);
