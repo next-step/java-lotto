@@ -40,6 +40,6 @@ public class LottoController {
         final GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         final WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
         final StatisticsExporter statisticsExporter = new StatisticsExporter(winnerStatistics);
-        outputView.printStatistics(statisticsExporter, lottoTickets);
+        outputView.printStatistics(statisticsExporter);
     }
 }

@@ -13,7 +13,7 @@ public class OutputView {
         }
     }
 
-    public void printStatistics(final StatisticsExporter statisticsExporter, final LottoTickets lottoTickets) {
+    public void printStatistics(final StatisticsExporter statisticsExporter) {
         System.out.println(StringResources.LOTTO_STATISTICS_MESSAGE);
         System.out.println(StringResources.DOTTED_LINE_MESSAGE);
         System.out.println(statisticsExporter.exportStatistics());
