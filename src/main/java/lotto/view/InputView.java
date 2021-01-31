@@ -11,10 +11,8 @@ public class InputView {
     public static int getMoneyToBuyLotto() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = scanner.nextLine();
-        Validator.isNegative(input);
-        Validator.isInteger(input);
 
-        return Integer.parseInt(input);
+        return Validator.checkIsIntegerAndIsNegative(input);
     }
 
     public static String getLottoAnswer() {
