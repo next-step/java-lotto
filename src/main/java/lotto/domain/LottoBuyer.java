@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoBuyer {
     private int manualTicketCnt;
@@ -23,6 +24,16 @@ public class LottoBuyer {
         boughtAutoTickets = new ArrayList<>();
     }
 
+    public boolean shouldBuyManualTicket() {
+        return manualTicketCnt - boughtManualTickets.size() > 0;
+    }
+
+    public void buyManualTicket(String manualNumbers) {
+        boughtManualTickets.add(
+            LottoTicketGenerator.generateManualTicket(manualNumbers)
+        );
+    }
+
     public void buyAutoTickets() {
         IntStream.range(
             0, autoTicketCnt
@@ -33,15 +44,24 @@ public class LottoBuyer {
         );
     }
 
+    private Stream<LottoTicket> getBoughtTicketsStream() {
+        return Stream.concat(
+            boughtManualTickets.stream(),
+            boughtAutoTickets.stream()
+        );
+    }
+
     public List<LottoTicket> getBoughtTickets() {
-        return boughtAutoTickets;
+        return getBoughtTicketsStream().collect(
+            Collectors.toList()
+        );
     }
 
     public BuyerData getBuyerData() {
         return new BuyerData(
-            autoTicketCnt,
-            manualTicketCnt,
-            boughtAutoTickets.stream().map(
+            boughtAutoTickets.size(),
+            boughtManualTickets.size(),
+            getBoughtTicketsStream().map(
                 ticket -> ticket.getTicketData()
             ).collect(
                 Collectors.toList()
