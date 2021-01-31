@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.BuyerData;
+import lotto.dto.BuyData;
 import lotto.dto.TicketData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,14 +60,14 @@ class LottoBuyerTest {
         assertEquals(2, buyer.getBoughtTickets().size());
     }
 
-    @DisplayName("구매한 티켓 데이터를 잘 가져오는지 확인")
+    @DisplayName("구매 정보를 잘 가져오는지 확인")
     @Test
-    void getBuyerData() {
+    void getBuyData() {
         LottoBuyer buyer = new LottoBuyer(1, 0);
 
         assertEquals(
-            buyer.getBuyerData(),
-            new BuyerData(
+            buyer.getBuyData(),
+            new BuyData(
                 0,
                 0,
                 new ArrayList<TicketData>()

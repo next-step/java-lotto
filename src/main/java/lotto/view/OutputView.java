@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.TicketData;
-import lotto.dto.BuyerData;
+import lotto.dto.BuyData;
 import lotto.dto.ScoreBoardData;
 
 import java.util.stream.Collectors;
@@ -19,14 +19,14 @@ public class OutputView {
     private static final String SCORE_FMT = "%d%s (%d원) - %d개\n";
     private static final String SCORE_PROFIT_FMT = "총 수익률은 %.2f 입니다.";
 
-    public void printBuyerData(BuyerData buyerData) {
+    public void printBuyData(BuyData buyData) {
         System.out.format(
             BUYER_FMT,
-            buyerData.getManualTicketCnt(),
-            buyerData.getAutoTicketCnt()
+            buyData.getManualTicketCnt(),
+            buyData.getAutoTicketCnt()
         );
 
-        buyerData.getBoughtTickets().stream().forEach(
+        buyData.getBoughtTickets().stream().forEach(
             ticketData -> printTicketData(ticketData)
         );
     }

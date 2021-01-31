@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.BuyerData;
+import lotto.dto.BuyData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +57,8 @@ public class LottoBuyer {
         );
     }
 
-    public BuyerData getBuyerData() {
-        return new BuyerData(
+    public BuyData getBuyData() {
+        return new BuyData(
             boughtAutoTickets.size(),
             boughtManualTickets.size(),
             getBoughtTicketsStream().map(

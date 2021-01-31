@@ -32,7 +32,7 @@ public class LottoApplication {
 
         List<LottoTicket> tickets = buyer.getBoughtTickets();
 
-        output.printBuyerData(buyer.getBuyerData());
+        output.printBuyData(buyer.getBuyData());
 
         // Make Lotto Answer
         LottoAnswer answer = new LottoAnswer(
