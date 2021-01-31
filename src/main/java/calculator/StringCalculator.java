@@ -11,10 +11,6 @@ public class StringCalculator {
             return 0;
         }
 
-//        if (isOneNumber(text) && !InputValidator.checkIsInvalidInput(text)) {
-//            return Integer.parseInt(text);
-//        }
-
         if(checkCustomDelimiter(text)) {
             return splitByCustomDelimiter(text);
         }
@@ -48,17 +44,6 @@ public class StringCalculator {
         }
         return res;
     }
-
-//    private int splitByDelimiter(String text) {
-//        // throw 된 exception 을 처리하는 곳은 어디에?
-//        String [] inputs = text.split(",|:");
-//        int res = Arrays.stream(inputs)
-//                //.map(InputValidator::isNegative)
-//                .filter(input -> InputValidator.checkInvalidInput(input))
-//                .map(Integer::parseInt)
-//                .reduce(Integer::sum).get();
-//        return res;
-//    }
 
     private int splitByCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);

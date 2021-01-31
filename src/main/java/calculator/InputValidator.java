@@ -14,19 +14,6 @@ public class InputValidator {
         return text == null;
     }
 
-//    public static boolean checkInvalidInput(String text) throws RuntimeException {
-//        try {
-//            int input= Integer.parseInt(text);
-//            if(input < 0) {
-//                throw new RuntimeException("음수는 연산이 불가합니다.");
-//            }
-//            return true;
-//        } catch (Exception e) {
-//            throw new RuntimeException("올바른 수를 입력해주세요.");
-//        } finally {
-//
-//        }
-//    }
     public static boolean checkIsInvalidInput(String text) {
         return isNegative(text)||isLetter(text);
     }
