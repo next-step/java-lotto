@@ -18,8 +18,8 @@ public class LottoApplication {
         OutputView output = new OutputView();
 
         // Buy Lotto Tickets
-        LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(
-            input.inputTotalCost()
+        LottoBuyer buyer = LottoBuyerGenerator .generateLottoBuyer(
+            input.inputTotalCost(), 0
         );
         buyer.buyAutoTickets();
 

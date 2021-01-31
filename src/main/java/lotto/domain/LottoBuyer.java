@@ -9,11 +9,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBuyer {
+    private int manualTicketCnt;
     private int autoTicketCnt;
+
+    private List<LottoTicket> boughtManualTickets;
     private List<LottoTicket> boughtAutoTickets;
 
-    public LottoBuyer(int autoTicketCnt) {
+    public LottoBuyer(int autoTicketCnt, int manualTicketCnt) {
+        this.manualTicketCnt = manualTicketCnt;
         this.autoTicketCnt = autoTicketCnt;
+
+        boughtManualTickets = new ArrayList<>();
         boughtAutoTickets = new ArrayList<>();
     }
 
