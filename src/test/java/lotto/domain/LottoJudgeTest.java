@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultTest {
+class LottoJudgeTest {
 
     @DisplayName("1등을 확인하는 랭크를 확인하는 테스트")
     @Test
@@ -18,10 +18,10 @@ class LottoResultTest {
         LottoTicket lottoTicket = new LottoTicket(createPickedWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        LottoResult lottoResult = new LottoResult(goldenTicket, lottoTicket);
+        LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when
-        Rank rank = lottoResult.getRank();
+        Rank rank = lottoJudge.determine();
 
         // then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -35,10 +35,10 @@ class LottoResultTest {
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
         LottoNumber bonusNumber = new LottoNumber(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        LottoResult lottoResult = new LottoResult(goldenTicket, lottoTicket);
+        LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when
-        Rank rank = lottoResult.getRank();
+        Rank rank = lottoJudge.determine();
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -52,10 +52,10 @@ class LottoResultTest {
         LottoTicket lottoTicket = new LottoTicket(createPickedThirdNumbers());
         LottoNumber bonusNumber = new LottoNumber(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        LottoResult lottoResult = new LottoResult(goldenTicket, lottoTicket);
+        LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when
-        Rank rank = lottoResult.getRank();
+        Rank rank = lottoJudge.determine();
 
         // then
         assertThat(rank).isEqualTo(Rank.THIRD);

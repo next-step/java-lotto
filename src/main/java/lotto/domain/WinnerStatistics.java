@@ -4,32 +4,44 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class WinnerStatistics {
+    private final GoldenTicket goldenTicket;
+    private final List<LottoTicket> pickedLottoTickets;
     private final EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
-    private long winningAmount = 0L;
 
     /**
-     * @param goldenTicket 당첨 번호 (보너스 볼 포함)
-     * @param lottoTickets 구입한 로또들
+     * @param goldenTicket       당첨 번호 (보너스 볼 포함)
+     * @param pickedLottoTickets 구입한 로또
      */
-    public WinnerStatistics(final GoldenTicket goldenTicket, final List<LottoTicket> lottoTickets) {
-        analyze(goldenTicket, lottoTickets);  // 당첨 통계 분석
+    public WinnerStatistics(final GoldenTicket goldenTicket, final List<LottoTicket> pickedLottoTickets) {
+        this.goldenTicket = goldenTicket;
+        this.pickedLottoTickets = pickedLottoTickets;
+        analyze();
     }
 
-    private void analyze(final GoldenTicket goldenTicket, final List<LottoTicket> pickedLottoTickets) {
+    private void analyze() {
         for (LottoTicket lottoTicket : pickedLottoTickets) {
-            LottoResult result = new LottoResult(goldenTicket, lottoTicket);
-            Rank rank = result.getRank();
+            LottoJudge judge = new LottoJudge(goldenTicket, lottoTicket);
+            Rank rank = judge.determine();
             results.put(rank, results.getOrDefault(rank, 0) + 1);
-            winningAmount += rank.getAmount();
         }
     }
 
-    public EnumMap<Rank, Integer> getResults() {
-        return results;
+    public int getRankCount(final Rank rank) {
+        return results.getOrDefault(rank, 0);
     }
 
-    public double getEarningRate(PurchaseAmount purchaseAmount) {
-        double origin = winningAmount / (double) purchaseAmount.getAmount();
-        return Math.floor(origin * 100) / 100;
+    public double calculateEarningRate() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(pickedLottoTickets);
+        long totalPrize = calculateTotalPrize();
+        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(totalPrize);
+        return Math.floor(earningsRate * 100) / 100;
+    }
+
+    private long calculateTotalPrize() {
+        long totalPrize = 0L;
+        for (final Rank rank : results.keySet()) {
+            totalPrize += results.get(rank);
+        }
+        return totalPrize;
     }
 }

@@ -19,8 +19,8 @@ public class PurchaseAmount {
         this.count = lottoTickets.size();
     }
 
-    public int getAmount() {
-        return amount;
+    public double calculateEarningsRateByTotalPrize(final long totalPrize) {
+        return totalPrize / (double) this.amount;
     }
 
     public int getCount() {

@@ -23,7 +23,7 @@ public class TicketOfficeTest {
         assertThat(lottoTickets).hasSize(14);
     }
 
-    @Disabled
+    @Disabled("2단계에서 구현 예정")
     @DisplayName("수동 구입전략으로 로또 티켓을 구입")
     @Test
     void issueLottoTicketByManualPurchaseStrategy() {

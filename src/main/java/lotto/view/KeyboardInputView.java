@@ -5,7 +5,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.PurchaseAmount;
 
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -27,18 +26,17 @@ public class KeyboardInputView implements InputView {
     public LottoTicket getWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputText = scanner.nextLine();
-        List<String> winningTicketNumbers = Arrays.asList(inputText.split(", "));
-        List<LottoNumber> lottoNumberList = winningTicketNumbers
+        List<String> winningTicketNumbers = StringParser.split(inputText);
+        List<LottoNumber> winningNumbers = winningTicketNumbers
                 .stream()
-                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        return new LottoTicket(lottoNumberList);
+        return new LottoTicket(winningNumbers);
     }
 
     public LottoNumber getBonusNumber() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber = Integer.parseInt(scanner.nextLine());
-        return new LottoNumber(bonusNumber);
+        String bonusNumberString = scanner.nextLine();
+        return LottoNumber.of(bonusNumberString);
     }
 }

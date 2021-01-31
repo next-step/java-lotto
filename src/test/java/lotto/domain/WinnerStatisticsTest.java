@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,17 +12,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinnerStatisticsTest {
     @DisplayName("1등 1개, 2등 1개, 꽝 1개")
     @Test
-    void getResult() {
+    void getRankCount() {
         // given
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        EnumMap<Rank, Integer> result = winnerStatistics.getResults();
+        int resultOfFirst = winnerStatistics.getRankCount(Rank.FIRST);
+        int resultOfSecond = winnerStatistics.getRankCount(Rank.SECOND);
+        int resultOfNone = winnerStatistics.getRankCount(Rank.NONE);
 
         // then
-        assertThat(result.getOrDefault(Rank.FIRST, 0)).isEqualTo(1);
-        assertThat(result.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
-        assertThat(result.getOrDefault(Rank.NONE, 0)).isEqualTo(1);
+        assertThat(resultOfFirst).isEqualTo(1);
+        assertThat(resultOfSecond).isEqualTo(1);
+        assertThat(resultOfNone).isEqualTo(1);
     }
 
     @DisplayName("3개 구입하여 1등 1개, 2등 1개일 때 수익률을 확인")
@@ -33,10 +34,10 @@ public class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        double earningRate = winnerStatistics.getEarningRate(new PurchaseAmount(3000));
+        double earningRate = winnerStatistics.calculateEarningRate();
 
         // then
-        assertThat(earningRate).isEqualTo(676666.66);
+        assertThat(earningRate).isEqualTo(676_666.66);
     }
 
     private WinnerStatistics createWinnerStatistics() {

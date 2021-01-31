@@ -15,15 +15,15 @@ public enum Rank {
 
     private static final Map<Integer, Rank> ranks = new HashMap<>();
 
-    private final int matchCount;
-    private final String matchCountMessage;
-    private final long amount;
-
     static {
         for (final Rank rank : values()) {
             ranks.put(rank.matchCount, rank);
         }
     }
+
+    private final int matchCount;
+    private final String matchCountMessage;
+    private final long amount;
 
     Rank(final int matchCount, final String matchCountMessage, final long amount) {
         this.matchCount = matchCount;

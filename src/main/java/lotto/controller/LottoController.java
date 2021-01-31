@@ -25,13 +25,15 @@ public class LottoController {
         return lottoTickets;
     }
 
-    public void draw(final List<LottoTicket> lottoTickets) {
+    public void draw(final List<LottoTicket> purchasedLottoTickets) {
+        GoldenTicket goldenTicket = getGoldenTicketInput();
+        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, purchasedLottoTickets);
+        outputView.printStatistics(winnerStatistics);
+    }
+
+    private GoldenTicket getGoldenTicketInput() {
         LottoTicket winningTicket = inputView.getWinningTicket();
         LottoNumber bonusNumber = inputView.getBonusNumber();
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        PurchaseAmount purchaseAmount = new PurchaseAmount(lottoTickets);
-
-        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
-        outputView.printStatistics(winnerStatistics, purchaseAmount);
+        return new GoldenTicket(winningTicket, bonusNumber);
     }
 }

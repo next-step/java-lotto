@@ -10,6 +10,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PurchaseAmountTest {
 
+    @DisplayName("총 상금으로 수익률 구하기")
+    @Test
+    void calculateEarningsRateByTotalPrize() {
+        // given
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+
+        // when
+        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(5_000);
+
+        // then
+        assertThat(earningsRate).isEqualTo(5_000d / 14_000d);
+    }
+
     @DisplayName("amount로 객체 생성")
     @Test
     void createByAmount() {
@@ -19,7 +32,6 @@ class PurchaseAmountTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
 
         // then
-        assertThat(purchaseAmount.getAmount()).isEqualTo(amount);
         assertThat(purchaseAmount.getCount()).isEqualTo(count);
     }
 
@@ -33,7 +45,6 @@ class PurchaseAmountTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(lottoTickets);
 
         // then
-        assertThat(purchaseAmount.getAmount()).isEqualTo(3000);
         assertThat(purchaseAmount.getCount()).isEqualTo(3);
     }
 

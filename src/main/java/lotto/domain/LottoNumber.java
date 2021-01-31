@@ -14,7 +14,13 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validate(int number) {
+    public static LottoNumber of(final String numberString) {
+        int number = Integer.parseInt(numberString);
+        validate(number);
+        return new LottoNumber(number);
+    }
+
+    private static void validate(int number) {
         if (number < SMALLEST || number > LARGEST) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 수만 가능합니다.");
         }

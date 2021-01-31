@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public class LottoResult {
+public class LottoJudge {
 
     private static final int WINNER_BALL_COUNT = 6;
     private static final int BONUS_BALL_COUNT = 5;
     private int count = 0;
 
-    public LottoResult(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
+    public LottoJudge(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
         addNormalLottoNumbersCount(goldenTicket, lottoTicket);
         addBonusLottoNumbersCount(goldenTicket, lottoTicket);
     }
@@ -27,7 +27,7 @@ public class LottoResult {
         }
     }
 
-    public Rank getRank() {
+    public Rank determine() {
         return Rank.of(count);
     }
 }
