@@ -38,7 +38,7 @@ class LottoMatcherTest {
         winnerNumbers.add(new LottoNumber(6));
 
         WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
-        assertThat(LottoMatcher.getMatchedCount(lottoNumber, winnerLotto)).isEqualTo(3);
+        assertThat(lottoMatcher.getMatchedCount(lottoNumber, winnerLotto)).isEqualTo(3);
     }
 
     @Test

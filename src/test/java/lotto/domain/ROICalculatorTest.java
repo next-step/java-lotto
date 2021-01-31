@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+import lotto.util.ROICalculator;
 import org.junit.jupiter.api.Test;
 
 class ROICalculatorTest {

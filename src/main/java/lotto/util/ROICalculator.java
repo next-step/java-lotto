@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.util;
 
 import java.util.Map;
+import lotto.domain.Prize;
 
 public class ROICalculator {
 

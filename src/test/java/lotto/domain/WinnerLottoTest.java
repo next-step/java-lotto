@@ -49,7 +49,7 @@ class WinnerLottoTest {
     @Test
     void getWinnerLottoWithSplitting() {
         String input = "1, 2, 3, 4, 5, 6";
-        assertThat(WinnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+        assertThat(winnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
     }
 
     @DisplayName("duplicated number lotto")
@@ -73,7 +73,7 @@ class WinnerLottoTest {
     void duplicatedLottoNumber() {
         Assertions.assertThatThrownBy(() -> {
             LottoNumber bonus = new LottoNumber(6);
-            List<LottoNumber> lotto = WinnerLotto.getWinnerLottoWithSplitting("1, 1, 2, 3, 4, 5");
+            List<LottoNumber> lotto = winnerLotto.getWinnerLottoWithSplitting("1, 1, 2, 3, 4, 5");
             WinnerLotto winnerLotto = new WinnerLotto(bonus,lotto);
         }).isInstanceOf(IllegalArgumentException.class);
 
