@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -11,6 +10,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerStatisticsTest {
+    private final static int PURCHASE_LOTTO_AMOUNT = 3_000;
+
     @DisplayName("1등 1개, 2등 1개, 꽝 1개")
     @Test
     void getResult() {
@@ -33,7 +34,7 @@ public class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        double earningRate = winnerStatistics.getEarningRate(3000);
+        double earningRate = winnerStatistics.getEarningRate(PURCHASE_LOTTO_AMOUNT);
 
         // then
         assertThat(earningRate).isEqualTo(676666.66);
@@ -43,12 +44,18 @@ public class WinnerStatisticsTest {
         LottoTicket winningTicket = createWinningTicket();
         LottoNumber bonusNumber = new LottoNumber(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        List<LottoTicket> pickedLottoTickets = new ArrayList<>(createPickedTickets());
-        return new WinnerStatistics(goldenTicket, pickedLottoTickets);
+
+        Tickets lottoTickets = new MockLottoTickets(Arrays.asList(
+                createPickedWinningNumbers(),
+                createPickedSecondNumbers(),
+                createPickedFailNumbers()
+        ), PURCHASE_LOTTO_AMOUNT);
+
+        return new WinnerStatistics(goldenTicket, lottoTickets);
     }
 
     private LottoTicket createWinningTicket() {
-        List<LottoNumber> lottoNumbersList = Arrays.asList(
+        List<LottoNumber> lottoNumbers = Arrays.asList(
                 new LottoNumber(8),
                 new LottoNumber(21),
                 new LottoNumber(23),
@@ -56,11 +63,11 @@ public class WinnerStatisticsTest {
                 new LottoNumber(42),
                 new LottoNumber(43)
         );
-        return new LottoTicket(lottoNumbersList);
+        return new LottoTicket(lottoNumbers);
     }
 
-    private List<LottoTicket> createPickedTickets() {
-        List<LottoNumber> lottoNumberList = Arrays.asList(
+    private LottoTicket createPickedWinningNumbers() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
                 new LottoNumber(8),
                 new LottoNumber(21),
                 new LottoNumber(23),
@@ -68,27 +75,30 @@ public class WinnerStatisticsTest {
                 new LottoNumber(42),
                 new LottoNumber(43)
         );
-        List<LottoNumber> lottoNumberList2 = Arrays.asList(
+        return new LottoTicket(lottoNumbers);
+    }
+
+    private LottoTicket createPickedSecondNumbers() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
                 new LottoNumber(8),
+                new LottoNumber(21),
                 new LottoNumber(23),
                 new LottoNumber(41),
                 new LottoNumber(42),
-                new LottoNumber(43),
                 new LottoNumber(45)
         );
-        List<LottoNumber> lottoNumberList3 = Arrays.asList(
+        return new LottoTicket(lottoNumbers);
+    }
+
+    private LottoTicket createPickedFailNumbers() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
                 new LottoNumber(3),
-                new LottoNumber(8),
-                new LottoNumber(27),
-                new LottoNumber(30),
-                new LottoNumber(35),
-                new LottoNumber(44)
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
         );
-        LottoTicket lottoTicket = new LottoTicket(lottoNumberList);
-        LottoTicket lottoTicket2 = new LottoTicket(lottoNumberList2);
-        LottoTicket lottoTicket3 = new LottoTicket(lottoNumberList3);
-        return Arrays.asList(
-                lottoTicket, lottoTicket2, lottoTicket3
-        );
+        return new LottoTicket(lottoNumbers);
     }
 }
