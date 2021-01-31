@@ -9,6 +9,9 @@ public class InputView {
 
     public static Money inputAmount() {
         int amount = scanner.nextInt();
+        if( amount < 1000) {
+            throw new IllegalArgumentException("복권은 1000원 부터 구매 가능합니다.");
+        }
         return new Money(amount);
     }
 }
