@@ -26,12 +26,12 @@ public class WinnerStatistics {
         }
     }
 
-    public int getRankCount(final Rank rank) {
+    public int getWinningCountByRank(final Rank rank) {
         return results.getOrDefault(rank, 0);
     }
 
     public double calculateEarningRate() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(pickedLottoTickets);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(this.pickedLottoTickets);
         long totalPrize = calculateTotalPrize();
         double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(totalPrize);
         return Math.floor(earningsRate * 100) / 100;
@@ -40,7 +40,8 @@ public class WinnerStatistics {
     private long calculateTotalPrize() {
         long totalPrize = 0L;
         for (final Rank rank : results.keySet()) {
-            totalPrize += results.get(rank);
+            int count = results.get(rank);
+            totalPrize += rank.getTotalPrizeByCount(count);
         }
         return totalPrize;
     }

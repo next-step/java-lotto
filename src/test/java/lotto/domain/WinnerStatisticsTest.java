@@ -17,9 +17,9 @@ public class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        int resultOfFirst = winnerStatistics.getRankCount(Rank.FIRST);
-        int resultOfSecond = winnerStatistics.getRankCount(Rank.SECOND);
-        int resultOfNone = winnerStatistics.getRankCount(Rank.NONE);
+        int resultOfFirst = winnerStatistics.getWinningCountByRank(Rank.FIRST);
+        int resultOfSecond = winnerStatistics.getWinningCountByRank(Rank.SECOND);
+        int resultOfNone = winnerStatistics.getWinningCountByRank(Rank.NONE);
 
         // then
         assertThat(resultOfFirst).isEqualTo(1);
@@ -29,7 +29,7 @@ public class WinnerStatisticsTest {
 
     @DisplayName("3개 구입하여 1등 1개, 2등 1개일 때 수익률을 확인")
     @Test
-    void getEarningRateTest() {
+    void calculateEarningRate() {
         // given
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 

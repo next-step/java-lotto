@@ -31,8 +31,8 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public long getAmount() {
-        return amount;
+    public long getTotalPrizeByCount(final int count) {
+        return this.amount * count;
     }
 
     /**

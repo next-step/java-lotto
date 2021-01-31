@@ -24,7 +24,7 @@ public class ConsoleOutputView implements OutputView {
         Collections.reverse(ranks);
         for (final Rank rank : ranks) {
             if (isNone(rank)) continue;
-            int rankCount = winnerStatistics.getRankCount(rank);
+            int rankCount = winnerStatistics.getWinningCountByRank(rank);
             System.out.println(rank.toString() + rankCount + "개");
         }
         System.out.println("총 수익률은 " + winnerStatistics.calculateEarningRate() + "입니다.");
