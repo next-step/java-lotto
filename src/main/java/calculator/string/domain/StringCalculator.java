@@ -10,8 +10,10 @@ public class StringCalculator implements Calculator {
 
     @Override
     public void inputExpression(String expression) {
-        if (!isUpdateAttributeCalculator(expression)){
-            this.expression = expression;
+        this.expression = expression;
+        if(delimiter.hasNewDelimiter(expression)){
+            delimiter.updateDelimiter();
+            this.expression = delimiter.extractExpression();
         }
     }
 
@@ -25,14 +27,5 @@ public class StringCalculator implements Calculator {
         }
 
         return result;
-    }
-
-    private boolean isUpdateAttributeCalculator(String expression) {
-        if(delimiter.isMatch(expression)){
-            this.expression = delimiter.getNewExpression();
-            delimiter.updateDelimiter();
-            return true;
-        }
-        return false;
     }
 }

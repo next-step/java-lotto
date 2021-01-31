@@ -15,7 +15,7 @@ public class Delimiter {
         this.delimiters = new ArrayList<>(Arrays.asList(":", ","));
     }
 
-    public boolean isMatch(String expression){
+    public boolean hasNewDelimiter(String expression){
         m = pattern.matcher(expression);
         return m.find();
     }
@@ -25,7 +25,7 @@ public class Delimiter {
         delimiters.add(customDelimiter);
     }
 
-    public String getNewExpression(){
+    public String extractExpression(){
         return m.group(2);
     }
 
