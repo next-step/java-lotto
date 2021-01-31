@@ -3,17 +3,18 @@ package lotto.view;
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
 import lotto.domain.LottoTicket;
+import lotto.wrapper.OutputString;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
-    private static final String BUY_MSG = "구입금액을 입력해 주세요.";
-    private static final String AFTER_BUY_MSG = "개를 구매했습니다.";
-    private static final String LOTTO_NUMBERS_MSG = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String BONUS_NUMBER_MSG = "보너스 볼을 입력해 주세요.";
-    private static final String RESULT_TITLE_MSG = "당첨 통계";
-    private static final String RESULT_DELIMITER_MSG = "---------";
+    private static final OutputString BUY_MSG = new OutputString("구입금액을 입력해 주세요.");
+    private static final OutputString AFTER_BUY_MSG = new OutputString("개를 구매했습니다.");
+    private static final OutputString LOTTO_NUMBERS_MSG = new OutputString("지난 주 당첨 번호를 입력해 주세요.");
+    private static final OutputString BONUS_NUMBER_MSG = new OutputString("보너스 볼을 입력해 주세요.");
+    private static final OutputString RESULT_TITLE_MSG = new OutputString("당첨 통계");
+    private static final OutputString RESULT_DELIMITER_MSG = new OutputString("---------");
     private static final List<Money> PRIZE_REWARDS =
             Arrays.asList(new Money(5000),
                     new Money(50_000),
@@ -23,11 +24,12 @@ public class OutputView {
 
     // 구매 메시지
     public static void printBuy() {
-        System.out.println(BUY_MSG);
+        BUY_MSG.print();
     }
 
     public static void printBuyerTickets(Count amount) {
-        System.out.printf("%d%s\n", amount.getCount(), AFTER_BUY_MSG);
+        System.out.printf("%d", amount.getCount());
+        AFTER_BUY_MSG.print();
     }
 
     // 구매자 로또 정보 메시지
@@ -53,7 +55,7 @@ public class OutputView {
 
     // 로또 당첨 번호 메시지지
     public static void printLottoMsg() {
-        System.out.println(LOTTO_NUMBERS_MSG);
+        LOTTO_NUMBERS_MSG.print();
     }
 
     // 로또 당첨 번호 출력
@@ -70,7 +72,7 @@ public class OutputView {
 
     // 로또 보너스 번호 메시
     public static void printBonusMsg() {
-        System.out.println(BONUS_NUMBER_MSG);
+        BONUS_NUMBER_MSG.print();
     }
 
     // 로또 보너스 번호 출력
@@ -79,24 +81,23 @@ public class OutputView {
         System.out.println(bonus);
     }
 
-    // 로또 당첨 결과 메시지
-    public static void printResult() {
-        System.out.println(RESULT_TITLE_MSG);
-        System.out.println(RESULT_DELIMITER_MSG);
+    public static void printResult(List<Count> result) {
+        for (int i = 0; i < result.size(); i++) {
+            printOnce(result, i);
+        }
     }
 
-    public static void printResult(List<Count> result) { // TODO: Count 관련한 부분 수정
-        for (int i = 0; i < result.size(); i++) {
-            // TODO : if i == 3, it is match 5 and bonus. => 함수를 나누던가 enum하던가
-            if (i == 3) {
-                System.out.printf("%d개 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
-            } else {
-                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
-            }
+    public static void printOnce(List<Count> result, int i) {
+        if (i == 3) {
+            System.out.printf("%d개 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
+        } else {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
         }
     }
 
     public static void printRevenue(Double resRevenue) {
+        RESULT_TITLE_MSG.print();
+        RESULT_DELIMITER_MSG.print();
         System.out.printf("총 수익률은 %f 입니다.", resRevenue);
     }
 

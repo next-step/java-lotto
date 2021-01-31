@@ -8,4 +8,7 @@ public class OutputString  {
     public String getString(){
         return str;
     }
+    public void print(){
+        System.out.println(str);
+    }
 }

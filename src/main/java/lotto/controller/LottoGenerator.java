@@ -38,18 +38,18 @@ public class LottoGenerator {
         return new LottoTicket(selectedNumbers, bonus);
     }
 
-    // overload for buyer
+    // overload for buyer : candidateNumbers를 사용하면 랜덤 시드를 다르게 줘도 동일한 셔플 결과만 반환 하는 문제를 해결
     public static LottoTicket generateLotto(int j) {
-        List<LottoNumber> candidateNumbers2 = new ArrayList<>();
+        List<LottoNumber> candidateNumbersBuyer = new ArrayList<>();
         for (int i = VALUE_LEFT_BOUND; i < VALUE_RIHGT_BOUND; i++) {
-            candidateNumbers2.add(
+            candidateNumbersBuyer.add(
                     new LottoNumber(i)
             );
         }
 
-        Collections.shuffle(candidateNumbers2, new Random(j));
+        Collections.shuffle(candidateNumbersBuyer, new Random(j));
 
-        List<LottoNumber> selectedNumbers = candidateNumbers2.subList(
+        List<LottoNumber> selectedNumbers = candidateNumbersBuyer.subList(
                 COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
         );
         Collections.sort(selectedNumbers);

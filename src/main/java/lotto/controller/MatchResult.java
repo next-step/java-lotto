@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MatchResult {
     // TODO : Check enum is useful
-    // TODO : change PRIZE_REWARDS to arraylist
     private static final List<Money> PRIZE_REWARDS =
             Arrays.asList(new Money(5000),
                         new Money(50_000),
@@ -24,7 +23,6 @@ public class MatchResult {
     private static final int BONUS_REWARD_IDX = 3;
     private static final int MAX_MATCH_IDX = 4;
     private static final int KINDS_OF_PRIZE = 5;
-    private static final int PADDING = 3;
     private static final int COUNT_OF_FIRST_PLACE = 6;
     private static final int COUNT_OF_SECOND_PLACE = 5;
     private static final Money LOTTO_PRICE = new Money(1000);
