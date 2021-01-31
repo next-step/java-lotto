@@ -1,11 +1,13 @@
 package lotto.wrapper;
 
-public class OutputString  {
+public class OutputString {
     private String str;
+
     public OutputString(String str) {
         this.str = str;
     }
-    public void print(){
+
+    public void print() {
         System.out.println(str);
     }
 }
