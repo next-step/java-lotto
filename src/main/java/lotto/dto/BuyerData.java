@@ -3,14 +3,14 @@ package lotto.dto;
 import java.util.Objects;
 
 public class BuyerData {
-    private final Integer ticketCnt;
+    private final Integer autoTicketCnt;
 
-    public BuyerData(Integer ticketCnt) {
-        this.ticketCnt = ticketCnt;
+    public BuyerData(Integer autoTicketCnt) {
+        this.autoTicketCnt = autoTicketCnt;
     }
 
-    public Integer getTicketCnt() {
-        return ticketCnt;
+    public Integer getAutoTicketCnt() {
+        return autoTicketCnt;
     }
 
     @Override
@@ -18,11 +18,11 @@ public class BuyerData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BuyerData that = (BuyerData) o;
-        return Objects.equals(ticketCnt, that.ticketCnt);
+        return Objects.equals(autoTicketCnt, that.autoTicketCnt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketCnt);
+        return Objects.hash(autoTicketCnt);
     }
 }

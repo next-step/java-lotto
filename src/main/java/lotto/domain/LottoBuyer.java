@@ -5,23 +5,23 @@ import lotto.dto.BuyerData;
 import java.util.Objects;
 
 public class LottoBuyer {
-    private int ticketCnt = 0;
+    private int autoTicketCnt;
 
-    public LottoBuyer(int ticketCnt) {
-        this.ticketCnt = ticketCnt;
+    public LottoBuyer(int autoTicketCnt) {
+        this.autoTicketCnt = autoTicketCnt;
     }
 
-    public boolean canBuyTicket() {
-        return this.ticketCnt > 0;
+    public boolean canBuyAutoTicket() {
+        return this.autoTicketCnt > 0;
     }
 
-    public LottoTicket buyTicket() {
-        ticketCnt--;
+    public LottoTicket buyAutoTicket() {
+        autoTicketCnt--;
         return LottoTicketGenerator.generateRandomTicket();
     }
 
     public BuyerData getBuyerData() {
-        return new BuyerData(ticketCnt);
+        return new BuyerData(autoTicketCnt);
     }
 
     @Override
@@ -29,11 +29,11 @@ public class LottoBuyer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoBuyer that = (LottoBuyer) o;
-        return ticketCnt == that.ticketCnt;
+        return autoTicketCnt == that.autoTicketCnt;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketCnt);
+        return Objects.hash(autoTicketCnt);
     }
 }

@@ -20,7 +20,7 @@ public class OutputView {
     private static final String SCORE_PROFIT_FMT = "총 수익률은 %.2f 입니다.";
 
     public void printBuyerData(BuyerData buyerData) {
-        System.out.format(BUYER_FMT, buyerData.getTicketCnt());
+        System.out.format(BUYER_FMT, buyerData.getAutoTicketCnt());
     }
 
     public void printTicket(TicketData ticketData) {
