@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.util.Validator;
 
 public class PlayersLotto implements Lotto {
-
 
     private final List<LottoNumber> numbers;
 
