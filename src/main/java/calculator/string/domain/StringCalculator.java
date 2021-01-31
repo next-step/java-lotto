@@ -1,5 +1,8 @@
 package calculator.string.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StringCalculator implements Calculator {
     private String expression;
     private Delimiter delimiter;
@@ -19,13 +22,8 @@ public class StringCalculator implements Calculator {
 
     @Override
     public int calculation() {
-        String[] numbers = this.expression.split(delimiter.getDelimiters());
-        int result = 0;
-        for (String number : numbers) {
-            System.out.println(number);
-            result += Integer.parseInt(number);
-        }
-
-        return result;
+        return Arrays.stream(expression.split(delimiter.getDelimiters()))
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
     }
 }
