@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import lotto.Buyer;
-import lotto.Lotto;
-import lotto.LottoNumber;
-import lotto.LottoTicket;
-import lotto.controller.MatchResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
