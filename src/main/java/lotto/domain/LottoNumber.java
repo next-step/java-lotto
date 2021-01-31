@@ -14,7 +14,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validate(int number) {
+    private void validate(final int number) {
         if (number < MINIMUM || number > MAXIMUM) {
             throw new IllegalArgumentException(StringResources.LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
         }

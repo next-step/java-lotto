@@ -20,7 +20,7 @@ public class LottoTicket {
         validateSize(lottoNumbers);
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
             throw new RuntimeException(StringResources.LOTTO_NUMBER_AMOUNT_ERROR_MESSAGE);
         }
@@ -35,7 +35,7 @@ public class LottoTicket {
         return this.lottoNumbers.toString();
     }
 
-    private List<LottoNumber> convertLottoNumbers(String[] winningTicketNumbers){
+    private List<LottoNumber> convertLottoNumbers(final String[] winningTicketNumbers){
         return Arrays
                 .stream(winningTicketNumbers)
                 .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))

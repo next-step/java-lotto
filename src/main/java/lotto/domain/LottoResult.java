@@ -6,19 +6,19 @@ public class LottoResult {
     private static final int BONUS_BALL_COUNT = 5;
     private int count = 0;
 
-    public LottoResult(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
+    public LottoResult(final GoldenTicket goldenTicket, final LottoTicket lottoTicket) {
         addNormalLottoNumbersCount(goldenTicket, lottoTicket);
         addBonusLottoNumbersCount(goldenTicket, lottoTicket);
     }
 
-    private void addNormalLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
+    private void addNormalLottoNumbersCount(final GoldenTicket goldenTicket, final LottoTicket lottoTicket) {
         count += goldenTicket.getMatchedNumbersCount(lottoTicket);
         if (count == WINNER_BALL_COUNT) {
             count++;
         }
     }
 
-    private void addBonusLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket myLottoTicket) {
+    private void addBonusLottoNumbersCount(final GoldenTicket goldenTicket, final LottoTicket myLottoTicket) {
         if (count != BONUS_BALL_COUNT) {
             return;
         }

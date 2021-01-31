@@ -8,13 +8,13 @@ public class LottoNumbersPicker implements NumberPicker{
 
     @Override
     public List<LottoNumber> pick() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        Random random = new Random();
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+        final Random random = new Random();
         while (lottoNumbers.size() < MAX_BOUNDARY_AMOUNT) {
-            int number = random.nextInt(MAX_BOUNDARY_NUMBER) + 1;
+            final int number = random.nextInt(MAX_BOUNDARY_NUMBER) + 1;
             lottoNumbers.add(new LottoNumber(number));
         }
-        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
+        final List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
         lottoNumberList.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return lottoNumberList;
     }

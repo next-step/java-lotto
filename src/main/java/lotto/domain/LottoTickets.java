@@ -6,7 +6,7 @@ public class LottoTickets implements Tickets{
     private final List<LottoTicket> lottoTickets;
     private final Purchase purchase;
 
-    public LottoTickets(Purchase purchase) {
+    public LottoTickets(final Purchase purchase) {
         this.purchase = purchase;
         this.lottoTickets = buyLottoTickets(purchase);
     }

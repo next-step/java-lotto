@@ -8,7 +8,7 @@ public class GoldenTicket {
     private final LottoTicket goldenTicket;
     private final LottoNumber bonusNumber;
 
-    public GoldenTicket(LottoTicket goldenTicket, LottoNumber bonusNumber) {
+    public GoldenTicket(final LottoTicket goldenTicket, final LottoNumber bonusNumber) {
         this.goldenTicket = goldenTicket;
         this.bonusNumber = bonusNumber;
     }

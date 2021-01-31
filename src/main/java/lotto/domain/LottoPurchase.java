@@ -9,7 +9,7 @@ public class LottoPurchase implements Purchase {
     private final NumberPicker numberPicker;
     private final int purchaseAmount;
 
-    public LottoPurchase(NumberPicker numberPicker, int purchaseAmount) {
+    public LottoPurchase(final NumberPicker numberPicker, final int purchaseAmount) {
         this.numberPicker = numberPicker;
         this.purchaseAmount = purchaseAmount;
     }
