@@ -1,12 +1,10 @@
-package lotto;
+package lotto.domain;
 
-import java.util.List;
+import lotto.Buyer;
+import lotto.Lotto;
+import lotto.LottoNumber;
+import lotto.LottoTicket;
 import lotto.controller.MatchResult;
-import lotto.domain.Buyer;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -86,12 +84,5 @@ public class LottoTest {
         Integer result = 3;
 
         assertThat(lotto.matchLotto(input)).isEqualTo(result);
-    }
-
-    @DisplayName("당첨 통계에 따라 수익률을 잘 계산하는지") // => matchresult test로 이관
-    @Test
-    void winningRevenueCheck() {
-        MatchResult result = new MatchResult(5, Arrays.asList(2,0,0,0,0));
-        assertThat(result.CalculateWinningRevenue()).isEqualTo(2.0);
     }
 }

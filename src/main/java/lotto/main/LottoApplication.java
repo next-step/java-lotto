@@ -1,9 +1,9 @@
 package lotto.main;
 
 import lotto.controller.MatchResult;
-import lotto.domain.Buyer;
-import lotto.domain.Lotto;
-import lotto.domain.LottoTicket;
+import lotto.Buyer;
+import lotto.Lotto;
+import lotto.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
