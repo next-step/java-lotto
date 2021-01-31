@@ -2,14 +2,12 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoNumbersPicker {
+public class LottoNumbersPicker implements NumberPicker{
     private static final int MAX_BOUNDARY_NUMBER = 45;
     private static final int MAX_BOUNDARY_AMOUNT = 6;
 
-    private LottoNumbersPicker() {
-    }
-
-    public static List<LottoNumber> pick() {
+    @Override
+    public List<LottoNumber> pick() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         Random random = new Random();
         while (lottoNumbers.size() < MAX_BOUNDARY_AMOUNT) {
