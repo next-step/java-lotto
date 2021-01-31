@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,7 +15,7 @@ public class LottoApplication {
         OutputView outputView = new OutputView();
         LottoController lottoController = new LottoController(inputView, outputView);
 
-        List<LottoTicket> lottoTickets = lottoController.purchaseLottoTickets();
+        LottoTickets lottoTickets = lottoController.purchaseLottoTickets();
         lottoController.getWinner(lottoTickets);
     }
 }

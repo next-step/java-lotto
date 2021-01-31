@@ -19,26 +19,25 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public List<LottoTicket> purchaseLottoTickets() {
+    public LottoTickets purchaseLottoTickets() {
         int purchaseAmount = inputView.getPurchaseAmount();
-        int purchaseCount = purchaseAmount / LOTTO_TICKET_PRICE;    // Purchase 객체 생성?
-        outputView.printPurchaseCount(purchaseCount);
+        final NumberPicker numberPicker = new LottoNumbersPicker();
+        final LottoPurchase lottoPurchase = new LottoPurchase(numberPicker, purchaseAmount);
+        final LottoTickets lottoTickets = new LottoTickets(lottoPurchase);
 
-        List<LottoTicket> lottoTickets = IntStream
-                .range(0, purchaseCount)
-                .mapToObj(i -> new LottoTicket(LottoNumbersPicker.pick()))
-                .collect(Collectors.toList());
+
+        outputView.printPurchaseCount(lottoTickets);
         outputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
-    public void getWinner(List<LottoTicket> lottoTickets) {
+    public void getWinner(LottoTickets lottoTickets) {
         LottoTicket winningTicket = inputView.getWinningTicket();
         LottoNumber bonusNumber = inputView.getBonusNumber();
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
-        int purchaseAmount = lottoTickets.size() * LOTTO_TICKET_PRICE;
+
 
         WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
-        outputView.printStatistics(winnerStatistics, purchaseAmount);
+        outputView.printStatistics(winnerStatistics, lottoTickets);
     }
 }

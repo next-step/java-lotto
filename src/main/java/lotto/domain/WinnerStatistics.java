@@ -11,12 +11,12 @@ public class WinnerStatistics {
      * @param goldenTicket 당첨 번호 (보너스 볼 포함)
      * @param lottoTickets 구입한 로또들
      */
-    public WinnerStatistics(final GoldenTicket goldenTicket, final List<LottoTicket> lottoTickets) {
+    public WinnerStatistics(final GoldenTicket goldenTicket, LottoTickets lottoTickets) {
         analyze(goldenTicket, lottoTickets);  // 당첨 통계 분석
     }
 
-    private void analyze(final GoldenTicket goldenTicket, final List<LottoTicket> pickedLottoTickets) {
-        for (LottoTicket lottoTicket : pickedLottoTickets) {
+    private void analyze(final GoldenTicket goldenTicket, LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             LottoResult result = new LottoResult(goldenTicket, lottoTicket);
             Rank rank = result.getRank();
             results.put(rank, results.getOrDefault(rank, 0) + 1);

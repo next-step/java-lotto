@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinnerStatistics;
 
@@ -11,13 +12,13 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printLottoTickets(final List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public void printLottoTickets(final LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket);
         }
     }
 
-    public void printStatistics(final WinnerStatistics winnerStatistics, final int purchaseAmount) {
+    public void printStatistics(final WinnerStatistics winnerStatistics, final LottoTickets lottoTickets) {
         EnumMap<Rank, Integer> results = winnerStatistics.getResults();
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
@@ -29,14 +30,14 @@ public class OutputView {
             int matchCount = results.getOrDefault(rank, 0);
             System.out.println(rank.toString() + matchCount + "개");
         }
-        System.out.println("총 수익률은 " + winnerStatistics.getEarningRate(purchaseAmount) + "입니다.");
+        System.out.println("총 수익률은 " + winnerStatistics.getEarningRate(lottoTickets.getPurchaseAmount()) + "입니다.");
     }
 
     private boolean isNone(final Rank rank) {
         return rank == Rank.NONE;
     }
 
-    public void printPurchaseCount(final int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+    public void printPurchaseCount(final LottoTickets lottoTickets) {
+        System.out.println(lottoTickets.getPurchaseCount() + "개를 구매했습니다.");
     }
 }
