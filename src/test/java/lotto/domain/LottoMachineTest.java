@@ -63,6 +63,14 @@ public class LottoMachineTest {
     }
 
     @Test
+    void winningBallMatchNumberTest() {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45));
+
+        Assertions.assertThat(lottoMachine.winningBallMatchNumber(winningLotto, lotto)).isEqualTo(3);
+    }
+
+    @Test
     void hasBonusBallTest() {
         List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         Assertions.assertThat(lottoMachine.hasBonusBall(1, lotto)).isTrue();
