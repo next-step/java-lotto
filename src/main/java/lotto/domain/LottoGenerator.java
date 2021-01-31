@@ -18,7 +18,7 @@ public class LottoGenerator {
         }
     }
 
-    private PlayersLotto generateLottoOneLotto() {
+    private PlayersLotto generateOneLottoTicket() {
         Collections.shuffle(possibleLottoNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_CAPACITY; i++) {
@@ -34,7 +34,7 @@ public class LottoGenerator {
         List<PlayersLotto> playersLottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTicket; i++) {
-            PlayersLotto playersLotto = generateLottoOneLotto();
+            PlayersLotto playersLotto = generateOneLottoTicket();
             playersLottoTickets.add(playersLotto);
         }
         return playersLottoTickets;
