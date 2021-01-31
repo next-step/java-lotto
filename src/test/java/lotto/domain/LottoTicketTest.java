@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketTest {
 
-    @DisplayName("생성자의 인자로 들어온 LottoNumbers의 size가 6이 아니면 예외 발생")
+    @DisplayName("생성자의 인자로 들어온 LottoNumbers의 size가 6이 아니면 exception 발생")
     @Test
     void notRequiredSizedLottoNumbersThrowsException() {
         // given
@@ -24,11 +24,11 @@ class LottoTicketTest {
         );
 
         // when & then
-        assertThrows(RuntimeException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> new LottoTicket(lottoNumbers));
     }
 
-    @DisplayName("로또티켓의 배열 리스트의 스트링 값을 확인하는 테스트")
+    @DisplayName("toString() 결과 포맷")
     @Test
     void toStringTest() {
         // given

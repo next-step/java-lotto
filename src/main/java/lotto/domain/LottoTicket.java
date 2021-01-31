@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LottoTicket {
     private static final int REQUIRED_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
@@ -11,14 +12,20 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
-            throw new RuntimeException("로또 번호는 6개여야만 합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개여야만 합니다.");
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public boolean contains(final LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
+    public int getSameNumbersCount(final LottoTicket otherLottoTicket) {
+        return (int) otherLottoTicket.lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 
     @Override
