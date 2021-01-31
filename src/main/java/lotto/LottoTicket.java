@@ -15,6 +15,7 @@ public class LottoTicket {
         this.numbers = numbers;
         this.bonus = bonus;
     }
+
     // for buyer
     public LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
@@ -38,14 +39,15 @@ public class LottoTicket {
     }
 
     // 티켓 한 장의 정보를 출력
-    public List<Integer> getLottoNumbers () {
+    public List<Integer> getLottoNumbers() {
         List<Integer> ticketNumbers = new ArrayList<>();
-        for(LottoNumber number : numbers){
+        for (LottoNumber number : numbers) {
             ticketNumbers.add(number.getLottoNumber());
         }
         return ticketNumbers;
     }
-    public LottoNumber getBonusNumber () {
+
+    public LottoNumber getBonusNumber() {
         return bonus;
     }
 }

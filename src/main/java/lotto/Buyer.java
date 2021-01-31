@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Buyer {
+    private static final int LOTTO_PRICE = 1000;
+
     public int matchPriceAndPayment(int input) {
-        return input / 1000;
+        return input / LOTTO_PRICE;
     }
 
     public List<LottoTicket> buyLotto(int input) {
