@@ -21,15 +21,14 @@ public class OutputView {
 
     public void printBuyerData(BuyerData buyerData) {
         System.out.format(BUYER_FMT, buyerData.getAutoTicketCnt());
-    }
-
-    public void printTicket(TicketData ticketData) {
-        System.out.format(
-            TICKET_FMT,
-            ticketData.getNumbersData().stream().map(
-                Object::toString
-            ).collect(
-                Collectors.joining(TICKET_DELIMITER)
+        buyerData.getBoughtTickets().stream().forEach(
+            ticketData -> System.out.format(
+                TICKET_FMT,
+                ticketData.getNumbersData().stream().map(
+                    Object::toString
+                ).collect(
+                    Collectors.joining(TICKET_DELIMITER)
+                )
             )
         );
     }

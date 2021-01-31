@@ -22,14 +22,14 @@ public class LottoApplication {
         LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(
             input.inputTotalCost()
         );
-        output.printBuyerData(buyer.getBuyerData());
 
         List<LottoTicket> tickets = new ArrayList<>();
         while (buyer.canBuyAutoTicket()) {
             LottoTicket ticket = buyer.buyAutoTicket();
-            output.printTicket(ticket.getTicketData());
             tickets.add(ticket);
         }
+
+        output.printBuyerData(buyer.getBuyerData());
 
         // Make Lotto Answer
         LottoAnswer answer = new LottoAnswer(
