@@ -10,10 +10,23 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
+    private static Lotto lotto;
+    private static InputView input;
+    private static Buyer buyer;
+    private static List<LottoTicket> tickets;
+    private static MatchResult result;
     public static void main(String[] args) {
-        Lotto lotto = new Lotto();
-        InputView input = new InputView();
-        Buyer buyer = new Buyer();
+        init();
+        buyLotto();
+        confirmLotto();
+        result();
+    }
+    private static void init () {
+        lotto = new Lotto();
+        input = new InputView();
+        buyer = new Buyer();
+    }
+    private static void buyLotto () {
         // 로또 입력
         // 금액 입력
         OutputView.printBuy();
@@ -23,14 +36,13 @@ public class LottoApplication {
         // 구매 수량 확인
         int lottos = buyer.matchPriceAndPayment(amount);
         OutputView.printBuyerTickets(lottos);
-        MatchResult result = new MatchResult(lottos);
+        result = new MatchResult(lottos);
         // Buy Lotto
-        List<LottoTicket> tickets = buyer.buyLotto(amount);
+        tickets = buyer.buyLotto(amount);
         // 구매자 로또 정보 메시지
-
-
         OutputView.printBuyTicketsNumbers(tickets);
-
+    }
+    private static void confirmLotto () {
         // 로또 당첨 번호
         OutputView.printLottoMsg();
         OutputView.printLottoNumbers(lotto.getLottoTicket());
@@ -40,7 +52,8 @@ public class LottoApplication {
 
         // Match Lotto
         result.countUpMatch(lotto, tickets);
-
+    }
+    private static void result () {
         // return result to output view
         List<Integer> res = result.getResult();
         Double resRevenue = result.CalculateWinningRevenue();
