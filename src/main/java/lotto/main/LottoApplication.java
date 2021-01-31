@@ -18,10 +18,18 @@ public class LottoApplication {
     private static List<LottoTicket> tickets;
     private static MatchResult result;
     public static void main(String[] args) {
-        init();
-        buyLotto();
-        confirmLotto();
-        result();
+        try {
+            init();
+            buyLotto();
+            confirmLotto();
+            result();
+        }
+        catch (IllegalArgumentException iae){
+            iae.printStackTrace();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     private static void init () {
         lotto = new Lotto();

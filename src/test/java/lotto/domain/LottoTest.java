@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,10 +21,10 @@ public class LottoTest {
             "5500, 5",
             "300, 0",
     })
-    void matchPriceAndPayment(int input, int output) {
+    void matchPriceAndPayment(int _input, int output) {
         Buyer number = new Buyer();
-
-        assertThat(number.matchPriceAndPayment(input)).isEqualTo(output);
+        Money input = new Money(_input);
+        assertThat(number.matchPriceAndPayment(input)).isEqualToComparingFieldByField(output);
     }
 
     @DisplayName("실제 로또 당첨 번호와 일치하는 번호를 넣었을 때 일치하는지")

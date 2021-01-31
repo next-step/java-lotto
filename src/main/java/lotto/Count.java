@@ -9,4 +9,12 @@ public class Count {
         }
         this.count = count;
     }
+
+    public void countUp() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }
