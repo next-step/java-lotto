@@ -63,6 +63,6 @@ public class MatchResult {
         for (int i = 0; i < 5; i++) {
             rewards += prizeCount.get(i) * PRIZE_REWARDS[i];
         }
-        return rewards / (tryCount * 1000);
+        return (double) rewards / (tryCount * 1000);
     }
 }
