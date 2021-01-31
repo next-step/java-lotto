@@ -1,4 +1,4 @@
-package lotto;
+package lotto.wrapper;
 
 public class Count {
     private int count;

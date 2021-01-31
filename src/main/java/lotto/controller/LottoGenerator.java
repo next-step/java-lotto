@@ -22,9 +22,7 @@ public class LottoGenerator {
 
     static {
         for (int i = VALUE_LEFT_BOUND; i < VALUE_RIHGT_BOUND; i++) {
-            candidateNumbers.add(
-                new LottoNumber(i)
-            );
+            candidateNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -33,7 +31,7 @@ public class LottoGenerator {
         Collections.shuffle(candidateNumbers);
 
         List<LottoNumber> selectedNumbers = candidateNumbers.subList(
-            COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
+                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
         );
         Collections.sort(selectedNumbers);
 
@@ -45,7 +43,7 @@ public class LottoGenerator {
         List<LottoNumber> candidateNumbers2 = new ArrayList<>();
         for (int i = VALUE_LEFT_BOUND; i < VALUE_RIHGT_BOUND; i++) {
             candidateNumbers2.add(
-                new LottoNumber(i)
+                    new LottoNumber(i)
             );
         }
 

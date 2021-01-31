@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.Count;
-import lotto.Money;
+import lotto.wrapper.Count;
+import lotto.wrapper.Money;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;

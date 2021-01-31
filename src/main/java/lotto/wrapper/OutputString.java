@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.wrapper;
 
 public class OutputString  {
     private String str;

@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.Count;
-import lotto.Money;
-import lotto.Revenue;
+import lotto.wrapper.Count;
+import lotto.wrapper.Money;
+import lotto.wrapper.Revenue;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 

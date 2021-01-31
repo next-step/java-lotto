@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.Count;
-import lotto.Money;
+import lotto.wrapper.Count;
+import lotto.wrapper.Money;
 import lotto.controller.LottoGenerator;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.wrapper;
 
 public class Revenue {
     double revenue;
