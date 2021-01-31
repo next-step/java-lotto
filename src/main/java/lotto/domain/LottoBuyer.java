@@ -17,16 +17,6 @@ public class LottoBuyer {
         boughtAutoTickets = new ArrayList<>();
     }
 
-    public boolean canBuyAutoTicket() {
-        return this.autoTicketCnt - boughtAutoTickets.size() > 0;
-    }
-
-    public LottoTicket buyAutoTicket() {
-        LottoTicket ticket = LottoTicketGenerator.generateRandomTicket();
-        boughtAutoTickets.add(ticket);
-        return ticket;
-    }
-
     public void buyAutoTickets() {
         IntStream.range(
             0, autoTicketCnt

@@ -10,7 +10,6 @@ import lotto.domain.LottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
@@ -22,12 +21,9 @@ public class LottoApplication {
         LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(
             input.inputTotalCost()
         );
+        buyer.buyAutoTickets();
 
-        List<LottoTicket> tickets = new ArrayList<>();
-        while (buyer.canBuyAutoTicket()) {
-            LottoTicket ticket = buyer.buyAutoTicket();
-            tickets.add(ticket);
-        }
+        List<LottoTicket> tickets = buyer.getBoughtTickets();
 
         output.printBuyerData(buyer.getBuyerData());
 
