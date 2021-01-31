@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoCalculation;
+import lotto.domain.LottoMachine;
 import lotto.domain.WinningType;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class ResultView {
             printEachResult(matchResult, winningType);
         }
 
-        float profitRate = LottoCalculation.getProfitRate(matchResult, money);
+        float profitRate = LottoMachine.getProfitRate(matchResult, money);
         System.out.println(String.format(STATISTIC_REVENUE_MESSAGE, profitRate));
     }
 

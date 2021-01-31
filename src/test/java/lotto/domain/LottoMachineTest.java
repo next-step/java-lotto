@@ -35,9 +35,9 @@ public class LottoMachineTest {
     }
 
     @Test
-    void startTest() {
+    void purchaseLottosTest() {
         int money = 14000;
-        Assertions.assertThat(lottoMachine.start(money).size()).isEqualTo(14);
+        Assertions.assertThat(lottoMachine.purchaseLottos(money).size()).isEqualTo(14);
     }
 
     @Test

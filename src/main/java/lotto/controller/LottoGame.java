@@ -12,7 +12,7 @@ public class LottoGame {
     public static void main(String[] args) {
         int money = InputView.getLottoMoney(); // 구입 금액을 입력해주세요
         LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.start(money);
+        List<Lotto> lottos = lottoMachine.purchaseLottos(money);
         ResultView.printPurchaseNumber(lottos.size()); // 개를 구입했습니다.
 
         ResultView.printGeneratedLottos(lottos); // 생성된 로또 목록

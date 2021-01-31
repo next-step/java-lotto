@@ -18,7 +18,7 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
-    public List<Lotto> start(int money) {
+    public List<Lotto> purchaseLottos(int money) {
         int lottoTicketNumber = getLottoTicketNumber(money);
 
         List<Lotto> lottos = new ArrayList<>();
@@ -85,4 +85,16 @@ public class LottoMachine {
     public Boolean hasBonusBall(int bonusBall, List<Integer> lotto) {
         return lotto.contains(bonusBall);
     }
+
+    public static float getProfitRate(Map<WinningType, Integer> result, int money) {
+        int totalProfit = 0;
+
+        for (WinningType key : result.keySet()) {
+            Integer value = result.get((key));
+            totalProfit += key.getProfit() * value;
+        }
+
+        return (float) totalProfit / (float) money;
+    }
+
 }
