@@ -3,8 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int MINIMUM = 1;
-    private static final int MAXIMUM = 45;
+    private static final int SMALLEST = 1;
+    private static final int LARGEST = 45;
+
     private final int number;
 
     public LottoNumber(final int number) {
@@ -13,8 +14,8 @@ public class LottoNumber {
     }
 
     private void validate(int number) {
-        if (number < MINIMUM || number > MAXIMUM) {
-            throw new IllegalArgumentException("정상적인 수의 범위가 아닙니다.");
+        if (number < SMALLEST || number > LARGEST) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지의 수만 가능합니다.");
         }
     }
 

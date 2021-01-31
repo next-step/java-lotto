@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberTest {
 
-    @DisplayName("45보다 큰 수를 넣을 경우 오류가 나는 케이스")
+    @DisplayName("45보다 큰 수로 생성시 exception 발생")
     @Test
     void numberLargerThan45ThrowsException() {
         // given
@@ -18,7 +18,7 @@ public class LottoNumberTest {
                 () -> new LottoNumber(number));
     }
 
-    @DisplayName("1보다 작은 수를 넣을 경우 오류가 나는 케이스")
+    @DisplayName("1보다 작은 수로 생성시 exception 발생")
     @Test
     void numberSmallerThan1ThrowsException() {
         // given
