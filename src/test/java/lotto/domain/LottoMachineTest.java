@@ -12,12 +12,12 @@ public class LottoMachineTest {
     static LottoMachine lottoMachine;
 
     @BeforeAll
-    static void initAll () {
+    static void initAll() {
         lottoMachine = new LottoMachine();
     }
 
     @Test
-    void getLottoTicketNumberTest () {
+    void getLottoTicketNumberTest() {
         Assertions.assertThat(lottoMachine.getLottoTicketNumber(14000)).isEqualTo(14);
     }
 
@@ -29,7 +29,7 @@ public class LottoMachineTest {
 
     @Test
     void createLottoFailureTest() {
-        List<Integer> lottoNumbers = hasBonusBallArrays.asList(1, 2, 3, 3, 5, 6);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
     }
