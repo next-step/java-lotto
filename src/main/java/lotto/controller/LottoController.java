@@ -1,16 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.utils.StatisticsExporter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class LottoController {
-    private final int LOTTO_TICKET_PRICE = 1_000;
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -20,24 +15,31 @@ public class LottoController {
     }
 
     public LottoTickets purchaseLottoTickets() {
-        int purchaseAmount = inputView.getPurchaseAmount();
+        final Money money = inputView.getPurchaseAmount();
         final NumberPicker numberPicker = new LottoNumbersPicker();
-        final LottoPurchase lottoPurchase = new LottoPurchase(numberPicker, purchaseAmount);
-        final LottoTickets lottoTickets = new LottoTickets(lottoPurchase);
+        final LottoPurchase lottoPurchase = new LottoPurchase(numberPicker, money.getAmount());
 
-
-        outputView.printPurchaseCount(lottoTickets);
-        outputView.printLottoTickets(lottoTickets);
-        return lottoTickets;
+        return new LottoTickets(lottoPurchase);
     }
 
-    public void getWinner(LottoTickets lottoTickets) {
-        LottoTicket winningTicket = inputView.getWinningTicket();
-        LottoNumber bonusNumber = inputView.getBonusNumber();
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+    public void printLottoTickets(final LottoTickets lottoTickets) {
+        outputView.printLottoTickets(lottoTickets);
+    }
 
+    public LottoTicket makeWinningTicket() {
+        final String[] winningTicketNumbers = inputView.getWinningTicketNumbers();
+        return new LottoTicket(winningTicketNumbers);
+    }
 
-        WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
-        outputView.printStatistics(winnerStatistics, lottoTickets);
+    public LottoNumber makeBonusBall() {
+        final LottoNumber bonusNumber = inputView.getBonusNumber();
+        return bonusNumber;
+    }
+
+    public void printResults(final LottoTickets lottoTickets, final LottoTicket winningTicket, final LottoNumber bonusNumber) {
+        final GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+        final WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
+        final StatisticsExporter statisticsExporter = new StatisticsExporter(winnerStatistics);
+        outputView.printStatistics(statisticsExporter, lottoTickets);
     }
 }

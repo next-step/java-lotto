@@ -1,33 +1,26 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.resources.StringResources;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 
-    public int getPurchaseAmount() {
+    public Money getPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(StringResources.INPUT_PURCHASE_AMOUNT_HINT);
-        return scanner.nextInt();
+        return new Money(scanner.nextInt());
     }
 
-    public LottoTicket getWinningTicket() {
+    public String[] getWinningTicketNumbers() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(StringResources.INPUT_LAST_WINNING_LOTTO_NUMBERS_HINT);
         String inputText = scanner.nextLine();
         String[] winningTicketNumbers = inputText.trim().split(",");
 
-        List<LottoNumber> lottoNumberList = Arrays
-                .stream(winningTicketNumbers)
-                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoNumberList);
+        return winningTicketNumbers;
     }
 
     public LottoNumber getBonusNumber() {
