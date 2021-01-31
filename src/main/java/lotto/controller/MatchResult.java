@@ -18,9 +18,18 @@ public class MatchResult {
 
     private Integer tryCount;
     private List<Integer> prizeCount;
+
+    public MatchResult() {
+
+    }
+
     public MatchResult(Integer tryCount) {
         this.tryCount = tryCount;
         prizeCount = Arrays.asList(new Integer[]{0,0,0,0,0});
+    }
+    public MatchResult(int tryCount, List<Integer> prizeCount) {
+        this.tryCount = tryCount;
+        this.prizeCount = prizeCount;
     }
 
     // prizeCount의 input 등수의 카운 올림
@@ -49,10 +58,7 @@ public class MatchResult {
         }
     }
 
-    public MatchResult(int tryCount, List<Integer> prizeCount) {
-        this.tryCount = tryCount;
-        this.prizeCount = prizeCount;
-    }
+
 
     //    TODO :
     public List<Integer> getResult() {
