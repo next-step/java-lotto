@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Delimiter {
     private final Pattern pattern = Pattern.compile("//(.)\n(.*)");
-    public List<String> delimiters;
-    public Matcher m;
+    private final List<String> delimiters;
+    private Matcher m;
 
     public Delimiter() {
         this.delimiters = new ArrayList<>(Arrays.asList(":", ","));
