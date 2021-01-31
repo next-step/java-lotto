@@ -10,6 +10,10 @@ public class LottoMachine {
     private List<Integer> lottos;
     private static final Map<WinningType, Integer> matchResult = new HashMap<>();
 
+    public LottoMachine() {
+        initialMatchResult();
+    }
+
     public int getLottoTicketNumber(int money) {
         return money / LOTTO_TICKET_PRICE;
     }
@@ -48,8 +52,6 @@ public class LottoMachine {
     }
 
     public Map<WinningType, Integer> calculateResult(WinningLotto winningLotto, List<Lotto> lottos) {
-        initialMatchResult();
-
         for (Lotto lotto : lottos) {
             int count = winningBallMatchNumber(winningLotto, lotto);
             boolean isBonusBall = hasBonusBall(winningLotto.getBonusBall(), lotto.getLottoNumbers());
@@ -62,14 +64,15 @@ public class LottoMachine {
         return matchResult;
     }
 
-    private static void initialMatchResult() {
+    private void initialMatchResult() {
         matchResult.put(WinningType.THREE, 0);
         matchResult.put(WinningType.FOUR, 0);
         matchResult.put(WinningType.FIVE, 0);
         matchResult.put(WinningType.FIVE_BONUS, 0);
         matchResult.put(WinningType.SIX, 0);
     }
-    private static void updateCount(WinningType winningType) {
+
+    private void updateCount(WinningType winningType) {
         if (winningType.getValue() != 0) {
             matchResult.put(winningType, matchResult.get(winningType) + 1);
         }
@@ -97,4 +100,7 @@ public class LottoMachine {
         return (float) totalProfit / (float) money;
     }
 
+    public Map<WinningType, Integer> getMatchResult() {
+        return matchResult;
+    }
 }

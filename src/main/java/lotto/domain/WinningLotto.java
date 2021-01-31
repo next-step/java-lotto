@@ -6,19 +6,13 @@ public class WinningLotto {
     private final List<Integer> winningLottos;
     private final int bonusBall;
 
-    private WinningLotto(Lotto winningLotto, int bonusBall) {
+    public WinningLotto(Lotto winningLotto, int bonusBall) {
         this.winningLottos = winningLotto.getLottoNumbers();
         this.bonusBall = bonusBall;
     }
 
     public static WinningLotto generate(Lotto winningLotto, int bonusBall) {
         return new WinningLotto(winningLotto, bonusBall);
-    }
-
-    public int getWinningCount(Lotto lotto) {
-        return (int) winningLottos.stream()
-                .filter(lotto.getLottoNumbers()::contains)
-                .count();
     }
 
     public List<Integer> getWinningLottoNumbers() {
