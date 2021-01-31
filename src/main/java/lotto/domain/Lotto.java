@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.controller.LottoGenerator;
+
 public class Lotto {
     private static final int VALUE_LEFT_BOUND = 1;
     private static final int VALUE_RIHGT_BOUND = 46;

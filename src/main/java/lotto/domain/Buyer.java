@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.controller.LottoGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
