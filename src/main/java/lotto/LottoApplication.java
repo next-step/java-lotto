@@ -19,8 +19,15 @@ public class LottoApplication {
 
         // Buy Lotto Tickets
         LottoBuyer buyer = LottoBuyerGenerator .generateLottoBuyer(
-            input.inputTotalCost(), 0
+            input.inputTotalCost(), input.inputManualTicketCnt()
         );
+
+        input.inputManualTicketsNumbers();
+        while (buyer.shouldBuyManualTicket()) {
+            buyer.buyManualTicket(
+                input.inputTicketsNumbers()
+            );
+        }
         buyer.buyAutoTickets();
 
         List<LottoTicket> tickets = buyer.getBoughtTickets();
