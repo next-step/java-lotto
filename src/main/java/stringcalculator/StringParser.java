@@ -3,11 +3,11 @@ package stringcalculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringSplitter {
+public class StringParser {
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
-    private static final String NORMAL_SEPARATOR = ",|:";
+    private static final String NORMAL_SEPARATOR = "[,:]";
 
-    private StringSplitter() {
+    private StringParser() {
     }
 
     public static String[] split(String inputText) {

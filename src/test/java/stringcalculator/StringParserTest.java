@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class StringSplitterTest {
+class StringParserTest {
     @DisplayName("컴마(,) 구분자로 입력할 경우 문자 배열을 반환")
     @Test
     void parseCommaReturnsStringArray() {
         // given & when
-        String[] result = StringSplitter.split("1,2,3");
+        String[] result = StringParser.split("1,2,3");
 
         // then
         assertThat(result).containsExactly("1", "2", "3");
@@ -20,7 +20,7 @@ class StringSplitterTest {
     @Test
     void parseColonReturnsStringArray() {
         // given & when
-        String[] result = StringSplitter.split("1:2:3");
+        String[] result = StringParser.split("1:2:3");
 
         // then
         assertThat(result).containsExactly("1", "2", "3");
@@ -30,7 +30,7 @@ class StringSplitterTest {
     @Test
     void parseCommaAndColonReturnsStringArray() {
         // given & when
-        String[] result = StringSplitter.split("1,2:3");
+        String[] result = StringParser.split("1,2:3");
 
         // then
         assertThat(result).containsExactly("1", "2", "3");
@@ -40,7 +40,7 @@ class StringSplitterTest {
     @Test
     void parseCustomReturnsStringArray() {
         // given & when
-        String[] result = StringSplitter.split("//;\n1;2;3");
+        String[] result = StringParser.split("//;\n1;2;3");
 
         // then
         assertThat(result).containsExactly("1", "2", "3");
