@@ -7,7 +7,7 @@ import java.util.List;
 
 public class StringCalculator implements Calculator {
     private String expression;
-    private Delimiter delimiter;
+    private final Delimiter delimiter;
 
     public StringCalculator() {
         delimiter = new Delimiter();
@@ -16,7 +16,7 @@ public class StringCalculator implements Calculator {
     @Override
     public void inputExpression(String expression) {
         this.expression = expression;
-        if(delimiter.hasNewDelimiter(expression)){
+        if (delimiter.hasNewDelimiter(expression)) {
             delimiter.updateDelimiter();
             this.expression = delimiter.extractExpression();
         }
