@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoBuyer {
     private int autoTicketCnt;
@@ -24,6 +25,20 @@ public class LottoBuyer {
         LottoTicket ticket = LottoTicketGenerator.generateRandomTicket();
         boughtAutoTickets.add(ticket);
         return ticket;
+    }
+
+    public void buyAutoTickets() {
+        IntStream.range(
+            0, autoTicketCnt
+        ).forEach(
+            i -> boughtAutoTickets.add(
+                LottoTicketGenerator.generateRandomTicket()
+            )
+        );
+    }
+
+    public List<LottoTicket> getBoughtTickets() {
+        return boughtAutoTickets;
     }
 
     public BuyerData getBuyerData() {

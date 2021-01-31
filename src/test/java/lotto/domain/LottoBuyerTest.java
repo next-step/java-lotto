@@ -47,4 +47,14 @@ class LottoBuyerTest {
             )
         );
     }
+
+    @DisplayName("자동 티켓을 개수대로 잘 구매하는지 확인")
+    @Test
+    void buyAutoTickets() {
+        LottoBuyer buyer = new LottoBuyer(2);
+
+        buyer.buyAutoTickets();
+
+        assertEquals(2, buyer.getBoughtTickets().size());
+    }
 }
