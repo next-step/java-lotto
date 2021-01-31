@@ -11,6 +11,6 @@ public class LottoApplication {
         ApplicationContext applicationContext = new ApplicationContext();
         LottoController lottoController = applicationContext.getLottoController();
         List<LottoTicket> lottoTickets = lottoController.purchaseLottoTickets();
-        lottoController.getWinner(lottoTickets);
+        lottoController.draw(lottoTickets);
     }
 }

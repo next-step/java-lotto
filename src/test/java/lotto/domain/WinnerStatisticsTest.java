@@ -33,7 +33,7 @@ public class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        double earningRate = winnerStatistics.getEarningRate(3000);
+        double earningRate = winnerStatistics.getEarningRate(new PurchaseAmount(3000));
 
         // then
         assertThat(earningRate).isEqualTo(676666.66);

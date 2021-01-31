@@ -28,8 +28,8 @@ public class WinnerStatistics {
         return results;
     }
 
-    public double getEarningRate(int purchaseAmount) {
-        double origin = winningAmount / (double) purchaseAmount;
+    public double getEarningRate(PurchaseAmount purchaseAmount) {
+        double origin = winningAmount / (double) purchaseAmount.getAmount();
         return Math.floor(origin * 100) / 100;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 import lotto.domain.WinnerStatistics;
 
@@ -12,12 +13,13 @@ import java.util.List;
 public class ConsoleOutputView implements OutputView {
 
     public void printLottoTickets(final List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket);
-        }
+        System.out.println();
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+        lottoTickets.forEach(System.out::println);
+        System.out.println();
     }
 
-    public void printStatistics(final WinnerStatistics winnerStatistics, final int purchaseAmount) {
+    public void printStatistics(final WinnerStatistics winnerStatistics, final PurchaseAmount purchaseAmount) {
         EnumMap<Rank, Integer> results = winnerStatistics.getResults();
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
@@ -34,9 +36,5 @@ public class ConsoleOutputView implements OutputView {
 
     private boolean isNone(final Rank rank) {
         return rank == Rank.NONE;
-    }
-
-    public void printPurchaseCount(final int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
     }
 }

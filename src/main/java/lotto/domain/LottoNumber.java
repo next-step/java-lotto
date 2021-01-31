@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
+// TODO: 1부터 45까지 총 45개의 인스턴스만 만들어지고 계속 재사용되도록
 public class LottoNumber {
     private static final int SMALLEST = 1;
     private static final int LARGEST = 45;

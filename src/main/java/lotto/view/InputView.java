@@ -2,10 +2,11 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.PurchaseAmount;
 
 public interface InputView {
 
-    int getPurchaseAmount();
+    PurchaseAmount getPurchaseAmount();
 
     LottoTicket getWinningTicket();
 

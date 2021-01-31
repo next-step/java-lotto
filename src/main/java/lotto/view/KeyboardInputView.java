@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.PurchaseAmount;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -17,9 +18,10 @@ public class KeyboardInputView implements InputView {
         this.scanner = new Scanner(source);
     }
 
-    public int getPurchaseAmount() {
+    public PurchaseAmount getPurchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        int amount = Integer.parseInt(scanner.nextLine());
+        return new PurchaseAmount(amount);
     }
 
     public LottoTicket getWinningTicket() {
