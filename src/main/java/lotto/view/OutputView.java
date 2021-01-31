@@ -7,7 +7,7 @@ import lotto.dto.ScoreBoardData;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String BUYER_FMT = "%d개를 구매했습니다.\n";
+    private static final String BUYER_FMT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     private static final String TICKET_DELIMITER = ", ";
     private static final String TICKET_FMT = "[%s]\n";
@@ -20,15 +20,24 @@ public class OutputView {
     private static final String SCORE_PROFIT_FMT = "총 수익률은 %.2f 입니다.";
 
     public void printBuyerData(BuyerData buyerData) {
-        System.out.format(BUYER_FMT, buyerData.getAutoTicketCnt());
+        System.out.format(
+            BUYER_FMT,
+            buyerData.getManualTicketCnt(),
+            buyerData.getAutoTicketCnt()
+        );
+
         buyerData.getBoughtTickets().stream().forEach(
-            ticketData -> System.out.format(
-                TICKET_FMT,
-                ticketData.getNumbersData().stream().map(
-                    Object::toString
-                ).collect(
-                    Collectors.joining(TICKET_DELIMITER)
-                )
+            ticketData -> printTicketData(ticketData)
+        );
+    }
+
+    private void printTicketData(TicketData ticketData) {
+        System.out.format(
+            TICKET_FMT,
+            ticketData.getNumbersData().stream().map(
+                Object::toString
+            ).collect(
+                Collectors.joining(TICKET_DELIMITER)
             )
         );
     }
