@@ -10,26 +10,6 @@ public class Buyer {
         return input / 1000;
     }
 
-    public void winningNumberEqual() {
-
-    }
-
-    public void bonusEqual() {
-
-    }
-
-    public void checkEqualWinningNumber() {
-
-    }
-
-    public void winningStatisticalCheck() {
-
-    }
-
-    public void winningRevenueCheck() {
-
-    }
-
     public List<LottoTicket> buyLotto(int input) {
         List<LottoTicket> lottos = new ArrayList<>();
         int lottoCnt = matchPriceAndPayment(input);
