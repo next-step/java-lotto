@@ -40,6 +40,7 @@ public class LottoBuyer {
     public BuyerData getBuyerData() {
         return new BuyerData(
             autoTicketCnt,
+            manualTicketCnt,
             boughtAutoTickets.stream().map(
                 ticket -> ticket.getTicketData()
             ).collect(

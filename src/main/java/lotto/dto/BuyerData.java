@@ -5,15 +5,21 @@ import java.util.Objects;
 
 public class BuyerData {
     private final Integer autoTicketCnt;
+    private final Integer manualTicketCnt;
     private final List<TicketData> boughtTickets;
 
-    public BuyerData(Integer autoTicketCnt, List<TicketData> boughtTickets) {
+    public BuyerData(Integer autoTicketCnt, Integer manualTicketCnt, List<TicketData> boughtTickets) {
         this.autoTicketCnt = autoTicketCnt;
+        this.manualTicketCnt = manualTicketCnt;
         this.boughtTickets = boughtTickets;
     }
 
     public Integer getAutoTicketCnt() {
         return autoTicketCnt;
+    }
+
+    public Integer getManualTicketCnt() {
+        return manualTicketCnt;
     }
 
     public List<TicketData> getBoughtTickets() {

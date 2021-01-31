@@ -18,7 +18,8 @@ class LottoBuyerTest {
         assertEquals(
             buyer.getBuyerData(),
             new BuyerData(
-            1,
+                1,
+                0,
                 new ArrayList<TicketData>()
             )
         );
