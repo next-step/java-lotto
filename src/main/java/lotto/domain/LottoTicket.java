@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.resources.StringResources;
+
 import java.util.List;
 
 public class LottoTicket {
@@ -13,7 +15,7 @@ public class LottoTicket {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
-            throw new RuntimeException("로또 번호는 6개여야만 합니다.");
+            throw new RuntimeException(StringResources.LOTTO_NUMBER_AMOUNT_ERROR_MESSAGE);
         }
     }
 

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.resources.StringResources;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,15 +13,15 @@ public class InputView {
 
     public int getPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("구입 금액을 입력해주세요.");
+        System.out.println(StringResources.INPUT_PURCHASE_AMOUNT_HINT);
         return scanner.nextInt();
     }
 
     public LottoTicket getWinningTicket() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(StringResources.INPUT_LAST_WINNING_LOTTO_NUMBERS_HINT);
         String inputText = scanner.nextLine();
-        String[] winningTicketNumbers = inputText.split(", ");
+        String[] winningTicketNumbers = inputText.trim().split(",");
 
         List<LottoNumber> lottoNumberList = Arrays
                 .stream(winningTicketNumbers)
@@ -31,7 +32,7 @@ public class InputView {
 
     public LottoNumber getBonusNumber() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("보너스 볼을 입력해 주세요.");
+        System.out.println(StringResources.INPUT_BONUS_BALL_HINT);
         int bonusNumber = scanner.nextInt();
         return new LottoNumber(bonusNumber);
     }

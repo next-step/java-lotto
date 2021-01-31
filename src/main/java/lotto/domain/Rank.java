@@ -45,6 +45,6 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return matchCountMessage + " (" + amount + "원)- ";
+        return String.format("%s (%d원)-",matchCountMessage, amount);
     }
 }

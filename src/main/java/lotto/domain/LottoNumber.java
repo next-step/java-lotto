@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.resources.StringResources;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -14,7 +16,7 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (number < MINIMUM || number > MAXIMUM) {
-            throw new IllegalArgumentException("정상적인 수의 범위가 아닙니다.");
+            throw new IllegalArgumentException(StringResources.LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
         }
     }
 

@@ -1,6 +1,8 @@
 package stringcalculator;
 
 public class StringCalculator {
+    private final static String USE_NEGATIVE_NUMBER_ERROR_MESSAGE = "음수는 사용할 수 없습니다.";
+
     public int calculate(final String inputText) {
         if (nullOrEmpty(inputText)) {
             return 0;
@@ -28,7 +30,7 @@ public class StringCalculator {
 
     private void minusNumberThrowsException(final int number) {
         if (number < 0) {
-            throw new RuntimeException("음수는 사용할 수 없습니다.");
+            throw new RuntimeException(USE_NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }
 }

@@ -4,6 +4,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinnerStatistics;
+import lotto.resources.StringResources;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,14 +24,17 @@ public class OutputView {
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
 
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(StringResources.LOTTO_STATISTICS_MESSAGE);
+        System.out.println(StringResources.DOTTED_LINE_MESSAGE);
         for (final Rank rank : ranks) {
             if (isNone(rank)) continue;
             int matchCount = results.getOrDefault(rank, 0);
-            System.out.println(rank.toString() + matchCount + "개");
+            String matchedRankStatus = String.format("%s %d개", rank.toString(), matchCount);
+            System.out.println(matchedRankStatus);
         }
-        System.out.println("총 수익률은 " + winnerStatistics.getEarningRate(lottoTickets.getPurchaseAmount()) + "입니다.");
+        double earningRate = winnerStatistics.getEarningRate(lottoTickets.getPurchaseAmount());
+        String earningRateText = String.format("총 수익률은 %.02f입니다.", earningRate);
+        System.out.println(earningRateText);
     }
 
     private boolean isNone(final Rank rank) {
