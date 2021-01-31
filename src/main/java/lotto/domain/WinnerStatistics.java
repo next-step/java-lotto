@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.EnumMap;
-import java.util.List;
 
 public class WinnerStatistics {
     private final EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
+    private final int purchaseAmount;
     private long winningAmount = 0L;
 
     /**
@@ -13,6 +13,7 @@ public class WinnerStatistics {
      */
     public WinnerStatistics(final GoldenTicket goldenTicket, Tickets lottoTickets) {
         analyze(goldenTicket, lottoTickets);  // 당첨 통계 분석
+        this.purchaseAmount = lottoTickets.getPurchaseAmount();
     }
 
     private void analyze(final GoldenTicket goldenTicket, Tickets lottoTickets) {
@@ -28,7 +29,7 @@ public class WinnerStatistics {
         return results;
     }
 
-    public double getEarningRate(int purchaseAmount) {
+    public double getEarningRate() {
         double origin = winningAmount / (double) purchaseAmount;
         return Math.floor(origin * 100) / 100;
     }

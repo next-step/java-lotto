@@ -34,7 +34,7 @@ public class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
         // when
-        double earningRate = winnerStatistics.getEarningRate(PURCHASE_LOTTO_AMOUNT);
+        double earningRate = winnerStatistics.getEarningRate();
 
         // then
         assertThat(earningRate).isEqualTo(676666.66);
