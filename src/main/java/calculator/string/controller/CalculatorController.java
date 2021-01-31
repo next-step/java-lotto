@@ -6,19 +6,19 @@ import calculator.string.view.Input;
 import calculator.string.view.Output;
 
 public class CalculatorController {
+    private final Calculator calculator;
 
-    public String prepareCalculator() {
+    public CalculatorController(Calculator calculator){
+        this.calculator = calculator;
+    }
+
+    public void prepareCalculator() {
         Output.printInputMessage();
-        return Input.expressionInput();
+        String expression = Input.expressionInput();
+        calculator.inputExpression(expression);
     }
 
-    public int executeCalculator(String expression) {
-        Calculator stringCalculator = new StringCalculator();
-        stringCalculator.inputExpression(expression);
-        return stringCalculator.calculation();
-    }
-
-    public void endCalculator(int result){
-        Output.printResultMessage(result);
+    public void executeCalculator() {
+        Output.printResultMessage(calculator.calculation());
     }
 }
