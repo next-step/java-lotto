@@ -25,10 +25,9 @@ public class KeyboardInputView implements InputView {
     public LottoTicket getWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputText = scanner.nextLine();
-        String[] winningTicketNumbers = inputText.split(", ");
-
-        List<LottoNumber> lottoNumberList = Arrays
-                .stream(winningTicketNumbers)
+        List<String> winningTicketNumbers = Arrays.asList(inputText.split(", "));
+        List<LottoNumber> lottoNumberList = winningTicketNumbers
+                .stream()
                 .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumberList);
