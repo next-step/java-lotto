@@ -39,4 +39,11 @@ public class LottoMachineTest {
         int money = 14000;
         Assertions.assertThat(lottoMachine.start(money).size()).isEqualTo(14);
     }
+
+    @Test
+    void hasBonusBallTest() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Assertions.assertThat(lottoMachine.hasBonusBall(1, lotto)).isTrue();
+        Assertions.assertThat(lottoMachine.hasBonusBall(10, lotto)).isFalse();
+    }
 }

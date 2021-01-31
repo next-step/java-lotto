@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LottoMachine {
     private static final int LOTTO_TICKET_PRICE = 1000;
@@ -10,6 +8,7 @@ public class LottoMachine {
     private static final int LOTTO_LENGTH = 6;
     private final Random random = new Random();
     private List<Integer> lottos;
+    private static final Map<WinningType, Integer> matchResult = new HashMap<>();
 
     public int getLottoTicketNumber(int money) {
         return money / LOTTO_TICKET_PRICE;
@@ -46,5 +45,44 @@ public class LottoMachine {
         if (!lottos.contains(number)) {
             lottos.add(number);
         }
+    }
+
+    public Map<WinningType, Integer> calculateResult(WinningLotto winningLotto, List<Lotto> lottos) {
+        initialMatchResult();
+
+        for (Lotto lotto : lottos) {
+            int count = winningBallMatchNumber(winningLotto, lotto);
+            boolean isBonusBall = hasBonusBall(winningLotto.getBonusBall(), lotto.getLottoNumbers());
+
+            WinningType winningType = WinningType.match(count, isBonusBall); // 이넘타입 반환
+
+            updateCount(winningType);
+        }
+
+        return matchResult;
+    }
+
+    private static void initialMatchResult() {
+        matchResult.put(WinningType.THREE, 0);
+        matchResult.put(WinningType.FOUR, 0);
+        matchResult.put(WinningType.FIVE, 0);
+        matchResult.put(WinningType.FIVE_BONUS, 0);
+        matchResult.put(WinningType.SIX, 0);
+    }
+    private static void updateCount(WinningType winningType) {
+        if (winningType.getValue() != 0) {
+            matchResult.put(winningType, matchResult.get(winningType) + 1);
+        }
+    }
+
+    public int winningBallMatchNumber(WinningLotto winningLotto, Lotto lotto) {
+        return (int) winningLotto.getWinningLottoNumbers()
+                .stream()
+                .filter(lotto.getLottoNumbers()::contains)
+                .count();
+    }
+
+    public Boolean hasBonusBall(int bonusBall, List<Integer> lotto) {
+        return lotto.contains(bonusBall);
     }
 }

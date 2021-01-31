@@ -21,7 +21,7 @@ public class LottoGame {
         int bonusBall = InputView.getBonusBall();  // 보너스 볼을 입력해 주세요.
         WinningLotto winningLotto = WinningLotto.generate(new Lotto(winningLottoNumbers), bonusBall);
 
-        Map<WinningType, Integer> matchResult = LottoCalculation.calculateResult(winningLotto, lottos); // 로또 결과 계산
+        Map<WinningType, Integer> matchResult = lottoMachine.calculateResult(winningLotto, lottos); // 로또 결과 계산
         ResultView.printResult(matchResult, money); // 로또 결과 출력
     }
 }

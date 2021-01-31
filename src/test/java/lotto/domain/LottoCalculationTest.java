@@ -38,10 +38,5 @@ public class LottoCalculationTest {
         Assertions.assertThat(lottoCalculation.isWinningBall(10, winningBalls)).isFalse();
     }
 
-    @Test
-    void hasBonusBallTest() {
-        List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Assertions.assertThat(LottoCalculation.hasBonusBall(1, lotto)).isTrue();
-        Assertions.assertThat(LottoCalculation.hasBonusBall(10, lotto)).isFalse();
-    }
+
 }
