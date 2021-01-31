@@ -15,18 +15,23 @@ public class Delimiter {
         this.delimiters = new ArrayList<>(Arrays.asList(":", ","));
     }
 
-    public boolean hasNewDelimiter(String expression){
+    public boolean hasNewDelimiter(String expression) {
         m = pattern.matcher(expression);
         return m.find();
     }
 
-    public void updateDelimiter(){
-        String customDelimiter = m.group(1);
-        delimiters.add(customDelimiter);
+    public void updateDelimiter() {
+        if (m != null) {
+            String customDelimiter = m.group(1);
+            delimiters.add(customDelimiter);
+        }
     }
 
-    public String extractExpression(){
-        return m.group(2);
+    public String extractExpression() {
+        if (m != null){
+            return m.group(2);
+        }
+        return null;
     }
 
     public String getDelimiters() {
