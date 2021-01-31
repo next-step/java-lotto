@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MatchResult {
-    // TODO : Check enum is useful
     private static final List<Money> PRIZE_REWARDS =
             Arrays.asList(new Money(5000),
                         new Money(50_000),

@@ -1,4 +1,4 @@
-package lotto.main;
+package lotto;
 
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
