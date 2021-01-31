@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import com.sun.javafx.binding.SelectBinding;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,7 @@ public class LottoMachineTest {
     @BeforeAll
     static void initAll () {
         lottoMachine = new LottoMachine();
-        matchResultTarget = lottoMachine.getMatchResult();
-        matchResultTarget.put(WinningType.THREE, 1); // 1, 2, 3, 43, 44, 45
-        matchResultTarget.put(WinningType.FOUR, 1); // 1, 2, 3, 4, 44, 45
-        matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
-        matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
-        matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
+
     }
 
     @Test
@@ -60,6 +54,13 @@ public class LottoMachineTest {
         Lotto lotto5 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
 
+        matchResultTarget = lottoMachine.getMatchResult();
+        matchResultTarget.put(WinningType.THREE, 1); // 1, 2, 3, 43, 44, 45
+        matchResultTarget.put(WinningType.FOUR, 1); // 1, 2, 3, 4, 44, 45
+        matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
+        matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
+        matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
+
         Assertions.assertThat(lottoMachine.calculateResult(winningLotto, lottos)).isEqualTo(matchResultTarget);
     }
 
@@ -80,6 +81,12 @@ public class LottoMachineTest {
 
     @Test
     void getProfitRateTest() {
+        matchResultTarget = lottoMachine.getMatchResult();
+        matchResultTarget.put(WinningType.THREE, 1); // 1, 2, 3, 43, 44, 45
+        matchResultTarget.put(WinningType.FOUR, 1); // 1, 2, 3, 4, 44, 45
+        matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
+        matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
+        matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
         Assertions.assertThat(LottoMachine.getProfitRate(matchResultTarget, 5000)).isEqualTo(406311.0f);
     }
 }
