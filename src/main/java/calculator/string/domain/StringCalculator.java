@@ -1,5 +1,7 @@
 package calculator.string.domain;
 
+import calculator.string.utils.ExpressionValidator;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +24,10 @@ public class StringCalculator implements Calculator {
 
     @Override
     public int calculation() {
-        return Arrays.stream(expression.split(delimiter.getDelimiters()))
+        List<String> operands = Arrays.asList(expression.split(delimiter.getDelimiters()));
+        operands.forEach(ExpressionValidator::checkNumberValidation);
+
+        return operands.stream()
                 .map(Integer::parseInt)
                 .reduce(0, Integer::sum);
     }
