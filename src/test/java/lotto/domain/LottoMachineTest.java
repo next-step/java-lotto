@@ -11,10 +11,17 @@ import java.util.Map;
 
 public class LottoMachineTest {
     static LottoMachine lottoMachine;
+    static Map<WinningType, Integer> matchResultTarget;
 
     @BeforeAll
     static void initAll () {
         lottoMachine = new LottoMachine();
+        matchResultTarget = lottoMachine.getMatchResult();
+        matchResultTarget.put(WinningType.THREE, 1); // 1, 2, 3, 43, 44, 45
+        matchResultTarget.put(WinningType.FOUR, 1); // 1, 2, 3, 4, 44, 45
+        matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
+        matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
+        matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
     }
 
     @Test
@@ -43,12 +50,6 @@ public class LottoMachineTest {
 
     @Test
     void calculateResultTest() {
-        Map<WinningType, Integer> matchResultTarget = lottoMachine.getMatchResult();
-        matchResultTarget.put(WinningType.THREE, 1); // 1, 2, 3, 43, 44, 45
-        matchResultTarget.put(WinningType.FOUR, 1); // 1, 2, 3, 4, 44, 45
-        matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
-        matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
-        matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
 
@@ -75,5 +76,10 @@ public class LottoMachineTest {
         List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         Assertions.assertThat(lottoMachine.hasBonusBall(1, lotto)).isTrue();
         Assertions.assertThat(lottoMachine.hasBonusBall(10, lotto)).isFalse();
+    }
+
+    @Test
+    void getProfitRateTest() {
+        Assertions.assertThat(LottoMachine.getProfitRate(matchResultTarget, 5000)).isEqualTo(406311.0f);
     }
 }
