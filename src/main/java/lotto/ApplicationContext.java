@@ -12,7 +12,7 @@ public class ApplicationContext {
     private final OutputView outputView;
 
     public ApplicationContext() {
-        this.inputView = new KeyboardInputView();
+        this.inputView = new KeyboardInputView(System.in);
         this.outputView = new ConsoleOutputView();
     }
 
