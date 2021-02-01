@@ -1,13 +1,14 @@
 package lotto.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 public class ScoreBoardData {
     private final List<ScoreData> scores;
-    private final double profit;
+    private final BigDecimal profit;
 
-    public ScoreBoardData(List<ScoreData> scores, double profit) {
+    public ScoreBoardData(List<ScoreData> scores, BigDecimal profit) {
         this.scores = scores;
         this.profit = profit;
     }
@@ -16,7 +17,7 @@ public class ScoreBoardData {
         return scores;
     }
 
-    public double getProfit() {
+    public BigDecimal getProfit() {
         return profit;
     }
 
@@ -25,7 +26,7 @@ public class ScoreBoardData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScoreBoardData that = (ScoreBoardData) o;
-        return Double.compare(that.profit, profit) == 0 && Objects.equals(scores, that.scores);
+        return Objects.equals(scores, that.scores) && Objects.equals(profit, that.profit);
     }
 
     @Override

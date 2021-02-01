@@ -7,11 +7,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.domain.LottoScoreBoard.BIG_DECIMAL_SCALE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoScoreBoardTest {
@@ -38,7 +40,7 @@ class LottoScoreBoardTest {
                     add(new ScoreData(LottoScore.SECOND, 0));
                     add(new ScoreData(LottoScore.FIRST, 0));
                 }},
-                profit
+                BigDecimal.valueOf(profit).setScale(BIG_DECIMAL_SCALE)
             ),
             scoreBoard.getScoreBoardData()
         );
