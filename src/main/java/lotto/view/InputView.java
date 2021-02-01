@@ -31,10 +31,10 @@ public class InputView {
 
     public String inputAnswerNumbers() {
         System.out.println(ANSWER_NUMBERS_MSG);
-        return inputTicketsNumbers();
+        return inputTicketNumbers();
     }
 
-    public String inputTicketsNumbers() {
+    public String inputTicketNumbers() {
         return scanner.nextLine();
     }
 

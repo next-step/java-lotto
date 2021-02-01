@@ -5,13 +5,10 @@ import lotto.domain.LottoBuyer;
 import lotto.domain.LottoBuyerGenerator;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketBunch;
 import lotto.domain.LottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class Controller {
     private InputView input;
@@ -40,7 +37,7 @@ public class Controller {
     private void manualBuy(LottoBuyer buyer) {
         while (buyer.shouldBuyManualTicket()) {
             buyer.buyManualTicket(
-                input.inputTicketsNumbers()
+                input.inputTicketNumbers()
             );
         }
     }
