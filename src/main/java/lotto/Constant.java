@@ -2,7 +2,7 @@ package lotto;
 
 public class Constant {
 
-    public static final String REQUEST_PURCHASE_PRICE = "구입 금액을 입력해 주세요.";
+    public static final String REQUEST_PURCHASE_PRICE = "구입 금액을 입력해 주세요. (티켓 한장당 1000원)";
     public static final String REMIND_LOTTO_COUNT = "개를 구매했습니다.";
     public static final String REQUEST_WINNING_PRICE = "지난 주 당첨 번호를 입력해 주세요. ex) 1, 2, 3, 4, 5, 6";
     public static final String REQUEST_BONUS_BALL = "보너스 볼을 입력해 주세요.";

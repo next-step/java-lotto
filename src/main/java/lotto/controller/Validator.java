@@ -17,7 +17,6 @@ public class Validator {
         return priceOrNull != null && priceOrNull != 0 && priceOrNull % ONE_LOTTO_PRICE == 0;
     }
 
-    // Logic
     public boolean validateWinningNumber(String winningNumber) {
         Pattern pattern = Pattern.compile(FORMAT_REGEX);
         List<String> numbers = Arrays.asList(winningNumber.split(COMMA));
