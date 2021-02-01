@@ -23,25 +23,33 @@ public class LottoBuyer {
     }
 
     public void buyManualTicketBunch(Supplier<String> manualNumbersSupplier) {
-        boughtManualTicketBunch = new LottoTicketBunch(
-            IntStream.range(
-                0, manualTicketCnt
-            ).mapToObj(
-                i -> LottoTicketGenerator.generateManualTicket(
+        boughtManualTicketBunch = boughtManualTicketBunch.merge(
+            generateTicket(
+                manualTicketCnt,
+                () -> LottoTicketGenerator.generateManualTicket(
                     manualNumbersSupplier.get()
                 )
-            ).collect(
-                Collectors.toList()
             )
         );
+        manualTicketCnt = 0;
     }
 
     public void buyAutoTicketBunch() {
-        boughtAutoTicketBunch = new LottoTicketBunch(
+        boughtAutoTicketBunch = boughtAutoTicketBunch.merge(
+            generateTicket(
+                autoTicketCnt,
+                () -> LottoTicketGenerator.generateRandomTicket()
+            )
+        );
+        autoTicketCnt = 0;
+    }
+
+    private LottoTicketBunch generateTicket(int ticketCnt, Supplier<LottoTicket> ticketSupplier) {
+        return new LottoTicketBunch(
             IntStream.range(
-                0, autoTicketCnt
+                0, ticketCnt
             ).mapToObj(
-                i -> LottoTicketGenerator.generateRandomTicket()
+                i -> ticketSupplier.get()
             ).collect(
                 Collectors.toList()
             )
