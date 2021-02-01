@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinnerLottoTest {
@@ -49,5 +50,23 @@ class WinnerLottoTest {
     void getWinnerLottoWithSplitting() {
         String input = "1, 2, 3, 4, 5, 6";
         assertThat(WinnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+    }
+
+    @DisplayName("bonusball cannot be same with lotto number")
+    @Test
+    void checkLottoContainsBonusball () {
+
+        assertThatThrownBy(() -> {
+            LottoNumber bonusBall = new LottoNumber(1);
+            List<LottoNumber> lottoNumbers = new ArrayList<>(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
+            ));
+            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, lottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

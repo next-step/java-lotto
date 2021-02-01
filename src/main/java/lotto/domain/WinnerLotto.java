@@ -14,6 +14,7 @@ public class WinnerLotto implements Lotto {
     public WinnerLotto(LottoNumber bonusBall, List<LottoNumber> numbers) {
         checkSizeOfLotto(numbers);
         checkDuplicatedNumber(numbers);
+        checkLottoContainsBonusball(bonusBall,numbers);
         BonusBall = bonusBall;
         this.numbers = numbers;
     }
@@ -26,6 +27,11 @@ public class WinnerLotto implements Lotto {
         return BonusBall;
     }
 
+    private void checkLottoContainsBonusball (LottoNumber bonusBall, List<LottoNumber> numbers) {
+        if (numbers.contains(bonusBall)) {
+            throw new IllegalArgumentException("보너스번호가 로또번호와 중복됩니다.");
+        }
+    }
 
     private void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
