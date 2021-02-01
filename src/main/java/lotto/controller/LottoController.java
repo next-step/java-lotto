@@ -14,42 +14,51 @@ public class LottoController {
     private final OutputHandler outputHandler = new OutputHandler();
     private final InputHandler inputHandler = new InputHandler();
 
-    public String getPriceFromUser() {
-        String money = inputHandler.requestPriceFromUser();
+    private String money;
+    private List<Ticket> tickets;
+    private String winningNumberInput;
+    private String bonusNumber;
+
+    public LottoController() {
+        getPriceFromUser();
+        purchaseTicket();
+        getWinningNumberFromUser();
+        getBonusNumberFromUser();
+        returnFinalLottoResult();
+    }
+
+    public void getPriceFromUser() {
+        money = inputHandler.requestPriceFromUser();
         if (!validator.isPriceValidate(money)) {
             outputHandler.printErrorPurchasePrice();
             System.exit(0);
         }
-        return money;
     }
 
-    public List<Ticket> purchaseTicket(String money) {
+    public void purchaseTicket() {
         Price price = new Price(Integer.parseInt(money));
         outputHandler.printLottoPurchaseCount(price.calculateTickets());
-        List<Ticket> tickets = price.buyTickets();
+        tickets = price.buyTickets();
         outputHandler.printGeneratedTickets(tickets);
-        return tickets;
     }
 
-    public String getWinningNumberFromUser() {
-        String winningNumberInput = inputHandler.requestWinningNumber();
+    public void getWinningNumberFromUser() {
+        winningNumberInput = inputHandler.requestWinningNumber();
         if (!validator.validateWinningNumber(winningNumberInput)) {
             outputHandler.printErrorWinningNumber();
             System.exit(0);
         }
-        return winningNumberInput;
     }
 
-    public String getBonusNumberFromUser() {
-        String bonusNumber = inputHandler.requestBonusNumber();
+    public void getBonusNumberFromUser() {
+        bonusNumber = inputHandler.requestBonusNumber();
         if (!validator.validateBonusNumber(bonusNumber)) {
             outputHandler.printErrorBonusBall();
             System.exit(0);
         }
-        return bonusNumber;
     }
 
-    public void returnFinalLottoResult(String money, String winningNumberInput, String bonusNumber, List<Ticket> tickets) {
+    public void returnFinalLottoResult() {
         WinningNumber winningNumber = new WinningNumber(new Ticket(NumberUtils.convertStringToIntegerList(winningNumberInput)),
                 Integer.parseInt(bonusNumber));
         Lotto lotto = new Lotto(winningNumber, tickets);

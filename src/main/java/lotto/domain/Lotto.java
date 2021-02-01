@@ -20,7 +20,7 @@ public class Lotto {
 
     public Map<Revenue, Integer> statisticsTicket() {
         Map<Revenue, Integer> revenueMap = new HashMap<>();
-        for(Ticket ticket : tickets) {
+        for (Ticket ticket : tickets) {
             Revenue matchingLotto = Revenue.checkTheNumberOfMatchingLotto(ticket, winningNumber);
             revenueMap.computeIfPresent(matchingLotto,((revenue, count) -> ++count));
             revenueMap.putIfAbsent(matchingLotto, 1);
