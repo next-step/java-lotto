@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class InputValidator {
 
+    private InputValidator() {}
+
     public static boolean validatePrice(String number) {
         try{
             checkNumberValidation(number);
