@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import lotto.dto.NumberData;
+import lotto.dto.TicketData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,6 +76,32 @@ class LottoTicketBunchTest {
                     new LottoNumber(7)
                 )
             )
+        );
+    }
+
+    @DisplayName("티켓들의 정보 데이터를 잘 생성하는지 확인")
+    @Test
+    void getTicketsData() {
+        LottoTicketBunch ticketBunch = new LottoTicketBunch(
+            new ArrayList<LottoTicket>() {{
+                add(LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 6"));
+            }}
+        );
+
+        assertEquals(
+            Arrays.asList(
+                new TicketData(
+                    Arrays.asList(
+                        new NumberData(1),
+                        new NumberData(2),
+                        new NumberData(3),
+                        new NumberData(4),
+                        new NumberData(5),
+                        new NumberData(6)
+                    )
+                )
+            ),
+            ticketBunch.getTicketsData()
         );
     }
 }
