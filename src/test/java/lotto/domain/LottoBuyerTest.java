@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,20 +33,20 @@ class LottoBuyerTest {
         buyer.buyManualTicket("1, 2, 3, 4, 5, 6");
 
         assertEquals(
-            new ArrayList<LottoTicket>() {{
-                add(
+            new LottoTicketBunch(
+                Arrays.asList(
                     new LottoTicket(
-                        new ArrayList<LottoNumber>() {{
-                            add(new LottoNumber(1));
-                            add(new LottoNumber(2));
-                            add(new LottoNumber(3));
-                            add(new LottoNumber(4));
-                            add(new LottoNumber(5));
-                            add(new LottoNumber(6));
-                        }}
+                        Arrays.asList(
+                            new LottoNumber(1),
+                            new LottoNumber(2),
+                            new LottoNumber(3),
+                            new LottoNumber(4),
+                            new LottoNumber(5),
+                            new LottoNumber(6)
+                        )
                     )
-                );
-            }},
+                )
+            ),
             buyer.getBoughtTickets()
         );
     }
@@ -57,7 +58,7 @@ class LottoBuyerTest {
 
         buyer.buyAutoTickets();
 
-        assertEquals(2, buyer.getBoughtTickets().size());
+        assertEquals(2, buyer.getBoughtTickets().getSize());
     }
 
     @DisplayName("구매 정보를 잘 가져오는지 확인")

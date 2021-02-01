@@ -1,24 +1,15 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LottoGame {
     private LottoAnswer answer;
-    private List<LottoTicket> tickets;
+    private LottoTicketBunch ticketBunch;
 
-    public LottoGame(LottoAnswer answer, List<LottoTicket> tickets) {
+    public LottoGame(LottoAnswer answer, LottoTicketBunch ticketBunch) {
         this.answer = answer;
-        this.tickets = tickets;
+        this.ticketBunch = ticketBunch;
     }
 
     public LottoScoreBoard calcScoreBoard() {
-        return new LottoScoreBoard(
-            tickets.stream().map(
-                ticket -> answer.calculateScore(ticket)
-            ).collect(
-                Collectors.toList()
-            )
-        );
+        return ticketBunch.calcScoreBoard(answer);
     }
 }

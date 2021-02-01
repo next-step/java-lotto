@@ -51,9 +51,11 @@ public class LottoBuyer {
         );
     }
 
-    public List<LottoTicket> getBoughtTickets() {
-        return getBoughtTicketsStream().collect(
-            Collectors.toList()
+    public LottoTicketBunch getBoughtTickets() {
+        return new LottoTicketBunch(
+            getBoughtTicketsStream().collect(
+                Collectors.toList()
+            )
         );
     }
 

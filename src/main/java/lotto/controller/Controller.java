@@ -6,6 +6,7 @@ import lotto.domain.LottoBuyerGenerator;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketBunch;
 import lotto.domain.LottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -21,7 +22,7 @@ public class Controller {
         this.output = output;
     }
 
-    public List<LottoTicket> buyTickets() {
+    public LottoTicketBunch buyTickets() {
         LottoBuyer buyer = LottoBuyerGenerator.generateLottoBuyer(
             input.inputTotalCost(), input.inputManualTicketCnt()
         );
@@ -59,8 +60,8 @@ public class Controller {
         );
     }
 
-    public void playGame(List<LottoTicket> tickets, LottoAnswer answer) {
-        LottoGame game = new LottoGame(answer, tickets);
+    public void playGame(LottoTicketBunch ticketBunch, LottoAnswer answer) {
+        LottoGame game = new LottoGame(answer, ticketBunch);
         output.printScoreBoardData(
             game.calcScoreBoard().getScoreBoardData()
         );
