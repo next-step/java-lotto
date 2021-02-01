@@ -12,8 +12,10 @@ import static lotto.domain.LottoNumber.NUM_RIGHT_BOUND;
 import static lotto.domain.LottoTicket.TICKET_LENGTH;
 
 public class LottoTicketGenerator {
-    private static final String PARSE_ERROR_MESSAGE = "로또 번호 입력은 (%s)를 구분자로 한 6개의 숫자여야 합니다";
     private static final String MANUAL_NUMBER_DELIMITER = ", ";
+    private static final String PARSE_ERROR_MESSAGE = String.format(
+        "로또 번호 입력은 (%s)를 구분자로 한 6개의 숫자여야 합니다", MANUAL_NUMBER_DELIMITER
+    );
     private static final List<LottoNumber> candidateNumbers;
 
     static {
