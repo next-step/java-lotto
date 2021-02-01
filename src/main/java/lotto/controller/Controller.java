@@ -24,26 +24,23 @@ public class Controller {
             input.inputTotalCost(), input.inputManualTicketCnt()
         );
 
+        buyManualTicketBunch(buyer);
+        buyAutoTicketBunch(buyer);
+
+        output.printBuyData(buyer.getBuyData());
+
+        return buyer.getBoughtTicketBunch();
+    }
+
+    private void buyManualTicketBunch(LottoBuyer buyer) {
         input.inputManualTicketsNumbers();
-        manualBuy(buyer);
-        autoBuy(buyer);
-        output.printBuyData(
-            buyer.getBuyData()
+        buyer.buyManualTicketBunch(
+            () -> input.inputTicketNumbers()
         );
-
-        return buyer.getBoughtTickets();
     }
 
-    private void manualBuy(LottoBuyer buyer) {
-        while (buyer.shouldBuyManualTicket()) {
-            buyer.buyManualTicket(
-                input.inputTicketNumbers()
-            );
-        }
-    }
-
-    private void autoBuy(LottoBuyer buyer) {
-        buyer.buyAutoTickets();
+    private void buyAutoTicketBunch(LottoBuyer buyer) {
+        buyer.buyAutoTicketBunch();
     }
 
     public LottoAnswer generateAnswer() {

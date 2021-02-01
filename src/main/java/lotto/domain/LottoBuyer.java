@@ -2,72 +2,63 @@ package lotto.domain;
 
 import lotto.dto.BuyData;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoBuyer {
     private int manualTicketCnt;
     private int autoTicketCnt;
 
-    private List<LottoTicket> boughtManualTickets;
-    private List<LottoTicket> boughtAutoTickets;
+    private LottoTicketBunch boughtManualTicketBunch;
+    private LottoTicketBunch boughtAutoTicketBunch;
 
     public LottoBuyer(int autoTicketCnt, int manualTicketCnt) {
         this.manualTicketCnt = manualTicketCnt;
         this.autoTicketCnt = autoTicketCnt;
 
-        boughtManualTickets = new ArrayList<>();
-        boughtAutoTickets = new ArrayList<>();
+        boughtManualTicketBunch = new LottoTicketBunch();
+        boughtAutoTicketBunch = new LottoTicketBunch();
     }
 
-    public boolean shouldBuyManualTicket() {
-        return manualTicketCnt - boughtManualTickets.size() > 0;
-    }
-
-    public void buyManualTicket(String manualNumbers) {
-        boughtManualTickets.add(
-            LottoTicketGenerator.generateManualTicket(manualNumbers)
-        );
-    }
-
-    public void buyAutoTickets() {
-        IntStream.range(
-            0, autoTicketCnt
-        ).forEach(
-            i -> boughtAutoTickets.add(
-                LottoTicketGenerator.generateRandomTicket()
-            )
-        );
-    }
-
-    private Stream<LottoTicket> getBoughtTicketsStream() {
-        return Stream.concat(
-            boughtManualTickets.stream(),
-            boughtAutoTickets.stream()
-        );
-    }
-
-    public LottoTicketBunch getBoughtTickets() {
-        return new LottoTicketBunch(
-            getBoughtTicketsStream().collect(
+    public void buyManualTicketBunch(Supplier<String> manualNumbersSupplier) {
+        boughtManualTicketBunch = new LottoTicketBunch(
+            IntStream.range(
+                0, manualTicketCnt
+            ).mapToObj(
+                i -> LottoTicketGenerator.generateManualTicket(
+                    manualNumbersSupplier.get()
+                )
+            ).collect(
                 Collectors.toList()
             )
+        );
+    }
+
+    public void buyAutoTicketBunch() {
+        boughtAutoTicketBunch = new LottoTicketBunch(
+            IntStream.range(
+                0, autoTicketCnt
+            ).mapToObj(
+                i -> LottoTicketGenerator.generateRandomTicket()
+            ).collect(
+                Collectors.toList()
+            )
+        );
+    }
+
+    public LottoTicketBunch getBoughtTicketBunch() {
+        return boughtManualTicketBunch.merge(
+            boughtAutoTicketBunch
         );
     }
 
     public BuyData getBuyData() {
         return new BuyData(
-            boughtAutoTickets.size(),
-            boughtManualTickets.size(),
-            getBoughtTicketsStream().map(
-                ticket -> ticket.getTicketData()
-            ).collect(
-                Collectors.toList()
-            )
+            boughtAutoTicketBunch.getSize(),
+            boughtManualTicketBunch.getSize(),
+            getBoughtTicketBunch().getTicketsData()
         );
     }
 

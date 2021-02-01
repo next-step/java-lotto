@@ -1,14 +1,37 @@
 package lotto.domain;
 
+import lotto.dto.TicketData;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicketBunch {
     private List<LottoTicket> tickets;
 
+    public LottoTicketBunch() {
+        this.tickets = new ArrayList<>();
+    }
+
     public LottoTicketBunch(List<LottoTicket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Integer getSize() {
+        return tickets.size();
+    }
+
+    public LottoTicketBunch merge (LottoTicketBunch otherBunch) {
+        return new LottoTicketBunch(
+            Stream.concat(
+                tickets.stream(),
+                otherBunch.tickets.stream()
+            ).collect(
+                Collectors.toList()
+            )
+        );
     }
 
     public LottoScoreBoard calcScoreBoard(LottoAnswer answer) {
@@ -21,8 +44,12 @@ public class LottoTicketBunch {
         );
     }
 
-    public int getSize() {
-        return tickets.size();
+    public List<TicketData> getTicketsData() {
+        return tickets.stream().map(
+            ticket -> ticket.getTicketData()
+        ).collect(
+            Collectors.toList()
+        );
     }
 
     @Override
