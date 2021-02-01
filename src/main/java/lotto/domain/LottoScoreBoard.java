@@ -15,7 +15,7 @@ import static lotto.domain.LottoBuyerGenerator.BUY_TICKET_COST;
 
 public class LottoScoreBoard {
     public static final int BIG_DECIMAL_SCALE = 2;
-    private Map<LottoScore, Integer> scoreBoard;
+    private final Map<LottoScore, Integer> scoreBoard;
 
     public LottoScoreBoard(List<LottoScore> scores) {
         scoreBoard = new LinkedHashMap<>();
@@ -26,7 +26,7 @@ public class LottoScoreBoard {
             score -> scoreBoard.put(score, 0)
         );
 
-        scores.stream().forEach(
+        scores.forEach(
             score -> scoreBoard.put(score, scoreBoard.get(score) + 1)
         );
     }
@@ -50,8 +50,8 @@ public class LottoScoreBoard {
         );
 
         BigDecimal cost = BigDecimal.valueOf(
-            scoreBoard.entrySet().stream().mapToInt(
-                board -> board.getValue()
+            scoreBoard.values().stream().mapToInt(
+                count -> count
             ).sum()
         );
 

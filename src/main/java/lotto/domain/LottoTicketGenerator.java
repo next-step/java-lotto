@@ -14,13 +14,13 @@ import static lotto.domain.LottoTicket.TICKET_LENGTH;
 public class LottoTicketGenerator {
     private static final String PARSE_ERROR_MESSAGE = "로또 번호 입력은 (%s)를 구분자로 한 6개의 숫자여야 합니다";
     private static final String MANUAL_NUMBER_DELIMITER = ", ";
-    private static List<LottoNumber> candidateNumbers;
+    private static final List<LottoNumber> candidateNumbers;
 
     static {
         candidateNumbers = IntStream.range(
             NUM_LEFT_BOUND, NUM_RIGHT_BOUND + 1
         ).mapToObj(
-            i -> new LottoNumber(i)
+            LottoNumber::new
         ).collect(
             Collectors.toList()
         );
@@ -42,7 +42,7 @@ public class LottoTicketGenerator {
                 Arrays.stream(
                     manualNumbers.split(MANUAL_NUMBER_DELIMITER)
                 ).map(
-                    manualNumber -> new LottoNumber(manualNumber)
+                    LottoNumber::new
                 ).collect(
                     Collectors.toList()
                 )

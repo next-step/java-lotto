@@ -9,7 +9,7 @@ public class InputView {
     private static final String ANSWER_NUMBERS_MSG = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_MSG = "보너스 볼을 입력해 주세요";
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public Integer inputTotalCost() {
         System.out.println(TOTAL_COST_MSG);

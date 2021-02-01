@@ -11,8 +11,8 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
-    private InputView input;
-    private OutputView output;
+    private final InputView input;
+    private final OutputView output;
 
     public Controller(InputView input, OutputView output) {
         this.input = input;

@@ -15,21 +15,19 @@ class LottoAnswerTest {
     @DisplayName("보너스 번호가 정답 정보와 겹치는 경우 예외를 잘 발생하는지 확인")
     @Test
     void answerIncludeBonusNumber() {
-        assertThrows(RuntimeException.class, () -> {
-            new LottoAnswer(
-                new LottoTicket(
-                    new ArrayList<LottoNumber>() {{
-                        add(new LottoNumber(1));
-                        add(new LottoNumber(2));
-                        add(new LottoNumber(3));
-                        add(new LottoNumber(4));
-                        add(new LottoNumber(5));
-                        add(new LottoNumber(6));
-                    }}
-                ),
-                new LottoNumber(6)
-            );
-        });
+        assertThrows(RuntimeException.class, () -> new LottoAnswer(
+            new LottoTicket(
+                new ArrayList<LottoNumber>() {{
+                    add(new LottoNumber(1));
+                    add(new LottoNumber(2));
+                    add(new LottoNumber(3));
+                    add(new LottoNumber(4));
+                    add(new LottoNumber(5));
+                    add(new LottoNumber(6));
+                }}
+            ),
+            new LottoNumber(6)
+        ));
     }
 
     private static Stream<Arguments> providerCalculateScoreParams() {

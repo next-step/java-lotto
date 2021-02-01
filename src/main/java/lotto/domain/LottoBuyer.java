@@ -38,7 +38,7 @@ public class LottoBuyer {
         boughtAutoTicketBunch = boughtAutoTicketBunch.merge(
             generateTicket(
                 autoTicketCnt,
-                () -> LottoTicketGenerator.generateRandomTicket()
+                LottoTicketGenerator::generateRandomTicket
             )
         );
         autoTicketCnt = 0;

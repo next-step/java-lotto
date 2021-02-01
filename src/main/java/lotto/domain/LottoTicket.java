@@ -15,7 +15,7 @@ public class LottoTicket {
     );
     private static final String TICKET_DUPLICATE_NUMBER_MSG = "로또 번호는 서로 다른 수여야 합니다.";
 
-    private List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
         if (!isProperNumberCnt(numbers)) {
@@ -38,11 +38,9 @@ public class LottoTicket {
     }
 
     public int getMatchedCnt(LottoTicket other) {
-        return numbers.stream().filter(
+        return (int) numbers.stream().filter(
             other.numbers::contains
-        ).collect(
-            Collectors.toList()
-        ).size();
+        ).count();
     }
 
     public boolean includeNumber(LottoNumber number) {
@@ -52,7 +50,7 @@ public class LottoTicket {
     public TicketData getTicketData() {
         return new TicketData(
             numbers.stream().map(
-                number -> number.getNumberData()
+                LottoNumber::getNumberData
             ).collect(
                 Collectors.toList()
             )

@@ -13,7 +13,7 @@ public class TicketData {
 
     public List<Integer> getNumbersData() {
         return numbersData.stream().map(
-            numberData -> numberData.getNumber()
+            NumberData::getNumber
         ).collect(
             Collectors.toList()
         );

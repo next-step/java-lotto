@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.dto.BuyData;
-import lotto.dto.TicketData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -85,7 +84,7 @@ class LottoBuyerTest {
             new BuyData(
                 0,
                 0,
-                new ArrayList<TicketData>()
+                new ArrayList<>()
             )
         );
     }

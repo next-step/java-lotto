@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicketBunch {
-    private List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTicketBunch() {
         this.tickets = new ArrayList<>();
@@ -37,7 +37,7 @@ public class LottoTicketBunch {
     public LottoScoreBoard calcScoreBoard(LottoAnswer answer) {
         return new LottoScoreBoard(
             tickets.stream().map(
-                ticket -> answer.calculateScore(ticket)
+                answer::calculateScore
             ).collect(
                 Collectors.toList()
             )
@@ -46,7 +46,7 @@ public class LottoTicketBunch {
 
     public List<TicketData> getTicketsData() {
         return tickets.stream().map(
-            ticket -> ticket.getTicketData()
+            LottoTicket::getTicketData
         ).collect(
             Collectors.toList()
         );

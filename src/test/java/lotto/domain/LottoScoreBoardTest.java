@@ -40,7 +40,9 @@ class LottoScoreBoardTest {
                     add(new ScoreData(LottoScore.SECOND, 0));
                     add(new ScoreData(LottoScore.FIRST, 0));
                 }},
-                BigDecimal.valueOf(profit).setScale(BIG_DECIMAL_SCALE)
+                BigDecimal.valueOf(profit).setScale(
+                    BIG_DECIMAL_SCALE, BigDecimal.ROUND_CEILING
+                )
             ),
             scoreBoard.getScoreBoardData()
         );

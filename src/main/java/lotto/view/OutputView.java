@@ -26,8 +26,8 @@ public class OutputView {
             buyData.getAutoTicketCnt()
         );
 
-        buyData.getBoughtTickets().stream().forEach(
-            ticketData -> printTicketData(ticketData)
+        buyData.getBoughtTickets().forEach(
+            this::printTicketData
         );
     }
 
@@ -46,7 +46,7 @@ public class OutputView {
         System.out.println(SCORE_BOARD_TITLE_MSG);
         System.out.println(SCORE_BOARD_DELIMITER_MSG);
 
-        scoreBoardData.getScores().stream().forEach(
+        scoreBoardData.getScores().forEach(
             score -> System.out.format(
                 SCORE_FMT,
                 score.getMatchedCnt(),
