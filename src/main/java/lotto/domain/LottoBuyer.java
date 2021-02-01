@@ -14,7 +14,7 @@ public class LottoBuyer {
     private LottoTicketBunch boughtManualTicketBunch;
     private LottoTicketBunch boughtAutoTicketBunch;
 
-    public LottoBuyer(int autoTicketCnt, int manualTicketCnt) {
+    public LottoBuyer(int manualTicketCnt, int autoTicketCnt) {
         this.manualTicketCnt = manualTicketCnt;
         this.autoTicketCnt = autoTicketCnt;
 

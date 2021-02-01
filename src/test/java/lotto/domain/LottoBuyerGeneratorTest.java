@@ -23,7 +23,7 @@ class LottoBuyerGeneratorTest {
         int calculatedManualTicketCnt
     ) {
         assertEquals(
-            new LottoBuyer(calculatedAutoTicketCnt, calculatedManualTicketCnt),
+            new LottoBuyer(calculatedManualTicketCnt, calculatedAutoTicketCnt),
             LottoBuyerGenerator.generateLottoBuyer(totalCost, manualTicketCnt)
         );
     }

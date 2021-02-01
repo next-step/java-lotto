@@ -33,7 +33,7 @@ public class Controller {
     }
 
     private void buyManualTicketBunch(LottoBuyer buyer) {
-        input.inputManualTicketsNumbers();
+        input.inputManualTicketBunch();
         buyer.buyManualTicketBunch(
             () -> input.inputTicketNumbers()
         );

@@ -6,12 +6,11 @@ public class LottoBuyerGenerator {
     public static LottoBuyer generateLottoBuyer(int totalCost, int manualTicketCnt) {
         int totalTicketCnt = totalCost / BUY_TICKET_COST;
         if (manualTicketCnt > totalTicketCnt) {
-           return new LottoBuyer(0, totalTicketCnt);
+           return new LottoBuyer(totalTicketCnt, 0);
         }
 
         return new LottoBuyer(
-            totalTicketCnt - manualTicketCnt,
-            manualTicketCnt
+            manualTicketCnt, totalTicketCnt - manualTicketCnt
         );
     }
 }

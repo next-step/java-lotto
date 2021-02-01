@@ -14,7 +14,7 @@ class LottoBuyerTest {
     @DisplayName("수동 티켓을 잘 구매하는지 확인")
     @Test
     void buyManualTicketBunch() {
-        LottoBuyer buyer = new LottoBuyer(0, 1);
+        LottoBuyer buyer = new LottoBuyer(1, 0);
 
         buyer.buyManualTicketBunch(
             () -> "1, 2, 3, 4, 5, 6"
@@ -43,7 +43,7 @@ class LottoBuyerTest {
     @DisplayName("자동 티켓을 잘 구매하는지 확인")
     @Test
     void buyAutoTicketBunch() {
-        LottoBuyer buyer = new LottoBuyer(2, 0);
+        LottoBuyer buyer = new LottoBuyer(0, 2);
 
         buyer.buyAutoTicketBunch();
 
@@ -53,7 +53,7 @@ class LottoBuyerTest {
     @DisplayName("구매한 로또 티켓 뭉치를 잘 가져오는지 확인")
     @Test
     void getBoughtTicketBunch() {
-        LottoBuyer buyer = new LottoBuyer(3, 4);
+        LottoBuyer buyer = new LottoBuyer(4, 3);
 
         buyer.buyManualTicketBunch(
             () -> "1, 2, 3, 4, 5, 6"
@@ -67,7 +67,7 @@ class LottoBuyerTest {
     @DisplayName("구매 정보를 잘 가져오는지 확인")
     @Test
     void getBuyData() {
-        LottoBuyer buyer = new LottoBuyer(1, 0);
+        LottoBuyer buyer = new LottoBuyer(0, 1);
 
         assertEquals(
             buyer.getBuyData(),
