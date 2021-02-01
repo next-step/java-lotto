@@ -49,7 +49,7 @@ public class LottoController {
         return bonusNumber;
     }
 
-    public void returnOutput(String money, String winningNumberInput, String bonusNumber, List<Ticket> tickets) {
+    public void returnFinalLottoResult(String money, String winningNumberInput, String bonusNumber, List<Ticket> tickets) {
         WinningNumber winningNumber = new WinningNumber(new Ticket(NumberUtils.convertStringToIntegerList(winningNumberInput)),
                 Integer.parseInt(bonusNumber));
         Lotto lotto = new Lotto(winningNumber, tickets);

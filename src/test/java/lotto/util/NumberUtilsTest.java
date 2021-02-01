@@ -48,7 +48,7 @@ class NumberUtilsTest {
     @ParameterizedTest
     @MethodSource("provideNumberInRangeTest")
     void isNumberInRangeTest(List<String> numbers, boolean expected) {
-        assertEquals(expected, NumberUtils.isNumberInRange(numbers));
+        assertEquals(expected, NumberUtils.isNumberInLottoRange(numbers));
     }
 
     private static Stream<Arguments> provideNumberInRangeTest() {

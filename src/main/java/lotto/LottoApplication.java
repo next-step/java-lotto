@@ -13,6 +13,6 @@ public class LottoApplication {
         List<Ticket> tickets = lottoController.purchaseTicket(money);
         String winningNumber = lottoController.getWinningNumberFromUser();
         String bonusNumber = lottoController.getBonusNumberFromUser();
-        lottoController.returnOutput(money, winningNumber, bonusNumber, tickets);
+        lottoController.returnFinalLottoResult(money, winningNumber, bonusNumber, tickets);
     }
 }

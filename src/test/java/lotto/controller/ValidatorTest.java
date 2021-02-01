@@ -47,7 +47,7 @@ public class ValidatorTest {
             Arguments.of("1, 2, 3, 4, 5, 5", false),
             Arguments.of("1, 2, 3, 4, 5, 45", true),
             Arguments.of("1, 2, 3, 4, dfsd, 45", false),
-            Arguments.of("1, 2, 3, 4, 5, 47", false),
+            Arguments.of("1, 2, 3, 4, 5, 46", false),
             Arguments.of("1; 2, 3, 4; 5, 47", false),
             Arguments.of("1, 2, 3, 4, 5, 6, 8", false),
             Arguments.of("123456", false),

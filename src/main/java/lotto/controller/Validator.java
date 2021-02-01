@@ -24,7 +24,7 @@ public class Validator {
         return pattern.matcher(winningNumber).matches()
             && numbers.size() == LOTTO_COUNT
             && NumberUtils.isNumberUnique(numbers)
-            && NumberUtils.isNumberInRange(numbers);
+            && NumberUtils.isNumberInLottoRange(numbers);
     }
 
     public boolean validateBonusNumber(String bonusNumber) {

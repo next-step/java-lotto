@@ -10,15 +10,17 @@ public class LottoMachine {
     private final List<Integer> numbers;
 
     private final static int MIN_LOTTO = 1;
-    private final static int MAX_LOTTO = 46;
+    private final static int MAX_LOTTO = 45;
+    private final static int MIN_LOTTO_COUNT = 0;
+    private final static int MAX_LOTTO_COUNT = 6;
 
     public LottoMachine() {
-        numbers = IntStream.range(MIN_LOTTO, MAX_LOTTO).boxed().collect(Collectors.toList());
+        numbers = IntStream.range(MIN_LOTTO, MAX_LOTTO + 1).boxed().collect(Collectors.toList());
     }
 
     public List<Integer> generateTicket() {
         Collections.shuffle(numbers);
-        List<Integer> ticket = numbers.subList(0, 6);
+        List<Integer> ticket = numbers.subList(MIN_LOTTO_COUNT, MAX_LOTTO_COUNT);
         Collections.sort(ticket);
         return ticket;
     }

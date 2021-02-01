@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class NumberUtils {
 
-    private static final int FIRST_RANGE_LOTTO_NUMBER = 0;
-    private static final int END_RANGE_LOTTO_NUMBER = 46;
+    private static final int FIRST_RANGE_LOTTO_NUMBER = 1;
+    private static final int END_RANGE_LOTTO_NUMBER = 45;
     private static final String COMMA = ", ";
 
     public static Integer returnInteger(String string) {
@@ -31,7 +31,7 @@ public class NumberUtils {
             .count() == numbers.size();
     }
 
-    public static boolean isNumberInRange(List<String> numbers) {
+    public static boolean isNumberInLottoRange(List<String> numbers) {
         return numbers
             .stream()
             .map(Integer::parseInt)
@@ -39,7 +39,7 @@ public class NumberUtils {
     }
 
     public static boolean checkLottoNumber(int num) {
-        return FIRST_RANGE_LOTTO_NUMBER < num && num < END_RANGE_LOTTO_NUMBER;
+        return FIRST_RANGE_LOTTO_NUMBER <= num && num <= END_RANGE_LOTTO_NUMBER;
     }
 
     public static List<Integer> convertStringToIntegerList(String winningNumber) {
