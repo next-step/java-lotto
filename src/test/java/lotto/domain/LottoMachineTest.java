@@ -45,7 +45,7 @@ public class LottoMachineTest {
     @Test
     void calculateResultTest() {
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto winningLotto = WinningLotto.generate(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
 
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45));
         Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45));
@@ -66,7 +66,7 @@ public class LottoMachineTest {
 
     @Test
     void winningBallMatchNumberTest() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto winningLotto = WinningLotto.generate(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 43, 44, 45));
 
         Assertions.assertThat(lottoMachine.winningBallMatchNumber(winningLotto, lotto)).isEqualTo(3);
