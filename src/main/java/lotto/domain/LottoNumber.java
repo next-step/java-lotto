@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.resources.StringResources;
+import lotto.resources.ErrorMessages;
 
 import java.util.Objects;
 
@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validate(final int number) {
         if (number < MINIMUM || number > MAXIMUM) {
-            throw new IllegalArgumentException(StringResources.LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessages.LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
         }
     }
 

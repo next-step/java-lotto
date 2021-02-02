@@ -1,4 +1,4 @@
-package lotto.resources;
+ package lotto.resources;
 
 public class StringResources {
     public static final String INPUT_PURCHASE_AMOUNT_HINT = "구입 금액을 입력해주세요.";
@@ -9,7 +9,4 @@ public class StringResources {
 
     public static final String LOTTO_STATISTICS_MESSAGE = "당첨 통계";
     public static final String DOTTED_LINE_MESSAGE = "---------";
-
-    public static final String LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE = "정상적인 수의 범위가 아닙니다.";
-    public static final String LOTTO_NUMBER_AMOUNT_ERROR_MESSAGE ="로또 번호는 6개여야만 합니다.";
 }
