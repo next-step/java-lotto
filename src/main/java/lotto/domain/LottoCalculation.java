@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoCalculation {
-    private static final Map<WinningType, Integer> matchResult = new HashMap<>();
+    private static final Map<WinningType, Integer> matchResult = new EnumMap<>(WinningType.class);
 
     public static Map<WinningType, Integer> calculateResult(WinningLotto winningLotto, List<Lotto> lottos) {
         initialMatchResult();
@@ -23,11 +23,9 @@ public class LottoCalculation {
     }
 
     private static void initialMatchResult() {
-        matchResult.put(WinningType.THREE, 0);
-        matchResult.put(WinningType.FOUR, 0);
-        matchResult.put(WinningType.FIVE, 0);
-        matchResult.put(WinningType.FIVE_BONUS, 0);
-        matchResult.put(WinningType.SIX, 0);
+        for (WinningType prize : WinningType.values()) {
+            matchResult.put(prize,0);
+        }
     }
 
     private static void updateCount(WinningType winningType) {
