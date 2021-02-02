@@ -47,13 +47,13 @@ public class OutputView {
     }
 
     private static void printValueAndCount(Prize prize, Map<Prize, Integer> prizeBoard) {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(" (");
-        stringBuffer.append(prize.getCash());
-        stringBuffer.append("원) - ");
-        stringBuffer.append(prizeBoard.get(prize));
-        stringBuffer.append("개");
-        System.out.println(stringBuffer.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(" (");
+        sb.append(prize.getCash());
+        sb.append("원) - ");
+        sb.append(prizeBoard.get(prize));
+        sb.append("개");
+        System.out.println(sb.toString());
     }
 
     private static void checkFiveWithBonusBallCase(Prize prize) {
