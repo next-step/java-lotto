@@ -25,4 +25,13 @@ public class InputView {
         int bonusBall = scanner.nextInt();
         return bonusBall;
     }
+
+    public static int getNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = scanner.nextLine();
+        return Validator.checkIsIntegerAndIsNegative(input);
+    }
+    public static String getStringOfLotto() {
+        return scanner.nextLine();
+    }
 }
