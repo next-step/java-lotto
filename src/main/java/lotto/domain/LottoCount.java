@@ -5,19 +5,28 @@ import lotto.resources.ErrorMessages;
 public class LottoCount {
     private static final int LOTTO_TICKET_PRICE = 1_000;
 
-    private final int totalCount;
+    private final int totalAmount;
     private final int autoLottoCount;
     private final int manualLottoCount;
 
+    public LottoCount(Money money) {
+        validate(money, 0);
+        int totalCount = money.getAmount() / LOTTO_TICKET_PRICE;
+        this.totalAmount = money.getAmount();
+        this.autoLottoCount = totalCount;
+        this.manualLottoCount = 0;
+    }
+
     public LottoCount(Money money, int manualLottoCount) {
         validate(money, manualLottoCount);
-        this.totalCount = money.getAmount() / LOTTO_TICKET_PRICE;
+        int totalCount = money.getAmount() / LOTTO_TICKET_PRICE;
+        this.totalAmount = money.getAmount();
         this.autoLottoCount = totalCount - manualLottoCount;
         this.manualLottoCount = manualLottoCount;
     }
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getTotalAmount() {
+        return totalAmount;
     }
 
     public int getAutoLottoCount() {
