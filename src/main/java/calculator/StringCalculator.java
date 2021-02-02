@@ -6,13 +6,25 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
     public int add(String text) {
+        String[] inputs;
+        int res = 0;
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
-        if (checkCustomDelimiter(text)) {
-            return splitByCustomDelimiter(text);
+        inputs = splitByCondition(text);
+        for (String input : inputs) {
+            InputValidator.checkIsInvalidInput(input);
+            res += Integer.parseInt(input);
         }
-        return splitByDelimiter(text);
+        return res;
+    }
+
+    private String[] splitByCondition(String text) {
+        String[] inputs = splitByDelimiter(text);
+        if (checkCustomDelimiter(text)) {
+            inputs = splitByCustomDelimiter(text);
+        }
+        return inputs;
     }
 
     private boolean checkCustomDelimiter(String text) {
@@ -20,29 +32,17 @@ public class StringCalculator {
         return m.find();
     }
 
-    private int splitByDelimiter(String text) {
-        String[] inputs = text.split(",|:");
-        int res = 0;
-        for (String input : inputs) {
-            if (InputValidator.checkIsInvalidInput(input)) {
-                throw new RuntimeException();
-            }
-            res += Integer.parseInt(input);
-        }
-        return res;
+    private String[] splitByDelimiter(String text) {
+        return text.split(",|:");
     }
 
-    private int splitByCustomDelimiter(String text) {
+    private String[] splitByCustomDelimiter(String text) {
+        String[] tokens = new String[]{};
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-            int res = 0;
-            for (String input : tokens) {
-                res += Integer.parseInt(input);
-            }
-            return res;
+            tokens = m.group(2).split(customDelimiter);
         }
-        return 0;
+        return tokens;
     }
 }
