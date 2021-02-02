@@ -5,8 +5,6 @@ import lotto.utils.StatisticsExporter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -18,8 +16,8 @@ public class LottoController {
 
     public LottoTickets purchaseLottoTickets() {
         final Money money = inputView.getPurchaseAmount();
-        final List<String> pickedNumberLines = inputView.getManualPickedNumberLines();
-        final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker(pickedNumberLines);
+        final LottoCount lottoCount = inputView.getManualLottoCount(money);
+        final ManualNumbersPicker manualNumbersPicker = inputView.getManualPickedNumberLines(lottoCount);
         final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
         final LottoPurchase lottoPurchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
 
@@ -31,8 +29,8 @@ public class LottoController {
     }
 
     public LottoTicket makeWinningTicket() {
-        final String[] winningTicketNumbers = inputView.getWinningTicketNumbers();
-        return new LottoTicket(winningTicketNumbers);
+        final LottoTicket winningTicket = inputView.getWinningTicketNumbers();
+        return winningTicket;
     }
 
     public LottoNumber makeBonusBall() {
