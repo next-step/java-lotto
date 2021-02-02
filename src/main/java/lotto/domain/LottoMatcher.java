@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class LottoMatcher {
 
-    private final Map<Prize, Integer> PrizeBoard = new EnumMap<>(Prize.class);
+    private final Map<Prize, Integer> prizeBoard = new EnumMap<>(Prize.class);
     private static final int BONUS_MATCH_CONDITION_COUNT = 5;
 
     public LottoMatcher() {
-        Arrays.stream(Prize.values()).forEach(prize -> PrizeBoard.put(prize, 0));
+        Arrays.stream(Prize.values()).forEach(prize -> prizeBoard.put(prize, 0));
     }
 
     public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerNumbers) {
@@ -27,11 +27,11 @@ public class LottoMatcher {
     }
 
     public Map<Prize, Integer> getPrizeBoard() {
-        return PrizeBoard;
+        return prizeBoard;
     }
 
     public void addPrizeStatus(Prize prize) {
-        PrizeBoard.put(prize, PrizeBoard.get(prize) + 1);
+        prizeBoard.put(prize, prizeBoard.get(prize) + 1);
     }
 
     public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
