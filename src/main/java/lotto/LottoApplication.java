@@ -1,8 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.GoldenTicket;
 import lotto.domain.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,8 +16,7 @@ public class LottoApplication {
         final LottoTickets lottoTickets = lottoController.purchaseLottoTickets();
         lottoController.printLottoTickets(lottoTickets);
 
-        final LottoTicket lottoTicket = lottoController.makeWinningTicket();
-        final LottoNumber lottoNumber = lottoController.makeBonusBall();
-        lottoController.printResults(lottoTickets, lottoTicket, lottoNumber);
+        final GoldenTicket lottoTicket = lottoController.pickGoldenTicket();
+        lottoController.printResults(lottoTickets, lottoTicket);
     }
 }

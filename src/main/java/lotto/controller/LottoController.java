@@ -28,18 +28,19 @@ public class LottoController {
         outputView.printLottoTickets(lottoTickets);
     }
 
-    public LottoTicket makeWinningTicket() {
+    public GoldenTicket pickGoldenTicket(){
         final LottoTicket winningTicket = inputView.getWinningTicketNumbers();
-        return winningTicket;
-    }
-
-    public LottoNumber makeBonusBall() {
         final LottoNumber bonusNumber = inputView.getBonusNumber();
-        return bonusNumber;
+
+        try {
+            return new GoldenTicket(winningTicket, bonusNumber);
+        }catch (Exception exception){
+            exception.printStackTrace();
+            return pickGoldenTicket();
+        }
     }
 
-    public void printResults(final LottoTickets lottoTickets, final LottoTicket winningTicket, final LottoNumber bonusNumber) {
-        final GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+    public void printResults(final LottoTickets lottoTickets, final GoldenTicket goldenTicket) {
         final WinnerStatistics winnerStatistics = new WinnerStatistics(goldenTicket, lottoTickets);
         final StatisticsExporter statisticsExporter = new StatisticsExporter(winnerStatistics);
         outputView.printStatistics(statisticsExporter);
