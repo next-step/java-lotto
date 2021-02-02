@@ -15,7 +15,6 @@ public class LottoMachineTest {
     @BeforeAll
     static void initAll () {
         lottoMachine = new LottoMachine();
-
     }
 
     @Test
