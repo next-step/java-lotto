@@ -19,7 +19,7 @@ public class LottoController {
         final LottoCount lottoCount = inputView.getManualLottoCount(money);
         final ManualNumbersPicker manualNumbersPicker = inputView.getManualPickedNumberLines(lottoCount);
         final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
-        final LottoPurchase lottoPurchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoPurchase lottoPurchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         return new LottoTickets(lottoPurchase);
     }
