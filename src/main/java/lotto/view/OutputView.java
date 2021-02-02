@@ -26,11 +26,12 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         Arrays.stream(Prize.values()).forEach(prize -> {
-            if (prize.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
-                printPrizeCount(prize);
-                checkFiveWithBonusBallCase(prize);
-                printValueAndCount(prize, prizeBoard);
+            if (prize.getMatchedNumber() < Prize.THREE.getMatchedNumber()) {
+                return;
             }
+            printPrizeCount(prize);
+            checkFiveWithBonusBallCase(prize);
+            printValueAndCount(prize,prizeBoard);
         });
     }
 
