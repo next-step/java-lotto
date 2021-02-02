@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public interface Lotto {
-    int LOTTO_NUMBER_SIZE = 6;
-    String DELIMITER = "[ ,]+";
+public abstract class Lotto {
+    static final int LOTTO_NUMBER_SIZE = 6;
+    static final String DELIMITER = "[ ,]+";
 }

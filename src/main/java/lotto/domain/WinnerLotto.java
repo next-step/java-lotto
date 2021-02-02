@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WinnerLotto implements Lotto {
+public class WinnerLotto extends Lotto {
 
     private final LottoNumber BonusBall;
     private final List<LottoNumber> numbers;
