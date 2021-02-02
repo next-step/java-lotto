@@ -1,0 +1,49 @@
+package lotto.domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
+
+class LottoTest {
+
+    @DisplayName("comma with space parsing test")
+    @Test
+    void getWinnerLottoWithSplitting() {
+        String input = "1, 2, 3, 4, 5, 6";
+        List<LottoNumber> expectedLottoNumbers = new ArrayList<>(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+        assertThat(Lotto.getLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+    }
+
+    @DisplayName("can't parsing 6+- length input")
+    @Test
+    void getWinnerLottoWithSplittingFailIfLengthIsNotSix() {
+        String input = "1, 2, 3, 4, 5, 6, 7";
+        assertThatThrownBy(() -> {
+            Lotto.getLottoWithSplitting(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
+    @DisplayName("can't parsing not integer input")
+    @Test
+    void getWinnerLottoWithSplittingWithNotInteger() {
+        String input = "1, 2, a, b, c, d";
+        assertThatThrownBy(() -> {
+            Lotto.getLottoWithSplitting(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
+}

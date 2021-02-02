@@ -43,31 +43,7 @@ class WinnerLottoTest {
         assertThat(winnerLotto.getBonusBall()).isEqualTo(lottoBonusNumber);
     }
 
-    @DisplayName("comma with space parsing test")
-    @Test
-    void getWinnerLottoWithSplitting() {
-        String input = "1, 2, 3, 4, 5, 6";
-        assertThat(WinnerLotto.getLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
-    }
 
-    @DisplayName("can't parsing 6+- length input")
-    @Test
-    void getWinnerLottoWithSplittingFailIfLengthIsNotSix() {
-        String input = "1, 2, 3, 4, 5, 6, 7";
-        assertThatThrownBy(() -> {
-            WinnerLotto.getLottoWithSplitting(input);
-        }).isInstanceOf(IllegalArgumentException.class);
-
-    }
-    @DisplayName("can't parsing not integer input")
-    @Test
-    void getWinnerLottoWithSplittingWithNotInteger() {
-        String input = "1, 2, a, b, c, d";
-        assertThatThrownBy(() -> {
-            WinnerLotto.getLottoWithSplitting(input);
-        }).isInstanceOf(IllegalArgumentException.class);
-
-    }
 
     @DisplayName("bonusball cannot be same with lotto number")
     @Test
