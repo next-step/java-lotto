@@ -18,6 +18,11 @@ public class MockLottoTickets implements Tickets {
     }
 
     @Override
+    public String getPurchaseInformation() {
+        return "";
+    }
+
+    @Override
     public int getPurchaseAmount() {
         return purchaseAmount;
     }

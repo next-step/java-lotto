@@ -14,8 +14,10 @@ public class LottoTicketsTest {
     @Test
     void getPurchaseAmountTest() {
         // given
-        NumberPicker numberPicker = new LottoNumbersPicker();
-        Purchase purchase = new LottoPurchase(numberPicker, PURCHASE_LOTTO_AMOUNT);
+        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
 
         LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
@@ -30,8 +32,10 @@ public class LottoTicketsTest {
     @Test
     void getPurchaseCountTest() {
         // given
-        NumberPicker numberPicker = new LottoNumbersPicker();
-        Purchase purchase = new LottoPurchase(numberPicker, PURCHASE_LOTTO_AMOUNT);
+        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
 
         LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
@@ -46,8 +50,10 @@ public class LottoTicketsTest {
     @Test
     void getLottoTicketsTest() {
         // given
-        NumberPicker numberPicker = new LottoNumbersPicker();
-        Purchase purchase = new LottoPurchase(numberPicker, PURCHASE_LOTTO_AMOUNT);
+        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
 
         LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
