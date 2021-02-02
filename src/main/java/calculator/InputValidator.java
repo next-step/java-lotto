@@ -2,6 +2,9 @@ package calculator;
 
 public class InputValidator {
 
+    private InputValidator() {
+    }
+
     public static boolean checkIsNullOrIsEmpty(String text) {
         return isNull(text) || isEmpty(text);
     }
@@ -28,7 +31,7 @@ public class InputValidator {
 
     public static boolean isLetter(String text) throws RuntimeException {
         try {
-            int input = Integer.parseInt(text);
+            Integer.parseInt(text);
             return false;
         } catch (Exception e) {
             throw new NumberFormatException("입력 형식에 벗어나는 입력입니다.");

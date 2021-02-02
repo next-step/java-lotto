@@ -8,6 +8,9 @@ import lotto.domain.LottoNumber;
 
 public class Validator {
 
+    private Validator() {
+    }
+
     public static void isInteger(String input) {
         try {
             Integer.parseInt(input);

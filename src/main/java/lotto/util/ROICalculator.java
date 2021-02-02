@@ -5,6 +5,9 @@ import lotto.domain.Prize;
 
 public class ROICalculator {
 
+    private ROICalculator() {
+    }
+
     public static int getRevenue(Map<Prize, Integer> prizeBoard) {
         int revenue = 0;
         for (Prize prize : prizeBoard.keySet()) {
