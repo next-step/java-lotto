@@ -8,7 +8,7 @@ public class LottoMachine {
     private static final int LOTTO_LENGTH = 6;
     private final Random random = new Random();
     private List<Integer> lottos;
-    private static final Map<WinningType, Integer> matchResult = new HashMap<>();
+    private final Map<WinningType, Integer> matchResult = new HashMap<>();
 
     public LottoMachine() {
         initialMatchResult();
