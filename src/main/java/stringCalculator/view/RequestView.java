@@ -3,7 +3,7 @@ package stringCalculator.view;
 import java.util.Scanner;
 import stringCalculator.Constant;
 
-public class InputHandler {
+public class RequestView {
     public String requestUserInput() {
         Scanner sc = new Scanner(System.in);
         printInputRequest();
