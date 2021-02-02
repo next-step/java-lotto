@@ -20,11 +20,11 @@ public class LottoPurchase implements Purchase {
 
     @Override
     public List<LottoTicket> buy() {
-        Stream<LottoTicket> manualNumbersPickerStream = IntStream
+        final Stream<LottoTicket> manualNumbersPickerStream = IntStream
                 .range(0, lottoCount.getManualLottoCount())
                 .mapToObj(i -> manualNumbersPicker.pick());
 
-        Stream<LottoTicket> autoNumbersPickerStream = IntStream
+        final Stream<LottoTicket> autoNumbersPickerStream = IntStream
                 .range(0, lottoCount.getAutoLottoCount())
                 .mapToObj(i -> autoNumbersPicker.pick());
 

@@ -10,7 +10,7 @@ public class ManualNumbersPicker implements NumberPicker {
         lottoTickets = new Stack<>();
     }
 
-    public ManualNumbersPicker(List<String> manualPickedNumberLines) {
+    public ManualNumbersPicker(final List<String> manualPickedNumberLines) {
         lottoTickets = manualPickedNumberLines
                 .stream()
                 .map(line ->
@@ -26,9 +26,5 @@ public class ManualNumbersPicker implements NumberPicker {
     @Override
     public LottoTicket pick() {
         return lottoTickets.pop();
-    }
-
-    public int getSize() {
-        return lottoTickets.size();
     }
 }

@@ -31,7 +31,7 @@ public class LottoTickets implements Tickets{
         return lottoTickets.size();
     }
 
-    private List<LottoTicket> buyLottoTickets(Purchase purchase) {
+    private List<LottoTicket> buyLottoTickets(final Purchase purchase) {
         return purchase.buy();
     }
 }

@@ -21,7 +21,7 @@ public class InputView {
         }
     }
 
-    public LottoCount getManualLottoCount(Money money) {
+    public LottoCount getManualLottoCount(final Money money) {
         final Scanner scanner = new Scanner(System.in);
         System.out.println(StringResources.INPUT_PURCHASE_MANUAL_LOTTO_COUNT_HINT);
         final int manualLottoCount = Integer.parseInt(scanner.nextLine());
@@ -34,7 +34,7 @@ public class InputView {
         }
     }
 
-    public ManualNumbersPicker getManualPickedNumberLines(LottoCount lottoCount) {
+    public ManualNumbersPicker getManualPickedNumberLines(final LottoCount lottoCount) {
         final Scanner scanner = new Scanner(System.in);
         System.out.println(StringResources.INPUT_MANUAL_LOTTO_NUMBERS_HINT);
 

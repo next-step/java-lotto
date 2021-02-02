@@ -17,9 +17,9 @@ public class WinnerStatistics {
     }
 
     private void analyze(final GoldenTicket goldenTicket, final Tickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            LottoResult result = new LottoResult(goldenTicket, lottoTicket);
-            Rank rank = result.getRank();
+        for (final LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            final LottoResult result = new LottoResult(goldenTicket, lottoTicket);
+            final Rank rank = result.getRank();
             results.put(rank, results.getOrDefault(rank, 0) + 1);
             winningAmount += rank.getAmount();
         }
@@ -30,7 +30,7 @@ public class WinnerStatistics {
     }
 
     public double getEarningRate() {
-        double origin = winningAmount / (double) purchaseAmount;
+        final double origin = winningAmount / (double) purchaseAmount;
         return Math.floor(origin * 100) / 100;
     }
 }

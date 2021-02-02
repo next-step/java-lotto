@@ -38,12 +38,12 @@ public class StatisticsExporter {
         return rank != Rank.NONE;
     }
 
-    private int getMatchCount(Rank rank) {
+    private int getMatchCount(final Rank rank) {
         EnumMap<Rank, Integer> results = winnerStatistics.getResults();
         return results.getOrDefault(rank, 0);
     }
 
-    private String decorateRankResult(Rank rank, int matchCount) {
+    private String decorateRankResult(final Rank rank, final int matchCount) {
         return String
                 .format(MATCHED_RANK_STATUS_MESSAGE
                         , rank.toString()
