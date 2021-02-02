@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoNumber{
+public class LottoNumber {
 
     private static final int LOWER_BOUND_LOTTO = 1;
     private static final int UPPER_BOUND_LOTTO = 46;

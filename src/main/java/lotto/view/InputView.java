@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Money;
 import lotto.util.Validator;
 
 import java.util.Scanner;
@@ -12,13 +13,10 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public int getMoneyToBuyLotto() {
+    public Money getMoneyToBuyLotto() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = scanner.nextLine();
-        Validator.isNegative(input);
-        Validator.isInteger(input);
-
-        return Integer.parseInt(input);
+        return new Money(input);
     }
 
     public String getLottoAnswer() {

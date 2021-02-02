@@ -6,6 +6,7 @@ import lotto.domain.LottoGenerator;
 import lotto.domain.LottoMatcher;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.domain.PlayersLotto;
 import lotto.domain.WinnerLotto;
 import lotto.util.ROICalculator;
@@ -18,7 +19,7 @@ public class LottoController {
     private final Lotto lotto;
     private final LottoGenerator lottoGenerator;
     private final LottoMatcher lottoMatcher;
-    private int money;
+    private Money money;
     private LottoTickets purchasedTickets;
     private WinnerLotto winnerLotto;
 
@@ -31,7 +32,7 @@ public class LottoController {
 
     public void start() {
         money = inputView.getMoneyToBuyLotto();
-        generatePlayersLotto(LottoTickets.countTicketNumberByMoney(money));
+        generatePlayersLotto(LottoTickets.countTicketNumberByMoney(money.getMoney()));
         OutputView.printAllLotto(purchasedTickets);
         generateWinnerLotto();
         lottoMatcher.checkAllTickets(purchasedTickets, winnerLotto);
@@ -56,6 +57,6 @@ public class LottoController {
         OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
         int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
         OutputView
-            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
+            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money.getMoney()));
     }
 }
