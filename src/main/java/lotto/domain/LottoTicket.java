@@ -38,7 +38,7 @@ public class LottoTicket {
     private List<LottoNumber> convertLottoNumbers(final String[] winningTicketNumbers){
         return Arrays
                 .stream(winningTicketNumbers)
-                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
+                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber.trim())))
                 .collect(Collectors.toList());
     }
 }

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public interface NumberPicker {
-    List<LottoNumber> pick();
+    LottoTicket pick();
 }
