@@ -17,6 +17,11 @@ public class LottoTickets implements Tickets{
     }
 
     @Override
+    public String getPurchaseInformation() {
+        return purchase.toString();
+    }
+
+    @Override
     public int getPurchaseAmount() {
         return purchase.getAmount();
     }
