@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.Scanner;
 import lotto.Constant;
 
-public class InputHandler {
+public class RequestView {
 
     private final Scanner sc = new Scanner(System.in);
 
