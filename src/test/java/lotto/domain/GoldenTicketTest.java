@@ -15,7 +15,7 @@ class GoldenTicketTest {
     void containsBonusBallTest() {
         // given
         LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(45);
+        LottoNumber bonusNumber = LottoNumber.of(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
 
@@ -30,7 +30,7 @@ class GoldenTicketTest {
     @Test
     void getMatchedNumbersCountTest() {
         LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(45);
+        LottoNumber bonusNumber = LottoNumber.of(45);
         GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
 
@@ -43,23 +43,23 @@ class GoldenTicketTest {
 
     private List<LottoNumber> createPickedWinningNumbers() {
         return Arrays.asList(
-                new LottoNumber(8),
-                new LottoNumber(21),
-                new LottoNumber(23),
-                new LottoNumber(41),
-                new LottoNumber(42),
-                new LottoNumber(43)
+                LottoNumber.of(8),
+                LottoNumber.of(21),
+                LottoNumber.of(23),
+                LottoNumber.of(41),
+                LottoNumber.of(42),
+                LottoNumber.of(43)
         );
     }
 
     private List<LottoNumber> createPickedSecondNumbers() {
         return Arrays.asList(
-                new LottoNumber(8),
-                new LottoNumber(21),
-                new LottoNumber(23),
-                new LottoNumber(41),
-                new LottoNumber(42),
-                new LottoNumber(45)
+                LottoNumber.of(8),
+                LottoNumber.of(21),
+                LottoNumber.of(23),
+                LottoNumber.of(41),
+                LottoNumber.of(42),
+                LottoNumber.of(45)
         );
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TicketOfficeTest {
+class TicketOfficeTest {
 
     @DisplayName("자동 구입전략으로 로또 티켓을 구입")
     @Test

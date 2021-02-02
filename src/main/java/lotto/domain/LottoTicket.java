@@ -9,6 +9,7 @@ public class LottoTicket {
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
+        // TODO: validateDuplicateLottoNumbers 추가
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -26,11 +27,6 @@ public class LottoTicket {
         return (int) otherLottoTicket.lottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
-    }
-
-    @Override
-    public String toString() {
-        return this.lottoNumbers.toString();
     }
 
     @Override

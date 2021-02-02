@@ -51,32 +51,32 @@ class PurchaseAmountTest {
     private List<LottoTicket> createLottoTickets() {
         LottoTicket lottoTicket0 = new LottoTicket(
                 Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)
                 )
         );
         LottoTicket lottoTicket1 = new LottoTicket(
                 Arrays.asList(
-                        new LottoNumber(7),
-                        new LottoNumber(8),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(2)
+                        LottoNumber.of(7),
+                        LottoNumber.of(8),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(2)
                 )
         );
         LottoTicket lottoTicket2 = new LottoTicket(
                 Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(3),
-                        new LottoNumber(5),
-                        new LottoNumber(7),
-                        new LottoNumber(9),
-                        new LottoNumber(11)
+                        LottoNumber.of(1),
+                        LottoNumber.of(3),
+                        LottoNumber.of(5),
+                        LottoNumber.of(7),
+                        LottoNumber.of(9),
+                        LottoNumber.of(11)
                 )
         );
         return Arrays.asList(

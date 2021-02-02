@@ -14,7 +14,7 @@ public class LottoNumbersPicker {
         Random random = new Random();
         while (lottoNumbers.size() < MAX_BOUNDARY_AMOUNT) {
             int number = random.nextInt(MAX_BOUNDARY_NUMBER) + 1;
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
         List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
         lottoNumberList.sort(Comparator.comparingInt(LottoNumber::getNumber));

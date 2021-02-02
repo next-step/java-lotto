@@ -1,15 +1,21 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.stream.IntStream;
 
-// TODO: 1부터 45까지 총 45개의 인스턴스만 만들어지고 계속 재사용되도록
 public class LottoNumber {
-    private static final int SMALLEST = 1;
-    private static final int LARGEST = 45;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
+    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAX_VALUE + 1];
+
+    static {
+        IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
+                .forEach(i -> LOTTO_NUMBERS[i] = new LottoNumber(i));
+    }
 
     private final int number;
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         validate(number);
         this.number = number;
     }
@@ -17,15 +23,21 @@ public class LottoNumber {
     public static LottoNumber of(final String numberString) {
         int number = Integer.parseInt(numberString);
         validate(number);
-        return new LottoNumber(number);
+        return LOTTO_NUMBERS[number];
+    }
+
+    public static LottoNumber of(final int number) {
+        validate(number);
+        return LOTTO_NUMBERS[number];
     }
 
     private static void validate(int number) {
-        if (number < SMALLEST || number > LARGEST) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 수만 가능합니다.");
         }
     }
 
+    // TODO: getter 없애기
     public int getNumber() {
         return number;
     }
