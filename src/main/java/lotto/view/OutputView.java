@@ -7,7 +7,8 @@ import lotto.utils.StatisticsExporter;
 
 public class OutputView {
     public void printLottoTickets(final LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getPurchaseCount() + "개를 구매했습니다.");
+        System.out.println();
+        System.out.println(lottoTickets.getPurchaseInformation());
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket);
         }
