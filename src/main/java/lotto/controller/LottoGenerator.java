@@ -14,7 +14,7 @@ public class LottoGenerator {
     private static final int VALUE_RIHGT_BOUND = 46;
 
     private static final int COUNT_LEFT_BOUND = 0;
-    private static final int COUNT_RIGHT_BOUND = 5;
+    private static final int COUNT_RIGHT_BOUND = 6;
 
     private static final int BONUS_IDX = 6;
 
@@ -31,7 +31,7 @@ public class LottoGenerator {
         Collections.shuffle(candidateNumbers);
 
         List<LottoNumber> selectedNumbers = candidateNumbers.subList(
-                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
+                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND
         );
         Collections.sort(selectedNumbers);
 
@@ -50,7 +50,7 @@ public class LottoGenerator {
         Collections.shuffle(candidateNumbersBuyer, new Random(j));
 
         List<LottoNumber> selectedNumbers = candidateNumbersBuyer.subList(
-                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND + 1
+                COUNT_LEFT_BOUND, COUNT_RIGHT_BOUND
         );
         Collections.sort(selectedNumbers);
 

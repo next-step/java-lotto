@@ -66,7 +66,7 @@ public class LottoApplication {
     private static void result () {
         // return result to output view
         List<Count> res = result.getResult();
-        Double resRevenue = result.CalculateWinningRevenue();
+        Double resRevenue = result.calculateWinningRevenue();
         // 로또 결과 메시지
         OutputView.printResult(res);
         // 통계 출력 메시지

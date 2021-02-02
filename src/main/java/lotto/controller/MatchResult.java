@@ -75,12 +75,12 @@ public class MatchResult {
         return prizeCount;
     }
 
-    public double CalculateWinningRevenue() {
+    public double calculateWinningRevenue() {
         int rewards = 0;
         for (int i = 0; i < KINDS_OF_PRIZE; i++) {
             rewards += prizeCount.get(i).getCount() * PRIZE_REWARDS.get(i).getMoney();
         }
-        Revenue temp = new Revenue(rewards);
-        return temp.divide((tryCount.getCount() * LOTTO_PRICE.getMoney()));
+        Revenue revenue = new Revenue(rewards);
+        return revenue.divide((tryCount.getCount() * LOTTO_PRICE.getMoney()));
     }
 }

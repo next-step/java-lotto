@@ -38,14 +38,7 @@ public class OutputView {
 
     // 로또 한 장의 정보 출력
     private static void printOneTicketNumbers(List<Integer> ticketNumbers) {
-        StringBuilder ticketString = new StringBuilder("[");
-        for (Integer ticketNumber : ticketNumbers) {
-            ticketString.append(Integer.toString(ticketNumber));
-            ticketString.append(",");
-        }
-        ticketString.deleteCharAt(ticketString.lastIndexOf(","));
-        ticketString.append("]");
-        System.out.println(ticketString);
+        System.out.println(ticketNumbers.toString());
     }
 
     // 로또 당첨 번호 메시지지
@@ -55,14 +48,8 @@ public class OutputView {
 
     // 로또 당첨 번호 출력
     public static void printLottoNumbers(LottoTicket lotto) {
-        StringBuilder lottoString = new StringBuilder();
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        for (Integer lottoNumber : lottoNumbers) {
-            lottoString.append(Integer.toString(lottoNumber));
-            lottoString.append(",");
-        }
-        lottoString.deleteCharAt(lottoString.lastIndexOf(","));
-        System.out.println(lottoString);
+        System.out.println(lottoNumbers.toString());
     }
 
     // 로또 보너스 번호 메시
@@ -85,9 +72,9 @@ public class OutputView {
     public static void printOnce(List<Count> result, int i) {
         if (i == 3) {
             System.out.printf("%d개 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
-        } else {
-            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
+            return;
         }
+        System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
     }
 
     public static void printRevenue(Double resRevenue) {

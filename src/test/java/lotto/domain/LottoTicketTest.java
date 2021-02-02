@@ -61,7 +61,7 @@ class LottoTicketTest {
 
     @DisplayName("특정 번호를 포함하고 있지 않은지를 잘 체크하는지 확인")
     @Test
-    void NotIncludeBounsNumber() {
+    void notIncludeBounsNumber() {
         LottoTicket ticket = new LottoTicket(
             new ArrayList<LottoNumber>() {{
                 add(new LottoNumber(1));

@@ -15,6 +15,6 @@ class MatchResultTest {
     void calculateWinningRevenue() {
         MatchResult result = new MatchResult(new Count(5),
                 Arrays.asList(new Count(2), new Count(0), new Count(0), new Count(0), new Count(0)));
-        assertThat(result.CalculateWinningRevenue()).isEqualTo(2.0);
+        assertThat(result.calculateWinningRevenue()).isEqualTo(2.0);
     }
 }

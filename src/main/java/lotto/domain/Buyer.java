@@ -16,8 +16,8 @@ public class Buyer {
 
     public List<LottoTicket> buyLotto(Money input) {
         List<LottoTicket> lottos = new ArrayList<>();
-        Count lottoCnt = matchPriceAndPayment(input);
-        for (int i = 0; i < lottoCnt.getCount(); i++) {
+        Count lottoCount = matchPriceAndPayment(input);
+        for (int i = 0; i < lottoCount.getCount(); i++) {
             lottos.add(LottoGenerator.generateLotto(i));
         }
         return lottos;
