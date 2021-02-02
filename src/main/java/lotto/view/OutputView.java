@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.resources.StringResources;
 import lotto.utils.StatisticsExporter;
@@ -9,9 +8,7 @@ public class OutputView {
     public void printLottoTickets(final LottoTickets lottoTickets) {
         System.out.println();
         System.out.println(lottoTickets.getPurchaseInformation());
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket);
-        }
+        lottoTickets.getLottoTickets().forEach(System.out::println);
     }
 
     public void printStatistics(final StatisticsExporter statisticsExporter) {
