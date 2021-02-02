@@ -3,7 +3,9 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.util.NumberUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,24 +17,36 @@ public class RevenueTest {
     @ParameterizedTest
     @MethodSource("provideCheckTheNumberOfMatchingLottoTest")
     public void checkTheNumberOfMatchingLotto(Ticket lottoNumbers,
-        WinningNumber winningNumbers, Enum<Revenue> expected) {
+        WinningInfo winningNumbers, Enum<Revenue> expected) {
         assertEquals(expected,
             Revenue.checkTheNumberOfMatchingLotto(lottoNumbers, winningNumbers));
     }
 
     private static Stream<Arguments> provideCheckTheNumberOfMatchingLottoTest() {
         return Stream.of(
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), 8),
-                Revenue.SIX_MATCHES),
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7)), 6),
-                Revenue.FIVE_AND_BONUS_MATCHES),
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7)), 9),
-                Revenue.FIVE_MATCHES),
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 45, 44)), 9),
-                Revenue.FOUR_MATCHES),
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 33, 22, 11)), 44),
-                Revenue.THREE_MATCHES),
-            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)), new WinningNumber(new Ticket(Arrays.asList(11, 22, 33, 44, 45, 37)), 10),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(
+                    new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toList()))), new LottoNumber(8)),
+                Revenue.SIX),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7).stream().map(LottoNumber::new).collect(
+                Collectors.toList()))), new LottoNumber(6)),
+                Revenue.FIVE_AND_BONUS),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7).stream().map(LottoNumber::new).collect(
+                Collectors.toList()))), new LottoNumber(9)),
+                Revenue.FIVE),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 4, 45, 44).stream().map(LottoNumber::new).collect(
+                Collectors.toList()))), new LottoNumber(9)),
+                Revenue.FOUR),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(new Ticket(Arrays.asList(1, 2, 3, 33, 22, 11).stream().map(LottoNumber::new).collect(
+                Collectors.toList()))), new LottoNumber(44)),
+                Revenue.THREE),
+            Arguments.of(new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(
+                Collectors.toList())), new WinningInfo(new WinningNumber(new Ticket(Arrays.asList(11, 22, 33, 44, 45, 37).stream().map(LottoNumber::new).collect(
+                Collectors.toList()))), new LottoNumber(10)),
                 Revenue.NOTHING)
         );
     }
