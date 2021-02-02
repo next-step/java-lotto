@@ -20,7 +20,6 @@ public class StringCalculator implements Calculator {
         String[] numbers = this.expression.split(delimiter.getDelimiters());
         int result = 0;
         for (String number : numbers) {
-            System.out.println(number);
             result += Integer.parseInt(number);
         }
 
