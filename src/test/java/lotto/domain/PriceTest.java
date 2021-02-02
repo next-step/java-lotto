@@ -3,6 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,6 +55,25 @@ public class PriceTest {
         return Stream.of(
             Arguments.of(24000, 24),
             Arguments.of(1000, 1)
+        );
+    }
+
+    @DisplayName("총 티켓 당첨금 테스트")
+    @ParameterizedTest
+    @MethodSource("provideCalculateTotalPrizeTest")
+    public void calculateTotalPrizeTest(Map<Revenue, Integer> revenue, int expected) {
+        Price price = new Price();
+        int totalRevenue = price.calculateTotalPrize(revenue);
+        assertEquals(expected, totalRevenue);
+    }
+
+    private static Stream<Arguments> provideCalculateTotalPrizeTest() {
+        Map<Revenue, Integer> revenueMap = new HashMap<>();
+        revenueMap.put(Revenue.NOTHING, 1);
+        revenueMap.put(Revenue.THREE, 1);
+        revenueMap.put(Revenue.FIVE_AND_BONUS, 2);
+        return Stream.of(
+            Arguments.of(revenueMap, 60005000)
         );
     }
 }

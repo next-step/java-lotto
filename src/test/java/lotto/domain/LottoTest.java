@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.util.NumberUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -64,25 +63,6 @@ public class LottoTest {
                     new Ticket(Stream.of(41, 42, 43, 4, 5, 38).map(LottoNumber::new).collect(
                         Collectors.toList())))
                 ), revenueMap2)
-        );
-    }
-
-    @DisplayName("총 티켓 당첨금 테스트")
-    @ParameterizedTest
-    @MethodSource("provideCalculateTotalPrizeTest")
-    public void calculateTotalPrizeTest(Map<Revenue, Integer> revenue, int expected) {
-        lotto = new Lotto();
-        int totalRevenue = lotto.calculateTotalPrize(revenue);
-        assertEquals(expected, totalRevenue);
-    }
-
-    private static Stream<Arguments> provideCalculateTotalPrizeTest() {
-        Map<Revenue, Integer> revenueMap = new HashMap<>();
-        revenueMap.put(Revenue.NOTHING, 1);
-        revenueMap.put(Revenue.THREE, 1);
-        revenueMap.put(Revenue.FIVE_AND_BONUS, 2);
-        return Stream.of(
-            Arguments.of(revenueMap, 60005000)
         );
     }
 
