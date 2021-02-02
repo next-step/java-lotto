@@ -11,13 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MatchResult {
-    private static final List<Money> PRIZE_REWARDS =
-            Arrays.asList(new Money(5000),
-                        new Money(50_000),
-                        new Money(1_500_000),
-                        new Money(30_000_000),
-                        new Money(2_000_000_000));
-
     private static final int MIN_MATCH_BOUND = 3;
     private static final int BONUS_REWARD_IDX = 3;
     private static final int MAX_MATCH_IDX = 4;
@@ -32,6 +25,7 @@ public class MatchResult {
 
     public MatchResult(Count tryCount) {
         this.tryCount = tryCount;
+        // prizeCount를 일급 컬렉션화?
         this.prizeCount = new ArrayList<>(
                 Arrays.asList(new Count(0),
                         new Count(0),
@@ -78,9 +72,17 @@ public class MatchResult {
     public double calculateWinningRevenue() {
         int rewards = 0;
         for (int i = 0; i < KINDS_OF_PRIZE; i++) {
-            rewards += prizeCount.get(i).getCount() * PRIZE_REWARDS.get(i).getMoney();
+            rewards += calculateWinningRevenueOnce(i);
         }
         Revenue revenue = new Revenue(rewards);
         return revenue.divide((tryCount.getCount() * LOTTO_PRICE.getMoney()));
+    }
+
+    private int calculateWinningRevenueOnce(int i) {
+        if (i == 3) {
+            return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), true).getPrize().getMoney();
+        }
+        return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), false).getPrize().getMoney();
+
     }
 }

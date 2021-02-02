@@ -1,21 +1,14 @@
 package lotto.view;
 
+import lotto.controller.MatchLookUpTable;
+import lotto.controller.Prize;
 import lotto.wrapper.Count;
-import lotto.wrapper.InputString;
-import lotto.wrapper.Money;
 import lotto.domain.LottoTicket;
-import lotto.wrapper.OutputString;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
-    private static final List<Money> PRIZE_REWARDS =
-            Arrays.asList(new Money(5000),
-                    new Money(50_000),
-                    new Money(1_500_000),
-                    new Money(30_000_000),
-                    new Money(2_000_000_000));
+    private static final int MIN_MATCH_BOUND = 3;
 
     // 구매 메시지
     public static void printBuy() {
@@ -71,10 +64,10 @@ public class OutputView {
 
     public static void printOnce(List<Count> result, int i) {
         if (i == 3) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
+            System.out.printf("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), true).getPrize().getMoney(), result.get(i).getCount());
             return;
         }
-        System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + 3, PRIZE_REWARDS.get(i).getMoney(), result.get(i).getCount());
+        System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), false).getPrize().getMoney(), result.get(i).getCount());
     }
 
     public static void printRevenue(Double resRevenue) {
