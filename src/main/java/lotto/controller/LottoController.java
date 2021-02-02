@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class LottoController {
     private final LottoService lottoService = new LottoService();
-    
-    public void buyLottoProcess () {
+
+    public void buyLottoProcess() {
         int price = InputView.inputPrice();
         int numberOfLotto = price / LottoTicket.PRICE;
 
@@ -25,7 +25,7 @@ public class LottoController {
         }
     }
 
-    public void pickLotteryNumber () {
+    public void pickLotteryNumber() {
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
@@ -33,7 +33,7 @@ public class LottoController {
         lottoService.recordLotteryNumber(lotteryNumber);
     }
 
-    public void showLottoResult () {
+    public void showLottoResult() {
         lottoService.calculatePrize();
         Map<Rank, Integer> lottoRankingStatus = lottoService.getLottoRankingStatus();
         double interestRate = lottoService.getInterestRate();
