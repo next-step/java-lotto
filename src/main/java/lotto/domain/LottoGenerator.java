@@ -9,7 +9,6 @@ public class LottoGenerator {
     public static final int LOWER_BOUND_LOTTO = 1;
     public static final int UPPER_BOUND_LOTTO = 46;
     public static final int LOTTO_CAPACITY = 6;
-
     private final List<LottoNumber> possibleLottoNumbers = new ArrayList<>();
 
     public LottoGenerator() {

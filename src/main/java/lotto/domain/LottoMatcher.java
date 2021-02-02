@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class LottoMatcher {
 
-    private final Map<Prize, Integer> prizeBoard = new EnumMap<>(Prize.class);
     private static final int BONUS_MATCH_CONDITION_COUNT = 5;
+    private final Map<Prize, Integer> prizeBoard = new EnumMap<>(Prize.class);
 
     public LottoMatcher() {
         Arrays.stream(Prize.values()).forEach(prize -> prizeBoard.put(prize, 0));
