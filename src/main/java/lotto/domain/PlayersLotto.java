@@ -27,5 +27,4 @@ public class PlayersLotto implements Lotto {
         Collections.sort(lottoNumberList);
         return lottoNumberList;
     }
-
 }

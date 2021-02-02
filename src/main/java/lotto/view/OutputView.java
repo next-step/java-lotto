@@ -29,7 +29,7 @@ public class OutputView {
             if (prize.getMatchedNumber() >= Prize.THREE.getMatchedNumber()) {
                 printPrizeCount(prize);
                 checkFiveWithBonusBallCase(prize);
-                printValueAndCount(prize,prizeBoard);
+                printValueAndCount(prize, prizeBoard);
             }
         });
     }
@@ -60,5 +60,4 @@ public class OutputView {
             System.out.print(", 보너스 볼 일치");
         }
     }
-
 }

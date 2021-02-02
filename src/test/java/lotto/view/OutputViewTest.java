@@ -1,17 +1,12 @@
 package lotto.view;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.LottoMatcher;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.PlayersLotto;
-import lotto.domain.Prize;
 import lotto.domain.WinnerLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

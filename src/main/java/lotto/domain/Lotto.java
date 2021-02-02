@@ -5,11 +5,12 @@ import java.util.List;
 import lotto.util.Validator;
 
 public interface Lotto {
+
     int LOTTO_NUMBER_SIZE = 6;
     String DELIMITER = "[ ,]+";
 
     default List<LottoNumber> getWinnerLottoWithSplitting(String winnerLottoInput) {
-        String [] inputs = winnerLottoInput.split(DELIMITER);
+        String[] inputs = winnerLottoInput.split(DELIMITER);
         List<LottoNumber> winnerLotto = new ArrayList<>();
         for (String input : inputs) {
             Validator.isInteger(input);

@@ -34,5 +34,4 @@ public enum Prize {
             ", cash=" + cash +
             '}';
     }
-
 }

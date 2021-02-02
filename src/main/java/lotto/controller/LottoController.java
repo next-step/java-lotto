@@ -41,7 +41,8 @@ public class LottoController {
     private void printLottoResult() {
         OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
         int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
-        OutputView.printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
+        OutputView
+            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
     }
 
     private void generateWinnerLotto() {

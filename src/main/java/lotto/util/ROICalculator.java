@@ -16,5 +16,4 @@ public class ROICalculator {
     public static double calculateReturnOnInvestment(int revenue, int investMoney) {
         return Math.floor((double) revenue / (double) investMoney * 100) / 100;
     }
-
 }

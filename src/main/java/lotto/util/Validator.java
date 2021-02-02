@@ -17,7 +17,7 @@ public class Validator {
     }
 
     public static void isNegative(String input) {
-        if(Integer.parseInt(input) < 1) {
+        if (Integer.parseInt(input) < 1) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
     }
@@ -33,6 +33,5 @@ public class Validator {
         if (lottoNumbersChecker.size() != Lotto.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
         }
-
     }
 }

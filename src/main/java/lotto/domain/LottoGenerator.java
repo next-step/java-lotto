@@ -29,12 +29,10 @@ public class LottoGenerator {
 
     public List<PlayersLotto> generateLottoTickets(int numberOfTicket) {
         List<PlayersLotto> playersLottoTickets = new ArrayList<>();
-
         for (int i = 0; i < numberOfTicket; i++) {
             PlayersLotto playersLotto = generateOneLotto();
             playersLottoTickets.add(playersLotto);
         }
         return playersLottoTickets;
     }
-
 }
