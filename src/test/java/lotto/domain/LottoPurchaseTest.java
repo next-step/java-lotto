@@ -19,7 +19,8 @@ public class LottoPurchaseTest {
         final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
         final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
         final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoCount lottoCount = new LottoCount(money);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         //when
         final int purchaseAmount = purchase.getAmount();
@@ -34,7 +35,8 @@ public class LottoPurchaseTest {
         final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
         final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
         final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoCount lottoCount = new LottoCount(money);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         //when
         final List<LottoTicket> lottoTickets = purchase.buy();
@@ -51,7 +53,8 @@ public class LottoPurchaseTest {
         final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
         final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker(inputDatas);
         final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoCount lottoCount = new LottoCount(money, 1);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         //when
         final String purchaseInformation = purchase.toString();

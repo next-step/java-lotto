@@ -14,15 +14,10 @@ public class LottoTicketsTest {
     @Test
     void getPurchaseAmountTest() {
         // given
-        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
-        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
-        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoTickets lottoTickets = makeLottoTickets();
 
-        LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
-
-        int purchaseAmount = lottoTickets.getPurchaseAmount();
+        final int purchaseAmount = lottoTickets.getPurchaseAmount();
 
         // then
         assertThat(purchaseAmount).isEqualTo(PURCHASE_LOTTO_AMOUNT);
@@ -32,15 +27,10 @@ public class LottoTicketsTest {
     @Test
     void getPurchaseCountTest() {
         // given
-        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
-        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
-        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoTickets lottoTickets = makeLottoTickets();
 
-        LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
-
-        int purchaseCount = lottoTickets.getPurchaseCount();
+        final int purchaseCount = lottoTickets.getPurchaseCount();
 
         // then
         assertThat(purchaseCount).isEqualTo(3);
@@ -50,17 +40,22 @@ public class LottoTicketsTest {
     @Test
     void getLottoTicketsTest() {
         // given
-        AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
-        ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
-        Money money = new Money(PURCHASE_LOTTO_AMOUNT);
-        Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, money);
+        final LottoTickets lottoTickets = makeLottoTickets();
 
-        LottoTickets lottoTickets = new LottoTickets(purchase);
         // when
-
-        List<LottoTicket> lottoTicket = lottoTickets.getLottoTickets();
+        final List<LottoTicket> lottoTicket = lottoTickets.getLottoTickets();
 
         // then
         assertThat(lottoTicket.size()).isEqualTo(3);
+    }
+
+    private LottoTickets makeLottoTickets(){
+        final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        final LottoCount lottoCount = new LottoCount(money);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
+
+        return new LottoTickets(purchase);
     }
 }
