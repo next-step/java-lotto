@@ -27,13 +27,13 @@ public class StringCalculator {
         return inputs;
     }
 
+    private String[] splitByDelimiter(String text) {
+        return text.split(",|:");
+    }
+
     private boolean checkCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         return m.find();
-    }
-
-    private String[] splitByDelimiter(String text) {
-        return text.split(",|:");
     }
 
     private String[] splitByCustomDelimiter(String text) {

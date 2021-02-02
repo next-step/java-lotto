@@ -38,11 +38,10 @@ public class LottoController {
         printLottoResult();
     }
 
-    private void printLottoResult() {
-        OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
-        int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
-        OutputView
-            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
+    private void generatePlayersLotto(int numberOfTicket) {
+        List<PlayersLotto> generatedPlayersLotto = lottoGenerator
+            .generateLottoTickets(numberOfTicket);
+        purchasedTickets = new LottoTickets(generatedPlayersLotto);
     }
 
     private void generateWinnerLotto() {
@@ -53,9 +52,10 @@ public class LottoController {
         winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
     }
 
-    private void generatePlayersLotto(int numberOfTicket) {
-        List<PlayersLotto> generatedPlayersLotto = lottoGenerator
-            .generateLottoTickets(numberOfTicket);
-        purchasedTickets = new LottoTickets(generatedPlayersLotto);
+    private void printLottoResult() {
+        OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
+        int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
+        OutputView
+            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
     }
 }
