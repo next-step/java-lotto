@@ -24,14 +24,13 @@ public class ResultView {
         }
     }
 
-    public static void printResult(Map<WinningType, Integer> matchResult, int money) {
+    public static void printResult(Map<WinningType, Integer> matchResult, int money, float profitRate) {
         System.out.println("");
         System.out.println(STATISTIC_HEADER_MESSAGE);
         for (WinningType winningType : WinningType.values()) {
             printEachResult(matchResult, winningType);
         }
 
-        float profitRate = LottoMachine.getProfitRate(matchResult, money);
         System.out.println(String.format(STATISTIC_REVENUE_MESSAGE, profitRate));
     }
 
