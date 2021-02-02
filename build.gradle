@@ -9,6 +9,9 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-text:1.8'
     testCompile('org.junit.jupiter:junit-jupiter:5.6.0')
     testCompile('org.assertj:assertj-core:3.15.0')
 }
