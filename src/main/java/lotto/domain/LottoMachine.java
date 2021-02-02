@@ -65,11 +65,9 @@ public class LottoMachine {
     }
 
     private void initialMatchResult() {
-        matchResult.put(WinningType.THREE, 0);
-        matchResult.put(WinningType.FOUR, 0);
-        matchResult.put(WinningType.FIVE, 0);
-        matchResult.put(WinningType.FIVE_BONUS, 0);
-        matchResult.put(WinningType.SIX, 0);
+        for ( WinningType winningType : WinningType.values()) {
+            matchResult.put(winningType, 0);
+        }
     }
 
     private void updateCount(WinningType winningType) {
