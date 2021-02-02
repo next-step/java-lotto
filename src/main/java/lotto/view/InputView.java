@@ -16,7 +16,7 @@ public class InputView {
         try {
             return new Money(scanner.nextInt());
         } catch (Exception exception) {
-            System.out.println(exception.getLocalizedMessage());
+            exception.printStackTrace();
             return getPurchaseAmount();
         }
     }
@@ -29,7 +29,7 @@ public class InputView {
         try {
             return new LottoCount(money, manualLottoCount);
         } catch (Exception exception) {
-            System.out.println(exception.getLocalizedMessage());
+            exception.printStackTrace();
             return getManualLottoCount(money);
         }
     }
@@ -46,7 +46,7 @@ public class InputView {
         try {
             return new ManualNumbersPicker(manualPickedNumberLines);
         } catch (Exception exception) {
-            System.out.println(exception.getLocalizedMessage());
+            exception.printStackTrace();
             return getManualPickedNumberLines(lottoCount);
         }
     }
@@ -61,7 +61,7 @@ public class InputView {
         try {
             return new LottoTicket(winningTicketNumbers);
         } catch (Exception exception){
-            System.out.println(exception.getLocalizedMessage());
+            exception.printStackTrace();
             return getWinningTicketNumbers();
         }
     }
@@ -73,7 +73,7 @@ public class InputView {
         try{
             return new LottoNumber(scanner.nextInt());
         } catch (Exception exception){
-            System.out.println(exception.getLocalizedMessage());
+            exception.printStackTrace();
             return getBonusNumber();
         }
     }
