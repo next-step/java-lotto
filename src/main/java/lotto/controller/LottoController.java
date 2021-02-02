@@ -3,90 +3,53 @@ package lotto.controller;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.Price;
 import lotto.domain.Revenue;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
+import lotto.domain.WinningInfo;
 import lotto.domain.WinningNumber;
 import lotto.util.NumberUtils;
-import lotto.util.ValidatorUtils;
-import lotto.view.InputHandler;
-import lotto.view.OutputHandler;
 
 public class LottoController {
 
-    private ValidatorUtils validatorUtils = new ValidatorUtils();
-    private OutputHandler outputHandler = new OutputHandler();
-    private InputHandler inputHandler = new InputHandler();
     private Price price;
-    private String money, winningNumberInput, bonusNumber;
+    private LottoNumber bonusNumber;
     private Map<Revenue, Integer> revenueCluster;
-    private List<Ticket> tickets;
+    private Tickets tickets;
     private Lotto lotto;
+    private WinningNumber winningNumber;
 
-    public void getPriceAndGenerateTickets() {
-        requestPriceOfTicketToBuy();
-        generateTickets();
+    public int createPriceOfTicketToBuy(String money) throws IllegalArgumentException {
+        price = new Price(money);
+        return price.calculateTicketCount();
     }
 
-    public void getWinningAndBonusNumber() {
-        requestWinningNumber();
-        requestBonusNumber();
+    public List<Ticket> generateTickets() {
+        tickets = new Tickets();
+        tickets.buyTickets(price.calculateTicketCount());
+        return tickets.getTickets();
     }
 
-    public void statisticsTicketAndTotalPrize() {
-        statisticsTicket();
-        calculateTotalPrize();
+    public void requestWinningNumber(String winningNumberInput) throws IllegalArgumentException {
+        winningNumber = new LottoMachine().generateWinningTicket(winningNumberInput);
     }
 
-    private void requestPriceOfTicketToBuy() {
-        try {
-            money = inputHandler.requestPriceFromUser();
-            validatorUtils.isPriceValidate(money);
-            price = new Price(Integer.parseInt(money));
-            outputHandler.printLottoPurchaseCount(price.calculateTickets());
-        } catch (IllegalArgumentException e) {
-            outputHandler.printErrorPurchasePrice();
-            requestPriceOfTicketToBuy();
-        }
+    public void requestBonusNumber(String bonus) throws IllegalArgumentException {
+        bonusNumber = new LottoNumber(NumberUtils.returnInteger(bonus));
     }
 
-    private void generateTickets() {
-        tickets = price.buyTickets();
-        outputHandler.printGeneratedTickets(tickets);
-    }
-
-    private void requestWinningNumber() {
-        try {
-            winningNumberInput = inputHandler.requestWinningNumber();
-            validatorUtils.validateWinningNumber(winningNumberInput);
-        } catch (IllegalArgumentException e) {
-            outputHandler.printErrorWinningNumber();
-            requestWinningNumber();
-        }
-    }
-
-    private void requestBonusNumber() {
-        try {
-            bonusNumber = inputHandler.requestBonusNumber();
-            validatorUtils.validateBonusNumber(bonusNumber);
-        } catch (IllegalArgumentException e) {
-            outputHandler.printErrorBonusBall();
-            requestBonusNumber();
-        }
-    }
-
-    private void statisticsTicket() {
-        WinningNumber winningNumber = new WinningNumber(
-            new Ticket(NumberUtils.convertStringToIntegerList(winningNumberInput)),
-            Integer.parseInt(bonusNumber));
-        lotto = new Lotto(winningNumber, tickets);
+    public Map<Revenue, Integer> statisticsTicket() {
+        WinningInfo winningInfo = new WinningInfo(winningNumber, bonusNumber);
+        lotto = new Lotto(winningInfo, tickets);
         revenueCluster = lotto.statisticsTicket();
-        outputHandler.printLottoStatics(revenueCluster);
+        return revenueCluster;
     }
 
-    private void calculateTotalPrize() {
-        int total = lotto.calculateTotalPrize(revenueCluster);
-        Double yield = NumberUtils.calculateYield(Integer.parseInt(money), total);
-        outputHandler.printTotalRevenue(yield);
+    public Double calculateTotalPrize(Integer money) {
+        int total = price.calculateTotalPrize(revenueCluster);
+        return NumberUtils.calculateYield(money, total);
     }
 }
