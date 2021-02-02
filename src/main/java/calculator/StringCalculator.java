@@ -8,7 +8,7 @@ public class StringCalculator {
     public static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     public static final String DEFAULT_DELIMITER = ",|:";
 
-    public int add(String text) {
+    public int add(final String text) {
         if (checkNotValidInput(text)) {
             return 0;
         }
@@ -21,30 +21,30 @@ public class StringCalculator {
         return sum(numbers);
     }
 
-    public void checkPositiveNumber(String[] numbers) {
+    public void checkPositiveNumber(final String[] numbers) {
         for (String number : numbers) {
             checkNotIntegerNumber(number);
             checkNotNegativeNumber(number);
         }
     }
 
-    private void checkNotIntegerNumber(String number) {
+    private void checkNotIntegerNumber(final String number) {
         if (number == null || number.length() == 0 || !number.chars().allMatch(Character::isDigit)) {
             throw new RuntimeException("숫자가 아닙니다.");
         }
     }
 
-    private void checkNotNegativeNumber(String number) {
+    private void checkNotNegativeNumber(final String number) {
         if (Integer.parseInt(number) < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
     }
 
-    private int[] StringToIntConverter(String[] numbers) {
+    private int[] StringToIntConverter(final String[] numbers) {
         return Stream.of(numbers).mapToInt(Integer::parseInt).toArray();
     }
 
-    private String[] splitText(String text) {
+    private String[] splitText(final String text) {
         Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -54,14 +54,14 @@ public class StringCalculator {
         return text.split(DEFAULT_DELIMITER);
     }
 
-    private Boolean checkNotValidInput(String text) {
+    private Boolean checkNotValidInput(final String text) {
         if (text == null || "".equals(text)) {
             return true;
         }
         return false;
     }
 
-    private int sum(int[] numbers) {
+    private int sum(final int[] numbers) {
         int result = 0;
         for (int number : numbers) {
             result += number;
