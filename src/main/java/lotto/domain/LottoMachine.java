@@ -18,6 +18,11 @@ public class LottoMachine {
         return money / LOTTO_TICKET_PRICE;
     }
 
+    public int getAutoLottoTicketNumber(int allLottoTicketNumber, int manualLottoTicketNumber) {
+        return allLottoTicketNumber - manualLottoTicketNumber;
+    }
+
+
     public Lotto createLotto(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
@@ -65,7 +70,7 @@ public class LottoMachine {
     }
 
     private void initialMatchResult() {
-        for ( WinningType winningType : WinningType.values()) {
+        for (WinningType winningType : WinningType.values()) {
             matchResult.put(winningType, 0);
         }
     }

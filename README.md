@@ -4,6 +4,8 @@
 
 * 사용자 입력
     * 로또 구입금액
+    * 수동으로 구매할 로또 수
+    * 수동으로 구매할 번호들
     * 당첨 번호
     * 보너스 볼
 * 로또 티켓 발급
@@ -15,17 +17,10 @@
 
 ## 구현
 
-- __LottoMain__
-  - LottoMachine 실행
-  - LottoNumbers 받음
-  - LottoCalculation
-
 - __LottoMachine__
   - 가격 받음 
   - 로또 갯수 계산
   - 갯수에 맞는 로또 번호 생성
-  
-- __LottoCalculation__
   - 로또 당첨 번호 확인
   - 보너스볼 번호 확인
   

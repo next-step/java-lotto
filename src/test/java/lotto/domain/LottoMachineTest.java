@@ -23,6 +23,12 @@ public class LottoMachineTest {
     }
 
     @Test
+    void getAutoLottoTicketNumberTest () {
+        Assertions.assertThat(lottoMachine.getAutoLottoTicketNumber(14, 3)).isEqualTo(11);
+        Assertions.assertThat(lottoMachine.getAutoLottoTicketNumber(14, 9)).isEqualTo(5);
+    }
+
+    @Test
     void createLottoTest() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Assertions.assertThat(lottoMachine.createLotto(lottoNumbers).getLottoNumbers()).isEqualTo(lottoNumbers);
