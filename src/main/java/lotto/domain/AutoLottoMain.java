@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMain {
+public class AutoLottoMain {
 
     public static void main(String[] args) {
         try {
@@ -13,14 +13,14 @@ public class LottoMain {
 
             LottoGenerator lottoGenerator = new LottoGenerator();
             // 무작위 로또를 생성해 로또티켓 객체에 생성자 주입
-            List<PlayersLotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTickets(numberOfTicket);
+            List<PlayersLotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTicketsAutomatically(numberOfTicket);
             LottoTickets purchasedTickets = new LottoTickets(generatedPlayersLottoNumbers);
             // 무작위 로또의 값을 출력
             OutputView.printAllLotto(purchasedTickets);
             // 지난주 로또 정답을 입력받음
             String winningLottoNumber = InputView.getLottoAnswer();
             // split 으로 정답 로또를 파싱해 리스트화
-            List<LottoNumber> winningLotto = WinnerLotto.getWinnerLottoWithSplitting(winningLottoNumber);
+            List<LottoNumber> winningLotto = WinnerLotto.getLottoWithSplitting(winningLottoNumber);
             // 보너스 번호를 입력
             LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
             // 정답로또를 생성
