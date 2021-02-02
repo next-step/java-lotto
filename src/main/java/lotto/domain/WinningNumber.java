@@ -1,20 +1,44 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class WinningNumber {
 
-    private final Ticket winningNumber;
-    private final Integer bonusNumber;
+    private Ticket winningNumber;
+    private static final int LOTTO_COUNT = 6;
 
-    public WinningNumber(Ticket winningNumber, Integer bonusNumber) {
+    public WinningNumber(Ticket winningNumber) throws IllegalArgumentException {
+        validateWinningNumber(winningNumber);
         this.winningNumber = winningNumber;
-        this.bonusNumber = bonusNumber;
     }
 
-    public long checkTicketAndWinning(Ticket ticket) {
-        return winningNumber.matchNumber(ticket);
+    public WinningNumber() {
     }
 
-    public boolean checkTicketAndBonus(Ticket ticket) {
-        return ticket.lottoNumberStream().anyMatch(ticketObject -> ticketObject.equals(bonusNumber));
+    public Ticket getWinningNumber() {
+        return winningNumber;
+    }
+
+    private void validateWinningNumber(Ticket winningNumber) throws IllegalArgumentException {
+        if (winningNumber.getLottoSize() != LOTTO_COUNT || !winningNumber.isNumberUnique()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningNumber that = (WinningNumber) o;
+        return Objects.equals(winningNumber, that.winningNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumber);
     }
 }

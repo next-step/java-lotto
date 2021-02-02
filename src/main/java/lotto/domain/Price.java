@@ -1,28 +1,68 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Price {
 
-    private int money;
+    private static final int ONE_LOTTO_PRICE = 1000;
     private static final int BASE_PRICE = 1000;
+    private int money;
+
+    public Price(String money) {
+        isPriceValidate(money);
+        this.money = Integer.parseInt(money);
+    }
+
+    public Price() {
+    }
 
     public Price(int money) {
         this.money = money;
     }
 
-    public int calculateTickets() {
+    public Price getPrice() {
+        return new Price(money);
+    }
+
+    public int calculateTicketCount() {
         return money / BASE_PRICE;
     }
 
-    public List<Ticket> buyTickets() {
-        List<Ticket> tickets = new ArrayList<>();
-        int ticketAmount = calculateTickets();
-        for (int i = 0; i < ticketAmount; i++) {
-            LottoMachine lottoMachine = new LottoMachine();
-            tickets.add(new Ticket(lottoMachine.generateTicket()));
+    private boolean isPriceValidate(String price) throws IllegalArgumentException {
+        Integer priceOrNull = Integer.parseInt(price);
+        if (priceOrNull != 0 && priceOrNull % ONE_LOTTO_PRICE == 0) {
+            return true;
         }
-        return tickets;
+        throw new IllegalArgumentException();
+    }
+
+    public int calculateTotalPrize(Map<Revenue, Integer> revenueMap) {
+        int totalRevenue = revenueMap.entrySet().stream()
+            .mapToInt(
+                entry -> entry.getKey()
+                    .totalRevenue(
+                        entry.getValue()
+                    )
+            )
+            .sum();
+        return totalRevenue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Price price = (Price) o;
+        return money == price.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
