@@ -2,6 +2,7 @@ package lotto.view;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     private static final String INPUT_MESSAGE_LOTTO_MONEY = "구입금액을 입력해 주세요.";
-    private static final String INPUT_MESSAGE_NUMBER_OF_MANUAL_LOTTO_TICKET = "구입금액을 입력해 주세요.";
+    private static final String INPUT_MESSAGE_NUMBER_OF_MANUAL_LOTTO_TICKET = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MESSAGE_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_MESSAGE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
@@ -27,13 +28,17 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getManualLottoNumbers() {
+    public static List<List<Integer>> getManualLottoNumbers(int numberOfManualLottoTicket) {
         System.out.println(INPUT_MESSAGE_MANUAL_LOTTO_NUMBER);
+
         scanner.nextLine();
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        for (int i=0; i<numberOfManualLottoTicket; i++) {
+            String manualLottoNumber = scanner.nextLine();
 
-        String manualLottoNumber = scanner.nextLine();
-
-        return getCommonLottoNumbers(manualLottoNumber);
+            manualLottos.add(getCommonLottoNumbers(manualLottoNumber));
+        }
+        return manualLottos;
     }
 
     public static List<Integer> getWinningNumbers() {

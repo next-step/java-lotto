@@ -27,11 +27,15 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
-    public List<Lotto> purchaseLottos(int money) {
+    public List<Lotto> purchaseLottos(int money, int numberOfManualLottoTicket, List<List<Integer>> manualLottoNumbers) {
         int lottoTicketNumber = getLottoTicketNumber(money);
+        int numberOfAutoLottoTicket = getAutoLottoTicketNumber(lottoTicketNumber, numberOfManualLottoTicket);
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoTicketNumber; i++) {
+        for ( List<Integer> manualLottoNumber : manualLottoNumbers) {
+            lottos.add(createLotto(manualLottoNumber));
+        }
+        for (int i = 0; i < numberOfAutoLottoTicket; i++) {
             lottos.add(createLotto(generateLottoNumber()));
         }
 
