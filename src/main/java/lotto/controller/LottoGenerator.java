@@ -3,10 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class LottoGenerator {
@@ -59,5 +56,18 @@ public class LottoGenerator {
 
     public static LottoNumber generateBonus() {
         return candidateNumbers.get(BONUS_IDX);
+    }
+
+    public static List<LottoTicket> rawToTicktes(List<String> lottosManualRaw) {
+        List<LottoTicket> lottoManualTickets = new ArrayList<>();
+        for(String raw : lottosManualRaw){
+            lottoManualTickets.add(rawToTicket(raw));
+        }
+        System.out.println(lottoManualTickets.size());
+        return lottoManualTickets;
+    }
+
+    private static LottoTicket rawToTicket(String raw) {
+        return new LottoTicket(raw);
     }
 }

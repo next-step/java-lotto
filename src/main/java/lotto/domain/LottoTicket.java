@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class LottoTicket {
@@ -21,6 +19,28 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
+    // for manual lotto ticket
+    public LottoTicket(String raw) {
+        List<String> raws = Arrays.asList(raw.split(","));
+        raws = raws.stream().map(r -> r.trim()).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        if (raws.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 6개만 입력해야 합니다.");
+        }
+        try{
+            rawToLottoNumbers(lottoNumbers, raws);
+        }catch(NumberFormatException nfe){
+            nfe.printStackTrace();
+            System.out.println("숫자, 공백, 쉼표(,)만 입력해 주세요.");
+        }
+        this.numbers = lottoNumbers;
+    }
+    private void rawToLottoNumbers (List<LottoNumber> lottoNumbers, List<String> raws) {
+        for(String r : raws){
+            int lottoNumber = Integer.parseInt(r);
+            lottoNumbers.add( new LottoNumber(lottoNumber) );
+        }
+    }
     public int countMatches(LottoTicket other) {
         Set<LottoNumber> foo = new HashSet<>(numbers);
         Set<LottoNumber> bar = new HashSet<>(other.numbers);

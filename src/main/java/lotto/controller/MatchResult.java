@@ -25,7 +25,6 @@ public class MatchResult {
 
     public MatchResult(Count tryCount) {
         this.tryCount = tryCount;
-        // prizeCount를 일급 컬렉션화?
         this.prizeCount = new ArrayList<>(
                 Arrays.asList(new Count(0),
                         new Count(0),
