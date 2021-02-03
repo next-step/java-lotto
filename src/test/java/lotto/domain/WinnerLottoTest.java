@@ -38,7 +38,7 @@ class WinnerLottoTest {
 
 
 
-    @DisplayName("bonusball cannot be same with lotto number")
+    @DisplayName("bonus ball cannot be same with lotto number")
     @Test
     void checkLottoContainsBonusball () {
 

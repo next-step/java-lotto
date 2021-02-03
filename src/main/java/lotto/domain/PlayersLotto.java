@@ -28,5 +28,8 @@ public class PlayersLotto extends Lotto {
         return lottoNumberList;
     }
 
+    public static PlayersLotto of (List<LottoNumber> numbers) {
+        return new PlayersLotto(numbers);
+    }
 
 }

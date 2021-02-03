@@ -21,24 +21,10 @@ class LottoMatcherTest {
     @DisplayName(value = "로또 티켓의 번호를 입력하면 일치 번호 개수를 출력한다.")
     @Test
     void getLottoTicketCount() {
-        List<LottoNumber> lottoNumber = new ArrayList<>();
-        lottoNumber.add(new LottoNumber(1));
-        lottoNumber.add(new LottoNumber(3));
-        lottoNumber.add(new LottoNumber(5));
-        lottoNumber.add(new LottoNumber(14));
-        lottoNumber.add(new LottoNumber(22));
-        lottoNumber.add(new LottoNumber(45));
-
-        List<LottoNumber> winnerNumbers = new ArrayList<>();
-        winnerNumbers.add(new LottoNumber(1));
-        winnerNumbers.add(new LottoNumber(2));
-        winnerNumbers.add(new LottoNumber(3));
-        winnerNumbers.add(new LottoNumber(4));
-        winnerNumbers.add(new LottoNumber(5));
-        winnerNumbers.add(new LottoNumber(6));
-
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
-        assertThat(LottoMatcher.getMatchedCount(lottoNumber, winnerLotto)).isEqualTo(3);
+        List<LottoNumber> lottoNumbers = LottoFactory.createListOfLottoNumber(new int[]{1,3,5,12,14,35});
+        List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(new int[]{1,2,3,4,5,6});
+        WinnerLotto winnerLotto = WinnerLotto.of(LottoNumber.of(7), winnerNumbers);
+        assertThat(LottoMatcher.getMatchedCount(lottoNumbers, winnerLotto)).isEqualTo(3);
     }
 
     @Test
@@ -57,36 +43,18 @@ class LottoMatcherTest {
     @DisplayName("로또 티켓에 대한 등수 매칭 검증. 3개와 6개가 적중한 로또티켓에 대해 테스트.")
     @Test
     void checkAllTickets() {
+        int [] firstLotto = {1,2,3,4,5,6};
+        int [] secondLotto = {1,2,3,9,10,11};
+        PlayersLotto playersLotto1 = PlayersLotto.of(LottoFactory.createListOfLottoNumber(firstLotto));
 
-        PlayersLotto playersLotto1 = new PlayersLotto(Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        ));
-        PlayersLotto playersLotto2 = new PlayersLotto(Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(9),
-            new LottoNumber(10),
-            new LottoNumber(11)
-        ));
+        PlayersLotto playersLotto2 = PlayersLotto.of(LottoFactory.createListOfLottoNumber(secondLotto));
         List<PlayersLotto> playersLottos = new ArrayList<>(Arrays.asList(
             playersLotto1,
             playersLotto2
         ));
-        LottoTickets lottoTickets = new LottoTickets(playersLottos);
-        List<LottoNumber> winnerNumbers = new ArrayList<>();
-        winnerNumbers.add(new LottoNumber(1));
-        winnerNumbers.add(new LottoNumber(2));
-        winnerNumbers.add(new LottoNumber(3));
-        winnerNumbers.add(new LottoNumber(4));
-        winnerNumbers.add(new LottoNumber(5));
-        winnerNumbers.add(new LottoNumber(6));
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
+        LottoTickets lottoTickets = LottoTickets.of(playersLottos);
+        List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(firstLotto);
+        WinnerLotto winnerLotto = WinnerLotto.of(LottoNumber.of(7), winnerNumbers);
         lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.THREE)).isEqualTo(1);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.SIX)).isEqualTo(1);
@@ -95,25 +63,13 @@ class LottoMatcherTest {
     @DisplayName("로또 티켓에 대한 등수 매칭 검증. 5개의 매칭과 보너스 볼을 적중한 로또티켓 테스트.")
     @Test
     void checkFiveWithBonusTicket() {
-        PlayersLotto playersLotto1 = new PlayersLotto(Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        ));
+        int [] playerLotto = {1,2,3,4,5,6};
+        int [] winningLotto = {1,2,3,4,5,7};
         List<PlayersLotto> playersLottos = new ArrayList<>(Arrays.asList(
-            playersLotto1
+                PlayersLotto.of(LottoFactory.createListOfLottoNumber(playerLotto))
         ));
-        LottoTickets lottoTickets = new LottoTickets(playersLottos);
-        List<LottoNumber> winnerNumbers = new ArrayList<>();
-        winnerNumbers.add(new LottoNumber(1));
-        winnerNumbers.add(new LottoNumber(2));
-        winnerNumbers.add(new LottoNumber(3));
-        winnerNumbers.add(new LottoNumber(4));
-        winnerNumbers.add(new LottoNumber(5));
-        winnerNumbers.add(new LottoNumber(7));
+        LottoTickets lottoTickets = LottoTickets.of(playersLottos);
+        List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(winningLotto);
         WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(6), winnerNumbers);
         lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.FIVE_WITH_BONUS)).isEqualTo(1);
