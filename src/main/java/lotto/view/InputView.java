@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.utils.InputValidator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

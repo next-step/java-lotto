@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.InputValidator;
+import lotto.utils.Validator;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,13 +17,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public LottoNumber(String number){
-        InputValidator.checkNumberValidation(number);
+        Validator.checkNumberValidation(number);
         this.number = Integer.parseInt(number);
         validate(this.number);
     }
 
     private void validate(int number){
-        InputValidator.checkLottoNumberValidation(number);
+        Validator.checkLottoNumberValidation(number);
     }
 
     public static List<LottoNumber> asList(List<Integer> normalNumbers) {

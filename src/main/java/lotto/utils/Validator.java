@@ -3,8 +3,8 @@ package lotto.utils;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
-public class InputValidator {
-    private InputValidator() {}
+public class Validator {
+    private Validator() {}
 
     public static void checkNumberValidation(String number) throws IllegalArgumentException {
         try {

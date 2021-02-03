@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.InputValidator;
+import lotto.utils.Validator;
 
 public class Money {
     private final int amount;
@@ -15,8 +15,8 @@ public class Money {
     }
 
     private void validate(String amount){
-        InputValidator.checkNumberValidation(amount);
-        InputValidator.checkBuyPriceValidation(Integer.parseInt(amount));
+        Validator.checkNumberValidation(amount);
+        Validator.checkBuyPriceValidation(Integer.parseInt(amount));
     }
 
     public int getAmount() {
