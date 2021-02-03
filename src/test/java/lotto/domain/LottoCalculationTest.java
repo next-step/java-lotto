@@ -31,6 +31,7 @@ public class LottoCalculationTest {
         matchResult.put(WinningType.FIVE_BONUS, 0);
         matchResult.put(WinningType.FOUR, 1);
         matchResult.put(WinningType.THREE, 0);
+        matchResult.put(WinningType.NONE, 0);
         WinningLotto winningLotto = WinningLotto.generate(winningNumbers, 7);
         Assertions.assertThat(LottoCalculation.calculateResult(winningLotto, lottos)).isEqualTo(matchResult);
     }
