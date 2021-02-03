@@ -40,5 +40,13 @@ public enum Prize {
                 '}';
     }
 
+    public static Prize getPrizeByMatchedNumber(final int matchedNumber) {
+        for(Prize prize : Prize.values()) {
+            if (matchedNumber == prize.getMatchedNumber()) {
+                return prize;
+            }
+        }
+        throw new IllegalArgumentException("일치 갯수가 범위 밖입니다.");
+    }
 
 }
