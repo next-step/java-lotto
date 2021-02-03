@@ -10,26 +10,20 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-
-    private static final String INPUT_MESSAGE_LOTTO_MONEY = "구입금액을 입력해 주세요.";
-    private static final String INPUT_MESSAGE_NUMBER_OF_MANUAL_LOTTO_TICKET = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String INPUT_MESSAGE_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String INPUT_MESSAGE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String INPUT_MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     public static final String REGEX = ", ";
 
     public static int getLottoMoney() {
-        System.out.println(INPUT_MESSAGE_LOTTO_MONEY);
+        System.out.println(Message.LOTTO_MONEY.message);
         return scanner.nextInt();
     }
 
     public static int getNumberOfManualLottoTicket() {
-        System.out.println(INPUT_MESSAGE_NUMBER_OF_MANUAL_LOTTO_TICKET);
+        System.out.println(Message.NUMBER_OF_MANUAL_LOTTO_TICKET.message);
         return scanner.nextInt();
     }
 
     public static List<List<Integer>> getManualLottoNumbers(int numberOfManualLottoTicket) {
-        System.out.println(INPUT_MESSAGE_MANUAL_LOTTO_NUMBER);
+        System.out.println(Message.MANUAL_LOTTO_NUMBER.message);
 
         scanner.nextLine();
         List<List<Integer>> manualLottos = new ArrayList<>();
@@ -41,13 +35,13 @@ public class InputView {
     }
 
     public static List<Integer> getWinningNumbers() {
-        System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
+        System.out.println(Message.WINNING_NUMBER.message);
         String winningLottoNumber = scanner.nextLine();
         return getCommonLottoNumbers(winningLottoNumber);
     }
 
     public static int getBonusBall() {
-        System.out.println(INPUT_MESSAGE_BONUS_BALL);
+        System.out.println(Message.BONUS_BALL.message);
         return scanner.nextInt();
     }
 
@@ -59,7 +53,7 @@ public class InputView {
 
     private static int toInt(String inputNumbers) {
         if (!StringUtils.isNumeric(inputNumbers)) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            throw new IllegalArgumentException(Message.NOT_INTEGER.message);
         }
         return Integer.parseInt(inputNumbers);
     }

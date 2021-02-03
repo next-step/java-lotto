@@ -1,28 +1,22 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
 import lotto.domain.WinningType;
 
 import java.util.List;
 import java.util.Map;
 
+
 public class ResultView {
-    private static final String PURCHASE_NUMBER_MESSAGE = "개를 구입했습니다.";
-    private static final String PURCHASE_LOTTOS_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
-    private static final String STATISTIC_HEADER_MESSAGE = "당첨 통계\n---------";
-    private static final String WINNER_COUNT_MESSAGE = "%d개 일치 (%d원)- %d개";
-    private static final String FIVE_BONUS_COUNT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
-    private static final String STATISTIC_REVENUE_MESSAGE = "총 수익률은 %.2f입니다.";
 
     public static void printPurchaseNumber(int number) {
-        System.out.println(number + PURCHASE_NUMBER_MESSAGE);
+        System.out.println(number + Message.PURCHASE_NUMBER.message);
     }
 
     public static void printGeneratedLottos(int numberOfManualLottoTicket,
                                             int numberOfAutoLottoTicket,
                                             List<Lotto> lottos) {
-        System.out.println(String.format(PURCHASE_LOTTOS_MESSAGE, numberOfManualLottoTicket, numberOfAutoLottoTicket));
+        System.out.println(String.format(Message.PURCHASE_LOTTOS.message, numberOfManualLottoTicket, numberOfAutoLottoTicket));
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().toString());
         }
@@ -30,12 +24,12 @@ public class ResultView {
 
     public static void printResult(Map<WinningType, Integer> matchResult, int money, float profitRate) {
         System.out.println("");
-        System.out.println(STATISTIC_HEADER_MESSAGE);
+        System.out.println(Message.STATISTIC_HEADER.message);
         for (WinningType winningType : WinningType.values()) {
             printEachResult(matchResult, winningType);
         }
 
-        System.out.println(String.format(STATISTIC_REVENUE_MESSAGE, profitRate));
+        System.out.println(String.format(Message.STATISTIC_REVENUE.message, profitRate));
     }
 
     private static void printEachResult(Map<WinningType, Integer> matchResult, WinningType winningType) {
@@ -43,11 +37,11 @@ public class ResultView {
             return;
         }
         if (winningType == WinningType.FIVE_BONUS) {
-            System.out.println(String.format(FIVE_BONUS_COUNT_MESSAGE,
+            System.out.println(String.format(Message.FIVE_BONUS_COUNT.message,
                     winningType.getValue(), winningType.getProfit().getValue(), matchResult.get(winningType)));
             return;
         }
-        System.out.println(String.format(WINNER_COUNT_MESSAGE,
+        System.out.println(String.format(Message.WINNER_COUNT.message,
                 winningType.getValue(), winningType.getProfit().getValue(), matchResult.get(winningType)));
     }
 }
