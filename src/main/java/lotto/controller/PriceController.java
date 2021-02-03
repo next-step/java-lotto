@@ -13,20 +13,19 @@ import lotto.view.ResultOutputView;
 
 public class PriceController {
 
+    private static TicketCount totalTicketCount, manualTicketCount;
+    private static Tickets manualTickets;
     private final DataView dataView = new DataView();
     private final ErrorView errorView;
     private final RequestView requestView;
     private final ResultOutputView resultOutputView = new ResultOutputView();
     private RevenueCluster revenueCluster;
+    private Price price;
 
     public PriceController(ErrorView errorView, RequestView requestView) {
         this.errorView = errorView;
         this.requestView = requestView;
     }
-
-    private static TicketCount totalTicketCount, manualTicketCount;
-    private static Tickets manualTickets;
-    private Price price;
 
     public Tickets getPriceAndGenerateTickets() {
         requestPriceOfTicketToBuy();

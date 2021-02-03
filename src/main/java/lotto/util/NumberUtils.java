@@ -1,7 +1,5 @@
 package lotto.util;
 
-import java.math.BigDecimal;
-
 public class NumberUtils {
 
     public static Integer returnInteger(String string) throws IllegalArgumentException {
@@ -11,7 +9,6 @@ public class NumberUtils {
             throw new IllegalArgumentException();
         }
     }
-
 
     public static int convertNullToNumber(Integer value) {
         if (value == null) {
