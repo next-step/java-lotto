@@ -12,13 +12,18 @@ import java.util.Map;
 
 public class LottoController {
     private final LottoService lottoService = new LottoService();
-    
+
     public void buyLottoProcess () {
         int price = InputView.inputPrice();
         int numberOfLotto = price / LottoTicket.PRICE;
 
-        lottoService.buyLottoTickets(numberOfLotto);
-        OutputView.printNumberOfLotto(numberOfLotto);
+        int numberOfManualLotto = InputView.inputNumberOfManualLottoTicket();
+        OutputView.printAskWinningNumberMessage();
+        lottoService.buyManualLottoTickets(numberOfManualLotto);
+
+        int numberOfAutomaticLotto = numberOfLotto - numberOfManualLotto;
+        lottoService.buyAutomaticLottoTickets(numberOfAutomaticLotto);
+        OutputView.printNumberOfLotto(numberOfManualLotto, numberOfAutomaticLotto);
         List<LottoTicket> lottoTickets = lottoService.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTickets) {
             OutputView.printLottoPickedNumber(lottoTicket);
