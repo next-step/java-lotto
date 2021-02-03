@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -56,5 +58,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of (final int number) {
         return new LottoNumber(number);
+    }
+
+    public static List<LottoNumber> getAsList (final int [] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int number: numbers) {
+            lottoNumbers.add(LottoNumber.of(number));
+        }
+        return lottoNumbers;
     }
 }

@@ -15,17 +15,11 @@ class WinnerLottoTest {
     WinnerLotto winnerLotto;
     List<LottoNumber> expectedLottoNumbers;
     LottoNumber lottoBonusNumber;
+    int [] lottoNumbers = {1,2,3,4,5,6};
 
     @BeforeEach
     void init() {
-        expectedLottoNumbers = new ArrayList<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+        expectedLottoNumbers = LottoFactory.createListOfLottoNumber(lottoNumbers);
         lottoBonusNumber = new LottoNumber(7);
         winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
     }
@@ -49,16 +43,9 @@ class WinnerLottoTest {
     void checkLottoContainsBonusball () {
 
         assertThatThrownBy(() -> {
-            LottoNumber bonusBall = new LottoNumber(1);
-            List<LottoNumber> lottoNumbers = new ArrayList<>(Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4),
-                    new LottoNumber(5),
-                    new LottoNumber(6)
-            ));
-            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, lottoNumbers);
+            LottoNumber bonusBall = LottoNumber.of(1);
+
+            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, LottoFactory.createListOfLottoNumber(lottoNumbers));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
