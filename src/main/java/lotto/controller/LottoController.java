@@ -5,6 +5,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LotteryNumber;
 import lotto.domain.Rank;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,8 +17,8 @@ public class LottoController {
     private final LottoService lottoService = new LottoService();
 
     public void buyLottoProcess() {
-        int price = InputView.inputPrice();
-        int numberOfLotto = price / LottoTicket.PRICE;
+        Money price = new Money(InputView.inputPrice());
+        int numberOfLotto = price.getAmount() / LottoTicket.PRICE;
 
         lottoService.buyLottoTickets(numberOfLotto);
         OutputView.printNumberOfLotto(numberOfLotto);

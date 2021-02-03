@@ -11,11 +11,10 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static String input;
 
-    public static int inputPrice() {
+    public static String inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         input = scanner.nextLine();
-        InputValidator.validateMoney(input);
-        return Integer.parseInt(input);
+        return input;
     }
 
     public static List<Integer> inputWinningNumbers() {
