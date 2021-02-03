@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void printNumberOfLotto(int numberOfLotto) {
-        System.out.println(numberOfLotto + "개를 구매했습니다.");
+    public static void printNumberOfLotto(int numberOfManualLotto, int numberOfAutomaticLotto) {
+        System.out.println("수동으로 " + numberOfManualLotto + "장, 자동으로 " + numberOfAutomaticLotto + "개를 구매했습니다.");
     }
 
     public static void printLottoPickedNumber(LottoTicket lottoTicket) {
@@ -24,5 +24,9 @@ public class OutputView {
         System.out.printf("5개 일치, 보너스 볼 일치 (%d원) - %d\n", Rank.SECOND.getReward(), lottoRankingStatus.get(Rank.SECOND));
         System.out.printf("6개 일치 (%d원) - %d\n", Rank.FIRST.getReward(), lottoRankingStatus.get(Rank.FIRST));
         System.out.printf("총 수익률은 %.1f 입니다.\n", interestRate);
+    }
+
+    public static void printAskWinningNumberMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
