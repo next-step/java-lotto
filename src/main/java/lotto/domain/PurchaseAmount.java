@@ -26,4 +26,9 @@ public class PurchaseAmount {
     public int getCount() {
         return count;
     }
+
+    public PurchaseAmount minus(final int ticketsCount) {
+        int deductedAmount = this.amount - (LOTTO_TICKET_PRICE * ticketsCount);
+        return new PurchaseAmount(deductedAmount);
+    }
 }

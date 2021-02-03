@@ -18,6 +18,7 @@ public class ConsoleOutputView implements OutputView {
     }
 
     public void printStatistics(final WinnerStatistics winnerStatistics) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         List<Rank> ranks = Arrays.asList(Rank.values());

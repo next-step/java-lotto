@@ -18,9 +18,8 @@ public class LottoController {
 
     public List<LottoTicket> purchaseLottoTickets() {
         PurchaseAmount amount = inputView.getPurchaseAmount();
-        // TODO: (2단계) `LottoTicketOffice`에 수동 구입 메시지를 전송하고, 발행된 티켓들을 받는다.
-
-        List<LottoTicket> lottoTickets = LottoTicketOffice.issue(new AutoPurchase(), amount);
+        PurchaseResult autoPurchaseResult = LottoTicketOffice.issue(new AutoPurchase(), amount);
+        List<LottoTicket> lottoTickets = autoPurchaseResult.getLottoTickets();
         outputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
