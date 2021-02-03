@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import org.apache.commons.lang3.StringUtils;
-import sun.rmi.server.InactiveGroupException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
