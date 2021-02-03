@@ -31,30 +31,26 @@ class LottoTicketTest {
     @DisplayName("티켓 내의 숫자가 6개가 아닌 경우 예외를 던지는지 확인")
     @Test
     void isNotProperNumberCnt() {
-        assertThrows(RuntimeException.class, () -> {
-            new LottoTicket(
-                new ArrayList<LottoNumber>() {{
-                    add(new LottoNumber(1));
-                }}
-            );
-        });
+        assertThrows(RuntimeException.class, () -> new LottoTicket(
+            new ArrayList<LottoNumber>() {{
+                add(new LottoNumber(1));
+            }}
+        ));
     }
 
     @DisplayName("티켓 내의 숫자중 중복이 있을경우 예외를 던지는지 확인")
     @Test
     void haveDuplicateNumber() {
-        assertThrows(RuntimeException.class, () -> {
-            new LottoTicket(
-                new ArrayList<LottoNumber>() {{
-                    add(new LottoNumber(1));
-                    add(new LottoNumber(2));
-                    add(new LottoNumber(3));
-                    add(new LottoNumber(4));
-                    add(new LottoNumber(5));
-                    add(new LottoNumber(5));
-                }}
-            );
-        });
+        assertThrows(RuntimeException.class, () -> new LottoTicket(
+            new ArrayList<LottoNumber>() {{
+                add(new LottoNumber(1));
+                add(new LottoNumber(2));
+                add(new LottoNumber(3));
+                add(new LottoNumber(4));
+                add(new LottoNumber(5));
+                add(new LottoNumber(5));
+            }}
+        ));
     }
 
     @DisplayName("두 티켓의 같은 숫자 개수를 잘 반환하는지 확인")

@@ -3,8 +3,9 @@ package lotto.domain;
 import lotto.dto.ScoreBoardData;
 import lotto.dto.ScoreData;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -13,10 +14,11 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoBuyerGenerator.BUY_TICKET_COST;
 
 public class LottoScoreBoard {
-    private Map<LottoScore, Integer> scoreBoard;
+    public static final int BIG_DECIMAL_SCALE = 2;
+    private final Map<LottoScore, Integer> scoreBoard;
 
     public LottoScoreBoard(List<LottoScore> scores) {
-        scoreBoard = new LinkedHashMap<>();
+        scoreBoard = new EnumMap<>(LottoScore.class);
 
         Arrays.stream(
             LottoScore.values()
@@ -24,7 +26,7 @@ public class LottoScoreBoard {
             score -> scoreBoard.put(score, 0)
         );
 
-        scores.stream().forEach(
+        scores.forEach(
             score -> scoreBoard.put(score, scoreBoard.get(score) + 1)
         );
     }
@@ -40,16 +42,24 @@ public class LottoScoreBoard {
         );
     }
 
-    private double calculateProfit() {
-        double profit = scoreBoard.entrySet().stream().mapToDouble(
-            board -> board.getKey().getReward() * board.getValue()
-        ).sum();
+    private BigDecimal calculateProfit() {
+        BigDecimal profit = BigDecimal.valueOf(
+            scoreBoard.entrySet().stream().mapToDouble(
+                board -> board.getKey().getReward() * board.getValue()
+            ).sum()
+        );
 
-        int cost = scoreBoard.entrySet().stream().mapToInt(
-            board -> board.getValue()
-        ).sum();
+        BigDecimal cost = BigDecimal.valueOf(
+            scoreBoard.values().stream().mapToInt(
+                count -> count
+            ).sum()
+        );
 
-        return profit / (cost * BUY_TICKET_COST);
+        return profit.divide(
+            BigDecimal.valueOf(BUY_TICKET_COST).multiply(cost),
+            BIG_DECIMAL_SCALE,
+            BigDecimal.ROUND_CEILING
+        );
     }
 
     @Override

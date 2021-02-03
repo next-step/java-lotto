@@ -17,11 +17,13 @@ class LottoGameTest {
                 LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 6"),
                 new LottoNumber(7)
             ),
-            new ArrayList<LottoTicket>() {{
-                add(LottoTicketGenerator.generateManualTicket("7, 8, 9, 10, 11, 12"));
-                add(LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 8"));
-                add(LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 7"));
-            }}
+            new LottoTicketBunch(
+                new ArrayList<LottoTicket>() {{
+                    add(LottoTicketGenerator.generateManualTicket("7, 8, 9, 10, 11, 12"));
+                    add(LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 8"));
+                    add(LottoTicketGenerator.generateManualTicket("1, 2, 3, 4, 5, 7"));
+                }}
+            )
         );
 
         assertEquals(

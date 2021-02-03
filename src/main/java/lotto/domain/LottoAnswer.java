@@ -3,12 +3,14 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoAnswer {
-    private LottoTicket answer;
-    private LottoNumber bonus;
+    private static final String BONUS_NUMBER_INCLUDE_ERROR_MSG = "보너스 번호는 정답 번호와 달라야 합니다.";
+
+    private final LottoTicket answer;
+    private final LottoNumber bonus;
 
     public LottoAnswer(LottoTicket answer, LottoNumber bonus) {
         if (answer.includeNumber(bonus)) {
-            throw new RuntimeException();
+            throw new RuntimeException(BONUS_NUMBER_INCLUDE_ERROR_MSG);
         }
 
         this.answer = answer;

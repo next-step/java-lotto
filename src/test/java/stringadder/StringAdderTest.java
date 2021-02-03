@@ -33,14 +33,6 @@ class StringAdderTest {
         assertThat(adder.add()).isEqualTo(3);
     }
 
-    @DisplayName("입력값이 null일 경우 0을 반환한다.")
-    @Test
-    void NullShouldReturnZero() {
-        StringAdder adder = new StringAdder(null);
-
-        assertThat(adder.add()).isEqualTo(0);
-    }
-
     @DisplayName("정수로 변환되지 않는 값이 배열에 있으면 exception을 던진다.")
     @Test
     void NotValidInputShouldThrowRuntimeException() {

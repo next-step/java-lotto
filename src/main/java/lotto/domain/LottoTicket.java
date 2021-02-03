@@ -10,12 +10,20 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int TICKET_LENGTH = 6;
+    private static final String TICKET_LENGTH_ERROR_MSG = String.format(
+        "로또 1장은 %d개 번호 여야 합니다.", TICKET_LENGTH
+    );
+    private static final String TICKET_DUPLICATE_NUMBER_MSG = "로또 번호는 서로 다른 수여야 합니다.";
 
-    private List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
-        if (!isProperNumberCnt(numbers) || hasDuplicateNumber(numbers)) {
-            throw new RuntimeException();
+        if (!isProperNumberCnt(numbers)) {
+            throw new RuntimeException(TICKET_LENGTH_ERROR_MSG);
+        }
+
+        if (hasDuplicateNumber(numbers)) {
+            throw new RuntimeException(TICKET_DUPLICATE_NUMBER_MSG);
         }
 
         this.numbers = numbers;
@@ -30,11 +38,11 @@ public class LottoTicket {
     }
 
     public int getMatchedCnt(LottoTicket other) {
-        return numbers.stream().filter(
-            other.numbers::contains
-        ).collect(
-            Collectors.toList()
-        ).size();
+        return (int) (
+            numbers.stream().filter(
+                other.numbers::contains
+            ).count()
+        );
     }
 
     public boolean includeNumber(LottoNumber number) {
@@ -44,7 +52,7 @@ public class LottoTicket {
     public TicketData getTicketData() {
         return new TicketData(
             numbers.stream().map(
-                number -> number.getNumberData()
+                LottoNumber::getNumberData
             ).collect(
                 Collectors.toList()
             )

@@ -33,14 +33,14 @@ public enum LottoScore {
         return reward;
     }
 
-    public static LottoScore calculateScore(int matchedCnt, boolean isBounsMatched) {
+    public static LottoScore calculateScore(int matchedCnt, boolean isBonusMatched) {
         LottoScore lottoScore = Arrays.stream(
             LottoScore.values()
         ).filter(
             score -> score.matchedCnt == matchedCnt
         ).findAny().orElse(NOTHING);
 
-        if (lottoScore == LottoScore.THIRD && isBounsMatched)
+        if (lottoScore == LottoScore.THIRD && isBonusMatched)
             return SECOND;
 
         return lottoScore;
