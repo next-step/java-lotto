@@ -19,7 +19,7 @@ public class LottoMachineTest {
 
     @Test
     void getLottoTicketNumberTest () {
-        Assertions.assertThat(lottoMachine.getLottoTicketNumber(14000)).isEqualTo(14);
+        Assertions.assertThat(lottoMachine.getLottoTicketNumber(new Money(14000))).isEqualTo(14);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LottoMachineTest {
     @Test
     void purchaseLottosTest() {
         //Given
-        int money = 14000;
+        Money money = new Money(14000);
         int numberOfManualLottoTicket = 3;
         List<List<Integer>> manualLottoNumbers = Arrays.asList(
                 Arrays.asList(8, 21, 23, 41, 42, 43),
@@ -101,6 +101,6 @@ public class LottoMachineTest {
         matchResultTarget.put(WinningType.FIVE, 1); // 1, 2, 3, 4, 5, 45
         matchResultTarget.put(WinningType.FIVE_BONUS, 1); // 1, 2, 3, 4, 5, 7
         matchResultTarget.put(WinningType.SIX, 1); // 1, 2, 3, 4, 5, 6
-        Assertions.assertThat(LottoMachine.getProfitRate(matchResultTarget, 5000)).isEqualTo(406311.0f);
+        Assertions.assertThat(LottoMachine.getProfitRate(matchResultTarget, new Money(5000))).isEqualTo(406311.0f);
     }
 }

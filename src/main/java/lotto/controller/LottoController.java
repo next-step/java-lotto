@@ -11,10 +11,10 @@ public class LottoController {
     LottoMachine lottoMachine = new LottoMachine();
     List<Lotto> lottos;
     WinningLotto winningLotto;
-    int money;
+    Money money;
 
     public void buyLotto() {
-        money = InputView.getLottoMoney(); // 구입금액을 입력해주세요
+        money = new Money(InputView.getLottoMoney()); // 구입금액을 입력해주세요
         int numberOfManualLottoTicket = InputView.getNumberOfManualLottoTicket(); // 수동으로 구매할 로또 수
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(numberOfManualLottoTicket);
 
@@ -37,6 +37,6 @@ public class LottoController {
     public void getLottoResult() {
         Map<WinningType, Integer> matchResult = lottoMachine.calculateResult(winningLotto, lottos); // 로또 결과 계산
         float profitRate = LottoMachine.getProfitRate(matchResult, money);
-        ResultView.printResult(matchResult, money, profitRate); // 로또 결과 출력
+        ResultView.printResult(matchResult, money.getValue(), profitRate); // 로또 결과 출력
     }
 }

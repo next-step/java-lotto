@@ -35,7 +35,6 @@ public class InputView {
         List<List<Integer>> manualLottos = new ArrayList<>();
         for (int i=0; i<numberOfManualLottoTicket; i++) {
             String manualLottoNumber = scanner.nextLine();
-
             manualLottos.add(getCommonLottoNumbers(manualLottoNumber));
         }
         return manualLottos;
@@ -43,10 +42,7 @@ public class InputView {
 
     public static List<Integer> getWinningNumbers() {
         System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
-        scanner.nextLine();
-
         String winningLottoNumber = scanner.nextLine();
-
         return getCommonLottoNumbers(winningLottoNumber);
     }
 

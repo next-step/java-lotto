@@ -44,10 +44,10 @@ public class ResultView {
         }
         if (winningType == WinningType.FIVE_BONUS) {
             System.out.println(String.format(FIVE_BONUS_COUNT_MESSAGE,
-                    winningType.getValue(), winningType.getProfit(), matchResult.get(winningType)));
+                    winningType.getValue(), winningType.getProfit().getValue(), matchResult.get(winningType)));
             return;
         }
         System.out.println(String.format(WINNER_COUNT_MESSAGE,
-                winningType.getValue(), winningType.getProfit(), matchResult.get(winningType)));
+                winningType.getValue(), winningType.getProfit().getValue(), matchResult.get(winningType)));
     }
 }

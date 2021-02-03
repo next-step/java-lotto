@@ -14,8 +14,8 @@ public class LottoMachine {
         initialMatchResult();
     }
 
-    public int getLottoTicketNumber(int money) {
-        return money / LOTTO_TICKET_PRICE;
+    public int getLottoTicketNumber(Money money) {
+        return money.getValue() / LOTTO_TICKET_PRICE;
     }
 
     public int getAutoLottoTicketNumber(int allLottoTicketNumber, int manualLottoTicketNumber) {
@@ -27,7 +27,7 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
-    public List<Lotto> purchaseLottos(int money, int numberOfManualLottoTicket, List<List<Integer>> manualLottoNumbers) {
+    public List<Lotto> purchaseLottos(Money money, int numberOfManualLottoTicket, List<List<Integer>> manualLottoNumbers) {
         int lottoTicketNumber = getLottoTicketNumber(money);
         int numberOfAutoLottoTicket = getAutoLottoTicketNumber(lottoTicketNumber, numberOfManualLottoTicket);
 
@@ -96,15 +96,15 @@ public class LottoMachine {
         return lotto.contains(bonusBall);
     }
 
-    public static float getProfitRate(Map<WinningType, Integer> result, int money) {
+    public static float getProfitRate(Map<WinningType, Integer> result, Money money) {
         long totalProfit = 0;
 
         for (WinningType winningType : result.keySet()) {
             Integer price = result.get(winningType);
-            totalProfit += (long) winningType.getProfit() * price;
+            totalProfit += (long) winningType.getProfit().getValue() * price;
         }
 
-        return (float) totalProfit / (float) money;
+        return (float) totalProfit / (float) money.getValue();
     }
 
     public Map<WinningType, Integer> getMatchResult() {
