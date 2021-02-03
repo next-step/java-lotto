@@ -10,7 +10,7 @@ public class ManualLottoMain {
 
     public static void main(String[] args) {
         try {
-            int money = InputView.getMoneyToBuyLotto();
+            Money money = Money.of(InputView.getMoneyToBuyLotto());
             int numberOfTicket = LottoTickets.countTicketNumberByMoney(money);
             int numberOfManualLotto = InputView.getNumberOfManualLotto();
 
@@ -37,7 +37,7 @@ public class ManualLottoMain {
             // 결과를 프린트
             OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
             // 수익을 계산
-            int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
+            Money revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
             OutputView.printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money));
 
 

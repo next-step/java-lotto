@@ -19,8 +19,8 @@ public class LottoTickets {
         return playersLottoTickets.size();
     }
 
-    public static int countTicketNumberByMoney(int money) {
-        return money / LOTTO_PRICE;
+    public static int countTicketNumberByMoney(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
 
     public static LottoTickets of (List<PlayersLotto> playersLottoTickets) {
