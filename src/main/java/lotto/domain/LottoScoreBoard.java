@@ -5,7 +5,7 @@ import lotto.dto.ScoreData;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class LottoScoreBoard {
     private final Map<LottoScore, Integer> scoreBoard;
 
     public LottoScoreBoard(List<LottoScore> scores) {
-        scoreBoard = new LinkedHashMap<>();
+        scoreBoard = new EnumMap<>(LottoScore.class);
 
         Arrays.stream(
             LottoScore.values()

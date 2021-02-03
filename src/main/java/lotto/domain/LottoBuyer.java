@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoBuyer {
-    private int manualTicketCnt;
-    private int autoTicketCnt;
+    private int shouldBuyManualTicket;
+    private int shouldBuyAutoticket;
 
     private LottoTicketBunch boughtManualTicketBunch;
     private LottoTicketBunch boughtAutoTicketBunch;
 
-    public LottoBuyer(int manualTicketCnt, int autoTicketCnt) {
-        this.manualTicketCnt = manualTicketCnt;
-        this.autoTicketCnt = autoTicketCnt;
+    public LottoBuyer(int shouldBuyManualTicket, int shouldBuyAutoticket) {
+        this.shouldBuyManualTicket = shouldBuyManualTicket;
+        this.shouldBuyAutoticket = shouldBuyAutoticket;
 
         boughtManualTicketBunch = new LottoTicketBunch();
         boughtAutoTicketBunch = new LottoTicketBunch();
@@ -25,23 +25,23 @@ public class LottoBuyer {
     public void buyManualTicketBunch(Supplier<String> manualNumbersSupplier) {
         boughtManualTicketBunch = boughtManualTicketBunch.merge(
             generateTicket(
-                manualTicketCnt,
+                shouldBuyManualTicket,
                 () -> LottoTicketGenerator.generateManualTicket(
                     manualNumbersSupplier.get()
                 )
             )
         );
-        manualTicketCnt = 0;
+        shouldBuyManualTicket = 0;
     }
 
     public void buyAutoTicketBunch() {
         boughtAutoTicketBunch = boughtAutoTicketBunch.merge(
             generateTicket(
-                autoTicketCnt,
+                shouldBuyAutoticket,
                 LottoTicketGenerator::generateRandomTicket
             )
         );
-        autoTicketCnt = 0;
+        shouldBuyAutoticket = 0;
     }
 
     private LottoTicketBunch generateTicket(int ticketCnt, Supplier<LottoTicket> ticketSupplier) {
@@ -75,11 +75,11 @@ public class LottoBuyer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoBuyer that = (LottoBuyer) o;
-        return autoTicketCnt == that.autoTicketCnt;
+        return shouldBuyAutoticket == that.shouldBuyAutoticket;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(autoTicketCnt);
+        return Objects.hash(shouldBuyAutoticket);
     }
 }

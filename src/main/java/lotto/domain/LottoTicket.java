@@ -38,9 +38,11 @@ public class LottoTicket {
     }
 
     public int getMatchedCnt(LottoTicket other) {
-        return (int) numbers.stream().filter(
-            other.numbers::contains
-        ).count();
+        return (int) (
+            numbers.stream().filter(
+                other.numbers::contains
+            ).count()
+        );
     }
 
     public boolean includeNumber(LottoNumber number) {
