@@ -13,7 +13,7 @@ public class LottoMachine {
     private final static int MAX_LOTTO = 46;
     private final static int FIRST_LOTTO_INDEX = 0;
     private final static int END_LOTTO_INDEX = 6;
-
+    private final static String COMMA = ", ";
     public LottoMachine() {
         lottoNumbers = IntStream
             .range(MIN_LOTTO, MAX_LOTTO)
@@ -31,10 +31,11 @@ public class LottoMachine {
         return new Ticket(lottoNumbers);
     }
 
-    public WinningNumber generateWinningTicket(String winningNumber) throws IllegalArgumentException {
-        return new WinningNumber(new Ticket(Arrays.stream(winningNumber.split(", "))
+    public Ticket generateManualTicket(String ticket) throws IllegalArgumentException {
+        return new Ticket(
+            Arrays.stream(ticket.split(COMMA))
             .map(Integer::parseInt)
             .map(LottoNumber::new)
-            .collect(Collectors.toList())));
+            .collect(Collectors.toList()));
     }
 }

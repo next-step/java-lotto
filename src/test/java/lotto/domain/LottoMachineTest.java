@@ -17,7 +17,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("provideValidateWinningNumberTest")
     public void validateWinningNumberTest(String winningNumber,WinningNumber expected) {
-        assertEquals(expected, lottoMachine.generateWinningTicket(winningNumber));
+        assertEquals(expected, new WinningNumber(lottoMachine.generateManualTicket(winningNumber)));
     }
 
     private static Stream<Arguments> provideValidateWinningNumberTest() {
@@ -36,7 +36,7 @@ public class LottoMachineTest {
     @MethodSource("provideValidateWinningNumberBadTest")
     public void validateWinningNumberBadTest(String winningNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> lottoMachine.generateWinningTicket(winningNumber));
+            .isThrownBy(() -> new WinningNumber(lottoMachine.generateManualTicket(winningNumber)));
     }
 
     private static Stream<Arguments> provideValidateWinningNumberBadTest() {
