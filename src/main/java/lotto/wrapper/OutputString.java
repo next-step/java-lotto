@@ -8,6 +8,6 @@ public class OutputString {
     }
 
     public void print() {
-        System.out.println(str);
+        System.out.print(str);
     }
 }

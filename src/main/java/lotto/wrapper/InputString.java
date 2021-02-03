@@ -6,6 +6,6 @@ public class InputString {
         this.str = str;
     }
     public void print(){
-        System.out.println(str);
+        System.out.print(str);
     }
 }
