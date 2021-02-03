@@ -1,10 +1,19 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.AutoPurchase;
+import lotto.domain.GoldenTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketOffice;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.PurchaseResult;
+import lotto.domain.WinnerStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -18,10 +27,12 @@ public class LottoController {
 
     public List<LottoTicket> purchaseLottoTickets() {
         PurchaseAmount amount = inputView.getPurchaseAmount();
-        PurchaseResult autoPurchaseResult = LottoTicketOffice.issue(new AutoPurchase(), amount);
-        List<LottoTicket> lottoTickets = autoPurchaseResult.getLottoTickets();
-        outputView.printLottoTickets(lottoTickets);
-        return lottoTickets;
+        PurchaseResult manualPurchaseResult = inputView.getManualPurchasedTickets(amount);
+        PurchaseResult autoPurchaseResult = LottoTicketOffice.issue(new AutoPurchase(), manualPurchaseResult.getChange());
+        outputView.printLottoTickets(manualPurchaseResult, autoPurchaseResult);
+        return Stream.concat(
+                manualPurchaseResult.getLottoTickets().stream(), autoPurchaseResult.getLottoTickets().stream()
+        ).collect(Collectors.toList());
     }
 
     public void draw(final List<LottoTicket> purchasedLottoTickets) {

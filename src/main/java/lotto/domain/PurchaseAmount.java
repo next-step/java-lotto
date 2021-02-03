@@ -6,6 +6,7 @@ public class PurchaseAmount {
 
     private static final int LOTTO_TICKET_PRICE = 1_000;
 
+    // TODO: 필드명 rename 고려
     private final int amount;
     private final int count;
 

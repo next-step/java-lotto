@@ -5,7 +5,7 @@ import java.util.List;
 public class PurchaseResult {
 
     private final List<LottoTicket> lottoTickets;
-    private final PurchaseAmount change;    // 잔돈
+    private final PurchaseAmount change;
 
     private PurchaseResult(final List<LottoTicket> lottoTickets, final PurchaseAmount purchaseAmount) {
         this.lottoTickets = lottoTickets;
@@ -18,5 +18,13 @@ public class PurchaseResult {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public PurchaseAmount getChange() {
+        return change;
+    }
+
+    public int getCount() {
+        return this.lottoTickets.size();
     }
 }

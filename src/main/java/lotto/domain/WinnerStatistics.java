@@ -2,11 +2,12 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinnerStatistics {
     private final GoldenTicket goldenTicket;
     private final List<LottoTicket> pickedLottoTickets;
-    private final EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
+    private final Map<Rank, Integer> results = new EnumMap<>(Rank.class);
 
     /**
      * @param goldenTicket       당첨 번호 (보너스 볼 포함)
@@ -39,7 +40,8 @@ public class WinnerStatistics {
 
     private long calculateTotalPrize() {
         long totalPrize = 0L;
-        for (final Rank rank : results.keySet()) {
+        for (final Map.Entry<Rank, Integer> rankEntry : results.entrySet()) {
+            Rank rank = rankEntry.getKey();
             int count = results.get(rank);
             totalPrize += rank.getTotalPrizeByCount(count);
         }
