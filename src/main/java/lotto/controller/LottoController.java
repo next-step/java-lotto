@@ -4,7 +4,7 @@ import lotto.domain.AutoPurchase;
 import lotto.domain.GoldenTicket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketOffice;
+import lotto.domain.LottoTicketMachine;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.PurchaseResult;
 import lotto.domain.WinnerStatistics;
@@ -28,7 +28,7 @@ public class LottoController {
     public List<LottoTicket> purchaseLottoTickets() {
         PurchaseAmount amount = inputView.getPurchaseAmount();
         PurchaseResult manualPurchaseResult = inputView.getManualPurchasedTickets(amount);
-        PurchaseResult autoPurchaseResult = LottoTicketOffice.issue(new AutoPurchase(), manualPurchaseResult.getChange());
+        PurchaseResult autoPurchaseResult = LottoTicketMachine.issue(new AutoPurchase(), manualPurchaseResult.getChange());
         outputView.printLottoTickets(manualPurchaseResult, autoPurchaseResult);
         return Stream.concat(
                 manualPurchaseResult.getLottoTickets().stream(), autoPurchaseResult.getLottoTickets().stream()

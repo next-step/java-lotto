@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketOfficeTest {
+class LottoTicketMachineTest {
 
     @DisplayName("자동 구입전략으로 로또 티켓을 구입")
     @Test
@@ -17,7 +17,7 @@ class LottoTicketOfficeTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
 
         // when
-        PurchaseResult purchaseResult = LottoTicketOffice.issue(new AutoPurchase(), purchaseAmount);
+        PurchaseResult purchaseResult = LottoTicketMachine.issue(new AutoPurchase(), purchaseAmount);
         List<LottoTicket> lottoTickets = purchaseResult.getLottoTickets();
 
         // then

@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoTicketOffice {
+public class LottoTicketMachine {
 
-    private LottoTicketOffice() {
+    private LottoTicketMachine() {
     }
 
     /**
