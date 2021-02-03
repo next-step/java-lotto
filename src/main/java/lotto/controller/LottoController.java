@@ -9,12 +9,14 @@ import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
     private final LottoService lottoService = new LottoService();
+    private Map<Rank, Integer> lottoRankingStatus;
 
     public void buyLottoProcess() {
         Money price = new Money(InputView.inputPrice());
@@ -40,9 +42,16 @@ public class LottoController {
     }
 
     public void showLottoResult() {
-        lottoService.calculatePrize();
-        Map<Rank, Integer> lottoRankingStatus = lottoService.getLottoRankingStatus();
-        double interestRate = lottoService.getInterestRate();
+        initLottoResults();
+        int profit = lottoService.calculateResult(lottoRankingStatus);
+        double interestRate = lottoService.getInterestRate(profit);
         OutputView.printLottoServiceResult(lottoRankingStatus, interestRate);
+    }
+
+    private void initLottoResults() {
+        lottoRankingStatus = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            lottoRankingStatus.put(rank, 0);
+        }
     }
 }

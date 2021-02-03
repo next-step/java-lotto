@@ -8,8 +8,6 @@ import java.util.Map;
 public class LottoService {
     private final List<LottoTicket> lottoTickets;
     private LotteryNumber lotteryNumber;
-    private Map<Rank, Integer> lottoRankingStatus;
-    private int profit;
 
     public LottoService() {
         lottoTickets = new ArrayList<>();
@@ -29,32 +27,22 @@ public class LottoService {
         return lottoTickets;
     }
 
-    private void initLottoResults() {
-        lottoRankingStatus = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            lottoRankingStatus.put(rank, 0);
-        }
-        profit = 0;
-    }
 
     public void recordLotteryNumber(LotteryNumber lotteryNumber) {
         this.lotteryNumber = lotteryNumber;
     }
 
-    public void calculatePrize() {
-        initLottoResults();
+    public int calculateResult(Map<Rank, Integer> lottoRankingStatus) {
+        int profit = 0;
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank currentRank = lottoTicket.calculateRank(lotteryNumber);
             lottoRankingStatus.put(currentRank, lottoRankingStatus.get(currentRank) + 1);
             profit += currentRank.getReward();
         }
+        return profit;
     }
 
-    public Map<Rank, Integer> getLottoRankingStatus() {
-        return lottoRankingStatus;
-    }
-
-    public double getInterestRate() {
+    public double getInterestRate(int profit) {
         int totalLottoPrice = LottoTicket.PRICE * lottoTickets.size();
         return (double) profit / totalLottoPrice;
     }

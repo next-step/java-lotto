@@ -44,7 +44,7 @@ public class LottoServiceTest {
         initLottoServiceWithTickets();
         LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
-        lottoService.calculatePrize();
+        lottoService.calculateResult();
 
         Map<Rank, Integer> expectedRankingStatus = new HashMap<>();
         expectedRankingStatus.put(Rank.FIRST, 0);
@@ -67,7 +67,7 @@ public class LottoServiceTest {
 
         LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
-        lottoService.calculatePrize();
+        lottoService.calculateResult();
 
         assertThat(lottoService.getInterestRate()).isEqualTo(2.5);
     }
