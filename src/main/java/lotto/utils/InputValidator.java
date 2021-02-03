@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
@@ -52,7 +53,7 @@ public class InputValidator {
     public static void checkLottoNumberValidation(String number) throws IllegalArgumentException {
         checkNumberValidation(number);
         int lottoNumber = Integer.parseInt(number);
-        if(lottoNumber < LottoTicket.MIN_LOTTO_NUMBER || lottoNumber > LottoTicket.MAX_LOTTO_NUMBER) {
+        if(lottoNumber < LottoNumber.MIN_LOTTO_NUMBER || lottoNumber > LottoNumber.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
     }

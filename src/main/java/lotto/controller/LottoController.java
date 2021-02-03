@@ -1,14 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.LotteryNumber;
 import lotto.domain.LottoService;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LotteryNumber;
 import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoController {
     private final LottoService lottoService = new LottoService();
@@ -26,8 +28,11 @@ public class LottoController {
     }
 
     public void pickLotteryNumber() {
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        List<LottoNumber> winningNumbers = InputView.inputWinningNumbers()
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
         LotteryNumber lotteryNumber = new LotteryNumber(winningNumbers, bonusNumber);
         lottoService.recordLotteryNumber(lotteryNumber);
