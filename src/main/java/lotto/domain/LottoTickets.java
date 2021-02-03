@@ -22,4 +22,8 @@ public class LottoTickets {
     public static int countTicketNumberByMoney(int money) {
         return money / LOTTO_PRICE;
     }
+
+    public static LottoTickets of (List<PlayersLotto> playersLottoTickets) {
+        return new LottoTickets(playersLottoTickets);
+    }
 }

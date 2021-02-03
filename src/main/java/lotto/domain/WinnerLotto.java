@@ -29,6 +29,9 @@ public class WinnerLotto extends Lotto {
         }
     }
 
+    public static WinnerLotto of (LottoNumber bonusBall, List<LottoNumber> numbers) {
+        return new WinnerLotto(bonusBall,numbers);
+    }
 
 
 }
