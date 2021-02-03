@@ -12,13 +12,6 @@ public class NumberUtils {
         }
     }
 
-    public static Double calculateYield(int inputPrice, int income) {
-        BigDecimal bd = new BigDecimal((double) income / inputPrice);
-        return bd
-            .setScale(2, BigDecimal.ROUND_FLOOR)
-            .doubleValue();
-    }
-
 
     public static int convertNullToNumber(Integer value) {
         if (value == null) {

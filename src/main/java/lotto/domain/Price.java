@@ -1,20 +1,17 @@
 package lotto.domain;
 
-import java.util.Map;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Price {
 
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final int BASE_PRICE = 1000;
-    private int money;
+    private final int money;
 
     public Price(String money) {
         isPriceValidate(money);
         this.money = Integer.parseInt(money);
-    }
-
-    public Price() {
     }
 
     public Price(int money) {
@@ -29,24 +26,18 @@ public class Price {
         return money / BASE_PRICE;
     }
 
-    private boolean isPriceValidate(String price) throws IllegalArgumentException {
-        Integer priceOrNull = Integer.parseInt(price);
-        if (priceOrNull != 0 && priceOrNull % ONE_LOTTO_PRICE == 0) {
-            return true;
+    private void isPriceValidate(String price) throws IllegalArgumentException {
+        int priceOrNull = Integer.parseInt(price);
+        if (priceOrNull == 0 || priceOrNull % ONE_LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
-    public int calculateTotalPrize(Map<Revenue, Integer> revenueMap) {
-        int totalRevenue = revenueMap.entrySet().stream()
-            .mapToInt(
-                entry -> entry.getKey()
-                    .totalRevenue(
-                        entry.getValue()
-                    )
-            )
-            .sum();
-        return totalRevenue;
+    public Double calculateYield(int income) {
+        BigDecimal bd = new BigDecimal((double) income / money);
+        return bd
+            .setScale(2, BigDecimal.ROUND_FLOOR)
+            .doubleValue();
     }
 
     @Override

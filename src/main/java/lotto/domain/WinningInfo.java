@@ -10,11 +10,6 @@ public class WinningInfo {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningInfo() {
-        winningNumber = new WinningNumber();
-        bonusNumber = new LottoNumber();
-    }
-
     public long matchWinning(Ticket ticket) {
         return ticket.matchWinningNumber(winningNumber);
     }
