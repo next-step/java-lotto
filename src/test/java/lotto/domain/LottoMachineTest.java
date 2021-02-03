@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import com.sun.javafx.binding.SelectBinding;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,8 +35,9 @@ public class LottoMachineTest {
     }
 
     @Test
-    void startTest() {
-        int money = 14000;
-        Assertions.assertThat(lottoMachine.start(money).size()).isEqualTo(14);
+    void generateLottos() {
+        lottoMachine.initializeLottoCount(3000, 0);
+        List<Lotto> lottos = lottoMachine.generateLottos(new ArrayList<>());
+        Assertions.assertThat(lottos.size()).isEqualTo(1);
     }
 }
