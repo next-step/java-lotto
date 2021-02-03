@@ -1,15 +1,19 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Rank {
 
-    FIRST(7, "6개 일치", 2000000000L),
-    SECOND(6, "5개 일치, 보너스 볼 일치", 30000000L),
-    THIRD(5, "5개 일치", 1500000L),
-    FOURTH(4, "4개 일치", 50000L),
-    FIFTH(3, "3개 일치", 5000L),
+    FIRST(7, "6개 일치", 2_000_000_000L),
+    SECOND(6, "5개 일치, 보너스 볼 일치", 30_000_000L),
+    THIRD(5, "5개 일치", 1_500_000L),
+    FOURTH(4, "4개 일치", 50_000L),
+    FIFTH(3, "3개 일치", 5_000L),
     NONE(0, "꽝", 0L),
     ;
 
@@ -29,6 +33,14 @@ public enum Rank {
         this.matchCount = matchCount;
         this.matchCountMessage = matchCountMessage;
         this.amount = amount;
+    }
+
+    public static List<Rank> getValuesAscendingOrder() {
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                .filter(rank -> rank != NONE)
+                .collect(Collectors.toList());
+        Collections.reverse(ranks);
+        return ranks;
     }
 
     public long getTotalPrizeByCount(final int count) {
