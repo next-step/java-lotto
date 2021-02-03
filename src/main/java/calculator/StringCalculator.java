@@ -1,22 +1,17 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
     public int add(String text) {
-        String[] inputs;
-        int res = 0;
         if (InputValidator.checkIsNullOrIsEmpty(text)) {
             return 0;
         }
-        inputs = splitByCondition(text);
-        for (String input : inputs) {
-            InputValidator.checkIsInvalidInput(input);
-            res += Integer.parseInt(input);
-        }
-        return res;
+        String[] inputs = splitByCondition(text);
+        return sum(inputs);
     }
 
     private String[] splitByCondition(String text) {
@@ -44,5 +39,14 @@ public class StringCalculator {
             tokens = m.group(2).split(customDelimiter);
         }
         return tokens;
+    }
+
+    private int sum(String[] inputs) {
+        return Arrays.stream(inputs)
+            .map(input -> {
+                InputValidator.checkIsInvalidInput(input);
+                return Integer.parseInt(input);
+            })
+            .reduce(0, Integer::sum);
     }
 }
