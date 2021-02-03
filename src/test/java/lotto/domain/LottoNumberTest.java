@@ -16,15 +16,4 @@ class LottoNumberTest {
             LottoNumber lottoNumber = new LottoNumber(illegalNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @DisplayName("compare test")
-    @Test
-    void compareToTest() {
-        LottoNumber smallNumber = new LottoNumber(1);
-        LottoNumber sameWithSmallNumber = new LottoNumber(1);
-        LottoNumber bigNumber = new LottoNumber(41);
-        assertThat(smallNumber.compareTo(bigNumber)).isEqualTo(-1);
-        assertThat(bigNumber.compareTo(smallNumber)).isEqualTo(1);
-        assertThat(smallNumber.compareTo(sameWithSmallNumber)).isEqualTo(-1);
-    }
 }
