@@ -9,6 +9,7 @@ public abstract class Lotto {
     static final int LOTTO_NUMBER_SIZE = 6;
     static final String DELIMITER = "[ ,]+";
 
+
     static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");

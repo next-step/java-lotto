@@ -21,7 +21,7 @@ class WinnerLottoTest {
     void init() {
         expectedLottoNumbers = LottoFactory.createListOfLottoNumber(lottoNumbers);
         lottoBonusNumber = new LottoNumber(7);
-        winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
+        winnerLotto = new WinnerLotto(lottoBonusNumber,LottoFactory.createPlayersLotto(lottoNumbers));
     }
 
     @DisplayName("get List of LottoNumber test")
@@ -45,7 +45,7 @@ class WinnerLottoTest {
         assertThatThrownBy(() -> {
             LottoNumber bonusBall = LottoNumber.of(1);
 
-            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, LottoFactory.createListOfLottoNumber(lottoNumbers));
+            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, LottoFactory.createPlayersLotto(lottoNumbers));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

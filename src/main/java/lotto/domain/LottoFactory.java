@@ -13,4 +13,8 @@ public class LottoFactory {
         });
         return lottoNumbers;
     }
+
+    public static PlayersLotto createPlayersLotto (int [] numbers) {
+        return PlayersLotto.of(createListOfLottoNumber(numbers));
+    }
 }

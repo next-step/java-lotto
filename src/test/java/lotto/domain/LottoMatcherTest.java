@@ -70,7 +70,7 @@ class LottoMatcherTest {
         ));
         LottoTickets lottoTickets = LottoTickets.of(playersLottos);
         List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(winningLotto);
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(6), winnerNumbers);
+        WinnerLotto winnerLotto = WinnerLotto.of(LottoNumber.of(6), winnerNumbers);
         lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.FIVE_WITH_BONUS)).isEqualTo(1);
     }
