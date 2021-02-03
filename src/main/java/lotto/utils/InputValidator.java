@@ -3,25 +3,8 @@ package lotto.utils;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class InputValidator {
     private InputValidator() {}
-
-    public static void validateMoney(String number) {
-        checkNumberValidation(number);
-        checkBuyPriceValidation(Integer.parseInt(number));
-    }
-
-    public static void validateWinningNumber(String winningNumbersInput) {
-        List<String> winningNumbers = Arrays.stream(winningNumbersInput.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
-        checkLengthWinningNumbersValidation(winningNumbers.size());
-        winningNumbers.forEach(InputValidator::checkLottoNumberValidation);
-    }
 
     public static void checkNumberValidation(String number) throws IllegalArgumentException {
         try {
@@ -37,10 +20,8 @@ public class InputValidator {
         }
     }
 
-    public static void checkLottoNumberValidation(String number) throws IllegalArgumentException {
-        checkNumberValidation(number);
-        int lottoNumber = Integer.parseInt(number);
-        if (lottoNumber < LottoNumber.MIN_LOTTO_NUMBER || lottoNumber > LottoNumber.MAX_LOTTO_NUMBER) {
+    public static void checkLottoNumberValidation(int number) throws IllegalArgumentException {
+        if (number < LottoNumber.MIN_LOTTO_NUMBER || number > LottoNumber.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
     }

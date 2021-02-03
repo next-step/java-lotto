@@ -17,21 +17,17 @@ public class InputView {
         return input;
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static List<String> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         input = scanner.nextLine();
-        InputValidator.validateWinningNumber(input);
-        List<Integer> winningNumbers = Arrays.stream(input.split(","))
+        return Arrays.stream(input.split(","))
                 .map(String::trim)
-                .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        return winningNumbers;
     }
 
-    public static int inputBonusNumber() {
+    public static String inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = scanner.next();
-        InputValidator.checkLottoNumberValidation(input);
-        return Integer.parseInt(input);
+        input = scanner.nextLine();
+        return input;
     }
 }

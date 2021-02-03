@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.InputValidator;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,19 +13,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int number) {
         this.number = number;
-        validate();
+        validate(this.number);
+    }
+
+    public LottoNumber(String number){
+        InputValidator.checkNumberValidation(number);
+        this.number = Integer.parseInt(number);
+        validate(this.number);
+    }
+
+    private void validate(int number){
+        InputValidator.checkLottoNumberValidation(number);
     }
 
     public static List<LottoNumber> asList(List<Integer> normalNumbers) {
         return normalNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private void validate() {
-        if (number < LottoNumber.MIN_LOTTO_NUMBER || number > LottoNumber.MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
-        }
     }
 
     @Override

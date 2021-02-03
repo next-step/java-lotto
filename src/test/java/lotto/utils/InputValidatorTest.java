@@ -25,8 +25,8 @@ public class InputValidatorTest {
 
     @DisplayName("checkLottoNumberValidationTest: 로또번호가 올바른지 확인 (1~45)")
     @ParameterizedTest
-    @ValueSource(strings = {"0", "46", "100"})
-    void checkLottoNumberValidationTest(String input) {
+    @ValueSource(ints = {0, 46, 100})
+    void checkLottoNumberValidationTest(int input) {
         assertThatThrownBy(() -> InputValidator.checkLottoNumberValidation(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
