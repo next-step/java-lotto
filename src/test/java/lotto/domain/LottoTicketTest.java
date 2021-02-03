@@ -1,16 +1,18 @@
 package lotto.domain;
 
+import org.assertj.core.internal.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-
+import static lotto.domain.LottoTicket.PICKED_NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
-    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static LottoTicket lottoTicket;
 
     @BeforeAll
@@ -21,15 +23,19 @@ public class LottoTicketTest {
     @DisplayName("로또번호 6개 생성 테스트")
     @Test
     public void makeRandomNumbersTest() {
-        List<Integer> result = lottoTicket.getPickedNumbers();
+        List<LottoNumber> result = lottoTicket.getPickedNumbers();
         int size = result.size();
-        assertThat(size).isEqualTo(LOTTO_NUMBERS_SIZE);
+        assertThat(size).isEqualTo(PICKED_NUMBERS_SIZE);
     }
 
     @DisplayName("로또번호 오름차순 정렬 테스트")
     @Test
     public void sortLottoNumbersTest() {
-        lottoTicket = new LottoTicket(Arrays.asList(6, 5, 4, 3, 2, 1));
-        assertThat(lottoTicket.getPickedNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> lottoNumbers = LottoNumber.asList(Arrays.asList(6, 5, 4, 3, 2, 1));
+        List<LottoNumber> reverseLottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(reverseLottoNumbers);
+        lottoTicket = new LottoTicket(lottoNumbers);
+        assertThat(lottoTicket.getPickedNumbers()).isEqualTo(lottoNumbers);
     }
+
 }

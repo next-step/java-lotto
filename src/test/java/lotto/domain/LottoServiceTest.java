@@ -27,8 +27,8 @@ public class LottoServiceTest {
 
     public void initLottoServiceWithTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(Arrays.asList(1, 12, 23, 34, 25, 16)));
-        lottoTickets.add(new LottoTicket(Arrays.asList(19, 28, 37, 41, 12, 1)));
+        lottoTickets.add(new LottoTicket(LottoNumber.asList(Arrays.asList(1, 12, 23, 34, 25, 16))));
+        lottoTickets.add(new LottoTicket(LottoNumber.asList(Arrays.asList(19, 28, 37, 41, 12, 1))));
         lottoService = new LottoService(lottoTickets);
     }
 
@@ -46,7 +46,7 @@ public class LottoServiceTest {
     @Test
     public void calculatePrizeTest() {
         initLottoServiceWithTickets();
-        LotteryNumber lotteryNumber = new LotteryNumber(Arrays.asList(12, 1, 11, 13, 14, 23), 45);
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), 45);
         lottoService.recordLotteryNumber(lotteryNumber);
         lottoService.calculatePrize();
 
@@ -69,7 +69,7 @@ public class LottoServiceTest {
     public void getInterestRateTest() {
         initLottoServiceWithTickets();
 
-        LotteryNumber lotteryNumber = new LotteryNumber(Arrays.asList(12, 1, 11, 13, 14, 23), 45);
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), 45);
         lottoService.recordLotteryNumber(lotteryNumber);
         lottoService.calculatePrize();
 
