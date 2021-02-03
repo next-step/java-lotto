@@ -12,7 +12,8 @@ public enum Message {
     STATISTIC_HEADER("당첨 통계\n---------"),
     WINNER_COUNT("%d개 일치 (%d원)- %d개"),
     FIVE_BONUS_COUNT("%d개 일치, 보너스 볼 일치(%d원)- %d개"),
-    STATISTIC_REVENUE("총 수익률은 %.2f입니다.");
+    STATISTIC_REVENUE("총 수익률은 %.2f입니다."),
+    MONEY("돈은 0원보다 커야합니다.");
 
     public final String message;
 

@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.view.Message;
+
 public class Money {
     private int value;
 
     public Money(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("돈은 0원보다 커야합니다.");
+            throw new IllegalArgumentException(Message.MONEY.message);
         }
         this.value = value;
     }
