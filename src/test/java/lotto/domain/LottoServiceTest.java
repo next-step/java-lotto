@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LotteryNumber;
-import lotto.domain.LottoService;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +42,7 @@ public class LottoServiceTest {
     @Test
     public void calculatePrizeTest() {
         initLottoServiceWithTickets();
-        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), 45);
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
         lottoService.calculatePrize();
 
@@ -69,7 +65,7 @@ public class LottoServiceTest {
     public void getInterestRateTest() {
         initLottoServiceWithTickets();
 
-        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), 45);
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
         lottoService.calculatePrize();
 
