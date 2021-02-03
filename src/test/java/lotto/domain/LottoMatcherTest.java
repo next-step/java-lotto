@@ -67,7 +67,6 @@ class LottoMatcherTest {
     @DisplayName("로또 티켓에 대한 등수 매칭 검증. 3개와 6개가 적중한 로또티켓에 대해 테스트.")
     @Test
     void checkAllTickets() {
-
         PlayersLotto playersLotto1 = new PlayersLotto(Arrays.asList(
             new LottoNumber(1),
             new LottoNumber(2),
