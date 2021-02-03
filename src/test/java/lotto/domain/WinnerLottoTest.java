@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinnerLottoTest {
-    //TODO: getLottoWithSplitting method 는 LottoTest 가 적합해보임. 추상클래스의 메소드니까
     WinnerLotto winnerLotto;
     List<LottoNumber> expectedLottoNumbers;
     LottoNumber lottoBonusNumber;

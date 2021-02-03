@@ -53,16 +53,6 @@ class LottoMatcherTest {
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.THREE)).isEqualTo(1);
     }
 
-    //TODO: 이부분에서 개수로만 Enum 매핑을 테스트 하도록 하면 보너스 넘버에 대한 논리 구조가 안맞는것 같다는 생각이 들어요!
-    // 그래서 의견을 듣고자 코멘트로 남겼습니다
-    // choi: 해당 메소드의 인풋이 지금처럼 LottoList고 내부에서 getMatchCnt 를 호출하는 형태면 되겠네요
-//    @DisplayName("맞춘 개수에 따른 상 enum 반환")
-//    @Test
-//    void getPrizeForEachLotto() {
-//        int matchedCount = 6;
-//
-//        assertThat(lottoMatcher.getPrizeForEachLotto(matchedCount, new LottoNumber(6))).isEqualTo(Prize.SIX);
-//    }
 
     @DisplayName("로또 티켓에 대한 등수 매칭 검증. 3개와 6개가 적중한 로또티켓에 대해 테스트.")
     @Test

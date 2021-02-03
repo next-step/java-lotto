@@ -9,7 +9,7 @@ public abstract class Lotto {
     static final int LOTTO_NUMBER_SIZE = 6;
     static final String DELIMITER = "[ ,]+";
 
-    void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
+    static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }
@@ -28,14 +28,8 @@ public abstract class Lotto {
         for (String input : inputs) {
             lottoNumbers.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
         }
-        checkSizeOfLotto(lottoNumbers.size());
+        checkSizeOfLotto(lottoNumbers);
         return lottoNumbers;
     }
 
-    static void checkSizeOfLotto(int size) {
-        //TODO: checkSzieOfLotto 가 리팩터링하다보니 2개가 됨. 파라미터가 다른 곳을 찾고 수정해야함.
-        if (size != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또의 숫자는 6개입니다.");
-        }
-    }
 }

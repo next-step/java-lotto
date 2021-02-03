@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-    //TODO: 수동으로 로또 번호 생성
     public static final int LOWER_BOUND_LOTTO = 1;
     public static final int UPPER_BOUND_LOTTO = 46;
     public static final int LOTTO_CAPACITY = 6;
