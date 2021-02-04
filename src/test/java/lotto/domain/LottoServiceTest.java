@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.controller.LottoController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +45,8 @@ public class LottoServiceTest {
         initLottoServiceWithTickets();
         LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
-        lottoService.calculateResult();
+        LottoController lottoController = new LottoController(lottoService);
+        lottoController.showLottoResult();
 
         Map<Rank, Integer> expectedRankingStatus = new HashMap<>();
         expectedRankingStatus.put(Rank.FIRST, 0);
@@ -56,7 +58,7 @@ public class LottoServiceTest {
 
         for (Rank rank : Rank.values()) {
             assertThat(expectedRankingStatus.get(rank))
-                    .isEqualTo(lottoService.getLottoRankingStatus().get(rank));
+                    .isEqualTo(lottoController.getLottoRankingStatus().get(rank));
         }
     }
 
@@ -64,11 +66,9 @@ public class LottoServiceTest {
     @Test
     public void getInterestRateTest() {
         initLottoServiceWithTickets();
-
         LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
-        lottoService.calculateResult();
-
-        assertThat(lottoService.getInterestRate()).isEqualTo(2.5);
+        int profit = lottoService.calculateResult(Rank.getInitRankingDict());
+        assertThat(lottoService.getInterestRate(profit)).isEqualTo(2.5);
     }
 }

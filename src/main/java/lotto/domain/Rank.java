@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Rank {
     FIRST(2_000_000_000), SECOND(30_000_000), THIRD(1_500_000),
     FOURTH(50_000), FIFTH(5_000), NOTHING(0);
@@ -21,5 +24,13 @@ public enum Rank {
 
     public int getReward(){
         return reward;
+    }
+
+    public static Map<Rank, Integer> getInitRankingDict() {
+        Map<Rank, Integer> rankingStatus = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankingStatus.put(rank, 0);
+        }
+        return rankingStatus;
     }
 }

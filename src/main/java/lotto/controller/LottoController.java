@@ -15,8 +15,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
-    private final LottoService lottoService = new LottoService();
+    private final LottoService lottoService;
     private Map<Rank, Integer> lottoRankingStatus;
+
+    public LottoController(){
+        lottoService = new LottoService();
+    }
+
+    public LottoController(LottoService lottoService){
+        this.lottoService = lottoService;
+    }
 
     public void buyLottoProcess() {
         Money price = new Money(InputView.inputPrice());
@@ -42,16 +50,13 @@ public class LottoController {
     }
 
     public void showLottoResult() {
-        initLottoResults();
+        lottoRankingStatus = Rank.getInitRankingDict();
         int profit = lottoService.calculateResult(lottoRankingStatus);
         double interestRate = lottoService.getInterestRate(profit);
         OutputView.printLottoServiceResult(lottoRankingStatus, interestRate);
     }
 
-    private void initLottoResults() {
-        lottoRankingStatus = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            lottoRankingStatus.put(rank, 0);
-        }
+    public Map<Rank, Integer> getLottoRankingStatus() {
+        return lottoRankingStatus;
     }
 }
