@@ -3,6 +3,9 @@ package lotto.utils;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
+import java.util.HashSet;
+import java.util.List;
+
 public class Validator {
     private Validator() {}
 
@@ -29,6 +32,18 @@ public class Validator {
     public static void checkLengthWinningNumbersValidation(int length) {
         if (length != LottoTicket.PICKED_NUMBERS_SIZE) {
             throw new IllegalArgumentException("당첨 로또 번호의 개수가 옳지 않습니다.");
+        }
+    }
+
+    public static void checkDuplicatedWinningNumber(List<LottoNumber> winningNumbers) {
+        if (new HashSet<>(winningNumbers).size() != winningNumbers.size()) {
+            throw new IllegalArgumentException("당첨번호 중에 중복된 수가 있습니다.");
+        }
+    }
+
+    public static void checkWinningNumbersInBonusNumber(List<LottoNumber> winningNumbers, LottoNumber bounsNumber) {
+        if (winningNumbers.contains(bounsNumber)) {
+            throw new IllegalArgumentException("당첨번호 중에 보너스 볼과 겹치는 수가 있습니다.");
         }
     }
 }

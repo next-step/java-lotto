@@ -10,15 +10,16 @@ public class LotteryNumber {
     private final LottoNumber bonusNumber;
 
     public LotteryNumber(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validate(winningNumbers);
-
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+        validate();
         sortWinningNumber();
     }
 
-    private void validate(List<LottoNumber> winningNumbers){
+    private void validate(){
         Validator.checkLengthWinningNumbersValidation(winningNumbers.size());
+        Validator.checkDuplicatedWinningNumber(winningNumbers);
+        Validator.checkWinningNumbersInBonusNumber(winningNumbers, bonusNumber);
     }
 
     private void sortWinningNumber() {
