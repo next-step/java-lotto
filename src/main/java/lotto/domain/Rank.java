@@ -4,13 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Rank {
-    FIRST(2_000_000_000), SECOND(30_000_000), THIRD(1_500_000),
-    FOURTH(50_000), FIFTH(5_000), NOTHING(0);
+    FIRST(2_000_000_000, "6개"),
+    SECOND(30_000_000, "5개, 보너스 볼"),
+    THIRD(1_500_000, "5개"),
+    FOURTH(50_000, "4개"),
+    FIFTH(5_000, "3개"),
+    NOTHING(0, "0개");
 
     private final int reward;
+    private final String message;
 
-    Rank(int reward){
+    Rank(int reward, String message){
         this.reward = reward;
+        this.message = message;
     }
 
     public static Rank getRank(int score, boolean hasBonus) {
@@ -24,6 +30,10 @@ public enum Rank {
 
     public int getReward(){
         return reward;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public static Map<Rank, Integer> getInitRankingDict() {
