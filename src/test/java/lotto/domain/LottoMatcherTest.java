@@ -45,10 +45,10 @@ class LottoMatcherTest {
     void checkAllTickets() {
         int [] firstLotto = {1,2,3,4,5,6};
         int [] secondLotto = {1,2,3,9,10,11};
-        PlayersLotto playersLotto1 = PlayersLotto.of(LottoFactory.createListOfLottoNumber(firstLotto));
+        Lotto playersLotto1 = Lotto.of(LottoFactory.createListOfLottoNumber(firstLotto));
 
-        PlayersLotto playersLotto2 = PlayersLotto.of(LottoFactory.createListOfLottoNumber(secondLotto));
-        List<PlayersLotto> playersLottos = new ArrayList<>(Arrays.asList(
+        Lotto playersLotto2 = Lotto.of(LottoFactory.createListOfLottoNumber(secondLotto));
+        List<Lotto> playersLottos = new ArrayList<>(Arrays.asList(
             playersLotto1,
             playersLotto2
         ));
@@ -65,8 +65,8 @@ class LottoMatcherTest {
     void checkFiveWithBonusTicket() {
         int [] playerLotto = {1,2,3,4,5,6};
         int [] winningLotto = {1,2,3,4,5,7};
-        List<PlayersLotto> playersLottos = new ArrayList<>(Arrays.asList(
-                PlayersLotto.of(LottoFactory.createListOfLottoNumber(playerLotto))
+        List<Lotto> playersLottos = new ArrayList<>(Arrays.asList(
+                Lotto.of(LottoFactory.createListOfLottoNumber(playerLotto))
         ));
         LottoTickets lottoTickets = LottoTickets.of(playersLottos);
         List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(winningLotto);

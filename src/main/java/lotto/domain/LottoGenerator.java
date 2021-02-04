@@ -19,41 +19,41 @@ public class LottoGenerator {
         }
     }
 
-    private PlayersLotto generateOneLottoTicket() {
+    private Lotto generateOneLottoTicket() {
         Collections.shuffle(possibleLottoNumbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_CAPACITY; i++) {
             lottoNumbers.add(possibleLottoNumbers.get(i));
         }
-        return new PlayersLotto(lottoNumbers);
+        return new Lotto(lottoNumbers);
 
     }
 
-    public List<PlayersLotto> generateLottoTicketsAutomatically(int numberOfTicket) {
+    public List<Lotto> generateLottoTicketsAutomatically(int numberOfTicket) {
         // 1로또를 만든다
         // 이 것을 리스트형태로 넘버오브티켓만큼 반복한다
-        List<PlayersLotto> playersLottoTickets = new ArrayList<>();
+        List<Lotto> playersLottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTicket; i++) {
-            PlayersLotto playersLotto = generateOneLottoTicket();
+            Lotto playersLotto = generateOneLottoTicket();
             playersLottoTickets.add(playersLotto);
         }
         return playersLottoTickets;
     }
 
-    public List<PlayersLotto> generateLottoTicketsManually(int numberOfTicket) {
-        List<PlayersLotto> ManualPlayersLottoTickets = new ArrayList<>();
+    public List<Lotto> generateLottoTicketsManually(int numberOfTicket) {
+        List<Lotto> ManualPlayersLottoTickets = new ArrayList<>();
         for (int i = 0; i < numberOfTicket; i++) {
             List <LottoNumber> manualLotto = Lotto.getLottoWithSplitting(InputView.getStringOfLotto());
-            ManualPlayersLottoTickets.add(new PlayersLotto(manualLotto));
+            ManualPlayersLottoTickets.add(new Lotto(manualLotto));
         }
         return ManualPlayersLottoTickets;
     }
 
-    public List<PlayersLotto> purchaseManualAndAutoLottoTickets(int numberOfTicket,int numberOfManualLotto) {
+    public List<Lotto> purchaseManualAndAutoLottoTickets(int numberOfTicket, int numberOfManualLotto) {
         int NumberOfAutoLotto = numberOfTicket-numberOfManualLotto;
         Validator.isNegative(NumberOfAutoLotto);
-        List<PlayersLotto> playersLottoTickets = generateLottoTicketsManually(numberOfManualLotto);
+        List<Lotto> playersLottoTickets = generateLottoTicketsManually(numberOfManualLotto);
         playersLottoTickets.addAll(generateLottoTicketsAutomatically(NumberOfAutoLotto));
 
         return playersLottoTickets;

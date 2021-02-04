@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,8 @@ public class LottoMatcher {
         // 나중에 getPrizeBoard 를 통해 EnumMap 을 리턴하고 OutputView 를 통해 PrizeBoard 를 순회해
         // 3개: 50000원 ... 등을 출력할 수 있도록 한다
 
-        List<PlayersLotto> playersLottoTickets = lottoTickets.getLottoTickets();
-        for (PlayersLotto lotto : playersLottoTickets) {
+        List<Lotto> playersLottoTickets = lottoTickets.getLottoTickets();
+        for (Lotto lotto : playersLottoTickets) {
             Prize prize = winnerNumbers.getPrizeForEachLotto(lotto.getNumbers());
             addPrizeStatus(prize);
         }

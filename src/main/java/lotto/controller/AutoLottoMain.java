@@ -15,7 +15,7 @@ public class AutoLottoMain {
 
             LottoGenerator lottoGenerator = new LottoGenerator();
             // 무작위 로또를 생성해 로또티켓 객체에 생성자 주입
-            List<PlayersLotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTicketsAutomatically(numberOfTicket);
+            List<Lotto> generatedPlayersLottoNumbers = lottoGenerator.generateLottoTicketsAutomatically(numberOfTicket);
             LottoTickets purchasedTickets = LottoTickets.of(generatedPlayersLottoNumbers);
             // 무작위 로또의 값을 출력
             OutputView.printAllLotto(purchasedTickets);
@@ -24,7 +24,7 @@ public class AutoLottoMain {
             // 보너스 번호를 입력
             LottoNumber bonusNumber = LottoNumber.of(InputView.getBonusBall());
             // 정답로또를 생성. split 으로 정답 로또를 파싱해 리스트화
-            WinnerLotto winnerLotto = WinnerLotto.of(bonusNumber, PlayersLotto.getLottoWithSplitting(winningLottoNumber));
+            WinnerLotto winnerLotto = WinnerLotto.of(bonusNumber, Lotto.getLottoWithSplitting(winningLottoNumber));
             // 로또매처를 통해 플레이어의 로또와 정답의 비교 결과를 확인
             LottoMatcher lottoMatcher = new LottoMatcher();
             lottoMatcher.checkAllTickets(purchasedTickets,winnerLotto);

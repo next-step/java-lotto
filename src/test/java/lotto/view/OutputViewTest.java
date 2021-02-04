@@ -1,12 +1,10 @@
 package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +21,9 @@ class OutputViewTest {
 
     @Test
     void printWinningResultTest() {
-        PlayersLotto playersLotto = PlayersLotto.of(
+        Lotto playersLotto = Lotto.of(
                 LottoFactory.createListOfLottoNumber(new int[]{1,2,3,4,5,6}));
-        List<PlayersLotto> playersLottoTickets = new ArrayList<>(Arrays.asList(
+        List<Lotto> playersLottoTickets = new ArrayList<>(Arrays.asList(
             playersLotto
         ));
         LottoTickets lottoTickets = LottoTickets.of(playersLottoTickets);

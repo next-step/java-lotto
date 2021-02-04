@@ -1,14 +1,47 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public abstract class Lotto {
+public class Lotto {
+
     static final int LOTTO_NUMBER_SIZE = 6;
     static final String DELIMITER = "[ ,]+";
 
+    private final List<LottoNumber> numbers;
+
+
+    public static List<LottoNumber> getLottoWithSplitting(String text) {
+        String [] inputs = text.split(DELIMITER);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String input : inputs) {
+            lottoNumbers.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
+        }
+        checkSizeOfLotto(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        checkSizeOfLotto(lottoNumbers);
+        checkDuplicatedNumber(lottoNumbers);
+        this.numbers = lottoNumbers;
+    }
+
+    public List<Integer> getAsIntegerList() {
+        List<Integer> lottoNumberList = new ArrayList<>();
+        numbers.forEach(lottoNumber -> {
+            lottoNumberList.add(lottoNumber.getLottoNumber());
+        });
+        Collections.sort(lottoNumberList);
+        return lottoNumberList;
+    }
+
+    public static Lotto of (List<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
 
     static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
@@ -22,15 +55,4 @@ public abstract class Lotto {
             throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
         }
     }
-
-    public static List<LottoNumber> getLottoWithSplitting(String text) {
-        String [] inputs = text.split(DELIMITER);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String input : inputs) {
-            lottoNumbers.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
-        }
-        checkSizeOfLotto(lottoNumbers);
-        return lottoNumbers;
-    }
-
 }

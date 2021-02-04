@@ -14,7 +14,7 @@ public class LottoFactory {
         return lottoNumbers;
     }
 
-    public static PlayersLotto createPlayersLotto (int [] numbers) {
-        return PlayersLotto.of(createListOfLottoNumber(numbers));
+    public static Lotto createPlayersLotto (int [] numbers) {
+        return Lotto.of(createListOfLottoNumber(numbers));
     }
 }
