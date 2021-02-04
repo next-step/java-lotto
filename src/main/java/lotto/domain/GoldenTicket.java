@@ -5,19 +5,19 @@ package lotto.domain;
  */
 public class GoldenTicket {
 
-    private final LottoTicket goldenTicket;
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public GoldenTicket(final LottoTicket goldenTicket, final LottoNumber bonusNumber) {
-        this.goldenTicket = goldenTicket;
+    public GoldenTicket(final LottoTicket winningTicket, final LottoNumber bonusNumber) {
+        this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
+    }
+
+    public int getMatchedNumbersCount(final LottoTicket lottoTicket) {
+        return this.winningTicket.getSameNumbersCount(lottoTicket);
     }
 
     public boolean containsBonusBall(final LottoTicket lottoTicket) {
         return lottoTicket.contains(bonusNumber);
-    }
-
-    public int getMatchedNumbersCount(final LottoTicket lottoTicket) {
-        return this.goldenTicket.getSameNumbersCount(lottoTicket);
     }
 }
