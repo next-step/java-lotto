@@ -35,7 +35,7 @@ public enum Prize {
                 .findFirst().orElse(ZERO_MATCHES);
     }
 
-    private boolean isEqualCount(int matchCount) {
+    public boolean isEqualCount(int matchCount) {
         return this.matchCount == matchCount;
     }
 }
