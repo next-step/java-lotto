@@ -23,6 +23,12 @@ public class LottoApplication {
     private static Buyer buyer;
     private static List<LottoTicket> tickets;
     private static MatchResult result;
+    static Count lottos;
+    static Money amount;
+    static Count lottosManual;
+    static Money randomAmount;
+    static Count lottosRandom;
+    static List<String> lottosManualRaw;
 
     public static void main(String[] args) {
         try {
@@ -42,25 +48,29 @@ public class LottoApplication {
         input = new InputView();
         buyer = new Buyer();
     }
+    private static void buyLottoManual() {
+        // 수동 구매 수량을 결정.
+        OutputView.printManual(); // 수동으로 구매 할 수를 입력하세요.
+        lottosManual = input.inputAmountManual(); // 수동 입력.
+        randomAmount = Money.subManual(amount, lottosManual);
+        lottosRandom = Count.split(lottos, lottosManual); // lottos에 전체 수량 - 수동 수량 을 해 주는 메서드 생성. 메서드는 new Count(res)를 반환.
 
+        OutputView.printSelectManual(); // 로또 수동 입력 하라는 프린트.
+        lottosManualRaw = input.selectLottosManually(lottosManual);
+        tickets = LottoGenerator.rawToTicktes(lottosManualRaw); // 수동으로 입력하기.
+    }
+    private static void buyLorroRandom() {
+        tickets.addAll(buyer.buyLotto(randomAmount));// 자동 구매 수량에 따라 티켓 생성.
+    }
     private static void buyLotto() {
         // 로또 입력
         // 금액 입력
         OutputView.printBuy();
-        Money amount = input.inputAmount();
+        amount = input.inputAmount();
         // 구매 가능 수량이 lottos로 담김.
-        Count lottos = buyer.matchPriceAndPayment(amount);
-        // 수동 구매 수량을 결정.
-        OutputView.printManual(); // 수동으로 구매 할 수를 입력하세요.
-        Count lottosManual = input.inputAmountManual(); // 수동 입력.
-        Money randomAmount = Money.subManual(amount, lottosManual);
-        Count lottosRandom = Count.split(lottos, lottosManual); // lottos에 전체 수량 - 수동 수량 을 해 주는 메서드 생성. 메서드는 new Count(res)를 반환.
-
-        OutputView.printSelectManual(); // 로또 수동 입력 하라는 프린트.
-        List<String> lottosManualRaw = input.selectLottosManually(lottosManual);
-        tickets = LottoGenerator.rawToTicktes(lottosManualRaw); // 수동으로 입력하기.
-
-        tickets.addAll(buyer.buyLotto(randomAmount));// 자동 구매 수량에 따라 티켓 생성.
+        lottos = buyer.matchPriceAndPayment(amount);
+        buyLottoManual();
+        buyLorroRandom();
 
         // 로또 실행
         // 구매
