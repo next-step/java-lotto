@@ -28,6 +28,29 @@ class LottoTicketTest {
                 () -> new LottoTicket(lottoNumbers));
     }
 
+    @DisplayName("중복된 번호가 있으면 exception 발생")
+    @Test
+    void duplicateElementsThrowException() {
+        // given
+        List<LottoNumber> lottoNumbers = createLottoNumbersWithDuplicate();
+
+        // when & then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new LottoTicket(lottoNumbers));
+        assertThat(exception.getMessage()).isEqualTo("중복된 번호가 존재합니다.");
+    }
+
+    private List<LottoNumber> createLottoNumbersWithDuplicate() {
+        return Arrays.asList(
+                LottoNumber.of(3),
+                LottoNumber.of(5),
+                LottoNumber.of(11),
+                LottoNumber.of(25),
+                LottoNumber.of(5),
+                LottoNumber.of(39)
+        );
+    }
+
     @DisplayName("toString() 결과 포맷")
     @Test
     void toStringTest() {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoTicket {
@@ -9,13 +10,21 @@ public class LottoTicket {
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
-        // TODO: validateDuplicateLottoNumbers 추가
+        validateDuplicateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야만 합니다.");
+        }
+    }
+
+    private void validateDuplicateLottoNumbers(final List<LottoNumber> lottoNumbers) {
+        boolean allUniqueElements = lottoNumbers.stream()
+                .allMatch(new HashSet<>()::add);
+        if (!allUniqueElements) {
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
     }
 
