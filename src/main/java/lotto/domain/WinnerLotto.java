@@ -4,14 +4,14 @@ import java.util.List;
 
 public class WinnerLotto {
     // extends keyword 제거됨
-    private final LottoNumber BonusBall;
+    private final LottoNumber bonusBall;
 //    private final List<LottoNumber> numbers;
     private final PlayersLotto playersLotto;
     public WinnerLotto(LottoNumber bonusBall, PlayersLotto playersLotto) {
 
         checkLottoContainsBonusball(bonusBall,playersLotto.getNumbers());
         this.playersLotto = playersLotto;
-        BonusBall = bonusBall;
+        this.bonusBall = bonusBall;
 //        this.numbers = numbers;
     }
 
@@ -20,7 +20,7 @@ public class WinnerLotto {
     }
 
     public LottoNumber getBonusBall() {
-        return BonusBall;
+        return bonusBall;
     }
 
     private void checkLottoContainsBonusball (LottoNumber bonusBall, List<LottoNumber> numbers) {
@@ -43,12 +43,9 @@ public class WinnerLotto {
     }
     public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber) {
         int matchCnt = getMatchedCount(lottoNumber);
-        Prize prize = Prize.getPrizeByMatchedNumber(matchCnt);
         // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
-        if(matchCnt == 5 && lottoNumber.stream().anyMatch(number -> number.numberEquals(BonusBall))) {
-            prize = Prize.FIVE_WITH_BONUS;
-        }
-        return prize;
+
+        return Prize.getPrizeByMatchedNumber(matchCnt,lottoNumber, bonusBall);
     }
 
 

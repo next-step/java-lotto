@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public enum Prize {
     //    3개 일치 (5000원)- 1개
     //4개 일치 (50000원)- 0개
@@ -40,13 +42,20 @@ public enum Prize {
                 '}';
     }
 
-    public static Prize getPrizeByMatchedNumber(final int matchedNumber) {
+    public static Prize getPrizeByMatchedNumber(final int matchedNumber, List<LottoNumber> lottoNumber,LottoNumber bonusBall) {
+        Prize returnPrize = null;
         for(Prize prize : Prize.values()) {
             if (matchedNumber == prize.getMatchedNumber()) {
-                return prize;
+                returnPrize = prize;
+                break;
             }
         }
-        throw new IllegalArgumentException("일치 갯수가 범위 밖입니다.");
+        if(matchedNumber == Prize.FIVE.getMatchedNumber() && lottoNumber.contains(bonusBall)) {
+            returnPrize = Prize.FIVE_WITH_BONUS;
+
+        }
+        return returnPrize;
+
     }
 
 }
