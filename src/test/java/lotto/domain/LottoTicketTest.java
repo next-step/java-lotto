@@ -15,13 +15,7 @@ class LottoTicketTest {
     @Test
     void notRequiredSizedLottoNumbersThrowsException() {
         // given
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5)
-        );
+        List<LottoNumber> lottoNumbers = createFiveLottoNumbers();
 
         // when & then
         assertThrows(IllegalArgumentException.class,
@@ -40,6 +34,30 @@ class LottoTicketTest {
         assertThat(exception.getMessage()).isEqualTo("중복된 번호가 존재합니다.");
     }
 
+    @DisplayName("toString() 결과 포맷")
+    @Test
+    void toStringTest() {
+        // given
+        List<LottoNumber> lottoNumbers = createNormalLottoNumbers();
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        // when
+        String result = lottoTicket.toString();
+
+        // then
+        assertThat(result).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    private List<LottoNumber> createFiveLottoNumbers() {
+        return Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5)
+        );
+    }
+
     private List<LottoNumber> createLottoNumbersWithDuplicate() {
         return Arrays.asList(
                 LottoNumber.of(3),
@@ -51,11 +69,8 @@ class LottoTicketTest {
         );
     }
 
-    @DisplayName("toString() 결과 포맷")
-    @Test
-    void toStringTest() {
-        // given
-        List<LottoNumber> lottoNumbers = Arrays.asList(
+    private List<LottoNumber> createNormalLottoNumbers() {
+        return Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -63,12 +78,5 @@ class LottoTicketTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        // when
-        String result = lottoTicket.toString();
-
-        // then
-        assertThat(result).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }
