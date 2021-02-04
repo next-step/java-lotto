@@ -24,6 +24,10 @@ public class LottoTicket {
         List<String> raws = Arrays.asList(raw.split(","));
         raws = raws.stream().map(r -> r.trim()).collect(Collectors.toList());
         List<LottoNumber> lottoNumbers = new ArrayList<>();
+        validateRawNnumbers(lottoNumbers, raws);
+        this.numbers = lottoNumbers;
+    }
+    private void validateRawNnumbers(List<LottoNumber> lottoNumbers,List<String> raws){
         if (raws.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개만 입력해야 합니다.");
         }
@@ -32,7 +36,6 @@ public class LottoTicket {
         }catch(NumberFormatException nfe){
             throw new NumberFormatException("숫자, 공백, 쉼표(,)만 입력해 주세요.");
         }
-        this.numbers = lottoNumbers;
     }
     private void rawToLottoNumbers (List<LottoNumber> lottoNumbers, List<String> raws) {
         for(String r : raws){
