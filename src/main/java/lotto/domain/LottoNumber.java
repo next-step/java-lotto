@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 45;
@@ -38,11 +38,6 @@ public class LottoNumber {
         }
     }
 
-    // TODO: getter 없애기
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -59,5 +54,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(final LottoNumber o) {
+        return Integer.compare(this.number, o.number);
     }
 }

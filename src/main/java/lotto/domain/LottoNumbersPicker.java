@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -16,13 +16,17 @@ public class LottoNumbersPicker {
     }
 
     public static List<LottoNumber> pick() {
+        List<LottoNumber> lottoNumbers = createNonDuplicateLottoNumbers();
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private static List<LottoNumber> createNonDuplicateLottoNumbers() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < MAX_BOUNDARY_AMOUNT) {
             int number = random.nextInt(MAX_BOUNDARY_NUMBER) + 1;
             lottoNumbers.add(LottoNumber.of(number));
         }
-        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
-        lottoNumberList.sort(Comparator.comparingInt(LottoNumber::getNumber));
-        return lottoNumberList;
+        return new ArrayList<>(lottoNumbers);
     }
 }
