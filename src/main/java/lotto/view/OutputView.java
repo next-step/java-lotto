@@ -22,7 +22,7 @@ public class OutputView {
     private static final String WINNING_RESULT_TEXT = "\n당첨 통계\n---------";
     private static final String MATCHED_NUMBER_TEXT = "%d개 일치";
     private static final String CASH_AND_PRIZE_TEXT = " (%d원) - %d개\n";
-    private static final String ROI_TEXT = "총 수익률은 %0.2f 입니다.\n";
+    private static final String ROI_TEXT = "총 수익률은 %.2f 입니다.\n";
     private static final String NUMBER_OF_EACH_TICKETS = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String FIVE_WITH_BONUS_CASE_TEXT = ", 보너스 볼 일치";
 
