@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +11,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoJudgeTest {
 
+    private GoldenTicket goldenTicket;
+
+    @BeforeEach
+    void setUp() {
+        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+    }
+
     @DisplayName("1등을 확인하는 랭크를 확인하는 테스트")
     @Test
     void getFirstRankTest() {
         // given
-        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
         LottoTicket lottoTicket = new LottoTicket(createPickedWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when
@@ -31,10 +38,7 @@ class LottoJudgeTest {
     @Test
     void getSecondRankTest() {
         // given
-        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when
@@ -48,10 +52,7 @@ class LottoJudgeTest {
     @Test
     void getThirdRankTest() {
         // given
-        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
         LottoTicket lottoTicket = new LottoTicket(createPickedThirdNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoJudge lottoJudge = new LottoJudge(goldenTicket, lottoTicket);
 
         // when

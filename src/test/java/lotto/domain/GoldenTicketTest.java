@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +11,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class GoldenTicketTest {
 
-    @DisplayName("보너스 볼이 들어 있을 때, 포함되었는지 확인하는 테스트")
+    private GoldenTicket goldenTicket;
+
+    @BeforeEach
+    void setUp() {
+        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
+    }
+
+    @DisplayName("당첨 번호와 로또 티켓을 대조하여 보너스 볼 포함 여부 확인")
     @Test
     void containsBonusBallTest() {
         // given
-        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
 
         // when
@@ -26,12 +33,9 @@ class GoldenTicketTest {
         assertThat(isContainBonusBall).isTrue();
     }
 
-    @DisplayName("2등으로 5개의 볼이 맞았을 때, 확인하는 테스트")
+    @DisplayName("당첨 번호와 로또 티켓을 대조하여 동일한 번호의 개수 확인")
     @Test
     void getMatchedNumbersCountTest() {
-        LottoTicket winningTicket = new LottoTicket(createPickedWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(45);
-        GoldenTicket goldenTicket = new GoldenTicket(winningTicket, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(createPickedSecondNumbers());
 
         // when
