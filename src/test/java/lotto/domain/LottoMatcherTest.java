@@ -21,10 +21,12 @@ class LottoMatcherTest {
     @DisplayName(value = "로또 티켓의 번호를 입력하면 일치 번호 개수를 출력한다.")
     @Test
     void getLottoTicketCount() {
+
         List<LottoNumber> lottoNumbers = LottoFactory.createListOfLottoNumber(new int[]{1,3,5,12,14,35});
         List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(new int[]{1,2,3,4,5,6});
+        Lotto lotto = Lotto.of(lottoNumbers);
         WinnerLotto winnerLotto = WinnerLotto.of(LottoNumber.of(7), winnerNumbers);
-        assertThat(winnerLotto.getMatchedCount(lottoNumbers)).isEqualTo(3);
+        assertThat(winnerLotto.getMatchedCount(lotto)).isEqualTo(3);
     }
 
     @Test

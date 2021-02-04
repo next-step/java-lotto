@@ -22,7 +22,7 @@ public class LottoMatcher {
 
         List<Lotto> playersLottoTickets = lottoTickets.getLottoTickets();
         for (Lotto lotto : playersLottoTickets) {
-            Prize prize = winnerNumbers.getPrizeForEachLotto(lotto.getNumbers());
+            Prize prize = winnerNumbers.getPrizeForEachLotto(lotto);
             addPrizeStatus(prize);
         }
     }

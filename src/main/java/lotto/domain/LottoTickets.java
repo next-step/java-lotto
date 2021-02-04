@@ -7,7 +7,7 @@ public class LottoTickets {
     private final  List<Lotto> playersLottoTickets;
     private static final int LOTTO_PRICE = 1000;
 
-    public LottoTickets(List<Lotto> playersLottoTickets) {
+    private LottoTickets(List<Lotto> playersLottoTickets) {
         this.playersLottoTickets = playersLottoTickets;
     }
 

@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int UPPER_BOUND_LOTTO = 46;
     private final int lottoNumber;
 
-    public LottoNumber(final int lottoNumber) {
+    private LottoNumber(final int lottoNumber) {
         checkIsValid(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

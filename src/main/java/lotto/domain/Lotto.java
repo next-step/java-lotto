@@ -14,7 +14,7 @@ public class Lotto {
         String [] inputs = text.split(DELIMITER);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String input : inputs) {
-            lottoNumbers.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
+            lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
         }
         checkSizeOfLotto(lottoNumbers);
         return lottoNumbers;

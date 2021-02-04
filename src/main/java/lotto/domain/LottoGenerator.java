@@ -15,7 +15,7 @@ public class LottoGenerator {
 
     public LottoGenerator() {
         for (int i = LOWER_BOUND_LOTTO; i < UPPER_BOUND_LOTTO; i++) {
-            possibleLottoNumbers.add(new LottoNumber(i));
+            possibleLottoNumbers.add(LottoNumber.of(i));
         }
     }
 

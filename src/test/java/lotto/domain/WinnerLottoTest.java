@@ -20,7 +20,7 @@ class WinnerLottoTest {
     @BeforeEach
     void init() {
         expectedLottoNumbers = LottoFactory.createListOfLottoNumber(lottoNumbers);
-        lottoBonusNumber = new LottoNumber(7);
+        lottoBonusNumber = LottoNumber.of(7);
         winnerLotto = new WinnerLotto(lottoBonusNumber,LottoFactory.createPlayersLotto(lottoNumbers));
     }
 
