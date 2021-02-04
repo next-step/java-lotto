@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +21,5 @@ class LottoTicketMachineTest {
 
         // then
         assertThat(lottoTickets).hasSize(14);
-    }
-
-    @Disabled("2단계에서 구현 예정")
-    @DisplayName("수동 구입전략으로 로또 티켓을 구입")
-    @Test
-    void issueLottoTicketByManualPurchaseStrategy() {
-        // given
-
-        // when
-
-        // then
     }
 }
