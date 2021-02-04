@@ -43,6 +43,7 @@ public class LottoGenerator {
 
     public List<Lotto> generateLottoTicketsManually(int numberOfTicket) {
         List<Lotto> ManualPlayersLottoTickets = new ArrayList<>();
+        InputView.printNumberOfManualLotto();
         for (int i = 0; i < numberOfTicket; i++) {
             List <LottoNumber> manualLotto = Lotto.getLottoWithSplitting(InputView.getStringOfLotto());
             ManualPlayersLottoTickets.add(new Lotto(manualLotto));
