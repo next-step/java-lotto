@@ -51,12 +51,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber == that.lottoNumber;
     }
 
-    public boolean numberEquals(LottoNumber lottoNumber) {
-        if (lottoNumber == null) {
-            return false;
-        }
-       return this.getLottoNumber() == lottoNumber.getLottoNumber();
-    }
 
     @Override
     public int hashCode() {
@@ -67,11 +61,4 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
-    public static List<LottoNumber> getAsList (final int [] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number: numbers) {
-            lottoNumbers.add(LottoNumber.of(number));
-        }
-        return lottoNumbers;
-    }
 }
