@@ -35,13 +35,15 @@ public class WinnerLotto {
         return getNumbers().contains(lottoNumber);
     }
 
-    public int getMatchedCount(List<LottoNumber> lottoNumber) {
-        return (int) lottoNumber.stream().filter(this::contains).count();
+    public int getMatchedCount(Lotto lotto) {
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        return (int) lottoNumbers.stream().filter(this::contains).count();
     }
-    public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber) {
-        int matchCnt = getMatchedCount(lottoNumber);
+    public Prize getPrizeForEachLotto(Lotto lotto) {
+
+        int matchCnt = getMatchedCount(lotto);
         // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
-        return Prize.getPrizeByMatchedNumber(matchCnt,lottoNumber, bonusBall);
+        return Prize.getPrizeByMatchedNumber(matchCnt,lotto, bonusBall);
     }
 
 

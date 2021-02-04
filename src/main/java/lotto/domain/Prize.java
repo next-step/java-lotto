@@ -42,7 +42,7 @@ public enum Prize {
                 '}';
     }
 
-    public static Prize getPrizeByMatchedNumber(final int matchedNumber, List<LottoNumber> lottoNumber,LottoNumber bonusBall) {
+    public static Prize getPrizeByMatchedNumber(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
         Prize returnPrize = null;
         for(Prize prize : Prize.values()) {
             if (matchedNumber == prize.getMatchedNumber()) {
@@ -50,12 +50,16 @@ public enum Prize {
                 break;
             }
         }
-        if(matchedNumber == Prize.FIVE.getMatchedNumber() && lottoNumber.contains(bonusBall)) {
+        if(FIVE.isFiveWithBonus(matchedNumber,lotto,bonusBall)) {
             returnPrize = Prize.FIVE_WITH_BONUS;
-
         }
         return returnPrize;
 
+    }
+
+    private boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        return matchedNumber == Prize.FIVE.getMatchedNumber() && lottoNumbers.contains(bonusBall);
     }
 
 }
