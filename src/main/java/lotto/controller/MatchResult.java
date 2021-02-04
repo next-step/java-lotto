@@ -79,9 +79,11 @@ public class MatchResult {
 
     private int calculateWinningRevenueOnce(int i) {
         if (i == 3) {
-            return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), true).getPrize().getMoney();
+            return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable
+                    .lookUpTable.get(i), true).getPrize().getMoney();
         }
-        return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), false).getPrize().getMoney();
+        return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable
+                .lookUpTable.get(i), false).getPrize().getMoney();
 
     }
 }

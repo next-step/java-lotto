@@ -67,7 +67,7 @@ public class LottoGenerator {
         return lottoManualTickets;
     }
 
-    private static LottoTicket rawToTicket(String raw) {
+    public static LottoTicket rawToTicket(String raw) {
         return new LottoTicket(raw);
     }
 }

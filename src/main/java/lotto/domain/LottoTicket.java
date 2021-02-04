@@ -30,8 +30,7 @@ public class LottoTicket {
         try{
             rawToLottoNumbers(lottoNumbers, raws);
         }catch(NumberFormatException nfe){
-            nfe.printStackTrace();
-            System.out.println("숫자, 공백, 쉼표(,)만 입력해 주세요.");
+            throw new NumberFormatException("숫자, 공백, 쉼표(,)만 입력해 주세요.");
         }
         this.numbers = lottoNumbers;
     }

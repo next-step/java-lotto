@@ -24,8 +24,8 @@ public class LottoTest {
     void matchPriceAndPayment(int _input, int output) {
         Buyer number = new Buyer();
         Money input = new Money(_input);
-        assertThat(number.matchPriceAndPayment(input)).isEqualToComparingFieldByField(output);
-
+        assertThat(number.matchPriceAndPayment(input))
+                .isEqualToComparingFieldByField(output);
     }
 
     @DisplayName("실제 로또 당첨 번호와 일치하는 번호를 넣었을 때 일치하는지")
@@ -43,7 +43,8 @@ public class LottoTest {
         LottoTicket input = new LottoTicket(lottoNumbers);
         Lotto lotto = new Lotto(ticket);
 
-        assertThat(lotto.getLottoTicket()).isEqualToComparingFieldByField(input);
+        assertThat(lotto.getLottoTicket())
+                .isEqualToComparingFieldByField(input);
     }
 
     @DisplayName("실제 로또 보너스 번호와 일치하는 번호를 넣었을 떄 일치하는지")
@@ -80,6 +81,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(ticket);
         Integer result = 3;
 
-        assertThat(lotto.matchLotto(input)).isEqualTo(result); // TODO: Count형으로 바꿔주기
+        assertThat(lotto.matchLotto(input)).isEqualTo(result);
     }
 }
