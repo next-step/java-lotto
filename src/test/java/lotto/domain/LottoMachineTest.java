@@ -19,6 +19,8 @@ public class LottoMachineTest {
 
     @Test
     void getLottoTicketNumberTest () {
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lottoMachine.getLottoTicketNumber(new Money(500)));
         Assertions.assertThat(lottoMachine.getLottoTicketNumber(new Money(14000))).isEqualTo(14);
     }
 

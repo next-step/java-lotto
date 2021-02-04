@@ -13,7 +13,8 @@ public enum Message {
     WINNER_COUNT("%d개 일치 (%d원)- %d개"),
     FIVE_BONUS_COUNT("%d개 일치, 보너스 볼 일치(%d원)- %d개"),
     STATISTIC_REVENUE("총 수익률은 %.2f입니다."),
-    MONEY("돈은 0원보다 커야합니다.");
+    MONEY("돈은 0원보다 커야합니다."),
+    LOTTO_MINIMUM_MONEY("최소 1000원 이상 지불해야 합니다.");
 
     public final String message;
 
