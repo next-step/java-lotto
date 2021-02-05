@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +40,12 @@ public class WinnerStatistics {
     }
 
     private long calculateTotalPrize() {
-        long totalPrize = 0L;
+        BigDecimal totalPrize = BigDecimal.ZERO;
         for (final Map.Entry<Rank, Integer> rankEntry : results.entrySet()) {
             Rank rank = rankEntry.getKey();
             int count = results.get(rank);
-            totalPrize += rank.getTotalPrizeByCount(count);
+            totalPrize = totalPrize.add(rank.getTotalPrizeByCount(count));
         }
-        return totalPrize;
+        return totalPrize.longValue();
     }
 }
