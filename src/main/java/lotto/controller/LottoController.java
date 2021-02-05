@@ -28,8 +28,16 @@ public class LottoController {
     public List<LottoTicket> purchaseLottoTickets() {
         PurchaseAmount amount = inputView.getPurchaseAmount();
         PurchaseResult manualPurchaseResult = inputView.getManualPurchasedTickets(amount);
-        PurchaseResult autoPurchaseResult = LottoTicketMachine.issue(new AutoPurchase(), manualPurchaseResult.getChange());
+        PurchaseResult autoPurchaseResult = purchaseAutomatically(manualPurchaseResult);
         outputView.printLottoTickets(manualPurchaseResult, autoPurchaseResult);
+        return addAllTickets(manualPurchaseResult, autoPurchaseResult);
+    }
+
+    private PurchaseResult purchaseAutomatically(final PurchaseResult previousPurchaseResult) {
+        return LottoTicketMachine.issue(new AutoPurchase(), previousPurchaseResult.getChange());
+    }
+
+    private List<LottoTicket> addAllTickets(final PurchaseResult manualPurchaseResult, final PurchaseResult autoPurchaseResult) {
         return Stream.concat(
                 manualPurchaseResult.getLottoTickets().stream(), autoPurchaseResult.getLottoTickets().stream()
         ).collect(Collectors.toList());

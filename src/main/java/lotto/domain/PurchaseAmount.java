@@ -25,7 +25,6 @@ public class PurchaseAmount {
         return totalPrize.divide(this.totalAmount, 2, RoundingMode.DOWN).doubleValue();
     }
 
-    // TODO: getter 삭제
     public int getCount() {
         return count;
     }
