@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
+import static lotto.view.ExceptionMessages.LOTTO_NUMBER_MUST_BE_BETWEEN_1_AND_45;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_VALUE = 1;
@@ -34,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validate(final int number) {
         if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45까지의 수만 가능합니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_BETWEEN_1_AND_45);
         }
     }
 

@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 
+import static lotto.view.ExceptionMessages.LOTTO_NUMBERS_MUST_BE_6_TOTAL;
+import static lotto.view.ExceptionMessages.THERE_ARE_DUPLICATE_NUMBERS;
+
 public class LottoTicket {
     private static final int REQUIRED_SIZE = 6;
 
@@ -16,7 +19,7 @@ public class LottoTicket {
 
     private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야만 합니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_BE_6_TOTAL);
         }
     }
 
@@ -24,7 +27,7 @@ public class LottoTicket {
         boolean allUniqueElements = lottoNumbers.stream()
                 .allMatch(new HashSet<>()::add);
         if (!allUniqueElements) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+            throw new IllegalArgumentException(THERE_ARE_DUPLICATE_NUMBERS);
         }
     }
 
