@@ -39,7 +39,8 @@ public class LottoController {
 
     private List<LottoTicket> addAllTickets(final PurchaseResult manualPurchaseResult, final PurchaseResult autoPurchaseResult) {
         return Stream.concat(
-                manualPurchaseResult.getLottoTickets().stream(), autoPurchaseResult.getLottoTickets().stream()
+                manualPurchaseResult.getLottoTickets().stream(),
+                autoPurchaseResult.getLottoTickets().stream()
         ).collect(Collectors.toList());
     }
 
