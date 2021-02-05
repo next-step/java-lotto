@@ -12,5 +12,5 @@ public interface OutputView {
 
     void printStatistics(final WinnerStatistics winnerStatistics);
 
-    void printLottoTickets(PurchaseResult manual, PurchaseResult auto);
+    void printLottoTickets(final PurchaseResult manual, final PurchaseResult auto);
 }

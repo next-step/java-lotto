@@ -32,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LOTTO_NUMBERS[number];
     }
 
-    private static void validate(int number) {
+    private static void validate(final int number) {
         if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 수만 가능합니다.");
         }

@@ -5,7 +5,7 @@ public class LottoJudge {
     private final GoldenTicket goldenTicket;
     private final LottoTicket lottoTicket;
 
-    public LottoJudge(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
+    public LottoJudge(final GoldenTicket goldenTicket, final LottoTicket lottoTicket) {
         this.goldenTicket = goldenTicket;
         this.lottoTicket = lottoTicket;
     }
