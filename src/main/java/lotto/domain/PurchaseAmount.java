@@ -25,11 +25,15 @@ public class PurchaseAmount {
         return totalPrize.divide(this.totalAmount, 2, RoundingMode.DOWN).doubleValue();
     }
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
     public int getCount() {
         return count;
     }
 
-    public PurchaseAmount minus(final int ticketsCount) {
+    public PurchaseAmount minusAmountBy(final int ticketsCount) {
         BigDecimal deductedAmount = this.totalAmount.subtract(LOTTO_TICKET_PRICE.multiply(BigDecimal.valueOf(ticketsCount)));
         return new PurchaseAmount(deductedAmount);
     }

@@ -11,19 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PurchaseAmountTest {
 
-    @DisplayName("총 상금으로 수익률 구하기")
-    @Test
-    void calculateEarningsRateByTotalPrize() {
-        // given
-        PurchaseAmount purchaseAmount = new PurchaseAmount(BigDecimal.valueOf(14_000));
-
-        // when
-        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(BigDecimal.valueOf(5_000));
-
-        // then
-        assertThat(earningsRate).isEqualTo(0.35);
-    }
-
     @DisplayName("amount로 객체 생성")
     @Test
     void createByAmount() {
@@ -45,6 +32,32 @@ class PurchaseAmountTest {
 
         // then
         assertThat(purchaseAmount.getCount()).isEqualTo(3);
+    }
+
+    @DisplayName("총 상금으로 수익률 구하기")
+    @Test
+    void calculateEarningsRateByTotalPrize() {
+        // given
+        PurchaseAmount purchaseAmount = new PurchaseAmount(BigDecimal.valueOf(14_000));
+
+        // when
+        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(BigDecimal.valueOf(5_000));
+
+        // then
+        assertThat(earningsRate).isEqualTo(0.35);
+    }
+
+    @DisplayName("티켓 개수를 받아 해당 금액만큼이 줄어든 새로운 객체를 리턴")
+    @Test
+    void minusAmountBy() {
+        // given
+        PurchaseAmount purchaseAmount = new PurchaseAmount(createLottoTickets());
+
+        // when
+        PurchaseAmount deducted = purchaseAmount.minusAmountBy(2);
+
+        // then
+        assertThat(deducted.getTotalAmount()).isEqualTo(BigDecimal.valueOf(1_000L));
     }
 
     private List<LottoTicket> createLottoTickets() {

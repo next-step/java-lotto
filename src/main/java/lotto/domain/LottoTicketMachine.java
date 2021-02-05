@@ -14,7 +14,7 @@ public class LottoTicketMachine {
      */
     public static PurchaseResult issue(final LottoPurchase lottoPurchase, final PurchaseAmount amount) {
         List<LottoTicket> lottoTickets = lottoPurchase.purchase(amount);
-        PurchaseAmount change = amount.minus(lottoTickets.size());
+        PurchaseAmount change = amount.minusAmountBy(lottoTickets.size());
         return PurchaseResult.of(lottoTickets, change);
     }
 }

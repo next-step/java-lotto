@@ -37,7 +37,7 @@ public class KeyboardInputView implements InputView {
         List<LottoTicket> lottoTickets = IntStream.rangeClosed(1, manualPurchaseCounts)
                 .mapToObj(i -> getLottoTicketInput())
                 .collect(Collectors.toList());
-        return PurchaseResult.of(lottoTickets, purchaseAmount.minus(manualPurchaseCounts));
+        return PurchaseResult.of(lottoTickets, purchaseAmount.minusAmountBy(manualPurchaseCounts));
     }
 
     @Override
