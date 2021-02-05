@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringParserTest {
+class StringParserTest {
 
     @DisplayName("숫자와 콤마로 구성된 문자열을 split")
     @Test

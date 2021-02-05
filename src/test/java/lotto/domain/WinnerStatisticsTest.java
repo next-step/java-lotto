@@ -9,10 +9,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinnerStatisticsTest {
+class WinnerStatisticsTest {
+
     @DisplayName("1등 1개, 2등 1개, 꽝 1개")
     @Test
-    void getRankCount() {
+    void getWinningCountByRank() {
         // given
         WinnerStatistics winnerStatistics = createWinnerStatistics();
 
