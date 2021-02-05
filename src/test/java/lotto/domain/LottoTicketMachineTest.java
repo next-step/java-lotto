@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +14,7 @@ class LottoTicketMachineTest {
     @Test
     void issueLottoTicketByAutoPurchaseStrategy() {
         // given
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(BigDecimal.valueOf(14_000));
 
         // when
         PurchaseResult purchaseResult = LottoTicketMachine.issue(new AutoPurchase(), purchaseAmount);

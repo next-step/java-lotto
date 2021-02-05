@@ -1,35 +1,37 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class PurchaseAmount {
 
-    private static final int LOTTO_TICKET_PRICE = 1_000;
+    private static final BigDecimal LOTTO_TICKET_PRICE = BigDecimal.valueOf(1_000L);
 
-    // TODO: 필드명 rename 고려
-    private final int amount;
+    private final BigDecimal totalAmount;
     private final int count;
 
-    public PurchaseAmount(final int amount) {
-        this.amount = amount;
-        this.count = amount / LOTTO_TICKET_PRICE;
+    public PurchaseAmount(final BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+        this.count = (totalAmount.divide(LOTTO_TICKET_PRICE, RoundingMode.DOWN)).intValue();
     }
 
     public PurchaseAmount(final List<LottoTicket> lottoTickets) {
-        this.amount = lottoTickets.size() * LOTTO_TICKET_PRICE;
+        this.totalAmount = LOTTO_TICKET_PRICE.multiply(BigDecimal.valueOf(lottoTickets.size()));
         this.count = lottoTickets.size();
     }
 
-    public double calculateEarningsRateByTotalPrize(final long totalPrize) {
-        return totalPrize / (double) this.amount;
+    public double calculateEarningsRateByTotalPrize(final BigDecimal totalPrize) {
+        return totalPrize.divide(this.totalAmount, 2, RoundingMode.DOWN).doubleValue();
     }
 
+    // TODO: getter 삭제
     public int getCount() {
         return count;
     }
 
     public PurchaseAmount minus(final int ticketsCount) {
-        int deductedAmount = this.amount - (LOTTO_TICKET_PRICE * ticketsCount);
+        BigDecimal deductedAmount = this.totalAmount.subtract(LOTTO_TICKET_PRICE.multiply(BigDecimal.valueOf(ticketsCount)));
         return new PurchaseAmount(deductedAmount);
     }
 }

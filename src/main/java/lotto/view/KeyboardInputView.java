@@ -6,6 +6,7 @@ import lotto.domain.PurchaseAmount;
 import lotto.domain.PurchaseResult;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class KeyboardInputView implements InputView {
     public PurchaseAmount getPurchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
         int amount = Integer.parseInt(scanner.nextLine());
-        return new PurchaseAmount(amount);
+        return new PurchaseAmount(BigDecimal.valueOf(amount));
     }
 
     @Override

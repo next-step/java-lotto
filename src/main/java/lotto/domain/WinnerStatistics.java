@@ -34,18 +34,18 @@ public class WinnerStatistics {
 
     public double calculateEarningRate() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(this.pickedLottoTickets);
-        long totalPrize = calculateTotalPrize();
+        BigDecimal totalPrize = calculateTotalPrize();
         double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(totalPrize);
         return Math.floor(earningsRate * 100) / 100;
     }
 
-    private long calculateTotalPrize() {
+    private BigDecimal calculateTotalPrize() {
         BigDecimal totalPrize = BigDecimal.ZERO;
         for (final Map.Entry<Rank, Integer> rankEntry : results.entrySet()) {
             Rank rank = rankEntry.getKey();
             int count = results.get(rank);
             totalPrize = totalPrize.add(rank.getTotalPrizeByCount(count));
         }
-        return totalPrize.longValue();
+        return totalPrize;
     }
 }

@@ -9,6 +9,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
+    @DisplayName("")
+    @Test
+    void of() {
+        // given
+
+        // when
+
+        // then
+    }
+
+    @DisplayName("")
+    @Test
+    void getValuesAscendingOrder() {
+        // given
+
+        // when
+
+        // then
+    }
+
     @DisplayName("Rank 상수별로 count를 받아 총 상금을 리턴")
     @Test
     void getTotalPrizeByCount() {

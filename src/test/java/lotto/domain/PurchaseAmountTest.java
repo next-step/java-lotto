@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,25 +15,23 @@ class PurchaseAmountTest {
     @Test
     void calculateEarningsRateByTotalPrize() {
         // given
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(BigDecimal.valueOf(14_000));
 
         // when
-        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(5_000);
+        double earningsRate = purchaseAmount.calculateEarningsRateByTotalPrize(BigDecimal.valueOf(5_000));
 
         // then
-        assertThat(earningsRate).isEqualTo(5_000d / 14_000d);
+        assertThat(earningsRate).isEqualTo(0.35);
     }
 
     @DisplayName("amount로 객체 생성")
     @Test
     void createByAmount() {
         // given & when
-        int amount = 14000;
-        int count = 14;
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(BigDecimal.valueOf(14_000));
 
         // then
-        assertThat(purchaseAmount.getCount()).isEqualTo(count);
+        assertThat(purchaseAmount.getCount()).isEqualTo(14);
     }
 
     @DisplayName("LottoTicket의 리스트로 객체 생성")
