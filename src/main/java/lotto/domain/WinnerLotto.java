@@ -37,10 +37,9 @@ public class WinnerLotto {
 
 
     public Prize getPrizeForEachLotto(Lotto lotto) {
-
-        int matchCnt = winnersLotto.getMatchedCount(lotto);
-        // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
-        return Prize.getPrizeByMatchedNumber(matchCnt,lotto, bonusBall);
+        int matchedCount = winnersLotto.getMatchedCount(lotto);
+        boolean isBonus = Prize.isFiveWithBonus(matchedCount,lotto,bonusBall);
+        return Prize.getPrizeByMatchedNumber(matchedCount,isBonus);
     }
 
 
