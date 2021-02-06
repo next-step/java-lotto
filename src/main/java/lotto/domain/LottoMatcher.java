@@ -14,7 +14,7 @@ public class LottoMatcher {
             PrizeBoard.put(prize,0);
         }
     }
-    public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerNumbers) {
+    public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerLotto) {
         // 들어온 모든 티켓의 리스트에 대해 각 티켓별로 맞춘 수를 구하고 해당 수에 맞는
         // Prize 를 꼽는다. 해당 Prize 의 EnumMap의 count 를 1 증가시킨다.
         // 나중에 getPrizeBoard 를 통해 EnumMap 을 리턴하고 OutputView 를 통해 PrizeBoard 를 순회해
@@ -22,7 +22,7 @@ public class LottoMatcher {
 
         List<Lotto> playersLottoTickets = lottoTickets.getLottoTickets();
         for (Lotto lotto : playersLottoTickets) {
-            Prize prize = winnerNumbers.getPrizeForEachLotto(lotto);
+            Prize prize = winnerLotto.getPrizeForEachLotto(lotto);
             addPrizeStatus(prize);
         }
     }

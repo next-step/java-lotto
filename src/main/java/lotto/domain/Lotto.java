@@ -55,4 +55,10 @@ public class Lotto {
             throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
         }
     }
+    public int getMatchedCount(Lotto lotto) {
+        return (int) lotto.numbers.stream().filter(this::contains).count();
+    }
+    boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
 }

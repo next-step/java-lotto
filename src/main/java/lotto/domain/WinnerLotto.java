@@ -13,6 +13,10 @@ public class WinnerLotto {
         this.bonusBall = bonusBall;
     }
 
+    public Lotto getWinnersLotto() {
+        return winnersLotto;
+    }
+
     public List<LottoNumber> getNumbers() {
         return winnersLotto.getNumbers();
     }
@@ -21,7 +25,7 @@ public class WinnerLotto {
         return bonusBall;
     }
 
-    private void checkLottoContainsBonusball (LottoNumber bonusBalla, List<LottoNumber> numbers) {
+    private void checkLottoContainsBonusball (LottoNumber bonusBall, List<LottoNumber> numbers) {
         if (numbers.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스번호가 로또번호와 중복됩니다.");
         }
@@ -31,17 +35,10 @@ public class WinnerLotto {
         return new WinnerLotto(bonusBall, Lotto.of(numbers));
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
-        return getNumbers().contains(lottoNumber);
-    }
 
-    public int getMatchedCount(Lotto lotto) {
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
-        return (int) lottoNumbers.stream().filter(this::contains).count();
-    }
     public Prize getPrizeForEachLotto(Lotto lotto) {
 
-        int matchCnt = getMatchedCount(lotto);
+        int matchCnt = winnersLotto.getMatchedCount(lotto);
         // DONE : 5개+보너스볼1개 인 경우의 분기 처리 구현
         return Prize.getPrizeByMatchedNumber(matchCnt,lotto, bonusBall);
     }

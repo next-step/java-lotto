@@ -26,7 +26,7 @@ class LottoMatcherTest {
         List<LottoNumber> winnerNumbers = LottoFactory.createListOfLottoNumber(new int[]{1,2,3,4,5,6});
         Lotto lotto = Lotto.of(lottoNumbers);
         WinnerLotto winnerLotto = WinnerLotto.of(LottoNumber.of(7), winnerNumbers);
-        assertThat(winnerLotto.getMatchedCount(lotto)).isEqualTo(3);
+        assertThat(winnerLotto.getWinnersLotto().getMatchedCount(lotto)).isEqualTo(3);
     }
 
     @Test

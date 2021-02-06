@@ -58,8 +58,8 @@ public enum Prize {
     }
 
     private boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
-        return matchedNumber == Prize.FIVE.getMatchedNumber() && lottoNumbers.contains(bonusBall);
+//        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        return matchedNumber == Prize.FIVE.matchedNumber && lotto.contains(bonusBall);
     }
 
 }
