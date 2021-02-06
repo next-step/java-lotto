@@ -12,8 +12,8 @@ class LottoNumberTest {
 
     @DisplayName("잘못된 값 LottoNumber 생성 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"a", "1a", "2a", "0", "46"})
-    public void constructorTest(String number) {
+    @ValueSource(ints = {0, 46})
+    public void constructorTest(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoNumber(number));
     }

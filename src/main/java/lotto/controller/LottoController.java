@@ -34,17 +34,14 @@ public class LottoController {
         int countOfLottoAuto = allCountOfLotto - countOfLottoManual;
         buyLottoProcessManual(countOfLottoManual);
         buyLottoProcessAuto(countOfLottoAuto);
-
         OutputView.printNumberOfLotto(countOfLottoManual, countOfLottoAuto, lottoService.getLottoTickets());
     }
 
     public void buyLottoProcessManual(int countOfLotto){
         Validator.checkCountOfLottoBuy(countOfLotto);
         lottoService.buyLottoTicketManual(
-                InputView.inputManualPurchaseLottoNumber(countOfLotto)
-                        .stream()
-                        .map(lottoNumber -> Arrays.stream(lottoNumber)
-                                .map(String::trim)
+                InputView.inputManualPurchaseLottoNumber(countOfLotto).stream()
+                        .map(lottoNumber -> lottoNumber.stream()
                                 .map(LottoNumber::new)
                                 .collect(Collectors.toList()))
                         .map(LottoTicket::new)
@@ -58,8 +55,7 @@ public class LottoController {
     }
 
     public void pickLotteryNumber() {
-        List<LottoNumber> winningNumbers = InputView.inputWinningNumbers()
-                .stream()
+        List<LottoNumber> winningNumbers = InputView.inputWinningNumbers().stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());

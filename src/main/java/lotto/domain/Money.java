@@ -6,17 +6,12 @@ public class Money {
     private final int amount;
 
     public Money(int amount) {
+        validate(amount);
         this.amount = amount;
     }
 
-    public Money(String amount) {
-        validate(amount);
-        this.amount = Integer.parseInt(amount);
-    }
-
-    private void validate(String amount){
-        Validator.checkNumberValidation(amount);
-        Validator.checkBuyPriceValidation(Integer.parseInt(amount));
+    private void validate(int amount){
+        Validator.checkBuyPriceValidation(amount);
     }
 
     public int getAmount() {

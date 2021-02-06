@@ -10,8 +10,8 @@ class MoneyTest {
 
     @DisplayName("잘못된 값 Money (String parameter) 생성 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"a", "1a", "2a", "0", "999", "-123"})
-    public void constructorParamStringTest(String amount) {
+    @ValueSource(ints = {0, 999, -123, 000})
+    public void constructorParamStringTest(int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Money(amount));
     }
