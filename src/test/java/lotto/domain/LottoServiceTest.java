@@ -34,7 +34,7 @@ public class LottoServiceTest {
     public void buyLottoTicketsTest() {
         initLottoService();
         int numberOfTickets = 5;
-        lottoService.buyLottoTickets(numberOfTickets);
+        lottoService.buyLottoTicketsAuto(numberOfTickets);
         int size = lottoService.getLottoTickets().size();
         assertThat(size).isEqualTo(numberOfTickets);
     }

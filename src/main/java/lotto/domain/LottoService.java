@@ -17,7 +17,7 @@ public class LottoService {
         this.lottoTickets = lottoTickets;
     }
 
-    public void buyLottoTickets(int numberOfTickets) {
+    public void buyLottoTicketsAuto(int numberOfTickets) {
         for (int i = 0; i < numberOfTickets; ++i) {
             lottoTickets.add(new LottoTicket());
         }
