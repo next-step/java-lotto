@@ -12,18 +12,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
+        validate(number);
         this.number = number;
-        validate(this.number);
     }
 
     public LottoNumber(String number){
-        Validator.checkNumberValidation(number);
+        validate(number);
         this.number = Integer.parseInt(number);
-        validate(this.number);
     }
 
     private void validate(int number){
         Validator.checkLottoNumberValidation(number);
+    }
+
+    private void validate(String number){
+        Validator.checkNumberValidation(number);
+        validate(Integer.parseInt(number));
     }
 
     public static List<LottoNumber> of(List<Integer> normalNumbers) {
