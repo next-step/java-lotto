@@ -2,9 +2,7 @@ package lotto.domain;
 
 import lotto.utils.Validator;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -17,12 +15,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
     private void validate(int number){
         Validator.checkLottoNumberValidation(number);
-    }
-
-    public static List<LottoNumber> of(List<Integer> normalNumbers) {
-        return normalNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     @Override

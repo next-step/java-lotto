@@ -60,4 +60,10 @@ public class LottoTicket {
 
         return rank;
     }
+
+    public static LottoTicket of(List<Integer> normalNumbers){
+        return new LottoTicket(normalNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
 }

@@ -10,7 +10,6 @@ import lotto.utils.Validator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,10 +40,7 @@ public class LottoController {
         Validator.checkCountOfLottoBuy(countOfLotto);
         lottoService.buyLottoTicketManual(
                 InputView.inputManualPurchaseLottoNumber(countOfLotto).stream()
-                        .map(lottoNumber -> lottoNumber.stream()
-                                .map(LottoNumber::new)
-                                .collect(Collectors.toList()))
-                        .map(LottoTicket::new)
+                        .map(LottoTicket::of)
                         .collect(Collectors.toList())
         );
     }
