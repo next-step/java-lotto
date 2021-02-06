@@ -35,7 +35,7 @@ public class ValidatorTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 5, 7, 8})
     void checkLengthWinningNumbersValidationTest(int input) {
-        assertThatThrownBy(() -> Validator.checkLengthWinningNumbersValidation(input))
+        assertThatThrownBy(() -> Validator.checkLengthLottoNumberSize(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -17,7 +17,7 @@ public class LotteryNumber {
     }
 
     private void validate(){
-        Validator.checkLengthWinningNumbersValidation(winningNumbers.size());
+        Validator.checkLengthLottoNumberSize(winningNumbers.size());
         Validator.checkDuplicatedWinningNumber(winningNumbers);
         Validator.checkWinningNumbersInBonusNumber(winningNumbers, bonusNumber);
     }

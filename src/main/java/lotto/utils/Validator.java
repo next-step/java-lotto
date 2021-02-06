@@ -29,7 +29,7 @@ public class Validator {
         }
     }
 
-    public static void checkLengthWinningNumbersValidation(int length) {
+    public static void checkLengthLottoNumberSize(int length) {
         if (length != LottoTicket.PICKED_NUMBERS_SIZE) {
             throw new IllegalArgumentException("당첨 로또 번호의 개수가 옳지 않습니다.");
         }
