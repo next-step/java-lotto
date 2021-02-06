@@ -12,11 +12,11 @@ public enum Rank {
     NOTHING(0, "0개");
 
     private final int reward;
-    private final String message;
+    private final String countMessage;
 
     Rank(int reward, String message){
         this.reward = reward;
-        this.message = message;
+        this.countMessage = message;
     }
 
     public static Rank getRank(int score, boolean hasBonus) {
@@ -32,8 +32,8 @@ public enum Rank {
         return reward;
     }
 
-    public String getMessage() {
-        return message;
+    public String getCountMessage() {
+        return countMessage;
     }
 
     public static Map<Rank, Integer> getInitRankingDict() {

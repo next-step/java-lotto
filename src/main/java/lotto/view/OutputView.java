@@ -21,7 +21,10 @@ public class OutputView {
         System.out.println("--------");
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.NOTHING))
-                .forEach(rank -> System.out.printf("%s 일치 (%d원) - %d\n", rank.getMessage(), rank.getReward(), lottoRankingStatus.get(rank)));
+                .forEach(rank -> System.out.printf("%s 일치 (%d원) - %d\n",
+                        rank.getCountMessage(),
+                        rank.getReward(),
+                        lottoRankingStatus.get(rank)));
         System.out.printf("총 수익률은 %.1f 입니다.\n", interestRate);
     }
 }
