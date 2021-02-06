@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LotteryNumber;
 import lotto.domain.Rank;
 import lotto.domain.Money;
+import lotto.utils.Validator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -29,11 +30,18 @@ public class LottoController {
     public void buyLottoProcess() {
         Money price = new Money(InputView.inputPrice());
         int allCountOfLotto = price.getAmount() / LottoTicket.PRICE;
-        // 수동구매 개수
-        int manualPurchaseCountOfLotto = InputView.inputManualPurchaseCount();
-        int autoPurchaseCountOfLotto = allCountOfLotto - manualPurchaseCountOfLotto;
+        int countOfLottoManual = InputView.inputManualPurchaseCount();
+        int countOfLottoAuto = allCountOfLotto - countOfLottoManual;
+        buyLottoProcessManual(countOfLottoManual);
+        buyLottoProcessAuto(countOfLottoAuto);
+
+        OutputView.printNumberOfLotto(countOfLottoManual, countOfLottoAuto, lottoService.getLottoTickets());
+    }
+
+    public void buyLottoProcessManual(int countOfLotto){
+        Validator.checkCountOfLottoBuy(countOfLotto);
         lottoService.buyLottoTicketManual(
-                InputView.inputManualPurchaseLottoNumber(manualPurchaseCountOfLotto)
+                InputView.inputManualPurchaseLottoNumber(countOfLotto)
                         .stream()
                         .map(lottoNumber -> Arrays.stream(lottoNumber)
                                 .map(String::trim)
@@ -42,14 +50,11 @@ public class LottoController {
                         .map(LottoTicket::new)
                         .collect(Collectors.toList())
         );
+    }
 
-
-        lottoService.buyLottoTicketsAuto(autoPurchaseCountOfLotto);
-        OutputView.printNumberOfLotto(autoPurchaseCountOfLotto);
-        List<LottoTicket> lottoTickets = lottoService.getLottoTickets();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            OutputView.printLottoPickedNumber(lottoTicket);
-        }
+    public void buyLottoProcessAuto(int countOfLotto){
+        Validator.checkCountOfLottoBuy(countOfLotto);
+        lottoService.buyLottoTicketsAuto(countOfLotto);
     }
 
     public void pickLotteryNumber() {
