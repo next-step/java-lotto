@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.Validator;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class LottoTicket {
     }
 
     public LottoTicket(List<LottoNumber> pickedNumbers) {
+        validate(pickedNumbers);
         this.pickedNumbers = pickedNumbers;
         sortPickedNumbers();
     }
@@ -31,6 +34,11 @@ public class LottoTicket {
     public List<LottoNumber> pickNumbers() {
         Collections.shuffle(LOTTO_NUMBERS_RANGE);
         return new ArrayList<>(LOTTO_NUMBERS_RANGE.subList(0, PICKED_NUMBERS_SIZE));
+    }
+
+    private void validate(List<LottoNumber> pickedNumbers){
+        Validator.checkLengthLottoNumberSize(pickedNumbers.size());
+        Validator.checkDuplicatedLottoNumbers(pickedNumbers);
     }
 
     public List<LottoNumber> getPickedNumbers() {
