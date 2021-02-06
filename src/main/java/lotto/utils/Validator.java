@@ -35,9 +35,9 @@ public class Validator {
         }
     }
 
-    public static void checkDuplicatedWinningNumber(List<LottoNumber> winningNumbers) {
-        if (new HashSet<>(winningNumbers).size() != winningNumbers.size()) {
-            throw new IllegalArgumentException("당첨번호 중에 중복된 수가 있습니다.");
+    public static void checkDuplicatedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("로또번호 중에 중복된 수가 있습니다.");
         }
     }
 
