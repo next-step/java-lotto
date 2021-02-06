@@ -9,7 +9,13 @@ import java.util.List;
 public class Validator {
     private Validator() {}
 
-    public static void checkNumberValidation(String number) throws IllegalArgumentException {
+    public static void checkCountOfLottoBuy(int number) {
+        if(number < 0){
+            throw new IllegalArgumentException("구매할 로또의 개수가 맞지 않습니다.");
+        }
+    }
+
+    public static void checkNumberValidation(String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
@@ -17,13 +23,13 @@ public class Validator {
         }
     }
 
-    public static void checkBuyPriceValidation(int price) throws IllegalArgumentException {
+    public static void checkBuyPriceValidation(int price) {
         if (price < LottoTicket.PRICE) {
             throw new IllegalArgumentException("로또를 구매할 수 없는 가격입니다.");
         }
     }
 
-    public static void checkLottoNumberValidation(int number) throws IllegalArgumentException {
+    public static void checkLottoNumberValidation(int number) {
         if (number < LottoNumber.MIN_LOTTO_NUMBER || number > LottoNumber.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
