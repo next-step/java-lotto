@@ -24,8 +24,8 @@ public class LottoServiceTest {
 
     public void initLottoServiceWithTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(LottoNumber.asList(Arrays.asList(1, 12, 23, 34, 25, 16))));
-        lottoTickets.add(new LottoTicket(LottoNumber.asList(Arrays.asList(19, 28, 37, 41, 12, 1))));
+        lottoTickets.add(new LottoTicket(LottoNumber.of(Arrays.asList(1, 12, 23, 34, 25, 16))));
+        lottoTickets.add(new LottoTicket(LottoNumber.of(Arrays.asList(19, 28, 37, 41, 12, 1))));
         lottoService = new LottoService(lottoTickets);
     }
 
@@ -43,7 +43,7 @@ public class LottoServiceTest {
     @Test
     public void calculatePrizeTest() {
         initLottoServiceWithTickets();
-        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.of(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
         LottoController lottoController = new LottoController(lottoService);
         lottoController.showLottoResult();
@@ -66,7 +66,7 @@ public class LottoServiceTest {
     @Test
     public void getInterestRateTest() {
         initLottoServiceWithTickets();
-        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.asList(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
+        LotteryNumber lotteryNumber = new LotteryNumber(LottoNumber.of(Arrays.asList(12, 1, 11, 13, 14, 23)), new LottoNumber(45));
         lottoService.recordLotteryNumber(lotteryNumber);
         int profit = lottoService.calculateResult(Rank.getInitRankingDict());
         assertThat(lottoService.getInterestRate(profit)).isEqualTo(2.5);

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.internal.Lists;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public class LottoTicketTest {
     @DisplayName("로또번호 오름차순 정렬 테스트")
     @Test
     public void sortLottoNumbersTest() {
-        List<LottoNumber> lottoNumbers = LottoNumber.asList(Arrays.asList(6, 5, 4, 3, 2, 1));
+        List<LottoNumber> lottoNumbers = LottoNumber.of(Arrays.asList(6, 5, 4, 3, 2, 1));
         List<LottoNumber> reverseLottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(reverseLottoNumbers);
         lottoTicket = new LottoTicket(lottoNumbers);

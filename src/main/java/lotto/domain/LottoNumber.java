@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         Validator.checkLottoNumberValidation(number);
     }
 
-    public static List<LottoNumber> asList(List<Integer> normalNumbers) {
+    public static List<LottoNumber> of(List<Integer> normalNumbers) {
         return normalNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

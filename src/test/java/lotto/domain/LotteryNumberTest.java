@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LotteryNumberTest {
     private static Stream<Arguments> provideLotteryNumberForTest() {
         return Stream.of(
-                Arguments.of(LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(1)),
-                Arguments.of(LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 5)), new LottoNumber(45)),
-                Arguments.of(LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 5, 5)), new LottoNumber(45))
+                Arguments.of(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(1)),
+                Arguments.of(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5)), new LottoNumber(45)),
+                Arguments.of(LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 5)), new LottoNumber(45))
         );
     }
 
