@@ -24,7 +24,7 @@ public class AutoLottoMain {
             // 보너스 번호를 입력
             LottoNumber bonusNumber = LottoNumber.of(InputView.getBonusBall());
             // 정답로또를 생성. split 으로 정답 로또를 파싱해 리스트화
-            WinnerLotto winnerLotto = WinnerLotto.of(bonusNumber, Lotto.getLottoWithSplitting(winningLottoNumber));
+            WinnerLotto winnerLotto = WinnerLotto.of(bonusNumber, LottoGenerator.getLottoWithSplitting(winningLottoNumber));
             // 로또매처를 통해 플레이어의 로또와 정답의 비교 결과를 확인
             LottoMatcher lottoMatcher = new LottoMatcher();
             lottoMatcher.checkAllTickets(purchasedTickets,winnerLotto);

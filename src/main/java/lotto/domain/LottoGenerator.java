@@ -45,7 +45,7 @@ public class LottoGenerator {
         List<Lotto> ManualPlayersLottoTickets = new ArrayList<>();
         InputView.printNumberOfManualLotto();
         for (int i = 0; i < numberOfTicket; i++) {
-            List <LottoNumber> manualLotto = Lotto.getLottoWithSplitting(InputView.getStringOfLotto());
+            List <LottoNumber> manualLotto = getLottoWithSplitting(InputView.getStringOfLotto());
             ManualPlayersLottoTickets.add(new Lotto(manualLotto));
         }
         return ManualPlayersLottoTickets;
@@ -59,5 +59,14 @@ public class LottoGenerator {
 
         return playersLottoTickets;
 
+    }
+    public static List<LottoNumber> getLottoWithSplitting(String text) {
+        String [] inputs = text.split(Lotto.DELIMITER);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String input : inputs) {
+            lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
+        }
+        Lotto.checkSizeOfLotto(lottoNumbers);
+        return lottoNumbers;
     }
 }

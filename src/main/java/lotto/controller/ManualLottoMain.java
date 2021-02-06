@@ -26,7 +26,7 @@ public class ManualLottoMain {
             // 지난주 로또 정답을 입력받음
             String winningLottoNumber = InputView.getLottoAnswer();
             // split 으로 정답 로또를 파싱해 리스트화 WinnerLotto.getLottoWithSplitting
-            List<LottoNumber> winningLotto = Lotto.getLottoWithSplitting(winningLottoNumber);
+            List<LottoNumber> winningLotto = LottoGenerator.getLottoWithSplitting(winningLottoNumber);
             // 보너스 번호를 입력
             LottoNumber bonusNumber = LottoNumber.of(InputView.getBonusBall());
             // 정답로또를 생성

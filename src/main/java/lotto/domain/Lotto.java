@@ -9,17 +9,6 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-
-    public static List<LottoNumber> getLottoWithSplitting(String text) {
-        String [] inputs = text.split(DELIMITER);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String input : inputs) {
-            lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
-        }
-        checkSizeOfLotto(lottoNumbers);
-        return lottoNumbers;
-    }
-
     public List<LottoNumber> getNumbers() {
         return numbers;
     }
@@ -43,7 +32,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
+    public static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
         }

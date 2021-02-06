@@ -14,39 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
-    @DisplayName("comma with space parsing test")
-    @Test
-    void getWinnerLottoWithSplitting() {
-        String input = "1, 2, 3, 4, 5, 6";
-        List<LottoNumber> expectedLottoNumbers = new ArrayList<>(Arrays.asList(
-                 LottoNumber.of(1),
-                 LottoNumber.of(2),
-                 LottoNumber.of(3),
-                 LottoNumber.of(4),
-                 LottoNumber.of(5),
-                 LottoNumber.of(6)
-        ));
-        assertThat(Lotto.getLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
-    }
 
-    @DisplayName("can't parsing 6+- length input")
-    @Test
-    void getWinnerLottoWithSplittingFailIfLengthIsNotSix() {
-        String input = "1, 2, 3, 4, 5, 6, 7";
-        assertThatThrownBy(() -> {
-            Lotto.getLottoWithSplitting(input);
-        }).isInstanceOf(IllegalArgumentException.class);
-
-    }
-    @DisplayName("can't parsing not integer input")
-    @Test
-    void getWinnerLottoWithSplittingWithNotInteger() {
-        String input = "1, 2, a, b, c, d";
-        assertThatThrownBy(() -> {
-            Lotto.getLottoWithSplitting(input);
-        }).isInstanceOf(IllegalArgumentException.class);
-
-    }
     @DisplayName("saving Lotto Number test")
     @Test
     void 로또_번호_저장() {
