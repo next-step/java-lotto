@@ -9,7 +9,7 @@ import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,20 +18,34 @@ public class LottoController {
     private final LottoService lottoService;
     private Map<Rank, Integer> lottoRankingStatus;
 
-    public LottoController(){
+    public LottoController() {
         lottoService = new LottoService();
     }
 
-    public LottoController(LottoService lottoService){
+    public LottoController(LottoService lottoService) {
         this.lottoService = lottoService;
     }
 
     public void buyLottoProcess() {
         Money price = new Money(InputView.inputPrice());
-        int numberOfLotto = price.getAmount() / LottoTicket.PRICE;
+        int allCountOfLotto = price.getAmount() / LottoTicket.PRICE;
+        // 수동구매 개수
+        int manualPurchaseCountOfLotto = InputView.inputManualPurchaseCount();
+        int autoPurchaseCountOfLotto = allCountOfLotto - manualPurchaseCountOfLotto;
+        lottoService.buyLottoTicketManual(
+                InputView.inputManualPurchaseLottoNumber(manualPurchaseCountOfLotto)
+                        .stream()
+                        .map(lottoNumber -> Arrays.stream(lottoNumber)
+                                .map(String::trim)
+                                .map(LottoNumber::new)
+                                .collect(Collectors.toList()))
+                        .map(LottoTicket::new)
+                        .collect(Collectors.toList())
+        );
 
-        lottoService.buyLottoTickets(numberOfLotto);
-        OutputView.printNumberOfLotto(numberOfLotto);
+
+        lottoService.buyLottoTicketsAuto(autoPurchaseCountOfLotto);
+        OutputView.printNumberOfLotto(autoPurchaseCountOfLotto);
         List<LottoTicket> lottoTickets = lottoService.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTickets) {
             OutputView.printLottoPickedNumber(lottoTicket);
