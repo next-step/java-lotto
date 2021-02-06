@@ -34,6 +34,8 @@ public enum Prize {
         return cash;
     }
 
+
+
     @Override
     public String toString() {
         return "Prize{" +
@@ -42,22 +44,26 @@ public enum Prize {
                 '}';
     }
 
-    public static Prize getPrizeByMatchedNumber(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
-        Prize returnPrize = null;
+    private static Prize getPrizeByOnlyMatchedNumber(int matchedNumber) {
         for(Prize prize : Prize.values()) {
-            if (matchedNumber == prize.getMatchedNumber()) {
-                returnPrize = prize;
-                break;
+            if (matchedNumber == prize.matchedNumber) {
+                return prize;
             }
         }
-        if(FIVE.isFiveWithBonus(matchedNumber,lotto,bonusBall)) {
+        throw new IllegalArgumentException("no matched prize");
+    }
+
+    public static Prize getPrizeByMatchedNumber(final int matchedNumber,boolean isBonus) {
+        Prize returnPrize = null;
+        returnPrize = getPrizeByOnlyMatchedNumber(matchedNumber);
+        if(isBonus) {
             returnPrize = Prize.FIVE_WITH_BONUS;
         }
         return returnPrize;
 
     }
 
-    private boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
+    public static boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
 //        List<LottoNumber> lottoNumbers = lotto.getNumbers();
         return matchedNumber == Prize.FIVE.matchedNumber && lotto.contains(bonusBall);
     }

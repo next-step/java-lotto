@@ -18,6 +18,6 @@ class PrizeTest {
     @DisplayName("FIVE_WITH_BONUS 적중 테스트")
     @Test
     void fiveWithBonus() {
-        assertThat(Prize.getPrizeByMatchedNumber(5,LottoFactory.createPlayersLotto(new int[]{1, 2, 3, 4, 5, 7}),LottoNumber.of(7))).isEqualTo(Prize.FIVE_WITH_BONUS);
+        assertThat(Prize.isFiveWithBonus(5, LottoFactory.createPlayersLotto(new int[]{1, 2, 3, 4, 5, 6}), LottoNumber.of(6))).isEqualTo(true);
     }
 }
