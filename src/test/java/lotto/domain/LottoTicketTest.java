@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static lotto.domain.LottoTicket.PICKED_NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTicketTest {
     private static LottoTicket lottoTicket;
@@ -37,4 +38,12 @@ public class LottoTicketTest {
         assertThat(lottoTicket.getPickedNumbers()).isEqualTo(lottoNumbers);
     }
 
+
+    @DisplayName("로또번호 중복숫자 테스트")
+    @Test
+    public void LottoTicketDuplicatedTest() {
+        List<LottoNumber> lottoNumbers = LottoNumber.of(Arrays.asList(5, 5, 4, 3, 2, 1));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTicket(lottoNumbers));
+    }
 }
