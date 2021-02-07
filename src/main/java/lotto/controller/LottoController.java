@@ -32,6 +32,8 @@ public class LottoController {
 
     public void start() {
         money = inputView.getMoneyToBuyLotto();
+        int manualCnt = inputView.getManualLottoCnt();
+        List<String> manualLottoNumberList = inputView.getManualLottoNumberList(manualCnt);
         generatePlayersLotto(LottoTickets.countTicketNumberByMoney(money.getMoney()));
         OutputView.printAllLotto(purchasedTickets);
         generateWinnerLotto();
