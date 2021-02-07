@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinnerLottoTest {
+class WinningLottoTest {
 
-    WinnerLotto winnerLotto;
+    WinningLotto winningLotto;
     List<LottoNumber> expectedLottoNumbers;
     LottoNumber lottoBonusNumber;
 
@@ -27,26 +27,26 @@ class WinnerLottoTest {
                 new LottoNumber(6)
         ));
         lottoBonusNumber = new LottoNumber(7);
-        winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
+        winningLotto = new WinningLotto(lottoBonusNumber,expectedLottoNumbers);
     }
 
     @DisplayName("get List of LottoNumber test")
     @Test
     void getNumbers() {
-        assertThat(winnerLotto.getNumbers()).isEqualTo(expectedLottoNumbers);
+        assertThat(winningLotto.getNumbers()).isEqualTo(expectedLottoNumbers);
     }
 
     @DisplayName("getBonusBall test")
     @Test
     void getBonusBall() {
-        assertThat(winnerLotto.getBonusBall()).isEqualTo(lottoBonusNumber);
+        assertThat(winningLotto.getBonusBall()).isEqualTo(lottoBonusNumber);
     }
 
     @DisplayName("comma with space parsing test")
     @Test
     void getWinnerLottoWithSplitting() {
         String input = "1, 2, 3, 4, 5, 6";
-        assertThat(winnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+        assertThat(winningLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
     }
 
     @DisplayName("duplicated number lotto")
@@ -62,7 +62,7 @@ class WinnerLottoTest {
                     new LottoNumber(6)
             ));
             lottoBonusNumber = new LottoNumber(7);
-            winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
+            winningLotto = new WinningLotto(lottoBonusNumber,expectedLottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
     @DisplayName("string input have duplicated number case")
@@ -70,8 +70,8 @@ class WinnerLottoTest {
     void duplicatedLottoNumber() {
         Assertions.assertThatThrownBy(() -> {
             LottoNumber bonus = new LottoNumber(6);
-            List<LottoNumber> lotto = winnerLotto.getWinnerLottoWithSplitting("1, 1, 2, 3, 4, 5");
-            WinnerLotto winnerLotto = new WinnerLotto(bonus,lotto);
+            List<LottoNumber> lotto = this.winningLotto.getWinnerLottoWithSplitting("1, 1, 2, 3, 4, 5");
+            WinningLotto winningLotto = new WinningLotto(bonus,lotto);
         }).isInstanceOf(IllegalArgumentException.class);
 
     }

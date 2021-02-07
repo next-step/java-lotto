@@ -8,7 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.PlayersLotto;
-import lotto.domain.WinnerLotto;
+import lotto.domain.WinningLotto;
 import lotto.util.ROICalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -21,11 +21,11 @@ public class LottoController {
     private final LottoMatcher lottoMatcher;
     private Money money;
     private LottoTickets purchasedTickets;
-    private WinnerLotto winnerLotto;
+    private WinningLotto winningLotto;
 
     public LottoController() {
         inputView = new InputView();
-        lotto = new WinnerLotto();
+        lotto = new WinningLotto();
         lottoGenerator = new LottoGenerator();
         lottoMatcher = new LottoMatcher();
     }
@@ -37,7 +37,7 @@ public class LottoController {
         generatePlayersLotto(LottoTickets.countTicketNumberByMoney(money.getMoney()));
         OutputView.printAllLotto(purchasedTickets);
         generateWinnerLotto();
-        lottoMatcher.checkAllTickets(purchasedTickets, winnerLotto);
+        lottoMatcher.checkAllTickets(purchasedTickets, winningLotto);
         printLottoResult();
     }
 
@@ -49,10 +49,10 @@ public class LottoController {
 
     private void generateWinnerLotto() {
         String winningLottoNumber = inputView.getLottoAnswer();
-        List<LottoNumber> winningLotto = lotto.getWinnerLottoWithSplitting(winningLottoNumber);
+        List<LottoNumber> winningLotto = lotto.getLottoNumbersWithSplitting(winningLottoNumber);
         int bonusBall = inputView.getBonusBall();
         LottoNumber bonusNumber = new LottoNumber(bonusBall);
-        winnerLotto = new WinnerLotto(bonusNumber, winningLotto);
+        this.winningLotto = new WinningLotto(bonusNumber, winningLotto);
     }
 
     private void printLottoResult() {
