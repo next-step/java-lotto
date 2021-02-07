@@ -14,10 +14,9 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public Money getMoneyToBuyLotto() {
+    public String getMoneyToBuyLotto() {
         System.out.println(InfoStrings.INFO_INPUT_PURCHASE_MONEY);
-        String input = scanner.nextLine();
-        return new Money(input);
+        return scanner.nextLine();
     }
 
     public int getManualLottoCnt() {
@@ -29,6 +28,7 @@ public class InputView {
     public List<String> getManualLottoNumberList(int manualLottoCnt) {
         List<String> manualNumberList = new ArrayList<>();
         System.out.println(InfoStrings.INFO_INPUT_MANUAL_LOTTO_NUMBER_LIST);
+        scanner.nextLine();
         for (int i = 0; i < manualLottoCnt; i++) {
             String ManualLottoNumber = scanner.nextLine();
             manualNumberList.add(ManualLottoNumber);

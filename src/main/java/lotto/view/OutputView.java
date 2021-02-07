@@ -5,18 +5,15 @@ import java.util.Map;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.PlayersLotto;
+import lotto.domain.PlayersLottoGenerateOption;
 import lotto.domain.Prize;
 import lotto.util.InfoStrings;
 
 
 public class OutputView {
 
-    public static void printNumberOfLottoInfo(int numberOfManualLotto, int numberOfAutoLotto) {
-        String.format(InfoStrings.INFO_OUTPUT_PURCHASE, numberOfManualLotto, numberOfAutoLotto);
-    }
-
-    public static void printAllLotto(LottoTickets lottoTickets) {
-        System.out.println();
+    public static void printAllLotto(LottoTickets lottoTickets, PlayersLottoGenerateOption option) {
+        System.out.println(String.format(InfoStrings.INFO_OUTPUT_PURCHASE, option.getManualGenerateCnt(), option.getAutoGenerateCnt()));
         for (PlayersLotto lotto : lottoTickets.getLottoTickets()) {
             System.out.println(lotto.getAsIntegerList());
         }
@@ -36,7 +33,7 @@ public class OutputView {
     }
 
     public static void printReturnOnInvestment(double returnOnInvestment) {
-        String.format(InfoStrings.INFO_OUTPUT_LOTTO_RETURN_OF_INVESTMENT, returnOnInvestment);
+        System.out.println(String.format(InfoStrings.INFO_OUTPUT_LOTTO_RETURN_OF_INVESTMENT, returnOnInvestment));
     }
 
     private static void printPrizeCount(Prize prize) {
