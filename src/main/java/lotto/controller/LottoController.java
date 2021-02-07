@@ -10,63 +10,89 @@ import java.util.Map;
 
 public class LottoController {
 
-    private final Validator validator = new Validator();
     private final OutputHandler outputHandler = new OutputHandler();
     private final InputHandler inputHandler = new InputHandler();
 
-    private String money;
+    private Money money;
+    private Integer manualCount;
     private List<Ticket> tickets;
-    private String winningNumberInput;
-    private String bonusNumber;
+    private LottoCount lottoCount;
 
     public LottoController() {
         getPriceFromUser();
-        purchaseTicket();
+        getManualTickets();
         getWinningNumberFromUser();
-        getBonusNumberFromUser();
-        returnFinalLottoResult();
     }
 
     public void getPriceFromUser() {
-        money = inputHandler.requestPriceFromUser();
-        if (!validator.isPriceValidate(money)) {
+        try {
+            money = new Money(inputHandler.requestPriceFromUser());
+            getManualTicketCounts();
+        } catch (IllegalArgumentException e) {
             outputHandler.printErrorPurchasePrice();
-            System.exit(0);
+            getPriceFromUser();
         }
     }
 
-    public void purchaseTicket() {
-        Price price = new Price(Integer.parseInt(money));
-        outputHandler.printLottoPurchaseCount(price.calculateTickets());
-        tickets = price.buyTickets();
+    public void getManualTicketCounts() {
+        try {
+            manualCount = inputHandler.requestNumberOfManualTicket();
+            lottoCount = new LottoCount(money, manualCount);
+        } catch (IllegalArgumentException e) {
+            outputHandler.printErrorManualTicketCount();
+            getManualTicketCounts();
+        }
+    }
+
+    public void getManualTickets() {
+        try {
+            outputHandler.askLottoTicket();
+            ManualLottoMachine manualLottoMachine = new ManualLottoMachine(inputHandler.requestManualTicketNumber(manualCount));
+            purchaseTicket(manualLottoMachine);
+        } catch (IllegalArgumentException e) {
+            outputHandler.printErrorTicketNumber();
+            getManualTickets();
+        }
+    }
+
+    public void purchaseTicket(ManualLottoMachine manualLottoMachine) {
+        tickets = manualLottoMachine.buyTicket(lottoCount.calculateAutoCount());
+        outputHandler.printLottoPurchaseCount(manualCount, lottoCount.calculateAutoCount());
         outputHandler.printGeneratedTickets(tickets);
     }
 
     public void getWinningNumberFromUser() {
-        winningNumberInput = inputHandler.requestWinningNumber();
-        if (!validator.validateWinningNumber(winningNumberInput)) {
-            outputHandler.printErrorWinningNumber();
-            System.exit(0);
+        try {
+            Ticket winningTicket = new Ticket(inputHandler.requestWinningNumber());
+            getBonusNumberFromUser(winningTicket);
+        } catch (IllegalArgumentException e) {
+            outputHandler.printErrorTicketNumber();
+            getWinningNumberFromUser();
         }
     }
 
-    public void getBonusNumberFromUser() {
-        bonusNumber = inputHandler.requestBonusNumber();
-        if (!validator.validateBonusNumber(bonusNumber)) {
+    public void getBonusNumberFromUser(Ticket winningTicket) {
+        String bonusNumber = inputHandler.requestBonusNumber();
+        if (!Validator.validateBonusNumber(bonusNumber)) {
             outputHandler.printErrorBonusBall();
-            System.exit(0);
+            getBonusNumberFromUser(winningTicket);
         }
+        returnFinalLottoResult(winningTicket, bonusNumber);
     }
 
-    public void returnFinalLottoResult() {
-        WinningNumber winningNumber = new WinningNumber(new Ticket(NumberUtils.convertStringToIntegerList(winningNumberInput)),
+    public void returnFinalLottoResult(Ticket winningTicket, String bonusNumber) {
+        WinningNumber winningNumber = new WinningNumber(winningTicket,
                 Integer.parseInt(bonusNumber));
         Lotto lotto = new Lotto(winningNumber, tickets);
-
         Map<Revenue, Integer> revenueCluster = lotto.statisticsTicket();
+
         outputHandler.printLottoStatics(revenueCluster);
+        returnYield(lotto, revenueCluster);
+    }
+
+    public void returnYield(Lotto lotto, Map<Revenue, Integer> revenueCluster) {
         int total = lotto.calculateTotalPrize(revenueCluster);
-        Double yield = NumberUtils.calculateYield(Integer.parseInt(money), total);
+        Double yield = NumberUtils.calculateYield(Integer.parseInt(money.toString()), total);
         outputHandler.printTotalRevenue(yield);
     }
 }
