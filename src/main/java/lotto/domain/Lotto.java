@@ -38,7 +38,7 @@ public class Lotto {
         }
     }
 
-    void checkDuplicatedNumber(List<LottoNumber> lottoNumbers) {
+    private void checkDuplicatedNumber(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumbersChecker = new HashSet<>(lottoNumbers);
         if (lottoNumbersChecker.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
