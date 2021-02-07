@@ -37,8 +37,4 @@ public class Lotto {
         }
         return totalRevenue;
     }
-
-    public boolean earnedMoney(Double yield) {
-        return yield >= 1;
-    }
 }
