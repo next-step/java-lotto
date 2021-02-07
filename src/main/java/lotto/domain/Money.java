@@ -19,7 +19,7 @@ public class Money {
 
     private void validate(String price) throws IllegalArgumentException {
         Integer priceOrNull = NumberUtils.returnInteger(price);
-        if (priceOrNull == null || priceOrNull <= 0) {
+        if (priceOrNull == null || priceOrNull <= 0 || priceOrNull < 1000) {
              throw new IllegalArgumentException();
         }
     }
