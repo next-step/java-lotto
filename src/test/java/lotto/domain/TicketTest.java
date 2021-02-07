@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,21 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class TicketTest {
+
+    @DisplayName("정확한 티켓 정보가 입력됬는지 확인하는 테스트")
+    @ParameterizedTest
+    @MethodSource("provideValidateTicketInfoTest")
+    public void validateTicketInfoTest(String ticket) {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Ticket(ticket));
+    }
+
+    private static Stream<Arguments> provideValidateTicketInfoTest() {
+        return Stream.of(
+                Arguments.of("1, 1, 2, 3, 4, 5"),
+                Arguments.of("1; 2; 3; 4; 5; 6"),
+                Arguments.of("1, 2, 3, 4, 5, 46")
+        );
+    }
 
     @DisplayName("티켓 매칭 테스트")
     @ParameterizedTest
