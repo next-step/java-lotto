@@ -10,8 +10,8 @@ import lotto.util.NumberUtils;
 
 public class OutputHandler {
 
-    public void printLottoPurchaseCount(int count) {
-        System.out.println(createLottoPurchaseCountString(count));
+    public void printLottoPurchaseCount(int manualCounts, int autoCounts) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCounts, autoCounts);
     }
 
     public void printGeneratedTickets(List<Ticket> tickets) {
@@ -19,11 +19,21 @@ public class OutputHandler {
     }
 
     public void printLottoStatics(Map<Revenue, Integer> revenueMap) {
-        System.out.println(createLottoStaticsString(revenueMap));
+        System.out.println(Constant.WINNING_STATISTICS + Constant.DIVISION_LINE);
+        Arrays.stream(Revenue.values()).forEach(revenue ->
+                System.out.printf("%d개 일치%s (%d원) - %d개%n",
+                revenue.getMatchNum(),
+                appendBonusNumber(revenue.getBonus()),
+                revenue.getRevenue(),
+                NumberUtils.convertNullToNumber(revenueMap.get(revenue))));
+    }
+
+    public void askLottoTicket() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public void printTotalRevenue(Double totalRevenue) {
-        System.out.println(createTotalRevenueString(totalRevenue));
+        System.out.printf("총 수익률은 %s입니다. %s", totalRevenue.toString(), isIncome(totalRevenue));
     }
 
     public void printErrorPurchasePrice() {
@@ -34,13 +44,12 @@ public class OutputHandler {
         System.out.println(Constant.ERROR_BONUS_BALL);
     }
 
-    public void printErrorWinningNumber() {
+    public void printErrorTicketNumber() {
         System.out.println(Constant.ERROR_WINNING_NUMBER);
     }
 
-    private StringBuilder createLottoPurchaseCountString(int count) {
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(count).append(Constant.REMIND_LOTTO_COUNT);
+    public void printErrorManualTicketCount() {
+        System.out.println(Constant.ERROR_MANUAL_COUNT);
     }
 
     private StringBuilder createGeneratedTicketsString(List<Ticket> tickets) {
@@ -50,33 +59,6 @@ public class OutputHandler {
             stringBuilder.append('\n');
         }
         return stringBuilder;
-    }
-
-    private StringBuilder createLottoStaticsString(Map<Revenue, Integer> revenueCluster) {
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(Constant.WINNING_STATISTICS).append(Constant.DIVISION_LINE)
-            .append(createLottoResultString(revenueCluster, stringBuilder));
-    }
-
-    private StringBuilder createLottoResultString(Map<Revenue, Integer> revenueCluster,
-        StringBuilder stringBuilder) {
-        Arrays.stream(Revenue.values()).forEach(revenue -> {
-            stringBuilder.append(revenue.getMatchNum())
-                .append(appendBonusNumber(revenue.getBonus())).append(Constant.CORRECT_NUM)
-                .append(Constant.OPEN_BRACKET)
-                .append(revenue.getRevenue()).append(Constant.MONEY_UNIT)
-                .append(NumberUtils.convertNullToNumber(revenueCluster.get(revenue)))
-                .append(Constant.COUNT);
-        });
-        return stringBuilder;
-    }
-
-    private StringBuilder createTotalRevenueString(Double totalRevenue) {
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(Constant.TOTAL_YIELD)
-            .append(totalRevenue)
-            .append(Constant.END_SENTENCE)
-            .append(isIncome(totalRevenue));
     }
 
     private String isIncome(Double totalRevenue) {
