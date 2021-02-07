@@ -38,7 +38,7 @@ public class WinnerLotto {
 
     public Prize getPrizeForEachLotto(Lotto lotto) {
         int matchedCount = winnersLotto.getMatchedCount(lotto);
-        boolean isBonus = Prize.isFiveWithBonus(matchedCount,lotto,bonusBall);
+        boolean isBonus = lotto.contains(bonusBall);
         return Prize.getPrizeByMatchedNumber(matchedCount,isBonus);
     }
 

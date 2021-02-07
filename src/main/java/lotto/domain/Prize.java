@@ -54,18 +54,17 @@ public enum Prize {
     }
 
     public static Prize getPrizeByMatchedNumber(final int matchedNumber,boolean isBonus) {
-        Prize returnPrize = null;
-        returnPrize = getPrizeByOnlyMatchedNumber(matchedNumber);
-        if(isBonus) {
-            returnPrize = Prize.FIVE_WITH_BONUS;
+        Prize returnPrize = getPrizeByOnlyMatchedNumber(matchedNumber);
+        if (returnPrize.matchedNumber == Prize.FIVE.matchedNumber && isBonus) {
+            return Prize.FIVE_WITH_BONUS;
         }
         return returnPrize;
 
     }
 
-    public static boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
-//        List<LottoNumber> lottoNumbers = lotto.getNumbers();
-        return matchedNumber == Prize.FIVE.matchedNumber && lotto.contains(bonusBall);
-    }
+//    public static boolean isFiveWithBonus(final int matchedNumber,Lotto lotto,LottoNumber bonusBall) {
+////        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+//        return matchedNumber == Prize.FIVE.matchedNumber && lotto.contains(bonusBall);
+//    }
 
 }
