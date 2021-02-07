@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.utils.InputValidator;
+import lotto.utils.Validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,33 +13,46 @@ public class InputView {
     private static String input;
 
     public static int inputPrice() {
-        boolean isValidPrice = false;
-        while(!isValidPrice){
-            System.out.println("구입금액을 입력해 주세요.");
+        System.out.println("구입금액을 입력해 주세요.");
+        input = scanner.nextLine();
+        return parseInt(input);
+    }
+
+    public static int inputManualPurchaseCount(){
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        input = scanner.nextLine();
+        return parseInt(input);
+    }
+
+    public static List<List<Integer>> inputManualPurchaseLottoNumber(int manualCount){
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for(int i = 0; i < manualCount; ++i){
             input = scanner.nextLine();
-            isValidPrice = InputValidator.validatePrice(input);
+            List<Integer> manualLottoNumber = Arrays.stream(input.split(","))
+                    .map(InputView::parseInt)
+                    .collect(Collectors.toList());
+            manualLottoNumbers.add(manualLottoNumber);
         }
-        return Integer.parseInt(input);
+        return manualLottoNumbers;
     }
 
     public static List<Integer> inputWinningNumbers() {
-        boolean isValidPrice = false;
-        while(!isValidPrice){
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            input = scanner.nextLine();
-            isValidPrice = InputValidator.validateWinningNumber(input);
-        }
-        List<Integer> winningNumbers = Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        input = scanner.nextLine();
+        return Arrays.stream(input.split(","))
+                .map(InputView::parseInt)
                 .collect(Collectors.toList());
-        return winningNumbers;
     }
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = scanner.next();
-        InputValidator.checkLottoNumberValidation(input);
-        return Integer.parseInt(input);
+        input = scanner.nextLine();
+        return parseInt(input);
     }
+
+     private static int parseInt(String input){
+         Validator.checkNumberValidation(input);
+        return Integer.parseInt(input);
+     }
 }
