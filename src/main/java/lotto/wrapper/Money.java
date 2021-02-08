@@ -1,8 +1,8 @@
 package lotto.wrapper;
 
-public class Money {
-    private static final Money LOTTO_PRICE = new Money(1000);
+import lotto.domain.Constants;
 
+public class Money {
     private int money;
 
     public Money(int money) {
@@ -13,7 +13,7 @@ public class Money {
     }
 
     public static Money subManual(Money amount, Count lottosManual) {
-        int amountManual = amount.getMoney() - lottosManual.getCount() * LOTTO_PRICE.getMoney();
+        int amountManual = amount.getMoney() - lottosManual.getCount() * Constants.LOTTO_PRICE.getMoney();
         return new Money(amountManual);
     }
 

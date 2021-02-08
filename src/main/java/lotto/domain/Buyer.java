@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Buyer {
-    private static final Money LOTTO_PRICE = new Money(1000);
-
     public Count matchPriceAndPayment(Money input) {
-        return new Count( input.getMoney() / LOTTO_PRICE.getMoney() );
+        return new Count( input.getMoney() / Constants.LOTTO_PRICE.getMoney() );
     }
 
     public List<LottoTicket> buyLotto(Money input) {
