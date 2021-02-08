@@ -8,7 +8,7 @@ public class LottoMain {
 
         LottoController lottoController = new LottoController();
         try {
-            lottoController.start();
+            lottoController.play();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

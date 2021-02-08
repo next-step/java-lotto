@@ -36,7 +36,7 @@ public class InputView {
         return manualNumberList;
     }
 
-    public String getLottoAnswer() {
+    public String getWinningLotto() {
         System.out.println(InfoStrings.INFO_INPUT_WINNING_LOTTO_NUMBERS);
         String winningLottoNumber = scanner.nextLine();
         return winningLottoNumber;

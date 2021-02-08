@@ -9,7 +9,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.PlayersLotto;
-import lotto.domain.PlayersLottoGenerateOption;
+import lotto.domain.PurchaseOption;
 import lotto.domain.WinningLotto;
 import lotto.util.ROICalculator;
 import lotto.view.InputView;
@@ -18,62 +18,67 @@ import lotto.view.OutputView;
 public class LottoController {
 
     private final InputView inputView;
-    private final Lotto lotto;
     private final LottoGenerator lottoGenerator;
     private final LottoMatcher lottoMatcher;
     private Money money;
-    private PlayersLottoGenerateOption generateOption;
+    private PurchaseOption purchaseOption;
     private LottoTickets purchasedTickets;
     private WinningLotto winningLotto;
 
     public LottoController() {
         inputView = new InputView();
-        lotto = new WinningLotto();
         lottoGenerator = new LottoGenerator();
         lottoMatcher = new LottoMatcher();
     }
 
-    public void start() {
-        money = new Money(inputView.getMoneyToBuyLotto());
-        generateOption = new PlayersLottoGenerateOption(
-            LottoTickets.countTicketNumberByMoney(money.getMoney()),
-            inputView.getManualLottoCnt());
-        List<PlayersLotto> manualLottoTickets = generateLottoTicketsByManualInputLottoNumber(
-            inputView.getManualLottoNumberList(generateOption.getManualGenerateCnt()));
-        generatePlayersLotto(generateOption, manualLottoTickets);
-        OutputView.printAllLotto(purchasedTickets, generateOption);
-        generateWinnerLotto();
-        lottoMatcher.checkAllTickets(purchasedTickets, winningLotto);
+    public void play() {
+        buyLotto();
+        generateLottoTickets();
+        generateWinningLotto();
         printLottoResult();
     }
 
-    private List<PlayersLotto> generateLottoTicketsByManualInputLottoNumber(List<String> lottoNumbers) {
+    private void buyLotto() {
+        money = new Money(inputView.getMoneyToBuyLotto());
+        purchaseOption = new PurchaseOption(
+            LottoTickets.countTicketNumberByMoney(money.getMoney()),
+            inputView.getManualLottoCnt());
+    }
+
+    private void generateLottoTickets() {
+        List<PlayersLotto> manualLottoTickets = generateManualLotto(
+            inputView.getManualLottoNumberList(purchaseOption.getManualGenerateCnt()));
+        generatePlayersLottoTickets(purchaseOption, manualLottoTickets);
+        OutputView.printAllLotto(purchasedTickets, purchaseOption);
+    }
+
+    private List<PlayersLotto> generateManualLotto(List<String> lottoNumbers) {
         List<LottoNumber> ticket;
         List<PlayersLotto> playersManualLotto = new ArrayList<>();
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            ticket = lotto.getLottoNumberListWithSplitting(lottoNumbers.get(i));
+            ticket = Lotto.getLottoNumberListWithSplitting(lottoNumbers.get(i));
             playersManualLotto.add(new PlayersLotto(ticket));
         }
         return playersManualLotto;
     }
 
-    private void generatePlayersLotto(PlayersLottoGenerateOption generateOption, List<PlayersLotto> manualLottoTicket) {
+    private void generatePlayersLottoTickets(PurchaseOption generateOption, List<PlayersLotto> manualLottoTicket) {
         List<PlayersLotto> generatedPlayersLotto = lottoGenerator.generateLottoTickets(generateOption, manualLottoTicket);
         purchasedTickets = new LottoTickets(generatedPlayersLotto);
     }
 
-    private void generateWinnerLotto() {
-        String winningLottoNumber = inputView.getLottoAnswer();
-        List<LottoNumber> winningLotto = lotto.getLottoNumberListWithSplitting(winningLottoNumber);
-        int bonusBall = inputView.getBonusBall();
-        LottoNumber bonusNumber = new LottoNumber(bonusBall);
+    private void generateWinningLotto() {
+        String winningLottoNumber = inputView.getWinningLotto();
+        List<LottoNumber> winningLotto = Lotto.getLottoNumberListWithSplitting(winningLottoNumber);
+        LottoNumber bonusNumber = new LottoNumber(inputView.getBonusBall());
         this.winningLotto = new WinningLotto(bonusNumber, winningLotto);
     }
 
     private void printLottoResult() {
+        lottoMatcher.checkAllTickets(purchasedTickets, winningLotto);
         OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
         int revenue = ROICalculator.getRevenue(lottoMatcher.getPrizeBoard());
-        OutputView
-            .printReturnOnInvestment(ROICalculator.calculateReturnOnInvestment(revenue, money.getMoney()));
+        OutputView.printReturnOnInvestment(
+            ROICalculator.calculateReturnOnInvestment(revenue, money.getMoney()));
     }
 }
