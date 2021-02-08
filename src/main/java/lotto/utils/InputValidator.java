@@ -23,12 +23,15 @@ public class InputValidator {
         }
     }
 
-
     public static void checkLengthWinningNumbersValidation(int length) {
         if(length != LottoTicket.PICKED_NUMBERS_SIZE){
             throw new IllegalArgumentException("당첨 로또 번호의 개수가 옳지 않습니다.");
         }
     }
 
-
+    public static void checkNumberOfManualLottoTicketsValidation(int numberOfManualLottoTickets, int numberOfLotto) {
+        if(numberOfManualLottoTickets > numberOfLotto){
+            throw new IllegalArgumentException("구매할 수 없는 로또 갯수입니다.");
+        }
+    }
 }
