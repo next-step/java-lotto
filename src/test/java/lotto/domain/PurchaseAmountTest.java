@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import lotto.view.ExceptionMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PurchaseAmountTest {
 
@@ -32,6 +35,28 @@ class PurchaseAmountTest {
 
         // then
         assertThat(purchaseAmount.getCount()).isEqualTo(3);
+    }
+
+    @DisplayName("0보다 작은 금액으로 생성 시 exception 발생")
+    @Test
+    void smallerThanZeroAmountThrowsException() {
+        // given & when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new PurchaseAmount(BigDecimal.valueOf(-1)));
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.AMOUNT_SMALLER_THAN_ZERO);
+    }
+
+    @DisplayName("1개 미만의 LottoTicket 리스트로 생성 시 exception 발생")
+    @Test
+    void emptyLottoTicketsThrowException() {
+        // given & when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new PurchaseAmount(Collections.emptyList()));
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(ExceptionMessages.AT_LEAST_ONE_LOTTO_TICKET);
     }
 
     @DisplayName("총 상금으로 수익률 구하기")
