@@ -11,6 +11,7 @@ import static lotto.view.Constants.MANUAL_BUY_MSG;
 
 public class OutputView {
     private static final int MIN_MATCH_BOUND = 3;
+    private static final int BONUS_DIFFERENCE = 1; // 보너스 번호 이후 index는 1개 씩 줄여야 함
 
     // 구매 메시지
     public static void printBuy() {
@@ -84,12 +85,20 @@ public class OutputView {
     }
 
     public static void printOnce(List<Count> result, int i) {
-        if (i == 3) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), true)
+        String stringOneResult = messageAccordingToCorrectNumbers(result, i);
+        System.out.print(stringOneResult);
+    }
+
+    private static String messageAccordingToCorrectNumbers(List<Count> result, int i) {
+        if (i < 3) {
+            return String.format("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), false)
                     .getPrize().getMoney(), result.get(i).getCount());
-            return;
         }
-        System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), false)
+        if (i == 3) {
+            return String.format("5개 일치, 보너스 볼 일치 (%d원) - %d개\n", Prize.match(MatchLookUpTable.lookUpTable.get(i), true)
+                    .getPrize().getMoney(), result.get(i).getCount());
+        }
+        return String.format("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND - BONUS_DIFFERENCE, Prize.match(MatchLookUpTable.lookUpTable.get(i), false)
                 .getPrize().getMoney(), result.get(i).getCount());
     }
 
