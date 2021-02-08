@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Buyer {
     public Count matchPriceAndPayment(Money input) {
-        return new Count( input.getMoney() / Constants.LOTTO_PRICE.getMoney() );
+        return new Count( input.getMoney() / Lotto.LOTTO_PRICE.getMoney() );
     }
 
     public List<LottoTicket> buyLotto(Money input) {
