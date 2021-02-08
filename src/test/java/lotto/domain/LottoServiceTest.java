@@ -1,18 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.LotteryNumber;
-import lotto.domain.LottoService;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,7 +28,7 @@ public class LottoServiceTest {
     public void buyLottoTicketsTest() {
         initLottoService();
         int numberOfTickets = 5;
-        lottoService.buyLottoTickets(numberOfTickets);
+        lottoService.buyAutomaticLottoTickets(numberOfTickets);
         int size = lottoService.getLottoTickets().size();
         assertThat(size).isEqualTo(numberOfTickets);
     }
