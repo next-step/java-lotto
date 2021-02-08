@@ -1,13 +1,10 @@
 package lotto;
 
 
-import lotto.domain.LottoGenerator;
+import lotto.domain.*;
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
 import lotto.controller.CheckResult;
-import lotto.domain.Buyer;
-import lotto.domain.Lotto;
-import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -80,14 +77,27 @@ public class LottoApplication {
         checker = new CheckResult(Count.sum(lottosManual, lottosRandom));
         // 로또 당첨 번호
         OutputView.printLottoMsg();
-        OutputView.printLottoNumbers(lotto.getLottoTicket());
-        // 로또 보너스 번호
-        OutputView.printBonusMsg();
-        OutputView.printBonusNumber(lotto.getLottoTicket());
+
+        inputWinningLottoNumbers();
+        inputBonusLottoNumber();
 
         // Match Lotto
         checker.countUpMatch(lotto, tickets);
     }
+
+    private static void inputWinningLottoNumbers() {
+        String lottoWinningNumbers = InputView.inputOneLotto();
+        LottoTicket ticket = LottoGenerator.rawToTicket(lottoWinningNumbers); // 수동으로 입력하기.
+        lotto.setLottoNumbers(ticket);
+    }
+
+    private static void inputBonusLottoNumber() {
+        // 로또 보너스 번호
+        OutputView.printBonusMsg();
+        LottoNumber bonusLottoNumber = InputView.inputBonus();
+        lotto.setBonusNumber(bonusLottoNumber);
+    }
+
 
     private static void resultLotto() {
         // return result to output view

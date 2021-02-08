@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.wrapper.Budget;
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
@@ -13,6 +14,7 @@ import java.util.List;
 public class InputView {
     private static final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private static int amount = 0;
+    private static int number = 0;
 
     public static Budget inputAmount() {
         try {
@@ -40,7 +42,7 @@ public class InputView {
         return lottosManualRaw;
     }
 
-    private static String inputOneLotto() {
+    public static String inputOneLotto() {
         String lottoManualRaw = null;
         try{
             lottoManualRaw = input.readLine();
@@ -50,4 +52,12 @@ public class InputView {
         return lottoManualRaw;
     }
 
+    public static LottoNumber inputBonus() {
+        try {
+            number = Integer.parseInt(input.readLine());
+        }catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return new LottoNumber(number);
+    }
 }
