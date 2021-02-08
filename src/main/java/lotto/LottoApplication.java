@@ -16,7 +16,7 @@ public class LottoApplication {
         final LottoTickets lottoTickets = lottoController.purchaseLottoTickets();
         lottoController.printLottoTickets(lottoTickets);
 
-        final GoldenTicket lottoTicket = lottoController.pickGoldenTicket();
-        lottoController.printResults(lottoTickets, lottoTicket);
+        final GoldenTicket goldenTicket = lottoController.pickGoldenTicket();
+        lottoController.printResults(lottoTickets, goldenTicket);
     }
 }
