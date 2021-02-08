@@ -4,12 +4,10 @@ import lotto.controller.MatchLookUpTable;
 import lotto.controller.Prize;
 import lotto.wrapper.Count;
 import lotto.domain.LottoTicket;
-import lotto.wrapper.OutputString;
 
 import java.util.List;
 
 import static lotto.view.Constants.MANUAL_BUY_MSG;
-import static lotto.view.Constants.SELECT_LOTTO_MSG;
 
 public class OutputView {
     private static final int MIN_MATCH_BOUND = 3;

@@ -97,12 +97,7 @@ class LottoTicketTest {
     }
 
     @DisplayName("문자열(수동로또)로 생성할 때 숫자,콤마,공백 이외를 포함하 때의 예외 발생.")
-//    @ParameterizedTest
-//    @CsvSource({
-//            "1, 2, 3,+ 4, 5, - 6",
-//            "1, 2,hello 3, 4, 5, world6, 7",
-//            "1, 2, 3, 4, 5, 6"
-//    })
+
     @Test
     void exceptConstructOtherFormats() {
         String ip = "1, 2, 3, 4, 5, ㅁ";
