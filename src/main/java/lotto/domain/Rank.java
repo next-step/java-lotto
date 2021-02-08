@@ -42,13 +42,10 @@ public enum Rank {
      * @return 일치하는 번호의 개수에 따른 당첨 등급
      */
     public static Rank of(final int count, final boolean containsBonusBall) {
-        if (count != 5) {
-            return ranks.getOrDefault(count, NONE);
-        }
-        if (containsBonusBall) {
+        if (count == 5 && containsBonusBall) {
             return SECOND;
         }
-        return THIRD;
+        return ranks.getOrDefault(count, NONE);
     }
 
     public static List<Rank> getValuesAscendingOrder() {
