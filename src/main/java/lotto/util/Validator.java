@@ -15,26 +15,26 @@ public class Validator {
         try {
             Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("입력된 수가 정수가 아닙니다.");
+            throw new IllegalArgumentException(ErrorStrings.ERROR_HINT_NOT_INTEGER);
         }
     }
 
     public static void isNegative(String input) {
         if (Integer.parseInt(input) < 1) {
-            throw new IllegalArgumentException("음수가 입력되었습니다.");
+            throw new IllegalArgumentException(ErrorStrings.ERROR_HINT_NOT_ALLOWED_NUMBER_SCOPE);
         }
     }
 
     public static void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != Lotto.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
+            throw new IllegalArgumentException(ErrorStrings.ERROR_HINT_INPUT_SIX_NUMBER);
         }
     }
 
     public static void checkDuplicatedNumber(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumbersChecker = new HashSet<>(lottoNumbers);
         if (lottoNumbersChecker.size() != Lotto.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
+            throw new IllegalArgumentException(ErrorStrings.ERROR_HINT_NOT_DISTINCT_NUMBER);
         }
     }
 }

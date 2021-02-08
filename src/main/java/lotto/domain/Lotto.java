@@ -17,9 +17,7 @@ public interface Lotto {
             Validator.isNegative(input);
             lottoTicket.add(new LottoNumber(Integer.parseInt(input)));
         }
-        if (lottoTicket.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또의 숫자는 6개입니다.");
-        }
+        Validator.checkSizeOfLotto(lottoTicket);
         return lottoTicket;
     }
 }
