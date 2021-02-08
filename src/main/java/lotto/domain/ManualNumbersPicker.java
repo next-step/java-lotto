@@ -13,12 +13,7 @@ public class ManualNumbersPicker implements NumberPicker {
     public ManualNumbersPicker(final List<String> manualPickedNumberLines) {
         lottoTickets = manualPickedNumberLines
                 .stream()
-                .map(line ->
-                        Arrays.stream(line.trim().split(","))
-                                .mapToInt(lottoNumber->Integer.parseInt(lottoNumber.trim()))
-                                .mapToObj(LottoNumber::new)
-                                .collect(Collectors.toList())
-                )
+                .map(this::makeLottoNumbers)
                 .map(LottoTicket::new)
                 .collect(Collectors.toCollection(Stack::new));
     }
@@ -26,5 +21,12 @@ public class ManualNumbersPicker implements NumberPicker {
     @Override
     public LottoTicket pick() {
         return lottoTickets.pop();
+    }
+
+    private List<LottoNumber> makeLottoNumbers(String line){
+        return Arrays.stream(line.trim().split(","))
+                .mapToInt(lottoNumber->Integer.parseInt(lottoNumber.trim()))
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
