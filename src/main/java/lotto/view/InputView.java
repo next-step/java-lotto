@@ -34,9 +34,9 @@ public class InputView {
 
         System.out.println(INPUT_MESSAGE_CUSTOM_INPUT_LOTTO_NUMBER);
         scanner.nextLine();
-        String lottoNumber = scanner.nextLine();
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i < customCount; i++) {
+            String lottoNumber = scanner.nextLine();
             lottos.add(new Lotto(getCommonLottoNumbers(lottoNumber)));
         }
 
@@ -45,7 +45,6 @@ public class InputView {
 
     public static List<Integer> getWinningNumbers() {
         System.out.println(INPUT_MESSAGE_WINNING_NUMBER);
-        scanner.nextLine();
         String winningLottoNumber = scanner.nextLine();
         return getCommonLottoNumbers(winningLottoNumber);
     }
