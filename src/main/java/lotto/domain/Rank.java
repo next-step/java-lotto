@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,11 +49,10 @@ public enum Rank {
     }
 
     public static List<Rank> getValuesAscendingOrder() {
-        List<Rank> ranks = Arrays.stream(Rank.values())
+        return Arrays.stream(values())
                 .filter(rank -> rank != NONE)
+                .sorted(Comparator.comparing(rank -> rank.amount))
                 .collect(Collectors.toList());
-        Collections.reverse(ranks); // TODO: Rank 내 상수들의 선언 순서의 영향을 받으므로 수정 필요
-        return ranks;
     }
 
     public BigDecimal getTotalPrizeByCount(final int count) {
