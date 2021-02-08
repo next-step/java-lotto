@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.wrapper.Budget;
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
 
@@ -13,16 +14,13 @@ public class InputView {
     private static final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private static int amount = 0;
 
-    public static Money inputAmount() {
+    public static Budget inputAmount() {
         try {
             amount = Integer.parseInt(input.readLine());
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        if (amount < 1000) {
-            throw new IllegalArgumentException("복권은 1000원 부터 구매 가능합니다.");
-        }
-        return new Money(amount);
+        return new Budget(amount);
     }
 
     public Count inputAmountManual() {
