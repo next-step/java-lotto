@@ -9,7 +9,7 @@ public interface Lotto {
     int LOTTO_NUMBER_SIZE = 6;
     String DELIMITER = "[ ,]+";
 
-    default List<LottoNumber> getLottoNumberListWithSplitting(String lottoNumbersInput) {
+    static List<LottoNumber> getLottoNumberListWithSplitting(String lottoNumbersInput) {
         String[] inputs = lottoNumbersInput.split(DELIMITER);
         List<LottoNumber> lottoTicket = new ArrayList<>();
         for (String input : inputs) {
