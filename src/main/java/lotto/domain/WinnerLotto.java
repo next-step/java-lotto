@@ -34,6 +34,9 @@ public class WinnerLotto {
     public static WinnerLotto of (LottoNumber bonusBall, List<LottoNumber> numbers) {
         return new WinnerLotto(bonusBall, Lotto.of(numbers));
     }
+    public static WinnerLotto of (LottoNumber bonusBall, Lotto winnersLotto) {
+        return new WinnerLotto(bonusBall, winnersLotto);
+    }
 
 
     public Prize getPrizeForEachLotto(Lotto lotto) {

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,13 +15,14 @@ class WinnerLottoTest {
     WinnerLotto winnerLotto;
     List<LottoNumber> expectedLottoNumbers;
     LottoNumber lottoBonusNumber;
-    int [] lottoNumbers = {1,2,3,4,5,6};
+    List<Integer> lottoNumbers;
 
     @BeforeEach
     void init() {
-        expectedLottoNumbers = LottoFactory.createListOfLottoNumber(lottoNumbers);
+        lottoNumbers = Arrays.asList(1,2,3,4,5,6);
+        expectedLottoNumbers = lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
         lottoBonusNumber = LottoNumber.of(7);
-        winnerLotto = new WinnerLotto(lottoBonusNumber,LottoFactory.createPlayersLotto(lottoNumbers));
+        winnerLotto = WinnerLotto.of(lottoBonusNumber,LottoFactory.createLotto(lottoNumbers));
     }
 
     @DisplayName("get List of LottoNumber test")
@@ -45,7 +46,7 @@ class WinnerLottoTest {
         assertThatThrownBy(() -> {
             LottoNumber bonusBall = LottoNumber.of(1);
 
-            WinnerLotto winnerLotto = new WinnerLotto(bonusBall, LottoFactory.createPlayersLotto(lottoNumbers));
+            WinnerLotto winnerLotto = WinnerLotto.of(bonusBall, LottoFactory.createLotto(lottoNumbers));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
