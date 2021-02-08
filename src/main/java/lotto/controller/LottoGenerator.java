@@ -13,7 +13,7 @@ public class LottoGenerator {
     private static final int COUNT_LEFT_BOUND = 0;
     private static final int COUNT_RIGHT_BOUND = 6;
 
-    private static final int BONUS_IDX = 6;
+    private static final int BONUS_INDEX = 6;
 
     private static List<LottoNumber> candidateNumbers = new ArrayList<>();
 
@@ -55,10 +55,10 @@ public class LottoGenerator {
     }
 
     public static LottoNumber generateBonus() {
-        return candidateNumbers.get(BONUS_IDX);
+        return candidateNumbers.get(BONUS_INDEX);
     }
 
-    public static List<LottoTicket> rawToTicktes(List<String> lottosManualRaw) {
+    public static List<LottoTicket> rawToTickets(List<String> lottosManualRaw) {
         List<LottoTicket> lottoManualTickets = new ArrayList<>();
         for(String raw : lottosManualRaw){
             lottoManualTickets.add(rawToTicket(raw));
