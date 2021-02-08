@@ -8,9 +8,6 @@ public class WinningLotto implements Lotto {
     private LottoNumber BonusBall;
     private List<LottoNumber> numbers;
 
-    public WinningLotto() {
-    }
-
     public WinningLotto(LottoNumber bonusBall, List<LottoNumber> numbers) {
         Validator.checkSizeOfLotto(numbers);
         Validator.checkDuplicatedNumber(numbers);
