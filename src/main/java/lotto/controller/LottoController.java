@@ -17,7 +17,7 @@ public class LottoController {
         int price = InputView.inputPrice();
         int numberOfLotto = price / LottoTicket.PRICE;
 
-        int numberOfManualLotto = InputView.inputNumberOfManualLottoTicket();
+        int numberOfManualLotto = InputView.inputNumberOfManualLottoTicket(numberOfLotto);
         OutputView.printAskWinningNumberMessage();
         lottoService.buyManualLottoTickets(numberOfManualLotto);
 
