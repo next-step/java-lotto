@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.view.InputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,8 +46,9 @@ public class LottoGenerator {
         List<Lotto> ManualPlayersLottoTickets = new ArrayList<>();
         InputView.printNumberOfManualLotto();
         for (int i = 0; i < numberOfTicket; i++) {
-            List <LottoNumber> manualLotto = getLottoWithSplitting(InputView.getStringOfLotto());
-            ManualPlayersLottoTickets.add(new Lotto(manualLotto));
+            ManualPlayersLottoTickets.add(
+                    getLottoWithSplitting(InputView.getStringOfLotto())
+            );
         }
         return ManualPlayersLottoTickets;
     }
@@ -60,13 +62,16 @@ public class LottoGenerator {
         return playersLottoTickets;
 
     }
-    public static List<LottoNumber> getLottoWithSplitting(String text) {
+    public static Lotto getLottoWithSplitting(String text) {
         String [] inputs = text.split(Lotto.DELIMITER);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String input : inputs) {
+        Arrays.stream(inputs).forEach(input -> {
             lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
-        }
-        Lotto.checkSizeOfLotto(lottoNumbers);
-        return lottoNumbers;
+                });
+//
+//        for (String input : inputs) {
+//            lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
+//        }
+        return Lotto.of(lottoNumbers);
     }
 }

@@ -3,9 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,15 +16,8 @@ class LottoGeneratorTest {
     @Test
     void getWinnerLottoWithSplitting() {
         String input = "1, 2, 3, 4, 5, 6";
-        List<LottoNumber> expectedLottoNumbers = new ArrayList<>(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        ));
-        assertThat(LottoGenerator.getLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+        Lotto lotto = LottoFactory.createLotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(LottoGenerator.getLottoWithSplitting(input).getNumbers()).isEqualTo(lotto.getNumbers());
     }
 
     @DisplayName("can't parsing 6+- length input")
