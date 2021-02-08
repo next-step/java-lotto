@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class ManualLottoMachine implements LottoMachine {
 
-    private final AutoLottoMachine autoLottoMachine = new AutoLottoMachine();
     private final String manualTickets;
 
     private final static String SPLIT_REGEX = "\r?\n";
@@ -26,10 +25,7 @@ public class ManualLottoMachine implements LottoMachine {
     }
 
     @Override
-    public List<Ticket> buyTicket(int ticketCounts) {
-        List<Ticket> manualLottos = generateLottos(manualTickets);
-        List<Ticket> autoLottos = autoLottoMachine.buyTicket(ticketCounts);
-        manualLottos.addAll(autoLottos);
-        return manualLottos;
+    public List<Ticket> buyTicket() {
+        return generateLottos(manualTickets);
     }
 }

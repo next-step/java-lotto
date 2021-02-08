@@ -48,15 +48,17 @@ public class LottoController {
         try {
             outputHandler.askLottoTicket();
             ManualLottoMachine manualLottoMachine = new ManualLottoMachine(inputHandler.requestManualTicketNumber(manualCount));
-            purchaseTicket(manualLottoMachine);
+            AutoLottoMachine autoLottoMachine = new AutoLottoMachine(lottoCount.calculateAutoCount());
+            purchaseTicket(manualLottoMachine, autoLottoMachine);
         } catch (IllegalArgumentException e) {
             outputHandler.printErrorTicketNumber();
             getManualTickets();
         }
     }
 
-    public void purchaseTicket(ManualLottoMachine manualLottoMachine) {
-        tickets = manualLottoMachine.buyTicket(lottoCount.calculateAutoCount());
+    public void purchaseTicket(ManualLottoMachine manualLottoMachine, AutoLottoMachine autoLottoMachine) {
+        tickets = manualLottoMachine.buyTicket();
+        tickets.addAll(autoLottoMachine.buyTicket());
         outputHandler.printLottoPurchaseCount(manualCount, lottoCount.calculateAutoCount());
         outputHandler.printGeneratedTickets(tickets);
     }

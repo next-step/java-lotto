@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface LottoMachine {
 
-    List<Ticket> buyTicket(int ticketCounts);
+    List<Ticket> buyTicket();
 }
