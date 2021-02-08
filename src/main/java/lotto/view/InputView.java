@@ -23,7 +23,7 @@ public class InputView {
         return new Budget(amount);
     }
 
-    public Count inputAmountManual() {
+    public static Count inputAmountManual() {
         try {
             amount = Integer.parseInt(input.readLine());
         } catch (IOException ioe) {
@@ -32,7 +32,7 @@ public class InputView {
         return new Count(amount);
     }
 
-    public List<String> selectLottosManually(Count lottosManual) {
+    public static List<String> selectLottosManually(Count lottosManual) {
         List<String> lottosManualRaw = new ArrayList<>();
         for(int i=0; i<lottosManual.getCount(); i++){
             lottosManualRaw.add(inputOneLotto());
@@ -40,7 +40,7 @@ public class InputView {
         return lottosManualRaw;
     }
 
-    private String inputOneLotto() {
+    private static String inputOneLotto() {
         String lottoManualRaw = null;
         try{
             lottoManualRaw = input.readLine();

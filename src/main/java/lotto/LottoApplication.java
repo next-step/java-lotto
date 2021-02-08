@@ -15,7 +15,6 @@ import java.util.List;
 
 public class LottoApplication {
     private static Lotto lotto;
-    private static InputView input;
     private static Buyer buyer;
     private static List<LottoTicket> tickets;
     private static CheckResult checker;
@@ -41,19 +40,18 @@ public class LottoApplication {
 
     private static void init() {
         lotto = new Lotto();
-        input = new InputView();
         buyer = new Buyer();
     }
 
     private static void buyLottoManual() {
         // 수동 구매 수량을 결정.
         OutputView.printManual(); // 수동으로 구매 할 수를 입력하세요.
-        lottosManual = input.inputAmountManual(); // 수동 입력.
+        lottosManual = InputView.inputAmountManual(); // 수동 입력.
         randomAmount = Money.subManual(amount, lottosManual);
         lottosRandom = Count.split(lottos, lottosManual); // lottos에 전체 수량 - 수동 수량 을 해 주는 메서드 생성. 메서드는 new Count(res)를 반환.
 
         OutputView.printSelectManual(); // 로또 수동 입력 하라는 프린트.
-        lottosManualRaw = input.selectLottosManually(lottosManual);
+        lottosManualRaw = InputView.selectLottosManually(lottosManual);
         tickets = LottoGenerator.rawToTickets(lottosManualRaw); // 수동으로 입력하기.
     }
 
@@ -65,7 +63,7 @@ public class LottoApplication {
         // 로또 입력
         // 금액 입력
         OutputView.printBuy();
-        amount = input.inputAmount();
+        amount = InputView.inputAmount();
         // 구매 가능 수량이 lottos로 담김.
         lottos = buyer.matchPriceAndPayment(amount);
         buyLottoManual();
