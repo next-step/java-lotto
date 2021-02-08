@@ -22,13 +22,13 @@ public class LottoCalculation {
         return matchResult;
     }
 
-    private static void initialMatchResult() {
+    public static void initialMatchResult() {
         for (WinningType prize : WinningType.values()) {
             matchResult.put(prize,0);
         }
     }
 
-    private static void updateCount(WinningType winningType) {
+    public static void updateCount(WinningType winningType) {
         if (winningType.getValue() != 0) {
             matchResult.put(winningType, matchResult.get(winningType) + 1);
         }
@@ -58,5 +58,9 @@ public class LottoCalculation {
 
     public static boolean hasBonusBall(List<Integer> lotto, int bonusBall) {
         return lotto.contains(bonusBall);
+    }
+
+    public static Map<WinningType, Integer> getMatchResult() {
+        return matchResult;
     }
 }

@@ -28,8 +28,15 @@ public class LottoMachineTest {
     }
 
     @Test
-    void createLottoFailureTest() {
+    void createLottoDuplicatedNumberFailureTest() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
+    }
+
+    @Test
+    void createLottoOutOfRangeNumberFailureTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 100);
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
     }
