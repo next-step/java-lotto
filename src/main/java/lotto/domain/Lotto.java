@@ -8,8 +8,6 @@ public class Lotto {
     private LottoNumber bonusNumber;
 
     public Lotto() {
-//        LottoNumber bonusNumber = LottoGenerator.generateBonus();
-//        this.lottoNumbers = LottoGenerator.generateLotto(bonusNumber);
     }
 
     public Lotto(LottoTicket lottoNumbers) {
