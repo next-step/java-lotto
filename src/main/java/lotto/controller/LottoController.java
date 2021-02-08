@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static lotto.utils.InputValidator.checkDuplicateNumberValidation;
+import static lotto.utils.InputValidator.checkDuplicateBonusNumberValidation;
 
 public class LottoController {
     private final LottoService lottoService = new LottoService();
@@ -36,6 +37,7 @@ public class LottoController {
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         checkDuplicateNumberValidation(winningNumbers);
         int bonusNumber = InputView.inputBonusNumber();
+        checkDuplicateBonusNumberValidation(winningNumbers, bonusNumber);
 
         LotteryNumber lotteryNumber = new LotteryNumber(winningNumbers, bonusNumber);
         lottoService.recordLotteryNumber(lotteryNumber);

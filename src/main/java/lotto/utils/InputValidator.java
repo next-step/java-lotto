@@ -45,4 +45,12 @@ public class InputValidator {
             throw new IllegalArgumentException("중복된 수가 포함된 로또 번호 입니다.");
         }
     }
+
+    public static void checkDuplicateBonusNumberValidation(List<Integer> winningNumbers, int bonusNumber) {
+        for (Integer winningNumber : winningNumbers) {
+            if (winningNumber == bonusNumber) {
+                throw new IllegalArgumentException("당첨 번호에 포함된 보너스 번호 입니다.");
+            }
+        }
+    }
 }
