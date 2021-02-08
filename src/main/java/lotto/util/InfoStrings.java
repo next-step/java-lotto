@@ -10,5 +10,5 @@ public class InfoStrings {
 
     public static final String INFO_OUTPUT_PURCHASE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     public static final String INFO_LOTTO_RESULT_STATISTIC = "\n당첨 통계\n---------";
-    public static final String INFO_OUTPUT_LOTTO_RETURN_OF_INVESTMENT = "총 수익률은 %.02f입니다.";
+    public static final String INFO_OUTPUT_LOTTO_RETURN_ON_INVESTMENT = "총 수익률은 %.02f입니다.";
 }
