@@ -84,22 +84,22 @@ public class OutputView {
         }
     }
 
-    public static void printOnce(List<Count> result, int i) {
-        String stringOneResult = messageAccordingToCorrectNumbers(result, i);
+    public static void printOnce(List<Count> result, int index) {
+        String stringOneResult = messageAccordingToCorrectNumbers(result, index);
         System.out.print(stringOneResult);
     }
 
-    private static String messageAccordingToCorrectNumbers(List<Count> result, int i) {
-        if (i < 3) {
-            return String.format("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(i), false)
-                    .getPrize().getMoney(), result.get(i).getCount());
+    private static String messageAccordingToCorrectNumbers(List<Count> result, int index) {
+        if (index < 3) {
+            return String.format("%d개 일치 (%d원) - %d개\n", index + MIN_MATCH_BOUND, Prize.match(MatchLookUpTable.lookUpTable.get(index), false)
+                    .getPrize().getMoney(), result.get(index).getCount());
         }
-        if (i == 3) {
-            return String.format("5개 일치, 보너스 볼 일치 (%d원) - %d개\n", Prize.match(MatchLookUpTable.lookUpTable.get(i), true)
-                    .getPrize().getMoney(), result.get(i).getCount());
+        if (index == 3) {
+            return String.format("5개 일치, 보너스 볼 일치 (%d원) - %d개\n", Prize.match(MatchLookUpTable.lookUpTable.get(index), true)
+                    .getPrize().getMoney(), result.get(index).getCount());
         }
-        return String.format("%d개 일치 (%d원) - %d개\n", i + MIN_MATCH_BOUND - BONUS_DIFFERENCE, Prize.match(MatchLookUpTable.lookUpTable.get(i), false)
-                .getPrize().getMoney(), result.get(i).getCount());
+        return String.format("%d개 일치 (%d원) - %d개\n", index + MIN_MATCH_BOUND - BONUS_DIFFERENCE, Prize.match(MatchLookUpTable.lookUpTable.get(index), false)
+                .getPrize().getMoney(), result.get(index).getCount());
     }
 
     public static void printRevenue(Double resRevenue) {
