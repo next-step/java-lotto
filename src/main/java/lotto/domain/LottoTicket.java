@@ -21,13 +21,13 @@ public class LottoTicket {
 
     // for manual lotto ticket
     public LottoTicket(String raw) {
-        List<String> raws = Arrays.asList(raw.split(","));
-        raws = raws.stream().map(r -> r.trim()).collect(Collectors.toList());
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        validateRawNnumbers(lottoNumbers, raws);
+        validateRawNnumbers(lottoNumbers, raw);
         this.numbers = lottoNumbers;
     }
-    private void validateRawNnumbers(List<LottoNumber> lottoNumbers,List<String> raws){
+    private void validateRawNnumbers(List<LottoNumber> lottoNumbers,String raw){
+        List<String> raws = Arrays.asList(raw.split(","));
+        raws = raws.stream().map(r -> r.trim()).collect(Collectors.toList());
         if (raws.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개만 입력해야 합니다.");
         }
@@ -38,8 +38,8 @@ public class LottoTicket {
         }
     }
     private void rawToLottoNumbers (List<LottoNumber> lottoNumbers, List<String> raws) {
-        for(String r : raws){
-            int lottoNumber = Integer.parseInt(r);
+        for(String item : raws){
+            int lottoNumber = Integer.parseInt(item);
             lottoNumbers.add( new LottoNumber(lottoNumber) );
         }
     }
