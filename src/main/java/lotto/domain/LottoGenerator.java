@@ -68,10 +68,7 @@ public class LottoGenerator {
         Arrays.stream(inputs).forEach(input -> {
             lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
                 });
-//
-//        for (String input : inputs) {
-//            lottoNumbers.add(LottoNumber.of(Validator.checkIsIntegerAndIsNegative(input)));
-//        }
+
         return Lotto.of(lottoNumbers);
     }
 }
