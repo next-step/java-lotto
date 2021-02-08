@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.domain;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -63,7 +63,6 @@ public class LottoGenerator {
         for(String raw : lottosManualRaw){
             lottoManualTickets.add(rawToTicket(raw));
         }
-        System.out.println(lottoManualTickets.size());
         return lottoManualTickets;
     }
 

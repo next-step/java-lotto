@@ -1,7 +1,7 @@
 package lotto;
 
 
-import lotto.controller.LottoGenerator;
+import lotto.domain.LottoGenerator;
 import lotto.wrapper.Count;
 import lotto.wrapper.Money;
 import lotto.controller.CheckResult;

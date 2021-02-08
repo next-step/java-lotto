@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.controller.LottoGenerator;
-
 public class Lotto {
     private LottoTicket lottoNumbers;
     private LottoNumber bonusNumber;
