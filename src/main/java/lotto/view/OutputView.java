@@ -78,6 +78,13 @@ public class OutputView {
         System.out.println(bonus);
     }
 
+    public static void printBeforeResult() {
+        Constants.RESULT_TITLE_MSG.print();
+        System.out.println();
+        Constants.RESULT_DELIMITER_MSG.print();
+        System.out.println();
+    }
+
     public static void printResult(List<Count> result) {
         for (int i = 0; i < result.size(); i++) {
             printOnce(result, i);
@@ -103,10 +110,7 @@ public class OutputView {
     }
 
     public static void printRevenue(Double resRevenue) {
-        Constants.RESULT_TITLE_MSG.print();
-        System.out.println();
-        Constants.RESULT_DELIMITER_MSG.print();
-        System.out.println();
         System.out.printf("총 수익률은 %f 입니다.", resRevenue);
     }
+
 }

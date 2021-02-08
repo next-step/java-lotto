@@ -103,6 +103,8 @@ public class LottoApplication {
         // return result to output view
         List<Count> res = checker.getResult();
         Double resRevenue = checker.calculateWinningRevenue();
+        // 로또 결과 이전 메시지
+        OutputView.printBeforeResult();
         // 로또 결과 메시지
         OutputView.printResult(res);
         // 통계 출력 메시지
