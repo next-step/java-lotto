@@ -36,6 +36,7 @@ public class ConsoleOutputView implements OutputView {
         int autoPurchaseCount = auto.getCount();
         System.out.println();
         System.out.println("수동으로 " + manualPurchaseCount + "장, 자동으로 " + autoPurchaseCount + "개를 구매했습니다.");
+        manual.getLottoTickets().forEach(System.out::println);
         auto.getLottoTickets().forEach(System.out::println);
         System.out.println();
     }
