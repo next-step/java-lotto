@@ -26,7 +26,7 @@ public class LottoGenerator {
         return new PlayersLotto(lottoNumbers);
     }
 
-    public List<PlayersLotto> generateLottoTickets(PlayersLottoGenerateOption option, List<PlayersLotto> manualLottoTicket) {
+    public List<PlayersLotto> generateLottoTickets(PurchaseOption option, List<PlayersLotto> manualLottoTicket) {
         List<PlayersLotto> playersLottoTickets = new ArrayList<>();
         for (int i = 0; i < option.getManualGenerateCnt(); i++) {
             playersLottoTickets.add(manualLottoTicket.get(i));
