@@ -17,7 +17,7 @@ public class LottoMachine {
     }
 
     public int getLottoTicketNumber(Money money) {
-        if (money.getValue() < 1000) {
+        if (money.getValue() < LOTTO_TICKET_PRICE) {
             throw new IllegalArgumentException(Message.LOTTO_MINIMUM_MONEY.message);
         }
         return money.getValue() / LOTTO_TICKET_PRICE;
