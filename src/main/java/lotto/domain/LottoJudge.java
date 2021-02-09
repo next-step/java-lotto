@@ -2,32 +2,17 @@ package lotto.domain;
 
 public class LottoJudge {
 
-    private static final int WINNER_BALL_COUNT = 6;
-    private static final int BONUS_BALL_COUNT = 5;
-    private int count = 0;
+    private final GoldenTicket goldenTicket;
+    private final LottoTicket lottoTicket;
 
-    public LottoJudge(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
-        addNormalLottoNumbersCount(goldenTicket, lottoTicket);
-        addBonusLottoNumbersCount(goldenTicket, lottoTicket);
-    }
-
-    private void addNormalLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket lottoTicket) {
-        count += goldenTicket.getMatchedNumbersCount(lottoTicket);
-        if (count == WINNER_BALL_COUNT) {
-            count++;
-        }
-    }
-
-    private void addBonusLottoNumbersCount(GoldenTicket goldenTicket, LottoTicket myLottoTicket) {
-        if (count != BONUS_BALL_COUNT) {
-            return;
-        }
-        if (goldenTicket.containsBonusBall(myLottoTicket)) {
-            count++;
-        }
+    public LottoJudge(final GoldenTicket goldenTicket, final LottoTicket lottoTicket) {
+        this.goldenTicket = goldenTicket;
+        this.lottoTicket = lottoTicket;
     }
 
     public Rank determine() {
-        return Rank.of(count);
+        int count = this.goldenTicket.getMatchedNumbersCount(lottoTicket);
+        boolean containsBonusBall = this.goldenTicket.containsBonusBall(lottoTicket);
+        return Rank.of(count, containsBonusBall);
     }
 }

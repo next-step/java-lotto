@@ -15,31 +15,30 @@ class LottoTicketTest {
     @Test
     void notRequiredSizedLottoNumbersThrowsException() {
         // given
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5)
-        );
+        List<LottoNumber> lottoNumbers = createFiveLottoNumbers();
 
         // when & then
         assertThrows(IllegalArgumentException.class,
                 () -> new LottoTicket(lottoNumbers));
     }
 
+    @DisplayName("중복된 번호가 있으면 exception 발생")
+    @Test
+    void duplicateElementsThrowException() {
+        // given
+        List<LottoNumber> lottoNumbers = createLottoNumbersWithDuplicate();
+
+        // when & then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new LottoTicket(lottoNumbers));
+        assertThat(exception.getMessage()).isEqualTo("중복된 번호가 존재합니다.");
+    }
+
     @DisplayName("toString() 결과 포맷")
     @Test
     void toStringTest() {
         // given
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        );
+        List<LottoNumber> lottoNumbers = createNormalLottoNumbers();
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -47,5 +46,37 @@ class LottoTicketTest {
 
         // then
         assertThat(result).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    private List<LottoNumber> createFiveLottoNumbers() {
+        return Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5)
+        );
+    }
+
+    private List<LottoNumber> createLottoNumbersWithDuplicate() {
+        return Arrays.asList(
+                LottoNumber.of(3),
+                LottoNumber.of(5),
+                LottoNumber.of(11),
+                LottoNumber.of(25),
+                LottoNumber.of(5),
+                LottoNumber.of(39)
+        );
+    }
+
+    private List<LottoNumber> createNormalLottoNumbers() {
+        return Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
     }
 }

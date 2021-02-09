@@ -1,10 +1,19 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.AutoPurchase;
+import lotto.domain.GoldenTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketMachine;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.PurchaseResult;
+import lotto.domain.WinnerStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -18,11 +27,21 @@ public class LottoController {
 
     public List<LottoTicket> purchaseLottoTickets() {
         PurchaseAmount amount = inputView.getPurchaseAmount();
-        // TODO: (2단계) `LottoTicketOffice`에 수동 구입 메시지를 전송하고, 발행된 티켓들을 받는다.
+        PurchaseResult manualPurchaseResult = inputView.getManualPurchasedTickets(amount);
+        PurchaseResult autoPurchaseResult = purchaseAutomatically(manualPurchaseResult);
+        outputView.printLottoTickets(manualPurchaseResult, autoPurchaseResult);
+        return addAllTickets(manualPurchaseResult, autoPurchaseResult);
+    }
 
-        List<LottoTicket> lottoTickets = LottoTicketOffice.issue(new AutoPurchase(), amount);
-        outputView.printLottoTickets(lottoTickets);
-        return lottoTickets;
+    private PurchaseResult purchaseAutomatically(final PurchaseResult previousPurchaseResult) {
+        return LottoTicketMachine.issue(new AutoPurchase(), previousPurchaseResult.getChange());
+    }
+
+    private List<LottoTicket> addAllTickets(final PurchaseResult manualPurchaseResult, final PurchaseResult autoPurchaseResult) {
+        return Stream.concat(
+                manualPurchaseResult.getLottoTickets().stream(),
+                autoPurchaseResult.getLottoTickets().stream()
+        ).collect(Collectors.toList());
     }
 
     public void draw(final List<LottoTicket> purchasedLottoTickets) {

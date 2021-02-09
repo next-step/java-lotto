@@ -12,10 +12,20 @@ class LottoNumbersPickerTest {
     @DisplayName("pick한 LottoNumber가 총 6개")
     @Test
     void pickLottoNumbers() {
-        // when
+        // given & when
         List<LottoNumber> lottoNumbers = LottoNumbersPicker.pick();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
+
+    @DisplayName("pick한 LottoNumber의 리스트는 항상 오름차순")
+    @Test
+    void lottoNumbersAscendingOrder() {
+        // given & when
+        List<LottoNumber> lottoNumbers = LottoNumbersPicker.pick();
+
+        // then
+        assertThat(lottoNumbers).isSortedAccordingTo(LottoNumber::compareTo);
     }
 }
