@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ResultView {
+public class OutputView {
 
     public static void printPurchaseNumber(int number) {
         System.out.println(number + Message.PURCHASE_NUMBER.message);
@@ -43,5 +43,9 @@ public class ResultView {
         }
         System.out.println(String.format(Message.WINNER_COUNT.message,
                 winningType.getValue(), winningType.getProfit().getValue(), matchResult.get(winningType)));
+    }
+
+    public static void isNotValidNumberOfManualLottoTicket() {
+        System.out.println(String.format(Message.IS_NOT_VALID_NUMBER.message));
     }
 }

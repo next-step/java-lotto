@@ -46,14 +46,14 @@ public class LottoMachineTest {
     @Test
     void purchaseLottosTest() {
         //Given
-        Money money = new Money(14000);
+        int numberOfAllLottoTicket = 14;
         int numberOfManualLottoTicket = 3;
         List<List<Integer>> manualLottoNumbers = Arrays.asList(
                 Arrays.asList(8, 21, 23, 41, 42, 43),
                 Arrays.asList(3, 5, 11, 16, 32, 38),
                 Arrays.asList(7, 11, 16, 35, 36, 44));
         //When
-        int result = lottoMachine.purchaseLottos(money, numberOfManualLottoTicket, manualLottoNumbers).size();
+        int result = lottoMachine.purchaseLottos(numberOfAllLottoTicket, numberOfManualLottoTicket, manualLottoNumbers).size();
         //Then
         Assertions.assertThat(result).isEqualTo(14);
     }

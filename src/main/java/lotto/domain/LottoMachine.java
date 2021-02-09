@@ -27,14 +27,12 @@ public class LottoMachine {
         return allLottoTicketNumber - manualLottoTicketNumber;
     }
 
-
     public Lotto createLotto(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    public List<Lotto> purchaseLottos(Money money, int numberOfManualLottoTicket, List<List<Integer>> manualLottoNumbers) {
-        int lottoTicketNumber = getLottoTicketNumber(money);
-        int numberOfAutoLottoTicket = getAutoLottoTicketNumber(lottoTicketNumber, numberOfManualLottoTicket);
+    public List<Lotto> purchaseLottos(int numberOfAllLottoTicket, int numberOfManualLottoTicket, List<List<Integer>> manualLottoNumbers) {
+        int numberOfAutoLottoTicket = getAutoLottoTicketNumber(numberOfAllLottoTicket, numberOfManualLottoTicket);
 
         List<Lotto> lottos = new ArrayList<>();
         for ( List<Integer> manualLottoNumber : manualLottoNumbers) {
@@ -114,5 +112,11 @@ public class LottoMachine {
 
     public Map<WinningType, Integer> getMatchResult() {
         return matchResult;
+    }
+
+    public void isValidNumberOfManualLottoTicket(int numberOfAllLottoTicket, int numberOfManualLottoTicket) {
+        if (numberOfAllLottoTicket < numberOfManualLottoTicket || numberOfManualLottoTicket < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
