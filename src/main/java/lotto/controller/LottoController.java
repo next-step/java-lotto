@@ -18,14 +18,17 @@ public class LottoController {
         int numberOfManualLottoTicket = InputView.getNumberOfManualLottoTicket(); // 수동으로 구매할 로또 수
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(numberOfManualLottoTicket);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        int numberOfAllLottoTicket = lottoMachine.getLottoTicketNumber(money);
-        int numberOfAutoLottoTicket = lottoMachine.getAutoLottoTicketNumber(numberOfAllLottoTicket,
-                                                                            numberOfManualLottoTicket);
+        int numberOfAutoLottoTicket = getNumberOfAutoLottoTicket(numberOfManualLottoTicket);
         lottos = lottoMachine.purchaseLottos(money, numberOfManualLottoTicket, manualLottoNumbers);
         ResultView.printPurchaseNumber(lottos.size()); // 개를 구입했습니다.
 
         ResultView.printGeneratedLottos(numberOfManualLottoTicket, numberOfAutoLottoTicket, lottos); // 생성된 로또 목록
+    }
+
+    private int getNumberOfAutoLottoTicket(int numberOfManualLottoTicket) {
+        int numberOfAllLottoTicket = lottoMachine.getLottoTicketNumber(money);
+        return lottoMachine.getAutoLottoTicketNumber(numberOfAllLottoTicket,
+                numberOfManualLottoTicket);
     }
 
     public void enterWinningNumber() {
