@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import com.sun.javafx.binding.SelectBinding;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,15 +28,23 @@ public class LottoMachineTest {
     }
 
     @Test
-    void createLottoFailureTest() {
+    void createLottoDuplicatedNumberFailureTest() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
     }
 
     @Test
-    void startTest() {
-        int money = 14000;
-        Assertions.assertThat(lottoMachine.start(money).size()).isEqualTo(14);
+    void createLottoOutOfRangeNumberFailureTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 100);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lottoMachine.createLotto(lottoNumbers));
+    }
+
+    @Test
+    void generateLottos() {
+        lottoMachine.initializeLottoCount(3000, 0);
+        List<Lotto> lottos = lottoMachine.generateLottos(new ArrayList<>());
+        Assertions.assertThat(lottos.size()).isEqualTo(1);
     }
 }
