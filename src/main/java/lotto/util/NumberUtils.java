@@ -3,6 +3,7 @@ package lotto.util;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class NumberUtils {
@@ -10,6 +11,10 @@ public class NumberUtils {
     private static final int FIRST_RANGE_LOTTO_NUMBER = 1;
     private static final int END_RANGE_LOTTO_NUMBER = 45;
     private static final String COMMA = ", ";
+
+    private NumberUtils() {
+
+    }
 
     public static Integer returnInteger(String string) {
         try {
@@ -24,14 +29,7 @@ public class NumberUtils {
         return bd.setScale(2, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
-    public static boolean isNumberUnique(List<String> numbers) {
-        return numbers
-            .stream()
-            .distinct()
-            .count() == numbers.size();
-    }
-
-    public static boolean isNumberInLottoRange(List<String> numbers) {
+    public static boolean isNumberInLottoRange(Set<String> numbers) {
         return numbers
             .stream()
             .map(Integer::parseInt)
