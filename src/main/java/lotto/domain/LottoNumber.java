@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int UPPER_BOUND_LOTTO = 46;
     private final int lottoNumber;
 
-    public LottoNumber(final int lottoNumber) {
+    private LottoNumber(final int lottoNumber) {
         checkIsValid(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
@@ -49,8 +51,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber == that.lottoNumber;
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public static LottoNumber of (final int number) {
+        return new LottoNumber(number);
+    }
+
 }

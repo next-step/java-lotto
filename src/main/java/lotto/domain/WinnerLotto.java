@@ -1,59 +1,49 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class WinnerLotto implements Lotto {
+public class WinnerLotto {
+    // extends keyword 제거됨
+    private final LottoNumber bonusBall;
+    private final Lotto winnersLotto;
+    public WinnerLotto(LottoNumber bonusBall, Lotto winnersLotto) {
 
-    private final LottoNumber BonusBall;
-    private final List<LottoNumber> numbers;
+        checkLottoContainsBonusball(bonusBall, winnersLotto.getNumbers());
+        this.winnersLotto = winnersLotto;
+        this.bonusBall = bonusBall;
+    }
 
-
-    public WinnerLotto(LottoNumber bonusBall, List<LottoNumber> numbers) {
-        checkSizeOfLotto(numbers);
-        checkDuplicatedNumber(numbers);
-        BonusBall = bonusBall;
-        this.numbers = numbers;
+    public Lotto getWinnersLotto() {
+        return winnersLotto;
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers;
+        return winnersLotto.getNumbers();
     }
 
     public LottoNumber getBonusBall() {
-        return BonusBall;
+        return bonusBall;
     }
 
-
-    private void checkSizeOfLotto(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개이어야 합니다.");
+    private void checkLottoContainsBonusball (LottoNumber bonusBall, List<LottoNumber> numbers) {
+        if (numbers.contains(bonusBall)) {
+            throw new IllegalArgumentException("보너스번호가 로또번호와 중복됩니다.");
         }
     }
 
-    private void checkDuplicatedNumber(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumbersChecker = new HashSet<>(lottoNumbers);
-        if (lottoNumbersChecker.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 로또번호가 있습니다.");
-        }
-
+    public static WinnerLotto of (LottoNumber bonusBall, List<LottoNumber> numbers) {
+        return new WinnerLotto(bonusBall, Lotto.of(numbers));
+    }
+    public static WinnerLotto of (LottoNumber bonusBall, Lotto winnersLotto) {
+        return new WinnerLotto(bonusBall, winnersLotto);
     }
 
-    public static List<LottoNumber> getWinnerLottoWithSplitting(String text) {
-        String [] inputs = text.split(DELIMITER);
-        List<LottoNumber> winnerLotto = new ArrayList<>();
-        for (String input : inputs) {
-            winnerLotto.add(new LottoNumber(Validator.checkIsIntegerAndIsNegative(input)));
-        }
-        checkSizeOfLotto(winnerLotto.size());
-        return winnerLotto;
+
+    public Prize getPrizeForEachLotto(Lotto lotto) {
+        int matchedCount = winnersLotto.getMatchedCount(lotto);
+        boolean isBonus = lotto.contains(bonusBall);
+        return Prize.getPrizeByMatchedNumber(matchedCount,isBonus);
     }
 
-    private static void checkSizeOfLotto(int size) {
-        if (size != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또의 숫자는 6개입니다.");
-        }
-    }
+
 }

@@ -1,35 +1,28 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinnerLottoTest {
-
     WinnerLotto winnerLotto;
     List<LottoNumber> expectedLottoNumbers;
     LottoNumber lottoBonusNumber;
+    List<Integer> lottoNumbers;
 
     @BeforeEach
     void init() {
-        expectedLottoNumbers = new ArrayList<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
-        lottoBonusNumber = new LottoNumber(7);
-        winnerLotto = new WinnerLotto(lottoBonusNumber,expectedLottoNumbers);
+        lottoNumbers = Arrays.asList(1,2,3,4,5,6);
+        expectedLottoNumbers = lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
+        lottoBonusNumber = LottoNumber.of(7);
+        winnerLotto = WinnerLotto.of(lottoBonusNumber,LottoFactory.createLotto(lottoNumbers));
     }
 
     @DisplayName("get List of LottoNumber test")
@@ -44,10 +37,16 @@ class WinnerLottoTest {
         assertThat(winnerLotto.getBonusBall()).isEqualTo(lottoBonusNumber);
     }
 
-    @DisplayName("comma with space parsing test")
+
+
+    @DisplayName("bonus ball cannot be same with lotto number")
     @Test
-    void getWinnerLottoWithSplitting() {
-        String input = "1, 2, 3, 4, 5, 6";
-        assertThat(WinnerLotto.getWinnerLottoWithSplitting(input)).isEqualTo(expectedLottoNumbers);
+    void checkLottoContainsBonusball () {
+
+        assertThatThrownBy(() -> {
+            LottoNumber bonusBall = LottoNumber.of(1);
+
+            WinnerLotto winnerLotto = WinnerLotto.of(bonusBall, LottoFactory.createLotto(lottoNumbers));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
