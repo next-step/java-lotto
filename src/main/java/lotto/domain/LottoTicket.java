@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.resources.StringResources;
+import lotto.resources.ErrorMessages;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class LottoTicket {
 
     private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != REQUIRED_SIZE) {
-            throw new RuntimeException(StringResources.LOTTO_NUMBER_AMOUNT_ERROR_MESSAGE);
+            throw new RuntimeException(ErrorMessages.LOTTO_NUMBER_AMOUNT_ERROR_MESSAGE);
         }
     }
 
@@ -38,7 +38,7 @@ public class LottoTicket {
     private List<LottoNumber> convertLottoNumbers(final String[] winningTicketNumbers){
         return Arrays
                 .stream(winningTicketNumbers)
-                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber)))
+                .map(winningTicketNumber -> new LottoNumber(Integer.parseInt(winningTicketNumber.trim())))
                 .collect(Collectors.toList());
     }
 }

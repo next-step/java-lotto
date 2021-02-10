@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,11 +16,14 @@ public class LottoPurchaseTest {
     @Test
     void getAmountTest() {
         //given
-        NumberPicker numberPicker = new LottoNumbersPicker();
-        Purchase purchase = new LottoPurchase(numberPicker, PURCHASE_LOTTO_AMOUNT);
+        final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        final LottoCount lottoCount = new LottoCount(money);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         //when
-        int purchaseAmount = purchase.getAmount();
+        final int purchaseAmount = purchase.getAmount();
         //then
         assertThat(purchaseAmount).isEqualTo(PURCHASE_LOTTO_AMOUNT);
     }
@@ -28,13 +32,34 @@ public class LottoPurchaseTest {
     @Test
     void buyTest() {
         //given
-        NumberPicker numberPicker = new LottoNumbersPicker();
-        Purchase purchase = new LottoPurchase(numberPicker, PURCHASE_LOTTO_AMOUNT);
+        final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker();
+        final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        final LottoCount lottoCount = new LottoCount(money);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
 
         //when
-        List<LottoTicket> lottoTickets = purchase.buy();
+        final List<LottoTicket> lottoTickets = purchase.buy();
 
         //amount
         assertThat(lottoTickets.size()).isEqualTo(LOTTO_TICKET_COUNT);
+    }
+
+    @DisplayName("복권을 3000원 구매했을 때, 수동 1000원과 자동 2000원을 정상적으로 구매했는 지 테스트")
+    @Test
+    void getPurchaseInformationTest() {
+        //given
+        final List<String> inputDatas = Arrays.asList("1,2,3,4,5,6");
+        final AutoNumbersPicker autoNumbersPicker = new AutoNumbersPicker();
+        final ManualNumbersPicker manualNumbersPicker = new ManualNumbersPicker(inputDatas);
+        final Money money = new Money(PURCHASE_LOTTO_AMOUNT);
+        final LottoCount lottoCount = new LottoCount(money, 1);
+        final Purchase purchase = new LottoPurchase(autoNumbersPicker, manualNumbersPicker, lottoCount);
+
+        //when
+        final String purchaseInformation = purchase.toString();
+
+        //then
+        assertThat(purchaseInformation).isEqualTo("수동으로 1장, 자동으로 2개를 구매했습니다.");
     }
 }
