@@ -37,8 +37,8 @@ class LottoMatcherTest {
         winnerNumbers.add(new LottoNumber(5));
         winnerNumbers.add(new LottoNumber(6));
 
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
-        assertThat(lottoMatcher.getMatchedCount(lottoNumber, winnerLotto)).isEqualTo(3);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumber(7), winnerNumbers);
+        assertThat(lottoMatcher.getMatchedCount(lottoNumber, winningLotto)).isEqualTo(3);
     }
 
     @Test
@@ -95,8 +95,8 @@ class LottoMatcherTest {
         winnerNumbers.add(new LottoNumber(4));
         winnerNumbers.add(new LottoNumber(5));
         winnerNumbers.add(new LottoNumber(6));
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(7), winnerNumbers);
-        lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumber(7), winnerNumbers);
+        lottoMatcher.checkAllTickets(lottoTickets, winningLotto);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.THREE)).isEqualTo(1);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.SIX)).isEqualTo(1);
     }
@@ -123,8 +123,8 @@ class LottoMatcherTest {
         winnerNumbers.add(new LottoNumber(4));
         winnerNumbers.add(new LottoNumber(5));
         winnerNumbers.add(new LottoNumber(7));
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(6), winnerNumbers);
-        lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumber(6), winnerNumbers);
+        lottoMatcher.checkAllTickets(lottoTickets, winningLotto);
         assertThat(lottoMatcher.getPrizeBoard().get(Prize.FIVE_WITH_BONUS)).isEqualTo(1);
     }
 }

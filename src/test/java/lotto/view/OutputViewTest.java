@@ -7,7 +7,7 @@ import lotto.domain.LottoMatcher;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.PlayersLotto;
-import lotto.domain.WinnerLotto;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +41,8 @@ class OutputViewTest {
         winnerNumbers.add(new LottoNumber(4));
         winnerNumbers.add(new LottoNumber(5));
         winnerNumbers.add(new LottoNumber(7));
-        WinnerLotto winnerLotto = new WinnerLotto(new LottoNumber(6), winnerNumbers);
-        lottoMatcher.checkAllTickets(lottoTickets, winnerLotto);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumber(6), winnerNumbers);
+        lottoMatcher.checkAllTickets(lottoTickets, winningLotto);
         OutputView.printWinningResult(lottoMatcher.getPrizeBoard());
     }
 }

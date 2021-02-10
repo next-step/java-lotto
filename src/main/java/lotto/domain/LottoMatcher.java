@@ -14,13 +14,13 @@ public class LottoMatcher {
         Arrays.stream(Prize.values()).forEach(prize -> prizeBoard.put(prize, 0));
     }
 
-    public void checkAllTickets(LottoTickets lottoTickets, WinnerLotto winnerNumbers) {
+    public void checkAllTickets(LottoTickets lottoTickets, WinningLotto winnerNumbers) {
         List<PlayersLotto> playersLottoTickets = lottoTickets.getLottoTickets();
         playersLottoTickets.forEach(lotto ->
             addPrizeStatus(getPrizeForEachLotto(lotto.getNumbers(), winnerNumbers)));
     }
 
-    int getMatchedCount(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
+    int getMatchedCount(List<LottoNumber> lottoNumber, WinningLotto winnerNumbers) {
         return (int) lottoNumber.stream()
             .filter(number -> winnerNumbers.getNumbers().contains(number))
             .count();
@@ -34,7 +34,7 @@ public class LottoMatcher {
         prizeBoard.put(prize, prizeBoard.get(prize) + 1);
     }
 
-    public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber, WinnerLotto winnerNumbers) {
+    public Prize getPrizeForEachLotto(List<LottoNumber> lottoNumber, WinningLotto winnerNumbers) {
         int matchCnt = getMatchedCount(lottoNumber, winnerNumbers);
         int bonusBall = winnerNumbers.getBonusBall().getLottoNumber();
         Prize returnPrize = Arrays.stream(Prize.values())

@@ -5,17 +5,15 @@ import java.util.Map;
 
 import lotto.domain.LottoTickets;
 import lotto.domain.PlayersLotto;
+import lotto.domain.PurchaseOption;
 import lotto.domain.Prize;
+import lotto.util.InfoStrings;
 
 
 public class OutputView {
 
-    public static void printNumberOfLottoInfo(int numberOfLotto) {
-        System.out.println(numberOfLotto + "개를 구매하셨습니다.");
-    }
-
-    public static void printAllLotto(LottoTickets lottoTickets) {
-        System.out.println();
+    public static void printAllLotto(LottoTickets lottoTickets, PurchaseOption option) {
+        System.out.println(String.format(InfoStrings.INFO_OUTPUT_PURCHASE, option.getManualGenerateCnt(), option.getAutoGenerateCnt()));
         for (PlayersLotto lotto : lottoTickets.getLottoTickets()) {
             System.out.println(lotto.getAsIntegerList());
         }
@@ -23,8 +21,7 @@ public class OutputView {
     }
 
     public static void printWinningResult(Map<Prize, Integer> prizeBoard) {
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
+        System.out.println(InfoStrings.INFO_LOTTO_RESULT_STATISTIC);
         Arrays.stream(Prize.values()).forEach(prize -> {
             if (prize.getMatchedNumber() < Prize.THREE.getMatchedNumber()) {
                 return;
@@ -36,7 +33,7 @@ public class OutputView {
     }
 
     public static void printReturnOnInvestment(double returnOnInvestment) {
-        System.out.println("총 수익률은 " + returnOnInvestment + "입니다.");
+        System.out.println(String.format(InfoStrings.INFO_OUTPUT_LOTTO_RETURN_ON_INVESTMENT, returnOnInvestment));
     }
 
     private static void printPrizeCount(Prize prize) {
