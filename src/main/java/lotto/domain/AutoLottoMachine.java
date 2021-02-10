@@ -15,7 +15,7 @@ public class AutoLottoMachine implements LottoMachine {
     private static int ticketCount;
 
     public AutoLottoMachine(int lottoCount) {
-        this.ticketCount = lottoCount;
+        ticketCount = lottoCount;
     }
 
     private static List<Integer> createLottoNumbers() {
