@@ -19,7 +19,7 @@ public enum Message {
 
     public final String message;
 
-    Message(String message){
+    Message(String message) {
         this.message = message;
     }
 }

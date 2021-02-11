@@ -27,7 +27,7 @@ public class InputView {
 
         scanner.nextLine();
         List<List<Integer>> manualLottos = new ArrayList<>();
-        for (int i=0; i<numberOfManualLottoTicket; i++) {
+        for (int i = 0; i < numberOfManualLottoTicket; i++) {
             String manualLottoNumber = scanner.nextLine();
             manualLottos.add(getCommonLottoNumbers(manualLottoNumber));
         }

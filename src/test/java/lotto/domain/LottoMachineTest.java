@@ -13,19 +13,19 @@ public class LottoMachineTest {
     static Map<WinningType, Integer> matchResultTarget;
 
     @BeforeAll
-    static void initAll () {
+    static void initAll() {
         lottoMachine = new LottoMachine();
     }
 
     @Test
-    void getLottoTicketNumberTest () {
+    void getLottoTicketNumberTest() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> lottoMachine.getLottoTicketNumber(new Money(500)));
         Assertions.assertThat(lottoMachine.getLottoTicketNumber(new Money(14000))).isEqualTo(14);
     }
 
     @Test
-    void getAutoLottoTicketNumberTest () {
+    void getAutoLottoTicketNumberTest() {
         Assertions.assertThat(lottoMachine.getAutoLottoTicketNumber(14, 3)).isEqualTo(11);
         Assertions.assertThat(lottoMachine.getAutoLottoTicketNumber(14, 9)).isEqualTo(5);
     }

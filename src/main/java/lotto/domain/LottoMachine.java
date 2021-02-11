@@ -35,7 +35,7 @@ public class LottoMachine {
         int numberOfAutoLottoTicket = getAutoLottoTicketNumber(numberOfAllLottoTicket, numberOfManualLottoTicket);
 
         List<Lotto> lottos = new ArrayList<>();
-        for ( List<Integer> manualLottoNumber : manualLottoNumbers) {
+        for (List<Integer> manualLottoNumber : manualLottoNumbers) {
             lottos.add(createLotto(manualLottoNumber));
         }
         for (int i = 0; i < numberOfAutoLottoTicket; i++) {
