@@ -1,9 +1,13 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static lotto.utils.InputValidator.checkDuplicateNumberValidation;
 
 public class LottoService {
     private final List<LottoTicket> lottoTickets;
@@ -19,9 +23,17 @@ public class LottoService {
         this.lottoTickets = lottoTickets;
     }
 
-    public void buyLottoTickets(int numberOfTickets) {
-        for (int i = 0; i < numberOfTickets; ++i) {
+    public void buyAutomaticLottoTickets(int numberOfAutomaticTickets) {
+        for (int i = 0; i < numberOfAutomaticTickets; ++i) {
             lottoTickets.add(new LottoTicket());
+        }
+    }
+
+    public void buyManualLottoTickets(int numberOfManualLottoTickets) {
+        for (int i = 0; i < numberOfManualLottoTickets; ++i) {
+            List<Integer> pickedNumbers = InputView.inputManualLottoTicketPickedNumber();
+            checkDuplicateNumberValidation(pickedNumbers);
+            lottoTickets.add(new LottoTicket(pickedNumbers));
         }
     }
 

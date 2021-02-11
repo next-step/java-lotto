@@ -1,10 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
 import lotto.utils.InputValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static lotto.utils.InputValidator.checkLengthWinningNumbersValidation;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -30,7 +33,7 @@ public class InputView {
             InputValidator.checkLottoNumberValidation(winningNumber);
             winningNumbers.add(winningNumber);
         }
-        InputValidator.checkLengthWinningNumbersValidation(winningNumbers.size());
+        checkLengthWinningNumbersValidation(winningNumbers.size());
         return winningNumbers;
     }
 
@@ -40,5 +43,25 @@ public class InputView {
         InputValidator.checkNumberValidation(input);
         Integer bonusNumber = Integer.valueOf(input);
         return bonusNumber;
+    }
+
+    public static int inputNumberOfManualLottoTicket(int numberOfLotto) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = scanner.next();
+        InputValidator.checkNumberValidation(input);
+        Integer numberOfManualLottoTicket = Integer.valueOf(input);
+        InputValidator.checkNumberOfManualLottoTicketsValidation(numberOfManualLottoTicket, numberOfLotto);
+        return numberOfManualLottoTicket;
+    }
+
+    public static List<Integer> inputManualLottoTicketPickedNumber() {
+        List<Integer> pickedNumbers = new ArrayList<>();
+        String input = scanner.next();
+        for (String s : input.split(",")) {
+            pickedNumbers.add(Integer.valueOf(s));
+        }
+        int numberOfPickedNumber = pickedNumbers.size();
+        checkLengthWinningNumbersValidation(numberOfPickedNumber);
+        return pickedNumbers;
     }
 }
