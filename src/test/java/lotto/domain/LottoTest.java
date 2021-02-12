@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.wrapper.Count;
 import lotto.wrapper.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,12 @@ public class LottoTest {
             "5500, 5",
             "300, 0",
     })
-    void matchPriceAndPayment(int _input, int output) {
-        Buyer number = new Buyer();
-        Money input = new Money(_input);
-        assertThat(number.matchPriceAndPayment(input)).isEqualToComparingFieldByField(output);
+    void matchPriceAndPayment(int input, int output) {
+        Buyer buyer = new Buyer();
+        Money money = new Money(input);
+        Count count = new Count(output);
+        assertThat(buyer.matchPriceAndPayment(money))
+                .isEqualToComparingFieldByField(count);
     }
 
     @DisplayName("실제 로또 당첨 번호와 일치하는 번호를 넣었을 때 일치하는지")
@@ -42,7 +45,8 @@ public class LottoTest {
         LottoTicket input = new LottoTicket(lottoNumbers);
         Lotto lotto = new Lotto(ticket);
 
-        assertThat(lotto.getLottoTicket()).isEqualToComparingFieldByField(input);
+        assertThat(lotto.getLottoTicket())
+                .isEqualToComparingFieldByField(input);
     }
 
     @DisplayName("실제 로또 보너스 번호와 일치하는 번호를 넣었을 떄 일치하는지")
@@ -79,6 +83,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(ticket);
         Integer result = 3;
 
-        assertThat(lotto.matchLotto(input)).isEqualTo(result); // TODO: Count형으로 바꿔주기
+        assertThat(lotto.matchLotto(input)).isEqualTo(result);
     }
 }

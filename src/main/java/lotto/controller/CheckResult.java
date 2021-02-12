@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MatchResult {
+public class CheckResult {
     private static final int MIN_MATCH_BOUND = 3;
     private static final int BONUS_REWARD_IDX = 3;
     private static final int MAX_MATCH_IDX = 4;
@@ -23,9 +23,8 @@ public class MatchResult {
     private Count tryCount;
     private List<Count> prizeCount;
 
-    public MatchResult(Count tryCount) {
+    public CheckResult(Count tryCount) {
         this.tryCount = tryCount;
-        // prizeCount를 일급 컬렉션화?
         this.prizeCount = new ArrayList<>(
                 Arrays.asList(new Count(0),
                         new Count(0),
@@ -34,7 +33,7 @@ public class MatchResult {
                         new Count(0)));
     }
 
-    public MatchResult(Count tryCount, List<Count> prizeCount) {
+    public CheckResult(Count tryCount, List<Count> prizeCount) {
         this.tryCount = tryCount;
         this.prizeCount = prizeCount;
     }
@@ -80,9 +79,11 @@ public class MatchResult {
 
     private int calculateWinningRevenueOnce(int i) {
         if (i == 3) {
-            return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), true).getPrize().getMoney();
+            return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable
+                    .lookUpTable.get(i), true).getPrize().getMoney();
         }
-        return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable.lookUpTable.get(i), false).getPrize().getMoney();
+        return prizeCount.get(i).getCount() * Prize.match(MatchLookUpTable
+                .lookUpTable.get(i), false).getPrize().getMoney();
 
     }
 }

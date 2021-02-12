@@ -1,12 +1,9 @@
-package lotto.controller;
+package lotto.domain;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class LottoGenerator {
@@ -16,7 +13,7 @@ public class LottoGenerator {
     private static final int COUNT_LEFT_BOUND = 0;
     private static final int COUNT_RIGHT_BOUND = 6;
 
-    private static final int BONUS_IDX = 6;
+    private static final int BONUS_INDEX = 6;
 
     private static List<LottoNumber> candidateNumbers = new ArrayList<>();
 
@@ -58,6 +55,18 @@ public class LottoGenerator {
     }
 
     public static LottoNumber generateBonus() {
-        return candidateNumbers.get(BONUS_IDX);
+        return candidateNumbers.get(BONUS_INDEX);
+    }
+
+    public static List<LottoTicket> rawToTickets(List<String> lottosManualRaw) {
+        List<LottoTicket> lottoManualTickets = new ArrayList<>();
+        for(String raw : lottosManualRaw){
+            lottoManualTickets.add(rawToTicket(raw));
+        }
+        return lottoManualTickets;
+    }
+
+    public static LottoTicket rawToTicket(String raw) {
+        return new LottoTicket(raw);
     }
 }

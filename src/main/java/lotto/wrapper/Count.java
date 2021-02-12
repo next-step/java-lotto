@@ -17,4 +17,13 @@ public class Count {
     public int getCount() {
         return count;
     }
+
+    public static Count split(Count lottos, Count lottosManual) {
+        int randomCount = lottos.getCount() - lottosManual.getCount();
+        return new Count(randomCount);
+    }
+    public static Count sum(Count lottosManual, Count lottosRandom) {
+        int lottoCount = lottosManual.getCount() + lottosRandom.getCount();
+        return new Count(lottoCount);
+    }
 }
