@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.Message;
+
 import java.util.*;
 
 public class LottoMachine {
@@ -7,48 +9,60 @@ public class LottoMachine {
     private static final int NUMBER_RANGE = 45;
     private static final int LOTTO_LENGTH = 6;
     private final Random random = new Random();
-    private List<Integer> lottos;
+    private List<LottoNumber> lottoNumbers;
+    private List<Lotto> lottos;
     private final Map<WinningType, Integer> matchResult = new HashMap<>();
 
     public LottoMachine() {
+        lottos = new ArrayList<>();
         initialMatchResult();
     }
 
-    public int getLottoTicketNumber(int money) {
-        return money / LOTTO_TICKET_PRICE;
+    public int getLottoTicketNumber(Money money) {
+        if (money.getValue() < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException(Message.LOTTO_MINIMUM_MONEY.message);
+        }
+        return money.getValue() / LOTTO_TICKET_PRICE;
     }
 
-    public Lotto createLotto(List<Integer> lottoNumbers) {
+    public int getAutoLottoTicketNumber(LottoPaper lottoPaper) {
+        return lottoPaper.getNumberOfAllLottoTicket()-lottoPaper.getNumberOfManualLottoTicket();
+    }
+
+    public Lotto createLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    public List<Lotto> purchaseLottos(int money) {
-        int lottoTicketNumber = getLottoTicketNumber(money);
+    public List<Lotto> purchaseLottos(LottoPaper lottoPaper) {
+        int numberOfAutoLottoTicket = getAutoLottoTicketNumber(lottoPaper);
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoTicketNumber; i++) {
+        createManualLottos(lottoPaper);
+        createAutoLottos(numberOfAutoLottoTicket);
+
+        return lottos;
+    }
+
+    private void createAutoLottos(int numberOfAutoLottoTicket) {
+        for (int i = 0; i < numberOfAutoLottoTicket; i++) {
             lottos.add(createLotto(generateLottoNumber()));
         }
-
-        return lottos;
     }
 
-    private List<Integer> generateLottoNumber() {
-        lottos = new ArrayList<>();
-        while (lottos.size() < LOTTO_LENGTH) {
-            int candidateLottoNumber = random.nextInt(NUMBER_RANGE) + 1;
-            lottoAdder(candidateLottoNumber);
+    private void createManualLottos(LottoPaper lottoPaper) {
+        for (List<LottoNumber> manualLottoNumber : lottoPaper.getManualLottoNumbers()) {
+            lottos.add(createLotto(manualLottoNumber));
         }
-
-        lottos.sort(Integer::compareTo);
-
-        return lottos;
     }
 
-    private void lottoAdder(int number) {
-        if (!lottos.contains(number)) {
-            lottos.add(number);
+    private List<LottoNumber> generateLottoNumber() {
+        lottoNumbers = new ArrayList<>();
+        for (int i=1; i<=NUMBER_RANGE; i++) {
+            lottoNumbers.add(new LottoNumber(i));
         }
+        Collections.shuffle(lottoNumbers);
+        lottoNumbers = lottoNumbers.subList(0, 6);
+
+        return lottoNumbers;
     }
 
     public Map<WinningType, Integer> calculateResult(WinningLotto winningLotto, List<Lotto> lottos) {
@@ -65,7 +79,7 @@ public class LottoMachine {
     }
 
     private void initialMatchResult() {
-        for ( WinningType winningType : WinningType.values()) {
+        for (WinningType winningType : WinningType.values()) {
             matchResult.put(winningType, 0);
         }
     }
@@ -83,22 +97,28 @@ public class LottoMachine {
                 .count();
     }
 
-    public Boolean hasBonusBall(int bonusBall, List<Integer> lotto) {
+    public Boolean hasBonusBall(LottoNumber bonusBall, List<LottoNumber> lotto) {
         return lotto.contains(bonusBall);
     }
 
-    public static float getProfitRate(Map<WinningType, Integer> result, int money) {
+    public static float getProfitRate(Map<WinningType, Integer> result, Money money) {
         long totalProfit = 0;
 
         for (WinningType winningType : result.keySet()) {
             Integer price = result.get(winningType);
-            totalProfit += (long) winningType.getProfit() * price;
+            totalProfit += (long) winningType.getProfit().getValue() * price;
         }
 
-        return (float) totalProfit / (float) money;
+        return (float) totalProfit / (float) money.getValue();
     }
 
     public Map<WinningType, Integer> getMatchResult() {
         return matchResult;
+    }
+
+    public void isValidNumberOfManualLottoTicket(int numberOfAllLottoTicket, int numberOfManualLottoTicket) {
+        if (numberOfAllLottoTicket < numberOfManualLottoTicket || numberOfManualLottoTicket < 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }

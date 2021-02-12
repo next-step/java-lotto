@@ -3,17 +3,17 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum WinningType {
-    NONE(0, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    FIVE_BONUS(5, 30000000),
-    SIX(6, 2000000000);
+    NONE(0, new Money(0)),
+    THREE(3, new Money(5000)),
+    FOUR(4, new Money(50000)),
+    FIVE(5, new Money(1500000)),
+    FIVE_BONUS(5, new Money(30000000)),
+    SIX(6, new Money(2000000000));
 
     private final int value;
-    private final int profit;
+    private final Money profit;
 
-    WinningType(int value, int profit) {
+    WinningType(int value, Money profit) {
         this.value = value;
         this.profit = profit;
     }
@@ -34,7 +34,7 @@ public enum WinningType {
         return value;
     }
 
-    public int getProfit() {
+    public Money getProfit() {
         return profit;
     }
 }
