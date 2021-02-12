@@ -4,15 +4,12 @@ import java.util.Objects;
 
 public class WinningNumber {
 
-    private Ticket winningNumber;
+    private final Ticket winningNumber;
     private static final int LOTTO_COUNT = 6;
 
     public WinningNumber(Ticket winningNumber) throws IllegalArgumentException {
         validateWinningNumber(winningNumber);
         this.winningNumber = winningNumber;
-    }
-
-    public WinningNumber() {
     }
 
     public Ticket getWinningNumber() {

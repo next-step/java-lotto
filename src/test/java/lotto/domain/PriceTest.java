@@ -61,9 +61,8 @@ public class PriceTest {
     @DisplayName("총 티켓 당첨금 테스트")
     @ParameterizedTest
     @MethodSource("provideCalculateTotalPrizeTest")
-    public void calculateTotalPrizeTest(Map<Revenue, Integer> revenue, int expected) {
-        Price price = new Price();
-        int totalRevenue = price.calculateTotalPrize(revenue);
+    public void calculateTotalPrizeTest(RevenueCluster revenueCluster, int expected) {
+        int totalRevenue = revenueCluster.calculateTotalPrize();
         assertEquals(expected, totalRevenue);
     }
 
@@ -73,7 +72,23 @@ public class PriceTest {
         revenueMap.put(Revenue.THREE, 1);
         revenueMap.put(Revenue.FIVE_AND_BONUS, 2);
         return Stream.of(
-            Arguments.of(revenueMap, 60005000)
+            Arguments.of(new RevenueCluster(revenueMap), 60005000)
+        );
+    }
+
+    @DisplayName("수익률 계산 테스트")
+    @ParameterizedTest
+    @MethodSource("provideCalcualteYieldTest")
+    void calculateYieldTest(Price inputPrice, int income, double expected) {
+        assertEquals(expected, inputPrice.calculateYield(income));
+    }
+
+    private static Stream<Arguments> provideCalcualteYieldTest() {
+        return Stream.of(
+            Arguments.of(new Price(14000), 5000, 0.35),
+            Arguments.of(new Price(10000), 5000, 0.5),
+            Arguments.of(new Price(2000), 2000000000, 1000000.0),
+            Arguments.of(new Price(2000), 0, 0.0)
         );
     }
 }

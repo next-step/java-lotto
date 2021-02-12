@@ -40,20 +40,4 @@ class NumberUtilsTest {
             Arguments.of("0.03")
         );
     }
-
-    @DisplayName("수익률 계산 테스트")
-    @ParameterizedTest
-    @MethodSource("provideCalcualteYieldTest")
-    void calculateYieldTest(int inputPrice, int income, double expected) {
-        assertEquals(expected, NumberUtils.calculateYield(inputPrice, income));
-    }
-
-    private static Stream<Arguments> provideCalcualteYieldTest() {
-        return Stream.of(
-            Arguments.of(14000, 5000, 0.35),
-            Arguments.of(10000, 5000, 0.5),
-            Arguments.of(2000, 2000000000, 1000000.0),
-            Arguments.of(2000, 0, 0.0)
-        );
-    }
 }
