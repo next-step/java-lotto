@@ -9,6 +9,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'junit:junit:4.12'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'org.apache.commons:commons-text:1.8'

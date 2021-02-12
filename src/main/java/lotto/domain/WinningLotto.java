@@ -3,23 +3,23 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLotto {
-    private final List<Integer> winningLottos;
-    private final int bonusBall;
+    private final List<LottoNumber> winningLottos;
+    private final LottoNumber bonusBall;
 
-    private WinningLotto(Lotto winningLotto, int bonusBall) {
+    private WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         this.winningLottos = winningLotto.getLottoNumbers();
         this.bonusBall = bonusBall;
     }
 
-    public static WinningLotto generate(Lotto winningLotto, int bonusBall) {
+    public static WinningLotto generate(Lotto winningLotto, LottoNumber bonusBall) {
         return new WinningLotto(winningLotto, bonusBall);
     }
 
-    public List<Integer> getWinningLottoNumbers() {
+    public List<LottoNumber> getWinningLottoNumbers() {
         return winningLottos;
     }
 
-    public int getBonusBall() {
+    public LottoNumber getBonusBall() {
         return bonusBall;
     }
 }

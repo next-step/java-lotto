@@ -1,6 +1,6 @@
 package lotto.view;
 
-import org.apache.commons.lang3.StringUtils;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,27 +14,25 @@ public class InputView {
 
     public static int getLottoMoney() {
         System.out.println(Message.LOTTO_MONEY.message);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static int getNumberOfManualLottoTicket() {
         System.out.println(Message.NUMBER_OF_MANUAL_LOTTO_TICKET.message);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<List<Integer>> getManualLottoNumbers(int numberOfManualLottoTicket) {
+    public static List<String> getManualLottoNumbers(int numberOfManualLottoTicket) {
         System.out.println(Message.MANUAL_LOTTO_NUMBER.message);
 
-        scanner.nextLine();
-        List<List<Integer>> manualLottos = new ArrayList<>();
+        List<String> manualLottos = new ArrayList<>();
         for (int i = 0; i < numberOfManualLottoTicket; i++) {
-            String manualLottoNumber = scanner.nextLine();
-            manualLottos.add(getCommonLottoNumbers(manualLottoNumber));
+            manualLottos.add(scanner.nextLine());
         }
         return manualLottos;
     }
 
-    public static List<Integer> getWinningNumbers() {
+    public static List<LottoNumber> getWinningNumbers() {
         System.out.println(Message.WINNING_NUMBER.message);
         String winningLottoNumber = scanner.nextLine();
         return getCommonLottoNumbers(winningLottoNumber);
@@ -42,19 +40,12 @@ public class InputView {
 
     public static int getBonusBall() {
         System.out.println(Message.BONUS_BALL.message);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Integer> getCommonLottoNumbers(String winningLottoNumber) {
+    public static List<LottoNumber> getCommonLottoNumbers(String winningLottoNumber) {
         return Arrays.stream(winningLottoNumber.split(REGEX))
-                .map(InputView::toInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private static int toInt(String inputNumbers) {
-        if (!StringUtils.isNumeric(inputNumbers)) {
-            throw new IllegalArgumentException(Message.NOT_INTEGER.message);
-        }
-        return Integer.parseInt(inputNumbers);
     }
 }

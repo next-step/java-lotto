@@ -17,13 +17,22 @@ public class LottoController {
         money = new Money(InputView.getLottoMoney()); // 구입금액을 입력해주세요
         int numberOfAllLottoTicket = lottoMachine.getLottoTicketNumber(money);
         int numberOfManualLottoTicket = getNumberOfManualLottoTicket(numberOfAllLottoTicket); // 수동으로 구매할 로또 수
-        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(numberOfManualLottoTicket);
+        LottoPaper lottoPaper = getLottoPaper(numberOfAllLottoTicket, numberOfManualLottoTicket);
 
-        int numberOfAutoLottoTicket = getNumberOfAutoLottoTicket(numberOfManualLottoTicket);
-        lottos = lottoMachine.purchaseLottos(numberOfAllLottoTicket, numberOfManualLottoTicket, manualLottoNumbers);
+        lottos = lottoMachine.purchaseLottos(lottoPaper);
         OutputView.printPurchaseNumber(lottos.size()); // 개를 구입했습니다.
 
-        OutputView.printGeneratedLottos(numberOfManualLottoTicket, numberOfAutoLottoTicket, lottos); // 생성된 로또 목록
+        OutputView.printGeneratedLottos(numberOfManualLottoTicket, numberOfAllLottoTicket-numberOfManualLottoTicket, lottos); // 생성된 로또 목록
+    }
+
+    private LottoPaper getLottoPaper(int numberOfAllLottoTicket, int numberOfManualLottoTicket) {
+        try {
+            List<String> manualLottoNumbers = InputView.getManualLottoNumbers(numberOfManualLottoTicket);
+            return new LottoPaper(manualLottoNumbers, numberOfAllLottoTicket, numberOfManualLottoTicket);
+        } catch (IllegalArgumentException iae) {
+            System.out.println("올바른 숫자를 입력해주세요.");
+            return getLottoPaper(numberOfAllLottoTicket, numberOfManualLottoTicket);
+        }
     }
 
     private int getNumberOfManualLottoTicket(int numberOfAllLottoTicket) {
@@ -37,16 +46,10 @@ public class LottoController {
         return numberOfManualLottoTicket;
     }
 
-    private int getNumberOfAutoLottoTicket(int numberOfManualLottoTicket) {
-        int numberOfAllLottoTicket = lottoMachine.getLottoTicketNumber(money);
-        return lottoMachine.getAutoLottoTicketNumber(numberOfAllLottoTicket,
-                numberOfManualLottoTicket);
-    }
-
     public void enterWinningNumber() {
-        List<Integer> winningLottoNumbers = InputView.getWinningNumbers(); // 당첨 번호를 입력해주세요
+        List<LottoNumber> winningLottoNumbers = InputView.getWinningNumbers(); // 당첨 번호를 입력해주세요
         int bonusBall = InputView.getBonusBall();  // 보너스 볼을 입력해 주세요.
-        winningLotto = WinningLotto.generate(new Lotto(winningLottoNumbers), bonusBall);
+        winningLotto = WinningLotto.generate(new Lotto(winningLottoNumbers), new LottoNumber(bonusBall));
     }
 
     public void getLottoResult() {

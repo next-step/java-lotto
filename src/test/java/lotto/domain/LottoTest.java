@@ -9,7 +9,10 @@ import java.util.List;
 public class LottoTest {
     @Test
     void checkValidLottoNumbersTest() {
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 5, 6);
+        // 1, 2, 3, 5, 6
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1),
+                new LottoNumber(2), new LottoNumber(3), new LottoNumber(5), new LottoNumber(6));
+
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers));
     }
