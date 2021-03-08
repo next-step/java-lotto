@@ -4,11 +4,15 @@
 - 1장의 가격 1000원
 - 전체 금액 input parameter
 - input 금액 / parameter ⇒ ticket수 output
+- String으로 받아서 숫자가 아니면 exception
 
 ### 로또 한장
 - random한 숫자 6개를 생성
 - List로 random한 숫자들을 가지고 있음
-- random한 숫자를 생성하는건 strategy pattern으로 6개를 받게끔 구성
+- random한 숫자를 생성하는건 randoomGenerator에서 6개를 받게끔 구성
+
+### 로또 번호 생성기
+- 겹치지않은 6개의 lotto번호 추출
 
 ### 로또 리스트
 - 로또 한장 리스트
