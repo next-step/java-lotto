@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import camp.nextcamp.edu.calculator.module.CustomPatternTokenizer;
 import camp.nextcamp.edu.calculator.module.DefaultPatternStringTokenizer;
 import camp.nextcamp.edu.calculator.module.PatternStringTokenizer;
+import camp.nextcamp.edu.calculator.module.PatternTokenizerFactory;
 
 public class StringTokenizerTest {
 
@@ -53,4 +54,21 @@ public class StringTokenizerTest {
 		// then
 		assertThat(result).isEqualTo(expected);
 	}
+
+	@ParameterizedTest
+	@DisplayName("PatternTokenizerFactory Test CustomPatternTokenizer")
+	@ValueSource(strings = {"//;\\n1;2;3", "//:\\n1:2.3"})
+	void PatternTokenizerFactory_CustomPatternTokenizer(String input) {
+		assertThat(PatternTokenizerFactory.getTokenizer(input))
+			.isInstanceOf(CustomPatternTokenizer.class);
+	}
+
+	@ParameterizedTest
+	@DisplayName("PatternTokenizerFactory Test DefaultPatternTokenizer")
+	@ValueSource(strings = {"1:2,3", "2:3,2"})
+	void PatternTokenizerFactory_DefaultPatternTokenizer(String input) {
+		assertThat(PatternTokenizerFactory.getTokenizer(input))
+			.isInstanceOf(DefaultPatternStringTokenizer.class);
+	}
+
 }
