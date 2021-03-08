@@ -59,14 +59,14 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;5;-344", "5,-322", "422:-23,1"})
+    @ValueSource(strings = {"//;\n-1;5;344", "5,-322", "422:-23,1"})
     @DisplayName("음수 포함시 예외 발생 테스트")
     void splitAndSum_with_negative_number(String input) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input));
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\nadd;bdd;-3", "5,asdf", "4:gasdfa,1"})
+    @ValueSource(strings = {"//;\nadd;bdd;3", "5,asdf", "4:gasdfa,1"})
     @DisplayName("숫자가 아닌 문자 포함시 예외 발생 테스트")
     void splitAndSum_with_not_numeric_input(String input) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input));
