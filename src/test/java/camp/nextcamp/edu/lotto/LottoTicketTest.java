@@ -7,17 +7,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import camp.nextcamp.edu.lotto.entity.LottoInput;
+import camp.nextcamp.edu.lotto.entity.LottoTicket;
 
-public class LottoInputTest {
+public class LottoTicketTest {
 
 	@ParameterizedTest
 	@DisplayName("로또 가격 parameter로 ticket 얻어오기")
 	@CsvSource(value = {"14000=14", "5000=5", "2000=2"}, delimiter = '=')
 	void lotto_생성(String input, int expected) {
-		LottoInput lottoInput = new LottoInput(input);
+		LottoTicket lottoInput = new LottoTicket(input);
 
-		assertThat(lottoInput.getLottoTicketCount())
+		assertThat(lottoInput.getTicketCount())
 			.isEqualTo(expected);
 	}
 
@@ -26,7 +26,7 @@ public class LottoInputTest {
 	@ValueSource(strings = {"a223", "333e", "1!@#"})
 	void LottoInput_실패케이스(String input) {
 		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(() -> new LottoInput(input))
+			.isThrownBy(() -> new LottoTicket(input))
 			.withMessageMatching("숫자만 가능합니다.");
 	}
 
