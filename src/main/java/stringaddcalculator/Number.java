@@ -1,4 +1,4 @@
-package StringAddCalculator;
+package stringaddcalculator;
 
 public class Number {
 
