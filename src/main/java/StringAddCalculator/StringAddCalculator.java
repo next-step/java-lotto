@@ -3,7 +3,9 @@ package StringAddCalculator;
 public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
-        if (isBlank(input)) return Number.ZERO.toValue();
+        if (isBlank(input)) {
+            return Number.ZERO.toValue();
+        }
         String[] stringNumberArray = split(input);
         return sum(stringNumberArray);
     }

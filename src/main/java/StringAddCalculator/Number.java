@@ -7,7 +7,9 @@ public class Number {
     public final static Number ZERO = new Number(0);
 
     public Number(int value) {
-        if (value < 0) throw new RuntimeException("not allowed number smaller than 0");
+        if (value < 0) {
+            throw new RuntimeException("not allowed number smaller than 0");
+        }
         this.value = value;
     }
 
