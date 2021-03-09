@@ -37,8 +37,10 @@ public enum WinningScore {
 			.collect(Collectors.toList());
 	}
 
-	@Override
-	public String toString() {
+	public String getStatics() {
+		if (this == NONE) {
+			return "꽝        (0원)";
+		}
 		return correctCount + "개 일치 (" + price + "원)";
 	}
 }

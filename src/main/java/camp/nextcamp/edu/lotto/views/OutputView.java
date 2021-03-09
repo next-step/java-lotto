@@ -25,7 +25,7 @@ public class OutputView extends View {
 		out.println("당첨 통계");
 		out.println("----------");
 		winningScore.forEach((key, value) -> {
-			String result = key + " - " + value + "개";
+			String result = key.getStatics() + " - " + value + "개";
 			out.println(result);
 		});
 	}
@@ -34,9 +34,9 @@ public class OutputView extends View {
 		String message = profit > 1 ? WINNING : FAIL;
 		String result =
 			"총 수익률은 "
-			+ profit
-			+ "입니다."
-			+ message;
+				+ profit
+				+ "입니다."
+				+ message;
 		out.println(result);
 	}
 }
