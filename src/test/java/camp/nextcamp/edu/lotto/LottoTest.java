@@ -2,11 +2,11 @@ package camp.nextcamp.edu.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,13 +14,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
 
 public class LottoTest {
 
-	private static List<Integer> getMocking(String input) {
+	private static Set<Integer> getMocking(String input) {
 		return Arrays.stream(input.split(","))
 			.map(Integer::parseInt)
-			.collect(Collectors.toList());
+			.collect(Collectors.toSet());
 	}
 
 	@ParameterizedTest
@@ -28,13 +29,13 @@ public class LottoTest {
 	@ValueSource(strings = {"1,2,3,4,5,6", "2,3,4,5,6,7"})
 	void Lotto_생성(String input) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		// given
-		List<Integer> mock = getMocking(input);
+		Set<Integer> mock = getMocking(input);
 
 		// when
 		Lotto lotto = new Lotto(mock);
 
 		Method method = lotto.getClass()
-			.getDeclaredMethod("checkSize", List.class);
+			.getDeclaredMethod("checkSize", Set.class);
 		method.setAccessible(true);
 
 		// then
@@ -47,11 +48,20 @@ public class LottoTest {
 	@ValueSource(strings = {"1,2,3,4,5", "1,3,4,5"})
 	void Lotto_갯수_6개_아닌경우(String input) {
 		// given
-		List<Integer> mock = getMocking(input);
+		Set<Integer> mock = getMocking(input);
 
 		// then
 		assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(() -> new Lotto(mock))
 			.withMessageMatching("Lotto 갯수는 6개 여야됩니다.");
+	}
+
+	@ParameterizedTest
+	@DisplayName("range에 포함이 안되는경우")
+	@ValueSource(strings = {"1,3,4,5,6,100", "1,2,3,90,5,6"})
+	void range_error(String input) {
+		assertThatExceptionOfType(RuntimeException.class)
+			.isThrownBy(() -> new Lotto(getMocking(input)))
+			.withMessageMatching("Lotto 는 1~46까지만 입력이 가능합니다.");
 	}
 }
