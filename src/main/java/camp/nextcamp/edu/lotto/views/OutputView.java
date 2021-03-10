@@ -24,19 +24,21 @@ public class OutputView extends View {
 	public void showResultStatistics(Map<WinningScore, Long> winningScore) {
 		out.println("당첨 통계");
 		out.println("----------");
-		winningScore.forEach((key, value) -> {
-			String result = key.getStatics() + " - " + value + "개";
-			out.println(result);
-		});
+
+		out.println(String.format("꽝\t\t\t\t(0원)  -  %s개", winningScore.get(WinningScore.NONE)));
+
+		winningScore.forEach(this::showExactNoneScore);
 	}
 
 	public void showProfit(double profit) {
 		String message = profit > 1 ? WINNING : FAIL;
-		String result =
-			"총 수익률은 "
-				+ profit
-				+ "입니다."
-				+ message;
-		out.println(result);
+		out.println(String.format("총 수익률은 %s 입니다. %s", profit, message));
+	}
+
+	private void showExactNoneScore(WinningScore score, Long count) {
+		if (score != WinningScore.NONE) {
+			String result = String.format("%s개 일치\t\t\t (%s원) - %s개", score.getCorrectCount(), score.getPrice(), count);
+			out.println(result);
+		}
 	}
 }

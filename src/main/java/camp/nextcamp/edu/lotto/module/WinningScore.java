@@ -20,6 +20,10 @@ public enum WinningScore {
 		this.price = price;
 	}
 
+	public int getCorrectCount() {
+		return correctCount;
+	}
+
 	public int getPrice() {
 		return price;
 	}
@@ -35,12 +39,5 @@ public enum WinningScore {
 		return Arrays.stream(values())
 			.filter(winningScore -> !countByMap.keySet().contains(winningScore))
 			.collect(Collectors.toList());
-	}
-
-	public String getStatics() {
-		if (this == NONE) {
-			return "꽝        (0원)";
-		}
-		return correctCount + "개 일치 (" + price + "원)";
 	}
 }

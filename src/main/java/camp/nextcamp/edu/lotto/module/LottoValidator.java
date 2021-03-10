@@ -8,10 +8,10 @@ import java.util.stream.IntStream;
 
 public class LottoValidator {
 
-	public static boolean isNotInRange(int number) {
-		Set<Integer> ranges = IntStream.range(LOTTO_MIN, LOTTO_MAX)
-			.boxed()
-			.collect(Collectors.toSet());
-		return ranges.contains(number);
+	private LottoValidator() {
+	}
+
+	public static boolean isInRange(int number) {
+		return LOTTO_MIN <= number && number <= LOTTO_MAX;
 	}
 }

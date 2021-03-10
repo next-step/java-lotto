@@ -12,19 +12,18 @@ import camp.nextcamp.edu.lotto.views.InputView;
 import camp.nextcamp.edu.lotto.views.OutputView;
 
 public class LottoController {
-	private final InputView inputView;
-	private final OutputView outputView;
 	private final LottoModule lottoModule;
 	private final LottoScoreBoardModule scoreBoardModule;
 
 	public LottoController() {
-		this.inputView = new InputView();
-		this.outputView = new OutputView();
 		this.lottoModule = LottoModule.getInstance();
 		this.scoreBoardModule = LottoScoreBoardModule.getInstance();
 	}
 
 	public void run() {
+		final InputView inputView = new InputView();
+		final OutputView outputView = new OutputView();
+
 		String money = inputView.getMoneyString();
 		LottoTicket ticket = lottoModule.getLottoTicket(money);
 		outputView.showLottoTicketCount(ticket);
