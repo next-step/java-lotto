@@ -12,15 +12,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.module.LottoModule;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class WinningLottoTest {
 
-	private static Set<Integer> getMock(String input) {
+	private static Set<LottoNumber> getMock(String input) {
 		return Arrays.stream(input.split(","))
 			.map(Integer::parseInt)
+			.map(LottoNumber::new)
 			.collect(Collectors.toSet());
 	}
 

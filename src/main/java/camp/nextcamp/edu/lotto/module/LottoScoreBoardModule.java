@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
 
 public class LottoScoreBoardModule {
@@ -23,10 +24,9 @@ public class LottoScoreBoardModule {
 		return LottoScoreBoardModule.LazyHolder.INSTANCE;
 	}
 
-	private int getIntersectionCount(Set<Integer> list, Set<Integer> otherList) {
-		return list.stream()
-			.distinct()
-			.filter(otherList::contains)
+	private int getIntersectionCount(Set<LottoNumber> input, Set<LottoNumber> winning) {
+		return input.stream()
+			.filter(winning::contains)
 			.collect(Collectors.toSet())
 			.size();
 	}

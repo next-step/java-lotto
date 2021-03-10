@@ -1,5 +1,6 @@
 package camp.nextcamp.edu.lotto;
 
+import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,13 +15,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
+import camp.nextcamp.edu.lotto.exception.UserExceptionMesssage;
 
 public class LottoTest {
 
-	private static Set<Integer> getMocking(String input) {
+	private static Set<LottoNumber> getMocking(String input) {
 		return Arrays.stream(input.split(","))
 			.map(Integer::parseInt)
+			.map(LottoNumber::new)
 			.collect(Collectors.toSet());
 	}
 
@@ -29,7 +33,7 @@ public class LottoTest {
 	@ValueSource(strings = {"1,2,3,4,5,6", "2,3,4,5,6,7"})
 	void Lotto_생성(String input) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		// given
-		Set<Integer> mock = getMocking(input);
+		Set<LottoNumber> mock = getMocking(input);
 
 		// when
 		Lotto lotto = new Lotto(mock);
@@ -48,12 +52,12 @@ public class LottoTest {
 	@ValueSource(strings = {"1,2,3,4,5", "1,3,4,5"})
 	void Lotto_갯수_6개_아닌경우(String input) {
 		// given
-		Set<Integer> mock = getMocking(input);
+		Set<LottoNumber> mock = getMocking(input);
 
 		// then
 		assertThatExceptionOfType(RuntimeException.class)
 			.isThrownBy(() -> new Lotto(mock))
-			.withMessageMatching("Lotto 갯수는 6개 여야됩니다.");
+			.withMessageMatching(MAXIUMUM_SIZE.getMessage());
 	}
 
 	@ParameterizedTest

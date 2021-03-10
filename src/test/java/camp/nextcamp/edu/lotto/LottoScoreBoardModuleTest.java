@@ -12,19 +12,17 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class LottoScoreBoardModuleTest {
 
-	private static Set<Integer> getMock(Integer... input) {
-		return new HashSet<>(Arrays.asList(input));
+	private static Set<LottoNumber> getMock(Integer... input) {
+		return new HashSet<>(Arrays.asList(input).stream().map(LottoNumber::new).collect(Collectors.toList()));
 	}
 
 

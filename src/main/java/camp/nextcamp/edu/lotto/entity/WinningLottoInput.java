@@ -1,28 +1,39 @@
 package camp.nextcamp.edu.lotto.entity;
 
+import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import camp.nextcamp.edu.lotto.exception.UserException;
 import camp.nextcamp.edu.util.StringUtils;
 
 public class WinningLottoInput {
-	private final Set<Integer> numbers;
+	private final Set<LottoNumber> numbers;
 
 	public WinningLottoInput(String input) {
-		if (!input.contains(", ")) {
-			throw new RuntimeException(",  단위로 잘라서 입력해주세요.");
-		}
+		validateContainsComma(input);
 
 		Set<String> numbers = Arrays.stream(input.split(", "))
 			.collect(Collectors.toSet());
-		if (checkNotNumeric(numbers)) {
-			throw new RuntimeException("숫자만 입력이 가능합니다.");
-		}
 
-		this.numbers = convertToIntegerList(numbers);
+		validateNumber(numbers);
+		this.numbers = convertLottoNumbers(numbers);
 	}
 
+
+	private void validateContainsComma(String input) {
+		if (!input.contains(", ")) {
+			throw new UserException(SLICE_WITH_COMMA);
+		}
+	}
+
+	private void validateNumber(Set<String> numbers) {
+		if (checkNotNumeric(numbers)) {
+			throw new UserException(ONLY_NUMBER);
+		}
+	}
 
 	private boolean checkNotNumeric(Set<String> input) {
 		return input.stream()
@@ -30,13 +41,14 @@ public class WinningLottoInput {
 			.anyMatch((valid) -> !valid);
 	}
 
-	private Set<Integer> convertToIntegerList(Set<String> input) {
+	private Set<LottoNumber> convertLottoNumbers(Set<String> input) {
 		return input.stream()
 			.map(Integer::parseInt)
+			.map(LottoNumber::new)
 			.collect(Collectors.toSet());
 	}
 
-	public Set<Integer> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return numbers;
 	}
 }

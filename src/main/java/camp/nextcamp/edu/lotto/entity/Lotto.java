@@ -7,35 +7,24 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import camp.nextcamp.edu.lotto.module.LottoValidator;
+import camp.nextcamp.edu.lotto.exception.UserException;
+import camp.nextcamp.edu.lotto.exception.UserExceptionMesssage;
 
 public class Lotto {
-	private final Set<Integer> numbers;
+	private final Set<LottoNumber> numbers;
 
-	public Lotto(Set<Integer> numbers) {
-		if (!checkSize(numbers)) {
-			throw new RuntimeException("Lotto 갯수는 6개 여야됩니다.");
-		}
-
-		if (isNotInRange(numbers)) {
-			throw new RuntimeException("Lotto 는 1~46까지만 입력이 가능합니다.");
-		}
+	public Lotto(Set<LottoNumber> numbers) {
+		validateSize(numbers);
 		this.numbers = numbers;
 	}
 
-	private boolean isNotInRange(Set<Integer> input) {
-		return input.stream()
-			.map(LottoValidator::isNotInRange)
-			.anyMatch((valid) -> !valid);
-	}
-
-	private boolean checkSize(Set<Integer> numbers) {
+	private boolean checkSize(Set<LottoNumber> numbers) {
 		return Optional.ofNullable(numbers)
 			.orElse(new TreeSet<>())
 			.size() == LOTTO_COUNT;
 	}
 
-	public Set<Integer> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return this.numbers;
 	}
 
@@ -44,5 +33,11 @@ public class Lotto {
 			.stream()
 			.map(Object::toString)
 			.collect(Collectors.joining(", "));
+	}
+
+	private void validateSize(Set<LottoNumber> numbers) {
+		if (!checkSize(numbers)) {
+			throw new UserException(UserExceptionMesssage.MAXIUMUM_SIZE);
+		}
 	}
 }

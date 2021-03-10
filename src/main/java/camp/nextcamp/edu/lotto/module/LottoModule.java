@@ -28,8 +28,7 @@ public class LottoModule {
 
 	public List<Lotto> getLottos(LottoTicket lottoTicket) {
 		return IntStream.range(0, lottoTicket.getTicketCount())
-			.boxed()
-			.map((i) -> LottoRandomGenerator.generate(new Random()))
+			.mapToObj((i) -> LottoRandomGenerator.generate(new Random()))
 			.map(Lotto::new)
 			.collect(Collectors.toList());
 	}

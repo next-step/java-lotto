@@ -13,23 +13,18 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.module.LottoRandomGenerator;
 
 public class LottoRandomGeneratorTest {
 
 	@Test
 	void LottoRandomGenerator_확인() {
-		Set<Integer> list = LottoRandomGenerator.generate(new Random());
+		Set<LottoNumber> list = LottoRandomGenerator.generate(new Random());
 
 		assertAll(
 			() -> assertThat(list.size())
-				.isEqualTo(6),
-			() -> {
-				list.forEach(key -> {
-					assertThat(isNotInRange(key))
-						.isEqualTo(true);
-				});
-			}
+				.isEqualTo(6)
 		);
 	}
 }

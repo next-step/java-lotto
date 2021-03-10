@@ -1,5 +1,6 @@
 package camp.nextcamp.edu.lotto;
 
+import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.exception.UserException;
 
 public class LottoTicketTest {
 
@@ -25,9 +27,9 @@ public class LottoTicketTest {
 	@DisplayName("로또 input 실패케이스")
 	@ValueSource(strings = {"a223", "333e", "1!@#"})
 	void LottoInput_실패케이스(String input) {
-		assertThatExceptionOfType(RuntimeException.class)
+		assertThatExceptionOfType(UserException.class)
 			.isThrownBy(() -> new LottoTicket(input))
-			.withMessageMatching("숫자만 가능합니다.");
+			.withMessageMatching(ONLY_NUMBER.getMessage());
 	}
 
 }
