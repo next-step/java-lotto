@@ -46,7 +46,7 @@ public class LottoScoreBoardModuleTest {
 		// when
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
 		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
-			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.generate(11))
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.getLottoNumber(11))
 		);
 
 		// then
@@ -80,7 +80,7 @@ public class LottoScoreBoardModuleTest {
 
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
 		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
-			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.generate(11))
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.getLottoNumber(11))
 		);
 
 		// when

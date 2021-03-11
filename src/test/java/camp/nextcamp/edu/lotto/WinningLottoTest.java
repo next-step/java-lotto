@@ -35,7 +35,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(11));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);
@@ -52,7 +52,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(11));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);
@@ -69,7 +69,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(11));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);
@@ -86,7 +86,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(45));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(45));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);
@@ -103,7 +103,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(9));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(9));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);
@@ -120,7 +120,7 @@ public class WinningLottoTest {
 	void 로또_5_보너스_에러(String input) {
 		// then
 		assertThatExceptionOfType(UserException.class)
-			.isThrownBy(() -> new WinningLotto(new Lotto(getMock(input)), LottoNumberGenerator.generate(5)))
+			.isThrownBy(() -> new WinningLotto(new Lotto(getMock(input)), LottoNumberGenerator.getLottoNumber(5)))
 			.withMessageMatching(OVERLAP_BONUS_NUMBER.getMessage());
 	}
 
@@ -132,7 +132,7 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(25));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.getLottoNumber(25));
 
 		// when
 		WinningScore winningScore = winningLotto.getWinningScore(lotto);

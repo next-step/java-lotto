@@ -42,7 +42,7 @@ public class LottoModule {
 
 		return new WinningLotto(
 			new Lotto(winningLottoInput.getNumbers()),
-			LottoNumberGenerator.generate(Integer.parseInt(bonusNumber))
+			LottoNumberGenerator.getLottoNumber(Integer.parseInt(bonusNumber))
 		);
 	}
 

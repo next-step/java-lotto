@@ -23,7 +23,7 @@ public class LottoNumberGenerator {
 			.collect(Collectors.toMap(i -> i, LottoNumber::new));
 	}
 
-	public static LottoNumber generate(int number) {
+	public static LottoNumber getLottoNumber(int number) {
 		return numbers.get(number);
 	}
 
@@ -31,7 +31,7 @@ public class LottoNumberGenerator {
 		return random.ints(LOTTO_MIN, LOTTO_MAX)
 			.distinct()
 			.limit(LOTTO_COUNT)
-			.mapToObj(LottoNumberGenerator::generate)
+			.mapToObj(LottoNumberGenerator::getLottoNumber)
 			.collect(Collectors.toCollection(TreeSet::new));
 	}
 }
