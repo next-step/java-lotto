@@ -40,5 +40,14 @@ public class OutputView extends View {
 			String result = String.format("%s개 일치\t\t\t (%s원) - %s개", score.getCorrectCount(), score.getPrice(), count);
 			out.println(result);
 		}
+
+		showSecond(score, count);
+	}
+
+	private void showSecond(WinningScore score, Long count) {
+		if (score == WinningScore.SECOND) {
+			String result = String.format("%s개 일치, 보너스볼 일치 (%s원) - %s개", score.getCorrectCount(), score.getPrice(), count);
+			out.println(result);
+		}
 	}
 }
