@@ -14,7 +14,7 @@ public class StringParser {
             String customDelimiter = m.group(1);
             this.input = m.group(2);
             // 덧셈 구현
-        return customDelimiter +"|"+DEFAULT_DELIMITER;
+            return customDelimiter + "|" + DEFAULT_DELIMITER;
         }
         return DEFAULT_DELIMITER;
     }

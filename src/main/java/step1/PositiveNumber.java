@@ -14,7 +14,7 @@ public class PositiveNumber {
             collect = Arrays.stream(stringNumbers)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new RuntimeException("숫자가 아닌 입력값이 존재합니다.");
         }
         return collect;
@@ -28,8 +28,8 @@ public class PositiveNumber {
 
     private void valid(List<Integer> numbers) {
         boolean isNegative = numbers.stream().anyMatch(number -> number < 0);
-        if(isNegative){
-            throw new RuntimeException("양수만 덧셈이 가능합닌다.");
+        if (isNegative) {
+            throw new RuntimeException("양수만 덧셈이 가능합니다.");
         }
     }
 }
