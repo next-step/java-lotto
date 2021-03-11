@@ -32,10 +32,13 @@ class StringParserTest {
     @DisplayName("구분자 설정 테스트")
     @Test
     void setDelimiter() {
+        //given
         String input = "//t\n1;2;3";
 
+        //when
         String delimiter = stringParser.setDelimiter(input);
 
+        //then
         assertThat(delimiter).isEqualTo("t|;|,");
     }
 

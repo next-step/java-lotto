@@ -1,5 +1,7 @@
 package step1;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 public class StringAddCalculator {
@@ -13,7 +15,7 @@ public class StringAddCalculator {
     }
 
     public int splitAndSum(String input) {
-        if (input.isBlank()) {
+        if (StringUtils.isBlank(input)) {
             return 0;
         }
         String delimiter = stringParser.setDelimiter(input);
