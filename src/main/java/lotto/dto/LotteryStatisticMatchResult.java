@@ -1,48 +1,43 @@
 package lotto.dto;
 
-import lotto.domain.LotteryGameRule;
-
-import java.util.List;
+import lotto.domain.LotteryPrize;
 
 public class LotteryStatisticMatchResult {
-    private int firstPrizeLotteryTicketCount;
-    private int firstPrizeReward;
-    private int secondPrizeLotteryTicketCount;
-    private int secondPrizeReward;
-    private int thirdPrizeLotteryTicketCount;
-    private int thirdPrizeReward;
-    private int fourthPrizeLotteryTicketCount;
-    private int fourthPrizeReward;
+
+    private LotteryPrizeResult firstPrizeLotteryResult;
+
+    private LotteryPrizeResult secondPrizeLotteryResult;
+
+    private LotteryPrizeResult thirdPrizeLotteryResult;
+
+    private LotteryPrizeResult fourthPrizeLotteryResult;
 
     private int totalReward;
+
     private int totalPriceOfLotteryTickets;
 
-    public LotteryStatisticMatchResult(LotteryMatchResult matchResult, LotteryGameRule lotteryGameRule) {
-        setReward(lotteryGameRule);
-        setTicketCount(matchResult);
-        List<LotteryTicketDto> firstPrizeWonLotteryTicketList = matchResult.getLotteryTicketListByMatchingCount(lotteryGameRule.getFirstPrizeMatchingCount());
-        firstPrizeReward=lotteryGameRule.getFirstPrizeReward();
+    public LotteryStatisticMatchResult(LotteryMatchResult matchResult, int totalPriceOfLotteryTickets) {
+        this.totalPriceOfLotteryTickets = totalPriceOfLotteryTickets;
+        setLotteryPrizeResult(matchResult);
         calculateTotalReward();
     }
 
-    private void setTicketCount(LotteryMatchResult matchResult,LotteryGameRule lotteryGameRule) {
-        firstPrizeLotteryTicketCount = matchResult.getLotteryTicketListCountByMatchingCount(lotteryGameRule.getFirstPrizeMatchingCount());
-        secondPrizeLotteryTicketCount = matchResult.getLotteryTicketListCountByMatchingCount(lotteryGameRule.getSecondPrizeMatchingCount());
-        thirdPrizeLotteryTicketCount = matchResult.getLotteryTicketListCountByMatchingCount(lotteryGameRule.getThirdPrizeMatchingCount());
-        fourthPrizeLotteryTicketCount = matchResult.getLotteryTicketListCountByMatchingCount(lotteryGameRule.getFourthPrizeMatchingCount());
+    private void setLotteryPrizeResult(LotteryMatchResult matchResult) {
+        firstPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FIRST,matchResult);
+        secondPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.SECOND,matchResult);
+        thirdPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.THIRD,matchResult);
+        fourthPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FOURTH,matchResult);
     }
 
-    private void setReward(LotteryGameRule lotteryGameRule) {
-        firstPrizeReward=lotteryGameRule.getFirstPrizeReward();
-        secondPrizeReward=lotteryGameRule.getSecondPrizeReward();
-        thirdPrizeReward=lotteryGameRule.getThirdPrizeReward();
-        fourthPrizeReward=lotteryGameRule.getFourthPrizeReward();
-    }
 
     private void calculateTotalReward() {
-        totalReward += firstPrizeReward * firstPrizeLotteryTicketCount;
-        totalReward += secondPrizeReward * secondPrizeLotteryTicketCount;
-        totalReward += thirdPrizeReward * thirdPrizeLotteryTicketCount;
-        totalReward += fourthPrizeReward * fourthPrizeLotteryTicketCount;
+        totalReward = firstPrizeLotteryResult.getTotalReward();
+        totalReward += secondPrizeLotteryResult.getTotalReward();
+        totalReward += thirdPrizeLotteryResult.getTotalReward();
+        totalReward += fourthPrizeLotteryResult.getTotalReward();
+    }
+
+    public Double getProfitMargin() {
+       return (double)totalPriceOfLotteryTickets / totalReward;
     }
 }

@@ -1,35 +1,30 @@
 package lotto.domain;
 
-import lotto.dto.LotteryGameRequest;
-import lotto.dto.LotteryMatchResult;
-import lotto.dto.LotteryStatisticMatchResult;
-import lotto.dto.LotteryTicketDto;
+import lotto.dto.*;
 
 import java.util.List;
 
 public class LotteryGame {
 
-    private final LotteryGameRule lotteryGameRule;
+    private LotteryTicketList lotteryTicketList;
 
-    private final LotteryTicketList lotteryTicketList;
+    private final LotterySeller lotterySeller;
 
     public LotteryGame() {
-        lotteryGameRule = new LotteryGameRule();
-        lotteryTicketList = new LotteryTicketList();
-
+        lotterySeller = new LotterySeller();
     }
-    public void generateLotteryTickets(LotteryGameRequest userInput) {
-        int numberOfLotteryTicketsToGenerate = userInput.getAmountOfMoney() / lotteryGameRule.getLotteryTicketPrice();
-        lotteryTicketList.addAutoBulk(numberOfLotteryTicketsToGenerate, lotteryGameRule.getLotteryTicketPrice());
+
+    public void generateLotteryTickets(LotteryGenerateRequest request) {
+        lotteryTicketList = lotterySeller.buy(request.getAmountOfMoney());
     }
 
     public List<LotteryTicketDto> getLotteryTickets() {
         return lotteryTicketList.getTicketList();
     }
 
-    public LotteryStatisticMatchResult matchWinningLotteryNumbers(List<Integer> lastWinningLotteryNumbers) {
-        LotteryTicket lastWinningLotteryTicket = new LotteryTicket(lastWinningLotteryNumbers);
+    public LotteryStatisticMatchResult matchWinningLotteryNumbers(WinningLotteryNumbersRequest winningLotteryNumbersRequest) {
+        WinningLotteryTicket lastWinningLotteryTicket = new WinningLotteryTicket(winningLotteryNumbersRequest.getLastWinningLotteryNumbers());
         LotteryMatchResult matchResult = lotteryTicketList.match(lastWinningLotteryTicket);
-        return new LotteryStatisticMatchResult(matchResult, lotteryGameRule);
+        return new LotteryStatisticMatchResult(matchResult, lotteryTicketList.getTotalPrice());
     }
 }

@@ -14,4 +14,8 @@ public class LotteryTicketDto {
         this.numbers = lottoTicket.getLottoNumberList();
         this.price = lottoTicket.getPrice();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

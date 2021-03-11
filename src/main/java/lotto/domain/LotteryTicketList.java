@@ -11,18 +11,12 @@ public class LotteryTicketList {
 
     private final List<LotteryTicket> list = new ArrayList<>();
 
-//    public LotteryTicketList(int numberOfLotteryTickets, int price) {
-//        for (int i = 0; i < numberOfLotteryTickets; i++) {
-//            list.add(LotteryTicket.auto(price));
-//        }
-//    }
-
     public List<LotteryTicketDto> getTicketList() {
         return list.stream().map(LotteryTicketDto::new)
                 .collect(Collectors.toList());
     }
 
-    public LotteryMatchResult match(LotteryTicket lastWinningTicket) {
+    public LotteryMatchResult match(WinningLotteryTicket lastWinningTicket) {
         LotteryMatchResult lotteryMatchResult = new LotteryMatchResult();
         list.forEach(lotteryTicket -> {
                     int matchingCount = lotteryTicket.findMatchCount(lastWinningTicket);
