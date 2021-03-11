@@ -8,9 +8,12 @@ public class LotteryPrizeResult {
 
     private int matchingCount;
 
+    private int matchedLotteryTicketCount;
+
     public LotteryPrizeResult(LotteryPrize lotteryPrize, LotteryMatchResult lotteryMatchResult) {
         this.reward = lotteryPrize.getReward();
-        this.matchingCount = lotteryMatchResult.getLotteryTicketListCountByMatchingCount(lotteryPrize.getMatchingCount());
+        this.matchingCount = lotteryPrize.getMatchingCount();
+        this.matchedLotteryTicketCount = lotteryMatchResult.getLotteryTicketListCountByMatchingCount(lotteryPrize.getMatchingCount());
     }
 
     public int getReward() {
@@ -21,7 +24,11 @@ public class LotteryPrizeResult {
         return matchingCount;
     }
 
+    public int getMatchedLotteryTicketCount() {
+        return matchedLotteryTicketCount;
+    }
+
     public int getTotalReward() {
-        return reward * matchingCount;
+        return reward * matchedLotteryTicketCount;
     }
 }

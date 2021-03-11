@@ -37,7 +37,25 @@ public class LotteryStatisticMatchResult {
         totalReward += fourthPrizeLotteryResult.getTotalReward();
     }
 
-    public Double getProfitMargin() {
-       return (double)totalPriceOfLotteryTickets / totalReward;
+    public LotteryPrizeResult getFirstPrizeLotteryResult() {
+        return firstPrizeLotteryResult;
     }
+
+    public LotteryPrizeResult getSecondPrizeLotteryResult() {
+        return secondPrizeLotteryResult;
+    }
+
+    public LotteryPrizeResult getThirdPrizeLotteryResult() {
+        return thirdPrizeLotteryResult;
+    }
+
+    public LotteryPrizeResult getFourthPrizeLotteryResult() {
+        return fourthPrizeLotteryResult;
+    }
+
+    public Double getProfitMargin() {
+       return (double)totalReward / totalPriceOfLotteryTickets;
+    }
+
+
 }

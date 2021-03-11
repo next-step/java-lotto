@@ -41,7 +41,7 @@ public class InputView {
         try {
             return Arrays.stream(numberListInString)
                     .map(Integer::parseInt)
-                    .collect(Collectors.toCollection());
+                    .collect(Collectors.toList());
         } catch (NumberFormatException ex) {
             printWrongInputMessage();
             return getWinningLotteryNumberList();

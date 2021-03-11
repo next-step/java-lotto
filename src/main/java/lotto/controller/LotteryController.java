@@ -2,11 +2,8 @@ package lotto.controller;
 
 import lotto.domain.LotteryGame;
 import lotto.dto.LotteryStatisticMatchResult;
-import lotto.dto.LotteryTicketDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LotteryController {
 
@@ -36,5 +33,5 @@ public class LotteryController {
             return matchLastWinningLotteryTicket(lotteryGame);
         }
     }
-    }
+
 }
