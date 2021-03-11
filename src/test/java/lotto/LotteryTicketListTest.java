@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LotteryTicket;
 import lotto.domain.LotteryTicketList;
 import lotto.domain.WinningLotteryTicket;
 import lotto.dto.LotteryMatchResult;

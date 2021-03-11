@@ -15,7 +15,7 @@ public class LottoNumberRandomGeneratorTest {
         int maxTryCount = 100;
         for (int i = 0; i < maxTryCount; i++) {
             LotteryNumber generatedNumber = LottoNumberRandomGenerator.generate();
-            assertThat(generatedNumber.getValue()).isBetween(LotteryNumber.MIN_VALUE,LotteryNumber.MAX_VALUE);
+            assertThat(generatedNumber.getValue()).isBetween(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_VALUE);
         }
     }
 }

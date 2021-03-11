@@ -16,15 +16,6 @@ public class LotteryController {
         ResultView.printFinalResult(lotteryStatisticMatchResult);
     }
 
-//    private static List<LotteryTicketDto> generateLotteryTickets(LotteryGame lotteryGame) {
-//        try {
-//            return lotteryGame.generateLotteryTickets(InputView.getLotteryGenerateInput());
-//        } catch (IllegalArgumentException exception) {
-//            InputView.printWrongInputMessage();
-//            return generateLotteryTickets(lotteryGame);
-//        }
-//    }
-
     private static LotteryStatisticMatchResult matchLastWinningLotteryTicket(LotteryGame lotteryGame) {
         try {
             return lotteryGame.matchWinningLotteryNumbers(InputView.getWinningLotteryNumberInput());

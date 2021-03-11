@@ -19,7 +19,7 @@ public class LotteryTicketList {
     public LotteryMatchResult match(WinningLotteryTicket lastWinningTicket) {
         LotteryMatchResult lotteryMatchResult = new LotteryMatchResult();
         list.forEach(lotteryTicket -> {
-                    int matchingCount = lotteryTicket.findMatchCount(lastWinningTicket);
+                    int matchingCount = lotteryTicket.getMatchCount(lastWinningTicket);
                     lotteryMatchResult.addResult(matchingCount, lotteryTicket);
                 }
         );
@@ -41,7 +41,8 @@ public class LotteryTicketList {
     }
 
     public int getTotalPrice() {
-        return list.stream().mapToInt(LotteryTicket::getPrice)
+        return list.stream()
+                .mapToInt(LotteryTicket::getPrice)
                 .sum();
     }
 }

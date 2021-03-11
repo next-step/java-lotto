@@ -10,5 +10,4 @@ public class MessageConstant {
     public static final String MATCH_RESULT = "%s개 일치 (%s원)- %s개";
     public static final String PROFIT_MARGIN_RESULT = "총 수익률은 %.2f입니다.";
 
-
 }

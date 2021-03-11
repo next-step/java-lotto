@@ -10,11 +10,12 @@ public class ResultView {
 
     private static final String NUMBER_SEPARATOR = ", ";
     private static final String LINE_BREAKER = "%n";
+    private static final String LINE_MARK = "------------------------";
 
     public static void printLotteryTickets(List<LotteryTicketDto> lotteryTickets) {
-        System.out.printf(MessageConstant.PURCHASED_RESULT+LINE_BREAKER, lotteryTickets.size());
+        System.out.printf(MessageConstant.PURCHASED_RESULT + LINE_BREAKER, lotteryTickets.size());
         for (LotteryTicketDto lotteryTicket : lotteryTickets) {
-            System.out.printf(MessageConstant.LOTTERY_NUMBER_RESULT+LINE_BREAKER,extractLotteryNumbersToString(lotteryTicket));
+            System.out.printf(MessageConstant.LOTTERY_NUMBER_RESULT + LINE_BREAKER, extractLotteryNumbersToString(lotteryTicket));
         }
         printEmptyLine();
     }
@@ -29,21 +30,21 @@ public class ResultView {
             b.append(number);
             b.append(NUMBER_SEPARATOR);
         }
-        return b.toString().replaceAll(NUMBER_SEPARATOR+"$", "");
+        return b.toString().replaceAll(NUMBER_SEPARATOR + "$", "");
     }
 
     public static void printFinalResult(LotteryStatisticMatchResult lotteryStatisticMatchResult) {
         System.out.println(MessageConstant.FINAL_STATISTIC_RESULT);
-        System.out.println("----------------------------------");
+        System.out.println(LINE_MARK);
         printLotteryPrizeResult(lotteryStatisticMatchResult.getFirstPrizeLotteryResult());
         printLotteryPrizeResult(lotteryStatisticMatchResult.getSecondPrizeLotteryResult());
         printLotteryPrizeResult(lotteryStatisticMatchResult.getThirdPrizeLotteryResult());
         printLotteryPrizeResult(lotteryStatisticMatchResult.getFourthPrizeLotteryResult());
-        System.out.printf(MessageConstant.PROFIT_MARGIN_RESULT+LINE_BREAKER,lotteryStatisticMatchResult.getProfitMargin() );
+        System.out.printf(MessageConstant.PROFIT_MARGIN_RESULT + LINE_BREAKER, lotteryStatisticMatchResult.getProfitMargin());
     }
 
     private static void printLotteryPrizeResult(LotteryPrizeResult lotteryPrizeResult) {
-        System.out.printf(MessageConstant.MATCH_RESULT+LINE_BREAKER,lotteryPrizeResult.getMatchingCount(),lotteryPrizeResult.getReward(),lotteryPrizeResult.getMatchedLotteryTicketCount() );
+        System.out.printf(MessageConstant.MATCH_RESULT + LINE_BREAKER, lotteryPrizeResult.getMatchingCount(), lotteryPrizeResult.getReward(), lotteryPrizeResult.getMatchedLotteryTicketCount());
     }
 
 

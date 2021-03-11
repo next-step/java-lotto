@@ -7,9 +7,11 @@ public class LotterySeller {
     public LotteryTicketList buy(int amountOfMoney) {
         int numberOfTickets = amountOfMoney / LOTTERY_TICKET_PRICE;
         LotteryTicketList lotteryTicketList = new LotteryTicketList();
-        lotteryTicketList.addAutoBulk(numberOfTickets,LOTTERY_TICKET_PRICE);
+        lotteryTicketList.addAutoBulk(numberOfTickets, LOTTERY_TICKET_PRICE);
         return lotteryTicketList;
     }
+
+
 
 
 }

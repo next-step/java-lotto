@@ -23,10 +23,10 @@ public class LotteryStatisticMatchResult {
     }
 
     private void setLotteryPrizeResult(LotteryMatchResult matchResult) {
-        firstPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FIRST,matchResult);
-        secondPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.SECOND,matchResult);
-        thirdPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.THIRD,matchResult);
-        fourthPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FOURTH,matchResult);
+        firstPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FIRST, matchResult);
+        secondPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.SECOND, matchResult);
+        thirdPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.THIRD, matchResult);
+        fourthPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FOURTH, matchResult);
     }
 
 
@@ -54,7 +54,7 @@ public class LotteryStatisticMatchResult {
     }
 
     public Double getProfitMargin() {
-       return (double)totalReward / totalPriceOfLotteryTickets;
+        return (double) totalReward / totalPriceOfLotteryTickets;
     }
 
 

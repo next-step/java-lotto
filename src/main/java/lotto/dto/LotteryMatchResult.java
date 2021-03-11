@@ -9,8 +9,8 @@ public class LotteryMatchResult {
     private Map<Integer, List<LotteryTicketDto>> matchingCountWithLotteryTicketListMap = new HashMap<>();
 
     public void addResult(int matchingCount, LotteryTicket lotteryTicket) {
-        if(!matchingCountWithLotteryTicketListMap.containsKey(matchingCount)){
-            matchingCountWithLotteryTicketListMap.put(matchingCount,new ArrayList<LotteryTicketDto>());
+        if (!matchingCountWithLotteryTicketListMap.containsKey(matchingCount)) {
+            matchingCountWithLotteryTicketListMap.put(matchingCount, new ArrayList<>());
         }
         List<LotteryTicketDto> lotteryTicketList = matchingCountWithLotteryTicketListMap.get(matchingCount);
         lotteryTicketList.add(new LotteryTicketDto(lotteryTicket));
@@ -18,7 +18,7 @@ public class LotteryMatchResult {
 
 
     public List<LotteryTicketDto> getLotteryTicketListByMatchingCount(int matchingCount) {
-        if(matchingCountWithLotteryTicketListMap.containsKey(matchingCount)){
+        if (matchingCountWithLotteryTicketListMap.containsKey(matchingCount)) {
             return matchingCountWithLotteryTicketListMap.get(matchingCount);
         }
         return Collections.emptyList();

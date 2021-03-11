@@ -14,7 +14,4 @@ public class WinningLotteryTicket {
         return lottery;
     }
 
-
-
-
 }

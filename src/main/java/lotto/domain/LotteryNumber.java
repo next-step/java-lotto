@@ -18,8 +18,8 @@ public class LotteryNumber {
     }
 
     private void validateValue(int value) {
-        if(value > MAX_VALUE || value <MIN_VALUE) {
-            throw new IllegalArgumentException ("로또번호로는 적합하지 않습니다.");
+        if (value > MAX_VALUE || value < MIN_VALUE) {
+            throw new IllegalArgumentException("로또번호로는 적합하지 않습니다.");
         }
     }
 

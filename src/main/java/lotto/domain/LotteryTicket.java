@@ -6,7 +6,7 @@ public class LotteryTicket {
 
     private final Lottery lottery;
 
-    private int price;
+    private final int price;
 
     private LotteryTicket(Lottery lottery, int price) {
         this.lottery = lottery;
@@ -25,7 +25,7 @@ public class LotteryTicket {
         return lottery.getNumberValueList();
     }
 
-    public int findMatchCount(WinningLotteryTicket winningLotteryTicket) {
+    public int getMatchCount(WinningLotteryTicket winningLotteryTicket) {
         return lottery.getMatchCount(winningLotteryTicket.getLottery());
     }
 
