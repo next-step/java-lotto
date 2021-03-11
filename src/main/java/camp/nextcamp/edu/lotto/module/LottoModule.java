@@ -33,9 +33,13 @@ public class LottoModule {
 			.collect(Collectors.toList());
 	}
 
-	public Lotto makeWinningLotto(String input) {
+	public WinningLotto makeWinningLotto(String input, String bonusNumber) {
 		WinningLottoInput winningLottoInput = new WinningLottoInput(input);
-		return new Lotto(winningLottoInput.getNumbers());
+
+		return new WinningLotto(
+			new Lotto(winningLottoInput.getNumbers()),
+			LottoNumberGenerator.generate(Integer.parseInt(bonusNumber))
+		);
 	}
 
 }

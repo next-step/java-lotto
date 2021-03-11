@@ -1,20 +1,22 @@
 package camp.nextcamp.edu.lotto;
 
+import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
-import camp.nextcamp.edu.lotto.module.LottoModule;
-import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
+import camp.nextcamp.edu.lotto.entity.WinningLotto;
+import camp.nextcamp.edu.lotto.exception.UserException;
+import camp.nextcamp.edu.lotto.module.LottoNumberGenerator;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class WinningLottoTest {
@@ -33,15 +35,14 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		Lotto winningLotto = new Lotto(getMock(winning));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
 
 		// when
-		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		WinningScore winningScore = lottoModule.getWinningScore(lotto, winningLotto);
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
 
 		// then
 		assertThat(winningScore)
-			.isEqualTo(WinningScore.SIX);
+			.isEqualTo(WinningScore.FIRST);
 	}
 
 	@ParameterizedTest
@@ -51,14 +52,14 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		Lotto winningLotto = new Lotto(getMock(winning));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
 
 		// when
-		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		WinningScore winningScore = lottoModule.getWinningScore(lotto, winningLotto);
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
+
 		// then
 		assertThat(winningScore)
-			.isEqualTo(WinningScore.FIVE);
+			.isEqualTo(WinningScore.THIRD);
 	}
 
 	@ParameterizedTest
@@ -68,34 +69,61 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		Lotto winningLotto = new Lotto(getMock(winning));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(11));
 
 		// when
-		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		WinningScore winningScore = lottoModule.getWinningScore(lotto, winningLotto);
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
 
 		// then
 		assertThat(winningScore)
-			.isEqualTo(WinningScore.FOUR);
+			.isEqualTo(WinningScore.FOURTH);
 	}
 
 	@ParameterizedTest
-	@DisplayName("로또 3개 맞추")
+	@DisplayName("로또 3개 맞추기")
 	@CsvSource(value = {"1,2,3,4,5,6=1,10,11,33,5,6", "2,3,4,5,6,7=2,9,10,11,6,7"}, delimiter = '=')
 	void 로또_3(String input, String winning) {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		Lotto winningLotto = new Lotto(getMock(winning));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(45));
 
 		// when
-		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		WinningScore winningScore = lottoModule.getWinningScore(lotto, winningLotto);
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
 
 		// then
 		assertThat(winningScore)
-			.isEqualTo(WinningScore.THREE);
+			.isEqualTo(WinningScore.FIFTH);
 	}
+
+	@ParameterizedTest
+	@DisplayName("로또 5개와 보너스 1개")
+	@CsvSource(value = {"1,2,3,4,5,9=1,2,3,4,5,7", "2,3,4,5,6,9=2,3,4,5,6,7"}, delimiter = '=')
+	void 로또_5_보너스(String input, String winning) {
+
+		// given
+		Lotto lotto = new Lotto(getMock(input));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(9));
+
+		// when
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
+
+		// then
+		assertThat(winningScore)
+			.isEqualTo(WinningScore.SECOND);
+	}
+
+
+	@ParameterizedTest
+	@DisplayName("로또 5개와 보너스 1개 중복 에러")
+	@ValueSource(strings = {"1,2,3,4,5,6", "2,3,4,5,6,8"})
+	void 로또_5_보너스_에러(String input) {
+		// then
+		assertThatExceptionOfType(UserException.class)
+			.isThrownBy(() -> new WinningLotto(new Lotto(getMock(input)), LottoNumberGenerator.generate(5)))
+			.withMessageMatching(OVERLAP_BONUS_NUMBER.getMessage());
+	}
+
 
 	@ParameterizedTest
 	@DisplayName("로또 fail")
@@ -104,14 +132,15 @@ public class WinningLottoTest {
 
 		// given
 		Lotto lotto = new Lotto(getMock(input));
-		Lotto winningLotto = new Lotto(getMock(winning));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(getMock(winning)), LottoNumberGenerator.generate(25));
 
 		// when
-		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		WinningScore winningScore = lottoModule.getWinningScore(lotto, winningLotto);
+		WinningScore winningScore = winningLotto.getWinningScore(lotto);
 
 		// then
 		assertThat(winningScore)
 			.isEqualTo(WinningScore.NONE);
 	}
+
+
 }
