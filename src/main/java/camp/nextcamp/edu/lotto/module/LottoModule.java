@@ -7,11 +7,15 @@ import java.util.stream.IntStream;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
 
 public class LottoModule {
 
+	private final Random random;
+
 	private LottoModule() {
+		this.random = new Random();
 	}
 
 	private static class LazyHolder {
@@ -28,7 +32,7 @@ public class LottoModule {
 
 	public List<Lotto> getLottos(LottoTicket lottoTicket) {
 		return IntStream.range(0, lottoTicket.getTicketCount())
-			.mapToObj((i) -> LottoRandomGenerator.generate(new Random()))
+			.mapToObj((i) -> LottoNumberGenerator.generateRandomNumber(random))
 			.map(Lotto::new)
 			.collect(Collectors.toList());
 	}
