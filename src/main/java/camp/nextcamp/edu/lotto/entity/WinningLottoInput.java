@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import camp.nextcamp.edu.lotto.exception.UserException;
+import camp.nextcamp.edu.lotto.module.LottoNumberGenerator;
 import camp.nextcamp.edu.util.StringUtils;
 
 public class WinningLottoInput {
@@ -44,7 +45,7 @@ public class WinningLottoInput {
 	private Set<LottoNumber> convertLottoNumbers(Set<String> input) {
 		return input.stream()
 			.map(Integer::parseInt)
-			.map(LottoNumber::new)
+			.map(LottoNumberGenerator::generate)
 			.collect(Collectors.toSet());
 	}
 
