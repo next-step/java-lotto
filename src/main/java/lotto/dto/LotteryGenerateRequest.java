@@ -1,10 +1,10 @@
 package lotto.dto;
 
-public class LotteryGameRequest {
+public class LotteryGenerateRequest {
 
     private int amountOfMoney;
 
-    public LotteryGameRequest(int amountOfMoney) {
+    public LotteryGenerateRequest(int amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
     }
 
