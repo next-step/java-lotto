@@ -7,7 +7,7 @@ public class StringAddCalculator {
     private final PositiveNumber positiveNumber;
     private final StringParser stringParser;
 
-    public StringAddCalculator(PositiveNumber positiveNumber, StringParser stringParser) {
+    public StringAddCalculator() {
         this.positiveNumber = new PositiveNumber();
         this.stringParser = new StringParser();
     }
