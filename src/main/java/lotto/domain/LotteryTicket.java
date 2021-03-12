@@ -25,8 +25,8 @@ public class LotteryTicket {
         return lottery.getNumberValueList();
     }
 
-    public int getMatchCount(WinningLotteryTicket winningLotteryTicket) {
-        return lottery.getMatchCount(winningLotteryTicket.getLottery());
+    public LotteryPrize match(WinningLotteryTicket winningLotteryTicket) {
+        return LotteryPrize.valueOf(lottery, winningLotteryTicket);
     }
 
     public int getPrice() {

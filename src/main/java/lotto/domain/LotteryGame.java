@@ -27,7 +27,8 @@ public class LotteryGame {
 
     public LotteryStatisticMatchResult matchWinningLotteryNumbers(WinningLotteryNumbersRequest winningLotteryNumbersRequest) {
         WinningLotteryTicket lastWinningLotteryTicket =
-                new WinningLotteryTicket(winningLotteryNumbersRequest.getLastWinningLotteryNumbers());
+                new WinningLotteryTicket(winningLotteryNumbersRequest.getLastWinningLotteryNumbers(),
+                        winningLotteryNumbersRequest.getBonusNumber());
         List<LotteryPrize> lotteryPrizeList = lotteryTicketList.match(lastWinningLotteryTicket);
         return new LotteryStatisticMatchResult(lotteryPrizeList, lotteryTicketList.getTotalPrice());
     }

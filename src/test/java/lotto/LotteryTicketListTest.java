@@ -21,6 +21,7 @@ public class LotteryTicketListTest {
 
         LotteryTicketList lottoTicketList = new LotteryTicketList();
         lottoTicketList.addAutoBulk(numberOfTickets, pricePerTicket);
+
         assertThat(lottoTicketList.getTicketList().size()).isEqualTo(numberOfTickets);
     }
 
@@ -41,20 +42,26 @@ public class LotteryTicketListTest {
     @DisplayName("로또티켓리스트 당첨로또티켓과 비교하여 결과값 도출 테스트")
     void match() {
         int price = 1000;
-        WinningLotteryTicket lastWinningTicket = new WinningLotteryTicket(Arrays.asList(3, 5, 7, 10, 11, 12));
+        WinningLotteryTicket lastWinningTicket = new WinningLotteryTicket(Arrays.asList(3, 5, 7, 10, 11, 12), 18);
 
         List<Integer> lotteryNumberListWith2MatchingCount = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> lotteryNumberListWith4MatchingCount = Arrays.asList(7, 8, 9, 10, 11, 12);
+        List<Integer> lotteryNumberListWith5MatchingCountWithNoBonusNumber = Arrays.asList(7, 18, 5, 10, 11, 12);
+        List<Integer> lotteryNumberListWith5MatchingCountWithOutBonusNumber = Arrays.asList(7, 22, 5, 10, 11, 12);
         List<Integer> lotteryNumberListWith6MatchingCount = Arrays.asList(3, 5, 7, 10, 11, 12);
 
         LotteryTicketList lottoTicketList = new LotteryTicketList();
         lottoTicketList.add(lotteryNumberListWith2MatchingCount, price);
         lottoTicketList.add(lotteryNumberListWith4MatchingCount, price);
+        lottoTicketList.add(lotteryNumberListWith5MatchingCountWithNoBonusNumber, price);
+        lottoTicketList.add(lotteryNumberListWith5MatchingCountWithOutBonusNumber, price);
         lottoTicketList.add(lotteryNumberListWith6MatchingCount, price);
 
         List<LotteryPrize> result = lottoTicketList.match(lastWinningTicket);
 
         assertThat(result).contains(LotteryPrize.NONE);
+        assertThat(result).contains(LotteryPrize.FOURTH);
+        assertThat(result).contains(LotteryPrize.SECOND);
         assertThat(result).contains(LotteryPrize.THIRD);
         assertThat(result).contains(LotteryPrize.FIRST);
     }

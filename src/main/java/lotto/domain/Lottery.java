@@ -40,7 +40,7 @@ public class Lottery {
         }
     }
 
-    private boolean isMatch(LotteryNumber lotteryNumber) {
+    public boolean isMatch(LotteryNumber lotteryNumber) {
         return numberList.contains(lotteryNumber);
     }
 

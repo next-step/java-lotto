@@ -18,7 +18,7 @@ public class LotteryTicketList {
     public List<LotteryPrize> match(WinningLotteryTicket lastWinningTicket) {
         List<LotteryPrize> lotteryPrizeList = new ArrayList<>();
         list.forEach(lotteryTicket ->
-                lotteryPrizeList.add(LotteryPrize.findByMatching(lotteryTicket, lastWinningTicket))
+                lotteryPrizeList.add(lotteryTicket.match(lastWinningTicket))
         );
         return lotteryPrizeList;
     }
