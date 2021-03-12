@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
+import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
 import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
@@ -32,7 +33,7 @@ public class LottoModule {
 
 	public List<Lotto> getLottos(LottoTicket lottoTicket) {
 		return IntStream.range(0, lottoTicket.getTicketCount())
-			.mapToObj((i) -> LottoNumberGenerator.generateRandomNumber(random))
+			.mapToObj((i) -> LottoNumber.generateRandomNumber(random))
 			.map(Lotto::new)
 			.collect(Collectors.toList());
 	}
@@ -42,7 +43,7 @@ public class LottoModule {
 
 		return new WinningLotto(
 			new Lotto(winningLottoInput.getNumbers()),
-			LottoNumberGenerator.getLottoNumber(Integer.parseInt(bonusNumber))
+			LottoNumber.valueOf(Integer.parseInt(bonusNumber))
 		);
 	}
 

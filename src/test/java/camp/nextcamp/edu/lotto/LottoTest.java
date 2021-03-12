@@ -24,7 +24,7 @@ public class LottoTest {
 	private static Set<LottoNumber> getMocking(String input) {
 		return Arrays.stream(input.split(","))
 			.map(Integer::parseInt)
-			.map(LottoNumber::new)
+			.map(LottoNumber::valueOf)
 			.collect(Collectors.toSet());
 	}
 

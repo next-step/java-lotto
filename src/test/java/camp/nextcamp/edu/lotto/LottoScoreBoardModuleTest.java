@@ -17,14 +17,13 @@ import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
 import camp.nextcamp.edu.lotto.entity.WinningLotto;
-import camp.nextcamp.edu.lotto.module.LottoNumberGenerator;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class LottoScoreBoardModuleTest {
 
 	private static Set<LottoNumber> getMock(Integer... input) {
-		return new HashSet<>(Arrays.asList(input).stream().map(LottoNumber::new).collect(Collectors.toList()));
+		return new HashSet<>(Arrays.asList(input).stream().map(LottoNumber::valueOf).collect(Collectors.toList()));
 	}
 
 
@@ -46,7 +45,7 @@ public class LottoScoreBoardModuleTest {
 		// when
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
 		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
-			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.getLottoNumber(11))
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumber.valueOf(11))
 		);
 
 		// then
@@ -80,7 +79,7 @@ public class LottoScoreBoardModuleTest {
 
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
 		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
-			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumberGenerator.getLottoNumber(11))
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumber.valueOf(11))
 		);
 
 		// when
