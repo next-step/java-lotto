@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicketList;
 import lotto.domain.WinningLotteryTicket;
-import lotto.dto.LotteryMatchResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -52,13 +52,10 @@ public class LotteryTicketListTest {
         lottoTicketList.add(lotteryNumberListWith4MatchingCount, price);
         lottoTicketList.add(lotteryNumberListWith6MatchingCount, price);
 
-        LotteryMatchResult result = lottoTicketList.match(lastWinningTicket);
+        List<LotteryPrize> result = lottoTicketList.match(lastWinningTicket);
 
-        assertThat(result.getLotteryTicketListByMatchingCount(0).size()).isEqualTo(0);
-        assertThat(result.getLotteryTicketListByMatchingCount(2).size()).isEqualTo(1);
-        assertThat(result.getLotteryTicketListByMatchingCount(4).size()).isEqualTo(1);
-        assertThat(result.getLotteryTicketListByMatchingCount(6).size()).isEqualTo(1);
-
+        assertThat(result).contains(LotteryPrize.NONE);
+        assertThat(result).contains(LotteryPrize.THIRD);
+        assertThat(result).contains(LotteryPrize.FIRST);
     }
-
 }

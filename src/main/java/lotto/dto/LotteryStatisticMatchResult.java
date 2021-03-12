@@ -2,55 +2,33 @@ package lotto.dto;
 
 import lotto.domain.LotteryPrize;
 
+import java.util.List;
+
 public class LotteryStatisticMatchResult {
 
-    private LotteryPrizeResult firstPrizeLotteryResult;
-
-    private LotteryPrizeResult secondPrizeLotteryResult;
-
-    private LotteryPrizeResult thirdPrizeLotteryResult;
-
-    private LotteryPrizeResult fourthPrizeLotteryResult;
-
-    private int totalReward;
+    private List<LotteryPrize> lotteryPrizeList;
 
     private int totalPriceOfLotteryTickets;
 
-    public LotteryStatisticMatchResult(LotteryMatchResult matchResult, int totalPriceOfLotteryTickets) {
+    private int totalReward;
+
+    public LotteryStatisticMatchResult(List<LotteryPrize> lotteryPrizeList, int totalPriceOfLotteryTickets) {
+        this.lotteryPrizeList = lotteryPrizeList;
         this.totalPriceOfLotteryTickets = totalPriceOfLotteryTickets;
-        setLotteryPrizeResult(matchResult);
-        calculateTotalReward();
+        this.totalReward = calculateTotalReward();
     }
 
-    private void setLotteryPrizeResult(LotteryMatchResult matchResult) {
-        firstPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FIRST, matchResult);
-        secondPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.SECOND, matchResult);
-        thirdPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.THIRD, matchResult);
-        fourthPrizeLotteryResult = new LotteryPrizeResult(LotteryPrize.FOURTH, matchResult);
+    private int calculateTotalReward() {
+       return lotteryPrizeList.stream()
+                .mapToInt(LotteryPrize::getReward)
+                .sum();
     }
 
-
-    private void calculateTotalReward() {
-        totalReward = firstPrizeLotteryResult.getTotalReward();
-        totalReward += secondPrizeLotteryResult.getTotalReward();
-        totalReward += thirdPrizeLotteryResult.getTotalReward();
-        totalReward += fourthPrizeLotteryResult.getTotalReward();
-    }
-
-    public LotteryPrizeResult getFirstPrizeLotteryResult() {
-        return firstPrizeLotteryResult;
-    }
-
-    public LotteryPrizeResult getSecondPrizeLotteryResult() {
-        return secondPrizeLotteryResult;
-    }
-
-    public LotteryPrizeResult getThirdPrizeLotteryResult() {
-        return thirdPrizeLotteryResult;
-    }
-
-    public LotteryPrizeResult getFourthPrizeLotteryResult() {
-        return fourthPrizeLotteryResult;
+    public int getLotteryPrizeCount(LotteryPrize toFindLotteryPrize) {
+        long count = this.lotteryPrizeList.stream()
+                .filter(lotteryPrize -> lotteryPrize == toFindLotteryPrize)
+                .count();
+        return (int)count;
     }
 
     public Double getProfitMargin() {

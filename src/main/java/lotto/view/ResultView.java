@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LotteryPrize;
 import lotto.dto.LotteryPrizeResult;
 import lotto.dto.LotteryStatisticMatchResult;
 import lotto.dto.LotteryTicketDto;
@@ -36,15 +37,16 @@ public class ResultView {
     public static void printFinalResult(LotteryStatisticMatchResult lotteryStatisticMatchResult) {
         System.out.println(MessageConstant.FINAL_STATISTIC_RESULT);
         System.out.println(LINE_MARK);
-        printLotteryPrizeResult(lotteryStatisticMatchResult.getFirstPrizeLotteryResult());
-        printLotteryPrizeResult(lotteryStatisticMatchResult.getSecondPrizeLotteryResult());
-        printLotteryPrizeResult(lotteryStatisticMatchResult.getThirdPrizeLotteryResult());
-        printLotteryPrizeResult(lotteryStatisticMatchResult.getFourthPrizeLotteryResult());
+        printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.FIRST);
+        printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.SECOND);
+        printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.THIRD);
+        printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.FOURTH);
         System.out.printf(MessageConstant.PROFIT_MARGIN_RESULT + LINE_BREAKER, lotteryStatisticMatchResult.getProfitMargin());
     }
 
-    private static void printLotteryPrizeResult(LotteryPrizeResult lotteryPrizeResult) {
-        System.out.printf(MessageConstant.MATCH_RESULT + LINE_BREAKER, lotteryPrizeResult.getMatchingCount(), lotteryPrizeResult.getReward(), lotteryPrizeResult.getMatchedLotteryTicketCount());
+    private static void printLotteryPrizeResult(LotteryStatisticMatchResult lotteryStatisticMatchResult,LotteryPrize lotteryPrize) {
+        int lotteryPrizeCount = lotteryStatisticMatchResult.getLotteryPrizeCount(lotteryPrize);
+        System.out.printf(MessageConstant.MATCH_RESULT + LINE_BREAKER, lotteryPrize.getMatchingCount(), lotteryPrize.getReward(), lotteryPrizeCount);
     }
 
 

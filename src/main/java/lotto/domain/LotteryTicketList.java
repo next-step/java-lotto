@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LotteryMatchResult;
 import lotto.dto.LotteryTicketDto;
 
 import java.util.ArrayList;
@@ -16,14 +15,12 @@ public class LotteryTicketList {
                 .collect(Collectors.toList());
     }
 
-    public LotteryMatchResult match(WinningLotteryTicket lastWinningTicket) {
-        LotteryMatchResult lotteryMatchResult = new LotteryMatchResult();
-        list.forEach(lotteryTicket -> {
-                    int matchingCount = lotteryTicket.getMatchCount(lastWinningTicket);
-                    lotteryMatchResult.addResult(matchingCount, lotteryTicket);
-                }
+    public List<LotteryPrize> match(WinningLotteryTicket lastWinningTicket) {
+        List<LotteryPrize> lotteryPrizeList = new ArrayList<>();
+        list.forEach(lotteryTicket ->
+                lotteryPrizeList.add(LotteryPrize.findByMatching(lotteryTicket, lastWinningTicket))
         );
-        return lotteryMatchResult;
+        return lotteryPrizeList;
     }
 
     public void addAutoBulk(int count, int price) {

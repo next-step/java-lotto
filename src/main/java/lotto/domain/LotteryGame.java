@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import lotto.dto.*;
+import lotto.dto.LotteryGenerateRequest;
+import lotto.dto.LotteryStatisticMatchResult;
+import lotto.dto.LotteryTicketDto;
+import lotto.dto.WinningLotteryNumbersRequest;
 
 import java.util.List;
 
@@ -23,8 +26,9 @@ public class LotteryGame {
     }
 
     public LotteryStatisticMatchResult matchWinningLotteryNumbers(WinningLotteryNumbersRequest winningLotteryNumbersRequest) {
-        WinningLotteryTicket lastWinningLotteryTicket = new WinningLotteryTicket(winningLotteryNumbersRequest.getLastWinningLotteryNumbers());
-        LotteryMatchResult matchResult = lotteryTicketList.match(lastWinningLotteryTicket);
-        return new LotteryStatisticMatchResult(matchResult, lotteryTicketList.getTotalPrice());
+        WinningLotteryTicket lastWinningLotteryTicket =
+                new WinningLotteryTicket(winningLotteryNumbersRequest.getLastWinningLotteryNumbers());
+        List<LotteryPrize> lotteryPrizeList = lotteryTicketList.match(lastWinningLotteryTicket);
+        return new LotteryStatisticMatchResult(lotteryPrizeList, lotteryTicketList.getTotalPrice());
     }
 }

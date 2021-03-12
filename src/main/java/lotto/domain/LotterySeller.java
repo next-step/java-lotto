@@ -10,8 +10,4 @@ public class LotterySeller {
         lotteryTicketList.addAutoBulk(numberOfTickets, LOTTERY_TICKET_PRICE);
         return lotteryTicketList;
     }
-
-
-
-
 }

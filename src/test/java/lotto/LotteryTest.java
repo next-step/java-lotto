@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Lottery;
-import lotto.domain.LotteryNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,19 +52,6 @@ public class LotteryTest {
         assertThatIllegalArgumentException().isThrownBy(() ->
                 new Lottery(numberList)
         );
-    }
-
-    @Test
-    @DisplayName("생성된 로또 번호로 isMatch로 포함된 숫자가 있느지 테스트")
-    void isMatch() {
-        List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int matchNumber = 1;
-        int notMatchNumber = 7;
-
-        Lottery lottery = new Lottery(numberList);
-
-        assertThat(lottery.isMatch(LotteryNumber.valueOf(matchNumber))).isTrue();
-        assertThat(lottery.isMatch(LotteryNumber.valueOf(notMatchNumber))).isFalse();
     }
 
     @ParameterizedTest
