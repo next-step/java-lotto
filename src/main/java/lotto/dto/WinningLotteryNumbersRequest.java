@@ -8,7 +8,6 @@ public class WinningLotteryNumbersRequest {
 
     private int bonusNumber;
 
-
     public WinningLotteryNumbersRequest(List<Integer> lastWinningLotteryNumbers, int bonusNumber) {
         this.lastWinningLotteryNumbers = lastWinningLotteryNumbers;
         this.bonusNumber = bonusNumber;

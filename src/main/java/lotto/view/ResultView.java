@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LotteryPrize;
-import lotto.dto.LotteryPrizeResult;
 import lotto.dto.LotteryStatisticMatchResult;
 import lotto.dto.LotteryTicketDto;
 
