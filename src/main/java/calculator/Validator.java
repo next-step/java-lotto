@@ -16,7 +16,7 @@ public final class Validator {
         return input.equals("");
     }
 
-    public static boolean isBlank(String input) {
+    private static boolean isBlank(String input) {
         return input == null;
     }
 
