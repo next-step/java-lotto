@@ -19,10 +19,18 @@ class ParserTest {
 
     @ParameterizedTest(name = "(',', ':') 로 구분된 문자열에서 수열을 추출한다. - {0}")
     @ValueSource(strings = {"1,2,3", "1:2:3", "1:2,3"})
-    void makeSequenceFromStringDividedIntoBasicDelimiters(String expression) {
+    void generateSequenceFromStringWithBasicDelimiters(String expression) {
         Sequence sequence = new Sequence(Arrays.asList("1", "2", "3"));
 
         assertThat(parser.makeSequence(expression)).isEqualTo(sequence);
     }
-    
+
+    @ParameterizedTest()
+    @ValueSource(strings = "//;\n1,2:3;4")
+    void generateSequenceFromStringWithCustomDelimiter(String expression) {
+        Sequence sequence = new Sequence(Arrays.asList("1", "2", "3", "4"));
+
+        assertThat(parser.makeSequence(expression)).isEqualTo(sequence);
+    }
+
 }
