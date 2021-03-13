@@ -22,15 +22,15 @@ class ParserTest {
     void generateSequenceFromStringWithBasicDelimiters(String expression) {
         Sequence sequence = new Sequence(Arrays.asList("1", "2", "3"));
 
-        assertThat(parser.makeSequence(expression)).isEqualTo(sequence);
+        assertThat(parser.generateSequence(expression)).isEqualTo(sequence);
     }
 
-    @ParameterizedTest()
-    @ValueSource(strings = "//;\n1,2:3;4")
+    @ParameterizedTest(name = "커스텀 구분자가 있는 문자열에서 수열을 추출한다. - {0}")
+    @ValueSource(strings = "//;\n1;2;3;4")
     void generateSequenceFromStringWithCustomDelimiter(String expression) {
         Sequence sequence = new Sequence(Arrays.asList("1", "2", "3", "4"));
 
-        assertThat(parser.makeSequence(expression)).isEqualTo(sequence);
+        assertThat(parser.generateSequence(expression)).isEqualTo(sequence);
     }
 
 }

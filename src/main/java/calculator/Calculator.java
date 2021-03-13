@@ -9,7 +9,7 @@ public class Calculator {
     }
 
     public int sum(String expression) {
-        Sequence sequence = parser.makeSequence(expression);
+        Sequence sequence = parser.generateSequence(expression);
 
         return sequence.sum();
     }
