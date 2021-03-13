@@ -1,6 +1,6 @@
 package lotto.view;
 
-public class MessageConstant {
+public final class MessageConstant {
     public static final String AMOUNT_INPUT = "구입금액을 입력해 주세요.";
     public static final String WRONG_INPUT = "잘못입력 하셨습니다.";
     public static final String LAST_WINNING_LOTTERY_NUMBER_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
