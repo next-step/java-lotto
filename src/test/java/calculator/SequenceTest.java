@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SequenceTest {
@@ -27,6 +28,16 @@ class SequenceTest {
         List<String> strSequence = Arrays.asList("1", "-2", "3");
 
         assertThatThrownBy(() -> new Sequence(strSequence)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("생성된 수열로부터 합을 구한다.")
+    void returnSum() {
+        List<String> strSequence = Arrays.asList("1", "2", "3");
+
+        Sequence sequence = new Sequence(strSequence);
+
+        assertThat(sequence.sum()).isEqualTo(6);
     }
 
     @ParameterizedTest(name = "숫자가 아닌 문자가 있으면 예외를 던진다.")
