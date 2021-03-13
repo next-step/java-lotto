@@ -5,6 +5,7 @@ import java.util.Map;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.module.LottoModule;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
@@ -31,7 +32,9 @@ public class LottoController {
 		List<Lotto> purchasedLottos = lottoModule.getLottos(ticket);
 		outputView.showPurchasedLottos(purchasedLottos);
 
-		Lotto winningLotto = lottoModule.makeWinningLotto(inputView.getWinningLottoNumbers());
+		String lottoNumbers = inputView.getWinningLottoNumbers();
+		String bonusNumber = inputView.getBonusNumber();
+		WinningLotto winningLotto = lottoModule.makeWinningLotto(lottoNumbers, bonusNumber);
 
 		Map<WinningScore, Long> winning = scoreBoardModule.getWinningScoreBoard(purchasedLottos, winningLotto);
 		outputView.showResultStatistics(winning);

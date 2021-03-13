@@ -16,13 +16,14 @@ import org.junit.jupiter.api.Test;
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class LottoScoreBoardModuleTest {
 
 	private static Set<LottoNumber> getMock(Integer... input) {
-		return new HashSet<>(Arrays.asList(input).stream().map(LottoNumber::new).collect(Collectors.toList()));
+		return new HashSet<>(Arrays.asList(input).stream().map(LottoNumber::valueOf).collect(Collectors.toList()));
 	}
 
 
@@ -33,6 +34,7 @@ public class LottoScoreBoardModuleTest {
 		List<Lotto> list = Arrays.asList(
 			new Lotto(getMock(2, 3, 4, 7, 9, 10)),     // 6
 			new Lotto(getMock(2, 3, 4, 7, 9, 11)),     // 5
+			new Lotto(getMock(2, 3, 4, 7, 9, 22)),     // 5
 			new Lotto(getMock(2, 3, 4, 5, 6, 7)),      // 4
 			new Lotto(getMock(1, 2, 3, 4, 5, 6)),      // 3
 			new Lotto(getMock(5, 6, 11, 12, 14, 15)),  // 2
@@ -42,18 +44,22 @@ public class LottoScoreBoardModuleTest {
 
 		// when
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list, new Lotto(getMock(2, 3, 4, 7, 9, 10)));
+		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumber.valueOf(11))
+		);
 
 		// then
 
 		assertAll(
-			() -> assertThat(countByWinningScore.get(WinningScore.SIX))
+			() -> assertThat(countByWinningScore.get(WinningScore.FIRST))
 				.isEqualTo(1),
-			() -> assertThat(countByWinningScore.get(WinningScore.FIVE))
+			() -> assertThat(countByWinningScore.get(WinningScore.SECOND))
 				.isEqualTo(1),
-			() -> assertThat(countByWinningScore.get(WinningScore.FOUR))
+			() -> assertThat(countByWinningScore.get(WinningScore.THIRD))
 				.isEqualTo(1),
-			() -> assertThat(countByWinningScore.get(WinningScore.THREE))
+			() -> assertThat(countByWinningScore.get(WinningScore.FOURTH))
+				.isEqualTo(1),
+			() -> assertThat(countByWinningScore.get(WinningScore.FIFTH))
 				.isEqualTo(1),
 			() -> assertThat(countByWinningScore.get(WinningScore.NONE))
 				.isEqualTo(3)
@@ -72,7 +78,9 @@ public class LottoScoreBoardModuleTest {
 		);
 
 		LottoScoreBoardModule lottoModule = LottoScoreBoardModule.getInstance();
-		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list, new Lotto(getMock(2, 3, 4, 7, 9, 10)));
+		Map<WinningScore, Long> countByWinningScore = lottoModule.getWinningScoreBoard(list,
+			new WinningLotto(new Lotto(getMock(2, 3, 4, 7, 9, 10)), LottoNumber.valueOf(11))
+		);
 
 		// when
 		double profit = lottoModule.getProfit(countByWinningScore, new LottoTicket("3000"));

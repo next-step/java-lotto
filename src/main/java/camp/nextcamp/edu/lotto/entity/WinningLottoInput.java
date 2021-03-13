@@ -44,7 +44,7 @@ public class WinningLottoInput {
 	private Set<LottoNumber> convertLottoNumbers(Set<String> input) {
 		return input.stream()
 			.map(Integer::parseInt)
-			.map(LottoNumber::new)
+			.map(LottoNumber::valueOf)
 			.collect(Collectors.toSet());
 	}
 

@@ -31,3 +31,10 @@
 - Lotto 여러장과 WinningLotto를 당첨 기준을 가지는 객체를 통해 비교
 - 총 수익률 계산 (Winning Lotto와 Lotto 여러장을 가지고 비교)
 
+
+### Winning Lotto
+- bonusNumber 가지고 있음
+- Lotto 객체자체를 가지고 있음
+
+### Bonus Number
+- bonus number는 WinningLotto의 Lotto값과는 다른 LottoNumber를 가져야함

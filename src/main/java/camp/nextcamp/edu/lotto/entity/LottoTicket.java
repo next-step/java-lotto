@@ -11,9 +11,8 @@ public class LottoTicket {
 	private final int money;
 
 	public LottoTicket(String money) {
-		if (!isNumeric(money)) {
-			throw new UserException(ONLY_NUMBER);
-		}
+		validateNumeric(money);
+
 		this.money = Integer.parseInt(money);
 		this.ticketCount = makeTicket(this.money);
 	}
@@ -30,4 +29,9 @@ public class LottoTicket {
 		return this.money;
 	}
 
+	private void validateNumeric(String money) {
+		if (!isNumeric(money)) {
+			throw new UserException(ONLY_NUMBER);
+		}
+	}
 }

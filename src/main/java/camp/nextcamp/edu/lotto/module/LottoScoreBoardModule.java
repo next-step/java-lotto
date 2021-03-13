@@ -2,14 +2,13 @@ package camp.nextcamp.edu.lotto.module;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
-import camp.nextcamp.edu.lotto.entity.LottoNumber;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.WinningLotto;
 
 public class LottoScoreBoardModule {
 
@@ -24,22 +23,9 @@ public class LottoScoreBoardModule {
 		return LottoScoreBoardModule.LazyHolder.INSTANCE;
 	}
 
-	private int getIntersectionCount(Set<LottoNumber> input, Set<LottoNumber> winning) {
-		return input.stream()
-			.filter(winning::contains)
-			.collect(Collectors.toSet())
-			.size();
-	}
-
-	public WinningScore getWinningScore(Lotto input, Lotto winning) {
-		int intersectionCount = getIntersectionCount(input.getNumbers(), winning.getNumbers());
-
-		return WinningScore.getInstance(intersectionCount);
-	}
-
-	public Map<WinningScore, Long> getWinningScoreBoard(List<Lotto> lottos, Lotto winning) {
+	public Map<WinningScore, Long> getWinningScoreBoard(List<Lotto> lottos, WinningLotto winning) {
 		Map<WinningScore, Long> countByScore = lottos.stream()
-			.map((lotto) -> getWinningScore(lotto, winning))
+			.map(winning::getWinningScore)
 			.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
 
 		WinningScore.getAllExactWinningCount(countByScore)
@@ -52,7 +38,7 @@ public class LottoScoreBoardModule {
 		int purchasedMoney = lottoTicket.getMoney();
 		long winningMoney = 0;
 		for (WinningScore key : winningScore.keySet()) {
-			Long value = winningScore.get(key);
+			long value = winningScore.get(key);
 			winningMoney += key.getPrice() * value;
 		}
 		return (double) winningMoney / purchasedMoney;

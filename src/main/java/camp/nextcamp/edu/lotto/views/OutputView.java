@@ -5,6 +5,7 @@ import java.util.Map;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.WinningScoreMessage;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
 public class OutputView extends View {
@@ -25,9 +26,7 @@ public class OutputView extends View {
 		out.println("당첨 통계");
 		out.println("----------");
 
-		out.println(String.format("꽝\t\t\t\t(0원)  -  %s개", winningScore.get(WinningScore.NONE)));
-
-		winningScore.forEach(this::showExactNoneScore);
+		winningScore.forEach(this::showWinningScoreResult);
 	}
 
 	public void showProfit(double profit) {
@@ -35,10 +34,7 @@ public class OutputView extends View {
 		out.println(String.format("총 수익률은 %s 입니다. %s", profit, message));
 	}
 
-	private void showExactNoneScore(WinningScore score, Long count) {
-		if (score != WinningScore.NONE) {
-			String result = String.format("%s개 일치\t\t\t (%s원) - %s개", score.getCorrectCount(), score.getPrice(), count);
-			out.println(result);
-		}
+	private void showWinningScoreResult(WinningScore score, Long count) {
+		out.println(WinningScoreMessage.getInstance(score).getMessage(score, count));
 	}
 }
