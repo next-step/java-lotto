@@ -9,10 +9,9 @@ public class Calculator {
     }
 
     public int sum(String expression) {
-        return parser.makeSequence(expression)
-                     .stream()
-                     .mapToInt(Integer::parseInt)
-                     .sum();
+        Sequence sequence = parser.makeSequence(expression);
+
+        return sequence.sum();
     }
 
 }

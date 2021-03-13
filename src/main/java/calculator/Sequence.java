@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Sequence {
@@ -29,5 +30,18 @@ public class Sequence {
 
     public int sum() {
         return elements.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sequence)) return false;
+        Sequence sequence = (Sequence) o;
+        return Objects.equals(elements, sequence.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(elements);
     }
 }
