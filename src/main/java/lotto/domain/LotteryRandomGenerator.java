@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class LottoNumberRandomGenerator {
+public class LotteryRandomGenerator {
 
     private static final List<LotteryNumber> allNumbers;
 
@@ -16,7 +14,15 @@ public class LottoNumberRandomGenerator {
         allNumbers = allLottoNumberList;
     }
 
-    public static LotteryNumber generate() {
+    public static Lottery generate(int lotteryNumberSize) {
+        Set<LotteryNumber> lotteryNumberTempList = new HashSet<>();
+        while (lotteryNumberTempList.size() != lotteryNumberSize) {
+            lotteryNumberTempList.add(getRandomLotteryNumber());
+        }
+        return new Lottery(lotteryNumberTempList);
+    }
+
+    private static LotteryNumber getRandomLotteryNumber() {
         Collections.shuffle(allNumbers);
         return allNumbers.get(0);
     }
