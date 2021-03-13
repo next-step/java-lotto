@@ -1,7 +1,10 @@
 package step2.domain;
 
+import step2.dto.LottoDto;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -19,4 +22,9 @@ public class Lottos {
         return lottoList.size();
     }
 
+    public List<LottoDto> getLottoDtoList() {
+        return lottoList.stream()
+                .map(LottoDto::new)
+                .collect(Collectors.toList());
+    }
 }
