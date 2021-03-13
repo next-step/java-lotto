@@ -23,8 +23,17 @@ public class Lottos {
     }
 
     public List<LottoDto> getLottoDtoList() {
+        List<LottoDto> list = new ArrayList<>();
+        for (Lotto lotto : lottoList) {
+            LottoDto lottoDto = new LottoDto(lotto);
+            list.add(lottoDto);
+        }
+        return list;
+    }
+
+    public List<Rank> staticsOfMatch(List<Integer> winNumber) {
         return lottoList.stream()
-                .map(LottoDto::new)
+                .map(lotto -> lotto.match(winNumber))
                 .collect(Collectors.toList());
     }
 }
