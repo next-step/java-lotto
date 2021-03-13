@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottery {
@@ -14,20 +11,22 @@ public class Lottery {
 
     public Lottery(List<Integer> numberList) {
         validateDuplicate(numberList);
-        validateSize(numberList);
-        this.numberList = numberList.stream().map(LotteryNumber::new)
+        Set<LotteryNumber> lotteryNumberList = numberList.stream().map(LotteryNumber::new)
                 .collect(Collectors.toSet());
+        validateSize(lotteryNumberList);
+        this.numberList = lotteryNumberList;
     }
 
-    public Lottery() {
-        Set<LotteryNumber> lotteryNumberTempList = new HashSet<>();
-        while (lotteryNumberTempList.size() != LOTTERY_NUMBER_SIZE) {
-            lotteryNumberTempList.add(LottoNumberRandomGenerator.generate());
-        }
-        this.numberList = lotteryNumberTempList;
+    public Lottery(Set<LotteryNumber> numberList) {
+        validateSize(numberList);
+        this.numberList = numberList;
     }
 
-    private void validateSize(List<Integer> numberList) {
+    public static Lottery auto() {
+        return LotteryRandomGenerator.generate(LOTTERY_NUMBER_SIZE);
+    }
+
+    private void validateSize(Collection<LotteryNumber> numberList) {
         if (numberList.size() != LOTTERY_NUMBER_SIZE) {
             throw new IllegalArgumentException("숫자 갯수가 맞지 않습니다.");
         }

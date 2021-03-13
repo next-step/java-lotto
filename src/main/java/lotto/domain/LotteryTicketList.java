@@ -15,12 +15,8 @@ public class LotteryTicketList {
                 .collect(Collectors.toList());
     }
 
-    public List<LotteryPrize> match(WinningLotteryTicket lastWinningTicket) {
-        List<LotteryPrize> lotteryPrizeList = new ArrayList<>();
-        list.forEach(lotteryTicket ->
-                lotteryPrizeList.add(lotteryTicket.match(lastWinningTicket))
-        );
-        return lotteryPrizeList;
+    public void setLotteryPrize(WinningLotteryTicket lastWinningTicket) {
+        list.forEach(lotteryTicket -> lotteryTicket.setLotteryPrize(lastWinningTicket));
     }
 
     public void addAutoBulk(int count, int price) {

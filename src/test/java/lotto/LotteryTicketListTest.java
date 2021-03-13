@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicketList;
 import lotto.domain.WinningLotteryTicket;
+import lotto.dto.LotteryStatisticMatchResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -57,12 +58,19 @@ public class LotteryTicketListTest {
         lottoTicketList.add(lotteryNumberListWith5MatchingCountWithOutBonusNumber, price);
         lottoTicketList.add(lotteryNumberListWith6MatchingCount, price);
 
-        List<LotteryPrize> result = lottoTicketList.match(lastWinningTicket);
+        lottoTicketList.setLotteryPrize(lastWinningTicket);
+        LotteryStatisticMatchResult lotteryStatisticMatchResult = new LotteryStatisticMatchResult(lottoTicketList);
 
-        assertThat(result).contains(LotteryPrize.NONE);
-        assertThat(result).contains(LotteryPrize.FOURTH);
-        assertThat(result).contains(LotteryPrize.SECOND);
-        assertThat(result).contains(LotteryPrize.THIRD);
-        assertThat(result).contains(LotteryPrize.FIRST);
+        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.NONE))
+                .isEqualTo(1);
+        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.FOURTH))
+                .isEqualTo(1);
+        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.SECOND))
+                .isEqualTo(1);
+        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.THIRD))
+                .isEqualTo(1);
+        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.FIRST))
+                .isEqualTo(1);
     }
+
 }

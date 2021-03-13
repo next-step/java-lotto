@@ -24,6 +24,7 @@ public class LottoTicketTest {
 
         assertThat(duplicateRemovedNumberList.size()).isEqualTo(6);
         assertThat(lotteryTicket.getPrice()).isEqualTo(price);
+        assertThat(lotteryTicket.getLotteryPrize()).isEqualTo(LotteryPrize.UNDEFINED);
     }
 
     @Test
@@ -35,6 +36,7 @@ public class LottoTicketTest {
 
         assertThat(lotteryTicket.getPrice()).isEqualTo(price);
         assertThat(lotteryTicket.getLottoNumberList()).isEqualTo(numberList);
+        assertThat(lotteryTicket.getLotteryPrize()).isEqualTo(LotteryPrize.UNDEFINED);
     }
 
     @Test
@@ -43,8 +45,11 @@ public class LottoTicketTest {
         LotteryTicket lotteryTicket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 100);
         WinningLotteryTicket winningLotteryTicket = new WinningLotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
-        assertThat(lotteryTicket.match(winningLotteryTicket))
+        lotteryTicket.setLotteryPrize(winningLotteryTicket);
+
+        assertThat(lotteryTicket.getLotteryPrize())
                 .isEqualTo(LotteryPrize.SECOND);
+
     }
 
     @Test
@@ -53,7 +58,9 @@ public class LottoTicketTest {
         LotteryTicket lotteryTicket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 100);
         WinningLotteryTicket winningLotteryTicket = new WinningLotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7), 9);
 
-        assertThat(lotteryTicket.match(winningLotteryTicket))
+        lotteryTicket.setLotteryPrize(winningLotteryTicket);
+
+        assertThat(lotteryTicket.getLotteryPrize())
                 .isEqualTo(LotteryPrize.THIRD);
     }
 
@@ -64,9 +71,12 @@ public class LottoTicketTest {
         LotteryTicket lotteryTicketWithOutMatchingBonusNumber = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 12, 22), 100);
         WinningLotteryTicket winningLotteryTicket = new WinningLotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7), 9);
 
-        assertThat(lotteryTicketWithMatchingBonusNumber.match(winningLotteryTicket))
+        lotteryTicketWithMatchingBonusNumber.setLotteryPrize(winningLotteryTicket);
+        lotteryTicketWithOutMatchingBonusNumber.setLotteryPrize(winningLotteryTicket);
+
+        assertThat(lotteryTicketWithMatchingBonusNumber.getLotteryPrize())
                 .isEqualTo(LotteryPrize.FOURTH);
-        assertThat(lotteryTicketWithOutMatchingBonusNumber.match(winningLotteryTicket))
+        assertThat(lotteryTicketWithOutMatchingBonusNumber.getLotteryPrize())
                 .isEqualTo(LotteryPrize.FOURTH);
     }
 
@@ -78,13 +88,16 @@ public class LottoTicketTest {
         LotteryTicket lotteryTicketWithMatchingTwoNumberWithBonusNumber = new LotteryTicket(Arrays.asList(1, 2, 12, 13, 14, 9), 100);
         WinningLotteryTicket winningLotteryTicket = new WinningLotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7), 9);
 
-        assertThat(lotteryTicketWithMatchingBonusNumberOnly.match(winningLotteryTicket))
-                .isEqualTo(LotteryPrize.NONE);
-        assertThat(lotteryTicketWithMatchingTwoNumberWithoutBonusNumber.match(winningLotteryTicket))
-                .isEqualTo(LotteryPrize.NONE);
-        assertThat(lotteryTicketWithMatchingTwoNumberWithBonusNumber.match(winningLotteryTicket))
-                .isEqualTo(LotteryPrize.NONE);
+        lotteryTicketWithMatchingBonusNumberOnly.setLotteryPrize(winningLotteryTicket);
+        lotteryTicketWithMatchingTwoNumberWithoutBonusNumber.setLotteryPrize(winningLotteryTicket);
+        lotteryTicketWithMatchingTwoNumberWithBonusNumber.setLotteryPrize(winningLotteryTicket);
 
+        assertThat(lotteryTicketWithMatchingBonusNumberOnly.getLotteryPrize())
+                .isEqualTo(LotteryPrize.NONE);
+        assertThat(lotteryTicketWithMatchingTwoNumberWithoutBonusNumber.getLotteryPrize())
+                .isEqualTo(LotteryPrize.NONE);
+        assertThat(lotteryTicketWithMatchingTwoNumberWithBonusNumber.getLotteryPrize())
+                .isEqualTo(LotteryPrize.NONE);
     }
 
 }

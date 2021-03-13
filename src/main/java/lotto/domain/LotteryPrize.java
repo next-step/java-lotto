@@ -9,7 +9,8 @@ public enum LotteryPrize {
     THIRD(1_500_000, 5),
     FOURTH(50_000, 4),
     FIFTH(5_000, 3),
-    NONE(0, 0);
+    NONE(0, 0),
+    UNDEFINED(0, 0);
 
     private int reward;
 
@@ -28,9 +29,7 @@ public enum LotteryPrize {
         return matchingCount;
     }
 
-    public static LotteryPrize valueOf(Lottery lottery, WinningLotteryTicket winningLotteryTicket) {
-        boolean isMatchingBonus = lottery.isMatch(winningLotteryTicket.getBonusLotteryNumber());
-        int matchingCount = lottery.getMatchCount(winningLotteryTicket.getLottery());
+    public static LotteryPrize valueOf(int matchingCount, boolean isMatchingBonus) {
         return Arrays.stream(values())
                 .filter(lotteryPrize -> isMatching(lotteryPrize, matchingCount, isMatchingBonus))
                 .findFirst()
