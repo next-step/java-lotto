@@ -6,7 +6,7 @@ public class LottoView {
 
     private final Scanner scanner;
 
-    public LottoView(Scanner scanner) {
+    public LottoView() {
         this.scanner = new Scanner(System.in);
     }
 
