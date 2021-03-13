@@ -32,5 +32,4 @@ class ParserTest {
 
         assertThat(parser.generateSequence(expression)).isEqualTo(sequence);
     }
-
 }
