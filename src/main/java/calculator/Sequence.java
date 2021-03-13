@@ -27,4 +27,7 @@ public class Sequence {
         }
     }
 
+    public int sum() {
+        return elements.stream().mapToInt(Integer::intValue).sum();
+    }
 }
