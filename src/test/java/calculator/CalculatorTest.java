@@ -12,7 +12,8 @@ class CalculatorTest {
 
     @BeforeEach
     void init() {
-        calculator = new Calculator();
+        Parser parser = new Parser();
+        calculator = new Calculator(parser);
     }
 
     @Test
