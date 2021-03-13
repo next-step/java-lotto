@@ -6,40 +6,35 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottosTest {
+class LottoStatisticsTest {
 
-    private Lottos lottos;
+    private LottoStatistics lottoStatistics;
 
     @BeforeEach
     void init() {
-        lottos = new Lottos();
+        lottoStatistics = new LottoStatistics();
     }
 
-    @DisplayName("로또 생성를 생성")
+    @DisplayName("통계를 낸다.")
     @Test
-    void createLotto() {
-        int count = 4;
-
-        Lottos resultLottos = lottos.createLottoList(count);
-
-        assertThat(resultLottos.lottoCount()).isEqualTo(4);
-    }
-
-    @DisplayName("로또마다 당첨번호 매칭 후 결과 값은 로또 갯수와 같다")
-    @Test
-    void staticsOfMatch() {
+    void statistics() {
         //given
         Lottos lottos = createLottos();
         List<Integer> winNumber = List.of(1, 2, 3, 4, 5, 6);
+        List<Rank> matchResult = lottos.staticsOfMatch(winNumber);
 
-        List<Rank> ranks = lottos.staticsOfMatch(winNumber);
+        //when
+        Map<Integer, List<Rank>> statistics = lottoStatistics.getLottoRank(lottos, winNumber);
 
-        assertThat(ranks.size()).isEqualTo(4);
-        assertThat(ranks.get(0)).isEqualTo(Rank.FIRST);
-        assertThat(ranks.get(1)).isEqualTo(Rank.SECOND);
+        //then
+        assertThat(statistics.get(6).size()).isEqualTo(1);
+        assertThat(statistics.get(5).size()).isEqualTo(1);
+        assertThat(statistics.get(4).size()).isEqualTo(1);
+        assertThat(statistics.get(0).size()).isEqualTo(1);
     }
 
     Lottos createLottos() {

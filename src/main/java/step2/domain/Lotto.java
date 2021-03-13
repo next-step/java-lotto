@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 public class Lotto {
 
     private final List<Integer> LottoNumbers;
-    private Rank rank;
 
     public Lotto() {
         List<Integer> numbers = createNumber();

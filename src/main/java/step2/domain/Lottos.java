@@ -10,6 +10,13 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
+    public Lottos() {
+    }
+
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
     public Lottos createLottoList(int count) {
         lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -36,4 +43,5 @@ public class Lottos {
                 .map(lotto -> lotto.match(winNumber))
                 .collect(Collectors.toList());
     }
+
 }
