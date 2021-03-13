@@ -30,8 +30,7 @@ public class InputView {
     }
 
     public static WinningLotteryNumbersRequest getWinningLotteryNumberInput() {
-        return new WinningLotteryNumbersRequest(getWinningLotteryNumberList());
-
+        return new WinningLotteryNumbersRequest(getWinningLotteryNumberList(), getBonusNumber());
     }
 
     private static List<Integer> getWinningLotteryNumberList() {
@@ -47,6 +46,16 @@ public class InputView {
         }
     }
 
+    private static int getBonusNumber() {
+        System.out.println(MessageConstant.BONUS_NUMBER_INPUT);
+        String bonusNumberInString = SCANNER.nextLine();
+        try {
+            return Integer.parseInt(bonusNumberInString);
+        } catch (NumberFormatException ex) {
+            printWrongInputMessage();
+            return getBonusNumber();
+        }
+    }
 
     public static void printWrongInputMessage() {
         System.out.println(MessageConstant.WRONG_INPUT);

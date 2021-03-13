@@ -20,7 +20,7 @@ public class LotteryTest {
     @Test
     @DisplayName("자동생성시 중복되는 로또번호가 있는지 갯수는 6개가 맞는지 테스트")
     void create_auto() {
-        Lottery lottery = new Lottery();
+        Lottery lottery = Lottery.auto();
         List<Integer> lottoNumberValueList = lottery.getNumberValueList();
         HashSet<Integer> duplicateRemovedNumberList = new HashSet<>(lottoNumberValueList);
 

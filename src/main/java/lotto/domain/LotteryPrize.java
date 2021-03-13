@@ -5,10 +5,12 @@ import java.util.Arrays;
 public enum LotteryPrize {
 
     FIRST(2_000_000_000, 6),
-    SECOND(1_500_000, 5),
-    THIRD(50_000, 4),
-    FOURTH(5_000, 3),
-    NONE(0,0);
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    NONE(0, 0),
+    UNDEFINED(0, 0);
 
     private int reward;
 
@@ -27,20 +29,18 @@ public enum LotteryPrize {
         return matchingCount;
     }
 
-    public static LotteryPrize findByMatching(LotteryTicket lotteryTicket,WinningLotteryTicket winningLotteryTicket){
-       return Arrays.stream(values())
-                .filter(lotteryPrize -> lotteryPrize.matchingCount ==
-                        lotteryTicket.getMatchCount(winningLotteryTicket))
-                .findFirst()
-               .orElse(NONE);
-
-    }
-
-    public static LotteryPrize findByMatchingCount(int matchingCount) {
+    public static LotteryPrize valueOf(int matchingCount, boolean isMatchingBonus) {
         return Arrays.stream(values())
-                .filter(lotteryPrize -> lotteryPrize.matchingCount ==
-                        matchingCount)
+                .filter(lotteryPrize -> isMatching(lotteryPrize, matchingCount, isMatchingBonus))
                 .findFirst()
                 .orElse(NONE);
     }
+
+    private static boolean isMatching(LotteryPrize lotteryPrize, int matchingCount, boolean isMatchingBonus) {
+        if (lotteryPrize == LotteryPrize.SECOND) {
+            return lotteryPrize.matchingCount == matchingCount && isMatchingBonus;
+        }
+        return lotteryPrize.matchingCount == matchingCount;
+    }
+
 }

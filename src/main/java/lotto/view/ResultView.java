@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LotteryPrize;
-import lotto.dto.LotteryPrizeResult;
 import lotto.dto.LotteryStatisticMatchResult;
 import lotto.dto.LotteryTicketDto;
 
@@ -16,7 +15,8 @@ public class ResultView {
     public static void printLotteryTickets(List<LotteryTicketDto> lotteryTickets) {
         System.out.printf(MessageConstant.PURCHASED_RESULT + LINE_BREAKER, lotteryTickets.size());
         for (LotteryTicketDto lotteryTicket : lotteryTickets) {
-            System.out.printf(MessageConstant.LOTTERY_NUMBER_RESULT + LINE_BREAKER, extractLotteryNumbersToString(lotteryTicket));
+            System.out.printf(MessageConstant.LOTTERY_NUMBER_RESULT + LINE_BREAKER,
+                    extractLotteryNumbersToString(lotteryTicket));
         }
         printEmptyLine();
     }
@@ -41,12 +41,18 @@ public class ResultView {
         printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.SECOND);
         printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.THIRD);
         printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.FOURTH);
+        printLotteryPrizeResult(lotteryStatisticMatchResult,LotteryPrize.FIFTH);
         System.out.printf(MessageConstant.PROFIT_MARGIN_RESULT + LINE_BREAKER, lotteryStatisticMatchResult.getProfitMargin());
     }
 
     private static void printLotteryPrizeResult(LotteryStatisticMatchResult lotteryStatisticMatchResult,LotteryPrize lotteryPrize) {
         int lotteryPrizeCount = lotteryStatisticMatchResult.getLotteryPrizeCount(lotteryPrize);
-        System.out.printf(MessageConstant.MATCH_RESULT + LINE_BREAKER, lotteryPrize.getMatchingCount(), lotteryPrize.getReward(), lotteryPrizeCount);
+        String message = MessageConstant.MATCH_RESULT;
+        if(lotteryPrize == LotteryPrize.SECOND) {
+            message = MessageConstant.MATCH_RESULT_SECOND_PRIZE;
+        }
+        System.out.printf(message + LINE_BREAKER,
+                lotteryPrize.getMatchingCount(), lotteryPrize.getReward(), lotteryPrizeCount);
     }
 
 
