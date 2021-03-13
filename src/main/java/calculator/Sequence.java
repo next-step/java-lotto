@@ -23,7 +23,7 @@ public class Sequence {
 
     private void validatePositiveInteger(int number) {
         if (number < 0) {
-            throw new RuntimeException("양의 정수만 사용할 수 있습니다.");
+            throw new NegativeIntegerElementException();
         }
     }
 
