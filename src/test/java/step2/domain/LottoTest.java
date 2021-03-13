@@ -21,7 +21,7 @@ class LottoTest {
     @Test
     void createNumber() {
 
-        List<Integer> numbers = lotto.createNumbers();
+        List<Integer> numbers = lotto.createNumber();
 
         assertThat(numbers.size()).isEqualTo(45);
     }
@@ -32,9 +32,9 @@ class LottoTest {
 
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        Lotto lotto = this.lotto.createLotto(numbers);
+        List<Integer> lottoNumbers = lotto.pickNumber(numbers);
 
-        assertThat(lotto.toNumberList()).contain(1, 2, 3, 4, 5, 6);
+        assertThat(lottoNumbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
 }

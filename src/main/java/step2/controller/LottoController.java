@@ -7,12 +7,13 @@ public class LottoController {
 
     private final LottoView lottoView;
     private final LottoMachine lottoMachine;
+
     public LottoController() {
         this.lottoView = new LottoView();
         this.lottoMachine = new LottoMachine();
     }
 
-    public void LottoProcess(){
+    public void LottoProcess() {
         int money = lottoView.paymentMoney();
         lottoMachine.createLotto(money);
     }

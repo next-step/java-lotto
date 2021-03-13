@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
@@ -22,10 +20,19 @@ class LottoMachineTest {
     void lottoCount() {
         int money = 13500;
 
-        List<Lotto> lotto = lottoMachine.createLotto(money);
+        Lottos lotto = lottoMachine.createLotto(money);
 
-        assertThat(lotto.size()).isEqualTo(13);
+        assertThat(lotto.lottoCount()).isEqualTo(13);
     }
 
+    @DisplayName("받은 돈에 따라 만들 로또 갯수를 생성")
+    @Test
+    void getLottoCount() {
+        int money = 12400;
+
+        int lottoCount = lottoMachine.getLottoCount(money);
+
+        assertThat(lottoCount).isEqualTo(12);
+    }
 
 }
