@@ -15,6 +15,17 @@ public class LottoController {
         this.lottoMachine = new LottoMachine();
     }
 
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        Lottos lottos = lottoController.paymentMoney();
+        lottoController.lottoInfoPirnt(lottos);
+    }
+
+    public void lottoInfoPirnt(Lottos lottos) {
+        LottosDto lottosDto = createLottosDto(lottos);
+        lottoView.lottoInfoPirnt(lottosDto);
+    }
+
     public Lottos paymentMoney() {
         int money = lottoView.paymentMoney();
         return lottoMachine.createLotto(money);

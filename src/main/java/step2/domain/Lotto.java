@@ -31,9 +31,10 @@ public class Lotto {
     }
 
     public List<Integer> pickNumber(List<Integer> lottoNumber) {
-        return lottoNumber.stream()
+        return Collections.unmodifiableList(lottoNumber.stream()
                 .limit(6)
-                .collect(toList());
+                .sorted()
+                .collect(toList()));
     }
 
     public List<Integer> toNumberList() {

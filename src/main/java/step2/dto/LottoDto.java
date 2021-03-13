@@ -11,4 +11,8 @@ public class LottoDto {
     public LottoDto(Lotto lottoNumbers) {
         this.lottoNubers = lottoNumbers.toNumberList();
     }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNubers;
+    }
 }
