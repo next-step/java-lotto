@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Lotto {
 
-    private List<Integer> LottoNumbers;
+    private final List<Integer> LottoNumbers;
+    private Rank rank;
 
     public Lotto() {
         List<Integer> numbers = createNumber();
@@ -31,13 +33,18 @@ public class Lotto {
     }
 
     public List<Integer> pickNumber(List<Integer> lottoNumber) {
-        return Collections.unmodifiableList(lottoNumber.stream()
+        return lottoNumber.stream()
                 .limit(6)
-                .sorted()
-                .collect(toList()));
+                .sorted().collect(toUnmodifiableList());
     }
 
     public List<Integer> toNumberList() {
         return this.LottoNumbers;
+    }
+
+    public Rank match(List<Integer> winnerNumber) {
+        int countOfMatch = LottoNumbers.stream()
+                .filter(winnerNumber::contains).map(e -> 1).reduce(0, Integer::sum);
+        return Rank.valueOf(countOfMatch);
     }
 }

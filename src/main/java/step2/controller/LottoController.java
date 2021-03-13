@@ -18,10 +18,10 @@ public class LottoController {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
         Lottos lottos = lottoController.paymentMoney();
-        lottoController.lottoInfoPirnt(lottos);
+        lottoController.lottoInfoPrint(lottos);
     }
 
-    public void lottoInfoPirnt(Lottos lottos) {
+    public void lottoInfoPrint(Lottos lottos) {
         LottosDto lottosDto = createLottosDto(lottos);
         lottoView.lottoInfoPirnt(lottosDto);
     }
