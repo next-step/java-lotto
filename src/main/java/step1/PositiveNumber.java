@@ -1,24 +1,25 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PositiveNumber {
 
     public List<Integer> toInt(String[] stringNumbers) {
-        List<Integer> collect;
+        List<Integer> numbers;
         try {
-            collect = Arrays.stream(stringNumbers)
+            numbers = Arrays.stream(stringNumbers)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자가 아닌 입력값이 존재합니다.");
         }
-        return collect;
+        return  Collections.unmodifiableList(numbers);
     }
 
-    public int add(List<Integer> numbers) {
+    public int sum(List<Integer> numbers) {
         valid(numbers);
         return numbers.stream().reduce(Integer::sum)
                 .orElseThrow(() -> new RuntimeException("덧셈중에 오류가 발생했습니다."));

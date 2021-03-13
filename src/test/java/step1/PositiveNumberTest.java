@@ -36,7 +36,7 @@ class PositiveNumberTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
         //when
-        int result = positiveNumber.add(numbers);
+        int result = positiveNumber.sum(numbers);
 
         //then
         assertThat(result).isEqualTo(15);
@@ -60,7 +60,7 @@ class PositiveNumberTest {
         List<Integer> numbers = List.of(-1, 2, 3, 4, 5);
 
         assertThatThrownBy(() -> {
-            positiveNumber.add(numbers);
+            positiveNumber.sum(numbers);
         }).isInstanceOf(RuntimeException.class).hasMessageMatching("양수만 덧셈이 가능합니다.");
 
     }
