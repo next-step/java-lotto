@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import camp.nextcamp.edu.lotto.exception.UserException;
 import camp.nextcamp.edu.util.StringUtils;
 
-public class WinningLottoInput {
+public class LottoInput {
 	private final Set<LottoNumber> numbers;
 
-	public WinningLottoInput(String input) {
+	public LottoInput(String input) {
 		validateContainsComma(input);
 
 		Set<String> numbers = Arrays.stream(input.split(", "))

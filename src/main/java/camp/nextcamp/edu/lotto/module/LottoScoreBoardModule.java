@@ -34,8 +34,7 @@ public class LottoScoreBoardModule {
 		return countByScore;
 	}
 
-	public double getProfit(Map<WinningScore, Long> winningScore, LottoTicket lottoTicket) {
-		int purchasedMoney = lottoTicket.getMoney();
+	public double getProfit(Map<WinningScore, Long> winningScore, int purchasedMoney) {
 		long winningMoney = 0;
 		for (WinningScore key : winningScore.keySet()) {
 			long value = winningScore.get(key);

@@ -1,22 +1,13 @@
 package camp.nextcamp.edu.lotto.module;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
-import camp.nextcamp.edu.lotto.entity.LottoTicket;
 import camp.nextcamp.edu.lotto.entity.WinningLotto;
-import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
+import camp.nextcamp.edu.lotto.entity.LottoInput;
 
 public class LottoModule {
 
-	private final Random random;
-
 	private LottoModule() {
-		this.random = new Random();
 	}
 
 	private static class LazyHolder {
@@ -27,22 +18,11 @@ public class LottoModule {
 		return LazyHolder.INSTANCE;
 	}
 
-	public LottoTicket getLottoTicket(String money) {
-		return new LottoTicket(money);
-	}
-
-	public List<Lotto> getLottos(LottoTicket lottoTicket) {
-		return IntStream.range(0, lottoTicket.getTicketCount())
-			.mapToObj((i) -> LottoNumber.generateRandomNumber(random))
-			.map(Lotto::new)
-			.collect(Collectors.toList());
-	}
-
 	public WinningLotto makeWinningLotto(String input, String bonusNumber) {
-		WinningLottoInput winningLottoInput = new WinningLottoInput(input);
+		LottoInput lottoInput = new LottoInput(input);
 
 		return new WinningLotto(
-			new Lotto(winningLottoInput.getNumbers()),
+			new Lotto(lottoInput.getNumbers()),
 			LottoNumber.valueOf(Integer.parseInt(bonusNumber))
 		);
 	}

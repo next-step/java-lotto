@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
-import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.LottoStore;
+import camp.nextcamp.edu.lotto.entity.PurchasedLotto;
 import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.module.LottoModule;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
@@ -25,21 +26,33 @@ public class LottoController {
 		final InputView inputView = new InputView();
 		final OutputView outputView = new OutputView();
 
-		String money = inputView.getMoneyString();
-		LottoTicket ticket = lottoModule.getLottoTicket(money);
-		outputView.showLottoTicketCount(ticket);
+		LottoStore lottoStore = makeLottoStore(inputView);
 
-		List<Lotto> purchasedLottos = lottoModule.getLottos(ticket);
-		outputView.showPurchasedLottos(purchasedLottos);
+		PurchasedLotto purchasedLotto = lottoStore.getPurchasedLotto();
+		outputView.showLottoCount(purchasedLotto);
 
-		String lottoNumbers = inputView.getWinningLottoNumbers();
-		String bonusNumber = inputView.getBonusNumber();
-		WinningLotto winningLotto = lottoModule.makeWinningLotto(lottoNumbers, bonusNumber);
+		List<Lotto> lottos = purchasedLotto.getLottos();
+		outputView.showPurchasedLottos(lottos);
+		WinningLotto winningLotto = makeWinningLotto(inputView);
 
-		Map<WinningScore, Long> winning = scoreBoardModule.getWinningScoreBoard(purchasedLottos, winningLotto);
+		Map<WinningScore, Long> winning = scoreBoardModule.getWinningScoreBoard(lottos, winningLotto);
 		outputView.showResultStatistics(winning);
 
-		double profit = scoreBoardModule.getProfit(winning, ticket);
+		double profit = scoreBoardModule.getProfit(winning, lottoStore.getTotalMoney());
 		outputView.showProfit(profit);
+	}
+
+	private WinningLotto makeWinningLotto(InputView inputView) {
+		String lottoNumbers = inputView.getWinningLottoNumbers();
+		String bonusNumber = inputView.getBonusNumber();
+		return lottoModule.makeWinningLotto(lottoNumbers, bonusNumber);
+	}
+
+	private LottoStore makeLottoStore(InputView inputView) {
+		String money = inputView.getMoneyString();
+		int manualCount = Integer.parseInt(inputView.getManualCount());
+		List<String> manualLottos = inputView.getManualLottos(manualCount);
+
+		return new LottoStore(money, manualLottos);
 	}
 }

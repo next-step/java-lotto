@@ -16,6 +16,7 @@ import camp.nextcamp.edu.lotto.exception.UserException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private final int number;
+	private static final Random random = new Random();
 
 	private LottoNumber(int number) {
 		this.number = number;
@@ -31,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	public static Set<LottoNumber> generateRandomNumber(Random random) {
+	public static Set<LottoNumber> generateRandomNumber() {
 		return random.ints(LOTTO_MIN, LOTTO_MAX)
 			.distinct()
 			.limit(LOTTO_COUNT)
