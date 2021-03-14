@@ -20,7 +20,7 @@ public class NumberTest {
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Number 객체 값 입력 비교 {0} == {1}")
     @MethodSource(value = "numberEntry")
     void numberOf_데이터타입_객체값_비교(String given, int givenNumber) {
         // given

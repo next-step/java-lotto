@@ -8,9 +8,12 @@ import study.calculator.pattern.CustomPattern;
 import study.calculator.pattern.DefaultPattern;
 import study.calculator.pattern.PatternSeparator;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class NumbersTest {
@@ -45,7 +48,10 @@ class NumbersTest {
         // given
         Numbers numbers = Numbers.of(given);
         // when
-        List<Integer> result = numbers.getNumbers();
+        List<Number> numberList = numbers.getNumbers();
+        List<Integer> result = numberList.stream()
+                .map(Number::getNumber)
+                .collect(toList());
         // then
         assertThat(result).containsExactly(expected);
     }
@@ -57,7 +63,11 @@ class NumbersTest {
         // given
         Numbers numbers = Numbers.of(given);
         // when
-        List<Integer> result = numbers.getNumbers();
+        List<Number> numberList = numbers.getNumbers();
+        List<Integer> result = numberList.stream()
+                .map(Number::getNumber)
+                .collect(toList());
+
         // then
         assertThat(result).containsExactly(expected);
     }
@@ -69,9 +79,12 @@ class NumbersTest {
         // given
         Numbers numbers = new Numbers();
         // when
-        List<Integer> extractNumbers = numbers.getExtractNumbers(given, patternSeparator);
+        List<Number> extractNumberList = numbers.getExtractNumbers(given, patternSeparator);
+        List<Integer> result = extractNumberList.stream()
+                .map(Number::getNumber)
+                .collect(toList());
         // then
-        assertThat(extractNumbers).contains(expected);
+        assertThat(result).contains(expected);
 
     }
 }

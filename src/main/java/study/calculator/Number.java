@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Number {
 
     public static final String NEGATIVE_NUMBER_EXCEPTION = "음수는 받을 수 없습니다.";
+    public static final int ZERO = 0;
 
     private final int number;
 

@@ -16,7 +16,7 @@ import static study.calculator.Validator.STRING_WHITESPACE;
  */
 public class Numbers {
 
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Numbers() {
         this(STRING_WHITESPACE);
@@ -37,16 +37,16 @@ public class Numbers {
         return new Numbers(text);
     }
 
-    protected List<Integer> getExtractNumbers(String text, PatternSeparator patternSeparator) {
+    protected List<Number> getExtractNumbers(String text, PatternSeparator patternSeparator) {
         String[] stringsSeparatedBySeparator = patternSeparator.matches(text);
 
         return Arrays.stream(stringsSeparatedBySeparator)
                 .filter(Validator::isNumeric)
-                .map(Integer::parseInt)
+                .map(Number::of)
                 .collect(toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<Number> getNumbers() {
         return numbers;
     }
 }
