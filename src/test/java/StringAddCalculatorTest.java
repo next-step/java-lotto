@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import util.Tokenizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -55,6 +56,13 @@ public class StringAddCalculatorTest {
             String target  = "//;\\n1;2;3";
             assertThat(target.substring(target.indexOf("//")+2, target.indexOf("\\"))).isEqualTo(";");
             assertThat(target.substring(target.indexOf("\\")+2)).isEqualTo("1;2;3");
+        }
+
+        @Test
+        @DisplayName("커스텀구분자여부")
+        void isCustom() {
+            Tokenizer tokenizer = new Tokenizer("//;\\n1;2;3");
+            assertThat(tokenizer.isCustom()).isTrue();
         }
     }
 
