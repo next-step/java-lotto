@@ -1,9 +1,15 @@
 package study.calculator;
 
+import study.calculator.pattern.CustomPattern;
+import study.calculator.pattern.DefaultPattern;
+import study.calculator.pattern.PatternSeparator;
+
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static study.calculator.Validator.PREFIX_STRATEGY_CONDITION;
+import static study.calculator.Validator.STRING_WHITESPACE;
 
 /**
  * 숫자를 관리 할 일급 컬렉션
@@ -12,20 +18,32 @@ public class Numbers {
 
     private final List<Integer> numbers;
 
-    public Numbers(String[] split) {
-        numbers = getIntegers(split);
+    public Numbers() {
+        this(STRING_WHITESPACE);
     }
 
-    private List<Integer> getIntegers(String[] split) {
-        return Arrays.stream(split)
-                .filter(Validator::isNumeric)
-                .map(Integer::parseInt)
-                .collect(toList());
+    private Numbers(String text) {
+        this(text, new DefaultPattern());
+    }
+
+    protected Numbers(String text, PatternSeparator patternSeparator) {
+        numbers = getExtractNumbers(text, patternSeparator);
     }
 
     public static Numbers of(String text) {
-        String[] split = text.split(",|:");
-        return new Numbers(split);
+        if(text.startsWith(PREFIX_STRATEGY_CONDITION)) {
+            return new Numbers(text, new CustomPattern());
+        }
+        return new Numbers(text);
+    }
+
+    protected List<Integer> getExtractNumbers(String text, PatternSeparator patternSeparator) {
+        String[] stringsSeparatedBySeparator = patternSeparator.matches(text);
+
+        return Arrays.stream(stringsSeparatedBySeparator)
+                .filter(Validator::isNumeric)
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 
     public List<Integer> getNumbers() {

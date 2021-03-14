@@ -1,4 +1,4 @@
-package study.calculator;
+package study.calculator.pattern;
 
 @FunctionalInterface
 public interface PatternSeparator {

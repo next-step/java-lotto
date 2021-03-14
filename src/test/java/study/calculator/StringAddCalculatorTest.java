@@ -2,8 +2,13 @@ package study.calculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import study.calculator.exception.CalculatorException;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -46,15 +51,24 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+    private static Stream<Arguments> customPatternEntry() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", 6),
+                Arguments.of("//#\n4#3", 7)
+        );
+    }
+    @ParameterizedTest(name = "{0} 문자열을 합산한 결과물: {1}")
+    @MethodSource(value = "customPatternEntry")
+    public void splitAndSum_custom_구분자(String given, int expected) throws Exception {
+        // when
+        int result = StringAddCalculator.splitAndSum(given);
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(CalculatorException.class);
     }
 }

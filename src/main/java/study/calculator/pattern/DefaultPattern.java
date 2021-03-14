@@ -1,4 +1,4 @@
-package study.calculator;
+package study.calculator.pattern;
 
 public class DefaultPattern implements PatternSeparator {
 
