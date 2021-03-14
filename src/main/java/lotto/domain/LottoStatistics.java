@@ -9,9 +9,21 @@ public class LottoStatistics {
 
     private Map<LottoRank,Integer> lottoStaticResult;
 
-    public LottoStatistics(Map<LottoRank, Integer> matchingCountResult) {
-        this.lottoStaticResult = matchingCountResult;
+    public LottoStatistics() {
+        lottoStaticResult = new HashMap<>();
+        init();
     }
+
+    private void init() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            lottoStaticResult.put(lottoRank,0);
+        }
+    }
+
+    public void put(LottoRank rank) {
+        lottoStaticResult.put(rank,lottoStaticResult.get(rank)+1);
+    }
+
 
     @Override
     public String toString() {
@@ -39,4 +51,5 @@ public class LottoStatistics {
                 .divide(amountBigDecimal,2,BigDecimal.ROUND_UP)
                 .doubleValue();
     }
+
 }

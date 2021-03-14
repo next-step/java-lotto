@@ -25,7 +25,6 @@ public class LottoMachine {
         for (int i = 0; i<6; i++) {
             lottoNumberList.add(new LottoNumber(random.nextInt(endNumber)+1));
         }
-
         Collections.sort(lottoNumberList);
         return lottoNumberList;
     }

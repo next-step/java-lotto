@@ -31,7 +31,7 @@ public class LottoGameController {
         List<LottoNumber> lastWeekWinningLotto = drawWinningLotto();
 
         LottoStatistics lottoStatistics
-                = new LottoStatistics(lottoList.makeMatchingCount(lastWeekWinningLotto));
+                = lottoList.makeMatchingCount(lastWeekWinningLotto);
 
         drawLottoStatics(lottoStatistics);
         drawLottoEarningRate(lottoStatistics.calculate(purchasePrice));

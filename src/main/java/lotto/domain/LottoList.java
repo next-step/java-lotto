@@ -24,18 +24,19 @@ public class LottoList {
     }
 
 
-    public Map<LottoRank,Integer> makeMatchingCount(List<LottoNumber> lastWeekWinningLotto) {
-        Map<LottoRank,Integer> matchingCountMap = new HashMap<>();
+    public LottoStatistics makeMatchingCount(List<LottoNumber> lastWeekWinningLotto) {
+
+        LottoStatistics lottoStatistics = new LottoStatistics();
         for ( Lotto lotto : lottoList) {
             int matchingCount = lotto.containsCount(lastWeekWinningLotto);
             LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
             if(LottoRank.isMiss(rank)) {
                 continue;
             }
-            matchingCountMap.put(rank, matchingCountMap.getOrDefault(rank,0) + 1);
+            lottoStatistics.put(rank);
         }
 
-        return matchingCountMap;
+        return lottoStatistics;
 
     }
 }
