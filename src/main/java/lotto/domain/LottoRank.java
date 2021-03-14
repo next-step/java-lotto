@@ -7,7 +7,7 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    MISS(0, 0);
+    ZERO(0,0);
 
     private int matchingCount;
     private int matchingPrice;
@@ -34,11 +34,14 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(r -> r.match(matchingCount))
                 .findFirst()
-                .orElse(MISS);
+                .orElse(ZERO);
     }
 
     private boolean match(int matchingCount) {
         return this.matchingCount == matchingCount;
     }
 
+    public static boolean isZero(LottoRank rank) {
+        return rank.match(0);
+    }
 }

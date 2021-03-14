@@ -21,7 +21,9 @@ public class LottoStatistics {
     }
 
     public void put(LottoRank rank) {
-        lottoStaticResult.put(rank,lottoStaticResult.get(rank)+1);
+        if(!LottoRank.isZero(rank)) {
+            lottoStaticResult.put(rank,lottoStaticResult.get(rank)+1);
+        }
     }
 
 
