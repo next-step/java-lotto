@@ -32,8 +32,11 @@ public class LottoStatistics {
         return sum;
     }
 
-    public double calculate(int lottoCount) {
-        int total = sum();
-        return 0;
+    public double calculate(int amount) {
+        BigDecimal totalBigDecimal = new BigDecimal(sum());
+        BigDecimal amountBigDecimal = new BigDecimal(amount);
+        return totalBigDecimal
+                .divide(amountBigDecimal,2,BigDecimal.ROUND_UP)
+                .doubleValue();
     }
 }
