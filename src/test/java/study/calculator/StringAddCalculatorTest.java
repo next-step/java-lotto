@@ -2,6 +2,7 @@ package study.calculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,10 +17,11 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
-    public void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    @ParameterizedTest(name = "숫자로 캐스팅이 가능한 문자 입력 시 결과 값 테스트")
+    @CsvSource(value = {"1, 1", "2, 2"})
+    public void splitAndSum_숫자하나(String given, int expected) throws Exception {
+        int result = StringAddCalculator.splitAndSum(given);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
