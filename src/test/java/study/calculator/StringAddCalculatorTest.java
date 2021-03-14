@@ -32,10 +32,11 @@ public class StringAddCalculatorTest {
                 }).withMessageContaining("숫자로 캐스팅할 수 없는 문자입니다.");
     }
 
-    @Test
-    public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+    @ParameterizedTest(name = "두 숫자({0})를 더한 결과 값이 {1}")
+    @CsvSource(value = {"1,2:3", "2,3:5"}, delimiter = ':')
+    public void splitAndSum_쉼표구분자(String given, int expected) throws Exception {
+        int result = StringAddCalculator.splitAndSum(given);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
