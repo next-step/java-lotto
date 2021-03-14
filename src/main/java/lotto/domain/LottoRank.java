@@ -36,4 +36,5 @@ public enum LottoRank {
     private boolean match(int matchingCount) {
         return this.matchingCount == matchingCount;
     }
+
 }

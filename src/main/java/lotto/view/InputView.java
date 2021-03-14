@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
-
+    
     public int inputPurchasePrice() {
         System.out.println("구매 금액을 입력해주세요");
         return new Scanner(System.in).nextInt();
