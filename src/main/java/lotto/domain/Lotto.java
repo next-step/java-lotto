@@ -1,17 +1,18 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private Set<LottoNumber> lottoNumberList;
+    private List<LottoNumber> lottoNumberList;
 
-    public Lotto(Set<LottoNumber> lottoNumberList) {
+    public Lotto(List<LottoNumber> lottoNumberList) {
+
         this.lottoNumberList = lottoNumberList;
     }
-
 
     @Override
     public String toString() {
