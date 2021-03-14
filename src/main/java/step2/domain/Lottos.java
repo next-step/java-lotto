@@ -38,10 +38,9 @@ public class Lottos {
         return list;
     }
 
-    public List<Rank> staticsOfMatch(List<Integer> winNumber) {
+    public List<Rank> getRankOfLotto(List<LottoNumber> winNumber) {
         return lottoList.stream()
                 .map(lotto -> lotto.match(winNumber))
                 .collect(Collectors.toList());
     }
-
 }

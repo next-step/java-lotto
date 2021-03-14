@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -19,30 +19,61 @@ class LottoStatisticsTest {
         lottoStatistics = new LottoStatistics();
     }
 
-    @DisplayName("통계를 낸다.")
+    @DisplayName("총 수익을 계산한다.")
     @Test
-    void statistics() {
+    void totalProfit() {
         //given
-        Lottos lottos = createLottos();
-        List<Integer> winNumber = List.of(1, 2, 3, 4, 5, 6);
-        List<Rank> matchResult = lottos.staticsOfMatch(winNumber);
+        List<Rank> matchResult = createRankList();
 
         //when
-        Map<Integer, List<Rank>> statistics = lottoStatistics.getLottoRank(lottos, winNumber);
+        int result = lottoStatistics.totalProfit(matchResult);
 
         //then
-        assertThat(statistics.get(6).size()).isEqualTo(1);
-        assertThat(statistics.get(5).size()).isEqualTo(1);
-        assertThat(statistics.get(4).size()).isEqualTo(1);
-        assertThat(statistics.get(0).size()).isEqualTo(1);
+        assertThat(result).isEqualTo(1555000);
     }
 
-    Lottos createLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        lottoList.add(new Lotto(List.of(1, 2, 3, 4, 5, 7)));
-        lottoList.add(new Lotto(List.of(7, 8, 9, 10, 11, 12)));
-        lottoList.add(new Lotto(List.of(2, 3, 4, 5, 11, 24)));
-        return new Lottos(lottoList);
+    @DisplayName("총수익이 0이면 0이다.")
+    @Test
+    void ZeroProfit() {
+        List<Rank> matchResult = List.of(Rank.MISS);
+
+        int result = lottoStatistics.totalProfit(matchResult);
+
+        assertThat(result).isEqualTo(0);
+    }
+
+    @DisplayName("수익률은 소수 2번째 자리까지 반올림한다.")
+    @Test
+    void statistics_소수점() {
+        List<Rank> matchResult = createRankList();
+
+        BigDecimal statistics = lottoStatistics.statistics(1000, matchResult);
+
+        assertThat(statistics.scale()).isEqualTo(2);
+    }
+
+    @DisplayName("수익률을 계산한다.")
+    @Test
+    void statistics_계산() {
+        List<Rank> matchResult = createRankList();
+
+        BigDecimal statistics = lottoStatistics.statistics(100000, matchResult);
+
+        assertThat(statistics).isEqualTo(BigDecimal.valueOf(15.55));
+    }
+
+    @DisplayName("매칭된 로또들을 그룹화한다.")
+    @Test
+    void matchOfLotto_계산() {
+        List<Rank> matchResult = createRankList();
+
+        Map<Integer, List<Rank>> matchGroup = lottoStatistics.groupMatchOfLotto(matchResult);
+
+        assertThat(matchGroup.get(6).size()).isEqualTo(0);
+        assertThat(matchGroup.get(5).size()).isEqualTo(1);
+    }
+
+    List<Rank> createRankList() {
+        return List.of(Rank.MISS, Rank.FIFTH, Rank.FOURTH, Rank.SECOND);
     }
 }

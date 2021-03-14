@@ -10,8 +10,8 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -19,10 +19,12 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        Rank[] ranks = values();
-        return Arrays.stream(ranks)
-                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
-                .collect(Collectors.toList()).get(0);
+        if (countOfMatch > 2) {
+            return Arrays.stream(Rank.values())
+                    .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                    .collect(Collectors.toList()).get(0);
+        }
+        return Rank.MISS;
     }
 
     public int getCountOfMatch() {
@@ -32,4 +34,5 @@ public enum Rank {
     public int getWinningMoney() {
         return winningMoney;
     }
+
 }
