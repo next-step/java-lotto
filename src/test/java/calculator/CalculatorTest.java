@@ -15,8 +15,7 @@ class CalculatorTest {
 
     @BeforeEach
     void init() {
-        Parser parser = new Parser();
-        calculator = new Calculator(parser);
+        calculator = new Calculator();
     }
 
     static Stream<Arguments> generateTestCase() {

@@ -13,11 +13,13 @@ public class Parser {
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int EXPRESSION_GROUP = 2;
 
-    public Sequence generateSequence(String expression) {
+    private Parser() {}
+
+    public static Sequence generateSequence(String expression) {
         return new Sequence(splitExpression(expression));
     }
 
-    private List<String> splitExpression(String expression) {
+    private static List<String> splitExpression(String expression) {
         Matcher matcher = CUSTOM_DELIMITER_EXPRESSION_PATTERN.matcher(expression);
 
         return matcher.find()
@@ -25,7 +27,7 @@ public class Parser {
                 : splitByDelimiterPattern(BASIC_DELIMITER_REGEX, expression);
     }
 
-    private List<String> splitByDelimiterPattern(String pattern, String expression) {
+    private static List<String> splitByDelimiterPattern(String pattern, String expression) {
         return Arrays.asList(expression.split(pattern));
     }
 }
