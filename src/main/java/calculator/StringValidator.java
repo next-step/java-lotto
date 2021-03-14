@@ -2,7 +2,7 @@ package calculator;
 
 import java.awt.*;
 
-public final class Validator {
+public final class StringValidator {
 
     public static boolean isBlankOrEmpty(String input) {
         if(isBlank(input) || isEmpty(input)) {
