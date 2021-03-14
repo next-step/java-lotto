@@ -1,4 +1,4 @@
-package camp.nextcamp.edu.lotto;
+package camp.nextcamp.edu.lotto.module;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
-import camp.nextcamp.edu.lotto.entity.LottoTicket;
 import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.module.LottoScoreBoardModule;
 import camp.nextcamp.edu.lotto.module.WinningScore;
@@ -83,10 +82,10 @@ public class LottoScoreBoardModuleTest {
 		);
 
 		// when
-		double profit = lottoModule.getProfit(countByWinningScore, new LottoTicket("3000"));
+		double profit = lottoModule.getProfit(countByWinningScore, list.size() * 1000);
 
 		// then
 		assertThat(profit)
-			.isEqualTo((double) 5000 / 3000);
+			.isEqualTo((double) 5000 / 4000);
 	}
 }

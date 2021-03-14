@@ -5,6 +5,7 @@ import java.util.Map;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoTicket;
+import camp.nextcamp.edu.lotto.entity.PurchasedLotto;
 import camp.nextcamp.edu.lotto.entity.WinningScoreMessage;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 
@@ -20,6 +21,15 @@ public class OutputView extends View {
 		lottos.stream()
 			.map(lotto -> "[" + lotto.getNumbersString() + "]")
 			.forEach(out::println);
+	}
+
+	public void showLottoCount(PurchasedLotto purchasedLotto) {
+		String result = String.format(
+			"수동으로 %s장, 자동으로 %s장을 구매했습니다."
+			, purchasedLotto.getManualLottoCount()
+			, purchasedLotto.getAutomaticLottoCount()
+		);
+		out.println(result);
 	}
 
 	public void showResultStatistics(Map<WinningScore, Long> winningScore) {
