@@ -7,3 +7,17 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 문자열 덧셈 계산기
+- 데이터 타입이 될 객체
+    - Number
+    - Numbers (일급 컬렉션)
+        - List<Number>를 만들기 위해 필요한 Pattern을 적용
+
+- 실제 데이터를 처리할 객체
+    - StringAddCalculator
+    
+- 데이터를 가공할 객체
+    - Pattern
+        - CustomPattern
+        - DefaultPattern
