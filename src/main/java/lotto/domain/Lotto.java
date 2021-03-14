@@ -31,14 +31,6 @@ public class Lotto {
                 .collect(Collectors.joining(","));
     }
 
-    /*
-    public int containsCount(List<LottoNumber> lastWeekWinningLotto) {
-        return (int) lastWeekWinningLotto.stream()
-                .filter(lottoNumberList::contains)
-                .count();
-    }
-
-     */
     public int containsCount(Lotto lastWeekWinningLotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumberList) {
