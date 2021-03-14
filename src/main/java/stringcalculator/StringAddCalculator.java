@@ -26,6 +26,7 @@ public class StringAddCalculator {
         }
 
         for (int i = 0; i < data.length; i++) {
+            isNegative(Integer.parseInt(data[i]));
             result = sum(result, Integer.parseInt(data[i]));
         }
 
@@ -34,6 +35,12 @@ public class StringAddCalculator {
 
     public boolean isInValidation(String input) {
         return input == null || input.isEmpty();
+    }
+
+    private void isNegative(int data) {
+        if (data < 0) {
+            throw new RuntimeException();
+        }
     }
 
     public int sum(int left, int right) {
