@@ -13,11 +13,10 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
-        String[] data = input.split(",");
-        result = Integer.parseInt(data[0]);
+        String[] data = input.split(",|:");
 
-        for (int i = 1; i < data.length; i+=2) {
-               result += Integer.parseInt(data[i]);
+        for (int i = 0; i < data.length; i++) {
+            result = sum(result, Integer.parseInt(data[i]));
         }
 
         return result;
@@ -25,5 +24,9 @@ public class StringAddCalculator {
 
     public boolean isInValidation(String input) {
         return input == null || input.isEmpty();
+    }
+
+    public int sum(int left, int right) {
+        return left + right;
     }
 }

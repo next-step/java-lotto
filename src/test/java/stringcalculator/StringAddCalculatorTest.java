@@ -31,4 +31,13 @@ class StringAddCalculatorTest {
         int calculationResult = new StringAddCalculator().splitAndSum(input);
         Assertions.assertThat(calculationResult).isEqualTo(result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3=6"}, delimiter = '=')
+    @DisplayName("컴마 이외에 콜론 구분자를 사용할 수 있다.")
+    void splitAndSum_CommaAndColon(String input, int result) {
+        int calculationResult = new StringAddCalculator().splitAndSum(input);
+        Assertions.assertThat(calculationResult).isEqualTo(result);
+    }
+
 }
