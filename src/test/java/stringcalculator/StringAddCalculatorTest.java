@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringAddCalculatorTest {
 
@@ -13,5 +14,13 @@ class StringAddCalculatorTest {
     void splitAndSum_Return0(String input, int result) {
         int calculationResult = new StringAddCalculator().splitAndSum(input);
         Assertions.assertThat(calculationResult).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1"})
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    void splitAndSum_ReturnInput(String input) {
+        int calculationResult = new StringAddCalculator().splitAndSum(input);
+        Assertions.assertThat(calculationResult).isEqualTo(Integer.parseInt(input));
     }
 }
