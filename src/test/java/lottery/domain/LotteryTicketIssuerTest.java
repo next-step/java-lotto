@@ -12,8 +12,6 @@ class LotteryTicketIssuerTest {
     @DisplayName("지불한 금액에 맞게 로또를 발급한다.")
     @CsvSource({"5000,5", "14500,14","100,0"})
     void sellLottery(int money, int expected) {
-        LotteryTicketIssuer issuer = new LotteryTicketIssuer();
-
-        assertThat(issuer.issue(money).size()).isEqualTo(expected);
+        assertThat(LotteryTicketIssuer.issue(money).size()).isEqualTo(expected);
     }
 }

@@ -8,13 +8,15 @@ import java.util.stream.IntStream;
 
 public class LotteryTicketIssuer {
 
+    private static final int LOTTERY_SIZE = 6;
+    private static final int LOTTERY_PRICE = 1000;
     private static final List<Integer> NUMBER_LIST = IntStream.rangeClosed(1, 45)
                                                               .boxed()
                                                               .collect(Collectors.toList());
-    private static final int LOTTERY_SIZE = 6;
-    private static final int LOTTERY_PRICE = 1000;
 
-    public LotteryTicket issue(int money) {
+    private LotteryTicketIssuer() {}
+
+    public static LotteryTicket issue(int money) {
         List<Lottery> lotteries = IntStream.range(0, money / LOTTERY_PRICE)
                                            .mapToObj(i -> generateLottery())
                                            .collect(Collectors.toList());
@@ -22,7 +24,7 @@ public class LotteryTicketIssuer {
         return new LotteryTicket(lotteries);
     }
 
-    private Lottery generateLottery() {
+    private static Lottery generateLottery() {
         List<Integer> numbers = new ArrayList<>(NUMBER_LIST);
 
         Collections.shuffle(numbers);
