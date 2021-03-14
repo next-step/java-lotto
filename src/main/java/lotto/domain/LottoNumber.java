@@ -37,4 +37,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber target) {
         return this.value - target.value;
     }
+
+    public int getNumber() {
+        return value;
+    }
 }

@@ -50,8 +50,11 @@ public class LottoStatistics {
         BigDecimal totalBigDecimal = new BigDecimal(sum());
         BigDecimal amountBigDecimal = new BigDecimal(amount);
         return totalBigDecimal
-                .divide(amountBigDecimal,2,BigDecimal.ROUND_UP)
+                .divide(amountBigDecimal,2,BigDecimal.ROUND_DOWN)
                 .doubleValue();
     }
 
+    public Map<LottoRank, Integer> getlottoStaticResultMap() {
+        return lottoStaticResult;
+    }
 }
