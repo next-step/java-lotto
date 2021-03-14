@@ -23,4 +23,12 @@ class StringAddCalculatorTest {
         int calculationResult = new StringAddCalculator().splitAndSum(input);
         Assertions.assertThat(calculationResult).isEqualTo(Integer.parseInt(input));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3"}, delimiter = ':')
+    @DisplayName("숫자 두 개를 컴마 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    void splitAndSum_ByComma(String input, int result) {
+        int calculationResult = new StringAddCalculator().splitAndSum(input);
+        Assertions.assertThat(calculationResult).isEqualTo(result);
+    }
 }
