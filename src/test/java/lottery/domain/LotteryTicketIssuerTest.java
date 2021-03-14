@@ -3,6 +3,8 @@ package lottery.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LotteryTicketIssuerTest {
 
     @Test
@@ -11,6 +13,6 @@ class LotteryTicketIssuerTest {
         LotteryTicketIssuer issuer = new LotteryTicketIssuer();
         int money = 5000;
 
-        assertThat(issuer.issue(money).size()).isEqaulTo(5);
+        assertThat(issuer.issue(money).size()).isEqualTo(5);
     }
 }
