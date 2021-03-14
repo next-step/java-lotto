@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lottery.domain.Prize.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LotteryTest {
 
     private Lottery winningLottery;
@@ -30,12 +33,12 @@ class LotteryTest {
         winningLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
-    @ParameterizedTest(name = "당첨 번호와 비교한 뒤, 로또 등수를 반환한다.")
+    @ParameterizedTest(name = "당첨 번호와 비교한 뒤, 로또 등수를 반환한다. 번호: {0}, 예상 등수: {1}")
     @MethodSource("generateTestCase")
     void getPrizeAfterComparingLotteries(List<Integer> numbers, Prize expected) {
         Lottery lottery = new Lottery(numbers);
 
-        assertThat(lottery.compare(winningLottery)).isEqualTo(expected);
+        assertThat(lottery.getPrize(winningLottery)).isEqualTo(expected);
     }
 
 }
