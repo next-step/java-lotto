@@ -38,3 +38,17 @@
 
 ### Bonus Number
 - bonus number는 WinningLotto의 Lotto값과는 다른 LottoNumber를 가져야함
+
+### PurchasedLotto
+- 사용자의 구매 로또들 전부 한곳에 정리
+- 수동 로또 카운트
+- 자동 로또 카운트
+
+### LottoStore
+- 로또 구매 금액 소유
+- 구매한 로또 소유
+
+### ManualLottoTicket
+- Lotto string 문자열 받기
+- 로또 전체의 갯수 소유
+- 수동으로 만든 로또 갯수보다 총 개수가 크면 사용자에러
