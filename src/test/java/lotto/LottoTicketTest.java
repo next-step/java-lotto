@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LotteryCreatedType;
 import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicket;
 import lotto.domain.WinningLotteryTicket;
@@ -25,6 +26,7 @@ public class LottoTicketTest {
         assertThat(duplicateRemovedNumberList.size()).isEqualTo(6);
         assertThat(lotteryTicket.getPrice()).isEqualTo(price);
         assertThat(lotteryTicket.getLotteryPrize()).isEqualTo(LotteryPrize.UNDEFINED);
+        assertThat(lotteryTicket.getCreatedType()).isEqualTo(LotteryCreatedType.AUTO);
     }
 
     @Test
@@ -37,6 +39,7 @@ public class LottoTicketTest {
         assertThat(lotteryTicket.getPrice()).isEqualTo(price);
         assertThat(lotteryTicket.getLottoNumberList()).isEqualTo(numberList);
         assertThat(lotteryTicket.getLotteryPrize()).isEqualTo(LotteryPrize.UNDEFINED);
+        assertThat(lotteryTicket.getCreatedType()).isEqualTo(LotteryCreatedType.MANUAL);
     }
 
     @Test
@@ -49,7 +52,6 @@ public class LottoTicketTest {
 
         assertThat(lotteryTicket.getLotteryPrize())
                 .isEqualTo(LotteryPrize.SECOND);
-
     }
 
     @Test

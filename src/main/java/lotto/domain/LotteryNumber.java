@@ -9,13 +9,13 @@ public class LotteryNumber {
 
     public static final int MIN_VALUE = 1;
 
-    private static Map<Integer,LotteryNumber> lotteryNumberMap = new HashMap<>();
+    private static Map<Integer, LotteryNumber> lotteryNumberMap = new HashMap<>();
 
     private final int value;
 
     static {
-        for (int i = MIN_VALUE; i <= MAX_VALUE ; i++) {
-            lotteryNumberMap.put(i,new LotteryNumber(i));
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lotteryNumberMap.put(i, new LotteryNumber(i));
         }
     }
 
@@ -24,7 +24,7 @@ public class LotteryNumber {
     }
 
     public static LotteryNumber valueOf(int value) {
-        if(!lotteryNumberMap.containsKey(value)){
+        if (!lotteryNumberMap.containsKey(value)) {
             throw new IllegalArgumentException("로또번호로는 적합하지 않습니다.");
         }
         return lotteryNumberMap.get(value);

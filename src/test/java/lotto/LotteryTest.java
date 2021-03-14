@@ -73,6 +73,5 @@ public class LotteryTest {
         Lottery toMatchLotteryTicket = new Lottery(numberListToMatch);
 
         assertThat(lottery.getMatchCount(toMatchLotteryTicket)).isEqualTo(matchCount);
-
     }
 }

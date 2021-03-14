@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicketList;
 import lotto.domain.WinningLotteryTicket;
-import lotto.dto.LotteryStatisticMatchResult;
+import lotto.dto.LotteryTicketListDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +15,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryTicketListTest {
 
     @Test
-    @DisplayName("로또티켓리스트 생성 테스트")
-    void create() {
+    @DisplayName("로또티켓리스트 자동생성 테스트")
+    void create_auto() {
         int numberOfTickets = 15;
         int pricePerTicket = 1200;
 
         LotteryTicketList lottoTicketList = new LotteryTicketList();
         lottoTicketList.addAutoBulk(numberOfTickets, pricePerTicket);
 
-        assertThat(lottoTicketList.getTicketList().size()).isEqualTo(numberOfTickets);
+        assertThat(lottoTicketList.getTicketList().totalSize()).isEqualTo(numberOfTickets);
+    }
+
+
+    @Test
+    @DisplayName("로또티켓리스트 수동생성 테스트")
+    void create_manual() {
+        int pricePerTicket = 1200;
+        List<List<Integer>> listOfManualLotteryNumberList = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(12, 14,15, 17, 18, 19));
+
+        LotteryTicketList lottoTicketList = new LotteryTicketList();
+        lottoTicketList.addManualBulk(listOfManualLotteryNumberList,pricePerTicket);
+        assertThat(lottoTicketList.getTicketList().totalSize()).isEqualTo(listOfManualLotteryNumberList.size());
+    }
+
+
+    @Test
+    @DisplayName("로또티켓리스트 자동수동생성 테스트")
+    void create_mixed() {
+        int pricePerTicket = 1200;
+        List<List<Integer>> listOfManualLotteryNumberList = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(12, 14,15, 17, 18, 19));
+        int numberOfAutoTickets = 15;
+
+        LotteryTicketList lottoTicketList = new LotteryTicketList();
+        lottoTicketList.addManualBulk(listOfManualLotteryNumberList,pricePerTicket);
+        lottoTicketList.addAutoBulk(numberOfAutoTickets,pricePerTicket);
+
+        LotteryTicketListDto ticketList = lottoTicketList.getTicketList();
+
+        assertThat(ticketList.autoSize()).isEqualTo(numberOfAutoTickets);
+        assertThat(ticketList.manualSize()).isEqualTo(listOfManualLotteryNumberList.size());
+        assertThat(ticketList.totalSize()).isEqualTo(listOfManualLotteryNumberList.size() + numberOfAutoTickets);
     }
 
     @Test
@@ -59,17 +92,17 @@ public class LotteryTicketListTest {
         lottoTicketList.add(lotteryNumberListWith6MatchingCount, price);
 
         lottoTicketList.setLotteryPrize(lastWinningTicket);
-        LotteryStatisticMatchResult lotteryStatisticMatchResult = new LotteryStatisticMatchResult(lottoTicketList);
+        LotteryTicketListDto ticketList = lottoTicketList.getTicketList();
 
-        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.NONE))
+        assertThat(ticketList.getLotteryPrizeCount(LotteryPrize.NONE))
                 .isEqualTo(1);
-        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.FOURTH))
+        assertThat(ticketList.getLotteryPrizeCount(LotteryPrize.FOURTH))
                 .isEqualTo(1);
-        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.SECOND))
+        assertThat(ticketList.getLotteryPrizeCount(LotteryPrize.SECOND))
                 .isEqualTo(1);
-        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.THIRD))
+        assertThat(ticketList.getLotteryPrizeCount(LotteryPrize.THIRD))
                 .isEqualTo(1);
-        assertThat(lotteryStatisticMatchResult.getLotteryPrizeCount(LotteryPrize.FIRST))
+        assertThat(ticketList.getLotteryPrizeCount(LotteryPrize.FIRST))
                 .isEqualTo(1);
     }
 

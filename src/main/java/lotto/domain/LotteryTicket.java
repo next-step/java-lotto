@@ -10,18 +10,21 @@ public class LotteryTicket {
 
     private LotteryPrize lotteryPrize;
 
-    private LotteryTicket(Lottery lottery, int price) {
+    private LotteryCreatedType createdType;
+
+    private LotteryTicket(Lottery lottery, int price, LotteryCreatedType createdType) {
         this.lottery = lottery;
         this.price = price;
         this.lotteryPrize = LotteryPrize.UNDEFINED;
+        this.createdType = createdType;
     }
 
     public LotteryTicket(List<Integer> numberList, int price) {
-        this(new Lottery(numberList), price);
+        this(new Lottery(numberList), price, LotteryCreatedType.MANUAL);
     }
 
     public static LotteryTicket auto(int price) {
-        return new LotteryTicket(Lottery.auto(), price);
+        return new LotteryTicket(Lottery.auto(), price, LotteryCreatedType.AUTO);
     }
 
     public List<Integer> getLottoNumberList() {
@@ -41,5 +44,9 @@ public class LotteryTicket {
 
     public LotteryPrize getLotteryPrize() {
         return lotteryPrize;
+    }
+
+    public LotteryCreatedType getCreatedType() {
+        return createdType;
     }
 }
