@@ -1,4 +1,4 @@
-package camp.nextcamp.edu.lotto;
+package camp.nextcamp.edu.lotto.entity;
 
 import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
 import static org.assertj.core.api.Assertions.*;
@@ -12,9 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import camp.nextcamp.edu.lotto.entity.Lotto;
-import camp.nextcamp.edu.lotto.entity.LottoNumber;
-import camp.nextcamp.edu.lotto.entity.WinningLotto;
 import camp.nextcamp.edu.lotto.exception.UserException;
 import camp.nextcamp.edu.lotto.module.WinningScore;
 

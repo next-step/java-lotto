@@ -1,4 +1,4 @@
-package camp.nextcamp.edu.lotto;
+package camp.nextcamp.edu.lotto.entity;
 
 import static camp.nextcamp.edu.lotto.exception.UserExceptionMesssage.*;
 import static org.assertj.core.api.Assertions.*;
@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import camp.nextcamp.edu.lotto.entity.Lotto;
 import camp.nextcamp.edu.lotto.entity.LottoNumber;
-import camp.nextcamp.edu.lotto.entity.WinningLottoInput;
-import camp.nextcamp.edu.lotto.exception.UserExceptionMesssage;
 
 public class LottoTest {
 
