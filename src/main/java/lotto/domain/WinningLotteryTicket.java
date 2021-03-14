@@ -13,7 +13,7 @@ public class WinningLotteryTicket {
     public WinningLotteryTicket(List<Integer> numberList, int bonusNumber) {
         validateBonusNumberIsDuplicateInLottery(numberList, bonusNumber);
         lottery = new Lottery(numberList);
-        bonusLotteryNumber = new LotteryNumber(bonusNumber);
+        bonusLotteryNumber = LotteryNumber.valueOf(bonusNumber);
     }
 
     public static WinningLotteryTicket ofRequest(WinningLotteryNumbersRequest winningLotteryNumbersRequest) {

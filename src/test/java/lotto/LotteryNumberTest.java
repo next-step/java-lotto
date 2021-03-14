@@ -14,8 +14,9 @@ public class LotteryNumberTest {
     @ValueSource(strings = {"34", "2", "7", "1", "45"})
     @DisplayName("정상적으로 생성 되는지 테스트")
     void create(int value) {
-        LotteryNumber lotteryNumber = new LotteryNumber(value);
+        LotteryNumber lotteryNumber = LotteryNumber.valueOf(value);
         assertThat(lotteryNumber.getValue()).isEqualTo(value);
+        assertThat(lotteryNumber == LotteryNumber.valueOf(value)).isTrue();
     }
 
     @ParameterizedTest
@@ -23,6 +24,6 @@ public class LotteryNumberTest {
     @DisplayName("로또번호가 범위를 넘어간 숫자로 생성시 예외 발생 테스트")
     void create_with_out_of_range_value(int value) {
         assertThatIllegalArgumentException().isThrownBy(() ->
-                new LotteryNumber(value));
+                LotteryNumber.valueOf(value));
     }
 }

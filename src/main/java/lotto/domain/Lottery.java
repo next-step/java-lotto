@@ -11,7 +11,8 @@ public class Lottery {
 
     public Lottery(List<Integer> numberList) {
         validateDuplicate(numberList);
-        Set<LotteryNumber> lotteryNumberList = numberList.stream().map(LotteryNumber::new)
+        Set<LotteryNumber> lotteryNumberList = numberList.stream()
+                .map(LotteryNumber::valueOf)
                 .collect(Collectors.toSet());
         validateSize(lotteryNumberList);
         this.numberList = lotteryNumberList;
