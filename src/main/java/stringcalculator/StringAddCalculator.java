@@ -1,5 +1,8 @@
 package stringcalculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
     public int splitAndSum(String input) {
@@ -13,7 +16,14 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
-        String[] data = input.split(",|:");
+        String[] data;
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            data = m.group(2).split(customDelimiter);
+        } else {
+            data = input.split(",|:");
+        }
 
         for (int i = 0; i < data.length; i++) {
             result = sum(result, Integer.parseInt(data[i]));
