@@ -1,4 +1,4 @@
-package study.lotto;
+package study.calculator;
 
 class StringAddCalculatorTest {
 
