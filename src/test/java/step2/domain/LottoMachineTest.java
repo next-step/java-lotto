@@ -14,34 +14,37 @@ class LottoMachineTest {
     @DisplayName("받은 돈 만큼 로또를 생성한다.")
     @Test
     void lottoCount() {
+        //given
         LottoMachine lottoMachine = new LottoMachine();
-
         int money = 13500;
 
+        //when
         Lottos lotto = lottoMachine.createLotto(money);
 
+        //then
         assertThat(lotto.lottoCount()).isEqualTo(13);
     }
 
     @DisplayName("만들 로또 갯수를 생성")
     @Test
     void getLottoCount() {
+        //given
         LottoMachine lottoMachine = new LottoMachine();
-
         int money = 12000;
-
+        //when
         int lottoCount = lottoMachine.getLottoCount(money);
-
+        //then
         assertThat(lottoCount).isEqualTo(12);
     }
 
     @DisplayName("지불한 가격이 1000원 단위가 아닐 경우 예외 발생")
     @Test
     void moneyVaild() {
+        //given
         LottoMachine lottoMachine = new LottoMachine();
-
         int money = 12002;
 
+        //then
         assertThatThrownBy(() -> {
             lottoMachine.getLottoCount(money);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -51,29 +54,39 @@ class LottoMachineTest {
     @DisplayName("로또 매칭 결과 테스트")
     @Test
     void getRank() {
+        //given
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
         LottoMachine lottoMachine = new LottoMachine(createLottos());
+
+        //when
         List<Rank> ranks = lottoMachine.getRankOfLottos(winNumber);
 
+        //then
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.MISS, Rank.FOURTH);
     }
 
     @DisplayName("String 문자열을 로또 번호 리스트로 변환 테스트")
     @Test
     void toLottoNumberList() {
+        //given
         LottoMachine lottoMachine = new LottoMachine();
         String winNumber = "1,2,3,4,5,6";
+
+        //when
         List<LottoNumber> lottoNumbers = lottoMachine.toLottoNumberList(winNumber);
 
+        //then
         assertThat(lottoNumbers).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
     }
 
     @DisplayName("당첨번호가 6개가 아닐 경우")
     @Test
     void valid_당첨번호길이검증() {
+        //given
         LottoMachine lottoMachine = new LottoMachine();
         String winNumber = "1,2,3,4,5";
 
+        //then
         assertThatThrownBy(() -> {
             lottoMachine.toLottoNumberList(winNumber);
         }).isInstanceOf(IllegalArgumentException.class)

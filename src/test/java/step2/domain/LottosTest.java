@@ -22,10 +22,13 @@ class LottosTest {
     @DisplayName("로또 생성를 생성")
     @Test
     void createLotto() {
+        //given
         int count = 4;
 
+        //when
         Lottos resultLottos = lottos.createLottoList(count);
 
+        //then
         assertThat(resultLottos.lottoCount()).isEqualTo(4);
     }
 
@@ -36,8 +39,10 @@ class LottosTest {
         Lottos lottos = createLottos();
         List<LottoNumber> winNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
+        //when
         List<Rank> ranks = lottos.getRankOfLotto(winNumber);
 
+        //then
         assertThat(ranks.size()).isEqualTo(4);
         assertThat(ranks.get(0)).isEqualTo(Rank.FIRST);
         assertThat(ranks.get(1)).isEqualTo(Rank.SECOND);
@@ -46,9 +51,13 @@ class LottosTest {
     @DisplayName("LottoDto 만들기 테스트")
     @Test
     void createLottoDtoList() {
+        //given
         Lottos lottos = createLottos();
+
+        //when
         List<LottoDto> lottoDtoList = lottos.getLottoDtoList();
 
+        //then
         assertThat(lottoDtoList.size()).isEqualTo(4);
         assertThat(lottoDtoList.get(0).getLottoNumbers()).contains(1, 2, 3, 4, 5, 6);
     }
