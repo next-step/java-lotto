@@ -17,6 +17,10 @@ public enum LottoRank {
         this.matchingPrice = matchingPrice;
     }
 
+    public static boolean isMiss(LottoRank rank) {
+        return rank.getMatchingCount() == 0;
+    }
+
     public int getMatchingCount() {
         return matchingCount;
     }

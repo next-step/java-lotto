@@ -17,9 +17,6 @@ public class LottoStatistics {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (LottoRank rank : lottoStaticResult.keySet()) {
-            if (rank.getMatchingCount() == 0) {
-                continue;
-            }
             sb.append(rank.getMatchingCount()+"개 일치 (");
             sb.append(rank.getMatchingPrice()+"원) - ");
             sb.append(lottoStaticResult.get(rank)+"개\n");

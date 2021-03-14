@@ -29,7 +29,10 @@ public class LottoList {
         for ( Lotto lotto : lottoList) {
             int matchingCount = lotto.containsCount(lastWeekWinningLotto);
             LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
-            matchingCountMap.put(rank, matchingCountMap.getOrDefault(rank,1) + 1);
+            if(LottoRank.isMiss(rank)) {
+                continue;
+            }
+            matchingCountMap.put(rank, matchingCountMap.getOrDefault(rank,0) + 1);
         }
 
         return matchingCountMap;
