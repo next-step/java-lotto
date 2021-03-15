@@ -16,7 +16,7 @@ class LottoMachineTest {
     void lottoCount() {
         //given
         LottoMachine lottoMachine = new LottoMachine();
-        int money = 13500;
+        int money = 13000;
 
         //when
         Lottos lotto = lottoMachine.createLotto(money);
@@ -25,28 +25,16 @@ class LottoMachineTest {
         assertThat(lotto.lottoCount()).isEqualTo(13);
     }
 
-    @DisplayName("만들 로또 갯수를 생성")
-    @Test
-    void getLottoCount() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine();
-        int money = 12000;
-        //when
-        int lottoCount = lottoMachine.getLottoCount(money);
-        //then
-        assertThat(lottoCount).isEqualTo(12);
-    }
-
     @DisplayName("지불한 가격이 1000원 단위가 아닐 경우 예외 발생")
     @Test
     void moneyVaild() {
         //given
         LottoMachine lottoMachine = new LottoMachine();
-        int money = 12002;
+        int money = 13500;
 
         //then
         assertThatThrownBy(() -> {
-            lottoMachine.getLottoCount(money);
+            lottoMachine.createLotto(money);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("1000원 단위로 돈을 지불해주세요");
     }
@@ -59,10 +47,10 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(createLottos());
 
         //when
-        List<Rank> ranks = lottoMachine.getRankOfLottos(winNumber);
+        List<Integer> ranks = lottoMachine.getRankOfLottos(winNumber);
 
         //then
-        assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.MISS, Rank.FOURTH);
+        assertThat(ranks).containsExactly(6, 5, 0, 4);
     }
 
     @DisplayName("String 문자열을 로또 번호 리스트로 변환 테스트")

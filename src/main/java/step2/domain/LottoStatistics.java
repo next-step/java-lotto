@@ -1,28 +1,33 @@
 package step2.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class LottoStatistics {
 
-    public BigDecimal statistics(int paymentMoney, List<Rank> matchResult) {
-        BigDecimal totalProfit = BigDecimal.valueOf(totalProfit(matchResult));
-        return totalProfit.divide(BigDecimal.valueOf(paymentMoney), 2, RoundingMode.HALF_UP);
+    private double earningRate;
 
+    public LottoStatistics(int paymentMoney, List<Integer> matchResult) {
+        this.earningRate = calculateProfitRate(paymentMoney, matchResult);
     }
 
-    public Map<Integer, List<Rank>> groupMatchOfLotto(List<Rank> matchResult) {
-        Map<Integer, List<Rank>> collect = matchResult.stream()
-                .collect(Collectors.groupingBy(Rank::getCountOfMatch));
+    public Map<Integer, List<Rank>> statistics(List<Integer> matchResult) {
+        return groupMatchOfLotto(matchResult);
+    }
+
+    public Map<Integer, List<Rank>> groupMatchOfLotto(List<Integer> matchResult) {
+        Map<Integer, List<Rank>> statisticsOfRank = matchResult.stream()
+                .map(Rank::valueOf)
+                .collect(groupingBy(Rank::getCountOfMatch));
+
         Rank[] values = Rank.values();
         for (int i = 0; i < Rank.values().length; i++) {
-            inputEmptyList(collect, values[i].getCountOfMatch());
+            inputEmptyList(statisticsOfRank, values[i].getCountOfMatch());
         }
-        return collect;
+        return statisticsOfRank;
     }
 
     private void inputEmptyList(Map<Integer, List<Rank>> collect, int countOfMatch) {
@@ -31,9 +36,18 @@ public class LottoStatistics {
         }
     }
 
-    public int totalProfit(List<Rank> matchResult) {
-        return matchResult.stream()
+    private double calculateProfitRate(int money, List<Integer> matchResult) {
+        money = 0;
+        Integer totalProfit = matchResult.stream()
+                .map(Rank::valueOf)
                 .map(Rank::getWinningMoney)
-                .reduce(Integer::sum).orElseThrow(() -> new RuntimeException("잘못된 계싼입니다."));
+                .reduce(Integer::sum)
+                .orElse(0);
+        return totalProfit / (double) money;
+    }
+
+    public String getStringEarningRate() {
+        System.out.println(earningRate);
+        return String.format("%.2f", earningRate);
     }
 }

@@ -33,7 +33,7 @@ public class LottoView {
                 .collect(Collectors.joining(",")) + "]";
     }
 
-    public String setWinNumber() {
+    public String inputWinNumber() {
         System.out.println("지난주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
         return scanner.nextLine();

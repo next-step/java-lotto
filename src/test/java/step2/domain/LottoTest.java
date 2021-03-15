@@ -31,14 +31,13 @@ class LottoTest {
     @Test
     void createLotto() {
         //given
-        Lotto lotto = new Lotto();
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<LottoNumber> numbers = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.pickNumber(numbers);
+        Lotto createLotto = new Lotto(numbers);
 
         //then
-        assertThat(lottoNumbers).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        assertThat(createLotto.toNumberList()).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
     }
 
     @DisplayName("1등일 경우 테스트")
@@ -49,10 +48,10 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.FIRST);
+        assertThat(countOfMatch).isEqualTo(6);
     }
 
     @DisplayName("2등일 경우 테스트")
@@ -63,10 +62,10 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.SECOND);
+        assertThat(countOfMatch).isEqualTo(5);
     }
 
     @DisplayName("하나도 당청안됬을 경우 테스트")
@@ -77,10 +76,10 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.MISS);
+        assertThat(countOfMatch).isEqualTo(0);
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {

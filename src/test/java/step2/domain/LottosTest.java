@@ -40,12 +40,12 @@ class LottosTest {
         List<LottoNumber> winNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
         //when
-        List<Rank> ranks = lottos.getRankOfLotto(winNumber);
+        List<Integer> rankOfLotto = lottos.getRankOfLotto(winNumber);
 
         //then
-        assertThat(ranks.size()).isEqualTo(4);
-        assertThat(ranks.get(0)).isEqualTo(Rank.FIRST);
-        assertThat(ranks.get(1)).isEqualTo(Rank.SECOND);
+        assertThat(rankOfLotto.size()).isEqualTo(4);
+        assertThat(rankOfLotto.get(0)).isEqualTo(6);
+        assertThat(rankOfLotto.get(1)).isEqualTo(5);
     }
 
     @DisplayName("LottoDto 만들기 테스트")

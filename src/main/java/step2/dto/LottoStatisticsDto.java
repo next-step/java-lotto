@@ -2,7 +2,6 @@ package step2.dto;
 
 import step2.domain.Rank;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +13,9 @@ public class LottoStatisticsDto {
     private final List<Integer> rankList;
     private final List<Integer> winningMoney;
     private final List<Integer> countOfRank;
-    private final BigDecimal ratioOfReturn;
+    private final String ratioOfReturn;
 
-    public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, BigDecimal statistics) {
+    public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, String statistics) {
         this.rankList = createRanList(ranks);
         this.winningMoney = createWinningMoneyList();
         this.countOfRank = createCountOfRank(ranks);
@@ -57,7 +56,7 @@ public class LottoStatisticsDto {
         return countOfRank;
     }
 
-    public BigDecimal getRatioOfReturn() {
+    public String getRatioOfReturn() {
         return ratioOfReturn;
     }
 }

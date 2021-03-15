@@ -25,8 +25,8 @@ public class LottoMachine {
         return lottos.createLottoList(getLottoCount(money));
     }
 
-    public int getLottoCount(int money) {
-        if (money % LOTTO_PRICE != ZERO) {
+    private int getLottoCount(int money) {
+        if (money % LOTTO_PRICE != ZERO || money == ZERO) {
             throw new IllegalArgumentException("1000원 단위로 돈을 지불해주세요");
         }
         return BigDecimal.valueOf(money)
@@ -34,7 +34,7 @@ public class LottoMachine {
                 .intValue();
     }
 
-    public List<Rank> getRankOfLottos(List<LottoNumber> winNumber) {
+    public List<Integer> getRankOfLottos(List<LottoNumber> winNumber) {
         return lottos.getRankOfLotto(winNumber);
     }
 

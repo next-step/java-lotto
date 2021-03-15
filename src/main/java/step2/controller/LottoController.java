@@ -5,7 +5,6 @@ import step2.dto.LottoStatisticsDto;
 import step2.dto.LottosDto;
 import step2.view.LottoView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +12,11 @@ public class LottoController {
 
     private final LottoView lottoView;
     private final LottoMachine lottoMachine;
-    private final LottoStatistics lottoStatistics;
+    private LottoStatistics lottoStatistics;
 
     public LottoController() {
         this.lottoView = new LottoView();
         this.lottoMachine = new LottoMachine();
-        this.lottoStatistics = new LottoStatistics();
     }
 
     public static void main(String[] args) {
@@ -26,8 +24,7 @@ public class LottoController {
         int money = lottoController.paymentMoney();
         Lottos lottos = lottoController.createLotto(money);
         lottoController.lottoInfoPrint(lottos);
-        LottoStatisticsDto statistics = lottoController.statistics(money);
-        lottoController.finishView(statistics);
+        lottoController.finishView(money);
     }
 
     public void lottoInfoPrint(Lottos lottos) {
@@ -43,28 +40,22 @@ public class LottoController {
         return lottoMachine.createLotto(money);
     }
 
-    public LottoStatisticsDto statistics(int money) {
-        List<LottoNumber> winNumbers = setWinNumber();
-        List<Rank> rank = lottoMachine.getRankOfLottos(winNumbers);
-        Map<Integer, List<Rank>> MapOfRanks = lottoStatistics.groupMatchOfLotto(rank);
-        BigDecimal statistics = lottoStatistics.statistics(money, rank);
-        return createStatisticsDto(MapOfRanks, statistics);
-    }
-
-    private LottoStatisticsDto createStatisticsDto(Map<Integer, List<Rank>> rank, BigDecimal statistics) {
+    private LottoStatisticsDto createStatisticsDto(Map<Integer, List<Rank>> rank, String statistics) {
         return new LottoStatisticsDto(rank, statistics);
     }
 
-    public void finishView(LottoStatisticsDto lottoStatisticsDto) {
-        lottoView.finish(lottoStatisticsDto);
+    public void finishView(int money) {
+        List<Integer> rankOfLottos = lottoMachine.getRankOfLottos(inputWinNumber());
+        lottoStatistics = new LottoStatistics(money, rankOfLottos);
+        Map<Integer, List<Rank>> statistics = lottoStatistics.statistics(rankOfLottos);
+        lottoView.finish(createStatisticsDto(statistics, lottoStatistics.getStringEarningRate()));
     }
 
-    public List<LottoNumber> setWinNumber() {
-        String stringWinNumbers = lottoView.setWinNumber();
+    public List<LottoNumber> inputWinNumber() {
+        String stringWinNumbers = lottoView.inputWinNumber();
         return lottoMachine.toLottoNumberList(stringWinNumbers);
 
     }
-
 
     public LottosDto createLottosDto(Lottos lotto) {
         return new LottosDto(lotto);
