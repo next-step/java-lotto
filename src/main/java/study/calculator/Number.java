@@ -4,23 +4,21 @@ import study.calculator.exception.CalculatorException;
 
 import java.util.Objects;
 
-public class Number {
+import static study.calculator.Validator.*;
 
-    public static final String NEGATIVE_NUMBER_EXCEPTION = "음수는 받을 수 없습니다.";
-    public static final int ZERO = 0;
+public class Number {
 
     private final int number;
 
-    public Number(int number) {
+    protected Number(int number) {
         this.number = number;
     }
 
     public static Number of(String number) {
-        int parseInt = Integer.parseInt(number);
-        if(parseInt < 0) {
-            throw new CalculatorException(NEGATIVE_NUMBER_EXCEPTION);
+        if(isNotNumericOrIsNegativeNumber(number)) {
+            throw new CalculatorException("계산할 수 없는 문자 입니다.");
         }
-        return new Number(parseInt);
+        return new Number(Integer.parseInt(number));
     }
 
     public int getNumber() {
@@ -30,7 +28,7 @@ public class Number {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Number)) return false;
         final Number number1 = (Number) o;
         return getNumber() == number1.getNumber();
     }

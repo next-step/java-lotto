@@ -7,11 +7,14 @@ public final class Validator {
     private Validator() {}
 
     public static final String PREFIX_STRATEGY_CONDITION = "//";
-    public static final String STRING_WHITESPACE = "";
 
-    public static boolean isSingleLengthAndIsNotNumeric(String text) {
-        return text.length() == 1 && !isNumeric(text);
+    public static boolean isNotNumericOrIsNegativeNumber(String number) {
+        return !isNumeric(number) || isNegativeNumber(number);
     }
+    public static boolean isNegativeNumber(String text) {
+        return Integer.parseInt(text) < 0;
+    }
+
     public static boolean isNotNullAndIsBlank(String text) {
         return Objects.isNull(text) || text.trim().isEmpty();
     }

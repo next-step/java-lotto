@@ -36,6 +36,5 @@ public class NumberTest {
     void numberOf_음수값_예외처리(String given) {
         assertThatThrownBy(() -> Number.of(given))
                 .isInstanceOf(CalculatorException.class);
-
     }
 }

@@ -1,10 +1,7 @@
 package study.calculator;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.*;
 import study.calculator.exception.CalculatorException;
 
 import java.util.stream.Stream;
@@ -40,7 +37,7 @@ public class StringAddCalculatorTest {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
                     StringAddCalculator.splitAndSum(given);
-                }).withMessageContaining("숫자로 캐스팅할 수 없는 문자입니다.");
+                }).withMessageContaining("계산할 수 없는 문자 입니다.");
     }
 
     @ParameterizedTest(name = "두 숫자({0})를 더한 결과 값이 {1}")
@@ -66,9 +63,10 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest(name = "{0} 입력 시 음수 포함하므로 예외처리")
-    @CsvSource(value = "-1, 2, 3")
+    @ValueSource(strings = {"-1,2,3", "1,2,a"})
     public void splitAndSum_negative(String given) {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(given))
-                .isInstanceOf(CalculatorException.class);
+                .isInstanceOf(CalculatorException.class)
+                .hasMessageContaining("계산할 수 없는 문자 입니다.");
     }
 }
