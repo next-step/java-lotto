@@ -12,11 +12,14 @@ class LottoTest {
     Lotto lotto;
 
     @Test
-    @DisplayName("섞인번호는 값이 다르다")
+    @DisplayName("섞인번호는 값이 다르다" +
+            "로또번호는 6개")
     void shuffle() {
         List<Integer> lottoNumbers1 = lotto.getLottoNumbers();
         List<Integer> lottoNumbers2 = lotto.getLottoNumbers();
 
+        assertThat(lottoNumbers1.size()).isEqualTo(6);
+        assertThat(lottoNumbers2.size()).isEqualTo(6);
         assertThat(lottoNumbers1).isNotEqualTo(lottoNumbers2);
     }
 
