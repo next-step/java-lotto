@@ -29,7 +29,7 @@ class LotteryTicketTest {
 
         RoundResult roundResult = lotteryTicket.getResult(winningNumbers);
 
-        double expectedRateOfReturn = (FOURTH.winnings * 2 + THIRD.winnings) / (1000.0 * lotteries.size());
+        double expectedRateOfReturn = (FOURTH.getWinnings() * 2 + THIRD.getWinnings()) / (1000.0 * lotteries.size());
             assertAll(
             () -> assertThat(roundResult.getPrizes())
                 .containsExactly(LOSING_TICKET, LOSING_TICKET, LOSING_TICKET, FOURTH, FOURTH, THIRD),

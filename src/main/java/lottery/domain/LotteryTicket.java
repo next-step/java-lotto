@@ -1,9 +1,6 @@
 package lottery.domain;
 
-import lottery.dto.LotteryProxy;
-import lottery.dto.ReadonlyLottery;
-import lottery.dto.ReadonlyLotteryTicket;
-import lottery.dto.RoundResult;
+import lottery.dto.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
