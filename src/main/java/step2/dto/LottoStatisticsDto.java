@@ -38,7 +38,7 @@ public class LottoStatisticsDto {
     }
 
     private List<Integer> createCountOfRank(Map<Integer, List<Rank>> ranks) {
-        return rankList.stream()
+        return winningMoney.stream()
                 .map(ranks::get)
                 .map(List::size)
                 .collect(toList());

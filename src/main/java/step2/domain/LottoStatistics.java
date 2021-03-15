@@ -59,7 +59,6 @@ public class LottoStatistics {
     }
 
     public String getStringEarningRate() {
-        System.out.println(earningRate);
         return String.format("%.2f", earningRate);
     }
 }
