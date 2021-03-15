@@ -14,13 +14,20 @@ public class StringAddCalculator {
         this.stringParser = new StringParser();
     }
 
-    public int splitAndSum(String input) {
-        if (StringUtils.isBlank(input)) {
+    public int calculate (String input) {
+        if(input == null|| input.equals("")){
             return 0;
         }
+      return sum(split(input));
+    }
+
+    public String[] split(String input) {
         String delimiter = stringParser.setDelimiter(input);
-        String[] parse = stringParser.parse(delimiter);
-        List<Integer> numbers = positiveNumber.toInt(parse);
-        return positiveNumber.add(numbers);
+        return stringParser.parse(delimiter);
+    }
+
+    public int sum (String[] stringNumbers) {
+        List<Integer> numbers = positiveNumber.toInt(stringNumbers);
+        return positiveNumber.sum(numbers);
     }
 }

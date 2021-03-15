@@ -7,9 +7,10 @@ public class StringParser {
 
     private static final String DEFAULT_DELIMITER = ":|,";
     private String input;
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public String setDelimiter(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = PATTERN.matcher(input);
         this.input = input;
         if (m.find()) {
             String customDelimiter = m.group(1);
