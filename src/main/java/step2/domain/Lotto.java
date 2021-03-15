@@ -51,4 +51,8 @@ public class Lotto {
                 .map(e -> 1).reduce(0, Integer::sum);
         return countOfMatch;
     }
+
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }
