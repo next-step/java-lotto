@@ -15,13 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryTest {
 
-    private Lottery winningLottery;
+    private List<Integer> winningNumbers;
 
     static Stream<Arguments> generateTestCase() {
         return Stream.of(
             Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), LOSING_TICKET),
             Arguments.of(Arrays.asList(1, 8, 9, 10, 11, 12), LOSING_TICKET),
-            Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), FIFTH),
+            Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), LOSING_TICKET),
             Arguments.of(Arrays.asList(1, 2, 3, 10, 11, 12), FOURTH),
             Arguments.of(Arrays.asList(1, 2, 3, 5, 10, 12), THIRD),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 12), SECOND),
@@ -31,7 +31,7 @@ class LotteryTest {
 
     @BeforeEach
     void init() {
-        winningLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @ParameterizedTest(name = "번호: {0}, 예상 등수: {1}")
@@ -40,7 +40,7 @@ class LotteryTest {
     void getPrizeAfterComparingLotteries(List<Integer> numbers, Prize expected) {
         Lottery lottery = new Lottery(numbers);
 
-        assertThat(lottery.getPrize(winningLottery)).isEqualTo(expected);
+        assertThat(lottery.getPrize(winningNumbers)).isEqualTo(expected);
     }
 
 }

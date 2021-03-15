@@ -3,9 +3,12 @@ package lottery.domain;
 import lottery.dto.LotteryProxy;
 import lottery.dto.ReadonlyLottery;
 import lottery.dto.ReadonlyLotteryTicket;
+import lottery.dto.RoundResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static lottery.domain.LotteryConstants.LOTTERY_PRICE;
 
 public class LotteryTicket implements ReadonlyLotteryTicket {
 
@@ -20,4 +23,22 @@ public class LotteryTicket implements ReadonlyLotteryTicket {
                         .map(LotteryProxy::new)
                         .collect(Collectors.toList());
     }
+
+    public RoundResult getResult(List<Integer> winningNumbers) {
+        List<Prize> prizes = lotteries.stream()
+                                      .map(lottery -> lottery.getPrize(winningNumbers))
+                                      .collect(Collectors.toList());
+
+        double rateOfReturn = getRateOfReturn(prizes);
+
+        return new RoundResult(prizes, rateOfReturn);
+    }
+
+    public double getRateOfReturn(List<Prize> prizes) {
+        return prizes.stream()
+                     .mapToDouble(prize -> prize.getWinnings() / (double) LOTTERY_PRICE)
+                     .average()
+                     .orElse(.0);
+    }
+
 }

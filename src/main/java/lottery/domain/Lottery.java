@@ -13,9 +13,9 @@ public class Lottery implements ReadonlyLottery {
         this.numbers = numbers;
     }
 
-    public Prize getPrize(Lottery winningLottery) {
+    public Prize getPrize(List<Integer> winningNumbers) {
         int matchedNumbers = numbers.stream()
-                                    .filter(winningLottery.numbers::contains)
+                                    .filter(winningNumbers::contains)
                                     .mapToInt(n -> 1)
                                     .sum();
 

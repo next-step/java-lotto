@@ -4,18 +4,19 @@ import java.util.Arrays;
 
 public enum Prize {
 
-    FIRST(6),
-    SECOND(5),
-    THIRD(4),
-    FOURTH(3),
-    FIFTH(2),
-    LOSING_TICKET(0)
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
+    LOSING_TICKET(0, 0)
     ;
 
     int condition;
+    int winnings;
 
-    Prize(int condition) {
+    Prize(int condition, int winnings) {
         this.condition = condition;
+        this.winnings = winnings;
     }
 
     public static Prize getPrize(int matchedCount)  {
@@ -25,4 +26,7 @@ public enum Prize {
                      .orElse(LOSING_TICKET);
     }
 
+    public int getWinnings() {
+        return winnings;
+    }
 }
