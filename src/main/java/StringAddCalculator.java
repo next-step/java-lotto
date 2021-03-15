@@ -4,18 +4,36 @@ import util.Validator;
 import java.util.Arrays;
 
 public class StringAddCalculator {
-    public int splitAndSum(String parameter) {
-        Tokenizer tokenizer = new Tokenizer(parameter);
+    String[] numbers;
+    public int calculate(String parameter) {
         Validator validator = new Validator();
 
         if (!validator.isNotNullAndNotEmptyString(parameter)) {
             return 0;
         }
+        splitParameter(parameter);
 
-        String[] numbers = tokenizer.generateNumbers();
         if (validator.containsMinusNumbers(numbers)) {
             throw new RuntimeException();
         }
+
+        return getSum();
+    }
+
+    /**
+     * 쪼개서 배열생성.
+     * @param parameter
+     */
+    private void splitParameter(String parameter) {
+        Tokenizer tokenizer = new Tokenizer(parameter);
+        numbers = tokenizer.generateNumbers();
+    }
+
+    /**
+     * 숫자배열의 합을 구한다.
+     * @return
+     */
+    private int getSum() {
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
