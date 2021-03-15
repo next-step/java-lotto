@@ -50,9 +50,16 @@ public class LottoView {
         List<Integer> countOfRank = lottoStatisticsDto.getCountOfRank();
         System.out.println("당청통계");
         System.out.println("---------");
-        for (int i = 0; i < rankList.size(); i++) {
-            System.out.println(rankList.get(i) + "개 일치 (" + winningMoney.get(i) + ")-" + countOfRank.get(i));
+        for (int i = 0; i < winningMoney.size(); i++) {
+            System.out.println(rankList.get(i) + "개 일치" + printBonus(winningMoney.get(i)) + "(" + winningMoney.get(i) + ")-" + countOfRank.get(i));
         }
         System.out.println("총 수익률은 " + lottoStatisticsDto.getRatioOfReturn() + "입니다.(기준이 1이기 떄문에 결과적으로 손해라는 의미임)");
+    }
+
+    private String printBonus(int winningMoney) {
+        if (winningMoney == 30000000) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 }
