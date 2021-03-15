@@ -38,7 +38,7 @@ public class ConsoleInteractiveInputUtils {
     }
 
     private static String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         return scanner.next();
     }
 
