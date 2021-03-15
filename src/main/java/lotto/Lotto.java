@@ -7,11 +7,13 @@ import java.util.Objects;
 public class Lotto {
     List<Integer> numbers;
 
-    public Lotto() {
-    }
-
     public Lotto(List<Integer> givenLottoNumbers) {
         this.numbers = givenLottoNumbers;
+        Collections.sort(this.numbers);
+    }
+
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.numbers = lottoGenerator.getNumbers();
         Collections.sort(this.numbers);
     }
 

@@ -1,12 +1,12 @@
 package LottoTest;
 
 import lotto.Lotto;
+import lotto.LottoGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,15 +14,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
-    @Test
-    void When_New_Then_InstanceCreated() {
-        //when
-        Lotto lotto = new Lotto();
-
-        //then
-        //no compile error
-    }
-
     @Test
     void Given_LottoNumber_When_New_Then_InstanceCreated() {
         //given
@@ -35,10 +26,22 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(givenLottoNumbers));
     }
 
+    @Test
+    void Given_LottoGenerator_When_New_Then_InstanceCreate() {
+        LottoGenerator fixedLottoGenerator = new FixedLottoGenerator();
+
+        //when
+        Lotto lotto = new Lotto(fixedLottoGenerator);
+
+        //then
+        assertThat(lotto).isEqualTo(new Lotto(fixedLottoGenerator.getNumbers()));
+    }
+
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
     void Given_WinningNumbers_When_Match_Then_NumberOfMatchedNumbers(List<Integer> winningNumbers, int expected) {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoGenerator fixedLottoGenerator = new FixedLottoGenerator();
+        Lotto lotto = new Lotto(fixedLottoGenerator);
 
         //when
         int winners = lotto.matches(winningNumbers);
