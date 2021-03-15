@@ -16,23 +16,23 @@ public class LottoStatisticsDto {
     private final String ratioOfReturn;
 
     public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, String statistics) {
-        this.rankList = createRanList(ranks);
-        this.winningMoney = createWinningMoneyList();
+        this.rankList = createRanList();
+        this.winningMoney = createWinningMoneyList(ranks);
         this.countOfRank = createCountOfRank(ranks);
         this.ratioOfReturn = statistics;
     }
 
-    private List<Integer> createRanList(Map<Integer, List<Rank>> ranks) {
-        return ranks.keySet().stream()
-                .filter(rank -> rank != 0)
+    private List<Integer> createRanList() {
+        return Arrays.stream(Rank.values())
+                .map(Rank::getCountOfMatch)
+                .filter(money -> money != 0)
                 .sorted()
                 .collect(toList());
     }
 
-    private List<Integer> createWinningMoneyList() {
-        return Arrays.stream(Rank.values())
-                .map(Rank::getWinningMoney)
-                .filter(money -> money != 0)
+    private List<Integer> createWinningMoneyList(Map<Integer, List<Rank>> ranks) {
+        return ranks.keySet().stream()
+                .filter(rank -> rank != 0)
                 .sorted()
                 .collect(toList());
     }
