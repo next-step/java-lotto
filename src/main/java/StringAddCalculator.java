@@ -14,7 +14,7 @@ public class StringAddCalculator {
         splitParameter(parameter);
 
         if (validator.containsMinusNumbers(numbers)) {
-            throw new RuntimeException();
+            throw new RuntimeException("음의 정수는 포함될 수 없습니다.");
         }
 
         return getSum();
