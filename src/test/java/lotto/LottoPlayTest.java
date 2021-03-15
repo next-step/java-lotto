@@ -37,4 +37,11 @@ class LottoPlayTest {
         LottoPlay lottoPlay = new LottoPlay();
         assertThat(lottoPlay.getWinningNumbers(lottoNumber, winningNumbers)).isEqualTo(countWinnings);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
+    @DisplayName("당첨 개수의 따라 금액이 달라진다.")
+    void decisionMoneyByWinningNumbers(int countWinnings, int amount) {
+        assertThat(Amount.getWinningMoney(countWinnings)).isEqualTo(amount);
+    }
 }
