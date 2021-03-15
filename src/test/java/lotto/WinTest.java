@@ -3,7 +3,10 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨자테스트")
 class WinTest {
@@ -33,6 +36,10 @@ class WinTest {
             "5개 일치 (1500000원)- 0개\n" +
             "6개 일치 (2000000000원)- 0개\n")
     void ex1() {
-        
+        LottoNumbers lottoNumbers = new LottoNumbers(IntStream.of(new int[]{8, 21, 23, 41, 42, 43})
+                .boxed()
+                .collect(Collectors.toList()));
+        System.out.println(lottoNumbers);
+        assertThat(1).isEqualTo(1);
     }
 }
