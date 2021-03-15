@@ -6,7 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -44,4 +46,18 @@ class LottoPlayTest {
     void decisionMoneyByWinningNumbers(int countWinnings, int amount) {
         assertThat(Amount.getWinningMoney(countWinnings)).isEqualTo(amount);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5000,2:10000", "1500000,1:1500000"}, delimiter = ':')
+    @DisplayName("당첨된 금액의 총 합을 구할 수 있다.")
+    void canSumWinningAmount(String input, int totalAmount) {
+        String[] winningInformation = input.split(",");
+
+        Map<Integer, Integer> winning = new HashMap<>();
+        winning.put(Integer.parseInt(winningInformation[0]), Integer.parseInt(winningInformation[1]));
+
+        Winning winnings = new Winning(winning);
+        assertThat(winnings.getSumAmount()).isEqualTo(totalAmount);
+    }
+
 }
