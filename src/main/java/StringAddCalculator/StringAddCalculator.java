@@ -5,7 +5,7 @@ public class StringAddCalculator {
     }
 
     public int calculate(String input) {
-        InputParser inputParser = new InputParser(input);
+        Input inputParser = new Input(input);
         Operands operands = inputParser.getOperands();
         return operands.sum().getNumber();
     }

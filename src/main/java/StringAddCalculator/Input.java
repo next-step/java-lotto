@@ -3,14 +3,14 @@ package StringAddCalculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputParser {
+public class Input {
     private static final String DEFAULT_DELIMITER = ",";
     private static final String CUSTOM_DELIMITER_PATTERN = "^//(.)\n";
 
     private String input;
     private Operands operands;
 
-    public InputParser(String input) {
+    public Input(String input) {
         this.input = correctZeroLikeString(input);
         String delimiter = parseDelimiter();
         String numbers = parseNumber();

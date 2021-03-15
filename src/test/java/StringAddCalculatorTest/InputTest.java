@@ -1,7 +1,6 @@
 package StringAddCalculatorTest;
 
-import StringAddCalculator.InputParser;
-import StringAddCalculator.Operand;
+import StringAddCalculator.Input;
 import StringAddCalculator.Operands;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class InputParserTest {
-    InputParser inputParser;
+public class InputTest {
+    Input input;
 
     @BeforeEach
     void initInputParser() {
@@ -25,10 +24,10 @@ public class InputParserTest {
     @MethodSource("provideInputString")
     void Given_Inputs_When_GetOperands_Then_ReturnsExpected(String input, Operands expected) {
         //given
-        inputParser = new InputParser(input);
+        this.input = new Input(input);
 
         //when
-        Operands actual = inputParser.getOperands();
+        Operands actual = this.input.getOperands();
 
         //then
         assertThat(actual).isEqualTo(expected);
@@ -48,10 +47,10 @@ public class InputParserTest {
     @Test
     void Given_Empty_When_GetOperands_Then_OperandsWith0() {
         //given
-        inputParser = new InputParser("");
+        input = new Input("");
 
         //when
-        Operands actual = inputParser.getOperands();
+        Operands actual = input.getOperands();
 
         //then
         assertThat(actual).isEqualTo(new Operands(new String[]{"0"}));
@@ -60,10 +59,10 @@ public class InputParserTest {
     @Test
     void Given_Null_When_GetOperands_Then_OperandsWith0() {
         //given
-        inputParser = new InputParser(null);
+        input = new Input(null);
 
         //when
-        Operands actual = inputParser.getOperands();
+        Operands actual = input.getOperands();
 
         //then
         assertThat(actual).isEqualTo(new Operands(new String[]{"0"}));
@@ -73,7 +72,7 @@ public class InputParserTest {
     @ParameterizedTest
     @MethodSource("provideInvalidInput")
     void Given_InvalidInput_When_New_Then_RuntimeException(String input) {
-        assertThatThrownBy(() -> new InputParser(input))
+        assertThatThrownBy(() -> new Input(input))
                 .isInstanceOf(RuntimeException.class);
     }
 
