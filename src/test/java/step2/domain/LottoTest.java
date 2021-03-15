@@ -82,6 +82,20 @@ class LottoTest {
         assertThat(countOfMatch).isEqualTo(0);
     }
 
+    @DisplayName("보너스 볼을 맞췄을 경우")
+    @Test
+    void match_Bonus() {
+        //given
+        Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
+        LottoNumber BonusNumber = new LottoNumber(6);
+
+        //when
+        boolean matchBonus = lotto.matchBonus(BonusNumber);
+
+        //then
+        assertThat(matchBonus).isTrue();
+    }
+
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
     }
