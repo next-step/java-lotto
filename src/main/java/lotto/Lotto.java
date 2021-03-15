@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -31,9 +30,9 @@ public class Lotto {
 
     public int matches(List<Integer> winningNumbers) {
         Collections.sort(winningNumbers);
-        long m = winningNumbers.stream()
+        long numberOfMatches = winningNumbers.stream()
                 .filter(winningNumber -> numbers.contains(winningNumber))
                 .count();
-        return (int) m;
+        return (int) numberOfMatches;
     }
 }
