@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import lotto.dto.LotteryTicketDto;
+import lotto.dto.LotteryTicketListDto;
+import lotto.dto.ManualLotteryNumberListDto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LotteryTicketList {
 
     private final List<LotteryTicket> list = new ArrayList<>();
 
-    public List<LotteryTicketDto> getTicketList() {
-        return list.stream().map(LotteryTicketDto::new)
-                .collect(Collectors.toList());
+    public LotteryTicketListDto getTicketList() {
+        return new LotteryTicketListDto(list);
     }
 
     public void setLotteryPrize(WinningLotteryTicket lastWinningTicket) {
@@ -37,5 +36,11 @@ public class LotteryTicketList {
         return list.stream()
                 .mapToInt(LotteryTicket::getPrice)
                 .sum();
+    }
+
+    public void addManualBulk(List<ManualLotteryNumberListDto> listOfManualLotteryNumberList, int price) {
+        for (ManualLotteryNumberListDto manualLotteryNumberListDto : listOfManualLotteryNumberList) {
+            add(manualLotteryNumberListDto.getList(), price);
+        }
     }
 }

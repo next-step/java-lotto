@@ -2,8 +2,14 @@ package lotto;
 
 import lotto.domain.LotterySeller;
 import lotto.domain.LotteryTicketList;
+import lotto.dto.LotteryPurchaseRequest;
+import lotto.dto.LotteryTicketListDto;
+import lotto.dto.ManualLotteryNumberListDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,11 +20,19 @@ public class LotterySellerTest {
     void buy() {
         int amountOfMoneyToBuyTicket = 18000;
         int lotteryTicketPrice = 1000;
-        int expectedNumberOfLotteryTickets = amountOfMoneyToBuyTicket / lotteryTicketPrice;
+        int expectedNumberOfAutoLotteryTickets = amountOfMoneyToBuyTicket / lotteryTicketPrice;
+        List<ManualLotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new ManualLotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new ManualLotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
 
-        LotterySeller lotterySeller = new LotterySeller();
-        LotteryTicketList lotteryTicketList = lotterySeller.buy(amountOfMoneyToBuyTicket);
+        LotteryPurchaseRequest lotteryPurchaseRequest = new LotteryPurchaseRequest(amountOfMoneyToBuyTicket, listOfManualLotteryNumberList);
+        LotteryTicketList lotteryTicketList = LotterySeller.purchase(lotteryPurchaseRequest);
+        LotteryTicketListDto ticketList = lotteryTicketList.getTicketList();
 
-        assertThat(lotteryTicketList.getTicketList().size()).isEqualTo(expectedNumberOfLotteryTickets);
+        assertThat(ticketList.totalSize())
+                .isEqualTo(expectedNumberOfAutoLotteryTickets + listOfManualLotteryNumberList.size());
+        assertThat(ticketList.autoSize())
+                .isEqualTo(expectedNumberOfAutoLotteryTickets);
+        assertThat(ticketList.manualSize())
+                .isEqualTo(listOfManualLotteryNumberList.size());
     }
 }

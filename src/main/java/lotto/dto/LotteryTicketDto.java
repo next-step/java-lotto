@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.LotteryCreatedType;
 import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicket;
 
@@ -13,10 +14,13 @@ public class LotteryTicketDto {
 
     private LotteryPrize lotteryPrize;
 
+    private LotteryCreatedType createdType;
+
     public LotteryTicketDto(LotteryTicket lottoTicket) {
         this.numbers = lottoTicket.getLottoNumberList();
         this.price = lottoTicket.getPrice();
         this.lotteryPrize = lottoTicket.getLotteryPrize();
+        this.createdType = lottoTicket.getCreatedType();
     }
 
     public List<Integer> getNumbers() {
@@ -25,5 +29,13 @@ public class LotteryTicketDto {
 
     public LotteryPrize getLotteryPrize() {
         return lotteryPrize;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public LotteryCreatedType getCreatedType() {
+        return createdType;
     }
 }
