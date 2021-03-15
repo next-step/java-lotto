@@ -81,6 +81,16 @@ class LottoMachineTest {
                 .hasMessageMatching("당첨번호가 6개가 아닙니다.");
     }
 
+    @DisplayName("보너스볼과 매칭한 결과들을 반환한다.")
+    @Test
+    void getMatchOfBonus() {
+        LottoMachine lottoMachine = new LottoMachine(createLottos());
+        List<Boolean> resultMatchList = lottoMachine.getMatchOfBonus(new LottoNumber(6));
+
+        assertThat(resultMatchList.get(0)).isTrue();
+        assertThat(resultMatchList.get(1)).isFalse();
+    }
+
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
     }
