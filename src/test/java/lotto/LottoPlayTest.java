@@ -39,26 +39,26 @@ class LottoPlayTest {
         }
 
         LottoPlay lottoPlay = new LottoPlay();
-        assertThat(lottoPlay.getWinningNumbers(lottoNumber, winningNumbers)).isEqualTo(countWinnings);
+        assertThat(lottoPlay.getMatchNumbers(lottoNumber, winningNumbers)).isEqualTo(countWinnings);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     @DisplayName("당첨 개수의 따라 금액이 달라진다.")
-    void decisionMoneyByWinningNumbers(int countWinnings, int amount) {
-        assertThat(Amount.getWinningMoney(countWinnings)).isEqualTo(amount);
+    void decisionMoneyByWinningNumbers(int matchNumbers, int amount) {
+        assertThat(Amount.getWinningMoney(matchNumbers)).isEqualTo(amount);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000,2:10000", "1500000,1:1500000"}, delimiter = ':')
+    @CsvSource(value = {"3,4:55000", "3,5:1505000"}, delimiter = ':')
     @DisplayName("당첨된 금액의 총 합을 구할 수 있다.")
     void canSumWinningAmount(String input, int totalAmount) {
-        String[] winningInformation = input.split(",");
+        String[] matchNumbers = input.split(",");
 
-        Map<Integer, Integer> winning = new HashMap<>();
-        winning.put(Integer.parseInt(winningInformation[0]), Integer.parseInt(winningInformation[1]));
+        Winning winnings = new Winning();
+        winnings.record(Integer.parseInt(matchNumbers[0]));
+        winnings.record(Integer.parseInt(matchNumbers[1]));
 
-        Winning winnings = new Winning(winning);
         assertThat(winnings.getSumAmount()).isEqualTo(totalAmount);
     }
 
