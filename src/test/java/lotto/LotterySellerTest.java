@@ -4,6 +4,7 @@ import lotto.domain.LotterySeller;
 import lotto.domain.LotteryTicketList;
 import lotto.dto.LotteryPurchaseRequest;
 import lotto.dto.LotteryTicketListDto;
+import lotto.dto.LotteryNumberListDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,8 @@ public class LotterySellerTest {
         int amountOfMoneyToBuyTicket = 18000;
         int lotteryTicketPrice = 1000;
         int expectedNumberOfAutoLotteryTickets = amountOfMoneyToBuyTicket / lotteryTicketPrice;
-        List<List<Integer>> listOfManualLotteryNumberList = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(12, 14,15, 17, 18, 19));
+        List<LotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new LotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
 
         LotteryPurchaseRequest lotteryPurchaseRequest = new LotteryPurchaseRequest(amountOfMoneyToBuyTicket, listOfManualLotteryNumberList);
         LotteryTicketList lotteryTicketList = LotterySeller.purchase(lotteryPurchaseRequest);

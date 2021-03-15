@@ -6,18 +6,19 @@ public class LotteryPurchaseRequest {
 
     private int amountOfMoney;
 
-    private List<List<Integer>> listOfManualLotteryNumberList;
+    private List<LotteryNumberListDto> listOfManualLotteryNumberListDto;
 
-    public LotteryPurchaseRequest(int amountOfMoney, List<List<Integer>> listOfManualLotteryNumberList) {
+    public LotteryPurchaseRequest(int amountOfMoney, List<LotteryNumberListDto> listOfManualLotteryNumberListDto) {
         this.amountOfMoney = amountOfMoney;
-        this.listOfManualLotteryNumberList = listOfManualLotteryNumberList;
+        this.listOfManualLotteryNumberListDto = listOfManualLotteryNumberListDto;
     }
 
-    public List<List<Integer>> getListOfManualLotteryNumberList() {
-        return listOfManualLotteryNumberList;
+    public int countOfPurchasableTickets(int lotteryTicketPrice) {
+        return amountOfMoney / lotteryTicketPrice;
     }
 
-    public int getAmountOfMoney() {
-        return amountOfMoney;
+    public List<LotteryNumberListDto> getListOfManualLotteryNumberList() {
+        return listOfManualLotteryNumberListDto;
     }
+
 }

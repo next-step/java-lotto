@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.LotteryTicketListDto;
+import lotto.dto.LotteryNumberListDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,9 @@ public class LotteryTicketList {
                 .sum();
     }
 
-    public void addManualBulk(List<List<Integer>> listOfManualLotteryNumberList, int price) {
-        for (List<Integer> lotteryNumberList : listOfManualLotteryNumberList) {
-            add(lotteryNumberList, price);
+    public void addManualBulk(List<LotteryNumberListDto> listOfManualLotteryNumberList, int price) {
+        for (LotteryNumberListDto lotteryNumberListDto : listOfManualLotteryNumberList) {
+            add(lotteryNumberListDto.getList(), price);
         }
     }
 }

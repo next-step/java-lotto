@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.dto.LotteryPurchaseRequest;
+import lotto.dto.LotteryNumberListDto;
 import lotto.dto.WinningLotteryNumbersRequest;
 
 import java.util.ArrayList;
@@ -30,12 +31,12 @@ public class InputView {
         }
     }
 
-    private static List<List<Integer>> getListOfManualLotteryNumberList() {
+    private static List<LotteryNumberListDto> getListOfManualLotteryNumberList() {
         int manualLotteryCount = getManualLotteryCount();
-        List<List<Integer>> list = new ArrayList<>();
+        List<LotteryNumberListDto> list = new ArrayList<>();
         System.out.println(MessageConstant.MANUAL_LOTTERY_NUMBER_INPUT);
         for (int i = 0; i < manualLotteryCount; i++) {
-            list.add(getManualLotteryNumberList());
+            list.add(new LotteryNumberListDto(getLotteryNumberList()));
         }
         return list;
     }
@@ -51,24 +52,7 @@ public class InputView {
         }
     }
 
-    private static List<Integer> getManualLotteryNumberList() {
-        String[] numberListInString = SCANNER.nextLine().trim().split(LOTTERY_NUMBER_SEPARATOR);
-        try {
-            return Arrays.stream(numberListInString)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException ex) {
-            printWrongInputMessage();
-            return getWinningLotteryNumberList();
-        }
-    }
-
-    public static WinningLotteryNumbersRequest getWinningLotteryNumberInput() {
-        return new WinningLotteryNumbersRequest(getWinningLotteryNumberList(), getBonusNumber());
-    }
-
-    private static List<Integer> getWinningLotteryNumberList() {
-        System.out.println(MessageConstant.LAST_WINNING_LOTTERY_NUMBER_INPUT);
+    private static List<Integer> getLotteryNumberList() {
         String[] numberListInString = SCANNER.nextLine()
                 .trim().split(LOTTERY_NUMBER_SEPARATOR);
         try {
@@ -77,8 +61,16 @@ public class InputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException ex) {
             printWrongInputMessage();
-            return getWinningLotteryNumberList();
+            return getLotteryNumberList();
         }
+    }
+    public static WinningLotteryNumbersRequest getWinningLotteryNumberInput() {
+        return new WinningLotteryNumbersRequest(getWinningLotteryNumberList(), getBonusNumber());
+    }
+
+    private static List<Integer> getWinningLotteryNumberList() {
+        System.out.println(MessageConstant.LAST_WINNING_LOTTERY_NUMBER_INPUT);
+        return getLotteryNumberList();
     }
 
     private static int getBonusNumber() {
