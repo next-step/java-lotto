@@ -39,6 +39,11 @@ public class LottoView {
         return scanner.nextLine();
     }
 
+    public int inputBonusInput() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
     public void finish(LottoStatisticsDto lottoStatisticsDto) {
         List<Integer> rankList = lottoStatisticsDto.getRankList();
         List<Integer> winningMoney = lottoStatisticsDto.getWinningMoney();
