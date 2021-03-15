@@ -38,6 +38,7 @@ public class LottoMachine {
         return lottos.getRankOfLotto(winNumber);
     }
 
+
     public List<LottoNumber> toLottoNumberList(String winNumber) {
         String[] stringNumbers = winNumber.split(",");
         valid(stringNumbers);
@@ -59,5 +60,7 @@ public class LottoMachine {
         }
     }
 
-
+    public List<Boolean> getMatchOfBonus(LottoNumber lottoNumber) {
+        return lottos.matchOfBonus(lottoNumber);
+    }
 }
