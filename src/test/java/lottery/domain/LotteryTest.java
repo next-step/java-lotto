@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,7 +34,8 @@ class LotteryTest {
         winningLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
-    @ParameterizedTest(name = "당첨 번호와 비교한 뒤, 로또 등수를 반환한다. 번호: {0}, 예상 등수: {1}")
+    @ParameterizedTest(name = "번호: {0}, 예상 등수: {1}")
+    @DisplayName("당첨 번호와 비교한 뒤, 로또 등수를 반환한다.")
     @MethodSource("generateTestCase")
     void getPrizeAfterComparingLotteries(List<Integer> numbers, Prize expected) {
         Lottery lottery = new Lottery(numbers);

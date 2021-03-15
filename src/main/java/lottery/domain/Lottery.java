@@ -1,8 +1,11 @@
 package lottery.domain;
 
+import lottery.dto.ReadonlyLottery;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Lottery {
+public class Lottery implements ReadonlyLottery {
 
     private final List<Integer> numbers;
 
@@ -19,6 +22,10 @@ public class Lottery {
         return Prize.getPrize(matchedNumbers);
     }
 
+    @Override
+    public List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
 }
 
 
