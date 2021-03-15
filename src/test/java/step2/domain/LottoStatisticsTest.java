@@ -44,16 +44,18 @@ class LottoStatisticsTest {
     void matchOfLotto_계산() {
         //given
         int paymentMoney = 1000;
-        List<Integer> matchResult = List.of(4, 0, 0);
+        List<Integer> matchResult = List.of(5, 5, 6, 6, 4, 4);
         LottoStatistics lottoStatistics = new LottoStatistics(paymentMoney, matchResult);
+        List<Boolean> matchOfBonus = List.of(true, false, true, false, true, false);
 
         //when
-        Map<Integer, List<Rank>> matchGroup = lottoStatistics.statistics(matchResult);
+        Map<Integer, List<Rank>> matchGroup = lottoStatistics.statistics(matchResult, matchOfBonus);
 
         //then
-        assertThat(matchGroup.get(0).size()).isEqualTo(2);
-        assertThat(matchGroup.get(6).size()).isEqualTo(0);
-        assertThat(matchGroup.get(4).size()).isEqualTo(1);
+        assertThat(matchGroup.get(2_000_000_000).size()).isEqualTo(2);
+        assertThat(matchGroup.get(30_000_000).size()).isEqualTo(1);
+        assertThat(matchGroup.get(1_500_000).size()).isEqualTo(1);
+        assertThat(matchGroup.get(50_000).size()).isEqualTo(2);
     }
 
 }

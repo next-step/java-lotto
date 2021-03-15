@@ -46,9 +46,9 @@ public class LottoController {
 
     public void finishView(int money) {
         List<Integer> rankOfLottos = lottoMachine.getRankOfLottos(inputWinNumber());
-        int bonusNumber = lottoView.inputBonusInput();
+        List<Boolean> matchOfBonus = lottoMachine.getMatchOfBonus(new LottoNumber(lottoView.inputBonusInput()));
         lottoStatistics = new LottoStatistics(money, rankOfLottos);
-        Map<Integer, List<Rank>> statistics = lottoStatistics.statistics(rankOfLottos);
+        Map<Integer, List<Rank>> statistics = lottoStatistics.statistics(rankOfLottos, matchOfBonus);
         lottoView.finish(createStatisticsDto(statistics, lottoStatistics.getStringEarningRate()));
     }
 
