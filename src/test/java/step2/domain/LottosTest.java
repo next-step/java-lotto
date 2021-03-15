@@ -62,6 +62,18 @@ class LottosTest {
         assertThat(lottoDtoList.get(0).getLottoNumbers()).contains(1, 2, 3, 4, 5, 6);
     }
 
+    @DisplayName("보유하고 있는 로또와 보너스 볼과 매칭 테스트")
+    @Test
+    void matchOfBonus() {
+        LottoNumber bonusNumber = new LottoNumber(6);
+        Lottos lottos = createLottos();
+
+        List<Boolean> resultMatchList = lottos.matchOfBonus(bonusNumber);
+
+        assertThat(resultMatchList.get(0)).isTrue();
+        assertThat(resultMatchList.get(1)).isFalse();
+    }
+
     Lottos createLottos() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
