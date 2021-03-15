@@ -1,6 +1,4 @@
-package lotto;
-
-import java.util.Arrays;
+package lotto.domain;
 
 public enum Amount {
 
