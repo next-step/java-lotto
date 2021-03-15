@@ -35,4 +35,16 @@ public class LottoPlay {
 
         return lottoNumber;
     }
+
+    public int getWinningNumbers(List<Integer> lottoNumber, int[] winningNumbers) {
+        int countWinnings = 0;
+
+        for (int winningNumber : winningNumbers) {
+            if (lottoNumber.contains(winningNumber)) {
+                countWinnings++;
+            }
+        }
+
+        return countWinnings;
+    }
 }
