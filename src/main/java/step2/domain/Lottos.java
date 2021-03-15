@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Lottos {
 
@@ -43,5 +44,11 @@ public class Lottos {
         return lottoList.stream()
                 .map(lotto -> lotto.match(winNumber))
                 .collect(toList());
+    }
+
+
+    public List<Boolean> matchOfBonus(LottoNumber bonusNumber) {
+        return lottoList.stream()
+                .map(lotto -> lotto.matchBonus(bonusNumber)).collect(toUnmodifiableList());
     }
 }
