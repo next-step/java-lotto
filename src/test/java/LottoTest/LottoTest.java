@@ -34,7 +34,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(fixedLottoGenerator);
 
         //then
-        assertThat(lotto).isEqualTo(new Lotto(fixedLottoGenerator.getNumbers()));
+        assertThat(lotto).isEqualTo(new Lotto(fixedLottoGenerator.generate()));
     }
 
     @ParameterizedTest

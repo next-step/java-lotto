@@ -3,5 +3,5 @@ package lotto;
 import java.util.List;
 
 public interface LottoGenerator {
-    List<Integer> getNumbers();
+    List<Integer> generate();
 }

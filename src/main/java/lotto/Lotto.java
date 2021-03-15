@@ -13,7 +13,7 @@ public class Lotto {
     }
 
     public Lotto(LottoGenerator lottoGenerator) {
-        this.numbers = lottoGenerator.getNumbers();
+        this.numbers = lottoGenerator.generate();
         Collections.sort(this.numbers);
     }
 
@@ -37,6 +37,4 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
-
-
 }

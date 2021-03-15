@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FixedLottoGenerator implements LottoGenerator {
     @Override
-    public List<Integer> getNumbers() {
+    public List<Integer> generate() {
         return Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 }
