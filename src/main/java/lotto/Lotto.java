@@ -15,6 +15,14 @@ public class Lotto {
         Collections.sort(this.numbers);
     }
 
+    public int matches(List<Integer> winningNumbers) {
+        Collections.sort(winningNumbers);
+        long numberOfMatches = winningNumbers.stream()
+                .filter(winningNumber -> numbers.contains(winningNumber))
+                .count();
+        return (int) numberOfMatches;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,11 +36,5 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public int matches(List<Integer> winningNumbers) {
-        Collections.sort(winningNumbers);
-        long numberOfMatches = winningNumbers.stream()
-                .filter(winningNumber -> numbers.contains(winningNumber))
-                .count();
-        return (int) numberOfMatches;
-    }
+
 }
