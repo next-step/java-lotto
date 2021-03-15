@@ -1,5 +1,7 @@
-import util.Tokenizer;
-import util.Validator;
+package stringcalculator;
+
+import stringcalculator.util.Tokenizer;
+import stringcalculator.util.Validator;
 
 import java.util.Arrays;
 

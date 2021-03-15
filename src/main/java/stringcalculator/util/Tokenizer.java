@@ -1,4 +1,4 @@
-package util;
+package stringcalculator.util;
 
 public class Tokenizer {
     String rawStrings;
