@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryTicketList;
 import lotto.domain.WinningLotteryTicket;
-import lotto.dto.LotteryNumberListDto;
+import lotto.dto.ManualLotteryNumberListDto;
 import lotto.dto.LotteryTicketListDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,8 +32,8 @@ public class LotteryTicketListTest {
     @DisplayName("로또티켓리스트 수동생성 테스트")
     void create_manual() {
         int pricePerTicket = 1200;
-        List<LotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new LotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
+        List<ManualLotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new ManualLotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new ManualLotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
 
         LotteryTicketList lottoTicketList = new LotteryTicketList();
         lottoTicketList.addManualBulk(listOfManualLotteryNumberList,pricePerTicket);
@@ -45,8 +45,8 @@ public class LotteryTicketListTest {
     @DisplayName("로또티켓리스트 자동수동생성 테스트")
     void create_mixed() {
         int pricePerTicket = 1200;
-        List<LotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new LotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
+        List<ManualLotteryNumberListDto> listOfManualLotteryNumberList = Arrays.asList(new ManualLotteryNumberListDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new ManualLotteryNumberListDto(Arrays.asList(12, 14,15, 17, 18, 19)));
         int numberOfAutoTickets = 15;
 
         LotteryTicketList lottoTicketList = new LotteryTicketList();

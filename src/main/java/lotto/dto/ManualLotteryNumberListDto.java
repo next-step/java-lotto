@@ -2,11 +2,11 @@ package lotto.dto;
 
 import java.util.List;
 
-public class LotteryNumberListDto {
+public class ManualLotteryNumberListDto {
 
     private List<Integer> list;
 
-    public LotteryNumberListDto(List<Integer> list) {
+    public ManualLotteryNumberListDto(List<Integer> list) {
         this.list = list;
     }
 

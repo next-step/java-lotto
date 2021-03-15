@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.LotteryPurchaseRequest;
-import lotto.dto.LotteryNumberListDto;
+import lotto.dto.ManualLotteryNumberListDto;
 import lotto.dto.WinningLotteryNumbersRequest;
 
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ public class InputView {
         }
     }
 
-    private static List<LotteryNumberListDto> getListOfManualLotteryNumberList() {
+    private static List<ManualLotteryNumberListDto> getListOfManualLotteryNumberList() {
         int manualLotteryCount = getManualLotteryCount();
-        List<LotteryNumberListDto> list = new ArrayList<>();
+        List<ManualLotteryNumberListDto> list = new ArrayList<>();
         System.out.println(MessageConstant.MANUAL_LOTTERY_NUMBER_INPUT);
         for (int i = 0; i < manualLotteryCount; i++) {
-            list.add(new LotteryNumberListDto(getLotteryNumberList()));
+            list.add(new ManualLotteryNumberListDto(getLotteryNumberList()));
         }
         return list;
     }
