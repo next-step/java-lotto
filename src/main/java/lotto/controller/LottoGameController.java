@@ -34,11 +34,14 @@ public class LottoGameController {
                 = lottoList.makeMatchingCount(lastWeekWinningLotto);
 
         drawLottoStatics(lottoStatistics);
-        drawLottoEarningRate(lottoStatistics.calculate(purchasePrice));
+
+        double yield = lottoStatistics.calculate(purchasePrice);
+
+        drawLottoEarningRate(yield,lottoStatistics.isBenefit(yield));
     }
 
-    private void drawLottoEarningRate(double earningRate) {
-        resultView.printLottoEarningRate(earningRate);
+    private void drawLottoEarningRate(double earningRate,boolean isBenefit) {
+        resultView.printLottoEarningRate(earningRate,isBenefit);
     }
 
     private Lotto drawWinningLotto() {

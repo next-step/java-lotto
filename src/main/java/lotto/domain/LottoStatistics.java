@@ -54,7 +54,16 @@ public class LottoStatistics {
                 .doubleValue();
     }
 
+
+
     public Map<LottoRank, Integer> getlottoStaticResultMap() {
         return lottoStaticResult;
+    }
+
+    public boolean isBenefit(double yield) {
+        if(yield < 1) {
+            return false;
+        }
+        return true;
     }
 }

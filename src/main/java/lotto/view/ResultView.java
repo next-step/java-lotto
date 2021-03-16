@@ -18,15 +18,10 @@ public class ResultView {
         System.out.println(lottoStatistics.toString());
     }
 
-    public void printLottoEarningRate(double earningRate) {
+    public void printLottoEarningRate(double earningRate, boolean isBenefit) {
+        String isBenefitOrLoss = (isBenefit) ? "이득" : "손해";
         System.out.println("총 수익률은 " + earningRate
-                + "입니다.(기준이 1이기 때문에 결과적으로 " + getResult(earningRate)+"란 얘기임)");
+                + "입니다.(기준이 1이기 때문에 결과적으로 " + isBenefitOrLoss +"란 얘기임)");
     }
 
-    private String getResult(double earningRate) {
-        if(earningRate < 1) {
-            return "손해";
-        }
-        return "이득";
-    }
 }
