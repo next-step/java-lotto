@@ -17,6 +17,7 @@ public class ResultView {
     public void printBuyLottos(Lottos lottos) {
         List<Lotto> lotteries = lottos.getLotteries();
         lotteries.forEach(System.out::println);
+        System.out.println();
     }
 
     public void printStatics(RequestWinningNumber winningNumber, Lottos lottoGame) {
