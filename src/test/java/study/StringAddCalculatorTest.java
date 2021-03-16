@@ -1,11 +1,9 @@
 package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -47,4 +45,5 @@ public class StringAddCalculatorTest {
 
         assertThat(result).containsExactly("1", "2", "3");
     }
+
 }
