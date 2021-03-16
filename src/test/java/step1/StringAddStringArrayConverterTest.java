@@ -6,7 +6,7 @@ import step1.controller.StringAddCalculator;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StringAddTextsConverterTest {
+class StringAddStringArrayConverterTest {
     
     @Test
     void splitAndSum_null_또는_빈문자() {

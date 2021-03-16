@@ -4,28 +4,28 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 
-public enum TextsConverter {
+public enum StringArrayConverter {
 
-    CUSTOM(true, TextsConverter::customConverter),
-    NORMAL(false,(matcher, text) -> {
+    CUSTOM_DELEMETER(true, StringArrayConverter::customConverter),
+    NORMAL_DELEMETER(false,(matcher, text) -> {
         return text.split(",|:");
     });
 
     public static final int FIRST = 1;
     public static final int SECOND = 2;
 
-    private final boolean isCustom;
+    private final boolean isCustomDelemeter;
     private final BiFunction<Matcher, String, String[]> texts;
 
 
-    TextsConverter(boolean isCustom, BiFunction<Matcher, String, String[]> texts) {
-        this.isCustom = isCustom;
+    StringArrayConverter(boolean isCustomDelemeter, BiFunction<Matcher, String, String[]> texts) {
+        this.isCustomDelemeter = isCustomDelemeter;
         this.texts = texts;
     }
 
-    public static TextsConverter of(boolean isCustom) {
-        return Arrays.stream(TextsConverter.values())
-                .filter(textsConverter -> textsConverter.isCustom == isCustom)
+    public static StringArrayConverter of(boolean isCustomDelemeter) {
+        return Arrays.stream(StringArrayConverter.values())
+                .filter(textToTextsConverter -> textToTextsConverter.isCustomDelemeter == isCustomDelemeter)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 입력값입니다."));
     }

@@ -23,7 +23,7 @@ public class Texts {
 
     private String[] textToTexts(String text) {
         Matcher matcher = TextMatcher.getMatcher(text);
-        return TextsConverter.of(matcher.find()).getTexts(matcher, text);
+        return StringArrayConverter.of(matcher.find()).getTexts(matcher, text);
     }
 
     public String[] getTexts() {
