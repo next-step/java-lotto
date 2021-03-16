@@ -1,7 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.LottoStatistics;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -17,10 +21,22 @@ public class ResultView {
     public void printLottoCount(int lottoCount) {
         System.out.printf(PRINT_LOTTO_COUNT,lottoCount);
     }
-
+    
     public void printLottoList(LottoList lottoList) {
+        String printLottolist = "";
+        for (Lotto lotto : lottoList.getLottoList()) {
+            printLottolist += "[";
+            printLottolist += printEachLotto(lotto);
+            printLottolist += "]\n";
+        }
+        System.out.println(printLottolist.trim());
+    }
 
-        System.out.println(lottoList.toString());
+    private String printEachLotto(Lotto lotto) {
+        return lotto.getLottoNumberList()
+                .stream()
+                .map(Objects::toString)
+                .collect(Collectors.joining(","));
     }
 
     public void printLottoStatics(LottoStatistics lottoStatistics) {

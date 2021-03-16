@@ -10,11 +10,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
     public static LottoNumber of(int value) {
         return new LottoNumber(value);
     }
@@ -40,5 +35,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int getNumber() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

@@ -13,18 +13,6 @@ public class LottoList {
         this.lottoList = lottoList;
     }
 
-    @Override
-    public String toString() {
-        String lottoListStr = "";
-        for (Lotto lotto : lottoList) {
-            lottoListStr += "[";
-            lottoListStr += lotto.toString();
-            lottoListStr += "]\n";
-        }
-        return lottoListStr.trim();
-    }
-
-
     public LottoStatistics makeMatchingCount(Lotto lastWeekWinningLotto) {
         LottoStatistics lottoStatistics = new LottoStatistics();
         for ( Lotto lotto : lottoList) {
@@ -33,10 +21,13 @@ public class LottoList {
             lottoStatistics.put(rank);
         }
         return lottoStatistics;
-
     }
 
     public int getLottoCount() {
         return lottoList.size();
+    }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
     }
 }

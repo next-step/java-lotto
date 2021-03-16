@@ -24,14 +24,6 @@ public class Lotto {
         return new Lotto(lottoNumberList);
     }
 
-
-    @Override
-    public String toString() {
-        return lottoNumberList.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(DELIMITER));
-    }
-
     public int containsCount(Lotto lastWeekWinningLotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumberList) {
@@ -50,4 +42,9 @@ public class Lotto {
     private boolean contains(LottoNumber lottoNumber) {
         return lottoNumberList.contains(lottoNumber);
     }
+
+    public List<LottoNumber> getLottoNumberList() {
+        return lottoNumberList;
+    }
+
 }
