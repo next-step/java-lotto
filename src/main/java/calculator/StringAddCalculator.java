@@ -16,7 +16,7 @@ public class StringAddCalculator {
 
 
   public int calculate(String input) {
-    String[] numbers = input.split(",");
+    String[] numbers = input.split(",|:");
     int result = 0;
 
     for (int i = 0; i < numbers.length; i++) {
