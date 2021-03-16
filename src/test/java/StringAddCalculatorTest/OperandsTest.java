@@ -1,13 +1,15 @@
 package StringAddCalculatorTest;
 
-import StringAddCalculator.Operand;
-import StringAddCalculator.Operands;
+import stringaddcalculator.Operand;
+import stringaddcalculator.Operands;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class OperandsTest {
     @Test
@@ -28,10 +30,9 @@ public class OperandsTest {
     void Given_StringArray_When_New_Then_InstanceCreated() {
         //given
         String[] stringArray = {"1", "2"};
-        Operands operands = new Operands(stringArray);
 
-        //then
-        //no compile error
+        //when then
+        assertDoesNotThrow(() -> new Operands(stringArray));
     }
 
     @Test

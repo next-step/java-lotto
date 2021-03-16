@@ -1,4 +1,4 @@
-package StringAddCalculator;
+package stringaddcalculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,13 +7,13 @@ public class Input {
     private static final String DEFAULT_DELIMITER = ",";
     private static final String CUSTOM_DELIMITER_PATTERN = "^//(.)\n";
 
-    private String input;
+    private String delimiter;
+    private String numbers;
     private Operands operands;
 
     public Input(String input) {
-        this.input = correctZeroLikeString(input);
-        String delimiter = parseDelimiter();
-        String numbers = parseNumber();
+        input = correctZeroLikeString(input);
+        parse(input);
         this.operands = new Operands(numbers.split(delimiter));
     }
 
@@ -28,19 +28,15 @@ public class Input {
         return input;
     }
 
-    private String parseDelimiter() {
-        String delimiter = DEFAULT_DELIMITER;
+    private void parse(String input) {
+        delimiter = DEFAULT_DELIMITER;
+        numbers = input;
+
         Matcher delimiterMatcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         if (delimiterMatcher.find()) {
             delimiter = delimiterMatcher.group(1);
-            input = deleteCustomDelimiter(delimiterMatcher);
+            numbers = deleteCustomDelimiter(delimiterMatcher);
         }
-        return delimiter;
-    }
-
-    private String parseNumber() {
-        String numbers = input;
-        return numbers;
     }
 
     private String deleteCustomDelimiter(Matcher delimiterMatcher) {

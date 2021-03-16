@@ -1,7 +1,7 @@
 package StringAddCalculatorTest;
 
-import StringAddCalculator.Input;
-import StringAddCalculator.Operands;
+import stringaddcalculator.Input;
+import stringaddcalculator.Operands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

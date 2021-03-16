@@ -1,4 +1,4 @@
-package StringAddCalculator;
+package stringaddcalculator;
 
 import java.util.Objects;
 
@@ -39,7 +39,7 @@ public class Operand {
 
     private void verifyOperand(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException("input은 움수가 될 수 없습니다.");
+            throw new IllegalArgumentException("input은 음수가 될 수 없습니다.");
         }
     }
 }
