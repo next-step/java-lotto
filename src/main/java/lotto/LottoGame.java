@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto {
+public class LottoGame {
     List<Integer> numbers;
 
-    public Lotto(List<Integer> givenLottoNumbers) {
+    public LottoGame(List<Integer> givenLottoNumbers) {
         this.numbers = givenLottoNumbers;
         Collections.sort(this.numbers);
     }
 
-    public Lotto(LottoGenerator lottoGenerator) {
+    public LottoGame(LottoGenerator lottoGenerator) {
         this.numbers = lottoGenerator.generate();
         Collections.sort(this.numbers);
     }
@@ -29,8 +29,8 @@ public class Lotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(numbers, lottoGame.numbers);
     }
 
     @Override
