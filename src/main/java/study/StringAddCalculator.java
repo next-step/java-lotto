@@ -1,13 +1,19 @@
 package study;
 
+import java.util.ArrayDeque;
+
 public class StringAddCalculator {
-    private final Expression expression;
+    private final ArrayDeque<Integer> expression;
 
     public StringAddCalculator(Expression expression) {
-        this.expression = expression;
+        this.expression = expression.convertToQueue();
     }
 
     public int sum() {
-        return 0;
+        int result = 0;
+        while(!expression.isEmpty()) {
+            result += expression.poll();
+        }
+        return result;
     }
 }
