@@ -23,7 +23,7 @@ public class InputValidator {
 
   public static void validateNumber(String input) {
     isCalculableNumber(input);
-    isNegative(input);
+    isNegativeNumber(input);
   }
 
   public static void isCalculableNumber(String input) {
@@ -32,7 +32,7 @@ public class InputValidator {
     }
   }
 
-  public static void isNegative(String input) {
+  public static void isNegativeNumber(String input) {
     if (Integer.parseInt(input) < 0) {
       throw new RuntimeException("양수만 계산할 수 있습니다.");
     }
