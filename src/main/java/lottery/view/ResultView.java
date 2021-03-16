@@ -2,7 +2,6 @@ package lottery.view;
 
 import lottery.domain.Prize;
 import lottery.dto.ReadonlyLottery;
-import lottery.dto.ReadonlyLotteryTicket;
 import lottery.dto.RoundResult;
 
 import java.util.Arrays;
@@ -14,9 +13,7 @@ import static java.util.stream.Collectors.*;
 
 public class ResultView {
 
-    public void printLotteryTicket(ReadonlyLotteryTicket lotteryTicket) {
-        List<ReadonlyLottery> lotteries = lotteryTicket.getLotteries();
-
+    public void printLotteryTicket(List<ReadonlyLottery> lotteries) {
         printMessage(String.format("%d개를 구매했습니다.", lotteries.size()));
         lotteries.forEach(this::printLottery);
     }
