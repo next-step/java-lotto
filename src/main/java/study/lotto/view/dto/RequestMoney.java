@@ -18,6 +18,10 @@ public class RequestMoney {
         totalLottoCount = money / LOTTO_PRICE;
     }
 
+    public int getTotalLottoCount() {
+        return totalLottoCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

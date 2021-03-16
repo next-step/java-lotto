@@ -2,7 +2,6 @@ package study.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -25,6 +24,10 @@ public class Lotto {
                 .collect(toList());
     }
 
+    protected void shuffle() {
+        Collections.shuffle(lotto);
+    }
+
     public List<LottoNumber> getLotto() {
         List<LottoNumber> collect = lotto.stream()
                 .limit(LOTTO_MAX_SIZE)
@@ -32,8 +35,8 @@ public class Lotto {
         return Collections.unmodifiableList(collect);
     }
 
-    protected void shuffle() {
-        Collections.shuffle(lotto);
+    @Override
+    public String toString() {
+        return getLotto().toString();
     }
-
 }

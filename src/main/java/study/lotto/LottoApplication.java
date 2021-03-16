@@ -1,6 +1,7 @@
 package study.lotto;
 
 import study.lotto.controller.LottoGame;
+import study.lotto.service.Lottos;
 import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.InputView;
 import study.lotto.view.dto.RequestWinningNumber;
@@ -15,11 +16,11 @@ public class LottoApplication {
         RequestMoney requestMoney = inputView.requestMoney();
 
         LottoGame lottoGame = new LottoGame();
-        lottoGame.buyLotto(requestMoney);
+        Lottos lottos = lottoGame.buyLotto(requestMoney);
 
         // 중간 보기
         resultView.printBuyCount(requestMoney);
-        resultView.printBuyLottos(lottoGame);
+        resultView.printBuyLottos(lottos);
 
         RequestWinningNumber winningNumber = inputView.requestWinningNumber();
         // 결과 보기
