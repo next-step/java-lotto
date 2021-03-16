@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static lottery.domain.LotteryConstants.LOTTERY_PRICE;
 
@@ -18,11 +19,9 @@ public class LotteryTicketIssuer {
     private LotteryTicketIssuer() {}
 
     public static LotteryTicket issue(int money) {
-        List<Lottery> lotteries = IntStream.range(0, money / LOTTERY_PRICE)
-                                           .mapToObj(i -> generateLottery())
-                                           .collect(Collectors.toList());
-
-        return new LotteryTicket(lotteries);
+        return Stream.generate(LotteryTicketIssuer::generateLottery)
+                     .limit(money / LOTTERY_PRICE)
+                     .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
     }
 
     private static Lottery generateLottery() {

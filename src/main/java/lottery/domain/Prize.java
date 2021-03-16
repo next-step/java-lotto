@@ -10,26 +10,26 @@ public enum Prize {
     FIRST(6, 2_000_000_000),
     ;
 
-    private final int condition;
-    private final int winnings;
+    private final long condition;
+    private final long winnings;
 
-    Prize(int condition, int winnings) {
+    Prize(long condition, long winnings) {
         this.condition = condition;
         this.winnings = winnings;
     }
 
-    public static Prize getPrize(int matchedCount)  {
+    public static Prize getPrize(long matchedCount)  {
         return Arrays.stream(values())
                      .filter(p -> p.condition <= matchedCount)
                      .reduce((last, current) -> current)
                      .orElse(LOSING_TICKET);
     }
 
-    public int getCondition() {
+    public long getCondition() {
         return condition;
     }
 
-    public int getWinnings() {
+    public long getWinnings() {
         return winnings;
     }
 }

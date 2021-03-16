@@ -48,8 +48,8 @@ public class ResultView {
         Arrays.stream(Prize.values())
               .filter(p -> p != Prize.LOSING_TICKET)
               .forEach(prize -> {
-                  int condition = prize.getCondition();
-                  int winnings = prize.getWinnings();
+                  long condition = prize.getCondition();
+                  long winnings = prize.getWinnings();
                   long count = prizeCountMap.getOrDefault(prize, 0L);
 
                   String message = String.format("%d개 일치 (%d원) - %d개", condition, winnings, count);

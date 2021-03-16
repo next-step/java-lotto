@@ -14,6 +14,6 @@ class LotteryTicketIssuerTest {
     void sellLottery(int money, int expected) {
         LotteryTicket lotteryTicket = LotteryTicketIssuer.issue(money);
 
-        assertThat(lotteryTicket.getLotteries().size()).isEqualTo(expected);
+        assertThat(lotteryTicket.getLotteries()).hasSize(expected);
     }
 }

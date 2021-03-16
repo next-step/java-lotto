@@ -14,10 +14,9 @@ public class Lottery implements ReadonlyLottery {
     }
 
     public Prize getPrize(List<Integer> winningNumbers) {
-        int matchedNumbers = numbers.stream()
-                                    .filter(winningNumbers::contains)
-                                    .mapToInt(n -> 1)
-                                    .sum();
+        long matchedNumbers = numbers.stream()
+                                     .filter(winningNumbers::contains)
+                                     .count();
 
         return Prize.getPrize(matchedNumbers);
     }
