@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final String DELIMITER = ",";
     private List<LottoNumber> lottoNumberList;
 
     public Lotto(List<LottoNumber> lottoNumberList) {
@@ -28,7 +29,7 @@ public class Lotto {
     public String toString() {
         return lottoNumberList.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(DELIMITER));
     }
 
     public int containsCount(Lotto lastWeekWinningLotto) {

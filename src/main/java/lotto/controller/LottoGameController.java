@@ -4,9 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
-
 public class LottoGameController {
 
     private InputView inputView;
