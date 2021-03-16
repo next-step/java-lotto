@@ -1,8 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Amount;
+import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
+import lotto.dto.IssueNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,8 +12,8 @@ import java.util.Map;
 
 public class LottoController {
 
-    private InputView inputView;
-    private LottoPlay lottoPlay;
+    private final InputView inputView;
+    private final LottoPlay lottoPlay;
 
     public LottoController(InputView inputView, LottoPlay lottoPlay) {
         this.inputView = inputView;
@@ -26,14 +27,14 @@ public class LottoController {
         
         ResultView resultView = new ResultView();
 
-        Map<Integer, List<Integer>> lottoNumbers = lottoPlay.getLottoNumbers();
+        Map<IssueNumber, List<LottoNumber>> lottoNumbers = lottoPlay.getLottoNumbers();
         resultView.printLottoNumbers(lottoNumbers);
 
-        int[] winningNumber = inputView.inputWinningNumber();
-
+        List<Integer> winningNumber = inputView.inputWinningNumber();
         Winning winning = new Winning();
-        for (Integer integer : lottoNumbers.keySet()) {
-            int matchNumbers = lottoPlay.getMatchNumbers(lottoNumbers.get(integer), winningNumber);
+
+        for (IssueNumber issueNumber : lottoNumbers.keySet()) {
+            int matchNumbers = lottoPlay.getMatchNumbers(lottoNumbers.get(issueNumber), winningNumber);
 
             winning.record(matchNumbers);
         }

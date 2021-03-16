@@ -1,27 +1,28 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Winning {
 
-    Map<Integer, Integer> winning = new HashMap<>();
+    Map<MatchNumber, Count> winning = new LinkedHashMap<>();
 
     public Winning() {
-        winning.put(3, 0);
-        winning.put(4, 0);
-        winning.put(5, 0);
-        winning.put(6, 0);
+        winning.put(new MatchNumber(3), new Count(0));
+        winning.put(new MatchNumber(4), new Count(0));
+        winning.put(new MatchNumber(5), new Count(0));
+        winning.put(new MatchNumber(6), new Count(0));
     }
 
-    public Map<Integer, Integer> getWinning() {
+    public Map<MatchNumber, Count> getWinning() {
         return winning;
     }
 
     public void record(int matchNumbers) {
-        for (Integer integer : winning.keySet()) {
-            if (integer == matchNumbers) {
-                winning.put(matchNumbers, winning.get(integer) + 1);
+        for (MatchNumber matchNumber : winning.keySet()) {
+            if (matchNumber.getMatchNumber() == matchNumbers) {
+                winning.get(matchNumber)
+                        .update();
             }
         }
     }
@@ -29,8 +30,10 @@ public class Winning {
     public int getSumAmount() {
         int sum = 0;
 
-        for (Integer integer : winning.keySet()) {
-            sum += Amount.getWinningMoney(integer) * winning.get(integer);
+        for (MatchNumber matchNumber : winning.keySet()) {
+            sum += Amount.getWinningMoney(matchNumber.getMatchNumber()) *
+                                            winning.get(matchNumber)
+                                                    .getCount();
         }
 
         return sum;

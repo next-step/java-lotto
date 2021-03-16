@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Amount {
 
     THREE(3, 5000),
@@ -8,21 +10,18 @@ public enum Amount {
     SIX(6, 2000000000);
 
     private final int count;
-    private final int amount;
+    private final int price;
 
-    Amount(int count, int amount) {
+    Amount(int count, int price) {
         this.count = count;
-        this.amount = amount;
+        this.price = price;
     }
 
     public static int getWinningMoney(int countWinnings) {
-        Amount[] amounts = values();
-        for (Amount amount : amounts) {
-            if (amount.count == countWinnings) {
-                return amount.amount;
-            }
-        }
-
-        return 0;
+        return Arrays.stream(values())
+                .filter(amount -> amount.count == countWinnings)
+                .map(amount -> amount.price)
+                .findFirst()
+                .orElse(0);
     }
 }

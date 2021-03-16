@@ -1,18 +1,25 @@
 package lotto.view;
 
 import lotto.domain.Amount;
+import lotto.domain.MatchNumber;
+import lotto.dto.LottoNumber;
 import lotto.domain.Winning;
+import lotto.dto.IssueNumber;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printLottoNumbers(Map<Integer, List<Integer>> lottoNumbers) {
+    public void printLottoNumbers(Map<IssueNumber, List<LottoNumber>> lottoNumbers) {
         System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
 
-        for (Integer integer : lottoNumbers.keySet()) {
-            System.out.println(lottoNumbers.get(integer));
+        for (IssueNumber issueNumber : lottoNumbers.keySet()) {
+            System.out.println(lottoNumbers.get(issueNumber)
+                    .stream()
+                    .map(LottoNumber::getLottoNumber)
+                    .collect(Collectors.toList()));
         }
 
         System.out.println();
@@ -23,8 +30,12 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Integer integer : winning.getWinning().keySet()) {
-            System.out.println(integer + "개 일치 (" + Amount.getWinningMoney(integer) + "원)-" + winning.getWinning().get(integer) + "개");
+        for (MatchNumber matchNumber : winning.getWinning().keySet()) {
+            System.out.println(matchNumber.getMatchNumber() + "개 일치 (" +
+                    Amount.getWinningMoney(matchNumber.getMatchNumber()) + "원)-" +
+                    winning.getWinning()
+                            .get(matchNumber)
+                            .getCount() + "개");
         }
 
         int totalAmount = winning.getSumAmount();
