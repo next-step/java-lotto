@@ -20,7 +20,7 @@ class PaperTicketTest {
     @Test
     @DisplayName("티켓들에 숫자가 입력되었는가")
     void name() {
-        assertThat(paperTicket.generateTickes(4).get(0)).isNotEmpty();
+        assertThat(paperTicket.generateTickes(4).get(0).getLottoNumbers()).isNotEmpty();
     }
 
     @BeforeEach

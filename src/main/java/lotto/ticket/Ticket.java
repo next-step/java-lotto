@@ -1,7 +1,9 @@
 package lotto.ticket;
 
+import lotto.LottoNumbers;
+
 import java.util.List;
 
 public interface Ticket {
-    List<Integer[]> generateTickes(int count);
+    List<LottoNumbers> generateTickes(int count);
 }
