@@ -20,10 +20,14 @@ public class Winning {
 
     public void record(int matchNumbers) {
         for (MatchNumber matchNumber : winning.keySet()) {
-            if (matchNumber.getMatchNumber() == matchNumbers) {
-                winning.get(matchNumber)
-                        .update();
-            }
+            updateCount(matchNumber, matchNumbers);
+        }
+    }
+
+    public void updateCount(MatchNumber matchNumber, int matchNumbers) {
+        if (matchNumber.getMatchNumber() == matchNumbers) {
+            winning.get(matchNumber)
+                    .update();
         }
     }
 
