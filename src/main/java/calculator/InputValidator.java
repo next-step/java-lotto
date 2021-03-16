@@ -17,4 +17,8 @@ public class InputValidator {
     return input == null;
   }
 
+  public static boolean isSingleNumber(String input) {
+    return input.matches("^[0-9]*$");
+  }
+
 }

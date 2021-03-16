@@ -6,6 +6,11 @@ public class StringAddCalculator {
     if (InputValidator.isEmptyOrBlank(input)) {
       return 0;
     }
+
+    if (InputValidator.isSingleNumber(input)) {
+      return Integer.parseInt(input);
+    }
+
     return 1;
   }
 }
