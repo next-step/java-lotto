@@ -74,54 +74,54 @@ class WinTest {
         lottoNumbers.add(lottoNumbers14);
 
         Win win = new Win(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(win.getWinNumbers().get(3)).isEqualTo(1);
-        assertThat(win.getWinNumbers().get(4)).isEqualTo(0);
-        assertThat(win.getWinNumbers().get(5)).isEqualTo(0);
-        assertThat(win.getWinNumbers().get(6)).isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(3)).isEqualTo(1);
+        assertThat(win.getWinNumbers(lottoNumbers).get(4)).isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(5)).isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(6)).isEqualTo(0);
     }
 
     @BeforeEach
     void init() {
-        LottoNumbers lottoNumbers1 = new LottoNumbers(IntStream.of(new int[]{8, 21, 23, 41, 42, 43})
+        lottoNumbers1 = new LottoNumbers(IntStream.of(new int[]{8, 21, 23, 41, 42, 43})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers2 = new LottoNumbers(IntStream.of(new int[]{3, 5, 11, 16, 32, 38})
+        lottoNumbers2 = new LottoNumbers(IntStream.of(new int[]{3, 5, 11, 16, 32, 38})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers3 = new LottoNumbers(IntStream.of(new int[]{7, 11, 16, 35, 36, 44})
+        lottoNumbers3 = new LottoNumbers(IntStream.of(new int[]{7, 11, 16, 35, 36, 44})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers4 = new LottoNumbers(IntStream.of(new int[]{1, 8, 11, 31, 41, 42})
+        lottoNumbers4 = new LottoNumbers(IntStream.of(new int[]{1, 8, 11, 31, 41, 42})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers5 = new LottoNumbers(IntStream.of(new int[]{13, 14, 16, 38, 42, 45})
+        lottoNumbers5 = new LottoNumbers(IntStream.of(new int[]{13, 14, 16, 38, 42, 45})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers6 = new LottoNumbers(IntStream.of(new int[]{7, 11, 30, 40, 42, 43})
+        lottoNumbers6 = new LottoNumbers(IntStream.of(new int[]{7, 11, 30, 40, 42, 43})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers7 = new LottoNumbers(IntStream.of(new int[]{2, 13, 22, 32, 38, 45})
+        lottoNumbers7 = new LottoNumbers(IntStream.of(new int[]{2, 13, 22, 32, 38, 45})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers8 = new LottoNumbers(IntStream.of(new int[]{23, 25, 33, 36, 39, 41})
+        lottoNumbers8 = new LottoNumbers(IntStream.of(new int[]{23, 25, 33, 36, 39, 41})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers9 = new LottoNumbers(IntStream.of(new int[]{1, 3, 5, 14, 22, 45})
+        lottoNumbers9 = new LottoNumbers(IntStream.of(new int[]{1, 3, 5, 14, 22, 45})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers10 = new LottoNumbers(IntStream.of(new int[]{5, 9, 38, 41, 43, 44})
+        lottoNumbers10 = new LottoNumbers(IntStream.of(new int[]{5, 9, 38, 41, 43, 44})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers11 = new LottoNumbers(IntStream.of(new int[]{2, 8, 9, 18, 19, 21})
+        lottoNumbers11 = new LottoNumbers(IntStream.of(new int[]{2, 8, 9, 18, 19, 21})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers12 = new LottoNumbers(IntStream.of(new int[]{13, 14, 18, 21, 23, 35})
+        lottoNumbers12 = new LottoNumbers(IntStream.of(new int[]{13, 14, 18, 21, 23, 35})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers13 = new LottoNumbers(IntStream.of(new int[]{17, 21, 29, 37, 42, 45})
+        lottoNumbers13 = new LottoNumbers(IntStream.of(new int[]{17, 21, 29, 37, 42, 45})
                 .boxed()
                 .collect(Collectors.toList()));
-        LottoNumbers lottoNumbers14 = new LottoNumbers(IntStream.of(new int[]{3, 8, 27, 30, 35, 44})
+        lottoNumbers14 = new LottoNumbers(IntStream.of(new int[]{3, 8, 27, 30, 35, 44})
                 .boxed()
                 .collect(Collectors.toList()));
     }
