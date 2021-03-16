@@ -13,9 +13,9 @@ public class LottoStatisticsDto {
     private final List<Integer> rankList;
     private final List<Integer> winningMoney;
     private final List<Integer> countOfRank;
-    private final String ratioOfReturn;
+    private final double ratioOfReturn;
 
-    public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, String statistics) {
+    public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, double statistics) {
         this.rankList = createRanList();
         this.winningMoney = createWinningMoneyList(ranks);
         this.countOfRank = createCountOfRank(ranks);
@@ -56,7 +56,7 @@ public class LottoStatisticsDto {
         return countOfRank;
     }
 
-    public String getRatioOfReturn() {
+    public double getRatioOfReturn() {
         return ratioOfReturn;
     }
 }

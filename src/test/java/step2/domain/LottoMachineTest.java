@@ -15,28 +15,14 @@ class LottoMachineTest {
     @Test
     void lottoCount() {
         //given
-        LottoMachine lottoMachine = new LottoMachine();
         int money = 13000;
+        LottoMachine lottoMachine = new LottoMachine(money);
 
         //when
-        Lottos lotto = lottoMachine.createLotto(money);
+        Lottos lotto = lottoMachine.createLotto();
 
         //then
         assertThat(lotto.lottoCount()).isEqualTo(13);
-    }
-
-    @DisplayName("지불한 가격이 1000원 단위가 아닐 경우 예외 발생")
-    @Test
-    void moneyVaild() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine();
-        int money = 13500;
-
-        //then
-        assertThatThrownBy(() -> {
-            lottoMachine.createLotto(money);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("1000원 단위로 돈을 지불해주세요");
     }
 
     @DisplayName("로또 매칭 결과 테스트")

@@ -35,7 +35,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findAny()
-                .orElse(Rank.MISS);
+                .orElseGet(() -> Rank.MISS);
     }
 
     public int getCountOfMatch() {

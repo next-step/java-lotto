@@ -46,10 +46,9 @@ public class Lotto {
     }
 
     public int match(List<LottoNumber> winnerNumber) {
-        int countOfMatch = lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .filter(winnerNumber::contains)
                 .map(e -> 1).reduce(0, Integer::sum);
-        return countOfMatch;
     }
 
     public boolean matchBonus(LottoNumber bonusNumber) {

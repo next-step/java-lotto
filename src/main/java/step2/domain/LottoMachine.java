@@ -1,19 +1,25 @@
 package step2.domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int ZERO = 0;
     private static final int WIN_NUMBER_LENGTH = 6;
     private final Lottos lottos;
+    private LottoStatistics lottoStatistics;
+    private Money money;
 
+    //테스트를 위한 생성자
     public LottoMachine() {
         this.lottos = new Lottos();
+    }
+
+    public LottoMachine(int money) {
+        this.lottos = new Lottos();
+        this.money = new Money(money);
     }
 
     //테스트를 위한 생성자
@@ -21,17 +27,12 @@ public class LottoMachine {
         this.lottos = lottos;
     }
 
-    public Lottos createLotto(int money) {
+    public Lottos createLotto() {
         return lottos.createLottoList(getLottoCount(money));
     }
 
-    private int getLottoCount(int money) {
-        if (money % LOTTO_PRICE != ZERO || money == ZERO) {
-            throw new IllegalArgumentException("1000원 단위로 돈을 지불해주세요");
-        }
-        return BigDecimal.valueOf(money)
-                .divide(BigDecimal.valueOf(LOTTO_PRICE))
-                .intValue();
+    private int getLottoCount(Money money) {
+        return money.divideMoneyByPrice();
     }
 
     public List<Integer> getRankOfLottos(List<LottoNumber> winNumber) {
@@ -62,5 +63,15 @@ public class LottoMachine {
 
     public List<Boolean> getMatchOfBonus(LottoNumber lottoNumber) {
         return lottos.matchOfBonus(lottoNumber);
+    }
+
+    public Map<Integer, List<Rank>> statistics(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
+        List<Integer> rankOfLottos = getRankOfLottos(winNumbers);
+        lottoStatistics = new LottoStatistics(rankOfLottos, money);
+        return lottoStatistics.statistics(getMatchOfBonus(bonusNumber));
+    }
+
+    public double getEarningRate() {
+        return lottoStatistics.getEarningRate();
     }
 }
