@@ -1,8 +1,9 @@
-package lotto;
+package lotto.ticket;
 
 import java.util.List;
 
-public class Ticket {
+public class PaperTicket implements Ticket {
+    @Override
     public List<Integer[]> generateTickes(int count) {
         return null;
     }
