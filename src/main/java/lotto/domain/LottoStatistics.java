@@ -26,18 +26,6 @@ public class LottoStatistics {
         }
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (LottoRank rank : lottoStaticResult.keySet()) {
-            sb.append(rank.getMatchingCount()+"개 일치 (");
-            sb.append(rank.getMatchingPrice()+"원) - ");
-            sb.append(lottoStaticResult.get(rank)+"개\n");
-        }
-        return sb.toString().trim();
-    }
-
     private int sum() {
         int sum = 0;
         for (LottoRank rank : lottoStaticResult.keySet()) {

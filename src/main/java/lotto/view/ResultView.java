@@ -1,14 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
-import lotto.domain.LottoStatistics;
+import lotto.domain.*;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
+    private static final String DELIMITER = ",";
     private static final String PRINT_LOTTO_COUNT = "%d개를 구매했습니다.\n";
     private static final String PRINT_LOTTO_STATICS = "당첨 통계";
     private static final String PRINT_DOTTED_LINE = "--------";
@@ -18,10 +17,11 @@ public class ResultView {
             = "총 수익률은 %.2f입니다.(기준은 1이기 때문에 결과적으로 %s란 얘기)\n";
 
 
+
     public void printLottoCount(int lottoCount) {
         System.out.printf(PRINT_LOTTO_COUNT,lottoCount);
     }
-    
+
     public void printLottoList(LottoList lottoList) {
         String printLottolist = "";
         for (Lotto lotto : lottoList.getLottoList()) {
@@ -35,14 +35,23 @@ public class ResultView {
     private String printEachLotto(Lotto lotto) {
         return lotto.getLottoNumberList()
                 .stream()
-                .map(Objects::toString)
-                .collect(Collectors.joining(","));
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(DELIMITER));
     }
 
     public void printLottoStatics(LottoStatistics lottoStatistics) {
-        System.out.println(PRINT_LOTTO_STATICS);
-        System.out.println(PRINT_DOTTED_LINE);
-        System.out.println(lottoStatistics.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(PRINT_LOTTO_STATICS);
+        sb.append(PRINT_DOTTED_LINE);
+
+        lottoStatistics.getlottoStaticResultMap()
+                .forEach((LottoRank rank, Integer count) -> {
+                    sb.append(rank.getMatchingCount()+"개 일치 (");
+                    sb.append(rank.getMatchingPrice()+"원) - ");
+                    sb.append(count+"개\n");
+                });
+
+        System.out.println(sb.toString().trim());
     }
 
     public void printLottoEarningRate(double earningRate, boolean isBenefit) {
