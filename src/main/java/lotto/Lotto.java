@@ -10,9 +10,7 @@ public class Lotto {
         this.lotto = new ArrayList<>();
     }
 
-    protected List<LottoNumbers> pay(int receiveMoney) {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        int count = lottoNumbers.howManyPass(receiveMoney);
+    protected List<LottoNumbers> makeLottoNumbers(int count) {
         for (int i = 0; i < count; i++) {
             lotto.add(new LottoNumbers());
         }
