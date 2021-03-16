@@ -11,6 +11,20 @@ public class StringAddCalculator {
       return Integer.parseInt(input);
     }
 
-    return 1;
+    return calculate(input);
   }
+
+
+  public int calculate(String input) {
+    String[] numbers = input.split(",");
+    int result = 0;
+
+    for (int i = 0; i < numbers.length; i++) {
+      InputValidator.validateNumber(numbers[i]);
+      result += Integer.parseInt(numbers[i]);
+    }
+
+    return result;
+  }
+
 }
