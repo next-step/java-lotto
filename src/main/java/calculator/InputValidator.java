@@ -21,4 +21,20 @@ public class InputValidator {
     return input.matches("^[0-9]*$");
   }
 
+  public static void validateNumber(String input) {
+    isCalculableNumber(input);
+    isNegative(input);
+  }
+
+  public static void isCalculableNumber(String input) {
+    if (!input.matches("^[0-9]*$")) {
+      throw new RuntimeException("양수만 계산할 수 있습니다.");
+    }
+  }
+
+  public static void isNegative(String input) {
+    if (Integer.parseInt(input) < 0) {
+      throw new RuntimeException("양수만 계산할 수 있습니다.");
+    }
+  }
 }
