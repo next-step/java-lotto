@@ -30,11 +30,11 @@ public class StringAddCalculator {
   }
 
   public String[] splitString(String text) {
-    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+    Matcher m = Pattern.compile(Constant.CUSTOM_SPLIT_REGEX_PATTERN).matcher(text);
     if (m.find()) {
       String customDelimiter = m.group(1);
       return m.group(2).split(customDelimiter);
     }
-    return text.split(",|:");
+    return text.split(Constant.BASIC_SPLIT_REGEX);
   }
 }

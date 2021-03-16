@@ -18,7 +18,7 @@ public class InputValidator {
   }
 
   public static boolean isSingleNumber(String input) {
-    return input.matches("^[0-9]*$");
+    return input.matches(Constant.NUMBER_REGEX);
   }
 
   public static void validateNumber(String input) {
@@ -27,7 +27,7 @@ public class InputValidator {
   }
 
   public static void isCalculableNumber(String input) {
-    if (!input.matches("^[0-9]*$")) {
+    if (!input.matches(Constant.NUMBER_REGEX)) {
       throw new RuntimeException("양수만 계산할 수 있습니다.");
     }
   }
