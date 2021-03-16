@@ -19,6 +19,7 @@ public class ResultView {
     }
 
     public void printLottoList(LottoList lottoList) {
+
         System.out.println(lottoList.toString());
     }
 

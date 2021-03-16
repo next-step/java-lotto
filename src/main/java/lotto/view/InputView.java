@@ -17,14 +17,13 @@ public class InputView {
         return new Scanner(System.in).nextInt();
     }
 
-    public Lotto inputWinningLottoNumbers() {
+    public List<Integer> inputWinningLottoNumbers() {
 
         System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
         String winngLottoNumbers = new Scanner(System.in).nextLine();
 
-         return new Lotto(Arrays.stream(winngLottoNumbers.split(DELIMITER))
+        return Arrays.stream(winngLottoNumbers.split(DELIMITER))
                 .map(Integer::valueOf)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }
