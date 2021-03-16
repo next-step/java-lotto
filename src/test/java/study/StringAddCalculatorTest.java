@@ -1,6 +1,7 @@
 package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,9 +60,46 @@ public class StringAddCalculatorTest {
         StringAddCalculator calculator =
                 new StringAddCalculator(new Expression("1", "2", "3"));
 
-        int result = calculator.sum();
+        final int result = calculator.sum();
 
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @DisplayName("숫자 이외의 값을 받을 경우 예외 던짐")
+    @ValueSource(strings = {"//;\\n4;3;후후", "//|\\n1|da|3", "가, 나, 다"})
+    public void sumIfInputValueIsNonNumeric(String inputString) {
+        assertThatThrownBy(() -> {
+
+            StringAddCalculator calculator =
+                    new StringAddCalculator(new InputExpression(inputString).split());
+
+        }).isInstanceOf(RuntimeException.class)
+          .hasMessageContaining("입력 값에는 숫자만 들어갈 수 있습니다.");
+    }
+
+    @ParameterizedTest
+    @DisplayName("음수를 받을 경우 예외 던짐")
+    @ValueSource(strings = {"//;\\n-3;3;4", "//|\\n-3|0|3", "-3, -4, -5"})
+    public void sumIfInputValueIsNegative(String inputString) {
+        assertThatThrownBy(() -> {
+
+            StringAddCalculator calculator =
+                    new StringAddCalculator(new InputExpression(inputString).split());
+
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("음수 값은 들어갈 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("빈칸(\"\")혹은 null일 경우 0으로 취급")
+    public void sumIfInputValueIsBlankOrNull() {
+        StringAddCalculator calculator =
+                new StringAddCalculator(new Expression("3", null, ""));
+
+        final int result = calculator.sum();
+
+        assertThat(result).isEqualTo(3);
     }
 
 }
