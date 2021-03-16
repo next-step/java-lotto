@@ -1,33 +1,42 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class LottoList {
 
-    private List<Lotto> lottoList;
+  private List<Lotto> lottoList;
+  private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
 
-    public LottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
-    }
+  public LottoList(List<Lotto> lottoList) {
+    validateDuplicated(lottoList);
+    this.lottoList = lottoList;
+  }
 
-    public LottoStatistics makeMatchingCount(Lotto lastWeekWinningLotto) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        for ( Lotto lotto : lottoList) {
-            int matchingCount = lotto.containsCount(lastWeekWinningLotto);
-            LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
-            lottoStatistics.put(rank);
-        }
-        return lottoStatistics;
-    }
+  public void validateDuplicated(List<Lotto> lottoList) {
+    boolean isNotDuplicated = lottoList.stream()
+        .allMatch(new HashSet<>()::add);
 
-    public int getLottoCount() {
-        return lottoList.size();
+    if (!isNotDuplicated) {
+      throw new IllegalArgumentException(DUPLICATED_LOTTO);
     }
+  }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+  public LottoStatistics makeMatchingCount(Lotto lastWeekWinningLotto) {
+    LottoStatistics lottoStatistics = new LottoStatistics();
+    for (Lotto lotto : lottoList) {
+      int matchingCount = lotto.containsCount(lastWeekWinningLotto);
+      LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
+      lottoStatistics.put(rank);
     }
+    return lottoStatistics;
+  }
+
+  public int getLottoCount() {
+    return lottoList.size();
+  }
+
+  public List<Lotto> getLottoList() {
+    return lottoList;
+  }
 }

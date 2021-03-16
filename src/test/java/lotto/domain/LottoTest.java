@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
 
-    @Test
-    @DisplayName("지난주 로또와 몇개가 일치하는지")
-    public void containsCountTest() {
-        Lotto lastWeekWinningLotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-        assertEquals(6,lotto.containsCount(lastWeekWinningLotto));
-    }
+  @Test
+  @DisplayName("지난주 로또와 몇개가 일치하는지")
+  public void containsCountTest() {
+    Lotto lastWeekWinningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+    assertEquals(6, lotto.containsCount(lastWeekWinningLotto));
+  }
 }
