@@ -20,7 +20,7 @@ public class Expression {
             return false;
         }
         Expression that = (Expression) o;
-        return expression.containsAll(that.expression);
+        return expression.equals(that.expression);
     }
 
     @Override
