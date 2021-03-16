@@ -1,7 +1,5 @@
 package study;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,26 +11,26 @@ public class InputExpression {
         this.inputString = inputString;
     }
 
-    public List<String> split() {
+    public Expression split() {
         Matcher matcher = InputExpression.customDelimiter.matcher(inputString);
-        while (matcher.find()) {
+        if (matcher.find()) {
             return splitWithCustomDelimiter(matcher);
         }
         return splitWithDefaultDelimiter();
     }
 
-    public List<String> splitWithDefaultDelimiter() {
+    public Expression splitWithDefaultDelimiter() {
         return splitWithDelimiter(inputString, ",|:");
     }
 
-    public List<String> splitWithCustomDelimiter(Matcher matcher) {
+    public Expression splitWithCustomDelimiter(Matcher matcher) {
         return splitWithDelimiter(inputString.replace(matcher.group(0), ""),
                                   Pattern.quote(matcher.group(1)));
     }
 
-    private List<String> splitWithDelimiter(String inputString, String delimiter) {
+    private Expression splitWithDelimiter(String inputString, String delimiter) {
         String[] tokens = inputString.split(delimiter);
-        return Arrays.asList(tokens);
+        return new Expression(tokens);
     }
 
 }

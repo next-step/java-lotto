@@ -2,8 +2,6 @@ package study;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,31 +17,31 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitExpressionWithComma() {
-        List<String> result = new InputExpression("1,2,3").split();
+        Expression result = new InputExpression("1,2,3").split();
 
-        assertThat(result).containsExactly("1", "2", "3");
+        assertThat(result).isEqualTo(new Expression("1", "2", "3"));
     }
 
     @Test
     public void splitExpressionWithColon() {
-        List<String> result = new InputExpression("1:2:3").split();
+        Expression result = new InputExpression("1:2:3").split();
 
-        assertThat(result).containsExactly("1", "2", "3");
+        assertThat(result).isEqualTo(new Expression("1", "2", "3"));
     }
 
     @Test
     public void splitExpressionWithMixed() {
-        List<String> result = new InputExpression("1,2:3").split();
+        Expression result = new InputExpression("1,2:3").split();
 
-        assertThat(result).containsExactly("1", "2", "3");
+        assertThat(result).isEqualTo(new Expression("1", "2", "3"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"//;\\n1;2;3", "//|\\n1|2|3", "//-\\n1-2-3"})
     public void splitExpressionWithCustomDelimiter(String inputString) {
-        List<String> result = new InputExpression(inputString).split();
+        Expression result = new InputExpression(inputString).split();
 
-        assertThat(result).containsExactly("1", "2", "3");
+        assertThat(result).isEqualTo(new Expression("1", "2", "3"));
     }
 
 }
