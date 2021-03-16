@@ -6,26 +6,26 @@ import java.util.regex.Matcher;
 
 public enum StringArrayConverter {
 
-    CUSTOM_DELEMETER(true, StringArrayConverter::customConverter),
-    NORMAL_DELEMETER(false,(matcher, text) -> {
+    CUSTOM_DELIMETER(true, StringArrayConverter::customConverter),
+    NORMAL_DELIMETER(false,(matcher, text) -> {
         return text.split(",|:");
     });
 
     public static final int FIRST = 1;
     public static final int SECOND = 2;
 
-    private final boolean isCustomDelemeter;
+    private final boolean isCustomDelimeter;
     private final BiFunction<Matcher, String, String[]> texts;
 
 
-    StringArrayConverter(boolean isCustomDelemeter, BiFunction<Matcher, String, String[]> texts) {
-        this.isCustomDelemeter = isCustomDelemeter;
+    StringArrayConverter(boolean isCustomDelimeter, BiFunction<Matcher, String, String[]> texts) {
+        this.isCustomDelimeter = isCustomDelimeter;
         this.texts = texts;
     }
 
-    public static StringArrayConverter of(boolean isCustomDelemeter) {
+    public static StringArrayConverter of(boolean isCustomDelimeter) {
         return Arrays.stream(StringArrayConverter.values())
-                .filter(textToTextsConverter -> textToTextsConverter.isCustomDelemeter == isCustomDelemeter)
+                .filter(textToTextsConverter -> textToTextsConverter.isCustomDelimeter == isCustomDelimeter)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 입력값입니다."));
     }
