@@ -1,7 +1,7 @@
 package StringAddCalculatorTest;
 
-import StringAddCalculator.Operand;
-import StringAddCalculator.Operands;
+import stringaddcalculator.Operand;
+import stringaddcalculator.Operands;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

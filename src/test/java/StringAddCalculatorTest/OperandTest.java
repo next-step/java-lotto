@@ -1,6 +1,6 @@
 package StringAddCalculatorTest;
 
-import StringAddCalculator.Operand;
+import stringaddcalculator.Operand;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
