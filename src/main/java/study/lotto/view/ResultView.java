@@ -19,7 +19,7 @@ public class ResultView {
         lotteries.forEach(System.out::println);
     }
 
-    public void printStatics(RequestWinningNumber winningNumber, LottoGame lottoGame) {
+    public void printStatics(RequestWinningNumber winningNumber, Lottos lottoGame) {
 
     }
 }

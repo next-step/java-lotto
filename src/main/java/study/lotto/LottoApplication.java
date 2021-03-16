@@ -24,6 +24,6 @@ public class LottoApplication {
 
         RequestWinningNumber winningNumber = inputView.requestWinningNumber();
         // 결과 보기
-        resultView.printStatics(winningNumber, lottoGame);
+        resultView.printStatics(winningNumber, lottos);
     }
 }
