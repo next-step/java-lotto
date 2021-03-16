@@ -54,11 +54,12 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(new Expression("1", "2", "3"));
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("숫자들을 받으면, 각 숫자들의 합을 반환하기")
-    public void sum() {
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "//;\\n1;2;3", ":2:4:"})
+    public void sum(String inputString) {
         StringAddCalculator calculator =
-                new StringAddCalculator(new Expression("1", "2", "3"));
+                new StringAddCalculator(new InputExpression(inputString).split());
 
         final int result = calculator.sum();
 
