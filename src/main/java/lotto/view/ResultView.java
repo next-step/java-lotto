@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.constant.LottoConstant;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
@@ -8,8 +9,6 @@ import lotto.domain.Rank;
 import java.util.List;
 
 public class ResultView {
-    private static final String RESULT_WINNER_RANK = "당첨 통계";
-    private static final String RESULT_WINNER_LINE = "----------";
 
     public void printLottoTicketInfos(LottoMachine lottoMachine) {
         List<LottoTicket> tickets = lottoMachine.getLottoTickets();
@@ -19,8 +18,8 @@ public class ResultView {
     }
 
     public void printLottoRanksInfos(List<LottoRank> readOnlyLottoRanks, int buyAmount) {
-        System.out.println(RESULT_WINNER_RANK);
-        System.out.println(RESULT_WINNER_LINE);
+        System.out.println(LottoConstant.RESULT_WINNER_RANK);
+        System.out.println(LottoConstant.RESULT_WINNER_LINE);
 
         readOnlyLottoRanks.stream()
                 .forEach(this::printLottoRank);
