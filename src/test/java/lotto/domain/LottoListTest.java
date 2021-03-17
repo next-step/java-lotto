@@ -19,18 +19,19 @@ public class LottoListTest {
     lottos.add(Lotto.of(Arrays.asList(34, 25, 35, 32, 43, 12)));
 
     LottoList lottolist = new LottoList(lottos);
+
     Lotto lastWeekWinningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     LottoStatistics actual = lottolist.makeMatchingCount(lastWeekWinningLotto);
 
-    Map<LottoRank, Integer> expected = new HashMap<>();
-    expected.put(LottoRank.FIRST, 1);
-    expected.put(LottoRank.SECOND, 0);
-    expected.put(LottoRank.THIRD, 0);
-    expected.put(LottoRank.FOURTH, 0);
-    expected.put(LottoRank.ZERO, 0);
+    Map<LottoRank, Integer> expectedMap = new HashMap<>();
+    expectedMap.put(LottoRank.FIRST, 1);
+    expectedMap.put(LottoRank.SECOND, 0);
+    expectedMap.put(LottoRank.THIRD, 0);
+    expectedMap.put(LottoRank.FOURTH, 0);
+    expectedMap.put(LottoRank.ZERO, 0);
 
-    assertEquals(actual.getlottoStaticResultMap(), expected);
+    assertEquals(expectedMap,actual.getlottoStaticResultMap());
   }
 
   @Test

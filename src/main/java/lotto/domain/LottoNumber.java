@@ -20,10 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
   }
 
-  public static LottoNumber of(int value) {
-    return new LottoNumber(value);
-  }
-
 
   @Override
   public boolean equals(Object o) {
