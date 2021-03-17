@@ -13,8 +13,8 @@ public class LottoNumberTest {
   @ValueSource(ints = {-1, 0, 49, 80})
   @DisplayName("1이상 45 이하의 로또 숫자인지 확인")
   public void validateNumber(int input) {
-    assertThatIllegalArgumentException().isThrownBy(() -> {
-      LottoNumber.validateNumber(input);
+    assertThatIllegalArgumentException().isThrownBy(() -> { ;
+      LottoNumber lottoNumber = new LottoNumber(input);
     });
 
   }
