@@ -18,6 +18,7 @@ public class LottoController {
         resultView.printLottoTicketInfos(lottoMachine);
 
         // 당첨 결과 확인
+        String winnerNumbers = inputView.inputWinnerNumber();
 
     }
 }
