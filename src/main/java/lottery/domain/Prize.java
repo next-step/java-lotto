@@ -20,8 +20,8 @@ public enum Prize {
 
     public static Prize getPrize(long matchedCount)  {
         return Arrays.stream(values())
-                     .filter(p -> p.condition <= matchedCount)
-                     .reduce((last, current) -> current)
+                     .filter(p -> p.condition == matchedCount)
+                     .findFirst()
                      .orElse(LOSING_TICKET);
     }
 
