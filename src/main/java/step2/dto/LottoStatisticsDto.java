@@ -2,7 +2,6 @@ package step2.dto;
 
 import step2.domain.Rank;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,35 +12,34 @@ public class LottoStatisticsDto {
 
     private final List<Integer> rankList;
     private final List<Integer> winningMoney;
-    private final List<Integer> countOfRank;
-    private final BigDecimal ratioOfReturn;
+    private final List<Long> countOfRank;
+    private final double ratioOfReturn;
 
-    public LottoStatisticsDto(Map<Integer, List<Rank>> ranks, BigDecimal statistics) {
-        this.rankList = createRanList(ranks);
-        this.winningMoney = createWinningMoneyList();
+    public LottoStatisticsDto(Map<Integer, Long> ranks, double statistics) {
+        this.rankList = createRanList();
+        this.winningMoney = createWinningMoneyList(ranks);
         this.countOfRank = createCountOfRank(ranks);
         this.ratioOfReturn = statistics;
     }
 
-    private List<Integer> createRanList(Map<Integer, List<Rank>> ranks) {
+    private List<Integer> createRanList() {
+        return Arrays.stream(Rank.values())
+                .map(Rank::getCountOfMatch)
+                .filter(money -> money != 0)
+                .sorted()
+                .collect(toList());
+    }
+
+    private List<Integer> createWinningMoneyList(Map<Integer, Long> ranks) {
         return ranks.keySet().stream()
                 .filter(rank -> rank != 0)
                 .sorted()
                 .collect(toList());
     }
 
-    private List<Integer> createWinningMoneyList() {
-        return Arrays.stream(Rank.values())
-                .map(Rank::getWinningMoney)
-                .filter(money -> money != 0)
-                .sorted()
-                .collect(toList());
-    }
-
-    private List<Integer> createCountOfRank(Map<Integer, List<Rank>> ranks) {
-        return rankList.stream()
+    private List<Long> createCountOfRank(Map<Integer, Long> ranks) {
+        return winningMoney.stream()
                 .map(ranks::get)
-                .map(List::size)
                 .collect(toList());
     }
 
@@ -53,11 +51,11 @@ public class LottoStatisticsDto {
         return winningMoney;
     }
 
-    public List<Integer> getCountOfRank() {
+    public List<Long> getCountOfRank() {
         return countOfRank;
     }
 
-    public BigDecimal getRatioOfReturn() {
+    public double getRatioOfReturn() {
         return ratioOfReturn;
     }
 }

@@ -40,12 +40,12 @@ class LottosTest {
         List<LottoNumber> winNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
         //when
-        List<Rank> ranks = lottos.getRankOfLotto(winNumber);
+        List<Integer> rankOfLotto = lottos.getRankOfLotto(winNumber);
 
         //then
-        assertThat(ranks.size()).isEqualTo(4);
-        assertThat(ranks.get(0)).isEqualTo(Rank.FIRST);
-        assertThat(ranks.get(1)).isEqualTo(Rank.SECOND);
+        assertThat(rankOfLotto.size()).isEqualTo(4);
+        assertThat(rankOfLotto.get(0)).isEqualTo(6);
+        assertThat(rankOfLotto.get(1)).isEqualTo(5);
     }
 
     @DisplayName("LottoDto 만들기 테스트")
@@ -60,6 +60,18 @@ class LottosTest {
         //then
         assertThat(lottoDtoList.size()).isEqualTo(4);
         assertThat(lottoDtoList.get(0).getLottoNumbers()).contains(1, 2, 3, 4, 5, 6);
+    }
+
+    @DisplayName("보유하고 있는 로또와 보너스 볼과 매칭 테스트")
+    @Test
+    void matchOfBonus() {
+        LottoNumber bonusNumber = new LottoNumber(6);
+        Lottos lottos = createLottos();
+
+        List<Boolean> resultMatchList = lottos.matchOfBonus(bonusNumber);
+
+        assertThat(resultMatchList.get(0)).isTrue();
+        assertThat(resultMatchList.get(1)).isFalse();
     }
 
     Lottos createLottos() {

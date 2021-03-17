@@ -33,7 +33,7 @@ public class Lotto {
         Collections.shuffle(lottoNumber);
     }
 
-    public List<LottoNumber> pickNumber(List<Integer> lottoNumber) {
+    private List<LottoNumber> pickNumber(List<Integer> lottoNumber) {
         return lottoNumber.stream()
                 .limit(6)
                 .sorted()
@@ -45,10 +45,13 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public Rank match(List<LottoNumber> winnerNumber) {
-        int countOfMatch = lottoNumbers.stream()
+    public int match(List<LottoNumber> winnerNumber) {
+        return lottoNumbers.stream()
                 .filter(winnerNumber::contains)
                 .map(e -> 1).reduce(0, Integer::sum);
-        return Rank.valueOf(countOfMatch);
+    }
+
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }

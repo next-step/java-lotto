@@ -3,7 +3,6 @@ package step2.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
@@ -27,18 +26,13 @@ class LottoTest {
         assertThat(min).isEqualTo(1);
     }
 
-    @DisplayName("6번째 번호까지 잘라 로또를 생성한다.")
+    @DisplayName("6개의 로또번호를 생성한다.")
     @Test
     void createLotto() {
-        //given
-        Lotto lotto = new Lotto();
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-        //when
-        List<LottoNumber> lottoNumbers = lotto.pickNumber(numbers);
+        Lotto createLotto = new Lotto();
 
         //then
-        assertThat(lottoNumbers).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        assertThat(createLotto.toNumberList().size()).isEqualTo(6);
     }
 
     @DisplayName("1등일 경우 테스트")
@@ -49,10 +43,10 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.FIRST);
+        assertThat(countOfMatch).isEqualTo(6);
     }
 
     @DisplayName("2등일 경우 테스트")
@@ -63,10 +57,10 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.SECOND);
+        assertThat(countOfMatch).isEqualTo(5);
     }
 
     @DisplayName("하나도 당청안됬을 경우 테스트")
@@ -77,23 +71,28 @@ class LottoTest {
         List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
 
         //when
-        Rank match = lotto.match(winNumber);
+        int countOfMatch = lotto.match(winNumber);
 
         //then
-        assertThat(match).isEqualTo(Rank.MISS);
+        assertThat(countOfMatch).isEqualTo(0);
+    }
+
+    @DisplayName("보너스 볼을 맞췄을 경우")
+    @Test
+    void match_Bonus() {
+        //given
+        Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
+        LottoNumber BonusNumber = new LottoNumber(6);
+
+        //when
+        boolean matchBonus = lotto.matchBonus(BonusNumber);
+
+        //then
+        assertThat(matchBonus).isTrue();
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
-    }
-
-    Lottos createLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(11), new LottoNumber(24))));
-        return new Lottos(lottoList);
     }
 }
 

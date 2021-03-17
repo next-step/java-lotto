@@ -1,39 +1,32 @@
 package step2.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
-    public BigDecimal statistics(int paymentMoney, List<Rank> matchResult) {
-        BigDecimal totalProfit = BigDecimal.valueOf(totalProfit(matchResult));
-        return totalProfit.divide(BigDecimal.valueOf(paymentMoney), 2, RoundingMode.HALF_UP);
+    private final RankOfMatch rankOfMatch;
+    private final double earningRate;
 
+    public LottoStatistics(List<Integer> matchResult, Money paymentMoney) {
+        this.rankOfMatch = new RankOfMatch(matchResult);
+        this.earningRate = calculateProfitRate(paymentMoney, matchResult);
     }
 
-    public Map<Integer, List<Rank>> groupMatchOfLotto(List<Rank> matchResult) {
-        Map<Integer, List<Rank>> collect = matchResult.stream()
-                .collect(Collectors.groupingBy(Rank::getCountOfMatch));
-        Rank[] values = Rank.values();
-        for (int i = 0; i < Rank.values().length; i++) {
-            inputEmptyList(collect, values[i].getCountOfMatch());
-        }
-        return collect;
+    public Map<Integer, Long> statistics(List<Boolean> matchOfBonus) {
+        return rankOfMatch.groupMatchOfLotto(matchOfBonus.iterator());
     }
 
-    private void inputEmptyList(Map<Integer, List<Rank>> collect, int countOfMatch) {
-        if (!collect.containsKey(countOfMatch)) {
-            collect.put(countOfMatch, new ArrayList<>());
-        }
-    }
-
-    public int totalProfit(List<Rank> matchResult) {
-        return matchResult.stream()
+    private double calculateProfitRate(Money money, List<Integer> matchResult) {
+        int totalProfit = matchResult.stream()
+                .map(Rank::valueOf)
                 .map(Rank::getWinningMoney)
-                .reduce(Integer::sum).orElseThrow(() -> new RuntimeException("잘못된 계싼입니다."));
+                .reduce(Integer::sum)
+                .orElseGet(() -> 0);
+        return totalProfit / (double) money.toInt();
+    }
+
+    public double getEarningRate() {
+        return earningRate;
     }
 }

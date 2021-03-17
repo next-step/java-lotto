@@ -1,17 +1,18 @@
 package step2.domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int ZERO = 0;
     private static final int WIN_NUMBER_LENGTH = 6;
     private final Lottos lottos;
+    private LottoStatistics lottoStatistics;
+    private Money money;
 
+    //테스트를 위한 생성자
     public LottoMachine() {
         this.lottos = new Lottos();
     }
@@ -22,21 +23,18 @@ public class LottoMachine {
     }
 
     public Lottos createLotto(int money) {
-        return lottos.createLottoList(getLottoCount(money));
+        this.money = new Money(money);
+        return lottos.createLottoList(getLottoCount(this.money));
     }
 
-    public int getLottoCount(int money) {
-        if (money % LOTTO_PRICE != ZERO) {
-            throw new IllegalArgumentException("1000원 단위로 돈을 지불해주세요");
-        }
-        return BigDecimal.valueOf(money)
-                .divide(BigDecimal.valueOf(LOTTO_PRICE))
-                .intValue();
+    private int getLottoCount(Money money) {
+        return money.divideMoneyByPrice();
     }
 
-    public List<Rank> getRankOfLottos(List<LottoNumber> winNumber) {
+    public List<Integer> getRankOfLottos(List<LottoNumber> winNumber) {
         return lottos.getRankOfLotto(winNumber);
     }
+
 
     public List<LottoNumber> toLottoNumberList(String winNumber) {
         String[] stringNumbers = winNumber.split(",");
@@ -54,10 +52,25 @@ public class LottoMachine {
     }
 
     private void valid(String[] stringNumbers) {
+        if (money == null) {
+            throw new RuntimeException("로또를 먼저 생성해 주세요!");
+        }
         if (stringNumbers.length != WIN_NUMBER_LENGTH) {
             throw new IllegalArgumentException("당첨번호가 6개가 아닙니다.");
         }
     }
 
+    public List<Boolean> getMatchOfBonus(LottoNumber lottoNumber) {
+        return lottos.matchOfBonus(lottoNumber);
+    }
 
+    public Map<Integer, Long> statistics(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
+        List<Integer> rankOfLottos = getRankOfLottos(winNumbers);
+        lottoStatistics = new LottoStatistics(rankOfLottos, money);
+        return lottoStatistics.statistics(getMatchOfBonus(bonusNumber));
+    }
+
+    public double getEarningRate() {
+        return lottoStatistics.getEarningRate();
+    }
 }

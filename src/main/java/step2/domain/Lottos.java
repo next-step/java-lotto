@@ -4,7 +4,9 @@ import step2.dto.LottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Lottos {
 
@@ -38,9 +40,15 @@ public class Lottos {
         return list;
     }
 
-    public List<Rank> getRankOfLotto(List<LottoNumber> winNumber) {
+    public List<Integer> getRankOfLotto(List<LottoNumber> winNumber) {
         return lottoList.stream()
                 .map(lotto -> lotto.match(winNumber))
-                .collect(Collectors.toList());
+                .collect(toList());
+    }
+
+
+    public List<Boolean> matchOfBonus(LottoNumber bonusNumber) {
+        return lottoList.stream()
+                .map(lotto -> lotto.matchBonus(bonusNumber)).collect(toUnmodifiableList());
     }
 }
