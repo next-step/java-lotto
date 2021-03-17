@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +14,15 @@ public class LottoNumberList {
   public LottoNumberList(List<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
+
+  public static LottoNumberList of(List<Integer> numbers) {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    for (Integer number : numbers) {
+      lottoNumbers.add(new LottoNumber(number));
+    }
+    return new LottoNumberList(lottoNumbers);
+  }
+
 
   public int containsCount(Lotto lastWeekWinningLotto) {
     int count = 0;
@@ -45,4 +56,5 @@ public class LottoNumberList {
   public int hashCode() {
     return Objects.hash(lottoNumbers);
   }
+
 }

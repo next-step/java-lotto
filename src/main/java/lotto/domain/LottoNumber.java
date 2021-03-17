@@ -20,7 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
