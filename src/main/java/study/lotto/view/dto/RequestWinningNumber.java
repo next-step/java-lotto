@@ -34,7 +34,7 @@ public class RequestWinningNumber {
         }
     }
 
-    public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 }

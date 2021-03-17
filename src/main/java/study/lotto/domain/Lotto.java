@@ -22,10 +22,8 @@ public class Lotto {
     }
 
     public LottoMatch match(final RequestWinningNumber winningNumber) {
-        List<LottoNumber> winningNumbers = winningNumber.getWinningNumbers();
-
         long count = lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningNumber::contains)
                 .count();
 
         return LottoMatch.of(count);
