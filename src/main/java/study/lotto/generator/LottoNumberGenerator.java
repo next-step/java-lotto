@@ -32,6 +32,7 @@ public class LottoNumberGenerator implements NumberGenerator {
     private List<LottoNumber> readOnlyLottoNumbers(final List<LottoNumber> lottoNumbers) {
         List<LottoNumber> collect = lottoNumbers.stream()
                 .limit(LOTTO_MAX_SIZE)
+                .sorted(LottoNumber::compareTo)
                 .collect(toList());
         return Collections.unmodifiableList(collect);
     }

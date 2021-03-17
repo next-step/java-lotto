@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * 로또 숫자 번호에 대한 wrapper class
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final String GUIDE_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
     private final int number;
@@ -40,5 +40,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 }
