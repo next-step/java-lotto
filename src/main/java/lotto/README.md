@@ -45,6 +45,7 @@
    - 일급 컬렉션(LottoTickets)
      - 로또 반환(LottoTicket)
 3) SBS 생방송 행복드림로또, 당첨번호 확인(입력) (SbsHappyDreamLottoLive) 
+   - 당첨번호(WinnerNumber)
    - 당첨내역반환(LottoRank)
      - 당첨정보(Rank)
 4) 결과 출력(ResultView)

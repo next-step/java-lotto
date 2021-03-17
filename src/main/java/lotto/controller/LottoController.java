@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.SbsHappyDreamLottoLive;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,6 +20,6 @@ public class LottoController {
 
         // 당첨 결과 확인
         String winnerNumbers = inputView.inputWinnerNumber();
-
+        SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers);
     }
 }
