@@ -24,8 +24,6 @@ class LottoNumberTest {
     @CsvSource(value = {"0", "46"})
     void createLottoNumber_예외_테스트(int given) {
         assertThatExceptionOfType(LottoException.class)
-                .isThrownBy(() -> {
-                    new LottoNumber(given);
-                });
+                .isThrownBy(() -> new LottoNumber(given));
     }
 }

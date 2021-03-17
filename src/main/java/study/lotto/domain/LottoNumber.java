@@ -1,42 +1,39 @@
 package study.lotto.domain;
 
 import study.lotto.exception.LottoException;
+import study.lotto.generator.LottoGenerator;
 
 import java.util.Objects;
 
+/**
+ * 로또 숫자 번호에 대한 wrapper class
+ */
 public class LottoNumber {
-
-    public static final int MIN_NUMBER_BOUND = 1;
-    public static final int MAX_NUMBER_BOUND = 45;
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         if(isInvalidNumber(number)) {
             throw new LottoException();
         }
         this.number = number;
     }
 
-    private boolean isInvalidNumber(int number) {
-        return MIN_NUMBER_BOUND > number || MAX_NUMBER_BOUND < number;
-    }
-
-    public int getNumber() {
-        return number;
+    private boolean isInvalidNumber(final int number) {
+        return LottoGenerator.MIN_NUMBER_BOUND > number || LottoGenerator.MAX_NUMBER_BOUND < number;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoNumber)) return false;
         final LottoNumber that = (LottoNumber) o;
-        return getNumber() == that.getNumber();
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumber());
+        return Objects.hash(number);
     }
 
     @Override
