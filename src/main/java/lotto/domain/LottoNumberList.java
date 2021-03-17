@@ -13,10 +13,6 @@ public class LottoNumberList {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public void addNumber(LottoNumber lottoNumber) {
-    lottoNumbers.add(lottoNumber);
-  }
-
   public int containsCount(Lotto lastWeekWinningLotto) {
     int count = 0;
     for (LottoNumber lottoNumber : lottoNumbers) {

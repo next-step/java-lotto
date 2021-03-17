@@ -18,6 +18,6 @@ public class Money {
   }
 
   public int calculateLottoCount() {
-    return (money/COST_CRETERION);
+    return (money / COST_CRETERION);
   }
 }

@@ -18,7 +18,6 @@ public class MoneyTest {
   @Test
   @DisplayName("1000원이상 금액 확인")
   public void validatePurchasePrice() {
-
     assertThatIllegalArgumentException().isThrownBy(() -> {
       Money money = new Money(900);
     });
