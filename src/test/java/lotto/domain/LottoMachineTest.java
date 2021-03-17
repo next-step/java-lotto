@@ -30,7 +30,7 @@ public class LottoMachineTest {
 
     @Test
     @DisplayName("로또 구매금액 천원미만 유효성 확인")
-    public void zeroAmountValidTest() throws Exception {
+    public void zeroAmountExceptionTest() throws Exception {
         //given
         int amount = 0;
 
