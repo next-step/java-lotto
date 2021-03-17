@@ -23,15 +23,14 @@ public class LottoResult {
         this.lottos = lottos;
     }
 
-    public int count(final LottoMatch lottoMatch) {
+    public long count(final LottoMatch lottoMatch) {
         List<Lotto> lotteries = lottos.getLottoList();
 
         return lotteries.stream()
                 .collect(
                         groupingBy(lotto -> lotto.match(winningNumber), counting())
                 )
-                .getOrDefault(lottoMatch, 0L)
-                .intValue();
+                .getOrDefault(lottoMatch, 0L);
     }
 
     public double winningRate() {
