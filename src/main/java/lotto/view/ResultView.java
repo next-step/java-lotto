@@ -29,7 +29,7 @@ public class ResultView {
     }
 
     public void printLottoYield(double lottoYield) {
-        System.out.println("총 수익률은 " + lottoYield + "입니다.(기준이 1이기 때문에 결과적으로 " + printStringYield(lottoYield) + "라는 의미임)");
+        System.out.println("총 수익률은 " + String.format("%.2f", lottoYield) + "입니다.(기준이 1이기 때문에 결과적으로 " + printStringYield(lottoYield) + "라는 의미임)");
     }
 
     private String printStringYield(double lottoYield) {
@@ -41,7 +41,7 @@ public class ResultView {
     }
 
     public double lottoYield(List<LottoRank> readOnlyLottoRanks, int buyAmount) {
-        int sumPrize = readOnlyLottoRanks.stream()
+        double sumPrize = readOnlyLottoRanks.stream()
                 .mapToInt(r -> r.getRank().rankPrizeSum(r.getWinnerCount()))
                 .sum();
 
