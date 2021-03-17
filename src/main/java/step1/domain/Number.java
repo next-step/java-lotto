@@ -1,4 +1,6 @@
-package step1;
+package step1.domain;
+
+import step1.NegativeException;
 
 import java.util.Objects;
 
@@ -12,6 +14,10 @@ public class Number {
 
     public Number(int number) {
         this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     private int change(String text) {
