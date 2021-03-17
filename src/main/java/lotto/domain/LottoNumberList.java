@@ -25,7 +25,7 @@ public class LottoNumberList {
     return lottoNumbers.contains(lottoNumber);
   }
 
-  public List<LottoNumber> getLottoNumberList() {
+  public List<LottoNumber> getLottoNumbers() {
     return lottoNumbers;
   }
 
