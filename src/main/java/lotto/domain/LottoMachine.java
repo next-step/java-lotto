@@ -8,10 +8,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoMachine {
+    private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
     private final List<LottoTicket> lottoTickets;
 
     public LottoMachine(int buyAmount) {
+        isBuyAmountValid(buyAmount);
         this.lottoTickets = createLottoTickets(buyAmount);
+    }
+
+    private void isBuyAmountValid(int buyAmount) {
+        if (buyAmount < 1000) {
+            throw new IllegalArgumentException(BUY_AMOUNT_ERROR);
+        }
     }
 
     private List<LottoTicket> createLottoTickets(int buyAmount) {
