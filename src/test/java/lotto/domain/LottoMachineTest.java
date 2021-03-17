@@ -18,12 +18,6 @@ public class LottoMachineTest {
     assertEquals(lottoList.getLottoCount(), 14);
   }
 
-  @Test
-  @DisplayName("입력 금액에 따라 구입한 로또 갯수 확인")
-  public void calculateLottoCount() {
-    LottoMachine lottoMachine = new LottoMachine();
-    assertEquals(14, lottoMachine.calculateLottoCount(14000));
-  }
 
 
   @Test
@@ -35,12 +29,4 @@ public class LottoMachineTest {
     assertThat(lottoNumberList.get(0).getNumber()).isBetween(1, 45);
   }
 
-  @Test
-  @DisplayName("1000원이상 금액 확인")
-  public void validatePurchasePrice() {
-    LottoMachine lottoMachine = new LottoMachine();
-    assertThatIllegalArgumentException().isThrownBy(() -> {
-      lottoMachine.validatePurchasePrice(900);
-    });
-  }
 }
