@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.constant.LottoConstant;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinnerNumber {
@@ -15,10 +12,14 @@ public class WinnerNumber {
         this.winnerNumbers = createWinnerNumber(winnerNumber);
     }
 
+    public WinnerNumber(List<Integer> winnerNumber) {
+        this.winnerNumbers = winnerNumber;
+    }
+
     private List<Integer> createWinnerNumber(String winnerNumber) {
-        List<Integer> result = Arrays.stream(stringToArray(winnerNumber))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> result = stringToList(winnerNumber).stream()
+                                .map(Integer::parseInt)
+                                .collect(Collectors.toList());
 
         if (isDuplicateNumbers(result)) {
             throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_DUPLICATE_ERROR);
@@ -39,27 +40,42 @@ public class WinnerNumber {
         return result.size() != LottoConstant.LOTTO_NUMBER_COUNT;
     }
 
-    public static boolean isDuplicateNumbers(List<Integer> result) {
+    private boolean isDuplicateNumbers(List<Integer> result) {
         return result.stream()
                 .distinct()
                 .count() != LottoConstant.LOTTO_NUMBER_COUNT;
     }
 
-    public static boolean isWinnerNumbers(List<Integer> result) {
+    private boolean isWinnerNumbers(List<Integer> result) {
         return result.stream()
-                .anyMatch(WinnerNumber::isLottoNumberSize);
+                .anyMatch(this::isLottoNumberSize);
     }
 
-    public static boolean isLottoNumberSize(int number) {
+    private boolean isLottoNumberSize(int number) {
         return (LottoConstant.LOTTO_MIN_NUMBER > number)
                 || (LottoConstant.LOTTO_MAX_NUMBER < number);
     }
 
-    private String[] stringToArray(String winnerNumbers) {
-        return winnerNumbers.split(",");
+    private List<String> stringToList(String winnerNumbers) {
+        return Arrays.stream(winnerNumbers.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getReadOnlyWinnerNumbers() {
         return Collections.unmodifiableList(winnerNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinnerNumber that = (WinnerNumber) o;
+        return Objects.equals(winnerNumbers, that.winnerNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winnerNumbers);
     }
 }

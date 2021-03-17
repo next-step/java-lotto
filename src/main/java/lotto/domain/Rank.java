@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
@@ -16,6 +14,10 @@ public enum Rank {
     Rank(int rankCount, int prize) {
         this.rankCount = rankCount;
         this.prize = prize;
+    }
+
+    public int getRankCount() {
+        return rankCount;
     }
 
     public int getPrize() {
@@ -42,5 +44,9 @@ public enum Rank {
     public boolean numberContains(int number, WinnerNumber winnerNumber) {
         return winnerNumber.getReadOnlyWinnerNumbers()
                     .contains(number);
+    }
+
+    public int rankPrizeSum(int winnerCount) {
+        return winnerCount * prize;
     }
 }
