@@ -37,4 +37,9 @@ public class RequestWinningNumber {
     public boolean contains(LottoNumber lottoNumber) {
         return winningNumbers.contains(lottoNumber);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(winningNumbers);
+    }
 }
