@@ -1,9 +1,9 @@
 package study.lotto.view;
 
 import study.lotto.domain.Lotto;
-import study.lotto.domain.LottoMatch;
+import study.lotto.domain.type.LottoMatch;
 import study.lotto.domain.LottoResult;
-import study.lotto.domain.ProfitMessage;
+import study.lotto.domain.type.ProfitMessage;
 import study.lotto.service.Lottos;
 import study.lotto.view.dto.RequestMoney;
 
@@ -19,7 +19,7 @@ public class ResultView {
     }
 
     public void printBuyLottos(final Lottos lottos) {
-        List<Lotto> lotteries = lottos.getLotteries();
+        List<Lotto> lotteries = lottos.getLottoList();
         lotteries.forEach(out::println);
         out.println();
     }

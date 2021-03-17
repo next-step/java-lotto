@@ -1,4 +1,4 @@
-package study.lotto.domain;
+package study.lotto.domain.type;
 
 import java.util.Arrays;
 import java.util.List;

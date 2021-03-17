@@ -46,10 +46,10 @@ public class InputView {
     public static boolean isNumeric(final String input) {
         try {
             Integer.parseInt(input);
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
-        return true;
     }
 
     public RequestWinningNumber requestWinningNumber() {

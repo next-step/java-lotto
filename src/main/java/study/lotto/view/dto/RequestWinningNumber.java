@@ -27,13 +27,11 @@ public class RequestWinningNumber {
     }
 
     private int parseInt(final String value) {
-        int intData = 0;
         try {
-            intData = Integer.parseInt(value.trim());
+            return Integer.parseInt(value.trim());
         } catch(NumberFormatException e) {
             throw new LottoException(PARSE_INT_EXCEPTION);
         }
-        return intData;
     }
 
     public List<LottoNumber> getWinningNumbers() {
