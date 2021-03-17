@@ -27,3 +27,30 @@
 - [조건문도 메서드 시그니처를 통해 의미 부여하기](https://github.com/next-step/java-lotto/pull/1242#discussion_r594304155)
 - [getter는 도메인 로직에서 최대한 줄이기](https://github.com/next-step/java-lotto/pull/1242#discussion_r594307685)
 - [요구사항 미흡 (음수 값 예외처리)](https://github.com/next-step/java-lotto/pull/1242#discussion_r594310922)
+
+## 로또
+- 기능 요구사항
+    - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+    - 로또 1장의 가격은 1000원이다.
+    - 지난 주의 당첨 번호 6개를 입력
+    - 구매했던 로또 번호와 비교하여 당첨 통계를 출력
+
+- 프로그래밍 요구사항
+    - 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다.
+    - indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+    - 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+    - 모든 로직에 단위 테스트를 구현한다.
+    - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+    - else 예약어를 쓰지 않는다.
+
+- 힌트
+    - 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
+    - Collections.sort() 메소드를 활용해 정렬 가능하다.
+    - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
+
+- 개요 작성하기
+    - 로또게임 시작 (LottoGame)
+        - 사용자 -> 구매할 금액을 지불하기 (InputView -> Money)
+        - 지불한 금액 -> 로또 구매하기 (RequestMoney -> Lottos)
+        - 지난주 당첨 번호 입력 (Lotto)
+        - 구매한 로또의 통계 보기 (resultView)
