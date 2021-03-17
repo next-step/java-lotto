@@ -11,14 +11,13 @@ public class Money {
     this.money = money;
   }
 
-  public int calculateLottoCount() {
-    return (money / COST_CRETERION);
-  }
-
   public void validateMoney(int money) {
     if (money < COST_CRETERION) {
       throw new IllegalArgumentException(INVALID_COST);
     }
   }
 
+  public int calculateLottoCount() {
+    return (money/COST_CRETERION);
+  }
 }
