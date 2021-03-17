@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoConstant;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,17 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTicket {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private final List<Integer> lottoNumbers;
 
     public LottoTicket() {
-        lottoNumbers = createLottoNumbers();
+        this.lottoNumbers = createLottoTicket();
     }
 
-    private List<Integer> createLottoNumbers() {
-        List<Integer> numbers = createNumber();
+    private List<Integer> createLottoTicket() {
+        List<Integer> numbers = createLottoNumbers();
 
         Collections.shuffle(numbers);
 
@@ -31,9 +31,9 @@ public class LottoTicket {
         return result;
     }
 
-    private List<Integer> createNumber() {
-        return Stream.iterate(MIN_NUMBER, i -> i + 1)
-                .limit(MAX_NUMBER)
+    private List<Integer> createLottoNumbers() {
+        return Stream.iterate(LottoConstant.LOTTO_MIN_NUMBER, i -> i + 1)
+                .limit(LottoConstant.LOTTO_MAX_NUMBER)
                 .collect(Collectors.toList());
     }
 

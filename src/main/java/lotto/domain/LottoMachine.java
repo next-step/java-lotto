@@ -1,15 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
     private static final String BUY_QUANTITY_MESSAGE = "개를 구매하셨습니다.";
+
     private final List<LottoTicket> lottoTickets;
 
     public LottoMachine(int buyAmount) {
