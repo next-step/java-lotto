@@ -9,13 +9,13 @@ public class StringAddCalculator {
         splitString = new SplitString();
     }
 
-    public int splitAndSum(String text) {
+    protected int splitAndSum(String text) {
 
-        if (Validator.isBlankOrEmpty(text)) {
+        if (StringValidator.isBlankOrEmpty(text)) {
             return Constants.ZERO;
         }
 
-        if (Validator.isOnlyOneNumber(text)) {
+        if (StringValidator.isOnlyOneNumber(text)) {
            return Integer.parseInt(text);
         }
 
@@ -26,7 +26,7 @@ public class StringAddCalculator {
         String[] splitNumber = splitString.splitStrings(text);
 
         for (int i = 0; i< splitNumber.length; i++) {
-            Validator.isLessThenZero(splitNumber[i]);
+            StringValidator.isLessThenZero(splitNumber[i]);
             result += Integer.parseInt(splitNumber[i]);
         }
 
