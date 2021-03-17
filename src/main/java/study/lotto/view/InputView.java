@@ -52,7 +52,7 @@ public class InputView {
         }
     }
 
-    public RequestWinningNumber requestWinningNumber() {
+    public static RequestWinningNumber requestWinningNumber() {
         System.out.println(GUIDE_LAST_WEEK_WINNING_NUMBER);
         final String inputWinningNumber = in.nextLine();
 
