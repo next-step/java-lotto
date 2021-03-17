@@ -3,7 +3,6 @@ package step2.controller;
 import step2.domain.LottoMachine;
 import step2.domain.LottoNumber;
 import step2.domain.Lottos;
-import step2.domain.Rank;
 import step2.dto.LottoStatisticsDto;
 import step2.dto.LottosDto;
 import step2.view.LottoView;
@@ -14,10 +13,11 @@ import java.util.Map;
 public class LottoController {
 
     private final LottoView lottoView;
-    private LottoMachine lottoMachine;
+    private final LottoMachine lottoMachine;
 
     public LottoController() {
         this.lottoView = new LottoView();
+        this.lottoMachine = new LottoMachine();
     }
 
     public static void main(String[] args) {
@@ -38,11 +38,10 @@ public class LottoController {
     }
 
     public Lottos createLotto(int money) {
-        lottoMachine = new LottoMachine(money);
-        return lottoMachine.createLotto();
+        return lottoMachine.createLotto(money);
     }
 
-    private LottoStatisticsDto createStatisticsDto(Map<Integer, List<Rank>> rank, double statistics) {
+    private LottoStatisticsDto createStatisticsDto(Map<Integer, Long> rank, double statistics) {
         return new LottoStatisticsDto(rank, statistics);
     }
 
@@ -51,7 +50,7 @@ public class LottoController {
     }
 
     public void finishView() {
-        Map<Integer, List<Rank>> statistics = lottoMachine.statistics(inputWinNumber(), inputBonusInput());
+        Map<Integer, Long> statistics = lottoMachine.statistics(inputWinNumber(), inputBonusInput());
         lottoView.finish(createStatisticsDto(statistics, lottoMachine.getEarningRate()));
     }
 

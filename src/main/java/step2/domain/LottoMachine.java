@@ -17,18 +17,14 @@ public class LottoMachine {
         this.lottos = new Lottos();
     }
 
-    public LottoMachine(int money) {
-        this.lottos = new Lottos();
-        this.money = new Money(money);
-    }
-
     //테스트를 위한 생성자
     public LottoMachine(Lottos lottos) {
         this.lottos = lottos;
     }
 
-    public Lottos createLotto() {
-        return lottos.createLottoList(getLottoCount(money));
+    public Lottos createLotto(int money) {
+        this.money = new Money(money);
+        return lottos.createLottoList(getLottoCount(this.money));
     }
 
     private int getLottoCount(Money money) {
@@ -56,6 +52,9 @@ public class LottoMachine {
     }
 
     private void valid(String[] stringNumbers) {
+        if (money == null) {
+            throw new RuntimeException("로또를 먼저 생성해 주세요!");
+        }
         if (stringNumbers.length != WIN_NUMBER_LENGTH) {
             throw new IllegalArgumentException("당첨번호가 6개가 아닙니다.");
         }
@@ -65,7 +64,7 @@ public class LottoMachine {
         return lottos.matchOfBonus(lottoNumber);
     }
 
-    public Map<Integer, List<Rank>> statistics(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
+    public Map<Integer, Long> statistics(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         List<Integer> rankOfLottos = getRankOfLottos(winNumbers);
         lottoStatistics = new LottoStatistics(rankOfLottos, money);
         return lottoStatistics.statistics(getMatchOfBonus(bonusNumber));

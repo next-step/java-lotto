@@ -13,7 +13,7 @@ public class LottoStatistics {
         this.earningRate = calculateProfitRate(paymentMoney, matchResult);
     }
 
-    public Map<Integer, List<Rank>> statistics(List<Boolean> matchOfBonus) {
+    public Map<Integer, Long> statistics(List<Boolean> matchOfBonus) {
         return rankOfMatch.groupMatchOfLotto(matchOfBonus.iterator());
     }
 
@@ -23,7 +23,7 @@ public class LottoStatistics {
                 .map(Rank::getWinningMoney)
                 .reduce(Integer::sum)
                 .orElseGet(() -> 0);
-        return Math.round(totalProfit / money.toDouble() * 100) / 100;
+        return totalProfit / (double) money.toInt();
     }
 
     public double getEarningRate() {

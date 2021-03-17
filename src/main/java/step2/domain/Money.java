@@ -15,8 +15,8 @@ public class Money {
         this.money = money;
     }
 
-    public double toDouble() {
-        return Double.valueOf(money);
+    public int toInt() {
+        return money;
     }
 
     public int divideMoneyByPrice() {

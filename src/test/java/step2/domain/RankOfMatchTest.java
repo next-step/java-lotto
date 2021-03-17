@@ -19,12 +19,12 @@ class RankOfMatchTest {
         List<Boolean> matchOfBonus = List.of(true, false, true, false, true, false);
 
         //when
-        Map<Integer, List<Rank>> matchGroup = rankOfMatch.groupMatchOfLotto(matchOfBonus.iterator());
+        Map<Integer, Long> matchGroup = rankOfMatch.groupMatchOfLotto(matchOfBonus.iterator());
 
         //then
-        assertThat(matchGroup.get(2_000_000_000).size()).isEqualTo(2);
-        assertThat(matchGroup.get(30_000_000).size()).isEqualTo(1);
-        assertThat(matchGroup.get(1_500_000).size()).isEqualTo(1);
-        assertThat(matchGroup.get(50_000).size()).isEqualTo(2);
+        assertThat(matchGroup.get(2_000_000_000)).isEqualTo(2);
+        assertThat(matchGroup.get(30_000_000)).isEqualTo(1);
+        assertThat(matchGroup.get(1_500_000)).isEqualTo(1);
+        assertThat(matchGroup.get(50_000)).isEqualTo(2);
     }
 }

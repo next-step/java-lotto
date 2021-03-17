@@ -16,10 +16,10 @@ class LottoMachineTest {
     void lottoCount() {
         //given
         int money = 13000;
-        LottoMachine lottoMachine = new LottoMachine(money);
+        LottoMachine lottoMachine = new LottoMachine();
 
         //when
-        Lottos lotto = lottoMachine.createLotto();
+        Lottos lotto = lottoMachine.createLotto(money);
 
         //then
         assertThat(lotto.lottoCount()).isEqualTo(13);
