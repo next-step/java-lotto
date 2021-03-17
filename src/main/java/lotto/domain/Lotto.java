@@ -1,42 +1,32 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-  private List<LottoNumber> lottoNumberList;
-  private static final int IS_MATCHED = 1;
-  private static final int IS_NOT_MATCHED = 0;
+  private LottoNumberList lottoNumberList;
 
-  public Lotto(List<LottoNumber> lottoNumberList) {
+
+  public Lotto(LottoNumberList lottoNumberList) {
     this.lottoNumberList = lottoNumberList;
   }
 
   public static Lotto of(List<Integer> numbers) {
-    List<LottoNumber> lottoNumberList = new ArrayList<>();
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (Integer number : numbers) {
-      lottoNumberList.add(LottoNumber.of(number));
+      lottoNumbers.add(new LottoNumber(number));
     }
-    return new Lotto(lottoNumberList);
+    return new Lotto(new LottoNumberList(lottoNumbers));
   }
 
   public int containsCount(Lotto lastWeekWinningLotto) {
-    int count = 0;
-    for (LottoNumber lottoNumber : lottoNumberList) {
-      count += (lastWeekWinningLotto.contains(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED);
-    }
-    return count;
+    return lottoNumberList.containsCount(lastWeekWinningLotto);
   }
 
-  private boolean contains(LottoNumber lottoNumber) {
-    return lottoNumberList.contains(lottoNumber);
-  }
 
-  public List<LottoNumber> getLottoNumberList() {
-    return lottoNumberList;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -55,4 +45,11 @@ public class Lotto {
     return Objects.hash(lottoNumberList);
   }
 
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumberList.contains(lottoNumber);
+  }
+
+  public LottoNumberList getLottoNumberList() {
+    return lottoNumberList;
+  }
 }
