@@ -7,7 +7,7 @@ import lottery.dto.RoundResult;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lottery.domain.LotteryConstants.LOTTERY_PRICE;
+import static lottery.domain.LotteryTicketIssuer.LOTTERY_PRICE;
 
 public class LotteryTicket {
 

@@ -7,14 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lottery.domain.LotteryConstants.LOTTERY_PRICE;
-
 public class LotteryTicketIssuer {
 
     private static final int LOTTERY_SIZE = 6;
     private static final List<Integer> NUMBER_LIST = IntStream.rangeClosed(1, 45)
                                                               .boxed()
                                                               .collect(Collectors.toList());
+    static final int LOTTERY_PRICE = 1000;
 
     private LotteryTicketIssuer() {}
 
