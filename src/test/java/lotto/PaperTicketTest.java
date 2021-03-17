@@ -14,13 +14,13 @@ class PaperTicketTest {
     @Test
     @DisplayName("구매 금액만큼의 티켓을 생성")
     void pay() {
-        assertThat(paperTicket.generateTickes(4).size()).isEqualTo(4);
+        assertThat(paperTicket.generateTickets(4).size()).isEqualTo(4);
     }
 
     @Test
     @DisplayName("티켓들에 숫자가 입력되었는가")
     void name() {
-        assertThat(paperTicket.generateTickes(4).get(0).getLottoNumbers()).isNotEmpty();
+        assertThat(paperTicket.generateTickets(4).get(0).getLottoNumbers()).isNotEmpty();
     }
 
     @BeforeEach

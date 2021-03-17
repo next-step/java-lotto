@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PaperTicket implements Ticket {
     @Override
-    public List<LottoNumbers> generateTickes(int count) {
+    public List<LottoNumbers> generateTickets(int count) {
         Lotto lotto = new Lotto();
         return lotto.makeLottoNumbers(count);
     }
