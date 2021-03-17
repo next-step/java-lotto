@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ public class LottoNumbers {
         for (int i = 0; i < 46; i++) {
             lottoNumbers.add(i);
         }
-        this.lottoPrice = new LottoPriceImpl();
+        this.lottoPrice = new LottoPrice();
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
