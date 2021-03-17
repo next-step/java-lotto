@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.constant.LottoConstant;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +12,10 @@ public class LottoTicket {
 
     public LottoTicket() {
         this.lottoNumbers = createLottoTicket();
+    }
+
+    public LottoTicket(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     private List<Integer> createLottoTicket() {
@@ -39,5 +40,18 @@ public class LottoTicket {
 
     public List<Integer> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

@@ -20,6 +20,9 @@ public class LottoController {
 
         // 당첨 결과 확인
         String winnerNumbers = inputView.inputWinnerNumber();
-        SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers);
+        SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers, lottoMachine);
+
+        // 당첨 내역 출력
+        resultView.printLottoRanksInfos(sbsHappyDreamLottoLive.getReadOnlyLottoRanks());
     }
 }

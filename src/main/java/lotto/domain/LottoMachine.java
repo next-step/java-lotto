@@ -15,6 +15,10 @@ public class LottoMachine {
         this.lottoTickets = createLottoTickets(buyAmount);
     }
 
+    public LottoMachine(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
     private void isBuyAmountValid(int buyAmount) {
         if (buyAmount < 1000) {
             throw new IllegalArgumentException(BUY_AMOUNT_ERROR);

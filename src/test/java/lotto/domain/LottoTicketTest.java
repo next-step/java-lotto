@@ -1,26 +1,30 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketTest {
 
+    public List<Integer> createLottoNumber() {
+        return Arrays.asList(1,2,3,4,5,6);
+    }
+
     @Test
     @DisplayName("로또 발급")
     public void createLottoTicket() throws Exception {
         //given
-        LottoTicket lottoTicket = new LottoTicket();
+        List<Integer> numbers = createLottoNumber();
+        LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //when
 
         //then
-
+        assertThat(lottoTicket.getLottoNumber()).isEqualTo(numbers);
     }
 
     @Test

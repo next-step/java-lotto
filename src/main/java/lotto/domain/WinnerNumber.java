@@ -20,9 +20,12 @@ public class WinnerNumber {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        System.out.println("result.toString() = " + result.toString());
         if (isDuplicateNumbers(result)) {
             throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_DUPLICATE_ERROR);
+        }
+
+        if (isWinnerNumberCount(result)) {
+            throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_COUNT_ERROR);
         }
 
         if (isWinnerNumbers(result)) {
@@ -30,6 +33,10 @@ public class WinnerNumber {
         };
 
         return result;
+    }
+
+    private boolean isWinnerNumberCount(List<Integer> result) {
+        return result.size() != LottoConstant.LOTTO_NUMBER_COUNT;
     }
 
     public static boolean isDuplicateNumbers(List<Integer> result) {
