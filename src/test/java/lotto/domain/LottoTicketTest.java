@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -29,7 +30,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket();
 
         //when
-        List<Integer> numbers = lottoTicket.getTicketNumber();
+        List<Integer> numbers = lottoTicket.getLottoNumber();
 
         //then
         assertThat(numbers.size()).isEqualTo(6);
