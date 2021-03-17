@@ -4,24 +4,25 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.List;
 
 public class LottoMachineTest {
-    private LottoMachine lottoMachine;
 
-    @BeforeEach
-    public void setUp() {
-        lottoMachine = new LottoMachine();
-    }
-
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"11000,11", "1000,1"})
     @DisplayName("로또 구매 개수 확인")
-    public void inputLottoAmount() throws Exception {
+    public void inputLottoAmount(int amount, int ticketCount ) throws Exception {
+
         //given
-        int amount = 11000;
-        int ticketQuantity = lottoMachine.amountToQuantity(amount);
+        LottoMachine lottoMachine = new LottoMachine(amount);
+
         //when
+        List<LottoTicket> tickets = lottoMachine.getLottoTickets();
 
         //then
-        Assertions.assertThat(ticketQuantity).isEqualTo(11);
+        Assertions.assertThat(tickets.size()).isEqualTo(ticketCount);
     }
 }
