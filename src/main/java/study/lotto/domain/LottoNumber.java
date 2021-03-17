@@ -1,7 +1,7 @@
 package study.lotto.domain;
 
 import study.lotto.exception.LottoException;
-import study.lotto.generator.LottoGenerator;
+import study.lotto.generator.LottoNumberGenerator;
 
 import java.util.Objects;
 
@@ -10,17 +10,18 @@ import java.util.Objects;
  */
 public class LottoNumber {
 
+    public static final String GUIDE_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
     private final int number;
 
     public LottoNumber(final int number) {
         if(isInvalidNumber(number)) {
-            throw new LottoException();
+            throw new LottoException(GUIDE_NOT_USE_VALUE);
         }
         this.number = number;
     }
 
     private boolean isInvalidNumber(final int number) {
-        return LottoGenerator.MIN_NUMBER_BOUND > number || LottoGenerator.MAX_NUMBER_BOUND < number;
+        return LottoNumberGenerator.MIN_NUMBER_BOUND > number || LottoNumberGenerator.MAX_NUMBER_BOUND < number;
     }
 
     @Override

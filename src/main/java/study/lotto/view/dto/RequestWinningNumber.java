@@ -14,19 +14,19 @@ public class RequestWinningNumber {
 
     private final List<LottoNumber> winningNumbers;
 
-    public RequestWinningNumber(String inputWinningNumber) {
+    public RequestWinningNumber(final String inputWinningNumber) {
         String[] split = inputWinningNumber.split(NUMBER_DELIMINATOR);
         winningNumbers = extractWinningNumbers(split);
     }
 
-    private List<LottoNumber> extractWinningNumbers(String[] split) {
+    private List<LottoNumber> extractWinningNumbers(final String[] split) {
         return Arrays.stream(split)
                 .map(this::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private int parseInt(String value) {
+    private int parseInt(final String value) {
         int intData = 0;
         try {
             intData = Integer.parseInt(value.trim());
