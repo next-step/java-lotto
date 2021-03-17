@@ -54,3 +54,8 @@
         - 지불한 금액 -> 로또 구매하기 (RequestMoney -> Lottos)
         - 지난주 당첨 번호 입력 (Lotto)
         - 구매한 로또의 통계 보기 (resultView)
+
+> 1차 피드백
+- [long 반환 타입인데 중복되는 로직 삭제](https://github.com/next-step/java-lotto/pull/1255#discussion_r595985358)
+- [return 로직 위치 변경](https://github.com/next-step/java-lotto/pull/1255#discussion_r595986529)
+- [굳이 없어도 되는 Getter 삭제](https://github.com/next-step/java-lotto/pull/1255#discussion_r595990045)
