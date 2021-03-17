@@ -1,19 +1,21 @@
 package lottery.dto;
 
+import lottery.domain.Lottery;
+
 import java.util.Collections;
 import java.util.List;
 
 public class LotteryProxy implements ReadonlyLottery {
 
-    private final List<Integer> numbers;
+    private final Lottery lottery;
 
-    public LotteryProxy(ReadonlyLottery readonlyLottery) {
-        numbers = Collections.unmodifiableList(readonlyLottery.getNumbers());
+    public LotteryProxy(Lottery lottery) {
+        this.lottery = lottery;
     }
 
     @Override
     public List<Integer> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(lottery.getNumbers());
     }
 
 }
