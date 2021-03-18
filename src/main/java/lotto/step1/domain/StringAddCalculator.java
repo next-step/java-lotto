@@ -1,4 +1,4 @@
-package lotto.step1;
+package lotto.step1.domain;
 
 public class StringAddCalculator {
 
@@ -6,7 +6,6 @@ public class StringAddCalculator {
     }
 
     public static int splitAndSum(String input) {
-
         if (input == null) {
             return 0;
         }
