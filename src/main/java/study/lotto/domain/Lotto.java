@@ -1,36 +1,36 @@
 package study.lotto.domain;
 
-import study.lotto.generator.LottoNumberGenerator;
-import study.lotto.generator.NumberGenerator;
+import study.lotto.domain.type.LottoMatch;
 import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 하나의 로또 게임 하나
+ */
 public class Lotto {
 
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(new LottoNumberGenerator());
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(final NumberGenerator lottoGenerator) {
-        lotto = lottoGenerator.generate();
+    public long winningReward(final RequestWinningNumber requestWinningNumber, final LottoNumber bonusNumber) {
+        return match(requestWinningNumber, bonusNumber).getWinningReward();
     }
 
-    public long winningReward(RequestWinningNumber requestWinningNumber) {
-        return match(requestWinningNumber).getWinningReward();
-    }
+    public LottoMatch match(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
 
-    public LottoMatch match(final RequestWinningNumber winningNumber) {
-        List<LottoNumber> winningNumbers = winningNumber.getWinningNumbers();
-
-        long count = lotto.stream()
-                .filter(winningNumbers::contains)
+        long count = lottoNumbers.stream()
+                .filter(winningNumber::contains)
                 .count();
 
-        return LottoMatch.of(count);
+        boolean hasBonus = lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
+
+        return LottoMatch.of(count, hasBonus);
     }
 
     @Override
@@ -38,16 +38,16 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(lottoNumbers, lotto1.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lotto);
+        return String.valueOf(lottoNumbers);
     }
 }

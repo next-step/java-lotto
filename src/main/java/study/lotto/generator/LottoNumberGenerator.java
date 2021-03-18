@@ -32,11 +32,12 @@ public class LottoNumberGenerator implements NumberGenerator {
     private List<LottoNumber> readOnlyLottoNumbers(final List<LottoNumber> lottoNumbers) {
         List<LottoNumber> collect = lottoNumbers.stream()
                 .limit(LOTTO_MAX_SIZE)
+                .sorted(LottoNumber::compareTo)
                 .collect(toList());
         return Collections.unmodifiableList(collect);
     }
 
-    private void shuffle(List<LottoNumber> lottoNumbers) {
+    private void shuffle(final List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
     }
 }

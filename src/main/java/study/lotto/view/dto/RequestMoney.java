@@ -20,16 +20,12 @@ public class RequestMoney {
         totalLottoCount = money / LOTTO_PRICE;
     }
 
-    public int getTotalLottoCount() {
+    public int totalCount() {
         return totalLottoCount;
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof RequestMoney)) return false;
         final RequestMoney money1 = (RequestMoney) o;
@@ -45,5 +41,9 @@ public class RequestMoney {
     @Override
     public String toString() {
         return String.valueOf(money);
+    }
+
+    public double winningRate(long sum) {
+        return (1.0 * sum) / money;
     }
 }

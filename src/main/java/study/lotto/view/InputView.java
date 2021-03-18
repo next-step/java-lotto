@@ -1,5 +1,6 @@
 package study.lotto.view;
 
+import study.lotto.domain.LottoNumber;
 import study.lotto.exception.LottoException;
 import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.dto.RequestWinningNumber;
@@ -16,8 +17,10 @@ public class InputView {
     public static final int LOTTO_PRICE = 1000;
 
     private static final Scanner in = new Scanner(System.in);
+    public static final String GUIDE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    public static final String GUIDE_CANNOT_PARSE_STRING = "숫자가 아닙니다.";
 
-    public static RequestMoney requestMoney() {
+    public static RequestMoney money() {
         System.out.println(GUIDE_PURCHASE_MONEY);
         final String inputMoney = in.nextLine();
 
@@ -46,16 +49,30 @@ public class InputView {
     public static boolean isNumeric(final String input) {
         try {
             Integer.parseInt(input);
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
-        return true;
     }
 
-    public RequestWinningNumber requestWinningNumber() {
+    public static RequestWinningNumber winningNumber() {
         System.out.println(GUIDE_LAST_WEEK_WINNING_NUMBER);
         final String inputWinningNumber = in.nextLine();
 
         return new RequestWinningNumber(inputWinningNumber);
+    }
+
+    public static LottoNumber bonusNumber() {
+        System.out.println(GUIDE_INPUT_BONUS_NUMBER);
+        final String inputBonusNumber = in.nextLine();
+
+        if(isNotNullAndIsBlank(inputBonusNumber)) {
+            throw new LottoException(GUIDE_NOT_FOUND_MONEY);
+        }
+
+        if(!isNumeric(inputBonusNumber)) {
+            throw new LottoException(GUIDE_CANNOT_PARSE_STRING);
+        }
+        return new LottoNumber(inputBonusNumber);
     }
 }
