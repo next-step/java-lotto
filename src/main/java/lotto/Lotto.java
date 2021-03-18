@@ -10,7 +10,7 @@ public class Lotto {
         this.lotto = new ArrayList<>();
     }
 
-    public List<LottoNumbers> makeLottoNumbers(int count) {
+    public List<LottoNumbers> lotto(int count) {
         for (int i = 0; i < count; i++) {
             lotto.add(new LottoNumbers());
         }

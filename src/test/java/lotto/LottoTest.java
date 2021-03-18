@@ -10,7 +10,7 @@ public class LottoTest {
 
     @Test
     void makeLottoNumbers() {
-        assertThat(lotto.makeLottoNumbers(14).size()).isEqualTo(14);
+        assertThat(lotto.lotto(14).size()).isEqualTo(14);
     }
 
     @BeforeEach
