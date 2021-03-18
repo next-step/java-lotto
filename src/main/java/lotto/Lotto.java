@@ -9,10 +9,10 @@ public class Lotto {
         this.lottoGames = lottoGame;
     }
 
-    public LottoResult result(List<Integer> winningNumbers) {
+    public LottoResult result(WinningNumber winningNumber) {
         LottoResult lottoResult = new LottoResult();
         for (LottoGame lottoGame : lottoGames) {
-            int winningNumberCount = lottoGame.winningNumberCount(winningNumbers);
+            int winningNumberCount = lottoGame.winningNumberCount(winningNumber);
             lottoResult.increase(winningNumberCount);
         }
         return lottoResult;

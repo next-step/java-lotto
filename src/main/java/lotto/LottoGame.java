@@ -16,15 +16,17 @@ public class LottoGame {
         Collections.sort(this.numbers);
     }
 
-    public int winningNumberCount(LottoGame winningLottoGame) {
-        return winningNumberCount(winningLottoGame.numbers);
+    public int winningNumberCount(List<Integer> winningNumbers) {
+        WinningNumber winningNumber = new WinningNumber(winningNumbers);
+        return winningNumberCount(winningNumber);
     }
 
-    public int winningNumberCount(List<Integer> winningNumbers) {
-        long winningNumberCount = winningNumbers.stream()
-                .filter(winningNumber -> numbers.contains(winningNumber))
-                .count();
-        return (int) winningNumberCount;
+    public int winningNumberCount(WinningNumber winningNumber) {
+        return winningNumber.matchCount(this);
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     @Override
@@ -39,4 +41,6 @@ public class LottoGame {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+
 }

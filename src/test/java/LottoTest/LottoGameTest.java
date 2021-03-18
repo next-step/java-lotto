@@ -5,7 +5,9 @@ import lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +37,21 @@ public class LottoGameTest {
 
         //then
         assertThat(lottoGame).isEqualTo(new LottoGame(fixedLottoNumber.numbers()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 6, 7})
+    void Given_Number_When_Contains_Then_Expected(int number) {
+        //given
+        List<Integer> givenLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoGame lottoGame = new LottoGame(givenLottoNumbers);
+        boolean expected = givenLottoNumbers.contains(number);
+
+        //when
+        boolean containsNumber = lottoGame.contains(number);
+
+        //then
+        assertThat(containsNumber).isEqualTo(expected);
     }
 
     @ParameterizedTest

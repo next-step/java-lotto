@@ -3,6 +3,7 @@ package LottoTest;
 import lotto.Lotto;
 import lotto.LottoGame;
 import lotto.LottoResult;
+import lotto.WinningNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class LottoTest {
     @Test
     void Given_WinningNumbers_When_Match_Then_LottoResult() {
         //given
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoGame> lottoGames = Arrays.asList(
                 new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 7)),
@@ -40,7 +41,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoGames);
 
         //when
-        LottoResult result = lotto.result(winningNumbers);
+        LottoResult result = lotto.result(winningNumber);
 
         //then
         assertThat(result.winningNumberCount(0)).isEqualTo(1);
