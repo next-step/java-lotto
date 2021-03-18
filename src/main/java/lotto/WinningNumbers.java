@@ -3,10 +3,15 @@ package lotto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class WinningNumbers {
     int[] winNumbers;
     Map<Integer, Integer> map;
+
+    public WinningNumbers(String[] winNumbers) {
+        this(Stream.of(winNumbers).mapToInt(Integer::parseInt).toArray());
+    }
 
     public WinningNumbers(int[] winNumbers) {
         map = new HashMap<>();
@@ -15,6 +20,10 @@ public class WinningNumbers {
         map.put(5, 0);
         map.put(6, 0);
         this.winNumbers = winNumbers;
+    }
+
+    public Map<Integer, Integer> getWinNumbers(Lotto lotto) {
+        return this.getWinNumbers(lotto.lotto());
     }
 
     public Map<Integer, Integer> getWinNumbers(List<LottoNumbers> lottoNumbers) {

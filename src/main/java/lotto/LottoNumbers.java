@@ -52,4 +52,11 @@ public class LottoNumbers {
     public int lottoCount(int receiveMoney) {
         return this.lottoPrice.lottos(receiveMoney);
     }
+
+    @Override
+    public String toString() {
+        return "LottoNumbers{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }
