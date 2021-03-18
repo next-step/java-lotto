@@ -46,4 +46,8 @@ public class RequestMoney {
     public String toString() {
         return String.valueOf(money);
     }
+
+    public double winningRate(long sum) {
+        return (1.0 * sum) / money;
+    }
 }

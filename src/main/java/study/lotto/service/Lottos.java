@@ -1,10 +1,16 @@
 package study.lotto.service;
 
 import study.lotto.domain.Lotto;
+import study.lotto.domain.LottoNumber;
+import study.lotto.domain.type.LottoMatch;
 import study.lotto.view.dto.RequestMoney;
+import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * Lotto 클래스의 일급 컬렉션
@@ -24,7 +30,18 @@ public class Lottos {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public int paidMoney() {
-        return money.getMoney();
+    public long statics(LottoMatch lottoMatch, RequestWinningNumber winningNumber, LottoNumber bonusNumber) {
+        return lottoList.stream()
+                .collect(
+                        groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
+                )
+                .getOrDefault(lottoMatch, 0L);
+    }
+
+    public double winningRate(RequestWinningNumber winningNumber, LottoNumber bonusNumber) {
+        long sum = lottoList.stream()
+                .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
+                .sum();
+        return money.winningRate(sum);
     }
 }

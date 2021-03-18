@@ -4,11 +4,6 @@ import study.lotto.domain.type.LottoMatch;
 import study.lotto.service.Lottos;
 import study.lotto.view.dto.RequestWinningNumber;
 
-import java.util.List;
-
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
-
 /**
  * Lotto 결과에 대한 통계 클래스
  */
@@ -25,24 +20,10 @@ public class LottoResult {
     }
 
     public long count(final LottoMatch lottoMatch) {
-        List<Lotto> lotteries = lottos.getLottoList();
-
-        return lotteries.stream()
-                .collect(
-                        groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
-                )
-                .getOrDefault(lottoMatch, 0L);
+        return lottos.statics(lottoMatch, winningNumber, bonusNumber);
     }
 
     public double winningRate() {
-        List<Lotto> lotteries = lottos.getLottoList();
-        int money = lottos.paidMoney();
-
-        long sum = lotteries.stream()
-                .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
-                .sum();
-        // 1.0 * 당첨 합계 / 구매 금액
-        return 1.0 * sum / money;
+        return lottos.winningRate(winningNumber, bonusNumber);
     }
-
 }
