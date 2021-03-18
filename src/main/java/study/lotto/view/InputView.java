@@ -1,12 +1,12 @@
 package study.lotto.view;
 
 import study.lotto.domain.LottoNumber;
-import study.lotto.exception.LottoException;
 import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.dto.RequestWinningNumber;
 
-import java.util.Objects;
 import java.util.Scanner;
+
+import static study.lotto.util.Validation.*;
 
 public class InputView {
 
@@ -24,35 +24,11 @@ public class InputView {
         System.out.println(GUIDE_PURCHASE_MONEY);
         final String inputMoney = in.nextLine();
 
-        if(isNotNullAndIsBlank(inputMoney)) {
-            throw new LottoException(GUIDE_NOT_FOUND_MONEY);
-        }
-        if(isCanNotBuyLotto(inputMoney)) {
-            throw new LottoException(GUIDE_PURCHASE_LOTTO);
-        }
+        isValidationInputData(isNotNullAndIsBlank(inputMoney), GUIDE_NOT_FOUND_MONEY);
+        isValidationInputData(isCanNotBuyLotto(inputMoney), GUIDE_PURCHASE_LOTTO);
+
         final int money = Integer.parseInt(inputMoney);
         return new RequestMoney(money);
-    }
-
-    private static boolean isNotNullAndIsBlank(final String inputMoney) {
-        return Objects.isNull(inputMoney) || inputMoney.isEmpty();
-    }
-
-    private static boolean isCanNotBuyLotto(final String input) {
-        return !isNumeric(input) || isLackOfMoney(input);
-    }
-
-    private static boolean isLackOfMoney(final String inputMoney) {
-        return Integer.parseInt(inputMoney) < LOTTO_PRICE;
-    }
-
-    public static boolean isNumeric(final String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     public static RequestWinningNumber winningNumber() {
@@ -66,13 +42,9 @@ public class InputView {
         System.out.println(GUIDE_INPUT_BONUS_NUMBER);
         final String inputBonusNumber = in.nextLine();
 
-        if(isNotNullAndIsBlank(inputBonusNumber)) {
-            throw new LottoException(GUIDE_NOT_FOUND_MONEY);
-        }
+        isValidationInputData(isNotNullAndIsBlank(inputBonusNumber), GUIDE_NOT_FOUND_MONEY);
+        isValidationInputData(!isNumeric(inputBonusNumber), GUIDE_CANNOT_PARSE_STRING);
 
-        if(!isNumeric(inputBonusNumber)) {
-            throw new LottoException(GUIDE_CANNOT_PARSE_STRING);
-        }
         return new LottoNumber(inputBonusNumber);
     }
 }
