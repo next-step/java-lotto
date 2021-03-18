@@ -17,4 +17,14 @@ public class ResultView {
 
         System.out.println();
     }
+
+    public void print(String resultInfo) {
+        System.out.println(resultInfo);
+    }
+
+    public void print() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+    }
 }

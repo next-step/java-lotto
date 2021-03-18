@@ -11,6 +11,7 @@ public class Lotto {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
     private final LottoMachine lottoMachine = new LottoMachine();
+    private final LottoResult lottoResult = new LottoResult();
 
     public void start(){
         int money = inputView.money();
@@ -24,6 +25,9 @@ public class Lotto {
 
         LottoNumbers winningNumbers = new LottoNumbers(inputView.winningNumbers());
 
+        String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);
+        resultView.print();
+        resultView.print(resultInfo);
     }
 
     public int buyCount(int buyMoney) {

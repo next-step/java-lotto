@@ -37,6 +37,12 @@ public class LottoNumbers {
         return numbers.size() == LottoConstants.LOTTO_NUMBER_COUNT;
     }
 
+    public int correctCount(LottoNumbers purchaseLottoNumber){
+        List<Integer> tempNumbers = new ArrayList<>(purchaseLottoNumber.numbers);
+        tempNumbers.removeAll(numbers);
+        return LottoConstants.LOTTO_NUMBER_COUNT - tempNumbers.size();
+    }
+
     public String printInfo(){
         List<Integer> collect = new ArrayList<>(numbers);
         return collect.toString();
