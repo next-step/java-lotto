@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
+    private static final String TOKEN_DELIMITER = ",|;";
+
     private StringAddCalculator() {
     }
 
@@ -19,7 +21,9 @@ public class StringAddCalculator {
     }
 
     private static Numbers getNumbers(String input) {
-        return Numbers.of(Arrays.stream(input.split(",|:"))
+        String[] tokens = input.split(TOKEN_DELIMITER);
+
+        return Numbers.of(Arrays.stream(tokens)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(number -> Number.of(number))
                 .collect(Collectors.toList()));
