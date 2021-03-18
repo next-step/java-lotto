@@ -18,10 +18,18 @@ public enum Amount {
     }
 
     public static int getWinningMoney(int countWinnings) {
-        return Arrays.stream(values())
-                .filter(amount -> amount.count == countWinnings)
-                .map(amount -> amount.price)
-                .findFirst()
-                .orElse(0);
+        MatchPrice matchPrice = new MatchPrice();
+
+        for (Amount amount : values()) {
+            matchPrice(amount, countWinnings, matchPrice);
+        }
+
+        return matchPrice.getMatchPrice();
+    }
+
+    public static void matchPrice(Amount amount, int countWinnings, MatchPrice matchPrice) {
+        if (amount.count == countWinnings) {
+            matchPrice.matching(amount.price);
+        }
     }
 }
