@@ -4,24 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private Map<Integer, Integer> matchCountMap;
+    private Map<Integer, Integer> winningNumberCountMap;
 
     public LottoResult() {
-        matchCountMap = new HashMap<>();
+        winningNumberCountMap = new HashMap<>();
     }
 
-    public int increaseMatchCount(int matchCount) {
-        if (matchCountMap.containsKey(matchCount) == false) {
-            matchCountMap.put(matchCount, 0);
+    public void increase(int winningNumberCount) {
+        if (winningNumberCountMap.containsKey(winningNumberCount) == false) {
+            winningNumberCountMap.put(winningNumberCount, 0);
         }
-        int currentMatchCount = matchCountMap.get(matchCount) + 1;
-        matchCountMap.put(matchCount, currentMatchCount);
-        return 0;
+
+        int currentMatchCount = winningNumberCountMap.get(winningNumberCount) + 1;
+        winningNumberCountMap.put(winningNumberCount, currentMatchCount);
     }
 
-    public int getMatchCount(int matchCount) {
+    public int winningNumberCount(int numberOfWinning) {
         try {
-            return matchCountMap.get(matchCount);
+            return winningNumberCountMap.get(numberOfWinning);
         } catch (Exception e) {
             return 0;
         }

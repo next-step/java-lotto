@@ -40,15 +40,15 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoGames);
 
         //when
-        LottoResult result = lotto.match(winningNumbers);
+        LottoResult result = lotto.result(winningNumbers);
 
         //then
-        assertThat(result.getMatchCount(0)).isEqualTo(1);
-        assertThat(result.getMatchCount(1)).isEqualTo(1);
-        assertThat(result.getMatchCount(2)).isEqualTo(1);
-        assertThat(result.getMatchCount(3)).isEqualTo(1);
-        assertThat(result.getMatchCount(4)).isEqualTo(1);
-        assertThat(result.getMatchCount(5)).isEqualTo(1);
-        assertThat(result.getMatchCount(6)).isEqualTo(1);
+        assertThat(result.winningNumberCount(0)).isEqualTo(1);
+        assertThat(result.winningNumberCount(1)).isEqualTo(1);
+        assertThat(result.winningNumberCount(2)).isEqualTo(1);
+        assertThat(result.winningNumberCount(3)).isEqualTo(1);
+        assertThat(result.winningNumberCount(4)).isEqualTo(1);
+        assertThat(result.winningNumberCount(5)).isEqualTo(1);
+        assertThat(result.winningNumberCount(6)).isEqualTo(1);
     }
 }

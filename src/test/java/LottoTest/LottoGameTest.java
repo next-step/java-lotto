@@ -1,7 +1,7 @@
 package LottoTest;
 
 import lotto.LottoGame;
-import lotto.LottoGenerator;
+import lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -28,23 +28,23 @@ public class LottoGameTest {
 
     @Test
     void Given_LottoGenerator_When_New_Then_InstanceCreate() {
-        LottoGenerator fixedLottoGenerator = new FixedLottoGenerator();
+        LottoNumber fixedLottoNumber = new FixedLottoNumber();
 
         //when
-        LottoGame lottoGame = new LottoGame(fixedLottoGenerator);
+        LottoGame lottoGame = new LottoGame(fixedLottoNumber);
 
         //then
-        assertThat(lottoGame).isEqualTo(new LottoGame(fixedLottoGenerator.generate()));
+        assertThat(lottoGame).isEqualTo(new LottoGame(fixedLottoNumber.numbers()));
     }
 
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
     void Given_WinningNumbers_When_Match_Then_NumberOfMatchedNumbers(List<Integer> winningNumbers, int expected) {
-        LottoGenerator fixedLottoGenerator = new FixedLottoGenerator();
-        LottoGame lottoGame = new LottoGame(fixedLottoGenerator);
+        LottoNumber fixedLottoNumber = new FixedLottoNumber();
+        LottoGame lottoGame = new LottoGame(fixedLottoNumber);
 
         //when
-        int winners = lottoGame.matches(winningNumbers);
+        int winners = lottoGame.winningNumberCount(winningNumbers);
 
         //then
         assertThat(winners).isEqualTo(expected);

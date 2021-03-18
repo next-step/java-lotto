@@ -7,22 +7,24 @@ import java.util.Objects;
 public class LottoGame {
     private List<Integer> numbers;
 
+    public LottoGame(LottoNumber lottoNumber) {
+        this(lottoNumber.numbers());
+    }
+
     public LottoGame(List<Integer> givenLottoNumbers) {
         this.numbers = givenLottoNumbers;
         Collections.sort(this.numbers);
     }
 
-    public LottoGame(LottoGenerator lottoGenerator) {
-        this.numbers = lottoGenerator.generate();
-        Collections.sort(this.numbers);
+    public int winningNumberCount(LottoGame winningLottoGame) {
+        return winningNumberCount(winningLottoGame.numbers);
     }
 
-    public int matches(List<Integer> winningNumbers) {
-        Collections.sort(winningNumbers);
-        long numberOfMatches = winningNumbers.stream()
+    public int winningNumberCount(List<Integer> winningNumbers) {
+        long winningNumberCount = winningNumbers.stream()
                 .filter(winningNumber -> numbers.contains(winningNumber))
                 .count();
-        return (int) numberOfMatches;
+        return (int) winningNumberCount;
     }
 
     @Override

@@ -1,13 +1,13 @@
 package LottoTest;
 
-import lotto.LottoGenerator;
+import lotto.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class FixedLottoGenerator implements LottoGenerator {
+public class FixedLottoNumber implements LottoNumber {
     @Override
-    public List<Integer> generate() {
+    public List<Integer> numbers() {
         return Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 }
