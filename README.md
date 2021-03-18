@@ -95,3 +95,13 @@
 
 
 ![step3](docs/lotto_step3.png)
+
+> 1차 피드백
+- [꼭 필요한 주석?](https://github.com/next-step/java-lotto/pull/1261#discussion_r596771924)
+- [엘레강트 오브젝트](https://github.com/next-step/java-lotto/pull/1261#discussion_r596800376)
+- [지엽적인 변수명](https://github.com/next-step/java-lotto/pull/1261#discussion_r596801645)
+- [순환참조 구조](https://github.com/next-step/java-lotto/pull/1261#discussion_r596803272)
+- [compareTo 이슈 발생 가능성](https://github.com/next-step/java-lotto/pull/1261#discussion_r596806649)
+- [연산처리](https://github.com/next-step/java-lotto/pull/1261#discussion_r596810848)
+- [메서드 내에 유효성검사 간결하게 표현하기](https://github.com/next-step/java-lotto/pull/1261#discussion_r596825348)
+- [객체의 상태값 관리 생각하기](https://github.com/next-step/java-lotto/pull/1261#discussion_r596829039)
