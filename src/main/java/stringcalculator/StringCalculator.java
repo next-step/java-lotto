@@ -5,6 +5,6 @@ public class StringCalculator {
   private StringCalculator() {}
 
   public static int sum(String expression) {
-    return -1;
+    return 0;
   }
 }
