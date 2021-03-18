@@ -92,3 +92,6 @@
     - LottoMatch 라는 enum 에서 보너스 번호 유무에 따라서 당첨금을 반환할 수 있으므로 필터링 추가
     - List<LottoNumber>라는 컬렉션을 갖고 있는 일급 컬렉션인 Lotto 클래스의 winningReward, match 메서드에 bonus 파라미터 추가
     - 로또 결과를 관리하는 LottoResult 클래스에서 LottoNumber(BonusNumber)를 관리할 수 있도록 필드 추가 및 관련 메서드에 파라미터로 추가  
+
+
+![step3](docs/lotto_step3.png)
