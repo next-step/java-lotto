@@ -16,19 +16,16 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore();
 
-        // 금액 요청
         RequestMoney requestMoney = money();
         ResultView.printLottoCount(requestMoney);
         Lottos lottos = lottoStore.lotto(requestMoney);
 
-        // 중간 보기
         ResultView.printLottos(lottos);
 
-        // 당첨 번호 입력
         RequestWinningNumber winningNumber = winningNumber();
         LottoNumber bonusNumber = bonusNumber();
         LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
-        // 결과 보기
+
         printResult(lottoResult);
         printRate(lottoResult);
     }
