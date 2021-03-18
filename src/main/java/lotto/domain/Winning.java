@@ -19,9 +19,7 @@ public class Winning {
     }
 
     public void record(int matchNumbers) {
-        for (MatchNumber matchNumber : winning.keySet()) {
-            updateCount(matchNumber, matchNumbers);
-        }
+        winning.keySet().forEach(matchNumber -> updateCount(matchNumber, matchNumbers));
     }
 
     public void updateCount(MatchNumber matchNumber, int matchNumbers) {
@@ -32,14 +30,13 @@ public class Winning {
     }
 
     public int getSumAmount() {
-        int sum = 0;
+        return winning.keySet()
+                .stream()
+                .mapToInt(this::multiply)
+                .sum();
+    }
 
-        for (MatchNumber matchNumber : winning.keySet()) {
-            sum += Amount.getWinningMoney(matchNumber.getMatchNumber()) *
-                                            winning.get(matchNumber)
-                                                    .getCount();
-        }
-
-        return sum;
+    private int multiply(MatchNumber matchNumber) {
+        return Amount.getWinningMoney(matchNumber.getMatchNumber()) * winning.get(matchNumber).getCount();
     }
 }
