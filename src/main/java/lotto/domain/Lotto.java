@@ -36,20 +36,12 @@ public class Lotto {
   }
 
   public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
-    boolean match = false;
+    int match = 0;
     for (LottoNumber lottoNumber : lottoNumberList) {
-      match = matchBonusBallDetail(lastWeekWinningLotto, lottoNumber);
-      if (match) {
-        break;
-      }
+      match += lastWeekWinningLotto.matchBonusBall(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED;
     }
-    return match;
+    return match > IS_NOT_MATCHED ;
   }
-
-  private boolean matchBonusBallDetail(LastWinningLotto lastWinningLotto, LottoNumber lottoNumber) {
-    return lastWinningLotto.matchBonusBall(lottoNumber);
-  }
-
 
 
   @Override
