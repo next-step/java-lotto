@@ -33,8 +33,18 @@ public class WinningNumbers {
 
     private void choose(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            count(lottoNumber.getLottoNumbers());
+            count(lottoNumber);
         }
+    }
+
+    private void count(LottoNumbers lottoNumber) {
+        int correct = 0;
+        for (int win : winNumbers) {
+            if (lottoNumber.contains(win)) {
+                correct++;
+            }
+        }
+        map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
 
     private void count(List<Integer> lottoNumberList) {

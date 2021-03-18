@@ -23,15 +23,11 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     /**
      * 로또번호를 제공
      * @return
      */
-    public void lottoNumbers() {
+    public void mark() {
         Collections.shuffle(lottoNumbers);
         sixNumbers(lottoNumbers);
     }
@@ -53,11 +49,15 @@ public class LottoNumbers {
      * @return
      */
     public int lottoCount(int receiveMoney) {
-        return this.lottoPrice.lottos(receiveMoney);
+        return this.lottoPrice.lottoTicketNumber(receiveMoney);
     }
 
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
+    }
+
+    public boolean contains(int win) {
+        return this.lottoNumbers.contains(win);
     }
 }

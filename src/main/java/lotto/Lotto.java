@@ -19,7 +19,7 @@ public class Lotto {
             lotto.add(new LottoNumbers());
         }
         for (LottoNumbers lottoNumbers : lotto) {
-            lottoNumbers.lottoNumbers();
+            lottoNumbers.mark();
         }
     }
 }

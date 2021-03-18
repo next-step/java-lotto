@@ -12,7 +12,7 @@ class LottoPriceTest {
     @Test
     @DisplayName("하나에 천원")
     void pay() {
-        assertThat(lottoPrice.lottos(14000))
+        assertThat(lottoPrice.lottoTicketNumber(14000))
                 .isEqualTo(14);
     }
 }
