@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<Integer> numbers;
 
+    public LottoNumbers(String number) {
+        this.numbers = lottoNumbers(number);
+    }
+
     public LottoNumbers(List<Integer> numbers) {
         this.numbers = numbers;
 
@@ -19,6 +23,11 @@ public class LottoNumbers {
         }
     }
 
+    private List<Integer> lottoNumbers(String lottoNumber) {
+        return Arrays.stream(lottoNumber.replace(" ", "").split(","))
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
 
     public boolean normal() {
         return Collections.min(numbers) >= LottoConstants.MIN_LOTTO_NUMBER && Collections.max(numbers) <= LottoConstants.MAX_LOTTO_NUMBER;

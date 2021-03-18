@@ -15,10 +15,14 @@ public class Lotto {
     public void start(){
         int money = inputView.money();
         int buyCount = buyCount(money);
+
         resultView.print(buyCount);
+
         List<LottoNumbers> lottoNumbers = lottoMachine.lottoNumbers(buyCount);
+
         resultView.print(lottoNumbers);
 
+        LottoNumbers winningNumbers = new LottoNumbers(inputView.winningNumbers());
 
     }
 
