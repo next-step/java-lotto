@@ -16,5 +16,4 @@ public class LottoRankTest {
       LottoRank.validateNumber(input);
     });
   }
-
 }

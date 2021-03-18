@@ -9,7 +9,6 @@ public class Lotto {
 
   private LottoNumberList lottoNumberList;
 
-
   public Lotto(LottoNumberList lottoNumberList) {
     this.lottoNumberList = lottoNumberList;
   }
@@ -22,11 +21,17 @@ public class Lotto {
     return new Lotto(new LottoNumberList(lottoNumbers));
   }
 
-  public int containsCount(Lotto lastWeekWinningLotto) {
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumberList.contains(lottoNumber);
+  }
+
+  public int containsCount(LastWinningLotto lastWeekWinningLotto) {
     return lottoNumberList.containsCount(lastWeekWinningLotto);
   }
 
-
+  public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
+    return lottoNumberList.matchBonusBall(lastWeekWinningLotto);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -45,11 +50,8 @@ public class Lotto {
     return Objects.hash(lottoNumberList);
   }
 
-  public boolean contains(LottoNumber lottoNumber) {
-    return lottoNumberList.contains(lottoNumber);
-  }
-
   public LottoNumberList getLottoNumberList() {
     return lottoNumberList;
   }
+
 }

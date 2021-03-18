@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import jdk.nashorn.internal.ir.CallNode.EvalArgs;
 
 public enum LottoRank {
   FIRST(6, 2_000_000_000),
-  SECOND(5, 1_500_000),
-  THIRD(4, 50_000),
-  FOURTH(3, 5_000),
+  SECOND(5, 30_000_000),
+  THIRD(5, 1_500_000),
+  FOURTH(4, 50_000),
+  FIFTH(3, 5_000),
   ZERO(0, 0);
 
   private int matchingCount;
@@ -28,8 +30,19 @@ public enum LottoRank {
     return matchingPrice;
   }
 
-  public static LottoRank findByMatchingCount(int matchingCount) {
+  public static LottoRank findByMatchingCount(int matchingCount,boolean matchBonus) {
     validateNumber(matchingCount);
+
+    LottoRank lottoRank = findLottoRank(matchingCount);
+
+    if (SECOND.match(matchingCount)) {
+      return matchBonus ? SECOND : THIRD;
+    }
+
+    return lottoRank;
+  }
+
+  public static LottoRank findLottoRank(int matchingCount) {
     return Arrays.stream(values())
         .filter(r -> r.match(matchingCount))
         .findFirst()

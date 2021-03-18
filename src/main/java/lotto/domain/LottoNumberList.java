@@ -24,7 +24,7 @@ public class LottoNumberList {
   }
 
 
-  public int containsCount(Lotto lastWeekWinningLotto) {
+  public int containsCount(LastWinningLotto lastWeekWinningLotto) {
     int count = 0;
     for (LottoNumber lottoNumber : lottoNumbers) {
       count += (lastWeekWinningLotto.contains(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED);
@@ -34,6 +34,21 @@ public class LottoNumberList {
 
   public boolean contains(LottoNumber lottoNumber) {
     return lottoNumbers.contains(lottoNumber);
+  }
+
+  public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
+    boolean match = false;
+    for (LottoNumber lottoNumber : lottoNumbers) {
+     match = matchBonusBallDetail(lastWeekWinningLotto,lottoNumber);
+     if (match) {
+       break;
+     }
+    }
+    return match;
+  }
+
+  private boolean matchBonusBallDetail(LastWinningLotto lastWinningLotto,LottoNumber lottoNumber) {
+    return lastWinningLotto.matchBonusBall(lottoNumber);
   }
 
   public List<LottoNumber> getLottoNumbers() {

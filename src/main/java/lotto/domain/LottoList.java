@@ -22,11 +22,12 @@ public class LottoList {
     }
   }
 
-  public LottoStatistics makeMatchingCount(Lotto lastWeekWinningLotto) {
+  public LottoStatistics makeMatchingCount(LastWinningLotto lastWeekWinningLotto) {
     LottoStatistics lottoStatistics = new LottoStatistics();
     for (Lotto lotto : lottoList) {
       int matchingCount = lotto.containsCount(lastWeekWinningLotto);
-      LottoRank rank = LottoRank.findByMatchingCount(matchingCount);
+      boolean matchBouns = lotto.matchBonusBall(lastWeekWinningLotto);
+      LottoRank rank = LottoRank.findByMatchingCount(matchingCount,matchBouns);
       lottoStatistics.put(rank);
     }
     return lottoStatistics;

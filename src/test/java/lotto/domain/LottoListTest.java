@@ -19,7 +19,7 @@ public class LottoListTest {
 
     LottoList lottolist = new LottoList(lottos);
 
-    Lotto lastWeekWinningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),4);
 
     LottoStatistics actual = lottolist.makeMatchingCount(lastWeekWinningLotto);
 
@@ -44,7 +44,5 @@ public class LottoListTest {
       LottoList lottoList = new LottoList(lottos);
       lottoList.validateDuplicated(lottos);
     });
-
   }
-
 }

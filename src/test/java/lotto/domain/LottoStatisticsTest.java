@@ -14,6 +14,4 @@ public class LottoStatisticsTest {
     lottoStatistics.put(LottoRank.FOURTH);
     assertEquals(0.35, lottoStatistics.calculate(14000));
   }
-
-
 }

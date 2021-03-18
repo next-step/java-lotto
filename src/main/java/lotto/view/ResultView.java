@@ -46,13 +46,17 @@ public class ResultView {
 
     lottoStatistics.getlottoStaticResultMap()
         .forEach((LottoRank rank, Integer count) -> {
-          sb.append(rank.getMatchingCount() + "개 일치 (");
-          sb.append(rank.getMatchingPrice() + "원) - ");
-          sb.append(count + "개\n");
+          sb.append(rank.getMatchingCount() + "개 일치");
+          if (rank.equals(LottoRank.SECOND)) {
+            sb.append(", 보너스볼 일치" );
+          }
+          sb.append(" ("+ rank.getMatchingPrice() + "원)");
+          sb.append(" - " + count + "개\n");
         });
 
     System.out.println(sb.toString().trim());
   }
+
 
   public void printLottoEarningRate(double earningRate, boolean isBenefit) {
     String benefitOrLoss = (isBenefit) ? PRINT_BENEFIT : PRINT_LOSS;
