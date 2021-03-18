@@ -1,7 +1,7 @@
 package lottery.view;
 
+import lottery.domain.Lottery;
 import lottery.domain.Prize;
-import lottery.dto.ReadonlyLottery;
 import lottery.dto.RoundResult;
 
 import java.util.Arrays;
@@ -13,12 +13,12 @@ import static java.util.stream.Collectors.*;
 
 public class ResultView {
 
-    public void printLotteryTicket(List<ReadonlyLottery> lotteries) {
+    public void printLotteryTicket(List<Lottery> lotteries) {
         printMessage(String.format("%d개를 구매했습니다.", lotteries.size()));
         lotteries.forEach(this::printLottery);
     }
 
-    private void printLottery(ReadonlyLottery lottery) {
+    private void printLottery(Lottery lottery) {
         List<String> numbers = lottery.getNumbers()
                                       .stream()
                                       .mapToInt(Integer::valueOf)

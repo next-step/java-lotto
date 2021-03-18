@@ -1,9 +1,8 @@
 package lottery.domain;
 
-import lottery.dto.LotteryProxy;
-import lottery.dto.ReadonlyLottery;
 import lottery.dto.RoundResult;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +16,8 @@ public class LotteryTicket {
         this.lotteries = lotteries;
     }
 
-    public List<ReadonlyLottery> getLotteries() {
-        return lotteries.stream()
-                        .map(LotteryProxy::new)
-                        .collect(Collectors.toList());
+    public List<Lottery> getLotteries() {
+        return Collections.unmodifiableList(lotteries);
     }
 
     public RoundResult getResult(List<Integer> winningNumbers) {
