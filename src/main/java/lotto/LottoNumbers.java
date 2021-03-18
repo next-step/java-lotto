@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final int MAX_SIZE = 6;
+    public static final int LOTTO_LIMIT_NUMBER = 46;
     private final List<Integer> lottoNumbers;
     private LottoPrice lottoPrice;
 
     public LottoNumbers() {
         this.lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 46; i++) {
+        for (int i = 0; i < LOTTO_LIMIT_NUMBER; i++) {
             lottoNumbers.add(i);
         }
         this.lottoPrice = new LottoPrice();
@@ -25,10 +27,10 @@ public class LottoNumbers {
      * 로또번호를 제공
      * @return
      */
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> lottoNumbers() {
         List<Integer> cloneNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(cloneNumbers);
-        return getSixNumbers(cloneNumbers);
+        return sixNumbers(cloneNumbers);
     }
 
     /**
@@ -36,9 +38,9 @@ public class LottoNumbers {
      * @param shuffledNumbers
      * @return
      */
-    private List<Integer> getSixNumbers(List<Integer> shuffledNumbers) {
+    private List<Integer> sixNumbers(List<Integer> shuffledNumbers) {
         return shuffledNumbers.stream()
-                .limit(6)
+                .limit(MAX_SIZE)
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +49,7 @@ public class LottoNumbers {
      * @param receiveMoney
      * @return
      */
-    public int howManyPass(int receiveMoney) {
+    public int lottoCount(int receiveMoney) {
         return this.lottoPrice.lottos(receiveMoney);
     }
 }

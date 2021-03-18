@@ -19,7 +19,7 @@ public class Win {
 
     public Map<Integer, Integer> getWinNumbers(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            List<Integer> lottoNumberList = lottoNumber.getLottoNumbers();
+            List<Integer> lottoNumberList = lottoNumber.lottoNumbers();
             countWinNumbers(lottoNumberList);
         }
         return map;
