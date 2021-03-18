@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,5 +23,21 @@ public class StringSumTest {
     void sum(String input, int sum) {
         Result result = stringSum.sum(input);
         assertEquals(new Result(sum), result);
+    }
+
+    @DisplayName("입력이 빈 문자열이면 0을 반환")
+    @Test
+    void empty() {
+        String input = "";
+        Result result = stringSum.sum(input);
+        assertEquals(new Result(0), result);
+    }
+
+    @DisplayName("입력이 null이면 0을 반환")
+    @Test
+    void inputNull() {
+        String input = null;
+        Result result = stringSum.sum(input);
+        assertEquals(new Result(0), result);
     }
 }
