@@ -48,6 +48,6 @@ public class LottoNumbers {
      * @return
      */
     public int howManyPass(int receiveMoney) {
-        return this.lottoPrice.howManyPass(receiveMoney);
+        return this.lottoPrice.lottos(receiveMoney);
     }
 }

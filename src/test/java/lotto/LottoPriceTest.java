@@ -10,6 +10,6 @@ class LottoPriceTest {
     @Test
     @DisplayName("하나에 천원")
     void pay() {
-        Assertions.assertThat(lottoPrice.howManyPass(14000)).isEqualTo(14);
+        Assertions.assertThat(lottoPrice.lottos(14000)).isEqualTo(14);
     }
 }
