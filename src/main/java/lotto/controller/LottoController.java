@@ -1,9 +1,13 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoYield;
 import lotto.domain.SbsHappyDreamLottoLive;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
     public void run() {
@@ -22,7 +26,11 @@ public class LottoController {
         String winnerNumbers = inputView.inputWinnerNumber();
         SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers, lottoMachine);
 
+        List<LottoRank> lottoRanks = sbsHappyDreamLottoLive.readOnlyLottoRanks();
+
+        LottoYield lottoYield = new LottoYield(lottoRanks, buyAmount);
+
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(sbsHappyDreamLottoLive.readOnlyLottoRanks(), buyAmount);
+        resultView.printLottoRanksInfos(lottoRanks, lottoYield);
     }
 }

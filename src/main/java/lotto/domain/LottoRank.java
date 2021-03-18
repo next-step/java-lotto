@@ -8,13 +8,20 @@ public enum LottoRank {
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
+    private static final int DEFAULT_WINNER_COUNT = 0;
+
     private int rankCount;
     private int prize;
     private int winnerCount;
 
     LottoRank(int rankCount, int prize) {
+        this(rankCount, prize, DEFAULT_WINNER_COUNT);
+    }
+
+    LottoRank(int rankCount, int prize, int winnerCount) {
         this.rankCount = rankCount;
         this.prize = prize;
+        this.winnerCount = winnerCount;
     }
 
     public int rankCount() {
@@ -53,5 +60,9 @@ public enum LottoRank {
 
     public int rankPrizeSum() {
         return winnerCount * prize;
+    }
+
+    public boolean checkWinnerNumber(int winnerCount) {
+        return this.winnerCount == winnerCount;
     }
 }

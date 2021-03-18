@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoLottoRankTest {
+public class LottoRankTest {
 
     public List<Integer> createLottoNumber() {
         return Arrays.asList(1,2,3,4,5,6);
@@ -20,6 +20,19 @@ public class LottoLottoRankTest {
 
     public LottoMachine createLottoMachine() {
         return new LottoMachine(createLottoTikect());
+    }
+
+    @Test
+    @DisplayName("로또 생성 시 당첨자 0 확인")
+    public void createLottoLankTest() throws Exception {
+        //given
+        int winnerCount = 0;
+        LottoRank lottoRank = LottoRank.THREE;
+
+        //when
+
+        //then
+        assertThat(lottoRank.checkWinnerNumber(winnerCount)).isTrue();
     }
 
     @Test
