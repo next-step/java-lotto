@@ -82,7 +82,7 @@ class LottoTest {
     void match_Bonus() {
         //given
         Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
-        LottoNumber BonusNumber = new LottoNumber(6);
+        LottoNumber BonusNumber = LottoNumber.of(6);
 
         //when
         boolean matchBonus = lotto.matchBonus(BonusNumber);
@@ -92,7 +92,7 @@ class LottoTest {
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
-        return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
+        return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
 }
 

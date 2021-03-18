@@ -46,7 +46,7 @@ public class LottoController {
     }
 
     public LottoNumber inputBonusInput() {
-        return new LottoNumber(lottoView.inputBonusInput());
+        return LottoNumber.of(lottoView.inputBonusInput());
     }
 
     public void finishView() {

@@ -19,23 +19,23 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        return Arrays.stream(Rank.values())
+        return Arrays.stream(values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findAny()
-                .orElse(Rank.MISS);
+                .orElse(MISS);
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 5 && matchBonus) {
-            return Rank.SECOND;
+        if (countOfMatch == SECOND.countOfMatch && matchBonus) {
+            return SECOND;
         }
-        if (countOfMatch == 5) {
-            return Rank.THIRD;
+        if (countOfMatch == THIRD.countOfMatch) {
+            return THIRD;
         }
-        return Arrays.stream(Rank.values())
+        return Arrays.stream(values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findAny()
-                .orElseGet(() -> Rank.MISS);
+                .orElseGet(() -> MISS);
     }
 
     public int getCountOfMatch() {

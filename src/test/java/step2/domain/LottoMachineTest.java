@@ -50,7 +50,7 @@ class LottoMachineTest {
         List<LottoNumber> lottoNumbers = lottoMachine.toLottoNumberList(winNumber);
 
         //then
-        assertThat(lottoNumbers).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        assertThat(lottoNumbers).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
     }
 
     @DisplayName("당첨번호가 6개가 아닐 경우")
@@ -71,22 +71,22 @@ class LottoMachineTest {
     @Test
     void getMatchOfBonus() {
         LottoMachine lottoMachine = new LottoMachine(createLottos());
-        List<Boolean> resultMatchList = lottoMachine.getMatchOfBonus(new LottoNumber(6));
+        List<Boolean> resultMatchList = lottoMachine.getMatchOfBonus(LottoNumber.of(6));
 
         assertThat(resultMatchList.get(0)).isTrue();
         assertThat(resultMatchList.get(1)).isFalse();
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
-        return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
+        return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
 
     Lottos createLottos() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(11), new LottoNumber(24))));
+        lottoList.add(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+        lottoList.add(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))));
+        lottoList.add(new Lotto(List.of(LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12))));
+        lottoList.add(new Lotto(List.of(LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(11), LottoNumber.of(24))));
         return new Lottos(lottoList);
     }
 }

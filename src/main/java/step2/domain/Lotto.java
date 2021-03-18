@@ -37,7 +37,7 @@ public class Lotto {
         return lottoNumber.stream()
                 .limit(6)
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(toUnmodifiableList());
     }
 

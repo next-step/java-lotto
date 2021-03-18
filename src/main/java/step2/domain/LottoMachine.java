@@ -43,7 +43,7 @@ public class LottoMachine {
         try {
             collect = Arrays.stream(stringNumbers)
                     .map(Integer::parseInt)
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::of)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new RuntimeException("로또 당첨번호에 숫자가 아닌 부분이 있습니다.");
