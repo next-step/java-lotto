@@ -4,13 +4,12 @@ import lotto.constant.LottoConstant;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private static final Integer[] LOTTO_NUMBERS = {1,2,3,4,5,6,7,8,9,10,
-                                                11,12,13,14,15,16,17,18,19,20,
-                                                21,22,23,24,25,26,27,28,29,30,
-                                                31,32,33,34,35,36,37,38,39,40,
-                                                41,42,43,44,45};
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 45)
+                                                            .boxed()
+                                                            .collect(Collectors.toList());
 
     private final List<Integer> lottoNumbers;
 
@@ -23,7 +22,7 @@ public class LottoTicket {
     }
 
     private List<Integer> createLottoTicket() {
-        List<Integer> numbers = createLottoNumbers();
+        List<Integer> numbers = LOTTO_NUMBERS;
 
         Collections.shuffle(numbers);
 
@@ -34,10 +33,6 @@ public class LottoTicket {
         Collections.sort(result);
 
         return result;
-    }
-
-    private List<Integer> createLottoNumbers() {
-        return Arrays.asList(LOTTO_NUMBERS);
     }
 
     public List<Integer> lottoNumber() {
