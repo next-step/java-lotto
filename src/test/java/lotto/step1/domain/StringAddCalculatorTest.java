@@ -1,6 +1,5 @@
 package lotto.step1.domain;
 
-import lotto.step1.domain.StringAddCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,6 +25,4 @@ class StringAddCalculatorTest {
                 Arguments.of("", 0)
         );
     }
-
-
 }

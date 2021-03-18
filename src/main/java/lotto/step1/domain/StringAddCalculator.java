@@ -6,14 +6,13 @@ public class StringAddCalculator {
     }
 
     public static int splitAndSum(String input) {
-        if (input == null) {
+        if (validateInputNullOrEmpty(input)) {
             return 0;
         }
-
-        if (input.trim().isEmpty()) {
-            return 0;
-        }
-
         return 1;
+    }
+
+    private static boolean validateInputNullOrEmpty(String input) {
+        return input == null || input.trim().isEmpty();
     }
 }
