@@ -21,7 +21,7 @@ public class ResultView {
     System.out.printf(PRINT_LOTTO_COUNT, lottoCount);
   }
 
-  public void printLottoList(LottoList lottoList) {
+  public void printLottoList(LottoMachine lottoList) {
     String printLottolist = "";
     for (Lotto lotto : lottoList.getLottoList()) {
       printLottolist += "[";
