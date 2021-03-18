@@ -16,4 +16,13 @@ class StringCalculatorTest {
         () -> assertThat(StringCalculator.sum("")).isEqualTo(0)
     );
   }
+
+  @Test
+  @DisplayName("숫자 형태의 문자열이 들어오면 해당 숫자를 반환한다.")
+  void calculateNumber() {
+    assertAll(
+        () -> assertThat(StringCalculator.sum("1")).isEqualTo(1),
+        () -> assertThat(StringCalculator.sum("2")).isEqualTo(2)
+    );
+  }
 }
