@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨자테스트")
-class WinTest {
+class WinningNumbersTest {
     LottoNumbers lottoNumbers1;
     LottoNumbers lottoNumbers2;
     LottoNumbers lottoNumbers3;
@@ -71,14 +71,14 @@ class WinTest {
         lottoNumbers.add(lottoNumbers13);
         lottoNumbers.add(lottoNumbers14);
 
-        Win win = new Win(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(win.getWinNumbers(lottoNumbers).get(3))
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(3))
                 .isEqualTo(1);
-        assertThat(win.getWinNumbers(lottoNumbers).get(4))
+        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(4))
                 .isEqualTo(0);
-        assertThat(win.getWinNumbers(lottoNumbers).get(5))
+        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(5))
                 .isEqualTo(0);
-        assertThat(win.getWinNumbers(lottoNumbers).get(6))
+        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(6))
                 .isEqualTo(0);
     }
 

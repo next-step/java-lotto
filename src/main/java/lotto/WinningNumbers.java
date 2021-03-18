@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Win {
+public class WinningNumbers {
     int[] winNumbers;
     Map<Integer, Integer> map;
 
-    public Win(int[] winNumbers) {
+    public WinningNumbers(int[] winNumbers) {
         map = new HashMap<>();
         map.put(3, 0);
         map.put(4, 0);
