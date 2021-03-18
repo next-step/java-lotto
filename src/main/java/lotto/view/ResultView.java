@@ -1,7 +1,17 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
+
+import java.util.List;
+
 public class ResultView {
     public void print(int buyCount){
         System.out.println(buyCount + "개를 구매했습니다.");
+    }
+
+    public void print(List<LottoNumbers> lottoNumbers) {
+        lottoNumbers.stream()
+                    .map(LottoNumbers::printInfo)
+                    .forEach(System.out::println);
     }
 }
