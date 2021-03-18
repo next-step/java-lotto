@@ -18,14 +18,18 @@ public class WinningNumbers {
     }
 
     public Map<Integer, Integer> getWinNumbers(List<LottoNumbers> lottoNumbers) {
-        for (LottoNumbers lottoNumber : lottoNumbers) {
-            List<Integer> lottoNumberList = lottoNumber.lottoNumbers();
-            countWinNumbers(lottoNumberList);
-        }
+        choose(lottoNumbers);
         return map;
     }
 
-    private void countWinNumbers(List<Integer> lottoNumberList) {
+    private void choose(List<LottoNumbers> lottoNumbers) {
+        for (LottoNumbers lottoNumber : lottoNumbers) {
+            List<Integer> lottoNumberList = lottoNumber.lottoNumbers();
+            count(lottoNumberList);
+        }
+    }
+
+    private void count(List<Integer> lottoNumberList) {
         int correct = 0;
         for (int win : winNumbers) {
             if (lottoNumberList.contains(win)) {
