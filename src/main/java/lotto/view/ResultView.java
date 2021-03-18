@@ -33,7 +33,6 @@ public class ResultView {
 
   private String printEachLotto(Lotto lotto) {
     return lotto.getLottoNumberList()
-        .getLottoNumbers()
         .stream()
         .map(LottoNumber::toString)
         .collect(Collectors.joining(DELIMITER));

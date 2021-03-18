@@ -7,9 +7,11 @@ import java.util.Objects;
 
 public class Lotto {
 
-  private LottoNumberList lottoNumberList;
+  private final List<LottoNumber> lottoNumberList;
+  private static final int IS_MATCHED = 1;
+  private static final int IS_NOT_MATCHED = 0;
 
-  public Lotto(LottoNumberList lottoNumberList) {
+  public Lotto(List<LottoNumber> lottoNumberList) {
     this.lottoNumberList = lottoNumberList;
   }
 
@@ -18,7 +20,7 @@ public class Lotto {
     for (Integer number : numbers) {
       lottoNumbers.add(new LottoNumber(number));
     }
-    return new Lotto(new LottoNumberList(lottoNumbers));
+    return new Lotto(lottoNumbers);
   }
 
   public boolean contains(LottoNumber lottoNumber) {
@@ -26,12 +28,29 @@ public class Lotto {
   }
 
   public int containsCount(LastWinningLotto lastWeekWinningLotto) {
-    return lottoNumberList.containsCount(lastWeekWinningLotto);
+    int count = 0;
+    for (LottoNumber lottoNumber : lottoNumberList) {
+      count += (lastWeekWinningLotto.contains(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED);
+    }
+    return count;
   }
 
   public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
-    return lottoNumberList.matchBonusBall(lastWeekWinningLotto);
+    boolean match = false;
+    for (LottoNumber lottoNumber : lottoNumberList) {
+      match = matchBonusBallDetail(lastWeekWinningLotto, lottoNumber);
+      if (match) {
+        break;
+      }
+    }
+    return match;
   }
+
+  private boolean matchBonusBallDetail(LastWinningLotto lastWinningLotto, LottoNumber lottoNumber) {
+    return lastWinningLotto.matchBonusBall(lottoNumber);
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -50,7 +69,7 @@ public class Lotto {
     return Objects.hash(lottoNumberList);
   }
 
-  public LottoNumberList getLottoNumberList() {
+  public List<LottoNumber> getLottoNumberList() {
     return lottoNumberList;
   }
 
