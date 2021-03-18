@@ -1,13 +1,13 @@
 package study.lotto;
 
 import study.lotto.controller.LottoStore;
+import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoResult;
 import study.lotto.service.Lottos;
 import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.dto.RequestWinningNumber;
 
-import static study.lotto.view.InputView.requestMoney;
-import static study.lotto.view.InputView.requestWinningNumber;
+import static study.lotto.view.InputView.*;
 import static study.lotto.view.ResultView.*;
 
 
@@ -25,8 +25,8 @@ public class LottoApplication {
 
         // 당첨 번호 입력
         RequestWinningNumber winningNumber = requestWinningNumber();
-        LottoResult lottoResult = new LottoResult(winningNumber, lottos);
-
+        LottoNumber bonusNumber = requestBonusNumber();
+        LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
         // 결과 보기
         printStatics(lottoResult);
         printRate(lottoResult);
