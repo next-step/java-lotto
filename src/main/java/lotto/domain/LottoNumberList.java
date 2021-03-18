@@ -39,15 +39,15 @@ public class LottoNumberList {
   public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
     boolean match = false;
     for (LottoNumber lottoNumber : lottoNumbers) {
-     match = matchBonusBallDetail(lastWeekWinningLotto,lottoNumber);
-     if (match) {
-       break;
-     }
+      match = matchBonusBallDetail(lastWeekWinningLotto, lottoNumber);
+      if (match) {
+        break;
+      }
     }
     return match;
   }
 
-  private boolean matchBonusBallDetail(LastWinningLotto lastWinningLotto,LottoNumber lottoNumber) {
+  private boolean matchBonusBallDetail(LastWinningLotto lastWinningLotto, LottoNumber lottoNumber) {
     return lastWinningLotto.matchBonusBall(lottoNumber);
   }
 

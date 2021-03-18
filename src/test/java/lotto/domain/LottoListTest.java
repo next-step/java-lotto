@@ -19,7 +19,7 @@ public class LottoListTest {
 
     LottoList lottolist = new LottoList(lottos);
 
-    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),4);
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 4);
 
     LottoStatistics actual = lottolist.makeMatchingCount(lastWeekWinningLotto);
 
@@ -30,7 +30,7 @@ public class LottoListTest {
     expectedMap.put(LottoRank.FOURTH, 0);
     expectedMap.put(LottoRank.ZERO, 0);
 
-    assertEquals(expectedMap,actual.getlottoStaticResultMap());
+    assertEquals(expectedMap, actual.getlottoStaticResultMap());
   }
 
   @Test

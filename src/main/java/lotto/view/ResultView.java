@@ -48,9 +48,9 @@ public class ResultView {
         .forEach((LottoRank rank, Integer count) -> {
           sb.append(rank.getMatchingCount() + "개 일치");
           if (rank.equals(LottoRank.SECOND)) {
-            sb.append(", 보너스볼 일치" );
+            sb.append(", 보너스볼 일치");
           }
-          sb.append(" ("+ rank.getMatchingPrice() + "원)");
+          sb.append(" (" + rank.getMatchingPrice() + "원)");
           sb.append(" - " + count + "개\n");
         });
 

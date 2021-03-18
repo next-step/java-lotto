@@ -30,7 +30,7 @@ public enum LottoRank {
     return matchingPrice;
   }
 
-  public static LottoRank findByMatchingCount(int matchingCount,boolean matchBonus) {
+  public static LottoRank findByMatchingCount(int matchingCount, boolean matchBonus) {
     validateNumber(matchingCount);
 
     LottoRank lottoRank = findLottoRank(matchingCount);

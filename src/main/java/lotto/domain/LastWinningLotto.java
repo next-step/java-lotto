@@ -13,8 +13,8 @@ public class LastWinningLotto {
     this.bonusBall = bonusBall;
   }
 
-  public static LastWinningLotto of(List<Integer> numbers,int bonusBall) {
-    return new LastWinningLotto(Lotto.of(numbers),new LottoNumber(bonusBall));
+  public static LastWinningLotto of(List<Integer> numbers, int bonusBall) {
+    return new LastWinningLotto(Lotto.of(numbers), new LottoNumber(bonusBall));
   }
 
   public boolean contains(LottoNumber lottoNumber) {
