@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또금액")
 class LottoPriceTest {
     LottoPrice lottoPrice = new LottoPrice();
+
     @Test
     @DisplayName("하나에 천원")
     void pay() {
