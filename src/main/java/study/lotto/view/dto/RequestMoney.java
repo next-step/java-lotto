@@ -44,6 +44,6 @@ public class RequestMoney {
     }
 
     public double winningRate(long sum) {
-        return (1.0 * sum) / money;
+        return (double) sum / money;
     }
 }
