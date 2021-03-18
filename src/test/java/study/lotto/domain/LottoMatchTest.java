@@ -38,10 +38,11 @@ class LottoMatchTest {
 
     private static Stream<Arguments> lottoMatchEntry() {
         return Stream.of(
-                Arguments.of(LottoMatch.RANK_FIRST, 2_000_000_000),
-                Arguments.of(LottoMatch.RANK_SECOND, 1_500_000),
-                Arguments.of(LottoMatch.RANK_THIRD, 50_000),
-                Arguments.of(LottoMatch.RANK_FOURTH, 5_000)
+                Arguments.of(LottoMatch.RANK_FIRST, 2_000_000_000, false),
+                Arguments.of(LottoMatch.RANK_BONUS, 30_000_000, true),
+                Arguments.of(LottoMatch.RANK_SECOND, 1_500_000, false),
+                Arguments.of(LottoMatch.RANK_THIRD, 50_000, false),
+                Arguments.of(LottoMatch.RANK_FOURTH, 5_000, false)
         );
     }
     @ParameterizedTest(name = "{0} 타입 enum에 존재하는지 확인 테스트")
@@ -54,13 +55,13 @@ class LottoMatchTest {
         assertThat(all).contains(given);
     }
 
-    @ParameterizedTest(name = "{0} 타입 reward 확인 테스트")
+    @ParameterizedTest(name = "{0} 개 숫자 중 {1}개 매칭 보너스 숫자 {2} reward 확인 테스트")
     @MethodSource(value = "lottoMatchEntry")
-    void test(LottoMatch given, long expected) {
+    void test(LottoMatch given, long expected, boolean hasBonus) {
         // given
         long lGiven = Long.parseLong(given.toString());
         // when
-        long winningReward = LottoMatch.of(lGiven).getWinningReward();
+        long winningReward = LottoMatch.of(lGiven, hasBonus).getWinningReward();
         // then
         assertThat(winningReward).isEqualTo(expected);
     }

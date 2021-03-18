@@ -37,15 +37,8 @@ public enum LottoMatch {
                 .orElse(RANK_ETC);
     }
 
-    private boolean isBonusNumber(boolean bonusNumber) {
+    private boolean isBonusNumber(final boolean bonusNumber) {
         return !this.equals(RANK_BONUS) || bonusNumber;
-    }
-
-    public static LottoMatch of(final long matchCount) {
-        return Arrays.stream(LottoMatch.values())
-                .filter(lottoMatch -> lottoMatch.isMatchCount(matchCount))
-                .findAny()
-                .orElse(RANK_ETC);
     }
 
     private boolean isMatchCount(final long matchCount) {
