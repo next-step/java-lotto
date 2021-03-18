@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-  private int value;
+  private final int value;
   private static final String INVALID_NUMBER = "유효하지 않은 로또 번호입니다.";
   private static final int MAX_VALUE = 45;
   private static final int MIN_VALUE = 1;

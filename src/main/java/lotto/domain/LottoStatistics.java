@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class LottoStatistics {
 
-  private Map<LottoRank, Integer> lottoStaticResult;
+  private final Map<LottoRank, Integer> lottoStaticResult;
   private static final int SCALE_VALUE = 2;
   private static final int ZERO_VALUE = 0;
   private static final int BENEFIT_CRETERION = 1;

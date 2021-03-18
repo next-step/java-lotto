@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoList {
 
-  private List<Lotto> lottoList;
+  private final List<Lotto> lottoList;
   private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
 
   public LottoList(List<Lotto> lottoList) {

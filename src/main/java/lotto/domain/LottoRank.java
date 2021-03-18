@@ -11,8 +11,8 @@ public enum LottoRank {
   FIFTH(3, 5_000),
   ZERO(0, 0);
 
-  private int matchingCount;
-  private int matchingPrice;
+  private final int matchingCount;
+  private final int matchingPrice;
   private static final String INVALID_NUMBER = "유효하지 않은 값입니다.";
   private static final int MIN_VALUE = 0;
   private static final int MAX_VALUE = 6;

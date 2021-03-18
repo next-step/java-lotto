@@ -5,8 +5,8 @@ import java.util.List;
 
 public class LastWinningLotto {
 
-  private Lotto lotto;
-  private LottoNumber bonusBall;
+  private final Lotto lotto;
+  private final LottoNumber bonusBall;
 
   public LastWinningLotto(Lotto lotto, LottoNumber bonusBall) {
     this.lotto = lotto;
