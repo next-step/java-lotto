@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     public static final int MAX_SIZE = 6;
     public static final int LOTTO_LIMIT_NUMBER = 46;
-    private final List<Integer> lottoNumbers;
+    private List<Integer> lottoNumbers;
     private LottoPrice lottoPrice;
 
     public LottoNumbers() {
@@ -23,14 +23,17 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     /**
      * 로또번호를 제공
      * @return
      */
-    public List<Integer> lottoNumbers() {
-        List<Integer> cloneNumbers = new ArrayList<>(lottoNumbers);
-        Collections.shuffle(cloneNumbers);
-        return sixNumbers(cloneNumbers);
+    public void lottoNumbers() {
+        Collections.shuffle(lottoNumbers);
+        sixNumbers(lottoNumbers);
     }
 
     /**
@@ -38,8 +41,8 @@ public class LottoNumbers {
      * @param shuffledNumbers
      * @return
      */
-    private List<Integer> sixNumbers(List<Integer> shuffledNumbers) {
-        return shuffledNumbers.stream()
+    private void sixNumbers(List<Integer> shuffledNumbers) {
+        this.lottoNumbers = shuffledNumbers.stream()
                 .limit(MAX_SIZE)
                 .collect(Collectors.toList());
     }
@@ -55,8 +58,6 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return "LottoNumbers{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        return String.valueOf(lottoNumbers);
     }
 }
