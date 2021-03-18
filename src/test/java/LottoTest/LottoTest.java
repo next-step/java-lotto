@@ -1,9 +1,6 @@
 package LottoTest;
 
-import lotto.Lotto;
-import lotto.LottoGame;
-import lotto.LottoResult;
-import lotto.WinningNumber;
+import lotto.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -30,26 +27,26 @@ public class LottoTest {
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoGame> lottoGames = Arrays.asList(
                 new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new LottoGame(Arrays.asList(1, 2, 3, 4, 8, 7)),
-                new LottoGame(Arrays.asList(1, 2, 3, 9, 8, 7)),
-                new LottoGame(Arrays.asList(1, 2, 10, 9, 8, 7)),
-                new LottoGame(Arrays.asList(1, 11, 10, 9, 8, 7)),
-                new LottoGame(Arrays.asList(12, 11, 10, 9, 8, 7))
+                new LottoGame(Arrays.asList(7, 2, 3, 4, 5, 6)),
+                new LottoGame(Arrays.asList(7, 8, 3, 4, 5, 6)),
+                new LottoGame(Arrays.asList(7, 8, 9, 4, 5, 6)),
+                new LottoGame(Arrays.asList(7, 8, 9, 10, 5, 6)),
+                new LottoGame(Arrays.asList(7, 8, 9, 10, 11, 6))
         );
 
         Lotto lotto = new Lotto(lottoGames);
 
         //when
-        LottoResult result = lotto.result(winningNumber);
+        List<LottoGameResult> result = lotto.result(winningNumber);
 
         //then
-        assertThat(result.winningNumberCount(0)).isEqualTo(1);
-        assertThat(result.winningNumberCount(1)).isEqualTo(1);
-        assertThat(result.winningNumberCount(2)).isEqualTo(1);
-        assertThat(result.winningNumberCount(3)).isEqualTo(1);
-        assertThat(result.winningNumberCount(4)).isEqualTo(1);
-        assertThat(result.winningNumberCount(5)).isEqualTo(1);
-        assertThat(result.winningNumberCount(6)).isEqualTo(1);
+        assertThat(result).contains(new LottoGameResult(6));
+        assertThat(result).contains(new LottoGameResult(5));
+        assertThat(result).contains(new LottoGameResult(4));
+        assertThat(result).contains(new LottoGameResult(3));
+        assertThat(result).contains(new LottoGameResult(2));
+        assertThat(result).contains(new LottoGameResult(1));
+
+        assertFalse(result.contains(new LottoGameResult(0)));
     }
 }

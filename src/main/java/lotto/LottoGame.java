@@ -12,21 +12,20 @@ public class LottoGame {
     }
 
     public LottoGame(List<Integer> givenLottoNumbers) {
+        Collections.sort(givenLottoNumbers);
         this.numbers = givenLottoNumbers;
-        Collections.sort(this.numbers);
-    }
-
-    public int winningNumberCount(List<Integer> winningNumbers) {
-        WinningNumber winningNumber = new WinningNumber(winningNumbers);
-        return winningNumberCount(winningNumber);
-    }
-
-    public int winningNumberCount(WinningNumber winningNumber) {
-        return winningNumber.matchCount(this);
     }
 
     public boolean contains(int number) {
         return numbers.contains(number);
+    }
+
+    public LottoGameResult result(List<Integer> winningNumbers) {
+        return result(new WinningNumber(winningNumbers));
+    }
+
+    public LottoGameResult result(WinningNumber winningNumber) {
+        return new LottoGameResult(winningNumber.matchCount(this));
     }
 
     @Override
@@ -41,6 +40,4 @@ public class LottoGame {
     public int hashCode() {
         return Objects.hash(numbers);
     }
-
-
 }
