@@ -2,7 +2,6 @@ package study.lotto.domain;
 
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.service.Lottos;
-import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.List;
@@ -16,10 +15,12 @@ import static java.util.stream.Collectors.groupingBy;
 public class LottoResult {
 
     private final RequestWinningNumber winningNumber;
+    private final LottoNumber bonusNumber;
     private final Lottos lottos;
 
-    public LottoResult(final RequestWinningNumber winningNumber, final Lottos lottos) {
+    public LottoResult(final RequestWinningNumber winningNumber, final Lottos lottos, final LottoNumber bonusNumber) {
         this.winningNumber = winningNumber;
+        this.bonusNumber = bonusNumber;
         this.lottos = lottos;
     }
 
@@ -28,7 +29,7 @@ public class LottoResult {
 
         return lotteries.stream()
                 .collect(
-                        groupingBy(lotto -> lotto.match(winningNumber), counting())
+                        groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
                 )
                 .getOrDefault(lottoMatch, 0L);
     }
@@ -38,7 +39,7 @@ public class LottoResult {
         int money = lottos.paidMoney();
 
         long sum = lotteries.stream()
-                .mapToLong(lotto -> lotto.winningReward(winningNumber))
+                .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
                 .sum();
         // 1.0 * 당첨 합계 / 구매 금액
         return 1.0 * sum / money;

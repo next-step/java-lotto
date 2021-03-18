@@ -1,7 +1,6 @@
 package study.lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -39,13 +38,22 @@ class LottoResultTest {
                         new RequestWinningNumber("1,2,3,4,5,6"),
                         new RequestMoney(1000),
                         LottoMatch.RANK_FIRST,
-                        1
+                        1,
+                        new LottoNumber(15)
                 ),
                 Arguments.of(
                         new RequestWinningNumber("4,5,6,7,8,9"),
                         new RequestMoney(2000),
                         LottoMatch.RANK_FOURTH,
-                        2
+                        2,
+                        new LottoNumber(15)
+                ),
+                Arguments.of(
+                        new RequestWinningNumber("1,2,3,4,5,10"),
+                        new RequestMoney(2000),
+                        LottoMatch.RANK_BONUS,
+                        1,
+                        new LottoNumber(6)
                 )
         );
     }
@@ -55,29 +63,33 @@ class LottoResultTest {
                 Arguments.of(
                         new RequestWinningNumber("1,2,3,4,5,6"),
                         new RequestMoney(2000),
-                        ProfitMessage.PROFIT
+                        ProfitMessage.PROFIT,
+                        new LottoNumber(15)
                         ),
                 Arguments.of(
                         new RequestWinningNumber("1,2,14,11,12,13"),
                         new RequestMoney(2000),
-                        ProfitMessage.LOSS
+                        ProfitMessage.LOSS,
+                        new LottoNumber(15)
                         ),
                 Arguments.of(
                         new RequestWinningNumber("1,2,3,16,14,15"),
                         new RequestMoney(5000),
-                        ProfitMessage.BREAK_POINT
+                        ProfitMessage.BREAK_POINT,
+                        new LottoNumber(16)
                         )
 
         );
     }
     @ParameterizedTest(name = "지난 주 당첨 숫자 {0} 중 {1}원으로 구매하여 매칭되는 숫자 {2}개로 로또 {3} 개 당첨")
     @MethodSource(value = "winningEntry")
-    void count_로또_총_맞춘_갯수(RequestWinningNumber winningNumber, RequestMoney requestMoney, LottoMatch rank,
-                          long matchCount) {
+    void count_로또_총_맞춘_갯수(
+            RequestWinningNumber winningNumber, RequestMoney requestMoney,
+            LottoMatch rank, long matchCount, LottoNumber bonusNumber) {
         // given
         Lottos lottos = new Lottos(lottoList, requestMoney);
         // when
-        LottoResult lottoResult = new LottoResult(winningNumber, lottos);
+        LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
         long count = lottoResult.count(rank);
         // then
         assertThat(count).isEqualTo(matchCount);
@@ -85,12 +97,13 @@ class LottoResultTest {
 
     @ParameterizedTest(name = "지난 주 당첨 숫자 {0} 중 {1}원으로 구매하여 {2}")
     @MethodSource(value = "winningRateEntry")
-    void winningRate_손익_확인(RequestWinningNumber winningNumber, RequestMoney requestMoney,
-                            ProfitMessage profitMessage) {
+    void winningRate_손익_확인(
+            RequestWinningNumber winningNumber, RequestMoney requestMoney,
+            ProfitMessage profitMessage, LottoNumber bonusNumber) {
         // given
         Lottos lottos = new Lottos(lottoList, requestMoney);
         // when
-        LottoResult lottoResult = new LottoResult(winningNumber, lottos);
+        LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
         double winningRate = lottoResult.winningRate();
         ProfitMessage actual = ProfitMessage.of(winningRate);
         // then
