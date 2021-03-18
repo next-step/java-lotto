@@ -20,14 +20,6 @@ public class LottoController {
         this.lottoMachine = new LottoMachine();
     }
 
-    public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        int money = lottoController.paymentMoney();
-        Lottos lottos = lottoController.createLotto(money);
-        lottoController.lottoInfoPrint(lottos);
-        lottoController.finishView();
-    }
-
     public void lottoInfoPrint(Lottos lottos) {
         LottosDto lottosDto = createLottosDto(lottos);
         lottoView.lottoInfoPirnt(lottosDto);
@@ -37,8 +29,12 @@ public class LottoController {
         return lottoView.paymentMoney();
     }
 
-    public Lottos createLotto(int money) {
-        return lottoMachine.createLotto(money);
+    public List<String> manualLottos() {
+        return lottoView.manualLottos();
+    }
+
+    public Lottos createLotto(int money, List<String> manualLottoList) {
+        return lottoMachine.createLotto(money, manualLottoList);
     }
 
     private LottoStatisticsDto createStatisticsDto(Map<Integer, Long> rank, double statistics) {
@@ -61,5 +57,14 @@ public class LottoController {
 
     public LottosDto createLottosDto(Lottos lotto) {
         return new LottosDto(lotto);
+    }
+
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        int money = lottoController.paymentMoney();
+        List<String> manualLottoList = lottoController.manualLottos();
+        Lottos lottos = lottoController.createLotto(money, manualLottoList);
+        lottoController.lottoInfoPrint(lottos);
+        lottoController.finishView();
     }
 }
