@@ -72,10 +72,14 @@ class WinTest {
         lottoNumbers.add(lottoNumbers14);
 
         Win win = new Win(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(win.getWinNumbers(lottoNumbers).get(3)).isEqualTo(1);
-        assertThat(win.getWinNumbers(lottoNumbers).get(4)).isEqualTo(0);
-        assertThat(win.getWinNumbers(lottoNumbers).get(5)).isEqualTo(0);
-        assertThat(win.getWinNumbers(lottoNumbers).get(6)).isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(3))
+                .isEqualTo(1);
+        assertThat(win.getWinNumbers(lottoNumbers).get(4))
+                .isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(5))
+                .isEqualTo(0);
+        assertThat(win.getWinNumbers(lottoNumbers).get(6))
+                .isEqualTo(0);
     }
 
     @BeforeEach

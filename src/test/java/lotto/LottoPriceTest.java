@@ -1,8 +1,9 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또금액")
 class LottoPriceTest {
@@ -10,6 +11,7 @@ class LottoPriceTest {
     @Test
     @DisplayName("하나에 천원")
     void pay() {
-        Assertions.assertThat(lottoPrice.lottos(14000)).isEqualTo(14);
+        assertThat(lottoPrice.lottos(14000))
+                .isEqualTo(14);
     }
 }
