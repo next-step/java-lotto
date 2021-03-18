@@ -16,22 +16,22 @@ public class ResultView {
     private static final String GUIDE_PROFIT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s를 의미)%n";
     private static final PrintStream out = System.out;
 
-    public static void printBuyCount(final RequestMoney requestMoney) {
-        out.printf(GUIDE_BUY_LOTTO, requestMoney.getTotalLottoCount());
+    public static void printLottoCount(final RequestMoney requestMoney) {
+        out.printf(GUIDE_BUY_LOTTO, requestMoney.totalCount());
     }
 
-    public static void printBuyLottos(final Lottos lottos) {
-        List<Lotto> lotteries = lottos.getLottoList();
+    public static void printLottos(final Lottos lottos) {
+        List<Lotto> lotteries = lottos.lottoList();
         lotteries.forEach(out::println);
         out.println();
     }
 
-    public static void printStatics(final LottoResult lottoResult) {
+    public static void printResult(final LottoResult lottoResult) {
         LottoMatch.all()
-                .forEach(lottoMatch -> out.println(printFormat(lottoMatch, lottoResult)));
+                .forEach(lottoMatch -> out.println(format(lottoMatch, lottoResult)));
     }
 
-    private static String printFormat(final LottoMatch lottoMatch, final LottoResult lottoResult) {
+    private static String format(final LottoMatch lottoMatch, final LottoResult lottoResult) {
         return String.format(
                 lottoMatch.guideLine()
                 , lottoMatch

@@ -20,7 +20,7 @@ public class InputView {
     public static final String GUIDE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public static final String GUIDE_CANNOT_PARSE_STRING = "숫자가 아닙니다.";
 
-    public static RequestMoney requestMoney() {
+    public static RequestMoney money() {
         System.out.println(GUIDE_PURCHASE_MONEY);
         final String inputMoney = in.nextLine();
 
@@ -55,14 +55,14 @@ public class InputView {
         }
     }
 
-    public static RequestWinningNumber requestWinningNumber() {
+    public static RequestWinningNumber winningNumber() {
         System.out.println(GUIDE_LAST_WEEK_WINNING_NUMBER);
         final String inputWinningNumber = in.nextLine();
 
         return new RequestWinningNumber(inputWinningNumber);
     }
 
-    public static LottoNumber requestBonusNumber() {
+    public static LottoNumber bonusNumber() {
         System.out.println(GUIDE_INPUT_BONUS_NUMBER);
         final String inputBonusNumber = in.nextLine();
 

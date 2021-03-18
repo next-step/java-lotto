@@ -20,7 +20,7 @@ public class RequestMoney {
         totalLottoCount = money / LOTTO_PRICE;
     }
 
-    public int getTotalLottoCount() {
+    public int totalCount() {
         return totalLottoCount;
     }
 

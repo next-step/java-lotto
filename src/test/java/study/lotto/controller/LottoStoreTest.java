@@ -18,8 +18,8 @@ class LottoStoreTest {
         // given
         LottoStore lottoStore = new LottoStore();
         // when
-        Lottos lottos = lottoStore.buyLotto(new RequestMoney(given));
-        List<Lotto> lotteries = lottos.getLottoList();
+        Lottos lottos = lottoStore.lotto(new RequestMoney(given));
+        List<Lotto> lotteries = lottos.lottoList();
         // then
         assertThat(lotteries.size()).isEqualTo(expected);
     }

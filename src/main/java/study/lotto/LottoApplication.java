@@ -4,6 +4,7 @@ import study.lotto.controller.LottoStore;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoResult;
 import study.lotto.service.Lottos;
+import study.lotto.view.ResultView;
 import study.lotto.view.dto.RequestMoney;
 import study.lotto.view.dto.RequestWinningNumber;
 
@@ -16,19 +17,19 @@ public class LottoApplication {
         LottoStore lottoStore = new LottoStore();
 
         // 금액 요청
-        RequestMoney requestMoney = requestMoney();
-        printBuyCount(requestMoney);
-        Lottos lottos = lottoStore.buyLotto(requestMoney);
+        RequestMoney requestMoney = money();
+        ResultView.printLottoCount(requestMoney);
+        Lottos lottos = lottoStore.lotto(requestMoney);
 
         // 중간 보기
-        printBuyLottos(lottos);
+        ResultView.printLottos(lottos);
 
         // 당첨 번호 입력
-        RequestWinningNumber winningNumber = requestWinningNumber();
-        LottoNumber bonusNumber = requestBonusNumber();
+        RequestWinningNumber winningNumber = winningNumber();
+        LottoNumber bonusNumber = bonusNumber();
         LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
         // 결과 보기
-        printStatics(lottoResult);
+        printResult(lottoResult);
         printRate(lottoResult);
     }
 }

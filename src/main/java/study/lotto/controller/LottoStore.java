@@ -25,13 +25,13 @@ public class LottoStore {
         this.generator = numberGenerator;
     }
 
-    public Lottos buyLotto(final RequestMoney money) {
-        int totalLottoCount = money.getTotalLottoCount();
-        List<Lotto> collect = makeLotto(totalLottoCount);
+    public Lottos lotto(final RequestMoney money) {
+        int totalLottoCount = money.totalCount();
+        List<Lotto> collect = generateLotto(totalLottoCount);
         return new Lottos(collect, money);
     }
 
-    private List<Lotto> makeLotto(final int totalLottoCount) {
+    private List<Lotto> generateLotto(final int totalLottoCount) {
         return Stream.generate(generator::generate)
                 .limit(totalLottoCount)
                 .map(Lotto::new)

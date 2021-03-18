@@ -26,7 +26,7 @@ public class Lottos {
         this.money = money;
     }
 
-    public List<Lotto> getLottoList() {
+    public List<Lotto> lottoList() {
         return Collections.unmodifiableList(lottoList);
     }
 

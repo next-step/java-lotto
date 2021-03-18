@@ -16,12 +16,12 @@ public enum ProfitMessage {
 
     public static ProfitMessage of(final double rate) {
         return Arrays.stream(ProfitMessage.values())
-                .map(profitMessage -> matchMessage(rate))
+                .map(profitMessage -> message(rate))
                 .findAny()
                 .orElse(BREAK_POINT);
     }
 
-    private static ProfitMessage matchMessage(final double rate) {
+    private static ProfitMessage message(final double rate) {
         if(rate > 1) {
             return PROFIT;
         }
