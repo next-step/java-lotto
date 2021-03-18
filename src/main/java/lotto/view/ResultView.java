@@ -16,13 +16,16 @@ public class ResultView {
         System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
 
         for (IssueNumber issueNumber : lottoNumbers.keySet()) {
-            System.out.println(lottoNumbers.get(issueNumber)
-                    .stream()
-                    .map(LottoNumber::getLottoNumber)
-                    .collect(Collectors.toList()));
+            printEachLottoNumber(lottoNumbers.get(issueNumber));
         }
 
         System.out.println();
+    }
+
+    public void printEachLottoNumber(List<LottoNumber> lottoNumber) {
+        System.out.println(lottoNumber.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList()));
     }
 
     public void printStatistics(Winning winning, int inputBuyAmount) {
