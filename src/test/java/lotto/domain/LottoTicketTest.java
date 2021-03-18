@@ -24,7 +24,7 @@ public class LottoTicketTest {
         //when
 
         //then
-        assertThat(lottoTicket.getLottoNumber()).isEqualTo(numbers);
+        assertThat(lottoTicket.lottoNumber()).isEqualTo(numbers);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket();
 
         //when
-        List<Integer> numbers = lottoTicket.getLottoNumber();
+        List<Integer> numbers = lottoTicket.lottoNumber();
 
         //then
         assertThat(numbers.size()).isEqualTo(6);

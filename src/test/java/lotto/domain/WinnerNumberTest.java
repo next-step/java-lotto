@@ -39,7 +39,7 @@ public class WinnerNumberTest {
         WinnerNumber winnerNumber = new WinnerNumber(input);
 
         //then
-        assertThat(winnerNumber.getReadOnlyWinnerNumbers()).isEqualTo(input);
+        assertThat(winnerNumber.checkNumbers(input)).isTrue();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class WinnerNumberTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinnerNumber(input);
+            createWinner(input);
         });
     }
 
@@ -62,7 +62,7 @@ public class WinnerNumberTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinnerNumber(input);
+            createWinner(input);
         });
     }
 
@@ -74,7 +74,7 @@ public class WinnerNumberTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinnerNumber(input);
+            createWinner(input);
         });
 
     }

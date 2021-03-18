@@ -6,6 +6,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinnerNumber {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final String DEFAULT_SPLIT_REGEX = ",";
+
     private final List<Integer> winnerNumbers;
 
     public WinnerNumber(String winnerNumber) {
@@ -31,7 +35,7 @@ public class WinnerNumber {
 
         if (isWinnerNumbers(result)) {
             throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_SIZE_ERROR);
-        };
+        }
 
         return result;
     }
@@ -52,30 +56,21 @@ public class WinnerNumber {
     }
 
     private boolean isLottoNumberSize(int number) {
-        return (LottoConstant.LOTTO_MIN_NUMBER > number)
-                || (LottoConstant.LOTTO_MAX_NUMBER < number);
+        return (LOTTO_MIN_NUMBER > number)
+                || (LOTTO_MAX_NUMBER < number);
     }
 
     private List<String> stringToList(String winnerNumbers) {
-        return Arrays.stream(winnerNumbers.split(","))
+        return Arrays.stream(winnerNumbers.split(DEFAULT_SPLIT_REGEX))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getReadOnlyWinnerNumbers() {
+    public List<Integer> readOnlyWinnerNumbers() {
         return Collections.unmodifiableList(winnerNumbers);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinnerNumber that = (WinnerNumber) o;
-        return Objects.equals(winnerNumbers, that.winnerNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(winnerNumbers);
+    public boolean checkNumbers(List<Integer> numbers) {
+        return Objects.equals(winnerNumbers, numbers);
     }
 }

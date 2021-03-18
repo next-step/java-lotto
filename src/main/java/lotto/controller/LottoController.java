@@ -23,6 +23,6 @@ public class LottoController {
         SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers, lottoMachine);
 
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(sbsHappyDreamLottoLive.getReadOnlyLottoRanks(), buyAmount);
+        resultView.printLottoRanksInfos(sbsHappyDreamLottoLive.readOnlyLottoRanks(), buyAmount);
     }
 }

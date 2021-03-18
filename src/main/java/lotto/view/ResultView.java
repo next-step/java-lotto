@@ -1,30 +1,30 @@
 package lotto.view;
 
-import lotto.constant.LottoConstant;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
+import lotto.domain.LottoRank;
 
 import java.util.List;
 
 public class ResultView {
+    private static final String RESULT_WINNER_RANK = "당첨 통계";
+    private static final String RESULT_WINNER_LINE = "----------";
 
     public void printLottoTicketInfos(LottoMachine lottoMachine) {
-        List<LottoTicket> tickets = lottoMachine.getLottoTickets();
+        List<LottoTicket> tickets = lottoMachine.lottoTickets();
 
         tickets.stream()
-                .forEach(ticket -> System.out.println(ticket.getLottoNumber().toString()));
+                .forEach(ticket -> System.out.println(ticket.lottoNumber().toString()));
     }
 
-    public void printLottoRanksInfos(List<LottoRank> readOnlyLottoRanks, int buyAmount) {
-        System.out.println(LottoConstant.RESULT_WINNER_RANK);
-        System.out.println(LottoConstant.RESULT_WINNER_LINE);
+    public void printLottoRanksInfos(List<LottoRank> readOnlyLottoLottoRanks, int buyAmount) {
+        System.out.println(RESULT_WINNER_RANK);
+        System.out.println(RESULT_WINNER_LINE);
 
-        readOnlyLottoRanks.stream()
+        readOnlyLottoLottoRanks.stream()
                 .forEach(this::printLottoRank);
 
-        printLottoYield(lottoYield(readOnlyLottoRanks, buyAmount));
+        printLottoYield(lottoYield(readOnlyLottoLottoRanks, buyAmount));
     }
 
     public void printLottoYield(double lottoYield) {
@@ -39,17 +39,16 @@ public class ResultView {
         return "손해";
     }
 
-    public double lottoYield(List<LottoRank> readOnlyLottoRanks, int buyAmount) {
-        double sumPrize = readOnlyLottoRanks.stream()
-                .mapToInt(r -> r.getRank().rankPrizeSum(r.getWinnerCount()))
+    public double lottoYield(List<LottoRank> readOnlyLottoLottoRanks, int buyAmount) {
+        double sumPrize = readOnlyLottoLottoRanks.stream()
+                .mapToInt(lottoRank -> lottoRank.rankPrizeSum())
                 .sum();
 
         return sumPrize / buyAmount;
     }
 
     public void printLottoRank(LottoRank lottoRank) {
-        Rank rank = lottoRank.getRank();
-        System.out.println(rank.getRankCount() + "개 일치 (" + rank.getPrize() + ") - " + lottoRank.getWinnerCount() + "개");
+        System.out.println(lottoRank.rankCount() + "개 일치 (" + lottoRank.prize() + ") - " + lottoRank.winnerCount() + "개");
     }
 
 }
