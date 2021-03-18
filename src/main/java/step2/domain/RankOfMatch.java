@@ -9,14 +9,14 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class RankOfMatch {
 
-    private final List<Integer> matchResult;
+    private final List<Integer> rankOfMatchList;
 
     public RankOfMatch(List<Integer> matchResult) {
-        this.matchResult = matchResult;
+        this.rankOfMatchList = matchResult;
     }
 
     public Map<Integer, Long> groupMatchOfLotto(Iterator<Boolean> matchOfBonus) {
-        Map<Integer, Long> statisticsOfRank = matchResult.stream()
+        Map<Integer, Long> statisticsOfRank = rankOfMatchList.stream()
                 .map(countOfMatch -> Rank.valueOf(countOfMatch, matchOfBonus.next()))
                 .collect(groupingBy(Rank::getWinningMoney, counting()));
 
@@ -31,5 +31,14 @@ public class RankOfMatch {
         if (!statisticsOfRank.containsKey(winningMoney)) {
             statisticsOfRank.put(winningMoney, 0L);
         }
+    }
+
+    public double calculateProfitRate(Money money) {
+        int totalProfit = rankOfMatchList.stream()
+                .map(Rank::valueOf)
+                .map(Rank::getWinningMoney)
+                .reduce(Integer::sum)
+                .orElseGet(() -> 0);
+        return totalProfit / (double) money.toInt();
     }
 }

@@ -51,7 +51,7 @@ public class LottoController {
 
     public void finishView() {
         Map<Integer, Long> statistics = lottoMachine.statistics(inputWinNumber(), inputBonusInput());
-        lottoView.finish(createStatisticsDto(statistics, lottoMachine.getEarningRate()));
+        lottoView.finish(createStatisticsDto(statistics, lottoMachine.calculateProfitRate()));
     }
 
     public List<LottoNumber> inputWinNumber() {

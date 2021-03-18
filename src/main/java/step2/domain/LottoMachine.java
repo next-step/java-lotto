@@ -66,11 +66,11 @@ public class LottoMachine {
 
     public Map<Integer, Long> statistics(List<LottoNumber> winNumbers, LottoNumber bonusNumber) {
         List<Integer> rankOfLottos = getRankOfLottos(winNumbers);
-        lottoStatistics = new LottoStatistics(rankOfLottos, money);
+        lottoStatistics = new LottoStatistics(rankOfLottos);
         return lottoStatistics.statistics(getMatchOfBonus(bonusNumber));
     }
 
-    public double getEarningRate() {
-        return lottoStatistics.getEarningRate();
+    public double calculateProfitRate() {
+        return lottoStatistics.calculateProfitRate(money);
     }
 }
