@@ -21,7 +21,7 @@ public class LottoStore {
         this(new LottoNumberGenerator());
     }
 
-    public LottoStore(NumberGenerator numberGenerator) {
+    public LottoStore(final NumberGenerator numberGenerator) {
         this.generator = numberGenerator;
     }
 

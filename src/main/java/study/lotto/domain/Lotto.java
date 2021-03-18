@@ -17,11 +17,11 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public long winningReward(final RequestWinningNumber requestWinningNumber, LottoNumber bonusNumber) {
+    public long winningReward(final RequestWinningNumber requestWinningNumber, final LottoNumber bonusNumber) {
         return match(requestWinningNumber, bonusNumber).getWinningReward();
     }
 
-    public LottoMatch match(final RequestWinningNumber winningNumber, LottoNumber bonusNumber) {
+    public LottoMatch match(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
 
         long count = lottoNumbers.stream()
                 .filter(winningNumber::contains)

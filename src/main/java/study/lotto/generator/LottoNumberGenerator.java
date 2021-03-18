@@ -37,7 +37,7 @@ public class LottoNumberGenerator implements NumberGenerator {
         return Collections.unmodifiableList(collect);
     }
 
-    private void shuffle(List<LottoNumber> lottoNumbers) {
+    private void shuffle(final List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
     }
 }

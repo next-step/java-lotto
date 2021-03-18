@@ -30,7 +30,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public long statics(LottoMatch lottoMatch, RequestWinningNumber winningNumber, LottoNumber bonusNumber) {
+    public long statics(final LottoMatch lottoMatch, final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
         return lottoList.stream()
                 .collect(
                         groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
@@ -38,7 +38,7 @@ public class Lottos {
                 .getOrDefault(lottoMatch, 0L);
     }
 
-    public double winningRate(RequestWinningNumber winningNumber, LottoNumber bonusNumber) {
+    public double winningRate(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
         long sum = lottoList.stream()
                 .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
                 .sum();

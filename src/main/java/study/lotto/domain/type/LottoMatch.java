@@ -19,7 +19,7 @@ public enum LottoMatch {
     private final long winningReward;
     private final String guideText;
 
-    LottoMatch(final long matchCount, final long winningReward, String guideText) {
+    LottoMatch(final long matchCount, final long winningReward, final String guideText) {
         this.matchCount = matchCount;
         this.winningReward = winningReward;
         this.guideText = guideText;

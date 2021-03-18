@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final String GUIDE_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
     private final int number;
 
-    public LottoNumber(String inputBonusNumber) {
+    public LottoNumber(final String inputBonusNumber) {
         this(parseInt(inputBonusNumber));
     }
 
@@ -31,7 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LottoNumberGenerator.MIN_NUMBER_BOUND > number || LottoNumberGenerator.MAX_NUMBER_BOUND < number;
     }
 
-    private static int parseInt(String inputBonusNumber) {
+    private static int parseInt(final String inputBonusNumber) {
         if(!isNumeric(inputBonusNumber)) {
             throw new LottoException(GUIDE_CANNOT_PARSE_STRING_TO_INTEGER);
         }

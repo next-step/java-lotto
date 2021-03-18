@@ -10,18 +10,18 @@ public enum ProfitMessage {
 
     private final String msg;
 
-    ProfitMessage(String msg) {
+    ProfitMessage(final String msg) {
         this.msg = msg;
     }
 
-    public static ProfitMessage of(double rate) {
+    public static ProfitMessage of(final double rate) {
         return Arrays.stream(ProfitMessage.values())
                 .map(profitMessage -> matchMessage(rate))
                 .findAny()
                 .orElse(BREAK_POINT);
     }
 
-    private static ProfitMessage matchMessage(double rate) {
+    private static ProfitMessage matchMessage(final double rate) {
         if(rate > 1) {
             return PROFIT;
         }

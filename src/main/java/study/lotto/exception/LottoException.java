@@ -2,7 +2,7 @@ package study.lotto.exception;
 
 public class LottoException extends RuntimeException {
     public LottoException() { }
-    public LottoException(String message) {
+    public LottoException(final String message) {
         super(message);
     }
 }
