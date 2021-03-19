@@ -14,7 +14,7 @@ public class StringSumTest {
 
     @BeforeEach
     void setUp() {
-        this.stringSum = new StringSum();
+        this.stringSum = new StringSum("[,:]");
     }
 
     @DisplayName("쉼표 또는 콜론을 구분자로 가지는 문자열을 전달하면 쉼표로 구분한 각 숫자의 합을 반환")
