@@ -4,9 +4,9 @@ import step2.View.InputView;
 import step2.View.ResultView;
 import step2.View.RuntimeView;
 import step2.domain.Judge;
-import step2.dto.Lotto;
 import step2.domain.Shop;
 import step2.dto.JudgeResponse;
+import step2.dto.Lotto;
 import step2.dto.Money;
 import step2.dto.ShopResponse;
 

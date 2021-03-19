@@ -16,11 +16,11 @@ public class ShopResponse {
         this.lottoCount = lottoCount;
         this.lottoList = lottoList;
         this.change = change;
-        if(!isResponseValid(this)) throw new IllegalArgumentException();
+        if (!isResponseValid(this)) throw new IllegalArgumentException();
     }
 
     private boolean isResponseValid(ShopResponse shopResponse) {
-        return shopResponse.getLottoCount()*LOTTO_PRICE+change==originMoney;
+        return shopResponse.getLottoCount() * LOTTO_PRICE + change == originMoney;
     }
 
     public int getOriginMoney() {
