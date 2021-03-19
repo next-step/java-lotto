@@ -17,20 +17,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public long winningReward(final RequestWinningNumber requestWinningNumber, final LottoNumber bonusNumber) {
-        return match(requestWinningNumber, bonusNumber).getWinningReward();
+    public long match(final Lotto winningLotto) {
+        return lottoNumbers.stream()
+                .filter(winningLotto::contains)
+                .count();
     }
 
-    public LottoMatch match(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
-
-        long count = lottoNumbers.stream()
-                .filter(winningNumber::contains)
-                .count();
-
-        boolean hasBonus = lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
-
-        return LottoMatch.of(count, hasBonus);
+    public boolean contains(final LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
