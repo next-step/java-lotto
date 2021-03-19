@@ -26,4 +26,11 @@ class LottoNumberTest {
         assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
     }
 
+    @DisplayName("로또 넘버를 생성한다.")
+    void lottoNumber() {
+        LottoNumber stringToLottoNumber = LottoNumber.of("5");
+        LottoNumber intToLottoNumber = LottoNumber.of(5);
+        assertThat(stringToLottoNumber).isEqualTo(intToLottoNumber);
+    }
+
 }
