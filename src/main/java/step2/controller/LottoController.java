@@ -30,7 +30,7 @@ public class LottoController {
     }
 
     public List<String> manualLottos() {
-        return lottoView.manualLottos();
+        return lottoView.manualLottoCount();
     }
 
     public Lottos createLotto(int money, List<String> manualLottoList) {

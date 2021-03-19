@@ -42,16 +42,21 @@ public class LottoView {
         return paymentMoney;
     }
 
-    private int manualLottoCount() {
+    public List<String> manualLottoCount() {
+        List<String> manualLottos = new ArrayList<>();
         System.out.println(INPUT_MANUAL_COUNT);
-        return scanner.nextInt();
+        int lottoCount = scanner.nextInt();
+        if (lottoCount != 0) {
+            manualLottos = manualLottos(lottoCount);
+        }
+        return manualLottos;
     }
 
-    public List<String> manualLottos() {
+    private List<String> manualLottos(int lottoCount) {
         System.out.println(INPUT_LOTTO_NUMBER);
         List<String> manualLottos = new ArrayList<>();
         scanner.nextLine();
-        for (int i = 0; i < manualLottoCount(); i++) {
+        for (int i = 0; i < lottoCount; i++) {
             manualLottos.add(scanner.nextLine());
         }
         return manualLottos;
