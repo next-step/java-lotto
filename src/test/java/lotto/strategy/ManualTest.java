@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("수동 입력")
 public class ManualTest {
     private String inputWinners;
 
@@ -42,7 +43,7 @@ public class ManualTest {
 
 
     @Test
-    @DisplayName("로 번호 중복 확인")
+    @DisplayName("로또 번호 중복 확인")
     public void winnerNumberDuplicateTest() throws Exception {
         //given
         String input = "1,1,2,3,4,5";

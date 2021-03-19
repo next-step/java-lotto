@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("로또 티켓")
 public class LottoTicketTest {
 
     public List<Integer> createLottoNumber() {

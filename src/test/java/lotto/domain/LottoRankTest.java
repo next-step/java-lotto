@@ -12,20 +12,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("로또 당첨 정보")
 public class LottoRankTest {
 
     private Numbers winnerNumber;
 
     public List<Integer> createLottoNumber() {
         return Arrays.asList(1,2,3,4,5,6);
-    }
-
-    public List<LottoTicket> createLottoTikect() {
-        return Arrays.asList(new LottoTicket(createLottoNumber()));
-    }
-
-    public LottoMachine createLottoMachine() {
-        return new LottoMachine(new LottoQuantity(1000), createLottoTikect());
     }
 
     @BeforeEach

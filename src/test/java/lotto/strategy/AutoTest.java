@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("자동 발급")
 public class AutoTest {
 
     public List<Integer> createLottoNumber() {
         return Arrays.asList(1,2,3,4,5,6);
     }
-
 
     @Test
     @DisplayName("번호 사이즈 6개 확인")

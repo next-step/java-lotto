@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("수익 통계")
 public class LottoYieldTest {
 
     @Test
