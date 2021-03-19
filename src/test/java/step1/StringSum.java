@@ -36,7 +36,13 @@ public class StringSum {
 
     private Integer sumString(String[] numbers) {
         return Arrays.stream(numbers)
-            .map(Integer::parseInt)
+            .map(string -> {
+                int number = Integer.parseInt(string);
+                if (number < 0) {
+                    throw new RuntimeException();
+                }
+                return number;
+            })
             .reduce(0, Integer::sum);
     }
 }
