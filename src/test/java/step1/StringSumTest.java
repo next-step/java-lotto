@@ -19,7 +19,7 @@ public class StringSumTest {
 
     @DisplayName("쉼표 또는 콜론을 구분자로 가지는 문자열을 전달하면 쉼표로 구분한 각 숫자의 합을 반환")
     @ParameterizedTest
-    @CsvSource(value = {"1,2:3|6", "1,2|3"}, delimiter = '|')
+    @CsvSource(value = {"1,2:3|6", "1,2|3", "1|1"}, delimiter = '|')
     void sum(String input, int sum) {
         Result result = stringSum.sum(input);
         assertEquals(new Result(sum), result);
@@ -39,5 +39,13 @@ public class StringSumTest {
         String input = null;
         Result result = stringSum.sum(input);
         assertEquals(new Result(0), result);
+    }
+
+    @DisplayName("커스텀 구분자")
+    @Test
+    void customDelimiter() {
+        String input = "//;\n1;2;3";
+        Result result = stringSum.sum(input);
+        assertEquals(new Result(6), result);
     }
 }
