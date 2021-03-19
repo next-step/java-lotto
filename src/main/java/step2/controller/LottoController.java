@@ -5,6 +5,7 @@ import step2.domain.LottoNumber;
 import step2.domain.Lottos;
 import step2.dto.LottoStatisticsDto;
 import step2.dto.LottosDto;
+import step2.util.StringParser;
 import step2.view.LottoView;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class LottoController {
 
     public List<LottoNumber> inputWinNumber() {
         String stringWinNumbers = lottoView.inputWinNumber();
-        return lottoMachine.toLottoNumberList(stringWinNumbers);
+        return StringParser.toLottoNumberList(stringWinNumbers);
     }
 
     public LottosDto createLottosDto(Lottos lotto) {

@@ -76,7 +76,6 @@ public class LottoView {
 
     public String inputWinNumber() {
         System.out.println(INPUT_WIN_NUMBER);
-        scanner.nextLine(); //scanner.nextLine() 사용전 nextInt()를 사용하면 스킵되는 현상때문에 추가
         return scanner.nextLine();
     }
 
