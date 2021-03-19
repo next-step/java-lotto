@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class WinnerNumberTest {
+public class LottoNumberTest {
     private String inputWinners;
 
     @BeforeEach
@@ -22,8 +21,8 @@ public class WinnerNumberTest {
         return Arrays.asList(1,2,3,4,5,6);
     }
 
-    private WinnerNumber createWinner(String input) {
-        return new WinnerNumber(input);
+    private LottoNumber createWinner(String input) {
+        return new LottoNumber(input);
     }
 
     @Test
@@ -33,10 +32,23 @@ public class WinnerNumberTest {
         List<Integer> input = createLottoNumber();
 
         //when
-        WinnerNumber winnerNumber = new WinnerNumber(input);
+        LottoNumber lottoNumber = new LottoNumber(input);
 
         //then
-        assertThat(winnerNumber.checkNumbers(input)).isTrue();
+        assertThat(lottoNumber.checkNumbers(input)).isTrue();
+    }
+
+    @Test
+    @DisplayName("당첨 번호 중복 확인")
+    public void winnerNumberDuplicateTest2() throws Exception {
+        //given
+        String input = "1, 2, 3, 4, 5, 6";
+
+        //when
+        LottoNumber lottoNumber = createWinner(input);
+
+        //then
+        System.out.println("lottoNumber = " + lottoNumber.readOnlyWinnerNumbers().size());
     }
 
     @Test

@@ -40,16 +40,16 @@
 
 
 ## 역할과 책임 분류
-1) 구매할 로또 금액을 입력(InputView)
-2) 로또머신으로 티켓생성(LottoMachine)
-   - 일급 컬렉션(LottoTickets)
-     - 로또 반환(LottoTicket)
-3) SBS 생방송 행복드림로또, 당첨번호 확인(입력) (SbsHappyDreamLottoLive) 
-   - 당첨번호(WinnerNumber)
-   - 당첨내역반환(LottoRank)
-     - 당첨정보(Rank)
-4) 로또 수익률 계산(LottoYield)
-5) 결과 출력(ResultView)
+1) 구매할 로또 금액을 입력 (InputView)
+2) 로또머신으로 티켓생성 (LottoMachine)
+   - 구매 개수(LottoQuantity)
+   - 일급 컬렉션
+     - 로또 반환 (LottoTicket)
+3) 당첨번호 확인(입력) (LottoNumber)
+4) 로또 당첨 정보(LottoRank)
+5) 로또 수익률 계산 (LottoYield)
+6) 결과 출력 (ResultView)
+   
 
 
 ## 구현 목록
@@ -58,9 +58,9 @@
   - [X] 1개 이상인지 확인
 - [X] 구입개수로 로또티켓 발행(일급컬렉션)
   - [X] 로또 생성, shuffle 후 앞에서 6개 빼오기
-- [X] 로또 번호 출력
-- [X] 생방송 당첨번호 입력
+- [X] 당첨번호 입력
 - [X] 당첨정보 반환
-  - [X] 당첨 내역
+    - [X] 당첨 내역
 - [X] 수익률 계산 
+- [X] 로또 번호 출력
   

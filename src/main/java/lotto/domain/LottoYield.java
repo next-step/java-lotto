@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoConstant;
+
 import java.util.List;
 
 public class LottoYield {
@@ -13,8 +15,18 @@ public class LottoYield {
         this.yield = yield;
     }
 
-    public LottoYield(List<LottoRank> lottoRanks, int buyAmount) {
-        this.yield = operationYield(lottoRanks, buyAmount);
+    public LottoYield(List<LottoTicket> lottoTickets, LottoNumber winnerNumber) {
+        this.yield = operationYield(lottoTickets, winnerNumber);
+    }
+
+    private double operationYield(List<LottoTicket> lottoTickets, LottoNumber winnerNumber) {
+        double lottoPrize = lottoTickets.stream()
+                            .mapToDouble(ticket -> ticket.rank(winnerNumber).prize)
+                            .sum();
+
+        double buyAmount = lottoTickets.size() * LottoConstant.MIN_BUY_AMOUNT;
+
+        return lottoPrize / buyAmount;
     }
 
     public double yield() {
@@ -29,20 +41,7 @@ public class LottoYield {
         return STRING_LOSS;
     }
 
-    private double operationYield(List<LottoRank> readOnlyLottoLottoRanks, int buyAmount) {
-        double sumPrize = operationPrizeSum(readOnlyLottoLottoRanks);
-
-        return sumPrize / buyAmount;
-    }
-
-    private double operationPrizeSum(List<LottoRank> readOnlyLottoLottoRanks) {
-        return readOnlyLottoLottoRanks.stream()
-                .mapToInt(lottoRank -> lottoRank.rankPrizeSum())
-                .sum();
-    }
-
     public boolean checkYield(double yield) {
         return this.yield == yield;
     }
-
 }

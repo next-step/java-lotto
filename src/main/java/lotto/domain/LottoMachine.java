@@ -1,47 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoMachine {
-    private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
-    private static final String BUY_QUANTITY_MESSAGE = "개를 구매하셨습니다.";
-    private static final int MIN_BUY_AMOUNT = 1000;
-
+    private final LottoQuantity lottoQuantity;
     private final List<LottoTicket> lottoTickets;
 
     public LottoMachine(int buyAmount) {
-        isBuyAmountValid(buyAmount);
-        this.lottoTickets = createLottoTickets(buyAmount);
+        this.lottoQuantity = new LottoQuantity(buyAmount);
+        this.lottoTickets = createLottoTickets();
     }
 
-    public LottoMachine(List<LottoTicket> lottoTickets) {
+    public LottoMachine(LottoQuantity lottoQuantity, List<LottoTicket> lottoTickets) {
+        this.lottoQuantity = lottoQuantity;
         this.lottoTickets = lottoTickets;
     }
 
-    private void isBuyAmountValid(int buyAmount) {
-        if (buyAmount < MIN_BUY_AMOUNT) {
-            throw new IllegalArgumentException(BUY_AMOUNT_ERROR);
-        }
+    private List<LottoTicket> createLottoTickets() {
+        return Stream.generate(LottoTicket::new)
+                .limit(lottoQuantity.lottoQuantity())
+                .collect(Collectors.toList());
     }
 
-    private List<LottoTicket> createLottoTickets(int buyAmount) {
-        int lottoQuantity = amountToQuantity(buyAmount);
-
-        System.out.println(lottoQuantity + BUY_QUANTITY_MESSAGE);
-
-        List<LottoTicket> tickets = new ArrayList<>();
-
-        IntStream.range(0, lottoQuantity)
-                .forEach(i -> tickets.add(new LottoTicket()));
-
-        return tickets;
-    }
-
-    private int amountToQuantity(int amount) {
-        return amount / MIN_BUY_AMOUNT;
+    public int lottoQuantity() {
+        return lottoQuantity.lottoQuantity();
     }
 
     public List<LottoTicket> lottoTickets() {

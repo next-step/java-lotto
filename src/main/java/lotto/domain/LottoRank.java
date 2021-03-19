@@ -1,68 +1,47 @@
 package lotto.domain;
 
+import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 public enum LottoRank {
+    ZERO(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
-    private static final int DEFAULT_WINNER_COUNT = 0;
-
-    private int rankCount;
-    private int prize;
-    private int winnerCount;
+    public final int rankCount;
+    public final int prize;
 
     LottoRank(int rankCount, int prize) {
-        this(rankCount, prize, DEFAULT_WINNER_COUNT);
-    }
-
-    LottoRank(int rankCount, int prize, int winnerCount) {
         this.rankCount = rankCount;
         this.prize = prize;
-        this.winnerCount = winnerCount;
     }
 
-    public int rankCount() {
-        return rankCount;
-    }
-
-    public int prize() {
-        return prize;
-    }
-
-    public int winnerCount() {
-        return winnerCount;
-    }
-
-    public LottoRank rank(LottoMachine lottoMachine, WinnerNumber winnerNumber) {
-        List<LottoTicket> tickets = lottoMachine.lottoTickets();
-
-        winnerCount = (int) tickets.stream()
-                        .filter(ticket -> winnerNumberCount(ticket, winnerNumber))
-                        .count();
-
-        return this;
-    }
-
-    public boolean winnerNumberCount(LottoTicket ticket, WinnerNumber winnerNumber) {
-        return ticket.lottoNumber()
+    public static LottoRank findLottoRank(LottoTicket lottoTicket, LottoNumber winnerNumber) {
+        return Arrays.asList(LottoRank.values())
                     .stream()
-                    .filter(numbers -> numberContains(numbers, winnerNumber))
-                    .count() == this.rankCount;
+                    .filter(lottoRank -> lottoRank.rankCount == checkLottoRank(lottoTicket, winnerNumber))
+                    .findAny()
+                    .orElse(ZERO);
     }
 
-    public boolean numberContains(int number, WinnerNumber winnerNumber) {
+    private static int checkLottoRank(LottoTicket lottoTicket, LottoNumber winnerNumber) {
+        return (int) lottoTicket.lottoNumber()
+                    .stream()
+                    .filter(number -> numberContains(number, winnerNumber))
+                    .count();
+    }
+
+    private static boolean numberContains(int number, LottoNumber winnerNumber) {
         return winnerNumber.readOnlyWinnerNumbers()
-                    .contains(number);
+                .contains(number);
     }
 
-    public int rankPrizeSum() {
-        return winnerCount * prize;
-    }
-
-    public boolean checkWinnerNumber(int winnerCount) {
-        return this.winnerCount == winnerCount;
+    public int winnerCount(List<LottoTicket> lottoTickets, LottoNumber winnerNumber) {
+        return (int)lottoTickets.stream()
+                    .filter(ticket -> ticket.rank(winnerNumber) == this)
+                    .count();
     }
 }

@@ -1,13 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoYield;
-import lotto.domain.SbsHappyDreamLottoLive;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
     public void run() {
@@ -24,13 +19,11 @@ public class LottoController {
 
         // 당첨 결과 확인
         String winnerNumbers = inputView.inputWinnerNumber();
-        SbsHappyDreamLottoLive sbsHappyDreamLottoLive = new SbsHappyDreamLottoLive(winnerNumbers, lottoMachine);
-
-        List<LottoRank> lottoRanks = sbsHappyDreamLottoLive.readOnlyLottoRanks();
-
-        LottoYield lottoYield = new LottoYield(lottoRanks, buyAmount);
+        LottoNumber winnerNumber = new LottoNumber(winnerNumbers);
+        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber);
 
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(lottoRanks, lottoYield);
+        resultView.printLottoRanksInfos(lottoMachine.lottoTickets(), winnerNumber);
+        resultView.printLottoYield(lottoYield);
     }
 }

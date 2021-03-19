@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoYieldTest {
 
     @Test
-    @DisplayName("수익 통계 생성 테스트")
-    public void createLottoYieldTest() throws Exception {
+    @DisplayName("수익 통계 일치 테스트")
+    public void lottoYieldTrueTest() throws Exception {
         //given
         double profit = 1;
         LottoYield lottoYield = new LottoYield(profit);
@@ -18,6 +18,20 @@ public class LottoYieldTest {
 
         //then
         assertThat(lottoYield.checkYield(profit)).isTrue();
+    }
+
+    @Test
+    @DisplayName("수익 통계 불일치 테스트")
+    public void lottoYieldFalseTest() throws Exception {
+        //given
+        double profit = 1;
+        double checkProfit = 2;
+        LottoYield lottoYield = new LottoYield(profit);
+
+        //when
+
+        //then
+        assertThat(lottoYield.checkYield(checkProfit)).isFalse();
     }
 
     @Test
