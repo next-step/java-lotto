@@ -81,7 +81,16 @@ class LottosTest {
         Lottos lottos = new Lottos(strings);
 
         assertThat(lottos.lottoCount()).isEqualTo(2);
-        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 4));
+    }
+
+    @DisplayName("수동 로또와 자동로또를 합친다.")
+    @Test
+    void add() {
+        Lottos lottos = new Lottos(createLottos(), createLottos());
+
+        assertThat(lottos.lottoCount()).isEqualTo(8);
+        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 5, 0, 4, 6, 5, 0, 4));
     }
 
     Lottos createLottos() {
