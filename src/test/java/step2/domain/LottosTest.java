@@ -85,11 +85,11 @@ class LottosTest {
     }
 
     Lottos createLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
-        lottoList.add(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7))));
-        lottoList.add(new Lotto(List.of(LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12))));
-        lottoList.add(new Lotto(List.of(LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(11), LottoNumber.of(24))));
+        List<String> lottoList = new ArrayList<>();
+        lottoList.add("1,2,3,4,5,6");
+        lottoList.add("1,2,3,4,5,7");
+        lottoList.add("7,8,9,10,11,12");
+        lottoList.add("2,3,4,5,11,24");
         return new Lottos(lottoList);
     }
 
