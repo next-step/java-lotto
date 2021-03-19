@@ -35,13 +35,13 @@ public class LottoStore {
         return manualLotto.addAll(autoLottos);
     }
 
-    public Lottos lotto(RequestMoney money, Lottos manualLotto) {
+    public Lottos lotto(final RequestMoney money, final Lottos manualLotto) {
         int totalLottoCount = money.autoCount();
         List<Lotto> sortLottos = autoLotto(manualLotto, totalLottoCount);
         return new Lottos(sortLottos, money);
     }
 
-    public Lotto manualLotto(String manualNumbers) {
+    public Lotto manualLotto(final String manualNumbers) {
         return new Lotto(generator.generate(manualNumbers));
     }
 }

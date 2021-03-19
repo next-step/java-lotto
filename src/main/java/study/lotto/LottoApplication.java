@@ -18,10 +18,15 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoStore lottoStore = new LottoStore();
 
-        RequestMoney requestMoney = money();
-        ResultView.printLottoCount(requestMoney);
-        Lottos lottos = lottoStore.lotto(requestMoney);
+        int money = money();
+        int manualCount = manualCount(money);
 
+        Lottos manualLotto = makeManualLotto(manualCount);
+
+        RequestMoney requestMoney = new RequestMoney(money, manualCount);
+        Lottos lottos = lottoStore.lotto(requestMoney, manualLotto);
+
+        ResultView.printLottoCount(requestMoney);
         ResultView.printLottos(lottos);
 
         Lotto winningNumber = winningNumber();

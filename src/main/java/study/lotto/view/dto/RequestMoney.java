@@ -17,7 +17,7 @@ public class RequestMoney {
         this(money, 0);
     }
 
-    public RequestMoney(int money, int manualCount) {
+    public RequestMoney(final int money, final int manualCount) {
         if(money < LOTTO_PRICE) {
             throw new LottoException(CANNOT_BUY_LOTTO);
         }
@@ -35,7 +35,7 @@ public class RequestMoney {
         return autoLottoCount;
     }
 
-    public double winningRate(long sum) {
+    public double winningRate(final long sum) {
         return (double) sum / money;
     }
 

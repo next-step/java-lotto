@@ -17,7 +17,7 @@ public class ResultView {
     private static final PrintStream out = System.out;
 
     public static void printLottoCount(final RequestMoney requestMoney) {
-        out.printf(GUIDE_BUY_LOTTO, requestMoney.totalCount());
+        out.printf(GUIDE_BUY_LOTTO, requestMoney.divideMoneyByPrice());
     }
 
     public static void printLottos(final Lottos lottos) {

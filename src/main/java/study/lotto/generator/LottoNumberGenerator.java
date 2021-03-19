@@ -15,7 +15,7 @@ public class LottoNumberGenerator implements NumberGenerator {
     public static final int MIN_NUMBER_BOUND = 1;
 
     @Override
-    public List<LottoNumber> generate(String text) {
+    public List<LottoNumber> generate(final String text) {
 
         List<LottoNumber> lottoNumbers = createLottoNumbers();
         shuffle(lottoNumbers);

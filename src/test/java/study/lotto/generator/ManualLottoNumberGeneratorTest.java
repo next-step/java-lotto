@@ -1,5 +1,6 @@
 package study.lotto.generator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.LottoNumber;
 
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ManualLottoNumberGeneratorTest {
 
+    @DisplayName(value = "수동 숫자 생성 테스트")
     @Test
     void generate_수동_숫자_생성() {
         ManualLottoNumberGenerator generator = new ManualLottoNumberGenerator();

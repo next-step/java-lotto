@@ -13,7 +13,7 @@ public class ManualLottoNumberGenerator implements NumberGenerator {
     public ManualLottoNumberGenerator() { }
 
     @Override
-    public List<LottoNumber> generate(String manualNumbers) {
+    public List<LottoNumber> generate(final String manualNumbers) {
         return Arrays.stream(manualNumbers.split(SPLIT_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(toList());

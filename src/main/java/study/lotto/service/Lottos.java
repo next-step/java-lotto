@@ -48,7 +48,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public List<Lotto> addAll(List<Lotto> autoLotto) {
+    public List<Lotto> addAll(final List<Lotto> autoLotto) {
         return Stream.concat(lottoList.stream(), autoLotto.stream())
                 .collect(Collectors.toList());
     }

@@ -65,6 +65,4 @@ class LottoMatchTest {
         // then
         assertThat(winningReward).isEqualTo(expected);
     }
-
-
 }

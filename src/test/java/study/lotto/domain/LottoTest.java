@@ -36,7 +36,6 @@ public class LottoTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         Lotto given = new Lotto(collect);
-
         // when
         long match = lotto.match(given);
         // then
