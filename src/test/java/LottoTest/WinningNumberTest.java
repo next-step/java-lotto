@@ -1,7 +1,7 @@
 package LottoTest;
 
-import lotto.LottoGame;
-import lotto.WinningNumber;
+import lotto.domain.LottoGame;
+import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

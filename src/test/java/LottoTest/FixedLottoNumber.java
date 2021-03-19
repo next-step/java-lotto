@@ -1,6 +1,6 @@
 package LottoTest;
 
-import lotto.LottoNumber;
+import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;

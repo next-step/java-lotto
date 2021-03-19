@@ -1,9 +1,9 @@
 package LottoTest;
 
-import lotto.LottoGameResult;
-import lotto.LottoStats;
-import lotto.Rank;
-import lotto.RankingRecord;
+import lotto.domain.LottoGameResult;
+import lotto.domain.LottoStats;
+import lotto.domain.Rank;
+import lotto.domain.RankingRecord;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

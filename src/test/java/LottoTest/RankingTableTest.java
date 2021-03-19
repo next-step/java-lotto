@@ -1,9 +1,9 @@
 package LottoTest;
 
-import lotto.LottoGameResult;
-import lotto.Rank;
-import lotto.RankingTable;
-import lotto.RankingRecord;
+import lotto.domain.LottoGameResult;
+import lotto.domain.Rank;
+import lotto.domain.RankingTable;
+import lotto.domain.RankingRecord;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
