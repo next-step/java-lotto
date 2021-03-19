@@ -7,6 +7,7 @@ import java.util.List;
 
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -90,6 +91,15 @@ class LottoTest {
         //then
         assertThat(matchBonus).isTrue();
     }
+
+    @DisplayName("로또는 중복되어서는 안된다.")
+    @Test
+    void isDuplicate_Lotto() {
+        assertThatThrownBy(() -> {
+            createLotto(1, 2, 3, 4, 6, 6);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
