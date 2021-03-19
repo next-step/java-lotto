@@ -7,10 +7,11 @@ import java.util.Objects;
 
 public class Lotto {
 
-  private LottoNumberList lottoNumberList;
+  private final List<LottoNumber> lottoNumberList;
+  private static final int IS_MATCHED = 1;
+  private static final int IS_NOT_MATCHED = 0;
 
-
-  public Lotto(LottoNumberList lottoNumberList) {
+  public Lotto(List<LottoNumber> lottoNumberList) {
     this.lottoNumberList = lottoNumberList;
   }
 
@@ -19,13 +20,28 @@ public class Lotto {
     for (Integer number : numbers) {
       lottoNumbers.add(new LottoNumber(number));
     }
-    return new Lotto(new LottoNumberList(lottoNumbers));
+    return new Lotto(lottoNumbers);
   }
 
-  public int containsCount(Lotto lastWeekWinningLotto) {
-    return lottoNumberList.containsCount(lastWeekWinningLotto);
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumberList.contains(lottoNumber);
   }
 
+  public int containsCount(LastWinningLotto lastWeekWinningLotto) {
+    int count = 0;
+    for (LottoNumber lottoNumber : lottoNumberList) {
+      count += (lastWeekWinningLotto.contains(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED);
+    }
+    return count;
+  }
+
+  public boolean matchBonusBall(LastWinningLotto lastWeekWinningLotto) {
+    int match = 0;
+    for (LottoNumber lottoNumber : lottoNumberList) {
+      match += lastWeekWinningLotto.matchBonusBall(lottoNumber) ? IS_MATCHED : IS_NOT_MATCHED;
+    }
+    return match > IS_NOT_MATCHED ;
+  }
 
 
   @Override
@@ -45,11 +61,8 @@ public class Lotto {
     return Objects.hash(lottoNumberList);
   }
 
-  public boolean contains(LottoNumber lottoNumber) {
-    return lottoNumberList.contains(lottoNumber);
-  }
-
-  public LottoNumberList getLottoNumberList() {
+  public List<LottoNumber> getLottoNumberList() {
     return lottoNumberList;
   }
+
 }

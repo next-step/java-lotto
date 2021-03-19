@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Money {
 
-  private int money;
+  private final int money;
   private static final int COST_CRETERION = 1000;
   private static final String INVALID_COST = "구매 금액은 1000원 이상이어야 합니다.";
 

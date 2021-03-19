@@ -21,7 +21,7 @@ public class ResultView {
     System.out.printf(PRINT_LOTTO_COUNT, lottoCount);
   }
 
-  public void printLottoList(LottoList lottoList) {
+  public void printLottoList(LottoMachine lottoList) {
     String printLottolist = "";
     for (Lotto lotto : lottoList.getLottoList()) {
       printLottolist += "[";
@@ -33,7 +33,6 @@ public class ResultView {
 
   private String printEachLotto(Lotto lotto) {
     return lotto.getLottoNumberList()
-        .getLottoNumbers()
         .stream()
         .map(LottoNumber::toString)
         .collect(Collectors.joining(DELIMITER));
@@ -46,13 +45,17 @@ public class ResultView {
 
     lottoStatistics.getlottoStaticResultMap()
         .forEach((LottoRank rank, Integer count) -> {
-          sb.append(rank.getMatchingCount() + "개 일치 (");
-          sb.append(rank.getMatchingPrice() + "원) - ");
-          sb.append(count + "개\n");
+          sb.append(rank.getMatchingCount() + "개 일치");
+          if (rank.equals(LottoRank.SECOND)) {
+            sb.append(", 보너스볼 일치");
+          }
+          sb.append(" (" + rank.getMatchingPrice() + "원)");
+          sb.append(" - " + count + "개\n");
         });
 
     System.out.println(sb.toString().trim());
   }
+
 
   public void printLottoEarningRate(double earningRate, boolean isBenefit) {
     String benefitOrLoss = (isBenefit) ? PRINT_BENEFIT : PRINT_LOSS;
