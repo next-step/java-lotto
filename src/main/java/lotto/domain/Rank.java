@@ -21,4 +21,12 @@ public enum Rank {
     public int reward() {
         return reward;
     }
+
+    public static boolean isValid(int matchCount) {
+        for (Rank rank : Rank.values()) {
+            if (rank.matchCount == matchCount)
+                return true;
+        }
+        return false;
+    }
 }

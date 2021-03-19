@@ -40,4 +40,8 @@ public class LottoGame {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    public List<Integer> numbers() {
+        return numbers;
+    }
 }

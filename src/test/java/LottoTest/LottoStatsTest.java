@@ -51,6 +51,27 @@ public class LottoStatsTest {
                 new LottoGameResult(0),
                 new LottoGameResult(0),
                 new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
+                new LottoGameResult(0),
                 new LottoGameResult(3)
         );
         LottoStats lottoStats = new LottoStats(lottoGameResults);
@@ -58,9 +79,10 @@ public class LottoStatsTest {
 
         //when
         double yield = lottoStats.yield();
+        double expect = (double)5000 / (lottoGameResults.size() * 1000);
 
         //then
-        assertThat(yield).isEqualTo(5000 / 6000);
+        assertThat(yield).isEqualTo(expect);
     }
 
 }

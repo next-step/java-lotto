@@ -18,7 +18,8 @@ public class RankingTable {
 
         for (LottoGameResult lottoGameResult : lottoGameResults) {
             int matchCount = lottoGameResult.matchCount();
-            table.put(matchCount, table.get(matchCount).increaseWinner());
+            if (Rank.isValid(matchCount))
+                table.put(matchCount, table.get(matchCount).increaseWinner());
         }
     }
 
