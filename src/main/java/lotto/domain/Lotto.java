@@ -13,9 +13,9 @@ public class Lotto {
     private final LottoMachine lottoMachine = new LottoMachine();
     private final LottoResult lottoResult = new LottoResult();
 
-    public void start(){
-        int money = inputView.money();
-        int buyCount = buyCount(money);
+    public void lotto(){
+
+        int buyCount = inputView.count();
 
         resultView.print(buyCount);
 
@@ -23,17 +23,13 @@ public class Lotto {
 
         resultView.print(lottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(inputView.winningNumbers());
+        LottoNumbers winningNumbers = new LottoNumbers(inputView.numbers());
 
         String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);
+
         resultView.print();
         resultView.print(resultInfo);
+
     }
-
-    public int buyCount(int buyMoney) {
-        return buyMoney / LottoConstants.LOTTO_PRICE;
-    }
-
-
 
 }

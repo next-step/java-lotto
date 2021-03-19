@@ -44,8 +44,7 @@ public class LottoNumbers {
     }
 
     public String printInfo(){
-        List<Integer> collect = new ArrayList<>(numbers);
-        return collect.toString();
+        return ((List<Integer>) new ArrayList<>(numbers)).toString();
     }
 
 }
