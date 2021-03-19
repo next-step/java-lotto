@@ -74,6 +74,16 @@ class LottosTest {
         assertThat(resultMatchList.get(1)).isFalse();
     }
 
+    @DisplayName("수동 로또를 만든다.")
+    @Test
+    void createManualLotto() {
+        List<String> strings = List.of("1,2,3,4,5,6", "22,3,4,5,6,7");
+        Lottos lottos = new Lottos(strings);
+
+        assertThat(lottos.lottoCount()).isEqualTo(2);
+        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    }
+
     Lottos createLottos() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
@@ -85,5 +95,9 @@ class LottosTest {
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
+    }
+
+    List<LottoNumber> createWinNumber(int one, int two, int three, int four, int five, int six) {
+        return List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six));
     }
 }
