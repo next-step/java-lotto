@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
@@ -69,6 +70,22 @@ public class LottoTest {
     @DisplayName("중복 번호 없는 자동 구매")
     public void lottoNumberDuplicate(){
         assertTrue(lottoMachine.lottoNumbers(1).get(0).normalSize());
+    }
+
+    @Test
+    @DisplayName("번호가 1 ~ 45가 아닐 경우")
+    public void lottoNumberValid(){
+        assertThatIllegalArgumentException().isThrownBy (
+                () -> new LottoNumbers("1,2,3,4,5,50")
+        );
+    }
+
+    @Test
+    @DisplayName("번호 6개 아닐 경우")
+    public void lottoNumberCountValid(){
+        assertThatIllegalArgumentException().isThrownBy (
+                () -> new LottoNumbers("1,2,3,4,5")
+        );
     }
 
     @Test

@@ -12,7 +12,7 @@ public class LottoNumbers {
     private final List<Integer> numbers;
 
     public LottoNumbers(String number) {
-        this.numbers = lottoNumbers(number);
+        this(lottoNumbers(number));
     }
 
     public LottoNumbers(List<Integer> numbers) {
@@ -23,7 +23,7 @@ public class LottoNumbers {
         }
     }
 
-    private List<Integer> lottoNumbers(String lottoNumber) {
+    private static List<Integer> lottoNumbers(String lottoNumber) {
         return Arrays.stream(lottoNumber.replace(" ", "").split(","))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
