@@ -14,9 +14,16 @@ public class Lottos {
 
     public Lottos() {
     }
+    
+    public Lottos(List<String> manualLottoList) {
+        this.lottoList = manualLottoList.stream()
+                .map(lottoNumber -> new Lotto(lottoNumber))
+                .collect(toList());
+    }
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(Lottos autoLottos, Lottos manualLottos) {
+        autoLottos.lottoList.addAll(manualLottos.lottoList);
+        this.lottoList = autoLottos.lottoList;
     }
 
     public Lottos createLottoList(int count) {
