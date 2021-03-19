@@ -1,11 +1,11 @@
 package lotto.step1.domain;
 
+import lotto.step1.utils.StringSpliter;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
-
-    private static final String TOKEN_DELIMITER = ",|;";
 
     private StringAddCalculator() {
     }
@@ -14,15 +14,16 @@ public class StringAddCalculator {
         if (validateInputNullOrEmpty(input)) {
             return 0;
         }
+        String[] tokens = StringSpliter.splitToStringArray(input);
+        Numbers numbers = getNumbers(tokens);
+        return calculate(numbers);
+    }
 
-        getNumbers(input);
-
+    private static int calculate(Numbers numbers) {
         return 1;
     }
 
-    private static Numbers getNumbers(String input) {
-        String[] tokens = input.split(TOKEN_DELIMITER);
-
+    private static Numbers getNumbers(String[] tokens) {
         return Numbers.of(Arrays.stream(tokens)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(number -> Number.of(number))
