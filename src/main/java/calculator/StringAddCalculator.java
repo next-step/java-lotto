@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final int DEFAULT_RESULT = 0;
-    private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
     public static int splitAndSum(final String text) {
         if (nullOrEmpty(text)) {
@@ -28,13 +28,13 @@ public class StringAddCalculator {
     }
 
     private static String[] tokens(final String text) {
-        final Matcher m = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
+        final Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
         if (m.find()) {
             final String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
 
-        return text.split(DEFAULT_DELIMITER);
+        return text.split(DEFAULT_DELIMITER_REGEX);
     }
 
     private static boolean containsNegative(final String[] tokens) {
