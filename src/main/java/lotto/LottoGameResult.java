@@ -5,11 +5,12 @@ import java.util.Objects;
 public class LottoGameResult {
     private final int matchCount;
 
-    public LottoGameResult(long matchCount) {
-        this.matchCount = (int)matchCount;
-    }
     public LottoGameResult(int matchCount) {
         this.matchCount = matchCount;
+    }
+
+    public int matchCount() {
+        return this.matchCount;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class LottoTest {
     }
 
     @Test
-    void Given_WinningNumbers_When_Match_Then_LottoResult() {
+    void Given_WinningNumbers_When_Result_Then_LottoResult() {
         //given
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoGame> lottoGames = Arrays.asList(
@@ -46,7 +46,6 @@ public class LottoTest {
         assertThat(result).contains(new LottoGameResult(3));
         assertThat(result).contains(new LottoGameResult(2));
         assertThat(result).contains(new LottoGameResult(1));
-
         assertFalse(result.contains(new LottoGameResult(0)));
     }
 }
