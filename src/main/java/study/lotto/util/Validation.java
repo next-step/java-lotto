@@ -31,7 +31,7 @@ public class Validation {
         return !isNumeric(input) || isLackOfMoney(input);
     }
 
-    public static void isValidationInputData(boolean notNullAndIsBlank, String guideNotFoundMoney) {
+    public static void isValidationInputData(final boolean notNullAndIsBlank, final String guideNotFoundMoney) {
         if (notNullAndIsBlank) {
             throw new LottoException(guideNotFoundMoney);
         }

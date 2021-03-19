@@ -1,15 +1,17 @@
 package study.lotto;
 
 import study.lotto.controller.LottoStore;
+import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoResult;
+import study.lotto.domain.WinningLotto;
 import study.lotto.service.Lottos;
 import study.lotto.view.ResultView;
 import study.lotto.view.dto.RequestMoney;
-import study.lotto.view.dto.RequestWinningNumber;
 
 import static study.lotto.view.InputView.*;
-import static study.lotto.view.ResultView.*;
+import static study.lotto.view.ResultView.printRate;
+import static study.lotto.view.ResultView.printResult;
 
 
 public class LottoApplication {
@@ -22,9 +24,11 @@ public class LottoApplication {
 
         ResultView.printLottos(lottos);
 
-        RequestWinningNumber winningNumber = winningNumber();
+        Lotto winningNumber = winningNumber();
         LottoNumber bonusNumber = bonusNumber();
-        LottoResult lottoResult = new LottoResult(winningNumber, lottos, bonusNumber);
+
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
         printResult(lottoResult);
         printRate(lottoResult);

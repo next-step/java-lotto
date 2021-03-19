@@ -1,8 +1,5 @@
 package study.lotto.domain;
 
-import study.lotto.domain.type.LottoMatch;
-import study.lotto.view.dto.RequestWinningNumber;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -28,10 +25,10 @@ public class Lotto {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto1 = (Lotto) o;
+        if (!(o instanceof Lotto)) return false;
+        final Lotto lotto1 = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto1.lottoNumbers);
     }
 

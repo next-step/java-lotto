@@ -1,11 +1,14 @@
 package study.lotto.view;
 
+import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoNumber;
 import study.lotto.view.dto.RequestMoney;
-import study.lotto.view.dto.RequestWinningNumber;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import static java.util.stream.Collectors.toList;
 import static study.lotto.util.Validation.*;
 
 public class InputView {
@@ -19,6 +22,9 @@ public class InputView {
     private static final Scanner in = new Scanner(System.in);
     public static final String GUIDE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public static final String GUIDE_CANNOT_PARSE_STRING = "숫자가 아닙니다.";
+    public static final String WHITE_SPACE = "";
+    public static final String SPLIT_DELIMITER = ",";
+    public static final String SPACIAL_CHARACTER_SPACE = "\\s";
 
     public static RequestMoney money() {
         System.out.println(GUIDE_PURCHASE_MONEY);
@@ -31,11 +37,21 @@ public class InputView {
         return new RequestMoney(money);
     }
 
-    public static RequestWinningNumber winningNumber() {
+    public static Lotto winningNumber() {
         System.out.println(GUIDE_LAST_WEEK_WINNING_NUMBER);
         final String inputWinningNumber = in.nextLine();
 
-        return new RequestWinningNumber(inputWinningNumber);
+        String[] splitWinningNumbers = splitWinningNumbers(inputWinningNumber);
+        List<LottoNumber> collect = Arrays.stream(splitWinningNumbers)
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        return new Lotto(collect);
+    }
+
+    private static String[] splitWinningNumbers(String inputWinningNumber) {
+        return inputWinningNumber.replaceAll(SPACIAL_CHARACTER_SPACE, WHITE_SPACE)
+                .split(SPLIT_DELIMITER);
     }
 
     public static LottoNumber bonusNumber() {

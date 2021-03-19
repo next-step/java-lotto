@@ -24,20 +24,20 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoMatch match(Lotto lotto) {
+    public LottoMatch match(final Lotto lotto) {
         long count = winningLotto.match(lotto);
         boolean hasBonus = lotto.contains(bonusNumber);
         return LottoMatch.of(count, hasBonus);
     }
 
-    public long winningReward(Lotto lotto) {
+    public long winningReward(final Lotto lotto) {
         return match(lotto).getWinningReward();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof WinningLotto)) return false;
         final WinningLotto that = (WinningLotto) o;
         return Objects.equals(winningLotto, that.winningLotto)
                 && Objects.equals(bonusNumber, that.bonusNumber);
@@ -50,9 +50,6 @@ public class WinningLotto {
 
     @Override
     public String toString() {
-        return "WinningLotto{" +
-                "winningLotto=" + winningLotto +
-                ", bonusNumber=" + bonusNumber +
-                '}';
+        return String.format("%s %s", winningLotto, bonusNumber);
     }
 }
