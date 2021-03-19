@@ -1,6 +1,8 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringSum {
 
@@ -14,8 +16,8 @@ public class StringSum {
         if (isEmpty(input)) {
             return new Result(0);
         }
-
-        Integer sum = calculateInput(input);
+        String[] numbers = split(input);
+        Integer sum = sumString(numbers);
         return new Result(sum);
     }
 
@@ -23,9 +25,16 @@ public class StringSum {
         return input == null || input.isEmpty();
     }
 
-    private Integer calculateInput(String input) {
-        String[] numbers = input.split(reg);
+    private String[] split(String input) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
+        return input.split(reg);
+    }
 
+    private Integer sumString(String[] numbers) {
         return Arrays.stream(numbers)
             .map(Integer::parseInt)
             .reduce(0, Integer::sum);
