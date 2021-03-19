@@ -1,6 +1,7 @@
 package step1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,5 +48,12 @@ public class StringSumTest {
         String input = "//;\n1;2;3";
         Result result = stringSum.sum(input);
         assertEquals(new Result(6), result);
+    }
+
+    @DisplayName("음수가 포함된 경우 RuntimeException")
+    @Test
+    void negativeInput() {
+        String input = "-1,2,3";
+        assertThrows(RuntimeException.class, () -> stringSum.sum(input));
     }
 }
