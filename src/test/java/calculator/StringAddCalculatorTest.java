@@ -30,4 +30,11 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
+    
+    @Test
+    @DisplayName("콜론(:)도 구분자로 포함할 경우")
+    public void checkColon() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }

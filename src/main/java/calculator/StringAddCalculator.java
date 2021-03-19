@@ -29,7 +29,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String expression) {
-        return expression.split(",| ");
+        return expression.split(",| |:");
     }
 
     private static boolean isEmptyOrNull(String expression) {
