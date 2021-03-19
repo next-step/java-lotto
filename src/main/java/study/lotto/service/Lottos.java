@@ -1,10 +1,9 @@
 package study.lotto.service;
 
 import study.lotto.domain.Lotto;
-import study.lotto.domain.LottoNumber;
+import study.lotto.domain.WinningLotto;
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.view.dto.RequestMoney;
-import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,22 +25,20 @@ public class Lottos {
         this.money = money;
     }
 
-    public List<Lotto> lottoList() {
-        return Collections.unmodifiableList(lottoList);
-    }
-
-    public long statics(final LottoMatch lottoMatch, final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
+    public long statics(final LottoMatch lottoMatch, final WinningLotto winningLotto) {
         return lottoList.stream()
-                .collect(
-                        groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
-                )
+                .collect(groupingBy(winningLotto::match, counting()))
                 .getOrDefault(lottoMatch, 0L);
     }
 
-    public double winningRate(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
+    public double winningRate(final WinningLotto winningLotto) {
         long sum = lottoList.stream()
-                .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
+                .mapToLong(winningLotto::winningReward)
                 .sum();
         return money.winningRate(sum);
+    }
+
+    public List<Lotto> lottoList() {
+        return Collections.unmodifiableList(lottoList);
     }
 }
