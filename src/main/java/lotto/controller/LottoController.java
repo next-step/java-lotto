@@ -31,6 +31,8 @@ public class LottoController {
         resultView.printLottoNumbers(lottoNumbers);
 
         List<Integer> winningNumber = inputView.inputWinningNumber();
+        int bonusBall = inputView.bonusBall();
+
         Winning winning = new Winning();
 
         for (IssueNumber issueNumber : lottoNumbers.keySet()) {
