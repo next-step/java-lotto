@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.util.StringParser;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -20,7 +22,16 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> numbers) {
+        boolean duplicated = numbers.stream()
+                .distinct().count() != numbers.size();
+        if (duplicated) {
+            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+        }
         this.lottoNumbers = numbers;
+    }
+
+    public Lotto(String lottoNumber) {
+        this(StringParser.toLottoNumberList(lottoNumber));
     }
 
     public List<Integer> createNumber() {
