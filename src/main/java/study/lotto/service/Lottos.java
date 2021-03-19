@@ -5,8 +5,12 @@ import study.lotto.domain.WinningLotto;
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.view.dto.RequestMoney;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
@@ -19,6 +23,10 @@ public class Lottos {
     // 전체 로또 생성
     private final List<Lotto> lottoList;
     private final RequestMoney money;
+
+    public Lottos(final List<Lotto> lotteries) {
+        this(lotteries, null);
+    }
 
     public Lottos(final List<Lotto> lotteries, final RequestMoney money) {
         this.lottoList = lotteries;
@@ -40,5 +48,10 @@ public class Lottos {
 
     public List<Lotto> lottoList() {
         return Collections.unmodifiableList(lottoList);
+    }
+
+    public List<Lotto> addAll(List<Lotto> autoLotto) {
+        return Stream.concat(lottoList.stream(), autoLotto.stream())
+                .collect(Collectors.toList());
     }
 }
