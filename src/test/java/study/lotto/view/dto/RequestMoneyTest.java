@@ -1,5 +1,6 @@
 package study.lotto.view.dto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,5 +26,13 @@ class RequestMoneyTest {
                 .isThrownBy(() -> {
                     new RequestMoney(given);
                 });
+    }
+
+    @DisplayName("금액에 따른 로또 갯수 확인 테스트")
+    @Test
+    void divideMoneyByPrice_금액에_따른_전체_로또_갯수() {
+        RequestMoney money = new RequestMoney(1000);
+        int lottoCount = money.divideMoneyByPrice();
+        assertThat(lottoCount).isEqualTo(1);
     }
 }
