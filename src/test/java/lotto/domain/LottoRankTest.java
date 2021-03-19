@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.strategy.Auto;
+import lotto.strategy.Manual;
+import lotto.strategy.Numbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoRankTest {
 
-    private LottoNumber winnerNumber;
+    private Numbers winnerNumber;
 
     public List<Integer> createLottoNumber() {
         return Arrays.asList(1,2,3,4,5,6);
@@ -27,7 +30,7 @@ public class LottoRankTest {
 
     @BeforeEach
     public void setUp() {
-        winnerNumber = new LottoNumber(createLottoNumber());
+        winnerNumber = new Auto(createLottoNumber());
     }
 
     @Test

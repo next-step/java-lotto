@@ -2,7 +2,6 @@ package lotto.constant;
 
 public class LottoConstant {
     // 로또
-    public static final int LOTTO_NUMBER_COUNT = 6;
     public static final int MIN_BUY_AMOUNT = 1000;
 
     // 에러 메시지
