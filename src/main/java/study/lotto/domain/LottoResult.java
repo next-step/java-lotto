@@ -9,21 +9,23 @@ import study.lotto.view.dto.RequestWinningNumber;
  */
 public class LottoResult {
 
-    private final RequestWinningNumber winningNumber;
-    private final LottoNumber bonusNumber;
     private final Lottos lottos;
+    private final WinningLotto winningLotto;
 
-    public LottoResult(final RequestWinningNumber winningNumber, final Lottos lottos, final LottoNumber bonusNumber) {
-        this.winningNumber = winningNumber;
-        this.bonusNumber = bonusNumber;
+    public LottoResult(final Lotto lotto, final Lottos lottos, final LottoNumber bonusNumber) {
+        this(lottos, new WinningLotto(lotto, bonusNumber));
+    }
+
+    public LottoResult(Lottos lottos, WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
         this.lottos = lottos;
     }
 
     public long count(final LottoMatch lottoMatch) {
-        return lottos.statics(lottoMatch, winningNumber, bonusNumber);
+        return lottos.statics(lottoMatch, winningLotto);
     }
 
     public double winningRate() {
-        return lottos.winningRate(winningNumber, bonusNumber);
+        return lottos.winningRate(winningLotto);
     }
 }
