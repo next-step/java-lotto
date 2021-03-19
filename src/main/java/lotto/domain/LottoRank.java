@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,18 +10,18 @@ public enum LottoRank {
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
-    public final int rankCount;
+    public final int matchCount;
     public final int prize;
 
-    LottoRank(int rankCount, int prize) {
-        this.rankCount = rankCount;
+    LottoRank(int matchCount, int prize) {
+        this.matchCount = matchCount;
         this.prize = prize;
     }
 
     public static LottoRank findLottoRank(LottoTicket lottoTicket, LottoNumber winnerNumber) {
         return Arrays.asList(LottoRank.values())
                     .stream()
-                    .filter(lottoRank -> lottoRank.rankCount == checkLottoRank(lottoTicket, winnerNumber))
+                    .filter(lottoRank -> lottoRank.matchCount == checkLottoRank(lottoTicket, winnerNumber))
                     .findAny()
                     .orElse(ZERO);
     }

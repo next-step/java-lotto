@@ -33,6 +33,6 @@ public class ResultView {
     }
 
     public void printLottoRank(LottoRank lottoRank, List<LottoTicket> lottoTickets, LottoNumber winnerNumber) {
-        System.out.println(lottoRank.rankCount + "개 일치 (" + lottoRank.prize + ") - " + lottoRank.winnerCount(lottoTickets, winnerNumber) + "개");
+        System.out.println(lottoRank.matchCount + "개 일치 (" + lottoRank.prize + ") - " + lottoRank.winnerCount(lottoTickets, winnerNumber) + "개");
     }
 }
