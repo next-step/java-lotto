@@ -5,10 +5,8 @@ import study.lotto.domain.WinningLotto;
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.view.dto.RequestMoney;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
