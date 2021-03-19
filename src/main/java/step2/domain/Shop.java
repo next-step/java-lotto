@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.dto.Lotto;
 import step2.dto.Money;
 import step2.dto.ShopResponse;
 

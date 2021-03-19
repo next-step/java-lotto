@@ -1,10 +1,11 @@
 package step2.dto;
 
-import step2.domain.Lotto;
-
 import java.util.List;
 
 public class ShopResponse {
+
+    private static final int LOTTO_PRICE = 1000;
+
     private final int originMoney;
     private final int lottoCount;
     private final List<Lotto> lottoList;
@@ -15,6 +16,11 @@ public class ShopResponse {
         this.lottoCount = lottoCount;
         this.lottoList = lottoList;
         this.change = change;
+        if(!isResponseValid(this)) throw new IllegalArgumentException();
+    }
+
+    private boolean isResponseValid(ShopResponse shopResponse) {
+        return shopResponse.getLottoCount()*LOTTO_PRICE+change==originMoney;
     }
 
     public int getOriginMoney() {

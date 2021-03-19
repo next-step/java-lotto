@@ -7,7 +7,7 @@ public class JudgeResponse {
     private final int sixMatch;
     private final double profitIndex;
 
-    public JudgeResponse(int threeMatch, int fourMatch, int fiveMatch, int sixMatch, double profitIndex){
+    public JudgeResponse(int threeMatch, int fourMatch, int fiveMatch, int sixMatch, double profitIndex) {
         this.threeMatch = threeMatch;
         this.fourMatch = fourMatch;
         this.fiveMatch = fiveMatch;
