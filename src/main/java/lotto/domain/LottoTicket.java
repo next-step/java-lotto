@@ -13,11 +13,11 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(stringNumber);
     }
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<Integer> lottoNumber() {
+    public List<LottoNumber> lottoNumber() {
         return Collections.unmodifiableList(lottoNumbers.readOnlyNumbers());
     }
 }

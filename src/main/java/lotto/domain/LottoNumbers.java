@@ -1,73 +1,66 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
     public static final String LOTTO_NUMBER_DUPLICATE_ERROR = "중복된 당첨 번호가 존재합니다.";
     public static final String LOTTO_NUMBER_COUNT_ERROR = "당첨 번호는 6개 입력해주세요.";
-    public static final String LOTTO_NUMBER_SIZE_ERROR = "당첨 번호는 1 부터 45 이내 입력해주세요.";
     private static final String DEFAULT_SPLIT_REGEX = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
     private static final List<Integer> LOTTO_NUMBERS = IntStream.range(MIN_NUMBER, MAX_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+                                                            .boxed()
+                                                            .collect(Collectors.toList());
 
-    private final List<Integer> lottoNumber;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this.lottoNumber = createLottoNumbers();
+        this.lottoNumbers = createLottoNumbers();
     }
 
-    public LottoNumbers(List<Integer> lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers(String inputNumbers) {
-        this.lottoNumber = createLottoNumbers(inputNumbers);
+        this.lottoNumbers = createLottoNumbers(inputNumbers);
     }
 
     public LottoNumbers(int inputBonusNumber) {
-        this.lottoNumber = createBonusNumber(inputBonusNumber);
+        this.lottoNumbers = createBonusNumber(inputBonusNumber);
     }
 
-    private List<Integer> createBonusNumber(int inputBonusNumber) {
-        List<Integer> bonusNumber = Arrays.asList(inputBonusNumber);
-
-        isLottoNumberRange(bonusNumber);
-
-        return bonusNumber;
+    private List<LottoNumber> createBonusNumber(int inputBonusNumber) {
+        return Arrays.asList(new LottoNumber(inputBonusNumber));
     }
 
-    private List<Integer> createLottoNumbers() {
-        List<Integer> numbers = LOTTO_NUMBERS;
+    private List<LottoNumber> createLottoNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
 
-        Collections.shuffle(numbers);
-
-        List<Integer> result = numbers.stream()
+        List<Integer> result = LOTTO_NUMBERS.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
 
         Collections.sort(result);
 
-        return result;
+        return result.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    private List<Integer> createLottoNumbers(String numbers) {
-        List<Integer> result = stringToList(numbers).stream()
+    private List<LottoNumber> createLottoNumbers(String numbers) {
+        List<LottoNumber> result = stringToList(numbers).stream()
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         isDuplicateNumbers(result);
         isLottoNumberCount(result);
-        isLottoNumberRange(result);
 
         return result;
     }
@@ -79,14 +72,15 @@ public class LottoNumbers {
     }
 
     // 유효성 start.
-    private void isLottoNumberCount(List<Integer> result) {
+    private void isLottoNumberCount(List<LottoNumber> result) {
         if (result.size() != LOTTO_NUMBER_COUNT ) {
             throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR);
         }
     }
 
-    private void isDuplicateNumbers(List<Integer> result) {
+    private void isDuplicateNumbers(List<LottoNumber> result) {
         int count = (int) result.stream()
+                .mapToInt(LottoNumber::lottoNumber)
                 .distinct()
                 .count();
 
@@ -94,25 +88,26 @@ public class LottoNumbers {
             throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE_ERROR);
         }
     }
-
-    private void isLottoNumberRange(List<Integer> result) {
-        if (result.stream()
-                .anyMatch(this::isLottoNumberSize)) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_ERROR);
-        };
-    }
-
-    private boolean isLottoNumberSize(int number) {
-        return (MIN_NUMBER > number)
-                || (MAX_NUMBER < number);
-    }
     // 유효성 end.
 
-    public List<Integer> readOnlyNumbers() {
-        return Collections.unmodifiableList(lottoNumber);
+    public List<LottoNumber> readOnlyNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean checkNumbers(List<Integer> numbers) {
-        return Objects.equals(numbers, lottoNumber);
+    public boolean checkNumbers(List<LottoNumber> numbers) {
+        return Objects.equals(numbers, lottoNumbers);
     }
+
+    public static int matchOf(LottoTicket lottoTicket, LottoNumbers winnerNumber) {
+        return (int) lottoTicket.lottoNumber()
+                .stream()
+                .filter(number -> numberContains(number.lottoNumber(), winnerNumber))
+                .count();
+    }
+
+    public static boolean numberContains(int number, LottoNumbers winnerNumber) {
+        return winnerNumber.readOnlyNumbers().stream()
+                .anyMatch(matchNumber -> number == matchNumber.lottoNumber());
+    }
+
 }

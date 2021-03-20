@@ -5,23 +5,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 티켓")
 public class LottoTicketTest {
 
-    public List<Integer> createLottoNumber() {
-        return Arrays.asList(1,2,3,4,5,6);
+    public List<LottoNumber> createLottoNumber() {
+         return IntStream.range(1,6)
+                .mapToObj(i -> new LottoNumber(i))
+                .collect(Collectors.toList());
     }
 
     @Test
     @DisplayName("로또 발급")
     public void createLottoTicket() throws Exception {
         //given
-        List<Integer> numbers = createLottoNumber();
+        List<LottoNumber> numbers = createLottoNumber();
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //when
@@ -37,7 +40,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket();
 
         //when
-        List<Integer> numbers = lottoTicket.lottoNumber();
+        List<LottoNumber> numbers = lottoTicket.lottoNumber();
 
         //then
         assertThat(numbers.size()).isEqualTo(6);

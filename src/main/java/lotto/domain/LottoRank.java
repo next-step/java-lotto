@@ -23,10 +23,10 @@ public enum LottoRank {
 
     public static LottoRank valueOf(LottoTicket lottoTicket,
             LottoNumbers winnerNumber, LottoNumbers bonusNumber) {
-        boolean isBonus = matchOf(lottoTicket, bonusNumber) == BOUNS_OF_MATCH ? true : false;
+        boolean isBonus = LottoNumbers.matchOf(lottoTicket, bonusNumber) == BOUNS_OF_MATCH ? true : false;
         LottoRank rank = Arrays.asList(LottoRank.values())
                     .stream()
-                    .filter(lottoRank -> lottoRank.countOfMatch == matchOf(lottoTicket, winnerNumber))
+                    .filter(lottoRank -> lottoRank.countOfMatch == LottoNumbers.matchOf(lottoTicket, winnerNumber))
                     .findAny()
                     .orElse(MISS);
 
@@ -35,18 +35,6 @@ public enum LottoRank {
         }
 
         return rank;
-    }
-
-    private static int matchOf(LottoTicket lottoTicket, LottoNumbers winnerNumber) {
-        return (int) lottoTicket.lottoNumber()
-                    .stream()
-                    .filter(number -> numberContains(number, winnerNumber))
-                    .count();
-    }
-
-    private static boolean numberContains(int number, LottoNumbers winnerNumber) {
-        return winnerNumber.readOnlyNumbers()
-                .contains(number);
     }
 
     public int winnerCount(List<LottoTicket> lottoTickets,
