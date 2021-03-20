@@ -13,7 +13,7 @@ public final class Number {
 
   public Number(int number) {
     if (number < 0) {
-      throw new RuntimeException("음수는 더할 수 없습니다.");
+      throw new NegativeNumberException();
     }
     this.number = number;
   }
