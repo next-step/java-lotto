@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Amount;
+import lotto.domain.Rank;
 import lotto.domain.MatchNumber;
 import lotto.dto.LottoNumber;
 import lotto.domain.Winning;
@@ -33,15 +33,27 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (MatchNumber matchNumber : winning.getWinning().keySet()) {
-            System.out.println(matchNumber.getMatchNumber() + "개 일치 (" +
-                    Amount.getWinningMoney(matchNumber.getMatchNumber()) + "원)-" +
-                    winning.getWinning()
-                            .get(matchNumber)
-                            .getCount() + "개");
+        for (Rank rank : winning.getWinning().keySet()) {
+            System.out.println(numberAndBonusBallString(rank) + " (" + rank.getPrice() + "원)-" + countMatchNumber(winning, rank) + "개");
         }
 
         int totalAmount = winning.getSumAmount();
         System.out.printf("총 수익률은 " + "%.2f" + "입니다.", totalAmount / (double) inputBuyAmount);
+    }
+
+    public String numberAndBonusBallString(Rank rank) {
+        String numberAndBonusString = rank.getCount() + "개 일치";
+
+        if (rank == Rank.SECOND) {
+            numberAndBonusString += ", 보너스볼 일치";
+        }
+
+        return numberAndBonusString;
+    }
+
+    public int countMatchNumber(Winning winning, Rank rank) {
+        return winning.getWinning()
+                .get(rank)
+                .getCount();
     }
 }

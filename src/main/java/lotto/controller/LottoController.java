@@ -31,14 +31,14 @@ public class LottoController {
         resultView.printLottoNumbers(lottoNumbers);
 
         List<Integer> winningNumber = inputView.inputWinningNumber();
-        int bonusBall = inputView.bonusBall();
+        boolean bonusBall = winningNumber.contains(inputView.bonusBall());
 
         Winning winning = new Winning();
 
         for (IssueNumber issueNumber : lottoNumbers.keySet()) {
-            int matchNumbers = lottoPlay.getMatchNumbers(lottoNumbers.get(issueNumber), winningNumber);
+            int countMatchNumber = lottoPlay.getMatchNumbers(lottoNumbers.get(issueNumber), winningNumber);
 
-            winning.record(matchNumbers);
+            winning.record(countMatchNumber, bonusBall);
         }
 
         resultView.printStatistics(winning, inputBuyAmount);
