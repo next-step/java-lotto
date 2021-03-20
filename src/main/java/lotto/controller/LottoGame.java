@@ -5,7 +5,6 @@ import lotto.utils.StringUtils;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -31,7 +30,7 @@ public class LottoGame {
     }
 
     public void start() {
-        String value = InputView.getInputAmount();
+        String value = InputView.amount();
         emptyValidation(value);
 
         Amount purchaseAmount = generateAmount(value);
@@ -39,7 +38,7 @@ public class LottoGame {
         List<Lotto> lottos = generateLotto(purchaseAmount);
         ResultView.showPurchaseLotto(lottos);
 
-        value = InputView.getWinningNumbers();
+        value = InputView.winningNumbers();
         emptyValidation(value);
 
         LotteryMachine lotteryMachine = generateLotteryMachine(value, purchaseAmount);
