@@ -16,10 +16,17 @@ public class PositiveNumberTest {
         assertThat(number).isEqualTo(new PositiveNumber("0"));
     }
 
+	@Test
+	@DisplayName("음수 Exception Test")
+	public void neegative() {
+		assertThatThrownBy(() -> new PositiveNumber("t"))
+			.isInstanceOf(RuntimeException.class);
+	}
+
     @Test
     @DisplayName("숫자 이외의 값 Exception Test")
     public void valid() {
-        assertThatThrownBy(() -> new PositiveNumber("-1"))
+        assertThatThrownBy(() -> new PositiveNumber("t"))
             .isInstanceOf(RuntimeException.class);
     }
 }
