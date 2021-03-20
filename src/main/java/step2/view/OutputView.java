@@ -5,25 +5,25 @@ import step2.dto.LottoStatisticsDto;
 import step2.dto.LottosDto;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static step2.view.Message.*;
+public class OutputView {
 
-public class LottoView {
+    private static final String COUNT_OF_LOTTO_PURCHASED = "개를 구매 했습니다.";
+    private static final String DELIMITER = ",";
+    private static final String LOTTO_INFO = "[%s]\n";
 
-    private final Scanner scanner;
-    public int paymentMoney;
+    private static final String STATISTICS = "당청통계";
+    private static final String DIVISION_LINE = "---------";
+    private static final String COUNT_OF_MATCH = "%d개 일치%s (%d)- %d원\n";
+    private static final String RETURN_OF_RATE = "총 수익률은 %5.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String PROFIT = "이득";
+    private static final String LOSS = "손해";
+    private static final String MATCH_OF_BONUS = ", 보너스 볼 일치";
 
-    public LottoView() {
-        this.scanner = new Scanner(System.in);
-    }
+    private static final int BREAK_EVEN_POINT = 1;
+    private static final int SECOND_WIN_MONEY = 30000000;
 
-    public int paymentMoney() {
-        System.out.println(INPUT_MONEY);
-        this.paymentMoney = scanner.nextInt();
-        return paymentMoney;
-    }
 
     public void lottoInfoPirnt(LottosDto lottosDto) {
         List<LottoDto> lottoDtoList = lottosDto.getLottoDtoList();
@@ -37,16 +37,6 @@ public class LottoView {
                 .collect(Collectors.joining(DELIMITER));
     }
 
-    public String inputWinNumber() {
-        System.out.println(INPUT_WIN_NUMBER);
-        scanner.nextLine(); //scanner.nextLine() 사용전 nextInt()를 사용하면 스킵되는 현상때문에 추가
-        return scanner.nextLine();
-    }
-
-    public int inputBonusInput() {
-        System.out.println(INPUT_BONUS_NUMBER);
-        return scanner.nextInt();
-    }
 
     public void finish(LottoStatisticsDto lottoStatisticsDto) {
         List<Integer> rankList = lottoStatisticsDto.getRankList();

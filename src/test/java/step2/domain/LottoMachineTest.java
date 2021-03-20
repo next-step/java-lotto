@@ -2,12 +2,12 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.util.StringParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
 
@@ -19,7 +19,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         //when
-        Lottos lotto = lottoMachine.createLotto(money);
+        Lottos lotto = lottoMachine.createLotto(money, List.of("1,2,3,4,5,6"));
 
         //then
         assertThat(lotto.lottoCount()).isEqualTo(13);
@@ -29,7 +29,7 @@ class LottoMachineTest {
     @Test
     void getRank() {
         //given
-        List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
+        Lotto winNumber = createLotto(1, 2, 3, 4, 5, 6);
         LottoMachine lottoMachine = new LottoMachine(createLottos());
 
         //when
@@ -47,46 +47,33 @@ class LottoMachineTest {
         String winNumber = "1,2,3,4,5,6";
 
         //when
-        List<LottoNumber> lottoNumbers = lottoMachine.toLottoNumberList(winNumber);
+        List<LottoNumber> lottoNumbers = StringParser.toLottoNumberList(winNumber);
 
         //then
-        assertThat(lottoNumbers).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-    }
-
-    @DisplayName("당첨번호가 6개가 아닐 경우")
-    @Test
-    void valid_당첨번호길이검증() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine();
-        String winNumber = "1,2,3,4,5";
-
-        //then
-        assertThatThrownBy(() -> {
-            lottoMachine.toLottoNumberList(winNumber);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("당첨번호가 6개가 아닙니다.");
+        assertThat(lottoNumbers).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
     }
 
     @DisplayName("보너스볼과 매칭한 결과들을 반환한다.")
     @Test
     void getMatchOfBonus() {
         LottoMachine lottoMachine = new LottoMachine(createLottos());
-        List<Boolean> resultMatchList = lottoMachine.getMatchOfBonus(new LottoNumber(6));
+        List<Boolean> resultMatchList = lottoMachine.getMatchOfBonus(LottoNumber.of(6));
 
         assertThat(resultMatchList.get(0)).isTrue();
         assertThat(resultMatchList.get(1)).isFalse();
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
-        return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
+        return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
 
     Lottos createLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(11), new LottoNumber(24))));
+        List<String> lottoList = new ArrayList<>();
+        lottoList.add("1,2,3,4,5,6");
+        lottoList.add("1,2,3,4,5,7");
+        lottoList.add("7,8,9,10,11,12");
+        lottoList.add("2,3,4,5,11,24");
         return new Lottos(lottoList);
     }
+
 }

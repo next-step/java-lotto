@@ -15,14 +15,22 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void lottoNumberRange(int number) {
         assertThatThrownBy(() -> {
-            new LottoNumber(number);
+            LottoNumber.of(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 넘버가 같으면 같은 로또이다.")
     @Test
     void lottoEquals() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
+    }
+
+    @DisplayName("로또 넘버를 생성한다.")
+    void lottoNumber() {
+        LottoNumber stringToLottoNumber = LottoNumber.of("5");
+        LottoNumber intToLottoNumber = LottoNumber.of(5);
+        assertThat(stringToLottoNumber).isEqualTo(intToLottoNumber);
     }
 
 }

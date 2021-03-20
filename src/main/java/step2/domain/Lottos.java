@@ -15,8 +15,19 @@ public class Lottos {
     public Lottos() {
     }
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(List<String> manualLottoList) {
+        this.lottoList = manualLottoList.stream()
+                .map(Lotto::new)
+                .collect(toList());
+    }
+
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> sumLottos = new ArrayList<>();
+        manualLottos.lottoList.stream()
+                .forEach(sumLottos::add);
+        autoLottos.lottoList.stream()
+                .forEach(sumLottos::add);
+        this.lottoList = sumLottos;
     }
 
     public Lottos createLottoList(int count) {
@@ -40,7 +51,7 @@ public class Lottos {
         return list;
     }
 
-    public List<Integer> getRankOfLotto(List<LottoNumber> winNumber) {
+    public List<Integer> getRankOfLotto(Lotto winNumber) {
         return lottoList.stream()
                 .map(lotto -> lotto.match(winNumber))
                 .collect(toList());

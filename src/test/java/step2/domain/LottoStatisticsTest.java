@@ -9,8 +9,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
-
-
+    
     @DisplayName("총수익이 0이면 0이다.")
     @Test
     void ZeroProfit() {
@@ -19,10 +18,10 @@ class LottoStatisticsTest {
         List<Integer> matchResult = List.of(0, 0, 0);
 
         //when
-        LottoStatistics lottoStatistics = new LottoStatistics(matchResult, paymentMoney);
+        LottoStatistics lottoStatistics = new LottoStatistics(matchResult);
 
         //then
-        assertThat(lottoStatistics.getEarningRate()).isEqualTo(0.00);
+        assertThat(lottoStatistics.calculateProfitRate(paymentMoney)).isEqualTo(0.00);
     }
 
     @DisplayName("수익률을 계산한다.")
@@ -33,19 +32,18 @@ class LottoStatisticsTest {
         List<Integer> matchResult = List.of(4, 0, 0);
 
         //when
-        LottoStatistics lottoStatistics = new LottoStatistics(matchResult, paymentMoney);
+        LottoStatistics lottoStatistics = new LottoStatistics(matchResult);
 
         //then
-        assertThat(lottoStatistics.getEarningRate()).isEqualTo(25.00);
+        assertThat(lottoStatistics.calculateProfitRate(paymentMoney)).isEqualTo(25.00);
     }
 
     @DisplayName("매칭된 로또들을 그룹화한다.")
     @Test
     void matchOfLotto_계산() {
         //given
-        Money paymentMoney = new Money(1000);
         List<Integer> matchResult = List.of(5, 5, 6, 6, 4, 4);
-        LottoStatistics lottoStatistics = new LottoStatistics(matchResult, paymentMoney);
+        LottoStatistics lottoStatistics = new LottoStatistics(matchResult);
         List<Boolean> matchOfBonus = List.of(true, false, true, false, true, false);
 
         //when

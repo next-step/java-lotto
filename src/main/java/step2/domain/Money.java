@@ -8,6 +8,11 @@ public class Money {
     private static final int ZERO = 0;
     private final int money;
 
+
+    public Money(int money, int count) {
+        this(money - (count * LOTTO_PRICE));
+    }
+
     public Money(int money) {
         if (money % LOTTO_PRICE != ZERO || money == ZERO) {
             throw new IllegalArgumentException("1000원 단위로 돈을 지불해주세요");

@@ -37,7 +37,7 @@ class LottosTest {
     void getRankOfLotto() {
         //given
         Lottos lottos = createLottos();
-        List<LottoNumber> winNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lotto winNumber = new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
 
         //when
         List<Integer> rankOfLotto = lottos.getRankOfLotto(winNumber);
@@ -65,7 +65,7 @@ class LottosTest {
     @DisplayName("보유하고 있는 로또와 보너스 볼과 매칭 테스트")
     @Test
     void matchOfBonus() {
-        LottoNumber bonusNumber = new LottoNumber(6);
+        LottoNumber bonusNumber = LottoNumber.of(6);
         Lottos lottos = createLottos();
 
         List<Boolean> resultMatchList = lottos.matchOfBonus(bonusNumber);
@@ -74,16 +74,36 @@ class LottosTest {
         assertThat(resultMatchList.get(1)).isFalse();
     }
 
+    @DisplayName("수동 로또를 만든다.")
+    @Test
+    void createManualLotto() {
+        List<String> strings = List.of("1,2,3,4,5,6", "22,3,4,5,6,7");
+        Lottos lottos = new Lottos(strings);
+
+        assertThat(lottos.lottoCount()).isEqualTo(2);
+        assertThat(lottos.getRankOfLotto(createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 4));
+    }
+
+    @DisplayName("수동 로또와 자동로또를 합친다.")
+    @Test
+    void add() {
+        Lottos lottos = new Lottos(createLottos(), createLottos());
+
+        assertThat(lottos.lottoCount()).isEqualTo(8);
+        assertThat(lottos.getRankOfLotto(createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 5, 0, 4, 6, 5, 0, 4));
+    }
+
     Lottos createLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))));
-        lottoList.add(new Lotto(List.of(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(11), new LottoNumber(24))));
+        List<String> lottoList = new ArrayList<>();
+        lottoList.add("1,2,3,4,5,6");
+        lottoList.add("1,2,3,4,5,7");
+        lottoList.add("7,8,9,10,11,12");
+        lottoList.add("2,3,4,5,11,24");
         return new Lottos(lottoList);
     }
 
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
-        return new Lotto(List.of(new LottoNumber(one), new LottoNumber(two), new LottoNumber(three), new LottoNumber(four), new LottoNumber(five), new LottoNumber(six)));
+        return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
+
 }
