@@ -4,6 +4,7 @@ import lotto.domain.Rank;
 import lotto.dto.LottoNumber;
 import lotto.domain.Winning;
 import lotto.dto.IssueNumber;
+import lotto.dto.LottoNumbers;
 
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,11 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printLottoNumbers(Map<IssueNumber, List<LottoNumber>> lottoNumbers) {
+    public void printLottoNumbers(Map<IssueNumber, LottoNumbers> lottoNumbers) {
         System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
 
         for (IssueNumber issueNumber : lottoNumbers.keySet()) {
-            printEachLottoNumber(lottoNumbers.get(issueNumber));
+            printEachLottoNumber(lottoNumbers.get(issueNumber).getLottoNumbers());
         }
 
         System.out.println();

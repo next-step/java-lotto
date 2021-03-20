@@ -13,4 +13,9 @@ public class LottoNumbers {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public boolean isContain(int bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> bonusNumber == lottoNumber.getLottoNumber());
+    }
 }

@@ -11,10 +11,9 @@ public class LottoPlay {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_LENGTH = 6;
-    //private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new HashMap<>();
     private final TotalLottoNumbers totalLottoNumbers = new TotalLottoNumbers();
 
-    public Map<IssueNumber, List<LottoNumber>> getLottoNumbers() {
+    public Map<IssueNumber, LottoNumbers> getLottoNumbers() {
         return totalLottoNumbers.getTotalLottoNumbers();
     }
 

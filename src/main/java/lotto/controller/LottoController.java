@@ -4,6 +4,7 @@ import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
 import lotto.dto.IssueNumber;
+import lotto.dto.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,16 +28,17 @@ public class LottoController {
         
         ResultView resultView = new ResultView();
 
-        Map<IssueNumber, List<LottoNumber>> lottoNumbers = lottoPlay.getLottoNumbers();
-        resultView.printLottoNumbers(lottoNumbers);
+        Map<IssueNumber, LottoNumbers> totalLottoNumbers = lottoPlay.getLottoNumbers();
+        resultView.printLottoNumbers(totalLottoNumbers);
 
         List<Integer> winningNumber = inputView.inputWinningNumber();
-        boolean bonusBall = winningNumber.contains(inputView.bonusBall());
+        int bonusNumber = inputView.bonusBall();
 
         Winning winning = new Winning();
 
-        for (IssueNumber issueNumber : lottoNumbers.keySet()) {
-            int countMatchNumber = lottoPlay.getMatchNumbers(lottoNumbers.get(issueNumber), winningNumber);
+        for (IssueNumber issueNumber : totalLottoNumbers.keySet()) {
+            int countMatchNumber = lottoPlay.getMatchNumbers(totalLottoNumbers.get(issueNumber).getLottoNumbers(), winningNumber);
+            boolean bonusBall = totalLottoNumbers.get(issueNumber).isContain(bonusNumber);
 
             winning.record(countMatchNumber, bonusBall);
         }

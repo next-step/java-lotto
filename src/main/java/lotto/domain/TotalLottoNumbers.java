@@ -10,13 +10,13 @@ import java.util.Map;
 
 public class TotalLottoNumbers {
 
-    private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new LinkedHashMap<>();
+    private final Map<IssueNumber, LottoNumbers> totalLottoNumbers = new LinkedHashMap<>();
 
-    public Map<IssueNumber, List<LottoNumber>> getTotalLottoNumbers() {
+    public Map<IssueNumber, LottoNumbers> getTotalLottoNumbers() {
         return totalLottoNumbers;
     }
 
     public void recordEachLottoNumbers(IssueNumber issueNumber, LottoNumbers lottoNumbers) {
-        totalLottoNumbers.put(issueNumber, lottoNumbers.getLottoNumbers());
+        totalLottoNumbers.put(issueNumber, new LottoNumbers(lottoNumbers.getLottoNumbers()));
     }
 }
