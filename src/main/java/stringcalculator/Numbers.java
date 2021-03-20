@@ -1,6 +1,6 @@
 package stringcalculator;
 
-public class Numbers {
+public final class Numbers {
 
   private final String[] numbers;
 
@@ -8,11 +8,11 @@ public class Numbers {
     this.numbers = numbers;
   }
 
-  public int sum() {
-    int sum = 0;
+  public Number sum() {
+    Number total = new Number();
     for (String number : numbers) {
-      sum += Integer.parseInt(number);
+      total = total.sum(new Number(number));
     }
-    return sum;
+    return total;
   }
 }
