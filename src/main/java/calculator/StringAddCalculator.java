@@ -11,7 +11,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        expression.hasNegative();
+        expression.checkNegative();
         return sum(StringSplitUtil.split(expression.toString()));
     }
 
