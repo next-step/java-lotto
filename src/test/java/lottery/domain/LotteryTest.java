@@ -31,7 +31,7 @@ class LotteryTest {
 
     static Stream<Arguments> generateInvalidWinningLottery() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5), 7),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 8),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 50),

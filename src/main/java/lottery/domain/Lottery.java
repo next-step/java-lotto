@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public class Lottery {
 
@@ -15,11 +14,16 @@ public class Lottery {
     private final List<Integer> numbers;
 
     public Lottery(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
-        validate();
     }
 
     public Prize getPrize(List<Integer> winningNumbers, int bonusNumber) {
+        validate(winningNumbers);
+        if (!checkRange(bonusNumber) || winningNumbers.contains(bonusNumber)) {
+            throw new InvalidBonusNumberException();
+        }
+
         long matchedNumbers = numbers.stream()
                                      .filter(winningNumbers::contains)
                                      .count();
@@ -32,20 +36,22 @@ public class Lottery {
         return new ArrayList<>(numbers);
     }
 
-    private void validate() {
-        validateRangeOfNumbers();
-        validateDuplicates();
+    private void validate(List<Integer> numbers) {
+        validateRangeOfNumbers(numbers);
+        validateDuplicates(numbers);
     }
 
-    private void validateRangeOfNumbers() {
-        Predicate<Integer> checkRange = n -> n >= LOTTERY_NUMBER_MIN && n <= LOTTERY_NUMBER_MAX;
-
-        if (numbers.stream().filter(checkRange).count() != LOTTERY_SIZE ) {
+    private void validateRangeOfNumbers(List<Integer> numbers) {
+        if (numbers.stream().filter(this::checkRange).count() != LOTTERY_SIZE ) {
             throw new InvalidLotteryException();
         }
     }
 
-    private void validateDuplicates() {
+    private boolean checkRange(int number) {
+        return number >= LOTTERY_NUMBER_MIN && number <= LOTTERY_NUMBER_MAX;
+    }
+
+    private void validateDuplicates(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
 
         if (uniqueNumbers.size() != numbers.size()) {
