@@ -26,6 +26,14 @@ class NonNegativeIntegersTest {
     );
   }
 
+  static Stream<Arguments> sumSource() {
+    return Stream.of(
+        arguments(new String[]{"1", "2"}, new NonNegativeInteger(3)),
+        arguments(new String[]{"1", "2", "3"}, new NonNegativeInteger(6)),
+        arguments(new String[]{"4", "8", "9"}, new NonNegativeInteger(21))
+    );
+  }
+
   @ParameterizedTest
   @DisplayName("생성자 테스트")
   @MethodSource("createSource")
@@ -38,5 +46,13 @@ class NonNegativeIntegersTest {
   void negativeContainsCreation() {
     assertThatThrownBy(() -> new NonNegativeIntegers(new String[]{"-1", "2"}))
         .isInstanceOf(NegativeNumberException.class);
+  }
+
+
+  @ParameterizedTest
+  @DisplayName("합 테스트")
+  @MethodSource("sumSource")
+  void sum(String[] numbers, NonNegativeInteger expected) {
+    assertThat(new NonNegativeIntegers(numbers).sum()).isEqualTo(expected);
   }
 }
