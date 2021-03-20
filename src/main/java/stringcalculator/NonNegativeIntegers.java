@@ -2,6 +2,7 @@ package stringcalculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class NonNegativeIntegers {
@@ -24,5 +25,22 @@ public final class NonNegativeIntegers {
       total = total.sum(number);
     }
     return total;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof NonNegativeIntegers)) {
+      return false;
+    }
+    NonNegativeIntegers that = (NonNegativeIntegers) o;
+    return Objects.equals(numbers, that.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(numbers);
   }
 }
