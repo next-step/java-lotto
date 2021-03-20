@@ -17,7 +17,9 @@ public enum LottoResultMessage {
 
         if (rateOfReturn > LottoConstants.PRINCIPAL_RATE) {
             return PROFIT.message;
-        } else if (rateOfReturn == LottoConstants.PRINCIPAL_RATE) {
+        }
+
+        if (rateOfReturn == LottoConstants.PRINCIPAL_RATE) {
             return PRINCIPAL.message;
         }
 

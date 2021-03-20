@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.common.LottoConstants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -24,7 +21,8 @@ public class LottoNumbers {
     }
 
     private static List<Integer> lottoNumbers(String lottoNumber) {
-        return Arrays.stream(lottoNumber.replace(" ", "").split(","))
+        return Arrays.stream(lottoNumber.split(","))
+                .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
@@ -34,13 +32,17 @@ public class LottoNumbers {
     }
 
     public boolean normalSize() {
-        return numbers.size() == LottoConstants.LOTTO_NUMBER_COUNT;
+        return new HashSet<>(numbers).size() == LottoConstants.LOTTO_NUMBER_COUNT;
     }
 
-    public int correctCount(LottoNumbers purchaseLottoNumber){
-        List<Integer> tempNumbers = new ArrayList<>(purchaseLottoNumber.numbers);
+    public int correctCount(List<Integer> winningNumbers) {
+        List<Integer> tempNumbers = new ArrayList<>(winningNumbers);
         tempNumbers.removeAll(numbers);
         return LottoConstants.LOTTO_NUMBER_COUNT - tempNumbers.size();
+    }
+
+    public boolean matchedBonusBall(int bonusBall) {
+        return numbers.stream().anyMatch(number -> number == bonusBall);
     }
 
     public String printInfo(){

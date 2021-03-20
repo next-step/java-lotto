@@ -37,12 +37,14 @@ public class LottoMachine {
 
         Collections.shuffle(lottoNumber);
 
-        List<Integer> lottoNumbers = new ArrayList<>();
+        return lottoNumber.stream()
+                .limit(LottoConstants.LOTTO_NUMBER_COUNT)
+                .sorted()
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
 
-        for (int i = 0; i < LottoConstants.LOTTO_NUMBER_COUNT; i++){
-            lottoNumbers.add(lottoNumber.get(i));
-        }
+    }
 
-        return new LottoNumbers(lottoNumbers);
+    public boolean useAbleBonusBall(String winningNumbers, int bonusBall) {
+        return !winningNumbers.contains(Integer.toString(bonusBall));
     }
 }

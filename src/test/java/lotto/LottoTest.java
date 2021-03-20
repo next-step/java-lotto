@@ -17,36 +17,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
 
-    InputView inputView;
+//    InputView inputView;
     Lotto lotto;
     LottoResult lottoResult;
     LottoMachine lottoMachine;
-    LottoNumbers winningNumbers;
+    WinningNumbers winningNumbers;
     List<LottoNumbers> buyLottoNumbers;
 
     @BeforeEach
     public void setup(){
-        inputView = new InputView();
+//        inputView = new InputView();
         lotto = new Lotto();
         lottoResult = new LottoResult();
         lottoMachine = new LottoMachine();
-        winningNumbers = new LottoNumbers("1,2,3,4,5,6");
+        winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
         buyLottoNumbers = new ArrayList<>();
     }
 
-    @Test
-    @DisplayName("입력 받은 금액 정합성 체크")
-    public void inputMoneyNormal(){
-        assertTrue(inputView.normal(15000));
-        assertFalse(inputView.normal(15999));
-        assertFalse(inputView.normal(-1000));
-    }
-
-    @Test
-    @DisplayName("입력 받은 금액 / 1000 만큼 구매")
-    public void buyLottoCount(){
-        assertEquals(inputView.count(15000), 15);
-    }
+//    @Test
+//    @DisplayName("입력 받은 금액 정합성 체크")
+//    public void inputMoneyNormal(){
+//        assertTrue(inputView.normal(15000));
+//        assertFalse(inputView.normal(15999));
+//        assertFalse(inputView.normal(-1000));
+//    }
+//
+//    @Test
+//    @DisplayName("입력 받은 금액 / 1000 만큼 구매")
+//    public void buyLottoCount(){
+//        assertEquals(inputView.count(15000), 15);
+//    }
 
     @Test
     @DisplayName("자동 구매 로또 번호 범위는 0 ~ 45")
@@ -77,8 +77,8 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("4등 결과 확인")
-    public void fourthRanking() {
+    @DisplayName("5등 결과 확인")
+    public void fifthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,10,20,30"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("3개 일치 (5000원)- 1개");
@@ -86,8 +86,8 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("3등 결과 확인")
-    public void thirdRanking() {
+    @DisplayName("4등 결과 확인")
+    public void fourthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,10,20"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("4개 일치 (50000원)- 1개");
@@ -95,12 +95,21 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("2등 결과 확인")
-    public void secondRanking() {
+    @DisplayName("3등 결과 확인")
+    public void thirdRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,10"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("5개 일치 (1500000원)- 1개");
         assertThat(result).contains("총 수익률은 1500.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+    }
+
+    @Test
+    @DisplayName("2등 결과 확인")
+    public void secondRanking() {
+        buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,7"));
+        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
+        assertThat(result).contains("5개 일치, 보너스 볼 일치 (30000000원)- 1개");
+        assertThat(result).contains("총 수익률은 30000.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
     }
 
     @Test
@@ -117,6 +126,14 @@ public class LottoTest {
     @DisplayName("수익률 별 메시지")
     public void resultMessage(float rateOfReturn, String message){
         assertThat(LottoResultMessage.message(rateOfReturn)).isEqualTo(message);
+    }
+
+
+    @Test
+    @DisplayName("보너스 볼 체크")
+    public void bonusBall() {
+        assertTrue(lottoMachine.useAbleBonusBall("1,2,3,4,5,6", 30));
+        assertFalse(lottoMachine.useAbleBonusBall("1,2,3,4,5,6", 5));
     }
 
 }

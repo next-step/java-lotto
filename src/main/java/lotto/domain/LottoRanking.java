@@ -3,34 +3,41 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRanking {
-    FIRST(6, "2,000,000,000"),
-    SECOND(5, "1,500,000"),
-    THIRD(4, "50,000"),
-    FOURTH(3, "5,000");
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private final int correctCount;
-    private final String price;
+    private final int price;
 
-    LottoRanking(int correctCount, String price) {
+    LottoRanking(int correctCount, int price) {
         this.correctCount = correctCount;
         this.price = price;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public static LottoRanking lottoRanking(int correctCount) throws IllegalArgumentException {
-        return Arrays.stream(LottoRanking.values())
-                .filter(lottoRanking -> lottoRanking.correctCount == correctCount)
+    public int getCorrectCount() {
+        return correctCount;
+    }
+
+    public static LottoRanking lottoRanking(int correctCount, boolean bonusBall) throws IllegalArgumentException {
+        LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
+                .filter(ranking -> ranking.correctCount == correctCount)
                 .findFirst()
-                .orElse(null);
-    }
+                .orElse(LottoRanking.MISS);
 
-    public String resultString(int count) {
-        return String.format("%d개 일치 (%d원)- %d개\n", this.correctCount, Integer.parseInt(this.price.replace(",", "")), count);
-    }
+        if (lottoRanking.equals(LottoRanking.SECOND) && !bonusBall) {
+            return LottoRanking.THIRD;
+        }
 
+        return lottoRanking;
+    }
 
 }
 
