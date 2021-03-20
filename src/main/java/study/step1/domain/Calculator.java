@@ -1,16 +1,25 @@
 package study.step1.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private final List<String> stringNumberList;
+    private final List<PositiveNumber> positiveNumberList;
     private int sum = 0;
 
     public Calculator(String input) {
-        stringNumberList = Arrays.asList(splitInput(input));
+        String[] splitStringNumbers = splitInput(input);
+        positiveNumberList = stringToPositveNumbers(splitStringNumbers);
+    }
+
+    private List<PositiveNumber> stringToPositveNumbers(String[] stringNumbers) {
+        List<PositiveNumber> numbers = new ArrayList<>();
+        for(String number : stringNumbers) {
+            numbers.add(new PositiveNumber(number));
+        }
+        return numbers;
     }
 
     private String[] splitInput(String input) {
@@ -24,19 +33,7 @@ public class Calculator {
     }
 
     public int sum() {
-        stringNumberList.forEach(str -> {
-            try {
-                int num = Integer.parseInt(str);
-                if(num < 0) {
-                    throw new RuntimeException();
-                }
-                sum += num;
-            } catch(RuntimeException e) {
-                throw new RuntimeException("잘못된 입력값입니다.");
-            }
-        });
-
-        return sum;
+        return positiveNumberList.stream().mapToInt(PositiveNumber::getNumber).sum();
     }
 
 }
