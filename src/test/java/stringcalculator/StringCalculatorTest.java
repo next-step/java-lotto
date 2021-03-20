@@ -27,11 +27,20 @@ class StringCalculatorTest {
   }
 
   @Test
-  @DisplayName("숫자 두 개가 쉼표를 구분자로 들어오면 두 숫자의 합을 반환한다.")
+  @DisplayName("숫자 두 개, 쉼표를 구분자로 두 숫자의 합을 반환한다.")
   void sumTwoNumbers() {
     assertAll(
         () -> assertThat(StringCalculator.sum("1,2")).isEqualTo(3),
         () -> assertThat(StringCalculator.sum("6,5")).isEqualTo(11)
+    );
+  }
+
+  @Test
+  @DisplayName("숫자 세 개, 쉼표과 콜론를 구분자로 세 숫자의 합을 반환한다.")
+  void sumThreeNumbers() {
+    assertAll(
+        () -> assertThat(StringCalculator.sum("1,2:3")).isEqualTo(6),
+        () -> assertThat(StringCalculator.sum("6,5:2")).isEqualTo(13)
     );
   }
 }
