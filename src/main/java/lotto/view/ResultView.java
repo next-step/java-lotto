@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -32,24 +31,24 @@ public class ResultView {
   }
 
   private String printEachLotto(Lotto lotto) {
-    return lotto.getLottoNumberList()
+    return lotto.getLottoNumbers()
         .stream()
         .map(LottoNumber::toString)
         .collect(Collectors.joining(DELIMITER));
   }
 
-  public void printLottoStatics(LottoStatistics lottoStatistics) {
+  public void printLottoStatics(LottoStaticResult lottoStaticResult) {
     StringBuilder sb = new StringBuilder();
     sb.append(PRINT_LOTTO_STATICS);
     sb.append(PRINT_DOTTED_LINE);
 
-    lottoStatistics.getlottoStaticResultMap()
+    lottoStaticResult.getlottoStaticResultMap()
         .forEach((LottoRank rank, Integer count) -> {
-          sb.append(rank.getMatchingCount() + "개 일치");
+          sb.append(rank.getCount() + "개 일치");
           if (rank.equals(LottoRank.SECOND)) {
             sb.append(", 보너스볼 일치");
           }
-          sb.append(" (" + rank.getMatchingPrice() + "원)");
+          sb.append(" (" + rank.getPrice() + "원)");
           sb.append(" - " + count + "개\n");
         });
 

@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoStatistics {
+public class LottoStaticResult {
 
   private final Map<LottoRank, Integer> lottoStaticResult;
   private static final int SCALE_VALUE = 2;
   private static final int ZERO_VALUE = 0;
   private static final int BENEFIT_CRETERION = 1;
 
-  public LottoStatistics() {
+  public LottoStaticResult() {
     this.lottoStaticResult = new HashMap<>();
     init();
   }
@@ -32,7 +32,7 @@ public class LottoStatistics {
   private int sum() {
     int sum = 0;
     for (LottoRank rank : lottoStaticResult.keySet()) {
-      sum += rank.getMatchingPrice() * lottoStaticResult.get(rank);
+      sum += rank.getPrice() * lottoStaticResult.get(rank);
     }
     return sum;
   }
@@ -64,7 +64,7 @@ public class LottoStatistics {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LottoStatistics that = (LottoStatistics) o;
+    LottoStaticResult that = (LottoStaticResult) o;
     return Objects.equals(lottoStaticResult, that.lottoStaticResult);
   }
 

@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import lotto.domain.*;
 import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import java.util.List;
@@ -23,18 +23,17 @@ public class LottoGameController {
     int lottoCount = money.calculateLottoCount();
     drawLottoCount(lottoCount);
 
-    AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
-    LottoMachine thisWeekLottoList = new LottoMachine(money,autoLottoGenerator);
-    drawLottoList(thisWeekLottoList);
+    LottoMachine lottoMachine = new LottoMachine(money, new AutoLottoGenerator());
+    drawLottoList(lottoMachine);
 
     LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(drawWinningLotto(),drawBonusBall());
 
-    LottoStatistics lottoStatistics
-        = thisWeekLottoList.makeMatchingCount(lastWeekWinningLotto);
-    drawLottoStatics(lottoStatistics);
+    LottoStaticResult lottoStaticResult
+        = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
+    drawLottoStatics(lottoStaticResult);
 
-    double yield = lottoStatistics.calculate(purchasePrice);
-    drawLottoEarningRate(yield, lottoStatistics.isBenefit(yield));
+    double yield = lottoStaticResult.calculate(purchasePrice);
+    drawLottoEarningRate(yield, lottoStaticResult.isBenefit(yield));
   }
 
   private int drawBonusBall() {
@@ -49,8 +48,8 @@ public class LottoGameController {
     return inputView.inputWinningLottoNumbers();
   }
 
-  private void drawLottoStatics(LottoStatistics lottoStatistics) {
-    resultView.printLottoStatics(lottoStatistics);
+  private void drawLottoStatics(LottoStaticResult lottoStaticResult) {
+    resultView.printLottoStatics(lottoStaticResult);
   }
 
   private void drawLottoList(LottoMachine lottoList) {

@@ -20,7 +20,7 @@ public class LottoMachineTest {
 
     LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 4);
 
-    LottoStatistics actual = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
+    LottoStaticResult actual = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
 
     Map<LottoRank, Integer> expectedMap = new HashMap<>();
     expectedMap.put(LottoRank.FIRST, 1);

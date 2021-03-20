@@ -8,7 +8,7 @@ public class LastWinningLotto {
   private final Lotto lotto;
   private final LottoNumber bonusBall;
 
-  public LastWinningLotto(Lotto lotto, LottoNumber bonusBall) {
+  public LastWinningLotto(final Lotto lotto, final LottoNumber bonusBall) {
     this.lotto = lotto;
     this.bonusBall = bonusBall;
   }
@@ -17,11 +17,9 @@ public class LastWinningLotto {
     return new LastWinningLotto(Lotto.of(numbers), new LottoNumber(bonusBall));
   }
 
-  public boolean contains(LottoNumber lottoNumber) {
-    return lotto.contains(lottoNumber);
-  }
-
-  public boolean matchBonusBall(LottoNumber lottoNumber) {
-    return bonusBall.equals(lottoNumber);
+  public LottoRank match(Lotto thisWeekLotto) {
+    int matchCount = lotto.containsCount(thisWeekLotto);
+    boolean matchBonusBall = thisWeekLotto.contains(bonusBall);
+    return LottoRank.findByCount(matchCount,matchBonusBall);
   }
 }
