@@ -12,6 +12,9 @@ public class Lotto {
     }
 
     public Lotto(int purchaseAmounts, LottoNumber lottoNumber) {
+        if (purchaseAmounts < LOTTO_PRICE) {
+            throw new IllegalArgumentException("Purchase Amounts must be more than " + LOTTO_PRICE);
+        }
         int buyLotto = purchaseAmounts / LOTTO_PRICE;
         lottoGames = new ArrayList<>();
         while (buyLotto-- > 0) {

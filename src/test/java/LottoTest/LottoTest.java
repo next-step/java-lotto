@@ -1,9 +1,6 @@
 package LottoTest;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoMatchNumbers;
-import lotto.domain.WinningNumber;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +50,15 @@ public class LottoTest {
         assertThat(result).contains(new LottoMatchNumbers(2));
         assertThat(result).contains(new LottoMatchNumbers(1));
         assertFalse(result.contains(new LottoMatchNumbers(0)));
+    }
+
+    @Test
+    @DisplayName("로또 구입 금액이 1장 가격보다 작을 경우 예외처리")
+    void Given_LittlePurchaseAmount_When_New_Then_Exception() {
+        LottoNumber lottoNumber = new FixedLottoNumber();
+        int purchaseAmount = 500;
+
+        assertThatExceptionOfType(IllegalArgumentException.class).
+                isThrownBy(() -> new Lotto(purchaseAmount, lottoNumber));
     }
 }

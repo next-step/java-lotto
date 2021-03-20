@@ -12,7 +12,13 @@ public class LottoControl {
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = View.purchaseAmount(scanner);
 
-        Lotto lotto = new Lotto(purchaseAmount, new RandomLottoNumber());
+        Lotto lotto = null;
+        try {
+            lotto = new Lotto(purchaseAmount, new RandomLottoNumber());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
         View.printBought(lotto.lottoGames());
 
         WinningNumber winningNumber = new WinningNumber(View.winningNumber(scanner));
