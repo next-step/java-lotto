@@ -1,10 +1,13 @@
 package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringCalculatorTest {
 
@@ -51,5 +54,14 @@ class StringCalculatorTest {
         () -> assertThat(StringCalculator.sum("//;\n1;2")).isEqualTo(3),
         () -> assertThat(StringCalculator.sum("//$\n10$5")).isEqualTo(15)
     );
+  }
+
+  @ParameterizedTest
+  @DisplayName("음수가 입력되었을 때, RuntimeException 이 발생해야 한다.")
+  @ValueSource(strings = {"1,-2", "-6,5,3"})
+  void sumNegativeNumber(String expression) {
+    assertThatThrownBy(
+        () -> StringCalculator.sum(expression)
+    ).isInstanceOf(RuntimeException.class);
   }
 }
