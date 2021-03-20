@@ -20,9 +20,9 @@ public class LotteryTicket {
         return Collections.unmodifiableList(lotteries);
     }
 
-    public RoundResult getResult(List<Integer> winningNumbers) {
+    public RoundResult getResult(List<Integer> winningNumbers, int bonusNumber) {
         List<Prize> prizes = lotteries.stream()
-                                      .map(lottery -> lottery.getPrize(winningNumbers))
+                                      .map(lottery -> lottery.getPrize(winningNumbers, bonusNumber))
                                       .collect(Collectors.toList());
 
         double rateOfReturn = getRateOfReturn(prizes);

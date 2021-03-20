@@ -11,12 +11,13 @@ public class Lottery {
         this.numbers = numbers;
     }
 
-    public Prize getPrize(List<Integer> winningNumbers) {
+    public Prize getPrize(List<Integer> winningNumbers, int bonusNumber) {
         long matchedNumbers = numbers.stream()
                                      .filter(winningNumbers::contains)
                                      .count();
+        boolean bonusNumberMatched = numbers.contains(bonusNumber);
 
-        return Prize.getPrize(matchedNumbers);
+        return Prize.getPrize(matchedNumbers, bonusNumberMatched);
     }
 
     public List<Integer> getNumbers() {

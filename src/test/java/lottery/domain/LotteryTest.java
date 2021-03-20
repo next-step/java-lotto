@@ -20,9 +20,10 @@ class LotteryTest {
             Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), LOSING_TICKET),
             Arguments.of(Arrays.asList(1, 8, 9, 10, 11, 12), LOSING_TICKET),
             Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), LOSING_TICKET),
-            Arguments.of(Arrays.asList(1, 2, 3, 10, 11, 12), FOURTH),
-            Arguments.of(Arrays.asList(1, 2, 3, 5, 10, 12), THIRD),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 12), SECOND),
+            Arguments.of(Arrays.asList(1, 2, 3, 10, 11, 12), FIFTH),
+            Arguments.of(Arrays.asList(1, 2, 3, 5, 10, 12), FOURTH),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 12), THIRD),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), SECOND),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), FIRST)
         );
     }

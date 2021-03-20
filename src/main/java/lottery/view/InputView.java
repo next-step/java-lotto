@@ -16,7 +16,7 @@ public class InputView {
         return ConsoleInteractiveInputUtils.getListOfInteger("지난 주 당첨 번호를 입력해 주세요.", BASIC_DELIMITER);
     }
 
-    public int receiveBonusBall() {
+    public int receiveBonusNumber() {
         return ConsoleInteractiveInputUtils.getInt("보너스 볼을 입력해 주세요.");
     }
 

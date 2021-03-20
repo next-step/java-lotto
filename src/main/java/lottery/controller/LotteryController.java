@@ -19,9 +19,9 @@ public class LotteryController {
         resultView.printLotteryTicket(lotteryTicket.getLotteries());
 
         List<Integer> winningNumbers = inputView.receiveWinningNumbers();
-        int bonusBall = inputView.receiveBonusBall();
+        int bonusNumber = inputView.receiveBonusNumber();
         
-        RoundResult roundResult = lotteryTicket.getResult(winningNumbers);
+        RoundResult roundResult = lotteryTicket.getResult(winningNumbers, bonusNumber);
         resultView.printResult(roundResult);
     }
 
