@@ -36,10 +36,10 @@ class StringAddCalculatorTest {
 
     private static Stream<Arguments> provideCorrectString() {
         return Stream.of(
+                Arguments.of("1", 1),
                 Arguments.of("3,4,5", 12),
                 Arguments.of("5,7:1", 13),
                 Arguments.of("//!\n10!2!7", 19)
         );
     }
-
 }
