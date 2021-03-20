@@ -60,7 +60,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new FixedLottoNumber());
 
         //when
-        LottoMatchNumbers lottoMatchNumbers = lottoGame.result(winningNumbers);
+        LottoMatchNumbers lottoMatchNumbers = lottoGame.matchNumbers(winningNumbers);
 
         //then
         assertThat(lottoMatchNumbers).isEqualTo(new LottoMatchNumbers(expected));

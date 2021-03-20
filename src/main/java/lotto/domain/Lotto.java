@@ -26,7 +26,7 @@ public class Lotto {
     public List<LottoMatchNumbers> result(WinningNumber winningNumber) {
         List<LottoMatchNumbers> lottoNumberMatches = new ArrayList<>();
         for (LottoGame lottoGame : lottoGames) {
-            LottoMatchNumbers matchNumbers = lottoGame.result(winningNumber);
+            LottoMatchNumbers matchNumbers = lottoGame.matchNumbers(winningNumber);
             lottoNumberMatches.add(matchNumbers);
         }
         return lottoNumberMatches;

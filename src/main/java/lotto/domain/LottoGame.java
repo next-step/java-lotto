@@ -20,11 +20,11 @@ public class LottoGame {
         return numbers.contains(number);
     }
 
-    public LottoMatchNumbers result(List<Integer> winningNumbers) {
-        return result(new WinningNumber(winningNumbers));
+    public LottoMatchNumbers matchNumbers(List<Integer> winningNumbers) {
+        return matchNumbers(new WinningNumber(winningNumbers));
     }
 
-    public LottoMatchNumbers result(WinningNumber winningNumber) {
+    public LottoMatchNumbers matchNumbers(WinningNumber winningNumber) {
         return new LottoMatchNumbers(winningNumber.matchCount(this));
     }
 
