@@ -1,35 +1,26 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static int splitAndSum(String expression) {
-        return validate(expression);
-    }
+    private static final String REGEX = ",| |:";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
-    private static Integer validate(String expression) {
+    public static int splitAndSum(String expression) {
         if (isEmptyOrNull(expression)) {
             return 0;
         }
 
-        String[] numbers = split(expression);
+        String[] tokens = split(expression);
 
-        if (isOneLetter(numbers)) {
-            return Integer.parseInt(numbers[0]);
+        if (isOneLetter(tokens)) {
+            return Integer.parseInt(tokens[0]);
         }
 
-        return sum(numbers);
-    }
-
-    private static int sum(String[] numbers) {
-        return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
-    }
-
-    private static String[] split(String expression) {
-        return expression.split(",| |:");
+        return sum(tokens);
     }
 
     private static boolean isEmptyOrNull(String expression) {
@@ -38,5 +29,21 @@ public class StringAddCalculator {
 
     private static boolean isOneLetter(String[] expression) {
         return expression.length == 1;
+    }
+
+    private static String[] split(String expression) {
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(expression);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter + "|" + REGEX);
+        }
+
+        return expression.split(REGEX);
+    }
+
+    private static int sum(String[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
