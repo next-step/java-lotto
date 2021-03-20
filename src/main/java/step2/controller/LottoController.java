@@ -6,7 +6,7 @@ public class LottoController {
 
     private final LottoService lottoService = new LottoService();
 
-    public void runAutoLotto() {
-        lottoService.buyAutoLotto();
+    public void runManualLotto() {
+        lottoService.buyManualLotto();
     }
 }

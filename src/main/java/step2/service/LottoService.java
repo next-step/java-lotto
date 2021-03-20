@@ -19,7 +19,7 @@ public class LottoService {
     private final Shop shop = new Shop();
     private final Judge judge = new Judge();
 
-    public void buyAutoLotto() {
+    public void buyManualLotto() {
         Money money = inputView.getMoneyInput();
         int capacity = shop.calculateLottoCapacity(money);
         ShopResponse shopResponse = shop.buyLotto(money, capacity);
