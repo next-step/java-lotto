@@ -1,7 +1,5 @@
 package calculator;
 
-import calculator.utils.StringSplitUtil;
-
 import java.util.Arrays;
 
 public class StringAddCalculator {
@@ -12,7 +10,8 @@ public class StringAddCalculator {
         }
 
         expression.checkNegative();
-        return sum(StringSplitUtil.split(expression.toString()));
+        Splitted splitted = new Splitted(expression);
+        return sum(splitted.expression());
     }
 
     private static int sum(String[] numbers) {
