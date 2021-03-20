@@ -15,8 +15,8 @@ public class Judge {
     public JudgeResponse calculateResult(ShopResponse shopResponse, Lotto winningLotto) {
         HashSet<Integer> winningNumbers = new HashSet<>(winningLotto.getNumbers());
         int[] matchCount = new int[MATCH_CASE];
-        List<Integer> matches = shopResponse.getLottos()
-                .getLottoList()
+        Lottos lottos = shopResponse.getLottos();
+        List<Integer> matches = lottos.getLottoList()
                 .stream()
                 .map(lotto -> calculateMatchCount(lotto, winningNumbers))
                 .collect(Collectors.toList());
