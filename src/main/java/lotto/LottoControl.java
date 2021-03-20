@@ -4,25 +4,26 @@ import lotto.domain.*;
 import lotto.view.View;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class LottoControl {
 
     public void play() {
-        View view = new View();
-        int purchaseAmount = view.purchaseAmount();
+        Scanner scanner = new Scanner(System.in);
+        int purchaseAmount = View.purchaseAmount(scanner);
 
         Lotto lotto = new Lotto(purchaseAmount, new RandomLottoNumber());
-        view.printBought(lotto.lottoGames());
+        View.printBought(lotto.lottoGames());
 
-        WinningNumber winningNumber = new WinningNumber(view.winningNumber());
+        WinningNumber winningNumber = new WinningNumber(View.winningNumber(scanner));
         List<LottoGameResult> lottoGameResults = lotto.result(winningNumber);
 
-        view.printStatsHead();
+        View.printStatsHead();
         LottoStats lottoStats = new LottoStats(lottoGameResults);
         for (Rank rank : Rank.values()) {
             RankingRecord rankingRecord = lottoStats.record(rank);
-            view.print(rank.matchCount(), rank.reward(), rankingRecord.winners());
+            View.print(rank.matchCount(), rank.reward(), rankingRecord.winners());
         }
-        view.printYield(lottoStats.yield());
+        View.printYield(lottoStats.yield());
     }
 }
