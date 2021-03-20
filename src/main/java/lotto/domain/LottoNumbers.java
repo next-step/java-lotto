@@ -105,6 +105,12 @@ public class LottoNumbers {
                 .count();
     }
 
+    public static boolean bonusOf(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        return lottoTicket.lottoNumber()
+                .stream()
+                .anyMatch(number -> number.checkNumber(bonusNumber));
+    }
+
     public static boolean numberContains(int number, LottoNumbers winnerNumber) {
         return winnerNumber.readOnlyNumbers().stream()
                 .anyMatch(matchNumber -> number == matchNumber.lottoNumber());

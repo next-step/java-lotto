@@ -27,6 +27,10 @@ public class LottoNumber {
         return lottoNumber;
     }
 
+    public boolean checkNumber(LottoNumber number) {
+        return lottoNumber == number.lottoNumber();
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);

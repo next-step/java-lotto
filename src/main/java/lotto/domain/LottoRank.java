@@ -21,14 +21,14 @@ public enum LottoRank {
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank valueOf(LottoTicket lottoTicket,
-            LottoNumbers winnerNumber, LottoNumbers bonusNumber) {
-        boolean isBonus = LottoNumbers.matchOf(lottoTicket, bonusNumber) == BOUNS_OF_MATCH ? true : false;
+    public static LottoRank valueOf(LottoTicket lottoTicket, LottoWinners lottoWinners) {
         LottoRank rank = Arrays.asList(LottoRank.values())
                     .stream()
-                    .filter(lottoRank -> lottoRank.countOfMatch == LottoNumbers.matchOf(lottoTicket, winnerNumber))
+                    .filter(lottoRank -> lottoRank.countOfMatch == LottoNumbers.matchOf(lottoTicket, lottoWinners.winnerNumbers()))
                     .findAny()
                     .orElse(MISS);
+
+        boolean isBonus = LottoNumbers.bonusOf(lottoTicket, lottoWinners.bonusNumber());
 
         if (rank == LottoRank.SECOND && !isBonus) {
             rank = LottoRank.THIRD;
@@ -37,10 +37,9 @@ public enum LottoRank {
         return rank;
     }
 
-    public int winnerCount(List<LottoTicket> lottoTickets,
-            LottoNumbers winnerNumber, LottoNumbers bonusNumber) {
+    public int winnerCount(List<LottoTicket> lottoTickets, LottoWinners lottoWinners) {
         return (int)lottoTickets.stream()
-                    .filter(ticket -> valueOf(ticket, winnerNumber, bonusNumber) == this)
+                    .filter(ticket -> valueOf(ticket, lottoWinners) == this)
                     .count();
     }
 }

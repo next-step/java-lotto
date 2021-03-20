@@ -4,11 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -16,10 +14,11 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoRankTest {
 
     private LottoNumbers winnerNumber;
-    private LottoNumbers bounsNumber;
+    private LottoNumber bounsNumber;
+    private LottoWinners winners;
 
     public List<LottoNumber> createLottoNumber() {
-        return IntStream.range(1, 6)
+        return IntStream.range(1, 7)
                 .mapToObj(i -> new LottoNumber(i))
                 .collect(Collectors.toList());
     }
@@ -27,7 +26,8 @@ public class LottoRankTest {
     @BeforeEach
     public void setUp() {
         winnerNumber = new LottoNumbers(createLottoNumber());
-        bounsNumber = new LottoNumbers(45);
+        bounsNumber = new LottoNumber(45);
+        winners = new LottoWinners(winnerNumber, bounsNumber);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.MISS);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.MISS);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.FIFTH);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class LottoRankTest {
 
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.FOURTH);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FOURTH);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LottoRankTest {
 
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.THIRD);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.THIRD);
     }
 
 
@@ -96,7 +96,7 @@ public class LottoRankTest {
 
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.SECOND);
     }
 
     @Test
@@ -109,6 +109,6 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(LottoRank.valueOf(ticket, winnerNumber, bounsNumber)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FIRST);
     }
 }

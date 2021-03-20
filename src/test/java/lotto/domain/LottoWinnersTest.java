@@ -13,32 +13,32 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoWinnersTest {
 
-    private String inputWinnerNumber;
+    private LottoNumbers winnerNumber;
+    private LottoNumber bounsNumber;
+    private LottoWinners winners;
+
+    public List<LottoNumber> createLottoNumber() {
+        return IntStream.range(1, 6)
+                .mapToObj(i -> new LottoNumber(i))
+                .collect(Collectors.toList());
+    }
 
     @BeforeEach
     public void setUp() {
-        inputWinnerNumber = "1,2,3,4,5,6";
-    }
-
-    public LottoNumbers createWinnerNumbers(String input) {
-        return new LottoNumbers(input);
-    }
-
-    public LottoNumber createBonusNumber(int number) {
-        return new LottoNumber(number);
+        winnerNumber = new LottoNumbers(createLottoNumber());
+        bounsNumber = new LottoNumber(45);
+        winners = new LottoWinners(winnerNumber, bounsNumber);
     }
 
     @Test
     @DisplayName("당첨 번호 관리 생성 테스트")
     public void createWinnersTest() throws Exception {
         //given
-        int number = 10;
-        LottoNumbers lottoNumbers = createWinnerNumbers(inputWinnerNumber);
-        LottoWinners winners = new LottoWinners(lottoNumbers, createBonusNumber(number));
+        LottoWinners winners2 = new LottoWinners(winnerNumber, bounsNumber);
 
         //when
 
         //then
-        assertThat(winners.checkWinners(lottoNumbers, number)).isTrue();
+        assertThat(winners2.equals(winners)).isTrue();
     }
 }

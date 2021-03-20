@@ -20,7 +20,7 @@ public class LottoNumberTest {
         //when
 
         //then
-        assertThat(bonusNumber).isEqualTo(inputNumber);
+        assertThat(bonusNumber.lottoNumber()).isEqualTo(inputNumber);
     }
 
     @ParameterizedTest
@@ -33,7 +33,7 @@ public class LottoNumberTest {
         //when
 
         //then
-        assertThat(bonusNumber).isEqualTo(inputNumber);
+        assertThat(bonusNumber.lottoNumber()).isEqualTo(inputNumber);
     }
 
     @ParameterizedTest

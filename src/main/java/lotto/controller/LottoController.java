@@ -19,14 +19,13 @@ public class LottoController {
 
         // 당첨 결과 확인
         String inputNumber = inputView.inputWinnerNumber();
-        LottoNumbers winnerNumber = new LottoNumbers(inputNumber);
         int inputBonusNumber = inputView.inputBonusNumber();
-        LottoNumbers bonusNumber = new LottoNumbers(inputBonusNumber);
+        LottoWinners lottoWinners = new LottoWinners(inputNumber, inputBonusNumber);
 
-        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber, bonusNumber);
+        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), lottoWinners);
 
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(winnerNumber, bonusNumber);
+        resultView.printLottoRanksInfos(lottoWinners);
         resultView.printLottoYield(lottoYield);
     }
 }
