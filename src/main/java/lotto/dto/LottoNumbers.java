@@ -1,7 +1,5 @@
 package lotto.dto;
 
-import lotto.dto.LottoNumber;
-
 import java.util.List;
 
 public class LottoNumbers {

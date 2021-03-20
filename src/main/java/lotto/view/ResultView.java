@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Rank;
-import lotto.domain.MatchNumber;
 import lotto.dto.LottoNumber;
 import lotto.domain.Winning;
 import lotto.dto.IssueNumber;
