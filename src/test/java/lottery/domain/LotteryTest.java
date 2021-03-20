@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,31 +29,27 @@ class LotteryTest {
         );
     }
 
-    static Stream<Arguments> invalidLotteryTestCases() {
-        return Stream.of(
-            Arguments.of(Arrays.asList(1, 7, 10, 23, 36, 47), 2),
-            Arguments.of(Arrays.asList(1, 7, 10, 23, 36, 42), 52)
-        );
-    }
-
-    static Stream<Arguments> duplicatedNumberLotteries() {
-        return Stream.of(
-            Arguments.of(Arrays.asList(1, 7, 10, 23, 36, 36), 2),
-            Arguments.of(Arrays.asList(1, 7, 10, 23, 36, 42), 23)
-        );
-    }
-
+    @Test
     @DisplayName("생성할 수 없는 번호가 포함되어 있으면 예외를 던진다.")
-    @ParameterizedTest(name = "로또 번호 - {0}")
-    @MethodSource("invalidLotteryTestCases")
-    void throwExceptionIfInvalidNumberContained(List<Integer> numbers) {
+    void throwExceptionIfInvalidNumberContained() {
+        List<Integer> numbers = Arrays.asList(1, 7, 10, 23, 36, 47);
+
         assertThatThrownBy(() -> new Lottery(numbers)).isInstanceOf(RuntimeException.class);
     }
 
+    @Test
     @DisplayName("로또 번호 가운데 중복된 것이 있으면 예외를 던진다.")
-    @ParameterizedTest(name = "로또 번호 - {0}")
-    @MethodSource("duplicatedNumberLotteries")
-    void throwExceptionIfNumbersDuplicated(List<Integer> numbers) {
+    void throwExceptionIfNumbersDuplicated() {
+        List<Integer> numbers = Arrays.asList(1, 7, 10, 23, 36, 36);
+
+        assertThatThrownBy(() -> new Lottery(numbers)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 6개가 아니면 예외를 던진다.")
+    void throwExceptionIfLotteryNumberIsInsufficient() {
+        List<Integer> numbers = Arrays.asList(1, 7, 10, 23, 36);
+
         assertThatThrownBy(() -> new Lottery(numbers)).isInstanceOf(RuntimeException.class);
     }
 
