@@ -57,11 +57,11 @@ class StringCalculatorTest {
   }
 
   @ParameterizedTest
-  @DisplayName("음수가 입력되었을 때, RuntimeException 이 발생해야 한다.")
+  @DisplayName("음수가 입력되었을 때, NegativeNumberException 이 발생해야 한다.")
   @ValueSource(strings = {"1,-2", "-6,5,3"})
   void sumNegativeNumber(String expression) {
     assertThatThrownBy(
         () -> StringCalculator.sum(expression)
-    ).isInstanceOf(RuntimeException.class);
+    ).isInstanceOf(NegativeNumberException.class);
   }
 }
