@@ -1,8 +1,10 @@
 package stringcalculator;
 
+import java.util.Objects;
+
 public final class NonNegativeInteger {
 
-  private static final int ZERO = 0;
+  public static final int ZERO = 0;
 
   private final int number;
 
@@ -26,5 +28,22 @@ public final class NonNegativeInteger {
 
   public int toInt() {
     return number;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof NonNegativeInteger)) {
+      return false;
+    }
+    NonNegativeInteger that = (NonNegativeInteger) o;
+    return number == that.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 }
