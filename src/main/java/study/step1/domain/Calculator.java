@@ -1,25 +1,13 @@
 package study.step1.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private final List<PositiveNumber> positiveNumberList;
-    private int sum = 0;
+    private final PositiveNumbers positiveNumberList;
 
     public Calculator(String input) {
-        String[] splitStringNumbers = splitInput(input);
-        positiveNumberList = stringToPositveNumbers(splitStringNumbers);
-    }
-
-    private List<PositiveNumber> stringToPositveNumbers(String[] stringNumbers) {
-        List<PositiveNumber> numbers = new ArrayList<>();
-        for(String number : stringNumbers) {
-            numbers.add(new PositiveNumber(number));
-        }
-        return numbers;
+        positiveNumberList = new PositiveNumbers(splitInput(input));
     }
 
     private String[] splitInput(String input) {
@@ -33,7 +21,7 @@ public class Calculator {
     }
 
     public int sum() {
-        return positiveNumberList.stream().mapToInt(PositiveNumber::getNumber).sum();
+        return positiveNumberList.sum();
     }
 
 }

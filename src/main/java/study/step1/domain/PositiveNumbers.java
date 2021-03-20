@@ -9,6 +9,17 @@ public class PositiveNumbers {
     public PositiveNumbers() {
         positiveNumberList = new ArrayList<>();
     }
+    public PositiveNumbers(String[] stringNumbers) {
+        positiveNumberList = parsePositiveNumbers(stringNumbers);
+    }
+
+    private List<PositiveNumber> parsePositiveNumbers(String[] stringNumbers) {
+        List<PositiveNumber> numbers = new ArrayList<>();
+        for(String number : stringNumbers) {
+            numbers.add(new PositiveNumber(number));
+        }
+        return numbers;
+    }
 
     public void add(PositiveNumber positiveNumber) {
         positiveNumberList.add(positiveNumber);
