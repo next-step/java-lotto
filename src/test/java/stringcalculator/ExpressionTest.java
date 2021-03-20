@@ -20,10 +20,26 @@ class ExpressionTest {
     );
   }
 
+  static Stream<Arguments> commaDelimiter() {
+    return Stream.of(
+        arguments("1,2", new String[]{"1", "2"}),
+        arguments("1:2", new String[]{"1", "2"}),
+        arguments("1,2:3", new String[]{"1", "2", "3"}),
+        arguments("//:\n1:2:3", new String[]{"1", "2", "3"})
+    );
+  }
+
   @ParameterizedTest
   @DisplayName("생성 테스트")
   @MethodSource("parameters")
   void create(String parameter, String expected) {
     assertThat(new Expression(parameter)).isEqualTo(new Expression(expected));
+  }
+
+  @ParameterizedTest
+  @DisplayName("구분자를 받아서 숫자 목록을 반환합니다.")
+  @MethodSource("commaDelimiter")
+  void commaSeparatedNumbers(String expression, String[] numbers) {
+    assertThat(new Expression(expression).numbers()).contains(numbers);
   }
 }
