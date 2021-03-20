@@ -1,7 +1,7 @@
 package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +23,15 @@ class StringCalculatorTest {
     assertAll(
         () -> assertThat(StringCalculator.sum("1")).isEqualTo(1),
         () -> assertThat(StringCalculator.sum("2")).isEqualTo(2)
+    );
+  }
+
+  @Test
+  @DisplayName("숫자 두 개가 쉼표를 구분자로 들어오면 두 숫자의 합을 반환한다.")
+  void sumTwoNumbers() {
+    assertAll(
+        () -> assertThat(StringCalculator.sum("1,2")).isEqualTo(3),
+        () -> assertThat(StringCalculator.sum("6,5")).isEqualTo(11)
     );
   }
 }
