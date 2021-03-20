@@ -12,7 +12,7 @@ public class LottoPlay {
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;
     private static final List<LottoNumber> LOTTO_NUMBER = new ArrayList<>();
-    private final Map<IssueNumber, List<LottoNumber>> lottoNumbers = new HashMap<>();
+    private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new HashMap<>();
 
     static {
         for (int number = LOTTO_MIN; number <= LOTTO_MAX; number++) {
@@ -21,28 +21,29 @@ public class LottoPlay {
     };
 
     public Map<IssueNumber, List<LottoNumber>> getLottoNumbers() {
-        return lottoNumbers;
+        return totalLottoNumbers;
     }
 
     public void createLotto(int inputBuyAmount) {
         int countLotto = inputBuyAmount / LOTTO_PRICE;
 
         for (int issueNumber = 1; issueNumber <= countLotto; issueNumber++) {
-            lottoNumbers.put(new IssueNumber(issueNumber), createLottoNumber());
+            totalLottoNumbers.put(new IssueNumber(issueNumber), createLottoNumber().getLottoNumbers());
         }
     }
 
-    public List<LottoNumber> createLottoNumber() {
+    public LottoNumbers createLottoNumber() {
         List<LottoNumber> lottoNumber = new ArrayList<>();
 
         Collections.shuffle(LOTTO_NUMBER);
         for (int i = 0; i < LOTTO_LENGTH; i++) {
             lottoNumber.add(new LottoNumber(LOTTO_NUMBER.get(i)
                                                         .getLottoNumber()));
-            Collections.sort(lottoNumber);
         }
+        Collections.sort(lottoNumber);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
 
-        return lottoNumber;
+        return lottoNumbers;
     }
 
     public int getMatchNumbers(List<LottoNumber> lottoNumber, List<Integer> winningNumbers) {
