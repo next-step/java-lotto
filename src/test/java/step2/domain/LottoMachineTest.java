@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
 
@@ -20,7 +19,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         //when
-        Lottos lotto = lottoMachine.createLotto(money, List.of("1, 2, 3, 4, 5, 6"));
+        Lottos lotto = lottoMachine.createLotto(money, List.of("1,2,3,4,5,6"));
 
         //then
         assertThat(lotto.lottoCount()).isEqualTo(13);
@@ -30,7 +29,7 @@ class LottoMachineTest {
     @Test
     void getRank() {
         //given
-        List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
+        Lotto winNumber = createLotto(1, 2, 3, 4, 5, 6);
         LottoMachine lottoMachine = new LottoMachine(createLottos());
 
         //when
@@ -52,20 +51,6 @@ class LottoMachineTest {
 
         //then
         assertThat(lottoNumbers).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-    }
-
-    @DisplayName("당첨번호가 6개가 아닐 경우")
-    @Test
-    void valid_당첨번호길이검증() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine();
-        List<LottoNumber> winNumber = List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5));
-
-        //then
-        assertThatThrownBy(() -> {
-            lottoMachine.statistics(winNumber, LottoNumber.of(7));
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("당첨번호가 6개가 아닙니다.");
     }
 
     @DisplayName("보너스볼과 매칭한 결과들을 반환한다.")
@@ -90,5 +75,5 @@ class LottoMachineTest {
         lottoList.add("2,3,4,5,11,24");
         return new Lottos(lottoList);
     }
-    
+
 }

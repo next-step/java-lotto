@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 public class StringParser {
 
     public static List<LottoNumber> toLottoNumberList(String number) {
-        String[] stringNumbers = number.split(",");
+        String[] numbers = number.split(",");
         List<LottoNumber> lottoNumbers;
         try {
-            lottoNumbers = Arrays.stream(stringNumbers)
+            lottoNumbers = Arrays.stream(numbers)
                     .map(Integer::parseInt)
                     .map(LottoNumber::of)
                     .collect(Collectors.toList());

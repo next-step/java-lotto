@@ -14,20 +14,30 @@ import static step2.domain.LottoNumber.MIN_NUMBER;
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
+    private static final int WIN_NUMBER_LENGTH = 6;
 
     public Lotto() {
         List<Integer> numbers = createNumber();
         shuffle(numbers);
-        this.lottoNumbers = pickNumber(numbers);
+        List<LottoNumber> lottoNumbers = pickNumber(numbers);
+        valid(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(List<LottoNumber> numbers) {
+        valid(numbers);
+        this.lottoNumbers = numbers;
+    }
+
+    private void valid(List<LottoNumber> numbers) {
+        if (numbers.size() != WIN_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("당첨번호가 6개가 아닙니다.");
+        }
         boolean duplicated = numbers.stream()
                 .distinct().count() != numbers.size();
         if (duplicated) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
-        this.lottoNumbers = numbers;
     }
 
     public Lotto(String lottoNumber) {
@@ -56,9 +66,9 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int match(List<LottoNumber> winnerNumber) {
+    public int match(Lotto winnerNumber) {
         return lottoNumbers.stream()
-                .filter(winnerNumber::contains)
+                .filter(winnerNumber.lottoNumbers::contains)
                 .map(e -> 1).reduce(0, Integer::sum);
     }
 

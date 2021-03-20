@@ -41,7 +41,7 @@ class LottoTest {
     void match_1등() {
         //given
         Lotto lotto = createLotto(1, 2, 3, 4, 5, 6);
-        List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
+        Lotto winNumber = createLotto(1, 2, 3, 4, 5, 6);
 
         //when
         int countOfMatch = lotto.match(winNumber);
@@ -55,7 +55,7 @@ class LottoTest {
     void match_2등() {
         //given
         Lotto lotto = createLotto(1, 2, 3, 4, 5, 7);
-        List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
+        Lotto winNumber = createLotto(1, 2, 3, 4, 5, 6);
 
         //when
         int countOfMatch = lotto.match(winNumber);
@@ -68,8 +68,8 @@ class LottoTest {
     @Test
     void match_미스() {
         //given
-        Lotto lotto = createLotto(11, 23, 42, 32, 11, 7);
-        List<LottoNumber> winNumber = createLotto(1, 2, 3, 4, 5, 6).toNumberList();
+        Lotto lotto = createLotto(11, 23, 42, 32, 12, 7);
+        Lotto winNumber = createLotto(1, 2, 3, 4, 5, 6);
 
         //when
         int countOfMatch = lotto.match(winNumber);
@@ -104,5 +104,15 @@ class LottoTest {
     Lotto createLotto(int one, int two, int three, int four, int five, int six) {
         return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
+
+    @DisplayName("로또 번호는 6개여야 한다.")
+    @Test
+    void valid() {
+        assertThatThrownBy(() -> {
+            new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5)));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
 

@@ -37,7 +37,7 @@ class LottosTest {
     void getRankOfLotto() {
         //given
         Lottos lottos = createLottos();
-        List<LottoNumber> winNumber = List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+        Lotto winNumber = new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
 
         //when
         List<Integer> rankOfLotto = lottos.getRankOfLotto(winNumber);
@@ -81,7 +81,7 @@ class LottosTest {
         Lottos lottos = new Lottos(strings);
 
         assertThat(lottos.lottoCount()).isEqualTo(2);
-        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 4));
+        assertThat(lottos.getRankOfLotto(createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 4));
     }
 
     @DisplayName("수동 로또와 자동로또를 합친다.")
@@ -90,7 +90,7 @@ class LottosTest {
         Lottos lottos = new Lottos(createLottos(), createLottos());
 
         assertThat(lottos.lottoCount()).isEqualTo(8);
-        assertThat(lottos.getRankOfLotto(createWinNumber(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 5, 0, 4, 6, 5, 0, 4));
+        assertThat(lottos.getRankOfLotto(createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(List.of(6, 5, 0, 4, 6, 5, 0, 4));
     }
 
     Lottos createLottos() {
@@ -106,7 +106,4 @@ class LottosTest {
         return new Lotto(List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six)));
     }
 
-    List<LottoNumber> createWinNumber(int one, int two, int three, int four, int five, int six) {
-        return List.of(LottoNumber.of(one), LottoNumber.of(two), LottoNumber.of(three), LottoNumber.of(four), LottoNumber.of(five), LottoNumber.of(six));
-    }
 }

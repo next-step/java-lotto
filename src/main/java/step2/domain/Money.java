@@ -19,7 +19,7 @@ public class Money {
         }
         this.money = money;
     }
-    
+
     public int toInt() {
         return money;
     }

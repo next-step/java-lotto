@@ -4,19 +4,15 @@ import step2.dto.LottoDto;
 import step2.dto.LottoStatisticsDto;
 import step2.dto.LottosDto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class LottoView {
+public class OutputView {
 
-    private static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
     private static final String COUNT_OF_LOTTO_PURCHASED = "개를 구매 했습니다.";
     private static final String DELIMITER = ",";
     private static final String LOTTO_INFO = "[%s]\n";
-    private static final String INPUT_WIN_NUMBER = "지난주 당첨 번호를 입력해 주세요.";
-    private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+
     private static final String STATISTICS = "당청통계";
     private static final String DIVISION_LINE = "---------";
     private static final String COUNT_OF_MATCH = "%d개 일치%s (%d)- %d원\n";
@@ -24,43 +20,10 @@ public class LottoView {
     private static final String PROFIT = "이득";
     private static final String LOSS = "손해";
     private static final String MATCH_OF_BONUS = ", 보너스 볼 일치";
-    private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String INPUT_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+
     private static final int BREAK_EVEN_POINT = 1;
     private static final int SECOND_WIN_MONEY = 30000000;
 
-    private final Scanner scanner;
-    public int paymentMoney;
-
-    public LottoView() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    public int paymentMoney() {
-        System.out.println(INPUT_MONEY);
-        this.paymentMoney = scanner.nextInt();
-        return paymentMoney;
-    }
-
-    public List<String> manualLottoCount() {
-        List<String> manualLottos = new ArrayList<>();
-        System.out.println(INPUT_MANUAL_COUNT);
-        int lottoCount = scanner.nextInt();
-        if (lottoCount != 0) {
-            manualLottos = manualLottos(lottoCount);
-        }
-        return manualLottos;
-    }
-
-    private List<String> manualLottos(int lottoCount) {
-        System.out.println(INPUT_LOTTO_NUMBER);
-        List<String> manualLottos = new ArrayList<>();
-        scanner.nextLine();
-        for (int i = 0; i < lottoCount; i++) {
-            manualLottos.add(scanner.nextLine());
-        }
-        return manualLottos;
-    }
 
     public void lottoInfoPirnt(LottosDto lottosDto) {
         List<LottoDto> lottoDtoList = lottosDto.getLottoDtoList();
@@ -74,15 +37,6 @@ public class LottoView {
                 .collect(Collectors.joining(DELIMITER));
     }
 
-    public String inputWinNumber() {
-        System.out.println(INPUT_WIN_NUMBER);
-        return scanner.nextLine();
-    }
-
-    public int inputBonusInput() {
-        System.out.println(INPUT_BONUS_NUMBER);
-        return scanner.nextInt();
-    }
 
     public void finish(LottoStatisticsDto lottoStatisticsDto) {
         List<Integer> rankList = lottoStatisticsDto.getRankList();
