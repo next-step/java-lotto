@@ -11,7 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NonNegativeIntegerTest {
 
@@ -61,4 +63,10 @@ class NonNegativeIntegerTest {
     assertThat(num1.sum(num2)).isEqualTo(expected);
   }
 
+  @ParameterizedTest
+  @DisplayName("원시값 변환 테스트")
+  @ValueSource(ints = {0, 1, 2, 3, 10})
+  void toInt(int value) {
+    assertThat(new NonNegativeInteger(value).toInt()).isEqualTo(value);
+  }
 }
