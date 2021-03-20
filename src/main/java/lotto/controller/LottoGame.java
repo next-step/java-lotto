@@ -11,12 +11,6 @@ public class LottoGame {
 
     public LottoGame() { }
 
-    public void emptyValidation(String value) {
-        if (StringUtils.isEmpty(value)) {
-            throw new IllegalArgumentException("유효하지 않은 입력값 입니다.");
-        }
-    }
-
     public List<Lotto> generateLotto(Amount amount) {
         return LottoGenerator.generate(amount.quantity());
     }
@@ -30,18 +24,12 @@ public class LottoGame {
     }
 
     public void start() {
-        String value = InputView.amount();
-        emptyValidation(value);
-
-        Amount purchaseAmount = generateAmount(value);
-
+        Amount purchaseAmount = generateAmount(InputView.amount());
         List<Lotto> lottos = generateLotto(purchaseAmount);
         ResultView.showPurchaseLotto(lottos);
 
-        value = InputView.winningNumbers();
-        emptyValidation(value);
-
-        LotteryMachine lotteryMachine = generateLotteryMachine(value, purchaseAmount);
+        String winningNumbers = InputView.winningNumbers();
+        LotteryMachine lotteryMachine = generateLotteryMachine(winningNumbers, purchaseAmount);
         LottoResult lottoResult = lotteryMachine.result(lottos);
 
         ResultView.showWinningResult(lottoResult);

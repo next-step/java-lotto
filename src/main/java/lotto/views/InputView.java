@@ -1,5 +1,7 @@
 package lotto.views;
 
+import lotto.utils.StringUtils;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -9,19 +11,27 @@ public class InputView {
 
     private InputView() { }
 
+    private static void emptyValidation(String value) {
+        if (StringUtils.isEmpty(value))
+            throw new IllegalArgumentException("유효하지 않은 입력값 입니다.");
+    }
+
+    private static String value(String description) {
+        System.out.println(description);
+        String value = new Scanner(System.in).nextLine();
+        emptyValidation(value);
+        return value;
+    }
+
     public static String amount() {
-        System.out.println(AMOUNT);
-        return new Scanner(System.in).nextLine();
+        return value(AMOUNT);
     }
 
     public static String winningNumbers() {
-        System.out.println(WINNING_NUMBERS);
-        return new Scanner(System.in).nextLine();
+        return value(WINNING_NUMBERS);
     }
 
     public static String bonusNumber() {
-        System.out.println(BONUS_NUMBER);
-        return new Scanner(System.in).nextLine();
+        return value(BONUS_NUMBER);
     }
-
 }
