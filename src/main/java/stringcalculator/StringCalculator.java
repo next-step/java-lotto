@@ -6,7 +6,7 @@ public final class StringCalculator {
 
   public static int sum(String input) {
     Expression expression = new Expression(input);
-    Numbers numbers = new Numbers(expression.numbers());
-    return numbers.sum().toInt();
+    NonNegativeIntegers nonNegativeIntegers = new NonNegativeIntegers(expression.numbers());
+    return nonNegativeIntegers.sum().toInt();
   }
 }
