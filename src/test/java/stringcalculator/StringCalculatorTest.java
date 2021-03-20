@@ -43,4 +43,13 @@ class StringCalculatorTest {
         () -> assertThat(StringCalculator.sum("6,5:2")).isEqualTo(13)
     );
   }
+
+  @Test
+  @DisplayName("숫자 두 개, 커스텀 구분자로 두 숫자의 합을 반환한다.")
+  void sumTwoNumbersWithCustomDelimiter() {
+    assertAll(
+        () -> assertThat(StringCalculator.sum("//;\n1;2")).isEqualTo(3),
+        () -> assertThat(StringCalculator.sum("//$\n10$5")).isEqualTo(15)
+    );
+  }
 }
