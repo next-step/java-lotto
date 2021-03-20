@@ -11,11 +11,11 @@ import study.step2.domain.Lotto;
 import study.step2.domain.LottoMachine;
 
 public class LottoMachineTest {
-	@Test
-	@DisplayName("금액에 따른 로또 생성 테스트")
-	void purchase() {
-		LottoMachine lottoMachine = new LottoMachine();
-		List<Lotto> lottos = lottoMachine.purchase(12000);
-		assertThat(lottos.size()).isEqualTo(12);
-	}
+    @Test
+    @DisplayName("금액에 따른 로또 생성 테스트")
+    void purchase() {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.purchase(12000);
+        assertThat(lottos.size()).isEqualTo(12);
+    }
 }
