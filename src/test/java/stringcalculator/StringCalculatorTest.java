@@ -10,7 +10,7 @@ class StringCalculatorTest {
 
   @Test
   @DisplayName("빈 문자열, null이 들어오면 0을 반환한다.")
-  void calculateEmtpyAndNull() {
+  void calculateEmptyAndNull() {
     assertAll(
         () -> assertThat(StringCalculator.sum(null)).isEqualTo(0),
         () -> assertThat(StringCalculator.sum("")).isEqualTo(0)
