@@ -3,6 +3,7 @@ package LottoTest;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoMatchNumbers;
 import lotto.domain.LottoNumber;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,6 +18,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoGameTest {
     @Test
+    @DisplayName("LottoGame 인스턴스 생성 테스트")
     void Given_LottoNumber_When_New_Then_InstanceCreated() {
         //given
         List<Integer> givenLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -29,7 +31,8 @@ public class LottoGameTest {
     }
 
     @Test
-    void Given_LottoGenerator_When_New_Then_InstanceCreate() {
+    @DisplayName("LottoNumber를 인자로 받는 LottoGame 인스턴스 생성 테스트")
+    void Given_LottoNumber_When_New_Then_InstanceCreate() {
         LottoNumber fixedLottoNumber = new FixedLottoNumber();
 
         //when
@@ -41,6 +44,7 @@ public class LottoGameTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 6, 7})
+    @DisplayName("로또 번호에 특정 번호가 있는지 확인 테스트")
     void Given_Number_When_Contains_Then_Expected(int number) {
         //given
         List<Integer> givenLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -56,6 +60,7 @@ public class LottoGameTest {
 
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
+    @DisplayName("당첨번호와 일치되는 로또 숫자의 개수 일치 여부 테스트")
     void Given_WinningNumbers_When_Result_Then_NumberOfMatchedNumbers(List<Integer> winningNumbers, int expected) {
         LottoGame lottoGame = new LottoGame(new FixedLottoNumber());
 

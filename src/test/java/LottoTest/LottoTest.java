@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoMatchNumbers;
 import lotto.domain.WinningNumber;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
     @Test
+    @DisplayName("Lotto 인스턴스 생성 테스트")
     void Given_LottoGame_When_Net_Then_NoException() {
         //given
         List<LottoGame> lottoGame = Arrays.asList(
@@ -25,6 +27,7 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("당첨번호가 주어졌을 때 로또 게임 별 맞은 숫자 계산 테스트")
     void Given_WinningNumbers_When_Result_Then_LottoResult() {
         //given
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
