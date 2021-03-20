@@ -25,7 +25,7 @@ public class LottoResult {
 
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
             addLottoRankingCount(LottoRanking.lottoRanking(purchaseLottoNumber.correctCount(winningNumbers.getWinningNumbers())
-                    , purchaseLottoNumber.matchedBonusBall(winningNumbers.getBonusBall())));
+                                                           , purchaseLottoNumber.matchedBonusBall(winningNumbers.getBonusBall())));
         }
 
         float rateOfReturn = rateOfReturn(purchaseLottoNumbers.size() * LottoConstants.LOTTO_PRICE);

@@ -62,10 +62,16 @@ public class InputView {
             return bonusBall();
         }
 
+        return bonusBall(bonusBall);
+    }
+
+    public int bonusBall(int bonusBall){
+
         if ((bonusBall > LottoConstants.MAX_LOTTO_NUMBER) || (bonusBall < LottoConstants.MIN_LOTTO_NUMBER)) {
             System.out.printf("보너스 볼은 %d ~ %d 사이여야 합니다.\n", LottoConstants.MIN_LOTTO_NUMBER, LottoConstants.MAX_LOTTO_NUMBER);
             return bonusBall();
         }
+
         return bonusBall;
     }
 }
