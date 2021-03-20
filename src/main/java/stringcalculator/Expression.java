@@ -2,7 +2,7 @@ package stringcalculator;
 
 public class Expression {
 
-  private static final String DELIMITER = ",";
+  private static final String DELIMITER = "[,:]";
 
   private final String expression;
 
