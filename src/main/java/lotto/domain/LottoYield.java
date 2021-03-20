@@ -22,7 +22,7 @@ public class LottoYield {
 
     private double operationYield(List<LottoTicket> lottoTickets, Numbers winnerNumber) {
         double lottoPrize = lottoTickets.stream()
-                            .mapToDouble(ticket -> ticket.rank(winnerNumber).prize)
+                            .mapToDouble(ticket -> LottoRank.checkTicketRank(ticket, winnerNumber).prize)
                             .sum();
 
         double buyAmount = lottoTickets.size() * LottoConstant.MIN_BUY_AMOUNT;

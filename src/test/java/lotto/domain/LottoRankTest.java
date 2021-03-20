@@ -36,7 +36,7 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.ZERO);
+        assertThat(LottoRank.checkTicketRank(ticket, winnerNumber)).isEqualTo(LottoRank.ZERO);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.THREE);
+        assertThat(LottoRank.checkTicketRank(ticket, winnerNumber)).isEqualTo(LottoRank.THREE);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class LottoRankTest {
 
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.FOUR);
+        assertThat(LottoRank.checkTicketRank(ticket, winnerNumber)).isEqualTo(LottoRank.FOUR);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class LottoRankTest {
 
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.FIVE);
+        assertThat(LottoRank.checkTicketRank(ticket, winnerNumber)).isEqualTo(LottoRank.FIVE);
     }
 
     @Test
@@ -90,6 +90,6 @@ public class LottoRankTest {
         //when
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.SIX);
+        assertThat(LottoRank.checkTicketRank(ticket, winnerNumber)).isEqualTo(LottoRank.SIX);
     }
 }
