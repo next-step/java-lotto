@@ -19,6 +19,4 @@ public class StringSpliter {
         }
         return input.split(TOKEN_DELIMITER);
     }
-
-
 }

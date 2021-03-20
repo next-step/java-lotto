@@ -16,11 +16,7 @@ public class StringAddCalculator {
         }
         String[] tokens = StringSpliter.splitToStringArray(input);
         Numbers numbers = getNumbers(tokens);
-        return calculate(numbers);
-    }
-
-    private static int calculate(Numbers numbers) {
-        return 1;
+        return numbers.getSum();
     }
 
     private static Numbers getNumbers(String[] tokens) {

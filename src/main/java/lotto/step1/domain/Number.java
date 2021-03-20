@@ -11,11 +11,18 @@ public class Number {
         if (number < 0) {
             throw new StringAddCalculatorException(NEGATIVE_NUMBER_IS_NOT_ALLOWED);
         }
-
         this.number = number;
     }
 
     public static Number of(final int number) {
         return new Number(number);
+    }
+
+    public Number sum(Number num) {
+        return new Number(number + num.number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

@@ -13,4 +13,10 @@ public class Numbers {
     public static Numbers of(final List<Number> numbers) {
         return new Numbers(numbers);
     }
+
+    public int getSum() {
+        return numbers.stream()
+                .reduce(Number.of(0), Number::sum)
+                .getNumber();
+    }
 }

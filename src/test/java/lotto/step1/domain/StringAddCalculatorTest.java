@@ -25,4 +25,21 @@ class StringAddCalculatorTest {
                 Arguments.of("", 0)
         );
     }
+
+    @DisplayName("문자열 결과 테스트")
+    @ParameterizedTest
+    @MethodSource("provideCorrectString")
+    public void splitAndSum(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideCorrectString() {
+        return Stream.of(
+                Arguments.of("3,4,5", 12),
+                Arguments.of("5,7:1", 13),
+                Arguments.of("//!\n10!2!7", 19)
+        );
+    }
+
 }
