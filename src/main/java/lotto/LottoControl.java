@@ -12,16 +12,24 @@ public class LottoControl {
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = View.purchaseAmount(scanner);
 
-        Lotto lotto = null;
+        LottoNumber lottoNumber = new RandomLottoNumber();
+        Lotto lotto;
         try {
-            lotto = new Lotto(purchaseAmount, new RandomLottoNumber());
+            lotto = new Lotto(purchaseAmount, lottoNumber);
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
         View.printBought(lotto.lottoGames());
 
-        WinningNumber winningNumber = new WinningNumber(View.winningNumber(scanner));
+        WinningNumber winningNumber;
+        try {
+            winningNumber = new WinningNumber(View.winningNumber(scanner), lottoNumber.min(), lottoNumber.max());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
         List<LottoMatchNumbers> lottoNumberMatches = lotto.result(winningNumber);
 
         View.printStatsHead();
