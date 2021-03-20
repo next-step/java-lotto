@@ -4,12 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class YieldCalculator {
-    private final Amount purchaseAmount;
     private int proceedsTotal = 0;
 
-    public YieldCalculator(final Amount purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
-    }
+    public YieldCalculator() { }
 
     public void proceedsCalculate(LinkedHashMap<Integer, Integer> resultMap) {
         for (Map.Entry<Integer, Integer> entry: resultMap.entrySet()) {
@@ -21,7 +18,7 @@ public class YieldCalculator {
         return proceedsTotal;
     }
 
-    public double yield() {
+    public double yield(Amount purchaseAmount) {
         return Double.isInfinite(purchaseAmount.value() / (double) proceedsTotal) ?
                 0.0 : purchaseAmount.value() / (double) proceedsTotal;
     }

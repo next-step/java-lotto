@@ -9,13 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LottoGame {
-    private final InputView inputView;
-    private final ResultView resultView;
 
-    public LottoGame() {
-        inputView = new InputView();
-        resultView = new ResultView();
-    }
+    public LottoGame() { }
 
     public void emptyValidation(String value) {
         if (StringUtils.isEmpty(value)) {
@@ -31,35 +26,25 @@ public class LottoGame {
         return new Amount(Integer.parseInt(value));
     }
 
-    public LotteryMachine generateLotteryMachine(String value) {
-        return new LotteryMachine(value);
-    }
-
-    public LinkedHashMap<Integer, Integer> generateGameResult(LotteryMachine lotteryMachine, List<Lotto> lottos) {
-        return lotteryMachine.result(lottos);
-    }
-
-    public double yeildCalculate(Amount amount, LinkedHashMap<Integer, Integer> resultMap) {
-        YieldCalculator yieldCalculator = new YieldCalculator(amount);
-        yieldCalculator.proceedsCalculate(resultMap);
-        return yieldCalculator.yield();
+    public LotteryMachine generateLotteryMachine(String value, Amount purchaseAmount) {
+        return new LotteryMachine(value, purchaseAmount);
     }
 
     public void start() {
-        String value = inputView.getInputAmount();
+        String value = InputView.getInputAmount();
         emptyValidation(value);
-        Amount amount = generateAmount(value);
 
-        List<Lotto> lottos = generateLotto(amount);
-        resultView.showPurchaseLotto(lottos);
+        Amount purchaseAmount = generateAmount(value);
 
-        value = inputView.getWinningNumbers();
+        List<Lotto> lottos = generateLotto(purchaseAmount);
+        ResultView.showPurchaseLotto(lottos);
+
+        value = InputView.getWinningNumbers();
         emptyValidation(value);
-        LotteryMachine lotteryMachine = generateLotteryMachine(value);
 
-        LinkedHashMap<Integer, Integer> resultMap = generateGameResult(lotteryMachine, lottos);
+        LotteryMachine lotteryMachine = generateLotteryMachine(value, purchaseAmount);
+        LottoResult lottoResult = lotteryMachine.result(lottos);
 
-        double yeild = yeildCalculate(amount, resultMap);
-        resultView.showWinningResult(new LottoResultDto(yeild, resultMap));
+        ResultView.showWinningResult(lottoResult);
     }
 }

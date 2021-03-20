@@ -15,18 +15,18 @@ class YieldCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        resultMap.put(3, 0);
-        resultMap.put(4, 0);
-        resultMap.put(5, 0);
-        resultMap.put(6, 0);
+        resultMap.put(WinningTable.THREE.matchNumber, 0);
+        resultMap.put(WinningTable.FOUR.matchNumber, 0);
+        resultMap.put(WinningTable.FIVE.matchNumber, 0);
+        resultMap.put(WinningTable.SIX.matchNumber, 0);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000:3:1", "5000:4:1", "5000:5:1", "5000:6:1", "5000:3:5"}, delimiter = ':')
-    void 수익률_계산(int amount, int matchNumber, int matchCount) {
+    @CsvSource(value = {"3:1", "4:1", "5:1", "6:1", "3:5"}, delimiter = ':')
+    void 당첨금_계산(int matchNumber, int matchCount) {
         resultMap.put(matchNumber, matchCount);
 
-        YieldCalculator yieldCalculator = new YieldCalculator(new Amount(amount));
+        YieldCalculator yieldCalculator = new YieldCalculator();
         yieldCalculator.proceedsCalculate(resultMap);
 
         assertThat(yieldCalculator.proceedsTotal())

@@ -17,14 +17,10 @@ public class LottoNumbers {
     }
 
     public List<Number> lottoNumbers() {
-        shuffle();
+        Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList());
-    }
-
-    public void shuffle() {
-        Collections.shuffle(numbers);
     }
 
     public int size() {

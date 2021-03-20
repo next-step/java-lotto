@@ -5,45 +5,48 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LotteryMachine {
-    private WinningNumbers winningNumbers;
+    private final WinningLotto winningLotto;
+    private final Amount purchaseAmount;
+
     private LinkedHashMap<Integer, Integer> resultMap = new LinkedHashMap<>();
 
-    public LotteryMachine(String winningNumbers) {
-        this(new WinningNumbers(winningNumbers));
+    public LotteryMachine(final String winningNumbers, final Amount purchaseAmount) {
+        this(new WinningLotto(winningNumbers), purchaseAmount);
     }
 
-    public LotteryMachine(WinningNumbers winningNumbers) {
+    public LotteryMachine(final WinningLotto winningLotto, final Amount purchaseAmount) {
         initialize();
-        this.winningNumbers = winningNumbers;
+        this.winningLotto = winningLotto;
+        this.purchaseAmount = purchaseAmount;
     }
 
     public void initialize() {
-        resultMap.put(3, 0);
-        resultMap.put(4, 0);
-        resultMap.put(5, 0);
-        resultMap.put(6, 0);
+        resultMap.put(WinningTable.THREE.matchNumber, 0);
+        resultMap.put(WinningTable.FOUR.matchNumber, 0);
+        resultMap.put(WinningTable.FIVE.matchNumber, 0);
+        resultMap.put(WinningTable.SIX.matchNumber, 0);
     }
 
-    public LinkedHashMap<Integer, Integer> result(List<Lotto> lottos) {
-        raffleResults(lottos)
+    public LottoResult result(List<Lotto> lottos) {
+        raffle(lottos)
                 .forEach(matchNumber -> {
                     if (resultMap.get(matchNumber) != null) {
                         resultMap.put(matchNumber, resultMap.get(matchNumber) + 1);
                     }
                 });
-        return resultMap;
+        return new LottoResult(resultMap, purchaseAmount);
     }
 
-    public List<Integer> raffleResults(List<Lotto> lottos) {
+    public List<Integer> raffle(List<Lotto> lottos) {
         return lottos.stream()
-                .map(lotto -> correctCount(lotto, winningNumbers))
+                .map(lotto -> correctCount(lotto, winningLotto))
                 .collect(Collectors.toList());
     }
 
-    public int correctCount(Lotto lotto, WinningNumbers winningNumbers) {
+    public int correctCount(Lotto lotto, WinningLotto winningLotto) {
         return (int) lotto.numbers()
                 .stream()
-                .filter(winningNumbers::contains).count();
+                .filter(winningLotto::contains).count();
     }
 }
 
