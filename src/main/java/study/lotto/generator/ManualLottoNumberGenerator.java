@@ -10,8 +10,6 @@ import static study.lotto.view.InputView.SPLIT_DELIMITER;
 
 public class ManualLottoNumberGenerator implements NumberGenerator {
 
-    public ManualLottoNumberGenerator() { }
-
     @Override
     public List<LottoNumber> generate(final String manualNumbers) {
         return Arrays.stream(manualNumbers.split(SPLIT_DELIMITER))
