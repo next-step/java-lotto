@@ -15,7 +15,7 @@ public class StringAddCalculator {
             return Integer.parseInt(expression.toString());
         }
 
-        expression.isNegative();
+        expression.hasNegative();
         return sum(StringSplitUtil.split(expression.toString()));
     }
 
