@@ -45,14 +45,24 @@ public class ResultView {
         Arrays.stream(Prize.values())
               .filter(p -> p != Prize.LOSING_TICKET)
               .forEach(prize -> {
-                  long condition = prize.getCondition();
-                  long winnings = prize.getWinnings();
                   long count = prizeCountMap.getOrDefault(prize, 0L);
-
-                  String message = String.format("%d개 일치 (%d원) - %d개", condition, winnings, count);
-
+                  String message = makeResultMessage(prize, count);
                   printMessage(message);
               });
+    }
+
+    private String makeResultMessage(Prize prize, long count) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("%d개 일치 ", prize.getCondition()));
+
+        if (prize == Prize.SECOND) {
+            sb.append(", 보너스 볼 일치");
+        }
+
+        sb.append(String.format("(%d원) - %d개", prize.getWinnings(), count));
+
+        return sb.toString();
     }
 
     private void printMessage(String message) {
