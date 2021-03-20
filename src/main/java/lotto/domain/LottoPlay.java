@@ -11,17 +11,18 @@ public class LottoPlay {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_LENGTH = 6;
-    private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new HashMap<>();
+    //private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new HashMap<>();
+    private final TotalLottoNumbers totalLottoNumbers = new TotalLottoNumbers();
 
     public Map<IssueNumber, List<LottoNumber>> getLottoNumbers() {
-        return totalLottoNumbers;
+        return totalLottoNumbers.getTotalLottoNumbers();
     }
 
     public void createLotto(int inputBuyAmount) {
         int countLotto = inputBuyAmount / LOTTO_PRICE;
 
         for (int issueNumber = 1; issueNumber <= countLotto; issueNumber++) {
-            totalLottoNumbers.put(new IssueNumber(issueNumber), createLottoNumber().getLottoNumbers());
+            totalLottoNumbers.recordEachLottoNumbers(new IssueNumber(issueNumber), createLottoNumber());
         }
     }
 
