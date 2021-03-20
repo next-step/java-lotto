@@ -26,6 +26,13 @@ class NonNegativeIntegerTest {
         arguments(new NonNegativeInteger("10"), new NonNegativeInteger(10))
     );
   }
+  static Stream<Arguments> sumSource() {
+    return Stream.of(
+        arguments(new NonNegativeInteger(), new NonNegativeInteger(5), new NonNegativeInteger(5)),
+        arguments(new NonNegativeInteger(1), new NonNegativeInteger(9), new NonNegativeInteger(10)),
+        arguments(new NonNegativeInteger(3), new NonNegativeInteger(4), new NonNegativeInteger(7))
+    );
+  }
 
   @ParameterizedTest
   @DisplayName("생성 테스트")
@@ -46,4 +53,12 @@ class NonNegativeIntegerTest {
         ).isInstanceOf(NegativeNumberException.class)
     );
   }
+
+  @ParameterizedTest
+  @DisplayName("합 테스트")
+  @MethodSource("sumSource")
+  void create(NonNegativeInteger num1, NonNegativeInteger num2, NonNegativeInteger expected) {
+    assertThat(num1.sum(num2)).isEqualTo(expected);
+  }
+
 }
