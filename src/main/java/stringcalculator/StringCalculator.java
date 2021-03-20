@@ -11,15 +11,7 @@ public class StringCalculator {
       return 0;
     }
 
-    String[] numbers = expression.split(DELIMITER);
-    return sum(numbers);
-  }
-
-  private static int sum(String[] numbers) {
-    int sum = 0;
-    for (String number : numbers) {
-      sum += Integer.parseInt(number);
-    }
-    return sum;
+    Numbers numbers = new Numbers(expression.split(DELIMITER));
+    return numbers.sum();
   }
 }
