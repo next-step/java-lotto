@@ -43,4 +43,8 @@ public class LottoMachine {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
 
     }
+
+    public boolean useAbleBonusBall(String winningNumbers, int bonusBall) {
+        return !winningNumbers.contains(Integer.toString(bonusBall));
+    }
 }

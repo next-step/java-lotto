@@ -23,7 +23,15 @@ public class Lotto {
 
         resultView.print(lottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(inputView.numbers());
+        String numbers = inputView.numbers();
+        int bonusBall = inputView.bonusBall();
+
+        while (!lottoMachine.useAbleBonusBall(numbers, bonusBall)) {
+            System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
+            bonusBall = inputView.bonusBall();
+        }
+
+        LottoNumbers winningNumbers = new LottoNumbers(numbers);
 
         String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);
 

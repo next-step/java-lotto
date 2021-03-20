@@ -48,4 +48,24 @@ public class InputView {
     public int count(int buyMoney) {
         return buyMoney / LottoConstants.LOTTO_PRICE;
     }
+
+    public int bonusBall() {
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int bonusBall;
+
+        try {
+            bonusBall = scanner.nextInt();
+        } catch (InputMismatchException inputMismatchException) {
+            System.out.println("보너스 볼은 정수만 입력 가능합니다.");
+            return bonusBall();
+        }
+
+        if ((bonusBall > LottoConstants.MAX_LOTTO_NUMBER) || (bonusBall < LottoConstants.MIN_LOTTO_NUMBER)) {
+            System.out.printf("보너스 볼은 %d ~ %d 사이여야 합니다.\n", LottoConstants.MIN_LOTTO_NUMBER, LottoConstants.MAX_LOTTO_NUMBER);
+            return bonusBall();
+        }
+        return bonusBall;
+    }
 }

@@ -119,4 +119,12 @@ public class LottoTest {
         assertThat(LottoResultMessage.message(rateOfReturn)).isEqualTo(message);
     }
 
+
+    @Test
+    @DisplayName("보너스 볼 체크")
+    public void bonusBall() {
+        assertTrue(lottoMachine.useAbleBonusBall("1,2,3,4,5,6", 30));
+        assertFalse(lottoMachine.useAbleBonusBall("1,2,3,4,5,6", 5));
+    }
+
 }
