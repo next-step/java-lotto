@@ -11,10 +11,6 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (expression.isOneLetter()) {
-            return Integer.parseInt(expression.toString());
-        }
-
         expression.hasNegative();
         return sum(StringSplitUtil.split(expression.toString()));
     }
