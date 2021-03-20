@@ -1,6 +1,6 @@
 package LottoTest;
 
-import lotto.domain.LottoGameResult;
+import lotto.domain.LottoMatchNumbers;
 import lotto.domain.LottoStats;
 import lotto.domain.Rank;
 import lotto.domain.RankingRecord;
@@ -16,24 +16,24 @@ public class LottoStatsTest {
     @Test
     void Given_LottoGameResults_When_New_Then_StatsInstanceCreated() {
         //given
-        List<LottoGameResult> lottoGameResults = Arrays.asList(
-                new LottoGameResult(3)
+        List<LottoMatchNumbers> lottoNumberMatches = Arrays.asList(
+                new LottoMatchNumbers(3)
         );
 
         //when then
-        assertDoesNotThrow(() -> new LottoStats(lottoGameResults));
+        assertDoesNotThrow(() -> new LottoStats(lottoNumberMatches));
     }
 
     @Test
     void When_Rank_Then_RankReturn() {
         //given
-        List<LottoGameResult> lottoGameResults = Arrays.asList(
-                new LottoGameResult(3),
-                new LottoGameResult(3),
-                new LottoGameResult(6)
+        List<LottoMatchNumbers> lottoNumberMatches = Arrays.asList(
+                new LottoMatchNumbers(3),
+                new LottoMatchNumbers(3),
+                new LottoMatchNumbers(6)
         );
 
-        LottoStats lottoStats = new LottoStats(lottoGameResults);
+        LottoStats lottoStats = new LottoStats(lottoNumberMatches);
 
         //when
         RankingRecord rank = lottoStats.record(Rank.FORTH);
@@ -45,41 +45,41 @@ public class LottoStatsTest {
     @Test
     void Given_LottoGameResults_When_Yield_Then_CalculatedYield() {
         //gvien
-        List<LottoGameResult> lottoGameResults = Arrays.asList(
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(0),
-                new LottoGameResult(3)
+        List<LottoMatchNumbers> lottoNumberMatches = Arrays.asList(
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(0),
+                new LottoMatchNumbers(3)
         );
-        LottoStats lottoStats = new LottoStats(lottoGameResults);
+        LottoStats lottoStats = new LottoStats(lottoNumberMatches);
 
 
         //when
         double yield = lottoStats.yield();
-        double expect = (double)5000 / (lottoGameResults.size() * 1000);
+        double expect = (double)5000 / (lottoNumberMatches.size() * 1000);
 
         //then
         assertThat(yield).isEqualTo(expect);

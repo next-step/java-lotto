@@ -1,7 +1,7 @@
 package LottoTest;
 
 import lotto.domain.LottoGame;
-import lotto.domain.LottoGameResult;
+import lotto.domain.LottoMatchNumbers;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,10 +60,10 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new FixedLottoNumber());
 
         //when
-        LottoGameResult lottoGameResult = lottoGame.result(winningNumbers);
+        LottoMatchNumbers lottoMatchNumbers = lottoGame.result(winningNumbers);
 
         //then
-        assertThat(lottoGameResult).isEqualTo(new LottoGameResult(expected));
+        assertThat(lottoMatchNumbers).isEqualTo(new LottoMatchNumbers(expected));
     }
 
     private static Stream<Arguments> provideWinningNumbers() {

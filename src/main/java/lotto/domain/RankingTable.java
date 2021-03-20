@@ -6,18 +6,18 @@ import java.util.*;
 public class RankingTable {
     private Map<Integer, RankingRecord> table;
 
-    public RankingTable(LottoGameResult lottoGameResult) {
-        this(Arrays.asList(lottoGameResult));
+    public RankingTable(LottoMatchNumbers lottoMatchNumbers) {
+        this(Arrays.asList(lottoMatchNumbers));
     }
 
-    public RankingTable(List<LottoGameResult> lottoGameResults) {
+    public RankingTable(List<LottoMatchNumbers> lottoNumberMatches) {
         table = new HashMap<>();
         for (Rank rank : Rank.values()) {
             table.put(rank.matchCount(), new RankingRecord(rank));
         }
 
-        for (LottoGameResult lottoGameResult : lottoGameResults) {
-            int matchCount = lottoGameResult.matchCount();
+        for (LottoMatchNumbers numberMatches : lottoNumberMatches) {
+            int matchCount = numberMatches.matchCount();
             if (Rank.isValid(matchCount))
                 table.put(matchCount, table.get(matchCount).increaseWinner());
         }

@@ -16,10 +16,10 @@ public class LottoControl {
         View.printBought(lotto.lottoGames());
 
         WinningNumber winningNumber = new WinningNumber(View.winningNumber(scanner));
-        List<LottoGameResult> lottoGameResults = lotto.result(winningNumber);
+        List<LottoMatchNumbers> lottoNumberMatches = lotto.result(winningNumber);
 
         View.printStatsHead();
-        LottoStats lottoStats = new LottoStats(lottoGameResults);
+        LottoStats lottoStats = new LottoStats(lottoNumberMatches);
         for (Rank rank : Rank.values()) {
             RankingRecord rankingRecord = lottoStats.record(rank);
             View.print(rank.matchCount(), rank.reward(), rankingRecord.winners());

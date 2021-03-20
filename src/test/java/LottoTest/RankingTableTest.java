@@ -1,6 +1,6 @@
 package LottoTest;
 
-import lotto.domain.LottoGameResult;
+import lotto.domain.LottoMatchNumbers;
 import lotto.domain.Rank;
 import lotto.domain.RankingTable;
 import lotto.domain.RankingRecord;
@@ -13,8 +13,8 @@ public class RankingTableTest {
     @Test
     void Given_LottoGameResult_When_Record_Then_() {
         //given
-        LottoGameResult lottoGameResult = new LottoGameResult(Rank.FORTH.matchCount());
-        RankingTable rankingTable = new RankingTable(lottoGameResult);
+        LottoMatchNumbers lottoMatchNumbers = new LottoMatchNumbers(Rank.FORTH.matchCount());
+        RankingTable rankingTable = new RankingTable(lottoMatchNumbers);
 
         //when
         RankingRecord rankingRecord = rankingTable.record(Rank.FORTH);

@@ -2,7 +2,7 @@ package LottoTest;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.domain.LottoGameResult;
+import lotto.domain.LottoMatchNumbers;
 import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.Test;
 
@@ -40,15 +40,15 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoGames);
 
         //when
-        List<LottoGameResult> result = lotto.result(winningNumber);
+        List<LottoMatchNumbers> result = lotto.result(winningNumber);
 
         //then
-        assertThat(result).contains(new LottoGameResult(6));
-        assertThat(result).contains(new LottoGameResult(5));
-        assertThat(result).contains(new LottoGameResult(4));
-        assertThat(result).contains(new LottoGameResult(3));
-        assertThat(result).contains(new LottoGameResult(2));
-        assertThat(result).contains(new LottoGameResult(1));
-        assertFalse(result.contains(new LottoGameResult(0)));
+        assertThat(result).contains(new LottoMatchNumbers(6));
+        assertThat(result).contains(new LottoMatchNumbers(5));
+        assertThat(result).contains(new LottoMatchNumbers(4));
+        assertThat(result).contains(new LottoMatchNumbers(3));
+        assertThat(result).contains(new LottoMatchNumbers(2));
+        assertThat(result).contains(new LottoMatchNumbers(1));
+        assertFalse(result.contains(new LottoMatchNumbers(0)));
     }
 }

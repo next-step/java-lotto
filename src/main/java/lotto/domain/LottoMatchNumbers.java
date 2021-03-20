@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoGameResult {
+public class LottoMatchNumbers {
     private final int matchCount;
 
-    public LottoGameResult(int matchCount) {
+    public LottoMatchNumbers(int matchCount) {
         this.matchCount = matchCount;
     }
 
@@ -17,7 +17,7 @@ public class LottoGameResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoGameResult that = (LottoGameResult) o;
+        LottoMatchNumbers that = (LottoMatchNumbers) o;
         return matchCount == that.matchCount;
     }
 

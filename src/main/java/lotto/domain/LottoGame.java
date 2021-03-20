@@ -20,12 +20,12 @@ public class LottoGame {
         return numbers.contains(number);
     }
 
-    public LottoGameResult result(List<Integer> winningNumbers) {
+    public LottoMatchNumbers result(List<Integer> winningNumbers) {
         return result(new WinningNumber(winningNumbers));
     }
 
-    public LottoGameResult result(WinningNumber winningNumber) {
-        return new LottoGameResult(winningNumber.matchCount(this));
+    public LottoMatchNumbers result(WinningNumber winningNumber) {
+        return new LottoMatchNumbers(winningNumber.matchCount(this));
     }
 
     @Override

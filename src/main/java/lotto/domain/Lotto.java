@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;
-    List<LottoGame> lottoGames;
+    private List<LottoGame> lottoGames;
 
     public Lotto(List<LottoGame> lottoGame) {
         this.lottoGames = lottoGame;
@@ -23,12 +23,12 @@ public class Lotto {
         return lottoGames;
     }
 
-    public List<LottoGameResult> result(WinningNumber winningNumber) {
-        List<LottoGameResult> lottoGameResults = new ArrayList<>();
+    public List<LottoMatchNumbers> result(WinningNumber winningNumber) {
+        List<LottoMatchNumbers> lottoNumberMatches = new ArrayList<>();
         for (LottoGame lottoGame : lottoGames) {
-            LottoGameResult lottoGameResult = lottoGame.result(winningNumber);
-            lottoGameResults.add(lottoGameResult);
+            LottoMatchNumbers matchNumbers = lottoGame.result(winningNumber);
+            lottoNumberMatches.add(matchNumbers);
         }
-        return lottoGameResults;
+        return lottoNumberMatches;
     }
 }

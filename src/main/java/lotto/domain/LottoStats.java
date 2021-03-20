@@ -7,9 +7,9 @@ public class LottoStats {
     private int numberOfLottoGameResults;
     private RankingTable rankingTable;
 
-    public LottoStats(List<LottoGameResult> lottoGameResults) {
-        rankingTable = new RankingTable(lottoGameResults);
-        numberOfLottoGameResults = lottoGameResults.size();
+    public LottoStats(List<LottoMatchNumbers> lottoNumberMatches) {
+        rankingTable = new RankingTable(lottoNumberMatches);
+        numberOfLottoGameResults = lottoNumberMatches.size();
     }
 
     public RankingRecord record(Rank rank) {
