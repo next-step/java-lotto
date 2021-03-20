@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Numbers {
 
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
-    private Numbers(List<Number> numbers) {
+    private Numbers(final List<Number> numbers) {
         this.numbers = numbers;
     }
 
-    public static Numbers of(List<Number> numbers) {
+    public static Numbers of(final List<Number> numbers) {
         return new Numbers(numbers);
     }
 }
