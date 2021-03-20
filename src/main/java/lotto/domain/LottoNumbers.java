@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.LottoConstant;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,10 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
+    public static final String LOTTO_NUMBER_DUPLICATE_ERROR = "중복된 당첨 번호가 존재합니다.";
+    public static final String LOTTO_NUMBER_COUNT_ERROR = "당첨 번호는 6개 입력해주세요.";
+    public static final String LOTTO_NUMBER_SIZE_ERROR = "당첨 번호는 1 부터 45 이내 입력해주세요.";
+    private static final String DEFAULT_SPLIT_REGEX = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final String DEFAULT_SPLIT_REGEX = ",";
 
     private static final List<Integer> LOTTO_NUMBERS = IntStream.range(MIN_NUMBER, MAX_NUMBER)
             .boxed()
@@ -80,7 +81,7 @@ public class LottoNumbers {
     // 유효성 start.
     private void isLottoNumberCount(List<Integer> result) {
         if (result.size() != LOTTO_NUMBER_COUNT ) {
-            throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_COUNT_ERROR);
+            throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR);
         }
     }
 
@@ -90,14 +91,14 @@ public class LottoNumbers {
                 .count();
 
         if (count != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_DUPLICATE_ERROR);
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE_ERROR);
         }
     }
 
     private void isLottoNumberRange(List<Integer> result) {
         if (result.stream()
                 .anyMatch(this::isLottoNumberSize)) {
-            throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_SIZE_ERROR);
+            throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_ERROR);
         };
     }
 

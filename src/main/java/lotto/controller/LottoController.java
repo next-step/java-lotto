@@ -19,8 +19,8 @@ public class LottoController {
 
         // 당첨 결과 확인
         String inputNumber = inputView.inputWinnerNumber();
-        int inputBonusNumber = inputView.inputBonusNumber();
         LottoNumbers winnerNumber = new LottoNumbers(inputNumber);
+        int inputBonusNumber = inputView.inputBonusNumber();
         LottoNumbers bonusNumber = new LottoNumbers(inputBonusNumber);
 
         LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber, bonusNumber);

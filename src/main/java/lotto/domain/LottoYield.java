@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import lotto.constant.LottoConstant;
-
 import java.util.List;
 
 public class LottoYield {
     private static final String STRING_PROFIT = "이익";
     private static final String STRING_LOSS = "손해";
+    private static final int LOTTO_AMOUNT = 1000;
     private static final int DEFAULT_LOTTO_YIELD = 1;
 
     private final double yield;
@@ -26,7 +25,7 @@ public class LottoYield {
                             .mapToDouble(ticket -> LottoRank.valueOf(ticket, winnerNumber, bonusNumber).winningMoney)
                             .sum();
 
-        double buyAmount = lottoTickets.size() * LottoConstant.MIN_BUY_AMOUNT;
+        double buyAmount = lottoTickets.size() * LOTTO_AMOUNT;
 
         return lottoPrize / buyAmount;
     }
