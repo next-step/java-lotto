@@ -4,6 +4,7 @@ import lotto.domain.Rank;
 import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
+import lotto.dto.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -32,17 +33,17 @@ class LottoPlayTest {
         String[] numbers = input.split(",");
         List<LottoNumber> lottoNumber = new ArrayList<>();
 
-        List<Integer> winningNumbers = new ArrayList<>();
+        List<Integer> winningNumber = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            winningNumbers.add(i);
+            winningNumber.add(i);
         }
 
         for (String number : numbers) {
             lottoNumber.add(new LottoNumber(Integer.parseInt(number)));
         }
 
-        LottoPlay lottoPlay = new LottoPlay();
-        assertThat(lottoPlay.getMatchNumbers(lottoNumber, winningNumbers)).isEqualTo(countWinnings);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
+        assertThat(lottoNumbers.countMatchNumber(winningNumber)).isEqualTo(countWinnings);
     }
 
     @ParameterizedTest

@@ -37,10 +37,4 @@ public class LottoPlay {
 
         return new LottoNumbers(lottoNumber);
     }
-
-    public int getMatchNumbers(List<LottoNumber> lottoNumber, List<Integer> winningNumbers) {
-        return (int) lottoNumber.stream()
-                .filter(number -> winningNumbers.contains(number.getLottoNumber()))
-                .count();
-    }
 }
