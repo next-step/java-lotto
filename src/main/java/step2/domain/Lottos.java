@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
+    private LottoMoney lottoMoney = new LottoMoney();
     private int money;
     private Map<Integer, Integer> lottoMatchCount = new HashMap<>();
     private int matchCount = 0;
@@ -19,7 +21,7 @@ public class Lottos {
 
     private List<Lotto> createLottos(int money) {
         List<Lotto> lotto = new ArrayList<>();
-        int count = money / 1000;
+        int count = money / lottoMoney.getMoney();
         for (int i = 0; i < count; i++) {
             lotto.add(new Lotto());
         }
@@ -53,13 +55,19 @@ public class Lottos {
         }
     }
 
-    public double totalBenefit() {
-        double totalWinnerPrice = 0;
-        for (Lotto lotto : lottos) {
-            totalWinnerPrice += lotto.winnerPrice();
+    public long totalBenefit() {
+        long total = 0;
+        List<Integer> benefitList = lottoMatchCount.keySet()
+                .stream()
+                .filter(i -> lottoMatchCount.get(i) > 0)
+                .collect(Collectors.toList());
+        for (int benefit : benefitList) {
+            System.out.println(WinnerPriceType.of(benefit).winningAmount + " " + lottoMatchCount.get(benefit));
+            total += WinnerPriceType.of(benefit).winningAmount * lottoMatchCount.get(benefit);
         }
-        System.out.println(totalWinnerPrice + "/" + money) ;
-        return totalWinnerPrice / money;
+        System.out.println(total);
+        System.out.println(this.money);
+        return total / this.money;
     }
 
     public List<Lotto> getLottos() {

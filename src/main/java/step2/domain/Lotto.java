@@ -5,13 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private List<Integer> lottoNumber;
+    private final List<Integer> lottoNumber;
+    private final List<Integer> generateList = new ArrayList<>();
+
     private int matchesCount = 0;
 
     public Lotto() {
         lottoNumber = extraction();
     }
-
     public Lotto(String lotto) {
         this.lottoNumber = Stream.of(lotto.split(","))
                                 .map(Integer::parseInt)
@@ -53,8 +54,6 @@ public class Lotto {
     }
 
     private List<Integer> generateLotto() {
-        List<Integer> generateList = new ArrayList<>();
-
         for (int i = 1; i < 46; i++) {
             generateList.add(i);
         }
@@ -68,27 +67,6 @@ public class Lotto {
                 .map(Integer::parseInt)
                 .sorted()
                 .collect(Collectors.toList());
-    }
-
-    public int winnerPrice() {
-        System.out.println("match " + getMatchesCount());
-        if (matchesCount == 3) {
-            return 5000;
-        }
-
-        if (matchesCount == 4) {
-            return 50000;
-        }
-
-        if (matchesCount == 5) {
-            return 1500000;
-        }
-
-        if (matchesCount == 6) {
-            return 200000000;
-        }
-
-        return 0;
     }
 
     public int getMatchesCount() {
