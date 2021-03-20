@@ -29,10 +29,10 @@ public class LottoResult {
 
         float rateOfReturn = rateOfReturn(purchaseLottoNumbers.size() * LottoConstants.LOTTO_PRICE);
 
-        String result = "";
-        result += rankingPrintInfo();
-        result += rateResultString(rateOfReturn);
-        return result;
+        StringBuilder result = new StringBuilder();
+        result.append(rankingPrintInfo());
+        result.append(rateResultString(rateOfReturn));
+        return result.toString();
     }
 
 
@@ -46,16 +46,21 @@ public class LottoResult {
         long sum = 0;
 
         for (LottoRanking lottoRanking : lottoResult.keySet()) {
-            sum += Long.parseLong(lottoRanking.getPrice().replace(",", "")) * lottoResult.get(lottoRanking);
+            sum += (long) lottoRanking.getPrice() * lottoResult.get(lottoRanking);
         }
 
         return (float) sum / inputMoney;
     }
 
+
     private String rankingPrintInfo() {
         return Arrays.stream(LottoRanking.values())
-                .map((LottoRanking) -> LottoRanking.resultString(lottoResult.get(LottoRanking)))
+                .map((LottoRanking) -> resultString(LottoRanking, lottoResult.get(LottoRanking)))
                 .sorted()
                 .collect(Collectors.joining());
+    }
+
+    public String resultString(LottoRanking lottoRanking, int count) {
+        return String.format("%d개 일치 (%d원)- %d개\n", lottoRanking.getCorrectCount(), lottoRanking.getPrice(), count);
     }
 }
