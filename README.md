@@ -19,3 +19,29 @@
 - 메소드의 크기가 최대 10라인을 넘지 않도록 구현한다
 - else를 사용하지 마라
 
+
+# 로또(자동)
+
+## 기능 요구 사항
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급
+- 로또 1장의 가격은 1000원이다.
+
+- controller
+    - LottoController
+- domain 
+    - Lotto
+    - LottoList
+    - LottoStore
+- util
+    - CreateAutoNumberMachine <- 로또 자동 번호 자판기
+- dto
+    - LottoResponse
+- view
+    - InputView
+    - ResultView
+    
+## 프로그램 요구사항
+- 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다.
+- indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다
+- 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현
+- else 예약어를 쓰지 않는다
