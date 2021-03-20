@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.*;
-import lotto.strategy.Numbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class ResultView {
                 .forEach(ticket -> System.out.println(ticket.lottoNumber().toString()));
     }
 
-    public void printLottoRanksInfos(List<LottoTicket> lottoTickets, Numbers winnerNumber) {
+    public void printLottoRanksInfos(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
         System.out.println(RESULT_WINNER_RANK);
         System.out.println(RESULT_WINNER_LINE);
 
@@ -33,7 +32,7 @@ public class ResultView {
         System.out.println("총 수익률은 " + String.format("%.2f", lottoYield.yield()) + "입니다.(기준이 1이기 때문에 결과적으로 " + lottoYield.stringYield() + "라는 의미임)");
     }
 
-    public void printLottoRank(LottoRank lottoRank, List<LottoTicket> lottoTickets, Numbers winnerNumber) {
+    public void printLottoRank(LottoRank lottoRank, List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
         System.out.println(lottoRank.matchCount + "개 일치 (" + lottoRank.prize + ") - " + lottoRank.winnerCount(lottoTickets, winnerNumber) + "개");
     }
 }

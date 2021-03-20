@@ -29,6 +29,10 @@ public class LottoNumbers {
         this.lottoNumber = lottoNumber;
     }
 
+    public LottoNumbers(String inputNumbers) {
+        this.lottoNumber = createLottoNumbers(inputNumbers);
+    }
+
     private List<Integer> createLottoNumbers() {
         List<Integer> numbers = LOTTO_NUMBERS;
 
@@ -43,7 +47,7 @@ public class LottoNumbers {
         return result;
     }
 
-    private List<Integer> createLottoNumber(String numbers) {
+    private List<Integer> createLottoNumbers(String numbers) {
         List<Integer> result = stringToList(numbers).stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -65,7 +69,7 @@ public class LottoNumbers {
     private void isLottoNumberCount(List<Integer> result) {
         if (result.size() != LOTTO_NUMBER_COUNT ) {
             throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_COUNT_ERROR);
-        };
+        }
     }
 
     private void isDuplicateNumbers(List<Integer> result) {

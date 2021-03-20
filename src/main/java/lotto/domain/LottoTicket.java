@@ -1,24 +1,20 @@
 package lotto.domain;
 
-import lotto.strategy.Auto;
-import lotto.strategy.Manual;
-import lotto.strategy.Numbers;
-
 import java.util.*;
 
 public class LottoTicket {
-    private final Numbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket() {
-        this.lottoNumbers = new Auto();
+        this.lottoNumbers = new LottoNumbers();
     }
 
     public LottoTicket(String stringNumber) {
-        this.lottoNumbers = new Manual(stringNumber);
+        this.lottoNumbers = new LottoNumbers(stringNumber);
     }
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        this.lottoNumbers = new Auto(lottoNumbers);
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
     public List<Integer> lottoNumber() {

@@ -1,8 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.strategy.Manual;
-import lotto.strategy.Numbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,8 +18,8 @@ public class LottoController {
         resultView.printLottoTicketInfos(lottoMachine);
 
         // 당첨 결과 확인
-        String winnerNumbers = inputView.inputWinnerNumber();
-        Numbers winnerNumber = new Manual(winnerNumbers);
+        String inputNumber = inputView.inputWinnerNumber();
+        LottoNumbers winnerNumber = new LottoNumbers(inputNumber);
         LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber);
 
         // 당첨 내역 출력

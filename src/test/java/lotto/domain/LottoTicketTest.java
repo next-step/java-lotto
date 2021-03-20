@@ -44,6 +44,35 @@ public class LottoTicketTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"1,", "1,2,3,4,5"})
+    @DisplayName("로또 번호 6개 미만 예외 확인")
+    public void checkLottoNumberSizeException(String input) throws Exception {
+        //given
+
+        //when
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+           new LottoTicket(input);
+        });
+
+        //then
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,1,2,3,4,5", "1,2,3,4,5,5"})
+    @DisplayName("로또 번호 중복으로 티켓 발생 예외 확인")
+    public void checkLottoTicketOverlapNumberException(String input) throws Exception {
+        //given
+        
+        //when
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoTicket(input);
+        });
+        
+        //then
+        
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"0,1,2,3,4,45", "1,2,3,4,5,46"})
     @DisplayName("로또 번호 1 ~ 45 벗어날 시 예외 확인")
     public void lottoNumberSizeOutException(String input) throws Exception {

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.Numbers;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static LottoRank checkTicketRank(LottoTicket lottoTicket, Numbers winnerNumber) {
+    public static LottoRank checkTicketRank(LottoTicket lottoTicket, LottoNumbers winnerNumber) {
         return Arrays.asList(LottoRank.values())
                     .stream()
                     .filter(lottoRank -> lottoRank.matchCount == checkLottoRank(lottoTicket, winnerNumber))
@@ -28,19 +26,19 @@ public enum LottoRank {
                     .orElse(ZERO);
     }
 
-    private static int checkLottoRank(LottoTicket lottoTicket, Numbers winnerNumber) {
+    private static int checkLottoRank(LottoTicket lottoTicket, LottoNumbers winnerNumber) {
         return (int) lottoTicket.lottoNumber()
                     .stream()
                     .filter(number -> numberContains(number, winnerNumber))
                     .count();
     }
 
-    private static boolean numberContains(int number, Numbers winnerNumber) {
+    private static boolean numberContains(int number, LottoNumbers winnerNumber) {
         return winnerNumber.readOnlyNumbers()
                 .contains(number);
     }
 
-    public int winnerCount(List<LottoTicket> lottoTickets, Numbers winnerNumber) {
+    public int winnerCount(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
         return (int)lottoTickets.stream()
                     .filter(ticket -> checkTicketRank(ticket, winnerNumber) == this)
                     .count();

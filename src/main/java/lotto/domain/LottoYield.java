@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.constant.LottoConstant;
-import lotto.strategy.Numbers;
 
 import java.util.List;
 
@@ -16,11 +15,11 @@ public class LottoYield {
         this.yield = yield;
     }
 
-    public LottoYield(List<LottoTicket> lottoTickets, Numbers winnerNumber) {
+    public LottoYield(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
         this.yield = operationYield(lottoTickets, winnerNumber);
     }
 
-    private double operationYield(List<LottoTicket> lottoTickets, Numbers winnerNumber) {
+    private double operationYield(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
         double lottoPrize = lottoTickets.stream()
                             .mapToDouble(ticket -> LottoRank.checkTicketRank(ticket, winnerNumber).prize)
                             .sum();
