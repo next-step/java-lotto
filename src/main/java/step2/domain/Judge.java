@@ -1,9 +1,8 @@
 package step2.domain;
 
 import step2.dto.JudgeResponse;
-import step2.dto.Lotto;
-import step2.dto.Price;
 import step2.dto.ShopResponse;
+import step2.utils.Price;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,16 +10,19 @@ import java.util.stream.Collectors;
 
 public class Judge {
 
-    private static final int MATCH_CASE = 6 + 1;
+    private static final int MATCH_CASE = 7;
 
     public JudgeResponse calculateResult(ShopResponse shopResponse, Lotto winningLotto) {
         HashSet<Integer> winningNumbers = new HashSet<>(winningLotto.getNumbers());
         int[] matchCount = new int[MATCH_CASE];
-        List<Integer> matches = shopResponse.getLottoList()
+        List<Integer> matches = shopResponse.getLottos()
+                .getLottoList()
                 .stream()
                 .map(lotto -> calculateMatchCount(lotto, winningNumbers))
                 .collect(Collectors.toList());
-        matches.forEach(val -> matchCount[val]++);
+        for (Integer match : matches) {
+            matchCount[match]++;
+        }
         double profitIndex = calculateMoneyWon(matchCount) / shopResponse.getOriginMoney();
         return new JudgeResponse(matchCount[3], matchCount[4], matchCount[5], matchCount[6], profitIndex);
     }
@@ -34,8 +36,8 @@ public class Judge {
 
     private int calculateMatchCount(Lotto lotto, HashSet<Integer> winningNumbers) {
         int count = 0;
-        for (int idx = 0; idx < lotto.getNumbers().size(); idx++) {
-            count += oneIfNumberIsInHashSet(lotto.getNumbers().get(idx), winningNumbers);
+        for (int number : lotto.getNumbers()) {
+            count += oneIfNumberIsInHashSet(number, winningNumbers);
         }
         return count;
     }

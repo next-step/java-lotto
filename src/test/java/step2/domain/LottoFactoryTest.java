@@ -4,19 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.dto.Lotto;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoMachineTest {
+class LottoFactoryTest {
 
-    private LottoMachine lottoMachine;
+    private LottoFactory lottoMachine;
 
     @BeforeEach
     void setUp() {
-        this.lottoMachine = new LottoMachine();
+        this.lottoMachine = new LottoFactory();
     }
 
 

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.dto.Money;
 import step2.dto.ShopResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,6 +39,17 @@ public class ShopTest {
     void buyingInvalidNumberOfLottoThrowsException(int moneyAmount, int capacity) {
         Money money = new Money(moneyAmount);
         assertThrows(IllegalArgumentException.class, () -> shop.buyLotto(money, capacity));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1100:1:0:false",
+            "1500:1:0:false",
+            "2600:2:0:false"}, delimiter = ':')
+    @DisplayName("원금과 로또를 모두 환불한다고 가정했을 때의 돈이 같지 않으면 예외를 던진다")
+    void shopResponseThrowsExceptionOnInvalidInput(int moneyAmount, int capacity, int change, boolean expected) {
+        ShopResponse shopResponse = new ShopResponse(moneyAmount, capacity, null, change);
+        assertThat(shop.isShopResponseValid(shopResponse)).isEqualTo(expected);
     }
 
 }

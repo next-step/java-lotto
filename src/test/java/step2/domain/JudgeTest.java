@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.dto.JudgeResponse;
-import step2.dto.Lotto;
 import step2.dto.ShopResponse;
 
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ class JudgeTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6 : 1,2,3,0,0,0 : 1,0,0,0 : 5",
-            "1,2,3,4,5,6 : 1,2,3,4,0,0 : 0,1,0,0 : 50",
-            "1,2,3,4,5,6 : 1,2,3,4,5,0 : 0,0,1,0 : 1500",
+            "1,2,3,4,5,6 : 1,2,3,10,20,30 : 1,0,0,0 : 5",
+            "1,2,3,4,5,6 : 1,2,3,4,10,20 : 0,1,0,0 : 50",
+            "1,2,3,4,5,6 : 1,2,3,4,5,10 : 0,0,1,0 : 1500",
             "1,2,3,4,5,6 : 1,2,3,4,5,6 : 0,0,0,1 : 2000000"}, delimiter = ':')
     @DisplayName("당첨여부를 판단할 수 있다")
     void judgeCalculatesResult(String winningString, String boughtString, String expected, double expectedProfitIndex) {
@@ -48,10 +47,9 @@ class JudgeTest {
     private ShopResponse generateShopResponse(String boughtString) {
         List<Integer> myNumbers = parseIntegerListFromString(boughtString);
         Lotto myLotto = new Lotto(myNumbers);
-        List<Lotto> myLottoList = new ArrayList<>();
-        myLottoList.add(myLotto);
+        Lottos myLottos = new Lottos(myLotto);
 
-        return new ShopResponse(1000, 1, myLottoList, 0);
+        return new ShopResponse(1000, 1, myLottos, 0);
     }
 
     private List<Integer> parseIntegerListFromString(String input) {

@@ -1,25 +1,33 @@
 package step2.domain;
 
-import step2.dto.Lotto;
-import step2.dto.Money;
 import step2.dto.ShopResponse;
+import step2.utils.Price;
 
 import java.util.List;
 
 public class Shop {
 
-    private static final int LOTTO_PRICE = 1000;
-
-    private final LottoMachine lottoMachine = new LottoMachine();
+    private final LottoFactory lottoMachine = new LottoFactory();
 
     public int calculateLottoCapacity(Money money) {
-        return money.getAmount() / LOTTO_PRICE;
+        return money.getAmount() / Price.LOTTO_PRICE;
     }
 
     public ShopResponse buyLotto(Money money, int capacity) {
-        if (capacity * LOTTO_PRICE > money.getAmount()) throw new IllegalArgumentException();
-        int change = money.getAmount() - capacity * LOTTO_PRICE;
-        List<Lotto> lottoList = lottoMachine.issueLottoList(capacity);
-        return new ShopResponse(money.getAmount(), capacity, lottoList, change);
+        if (capacity * Price.LOTTO_PRICE > money.getAmount()) {
+            throw new IllegalArgumentException();
+        }
+        int change = money.getAmount() - capacity * Price.LOTTO_PRICE;
+        Lottos lottos = new Lottos(lottoMachine.issueLottoList(capacity));
+        ShopResponse shopResponse = new ShopResponse(money.getAmount(), capacity, lottos, change);
+        if (!isShopResponseValid(shopResponse)) {
+            throw new IllegalArgumentException();
+        }
+        return shopResponse;
+    }
+
+    public boolean isShopResponseValid(ShopResponse shopResponse) {
+        return shopResponse.getLottoCount() * Price.LOTTO_PRICE + shopResponse.getChange()
+                == shopResponse.getOriginMoney();
     }
 }

@@ -1,5 +1,7 @@
 package step2.View;
 
+import step2.domain.Lotto;
+import step2.domain.Lottos;
 import step2.dto.ShopResponse;
 
 public class RuntimeView {
@@ -9,8 +11,10 @@ public class RuntimeView {
     }
 
     public void printLottoNumbers(ShopResponse shopResponse) {
-        shopResponse.getLottoList()
-                .forEach((lotto -> System.out.println(lotto.getNumbers().toString())));
+        Lottos lottos = shopResponse.getLottos();
+        for(Lotto lotto: lottos.getLottoList()){
+            System.out.println(lotto.getNumbers().toString());
+        }
     }
 
 }

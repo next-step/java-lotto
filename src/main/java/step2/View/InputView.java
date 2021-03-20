@@ -1,7 +1,7 @@
 package step2.View;
 
-import step2.dto.Lotto;
-import step2.dto.Money;
+import step2.domain.Lotto;
+import step2.domain.Money;
 
 import java.util.Scanner;
 
@@ -12,9 +12,9 @@ public class InputView {
         return new Money(money);
     }
 
-    public Lotto getWinningNumbers() {
+    public Lotto getLastWeekWiningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
-        String values = new Scanner(System.in).next();
+        String values = new Scanner(System.in).nextLine();
         return new Lotto(values);
     }
 }

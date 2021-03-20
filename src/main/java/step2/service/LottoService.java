@@ -4,10 +4,10 @@ import step2.View.InputView;
 import step2.View.ResultView;
 import step2.View.RuntimeView;
 import step2.domain.Judge;
+import step2.domain.Lotto;
+import step2.domain.Money;
 import step2.domain.Shop;
 import step2.dto.JudgeResponse;
-import step2.dto.Lotto;
-import step2.dto.Money;
 import step2.dto.ShopResponse;
 
 public class LottoService {
@@ -19,13 +19,13 @@ public class LottoService {
     private final Shop shop = new Shop();
     private final Judge judge = new Judge();
 
-    public void autoLotto() {
+    public void buyAutoLotto() {
         Money money = inputView.getMoneyInput();
         int capacity = shop.calculateLottoCapacity(money);
         ShopResponse shopResponse = shop.buyLotto(money, capacity);
         runtimeView.printLottoAmount(shopResponse);
         runtimeView.printLottoNumbers(shopResponse);
-        Lotto winningLotto = inputView.getWinningNumbers();
+        Lotto winningLotto = inputView.getLastWeekWiningLottoNumbers();
         JudgeResponse judgeResponse = judge.calculateResult(shopResponse, winningLotto);
         resultView.printResult(judgeResponse);
     }

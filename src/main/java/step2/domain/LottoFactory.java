@@ -1,11 +1,9 @@
 package step2.domain;
 
-import step2.dto.Lotto;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine {
+public class LottoFactory {
 
     public List<Lotto> issueLottoList(int amount) {
         List<Lotto> lottoList = new ArrayList<>();
