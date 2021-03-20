@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
 import lotto.dto.IssueNumber;
