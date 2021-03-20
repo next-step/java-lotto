@@ -33,6 +33,18 @@ public class LottoNumbers {
         this.lottoNumber = createLottoNumbers(inputNumbers);
     }
 
+    public LottoNumbers(int inputBonusNumber) {
+        this.lottoNumber = createBonusNumber(inputBonusNumber);
+    }
+
+    private List<Integer> createBonusNumber(int inputBonusNumber) {
+        List<Integer> bonusNumber = Arrays.asList(inputBonusNumber);
+
+        isLottoNumberRange(bonusNumber);
+
+        return bonusNumber;
+    }
+
     private List<Integer> createLottoNumbers() {
         List<Integer> numbers = LOTTO_NUMBERS;
 
@@ -54,7 +66,7 @@ public class LottoNumbers {
 
         isDuplicateNumbers(result);
         isLottoNumberCount(result);
-        isWinnerNumbers(result);
+        isLottoNumberRange(result);
 
         return result;
     }
@@ -82,7 +94,7 @@ public class LottoNumbers {
         }
     }
 
-    private void isWinnerNumbers(List<Integer> result) {
+    private void isLottoNumberRange(List<Integer> result) {
         if (result.stream()
                 .anyMatch(this::isLottoNumberSize)) {
             throw new IllegalArgumentException(LottoConstant.LOTTO_NUMBER_SIZE_ERROR);

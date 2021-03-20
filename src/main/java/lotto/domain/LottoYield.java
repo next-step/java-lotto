@@ -15,13 +15,15 @@ public class LottoYield {
         this.yield = yield;
     }
 
-    public LottoYield(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
-        this.yield = operationYield(lottoTickets, winnerNumber);
+    public LottoYield(List<LottoTicket> lottoTickets,
+            LottoNumbers winnerNumber, LottoNumbers bonusNumber) {
+        this.yield = operationYield(lottoTickets, winnerNumber, bonusNumber);
     }
 
-    private double operationYield(List<LottoTicket> lottoTickets, LottoNumbers winnerNumber) {
+    private double operationYield(List<LottoTicket> lottoTickets,
+            LottoNumbers winnerNumber, LottoNumbers bonusNumber) {
         double lottoPrize = lottoTickets.stream()
-                            .mapToDouble(ticket -> LottoRank.checkTicketRank(ticket, winnerNumber).prize)
+                            .mapToDouble(ticket -> LottoRank.valueOf(ticket, winnerNumber, bonusNumber).winningMoney)
                             .sum();
 
         double buyAmount = lottoTickets.size() * LottoConstant.MIN_BUY_AMOUNT;

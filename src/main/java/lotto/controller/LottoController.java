@@ -14,16 +14,19 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine(buyAmount);
 
         // 로또 번호 확인
-        ResultView resultView = new ResultView();
-        resultView.printLottoTicketInfos(lottoMachine);
+        ResultView resultView = new ResultView(lottoMachine);
+        resultView.printLottoTicketInfos();
 
         // 당첨 결과 확인
         String inputNumber = inputView.inputWinnerNumber();
+        int inputBonusNumber = inputView.inputBonusNumber();
         LottoNumbers winnerNumber = new LottoNumbers(inputNumber);
-        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber);
+        LottoNumbers bonusNumber = new LottoNumbers(inputBonusNumber);
+
+        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber, bonusNumber);
 
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(lottoMachine.lottoTickets(), winnerNumber);
+        resultView.printLottoRanksInfos(winnerNumber, bonusNumber);
         resultView.printLottoYield(lottoYield);
     }
 }
