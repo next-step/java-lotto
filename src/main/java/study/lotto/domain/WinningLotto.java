@@ -9,18 +9,14 @@ import java.util.Objects;
 public class WinningLotto {
 
     public static final String GUIDE_DONT_CONTAINS_BONUS_NUMBER = "보너스 번호는 당첨 번호에 포함될 수 없습니다.";
-    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
-
-    public WinningLotto(final List<LottoNumber> lottoNumberList, final LottoNumber bonusNumber) {
-        this(new Lotto(lottoNumberList), bonusNumber);
-    }
+    private final Lotto winningLotto;
 
     public WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        this.winningLotto = winningLotto;
         if(winningLotto.contains(bonusNumber)) {
             throw new LottoException(GUIDE_DONT_CONTAINS_BONUS_NUMBER);
         }
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
