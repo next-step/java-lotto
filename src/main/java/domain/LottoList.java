@@ -10,8 +10,5 @@ public class LottoList {
     public LottoList(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
-
-    public void validate(){
-        lottoList.forEach(Lotto::validateLength);
-    }
+    
 }
