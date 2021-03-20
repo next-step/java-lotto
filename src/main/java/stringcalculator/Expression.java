@@ -3,7 +3,7 @@ package stringcalculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Expression {
+public final class Expression {
 
   private static final String DELIMITER = "[,:]";
 
