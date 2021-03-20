@@ -2,16 +2,11 @@ package stringcalculator;
 
 public class StringCalculator {
 
-  public static final String DELIMITER = ",";
-
   private StringCalculator() {}
 
-  public static int sum(String expression) {
-    if (expression == null || expression.isEmpty()) {
-      return 0;
-    }
-
-    Numbers numbers = new Numbers(expression.split(DELIMITER));
+  public static int sum(String input) {
+    Expression expression = new Expression(input);
+    Numbers numbers = new Numbers(expression.numbers());
     return numbers.sum();
   }
 }
