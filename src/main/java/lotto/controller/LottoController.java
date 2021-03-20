@@ -37,7 +37,7 @@ public class LottoController {
         Winning winning = new Winning();
 
         for (IssueNumber issueNumber : totalLottoNumbers.keySet()) {
-            int countMatchNumber = lottoPlay.getMatchNumbers(totalLottoNumbers.get(issueNumber).getLottoNumbers(), winningNumber);
+            int countMatchNumber = totalLottoNumbers.get(issueNumber).countMatchNumber(winningNumber);
             boolean bonusBall = totalLottoNumbers.get(issueNumber).isContain(bonusNumber);
 
             winning.record(countMatchNumber, bonusBall);

@@ -18,4 +18,10 @@ public class LottoNumbers {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> bonusNumber == lottoNumber.getLottoNumber());
     }
+
+    public int countMatchNumber(List<Integer> winningNumber) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> winningNumber.contains(lottoNumber.getLottoNumber()))
+                .count();
+    }
 }
