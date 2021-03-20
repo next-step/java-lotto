@@ -2,17 +2,19 @@ package stringcalculator;
 
 public final class NonNegativeInteger {
 
+  private static final int ZERO = 0;
+
   private final int number;
 
   public NonNegativeInteger() {
-    this(0);
+    this(ZERO);
   }
   public NonNegativeInteger(String number) {
     this(Integer.parseInt(number));
   }
 
   public NonNegativeInteger(int number) {
-    if (number < 0) {
+    if (number < ZERO) {
       throw new NegativeNumberException();
     }
     this.number = number;
