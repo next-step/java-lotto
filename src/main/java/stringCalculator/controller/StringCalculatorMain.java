@@ -8,6 +8,8 @@ public class StringCalculatorMain {
     InputView inputView = new InputView();
     String input = inputView.input();
 
+
+
   }
 
 }
