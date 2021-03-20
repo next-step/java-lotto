@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.dto.IssueNumber;
 import lotto.dto.LottoNumber;
 import lotto.dto.LottoNumbers;
+import lotto.util.Lotto;
 
 import java.util.*;
 
@@ -10,16 +11,7 @@ public class LottoPlay {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_LENGTH = 6;
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
-    private static final List<LottoNumber> LOTTO_NUMBER = new ArrayList<>();
     private final Map<IssueNumber, List<LottoNumber>> totalLottoNumbers = new HashMap<>();
-
-    static {
-        for (int number = LOTTO_MIN; number <= LOTTO_MAX; number++) {
-            LOTTO_NUMBER.add(new LottoNumber(number));
-        }
-    };
 
     public Map<IssueNumber, List<LottoNumber>> getLottoNumbers() {
         return totalLottoNumbers;
@@ -36,15 +28,14 @@ public class LottoPlay {
     public LottoNumbers createLottoNumber() {
         List<LottoNumber> lottoNumber = new ArrayList<>();
 
-        Collections.shuffle(LOTTO_NUMBER);
+        Collections.shuffle(Lotto.LOTTO_NUMBER);
         for (int i = 0; i < LOTTO_LENGTH; i++) {
-            lottoNumber.add(new LottoNumber(LOTTO_NUMBER.get(i)
+            lottoNumber.add(new LottoNumber(Lotto.LOTTO_NUMBER.get(i)
                                                         .getLottoNumber()));
         }
         Collections.sort(lottoNumber);
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
 
-        return lottoNumbers;
+        return new LottoNumbers(lottoNumber);
     }
 
     public int getMatchNumbers(List<LottoNumber> lottoNumber, List<Integer> winningNumbers) {
