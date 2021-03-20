@@ -21,7 +21,7 @@ public class LottoTest {
     Lotto lotto;
     LottoResult lottoResult;
     LottoMachine lottoMachine;
-    LottoNumbers winningNumbers;
+    WinningNumbers winningNumbers;
     List<LottoNumbers> buyLottoNumbers;
 
     @BeforeEach
@@ -30,7 +30,7 @@ public class LottoTest {
         lotto = new Lotto();
         lottoResult = new LottoResult();
         lottoMachine = new LottoMachine();
-        winningNumbers = new LottoNumbers("1,2,3,4,5,6");
+        winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
         buyLottoNumbers = new ArrayList<>();
     }
 
@@ -77,8 +77,8 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("4등 결과 확인")
-    public void fourthRanking() {
+    @DisplayName("5등 결과 확인")
+    public void fifthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,10,20,30"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("3개 일치 (5000원)- 1개");
@@ -86,8 +86,8 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("3등 결과 확인")
-    public void thirdRanking() {
+    @DisplayName("4등 결과 확인")
+    public void fourthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,10,20"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("4개 일치 (50000원)- 1개");
@@ -95,12 +95,21 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("2등 결과 확인")
-    public void secondRanking() {
+    @DisplayName("3등 결과 확인")
+    public void thirdRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,10"));
         String result = lottoResult.result(buyLottoNumbers, winningNumbers);
         assertThat(result).contains("5개 일치 (1500000원)- 1개");
         assertThat(result).contains("총 수익률은 1500.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+    }
+
+    @Test
+    @DisplayName("2등 결과 확인")
+    public void secondRanking() {
+        buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,7"));
+        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
+        assertThat(result).contains("5개 일치, 보너스 볼 일치 (30000000원)- 1개");
+        assertThat(result).contains("총 수익률은 30000.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
     }
 
     @Test

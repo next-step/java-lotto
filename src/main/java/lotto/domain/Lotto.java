@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.common.LottoConstants;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -31,7 +30,7 @@ public class Lotto {
             bonusBall = inputView.bonusBall();
         }
 
-        LottoNumbers winningNumbers = new LottoNumbers(numbers);
+        WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusBall);
 
         String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);
 

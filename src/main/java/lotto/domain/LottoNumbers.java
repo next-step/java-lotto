@@ -35,10 +35,14 @@ public class LottoNumbers {
         return new HashSet<>(numbers).size() == LottoConstants.LOTTO_NUMBER_COUNT;
     }
 
-    public int correctCount(LottoNumbers purchaseLottoNumber){
-        List<Integer> tempNumbers = new ArrayList<>(purchaseLottoNumber.numbers);
+    public int correctCount(List<Integer> winningNumbers) {
+        List<Integer> tempNumbers = new ArrayList<>(winningNumbers);
         tempNumbers.removeAll(numbers);
         return LottoConstants.LOTTO_NUMBER_COUNT - tempNumbers.size();
+    }
+
+    public boolean matchedBonusBall(int bonusBall) {
+        return numbers.stream().anyMatch(number -> number == bonusBall);
     }
 
     public String printInfo(){
