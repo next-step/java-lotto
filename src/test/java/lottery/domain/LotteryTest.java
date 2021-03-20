@@ -29,6 +29,16 @@ class LotteryTest {
         );
     }
 
+    static Stream<Arguments> generateInvalidWinningLottery() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 8),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 50),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 50), 7)
+        );
+    }
+
     @Test
     @DisplayName("생성할 수 없는 번호가 포함되어 있으면 예외를 던진다.")
     void throwExceptionIfInvalidNumberContained() {
@@ -65,4 +75,12 @@ class LotteryTest {
         assertThat(lottery.getPrize(winningNumbers, winningBonusNumber)).isEqualTo(expected);
     }
 
+    @DisplayName("유효하지 않은 당첨 번호로 등수를 알아내려고 시도하면 예외 처리한다.")
+    @ParameterizedTest(name = "당첨 번호 - {0}, 보너스 번호 - {1}")
+    @MethodSource("generateInvalidWinningLottery")
+    void throwExceptionIfInvalidWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThatThrownBy(() -> lottery.getPrize(winningNumbers, bonusNumber)).isInstanceOf(RuntimeException.class);
+    }
 }
