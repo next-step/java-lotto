@@ -1,11 +1,14 @@
 package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static stringcalculator.Expression.WRONG_CUSTOM_DELIMITER_MESSAGE;
 import static stringcalculator.Expression.ZERO_STRING;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,5 +44,13 @@ class ExpressionTest {
   @MethodSource("commaDelimiter")
   void commaSeparatedNumbers(String expression, String[] numbers) {
     assertThat(new Expression(expression).numbers()).contains(numbers);
+  }
+
+  @Test
+  @DisplayName("잘못된 커스텀 구분자 입력시 IllegalArgumentException이 발생한다.")
+  void wrongCustomDelimiter() {
+    assertThatIllegalArgumentException().isThrownBy(
+        () -> new Expression("//\n123")
+    ).withMessage(WRONG_CUSTOM_DELIMITER_MESSAGE);
   }
 }
