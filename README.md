@@ -43,6 +43,7 @@
 ### Todo 기능
   - 구입금액을 입력받는 InterView 메소드
     - 구입 금액이 1000원 이상인지 체크하는 Validation 메소드
+    - 구입 금액이 null 체크하는 Validation 메소드
     - 구입 금액이 정수인지 체크하는 Validation 메소드
   - lotto 번호를 생성하는 메소드
     - lotto 번호가 45를 안넘는지 체크하는 Validation 메소드
