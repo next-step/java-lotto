@@ -1,7 +1,7 @@
 package step2.View;
 
+import step2.constants.Price;
 import step2.dto.JudgeResponse;
-import step2.utils.Price;
 
 public class ResultView {
 

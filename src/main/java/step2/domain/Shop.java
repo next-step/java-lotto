@@ -1,9 +1,7 @@
 package step2.domain;
 
+import step2.constants.Price;
 import step2.dto.ShopResponse;
-import step2.utils.Price;
-
-import java.util.List;
 
 public class Shop {
 

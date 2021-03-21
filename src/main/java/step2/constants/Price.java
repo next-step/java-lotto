@@ -1,4 +1,4 @@
-package step2.utils;
+package step2.constants;
 
 public class Price {
     public static final int LOTTO_PRICE = 1000;
