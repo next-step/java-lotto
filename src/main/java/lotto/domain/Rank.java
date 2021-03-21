@@ -26,14 +26,24 @@ public enum Rank {
     }
 
     public static Rank rank(int countMatchNumber, boolean bonusBall) {
-        MatchRank matchRank = new MatchRank();
+        Rank matchRank = Rank.MISS;
 
         for (Rank rank : values()) {
-            matchRank.matching(rank, countMatchNumber);
+            matchRank = matching(rank, matchRank, countMatchNumber);
         }
 
-        matchRank.bonusMatching(bonusBall);
+        if (matchRank.getCount() == 5 && !bonusBall) {
+            matchRank = Rank.THIRD;
+        }
 
-        return matchRank.getMatchRank();
+        return matchRank;
+    }
+
+    public static Rank matching(Rank rank, Rank matchRank, int countMatchNumber) {
+        if (rank.getCount() == countMatchNumber) {
+            return rank;
+        }
+
+        return matchRank;
     }
 }
