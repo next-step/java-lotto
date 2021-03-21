@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoNumberGenerator {
 
@@ -14,24 +15,16 @@ public class LottoNumberGenerator {
 
         return IntStream.rangeClosed(1, upperbound)
                 .boxed()
-                .collect(toShuffledList())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumberGenerator::shuffleList))
                 .subList(0, count)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    private static final Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(
-            Collectors.toCollection(ArrayList::new),
-            list -> {
-                Collections.shuffle(list);
-                return list;
-            }
-    );
-
-    @SuppressWarnings("unchecked")
-    private static <T> Collector<T, T, List<T>> toShuffledList() {
-        return (Collector<T, T, List<T>>) SHUFFLER;
+    private static List<Integer> shuffleList(List<Integer> list){
+        Collections.shuffle(list);
+        return list;
     }
 
 }
