@@ -1,5 +1,7 @@
 package calculator;
 
+import common.utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class PositiveNumbers {
 
+    private static final String ZERO = "0";
     private static final int CUSTOM_DELIMITER_INDEX = 1;
     private static final int CALCULATE_TARGET_INDEX = 2;
 
@@ -17,11 +20,16 @@ public class PositiveNumbers {
     }
 
     private String[] createCalculateTarget(String text) {
+        if(StringUtils.isBlank(text)) {
+            return new String[] {ZERO};
+        }
+
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
             return m.group(CALCULATE_TARGET_INDEX).split(customDelimiter);
         }
+
         return DefaultDelimiter.split(text);
     }
 
