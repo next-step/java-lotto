@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,6 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨자테스트")
 class WinningNumbersTest {
+    @Test
+    void isWinner() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
+        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
+        System.out.println(winNumbers.toString());
+        assertThat(winNumbers.get(3)).isEqualTo(3);
+    }
+
     LottoNumbers lottoNumbers1;
     LottoNumbers lottoNumbers2;
     LottoNumbers lottoNumbers3;
