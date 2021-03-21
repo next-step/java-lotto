@@ -19,7 +19,7 @@ public class StringAddCalculator {
 			text = m.group(2);
 		}
 		String[] numbers = text.split("[,:" + customDelimiter + "]");
-		checkMinus(numbers);
+		checkNegative(numbers);
 		return numbers;
 	}
 
@@ -35,12 +35,15 @@ public class StringAddCalculator {
 		return input == null || input.isEmpty();
 	}
 
-	private static void checkMinus(String[] numbers) {
-		for (String number :
-			numbers) {
-			if (Integer.parseInt(number) < 0) {
-				throw new RuntimeException("숫자는 양수만 입력 가능합니다.");
-			}
+	private static void checkNegative(String[] numbers) {
+		for (String number: numbers) {
+			checkNegative(number);
+		}
+	}
+
+	private static void checkNegative(String number) {
+		if (Integer.parseInt(number) < 0) {
+			throw new RuntimeException("숫자는 양수만 입력 가능합니다.");
 		}
 	}
 }
