@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import step2.domain.Game;
+import step2.domain.Number;
 
 public class GameTest {
 
@@ -14,8 +15,8 @@ public class GameTest {
         int length = 6;
         Game game = new Game(length);
 
-        Set<Number> numbers = new HashSet<>(game.numbers);
+        Set<Number> numbers = new HashSet<>(game.numbers());
 
-        assertEquals(6, numbers.size());
+        assertEquals(length, numbers.size());
     }
 }
