@@ -24,11 +24,11 @@ public enum LottoRank {
     public static LottoRank valueOf(LottoTicket lottoTicket, LottoWinners lottoWinners) {
         LottoRank rank = Arrays.asList(LottoRank.values())
                     .stream()
-                    .filter(lottoRank -> lottoRank.countOfMatch == LottoNumbers.matchOf(lottoTicket, lottoWinners.winnerNumbers()))
+                    .filter(lottoRank -> lottoWinners.matchOf(lottoTicket, lottoRank.countOfMatch))
                     .findAny()
                     .orElse(MISS);
 
-        boolean isBonus = LottoNumbers.bonusOf(lottoTicket, lottoWinners.bonusNumber());
+        boolean isBonus = lottoWinners.bonusOf(lottoTicket);
 
         if (rank == LottoRank.SECOND && !isBonus) {
             rank = LottoRank.THIRD;

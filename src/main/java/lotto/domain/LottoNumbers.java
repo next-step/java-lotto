@@ -52,23 +52,6 @@ public class LottoNumbers {
         return Collections.unmodifiableList(numbers);
     }
 
-    public static int matchOf(LottoTicket lottoTicket, LottoNumbers winnerNumber) {
-        return (int) lottoTicket.lottoNumber()
-                .stream()
-                .filter(number -> numberContains(number, winnerNumber))
-                .count();
-    }
-
-    public static boolean bonusOf(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        return lottoTicket.lottoNumber()
-                .stream()
-                .anyMatch(number -> number.checkNumber(bonusNumber));
-    }
-
-    public static boolean numberContains(LottoNumber number, LottoNumbers winnerNumber) {
-        return winnerNumber.readOnlyNumbers().stream()
-                .anyMatch(matchNumber -> number.checkNumber(matchNumber));
-    }
 
     @Override
     public boolean equals(Object o) {

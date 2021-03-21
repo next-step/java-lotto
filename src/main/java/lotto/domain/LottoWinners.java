@@ -13,14 +13,6 @@ public class LottoWinners {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumbers winnerNumbers() {
-        return winnerNumbers;
-    }
-
-    public LottoNumber bonusNumber() {
-        return bonusNumber;
-    }
-
     private void isDuplicateWinnersInBonus(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         boolean result = winnerNumbers.readOnlyNumbers().contains(bonusNumber);
 
@@ -29,6 +21,23 @@ public class LottoWinners {
         }
     }
 
+    public boolean matchOf(LottoTicket lottoTicket, int countOfMatch) {
+        return (int) lottoTicket.lottoNumber()
+                .stream()
+                .filter(this::numberContains)
+                .count() == countOfMatch;
+    }
+
+    public boolean bonusOf(LottoTicket lottoTicket) {
+        return lottoTicket.lottoNumber()
+                .stream()
+                .anyMatch(number -> number.checkNumber(bonusNumber));
+    }
+
+    public boolean numberContains(LottoNumber number) {
+        return winnerNumbers.readOnlyNumbers().stream()
+                .anyMatch(matchNumber -> number.checkNumber(matchNumber));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

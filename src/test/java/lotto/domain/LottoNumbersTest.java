@@ -14,13 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumbersTest {
-    private String inputWinners;
-
-    @BeforeEach
-    public void setUp() {
-        inputWinners = "1,2,3,4,5,6";
-    }
-
     public List<Integer> createLottoNumber() {
         return IntStream.range(1,7)
                 .boxed()
