@@ -13,7 +13,7 @@ public class LottoTickets {
     }
 
     public int lottoQuantity() {
-        return lottoQuantity.lottoQuantity();
+        return lottoQuantity.quantity();
     }
 
     public List<LottoTicket> readOnlyLottoTicket() {

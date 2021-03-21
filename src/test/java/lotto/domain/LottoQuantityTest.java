@@ -21,7 +21,7 @@ public class LottoQuantityTest {
         //when
 
         //then
-        assertThat(lottoQuantity.lottoQuantity()).isEqualTo(ticketCount);
+        assertThat(lottoQuantity.quantity()).isEqualTo(ticketCount);
     }
 
     @Test

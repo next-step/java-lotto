@@ -21,7 +21,7 @@ public class LottoQuantity {
         return buyAmount / LOTTO_AMOUNT;
     }
 
-    public int lottoQuantity() {
+    public int quantity() {
         return this.quantity;
     }
 }

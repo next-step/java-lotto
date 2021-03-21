@@ -21,7 +21,7 @@ public class LottoMachine {
         LottoQuantity lottoQuantity = new LottoQuantity(buyAmount);
 
         List<LottoTicket> tickets = Stream.generate(LottoMachine::createLottoTicket)
-                .limit(lottoQuantity.lottoQuantity())
+                .limit(lottoQuantity.quantity())
                 .collect(Collectors.toList());
 
         return new LottoTickets(lottoQuantity, tickets);
