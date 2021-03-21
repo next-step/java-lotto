@@ -14,7 +14,7 @@ public class NonNegativeInteger {
 
     public NonNegativeInteger(int nonNegativeInteger){
         if(nonNegativeInteger < 0){
-            throw new IllegalArgumentException(Constants.checkNonNegative);
+            throw new RuntimeException(Constants.checkNonNegative);
         }
         value = nonNegativeInteger;
     }
