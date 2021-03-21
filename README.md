@@ -34,3 +34,32 @@
  - `ValidationNumber` : 유효성 검사를 위한 클래스 
 
 
+## 🚀 2단계 - 로또(자동)
+
+### 요구 사항
+ - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+ - 로또 1장의 가격은 1000원이다.
+ 
+### Todo 기능
+  - 구입금액을 입력받는 InterView 메소드
+    - 구입 금액이 1000원 이상인지 체크하는 Validation 메소드
+    - 구입 금액이 정수인지 체크하는 Validation 메소드
+  - lotto 번호를 생성하는 메소드
+    - lotto 번호가 45를 안넘는지 체크하는 Validation 메소드
+  - lotto 번호를 랜덤으로 섞어주는 메소드
+    - 섞인 lotto번호를 정렬 (오름차순)
+  - 지난주 당첨번호를 입력받는 InterView 메소드
+    - lotto 번호가 45를 안넘는지 체크하는 Validation 메소드
+    - lotto 번호가 정수인지 체크하는 Validation 메소드
+  - 당첨 통계 계산하는 메소드
+    - enum class로 당첨 금액 저장
+    - 몇개 일치하는지 확인하는 메소드
+    - 수익률 계산하는 메소드
+    
+### 객체
+   - `Lotto`
+   - `Number`
+   - `Role`
+   - `LottoGame`
+   - `InterView`
+   - `ResultView`
