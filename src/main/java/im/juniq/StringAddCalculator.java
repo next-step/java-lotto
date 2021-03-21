@@ -8,7 +8,9 @@ public class StringAddCalculator {
 		if (nullableOrEmpty(input)) {
 			return 0;
 		}
-		return sum(splitedNumbers(input));
+		String[] numbers = splitedNumbers(input);
+		checkNegative(numbers);
+		return sum(numbers);
 	}
 
 	private static boolean nullableOrEmpty(String text) {
@@ -22,9 +24,7 @@ public class StringAddCalculator {
 			customDelimiter = m.group(1);
 			text = m.group(2);
 		}
-		String[] numbers = text.split("[,:" + customDelimiter + "]");
-		checkNegative(numbers);
-		return numbers;
+		return text.split("[,:" + customDelimiter + "]");
 	}
 
 	private static int sum(String[] numbers) {
