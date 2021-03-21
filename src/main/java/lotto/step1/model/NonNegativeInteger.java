@@ -5,14 +5,14 @@ import java.util.Objects;
 public class NonNegativeInteger {
     private final int value;
 
-    NonNegativeInteger(){
+    public NonNegativeInteger(){
         this(0);
     }
-    NonNegativeInteger(String nonNegativeInteger){
+    public NonNegativeInteger(String nonNegativeInteger){
         this(Integer.parseInt(nonNegativeInteger));
     }
 
-    NonNegativeInteger(int nonNegativeInteger){
+    public NonNegativeInteger(int nonNegativeInteger){
         if(nonNegativeInteger < 0){
             throw new IllegalArgumentException("숫자는 0 이상의 정수이어야 합니다.");
         }
