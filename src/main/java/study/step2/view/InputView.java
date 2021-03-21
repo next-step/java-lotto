@@ -14,6 +14,7 @@ public class InputView {
 
     public static String inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
+        scanner.nextLine();
         return scanner.nextLine();
     }
 }
