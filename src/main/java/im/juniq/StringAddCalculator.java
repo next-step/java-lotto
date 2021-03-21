@@ -5,7 +5,10 @@ public class StringAddCalculator {
 		if (checkNullOrEmpty(input)) {
 			return 0;
 		}
-		String[] numbers = input.split(",");
+		return sum(input.split(","));
+	}
+
+	private static int sum(String[] numbers) {
 		int criterion = 0;
 		for (int i = 0; i < numbers.length; i++) {
 			criterion += Integer.parseInt(numbers[i]);
