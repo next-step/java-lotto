@@ -18,4 +18,10 @@ public class Lotto {
         Collections.sort(list);
         return list;
     }
+
+    public int match(List<Integer> winInput) {
+        int matchCount = lottoNumbers.stream()
+            .mapToInt(number -> winInput.contains(number) ? 1 : 0).sum();
+        return matchCount;
+    }
 }

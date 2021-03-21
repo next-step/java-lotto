@@ -9,10 +9,12 @@ public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
     private List<Integer> winNumbers;
+    private LottoWin lottoWin;
 
     public LottoMachine() {
         lottos = new ArrayList<>();
         winNumbers = new ArrayList<>();
+        lottoWin = new LottoWin();
     }
 
     public List<Lotto> getLottos() {
@@ -35,5 +37,10 @@ public class LottoMachine {
         winNumbers = Arrays.stream(winInput.split(","))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
+    }
+
+    public LottoWin result() {
+        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winNumbers)));
+        return lottoWin;
     }
 }
