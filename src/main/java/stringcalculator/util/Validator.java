@@ -1,4 +1,4 @@
-package util;
+package stringcalculator.util;
 
 import java.util.Arrays;
 
