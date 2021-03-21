@@ -14,7 +14,8 @@ public class LottoWinners {
     }
 
     private void isDuplicateWinnersInBonus(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
-        boolean result = winnerNumbers.readOnlyNumbers().contains(bonusNumber);
+        boolean result = winnerNumbers.readOnlyNumbers()
+                            .contains(bonusNumber);
 
         if (result) {
             throw new IllegalArgumentException(WINNER_BONUS_DUPLICATE_ERROR);
@@ -30,14 +31,12 @@ public class LottoWinners {
 
     public boolean bonusOf(LottoTicket lottoTicket) {
         return lottoTicket.readOnlyLottoNumber()
-                .stream()
-                .anyMatch(number -> number.checkNumber(bonusNumber));
+                    .contains(bonusNumber);
     }
 
     public boolean numberContains(LottoNumber number) {
         return winnerNumbers.readOnlyNumbers()
-                .stream()
-                .anyMatch(matchNumber -> number.checkNumber(matchNumber));
+                    .contains(number);
     }
 
     @Override

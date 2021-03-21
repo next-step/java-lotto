@@ -25,10 +25,6 @@ public class LottoNumber {
                 || (MAX_NUMBER < number);
     }
 
-    public boolean checkNumber(LottoNumber number) {
-        return this.number == number.number;
-    }
-
     @Override
     public String toString() {
         return String.valueOf(number);
