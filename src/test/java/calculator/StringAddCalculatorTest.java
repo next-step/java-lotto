@@ -31,25 +31,18 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(new Expression("1,2"));
         assertThat(result).isEqualTo(3);
     }
-    
+
     @Test
     @DisplayName("콜론(:)도 구분자로 포함할 경우")
     public void checkColon() throws Exception {
         int result = StringAddCalculator.splitAndSum(new Expression("1,2:3"));
         assertThat(result).isEqualTo(6);
     }
-    
+
     @Test
     @DisplayName("\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 경우")
     public void checkCustomDelimiter() throws Exception {
         int result = StringAddCalculator.splitAndSum(new Expression("//;\n1;2;3"));
         assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("음수를 전달할 경우 RuntimeException 예외 발생")
-    public void checkNegative() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(new Expression("-1,2,3")))
-                .isInstanceOf(RuntimeException.class).hasMessageContaining("음수가 포함");
     }
 }
