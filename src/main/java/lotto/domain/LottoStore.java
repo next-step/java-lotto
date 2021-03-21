@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import lotto.factories.LottoTicketFactory;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,20 +25,9 @@ public class LottoStore {
             throw new IllegalArgumentException();
         }
 
-        return Stream.generate(this::autoCreatedLottoTicket)
+        return Stream.generate(LottoTicketFactory::createAutoLottoTicket)
                 .limit(payment / price)
                 .collect(Collectors.toList());
-    }
-
-    private LottoTicket autoCreatedLottoTicket() {
-        return new LottoTicket(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
     }
 
     @Override
