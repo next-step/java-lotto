@@ -8,15 +8,15 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(Integer... numbers) {
-        if (numbers.length != 6) {
-            throw new IllegalArgumentException("로또 번호는 반드시 6자리여야 합니다.");
+        if (numbers.length != LottoConstant.NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoConstant.NUMBER_COUNT_EXCEPTION);
         }
         this.numbers = Arrays.asList(numbers);
     }
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 반드시 6자리여야 합니다.");
+        if (numbers.size() != LottoConstant.NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoConstant.NUMBER_COUNT_EXCEPTION);
         }
         this.numbers = numbers;
     }
