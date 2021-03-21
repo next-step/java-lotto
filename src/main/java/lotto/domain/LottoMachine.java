@@ -27,10 +27,6 @@ public class LottoMachine {
         return new LottoTickets(lottoQuantity, tickets);
     }
 
-    public static LottoTicket createLottoTicket() {
-        return new LottoTicket(lottoNumberRandom());
-    }
-
     public static LottoTicket createLottoTicket(String numbers) {
         return new LottoTicket(createLottoNumbers(numbers));
     }
@@ -39,6 +35,10 @@ public class LottoMachine {
         LottoNumbers winners = new LottoNumbers(createLottoNumbers(inputNumber));
         LottoNumber bonus = new LottoNumber(inputBonusNumber);
         return new LottoWinners(winners, bonus);
+    }
+
+    private static LottoTicket createLottoTicket() {
+        return new LottoTicket(lottoNumberRandom());
     }
 
     private static List<Integer> lottoNumberRandom() {

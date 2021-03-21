@@ -22,22 +22,24 @@ public class LottoWinners {
     }
 
     public boolean matchOf(LottoTicket lottoTicket, int countOfMatch) {
-        return (int) lottoTicket.lottoNumber()
+        return (int) lottoTicket.readOnlyLottoNumber()
                 .stream()
                 .filter(this::numberContains)
                 .count() == countOfMatch;
     }
 
     public boolean bonusOf(LottoTicket lottoTicket) {
-        return lottoTicket.lottoNumber()
+        return lottoTicket.readOnlyLottoNumber()
                 .stream()
                 .anyMatch(number -> number.checkNumber(bonusNumber));
     }
 
     public boolean numberContains(LottoNumber number) {
-        return winnerNumbers.readOnlyNumbers().stream()
+        return winnerNumbers.readOnlyNumbers()
+                .stream()
                 .anyMatch(matchNumber -> number.checkNumber(matchNumber));
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

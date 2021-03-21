@@ -24,7 +24,7 @@ public class ResultView {
         System.out.println(lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
 
         tickets.stream()
-                .forEach(ticket -> System.out.println(ticket.lottoNumber().toString()));
+                .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
     }
 
     public void printLottoRanksInfos(LottoWinners lottoWinners) {

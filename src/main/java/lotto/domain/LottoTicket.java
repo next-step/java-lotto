@@ -9,7 +9,7 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(numbers);
     }
 
-    public List<LottoNumber> lottoNumber() {
+    public List<LottoNumber> readOnlyLottoNumber() {
         return Collections.unmodifiableList(lottoNumbers.readOnlyNumbers());
     }
 }

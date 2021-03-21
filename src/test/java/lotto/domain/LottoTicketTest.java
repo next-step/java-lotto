@@ -6,8 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -18,7 +16,7 @@ public class LottoTicketTest {
     @DisplayName("로또 발급")
     public void createLottoTicket() throws Exception {
         //given
-        LottoTicket lottoTicket = LottoMachine.createLottoTicket();
+        LottoTicket lottoTicket = LottoMachine.createLottoTicket("1,2,3,4,5,6");
 
         //when
 
@@ -30,10 +28,10 @@ public class LottoTicketTest {
     @DisplayName("로또 번호 6개인지 확인")
     public void checkLottoNumberSize() throws Exception {
         //given
-        LottoTicket lottoTicket = LottoMachine.createLottoTicket();
+        LottoTicket lottoTicket = LottoMachine.createLottoTicket("1,2,3,4,5,6");
 
         //when
-        List<LottoNumber> numbers = lottoTicket.lottoNumber();
+        List<LottoNumber> numbers = lottoTicket.readOnlyLottoNumber();
 
         //then
         assertThat(numbers.size()).isEqualTo(6);
