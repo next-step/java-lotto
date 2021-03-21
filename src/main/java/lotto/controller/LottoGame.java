@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.utils.StringUtils;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
@@ -19,17 +18,16 @@ public class LottoGame {
         return new Amount(Integer.parseInt(value));
     }
 
-    public LotteryMachine generateLotteryMachine(String value, Amount purchaseAmount) {
-        return new LotteryMachine(value, purchaseAmount);
-    }
-
     public void start() {
         Amount purchaseAmount = generateAmount(InputView.amount());
         List<Lotto> lottos = generateLotto(purchaseAmount);
         ResultView.showPurchaseLotto(lottos);
 
         String winningNumbers = InputView.winningNumbers();
-        LotteryMachine lotteryMachine = generateLotteryMachine(winningNumbers, purchaseAmount);
+        String bonusNumber = InputView.bonusNumber();
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        LotteryMachine lotteryMachine = new LotteryMachine(winningLotto, purchaseAmount);
         LottoResult lottoResult = lotteryMachine.result(lottos);
 
         ResultView.showWinningResult(lottoResult);
