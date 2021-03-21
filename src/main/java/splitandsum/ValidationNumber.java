@@ -1,7 +1,8 @@
 package splitandsum;
 
 public class ValidationNumber {
-
+    public static final int INPUT_ZERO = 0;
+    public static final String ERROR_NEGATIVE = "음수는 입력이 불가능 합니다.";
     public static String checkNumber(String number) {
         number = isNull(number);
         number = isEmptyNum(number);
@@ -23,8 +24,8 @@ public class ValidationNumber {
     }
 
     public static int isNegativeNum(int number) {
-        if (number < Constant.INPUT_ZERO) {
-            throw new RuntimeException("음수는 입력이 불가능 합니다.");
+        if (number < INPUT_ZERO) {
+            throw new RuntimeException(ERROR_NEGATIVE);
         }
         return number;
     }
