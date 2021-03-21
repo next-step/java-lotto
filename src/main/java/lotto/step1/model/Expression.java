@@ -21,6 +21,8 @@ public class Expression {
         if (m.find()) {
             String customDelimiter = m.group(1);
             operands = m.group(2).split(customDelimiter);
+            checkNumericForArray(operands);
+            return operands;
         }
         operands = expression.split(",|:");
         checkNumericForArray(operands);
