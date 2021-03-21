@@ -6,18 +6,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException();
         }
+    }
 
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException();
         }
-
-        this.lottoNumbers = lottoNumbers;
     }
 
     public List<LottoNumber> ascendingLottoNumbers() {
