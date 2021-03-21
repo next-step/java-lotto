@@ -11,6 +11,10 @@ public class StringAddCalculator {
 		return sum(splitedNumbers(input));
 	}
 
+	private static boolean nullableOrEmpty(String text) {
+		return text == null || text.isEmpty();
+	}
+
 	private static String[] splitedNumbers(String text) {
 		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
 		String customDelimiter = "";
@@ -29,10 +33,6 @@ public class StringAddCalculator {
 			criterion += Integer.parseInt(number);
 		}
 		return criterion;
-	}
-
-	private static boolean nullableOrEmpty(String input) {
-		return input == null || input.isEmpty();
 	}
 
 	private static void checkNegative(String[] numbers) {
