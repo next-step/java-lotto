@@ -17,7 +17,11 @@ public class Number {
   }
 
   public int parseInt(String str) {
-    return Integer.parseInt(str);
+    int number = Integer.parseInt(str);
+    if(number < 0) {
+      throw new IllegalArgumentException("숫자는 음수일수 없습니다.");
+    }
+    return number;
   }
 
 }
