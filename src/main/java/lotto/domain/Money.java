@@ -40,4 +40,8 @@ public class Money {
     public int value() {
         return this.money;
     }
+
+    public int getLottoCount() {
+        return this.money / LOTTO_PRICE;
+    }
 }
