@@ -17,9 +17,6 @@ public class StringAddCalculator {
 	}
 
 	private static boolean checkNullOrEmpty(String input) {
-		if (input == null || input.isEmpty()) {
-			return true;
-		}
-		return false;
+		return input == null || input.isEmpty();
 	}
 }
