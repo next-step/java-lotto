@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.policy.TestRandomPolicy;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +20,13 @@ import org.junit.jupiter.api.Test;
 public class AutomatedLottoTest {
 
     @Test
-    @DisplayName("번호가 오름차순으로 정렬된 로또 1장 발급한다.")
+    @DisplayName("로또 1장을 발급한다.")
     void lottoCreateTest() {
-        LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.setPolicy(new DescendingPolicy());
+        LottoMachine lottoMachine = new LottoMachine(new TestRandomPolicy());
 
-        Lotto lotto = lottoMachine.draw();
+        Lotto lotto = lottoMachine.generate();
 
-        assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isEqualTo(new Lotto(10, 13, 44, 17, 20, 33));
     }
 
 }
