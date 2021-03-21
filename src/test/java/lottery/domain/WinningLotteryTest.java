@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lottery.domain.Prize.*;
@@ -33,9 +32,7 @@ class WinningLotteryTest {
     @Test
     @DisplayName("보너스 번호가 당첨 번호와 중복되었다면 예외를 던진다.")
     void throwExceptionIfNumbersDuplicated() {
-        List<LotteryNumber> numbers = Stream.of(1, 7, 10, 23, 36, 41)
-                                            .map(LotteryNumber::new)
-                                            .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(1, 7, 10, 23, 36, 41);
 
         LotteryNumbers winningNumbers = new LotteryNumbers(numbers);
         LotteryNumber bonusNumber = new LotteryNumber(23);
@@ -47,14 +44,9 @@ class WinningLotteryTest {
     @DisplayName("당첨 번호와 비교한 뒤, 로또 등수를 반환한다.")
     @MethodSource("generateTestData")
     void getPrizeAfterComparingLotteries(List<Integer> numberList, Prize expected) {
-        List<LotteryNumber> numbers = numberList.stream()
-                                                .map(LotteryNumber::new)
-                                                .collect(Collectors.toList());
-        LotteryNumbers lotteryNumbers = new LotteryNumbers(numbers);
+        LotteryNumbers lotteryNumbers = new LotteryNumbers(numberList);
 
-        List<LotteryNumber> winningNumberList = Stream.of(1, 2, 3, 4, 5, 6)
-                                                      .map(LotteryNumber::new)
-                                                      .collect(Collectors.toList());
+        List<Integer> winningNumberList = Arrays.asList(1, 2, 3, 4, 5, 6);
         LotteryNumbers winningNumbers = new LotteryNumbers(winningNumberList);
         LotteryNumber bonusNumber = new LotteryNumber(7);
         WinningLottery winningLottery = new WinningLottery(winningNumbers, bonusNumber);

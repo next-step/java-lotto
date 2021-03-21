@@ -3,6 +3,7 @@ package lottery.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LotteryNumbers {
 
@@ -10,9 +11,12 @@ public class LotteryNumbers {
 
     private final List<LotteryNumber> numbers;
 
-    public LotteryNumbers(List<LotteryNumber> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
+    public LotteryNumbers(List<Integer> numberList) {
+        this.numbers = numberList.stream()
+                                 .map(LotteryNumber::new)
+                                 .collect(Collectors.toList());
+
+        validate(this.numbers);
     }
 
     public boolean contains(LotteryNumber lotteryNumber) {
@@ -20,9 +24,9 @@ public class LotteryNumbers {
     }
 
     public long countMatchedNumbers(LotteryNumbers lotteryNumbers) {
-        return numbers.stream()
-                      .filter(lotteryNumbers.numbers::contains)
-                      .count();
+        return this.numbers.stream()
+                           .filter(lotteryNumbers.numbers::contains)
+                           .count();
     }
 
     private void validate(List<LotteryNumber> numbers) {
