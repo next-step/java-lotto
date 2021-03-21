@@ -7,23 +7,23 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class WinningNumbersTest {
+class WinningLottoTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3"})
-    void 유효숫자_예외(String input) {
+    @CsvSource(value = {"'1,2,3,4,5,6,7':'6'", "'1,2,3':'3'"}, delimiter = ':')
+    void 유효숫자_예외(String input, String bonusInput) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new WinningNumbers(input);
+                    new WinningLotto(input, bonusInput);
                 });
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void 당첨번호_포함(int input, boolean expected) {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
 
-        assertThat(winningNumbers.contains(new Number(input)))
+        assertThat(winningLotto.contains(new Number(input)))
                 .isEqualTo(expected);
     }
 }

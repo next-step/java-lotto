@@ -11,26 +11,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class YieldCalculatorTest {
-    private LinkedHashMap<Integer, Integer> resultMap = new LinkedHashMap<>();
+    private LinkedHashMap<String, Integer> resultMap = new LinkedHashMap<>();
 
     @BeforeEach
     void setUp() {
-        resultMap.put(3, 0);
-        resultMap.put(4, 0);
-        resultMap.put(5, 0);
-        resultMap.put(6, 0);
+        resultMap.put(WinningTable.FIFTH.name(), 0);
+        resultMap.put(WinningTable.FOURTH.name(), 0);
+        resultMap.put(WinningTable.THIRD.name(), 0);
+        resultMap.put(WinningTable.SECOND.name(), 0);
+        resultMap.put(WinningTable.FIRST.name(), 0);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000:3:1", "5000:4:1", "5000:5:1", "5000:6:1", "5000:3:5"}, delimiter = ':')
-    void 수익률_계산(int amount, int matchNumber, int matchCount) {
-        resultMap.put(matchNumber, matchCount);
+    @CsvSource(value = {"'FIFTH':5", "'FOURTH':4", "'THIRD':3", "'SECOND':2", "'FIRST':1"}, delimiter = ':')
+    void 당첨금_계산(String matchString, int matchCount) {
+        resultMap.put(matchString, matchCount);
 
-        YieldCalculator yieldCalculator = new YieldCalculator(new Amount(amount));
+        YieldCalculator yieldCalculator = new YieldCalculator();
         yieldCalculator.proceedsCalculate(resultMap);
 
         assertThat(yieldCalculator.proceedsTotal())
-                .isEqualTo(WinningTable.of(matchNumber)
+                .isEqualTo(WinningTable.valueOf(matchString)
                         .multiply(matchCount));
     }
 }

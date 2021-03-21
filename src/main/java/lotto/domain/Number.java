@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Number implements Comparable<Number> {
+    public final static int MIN_NUMBER_VALUE = 0;
+    public final static int MAX_NUMBER_VALUE = 45;
     private final int value;
 
     public Number(final String value) {
@@ -15,7 +17,7 @@ public class Number implements Comparable<Number> {
     }
 
     public void validation(final int value) {
-        if (value <= 0 || value > 45)
+        if (value <= MIN_NUMBER_VALUE || value > MAX_NUMBER_VALUE)
             throw new IllegalArgumentException("유효하지 않은 숫자입니다.");
     }
 

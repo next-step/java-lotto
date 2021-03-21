@@ -32,9 +32,7 @@ class LottoNumbersTest {
 
     @Test
     void 로또_기본번호_섞기() {
-        lottoNumbers.shuffle();
-
-        assertThat(new LottoNumbers().numbers()
+        assertThat(new LottoNumbers().lottoNumbers()
                 .toString()
                 .equals(lottoNumbers.numbers().toString()))
                 .isEqualTo(false);

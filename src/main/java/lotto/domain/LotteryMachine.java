@@ -5,45 +5,50 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LotteryMachine {
-    private WinningNumbers winningNumbers;
-    private LinkedHashMap<Integer, Integer> resultMap = new LinkedHashMap<>();
+    private final WinningLotto winningLotto;
+    private final Amount purchaseAmount;
 
-    public LotteryMachine(String winningNumbers) {
-        this(new WinningNumbers(winningNumbers));
-    }
+    private LinkedHashMap<String, Integer> resultMap = new LinkedHashMap<>();
 
-    public LotteryMachine(WinningNumbers winningNumbers) {
+    public LotteryMachine(final WinningLotto winningLotto, final Amount purchaseAmount) {
         initialize();
-        this.winningNumbers = winningNumbers;
+        this.winningLotto = winningLotto;
+        this.purchaseAmount = purchaseAmount;
     }
 
     public void initialize() {
-        resultMap.put(3, 0);
-        resultMap.put(4, 0);
-        resultMap.put(5, 0);
-        resultMap.put(6, 0);
+        resultMap.put(WinningTable.FIFTH.name(), 0);
+        resultMap.put(WinningTable.FOURTH.name(), 0);
+        resultMap.put(WinningTable.THIRD.name(), 0);
+        resultMap.put(WinningTable.SECOND.name(), 0);
+        resultMap.put(WinningTable.FIRST.name(), 0);
     }
 
-    public LinkedHashMap<Integer, Integer> result(List<Lotto> lottos) {
-        raffleResults(lottos)
-                .forEach(matchNumber -> {
-                    if (resultMap.get(matchNumber) != null) {
-                        resultMap.put(matchNumber, resultMap.get(matchNumber) + 1);
+    public LottoResult result(List<Lotto> lottos) {
+        raffle(lottos)
+                .forEach(winningResult -> {
+                    if (resultMap.get(winningResult) != null) {
+                        resultMap.put(winningResult, resultMap.get(winningResult) + 1);
                     }
                 });
-        return resultMap;
+        return new LottoResult(resultMap, purchaseAmount);
     }
 
-    public List<Integer> raffleResults(List<Lotto> lottos) {
+    public List<String> raffle(List<Lotto> lottos) {
         return lottos.stream()
-                .map(lotto -> correctCount(lotto, winningNumbers))
+                .map(lotto -> WinningTable.of(correctCount(lotto),
+                        checkSecond(lotto)).name())
                 .collect(Collectors.toList());
     }
 
-    public int correctCount(Lotto lotto, WinningNumbers winningNumbers) {
+    public int correctCount(Lotto lotto) {
         return (int) lotto.numbers()
                 .stream()
-                .filter(winningNumbers::contains).count();
+                .filter(winningLotto::contains).count();
+    }
+
+    public boolean checkSecond(Lotto lotto) {
+        return lotto.numbers().contains(winningLotto.bonusNumber());
     }
 }
 
