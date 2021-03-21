@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class StringCalculatorTest {
 
-  @DisplayName("")
+  @DisplayName("문자열 입력 받으면 합을 계산한다.")
   @Test
   void test() {
     StringCalculator stringCalculator = new StringCalculator();
