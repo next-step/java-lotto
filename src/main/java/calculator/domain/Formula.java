@@ -2,7 +2,6 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ public class Formula {
 
   private static final String DEFAULT_SEPARATOR = "[,:]";
   private static final String CUSTOM_SEPARATOR =  "//(.)\n(.*)";
+  private static final String CONVERT_NULL_TO_ZERO = "0";
 
   private final List<Operand> operands;
 
@@ -19,6 +19,14 @@ public class Formula {
   }
 
   public static Formula createFormula(String userInput) {
+    try {
+      return defaultOrCustomSeparator(userInput);
+    } catch (NullPointerException e) {
+      return new Formula(byDefaultSeparator(CONVERT_NULL_TO_ZERO));
+    }
+  }
+
+  private static Formula defaultOrCustomSeparator(String userInput) {
     if(isCustomSeparator(userInput)) {
       return new Formula(byCustomSeparator(userInput));
     }
