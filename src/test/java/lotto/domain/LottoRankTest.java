@@ -13,21 +13,11 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("로또 당첨 정보")
 public class LottoRankTest {
 
-    private LottoNumbers winnerNumber;
-    private LottoNumber bounsNumber;
     private LottoWinners winners;
-
-    public List<LottoNumber> createLottoNumber() {
-        return IntStream.range(1, 7)
-                .mapToObj(i -> new LottoNumber(i))
-                .collect(Collectors.toList());
-    }
 
     @BeforeEach
     public void setUp() {
-        winnerNumber = new LottoNumbers(createLottoNumber());
-        bounsNumber = new LottoNumber(45);
-        winners = new LottoWinners(winnerNumber, bounsNumber);
+        winners = LottoMachine.createWinners("1,2,3,4,5,6", 45);
     }
 
     @Test
@@ -35,7 +25,7 @@ public class LottoRankTest {
     public void lottoRankMissTest() throws Exception {
         //given
         String inputLottoThree = "1,2,42,43,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoThree);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
 
         //when
 
@@ -48,7 +38,7 @@ public class LottoRankTest {
     public void lottoRankFiveTest() throws Exception {
         //given
         String inputLottoThree = "1,2,3,43,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoThree);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
 
         //when
 
@@ -61,7 +51,7 @@ public class LottoRankTest {
     public void lottoRankFourTest() throws Exception {
         //given
         String inputLottoFour = "1,2,3,4,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoFour);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFour);
 
         //when
 
@@ -75,7 +65,7 @@ public class LottoRankTest {
     public void lottoRankThirdTest() throws Exception {
         //given
         String inputLottoFive = "1,2,3,4,5,44";
-        LottoTicket ticket = new LottoTicket(inputLottoFive);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
 
         //when
 
@@ -90,7 +80,7 @@ public class LottoRankTest {
     public void lottoRankTwoTest() throws Exception {
         //given
         String inputLottoFive = "1,2,3,4,5,45";
-        LottoTicket ticket = new LottoTicket(inputLottoFive);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
 
         //when
 
@@ -104,7 +94,7 @@ public class LottoRankTest {
     public void lottoRankOneTest() throws Exception {
         //given
         String inputLottoSix = "1,2,3,4,5,6";
-        LottoTicket ticket = new LottoTicket(inputLottoSix);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoSix);
 
         //when
 

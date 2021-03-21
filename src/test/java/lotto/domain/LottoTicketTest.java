@@ -14,30 +14,23 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("로또 티켓")
 public class LottoTicketTest {
 
-    public List<LottoNumber> createLottoNumber() {
-         return IntStream.range(1,6)
-                .mapToObj(i -> new LottoNumber(i))
-                .collect(Collectors.toList());
-    }
-
     @Test
     @DisplayName("로또 발급")
     public void createLottoTicket() throws Exception {
         //given
-        List<LottoNumber> numbers = createLottoNumber();
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoMachine.createLottoTicket();
 
         //when
 
         //then
-        assertThat(lottoTicket.lottoNumber()).isEqualTo(numbers);
+        assertThat(lottoTicket).isNotNull();
     }
 
     @Test
     @DisplayName("로또 번호 6개인지 확인")
     public void checkLottoNumberSize() throws Exception {
         //given
-        LottoTicket lottoTicket = new LottoTicket();
+        LottoTicket lottoTicket = LottoMachine.createLottoTicket();
 
         //when
         List<LottoNumber> numbers = lottoTicket.lottoNumber();
@@ -54,7 +47,7 @@ public class LottoTicketTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           new LottoTicket(input);
+            LottoMachine.createLottoTicket(input);
         });
 
         //then
@@ -68,7 +61,7 @@ public class LottoTicketTest {
         
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoTicket(input);
+            LottoMachine.createLottoTicket(input);
         });
         
         //then
@@ -83,7 +76,7 @@ public class LottoTicketTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoTicket(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 }

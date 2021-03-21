@@ -4,10 +4,10 @@ public class LottoQuantity {
     private static final int LOTTO_AMOUNT = 1000;
     private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
 
-    private final int lottoQuantity;
+    private final int quantity;
 
     public LottoQuantity(int buyAmount) {
-        this.lottoQuantity = amountToQuantity(buyAmount);
+        this.quantity = amountToQuantity(buyAmount);
     }
 
     private void isBuyAmountValid(int buyAmount) {
@@ -22,6 +22,6 @@ public class LottoQuantity {
     }
 
     public int lottoQuantity() {
-        return this.lottoQuantity;
+        return this.quantity;
     }
 }

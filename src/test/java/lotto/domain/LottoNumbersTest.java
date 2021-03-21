@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,13 +21,15 @@ public class LottoNumbersTest {
         inputWinners = "1,2,3,4,5,6";
     }
 
-    private LottoNumbers createWinner(String input) {
-        return new LottoNumbers(input);
+    public List<Integer> createLottoNumber() {
+        return IntStream.range(1,7)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> createLottoNumber() {
-        return IntStream.range(1,6)
-                .mapToObj(i -> new LottoNumber(i))
+    public List<Integer> createLottoNumber2() {
+        return IntStream.range(2,8)
+                .boxed()
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +37,7 @@ public class LottoNumbersTest {
     @DisplayName("번호 사이즈 6개 확인")
     public void numberSizeSixTest() throws Exception {
         //given
-        LottoNumbers numbers = new LottoNumbers();
+        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
 
         //when
 
@@ -48,26 +49,27 @@ public class LottoNumbersTest {
     @DisplayName("번호 일치 확인")
     public void numberTrueTest() throws Exception {
         //given
-        List<LottoNumber> intList = createLottoNumber();
+        List<Integer> intList = createLottoNumber();
         LottoNumbers numbers = new LottoNumbers(intList);
+        LottoNumbers numbers2 = new LottoNumbers(intList);
 
         //when
 
         //then
-        assertThat(numbers.checkNumbers(intList)).isTrue();
+        assertThat(numbers.equals(numbers2)).isTrue();
     }
 
     @Test
     @DisplayName("번호 불일치 확인")
     public void numberFalseTest() throws Exception {
         //given
-        List<LottoNumber> intList = createLottoNumber();
-        LottoNumbers numbers = new LottoNumbers();
+        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
+        LottoNumbers numbers2 = new LottoNumbers(createLottoNumber2());
 
         //when
 
         //then
-        assertThat(numbers.checkNumbers(intList)).isFalse();
+        assertThat(numbers.equals(numbers2)).isFalse();
     }
 
 
@@ -75,7 +77,7 @@ public class LottoNumbersTest {
     @DisplayName("당첨 번호 6개 사이즈 확인")
     public void winnerNumberSizeSixTest() throws Exception {
         //given
-        LottoNumbers winnerNumber = new LottoNumbers(inputWinners);
+        LottoNumbers winnerNumber = new LottoNumbers(createLottoNumber());
 
         //when
 
@@ -91,7 +93,7 @@ public class LottoNumbersTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            createWinner(input);
+            LottoMachine.createLottoTicket(input);
         });
 
         //then
@@ -105,7 +107,7 @@ public class LottoNumbersTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            createWinner(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 
@@ -117,7 +119,7 @@ public class LottoNumbersTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            createWinner(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 
@@ -129,7 +131,7 @@ public class LottoNumbersTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            createWinner(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 }

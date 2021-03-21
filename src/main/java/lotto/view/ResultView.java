@@ -12,16 +12,16 @@ public class ResultView {
     private static final String STRING_BONUS = ", 보너스 볼 일치";
     private static final String STRING_EMPTY = "";
 
-    private final LottoMachine lottoMachine;
+    private final LottoTickets lottoTickets;
 
-    public ResultView(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
+    public ResultView(LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public void printLottoTicketInfos() {
-        List<LottoTicket> tickets = lottoMachine.lottoTickets();
+        List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
 
-        System.out.println(lottoMachine.lottoQuantity() + BUY_QUANTITY_MESSAGE);
+        System.out.println(lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
 
         tickets.stream()
                 .forEach(ticket -> System.out.println(ticket.lottoNumber().toString()));
@@ -36,12 +36,13 @@ public class ResultView {
                 .forEach(lottoRank -> printLottoRank(lottoRank, lottoWinners));
     }
 
-    public void printLottoYield(LottoYield lottoYield) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoYield.yield()) + "입니다.(기준이 1이기 때문에 결과적으로 " + lottoYield.stringYield() + "라는 의미임)");
+    public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {
+        double yield = LottoYield.operationYield(lottoTickets, lottoWinners);
+        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.(기준이 1이기 때문에 결과적으로 " + LottoYield.stringYield(yield) + "라는 의미임)");
     }
 
     public void printLottoRank(LottoRank lottoRank, LottoWinners lottoWinners) {
-        System.out.println(lottoRank.countOfMatch + "개 일치 " + bonusOfString(lottoRank) + "(" + lottoRank.winningMoney + ") - " + lottoRank.winnerCount(lottoMachine.lottoTickets(), lottoWinners) + "개");
+        System.out.println(lottoRank.countOfMatch + "개 일치 " + bonusOfString(lottoRank) + "(" + lottoRank.winningMoney + ") - " + lottoRank.winnerCount(lottoTickets.readOnlyLottoTicket(), lottoWinners) + "개");
     }
 
     private String bonusOfString(LottoRank lottoRank) {
