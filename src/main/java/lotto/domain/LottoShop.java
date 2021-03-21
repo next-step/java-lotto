@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
@@ -10,6 +11,11 @@ public class LottoShop {
     }
 
     public List<Lotto> purchase(Money money) {
-        return null;
+        List<Lotto> lottoList = new ArrayList<>();
+
+        while(money.withdraw(LottoConstant.PRICE)) {
+            lottoList.add(lottoMachine.generate());
+        }
+        return lottoList;
     }
 }
