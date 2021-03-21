@@ -11,7 +11,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String inputString){
         String[] splitStrings = Split.split(inputString);
-        int[] parseNumbers = Parser.parser(splitStrings);
+        Integer[] parseNumbers = Parser.parser(splitStrings);
         int result = Calculator.add(parseNumbers);
         return result;
     }

@@ -10,10 +10,10 @@ public class ParserTest {
     public void parser_positive() {
         //given
         String[] inputStrings = new String[]{"1","2","3"};
-        int[] expectResults = new int[]{1,2,3};
+        Integer[] expectResults = new Integer[]{1,2,3};
 
         //when
-        int[] results = Parser.parser(inputStrings);
+        Integer[] results = Parser.parser(inputStrings);
 
 
         //then
