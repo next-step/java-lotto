@@ -35,7 +35,7 @@ public class Expression {
     }
 
     private void checkNumericForString(String operand){
-        String numberRegExp = "^[0-9]+$";
+        String numberRegExp = "^[-]?[0-9]+$";
         if(!operand.matches(numberRegExp)){
             throw new IllegalArgumentException("피연산자는 숫자여야 합니다.");
         }
