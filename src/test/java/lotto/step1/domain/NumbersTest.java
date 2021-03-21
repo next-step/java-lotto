@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,10 +19,7 @@ class NumbersTest {
         Number number2 = Number.of(inputNumber2);
         Number number3 = Number.of(inputNumber3);
 
-        List<Number> numberList = new ArrayList<>();
-        numberList.add(number1);
-        numberList.add(number2);
-        numberList.add(number3);
+        List<Number> numberList = Arrays.asList(number1, number2, number3);
         Numbers numbers = Numbers.of(numberList);
 
         assertThat(numbers.getSum()).isEqualTo(Number.of(expected));
