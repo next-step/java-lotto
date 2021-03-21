@@ -29,7 +29,7 @@ public class LottoNumbers {
      */
     public void mark() {
         Collections.shuffle(lottoNumbers);
-        sixNumbers(lottoNumbers);
+        shuffle(lottoNumbers);
     }
 
     /**
@@ -37,7 +37,7 @@ public class LottoNumbers {
      * @param shuffledNumbers
      * @return
      */
-    private void sixNumbers(List<Integer> shuffledNumbers) {
+    private void shuffle(List<Integer> shuffledNumbers) {
         this.lottoNumbers = shuffledNumbers.stream()
                 .limit(MAX_SIZE)
                 .collect(Collectors.toList());

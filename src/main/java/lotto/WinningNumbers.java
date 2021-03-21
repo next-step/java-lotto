@@ -47,14 +47,4 @@ public class WinningNumbers {
         System.out.println();
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
-
-    private void count(List<Integer> lottoNumberList) {
-        int correct = 0;
-        for (int win : winNumbers) {
-            if (lottoNumberList.contains(win)) {
-                correct++;
-            }
-        }
-        map.put(correct, map.getOrDefault(correct, 0) + 1);
-    }
 }
