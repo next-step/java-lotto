@@ -4,9 +4,9 @@ import stringCalculator.domain.StringCalculator;
 import stringCalculator.view.InputView;
 import stringCalculator.view.ResultView;
 
-public class StringCalculatorMain {
+public class StringCalculatorController {
 
-  public static void main(String[] args) {
+  public void calculate() {
     InputView inputView = new InputView();
     String input = inputView.input();
 
@@ -15,8 +15,5 @@ public class StringCalculatorMain {
 
     ResultView resultView = new ResultView();
     resultView.printCalculateResult(calculate);
-
-
   }
-
 }
