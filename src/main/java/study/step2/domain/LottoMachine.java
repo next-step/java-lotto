@@ -1,14 +1,18 @@
 package study.step2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
+    private List<Integer> winNumbers;
 
     public LottoMachine() {
         lottos = new ArrayList<>();
+        winNumbers = new ArrayList<>();
     }
 
     public List<Lotto> getLottos() {
@@ -25,5 +29,11 @@ public class LottoMachine {
 
     private int getLottoCount(int amount) {
         return amount / LOTTO_PRICE;
+    }
+
+    public void setWinNumbers(String winInput) {
+        winNumbers = Arrays.stream(winInput.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 }
