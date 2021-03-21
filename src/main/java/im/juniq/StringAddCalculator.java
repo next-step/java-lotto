@@ -4,6 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+	private static final String BASIC_DELIMITER = ",:";
+	private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+	private static final String NEGATIVE_EXCEPTION_MESSAGE = "숫자는 양수만 입력 가능합니다.";
+
 	public static int splitAndSum(String input) {
 		if (nullableOrEmpty(input)) {
 			return 0;
@@ -18,13 +22,13 @@ public class StringAddCalculator {
 	}
 
 	private static String[] splitedNumbers(String text) {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+		Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
 		String customDelimiter = "";
 		if (m.find()) {
 			customDelimiter = m.group(1);
 			text = m.group(2);
 		}
-		return text.split("[,:" + customDelimiter + "]");
+		return text.split("[" + BASIC_DELIMITER + customDelimiter + "]");
 	}
 
 	private static int sum(String[] numbers) {
@@ -43,7 +47,7 @@ public class StringAddCalculator {
 
 	private static void checkNegative(String number) {
 		if (Integer.parseInt(number) < 0) {
-			throw new RuntimeException("숫자는 양수만 입력 가능합니다.");
+			throw new RuntimeException(NEGATIVE_EXCEPTION_MESSAGE);
 		}
 	}
 }
