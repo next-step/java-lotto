@@ -25,11 +25,11 @@ public enum Prize {
                             .findFirst()
                             .orElse(LOSING_TICKET);
 
-        return promote(prize, bonusNumberMatched);
-    }
+        if (prize == Prize.THIRD && bonusNumberMatched) {
+            prize = Prize.SECOND;
+        }
 
-    private static Prize promote(Prize prize, boolean bonusNumberMatched) {
-        return prize == Prize.THIRD && bonusNumberMatched ? Prize.SECOND : prize;
+        return prize;
     }
 
     public long getCondition() {
