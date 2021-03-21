@@ -7,9 +7,6 @@ import java.util.regex.Pattern;
 
 public class PositiveNumbers {
 
-    private static final String FIRST_DEFAULT_DELIMITER = ":";
-    private static final String SECOND_DEFAULT_DELIMITER = ",";
-
     private final List<PositiveNumber> positiveNumberList;
 
     public PositiveNumbers(String text) {
@@ -22,7 +19,7 @@ public class PositiveNumbers {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        return text.replace(FIRST_DEFAULT_DELIMITER, SECOND_DEFAULT_DELIMITER).split(SECOND_DEFAULT_DELIMITER);
+        return DefaultDelimiter.split(text);
     }
 
     private List<PositiveNumber> parsePositiveNumberList(String[] textArray) {
