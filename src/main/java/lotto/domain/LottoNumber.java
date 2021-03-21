@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   private static final int MAX_VALUE = 45;
   private static final int MIN_VALUE = 1;
 
-  public LottoNumber(final int value) {
+  public LottoNumber(int value) {
     validateNumber(value);
     this.value = value;
   }

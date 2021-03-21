@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import jdk.nashorn.internal.ir.CallNode.EvalArgs;
 
 public enum LottoRank {
-  FIRST(6, 2_000_000_000,false),
-  SECOND(5, 30_000_000,true),
-  THIRD(5, 1_500_000,false),
-  FOURTH(4, 50_000,false),
-  FIFTH(3, 5_000,false),
-  ZERO(0, 0,false);
+  FIRST(6, 2_000_000_000, false),
+  SECOND(5, 30_000_000, true),
+  THIRD(5, 1_500_000, false),
+  FOURTH(4, 50_000, false),
+  FIFTH(3, 5_000, false),
+  ZERO(0, 0, false);
 
   private final int count;
   private final int price;
@@ -20,7 +20,7 @@ public enum LottoRank {
   private static final int MIN_VALUE = 0;
   private static final int MAX_VALUE = 6;
 
-  LottoRank(final int count, final int price,final boolean isBonus) {
+  LottoRank(int count, int price, boolean isBonus) {
     this.count = count;
     this.price = price;
     this.isBonus = isBonus;
@@ -36,10 +36,10 @@ public enum LottoRank {
 
   public static LottoRank findByCount(int count, boolean bonus) {
     validateNumber(count);
-    return findLottoRank(count,bonus);
+    return findLottoRank(count, bonus);
   }
 
-  public static LottoRank findLottoRank(int count,boolean bonus) {
+  public static LottoRank findLottoRank(int count, boolean bonus) {
     return Arrays.stream(values())
         .filter(r -> r.matchCount(count))
         .filter(m -> m.matchBonus(bonus))

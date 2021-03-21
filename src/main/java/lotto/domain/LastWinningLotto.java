@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LastWinningLotto {
@@ -20,6 +19,6 @@ public class LastWinningLotto {
   public LottoRank match(Lotto thisWeekLotto) {
     int matchCount = lotto.containsCount(thisWeekLotto);
     boolean matchBonusBall = thisWeekLotto.contains(bonusBall);
-    return LottoRank.findByCount(matchCount,matchBonusBall);
+    return LottoRank.findByCount(matchCount, matchBonusBall);
   }
 }

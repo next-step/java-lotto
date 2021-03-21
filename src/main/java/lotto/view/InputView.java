@@ -11,6 +11,8 @@ public class InputView {
   private static final String INPUT_PURCHASE_PRICE = "구매 금액을 입력해주세요.";
   private static final String INPUT_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요";
   private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+  private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+  private static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
   private static final String DELIMITER = ",";
 
   public int inputPurchasePrice() {
@@ -18,17 +20,36 @@ public class InputView {
     return new Scanner(System.in).nextInt();
   }
 
-  public List<Integer> inputWinningLottoNumbers() {
-    System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
-    String winngLottoNumbers = new Scanner(System.in).nextLine();
 
-    return Arrays.stream(winngLottoNumbers.split(DELIMITER))
+  public List<Integer> inputLottoNumbers() {
+    System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
+    return inputNumbers();
+  }
+
+  private List<Integer> inputNumbers() {
+    String input = new Scanner(System.in).nextLine();
+    return Arrays.stream(input.split(DELIMITER))
         .map(Integer::valueOf)
         .collect(Collectors.toList());
   }
 
+  public List<List<Integer>> inputLottoNumbers(int count) {
+    System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
+    List<List<Integer>> numbers = new ArrayList<List<Integer>>();
+    for (int i = 0; i < count; i++) {
+      List<Integer> input = inputNumbers();
+      numbers.add(input);
+    }
+    return numbers;
+  }
+
   public int inputBonusBall() {
     System.out.println(INPUT_BONUS_BALL);
+    return new Scanner(System.in).nextInt();
+  }
+
+  public int inputManualLottoCount() {
+    System.out.println(INPUT_MANUAL_LOTTO_COUNT);
     return new Scanner(System.in).nextInt();
   }
 }

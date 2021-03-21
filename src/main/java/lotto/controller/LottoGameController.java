@@ -1,8 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.generator.AutoLottoGenerator;
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.DefaultGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import java.util.List;
@@ -20,13 +19,15 @@ public class LottoGameController {
   public void runGame() {
     int purchasePrice = drawPurchasePrice();
     Money money = new Money(purchasePrice);
-    int lottoCount = money.calculateLottoCount();
-    drawLottoCount(lottoCount);
 
-    LottoMachine lottoMachine = new LottoMachine(money, new AutoLottoGenerator());
+    int count = drawManualLottoCount();
+    List<List<Integer>> manualLottos = drawManualLotto(count);
+    LottoMachine lottoMachine = new LottoMachine(money, new DefaultGenerator(manualLottos));
+
+    drawLottoCount(count, money.calculateLottoCount());
     drawLottoList(lottoMachine);
 
-    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(drawWinningLotto(),drawBonusBall());
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(drawWinningLotto(), drawBonusBall());
 
     LottoStaticResult lottoStaticResult
         = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
@@ -34,6 +35,14 @@ public class LottoGameController {
 
     double yield = lottoStaticResult.calculate(purchasePrice);
     drawLottoEarningRate(yield, lottoStaticResult.isBenefit(yield));
+  }
+
+  private List<List<Integer>> drawManualLotto(int count) {
+    return inputView.inputLottoNumbers(count);
+  }
+
+  private int drawManualLottoCount() {
+    return inputView.inputManualLottoCount();
   }
 
   private int drawBonusBall() {
@@ -45,7 +54,7 @@ public class LottoGameController {
   }
 
   private List<Integer> drawWinningLotto() {
-    return inputView.inputWinningLottoNumbers();
+    return inputView.inputLottoNumbers();
   }
 
   private void drawLottoStatics(LottoStaticResult lottoStaticResult) {
@@ -56,8 +65,8 @@ public class LottoGameController {
     resultView.printLottoList(lottoList);
   }
 
-  private void drawLottoCount(int lottoCount) {
-    resultView.printLottoCount(lottoCount);
+  private void drawLottoCount(int manualCount, int autoCount) {
+    resultView.printLottoCount(manualCount, autoCount);
   }
 
   private int drawPurchasePrice() {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class ResultView {
 
   private static final String DELIMITER = ",";
-  private static final String PRINT_LOTTO_COUNT = "%d개를 구매했습니다.\n";
+  private static final String PRINT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d장 구매했습니다.\n";
   private static final String PRINT_LOTTO_STATICS = "당첨 통계\n";
   private static final String PRINT_DOTTED_LINE = "--------\n";
   private static final String PRINT_BENEFIT = "이득";
@@ -16,8 +16,8 @@ public class ResultView {
       = "총 수익률은 %.2f입니다.(기준은 1이기 때문에 결과적으로 %s란 얘기)\n";
 
 
-  public void printLottoCount(int lottoCount) {
-    System.out.printf(PRINT_LOTTO_COUNT, lottoCount);
+  public void printLottoCount(int manualCount, int lottoCount) {
+    System.out.printf(PRINT_LOTTO_COUNT, manualCount, lottoCount);
   }
 
   public void printLottoList(LottoMachine lottoList) {

@@ -10,17 +10,23 @@ public class Lotto {
   private final List<LottoNumber> lottoNumbers;
   private static final int IS_MATCHED = 1;
   private static final int IS_NOT_MATCHED = 0;
+  private static final String INVALID_LOTTO_COUNT = "6개 번호로 이루어진 로또가 아닙니다.";
 
-  public Lotto(final List<LottoNumber> lottoNumbers) {
+  public Lotto(List<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
 
   public static Lotto of(List<Integer> numbers) {
+    validateCount(numbers);
     List<LottoNumber> lottoNumbers = new ArrayList<>();
-    for (Integer number : numbers) {
-      lottoNumbers.add(new LottoNumber(number));
-    }
+    numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     return new Lotto(lottoNumbers);
+  }
+
+  private static void validateCount(List<Integer> numbers) {
+    if (numbers.size() != 6) {
+      throw new IllegalArgumentException(INVALID_LOTTO_COUNT);
+    }
   }
 
   public boolean contains(LottoNumber lottoNumber) {
