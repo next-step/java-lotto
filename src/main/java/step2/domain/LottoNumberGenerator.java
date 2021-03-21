@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    private static final Collector<Integer, ? super Integer, List<Integer>> SHUFFLER = Collectors.collectingAndThen(
+    private static final Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(
             Collectors.toCollection(ArrayList::new),
             list -> {
                 Collections.shuffle(list);
@@ -30,8 +30,8 @@ public class LottoNumberGenerator {
     );
 
     @SuppressWarnings("unchecked")
-    public static Collector<Integer, Integer, List<Integer>> toShuffledList() {
-        return (Collector<Integer, Integer, List<Integer>>) SHUFFLER;
+    public static <T> Collector<T, T, List<T>> toShuffledList() {
+        return (Collector<T, T, List<T>>) SHUFFLER;
     }
 
 }
