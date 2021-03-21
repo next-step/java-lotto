@@ -3,8 +3,6 @@ package step2.controller;
 import step2.View.InputView;
 import step2.View.ResultView;
 import step2.View.RuntimeView;
-import step2.dto.LottoDTO;
-import step2.dto.MoneyDTO;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.ShopResponseDTO;
 import step2.service.LottoService;
@@ -19,15 +17,13 @@ public class LottoController {
 
     public void buyManualLotto() {
         int rawAmount = inputView.getMoneyInput();
-        MoneyDTO money = lottoService.convertRawAmountToMoney(rawAmount);
-        ShopResponseDTO shopResponse = lottoService.buyManualLotto(money);
+        ShopResponseDTO shopResponse = lottoService.buyManualLotto(rawAmount);
 
         runtimeView.printLottoAmount(shopResponse);
         runtimeView.printLottoNumbers(shopResponse);
 
         String rawNumberString = inputView.getLastWeekWiningLottoNumbers();
-        LottoDTO winningLotto = lottoService.convertRawNumberStringToLotto(rawNumberString);
-        JudgeResponseDTO judgeResponse = lottoService.getLottoResult(shopResponse, winningLotto);
+        JudgeResponseDTO judgeResponse = lottoService.getLottoResult(shopResponse, rawNumberString);
         resultView.printResult(judgeResponse);
     }
 

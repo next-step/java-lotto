@@ -2,6 +2,7 @@ package step2.service;
 
 import step2.domain.Judge;
 import step2.domain.LottoGenerator;
+import step2.domain.MoneyGenerator;
 import step2.domain.Shop;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoDTO;
@@ -14,21 +15,24 @@ public class LottoService {
     private final Judge judge = new Judge();
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
+    private final MoneyGenerator moneyGenerator = new MoneyGenerator();
 
-    public ShopResponseDTO buyManualLotto(MoneyDTO money) {
+    public ShopResponseDTO buyManualLotto(int rawAmount) {
+        MoneyDTO money = convertRawAmountToMoney(rawAmount);
         int capacity = shop.calculateLottoCapacity(money);
         return shop.buyLotto(money, capacity);
     }
 
-    public JudgeResponseDTO getLottoResult(ShopResponseDTO shopResponse, LottoDTO winningLotto) {
+    public JudgeResponseDTO getLottoResult(ShopResponseDTO shopResponse, String rawNumberString) {
+        LottoDTO winningLotto = convertRawNumberStringToLotto(rawNumberString);
         return judge.calculateResult(shopResponse, winningLotto);
     }
 
-    public MoneyDTO convertRawAmountToMoney(int rawAmount) {
-        return new MoneyDTO(rawAmount);
+    private MoneyDTO convertRawAmountToMoney(int rawAmount) {
+        return moneyGenerator.generateMoney(rawAmount);
     }
 
-    public LottoDTO convertRawNumberStringToLotto(String rawNumberString) {
+    private LottoDTO convertRawNumberStringToLotto(String rawNumberString) {
         return lottoGenerator.generateLotto(rawNumberString);
     }
 }

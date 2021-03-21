@@ -11,8 +11,8 @@ public class RuntimeView {
     }
 
     public void printLottoNumbers(ShopResponseDTO shopResponse) {
-        LottoListDTO lottos = shopResponse.getLottoList();
-        for (LottoDTO lotto : lottos.getLottoList()) {
+        LottoListDTO lottoList = shopResponse.getLottoList();
+        for (LottoDTO lotto : lottoList.getLottoList()) {
             System.out.println(lotto.getNumbers().toString());
         }
     }

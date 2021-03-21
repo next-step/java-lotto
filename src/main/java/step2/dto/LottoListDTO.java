@@ -16,6 +16,10 @@ public class LottoListDTO {
     }
 
     public List<LottoDTO> getLottoList() {
-        return lottoList;
+        return this.lottoList;
+    }
+
+    public int getLottoListCount() {
+        return this.lottoList.size();
     }
 }

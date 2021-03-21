@@ -30,7 +30,7 @@ public class LottoNumberGenerator {
     );
 
     @SuppressWarnings("unchecked")
-    public static <T> Collector<T, T, List<T>> toShuffledList() {
+    private static <T> Collector<T, T, List<T>> toShuffledList() {
         return (Collector<T, T, List<T>>) SHUFFLER;
     }
 

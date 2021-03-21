@@ -1,6 +1,7 @@
 package step2.domain;
 
 import step2.dto.LottoDTO;
+import step2.dto.LottoListDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,19 +14,28 @@ public class LottoGenerator {
     private static final int UPPER_BOUND = 45;
     private static final int COUNT = 6;
 
-    public List<LottoDTO> issueLottoList(int amount) {
+    public LottoListDTO generateLottoList(int amount) {
         List<LottoDTO> lottoList = new ArrayList<>();
         for (int count = 0; count < amount; count++) {
             lottoList.add(generateLotto());
         }
-        return lottoList;
+        return new LottoListDTO(lottoList);
     }
 
     public LottoDTO generateLotto() {
-        return new LottoDTO(LottoNumberGenerator.issueNumbers(UPPER_BOUND, COUNT));
+        return issueLotto(LottoNumberGenerator.issueNumbers(UPPER_BOUND, COUNT));
     }
 
-    public LottoDTO gerarateLotto(List<Integer> numbers) {
+    public LottoDTO generateLotto(String values) {
+        List<Integer> numbers = Arrays.stream(values.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .sorted()
+                .collect(Collectors.toList());
+        return issueLotto(numbers);
+    }
+
+    private LottoDTO issueLotto(List<Integer> numbers) {
         if (numbers.size() != COUNT) {
             throw new IllegalArgumentException();
         }
@@ -36,14 +46,6 @@ public class LottoGenerator {
             throw new IllegalArgumentException();
         }
         return new LottoDTO(numbers);
-    }
-
-    public LottoDTO generateLotto(String values) {
-        return new LottoDTO(Arrays.stream(values.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .sorted()
-                .collect(Collectors.toList()));
     }
 
     private boolean areNumbersUnique(List<Integer> numbers) {
