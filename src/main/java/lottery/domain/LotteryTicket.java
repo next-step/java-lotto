@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import lottery.dto.LotteryNumbersDto;
 import lottery.dto.RoundResult;
 
 import java.util.Collections;
@@ -10,19 +11,23 @@ import static lottery.domain.LotteryTicketIssuer.LOTTERY_PRICE;
 
 public class LotteryTicket {
 
-    private final List<Lottery> lotteries;
+    private final List<LotteryNumbers> lotteries;
 
-    public LotteryTicket(List<Lottery> lotteries) {
+    public LotteryTicket(List<LotteryNumbers> lotteries) {
         this.lotteries = lotteries;
     }
 
-    public List<Lottery> getLotteries() {
-        return Collections.unmodifiableList(lotteries);
+    public List<LotteryNumbersDto> exportLotteryNumbers() {
+        List<LotteryNumbersDto> exportedNumbers = lotteries.stream()
+                                                           .map(LotteryNumbers::export)
+                                                           .collect(Collectors.toList());
+
+        return Collections.unmodifiableList(exportedNumbers);
     }
 
-    public RoundResult getResult(List<Integer> winningNumbers) {
+    public RoundResult getResult(WinningLottery winningLottery) {
         List<Prize> prizes = lotteries.stream()
-                                      .map(lottery -> lottery.getPrize(winningNumbers))
+                                      .map(winningLottery::getPrize)
                                       .collect(Collectors.toList());
 
         double rateOfReturn = getRateOfReturn(prizes);
