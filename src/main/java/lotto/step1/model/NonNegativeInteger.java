@@ -14,7 +14,7 @@ public class NonNegativeInteger {
 
     public NonNegativeInteger(int nonNegativeInteger){
         if(nonNegativeInteger < 0){
-            throw new IllegalArgumentException("숫자는 0 이상의 정수이어야 합니다.");
+            throw new IllegalArgumentException(Constants.checkNonNegative);
         }
         value = nonNegativeInteger;
     }

@@ -8,7 +8,7 @@ public class Expression {
     private final String expression;
     private static Pattern customDelimiter;
     static {
-        customDelimiter = Pattern.compile("//(.)\n(.*)");
+        customDelimiter = Pattern.compile(Constants.customDelimiterRegex);
     }
 
     public Expression(String input){
@@ -19,12 +19,12 @@ public class Expression {
         Matcher m = customDelimiter.matcher(expression);
         String[] operands;
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            operands = m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(Constants.customDelimiterGroupNumber);
+            operands = m.group(Constants.stringGroupNumber).split(customDelimiter);
             checkNumericForArray(operands);
             return operands;
         }
-        operands = expression.split(",|:");
+        operands = expression.split(Constants.basicDelimiter);
         checkNumericForArray(operands);
         return operands;
     }
@@ -35,9 +35,9 @@ public class Expression {
     }
 
     private void checkNumericForString(String operand){
-        String numberRegExp = "^[-]?[0-9]+$";
+        String numberRegExp = Constants.numericRegex;
         if(!operand.matches(numberRegExp)){
-            throw new IllegalArgumentException("피연산자는 숫자여야 합니다.");
+            throw new IllegalArgumentException(Constants.checkNumeric);
         }
     }
 
