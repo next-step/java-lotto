@@ -1,5 +1,7 @@
 package study.step2.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     MISS(0, 0),
     FOURTH(3, 5000),
@@ -15,8 +17,18 @@ public enum LottoRank {
         this.amount = amount;
     }
 
-    public static LottoRank of(int hit) {
-        return null;
+    public int getAmount() {
+        return this.amount;
     }
 
+    public int getHit() {
+        return this.hit;
+    }
+
+    public static LottoRank of(int hit) {
+        return Arrays.stream(LottoRank.values())
+            .filter(resultType -> resultType.hit == hit)
+            .findFirst()
+            .orElse(MISS);
+    }
 }
