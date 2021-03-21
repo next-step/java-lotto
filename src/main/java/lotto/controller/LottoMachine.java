@@ -1,17 +1,28 @@
 package lotto.controller;
 
-import lotto.domain.Money;
+import lotto.domain.*;
+import lotto.util.LottosDto;
 
 public class LottoMachine {
 
-    private Money money;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
-    public int getResult() {
-        return -1;
+    private static Lottos lottos;
+
+    public void purchaseLotto(Money money) {
+        int lottoCount = money.getLottoCount();
+        lottos = LottoGenerator.getLotto(lottoCount);
     }
 
-    public int getLottoCount(Money money) {
-        return -1;
+    public int getPurchaseLottoCount() {
+        return lottos.lottoCount();
     }
 
+    public LottosDto getLottos() {
+        return new LottosDto(lottos);
+    }
+
+    public ResultGroup getResult(Lotto winnigLotto) {
+        return lottos.getResult(winnigLotto);
+    }
 }
