@@ -44,6 +44,7 @@ public class WinningNumbers {
                 correct++;
             }
         }
+        System.out.println();
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
 

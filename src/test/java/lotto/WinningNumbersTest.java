@@ -23,7 +23,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
         Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
         System.out.println(winNumbers.toString());
-        assertThat(winNumbers.get(3)).isEqualTo(3);
+        assertThat(winNumbers.get(3)).isEqualTo(1);
     }
 
     LottoNumbers lottoNumbers1;
