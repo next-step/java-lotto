@@ -5,7 +5,7 @@ public class StringAddCalculator {
 		if (checkNullOrEmpty(input)) {
 			return 0;
 		}
-		return sum(input.split(","));
+		return sum(input.split("[,:]"));
 	}
 
 	private static int sum(String[] numbers) {
