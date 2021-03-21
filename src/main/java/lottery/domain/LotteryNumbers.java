@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.dto.LotteryNumbersDto;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +29,13 @@ public class LotteryNumbers {
         return this.numbers.stream()
                            .filter(lotteryNumbers.numbers::contains)
                            .count();
+    }
+
+    public LotteryNumbersDto export() {
+        List<Integer> rawNumbers = numbers.stream()
+                                          .map(LotteryNumber::export)
+                                          .collect(Collectors.toList());
+        return new LotteryNumbersDto(rawNumbers);
     }
 
     private void validate(List<LotteryNumber> numbers) {

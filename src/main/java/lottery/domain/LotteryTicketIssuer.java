@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lottery.domain.Lottery.*;
+import static lottery.domain.LotteryNumber.LOTTERY_NUMBER_MAX;
+import static lottery.domain.LotteryNumber.LOTTERY_NUMBER_MIN;
+import static lottery.domain.LotteryNumbers.LOTTERY_SIZE;
 
 public class LotteryTicketIssuer {
 
@@ -24,7 +26,7 @@ public class LotteryTicketIssuer {
                      .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
     }
 
-    private static Lottery generateLottery() {
+    private static LotteryNumbers generateLottery() {
         List<Integer> numbers = new ArrayList<>(NUMBER_LIST);
 
         Collections.shuffle(numbers);
@@ -34,7 +36,7 @@ public class LotteryTicketIssuer {
                                           .sorted()
                                           .collect(Collectors.toList());
 
-        return new Lottery(pickedList);
+        return new LotteryNumbers(pickedList);
     }
 
 }

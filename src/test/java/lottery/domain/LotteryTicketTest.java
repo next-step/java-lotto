@@ -14,29 +14,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LotteryTicketTest {
 
     private LotteryTicket lotteryTicket;
-    private List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-    private int bonusNumber = 7;
+    private WinningLottery winningLottery;
 
     @BeforeEach
     void init() {
-        Lottery losingLottery = new Lottery(Arrays.asList(1, 2, 7, 8, 9, 10));
-        Lottery fifthPlaceLottery = new Lottery(Arrays.asList(1, 2, 3, 7, 8, 9));
-        Lottery thirdPlaceLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 9));
-        Lottery secondPlaceLottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LotteryNumbers losingLottery = new LotteryNumbers(Arrays.asList(1, 2, 7, 8, 9, 10));
+        LotteryNumbers fifthPlaceLottery = new LotteryNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
+        LotteryNumbers thirdPlaceLottery = new LotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 9));
+        LotteryNumbers secondPlaceLottery = new LotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
 
-        List<Lottery> lotteries = Arrays.asList(losingLottery, losingLottery,
+        List<LotteryNumbers> lotteries = Arrays.asList(losingLottery, losingLottery,
             losingLottery, fifthPlaceLottery, fifthPlaceLottery, thirdPlaceLottery, secondPlaceLottery);
 
         lotteryTicket = new LotteryTicket(lotteries);
 
-        winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        bonusNumber = 7;
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LotteryNumber bonusNumber = new LotteryNumber(7);
+
+        winningLottery = new WinningLottery(new LotteryNumbers(winningNumbers), bonusNumber);
     }
 
     @Test
     @DisplayName("당첨 번호와 대조하여 결과를 생성한다.")
     void getResultFromWinningNumbers() {
-        RoundResult roundResult = lotteryTicket.getResult(winningNumbers, bonusNumber);
+        RoundResult roundResult = lotteryTicket.getResult(winningLottery);
 
         assertThat(roundResult.getPrizes())
             .containsExactly(LOSING_TICKET, LOSING_TICKET, LOSING_TICKET, FIFTH, FIFTH, THIRD, SECOND);
@@ -46,9 +47,9 @@ class LotteryTicketTest {
     @DisplayName("생성된 결과에서 수익률을 가져온다.")
     void getRateOfReturn() {
         long total = FIFTH.getWinnings() * 2 + THIRD.getWinnings() + SECOND.getWinnings();
-        double expectedRateOfReturn = total / (1000.0 * lotteryTicket.getLotteries().size());
+        double expectedRateOfReturn = total / (1000.0 * lotteryTicket.exportLotteryNumbers().size());
 
-        RoundResult roundResult = lotteryTicket.getResult(winningNumbers, bonusNumber);
+        RoundResult roundResult = lotteryTicket.getResult(winningLottery);
 
         assertThat(roundResult.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
     }

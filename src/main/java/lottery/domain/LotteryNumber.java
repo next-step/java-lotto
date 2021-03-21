@@ -14,6 +14,10 @@ public class LotteryNumber {
         this.number = number;
     }
 
+    public int export() {
+        return number;
+    }
+
     private void validate(int number) {
         if(!checkRange(number)) {
             throw new LotteryNumberOutOfRangeException();

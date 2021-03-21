@@ -1,12 +1,9 @@
 package lottery.controller;
 
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryTicketIssuer;
+import lottery.domain.*;
 import lottery.dto.RoundResult;
 import lottery.view.InputView;
 import lottery.view.ResultView;
-
-import java.util.List;
 
 public class LotteryController {
 
@@ -16,12 +13,13 @@ public class LotteryController {
     public void run() {
         int money = inputView.receivePurchaseAmount();
         LotteryTicket lotteryTicket = LotteryTicketIssuer.issue(money);
-        resultView.printLotteryTicket(lotteryTicket.getLotteries());
+        resultView.printLotteryNumbers(lotteryTicket.exportLotteryNumbers());
 
-        List<Integer> winningNumbers = inputView.receiveWinningNumbers();
-        int bonusNumber = inputView.receiveBonusNumber();
-        
-        RoundResult roundResult = lotteryTicket.getResult(winningNumbers, bonusNumber);
+        LotteryNumbers winningNumbers = new LotteryNumbers(inputView.receiveWinningNumbers());
+        LotteryNumber bonusNumber = new LotteryNumber(inputView.receiveBonusNumber());
+        WinningLottery winningLottery = new WinningLottery(winningNumbers, bonusNumber);
+
+        RoundResult roundResult = lotteryTicket.getResult(winningLottery);
         resultView.printResult(roundResult);
     }
 
