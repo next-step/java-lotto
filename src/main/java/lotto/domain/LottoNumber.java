@@ -1,15 +1,17 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     public static final String LOTTO_NUMBER_SIZE_ERROR = "당첨 번호는 1 부터 45 이내 입력해주세요.";
 
-    private final int lottoNumber;
+    private final int number;
 
-    public LottoNumber(int lottoNumber) {
-        isLottoNumberRange(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(int number) {
+        isLottoNumberRange(number);
+        this.number = number;
     }
 
     private void isLottoNumberRange(int result) {
@@ -23,16 +25,25 @@ public class LottoNumber {
                 || (MAX_NUMBER < number);
     }
 
-    public int lottoNumber() {
-        return lottoNumber;
-    }
-
     public boolean checkNumber(LottoNumber number) {
-        return lottoNumber == number.lottoNumber();
+        return this.number == number.number;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumber);
+        return String.valueOf(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
