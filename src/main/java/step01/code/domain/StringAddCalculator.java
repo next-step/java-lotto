@@ -17,7 +17,7 @@ public class StringAddCalculator {
   }
 
   public static List<Number> split(String str) {
-    return Arrays.asList(str.split(","))
+    return Arrays.asList(str.split(",|:"))
       .stream()
       .map((num) -> new Number(num))
       .collect(Collectors.toList()); 
