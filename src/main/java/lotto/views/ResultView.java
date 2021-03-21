@@ -5,23 +5,22 @@ import lotto.domain.LottoResult;
 import lotto.domain.WinningTable;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
     private ResultView() { }
 
     public static void showWinningResult(LottoResult lottoResult) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n당첨 통계\n")
-                .append("---------\n");
-        lottoResult.resultMap().forEach((matchNumber, matchCount) -> {
-            stringBuilder.append(matchNumber)
-                    .append("개 일치 (")
-                    .append(WinningTable.of(matchNumber).winningAmount)
-                    .append(")- ")
-                    .append(matchCount)
-                    .append("개\n");
-        });
+        StringBuilder stringBuilder = new StringBuilder()
+                .append("\n당첨 통계\n---------\n");
+
+        for (Map.Entry<String, Integer> entry: lottoResult.resultMap().entrySet()) {
+            stringBuilder.append(WinningTable.valueOf(entry.getKey()).description)
+            .append("- ")
+            .append(entry.getValue())
+            .append("개\n");
+        }
         stringBuilder.append("총 수익률은 ")
                 .append(String.format("%.2f", lottoResult.yield()))
                 .append(" 입니다.");
