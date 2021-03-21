@@ -15,13 +15,37 @@ public class LottoNumbers {
     }
 
     public boolean isContain(int bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> bonusNumber == lottoNumber.getLottoNumber());
+        boolean trueOrFalse = false;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            trueOrFalse = isMatching(lottoNumber, bonusNumber, trueOrFalse);
+        }
+
+        return trueOrFalse;
+    }
+
+    public boolean isMatching(LottoNumber lottoNumber, int bonusNumber, boolean trueOrFalse) {
+        if (bonusNumber == lottoNumber.getLottoNumber()) {
+            trueOrFalse = true;
+        }
+
+        return trueOrFalse;
     }
 
     public int countMatchNumber(List<Integer> winningNumber) {
-        return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> winningNumber.contains(lottoNumber.getLottoNumber()))
-                .count();
+        int count = 0;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            count += matchNumber(winningNumber, lottoNumber);
+        }
+        return count;
+    }
+
+    public int matchNumber(List<Integer> winningNumber, LottoNumber lottoNumber) {
+        if (winningNumber.contains(lottoNumber.getLottoNumber())) {
+            return 1;
+        }
+
+        return 0;
     }
 }
