@@ -25,6 +25,6 @@ class NumbersTest {
         numberList.add(number3);
         Numbers numbers = Numbers.of(numberList);
 
-        assertThat(numbers.getSum()).isEqualTo(expected);
+        assertThat(numbers.getSum()).isEqualTo(Number.of(expected));
     }
 }

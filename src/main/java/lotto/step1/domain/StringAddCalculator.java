@@ -10,9 +10,9 @@ public class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static int splitAndSum(String input) {
+    public static Number splitAndSum(String input) {
         if (validateInputNullOrEmpty(input)) {
-            return 0;
+            return Number.of(0);
         }
         String[] tokens = StringSpliter.splitToStringArray(input);
         Numbers numbers = getNumbers(tokens);

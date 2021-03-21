@@ -15,8 +15,8 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideNullOREmpty")
     public void splitAndSum_null_또는_빈문자(String input, int expected) {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(expected);
+        Number result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(Number.of(expected));
     }
 
     private static Stream<Arguments> provideNullOREmpty() {
@@ -30,8 +30,8 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideCorrectString")
     public void splitAndSum(String input, int expected) {
-        int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(expected);
+        Number result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(Number.of(expected));
     }
 
     private static Stream<Arguments> provideCorrectString() {
