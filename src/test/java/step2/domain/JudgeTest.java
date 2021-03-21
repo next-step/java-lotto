@@ -4,10 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.dto.JudgeResponse;
-import step2.dto.ShopResponse;
+import step2.dto.JudgeResponseDTO;
+import step2.dto.LottoDTO;
+import step2.dto.LottoListDTO;
+import step2.dto.ShopResponseDTO;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +33,11 @@ class JudgeTest {
     @DisplayName("당첨여부를 판단할 수 있다")
     void judgeCalculatesResult(String winningString, String boughtString, String expected, double expectedProfitIndex) {
         List<Integer> winningNumbers = parseIntegerListFromString(winningString);
-        Lotto winningLotto = new Lotto(winningNumbers);
-        ShopResponse shopResponse = generateShopResponse(boughtString);
+        LottoDTO winningLotto = new LottoDTO(winningNumbers);
+        ShopResponseDTO shopResponse = generateShopResponse(boughtString);
         List<Integer> expectedResult = parseIntegerListFromString(expected);
 
-        JudgeResponse judgeResponse = judge.calculateResult(shopResponse, winningLotto);
+        JudgeResponseDTO judgeResponse = judge.calculateResult(shopResponse, winningLotto);
         assertThat(judgeResponse.getThreeMatch()).isEqualTo(expectedResult.get(0));
         assertThat(judgeResponse.getFourMatch()).isEqualTo(expectedResult.get(1));
         assertThat(judgeResponse.getFiveMatch()).isEqualTo(expectedResult.get(2));
@@ -44,12 +45,12 @@ class JudgeTest {
         assertThat(judgeResponse.getProfitIndex()).isEqualTo(expectedProfitIndex);
     }
 
-    private ShopResponse generateShopResponse(String boughtString) {
+    private ShopResponseDTO generateShopResponse(String boughtString) {
         List<Integer> myNumbers = parseIntegerListFromString(boughtString);
-        Lotto myLotto = new Lotto(myNumbers);
-        Lottos myLottos = new Lottos(myLotto);
+        LottoDTO myLotto = new LottoDTO(myNumbers);
+        LottoListDTO myLottos = new LottoListDTO(myLotto);
 
-        return new ShopResponse(1000, 1, myLottos, 0);
+        return new ShopResponseDTO(1000, 1, myLottos, 0);
     }
 
     private List<Integer> parseIntegerListFromString(String input) {

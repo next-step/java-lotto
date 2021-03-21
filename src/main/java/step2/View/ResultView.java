@@ -1,11 +1,11 @@
 package step2.View;
 
 import step2.constants.Price;
-import step2.dto.JudgeResponse;
+import step2.dto.JudgeResponseDTO;
 
 public class ResultView {
 
-    public void printResult(JudgeResponse judgeResponse) {
+    public void printResult(JudgeResponseDTO judgeResponse) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(generateResultString(3, Price.THREE_MATCH_PRICE, judgeResponse.getThreeMatch()));

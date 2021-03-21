@@ -1,21 +1,16 @@
 package step2.dto;
 
-import step2.domain.Lotto;
-import step2.domain.Lottos;
-
-import java.util.List;
-
-public class ShopResponse {
+public class ShopResponseDTO {
 
     private final int originMoney;
     private final int lottoCount;
-    private final Lottos lottos;
+    private final LottoListDTO lottoList;
     private final int change;
 
-    public ShopResponse(int originMoney, int lottoCount, Lottos lottos, int change) {
+    public ShopResponseDTO(int originMoney, int lottoCount, LottoListDTO lottos, int change) {
         this.originMoney = originMoney;
         this.lottoCount = lottoCount;
-        this.lottos = lottos;
+        this.lottoList = lottos;
         this.change = change;
     }
 
@@ -31,7 +26,7 @@ public class ShopResponse {
         return lottoCount;
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public LottoListDTO getLottoList() {
+        return lottoList;
     }
 }

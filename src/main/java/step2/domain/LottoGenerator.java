@@ -1,18 +1,31 @@
 package step2.domain;
 
+import step2.dto.LottoDTO;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class LottoGenerator {
 
     private static final int UPPER_BOUND = 45;
     private static final int COUNT = 6;
 
-    private List<Integer> numbers;
+    public List<LottoDTO> issueLottoList(int amount) {
+        List<LottoDTO> lottoList = new ArrayList<>();
+        for (int count = 0; count < amount; count++) {
+            lottoList.add(generateLotto());
+        }
+        return lottoList;
+    }
 
-    public Lotto(List<Integer> numbers) {
+    public LottoDTO generateLotto() {
+        return new LottoDTO(LottoNumberGenerator.issueNumbers(UPPER_BOUND, COUNT));
+    }
+
+    public LottoDTO gerarateLotto(List<Integer> numbers) {
         if (numbers.size() != COUNT) {
             throw new IllegalArgumentException();
         }
@@ -22,7 +35,15 @@ public class Lotto {
         if (!areNumbersUnique(numbers)) {
             throw new IllegalArgumentException();
         }
-        this.numbers = numbers;
+        return new LottoDTO(numbers);
+    }
+
+    public LottoDTO generateLotto(String values) {
+        return new LottoDTO(Arrays.stream(values.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .sorted()
+                .collect(Collectors.toList()));
     }
 
     private boolean areNumbersUnique(List<Integer> numbers) {
@@ -37,19 +58,4 @@ public class Lotto {
         return validFlag;
     }
 
-    public Lotto() {
-        this(LottoNumberGenerator.issueNumbers(UPPER_BOUND, COUNT));
-    }
-
-    public Lotto(String values) {
-        this(Arrays.stream(values.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .sorted()
-                .collect(Collectors.toList()));
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
 }

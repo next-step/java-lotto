@@ -1,21 +1,21 @@
-package step2.domain;
+package step2.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
-    List<Lotto> lottoList;
+public class LottoListDTO {
+    List<LottoDTO> lottoList;
 
-    public Lottos(List<Lotto> lottoList) {
+    public LottoListDTO(List<LottoDTO> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public Lottos(Lotto lotto) {
+    public LottoListDTO(LottoDTO lotto) {
         this.lottoList = new ArrayList<>();
         this.lottoList.add(lotto);
     }
 
-    public List<Lotto> getLottoList() {
+    public List<LottoDTO> getLottoList() {
         return lottoList;
     }
 }

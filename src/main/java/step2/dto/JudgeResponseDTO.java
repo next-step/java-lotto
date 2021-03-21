@@ -1,13 +1,13 @@
 package step2.dto;
 
-public class JudgeResponse {
+public class JudgeResponseDTO {
     private final int threeMatch;
     private final int fourMatch;
     private final int fiveMatch;
     private final int sixMatch;
     private final double profitIndex;
 
-    public JudgeResponse(int threeMatch, int fourMatch, int fiveMatch, int sixMatch, double profitIndex) {
+    public JudgeResponseDTO(int threeMatch, int fourMatch, int fiveMatch, int sixMatch, double profitIndex) {
         this.threeMatch = threeMatch;
         this.fourMatch = fourMatch;
         this.fiveMatch = fiveMatch;
