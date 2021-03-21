@@ -5,21 +5,20 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 	public static int splitAndSum(String input) {
-		if (checkNullOrEmpty(input)) {
+		if (nullableOrEmpty(input)) {
 			return 0;
 		}
-		return sum(splitNumbers(input));
+		return sum(splitedNumbers(input));
 	}
 
-	private static String[] splitNumbers(String text) {
+	private static String[] splitedNumbers(String text) {
 		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
 		String customDelimiter = "";
 		if (m.find()) {
 			customDelimiter = m.group(1);
 			text = m.group(2);
 		}
-		String[] numbers = text.split("[,:" + customDelimiter + "]");
-		return numbers;
+		return text.split("[,:" + customDelimiter + "]");
 	}
 
 	private static int sum(String[] numbers) {
@@ -30,7 +29,7 @@ public class StringAddCalculator {
 		return criterion;
 	}
 
-	private static boolean checkNullOrEmpty(String input) {
+	private static boolean nullableOrEmpty(String input) {
 		return input == null || input.isEmpty();
 	}
 }
