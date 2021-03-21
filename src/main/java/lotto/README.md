@@ -44,8 +44,11 @@
 2) 로또머신으로 티켓생성 (LottoMachine)
    - 구매 개수(LottoQuantity)
    - 일급 컬렉션
-     - 로또 반환 (LottoTicket)
-3) 당첨번호 확인(입력) (LottoNumber)
+     - 로또 티켓들 생성 (LottoTickets)
+        - 로또 티켓 (LottoTicket)
+3) 당첨번호 확인(입력) (LottoWinners)
+    - 당첨정보 생성(LottoNumbers)
+    - 보너스볼 생성(LottoNumber)
 4) 로또 당첨 정보(LottoRank)
 5) 로또 수익률 계산 (LottoYield)
 6) 결과 출력 (ResultView)
