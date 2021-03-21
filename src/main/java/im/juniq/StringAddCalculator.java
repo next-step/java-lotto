@@ -18,7 +18,9 @@ public class StringAddCalculator {
 			customDelimiter = m.group(1);
 			text = m.group(2);
 		}
-		return text.split("[,:" + customDelimiter + "]");
+		String[] numbers = text.split("[,:" + customDelimiter + "]");
+		checkMinus(numbers);
+		return numbers;
 	}
 
 	private static int sum(String[] numbers) {
@@ -31,5 +33,14 @@ public class StringAddCalculator {
 
 	private static boolean nullableOrEmpty(String input) {
 		return input == null || input.isEmpty();
+	}
+
+	private static void checkMinus(String[] numbers) {
+		for (String number :
+			numbers) {
+			if (Integer.parseInt(number) < 0) {
+				throw new RuntimeException("숫자는 양수만 입력 가능합니다.");
+			}
+		}
 	}
 }
