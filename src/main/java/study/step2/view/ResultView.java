@@ -27,4 +27,8 @@ public class ResultView {
             System.out.println(win.getHit() + "개 일치 (" + win.getAmount() + "원) - " + lottoWin.getWin().get(win) + "개");
         }
     }
+
+    public static void printProfit(int payment, LottoWin lottoWin) {
+        System.out.println("총 수익률은 " +  String.format("%.2f", ((double) lottoWin.sum() / payment)) + "입니다.");
+    }
 }

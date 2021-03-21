@@ -23,5 +23,6 @@ public class LottoController {
 
         LottoWin lottoWin = lottoMachine.result();
         ResultView.printResult(lottoWin);
+        ResultView.printProfit(purchaseAmount, lottoWin);
     }
 }
