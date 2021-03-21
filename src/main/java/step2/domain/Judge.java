@@ -2,7 +2,7 @@ package step2.domain;
 
 import step2.dto.JudgeResponse;
 import step2.dto.ShopResponse;
-import step2.utils.Price;
+import step2.constants.Price;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +43,6 @@ public class Judge {
     }
 
     private int oneIfNumberIsInHashSet(int number, HashSet<Integer> numbers) {
-        if (numbers.contains(number)) return 1;
-        return 0;
+        return numbers.contains(number)?1:0;
     }
 }
