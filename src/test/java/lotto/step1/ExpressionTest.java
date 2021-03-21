@@ -36,5 +36,5 @@ public class ExpressionTest {
                 Arguments.of("//f\n13f63f32f21",(Object) new String[]{"13", "63", "32", "21"})
         );
     }
-    
+
 }
