@@ -19,6 +19,8 @@ public class LottoMachineTest {
     @DisplayName("금액에 맞는 로또 갯수를 반환한다.")
     @Test
     void getLottoCountTest() {
-        assertThat(new LottoMachine().getLottoCount(money)).isEqualTo(14);
+        LottoMachine lottoMachine = new LottoMachine();
+        lottoMachine.purchaseLotto(money);
+        assertThat(lottoMachine.getPurchaseLottoCount()).isEqualTo(14);
     }
 }
