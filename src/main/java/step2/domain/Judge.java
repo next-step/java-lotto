@@ -1,10 +1,10 @@
 package step2.domain;
 
+import step2.constants.Price;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoDTO;
 import step2.dto.LottoListDTO;
 import step2.dto.ShopResponseDTO;
-import step2.constants.Price;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +45,6 @@ public class Judge {
     }
 
     private int oneIfNumberIsInHashSet(int number, HashSet<Integer> numbers) {
-        return numbers.contains(number)?1:0;
+        return numbers.contains(number) ? 1 : 0;
     }
 }
