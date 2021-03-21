@@ -1,7 +1,5 @@
 package step01.code.domain;
 
-import org.junit.platform.commons.util.StringUtils;
-
 public class Number {
   
   private final int number;
@@ -19,9 +17,6 @@ public class Number {
   }
 
   public int parseInt(String str) {
-    if(StringUtils.isBlank(str)) {
-      return 0;
-    }
     return Integer.parseInt(str);
   }
 
