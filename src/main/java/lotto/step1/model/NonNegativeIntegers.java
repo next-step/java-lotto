@@ -5,7 +5,7 @@ import java.util.List;
 
 public class NonNegativeIntegers {
 
-    private List<NonNegativeInteger> nonNegativeIntegers;
+    private final List<NonNegativeInteger> nonNegativeIntegers;
 
     public NonNegativeIntegers(String[] integers){
         nonNegativeIntegers = new ArrayList<>();
