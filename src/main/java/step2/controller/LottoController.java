@@ -3,8 +3,7 @@ package step2.controller;
 import step2.View.InputView;
 import step2.View.ResultView;
 import step2.View.RuntimeView;
-import step2.dto.JudgeDTO;
-import step2.dto.JudgeDTO.JudgeResponseDTO;
+import step2.dto.JudgeResponseDTO;
 import step2.dto.ShopResponseDTO;
 import step2.service.LottoService;
 

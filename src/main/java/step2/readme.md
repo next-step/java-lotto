@@ -371,7 +371,17 @@
 
 - feat(step3): add winning lotto logic
 
-    - 보너스 숫자를 받는 로직을 컨트롤러에 추가
-    - 서비스에서 기존에 이기는 로또를 받아서 로또 DTO를 만들어주는 메서드에 보너스 숫자를 파라미터로 추가  
-    - 6개의 숫자와 보너스 숫자를 받아서 이기는 로또 객체를 생성
-    - 사용자가 구입하는 로또를 그냥 로또로 재정의
+  - 보너스 숫자를 받는 로직을 컨트롤러에 추가
+  - 서비스에서 기존에 이기는 로또를 받아서 로또 DTO를 만들어주는 메서드에 보너스 숫자를 파라미터로 추가
+  - 6개의 숫자와 보너스 숫자를 받아서 이기는 로또 객체를 생성
+  - 사용자가 구입하는 로또를 그냥 로또로 재정의
+
+- feat(step3): add judge logic to deal with bonus number
+
+  - judge가 로또 결과를 판단하는 로직 정리
+
+- feat(step3): add dto to deal with bonus number
+
+  - judge가 로또 결과를 판단하는 메소드 분리
+  - judge가 주고받는 dto재정의
+  - resultView에서 출력하는 형식 변경
