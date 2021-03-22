@@ -50,7 +50,7 @@ public class ShopTest {
     @DisplayName("원금과 로또를 모두 환불한다고 가정했을 때의 돈이 같지 않으면 예외를 던진다")
     void shopResponseThrowsExceptionOnInvalidInput(int moneyAmount, int capacity, int change, boolean expected) {
         ShopResponseDTO shopResponse = new ShopResponseDTO(moneyAmount, capacity, null, change);
-        assertThat(shop.isShopResponseValid(shopResponse)).isEqualTo(expected);
+        assertThat(shop.valid(shopResponse)).isEqualTo(expected);
     }
 
 }

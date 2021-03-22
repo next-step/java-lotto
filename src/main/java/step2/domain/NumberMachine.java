@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
+public class NumberMachine {
 
-    public static List<Integer> issueNumbers(int upperbound, int count) {
+    public static List<Integer> numberBuilder(int upperbound, int count) {
         if (count > upperbound) throw new IllegalArgumentException();
 
         return IntStream.rangeClosed(1, upperbound)
                 .boxed()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumberGenerator::shuffleList))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), NumberMachine::shuffleList))
                 .subList(0, count)
                 .stream()
                 .sorted()

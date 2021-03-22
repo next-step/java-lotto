@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LottoNumberGeneratorTest {
+class NumberMachineTest {
 
     @ParameterizedTest
     @CsvSource(value = {
@@ -18,7 +18,7 @@ class LottoNumberGeneratorTest {
             "14:14"}, delimiter = ':')
     @DisplayName("랜덤 번호들을 정해진 범위내에서 뽑을 수 있다")
     void godChoosesExpectedNumbers(int upperbound, int count) {
-        List<Integer> issuedNumbers = LottoNumberGenerator.issueNumbers(upperbound, count);
+        List<Integer> issuedNumbers = NumberMachine.numberBuilder(upperbound, count);
         issuedNumbers.forEach((value) -> assertThat(value <= count).isTrue());
     }
 
@@ -29,7 +29,7 @@ class LottoNumberGeneratorTest {
             "45:14:14"}, delimiter = ':')
     @DisplayName("랜덤 번호들을 정해진 숫자만큼 뽑을 수 있다")
     void godChoosesExpectedSizeOfNumbers(int upperbound, int count, int expected) {
-        List<Integer> issuedNumbers = LottoNumberGenerator.issueNumbers(upperbound, count);
+        List<Integer> issuedNumbers = NumberMachine.numberBuilder(upperbound, count);
         assertThat(issuedNumbers.size()).isEqualTo((expected));
     }
 
@@ -41,7 +41,7 @@ class LottoNumberGeneratorTest {
     @DisplayName("뽑아야 하는 번호의 수가 뽑을 수 있는 번호의 수보다 크면 IllegalArgumentException을 던진다")
     void godThrowsExceptionOnInvalidNumberCounts(int upperbound, int count) {
         assertThrows(IllegalArgumentException.class,
-                () -> LottoNumberGenerator.issueNumbers(upperbound, count));
+                () -> NumberMachine.numberBuilder(upperbound, count));
     }
 
 }

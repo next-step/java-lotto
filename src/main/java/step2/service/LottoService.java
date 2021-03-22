@@ -1,8 +1,8 @@
 package step2.service;
 
 import step2.domain.Judge;
-import step2.domain.LottoGenerator;
-import step2.domain.MoneyGenerator;
+import step2.domain.LottoMachine;
+import step2.domain.MoneyMachine;
 import step2.domain.Shop;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoDTO.WinningLottoDTO;
@@ -14,8 +14,8 @@ public class LottoService {
     private final Shop shop = new Shop();
     private final Judge judge = new Judge();
 
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private final MoneyGenerator moneyGenerator = new MoneyGenerator();
+    private final LottoMachine lottoGenerator = new LottoMachine();
+    private final MoneyMachine moneyGenerator = new MoneyMachine();
 
     public ShopResponseDTO buyManualLotto(int rawAmount) {
         MoneyDTO money = convertRawAmountToMoney(rawAmount);
@@ -33,6 +33,6 @@ public class LottoService {
     }
 
     private WinningLottoDTO convertRawNumberStringToLotto(String rawNumberString, int rawBonusNumber) {
-        return lottoGenerator.generateLotto(rawNumberString, rawBonusNumber);
+        return lottoGenerator.lottoGenerator(rawNumberString, rawBonusNumber);
     }
 }

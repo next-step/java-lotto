@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MoneyGeneratorTest {
+class MoneyMachineTest {
 
-    private MoneyGenerator moneyGenerator;
+    private MoneyMachine moneyGenerator;
 
     @BeforeEach
     void setUp() {
-        this.moneyGenerator = new MoneyGenerator();
+        this.moneyGenerator = new MoneyMachine();
     }
 
     @ParameterizedTest

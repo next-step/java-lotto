@@ -7,7 +7,7 @@ import step2.dto.ShopResponseDTO;
 
 public class Shop {
 
-    private final LottoGenerator lottoMachine = new LottoGenerator();
+    private final LottoMachine lottoMachine = new LottoMachine();
 
     public int calculateLottoCapacity(MoneyDTO money) {
         return money.getAmount() / Price.LOTTO.getPrice();
@@ -20,13 +20,13 @@ public class Shop {
         int change = money.getAmount() - capacity * Price.LOTTO.getPrice();
         LottoListDTO lottoList = lottoMachine.generateLottoList(capacity);
         ShopResponseDTO shopResponse = new ShopResponseDTO(money.getAmount(), capacity, lottoList, change);
-        if (!isShopResponseValid(shopResponse)) {
+        if (!valid(shopResponse)) {
             throw new IllegalArgumentException();
         }
         return shopResponse;
     }
 
-    public boolean isShopResponseValid(ShopResponseDTO shopResponse) {
+    public boolean valid(ShopResponseDTO shopResponse) {
         return shopResponse.getLottoCount() * Price.LOTTO.getPrice() + shopResponse.getChange()
                 == shopResponse.getOriginMoney();
     }

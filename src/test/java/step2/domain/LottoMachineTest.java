@@ -4,19 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import step2.dto.LottoListDTO;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class LottoGeneratorTest {
+class LottoMachineTest {
 
-    private LottoGenerator lottoGenerator;
+    private LottoMachine lottoGenerator;
 
     @BeforeEach
     void setUp() {
-        this.lottoGenerator = new LottoGenerator();
+        this.lottoGenerator = new LottoMachine();
     }
 
 
@@ -41,6 +40,6 @@ class LottoGeneratorTest {
             "1,2,3,4,5,6:6"}, delimiter = ':')
     @DisplayName("가짜 로또를 구별할 수 있다")
     void lottoCanDetermineFakeLotto(String input, int bonusnumber) {
-        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.generateLotto(input, bonusnumber));
+        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.lottoGenerator(input, bonusnumber));
     }
 }

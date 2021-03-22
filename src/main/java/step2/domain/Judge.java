@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 
 public class Judge {
 
-    private static final int MATCH_CASE = 7;
-
     public JudgeResponseDTO calculateResult(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
         List<MatchDTO> matchList = getMatchList(shopResponse, winningLotto);
         HashMap<Price, Integer> priceCountMap = convertToPriceCountMap(matchList);
@@ -60,7 +58,7 @@ public class Judge {
         return lottoList.getLottoList()
                 .stream()
                 .map(lotto -> new MatchDTO(calculateMatchCount(lotto.getNumbers(), winningNumbers),
-                        isBonusNumberMatch(lotto.getNumbers(), bonusNumber)))
+                        match(lotto.getNumbers(), bonusNumber)))
                 .collect(Collectors.toList());
     }
 
@@ -79,18 +77,18 @@ public class Judge {
         return 0;
     }
 
-    private boolean isBonusNumberMatch(List<Integer> numbers, int bonusNumber) {
+    private boolean match(List<Integer> numbers, int bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 
     private Price calculatePrice(MatchDTO matchDTO) {
-        if (isValueThirdOrAbove(matchDTO.getCountOfMatch())) {
+        if (thirdPriceOrAbove(matchDTO.getCountOfMatch())) {
             return convertToHighPrice(matchDTO.getCountOfMatch(), matchDTO.getMatchBonus());
         }
         return convertToLowPrice(matchDTO.getCountOfMatch());
     }
 
-    private static boolean isValueThirdOrAbove(int countOfMatch) {
+    private static boolean thirdPriceOrAbove(int countOfMatch) {
         return countOfMatch >= 5;
     }
 
