@@ -11,8 +11,6 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    public static final int BOUNS_OF_MATCH = 1;
-
     public final int countOfMatch;
     public final int winningMoney;
 
