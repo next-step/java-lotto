@@ -2,22 +2,22 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.ExceedNumberException;
+import exception.ExceedSizeException;
+import exception.NegativeException;
 import java.util.Arrays;
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.CreateAutoNumberMachine;
 
 class LottoTest {
 
     @DisplayName("로또 번호 초과 시 에러 체크")
     @Test
-    public void checkNumberLengthException(){
-
+    public void checkExceedSizeException(){
         assertThatThrownBy( () ->
             new Lotto(
-                Sets.newHashSet(
-                    Arrays.asList(0,1,2,3,4,5,6,7)
-                )
+                CreateAutoNumberMachine.createNumbers(Arrays.asList(0,1,2,3,4,5,6,7))
             ))
             .isInstanceOf(RuntimeException.class);
     }
@@ -27,11 +27,11 @@ class LottoTest {
     public void checkNegativeNumberException(){
         assertThatThrownBy( () ->
             new Lotto(
-                Sets.newHashSet(
+                CreateAutoNumberMachine.createNumbers(
                     Arrays.asList(-11,2,3,4,5,6)
                 )
             ))
-            .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(NegativeException.class);
     }
 
     @DisplayName("로또 번호 범위 초과")
@@ -39,31 +39,19 @@ class LottoTest {
     public void validateExceedNumber(){
         assertThatThrownBy( () ->
             new Lotto(
-                Sets.newHashSet(
-                    Arrays.asList(0,1,2,3,4,46)
+                CreateAutoNumberMachine.createNumbers(
+                    Arrays.asList(8,1,2,3,4,46)
                 )
             ))
-            .isInstanceOf(RuntimeException.class);
-    }
-
-    @DisplayName("중복 번호 체크")
-    @Test
-    public void duplicateNumberException(){
-        assertThatThrownBy( () ->
-            new Lotto(
-                Sets.newHashSet(
-                    Arrays.asList(1,1,2,3,4,6)
-                )
-            ))
-            .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(ExceedNumberException.class);
     }
 
     @DisplayName("로또 생성")
     @Test
     public void createLotto(){
         Lotto lotto = new Lotto(
-            Sets.newHashSet(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(lotto.getNumbers())
-            .isEqualTo(Sets.newHashSet(Arrays.asList(1,2,3,4,5,6)));
+            CreateAutoNumberMachine.createNumbers(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(lotto.getLottoNumbers())
+            .isEqualTo(CreateAutoNumberMachine.createNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
 }

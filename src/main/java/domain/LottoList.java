@@ -2,13 +2,21 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import util.CreateAutoNumberMachine;
 
 public class LottoList {
 
-    List<Lotto> lottoList = new ArrayList<>();
+    private List<Lotto> lottoList = new ArrayList<>();
 
-    public LottoList(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public LottoList(int ticketCount) {
+        for (int count = 0; count < ticketCount; count++){
+            lottoList.add(
+                new Lotto(CreateAutoNumberMachine.createNumbers()
+            ));
+        }
     }
-    
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }

@@ -1,23 +1,36 @@
 package util;
 
-import java.util.Arrays;
+import domain.LottoNumber;
+import domain.LottoNumbers;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CreateAutoNumberMachine {
 
-    private static Random random = new Random();
     private static final int SIZE = 6;
-    private static final int LOW_BOUND = 1;
-    private static final int HIGH_BOUND = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
-    public static List<Integer> create(){
-        return Arrays.stream(
-            random
-                .ints(SIZE, LOW_BOUND, HIGH_BOUND)
-                .toArray())
-                .boxed()
-                .collect(Collectors.toList());
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(MIN_NUMBER, MAX_NUMBER)
+        .boxed()
+        .collect(Collectors.toList());
+
+    public static LottoNumbers createNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return new LottoNumbers(LOTTO_NUMBERS
+            .stream()
+            .limit(SIZE)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
+    public static LottoNumbers createNumbers(List<Integer> list) {
+        return new LottoNumbers(
+            list.stream()
+            .limit(SIZE)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
     }
 }
