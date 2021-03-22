@@ -83,4 +83,22 @@ public class LottoStatisticsTest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    public void yield() {
+        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
+
+        final int payment = 2000;
+        final long threeMatchingPrize = 5000L * lottoStatistics.threeMatchingLottoTicketsCount();
+        final long fourMatchingPrize = 50000L * lottoStatistics.fourMatchingLottoTicketsCount();
+        final long fiveMatchingPrize = 1500000L * lottoStatistics.fiveMatchingLottoTicketsCount();
+        final long sixMatchingPrize = 2000000000L * lottoStatistics.sixMatchingLottoTicketsCount();
+
+        final long totalPrize = threeMatchingPrize + fourMatchingPrize + fiveMatchingPrize + sixMatchingPrize;
+        final double expected = (double) totalPrize / payment;
+
+        final double result = lottoStatistics.yield(payment);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
