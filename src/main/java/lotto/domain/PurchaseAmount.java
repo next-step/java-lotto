@@ -18,6 +18,10 @@ public class PurchaseAmount {
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
     }
 
+    public int purchaseAmount() {
+        return purchaseAmount;
+    }
+
     private void checkInteger(String purchaseAmount) {
         try {
             Integer.parseInt(purchaseAmount);
