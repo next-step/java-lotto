@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoDTO;
+import step2.dto.LottoDTO.NormalLottoDTO;
+import step2.dto.LottoDTO.WinningLottoDTO;
 import step2.dto.LottoListDTO;
 import step2.dto.ShopResponseDTO;
 
@@ -26,14 +28,14 @@ class JudgeTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6 : 1,2,3,10,20,30 : 1,0,0,0 : 5",
-            "1,2,3,4,5,6 : 1,2,3,4,10,20 : 0,1,0,0 : 50",
-            "1,2,3,4,5,6 : 1,2,3,4,5,10 : 0,0,1,0 : 1500",
-            "1,2,3,4,5,6 : 1,2,3,4,5,6 : 0,0,0,1 : 2000000"}, delimiter = ':')
+            "1,2,3,4,5,6 : 7 : 1,2,3,10,20,30 : 1,0,0,0 : 5",
+            "1,2,3,4,5,6 : 7 : 1,2,3,4,10,20 : 0,1,0,0 : 50",
+            "1,2,3,4,5,6 : 7 : 1,2,3,4,5,10 : 0,0,1,0 : 1500",
+            "1,2,3,4,5,6 : 7 : 1,2,3,4,5,6 : 0,0,0,1 : 2000000"}, delimiter = ':')
     @DisplayName("당첨여부를 판단할 수 있다")
-    void judgeCalculatesResult(String winningString, String boughtString, String expected, double expectedProfitIndex) {
+    void judgeCalculatesResult(String winningString, int rawBonusNumber, String boughtString, String expected, double expectedProfitIndex) {
         List<Integer> winningNumbers = parseIntegerListFromString(winningString);
-        LottoDTO winningLotto = new LottoDTO(winningNumbers);
+        WinningLottoDTO winningLotto = new WinningLottoDTO(winningNumbers, rawBonusNumber);
         ShopResponseDTO shopResponse = generateShopResponse(boughtString);
         List<Integer> expectedResult = parseIntegerListFromString(expected);
 
@@ -47,10 +49,10 @@ class JudgeTest {
 
     private ShopResponseDTO generateShopResponse(String boughtString) {
         List<Integer> myNumbers = parseIntegerListFromString(boughtString);
-        LottoDTO myLotto = new LottoDTO(myNumbers);
-        LottoListDTO myLottos = new LottoListDTO(myLotto);
+        NormalLottoDTO myLotto = new NormalLottoDTO(myNumbers);
+        LottoListDTO myLottoList = new LottoListDTO(myLotto);
 
-        return new ShopResponseDTO(1000, 1, myLottos, 0);
+        return new ShopResponseDTO(1000, 1, myLottoList, 0);
     }
 
     private List<Integer> parseIntegerListFromString(String input) {

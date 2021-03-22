@@ -23,7 +23,8 @@ public class LottoController {
         runtimeView.printLottoNumbers(shopResponse);
 
         String rawNumberString = inputView.getLastWeekWiningLottoNumbers();
-        JudgeResponseDTO judgeResponse = lottoService.getLottoResult(shopResponse, rawNumberString);
+        int rawBonusNumber = inputView.getLastWeekBonusLottoNumber();
+        JudgeResponseDTO judgeResponse = lottoService.getLottoResult(shopResponse, rawNumberString, rawBonusNumber);
         resultView.printResult(judgeResponse);
     }
 

@@ -31,15 +31,15 @@ class LottoGeneratorTest {
         assertThat(lottoList.getLottoListCount()).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "1,2,3,4,5,6,1",
-            "1,2,3,4,5",
-            "1,2,3,4",
-            "1,2,3,3,4,5",
-            "1,2,3,4,5,46"})
-    @DisplayName("가짜 로또를 구별할 수 있다")
-    void lottoCanDetermineFakeLotto(String input) {
-        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.generateLotto(input));
-    }
+//    @ParameterizedTest
+//    @ValueSource(strings = {
+//            "1,2,3,4,5,6,1",
+//            "1,2,3,4,5",
+//            "1,2,3,4",
+//            "1,2,3,3,4,5",
+//            "1,2,3,4,5,46"})
+//    @DisplayName("가짜 로또를 구별할 수 있다")
+//    void lottoCanDetermineFakeLotto(String input) {
+//        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.generateLotto(input));
+//    }
 }

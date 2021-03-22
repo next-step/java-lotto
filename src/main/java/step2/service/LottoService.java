@@ -5,7 +5,7 @@ import step2.domain.LottoGenerator;
 import step2.domain.MoneyGenerator;
 import step2.domain.Shop;
 import step2.dto.JudgeResponseDTO;
-import step2.dto.LottoDTO;
+import step2.dto.LottoDTO.WinningLottoDTO;
 import step2.dto.MoneyDTO;
 import step2.dto.ShopResponseDTO;
 
@@ -23,8 +23,8 @@ public class LottoService {
         return shop.buyLotto(money, capacity);
     }
 
-    public JudgeResponseDTO getLottoResult(ShopResponseDTO shopResponse, String rawNumberString) {
-        LottoDTO winningLotto = convertRawNumberStringToLotto(rawNumberString);
+    public JudgeResponseDTO getLottoResult(ShopResponseDTO shopResponse, String rawNumberString, int rawBonusNumber) {
+        WinningLottoDTO winningLotto = convertRawNumberStringToLotto(rawNumberString, rawBonusNumber);
         return judge.calculateResult(shopResponse, winningLotto);
     }
 
@@ -32,7 +32,7 @@ public class LottoService {
         return moneyGenerator.generateMoney(rawAmount);
     }
 
-    private LottoDTO convertRawNumberStringToLotto(String rawNumberString) {
-        return lottoGenerator.generateLotto(rawNumberString);
+    private WinningLottoDTO convertRawNumberStringToLotto(String rawNumberString, int rawBonusNumber) {
+        return lottoGenerator.generateLotto(rawNumberString, rawBonusNumber);
     }
 }

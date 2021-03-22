@@ -3,6 +3,8 @@ package step2.domain;
 import step2.constants.Price;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoDTO;
+import step2.dto.LottoDTO.NormalLottoDTO;
+import step2.dto.LottoDTO.WinningLottoDTO;
 import step2.dto.LottoListDTO;
 import step2.dto.ShopResponseDTO;
 
@@ -14,7 +16,7 @@ public class Judge {
 
     private static final int MATCH_CASE = 7;
 
-    public JudgeResponseDTO calculateResult(ShopResponseDTO shopResponse, LottoDTO winningLotto) {
+    public JudgeResponseDTO calculateResult(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
         HashSet<Integer> winningNumbers = new HashSet<>(winningLotto.getNumbers());
         int[] matchCount = new int[MATCH_CASE];
         LottoListDTO lottoList = shopResponse.getLottoList();
@@ -36,7 +38,7 @@ public class Judge {
                 Price.SIX_MATCH_PRICE * matchCount[6];
     }
 
-    private int calculateMatchCount(LottoDTO lotto, HashSet<Integer> winningNumbers) {
+    private int calculateMatchCount(NormalLottoDTO lotto, HashSet<Integer> winningNumbers) {
         int count = 0;
         for (int number : lotto.getNumbers()) {
             count += oneIfNumberIsInHashSet(number, winningNumbers);

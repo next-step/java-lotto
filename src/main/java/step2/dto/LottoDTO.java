@@ -4,13 +4,33 @@ import java.util.List;
 
 public class LottoDTO {
 
-    private List<Integer> numbers;
+    public static class NormalLottoDTO {
+        private List<Integer> numbers;
 
-    public LottoDTO(List<Integer> numbers) {
-        this.numbers = numbers;
+        public NormalLottoDTO(List<Integer> numbers) {
+            this.numbers = numbers;
+        }
+
+        public List<Integer> getNumbers() {
+            return numbers;
+        }
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public static class WinningLottoDTO {
+        private List<Integer> numbers;
+        private int bonusNumber;
+
+        public WinningLottoDTO(List<Integer> numbers, int bonusNumber) {
+            this.numbers = numbers;
+            this.bonusNumber = bonusNumber;
+        }
+
+        public List<Integer> getNumbers() {
+            return this.numbers;
+        }
+
+        public int getBonusNumber() {
+            return this.bonusNumber;
+        }
     }
 }

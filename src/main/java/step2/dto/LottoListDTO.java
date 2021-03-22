@@ -1,21 +1,23 @@
 package step2.dto;
 
+import step2.dto.LottoDTO.NormalLottoDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoListDTO {
-    List<LottoDTO> lottoList;
+    List<NormalLottoDTO> lottoList;
 
-    public LottoListDTO(List<LottoDTO> lottoList) {
+    public LottoListDTO(List<NormalLottoDTO> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public LottoListDTO(LottoDTO lotto) {
+    public LottoListDTO(NormalLottoDTO lotto) {
         this.lottoList = new ArrayList<>();
         this.lottoList.add(lotto);
     }
 
-    public List<LottoDTO> getLottoList() {
+    public List<NormalLottoDTO> getLottoList() {
         return this.lottoList;
     }
 
