@@ -2,8 +2,11 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoConstant;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoShop;
 import lotto.domain.Money;
@@ -12,7 +15,10 @@ import lotto.domain.policy.TestRandomPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.provider.ArgumentsSources;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * 로또(자동)
@@ -42,7 +48,7 @@ public class AutomatedLottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1200:1", "3800:3", "8800:8", "0:0", "100:0"}, delimiter = ':')
+    @CsvSource(value = {"1200:1", "3800:3", "8800:8", "0:0", "100:0", "16000:16"}, delimiter = ':')
     @DisplayName("로또 구입 금액에 해당하는 만큼의 로또를 발급한다.")
     void lottoCreateByPriceTotal(int money, int lottoCount) {
         LottoMachine lottoMachine = new LottoMachine(new TestRandomPolicy());
@@ -50,6 +56,21 @@ public class AutomatedLottoTest {
 
         List<Lotto> lotteries = lottoShop.purchase(new Money(money));
 
+        System.out.println(lotteries);
         assertThat(lotteries.size()).isEqualTo(lottoCount);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10:13:44:17:20:33:6", "10:13:44:17:20:23:5",
+            "1:23:44:17:20:33:4", "10:3:2:17:20:8:3", "1:13:2:17:4:5:2",
+            "10:9:8:7:6:5:1", "1:2:3:4:5:6:0"}, delimiter = ':')
+    @DisplayName("당첨된 번호 개수가 맞은지 확인하기")
+    void lottoCountWinnerNumber(int n1, int n2, int n3, int n4, int n5, int n6, long expectedCount) {
+        LottoMachine lottoMachine = new LottoMachine(new TestRandomPolicy());
+
+        Lotto lotto = lottoMachine.generate();
+        long result = lotto.countWinnerNumbersIn(new Lotto(n1, n2, n3, n4, n5, n6));
+
+        assertThat(result).isEqualTo(expectedCount);
     }
 }

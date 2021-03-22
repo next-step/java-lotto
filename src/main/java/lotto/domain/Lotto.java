@@ -44,4 +44,12 @@ public class Lotto {
                 "numbers=" + numbers +
                 '}';
     }
+
+    public long countWinnerNumbersIn(Lotto winner) {
+        return winner.numbers.stream().mapToLong(this::traverseCompareTo).sum();
+    }
+
+    private long traverseCompareTo(int winnerNumber) {
+        return numbers.stream().filter(num -> num == winnerNumber).count();
+    }
 }
