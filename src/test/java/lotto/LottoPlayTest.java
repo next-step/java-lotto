@@ -4,7 +4,7 @@ import lotto.domain.Rank;
 import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
-import lotto.dto.LottoNumbers;
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

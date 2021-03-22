@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.dto.IssueNumber;
-import lotto.dto.LottoNumbers;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
