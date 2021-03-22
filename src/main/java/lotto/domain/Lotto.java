@@ -21,12 +21,12 @@ public class Lotto {
     }
 
     public int numberOfSize() {
-        return 0;
+        return lottoNumbers.size();
     }
 
     public String numbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::parseString)
                 .collect(Collectors.joining(","));
     }
 

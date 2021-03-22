@@ -8,14 +8,18 @@ public class Money {
     private final int money;
 
     public Money(String money) {
+        this.money = parsingMoney(money);
+        if (isNotAvailable()) {
+            throw new IllegalArgumentException(NOT_AVAILABLE_COMMENT);
+        }
+    }
+
+    private int parsingMoney(String money) {
         validateMoney(money);
         if (isNotParsable(money)) {
             throw new IllegalArgumentException(NOT_NUMBER_COMMENT);
         }
-        this.money = Integer.parseInt(money);
-        if (isNotAvailable()) {
-            throw new IllegalArgumentException(NOT_AVAILABLE_COMMENT);
-        }
+        return Integer.parseInt(money);
     }
 
     private boolean isNotAvailable() {

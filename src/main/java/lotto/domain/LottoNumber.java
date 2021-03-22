@@ -20,7 +20,7 @@ public class LottoNumber {
         }
     }
 
-    public String of() {
+    public String parseString() {
         return String.valueOf(lottoNumber);
     }
 

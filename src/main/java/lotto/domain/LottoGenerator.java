@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -21,10 +20,9 @@ public class LottoGenerator {
             .collect(Collectors.toList());
 
     public static Lottos getLotto(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        while (lottoCount-- > 0) {
-            lottos.add(generateLotto());
-        }
+        List<Lotto> lottos = IntStream.range(0, lottoCount)
+                .mapToObj(i -> generateLotto())
+                .collect(Collectors.toList());
         return new Lottos(Collections.unmodifiableList(lottos));
     }
 
