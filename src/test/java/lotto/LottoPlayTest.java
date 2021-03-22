@@ -31,6 +31,21 @@ class LottoPlayTest {
     }
 
     @Test
+    @DisplayName("하나의 로또의 숫자가 6개가 아닌 경우 에러가 발생한다.")
+    void oneLotto_6() {
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5);
+        List<LottoNumber> lotto = new ArrayList<>();
+
+        for (Integer number : lottoNumber) {
+            lotto.add(new LottoNumber(number));
+        }
+
+        assertThatThrownBy(() -> {
+            new LottoNumbers(lotto);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("수동으로 로또를 구매할 수 있다.")
     void canBuyLottoByManual() {
         LottoPlay lottoPlay = new LottoPlay();

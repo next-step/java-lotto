@@ -6,9 +6,14 @@ import java.util.List;
 
 public class LottoNumbers {
 
+    private static final int LOTTO_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException();
+        }
+
         this.lottoNumbers = lottoNumbers;
     }
 
