@@ -1,19 +1,15 @@
 package study.step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private List<Lotto> lottos;
-    private List<Integer> winNumbers;
+    private final List<Lotto> lottos;
     private LottoWin lottoWin;
 
     public LottoMachine() {
         lottos = new ArrayList<>();
-        winNumbers = new ArrayList<>();
         lottoWin = new LottoWin();
     }
 
@@ -22,25 +18,15 @@ public class LottoMachine {
     }
 
     public int purchase(int amount) {
-        int count = getLottoCount(amount);
+        int count = amount / LOTTO_PRICE;
         for(int i=0; i<count; i++) {
             lottos.add(LottoFactory.createLotto());
         }
         return lottos.size();
     }
 
-    private int getLottoCount(int amount) {
-        return amount / LOTTO_PRICE;
-    }
-
-    public void setWinNumbers(String winInput) {
-        winNumbers = Arrays.stream(winInput.split(","))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-    }
-
-    public LottoWin result() {
-        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winNumbers)));
+    public LottoWin result(Lotto winLotto) {
+        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winLotto.getLottoNumbers())));
         return lottoWin;
     }
 }

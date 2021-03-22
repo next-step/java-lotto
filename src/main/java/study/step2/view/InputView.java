@@ -12,9 +12,9 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String inputWinNumber() {
+    public static String[] inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
         scanner.nextLine();
-        return scanner.nextLine();
+        return scanner.nextLine().split(",");
     }
 }

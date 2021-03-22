@@ -1,5 +1,6 @@
 package study.step2.controller;
 
+import study.step2.domain.Lotto;
 import study.step2.domain.LottoMachine;
 import study.step2.domain.LottoWin;
 import study.step2.view.InputView;
@@ -18,10 +19,10 @@ public class LottoController {
         ResultView.printPurchaseCount(lottoMachine.purchase(purchaseAmount));
         ResultView.printLottoNumbers(lottoMachine.getLottos());
 
-        String winInput = InputView.inputWinNumber();
-        lottoMachine.setWinNumbers(winInput);
+        String[] winNumbers = InputView.inputWinNumber();
+        Lotto winLotto = new Lotto(winNumbers);
 
-        LottoWin lottoWin = lottoMachine.result();
+        LottoWin lottoWin = lottoMachine.result(winLotto);
         ResultView.printResult(lottoWin);
         ResultView.printProfit(purchaseAmount, lottoWin);
     }
