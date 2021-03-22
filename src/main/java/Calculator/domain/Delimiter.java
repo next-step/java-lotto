@@ -2,7 +2,7 @@
  * Delimiter를 포장하는 클래스
  * */
 
-package Calculator;
+package Calculator.domain;
 
 import java.util.Objects;
 

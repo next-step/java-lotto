@@ -1,7 +1,9 @@
 /*
 * 문자열의 확인 및 가공을 담당하는 클래스
 * */
-package Calculator;
+package Calculator.util;
+
+import Calculator.domain.Delimiter;
 
 import java.util.Arrays;
 

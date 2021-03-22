@@ -1,8 +1,11 @@
-package Calculator;
+package Calculator.util;
 
+import Calculator.domain.Delimiter;
+import Calculator.domain.Operand;
+import Calculator.util.Mapper;
 import org.junit.jupiter.api.Test;
 
-import static Calculator.Delimiter.DEFAULT_DELIMITER;
+import static Calculator.domain.Delimiter.DEFAULT_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapperTest {

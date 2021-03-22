@@ -1,7 +1,10 @@
 /*
  * 원시값으로 포장했던 객체 내부의 값을 반환해주는 mapper 클래스
  * */
-package Calculator;
+package Calculator.util;
+
+import Calculator.domain.Operand;
+import Calculator.domain.Delimiter;
 
 import java.lang.reflect.Field;
 

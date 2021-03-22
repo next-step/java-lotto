@@ -1,7 +1,7 @@
 /*
 * Operand 집합을 포장하는 클래스
 * */
-package Calculator;
+package Calculator.domain;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,5 +1,6 @@
-package Calculator;
+package Calculator.domain;
 
+import Calculator.domain.Operator;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.BinaryOperator;

@@ -1,4 +1,4 @@
-package Calculator;
+package Calculator.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

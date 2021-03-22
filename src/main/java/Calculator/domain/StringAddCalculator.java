@@ -2,7 +2,10 @@
 * 문자열 덧셈 계산기를 담당하는 클래스
 * */
 
-package Calculator;
+package Calculator.domain;
+
+import Calculator.util.Mapper;
+import Calculator.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
