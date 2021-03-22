@@ -48,4 +48,14 @@ public class LottoTest {
             assertEquals(lengthPerGame, numbers.size());
         }
     }
+
+    @DisplayName("당첨번호 생성")
+    @Test
+    void generateLastPrize() {
+        String input = "1,2,3,4,5,6";
+        lotto.initLastPrize(input);
+        Game lastPrize = lotto.lastPrize();
+        Set<Number> numbers = new HashSet<>(lastPrize.numbers());
+        assertEquals(lengthPerGame, numbers.size());
+    }
 }
