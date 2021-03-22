@@ -2,6 +2,7 @@ package step1.calculator;
 
 
 import static utils.StringUtils.isNullOrBlank;
+import static java.lang.Integer.parseInt;
 
 public final class StringAddCalculator {
 
@@ -9,7 +10,7 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        return 1;
+        return parseInt(expression);
     }
 
 }
