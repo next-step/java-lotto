@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto {
+public class LottoGenerator {
 
     private final List<Integer> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(Integer::new).collect(Collectors.toList());
 
-    private Lotto() {
+    private LottoGenerator() {
     }
 
     private static class LazyHolder {
-        private static final Lotto instance = new Lotto();
+        private static final LottoGenerator instance = new LottoGenerator();
     }
 
-    public static Lotto getInstance() {
+    public static LottoGenerator getInstance() {
         return LazyHolder.instance;
     }
 }
