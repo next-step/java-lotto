@@ -5,34 +5,31 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("당첨 번호 세팅")
 public class LottoWinnersTest {
 
-    private String inputNumber = "1,2,3,4,5,6";
-    private int bonusNumber = 45;
-
-    @Test
-    @DisplayName("당첨 번호 관리 생성 테스트")
-    public void createWinnersTest() throws Exception {
-        //given
-        LottoWinners winners = LottoMachine.createWinners(inputNumber, bonusNumber);
-        LottoWinners winners2 = LottoMachine.createWinners(inputNumber, bonusNumber);
-
-        //when
-
-        //then
-        assertThat(winners2.equals(winners)).isTrue();
+    public List<Integer> createLottoNumber() {
+        return IntStream.range(1,7)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     @Test
     @DisplayName("당첨번호와 보너스번호 중복 테스트")
     public void winnerNumberMatchOfBonusExceptionTest() throws Exception {
         //given
+        LottoNumbers winner = new LottoNumbers(createLottoNumber());
+        LottoNumber bonus = new LottoNumber(1);
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           LottoMachine.createWinners(inputNumber, 1);
+            new LottoWinners(winner, bonus);
         });
 
         //then

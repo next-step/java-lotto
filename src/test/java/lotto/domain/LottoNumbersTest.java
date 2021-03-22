@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+@DisplayName("번호 그룹")
 public class LottoNumbersTest {
     public List<Integer> createLottoNumber() {
         return IntStream.range(1,7)
@@ -65,23 +65,10 @@ public class LottoNumbersTest {
         assertThat(numbers.equals(numbers2)).isFalse();
     }
 
-
-    @Test
-    @DisplayName("당첨 번호 6개 사이즈 확인")
-    public void winnerNumberSizeSixTest() throws Exception {
-        //given
-        LottoNumbers winnerNumber = new LottoNumbers(createLottoNumber());
-
-        //when
-
-        //then
-        assertThat(winnerNumber.readOnlyNumbers().size()).isEqualTo(6);
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"1", "1,2,3,", "1,2,3,4,5"})
-    @DisplayName("당첨 번호 6개 미만 예외 확인")
-    public void winnerNumberSizeSixDownExceptionTest(String input) throws Exception {
+    @DisplayName("번호 6개 미만 예외 확인")
+    public void numberSizeSixDownExceptionTest(String input) throws Exception {
         //given
 
         //when
@@ -90,24 +77,12 @@ public class LottoNumbersTest {
         });
 
         //then
-    }
-
-    @Test
-    @DisplayName("로또 번호 중복 확인")
-    public void winnerNumberDuplicateTest() throws Exception {
-        //given
-        String input = "1,1,2,3,4,5";
-
-        //when
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(input);
-        });
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"0,1,2,3,4,45", "1,2,3,4,5,46"})
     @DisplayName("로또 번호 1 ~ 45 벗어날 시 예외 확인")
-    public void winnerNumberRangeExceptionTest(String input) throws Exception {
+    public void wnumberRangeExceptionTest(String input) throws Exception {
         //given
 
         //when, then
@@ -116,11 +91,11 @@ public class LottoNumbersTest {
         });
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"1,1,2,3,4,5", "1,1,1,1,1,1"})
     @DisplayName("로또 번호 중복 예외 확인")
-    public void winnerNumberDuplicateExceptionTest() throws Exception {
+    public void numberDuplicateExceptionTest(String input) throws Exception {
         //given
-        String input = "1,1,1,1,1,1";
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {

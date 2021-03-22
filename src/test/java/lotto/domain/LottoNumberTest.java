@@ -8,38 +8,26 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+@DisplayName("번호")
 public class LottoNumberTest {
-
-    @Test
-    @DisplayName("보너스번호 생성 테스트")
-    public void bonusNumberTest() throws Exception {
-        //given
-        int inputNumber = 1;
-        LottoNumber bonusNumber = new LottoNumber(inputNumber);
-
-        //when
-
-        //then
-        assertThat(bonusNumber).isNotNull();
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {1,45})
-    @DisplayName("보너스번호 범위 1~45 테스트")
-    public void bonusNumberRangeTest(int inputNumber) throws Exception {
+    @DisplayName("번호 범위 1~45 테스트")
+    public void numberRangeTest(int inputNumber) throws Exception {
         //given
-        LottoNumber bonusNumber = new LottoNumber(inputNumber);
+        LottoNumber number = new LottoNumber(inputNumber);
 
         //when
 
         //then
-        assertThat(bonusNumber).isNotNull();
+        assertThat(number).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0,46})
-    @DisplayName("잘못된 보너스번호 예외 테스트")
-    public void bonusNumberRangeExceptionTest(int inputNumber) throws Exception {
+    @DisplayName("잘못된 번호 예외 테스트")
+    public void numberRangeExceptionTest(int inputNumber) throws Exception {
         //given
 
         //when
