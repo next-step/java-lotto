@@ -33,12 +33,9 @@ public class LottoNumbers {
     }
 
     public int countMatchNumber(List<Integer> winningNumber) {
-        int count = 0;
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            count += matchNumber(winningNumber, lottoNumber);
-        }
-        return count;
+        return lottoNumbers.stream()
+                .mapToInt(lottoNumber -> matchNumber(winningNumber, lottoNumber))
+                .sum();
     }
 
     public int matchNumber(List<Integer> winningNumber, LottoNumber lottoNumber) {
