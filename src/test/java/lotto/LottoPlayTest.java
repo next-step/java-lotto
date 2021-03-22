@@ -5,6 +5,7 @@ import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
 import lotto.domain.LottoNumbers;
+import lotto.dto.WinningNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoPlayTest {
+
+    @Test
+    @DisplayName("보너스볼은 당첨번호와 중복되면 에러가 발생한다.")
+    void bonusBallUnique() {
+        int bonusBall = 5;
+        assertThatThrownBy(() -> {
+            new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
