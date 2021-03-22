@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningNumbersTest {
 
@@ -14,5 +15,14 @@ public class WinningNumbersTest {
         String[] numbers = {"1", "2", "3", "4", "5", "6"};
         WinningNumbers winningNumbers = new WinningNumbers(numbers);
         assertThat(winningNumbers).isEqualTo(new WinningNumbers(numbers));
+    }
+
+    @Test
+    @DisplayName("당첨 번호 길이가 6자 이외일 경우 예외")
+    public void checkLength() throws Exception {
+        String[] overSix = {"1", "2", "3", "4", "5", "6", "7"};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(overSix));
+        String[] lowerSix = {"1", "2", "3", "4", "5"};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(lowerSix));
     }
 }
