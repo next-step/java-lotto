@@ -166,3 +166,7 @@
 - feat(step3): update class, method names
 
   - 엘레강트 오브젝트의 관점에 따라 이름 변경
+
+- feat(step3): update method names
+
+  - 엘레강트 오브젝트의 관점에 따라 메소드명 변경

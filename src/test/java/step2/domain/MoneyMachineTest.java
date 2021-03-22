@@ -20,6 +20,6 @@ class MoneyMachineTest {
     @ValueSource(ints = {-1000, -1500, -2600})
     @DisplayName("음수의 돈을 입력하면 예외를 던진다")
     void moneyWithNegativeNumberThrowsException(int moneyAmount) {
-        assertThrows(IllegalArgumentException.class, () -> moneyGenerator.generateMoney(moneyAmount));
+        assertThrows(IllegalArgumentException.class, () -> moneyGenerator.money(moneyAmount));
     }
 }

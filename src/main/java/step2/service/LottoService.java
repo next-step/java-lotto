@@ -29,10 +29,10 @@ public class LottoService {
     }
 
     private MoneyDTO convertRawAmountToMoney(int rawAmount) {
-        return moneyGenerator.generateMoney(rawAmount);
+        return moneyGenerator.money(rawAmount);
     }
 
     private WinningLottoDTO convertRawNumberStringToLotto(String rawNumberString, int rawBonusNumber) {
-        return lottoGenerator.lottoGenerator(rawNumberString, rawBonusNumber);
+        return lottoGenerator.lotto(rawNumberString, rawBonusNumber);
     }
 }

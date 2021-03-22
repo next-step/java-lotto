@@ -3,7 +3,7 @@ package step2.domain;
 import step2.dto.MoneyDTO;
 
 public class MoneyMachine {
-    public MoneyDTO generateMoney(int amount) {
+    public MoneyDTO money(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException();
         }

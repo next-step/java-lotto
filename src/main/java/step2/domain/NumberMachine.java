@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class NumberMachine {
 
-    public static List<Integer> numberBuilder(int upperbound, int count) {
+    public static List<Integer> number(int upperbound, int count) {
         if (count > upperbound) throw new IllegalArgumentException();
 
         return IntStream.rangeClosed(1, upperbound)

@@ -18,7 +18,7 @@ public class Shop {
             throw new IllegalArgumentException();
         }
         int change = money.getAmount() - capacity * Price.LOTTO.getPrice();
-        LottoListDTO lottoList = lottoMachine.generateLottoList(capacity);
+        LottoListDTO lottoList = lottoMachine.lottoList(capacity);
         ShopResponseDTO shopResponse = new ShopResponseDTO(money.getAmount(), capacity, lottoList, change);
         if (!valid(shopResponse)) {
             throw new IllegalArgumentException();

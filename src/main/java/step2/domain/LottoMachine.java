@@ -16,19 +16,19 @@ public class LottoMachine {
     private static final int COUNT = 6;
     private static final int COUNT_INCLUDING_BONUS_NUMBER = 7;
 
-    public LottoListDTO generateLottoList(int amount) {
+    public LottoListDTO lottoList(int amount) {
         List<NormalLottoDTO> lottoList = new ArrayList<>();
         for (int count = 0; count < amount; count++) {
-            lottoList.add(lottoGenerator());
+            lottoList.add(lotto());
         }
         return new LottoListDTO(lottoList);
     }
 
-    public NormalLottoDTO lottoGenerator() {
-        return lottoBuilder(NumberMachine.numberBuilder(UPPER_BOUND, COUNT));
+    public NormalLottoDTO lotto() {
+        return lottoBuilder(NumberMachine.number(UPPER_BOUND, COUNT));
     }
 
-    public WinningLottoDTO lottoGenerator(String values, int rawBonusNumber) {
+    public WinningLottoDTO lotto(String values, int rawBonusNumber) {
         List<Integer> numbers = Arrays.stream(values.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)

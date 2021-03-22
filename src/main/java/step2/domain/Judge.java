@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class Judge {
 
     public JudgeResponseDTO calculateResult(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
-        List<MatchDTO> matchList = getMatchList(shopResponse, winningLotto);
+        List<MatchDTO> matchList = winningLottoMatchList(shopResponse, winningLotto);
         HashMap<Price, Integer> priceCountMap = convertToPriceCountMap(matchList);
         double profitIndex = calculateProfitIndex(priceCountMap, shopResponse.getOriginMoney());
         return new JudgeResponseDTO(priceCountMap, profitIndex);
@@ -51,7 +51,7 @@ public class Judge {
         return priceCountMap;
     }
 
-    private List<MatchDTO> getMatchList(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
+    private List<MatchDTO> winningLottoMatchList(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
         List<Integer> winningNumbers = new ArrayList<>(winningLotto.getNumbers());
         int bonusNumber = winningLotto.getBonusNumber();
         LottoListDTO lottoList = shopResponse.getLottoList();

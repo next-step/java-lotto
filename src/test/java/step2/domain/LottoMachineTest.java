@@ -26,7 +26,7 @@ class LottoMachineTest {
             "14:14"}, delimiter = ':')
     @DisplayName("원하는 수의 로또를 살 수 있다")
     void lottoMachineIssuesValidCountOfLotto(int wanted, int expected) {
-        LottoListDTO lottoList = lottoGenerator.generateLottoList(wanted);
+        LottoListDTO lottoList = lottoGenerator.lottoList(wanted);
         assertThat(lottoList.getLottoListCount()).isEqualTo(expected);
     }
 
@@ -40,6 +40,6 @@ class LottoMachineTest {
             "1,2,3,4,5,6:6"}, delimiter = ':')
     @DisplayName("가짜 로또를 구별할 수 있다")
     void lottoCanDetermineFakeLotto(String input, int bonusnumber) {
-        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.lottoGenerator(input, bonusnumber));
+        assertThrows(IllegalArgumentException.class, () -> lottoGenerator.lotto(input, bonusnumber));
     }
 }
