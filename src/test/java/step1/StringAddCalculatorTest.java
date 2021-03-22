@@ -28,12 +28,14 @@ public class StringAddCalculatorTest {
         int result = stringAddCalculator.sum("");
         assertThat(result).isEqualTo(0);
     }
+
     @Test
     @DisplayName("구분자가 없는 경우에도 split 되는지 테스트")
     void split_테스트() {
         int result = stringAddCalculator.sum("");
         assertThat(result).isEqualTo(0);
     }
+
     @Test
     @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환하는 테스트")
     void sum_숫자_한개() {
@@ -48,4 +50,10 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("구분자 여러 개(콤마, 콜론)일때 숫자의 합을 더하는 하는 테스트")
+    void sum_구분자_여러개_테스트(){
+        int result = stringAddCalculator.sum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }

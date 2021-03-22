@@ -12,7 +12,7 @@ public class StringAddCalculator {
         if(input == null || input.isEmpty()) {
             return 0;
         }
-        return Arrays.stream(input.split(","))
+        return Arrays.stream(input.split(",|:"))
                 .mapToInt(i-> Integer.parseInt(i))
                 .sum();
     }
