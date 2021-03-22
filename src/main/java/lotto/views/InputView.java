@@ -7,7 +7,13 @@ public class InputView {
 
     public static int payment() {
         System.out.println("구입 금액을 입력해 주세요.");
-        return scanner.nextInt();
+        final int result = scanner.nextInt();
+        clearInputBuffer();
+        return result;
+    }
+
+    private static void clearInputBuffer() {
+        scanner.nextLine();
     }
 
     public static String winnerNumbers() {
