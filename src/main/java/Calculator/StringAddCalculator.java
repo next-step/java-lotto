@@ -4,7 +4,9 @@
 
 package Calculator;
 
-import java.util.regex.*;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
@@ -19,10 +21,9 @@ public class StringAddCalculator {
     public static String[] splitWithMatcher(String input) {
         Matcher m = Pattern.compile(PATTERN).matcher(input);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+            return StringUtils.splitWithDelimiter(m.group(2), new Delimiter(m.group(1)));
         }
-        return input.split(DEFAULT_DELIMETER);
+        return StringUtils.splitWithDelimiter(input, new Delimiter());
     }
 
 
@@ -30,9 +31,15 @@ public class StringAddCalculator {
         if (StringUtils.checkEmpty(input)) {
             return INIT_NUM;
         }
-        int[] operands = StringUtils.parseToIntList(
-                splitWithMatcher(input)
-        );
+
+        Operand[] operands = Arrays.stream(
+                StringUtils.parseToIntList(splitWithMatcher(input)))
+                .mapToObj(Operand::new)
+                .toArray(Operand[]::new);
+
+//        Arrays.stream(operands)
+//                .forEach(operand -> );
+
         return 0;
     }
 }

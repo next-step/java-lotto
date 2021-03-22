@@ -22,7 +22,6 @@ public class StringUtils {
         return false;
     }
 
-
     /*
     * 입력받은 피연산자 문자열 집합을 int형 집합으로 반환한다.
     * */
@@ -33,7 +32,7 @@ public class StringUtils {
     }
 
     public static String[] splitWithDelimiter(String input, Delimiter delimiter){
-        return input.split(delimiter.getDelimter());
+        return input.split(Mapper.delimiterToString(delimiter));
     }
 
 
