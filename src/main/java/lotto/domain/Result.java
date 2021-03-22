@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import lotto.constant.Constant;
 
 public class Result {
 
@@ -27,5 +28,26 @@ public class Result {
       sb.append(String.format("%s %d개\n", hit.showHitResult(), resultMap.get(hit)));
     }
     return sb.toString();
+  }
+
+  public double getRatio(Amount amount) {
+    double profit = getProfit();
+    return calcRatio(profit, amount.getPrice());
+  }
+
+  private double calcRatio(double profit, int price) {
+    return (profit / price);
+  }
+
+  private double getProfit() {
+    double profit = 0;
+    for (Hit hit : Hit.all()) {
+      profit += resultMap.get(hit) * hit.prize();
+    }
+    return profit;
+  }
+
+  public boolean isProfit(double ratio) {
+    return ratio >= Constant.STANDARD_OF_PROFIT;
   }
 }
