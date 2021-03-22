@@ -22,7 +22,9 @@ public class LottoController {
 
     public void run() {
         int inputBuyAmount = inputView.inputBuyAmount();
-        
+
+        playManualLotto();
+
         lottoPlay.createLotto(inputBuyAmount);
         
         ResultView resultView = new ResultView();
@@ -34,7 +36,6 @@ public class LottoController {
         int bonusNumber = inputView.bonusBall();
 
         Winning winning = new Winning();
-
         for (IssueNumber issueNumber : totalLottoNumbers.keySet()) {
             int countMatchNumber = totalLottoNumbers.get(issueNumber).countMatchNumber(winningNumber);
             boolean bonusBall = totalLottoNumbers.get(issueNumber).isContain(bonusNumber);
@@ -43,5 +44,11 @@ public class LottoController {
         }
 
         resultView.printStatistics(winning, inputBuyAmount);
+    }
+
+    public void playManualLotto() {
+        Map<Integer, List<Integer>> manualLotto =  inputView.manualLottoNumber(inputView.countManualLotto());
+        manualLotto.keySet()
+                .forEach(count -> lottoPlay.createLottoByManual(manualLotto.get(count)));
     }
 }
