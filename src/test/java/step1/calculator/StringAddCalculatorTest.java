@@ -17,4 +17,11 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @DisplayName("splitAndSum에 유효한 숫자값 하나를 넣었을 때의 반환값 검증 테스트")
+    @Test
+    public void splitAndSum_숫자하나() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
 }
