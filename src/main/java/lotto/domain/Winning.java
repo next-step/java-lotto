@@ -5,38 +5,33 @@ import java.util.Map;
 
 public class Winning {
 
-    Map<MatchNumber, Count> winning = new LinkedHashMap<>();
+    Map<Rank, Count> winning = new LinkedHashMap<>();
 
     public Winning() {
-        winning.put(new MatchNumber(3), new Count(0));
-        winning.put(new MatchNumber(4), new Count(0));
-        winning.put(new MatchNumber(5), new Count(0));
-        winning.put(new MatchNumber(6), new Count(0));
+        winning.put(Rank.FIFTH, new Count(0));
+        winning.put(Rank.FOURTH, new Count(0));
+        winning.put(Rank.THIRD, new Count(0));
+        winning.put(Rank.SECOND, new Count(0));
+        winning.put(Rank.FIRST, new Count(0));
     }
 
-    public Map<MatchNumber, Count> getWinning() {
+    public Map<Rank, Count> getWinning() {
         return winning;
     }
 
-    public void record(int matchNumbers) {
-        winning.keySet().forEach(matchNumber -> updateCount(matchNumber, matchNumbers));
-    }
-
-    public void updateCount(MatchNumber matchNumber, int matchNumbers) {
-        if (matchNumber.getMatchNumber() == matchNumbers) {
-            winning.get(matchNumber)
-                    .update();
+    public void record(int countMatchNumber, boolean bonusBall) {
+        if (Rank.rank(countMatchNumber, bonusBall) != Rank.MISS) {
+            winning.get(Rank.rank(countMatchNumber, bonusBall)).update();
         }
     }
 
     public int getSumAmount() {
-        return winning.keySet()
-                .stream()
-                .mapToInt(this::multiply)
-                .sum();
-    }
+        int sum = 0;
+        for (Rank rank : winning.keySet()) {
+            int multiply = rank.getPrice() * winning.get(rank).getCount();
+            sum += multiply;
+        }
 
-    private int multiply(MatchNumber matchNumber) {
-        return Amount.getWinningMoney(matchNumber.getMatchNumber()) * winning.get(matchNumber).getCount();
+        return sum;
     }
 }
