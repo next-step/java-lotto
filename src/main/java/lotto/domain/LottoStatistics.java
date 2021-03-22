@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoStatistics {
+    public static final long THREE_MATCHING_PRIZE = 5000L;
+    public static final long FOUR_MATCHING_PRIZE = 50000L;
+    public static final long FIVE_MATCHING_PRIZE = 1500000L;
+    public static final long SIX_MATCHING_PRIZE = 2000000000L;
+
     private final LottoDiscriminator lottoDiscriminator;
     private final List<LottoTicket> lottoTickets;
 
@@ -36,12 +41,13 @@ public class LottoStatistics {
     }
 
     public double yield(int payment) {
-        final long threeMatchingPrize = 5000L * threeMatchingLottoTicketsCount();
-        final long fourMatchingPrize = 50000L * fourMatchingLottoTicketsCount();
-        final long fiveMatchingPrize = 1500000L * fiveMatchingLottoTicketsCount();
-        final long sixMatchingPrize = 2000000000L * sixMatchingLottoTicketsCount();
+        final long threeMatchingLottoTicketsPrize = THREE_MATCHING_PRIZE * threeMatchingLottoTicketsCount();
+        final long fourMatchingLottoTicketsPrize = FOUR_MATCHING_PRIZE * fourMatchingLottoTicketsCount();
+        final long fiveMatchingLottoTicketsPrize = FIVE_MATCHING_PRIZE * fiveMatchingLottoTicketsCount();
+        final long sixMatchingLottoTicketsPrize = SIX_MATCHING_PRIZE * sixMatchingLottoTicketsCount();
 
-        final long totalPrize = threeMatchingPrize + fourMatchingPrize + fiveMatchingPrize + sixMatchingPrize;
+        final long totalPrize = threeMatchingLottoTicketsPrize + fourMatchingLottoTicketsPrize +
+                fiveMatchingLottoTicketsPrize + sixMatchingLottoTicketsPrize;
 
         return (double) totalPrize / payment;
     }
