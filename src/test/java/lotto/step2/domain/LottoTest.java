@@ -48,4 +48,24 @@ class LottoTest {
                 Arguments.of(new int[]{5, 10, 13, 17, 29})
         );
     }
+
+    @DisplayName("중복숫자 에러처리")
+    @ParameterizedTest
+    @MethodSource("provideOverLappedLotto")
+    void lotto_숫자중복구성(int[] input) {
+        assertThatThrownBy(() -> {
+            Lotto lotto = Lotto.of(input);
+        }).isInstanceOf(LottoException.class)
+                .hasMessage("중복된 숫자는 허용되지 않습니다.");
+    }
+
+    private static Stream<Arguments> provideOverLappedLotto() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 5}),
+                Arguments.of(new int[]{1, 3, 5, 6, 7, 3}),
+                Arguments.of(new int[]{21, 33, 34, 33, 15, 21}),
+                Arguments.of(new int[]{1, 3, 5, 7, 5, 1}),
+                Arguments.of(new int[]{5, 10, 13, 17, 29, 5})
+        );
+    }
 }
