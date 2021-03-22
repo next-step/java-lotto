@@ -5,13 +5,13 @@ import java.util.List;
 
 public final class Lottos {
 
-  public static final int PRICE = 1000;
+  public static final Money PRICE = new Money(1000);
 
   private final List<Object> lottos;
 
-  public Lottos(int money) {
+  public Lottos(Money money) {
     lottos = new ArrayList<>();
-    for (int i = 0; i < money / PRICE; i++) {
+    for (int i = 0; i < money.divideBy(PRICE).toInteger(); i++) {
       lottos.add(new Object());
     }
   }

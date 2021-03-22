@@ -12,8 +12,8 @@ class LottosTest {
   @DisplayName("금액을 입력받아, 로또 금액으로 나눠 개수를 반환한다.")
   void create() {
     // given
-    int money = 14000;
-    int expectedSize = money / PRICE;
+    Money money = new Money(14000);
+    int expectedSize = money.divideBy(PRICE).toInteger();
 
     // when
     Lottos lottos = new Lottos(money);
