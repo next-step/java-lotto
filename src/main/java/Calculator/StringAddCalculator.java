@@ -16,6 +16,6 @@ public class StringAddCalculator {
         int[] operands = StringUtils.parseOperand(
                 StringUtils.splitWithMatcher(input)
         );
-        return Operator.add(operands);
+        return 0;
     }
 }

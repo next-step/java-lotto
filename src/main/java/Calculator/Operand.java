@@ -1,9 +1,10 @@
 /*
-* 피연산자 문자열을 입력받아 정수형 원시값으로 포장하고 관련 로직을 수행하는 클래스
-* */
+ * 피연산자를 입력받아 원시값으로 포장하고 관련 로직을 수행하는 클래스
+ * */
 package Calculator;
 
 import java.util.Objects;
+import java.util.function.BinaryOperator;
 
 public class Operand {
     private static int BOUND_NUMBER = 0;
@@ -11,8 +12,8 @@ public class Operand {
 
     private int operand;
 
-    public Operand(String str) {
-        operand = Integer.parseInt(str);
+    public Operand(int operand) {
+        this.operand = operand;
     }
 
     /*
@@ -23,6 +24,22 @@ public class Operand {
             throw new IllegalArgumentException(NEGATVIE_NUMBER_MESSAGE);
         }
         return true;
+    }
+
+    /*
+    * 새로운 피연산자와 연산자를 받아 연산을 수행하고 새로운 Operand 객체를 반환한다.
+    * */
+    public Operand operate(Operand newOperand, BinaryOperator<Integer> operator) {
+        return new Operand(operator.apply(operand, newOperand.operand));
+    }
+
+
+    /*
+    * 포장하고 있던 operand 값을 반환한다.
+    * (최대한 get method는 사용하고싶지 않았으나, StringAddCalculator에서 결과값으로 int를 반환해야하므로 만듦)
+    * */
+    public int getOperand() {
+        return operand;
     }
 
     @Override
