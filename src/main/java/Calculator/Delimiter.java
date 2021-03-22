@@ -20,10 +20,6 @@ public class Delimiter {
         this.delimter = delimter;
     }
 
-    public String getDelimter() {
-        return delimter;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

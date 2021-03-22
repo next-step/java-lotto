@@ -33,9 +33,6 @@ public class OperandTest {
         field.setAccessible(true);
         int operandValue = field.getInt(operand);
         assertThat(operandValue).isEqualTo(TEST_INT);
-
-        //then-getOperand(method)로 확인
-        assertThat(operand.getOperand()).isEqualTo(TEST_INT);
     }
 
     @Test

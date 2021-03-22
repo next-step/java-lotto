@@ -33,15 +33,6 @@ public class Operand {
         return new Operand(operator.apply(operand, newOperand.operand));
     }
 
-
-    /*
-    * 포장하고 있던 operand 값을 반환한다.
-    * (최대한 get method는 사용하고싶지 않았으나, StringAddCalculator에서 결과값으로 int를 반환해야하므로 만듦)
-    * */
-    public int getOperand() {
-        return operand;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
