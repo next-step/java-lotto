@@ -1,3 +1,6 @@
+/*
+* 피연산자 숫자들을 입력받아 연산을 수행하고 결과값을 반환하는 클래스
+* */
 package Calculator;
 
 import java.util.Arrays;
