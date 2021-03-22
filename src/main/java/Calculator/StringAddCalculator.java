@@ -6,6 +6,7 @@ public class StringAddCalculator {
         if (StringUtils.checkEmpty(input)) {
             return 0;
         }
-        return 1;
+        int[] operands = StringUtils.parseOperand(input.split(""));
+        return operands[0];
     }
 }

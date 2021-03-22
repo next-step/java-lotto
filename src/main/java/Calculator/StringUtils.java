@@ -1,5 +1,7 @@
 package Calculator;
 
+import java.util.Arrays;
+
 public class StringUtils {
 
     public static boolean checkEmpty(String input) {
@@ -7,6 +9,12 @@ public class StringUtils {
             return true;
         }
         return false;
+    }
+
+    public static int[] parseOperand(String[] strOperands){
+        return Arrays.stream(strOperands)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
 }
