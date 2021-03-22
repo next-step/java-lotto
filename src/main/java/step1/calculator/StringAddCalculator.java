@@ -1,8 +1,15 @@
 package step1.calculator;
 
-public class StringAddCalculator {
-    public static int splitAndSum(String expression) {
-        if(expression == null || expression.isEmpty()) return 0;
+
+import static utils.StringUtils.isNullOrBlank;
+
+public final class StringAddCalculator {
+
+    public static final int splitAndSum(String expression) {
+        if (isNullOrBlank(expression)) {
+            return 0;
+        }
         return 1;
     }
+
 }
