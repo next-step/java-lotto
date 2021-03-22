@@ -13,12 +13,12 @@ public class PurchaseAmount {
     }
 
     public PurchaseAmount(String purchaseAmount) {
-        checkCharacter(purchaseAmount);
+        checkInteger(purchaseAmount);
         checkGreaterThanMinimum(Integer.parseInt(purchaseAmount));
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
     }
 
-    private void checkCharacter(String purchaseAmount) {
+    private void checkInteger(String purchaseAmount) {
         try {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {

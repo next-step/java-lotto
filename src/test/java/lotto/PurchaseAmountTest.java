@@ -24,4 +24,10 @@ public class PurchaseAmountTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount(999));
         assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount("999"));
     }
+
+    @Test
+    @DisplayName("숫자가 아닐 경우 예외")
+    public void checkInteger() throws Exception {
+        assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount("1000s"));
+    }
 }
