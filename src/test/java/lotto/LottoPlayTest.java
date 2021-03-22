@@ -23,6 +23,21 @@ import static org.assertj.core.api.Assertions.*;
 class LottoPlayTest {
 
     @Test
+    @DisplayName("하나의 로또에 중복되는 숫자가 있으면 에러가 발생한다.")
+    void lottoNumberUniqueInLotto() {
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 5);
+        List<LottoNumber> lotto = new ArrayList<>();
+
+        for (Integer number : lottoNumber) {
+            lotto.add(new LottoNumber(number));
+        }
+
+        assertThatThrownBy(() -> {
+            new LottoNumbers(lotto);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("보너스볼은 당첨번호와 중복되면 에러가 발생한다.")
     void bonusBallUnique() {
         int bonusBall = 5;
@@ -89,7 +104,7 @@ class LottoPlayTest {
         }
 
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber);
-        assertThat(lottoNumbers.countMatchNumber(winningNumber)).isEqualTo(countWinnings);
+        assertThat(lottoNumbers.countMatchNumber(new WinningNumber(winningNumber))).isEqualTo(countWinnings);
     }
 
     @ParameterizedTest

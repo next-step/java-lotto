@@ -14,6 +14,6 @@ public class TotalLottoNumbers {
     }
 
     public void recordEachLottoNumbers(IssueNumber issueNumber, LottoNumbers lottoNumbers) {
-        totalLottoNumbers.put(issueNumber, new LottoNumbers(lottoNumbers.getLottoNumbers()));
+        totalLottoNumbers.put(issueNumber, lottoNumbers);
     }
 }
