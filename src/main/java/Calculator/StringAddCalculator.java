@@ -10,7 +10,7 @@ public class StringAddCalculator {
         if (StringUtils.checkEmpty(input)) {
             return INIT_NUM;
         }
-        int[] operands = StringUtils.parseOperand(input.split(",|:"));
+        int[] operands = StringUtils.parseOperand(StringUtils.splitWithMatcher(input));
         return Operator.add(operands);
     }
 }
