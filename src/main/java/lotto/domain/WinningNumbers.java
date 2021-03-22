@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private static final int NUMBER_LENGTH = 6;
@@ -10,11 +12,13 @@ public class WinningNumbers {
     private static final String CHECK_LENGTH = String.format("당첨 번호의 길이는 {}(이)여야 합니다.", NUMBER_LENGTH);
     private static final String CHECK_INTEGER = "당첨 번호는 모두 숫자여야 합니다.";
     private static final String CHECK_BOUND = String.format("당첨 번호는 {} ~ {} 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
-    private final String[] winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public WinningNumbers(String[] winningNumbers) {
         validate(winningNumbers);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = Arrays.stream(winningNumbers)
+                .mapToInt(Integer::parseInt)
+                .boxed().collect(Collectors.toList());
     }
 
     private void validate(String[] winningNumbers) {
