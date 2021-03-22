@@ -89,12 +89,17 @@ public class LottoStatisticsTest {
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
 
         final int payment = 2000;
-        final long threeMatchingPrize = 5000L * lottoStatistics.threeMatchingLottoTicketsCount();
-        final long fourMatchingPrize = 50000L * lottoStatistics.fourMatchingLottoTicketsCount();
-        final long fiveMatchingPrize = 1500000L * lottoStatistics.fiveMatchingLottoTicketsCount();
-        final long sixMatchingPrize = 2000000000L * lottoStatistics.sixMatchingLottoTicketsCount();
+        final long threeMatchingLottoTicketsPrize =
+                LottoStatistics.THREE_MATCHING_PRIZE * lottoStatistics.threeMatchingLottoTicketsCount();
+        final long fourMatchingLottoTicketsPrize =
+                LottoStatistics.FOUR_MATCHING_PRIZE * lottoStatistics.fourMatchingLottoTicketsCount();
+        final long fiveMatchingLottoTicketsPrize =
+                LottoStatistics.FIVE_MATCHING_PRIZE * lottoStatistics.fiveMatchingLottoTicketsCount();
+        final long sixMatchingLottoTicketsPrize =
+                LottoStatistics.SIX_MATCHING_PRIZE * lottoStatistics.sixMatchingLottoTicketsCount();
 
-        final long totalPrize = threeMatchingPrize + fourMatchingPrize + fiveMatchingPrize + sixMatchingPrize;
+        final long totalPrize = threeMatchingLottoTicketsPrize + fourMatchingLottoTicketsPrize +
+                fiveMatchingLottoTicketsPrize + sixMatchingLottoTicketsPrize;
         final double expected = (double) totalPrize / payment;
 
         final double result = lottoStatistics.yield(payment);
