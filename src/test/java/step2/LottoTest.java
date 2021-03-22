@@ -22,7 +22,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
+        lotto = new Lotto(lengthPerGame);
         seed = new Seed(14000);
     }
 
