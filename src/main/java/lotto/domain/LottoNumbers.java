@@ -27,21 +27,7 @@ public class LottoNumbers {
     }
 
     public boolean isContain(LottoNumber bonusNumber) {
-        boolean trueOrFalse = false;
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            trueOrFalse = isMatching(lottoNumber, bonusNumber.getLottoNumber(), trueOrFalse);
-        }
-
-        return trueOrFalse;
-    }
-
-    public boolean isMatching(LottoNumber lottoNumber, int bonusNumber, boolean trueOrFalse) {
-        if (bonusNumber == lottoNumber.getLottoNumber()) {
-            trueOrFalse = true;
-        }
-
-        return trueOrFalse;
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public int countMatchNumber(WinningNumber winningNumber) {
