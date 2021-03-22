@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class WinningNumbers {
     private static final int NUMBER_LENGTH = 6;
+    private static final int BOUND_MAX = 45;
+    private static final int BOUND_MIN = 1;
     private static final String CHECK_LENGTH = String.format("당첨 번호의 길이는 {}(이)여야 합니다.", NUMBER_LENGTH);
     private static final String CHECK_INTEGER = "당첨 번호는 모두 숫자여야 합니다.";
+    private static final String CHECK_BOUND = String.format("당첨 번호는 {} ~ {} 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
     private final String[] winningNumbers;
 
     public WinningNumbers(String[] winningNumbers) {
@@ -16,6 +20,7 @@ public class WinningNumbers {
     private void validate(String[] winningNumbers) {
         checkLength(winningNumbers);
         checkInteger(winningNumbers);
+        checkBound(winningNumbers);
     }
 
     private void checkLength(String[] winningNumbers) {
@@ -35,6 +40,19 @@ public class WinningNumbers {
             Integer.parseInt(winningNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(CHECK_INTEGER);
+        }
+    }
+
+    private void checkBound(String[] winningNumbers) {
+        for (String winningNumber : winningNumbers) {
+            int number = Integer.parseInt(winningNumber);
+            checkBound(number);
+        }
+    }
+
+    private void checkBound(int number) {
+        if (BOUND_MIN > number || number > BOUND_MAX) {
+            throw new IllegalArgumentException(CHECK_BOUND);
         }
     }
 
