@@ -7,7 +7,7 @@ public class Money {
 
     public Money(int money) {
         if (money < 0) {
-            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+            throw new IllegalArgumentException(LottoConstant.MONEY_NEGATIVE_EXCEPTION);
         }
         this.balance = money;
     }

@@ -8,4 +8,5 @@ public class LottoConstant {
 
     public static final String NUMBER_COUNT_EXCEPTION =
             String.format("로또 번호는 반드시 %d자리여야 합니다.", NUMBER_COUNT);
+    public static final String MONEY_NEGATIVE_EXCEPTION = "금액은 음수일 수 없습니다.";
 }
