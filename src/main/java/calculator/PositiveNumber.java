@@ -9,16 +9,15 @@ public class PositiveNumber {
     }
 
     private int parseInt(String positiveNumber) {
-        int targetNum;
         try {
-            targetNum = Integer.parseInt(positiveNumber);
+            int targetNum = Integer.parseInt(positiveNumber);
+            if(targetNum < 0) {
+                throw new RuntimeException();
+            }
+            return targetNum;
         } catch (NumberFormatException e) {
             throw new RuntimeException();
         }
-        if(targetNum<0) {
-            throw new RuntimeException();
-        }
-        return targetNum;
     }
 
     public int getPositiveNumber() {
