@@ -31,7 +31,9 @@ public class Lotto {
             throw new LottoException(LOTTO_NUMBERS_MADE_OF_SIX_NUMBERS);
         }
 
-        ArrayList<Integer> numList = new ArrayList<Integer>(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+        List<Integer> numList = new ArrayList<Integer>(Arrays.stream(numbers)
+                        .boxed()
+                        .collect(Collectors.toList()));
         if (numbers.length != numList.stream()
                 .distinct()
                 .count()
