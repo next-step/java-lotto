@@ -5,10 +5,12 @@ import lotto.dto.LottoNumber;
 import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
 import lotto.domain.LottoNumbers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +20,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoPlayTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    @DisplayName("로또 숫자가 1 ~ 45에 해당하지 않으면 에러가 발생한다.")
+    void lottoNumberRange(int number) {
+        assertThatThrownBy(() -> {
+            new LottoNumber(number);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
     @Test
     @DisplayName("수동으로 로또를 구매할 수 있다.")

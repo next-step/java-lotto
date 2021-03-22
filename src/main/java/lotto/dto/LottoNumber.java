@@ -5,6 +5,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
+            throw new IllegalArgumentException();
+        }
+
         this.lottoNumber = lottoNumber;
     }
 
