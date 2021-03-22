@@ -21,6 +21,7 @@ public class LottoGenerator {
         for (int i = 0; i < length; ++i) {
             newLotto.add(lottoNumber.get(i));
         }
+        Collections.sort(newLotto);
         return newLotto;
     }
 }
