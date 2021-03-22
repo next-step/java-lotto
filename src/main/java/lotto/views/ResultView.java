@@ -14,6 +14,7 @@ public class ResultView {
         for (final LottoTicket lottoTicket : lottoTickets) {
             System.out.println(prettyString(lottoTicket));
         }
+        System.out.println();
     }
 
     private static String prettyString(LottoTicket lottoTicket) {
@@ -27,12 +28,12 @@ public class ResultView {
     }
 
     public static void print(LottoStatistics lottoStatistics, int payment) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원) - " + lottoStatistics.threeMatchingLottoTicketsCount() + "개");
         System.out.println("4개 일치 (50000원) - " + lottoStatistics.fourMatchingLottoTicketsCount() + "개");
         System.out.println("5개 일치 (1500000원) - " + lottoStatistics.fiveMatchingLottoTicketsCount() + "개");
         System.out.println("6개 일치 (2000000000원) - " + lottoStatistics.sixMatchingLottoTicketsCount() + "개");
-        System.out.println("총 수익률은 " + lottoStatistics.yield(payment) + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", lottoStatistics.yield(payment)) + "입니다.");
     }
 }
