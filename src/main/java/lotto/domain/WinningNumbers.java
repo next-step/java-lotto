@@ -1,13 +1,21 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class WinningNumbers {
-    private final List<Integer> winningNumbers;
+    private static final int NUMBER_LENGTH = 6;
+    private static final String CHECK_LENGTH = String.format("로또 번호의 길이는 {}(이)여야 합니다.", NUMBER_LENGTH);
+    private final String[] winningNumbers;
 
-    public WinningNumbers(List<Integer> winningNumbers) {
+    public WinningNumbers(String[] winningNumbers) {
+        checkLength(winningNumbers);
         this.winningNumbers = winningNumbers;
+    }
+
+    private void checkLength(String[] winningNumbers) {
+        if (winningNumbers.length != NUMBER_LENGTH) {
+            throw new IllegalArgumentException(CHECK_LENGTH);
+        }
     }
 
     @Override
