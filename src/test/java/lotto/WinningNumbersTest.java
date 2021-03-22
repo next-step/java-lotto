@@ -32,4 +32,13 @@ public class WinningNumbersTest {
         String[] numbers = {"1", "2", "3", "4", "5", "X"};
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(numbers));
     }
+
+    @Test
+    @DisplayName("당첨 번호의 요소 범위가 1 ~ 45가 아닐 경우 예외")
+    public void checkBound() throws Exception {
+        String[] overMax = {"1", "2", "3", "4", "5", "46"};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(overMax));
+        String[] lowerMin = {"0", "2", "3", "4", "5", "45"};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(lowerMin));
+    }
 }
