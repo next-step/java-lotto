@@ -13,7 +13,10 @@ public class LottoStatistics {
     }
 
     private int matchingLottoTicketsCount(final int matchingCount) {
-        return (int) lottoTickets.stream().filter(e -> lottoDiscriminator.matchingCount(e) == matchingCount).count();
+        return (int) lottoTickets.stream()
+                .map(lottoDiscriminator::matchingCount)
+                .filter(e -> e == matchingCount)
+                .count();
     }
 
     public int threeMatchingLottoTicketsCount() {
