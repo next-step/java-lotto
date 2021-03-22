@@ -25,4 +25,11 @@ public class WinningNumbersTest {
         String[] lowerSix = {"1", "2", "3", "4", "5"};
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(lowerSix));
     }
+
+    @Test
+    @DisplayName("당청 번호의 요소 모두 정수가 아닐 경우 예외")
+    public void checkInteger() throws Exception {
+        String[] numbers = {"1", "2", "3", "4", "5", "X"};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(numbers));
+    }
 }
