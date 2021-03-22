@@ -1,8 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.strategy.Manual;
-import lotto.strategy.Numbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,19 +11,19 @@ public class LottoController {
         int buyAmount = inputView.inputBuyAmount();
 
         // 로또 발급
-        LottoMachine lottoMachine = new LottoMachine(buyAmount);
+        LottoTickets lottoTickets = LottoMachine.createLottoTickets(buyAmount);
 
         // 로또 번호 확인
-        ResultView resultView = new ResultView();
-        resultView.printLottoTicketInfos(lottoMachine);
+        ResultView resultView = new ResultView(lottoTickets);
+        resultView.printLottoTicketInfos();
 
         // 당첨 결과 확인
-        String winnerNumbers = inputView.inputWinnerNumber();
-        Numbers winnerNumber = new Manual(winnerNumbers);
-        LottoYield lottoYield = new LottoYield(lottoMachine.lottoTickets(), winnerNumber);
+        String inputNumber = inputView.inputWinnerNumber();
+        int inputBonusNumber = inputView.inputBonusNumber();
+        LottoWinners lottoWinners = LottoMachine.createWinners(inputNumber, inputBonusNumber);
 
         // 당첨 내역 출력
-        resultView.printLottoRanksInfos(lottoMachine.lottoTickets(), winnerNumber);
-        resultView.printLottoYield(lottoYield);
+        resultView.printLottoRanksInfos(lottoWinners);
+        resultView.printLottoYield(lottoTickets, lottoWinners);
     }
 }

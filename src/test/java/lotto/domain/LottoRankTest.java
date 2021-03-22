@@ -1,83 +1,88 @@
 package lotto.domain;
 
-import lotto.strategy.Auto;
-import lotto.strategy.Manual;
-import lotto.strategy.Numbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("로또 당첨 정보")
+@DisplayName("당첨 결과")
 public class LottoRankTest {
 
-    private Numbers winnerNumber;
-
-    public List<Integer> createLottoNumber() {
-        return Arrays.asList(1,2,3,4,5,6);
-    }
+    private LottoWinners winners;
 
     @BeforeEach
     public void setUp() {
-        winnerNumber = new Auto(createLottoNumber());
+        winners = LottoMachine.createWinners("1,2,3,4,5,6", 45);
     }
 
     @Test
     @DisplayName("로또 꽝 생성 확인")
-    public void lottoRankOutTest() throws Exception {
+    public void lottoRankMissTest() throws Exception {
         //given
         String inputLottoThree = "1,2,42,43,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoThree);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
 
         //when
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.ZERO);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 5등 생성 확인")
+    public void lottoRankFiveTest() throws Exception {
+        //given
+        String inputLottoThree = "1,2,3,43,44,45";
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
+
+        //when
+
+        //then
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
     @DisplayName("로또 당첨 4등 생성 확인")
     public void lottoRankFourTest() throws Exception {
         //given
-        String inputLottoThree = "1,2,3,43,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoThree);
+        String inputLottoFour = "1,2,3,4,44,45";
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFour);
 
         //when
 
+
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.THREE);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FOURTH);
     }
 
     @Test
     @DisplayName("로또 당첨 3등 생성 확인")
-    public void lottoRankThreeTest() throws Exception {
+    public void lottoRankThirdTest() throws Exception {
         //given
-        String inputLottoFour = "1,2,3,4,44,45";
-        LottoTicket ticket = new LottoTicket(inputLottoFour);
+        String inputLottoFive = "1,2,3,4,5,44";
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
 
         //when
 
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.FOUR);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.THIRD);
     }
 
+
     @Test
-    @DisplayName("로또 당첨 2등 생성 확인")
+    @DisplayName("로또 당첨 2등(보너스볼) 생성 확인")
     public void lottoRankTwoTest() throws Exception {
         //given
         String inputLottoFive = "1,2,3,4,5,45";
-        LottoTicket ticket = new LottoTicket(inputLottoFive);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
 
         //when
 
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.FIVE);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.SECOND);
     }
 
     @Test
@@ -85,11 +90,11 @@ public class LottoRankTest {
     public void lottoRankOneTest() throws Exception {
         //given
         String inputLottoSix = "1,2,3,4,5,6";
-        LottoTicket ticket = new LottoTicket(inputLottoSix);
+        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoSix);
 
         //when
 
         //then
-        assertThat(ticket.rank(winnerNumber)).isEqualTo(LottoRank.SIX);
+        assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.FIRST);
     }
 }
