@@ -2,10 +2,11 @@ package calculator;
 
 import common.utils.StringUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class PositiveNumbers {
 
@@ -34,11 +35,7 @@ public class PositiveNumbers {
     }
 
     private List<PositiveNumber> parsePositiveNumberList(String[] textArray) {
-        List<PositiveNumber> positiveNumberList = new ArrayList<>();
-        for (String text : textArray) {
-            positiveNumberList.add(new PositiveNumber(text));
-        }
-        return positiveNumberList;
+        return Arrays.stream(textArray).map(PositiveNumber::new).collect(Collectors.toList());
     }
 
     public int sum() {
