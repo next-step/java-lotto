@@ -20,6 +20,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public int lottoNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
