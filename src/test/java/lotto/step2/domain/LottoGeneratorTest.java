@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
@@ -13,7 +15,7 @@ class LottoGeneratorTest {
     @ValueSource(ints = {6, 6, 6})
     void getSixLottoNumbers(int expected) {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
-        int[] lottoArray = lottoGenerator.generateShuffledNumbers();
-        assertThat(lottoArray.length).isEqualTo(expected);
+        Set<Integer> lottoSet = lottoGenerator.generateShuffledNumbers();
+        assertThat(lottoSet.size()).isEqualTo(expected);
     }
 }

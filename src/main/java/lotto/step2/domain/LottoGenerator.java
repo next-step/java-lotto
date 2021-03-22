@@ -2,6 +2,7 @@ package lotto.step2.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,11 +23,10 @@ public class LottoGenerator {
         return LazyHolder.instance;
     }
 
-    public int[] generateShuffledNumbers() {
+    public Set<Integer> generateShuffledNumbers() {
         Collections.shuffle(AUTO_LOTTO);
         return AUTO_LOTTO.subList(START, END)
                 .stream()
-                .mapToInt(i->i)
-                .toArray();
+                .collect(Collectors.toSet());
     }
 }
