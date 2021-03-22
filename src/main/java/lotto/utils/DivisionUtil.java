@@ -8,7 +8,7 @@ public class DivisionUtil {
     private DivisionUtil() {
     }
 
-    public static int divideByThousand(PurchaseAmount purchaseAmount) {
+    public static int divisionByThousand(PurchaseAmount purchaseAmount) {
         return purchaseAmount.purchaseAmount() / THOUSAND;
     }
 }
