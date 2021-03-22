@@ -12,14 +12,14 @@ public class inputView {
     public static String purchaseAmount() {
         System.out.println(PURCHASE_AMOUNT);
         String purchaseAmount = scanner.nextLine().trim();
-        PreConditionUtil.isNullOrEmpty(purchaseAmount);
+        PreConditionUtil.checkNullOrEmpty(purchaseAmount);
         return purchaseAmount;
     }
 
     public static String winningNumbers() {
         System.out.println(WINNING_NUMBERS);
         String winningNumbers = scanner.nextLine().trim();
-        PreConditionUtil.isNullOrEmpty(winningNumbers);
+        PreConditionUtil.checkNullOrEmpty(winningNumbers);
         return winningNumbers;
     }
 }

@@ -9,8 +9,8 @@ class PreConditionUtilTest {
 
     @Test
     @DisplayName("null 또는 빈 값일 경우 예외")
-    public void isNullOrEmpty() throws Exception {
-        assertThatIllegalArgumentException().isThrownBy(() -> PreConditionUtil.isNullOrEmpty(null));
-        assertThatIllegalArgumentException().isThrownBy(() -> PreConditionUtil.isNullOrEmpty(""));
+    public void checkNullOrEmpty() throws Exception {
+        assertThatIllegalArgumentException().isThrownBy(() -> PreConditionUtil.checkNullOrEmpty(null));
+        assertThatIllegalArgumentException().isThrownBy(() -> PreConditionUtil.checkNullOrEmpty(""));
     }
 }

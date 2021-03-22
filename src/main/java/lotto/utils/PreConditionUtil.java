@@ -7,7 +7,7 @@ public class PreConditionUtil {
     private PreConditionUtil() {
     }
 
-    public static void isNullOrEmpty(String input) {
+    public static void checkNullOrEmpty(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(CHECK_NULL_OR_EMPTY);
         }
