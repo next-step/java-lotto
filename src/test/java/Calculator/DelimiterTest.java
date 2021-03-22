@@ -3,7 +3,7 @@ package Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static Calculator.Delimiter.DEFAULT_DELIMETER;
+import static Calculator.Delimiter.DEFAULT_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DelimiterTest {
@@ -11,16 +11,16 @@ public class DelimiterTest {
     private Delimiter delimiter;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         //given
         delimiter = new Delimiter();
 
     }
 
     @Test
-    void createTest(){
+    void createTest() {
         //then
-        assertThat(delimiter).isEqualTo(new Delimiter(DEFAULT_DELIMETER));
+        assertThat(delimiter).isEqualTo(new Delimiter(DEFAULT_DELIMITER));
     }
 
 }

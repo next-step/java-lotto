@@ -8,12 +8,12 @@ import java.util.Objects;
 
 public class Delimiter {
 
-    public static String DEFAULT_DELIMETER = ",|:";
+    public static String DEFAULT_DELIMITER = ",|:";
 
     private String delimiter;
 
     public Delimiter() {
-        this.delimiter = DEFAULT_DELIMETER;
+        this.delimiter = DEFAULT_DELIMITER;
     }
 
     public Delimiter(String delimter) {
@@ -24,8 +24,8 @@ public class Delimiter {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Delimiter delimiter = (Delimiter) o;
-        return Objects.equals(delimiter, delimiter.delimiter);
+        Delimiter delimiter1 = (Delimiter) o;
+        return Objects.equals(delimiter, delimiter1.delimiter);
     }
 
     @Override

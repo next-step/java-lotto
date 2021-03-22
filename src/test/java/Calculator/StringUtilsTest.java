@@ -10,14 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringUtilsTest {
 
     @ParameterizedTest
-    @NullAndEmptySource //given
-    void checkEmtpyTrue(String input){
+    @NullAndEmptySource
+        //given
+    void checkEmtpyTrue(String input) {
         assertThat(StringUtils.checkEmpty(input)).isTrue();
     }
 
     @ParameterizedTest
-    @CsvSource("1, |, ?") //given
-    void checkEmptyFalse(String input){
+    @CsvSource("1, |, ?")
+        //given
+    void checkEmptyFalse(String input) {
         assertThat(StringUtils.checkEmpty(input)).isFalse();
     }
 
@@ -36,7 +38,7 @@ public class StringUtilsTest {
 
 
     @Test
-    void splitTest(){
+    void splitTest() {
         //given
         String str = "1:3,4";
         Delimiter delimiter = new Delimiter(":|,");

@@ -46,7 +46,7 @@ public class OperandTest {
     }
 
     @Test
-    void operateTest(){
+    void operateTest() {
         //given
         Operand newOp = new Operand(TEST_INT + 1);
 

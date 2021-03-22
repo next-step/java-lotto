@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
-    public static final int INIT_NUM = 0;
+    private static final int INIT_NUM = 0;
     private static String PATTERN = "//(.)\n(.*)";
 
     /*

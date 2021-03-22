@@ -2,13 +2,13 @@ package Calculator;
 
 import org.junit.jupiter.api.Test;
 
-import static Calculator.Delimiter.DEFAULT_DELIMETER;
+import static Calculator.Delimiter.DEFAULT_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapperTest {
 
     @Test
-    void operandToIntTest(){
+    void operandToIntTest() {
         //given
         int testNum = 1;
         Operand operand = new Operand(testNum);
@@ -21,9 +21,9 @@ public class MapperTest {
     }
 
     @Test
-    void delimiterToStringTest(){
+    void delimiterToStringTest() {
         //given
-        String testDel = DEFAULT_DELIMETER;
+        String testDel = DEFAULT_DELIMITER;
         Delimiter delimiter = new Delimiter();
 
         //when

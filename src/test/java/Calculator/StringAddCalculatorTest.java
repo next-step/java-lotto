@@ -65,7 +65,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void calculate_CustomDel(){
+    void calculate_CustomDel() {
         //given
         String customStr = "//;\n1;2;3";
         int predict = 6;
@@ -75,8 +75,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void calculate_fail(){
-        assertThatThrownBy(() ->{
+    void calculate_fail() {
+        assertThatThrownBy(() -> {
             StringAddCalculator.calculate("-1:3:2");
         }).isInstanceOf(IllegalArgumentException.class);
     }
