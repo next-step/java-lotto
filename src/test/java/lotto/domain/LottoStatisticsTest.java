@@ -59,7 +59,7 @@ public class LottoStatisticsTest {
         final int expected = matchingLottoTicketsCount(4);
 
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.threeMatchingLottoTicketsCount();
+        final int result = lottoStatistics.fourMatchingLottoTicketsCount();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -69,7 +69,7 @@ public class LottoStatisticsTest {
         final int expected = matchingLottoTicketsCount(5);
 
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.threeMatchingLottoTicketsCount();
+        final int result = lottoStatistics.fiveMatchingLottoTicketsCount();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -79,7 +79,7 @@ public class LottoStatisticsTest {
         final int expected = matchingLottoTicketsCount(6);
 
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.threeMatchingLottoTicketsCount();
+        final int result = lottoStatistics.sixMatchingLottoTicketsCount();
 
         assertThat(result).isEqualTo(expected);
     }
