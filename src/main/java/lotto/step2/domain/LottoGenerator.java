@@ -1,12 +1,10 @@
 package lotto.step2.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private final List<Integer> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(Integer::new).collect(Collectors.toList());
+    private final int[] AUTO_LOTTO = IntStream.rangeClosed(1, 45).toArray();
 
     private LottoGenerator() {
     }
