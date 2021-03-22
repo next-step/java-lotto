@@ -36,7 +36,14 @@ public class LottoStatistics {
     }
 
     public double yield(int payment) {
-        return -1;
+        final long threeMatchingPrize = 5000L * threeMatchingLottoTicketsCount();
+        final long fourMatchingPrize = 50000L * fourMatchingLottoTicketsCount();
+        final long fiveMatchingPrize = 1500000L * fiveMatchingLottoTicketsCount();
+        final long sixMatchingPrize = 2000000000L * sixMatchingLottoTicketsCount();
+
+        final long totalPrize = threeMatchingPrize + fourMatchingPrize + fiveMatchingPrize + sixMatchingPrize;
+
+        return (double) totalPrize / payment;
     }
 
     @Override
