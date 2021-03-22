@@ -3,8 +3,8 @@ package study;
 public class Calculator {
 
 	public int run(String input) {
-		InputSplit inputSplit = new InputSplit(input);
-		String[] numbers = inputSplit.split();
+		InputSplit inputSplit = new InputSplit();
+		String[] numbers = inputSplit.split(input);
 		int sum = sum(numbers);
 		return sum;
 	}
