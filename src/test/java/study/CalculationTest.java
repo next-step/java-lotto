@@ -6,42 +6,43 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculationTest {
 	Calculator calculator = new Calculator();
+	InputSplit inputSplit;
 
 	@DisplayName("입력값 Null 및 공백 반환값 테스트")
 	@ParameterizedTest
 	@CsvSource(value = {",0", "'',0", "' ',0"})
 	void splitTest_Null_or_Empty(String input, String expected) {
-		assertThat(calculator.split(input)).contains(expected);
+		inputSplit = new InputSplit(input);
+		assertThat(inputSplit.split()).contains(expected);
 	}
 
 	@Test
 	@DisplayName("입력값 구분자 자르기 테스트")
 	void splitTest_구분자() {
-		assertThat(calculator.split("1,2")).contains("1", "2");
-		assertThat(calculator.split("1,2,3")).contains("1", "2", "3");
-		assertThat(calculator.split("1,2:3")).contains("1", "2", "3");
+		inputSplit = new InputSplit("1,2");
+		assertThat(inputSplit.split()).contains("1", "2");
+
+		inputSplit = new InputSplit("1,2,3");
+		assertThat(inputSplit.split()).contains("1", "2", "3");
+
+		inputSplit = new InputSplit("1,2:3");
+		assertThat(inputSplit.split()).contains("1", "2", "3");
 	}
 
 	@Test
 	@DisplayName("입력값 커스텀 구분자 자르기 테스트")
 	void splitTest_커스텀구분자() {
-		assertThat(calculator.split("//;\n1;2")).contains("1", "2");
-		assertThat(calculator.split("//;\n1;2;3")).contains("1", "2", "3");
-		assertThat(calculator.split("//w\n1w2w3")).contains("1", "2", "3");
-	}
+		inputSplit = new InputSplit("//;\n1;2");
+		assertThat(inputSplit.split()).contains("1", "2");
 
-	@DisplayName("숫자 이외의 값 또는 음수 테스트")
-	@ParameterizedTest
-	@ValueSource(strings = {"a", "-5", "$", "안"})
-	void validateInputTest(String input) {
-		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(() -> {
-				calculator.validatePositiveNumber(input);
-			});
+		inputSplit = new InputSplit("//;\n1;2;3");
+		assertThat(inputSplit.split()).contains("1", "2", "3");
+
+		inputSplit = new InputSplit("//w\n1w2w3");
+		assertThat(inputSplit.split()).contains("1", "2", "3");
 	}
 
 	@DisplayName("덧셈 테스트자: 표준 구분자")

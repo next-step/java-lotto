@@ -1,11 +1,10 @@
 package study;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Calculator {
+
 	public int run(String input) {
-		String[] numbers = split(input);
+		InputSplit inputSplit = new InputSplit(input);
+		String[] numbers = inputSplit.split();
 		int sum = sum(numbers);
 		return sum;
 	}
@@ -18,43 +17,10 @@ public class Calculator {
 		return sum;
 	}
 
-	public String[] split(String input) {
-		if (isNullOrEmpty(input)) {
-			return new String[] {"0"};
-		}
-
-		return splitDelimiter(input);
-	}
-
-	public int validatePositiveNumber(String input) {
+	private int validatePositiveNumber(String input) {
 		if (input.contains("-")) {
-			throw new RuntimeException();
+			throw new RuntimeException("음수는 포함될 수 없습니다.");
 		}
-
-		try {
-			return Integer.valueOf(input);
-		} catch (NumberFormatException ex) {
-			throw new RuntimeException();
-		}
-
-	}
-
-	private String[] splitDelimiter(String input) {
-		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			return matcher.group(2).split(customDelimiter);
-		}
-		return input.split(",|:");
-	}
-
-	private boolean isNullOrEmpty(String input) {
-		if (input == null) {
-			return true;
-		}
-		if (input.trim().isEmpty()) {
-			return true;
-		}
-		return false;
+		return Integer.valueOf(input);
 	}
 }
