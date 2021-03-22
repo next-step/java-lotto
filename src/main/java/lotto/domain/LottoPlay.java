@@ -7,8 +7,8 @@ import java.util.*;
 
 public class LottoPlay {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_LENGTH = 6;
+    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_LENGTH = 6;
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
     public static final List<LottoNumber> LOTTO_NUMBER = new ArrayList<>();

@@ -4,9 +4,10 @@ import lotto.dto.LottoNumber;
 
 import java.util.List;
 
+import static lotto.domain.LottoPlay.LOTTO_LENGTH;
+
 public class LottoNumbers {
 
-    private static final int LOTTO_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {

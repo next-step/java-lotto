@@ -1,10 +1,16 @@
 package lotto.dto;
 
+import static lotto.domain.LottoPlay.*;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int lottoNumber;
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
+
+    static {
+        for (int number = LOTTO_MIN; number <= LOTTO_MAX; number++) {
+            LOTTO_NUMBER.add(new LottoNumber(number));
+        }
+    };
 
     public LottoNumber(int lottoNumber) {
         if (lottoNumber < LOTTO_MIN || lottoNumber > LOTTO_MAX) {
