@@ -6,16 +6,26 @@ import lotto.domain.LottoPlay;
 import lotto.domain.Winning;
 import lotto.dto.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 import static org.assertj.core.api.Assertions.*;
 
 class LottoPlayTest {
+
+    @Test
+    @DisplayName("수동으로 로또를 구매할 수 있다.")
+    void canBuyLottoByManual() {
+        LottoPlay lottoPlay = new LottoPlay();
+        lottoPlay.createLottoByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoPlay.getLottoNumbers().size()).isEqualTo(1);
+    }
 
     @ParameterizedTest
     @CsvSource({"14000, 14"})
