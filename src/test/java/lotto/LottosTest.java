@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.Lottos.PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ class LottosTest {
   void create() {
     // given
     int money = 14000;
-    int expectedSize = money / 1000;
+    int expectedSize = money / PRICE;
 
     // when
     Lottos lottos = new Lottos(money);
