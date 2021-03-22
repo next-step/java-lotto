@@ -18,4 +18,12 @@ class SplitUtilTest {
                 .isThrownBy(() -> SplitUtil.split("1:2:3:4:5:6"))
                 .withMessageContaining("구분자가 \",\"인지 확인");
     }
+
+    @Test
+    @DisplayName("\",\"가 없을 시 예외")
+    public void checkDelimiter() throws Exception {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> SplitUtil.split("1:2:3:4:5:6"))
+                .withMessageContaining("구분자가 \",\"인지 확인");
+    }
 }
