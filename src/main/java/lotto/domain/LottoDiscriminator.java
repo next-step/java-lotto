@@ -26,8 +26,8 @@ public class LottoDiscriminator {
         }
     }
 
-    public int matchingCount(final LottoTicket lottoTickets) {
-        return lottoTickets.matchingCount(winningNumbers);
+    public int matchingCount(final LottoTicket lottoTicket) {
+        return lottoTicket.matchingCount(winningNumbers);
     }
 
     @Override
