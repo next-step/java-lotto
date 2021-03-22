@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Amount;
+import lotto.domain.HitNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStore;
 import lotto.view.InputView;
@@ -15,5 +16,7 @@ public class LottoGame {
 
     ResultView.showAmountOfLotto(amount.getAmount());
     ResultView.showLottoNumbers(lottos);
+
+    HitNumber hitNumber = new HitNumber(InputView.inputPrizeNumber());
   }
 }
