@@ -10,14 +10,14 @@ public class Delimiter {
 
     public static String DEFAULT_DELIMETER = ",|:";
 
-    private String delimter;
+    private String delimiter;
 
     public Delimiter() {
-        this.delimter = DEFAULT_DELIMETER;
+        this.delimiter = DEFAULT_DELIMETER;
     }
 
     public Delimiter(String delimter) {
-        this.delimter = delimter;
+        this.delimiter = delimter;
     }
 
     @Override
@@ -25,11 +25,11 @@ public class Delimiter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Delimiter delimiter = (Delimiter) o;
-        return Objects.equals(delimter, delimiter.delimter);
+        return Objects.equals(delimiter, delimiter.delimiter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(delimter);
+        return Objects.hash(delimiter);
     }
 }
