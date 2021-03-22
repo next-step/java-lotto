@@ -10,14 +10,14 @@ public class Shop {
     private final LottoGenerator lottoMachine = new LottoGenerator();
 
     public int calculateLottoCapacity(MoneyDTO money) {
-        return money.getAmount() / Price.LOTTO_PRICE;
+        return money.getAmount() / Price.LOTTO.getPrice();
     }
 
     public ShopResponseDTO buyLotto(MoneyDTO money, int capacity) {
-        if (capacity * Price.LOTTO_PRICE > money.getAmount()) {
+        if (capacity * Price.LOTTO.getPrice() > money.getAmount()) {
             throw new IllegalArgumentException();
         }
-        int change = money.getAmount() - capacity * Price.LOTTO_PRICE;
+        int change = money.getAmount() - capacity * Price.LOTTO.getPrice();
         LottoListDTO lottoList = lottoMachine.generateLottoList(capacity);
         ShopResponseDTO shopResponse = new ShopResponseDTO(money.getAmount(), capacity, lottoList, change);
         if (!isShopResponseValid(shopResponse)) {
@@ -27,7 +27,7 @@ public class Shop {
     }
 
     public boolean isShopResponseValid(ShopResponseDTO shopResponse) {
-        return shopResponse.getLottoCount() * Price.LOTTO_PRICE + shopResponse.getChange()
+        return shopResponse.getLottoCount() * Price.LOTTO.getPrice() + shopResponse.getChange()
                 == shopResponse.getOriginMoney();
     }
 }

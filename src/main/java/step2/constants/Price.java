@@ -1,9 +1,22 @@
 package step2.constants;
 
-public class Price {
-    public static final int LOTTO_PRICE = 1000;
-    public static final int THREE_MATCH_PRICE = 5000;
-    public static final int FOUR_MATCH_PRICE = 50000;
-    public static final int FIVE_MATCH_PRICE = 1500000;
-    public static final int SIX_MATCH_PRICE = 2000000000;
+public enum Price {
+
+    LOTTO(1000),
+    MISS(0),
+    FIFTH(5000),
+    FORTH(50000),
+    THIRD(1500000),
+    SECOND(30000000),
+    FIRST(2000000000);
+
+    private int price;
+
+    Price(int price){
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
