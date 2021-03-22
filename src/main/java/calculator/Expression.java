@@ -6,13 +6,13 @@ public class Expression {
     private final String expression;
 
     public Expression(String expression) {
-        this.expression = getDefaultOr(expression);
+        this.expression = getDefaultOrExpression(expression, DEFAULT);
         checkNegative(this.expression);
     }
 
-    private String getDefaultOr(String expression) {
+    private String getDefaultOrExpression(String expression, String defaultExpression) {
         if (isEmptyOrNull(expression)) {
-            return DEFAULT;
+            return defaultExpression;
         }
 
         return expression;
