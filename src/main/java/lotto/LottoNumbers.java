@@ -28,4 +28,16 @@ public final class LottoNumbers {
   public int size() {
     return lottoNumbers.size();
   }
+
+  public int compare(LottoNumbers other) {
+    int count = 0;
+
+    for (LottoNumber lottoNumber : other.lottoNumbers) {
+      if (lottoNumbers.contains(lottoNumber)) {
+        count++;
+      }
+    }
+
+    return count;
+  }
 }

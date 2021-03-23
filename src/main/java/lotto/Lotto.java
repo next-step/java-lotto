@@ -17,6 +17,6 @@ public final class Lotto {
   }
 
   public int compare(Lotto winningLotto) {
-    return 0;
+    return lottoNumbers.compare(winningLotto.lottoNumbers);
   }
 }
