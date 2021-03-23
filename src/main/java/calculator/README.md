@@ -25,3 +25,6 @@
 
 ### PrintView
 * 합을 출력한다. 
+
+### CalculateController
+* 입력값을 받아 연산하고 프린트 하는 계산기 프로세스를 제어한다
