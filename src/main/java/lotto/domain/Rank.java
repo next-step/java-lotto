@@ -1,32 +1,59 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public enum Rank {
-    FORTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    LOSE(0, 0),
+    FIFTH(5_000, 3),
+    FORTH(50_000, 4),
+    THIRD(1_500_000, 5),
+    SECOND(30_000_0000, 5, true),
+    FIRST(2_000_000_000, 6);
 
-    private final int matchCount;
-    private final int reward;
+    private final int prize;
+    private final int countOfMatch;
+    private final boolean matchBonus;
 
-    Rank(int matchCount, int reward) {
-        this.matchCount = matchCount;
-        this.reward = reward;
+    Rank(int prize, int countOfMatch) {
+        this(prize, countOfMatch, false);
     }
 
-    public int matchCount() {
-        return matchCount;
+    Rank(int prize, int countOfMatch, boolean matchBonus) {
+        this.prize = prize;
+        this.countOfMatch = countOfMatch;
+        this.matchBonus = matchBonus;
     }
 
-    public int reward() {
-        return reward;
+    public int prize() {
+        return prize;
     }
 
-    public static boolean isValid(int matchCount) {
-        for (Rank rank : Rank.values()) {
-            if (rank.matchCount == matchCount)
-                return true;
+    public int countOfMatch() {
+        return countOfMatch;
+    }
+
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.isMatch(countOfMatch, matchBonus))
+                .findFirst().orElse(LOSE);
+    }
+
+    private boolean isMatch(int countOfMatch, boolean matchBonus) {
+        if (this.countOfMatch != countOfMatch) {
+            return false;
         }
-        return false;
+
+        return isMatchBonus(matchBonus);
+    }
+
+    private boolean isMatchBonus(boolean matchBonus) {
+        if (!this.matchBonus)
+            return true;
+        return this.matchBonus == matchBonus;
+    }
+
+    public boolean matchBonus() {
+        return matchBonus;
     }
 }
