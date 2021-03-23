@@ -31,9 +31,7 @@ public class Separator {
         return stringBuilder
                 .append(customDelimiter)
                 .append(BAR)
-                .append(COMMA)
-                .append(BAR)
-                .append(COLON)
+                .append(defaultDelimiter())
                 .toString();
     }
 
