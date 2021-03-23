@@ -16,6 +16,10 @@ public final class LottoNumbers {
     }
   }
 
+  public LottoNumbers(String[] winningNumbers) {
+    lottoNumbers = null;
+  }
+
   public int size() {
     return lottoNumbers.size();
   }
