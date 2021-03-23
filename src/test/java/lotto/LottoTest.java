@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.Lotto.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,6 @@ class LottoTest {
     Lotto lotto = new Lotto();
 
     // then
-    assertThat(lotto.numbers()).hasSize(6);
+    assertThat(lotto.numbers()).hasSize(LOTTO_NUMBER_COUNT);
   }
 }
