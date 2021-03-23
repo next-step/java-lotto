@@ -30,7 +30,7 @@ public class LottoYieldTest {
     }
 
     public LottoTickets createTickets() {
-        List<LottoTicket> lottoTickets = Arrays.asList(LottoMachine.createLottoTicket(inputNumbers));
+        List<LottoTicket> lottoTickets = Arrays.asList(new LottoTicket(inputNumbers));
         return new LottoTickets(lottoTickets);
     }
 

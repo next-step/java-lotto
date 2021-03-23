@@ -78,7 +78,7 @@ public class LottoNumbersTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(stringToIntegers(input));
+            new LottoNumbers(stringToIntegers(input));
         });
 
         //then
@@ -92,7 +92,7 @@ public class LottoNumbersTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(stringToIntegers(input));
+            new LottoNumbers(stringToIntegers(input));
         });
     }
 }

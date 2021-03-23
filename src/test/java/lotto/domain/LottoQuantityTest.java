@@ -53,7 +53,7 @@ public class LottoQuantityTest {
 
     @ParameterizedTest
     @CsvSource(value = {"10000,11"})
-    @DisplayName("수동개수가 금액초과 시 예외 확인")
+    @DisplayName("수동 개수가 금액초과 시 예외 확인")
     public void manualOverQuantityExceptionTest(int buyAmount, int manualQuantity) throws Exception {
         //given
 

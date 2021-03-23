@@ -32,7 +32,7 @@ public class LottoNumberTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(inputNumber);
+            new LottoNumber(inputNumber);
         });
         //then
     }

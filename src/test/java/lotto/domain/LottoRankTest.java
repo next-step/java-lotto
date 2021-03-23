@@ -16,7 +16,7 @@ public class LottoRankTest {
 
     @BeforeEach
     public void setUp() {
-        winners = LottoMachine.createWinners(Arrays.asList(1,2,3,4,5,6), 45);
+        winners = new LottoWinners(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class LottoRankTest {
     public void lottoRankMissTest() throws Exception {
         //given
         List<Integer> inputLottoZero = Arrays.asList(1,2,42,43,44,45);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoZero);
+        LottoTicket ticket = new LottoTicket(inputLottoZero);
 
         //when
 
@@ -37,7 +37,7 @@ public class LottoRankTest {
     public void lottoRankFiveTest() throws Exception {
         //given
         List<Integer> inputLottoThree = Arrays.asList(1,2,3,43,44,45);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
+        LottoTicket ticket = new LottoTicket(inputLottoThree);
 
         //when
 
@@ -50,7 +50,7 @@ public class LottoRankTest {
     public void lottoRankFourTest() throws Exception {
         //given
         List<Integer> inputLottoFour = Arrays.asList(1,2,3,4,44,45);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFour);
+        LottoTicket ticket = new LottoTicket(inputLottoFour);
 
         //when
 
@@ -64,7 +64,7 @@ public class LottoRankTest {
     public void lottoRankThirdTest() throws Exception {
         //given
         List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,44);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
+        LottoTicket ticket = new LottoTicket(inputLottoFive);
 
         //when
 
@@ -79,7 +79,7 @@ public class LottoRankTest {
     public void lottoRankTwoTest() throws Exception {
         //given
         List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,45);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
+        LottoTicket ticket = new LottoTicket(inputLottoFive);
 
         //when
 
@@ -93,7 +93,7 @@ public class LottoRankTest {
     public void lottoRankOneTest() throws Exception {
         //given
         List<Integer> inputLottoSix = Arrays.asList(1,2,3,4,5,6);
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoSix);
+        LottoTicket ticket = new LottoTicket(inputLottoSix);
 
         //when
 
