@@ -1,8 +1,5 @@
 package step1.separator;
 
-import step1.number.Numbers;
-
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,8 +21,7 @@ public class Separator {
         Matcher m = Pattern.compile(CUSTOM_EXPRESSION_DELIMITER_FORMAT).matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(DELIMITER_POSITION);
-            String[] tokens = m.group(EXPRESSION_POSITION).split(customDelimiter(customDelimiter));
-            return tokens;
+            return m.group(EXPRESSION_POSITION).split(customDelimiter(customDelimiter));
         }
         return expression.split(defaultDelimiter());
     }
