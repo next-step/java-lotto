@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import static lotto.Lottos.PRICE;
+import static lotto.domain.Lottos.PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
