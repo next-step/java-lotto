@@ -3,6 +3,7 @@ package step1.number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step1.exception.NegativeNumberInputException;
+import step1.exception.StringNumberFormatException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -46,7 +47,7 @@ class NumberTest {
         assertThatThrownBy(() -> {
             assertThat(new Number(inputValue)).isNotNull();
         }).isInstanceOf(StringNumberFormatException.class)
-                .hasMessageContaining("음수가 입력되었습니다.");
+                .hasMessageContaining("숫자가 아닌 문자열을 입력했습니다.");
 
     }
 
