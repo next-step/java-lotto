@@ -23,4 +23,8 @@ public class LottoGame {
     public static LottoGame of(final int lottoAmount) {
         return new LottoGame(lottoAmount);
     }
+
+    public Lottos getLottos() {
+        return lottos;
+    }
 }
