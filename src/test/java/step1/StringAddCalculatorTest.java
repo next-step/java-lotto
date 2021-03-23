@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
@@ -54,6 +57,13 @@ public class StringAddCalculatorTest {
     @DisplayName("구분자 여러 개(콤마, 콜론)일때 숫자의 합을 더하는 하는 테스트")
     void sum_구분자_여러개_테스트(){
         int result = stringAddCalculator.sum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 사용하여 숫자의 합을 더하는 테스트")
+    void sum_커스팀_구분자() throws Exception {
+        int result = stringAddCalculator.sum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 }
