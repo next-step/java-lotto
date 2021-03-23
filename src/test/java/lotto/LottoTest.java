@@ -2,6 +2,7 @@ package lotto;
 
 import static lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
@@ -24,6 +25,23 @@ class LottoTest {
     return Stream.of(
         arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9"}, 2),
         arguments(new String[]{"45", "44", "43", "42", "41", "40"}, new String[]{"1", "2", "3", "4", "5", "6"}, 0)
+    );
+  }
+
+  static Stream<Arguments> multiComparingSource() {
+    return Stream.of(
+        arguments(
+            new String[]{"1", "2", "3", "4", "5", "6"},
+            new String[]{"2", "5", "6", "8", "9", "20"},
+            new String[]{"2", "5", "7", "8", "9", "13"},
+            2,
+            4),
+        arguments(
+            new String[]{"45", "44", "43", "42", "41", "40"},
+            new String[]{"1", "2", "3", "4", "5", "6"},
+            new String[]{"1", "2", "3", "4", "5", "6"},
+            0,
+            6)
     );
   }
 
@@ -53,5 +71,27 @@ class LottoTest {
 
     // then
     assertThat(matchCount).isEqualTo(expectedCount);
+  }
+
+  @ParameterizedTest
+  @DisplayName("여러개의 번호를 당첨번호와 비교해 일치한 갯수를 반환한다.")
+  @MethodSource("multiComparingSource")
+  void compare(String[] myNumbers1, String[] myNumbers2, String[] winningNumbers, int expectedCount1,
+      int expectedCount2) {
+    // given
+    Lotto myLotto1 = new Lotto(myNumbers1);
+    Lotto myLotto2 = new Lotto(myNumbers2);
+    Lotto winningLotto = new Lotto(winningNumbers);
+
+    // when
+    int matchCount1 = myLotto1.compare(winningLotto);
+    int matchCount2 = myLotto2.compare(winningLotto);
+
+    // then
+    assertAll(
+        () -> assertThat(matchCount1).isEqualTo(expectedCount1),
+        () -> assertThat(matchCount2).isEqualTo(expectedCount2)
+    );
+
   }
 }
