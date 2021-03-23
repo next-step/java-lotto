@@ -7,3 +7,22 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현대상 소스
+### [UI]
+* LottoAutoApplication : 자동 로또 진행을 위한 UI App
+* InputView : 구입금액, 당첨번호 입력처리를 위한 입력 기능 view
+* ResultView : 구매리스트, 당첨결과 출력을 위한 출력 기능 view
+### [Presentation Layer]
+* LottoController : 자동로또 구매, 당첨결과 조회 처리를 위한 API 진입소스
+* PurchaseLottoAutoRequest : 자동로또 구매정보를 저장하는 Input dto 클래스
+* PurchaseLottoAutoResponse : 자동로또 구매결과를 리턴해주기 위한 Output dto 클래스
+* InquiryWinRequest : 로또 당첨조회를 위한 Input dto 클래스
+* InquiryWinResponse : 로또 당첨조회를 위한 output dto 클래스
+### [Service Layer]
+* LottoAutoService : 로또 자동구매 및 당첨조회 처리를 위한 서비스 클래스
+### [Domain Layer]
+* LottoTicket : 여러 건의 로또를 표현하는 티켓 한 장
+* Lotto : 6개의 숫자를 갖는 로또복권 한 건
+* LottoNumber : 로또 숫자 하나
+* LottoRank : 로또 등수와 당첨금액 정보를 표현하기 위한 enum 클래스
