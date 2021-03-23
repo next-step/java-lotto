@@ -1,22 +1,14 @@
 package lotto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public final class Lotto {
 
-  public static final int LOTTO_NUMBER_COUNT = 6;
-
-  private final Set<LottoNumber> lottoNumbers;
+  private final LottoNumbers lottoNumbers;
 
   public Lotto() {
-    lottoNumbers = new HashSet<>();
-    for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-      lottoNumbers.add(new LottoNumber(1));
-    }
+    lottoNumbers = new LottoNumbers();
   }
 
-  public Set<LottoNumber> lottoNumbers() {
-    return lottoNumbers;
+  public int lottoNumbersSize() {
+    return lottoNumbers.size();
   }
 }

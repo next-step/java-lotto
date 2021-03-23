@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Lotto.LOTTO_NUMBER_COUNT;
+import static lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +16,6 @@ class LottoTest {
     Lotto lotto = new Lotto();
 
     // then
-    assertThat(lotto.lottoNumbers()).hasSize(LOTTO_NUMBER_COUNT);
+    assertThat(lotto.lottoNumbersSize()).isEqualTo(LOTTO_NUMBER_COUNT);
   }
 }
