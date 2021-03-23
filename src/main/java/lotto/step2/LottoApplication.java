@@ -1,10 +1,12 @@
 package lotto.step2;
 
 import lotto.step2.view.InputView;
+import lotto.step2.view.ResultView;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        InputView.enterLottoPurchaseAmount();
+        int lottoAmount = InputView.enterLottoPurchaseAmount();
+        ResultView.printPurchaseAmount(lottoAmount);
     }
 }
