@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringAddCalculatorTest {
 
@@ -43,6 +44,14 @@ class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("splitAndSum에 음수 입력시 예외처리 발생 여부 테스트")
+    @Test
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() ->
+                StringAddCalculator.splitAndSum("-1,2,3")
+        ).isInstanceOf(RuntimeException.class); // 요구사항에 RuntimeException 으로 검증하는 것이 있어서 이렇게 테스트했습니다.
     }
 
 }
