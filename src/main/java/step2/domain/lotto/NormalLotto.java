@@ -8,9 +8,9 @@ import java.util.stream.IntStream;
 
 public class NormalLotto {
 
-    protected static final int PRICE = 1000;
+    public static final int PRICE = 1000;
     protected static final int UPPER_BOUND = 45;
-    private static final int COUNT = 6;
+    protected static final int COUNT = 6;
 
     private final List<Integer> numbers;
 
@@ -42,8 +42,12 @@ public class NormalLotto {
         return list;
     }
 
-    private boolean valid(List<Integer> numbers) {
-        return inBoundary(numbers) && unique(numbers);
+    public boolean valid(List<Integer> numbers) {
+        return sizeSix(numbers) && inBoundary(numbers) && unique(numbers);
+    }
+
+    private boolean sizeSix(List<Integer> numbers){
+        return numbers.size()==COUNT;
     }
 
     private boolean inBoundary(List<Integer> numbers) {

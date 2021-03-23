@@ -52,8 +52,12 @@ public class WinningLotto extends NormalLotto {
         return 0;
     }
 
-    private boolean valid(List<Integer> numbers, int bonusNumber) {
-        return inBoundary(numbers, bonusNumber) && unique(numbers, bonusNumber);
+    public boolean valid(List<Integer> numbers, int bonusNumber) {
+        return sizeSix(numbers) && inBoundary(numbers, bonusNumber) && unique(numbers, bonusNumber);
+    }
+
+    private boolean sizeSix(List<Integer> numbers){
+        return numbers.size()==NormalLotto.COUNT;
     }
 
     private boolean unique(List<Integer> numbers, int bonusNumber) {

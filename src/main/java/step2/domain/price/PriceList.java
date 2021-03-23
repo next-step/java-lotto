@@ -1,5 +1,7 @@
 package step2.domain.price;
 
+import step2.domain.lotto.NormalLotto;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class PriceList {
         for(Price price:this.prices){
             profit+= price.getPrize();
         }
-        profit/= this.prices.size();
+        profit/= NormalLotto.PRICE;
         return profit;
     }
 
@@ -53,4 +55,5 @@ public class PriceList {
         countMap.put(Price.FIRST.getRank(), Price.FIRST.getPrize());
         return countMap;
     }
+
 }

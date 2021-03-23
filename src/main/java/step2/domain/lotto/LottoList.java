@@ -16,6 +16,10 @@ public class LottoList {
         return lottos;
     }
 
+    public int getLottoSize() {
+        return lottos.size();
+    }
+
     public LottoListDTO dto() {
         return new LottoListDTO(lottos.stream()
                 .map(NormalLotto::toString)
