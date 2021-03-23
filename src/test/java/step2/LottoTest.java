@@ -2,8 +2,10 @@ package step2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -57,5 +59,33 @@ public class LottoTest {
         Game lastPrize = lotto.lastPrize();
         Set<Number> numbers = new HashSet<>(lastPrize.numbers());
         assertEquals(lengthPerGame, numbers.size());
+    }
+
+    @DisplayName("당첨테스트")
+    @Test
+    void prize() {
+        String input = "1,2,3,4,5,6";
+        lotto.initLastPrize(input);
+        List<Game> games = lotto.games();
+        games.add(new Game(Arrays.asList(1,2,3,14,15,16)));
+        games.add(new Game(Arrays.asList(11,12,13,4,5,6)));
+        games.add(new Game(Arrays.asList(11,12,3,14,5,6)));
+        games.add(new Game(Arrays.asList(1,2,3,4,15,16)));
+        games.add(new Game(Arrays.asList(1,2,3,14,5,16)));
+        games.add(new Game(Arrays.asList(1,2,3,4,5,16)));
+        games.add(new Game(Arrays.asList(1,2,3,4,5,6)));
+
+        Map<Long, List<Game>> candidate = lotto.candidate();
+        candidate.forEach((key, value) -> {
+            if(key == 3){
+                assertEquals(3 , value.size());
+            }else if(key == 4){
+                assertEquals(2 , value.size());
+            }else if(key == 5){
+                assertEquals(1 , value.size());
+            }else if(key == 6){
+                assertEquals(1 , value.size());
+            }
+        });
     }
 }
