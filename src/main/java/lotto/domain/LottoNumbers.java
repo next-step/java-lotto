@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.dto.LottoNumber;
 import lotto.dto.WinningNumber;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static lotto.domain.LottoPlay.LOTTO_LENGTH;
 
@@ -15,7 +12,15 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+
+        if (this.lottoNumbers.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
 
         if (this.lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException();

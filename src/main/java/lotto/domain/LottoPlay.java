@@ -15,15 +15,15 @@ public class LottoPlay {
     private final TotalLottoNumbers totalLottoNumbers = new TotalLottoNumbers();
     private int issueNumber;
 
-    public LottoPlay() {
-        this.issueNumber = 1;
-    }
-
     static {
         for (int number = LOTTO_MIN; number <= LOTTO_MAX; number++) {
             LOTTO_NUMBER.add(new LottoNumber(number));
         }
     };
+
+    public LottoPlay() {
+        this.issueNumber = 1;
+    }
 
     public Map<IssueNumber, LottoNumbers> getLottoNumbers() {
         return totalLottoNumbers.getTotalLottoNumbers();
@@ -45,7 +45,6 @@ public class LottoPlay {
             lottoNumber.add(new LottoNumber(LOTTO_NUMBER.get(i)
                                                         .getLottoNumber()));
         }
-        Collections.sort(lottoNumber);
 
         return new LottoNumbers(lottoNumber);
     }
