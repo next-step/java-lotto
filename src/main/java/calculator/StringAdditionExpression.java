@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAdditionExpression {
-    public static final String DEFAULT = ",|:";
+    public static final String DEFAULT = "[,:]";
     public static final String CUSTOM_PREFIX = "//";
     public static final String CUSTOM_SUFFIX = "\n";
     public static final Pattern CUSTOM_PATTERN = Pattern.compile(
@@ -16,7 +16,12 @@ public class StringAdditionExpression {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
         if (matcher.find()) {
             this.separator = matcher.group(1);
+            input = input.replace(matcher.group(), "");
         }
         this.input = input;
+    }
+
+    public String[] array(){
+        return input.split(separator);
     }
 }
