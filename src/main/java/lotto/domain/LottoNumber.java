@@ -30,6 +30,13 @@ public class LottoNumber {
                 .count();
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public List<Integer> numbers() {
+        return numbers;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,13 +49,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    public List<Integer> numbers() {
-        return numbers;
     }
 }
