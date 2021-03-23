@@ -1,8 +1,7 @@
-package step2.constants;
+package step2.domain;
 
 public enum Price {
 
-    LOTTO(1000),
     MISS(0),
     FIFTH(5000),
     FORTH(50000),
@@ -19,4 +18,5 @@ public enum Price {
     public int getPrice() {
         return price;
     }
+
 }

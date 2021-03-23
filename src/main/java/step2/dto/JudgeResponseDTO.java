@@ -1,6 +1,6 @@
 package step2.dto;
 
-import step2.constants.Price;
+import step2.domain.Price;
 
 import java.util.HashMap;
 

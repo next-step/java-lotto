@@ -1,8 +1,9 @@
 package step2.domain;
 
-import step2.constants.Price;
+import step2.domain.lotto.LottoList;
+import step2.domain.lotto.WinningLotto;
 import step2.dto.JudgeResponseDTO;
-import step2.dto.LottoDTO.WinningLottoDTO;
+import step2.dto.WinningLottoDTO;
 import step2.dto.LottoListDTO;
 import step2.dto.MatchDTO;
 import step2.dto.ShopResponseDTO;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Judge {
 
-    public JudgeResponseDTO calculateResult(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
+    public JudgeResponseDTO calculateResult(LottoList lottoList, WinningLotto winningLotto) {
         List<MatchDTO> matchList = winningLottoMatchList(shopResponse, winningLotto);
         HashMap<Price, Integer> priceCountMap = convertToPriceCountMap(matchList);
         double profitIndex = calculateProfitIndex(priceCountMap, shopResponse.getOriginMoney());
@@ -51,16 +52,16 @@ public class Judge {
         return priceCountMap;
     }
 
-    private List<MatchDTO> winningLottoMatchList(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
-        List<Integer> winningNumbers = new ArrayList<>(winningLotto.getNumbers());
-        int bonusNumber = winningLotto.getBonusNumber();
-        LottoListDTO lottoList = shopResponse.getLottoList();
-        return lottoList.getLottoList()
-                .stream()
-                .map(lotto -> new MatchDTO(calculateMatchCount(lotto.getNumbers(), winningNumbers),
-                        match(lotto.getNumbers(), bonusNumber)))
-                .collect(Collectors.toList());
-    }
+//    private List<MatchDTO> winningLottoMatchList(ShopResponseDTO shopResponse, WinningLottoDTO winningLotto) {
+//        List<Integer> winningNumbers = new ArrayList<>(winningLotto.getNumbers());
+//        int bonusNumber = winningLotto.getBonusNumber();
+//        LottoListDTO lottoList = shopResponse.getLottoList();
+//        return lottoList.getLottoList()
+//                .stream()
+//                .map(lotto -> new MatchDTO(calculateMatchCount(lotto.getNumbers(), winningNumbers),
+//                        match(lotto.getNumbers(), bonusNumber)))
+//                .collect(Collectors.toList());
+//    }
 
     private int calculateMatchCount(List<Integer> numbers, List<Integer> winningNumbers) {
         int count = 0;

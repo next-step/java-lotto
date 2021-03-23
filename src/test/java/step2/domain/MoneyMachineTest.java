@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MoneyMachineTest {
 
-    private MoneyMachine moneyGenerator;
-
-    @BeforeEach
-    void setUp() {
-        this.moneyGenerator = new MoneyMachine();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-1000, -1500, -2600})
-    @DisplayName("음수의 돈을 입력하면 예외를 던진다")
-    void moneyWithNegativeNumberThrowsException(int moneyAmount) {
-        assertThrows(IllegalArgumentException.class, () -> moneyGenerator.money(moneyAmount));
-    }
+//    private MoneyMachine moneyGenerator;
+//
+//    @BeforeEach
+//    void setUp() {
+//        this.moneyGenerator = new MoneyMachine();
+//    }
+//
+//    @ParameterizedTest
+//    @ValueSource(ints = {-1000, -1500, -2600})
+//    @DisplayName("음수의 돈을 입력하면 예외를 던진다")
+//    void moneyWithNegativeNumberThrowsException(int moneyAmount) {
+//        assertThrows(IllegalArgumentException.class, () -> moneyGenerator.money(moneyAmount));
+//    }
 }
