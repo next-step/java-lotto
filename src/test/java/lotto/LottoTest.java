@@ -20,6 +20,13 @@ class LottoTest {
     );
   }
 
+  static Stream<Arguments> comparingSource() {
+    return Stream.of(
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9"}, 2),
+        arguments(new String[]{"45", "44", "43", "42", "41", "40"}, new String[]{"1", "2", "3", "4", "5", "6"}, 0)
+    );
+  }
+
   @Test
   @DisplayName("로또 생성 테스트, 로또가 생성되면 지정된 갯수의 목록을 가진다.")
   void create() {
@@ -31,5 +38,20 @@ class LottoTest {
   @MethodSource("winningNumbersSource")
   void createWithWinningNumbers(String[] winningNumbers) {
     assertThat(new Lotto(winningNumbers).lottoNumbersSize()).isEqualTo(LOTTO_NUMBER_COUNT);
+  }
+
+  @ParameterizedTest
+  @DisplayName("당첨번호와 비교해 일치한 갯수를 반환한다.")
+  @MethodSource("comparingSource")
+  void compare(String[] myNumbers, String[] winningNumbers, int expectedCount) {
+    // given
+    Lotto myLotto = new Lotto(myNumbers);
+    Lotto winningLotto = new Lotto(winningNumbers);
+
+    // when
+    int matchCount = myLotto.compare(winningLotto);
+
+    // then
+    assertThat(matchCount).isEqualTo(expectedCount);
   }
 }

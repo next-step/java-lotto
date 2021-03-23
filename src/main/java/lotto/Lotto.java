@@ -15,4 +15,8 @@ public final class Lotto {
   public int lottoNumbersSize() {
     return lottoNumbers.size();
   }
+
+  public int compare(Lotto winningLotto) {
+    return 0;
+  }
 }
