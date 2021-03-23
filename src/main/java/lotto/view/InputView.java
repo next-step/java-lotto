@@ -55,7 +55,9 @@ public class InputView {
     }
 
     public List<List<Integer>> inputManualNumbers(int manualQuantity) {
-        System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
+        if (manualQuantity > 0) {
+            System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
+        }
         return Stream.generate(this::inputNumbers)
                 .limit(manualQuantity)
                 .collect(Collectors.toList());
