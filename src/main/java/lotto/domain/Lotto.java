@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private static final int PRICE = 1000;
     private List<LottoNumber> games;
 
     public Lotto(int money, LottoNumberGenerator lottoNumberGenerator) {
-        if (money < PRICE) {
+        if (money < LottoRule.price()) {
             throw new IllegalArgumentException();
         }
 
         this.games = new ArrayList<>();
-        int numberOfGames = money / PRICE;
+        int numberOfGames = money / LottoRule.price();
         while (numberOfGames-- > 0) {
             games.add(lottoNumberGenerator.numbers());
         }
