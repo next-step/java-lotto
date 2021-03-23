@@ -24,4 +24,11 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(1);
     }
 
+    @DisplayName("splitAndSum에 유효한 숫자와 쉼표 입력시 반환되는 값 검증 테스트" )
+    @Test
+    public void splitAndSum_쉼표구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
+
 }
