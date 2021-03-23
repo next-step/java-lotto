@@ -25,7 +25,7 @@ public class LottoController {
         String rawNumberString = inputView.getLastWeekWiningLottoNumbers();
         int rawBonusNumber = inputView.getLastWeekBonusLottoNumber();
         JudgeResponseDTO judgeResponse = lottoService.getLottoResult(rawNumberString, rawBonusNumber);
-//        resultView.printResult(judgeResponse);
+        resultView.printResult(judgeResponse);
     }
 
 }

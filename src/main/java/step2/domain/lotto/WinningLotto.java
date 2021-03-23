@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto extends NormalLotto {
-    private static int COUNT = 7;
+    private static final int COUNT = 7;
 
     private final List<Integer> numbers;
     private final int bonusNumber;
@@ -23,6 +23,33 @@ public class WinningLotto extends NormalLotto {
                 .map(Integer::parseInt)
                 .sorted()
                 .collect(Collectors.toList()), bonusNumber);
+    }
+
+    public int matchCount(NormalLotto lotto) {
+        int count = 0;
+        for(Integer number:lotto.getNumbers()){
+            count+=oneIfNumberMatch(number);
+        }
+        return count;
+    }
+
+    public boolean matchBonus(NormalLotto lotto){
+        boolean match = false;
+        for(Integer number: lotto.getNumbers()){
+            match|=bonus(number);
+        }
+        return match;
+    }
+
+    private boolean bonus(int number){
+        return this.bonusNumber==number;
+    }
+
+    private int oneIfNumberMatch(int number) {
+        if (this.numbers.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 
     private boolean valid(List<Integer> numbers, int bonusNumber) {

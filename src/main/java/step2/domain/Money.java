@@ -4,7 +4,7 @@ public class Money {
     private final int amount;
 
     public Money(int amount) {
-        if(!valid(amount)) throw new IllegalArgumentException();
+        if (!valid(amount)) throw new IllegalArgumentException();
         this.amount = amount;
     }
 
@@ -12,8 +12,8 @@ public class Money {
         return amount;
     }
 
-    private boolean valid(int amount){
-        return amount>=0;
+    private boolean valid(int amount) {
+        return amount >= 0;
     }
 
 }

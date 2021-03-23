@@ -1,36 +1,56 @@
 package step2.dto;
 
-import step2.domain.Price;
-
-import java.util.HashMap;
+import java.util.Map;
 
 public class JudgeResponseDTO {
-    private final HashMap<Price, Integer> priceCountMap;
+    private final Map<String, Integer> priceMap;
+    private final Map<String, Integer> priceCountMap;
     private final double profitIndex;
 
-    public JudgeResponseDTO(HashMap<Price, Integer> priceCountMap, double profit) {
+    public JudgeResponseDTO(Map<String, Integer> priceMap, Map<String, Integer> priceCountMap, double profit) {
+        this.priceMap = priceMap;
         this.priceCountMap = priceCountMap;
         this.profitIndex = profit;
     }
 
+    public int getFirstPrice() {
+        return priceMap.get("FIRST");
+    }
+
     public int getFirstPriceCount() {
-        return priceCountMap.get(Price.FIRST);
+        return priceCountMap.get("FIRST");
+    }
+
+    public int getSecondPrice() {
+        return priceMap.get("SECOND");
     }
 
     public int getSecondPriceCount() {
-        return priceCountMap.get(Price.SECOND);
+        return priceCountMap.get("SECOND");
+    }
+
+    public int getThirdPrice() {
+        return priceMap.get("THIRD");
     }
 
     public int getThirdPriceCount() {
-        return priceCountMap.get(Price.THIRD);
+        return priceCountMap.get("THIRD");
+    }
+
+    public int getForthPrice() {
+        return priceMap.get("FORTH");
     }
 
     public int getForthPriceCount() {
-        return priceCountMap.get(Price.FORTH);
+        return priceCountMap.get("FORTH");
+    }
+
+    public int getFifthPrice() {
+        return priceMap.get("FIFTH");
     }
 
     public int getFifthPriceCount() {
-        return priceCountMap.get(Price.FIFTH);
+        return priceCountMap.get("FIFTH");
     }
 
     public double getProfitIndex() {

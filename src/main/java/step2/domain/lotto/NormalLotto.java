@@ -23,6 +23,10 @@ public class NormalLotto {
         this(NormalLotto.numbers());
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     private static List<Integer> numbers() {
         return IntStream.rangeClosed(1, UPPER_BOUND)
                 .boxed()

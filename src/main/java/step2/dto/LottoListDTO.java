@@ -1,9 +1,5 @@
 package step2.dto;
 
-import step2.domain.lotto.LottoList;
-import step2.domain.lotto.NormalLotto;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoListDTO {
@@ -13,11 +9,11 @@ public class LottoListDTO {
         this.lottoList = lottoList;
     }
 
-    public List<String> getLottoList(){
+    public List<String> getLottoList() {
         return this.lottoList;
     }
 
-    public int count(){
+    public int count() {
         return lottoList.size();
     }
 
