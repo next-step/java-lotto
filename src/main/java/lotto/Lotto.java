@@ -1,22 +1,22 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class Lotto {
 
   public static final int LOTTO_NUMBER_COUNT = 6;
 
-  private final List<LottoNumber> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
   public Lotto() {
-    lottoNumbers = new ArrayList<>();
+    lottoNumbers = new HashSet<>();
     for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
       lottoNumbers.add(new LottoNumber(1));
     }
   }
 
-  public List<LottoNumber> lottoNumbers() {
+  public Set<LottoNumber> lottoNumbers() {
     return lottoNumbers;
   }
 }
