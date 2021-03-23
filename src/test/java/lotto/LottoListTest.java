@@ -36,4 +36,9 @@ public class LottoListTest {
     void createTest() {
         assertThat(lottos).isEqualTo(new Lottos(lottoList));
     }
+
+    @Test
+    void toStringTest() {
+        System.out.println(lottos.toString());
+    }
 }
