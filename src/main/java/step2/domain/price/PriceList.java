@@ -39,10 +39,10 @@ public class PriceList {
 
     public double getProfitIndex() {
         double profit = 0;
-        for(Price price:this.prices){
-            profit+= price.getPrize();
+        for (Price price : this.prices) {
+            profit += price.getPrize();
         }
-        profit/= NormalLotto.PRICE;
+        profit /= NormalLotto.PRICE;
         return profit;
     }
 

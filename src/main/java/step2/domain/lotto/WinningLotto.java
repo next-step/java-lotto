@@ -3,6 +3,8 @@ package step2.domain.lotto;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class WinningLotto extends NormalLotto {
@@ -12,7 +14,11 @@ public class WinningLotto extends NormalLotto {
     private final int bonusNumber;
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if (!valid(numbers, bonusNumber)) throw new IllegalArgumentException("winning lotto numbers are invalid");
+        if (!valid(numbers, bonusNumber)) {
+            Logger logger = Logger.getGlobal();
+            logger.log(Level.SEVERE, "winning lotto numbers are invalid");
+            throw new IllegalArgumentException("winning lotto numbers are invalid");
+        }
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
@@ -27,22 +33,22 @@ public class WinningLotto extends NormalLotto {
 
     public int matchCount(NormalLotto lotto) {
         int count = 0;
-        for(Integer number:lotto.getNumbers()){
-            count+=oneIfNumberMatch(number);
+        for (Integer number : lotto.getNumbers()) {
+            count += oneIfNumberMatch(number);
         }
         return count;
     }
 
-    public boolean matchBonus(NormalLotto lotto){
+    public boolean matchBonus(NormalLotto lotto) {
         boolean match = false;
-        for(Integer number: lotto.getNumbers()){
-            match|=bonus(number);
+        for (Integer number : lotto.getNumbers()) {
+            match |= bonus(number);
         }
         return match;
     }
 
-    private boolean bonus(int number){
-        return this.bonusNumber==number;
+    private boolean bonus(int number) {
+        return this.bonusNumber == number;
     }
 
     private int oneIfNumberMatch(int number) {
@@ -56,8 +62,8 @@ public class WinningLotto extends NormalLotto {
         return sizeSix(numbers) && inBoundary(numbers, bonusNumber) && unique(numbers, bonusNumber);
     }
 
-    private boolean sizeSix(List<Integer> numbers){
-        return numbers.size()==NormalLotto.COUNT;
+    private boolean sizeSix(List<Integer> numbers) {
+        return numbers.size() == NormalLotto.COUNT;
     }
 
     private boolean unique(List<Integer> numbers, int bonusNumber) {

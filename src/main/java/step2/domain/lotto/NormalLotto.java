@@ -3,6 +3,8 @@ package step2.domain.lotto;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,7 +17,11 @@ public class NormalLotto {
     private final List<Integer> numbers;
 
     public NormalLotto(List<Integer> numbers) {
-        if (!valid(numbers)) throw new IllegalArgumentException("Normal Lotto numbers are invalid");
+        if (!valid(numbers)) {
+            Logger logger = Logger.getGlobal();
+            logger.log(Level.SEVERE, "Normal Lotto numbers are invalid");
+            throw new IllegalArgumentException("Normal Lotto numbers are invalid");
+        }
         this.numbers = numbers;
     }
 
