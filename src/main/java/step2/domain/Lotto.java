@@ -6,6 +6,8 @@ import static java.util.stream.Collectors.toList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -27,8 +29,13 @@ public class Lotto {
     }
 
     public void initLastPrize(String input) {
-        List<Integer> numbers = toInteger(input);
+        List<Integer> numbers = toIntegerList(input);
         this.lastPrize = new Game(numbers);
+    }
+
+    public Map<Long, List<Game>> candidate() {
+        return games.stream()
+            .collect(Collectors.groupingBy(game -> game.containCount(lastPrize)));
     }
 
     public int size() {
@@ -43,7 +50,7 @@ public class Lotto {
         return this.lastPrize;
     }
 
-    private List<Integer> toInteger(String input) {
+    private List<Integer> toIntegerList(String input) {
         return Arrays.stream(input.split(DELIMITER))
             .map(Integer::parseInt)
             .collect(toList());

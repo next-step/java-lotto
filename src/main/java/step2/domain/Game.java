@@ -15,6 +15,12 @@ public class Game {
         this.numbers = initLastPrize(lastPrize);
     }
 
+    public Long containCount(Game lastPrize) {
+        return numbers.stream()
+            .filter(lastPrize.numbers::contains)
+            .count();
+    }
+
     public int size() {
         return numbers.size();
     }
@@ -31,5 +37,14 @@ public class Game {
         return lastPrize.stream()
             .map(Number::new)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return "[ " +
+            numbers.stream()
+                .map(Number::toString)
+                .collect(Collectors.joining(","))
+            + " ]";
     }
 }
