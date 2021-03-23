@@ -31,9 +31,9 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"5000,0", "1000,0"})
     @DisplayName("로또 자동 개수 확인")
-    public void createAutoLottoSizeTest(int amount, int qantity) throws Exception {
+    public void createAutoLottoSizeTest(int amount, int quantity) {
         //given
-        LottoQuantity lottoQuantity = createQuantity(amount, qantity);
+        LottoQuantity lottoQuantity = createQuantity(amount, quantity);
         LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity);
 
         //when
@@ -46,10 +46,10 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"5000,5", "10000,10"})
     @DisplayName("로또 수동 개수 확인")
-    public void createManualLottoSizeTest(int amount, int qantity) throws Exception {
+    public void createManualLottoSizeTest(int amount, int quantity) {
         //given
-        LottoQuantity lottoQuantity = createQuantity(amount, qantity);
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(qantity));
+        LottoQuantity lottoQuantity = createQuantity(amount, quantity);
+        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
         boolean result = lottoQuantity.isManualQuantityCheck(lottoTickets.readOnlyLottoTicket().size());
@@ -61,10 +61,10 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"5000,0,5", "5000,2,5", "10000,2,10"})
     @DisplayName("로또 자동,수동 개수 확인")
-    public void createAutoAndManualLottoSizeTest(int amount, int qantity, int ticketSize) throws Exception {
+    public void createAutoAndManualLottoSizeTest(int amount, int quantity, int ticketSize) {
         //given
-        LottoQuantity lottoQuantity = createQuantity(amount, qantity);
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(qantity));
+        LottoQuantity lottoQuantity = createQuantity(amount, quantity);
+        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
 
