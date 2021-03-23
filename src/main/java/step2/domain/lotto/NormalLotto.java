@@ -15,7 +15,7 @@ public class NormalLotto {
     private final List<Integer> numbers;
 
     public NormalLotto(List<Integer> numbers) {
-        if (!valid(numbers)) throw new IllegalArgumentException();
+        if (!valid(numbers)) throw new IllegalArgumentException("Normal Lotto numbers are invalid");
         this.numbers = numbers;
     }
 
@@ -46,8 +46,8 @@ public class NormalLotto {
         return sizeSix(numbers) && inBoundary(numbers) && unique(numbers);
     }
 
-    private boolean sizeSix(List<Integer> numbers){
-        return numbers.size()==COUNT;
+    private boolean sizeSix(List<Integer> numbers) {
+        return numbers.size() == COUNT;
     }
 
     private boolean inBoundary(List<Integer> numbers) {

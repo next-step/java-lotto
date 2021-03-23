@@ -12,7 +12,7 @@ public class WinningLotto extends NormalLotto {
     private final int bonusNumber;
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if (!valid(numbers, bonusNumber)) throw new IllegalArgumentException();
+        if (!valid(numbers, bonusNumber)) throw new IllegalArgumentException("winning lotto numbers are invalid");
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }

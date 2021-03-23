@@ -4,7 +4,7 @@ public class Money {
     private final int amount;
 
     public Money(int amount) {
-        if (!valid(amount)) throw new IllegalArgumentException();
+        if (!valid(amount)) throw new IllegalArgumentException("negative money is not allowed");
         this.amount = amount;
     }
 
