@@ -22,5 +22,6 @@ public class LottoRule {
         return PRICE;
     }
 
-
+    private LottoRule() {
+    }
 }
