@@ -38,4 +38,11 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @DisplayName("splitAndSum에 유효한 숫자와 커스텀 구분자 입력시 반환되는 값 검증 테스트")
+    @Test
+    public void splitAndSum_custom_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
 }
