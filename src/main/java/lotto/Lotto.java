@@ -8,6 +8,10 @@ public final class Lotto {
     lottoNumbers = new LottoNumbers();
   }
 
+  public Lotto(String[] winningNumbers) {
+    lottoNumbers = null;
+  }
+
   public int lottoNumbersSize() {
     return lottoNumbers.size();
   }
