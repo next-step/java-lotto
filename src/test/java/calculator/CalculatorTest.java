@@ -76,12 +76,33 @@ public class CalculatorTest {
                 .isEqualTo(expected);
     }
 
-    static Stream<Arguments> providerTestCalculate(){
+    static Stream<Arguments> providerTestCalculate() {
         return Stream.of(
                 Arguments.of("1,2,3", 6),
                 Arguments.of("1:2:3", 6),
+                Arguments.of("1000", 1000),
                 Arguments.of("//n\n1n2n3", 6),
                 Arguments.of("//!\n1!2!3", 6)
+        );
+    }
+
+    @DisplayName("음수나 숫자아닌 문자열을 입력하면 RuntimeException 을 던진다")
+    @ParameterizedTest
+    @MethodSource("providerTestCalculate_onInvalidInput")
+    void testCalculate_onInvalidInput(String input) {
+        Assertions.assertThatThrownBy(() ->
+                Calculator.getInstance()
+                        .calculate(input))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+
+    static Stream<Arguments> providerTestCalculate_onInvalidInput() {
+        return Stream.of(
+                Arguments.of("1,-2,3", 6),
+                Arguments.of("g", 6),
+                Arguments.of("//n\n-3", 6),
+                Arguments.of("//!\n1!2!k", 6)
         );
     }
 
