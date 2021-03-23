@@ -18,7 +18,8 @@
 * "" 또는 null 입력시 '0' 으로 변환한다.
 * 문자열을 int 로 변환하는 toNumber 메서드
     * 숫자 이외의 값을 입력할 경우 RuntimeException 을 던진다
-* 음수를  입력할 경우 RuntimeException 을 던진다
+* 음수인지 체크하는 assurePositive 메서드
+    * 음수를 입력할 경우 RuntimeException 을 던진다
 
 ### PrintView
 * 합을 출력한다. 

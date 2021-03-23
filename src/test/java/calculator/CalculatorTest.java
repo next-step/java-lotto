@@ -25,9 +25,29 @@ public class CalculatorTest {
     @Test
     void testToNumber_whenNonNumericString() {
         String nonNumeric = "g";
-        Assertions.assertThatThrownBy(() -> Calculator.getInstance()
-                .toNumber(nonNumeric))
+        Assertions.assertThatThrownBy(
+                () -> Calculator.getInstance()
+                        .toNumber(nonNumeric))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+
+    @DisplayName("음수를 입력한 경우 RuntimeException 을 던진다")
+    @Test
+    void testAssurePositive_whenNegative() {
+        int negative = -1;
+        Assertions.assertThatThrownBy(
+                () -> Calculator.getInstance()
+                        .assurePositive(negative))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void testAssurePositive_whenPositive() {
+        int positive = 1;
+        Assertions.assertThatCode(() -> Calculator.getInstance()
+                .assurePositive(positive))
+                .doesNotThrowAnyException();
     }
 
 }
