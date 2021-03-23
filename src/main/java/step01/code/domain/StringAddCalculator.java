@@ -13,9 +13,10 @@ import org.junit.platform.commons.util.StringUtils;
 public class StringAddCalculator {
 
   public static int splitAndSum(String str) {
-    if(StringUtils.isBlank(str)) {
+    if(str == null || str.equals("")) {
       return 0;
     }
+    
     Matcher m = Pattern.compile("//(.)\n(.*)").matcher(str);
     if(m.find()) {
       String customDelimiter = m.group(1);
