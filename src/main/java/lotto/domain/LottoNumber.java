@@ -1,25 +1,22 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static int MIN = 1;
-    private static int MAX = 45;
-    private static int COUNT_OF_SELECTION = 6;
-
     List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
-        if (numbers.stream().max(Integer::compare).get() > MAX) {
+    public LottoNumber(List<Integer> numbers, LottoRule lottoRule) {
+        if (numbers.stream().max(Integer::compare).get() > lottoRule.max()) {
             throw new IllegalArgumentException();
         }
-        if (numbers.stream().min(Integer::compare).get() < MIN) {
+        if (numbers.stream().min(Integer::compare).get() < lottoRule.min()) {
             throw new IllegalArgumentException();
         }
 
-        if (numbers.stream().distinct().count() != COUNT_OF_SELECTION) {
+        if (numbers.stream().distinct().count() != lottoRule.countOfSelection()) {
             throw new IllegalArgumentException();
         }
 

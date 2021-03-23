@@ -11,11 +11,11 @@ public class LottoControl {
     public void play() {
         Scanner scanner = new Scanner(System.in);
         int money = View.purchaseAmount(scanner);
-
-        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator());
+        LottoRule lottoRule = new LottoRule();
+        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator(lottoRule));
         View.print(lotto.games());
 
-        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner));
+        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner), lottoRule);
         int typedBonusNumber = View.bonusNumber(scanner);
         WinningNumber winningNumber = new WinningNumber(typedWinningNumber, typedBonusNumber);
 
