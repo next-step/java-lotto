@@ -16,7 +16,8 @@
 ### Calculator
 * 인스턴스를 싱글턴으로 관리한다.
 * "" 또는 null 입력시 '0' 으로 변환한다.
-* 숫자 이외의 값을 입력할 경우 RuntimeException 을 던진다
+* 문자열을 int 로 변환하는 toNumber 메서드
+    * 숫자 이외의 값을 입력할 경우 RuntimeException 을 던진다
 * 음수를  입력할 경우 RuntimeException 을 던진다
 
 ### PrintView

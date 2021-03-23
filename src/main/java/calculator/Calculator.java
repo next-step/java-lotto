@@ -14,4 +14,11 @@ public class Calculator {
         return calculator;
     }
 
+    public int toNumber(String string){
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException e){
+            throw new RuntimeException("숫자 이외의 값을 입력할 수 없습니다.");
+        }
+    }
 }
