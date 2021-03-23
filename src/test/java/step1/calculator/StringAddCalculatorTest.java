@@ -38,5 +38,4 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-
 }
