@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoDTO {
 
     public static class NormalLottoDTO {
-        private List<Integer> numbers;
+        private final List<Integer> numbers;
 
         public NormalLottoDTO(List<Integer> numbers) {
             this.numbers = numbers;
@@ -17,8 +17,8 @@ public class LottoDTO {
     }
 
     public static class WinningLottoDTO {
-        private List<Integer> numbers;
-        private int bonusNumber;
+        private final List<Integer> numbers;
+        private final int bonusNumber;
 
         public WinningLottoDTO(List<Integer> numbers, int bonusNumber) {
             this.numbers = numbers;

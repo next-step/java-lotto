@@ -14,8 +14,8 @@ public class LottoService {
     private final Shop shop = new Shop();
     private final Judge judge = new Judge();
 
-    private final LottoMachine lottoGenerator = new LottoMachine();
-    private final MoneyMachine moneyGenerator = new MoneyMachine();
+    private final LottoMachine lottoMachine = new LottoMachine();
+    private final MoneyMachine moneyMachine = new MoneyMachine();
 
     public ShopResponseDTO buyManualLotto(int rawAmount) {
         MoneyDTO money = convertRawAmountToMoney(rawAmount);
@@ -29,10 +29,10 @@ public class LottoService {
     }
 
     private MoneyDTO convertRawAmountToMoney(int rawAmount) {
-        return moneyGenerator.money(rawAmount);
+        return moneyMachine.money(rawAmount);
     }
 
     private WinningLottoDTO convertRawNumberStringToLotto(String rawNumberString, int rawBonusNumber) {
-        return lottoGenerator.lotto(rawNumberString, rawBonusNumber);
+        return lottoMachine.lotto(rawNumberString, rawBonusNumber);
     }
 }

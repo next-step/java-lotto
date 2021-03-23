@@ -5,8 +5,8 @@ import step2.constants.Price;
 import java.util.HashMap;
 
 public class JudgeResponseDTO {
-    private HashMap<Price, Integer> priceCountMap;
-    private double profitIndex;
+    private final HashMap<Price, Integer> priceCountMap;
+    private final double profitIndex;
 
     public JudgeResponseDTO(HashMap<Price, Integer> priceCountMap, double profit) {
         this.priceCountMap = priceCountMap;

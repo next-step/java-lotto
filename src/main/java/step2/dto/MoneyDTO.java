@@ -7,7 +7,7 @@ public class MoneyDTO {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public final int getAmount() {
         return amount;
     }
 }
