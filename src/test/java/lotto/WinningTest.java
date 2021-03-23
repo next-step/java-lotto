@@ -3,11 +3,10 @@ package lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static lotto.Winning.MAX_MATCH_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTest {
@@ -31,14 +30,23 @@ public class WinningTest {
         assertThat(winning).isEqualTo(new Winning(winningNumbers));
 
         //when, then - field 접근
-        Field[] allField = winning.getClass().getDeclaredFields();
-        Arrays.stream(allField).forEach(field -> field.setAccessible(true));
-
-        assertThat(allField[0].get(winning)).isEqualTo(winningNumbers);
-        for (int i = 1; i < allField.length; i++) {
-            assertThat(allField[i].getInt(winning)).isEqualTo(0);
-        }
+        assertThat(winning).hasNoNullFieldsOrProperties()
+                .hasFieldOrPropertyWithValue("winningNumbers", winningNumbers);
     }
 
+    @Test
+    void matchesTest() {
+        //given
+        int[] matchArr = new int[MAX_MATCH_NUM + 1];
+        int matchNum = 3;
+        matchArr[matchNum]++;
+        Winning testWinning = new Winning(winningNumbers, matchArr);
+
+        //when
+        winning.matches(3);
+
+        //then
+        assertThat(winning).isEqualTo(testWinning);
+    }
 
 }
