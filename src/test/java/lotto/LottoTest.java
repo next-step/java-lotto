@@ -16,6 +16,6 @@ class LottoTest {
     Lotto lotto = new Lotto();
 
     // then
-    assertThat(lotto.numbers()).hasSize(LOTTO_NUMBER_COUNT);
+    assertThat(lotto.lottoNumbers()).hasSize(LOTTO_NUMBER_COUNT);
   }
 }
