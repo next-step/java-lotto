@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTest {
 
-    private static final int WINNING_SIZE = 6;
+    public static final int WINNING_SIZE = 6;
 
     private Winning winning;
     private List<Integer> winningNumbers = new ArrayList<>();

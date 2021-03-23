@@ -14,6 +14,18 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
+    /*
+    * 보유중인 로또의 당첨 개수를 확인하고, 해당하는 갯수만큼 matches 시켜준다.
+    * */
+    public void checkWinning(Winning winning) {
+        List<Integer> winningNumbers = winning.getWinningNumbers();
+        lottoList.forEach(lotto -> {
+            winning.matches(lotto.contains(winningNumbers));
+        });
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
