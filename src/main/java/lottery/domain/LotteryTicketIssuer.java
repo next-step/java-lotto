@@ -1,5 +1,8 @@
 package lottery.domain;
 
+import lottery.dto.LotteryNumbersDto;
+import lottery.dto.LotteryTicketOrderDto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,13 +23,40 @@ public class LotteryTicketIssuer {
 
     private LotteryTicketIssuer() {}
 
+    public static LotteryTicket issue(LotteryTicketOrderDto lotteryTicketOrderDto) {
+        int money = lotteryTicketOrderDto.getMoney();
+        List<LotteryNumbersDto> lotteryNumbers = lotteryTicketOrderDto.getmanualLotteryNumbers();
+        int manualAmount = lotteryNumbers.size();
+
+        int automaticAmount = (money / LOTTERY_PRICE) - manualAmount;
+
+        List<LotteryNumbers> manualLotteryNumbers = getManualLotteryNumbers(lotteryNumbers);
+
+        List<LotteryNumbers> automaticLotteryNumbers = getAutomaticLotteryNumbers(automaticAmount);
+
+        return Stream.concat(manualLotteryNumbers.stream(), automaticLotteryNumbers.stream())
+                     .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
+    }
+
+    private static List<LotteryNumbers> getManualLotteryNumbers(List<LotteryNumbersDto> lotteryNumbersDtoList) {
+        return lotteryNumbersDtoList.stream()
+                                    .map(dto -> new LotteryNumbers(dto.getNumbers()))
+                                    .collect(Collectors.toList());
+    }
+
+    private static List<LotteryNumbers> getAutomaticLotteryNumbers(int amount) {
+        return Stream.generate(LotteryTicketIssuer::generateLotteryNumbers)
+                     .limit(amount)
+                     .collect(Collectors.toList());
+    }
+
     public static LotteryTicket issue(int money) {
-        return Stream.generate(LotteryTicketIssuer::generateLottery)
+        return Stream.generate(LotteryTicketIssuer::generateLotteryNumbers)
                      .limit(money / LOTTERY_PRICE)
                      .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
     }
 
-    private static LotteryNumbers generateLottery() {
+    private static LotteryNumbers generateLotteryNumbers() {
         List<Integer> numbers = new ArrayList<>(NUMBER_LIST);
 
         Collections.shuffle(numbers);

@@ -22,8 +22,8 @@ class LotteryTicketIssuerTest {
         );
 
         return Stream.of(
-            Arguments.of(new LotteryTicketOrderDto(14000, 2, lotteryNumbersDtoList), 14),
-            Arguments.of(new LotteryTicketOrderDto(2000, 2, lotteryNumbersDtoList), 2)
+            Arguments.of(new LotteryTicketOrderDto(14000, lotteryNumbersDtoList), 14),
+            Arguments.of(new LotteryTicketOrderDto(2000, lotteryNumbersDtoList), 2)
         );
     }
 
