@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum Rank {
     LOSE(0, 0),
@@ -33,6 +32,10 @@ public enum Rank {
         return countOfMatch;
     }
 
+    public boolean matchBonus() {
+        return matchBonus;
+    }
+
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.isMatch(countOfMatch, matchBonus))
@@ -51,10 +54,6 @@ public enum Rank {
     private boolean isMatchBonus(boolean matchBonus) {
         if (!this.matchBonus)
             return true;
-        return matchBonus;
-    }
-
-    public boolean matchBonus() {
         return matchBonus;
     }
 }
