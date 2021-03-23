@@ -8,14 +8,20 @@ public final class Numbers {
     private final List<Number> numbers;
 
     public Numbers(List<Number> numbers) {
-        if(isNull(numbers)) {
+        if (isNull(numbers)) {
             throw new IllegalArgumentException("null 값을 입력했습니다.");
         }
         this.numbers = numbers;
     }
 
-    private final boolean isNull(List<Number> numbers){
+    private final boolean isNull(List<Number> numbers) {
         return numbers == null;
+    }
+
+    public final int sum() {
+        return numbers.stream()
+                .mapToInt(Number::getNumber)
+                .sum();
     }
 
     @Override

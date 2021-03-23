@@ -54,4 +54,19 @@ class NumbersTest {
         // then
         assertThat(firstNumbers).isEqualTo(secondNumbers);
     }
+
+    @DisplayName("Numbers 인스턴스가 소유한 값들을 합해서 반환 여부 테스트")
+    @Test
+    void 총합() {
+        // given
+        List<Number> inputData = Arrays.asList(new Number(1), new Number(2));
+
+        // when
+        Numbers numbers = new Numbers(inputData);
+        int actual = numbers.sum();
+
+        // then
+        assertThat(actual).isEqualTo(3);
+    }
+
 }
