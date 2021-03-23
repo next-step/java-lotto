@@ -52,18 +52,5 @@ class StringUtilsTest {
         );
     }
 
-    @DisplayName("문자열을 쉼표로 나누었을 때의 String 배열 반환되는지 테스트")
-    @Test
-    void splitByComma_쉼표있는문자열() {
-        // given
-        String inputData = "1,2,3";
-
-        // when
-        String[] data = StringUtils.splitByComma(inputData);
-        int actual = data.length;
-
-        // then
-        assertThat(actual).isEqualTo(3);
-    }
 
 }

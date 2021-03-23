@@ -1,9 +1,9 @@
 package step1.calculator;
 
 import step1.number.Numbers;
+import step1.separator.Separator;
 
 import static utils.StringUtils.isNullOrBlank;
-import static utils.StringUtils.splitByCommaAndColon;
 
 public final class StringAddCalculator {
 
@@ -11,8 +11,8 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-
-        Numbers numbers = new Numbers(splitByCommaAndColon(expression));
+        Separator separator = new Separator(expression);
+        Numbers numbers = new Numbers(separator.splitByDelimiter());
         return numbers.sum();
     }
 
