@@ -16,15 +16,8 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        Numbers numbers = new Numbers(convertStringArrayToNumberList(splitByCommaAndColon(expression)));
+        Numbers numbers = new Numbers(splitByCommaAndColon(expression));
         return numbers.sum();
-    }
-
-    private static final List<Number> convertStringArrayToNumberList(String[] data) {
-        return Arrays.stream(data)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(Number::new)
-                .collect(Collectors.toList());
     }
 
 }
