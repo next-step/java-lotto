@@ -1,6 +1,7 @@
 package step1.number;
 
 import java.util.List;
+import java.util.Objects;
 
 public final class Numbers {
 
@@ -15,5 +16,18 @@ public final class Numbers {
 
     private final boolean isNull(List<Number> numbers){
         return numbers == null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Numbers numbers1 = (Numbers) o;
+        return Objects.equals(numbers, numbers1.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
