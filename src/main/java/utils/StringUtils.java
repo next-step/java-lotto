@@ -19,11 +19,11 @@ public final class StringUtils {
         return sentence.isEmpty() || sentence.trim().length() == ZERO;
     }
 
-    public static final String[] splitByComma(String sentence){
+    public static final String[] splitByComma(String sentence) {
         return sentence.split(COMMA);
     }
 
-    public static final String[] splitByCommaAndColon(String sentence){
-        return sentence.split(COMMA+"|"+COLON);
+    public static final String[] splitByCommaAndColon(String sentence) {
+        return sentence.split(COMMA + "|" + COLON);
     }
 }

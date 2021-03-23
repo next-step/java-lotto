@@ -7,6 +7,7 @@ import step1.exception.StringNumberFormatException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class NumberTest {
 
@@ -51,4 +52,19 @@ class NumberTest {
 
     }
 
+    @DisplayName("Number 인스턴스가 소유한 값 반환 여부 테스트")
+    @Test
+    void 반환() {
+        // given
+        String stringValue = "1";
+        int integerValue = 1;
+        int expected = 1;
+
+        // when an then
+        assertAll(
+                () -> assertThat(new Number(stringValue).getNumber()).isEqualTo(expected),
+                () -> assertThat(new Number(integerValue).getNumber()).isEqualTo(expected)
+        );
+
+    }
 }

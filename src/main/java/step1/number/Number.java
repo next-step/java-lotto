@@ -13,7 +13,7 @@ public final class Number {
     }
 
     public Number(int number) {
-        if(isNegative(number)) {
+        if (isNegative(number)) {
             throw new NegativeNumberInputException();
         }
         this.number = number;
@@ -29,6 +29,10 @@ public final class Number {
 
     private final boolean isNegative(int number) {
         return number < ZERO;
+    }
+
+    public final int getNumber() {
+        return number;
     }
 
 }

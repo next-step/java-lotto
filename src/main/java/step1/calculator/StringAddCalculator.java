@@ -1,7 +1,10 @@
 package step1.calculator;
 
+import step1.number.Number;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static utils.StringUtils.isNullOrBlank;
 import static utils.StringUtils.splitByCommaAndColon;
@@ -12,12 +15,18 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        return sum(splitByCommaAndColon(expression));
+        List<Number> numbers = convertStringArrayToNumberList(splitByCommaAndColon(expression));
+        return sum(numbers);
     }
 
-    private static final int sum(String[] data) {
+    private static final List<Number> convertStringArrayToNumberList(String[] data) {
         return Arrays.stream(data)
                 .mapToInt(Integer::parseInt)
-                .sum();
+                .mapToObj(Number::new)
+                .collect(Collectors.toList());
+    }
+
+    private static final int sum(List<Number> numbers) {
+        return numbers.stream().mapToInt(Number::getNumber).sum();
     }
 }
