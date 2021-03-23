@@ -1,26 +1,28 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Lottery {
 
-  private final HitNumber hitNumber;
-  public Result result = new Result();
+  private final HitNumbers hitNumbers;
+  private Result result = new Result();
 
-  public Lottery(HitNumber hitNumber) {
-    this.hitNumber = hitNumber;
+  public Lottery(HitNumbers hitNumbers) {
+    this.hitNumbers = hitNumbers;
   }
 
   public int countHit(LottoNumbers lottoNumbers) {
     return (int) lottoNumbers.numbers()
         .stream()
-        .filter(hitNumber::contains).count();
+        .filter(hitNumbers::contains).count();
   }
 
-  public void draw(List<LottoNumbers> lottos) {
-    for (LottoNumbers numbers : lottos) {
+  public void draw(Lottos lottos) {
+    for (LottoNumbers numbers : lottos.getLottos()) {
       int hit = countHit(numbers);
       result.update(hit);
     }
+  }
+
+  public Result getResult() {
+    return result;
   }
 }

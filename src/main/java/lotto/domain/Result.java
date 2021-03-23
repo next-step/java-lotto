@@ -22,12 +22,8 @@ public class Result {
     resultMap.put(Hit.getHitCount(hit), resultMap.get(Hit.getHitCount(hit)) + 1);
   }
 
-  public String showLotteryResult() {
-    StringBuilder sb = new StringBuilder();
-    for (Hit hit : Hit.all()) {
-      sb.append(String.format("%s %d개\n", hit.showHitResult(), resultMap.get(hit)));
-    }
-    return sb.toString();
+  public Integer getResult(Hit hit) {
+    return resultMap.get(hit);
   }
 
   public double getRatio(Amount amount) {

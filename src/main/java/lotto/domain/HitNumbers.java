@@ -6,26 +6,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.constant.Constant;
 
-public class HitNumber {
+public class HitNumbers {
 
-  private LottoNumbers hitNumber;
+  private LottoNumbers hitNumbers;
 
-  public HitNumber(String text) {
-    this.hitNumber = generateHitNumber(text);
+  public HitNumbers(String inputHit) {
+    this.hitNumbers = generateHitNumbers(inputHit);
   }
 
-  public HitNumber() {
+  public HitNumbers() {
   }
 
-  private LottoNumbers generateHitNumber(String text) {
-    List<String> inputNumber = stringToList(text);
-    validateSize(inputNumber);
-    validateDuplication(inputNumber);
+  private LottoNumbers generateHitNumbers(String inputHit) {
+    List<String> inputNumbers = stringToList(inputHit);
+    validateSize(inputNumbers);
+    validateDuplication(inputNumbers);
 
-    return new LottoNumbers(inputNumber
+    return new LottoNumbers(inputNumbers
         .stream()
         .mapToInt(Integer::parseInt)
-        .mapToObj(Number::new)
+        .mapToObj(LottoNumber::new)
         .collect(Collectors.toList()));
   }
 
@@ -50,17 +50,7 @@ public class HitNumber {
     }
   }
 
-  public void validateRange(List<String> list) {
-    list.forEach(number -> isRange(Integer.parseInt(number)));
-  }
-
-  private void isRange(int number) {
-    if (number > Constant.MAX_NUM || number < Constant.MIN_NUM) {
-      throw new IllegalArgumentException("로또 번호는 1에서 45 사이 값만 가합니다.");
-    }
-  }
-
-  public boolean contains(Number number) {
-    return hitNumber.numbers().contains(number);
+  public boolean contains(LottoNumber number) {
+    return hitNumbers.numbers().contains(number);
   }
 }
