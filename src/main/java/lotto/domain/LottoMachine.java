@@ -2,8 +2,10 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -12,6 +14,13 @@ public class LottoMachine {
     private static final List<Integer> DEFAULT_NUMBER_RANGE = IntStream.range(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE)
                                                                     .boxed()
                                                                     .collect(Collectors.toList());
+    public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity) {
+        List<LottoTicket> tickets = Stream.generate(LottoMachine::createLottoTicket)
+                .limit(lottoQuantity.autoQuantity())
+                .collect(Collectors.toList());
+
+        return new LottoTickets(tickets);
+    }
 
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
         List<LottoTicket> tickets = inputManual.stream()

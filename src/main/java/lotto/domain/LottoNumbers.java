@@ -52,7 +52,6 @@ public class LottoNumbers {
         return Collections.unmodifiableList(numbers);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

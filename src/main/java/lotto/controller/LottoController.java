@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class LottoController {
     public void run() {
-        // 구매 금액 입력
+        // 구매 금액, 수동 수 입력
         InputView inputView = new InputView();
         int buyAmount = inputView.inputBuyAmount();
         int manualQuantity = inputView.inputManualQuantity();
