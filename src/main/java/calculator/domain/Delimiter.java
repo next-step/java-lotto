@@ -2,7 +2,7 @@
  * Delimiter를 포장하는 클래스
  * */
 
-package Calculator.domain;
+package calculator.domain;
 
 import java.util.Objects;
 
@@ -18,6 +18,10 @@ public class Delimiter {
 
     public Delimiter(String delimter) {
         this.delimiter = delimter;
+    }
+
+    public String[] splitWithDelimiter(String input){
+        return input.split(delimiter);
     }
 
     @Override

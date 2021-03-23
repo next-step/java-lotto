@@ -1,7 +1,7 @@
 /*
  * 피연산자를 입력받아 원시값으로 포장하고 관련 로직을 수행하는 클래스
  * */
-package Calculator.domain;
+package calculator.domain;
 
 import java.util.Objects;
 import java.util.function.BinaryOperator;

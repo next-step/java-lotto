@@ -2,22 +2,20 @@
 * 문자열 덧셈 계산기를 담당하는 클래스
 * */
 
-package Calculator.domain;
+package calculator.domain;
 
-import Calculator.util.Mapper;
-import Calculator.util.StringUtils;
+import calculator.util.Mapper;
+import calculator.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
     private static final int INIT_NUM = 0;
     private static String PATTERN = "//(.)\n(.*)";
+    private static Delimiter delimiter;
 
     /*
      * 문자열이 Custom Delimiter를 보유중인 패턴이라면, 해당 구분자로 split하고
@@ -26,20 +24,11 @@ public class StringAddCalculator {
     public static String[] splitWithMatcher(String input) {
         Matcher m = Pattern.compile(PATTERN).matcher(input);
         if (m.find()) {
-            return StringUtils.splitWithDelimiter(m.group(2), new Delimiter(m.group(1)));
+            delimiter = new Delimiter(m.group(1));
+            return delimiter.splitWithDelimiter(m.group(2));
         }
-        return StringUtils.splitWithDelimiter(input, new Delimiter());
-    }
-
-    /*
-    * 숫자 집합을 받아 피연산자 집합을 담고있는 Operands 객체를 반환한다.
-    * */
-    public static Operands intArrToOperands(int[] arr) {
-        List<Operand> operandList = Arrays.stream(arr)
-                .mapToObj(Operand::new)
-                .filter(Operand::checkOperand)
-                .collect(Collectors.toList());
-       return new Operands(operandList);
+        delimiter = new Delimiter();
+        return delimiter.splitWithDelimiter(input);
     }
 
 
@@ -52,7 +41,7 @@ public class StringAddCalculator {
             return INIT_NUM;
         }
         String[] operandsStr = splitWithMatcher(input);
-        Operands operands = intArrToOperands(StringUtils.parseToIntList(operandsStr));
+        Operands operands = new Operands(StringUtils.parseToIntList(operandsStr));
         BinaryOperator<Integer> operator = Operator.add();
 
         return Mapper.operandToInt(operands.operateAll(operator));

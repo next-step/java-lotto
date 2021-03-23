@@ -1,6 +1,5 @@
-package Calculator.util;
+package calculator.util;
 
-import Calculator.domain.Delimiter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -37,14 +36,4 @@ public class StringUtilsTest {
         assertThat(result).containsOnly(answer);
     }
 
-
-    @Test
-    void splitTest() {
-        //given
-        String str = "1:3,4";
-        Delimiter delimiter = new Delimiter(":|,");
-
-        //when
-        String[] result = StringUtils.splitWithDelimiter(str, delimiter);
-    }
 }

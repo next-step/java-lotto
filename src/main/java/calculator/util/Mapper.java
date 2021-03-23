@@ -1,10 +1,9 @@
 /*
  * 원시값으로 포장했던 객체 내부의 값을 반환해주는 mapper 클래스
  * */
-package Calculator.util;
+package calculator.util;
 
-import Calculator.domain.Operand;
-import Calculator.domain.Delimiter;
+import calculator.domain.Operand;
 
 import java.lang.reflect.Field;
 
@@ -38,16 +37,4 @@ public class Mapper {
         return 0;
     }
 
-    /*
-     * delimiter로 인자를 받아, 접근가능한 field를 이용해 int형의 operand를 반환한다.
-     * */
-    public static String delimiterToString(Delimiter delimiter) {
-        try {
-            return (String) mapper(delimiter, "delimiter").get(delimiter);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 }
