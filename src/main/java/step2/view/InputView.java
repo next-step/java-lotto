@@ -8,7 +8,7 @@ public class InputView {
 
     public static int getSeed() {
         System.out.println(Message.SEED_MONEY);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String getPrize() {

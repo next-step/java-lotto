@@ -2,9 +2,9 @@ package step2.domain;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
+import static step2.util.StringConstant.NEW_LINE;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,14 +12,10 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final String DELIMITER = ",";
-
     private final List<Game> games;
-    private Game lastPrize;
 
-    public Lotto(int lengthPerGame) {
+    public Lotto() {
         this.games = new ArrayList<>();
-        this.lastPrize = new Game(lengthPerGame);
     }
 
     public void init(int gameSize, int lengthPerGame) {
@@ -28,14 +24,9 @@ public class Lotto {
             .collect(collectingAndThen(toList(), games::addAll));
     }
 
-    public void initLastPrize(String input) {
-        List<Integer> numbers = toIntegerList(input);
-        this.lastPrize = new Game(numbers);
-    }
-
-    public Map<Long, List<Game>> candidate() {
+    public Map<Integer, List<Game>> candidate(Prize prize) {
         return games.stream()
-            .collect(Collectors.groupingBy(game -> game.containCount(lastPrize)));
+            .collect(Collectors.groupingBy(game -> game.containCount(prize.last())));
     }
 
     public int size() {
@@ -46,13 +37,10 @@ public class Lotto {
         return this.games;
     }
 
-    public Game lastPrize() {
-        return this.lastPrize;
-    }
-
-    private List<Integer> toIntegerList(String input) {
-        return Arrays.stream(input.split(DELIMITER))
-            .map(Integer::parseInt)
-            .collect(toList());
+    @Override
+    public String toString() {
+        return games.stream()
+            .map(Game::toString)
+            .collect(Collectors.joining(NEW_LINE));
     }
 }

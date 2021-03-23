@@ -1,30 +1,32 @@
 package step2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step2.LottoApplication.lengthPerGame;
+import static step2.LottoApplication.pricePerGame;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.Candidate;
 import step2.domain.Game;
 import step2.domain.Lotto;
 import step2.domain.Number;
+import step2.domain.Prize;
 import step2.domain.Seed;
 
 public class LottoTest {
 
-    private final int lengthPerGame = 6;
-    private final int pricePerGame = 1000;
     private Lotto lotto;
     private Seed seed;
+    private Prize prize;
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(lengthPerGame);
+        lotto = new Lotto();
         seed = new Seed(14000);
     }
 
@@ -54,9 +56,8 @@ public class LottoTest {
     @DisplayName("당첨번호 생성")
     @Test
     void generateLastPrize() {
-        String input = "1,2,3,4,5,6";
-        lotto.initLastPrize(input);
-        Game lastPrize = lotto.lastPrize();
+        prize = new Prize("1,2,3,4,5,6");
+        Game lastPrize = prize.last();
         Set<Number> numbers = new HashSet<>(lastPrize.numbers());
         assertEquals(lengthPerGame, numbers.size());
     }
@@ -64,28 +65,31 @@ public class LottoTest {
     @DisplayName("당첨테스트")
     @Test
     void prize() {
-        String input = "1,2,3,4,5,6";
-        lotto.initLastPrize(input);
+        prize = new Prize("1,2,3,4,5,6");
         List<Game> games = lotto.games();
-        games.add(new Game(Arrays.asList(1,2,3,14,15,16)));
-        games.add(new Game(Arrays.asList(11,12,13,4,5,6)));
-        games.add(new Game(Arrays.asList(11,12,3,14,5,6)));
-        games.add(new Game(Arrays.asList(1,2,3,4,15,16)));
-        games.add(new Game(Arrays.asList(1,2,3,14,5,16)));
-        games.add(new Game(Arrays.asList(1,2,3,4,5,16)));
-        games.add(new Game(Arrays.asList(1,2,3,4,5,6)));
+        initGames(games);
 
-        Map<Long, List<Game>> candidate = lotto.candidate();
-        candidate.forEach((key, value) -> {
-            if(key == 3){
-                assertEquals(3 , value.size());
-            }else if(key == 4){
-                assertEquals(2 , value.size());
-            }else if(key == 5){
-                assertEquals(1 , value.size());
-            }else if(key == 6){
-                assertEquals(1 , value.size());
+        Candidate candidate = new Candidate(lotto.candidate(prize));
+        candidate.rank().forEach((key, value) -> {
+            if (key == 3) {
+                assertEquals(3, value.size());
+            } else if (key == 4) {
+                assertEquals(2, value.size());
+            } else if (key == 5) {
+                assertEquals(1, value.size());
+            } else if (key == 6) {
+                assertEquals(1, value.size());
             }
         });
+    }
+
+    private void initGames(List<Game> games) {
+        games.add(new Game(Arrays.asList(1, 2, 3, 14, 15, 16)));
+        games.add(new Game(Arrays.asList(11, 12, 13, 4, 5, 6)));
+        games.add(new Game(Arrays.asList(11, 12, 3, 14, 5, 6)));
+        games.add(new Game(Arrays.asList(1, 2, 3, 4, 15, 16)));
+        games.add(new Game(Arrays.asList(1, 2, 3, 14, 5, 16)));
+        games.add(new Game(Arrays.asList(1, 2, 3, 4, 5, 16)));
+        games.add(new Game(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

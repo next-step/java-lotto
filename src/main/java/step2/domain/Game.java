@@ -8,21 +8,19 @@ public class Game {
     private final List<Number> numbers;
 
     public Game(int length) {
-        this.numbers = this.init(length);
+        this.numbers = init(length);
     }
 
-    public Game(List<Integer> lastPrize) {
-        this.numbers = initLastPrize(lastPrize);
+    public Game(List<Integer> numbers) {
+        this.numbers = init(numbers);
     }
 
-    public Long containCount(Game lastPrize) {
-        return numbers.stream()
-            .filter(lastPrize.numbers::contains)
+    public Integer containCount(Game prize) {
+        long count = numbers.stream()
+            .filter(prize.numbers::contains)
             .count();
-    }
 
-    public int size() {
-        return numbers.size();
+        return Long.valueOf(count).intValue();
     }
 
     public List<Number> numbers() {
@@ -33,8 +31,8 @@ public class Game {
         return LottoGenerator.generateLotto(length);
     }
 
-    private List<Number> initLastPrize(List<Integer> lastPrize) {
-        return lastPrize.stream()
+    private List<Number> init(List<Integer> numbers) {
+        return numbers.stream()
             .map(Number::new)
             .collect(Collectors.toList());
     }
