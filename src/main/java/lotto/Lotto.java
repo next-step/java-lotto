@@ -12,7 +12,7 @@ public final class Lotto {
   public Lotto() {
     lottoNumbers = new ArrayList<>();
     for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-      lottoNumbers.add(new LottoNumber(0));
+      lottoNumbers.add(new LottoNumber(1));
     }
   }
 

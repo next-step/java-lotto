@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.LottoNumber.ILLEGAL_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -22,6 +23,6 @@ class LottoNumberTest {
   void createFail(int value) {
     assertThatIllegalArgumentException()
         .isThrownBy(() -> new LottoNumber(value))
-        .withMessage("유효한 로또 번호가 아닙니다.");
+        .withMessage(ILLEGAL_LOTTO_NUMBER);
   }
 }
