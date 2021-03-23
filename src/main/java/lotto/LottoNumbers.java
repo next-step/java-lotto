@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class LottoNumbers {
 
@@ -17,7 +19,10 @@ public final class LottoNumbers {
   }
 
   public LottoNumbers(String[] winningNumbers) {
-    lottoNumbers = null;
+    this.lottoNumbers = Arrays.stream(winningNumbers)
+        .map(Integer::parseInt)
+        .map(LottoNumber::new)
+        .collect(Collectors.toSet());
   }
 
   public int size() {

@@ -2,19 +2,21 @@ package lotto;
 
 import static lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoNumbersTest {
 
-  static Stream<String[]> winningNumbersSource() {
+  static Stream<Arguments> winningNumbersSource() {
     return Stream.of(
-        new String[]{"1, 2, 3, 4, 5, 6"},
-        new String[]{"45, 44, 43, 42, 41, 40"}
+        arguments((Object) new String[]{"1", "2", "3", "4", "5", "6"}),
+        arguments((Object) new String[]{"45", "44", "43", "42", "41", "40"})
     );
   }
 
