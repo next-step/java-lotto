@@ -2,6 +2,7 @@ package step1.number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step1.exception.NegativeNumberInputException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,8 +30,9 @@ class NumberTest {
 
         // when and then
         assertThatThrownBy(()->{
-            () -> assertThat(new Number(inputValue)).isNotNull();
-        }).isInstanceOf(NegativeNumberException.class);
+            assertThat(new Number(inputValue)).isNotNull();
+        }).isInstanceOf(NegativeNumberInputException.class)
+        .hasMessageContaining( "음수가 입력되었습니다.");
 
     }
 }
