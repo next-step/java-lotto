@@ -67,4 +67,21 @@ class NumberTest {
         );
 
     }
+
+    @DisplayName("Number 인스턴스가 소유한 값을 기준으로 객체 비교하는지 여부 테스트")
+    @Test
+    void 비교() {
+        // given
+        String stringValue = "1";
+        int integerValue = 1;
+        int expected = 1;
+
+        // when
+        Number numberByString = new Number(stringValue);
+        Number numberByInteger = new Number(integerValue);
+
+        // then
+        assertThat(numberByString).isEqualTo(numberByInteger);
+
+    }
 }
