@@ -4,10 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -65,5 +63,30 @@ public class StringAddCalculatorTest {
     void sum_커스팀_구분자() throws Exception {
         int result = stringAddCalculator.sum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 문자 1개")
+    void sum_음수_문자1개_테스트() throws Exception {
+        assertThatThrownBy(()->{
+            stringAddCalculator.sum("-1");
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 디폴트 구분자")
+    void sum_음수_디폴트_구분자_테스트() throws Exception {
+        assertThatThrownBy(()-> {
+            stringAddCalculator.sum("-1,2,3");
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 커스텀 구분자")
+    void sum_음수_커스텀_구분자_테스트() throws Exception {
+        assertThatThrownBy(()-> {
+            stringAddCalculator.sum("//;\n1;2;-3");
+        }).isInstanceOf(RuntimeException.class);
+
     }
 }

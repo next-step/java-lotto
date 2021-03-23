@@ -19,16 +19,27 @@ public class StringAddCalculator {
     }
 
     public int sum(String input) {
-        if(input == null || input.isEmpty()) {
-            return 0;
-        }
+        if(emptyCheck(input)) return 0;
+        input = patternCheck(input);
+        return Arrays.stream(input.split(delimiter))
+                .mapToInt(i-> {
+                    int result = Integer.parseInt(i);
+                    if(Integer.parseInt(i) < 0) throw new RuntimeException();
+                    return result;
+                }).sum();
+    }
+
+    private boolean emptyCheck(String input){
+        return input == null || input.isEmpty();
+    }
+
+    private String patternCheck(String input){
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if(m.find()){
             delimiter = m.group(1);
             input = m.group(2);
         }
-        return Arrays.stream(input.split(delimiter))
-                .mapToInt(i-> Integer.parseInt(i))
-                .sum();
+        return input;
     }
+
 }
