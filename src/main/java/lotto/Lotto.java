@@ -9,7 +9,7 @@ public final class Lotto {
   }
 
   public Lotto(String[] winningNumbers) {
-    lottoNumbers = null;
+    lottoNumbers = new LottoNumbers(winningNumbers);
   }
 
   public int lottoNumbersSize() {
