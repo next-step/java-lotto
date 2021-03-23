@@ -12,6 +12,6 @@ public class InputView {
 
     public static int enterLottoPurchaseAmount() {
         System.out.println(LOTTO_PURCHASE_AMOUNT_MESSAGE);
-        return scanner.nextInt()/ 1000;
+        return scanner.nextInt() / 1000;
     }
 }

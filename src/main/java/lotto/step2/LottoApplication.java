@@ -12,5 +12,7 @@ public class LottoApplication {
 
         LottoGame lottoGame = LottoGame.of(lottoAmount);
         ResultView.printLottos(lottoGame.getLottos());
+
+        ResultView.printWinningNumbers();
     }
 }
