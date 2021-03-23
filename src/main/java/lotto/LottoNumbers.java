@@ -33,11 +33,16 @@ public final class LottoNumbers {
     int count = 0;
 
     for (LottoNumber lottoNumber : other.lottoNumbers) {
-      if (lottoNumbers.contains(lottoNumber)) {
-        count++;
-      }
+      count = countMatch(count, lottoNumber);
     }
 
+    return count;
+  }
+
+  private int countMatch(int count, LottoNumber lottoNumber) {
+    if (lottoNumbers.contains(lottoNumber)) {
+      count++;
+    }
     return count;
   }
 }
