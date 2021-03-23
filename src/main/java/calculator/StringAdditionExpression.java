@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,5 +24,18 @@ public class StringAdditionExpression {
 
     public String[] array(){
         return input.split(separator);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StringAdditionExpression that = (StringAdditionExpression) o;
+        return input.equals(that.input) && separator.equals(that.separator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(input, separator);
     }
 }
