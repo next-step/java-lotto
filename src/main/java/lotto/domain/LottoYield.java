@@ -14,7 +14,7 @@ public class LottoYield {
                             .mapToDouble(ticket -> LottoRank.valueOf(ticket, lottoWinners).winningMoney)
                             .sum();
 
-        double buyAmount = lottoTickets.lottoQuantity() * LOTTO_AMOUNT;
+        double buyAmount = tickets.size() * LOTTO_AMOUNT;
 
         return lottoPrize / buyAmount;
     }

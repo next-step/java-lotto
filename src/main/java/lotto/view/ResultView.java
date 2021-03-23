@@ -21,7 +21,7 @@ public class ResultView {
     public void printLottoTicketInfos() {
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
 
-        System.out.println(lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
+        System.out.println(tickets.size() + BUY_QUANTITY_MESSAGE);
 
         tickets.stream()
                 .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));

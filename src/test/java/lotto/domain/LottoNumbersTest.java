@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +25,10 @@ public class LottoNumbersTest {
         return IntStream.range(2,8)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public List<Integer> stringToIntegers(String input) {
+        return InputView.stringToIntegers(input);
     }
 
     @Test
@@ -73,22 +78,10 @@ public class LottoNumbersTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(input);
+            LottoMachine.createLottoTicket(stringToIntegers(input));
         });
 
         //then
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"0,1,2,3,4,45", "1,2,3,4,5,46"})
-    @DisplayName("로또 번호 1 ~ 45 벗어날 시 예외 확인")
-    public void wnumberRangeExceptionTest(String input) throws Exception {
-        //given
-
-        //when, then
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(input);
-        });
     }
 
     @ParameterizedTest
@@ -99,7 +92,7 @@ public class LottoNumbersTest {
 
         //when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoMachine.createLottoTicket(input);
+            LottoMachine.createLottoTicket(stringToIntegers(input));
         });
     }
 }
