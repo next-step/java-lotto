@@ -4,18 +4,17 @@ import lotto.domain.*;
 import lotto.view.View;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoControl {
     public void play() {
         Scanner scanner = new Scanner(System.in);
         int money = View.purchaseAmount(scanner);
-        LottoRule lottoRule = new LottoRule();
-        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator(lottoRule));
+
+        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator());
         View.print(lotto.games());
 
-        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner), lottoRule);
+        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner));
         int typedBonusNumber = View.bonusNumber(scanner);
         WinningNumber winningNumber = new WinningNumber(typedWinningNumber, typedBonusNumber);
 

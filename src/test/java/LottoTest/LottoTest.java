@@ -26,7 +26,7 @@ public class LottoTest {
     void When_Result() {
         int Money = 10000;
         Lotto lotto = new Lotto(Money, lottoNumberGenerator);
-        WinningNumber winningNumber = new WinningNumber(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoRule()), 7);
+        WinningNumber winningNumber = new WinningNumber(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
 
         Winners winners = lotto.winners(winningNumber);
 

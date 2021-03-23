@@ -5,15 +5,15 @@ public class LottoRule {
     private static int MAX = 45;
     private static int COUNT_OF_SELECTION = 6;
 
-    public int min() {
+    public static int min() {
         return MIN;
     }
 
-    public int max() {
+    public static int max() {
         return MAX;
     }
 
-    public int countOfSelection() {
+    public static int countOfSelection() {
         return COUNT_OF_SELECTION;
     }
 

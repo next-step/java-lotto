@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -8,15 +7,15 @@ import java.util.Objects;
 public class LottoNumber {
     List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers, LottoRule lottoRule) {
-        if (numbers.stream().max(Integer::compare).get() > lottoRule.max()) {
+    public LottoNumber(List<Integer> numbers) {
+        if (numbers.stream().max(Integer::compare).get() > LottoRule.max()) {
             throw new IllegalArgumentException();
         }
-        if (numbers.stream().min(Integer::compare).get() < lottoRule.min()) {
+        if (numbers.stream().min(Integer::compare).get() < LottoRule.min()) {
             throw new IllegalArgumentException();
         }
 
-        if (numbers.stream().distinct().count() != lottoRule.countOfSelection()) {
+        if (numbers.stream().distinct().count() != LottoRule.countOfSelection()) {
             throw new IllegalArgumentException();
         }
 
