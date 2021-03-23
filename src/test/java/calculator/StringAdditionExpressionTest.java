@@ -57,6 +57,7 @@ public class StringAdditionExpressionTest {
                 Arguments.of("1,2,3", array ),
                 Arguments.of("1:2:3", array),
                 Arguments.of("//!\n1!2!3", array),
+                Arguments.of("//;\n1;2;3", array),
                 Arguments.of("//n\n1n2n3", array)
         );
     }
