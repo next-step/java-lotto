@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,4 +41,17 @@ class NumbersTest {
 
     }
 
+    @DisplayName("Numbers 인스턴스가 소유한 값을 기준으로 비교 가능한지 테스트")
+    @Test
+    void 비교() {
+        // given
+        List<Number> inputData = Arrays.asList(new Number(1), new Number(2));
+
+        // when
+        Numbers firstNumbers = new Numbers(inputData);
+        Numbers secondNumbers = new Numbers(inputData);
+
+        // then
+        assertThat(firstNumbers).isEqualTo(secondNumbers);
+    }
 }
