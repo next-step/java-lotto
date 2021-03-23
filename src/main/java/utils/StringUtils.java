@@ -1,6 +1,8 @@
 package utils;
 
 public final class StringUtils {
+
+    private static final String COMMA = ",";
     private static final int ZERO = 0;
 
     public static final boolean isNullOrBlank(String sentence) {
@@ -15,5 +17,8 @@ public final class StringUtils {
         return sentence.isEmpty() || sentence.trim().length() == ZERO;
     }
 
+    public static final String[] splitByComma(String sentence){
+        return sentence.split(COMMA);
+    }
 
 }

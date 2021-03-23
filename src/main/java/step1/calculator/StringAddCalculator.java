@@ -1,8 +1,10 @@
 package step1.calculator;
 
 
+import java.util.Arrays;
+
 import static utils.StringUtils.isNullOrBlank;
-import static java.lang.Integer.parseInt;
+import static utils.StringUtils.splitByComma;
 
 public final class StringAddCalculator {
 
@@ -10,11 +12,12 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        int sum = 0;
-        String[] numbers = expression.split(",");
-        for(String number : numbers)
-            sum += parseInt(number);
-        return sum;
+        return sum(splitByComma(expression));
     }
 
+    private static final int sum(String[] data) {
+        return Arrays.stream(data)
+                .mapToInt(Integer::parseInt)
+                .sum();
+    }
 }
