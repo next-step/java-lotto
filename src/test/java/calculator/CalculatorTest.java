@@ -3,6 +3,12 @@ package calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import java.util.stream.Stream;
 
 public class CalculatorTest {
     @Test
@@ -48,6 +54,35 @@ public class CalculatorTest {
         Assertions.assertThatCode(() -> Calculator.getInstance()
                 .assurePositive(positive))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("null 이나 \"\" 을 입력하면 0을 리턴한다.")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void testCalculate(String nullOrEmpty) {
+        int expected = 0;
+        int sum = Calculator.getInstance()
+                .calculate(nullOrEmpty);
+        Assertions.assertThat(sum)
+                .isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("providerTestCalculate")
+    void testCalculate(String input, int expected) {
+        int sum = Calculator.getInstance()
+                .calculate(input);
+        Assertions.assertThat(sum)
+                .isEqualTo(expected);
+    }
+
+    static Stream<Arguments> providerTestCalculate(){
+        return Stream.of(
+                Arguments.of("1,2,3", 6),
+                Arguments.of("1:2:3", 6),
+                Arguments.of("//n\n1n2n3", 6),
+                Arguments.of("//!\n1!2!3", 6)
+        );
     }
 
 }
