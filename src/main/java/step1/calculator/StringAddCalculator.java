@@ -4,7 +4,7 @@ package step1.calculator;
 import java.util.Arrays;
 
 import static utils.StringUtils.isNullOrBlank;
-import static utils.StringUtils.splitByComma;
+import static utils.StringUtils.splitByCommaAndColon;
 
 public final class StringAddCalculator {
 
@@ -12,7 +12,7 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        return sum(splitByComma(expression));
+        return sum(splitByCommaAndColon(expression));
     }
 
     private static final int sum(String[] data) {
