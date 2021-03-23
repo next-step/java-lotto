@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoMachine {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -14,19 +13,15 @@ public class LottoMachine {
                                                                     .boxed()
                                                                     .collect(Collectors.toList());
 
-    public static LottoTickets createLottoTickets(int buyAmount) {
-        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount);
-
-        List<LottoTicket> tickets =
-                    Stream.generate(LottoMachine::createLottoTicket)
-                .limit(lottoQuantity.autoQuantity())
+    public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
+        List<LottoTicket> tickets = inputManual.stream()
+                .map(LottoMachine::createLottoTicket)
                 .collect(Collectors.toList());
 
-        return new LottoTickets(tickets);
-    }
+        IntStream.range(0, lottoQuantity.autoQuantity())
+                .forEach(i -> tickets.add(createLottoTicket()));
 
-    public static LottoTicket createLottoTicket(List<Integer> numbers) {
-        return new LottoTicket(numbers);
+        return new LottoTickets(tickets);
     }
 
     public static LottoWinners createWinners(List<Integer> numbers, int inputBonusNumber) {
@@ -37,6 +32,10 @@ public class LottoMachine {
 
     private static LottoTicket createLottoTicket() {
         return new LottoTicket(lottoNumberRandom());
+    }
+
+    public static LottoTicket createLottoTicket(List<Integer> numbers) {
+        return new LottoTicket(numbers);
     }
 
     private static List<Integer> lottoNumberRandom() {

@@ -1,9 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoMachine;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
     private static final String INPUT_BUY_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -14,23 +18,25 @@ public class InputView {
     private static final String DEFAULT_SPLIT_REGEX = ",";
 
     public int inputBuyAmount() {
-        System.out.println(INPUT_BUY_AMOUNT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return inputInt(INPUT_BUY_AMOUNT_MESSAGE);
     }
 
     public int inputManualQuantity() {
-        System.out.println(INPUT_MANUAL_QUANTITY_MESSAGE);
+        return inputInt(INPUT_MANUAL_QUANTITY_MESSAGE);
+    }
+
+    private int inputInt(String message) {
+        System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
     public List<Integer> inputWinnerNumber() {
-        return inputNumbers(INPUT_WINNER_NUMBERS_MESSAGE);
+        System.out.println(INPUT_WINNER_NUMBERS_MESSAGE);
+        return inputNumbers();
     }
 
-    private List<Integer> inputNumbers(String message) {
-        System.out.println(message);
+    private List<Integer> inputNumbers() {
         Scanner scanner = new Scanner(System.in);
         return stringToIntegers(scanner.nextLine());
     }
@@ -48,4 +54,10 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public List<List<Integer>> inputManualNumbers(int manualQuantity) {
+        System.out.println(INPUT_MANUAL_NUMBERS_MESSAGE);
+        return Stream.generate(this::inputNumbers)
+                .limit(manualQuantity)
+                .collect(Collectors.toList());
+    }
 }

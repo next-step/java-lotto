@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoController {
     public void run() {
@@ -14,12 +15,14 @@ public class LottoController {
         int manualQuantity = inputView.inputManualQuantity();
 
         LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, manualQuantity);
+        List<List<Integer>> inputManual = inputView.inputManualNumbers(manualQuantity);
 
         // 로또 발급
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(buyAmount);
+        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, inputManual);
 
         // 로또 번호 확인
         ResultView resultView = new ResultView(lottoTickets);
+        resultView.printLottoQuantity(lottoQuantity);
         resultView.printLottoTicketInfos();
 
         // 당첨 결과 확인

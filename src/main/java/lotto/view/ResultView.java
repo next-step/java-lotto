@@ -18,10 +18,12 @@ public class ResultView {
         this.lottoTickets = lottoTickets;
     }
 
+    public void printLottoQuantity(LottoQuantity lottoQuantity) {
+        System.out.println("수동으로 " + lottoQuantity.manualQuantity() + "장, 자동으로 "  + lottoQuantity.autoQuantity() + "개를 구매했습니다.");
+    }
+
     public void printLottoTicketInfos() {
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
-
-        System.out.println(tickets.size() + BUY_QUANTITY_MESSAGE);
 
         tickets.stream()
                 .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
