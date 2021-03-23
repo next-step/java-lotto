@@ -2,10 +2,6 @@
 
 구분자로 문자열을 분리하고 숫자로 변환하여 합을 구한다.
 
-
-### InputView
-* 덧셈식을 수행할 문자열을 입력 받는다.
-
 ### StringAdditionExpression 
 * 연산요청을 생성자 파라미터로 받는다
 * 생성자에서 구분자를 결정한다.
@@ -23,6 +19,9 @@
   * "" 또는 null 입력시 '0' 으로 변환한다.
   * input 을 StringAdditionExpression 으로 변환하여 덧셈 연산한다.
 
+
+### InputView
+* 덧셈식을 수행할 문자열을 입력 받는다.
 
 ### PrintView
 * 합을 출력한다. 
