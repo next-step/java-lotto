@@ -10,7 +10,11 @@ public final class StringAddCalculator {
         if (isNullOrBlank(expression)) {
             return 0;
         }
-        return parseInt(expression);
+        int sum = 0;
+        String[] numbers = expression.split(",");
+        for(String number : numbers)
+            sum += parseInt(number);
+        return sum;
     }
 
 }
