@@ -11,5 +11,6 @@ public class LottoApplication {
         ResultView.printPurchaseAmount(lottoAmount);
 
         LottoGame lottoGame = LottoGame.of(lottoAmount);
+        ResultView.printLottos(lottoGame.getLottos());
     }
 }

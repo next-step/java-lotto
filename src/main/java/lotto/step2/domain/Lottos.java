@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -16,5 +17,9 @@ public class Lottos {
 
     public int getSize() {
         return lottos.size();
+    }
+
+    public Stream<Lotto> stream() {
+        return lottos.stream();
     }
 }

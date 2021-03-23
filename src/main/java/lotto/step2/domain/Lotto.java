@@ -5,6 +5,7 @@ import lotto.step2.exception.LottoException;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 
 public class Lotto {
@@ -26,6 +27,10 @@ public class Lotto {
         if (numbers.size() != LOTTO_MADE_OF_NUMBERS) {
             throw new LottoException(LOTTO_NUMBERS_MADE_OF_SIX_NUMBERS);
         }
+    }
+
+    public Stream<Integer> stream() {
+        return numbers.stream();
     }
 
     @Override
