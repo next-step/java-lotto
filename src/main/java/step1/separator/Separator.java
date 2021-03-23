@@ -20,6 +20,34 @@ public class Separator {
         this.expression = expression;
     }
 
+    public final String[] splitByDelimiter(){
+        Matcher m = Pattern.compile(CUSTOM_EXPRESSION_DELIMITER_FORMAT).matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(DELIMITER_POSITION);
+            String[] tokens = m.group(EXPRESSION_POSITION).split(customDelimiter(customDelimiter));
+            return tokens;
+        }
+        return expression.split(defaultDelimiter());
+    }
 
+    private final String customDelimiter(String customDelimiter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder
+                .append(customDelimiter)
+                .append(BAR)
+                .append(COMMA)
+                .append(BAR)
+                .append(COLON)
+                .toString();
+    }
+
+    private final String defaultDelimiter() {
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder
+                .append(COMMA)
+                .append(BAR)
+                .append(COLON)
+                .toString();
+    }
 
 }
