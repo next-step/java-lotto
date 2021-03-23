@@ -6,12 +6,12 @@ import java.util.List;
 public class LottoBallFactory {
   private static final int LOTTO_NUMBER = 45;
 
-  private static List<LottoBall> lottoBallList = new ArrayList<>();
-
-  public static void initialize() {
+  public static LottoBalls initialize() {
+    List<LottoBall> lottoBalls = new ArrayList<>();
     for (int i=1 ; i <= LOTTO_NUMBER ; i++) {
-      lottoBallList.add(LottoBall.create(i));
+      lottoBalls.add(LottoBall.create(i));
     }
+    return new LottoBalls(lottoBalls);
   }
 
 }
