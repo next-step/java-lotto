@@ -3,14 +3,14 @@ package step2;
 import java.util.Objects;
 
 public class Lotto {
-    private int number;
+    private LottoNumber number;
 
-    public Lotto(int number){
+    public Lotto(LottoNumber number){
         this.number = number;
     }
 
-    public Lotto(LottoNumberGenerator generator){
-        this.number = generator.generator();
+    public LottoNumber getLottoNumber(){
+        return number;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return number == lotto.number;
+        return Objects.equals(number, lotto.number);
     }
 
     @Override
