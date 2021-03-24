@@ -1,5 +1,6 @@
 package step2.domain.lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,16 @@ public class NormalLotto {
 
     private final List<Integer> numbers;
 
+    public NormalLotto() {
+        this(NormalLotto.numbers());
+    }
+
+    public NormalLotto(String rawLottoNumbers) {
+        this(Arrays.stream(rawLottoNumbers.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
+    }
+
     public NormalLotto(List<Integer> numbers) {
         if (!valid(numbers)) {
             Logger logger = Logger.getGlobal();
@@ -23,10 +34,6 @@ public class NormalLotto {
             throw new IllegalArgumentException("Normal Lotto numbers are invalid");
         }
         this.numbers = numbers;
-    }
-
-    public NormalLotto() {
-        this(NormalLotto.numbers());
     }
 
     public List<Integer> getNumbers() {
