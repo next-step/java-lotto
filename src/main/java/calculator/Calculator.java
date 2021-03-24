@@ -16,9 +16,8 @@ public class Calculator {
         return calculator;
     }
 
-    public int calculate(String input) {
-        return Arrays.stream(StringAdditionExpression.getExpression(input)
-                .array())
+    public int calculate(Expression expression) {
+        return Arrays.stream(expression.array())
                 .mapToInt(this::toNumber)
                 .peek(this::assurePositive)
                 .sum();

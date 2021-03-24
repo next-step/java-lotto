@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAdditionExpression {
+public class StringAdditionExpression implements Expression{
     public static final String DEFAULT = "[,:]";
     public static final String CUSTOM_PREFIX = "//";
     public static final String CUSTOM_SUFFIX = "\n";

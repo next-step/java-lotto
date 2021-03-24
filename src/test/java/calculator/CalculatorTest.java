@@ -61,8 +61,9 @@ public class CalculatorTest {
     @NullAndEmptySource
     void testCalculate(String nullOrEmpty) {
         int expected = 0;
+        Expression expression = StringAdditionExpression.getExpression(nullOrEmpty);
         int sum = Calculator.getInstance()
-                .calculate(nullOrEmpty);
+                .calculate(expression);
         Assertions.assertThat(sum)
                 .isEqualTo(expected);
     }
@@ -70,8 +71,9 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("providerTestCalculate")
     void testCalculate(String input, int expected) {
+        Expression expression = StringAdditionExpression.getExpression(input);
         int sum = Calculator.getInstance()
-                .calculate(input);
+                .calculate(expression);
         Assertions.assertThat(sum)
                 .isEqualTo(expected);
     }
@@ -90,9 +92,10 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("providerTestCalculate_onInvalidInput")
     void testCalculate_onInvalidInput(String input) {
+        Expression expression = StringAdditionExpression.getExpression(input);
         Assertions.assertThatThrownBy(() ->
                 Calculator.getInstance()
-                        .calculate(input))
+                        .calculate(expression))
                 .isInstanceOf(RuntimeException.class);
     }
 
