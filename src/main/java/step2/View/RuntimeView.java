@@ -4,8 +4,9 @@ import step2.dto.LottoListDTO;
 
 public class RuntimeView {
 
-    public void printLottoAmount(LottoListDTO lottoListDTO) {
-        System.out.println(lottoListDTO.count() + "개를 구매했습니다.");
+    public void printLottoAmount(int manualLottoCount, int autoLottoCount) {
+        String printString = String.format("수동으로 %d장, 자동으로 %d장을 구입했습니다.", manualLottoCount, autoLottoCount);
+        System.out.println(printString);
     }
 
     public void printLottoNumbers(LottoListDTO lottoListDTO) {

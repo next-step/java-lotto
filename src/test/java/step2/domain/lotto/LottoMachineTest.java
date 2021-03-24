@@ -16,26 +16,26 @@ class LottoMachineTest {
         this.lottoMachine = new LottoMachine();
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-            "6000:6",
-            "5500:5",
-            "14200:14"}, delimiter = ':')
-    @DisplayName("살 수 있는 로또의 개수를 구할 수 있다")
-    void calculatesLottoCapacity(int wanted, int expected) {
-        int capacity = lottoMachine.normalLottoCapacity(new Money(wanted));
-        Assertions.assertThat(capacity).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-            "6000:6",
-            "5500:5",
-            "14200:14"}, delimiter = ':')
-    @DisplayName("원하는 수의 로또를 살 수 있다")
-    void canBuyValidLottoSize(int wanted, int expected) {
-        LottoList lottoList = lottoMachine.buyAutoLotto(new Money(wanted));
-        Assertions.assertThat(lottoList.getLottoSize()).isEqualTo(expected);
-    }
+//    @ParameterizedTest
+//    @CsvSource(value = {
+//            "6000:6",
+//            "5500:5",
+//            "14200:14"}, delimiter = ':')
+//    @DisplayName("살 수 있는 로또의 개수를 구할 수 있다")
+//    void calculatesLottoCapacity(int wanted, int expected) {
+//        int capacity = lottoMachine.normalLottoCapacity(new Money(wanted));
+//        Assertions.assertThat(capacity).isEqualTo(expected);
+//    }
+//
+//    @ParameterizedTest
+//    @CsvSource(value = {
+//            "6000:6",
+//            "5500:5",
+//            "14200:14"}, delimiter = ':')
+//    @DisplayName("원하는 수의 로또를 살 수 있다")
+//    void canBuyValidLottoSize(int wanted, int expected) {
+//        LottoList lottoList = lottoMachine.buyAutoLotto(new Money(wanted));
+//        Assertions.assertThat(lottoList.getLottoSize()).isEqualTo(expected);
+//    }
 
 }

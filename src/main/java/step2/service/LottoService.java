@@ -18,10 +18,9 @@ public class LottoService {
 
     private LottoList lottoList;
 
-    public LottoListDTO buyLotto(int rawAmount, List<String> rawLottoList) {
-        Money money = new Money(rawAmount);
+    public LottoListDTO buyLotto(List<String> rawLottoList, int autoLottoCount) {
         LottoList manualLottoList = lottoMachine.buyManualLotto(rawLottoList);
-        LottoList autoLottoList = lottoMachine.buyAutoLotto(money);
+        LottoList autoLottoList = lottoMachine.buyAutoLotto(autoLottoCount);
         lottoList = new LottoList(manualLottoList, autoLottoList);
         return lottoList.dto();
     }
@@ -43,5 +42,10 @@ public class LottoService {
     public int change(int rawAmount, int rawManualLottoCount) {
         Money amount = new Money(rawAmount);
         return lottoMachine.change(amount, rawManualLottoCount);
+    }
+
+    public int capacity(int amount) {
+        Money change = new Money(amount);
+        return lottoMachine.normalLottoCapacity(change);
     }
 }

@@ -18,14 +18,28 @@ public class LottoController {
     private final LottoService lottoService = new LottoService();
 
     public void buyLotto() {
-        LottoListDTO lottoList = lottoList();
-        showLottoList(lottoList);
+        int amount = inputView.moneyInput();
+        int manualLottoCount = manualLottoCount(amount);
+        int change = lottoService.change(amount, manualLottoCount);
+        List<String> rawManualLottoList = rawManualLottoList(manualLottoCount);
+        int autoLottoCount = lottoService.capacity(change);
+
+        LottoListDTO lottoList = lottoService.buyLotto(rawManualLottoList, autoLottoCount);
+        showLottoList(manualLottoCount, autoLottoCount, lottoList);
         JudgeResponseDTO result = result();
-        showResult(result);
+        resultView.printResult(result);
     }
 
-    private void showResult(JudgeResponseDTO result){
-        resultView.printResult(result);
+    private int manualLottoCount(int amount){
+        int manualLottoCount = inputView.manualLottoCount();
+        lottoService.verifyLottoCount(amount, manualLottoCount);
+        return manualLottoCount;
+    }
+
+    private List<String> rawManualLottoList(int manualLottoCount){
+        List<String> rawManualLottoList = inputView.manualLottoList(manualLottoCount);
+        lottoService.verifyLottoList(rawManualLottoList);
+        return rawManualLottoList;
     }
 
     private JudgeResponseDTO result(){
@@ -34,18 +48,8 @@ public class LottoController {
         return lottoService.getLottoResult(rawNumberString, rawBonusNumber);
     }
 
-    private LottoListDTO lottoList(){
-        int rawAmount = inputView.moneyInput();
-        int rawManualLottoCount = inputView.manualLottoCount();
-        lottoService.verifyLottoCount(rawAmount,rawManualLottoCount);
-        int change = lottoService.change(rawAmount, rawManualLottoCount);
-        List<String> rawManualLottoList = inputView.manualLottoList(rawManualLottoCount);
-        lottoService.verifyLottoList(rawManualLottoList);
-        return lottoService.buyLotto(change, rawManualLottoList);
-    }
-
-    private void showLottoList(LottoListDTO lottoList){
-        runtimeView.printLottoAmount(lottoList);
+    private void showLottoList(int manualLottoCount, int autoLottoCount, LottoListDTO lottoList){
+        runtimeView.printLottoAmount(manualLottoCount, autoLottoCount);
         runtimeView.printLottoNumbers(lottoList);
     }
 

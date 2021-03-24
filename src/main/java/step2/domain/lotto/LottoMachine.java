@@ -13,12 +13,7 @@ public class LottoMachine {
         return money.getAmount() / NormalLotto.PRICE;
     }
 
-    public LottoList buyAutoLotto(Money money) {
-        int capacity = normalLottoCapacity(money);
-        return buyAutoLotto(capacity);
-    }
-
-    private LottoList buyAutoLotto(int capacity) {
+    public LottoList buyAutoLotto(int capacity) {
         return new LottoList(IntStream.range(0, capacity)
                 .mapToObj(count -> new NormalLotto())
                 .collect(Collectors.toList()));
