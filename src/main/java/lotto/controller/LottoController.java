@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class LottoController {
     public void run() {
