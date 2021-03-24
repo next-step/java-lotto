@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -16,18 +15,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(LottoNumber::addLottoNumbersCache);
-    }
-
-    private static void addLottoNumbersCache(int number) {
-        lottoNumbersCache.put(number, new LottoNumber(number));
-    }
-
     public static LottoNumber of(final int number) {
         validate(number);
-        return lottoNumbersCache.get(number);
+        return lottoNumbersCache.putIfAbsent(number, new LottoNumber(number));
     }
 
     private static void validate(final int number) {
