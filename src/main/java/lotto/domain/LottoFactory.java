@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,28 +18,37 @@ public class LottoFactory {
     private LottoFactory() { }
 
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
-        List<LottoTicket> tickets = inputManual.stream()
-                .map(LottoFactory::createLottoTicket)
+        List<LottoTicket> result = new ArrayList<>();
+        result.addAll(LottoFactory.createManualLottoTickets(inputManual));
+        result.addAll(LottoFactory.createAutoLottoTickets(lottoQuantity));
+
+        return new LottoTickets(result);
+    }
+
+    private static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
+        return Stream.generate(LottoFactory::createAutoLotto)
+                                    .limit(lottoQuantity.autoQuantity())
+                                    .collect(Collectors.toList());
+    }
+
+    private static LottoTicket createAutoLotto() {
+        return new LottoTicket(lottoNumberRandom());
+    }
+
+    private static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
+        return inputManual.stream()
+                .map(LottoFactory::createManualLotto)
                 .collect(Collectors.toList());
+    }
 
-        IntStream.range(0, lottoQuantity.autoQuantity())
-                .forEach(i -> tickets.add(createLottoTicket()));
-
-        return new LottoTickets(tickets);
+    private static LottoTicket createManualLotto(List<Integer> numbers) {
+        return new LottoTicket(numbers);
     }
 
     public static LottoWinners createWinners(List<Integer> numbers, int inputBonusNumber) {
         LottoNumbers winners = new LottoNumbers(numbers);
         LottoNumber bonus = new LottoNumber(inputBonusNumber);
         return new LottoWinners(winners, bonus);
-    }
-
-    private static LottoTicket createLottoTicket() {
-        return new LottoTicket(lottoNumberRandom());
-    }
-
-    private static LottoTicket createLottoTicket(List<Integer> numbers) {
-        return new LottoTicket(numbers);
     }
 
     private static List<Integer> lottoNumberRandom() {
