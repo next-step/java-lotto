@@ -20,16 +20,20 @@ public enum Prize {
     }
 
     public static Prize getPrize(long matchedCount, boolean bonusNumberMatched)  {
-        Prize prize = Arrays.stream(values())
-                            .filter(p -> p.condition == matchedCount)
-                            .findFirst()
-                            .orElse(LOSING_TICKET);
+        Prize prize = makePrize(matchedCount);
 
         if (prize == Prize.THIRD && bonusNumberMatched) {
-            prize = Prize.SECOND;
+            return  Prize.SECOND;
         }
 
         return prize;
+    }
+
+    private static Prize makePrize(long matchedCount) {
+        return Arrays.stream(values())
+                     .filter(p -> p.condition == matchedCount)
+                     .findFirst()
+                     .orElse(LOSING_TICKET);
     }
 
     public long getCondition() {
