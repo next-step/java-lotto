@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberList;
+
 public class LottoNumberTest {
 
 	@DisplayName("단일 숫자 생성 테스트 : 정상 범위")

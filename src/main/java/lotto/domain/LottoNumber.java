@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 	private final int lottoNumber;
 
 	public LottoNumber(int lottoNumber) {
@@ -32,5 +32,15 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public int compareTo(LottoNumber l) {
+		if (this.lottoNumber > l.lottoNumber) {
+			return 1;
+		} else if (this.lottoNumber < l.lottoNumber) {
+			return -1;
+		}
+		return 0;
 	}
 }
