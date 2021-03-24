@@ -11,7 +11,7 @@ public final class PositiveNumber {
     private final Integer positiveNumber;
 
     private static final int ZERO = 0;
-    private static final int MAX_LENGTH = 127;
+    private static final int MAX_LENGTH = 128;
 
     private static final PositiveNumber[] cache;
 
@@ -19,11 +19,11 @@ public final class PositiveNumber {
         cache = new PositiveNumber[MAX_LENGTH];
     }
 
-    public final static PositiveNumber valueOf(String positiveNumber) {
+    public static final PositiveNumber valueOf(String positiveNumber) {
         return valueOf(convertStringToInt(positiveNumber));
     }
 
-    public final static PositiveNumber valueOf(Integer positiveNumber) {
+    public static final PositiveNumber valueOf(Integer positiveNumber) {
         if (isNegative(positiveNumber)) {
             throw new NegativeNumberInputException();
         }

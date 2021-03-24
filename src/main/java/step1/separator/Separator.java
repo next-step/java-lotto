@@ -21,21 +21,21 @@ public final class Separator {
         Matcher m = Pattern.compile(CUSTOM_EXPRESSION_DELIMITER_FORMAT).matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(DELIMITER_POSITION);
-            return m.group(EXPRESSION_POSITION).split(customDelimiter(customDelimiter));
+            return m.group(EXPRESSION_POSITION).split(getCustomDelimiter(customDelimiter));
         }
-        return expression.split(defaultDelimiter());
+        return expression.split(getDefaultDelimiter());
     }
 
-    private final String customDelimiter(String customDelimiter) {
+    private final String getCustomDelimiter(String customDelimiter) {
         StringBuilder stringBuilder = new StringBuilder();
         return stringBuilder
                 .append(customDelimiter)
                 .append(BAR)
-                .append(defaultDelimiter())
+                .append(getDefaultDelimiter())
                 .toString();
     }
 
-    private final String defaultDelimiter() {
+    private final String getDefaultDelimiter() {
         StringBuilder stringBuilder = new StringBuilder();
         return stringBuilder
                 .append(COMMA)

@@ -2,6 +2,11 @@ package step1.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step1.number.PositiveNumber;
+import step1.number.PositiveNumbers;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -52,6 +57,20 @@ class StringAddCalculatorTest {
         assertThatThrownBy(() ->
                 StringAddCalculator.splitAndSum("-1,2,3")
         ).isInstanceOf(RuntimeException.class); // 요구사항에 RuntimeException 으로 검증하는 것이 있어서 이렇게 테스트했습니다.
+    }
+
+    @DisplayName("splitAndSum에 유효한 경계값 입력시 덧셈기능이 동작하는지 여부 테스트")
+    @Test
+    void 검증_경계값() {
+        // given
+        List<PositiveNumber> inputData = Arrays.asList(PositiveNumber.valueOf(0), PositiveNumber.valueOf(127));
+
+        // when
+        PositiveNumbers positiveNumbers = new PositiveNumbers(inputData);
+        int actual = positiveNumbers.sum();
+
+        // then
+        assertThat(actual).isEqualTo(127);
     }
 
 }

@@ -15,7 +15,7 @@ class PositiveNumberTest {
     @Test
     void 생성() {
         // given
-        int inputValue = 1;
+        int inputValue = 127;
 
         // when
         PositiveNumber positiveNumber = PositiveNumber.valueOf(inputValue);
@@ -56,9 +56,9 @@ class PositiveNumberTest {
     @Test
     void 반환() {
         // given
-        String stringValue = "1";
-        int integerValue = 1;
-        int expected = 1;
+        String stringValue = "127";
+        int integerValue = 127;
+        int expected = 127;
 
         // when an then
         assertAll(
@@ -72,9 +72,9 @@ class PositiveNumberTest {
     @Test
     void 비교() {
         // given
-        String stringValue = "1";
-        int integerValue = 1;
-        int expected = 1;
+        String stringValue = "127";
+        int integerValue = 127;
+        int expected = 127;
 
         // when
         PositiveNumber positiveNumberByString = PositiveNumber.valueOf(stringValue);
@@ -89,8 +89,8 @@ class PositiveNumberTest {
     @Test
     void 비교_주소값() {
         // given
-        String stringValue = "1";
-        int integerValue = 1;
+        String stringValue = "127";
+        int integerValue = 127;
 
         // when
         PositiveNumber positiveNumberByString = PositiveNumber.valueOf(stringValue);
