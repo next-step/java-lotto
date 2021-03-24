@@ -16,7 +16,8 @@ public class LottoGame {
     ResultView.showAmountOfLotto(amount);
     ResultView.showLottoNumbers(lottos);
 
-    HitNumbers hitNumbers = new HitNumbers(InputView.inputPrizeNumber());
+    HitNumbers hitNumbers = new HitNumbers(InputView.inputPrizeNumber(),
+        InputView.inputBonusNumber());
     Lottery lottery = new Lottery(hitNumbers);
     lottery.draw(lottos);
 
