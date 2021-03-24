@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import step1.exception.InvalidNumberInputException;
 import step1.exception.StringNumberFormatException;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,7 +37,7 @@ class PositiveNumberTest {
         assertThatThrownBy(() -> {
             assertThat(PositiveNumber.valueOf(inputValue)).isNotNull();
         }).isInstanceOf(InvalidNumberInputException.class)
-                .hasMessageContaining("음수가 입력되었습니다.");
+                .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
 
     }
 
@@ -99,6 +102,20 @@ class PositiveNumberTest {
 
         // then
         assertThat(actual).isTrue();
+    }
+
+    @DisplayName("PositiveNumber 에 범위를 넘는값 입력시 예외 발생시키는지 여부 테스트")
+    @Test
+    void 검증_범위를넘는값() {
+        // given
+        int outOfBoundsValue = 128;
+
+        // when and then
+        assertThatThrownBy(()-> {
+                PositiveNumber.valueOf(128);
+        }).isInstanceOf(InvalidNumberInputException.class)
+                .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
+
     }
 
 }
