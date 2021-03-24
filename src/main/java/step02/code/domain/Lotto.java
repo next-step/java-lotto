@@ -12,11 +12,10 @@ public class Lotto {
   private final List<Integer> lotto;
 
   public Lotto(List<Integer> lotto) {
-    check(lotto);
     this.lotto = lotto;
   }
 
-  private void check(List<Integer> lotto) {
+  public void check() {
     if(lotto.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 6개의 숫자가 필요합니다");
     }
