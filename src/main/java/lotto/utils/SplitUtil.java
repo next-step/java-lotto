@@ -1,6 +1,8 @@
 package lotto.utils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SplitUtil {
 
@@ -10,10 +12,12 @@ public class SplitUtil {
     private SplitUtil() {
     }
 
-    public static String[] split(String expression) {
+    public static List<String> split(String expression) {
         checkDelimiter(expression);
         checkNumberOfDelimiter(expression.split(""));
-        return expression.split(DELIMITER);
+        return Arrays.stream(expression.split(DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     private static void checkDelimiter(String expression) {
