@@ -2,24 +2,29 @@ package lotto.domain;
 
 import lotto.dto.IssueNumber;
 import lotto.dto.LottoNumber;
-import lotto.dto.LottoNumbers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoPlay {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_LENGTH = 6;
+    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_LENGTH = 6;
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
     public static final List<LottoNumber> LOTTO_NUMBER = new ArrayList<>();
     private final TotalLottoNumbers totalLottoNumbers = new TotalLottoNumbers();
+    private int issueNumber;
 
     static {
         for (int number = LOTTO_MIN; number <= LOTTO_MAX; number++) {
             LOTTO_NUMBER.add(new LottoNumber(number));
         }
     };
+
+    public LottoPlay() {
+        this.issueNumber = 1;
+    }
 
     public Map<IssueNumber, LottoNumbers> getLottoNumbers() {
         return totalLottoNumbers.getTotalLottoNumbers();
@@ -28,8 +33,8 @@ public class LottoPlay {
     public void createLotto(int inputBuyAmount) {
         int countLotto = inputBuyAmount / LOTTO_PRICE;
 
-        for (int issueNumber = 1; issueNumber <= countLotto; issueNumber++) {
-            totalLottoNumbers.recordEachLottoNumbers(new IssueNumber(issueNumber), createLottoNumber());
+        while (issueNumber <= countLotto) {
+            totalLottoNumbers.recordEachLottoNumbers(new IssueNumber(issueNumber++), createLottoNumber());
         }
     }
 
@@ -41,8 +46,15 @@ public class LottoPlay {
             lottoNumber.add(new LottoNumber(LOTTO_NUMBER.get(i)
                                                         .getLottoNumber()));
         }
-        Collections.sort(lottoNumber);
 
         return new LottoNumbers(lottoNumber);
+    }
+
+    public void createLottoByManual(List<Integer> manualLottoNumber) {
+        List<LottoNumber> lottoNumber = manualLottoNumber.stream()
+                                            .map(LottoNumber::new)
+                                            .collect(Collectors.toList());
+
+        totalLottoNumbers.recordEachLottoNumbers(new IssueNumber(issueNumber++), new LottoNumbers(lottoNumber));
     }
 }

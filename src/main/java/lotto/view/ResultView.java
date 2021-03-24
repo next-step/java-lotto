@@ -4,7 +4,7 @@ import lotto.domain.Rank;
 import lotto.dto.LottoNumber;
 import lotto.domain.Winning;
 import lotto.dto.IssueNumber;
-import lotto.dto.LottoNumbers;
+import lotto.domain.LottoNumbers;
 
 import java.util.List;
 import java.util.Map;
