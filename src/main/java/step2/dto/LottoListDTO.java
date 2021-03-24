@@ -13,8 +13,4 @@ public class LottoListDTO {
         return this.lottoList;
     }
 
-    public int count() {
-        return lottoList.size();
-    }
-
 }

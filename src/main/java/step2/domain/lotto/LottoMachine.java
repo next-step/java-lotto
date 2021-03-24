@@ -20,13 +20,13 @@ public class LottoMachine {
     }
 
     public void verifyCapacity(Money amount, int rawManualLottoCount) {
-        if(normalLottoCapacity(amount)<rawManualLottoCount){
+        if (normalLottoCapacity(amount) < rawManualLottoCount) {
             throw new IllegalArgumentException("돈이 부족합니다");
         }
     }
 
     public int change(Money amount, int rawManualLottoCount) {
-        return amount.getAmount()-rawManualLottoCount*NormalLotto.PRICE;
+        return amount.getAmount() - rawManualLottoCount * NormalLotto.PRICE;
     }
 
     public LottoList buyManualLotto(List<String> rawLottoList) {

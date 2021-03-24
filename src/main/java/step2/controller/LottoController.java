@@ -30,25 +30,25 @@ public class LottoController {
         resultView.printResult(result);
     }
 
-    private int manualLottoCount(int amount){
+    private int manualLottoCount(int amount) {
         int manualLottoCount = inputView.manualLottoCount();
         lottoService.verifyLottoCount(amount, manualLottoCount);
         return manualLottoCount;
     }
 
-    private List<String> rawManualLottoList(int manualLottoCount){
+    private List<String> rawManualLottoList(int manualLottoCount) {
         List<String> rawManualLottoList = inputView.manualLottoList(manualLottoCount);
         lottoService.verifyLottoList(rawManualLottoList);
         return rawManualLottoList;
     }
 
-    private JudgeResponseDTO result(){
+    private JudgeResponseDTO result() {
         String rawNumberString = inputView.lastWeekWinningLottoNumbers();
         int rawBonusNumber = inputView.lastWeekBonusLottoNumber();
         return lottoService.getLottoResult(rawNumberString, rawBonusNumber);
     }
 
-    private void showLottoList(int manualLottoCount, int autoLottoCount, LottoListDTO lottoList){
+    private void showLottoList(int manualLottoCount, int autoLottoCount, LottoListDTO lottoList) {
         runtimeView.printLottoAmount(manualLottoCount, autoLottoCount);
         runtimeView.printLottoNumbers(lottoList);
     }

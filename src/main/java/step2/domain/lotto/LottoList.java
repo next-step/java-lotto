@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class LottoList {
     private final List<NormalLotto> lottos;
 
-    public LottoList(ArrayList<String> rawLottoList){
+    public LottoList(ArrayList<String> rawLottoList) {
         this(rawLottoList.stream()
                 .map(NormalLotto::new)
                 .collect(Collectors.toList()));
@@ -27,10 +27,6 @@ public class LottoList {
 
     public List<NormalLotto> getLottos() {
         return lottos;
-    }
-
-    public int getLottoSize() {
-        return lottos.size();
     }
 
     public LottoListDTO dto() {
