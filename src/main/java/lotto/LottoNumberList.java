@@ -1,0 +1,18 @@
+package lotto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LottoNumberList {
+	List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+	public LottoNumberList() {
+		for (int i = 1; i <= 45; i++) {
+			lottoNumberList.add(new LottoNumber(i));
+		}
+	}
+
+	public List<LottoNumber> getLottoNumberList() {
+		return lottoNumberList;
+	}
+}
