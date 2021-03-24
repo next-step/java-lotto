@@ -20,7 +20,7 @@ class LottoWinnersTest {
 
     @Test
     @DisplayName("당첨번호와 보너스번호 중복 테스트")
-    void winnerNumberMatchOfBonusExceptionTest() throws Exception {
+    void winnerNumberMatchOfBonusExceptionTest() {
         //given
         LottoNumbers winner = new LottoNumbers(createLottoNumber());
         LottoNumber bonus = LottoNumber.of(1);

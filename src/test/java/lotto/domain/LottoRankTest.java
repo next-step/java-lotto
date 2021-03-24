@@ -21,7 +21,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 꽝 생성 확인")
-    void lottoRankMissTest() throws Exception {
+    void lottoRankMissTest() {
         //given
         List<Integer> inputLottoZero = Arrays.asList(1,2,42,43,44,45);
         LottoTicket ticket = new LottoTicket(inputLottoZero);
@@ -34,7 +34,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 5등 생성 확인")
-    void lottoRankFiveTest() throws Exception {
+    void lottoRankFiveTest() {
         //given
         List<Integer> inputLottoThree = Arrays.asList(1,2,3,43,44,45);
         LottoTicket ticket = new LottoTicket(inputLottoThree);
@@ -47,7 +47,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 4등 생성 확인")
-    void lottoRankFourTest() throws Exception {
+    void lottoRankFourTest() {
         //given
         List<Integer> inputLottoFour = Arrays.asList(1,2,3,4,44,45);
         LottoTicket ticket = new LottoTicket(inputLottoFour);
@@ -61,7 +61,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 3등 생성 확인")
-    void lottoRankThirdTest() throws Exception {
+    void lottoRankThirdTest() {
         //given
         List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,44);
         LottoTicket ticket = new LottoTicket(inputLottoFive);
@@ -76,7 +76,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 2등(보너스볼) 생성 확인")
-    void lottoRankTwoTest() throws Exception {
+    void lottoRankTwoTest() {
         //given
         List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,45);
         LottoTicket ticket = new LottoTicket(inputLottoFive);
@@ -90,7 +90,7 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 1등 생성 확인")
-    void lottoRankOneTest() throws Exception {
+    void lottoRankOneTest() {
         //given
         List<Integer> inputLottoSix = Arrays.asList(1,2,3,4,5,6);
         LottoTicket ticket = new LottoTicket(inputLottoSix);

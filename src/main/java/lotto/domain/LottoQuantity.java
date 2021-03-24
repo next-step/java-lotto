@@ -4,9 +4,10 @@ public class LottoQuantity {
     private static final int LOTTO_AMOUNT = 1000;
     private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
     private static final String MANUAL_QUANTITY_AMOUNT_ERROR = "구매 금액이 부족합니다.";
+    private static final String MANUAL_MINUS_QUANTITY_ERROR = "0개 이상 입력해주세요";
 
-    private final Quantity autoQuantity;
-    private final Quantity manualQuantity;
+    private final int buyAmount;
+    private final int manualQuantity;
 
     public LottoQuantity(int buyAmount) {
         this(buyAmount, 0);
@@ -15,14 +16,18 @@ public class LottoQuantity {
     public LottoQuantity(int buyAmount, int manualQuatity) {
         isBuyAmountValid(buyAmount);
         isManualQuantityOverValid(buyAmount, manualQuatity);
-        this.manualQuantity = new Quantity(manualQuatity);
-        this.autoQuantity = new Quantity(amountToQuantity(buyAmount, manualQuatity));
+        this.manualQuantity = manualQuatity;
+        this.buyAmount = buyAmount;
     }
 
     private void isManualQuantityOverValid(int buyAmount, int manualQuatity) {
         int manualAmount = manualQuatity * LOTTO_AMOUNT;
         if (buyAmount < manualAmount) {
             throw new IllegalArgumentException(MANUAL_QUANTITY_AMOUNT_ERROR);
+        }
+
+        if (manualQuatity < 0) {
+            throw new IllegalArgumentException(MANUAL_MINUS_QUANTITY_ERROR);
         }
     }
 
@@ -32,15 +37,7 @@ public class LottoQuantity {
         }
     }
 
-    private int amountToQuantity(int buyAmount, int manualQuatity) {
-        return (buyAmount / LOTTO_AMOUNT) - manualQuatity;
-    }
-
-    public int autoQuantity() {
-        return autoQuantity.quantity();
-    }
-
-    public int manualQuantity() {
-        return manualQuantity.quantity();
+    public int amountToAutoQuantity() {
+        return (buyAmount / LOTTO_AMOUNT) - manualQuantity;
     }
 }

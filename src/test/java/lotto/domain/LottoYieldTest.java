@@ -37,7 +37,7 @@ class LottoYieldTest {
 
     @Test
     @DisplayName("수익 통계 일치 테스트")
-    void lottoYieldTrueTest() throws Exception {
+    void lottoYieldTrueTest() {
         //given
         LottoTickets tickets = createTickets();
         LottoWinners winners = createWinners(stringToIntegers("1,2,3,14,15,16"), inputBonus);
@@ -51,7 +51,7 @@ class LottoYieldTest {
 
     @Test
     @DisplayName("이익 문자열 테스트")
-    void stringProfitTest() throws Exception {
+    void stringProfitTest() {
         //given
         LottoTickets tickets = createTickets();
         LottoWinners winners = createWinners(stringToIntegers("1,2,3,4,15,16"), inputBonus);
@@ -66,7 +66,7 @@ class LottoYieldTest {
 
     @Test
     @DisplayName("손해 문자열 테스트")
-    void stringLossTest() throws Exception {
+    void stringLossTest() {
         //given
         LottoTickets tickets = createTickets();
         LottoWinners winners = createWinners(stringToIntegers("1,2,13,14,15,16"), inputBonus);

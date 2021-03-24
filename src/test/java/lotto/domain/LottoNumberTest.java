@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1,45})
     @DisplayName("번호 범위 1~45 테스트")
-    void numberRangeTest(int inputNumber) throws Exception {
+    void numberRangeTest(int inputNumber) {
         //given
         LottoNumber number = LottoNumber.of(inputNumber);
 
@@ -26,7 +26,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0,46})
     @DisplayName("잘못된 번호 예외 테스트")
-    void numberRangeExceptionTest(int inputNumber) throws Exception {
+    void numberRangeExceptionTest(int inputNumber) {
         //given
 
         //when

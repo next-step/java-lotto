@@ -12,7 +12,7 @@ class LottoTicketTest {
 
     @Test
     @DisplayName("로또 발급 확인")
-    void createTicketTest() throws Exception {
+    void createTicketTest() {
         //given
         LottoTicket ticket = new LottoTicket(Arrays.asList(1,2,3,4,5,6));
 

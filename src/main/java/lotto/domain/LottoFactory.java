@@ -12,10 +12,11 @@ public class LottoFactory {
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 46;
     private static final List<Integer> DEFAULT_NUMBER_RANGE = IntStream.range(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE)
-                                                                    .boxed()
-                                                                    .collect(Collectors.toList());
+            .boxed()
+            .collect(Collectors.toList());
 
-    private LottoFactory() { }
+    private LottoFactory() {
+    }
 
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
         List<LottoTicket> result = new ArrayList<>();
@@ -25,17 +26,17 @@ public class LottoFactory {
         return new LottoTickets(result);
     }
 
-    private static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
+    public static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
         return Stream.generate(LottoFactory::createAutoLotto)
-                                    .limit(lottoQuantity.autoQuantity())
-                                    .collect(Collectors.toList());
+                .limit(lottoQuantity.amountToAutoQuantity())
+                .collect(Collectors.toList());
     }
 
     private static LottoTicket createAutoLotto() {
         return new LottoTicket(lottoNumberRandom());
     }
 
-    private static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
+    public static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
         return inputManual.stream()
                 .map(LottoFactory::createManualLotto)
                 .collect(Collectors.toList());

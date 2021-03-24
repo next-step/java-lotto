@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
-    private static final String BUY_QUANTITY_MESSAGE = "개를 구매하셨습니다.";
     private static final String RESULT_WINNER_RANK = "당첨 통계";
     private static final String RESULT_WINNER_LINE = "----------";
     private static final String STRING_BONUS = ", 보너스 볼 일치";
@@ -18,8 +17,8 @@ public class ResultView {
         this.lottoTickets = lottoTickets;
     }
 
-    public void printLottoQuantity(LottoQuantity lottoQuantity) {
-        System.out.println("수동으로 " + lottoQuantity.manualQuantity() + "장, 자동으로 "  + lottoQuantity.autoQuantity() + "개를 구매했습니다.");
+    public void printLottoQuantity(LottoQuantity lottoQuantity, int manualQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 "  + lottoQuantity.amountToAutoQuantity() + "개를 구매했습니다.");
     }
 
     public void printLottoTicketInfos() {
@@ -38,7 +37,7 @@ public class ResultView {
                 .forEach(lottoRank -> printLottoRank(lottoRank, lottoWinners));
     }
 
-    public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {
+    public void printLottoYield(LottoWinners lottoWinners) {
         double yield = LottoYield.operationYield(lottoTickets, lottoWinners);
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.(기준이 1이기 때문에 결과적으로 " + LottoYield.stringYield(yield) + "라는 의미임)");
     }

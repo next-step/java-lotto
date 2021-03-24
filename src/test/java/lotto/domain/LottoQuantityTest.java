@@ -13,7 +13,7 @@ class LottoQuantityTest {
     @ParameterizedTest
     @CsvSource(value = {"11000,11", "1000,1"})
     @DisplayName("자동 로또 개수 확인")
-    void autoLottoSizeTest(int amount, int ticketCount) throws Exception {
+    void autoLottoSizeTest(int amount, int ticketCount) {
 
         //given
         LottoQuantity lottoQuantity = new LottoQuantity(amount);
@@ -21,12 +21,12 @@ class LottoQuantityTest {
         //when
 
         //then
-        assertThat(lottoQuantity.autoQuantity()).isEqualTo(ticketCount);
+        assertThat(lottoQuantity.amountToAutoQuantity()).isEqualTo(ticketCount);
     }
 
     @Test
     @DisplayName("로또 구매금액 천원미만 유효성 확인")
-    void zeroAmountExceptionTest() throws Exception {
+    void zeroAmountExceptionTest() {
         //given
         int amount = 0;
 
@@ -37,23 +37,22 @@ class LottoQuantityTest {
 
     @ParameterizedTest
     @CsvSource(value = {"10000,5,5,5", "10000,10,0,10"})
-    @DisplayName("오토, 수동 확인")
-    void manualQuantityTest(int buyAmount, int manualQuantity, int autoCheck, int manualCheck) throws Exception {
+    @DisplayName("수동 개수 존재 시 오토 개수 확인")
+    void manualQuantityTest(int buyAmount, int manualQuantity, int autoCheck) {
         //given
         LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, manualQuantity);
 
         //when
 
         //then
-        assertThat(lottoQuantity.manualQuantity()).isEqualTo(manualCheck);
-        assertThat(lottoQuantity.autoQuantity()).isEqualTo(autoCheck);
+        assertThat(lottoQuantity.amountToAutoQuantity()).isEqualTo(autoCheck);
     }
 
 
     @ParameterizedTest
     @CsvSource(value = {"10000,11"})
     @DisplayName("수동 개수가 금액초과 시 예외 확인")
-    void manualOverQuantityExceptionTest(int buyAmount, int manualQuantity) throws Exception {
+    void manualOverQuantityExceptionTest(int buyAmount, int manualQuantity) {
         //given
 
         //when

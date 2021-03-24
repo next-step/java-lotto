@@ -33,7 +33,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("번호 사이즈 6개 확인")
-    void numberSizeSixTest() throws Exception {
+    void numberSizeSixTest() {
         //given
         LottoNumbers numbers = new LottoNumbers(createLottoNumber());
 
@@ -45,7 +45,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("번호 일치 확인")
-    void numberTrueTest() throws Exception {
+    void numberTrueTest() {
         //given
         List<Integer> intList = createLottoNumber();
         LottoNumbers numbers = new LottoNumbers(intList);
@@ -59,7 +59,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("번호 불일치 확인")
-    void numberFalseTest() throws Exception {
+    void numberFalseTest() {
         //given
         LottoNumbers numbers = new LottoNumbers(createLottoNumber());
         LottoNumbers numbers2 = new LottoNumbers(createLottoNumber2());
@@ -73,7 +73,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "1,2,3,", "1,2,3,4,5"})
     @DisplayName("번호 6개 미만 예외 확인")
-    void numberSizeSixDownExceptionTest(String input) throws Exception {
+    void numberSizeSixDownExceptionTest(String input) {
         //given
 
         //when
@@ -87,7 +87,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,1,2,3,4,5", "1,1,1,1,1,1"})
     @DisplayName("로또 번호 중복 예외 확인")
-    void numberDuplicateExceptionTest(String input) throws Exception {
+    void numberDuplicateExceptionTest(String input) {
         //given
 
         //when, then
