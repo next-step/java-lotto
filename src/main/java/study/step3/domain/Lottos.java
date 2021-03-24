@@ -1,6 +1,7 @@
 package study.step3.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -8,10 +9,6 @@ public class Lottos {
 
     public Lottos() {
         lottos = new ArrayList<>();
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 
     public LottoWin result(Lotto winLotto) {
@@ -24,4 +21,7 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
+    }
 }

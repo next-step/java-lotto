@@ -1,5 +1,6 @@
 package study.step3.view;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import study.step3.domain.Lotto;
@@ -28,7 +29,7 @@ public class ResultView {
         }
     }
 
-    public static void printProfit(int payment, LottoWin lottoWin) {
-        System.out.println("총 수익률은 " +  String.format("%.2f", ((double) lottoWin.sum() / payment)) + "입니다.");
+    public static void printProfit(BigDecimal profit) {
+        System.out.println("총 수익률은 " +  String.format("%.2f", profit) + "입니다.");
     }
 }

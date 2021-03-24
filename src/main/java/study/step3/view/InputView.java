@@ -7,6 +7,9 @@ public class InputView {
     private final static String MESSAGE_WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private final static Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static int inputPurchaseAmount() {
         System.out.println(MESSAGE_PURCHASE_AMOUNT);
         return scanner.nextInt();

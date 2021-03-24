@@ -26,9 +26,9 @@ public class LottoFactory {
             .collect(Collectors.toList()));
     }
 
-    public static Lottos purchase(int amount) {
+    public static Lottos purchase(Amount amount) {
         Lottos lottoList = new Lottos();
-        int count = amount / LOTTO_PRICE;
+        int count = amount.divide(LOTTO_PRICE);
         for(int i=0; i<count; i++) {
             lottoList.add(createLotto());
         }
