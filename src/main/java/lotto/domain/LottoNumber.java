@@ -15,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(final int number) {
-        return null;
+        return new LottoNumber(number);
     }
 
     private void validate(final int number) {
