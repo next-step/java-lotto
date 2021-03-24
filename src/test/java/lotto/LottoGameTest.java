@@ -15,7 +15,7 @@ import lotto.domain.ShuffleMakeStrategy;
 public class LottoGameTest {
 
 	@Test
-	@DisplayName("로또 게임 생성 테스트 : 1~45 중 6개 자동 생성")
+	@DisplayName("로또 게임 생성 테스트 : 1~45 중 6개 생성")
 	void gameMakeTest() {
 		LottoGame lottoGame = new LottoGame(() -> {
 			List<LottoNumber> gameNumberList = new ArrayList<>();
@@ -41,5 +41,31 @@ public class LottoGameTest {
 	void gameMakeShuffleTest() {
 		LottoGame lottoGame = new LottoGame(new ShuffleMakeStrategy());
 		assertThat(lottoGame.getGameNumberList().size()).isEqualTo(6);
+	}
+
+	@Test
+	@DisplayName("로또 게임 생성 테스트 : 6개가 아닌 숫자로 게임 생성")
+	void gameMakeInvalidTest() {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			new LottoGame(() -> {
+				List<LottoNumber> gameNumberList = new ArrayList<>();
+				gameNumberList.add(new LottoNumber(45));
+				gameNumberList.add(new LottoNumber(5));
+				gameNumberList.add(new LottoNumber(15));
+				return gameNumberList;
+			});
+
+			new LottoGame(() -> {
+				List<LottoNumber> gameNumberList = new ArrayList<>();
+				gameNumberList.add(new LottoNumber(45));
+				gameNumberList.add(new LottoNumber(5));
+				gameNumberList.add(new LottoNumber(15));
+				gameNumberList.add(new LottoNumber(1));
+				gameNumberList.add(new LottoNumber(2));
+				gameNumberList.add(new LottoNumber(3));
+				gameNumberList.add(new LottoNumber(4));
+				return gameNumberList;
+			});
+		});
 	}
 }
