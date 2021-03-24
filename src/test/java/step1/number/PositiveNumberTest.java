@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class PositiveNumberTest {
 
-    @DisplayName("Number 인스턴스 생성 여부 테스트")
+    @DisplayName("PositiveNumber 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
         // given
@@ -24,7 +24,7 @@ class PositiveNumberTest {
         assertThat(positiveNumber).isNotNull();
     }
 
-    @DisplayName("Number 인스턴스 음수 입력시 예외처리 여부 테스트")
+    @DisplayName("PositiveNumber 인스턴스 음수 입력시 예외처리 여부 테스트")
     @Test
     void 검증_음수() {
         // given
@@ -38,7 +38,7 @@ class PositiveNumberTest {
 
     }
 
-    @DisplayName("Number 인스턴스 숫자가 아닌 문자열 입력시 예외처리 여부 테스트")
+    @DisplayName("PositiveNumber 인스턴스 숫자가 아닌 문자열 입력시 예외처리 여부 테스트")
     @Test
     void 검증_숫자아닌문자열() {
         // given
@@ -52,7 +52,7 @@ class PositiveNumberTest {
 
     }
 
-    @DisplayName("Number 인스턴스가 소유한 값 반환 여부 테스트")
+    @DisplayName("PositiveNumber 인스턴스가 소유한 값 반환 여부 테스트")
     @Test
     void 반환() {
         // given
@@ -68,7 +68,7 @@ class PositiveNumberTest {
 
     }
 
-    @DisplayName("Number 인스턴스가 소유한 값을 기준으로 객체 비교하는지 여부 테스트")
+    @DisplayName("PositiveNumber 인스턴스가 소유한 값을 기준으로 객체 비교하는지 여부 테스트")
     @Test
     void 비교() {
         // given
@@ -84,4 +84,21 @@ class PositiveNumberTest {
         assertThat(positiveNumberByString).isEqualTo(positiveNumberByInteger);
 
     }
+
+    @DisplayName("PositiveNumber 인스턴스가 소유한 값이 같으면 주소도 같은지 여부 테스트")
+    @Test
+    void 비교_주소값() {
+        // given
+        String stringValue = "1";
+        int integerValue = 1;
+
+        // when
+        PositiveNumber positiveNumberByString = new PositiveNumber(stringValue);
+        PositiveNumber positiveNumberByInteger = new PositiveNumber(integerValue);
+        boolean actual = positiveNumberByString == positiveNumberByInteger;
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
 }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PositiveNumbersTest {
 
-    @DisplayName("Numbers 인스턴스 생성 여부 테스트")
+    @DisplayName("PositiveNumbers 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
         // given
@@ -26,7 +26,7 @@ class PositiveNumbersTest {
 
     }
 
-    @DisplayName("Numbers 인스턴스 생성시 Null 값 입력시 예외처리 발생 여부 테스트")
+    @DisplayName("PositiveNumbers 인스턴스 생성시 Null 값 입력시 예외처리 발생 여부 테스트")
     @Test
     void 검증() {
         // given
@@ -40,7 +40,7 @@ class PositiveNumbersTest {
 
     }
 
-    @DisplayName("Numbers 인스턴스가 소유한 값을 기준으로 비교 가능한지 테스트")
+    @DisplayName("PositiveNumbers 인스턴스가 소유한 값을 기준으로 비교 가능한지 테스트")
     @Test
     void 비교() {
         // given
@@ -54,7 +54,7 @@ class PositiveNumbersTest {
         assertThat(firstPositiveNumbers).isEqualTo(secondPositiveNumbers);
     }
 
-    @DisplayName("Numbers 인스턴스가 소유한 값들을 합해서 반환 여부 테스트")
+    @DisplayName("PositiveNumbers 인스턴스가 소유한 값들을 합해서 반환 여부 테스트")
     @Test
     void 총합() {
         // given
