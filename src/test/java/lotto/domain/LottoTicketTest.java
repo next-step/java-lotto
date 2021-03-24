@@ -56,24 +56,6 @@ public class LottoTicketTest {
     }
 
     @Test
-    public void ascendingLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        final List<LottoNumber> ascendingLottoNumbers = ascendingLottoNumbers(lottoNumbers);
-
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        assertThat(lottoTicket.ascendingLottoNumbers()).isEqualTo(ascendingLottoNumbers);
-    }
-
-    private List<LottoNumber> ascendingLottoNumbers(List<LottoNumber> lottoNumbers) {
-        final List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
-
-        Collections.sort(newLottoNumbers);
-
-        return newLottoNumbers;
-    }
-
-    @Test
     public void matchingCount() {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 

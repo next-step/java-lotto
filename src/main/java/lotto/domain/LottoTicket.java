@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,12 +28,8 @@ public class LottoTicket {
         }
     }
 
-    public List<LottoNumber> ascendingLottoNumbers() {
-        final List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
-
-        Collections.sort(newLottoNumbers);
-
-        return newLottoNumbers;
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
     }
 
     public int matchingCount(List<LottoNumber> lottoNumbers) {

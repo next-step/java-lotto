@@ -19,6 +19,7 @@ public class LottoTicketFactory {
         return new LottoTicket(
                 allLottoNumbers.stream()
                         .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
+                        .sorted()
                         .collect(Collectors.toList())
         );
     }
