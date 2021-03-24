@@ -16,14 +16,6 @@ public class LottoFactory {
 
     private LottoFactory() { }
 
-    public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity) {
-        List<LottoTicket> tickets = Stream.generate(LottoFactory::createLottoTicket)
-                .limit(lottoQuantity.autoQuantity())
-                .collect(Collectors.toList());
-
-        return new LottoTickets(tickets);
-    }
-
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
         List<LottoTicket> tickets = inputManual.stream()
                 .map(LottoFactory::createLottoTicket)

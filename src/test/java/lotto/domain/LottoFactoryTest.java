@@ -34,7 +34,7 @@ class LottoFactoryTest {
     void createAutoLottoSizeTest(int amount, int quantity) {
         //given
         LottoQuantity lottoQuantity = createQuantity(amount, quantity);
-        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity);
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
         int result = lottoTickets.readOnlyLottoTicket().size();
