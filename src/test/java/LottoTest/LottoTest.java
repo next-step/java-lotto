@@ -36,8 +36,8 @@ public class LottoTest {
     @Test
     @DisplayName("구매금액이 1장 가격보다 작을 때 Exception 발생 테스트")
     void Given_LowPrice_When_New_Then_Exception() {
-        assertThatExceptionOfType(IllegalArgumentException.class).
-                isThrownBy(() -> new Lotto(LottoRule.price() - 1, lottoNumberGenerator));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(LottoRule.price() - 1, lottoNumberGenerator));
     }
 
     @ParameterizedTest
