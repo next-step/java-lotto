@@ -1,38 +1,29 @@
 package step2.service;
 
 import step2.domain.Judge;
-import step2.domain.LottoGenerator;
-import step2.domain.MoneyGenerator;
-import step2.domain.Shop;
+import step2.domain.Money;
+import step2.domain.lotto.LottoList;
+import step2.domain.lotto.LottoMachine;
+import step2.domain.lotto.WinningLotto;
 import step2.dto.JudgeResponseDTO;
-import step2.dto.LottoDTO;
-import step2.dto.MoneyDTO;
-import step2.dto.ShopResponseDTO;
+import step2.dto.LottoListDTO;
 
 public class LottoService {
 
-    private final Shop shop = new Shop();
+    private final LottoMachine lottoMachine = new LottoMachine();
     private final Judge judge = new Judge();
 
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
-    private final MoneyGenerator moneyGenerator = new MoneyGenerator();
+    private LottoList lottoList;
 
-    public ShopResponseDTO buyManualLotto(int rawAmount) {
-        MoneyDTO money = convertRawAmountToMoney(rawAmount);
-        int capacity = shop.calculateLottoCapacity(money);
-        return shop.buyLotto(money, capacity);
+    public LottoListDTO buyLotto(int rawAmount) {
+        Money money = new Money(rawAmount);
+        lottoList = lottoMachine.buyAutoLotto(money);
+        return lottoList.dto();
     }
 
-    public JudgeResponseDTO getLottoResult(ShopResponseDTO shopResponse, String rawNumberString) {
-        LottoDTO winningLotto = convertRawNumberStringToLotto(rawNumberString);
-        return judge.calculateResult(shopResponse, winningLotto);
+    public JudgeResponseDTO getLottoResult(String rawNumberString, int rawBonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(rawNumberString, rawBonusNumber);
+        return judge.calculateResult(lottoList, winningLotto);
     }
 
-    private MoneyDTO convertRawAmountToMoney(int rawAmount) {
-        return moneyGenerator.generateMoney(rawAmount);
-    }
-
-    private LottoDTO convertRawNumberStringToLotto(String rawNumberString) {
-        return lottoGenerator.generateLotto(rawNumberString);
-    }
 }
