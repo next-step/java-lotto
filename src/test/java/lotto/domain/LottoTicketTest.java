@@ -18,12 +18,12 @@ public class LottoTicketTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
         );
     }
 
@@ -42,7 +42,7 @@ public class LottoTicketTest {
     @Test
     public void createMoreThan6LottoNumbers() {
         lottoNumbers = new ArrayList<>(lottoNumbers);
-        lottoNumbers.add(new LottoNumber(7));
+        lottoNumbers.add(LottoNumber.of(7));
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
@@ -50,7 +50,7 @@ public class LottoTicketTest {
     @Test
     public void createDuplicateLottoNumbers() {
         lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
-        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(LottoNumber.of(5));
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
@@ -60,12 +60,12 @@ public class LottoTicketTest {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(23),
-                new LottoNumber(3),
-                new LottoNumber(42),
-                new LottoNumber(5),
-                new LottoNumber(19)
+                LottoNumber.of(1),
+                LottoNumber.of(23),
+                LottoNumber.of(3),
+                LottoNumber.of(42),
+                LottoNumber.of(5),
+                LottoNumber.of(19)
         ));
 
         assertThat(lottoTicket.matchingLottoNumbersCount(winningTicket)).isEqualTo(3);

@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class LottoTicketFactory {
     private static final List<LottoNumber> allLottoNumbers =
             IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-                    .mapToObj(LottoNumber::new).collect(Collectors.toList());
+                    .mapToObj(LottoNumber::of).collect(Collectors.toList());
 
     public static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(allLottoNumbers);

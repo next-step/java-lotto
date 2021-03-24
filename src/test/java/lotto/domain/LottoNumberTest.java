@@ -25,7 +25,7 @@ public class LottoNumberTest {
         final int b = 5;
         final int expected = Integer.compare(a, 5);
 
-        final int result = new LottoNumber(a).compareTo(new LottoNumber(b));
+        final int result = LottoNumber.of(a).compareTo(LottoNumber.of(b));
 
         assertThat(result).isEqualTo(expected);
     }

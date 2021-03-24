@@ -14,7 +14,7 @@ public class LottoDiscriminatorFactory {
                         Arrays.stream(winningNumbers)
                                 .map(String::trim)
                                 .mapToInt(Integer::parseInt)
-                                .mapToObj(LottoNumber::new)
+                                .mapToObj(LottoNumber::of)
                                 .collect(Collectors.toList())
                 )
         );

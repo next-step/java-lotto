@@ -13,12 +13,12 @@ public class LottoDiscriminatorTest {
     @BeforeEach
     void setUp() {
         lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
         ));
     }
 
@@ -30,12 +30,12 @@ public class LottoDiscriminatorTest {
     @Test
     public void matchingCount() {
         final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(23),
-                new LottoNumber(3),
-                new LottoNumber(42),
-                new LottoNumber(5),
-                new LottoNumber(19)
+                LottoNumber.of(1),
+                LottoNumber.of(23),
+                LottoNumber.of(3),
+                LottoNumber.of(42),
+                LottoNumber.of(5),
+                LottoNumber.of(19)
         ));
         final LottoDiscriminator lottoDiscriminator = new LottoDiscriminator(winningTicket);
 
