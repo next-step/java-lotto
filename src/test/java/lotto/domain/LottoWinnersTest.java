@@ -23,7 +23,7 @@ class LottoWinnersTest {
     void winnerNumberMatchOfBonusExceptionTest() throws Exception {
         //given
         LottoNumbers winner = new LottoNumbers(createLottoNumber());
-        LottoNumber bonus = new LottoNumber(1);
+        LottoNumber bonus = LottoNumber.of(1);
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {

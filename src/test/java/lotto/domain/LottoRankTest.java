@@ -16,7 +16,7 @@ class LottoRankTest {
 
     @BeforeEach
     void setUp() {
-        winners = new LottoWinners(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
+        winners = new LottoWinners(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(45));
     }
 
     @Test

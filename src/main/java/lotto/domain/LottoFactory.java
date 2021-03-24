@@ -47,7 +47,7 @@ public class LottoFactory {
 
     public static LottoWinners createWinners(List<Integer> numbers, int inputBonusNumber) {
         LottoNumbers winners = new LottoNumbers(numbers);
-        LottoNumber bonus = new LottoNumber(inputBonusNumber);
+        LottoNumber bonus = LottoNumber.of(inputBonusNumber);
         return new LottoWinners(winners, bonus);
     }
 

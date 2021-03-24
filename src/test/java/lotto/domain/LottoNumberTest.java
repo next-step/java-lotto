@@ -15,7 +15,7 @@ class LottoNumberTest {
     @DisplayName("번호 범위 1~45 테스트")
     void numberRangeTest(int inputNumber) throws Exception {
         //given
-        LottoNumber number = new LottoNumber(inputNumber);
+        LottoNumber number = LottoNumber.of(inputNumber);
 
         //when
 
@@ -31,7 +31,7 @@ class LottoNumberTest {
 
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumber(inputNumber);
+            LottoNumber.of(inputNumber);
         });
         //then
     }

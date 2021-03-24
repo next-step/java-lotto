@@ -22,12 +22,12 @@ public class LottoNumbers {
 
     private List<LottoNumber> createLottoNumbers(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
     private List<LottoNumber> createBonusNumber(int inputBonusNumber) {
-        return Arrays.asList(new LottoNumber(inputBonusNumber));
+        return Arrays.asList(LottoNumber.of(inputBonusNumber));
     }
 
     // 유효성 start.
