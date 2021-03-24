@@ -3,8 +3,6 @@ package calculator;
 import java.util.Arrays;
 
 public class Calculator {
-    private static final String EMPTY = "";
-    private static final int ZERO = 0;
     private static Calculator calculator;
 
     private Calculator() {
@@ -19,10 +17,7 @@ public class Calculator {
     }
 
     public int calculate(String input) {
-        if (EMPTY.equals(input) || input == null) {
-            return ZERO;
-        }
-        return Arrays.stream(new StringAdditionExpression(input)
+        return Arrays.stream(StringAdditionExpression.getExpression(input)
                 .array())
                 .mapToInt(this::toNumber)
                 .peek(this::assurePositive)
