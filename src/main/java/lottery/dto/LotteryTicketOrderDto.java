@@ -5,18 +5,19 @@ import java.util.List;
 public class LotteryTicketOrderDto {
 
     private final int money;
-    private final List<LotteryNumbersDto> rawManualLotteries;
+    private final List<LotteryNumbersDto> lotteryNumbersDtoList;
 
-    public LotteryTicketOrderDto(int money, List<LotteryNumbersDto> rawManualLotteries) {
+    public LotteryTicketOrderDto(int money,
+        List<LotteryNumbersDto> lotteryNumbersDtoList) {
         this.money = money;
-        this.rawManualLotteries = rawManualLotteries;
+        this.lotteryNumbersDtoList = lotteryNumbersDtoList;
     }
 
     public int getMoney() {
         return money;
     }
 
-    public List<LotteryNumbersDto> getmanualLotteryNumbers() {
-        return rawManualLotteries;
+    public List<LotteryNumbersDto> getLotteryNumbersDtoList() {
+        return lotteryNumbersDtoList;
     }
 }

@@ -21,16 +21,17 @@ class LotteryTicketIssuerTest {
             new LotteryNumbersDto(Arrays.asList(7, 8 ,9, 10, 11, 12))
         );
 
+
         return Stream.of(
-            Arguments.of(new LotteryTicketOrderDto(14000, lotteryNumbersDtoList), 14),
-            Arguments.of(new LotteryTicketOrderDto(2000, lotteryNumbersDtoList), 2)
+            Arguments.of(new LotteryTicketOrder(14000, lotteryNumbersDtoList), 14),
+            Arguments.of(new LotteryTicketOrder(2000, lotteryNumbersDtoList), 2)
         );
     }
 
     @ParameterizedTest
     @DisplayName("지불한 금액에 맞게 로또를 발급한다.")
     @MethodSource("generateTestData")
-    void sellLottery(LotteryTicketOrderDto order, int expected) {
+    void sellLottery(LotteryTicketOrder order, int expected) {
         LotteryTicket lotteryTicket = LotteryTicketIssuer.issue(order);
 
         assertThat(lotteryTicket.exportLotteryNumbers()).hasSize(expected);
