@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.generator.DefaultGenerator;
+import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.Generator;
+import lotto.domain.generator.ManualLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +20,11 @@ public class LottoMachineTest {
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-    LottoMachine lottoMachine = new LottoMachine(new Money(14000),
-        new DefaultGenerator(manualLottos));
+    Generator generator = new Generator(new ManualLottoGenerator(manualLottos));
+    LottoMachine lottoMachine = new LottoMachine(new Money(14000),generator);
 
     assertThat(lottoMachine.getLottoCount()).isEqualTo(14);
+
   }
 
 

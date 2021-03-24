@@ -6,24 +6,22 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 
-public class DefaultGenerator implements LottoGenerator {
+public class ManualGenerator implements LottoGenerator {
 
-  private final AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
   private final List<List<Integer>> input;
 
-
-  public DefaultGenerator(List<List<Integer>> input) {
+  public ManualGenerator(List<List<Integer>> input) {
     this.input = input;
   }
 
   @Override
-  public List<Lotto> generatedLottoList(Money money) {
+  public List<Lotto> generatedLottoList() {
     List<Lotto> lottos = new ArrayList<>();
     for (List<Integer> lottoNumbers : input) {
       lottos.add(Lotto.of(lottoNumbers));
-      money.decrease();
     }
-    lottos.addAll(autoLottoGenerator.generatedLottoList(money));
+
     return lottos;
   }
+
 }
