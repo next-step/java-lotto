@@ -1,7 +1,6 @@
 package lottery.domain;
 
 import lottery.dto.LotteryNumbersDto;
-import lottery.dto.LotteryTicketOrderDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,9 +22,9 @@ public class LotteryTicketIssuer {
 
     private LotteryTicketIssuer() {}
 
-    public static LotteryTicket issue(LotteryTicketOrderDto lotteryTicketOrderDto) {
-        int money = lotteryTicketOrderDto.getMoney();
-        List<LotteryNumbersDto> lotteryNumbers = lotteryTicketOrderDto.getmanualLotteryNumbers();
+    public static LotteryTicket issue(LotteryTicketOrder order) {
+        int money = order.getMoney();
+        List<LotteryNumbersDto> lotteryNumbers = order.getLotteryNumbersDtoList();
         int manualAmount = lotteryNumbers.size();
 
         int automaticAmount = (money / LOTTERY_PRICE) - manualAmount;
@@ -48,12 +47,6 @@ public class LotteryTicketIssuer {
         return Stream.generate(LotteryTicketIssuer::generateLotteryNumbers)
                      .limit(amount)
                      .collect(Collectors.toList());
-    }
-
-    public static LotteryTicket issue(int money) {
-        return Stream.generate(LotteryTicketIssuer::generateLotteryNumbers)
-                     .limit(money / LOTTERY_PRICE)
-                     .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
     }
 
     private static LotteryNumbers generateLotteryNumbers() {
