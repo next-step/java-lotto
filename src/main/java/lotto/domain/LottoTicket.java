@@ -32,9 +32,9 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public int matchingCount(List<LottoNumber> lottoNumbers) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumbers::contains)
+    public int matchingLottoNumbersCount(LottoTicket that) {
+        return (int) lottoNumbers.stream()
+                .filter(that.lottoNumbers::contains)
                 .count();
     }
 

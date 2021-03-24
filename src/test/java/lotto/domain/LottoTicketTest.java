@@ -56,18 +56,18 @@ public class LottoTicketTest {
     }
 
     @Test
-    public void matchingCount() {
+    public void matchingLottoNumbersCount() {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        final List<LottoNumber> winningNumbers = Arrays.asList(
+        final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(23),
                 new LottoNumber(3),
                 new LottoNumber(42),
                 new LottoNumber(5),
                 new LottoNumber(19)
-        );
+        ));
 
-        assertThat(lottoTicket.matchingCount(winningNumbers)).isEqualTo(3);
+        assertThat(lottoTicket.matchingLottoNumbersCount(winningTicket)).isEqualTo(3);
     }
 }

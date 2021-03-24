@@ -17,15 +17,15 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        final List<LottoNumber> winningNumbers = Arrays.asList(
+        final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
                 new LottoNumber(4),
                 new LottoNumber(5),
                 new LottoNumber(6)
-        );
-        lottoDiscriminator = new LottoDiscriminator(winningNumbers);
+        ));
+        lottoDiscriminator = new LottoDiscriminator(winningTicket);
         lottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
                 .limit(20)
                 .collect(Collectors.toList());
