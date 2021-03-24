@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.round;
 import static lotto.domain.Price.*;
 import static lotto.domain.Winning.MAX_MATCH_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,14 +53,15 @@ public class WinningTest {
     @Test
     void yieldTest() {
         //given
-        Long buyMoney = 14000L;
+        int buyNum = 14;
+        Long buyMoney = buyNum * 1000L;
         int[] match = new int[]{0, 1, 2, 3, 4, 5, 6};
         Long expectMatch = 0 * 0 + 1 * 0 + 2 * 0 + 3 * THREE_MATCH_PRICE + 4 * FOUR_MATCH_PRICE + 5 * FIVE_MATCH_PRICE + 6 * SIX_MATCH_PRICE;
-        double expect =  round(expectMatch / buyMoney * 100) / 100.0;
+        double expect =  expectMatch / buyMoney;
         Winning winning = new Winning(winningNumbers, match);
 
         //when
-        double result = winning.yield(buyMoney);
+        double result = winning.yield(buyNum);
 
         //then
         assertThat(result).isEqualTo(expect);

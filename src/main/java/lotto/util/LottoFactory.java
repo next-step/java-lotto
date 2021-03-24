@@ -22,7 +22,9 @@ public class LottoFactory {
         for (int i = 0; i < lottoCount; i++) {
             lottoList.add(lotto(lottoStrategy));
         }
-        return new Lottos(lottoList);
+        Lottos lottos = new Lottos(lottoList);
+        ResultView.printLottos(lottos);
+        return lottos;
     }
 
     public static Winning winning(List<Integer> winningNumber) {

@@ -3,35 +3,44 @@
  * */
 package lotto.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static lotto.domain.Price.LOTTO_PRICE;
 
 public class InputView {
 
-    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static final String BUYING_MESSAGE_BEFORE = "구입금액을 입력해 주세요.";
+    public static final String BUYING_MESSAGE_AFTER = "개를 구매했습니다.";
+    public static final String WINNING_MESSAGE_BEFORE = "지난주 당첨 번호를 입력해 주세요. (구분자는 ', ')";
+    public static final String DELIMITER = ", ";
 
-    public static int inputBuy() throws IOException {
-        System.out.println("구입금액을 입력해 주세요.");
-        int result = Integer.parseInt(br.readLine()) % 1000;
-        System.out.println(result + "개를 구매했습니다.");
+    private static Scanner sc;
 
+    public static int inputBuy() {
+        openScanner();
+        System.out.println(BUYING_MESSAGE_BEFORE);
+        int result = sc.nextInt() / LOTTO_PRICE;
+        System.out.println(result + BUYING_MESSAGE_AFTER);
+        sc.nextLine();
         return result;
     }
 
-    public static List<Integer> inputWinning() throws IOException {
-        System.out.println("지난주 당첨 번호를 입력해 주세요. (구분자는 ', ')");
-        String[] result = br.readLine().split(", ");
+    public static List<Integer> inputWinning() {
+        System.out.println(WINNING_MESSAGE_BEFORE);
+        String[] result = sc.nextLine().split(DELIMITER);
 
         return Arrays.stream(result)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static void closeReader() throws IOException {
-        br.close();
+    public static void openScanner() {
+        if (sc == null) {
+            sc = new Scanner(System.in);
+        }
     }
+
 }

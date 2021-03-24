@@ -24,6 +24,9 @@ public class Lottos {
         });
     }
 
+    public int getBuyNum() {
+        return lottoList.size();
+    }
 
 
     @Override

@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-import static java.lang.Math.round;
-
 public class Winning {
 
     public static final int MAX_MATCH_NUM = 6;
@@ -41,9 +39,10 @@ public class Winning {
     /*
     * 구매한 금액을 인자로 받아 당첨금액/구매금액 수익률을 계산한다.
     * */
-    public double yield(Long buyMoney) {
+    public double yield(int buyNum) {
         Long winningMoney = Price.calculate(match);
-        return round(winningMoney / buyMoney * 100) / 100.0;
+        Long buyMoney = buyNum * 1000L;
+        return winningMoney / buyMoney;
     }
 
     /*
@@ -74,7 +73,7 @@ public class Winning {
         IntStream.range(0, match.length)
                 .filter(i -> i >= MINIMUM_MATCH)
                 .forEach(i -> {
-                    sb.append(i + "개 일치 (" + Price.winningPrice(match[i]) + "원) - " + match[i] + "개");
+                    sb.append(i + "개 일치 (" + Price.winningPrice(i) + "원) - " + match[i] + "개");
                     sb.append((System.getProperty("line.separator")));
                 });
         return sb.toString();

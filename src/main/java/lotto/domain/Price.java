@@ -3,9 +3,10 @@
 * */
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Price {
+    public static final int LOTTO_PRICE = 1000;
     private static Long NO_MATCH = 0L;
     public static final Long THREE_MATCH_PRICE = 5000L;
     public static final Long FOUR_MATCH_PRICE = 50000L;
@@ -15,9 +16,9 @@ public class Price {
     private static Long[] prices = {NO_MATCH, NO_MATCH, NO_MATCH, THREE_MATCH_PRICE, FOUR_MATCH_PRICE, FIVE_MATCH_PRICE, SIX_MATCH_PRICE};
 
     public static Long calculate(int[] match) {
-        return Arrays.stream(match)
-                .mapToLong(num -> {
-                    return num * prices[num];
+        return IntStream.range(0, match.length)
+                .mapToLong(i -> {
+                    return match[i] * prices[i];
                 })
                 .sum();
     }
