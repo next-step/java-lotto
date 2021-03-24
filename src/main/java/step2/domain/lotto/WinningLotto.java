@@ -1,9 +1,10 @@
 package step2.domain.lotto;
 
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class WinningLotto {
     private static final int COUNT = NormalLotto.COUNT;
@@ -14,9 +15,7 @@ public class WinningLotto {
 
     public WinningLotto(List<LottoBall> numbers, LottoBall bonusNumber) {
         if (!valid(numbers, bonusNumber)) {
-            Logger logger = Logger.getGlobal();
-            logger.log(Level.SEVERE, "winning lotto numbers are invalid");
-            throw new IllegalArgumentException("winning lotto numbers are invalid");
+            throw new CustomException(ErrorCode.INVALID_WINNING_LOTTO_NUMBERS);
         }
         this.lottoBalls = numbers;
         this.bonusBall = bonusNumber;

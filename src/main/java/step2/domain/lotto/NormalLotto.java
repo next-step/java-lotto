@@ -1,9 +1,10 @@
 package step2.domain.lotto;
 
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class NormalLotto {
 
@@ -22,9 +23,7 @@ public class NormalLotto {
 
     public NormalLotto(List<LottoBall> lottoBalls) {
         if (!valid(lottoBalls)) {
-            Logger logger = Logger.getGlobal();
-            logger.log(Level.SEVERE, "Lotto balls are not six or they are not unique");
-            throw new IllegalArgumentException("Lotto balls are not six or they are not unique");
+            throw new CustomException(ErrorCode.DUPLICATED_OR_ABNORMAL_NUMBER_OF_LOTTO_BALLS);
         }
         this.balls = lottoBalls;
     }

@@ -1,5 +1,8 @@
 package step2.domain.lotto;
 
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,14 +18,14 @@ public class LottoBall {
 
     public LottoBall(int number) {
         if (!valid(number)) {
-            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자만 허용합니다");
+            throw new CustomException(ErrorCode.INVALID_LOTTO_NUMBER);
         }
         this.number = number;
     }
 
     public static List<LottoBall> balls(int count) {
-        if(!valid(count)) {
-            throw new IllegalArgumentException("1~45개만 생성할 수 있습니다");
+        if (!valid(count)) {
+            throw new CustomException(ErrorCode.INVALID_NUMBER_OF_LOTTO_BALLS);
         }
         return IntStream.rangeClosed(1, UPPER_BOUND)
                 .boxed()

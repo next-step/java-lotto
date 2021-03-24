@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.domain.exception.CustomException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ class LottoBallTest {
     @ValueSource(ints = {46, 55, 142})
     @DisplayName("공을 로또 번호 총 개수보다 많이 만들려고 하면 에러를 던진다")
     void throwsExceptionWhenAskToGenerateInvalidAmount(int wanted) {
-        assertThrows(IllegalArgumentException.class, () -> LottoBall.balls(wanted));
+        assertThrows(CustomException.class, () -> LottoBall.balls(wanted));
     }
 
     @ParameterizedTest

@@ -1,6 +1,8 @@
 package step2.domain.lotto;
 
 import step2.domain.Money;
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class LottoMachine {
 
     public void verifyCapacity(Money amount, int rawManualLottoCount) {
         if (normalLottoCapacity(amount) < rawManualLottoCount) {
-            throw new IllegalArgumentException("돈이 부족합니다");
+            throw new CustomException(ErrorCode.NOT_ENOUGH_MONEY);
         }
     }
 
