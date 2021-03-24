@@ -2,7 +2,7 @@ package step1.number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1.exception.NegativeNumberInputException;
+import step1.exception.InvalidNumberInputException;
 import step1.exception.StringNumberFormatException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,7 +33,7 @@ class PositiveNumberTest {
         // when and then
         assertThatThrownBy(() -> {
             assertThat(PositiveNumber.valueOf(inputValue)).isNotNull();
-        }).isInstanceOf(NegativeNumberInputException.class)
+        }).isInstanceOf(InvalidNumberInputException.class)
                 .hasMessageContaining("음수가 입력되었습니다.");
 
     }

@@ -1,9 +1,8 @@
 package step1.number;
 
-import step1.exception.NegativeNumberInputException;
+import step1.exception.InvalidNumberInputException;
 import step1.exception.StringNumberFormatException;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public final class PositiveNumber {
@@ -11,12 +10,12 @@ public final class PositiveNumber {
     private final Integer positiveNumber;
 
     private static final int ZERO = 0;
-    private static final int MAX_LENGTH = 128;
+    private static final int MAXIMUM = 128;
 
     private static final PositiveNumber[] cache;
 
     static {
-        cache = new PositiveNumber[MAX_LENGTH];
+        cache = new PositiveNumber[MAXIMUM];
     }
 
     public static final PositiveNumber valueOf(String positiveNumber) {
@@ -24,8 +23,8 @@ public final class PositiveNumber {
     }
 
     public static final PositiveNumber valueOf(Integer positiveNumber) {
-        if (isNegative(positiveNumber)) {
-            throw new NegativeNumberInputException();
+        if (isNegativeOrOutOfBounds(positiveNumber)) {
+            throw new InvalidNumberInputException();
         }
         if (isCacheNull(positiveNumber)) {
             cache[positiveNumber] = new PositiveNumber(positiveNumber);
@@ -49,9 +48,18 @@ public final class PositiveNumber {
         }
     }
 
+    private static final boolean isNegativeOrOutOfBounds(Integer positiveNumber) {
+        return (isNegative(positiveNumber) || isOutOfBounds(positiveNumber));
+    }
+
     private static final boolean isNegative(Integer positiveNumber) {
         return positiveNumber < ZERO;
     }
+
+    private static final boolean isOutOfBounds(Integer positiveNumber) {
+        return positiveNumber >= MAXIMUM;
+    }
+
 
     public final Integer getPositiveNumber() {
         return positiveNumber;
