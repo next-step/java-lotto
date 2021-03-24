@@ -7,3 +7,30 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+---
+
+* 구현 할 기능 목록
+1. [test] 로또번호 생성 테스트 추가
+
+2. [feat] 로또번호 생성 기능 구현
+
+3. [test] 로또 번호 생성 exception 테스트
+
+4. [feat] 로또 번호 exception 기능 구현
+
+5. [test] 로또 일급 컬렉션 생성 테스트
+
+6. [feat] 로또 일급 컬렉션 생성 기능 구현
+
+7. [test] 일급 컬렉션 로또 번호 6개 발급 테스트
+
+8. [feat] 일급 컬렉션 로또 번호 6개 발급 기능 구현
+
+9. [test] 당첨 통계 테스트
+
+10. [feat] 당첨 통계 구현
+ 
+11. [feat] InputView, ResultView 클래스 구현
+
+12. [refactor] 전반적인 리팩토링
