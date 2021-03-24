@@ -1,7 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.generator.DefaultGenerator;
+import lotto.domain.generator.Generator;
+import lotto.domain.generator.ManualLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import java.util.List;
@@ -22,7 +23,11 @@ public class LottoGameController {
 
     int count = drawManualLottoCount();
     List<List<Integer>> manualLottos = drawManualLotto(count);
-    LottoMachine lottoMachine = new LottoMachine(money, new DefaultGenerator(manualLottos));
+
+    Generator generator = new Generator(new ManualLottoGenerator(manualLottos));
+
+    LottoMachine lottoMachine
+        = new LottoMachine(money,generator);
 
     drawLottoCount(count, money.calculateLottoCount());
     drawLottoList(lottoMachine);

@@ -21,7 +21,7 @@ public class Money {
     return (money / COST_CRETERION);
   }
 
-  public void decrease() {
-    this.money -= COST_CRETERION;
+  public void decreaseByManualLottoCount(int size) {
+    this.money -= (COST_CRETERION * size);
   }
 }
