@@ -21,6 +21,10 @@ public class LottoMachine {
                 .collect(Collectors.toList()));
     }
 
+    public LottoList buyManualLotto(List<String> rawLottoList) {
+        return new LottoList((ArrayList<String>) rawLottoList);
+    }
+
     public void verifyCapacity(Money amount, int rawManualLottoCount) {
         if (normalLottoCapacity(amount) < rawManualLottoCount) {
             throw new CustomException(ErrorCode.NOT_ENOUGH_MONEY);
@@ -31,7 +35,4 @@ public class LottoMachine {
         return amount.getAmount() - rawManualLottoCount * NormalLotto.PRICE;
     }
 
-    public LottoList buyManualLotto(List<String> rawLottoList) {
-        return new LottoList((ArrayList<String>) rawLottoList);
-    }
 }

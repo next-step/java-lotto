@@ -13,16 +13,16 @@ public class WinningLotto {
     private final List<LottoBall> lottoBalls;
     private final LottoBall bonusBall;
 
-    public WinningLotto(List<LottoBall> numbers, LottoBall bonusNumber) {
+    public WinningLotto(String rawNumbers, int bonusNumber) {
+        this(LottoBall.balls(rawNumbers), new LottoBall(bonusNumber));
+    }
+
+    private WinningLotto(List<LottoBall> numbers, LottoBall bonusNumber) {
         if (!valid(numbers, bonusNumber)) {
             throw new CustomException(ErrorCode.INVALID_WINNING_LOTTO_NUMBERS);
         }
         this.lottoBalls = numbers;
         this.bonusBall = bonusNumber;
-    }
-
-    public WinningLotto(String rawNumbers, int bonusNumber) {
-        this(LottoBall.balls(rawNumbers), new LottoBall(bonusNumber));
     }
 
     public int matchCount(NormalLotto lotto) {
@@ -42,7 +42,7 @@ public class WinningLotto {
     }
 
     private boolean bonus(LottoBall lottoBall) {
-        return this.bonusBall == lottoBall;
+        return this.bonusBall.equals(lottoBall);
     }
 
     private int oneIfNumberMatch(LottoBall lottoBall) {

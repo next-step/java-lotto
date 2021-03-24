@@ -21,7 +21,7 @@ public class NormalLotto {
         this(LottoBall.balls(rawLottoNumbers));
     }
 
-    public NormalLotto(List<LottoBall> lottoBalls) {
+    private NormalLotto(List<LottoBall> lottoBalls) {
         if (!valid(lottoBalls)) {
             throw new CustomException(ErrorCode.DUPLICATED_OR_ABNORMAL_NUMBER_OF_LOTTO_BALLS);
         }
@@ -32,7 +32,7 @@ public class NormalLotto {
         return balls;
     }
 
-    public boolean valid(List<LottoBall> lottoBalls) {
+    private boolean valid(List<LottoBall> lottoBalls) {
         return sizeSix(lottoBalls) && unique(lottoBalls);
     }
 
