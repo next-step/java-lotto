@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Buyer {
-    private final String name;
+    private final Name name;
 
-    public Buyer(String name) {
+    public Buyer(Name name) {
         this.name = name;
     }
 

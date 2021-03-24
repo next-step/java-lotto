@@ -10,7 +10,8 @@ public class BuyerTest {
     @Test
     @DisplayName("구매자 생성 테스트")
     public void create() throws Exception {
-        Buyer buyer = new Buyer("seongbeen");
-        assertThat(buyer).isEqualTo(new Buyer("seongbeen"));
+        Name name = new Name("seongbeen");
+        Buyer buyer = new Buyer(name);
+        assertThat(buyer).isEqualTo(new Buyer(name));
     }
 }
