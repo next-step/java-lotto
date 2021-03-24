@@ -9,9 +9,11 @@ import lotto.constant.Constant;
 public class HitNumbers {
 
   private LottoNumbers hitNumbers;
+  private LottoNumber bonusNumber;
 
-  public HitNumbers(String inputHit) {
+  public HitNumbers(String inputHit, int bonusNumber) {
     this.hitNumbers = generateHitNumbers(inputHit);
+    this.bonusNumber = generateBonusNumber(bonusNumber);
   }
 
   public HitNumbers() {
@@ -27,6 +29,12 @@ public class HitNumbers {
         .mapToInt(Integer::parseInt)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList()));
+  }
+
+  private LottoNumber generateBonusNumber(int bonusNumber) {
+    LottoNumber number = new LottoNumber(bonusNumber);
+    validateBonus(number);
+    return number;
   }
 
   public List<String> stringToList(String text) {
@@ -47,6 +55,12 @@ public class HitNumbers {
     HashSet<String> numbers = new HashSet<>(list);
     if (numbers.size() != Constant.LOTTO_NUMBER_SIZE) {
       throw new IllegalArgumentException("로또 번호는 중복이 불가능합니다.");
+    }
+  }
+
+  public void validateBonus(LottoNumber number) {
+    if (contains(number)) {
+      throw new IllegalArgumentException("보너스 번호와 당첨 번호가 같을 수 없습니다.");
     }
   }
 
