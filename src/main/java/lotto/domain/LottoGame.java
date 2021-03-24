@@ -4,10 +4,10 @@ import java.util.List;
 
 public class LottoGame {
 
-  private List<LottoBall> balls;
+  private final List<LottoBall> draw;
 
-  public void start(LottoBalls lottoBalls) {
-     this.balls = lottoBalls.draw();
+  public LottoGame() {
+    draw = LottoBallFactory.draw();
   }
 
 }
