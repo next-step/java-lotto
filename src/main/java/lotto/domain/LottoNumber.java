@@ -1,24 +1,36 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
+    private static final Map<Integer, LottoNumber> lottoNumbersCache = new HashMap<>();
+
     private final int number;
 
     public LottoNumber(final int number) {
-        validate(number);
-
         this.number = number;
     }
 
-    public static LottoNumber of(final int number) {
-        return new LottoNumber(number);
+    static {
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .forEach(LottoNumber::addLottoNumbersCache);
     }
 
-    private void validate(final int number) {
+    private static void addLottoNumbersCache(int number) {
+        lottoNumbersCache.put(number, new LottoNumber(number));
+    }
+
+    public static LottoNumber of(final int number) {
+        validate(number);
+        return lottoNumbersCache.get(number);
+    }
+
+    private static void validate(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException();
         }
@@ -26,19 +38,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int lottoNumber() {
         return number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 
     @Override

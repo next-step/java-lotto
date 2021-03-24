@@ -9,18 +9,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    public void create(int expected) {
-        assertThat(new LottoNumber(expected)).isEqualTo(new LottoNumber(expected));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    public void createOutOfRange(int expected) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(expected));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 45})
     public void of(int expected) {
         assertThat(LottoNumber.of(expected)).isEqualTo(LottoNumber.of(expected));
     }
