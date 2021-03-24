@@ -15,6 +15,5 @@ public class LottoApplication {
         ResultView.printLottos(lottoGame.getLottos());
 
         WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers().split(", "));
-        System.out.println("Asd");
     }
 }

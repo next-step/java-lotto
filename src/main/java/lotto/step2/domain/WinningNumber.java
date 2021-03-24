@@ -2,10 +2,7 @@ package lotto.step2.domain;
 
 import lotto.step2.utils.LottoUtils;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
@@ -25,6 +22,13 @@ public class WinningNumber {
                         .collect(Collectors.toSet())
                 )
         );
+    }
+
+    public int getLottoMatchCount(Lotto lotto) {
+        List<Integer> list = lotto.stream().collect(Collectors.toList());
+        return (int) winningNumbers.stream()
+                .filter(i -> list.contains(i))
+                .count();
     }
 
     @Override
