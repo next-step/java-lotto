@@ -13,10 +13,6 @@ class SplitUtilTest {
     public void split() throws Exception {
         String[] numbers = SplitUtil.split("1,2,3,4,5,6");
         assertThat(numbers).containsExactly("1", "2", "3", "4", "5", "6");
-
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> SplitUtil.split("1:2:3:4:5:6"))
-                .withMessageContaining("구분자가 \",\"인지 확인");
     }
 
     @Test
@@ -25,5 +21,13 @@ class SplitUtilTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> SplitUtil.split("1:2:3:4:5:6"))
                 .withMessageContaining("구분자가 \",\"인지 확인");
+    }
+
+    @Test
+    @DisplayName("\",\"가 5개가 아닐 시 예외")
+    public void checkNumberOfDelimiter() throws Exception {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> SplitUtil.split("1,2,3,4,5:6"))
+                .withMessageContaining("5개");
     }
 }
