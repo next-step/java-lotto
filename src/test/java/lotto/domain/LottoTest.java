@@ -43,7 +43,7 @@ public class LottoTest {
             lottoNumberList.add(new LottoNumber(i));
         }
         Lotto createdLotto = new Lotto(lottoNumberList);
-        Lotto prizeLotto = new Lotto(lottoNumberList);
+        WinningLotto prizeLotto = new WinningLotto(lottoNumberList);
         assertThat(createdLotto.howMatch(prizeLotto)).isEqualTo(6);
     }
 
