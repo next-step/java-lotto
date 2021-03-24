@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,10 @@ public class LottoTicket {
 
     public LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public List<Integer> lottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
