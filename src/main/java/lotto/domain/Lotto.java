@@ -4,34 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_PRICE = 1000;
-    private List<LottoGame> lottoGames;
+    private List<LottoNumber> games;
 
-    public Lotto(List<LottoGame> lottoGame) {
-        this.lottoGames = lottoGame;
-    }
-
-    public Lotto(int purchaseAmounts, LottoNumber lottoNumber) {
-        if (purchaseAmounts < LOTTO_PRICE) {
-            throw new IllegalArgumentException("Purchase Amounts must be more than " + LOTTO_PRICE);
+    public Lotto(int money, LottoNumberGenerator lottoNumberGenerator) {
+        if (money < LottoRule.price()) {
+            throw new IllegalArgumentException();
         }
-        int buyLotto = purchaseAmounts / LOTTO_PRICE;
-        lottoGames = new ArrayList<>();
-        while (buyLotto-- > 0) {
-            lottoGames.add(new LottoGame(lottoNumber));
+
+        this.games = new ArrayList<>();
+        int numberOfGames = money / LottoRule.price();
+        while (numberOfGames-- > 0) {
+            games.add(lottoNumberGenerator.numbers());
         }
     }
 
-    public List<LottoGame> lottoGames() {
-        return lottoGames;
+    public List<LottoNumber> games() {
+        return this.games;
     }
 
-    public List<LottoMatchNumbers> result(WinningNumber winningNumber) {
-        List<LottoMatchNumbers> lottoNumberMatches = new ArrayList<>();
-        for (LottoGame lottoGame : lottoGames) {
-            LottoMatchNumbers matchNumbers = lottoGame.matchNumbers(winningNumber);
-            lottoNumberMatches.add(matchNumbers);
+    public Winners winners(WinningNumber winningNumber) {
+        Winners winners = new Winners();
+
+        for (LottoNumber game : games) {
+            int countOfMatch = winningNumber.countOfMatch(game);
+            boolean matchBonus = winningNumber.matchBonus(game);
+            winners.increase(Rank.valueOf(countOfMatch, matchBonus));
         }
-        return lottoNumberMatches;
+        return winners;
     }
 }

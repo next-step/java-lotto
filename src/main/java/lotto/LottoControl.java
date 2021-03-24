@@ -3,41 +3,26 @@ package lotto;
 import lotto.domain.*;
 import lotto.view.View;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LottoControl {
-
     public void play() {
         Scanner scanner = new Scanner(System.in);
-        int purchaseAmount = View.purchaseAmount(scanner);
+        int money = View.purchaseAmount(scanner);
 
-        LottoNumber lottoNumber = new RandomLottoNumber();
-        Lotto lotto;
-        try {
-            lotto = new Lotto(purchaseAmount, lottoNumber);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-        View.printBought(lotto.lottoGames());
+        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator());
+        View.print(lotto.games());
 
-        WinningNumber winningNumber;
-        try {
-            winningNumber = new WinningNumber(View.winningNumber(scanner), lottoNumber.min(), lottoNumber.max());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner));
+        int typedBonusNumber = View.bonusNumber(scanner);
+        WinningNumber winningNumber = new WinningNumber(typedWinningNumber, typedBonusNumber);
 
-        List<LottoMatchNumbers> lottoNumberMatches = lotto.result(winningNumber);
-
+        Winners winners = lotto.winners(winningNumber);
         View.printStatsHead();
-        LottoStats lottoStats = new LottoStats(lottoNumberMatches);
-        for (Rank rank : Rank.values()) {
-            RankingRecord rankingRecord = lottoStats.record(rank);
-            View.print(rank.matchCount(), rank.reward(), rankingRecord.winners());
-        }
-        View.printYield(lottoStats.yield());
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank.countOfMatch() != 0)
+                .forEach(rank -> View.print(rank, winners.wins(rank)));
+        View.printYield(winners.yield(money));
     }
 }
