@@ -9,6 +9,10 @@ public class PrePurchaseInformation {
         this.values = values;
     }
 
+    public String value() {
+        return values;
+    }
+
     public String[] values() {
         return values.split("\n");
     }

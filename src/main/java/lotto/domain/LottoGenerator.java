@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoGenerator {
+    public final static int ZERO_SIZE = 0;
     private final static LottoNumbers LOTTO_NUMBERS = new LottoNumbers();
 
     private LottoGenerator() { }
@@ -25,7 +26,9 @@ public class LottoGenerator {
 
     public static List<Lotto> generate(PrePurchaseInformation prePurchaseInformation) {
         List<Lotto> lottos = autoGenerate(prePurchaseInformation.autoQuantity());
-        lottos.addAll(manualGenerate(prePurchaseInformation.values()));
+        if (prePurchaseInformation.manualQuantity() > ZERO_SIZE) {
+            lottos.addAll(manualGenerate(prePurchaseInformation.values()));
+        }
         return lottos;
     }
 }
