@@ -15,14 +15,14 @@ public class LottoMain {
     ResultView.printLottos(lottos);
 
     List<Integer> winnerNumber = InputView.inputWinnerNumber();
-    checkResult(lottos, winnerNumber);
+    int bonusNumber = InputView.inputBonusNumber();
+    checkResult(lottos, winnerNumber, bonusNumber);
     ResultView.printResult(lottos);
     ResultView.printIncomePercent(lottos.calculateIncomePercent());
   }
 
-  private static void checkResult(Lottos lottos, List<Integer> winnerNumber) {
-    lottos.assignWinNumber(winnerNumber);
-    lottos.checkResult();
+  private static void checkResult(Lottos lottos, List<Integer> winnerNumber, int bonusNumber) {
+    lottos.checkResult(winnerNumber, bonusNumber);
   }
 
   private static Lottos buyLottos(Money money) {

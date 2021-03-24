@@ -32,12 +32,13 @@ public class Lotto {
     return ticket;
   }
 
-  public void checkResult(Lotto winner) {
+  public void checkResult(Lotto winner, LottoNumber bonusNumber) {
     int containsCount = 0;
     for (LottoNumber lottoNumber : ticket) {
       containsCount = checkContains(winner, containsCount, lottoNumber);
     }
-    this.result = LottoResult.findResult(containsCount);
+    boolean containsBonusNumber = ticket.contains(bonusNumber);
+    this.result = LottoResult.findResult(containsCount, containsBonusNumber);
   }
 
   private int checkContains(Lotto winner, int cotainsCount, LottoNumber lottoNumber) {

@@ -46,6 +46,7 @@ public class ResultView {
     System.out.println("당첨통계");
     System.out.println("-----------");
 
+    printLottoResult(lottos, LottoResult.FIFTH);
     printLottoResult(lottos, LottoResult.FOURTH);
     printLottoResult(lottos, LottoResult.THIRD);
     printLottoResult(lottos, LottoResult.SECOND);
