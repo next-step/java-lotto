@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.view.ResultView;
 
 public class Lottos {
 
@@ -54,10 +53,7 @@ public class Lottos {
     return total / investment;
   }
 
-  public void print() {
-    for (Lotto ticket : tickets) {
-      ResultView.printLottoNumber(ticket);
-    }
+  public List<Lotto> getTickets() {
+    return tickets;
   }
-
 }

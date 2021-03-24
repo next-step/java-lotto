@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
+  private LottoMachine lottoMachine = new LottoMachine();
+
   private static Stream<Arguments> winner() {
     Lotto case1
         = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -33,7 +35,7 @@ class LottoTest {
   void checkLotto(Lotto winner, LottoResult expected) {
     //given
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-    Lotto lotto = LottoMachine.generateManual(numbers);
+    Lotto lotto = lottoMachine.generateManual(numbers);
     //when
     lotto.checkResult(winner);
     //then

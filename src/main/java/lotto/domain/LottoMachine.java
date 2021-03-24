@@ -8,20 +8,16 @@ import java.util.Set;
 
 public class LottoMachine {
 
-  public static final List<LottoNumber> lotto_numbers;
+  public List<LottoNumber> lottoNumbers;
 
-  private static final int END_NUMBER = 45;
-
-  private static final int START_NUMBER = 1;
-
-  static {
-    lotto_numbers = new ArrayList<>();
-    for (int i = START_NUMBER; i <= END_NUMBER; i++) {
-      lotto_numbers.add(new LottoNumber(i));
+  public LottoMachine() {
+    lottoNumbers = new ArrayList<>();
+    for (int i = LottoNumber.START_NUMBER; i <= LottoNumber.END_NUMBER; i++) {
+      lottoNumbers.add(new LottoNumber(i));
     }
   }
 
-  public static Lottos generateAuto(int count) {
+  public Lottos generateAuto(int count) {
     Lottos lottos = new Lottos();
     for (int i = 0; i < count; i++) {
       lottos.add(generateAuto());
@@ -29,16 +25,16 @@ public class LottoMachine {
     return lottos;
   }
 
-  public static Lotto generateAuto() {
-    Collections.shuffle(lotto_numbers);
+  public Lotto generateAuto() {
+    Collections.shuffle(lottoNumbers);
     Set<LottoNumber> numbers = new HashSet<>();
     for (int i = 0; i < 6; i++) {
-      numbers.add(lotto_numbers.get(i));
+      numbers.add(lottoNumbers.get(i));
     }
     return new Lotto(numbers);
   }
 
-  public static Lotto generateManual(List<Integer> manualNumbers) {
+  public Lotto generateManual(List<Integer> manualNumbers) {
     Set<LottoNumber> numbers = new HashSet<>();
     for (Integer number : manualNumbers) {
       numbers.add(new LottoNumber(number));

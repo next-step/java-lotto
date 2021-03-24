@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+  public static final int START_NUMBER = 1;
+  public static final int END_NUMBER = 45;
   private int number;
 
   public LottoNumber(int number) {
-    if (number < 1 || number > 45) {
+    if (number < START_NUMBER || number > END_NUMBER) {
       throw new IllegalArgumentException("out of bound.");
     }
     this.number = number;

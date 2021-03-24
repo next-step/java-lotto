@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
@@ -10,29 +9,28 @@ import lotto.view.ResultView;
 
 public class LottoMain {
 
-  public static final String DELIMITER = ", ";
-
   public static void main(String[] args) {
     Money money = new Money(InputView.inputMoney());
-    int count = money.buyLotto();
-    Lottos lottos = LottoMachine.generateAuto(count);
-    lottos.print();
-    List<Integer> winnerNumber = getWinnerNumbers();
-    lottos.assignWinNumber(winnerNumber);
-    lottos.checkResult();
+    Lottos lottos = buyLottos(money);
+    ResultView.printLottos(lottos);
+
+    List<Integer> winnerNumber = InputView.inputWinnerNumber();
+    checkResult(lottos, winnerNumber);
     ResultView.printResult(lottos);
     ResultView.printIncomePercent(lottos.calculateIncomePercent());
   }
 
-  private static List<Integer> getWinnerNumbers() {
-    String winnerNumberString = InputView.inputWinnerNumber();
-    String[] split = winnerNumberString.split(DELIMITER);
-    List<Integer> winnerNumber = new ArrayList<>();
-    for (String string : split) {
-      int number = Integer.parseInt(string);
-      winnerNumber.add(number);
-    }
-    return winnerNumber;
+  private static void checkResult(Lottos lottos, List<Integer> winnerNumber) {
+    lottos.assignWinNumber(winnerNumber);
+    lottos.checkResult();
   }
+
+  private static Lottos buyLottos(Money money) {
+    int count = money.getBuyableCount();
+    LottoMachine lottoMachine = new LottoMachine();
+    Lottos lottos = lottoMachine.generateAuto(count);
+    return lottos;
+  }
+
 
 }

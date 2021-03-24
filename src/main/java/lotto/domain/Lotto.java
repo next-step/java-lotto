@@ -6,15 +6,8 @@ import java.util.Set;
 
 public class Lotto {
 
-  private Set<LottoNumber> ticket = new HashSet<>();
+  private Set<LottoNumber> ticket;
   private LottoResult result;
-
-  public Lotto(Set<LottoNumber> ticket) {
-    this.ticket = ticket;
-    if (ticket.size() != 6) {
-      throw new IllegalArgumentException("size is not 6");
-    }
-  }
 
   public Lotto(List<Integer> numbers) {
     this(createLotto(numbers));
@@ -26,6 +19,13 @@ public class Lotto {
       ticket.add(new LottoNumber(number));
     }
     return ticket;
+  }
+
+  public Lotto(Set<LottoNumber> ticket) {
+    this.ticket = ticket;
+    if (ticket.size() != 6) {
+      throw new IllegalArgumentException("size is not 6");
+    }
   }
 
   public Set<LottoNumber> getTicket() {
