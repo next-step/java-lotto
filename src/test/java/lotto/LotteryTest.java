@@ -21,7 +21,7 @@ public class LotteryTest {
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-    HitNumbers hitNumbers = new HitNumbers("1, 2, 3, 4, 5, 7");
+    HitNumbers hitNumbers = new HitNumbers("1, 2, 3, 4, 5, 7", 10);
     Lottery lottery = new Lottery(hitNumbers);
 
     int hitCount = lottery.countHit(lottoNumbers);
