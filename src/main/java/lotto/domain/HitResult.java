@@ -18,8 +18,8 @@ public class HitResult {
         return prize == null ? new HitMoney(0) : prize.getPrizeMoney();
     }
 
-    public int isHitPrize(Prize prize) {
+    public boolean isHitPrize(Prize prize) {
         return prize.getHitCount()
-                .equals(hitCount()) ? 1 : 0;
+                .equals(hitCount());
     }
 }

@@ -9,8 +9,8 @@ public class HitMoney {
         this.hitMoney = hitMoney;
     }
 
-    public double toDouble() {
-        return (double) this.hitMoney;
+    public int getHitMoney() {
+        return hitMoney;
     }
 
     @Override

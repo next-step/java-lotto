@@ -23,7 +23,7 @@ public class Stats {
     public double sumHitMoney() {
         double sumHitMoney = 0;
         for (HitResult hitResult : hitResults.getHitResults()) {
-            sumHitMoney = sumHitMoney + hitResult.hitMoney().toDouble();
+            sumHitMoney = sumHitMoney + hitResult.hitMoney().getHitMoney();
         }
         return sumHitMoney;
     }
@@ -42,8 +42,12 @@ public class Stats {
     private int prizeCount(Prize prize) {
         int prizeCount = 0;
         for (HitResult hitResult : hitResults.getHitResults()) {
-            prizeCount = prizeCount + hitResult.isHitPrize(prize);
+            prizeCount = prizeCount + countHitPrize(hitResult, prize);
         }
         return prizeCount;
+    }
+
+    private int countHitPrize(HitResult hitResult, Prize prize) {
+        return hitResult.isHitPrize(prize) ? 1 : 0;
     }
 }
