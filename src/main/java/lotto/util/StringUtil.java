@@ -10,6 +10,6 @@ public class StringUtil {
     }
 
     private static boolean isIllegalArgument(String inputString) {
-        return inputString == null || "".equals(inputString.trim()) ? true : false;
+        return inputString == null || "".equals(inputString.trim());
     }
 }
