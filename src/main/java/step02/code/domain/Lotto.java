@@ -1,8 +1,12 @@
 package step02.code.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.assertj.core.util.Arrays;
 
 public class Lotto {
   private static final int LOTTO_SIZE = 6;
@@ -12,10 +16,11 @@ public class Lotto {
   private final List<Integer> lotto;
 
   public Lotto(List<Integer> lotto) {
+    check(lotto);
     this.lotto = lotto;
   }
 
-  public void check() {
+  public static void check(List<Integer> lotto) {
     if(lotto.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 6개의 숫자가 필요합니다");
     }
@@ -27,7 +32,17 @@ public class Lotto {
     if(overlapRemoved.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 중복된 숫자를 가질수 없습니다");
     }
-    
+  }
+
+  public void check() {
+    check(this.lotto);
+  }
+
+  public int match(List<Integer> winningNumber) {
+    List<Integer> lotto = new ArrayList<>();
+    lotto.addAll(this.lotto);
+    lotto.removeAll(winningNumber);
+    return LOTTO_SIZE - lotto.size();
   }
   
 }
