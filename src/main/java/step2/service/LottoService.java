@@ -10,14 +10,14 @@ import step2.dto.LottoListDTO;
 
 public class LottoService {
 
-    private final LottoMachine shop = new LottoMachine();
+    private final LottoMachine lottoMachine = new LottoMachine();
     private final Judge judge = new Judge();
 
     private LottoList lottoList;
 
     public LottoListDTO buyLotto(int rawAmount) {
         Money money = new Money(rawAmount);
-        lottoList = shop.buyAutoLotto(money);
+        lottoList = lottoMachine.buyAutoLotto(money);
         return lottoList.dto();
     }
 

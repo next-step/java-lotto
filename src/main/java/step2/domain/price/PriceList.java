@@ -43,7 +43,7 @@ public class PriceList {
         for (Price price : this.prices) {
             profit += price.getPrize();
         }
-        profit /= NormalLotto.PRICE*this.prices.size();
+        profit /= NormalLotto.PRICE * this.prices.size();
         return profit;
     }
 
