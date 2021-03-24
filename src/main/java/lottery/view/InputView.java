@@ -1,5 +1,6 @@
 package lottery.view;
 
+import java.util.ArrayList;
 import lottery.dto.LotteryNumbersDto;
 import lottery.dto.LotteryTicketOrderDto;
 import lottery.util.ConsoleInteractiveInputUtils;
@@ -28,6 +29,10 @@ public class InputView {
     }
 
     private List<LotteryNumbersDto> receiveManualLotteries(int amount) {
+        if (amount <= 0) {
+            return new ArrayList<>();
+        }
+
         String message = "수동으로 구매할 번호를 입력해 주세요.";
 
         return ConsoleInteractiveInputUtils.getIntegerLists(message, BASIC_DELIMITER, amount)
