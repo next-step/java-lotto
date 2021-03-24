@@ -73,7 +73,10 @@ public class Winning {
         StringBuilder sb = new StringBuilder();
         IntStream.range(0, match.length)
                 .filter(i -> i >= MINIMUM_MATCH)
-                .forEach(i -> sb.append(i + "개 일치 (" + Price.winningPrice(match[i]) + "원) - " + match[i] + "개"));
+                .forEach(i -> {
+                    sb.append(i + "개 일치 (" + Price.winningPrice(match[i]) + "원) - " + match[i] + "개");
+                    sb.append((System.getProperty("line.separator")));
+                });
         return sb.toString();
     }
 }
