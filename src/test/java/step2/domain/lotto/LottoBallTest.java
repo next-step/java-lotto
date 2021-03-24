@@ -1,6 +1,5 @@
 package step2.domain.lotto;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoBallTest {
 
@@ -45,7 +44,7 @@ class LottoBallTest {
                 .map(Integer::parseInt)
                 .map(LottoBall::new)
                 .collect(Collectors.toList());
-        for(int idx = 0;idx<lottoBalls.size();idx++){
+        for (int idx = 0; idx < lottoBalls.size(); idx++) {
             assertThat(lottoBalls.get(idx)).isEqualTo(expectedLottoBalls.get(idx));
         }
     }

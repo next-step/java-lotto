@@ -3,9 +3,6 @@ package step2.domain;
 import step2.domain.exception.CustomException;
 import step2.domain.exception.ErrorCode;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Money {
     private final int amount;
 
