@@ -14,14 +14,13 @@ public class LotteryNumbers {
     private final List<LotteryNumber> numbers;
 
     public LotteryNumbers(List<Integer> numberList) {
-        this.numbers = numberList.stream()
-                                 .map(LotteryNumber::new)
-                                 .collect(Collectors.toList());
-
-        validate(this.numbers);
+        List<LotteryNumber> lotteryNumbers =
+            numberList.stream().map(LotteryNumber::new).collect(Collectors.toList());
+        validate(lotteryNumbers);
+        this.numbers = lotteryNumbers;
     }
 
-    public boolean contains(LotteryNumber lotteryNumber) {
+    public boolean contain(LotteryNumber lotteryNumber) {
         return numbers.contains(lotteryNumber);
     }
 

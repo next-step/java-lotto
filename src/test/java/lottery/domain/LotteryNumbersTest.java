@@ -38,7 +38,7 @@ class LotteryNumbersTest {
         List<Integer> numbers = Arrays.asList(1, 7, 10, 23, 36, 42);
         LotteryNumbers lotteryNumbers = new LotteryNumbers(numbers);
 
-        assertThat(lotteryNumbers.contains(lotteryNumber)).isEqualTo(expected);
+        assertThat(lotteryNumbers.contain(lotteryNumber)).isEqualTo(expected);
     }
 
     @Test

@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lottery.domain.LotteryNumber.LOTTERY_NUMBER_MAX;
-import static lottery.domain.LotteryNumber.LOTTERY_NUMBER_MIN;
 import static lottery.domain.LotteryNumbers.LOTTERY_SIZE;
 
 public class LotteryTicketIssuer {
 
-    private static final List<Integer> NUMBER_LIST = IntStream.rangeClosed(LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX)
-                                                              .boxed()
-                                                              .collect(Collectors.toList());
+    private static final List<Integer> NUMBER_LIST
+        = IntStream.rangeClosed(LotteryNumber.MINIMUM_VALUE, LotteryNumber.MAXIMUM_VALUE)
+                   .boxed()
+                   .collect(Collectors.toList());
+    
     static final int LOTTERY_PRICE = 1000;
 
     private LotteryTicketIssuer() {}

@@ -13,13 +13,13 @@ public class WinningLottery {
 
     public Prize getPrize(LotteryNumbers lotteryNumbers) {
         long matchedNumbers = winningNumbers.countMatchedNumbers(lotteryNumbers);
-        boolean bonusNumberMatched = lotteryNumbers.contains(bonusNumber);
+        boolean bonusNumberMatched = lotteryNumbers.contain(bonusNumber);
 
         return Prize.getPrize(matchedNumbers, bonusNumberMatched);
     }
 
     private void validateDuplicates(LotteryNumbers lotteryNumbers, LotteryNumber bonusNumber) {
-        if (lotteryNumbers.contains(bonusNumber)) {
+        if (lotteryNumbers.contain(bonusNumber)) {
             throw new DuplicatedBonusNumberException();
         }
     }

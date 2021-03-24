@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LotteryNumber {
 
-    static final int LOTTERY_NUMBER_MIN = 1;
-    static final int LOTTERY_NUMBER_MAX = 45;
+    static final int MINIMUM_VALUE = 1;
+    static final int MAXIMUM_VALUE = 45;
 
     private final int number;
 
@@ -25,7 +25,7 @@ public class LotteryNumber {
     }
 
     private boolean checkRange(int number) {
-        return number >= LOTTERY_NUMBER_MIN && number <= LOTTERY_NUMBER_MAX;
+        return number >= MINIMUM_VALUE && number <= MAXIMUM_VALUE;
     }
 
     @Override
