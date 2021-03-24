@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.utils.ValidationLotto;
+import lotto.utils.ValidationUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,7 +15,7 @@ public class ValidationLottoTest {
         // GIVE
         // WHEN
         // THEN
-        assertThatThrownBy(() -> ValidationLotto.isPurchaseAmount(money))
+        assertThatThrownBy(() -> ValidationUtil.isPurchaseAmount(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -25,7 +25,7 @@ public class ValidationLottoTest {
         String money = null;
         // WHEN
         // THEN
-        assertThatThrownBy(() -> ValidationLotto.isNumber(money))
+        assertThatThrownBy(() -> ValidationUtil.isNumber(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -34,7 +34,7 @@ public class ValidationLottoTest {
         // GIVE
         // WHEN
         // THEN
-        assertThatThrownBy(() -> ValidationLotto.isNegativeNum("-1"))
+        assertThatThrownBy(() -> ValidationUtil.isNegativeNum("-1"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
