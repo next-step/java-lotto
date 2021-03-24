@@ -5,6 +5,10 @@ import java.util.Objects;
 public class Lotto {
     private LottoNumber number;
 
+    public Lotto(int number){
+        this(new LottoNumber(number));
+    }
+
     public Lotto(LottoNumber number){
         this.number = number;
     }
