@@ -18,8 +18,8 @@ public class Result {
     }
   }
 
-  public void update(int hit) {
-    resultMap.put(Hit.getHitCount(hit), resultMap.get(Hit.getHitCount(hit)) + 1);
+  public void update(Hit hit) {
+    resultMap.put(hit, resultMap.get(hit) + 1);
   }
 
   public Integer getResult(Hit hit) {

@@ -8,5 +8,4 @@ public class LottoMain {
     LottoGame game = new LottoGame();
     game.run();
   }
-
 }

@@ -67,4 +67,8 @@ public class HitNumbers {
   public boolean contains(LottoNumber number) {
     return hitNumbers.numbers().contains(number);
   }
+
+  public boolean containsBonus(LottoNumbers lottoNumbers) {
+    return lottoNumbers.numbers().contains(bonusNumber);
+  }
 }
