@@ -6,11 +6,11 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 
-public class ManualGenerator implements LottoGenerator {
+public class ManualLottoGenerator implements LottoGenerator {
 
   private final List<List<Integer>> input;
 
-  public ManualGenerator(List<List<Integer>> input) {
+  public ManualLottoGenerator(List<List<Integer>> input) {
     this.input = input;
   }
 
