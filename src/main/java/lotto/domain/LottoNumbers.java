@@ -19,14 +19,6 @@ public class LottoNumbers {
         }
     }
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-
-        if (this.lottoNumbers.size() != LOTTO_LENGTH) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }

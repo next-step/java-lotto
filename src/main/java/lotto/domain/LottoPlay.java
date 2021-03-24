@@ -4,6 +4,7 @@ import lotto.dto.IssueNumber;
 import lotto.dto.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoPlay {
 
@@ -50,11 +51,9 @@ public class LottoPlay {
     }
 
     public void createLottoByManual(List<Integer> manualLottoNumber) {
-        List<LottoNumber> lottoNumber = new ArrayList<>();
-
-        for (Integer number : manualLottoNumber) {
-            lottoNumber.add(new LottoNumber(number));
-        }
+        List<LottoNumber> lottoNumber = manualLottoNumber.stream()
+                                            .map(LottoNumber::new)
+                                            .collect(Collectors.toList());
 
         totalLottoNumbers.recordEachLottoNumbers(new IssueNumber(issueNumber++), new LottoNumbers(lottoNumber));
     }
