@@ -21,11 +21,6 @@ public class LottoTest {
     private final LottoNumberGenerator lottoNumberGenerator = new FixedLottoNumberGenerator();
     private Lotto lotto;
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
     @Test
     @DisplayName("로또 게임 구매 테스트")
     void When_Game_Then_LottoNumberList() {
@@ -42,7 +37,7 @@ public class LottoTest {
     @DisplayName("구매금액이 1장 가격보다 작을 때 Exception 발생 테스트")
     void Given_LowPrice_When_New_Then_Exception() {
         assertThatExceptionOfType(IllegalArgumentException.class).
-                isThrownBy(() -> new Lotto(900, lottoNumberGenerator));
+                isThrownBy(() -> new Lotto(LottoRule.price() - 1, lottoNumberGenerator));
     }
 
     @ParameterizedTest
