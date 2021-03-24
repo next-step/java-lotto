@@ -29,6 +29,7 @@ public class PriceList {
 
     public Map<String, Integer> initCountMap() {
         Map<String, Integer> countMap = new HashMap<>();
+        countMap.put(Price.MISS.getRank(), 0);
         countMap.put(Price.FIFTH.getRank(), 0);
         countMap.put(Price.FORTH.getRank(), 0);
         countMap.put(Price.THIRD.getRank(), 0);
@@ -42,12 +43,13 @@ public class PriceList {
         for (Price price : this.prices) {
             profit += price.getPrize();
         }
-        profit /= NormalLotto.PRICE;
+        profit /= NormalLotto.PRICE*this.prices.size();
         return profit;
     }
 
     public Map<String, Integer> priceMap() {
         Map<String, Integer> countMap = new HashMap<>();
+        countMap.put(Price.MISS.getRank(), Price.MISS.getPrize());
         countMap.put(Price.FIFTH.getRank(), Price.FIFTH.getPrize());
         countMap.put(Price.FORTH.getRank(), Price.FORTH.getPrize());
         countMap.put(Price.THIRD.getRank(), Price.THIRD.getPrize());

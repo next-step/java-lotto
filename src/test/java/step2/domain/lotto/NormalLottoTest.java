@@ -3,6 +3,7 @@ package step2.domain.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.Util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,26 +28,22 @@ class NormalLottoTest {
     @DisplayName("로또가 올바른지 판단할 수 있다")
     void determinesValidLotto(String rawLotto, boolean expected) {
         NormalLotto normalLotto = new NormalLotto();
-        boolean valid = normalLotto.valid(Arrays.stream(rawLotto.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+        boolean valid = normalLotto.valid(Util.integerList(rawLotto));
         assertThat(valid).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6,1:false",
-            "1,2,3,4,5:false",
-            "1,2,3,4:10:false",
-            "1,2,3,3,4,5:false",
-            "-1,1,2,3,4,5:false",
-            "1,2,3,4,5,46:false",
-            "1,2,3,4,5,6,7:false"}, delimiter = ':')
+            "1,2,3,4,5,6,1",
+            "1,2,3,4,5",
+            "1,2,3,4:10",
+            "1,2,3,3,4,5",
+            "-1,1,2,3,4,5",
+            "1,2,3,4,5,46",
+            "1,2,3,4,5,6,7"}, delimiter = ':')
     @DisplayName("로또가 올바르지 않으면 생성자에서 에러를 던진다")
-    void invalidLottoThrowsException(String rawLotto, boolean expected) {
-        List<Integer> numbers = Arrays.stream(rawLotto.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    void invalidLottoThrowsException(String rawLotto) {
+        List<Integer> numbers = Util.integerList(rawLotto);
         assertThrows(IllegalArgumentException.class, () -> new NormalLotto(numbers));
     }
 }

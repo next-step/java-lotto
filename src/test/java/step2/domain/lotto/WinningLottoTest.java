@@ -3,6 +3,7 @@ package step2.domain.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.Util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,11 +32,7 @@ class WinningLottoTest {
     void determinesValidLotto(String rawLotto, int bonusNumber, boolean expected) {
         String dummyString = "1,2,3,4,5,6";
         WinningLotto winningLotto = new WinningLotto(dummyString, 7);
-
-        List<Integer> numbers = Arrays.stream(rawLotto.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
+        List<Integer> numbers = Util.integerList(rawLotto);
         boolean valid = winningLotto.valid(numbers, bonusNumber);
         assertThat(valid).isEqualTo(expected);
     }
@@ -54,9 +51,7 @@ class WinningLottoTest {
             "1,2,3,4,5,6      :-1"}, delimiter = ':')
     @DisplayName("로또가 올바르지 않으면 생성자에서 에러를 던진다")
     void invalidLottoThrowsException(String rawLotto, int bonusNumber) {
-        List<Integer> numbers = Arrays.stream(rawLotto.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> numbers = Util.integerList(rawLotto);
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto(numbers, bonusNumber));
     }
 
@@ -71,9 +66,7 @@ class WinningLottoTest {
     @DisplayName("보너스 번호가 맞았는지 알 수 있다")
     void determineBonusMatch(String winningString, int rawBonusNumber, String boughtString, boolean expected) {
         WinningLotto winningLotto = new WinningLotto(winningString, rawBonusNumber);
-        List<Integer> numbers = Arrays.stream(boughtString.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> numbers = Util.integerList(boughtString);
         NormalLotto normalLotto = new NormalLotto(numbers);
         boolean bonusMatch = winningLotto.matchBonus(normalLotto);
         assertThat(bonusMatch).isEqualTo(expected);
@@ -90,9 +83,7 @@ class WinningLottoTest {
     @DisplayName("일반 번호가 몇개 맞았는지 알 수 있다")
     void determineNumberMatch(String winningString, int rawBonusNumber, String boughtString, int expected) {
         WinningLotto winningLotto = new WinningLotto(winningString, rawBonusNumber);
-        List<Integer> numbers = Arrays.stream(boughtString.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> numbers = Util.integerList(boughtString);
         NormalLotto normalLotto = new NormalLotto(numbers);
         int matchCount = winningLotto.matchCount(normalLotto);
         assertThat(matchCount).isEqualTo(expected);
