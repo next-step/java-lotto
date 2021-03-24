@@ -9,21 +9,20 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
-class NumbersTest {
+class PositiveNumbersTest {
 
     @DisplayName("Numbers 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
         // given
-        List<Number> inputData = new ArrayList<Number>();
+        List<PositiveNumber> inputData = new ArrayList<PositiveNumber>();
 
         // when
-        Numbers numbers = new Numbers(inputData);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(inputData);
 
         // then
-        assertThat(numbers).isNotNull();
+        assertThat(positiveNumbers).isNotNull();
 
     }
 
@@ -31,11 +30,11 @@ class NumbersTest {
     @Test
     void 검증() {
         // given
-        List<Number> inputData = null;
+        List<PositiveNumber> inputData = null;
 
         // when and then
         assertThatThrownBy(() -> {
-            new Numbers(inputData);
+            new PositiveNumbers(inputData);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("null 값을 입력했습니다.");
 
@@ -45,25 +44,25 @@ class NumbersTest {
     @Test
     void 비교() {
         // given
-        List<Number> inputData = Arrays.asList(new Number(1), new Number(2));
+        List<PositiveNumber> inputData = Arrays.asList(new PositiveNumber(1), new PositiveNumber(2));
 
         // when
-        Numbers firstNumbers = new Numbers(inputData);
-        Numbers secondNumbers = new Numbers(inputData);
+        PositiveNumbers firstPositiveNumbers = new PositiveNumbers(inputData);
+        PositiveNumbers secondPositiveNumbers = new PositiveNumbers(inputData);
 
         // then
-        assertThat(firstNumbers).isEqualTo(secondNumbers);
+        assertThat(firstPositiveNumbers).isEqualTo(secondPositiveNumbers);
     }
 
     @DisplayName("Numbers 인스턴스가 소유한 값들을 합해서 반환 여부 테스트")
     @Test
     void 총합() {
         // given
-        List<Number> inputData = Arrays.asList(new Number(1), new Number(2));
+        List<PositiveNumber> inputData = Arrays.asList(new PositiveNumber(1), new PositiveNumber(2));
 
         // when
-        Numbers numbers = new Numbers(inputData);
-        int actual = numbers.sum();
+        PositiveNumbers positiveNumbers = new PositiveNumbers(inputData);
+        int actual = positiveNumbers.sum();
 
         // then
         assertThat(actual).isEqualTo(3);

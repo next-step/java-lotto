@@ -26,11 +26,11 @@
    ```
 2. 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)
     ```java   
-    int number = Integer.parseInt(text);
+    int positiveNumber = Integer.parseInt(text);
     ```
 3. 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)
    ```java
-   String[] numbers = text.split(","); 
+   String[] positiveNumbers = text.split(","); 
    // 앞 단계의 구분자가 없는 경우도 split()을 활용해 구현할 수 있는지 검토해 본다.
    ```   
 

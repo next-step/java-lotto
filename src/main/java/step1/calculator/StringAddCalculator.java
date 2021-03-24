@@ -1,6 +1,6 @@
 package step1.calculator;
 
-import step1.number.Numbers;
+import step1.number.PositiveNumbers;
 import step1.separator.Separator;
 
 import static utils.StringUtils.isNullOrBlank;
@@ -13,8 +13,8 @@ public final class StringAddCalculator {
             return NO_VALUE;
         }
         Separator separator = new Separator(expression);
-        Numbers numbers = new Numbers(separator.splitByDelimiter());
-        return numbers.sum();
+        PositiveNumbers positiveNumbers = new PositiveNumbers(separator.splitByDelimiter());
+        return positiveNumbers.sum();
     }
 
 }

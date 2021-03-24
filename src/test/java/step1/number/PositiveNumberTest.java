@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class NumberTest {
+class PositiveNumberTest {
 
     @DisplayName("Number 인스턴스 생성 여부 테스트")
     @Test
@@ -18,10 +18,10 @@ class NumberTest {
         int inputValue = 1;
 
         // when
-        Number number = new Number(inputValue);
+        PositiveNumber positiveNumber = new PositiveNumber(inputValue);
 
         // then
-        assertThat(number).isNotNull();
+        assertThat(positiveNumber).isNotNull();
     }
 
     @DisplayName("Number 인스턴스 음수 입력시 예외처리 여부 테스트")
@@ -32,7 +32,7 @@ class NumberTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            assertThat(new Number(inputValue)).isNotNull();
+            assertThat(new PositiveNumber(inputValue)).isNotNull();
         }).isInstanceOf(NegativeNumberInputException.class)
                 .hasMessageContaining("음수가 입력되었습니다.");
 
@@ -46,7 +46,7 @@ class NumberTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            assertThat(new Number(inputValue)).isNotNull();
+            assertThat(new PositiveNumber(inputValue)).isNotNull();
         }).isInstanceOf(StringNumberFormatException.class)
                 .hasMessageContaining("숫자가 아닌 문자열을 입력했습니다.");
 
@@ -62,8 +62,8 @@ class NumberTest {
 
         // when an then
         assertAll(
-                () -> assertThat(new Number(stringValue).getNumber()).isEqualTo(expected),
-                () -> assertThat(new Number(integerValue).getNumber()).isEqualTo(expected)
+                () -> assertThat(new PositiveNumber(stringValue).getPositiveNumber()).isEqualTo(expected),
+                () -> assertThat(new PositiveNumber(integerValue).getPositiveNumber()).isEqualTo(expected)
         );
 
     }
@@ -77,11 +77,11 @@ class NumberTest {
         int expected = 1;
 
         // when
-        Number numberByString = new Number(stringValue);
-        Number numberByInteger = new Number(integerValue);
+        PositiveNumber positiveNumberByString = new PositiveNumber(stringValue);
+        PositiveNumber positiveNumberByInteger = new PositiveNumber(integerValue);
 
         // then
-        assertThat(numberByString).isEqualTo(numberByInteger);
+        assertThat(positiveNumberByString).isEqualTo(positiveNumberByInteger);
 
     }
 }
