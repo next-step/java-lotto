@@ -25,12 +25,7 @@ public class LotteryMachine {
     }
 
     public LottoResult result(List<Lotto> lottos) {
-        raffle(lottos)
-                .forEach(winningResult -> {
-                    if (resultMap.get(winningResult) != null) {
-                        resultMap.put(winningResult, resultMap.get(winningResult) + 1);
-                    }
-                });
+        raffle(lottos).forEach(this::plusCorrectCount);
         return new LottoResult(resultMap, purchaseAmount);
     }
 
@@ -45,6 +40,12 @@ public class LotteryMachine {
         return (int) lotto.numbers()
                 .stream()
                 .filter(winningLotto::contains).count();
+    }
+
+    public void plusCorrectCount(String winningResult) {
+        if (resultMap.get(winningResult) != null) {
+            resultMap.put(winningResult, resultMap.get(winningResult) + 1);
+        }
     }
 
     public boolean checkSecond(Lotto lotto) {

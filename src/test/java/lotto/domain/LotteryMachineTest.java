@@ -19,13 +19,13 @@ class LotteryMachineTest {
                 .collect(Collectors.toList()));
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:6", "6,7,8,9,10,11:1", "12,13,14,15,16,17:0"}, delimiter = ':')
-    void 일치하는_로또번호_개수(String input, int result) {
-        WinningLotto winningLotto = new WinningLotto(input, "45");
-
-        assertThat(new LotteryMachine(winningLotto, new Amount(5000))
-                .correctCount(lotto))
-                .isEqualTo(result);
-    }
+//    @ParameterizedTest
+//    @CsvSource(value = {"1,2,3,4,5,6:6", "6,7,8,9,10,11:1", "12,13,14,15,16,17:0"}, delimiter = ':')
+//    void 일치하는_로또번호_개수(String input, int result) {
+//        WinningLotto winningLotto = new WinningLotto(input, "45");
+//
+//        assertThat(new LotteryMachine(winningLotto, new Amount(5000))
+//                .correctCount(lotto))
+//                .isEqualTo(result);
+//    }
 }

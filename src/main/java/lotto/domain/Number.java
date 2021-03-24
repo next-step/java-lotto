@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Number implements Comparable<Number> {
     public final static int MIN_NUMBER_VALUE = 0;
     public final static int MAX_NUMBER_VALUE = 45;
+
     private final int value;
 
     public Number(final String value) {

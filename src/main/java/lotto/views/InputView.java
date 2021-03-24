@@ -25,6 +25,12 @@ public class InputView {
         return value;
     }
 
+    private static String value() {
+        String value = new Scanner(System.in).nextLine();
+        emptyValidation(value);
+        return value;
+    }
+
     public static String amount() {
         return value(AMOUNT);
     }
@@ -41,7 +47,12 @@ public class InputView {
         return value(MANUAL_BUY_QUANTITY);
     }
 
-    public static String manualBuyNumbers() {
-        return value(MANUAL_BUY_NUMBERS);
+    public static String manualBuyNumbers(int quantity) {
+        System.out.println(MANUAL_BUY_NUMBERS);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < quantity; i++) {
+            stringBuilder.append(value());
+        }
+        return stringBuilder.toString();
     }
 }

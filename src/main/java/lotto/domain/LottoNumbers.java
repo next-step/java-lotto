@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
     public final static int LOTTO_NUMBER_COUNT = 6;
+
     private final List<Number> numbers;
 
     public LottoNumbers() {
