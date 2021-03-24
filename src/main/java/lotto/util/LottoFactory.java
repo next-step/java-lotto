@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStrategy;
 import lotto.domain.Lottos;
 import lotto.domain.Winning;
+import lotto.ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;

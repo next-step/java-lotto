@@ -1,7 +1,7 @@
 /*
  * UI 출력을 담당하는 클래스
  * */
-package lotto.util;
+package lotto.ui;
 
 import lotto.domain.Lottos;
 import lotto.domain.Winning;

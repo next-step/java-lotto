@@ -3,9 +3,9 @@ package lotto;
 import lotto.domain.AutoLottoStrategy;
 import lotto.domain.Lottos;
 import lotto.domain.Winning;
-import lotto.util.InputView;
+import lotto.ui.InputView;
 import lotto.util.LottoFactory;
-import lotto.util.ResultView;
+import lotto.ui.ResultView;
 
 public class LottoGame {
 
