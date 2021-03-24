@@ -29,4 +29,12 @@ public class LottoTest {
             LottoNumber number = new LottoNumber(() -> -1);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또 번호 정상번호인지 테스트(수동) - 비정상이면 IllegalArgumentException 발생")
+    void is_normal_lotto_number_passive(){
+        assertThatThrownBy(()->{
+            LottoNumber number = new LottoNumber(-3);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
