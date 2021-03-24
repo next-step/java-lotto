@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LastWeekWinnerNumber {
-	LottoGame winnerNumber;
+	private final LottoGame winnerNumber;
 
 	public LastWeekWinnerNumber(String inputNumber) {
 		String[] splitNumbers = inputNumber.split(",");

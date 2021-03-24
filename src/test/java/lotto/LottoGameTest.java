@@ -68,4 +68,21 @@ public class LottoGameTest {
 			});
 		});
 	}
+
+	@Test
+	@DisplayName("로또 게임 생성 테스트 : 중복된 숫자로 6개 생성")
+	void gameMakeInvalid2Test() {
+		assertThatThrownBy(() -> {
+			new LottoGame(() -> {
+				List<LottoNumber> gameNumberList = new ArrayList<>();
+				gameNumberList.add(new LottoNumber(45));
+				gameNumberList.add(new LottoNumber(5));
+				gameNumberList.add(new LottoNumber(15));
+				gameNumberList.add(new LottoNumber(15));
+				gameNumberList.add(new LottoNumber(20));
+				gameNumberList.add(new LottoNumber(33));
+				return gameNumberList;
+			});
+		}).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복");
+	}
 }
