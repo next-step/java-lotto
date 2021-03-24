@@ -47,7 +47,7 @@ public class GeneratorTest {
   @Test
   @DisplayName("자동 발급")
   public void autoLotto() {
-    Generator generator = new Generator(new AutoLottoGenerator());
+    Generator generator = new Generator();
     List<Lotto> autoLottos = generator.autoLotto(5);
     assertEquals(5,autoLottos.size());
 

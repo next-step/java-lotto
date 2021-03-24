@@ -12,6 +12,9 @@ public class Generator {
     this.lottoGenerator = lottoGenerator;
   }
 
+  public Generator() {
+  }
+
   public List<Lotto> manualLotto() {
     return lottoGenerator.generatedLottoList();
   }

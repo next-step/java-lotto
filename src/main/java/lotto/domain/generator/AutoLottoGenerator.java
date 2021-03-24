@@ -20,9 +20,6 @@ public class AutoLottoGenerator implements LottoGenerator {
     this.autoLottoCount = autoLottoCount;
   }
 
-  public AutoLottoGenerator() {
-  }
-
   @Override
   public List<Lotto> generatedLottoList() {
     List<Lotto> lottoList = new ArrayList<>();
