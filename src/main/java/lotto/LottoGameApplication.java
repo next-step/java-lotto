@@ -10,7 +10,7 @@ import lotto.view.LottoStatsView;
 public class LottoGameApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        inputView.inputPayMoney("구입금액을 입력해 주세요.");
+        inputView.inputPayMoney();
 
         LottoGames lottoGames = new LottoGames(inputView.getPayMoney());
         lottoGames.makeNumbers();
@@ -18,7 +18,7 @@ public class LottoGameApplication {
         LottoGamesView lottoGamesView = new LottoGamesView(lottoGames);
         lottoGamesView.printLottoGamesNumber();
 
-        inputView.inputHitNumbers("지난 주 당첨 번호를 입력해 주세요.");
+        inputView.inputHitNumbers();
         HitResults hitResults = lottoGames.result(inputView.getWinNumbers());
         Stats stats = new Stats(hitResults);
 

@@ -8,12 +8,12 @@ public class InputView {
     private int payMoney;
     private WinNumbers winNumbers;
 
-    public void inputPayMoney(String message) {
-        this.payMoney = InputViewUtil.scannerInt(message);
+    public void inputPayMoney() {
+        this.payMoney = InputViewUtil.scannerInt("구입금액을 입력해 주세요.");
     }
 
-    public void inputHitNumbers(String message) {
-        String numbers = InputViewUtil.scannerString(message);
+    public void inputHitNumbers() {
+        String numbers = InputViewUtil.scannerString("지난 주 당첨 번호를 입력해 주세요.");
         this.winNumbers = new WinNumbers(splitNumbers(numbers));
     }
 
