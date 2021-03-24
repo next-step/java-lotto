@@ -1,9 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static lotto.Price.*;
-import static lotto.Price.SIX_MATCH_PRICE;
+import static lotto.domain.Price.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PriceTest {

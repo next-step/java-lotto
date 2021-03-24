@@ -1,5 +1,8 @@
-package lotto;
+package lotto.util;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Winning;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,7 +1,10 @@
 /*
  * UI 출력을 담당하는 클래스
  * */
-package lotto;
+package lotto.util;
+
+import lotto.domain.Lottos;
+import lotto.domain.Winning;
 
 public class ResultView {
 

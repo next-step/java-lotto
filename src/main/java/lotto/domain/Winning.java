@@ -1,7 +1,7 @@
 /*
  * 당첨 번호와 당첨수를 지니는 클래스
  * */
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;

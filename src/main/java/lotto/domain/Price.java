@@ -1,7 +1,7 @@
 /*
 * 당첨 가격과 당첨 개수에 따른 당첨금액을 계산하는 클래스
 * */
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 

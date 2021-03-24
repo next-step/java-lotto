@@ -1,7 +1,7 @@
 /*
 * n개의 로또를 지니는 로또 집합 클래스
 * */
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;

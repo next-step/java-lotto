@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static lotto.WinningTest.WINNING_SIZE;
+import static lotto.domain.WinningTest.WINNING_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -72,7 +72,7 @@ public class LottosTest {
         List<Lotto> testLottoList = new ArrayList<>();
 
         testLottoList.add(new Lotto(winningNumbers));   //6개 당첨
-        for (int i = 0; i < 2; i++) {   //5개, 4개 당첨
+        for (int i = 1; i <= 2; i++) {   //5개, 4개 당첨
             testLottoList.add(new Lotto(changeNumbers(winningNumbers, i)));
         }
 

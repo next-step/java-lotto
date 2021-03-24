@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.round;
-import static lotto.Price.*;
-import static lotto.Winning.MAX_MATCH_NUM;
+import static lotto.domain.Price.*;
+import static lotto.domain.Winning.MAX_MATCH_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTest {

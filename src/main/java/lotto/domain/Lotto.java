@@ -1,7 +1,7 @@
 /*
 * 로또번호 집합을 보유하는 하나의 로또 클래스
 * */
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
