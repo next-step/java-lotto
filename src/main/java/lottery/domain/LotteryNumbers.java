@@ -20,23 +20,6 @@ public class LotteryNumbers {
         this.numbers = lotteryNumbers;
     }
 
-    public boolean contain(LotteryNumber lotteryNumber) {
-        return numbers.contains(lotteryNumber);
-    }
-
-    public long countMatchedNumbers(LotteryNumbers lotteryNumbers) {
-        return this.numbers.stream()
-                           .filter(lotteryNumbers.numbers::contains)
-                           .count();
-    }
-
-    public LotteryNumbersDto export() {
-        List<Integer> rawNumbers = numbers.stream()
-                                          .map(LotteryNumber::export)
-                                          .collect(Collectors.toList());
-        return new LotteryNumbersDto(rawNumbers);
-    }
-
     private void validate(List<LotteryNumber> numbers) {
         validateLotteryNumberSize(numbers);
         validateDuplicates(numbers);
@@ -55,4 +38,22 @@ public class LotteryNumbers {
             throw new InvalidLotteryException();
         }
     }
+
+    public boolean contain(LotteryNumber lotteryNumber) {
+        return numbers.contains(lotteryNumber);
+    }
+
+    public long countMatchedNumbers(LotteryNumbers lotteryNumbers) {
+        return this.numbers.stream()
+                           .filter(lotteryNumbers.numbers::contains)
+                           .count();
+    }
+
+    public LotteryNumbersDto export() {
+        List<Integer> rawNumbers = numbers.stream()
+                                          .map(LotteryNumber::export)
+                                          .collect(Collectors.toList());
+        return new LotteryNumbersDto(rawNumbers);
+    }
+
 }
