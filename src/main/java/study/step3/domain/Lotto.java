@@ -24,6 +24,10 @@ public class Lotto {
         return matchCount;
     }
 
+    public boolean matchBonus(LottoNumber bonusBall) {
+        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }

@@ -1,5 +1,6 @@
 package study.step3.controller;
 
+import study.step3.domain.LottoNumber;
 import study.step3.view.InputView;
 import study.step3.view.ResultView;
 import study.step3.domain.Amount;
@@ -20,7 +21,9 @@ public class LottoController {
         ResultView.printPurchaseCount(lottos.getLottos().size());
         ResultView.printLottoNumbers(lottos.getLottos());
 
-        LottoWin lottoWin = lottos.result(new Lotto(InputView.inputWinNumber()));
+        Lotto lotto = new Lotto(InputView.inputWinNumber());
+        LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
+        LottoWin lottoWin = lottos.result(lotto, bonusBall);
         ResultView.printResult(lottoWin);
         ResultView.printProfit(lottoWin.profit(amount));
     }

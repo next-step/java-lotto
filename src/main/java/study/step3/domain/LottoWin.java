@@ -8,6 +8,7 @@ public class LottoWin {
     Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
 
     public LottoWin() {
+        lottoWin.put(LottoRank.FIFTH, 0);
         lottoWin.put(LottoRank.FOURTH, 0);
         lottoWin.put(LottoRank.THIRD, 0);
         lottoWin.put(LottoRank.SECOND, 0);
@@ -20,8 +21,17 @@ public class LottoWin {
 
     public void hit(int match) {
         LottoRank lottoWinType = LottoRank.of(match);
-        if(lottoWinType != LottoRank.MISS) {
-            lottoWin.put(lottoWinType, lottoWin.get(lottoWinType) + 1);
+        addWin(lottoWinType);
+    }
+
+    public void hit(int match, boolean matchBonus) {
+        LottoRank lottoWinType = LottoRank.of(match, matchBonus);
+        addWin(lottoWinType);
+    }
+
+    private void addWin(LottoRank lottoRank) {
+        if(lottoRank != LottoRank.MISS) {
+            lottoWin.put(lottoRank, lottoWin.get(lottoRank) + 1);
         }
     }
 

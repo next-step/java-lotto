@@ -11,9 +11,9 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
-    public LottoWin result(Lotto winLotto) {
+    public LottoWin result(Lotto winLotto, LottoNumber bonusBall) {
         LottoWin lottoWin = new LottoWin();
-        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winLotto.getLottoNumbers())));
+        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winLotto.getLottoNumbers()), lotto.matchBonus(bonusBall)));
         return lottoWin;
     }
 

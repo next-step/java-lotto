@@ -25,6 +25,15 @@ public enum LottoRank {
             .orElse(MISS);
     }
 
+    public static LottoRank of(int hit, boolean hitBonus) {
+        LottoRank lottoRank = of(hit);
+
+        if (lottoRank == LottoRank.SECOND && !hitBonus) {
+            lottoRank = LottoRank.THIRD;
+        }
+        return lottoRank;
+    }
+
     public int getAmount() {
         return this.amount;
     }
