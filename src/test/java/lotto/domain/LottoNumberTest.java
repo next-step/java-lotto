@@ -20,6 +20,18 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    public void of(int expected) {
+        assertThat(LottoNumber.of(expected)).isEqualTo(LottoNumber.of(expected));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    public void ofOutOfRange(int expected) {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(expected));
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {1, 5, 10})
     public void compareTo(int a) {
         final int b = 5;

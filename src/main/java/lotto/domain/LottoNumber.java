@@ -14,6 +14,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public static LottoNumber of(final int number) {
+        return null;
+    }
+
     private void validate(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException();
