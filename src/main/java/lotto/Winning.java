@@ -7,12 +7,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import static java.lang.Math.round;
 
 public class Winning {
 
     public static final int MAX_MATCH_NUM = 6;
+    public static final int MINIMUM_MATCH = 3;
 
     private List<Integer> winningNumbers;
     private int[] match = new int[MAX_MATCH_NUM+1];  //당첨 개수를 확인하는 array, matchArr[2]은 2개 당첨개수를 뜻한다.
@@ -39,9 +41,9 @@ public class Winning {
     /*
     * 구매한 금액을 인자로 받아 당첨금액/구매금액 수익률을 계산한다.
     * */
-    public int yield(int buyMoney) {
-        int winningMoney = Price.calculate(match);
-        return round(winningMoney / buyMoney * 100) / 100;
+    public double yield(Long buyMoney) {
+        Long winningMoney = Price.calculate(match);
+        return round(winningMoney / buyMoney * 100) / 100.0;
     }
 
     /*
@@ -64,5 +66,14 @@ public class Winning {
         int result = Objects.hash(winningNumbers);
         result = 31 * result + Arrays.hashCode(match);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        IntStream.range(0, match.length)
+                .filter(i -> i >= MINIMUM_MATCH)
+                .forEach(i -> sb.append(i + "개 일치 (" + Price.winningPrice(match[i]) + "원) - " + match[i] + "개"));
+        return sb.toString();
     }
 }
