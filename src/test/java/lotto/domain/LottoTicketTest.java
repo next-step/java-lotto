@@ -8,11 +8,11 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 티켓")
-public class LottoTicketTest {
+class LottoTicketTest {
 
     @Test
     @DisplayName("로또 발급 확인")
-    public void createTicketTest() throws Exception {
+    void createTicketTest() throws Exception {
         //given
         LottoTicket ticket = new LottoTicket(Arrays.asList(1,2,3,4,5,6));
 

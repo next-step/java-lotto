@@ -14,26 +14,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("번호 그룹")
-public class LottoNumbersTest {
-    public List<Integer> createLottoNumber() {
+class LottoNumbersTest {
+    List<Integer> createLottoNumber() {
         return IntStream.range(1,7)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> createLottoNumber2() {
+    List<Integer> createLottoNumber2() {
         return IntStream.range(2,8)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> stringToIntegers(String input) {
+    List<Integer> stringToIntegers(String input) {
         return InputView.stringToIntegers(input);
     }
 
     @Test
     @DisplayName("번호 사이즈 6개 확인")
-    public void numberSizeSixTest() throws Exception {
+    void numberSizeSixTest() throws Exception {
         //given
         LottoNumbers numbers = new LottoNumbers(createLottoNumber());
 
@@ -45,7 +45,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("번호 일치 확인")
-    public void numberTrueTest() throws Exception {
+    void numberTrueTest() throws Exception {
         //given
         List<Integer> intList = createLottoNumber();
         LottoNumbers numbers = new LottoNumbers(intList);
@@ -59,7 +59,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("번호 불일치 확인")
-    public void numberFalseTest() throws Exception {
+    void numberFalseTest() throws Exception {
         //given
         LottoNumbers numbers = new LottoNumbers(createLottoNumber());
         LottoNumbers numbers2 = new LottoNumbers(createLottoNumber2());
@@ -73,7 +73,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "1,2,3,", "1,2,3,4,5"})
     @DisplayName("번호 6개 미만 예외 확인")
-    public void numberSizeSixDownExceptionTest(String input) throws Exception {
+    void numberSizeSixDownExceptionTest(String input) throws Exception {
         //given
 
         //when
@@ -87,7 +87,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,1,2,3,4,5", "1,1,1,1,1,1"})
     @DisplayName("로또 번호 중복 예외 확인")
-    public void numberDuplicateExceptionTest(String input) throws Exception {
+    void numberDuplicateExceptionTest(String input) throws Exception {
         //given
 
         //when, then
