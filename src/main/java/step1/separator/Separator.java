@@ -3,7 +3,7 @@ package step1.separator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Separator {
+public final class Separator {
     private final String expression;
     private final String CUSTOM_EXPRESSION_DELIMITER_FORMAT = "//(.)\n(.*)";
     private final String COMMA = ",";

@@ -18,7 +18,7 @@ class PositiveNumberTest {
         int inputValue = 1;
 
         // when
-        PositiveNumber positiveNumber = new PositiveNumber(inputValue);
+        PositiveNumber positiveNumber = PositiveNumber.valueOf(inputValue);
 
         // then
         assertThat(positiveNumber).isNotNull();
@@ -32,7 +32,7 @@ class PositiveNumberTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            assertThat(new PositiveNumber(inputValue)).isNotNull();
+            assertThat(PositiveNumber.valueOf(inputValue)).isNotNull();
         }).isInstanceOf(NegativeNumberInputException.class)
                 .hasMessageContaining("음수가 입력되었습니다.");
 
@@ -46,7 +46,7 @@ class PositiveNumberTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            assertThat(new PositiveNumber(inputValue)).isNotNull();
+            assertThat(PositiveNumber.valueOf(inputValue)).isNotNull();
         }).isInstanceOf(StringNumberFormatException.class)
                 .hasMessageContaining("숫자가 아닌 문자열을 입력했습니다.");
 
@@ -62,8 +62,8 @@ class PositiveNumberTest {
 
         // when an then
         assertAll(
-                () -> assertThat(new PositiveNumber(stringValue).getPositiveNumber()).isEqualTo(expected),
-                () -> assertThat(new PositiveNumber(integerValue).getPositiveNumber()).isEqualTo(expected)
+                () -> assertThat(PositiveNumber.valueOf(stringValue).getPositiveNumber()).isEqualTo(expected),
+                () -> assertThat(PositiveNumber.valueOf(integerValue).getPositiveNumber()).isEqualTo(expected)
         );
 
     }
@@ -77,8 +77,8 @@ class PositiveNumberTest {
         int expected = 1;
 
         // when
-        PositiveNumber positiveNumberByString = new PositiveNumber(stringValue);
-        PositiveNumber positiveNumberByInteger = new PositiveNumber(integerValue);
+        PositiveNumber positiveNumberByString = PositiveNumber.valueOf(stringValue);
+        PositiveNumber positiveNumberByInteger = PositiveNumber.valueOf(integerValue);
 
         // then
         assertThat(positiveNumberByString).isEqualTo(positiveNumberByInteger);
@@ -93,8 +93,8 @@ class PositiveNumberTest {
         int integerValue = 1;
 
         // when
-        PositiveNumber positiveNumberByString = new PositiveNumber(stringValue);
-        PositiveNumber positiveNumberByInteger = new PositiveNumber(integerValue);
+        PositiveNumber positiveNumberByString = PositiveNumber.valueOf(stringValue);
+        PositiveNumber positiveNumberByInteger = PositiveNumber.valueOf(integerValue);
         boolean actual = positiveNumberByString == positiveNumberByInteger;
 
         // then

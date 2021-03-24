@@ -3,37 +3,57 @@ package step1.number;
 import step1.exception.NegativeNumberInputException;
 import step1.exception.StringNumberFormatException;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public final class PositiveNumber {
 
-    private final int positiveNumber;
-    private final int ZERO = 0;
+    private final Integer positiveNumber;
 
-    public PositiveNumber(String positiveNumber) {
-        this(convertStringToInt(positiveNumber));
+    private static final int ZERO = 0;
+    private static final int MAX_LENGTH = 127;
+
+    private static final PositiveNumber[] cache;
+
+    static {
+        cache = new PositiveNumber[MAX_LENGTH];
     }
 
-    public PositiveNumber(int positiveNumber) {
+    public final static PositiveNumber valueOf(String positiveNumber) {
+        return valueOf(convertStringToInt(positiveNumber));
+    }
+
+    public final static PositiveNumber valueOf(Integer positiveNumber) {
         if (isNegative(positiveNumber)) {
             throw new NegativeNumberInputException();
         }
-        this.positiveNumber = positiveNumber;
+        if (isCacheNull(positiveNumber)) {
+            cache[positiveNumber] = new PositiveNumber(positiveNumber);
+        }
+        return cache[positiveNumber];
     }
 
-    private static final int convertStringToInt(String positiveNumber) {
+    private PositiveNumber(Integer positiveNumber) {
+        this.positiveNumber = Integer.valueOf(positiveNumber);
+    }
+
+    private static final boolean isCacheNull(Integer index) {
+        return cache[index] == null;
+    }
+
+    private static final Integer convertStringToInt(String positiveNumber) {
         try {
-            return Integer.parseInt(positiveNumber);
+            return Integer.valueOf(positiveNumber);
         } catch (Exception e) {
             throw new StringNumberFormatException();
         }
     }
 
-    private final boolean isNegative(int positiveNumber) {
+    private static final boolean isNegative(Integer positiveNumber) {
         return positiveNumber < ZERO;
     }
 
-    public final int getPositiveNumber() {
+    public final Integer getPositiveNumber() {
         return positiveNumber;
     }
 

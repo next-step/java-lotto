@@ -23,7 +23,7 @@ public final class PositiveNumbers {
     private static final List<PositiveNumber> convertStringArrayToNumberList(String[] data) {
         return Arrays.stream(data)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(PositiveNumber::new)
+                .mapToObj(PositiveNumber::valueOf)
                 .collect(Collectors.toList());
     }
 

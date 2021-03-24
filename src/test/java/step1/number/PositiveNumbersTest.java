@@ -16,7 +16,7 @@ class PositiveNumbersTest {
     @Test
     void 생성() {
         // given
-        List<PositiveNumber> inputData = new ArrayList<PositiveNumber>();
+        List<PositiveNumber> inputData = new ArrayList<>();
 
         // when
         PositiveNumbers positiveNumbers = new PositiveNumbers(inputData);
@@ -44,7 +44,7 @@ class PositiveNumbersTest {
     @Test
     void 비교() {
         // given
-        List<PositiveNumber> inputData = Arrays.asList(new PositiveNumber(1), new PositiveNumber(2));
+        List<PositiveNumber> inputData = Arrays.asList(PositiveNumber.valueOf(1), PositiveNumber.valueOf(2));
 
         // when
         PositiveNumbers firstPositiveNumbers = new PositiveNumbers(inputData);
@@ -58,7 +58,7 @@ class PositiveNumbersTest {
     @Test
     void 총합() {
         // given
-        List<PositiveNumber> inputData = Arrays.asList(new PositiveNumber(1), new PositiveNumber(2));
+        List<PositiveNumber> inputData = Arrays.asList(PositiveNumber.valueOf(1), PositiveNumber.valueOf(2));
 
         // when
         PositiveNumbers positiveNumbers = new PositiveNumbers(inputData);
