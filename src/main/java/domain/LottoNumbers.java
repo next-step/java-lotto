@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ExceedNumberException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,21 +13,13 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> numbers){
+        validate(numbers);
         this.numbers = numbers;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LottoNumbers that = (LottoNumbers) o;
-
-        return numbers != null ? numbers.equals(that.numbers) : that.numbers == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return numbers != null ? numbers.hashCode() : 0;
+    private void validate(List<LottoNumber> numbers) {
+        if(numbers.size() != 6){
+            throw new ExceedNumberException("6개의 번호를 입력해주세요");
+        }
     }
 }
