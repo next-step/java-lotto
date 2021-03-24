@@ -31,7 +31,7 @@ class LottoYieldTest {
     }
 
     LottoWinners createWinners(List<Integer> winners, int bonus) {
-        return LottoMachine.createWinners(winners, bonus);
+        return LottoFactory.createWinners(winners, bonus);
     }
 
 

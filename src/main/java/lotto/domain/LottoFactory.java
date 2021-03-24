@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class LottoMachine {
+public class LottoFactory {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 46;
@@ -14,10 +14,10 @@ public class LottoMachine {
                                                                     .boxed()
                                                                     .collect(Collectors.toList());
 
-    private LottoMachine() { }
+    private LottoFactory() { }
 
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity) {
-        List<LottoTicket> tickets = Stream.generate(LottoMachine::createLottoTicket)
+        List<LottoTicket> tickets = Stream.generate(LottoFactory::createLottoTicket)
                 .limit(lottoQuantity.autoQuantity())
                 .collect(Collectors.toList());
 
@@ -26,7 +26,7 @@ public class LottoMachine {
 
     public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
         List<LottoTicket> tickets = inputManual.stream()
-                .map(LottoMachine::createLottoTicket)
+                .map(LottoFactory::createLottoTicket)
                 .collect(Collectors.toList());
 
         IntStream.range(0, lottoQuantity.autoQuantity())
@@ -45,7 +45,7 @@ public class LottoMachine {
         return new LottoTicket(lottoNumberRandom());
     }
 
-    public static LottoTicket createLottoTicket(List<Integer> numbers) {
+    private static LottoTicket createLottoTicket(List<Integer> numbers) {
         return new LottoTicket(numbers);
     }
 

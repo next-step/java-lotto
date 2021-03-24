@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 기계")
-class LottoMachineTest {
+class LottoFactoryTest {
 
     LottoQuantity createQuantity(int amount, int quantity) {
         return new LottoQuantity(amount, quantity);
@@ -34,7 +34,7 @@ class LottoMachineTest {
     void createAutoLottoSizeTest(int amount, int quantity) {
         //given
         LottoQuantity lottoQuantity = createQuantity(amount, quantity);
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity);
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity);
 
         //when
         int result = lottoTickets.readOnlyLottoTicket().size();
@@ -49,7 +49,7 @@ class LottoMachineTest {
     void createManualLottoSizeTest(int amount, int quantity) {
         //given
         LottoQuantity lottoQuantity = createQuantity(amount, quantity);
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(quantity));
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
         int result = lottoTickets.readOnlyLottoTicket().size();
@@ -64,7 +64,7 @@ class LottoMachineTest {
     void createAutoAndManualLottoSizeTest(int amount, int quantity, int ticketSize) {
         //given
         LottoQuantity lottoQuantity = createQuantity(amount, quantity);
-        LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(quantity));
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
 
