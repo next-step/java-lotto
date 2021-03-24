@@ -21,7 +21,7 @@ class LottoMachineTest {
             "6000:6",
             "5500:5",
             "14200:14"}, delimiter = ':')
-    @DisplayName("살 수 있는 로또의 개수를 구할 수 있")
+    @DisplayName("살 수 있는 로또의 개수를 구할 수 있다")
     void calculatesLottoCapacity(int wanted, int expected) {
         int capacity = lottoMachine.normalLottoCapacity(new Money(wanted));
         Assertions.assertThat(capacity).isEqualTo(expected);
