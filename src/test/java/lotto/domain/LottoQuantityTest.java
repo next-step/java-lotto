@@ -21,7 +21,7 @@ public class LottoQuantityTest {
         //when
 
         //then
-        assertThat(lottoQuantity.isAutoQuantityCheck(ticketCount)).isTrue();
+        assertThat(lottoQuantity.autoQuantity()).isEqualTo(ticketCount);
     }
 
     @Test
@@ -45,8 +45,8 @@ public class LottoQuantityTest {
         //when
 
         //then
-        assertThat(lottoQuantity.isManualQuantityCheck(manualCheck)).isTrue();
-        assertThat(lottoQuantity.isAutoQuantityCheck(autoCheck)).isTrue();
+        assertThat(lottoQuantity.manualQuantity()).isEqualTo(manualCheck);
+        assertThat(lottoQuantity.autoQuantity()).isEqualTo(autoCheck);
     }
 
 

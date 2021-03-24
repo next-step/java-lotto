@@ -43,12 +43,4 @@ public class LottoQuantity {
     public int manualQuantity() {
         return manualQuantity.quantity();
     }
-
-    public boolean isAutoQuantityCheck(int quantity) {
-        return autoQuantity.isQuantityCheck(quantity);
-    }
-
-    public boolean isManualQuantityCheck(int quantity) {
-        return manualQuantity.isQuantityCheck(quantity);
-    }
 }

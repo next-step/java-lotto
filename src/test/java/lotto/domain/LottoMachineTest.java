@@ -37,10 +37,10 @@ public class LottoMachineTest {
         LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity);
 
         //when
-        boolean result = lottoQuantity.isAutoQuantityCheck(lottoTickets.readOnlyLottoTicket().size());
+        int result = lottoTickets.readOnlyLottoTicket().size();
 
         //then
-        assertThat(result).isTrue();
+        assertThat(lottoQuantity.autoQuantity()).isEqualTo(result);
     }
 
     @ParameterizedTest
@@ -52,10 +52,10 @@ public class LottoMachineTest {
         LottoTickets lottoTickets = LottoMachine.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
-        boolean result = lottoQuantity.isManualQuantityCheck(lottoTickets.readOnlyLottoTicket().size());
+        int result = lottoTickets.readOnlyLottoTicket().size();
 
         //then
-        assertThat(result).isTrue();
+        assertThat(lottoQuantity.manualQuantity()).isEqualTo(result);
     }
 
     @ParameterizedTest
