@@ -1,8 +1,7 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +16,7 @@ class LottoNumberTest {
     //given //when
     LottoNumber lottoNumber = new LottoNumber(45);
     //then
-    assertAll(
-        () -> assertTrue(lottoNumber.getNumber() > 0),
-        () -> assertTrue(lottoNumber.getNumber() < 46)
-    );
+    assertThat(lottoNumber.getNumber()).isBetween(1, 45);
   }
 
   @ParameterizedTest

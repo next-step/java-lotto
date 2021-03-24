@@ -15,7 +15,7 @@ public class Money {
     }
   }
 
-  public int buyLotto() {
+  public int getBuyableCount() {
     checkPurchaseLotto(money);
     return money / 1000;
   }

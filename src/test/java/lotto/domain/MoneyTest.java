@@ -24,7 +24,7 @@ class MoneyTest {
   void buyLotto_fail() {
     Money money = new Money(999);
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> money.buyLotto());
+        .isThrownBy(() -> money.getBuyableCount());
   }
 
   @ParameterizedTest
@@ -32,7 +32,7 @@ class MoneyTest {
   @DisplayName("로또를 몇개 살 수 있는지 확인한다.")
   void buyLotto(int input, int expected) {
     Money money = new Money(input);
-    int buyLottoCount = money.buyLotto();
+    int buyLottoCount = money.getBuyableCount();
     assertEquals(buyLottoCount, expected);
   }
 }

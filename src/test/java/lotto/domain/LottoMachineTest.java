@@ -14,15 +14,17 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoMachineTest {
 
+  private LottoMachine lottoMachine = new LottoMachine();
+
   @Test
   @DisplayName("1~45 숫자 6개로 구성된 로또를 생성한다.")
   void generateAuto() {
     //given //when
-    Lotto lotto = LottoMachine.generateAuto();
+    Lotto lotto = lottoMachine.generateAuto();
     //then
     assertAll(
         () -> assertEquals(lotto.getTicket().size(), 6),
-        () -> assertTrue(LottoMachine.lotto_numbers.containsAll(lotto.getTicket()))
+        () -> assertTrue(lottoMachine.lottoNumbers.containsAll(lotto.getTicket()))
     );
   }
 
@@ -32,7 +34,7 @@ class LottoMachineTest {
     //given
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
     //when
-    Lotto lotto = LottoMachine.generateManual(numbers);
+    Lotto lotto = lottoMachine.generateManual(numbers);
     //then
     assertAll(
         () -> assertEquals(lotto.getTicket().size(), 6),
@@ -50,7 +52,8 @@ class LottoMachineTest {
   @DisplayName("입력된 갯수만큼 로또를 생성한다.")
   void generateAutoLottos(int count) {
     //given //when
-    Lottos lottos = LottoMachine.generateAuto(count);
+
+    Lottos lottos = lottoMachine.generateAuto(count);
     //then
     assertEquals(lottos.size(), count);
   }

@@ -6,15 +6,8 @@ import java.util.Set;
 
 public class Lotto {
 
-  private Set<LottoNumber> ticket = new HashSet<>();
+  private Set<LottoNumber> ticket;
   private LottoResult result;
-
-  public Lotto(Set<LottoNumber> ticket) {
-    this.ticket = ticket;
-    if (ticket.size() != 6) {
-      throw new IllegalArgumentException("size is not 6");
-    }
-  }
 
   public Lotto(List<Integer> numbers) {
     this(createLotto(numbers));
@@ -28,16 +21,24 @@ public class Lotto {
     return ticket;
   }
 
+  public Lotto(Set<LottoNumber> ticket) {
+    this.ticket = ticket;
+    if (ticket.size() != 6) {
+      throw new IllegalArgumentException("size is not 6");
+    }
+  }
+
   public Set<LottoNumber> getTicket() {
     return ticket;
   }
 
-  public void checkResult(Lotto winner) {
+  public void checkResult(Lotto winner, LottoNumber bonusNumber) {
     int containsCount = 0;
     for (LottoNumber lottoNumber : ticket) {
       containsCount = checkContains(winner, containsCount, lottoNumber);
     }
-    this.result = LottoResult.findResult(containsCount);
+    boolean containsBonusNumber = ticket.contains(bonusNumber);
+    this.result = LottoResult.findResult(containsCount, containsBonusNumber);
   }
 
   private int checkContains(Lotto winner, int cotainsCount, LottoNumber lottoNumber) {

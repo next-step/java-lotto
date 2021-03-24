@@ -11,16 +11,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottosTest {
 
+  private static final double MONEY = 4000.00;
   private static Lottos lottos = new Lottos();
 
   @BeforeAll
   static void setup() {
-    lottos.assignWinNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
     lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 5, 6)));
     lottos.add(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 6)));
+    lottos.add(new Lotto(Arrays.asList(45, 2, 3, 4, 5, 6)));
     lottos.add(new Lotto(Arrays.asList(10, 2, 3, 4, 5, 6)));
-    lottos.add(new Lotto(Arrays.asList(10, 11, 3, 4, 5, 6)));
-    lottos.checkResult();
+    lottos.checkResult(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
   }
 
   @ParameterizedTest
@@ -36,6 +36,7 @@ class LottosTest {
   @Test
   void calculateIncomePercent() {
     double incomePercent = lottos.calculateIncomePercent();
-    assertEquals(incomePercent, 387.5);
+    double expected = (LottoResult.SECOND.getRewardPrice() + LottoResult.THIRD.getRewardPrice()) / MONEY;
+    assertEquals(incomePercent, expected);
   }
 }
