@@ -24,7 +24,7 @@ public class Lottery {
     }
   }
 
-  public Hit getHit(LottoNumbers numbers, int hit) {
+  private Hit getHit(LottoNumbers numbers, int hit) {
     if (hit == Constant.HIT_OF_BONUS) {
       return Hit.getBonusHit(hitNumbers.containsBonus(numbers));
     }
