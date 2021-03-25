@@ -26,7 +26,7 @@ public class AutoLottoGeneratorTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {0,1,2,3,4,5})
+  @ValueSource(ints = {0, 1, 2, 3, 4, 5})
   @DisplayName("랜덤으로 만든 로또 넘버가 1~45 사이의 숫자인지 확인")
   public void makeLottoNumber(int index) {
     assertThat(autoLottoGenerator.createSeed().get(index)).isBetween(1, 45);

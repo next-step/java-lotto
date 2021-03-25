@@ -36,7 +36,8 @@ public class LottoMachineTest {
     lottos.add(Lotto.of(Arrays.asList(34, 25, 35, 32, 43, 12)));
     LottoMachine lottoMachine = new LottoMachine(lottos);
 
-    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto
+        .of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
     LottoStaticResult actual = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
 
     Map<LottoRank, Integer> expectedMap = new HashMap<>();

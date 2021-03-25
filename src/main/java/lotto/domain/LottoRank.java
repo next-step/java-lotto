@@ -16,11 +16,11 @@ public enum LottoRank {
   private final int count;
   private final int price;
   private final boolean isBonus;
-  private static final String INVALID_NUMBER = "유효하지 않은 값입니다.";
   private static final int MIN_VALUE = 0;
   private static final int MAX_VALUE = 6;
+  private static final String INVALID_NUMBER = "유효하지 않은 값입니다.";
 
-  LottoRank(final int count,final int price,final boolean isBonus) {
+  LottoRank(final int count, final int price, final boolean isBonus) {
     this.count = count;
     this.price = price;
     this.isBonus = isBonus;
@@ -47,8 +47,8 @@ public enum LottoRank {
         .orElse(ZERO);
   }
 
-  public static void validateNumber(int matchingCount) {
-    if (matchingCount < MIN_VALUE || matchingCount > MAX_VALUE) {
+  public static void validateNumber(int matchCount) {
+    if (matchCount < MIN_VALUE || matchCount > MAX_VALUE) {
       throw new IllegalArgumentException(INVALID_NUMBER);
     }
   }

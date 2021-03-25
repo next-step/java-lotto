@@ -15,11 +15,11 @@ public class LottoMachine {
   private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
 
   public LottoMachine(Money money) {
-    this(money,new ArrayList<>());
+    this(money, new ArrayList<>());
   }
 
   public LottoMachine(int money) {
-    this(new Money(money),new ArrayList<>());
+    this(new Money(money), new ArrayList<>());
   }
 
   public LottoMachine(Money money, List<Lotto> lottos) {

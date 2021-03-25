@@ -35,7 +35,8 @@ public class LottoGameController {
     drawLottoCount(count, money.calculateLottoCount());
     drawLottoList(lottoMachine);
 
-    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(drawWinningLotto(), drawBonusBall());
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto
+        .of(drawWinningLotto(), drawBonusBall());
 
     LottoStaticResult lottoStaticResult
         = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
