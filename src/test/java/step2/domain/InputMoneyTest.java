@@ -35,4 +35,5 @@ class InputMoneyTest {
                 .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
 
     }
+
 }
