@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum Rank {
+public enum LottoRank {
     FIRST,
     SECOND,
     THIRD,
@@ -8,7 +8,7 @@ public enum Rank {
     FIFTH,
     MISS;
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
             return FIRST;
         }

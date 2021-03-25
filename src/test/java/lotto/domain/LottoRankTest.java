@@ -5,15 +5,15 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RankTest {
+public class LottoRankTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/rank.csv", delimiter = ':')
     public void valueOf(String countOfMatchInput, String matchBonusInput, String expectedInput) {
-        final Rank expected = Rank.valueOf(expectedInput);
+        final LottoRank expected = LottoRank.valueOf(expectedInput);
 
         final int countOfMatch = Integer.parseInt(countOfMatchInput);
         final boolean matchBonus = Boolean.parseBoolean(matchBonusInput);
-        final Rank result = Rank.valueOf(countOfMatch, matchBonus);
+        final LottoRank result = LottoRank.valueOf(countOfMatch, matchBonus);
 
         assertThat(result).isEqualTo(expected);
     }
