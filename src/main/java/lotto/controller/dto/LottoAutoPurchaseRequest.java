@@ -1,10 +1,10 @@
 package lotto.controller.dto;
 
-public class PurchaseLottoAutoRequest {
+public class LottoAutoPurchaseRequest {
 
     private final int purchaseAmount;
 
-    public PurchaseLottoAutoRequest(int purchaseAmount) {
+    public LottoAutoPurchaseRequest(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 

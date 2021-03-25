@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.controller.dto.PurchaseLottoAutoRequest;
-import lotto.controller.dto.PurchaseLottoAutoResponse;
+import lotto.controller.dto.LottoAutoPurchaseRequest;
+import lotto.controller.dto.LottoAutoPurchaseResponse;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.service.LottoAutoService;
@@ -18,9 +18,9 @@ public class LottoController {
         this.lottoAutoService = new LottoAutoService();
     }
 
-    public PurchaseLottoAutoResponse purchaseLottoAutoTicket(PurchaseLottoAutoRequest request) {
+    public LottoAutoPurchaseResponse purchaseLottoAutoTicket(LottoAutoPurchaseRequest request) {
         LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(request.getPurchaseAmount());
-        return new PurchaseLottoAutoResponse(lottoTicket.getCount(), assembleLottoNumbers(lottoTicket.getLottoList()));
+        return new LottoAutoPurchaseResponse(lottoTicket.getCount(), assembleLottoNumbers(lottoTicket.getLottoList()));
     }
 
     private List<String> assembleLottoNumbers(List<Lotto> lottoList) {

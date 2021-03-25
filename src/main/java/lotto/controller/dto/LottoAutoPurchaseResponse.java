@@ -2,12 +2,12 @@ package lotto.controller.dto;
 
 import java.util.List;
 
-public class PurchaseLottoAutoResponse {
+public class LottoAutoPurchaseResponse {
 
     private final int purchaseCount;
     private final List<String> lottoNumberList;
 
-    public PurchaseLottoAutoResponse(int purchaseCount, List<String> lottoNumberList) {
+    public LottoAutoPurchaseResponse(int purchaseCount, List<String> lottoNumberList) {
         this.purchaseCount = purchaseCount;
         this.lottoNumberList = lottoNumberList;
     }
