@@ -15,34 +15,21 @@ public class WinningLottoTest {
     @Test
     void winningLottoCreateTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 7; i++) {
+        for (int i = 1; i <= 6; i++) {
             lottoNumberList.add(new LottoNumber(i));
         }
-        WinningLotto winningLotto = new WinningLotto(lottoNumberList);
+        WinningLotto winningLotto = new WinningLotto(lottoNumberList, new LottoNumber(7));
         assertThat(winningLotto.numOfSize()).isEqualTo(7);
-    }
-
-    @DisplayName("우승 로또는 7개 미만, 초과시 예외를 발생시킨다")
-    @Test
-    void winningLottoCreateExceptionTest() {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 6; i++) {
-            lottoNumberList.add(new LottoNumber(i));
-        }
-        assertThatThrownBy(() ->new WinningLotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
-        lottoNumberList.add(new LottoNumber(7));
-        lottoNumberList.add(new LottoNumber(8));
-        assertThatThrownBy(() ->new WinningLotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("우승 로또의 보너스 볼은 우승 번호와 일치하면 예외를 발생시킨다")
     @Test
     void winningLottoBonusExceptionTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 6; i++) {
+        for (int i = 1; i <= 6; i++) {
             lottoNumberList.add(new LottoNumber(i));
         }
         lottoNumberList.add(new LottoNumber(6));
-        assertThatThrownBy(() ->new WinningLotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(lottoNumberList, lottoNumberList.get(6))).isInstanceOf(IllegalArgumentException.class);
     }
 }
