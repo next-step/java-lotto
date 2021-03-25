@@ -5,6 +5,7 @@ import lotto.controller.dto.WinInquiryRequest;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -21,7 +22,14 @@ public class InputView {
 
     public WinInquiryRequest inputWinNumber(List<String> confirmTargetList) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinInquiryRequest(scanner.next(), confirmTargetList);
+        return new WinInquiryRequest(scanner.next(), removeBracket(confirmTargetList));
+    }
+
+    private List<String> removeBracket(List<String> confirmTargetList) {
+        return confirmTargetList.stream()
+                .map(confirmTarget -> confirmTarget.replace("[", ""))
+                .map(confirmTarget -> confirmTarget.replace("]", ""))
+                .collect(Collectors.toList());
     }
 
 }
