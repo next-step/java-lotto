@@ -30,6 +30,9 @@
     - Lottos(int money);
       - 돈을 받고, lotto list 생성
   - method
+    - static void check(int money);
+    - static List<Lotto> buy(int money);
+      - 돈에 따라서 로또 구입
     - Iterator<List<Integer>> lottos();
       - 구매한 lotto 번호를 확인하기 위해, list return
       - 이부분은 return 값을 iterator 로 구현해볼 예정
