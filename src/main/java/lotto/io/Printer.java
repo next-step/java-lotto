@@ -34,6 +34,10 @@ public final class Printer {
     printMessageAndCountOfRank(winningStatistics, FOUR);
     printMessageAndCountOfRank(winningStatistics, FIVE);
     printMessageAndCountOfRank(winningStatistics, SIX);
+
+    long winnings = winningStatistics.totalMoney().toInteger();
+    System.out.println("당첨금: " + winnings + "원");
+    System.out.printf("총 수익률은 %.2f입니다.%n", (double) winnings / userMoney.toInteger());
   }
 
   private static void printMessageAndCountOfRank(WinningStatistics winningStatistics, Rank rank) {
