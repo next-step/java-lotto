@@ -51,4 +51,19 @@ class InputMoneyTest {
 
     }
 
+    @DisplayName("InputMoney 인스턴스가 쇼유한 값을 기준으로 동일 객체로 비교하는지에 대한 테스트")
+    @Test
+    void 비교() {
+        // given
+        int expected = 1;
+
+        // when
+        InputMoney actualInputMoney = InputMoney.valueOf(expected);
+        InputMoney expectedInputMoney = InputMoney.valueOf(expected);
+
+        // then
+        assertThat(actualInputMoney).isEqualTo(expectedInputMoney);
+
+    }
+
 }
