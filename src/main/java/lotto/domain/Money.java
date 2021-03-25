@@ -19,11 +19,11 @@ public final class Money {
   }
 
   public Money multiply(int multiplier) {
-    return null;
+    return multiply((long) multiplier);
   }
 
   public Money multiply(long multiplier) {
-    return null;
+    return new Money(money * multiplier);
   }
 
   public long toInteger() {
