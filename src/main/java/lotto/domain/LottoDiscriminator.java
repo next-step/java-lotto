@@ -12,6 +12,13 @@ public class LottoDiscriminator {
     public int matchingCount(final LottoTicket lottoTicket) {
         return lottoTicket.matchingLottoNumbersCount(winningTicket);
     }
+    
+    public LottoRank lottoRank(LottoTicket lottoTicket) {
+        return LottoRank.valueOf(
+                winningTicket.matchingLottoNumbersCount(lottoTicket),
+                winningTicket.sameBonusNumber(lottoTicket)
+        );
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -24,9 +31,5 @@ public class LottoDiscriminator {
     @Override
     public int hashCode() {
         return Objects.hash(winningTicket);
-    }
-
-    public LottoRank lottoRank(LottoTicket lottoTicket) {
-        return LottoRank.FIRST;
     }
 }
