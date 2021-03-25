@@ -8,11 +8,22 @@ public class Lotto {
 	private static final int FIRST_LOTTO_NUMBER = 1;
 	private static final int LAST_LOTTO_NUMBER = 45;
 	private static final int NUMBER_OF_PICKUP = 6;
+	private List<Integer> numbers;
+
+	public Lotto() {
+		List<Integer> baseNumbers = makeBaseNumbers();
+		new ShuffleStrategyImpl().shuffle(baseNumbers);
+		numbers = pickupNumbers(baseNumbers);
+	}
+
+	public Lotto(ShuffleStrategy shuffleStrategy) {
+		List<Integer> baseNumbers = makeBaseNumbers();
+		shuffleStrategy.shuffle(baseNumbers);
+		numbers = pickupNumbers(baseNumbers);
+	}
 
 	public List<Integer> numbers() {
-		List<Integer> baseNumbers = makeBaseNumbers();
-		Collections.shuffle(baseNumbers);
-		return pickupNumbers(baseNumbers);
+		return numbers;
 	}
 
 	private List<Integer> makeBaseNumbers() {
