@@ -7,6 +7,7 @@ public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     private static final String SIZE_ERROR_MESSAGE = "로또 번호는 6개여야 합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
+    private static final String BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE = "보너스 번호는 다른 로또 번호와 중복될 수 없습니다.";
 
     private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
@@ -18,10 +19,7 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-
-        if (lottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException();
-        }
+        validateDuplicateBonusNumber(lottoNumbers, bonusNumber);
 
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
@@ -39,6 +37,12 @@ public class LottoTicket {
         }
     }
 
+    private void validateDuplicateBonusNumber(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE);
+        }
+    }
+
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
@@ -47,6 +51,10 @@ public class LottoTicket {
         return (int) lottoNumbers.stream()
                 .filter(that.lottoNumbers::contains)
                 .count();
+    }
+
+    public boolean sameBonusNumber(LottoTicket that) {
+        return bonusNumber == that.bonusNumber;
     }
 
     @Override
@@ -60,9 +68,5 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public boolean sameBonusNumber(LottoTicket targetLottoTicket) {
-        return bonusNumber == targetLottoTicket.bonusNumber;
     }
 }
