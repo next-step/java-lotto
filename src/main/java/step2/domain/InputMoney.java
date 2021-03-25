@@ -22,4 +22,8 @@ public class InputMoney {
         return inputMoney < ZERO;
     }
 
+    public final int getInputMoney() {
+        return inputMoney.intValue();
+    }
+
 }
