@@ -26,19 +26,16 @@ class StringUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3", "//;\n1;2;3"})
     void split(String input) {
-        // given
-        Matcher m = Pattern.compile(Constants.CUSTOM_SEPARATOR_PATTERN).matcher(input);
-        List<String> inputs;
-
-        // when
-        if (m.find()) {
-            inputs = Arrays.asList(StringUtils.split(m.group(2), m.group(1)));
-        } else {
-            inputs = Arrays.asList(StringUtils.split(input, Constants.SEPARATOR_PATTERN));
-        }
-
-        // then
+        List<String> inputs = getInputs(input);
         assertThat(inputs.size()).isEqualTo(3);
+    }
+
+    private List<String> getInputs(String input) {
+        Matcher matcher = Pattern.compile(Constants.CUSTOM_SEPARATOR_PATTERN).matcher(input);
+        if (matcher.find()) {
+            return Arrays.asList(StringUtils.split(matcher.group(2), matcher.group(1)));
+        }
+        return Arrays.asList(StringUtils.split(input, Constants.SEPARATOR_PATTERN));
     }
 
     @DisplayName("문자가 숫자일 경우 true, 아닐경우 false를 반환한다.")

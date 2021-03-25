@@ -20,9 +20,9 @@ public class StringAddCalculator {
     }
 
     private static List<String> getInputs(final String input) {
-        Matcher m = Pattern.compile(Constants.CUSTOM_SEPARATOR_PATTERN).matcher(input);
-        if (m.find()) {
-            return Arrays.asList(StringUtils.split(m.group(2), m.group(1)));
+        Matcher matcher = Pattern.compile(Constants.CUSTOM_SEPARATOR_PATTERN).matcher(input);
+        if (matcher.find()) {
+            return Arrays.asList(StringUtils.split(matcher.group(2), matcher.group(1)));
         }
         return Arrays.asList(StringUtils.split(input, Constants.SEPARATOR_PATTERN));
     }
