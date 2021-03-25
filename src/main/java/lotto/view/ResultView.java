@@ -17,8 +17,8 @@ public class ResultView {
         this.lottoTickets = lottoTickets;
     }
 
-    public void printLottoQuantity(LottoQuantity lottoQuantity, int manualQuantity) {
-        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 "  + lottoQuantity.amountToAutoQuantity() + "개를 구매했습니다.");
+    public void printLottoQuantity(LottoQuantity lottoQuantity) {
+        System.out.println("수동으로 " + lottoQuantity.uiManualQuantity() + "장, 자동으로 "  + lottoQuantity.amountToAutoQuantity() + "개를 구매했습니다.");
     }
 
     public void printLottoTicketInfos() {

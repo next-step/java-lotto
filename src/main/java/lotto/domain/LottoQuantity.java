@@ -40,4 +40,8 @@ public class LottoQuantity {
     public int amountToAutoQuantity() {
         return (buyAmount / LOTTO_AMOUNT) - manualQuantity;
     }
+
+    public int uiManualQuantity() {
+        return manualQuantity;
+    }
 }

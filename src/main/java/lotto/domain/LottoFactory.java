@@ -26,7 +26,7 @@ public class LottoFactory {
         return new LottoTickets(result);
     }
 
-    public static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
+    private static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
         return Stream.generate(LottoFactory::createAutoLotto)
                 .limit(lottoQuantity.amountToAutoQuantity())
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class LottoFactory {
         return new LottoTicket(lottoNumberRandom());
     }
 
-    public static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
+    private static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
         return inputManual.stream()
                 .map(LottoFactory::createManualLotto)
                 .collect(Collectors.toList());

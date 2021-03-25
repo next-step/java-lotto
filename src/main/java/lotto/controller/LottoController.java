@@ -21,7 +21,7 @@ public class LottoController {
 
         // 로또 번호 확인
         ResultView resultView = new ResultView(lottoTickets);
-        resultView.printLottoQuantity(lottoQuantity, manualQuantity);
+        resultView.printLottoQuantity(lottoQuantity);
         resultView.printLottoTicketInfos();
 
         // 당첨 결과 확인
