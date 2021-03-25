@@ -142,4 +142,5 @@ public class RankingTest {
 		rankingResult.calculate(lottoGameList, lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.THREE)).isEqualTo(1);
 	}
+
 }

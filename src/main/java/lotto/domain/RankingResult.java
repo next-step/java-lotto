@@ -22,13 +22,13 @@ public class RankingResult {
 		saveRanking(winnerCountPerRanking);
 	}
 
+	public Map<Ranking, Integer> getResult() {
+		return result;
+	}
+
 	private void saveRanking(Map<Integer, Integer> winnerCountPerGrade) {
 		for (Ranking ranking : Ranking.values()) {
 			result.put(ranking, winnerCountPerGrade.getOrDefault(ranking.getMatchCount(), 0));
 		}
-	}
-
-	public Map<Ranking, Integer> getResult() {
-		return result;
 	}
 }

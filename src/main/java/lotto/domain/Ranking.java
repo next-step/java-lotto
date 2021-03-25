@@ -6,7 +6,6 @@ public enum Ranking {
 	FIVE(5, 1500000),
 	SIX(6, 2000000000);
 
-	private final static String CURRENCY = "원";
 	private final int matchCount;
 	private final int price;
 
@@ -15,8 +14,8 @@ public enum Ranking {
 		this.price = price;
 	}
 
-	public String getPrice() {
-		return price + CURRENCY;
+	public int getPrice() {
+		return price;
 	}
 
 	public int getMatchCount() {
