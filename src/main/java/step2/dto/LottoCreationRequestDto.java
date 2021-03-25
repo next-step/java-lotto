@@ -1,14 +1,20 @@
 package step2.dto;
 
+import step2.domain.InputMoney;
+
 public class LottoCreationRequestDto {
 
-    private final int inputValue;
+    private final InputMoney inputMoney;
 
     private LottoCreationRequestDto(int inputValue) {
-        this.inputValue = inputValue;
+        this(InputMoney.valueOf(inputValue));
     }
 
-    public static LottoCreationRequestDto newInstance(int inputValue) {
+    private LottoCreationRequestDto(InputMoney inputValue) {
+        this.inputMoney = inputValue;
+    }
+
+    public static final LottoCreationRequestDto newInstance(int inputValue) {
         return new LottoCreationRequestDto(inputValue);
     }
 
