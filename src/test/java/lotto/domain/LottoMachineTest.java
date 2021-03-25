@@ -21,15 +21,8 @@ public class LottoMachineTest {
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-    Money money = new Money(14000);
-    List<LottoGenerator> generators = new ArrayList<>();
-    generators.add(new ManualLottoGenerator(manualLottos));
-    money.decreaseByManualLottoCount(manualLottos.size());
-    generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
-
-    LottoGenerator generator = new MergedGenerator(generators);
-    LottoMachine lottoMachine = new LottoMachine(generator);
-
+    LottoMachine lottoMachine = new LottoMachine(new Money(14000));
+    lottoMachine.makeLottos(manualLottos);
     assertThat(lottoMachine.getLottoCount()).isEqualTo(14);
 
   }

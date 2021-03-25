@@ -1,18 +1,34 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lotto.domain.generator.AutoLottoGenerator;
 import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.ManualLottoGenerator;
+import lotto.domain.generator.MergedGenerator;
 
 public class LottoMachine {
 
-  private List<Lotto> lottos;
   private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
+  private List<Lotto> lottos;
+  private Money money;
 
-  public LottoMachine(LottoGenerator lottoGenerator) {
-    this.lottos = lottoGenerator.generatedLottoList();
+  public LottoMachine(Money money) {
+    this.money = money;
+    this.lottos = new ArrayList<>();
     validateDuplicated(lottos);
   }
+
+  public void makeLottos(List<List<Integer>> manualLottos) {
+    List<LottoGenerator> generators = new ArrayList<>();
+    generators.add(new ManualLottoGenerator(manualLottos));
+    money.decreaseByManualLottoCount(manualLottos.size());
+    generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
+    LottoGenerator lottoGenerator = new MergedGenerator(generators);
+    this.lottos = lottoGenerator.generatedLottoList();
+  }
+
   public LottoMachine(List<Lotto> lottos) {
     validateDuplicated(lottos);
     this.lottos = lottos;
