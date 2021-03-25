@@ -1,8 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoGenerator;
-import lotto.domain.generator.Generator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.ManualLottoGenerator;
+import lotto.domain.generator.MergedGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +19,16 @@ public class LottoMachineTest {
   public void generatedLotto() {
     List<List<Integer>> manualLottos = new ArrayList<List<Integer>>();
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-    manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+    manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-    Generator generator = new Generator(new ManualLottoGenerator(manualLottos));
-    LottoMachine lottoMachine = new LottoMachine(new Money(14000),generator);
+    Money money = new Money(14000);
+    List<LottoGenerator> generators = new ArrayList<>();
+    generators.add(new ManualLottoGenerator(manualLottos));
+    money.decreaseByManualLottoCount(manualLottos.size());
+    generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
+
+    LottoGenerator generator = new MergedGenerator(generators);
+    LottoMachine lottoMachine = new LottoMachine(generator);
 
     assertThat(lottoMachine.getLottoCount()).isEqualTo(14);
 
@@ -36,7 +43,7 @@ public class LottoMachineTest {
     lottos.add(Lotto.of(Arrays.asList(34, 25, 35, 32, 43, 12)));
     LottoMachine lottoMachine = new LottoMachine(lottos);
 
-    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 4);
+    LastWinningLotto lastWeekWinningLotto = LastWinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
     LottoStaticResult actual = lottoMachine.makeMatchingCount(lastWeekWinningLotto);
 
     Map<LottoRank, Integer> expectedMap = new HashMap<>();
