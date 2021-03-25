@@ -32,7 +32,12 @@ public final class Lottos {
     }
   }
 
-  public List<Integer> compare(Lotto winningLotto) {
-    return null;
+  public List<Integer> compare(final Lotto winningLotto) {
+    List<Integer> list = new ArrayList<>();
+
+    for (Lotto lotto : lottos) {
+      list.add(lotto.compare(winningLotto));
+    }
+    return list;
   }
 }
