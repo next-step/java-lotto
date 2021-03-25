@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public class LottoNumbers {
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     @Override
