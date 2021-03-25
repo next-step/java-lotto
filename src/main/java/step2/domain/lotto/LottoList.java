@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 public class LottoList {
     private final List<NormalLotto> lottos;
 
-    public LottoList(ArrayList<String> rawLottoList) {
-        this(rawLottoList.stream()
-                .map(NormalLotto::new)
-                .collect(Collectors.toList()));
-    }
+//    public LottoList(ArrayList<String> rawLottoList) {
+//        this(rawLottoList.stream()
+//                .map(NormalLotto::new)
+//                .collect(Collectors.toList()));
+//    }
 
     public LottoList(LottoList manualLottoList, LottoList autoLottoList) {
         this(Stream.concat(manualLottoList.getLottos().stream(), autoLottoList.getLottos().stream())
@@ -23,6 +23,12 @@ public class LottoList {
 
     public LottoList(List<NormalLotto> lottoList) {
         this.lottos = lottoList;
+    }
+
+    public static LottoList lottoList(List<String> rawLottoList){
+        return new LottoList(rawLottoList.stream()
+                .map(NormalLotto::new)
+                .collect(Collectors.toList()));
     }
 
     public List<NormalLotto> getLottos() {

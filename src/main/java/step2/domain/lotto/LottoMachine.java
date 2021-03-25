@@ -22,7 +22,7 @@ public class LottoMachine {
     }
 
     public LottoList buyManualLotto(List<String> rawLottoList) {
-        return new LottoList((ArrayList<String>) rawLottoList);
+        return LottoList.lottoList(rawLottoList);
     }
 
     public void verifyCapacity(Money amount, int rawManualLottoCount) {

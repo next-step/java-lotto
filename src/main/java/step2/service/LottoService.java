@@ -36,7 +36,7 @@ public class LottoService {
     }
 
     public void verifyLottoList(List<String> rawManualLottoList) {
-        new LottoList((ArrayList<String>) rawManualLottoList);
+        LottoList.lottoList(rawManualLottoList);
     }
 
     public int change(int rawAmount, int rawManualLottoCount) {
