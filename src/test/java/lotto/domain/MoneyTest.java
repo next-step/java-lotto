@@ -24,6 +24,24 @@ class MoneyTest {
     );
   }
 
+  static Stream<Arguments> multiplySource() {
+    return Stream.of(
+        arguments(new Money(1000), 14, new Money(14000)),
+        arguments(new Money(1000), 1, new Money(1000)),
+        arguments(new Money(1000), 20, new Money(20000)),
+        arguments(new Money(1000), 0, new Money(0))
+    );
+  }
+
+  static Stream<Arguments> multiplySource2() {
+    return Stream.of(
+        arguments(new Money(1000), 14L, new Money(14000)),
+        arguments(new Money(1000), 1L, new Money(1000)),
+        arguments(new Money(1000), 20L, new Money(20000)),
+        arguments(new Money(1000), 0L, new Money(0))
+    );
+  }
+
   @Test
   @DisplayName("생성")
   void create() {
@@ -41,5 +59,19 @@ class MoneyTest {
   @MethodSource("divideSource")
   void divide(Money dividend, Money divisor, Money expected) {
     assertThat(dividend.divideBy(divisor)).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @DisplayName("곱셈 테스트")
+  @MethodSource("multiplySource")
+  void divide(Money multiplicand, int multiplier, Money expected) {
+    assertThat(multiplicand.multiply(multiplier)).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @DisplayName("곱셈 테스트(long)")
+  @MethodSource("multiplySource2")
+  void divide(Money multiplicand, long multiplier, Money expected) {
+    assertThat(multiplicand.multiply(multiplier)).isEqualTo(expected);
   }
 }

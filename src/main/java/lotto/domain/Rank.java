@@ -10,9 +10,9 @@ public enum Rank {
   FIVE(5, new Money(1_500_000), "5개 일치 (1500000원)"),
   SIX(6, new Money(2_000_000_000), "6개 일치 (2000000000원)");
 
-  int matchCount;
-  Money money;
-  String message;
+  private final int matchCount;
+  private final Money money;
+  private final String message;
 
   Rank(int matchCount, Money money, String message) {
     this.matchCount = matchCount;

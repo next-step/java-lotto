@@ -18,6 +18,14 @@ public final class Money {
     return new Money(this.money / price.money);
   }
 
+  public Money multiply(int multiplier) {
+    return null;
+  }
+
+  public Money multiply(long multiplier) {
+    return null;
+  }
+
   public long toInteger() {
     return money;
   }
@@ -38,4 +46,5 @@ public final class Money {
   public int hashCode() {
     return Objects.hash(money);
   }
+
 }
