@@ -14,7 +14,7 @@ public class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "9800:9", "14000:14"}, delimiter = ':')
+    @CsvSource(value = {"9800:9", "14000:14"}, delimiter = ':')
     public void lottoTickets(String price, String expected) {
         final int priceValue = Integer.parseInt(price);
         final int expectedValue = Integer.parseInt(expected);
