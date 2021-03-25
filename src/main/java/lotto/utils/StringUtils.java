@@ -13,4 +13,12 @@ public class StringUtils {
     public static List<String> split(String value, String tokenizer) {
         return Arrays.asList(value.split(tokenizer));
     }
+
+    public static int toInteger(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException("숫자 형태의 문자로 입력해주세요");
+        }
+    }
 }

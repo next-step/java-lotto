@@ -7,27 +7,31 @@ import lotto.views.ResultView;
 import java.util.List;
 
 public class LottoGame {
-
     public LottoGame() { }
 
-    public List<Lotto> generateLotto(Amount amount) {
-        return LottoGenerator.generate(amount.quantity());
+    public List<Lotto> generateLotto(PrePurchaseInformation prePurchaseInformation) {
+        return LottoGenerator.generate(prePurchaseInformation);
     }
 
-    public Amount generateAmount(String value) {
-        return new Amount(Integer.parseInt(value));
+    public PrePurchaseInformation generatePrePurchaseInformation(String amountValue, String manualValue) {
+        Amount amount = new Amount(amountValue, manualValue);
+        String values = InputView.manualBuyNumbers(amount.manualQuantity());
+        return new PrePurchaseInformation(amount, values);
     }
 
     public void start() {
-        Amount purchaseAmount = generateAmount(InputView.amount());
-        List<Lotto> lottos = generateLotto(purchaseAmount);
+        String amountValue = InputView.amount();
+        String manualValue = InputView.manualBuyQuantity();
+
+        PrePurchaseInformation prePurchaseInformation = generatePrePurchaseInformation(amountValue, manualValue);
+        List<Lotto> lottos = generateLotto(prePurchaseInformation);
         ResultView.showPurchaseLotto(lottos);
 
         String winningNumbers = InputView.winningNumbers();
         String bonusNumber = InputView.bonusNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        LotteryMachine lotteryMachine = new LotteryMachine(winningLotto, purchaseAmount);
+        LotteryMachine lotteryMachine = new LotteryMachine(winningLotto, prePurchaseInformation.amount());
         LottoResult lottoResult = lotteryMachine.result(lottos);
 
         ResultView.showWinningResult(lottoResult);
