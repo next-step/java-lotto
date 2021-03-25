@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumbersTest {
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumberList;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(
+        lottoNumberList = Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -28,35 +28,35 @@ public class LottoNumbersTest {
 
     @Test
     public void create() {
-        assertThat(new LottoNumbers(lottoNumbers)).isEqualTo(new LottoNumbers(lottoNumbers));
+        assertThat(new LottoNumbers(lottoNumberList)).isEqualTo(new LottoNumbers(lottoNumberList));
     }
 
     @Test
     public void createLessThan6LottoNumbers() {
-        lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
+        lottoNumberList = lottoNumberList.stream().limit(5).collect(Collectors.toList());
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumberList));
     }
 
     @Test
     public void createMoreThan6LottoNumbers() {
-        lottoNumbers = new ArrayList<>(lottoNumbers);
-        lottoNumbers.add(LottoNumber.of(7));
+        lottoNumberList = new ArrayList<>(lottoNumberList);
+        lottoNumberList.add(LottoNumber.of(7));
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumberList));
     }
 
     @Test
     public void createDuplicateLottoNumbers() {
-        lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
-        lottoNumbers.add(LottoNumber.of(5));
+        lottoNumberList = lottoNumberList.stream().limit(5).collect(Collectors.toList());
+        lottoNumberList.add(LottoNumber.of(5));
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(lottoNumberList));
     }
 
     @Test
     public void matchingCount() {
-        final LottoNumbers source = new LottoNumbers(lottoNumbers);
+        final LottoNumbers source = new LottoNumbers(lottoNumberList);
 
         final LottoNumbers target = new LottoNumbers(
                 Arrays.asList(
