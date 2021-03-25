@@ -6,8 +6,8 @@ public class LottoQuantity {
     private static final String MANUAL_QUANTITY_AMOUNT_ERROR = "구매 금액이 부족합니다.";
     private static final String MANUAL_MINUS_QUANTITY_ERROR = "0개 이상 입력해주세요";
 
-    private final int buyAmount;
-    private final int manualQuantity;
+    private final Quantity autoQuantity;
+    private final Quantity manualQuantity;
 
     public LottoQuantity(int buyAmount) {
         this(buyAmount, 0);
@@ -16,8 +16,8 @@ public class LottoQuantity {
     public LottoQuantity(int buyAmount, int manualQuatity) {
         isBuyAmountValid(buyAmount);
         isManualQuantityOverValid(buyAmount, manualQuatity);
-        this.manualQuantity = manualQuatity;
-        this.buyAmount = buyAmount;
+        this.manualQuantity = new Quantity(manualQuatity);
+        this.autoQuantity = new Quantity(amountToAutoQuantity(buyAmount, manualQuatity));
     }
 
     private void isManualQuantityOverValid(int buyAmount, int manualQuatity) {
@@ -37,11 +37,19 @@ public class LottoQuantity {
         }
     }
 
-    public int amountToAutoQuantity() {
+    private int amountToAutoQuantity(int buyAmount, int manualQuantity) {
         return (buyAmount / LOTTO_AMOUNT) - manualQuantity;
     }
 
+    public boolean isUnderAutoQuantity(int quantity) {
+        return autoQuantity.isUnderQuantity(quantity);
+    }
+
     public int uiManualQuantity() {
-        return manualQuantity;
+        return manualQuantity.uiQuantity();
+    }
+
+    public int uiAutoQuantity() {
+        return autoQuantity.uiQuantity();
     }
 }

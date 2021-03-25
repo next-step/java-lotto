@@ -27,9 +27,11 @@ public class LottoFactory {
     }
 
     private static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
-        return Stream.generate(LottoFactory::createAutoLotto)
-                .limit(lottoQuantity.amountToAutoQuantity())
-                .collect(Collectors.toList());
+        List<LottoTicket> result = new ArrayList<>();
+        for (int i = 1; lottoQuantity.isUnderAutoQuantity(i); i++) {
+            result.add(createAutoLotto());
+        }
+        return result;
     }
 
     private static LottoTicket createAutoLotto() {

@@ -14,14 +14,14 @@ class LottoQuantityTest {
     @CsvSource(value = {"11000,11", "1000,1"})
     @DisplayName("자동 로또 개수 확인")
     void autoLottoSizeTest(int amount, int ticketCount) {
-
         //given
         LottoQuantity lottoQuantity = new LottoQuantity(amount);
 
         //when
 
         //then
-        assertThat(lottoQuantity.amountToAutoQuantity()).isEqualTo(ticketCount);
+        assertThat(lottoQuantity.isUnderAutoQuantity(ticketCount)).isTrue();
+        assertThat(lottoQuantity.isUnderAutoQuantity(ticketCount+1)).isFalse();
     }
 
     @Test
@@ -45,7 +45,7 @@ class LottoQuantityTest {
         //when
 
         //then
-        assertThat(lottoQuantity.amountToAutoQuantity()).isEqualTo(autoCheck);
+        assertThat(lottoQuantity.isUnderAutoQuantity(autoCheck)).isTrue();
     }
 
 

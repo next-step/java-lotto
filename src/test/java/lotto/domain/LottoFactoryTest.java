@@ -40,7 +40,7 @@ class LottoFactoryTest {
         int result = lottoTickets.readOnlyLottoTicket().size();
 
         //then
-        assertThat(lottoQuantity.amountToAutoQuantity()).isEqualTo(result);
+        assertThat(lottoQuantity.isUnderAutoQuantity(result)).isTrue();
     }
 
     @ParameterizedTest
@@ -52,11 +52,10 @@ class LottoFactoryTest {
         LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity, createManualLottos(quantity));
 
         //when
-        int manual = quantity - lottoQuantity.amountToAutoQuantity();
         int result = lottoTickets.readOnlyLottoTicket().size();
 
         //then
-        assertThat(manual).isEqualTo(result);
+        assertThat(quantity).isEqualTo(result);
     }
 
     @ParameterizedTest
