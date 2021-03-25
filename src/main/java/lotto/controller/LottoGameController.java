@@ -27,10 +27,15 @@ public class LottoGameController {
     int count = drawManualLottoCount();
     List<List<Integer>> manualLottos = drawManualLotto(count);
 
-    LottoMachine lottoMachine
-        = new LottoMachine(money);
+    List<LottoGenerator> generators = new ArrayList<>();
+    generators.add(new ManualLottoGenerator(manualLottos));
+    money.decreaseByManualLottoCount(manualLottos.size());
+    generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
+    LottoGenerator lottoGenerator = new MergedGenerator(generators);
 
-    lottoMachine.makeLottos(manualLottos);
+
+    LottoMachine lottoMachine
+        = new LottoMachine(lottoGenerator);
 
     drawLottoCount(count, money.calculateLottoCount());
     drawLottoList(lottoMachine);

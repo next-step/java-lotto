@@ -7,4 +7,5 @@ import lotto.domain.Money;
 public interface LottoGenerator {
 
   List<Lotto> generatedLottoList();
+
 }
