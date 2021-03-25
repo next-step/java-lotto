@@ -36,4 +36,19 @@ class LottoNumberTest {
                 .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
 
     }
+
+    @DisplayName("LottoNumber 인스턴스가 같은 소유한 값을 기준으로 비교 가능한지 테스트")
+    @Test
+    void 비교_equals() {
+        // given
+        int inputValue = 1;
+
+        // when
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(inputValue);
+        LottoNumber secondLottoNumber = LottoNumber.valueOf(inputValue);
+
+        // then
+        assertThat(firstLottoNumber).isEqualTo(secondLottoNumber);
+    }
+
 }
