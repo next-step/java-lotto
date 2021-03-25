@@ -49,7 +49,7 @@ class WinningNumbersTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
-        winningNumbers.addBonusNumber(new int[]{7,9});
+        winningNumbers.addBonusNumbers(new int[]{7,9});
         Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
         System.out.println(winNumbers.toString());
         assertThat(winNumbers.get(3)).isEqualTo(0);

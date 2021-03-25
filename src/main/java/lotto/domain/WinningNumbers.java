@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class WinningNumbers {
@@ -48,7 +49,7 @@ public class WinningNumbers {
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
 
-    public void addBonusNumber(int[] bonusNumber) {
-
+    public void addBonusNumbers(int[] bonusNumbers) {
+        this.winNumbers = IntStream.concat(IntStream.of(this.winNumbers), IntStream.of(bonusNumbers)).toArray();
     }
 }
