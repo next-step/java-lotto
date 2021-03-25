@@ -12,22 +12,24 @@ public class Generator {
     this.lottoGenerator = lottoGenerator;
   }
 
-  public Generator() {
+  public Generator(List<List<Integer>> input) {
+    this(new ManualLottoGenerator(input));
   }
 
-  public List<Lotto> manualLotto() {
+  public Generator(int autoLottoCount) {
+    this(new AutoLottoGenerator(autoLottoCount));
+  }
+
+  public List<Lotto> generateLottos() {
     return lottoGenerator.generatedLottoList();
   }
 
 
-  public List<Lotto> autoLotto(int calculateLottoCount) {
-    return new AutoLottoGenerator(calculateLottoCount).generatedLottoList();
-  }
-
   public List<Lotto> composite(Money money) {
-    List<Lotto> lottos = manualLotto();
+    List<Lotto> lottos = generateLottos();
     money.decreaseByManualLottoCount(lottos.size());
-    List<Lotto> autoLottos = autoLotto(money.calculateLottoCount());
+    Generator generator = new Generator(money.calculateLottoCount());
+    List<Lotto> autoLottos = generator.generateLottos();
     lottos.addAll(autoLottos);
     return lottos;
   }

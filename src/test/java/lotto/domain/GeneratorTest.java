@@ -32,8 +32,8 @@ public class GeneratorTest {
     List<List<Integer>> manualLottoInput = new ArrayList<List<Integer>>();
     manualLottoInput.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     manualLottoInput.add(Arrays.asList(34,25,35,32,43,12));
-    Generator generator = new Generator(new ManualLottoGenerator(manualLottoInput));
-    List<Lotto> manualLottos = generator.manualLotto();
+    Generator generator = new Generator(manualLottoInput);
+    List<Lotto> manualLottos = generator.generateLottos();
 
 
     List<Lotto> expected = new ArrayList<>();
@@ -47,8 +47,8 @@ public class GeneratorTest {
   @Test
   @DisplayName("자동 발급")
   public void autoLotto() {
-    Generator generator = new Generator();
-    List<Lotto> autoLottos = generator.autoLotto(5);
+    Generator generator = new Generator(5);
+    List<Lotto> autoLottos = generator.generateLottos();
     assertEquals(5,autoLottos.size());
 
   }
