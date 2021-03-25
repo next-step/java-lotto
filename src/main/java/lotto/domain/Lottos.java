@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class Lottos {
 
-  public static final Money PRICE = new Money(1000);
+  public static final Money PRICE = new Money(Lotto.PRICE);
 
   private final List<Lotto> lottos;
 
@@ -18,6 +18,10 @@ public final class Lottos {
     }
   }
 
+  public Lottos(List<Lotto> lottoList) {
+    this.lottos = lottoList;
+  }
+
   public int count() {
     return lottos.size();
   }
@@ -26,5 +30,9 @@ public final class Lottos {
     for (Lotto lotto : lottos) {
       lotto.printLottoNumbers();
     }
+  }
+
+  public List<Integer> compare(Lotto winningLotto) {
+    return null;
   }
 }
