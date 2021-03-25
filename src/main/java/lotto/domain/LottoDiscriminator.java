@@ -9,11 +9,6 @@ public class LottoDiscriminator {
         this.winningTicket = winningTicket;
     }
 
-    // TODO: 연관된 기능 수정하고, 지워야 함.
-    public int matchingCount(final LottoTicket lottoTicket) {
-        return lottoTicket.matchingLottoNumbersCount(winningTicket);
-    }
-
     public LottoRank lottoRank(LottoTicket lottoTicket) {
         return LottoRank.valueOf(
                 winningTicket.matchingLottoNumbersCount(lottoTicket),
