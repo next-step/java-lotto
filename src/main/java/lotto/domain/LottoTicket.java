@@ -9,11 +9,18 @@ public class LottoTicket {
     private static final String DUPLICATE_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
 
     private final List<LottoNumber> lottoNumbers;
+    private final LottoNumber bonusNumber;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        this(lottoNumbers, LottoNumber.of(45));
+    }
+
+    public LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
+
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -49,5 +56,9 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    public boolean sameBonusNumber(LottoTicket targetLottoTicket) {
+        return true;
     }
 }
