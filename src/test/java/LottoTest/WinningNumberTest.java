@@ -1,6 +1,7 @@
 package LottoTest;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +41,7 @@ public class WinningNumberTest {
         //given
         List<Integer> givenNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoGame game = new LottoGame(givenNumber);
-        WinningNumber winningNumber = new WinningNumber(givenNumber, 7);
+        WinningNumber winningNumber = new WinningNumber(givenNumber, LottoNumber.create(7));
 
         //when, then
         assertThat(winningNumber.rank(game)).isEqualTo(Rank.FIRST);

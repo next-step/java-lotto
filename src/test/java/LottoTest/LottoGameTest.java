@@ -1,6 +1,7 @@
 package LottoTest;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,12 +17,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 
 public class LottoGameTest {
     @ParameterizedTest
-    @CsvSource(value = {"1:true", "0:false", "6:true", "7:false"}, delimiter = ':')
+    @CsvSource(value = {"1:true", "6:true", "7:false"}, delimiter = ':')
     @DisplayName("contains 테스트")
     void When_Contains(int number, boolean expected) {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoGame.contains(number)).isEqualTo(expected);
+        assertThat(lottoGame.contains(LottoNumber.create(number))).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -62,6 +63,4 @@ public class LottoGameTest {
                 Arguments.of(Arrays.asList(46, 2, 3, 4, 5, 6))
         );
     }
-
-
 }

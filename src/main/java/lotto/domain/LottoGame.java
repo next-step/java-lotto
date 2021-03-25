@@ -1,26 +1,26 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoGame {
-    List<Integer> numbers;
+    Set<LottoNumber> numbers;
 
     public LottoGame(List<Integer> numbers) {
-        if (numbers.stream().max(Integer::compare).get() > LottoRule.max()) {
-            throw new IllegalArgumentException();
-        }
-        if (numbers.stream().min(Integer::compare).get() < LottoRule.min()) {
-            throw new IllegalArgumentException();
-        }
+        this(castLottoNumberSet(numbers));
+    }
 
-        if (numbers.stream().distinct().count() != LottoRule.countOfSelection()) {
+    public LottoGame(Set<LottoNumber> numbers) {
+        if (numbers.size() != LottoRule.countOfSelection()) {
             throw new IllegalArgumentException();
         }
-
-        Collections.sort(numbers);
         this.numbers = numbers;
+    }
+
+    private static Set<LottoNumber> castLottoNumberSet(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::create)
+                .collect(Collectors.toSet());
     }
 
     public int countOfMatch(LottoGame lottoGame) {
@@ -30,20 +30,22 @@ public class LottoGame {
                 .count();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public List<Integer> numbers() {
-        return numbers;
+    public List<LottoNumber> numbers() {
+        return new ArrayList<>(this.numbers).stream()
+                .sorted(LottoNumber::compare)
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoGame that = (LottoGame) o;
-        return Objects.equals(numbers, that.numbers);
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(numbers, lottoGame.numbers);
     }
 
     @Override

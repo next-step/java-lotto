@@ -5,17 +5,22 @@ import java.util.Objects;
 
 public class WinningNumber {
     private LottoGame winningNumber;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningNumber(List<Integer> numbers, int bonusNumber) {
+        this(new LottoGame(numbers), LottoNumber.create(bonusNumber));
+    }
+
+    public WinningNumber(List<Integer> numbers, LottoNumber bonusNumber) {
         this(new LottoGame(numbers), bonusNumber);
     }
 
-    public WinningNumber(LottoGame winningNumber, int bonusNumber) {
+    public WinningNumber(LottoGame numbers, int bonusNumber) {
+        this(numbers, LottoNumber.create(bonusNumber));
+    }
+
+    public WinningNumber(LottoGame winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException();
-        }
-        if (bonusNumber < LottoRule.min() || bonusNumber > LottoRule.max()) {
             throw new IllegalArgumentException();
         }
 
@@ -32,7 +37,7 @@ public class WinningNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningNumber that = (WinningNumber) o;
-        return bonusNumber == that.bonusNumber && Objects.equals(winningNumber, that.winningNumber);
+        return Objects.equals(winningNumber, that.winningNumber) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
