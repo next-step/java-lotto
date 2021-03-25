@@ -17,6 +17,12 @@ public class LottoStatistics {
         this.lottoTickets = lottoTickets;
     }
 
+    public int lottoTicketsCount(LottoRank lottoRank) {
+        return (int) lottoTickets.stream()
+                .filter(e -> lottoDiscriminator.lottoRank(e) == lottoRank)
+                .count();
+    }
+
     private int matchingLottoTicketsCount(final int matchingCount) {
         return (int) lottoTickets.stream()
                 .map(lottoDiscriminator::matchingCount)
@@ -63,9 +69,5 @@ public class LottoStatistics {
     @Override
     public int hashCode() {
         return Objects.hash(lottoDiscriminator, lottoTickets);
-    }
-
-    public int lottoTicketsCount(LottoRank lottoRank) {
-        return 0;
     }
 }
