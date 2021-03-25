@@ -18,6 +18,7 @@ public enum LottoRank {
         return winningPrize;
     }
 
+    // TODO: 리팩토링 필요
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
             return FIRST;
