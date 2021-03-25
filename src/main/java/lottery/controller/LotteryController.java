@@ -2,6 +2,7 @@ package lottery.controller;
 
 import lottery.domain.*;
 import lottery.dto.LotteryNumbersDto;
+import lottery.dto.LotteryTicketOrderDto;
 import lottery.dto.RoundResult;
 import lottery.view.InputView;
 import lottery.view.ResultView;
@@ -14,14 +15,14 @@ public class LotteryController {
     private final ResultView resultView = new ResultView();
 
     public void run() {
-        LotteryTicketOrder order = new LotteryTicketOrder(inputView.receiveLotteryTicketOrder());
+        LotteryTicketOrderDto order = inputView.receiveLotteryTicketOrder();
         LotteryTicket lotteryTicket = LotteryTicketIssuer.issue(order);
 
         List<LotteryNumbersDto> lotteryNumbersDtoList = lotteryTicket.exportLotteryNumbers();
-        int amountOfManualLotteries = order.getAmountOfManualLotteries();
-        int amountOfAutomaticLotteries = lotteryNumbersDtoList.size() - amountOfManualLotteries;
+        int manualLotteryQuantity = order.getLotteryNumbersDtoList().size();
+        int automaticLotteryQuantity = lotteryNumbersDtoList.size() - manualLotteryQuantity;
 
-        resultView.printLotteryAmounts(amountOfManualLotteries, amountOfAutomaticLotteries);
+        resultView.printLotteryAmounts(manualLotteryQuantity, automaticLotteryQuantity);
         resultView.printLotteryNumbers(lotteryNumbersDtoList);
 
         LotteryNumbers winningNumbers = new LotteryNumbers(inputView.receiveWinningNumbers());

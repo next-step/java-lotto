@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import lottery.dto.LotteryNumbersDto;
+import lottery.dto.LotteryTicketOrderDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,19 +23,31 @@ public class LotteryTicketIssuer {
 
     private LotteryTicketIssuer() {}
 
-    public static LotteryTicket issue(LotteryTicketOrder order) {
-        int money = order.getMoney();
+    public static LotteryTicket issue(LotteryTicketOrderDto order) {
+        validateOrder(order);
+
         List<LotteryNumbersDto> lotteryNumbers = order.getLotteryNumbersDtoList();
         int manualAmount = lotteryNumbers.size();
+        int automaticAmount = getTotalQuantity(order.getMoney()) - manualAmount;
 
-        int automaticAmount = (money / LOTTERY_PRICE) - manualAmount;
-
-        List<LotteryNumbers> manualLotteryNumbers = getManualLotteryNumbers(lotteryNumbers);
-
+        List<LotteryNumbers> manualLotteryNumbers = getManualLotteryNumbers(order.getLotteryNumbersDtoList());
         List<LotteryNumbers> automaticLotteryNumbers = getAutomaticLotteryNumbers(automaticAmount);
 
         return Stream.concat(manualLotteryNumbers.stream(), automaticLotteryNumbers.stream())
                      .collect(Collectors.collectingAndThen(Collectors.toList(), LotteryTicket::new));
+    }
+
+    private static void validateOrder(LotteryTicketOrderDto order) {
+        int manualLotteryQuantity = order.getLotteryNumbersDtoList().size();
+        int totalQuantity = getTotalQuantity(order.getMoney());
+
+        if (totalQuantity < manualLotteryQuantity) {
+            throw new ManualLotteryQuantityExceedException();
+        }
+    }
+
+    private static int getTotalQuantity(int money) {
+        return money / LOTTERY_PRICE;
     }
 
     private static List<LotteryNumbers> getManualLotteryNumbers(List<LotteryNumbersDto> lotteryNumbersDtoList) {
