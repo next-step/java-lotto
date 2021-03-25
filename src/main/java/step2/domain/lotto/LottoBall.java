@@ -57,7 +57,7 @@ public class LottoBall {
 
     @Override
     public String toString() {
-        return "" + number;
+        return String.valueOf(this.number);
     }
 
     @Override

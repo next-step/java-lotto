@@ -3,12 +3,8 @@ package step2.domain.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.Util;
 import step2.domain.exception.CustomException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import step2.domain.exception.ErrorCode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,36 +13,28 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6,1    :15:false",
-            "1,2,3,4,5        :15:false",
-            "1,2,3,4:10       :15:false",
-            "1,2,3,3,4,5      :15:false",
-            "1,2,3,4,5,6,7    :15:false",
-            "1,2,3,4,5,6      :6 :false",
-            "1,2,3,4,5,6      :15:true",
-            "40,41,42,43,44,45:15:true"}, delimiter = ':')
-    @DisplayName("로또가 올바른지 판단할 수 있다")
-    void determinesValidLotto(String rawLotto, int bonusNumber, boolean expected) {
-        List<LottoBall> lottoBalls = LottoBall.balls(rawLotto);
-        boolean valid = WinningLotto.valid(lottoBalls, new LottoBall(bonusNumber));
-        assertThat(valid).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
             "1,2,3,4,5,6,1    :15",
             "1,2,3,4,5        :15",
             "1,2,3,4:10       :15",
             "1,2,3,3,4,5      :15",
-            "-1,1,2,3,4,5     :15",
-            "1,2,3,4,5,46     :15",
             "1,2,3,4,5,6,7    :15",
-            "1,2,3,4,5,6      :6",
-            "1,2,3,4,5,6      :46",
-            "1,2,3,4,5,6      :-1"}, delimiter = ':')
+            "1,2,3,4,5,6      :6"}, delimiter = ':')
     @DisplayName("로또가 올바르지 않으면 생성자에서 에러를 던진다")
     void invalidLottoThrowsException(String rawLotto, int bonusNumber) {
-        assertThrows(CustomException.class, () -> new WinningLotto(rawLotto, bonusNumber));
+        CustomException thrown = assertThrows(CustomException.class, () -> new WinningLotto(rawLotto, bonusNumber));
+        assertThat(thrown.errorCode()).isEqualTo(ErrorCode.INVALID_WINNING_LOTTO_NUMBERS);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "-1,1,2,3,4,5     :15",
+            "1,2,3,4,5,46     :15",
+            "1,2,3,4,5,6      :46",
+            "1,2,3,4,5,6      :-1"}, delimiter = ':')
+    @DisplayName("로또번호가 올바르지 않으면 생성자에서 에러를 던진다")
+    void invalidLottoNumberThrowsException(String rawLotto, int bonusNumber) {
+        CustomException thrown = assertThrows(CustomException.class, () -> new WinningLotto(rawLotto, bonusNumber));
+        assertThat(thrown.errorCode()).isEqualTo(ErrorCode.INVALID_LOTTO_NUMBER);
     }
 
     @ParameterizedTest

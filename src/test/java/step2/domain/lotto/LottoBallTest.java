@@ -1,10 +1,12 @@
 package step2.domain.lotto;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +32,8 @@ class LottoBallTest {
     @ValueSource(ints = {46, 55, 142})
     @DisplayName("공을 로또 번호 총 개수보다 많이 만들려고 하면 에러를 던진다")
     void throwsExceptionWhenAskToGenerateInvalidAmount(int wanted) {
-        assertThrows(CustomException.class, () -> LottoBall.balls(wanted));
+        CustomException thrown = assertThrows(CustomException.class, () -> LottoBall.balls(wanted));
+        assertThat(thrown.errorCode()).isEqualTo(ErrorCode.INVALID_NUMBER_OF_LOTTO_BALLS);
     }
 
     @ParameterizedTest
@@ -44,9 +47,11 @@ class LottoBallTest {
                 .map(Integer::parseInt)
                 .map(LottoBall::new)
                 .collect(Collectors.toList());
+        SoftAssertions softAssertions = new SoftAssertions();
         for (int idx = 0; idx < lottoBalls.size(); idx++) {
-            assertThat(lottoBalls.get(idx)).isEqualTo(expectedLottoBalls.get(idx));
+            softAssertions.assertThat(lottoBalls.get(idx)).isEqualTo(expectedLottoBalls.get(idx));
         }
+        softAssertions.assertAll();
     }
 
 }

@@ -30,6 +30,7 @@ public class WinningLotto {
         for (LottoBall lottoBall : lotto.getBalls()) {
             count += oneIfNumberMatch(lottoBall);
         }
+        String tmp = "";
         return count;
     }
 
@@ -52,7 +53,7 @@ public class WinningLotto {
         return 0;
     }
 
-    public static boolean valid(List<LottoBall> lottoBalls, LottoBall bonusBall) {
+    private static boolean valid(List<LottoBall> lottoBalls, LottoBall bonusBall) {
         return sizeSix(lottoBalls) && unique(lottoBalls, bonusBall);
     }
 

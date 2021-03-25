@@ -46,6 +46,6 @@ public class NormalLotto {
 
     @Override
     public String toString() {
-        return "" + balls;
+        return String.valueOf(this.balls);
     }
 }

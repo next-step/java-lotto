@@ -19,9 +19,6 @@ public enum ErrorCode {
 
     @Override
     public String toString() {
-        return "ErrorCode{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                '}';
+        return String.format("ErrorCode{code=%s, message=%s}",code, message);
     }
 }

@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoMachineTest {
 
@@ -54,7 +54,7 @@ class LottoMachineTest {
             "2400:14"}, delimiter = ':')
     @DisplayName("원하는 수의 로또를 살 수 있다")
     void throwsExceptionWhenBuyMoreThanAvailable(int amount, int count) {
-        assertThrows(CustomException.class, ()-> lottoMachine.verifyCapacity(new Money(amount), count));
+        assertThrows(CustomException.class, () -> lottoMachine.verifyCapacity(new Money(amount), count));
     }
 
     @ParameterizedTest
@@ -86,10 +86,11 @@ class LottoMachineTest {
 
         LottoList lottoList = lottoMachine.buyManualLotto(stringLottoList);
         List<LottoBall> generatedLottoBalls = lottoList.getLottos().get(0).getBalls();
-        for(int idx = 0;idx<generatedLottoBalls.size();idx++){
-            assertThat(generatedLottoBalls.get(idx)).isEqualTo(lottoBalls.get(idx));
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (int idx = 0; idx < generatedLottoBalls.size(); idx++) {
+            softAssertions.assertThat(generatedLottoBalls.get(idx)).isEqualTo(lottoBalls.get(idx));
         }
-
+        softAssertions.assertAll();
     }
 
 }
