@@ -34,7 +34,7 @@ class WinningStatisticsTest {
             1L,
             1L,
             3L,
-            new Money(6000205000L)
+            new Money(6001555000L)
         )
     );
   }

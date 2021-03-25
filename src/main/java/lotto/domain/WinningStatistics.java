@@ -26,7 +26,7 @@ public final class WinningStatistics {
     for (Entry<Rank, Long> entry : winningStatistics.entrySet()) {
       Rank rank = entry.getKey();
       Money rankTotal = rank.getMoney().multiply(entry.getValue());
-      total.sum(rankTotal);
+      total = total.sum(rankTotal);
     }
     return total;
   }

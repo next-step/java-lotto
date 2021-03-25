@@ -50,5 +50,4 @@ public final class Money {
   public int hashCode() {
     return Objects.hash(money);
   }
-
 }
