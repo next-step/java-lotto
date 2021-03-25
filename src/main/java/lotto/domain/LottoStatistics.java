@@ -64,4 +64,8 @@ public class LottoStatistics {
     public int hashCode() {
         return Objects.hash(lottoDiscriminator, lottoTickets);
     }
+
+    public int lottoTicketsCount(LottoRank lottoRank) {
+        return 0;
+    }
 }

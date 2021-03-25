@@ -3,8 +3,9 @@ package lotto.domain;
 import lotto.factories.LottoTicketFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ public class LottoStatisticsTest {
         final LottoTicket winningTicket = LottoTicketFactory.createAutoLottoTicket();
         lottoDiscriminator = new LottoDiscriminator(winningTicket);
         lottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                .limit(20)
+                .limit(100)
                 .collect(Collectors.toList());
     }
 
@@ -32,70 +33,14 @@ public class LottoStatisticsTest {
         assertThat(result).isEqualTo(expected);
     }
 
-
-    private int matchingLottoTicketsCount(final int matchingCount) {
-        return (int) lottoTickets.stream().filter(e -> lottoDiscriminator.matchingCount(e) == matchingCount).count();
-    }
-
-    @Test
-    public void threeMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(3);
+    @ParameterizedTest
+    @ValueSource(strings = {"FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "MISS"})
+    public void lottoTicketsCount(String LottoRankInput) {
+        final LottoRank lottoRank = LottoRank.valueOf(LottoRankInput);
+        final int expected = (int) lottoTickets.stream().filter(e -> lottoDiscriminator.lottoRank(e) == lottoRank).count();
 
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.threeMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void FourMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(4);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.fourMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void FiveMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(5);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.fiveMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void SixMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(6);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.sixMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void yield() {
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-
-        final int payment = 2000;
-        final long threeMatchingLottoTicketsPrize =
-                LottoStatistics.THREE_MATCHING_PRIZE * lottoStatistics.threeMatchingLottoTicketsCount();
-        final long fourMatchingLottoTicketsPrize =
-                LottoStatistics.FOUR_MATCHING_PRIZE * lottoStatistics.fourMatchingLottoTicketsCount();
-        final long fiveMatchingLottoTicketsPrize =
-                LottoStatistics.FIVE_MATCHING_PRIZE * lottoStatistics.fiveMatchingLottoTicketsCount();
-        final long sixMatchingLottoTicketsPrize =
-                LottoStatistics.SIX_MATCHING_PRIZE * lottoStatistics.sixMatchingLottoTicketsCount();
-
-        final long totalPrize = threeMatchingLottoTicketsPrize + fourMatchingLottoTicketsPrize +
-                fiveMatchingLottoTicketsPrize + sixMatchingLottoTicketsPrize;
-        final double expected = (double) totalPrize / payment;
-
-        final double result = lottoStatistics.yield(payment);
+        final int result = lottoStatistics.lottoTicketsCount(lottoRank);
 
         assertThat(result).isEqualTo(expected);
     }
