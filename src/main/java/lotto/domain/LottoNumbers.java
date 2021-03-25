@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.LottoNumberCreationStrategy;
 
 public final class LottoNumbers {
 
@@ -11,11 +11,8 @@ public final class LottoNumbers {
 
   private final List<LottoNumber> lottoNumbers;
 
-  public LottoNumbers() {
-    lottoNumbers = new ArrayList<>();
-    for (int i = 1; i <= LOTTO_NUMBER_COUNT; i++) {
-      lottoNumbers.add(new LottoNumber(i));
-    }
+  public LottoNumbers(LottoNumberCreationStrategy lottoNumberCreationStrategy) {
+    lottoNumbers = lottoNumberCreationStrategy.create();
   }
 
   public LottoNumbers(String[] winningNumbers) {

@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.RandomLottoNumberCreationStrategy;
+
 public final class Lotto {
 
   private final LottoNumbers lottoNumbers;
 
   public Lotto() {
-    lottoNumbers = new LottoNumbers();
+    lottoNumbers = new LottoNumbers(new RandomLottoNumberCreationStrategy());
   }
 
   public Lotto(String[] winningNumbers) {

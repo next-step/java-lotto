@@ -4,7 +4,9 @@ import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.LottoNumberCreationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +32,10 @@ class LottoNumbersTest {
   @Test
   @DisplayName("생성")
   void create() {
-    assertThat(new LottoNumbers().size()).isEqualTo(LOTTO_NUMBER_COUNT);
+    LottoNumberCreationStrategy lottoNumberCreationStrategy = () -> Stream.of(1, 2, 3, 4, 5, 6)
+        .map(LottoNumber::new)
+        .collect(Collectors.toList());
+    assertThat(new LottoNumbers(lottoNumberCreationStrategy).size()).isEqualTo(LOTTO_NUMBER_COUNT);
   }
 
   @ParameterizedTest
