@@ -11,4 +11,15 @@ class LottoTest {
 
 		assertThat(lotto.numbers().size()).isEqualTo(6);
 	}
+
+	@Test
+	void checkDuplicateNumbers() {
+		Lotto lotto = new Lotto();
+
+		long distinctNumberSize = lotto.numbers().stream()
+			.distinct()
+			.count();
+
+		assertThat(distinctNumberSize).isEqualTo(lotto.numbers().size());
+	}
 }
