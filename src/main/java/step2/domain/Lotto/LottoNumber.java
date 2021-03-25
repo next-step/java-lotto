@@ -1,6 +1,10 @@
 package step2.domain.Lotto;
 
-public class LottoNumber {
+import step2.exception.InvalidNumberInputException;
+
+public final class LottoNumber {
+
+    private static final int ZERO = 0;
 
     private final Integer lottoNumber;
 
@@ -9,11 +13,18 @@ public class LottoNumber {
     }
 
     private LottoNumber(Integer lottoNumber){
+        if(isOutOfBounds(lottoNumber)) {
+            throw new InvalidNumberInputException();
+        }
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber valueOf(int lottoNumber) {
+    public static final LottoNumber valueOf(int lottoNumber) {
         return new LottoNumber(lottoNumber);
+    }
+
+    private final boolean isOutOfBounds(Integer inputMoney) {
+        return inputMoney < ZERO;
     }
 
 }
