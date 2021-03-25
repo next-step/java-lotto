@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
@@ -12,19 +11,21 @@ public class WinningNumbers {
     private static final String CHECK_LENGTH = String.format("당첨 번호의 길이는 %d(이)여야 합니다.", NUMBER_LENGTH);
     private static final String CHECK_INTEGER = "당첨 번호는 모두 숫자여야 합니다.";
     private static final String CHECK_BOUND = String.format("당첨 번호는 %d ~ %d 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
-    private final Set<Integer> winningNumbers;
+    private static final String CHECK_DUPLICATION = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
+    private final List<Integer> winningNumbers;
 
     public WinningNumbers(List<String> winningNumbers) {
         validate(winningNumbers);
         this.winningNumbers = winningNumbers.stream()
                 .mapToInt(Integer::parseInt)
-                .boxed().collect(Collectors.toSet());
+                .boxed().collect(Collectors.toList());
     }
 
     private void validate(List<String> winningNumbers) {
         checkLength(winningNumbers);
         checkInteger(winningNumbers);
         checkBound(winningNumbers);
+        checkDuplication(winningNumbers);
     }
 
     private void checkLength(List<String> winningNumbers) {
@@ -61,6 +62,15 @@ public class WinningNumbers {
         }
     }
 
+    private void checkDuplication(List<String> winningNumbers) {
+        long countAfterDeduplication = winningNumbers.stream()
+                .distinct()
+                .count();
+
+        if (countAfterDeduplication != NUMBER_LENGTH) {
+            throw new IllegalArgumentException(CHECK_DUPLICATION);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
