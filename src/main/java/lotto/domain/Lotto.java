@@ -26,9 +26,7 @@ public class Lotto {
         Winners winners = new Winners();
 
         for (LottoGame game : games) {
-            int countOfMatch = winningNumber.countOfMatch(game);
-            boolean matchBonus = winningNumber.matchBonus(game);
-            winners.increase(Rank.valueOf(countOfMatch, matchBonus));
+            winners.increase(winningNumber.rank(game));
         }
         return winners;
     }
