@@ -64,4 +64,8 @@ public final class LottoNumber {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public final int getLottoNumber() {
+        return lottoNumber.intValue();
+    }
 }
