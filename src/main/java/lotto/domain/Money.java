@@ -18,6 +18,10 @@ public final class Money {
     return new Money(this.money / price.money);
   }
 
+  public Money sum(Money otherMoney) {
+    return null;
+  }
+
   public Money multiply(int multiplier) {
     return multiply((long) multiplier);
   }

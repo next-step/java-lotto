@@ -42,6 +42,16 @@ class MoneyTest {
     );
   }
 
+  static Stream<Arguments> sumSource() {
+    return Stream.of(
+        arguments(new Money(14000), new Money(1000), new Money(15000)),
+        arguments(new Money(1400), new Money(1000), new Money(2400)),
+        arguments(new Money(1000), new Money(1000), new Money(2000)),
+        arguments(new Money(999), new Money(1000), new Money(1999)),
+        arguments(new Money(0), new Money(1000), new Money(1000))
+    );
+  }
+
   @Test
   @DisplayName("생성")
   void create() {
@@ -59,6 +69,13 @@ class MoneyTest {
   @MethodSource("divideSource")
   void divide(Money dividend, Money divisor, Money expected) {
     assertThat(dividend.divideBy(divisor)).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @DisplayName("덧셈 테스트")
+  @MethodSource("sumSource")
+  void sum(Money money1, Money money2, Money expected) {
+    assertThat(money1.sum(money2)).isEqualTo(expected);
   }
 
   @ParameterizedTest

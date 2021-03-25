@@ -22,10 +22,12 @@ public final class WinningStatistics {
   }
 
   public Money totalMoney() {
+    Money total = new Money(0);
     for (Entry<Rank, Long> entry : winningStatistics.entrySet()) {
-      Rank key = entry.getKey();
-      key.getMoney().multiply(entry.getValue());
+      Rank rank = entry.getKey();
+      Money rankTotal = rank.getMoney().multiply(entry.getValue());
+      total.sum(rankTotal);
     }
-    return null;
+    return total;
   }
 }
