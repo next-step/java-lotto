@@ -9,8 +9,8 @@ public class WinningNumber {
     private final List<Integer> winningNumbers;
 
     public WinningNumber(String winningNumber) {
-        String[] test = winningNumber.split(DEFAULT_REGEX);
-        winningNumbers = Arrays.stream(test)
+        String[] splitWinnigNumbers = winningNumber.split(DEFAULT_REGEX);
+        winningNumbers = Arrays.stream(splitWinnigNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
