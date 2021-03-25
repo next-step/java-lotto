@@ -1,40 +1,46 @@
 package lotto.domain;
 
-public enum LottoRank {
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000),
-    MISS(0);
+import java.util.Arrays;
 
+public enum LottoRank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
+
+    private final int matchingCount;
     private final int winningPrize;
 
-    LottoRank(int winningPrize) {
+    LottoRank(int matchingCount, int winningPrize) {
+        this.matchingCount = matchingCount;
         this.winningPrize = winningPrize;
+    }
+
+    public int matchingCount() {
+        return matchingCount;
     }
 
     public int winningPrize() {
         return winningPrize;
     }
 
-    // TODO: 리팩토링 필요
-    public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == 6) {
-            return FIRST;
+    public static LottoRank valueOf(int matchingCount, boolean sameBonusNumber) {
+        if (matchingCount == SECOND.matchingCount) {
+            return secondOrThird(sameBonusNumber);
         }
-        if (countOfMatch == 5) {
-            if (matchBonus) {
-                return SECOND;
-            }
-            return THIRD;
+
+        return Arrays.stream(values())
+                .filter(e -> e.matchingCount == matchingCount)
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    private static LottoRank secondOrThird(boolean sameBonusNumber) {
+        if (sameBonusNumber) {
+            return SECOND;
         }
-        if (countOfMatch == 4) {
-            return FOURTH;
-        }
-        if (countOfMatch == 3) {
-            return FIFTH;
-        }
-        return MISS;
+        return THIRD;
     }
 }
