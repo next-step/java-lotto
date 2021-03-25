@@ -25,10 +25,6 @@ public class LottoQuantity {
         if (buyAmount < manualAmount) {
             throw new IllegalArgumentException(MANUAL_QUANTITY_AMOUNT_ERROR);
         }
-
-        if (manualQuatity < 0) {
-            throw new IllegalArgumentException(MANUAL_MINUS_QUANTITY_ERROR);
-        }
     }
 
     private void isBuyAmountValid(int buyAmount) {
