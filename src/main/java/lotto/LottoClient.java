@@ -26,10 +26,6 @@ public class LottoClient {
         int lottoTicketNumber = lottoPrice.lottoTicketNumber(Integer.parseInt(inputView.inputQuestion("구입금액을 입력해 주세요.")));
         inputView.print(lottoTicketNumber + "개를 구매했습니다.");
         lotto.buy(lottoTicketNumber);
-
-        for (LottoNumbers marked : lotto.lotto()) {
-            System.out.println(marked.toString());
-        }
     }
 
     private static void printWinNumbers(InputView inputView, Map<Integer, Integer> winNumbers) {

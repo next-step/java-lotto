@@ -15,17 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨자테스트")
 class WinningNumbersTest {
-    @Test
-    void isWinner() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(lottoNumbers);
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
-        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbers.toString());
-        assertThat(winNumbers.get(3)).isEqualTo(1);
-    }
-
     LottoNumbers lottoNumbers1;
     LottoNumbers lottoNumbers2;
     LottoNumbers lottoNumbers3;
@@ -40,6 +29,33 @@ class WinningNumbersTest {
     LottoNumbers lottoNumbers12;
     LottoNumbers lottoNumbers13;
     LottoNumbers lottoNumbers14;
+
+    @Test
+    @DisplayName("우승번호찾기")
+    void isWinner() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
+        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
+        System.out.println(winNumbers.toString());
+        assertThat(winNumbers.get(3)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("보너스번호 포함한 우승번호찾기")
+    void isWinnerWithBonusNumber() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
+        winningNumbers.addBonusNumber(new int[]{7,9});
+        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
+        System.out.println(winNumbers.toString());
+        assertThat(winNumbers.get(3)).isEqualTo(0);
+        assertThat(winNumbers.get(4)).isEqualTo(0);
+        assertThat(winNumbers.get(5)).isEqualTo(1);
+    }
 
     @Test
     @DisplayName("당첨번호의 갯수를 찾는다.")
