@@ -7,16 +7,15 @@ import lotto.domain.Money;
 
 public class MergedGenerator implements LottoGenerator {
 
-  private List<LottoGenerator> generators;
+  private final List<LottoGenerator> generators;
 
-  public MergedGenerator(List<LottoGenerator> generators) {
+  public MergedGenerator(final List<LottoGenerator> generators) {
     this.generators = generators;
   }
 
   @Override
   public List<Lotto> generatedLottoList() {
     List<Lotto> lottos = new ArrayList<>();
-
     for (LottoGenerator lottoGenerator : generators) {
       lottos.addAll(lottoGenerator.generatedLottoList());
     }

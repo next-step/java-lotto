@@ -20,7 +20,7 @@ public enum LottoRank {
   private static final int MIN_VALUE = 0;
   private static final int MAX_VALUE = 6;
 
-  LottoRank(int count, int price, boolean isBonus) {
+  LottoRank(final int count,final int price,final boolean isBonus) {
     this.count = count;
     this.price = price;
     this.isBonus = isBonus;

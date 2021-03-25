@@ -10,7 +10,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
   private final List<List<Integer>> input;
 
-  public ManualLottoGenerator(List<List<Integer>> input) {
+  public ManualLottoGenerator(final List<List<Integer>> input) {
     this.input = input;
   }
 

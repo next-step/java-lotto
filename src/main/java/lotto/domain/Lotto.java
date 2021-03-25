@@ -12,7 +12,7 @@ public class Lotto {
   private static final int IS_NOT_MATCHED = 0;
   private static final String INVALID_LOTTO_COUNT = "6개 번호로 이루어진 로또가 아닙니다.";
 
-  public Lotto(List<LottoNumber> lottoNumbers) {
+  public Lotto(final List<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
 

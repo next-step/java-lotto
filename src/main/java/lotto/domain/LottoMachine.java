@@ -10,14 +10,21 @@ import lotto.domain.generator.MergedGenerator;
 
 public class LottoMachine {
 
-  private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
   private List<Lotto> lottos;
   private Money money;
+  private static final String DUPLICATED_LOTTO = "중복된 로또는 발급할 수 없습니다.";
 
   public LottoMachine(Money money) {
+    this(money,new ArrayList<>());
+  }
+
+  public LottoMachine(int money) {
+    this(new Money(money),new ArrayList<>());
+  }
+
+  public LottoMachine(Money money, List<Lotto> lottos) {
     this.money = money;
-    this.lottos = new ArrayList<>();
-    validateDuplicated(lottos);
+    this.lottos = lottos;
   }
 
   public void makeLottos(List<List<Integer>> manualLottos) {
@@ -27,6 +34,7 @@ public class LottoMachine {
     generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
     LottoGenerator lottoGenerator = new MergedGenerator(generators);
     this.lottos = lottoGenerator.generatedLottoList();
+    validateDuplicated(this.lottos);
   }
 
   public LottoMachine(List<Lotto> lottos) {
