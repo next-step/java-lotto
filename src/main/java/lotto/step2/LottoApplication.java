@@ -17,5 +17,7 @@ public class LottoApplication {
 
         WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers().split(", "));
         LottoBoard lottoBoard = lottoGame.calculateWinnings(winningNumber);
+
+        ResultView.printLottoResult(lottoAmount, lottoBoard);
     }
 }

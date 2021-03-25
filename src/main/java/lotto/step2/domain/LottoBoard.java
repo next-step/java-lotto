@@ -2,6 +2,7 @@ package lotto.step2.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LottoBoard {
 
@@ -13,6 +14,10 @@ public class LottoBoard {
 
     public static LottoBoard of(final List<Long> boards) {
         return new LottoBoard(boards);
+    }
+
+    public Stream<Long> stream() {
+        return boards.stream();
     }
 
     @Override

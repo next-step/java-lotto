@@ -1,8 +1,13 @@
 package lotto.step2.view;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoBoard;
 import lotto.step2.domain.Lottos;
+import lotto.step2.domain.enums.LottoBoardMatcher;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -33,5 +38,18 @@ public class ResultView {
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
                 + END_BRACKETS + NEWLINE_CHARACTER;
+    }
+
+    public static void printLottoResult(int lottoAmount, LottoBoard lottoBoard) {
+        Map<Long, Long> map = lottoBoard.stream().collect(
+                Collectors.groupingBy(Function.identity(), Collectors.counting())
+        );
+
+        for (Long key : map.keySet()) {
+            System.out.println(key + "," + map.get(key));
+        }
+
+        System.out.println("당첨 통계");
+        System.out.println("---------");
     }
 }
