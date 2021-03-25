@@ -30,7 +30,6 @@ public class WinningLotto {
         for (LottoBall lottoBall : lotto.getBalls()) {
             count += oneIfNumberMatch(lottoBall);
         }
-        String tmp = "";
         return count;
     }
 
