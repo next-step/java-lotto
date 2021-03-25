@@ -2,7 +2,9 @@ package step2.domain;
 
 import step2.exception.InvalidNumberInputException;
 
-public class InputMoney {
+import java.util.Objects;
+
+public final class InputMoney {
     private static final int ZERO = 0;
 
     private final Integer inputMoney;
@@ -24,6 +26,19 @@ public class InputMoney {
 
     public final int getInputMoney() {
         return inputMoney.intValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InputMoney that = (InputMoney) o;
+        return Objects.equals(inputMoney, that.inputMoney);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(inputMoney);
     }
 
 }
