@@ -4,24 +4,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("당첨 결과")
-public class LottoRankTest {
+class LottoRankTest {
 
     private LottoWinners winners;
 
     @BeforeEach
-    public void setUp() {
-        winners = LottoMachine.createWinners("1,2,3,4,5,6", 45);
+    void setUp() {
+        winners = new LottoWinners(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(45));
     }
 
     @Test
     @DisplayName("로또 꽝 생성 확인")
-    public void lottoRankMissTest() throws Exception {
+    void lottoRankMissTest() {
         //given
-        String inputLottoThree = "1,2,42,43,44,45";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
+        List<Integer> inputLottoZero = Arrays.asList(1,2,42,43,44,45);
+        LottoTicket ticket = new LottoTicket(inputLottoZero);
 
         //when
 
@@ -31,10 +34,10 @@ public class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 5등 생성 확인")
-    public void lottoRankFiveTest() throws Exception {
+    void lottoRankFiveTest() {
         //given
-        String inputLottoThree = "1,2,3,43,44,45";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoThree);
+        List<Integer> inputLottoThree = Arrays.asList(1,2,3,43,44,45);
+        LottoTicket ticket = new LottoTicket(inputLottoThree);
 
         //when
 
@@ -44,10 +47,10 @@ public class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 4등 생성 확인")
-    public void lottoRankFourTest() throws Exception {
+    void lottoRankFourTest() {
         //given
-        String inputLottoFour = "1,2,3,4,44,45";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFour);
+        List<Integer> inputLottoFour = Arrays.asList(1,2,3,4,44,45);
+        LottoTicket ticket = new LottoTicket(inputLottoFour);
 
         //when
 
@@ -58,10 +61,10 @@ public class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 3등 생성 확인")
-    public void lottoRankThirdTest() throws Exception {
+    void lottoRankThirdTest() {
         //given
-        String inputLottoFive = "1,2,3,4,5,44";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
+        List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,44);
+        LottoTicket ticket = new LottoTicket(inputLottoFive);
 
         //when
 
@@ -73,10 +76,10 @@ public class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 2등(보너스볼) 생성 확인")
-    public void lottoRankTwoTest() throws Exception {
+    void lottoRankTwoTest() {
         //given
-        String inputLottoFive = "1,2,3,4,5,45";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
+        List<Integer> inputLottoFive = Arrays.asList(1,2,3,4,5,45);
+        LottoTicket ticket = new LottoTicket(inputLottoFive);
 
         //when
 
@@ -87,10 +90,10 @@ public class LottoRankTest {
 
     @Test
     @DisplayName("로또 당첨 1등 생성 확인")
-    public void lottoRankOneTest() throws Exception {
+    void lottoRankOneTest() {
         //given
-        String inputLottoSix = "1,2,3,4,5,6";
-        LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoSix);
+        List<Integer> inputLottoSix = Arrays.asList(1,2,3,4,5,6);
+        LottoTicket ticket = new LottoTicket(inputLottoSix);
 
         //when
 
