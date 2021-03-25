@@ -55,7 +55,6 @@ public class Splitter {
     if (m.find()) {
       String customDelimiter = m.group(1);
       tokens = m.group(2).split(customDelimiter);
-      // 덧셈 구현
       return tokens;
     }
 
