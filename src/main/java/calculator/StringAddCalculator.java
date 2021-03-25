@@ -34,13 +34,17 @@ public class StringAddCalculator {
         int number = 0;
 
         for (String token : tokens) {
-            if (isNumber(token) == false || isMinusNumber(token)) {
-                throw new RuntimeException();
-            }
+            checkToken(token);
             number = number + Integer.parseInt(token);
         }
 
         return number;
+    }
+
+    private static void checkToken(String token) {
+        if (isNumber(token) == false || isMinusNumber(token)) {
+            throw new RuntimeException();
+        }
     }
 
     private static boolean isMinusNumber(String number) {
