@@ -19,7 +19,8 @@ public class LottoController {
         ResultView.print(lottoTickets);
 
         final String winnerNumbersInput = InputView.winnerNumbers();
-        final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(StringUtil.splitCommas(winnerNumbersInput));
+        final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(
+                StringUtil.splitCommas(winnerNumbersInput), "");
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
 
         ResultView.print(lottoStatistics, payment);

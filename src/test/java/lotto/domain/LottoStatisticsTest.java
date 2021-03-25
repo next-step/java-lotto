@@ -17,14 +17,7 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        ));
+        final LottoTicket winningTicket = LottoTicketFactory.createAutoLottoTicket();
         lottoDiscriminator = new LottoDiscriminator(winningTicket);
         lottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
                 .limit(20)

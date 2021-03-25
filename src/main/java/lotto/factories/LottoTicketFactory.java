@@ -17,21 +17,26 @@ public class LottoTicketFactory {
     public static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(allLottoNumbers);
 
-        return new LottoTicket(
-                allLottoNumbers.stream()
-                        .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
-                        .sorted()
-                        .collect(Collectors.toList())
-        );
+        final List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
+                .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
+        final LottoNumber bonusNumber = allLottoNumbers.stream()
+                .filter(e -> !lottoNumbers.contains(e))
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
+
+        return new LottoTicket(lottoNumbers, bonusNumber);
     }
 
-    public static LottoTicket from(String[] lottoNumbers) {
+    public static LottoTicket from(String[] lottoNumbers, String bonusNumber) {
         return new LottoTicket(
                 Arrays.stream(lottoNumbers)
                         .map(String::trim)
                         .mapToInt(Integer::parseInt)
                         .mapToObj(LottoNumber::of)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                LottoNumber.of(Integer.parseInt(bonusNumber))
         );
     }
 }

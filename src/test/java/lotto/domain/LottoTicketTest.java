@@ -70,14 +70,15 @@ public class LottoTicketTest {
     public void matchingLottoNumbersCount() {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumbers, bonusNumber);
 
-        final LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(23),
-                LottoNumber.of(3),
-                LottoNumber.of(42),
-                LottoNumber.of(5),
-                LottoNumber.of(19)
-        ));
+        final LottoTicket winningTicket = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(23),
+                        LottoNumber.of(3),
+                        LottoNumber.of(42),
+                        LottoNumber.of(5),
+                        LottoNumber.of(19)
+                ), bonusNumber);
 
         assertThat(lottoTicket.matchingLottoNumbersCount(winningTicket)).isEqualTo(3);
     }

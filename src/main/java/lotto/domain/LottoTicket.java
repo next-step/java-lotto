@@ -12,10 +12,6 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this(lottoNumbers, LottoNumber.of(45));
-    }
-
     public LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
