@@ -9,8 +9,8 @@ public enum Statistics {
     SIX(6, 2_000_000_000);
 
     private static final String NOT_EXIST_VALUE = "존재하지 않는 값입니다.";
-    private int matchCount;
-    private long money;
+    private final int matchCount;
+    private final long money;
 
     Statistics(int matchCount, long money) {
         this.matchCount = matchCount;
@@ -30,9 +30,5 @@ public enum Statistics {
 
     public long getMoney() {
         return money;
-    }
-
-    public static double getYield(int buyAmount, long winningAmount) {
-        return winningAmount / (double) buyAmount;
     }
 }

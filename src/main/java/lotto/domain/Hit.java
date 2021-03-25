@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Hit {
-    private final Map<Statistics, Integer> hit;
     private static final int ZERO = 0;
     private static final int MINIMUN_MATCH_COUNT = 3;
+    private final Map<Statistics, Integer> hit;
 
     public Hit() {
         this.hit = new HashMap<>();

@@ -2,8 +2,8 @@ package lotto.controller;
 
 import lotto.domain.Hit;
 import lotto.domain.Lottos;
-import lotto.domain.Statistics;
 import lotto.domain.WinningNumber;
+import lotto.domain.Yield;
 import lotto.dto.ResponseLottosDTO;
 import lotto.dto.ResponsePurchaseCountDTO;
 import lotto.dto.ResponseWinningDTO;
@@ -11,7 +11,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private static int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
+    private static final int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
 
     public void start() {
         int purchaseAmount = InputView.inputPurchaseAmount();
@@ -37,8 +37,8 @@ public class LottoController {
 
     private ResponseWinningDTO exportResponseWinningDTO(Lottos lottos, int purchaseAmount) {
         WinningNumber winningNumber = new WinningNumber(InputView.inputLastWeekWinningNumber());
-        Hit hit = winningNumber.getWinnerStatistics(lottos);
-        double yield = Statistics.getYield(purchaseAmount, hit.getTotalWinningAmount());
+        Hit hit = lottos.getWinnerStatistics(winningNumber);
+        double yield = Yield.getYield(purchaseAmount, hit.getTotalWinningAmount());
 
         return new ResponseWinningDTO(hit.getHit(), yield);
     }

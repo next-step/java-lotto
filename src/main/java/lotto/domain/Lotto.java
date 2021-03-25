@@ -6,13 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_FIRST_NUMBER = 1;
+    private static final int LOTTO_LAST_NUMBER = 45;
     private final List<Integer> lotto;
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lotto = lottoNumbers;
     }
 
-    public static List<Integer> extractionLottoNumber() {
+    public static Lotto of() {
+        return new Lotto(extractionLottoNumber());
+    }
+
+    private static List<Integer> extractionLottoNumber() {
         List<Integer> referenceNumbers = createReferenceNumbers();
 
         Collections.shuffle(referenceNumbers);
@@ -23,12 +29,18 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> createReferenceNumbers() {
+    private static List<Integer> createReferenceNumbers() {
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LOTTO_FIRST_NUMBER; i <= LOTTO_LAST_NUMBER; i++) {
             randomNumbers.add(i);
         }
         return randomNumbers;
+    }
+
+    public int getMatchCount(WinningNumber winningNumber) {
+        return (int) lotto.stream()
+                .filter(winningNumber::contains)
+                .count();
     }
 
     public List<Integer> getLottoNumbers() {
