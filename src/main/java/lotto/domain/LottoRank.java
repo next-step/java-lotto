@@ -8,6 +8,10 @@ public enum LottoRank {
     FIFTH,
     MISS;
 
+    public int winningPrize() {
+        return 0;
+    }
+
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch == 6) {
             return FIRST;
