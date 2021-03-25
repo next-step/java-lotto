@@ -7,7 +7,14 @@ public class LottoTicket {
     private final List<Lotto> lottoList;
 
     public LottoTicket(int count) {
+        validate(count);
         this.lottoList = generateLottoList(count);
+    }
+
+    private void validate(int count) {
+        if(count < 1) {
+            throw new IllegalArgumentException("최소 1개 이상의 구매수량을 입력해 주세요");
+        }
     }
 
     private List<Lotto> generateLottoList(int count) {
