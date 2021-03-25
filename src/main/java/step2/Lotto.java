@@ -13,7 +13,7 @@ public class Lotto {
         this.number = number;
     }
 
-    public LottoNumber getLottoNumber(){
+    public LottoNumber lotto(){
         return number;
     }
 

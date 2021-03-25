@@ -9,13 +9,6 @@ public class LottoNumber {
 
     private int number;
 
-    public LottoNumber(){
-        this(new RandomLottoNumberGenerator().generator());
-    }
-
-    public LottoNumber(LottoNumberGenerator generator){
-        this(generator.generator());
-    }
     public LottoNumber(int number) {
         check(number);
         this.number = number;
@@ -27,7 +20,9 @@ public class LottoNumber {
         }
     }
 
-
+    public int getNumber(){
+        return number;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
