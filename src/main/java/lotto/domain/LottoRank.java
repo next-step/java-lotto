@@ -8,9 +8,9 @@ public enum LottoRank {
     ;
 
     private final int matchCount;
-    private final int winAmount;
+    private final long winAmount;
 
-    LottoRank(int matchCount, int winAmount) {
+    LottoRank(int matchCount, long winAmount) {
         this.matchCount = matchCount;
         this.winAmount = winAmount;
     }
