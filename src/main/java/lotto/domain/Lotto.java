@@ -13,6 +13,6 @@ public class Lotto {
     }
 
     public int[] getLottoNumbers() {
-        return lottoNumberList.stream().mapToInt(LottoNumber::getLottoNumber).toArray();
+        return lottoNumberList.stream().mapToInt(LottoNumber::getLottoNumber).sorted().toArray();
     }
 }
