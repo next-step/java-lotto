@@ -17,6 +17,7 @@ public class InputView {
     }
 
     public static String winningNumbers() {
+        System.out.println();
         System.out.println(WINNING_NUMBERS);
         String winningNumbers = scanner.nextLine().trim();
         PreConditionUtil.checkNullOrEmpty(winningNumbers);
