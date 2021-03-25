@@ -8,12 +8,12 @@ import java.util.Set;
 
 public class LottoMachine {
 
-  public List<LottoNumber> lottoNumbers;
+  public static final List<LottoNumber> LOTTO_NUMBERS;
 
-  public LottoMachine() {
-    lottoNumbers = new ArrayList<>();
+  static {
+    LOTTO_NUMBERS = new ArrayList<>();
     for (int i = LottoNumber.START_NUMBER; i <= LottoNumber.END_NUMBER; i++) {
-      lottoNumbers.add(new LottoNumber(i));
+      LOTTO_NUMBERS.add(new LottoNumber(i));
     }
   }
 
@@ -26,10 +26,10 @@ public class LottoMachine {
   }
 
   public Lotto generateAuto() {
-    Collections.shuffle(lottoNumbers);
+    Collections.shuffle(LOTTO_NUMBERS);
     Set<LottoNumber> numbers = new HashSet<>();
     for (int i = 0; i < 6; i++) {
-      numbers.add(lottoNumbers.get(i));
+      numbers.add(LOTTO_NUMBERS.get(i));
     }
     return new Lotto(numbers);
   }

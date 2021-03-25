@@ -9,6 +9,8 @@ import lotto.view.ResultView;
 
 public class LottoMain {
 
+  public static final LottoMachine LOTTO_MACHINE = new LottoMachine();
+
   public static void main(String[] args) {
     Money money = new Money(InputView.inputMoney());
     Lottos lottos = buyLottos(money);
@@ -16,20 +18,14 @@ public class LottoMain {
 
     List<Integer> winnerNumber = InputView.inputWinnerNumber();
     int bonusNumber = InputView.inputBonusNumber();
-    checkResult(lottos, winnerNumber, bonusNumber);
+    lottos.checkResult(winnerNumber, bonusNumber);
     ResultView.printResult(lottos);
     ResultView.printIncomePercent(lottos.calculateIncomePercent());
   }
 
-  private static void checkResult(Lottos lottos, List<Integer> winnerNumber, int bonusNumber) {
-    lottos.checkResult(winnerNumber, bonusNumber);
-  }
-
   private static Lottos buyLottos(Money money) {
     int count = money.getBuyableCount();
-    LottoMachine lottoMachine = new LottoMachine();
-    Lottos lottos = lottoMachine.generateAuto(count);
-    return lottos;
+    return LOTTO_MACHINE.generateAuto(count);
   }
 
 

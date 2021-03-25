@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class Money {
 
+  public static final int LOTTO_PRICE = 1000;
   private int money;
 
   public Money(int money) {
@@ -17,7 +18,7 @@ public class Money {
 
   public int getBuyableCount() {
     checkPurchaseLotto(money);
-    return money / 1000;
+    return money / LOTTO_PRICE;
   }
 
   private void checkPurchaseLotto(int money) {

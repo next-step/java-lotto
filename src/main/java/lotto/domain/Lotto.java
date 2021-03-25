@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Lotto {
 
+  private static final int LOTTO_COUNT = 6;
   private Set<LottoNumber> ticket;
   private LottoResult result;
 
@@ -23,7 +24,7 @@ public class Lotto {
 
   public Lotto(Set<LottoNumber> ticket) {
     this.ticket = ticket;
-    if (ticket.size() != 6) {
+    if (ticket.size() != LOTTO_COUNT) {
       throw new IllegalArgumentException("size is not 6");
     }
   }
@@ -33,12 +34,17 @@ public class Lotto {
   }
 
   public void checkResult(Lotto winner, LottoNumber bonusNumber) {
+    int containsCount = getContainsCount(winner);
+    boolean containsBonusNumber = ticket.contains(bonusNumber);
+    this.result = LottoResult.findResult(containsCount, containsBonusNumber);
+  }
+
+  private int getContainsCount(Lotto winner) {
     int containsCount = 0;
     for (LottoNumber lottoNumber : ticket) {
       containsCount = checkContains(winner, containsCount, lottoNumber);
     }
-    boolean containsBonusNumber = ticket.contains(bonusNumber);
-    this.result = LottoResult.findResult(containsCount, containsBonusNumber);
+    return containsCount;
   }
 
   private int checkContains(Lotto winner, int cotainsCount, LottoNumber lottoNumber) {

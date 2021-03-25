@@ -24,7 +24,7 @@ class LottoMachineTest {
     //then
     assertAll(
         () -> assertEquals(lotto.getTicket().size(), 6),
-        () -> assertTrue(lottoMachine.lottoNumbers.containsAll(lotto.getTicket()))
+        () -> assertTrue(LottoMachine.LOTTO_NUMBERS.containsAll(lotto.getTicket()))
     );
   }
 
@@ -52,7 +52,6 @@ class LottoMachineTest {
   @DisplayName("입력된 갯수만큼 로또를 생성한다.")
   void generateAutoLottos(int count) {
     //given //when
-
     Lottos lottos = lottoMachine.generateAuto(count);
     //then
     assertEquals(lottos.size(), count);
