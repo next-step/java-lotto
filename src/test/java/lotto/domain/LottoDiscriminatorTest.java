@@ -31,7 +31,9 @@ public class LottoDiscriminatorTest {
     }
 
     @Test
-    public void matchingCount() {
+    public void lottoRank() {
+        final LottoRank expected = LottoRank.FIFTH;
+
         final LottoTicket winningTicket = new LottoTicket(
                 Arrays.asList(
                         LottoNumber.of(1),
@@ -44,7 +46,8 @@ public class LottoDiscriminatorTest {
                 LottoNumber.of(7)
         );
         final LottoDiscriminator lottoDiscriminator = new LottoDiscriminator(winningTicket);
+        final LottoRank result = lottoDiscriminator.lottoRank(lottoTicket);
 
-        assertThat(lottoDiscriminator.matchingCount(lottoTicket)).isEqualTo(3);
+        assertThat(result).isEqualTo(expected);
     }
 }

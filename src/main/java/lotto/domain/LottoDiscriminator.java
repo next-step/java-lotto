@@ -25,4 +25,8 @@ public class LottoDiscriminator {
     public int hashCode() {
         return Objects.hash(winningTicket);
     }
+
+    public LottoRank lottoRank(LottoTicket lottoTicket) {
+        return LottoRank.FIRST;
+    }
 }
