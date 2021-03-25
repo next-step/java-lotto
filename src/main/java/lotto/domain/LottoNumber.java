@@ -1,15 +1,24 @@
 package lotto.domain;
 
-public class Number implements Comparable<Number> {
+import lotto.constant.Constant;
 
-  private int number;
+public class LottoNumber implements Comparable<LottoNumber> {
 
-  public Number(int number) {
+  private final int number;
+
+  public LottoNumber(int number) {
+    validateRange(number);
     this.number = number;
   }
 
   public int getLottoNumber() {
     return number;
+  }
+
+  public void validateRange(int number) {
+    if (number > Constant.MAX_NUM || number < Constant.MIN_NUM) {
+      throw new IllegalArgumentException("로또 번호는 1에서 45 사이 값만 가합니다.");
+    }
   }
 
   @Override
@@ -21,7 +30,7 @@ public class Number implements Comparable<Number> {
       return false;
     }
 
-    Number that = (Number) o;
+    LottoNumber that = (LottoNumber) o;
 
     return number == that.number;
   }
@@ -32,7 +41,7 @@ public class Number implements Comparable<Number> {
   }
 
   @Override
-  public int compareTo(Number o) {
+  public int compareTo(LottoNumber o) {
     if (this.number < o.number) {
       return -1;
     }

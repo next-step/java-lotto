@@ -7,19 +7,23 @@ import java.util.stream.IntStream;
 import lotto.constant.Constant;
 
 public class LottoNumberStore {
+  private final List<LottoNumber> baseNumbers;
 
-  public List<Number> createBaseNumbers() {
+  public LottoNumberStore() {
+    baseNumbers = createBaseNumbers();
+  }
+
+  public List<LottoNumber> createBaseNumbers() {
     return IntStream.rangeClosed(Constant.MIN_NUM, Constant.MAX_NUM)
-        .mapToObj(Number::new)
+        .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
   }
 
-  private void shuffleBaseNumbers(List<Number> basicNumbers) {
+  private void shuffleBaseNumbers(List<LottoNumber> basicNumbers) {
     Collections.shuffle(basicNumbers);
   }
 
-  public List<Number> createLottoNumbers() {
-    List<Number> baseNumbers = createBaseNumbers();
+  public List<LottoNumber> createLottoNumbers() {
     shuffleBaseNumbers(baseNumbers);
 
     return baseNumbers.stream().limit(6).sorted().collect(Collectors.toList());
