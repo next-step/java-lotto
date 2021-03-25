@@ -12,7 +12,7 @@ public class Lotto {
         this.lottoNumberList = Arrays.stream(lottoNumbers).mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public Lotto(List<LottoNumber> lottoNumberList) {
-        this.lottoNumberList = lottoNumberList;
+    public int[] getLottoNumbers() {
+        return lottoNumberList.stream().mapToInt(LottoNumber::getLottoNumber).toArray();
     }
 }
