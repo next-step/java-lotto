@@ -21,11 +21,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public ResultGroup getResult(Lotto winingLotto) {
+    public ResultGroup getResult(WinningLotto winingLotto) {
         ResultGroup resultGroup = new ResultGroup();
         for (Lotto lotto : lottos) {
             int howMatch = lotto.howMatch(winingLotto);
-            resultGroup.update(ResultMap.of(howMatch));
+            boolean matchBonus = lotto.matchBonus(winingLotto);
+            resultGroup.update(ResultMap.of(howMatch, matchBonus));
         }
         return resultGroup;
     }

@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.controller.LottoMachine;
-import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,7 +14,7 @@ public class LottoApplication {
         lottoMachine.purchaseLotto(money);
         ResultView.showCount(lottoMachine.getPurchaseLottoCount());
         ResultView.showLottos(lottoMachine.getLottos());
-        Lotto winningLotto = InputView.getWinningLotto();
+        WinningLotto winningLotto = InputView.getWinningLotto();
         ResultView.showResult(lottoMachine.getResult(winningLotto), money);
     }
 

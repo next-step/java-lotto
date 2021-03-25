@@ -30,18 +30,18 @@ public class Lotto {
                 .collect(Collectors.joining(","));
     }
 
-    public int howMatch(Lotto winingLotto) {
+    public int howMatch(WinningLotto winingLotto) {
         return (int) winingLotto.of()
                 .stream()
                 .filter(this::isIn)
                 .count();
     }
 
-    private boolean isIn(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public boolean matchBonus(WinningLotto winningLotto) {
+        return this.lottoNumbers.contains(winningLotto.getBonusNumber());
     }
 
-    private List<LottoNumber> of() {
-        return lottoNumbers;
+    private boolean isIn(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

@@ -19,7 +19,7 @@ public class WinningLottoTest {
             lottoNumberList.add(new LottoNumber(i));
         }
         WinningLotto winningLotto = new WinningLotto(lottoNumberList, new LottoNumber(7));
-        assertThat(winningLotto.numOfSize()).isEqualTo(7);
+        assertThat(winningLotto.numOfSize()).isEqualTo(6);
     }
 
     @DisplayName("우승 로또의 보너스 볼은 우승 번호와 일치하면 예외를 발생시킨다")
