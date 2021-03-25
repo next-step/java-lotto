@@ -19,6 +19,10 @@ public class LottoTicket {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
 
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -59,6 +63,6 @@ public class LottoTicket {
     }
 
     public boolean sameBonusNumber(LottoTicket targetLottoTicket) {
-        return true;
+        return bonusNumber == targetLottoTicket.bonusNumber;
     }
 }
