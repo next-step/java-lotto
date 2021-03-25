@@ -19,7 +19,15 @@ public enum Hit {
     this.prize = prize;
   }
 
-  public static Hit getHit(HitNumbers hitNumbers, LottoNumbers numbers, int hitNumber) {
+  public static int countHit(HitNumbers hitNumbers, LottoNumbers lottoNumbers) {
+    return (int) lottoNumbers.numbers()
+        .stream()
+        .filter(hitNumbers::contains).count();
+  }
+
+  public static Hit getHit(HitNumbers hitNumbers, LottoNumbers numbers) {
+    int hitNumber = countHit(hitNumbers, numbers);
+
     if (hitNumber == Constant.HIT_OF_BONUS) {
       return getBonusHit(hitNumbers.containsBonus(numbers));
     }

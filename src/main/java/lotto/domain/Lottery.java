@@ -9,16 +9,9 @@ public class Lottery {
     this.hitNumbers = hitNumbers;
   }
 
-  public int countHit(LottoNumbers lottoNumbers) {
-    return (int) lottoNumbers.numbers()
-        .stream()
-        .filter(hitNumbers::contains).count();
-  }
-
   public void draw(Lottos lottos) {
     for (LottoNumbers numbers : lottos.getLottos()) {
-      int hit = countHit(numbers);
-      result.update(Hit.getHit(hitNumbers, numbers, hit));
+      result.update(Hit.getHit(hitNumbers, numbers));
     }
   }
 
