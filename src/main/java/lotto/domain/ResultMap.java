@@ -6,9 +6,10 @@ import java.util.List;
 public enum ResultMap {
 
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOUR(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOUR(4, 50_000),
+    FIVE(3, 5_000),
     ETC(0, 0);
 
     private int howMatch;
@@ -19,15 +20,19 @@ public enum ResultMap {
         this.prize = prize;
     }
 
-    public static ResultMap of(int howMatch) {
-        return Arrays.stream(values())
-                .filter(resultMap -> resultMap.howMatch == howMatch)
+    public static ResultMap of(int howMatch, boolean matchBonus) {
+        ResultMap resultMap = Arrays.stream(values())
+                .filter(result -> result.howMatch == howMatch)
                 .findFirst()
                 .orElse(ETC);
+        if (resultMap == SECOND && !matchBonus) {
+            return THIRD;
+        }
+        return resultMap;
     }
 
     public static List<ResultMap> all() {
-        return Arrays.asList(FOUR, THIRD, SECOND, FIRST);
+        return Arrays.asList(FIVE, FOUR, THIRD, SECOND, FIRST);
     }
 
     public String showResult() {
