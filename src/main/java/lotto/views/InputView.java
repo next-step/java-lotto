@@ -51,7 +51,7 @@ public class InputView {
         System.out.println(MANUAL_BUY_NUMBERS);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < quantity; i++) {
-            stringBuilder.append(value());
+            stringBuilder.append(value()).append("\n");
         }
         return stringBuilder.toString();
     }
