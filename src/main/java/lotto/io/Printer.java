@@ -36,8 +36,14 @@ public final class Printer {
     printMessageAndCountOfRank(winningStatistics, SIX);
 
     long winnings = winningStatistics.totalMoney().toInteger();
+    double yield = (double) winnings / userMoney.toInteger();
+
     System.out.println("당첨금: " + winnings + "원");
-    System.out.printf("총 수익률은 %.2f입니다.%n", (double) winnings / userMoney.toInteger());
+    System.out.printf("총 수익률은 %.2f입니다.", yield);
+    if (yield < 1) {
+      System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+    System.out.println();
   }
 
   private static void printMessageAndCountOfRank(WinningStatistics winningStatistics, Rank rank) {
