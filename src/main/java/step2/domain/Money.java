@@ -1,16 +1,14 @@
 package step2.domain;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
 
 public class Money {
     private final int amount;
 
     public Money(int amount) {
         if (!valid(amount)) {
-            Logger logger = Logger.getGlobal();
-            logger.log(Level.SEVERE, "negative money is not allowed");
-            throw new IllegalArgumentException("negative money is not allowed");
+            throw new CustomException(ErrorCode.NEGATIVE_MONEY_AMOUNT);
         }
         this.amount = amount;
     }

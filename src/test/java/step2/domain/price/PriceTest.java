@@ -1,10 +1,9 @@
 package step2.domain.price;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PriceTest {
 
@@ -19,8 +18,10 @@ class PriceTest {
     @DisplayName("당첨 등수와 상금을 알 수 있다")
     void determineNumberMatch(int matchCount, boolean matchBonus, String expectedRank, int expectedPrize) {
         Price price = Price.price(matchCount, matchBonus);
-        assertThat(price.getRank()).isEqualTo(expectedRank);
-        assertThat(price.getPrize()).isEqualTo(expectedPrize);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(price.getRank()).isEqualTo(expectedRank);
+        softAssertions.assertThat(price.getPrize()).isEqualTo(expectedPrize);
+        softAssertions.assertAll();
     }
 
 }

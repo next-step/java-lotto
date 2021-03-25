@@ -8,6 +8,9 @@ import step2.domain.lotto.WinningLotto;
 import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoListDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoService {
 
     private final LottoMachine lottoMachine = new LottoMachine();
@@ -15,9 +18,10 @@ public class LottoService {
 
     private LottoList lottoList;
 
-    public LottoListDTO buyLotto(int rawAmount) {
-        Money money = new Money(rawAmount);
-        lottoList = lottoMachine.buyAutoLotto(money);
+    public LottoListDTO buyLotto(List<String> rawLottoList, int autoLottoCount) {
+        LottoList manualLottoList = lottoMachine.buyManualLotto(rawLottoList);
+        LottoList autoLottoList = lottoMachine.buyAutoLotto(autoLottoCount);
+        lottoList = new LottoList(manualLottoList, autoLottoList);
         return lottoList.dto();
     }
 
@@ -26,4 +30,22 @@ public class LottoService {
         return judge.calculateResult(lottoList, winningLotto);
     }
 
+    public void verifyLottoCount(int rawAmount, int rawManualLottoCount) {
+        Money amount = new Money(rawAmount);
+        lottoMachine.verifyCapacity(amount, rawManualLottoCount);
+    }
+
+    public void verifyLottoList(List<String> rawManualLottoList) {
+        LottoList.lottoList(rawManualLottoList);
+    }
+
+    public int change(int rawAmount, int rawManualLottoCount) {
+        Money amount = new Money(rawAmount);
+        return lottoMachine.change(amount, rawManualLottoCount);
+    }
+
+    public int capacity(int amount) {
+        Money change = new Money(amount);
+        return lottoMachine.normalLottoCapacity(change);
+    }
 }

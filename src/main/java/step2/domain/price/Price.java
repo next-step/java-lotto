@@ -9,8 +9,8 @@ public enum Price {
     SECOND("SECOND", 30000000),
     FIRST("FIRST", 2000000000);
 
-    private String rank;
-    private int prize;
+    private final String rank;
+    private final int prize;
 
     Price(String rank, int price) {
         this.rank = rank;

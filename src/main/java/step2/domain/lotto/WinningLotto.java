@@ -1,85 +1,69 @@
 package step2.domain.lotto;
 
-import java.util.Arrays;
+import step2.domain.exception.CustomException;
+import step2.domain.exception.ErrorCode;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
-public class WinningLotto extends NormalLotto {
-    private static final int COUNT = 7;
+public class WinningLotto {
+    private static final int COUNT = NormalLotto.COUNT;
+    private static final int COUNT_INCLUDING_BONUS = COUNT + 1;
 
-    private final List<Integer> numbers;
-    private final int bonusNumber;
-
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if (!valid(numbers, bonusNumber)) {
-            Logger logger = Logger.getGlobal();
-            logger.log(Level.SEVERE, "winning lotto numbers are invalid");
-            throw new IllegalArgumentException("winning lotto numbers are invalid");
-        }
-        this.numbers = numbers;
-        this.bonusNumber = bonusNumber;
-    }
+    private final List<LottoBall> lottoBalls;
+    private final LottoBall bonusBall;
 
     public WinningLotto(String rawNumbers, int bonusNumber) {
-        this(Arrays.stream(rawNumbers.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .sorted()
-                .collect(Collectors.toList()), bonusNumber);
+        this(LottoBall.balls(rawNumbers), new LottoBall(bonusNumber));
+    }
+
+    private WinningLotto(List<LottoBall> numbers, LottoBall bonusNumber) {
+        if (!valid(numbers, bonusNumber)) {
+            throw new CustomException(ErrorCode.INVALID_WINNING_LOTTO_NUMBERS);
+        }
+        this.lottoBalls = numbers;
+        this.bonusBall = bonusNumber;
     }
 
     public int matchCount(NormalLotto lotto) {
         int count = 0;
-        for (Integer number : lotto.getNumbers()) {
-            count += oneIfNumberMatch(number);
+        for (LottoBall lottoBall : lotto.getBalls()) {
+            count += oneIfNumberMatch(lottoBall);
         }
         return count;
     }
 
     public boolean matchBonus(NormalLotto lotto) {
         boolean match = false;
-        for (Integer number : lotto.getNumbers()) {
-            match |= bonus(number);
+        for (LottoBall lottoBall : lotto.getBalls()) {
+            match |= bonus(lottoBall);
         }
         return match;
     }
 
-    private boolean bonus(int number) {
-        return this.bonusNumber == number;
+    private boolean bonus(LottoBall lottoBall) {
+        return this.bonusBall.equals(lottoBall);
     }
 
-    private int oneIfNumberMatch(int number) {
-        if (this.numbers.contains(number)) {
+    private int oneIfNumberMatch(LottoBall lottoBall) {
+        if (this.lottoBalls.contains(lottoBall)) {
             return 1;
         }
         return 0;
     }
 
-    public boolean valid(List<Integer> numbers, int bonusNumber) {
-        return sizeSix(numbers) && inBoundary(numbers, bonusNumber) && unique(numbers, bonusNumber);
+    private static boolean valid(List<LottoBall> lottoBalls, LottoBall bonusBall) {
+        return sizeSix(lottoBalls) && unique(lottoBalls, bonusBall);
     }
 
-    private boolean sizeSix(List<Integer> numbers) {
-        return numbers.size() == NormalLotto.COUNT;
+    private static boolean sizeSix(List<LottoBall> lottoBalls) {
+        return lottoBalls.size() == COUNT;
     }
 
-    private boolean unique(List<Integer> numbers, int bonusNumber) {
-        HashSet<Integer> hashSet = new HashSet<>(numbers);
-        hashSet.add(bonusNumber);
-        return hashSet.size() == COUNT;
+    private static boolean unique(List<LottoBall> numbers, LottoBall bonusBall) {
+        HashSet<LottoBall> hashSet = new HashSet<>(numbers);
+        hashSet.add(bonusBall);
+        return hashSet.size() == COUNT_INCLUDING_BONUS;
     }
 
-    private boolean inBoundary(List<Integer> numbers, int bonusNumber) {
-        boolean validFlag = true;
-        for (Integer number : numbers) {
-            validFlag &= (number >= 1 && number <= UPPER_BOUND);
-        }
-        if (bonusNumber < 1 || bonusNumber > UPPER_BOUND) {
-            validFlag = false;
-        }
-        return validFlag;
-    }
 }

@@ -7,6 +7,8 @@ import step2.dto.JudgeResponseDTO;
 import step2.dto.LottoListDTO;
 import step2.service.LottoService;
 
+import java.util.List;
+
 public class LottoController {
 
     private final InputView inputView = new InputView();
@@ -15,17 +17,40 @@ public class LottoController {
 
     private final LottoService lottoService = new LottoService();
 
-    public void buyManualLotto() {
-        int rawAmount = inputView.getMoneyInput();
-        LottoListDTO lottoList = lottoService.buyLotto(rawAmount);
+    public void buyLotto() {
+        int amount = inputView.moneyInput();
+        int manualLottoCount = manualLottoCount(amount);
+        int change = lottoService.change(amount, manualLottoCount);
+        List<String> rawManualLottoList = rawManualLottoList(manualLottoCount);
+        int autoLottoCount = lottoService.capacity(change);
 
-        runtimeView.printLottoAmount(lottoList);
+        LottoListDTO lottoList = lottoService.buyLotto(rawManualLottoList, autoLottoCount);
+        showLottoList(manualLottoCount, autoLottoCount, lottoList);
+        JudgeResponseDTO result = result();
+        resultView.printResult(result);
+    }
+
+    private int manualLottoCount(int amount) {
+        int manualLottoCount = inputView.manualLottoCount();
+        lottoService.verifyLottoCount(amount, manualLottoCount);
+        return manualLottoCount;
+    }
+
+    private List<String> rawManualLottoList(int manualLottoCount) {
+        List<String> rawManualLottoList = inputView.manualLottoList(manualLottoCount);
+        lottoService.verifyLottoList(rawManualLottoList);
+        return rawManualLottoList;
+    }
+
+    private JudgeResponseDTO result() {
+        String rawNumberString = inputView.lastWeekWinningLottoNumbers();
+        int rawBonusNumber = inputView.lastWeekBonusLottoNumber();
+        return lottoService.getLottoResult(rawNumberString, rawBonusNumber);
+    }
+
+    private void showLottoList(int manualLottoCount, int autoLottoCount, LottoListDTO lottoList) {
+        runtimeView.printLottoAmount(manualLottoCount, autoLottoCount);
         runtimeView.printLottoNumbers(lottoList);
-
-        String rawNumberString = inputView.getLastWeekWiningLottoNumbers();
-        int rawBonusNumber = inputView.getLastWeekBonusLottoNumber();
-        JudgeResponseDTO judgeResponse = lottoService.getLottoResult(rawNumberString, rawBonusNumber);
-        resultView.printResult(judgeResponse);
     }
 
 }
