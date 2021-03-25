@@ -13,7 +13,7 @@ public class LottoNumbers {
 
     public LottoNumbers() {
         this.lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_LIMIT_NUMBER; i++) {
+        for (int i = 1; i < LOTTO_LIMIT_NUMBER; i++) {
             lottoNumbers.add(i);
         }
         this.lottoPrice = new LottoPrice();

@@ -17,6 +17,7 @@ public class LottoClient {
         input(inputView, lottoPrice, lotto);
 
         WinningNumbers winningNumbers = new WinningNumbers(inputView.inputQuestion("지난 주 당첨 번호를 입력해 주세요.").replaceAll(" ", "").split(","));
+        winningNumbers.addBonusNumbers(inputView.inputQuestion("보너스 볼을 입력해 주세요.").replaceAll(" ", "").split(","));
         Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lotto);
 
         printWinNumbers(inputView, winNumbers);
@@ -26,6 +27,10 @@ public class LottoClient {
         int lottoTicketNumber = lottoPrice.lottoTicketNumber(Integer.parseInt(inputView.inputQuestion("구입금액을 입력해 주세요.")));
         inputView.print(lottoTicketNumber + "개를 구매했습니다.");
         lotto.buy(lottoTicketNumber);
+
+        for (LottoNumbers marked : lotto.lotto()) {
+            System.out.println(marked.toString());
+        }
     }
 
     private static void printWinNumbers(InputView inputView, Map<Integer, Integer> winNumbers) {

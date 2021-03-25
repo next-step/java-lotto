@@ -52,4 +52,14 @@ public class WinningNumbers {
     public void addBonusNumbers(int[] bonusNumbers) {
         this.winNumbers = IntStream.concat(IntStream.of(this.winNumbers), IntStream.of(bonusNumbers)).toArray();
     }
+
+    public void addBonusNumbers(String[] bonusNumbers) {
+        this.winNumbers = IntStream.concat(
+                IntStream.of(this.winNumbers),
+                IntStream.of(
+                        Stream.of(bonusNumbers)
+                                .mapToInt(Integer::parseInt)
+                                .toArray())
+        ).toArray();
+    }
 }
