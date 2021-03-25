@@ -39,7 +39,7 @@ class LottosTest {
   void create() {
     // given
     Money money = new Money(14000);
-    int expectedSize = money.divideBy(PRICE).toInteger();
+    long expectedSize = money.divideBy(PRICE).toInteger();
 
     // when
     Lottos lottos = new Lottos(money);

@@ -19,4 +19,8 @@ public final class WinningStatistics {
   public long countOf(Rank rank) {
     return winningStatistics.getOrDefault(rank, 0L);
   }
+
+  public Money totalMoney() {
+    return null;
+  }
 }

@@ -10,9 +10,9 @@ public final class Lottos {
   private final List<Lotto> lottos;
 
   public Lottos(Money money) {
-    int size = money.divideBy(PRICE).toInteger();
+    long size = money.divideBy(PRICE).toInteger();
 
-    lottos = new ArrayList<>(size);
+    lottos = new ArrayList<>((int) size);
     for (int i = 0; i < size; i++) {
       lottos.add(new Lotto());
     }

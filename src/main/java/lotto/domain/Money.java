@@ -4,9 +4,13 @@ import java.util.Objects;
 
 public final class Money {
 
-  private final int money;
+  private final long money;
 
   public Money(int money) {
+    this((long) money);
+  }
+
+  public Money(long money) {
     this.money = money;
   }
 
@@ -14,7 +18,7 @@ public final class Money {
     return new Money(this.money / price.money);
   }
 
-  public int toInteger() {
+  public long toInteger() {
     return money;
   }
 

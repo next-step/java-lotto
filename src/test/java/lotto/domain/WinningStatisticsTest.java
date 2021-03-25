@@ -33,15 +33,17 @@ class WinningStatisticsTest {
             1L,
             1L,
             1L,
-            3L
+            3L,
+            new Money(6000205000L)
         )
     );
   }
 
   @ParameterizedTest
-  @DisplayName("로또목록과 당첨번호를 받아서 등수별로 개수를 계산한다.")
+  @DisplayName("로또목록과 당첨번호를 받아서 등수별로 개수를 계산하고, 합계금액도 반환할 수 있다.")
   @MethodSource("winningStatisticsSource")
-  void create(Lottos lottos, Lotto winningLotto, long threeCount, long fourCount, long fiveCount, long sixCount) {
+  void create(Lottos lottos, Lotto winningLotto, long threeCount, long fourCount, long fiveCount, long sixCount,
+      Money total) {
     // given
     // when
     WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
@@ -51,7 +53,8 @@ class WinningStatisticsTest {
         () -> assertThat(winningStatistics.countOf(THREE)).isEqualTo(threeCount),
         () -> assertThat(winningStatistics.countOf(FOUR)).isEqualTo(fourCount),
         () -> assertThat(winningStatistics.countOf(FIVE)).isEqualTo(fiveCount),
-        () -> assertThat(winningStatistics.countOf(SIX)).isEqualTo(sixCount)
+        () -> assertThat(winningStatistics.countOf(SIX)).isEqualTo(sixCount),
+        () -> assertThat(winningStatistics.totalMoney()).isEqualTo(total)
     );
   }
 }
