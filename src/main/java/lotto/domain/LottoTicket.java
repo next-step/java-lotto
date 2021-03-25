@@ -4,6 +4,8 @@ import java.util.*;
 
 public class LottoTicket {
 
+    private static final String NUMBER_DELIMITER = ",";
+
     private final List<Lotto> lottoList;
 
     public LottoTicket(int count) {
@@ -11,9 +13,20 @@ public class LottoTicket {
         this.lottoList = generateLottoList(count);
     }
 
+    public LottoTicket(List<String> lottoNumberList) {
+        validate(lottoNumberList);
+        this.lottoList = generateLottoList(lottoNumberList);
+    }
+
     private void validate(int count) {
         if(count < 1) {
             throw new IllegalArgumentException("최소 1개 이상의 구매수량을 입력해 주세요");
+        }
+    }
+
+    private void validate(List<String> lottoNumberList) {
+        if(lottoNumberList==null || lottoNumberList.size()==0) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -25,6 +38,13 @@ public class LottoTicket {
         return lottoList;
     }
 
+    private List<Lotto> generateLottoList(List<String> lottoNumberList) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (String lottoNumbers : lottoNumberList) {
+            lottoList.add(new Lotto(generateLottoNumbers(lottoNumbers)));
+        }
+        return lottoList;
+    }
 
     private int[] generateLottoNumbers() {
         Random random = new Random();
@@ -33,6 +53,10 @@ public class LottoTicket {
             lottoNumberSet.add(random.nextInt(LottoConstant.MAX_LOTTO_NUMBER-1) + LottoConstant.MIN_LOTTO_NUMBER);
         }
         return lottoNumberSet.stream().mapToInt(a->a).toArray();
+    }
+
+    private int[] generateLottoNumbers(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(NUMBER_DELIMITER)).mapToInt(Integer::new).toArray();
     }
 
     public List<Lotto> getLottoList() {
