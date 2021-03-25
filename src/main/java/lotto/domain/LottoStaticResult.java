@@ -13,7 +13,11 @@ public class LottoStaticResult {
   private static final int BENEFIT_CRETERION = 1;
 
   public LottoStaticResult() {
-    this.lottoStaticResult = new HashMap<>();
+    this(new HashMap<>());
+  }
+
+  public LottoStaticResult(Map<LottoRank,Integer> lottoStaticResult) {
+    this.lottoStaticResult = lottoStaticResult;
     init();
   }
 
