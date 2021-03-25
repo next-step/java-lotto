@@ -65,4 +65,18 @@ class LottoNumberTest {
         assertThat(firstLottoNumber == secondLottoNumber).isTrue();
     }
 
+    @DisplayName("LottoNumber 인스턴스가 소유한 값을 반환하는지에 대한 테스트")
+    @Test
+    void 반환() {
+        // given
+        int expected = 1;
+
+        // when
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(expected);
+        int actual = firstLottoNumber.getLottoNumber();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

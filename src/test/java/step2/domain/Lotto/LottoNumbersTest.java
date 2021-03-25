@@ -28,9 +28,9 @@ class LottoNumbersTest {
     void 생성() {
 
         // when
-        LottoNumber lottoNumber = new LottoNumber(lottoNumberList);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
         // then
-        assertThat(lottoNumber).isNotNull();
+        assertThat(lottoNumbers).isNotNull();
     }
 }
