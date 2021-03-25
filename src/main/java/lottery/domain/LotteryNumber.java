@@ -20,7 +20,11 @@ public class LotteryNumber {
 
     private void validate(int number) {
         if(!checkRange(number)) {
-            throw new LotteryNumberOutOfRangeException();
+            throw new IllegalArgumentException(
+                String.format(
+                    "로또 번호는 %d ~ %d 사이의 번호여야 합니다.",
+                    LotteryNumber.MINIMUM_VALUE, LotteryNumber.MAXIMUM_VALUE)
+            );
         }
     }
 

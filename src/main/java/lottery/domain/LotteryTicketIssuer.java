@@ -42,7 +42,7 @@ public class LotteryTicketIssuer {
         int totalQuantity = getTotalQuantity(order.getMoney());
 
         if (totalQuantity < manualLotteryQuantity) {
-            throw new ManualLotteryQuantityExceedException();
+            throw new IllegalArgumentException("수동으로 구매할 로또 개수가 발급할 로또 개수보다 많습니다.");
         }
     }
 

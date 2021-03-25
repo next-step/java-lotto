@@ -20,7 +20,7 @@ public class WinningLottery {
 
     private void validateDuplicates(LotteryNumbers lotteryNumbers, LotteryNumber bonusNumber) {
         if (lotteryNumbers.contain(bonusNumber)) {
-            throw new DuplicatedBonusNumberException();
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 겹치지 않는 번호여야 합니다.");
         }
     }
 

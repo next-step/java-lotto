@@ -27,7 +27,7 @@ public class LotteryNumbers {
 
     private void validateLotteryNumberSize(List<LotteryNumber> numbers) {
         if (numbers.size() != LOTTERY_SIZE) {
-            throw new InvalidLotteryException();
+            throw new IllegalArgumentException("로또 하나는 여섯 개의 번호로 구성되어야 합니다.");
         }
     }
 
@@ -35,7 +35,7 @@ public class LotteryNumbers {
         Set<LotteryNumber> uniqueNumbers = new HashSet<>(numbers);
 
         if (uniqueNumbers.size() != numbers.size()) {
-            throw new InvalidLotteryException();
+            throw new IllegalArgumentException("중복된 숫자는 허용되지 않습니다.");
         }
     }
 
