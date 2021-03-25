@@ -1,5 +1,8 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Collections;
+import lotto.constant.Constant;
 import lotto.domain.Amount;
 import lotto.domain.Hit;
 import lotto.domain.Lottery;
@@ -36,9 +39,19 @@ public class ResultView {
 
   private static String showLotteryResult(Result result) {
     StringBuilder sb = new StringBuilder();
-    for (Hit hit : Hit.all()) {
-      sb.append(String.format("%s %d개\n", hit.showHitResult(), result.getResult(hit)));
-    }
+
+    Arrays.stream(Hit.values()).sorted(Collections.reverseOrder())
+        .filter(hit -> hit.hitNumber() != 0)
+        .map(hit -> String.format("%s %d개\n", showHitResult(hit), result.getResult(hit)))
+        .forEach(sb::append);
+
     return sb.toString();
+  }
+
+  private static String showHitResult(Hit hit) {
+    if (hit.prize() == Constant.BONUS_PRIZE) {
+      return String.format("%d개 일치, 보너스 볼 일치(%d원)-", hit.hitNumber(), hit.prize());
+    }
+    return String.format("%d개 일치 (%d원)-", hit.hitNumber(), hit.prize());
   }
 }

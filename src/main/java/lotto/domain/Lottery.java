@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.Constant;
-
 public class Lottery {
 
   private final HitNumbers hitNumbers;
@@ -20,15 +18,8 @@ public class Lottery {
   public void draw(Lottos lottos) {
     for (LottoNumbers numbers : lottos.getLottos()) {
       int hit = countHit(numbers);
-      result.update(getHit(numbers, hit));
+      result.update(Hit.getHit(hitNumbers, numbers, hit));
     }
-  }
-
-  private Hit getHit(LottoNumbers numbers, int hit) {
-    if (hit == Constant.HIT_OF_BONUS) {
-      return Hit.getBonusHit(hitNumbers.containsBonus(numbers));
-    }
-    return Hit.getHit(hit);
   }
 
   public Result getResult() {

@@ -37,7 +37,7 @@ public class Result {
 
   private double getProfit() {
     double profit = 0;
-    for (Hit hit : Hit.all()) {
+    for (Hit hit : Hit.values()) {
       profit += resultMap.get(hit) * hit.prize();
     }
     return profit;
