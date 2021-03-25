@@ -14,12 +14,12 @@ public final class Money {
     this.money = money;
   }
 
-  public Money divideBy(Money price) {
-    return new Money(this.money / price.money);
+  public Money divideBy(Money otherMoney) {
+    return new Money(this.money / otherMoney.money);
   }
 
   public Money sum(Money otherMoney) {
-    return null;
+    return new Money(this.money + otherMoney.money);
   }
 
   public Money multiply(int multiplier) {
