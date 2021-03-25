@@ -36,4 +36,19 @@ class InputMoneyTest {
 
     }
 
+    @DisplayName("InputMoney 인스턴스 유효한 값 주입후 이를 반환하는지에 대한 테스트")
+    @Test
+    void 반환() {
+        // given
+        int expected = 1;
+
+        // when
+        InputMoney inputMoney = InputMoney.valueOf(expected);
+        int actual = inputMoney.getInputMoney();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+
+    }
+
 }
