@@ -14,7 +14,6 @@ import java.util.List;
 public class LottoController {
     public void run() {
         final int payment = InputView.payment();
-
         final List<LottoTicket> lottoTickets = new LottoStore().lottoTickets(payment);
 
         ResultView.print(lottoTickets);

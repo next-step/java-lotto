@@ -5,16 +5,21 @@ import java.util.Objects;
 
 public class LottoStatistics {
     private final LottoDiscriminator lottoDiscriminator;
-    private final List<LottoTicket> lottoTickets;
+    private final LottoTickets lottoTickets;
 
     public LottoStatistics(final LottoDiscriminator lottoDiscriminator, final List<LottoTicket> lottoTickets) {
+        this(lottoDiscriminator, new LottoTickets(lottoTickets));
+    }
+
+    public LottoStatistics(final LottoDiscriminator lottoDiscriminator, final LottoTickets lottoTickets) {
         this.lottoDiscriminator = lottoDiscriminator;
         this.lottoTickets = lottoTickets;
     }
 
     public int lottoTicketsCount(LottoRank lottoRank) {
-        return (int) lottoTickets.stream()
-                .filter(e -> lottoDiscriminator.lottoRank(e) == lottoRank)
+        return (int) lottoTickets.lottoRanks(lottoDiscriminator)
+                .stream()
+                .filter(e -> e == lottoRank)
                 .count();
     }
 
