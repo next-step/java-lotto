@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber> {
 
   public static final String ILLEGAL_LOTTO_NUMBER = "유효한 로또 번호가 아닙니다.";
   public static final int MIN = 1;
@@ -36,5 +36,10 @@ public final class LottoNumber {
   @Override
   public int hashCode() {
     return Objects.hash(lottoNumber);
+  }
+
+  @Override
+  public int compareTo(LottoNumber o) {
+    return this.lottoNumber - o.lottoNumber;
   }
 }
