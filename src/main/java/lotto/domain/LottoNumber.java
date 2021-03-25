@@ -5,11 +5,13 @@ import java.util.Objects;
 public final class LottoNumber {
 
   public static final String ILLEGAL_LOTTO_NUMBER = "유효한 로또 번호가 아닙니다.";
+  public static final int MIN = 1;
+  public static final int MAX = 45;
 
   private final int lottoNumber;
 
   public LottoNumber(int lottoNumber) {
-    if (lottoNumber < 1 || lottoNumber > 45) {
+    if (lottoNumber < MIN || lottoNumber > MAX) {
       throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
     }
     this.lottoNumber = lottoNumber;
