@@ -1,52 +1,32 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    public static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final String SIZE_ERROR_MESSAGE = "로또 번호는 6개여야 합니다.";
-    private static final String DUPLICATE_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
     private static final String BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE = "보너스 번호는 다른 로또 번호와 중복될 수 없습니다.";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        validateSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
+    public LottoTicket(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         validateDuplicateBonusNumber(lottoNumbers, bonusNumber);
 
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateDuplicateBonusNumber(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+    private void validateDuplicateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    public List<LottoNumber> lottoNumbers() {
+    public LottoNumbers lottoNumbers() {
         return lottoNumbers;
     }
 
     public int matchingLottoNumbersCount(LottoTicket that) {
-        return (int) lottoNumbers.stream()
-                .filter(that.lottoNumbers::contains)
-                .count();
+        return lottoNumbers.matchingCount(that.lottoNumbers);
     }
 
     public boolean sameBonusNumber(LottoTicket that) {
@@ -58,11 +38,11 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoNumbers, bonusNumber);
     }
 }

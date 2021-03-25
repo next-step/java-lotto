@@ -1,6 +1,7 @@
 package lotto.factories;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
@@ -17,10 +18,12 @@ public class LottoTicketFactory {
     public static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(allLottoNumbers);
 
-        final List<LottoNumber> lottoNumbers = allLottoNumbers.stream()
-                .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
+        final LottoNumbers lottoNumbers = new LottoNumbers(
+                allLottoNumbers.stream()
+                        .limit(LottoNumbers.LOTTO_NUMBERS_SIZE)
+                        .sorted()
+                        .collect(Collectors.toList())
+        );
         final LottoNumber bonusNumber = allLottoNumbers.stream()
                 .filter(e -> !lottoNumbers.contains(e))
                 .findFirst()
@@ -31,11 +34,13 @@ public class LottoTicketFactory {
 
     public static LottoTicket from(String[] lottoNumbers, String bonusNumber) {
         return new LottoTicket(
-                Arrays.stream(lottoNumbers)
-                        .map(String::trim)
-                        .mapToInt(Integer::parseInt)
-                        .mapToObj(LottoNumber::of)
-                        .collect(Collectors.toList()),
+                new LottoNumbers(
+                        Arrays.stream(lottoNumbers)
+                                .map(String::trim)
+                                .mapToInt(Integer::parseInt)
+                                .mapToObj(LottoNumber::of)
+                                .collect(Collectors.toList())
+                ),
                 LottoNumber.of(Integer.parseInt(bonusNumber))
         );
     }
