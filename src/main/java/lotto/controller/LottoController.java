@@ -13,15 +13,16 @@ public class LottoController {
         int buyAmount = inputView.inputBuyAmount();
         int manualQuantity = inputView.inputManualQuantity();
 
-        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, manualQuantity);
         List<List<Integer>> inputManual = inputView.inputManualNumbers(manualQuantity);
 
         // 로또 발급
-        LottoTickets lottoTickets = LottoFactory.createLottoTickets(lottoQuantity, inputManual);
+        List<LottoTicket> autoLottoTickets = LottoFactory.createAutoLottoTickets(buyAmount, inputManual);
+        List<LottoTicket> manualLottoTickets = LottoFactory.createManualLottoTickets(inputManual);
+        LottoTickets lottoTickets = LottoFactory.joinLottoTickets(autoLottoTickets, manualLottoTickets);
 
         // 로또 번호 확인
         ResultView resultView = new ResultView(lottoTickets);
-        resultView.printLottoQuantity(lottoQuantity);
+        resultView.printLottoQuantity(manualQuantity);
         resultView.printLottoTicketInfos();
 
         // 당첨 결과 확인

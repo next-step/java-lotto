@@ -5,8 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoFactory {
+    private static final String BUY_AMOUNT_ERROR = "천원 이상 구매해주시길 바랍니다.";
+    private static final String MANUAL_QUANTITY_AMOUNT_ERROR = "구매 금액이 부족합니다.";
+    private static final int LOTTO_AMOUNT = 1000;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 46;
@@ -17,27 +21,27 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static LottoTickets createLottoTickets(LottoQuantity lottoQuantity, List<List<Integer>> inputManual) {
+    public static LottoTickets joinLottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
         List<LottoTicket> result = new ArrayList<>();
-        result.addAll(LottoFactory.createManualLottoTickets(inputManual));
-        result.addAll(LottoFactory.createAutoLottoTickets(lottoQuantity));
+        result.addAll(manualTickets);
+        result.addAll(autoTickets);
 
         return new LottoTickets(result);
     }
 
-    private static List<LottoTicket> createAutoLottoTickets(LottoQuantity lottoQuantity) {
-        List<LottoTicket> result = new ArrayList<>();
-        for (int i = 1; lottoQuantity.isUnderAutoQuantity(i); i++) {
-            result.add(createAutoLotto());
-        }
-        return result;
+    public static List<LottoTicket> createAutoLottoTickets(int buyAmount, List<List<Integer>> inputManual) {
+        isBuyAmountValid(buyAmount);
+        isManualQuantityOverValid(buyAmount, inputManual.size());
+        return Stream.generate(LottoFactory::createAutoLotto)
+                .limit(amountToAutoQuantity(buyAmount, inputManual.size()))
+                .collect(Collectors.toList());
     }
 
     private static LottoTicket createAutoLotto() {
         return new LottoTicket(lottoNumberRandom());
     }
 
-    private static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
+    public static List<LottoTicket> createManualLottoTickets(List<List<Integer>> inputManual) {
         return inputManual.stream()
                 .map(LottoFactory::createManualLotto)
                 .collect(Collectors.toList());
@@ -63,5 +67,22 @@ public class LottoFactory {
         Collections.sort(result);
 
         return result;
+    }
+
+    private static void isManualQuantityOverValid(int buyAmount, int manualQuatity) {
+        int manualAmount = manualQuatity * LOTTO_AMOUNT;
+        if (buyAmount < manualAmount) {
+            throw new IllegalArgumentException(MANUAL_QUANTITY_AMOUNT_ERROR);
+        }
+    }
+
+    private static void isBuyAmountValid(int buyAmount) {
+        if (buyAmount < LOTTO_AMOUNT) {
+            throw new IllegalArgumentException(BUY_AMOUNT_ERROR);
+        }
+    }
+
+    private static int amountToAutoQuantity(int buyAmount, int manualQuantity) {
+        return (buyAmount / LOTTO_AMOUNT) - manualQuantity;
     }
 }
