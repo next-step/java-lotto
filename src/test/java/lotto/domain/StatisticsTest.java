@@ -24,10 +24,4 @@ class StatisticsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("존재하지 않는 값입니다.");
     }
-
-    @Test
-    @DisplayName("수익률 구하기")
-    void getYieldTest() {
-        assertThat(Statistics.getYield(3000, 10000L)).isEqualTo(10000L / (double) 3000);
-    }
 }
