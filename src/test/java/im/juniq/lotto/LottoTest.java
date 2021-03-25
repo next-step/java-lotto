@@ -22,4 +22,12 @@ class LottoTest {
 
 		assertThat(distinctNumberSize).isEqualTo(lotto.numbers().size());
 	}
+
+	@Test
+	void equals() {
+		Lotto lottoA = new Lotto(new NoShuffleStrategy());
+		Lotto lottoB = new Lotto(new NoShuffleStrategy());
+
+		assertThat(lottoA).isEqualToComparingFieldByField(lottoB);
+	}
 }
