@@ -30,10 +30,10 @@ class WinningStatisticsTest {
                 )
             ),
             new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}),
-            1,
-            1,
-            1,
-            3
+            1L,
+            1L,
+            1L,
+            3L
         )
     );
   }
@@ -41,7 +41,7 @@ class WinningStatisticsTest {
   @ParameterizedTest
   @DisplayName("로또목록과 당첨번호를 받아서 등수별로 개수를 계산한다.")
   @MethodSource("winningStatisticsSource")
-  void create(Lottos lottos, Lotto winningLotto, int threeCount, int fourCount, int fiveCount, int sixCount) {
+  void create(Lottos lottos, Lotto winningLotto, long threeCount, long fourCount, long fiveCount, long sixCount) {
     // given
     // when
     WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
