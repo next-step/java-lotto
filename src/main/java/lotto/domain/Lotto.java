@@ -12,8 +12,8 @@ public final class Lotto {
     lottoNumbers = new LottoNumbers(new RandomLottoNumberCreationStrategy());
   }
 
-  public Lotto(String[] winningNumbers) {
-    lottoNumbers = new LottoNumbers(winningNumbers);
+  public Lotto(String[] numbers) {
+    lottoNumbers = new LottoNumbers(numbers);
   }
 
   public int lottoNumbersSize() {
