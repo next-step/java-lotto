@@ -13,8 +13,8 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public LottoNumber numbers() {
+    public LottoGame numbers() {
         Collections.shuffle(numbers, new Random());
-        return new LottoNumber(new ArrayList<>(numbers.subList(0, LottoRule.countOfSelection())));
+        return new LottoGame(new ArrayList<>(numbers.subList(0, LottoRule.countOfSelection())));
     }
 }

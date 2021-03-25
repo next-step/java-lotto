@@ -1,5 +1,5 @@
 package lotto.domain;
 
 public interface LottoNumberGenerator {
-    LottoNumber numbers();
+    LottoGame numbers();
 }

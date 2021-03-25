@@ -1,9 +1,8 @@
 package LottoTest;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoGame;
 import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,6 +17,6 @@ public class WinningNumberTest {
     void Given_InvalidBonusNumber_When_New_Then_Exception() {
         int duplicatedBonusNumber = 6;
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy((() -> new WinningNumber(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)), duplicatedBonusNumber)));
+                .isThrownBy((() -> new WinningNumber(new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6)), duplicatedBonusNumber)));
     }
 }

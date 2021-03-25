@@ -14,7 +14,7 @@ public class LottoControl {
         Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator());
         View.print(lotto.games());
 
-        LottoNumber typedWinningNumber = new LottoNumber(View.winningNumber(scanner));
+        LottoGame typedWinningNumber = new LottoGame(View.winningNumber(scanner));
         int typedBonusNumber = View.bonusNumber(scanner);
         WinningNumber winningNumber = new WinningNumber(typedWinningNumber, typedBonusNumber);
 

@@ -1,7 +1,6 @@
 package LottoTest;
 
 import lotto.domain.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +26,7 @@ public class LottoTest {
         lotto = new Lotto(MONEY, lottoNumberGenerator);
 
         //when
-        List<LottoNumber> games = lotto.games();
+        List<LottoGame> games = lotto.games();
 
         //then
         assertThat(games.size()).isEqualTo(NUMBER_OF_GAMES);
@@ -45,7 +44,7 @@ public class LottoTest {
     @MethodSource("provideResultTestInput")
     void When_Result(List<Integer> givenWinningNumber, int bonusNumber, Rank expectedRank) {
         //given
-        WinningNumber winningNumber = new WinningNumber(new LottoNumber(givenWinningNumber), bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(new LottoGame(givenWinningNumber), bonusNumber);
         lotto = new Lotto(MONEY, lottoNumberGenerator);
 
         //when

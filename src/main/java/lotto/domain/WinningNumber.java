@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public class WinningNumber {
-    private LottoNumber winningNumber;
+    private LottoGame winningNumber;
     private int bonusNumber;
 
-    public WinningNumber(LottoNumber winningNumber, int bonusNumber) {
+    public WinningNumber(LottoGame winningNumber, int bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
@@ -16,11 +16,11 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean matchBonus(LottoNumber lottoNumber) {
-        return lottoNumber.contains(bonusNumber);
+    public boolean matchBonus(LottoGame lottoGame) {
+        return lottoGame.contains(bonusNumber);
     }
 
-    public int countOfMatch(LottoNumber lottoNumber) {
-        return winningNumber.countOfMatch(lottoNumber);
+    public int countOfMatch(LottoGame lottoGame) {
+        return winningNumber.countOfMatch(lottoGame);
     }
 }

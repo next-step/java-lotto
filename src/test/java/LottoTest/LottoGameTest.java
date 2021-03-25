@@ -1,11 +1,7 @@
 package LottoTest;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberGenerator;
-import lotto.domain.Rank;
+import lotto.domain.LottoGame;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,23 +14,23 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-public class LottoNumberTest {
+public class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"1:true", "0:false", "6:true", "7:false"}, delimiter = ':')
     @DisplayName("contains 테스트")
     void When_Contains(int number, boolean expected) {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoNumber.contains(number)).isEqualTo(expected);
+        assertThat(lottoGame.contains(number)).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @MethodSource("provideCountOfMatchTestInput")
     @DisplayName("countOfMatch 테스트")
     void When_countOfMatch(List<Integer> given, int expected) {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        int countOfMatch = lottoNumber.countOfMatch(new LottoNumber(given));
+        int countOfMatch = lottoGame.countOfMatch(new LottoGame(given));
 
         assertThat(countOfMatch).isEqualTo(expected);
     }
@@ -56,7 +52,7 @@ public class LottoNumberTest {
     @DisplayName("잘못된 로또 번호면 Exception 테스트")
     void Given_InvalidNumbers_When_New_Then_Exception(List<Integer> invalidNumbers) {
         assertThatExceptionOfType(IllegalArgumentException.class).
-                isThrownBy(() -> new LottoNumber(invalidNumbers));
+                isThrownBy(() -> new LottoGame(invalidNumbers));
     }
 
     private static Stream<Arguments> provideInvalidInput() {

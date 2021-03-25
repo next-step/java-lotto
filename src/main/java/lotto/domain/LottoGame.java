@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoGame {
     List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
+    public LottoGame(List<Integer> numbers) {
         if (numbers.stream().max(Integer::compare).get() > LottoRule.max()) {
             throw new IllegalArgumentException();
         }
@@ -23,10 +23,10 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public int countOfMatch(LottoNumber lottoNumber) {
+    public int countOfMatch(LottoGame lottoGame) {
         return (int) this.numbers
                 .stream()
-                .filter(lottoNumber::contains)
+                .filter(lottoGame::contains)
                 .count();
     }
 
@@ -42,7 +42,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoGame that = (LottoGame) o;
         return Objects.equals(numbers, that.numbers);
     }
 
