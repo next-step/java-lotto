@@ -26,4 +26,12 @@ public enum Rank {
         .findAny()
         .orElse(Rank.NONE);
   }
+
+  public Money getMoney() {
+    return money;
+  }
+
+  public String getMessage() {
+    return message;
+  }
 }

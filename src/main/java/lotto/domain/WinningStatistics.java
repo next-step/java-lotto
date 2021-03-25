@@ -17,6 +17,6 @@ public final class WinningStatistics {
   }
 
   public long countOf(Rank rank) {
-    return winningStatistics.get(rank);
+    return winningStatistics.getOrDefault(rank, 0L);
   }
 }
