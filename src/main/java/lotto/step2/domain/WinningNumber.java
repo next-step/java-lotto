@@ -24,9 +24,9 @@ public class WinningNumber {
         );
     }
 
-    public int getLottoMatchCount(Lotto lotto) {
+    public long getLottoMatchCount(Lotto lotto) {
         List<Integer> list = lotto.stream().collect(Collectors.toList());
-        return (int) winningNumbers.stream()
+        return winningNumbers.stream()
                 .filter(i -> list.contains(i))
                 .count();
     }

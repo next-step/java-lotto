@@ -1,5 +1,6 @@
 package lotto.step2;
 
+import lotto.step2.domain.LottoBoard;
 import lotto.step2.domain.LottoGame;
 import lotto.step2.domain.WinningNumber;
 import lotto.step2.view.InputView;
@@ -15,5 +16,6 @@ public class LottoApplication {
         ResultView.printLottos(lottoGame.getLottos());
 
         WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers().split(", "));
+        LottoBoard lottoBoard = lottoGame.calculateWinnings(winningNumber);
     }
 }

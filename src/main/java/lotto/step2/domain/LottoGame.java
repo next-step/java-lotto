@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoGame {
 
     private final static int LOTTO_START_INCLUSIVE_VALUE = 0;
-    private Lottos lottos;
+    private final Lottos lottos;
 
     private LottoGame(final int lottoAmount) {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
@@ -26,5 +26,12 @@ public class LottoGame {
 
     public Lottos getLottos() {
         return lottos;
+    }
+
+    public LottoBoard calculateWinnings(WinningNumber winningNumber) {
+        return LottoBoard.of(lottos.stream()
+                .map(lotto -> winningNumber.getLottoMatchCount(lotto))
+                .collect(Collectors.toList())
+        );
     }
 }
