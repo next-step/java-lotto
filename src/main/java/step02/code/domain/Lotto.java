@@ -1,12 +1,10 @@
 package step02.code.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.assertj.core.util.Arrays;
 
 public class Lotto {
   private static final int LOTTO_SIZE = 6;
@@ -43,6 +41,10 @@ public class Lotto {
     lotto.addAll(this.lotto);
     lotto.removeAll(winningNumber);
     return LOTTO_SIZE - lotto.size();
+  }
+
+  public List<Integer> lotto() {
+    return lotto;
   }
   
 }
