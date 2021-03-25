@@ -12,7 +12,7 @@ public final class Printer {
   }
 
   public static void printLottos(Lottos userLottos) {
-    // 번호 나열하는게 있어야겠다.
+    userLottos.print();
     System.out.println();
   }
 

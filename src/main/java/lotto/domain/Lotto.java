@@ -19,4 +19,8 @@ public final class Lotto {
   public int compare(Lotto winningLotto) {
     return lottoNumbers.compare(winningLotto.lottoNumbers);
   }
+
+  public void printLottoNumbers() {
+    lottoNumbers.print();
+  }
 }

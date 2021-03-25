@@ -21,4 +21,10 @@ public final class Lottos {
   public int count() {
     return lottos.size();
   }
+
+  public void print() {
+    for (Lotto lotto : lottos) {
+      lotto.printLottoNumbers();
+    }
+  }
 }

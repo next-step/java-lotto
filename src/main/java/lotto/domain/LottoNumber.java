@@ -15,6 +15,10 @@ public final class LottoNumber {
     this.lottoNumber = lottoNumber;
   }
 
+  public String toStringValue() {
+    return String.valueOf(lottoNumber);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

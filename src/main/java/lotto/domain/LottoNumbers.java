@@ -45,4 +45,10 @@ public final class LottoNumbers {
     }
     return count;
   }
+
+  public void print() {
+    System.out.println(lottoNumbers.stream()
+        .map(LottoNumber::toStringValue)
+        .collect(Collectors.joining(", ", "[", "]")));
+  }
 }
