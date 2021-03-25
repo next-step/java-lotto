@@ -20,7 +20,7 @@ public final class LottoManager {
       Printer.printLottos(userLottos);
 
       Lotto winningLotto = inputView.inputLastWinningNumber();
-      Printer.printWinningStatistics(userLottos, winningLotto);
+      Printer.printWinningStatistics(userLottos, winningLotto, userMoney);
     }
   }
 }
