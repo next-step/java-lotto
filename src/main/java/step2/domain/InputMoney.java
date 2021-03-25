@@ -16,8 +16,8 @@ public final class InputMoney {
         this.inputMoney = Integer.valueOf(inputMoney);
     }
 
-    public static final InputMoney valueOf(int inputValue) {
-        return new InputMoney(inputValue);
+    public static final InputMoney valueOf(int inputMoney) {
+        return new InputMoney(inputMoney);
     }
 
     private final boolean isOutOfBounds(int inputMoney) {
@@ -25,7 +25,7 @@ public final class InputMoney {
     }
 
     public final int getInputMoney() {
-        return inputMoney.intValue();
+        return inputMoney;
     }
 
     @Override
