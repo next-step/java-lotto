@@ -17,8 +17,8 @@ public class lottoTests {
     @Test
     public void test1() {
         Lotto lotto = new Lotto();
-        System.out.println(lotto.getLottoNumber());
-        assertEquals(lotto.getLottoNumber().size(), 6);
+        System.out.println(lotto.getInteger());
+        assertEquals(lotto.getInteger().size(), 6);
     }
 
     @DisplayName("돈에 따라 로또 생성하는 개수 테스트")
@@ -33,7 +33,7 @@ public class lottoTests {
     public void test4() {
         Lotto lotto = new Lotto("2,1,3,5,4,6");
 
-        assertEquals(lotto.getLottoNumber(),lotto.lastWinner("1,2,3,4,5,6"));
+        assertEquals(lotto.getInteger(),lotto.lastWinner("1,2,3,4,5,6"));
     }
 
     @DisplayName("지난 당첨번호와 현재 번호가 맞는지 테스트")
