@@ -3,6 +3,8 @@
  * */
 package lotto.ui;
 
+import lotto.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,12 +30,13 @@ public class InputView {
         return result;
     }
 
-    public static List<Integer> inputWinning() {
+    public static List<LottoNumber> inputWinning() {
         System.out.println(WINNING_MESSAGE_BEFORE);
         String[] result = sc.nextLine().split(DELIMITER);
 
         return Arrays.stream(result)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

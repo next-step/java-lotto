@@ -25,9 +25,9 @@ public class LottosTest {
     void setUp() {
         Random random = new Random();
         for (int i = 0; i < LOTTO_LIST_SIZE; i++) {
-            List<Integer> numbers = new ArrayList<>();
+            List<LottoNumber> numbers = new ArrayList<>();
             for (int j = 0; j < LOTTO_SIZE; j++) {
-                numbers.add(1 + random.nextInt(LOTTO_BOUND));
+                numbers.add(new LottoNumber(1 + random.nextInt(LOTTO_BOUND)));
             }
             lottoList.add(new Lotto(numbers));
         }
@@ -49,13 +49,17 @@ public class LottosTest {
     @DisplayName("당첨번호를 확인해서 당첨 개수만큼 match 수를 늘리는지 확인하는 테스트")
     void checkWinningTest() {
         //given
-        List<Integer> winningNumbers = new ArrayList<>();
+        List<Integer> testNumbers = new ArrayList<>();
         for (int i = 1; i <= WINNING_SIZE; i++) {
-            winningNumbers.add(i);
+            testNumbers.add(i);
         }
+        List<LottoNumber> winningNumbers = testNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
         Winning winning = new Winning(winningNumbers);
         Winning predictWinning = new Winning(winningNumbers, new int[]{0, 0, 0, 0, 1, 1, 1});
-        Lottos testLottos = makeWinningLottos(winningNumbers);
+        Lottos testLottos = makeWinningLottos(testNumbers);
 
         //when
         testLottos.checkWinning(winning);
@@ -68,12 +72,11 @@ public class LottosTest {
     /*
      * 임의의 6개, 5개, 4개 당첨 로또를 만드는 메소드
      * */
-    Lottos makeWinningLottos(List<Integer> winningNumbers) {
+    Lottos makeWinningLottos(List<Integer> testNumbers) {
         List<Lotto> testLottoList = new ArrayList<>();
 
-        testLottoList.add(new Lotto(winningNumbers));   //6개 당첨
-        for (int i = 1; i <= 2; i++) {   //5개, 4개 당첨
-            testLottoList.add(new Lotto(changeNumbers(winningNumbers, i)));
+        for (int i = 0; i <= 2; i++) {   //6개, 5개, 4개 당첨
+            testLottoList.add(new Lotto(changeNumbers(testNumbers, i)));
         }
 
         return new Lottos(testLottoList);
@@ -82,9 +85,9 @@ public class LottosTest {
     /*
     * 번호를 하나씩 늘려주는 메소드 (로또번호 변경용으로 이용)
     * */
-    List<Integer> changeNumbers(List<Integer> numbers, int index) {
+    List<LottoNumber> changeNumbers(List<Integer> numbers, int index) {
         return numbers.stream().map(num -> {
-            return num + index;
+            return new LottoNumber(num + index);
         }).collect(Collectors.toList());
     }
 }

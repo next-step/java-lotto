@@ -7,19 +7,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
     private static int LOTTO_SIZE = 6;
     private Lotto lotto;
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     @BeforeEach
     void setUp() { //given
         numbers = new ArrayList<>();
-        for (int i = 1; i <= LOTTO_SIZE; i++) {
-            numbers.add(i);
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= LOTTO_SIZE; i++) {
+            numbers.add(new LottoNumber(i));
         }
         lotto = new Lotto(numbers);
     }
@@ -33,9 +34,9 @@ public class LottoTest {
     @Test
     void containsTest(){
         //given
-        List<Integer> testNumbers = new ArrayList<>();
-        for (int i = 0; i <= LOTTO_SIZE - 1; i++) {
-            testNumbers.add(i);
+        List<LottoNumber> testNumbers = new ArrayList<>();
+        for (int i = LOWER_LOTTONUMBER_BOUND + 1; i <= LOTTO_SIZE + 1; i++) {
+            testNumbers.add(new LottoNumber(i));
         }
 
         //when

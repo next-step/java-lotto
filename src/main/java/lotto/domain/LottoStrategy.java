@@ -11,5 +11,5 @@ public interface LottoStrategy {
     int LOTTO_BOUND = 45;
     int LOTTO_START_NUM = 1;
 
-    List<Integer> makeLotto();
+    List<LottoNumber> makeLotto();
 }

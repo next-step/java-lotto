@@ -18,7 +18,7 @@ public class Lottos {
     * 보유중인 로또의 당첨 개수를 확인하고, 해당하는 갯수만큼 matches 시켜준다.
     * */
     public void checkWinning(Winning winning) {
-        List<Integer> winningNumbers = winning.getWinningNumbers();
+        List<LottoNumber> winningNumbers = winning.getWinningNumbers();
         lottoList.forEach(lotto -> {
             winning.matches(lotto.contains(winningNumbers));
         });

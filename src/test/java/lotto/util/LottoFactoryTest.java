@@ -1,6 +1,7 @@
 package lotto.util;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Winning;
 import org.junit.jupiter.api.Test;
@@ -47,9 +48,9 @@ public class LottoFactoryTest {
     @Test
     void createWinningTest() {
         //given
-        List<Integer> winningNumber = new ArrayList<>();
+        List<LottoNumber> winningNumber = new ArrayList<>();
         for (int i = 1; i<=WINNING_NUM; i++) {
-            winningNumber.add(i);
+            winningNumber.add(new LottoNumber(i));
         }
 
         //when

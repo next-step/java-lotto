@@ -3,16 +3,14 @@
  * */
 package lotto.util;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStrategy;
-import lotto.domain.Lottos;
-import lotto.domain.Winning;
+import lotto.domain.*;
 import lotto.ui.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFactory {
+
 
     public static Lotto lotto(LottoStrategy lottoStrategy) {
         return new Lotto(lottoStrategy.makeLotto());
@@ -28,7 +26,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static Winning winning(List<Integer> winningNumber) {
+    public static Winning winning(List<LottoNumber> winningNumber) {
         return new Winning(winningNumber);
     }
 }

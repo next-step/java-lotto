@@ -8,13 +8,13 @@ import java.util.Objects;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public int contains(List<Integer> numbers) {
+    public int contains(List<LottoNumber> numbers) {
         return Long.valueOf(numbers.stream()
                 .filter(number -> this.numbers.contains(number))
                 .count())

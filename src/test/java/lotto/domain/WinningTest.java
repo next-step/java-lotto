@@ -15,12 +15,12 @@ public class WinningTest {
     public static final int WINNING_SIZE = 6;
 
     private Winning winning;
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private List<LottoNumber> winningNumbers = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
         for (int i = 1; i <= WINNING_SIZE; i++) {
-            winningNumbers.add(i);
+            winningNumbers.add(new LottoNumber(i));
         }
         winning = new Winning(winningNumbers);
     }
