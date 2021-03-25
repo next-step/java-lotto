@@ -1,6 +1,7 @@
 package lotto.views;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
@@ -30,10 +31,10 @@ public class ResultView {
     public static void print(LottoStatistics lottoStatistics, int payment) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) - " + lottoStatistics.threeMatchingLottoTicketsCount() + "개");
-        System.out.println("4개 일치 (50000원) - " + lottoStatistics.fourMatchingLottoTicketsCount() + "개");
-        System.out.println("5개 일치 (1500000원) - " + lottoStatistics.fiveMatchingLottoTicketsCount() + "개");
-        System.out.println("6개 일치 (2000000000원) - " + lottoStatistics.sixMatchingLottoTicketsCount() + "개");
+        System.out.println("3개 일치 (5000원) - " + lottoStatistics.lottoTicketsCount(LottoRank.FIFTH) + "개");
+        System.out.println("4개 일치 (50000원) - " + lottoStatistics.lottoTicketsCount(LottoRank.FOURTH) + "개");
+        System.out.println("5개 일치 (1500000원) - " + lottoStatistics.lottoTicketsCount(LottoRank.THIRD) + "개");
+        System.out.println("6개 일치 (2000000000원) - " + lottoStatistics.lottoTicketsCount(LottoRank.FIRST) + "개");
         System.out.println("총 수익률은 " + String.format("%.2f", lottoStatistics.yield(payment)) + "입니다.");
     }
 }

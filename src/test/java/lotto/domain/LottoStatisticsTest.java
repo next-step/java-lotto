@@ -44,4 +44,29 @@ public class LottoStatisticsTest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    public void yield() {
+        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
+
+        final int payment = 2000;
+        final double expected = (double) totalPrize(lottoStatistics) / payment;
+
+        final double result = lottoStatistics.yield(payment);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+
+    private long totalPrize(LottoStatistics lottoStatistics) {
+        return lottoTicketsPrize(lottoStatistics, LottoRank.FIRST) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.SECOND) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.THIRD) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.FOURTH) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.FIFTH);
+    }
+
+    private long lottoTicketsPrize(LottoStatistics lottoStatistics, LottoRank lottoRank) {
+        return (long) lottoRank.winningPrize() * lottoStatistics.lottoTicketsCount(lottoRank);
+    }
 }
