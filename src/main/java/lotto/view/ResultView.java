@@ -2,10 +2,21 @@ package lotto.view;
 
 import lotto.controller.dto.PurchaseLottoAutoResponse;
 
+import java.util.Arrays;
+
 public class ResultView {
     public void printPurchaseList(PurchaseLottoAutoResponse response) {
-        // TODO : 파라미터로 컨트롤러 output 받아야 함
-        System.out.println(" 개를 구매했습니다.");
-        // TODO : print 리스트
+        System.out.println(response.getPurchaseCount() + " 개를 구매했습니다.");
+        printLottoNumberList(response.getLottoNumberList());
+    }
+
+    private void printLottoNumberList(int[][] lottoNumberList) {
+        for (int[] ints : lottoNumberList) {
+            printLottoNumber(ints);
+        }
+    }
+
+    private void printLottoNumber(int[] lottoNumbers) {
+        System.out.println(Arrays.toString(lottoNumbers));
     }
 }
