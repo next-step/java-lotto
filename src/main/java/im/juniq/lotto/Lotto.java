@@ -39,4 +39,14 @@ public class Lotto {
 		Collections.sort(results);
 		return results;
 	}
+
+	public int numberOfMatchedWinningNumber(List winningNumbers) {
+		int matchedCount = 0;
+		for (int number : numbers) {
+			if (winningNumbers.contains(number)) {
+				matchedCount++;
+			}
+		}
+		return matchedCount;
+	}
 }
