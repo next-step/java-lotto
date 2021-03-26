@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import lotto.domain.Ranking;
 import lotto.domain.RateOfReturn;
 
-public class RorTest {
+public class RateOfReturnTest {
 
 	@Test
 	@DisplayName("수익률 테스트")

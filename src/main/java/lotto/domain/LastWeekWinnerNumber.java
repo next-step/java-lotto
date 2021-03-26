@@ -1,23 +1,13 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class LastWeekWinnerNumber {
-	private final LottoGame winnerNumber;
+	private final Lotto winnerNumber;
 
 	public LastWeekWinnerNumber(String inputNumber) {
-		String[] splitNumbers = inputNumber.split(",");
-		winnerNumber = new LottoGame(() -> {
-			List<LottoNumber> gameNumberList = new ArrayList<>();
-			Arrays.stream(splitNumbers)
-				.forEach((numbers) -> gameNumberList.add(new LottoNumber(Integer.valueOf(numbers.trim()))));
-			return gameNumberList;
-		});
+		winnerNumber = new Lotto(inputNumber);
 	}
 
-	public LottoGame getLastWinnerNumber() {
+	public Lotto getLastWinnerNumber() {
 		return winnerNumber;
 	}
 }

@@ -6,10 +6,10 @@ import java.util.Map;
 public class RankingResult {
 	private final Map<Ranking, Integer> result = new HashMap<>();
 
-	public void calculate(LottoGameList lottoGameList, LastWeekWinnerNumber lastWeekWinnerNumber) {
+	public void calculate(LottoGames lottoGames, LastWeekWinnerNumber lastWeekWinnerNumber) {
 		final Map<Integer, Integer> winnerCountPerRanking = new HashMap<>();
 
-		lottoGameList.getLottoGameList().forEach(lottoGame -> {
+		lottoGames.getLottoGameList().forEach(lottoGame -> {
 			int equalCount = (int)lottoGame.getGameNumberList()
 				.stream()
 				.filter(

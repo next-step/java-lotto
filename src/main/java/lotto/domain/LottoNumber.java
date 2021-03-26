@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 	private final int lottoNumber;
+	private final static int LOTTO_MIN_NUMBER = 1;
+	private final static int LOTTO_MAX_NUMBER = 45;
 
 	public LottoNumber(int lottoNumber) {
 		if (isInvalidLottoNumber(lottoNumber)) {
@@ -13,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	private boolean isInvalidLottoNumber(int lottoNumber) {
-		if (lottoNumber < 1 || lottoNumber > 45) {
+		if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
 			return true;
 		}
 		return false;
@@ -35,13 +37,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	@Override
-	public int compareTo(LottoNumber l) {
-		if (this.lottoNumber > l.lottoNumber) {
-			return 1;
-		} else if (this.lottoNumber < l.lottoNumber) {
-			return -1;
-		}
-		return 0;
+	public int compareTo(LottoNumber other) {
+		return Integer.compare(this.lottoNumber, other.lottoNumber);
 	}
 
 	@Override
