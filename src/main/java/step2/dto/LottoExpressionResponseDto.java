@@ -21,4 +21,8 @@ public final class LottoExpressionResponseDto {
     private final boolean isNull(LottoList lottoList) {
         return lottoList == null;
     }
+
+    public final LottoList getLottoList() {
+        return lottoList;
+    }
 }
