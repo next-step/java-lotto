@@ -1,5 +1,6 @@
 package lotto.step2.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,22 +8,17 @@ import java.util.Map;
 
 public class WinningStatistics {
 
-    private Map<Rank, Integer> winningStatistics = new HashMap<>();
-    private Money money;
+    private final Map<Rank, Integer> winningStatistics = new HashMap<>();
+    private int lottoCount;
+    private static final long PRICE_PER_LOTTO = 1000;
+    private static final int SCALE = 2;
 
-    public WinningStatistics(Money money, int fourthRank, int thirdRank, int secondRank, int firstRank) {
-        //Test용 생성자
-        this(money);
-        winningStatistics.put(Rank.from(3),fourthRank);
-        winningStatistics.put(Rank.from(4),thirdRank);
-        winningStatistics.put(Rank.from(5),secondRank);
-        winningStatistics.put(Rank.from(6),firstRank);
-    }
-
-    public WinningStatistics(Money money) {
+    public WinningStatistics(Lottos lottos, Lotto winningLotto) {
         Arrays.stream(Rank.values())
                 .forEach(rank -> winningStatistics.put(rank, 0));
-        this.money = money;
+        lottos.lottos()
+                .forEach(lotto -> hit(lotto.match(winningLotto)));
+        lottoCount = lottos.lottos().size();
     }
 
     public Map<Rank, Integer> statistics() {
@@ -44,7 +40,10 @@ public class WinningStatistics {
     }
 
     public double profits() {
-        return money.profits(sum());
+        BigDecimal purchasingAmount = BigDecimal.valueOf(lottoCount * PRICE_PER_LOTTO);
+        return BigDecimal.valueOf(sum())
+                .divide(purchasingAmount,SCALE,BigDecimal.ROUND_DOWN)
+                .doubleValue();
     }
 
 }
