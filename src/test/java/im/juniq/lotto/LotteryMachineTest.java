@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 class LotteryMachineTest {
 	@Test
 	void buyOneLotto() {
-		LotteryMachine lotteryMachine = new LotteryMachine();
+		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
+		LotteryMachine lotteryMachine = new LotteryMachine(shuffleStrategy);
 
-		assertThat(lotteryMachine.lottos(1000).get(0)).isEqualTo(new Lotto());
+		assertThat(lotteryMachine.lottos(1000).get(0)).isEqualToComparingFieldByField(new Lotto(shuffleStrategy));
 	}
 }
