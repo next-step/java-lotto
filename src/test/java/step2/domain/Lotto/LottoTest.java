@@ -19,7 +19,7 @@ class LottoTest {
 
     @BeforeEach
     void setUp(){
-        lottoNumbers =  IntStream.range(1, 46)
+        lottoNumbers =  IntStream.range(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
@@ -48,5 +48,19 @@ class LottoTest {
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
 
+    }
+
+    @DisplayName("Lotto 인스턴스가 소유한 값 반환 여부 테스트")
+    @Test
+    void 반환() {
+
+        // given
+        Lotto lotto = Lotto.newInstance(lottoNumbers);
+
+        // when
+        List<LottoNumber> actual = lotto.getLottoNumbers();
+
+        // then
+        assertThat(actual).isEqualTo(lottoNumbers);
     }
 }
