@@ -10,6 +10,10 @@ public class LottoNumber {
 
     private int number;
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(ILLEGAL_NUMBER);
