@@ -107,7 +107,7 @@
 - [객체의 상태값 관리 생각하기](https://github.com/next-step/java-lotto/pull/1261#discussion_r596829039)
 
 
-## 로또 (수)
+## 로또 (수동)
 - 기능 요구사항
     - 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
     - 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
@@ -137,3 +137,26 @@
     - 숫자 수동으로 생성하는 클래스 작성
     - 수동 숫자, 로또 숫자 수동 로직 추가
     - 기존 테스트는 깨지지 않도록 최대한 생성자를 이용
+
+> 1차 피드백
+- [기본 생성자가 꼭 필요한 것인지?](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077223)
+- [메서드 컨벤션](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077620)
+- [연산 최소화하기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077940)
+- [boolean 반환 타입 메서드 컨벤션](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078056)
+- [객체 책임](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078595)
+- [객체 비교 테스트](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078862)
+- [JUnit API 더 알아보기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078901)
+- [예외가 발생하는 시나리오를 파악하기 -> 무분별한 테스트 코드 X](https://github.com/next-step/java-lotto/pull/1273#discussion_r598079069)
+- [인터페이스를 통한 여러 구현체를 사용하는 장점에 대해서 생각해보기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598079685)
+- [static 메서드로 구성된 클래스는 맞는건가?](https://github.com/next-step/java-lotto/pull/1273#discussion_r598080023)
+
+
+- 고민하기
+  - static을 없애기 위해서 어떻게 처리하는게 좋을까
+  - 코드가 너무 자유분방한데 어떻게 응집도있게 짤 수 있을까?
+    - 인터페이스를 통한 명세로 정리해보기
+  - 낮은 결합도를 위해 View와 domain 사이의 데이터 전달을 기본 라이브러리를 사용하도록 변경
+  - 객체가 다양한 타입의 파라미터를 받지 못하고 있음
+  - 전체적인 구조 변경
+
+![step4](docs/lotto_step4.png)
