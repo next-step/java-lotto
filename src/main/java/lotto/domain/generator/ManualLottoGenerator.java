@@ -9,9 +9,9 @@ import lotto.domain.Money;
 public class ManualLottoGenerator implements LottoGenerator {
 
   private final List<List<Integer>> input;
-  private Money money;
+  private final Money money;
 
-  public ManualLottoGenerator(final List<List<Integer>> input,Money money) {
+  public ManualLottoGenerator(final List<List<Integer>> input, final Money money) {
     this.input = input;
     this.money = money;
   }

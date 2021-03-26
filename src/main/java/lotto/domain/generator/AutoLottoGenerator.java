@@ -14,9 +14,9 @@ public class AutoLottoGenerator implements LottoGenerator {
   private static final int END_NUMBER = 46;
   private static final int FROM_INDEX = 0;
   private static final int TO_INDEX = 6;
+  private final Money money;
 
-  private Money money;
-  public AutoLottoGenerator(Money money) {
+  public AutoLottoGenerator(final Money money) {
     this.money = money;
   }
 

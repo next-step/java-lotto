@@ -4,6 +4,7 @@ import lotto.domain.generator.AutoLottoGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.ManualLottoGenerator;
 import lotto.domain.generator.MergedGenerator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,16 +15,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoMachineTest {
 
+  List<List<Integer>> manualLottos;
+
+  @BeforeEach
+  void setUp() {
+    manualLottos = new ArrayList<>();
+    manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+    manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
+  }
+
   @Test
   @DisplayName("수동 + 자동 발급 확인")
   public void generatedLotto() {
-    List<List<Integer>> manualLottos = new ArrayList<List<Integer>>();
-    manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-    manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
-
     Money money = new Money(14000);
     List<LottoGenerator> generators = new ArrayList<>();
-    generators.add(new ManualLottoGenerator(manualLottos,money));
+    generators.add(new ManualLottoGenerator(manualLottos, money));
     generators.add(new AutoLottoGenerator(money));
     LottoGenerator lottoGenerator = new MergedGenerator(generators);
     LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
@@ -35,11 +41,9 @@ public class LottoMachineTest {
   @Test
   @DisplayName("수동 발급")
   public void generatedManualLotto() {
-
-    List<List<Integer>> manualLottos = new ArrayList<List<Integer>>();
-    manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-    manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
-    LottoMachine lottoMachine = new LottoMachine(new ManualLottoGenerator(manualLottos,new Money(2000)));
+    Money money = new Money(2000);
+    LottoMachine lottoMachine = new LottoMachine(
+        new ManualLottoGenerator(manualLottos, money));
 
     assertThat(lottoMachine.getLottoCount()).isEqualTo(2);
 
@@ -48,7 +52,8 @@ public class LottoMachineTest {
   @Test
   @DisplayName("자동 발급")
   public void generatedAutoLotto() {
-    LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator(new Money(14000)));
+    Money money = new Money(14000);
+    LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator(money));
     assertThat(lottoMachine.getLottoCount()).isEqualTo(14);
   }
 
