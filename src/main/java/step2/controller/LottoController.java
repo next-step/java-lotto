@@ -7,6 +7,7 @@ import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
+import step2.view.ResultView;
 
 public final class LottoController {
 
