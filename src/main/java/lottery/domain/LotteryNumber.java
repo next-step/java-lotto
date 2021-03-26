@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LotteryNumber {
 
-    static final int LOTTERY_NUMBER_MIN = 1;
-    static final int LOTTERY_NUMBER_MAX = 45;
+    static final int MINIMUM_VALUE = 1;
+    static final int MAXIMUM_VALUE = 45;
 
     private final int number;
 
@@ -20,12 +20,16 @@ public class LotteryNumber {
 
     private void validate(int number) {
         if(!checkRange(number)) {
-            throw new LotteryNumberOutOfRangeException();
+            throw new IllegalArgumentException(
+                String.format(
+                    "로또 번호는 %d ~ %d 사이의 번호여야 합니다.",
+                    LotteryNumber.MINIMUM_VALUE, LotteryNumber.MAXIMUM_VALUE)
+            );
         }
     }
 
     private boolean checkRange(int number) {
-        return number >= LOTTERY_NUMBER_MIN && number <= LOTTERY_NUMBER_MAX;
+        return number >= MINIMUM_VALUE && number <= MAXIMUM_VALUE;
     }
 
     @Override

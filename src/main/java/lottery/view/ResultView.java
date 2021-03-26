@@ -13,8 +13,11 @@ import static java.util.stream.Collectors.*;
 
 public class ResultView {
 
+    public void printLotteryAmounts(int amountOfManual, int amountOfAutomatic) {
+        printMessage(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", amountOfManual, amountOfAutomatic));
+    }
+
     public void printLotteryNumbers(List<LotteryNumbersDto> lotteryNumbers) {
-        printMessage(String.format("%d개를 구매했습니다.", lotteryNumbers.size()));
         lotteryNumbers.forEach(this::printLottery);
     }
 

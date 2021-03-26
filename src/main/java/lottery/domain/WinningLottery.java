@@ -13,14 +13,14 @@ public class WinningLottery {
 
     public Prize getPrize(LotteryNumbers lotteryNumbers) {
         long matchedNumbers = winningNumbers.countMatchedNumbers(lotteryNumbers);
-        boolean bonusNumberMatched = lotteryNumbers.contains(bonusNumber);
+        boolean bonusNumberMatched = lotteryNumbers.contain(bonusNumber);
 
         return Prize.getPrize(matchedNumbers, bonusNumberMatched);
     }
 
     private void validateDuplicates(LotteryNumbers lotteryNumbers, LotteryNumber bonusNumber) {
-        if (lotteryNumbers.contains(bonusNumber)) {
-            throw new DuplicatedBonusNumberException();
+        if (lotteryNumbers.contain(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 겹치지 않는 번호여야 합니다.");
         }
     }
 

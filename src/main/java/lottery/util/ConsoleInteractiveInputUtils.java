@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ConsoleInteractiveInputUtils {
 
@@ -16,21 +17,18 @@ public class ConsoleInteractiveInputUtils {
         return Integer.parseInt(getUserInput());
     }
 
-    public static List<String> getListOfString(String message, String delimiter) {
+    public static List<List<Integer>> getIntegerLists(String message, String delimiter, int length) {
         printMessage(message);
 
-        return Arrays.stream(getUserInput().split(delimiter))
-                     .map(String::trim)
-                     .collect(Collectors.toList());
+        return IntStream.range(0, length)
+                        .mapToObj(ignored -> convertIntegerList(getUserInput(), delimiter))
+                        .collect(Collectors.toList());
     }
 
     public static List<Integer> getListOfInteger(String message, String delimiter) {
         printMessage(message);
 
-        return Arrays.stream(getUserInput().split(delimiter))
-                     .map(String::trim)
-                     .map(Integer::parseInt)
-                     .collect(Collectors.toList());
+        return convertIntegerList(getUserInput(), delimiter);
     }
 
     private static void printMessage(String message) {
@@ -40,6 +38,13 @@ public class ConsoleInteractiveInputUtils {
     private static String getUserInput() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         return scanner.next();
+    }
+
+    private static List<Integer> convertIntegerList(String str, String delimiter) {
+        return Arrays.stream(str.split(delimiter))
+                     .map(String::trim)
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
     }
 
 }

@@ -14,14 +14,32 @@ public class LotteryNumbers {
     private final List<LotteryNumber> numbers;
 
     public LotteryNumbers(List<Integer> numberList) {
-        this.numbers = numberList.stream()
-                                 .map(LotteryNumber::new)
-                                 .collect(Collectors.toList());
-
-        validate(this.numbers);
+        List<LotteryNumber> lotteryNumbers =
+            numberList.stream().map(LotteryNumber::new).collect(Collectors.toList());
+        validate(lotteryNumbers);
+        this.numbers = lotteryNumbers;
     }
 
-    public boolean contains(LotteryNumber lotteryNumber) {
+    private void validate(List<LotteryNumber> numbers) {
+        validateLotteryNumberSize(numbers);
+        validateDuplicates(numbers);
+    }
+
+    private void validateLotteryNumberSize(List<LotteryNumber> numbers) {
+        if (numbers.size() != LOTTERY_SIZE) {
+            throw new IllegalArgumentException("로또 하나는 여섯 개의 번호로 구성되어야 합니다.");
+        }
+    }
+
+    private void validateDuplicates(List<LotteryNumber> numbers) {
+        Set<LotteryNumber> uniqueNumbers = new HashSet<>(numbers);
+
+        if (uniqueNumbers.size() != numbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자는 허용되지 않습니다.");
+        }
+    }
+
+    public boolean contain(LotteryNumber lotteryNumber) {
         return numbers.contains(lotteryNumber);
     }
 
@@ -38,22 +56,4 @@ public class LotteryNumbers {
         return new LotteryNumbersDto(rawNumbers);
     }
 
-    private void validate(List<LotteryNumber> numbers) {
-        validateLotteryNumberSize(numbers);
-        validateDuplicates(numbers);
-    }
-
-    private void validateLotteryNumberSize(List<LotteryNumber> numbers) {
-        if (numbers.size() != LOTTERY_SIZE) {
-            throw new InvalidLotteryException();
-        }
-    }
-
-    private void validateDuplicates(List<LotteryNumber> numbers) {
-        Set<LotteryNumber> uniqueNumbers = new HashSet<>(numbers);
-
-        if (uniqueNumbers.size() != numbers.size()) {
-            throw new InvalidLotteryException();
-        }
-    }
 }
