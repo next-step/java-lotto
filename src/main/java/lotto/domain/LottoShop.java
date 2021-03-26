@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.util.LottoConstant;
 
 public class LottoShop {
     private final LottoMachine lottoMachine;

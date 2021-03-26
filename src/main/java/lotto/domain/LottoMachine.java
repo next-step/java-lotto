@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.policy.DrawPolicy;
+import lotto.domain.util.LottoConstant;
 
 public class LottoMachine {
     private final List<Integer> candidates;

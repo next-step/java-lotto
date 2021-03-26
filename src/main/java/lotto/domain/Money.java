@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.domain.util.LottoConstant;
 
 public class Money {
     private int balance;

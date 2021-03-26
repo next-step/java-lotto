@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.util;
 
 public class LottoConstant {
     public static final int NUMBER_COUNT = 6; // 로또 당첨 숫자 개수

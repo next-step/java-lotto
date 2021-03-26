@@ -2,11 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoConstant;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoShop;
 import lotto.domain.Money;
@@ -15,10 +12,7 @@ import lotto.domain.policy.TestRandomPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.converter.ConvertWith;
-import org.junit.jupiter.params.provider.ArgumentsSources;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * 로또(자동)
@@ -73,4 +67,5 @@ public class AutomatedLottoTest {
 
         assertThat(result).isEqualTo(expectedCount);
     }
+
 }

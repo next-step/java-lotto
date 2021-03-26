@@ -1,8 +1,11 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import lotto.domain.util.LottoConstant;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -19,6 +22,14 @@ public class Lotto {
             throw new IllegalArgumentException(LottoConstant.NUMBER_COUNT_EXCEPTION);
         }
         this.numbers = numbers;
+    }
+
+    public Lotto(String numberString) {
+        String[] splitedLottoNumber = numberString.split(", ");
+        this.numbers = new ArrayList<>(splitedLottoNumber.length);
+
+        Arrays.stream(splitedLottoNumber).map(Integer::valueOf)
+                                         .forEach(numbers::add);
     }
 
     @Override
@@ -40,9 +51,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        return numbers.stream().map(String::valueOf)
+                               .collect(Collectors.joining(", "));
     }
 
     public long countWinnerNumbersIn(Lotto winner) {
@@ -52,4 +62,5 @@ public class Lotto {
     private long traverseCompareTo(int winnerNumber) {
         return numbers.stream().filter(num -> num == winnerNumber).count();
     }
+
 }
