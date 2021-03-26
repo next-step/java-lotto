@@ -13,6 +13,6 @@ class MoneyTest {
     //when
     Money money = new Money(1000);
     //then
-    assertEquals(money.toInt(), 1000);
+    assertEquals(money, new Money(1000));
   }
 }
