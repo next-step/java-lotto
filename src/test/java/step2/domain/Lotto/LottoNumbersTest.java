@@ -19,7 +19,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp(){
-        lottoNumberList =  IntStream.range(1, 7)
+        lottoNumberList =  IntStream.range(1, 46)
                     .mapToObj(LottoNumber::valueOf)
                     .collect(Collectors.toList());
     }
