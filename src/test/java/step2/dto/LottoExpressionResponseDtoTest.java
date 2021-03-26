@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.Lotto.Lotto;
 import step2.domain.Lotto.LottoList;
 import step2.domain.Lotto.LottoNumber;
+import step2.exception.LottoListNullPointerException;
 
 import java.util.ArrayList;
 import java.util.List;
