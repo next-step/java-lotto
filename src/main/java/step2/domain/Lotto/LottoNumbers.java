@@ -35,7 +35,6 @@ public final class LottoNumbers {
         return new LottoNumbers(start, end);
     }
 
-
     private final boolean isListNull(List<LottoNumber> lottoNumbers) {
         return lottoNumbers == null;
     }

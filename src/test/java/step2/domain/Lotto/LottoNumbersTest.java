@@ -60,4 +60,16 @@ class LottoNumbersTest {
 
     }
 
+    @DisplayName("LottoNumbers 인스턴스가 소유한 값을 기준으로 비교하는지 테스트")
+    @Test
+    void 비교() {
+
+        // when
+        LottoNumbers firstLottoNumbers = LottoNumbers.newInstance(lottoNumberList);
+        LottoNumbers secondLottoNumbers = LottoNumbers.newInstance(lottoNumberList);
+
+        // then
+        assertThat(firstLottoNumbers).isEqualTo(secondLottoNumbers);
+    }
+
 }
