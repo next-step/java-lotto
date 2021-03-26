@@ -22,7 +22,8 @@ public class InputView {
 
     public WinInquiryRequest inputWinNumber(List<String> confirmTargetList) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinInquiryRequest(scanner.next(), removeBracket(confirmTargetList));
+        scanner.nextLine();
+        return new WinInquiryRequest(scanner.nextLine(), removeBracket(confirmTargetList));
     }
 
     private List<String> removeBracket(List<String> confirmTargetList) {
