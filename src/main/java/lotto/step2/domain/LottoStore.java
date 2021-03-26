@@ -18,6 +18,9 @@ public class LottoStore {
                 .forEach(number -> allLottoNumbers.add(new LottoNumber(number)));
     }
 
+    private LottoStore(){
+    }
+
     private static Lotto createLotto() {
         Collections.shuffle(allLottoNumbers);
         Lotto lotto = new Lotto(allLottoNumbers.stream()
