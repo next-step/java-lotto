@@ -1,9 +1,6 @@
-package lotto.util;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.Winning;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,12 +14,17 @@ public class LottoFactoryTest {
     private static int LOTTO_COUNT = 3;
     private static int WINNING_NUM = 6;
 
+    @BeforeEach
+    void setUp() {
+        LottoFactory.setLottoStrategy(() -> {
+            return Collections.emptyList();
+        });
+    }
+
     @Test
     void createLottoTest() {
         //given, when
-        Lotto lotto = LottoFactory.lotto(() -> {
-            return Collections.emptyList();
-        });
+        Lotto lotto = LottoFactory.lotto();
 
         //then
         assertThat(lotto).isEqualTo(new Lotto(Collections.emptyList()));
@@ -37,9 +39,7 @@ public class LottoFactoryTest {
         }
 
         //when
-        Lottos lottos = LottoFactory.lottos(LOTTO_COUNT, () -> {
-            return Collections.emptyList();
-        });
+        Lottos lottos = LottoFactory.lottos(LOTTO_COUNT);
 
         //then
         assertThat(lottos).isEqualTo(new Lottos(testList));
