@@ -2,7 +2,10 @@ package study.lotto.domain;
 
 import study.lotto.exception.LottoException;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static study.lotto.service.LottoFactory.LOTTO_MAX_SIZE;
 import static study.lotto.util.Constants.GUIDE_ERR_LOTTO_SIZE;

@@ -7,8 +7,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.domain.type.ProfitMessage;
 import study.lotto.service.Lottos;
-import study.lotto.view.dto.RequestMoney;
-import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,20 +22,20 @@ class LottoResultTest {
     @BeforeEach
     void setUp() {
         List<LottoNumber> collect = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
         List<LottoNumber> collect1 = IntStream.range(7, 13)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
-        lottoList = Arrays.asList(new Lotto(collect), new Lotto(collect1));
+        lottoList = Arrays.asList(Lotto.of(collect), Lotto.of(collect1));
     }
 
     private static Stream<Arguments> winningEntry() {
         return Stream.of(
             Arguments.of(
-                    new WinningLotto(new Lotto(IntStream.range(1, 7)
-                            .mapToObj(LottoNumber::new).collect(Collectors.toList()))
-                            , new LottoNumber(8)),
+                    new WinningLotto(Lotto.of(IntStream.range(1, 7)
+                            .mapToObj(LottoNumber::of).collect(Collectors.toList()))
+                            , LottoNumber.of(8)),
                     LottoMatch.RANK_FIRST,
                     1
             )
@@ -46,9 +44,9 @@ class LottoResultTest {
     private static Stream<Arguments> winningRateEntry() {
         return Stream.of(
             Arguments.of(
-                    new WinningLotto(new Lotto(IntStream.range(1, 7)
-                            .mapToObj(LottoNumber::new).collect(Collectors.toList()))
-                            , new LottoNumber(8)),
+                    new WinningLotto(Lotto.of(IntStream.range(1, 7)
+                            .mapToObj(LottoNumber::of).collect(Collectors.toList()))
+                            , LottoNumber.of(8)),
                     ProfitMessage.PROFIT
             )
         );
@@ -60,7 +58,7 @@ class LottoResultTest {
             final WinningLotto winningLotto, final LottoMatch match,
             final long matchCount) {
         // given
-        Lottos lottos = new Lottos(lottoList, new RequestMoney(2000));
+        Lottos lottos = new Lottos(lottoList);
         // when
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
         long count = lottoResult.count(match);
@@ -73,7 +71,7 @@ class LottoResultTest {
     void winningRate_손익_확인(
             final WinningLotto winningLotto, final ProfitMessage profitMessage) {
         // given
-        Lottos lottos = new Lottos(lottoList, new RequestMoney(2000));
+        Lottos lottos = new Lottos(lottoList);
         // when
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
         double winningRate = lottoResult.winningRate();

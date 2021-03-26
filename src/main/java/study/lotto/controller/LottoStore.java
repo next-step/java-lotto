@@ -3,8 +3,8 @@ package study.lotto.controller;
 import study.lotto.domain.Lotto;
 import study.lotto.service.LottoFactory;
 import study.lotto.service.Lottos;
-import study.lotto.view.dto.RequestLottoArgument;
 import study.lotto.view.dto.ManualLottoParser;
+import study.lotto.view.dto.RequestLottoArgument;
 
 import java.util.List;
 

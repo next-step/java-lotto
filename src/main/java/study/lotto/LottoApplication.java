@@ -4,11 +4,11 @@ import study.lotto.controller.LottoStore;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoResult;
 import study.lotto.domain.Money;
-import study.lotto.view.dto.ManualLottoParser;
 import study.lotto.domain.WinningLotto;
 import study.lotto.service.Lottos;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
+import study.lotto.view.dto.ManualLottoParser;
 import study.lotto.view.dto.RequestLottoArgument;
 
 
