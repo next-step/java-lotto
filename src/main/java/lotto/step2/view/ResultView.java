@@ -1,6 +1,7 @@
 package lotto.step2.view;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.Lottos;
 import lotto.step2.domain.Rank;
 import lotto.step2.domain.WinningStatistics;
 import java.util.List;
@@ -17,13 +18,11 @@ public class ResultView {
 
     private ResultView(){
     }
-    
-    public static void printPurchasingCount(int count) {
-        System.out.println(count + MESSAGE_PURCHASING_COUNT);
-    }
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.stream()
+    public static void printLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.lottos().size() + MESSAGE_PURCHASING_COUNT);
+        lottos.lottos()
+                .stream()
                 .forEach(lotto -> System.out.println(lotto.lottoNumbers()));
         System.out.println();
     }
@@ -33,9 +32,6 @@ public class ResultView {
         for(Rank rank : winningStatistics.statistics().keySet()) {
             System.out.println(rank.hit() + MESSAGE_NUMBER_MATCHED + rank.amount() + MESSAGE_WON + winningStatistics.statistics().get(rank) + MESSAGE_COUNT);
         }
-    }
-
-    public static void printProfits(WinningStatistics winningStatistics) {
         System.out.println(MESSAGE_TOTAL_PROFITS +  winningStatistics.profits() + MESSAGE_IS);
     }
 
