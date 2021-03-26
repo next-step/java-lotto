@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningStatisticsTest {
 
-    @ParameterizedTest(name = "creationTest")
+    @ParameterizedTest(name = "profitsTest")
     @MethodSource("arrayProvider")
     public void profitsTest(Lottos inputLottos, Lotto winningLotto, double expected) {
         WinningStatistics statistics = new WinningStatistics(inputLottos, winningLotto);
