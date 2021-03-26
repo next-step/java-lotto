@@ -20,7 +20,7 @@ public final class LottoList {
     }
 
     public final void add(Lotto additionalLotto) {
-        lottoList.contains(additionalLotto);
+        lottoList.add(additionalLotto);
     }
 
     public final List<Lotto> getLottoList() {
