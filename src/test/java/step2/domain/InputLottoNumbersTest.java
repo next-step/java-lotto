@@ -45,7 +45,7 @@ class InputLottoNumbersTest {
 
         // when and then
         assertThatThrownBy(()-> {
-            InputLottoNumbers.newInstance(testLottoNumbers);
+            InputLottoNumbers.newInstance(nullLottoNumbers);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
 
