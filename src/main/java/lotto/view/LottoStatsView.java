@@ -28,7 +28,9 @@ public class LottoStatsView {
         Map<String, Integer> countHitStats = stats.countHitStats();
 
         for (Prize prize : Prize.values()) {
-            System.out.println(String.format("%s (%s원)- %d개", prize.getHitCount(), prize.getPrizeMoney(), countHitStats.get(prize.name())));
+            System.out.println(String.format("%s (%,d원)- %d개", prize.getHitCount(),
+                    prize.getPrizeMoney().getHitMoney(),
+                    countHitStats.get(prize.name())));
         }
     }
 
