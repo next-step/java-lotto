@@ -12,7 +12,7 @@ public class Money {
 
     private final int money;
 
-    private Money(int money) {
+    private Money(final int money) {
         if(money < LOTTO_PRICE) {
             throw new LottoException(GUIDE_ERR_CANNOT_BUY_LOTTO);
         }
@@ -28,7 +28,7 @@ public class Money {
         return new Money(Integer.parseInt(money));
     }
 
-    private static void checkValidation(String money) {
+    private static void checkValidation(final String money) {
         try {
             Integer.parseInt(money);
         } catch(NumberFormatException e) {
@@ -36,7 +36,7 @@ public class Money {
         }
     }
 
-    public int autoSize(int manualCount) {
+    public int autoSize(final int manualCount) {
         return BigDecimal.valueOf(money)
                 .divide(BigDecimal.valueOf(LOTTO_PRICE))
                 .subtract(BigDecimal.valueOf(manualCount))
@@ -44,7 +44,7 @@ public class Money {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Money money1 = (Money) o;
