@@ -23,4 +23,8 @@ public final class LottoGenerateCount {
     public final boolean hasNext() {
         return count > FINISH;
     }
+
+    public final void next() {
+        count--;
+    }
 }
