@@ -1,8 +1,10 @@
 package lotto.service;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Queue;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoShop;
@@ -41,26 +43,31 @@ public class LottoService {
     public LottoResultDto draw(LottoDrawDto lottoDrawDto) {
         List<String> lottoPurchasedNumberList = lottoDrawDto.getNumberList();
         final Lotto winnerLotto = new Lotto(lottoDrawDto.getWinnerNumber());
-
-        PrizeMapper prizeMapper = new PrizeMapper();
-
-        LottoResultDto resultDto = new LottoResultDto();
-        for (LottoPrize prize : LottoPrize.values()) {
-            resultDto.putPrizeMap(prize.getCountMatches(), prize.getPrize());
-        }
-
-        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(
-            lottoPurchasedNumberList.size());
+        Queue<Long> winners = new ArrayDeque<>();
 
         for (String number : lottoPurchasedNumberList) {
             long countMatches = new Lotto(number).countWinnerNumbersIn(winnerLotto);
-            resultDto.putRewardRecord(countMatches);
+            winners.add(countMatches);
+        }
 
+        return statsLottoResult(winners);
+    }
+
+    private LottoResultDto statsLottoResult(Queue<Long> winners) {
+        LottoResultDto lottoResultDto = new LottoResultDto();
+        PrizeMapper prizeMapper = new PrizeMapper();
+        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(winners.size());
+
+        while (!winners.isEmpty()) {
+            long countMatches = winners.poll();
+            lottoResultDto.putRewardRecord(countMatches);
             long prize = prizeMapper.findPrizeByCountMatches(countMatches);
             calculator.cumulateEarning(prize);
         }
-        resultDto.setEarningRate(calculator.resultToString());
-
-        return resultDto;
+        for (LottoPrize prize : LottoPrize.values()) {
+            lottoResultDto.putPrizeMap(prize.getCountMatches(), prize.getPrize());
+        }
+        lottoResultDto.setEarningRate(calculator.resultToString());
+        return lottoResultDto;
     }
 }

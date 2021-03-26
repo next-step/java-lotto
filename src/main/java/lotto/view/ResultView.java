@@ -6,11 +6,11 @@ import lotto.dto.LottoPurchasedDto;
 import lotto.dto.LottoResultDto;
 
 public class ResultView {
-    public static void printLottoPurchaseResult(LottoPurchasedDto lottoOrderedDto) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoOrderedDto.getPurchasedLottoCount());
+    public static void printLottoPurchaseResult(LottoPurchasedDto lottoPurchasedDto) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoPurchasedDto.getPurchasedLottoCount());
 
-        List<String> lottoNumberList = lottoOrderedDto.getLottoNumberList();
-        lottoNumberList.forEach(System.out::println);
+        List<String> lottoNumberList = lottoPurchasedDto.getLottoNumberList();
+        lottoNumberList.forEach(number -> System.out.println("[" + number + "]"));
     }
 
     public static void printLottoDrawResult(LottoResultDto lottoResultDto) {

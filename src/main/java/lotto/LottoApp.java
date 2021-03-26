@@ -12,15 +12,16 @@ import lotto.view.ResultView;
 
 public class LottoApp {
 
-  public static void main(String[] args) {
-    InputView inputView = new InputView(System.in);
+    public static void main(String[] args) {
+        InputView inputView = new InputView(System.in);
 
-    LottoPurchaseMoneyDto purchaseMoneyDto = new LottoPurchaseMoneyDto(inputView.inputMoney());
-    LottoPurchasedDto lottoPurchasedDto = LottoController.purchaseLotto(purchaseMoneyDto);
-    ResultView.printLottoPurchaseResult(lottoPurchasedDto);
+        LottoPurchaseMoneyDto purchaseMoneyDto = new LottoPurchaseMoneyDto(inputView.inputMoney());
+        LottoPurchasedDto lottoPurchasedDto = LottoController.purchaseLotto(purchaseMoneyDto);
+        ResultView.printLottoPurchaseResult(lottoPurchasedDto);
 
-    LottoDrawDto lottoDrawDto = new LottoDrawDto(lottoPurchasedDto, inputView.inputWinnerNumbers());
-    LottoResultDto lottoResultDto = LottoController.drawLotto(lottoDrawDto);
-    ResultView.printLottoDrawResult(lottoResultDto);
-  }
+        LottoDrawDto lottoDrawDto = new LottoDrawDto(lottoPurchasedDto,
+                inputView.inputWinnerNumbers());
+        LottoResultDto lottoResultDto = LottoController.drawLotto(lottoDrawDto);
+        ResultView.printLottoDrawResult(lottoResultDto);
+    }
 }
