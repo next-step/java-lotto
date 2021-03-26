@@ -59,4 +59,21 @@ class LottoAutoServiceTest {
         assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
     }
 
+    @Test
+    @DisplayName("수익률 계산")
+    void totalReturnRate() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 7");
+        lottoNumberInputList.add("1, 2, 3, 4, 7, 8");
+        LottoAutoService lottoAutoService = new LottoAutoService();
+
+        // when
+        LottoRanks lottoRanks = lottoAutoService.inquiryWin(lottoNumberInputList, new int[]{1, 2, 3, 4, 5, 6});
+
+        // then
+        assertThat(667183.33).isEqualTo(lottoRanks.totalReturnRate());
+    }
+
 }
