@@ -34,4 +34,19 @@ class LottoGenerateCountTest {
         // then
         assertThat(actual).isTrue();
     }
+
+    @DisplayName("LottoGenerateCount 인스턴스가 다음 시점으로 넘어가는지 테스트")
+    @Test
+    void 다음으로_이동() {
+        // given
+        int testMoney = 1000;
+
+        // when
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(testMoney);
+        lottoGenerateCount.next();
+        boolean actual = lottoGenerateCount.hasNext();
+
+        // then
+        assertThat(actual).isFalse();
+    }
 }
