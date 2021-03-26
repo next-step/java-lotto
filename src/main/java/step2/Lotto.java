@@ -44,21 +44,20 @@ public class Lotto {
                 .count();
     }
 
-
     public List<LottoNumber> getLottoNumberList(){
         return lottoNumberList;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numberList, lotto.numberList);
+        return Objects.equals(lottoNumberList, lotto.lottoNumberList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(lottoNumberList);
     }
-
 }
