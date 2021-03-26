@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public int getNumber() {
+    public int number() {
         return number;
     }
 
