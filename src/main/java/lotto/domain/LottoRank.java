@@ -28,7 +28,7 @@ public enum LottoRank {
     }
 
     public static LottoRank getEnum(int matchCount) {
-        if(matchCount < FIVE.getMatchCount()) {
+        if(isLose(matchCount)) {
             return LOSE;
         }
         Optional<LottoRank> find = Arrays.stream(LottoRank.values())
@@ -38,5 +38,9 @@ public enum LottoRank {
             return find.get();
         }
         throw new IllegalArgumentException();
+    }
+
+    private static boolean isLose(int matchCount) {
+        return matchCount >= LOSE.getMatchCount() && matchCount < FIVE.getMatchCount();
     }
 }
