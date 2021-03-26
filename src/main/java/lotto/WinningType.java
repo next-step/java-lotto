@@ -16,6 +16,10 @@ public enum WinningType {
         this.winnings = winnings;
     }
 
+    public static boolean isWinningTypeNumber(int matchNumberCount) {
+        return FIFTH.matchNumberCount <= matchNumberCount && matchNumberCount <= FIRST.matchNumberCount;
+    }
+
     public static WinningType valueOf(int matchNumberCount) {
         return Arrays.stream(WinningType.values())
                 .filter(type -> matchNumberCount == type.matchNumberCount)

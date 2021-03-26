@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -22,7 +23,7 @@ class WinningTypeTest {
                 .isEqualTo(expected);
     }
 
-    static Stream<Arguments> providerTestValueOf(){
+    static Stream<Arguments> providerTestValueOf() {
         return Stream.of(
                 Arguments.of(6, WinningType.FIRST),
                 Arguments.of(5, WinningType.THIRD),
@@ -32,5 +33,12 @@ class WinningTypeTest {
                 Arguments.of(1, WinningType.NONE),
                 Arguments.of(0, WinningType.NONE)
         );
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0,false", "1,false", "2,false", "3,true", "4,true", "5,true", "6,true"}, delimiter = ',')
+    void isWinningTypeNumber(int matchedCount, boolean isWinningNumber) {
+        Assertions.assertThat(WinningType.isWinningTypeNumber(matchedCount))
+                .isEqualTo(isWinningNumber);
     }
 }
