@@ -15,7 +15,6 @@ public final class LottoGenerator {
     private static final int START_INCLUSIVE = 1;
     private static final int END_EXCLUSIVE = 46;
 
-    private static LottoGenerator instance;
     private final LottoShuffleStrategy lottoShuffleStrategy;
 
     private LottoGenerator() {
@@ -26,22 +25,12 @@ public final class LottoGenerator {
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
-    public static final LottoGenerator getInstance() {
-        if(isInstanceNull()) {
-            instance = new LottoGenerator();
-        }
-        return instance;
+    public static final LottoGenerator newInstance() {
+        return new LottoGenerator();
     }
 
-    public static final LottoGenerator getInstance(LottoShuffleStrategy lottoShuffleStrategy) {
-        if(isInstanceNull()) {
-            instance = new LottoGenerator(lottoShuffleStrategy);
-        }
-        return instance;
-    }
-
-    private static final boolean isInstanceNull() {
-        return instance == null;
+    public static final LottoGenerator newInstance(LottoShuffleStrategy lottoShuffleStrategy) {
+        return new LottoGenerator(lottoShuffleStrategy);
     }
 
     public final Lotto generateLotto() {

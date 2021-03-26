@@ -19,7 +19,7 @@ public final class LottoController {
 
     private LottoController(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
         this.lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto);
-        this.lottoGenerator = LottoGenerator.getInstance(strategy);
+        this.lottoGenerator = LottoGenerator.newInstance(strategy);
     }
 
     public static final LottoController newInstance(LottoCreationRequestDto creationRequestDto) {
