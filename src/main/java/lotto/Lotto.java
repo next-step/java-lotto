@@ -33,7 +33,7 @@ public class Lotto {
     }
 
     public List<Integer> numbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public int matchedCount(Lotto other) {
