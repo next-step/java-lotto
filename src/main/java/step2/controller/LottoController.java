@@ -9,4 +9,5 @@ public class LottoController {
         return new LottoController();
     }
 
+
 }
