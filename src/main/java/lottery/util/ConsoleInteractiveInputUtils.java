@@ -17,14 +17,6 @@ public class ConsoleInteractiveInputUtils {
         return Integer.parseInt(getUserInput());
     }
 
-    public static List<String> getListOfString(String message, String delimiter) {
-        printMessage(message);
-
-        return Arrays.stream(getUserInput().split(delimiter))
-                     .map(String::trim)
-                     .collect(Collectors.toList());
-    }
-
     public static List<List<Integer>> getIntegerLists(String message, String delimiter, int length) {
         printMessage(message);
 
