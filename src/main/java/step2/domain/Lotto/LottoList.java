@@ -26,4 +26,5 @@ public final class LottoList {
     public final List<Lotto> getLottoList() {
         return lottoList;
     }
+
 }

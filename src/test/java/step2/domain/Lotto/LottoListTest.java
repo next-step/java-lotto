@@ -50,4 +50,16 @@ class LottoListTest {
         assertThat(actual).isEqualTo(testLottoList);
     }
 
+    @DisplayName("LottoList 인스턴스가 쇼유한 값을 기준으로 비교를 반환하는지 테스트")
+    @Test
+    void 비교() {
+
+        // when
+        LottoList actualLottoList = LottoList.newInstance(testLottoList);
+        LottoList expectedLottoList = LottoList.newInstance(testLottoList);
+
+        // then
+        assertThat(actualLottoList).isEqualTo(expectedLottoList);
+    }
+
 }

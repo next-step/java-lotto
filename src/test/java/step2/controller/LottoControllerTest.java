@@ -73,6 +73,24 @@ class LottoControllerTest {
         LottoExpressionResponseDto actual = lottoController.generateLottoList();
         LottoExpressionResponseDto expected = LottoExpressionResponseDto.newInstance(testLottoList);
 
+        List<LottoNumber> lott = actual.getLottoList()
+                .getLottoList()
+                .stream()
+                .map(Lotto::getLottoNumbers)
+                .findFirst().get();
+
+        lott.stream().map(lottoNumber -> lottoNumber.getLottoNumber())
+                .forEach(System.out::println);
+
+        List<LottoNumber> es = expected.getLottoList()
+                .getLottoList()
+                .stream()
+                .map(Lotto::getLottoNumbers)
+                .findFirst().get();
+
+        lott.stream().map(lottoNumber -> lottoNumber.getLottoNumber())
+                .forEach(System.out::println);
+
         // then
         assertThat(actual).isEqualTo(expected);
     }
