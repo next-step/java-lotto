@@ -35,4 +35,25 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Lotto otherLotto = (Lotto) other;
+        return otherLotto.lottoNumbers
+                        .stream()
+                        .filter(lottoNumber -> !otherLotto.lottoNumbers.contains(lottoNumber))
+                        .findAny()
+                        .isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }

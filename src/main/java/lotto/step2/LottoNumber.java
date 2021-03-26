@@ -33,8 +33,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        LottoNumber that = (LottoNumber) other;
-        return number == that.number;
+        LottoNumber otherLottoNumber = (LottoNumber) other;
+        return number == otherLottoNumber.number;
     }
 
     @Override
