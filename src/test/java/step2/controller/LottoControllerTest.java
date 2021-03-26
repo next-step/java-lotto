@@ -67,29 +67,12 @@ class LottoControllerTest {
     @DisplayName("LottoController 인스턴스의 LottoExpressionResponseDto 반환값 검중 테스트")
     @Test
     void 로또_반환값_검증() {
+        // given
+        LottoController lottoController = LottoController.newInstance(creationRequestDto, lottoShuffleStrategy);
 
         // when
-        LottoController lottoController = LottoController.newInstance(creationRequestDto, lottoShuffleStrategy);
         LottoExpressionResponseDto actual = lottoController.generateLottoList();
         LottoExpressionResponseDto expected = LottoExpressionResponseDto.newInstance(testLottoList);
-
-        List<LottoNumber> lott = actual.getLottoList()
-                .getLottoList()
-                .stream()
-                .map(Lotto::getLottoNumbers)
-                .findFirst().get();
-
-        lott.stream().map(lottoNumber -> lottoNumber.getLottoNumber())
-                .forEach(System.out::println);
-
-        List<LottoNumber> es = expected.getLottoList()
-                .getLottoList()
-                .stream()
-                .map(Lotto::getLottoNumbers)
-                .findFirst().get();
-
-        lott.stream().map(lottoNumber -> lottoNumber.getLottoNumber())
-                .forEach(System.out::println);
 
         // then
         assertThat(actual).isEqualTo(expected);
