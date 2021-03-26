@@ -3,21 +3,43 @@ package study.lotto.domain;
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.exception.LottoException;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static study.lotto.util.Constants.*;
 
 public class WinningLotto {
 
-    public static final String GUIDE_DONT_CONTAINS_BONUS_NUMBER = "보너스 번호는 당첨 번호에 포함될 수 없습니다.";
-    private final LottoNumber bonusNumber;
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+    protected WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if(winningLotto.contains(bonusNumber)) {
-            throw new LottoException(GUIDE_DONT_CONTAINS_BONUS_NUMBER);
+            throw new LottoException(GUIDE_ERR_DONT_CONTAINS_BONUS_NUMBER);
         }
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static WinningLotto of(final String winningLotto) {
+        return new WinningLotto(parseLotto(winningLotto), null);
+    }
+
+    public static WinningLotto of(final String winningLotto, final LottoNumber bonusNumber) {
+        return new WinningLotto(parseLotto(winningLotto), bonusNumber);
+    }
+
+    private static Lotto parseLotto(final String winningLotto) {
+        String[] split = parseSplit(winningLotto);
+        return Lotto.of(Arrays.stream(split)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    private static String[] parseSplit(final String winningLotto) {
+        return winningLotto.replaceAll(SPACIAL_CHARACTER_SPACE, WHITE_SPACE)
+                .split(SPLIT_DELIMITER);
     }
 
     public LottoMatch match(final Lotto lotto) {
@@ -31,7 +53,7 @@ public class WinningLotto {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof WinningLotto)) return false;
         final WinningLotto that = (WinningLotto) o;
