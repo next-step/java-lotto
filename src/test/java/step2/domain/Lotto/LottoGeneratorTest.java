@@ -16,4 +16,17 @@ class LottoGeneratorTest {
         // then
         assertThat(lottoGenerator).isNotNull();
     }
+
+    @DisplayName("LottoNumbersGenerator 인스턴스가 Lotto 인스턴스를 생성하고 반환하는지 테스트")
+    @Test
+    void 반환_Lotto() {
+        // given
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+
+        // when
+        Lotto lotto = lottoGenerator.generateLotto();
+
+        // then
+        assertThat(lotto).isNotNull();
+    }
 }
