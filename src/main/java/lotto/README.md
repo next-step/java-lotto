@@ -23,7 +23,6 @@
 * 발행한 로또 리스트와 당첨번호를 입력 받아 당첨 통계 생성한다
     * Map<WinningType, Integer> winningLogs
     * getWinningLogs(): Map<WinningType, Integer>
-    * double returnOnInvestment
     * getReturnOnInvestment(): double
     
 ### InputView 

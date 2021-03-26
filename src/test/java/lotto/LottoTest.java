@@ -11,6 +11,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.LottoFixture.*;
+
 
 public class LottoTest {
 
@@ -55,16 +57,11 @@ public class LottoTest {
     }
 
     static Stream<Arguments> providerTestMatchedCount() {
-        Lotto lotto = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
-        Lotto nonMatched = new Lotto(Lists.newArrayList(11, 12, 13, 14, 15, 16));
-        Lotto oneMatched = new Lotto(Lists.newArrayList(1, 12, 13, 14, 15, 16));
-        Lotto threeMatched = new Lotto(Lists.newArrayList(1, 2, 3, 14, 15, 16));
-        Lotto allMatched = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
         return Stream.of(
-                Arguments.of(lotto, nonMatched, 0),
-                Arguments.of(lotto, oneMatched, 1),
-                Arguments.of(lotto, threeMatched, 3),
-                Arguments.of(lotto, allMatched, 6)
+                Arguments.of(WINNING_NUMBER, NONE_MATCHED, 0),
+                Arguments.of(WINNING_NUMBER, ONE_MATCHED, 1),
+                Arguments.of(WINNING_NUMBER, THREE_MATCHED, 3),
+                Arguments.of(WINNING_NUMBER, ALL_MATCHED, 6)
         );
     }
 }
