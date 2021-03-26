@@ -26,7 +26,11 @@ public class LottoCoupon {
 
   @Override
   public String toString() {
-    return "" + lottoCoupon + "";
+    StringBuilder sb = new StringBuilder();
+    for(Lotto lotto : lottoCoupon) {
+      sb.append(lotto.toString());
+    }
+    return sb.toString();
   }
 
   @Override

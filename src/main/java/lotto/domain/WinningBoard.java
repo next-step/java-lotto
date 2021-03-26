@@ -70,8 +70,8 @@ public class WinningBoard {
     int total = getTotal(winningBoard);
     int test = this.money.toInt();
 
-    double earning = (total / (double)test) * 100;
-    return String.valueOf(String.format("%.3f", earning));
+    double earning = (total / (double)test);
+    return String.valueOf(String.format("%.1f", earning));
   }
 
   private int getTotal(Map<String, Integer> map) {
