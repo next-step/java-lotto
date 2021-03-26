@@ -5,22 +5,24 @@ import step2.exception.ListNullPointerException;
 import java.util.List;
 
 public final class Lotto {
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    private Lotto(List<LottoNumber> lotto) {
-        if (isListNull(lotto)) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (isListNull(lottoNumbers)) {
             throw new ListNullPointerException();
         }
-        this.lotto = lotto;
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static final Lotto newInstance(List<LottoNumber> lotto) {
-        return new Lotto(lotto);
+    public static final Lotto newInstance(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
-    private final boolean isListNull(List<LottoNumber> lotto) {
-        return lotto == null;
+    private final boolean isListNull(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers == null;
     }
 
-
+    public final List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
