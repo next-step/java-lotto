@@ -1,8 +1,6 @@
 package lotto;
 
-import org.assertj.core.util.Lists;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +15,6 @@ public class WinningStatisticsFixture {
         winningLog.put(WinningType.THIRD, third);
         winningLog.put(WinningType.FOURTH, fourth);
         winningLog.put(WinningType.FIFTH, fifth);
-        return new WinningStatistics(winningLog);
+        return new WinningStatistics(winningLog, (first + third + fourth + fifth) * LottoStore.LOTTO_PRICE);
     }
 }

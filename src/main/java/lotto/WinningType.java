@@ -20,6 +20,10 @@ public enum WinningType {
         return FIFTH.matchNumberCount <= matchNumberCount && matchNumberCount <= FIRST.matchNumberCount;
     }
 
+    public int winnings(){
+        return winnings;
+    }
+
     public static WinningType valueOf(int matchNumberCount) {
         return Arrays.stream(WinningType.values())
                 .filter(type -> matchNumberCount == type.matchNumberCount)

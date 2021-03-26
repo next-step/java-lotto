@@ -21,7 +21,9 @@
 
 ### WinningStatistics
 * 발행한 로또 리스트와 당첨번호를 입력 받아 당첨 통계 생성한다
+    * int purchasedAmount
     * Map<WinningType, Integer> winningLogs
+    * double returnOnInvestment
     * getWinningLogs(): Map<WinningType, Integer>
     * getReturnOnInvestment(): double
     
