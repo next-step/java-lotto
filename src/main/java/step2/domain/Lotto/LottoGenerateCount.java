@@ -5,7 +5,7 @@ import step2.domain.InputMoney;
 public final class LottoGenerateCount {
 
     private final static int DIVIDE_STANDARD = 1000;
-
+    private final int FINISH = 0;
     private int count;
 
     private LottoGenerateCount(int money) {
@@ -20,5 +20,7 @@ public final class LottoGenerateCount {
         return new LottoGenerateCount(money);
     }
 
-
+    public final boolean hasNext() {
+        return count > FINISH;
+    }
 }
