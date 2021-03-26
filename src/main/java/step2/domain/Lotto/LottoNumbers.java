@@ -35,4 +35,8 @@ public final class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    public final List<LottoNumber> subLottoNumbers(int fromIndex, int toIndex) {
+        return lottoNumbers.subList(fromIndex, toIndex);
+    }
 }
