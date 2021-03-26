@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.util.RandomNumberGenerator;
 
 public class Number implements Comparable<Number> {
+
+  private static final int MIN_NUMBER = 1;
+  private static final int MAX_NUMBER = 45;
 
   private final int generatedNumber;
 
@@ -12,9 +14,8 @@ public class Number implements Comparable<Number> {
     this.generatedNumber = generatedNumber;
   }
 
-  public static Number generateNumber() {
-    RandomNumberGenerator generator = new RandomNumberGenerator();
-    return new Number(generator.generatedRandomNumber());
+  public static Number generateNumber(int generatedNumber) {
+    return new Number(generatedNumber);
   }
 
   private void validation(int generatedNumber) {
@@ -22,7 +23,7 @@ public class Number implements Comparable<Number> {
   }
 
   private void rangeValidate(int generatedNumber) {
-    if(generatedNumber <= 0 || generatedNumber > 45) {
+    if(generatedNumber < MIN_NUMBER || generatedNumber > MAX_NUMBER) {
       throw new IllegalArgumentException("ERROR : 해당 범위에는 생성하실 수 없습니다.");
     }
   }

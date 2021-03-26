@@ -19,7 +19,7 @@ public class LottoCoupon {
   public static LottoCoupon createLottoCoupon(int howMany) {
     List<Lotto> lottoList = new ArrayList<>();
     for(int i = 0; i < howMany; i++) {
-      lottoList.add(Lotto.generatedLottoNumber());
+      lottoList.add(Lotto.generatedAutoLottoNumber());
     }
     return new LottoCoupon(lottoList);
   }
