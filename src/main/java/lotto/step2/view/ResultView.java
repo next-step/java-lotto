@@ -29,9 +29,12 @@ public class ResultView {
 
     public static void printResult(WinningStatistics winningStatistics) {
         System.out.println(MESSAGE_WINNING_RESULT);
-        for(Rank rank : winningStatistics.statistics().keySet()) {
-            System.out.println(rank.hit() + MESSAGE_NUMBER_MATCHED + rank.amount() + MESSAGE_WON + winningStatistics.statistics().get(rank) + MESSAGE_COUNT);
-        }
+        winningStatistics.statistics()
+                    .keySet()
+                    .stream()
+                    .filter(rank -> rank.hit() > 0)
+                    .sorted()
+                    .forEach(rank -> System.out.println(rank.hit() + MESSAGE_NUMBER_MATCHED + rank.amount() + MESSAGE_WON + winningStatistics.statistics().get(rank) + MESSAGE_COUNT));
         System.out.println(MESSAGE_TOTAL_PROFITS +  winningStatistics.profits() + MESSAGE_IS);
     }
 

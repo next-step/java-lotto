@@ -21,6 +21,7 @@ public class InputView {
 
     public static Lotto enterWinningNumber() {
         System.out.println(MESSAGE_WINNING_NUMBER);
+        scanner.nextLine();
         return new Lotto(scanner.nextLine().split(DELIMITER_COMMA));
     }
 }

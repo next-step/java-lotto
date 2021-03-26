@@ -7,11 +7,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final static int MIN = 1;
     private final static int MAX = 45;
     private final static String MESSAGE_ILLEGAL_NUMBER = "유효범위를 벗어난 숫자입니다.";
+    private final static String MESSAGE_CHECK_NUMERIC = "당첨번호는 정수여야 합니다.";
+    private final static String numericRegex = "^[-]?[0-9]+$";
 
     private int number;
 
     public LottoNumber(String number) {
-        this(Integer.parseInt(number));
+        this(checkNumeric(number));
     }
 
     public LottoNumber(int number) {
@@ -23,6 +25,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int number() {
         return number;
+    }
+
+    private static int checkNumeric(String number){
+        String numberRegExp = numericRegex;
+        if(!number.matches(numberRegExp)){
+            throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
+        }
+        return Integer.parseInt(number);
     }
 
     @Override
@@ -45,6 +55,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber other) {
         return number - other.number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
 
