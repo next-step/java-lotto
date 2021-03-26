@@ -5,8 +5,7 @@ import study.lotto.exception.LottoException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import static study.lotto.util.Constants.GUIDE_ERR_CANNOT_BUY_LOTTO;
-import static study.lotto.util.Constants.LOTTO_PRICE;
+import static study.lotto.util.Constants.*;
 
 public class Money {
 
@@ -41,6 +40,21 @@ public class Money {
                 .divide(BigDecimal.valueOf(LOTTO_PRICE))
                 .subtract(BigDecimal.valueOf(manualCount))
                 .intValue();
+    }
+
+    public int totalSize() {
+        return BigDecimal.valueOf(money)
+                .divide(BigDecimal.valueOf(LOTTO_PRICE))
+                .intValue();
+    }
+
+    public void ensureBuyLotto(int manualCount) {
+        int totalSize = BigDecimal.valueOf(money)
+                .divide(BigDecimal.valueOf(LOTTO_PRICE))
+                .intValue();
+        if(manualCount > totalSize) {
+            throw new LottoException(GUIDE_ERR_GREATER_THAN_LOTTO_COUNT);
+        }
     }
 
     @Override
