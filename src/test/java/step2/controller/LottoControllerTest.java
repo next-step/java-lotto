@@ -1,13 +1,22 @@
 package step2.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoControllerTest {
+
+    private LottoCreationRequestDto creationRequestDto;
+
+    @BeforeEach
+    void setUp() {
+        creationRequestDto = LottoCreationRequestDto.newInstance(1000);
+    }
 
     @DisplayName("LottoController 인스턴스 생성 여부 테스트")
     @Test
@@ -29,7 +38,7 @@ class LottoControllerTest {
         LottoController lottoController = LottoController.newInstance();
 
         // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList();
+        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
 
         // then
         assertThat(actual).isNotNull();

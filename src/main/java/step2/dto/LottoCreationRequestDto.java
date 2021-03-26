@@ -6,16 +6,20 @@ public final class LottoCreationRequestDto {
 
     private final InputMoney inputMoney;
 
-    private LottoCreationRequestDto(int inputValue) {
-        this(InputMoney.valueOf(inputValue));
+    private LottoCreationRequestDto(int inputMoney) {
+        this(InputMoney.valueOf(inputMoney));
     }
 
-    private LottoCreationRequestDto(InputMoney inputValue) {
-        this.inputMoney = inputValue;
+    private LottoCreationRequestDto(InputMoney inputMoney) {
+        this.inputMoney = inputMoney;
     }
 
-    public static final LottoCreationRequestDto newInstance(int inputValue) {
-        return new LottoCreationRequestDto(inputValue);
+    public static final LottoCreationRequestDto newInstance(int inputMoney) {
+        return new LottoCreationRequestDto(inputMoney);
+    }
+
+    public static final LottoCreationRequestDto newInstance(InputMoney inputMoney) {
+        return new LottoCreationRequestDto(inputMoney);
     }
 
 }
