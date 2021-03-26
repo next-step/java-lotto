@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,12 @@ public class Lotto {
     private List<LottoNumber> lottoNumberList;
 
     private static List<Integer> numberList;
+
+    public Lotto(String lottoNumberList){
+        this(Arrays.stream(lottoNumberList.split(","))
+                .map(number->new LottoNumber(Integer.parseInt(number)))
+                .collect(Collectors.toList()));
+    }
 
     public Lotto(List<LottoNumber> lottoNumberList){
         this.lottoNumberList = lottoNumberList;
