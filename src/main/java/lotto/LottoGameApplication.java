@@ -20,7 +20,7 @@ public class LottoGameApplication {
 
         inputView.inputHitNumbers();
         inputView.inputHitBonusNumber();
-        HitResults hitResults = lottoGames.result(inputView.getWinNumbers());
+        HitResults hitResults = lottoGames.result(inputView.winNumbers());
         Stats stats = new Stats(hitResults);
 
         LottoStatsView lottoStatsView = new LottoStatsView(stats);

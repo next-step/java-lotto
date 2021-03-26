@@ -36,7 +36,7 @@ public class InputView {
         return payMoney;
     }
 
-    public WinNumbers getWinNumbers() {
+    public WinNumbers winNumbers() {
         return new WinNumbers(winNumbers, bonusNumber);
     }
 }
