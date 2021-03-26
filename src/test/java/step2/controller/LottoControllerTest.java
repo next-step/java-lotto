@@ -19,4 +19,6 @@ class LottoControllerTest {
         assertThat(lottoController).isNotNull();
 
     }
+
+
 }

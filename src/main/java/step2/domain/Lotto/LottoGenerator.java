@@ -32,6 +32,13 @@ public final class LottoGenerator {
         return instance;
     }
 
+    public static final LottoGenerator getInstance(LottoShuffleStrategy lottoShuffleStrategy) {
+        if(isInstanceNull()) {
+            instance = new LottoGenerator(lottoShuffleStrategy);
+        }
+        return instance;
+    }
+
     private static final boolean isInstanceNull() {
         return instance == null;
     }
