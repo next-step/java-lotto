@@ -27,16 +27,15 @@ class LottoListTest {
         testLottoList.add(Lotto.newInstance(testLottoNumbers));
     }
 
-
-
-    @DisplayName("Lottos 인스턴스 생성 여부 테스트")
+    @DisplayName("LottoList 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
 
         // when
-        LottoList lottoList = LottoList.newInstance(this.testLottoList);
+        LottoList lottoList = LottoList.newInstance(testLottoList);
 
         // then
         assertThat(lottoList).isNotNull();
     }
+
 }

@@ -3,6 +3,7 @@ package step2.domain.Lotto;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -46,6 +47,7 @@ public final class LottoGenerator {
     public final Lotto generateLotto() {
         List<LottoNumber> lottoNumbers = generateLottoNumbers();
         lottoShuffleStrategy.shuffle(lottoNumbers);
+        Collections.sort(lottoNumbers);
         return Lotto.newInstance(lottoNumbers.subList(FROM_INDEX, TO_INDEX));
     }
 

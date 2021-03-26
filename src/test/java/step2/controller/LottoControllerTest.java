@@ -32,15 +32,15 @@ class LottoControllerTest {
 
     @DisplayName("LottoController 인스턴스의 로또 생성 로직과 LottoExpressionResponseDto 반환 테스트")
     @Test
-    void 로또생성_및_반환() {
+    void 로또_생성_및_반환() {
 
         // given
         LottoController lottoController = LottoController.newInstance();
 
         // when
-        //LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
+        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
 
         // then
-        //assertThat(actual).isNotNull();
+        assertThat(actual).isNotNull();
     }
 }
