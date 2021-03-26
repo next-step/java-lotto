@@ -1,5 +1,8 @@
 package lotto.domain.util;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class LottoEarningRateCalculator {
   private final long principal;
   private long earning;
@@ -13,7 +16,14 @@ public class LottoEarningRateCalculator {
     earning += prize;
   }
 
-  public String eval() {
-    return "0";
+  public String resultToString() {
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    decimalFormat.setRoundingMode(RoundingMode.DOWN);
+
+    return decimalFormat.format(eval());
+  }
+
+  private double eval() {
+    return earning / (double) principal;
   }
 }

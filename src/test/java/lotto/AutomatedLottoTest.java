@@ -75,7 +75,7 @@ public class AutomatedLottoTest {
         LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(14);
 
         calculator.cumulateEarning(5000);
-        String result = calculator.eval();
+        String result = calculator.resultToString();
 
         assertThat(result).isEqualTo("0.35");
     }
