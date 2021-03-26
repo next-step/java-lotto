@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.dto.LottoConfirmationRequestDto;
 import step2.dto.LottoCreationRequestDto;
 
 import java.util.Scanner;
@@ -29,8 +30,17 @@ public final class InputView {
         return scanner.nextInt();
     }
 
+    private final String inputLottoNumbersByClient() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
     public final LottoCreationRequestDto getLottoCreationRequestDto() {
         return LottoCreationRequestDto.newInstance(inputMoneyByClient());
+    }
+
+    public final LottoConfirmationRequestDto getLottoConfirmationRequestDto() {
+        return LottoConfirmationRequestDto.newInstance(inputLottoNumbersByClient());
     }
 
 }
