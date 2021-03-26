@@ -91,4 +91,5 @@ public class LottoMachineTest {
       LottoMachine lottoMachine = new LottoMachine(lottos);
     });
   }
+
 }
