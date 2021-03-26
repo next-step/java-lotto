@@ -38,6 +38,13 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public long isWinningLottoList(WinningLotto winningLotto){
+        return winningLotto.getLottoNumberList().stream()
+                .filter(winningNumber->lottoNumberList.contains(winningNumber))
+                .count();
+    }
+
+
     public List<LottoNumber> getLottoNumberList(){
         return lottoNumberList;
     }
