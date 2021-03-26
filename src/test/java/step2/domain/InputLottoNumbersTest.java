@@ -29,7 +29,7 @@ class InputLottoNumbersTest {
     void 생성() {
 
         // when
-        InputLottoNumbers inputLottoNumbers = InputLottoNumbers(testLottoNumbers);
+        InputLottoNumbers inputLottoNumbers = InputLottoNumbers.newInstance(testLottoNumbers);
 
         // then
         assertThat(inputLottoNumbers).isNotNull();
