@@ -12,7 +12,8 @@ class LotteryMachineTest {
 		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
 		LotteryMachine lotteryMachine = new LotteryMachine(shuffleStrategy);
 
-		assertThat(lotteryMachine.lottoes(1000).get(0)).isEqualToComparingFieldByField(new Lotto(shuffleStrategy));
+		assertThat(lotteryMachine.lottoes(1000).get(0)).isEqualToComparingFieldByField(
+			new Lotto(shuffleStrategy));
 	}
 
 	@Test
@@ -22,5 +23,12 @@ class LotteryMachineTest {
 
 		assertThat(lotteryMachine.lottoes(2000)).usingRecursiveComparison().isEqualTo(
 			Arrays.asList(new Lotto(shuffleStrategy), new Lotto(shuffleStrategy)));
+	}
+
+	@Test
+	void buyLottoAtWrongPrice() {
+		LotteryMachine lotteryMachine = new LotteryMachine(new NoShuffleStrategy());
+
+		assertThatThrownBy(() -> lotteryMachine.lottoes(1100)).isInstanceOf(RuntimeException.class);
 	}
 }
