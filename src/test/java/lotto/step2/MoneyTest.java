@@ -1,5 +1,6 @@
 package lotto.step2;
 
+import lotto.step2.domain.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

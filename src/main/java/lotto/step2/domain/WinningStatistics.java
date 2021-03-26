@@ -1,9 +1,7 @@
-package lotto.step2;
+package lotto.step2.domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningStatistics {

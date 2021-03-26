@@ -1,5 +1,7 @@
 package lotto.step2;
 
+import lotto.step2.domain.Money;
+import lotto.step2.domain.WinningStatistics;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
