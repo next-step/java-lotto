@@ -20,6 +20,12 @@ public class Lotto {
         validateLottoSize();
     }
 
+    private void validateLottoSize(){
+        if(lottoNumbers.size() != 6){
+            throw new IllegalArgumentException(ILLEGAL_LOTTO);
+        }
+    }
+
     public int match(Lotto winningNumbers) {
         int matchCount = lottoNumbers.stream()
                 .mapToInt(number -> winningNumbers.lottoNumbers.contains(number) ? MATCHED : MISMATCHED)
@@ -27,11 +33,6 @@ public class Lotto {
         return matchCount;
     }
 
-    private void validateLottoSize(){
-        if(lottoNumbers.size() != 6){
-            throw new IllegalArgumentException(ILLEGAL_LOTTO);
-        }
-    }
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
