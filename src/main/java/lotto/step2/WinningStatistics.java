@@ -11,6 +11,14 @@ public class WinningStatistics {
     private Map<Rank, Integer> winningStatistics = new HashMap<>();
     private Money money;
 
+    public WinningStatistics(Money money, int fourthRank, int thirdRank, int secondRank, int firstRank) {
+        this(money);
+        winningStatistics.put(Rank.from(3),fourthRank);
+        winningStatistics.put(Rank.from(4),thirdRank);
+        winningStatistics.put(Rank.from(5),secondRank);
+        winningStatistics.put(Rank.from(6),firstRank);
+    }
+
     public WinningStatistics(Money money) {
         Arrays.stream(Rank.values())
                 .forEach(rank -> winningStatistics.put(rank, 0));
@@ -26,7 +34,7 @@ public class WinningStatistics {
         winningStatistics.put(rank, winningStatistics.get(rank) + 1);
     }
 
-    public long sum() {
+    private long sum() {
         long sum = 0;
         for(Rank rank : winningStatistics.keySet()) {
             long multiple = rank.amount() * winningStatistics.get(rank);
@@ -35,7 +43,7 @@ public class WinningStatistics {
         return sum;
     }
 
-    public BigDecimal profits() {
+    public double profits() {
         return money.profits(sum());
     }
 

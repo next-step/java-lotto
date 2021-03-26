@@ -27,10 +27,11 @@ public class Money {
         return (money / PRICE_PER_LOTTO);
     }
 
-    public BigDecimal profits(long sum){
+    public double profits(long sum){
         BigDecimal purchasingAmount = BigDecimal.valueOf(money);
         return BigDecimal.valueOf(sum)
-                         .divide(purchasingAmount,SCALE,BigDecimal.ROUND_DOWN);
+                    .divide(purchasingAmount,SCALE,BigDecimal.ROUND_DOWN)
+                    .doubleValue();
     }
 
 }
