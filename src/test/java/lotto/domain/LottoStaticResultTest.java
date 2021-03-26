@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoStatisticsTest {
+public class LottoStaticResultTest {
 
   @Test
   @DisplayName("수익률 확인")
   public void calculate() {
-    LottoStatistics lottoStatistics = new LottoStatistics();
-    lottoStatistics.put(LottoRank.FOURTH);
-    assertEquals(0.35, lottoStatistics.calculate(14000));
+    LottoStaticResult lottoStaticResult = new LottoStaticResult();
+    lottoStaticResult.put(LottoRank.FOURTH);
+    assertEquals(0.35, lottoStaticResult.calculate(14000));
   }
 }

@@ -2,11 +2,11 @@ package lotto.domain;
 
 public class Money {
 
-  private final int money;
+  private int money;
   private static final int COST_CRETERION = 1000;
   private static final String INVALID_COST = "구매 금액은 1000원 이상이어야 합니다.";
 
-  public Money(int money) {
+  public Money(final int money) {
     validateMoney(money);
     this.money = money;
   }
@@ -19,5 +19,9 @@ public class Money {
 
   public int calculateLottoCount() {
     return (money / COST_CRETERION);
+  }
+
+  public void decreaseByLottoCount(int size) {
+    this.money -= (COST_CRETERION * size);
   }
 }
