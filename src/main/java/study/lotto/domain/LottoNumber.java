@@ -5,27 +5,34 @@ import study.lotto.util.Validation;
 
 import java.util.Objects;
 
-import static study.lotto.generator.LottoNumberGenerator.MAX_NUMBER_BOUND;
-import static study.lotto.generator.LottoNumberGenerator.MIN_NUMBER_BOUND;
+import static study.lotto.service.LottoFactory.MAX_NUMBER_BOUND;
+import static study.lotto.service.LottoFactory.MIN_NUMBER_BOUND;
+import static study.lotto.util.Constants.GUIDE_ERR_NOT_USE_VALUE;
 
 /**
  * 로또 숫자 번호에 대한 wrapper class
  */
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final String GUIDE_CANNOT_PARSE_STRING_TO_INTEGER = "숫자로 캐스팅 할 수 없는 값 입니다.";
-    public static final String GUIDE_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
     private final int number;
 
-    public LottoNumber(final String bonusNumber) {
+    protected LottoNumber(final String bonusNumber) {
         this(Validation.parseInt(bonusNumber));
     }
 
-    public LottoNumber(final int number) {
+    protected LottoNumber(final int number) {
         if(isInvalidNumber(number)) {
-            throw new LottoException(GUIDE_NOT_USE_VALUE);
+            throw new LottoException(GUIDE_ERR_NOT_USE_VALUE);
         }
         this.number = number;
+    }
+
+    public static LottoNumber of(final String number) {
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber of(final int number) {
+        return new LottoNumber(number);
     }
 
     private boolean isInvalidNumber(final int number) {

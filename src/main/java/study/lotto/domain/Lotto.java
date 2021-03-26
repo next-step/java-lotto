@@ -1,17 +1,39 @@
 package study.lotto.domain;
 
-import java.util.List;
+import study.lotto.exception.LottoException;
+
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import static study.lotto.service.LottoFactory.LOTTO_MAX_SIZE;
+import static study.lotto.util.Constants.GUIDE_ERR_LOTTO_SIZE;
 
 /**
  * 하나의 로또 게임 하나
  */
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    protected Lotto(final Collection<LottoNumber> lottoNumbers) {
+        checkValidation(lottoNumbers);
+        this.lottoNumbers = getLottoNumbers(lottoNumbers);
+    }
+
+    private void checkValidation(final Collection<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != LOTTO_MAX_SIZE) {
+            throw new LottoException(GUIDE_ERR_LOTTO_SIZE);
+        }
+    }
+
+    public static Lotto of(final Collection<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
+
+    private Set<LottoNumber> getLottoNumbers(final Collection<LottoNumber> lottoNumbers) {
+        return new HashSet<>(lottoNumbers);
     }
 
     public long match(final Lotto winningLotto) {
