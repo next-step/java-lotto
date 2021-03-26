@@ -35,7 +35,7 @@ class LottosTest {
     void 생성() {
 
         // when
-        Lottos lottos = Lottos.newInsatnce(lottoList);
+        Lottos lottos = Lottos.newInstance(lottoList);
 
         // then
         assertThat(lottos).isNotNull();
