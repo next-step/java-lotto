@@ -3,6 +3,7 @@ package step2.domain.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.exception.ListNullPointerException;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -2,7 +2,7 @@ package step2.dto;
 
 import step2.domain.InputMoney;
 
-public class LottoCreationRequestDto {
+public final class LottoCreationRequestDto {
 
     private final InputMoney inputMoney;
 

@@ -52,6 +52,10 @@ public final class LottoNumber {
         return lottoNumber > MAXIMUM;
     }
 
+    public final int getLottoNumber() {
+        return lottoNumber.intValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,7 +69,5 @@ public final class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    public final int getLottoNumber() {
-        return lottoNumber.intValue();
-    }
+
 }
