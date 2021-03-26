@@ -135,4 +135,64 @@ class LottoTest {
         assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
     }
 
+    @Test
+    @DisplayName("LottoTicket - 등수조회 null 값입력")
+    void lottoTicket_inquiryRank_nukk() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(null))
+                .withMessageMatching("당첨 숫자를 입력해 주세요.");
+    }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회 당첨번호 수 불일치")
+    void lottoTicket_inquiryRank_winNumberLength() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6, 7}))
+                .withMessageMatching("당첨 숫자는 6개의 수 여야 합니다.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5}))
+                .withMessageMatching("당첨 숫자는 6개의 수 여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회 당첨번호 수 중복입력")
+    void lottoTicket_inquiryRank_winNumberDup() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 2, 4, 5, 6}))
+                .withMessageMatching("중복된 숫자가 존재합니다. 입력값을 확인해주세요.");
+    }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회 당첨번호 수 범위 불일치")
+    void lottoTicket_inquiryRank_winNumberIsIllegal() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 48, 2, 3, 5, 6}))
+                .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
+    }
+
 }

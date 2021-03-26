@@ -1,10 +1,15 @@
 package lotto.service;
 
+import lotto.domain.LottoRank;
+import lotto.domain.LottoRanks;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -37,6 +42,21 @@ class LottoAutoServiceTest {
 
         // then
         assertThat(purchaseAmount / lottoPrice).isEqualTo(lottoTicket.getCount());
+    }
+
+    @Test
+    @DisplayName("inquiryWin 기본테스트")
+    void inquiryWin() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoAutoService lottoAutoService = new LottoAutoService();
+
+        // when
+        LottoRanks lottoRanks = lottoAutoService.inquiryWin(lottoNumberInputList, new int[]{1, 2, 3, 4, 5, 6});
+
+        // then
+        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
     }
 
 }
