@@ -57,7 +57,7 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(NUMBER_DELIMITER)).mapToInt(Integer::new).toArray();
+        return Arrays.stream(lottoNumbers.split(NUMBER_DELIMITER)).mapToInt(value -> Integer.parseInt(value.trim())).toArray();
     }
 
     public List<Lotto> getLottoList() {

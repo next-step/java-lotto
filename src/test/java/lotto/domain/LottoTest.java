@@ -6,7 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -92,4 +94,45 @@ class LottoTest {
         // then
         assertThat(LottoRank.getEnum(matchCount)).isEqualTo(lottoRank);
     }
+
+    @Test
+    @DisplayName("LottoTicket - 문자열기반 초기화 테스트")
+    void lottoTicket_String() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 3, 13, 28, 32, 34");
+        lottoNumberInputList.add("3, 6, 17, 31, 34, 36");
+
+        List<String> lottoNumberTargetList = new ArrayList<>();
+
+        // when
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+        for (Lotto lotto : lottoTicket.getLottoList()) {
+            String lottoNumbers = Arrays.toString(lotto.getLottoNumbers());
+            lottoNumbers = lottoNumbers.replace("[", "");
+            lottoNumbers = lottoNumbers.replace("]", "");
+            lottoNumberTargetList.add(lottoNumbers);
+        }
+
+        // then
+        for (int i = 0; i < lottoNumberInputList.size(); i++) {
+            assertThat(lottoNumberInputList.get(i).equals(lottoNumberTargetList.get(i))).isTrue();
+        }
+    }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회")
+    void lottoTicket_inquiryRank() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when
+        LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6});
+
+        // then
+        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
+    }
+
 }
