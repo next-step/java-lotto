@@ -4,6 +4,8 @@ import step1.constants.Constants;
 
 public class StringUtils {
 
+    private StringUtils() { }
+
     public static boolean isBlank(final String input) {
         if (input == null || input.trim().isEmpty()) {
             return true;
