@@ -23,4 +23,7 @@ public final class LottoList {
         lottoList.contains(additionalLotto);
     }
 
+    public final List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }
