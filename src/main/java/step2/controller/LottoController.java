@@ -7,7 +7,6 @@ import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
-import step2.view.ResultView;
 
 public final class LottoController {
 
@@ -19,7 +18,7 @@ public final class LottoController {
     }
 
     private LottoController(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
-        this.lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto.getInputMoney());
+        this.lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto);
         this.lottoGenerator = LottoGenerator.getInstance(strategy);
     }
 

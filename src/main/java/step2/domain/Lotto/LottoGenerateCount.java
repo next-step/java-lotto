@@ -1,6 +1,7 @@
 package step2.domain.Lotto;
 
 import step2.domain.InputMoney;
+import step2.dto.LottoCreationRequestDto;
 
 public final class LottoGenerateCount {
 
@@ -10,6 +11,10 @@ public final class LottoGenerateCount {
 
     private LottoGenerateCount(int money) {
         this.count = (money/DIVIDE_STANDARD);
+    }
+
+    public static final LottoGenerateCount newInstance(LottoCreationRequestDto requestDto) {
+        return newInstance(requestDto.getInputMoney());
     }
 
     public static final LottoGenerateCount newInstance(InputMoney inputMoney) {
