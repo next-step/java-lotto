@@ -26,6 +26,10 @@ public final class LottoController {
         return new LottoController(creationRequestDto);
     }
 
+    public static final LottoController newInstance(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
+        return new LottoController(creationRequestDto, strategy);
+    }
+
     public final LottoExpressionResponseDto generateLottoList() {
         LottoList lottoList = LottoList.newInstance();
         while (lottoGenerateCount.hasNext()) {

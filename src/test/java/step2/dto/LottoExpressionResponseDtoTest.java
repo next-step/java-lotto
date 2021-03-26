@@ -74,4 +74,18 @@ class LottoExpressionResponseDtoTest {
         assertThat(actual).isEqualTo(testLottoList);
     }
 
+    @DisplayName("LottoExpressionResponseDto가 소유한 값을 기준으로 비교하는지에 대한 테스트")
+    @Test
+    void 비교() {
+        // when
+        LottoExpressionResponseDto actual =
+                LottoExpressionResponseDto.newInstance(testLottoList);
+
+        LottoExpressionResponseDto expected =
+                LottoExpressionResponseDto.newInstance(testLottoList);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }
