@@ -2,6 +2,8 @@ package im.juniq.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
@@ -29,5 +31,11 @@ class LottoTest {
 		Lotto lottoB = new Lotto(new NoShuffleStrategy());
 
 		assertThat(lottoA).isEqualToComparingFieldByField(lottoB);
+	}
+
+	@Test
+	void checkWinningNumber() {
+		Lotto lotto = new Lotto(new NoShuffleStrategy());
+		assertThat(lotto.numberOfMatchedWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(6);
 	}
 }
