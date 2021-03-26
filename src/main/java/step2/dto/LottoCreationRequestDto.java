@@ -22,4 +22,7 @@ public final class LottoCreationRequestDto {
         return new LottoCreationRequestDto(inputMoney);
     }
 
+    public final InputMoney getInputMoney() {
+        return inputMoney;
+    }
 }

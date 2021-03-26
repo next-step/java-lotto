@@ -12,8 +12,5 @@ public class LottoController {
         return new LottoController();
     }
 
-    public LottoExpressionResponseDto generateLottoList(LottoCreationRequestDto creationRequestDto) {
 
-
-    }
 }
