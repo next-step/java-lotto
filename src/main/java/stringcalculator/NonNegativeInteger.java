@@ -11,6 +11,7 @@ public final class NonNegativeInteger {
   public NonNegativeInteger() {
     this(ZERO);
   }
+
   public NonNegativeInteger(String number) {
     this(Integer.parseInt(number));
   }
