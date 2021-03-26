@@ -9,23 +9,23 @@ public enum Rank {
     SECOND(5, 1_500_000, "5개 번호 일치"),
     FIRST(6, 2_000_000_000, "6개 번호 일치");
     
-    private final int hit;
-    private final int amount;
+    private final long hit;
+    private final long amount;
 
-    Rank(int hit, int amount, String message) {
+    Rank(long hit, long amount, String message) {
         this.hit = hit;
         this.amount = amount;
     }
 
-    public int amount() {
+    public long amount() {
         return this.amount;
     }
 
-    public int hit() {
+    public long hit() {
         return this.hit;
     }
 
-    public static Rank from(int hit) {
+    public static Rank from(long hit) {
         return Arrays.stream(values())
                 .filter(rank -> rank.hit == hit)
                 .findFirst()
