@@ -28,3 +28,4 @@
 * LottoNumber : 로또 숫자 하나
 * LottoRank : 로또 등수와 당첨금액 정보를 표현하기 위한 enum 클래스
 * LottoRanks : 로또 수익률과 등수별 당첨정보를 제공하기 위한 일급컬렉션 클래스
+* LottoConstant : 로또복권과 관련된 상수들의 모임 클래스
