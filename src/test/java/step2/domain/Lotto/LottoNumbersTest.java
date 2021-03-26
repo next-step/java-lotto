@@ -61,4 +61,19 @@ class LottoNumbersTest {
         assertThat(firstLottoNumbers).isEqualTo(secondLottoNumbers);
     }
 
+    @DisplayName("LottoNumbers 인스턴스가 특정 범위만큼의 값을 반환하는지 테스트")
+    @Test
+    void 반환() {
+        // given
+        LottoNumbers lottoNumbers = LottoNumbers.newInstance(lottoNumberList);
+
+        // when
+        List<LottoNumber> actualList = lottoNumbers.subLottoNumbers(0, 6);
+        int actual = actualList.size();
+
+        // then
+        assertThat(actual).isEqualTo(6);
+    }
+
+
 }
