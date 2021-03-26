@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.Objects;
 
 public class Operand {
-
+  private static final String NUMERIC_REGEX = "-?\\d+(\\.\\d+)?";
   private final int operand;
 
   public Operand(String formula) {
@@ -36,7 +36,7 @@ public class Operand {
   }
 
   private boolean isNumeric(String formula) {
-    return formula.matches("-?\\d+(\\.\\d+)?");
+    return formula.matches(NUMERIC_REGEX);
   }
 
   private boolean isNegativeNumber(int operand) {

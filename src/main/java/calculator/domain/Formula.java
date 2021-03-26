@@ -55,7 +55,9 @@ public class Formula {
   }
 
   private static boolean isCustomSeparator(String userInput) {
-    return Pattern.compile(CUSTOM_SEPARATOR).matcher(userInput).find();
+    return Pattern.compile(CUSTOM_SEPARATOR)
+        .matcher(userInput)
+        .find();
   }
 
   public int summation() {
