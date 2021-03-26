@@ -19,7 +19,7 @@ class WinningBoardTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"3, fourth", "4, third", "5, second", "6, first"})
+  @CsvSource({"3, FOURTH", "4, THIRD", "5, SECOND", "6, FIRST"})
   @DisplayName("구매한 로또 쿠폰에 대한 올바른 당첨 결과에 대한 검증을 제대로 하는가")
   public void validateWinLotto(int winner, String key) throws Exception {
     //given
@@ -34,7 +34,7 @@ class WinningBoardTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"3, 500.000", "4, 5000.000", "5, 150000.000", "6, 200000000.000"})
+  @CsvSource({"3, 5.0", "4, 50.0", "5, 1500.0", "6, 2000000.0"})
   @DisplayName("구매한 로또 쿠폰에 대한 수익률에 대한 검증을 제대로 하는가")
   public void validateWinLottoEarningRate(int winner, String earningRate) throws Exception {
     //given
