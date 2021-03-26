@@ -10,22 +10,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LottosTest {
+class LottoListTest {
 
-    private List<Lotto> lottoList;
+    private List<Lotto> testLottoList;
 
     @BeforeEach
     void setUp() {
-        lottoList = new ArrayList<>();
+        testLottoList = new ArrayList<>();
 
-        List<LottoNumber> testNumbers = IntStream
+        List<LottoNumber> testLottoNumbers = IntStream
                 .range(1,6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        lottoList.add(Lotto.newInstance(testNumbers));
+        testLottoList.add(Lotto.newInstance(testLottoNumbers));
     }
 
 
@@ -35,9 +34,9 @@ class LottosTest {
     void 생성() {
 
         // when
-        Lottos lottos = Lottos.newInstance(lottoList);
+        LottoList lottoList = LottoList.newInstance(this.testLottoList);
 
         // then
-        assertThat(lottos).isNotNull();
+        assertThat(lottoList).isNotNull();
     }
 }
