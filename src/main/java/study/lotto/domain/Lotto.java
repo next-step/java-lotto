@@ -2,10 +2,7 @@ package study.lotto.domain;
 
 import study.lotto.exception.LottoException;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static study.lotto.service.LottoFactory.LOTTO_MAX_SIZE;
 import static study.lotto.util.Constants.GUIDE_ERR_LOTTO_SIZE;
@@ -22,18 +19,18 @@ public class Lotto {
         this.lottoNumbers = getLottoNumbers(lottoNumbers);
     }
 
+    public static Lotto of(final Collection<LottoNumber> numbers) {
+        return new Lotto(numbers);
+    }
+
     private void checkValidation(final Collection<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != LOTTO_MAX_SIZE) {
             throw new LottoException(GUIDE_ERR_LOTTO_SIZE);
         }
     }
 
-    public static Lotto of(final Collection<LottoNumber> numbers) {
-        return new Lotto(numbers);
-    }
-
     private Set<LottoNumber> getLottoNumbers(final Collection<LottoNumber> lottoNumbers) {
-        return new HashSet<>(lottoNumbers);
+        return new TreeSet<>(lottoNumbers);
     }
 
     public long match(final Lotto winningLotto) {
