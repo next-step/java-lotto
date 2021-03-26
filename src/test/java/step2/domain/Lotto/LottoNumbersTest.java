@@ -35,6 +35,17 @@ class LottoNumbersTest {
         assertThat(lottoNumbers).isNotNull();
     }
 
+    @DisplayName("LottoNumbers 인스턴스 시작값과 종료값을 이용한 생성 여부 테스트")
+    @Test
+    void 생성_시작값_종료값() {
+
+        // when
+        LottoNumbers lottoNumbers = LottoNumbers.newInstance(1, 46);
+
+        // then
+        assertThat(lottoNumbers).isNotNull();
+    }
+
     @DisplayName("LottoNumbers 인스턴스 부적절한 값 입력시 예외처리 발생 여부 테스트")
     @Test
     void 검증_Null() {
