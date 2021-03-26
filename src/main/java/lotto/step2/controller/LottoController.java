@@ -12,7 +12,6 @@ public class LottoController {
         Lottos lottos = LottoStore.purchase(InputView.enterPurchasingAmount());
         ResultView.printLottoNumbers(lottos);
         Lotto winningLotto = InputView.enterWinningNumber();
-        WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
-        ResultView.printResult(winningStatistics);
+        ResultView.printResult(new WinningStatistics(lottos, winningLotto));
     }
 }

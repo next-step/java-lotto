@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final static int MAX = 45;
     private final static String MESSAGE_ILLEGAL_NUMBER = "유효범위를 벗어난 숫자입니다.";
     private final static String MESSAGE_CHECK_NUMERIC = "당첨번호는 정수여야 합니다.";
-    private final static String numericRegex = "^[-]?[0-9]+$";
+    private final static String NUMERIC_REGEX = "^[-]?[0-9]+$";
 
     private int number;
 
@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static int checkNumeric(String number){
-        String numberRegExp = numericRegex;
+        String numberRegExp = NUMERIC_REGEX;
         if(!number.matches(numberRegExp)){
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
         }

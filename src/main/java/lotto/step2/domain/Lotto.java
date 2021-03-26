@@ -27,35 +27,13 @@ public class Lotto {
     }
 
     public int match(Lotto winningNumbers) {
-        int matchCount = lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .mapToInt(number -> winningNumbers.lottoNumbers.contains(number) ? MATCHED : MISMATCHED)
                 .sum();
-        return matchCount;
     }
 
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other == null || getClass() != other.getClass()) {
-            return false;
-        }
-        Lotto otherLotto = (Lotto) other;
-        return otherLotto.lottoNumbers
-                        .stream()
-                        .filter(lottoNumber -> !otherLotto.lottoNumbers.contains(lottoNumber))
-                        .findAny()
-                        .isPresent();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
     }
 
 }

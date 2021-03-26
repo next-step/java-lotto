@@ -8,10 +8,11 @@ import java.util.Map;
 
 public class WinningStatistics {
 
-    private final Map<Rank, Integer> winningStatistics = new HashMap<>();
-    private int lottoCount;
     private static final long PRICE_PER_LOTTO = 1000;
     private static final int SCALE = 2;
+
+    private final Map<Rank, Integer> winningStatistics = new HashMap<>();
+    private final int lottoCount;
 
     public WinningStatistics(Lottos lottos, Lotto winningLotto) {
         Arrays.stream(Rank.values())

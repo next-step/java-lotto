@@ -16,7 +16,7 @@ public class InputView {
 
     public static Money enterPurchasingAmount() {
         System.out.println(MESSAGE_PURCHASING_AMOUNT);
-        return new Money(scanner.nextInt());
+        return new Money(scanner.next());
     }
 
     public static Lotto enterWinningNumber() {

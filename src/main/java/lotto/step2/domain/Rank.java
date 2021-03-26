@@ -3,7 +3,7 @@ package lotto.step2.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    MISS(0, 0, "일치하는 번호 없음"),
+    MISS(0, 0, "꽝"),
     FOURTH(3, 5_000, "3개 번호 일치"),
     THIRD(4, 50_000, "4개 번호 일치"),
     SECOND(5, 1_500_000, "5개 번호 일치"),
