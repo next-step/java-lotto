@@ -17,21 +17,23 @@ public class Lotto {
     }
 
     static {
-        List<Integer> numberList = Stream.iterate(1, n -> n + 1)
+        numberList = Stream.iterate(1, n -> n + 1)
                 .limit(45)
                 .collect(Collectors.toList());
     }
 
-    public void generate(){
+    public static Lotto generate(){
         Collections.shuffle(numberList);
-        lottoNumberList = numberList.stream().
+        return new Lotto(numberList.stream().
                 limit(6)
                 .sorted()
                 .map(number->new LottoNumber(number))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-
+    public List<LottoNumber> getLottoNumberList(){
+        return lottoNumberList;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,4 +46,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numberList);
     }
+
 }
