@@ -49,9 +49,9 @@ class WinningNumberTest {
 
     private static Stream<Arguments> provideLottos() {
         return Stream.of(
-                Arguments.of(new int[]{1, 3, 5, 7, 9, 11}, 6L),
-                Arguments.of(new int[]{1, 3, 5, 7, 9, 45}, 5L),
-                Arguments.of(new int[]{1, 3, 5, 7, 10, 43}, 4L)
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 11}, 6),
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 45}, 5),
+                Arguments.of(new int[]{1, 3, 5, 7, 10, 43}, 4)
         );
     }
 }

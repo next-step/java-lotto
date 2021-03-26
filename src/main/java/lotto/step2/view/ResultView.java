@@ -1,14 +1,13 @@
 package lotto.step2.view;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.LottoBoard;
 import lotto.step2.domain.Lottos;
 import lotto.step2.domain.enums.LottoBoardMatcher;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -17,6 +16,10 @@ public class ResultView {
     private static final String NEWLINE_CHARACTER = "\n";
     private static final String FRONT_BRACKETS = "[";
     private static final String END_BRACKETS = "]";
+    private static final String WINNING_STATISTICS = "당첨 통계";
+    private static final String BOUNDARY = "---------";
+    private static final String WINNING_MATCH_MSG = "%d개 일치 (%d)원 - %d개";
+    private static final String WINNING_RATIO = "총 수익률은 %.02f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private ResultView() {
     }
@@ -40,16 +43,28 @@ public class ResultView {
                 + END_BRACKETS + NEWLINE_CHARACTER;
     }
 
-    public static void printLottoResult(int lottoAmount, LottoBoard lottoBoard) {
+    public static void printLottoResult(LottoBoard lottoBoard) {
+        System.out.println(WINNING_STATISTICS);
+        System.out.println(BOUNDARY);
+
         Map<Long, Long> map = lottoBoard.stream().collect(
-                Collectors.groupingBy(Function.identity(), Collectors.counting())
+            Collectors.groupingBy(Function.identity(), Collectors.counting())
         );
 
-        for (Long key : map.keySet()) {
-            System.out.println(key + "," + map.get(key));
-        }
+        LongStream.rangeClosed(LottoBoardMatcher.THREE.getMatchCount(), LottoBoardMatcher.SIX.getMatchCount())
+            .forEach(matchCount -> {
+                System.out.println(String.format(WINNING_MATCH_MSG, matchCount, LottoBoardMatcher.getWinningBonus(matchCount), valueToLong(map, matchCount)));
+            }
+        );
 
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(String.format(WINNING_RATIO, LottoBoardMatcher.winningRatio(map)));
+    }
+
+    private static Long valueToLong(Map<Long, Long> map, Long key) {
+        Long value = map.get(key);
+        if (value == null) {
+            return 0L;
+        }
+        return value;
     }
 }
