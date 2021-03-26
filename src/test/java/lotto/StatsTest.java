@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.entry;
@@ -38,27 +39,33 @@ public class StatsTest {
     @DisplayName("당첨 통계를 반환한다.")
     @Test
     public void stats() {
-        WinNumbers winNumbers = new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winNumberList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinNumbers winNumbers = new WinNumbers(winNumberList, bonusNumber);
 
         HitResult first = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6)), winNumbers);
         HitResult second = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 5, 7)), winNumbers);
-        HitResult third1 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 10, 24)), winNumbers);
-        HitResult third2 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 23, 41)), winNumbers);
-        HitResult fourth = new HitResult(new Numbers(Arrays.asList(1, 2, 6, 14, 30, 41)), winNumbers);
+        HitResult third = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 5, 10)), winNumbers);
+        HitResult fourth1 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 10, 24)), winNumbers);
+        HitResult fourth2 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 23, 41)), winNumbers);
+        HitResult fifth = new HitResult(new Numbers(Arrays.asList(1, 2, 6, 14, 30, 41)), winNumbers);
 
         HitResults hitResults = new HitResults(5000);
         hitResults.add(first);
         hitResults.add(second);
-        hitResults.add(third1);
-        hitResults.add(third2);
-        hitResults.add(fourth);
+        hitResults.add(third);
+        hitResults.add(fourth1);
+        hitResults.add(fourth2);
+        hitResults.add(fifth);
 
         Stats stats = new Stats(hitResults);
 
         Map<String, Integer> countHitStats = stats.countHitStats();
         assertThat(countHitStats).contains(entry("FIRST", 1)
                 , entry("SECOND", 1)
-                , entry("THIRD", 2)
-                , entry("FOURTH", 1));
+                , entry("THIRD", 1)
+                , entry("FOURTH", 2)
+                , entry("FIFTH", 1)
+        );
     }
 }
