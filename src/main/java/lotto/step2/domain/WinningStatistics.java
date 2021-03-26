@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class WinningStatistics {
     }
 
     public Map<Rank, Integer> statistics() {
-        return winningStatistics;
+        return Collections.unmodifiableMap(winningStatistics);
     }
 
     public void hit(long hit) {
