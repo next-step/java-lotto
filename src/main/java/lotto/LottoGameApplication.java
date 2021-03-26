@@ -19,10 +19,12 @@ public class LottoGameApplication {
         lottoGamesView.printLottoGamesNumber();
 
         inputView.inputHitNumbers();
+        inputView.inputHitBonusNumber();
         HitResults hitResults = lottoGames.result(inputView.getWinNumbers());
         Stats stats = new Stats(hitResults);
 
         LottoStatsView lottoStatsView = new LottoStatsView(stats);
         lottoStatsView.printLottoResult();
+
     }
 }

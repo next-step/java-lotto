@@ -28,11 +28,11 @@ public class LottoStatsView {
         Map<String, Integer> countHitStats = stats.countHitStats();
 
         for (Prize prize : Prize.values()) {
-            System.out.println(prize.getHitCount() + "개 일치 (" + prize.getPrizeMoney() + "원)-" + countHitStats.get(prize.name()) + "개");
+            System.out.println(String.format("%s (%s원)- %d개", prize.getHitCount(), prize.getPrizeMoney(), countHitStats.get(prize.name())));
         }
     }
 
     private void printReturnRate() {
-        System.out.println("총 수익률은 " + stats.returnRate() + "입니다.");
+        System.out.println(String.format("총 수익률은 %s 입니다.", stats.returnRate()));
     }
 }

@@ -5,9 +5,10 @@ import java.util.Map;
 
 public enum Prize {
     FIRST(new HitCount(6), new HitMoney(2_000_000_000)),
-    SECOND(new HitCount(5), new HitMoney(1_500_000)),
-    THIRD(new HitCount(4), new HitMoney(50_000)),
-    FOURTH(new HitCount(3), new HitMoney(5_000)),
+    SECOND(new HitCount(5, true), new HitMoney(30_000_0000)),
+    THIRD(new HitCount(5), new HitMoney(1_500_000)),
+    FOURTH(new HitCount(4), new HitMoney(50_000)),
+    FIFTH(new HitCount(3), new HitMoney(5_000)),
     ;
 
     private HitCount hitCount;
