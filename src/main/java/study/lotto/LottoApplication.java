@@ -1,41 +1,45 @@
 package study.lotto;
 
 import study.lotto.controller.LottoStore;
-import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoNumber;
 import study.lotto.domain.LottoResult;
+import study.lotto.domain.Money;
+import study.lotto.view.dto.ManualLottoParser;
 import study.lotto.domain.WinningLotto;
 import study.lotto.service.Lottos;
+import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
-import study.lotto.view.dto.RequestMoney;
-
-import static study.lotto.view.InputView.*;
-import static study.lotto.view.ResultView.printRate;
-import static study.lotto.view.ResultView.printResult;
+import study.lotto.view.dto.RequestLottoArgument;
 
 
 public class LottoApplication {
-    public static void main(String[] args) {
+
+    public void step4() {
+        InputView inputView = new InputView();
         LottoStore lottoStore = new LottoStore();
+        ResultView resultView = new ResultView();
 
-        int money = money();
-        int manualCount = manualCount(money);
+        Money money = Money.of(inputView.requestPurchasedLotto());
+        String manualCount = inputView.requestManual();
+        RequestLottoArgument lottoArgument = RequestLottoArgument.of(money, manualCount);
 
-        Lottos manualLotto = makeManualLotto(manualCount);
+        ManualLottoParser manualArgument = ManualLottoParser.of(inputView.makeManualLottoNumbers(manualCount));
+        resultView.printLottoCount(lottoArgument);
 
-        RequestMoney requestMoney = new RequestMoney(money, manualCount);
-        Lottos lottos = lottoStore.lotto(requestMoney, manualLotto);
+        Lottos lottos = lottoStore.issueLotto(lottoArgument, manualArgument);
+        resultView.printLottos(lottos);
 
-        ResultView.printLottoCount(requestMoney);
-        ResultView.printLottos(lottos);
+        String winningNumbers = inputView.requestWinningNumbers();
+        LottoNumber bonusNumber = LottoNumber.of(inputView.requestBonusNumber());
 
-        Lotto winningNumber = winningNumber();
-        LottoNumber bonusNumber = bonusNumber();
+        WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
+        resultView.printResult(lottoResult);
+    }
 
-        printResult(lottoResult);
-        printRate(lottoResult);
+    public static void main(String[] args) {
+        LottoApplication lottoApplication = new LottoApplication();
+        lottoApplication.step4();
     }
 }
