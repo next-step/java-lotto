@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,10 +18,14 @@ public class Lotto {
     private List<Integer> numbers;
 
     public Lotto() {
-        numbers = creatNumbers();
+        this(creatNumbers());
     }
 
-    private List<Integer> creatNumbers() {
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static List<Integer> creatNumbers() {
         Collections.shuffle(range);
         List<Integer> numbers = new ArrayList<>(range.subList(0, LOTTO_NUMBER));
         Collections.sort(numbers);
@@ -34,5 +39,23 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        for (int i = 0; i < LOTTO_NUMBER; i++) {
+            if (!numbers.get(i).equals(lotto.numbers.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
