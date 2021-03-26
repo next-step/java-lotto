@@ -38,4 +38,16 @@ class LottoListTest {
         assertThat(lottoList).isNotNull();
     }
 
+    @DisplayName("LottoList 인스턴스가 쇼유한 값을 반환하는지에 대한 테스트")
+    @Test
+    void 반환() {
+
+        // when
+        LottoList lottoList = LottoList.newInstance(testLottoList);
+        List<Lotto> actual = lottoList.getLottoList();
+
+        // then
+        assertThat(actual).isEqualTo(testLottoList);
+    }
+
 }
