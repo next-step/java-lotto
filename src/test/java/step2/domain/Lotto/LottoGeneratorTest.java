@@ -34,7 +34,8 @@ class LottoGeneratorTest {
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {});
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {
+        });
 
         // then
         assertThat(lottoGenerator).isNotNull();
@@ -44,7 +45,8 @@ class LottoGeneratorTest {
     @Test
     void 반환_Lotto() {
         // given
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {});
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {
+        });
 
         // when
         Lotto lotto = lottoGenerator.generateLotto();

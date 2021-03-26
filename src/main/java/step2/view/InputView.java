@@ -29,7 +29,7 @@ public final class InputView {
         return scanner.nextInt();
     }
 
-    public final LottoCreationRequestDto getLottoCreationRequestDto(){
+    public final LottoCreationRequestDto getLottoCreationRequestDto() {
         return LottoCreationRequestDto.newInstance(inputMoneyByClient());
     }
 

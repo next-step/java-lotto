@@ -1,7 +1,7 @@
 package step2;
 
-public class ApplicationStarter {
-    public static void main(String[] args) {
+public final class ApplicationStarter {
+    public static final void main(String[] args) {
         LottoApplication.newInstance().start();
     }
 }

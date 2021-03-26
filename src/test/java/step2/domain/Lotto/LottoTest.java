@@ -18,8 +18,8 @@ class LottoTest {
     private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
-    void setUp(){
-        lottoNumbers =  IntStream.range(1, 6)
+    void setUp() {
+        lottoNumbers = IntStream.range(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
@@ -43,8 +43,8 @@ class LottoTest {
         List<LottoNumber> nullLottoNumbers = null;
 
         // when and then
-        assertThatThrownBy(()-> {
-                    Lotto.newInstance(nullLottoNumbers);
+        assertThatThrownBy(() -> {
+            Lotto.newInstance(nullLottoNumbers);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
 

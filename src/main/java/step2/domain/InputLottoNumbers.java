@@ -10,7 +10,7 @@ public final class InputLottoNumbers {
     private final List<LottoNumber> InputLottoNumbers;
 
     private InputLottoNumbers(List<LottoNumber> inputLottoNumbers) {
-        if(isListNull(inputLottoNumbers)) {
+        if (isListNull(inputLottoNumbers)) {
             throw new ListNullPointerException();
         }
         this.InputLottoNumbers = inputLottoNumbers;

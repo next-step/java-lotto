@@ -4,7 +4,7 @@ import step2.exception.InvalidNumberInputException;
 
 import java.util.Objects;
 
-public final class LottoNumber implements Comparable<LottoNumber>{
+public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final LottoNumber[] cache;
 
@@ -72,6 +72,6 @@ public final class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public int compareTo(LottoNumber o) {
-        return this.lottoNumber-o.lottoNumber;
+        return this.lottoNumber - o.lottoNumber;
     }
 }

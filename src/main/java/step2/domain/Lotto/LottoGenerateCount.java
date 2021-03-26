@@ -10,7 +10,7 @@ public final class LottoGenerateCount {
     private int count;
 
     private LottoGenerateCount(int money) {
-        this.count = (money/DIVIDE_STANDARD);
+        this.count = (money / DIVIDE_STANDARD);
     }
 
     public static final LottoGenerateCount newInstance(LottoCreationRequestDto requestDto) {

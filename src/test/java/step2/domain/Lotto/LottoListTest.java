@@ -20,7 +20,7 @@ class LottoListTest {
         testLottoList = new ArrayList<>();
 
         List<LottoNumber> testLottoNumbers = IntStream
-                .range(1,6)
+                .range(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 

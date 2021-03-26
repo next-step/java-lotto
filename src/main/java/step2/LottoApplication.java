@@ -9,7 +9,7 @@ public final class LottoApplication {
     private final InputView inputView;
     private final ResultView resultView;
 
-    private LottoApplication(){
+    private LottoApplication() {
         this.inputView = InputView.getInstance();
         this.resultView = ResultView.getInstance();
     }
@@ -18,7 +18,7 @@ public final class LottoApplication {
         return new LottoApplication();
     }
 
-    public void start() {
+    public final void start() {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
         LottoController lottoController = LottoController.newInstance(lottoCreationRequestDto);
         resultView.printLottoList(lottoController.generateLottoList());
