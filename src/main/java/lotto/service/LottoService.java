@@ -8,9 +8,13 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoShop;
 import lotto.domain.Money;
 import lotto.domain.policy.DrawPolicy;
+import lotto.domain.prize.LottoPrize;
+import lotto.domain.prize.PrizeMapper;
+import lotto.domain.util.LottoEarningRateCalculator;
 
 import lotto.dto.LottoDrawDto;
-import lotto.dto.LottoOrderedDto;
+import lotto.dto.LottoPurchaseMoneyDto;
+import lotto.dto.LottoPurchasedDto;
 import lotto.dto.LottoResultDto;
 
 
@@ -23,27 +27,40 @@ public class LottoService {
         lottoShop = new LottoShop(lottoMachine);
     }
 
-    public LottoOrderedDto purchase(int amount) {
-        Money money = new Money(amount);
+    public LottoPurchasedDto purchase(LottoPurchaseMoneyDto lottoMoneyDto) {
+        Money money = new Money(lottoMoneyDto.getAmount());
         List<Lotto> lotteries = lottoShop.purchase(money);
         List<String> numberList = new ArrayList<>(lotteries.size());
 
         lotteries.stream().map(Lotto::toString)
                           .forEach(numberList::add);
 
-        return new LottoOrderedDto(numberList);
+        return new LottoPurchasedDto(numberList);
     }
 
     public LottoResultDto draw(LottoDrawDto lottoDrawDto) {
-        List<String> lottoOrderedNumberList = lottoDrawDto.getNumberList();
-
+        List<String> lottoPurchasedNumberList = lottoDrawDto.getNumberList();
         final Lotto winnerLotto = new Lotto(lottoDrawDto.getWinnerNumber());
-        LottoResultDto resultDto = new LottoResultDto();
 
-        for (String number : lottoOrderedNumberList) {
+        PrizeMapper prizeMapper = new PrizeMapper();
+
+        LottoResultDto resultDto = new LottoResultDto();
+        for (LottoPrize prize : LottoPrize.values()) {
+            resultDto.putPrizeMap(prize.getCountMatches(), prize.getPrize());
+        }
+
+        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(
+            lottoPurchasedNumberList.size());
+
+        for (String number : lottoPurchasedNumberList) {
             long countMatches = new Lotto(number).countWinnerNumbersIn(winnerLotto);
             resultDto.putRewardRecord(countMatches);
+
+            long prize = prizeMapper.findPrizeByCountMatches(countMatches);
+            calculator.cumulateEarning(prize);
         }
-        return null;
+        resultDto.setEarningRate(calculator.resultToString());
+
+        return resultDto;
     }
 }

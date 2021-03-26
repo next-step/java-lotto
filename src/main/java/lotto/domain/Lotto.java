@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import lotto.domain.util.LottoConstant;
 
@@ -25,11 +26,17 @@ public class Lotto {
     }
 
     public Lotto(String numberString) {
-        String[] splitedLottoNumber = numberString.split(", ");
-        this.numbers = new ArrayList<>(splitedLottoNumber.length);
+        StringTokenizer stringTokenizer =
+            new StringTokenizer(numberString, ",");
 
-        Arrays.stream(splitedLottoNumber).map(Integer::valueOf)
-                                         .forEach(numbers::add);
+        if (stringTokenizer.countTokens() != LottoConstant.NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoConstant.NUMBER_COUNT_EXCEPTION);
+        }
+        numbers = new ArrayList<>(stringTokenizer.countTokens());
+
+        while (stringTokenizer.hasMoreTokens()) {
+            numbers.add(Integer.parseInt(stringTokenizer.nextToken().trim()));
+        }
     }
 
     @Override

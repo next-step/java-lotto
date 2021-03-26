@@ -4,19 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PrizeMapper {
-  private Map<Long, LottoPrize> prizeMap;
+  private Map<Long, Long> prizeMap;
 
   public PrizeMapper() {
     LottoPrize[] prizes = LottoPrize.values();
-    Long[] countMatches = { 6L, 5L, 4L, 3L };
     prizeMap = new HashMap<>(prizes.length);
 
-    for (int i = 0; i < prizes.length; i++) {
-      prizeMap.put(countMatches[i], prizes[i]);
+    for (LottoPrize prize : prizes) {
+      prizeMap.put(prize.getCountMatches(), prize.getPrize());
     }
   }
 
   public long findPrizeByCountMatches(long countMatches) {
-    return prizeMap.get(countMatches).getPrize();
+    if (prizeMap.containsKey(countMatches)) {
+      return prizeMap.get(countMatches);
+    }
+    return 0;
   }
 }

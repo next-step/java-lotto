@@ -24,6 +24,9 @@ public class LottoEarningRateCalculator {
   }
 
   private double eval() {
-    return earning / (double) principal;
+    if (principal > 0) {
+      return earning / (double) principal;
+    }
+    return 0;
   }
 }

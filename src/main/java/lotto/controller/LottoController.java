@@ -1,12 +1,21 @@
 package lotto.controller;
 
+import lotto.domain.policy.TestRandomPolicy;
+import lotto.dto.LottoDrawDto;
 import lotto.dto.LottoPurchaseMoneyDto;
-import lotto.view.InputView;
+import lotto.dto.LottoPurchasedDto;
+import lotto.dto.LottoResultDto;
+import lotto.service.LottoService;
 
 public class LottoController {
 
-    public void get() {
-        InputView inputView = new InputView(System.in);
-        LottoPurchaseMoneyDto purchaseMoneyDto = new LottoPurchaseMoneyDto(inputView.inputMoney());
+    private static LottoService lottoService = new LottoService(new TestRandomPolicy());
+
+    public static LottoPurchasedDto purchaseLotto(LottoPurchaseMoneyDto purchaseMoneyDto) {
+        return lottoService.purchase(purchaseMoneyDto);
+    }
+
+    public static LottoResultDto drawLotto(LottoDrawDto lottoDrawDto) {
+        return lottoService.draw(lottoDrawDto);
     }
 }

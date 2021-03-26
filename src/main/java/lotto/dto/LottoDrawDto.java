@@ -6,7 +6,7 @@ public class LottoDrawDto {
     private final List<String> numberList;
     private final String winnerNumber;
 
-    public LottoDrawDto(LottoOrderedDto lottoOrderedDto, String winnerNumber) {
+    public LottoDrawDto(LottoPurchasedDto lottoOrderedDto, String winnerNumber) {
         numberList = lottoOrderedDto.getLottoNumberList();
         this.winnerNumber = winnerNumber;
     }
