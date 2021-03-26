@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface LottoShuffleStrategy {
 
-    void shuffle(List<LottoNumber> lotto);
+    void shuffle(List<LottoNumber> lottoNumbers);
+
 }

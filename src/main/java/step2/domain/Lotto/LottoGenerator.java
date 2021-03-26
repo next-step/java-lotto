@@ -1,16 +1,29 @@
 package step2.domain.Lotto;
 
+import step2.strategy.LottoRandomShuffleStrategy;
+import step2.strategy.LottoShuffleStrategy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class LottoGenerator {
-    private static final int START = 1;
-    private static final int LIMIT = 46;
+
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
+    private static final int CREATE_START = 1;
+    private static final int CREATE_END = 46;
 
     private static LottoGenerator instance;
+    private final LottoShuffleStrategy lottoShuffleStrategy;
 
-    private LottoGenerator() {}
+    private LottoGenerator() {
+        this(LottoRandomShuffleStrategy.getInstance());
+    }
+
+    private LottoGenerator(LottoShuffleStrategy lottoShuffleStrategy) {
+        this.lottoShuffleStrategy = lottoShuffleStrategy;
+    }
 
     public static final LottoGenerator getInstance() {
         if(isInstanceNull()) {
@@ -24,19 +37,15 @@ public final class LottoGenerator {
     }
 
     public final Lotto generateLotto() {
-        LottoNumbers lottoNumbers = generateLottoNumbers();
-        return Lotto.newInstance(lottoNumbers.subLottoNumbers(0, 6));
+        List<LottoNumber> lottoNumbers = generateLottoNumbers();
+        lottoShuffleStrategy.shuffle(lottoNumbers);
+        return Lotto.newInstance(lottoNumbers.subList(FROM_INDEX, TO_INDEX));
     }
 
-    private final LottoNumbers generateLottoNumbers() {
-        return LottoNumbers.newInstance(generateLottoNumberList());
-    }
-
-    private final List<LottoNumber> generateLottoNumberList() {
-        return IntStream.range(START, LIMIT)
+    private final List<LottoNumber> generateLottoNumbers() {
+        return IntStream.range(CREATE_START, CREATE_END)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
-
 
 }
