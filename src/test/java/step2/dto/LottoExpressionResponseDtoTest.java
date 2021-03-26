@@ -60,4 +60,18 @@ class LottoExpressionResponseDtoTest {
                 .hasMessageContaining("LottoList 인스턴스가 null 입니다.");
     }
 
+    @DisplayName("LottoExpressionResponseDto가 소유한 값을 반환하는지에 대한 테스트")
+    @Test
+    void 반환() {
+        // given
+        LottoExpressionResponseDto responseDto =
+                LottoExpressionResponseDto.newInstance(testLottoList);
+
+        // when
+        LottoList actual = responseDto.getLottoList();
+
+        // then
+        assertThat(actual).isEqualTo(testLottoList);
+    }
+
 }
