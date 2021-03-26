@@ -3,23 +3,29 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 번호 수동 생성 테스트")
-    void make_lotto(){
-        LottoNumber number = new LottoNumber(5);
-        assertThat(number).isEqualTo(new LottoNumber(5));
-    }
+    @DisplayName("로또 번호 6개 생성 테스트")
+    void six_lottos(){
+        List<Integer> numberList = Stream.iterate(1, n -> n + 1)
+                .limit(45)
+                .collect(Collectors.toList());
+        Collections.shuffle(numberList);
 
-    @Test
-    @DisplayName("로또 번호 정상번호인지 테스트(수동) - 비정상이면 IllegalArgumentException 발생")
-    void is_normal_lotto_number_passive(){
-        assertThatThrownBy(()->{
-            LottoNumber number = new LottoNumber(-3);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThat(numberList.stream().
+        limit(6)
+        .sorted()
+        .map(number->new LottoNumber(number))
+        .collect(Collectors.toSet()).size()).isEqualTo(6);
     }
+    
 }
