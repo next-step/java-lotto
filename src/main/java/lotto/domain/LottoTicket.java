@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -60,10 +61,14 @@ public class LottoTicket {
     }
 
     public List<Lotto> getLottoList() {
-        return lottoList;
+        return this.lottoList;
     }
 
     public int getCount() {
         return this.lottoList.size();
+    }
+
+    public LottoRanks inquiryRankList(int[] winNumbers) {
+        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers)).collect(Collectors.toList()));
     }
 }

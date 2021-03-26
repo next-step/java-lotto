@@ -15,4 +15,12 @@ public class Lotto {
     public int[] getLottoNumbers() {
         return lottoNumberList.stream().mapToInt(LottoNumber::getLottoNumber).sorted().toArray();
     }
+
+    public LottoRank inquiryRank(int[] winNumbers) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : lottoNumberList) {
+            matchCount+=Arrays.stream(winNumbers).filter(winNumber -> lottoNumber.getLottoNumber() == winNumber).count();
+        }
+        return LottoRank.getEnum(matchCount);
+    }
 }
