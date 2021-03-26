@@ -17,6 +17,13 @@ public enum Rank {
         this.amount = amount;
     }
 
+    public static Rank from(long hit) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.hit == hit)
+                .findFirst()
+                .orElse(MISS);
+    }
+
     public long amount() {
         return this.amount;
     }
@@ -25,10 +32,4 @@ public enum Rank {
         return this.hit;
     }
 
-    public static Rank from(long hit) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.hit == hit)
-                .findFirst()
-                .orElse(MISS);
-    }
 }

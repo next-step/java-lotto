@@ -23,16 +23,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public int number() {
-        return number;
-    }
-
     private static int checkNumeric(String number){
         String numberRegExp = numericRegex;
         if(!number.matches(numberRegExp)){
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
         }
         return Integer.parseInt(number);
+    }
+
+    public int number() {
+        return number;
     }
 
     @Override

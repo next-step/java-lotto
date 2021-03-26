@@ -16,7 +16,7 @@ public class Money {
         this.money = money;
     }
 
-    public void validateMoney(int money) {
+    private void validateMoney(int money) {
         if (money < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(MESSAGE_INVALID_COST);
         }
