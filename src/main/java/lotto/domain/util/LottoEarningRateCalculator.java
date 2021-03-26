@@ -12,4 +12,8 @@ public class LottoEarningRateCalculator {
   public void cumulateEarning(long prize) {
     earning += prize;
   }
+
+  public String eval() {
+    return "0";
+  }
 }

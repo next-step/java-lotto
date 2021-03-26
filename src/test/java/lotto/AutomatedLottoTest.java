@@ -9,6 +9,7 @@ import lotto.domain.LottoShop;
 import lotto.domain.Money;
 import lotto.domain.policy.TestRandomPolicy;
 
+import lotto.domain.util.LottoEarningRateCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -66,6 +67,17 @@ public class AutomatedLottoTest {
         long result = lotto.countWinnerNumbersIn(new Lotto(n1, n2, n3, n4, n5, n6));
 
         assertThat(result).isEqualTo(expectedCount);
+    }
+
+    @Test
+    @DisplayName("로또 14장을 구입하여, 5000원을 얻은 수익률을 계산한다.")
+    void calculateEarningRate() {
+        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(14);
+
+        calculator.cumulateEarning(5000);
+        String result = calculator.eval();
+
+        assertThat(result).isEqualTo("0.35");
     }
 
 }
