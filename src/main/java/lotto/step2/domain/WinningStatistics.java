@@ -10,6 +10,7 @@ public class WinningStatistics {
     private Money money;
 
     public WinningStatistics(Money money, int fourthRank, int thirdRank, int secondRank, int firstRank) {
+        //Test용 생성자
         this(money);
         winningStatistics.put(Rank.from(3),fourthRank);
         winningStatistics.put(Rank.from(4),thirdRank);

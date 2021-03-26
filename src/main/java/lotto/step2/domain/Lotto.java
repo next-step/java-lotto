@@ -33,7 +33,7 @@ public class Lotto {
         return matchCount;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
 
