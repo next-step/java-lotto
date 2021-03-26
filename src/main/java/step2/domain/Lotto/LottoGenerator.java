@@ -11,8 +11,8 @@ public final class LottoGenerator {
 
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
-    private static final int CREATE_START = 1;
-    private static final int CREATE_END = 46;
+    private static final int START_INCLUSIVE = 1;
+    private static final int END_EXCLUSIVE = 46;
 
     private static LottoGenerator instance;
     private final LottoShuffleStrategy lottoShuffleStrategy;
@@ -43,7 +43,7 @@ public final class LottoGenerator {
     }
 
     private final List<LottoNumber> generateLottoNumbers() {
-        return IntStream.range(CREATE_START, CREATE_END)
+        return IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
