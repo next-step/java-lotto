@@ -28,6 +28,9 @@ public enum LottoRank {
     }
 
     public static LottoRank getEnum(int matchCount) {
+        if(matchCount < FIVE.getMatchCount()) {
+            return LOSE;
+        }
         Optional<LottoRank> find = Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
                 .findFirst();
