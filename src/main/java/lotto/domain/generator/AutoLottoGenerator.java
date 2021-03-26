@@ -14,19 +14,19 @@ public class AutoLottoGenerator implements LottoGenerator {
   private static final int END_NUMBER = 46;
   private static final int FROM_INDEX = 0;
   private static final int TO_INDEX = 6;
-  private final int autoLottoCount;
 
-  public AutoLottoGenerator(final int autoLottoCount) {
-    this.autoLottoCount = autoLottoCount;
+  private Money money;
+  public AutoLottoGenerator(Money money) {
+    this.money = money;
   }
 
   @Override
   public List<Lotto> generatedLottoList() {
-    List<Lotto> lottoList = new ArrayList<>();
-    for (int i = 0; i < autoLottoCount; i++) {
-      lottoList.add(makeLotto());
+    List<Lotto> lottos = new ArrayList<>();
+    for (int i = 0; i < money.calculateLottoCount(); i++) {
+      lottos.add(makeLotto());
     }
-    return lottoList;
+    return lottos;
   }
 
   private Lotto makeLotto() {

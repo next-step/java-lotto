@@ -9,9 +9,11 @@ import lotto.domain.Money;
 public class ManualLottoGenerator implements LottoGenerator {
 
   private final List<List<Integer>> input;
+  private Money money;
 
-  public ManualLottoGenerator(final List<List<Integer>> input) {
+  public ManualLottoGenerator(final List<List<Integer>> input,Money money) {
     this.input = input;
+    this.money = money;
   }
 
   @Override
@@ -20,7 +22,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     for (List<Integer> lottoNumbers : input) {
       lottos.add(Lotto.of(lottoNumbers));
     }
-
+    money.decreaseByLottoCount(lottos.size());
     return lottos;
   }
 

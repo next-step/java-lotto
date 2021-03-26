@@ -16,7 +16,7 @@ public class AutoLottoGeneratorTest {
 
   @BeforeEach
   void setUp() {
-    autoLottoGenerator = new AutoLottoGenerator(5);
+    autoLottoGenerator = new AutoLottoGenerator(new Money(5000));
   }
 
   @Test

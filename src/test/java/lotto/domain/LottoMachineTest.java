@@ -23,9 +23,8 @@ public class LottoMachineTest {
 
     Money money = new Money(14000);
     List<LottoGenerator> generators = new ArrayList<>();
-    generators.add(new ManualLottoGenerator(manualLottos));
-    money.decreaseByManualLottoCount(manualLottos.size());
-    generators.add(new AutoLottoGenerator(money.calculateLottoCount()));
+    generators.add(new ManualLottoGenerator(manualLottos,money));
+    generators.add(new AutoLottoGenerator(money));
     LottoGenerator lottoGenerator = new MergedGenerator(generators);
     LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
 
@@ -37,11 +36,10 @@ public class LottoMachineTest {
   @DisplayName("수동 발급")
   public void generatedManualLotto() {
 
-
     List<List<Integer>> manualLottos = new ArrayList<List<Integer>>();
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     manualLottos.add(Arrays.asList(7, 8, 9, 10, 11, 12));
-    LottoMachine lottoMachine = new LottoMachine(new ManualLottoGenerator(manualLottos));
+    LottoMachine lottoMachine = new LottoMachine(new ManualLottoGenerator(manualLottos,new Money(2000)));
 
     assertThat(lottoMachine.getLottoCount()).isEqualTo(2);
 
@@ -50,7 +48,7 @@ public class LottoMachineTest {
   @Test
   @DisplayName("자동 발급")
   public void generatedAutoLotto() {
-    LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator(14));
+    LottoMachine lottoMachine = new LottoMachine(new AutoLottoGenerator(new Money(14000)));
     assertThat(lottoMachine.getLottoCount()).isEqualTo(14);
   }
 

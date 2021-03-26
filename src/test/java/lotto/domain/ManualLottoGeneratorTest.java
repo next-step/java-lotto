@@ -18,7 +18,7 @@ public class ManualLottoGeneratorTest {
     List<List<Integer>> manualLottos = new ArrayList<List<Integer>>();
     manualLottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     manualLottos.add(Arrays.asList(34, 25, 35, 32, 43, 12));
-    ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(manualLottos);
+    ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(manualLottos,new Money(2000));
 
     List<Lotto> expected = new ArrayList<>();
     expected.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
