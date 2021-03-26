@@ -4,7 +4,7 @@ import step2.exception.ListNullPointerException;
 
 import java.util.List;
 
-public class Lotto {
+public final class Lotto {
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {

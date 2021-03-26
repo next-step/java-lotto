@@ -23,7 +23,7 @@ class LottoControllerTest {
     void 생성() {
 
         // when
-        LottoController lottoController = LottoController.newInstance();
+        LottoController lottoController = LottoController.newInstance(creationRequestDto);
 
         // then
         assertThat(lottoController).isNotNull();
@@ -35,10 +35,10 @@ class LottoControllerTest {
     void 로또_생성_및_반환() {
 
         // given
-        LottoController lottoController = LottoController.newInstance();
+        LottoController lottoController = LottoController.newInstance(creationRequestDto);
 
         // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
+        LottoExpressionResponseDto actual = lottoController.generateLottoList();
 
         // then
         assertThat(actual).isNotNull();
