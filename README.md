@@ -27,10 +27,10 @@
 
 8. [feat] 일급 컬렉션 로또 번호 6개 발급 기능 구현
 
-9. [test] 당첨 통계 테스트
+9. [feat] InputView, ResultView 클래스 구현
 
-10. [feat] 당첨 통계 구현
- 
-11. [feat] InputView, ResultView 클래스 구현
+10. [test] 당첨 통계 테스트
+
+11. [feat] 당첨 통계 구현
 
 12. [refactor] 전반적인 리팩토링
