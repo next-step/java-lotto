@@ -1,9 +1,11 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.LottoBallMachine;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
+import lotto.domain.Statistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,11 +24,8 @@ public class LottoGameController {
     ResultView resultView = new ResultView();
     resultView.printBuyingLottoGame(lottoGames);
 
-
-
-
-
-
+    List<Integer> winNumbers = inputView.inputWinNumbers();
+    Statistics statistics = lottoGames.calculateStatistics(winNumbers);
 
 
   }
