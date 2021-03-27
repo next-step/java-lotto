@@ -1,4 +1,4 @@
-package step2.domain.Lotto;
+package step2.domain.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

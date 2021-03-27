@@ -1,8 +1,7 @@
 package step2.controller;
 
-import step2.domain.Lotto.LottoGenerateCount;
-import step2.domain.Lotto.LottoGenerator;
-import step2.domain.Lotto.LottoList;
+import step2.domain.lotto.LottoGenerator;
+import step2.domain.lotto.LottoList;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoRandomShuffleStrategy;

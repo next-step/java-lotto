@@ -1,6 +1,6 @@
 package step2.dto;
 
-import step2.domain.Lotto.LottoList;
+import step2.domain.lotto.LottoList;
 import step2.exception.LottoListNullPointerException;
 
 import java.util.Objects;

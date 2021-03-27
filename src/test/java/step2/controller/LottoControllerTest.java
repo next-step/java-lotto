@@ -3,9 +3,9 @@ package step2.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto.Lotto;
-import step2.domain.Lotto.LottoList;
-import step2.domain.Lotto.LottoNumber;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoList;
+import step2.domain.lotto.LottoNumber;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoShuffleStrategy;
@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoControllerTest {
 

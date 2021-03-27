@@ -1,4 +1,4 @@
-package step2.domain.Lotto;
+package step2.domain.lotto;
 
 import step2.dto.LottoCreationRequestDto;
 import step2.strategy.LottoRandomShuffleStrategy;

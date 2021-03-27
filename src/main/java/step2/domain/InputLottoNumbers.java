@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.domain.Lotto.LottoNumber;
+import step2.domain.lotto.LottoNumber;
 import step2.exception.ListNullPointerException;
 
 import java.util.List;
