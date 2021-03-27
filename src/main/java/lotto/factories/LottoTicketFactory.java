@@ -7,14 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
-    private static final List<LottoNumber> allLottoNumbers =
-            IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-                    .mapToObj(LottoNumber::of).collect(Collectors.toList());
-
     public static LottoTicket createAutoLottoTicket() {
+        final List<LottoNumber> allLottoNumbers = LottoNumber.allLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
         final List<LottoNumber> lottoNumbers =
