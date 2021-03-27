@@ -19,6 +19,12 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
+//    public void makeStatistic(WinningLotto winningLotto){
+//
+//        for(Lotto lotto : lottoList){
+//            LottoStatistic lottoStatistic = new LottoStatistic(lotto.isWinningLottoList(winningLotto));
+//        }
+//    }
 
     public List<Lotto> getLottos() {
         return lottoList;

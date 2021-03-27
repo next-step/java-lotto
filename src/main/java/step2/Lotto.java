@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
+    private static final int LOTTO_BOUND = 45;
+    private static final int LOTTO_VOLUME = 6;
+
     private List<LottoNumber> lottoNumberList;
 
     private static List<Integer> numberList;
@@ -25,14 +28,14 @@ public class Lotto {
 
     static {
         numberList = Stream.iterate(1, n -> n + 1)
-                .limit(45)
+                .limit(LOTTO_BOUND)
                 .collect(Collectors.toList());
     }
 
     public static Lotto generate(){
         Collections.shuffle(numberList);
         return new Lotto(numberList.stream().
-                limit(6)
+                limit(LOTTO_VOLUME)
                 .sorted()
                 .map(number->new LottoNumber(number))
                 .collect(Collectors.toList()));

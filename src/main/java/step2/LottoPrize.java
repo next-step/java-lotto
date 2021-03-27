@@ -4,23 +4,22 @@ import java.util.Arrays;
 
 public enum LottoPrize {
 
-    FIRST(1,2000000000,new HitCount(6)),
-    SECOND(2,10000000,new HitCount(5,true)),
-    THIRD(3,1500000,new HitCount(5)),
-    FOURTH(4,50000,new HitCount(4)),
-    FIFTH(5,5000,new HitCount(3)),
-    BLANK(6,0);
+    FIRST(2000000000,new HitCount(6)),
+    SECOND(10000000,new HitCount(5,true)),
+    THIRD(1500000,new HitCount(5)),
+    FOURTH(50000,new HitCount(4)),
+    FIFTH(5000,new HitCount(3)),
+    BLANK(0);
 
     private long rank;
     private long prize;
     private HitCount hitCount;
 
-    LottoPrize(long rank,long prize){
-        this(rank,prize,new HitCount(0));
+    LottoPrize(long prize){
+        this(prize,new HitCount(0));
     }
 
-    LottoPrize(long rank,long prize,HitCount hitCount){
-        this.rank = rank;
+    LottoPrize(long prize,HitCount hitCount){
         this.prize = prize;
         this.hitCount = hitCount;
     }
