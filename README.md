@@ -28,7 +28,7 @@
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
     * getWinningNumbers(return : 게임 당첨 번호)
   * Rank(enum)   
-    * 형식 : 등수(int matchCount, int winningMoney)
+    * 형식 : 등수(int matchCount, int winningMoney) (등수 : 1등~꽝)
     * 당첨등수 생성자(param : matchCount)   
   
 
@@ -42,7 +42,7 @@
     * getWinner
     * getYield  
   * Statistics   
-    * 당첨 통계(6개일치,5개일치,4개일치,3개일치,2개일치)   
+    * 당첨 통계(6개일치,5개일치,4개일치,3개일치,꽝)   
     * 수익률   
 
 * ui   
