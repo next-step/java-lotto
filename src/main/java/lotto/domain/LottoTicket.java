@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private static final int PRICE = 1000;
+    private final LottoTicketPrice lottoTicketPrice;
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        this.lottoTicketPrice = new LottoTicketPrice();
     }
 
     public List<Integer> lottoNumbers() {
@@ -17,7 +18,7 @@ public class LottoTicket {
     }
 
     public int price() {
-        return PRICE;
+        return lottoTicketPrice.price();
     }
 
     @Override
