@@ -19,7 +19,7 @@ class LottosTest {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
         List<Lotto> lottos = IntStream.range(0, input)
                 .mapToObj(i ->
-                        Lotto.of(lottoGenerator.generateShuffledNumbers())
+                        Lotto.of(lottoGenerator.generateShuffledLotto())
                 )
                 .collect(Collectors.toList());
 

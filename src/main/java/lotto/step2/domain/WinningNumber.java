@@ -1,27 +1,21 @@
 package lotto.step2.domain;
 
-import lotto.step2.utils.LottoUtils;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
 
-    private final Set<Integer> winningNumbers;
+    private static final LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+    private final Lotto winningNumbers;
 
-    private WinningNumber(final Set<Integer> winningNumbers) {
-        LottoUtils.validation(winningNumbers);
-        this.winningNumbers = winningNumbers;
+    private WinningNumber(final String winningNumbers) {
+        this.winningNumbers = Lotto.of(
+                lottoGenerator.generateAppointedLotto(winningNumbers)
+        );
     }
 
-    public static WinningNumber of(final String[] winningNumbers) {
-        return new WinningNumber(
-                new TreeSet<Integer>(Arrays.stream(winningNumbers)
-                        .mapToInt(Integer::parseInt)
-                        .boxed()
-                        .collect(Collectors.toSet())
-                )
-        );
+    public static WinningNumber of(final String winningNumbers) {
+        return new WinningNumber(winningNumbers);
     }
 
     public long getLottoMatchCount(Lotto lotto) {

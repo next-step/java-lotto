@@ -13,7 +13,7 @@ public class LottoGame {
     private LottoGame(final int lottoAmount) {
         List<Lotto> lottoList = IntStream.range(LOTTO_START_INCLUSIVE_VALUE, lottoAmount)
                 .mapToObj(i ->
-                        Lotto.of(lottoGenerator.generateShuffledNumbers())
+                        Lotto.of(lottoGenerator.generateShuffledLotto())
                 )
                 .collect(Collectors.toList());
 

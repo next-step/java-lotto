@@ -18,7 +18,7 @@ class WinningNumberTest {
     @DisplayName("당첨번호 6개의 숫자로 이루어짐")
     @ParameterizedTest
     @MethodSource("provideWinningNumbers")
-    void winningNumber_숫자6개구성(String[] input, String[] expected) {
+    void winningNumber_숫자6개구성(String input, String expected) {
         WinningNumber winningNumberInput = WinningNumber.of(input);
         WinningNumber winningNumberExpeced = WinningNumber.of(expected);
         assertThat(winningNumberInput).isEqualTo(winningNumberExpeced);
@@ -26,9 +26,9 @@ class WinningNumberTest {
 
     private static Stream<Arguments> provideWinningNumbers() {
         return Stream.of(
-                Arguments.of(new String[]{"1", "3", "5", "7", "9", "11"}, new String[]{"1", "3", "5", "7", "9", "11"}),
-                Arguments.of(new String[]{"5", "10", "13", "17", "29", "31"}, new String[]{"5", "10", "13", "17", "29", "31"}),
-                Arguments.of(new String[]{"21", "33", "34", "37", "40", "45"}, new String[]{"21", "33", "34", "37", "40", "45"})
+                Arguments.of("1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 11"),
+                Arguments.of("5, 10, 13, 17, 29, 31", "5, 10, 13, 17, 29, 31"),
+                Arguments.of("21, 33, 34, 37, 40, 45", "21, 33, 34, 37, 40, 45")
         );
     }
 
@@ -36,7 +36,7 @@ class WinningNumberTest {
     @ParameterizedTest
     @MethodSource("provideLottos")
     void getLottoMatchCount(int[] input, int expected) {
-        String[] winningNumbers = {"1", "3", "5", "7", "9", "11"};
+        String winningNumbers = "1, 3, 5, 7, 9, 11";
         WinningNumber winningNumber = WinningNumber.of(winningNumbers);
 
         Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
