@@ -26,11 +26,12 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(lottoTicketPrice, that.lottoTicketPrice) &&
+                Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoTicketPrice, lottoNumbers);
     }
 }
