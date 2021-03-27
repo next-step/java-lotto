@@ -27,15 +27,15 @@ public class WinningLottoTest {
                 .count()).isGreaterThan(2);
     }
 
-//    @Test
-//    @DisplayName("몇 개 일치하는지 통계 클래스 생성 테스트")
-//    void statistic_test(){
-//        String winningNumbers = "1,2,3,4,5,6";
-//        String purchasedNumbers = "1,3,5,7,9,11";
-//        WinningLotto winningLotto = new WinningLotto(winningNumbers);
-//        Lotto purchasedLotto = new Lotto(purchasedNumbers);
-//        LottoStatistic lottoStatistic = new LottoStatistic(purchasedLotto.isWinningLottoList(winningLotto));
-//        assertThat(lottoStatistic.lottoPrize()).isEqualto(5000);
-//    }
+    @Test
+    @DisplayName("몇 개 일치하는지 통계 클래스 생성 테스트")
+    void statistic_test(){
+        String winningNumbers = "1,2,3,4,5,6";
+        String purchasedNumbers = "1,2,3,4,9,11";
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        Lotto purchasedLotto = new Lotto(purchasedNumbers);
+        LottoStatistic lottoStatistic = new LottoStatistic(purchasedLotto.isWinningLottoList(winningLotto));
+        assertThat(lottoStatistic.lottoPrize()).isEqualTo(LottoPrize.FOURTH);
+    }
 
 }
