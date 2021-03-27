@@ -2,6 +2,7 @@ package step2.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.Lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,11 +27,11 @@ class LottoConfirmationRequestDtoTest {
 
         // given
         String testInputLottoNumbers = "1, 2, 3, 4, 5, 6";
-        InputLottoNumbers expected = InputLottoNumbers.newInstance(testInputLottoNumbers);
+        Lotto expected = Lotto.newInstance(testInputLottoNumbers);
 
         // when
         LottoConfirmationRequestDto requestDto = LottoConfirmationRequestDto.newInstance(expected);
-        InputLottoNumbers actual = requestDto.getInputLottoNumbers();
+        Lotto actual = requestDto.getLotto();
 
         // then
         assertThat(actual).isEqualTo(expected);

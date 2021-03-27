@@ -2,10 +2,9 @@ package step2.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.InputMoney;
+import step2.domain.request.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoCreationRequestDtoTest {
 
@@ -26,11 +25,11 @@ class LottoCreationRequestDtoTest {
     @Test
     void 반환() {
         // given
-        InputMoney expected = InputMoney.valueOf(1000);
+        Money expected = Money.valueOf(1000);
 
         // when
         LottoCreationRequestDto lottoCreationRequestDto = LottoCreationRequestDto.newInstance(expected);
-        InputMoney actual = lottoCreationRequestDto.getInputMoney();
+        Money actual = lottoCreationRequestDto.getMoney();
 
         // then
         assertThat(actual).isEqualTo(expected);

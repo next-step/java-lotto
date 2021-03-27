@@ -1,26 +1,29 @@
 package step2.dto;
 
-public class LottoConfirmationRequestDto {
+import step2.domain.lotto.Lotto;
 
-    private final InputLottoNumbers inputLottoNumbers;
+public final class LottoConfirmationRequestDto {
 
-    private LottoConfirmationRequestDto(InputLottoNumbers inputLottoNumbers) {
-        this.inputLottoNumbers = inputLottoNumbers;
+    private final Lotto lotto;
+
+
+    private LottoConfirmationRequestDto(Lotto lotto) {
+        this.lotto = lotto;
     }
 
-    private LottoConfirmationRequestDto(String inputLottoNumbers) {
-        this(InputLottoNumbers.newInstance(inputLottoNumbers));
+    private LottoConfirmationRequestDto(String sentence) {
+        this(Lotto.newInstance(sentence));
     }
 
-    public static LottoConfirmationRequestDto newInstance(String inputLottoNumbers) {
-        return new LottoConfirmationRequestDto(inputLottoNumbers);
+    public static final LottoConfirmationRequestDto newInstance(Lotto lotto) {
+        return new LottoConfirmationRequestDto(lotto);
     }
 
-    public static LottoConfirmationRequestDto newInstance(InputLottoNumbers inputLottoNumbers) {
-        return new LottoConfirmationRequestDto(inputLottoNumbers);
+    public static final LottoConfirmationRequestDto newInstance(String sentence) {
+        return new LottoConfirmationRequestDto(sentence);
     }
 
-    public InputLottoNumbers getInputLottoNumbers() {
-        return inputLottoNumbers;
+    public final Lotto getLotto() {
+        return lotto;
     }
 }

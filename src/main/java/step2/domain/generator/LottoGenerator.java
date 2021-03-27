@@ -1,5 +1,7 @@
-package step2.domain.lotto;
+package step2.domain.generator;
 
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoNumber;
 import step2.dto.LottoCreationRequestDto;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;

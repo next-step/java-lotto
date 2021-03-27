@@ -18,7 +18,7 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = IntStream.range(1, 6)
+        lottoNumbers = IntStream.range(1, 7)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
@@ -29,6 +29,19 @@ class LottoTest {
 
         // when
         Lotto lotto = Lotto.newInstance(lottoNumbers);
+
+        // then
+        assertThat(lotto).isNotNull();
+    }
+
+    @DisplayName("Lotto 인스턴스를 문자열로 생성 가능한지 테스트")
+    @Test
+    void 생성_문자열() {
+        // given
+        String sentence = "1, 2, 3, 4, 5, 6";
+
+        // when
+        Lotto lotto = Lotto.newInstance(sentence);
 
         // then
         assertThat(lotto).isNotNull();

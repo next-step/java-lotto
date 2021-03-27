@@ -1,8 +1,10 @@
-package step2.domain.lotto;
+package step2.domain.generator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoNumber;
 import step2.strategy.LottoShuffleStrategy;
 
 import java.util.Collections;

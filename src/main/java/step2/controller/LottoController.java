@@ -1,6 +1,6 @@
 package step2.controller;
 
-import step2.domain.lotto.LottoGenerator;
+import step2.domain.generator.LottoGenerator;
 import step2.domain.lotto.LottoList;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
