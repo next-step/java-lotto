@@ -66,7 +66,6 @@ public class WinningNumbers {
 
     public double earningsRate(int price) {
         int total = map.get(3) * 5000;
-        total += map.get(3) * 5000;
         total += map.get(4) * 50000;
         total += map.get(5) * 1500000;
         total += map.get(6) * 2000000000;
