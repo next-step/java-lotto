@@ -41,3 +41,12 @@
     - List<Integer> lottoNumbers();
       - 로또 숫자 6자리 생성
       - set 으로 생성해서 동일한 숫자가 안겹치도록
+- ## WinningNumber.java
+  - field
+    - List<Integer> winningNumber;
+  - constructor
+    - private WinningNumber();
+  - method
+    - public static WinningNumber makeWinningNumberByString(String str);
+    - public void check(String str);
+    - public List<Integer> number();
