@@ -28,7 +28,7 @@ public class LottoFactory {
     public static Lottos purchase(Amount amount) {
         Lottos lottoList = new Lottos();
         int count = amount.getPurchaseLottoCount();
-        for(int i=0; i<count; i++) {
+        for(int i = 0; i < count; i++) {
             lottoList.add(createLotto());
         }
         return lottoList;
