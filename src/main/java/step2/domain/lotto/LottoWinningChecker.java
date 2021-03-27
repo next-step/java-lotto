@@ -1,6 +1,5 @@
 package step2.domain.lotto;
 
-import step2.domain.InputLottoNumbers;
 import step2.dto.LottoConfirmationRequestDto;
 
 public class LottoWinningChecker {
@@ -15,11 +14,11 @@ public class LottoWinningChecker {
         this.inputLottoNumbers = inputLottoNumbers;
     }
 
-    public static LottoWinningChecker newInstance(LottoConfirmationRequestDto confirmationRequestDto) {
+    public static final LottoWinningChecker newInstance(LottoConfirmationRequestDto confirmationRequestDto) {
         return new LottoWinningChecker(confirmationRequestDto);
     }
 
-    public static LottoWinningChecker newInstance(InputLottoNumbers inputLottoNumbers) {
+    public static final LottoWinningChecker newInstance(InputLottoNumbers inputLottoNumbers) {
         return new LottoWinningChecker(inputLottoNumbers);
     }
 

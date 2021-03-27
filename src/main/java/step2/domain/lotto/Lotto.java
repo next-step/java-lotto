@@ -4,8 +4,11 @@ import step2.exception.ListNullPointerException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Lotto {
+    private static final String COMMA = ",";
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
@@ -15,12 +18,28 @@ public final class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(String sentence) {
+        this(toLottoNumberList(sentence));
+    }
+
     public static final Lotto newInstance(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
+    public static final Lotto newInstance(String sentence) {
+        return new Lotto(sentence);
+    }
+
     private final boolean isListNull(List<LottoNumber> lottoNumbers) {
         return lottoNumbers == null;
+    }
+
+    private static List<LottoNumber> toLottoNumberList(String sentence) {
+        return Stream.of(sentence.split(COMMA))
+                .map(String::trim)
+                .map(Integer::valueOf)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
     }
 
     public final List<LottoNumber> getLottoNumbers() {

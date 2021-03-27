@@ -1,7 +1,5 @@
 package step2.dto;
 
-import step2.domain.InputLottoNumbers;
-
 public class LottoConfirmationRequestDto {
 
     private final InputLottoNumbers inputLottoNumbers;

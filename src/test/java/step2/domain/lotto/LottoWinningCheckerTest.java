@@ -28,4 +28,6 @@ class LottoWinningCheckerTest {
         assertThat(winningChecker).isNotNull();
 
     }
+
+
 }
