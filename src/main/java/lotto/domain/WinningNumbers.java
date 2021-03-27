@@ -77,4 +77,8 @@ public class WinningNumbers {
     public Map<Integer, Integer> getBonusNumber() {
         return bonusMap;
     }
+
+    public float earningsRate() {
+        return 0;
+    }
 }

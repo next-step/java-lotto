@@ -60,6 +60,31 @@ class WinningNumbersTest {
     }
 
     @Test
+    @DisplayName("수익률 반환")
+    void earningsRate() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,5});
+        winningNumbers.bonusNumber(7);
+        Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lottoNumbersList);
+        Map<Integer, Integer> bonusNumberMap = winningNumbers.getBonusNumber();
+        System.out.println(winNumbersMap.toString());
+        assertThat(winNumbersMap.get(3)).isEqualTo(0);
+        assertThat(winNumbersMap.get(4)).isEqualTo(1);
+        assertThat(winNumbersMap.get(5)).isEqualTo(0);
+        assertThat(bonusNumberMap.get(4)).isEqualTo(1);
+        assertThat(winningNumbers.earningsRate()).isEqualTo(50);
+    }
+
+    @Test
+    @DisplayName("명시되있지 않지만, 예제를 보면 소수2자릿수까지 내림으로 보여진다")
+    void down() {
+        double result = Math.floor((double) 5000/14000 * 100.0) / 100.0;
+        assertThat(result).isEqualTo(0.35);
+    }
+
+    @Test
     @DisplayName("당첨번호의 갯수를 찾는다.")
     void ex1() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
