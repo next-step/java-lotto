@@ -24,8 +24,8 @@ public class PurchaseAmountTest {
     public void numberOfTicket() throws Exception {
         PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(LottoRandomNumberUtil.lottoNumbers()));
-        int numberOfTicket = purchaseAmount.numberOfTicket(lottoTicket.price());
-        assertThat(numberOfTicket).isEqualTo(1);
+        NumberOfTicket numberOfTicket = purchaseAmount.numberOfTicket(lottoTicket.price());
+        assertThat(numberOfTicket.count()).isEqualTo(1);
     }
 
     @Test
