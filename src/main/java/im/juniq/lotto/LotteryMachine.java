@@ -1,7 +1,5 @@
 package im.juniq.lotto;
 
-import java.util.List;
-
 public class LotteryMachine {
 	private static final int LOTTO_PRICE = 1000;
 
@@ -30,12 +28,12 @@ public class LotteryMachine {
 		}
 	}
 
-	public double yield(List<Integer> winningNumber) {
+	public double yield(WinningNumbers winningNumbers) {
 		double winningAmount = 0;
-		winningAmount += Winning.SIX_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(6, winningNumber);
-		winningAmount += Winning.FIVE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(5, winningNumber);
-		winningAmount += Winning.FOUR_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(4, winningNumber);
-		winningAmount += Winning.THREE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(3, winningNumber);
+		winningAmount += Winning.SIX_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(6, winningNumbers);
+		winningAmount += Winning.FIVE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(5, winningNumbers);
+		winningAmount += Winning.FOUR_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(4, winningNumbers);
+		winningAmount += Winning.THREE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(3, winningNumbers);
 
 		return winningAmount / price;
 	}

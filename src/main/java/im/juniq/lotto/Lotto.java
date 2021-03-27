@@ -41,7 +41,7 @@ public class Lotto {
 		return results;
 	}
 
-	public int numberOfMatchedWinningNumber(List<Integer> winningNumbers) {
+	public int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
 		matchedCount = 0;
 		for (int number : numbers) {
 			countMatched(winningNumbers, number);
@@ -49,8 +49,8 @@ public class Lotto {
 		return matchedCount;
 	}
 
-	private void countMatched(List<Integer> winningNumbers, int number) {
-		if (winningNumbers.contains(number)) {
+	private void countMatched(WinningNumbers winningNumbers, int number) {
+		if (winningNumbers.find(number)) {
 			matchedCount++;
 		}
 	}

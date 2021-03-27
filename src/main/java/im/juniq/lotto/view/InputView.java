@@ -1,8 +1,8 @@
 package im.juniq.lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import im.juniq.lotto.WinningNumbers;
 
 public class InputView {
 	public static int purchaseAmount() {
@@ -11,16 +11,11 @@ public class InputView {
 		return Integer.parseInt(scanner.next());
 	}
 
-	public static List<Integer> winningNumbers() {
+	public static WinningNumbers winningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
 		String inputString = scanner.next();
-		String[] stringNumbers = inputString.split(",");
 
-		List<Integer> numbers = new ArrayList<>();
-		for (String number : stringNumbers) {
-			numbers.add(Integer.parseInt(number));
-		}
-		return numbers;
+		return new WinningNumbers(inputString.split(","));
 	}
 }

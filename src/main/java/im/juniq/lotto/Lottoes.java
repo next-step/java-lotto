@@ -30,7 +30,7 @@ public class Lottoes {
 		return lottoes.get(index);
 	}
 
-	public int numberOfLottoesMatched(int count, List<Integer> winningNumbers) {
+	public int numberOfLottoesMatched(int count, WinningNumbers winningNumbers) {
 		int countMatchedLotto = 0;
 		for (Lotto lotto : lottoes) {
 			countMatchedLotto += countMatchedLottoes(count, lotto, winningNumbers);
@@ -39,7 +39,7 @@ public class Lottoes {
 		return countMatchedLotto;
 	}
 
-	private int countMatchedLottoes(int matchingCount, Lotto lotto, List<Integer> winningNumbers) {
+	private int countMatchedLottoes(int matchingCount, Lotto lotto, WinningNumbers winningNumbers) {
 		if (lotto.numberOfMatchedWinningNumber(winningNumbers) == matchingCount) {
 			return 1;
 		}
