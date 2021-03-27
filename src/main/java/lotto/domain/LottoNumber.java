@@ -34,7 +34,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> allLottoNumbers() {
-        return null;
+        return new ArrayList<>(lottoNumbersCache.values());
     }
 
     public int lottoNumber() {
