@@ -37,7 +37,17 @@ public class LottoTicketsTest {
     @Test
     public void lottoRanks() {
         final LottoDiscriminator lottoDiscriminator = new LottoDiscriminator(
-                LottoTicketFactory.createAutoLottoTicket()
+                new LottoTicket(
+                        Arrays.asList(
+                                LottoNumber.of(1),
+                                LottoNumber.of(2),
+                                LottoNumber.of(3),
+                                LottoNumber.of(4),
+                                LottoNumber.of(5),
+                                LottoNumber.of(6)
+                        )
+                ),
+                LottoNumber.of(7)
         );
 
         final List<LottoRank> expected = lottoTicketList.stream()

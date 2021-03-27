@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,8 +19,19 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        final LottoTicket winningTicket = LottoTicketFactory.createAutoLottoTicket();
-        lottoDiscriminator = new LottoDiscriminator(winningTicket);
+        final LottoTicket winningTicket = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)
+                )
+        );
+        final LottoNumber bonusNumber = LottoNumber.of(7);
+
+        lottoDiscriminator = new LottoDiscriminator(winningTicket, bonusNumber);
         lottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
                 .limit(100)
                 .collect(Collectors.toList());

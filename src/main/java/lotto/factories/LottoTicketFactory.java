@@ -1,7 +1,6 @@
 package lotto.factories;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
@@ -18,30 +17,22 @@ public class LottoTicketFactory {
     public static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(allLottoNumbers);
 
-        final LottoNumbers lottoNumbers = new LottoNumbers(
+        final List<LottoNumber> lottoNumbers =
                 allLottoNumbers.stream()
-                        .limit(LottoNumbers.LOTTO_NUMBERS_SIZE)
+                        .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
                         .sorted()
-                        .collect(Collectors.toList())
-        );
-        final LottoNumber bonusNumber = allLottoNumbers.stream()
-                .filter(e -> !lottoNumbers.contains(e))
-                .findFirst()
-                .orElseThrow(RuntimeException::new);
+                        .collect(Collectors.toList());
 
-        return new LottoTicket(lottoNumbers, bonusNumber);
+        return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicket from(String[] lottoNumbers, String bonusNumber) {
+    public static LottoTicket from(String[] lottoNumbers) {
         return new LottoTicket(
-                new LottoNumbers(
-                        Arrays.stream(lottoNumbers)
-                                .map(String::trim)
-                                .mapToInt(Integer::parseInt)
-                                .mapToObj(LottoNumber::of)
-                                .collect(Collectors.toList())
-                ),
-                LottoNumber.of(Integer.parseInt(bonusNumber))
+                Arrays.stream(lottoNumbers)
+                        .map(String::trim)
+                        .mapToInt(Integer::parseInt)
+                        .mapToObj(LottoNumber::of)
+                        .collect(Collectors.toList())
         );
     }
 }

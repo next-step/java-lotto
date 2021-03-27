@@ -3,16 +3,28 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoDiscriminator {
-    private final LottoTicket winningTicket;
+    private static final String BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE = "보너스 번호는 다른 로또 번호와 중복될 수 없습니다.";
 
-    public LottoDiscriminator(final LottoTicket winningTicket) {
+    private final LottoTicket winningTicket;
+    private final LottoNumber bonusNumber;
+
+    public LottoDiscriminator(final LottoTicket winningTicket, final LottoNumber bonusNumber) {
+        validateDuplicateBonusNumber(winningTicket, bonusNumber);
+
         this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDuplicateBonusNumber(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE);
+        }
     }
 
     public LottoRank lottoRank(LottoTicket lottoTicket) {
         return LottoRank.valueOf(
-                winningTicket.matchingLottoNumbersCount(lottoTicket),
-                winningTicket.sameBonusNumber(lottoTicket)
+                lottoTicket.matchingCount(winningTicket),
+                lottoTicket.contains(bonusNumber)
         );
     }
 

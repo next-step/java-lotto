@@ -22,7 +22,7 @@ public class ResultView {
 
     private static String prettyString(LottoTicket lottoTicket) {
         return "[" +
-                lottoTicket.lottoNumbers().lottoNumbers()
+                lottoTicket.lottoNumbers()
                         .stream()
                         .mapToInt(LottoNumber::lottoNumber)
                         .mapToObj(String::valueOf)
