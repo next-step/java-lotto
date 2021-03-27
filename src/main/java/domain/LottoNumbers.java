@@ -4,6 +4,7 @@ import enums.Rank;
 import exception.DuplicateNumberException;
 import exception.ExceedNumberException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumbers {
@@ -17,6 +18,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> numbers){
         validate(numbers);
+        System.out.println(Arrays.toString(numbers.toArray()));
         this.numbers = numbers;
     }
 
