@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 public enum LottoRank {
     LOSE(0, 0),
     FIRST(6, 2_000_000_000),
@@ -30,11 +27,17 @@ public enum LottoRank {
         if (isLose(matchCount)) {
             return LOSE;
         }
-        Optional<LottoRank> find = Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
-                .findFirst();
-        if (find.isPresent()) {
-            return find.get();
+        if (FIRST.getMatchCount() == matchCount) {
+            return FIRST;
+        }
+        if (THIRD.getMatchCount() == matchCount) {
+            return THIRD;
+        }
+        if (FOURTH.getMatchCount() == matchCount) {
+            return FOURTH;
+        }
+        if (FIFTH.getMatchCount() == matchCount) {
+            return FIFTH;
         }
         throw new IllegalArgumentException();
     }
