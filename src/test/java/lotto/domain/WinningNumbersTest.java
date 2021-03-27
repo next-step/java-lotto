@@ -29,10 +29,10 @@ public class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(lottoNumbers));
 
         //when
-        long matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+        MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
 
         //then
-        assertThat(matchedCount).isEqualTo(6);
+        assertThat(matchedCount.matchedCount()).isEqualTo(6);
     }
 
     @Test

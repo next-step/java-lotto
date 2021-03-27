@@ -30,8 +30,8 @@ public class LottoApplication {
         WinningNumbers winningNumbers = new WinningNumbers(SplitUtil.split(InputView.winningNumbers()));
         RanksCount ranksCount = new RanksCount();
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            int matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
-            WinningRank rank = WinningRank.findByMacthedCount(matchedCount);
+            MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount());
             ranksCount.add(rank);
         }
 

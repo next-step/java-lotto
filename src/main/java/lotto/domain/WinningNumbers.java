@@ -28,10 +28,12 @@ public class WinningNumbers {
         checkDuplication(winningNumbers);
     }
 
-    public int countMatchingNumbers(List<Integer> lottoNumbers) {
-        return (int) lottoNumbers.stream()
+    public MatchedCount countMatchingNumbers(List<Integer> lottoNumbers) {
+        int count = (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+
+        return new MatchedCount(count);
     }
 
     private void checkLength(List<String> winningNumbers) {
