@@ -26,9 +26,6 @@ public class Lotto {
     }
 
     public boolean matchBonus(LottoNumber bonusBall) {
-        if(bonusBall == null) {
-            return false;
-        }
         return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
