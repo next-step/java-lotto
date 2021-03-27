@@ -22,12 +22,12 @@
   * Lottos   
     * 로또 n회 생성자(n = 구매금액 / 로또 가격)   
   * Result   
-    *게임 당첨 번호 생성자(input된 당첨 번호)   
+    * 게임 당첨 번호 생성자(input된 당첨 번호)   
 
-> module   
->> Game(interface)
->>> generate   
->>> getWinner   
+* module   
+ * Game(interface)
+  * generate   
+  * getWinner   
 >>> getYield   
 >> LottoGame implments Game
 >>> generate
