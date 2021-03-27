@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 public class LottoGame {
     Set<LottoNumber> numbers;
 
+    public LottoGame(String numbers) {
+        this(castToListInteger(numbers));
+    }
+
     public LottoGame(List<Integer> numbers) {
         this(castLottoNumberSet(numbers));
     }
@@ -15,12 +19,6 @@ public class LottoGame {
             throw new IllegalArgumentException();
         }
         this.numbers = numbers;
-    }
-
-    private static Set<LottoNumber> castLottoNumberSet(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::create)
-                .collect(Collectors.toSet());
     }
 
     public int countOfMatch(LottoGame lottoGame) {
@@ -52,4 +50,17 @@ public class LottoGame {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    private static List<Integer> castToListInteger(String numbers) {
+        return Arrays.stream(numbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private static Set<LottoNumber> castLottoNumberSet(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::create)
+                .collect(Collectors.toSet());
+    }
+
 }
