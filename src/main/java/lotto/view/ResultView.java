@@ -38,11 +38,11 @@ public class ResultView {
         }
     }
 
-    public static void plusProfitRate(double profitRate) {
+    public static void positiveProfitRate(double profitRate) {
         System.out.printf((PLUS_PROFIT_RATE) + "%n", profitRate);
     }
 
-    public static void minusProfitRate(double profitRate) {
+    public static void negativeProfitRate(double profitRate) {
         System.out.printf((MINUS_PROFIT_RATE) + "%n", profitRate);
     }
 }
