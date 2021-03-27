@@ -62,7 +62,7 @@ public class WinningNumbers {
         }
     }
 
-    private void checkBound(int number) {
+    private void checkBound(Integer number) {
         if (BOUND_MIN > number || number > BOUND_MAX) {
             throw new IllegalArgumentException(CHECK_BOUND);
         }
