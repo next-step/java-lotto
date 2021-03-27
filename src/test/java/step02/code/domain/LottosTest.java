@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -66,11 +67,15 @@ public class LottosTest {
         new Lottos(
           Arrays.asList(
             new Lotto(Arrays.asList(1,2,3,4,5,6)),
+            new Lotto(Arrays.asList(1,2,3,4,5,6)),
+            new Lotto(Arrays.asList(1,2,3,4,5,7)),
+            new Lotto(Arrays.asList(1,2,3,4,5,7)),
             new Lotto(Arrays.asList(1,2,3,4,5,7))
           )
         ),
         Arrays.asList(1, 2, 3, 4, 5, 6),
-        Arrays.asList(6, 5)
+        Arrays.asList(6, 6, 5, 5, 5),
+        Map.of(6, 2, 5, 3)
       ),
       Arguments.of(
         new Lottos(
@@ -81,8 +86,18 @@ public class LottosTest {
           )
         ),
         Arrays.asList(40, 41, 42, 43, 44, 45),
-        Arrays.asList(4, 2, 1)
+        Arrays.asList(4, 2, 1),
+        Map.of(4, 1, 2, 1, 1, 1)
       )
     );
+  }
+
+  @ParameterizedTest
+  @MethodSource("lottosAndWinningNumberAndMatch")
+  @DisplayName("결과 합산된 데이터가 정확히 만들어 지는지 테스트")
+  public void result(Lottos lottos, List<Integer> winningNumber, List<Integer> mustMatched, Map<Integer, Integer> mustResult) {
+    Map<Integer, Integer> result = lottos.result(winningNumber);
+
+    assertThat(result.equals(mustResult)).isTrue();
   }
 }

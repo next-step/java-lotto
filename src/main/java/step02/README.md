@@ -41,6 +41,8 @@
     - List<Integer> lottoNumbers();
       - 로또 숫자 6자리 생성
       - set 으로 생성해서 동일한 숫자가 안겹치도록
+    - Map<Integer, Integer> result();
+      - result 출력 할 수 있도록 map 으로 등수 합산
 - ## WinningNumber.java
   - field
     - List<Integer> winningNumber;
