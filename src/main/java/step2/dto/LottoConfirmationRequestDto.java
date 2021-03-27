@@ -18,4 +18,8 @@ public class LottoConfirmationRequestDto {
         return new LottoConfirmationRequestDto(inputLottoNumbers);
     }
 
+    public static LottoConfirmationRequestDto newInstance(InputLottoNumbers inputLottoNumbers) {
+        return new LottoConfirmationRequestDto(inputLottoNumbers);
+    }
+
 }
