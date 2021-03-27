@@ -1,13 +1,23 @@
 package step2.domain;
 
-public class Money {
-    private final int money;
+import step2.constants.Constants;
 
-    private Money(final int money) {
-        this.money = money;
+public class Money {
+    private int money;
+
+    private Money(final int amount) {
+        this.money = amount;
     }
 
-    public static Money from(final int money) {
-        return new Money(money);
+    public static Money from(final int amount) {
+        return new Money(amount);
+    }
+
+    public void buyLotto() {
+        this.money = money - Constants.LOTTO_PRICE;
+    }
+
+    public boolean isPossibleBuyLotto() {
+        return money >= Constants.LOTTO_PRICE;
     }
 }
