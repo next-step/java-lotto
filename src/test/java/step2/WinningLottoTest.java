@@ -28,7 +28,7 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("몇 개 일치하는지 통계 클래스 생성 테스트")
+    @DisplayName("지난주 당첨 번호와 몇 개 일치하는지 통계 클래스 생성 테스트")
     void statistic_test(){
         String winningNumbers = "1,2,3,4,5,6";
         String purchasedNumbers = "1,2,3,4,9,11";
