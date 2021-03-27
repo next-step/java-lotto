@@ -15,7 +15,7 @@ public class LottoTest {
 
     @ParameterizedTest(name = "로또 넘버 정렬 테스트")
     @CsvSource(value = {"26,42,7,39,15,1:1,7,15,26,39,42", "36,2,20,3,8,34:2,3,8,20,34,36"}, delimiter = ':')
-    public void sortedNumbers(String inputs, String expected) {
+    public void sort(String inputs, String expected) {
         String[] inputNumbers = inputs.split(",");
         List<Integer> expectNumbers = Arrays.stream(expected.split(","))
             .map(Integer::parseInt)
@@ -24,4 +24,13 @@ public class LottoTest {
         Lotto lotto = new Lotto(inputNumbers);
         assertThat(lotto.getLottoNumbers().toString()).isEqualTo(expectNumbers.toString());
     }
+
+    @ParameterizedTest(name = "로또 넘버 중복 테스트")
+    @CsvSource(value={"1,2,3,4,5:5", "1,2,2,3,4:4", "1,2,2,2,3:3"}, delimiter = ':')
+    public void duplicate(String inputs, int expected) {
+        String[] inputNumbers = inputs.split(",");
+        Lotto lotto = new Lotto(inputNumbers);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(expected);
+    }
+
 }

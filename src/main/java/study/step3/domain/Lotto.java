@@ -3,10 +3,11 @@ package study.step3.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
-    private TreeSet<LottoNumber> lottoNumbers = new TreeSet<>();
+    private Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
     public Lotto(List<LottoNumber> collect) {
         lottoNumbers = new TreeSet<>(collect);
