@@ -20,8 +20,10 @@ public class LottoRankTest {
     @Test
     @DisplayName("보너스 상금 테스트")
     public void bonus() {
+        // given
         int hit = 5;
         int amount = 30000000;
+        // when & then
         assertThat(LottoRank.of(hit, true).getAmount()).isEqualTo(amount);
     }
 }

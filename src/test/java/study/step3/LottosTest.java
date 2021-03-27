@@ -13,7 +13,9 @@ public class LottosTest {
     @Test
     @DisplayName("금액에 따른 로또 생성 테스트")
     void purchase() {
+        // given
         Lottos lottos = LottoFactory.purchase(new Amount(12000));
+        // when & then
         assertThat(lottos.getLottos().size()).isEqualTo(12);
     }
 }

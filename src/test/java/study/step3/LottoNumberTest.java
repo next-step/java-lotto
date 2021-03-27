@@ -22,6 +22,10 @@ public class LottoNumberTest {
     @ParameterizedTest(name = "로또 번호 생성 테스트")
     @ValueSource(strings = {"1", "45"})
     public void of(String input) {
-        assertThat(LottoNumber.of(Integer.parseInt(input)).toString()).isEqualTo(input);
+        // given
+        int test = Integer.parseInt(input);
+        LottoNumber lottoNumber = LottoNumber.of(test);
+        // when & then
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(test));
     }
 }

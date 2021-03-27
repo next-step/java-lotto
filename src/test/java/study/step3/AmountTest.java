@@ -19,7 +19,9 @@ public class AmountTest {
     @ParameterizedTest(name = "복권 구매 갯수 테스트")
     @CsvSource(value = {"1000:1", "2000:2", "150000: 150"}, delimiter = ':')
     public void purchaseLottoCount(int input, int expected) {
+        // given
         Amount amount = new Amount(input);
+        // when & then
         assertThat(amount.getPurchaseLottoCount()).isEqualTo(expected);
     }
 }
