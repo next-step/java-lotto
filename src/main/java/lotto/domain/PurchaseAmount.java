@@ -18,6 +18,10 @@ public class PurchaseAmount {
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
     }
 
+    public int numberOfTicket(int lottoTicketPrice) {
+        return purchaseAmount / lottoTicketPrice;
+    }
+
     public int purchaseAmount() {
         return purchaseAmount;
     }
