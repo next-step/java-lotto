@@ -24,30 +24,30 @@
   * Result   
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
 
-* module   
- * Game(interface)
-  * generate   
-  * getWinner   
->>> getYield   
->> LottoGame implments Game
->>> generate
->>> getWinner
->>> getYield  
->> Statistics   
->>> 당첨 통계(6개일치,5개일치,4개일치,3개일치,2개일치)   
->>> 수익률   
+* module
+  * Game(interface)
+    * generate   
+    * getWinner   
+    * getYield   
+  * LottoGame implments Game
+    * generate
+    * getWinner
+    * getYield  
+  * Statistics   
+    * 당첨 통계(6개일치,5개일치,4개일치,3개일치,2개일치)   
+    * 수익률   
 
-> ui   
->> InputView   
->>> 구입금액
->>> 당첨번호
->> ResultView   
->>> 당첨 통계 결과
->>> 수익률 결과
+* ui   
+  * InputView   
+    * 구입금액
+    * 당첨번호
+  * ResultView   
+    * 당첨 통계 결과
+    * 수익률 결과
 
-> controller   
->> LottoMain   
->>> run   
+* controller   
+  * LottoMain   
+    * run   
 
 
 ## 구현예시
