@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.PurchaseAmount;
+import lotto.utils.LottoRandomNumberUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,15 @@ public class PurchaseAmountTest {
         assertThat(purchaseAmount).isEqualTo(new PurchaseAmount(1000));
         purchaseAmount = new PurchaseAmount("1000");
         assertThat(purchaseAmount).isEqualTo(new PurchaseAmount("1000"));
+    }
+
+    @Test
+    @DisplayName("구매한 티켓 장수 구하기")
+    public void numberOfTicket() throws Exception {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
+        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(LottoRandomNumberUtil.lottoNumbers()));
+        int numberOfTicket = purchaseAmount.numberOfTicket(lottoTicket.price());
+        assertThat(numberOfTicket).isEqualTo(1);
     }
 
     @Test
