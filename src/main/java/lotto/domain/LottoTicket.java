@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
+    private static final int PRICE = 1000;
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket(LottoNumbers lottoNumbers) {
@@ -13,6 +14,10 @@ public class LottoTicket {
 
     public List<Integer> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers.lottoNumbers());
+    }
+
+    public int price() {
+        return PRICE;
     }
 
     @Override
