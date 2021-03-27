@@ -23,8 +23,7 @@
   * Lottos   
     * 로또 n회 생성자(n = 구매금액 / 로또 가격)   
     * 구매금액   
-    * 당첨결과(param :WinningNumbers, return : List<Rank>)   
-    * 수익률
+    * 당첨결과(param :WinningNumbers, return : List\<Rank\>)   
   * WinningNumber   
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
     * getWinningNumbers(return : 게임 당첨 번호)
