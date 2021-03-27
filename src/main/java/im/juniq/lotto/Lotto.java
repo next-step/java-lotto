@@ -9,7 +9,6 @@ public class Lotto {
 	private static final int LAST_LOTTO_NUMBER = 45;
 	private static final int NUMBER_OF_PICKUP = 6;
 	private List<Integer> numbers;
-	private int matchedCount;
 
 	public Lotto() {
 		List<Integer> baseNumbers = makeBaseNumbers();
@@ -42,16 +41,17 @@ public class Lotto {
 	}
 
 	public int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
-		matchedCount = 0;
+		int matchedCount = 0;
 		for (int number : numbers) {
-			countMatched(winningNumbers, number);
+			matchedCount += countMatched(winningNumbers, number);
 		}
 		return matchedCount;
 	}
 
-	private void countMatched(WinningNumbers winningNumbers, int number) {
+	private int countMatched(WinningNumbers winningNumbers, int number) {
 		if (winningNumbers.find(number)) {
-			matchedCount++;
+			return 1;
 		}
+		return 0;
 	}
 }

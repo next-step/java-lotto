@@ -3,9 +3,9 @@ package im.juniq.lotto;
 public class LotteryMachine {
 	private static final int LOTTO_PRICE = 1000;
 
-	private ShuffleStrategy shuffleStrategy;
 	private Lottoes lottoes;
 	private int price;
+	private WinningNumbers winningNumbers;
 
 	public LotteryMachine(int price) {
 		this(price, new ShuffleStrategyImpl());
@@ -14,7 +14,6 @@ public class LotteryMachine {
 	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
 		this.price = price;
 		checkPrice(price);
-		this.shuffleStrategy = shuffleStrategy;
 		lottoes = new Lottoes(price / LOTTO_PRICE, shuffleStrategy);
 	}
 
