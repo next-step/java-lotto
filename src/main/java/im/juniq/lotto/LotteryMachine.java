@@ -31,11 +31,11 @@ public class LotteryMachine {
 	}
 
 	public double yield(List<Integer> winningNumber) {
-		long winningAmount = 0;
-		winningAmount += 2000000000 * lottoes.numberOfLottoesMatched(6, winningNumber);
-		winningAmount += 1500000 * lottoes.numberOfLottoesMatched(5, winningNumber);
-		winningAmount += 50000 * lottoes.numberOfLottoesMatched(4, winningNumber);
-		winningAmount += 5000 * lottoes.numberOfLottoesMatched(3, winningNumber);
+		double winningAmount = 0;
+		winningAmount += Winning.SIX_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(6, winningNumber);
+		winningAmount += Winning.FIVE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(5, winningNumber);
+		winningAmount += Winning.FOUR_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(4, winningNumber);
+		winningAmount += Winning.THREE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(3, winningNumber);
 
 		return winningAmount / price;
 	}
