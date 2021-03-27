@@ -10,8 +10,8 @@ public class ProfitRate {
         this.profitRate = profitRate;
     }
 
-    public ProfitRate(int totalPrize, int purchaeAmount) {
-        this.profitRate = (double) totalPrize / purchaeAmount;
+    public ProfitRate(TotalPrize totalPrize, PurchaseAmount purchaeAmount) {
+        this.profitRate = (double) totalPrize.totalPrize() / purchaeAmount.purchaseAmount();
     }
 
     public double profitRate() {

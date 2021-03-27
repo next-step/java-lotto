@@ -10,7 +10,7 @@ public class ProfitRateTest {
     @Test
     @DisplayName("수익률 생성")
     public void create() throws Exception {
-        ProfitRate profitRate = new ProfitRate(5000, 14000);
+        ProfitRate profitRate = new ProfitRate(new TotalPrize(5000), new PurchaseAmount(14000));
         assertThat(profitRate).isEqualTo(new ProfitRate(((double) 5000 / 14000)));
     }
 }
