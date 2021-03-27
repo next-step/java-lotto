@@ -48,9 +48,14 @@ public class ResultView {
     }
 
     private static void printLottoRankStatistics(LottoStatistics lottoStatistics, LottoRank lottoRank) {
-        System.out.printf(
-                "%d개 일치 (%d원) - %d개\n",
-                lottoRank.matchingCount(), lottoRank.winningPrize(), lottoStatistics.lottoTicketsCount(lottoRank)
-        );
+        final StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d개 일치", lottoRank.matchingCount()));
+        if (lottoRank == LottoRank.SECOND) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(String.format(" (%d원)", lottoRank.winningPrize()));
+        sb.append(String.format(" - %d개", lottoStatistics.lottoTicketsCount(lottoRank)));
+
+        System.out.println(sb);
     }
 }
