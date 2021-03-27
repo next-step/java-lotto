@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoBallFactory {
+public class LottoBallMachine {
   private static final int LOTTO_NUMBER = 45;
-  private static List<LottoBall> lottoBalls;
+  private List<LottoBall> lottoBalls;
 
-  public static void initialize() {
+  public void initialize() {
     lottoBalls = new ArrayList<>();
     for (int i=1 ; i <= LOTTO_NUMBER ; i++) {
-      lottoBalls.add(LottoBall.create(i));
+      lottoBalls.add(new LottoBall(i));
     }
   }
 
-  public static List<LottoBall> draw() {
+  public List<LottoBall> draw() {
     Collections.shuffle(lottoBalls);
-    List<LottoBall> ballsDraw = lottoBalls.subList(0, 6);
+    List<LottoBall> ballsDraw = new ArrayList<>(lottoBalls.subList(0, 6));
     Collections.sort(ballsDraw);
     return ballsDraw;
   }

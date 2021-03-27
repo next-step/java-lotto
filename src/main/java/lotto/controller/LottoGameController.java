@@ -1,11 +1,11 @@
 package lotto.controller;
 
-import java.util.List;
-import lotto.domain.LottoBallFactory;
-import lotto.domain.LottoGame;
+import lotto.domain.LottoBallMachine;
+import lotto.domain.LottoGames;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoGameController {
 
@@ -13,13 +13,15 @@ public class LottoGameController {
     InputView inputView = new InputView();
     Money money = inputView.inputMoney();
 
-    LottoBallFactory.initialize();
-    LottoStore lottoStore = new LottoStore();
-    List<LottoGame> lottoGames = lottoStore.sell(money);
+    LottoBallMachine lottoBallMachine = new LottoBallMachine();
+    lottoBallMachine.initialize();
 
-    lottoGames.forEach( game -> {
+    LottoStore lottoStore = new LottoStore(lottoBallMachine);
+    LottoGames lottoGames = lottoStore.sell(money);
 
-    });
+    ResultView resultView = new ResultView();
+    resultView.printBuyingLottoGame(lottoGames);
+
 
 
 

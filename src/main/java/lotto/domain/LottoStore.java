@@ -1,16 +1,23 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStore {
-  private static final Integer LOTTO_PRICE = 1000;
 
-  public List<LottoGame> sell(Money money) {
-    int count = money.getTryLottoCount(LOTTO_PRICE);
-    return Stream.generate(LottoGame::new)
-        .limit(count)
-        .collect(Collectors.toList());
+  private static final Integer LOTTO_PRICE = 1000;
+  private final LottoBallMachine lottoBallMachine;
+
+  public LottoStore(LottoBallMachine lottoBallMachine) {
+    this.lottoBallMachine = lottoBallMachine;
+  }
+
+  public LottoGames sell(Money money) {
+    int count = money.calculateTryLottoCount(LOTTO_PRICE);
+    return new LottoGames(
+        Stream.generate(() -> new LottoGame(new LottoBalls(lottoBallMachine.draw())))
+            .limit(count)
+            .collect(Collectors.toList())
+    );
   }
 }
