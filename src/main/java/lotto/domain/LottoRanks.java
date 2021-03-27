@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class LottoRanks {
@@ -23,15 +22,15 @@ public class LottoRanks {
     }
 
     public double totalReturnRate() {
-        BigDecimal totalWinAmount = totalWinAmount();
-        BigDecimal purchaseAmount = BigDecimal.valueOf((long) lottoRankList.size() * LottoConstant.LOTTO_PRICE);
-        return totalWinAmount.divide(purchaseAmount, 2, BigDecimal.ROUND_FLOOR).doubleValue();
+        double totalWinAmount = totalWinAmount();
+        double purchaseAmount = lottoRankList.size() * LottoConstant.LOTTO_PRICE;
+        return Math.floor(totalWinAmount / purchaseAmount * 100) / 100;
     }
 
-    private BigDecimal totalWinAmount() {
-        BigDecimal totalWinAmount = BigDecimal.ZERO;
+    private long totalWinAmount() {
+        long totalWinAmount = 0L;
         for (LottoRank lottoRank : lottoRankList) {
-            totalWinAmount = totalWinAmount.add(BigDecimal.valueOf(lottoRank.getWinAmount()));
+            totalWinAmount += lottoRank.getWinAmount();
         }
         return totalWinAmount;
     }
