@@ -5,11 +5,12 @@ import java.util.Objects;
 public class PurchaseAmount {
     private final static int PURCHASE_AMOUNT_MIN = 1000;
     private final static String GREATER_THAN_MIN = String.format("구매금액은 최소 %d원 이상이여야 합니다.", PURCHASE_AMOUNT_MIN);
-    private final static String HAS_CHARACTER = "숫자가 아닌 문자가 포함되어 있는지 확인해주세요.";
+    private final static String CHECK_CHARACTER = "숫자가 아닌 문자가 포함되어 있는지 확인해주세요.";
     private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
-        this(Integer.toString(purchaseAmount));
+        checkGreaterThanMinimum(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
     }
 
     public PurchaseAmount(String purchaseAmount) {
@@ -30,7 +31,7 @@ public class PurchaseAmount {
         try {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(HAS_CHARACTER);
+            throw new IllegalArgumentException(CHECK_CHARACTER);
         }
     }
 
