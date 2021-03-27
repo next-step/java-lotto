@@ -13,18 +13,18 @@
 * 로또 1장의 가격은 1000원이다.
 
 ## 구현 객체
-> domain
->> Lottonumber(로또 번호 1~45)
->> Lotto(로또 1회)
->> Lottos(로또 n회, 당첨 통계)
->> GameResult(게임 당첨 번호)
+> domain   
+>> Lottonumber(로또 번호 1~45)   
+>> Lotto(로또 1회)   
+>> Lottos(로또 n회, 당첨 통계)   
+>> GameResult(게임 당첨 번호)   
 
-> module
->> LottoGame(generateLotto, getWinner, getYield)
+> module   
+>> LottoGame(generateLotto, getWinner, getYield)   
 
-> ui
->> InputView
->> ResultView
+> ui   
+>> InputView   
+>> ResultView   
 
 ## 구현예시
 
