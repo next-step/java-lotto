@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoTest {
     private final int MONEY = 10000;
@@ -30,6 +31,43 @@ public class LottoTest {
 
         //then
         assertThat(games.size()).isEqualTo(NUMBER_OF_GAMES);
+    }
+
+    @Test
+    @DisplayName("수동 로또 입력 받기 테스트")
+    void Given_ManualLottoGame_When_New_Then_InstanceCreated() {
+        List<LottoGame> manualLottoGame = null;
+
+        assertDoesNotThrow(() -> {
+            lotto = new Lotto(MONEY, manualLottoGame, lottoNumberGenerator);
+        });
+    }
+
+    @Test
+    @DisplayName("수동 로또가 있을 때 lotto.games()가 알맞은 값을 리턴하는지 테스트")
+    void Given_ManualLottoGame_When_Game_Then_NumberOfGame() {
+        List<LottoGame> manualLottoGame = Arrays.asList(new LottoGame("1, 2, 3, 4, 5, 6"));
+
+        lotto = new Lotto(MONEY, manualLottoGame, lottoNumberGenerator);
+
+        //when
+        List<LottoGame> games = lotto.games();
+
+        //then
+        assertThat(games.size()).isEqualTo(NUMBER_OF_GAMES);
+    }
+
+    @Test
+    @DisplayName("로또 금액보다 수동 로또가 더 많으면 Exception")
+    void Given_TooManyLottoGame_When_New_Then_Exception() {
+        List<LottoGame> manualLottoGame = Arrays.asList(
+                new LottoGame("1, 2, 3, 4, 5, 6"),
+                new LottoGame("1, 2, 3, 4, 5, 6")
+        );
+
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lotto = new Lotto(1000, manualLottoGame, lottoNumberGenerator));
     }
 
     @Test

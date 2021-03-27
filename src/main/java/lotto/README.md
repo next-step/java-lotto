@@ -5,5 +5,5 @@
 - [X] 입력을 받는다
 - [X] 출력을 한다.
 - [X] 스트링으로 LottoGame을 만든다.
-- [ ] Lotto에서 이미 생성한 LottoGame을 받는다.
-- [ ] 구매금액보다 수동 금액이 많은면 Exception 처리한다.
+- [X] Lotto에서 이미 생성한 LottoGame을 받는다.
+- [X] 구매금액보다 수동 금액이 많은면 Exception 처리한다.
