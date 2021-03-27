@@ -13,13 +13,13 @@ public class LottoRanks {
     }
 
     private void validate(List<LottoRank> lottoRankList) {
-        if(lottoRankList==null || lottoRankList.size()==0) {
+        if (lottoRankList == null || lottoRankList.size() == 0) {
             throw new IllegalArgumentException();
         }
     }
 
     public int matchLottoCount(LottoRank lottoRank) {
-        return (int) lottoRankList.stream().filter(lottoRankResult -> lottoRankResult==lottoRank).count();
+        return (int) lottoRankList.stream().filter(lottoRankResult -> lottoRankResult == lottoRank).count();
     }
 
     public double totalReturnRate() {

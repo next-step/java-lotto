@@ -20,13 +20,13 @@ public class LottoTicket {
     }
 
     private void validate(int count) {
-        if(count < 1) {
+        if (count < 1) {
             throw new IllegalArgumentException("최소 1개 이상의 구매수량을 입력해 주세요");
         }
     }
 
     private void validate(List<String> lottoNumberList) {
-        if(lottoNumberList==null || lottoNumberList.size()==0) {
+        if (lottoNumberList == null || lottoNumberList.size() == 0) {
             throw new IllegalArgumentException();
         }
     }
@@ -51,9 +51,9 @@ public class LottoTicket {
         Random random = new Random();
         Set<Integer> lottoNumberSet = new HashSet<>();
         while (lottoNumberSet.size() < LottoConstant.MAX_LOTTO_COUNT) {
-            lottoNumberSet.add(random.nextInt(LottoConstant.MAX_LOTTO_NUMBER-1) + LottoConstant.MIN_LOTTO_NUMBER);
+            lottoNumberSet.add(random.nextInt(LottoConstant.MAX_LOTTO_NUMBER - 1) + LottoConstant.MIN_LOTTO_NUMBER);
         }
-        return lottoNumberSet.stream().mapToInt(a->a).toArray();
+        return lottoNumberSet.stream().mapToInt(a -> a).toArray();
     }
 
     private int[] generateLottoNumbers(String lottoNumbers) {

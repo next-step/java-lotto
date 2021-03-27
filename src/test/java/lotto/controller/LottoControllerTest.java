@@ -39,12 +39,12 @@ class LottoControllerTest {
 
         // then
         for (String lottoNumbers : response.getLottoNumberList()) {
-            lottoNumbers = lottoNumbers.substring(1, lottoNumbers.length()-1);
+            lottoNumbers = lottoNumbers.substring(1, lottoNumbers.length() - 1);
             long count = Arrays.stream(Arrays.stream(lottoNumbers.split(","))
-                                .mapToInt(lottoNumber->Integer.parseInt(lottoNumber.trim()))
-                                .toArray())
-                                .distinct()
-                                .count();
+                    .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
+                    .toArray())
+                    .distinct()
+                    .count();
             assertThat(6).isEqualTo(count);
         }
     }
@@ -59,7 +59,7 @@ class LottoControllerTest {
         lottoNumberInputList.add("1, 2, 3, 4, 5, 7");
         lottoNumberInputList.add("1, 2, 3, 4, 7, 8");
         lottoNumberInputList.add("1, 2, 3, 7, 8, 9");
-        WinInquiryRequest winInquiryRequest  = new WinInquiryRequest("1, 2, 3, 4, 5, 6", lottoNumberInputList);
+        WinInquiryRequest winInquiryRequest = new WinInquiryRequest("1, 2, 3, 4, 5, 6", lottoNumberInputList);
 
         // when
         WinInquiryResponse winInquiryResponse = lottoController.inquiryWin(winInquiryRequest);
