@@ -3,11 +3,11 @@ package lotto;
 import java.util.Arrays;
 
 public enum WinningType {
-    FIRST(6, 2000000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
+    NONE(0, 0),
     FIFTH(3, 5000),
-    NONE(0, 0);
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    FIRST(6, 2000000000);
     private final int matchNumberCount;
     private final int winnings;
 
@@ -20,7 +20,11 @@ public enum WinningType {
         return FIFTH.matchNumberCount <= matchNumberCount && matchNumberCount <= FIRST.matchNumberCount;
     }
 
-    public int winnings(){
+    public int matchNumberCount() {
+        return matchNumberCount;
+    }
+
+    public int winnings() {
         return winnings;
     }
 
@@ -29,5 +33,10 @@ public enum WinningType {
                 .filter(type -> matchNumberCount == type.matchNumberCount)
                 .findAny()
                 .orElse(NONE);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d개 일치(%d원)", matchNumberCount, winnings);
     }
 }
