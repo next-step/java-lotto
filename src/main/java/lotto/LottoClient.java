@@ -17,10 +17,11 @@ public class LottoClient {
         input(inputView, lottoPrice, lotto);
 
         WinningNumbers winningNumbers = new WinningNumbers(inputView.inputQuestion("지난 주 당첨 번호를 입력해 주세요.").replaceAll(" ", "").split(","));
-        winningNumbers.addBonusNumbers(inputView.inputQuestion("보너스 볼을 입력해 주세요.").replaceAll(" ", "").split(","));
-        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lotto);
+        winningNumbers.bonusNumber(Integer.parseInt(inputView.inputQuestion("보너스 볼을 입력해 주세요.").replaceAll(" ", "")));
+        Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lotto);
+        Map<Integer, Integer> bonusNumberMap = winningNumbers.getBonusNumber();
 
-        printWinNumbers(inputView, winNumbers);
+        printWinNumbers(inputView, winNumbersMap, bonusNumberMap);
     }
 
     private static void input(InputView inputView, LottoPrice lottoPrice, Lotto lotto) {
@@ -33,13 +34,13 @@ public class LottoClient {
         }
     }
 
-    private static void printWinNumbers(InputView inputView, Map<Integer, Integer> winNumbers) {
+    private static void printWinNumbers(InputView inputView, Map<Integer, Integer> winNumbersMap, Map<Integer, Integer> bonusNumberMap) {
         inputView.print("당첨 통계");
         inputView.print("---------");
-        System.out.println("3개 일치 (5000원)- " + winNumbers.get(3) +"개");
-        System.out.println("4개 일치 (50000원)- " + winNumbers.get(4) +"개");
-        System.out.println("5개 일치 (1500000원)- " + winNumbers.get(5) +"개");
-        System.out.println("6개 일치 (2000000000원)- " + winNumbers.get(6) +"개");
+        System.out.println("3개 일치, " + ((bonusNumberMap.get(3) > 0) ? ", 보너스 볼 일치" : "") + "(5000원)- " + winNumbersMap.get(3) +"개");
+        System.out.println("4개 일치, " + ((bonusNumberMap.get(4) > 0) ? ", 보너스 볼 일치" : "") + "(50000원)- " + winNumbersMap.get(4) +"개");
+        System.out.println("5개 일치, " + ((bonusNumberMap.get(5) > 0) ? ", 보너스 볼 일치" : "") + "(1500000원)- " + winNumbersMap.get(5) +"개");
+        System.out.println("6개 일치, " + ((bonusNumberMap.get(6) > 0) ? ", 보너스 볼 일치" : "") + "(2000000000원)- " + winNumbersMap.get(6) +"개");
         System.out.println("총 수익률은 0.35입니다.");
     }
 }
