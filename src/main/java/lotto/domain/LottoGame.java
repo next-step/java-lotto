@@ -52,7 +52,8 @@ public class LottoGame {
     }
 
     private static List<Integer> castToListInteger(String numbers) {
-        return Arrays.stream(numbers.split(", "))
+        numbers = numbers.replaceAll("\\s+", "");
+        return Arrays.stream(numbers.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

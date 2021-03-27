@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Lotto {
     private List<LottoGame> games;
+    private int numberOfManualGames;
+    private int numberOfGeneratedGames;
 
     public Lotto(int money, LottoNumberGenerator lottoNumberGenerator) {
         this(money, null, lottoNumberGenerator);
@@ -35,20 +37,29 @@ public class Lotto {
         return winners;
     }
 
+    public int numberOfGeneratedGames() {
+        return numberOfGeneratedGames;
+    }
+
+    public int numberOfManualGames() {
+        return numberOfManualGames;
+    }
+
     private void initLottoGame(int money, List<LottoGame> manualLottoGame, LottoNumberGenerator lottoNumberGenerator) {
-        this.games = new ArrayList<>();
+        games = new ArrayList<>();
 
         appendManualGames(manualLottoGame);
         appendGeneratedGames(money, manualLottoGame.size(), lottoNumberGenerator);
     }
 
     private void appendManualGames(List<LottoGame> manualLottoGame) {
-        this.games.addAll(manualLottoGame);
+        numberOfManualGames = manualLottoGame.size();
+        games.addAll(manualLottoGame);
     }
 
     private void appendGeneratedGames(int money, int numberOfManualGames, LottoNumberGenerator lottoNumberGenerator) {
-        int numberOfGames = numberOfGeneratedGames(money, numberOfManualGames);
-        while (numberOfGames-- > 0) {
+        numberOfGeneratedGames = numberOfGeneratedGames(money, numberOfManualGames);
+        for (int i = 0; i < numberOfGeneratedGames; i++) {
             games.add(lottoNumberGenerator.numbers());
         }
     }

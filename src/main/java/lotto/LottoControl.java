@@ -4,15 +4,23 @@ import lotto.domain.*;
 import lotto.view.View;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoControl {
     public void play() {
         Scanner scanner = new Scanner(System.in);
         int money = View.purchaseAmount(scanner);
 
-        Lotto lotto = new Lotto(money, new RandomLottoNumberGenerator());
-        View.print(lotto.games());
+        int numberOfManualGames = View.numberOfManualGames(scanner);
+        List<String> manualGameNumbers = View.manualGameNumbers(numberOfManualGames, scanner);
+        List<LottoGame> manualLottoGames = manualGameNumbers.stream()
+                .map(LottoGame::new)
+                .collect(Collectors.toList());
+
+        Lotto lotto = new Lotto(money, manualLottoGames, new RandomLottoNumberGenerator());
+        View.print(lotto);
 
         LottoGame typedWinningNumber = new LottoGame(View.winningNumber(scanner));
         int typedBonusNumber = View.bonusNumber(scanner);
