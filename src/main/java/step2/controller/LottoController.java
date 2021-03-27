@@ -16,6 +16,7 @@ public class LottoController {
     }
 
     public void run() {
-
+        ResultView.printPurchaseCount(lottos);
+        ResultView.printAllLotto(lottos);
     }
 }
