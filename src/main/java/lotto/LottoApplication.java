@@ -14,18 +14,24 @@ import java.util.Map;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = createPurchaseAmount(InputView.purchaseAmount());
+        PurchaseAmount purchaseAmount = createPurchaseAmount();
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
         printLottoTickets(lottoTickets);
-        WinningNumbers winningNumbers = createWinningNumbers(SplitUtil.split(InputView.winningNumbers()));
+        WinningNumbers winningNumbers = createWinningNumbers();
         RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
         printStatistics(ranksCount.ranksCount());
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
     }
 
-    private static PurchaseAmount createPurchaseAmount(String amount) {
-        return new PurchaseAmount(amount);
+    private static PurchaseAmount createPurchaseAmount() {
+        try {
+            String purchaseAmount = InputView.purchaseAmount();
+            return new PurchaseAmount(purchaseAmount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return createPurchaseAmount();
+        }
     }
 
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
@@ -47,8 +53,14 @@ public class LottoApplication {
         }
     }
 
-    private static WinningNumbers createWinningNumbers(List<String> numbers) {
-        return new WinningNumbers(numbers);
+    private static WinningNumbers createWinningNumbers() {
+        try {
+            List<String> winningNumbers = SplitUtil.split(InputView.winningNumbers());
+            return new WinningNumbers(winningNumbers);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return createWinningNumbers();
+        }
     }
 
     private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
