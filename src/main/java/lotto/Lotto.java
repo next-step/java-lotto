@@ -1,9 +1,12 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,8 +24,43 @@ public class Lotto {
         this(creatNumbers());
     }
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
+        shouldBeSize6(numbers);
+
         this.numbers = numbers;
+    }
+
+    public static Lotto of(String numbersString) {
+        if (Objects.isNull(numbersString) || numbersString.isEmpty()) {
+            throw new IllegalArgumentException("로또 번호를 입력해주세요!");
+        }
+        List<Integer> numbers = Arrays.stream(numbersString.split(","))
+                .map(String::trim)
+                .map(Lotto::parse)
+                .peek(Lotto::shouldBeValidNumber)
+                .collect(Collectors.toList());
+        shouldBeSize6(numbers);
+        return new Lotto(numbers);
+    }
+
+    private static Integer parse(String numeric) {
+        try {
+            return Integer.valueOf(numeric);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자값을 입력해주세요.");
+        }
+    }
+
+    private static void shouldBeValidNumber(Integer number) {
+        if (number < START || number > END) {
+            throw new IllegalArgumentException("로또 번호는 1~45 범위의 숫자입니다.");
+        }
+    }
+
+    private static void shouldBeSize6(List numbers) {
+        if (new HashSet<>(numbers).size() != 6) {
+            throw new IllegalArgumentException("중복되지 않은 여섯자리 숫자를 입력하세요.");
+        }
     }
 
     public static List<Integer> creatNumbers() {
