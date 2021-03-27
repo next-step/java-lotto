@@ -20,7 +20,7 @@ public class LottoNumber {
     public static LottoNumber create(int number) {
         LottoNumber lottoNumber = numbersCache.get(number);
         if (lottoNumber == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호가 범위를 벗어났습니다.");
         }
         return lottoNumber;
     }

@@ -12,7 +12,7 @@ public class Lotto {
 
     public Lotto(int money, List<LottoGame> manualLottoGame, LottoNumberGenerator lottoNumberGenerator) {
         if (money < LottoRule.price()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("최소 구매 금액은 1000원입니다.");
         }
 
         if (manualLottoGame == null) {
@@ -56,7 +56,7 @@ public class Lotto {
     private int numberOfGeneratedGames(int money, int numberOfManualGames) {
         int numberOfGames = money / LottoRule.price() - numberOfManualGames;
         if (numberOfGames < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("구매 금액이 부족합니다.");
         }
         return numberOfGames;
     }
