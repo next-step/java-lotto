@@ -8,13 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningRankTest {
 
     @Test
-    @DisplayName("등수 반환")
-    public void rank() throws Exception {
-        int rank = WinningRank.FIRST_PLACE.rank();
-        assertThat(rank).isEqualTo(1);
-    }
-
-    @Test
     @DisplayName("상금 반환")
     public void prize() throws Exception {
         int firstPrize = WinningRank.FIRST_PLACE.prize();
