@@ -22,4 +22,7 @@ public class LottoConfirmationRequestDto {
         return new LottoConfirmationRequestDto(inputLottoNumbers);
     }
 
+    public InputLottoNumbers getInputLottoNumbers() {
+        return inputLottoNumbers;
+    }
 }

@@ -4,10 +4,11 @@ import step2.dto.LottoConfirmationRequestDto;
 
 public class LottoWinningChecker {
 
-    private LottoWinningChecker(LottoConfirmationRequestDto requestDto) {
+    private LottoWinningChecker(LottoConfirmationRequestDto confirmationRequestDto) {
 
     }
 
     public static LottoWinningChecker getInstance(LottoConfirmationRequestDto confirmationRequestDto) {
+        return new LottoWinningChecker(confirmationRequestDto);
     }
 }
