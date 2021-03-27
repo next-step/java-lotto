@@ -13,8 +13,8 @@
 * 로또 1장의 가격은 1000원이다.
 
 ## 구현 객체
-
-> Domain
+```
+> Domain   
 >> LottoNumber   
 >>> 로또 번호 생성자(1~45 까지의 숫자)   
 >> Lotto   
@@ -48,7 +48,7 @@
 > controller   
 >> LottoMain   
 >>> run   
-
+```
 
 ## 구현예시
 ```
