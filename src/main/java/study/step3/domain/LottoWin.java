@@ -1,6 +1,7 @@
 package study.step3.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,11 +9,8 @@ public class LottoWin {
     Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
 
     public LottoWin() {
-        lottoWin.put(LottoRank.FIFTH, 0);
-        lottoWin.put(LottoRank.FOURTH, 0);
-        lottoWin.put(LottoRank.THIRD, 0);
-        lottoWin.put(LottoRank.SECOND, 0);
-        lottoWin.put(LottoRank.FIRST, 0);
+        Arrays.stream(LottoRank.values())
+            .forEach(lottoRank -> lottoWin.put(lottoRank, 0));
     }
 
     public Map<LottoRank, Integer> getWin() {
@@ -20,7 +18,7 @@ public class LottoWin {
     }
 
     public void hit(int match) {
-        LottoRank lottoWinType = LottoRank.of(match);
+        LottoRank lottoWinType = LottoRank.of(match, false);
         addWin(lottoWinType);
     }
 
@@ -45,6 +43,6 @@ public class LottoWin {
     }
 
     public BigDecimal profit(Amount amount) {
-        return new BigDecimal((double) sum() / amount.getAmount());
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(amount.getAmount()));
     }
 }
