@@ -10,7 +10,6 @@ import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoShuffleStrategy;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +42,7 @@ class LottoControllerTest {
     void 생성() {
 
         // when
-        LottoController lottoController = LottoController.newInstance(creationRequestDto);
+        LottoController lottoController = LottoController.newInstance(lottoShuffleStrategy);
 
         // then
         assertThat(lottoController).isNotNull();
@@ -55,10 +54,10 @@ class LottoControllerTest {
     void 로또_생성_및_반환() {
 
         // given
-        LottoController lottoController = LottoController.newInstance(creationRequestDto);
+        LottoController lottoController = LottoController.newInstance(lottoShuffleStrategy);
 
         // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList();
+        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
 
         // then
         assertThat(actual).isNotNull();
@@ -68,10 +67,10 @@ class LottoControllerTest {
     @Test
     void 로또_반환값_검증() {
         // given
-        LottoController lottoController = LottoController.newInstance(creationRequestDto, lottoShuffleStrategy);
+        LottoController lottoController = LottoController.newInstance(lottoShuffleStrategy);
 
         // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList();
+        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
         LottoExpressionResponseDto expected = LottoExpressionResponseDto.newInstance(testLottoList);
 
         // then

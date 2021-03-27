@@ -10,25 +10,26 @@ import step2.strategy.LottoShuffleStrategy;
 
 public final class LottoController {
 
-    private final LottoGenerator lottoGenerator;
+    private final LottoShuffleStrategy strategy;
 
-    private LottoController(LottoCreationRequestDto creationRequestDto) {
-        this(creationRequestDto, LottoRandomShuffleStrategy.getInstance());
+    private LottoController() {
+        this(LottoRandomShuffleStrategy.getInstance());
     }
 
-    private LottoController(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
-        this.lottoGenerator = LottoGenerator.newInstance(creationRequestDto, strategy);
+    private LottoController(LottoShuffleStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public static final LottoController newInstance(LottoCreationRequestDto creationRequestDto) {
-        return new LottoController(creationRequestDto);
+    public static final LottoController newInstance() {
+        return new LottoController();
     }
 
-    public static final LottoController newInstance(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
-        return new LottoController(creationRequestDto, strategy);
+    public static final LottoController newInstance(LottoShuffleStrategy strategy) {
+        return new LottoController(strategy);
     }
 
-    public final LottoExpressionResponseDto generateLottoList() {
+    public final LottoExpressionResponseDto generateLottoList(LottoCreationRequestDto creationRequestDto) {
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(creationRequestDto, strategy);
         LottoList lottoList = LottoList.newInstance();
         while (lottoGenerator.hasNext()) {
             lottoList.add(lottoGenerator.generateLotto());

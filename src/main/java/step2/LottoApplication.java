@@ -8,10 +8,12 @@ import step2.view.ResultView;
 public final class LottoApplication {
     private final InputView inputView;
     private final ResultView resultView;
+    private final LottoController lottoController;
 
     private LottoApplication() {
         this.inputView = InputView.getInstance();
         this.resultView = ResultView.getInstance();
+        this.lottoController = LottoController.newInstance();
     }
 
     public static final LottoApplication newInstance() {
@@ -19,14 +21,12 @@ public final class LottoApplication {
     }
 
     public final void start() {
-        generateAndShowLotto();
-
+        generateAndShowLottoList();
     }
 
-    private final void generateAndShowLotto() {
+    public final void generateAndShowLottoList() {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
-        LottoController lottoController = LottoController.newInstance(lottoCreationRequestDto);
-        resultView.printLottoList(lottoController.generateLottoList());
+        resultView.printLottoList(lottoController.generateLottoList(lottoCreationRequestDto));
     }
 
 }
