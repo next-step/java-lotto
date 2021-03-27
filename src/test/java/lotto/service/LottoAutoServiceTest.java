@@ -56,7 +56,7 @@ class LottoAutoServiceTest {
         LottoRanks lottoRanks = lottoAutoService.inquiryWin(lottoNumberInputList, new int[]{1, 2, 3, 4, 5, 6});
 
         // then
-        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
+        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIRST));
     }
 
     @Test

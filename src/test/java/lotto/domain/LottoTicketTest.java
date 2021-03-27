@@ -83,7 +83,7 @@ class LottoTicketTest {
         LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6});
 
         // then
-        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.ONE));
+        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIRST));
     }
 
     @Test

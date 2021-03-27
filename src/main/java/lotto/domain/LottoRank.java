@@ -5,10 +5,10 @@ import java.util.Optional;
 
 public enum LottoRank {
     LOSE(0, 0),
-    ONE(6, 2000000000),
-    THREE(5, 1500000),
-    FOUR(4, 50000),
-    FIVE(3, 5000);
+    FIRST(6, 2_000_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
 
     private final int matchCount;
     private final long winAmount;
@@ -40,6 +40,6 @@ public enum LottoRank {
     }
 
     private static boolean isLose(int matchCount) {
-        return matchCount >= LOSE.getMatchCount() && matchCount < FIVE.getMatchCount();
+        return matchCount >= LOSE.getMatchCount() && matchCount < FIFTH.getMatchCount();
     }
 }
