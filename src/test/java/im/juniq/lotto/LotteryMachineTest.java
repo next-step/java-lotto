@@ -43,9 +43,13 @@ class LotteryMachineTest {
 	void calculateYield() {
 		LotteryMachine lotteryMachine = new LotteryMachine(1000, new NoShuffleStrategy());
 
-		assertThat(lotteryMachine.yield(new WinningNumbers(1, 2, 3, 4, 5, 6))).isEqualTo(2000000);
-		assertThat(lotteryMachine.yield(new WinningNumbers(1, 2, 3, 4, 5, 7))).isEqualTo(15000);
-		assertThat(lotteryMachine.yield(new WinningNumbers(1, 2, 3, 4, 7, 8))).isEqualTo(50);
-		assertThat(lotteryMachine.yield(new WinningNumbers(1, 2, 3, 7, 8, 9))).isEqualTo(5);
+		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 6));
+		assertThat(lotteryMachine.yield()).isEqualTo(2000000);
+		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 7));
+		assertThat(lotteryMachine.yield()).isEqualTo(15000);
+		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 7, 8));
+		assertThat(lotteryMachine.yield()).isEqualTo(50);
+		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 7, 8, 9));
+		assertThat(lotteryMachine.yield()).isEqualTo(5);
 	}
 }

@@ -27,7 +27,15 @@ public class LotteryMachine {
 		}
 	}
 
-	public double yield(WinningNumbers winningNumbers) {
+	public void setWinningNumbers(WinningNumbers winningNumbers) {
+		this.winningNumbers = winningNumbers;
+	}
+
+	public int numberOfLottoesMatched(int count) {
+		return lottoes.numberOfLottoesMatched(count, winningNumbers);
+	}
+
+	public double yield() {
 		double winningAmount = 0;
 		winningAmount += Winning.SIX_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(6, winningNumbers);
 		winningAmount += Winning.FIVE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(5, winningNumbers);
