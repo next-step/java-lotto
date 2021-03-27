@@ -21,6 +21,10 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
+    public static Lotto from(List<Number> lotto) {
+        return new Lotto(lotto);
+    }
+
     public List<Number> getNumbers() {
         return Collections.unmodifiableList(lotto);
     }

@@ -1,5 +1,6 @@
 package step2.controller;
 
+import step2.domain.Lotto;
 import step2.domain.Lottos;
 import step2.domain.Money;
 import step2.generator.LottoNumberGenerator;
@@ -18,5 +19,6 @@ public class LottoController {
     public void run() {
         ResultView.printPurchaseCount(lottos);
         ResultView.printAllLotto(lottos);
+        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());
     }
 }
