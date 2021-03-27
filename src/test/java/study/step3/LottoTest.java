@@ -2,14 +2,18 @@ package study.step3;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import study.step3.domain.Lotto;
+import study.step3.domain.LottoNumber;
 
 public class LottoTest {
 
@@ -34,6 +38,21 @@ public class LottoTest {
         Lotto lotto = new Lotto(inputNumbers);
         // when & then
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(expected);
+    }
+
+
+    @ParameterizedTest(name = "로또 넘버 맞춤 테스트")
+    @CsvSource(value={"1,2,3,4,5:5", "1,2,3,4,10:4", "1,2,3,10,11:3", "1,2,9,10,11:2", "1,13,14,10,11:1", "10,12,13,14,15:0"}, delimiter = ':')
+    public void match(String inputs, int expect) {
+        // given
+        String[] inputNumbers = inputs.split(",");
+        Lotto lotto = new Lotto(inputNumbers);
+        List<LottoNumber> winInput = new ArrayList<>();
+        for(int i = 1; i <= 5; i++) {
+            winInput.add(LottoNumber.of(i));
+        }
+        // when & then
+        assertThat(lotto.match(winInput)).isEqualTo(expect);
     }
 
 }
