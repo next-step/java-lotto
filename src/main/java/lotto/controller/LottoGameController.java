@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.awt.geom.RectangularShape;
 import java.util.List;
 import lotto.domain.LottoBallMachine;
 import lotto.domain.LottoGames;
@@ -26,6 +27,8 @@ public class LottoGameController {
 
     List<Integer> winNumbers = inputView.inputWinNumbers();
     Statistics statistics = lottoGames.calculateStatistics(winNumbers);
+
+    resultView.printLottoResult(money,statistics);
 
 
   }

@@ -20,8 +20,12 @@ public class InputView {
   public List<Integer> inputWinNumbers() {
     System.out.println(INPUT_WIN_NUMBERS);
     String winNumberString = scanner.next();
-    return Arrays.stream(winNumberString.split(","))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+    List<Integer> result  = Arrays.stream(winNumberString.split(","))
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
+    if (result.size() < 6) {
+      throw new IllegalArgumentException("당첨번호는 6개 이상 입력해야 합니다.");
+    }
+    return result;
   }
 }

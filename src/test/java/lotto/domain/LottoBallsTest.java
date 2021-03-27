@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -25,11 +24,11 @@ class LottoBallsTest {
     );
   }
 
-  @DisplayName("")
+  @DisplayName("당첨 번호 개수 구하기")
   @ParameterizedTest
   @CsvSource(value = {"3,4,7,8,9,10:2", "1,3,5,7,8,9:3", "1,2,3,4,5,6:6"} , delimiter = ':')
-  void test(String input, String result) {
-    int count = lottoBalls.countContainingWinNumbers(createLottoList(input));
+  void test(String winLottoNumber, String result) {
+    int count = lottoBalls.countContainingWinNumbers(createLottoList(winLottoNumber));
     assertThat(count).isEqualTo(Integer.parseInt(result));
   }
 
