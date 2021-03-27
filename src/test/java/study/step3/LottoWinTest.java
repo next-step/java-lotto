@@ -23,7 +23,7 @@ public class LottoWinTest {
     }
 
     @ParameterizedTest(name = "수익 테스트")
-    @CsvSource(value = {"3,4,5:1555", "3,3,3:15"}, delimiter = ':')
+    @CsvSource(value = {"3,4,5:1555.00", "3,3,3:15.00"}, delimiter = ':')
     public void profit(String inputs, String expected) {
         // given
         LottoWin lottoWin = new LottoWin();
@@ -36,7 +36,7 @@ public class LottoWinTest {
     }
 
     @ParameterizedTest(name = "보너스 수익 테스트")
-    @CsvSource(value = {"3,4,5:30055", "3,3,5:30010"}, delimiter = ':')
+    @CsvSource(value = {"3,4,5:30055.00", "3,3,5:30010.00"}, delimiter = ':')
     public void profitWithBonus(String inputs, String expected) {
         // given
         LottoWin lottoWin = new LottoWin();
