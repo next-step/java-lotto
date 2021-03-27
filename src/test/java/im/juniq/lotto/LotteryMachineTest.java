@@ -42,4 +42,15 @@ class LotteryMachineTest {
 		assertThat(lottoes.numberOfLottoesMatched(3, Arrays.asList(1, 2, 3, 7, 8, 9))).isEqualTo(14);
 		assertThat(lottoes.numberOfLottoesMatched(4, Arrays.asList(1, 2, 3, 4, 8, 9))).isEqualTo(14);
 	}
+
+	@Test
+	void calculateYield() {
+		LotteryMachine lotteryMachine = new LotteryMachine(new NoShuffleStrategy());
+		lotteryMachine.lottoes(1000);
+
+		assertThat(lotteryMachine.yield(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(2000000);
+		assertThat(lotteryMachine.yield(Arrays.asList(1, 2, 3, 4, 5, 7))).isEqualTo(1500);
+		assertThat(lotteryMachine.yield(Arrays.asList(1, 2, 3, 4, 7, 8))).isEqualTo(50);
+		assertThat(lotteryMachine.yield(Arrays.asList(1, 2, 3, 7, 8, 9))).isEqualTo(5);
+	}
 }
