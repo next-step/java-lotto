@@ -1,17 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.LastWeekWinnerNumber;
-import lotto.domain.LottoGames;
+import lotto.domain.Lotteries;
 import lotto.domain.RankingResult;
-import lotto.domain.RateOfReturn;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-
-	private final static int PRICE_PER_GAME = 1000;
-	private RankingResult rankingResult;
-	private double rateOfReturn;
 
 	public LottoController() {
 	}
@@ -19,12 +14,9 @@ public class LottoController {
 	public void run() {
 		try {
 			int purchasePrice = getPrice();
-			validationLottoGamesSize(purchasePrice / PRICE_PER_GAME);
-			LottoGames lottoGames = getLottoGames(purchasePrice / PRICE_PER_GAME);
-			rankingResult = getRankingResult(lottoGames);
-			rateOfReturn = getRateOfReturn(purchasePrice, rankingResult);
-
-			printStatus(rankingResult, rateOfReturn);
+			Lotteries lotteries = getLottoGames(purchasePrice);
+			RankingResult rankingResult = getRankingResult(lotteries);
+			printStatus(rankingResult, purchasePrice);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -36,39 +28,25 @@ public class LottoController {
 		return inputPurchasePriceView.getInputInt();
 	}
 
-	private static LottoGames getLottoGames(int gamesSize) {
-		validationLottoGamesSize(gamesSize);
-		LottoGames lottoGames = new LottoGames(gamesSize);
+	private static Lotteries getLottoGames(int purchasePrice) {
+		Lotteries lotteries = new Lotteries(purchasePrice);
 		ResultView resultView = new ResultView();
-		resultView.printLottoGameList(lottoGames.getLottoGameList());
-		return lottoGames;
+		resultView.printLottoGameList(lotteries.getLottoGameList());
+		return lotteries;
 	}
 
-	private static RankingResult getRankingResult(LottoGames lottoGames) {
+	private static RankingResult getRankingResult(Lotteries lotteries) {
 		InputView inputLastWeekWinnerView = new InputView("지난 주 당첨 번호를 입력해주세요.");
 		String lastWeekWinnerNumberInput = inputLastWeekWinnerView.getInputString();
 
 		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber(lastWeekWinnerNumberInput);
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
-		return rankingResult;
+		return lotteries.calculateRanking(lastWeekWinnerNumber);
 	}
 
-	private static double getRateOfReturn(int purchasePrice, RankingResult rankingResult) {
-		RateOfReturn rateOfReturn = new RateOfReturn();
-		return rateOfReturn.calculate(rankingResult.getResult(), purchasePrice);
-	}
-
-	private static void printStatus(RankingResult rankingResult, double rateOfReturn) {
+	private static void printStatus(RankingResult rankingResult, int purchasePrice) {
 		if (rankingResult != null) {
 			ResultView resultView = new ResultView();
-			resultView.printStatus(rankingResult, rateOfReturn);
-		}
-	}
-
-	private static void validationLottoGamesSize(int gameSize) {
-		if (gameSize < 1) {
-			throw new IllegalArgumentException("최소 한장 이상 구매할 수 있는 금액을 입력해주세요.");
+			resultView.printStatus(rankingResult, rankingResult.getRateOfReturn(purchasePrice));
 		}
 	}
 }

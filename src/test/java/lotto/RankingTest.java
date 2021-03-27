@@ -9,8 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.LastWeekWinnerNumber;
+import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ranking;
 import lotto.domain.RankingResult;
@@ -76,10 +76,9 @@ public class RankingTest {
 	@Test
 	@DisplayName("6개 일치 테스트 : 1장")
 	void rankingTest_6개일치1장() {
-		LottoGames lottoGames = new LottoGames(lottoSixMatch);
+		Lotteries lotteries = new Lotteries(lottoSixMatch);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.SIX)).isEqualTo(1);
 
 	}
@@ -87,10 +86,9 @@ public class RankingTest {
 	@Test
 	@DisplayName("6개 일치 테스트 : 2장")
 	void rankingTest_6개일치2장() {
-		LottoGames lottoGames = new LottoGames(lottoSixMatch, lottoSixMatch);
+		Lotteries lotteries = new Lotteries(lottoSixMatch, lottoSixMatch);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.SIX)).isEqualTo(2);
 
 	}
@@ -98,40 +96,36 @@ public class RankingTest {
 	@Test
 	@DisplayName("5개 일치 테스트 : 1장")
 	void rankingTest_5개일치1장() {
-		LottoGames lottoGames = new LottoGames(lottoFiveMatch1);
+		Lotteries lotteries = new Lotteries(lottoFiveMatch1);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.FIVE)).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("5개 일치 테스트 : 2장")
 	void rankingTest_5개일치2장() {
-		LottoGames lottoGames = new LottoGames(lottoFiveMatch1, lottoFiveMatch2);
+		Lotteries lotteries = new Lotteries(lottoFiveMatch1, lottoFiveMatch2);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.FIVE)).isEqualTo(2);
 	}
 
 	@Test
 	@DisplayName("4개 일치 테스트")
 	void rankingTest_4개일치() {
-		LottoGames lottoGames = new LottoGames(lottoFourMatch);
+		Lotteries lotteries = new Lotteries(lottoFourMatch);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.FOUR)).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("3개 일치 테스트")
 	void rankingTest_3개일치() {
-		LottoGames lottoGames = new LottoGames(lottoThreeMatch);
+		Lotteries lotteries = new Lotteries(lottoThreeMatch);
 
-		RankingResult rankingResult = new RankingResult();
-		rankingResult.calculate(lottoGames, lastWeekWinnerNumber);
+		RankingResult rankingResult = lotteries.calculateRanking(lastWeekWinnerNumber);
 		assertThat(rankingResult.getResult().get(Ranking.THREE)).isEqualTo(1);
 	}
 
