@@ -19,10 +19,19 @@
     * 로또 번호 생성자(1~45 까지의 숫자)   
   * Lotto   
     * 로또 1회 생성자(6개의 LottoNumber를 갖고 있음)   
+    * 당첨결과(param : WinningNumbers, return : Rank)   
   * Lottos   
     * 로또 n회 생성자(n = 구매금액 / 로또 가격)   
-  * Result   
+    * 구매금액   
+    * 당첨결과(param :WinningNumbers, return : List<Rank>)   
+    * 수익률
+  * WinningNumber   
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
+    * getWinningNumbers(return : 게임 당첨 번호)
+  * Rank(enum)   
+    * 형식 : 등수(int matchCount, int winningMoney)
+    * 당첨등수 생성자(param : matchCount)   
+  
 
 * module
   * Game(interface)
