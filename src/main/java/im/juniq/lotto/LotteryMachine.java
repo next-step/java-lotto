@@ -1,8 +1,5 @@
 package im.juniq.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LotteryMachine {
 	private static final int LOTTO_PRICE = 1000;
 
@@ -16,17 +13,9 @@ public class LotteryMachine {
 		this.shuffleStrategy = shuffleStrategy;
 	}
 
-	public List<Lotto> lottoes(int price) {
+	public Lottoes lottoes(int price) {
 		checkPrice(price);
-		return makeLotto(price / LOTTO_PRICE);
-	}
-
-	private List<Lotto> makeLotto(int numberOfCreated) {
-		List<Lotto> lottoes = new ArrayList<>();
-		for (int i = 0; i < numberOfCreated; i++) {
-			lottoes.add(new Lotto(shuffleStrategy));
-		}
-		return lottoes;
+		return new Lottoes(price / LOTTO_PRICE, shuffleStrategy);
 	}
 
 	private void checkPrice(int price) {

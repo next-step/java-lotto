@@ -13,12 +13,13 @@ class WinningStatusTest {
 		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
 		LotteryMachine lotteryMachine = new LotteryMachine(shuffleStrategy);
 
-		List<Lotto> lottoes = lotteryMachine.lottoes(14000);
-		WinningStatus winningStatus = new WinningStatus(lottoes, Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lottoes lottoes = lotteryMachine.lottoes(14000);
+		WinningStatus winningStatus = new WinningStatus(lottoes, Arrays.asList(1, 2, 3, 7, 8, 9));
 
-		assertThat(winningStatus.numberOfLottoesMatched(3)).isEqualTo(0);
-		assertThat(winningStatus.numberOfLottoesMatched(4)).isEqualTo(0);
-		assertThat(winningStatus.numberOfLottoesMatched(5)).isEqualTo(0);
-		assertThat(winningStatus.numberOfLottoesMatched(6)).isEqualTo(14);
+		assertThat(winningStatus.numberOfLottoesMatched(3)).isEqualTo(14);
+
+		winningStatus = new WinningStatus(lottoes, Arrays.asList(1, 2, 3, 4, 7, 8));
+
+		assertThat(winningStatus.numberOfLottoesMatched(4)).isEqualTo(14);
 	}
 }
