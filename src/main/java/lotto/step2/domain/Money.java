@@ -13,12 +13,12 @@ public class Money {
         this(checkNumeric(money));
     }
 
-    public Money(int money) {
+    public Money(long money) {
         validateMoney(money);
         this.money = money;
     }
 
-    private static int checkNumeric(String number){
+    private static long checkNumeric(String number){
         String numberRegExp = NUMERIC_REGEX;
         if(!number.matches(numberRegExp)){
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
@@ -26,7 +26,7 @@ public class Money {
         return Integer.parseInt(number);
     }
 
-    private void validateMoney(int money) {
+    private void validateMoney(long money) {
         if (money < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(MESSAGE_INVALID_COST);
         }

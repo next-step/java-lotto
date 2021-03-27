@@ -12,7 +12,7 @@ public class WinningStatistics {
     private static final int SCALE = 2;
 
     private final Map<Rank, Integer> winningStatistics = new HashMap<>();
-    private final int lottoCount;
+    private final long lottoCount;
 
     public WinningStatistics(Lottos lottos, Lotto winningLotto) {
         Arrays.stream(Rank.values())
