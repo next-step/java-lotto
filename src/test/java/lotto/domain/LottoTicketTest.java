@@ -15,7 +15,7 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 생성")
     public void create() throws Exception {
         List<Integer> lottoNumbers = LottoRandomNumberUtil.lottoNumbers();
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
+        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(lottoNumbers));
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(new LottoNumbers(lottoNumbers)));
     }
 }

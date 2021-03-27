@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,9 +15,9 @@ public class LottoTicketsTest {
     @DisplayName("다수의 로또 티켓 저장")
     public void add() throws Exception {
         LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
-        lottoTickets.add(new LottoTicket(LottoRandomNumberUtil.lottoNumbers()));
-        lottoTickets.add(new LottoTicket(LottoRandomNumberUtil.lottoNumbers()));
-
+        List<Integer> lottoNumbers = LottoRandomNumberUtil.lottoNumbers();
+        lottoTickets.add(new LottoTicket(new LottoNumbers(lottoNumbers)));
+        lottoTickets.add(new LottoTicket(new LottoNumbers(lottoNumbers)));
         assertThat(lottoTickets.lottoTickets()).hasSize(2);
     }
 }

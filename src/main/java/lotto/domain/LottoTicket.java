@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private final List<Integer> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> lottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers.lottoNumbers());
     }
 
     @Override
