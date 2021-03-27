@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    private static final int LOTTO_PRICE = 1000;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
@@ -28,7 +27,7 @@ public class LottoFactory {
 
     public static Lottos purchase(Amount amount) {
         Lottos lottoList = new Lottos();
-        int count = amount.divide(LOTTO_PRICE);
+        int count = amount.getPurchaseLottoCount();
         for(int i=0; i<count; i++) {
             lottoList.add(createLotto());
         }

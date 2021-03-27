@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import study.step3.domain.Lotto;
-import study.step3.domain.LottoNumber;
 import study.step3.domain.LottoRank;
 import study.step3.domain.LottoWin;
 
@@ -14,7 +13,7 @@ public class ResultView {
     private final static String MESSAGE_BONUS_BALL = ", 보너스 일치";
     private static final String MESSAGE_EMPTY = " ";
 
-    public static void printPurchaseCount(int count) {
+    public static void printPurchaseLottoCount(int count) {
         System.out.println(count + MESSAGE_PURCHASE_COUNT);
     }
 

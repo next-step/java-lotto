@@ -1,7 +1,7 @@
 package study.step3.domain;
 
 public class Amount {
-    private final static int MIN_AMOUNT = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private final int amount;
 
     public Amount(int amount) {
@@ -14,12 +14,12 @@ public class Amount {
     }
 
     private void valid(int amount) {
-        if(amount < MIN_AMOUNT) {
-            throw new IllegalArgumentException("유효하지 않는 금액입니다.");
+        if ((amount < 0) || (amount / LOTTO_PRICE == 0)) {
+            throw new IllegalArgumentException("로또 구매 최저 금액은 " + LOTTO_PRICE + "원 입니다.");
         }
     }
 
-    public int divide(int lottoPrice) {
-        return this.amount / lottoPrice;
+    public int getPurchaseLottoCount() {
+        return this.amount / LOTTO_PRICE;
     }
 }
