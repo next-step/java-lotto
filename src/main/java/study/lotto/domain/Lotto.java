@@ -17,7 +17,7 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    protected Lotto(final Collection<LottoNumber> lottoNumbers) {
+    Lotto(final Collection<LottoNumber> lottoNumbers) {
         checkValidation(lottoNumbers);
         this.lottoNumbers = getLottoNumbers(lottoNumbers);
     }

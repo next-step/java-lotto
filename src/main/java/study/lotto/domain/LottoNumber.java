@@ -16,11 +16,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    protected LottoNumber(final String bonusNumber) {
+    LottoNumber(final String bonusNumber) {
         this(Validation.parseInt(bonusNumber));
     }
 
-    protected LottoNumber(final int number) {
+    LottoNumber(final int number) {
         if(isInvalidNumber(number)) {
             throw new LottoException(GUIDE_ERR_NOT_USE_VALUE);
         }

@@ -11,7 +11,7 @@ public class Money {
 
     private final int money;
 
-    private Money(final int money) {
+    Money(final int money) {
         if(money < LOTTO_PRICE) {
             throw new LottoException(GUIDE_ERR_CANNOT_BUY_LOTTO);
         }

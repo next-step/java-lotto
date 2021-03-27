@@ -14,7 +14,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    protected WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+    WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if(winningLotto.contains(bonusNumber)) {
             throw new LottoException(GUIDE_ERR_DONT_CONTAINS_BONUS_NUMBER);
         }
