@@ -1,5 +1,6 @@
 package step2.domain.Lotto;
 
+import step2.dto.LottoCreationRequestDto;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
 
@@ -15,22 +16,32 @@ public final class LottoGenerator {
     private static final int START_INCLUSIVE = 1;
     private static final int END_EXCLUSIVE = 46;
 
+    private final LottoGenerateCount lottoGenerateCount;
     private final LottoShuffleStrategy lottoShuffleStrategy;
 
-    private LottoGenerator() {
-        this(LottoRandomShuffleStrategy.getInstance());
+    public LottoGenerator(LottoCreationRequestDto requestDto, LottoShuffleStrategy lottoShuffleStrategy) {
+        this(LottoGenerateCount.newInstance(requestDto), lottoShuffleStrategy);
     }
 
-    private LottoGenerator(LottoShuffleStrategy lottoShuffleStrategy) {
+    private LottoGenerator(LottoGenerateCount lottoGenerateCount) {
+        this(lottoGenerateCount, LottoRandomShuffleStrategy.getInstance());
+    }
+
+    private LottoGenerator(LottoGenerateCount lottoGenerateCount, LottoShuffleStrategy lottoShuffleStrategy) {
+        this.lottoGenerateCount = lottoGenerateCount;
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
-    public static final LottoGenerator newInstance() {
-        return new LottoGenerator();
+    public static final LottoGenerator newInstance(LottoGenerateCount lottoGenerateCount) {
+        return new LottoGenerator(lottoGenerateCount);
     }
 
-    public static final LottoGenerator newInstance(LottoShuffleStrategy lottoShuffleStrategy) {
-        return new LottoGenerator(lottoShuffleStrategy);
+    public static final LottoGenerator newInstance(LottoGenerateCount lottoGenerateCount, LottoShuffleStrategy lottoShuffleStrategy) {
+        return new LottoGenerator(lottoGenerateCount, lottoShuffleStrategy);
+    }
+
+    public static final LottoGenerator newInstance(LottoCreationRequestDto requestDto, LottoShuffleStrategy lottoShuffleStrategy) {
+        return new LottoGenerator(requestDto, lottoShuffleStrategy);
     }
 
     public final Lotto generateLotto() {
@@ -45,6 +56,14 @@ public final class LottoGenerator {
         return IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    public final boolean hasNext() {
+        return lottoGenerateCount.hasNext();
+    }
+
+    public final void next() {
+        lottoGenerateCount.next();
     }
 
 }

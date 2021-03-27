@@ -16,7 +16,7 @@ class LottoGeneratorTest {
 
     private List<LottoNumber> testSortLottoNumbers;
     private List<LottoNumber> reverseAndSortLottoNumbers;
-
+    private LottoGenerateCount lottoGenerateCount;
     @BeforeEach
     void setUp() {
         testSortLottoNumbers = IntStream
@@ -28,13 +28,15 @@ class LottoGeneratorTest {
                 .range(40, 46)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
+
+        lottoGenerateCount = LottoGenerateCount.newInstance(1000);
     }
 
     @DisplayName("LottoNumbersGenerator 인스턴스 생성 테스트")
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoNumbers -> {
         });
 
         // then
@@ -45,7 +47,7 @@ class LottoGeneratorTest {
     @Test
     void 반환_Lotto() {
         // given
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoNumbers -> {
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoNumbers -> {
         });
 
         // when
@@ -62,7 +64,7 @@ class LottoGeneratorTest {
         LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
                 -> Collections.sort(lottoNumbers);
 
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoShuffleStrategy);
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
 
         // when
         Lotto actual = lottoGenerator.generateLotto();
@@ -79,7 +81,7 @@ class LottoGeneratorTest {
         LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
                 -> Collections.reverse(lottoNumbers);
 
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoShuffleStrategy);
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
 
         // when
         Lotto actual = lottoGenerator.generateLotto();

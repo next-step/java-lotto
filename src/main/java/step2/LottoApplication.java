@@ -19,6 +19,11 @@ public final class LottoApplication {
     }
 
     public final void start() {
+        generateAndShowLotto();
+
+    }
+
+    private final void generateAndShowLotto() {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
         LottoController lottoController = LottoController.newInstance(lottoCreationRequestDto);
         resultView.printLottoList(lottoController.generateLottoList());

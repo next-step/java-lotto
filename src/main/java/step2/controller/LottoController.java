@@ -10,7 +10,6 @@ import step2.strategy.LottoShuffleStrategy;
 
 public final class LottoController {
 
-    private final LottoGenerateCount lottoGenerateCount;
     private final LottoGenerator lottoGenerator;
 
     private LottoController(LottoCreationRequestDto creationRequestDto) {
@@ -18,8 +17,7 @@ public final class LottoController {
     }
 
     private LottoController(LottoCreationRequestDto creationRequestDto, LottoShuffleStrategy strategy) {
-        this.lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto);
-        this.lottoGenerator = LottoGenerator.newInstance(strategy);
+        this.lottoGenerator = LottoGenerator.newInstance(creationRequestDto, strategy);
     }
 
     public static final LottoController newInstance(LottoCreationRequestDto creationRequestDto) {
@@ -32,9 +30,9 @@ public final class LottoController {
 
     public final LottoExpressionResponseDto generateLottoList() {
         LottoList lottoList = LottoList.newInstance();
-        while (lottoGenerateCount.hasNext()) {
+        while (lottoGenerator.hasNext()) {
             lottoList.add(lottoGenerator.generateLotto());
-            lottoGenerateCount.next();
+            lottoGenerator.next();
         }
         return LottoExpressionResponseDto.newInstance(lottoList);
     }
