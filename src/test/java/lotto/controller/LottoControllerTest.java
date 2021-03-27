@@ -17,10 +17,10 @@ class LottoControllerTest {
     void purchaseLotto() {
         // given
         LottoAutoPurchaseRequest request = new LottoAutoPurchaseRequest(14000);
-        LottoController lottoController = new LottoController();
+        LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when
-        LottoAutoPurchaseResponse response = lottoController.purchaseLottoAutoTicket(request);
+        LottoAutoPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
 
         // then
         assertThat(14).isEqualTo(response.getPurchaseCount());
@@ -32,10 +32,10 @@ class LottoControllerTest {
     void purchaseLotto_lottoNumber_distinct() {
         // given
         LottoAutoPurchaseRequest request = new LottoAutoPurchaseRequest(14000);
-        LottoController lottoController = new LottoController();
+        LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when
-        LottoAutoPurchaseResponse response = lottoController.purchaseLottoAutoTicket(request);
+        LottoAutoPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
 
         // then
         for (String lottoNumbers : response.getLottoNumberList()) {
@@ -53,7 +53,7 @@ class LottoControllerTest {
     @DisplayName("당첨결과 조회 - 등수 별 하나씩 당첨")
     void inquiryWin() {
         // given
-        LottoController lottoController = new LottoController();
+        LottoWinInquiryController controller = new LottoWinInquiryController();
         List<String> lottoNumberInputList = new ArrayList<>();
         lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
         lottoNumberInputList.add("1, 2, 3, 4, 5, 7");
@@ -62,7 +62,7 @@ class LottoControllerTest {
         WinInquiryRequest winInquiryRequest = new WinInquiryRequest("1, 2, 3, 4, 5, 6", lottoNumberInputList);
 
         // when
-        WinInquiryResponse winInquiryResponse = lottoController.inquiryWin(winInquiryRequest);
+        WinInquiryResponse winInquiryResponse = controller.inquiryWin(winInquiryRequest);
 
         // then
         for (WinStatistic winStatistic : winInquiryResponse.getWinStatisticList()) {

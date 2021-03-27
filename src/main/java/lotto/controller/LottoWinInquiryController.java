@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import lotto.controller.dto.*;
-import lotto.domain.Lotto;
+import lotto.controller.dto.WinInquiryRequest;
+import lotto.controller.dto.WinInquiryResponse;
+import lotto.controller.dto.WinStatistic;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRanks;
-import lotto.domain.LottoTicket;
 import lotto.service.LottoAutoService;
 
 import java.util.ArrayList;
@@ -12,21 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoController {
+public class LottoWinInquiryController {
 
     private final LottoAutoService lottoAutoService;
 
-    public LottoController() {
+    public LottoWinInquiryController() {
         this.lottoAutoService = new LottoAutoService();
-    }
-
-    public LottoAutoPurchaseResponse purchaseLottoAutoTicket(LottoAutoPurchaseRequest request) {
-        LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(request.getPurchaseAmount());
-        return new LottoAutoPurchaseResponse(lottoTicket.getCount(), assembleLottoNumbers(lottoTicket.getLottoList()));
-    }
-
-    private List<String> assembleLottoNumbers(List<Lotto> lottoList) {
-        return lottoList.stream().map(lotto -> Arrays.toString(lotto.getLottoNumbers())).collect(Collectors.toList());
     }
 
     public WinInquiryResponse inquiryWin(WinInquiryRequest request) {
