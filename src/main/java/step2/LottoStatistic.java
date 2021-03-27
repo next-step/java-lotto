@@ -2,11 +2,11 @@ package step2;
 
 public class LottoStatistic {
 
-    private long hitCount;
+    private HitCount hitCount;
     private LottoPrize lottoPrize;
 
-    public LottoStatistic(long hitCount){
-        lottoPrize = LottoPrize.getPrizeInfo(hitCount);
+    public LottoStatistic(HitCount hitCount){
+        //lottoPrize = LottoPrize.getPrizeInfo(hitCount);
     }
 
     public LottoPrize lottoPrize() {

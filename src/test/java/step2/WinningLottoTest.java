@@ -3,8 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.stream.Collectors;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
@@ -28,7 +26,7 @@ public class WinningLottoTest {
                 .filter(winningNumber->purchasedLotto.getLottoNumberList().contains(winningNumber))
                 .count()).isGreaterThan(2);
     }
-//
+
 //    @Test
 //    @DisplayName("몇 개 일치하는지 통계 클래스 생성 테스트")
 //    void statistic_test(){

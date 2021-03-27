@@ -38,10 +38,10 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public long isWinningLottoList(WinningLotto winningLotto){
-        return winningLotto.getLottoNumberList().stream()
+    public HitCount isWinningLottoList(WinningLotto winningLotto){
+        return new HitCount(winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber->lottoNumberList.contains(winningNumber))
-                .count();
+                .count());
     }
 
     public List<LottoNumber> getLottoNumberList(){
