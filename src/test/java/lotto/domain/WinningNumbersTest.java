@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +17,22 @@ public class WinningNumbersTest {
         List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
         WinningNumbers winningNumbers = new WinningNumbers(numbers);
         assertThat(winningNumbers).isEqualTo(new WinningNumbers(numbers));
+    }
+
+    @Test
+    @DisplayName("로또 번호와 비교")
+    public void countMatchingNumbers() throws Exception {
+        //given
+        List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(lottoNumbers));
+
+        //when
+        long matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+
+        //then
+        assertThat(matchedCount).isEqualTo(6);
     }
 
     @Test
