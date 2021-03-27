@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class ProfitRate {
+    private static final double STANDARD = 1;
     private final double profitRate;
-
 
     public ProfitRate(double profitRate) {
         this.profitRate = profitRate;
@@ -16,6 +16,10 @@ public class ProfitRate {
 
     public double profitRate() {
         return profitRate;
+    }
+
+    public boolean isPositive() {
+        return profitRate >= STANDARD;
     }
 
     @Override
