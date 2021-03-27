@@ -6,17 +6,17 @@ import util.CreateAutoNumberMachine;
 
 public class LottoList {
 
-    private List<Lotto> lottoList = new ArrayList<>();
+    private List<LottoNumbers> lottos = new ArrayList<>();
 
     public LottoList(int ticketCount) {
         for (int count = 0; count < ticketCount; count++){
-            lottoList.add(
-                new Lotto(CreateAutoNumberMachine.createNumbers()
-            ));
+            lottos.add(
+                CreateAutoNumberMachine.createNumbers()
+            );
         }
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<LottoNumbers> getLottos() {
+        return lottos;
     }
 }

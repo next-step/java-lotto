@@ -15,9 +15,24 @@ public class LottoNumber {
     }
 
     private void validateExceedNumber(int lottoNumber) {
-        if(lottoNumber > MAX_NUMBER && lottoNumber < MIN_NUMBER) {
+        if(lottoNumber > MAX_NUMBER || lottoNumber < MIN_NUMBER) {
             throw new ExceedNumberException("1에서 45 숫자만 입력할 수 있습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumber;
     }
 
     @Override
