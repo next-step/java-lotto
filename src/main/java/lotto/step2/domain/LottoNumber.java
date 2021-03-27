@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -9,7 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final static String MESSAGE_ILLEGAL_NUMBER = "유효범위를 벗어난 숫자입니다.";
     private final static String MESSAGE_CHECK_NUMERIC = "로또번호는 정수여야 합니다.";
     private final static String NUMERIC_REGEX = "^[-]?[0-9]+$";
-
+    private final static Pattern PATTERN_NUMERIC = Pattern.compile(NUMERIC_REGEX);
     private int number;
 
     public LottoNumber(String number) {
@@ -24,8 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static int checkNumeric(String number){
-        String numberRegExp = NUMERIC_REGEX;
-        if(!number.matches(numberRegExp)){
+        if(!PATTERN_NUMERIC.matcher(number).matches()){
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
         }
         return Integer.parseInt(number);
