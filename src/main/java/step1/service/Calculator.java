@@ -1,19 +1,19 @@
-package step1;
+package step1.service;
 
 import step1.domain.Number;
 
 import java.util.List;
 
 public class Calculator {
-  private final List<Number> numberList;
+  private final List<Number> numbers;
 
   public Calculator(List<Number> numberList) {
-    this.numberList = numberList;
+    this.numbers = numberList;
   }
 
   public int sum() {
     Number result = new Number();
-    for (Number number : numberList) {
+    for (Number number : numbers) {
       result = number.sum(result);
     }
 

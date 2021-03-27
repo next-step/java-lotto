@@ -1,17 +1,18 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import step1.controller.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-  @Test
-  public void splitAndSum_null_또는_빈문자() {
-    int result = StringAddCalculator.splitAndSum(null);
-    assertThat(result).isEqualTo(0);
-
-    result = StringAddCalculator.splitAndSum("");
+  @ParameterizedTest
+  @EmptySource
+  public void splitAndSum_null_또는_빈문자(String expression) {
+    int result = StringAddCalculator.splitAndSum(expression);
     assertThat(result).isEqualTo(0);
   }
 
@@ -19,6 +20,12 @@ public class StringAddCalculatorTest {
   public void splitAndSum_숫자하나() throws Exception {
     int result = StringAddCalculator.splitAndSum("1");
     assertThat(result).isEqualTo(1);
+  }
+
+  @Test
+  public void splitAndSum_문자하나() throws Exception {
+    assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a"))
+      .isInstanceOf(RuntimeException.class);
   }
 
   @Test
