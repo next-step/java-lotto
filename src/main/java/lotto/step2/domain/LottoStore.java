@@ -14,8 +14,9 @@ public class LottoStore {
     private static List<LottoNumber> allLottoNumbers = new ArrayList<>();
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> allLottoNumbers.add(new LottoNumber(number)));
+        for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
+            allLottoNumbers.add(new LottoNumber(number));
+        }
     }
 
     private LottoStore(){
