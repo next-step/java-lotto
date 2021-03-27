@@ -31,4 +31,15 @@ class LotteryMachineTest {
 
 		assertThatThrownBy(() -> lotteryMachine.lottoes(1100)).isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	void countMatchedLottoes() {
+		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
+		LotteryMachine lotteryMachine = new LotteryMachine(shuffleStrategy);
+
+		Lottoes lottoes = lotteryMachine.lottoes(14000);
+
+		assertThat(lottoes.numberOfLottoesMatched(3, Arrays.asList(1, 2, 3, 7, 8, 9))).isEqualTo(14);
+		assertThat(lottoes.numberOfLottoesMatched(4, Arrays.asList(1, 2, 3, 4, 8, 9))).isEqualTo(14);
+	}
 }

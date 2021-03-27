@@ -15,6 +15,10 @@ public class Lottoes {
 		lottoes.addAll(Arrays.asList(lotto));
 	}
 
+	public Lottoes(List<Lotto> lottoes) {
+		this.lottoes.addAll(lottoes);
+	}
+
 	private List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
 		for (int i = 0; i < numberOfCreated; i++) {
 			lottoes.add(new Lotto(shuffleStrategy));
@@ -26,7 +30,19 @@ public class Lottoes {
 		return lottoes.get(index);
 	}
 
-	public List<Lotto> get() {
-		return lottoes;
+	public int numberOfLottoesMatched(int count, List<Integer> winningNumbers) {
+		int countMatchedLotto = 0;
+		for (Lotto lotto : lottoes) {
+			countMatchedLotto += countMatchedLottoes(count, lotto, winningNumbers);
+		}
+
+		return countMatchedLotto;
+	}
+
+	private int countMatchedLottoes(int matchingCount, Lotto lotto, List<Integer> winningNumbers) {
+		if (lotto.numberOfMatchedWinningNumber(winningNumbers) == matchingCount) {
+			return 1;
+		}
+		return 0;
 	}
 }
