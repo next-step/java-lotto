@@ -1,6 +1,9 @@
 package lotto.enums;
 
+import lotto.domain.RanksCount;
+
 import java.util.Arrays;
+import java.util.Map;
 
 public enum WinningRank {
     FIRST_PLACE(6, 2_000_000_000),
@@ -22,6 +25,16 @@ public enum WinningRank {
                 .filter(winningRank -> winningRank.matchedCount == matchedCount)
                 .findAny()
                 .orElse(ETC);
+    }
+
+    public static int totalPrize(RanksCount ranksCount) {
+        int totalPrize = 0;
+
+        for (Map.Entry<WinningRank, Integer> rank : ranksCount.ranksCount().entrySet()) {
+            totalPrize += rank.getKey().prize * rank.getValue();
+        }
+
+        return totalPrize;
     }
 
     public int prize() {
