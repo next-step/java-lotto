@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 
 public class WinningNumbers {
     int[] winNumbers;
+    int bonusNumber;
     Map<Integer, Integer> map;
+    Map<Integer, Integer> bonusMap;
 
     public WinningNumbers(String[] winNumbers) {
         this(Stream.of(winNumbers).mapToInt(Integer::parseInt).toArray());
@@ -16,10 +18,12 @@ public class WinningNumbers {
 
     public WinningNumbers(int[] winNumbers) {
         map = new HashMap<>();
+        bonusMap = new HashMap<>();
         map.put(3, 0);
         map.put(4, 0);
         map.put(5, 0);
         map.put(6, 0);
+        bonusMap.putAll(map);
         this.winNumbers = winNumbers;
     }
 
@@ -45,7 +49,10 @@ public class WinningNumbers {
                 correct++;
             }
         }
-        System.out.println();
+        if (lottoNumber.contains(bonusNumber)) {
+            correct++;
+            bonusMap.put(correct, map.getOrDefault(correct, 0) + 1);
+        }
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
 
@@ -61,5 +68,13 @@ public class WinningNumbers {
                                 .mapToInt(Integer::parseInt)
                                 .toArray())
         ).toArray();
+    }
+
+    public void bonusNumber(int bonusNumber) {
+        this.bonusNumber =  bonusNumber;
+    }
+
+    public Map<Integer, Integer> getBonusNumber() {
+        return bonusMap;
     }
 }

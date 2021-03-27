@@ -48,13 +48,15 @@ class WinningNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(lottoNumbers);
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
-        winningNumbers.addBonusNumbers(new int[]{7,9});
-        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbers.toString());
-        assertThat(winNumbers.get(3)).isEqualTo(0);
-        assertThat(winNumbers.get(4)).isEqualTo(0);
-        assertThat(winNumbers.get(5)).isEqualTo(1);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,5});
+        winningNumbers.bonusNumber(7);
+        Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lottoNumbersList);
+        Map<Integer, Integer> bonusNumberMap = winningNumbers.getBonusNumber();
+        System.out.println(winNumbersMap.toString());
+        assertThat(winNumbersMap.get(3)).isEqualTo(0);
+        assertThat(winNumbersMap.get(4)).isEqualTo(1);
+        assertThat(winNumbersMap.get(5)).isEqualTo(0);
+        assertThat(bonusNumberMap.get(4)).isEqualTo(1);
     }
 
     @Test
