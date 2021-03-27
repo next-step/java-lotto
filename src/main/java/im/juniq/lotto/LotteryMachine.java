@@ -9,18 +9,18 @@ public class LotteryMachine {
 	private Lottoes lottoes;
 	private int price;
 
-	public LotteryMachine() {
-		shuffleStrategy = new ShuffleStrategyImpl();
+	public LotteryMachine(int price) {
+		this(price, new ShuffleStrategyImpl());
 	}
 
-	public LotteryMachine(ShuffleStrategy shuffleStrategy) {
-		this.shuffleStrategy = shuffleStrategy;
-	}
-
-	public Lottoes lottoes(int price) {
+	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
 		this.price = price;
 		checkPrice(price);
+		this.shuffleStrategy = shuffleStrategy;
 		lottoes = new Lottoes(price / LOTTO_PRICE, shuffleStrategy);
+	}
+
+	public Lottoes lottoes() {
 		return lottoes;
 	}
 
