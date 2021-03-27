@@ -17,6 +17,7 @@ class LottoGeneratorTest {
     private List<LottoNumber> testSortLottoNumbers;
     private List<LottoNumber> reverseAndSortLottoNumbers;
     private LottoGenerateCount lottoGenerateCount;
+
     @BeforeEach
     void setUp() {
         testSortLottoNumbers = IntStream
@@ -89,6 +90,38 @@ class LottoGeneratorTest {
 
         // then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("LottoNumbersGenerator 인스턴스가 다음에 로또를 생성할 수 있는지 여부를 테스트")
+    @Test
+    void 반환_다음_로또_생성_카운트() {
+        // given
+        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
+                -> Collections.reverse(lottoNumbers);
+
+
+        // when
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
+        boolean actual = lottoGenerator.hasNext();
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @DisplayName("LottoNumbersGenerator 인스턴스가 로또를 생성한 카운트 증가 테스트")
+    @Test
+    void 반환_다음_카운트로_이동() {
+        // given
+        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
+                -> Collections.reverse(lottoNumbers);
+
+        // when
+        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
+        lottoGenerator.next();
+        boolean actual = lottoGenerator.hasNext();
+
+        // then
+        assertThat(actual).isFalse();
     }
 
 }
