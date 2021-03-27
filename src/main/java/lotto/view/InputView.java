@@ -21,7 +21,7 @@ public class InputView {
     System.out.println(INPUT_WIN_NUMBERS);
     String winNumberString = scanner.next();
     return Arrays.stream(winNumberString.split(","))
-            .map(Integer::valueOf)
+            .map(Integer::parseInt)
             .collect(Collectors.toList());
   }
 }

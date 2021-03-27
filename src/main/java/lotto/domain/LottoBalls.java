@@ -20,4 +20,12 @@ public class LottoBalls {
         .reduce((d1, d2) -> String.join(",", d1,d2))
         .orElseThrow(() -> new IllegalArgumentException("로또 번호 문자열 변환 실패"));
   }
+
+  public int countContainingWinNumbers(List<LottoBall> winLottoBalls) {
+    int count=0;
+    for (LottoBall winBall : winLottoBalls) {
+      count = lottoBalls.contains(winBall) ? count + 1 : count;
+    }
+    return count;
+  }
 }

@@ -17,4 +17,8 @@ public class LottoGame {
   public String getLottoBallNumbersString() {
     return lottoBalls.numbersString();
   }
+
+  public int countMatchNumber(List<LottoBall> winNumbers) {
+    return lottoBalls.countContainingWinNumbers(winNumbers);
+  }
 }
