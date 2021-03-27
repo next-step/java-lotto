@@ -13,18 +13,42 @@
 * 로또 1장의 가격은 1000원이다.
 
 ## 구현 객체
-> domain   
->> Lottonumber(로또 번호 1~45)   
->> Lotto(로또 1회)   
->> Lottos(로또 n회, 당첨 통계)   
->> GameResult(게임 당첨 번호)   
+
+> Domain
+>> LottoNumber   
+>>> 로또 번호 생성자(1~45 까지의 숫자)   
+>> Lotto   
+>>> 로또 1회 생성자(6개의 LottoNumber를 갖고 있음)   
+>> Lottos   
+>>> 로또 n회 생성자(n = 구매금액 / 로또 가격)   
+>> Result   
+>>> 게임 당첨 번호 생성자(input된 당첨 번호)   
 
 > module   
->> LottoGame(generateLotto, getWinner, getYield)   
+>> Game(interface)
+>>> generate
+>>> getWinner
+>>> getYield   
+>> LottoGame implments Game
+>>> generate
+>>> getWinner
+>>> getYield  
+>> Statistics   
+>>> 당첨 통계(6개일치,5개일치,4개일치,3개일치,2개일치)   
+>>> 수익률   
 
 > ui   
 >> InputView   
+>>> 구입금액
+>>> 당첨번호
 >> ResultView   
+>>> 당첨 통계 결과
+>>> 수익률 결과
+
+> controller   
+>> LottoMain   
+>>> run   
+
 
 ## 구현예시
 ```
