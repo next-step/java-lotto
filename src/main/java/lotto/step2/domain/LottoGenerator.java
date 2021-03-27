@@ -11,7 +11,7 @@ public class LottoGenerator {
 
     private static final int START = 0;
     private static final int END = 6;
-    private final List<Integer> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(Integer::new).collect(Collectors.toList());
+    private static final List<Integer> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(Integer::new).collect(Collectors.toList());
 
     private LottoGenerator() {
     }
