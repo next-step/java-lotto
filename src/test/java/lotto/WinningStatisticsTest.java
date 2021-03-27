@@ -16,7 +16,7 @@ public class WinningStatisticsTest {
 
     @Test
     void testConstructor() {
-        Lotto winningNumber = new Lotto(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = Lotto.of("1,2,3,4,5,6");
         List<Lotto> lottoList = LottoStore.issue(String.valueOf(10000));
         WinningStatistics statistics = new WinningStatistics(winningNumber, lottoList);
         Assertions.assertThat(statistics)
@@ -32,9 +32,9 @@ public class WinningStatisticsTest {
     }
 
     static Stream<Arguments> providerTestWinningLogs() {
-        WinningStatistics 일치_없음 = WinningStatisticsFixture.by(0, 0, 0, 0);
+        WinningStatistics 일치_없음 = WinningStatisticsFixture.by(0, 0, 0, 0, 10000);
         WinningStatistics 일등_2_삼등_1_사등_3_오등_1 =
-                WinningStatisticsFixture.by(2, 1, 3, 1);
+                WinningStatisticsFixture.by(2, 1, 3, 1, 7000);
 
         return Stream.of(
                 Arguments.of(WINNING_NUMBER, Lists.newArrayList(NONE_MATCHED, ONE_MATCHED, TWO_MATCHED), 일치_없음),
