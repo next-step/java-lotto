@@ -2,9 +2,10 @@ package im.juniq.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lottoes {
+public class Lottoes implements Iterable<Lotto>{
 	private List<Lotto> lottoes = new ArrayList<>();
 
 	public Lottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
@@ -30,6 +31,10 @@ public class Lottoes {
 		return lottoes.get(index);
 	}
 
+	public int size() {
+		return lottoes.size();
+	}
+
 	public int numberOfLottoesMatched(int count, WinningNumbers winningNumbers) {
 		int countMatchedLotto = 0;
 		for (Lotto lotto : lottoes) {
@@ -44,5 +49,10 @@ public class Lottoes {
 			return 1;
 		}
 		return 0;
+	}
+
+	@Override
+	public Iterator<Lotto> iterator() {
+		return lottoes.iterator();
 	}
 }
