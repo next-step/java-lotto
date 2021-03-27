@@ -15,10 +15,10 @@
 ## 구현 객체
 
 > Domain   
->> LottoNumber   
->>> 로또 번호 생성자(1~45 까지의 숫자)   
->> Lotto   
->>> 로또 1회 생성자(6개의 LottoNumber를 갖고 있음)   
+> > LottoNumber   
+> > > 로또 번호 생성자(1~45 까지의 숫자)   
+> > Lotto   
+> > > 로또 1회 생성자(6개의 LottoNumber를 갖고 있음)   
 >> Lottos   
 >>> 로또 n회 생성자(n = 구매금액 / 로또 가격)   
 >> Result   
@@ -26,8 +26,8 @@
 
 > module   
 >> Game(interface)
->>> generate
->>> getWinner
+>>> generate   
+>>> getWinner   
 >>> getYield   
 >> LottoGame implments Game
 >>> generate
