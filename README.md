@@ -14,7 +14,8 @@
 * InputView : 구입금액, 당첨번호 입력처리를 위한 입력 기능 view
 * ResultView : 구매리스트, 당첨결과 출력을 위한 출력 기능 view
 ### [Presentation Layer]
-* LottoController : 자동로또 구매, 당첨결과 조회 처리를 위한 API 진입소스
+* LottoAutoPurchaseController : 자동로또 구매 처리를 위한 API 진입소스
+* LottoWinInquiryController : 로또 당첨결과 조회를 위한 API 진입소스
 * LottoAutoPurchaseRequest : 자동로또 구매정보를 저장하는 Input dto 클래스
 * LottoAutoPurchaseResponse : 자동로또 구매결과를 리턴해주기 위한 Output dto 클래스
 * WinInquiryRequest : 로또 당첨조회를 위한 Input dto 클래스
