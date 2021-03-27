@@ -23,13 +23,13 @@ public class Money {
     }
 
     public static Money of(final String money) {
-        checkValidation(money);
-        return new Money(Integer.parseInt(money));
+        int parseMoney = parseIntMoney(money);
+        return new Money(parseMoney);
     }
 
-    private static void checkValidation(final String money) {
+    private static int parseIntMoney(final String money) {
         try {
-            Integer.parseInt(money);
+            return Integer.parseInt(money);
         } catch(NumberFormatException e) {
             throw new LottoException();
         }
