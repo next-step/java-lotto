@@ -74,7 +74,7 @@ class WinningNumbersTest {
         assertThat(winNumbersMap.get(4)).isEqualTo(1);
         assertThat(winNumbersMap.get(5)).isEqualTo(0);
         assertThat(bonusNumberMap.get(4)).isEqualTo(1);
-        assertThat(winningNumbers.earningsRate()).isEqualTo(50);
+        assertThat(winningNumbers.earningsRate(1000)).isEqualTo(50);
     }
 
     @Test

@@ -56,20 +56,6 @@ public class WinningNumbers {
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
 
-    public void addBonusNumbers(int[] bonusNumbers) {
-        this.winNumbers = IntStream.concat(IntStream.of(this.winNumbers), IntStream.of(bonusNumbers)).toArray();
-    }
-
-    public void addBonusNumbers(String[] bonusNumbers) {
-        this.winNumbers = IntStream.concat(
-                IntStream.of(this.winNumbers),
-                IntStream.of(
-                        Stream.of(bonusNumbers)
-                                .mapToInt(Integer::parseInt)
-                                .toArray())
-        ).toArray();
-    }
-
     public void bonusNumber(int bonusNumber) {
         this.bonusNumber =  bonusNumber;
     }
@@ -78,7 +64,13 @@ public class WinningNumbers {
         return bonusMap;
     }
 
-    public float earningsRate() {
-        return 0;
+    public double earningsRate(int price) {
+        int total = map.get(3) * 5000;
+        total += map.get(3) * 5000;
+        total += map.get(4) * 50000;
+        total += map.get(5) * 1500000;
+        total += map.get(6) * 2000000000;
+        System.out.println(total);
+        return Math.floor((double) total / price * 100.0) / 100.0;
     }
 }
