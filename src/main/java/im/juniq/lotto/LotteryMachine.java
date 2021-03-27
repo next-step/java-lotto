@@ -1,10 +1,8 @@
 package im.juniq.lotto;
 
 public class LotteryMachine {
-	private static final int LOTTO_PRICE = 1000;
-
 	private Lottoes lottoes;
-	private int price;
+	private Price price;
 	private WinningNumbers winningNumbers;
 
 	public LotteryMachine(int price) {
@@ -12,19 +10,12 @@ public class LotteryMachine {
 	}
 
 	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
-		this.price = price;
-		checkPrice(price);
-		lottoes = new Lottoes(price / LOTTO_PRICE, shuffleStrategy);
+		this.price = new Price(price);
+		lottoes = new Lottoes(this.price.numberOfLottoPurchased() , shuffleStrategy);
 	}
 
 	public Lottoes lottoes() {
 		return lottoes;
-	}
-
-	private void checkPrice(int price) {
-		if (price % LOTTO_PRICE != 0) {
-			throw new RuntimeException("금액은 " + LOTTO_PRICE + "원 단위로 입력해주세요.");
-		}
 	}
 
 	public void setWinningNumbers(WinningNumbers winningNumbers) {
@@ -42,6 +33,6 @@ public class LotteryMachine {
 		winningAmount += Winning.FOUR_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(4, winningNumbers);
 		winningAmount += Winning.THREE_NUMBERS_MATCHED.amount() * lottoes.numberOfLottoesMatched(3, winningNumbers);
 
-		return winningAmount / price;
+		return price.yield(winningAmount);
 	}
 }
