@@ -14,14 +14,14 @@ public class InputView {
     private InputView() {
     }
 
-    public static Money enterPurchasingAmount() {
+    public static String enterPurchasingAmount() {
         System.out.println(MESSAGE_PURCHASING_AMOUNT);
-        return new Money(scanner.next());
+        return scanner.next();
     }
 
-    public static Lotto enterWinningNumber() {
+    public static String[] enterWinningNumber() {
         System.out.println(MESSAGE_WINNING_NUMBER);
         scanner.nextLine();
-        return new Lotto(scanner.nextLine().split(DELIMITER_COMMA));
+        return scanner.nextLine().split(DELIMITER_COMMA);
     }
 }
