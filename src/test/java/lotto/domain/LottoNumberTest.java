@@ -1,7 +1,12 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -28,5 +33,15 @@ public class LottoNumberTest {
         final int result = LottoNumber.of(a).compareTo(LottoNumber.of(b));
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void allLottoNumbers() {
+        final List<LottoNumber> expected = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::of).collect(Collectors.toList());
+
+        final List<LottoNumber> result = LottoNumber.allLottoNumbers();
+
+        assertThat(result).containsAll(expected);
     }
 }

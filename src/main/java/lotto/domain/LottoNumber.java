@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -32,6 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(BOUNDARY_ERROR_MESSAGE);
         }
+    }
+
+    public static List<LottoNumber> allLottoNumbers() {
+        return null;
     }
 
     public int lottoNumber() {
