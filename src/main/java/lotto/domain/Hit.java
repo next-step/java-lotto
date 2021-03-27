@@ -5,8 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Hit {
-    private static final int ZERO = 0;
-    private static final int MINIMUN_MATCH_COUNT = 3;
+    private static final int MIN = 0;
+    private static final int MINIMUM_MATCH_COUNT = 3;
+
     private final Map<Statistics, Integer> hit;
 
     public Hit() {
@@ -15,14 +16,14 @@ public class Hit {
     }
 
     private void initHitMap() {
-        hit.put(Statistics.THREE, ZERO);
-        hit.put(Statistics.FOUR, ZERO);
-        hit.put(Statistics.FIVE, ZERO);
-        hit.put(Statistics.SIX, ZERO);
+        hit.put(Statistics.THREE, MIN);
+        hit.put(Statistics.FOUR, MIN);
+        hit.put(Statistics.FIVE, MIN);
+        hit.put(Statistics.SIX, MIN);
     }
 
     public void hittingLottoStatistics(int matchCount) {
-        if (matchCount >= MINIMUN_MATCH_COUNT) {
+        if (matchCount >= MINIMUM_MATCH_COUNT) {
             Statistics statistics = Statistics.getStatisticsByMatchCount(matchCount);
             hit.computeIfPresent(statistics, (match, hitCount) -> hitCount + 1);
         }
@@ -31,7 +32,7 @@ public class Hit {
     public long getTotalWinningAmount() {
         long sum = 0L;
         for (Map.Entry<Statistics, Integer> hitEntrySet : hit.entrySet()) {
-            if (hitEntrySet.getValue() != ZERO) {
+            if (hitEntrySet.getValue() != MIN) {
                 sum += hitEntrySet.getKey().getMoney() * hitEntrySet.getValue().longValue();
             }
         }

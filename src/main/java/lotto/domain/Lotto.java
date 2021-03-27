@@ -1,40 +1,24 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_FIRST_NUMBER = 1;
-    private static final int LOTTO_LAST_NUMBER = 45;
+    public static final int LOTTO_FIRST_NUMBER = 1;
+    public static final int LOTTO_LAST_NUMBER = 45;
+    public static final int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
     private final List<Integer> lotto;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<Integer> lottoNumbers) {
         this.lotto = lottoNumbers;
     }
 
     public static Lotto of() {
-        return new Lotto(extractionLottoNumber());
+        return of(new RandomGenerator());
     }
 
-    private static List<Integer> extractionLottoNumber() {
-        List<Integer> referenceNumbers = createReferenceNumbers();
-
-        Collections.shuffle(referenceNumbers);
-
-        return referenceNumbers.subList(0, 6)
-                .stream()
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    private static List<Integer> createReferenceNumbers() {
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = LOTTO_FIRST_NUMBER; i <= LOTTO_LAST_NUMBER; i++) {
-            randomNumbers.add(i);
-        }
-        return randomNumbers;
+    public static Lotto of(LottoNumberGenerator lottoNumberGenerator) {
+        return new Lotto(lottoNumberGenerator.extractLottoNumber());
     }
 
     public int getMatchCount(WinningNumber winningNumber) {
@@ -46,4 +30,5 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return lotto;
     }
+
 }

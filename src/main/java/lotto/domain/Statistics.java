@@ -17,9 +17,9 @@ public enum Statistics {
         this.money = money;
     }
 
-    public static Statistics getStatisticsByMatchCount(int num) {
+    public static Statistics getStatisticsByMatchCount(int matchCount) {
         return Arrays.stream(Statistics.values())
-                .filter(statistics -> statistics.getMatchCount() == num)
+                .filter(statistics -> statistics.getMatchCount() == matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_EXIST_VALUE));
     }

@@ -2,15 +2,14 @@ package lotto.view;
 
 import lotto.domain.Statistics;
 import lotto.dto.ResponseLottosDTO;
-import lotto.dto.ResponsePurchaseCountDTO;
 import lotto.dto.ResponseWinningDTO;
 
 import java.util.Map;
 
 public class ResultView {
 
-    public static void printPurchaseCount(ResponsePurchaseCountDTO responsePurchaseCountDTO) {
-        System.out.println(responsePurchaseCountDTO.getPurchaseCount() + "개를 구매했습니다.");
+    public static void printPurchaseCount(int count) {
+        System.out.println(count + "개를 구매했습니다.");
     }
 
     public static void printLottoNumber(ResponseLottosDTO responseLottosDTO) {
