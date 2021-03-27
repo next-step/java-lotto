@@ -18,4 +18,18 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(lottoNumbers));
         assertThat(lottoTicket).isEqualTo(new LottoTicket(new LottoNumbers(lottoNumbers)));
     }
+
+    @Test
+    @DisplayName("로또 티켓 한 장의 가격")
+    public void price() throws Exception {
+        //given
+        List<Integer> lottoNumbers = LottoRandomNumberUtil.lottoNumbers();
+        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(lottoNumbers));
+
+        //when
+        int price = lottoTicket.price();
+
+        //then
+        assertThat(price).isEqualTo(1000);
+    }
 }
