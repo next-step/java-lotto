@@ -5,14 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoBallMachine {
-  private static final int LOTTO_NUMBER = 45;
   private List<LottoBall> lottoBalls;
 
   public void initialize() {
-    lottoBalls = new ArrayList<>();
-    for (int i=1 ; i <= LOTTO_NUMBER ; i++) {
-      lottoBalls.add(new LottoBall(i));
-    }
+    lottoBalls = new ArrayList<>(LottoBall.values());
   }
 
   public List<LottoBall> draw() {

@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoGames {
+public final class LottoGames {
 
   private List<LottoGame> lottoGames;
 
-  public LottoGames(List<LottoGame> lottoGames) {
+  public LottoGames(final List<LottoGame> lottoGames) {
     this.lottoGames = lottoGames;
   }
 

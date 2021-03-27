@@ -2,9 +2,9 @@ package stringCalculator.domain;
 
 public class StringCalculator {
 
-  public int calculate(String s) {
-    String[] strs = StringSplitter.split(s);
-    Numbers numbers = new Numbers(strs);
+  public int calculate(String inputString) {
+    String[] stringSeparated = StringSplitter.split(inputString);
+    Numbers numbers = new Numbers(stringSeparated);
     return numbers.sum();
   }
 }

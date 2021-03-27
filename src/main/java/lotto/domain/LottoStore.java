@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoStore {
+public final class LottoStore {
 
   private static final Integer LOTTO_PRICE = 1000;
   private final LottoBallMachine lottoBallMachine;
 
-  public LottoStore(LottoBallMachine lottoBallMachine) {
+  public LottoStore(final LottoBallMachine lottoBallMachine) {
     this.lottoBallMachine = lottoBallMachine;
   }
 

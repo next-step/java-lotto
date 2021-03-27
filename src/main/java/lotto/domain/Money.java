@@ -7,7 +7,7 @@ public final class Money {
 
   private final int money;
 
-  public Money(int money) {
+  public Money(final int money) {
     if (money < 0) {
       throw new IllegalArgumentException("입력한 돈이 음수입니다.");
     }

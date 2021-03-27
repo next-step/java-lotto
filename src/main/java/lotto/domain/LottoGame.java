@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoGame {
+public final class LottoGame {
   private static final int SIX = 6;
 
   private final LottoBalls lottoBalls;
 
-  public LottoGame(LottoBalls lottoBalls) {
+  public LottoGame(final LottoBalls lottoBalls) {
     if (lottoBalls.size() != SIX) {
       throw new IllegalArgumentException("로또 공 개수가 6개가 아닙니다.");
     }
