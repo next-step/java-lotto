@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.enums.WinningRank;
-import lotto.utils.LottoRandomNumberUtil;
 import lotto.utils.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -40,8 +39,7 @@ public class LottoApplication {
         LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
 
         for (int i = 0; i < numberOfTicket.count(); i++) {
-            List<Integer> lottoNumbers = LottoRandomNumberUtil.lottoNumbers();
-            lottoTickets.add(new LottoTicket(new LottoNumbers(lottoNumbers)));
+            lottoTickets.add(new LottoTicket(new LottoNumbers()));
         }
 
         return lottoTickets;
