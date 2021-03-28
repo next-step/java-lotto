@@ -13,17 +13,4 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers());
         assertThat(lottoTicket).isEqualTo(new LottoTicket(new LottoNumbers(lottoTicket.lottoNumbers())));
     }
-
-    @Test
-    @DisplayName("로또 티켓 한 장의 가격")
-    public void price() throws Exception {
-        //given
-        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers());
-
-        //when
-        int price = lottoTicket.price();
-
-        //then
-        assertThat(price).isEqualTo(1_000);
-    }
 }
