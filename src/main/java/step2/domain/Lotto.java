@@ -1,5 +1,7 @@
 package step2.domain;
 
-public class Lotto {
+import java.util.List;
 
+public class Lotto {
+  private List<Integer> numbers;
 }
