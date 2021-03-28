@@ -23,4 +23,8 @@ public enum Rank {
                 .findFirst()
                 .orElse(Rank.OTHER);
     }
+
+    public int prizeMoney(int count) {
+        return this.winningMoney * count;
+    }
 }

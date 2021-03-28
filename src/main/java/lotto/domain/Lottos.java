@@ -11,7 +11,7 @@ public class Lottos {
 
     public Lottos(int purchaseAmount) {
         this.purchaseLotto = purchaseAmount / LOTTO_PRICE;
-        this.Lottos = generateLottos();
+        this.Lottos = generate();
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -31,7 +31,7 @@ public class Lottos {
         return result;
     }
 
-    private List<Lotto> generateLottos() {
+    private List<Lotto> generate() {
         List<Lotto> result = new ArrayList<>();
         IntStream.rangeClosed(1, this.purchaseLotto)
                 .forEach(i -> result.add(new Lotto()));

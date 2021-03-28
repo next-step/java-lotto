@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoTest {
+
     private static Stream<Arguments> winningResultParameters() {
         return Stream.of(
                 arguments(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Rank.FIRST),
