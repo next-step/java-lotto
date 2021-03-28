@@ -23,8 +23,8 @@ public enum Rank {
     public static Rank from(long hit, boolean bonusNumber) {
         return Arrays.stream(values())
                 .filter(rank -> {
-                    if (rank.hit == 5) {
-                        return bonusNumber ? rank.amount == 30_000_000 : rank.amount == 1_500_000;
+                    if (hit == 5) {
+                        return (bonusNumber ? rank.amount == 30_000_000 : rank.amount == 1_500_000);
                     }
                     return rank.hit == hit;
                 })
