@@ -46,6 +46,10 @@ public final class Lotto {
         return lottoNumbers;
     }
 
+    public final int getCountContaining(Lotto other) {
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,4 +62,6 @@ public final class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

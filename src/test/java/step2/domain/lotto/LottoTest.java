@@ -88,9 +88,22 @@ class LottoTest {
         assertThat(firstLotto).isEqualTo(secondLotto);
     }
 
-    @DisplayName("Lotto 인스턴스가 소유값을 기준으로 몇개가 일치하는지 판단 테스트")
+    @DisplayName("Lotto 인스턴스가 특정 값을 소유하고 있는지 판단 테스트")
     @Test
     void 포함() {
+        // given
+        Lotto firstLotto = Lotto.newInstance(lottoNumbers);
+
+        // when
+        boolean actual = firstLotto.contains(1);
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @DisplayName("Lotto 인스턴스가 소유값을 기준으로 몇개가 일치하는지 판단 테스트")
+    @Test
+    void 포함_갯() {
         // given
         Lotto firstLotto = Lotto.newInstance(lottoNumbers);
         Lotto secondLotto = Lotto.newInstance(lottoNumbers);
