@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class WinningLotto {
 
@@ -69,13 +68,8 @@ public class WinningLotto {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        IntStream.range(0, match.length)
-                .filter(i -> i >= MINIMUM_MATCH)
-                .forEach(i -> {
-                    sb.append(i + "개 일치 (" + Price.winningPrice(i) + "원) - " + match[i] + "개");
-                    sb.append((System.getProperty("line.separator")));
-                });
-        return sb.toString();
+        return new StringBuilder()
+                .append(Arrays.toString(match))
+                .toString();
     }
 }

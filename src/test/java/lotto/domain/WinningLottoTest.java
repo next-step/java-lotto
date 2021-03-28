@@ -57,7 +57,7 @@ public class WinningLottoTest {
         Long buyMoney = buyNum * 1000L;
         int[] match = new int[]{0, 1, 2, 3, 4, 5, 6};
         Long expectMatch = 0 * 0 + 1 * 0 + 2 * 0 + 3 * THREE_PRICE + 4 * FOUR_PRICE + 5 * FIVE_PRICE + 6 * SIX_PRICE;
-        double expect =  expectMatch / buyMoney;
+        double expect = expectMatch / buyMoney;
         WinningLotto winning = new WinningLotto(winningNumbers, match);
 
         //when
@@ -67,4 +67,9 @@ public class WinningLottoTest {
         assertThat(result).isEqualTo(expect);
     }
 
+
+    @Test
+    void toStringTest() {
+        System.out.println(winning);
+    }
 }

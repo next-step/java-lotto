@@ -44,11 +44,8 @@ public class Lottos {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        lottoList.stream().forEach(lotto -> {
-                    stringBuilder.append(lotto.toString());
-                    stringBuilder.append((System.getProperty("line.separator")));
-                });
-        return stringBuilder.toString();
+        return new StringBuilder()
+                .append(lottoList.toString())
+                .toString();
     }
 }
