@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoStore {
 
-  public static List<LottoNumbers> generateLottos(int amount) {
-    return IntStream.range(0, amount)
+  public static List<LottoNumbers> generateAutoLottos(Amount amount) {
+    return IntStream.range(0, amount.getAutoAmount())
         .mapToObj(i -> new LottoNumbers())
         .collect(Collectors.toList());
   }
