@@ -18,14 +18,10 @@ public enum WinningScore {
         this.winningAmount = winningAmount;
     }
 
-    public static void valueOf(int realCorrectCount) {
-        WinningScore winningScore = Arrays.stream(WinningScore.values())
+    public static final WinningScore valueOf(int realCorrectCount) {
+        return Arrays.stream(WinningScore.values())
                 .filter(operation -> operation.correctCount == realCorrectCount)
                 .findFirst().orElse(WinningScore.MISS);
-    }
-
-    public final int getCorrectCount() {
-        return correctCount;
     }
 
     public final long getWinningAmount() {
