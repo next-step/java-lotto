@@ -47,7 +47,7 @@ public class StringAddCalculator {
         }
 
         if (number < ZERO) {
-            throw new StringAddCaculatorException("입력값이 잘못되었습니다.");
+            throw new StringAddCaculatorException("음수 값을 입력할 수 없습니다.");
         }
 
         return number;
