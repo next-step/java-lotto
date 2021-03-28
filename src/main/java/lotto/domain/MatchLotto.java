@@ -3,24 +3,18 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum MatchLotto {
-  NONE(Integer.MIN_VALUE, 0, "NONE"),
-  FOURTH(3, 5000, "FOURTH"),
-  THIRD(4, 50000, "THIRD"),
-  SECOND(5, 1500000, "SECOND"),
-  FIRST(6, 2000000000, "FIRST");
+  NONE(Integer.MIN_VALUE, 0),
+  FOURTH(3, 5000),
+  THIRD(4, 50000),
+  SECOND(5, 1500000),
+  FIRST(6, 2000000000);
 
   private int matchCount;
   private Money winnerMoney;
-  private String winnerRank;
 
-  MatchLotto(int matchCount, int winnerMoney, String winnerRank) {
+  MatchLotto(int matchCount, int winnerMoney) {
     this.matchCount = matchCount;
     this.winnerMoney = new Money(winnerMoney);
-    this.winnerRank = winnerRank;
-  }
-
-  public String getWinnerRank() {
-    return winnerRank;
   }
 
   public int getWinnerMoney() {
@@ -29,7 +23,7 @@ public enum MatchLotto {
 
   public static MatchLotto findPrize(String winnerRank) {
     return Arrays.stream(MatchLotto.values())
-        .filter(matches -> matches.winnerRank.equals(winnerRank))
+        .filter(matches -> matches.name().equals(winnerRank))
         .findAny()
         .orElseThrow(IllegalArgumentException::new);
   }

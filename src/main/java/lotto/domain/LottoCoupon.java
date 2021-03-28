@@ -13,24 +13,15 @@ public class LottoCoupon {
   }
 
   public List<Lotto> getLottoCoupon() {
-    return lottoCoupon;
+    return new ArrayList<>(lottoCoupon);
   }
 
   public static LottoCoupon createLottoCoupon(int howMany) {
     List<Lotto> lottoList = new ArrayList<>();
     for(int i = 0; i < howMany; i++) {
-      lottoList.add(Lotto.generatedAutoLottoNumber());
+      lottoList.add(Lotto.generateAutoLottoNumber());
     }
     return new LottoCoupon(lottoList);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    for(Lotto lotto : lottoCoupon) {
-      sb.append(lotto.toString());
-    }
-    return sb.toString();
   }
 
   @Override

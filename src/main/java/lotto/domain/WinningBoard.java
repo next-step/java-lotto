@@ -14,16 +14,16 @@ public class WinningBoard {
   private static final String SECOND_WINNER_KEY = "SECOND";
   private static final String FIRST_WINNER_KEY = "FIRST";
 
-  private final Map<String, Integer> winningBoard;
+  private final Map<String, Integer> matchResultMap;
   private final Money money;
 
-  public WinningBoard(Map<String, Integer> winningBoard, Money money) {
-    this.winningBoard = winningBoard;
+  public WinningBoard(Map<String, Integer> matchResultMap, Money money) {
+    this.matchResultMap = matchResultMap;
     this.money = money;
   }
 
-  public Map<String, Integer> getWinningBoard() {
-    return winningBoard;
+  public Map<String, Integer> getMatchResultMap() {
+    return matchResultMap;
   }
 
   public static WinningBoard createLottoResult(List<Integer> lottoMatchResult, Money money) {
@@ -45,13 +45,13 @@ public class WinningBoard {
   }
 
   private static void putLottoMatchResult(Map<String, Integer> earningBoard, MatchLotto key) {
-    earningBoard.put(key.getWinnerRank(), earningBoard.getOrDefault(key.getWinnerRank(), 0) + 1);
+    earningBoard.put(key.name(), earningBoard.getOrDefault(key.name(), 0) + 1);
   }
 
   public String calculateEarningRate() {
-    Map<String, Integer> winningBoard = getWinningBoard();
+    Map<String, Integer> matchResultMap = getMatchResultMap();
 
-    int total = getTotalEarning(winningBoard);
+    int total = getTotalEarning(matchResultMap);
     int boughtMoney = this.money.toInt();
 
     double earning = (total / (double)boughtMoney);
@@ -77,9 +77,11 @@ public class WinningBoard {
   }
 
   public String toResultString() {
-    return "3개 일치 (5,000원) : " + winningBoard.getOrDefault(FOURTH_WINNER_KEY, INIT_VALUE) + "장"
-        + "\n4개 일치 (50,000원) : " + winningBoard.getOrDefault(THIRD_WINNER_KEY, INIT_VALUE) + "장"
-        + "\n5개 일치 (1,500,000원):  " + winningBoard.getOrDefault(SECOND_WINNER_KEY, INIT_VALUE) + "장"
-        + "\n6개 일치 (2,000,000,000원) : " + winningBoard.getOrDefault(FIRST_WINNER_KEY, INIT_VALUE) + "장";
+    return "3개 일치 (5000원) - " + matchResultMap.getOrDefault(FOURTH_WINNER_KEY, INIT_VALUE) + "개"
+        + "\n4개 일치 (50000원) - " + matchResultMap.getOrDefault(THIRD_WINNER_KEY, INIT_VALUE) + "개"
+        + "\n5개 일치 (1500000원) - " + matchResultMap
+        .getOrDefault(SECOND_WINNER_KEY, INIT_VALUE) + "개"
+        + "\n6개 일치 (2000000000원) - " + matchResultMap
+        .getOrDefault(FIRST_WINNER_KEY, INIT_VALUE) + "개";
   }
 }

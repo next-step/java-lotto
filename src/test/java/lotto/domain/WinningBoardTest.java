@@ -27,7 +27,7 @@ class WinningBoardTest {
     WinningBoard lottoResult = WinningBoard.createLottoResult(list, new Money(1000));
 
     //when
-    Map<String, Integer> winningBoard = lottoResult.getMatchAndPrizeResultMap();
+    Map<String, Integer> winningBoard = lottoResult.getMatchResultMap();
 
     //then
     assertEquals((int) winningBoard.get(key), 1);

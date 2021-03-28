@@ -3,7 +3,6 @@ package lotto.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
@@ -34,8 +33,6 @@ public class InputView {
     for(String str : list) {
       numbers.add(new Number(Integer.parseInt(str)));
     }
-
     return new Lotto(numbers);
   }
-
 }

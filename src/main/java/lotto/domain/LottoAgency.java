@@ -10,7 +10,6 @@ public class LottoAgency {
 
   private final LottoCoupon coupon;
   private final Money money;
-  private Lotto winLottoNumbers;
 
   public LottoAgency(Money money) {
     this.money = money;
@@ -25,28 +24,20 @@ public class LottoAgency {
     return money.toInt() / LOTTO_PER_PRICE;
   }
 
-  public void updateWinLottoNumbers(Lotto winLottoNumbers) {
-    this.winLottoNumbers = winLottoNumbers;
+  public LottoCoupon getCoupon() {
+    return new LottoCoupon(coupon.getLottoCoupon());
   }
 
-  public Lotto getWinLottoNumbers() {
-    return winLottoNumbers;
-  }
-
-  public String printLottoCoupon() {
-    return this.coupon.toString();
-  }
-
-  public WinningBoard getTotalResult() {
+  public WinningBoard getTotalResult(Lotto winNumbers) {
     List<Integer> lottoMatchResult = new ArrayList<>();
     for(int i = 0; i < getPurchaseQuantity(); i++) {
-      lottoMatchResult.add(eachResult(i));
+      lottoMatchResult.add(eachResult(i, winNumbers));
     }
     return WinningBoard.createLottoResult(lottoMatchResult, money);
   }
 
-  private int eachResult(int index) {
-    List<Number> winNumber = getWinLottoNumbers().getNumbers();
+  private int eachResult(int index, Lotto winNumbers) {
+    List<Number> winNumber = winNumbers.getNumbers();
     List<Number> targetNumber = coupon.getLottoCoupon().get(index).getNumbers();
 
     int count = 0;
