@@ -14,7 +14,7 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public static Lotto from(NumberGenerator numberGenerator) {
+    public static Lotto from(final NumberGenerator numberGenerator) {
         Set<Number> lotto = new HashSet<>();
         for (Integer number : numberGenerator.generator()) {
             lotto.add(Number.from(number));
@@ -22,14 +22,14 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    public static Lotto from(Set<Number> lotto) {
+    public static Lotto from(final Set<Number> lotto) {
         if (lotto.size() != Constants.LOTTO_SIZE) {
             throw new RuntimeException("로또 숫자는 6개이여야 합니다.");
         }
         return new Lotto(lotto);
     }
 
-    public int getMatchCount(Lotto prizeLotto) {
+    public int getMatchCount(final Lotto prizeLotto) {
         return (int) prizeLotto.getNumbers()
                 .stream()
                 .filter(number -> this.lotto.contains(number))

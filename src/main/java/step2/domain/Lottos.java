@@ -13,29 +13,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(NumberGenerator numberGenerator, Money money) {
+    public static Lottos of(final NumberGenerator numberGenerator, final Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        int purchaseCount = 1;
-        while (money.isPossibleBuyLotto(purchaseCount)) {
+        while (money.isPossibleBuyLotto()) {
             lottos.add(Lotto.from(numberGenerator));
-            purchaseCount++;
+            money.buyLotto();
         }
         return new Lottos(lottos);
     }
 
-    public int getPrizeCount(Lotto prizeLotto, Prize prize) {
+    public int getPrizeCount(final Lotto prizeLotto, final Prize prize) {
         return (int) lottos.stream()
                 .map(lotto -> lotto.getMatchCount(prizeLotto))
                 .filter(matchCount -> matchCount == prize.getMatchCount())
                 .count();
-    }
-
-    public int getTotalPrizeAmount(Lotto prizeLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.getMatchCount(prizeLotto))
-                .map(matchCount -> Prize.findPrize(matchCount))
-                .map(Prize::getAmount)
-                .reduce(0, Integer::sum);
     }
 
     public int getLottoCount() {

@@ -13,11 +13,11 @@ public class Money {
         return new Money(amount);
     }
 
-    public boolean isPossibleBuyLotto(int purchaseCount) {
-        return money >= (Constants.LOTTO_PRICE * purchaseCount);
+    public void buyLotto() {
+        this.money = money - Constants.LOTTO_PRICE;
     }
 
-    public double getRevenueRate(int totalPrizeAmount) {
-        return (double) totalPrizeAmount / money;
+    public boolean isPossibleBuyLotto() {
+        return money >= Constants.LOTTO_PRICE;
     }
 }

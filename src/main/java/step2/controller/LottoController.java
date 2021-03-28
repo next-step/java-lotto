@@ -1,6 +1,7 @@
 package step2.controller;
 
 import step2.domain.Lotto;
+import step2.domain.LottoStatistics;
 import step2.domain.Lottos;
 import step2.domain.Money;
 import step2.generator.LottoNumberGenerator;
@@ -10,16 +11,20 @@ import step2.view.ResultView;
 public class LottoController {
     private final Money amount;
     private final Lottos lottos;
+    private final LottoStatistics lottoStatistics;
 
     public LottoController() {
-        this.amount = Money.from(InputView.inputAmount());
-        this.lottos = Lottos.of(new LottoNumberGenerator(), amount);
+        int amount = InputView.inputAmount();
+        this.amount = Money.from(amount);
+        this.lottos = Lottos.of(new LottoNumberGenerator(), this.amount);
+        this.lottoStatistics = LottoStatistics.from(amount);
     }
 
     public void run() {
-        ResultView.printLottos(lottos);
-        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());
-        ResultView.printStatistics(lottos, prizeLotto);
-        ResultView.printRevenueRate(lottos, prizeLotto, amount);
+        ResultView.printLottos(lottos);                                                     // 로또 출력
+        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());                         // 당첨 번호 입력
+        lottoStatistics.makeStatisticsResult(lottos, prizeLotto);                           // 당첨 통계용 데이터 생성
+        ResultView.printStatistics(lottoStatistics);                                        // 당첨 통계 출력
+        ResultView.printRevenueRate(lottoStatistics.getRevenueRate(lottos, prizeLotto));    // 수익률 출력
     }
 }
