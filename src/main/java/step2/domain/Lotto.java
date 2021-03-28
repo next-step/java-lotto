@@ -1,22 +1,39 @@
 package step2.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Collections;
+import java.util.Set;
 
 public class Lotto {
 
-    private NumberGenerator numberGenerator;
-    private List<Integer> numbers;
+    public static final int NUMBER_SIZE = 6;
 
-    public Lotto(NumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
-        this.numbers = IntStream.range(1, 46)
-                .boxed()
-                .collect(Collectors.toList());
+    private final LottoNumber lottoNumbers;
+
+    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumbers = new LottoNumber(lottoNumberGenerator.getGeneratedNumbers());
     }
 
-    public List<Integer> getNumbers() {
-        return numberGenerator.getGeneratedNumbers(numbers);
+
+    public LottoNumber getLottoNumber() {
+        return this.lottoNumbers;
+    }
+
+    public int matchNumberCounts(Lotto lotto) {
+        return this.lottoNumbers.getMatchCount(lotto.getLottoNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
