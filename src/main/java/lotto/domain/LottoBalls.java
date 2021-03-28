@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public final class LottoBalls {
+
   private static final int SIX = 6;
 
   private List<LottoBall> lottoBalls;

@@ -7,12 +7,12 @@ public enum Ranking {
   SECOND(5, 1500000),
   THIRD(4, 50000),
   FOURTH(3, 5000),
-  DROP(0,0);
+  DROP(0, 0);
 
   private Integer count;
   private Integer prize;
 
-  Ranking(Integer count,Integer prize) {
+  Ranking(Integer count, Integer prize) {
     this.count = count;
     this.prize = prize;
   }
@@ -20,11 +20,14 @@ public enum Ranking {
   public Integer getCount() {
     return count;
   }
-  public Integer getPrize() { return prize; }
+
+  public Integer getPrize() {
+    return prize;
+  }
 
   public static Ranking ofCount(int count) {
     return Arrays.stream(values())
-        .filter( value -> value.getCount().equals(count))
+        .filter(value -> value.getCount().equals(count))
         .findAny()
         .orElse(Ranking.DROP);
   }

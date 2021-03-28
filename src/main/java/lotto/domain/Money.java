@@ -28,7 +28,7 @@ public final class Money {
 
   public double calculateRate(Money investMoney) {
     return new BigDecimal(this.money)
-        .divide(new BigDecimal(investMoney.money) , 2, RoundingMode.HALF_UP)
+        .divide(new BigDecimal(investMoney.money), 2, RoundingMode.HALF_UP)
         .doubleValue()
         ;
   }

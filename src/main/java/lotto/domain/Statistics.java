@@ -15,7 +15,7 @@ public final class Statistics {
   }
 
   public void recordRanking(Ranking ranking) {
-    rankMap.computeIfPresent(ranking, (key,value) -> value + 1);
+    rankMap.computeIfPresent(ranking, (key, value) -> value + 1);
     rankMap.computeIfAbsent(ranking, key -> 1);
     winPrice = winPrice.plus(new Money(ranking.getPrize()));
   }

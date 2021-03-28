@@ -30,18 +30,19 @@ class LottoBallsTest {
   @Test
   void less_than_six_then_throw_Exception() {
     assertThatThrownBy(() -> new LottoBalls(
-            Arrays.asList(
-                new LottoBall(1), new LottoBall(2), new LottoBall(3)
-            )))
+        Arrays.asList(
+            new LottoBall(1), new LottoBall(2), new LottoBall(3)
+        )))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage("로또 공 개수가 6개가 아닙니다.");
   }
 
   @DisplayName("당첨 번호 개수 구하기")
   @ParameterizedTest
-  @CsvSource(value = {"3,4,7,8,9,10:2", "1,3,5,7,8,9:3", "1,2,3,4,5,6:6"} , delimiter = ':')
+  @CsvSource(value = {"3,4,7,8,9,10:2", "1,3,5,7,8,9:3", "1,2,3,4,5,6:6"}, delimiter = ':')
   void test(String winLottoNumber, String result) {
-    int count = lottoBalls.countContainingWinNumbers(new LottoBalls(createLottoList(winLottoNumber)));
+    int count = lottoBalls
+        .countContainingWinNumbers(new LottoBalls(createLottoList(winLottoNumber)));
     assertThat(count).isEqualTo(Integer.parseInt(result));
   }
 

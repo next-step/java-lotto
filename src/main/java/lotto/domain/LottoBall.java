@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public final class LottoBall implements Comparable<LottoBall> {
+
   private static final int MIN = 1;
   private static final int MAX = 45;
   private static final List<LottoBall> CACHE_LOTTOBALL = new ArrayList<>();
   private final int number;
 
   static {
-    for (int i = MIN ; i <= MAX ; i++ ) {
+    for (int i = MIN; i <= MAX; i++) {
       CACHE_LOTTOBALL.add(new LottoBall(i));
     }
   }
@@ -38,7 +39,7 @@ public final class LottoBall implements Comparable<LottoBall> {
 
   @Override
   public int compareTo(LottoBall other) {
-    return Integer.compare(this.number,other.number);
+    return Integer.compare(this.number, other.number);
   }
 
   @Override

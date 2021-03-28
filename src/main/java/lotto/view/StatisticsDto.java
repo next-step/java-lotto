@@ -21,7 +21,4 @@ public class StatisticsDto {
     return ranking;
   }
 
-  public Money getPrice() {
-    return price;
-  }
 }

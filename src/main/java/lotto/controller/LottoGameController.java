@@ -7,7 +7,6 @@ import lotto.domain.LottoBalls;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
-import lotto.domain.Ranking;
 import lotto.domain.Statistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -28,7 +27,6 @@ public class LottoGameController {
 
     resultView.printLottoBuySize(lottoGame);
     resultView.printBuyingLottoGame(lottoGame);
-
 
     LottoBalls winLottoBalls = toLottoBallList(inputView.inputWinNumbers());
     Statistics statistics = lottoGame.countMatchLottoNumber(winLottoBalls);
