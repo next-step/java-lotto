@@ -30,7 +30,8 @@ public class Lotto {
     }
 
     public int getMatchCount(Lotto prizeLotto) {
-        return (int) prizeLotto.getNumbers().stream()
+        return (int) prizeLotto.getNumbers()
+                .stream()
                 .filter(number -> this.lotto.contains(number))
                 .count();
     }
