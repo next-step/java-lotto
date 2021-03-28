@@ -53,7 +53,7 @@ public class LottoApplication {
 
     private static WinningNumbers createWinningNumbers() {
         try {
-            List<String> winningNumbers = SplitUtil.split(InputView.winningNumbers());
+            List<String> winningNumbers = SplitUtil.splitByComma(InputView.winningNumbers());
             return new WinningNumbers(winningNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
