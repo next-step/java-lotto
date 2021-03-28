@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.List;
+
 public interface LottoNumberGenerator {
-    Lotto generate();
+    List<Lotto> generate();
 }

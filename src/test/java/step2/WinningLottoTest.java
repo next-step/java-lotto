@@ -49,13 +49,10 @@ public class WinningLottoTest {
         String purchasedNumbers2="1,2,3,4,44,45";
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        List<Lotto> lottoList = new ArrayList<>();
-        Lotto lotto1 = new Lotto(purchasedNumbers1);
-        Lotto lotto2 = new Lotto(purchasedNumbers2);
-        lottoList.add(lotto1);
-        lottoList.add(lotto2);
+        LottoNumberGenerator generator = ()-> Arrays.asList(new Lotto(purchasedNumbers1),new Lotto(purchasedNumbers2));
 
-        Map<HitCount,List<Lotto>> rankInfo = lottoList.stream()
+        Lottos lottos = Lottos.of(generator);
+        Map<HitCount,List<Lotto>> rankInfo = lottos.getLottos().stream()
                 .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto)));
 
         assertThat(rankInfo.keySet()).contains(new HitCount(3),new HitCount(4));
@@ -68,11 +65,10 @@ public class WinningLottoTest {
         String purchasedNumbers1 = "1,2,3,43,44,45";
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        List<Lotto> lottoList = new ArrayList<>();
-        Lotto lotto1 = new Lotto(purchasedNumbers1);
-        lottoList.add(lotto1);
+        LottoNumberGenerator generator = ()-> Arrays.asList(new Lotto(purchasedNumbers1));
+        Lottos lottoList = Lottos.of(generator);
 
-        Rank rankInfo = new Rank(lottoList.stream()
+        Rank rankInfo = new Rank(lottoList.getLottos().stream()
                 .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto))));
 
         assertThat(rankInfo.size(new HitCount(3))).isEqualTo(1);
