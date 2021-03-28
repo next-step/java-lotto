@@ -34,7 +34,8 @@ public final class LottoWinningChecker {
         List<Lotto> lottos = lottoList.getLottoList();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
         for(Lotto lotto : lottos) {
-            WinningScore winningScore = WinningScore.valueOf(lotto.getCorrectCount(lotto));
+            int correctCount = lotto.getCorrectCount(WinningLotto);
+            WinningScore winningScore = WinningScore.valueOf(correctCount);
             winningScoreBoard.increaseCount(winningScore);
         }
         return LottoWinningResultResponseDto.newInstance(winningScoreBoard);

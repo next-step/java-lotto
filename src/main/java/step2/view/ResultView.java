@@ -9,6 +9,8 @@ import step2.dto.LottoExpressionResponseDto;
 import step2.dto.LottoWinningResultResponseDto;
 import sun.lwawt.SecurityWarningWindow;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,16 +56,16 @@ public final class ResultView {
 
         stringBuilder.append("당첨 통계\n");
         stringBuilder.append("---------\n");
-        for(WinningScore winningScore : WinningScore.values()) {
-            stringBuilder.append(winningScore.get)
-            3개 일치 (5000원)- 1개
-
+        List<WinningScore> data = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
+        data.remove(WinningScore.MISS);
+        for(WinningScore winningScore : data) {
+            stringBuilder.append(winningScore.getCorrectCount()).append("개 일치");
+            stringBuilder.append("(").append(winningScore.getWinningAmount()).append("원)");
+            stringBuilder.append("-").append(winningScoreBoard.get(winningScore)).append("개\n");
         }
-
-        winningScoreBoard.get(WinningScore.THREE);
-        winningScoreBoard.get(WinningScore.FIVE);
-        winningScoreBoard.get(WinningScore.THREE);
-        winningScoreBoard.get(WinningScore.SIX);
+        stringBuilder.append("총 수익률은 ").append(0.35).append("입니다.");
+        stringBuilder.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n");
+        System.out.println(stringBuilder.toString());
 
     }
 }

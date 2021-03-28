@@ -36,7 +36,7 @@ class WinningScoreTest {
 
     }
 
-    @DisplayName("WinningScore 값 반환 테스트")
+    @DisplayName("WinningScore 맞은 갯수 반환 테스트")
     @Test
     void 반환_맞은갯수() {
 
