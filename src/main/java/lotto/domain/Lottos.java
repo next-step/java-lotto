@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lottos {
 
-  private Purchase purchase;
+  private final Purchase purchase;
   private final List<LottoNumbers> lottos;
 
   public Lottos(Purchase purchase) {
