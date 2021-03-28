@@ -11,6 +11,7 @@ import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.stats.LottoEarningRateCalculator;
 
+import lotto.domain.stats.LottoScoreBoard;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -102,7 +103,9 @@ public class AutomatedLottoTest {
         LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator());
         Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
         List<Lotto> lotteries = lottoShop.purchase();
-        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(winnerLotto, lotteries);
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
+        final long balance = lotteries.size() * 1000;
+        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
 
         String earningRate = calculator.resultToString();
 

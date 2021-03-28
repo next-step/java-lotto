@@ -11,9 +11,9 @@ public class LottoEarningRateCalculator {
     private final long principal; // 원금
     private final LottoScoreBoard lottoScoreBoard;
 
-    public LottoEarningRateCalculator(Lotto winnerLotto, List<Lotto> winnerCandidates) {
-        principal = winnerCandidates.size() * LottoShop.LOTTO_PRICE;
-        this.lottoScoreBoard = new LottoScoreBoard(winnerLotto, winnerCandidates);
+    public LottoEarningRateCalculator(long principal, LottoScoreBoard lottoScoreBoard) {
+        this.principal = principal;
+        this.lottoScoreBoard = lottoScoreBoard;
     }
 
     public String resultToString() {
