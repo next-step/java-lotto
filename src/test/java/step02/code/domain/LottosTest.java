@@ -53,7 +53,7 @@ public class LottosTest {
 
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("lotto 와 지난주 번호와 비교후 일치 갯수 리스트 테스트")
+  @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트 테스트")
   public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
     WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
     List<Integer> matched = lottos.match(winning.number());
