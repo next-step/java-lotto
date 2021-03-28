@@ -5,19 +5,17 @@ import java.util.List;
 
 public class Lottos {
 
-  private final ManualNumbers manualNumbers;
   private final List<LottoNumbers> lottos;
 
   public Lottos(Amount amount, ManualNumbers manualNumbers) {
-    this.manualNumbers = manualNumbers;
-    this.lottos = generateLottoNumbers(amount);
+    this.lottos = generateLottoNumbers(amount, manualNumbers);
   }
 
   public List<LottoNumbers> getLottos() {
     return lottos;
   }
 
-  public List<LottoNumbers> generateLottoNumbers(Amount amount) {
+  public List<LottoNumbers> generateLottoNumbers(Amount amount, ManualNumbers manualNumbers) {
     List<LottoNumbers> lottos = new ArrayList<>();
 
     for (String manualNumber : manualNumbers.manualNumbers()) {
