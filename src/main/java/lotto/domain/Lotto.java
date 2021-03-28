@@ -24,7 +24,7 @@ public final class Lotto {
     return lottoNumbers.compare(winningLotto.lottoNumbers);
   }
 
-  public void printLottoNumbers() {
-    lottoNumbers.print();
+  public LottoNumbers getLottoNumbers() {
+    return lottoNumbers;
   }
 }

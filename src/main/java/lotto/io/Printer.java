@@ -6,7 +6,10 @@ import static lotto.domain.Rank.NONE;
 import static lotto.domain.Rank.SIX;
 import static lotto.domain.Rank.THREE;
 
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -21,8 +24,16 @@ public final class Printer {
   }
 
   public static void printLottos(Lottos userLottos) {
-    userLottos.print();
+    for (Lotto lotto : userLottos.getLottos()) {
+      printLottoNumbers(lotto.getLottoNumbers());
+    }
     System.out.println();
+  }
+
+  private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    System.out.println(lottoNumbers.getLottoNumbers().stream()
+        .map(LottoNumber::toStringValue)
+        .collect(Collectors.joining(", ", "[", "]")));
   }
 
   public static void printWinningStatistics(Lottos userLottos, Lotto winningLotto, Money userMoney) {

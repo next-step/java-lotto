@@ -26,10 +26,8 @@ public final class Lottos {
     return lottos.size();
   }
 
-  public void print() {
-    for (Lotto lotto : lottos) {
-      lotto.printLottoNumbers();
-    }
+  public List<Lotto> getLottos() {
+    return lottos;
   }
 
   public List<Integer> compare(final Lotto winningLotto) {
