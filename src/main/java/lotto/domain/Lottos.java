@@ -5,25 +5,25 @@ import java.util.List;
 
 public class Lottos {
 
-  private final Purchase purchase;
+  private final ManualNumbers manualNumbers;
   private final List<LottoNumbers> lottos;
 
-  public Lottos(Purchase purchase) {
-    this.purchase = purchase;
-    this.lottos = generateLottoNumbers();
+  public Lottos(Amount amount, ManualNumbers manualNumbers) {
+    this.manualNumbers = manualNumbers;
+    this.lottos = generateLottoNumbers(amount);
   }
 
   public List<LottoNumbers> getLottos() {
     return lottos;
   }
 
-  public List<LottoNumbers> generateLottoNumbers() {
+  public List<LottoNumbers> generateLottoNumbers(Amount amount) {
     List<LottoNumbers> lottos = new ArrayList<>();
 
-    for (String manualNumber : purchase.manualNumbers()) {
+    for (String manualNumber : manualNumbers.manualNumbers()) {
       lottos.add(new LottoNumbers(manualNumber));
     }
-    lottos.addAll(LottoStore.generateAutoLottos(purchase.getAmount()));
+    lottos.addAll(LottoStore.generateAutoLottos(amount));
 
     return lottos;
   }

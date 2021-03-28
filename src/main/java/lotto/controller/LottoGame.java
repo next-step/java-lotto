@@ -4,7 +4,7 @@ import lotto.domain.Amount;
 import lotto.domain.HitNumbers;
 import lotto.domain.LotteryMachine;
 import lotto.domain.Lottos;
-import lotto.domain.Purchase;
+import lotto.domain.ManualNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,8 +12,8 @@ public class LottoGame {
 
   public void run() {
     Amount amount = new Amount(InputView.inputPriceOfBuy(), InputView.inputManualBuy());
-    Purchase purchase = new Purchase(amount, InputView.inputManualNumbers(amount));
-    Lottos lottos = new Lottos(purchase);
+    ManualNumbers manualNumbers = new ManualNumbers(InputView.inputManualNumbers(amount));
+    Lottos lottos = new Lottos(amount, manualNumbers);
 
     ResultView.showAmountOfLotto(amount);
     ResultView.showLottoNumbers(lottos);
