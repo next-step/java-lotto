@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private final List<Integer> rangeNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private List<Integer> rangeNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private final List<Integer> lotto;
 
 
     public Lotto() {
         Collections.shuffle(rangeNumbers);
         lotto = rangeNumbers.stream()
-                .sorted()
                 .limit(6)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -28,5 +28,10 @@ public class Lotto {
                 .filter(number -> this.lotto.contains(number))
                 .count();
         return Rank.valueOf(matchCount);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }

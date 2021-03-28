@@ -1,9 +1,12 @@
 package lotto.domain;
 
-public class Split {
-    private final static String DELIMITER = ",";
+import java.util.Arrays;
+import java.util.List;
 
-    public static String[] splitDelimiter(String inputString) {
-        return inputString.split(DELIMITER);
+public class Split {
+    private final static String DELIMITER = ", ";
+
+    public static List<String> splitDelimiter(String inputString) {
+        return Arrays.asList(inputString.split(DELIMITER));
     }
 }

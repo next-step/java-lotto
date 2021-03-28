@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Parser {
-    public static Integer[] parse(String[] inputStrings) {
-        return Arrays.stream(inputStrings)
+    public static List<Integer> parse(List<String> inputStrings) {
+        return inputStrings.stream()
                 .map(v -> Integer.parseInt(v))
-                .toArray(Integer[]::new);
+                .collect(Collectors.toList());
     }
 }

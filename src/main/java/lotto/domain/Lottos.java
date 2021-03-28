@@ -19,6 +19,9 @@ public class Lottos {
         this.Lottos = lottos;
     }
 
+    public List<Lotto> getLottos() {
+        return Lottos;
+    }
 
     public int purchaseLotto() {
         return purchaseLotto;

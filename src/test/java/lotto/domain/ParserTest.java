@@ -2,17 +2,20 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParserTest {
     @Test
     public void parser_positive() {
         //given
-        String[] inputStrings = new String[]{"1", "2", "3"};
-        Integer[] expectResults = new Integer[]{1, 2, 3};
+        List<String> inputStrings = Arrays.asList(new String[]{"1", "2", "3"});
+        List<Integer> expectResults = Arrays.asList(new Integer[]{1, 2, 3});
 
         //when
-        Integer[] results = Parser.parse(inputStrings);
+        List<Integer> results = Parser.parse(inputStrings);
 
         //then
         assertThat(results).isEqualTo(expectResults);

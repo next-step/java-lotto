@@ -2,16 +2,19 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SplitTest {
     @Test
     public void split_숫자하나() throws Exception {
         //given
-        String[] expectResult = {"1"};
+        List<String> expectResult = Arrays.asList(new String[]{"1"});
 
         //when
-        String[] result = Split.splitDelimiter("1");
+        List<String> result = Split.splitDelimiter("1");
 
         //then
         assertThat(result).isEqualTo(expectResult);
@@ -21,10 +24,10 @@ public class SplitTest {
     @Test
     public void split_쉼표구분자() throws Exception {
         //given
-        String[] expectResult = {"1", "2"};
+        List<String> expectResult = Arrays.asList(new String[]{"1", "2"});
 
         //when
-        String[] result = Split.splitDelimiter("1,2");
+        List<String> result = Split.splitDelimiter("1, 2");
 
         //then
         assertThat(result).isEqualTo(expectResult);

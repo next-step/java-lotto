@@ -1,7 +1,7 @@
 package lotto.domain;
 
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public class Statistics {
     }
 
     private Map<Rank, Integer> generate(List<Rank> winningResults) {
-        Map<Rank, Integer> result = new HashMap<>();
+        Map<Rank, Integer> result = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
             result.put(rank, winningCount(rank, winningResults));
         }

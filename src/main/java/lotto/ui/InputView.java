@@ -14,6 +14,7 @@ public class InputView {
     }
 
     public static String getWinningNumber() {
+        scanner.nextLine();
         System.out.println(GET_WINNING_NUMBER);
         return scanner.nextLine();
     }
