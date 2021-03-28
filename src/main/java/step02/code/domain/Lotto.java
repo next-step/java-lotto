@@ -34,8 +34,7 @@ public class Lotto {
   }
 
   public int match(List<Integer> winningNumber) {
-    List<Integer> lotto = new ArrayList<>();
-    lotto.addAll(this.lotto);
+    List<Integer> lotto = new ArrayList<>(this.lotto);
     lotto.removeAll(winningNumber);
     return LOTTO_SIZE - lotto.size();
   }
