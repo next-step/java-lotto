@@ -1,9 +1,11 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
+import lotto.domain.machine.LottoMachine;
+import lotto.domain.machine.TestLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,10 +31,23 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("1~45까지 범위에서 숫자 6개를 가진 Lotto 객체를 만든다.")
     void lottoCreateTest() {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator());
 
         Lotto lotto = lottoMachine.generate();
 
         assertThat(lotto).isEqualTo(new Lotto(10, 13, 44, 17, 20, 33));
     }
+
+    @Test
+    @DisplayName("번호가 6자리가 아니면, 예외를 발생시킨다.")
+    void lottoWrongNumberFormatTest() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(1, 2, 3))
+                .withMessage("로또는 6개 숫자여야 합니다.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(1, 2, 3, 4, 5))
+                .withMessage("로또는 6개 숫자여야 합니다.");
+    }
+
 }
