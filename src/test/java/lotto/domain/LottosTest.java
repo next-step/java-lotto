@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static lotto.domain.WinningTest.WINNING_SIZE;
+import static lotto.domain.WinningLottoTest.WINNING_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -57,8 +57,8 @@ public class LottosTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        Winning winning = new Winning(winningNumbers);
-        Winning predictWinning = new Winning(winningNumbers, new int[]{0, 0, 0, 0, 1, 1, 1});
+        WinningLotto winning = new WinningLotto(winningNumbers);
+        WinningLotto predictWinning = new WinningLotto(winningNumbers, new int[]{0, 0, 0, 0, 1, 1, 1});
         Lottos testLottos = makeWinningLottos(testNumbers);
 
         //when

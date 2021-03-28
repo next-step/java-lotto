@@ -16,7 +16,7 @@ public class LottoFactoryTest {
 
     @BeforeEach
     void setUp() {
-        LottoFactory.setLottoStrategy(() -> {
+        LottoFactory.setLottoStrategy(a -> {
             return Collections.emptyList();
         });
     }
@@ -54,7 +54,7 @@ public class LottoFactoryTest {
         }
 
         //when
-        Winning winning = LottoFactory.winning(winningNumber);
+        WinningLotto winning = LottoFactory.winning(winningNumber);
 
         //then
         assertThat(winning.getWinningNumbers()).containsAll(winningNumber);

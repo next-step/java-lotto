@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.PriceTest.*;
-import static lotto.domain.Winning.MAX_MATCH_NUM;
+import static lotto.domain.WinningLotto.MAX_MATCH_NUM;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningTest {
+public class WinningLottoTest {
 
     public static final int WINNING_SIZE = 6;
 
-    private Winning winning;
+    private WinningLotto winning;
     private List<LottoNumber> winningNumbers = new ArrayList<>();
 
     @BeforeEach
@@ -22,13 +22,13 @@ public class WinningTest {
         for (int i = 1; i <= WINNING_SIZE; i++) {
             winningNumbers.add(new LottoNumber(i));
         }
-        winning = new Winning(winningNumbers);
+        winning = new WinningLotto(winningNumbers);
     }
 
     @Test
     void createTest() throws NoSuchFieldException, IllegalAccessException {
         //then - 동일 생성으로 비교
-        assertThat(winning).isEqualTo(new Winning(winningNumbers));
+        assertThat(winning).isEqualTo(new WinningLotto(winningNumbers));
 
         //when, then - field 접근
         assertThat(winning).hasNoNullFieldsOrProperties()
@@ -41,7 +41,7 @@ public class WinningTest {
         int[] matchArr = new int[MAX_MATCH_NUM + 1];
         int matchNum = 3;
         matchArr[matchNum]++;
-        Winning testWinning = new Winning(winningNumbers, matchArr);
+        WinningLotto testWinning = new WinningLotto(winningNumbers, matchArr);
 
         //when
         winning.matches(3);
@@ -58,7 +58,7 @@ public class WinningTest {
         int[] match = new int[]{0, 1, 2, 3, 4, 5, 6};
         Long expectMatch = 0 * 0 + 1 * 0 + 2 * 0 + 3 * THREE_PRICE + 4 * FOUR_PRICE + 5 * FIVE_PRICE + 6 * SIX_PRICE;
         double expect =  expectMatch / buyMoney;
-        Winning winning = new Winning(winningNumbers, match);
+        WinningLotto winning = new WinningLotto(winningNumbers, match);
 
         //when
         double result = winning.yield(buyNum);

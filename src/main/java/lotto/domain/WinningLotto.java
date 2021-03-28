@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class Winning {
+public class WinningLotto {
 
     public static final int MAX_MATCH_NUM = 6;
     public static final int MINIMUM_MATCH = 3;
@@ -17,14 +17,14 @@ public class Winning {
     private List<LottoNumber> winningNumbers;
     private int[] match = new int[MAX_MATCH_NUM+1];  //당첨 개수를 확인하는 array, matchArr[2]은 2개 당첨개수를 뜻한다.
 
-    public Winning(List<LottoNumber> winningNumbers) {
+    public WinningLotto(List<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
     /*
     * 테스트를 위한 생성자
     * */
-    public Winning(List<LottoNumber> winningNumbers, int[] match) {
+    public WinningLotto(List<LottoNumber> winningNumbers, int[] match) {
         this.winningNumbers = winningNumbers;
         this.match = match;
     }
@@ -56,7 +56,7 @@ public class Winning {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Winning winning = (Winning) o;
+        WinningLotto winning = (WinningLotto) o;
         return winningNumbers.containsAll(winning.winningNumbers) && Arrays.equals(match, winning.match);
     }
 

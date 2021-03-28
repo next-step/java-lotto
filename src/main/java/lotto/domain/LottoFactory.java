@@ -6,16 +6,27 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoStrategy.LOTTO_BOUND;
+import static lotto.domain.LottoStrategy.LOTTO_START_NUM;
+
 public class LottoFactory {
 
     private static LottoStrategy lottoStrategy;
+
+    public static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public static void setLottoStrategy(LottoStrategy strategy) {
         lottoStrategy = strategy;
     }
 
+    public static void lottoNumbers() {
+        for (int i = LOTTO_START_NUM; i < LOTTO_BOUND; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+    }
+
     public static Lotto lotto() {
-        return new Lotto(lottoStrategy.makeLotto());
+        return new Lotto(lottoStrategy.makeLotto(lottoNumbers));
     }
 
     public static Lottos lottos(int lottoCount) {
@@ -27,7 +38,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static Winning winning(List<LottoNumber> winningNumber) {
-        return new Winning(winningNumber);
+    public static WinningLotto winning(List<LottoNumber> winningNumber) {
+        return new WinningLotto(winningNumber);
     }
 }

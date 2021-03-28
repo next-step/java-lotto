@@ -10,16 +10,8 @@ import java.util.Random;
 
 public class AutoLottoStrategy implements LottoStrategy {
 
-    public List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-    public AutoLottoStrategy() {
-        for (int i = LOTTO_START_NUM; i < LOTTO_BOUND; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-    }
-
     @Override
-    public List<LottoNumber> makeLotto() {
+    public List<LottoNumber> makeLotto(List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers, new Random());
         return new ArrayList<>(lottoNumbers.subList(0, LOTTO_SIZE));
     }

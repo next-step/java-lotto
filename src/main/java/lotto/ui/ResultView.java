@@ -4,7 +4,7 @@
 package lotto.ui;
 
 import lotto.domain.Lottos;
-import lotto.domain.Winning;
+import lotto.domain.WinningLotto;
 
 public class ResultView {
 
@@ -21,7 +21,7 @@ public class ResultView {
         System.out.println(lottos);
     }
 
-    public static void printResult(Winning winning, int buyNum) {
+    public static void printResult(WinningLotto winning, int buyNum) {
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_MESSAGE_LINE);
         System.out.println(winning.toString());
