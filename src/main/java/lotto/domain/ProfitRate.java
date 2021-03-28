@@ -6,12 +6,12 @@ public class ProfitRate {
     private static final double STANDARD = 1;
     private final double profitRate;
 
-    public ProfitRate(double profitRate) {
-        this.profitRate = profitRate;
+    public ProfitRate(TotalPrize totalPrize, PurchaseAmount purchaeAmount) {
+        this((double) totalPrize.totalPrize() / purchaeAmount.purchaseAmount());
     }
 
-    public ProfitRate(TotalPrize totalPrize, PurchaseAmount purchaeAmount) {
-        this.profitRate = (double) totalPrize.totalPrize() / purchaeAmount.purchaseAmount();
+    public ProfitRate(double profitRate) {
+        this.profitRate = profitRate;
     }
 
     public double profitRate() {
