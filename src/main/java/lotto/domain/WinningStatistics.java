@@ -10,7 +10,7 @@ public final class WinningStatistics {
 
   private final Map<Rank, Long> winningStatistics;
 
-  public WinningStatistics(Lottos lottos, Lotto winningLotto) {
+  public WinningStatistics(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
     List<Integer> matchCounts = lottos.compare(winningLotto);
     winningStatistics = matchCounts.stream()
         .map(Rank::of)
