@@ -1,9 +1,12 @@
 package lotto.views;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +22,7 @@ public class ResultView {
 
     private static String prettyString(LottoTicket lottoTicket) {
         return "[" +
-                lottoTicket.ascendingLottoNumbers()
+                lottoTicket.lottoNumbers()
                         .stream()
                         .mapToInt(LottoNumber::lottoNumber)
                         .mapToObj(String::valueOf)
@@ -30,10 +33,29 @@ public class ResultView {
     public static void print(LottoStatistics lottoStatistics, int payment) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) - " + lottoStatistics.threeMatchingLottoTicketsCount() + "개");
-        System.out.println("4개 일치 (50000원) - " + lottoStatistics.fourMatchingLottoTicketsCount() + "개");
-        System.out.println("5개 일치 (1500000원) - " + lottoStatistics.fiveMatchingLottoTicketsCount() + "개");
-        System.out.println("6개 일치 (2000000000원) - " + lottoStatistics.sixMatchingLottoTicketsCount() + "개");
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoStatistics.yield(payment)) + "입니다.");
+        printLottoRanksStatistics(lottoStatistics);
+        System.out.printf("총 수익률은 %.2f입니다.\n", lottoStatistics.yield(payment));
+    }
+
+
+    private static void printLottoRanksStatistics(LottoStatistics lottoStatistics) {
+        final List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        Collections.reverse(lottoRanks);
+
+        lottoRanks.stream()
+                .filter(e -> e != LottoRank.MISS)
+                .forEach(e -> printLottoRankStatistics(lottoStatistics, e));
+    }
+
+    private static void printLottoRankStatistics(LottoStatistics lottoStatistics, LottoRank lottoRank) {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d개 일치", lottoRank.matchingCount()));
+        if (lottoRank == LottoRank.SECOND) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(String.format(" (%d원)", lottoRank.winningPrize()));
+        sb.append(String.format(" - %d개", lottoStatistics.lottoTicketsCount(lottoRank)));
+
+        System.out.println(sb);
     }
 }

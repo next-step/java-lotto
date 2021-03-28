@@ -1,33 +1,31 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoDiscriminator {
-    public static final int WINNING_NUMBERS_SIZE = 6;
+    private static final String BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE = "보너스 번호는 다른 로또 번호와 중복될 수 없습니다.";
 
-    private final List<LottoNumber> winningNumbers;
+    private final LottoTicket winningTicket;
+    private final LottoNumber bonusNumber;
 
-    public LottoDiscriminator(final List<LottoNumber> winningNumbers) {
-        validateSize(winningNumbers);
-        validateDuplicate(winningNumbers);
-        this.winningNumbers = winningNumbers;
+    public LottoDiscriminator(final LottoTicket winningTicket, final LottoNumber bonusNumber) {
+        validateDuplicateBonusNumber(winningTicket, bonusNumber);
+
+        this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != WINNING_NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
+    private void validateDuplicateBonusNumber(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public int matchingCount(final LottoTicket lottoTicket) {
-        return lottoTicket.matchingCount(winningNumbers);
+    public LottoRank lottoRank(LottoTicket lottoTicket) {
+        return LottoRank.valueOf(
+                lottoTicket.matchingCount(winningTicket),
+                lottoTicket.contains(bonusNumber)
+        );
     }
 
     @Override
@@ -35,11 +33,11 @@ public class LottoDiscriminator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoDiscriminator that = (LottoDiscriminator) o;
-        return Objects.equals(winningNumbers, that.winningNumbers);
+        return Objects.equals(winningTicket, that.winningTicket);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumbers);
+        return Objects.hash(winningTicket);
     }
 }

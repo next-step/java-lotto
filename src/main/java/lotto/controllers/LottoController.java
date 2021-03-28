@@ -19,7 +19,10 @@ public class LottoController {
         ResultView.print(lottoTickets);
 
         final String winnerNumbersInput = InputView.winnerNumbers();
-        final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(StringUtil.splitCommas(winnerNumbersInput));
+        final String bonusNumberInput = InputView.bonusNumber();
+
+        final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(
+                StringUtil.splitCommas(winnerNumbersInput), bonusNumberInput);
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
 
         ResultView.print(lottoStatistics, payment);

@@ -3,70 +3,64 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoDiscriminatorTest {
-    private List<LottoNumber> lottoNumbers;
+    private LottoTicket winningTicket;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+        winningTicket = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)
+                )
         );
+        bonusNumber = LottoNumber.of(7);
     }
 
     @Test
     public void create() {
-        assertThat(new LottoDiscriminator(lottoNumbers)).isEqualTo(new LottoDiscriminator(lottoNumbers));
+        final LottoDiscriminator expected = new LottoDiscriminator(winningTicket, bonusNumber);
+
+        final LottoDiscriminator result = new LottoDiscriminator(winningTicket, bonusNumber);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+
+    @Test
+    public void createDuplicateLottoNumbersAndBonusNumber() {
+        final LottoNumber duplicateBonusNumber = LottoNumber.of(6);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoDiscriminator(winningTicket, duplicateBonusNumber));
     }
 
     @Test
-    public void createLessThan6LottoNumbers() {
-        lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
+    public void lottoRank() {
+        final LottoRank expected = LottoRank.FIFTH;
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoDiscriminator(lottoNumbers));
-    }
-
-    @Test
-    public void createMoreThan6LottoNumbers() {
-        lottoNumbers = new ArrayList<>(lottoNumbers);
-        lottoNumbers.add(new LottoNumber(7));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoDiscriminator(lottoNumbers));
-    }
-
-    @Test
-    public void createDuplicateLottoNumbers() {
-        lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
-        lottoNumbers.add(new LottoNumber(5));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoDiscriminator(lottoNumbers));
-    }
-
-    @Test
-    public void matchingCount() {
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        final List<LottoNumber> winningNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(23),
-                new LottoNumber(3),
-                new LottoNumber(42),
-                new LottoNumber(5),
-                new LottoNumber(19)
+        final LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(23),
+                        LottoNumber.of(3),
+                        LottoNumber.of(42),
+                        LottoNumber.of(5),
+                        LottoNumber.of(19)
+                )
         );
-        final LottoDiscriminator lottoDiscriminator = new LottoDiscriminator(winningNumbers);
+        final LottoDiscriminator lottoDiscriminator = new LottoDiscriminator(winningTicket, bonusNumber);
+        final LottoRank result = lottoDiscriminator.lottoRank(lottoTicket);
 
-        assertThat(lottoDiscriminator.matchingCount(lottoTicket)).isEqualTo(3);
+        assertThat(result).isEqualTo(expected);
     }
 }

@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.factories.LottoTicketFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +19,21 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        final List<LottoNumber> winningNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+        final LottoTicket winningTicket = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)
+                )
         );
-        lottoDiscriminator = new LottoDiscriminator(winningNumbers);
+        final LottoNumber bonusNumber = LottoNumber.of(7);
+
+        lottoDiscriminator = new LottoDiscriminator(winningTicket, bonusNumber);
         lottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                .limit(20)
+                .limit(100)
                 .collect(Collectors.toList());
     }
 
@@ -39,47 +45,14 @@ public class LottoStatisticsTest {
         assertThat(result).isEqualTo(expected);
     }
 
-
-    private int matchingLottoTicketsCount(final int matchingCount) {
-        return (int) lottoTickets.stream().filter(e -> lottoDiscriminator.matchingCount(e) == matchingCount).count();
-    }
-
-    @Test
-    public void threeMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(3);
+    @ParameterizedTest
+    @ValueSource(strings = {"FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "MISS"})
+    public void lottoTicketsCount(String LottoRankInput) {
+        final LottoRank lottoRank = LottoRank.valueOf(LottoRankInput);
+        final int expected = (int) lottoTickets.stream().filter(e -> lottoDiscriminator.lottoRank(e) == lottoRank).count();
 
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.threeMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void FourMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(4);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.fourMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void FiveMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(5);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.fiveMatchingLottoTicketsCount();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void SixMatchingLottoTicketsCount() {
-        final int expected = matchingLottoTicketsCount(6);
-
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
-        final int result = lottoStatistics.sixMatchingLottoTicketsCount();
+        final int result = lottoStatistics.lottoTicketsCount(lottoRank);
 
         assertThat(result).isEqualTo(expected);
     }
@@ -89,21 +62,23 @@ public class LottoStatisticsTest {
         final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoTickets);
 
         final int payment = 2000;
-        final long threeMatchingLottoTicketsPrize =
-                LottoStatistics.THREE_MATCHING_PRIZE * lottoStatistics.threeMatchingLottoTicketsCount();
-        final long fourMatchingLottoTicketsPrize =
-                LottoStatistics.FOUR_MATCHING_PRIZE * lottoStatistics.fourMatchingLottoTicketsCount();
-        final long fiveMatchingLottoTicketsPrize =
-                LottoStatistics.FIVE_MATCHING_PRIZE * lottoStatistics.fiveMatchingLottoTicketsCount();
-        final long sixMatchingLottoTicketsPrize =
-                LottoStatistics.SIX_MATCHING_PRIZE * lottoStatistics.sixMatchingLottoTicketsCount();
-
-        final long totalPrize = threeMatchingLottoTicketsPrize + fourMatchingLottoTicketsPrize +
-                fiveMatchingLottoTicketsPrize + sixMatchingLottoTicketsPrize;
-        final double expected = (double) totalPrize / payment;
+        final double expected = (double) totalPrize(lottoStatistics) / payment;
 
         final double result = lottoStatistics.yield(payment);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+
+    private long totalPrize(LottoStatistics lottoStatistics) {
+        return lottoTicketsPrize(lottoStatistics, LottoRank.FIRST) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.SECOND) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.THIRD) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.FOURTH) +
+                lottoTicketsPrize(lottoStatistics, LottoRank.FIFTH);
+    }
+
+    private long lottoTicketsPrize(LottoStatistics lottoStatistics, LottoRank lottoRank) {
+        return (long) lottoRank.winningPrize() * lottoStatistics.lottoTicketsCount(lottoRank);
     }
 }

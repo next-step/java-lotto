@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoStore {
+    private static final String PAYMENT_ERROR_MESSAGE = "%d원보다 높은 금액을 입력해야 합니다.";
     private static final int DEFAULT_PRICE = 1000;
 
     private final int price;
@@ -21,8 +22,8 @@ public class LottoStore {
     }
 
     public List<LottoTicket> lottoTickets(int payment) {
-        if (payment < 0) {
-            throw new IllegalArgumentException();
+        if (payment < price) {
+            throw new IllegalArgumentException(String.format(PAYMENT_ERROR_MESSAGE, price));
         }
 
         return Stream.generate(LottoTicketFactory::createAutoLottoTicket)

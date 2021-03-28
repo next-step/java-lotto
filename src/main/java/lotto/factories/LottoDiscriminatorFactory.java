@@ -3,17 +3,11 @@ package lotto.factories;
 import lotto.domain.LottoDiscriminator;
 import lotto.domain.LottoNumber;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class LottoDiscriminatorFactory {
-    public static LottoDiscriminator from(String[] winnerNumbers) {
+    public static LottoDiscriminator from(String[] winningNumbers, String bonusNumber) {
         return new LottoDiscriminator(
-                Arrays.stream(winnerNumbers)
-                        .map(String::trim)
-                        .mapToInt(Integer::parseInt)
-                        .mapToObj(LottoNumber::new)
-                        .collect(Collectors.toList())
+                LottoTicketFactory.from(winningNumbers),
+                LottoNumber.of(Integer.parseInt(bonusNumber))
         );
     }
 }

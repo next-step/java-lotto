@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,12 +17,12 @@ public class LottoTicketTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
         );
     }
 
@@ -42,7 +41,7 @@ public class LottoTicketTest {
     @Test
     public void createMoreThan6LottoNumbers() {
         lottoNumbers = new ArrayList<>(lottoNumbers);
-        lottoNumbers.add(new LottoNumber(7));
+        lottoNumbers.add(LottoNumber.of(7));
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
@@ -50,42 +49,26 @@ public class LottoTicketTest {
     @Test
     public void createDuplicateLottoNumbers() {
         lottoNumbers = lottoNumbers.stream().limit(5).collect(Collectors.toList());
-        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(LottoNumber.of(5));
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
 
     @Test
-    public void ascendingLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        final List<LottoNumber> ascendingLottoNumbers = ascendingLottoNumbers(lottoNumbers);
-
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        assertThat(lottoTicket.ascendingLottoNumbers()).isEqualTo(ascendingLottoNumbers);
-    }
-
-    private List<LottoNumber> ascendingLottoNumbers(List<LottoNumber> lottoNumbers) {
-        final List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
-
-        Collections.sort(newLottoNumbers);
-
-        return newLottoNumbers;
-    }
-
-    @Test
     public void matchingCount() {
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        final LottoTicket source = new LottoTicket(lottoNumbers);
 
-        final List<LottoNumber> winningNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(23),
-                new LottoNumber(3),
-                new LottoNumber(42),
-                new LottoNumber(5),
-                new LottoNumber(19)
+        final LottoTicket target = new LottoTicket(
+                Arrays.asList(
+                        LottoNumber.of(1),
+                        LottoNumber.of(23),
+                        LottoNumber.of(3),
+                        LottoNumber.of(42),
+                        LottoNumber.of(5),
+                        LottoNumber.of(19)
+                )
         );
 
-        assertThat(lottoTicket.matchingCount(winningNumbers)).isEqualTo(3);
+        assertThat(source.matchingCount(target)).isEqualTo(3);
     }
 }

@@ -1,7 +1,12 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -9,14 +14,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    public void create(int expected) {
-        assertThat(new LottoNumber(expected)).isEqualTo(new LottoNumber(expected));
+    public void of(int expected) {
+        assertThat(LottoNumber.of(expected)).isEqualTo(LottoNumber.of(expected));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
-    public void createOutOfRange(int expected) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(expected));
+    public void ofOutOfRange(int expected) {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(expected));
     }
 
     @ParameterizedTest
@@ -25,8 +30,18 @@ public class LottoNumberTest {
         final int b = 5;
         final int expected = Integer.compare(a, 5);
 
-        final int result = new LottoNumber(a).compareTo(new LottoNumber(b));
+        final int result = LottoNumber.of(a).compareTo(LottoNumber.of(b));
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void allLottoNumbers() {
+        final List<LottoNumber> expected = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::of).collect(Collectors.toList());
+
+        final List<LottoNumber> result = LottoNumber.allLottoNumbers();
+
+        assertThat(result).containsAll(expected);
     }
 }

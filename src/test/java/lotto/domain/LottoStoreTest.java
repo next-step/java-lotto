@@ -14,7 +14,7 @@ public class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "9800:9", "14000:14"}, delimiter = ':')
+    @CsvSource(value = {"9800:9", "14000:14"}, delimiter = ':')
     public void lottoTickets(String price, String expected) {
         final int priceValue = Integer.parseInt(price);
         final int expectedValue = Integer.parseInt(expected);
@@ -25,7 +25,13 @@ public class LottoStoreTest {
     }
 
     @Test
-    public void lottoTicketsNegativePrice() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoStore().lottoTickets(-1000));
+    public void lottoTicketsLessThanPrice() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            final int price = 1000;
+            final LottoStore lottoStore = new LottoStore(price);
+            final int paymentLessThanPrice = 500;
+
+            lottoStore.lottoTickets(paymentLessThanPrice);
+        });
     }
 }
