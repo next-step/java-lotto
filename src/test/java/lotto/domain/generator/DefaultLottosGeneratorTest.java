@@ -1,7 +1,6 @@
 package lotto.domain.generator;
 
 import lotto.domain.Lotto;
-import lotto.domain.Money;
 import org.junit.Test;
 
 import java.util.List;
