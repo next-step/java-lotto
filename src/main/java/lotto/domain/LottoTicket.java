@@ -48,12 +48,12 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers() {
-        Random random = new Random();
-        Set<Integer> lottoNumberSet = new HashSet<>();
-        while (lottoNumberSet.size() < LottoConstant.MAX_LOTTO_COUNT) {
-            lottoNumberSet.add(random.nextInt(LottoConstant.MAX_LOTTO_NUMBER - 1) + LottoConstant.MIN_LOTTO_NUMBER);
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (int i = LottoConstant.MIN_LOTTO_NUMBER; i <= LottoConstant.MAX_LOTTO_NUMBER; i++) {
+            lottoNumbers.add(i);
         }
-        return lottoNumberSet.stream().mapToInt(a -> a).toArray();
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.stream().limit(LottoConstant.MAX_LOTTO_COUNT).mapToInt(Integer::intValue).toArray();
     }
 
     private int[] generateLottoNumbers(String lottoNumbers) {
