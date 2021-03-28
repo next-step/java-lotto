@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Rank {
 
-    Map<HitCount, List<Lotto>> rank;
+    private Map<HitCount, List<Lotto>> rank;
 
     public Rank(Map<HitCount, List<Lotto>> rank){
         this.rank = rank;
@@ -18,5 +18,7 @@ public class Rank {
         return rank.get(hitCount).size();
     }
 
-
+    public Map<HitCount, List<Lotto>> getRank(){
+        return rank;
+    }
 }

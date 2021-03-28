@@ -14,6 +14,9 @@ public class PurchaseManager {
         this.money = money;
     }
 
+    public Money money(){
+        return money;
+    }
     public PurchasedLottoNumber getPurchasedLottoNumber(){
         return purchasedLottoNumber;
     }
