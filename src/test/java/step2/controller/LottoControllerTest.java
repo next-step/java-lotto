@@ -62,17 +62,4 @@ class LottoControllerTest {
         assertThat(actual).isNotNull();
     }
 
-    @DisplayName("LottoController 인스턴스의 LottoExpressionResponseDto 반환값 검중 테스트")
-    @Test
-    void 로또_반환값_검증() {
-        // given
-        LottoController lottoController = LottoController.newInstance(lottoShuffleStrategy);
-
-        // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
-        LottoExpressionResponseDto expected = LottoExpressionResponseDto.newInstance(testLottoList);
-
-        // then
-        assertThat(actual).isEqualTo(expected);
-    }
 }

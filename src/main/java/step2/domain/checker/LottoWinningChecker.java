@@ -5,6 +5,7 @@ import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoList;
 import step2.domain.winning.WinningScoreBoard;
 import step2.dto.LottoConfirmationRequestDto;
+import step2.dto.LottoWinningResultResponseDto;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -29,14 +30,14 @@ public final class LottoWinningChecker {
         this.WinningLotto = WinningLotto;
     }
 
-    public void 비즈니스_로직을_검증하기위한_메서드(LottoList lottoList) {
+    public LottoWinningResultResponseDto 비즈니스_로직을_검증하기위한_메서드(LottoList lottoList) {
         List<Lotto> lottos = lottoList.getLottoList();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
         for(Lotto lotto : lottos) {
             WinningScore winningScore = WinningScore.valueOf(lotto.getCorrectCount(lotto));
             winningScoreBoard.increaseCount(winningScore);
         }
-
+        return LottoWinningResultResponseDto.newInstance(winningScoreBoard);
     }
 
 }

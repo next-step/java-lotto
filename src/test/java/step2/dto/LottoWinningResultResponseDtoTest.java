@@ -30,13 +30,13 @@ class LottoWinningResultResponseDtoTest {
     @DisplayName("LottoWinningResultResponseDto 인스턴스 소유값 반환 여부 테스트")
     @Test
     void 반환() {
-        //given
-        Map<WinningScore, Integer> expected = new HashMap<>();
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(expected);
+        // given
+        Map<WinningScore, Integer> testMap = new HashMap<>();
+        WinningScoreBoard expected = WinningScoreBoard.newInstance(testMap);
 
         // when
-        LottoWinningResultResponseDto responseDto = LottoWinningResultResponseDto.newInstance(winningScoreBoard);
-        Map<WinningScore, Integer> actual = responseDto.getWinningScoreBoard();
+        LottoWinningResultResponseDto responseDto = LottoWinningResultResponseDto.newInstance(expected);
+        WinningScoreBoard actual = responseDto.getWinningScoreBoard();
 
         // then
         assertThat(actual).isEqualTo(expected);
