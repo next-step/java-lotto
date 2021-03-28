@@ -47,14 +47,14 @@ public final class LottoGenerator {
     }
 
     public final Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = generateLottoNumbers();
+        List<LottoNumber> lottoNumbers = generateAllLottoNumbers();
         lottoShuffleStrategy.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
         Collections.sort(lottoNumbers);
         return Lotto.newInstance(lottoNumbers);
     }
 
-    private final List<LottoNumber> generateLottoNumbers() {
+    private final List<LottoNumber> generateAllLottoNumbers() {
         return IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());

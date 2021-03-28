@@ -18,6 +18,14 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         cache = new LottoNumber[ARRAY_LENGTH];
     }
 
+    private static final boolean isCacheNull(Integer index) {
+        return cache[index] == null;
+    }
+
+    private static final boolean isOutOfBounds(Integer lottoNumber) {
+        return (isLessThanMinimum(lottoNumber) || isExceedMaximum(lottoNumber));
+    }
+
     private LottoNumber(int lottoNumber) {
         this(Integer.valueOf(lottoNumber));
     }
@@ -34,14 +42,6 @@ public final class LottoNumber implements Comparable<LottoNumber> {
             cache[lottoNumber] = new LottoNumber(lottoNumber);
         }
         return cache[lottoNumber];
-    }
-
-    private static final boolean isCacheNull(Integer index) {
-        return cache[index] == null;
-    }
-
-    private static final boolean isOutOfBounds(Integer lottoNumber) {
-        return (isLessThanMinimum(lottoNumber) || isExceedMaximum(lottoNumber));
     }
 
     private static final boolean isLessThanMinimum(Integer lottoNumber) {

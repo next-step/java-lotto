@@ -110,7 +110,7 @@ class LottoTest {
         Lotto secondLotto = Lotto.newInstance(lottoNumbers);
 
         // when
-        int actual = firstLotto.getCountContaining(secondLotto);
+        int actual = firstLotto.getCorrectCount(secondLotto);
 
         // then
         assertThat(actual).isEqualTo(6);

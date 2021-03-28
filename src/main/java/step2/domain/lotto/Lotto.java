@@ -12,23 +12,23 @@ public final class Lotto {
     private static final String COMMA = ",";
     private final List<LottoNumber> lottoNumbers;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
-        if (isListNull(lottoNumbers)) {
-            throw new ListNullPointerException();
-        }
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public Lotto(String sentence) {
-        this(toLottoNumberList(sentence));
+    public static final Lotto newInstance(String sentence) {
+        return new Lotto(sentence);
     }
 
     public static final Lotto newInstance(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    public static final Lotto newInstance(String sentence) {
-        return new Lotto(sentence);
+    public Lotto(String sentence) {
+        this(toLottoNumberList(sentence));
+    }
+
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (isListNull(lottoNumbers)) {
+            throw new ListNullPointerException();
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
     private final boolean isListNull(List<LottoNumber> lottoNumbers) {
@@ -43,7 +43,7 @@ public final class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public final int getCountContaining(Lotto other) {
+    public final int getCorrectCount(Lotto other) {
         return lottoNumbers.stream()
                 .filter(other::contains)
                 .mapToInt(i -> 1)
