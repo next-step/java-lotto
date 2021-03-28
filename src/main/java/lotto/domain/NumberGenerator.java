@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.LottoConstants.CREATION_MAX_COUNT;
-import static lotto.domain.LottoConstants.CREATION_NUMBER_BOUND;
-
 public class NumberGenerator {
+    public static final int CREATION_MAX_COUNT = 6;
+    public static final int CREATION_NUMBER_BOUND = 45;
 
     public static Numbers creation() {
         List<Integer> numbers = new ArrayList<>();

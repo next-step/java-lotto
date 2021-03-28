@@ -3,11 +3,13 @@ package lotto.domain;
 import java.util.Objects;
 
 public class HitCount {
+    private final static boolean HIT_BONUS_NUMBER_INIT = false;
+
     private final int hitCount;
     private final boolean isHitBonusNumber;
 
     public HitCount(int hitCount) {
-        this(hitCount, false);
+        this(hitCount, HIT_BONUS_NUMBER_INIT);
     }
 
     public HitCount(int hitCount, boolean isHitBonusNumber) {

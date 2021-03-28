@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinNumbers {
+    private final static int BONUS_NUMBER_INIT = 0;
+
     private final List<Integer> winNumbers;
     private final int bonusNumber;
 
@@ -15,7 +17,7 @@ public class WinNumbers {
     }
 
     public WinNumbers(List<Integer> winNumbers) {
-        this(winNumbers, 0);
+        this(winNumbers, BONUS_NUMBER_INIT);
     }
 
     public WinNumbers(List<Integer> winNumbers, int bonusNumber) {

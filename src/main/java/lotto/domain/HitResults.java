@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HitResults {
+    private final static int PAY_MONEY_INIT = 0;
+
     private final List<HitResult> hitResults;
     private final int payMoney;
 
     public HitResults() {
-        this(0);
+        this(PAY_MONEY_INIT);
     }
 
     public HitResults(int payMoney) {

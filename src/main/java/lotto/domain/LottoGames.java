@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoConstants.GAME_MONEY;
-
 public class LottoGames {
+    private static final int ONE_GAME_MONEY = 1_000;
+
     private final int payMoney;
     private final List<LottoGame> lottoGames;
 
@@ -17,7 +17,7 @@ public class LottoGames {
     private List<LottoGame> makeLottoGames() {
         List<LottoGame> lottoGameList = new ArrayList<>();
 
-        for (int i = 0; i < payMoney / GAME_MONEY; i++) {
+        for (int i = 0; i < payMoney / ONE_GAME_MONEY; i++) {
             lottoGameList.add(new LottoGame());
         }
         return lottoGameList;
