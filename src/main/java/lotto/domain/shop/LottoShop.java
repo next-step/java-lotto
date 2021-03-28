@@ -7,7 +7,7 @@ import lotto.domain.machine.LottoGenerator;
 import lotto.domain.machine.LottoMachine;
 
 public class LottoShop {
-    private final static long LOTTO_PRICE = 1000;
+    public final static long LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
     private long balance;
