@@ -42,12 +42,12 @@ public class Stats {
     private int prizeCount(Prize prize) {
         int prizeCount = 0;
         for (HitResult hitResult : hitResults.getHitResults()) {
-            prizeCount = prizeCount + countHitPrize(hitResult, prize);
+            prizeCount = prizeCount + zeroOrOne(hitResult.isHitPrize(prize));
         }
         return prizeCount;
     }
 
-    private int countHitPrize(HitResult hitResult, Prize prize) {
-        return hitResult.isHitPrize(prize) ? 1 : 0;
+    private int zeroOrOne(boolean isHitPrize) {
+        return isHitPrize ? 1 : 0;
     }
 }
