@@ -1,10 +1,16 @@
 # 기능 정의
 
-<!-- - ## ConstructorStragy.java / interface
-  - List<Integer> constructor();
-- ## AutoNumber.java / extends ConstructorStragy
-  - List<Integer> constructor(); -->
-
+- ## Number.java
+  - field
+    - private int number
+  - constructor
+    - Number(int number)
+      - range check
+  - method
+    - private void rangeCheck(int number)
+      - 45를 넘어가는 숫자가 없는지
+    - public int number();
+      - field 값 반환
 - ## Lotto.java
   - field
     - List<Integer> lotto;
@@ -18,7 +24,6 @@
       - redirect to check(List<Integer> lotto);
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
-      - 45를 넘어가는 숫자가 없는지
       - 동일한 숫자가 없는지
       <!-- - List<Integer> lottoNumbers(AutoNumber autoNumber); -->
     - int match(List<Integer> winningNumber);

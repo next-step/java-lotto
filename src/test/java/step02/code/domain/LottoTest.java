@@ -23,17 +23,6 @@ public class LottoTest {
   }
 
   @Test
-  @DisplayName("숫자의 min, max 체크 / 0 ~ 45")
-  public void checkMinMax() {
-    assertThatThrownBy(() -> {
-      new Lotto(Arrays.asList(0, 1, 2, 3, 4, 45));
-    }).isInstanceOf(IllegalArgumentException.class);
-    assertThatThrownBy(() -> {
-      new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46));
-    }).isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @Test
   @DisplayName("중복되는 숫자가 존재하는지 체크")
   public void checkSameNumber() {
     assertThatThrownBy(() -> {
