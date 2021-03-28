@@ -73,4 +73,15 @@ public class AutomatedLottoTest {
                 .withMessage("금액은 음수일 수 없습니다.");
     }
 
+    @Test
+    @DisplayName("로또 객체 간에 숫자를 비교하여, 일치하는 개수를 반환한다.")
+    void lottoComparingTest() {
+        Lotto myLotto = new Lotto(3, 6, 9, 12, 15, 18);
+        Lotto yourLotto = new Lotto(2, 4, 6, 8, 10, 12);
+
+        long counts = myLotto.getEqualNumberCountFrom(yourLotto);
+
+        assertThat(counts).isEqualTo(2L);
+    }
+
 }

@@ -18,6 +18,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public long getEqualNumberCountFrom(Lotto lotto) {
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
