@@ -30,15 +30,10 @@ public class Lottos {
     }
   }
 
-  public static List<Integer> lottoNumbers(MakeNumber makeNumber) {
-    return makeNumber.make();
-  }
-
   public static List<Lotto> buy(int money) {
     return IntStream.range(INIT_NUM, money / LOTTO_PRICE)
       .boxed()
-      .map((i) -> lottoNumbers(new RandomNumber()))
-      .map(Lotto::new)
+      .map((i) -> new Lotto(new RandomNumber()))
       .collect(Collectors.toList());
   }
 

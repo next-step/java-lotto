@@ -18,6 +18,10 @@ public class Lotto {
     this.lotto = lotto.stream().map(Number::new).collect(Collectors.toList());
   }
 
+  public Lotto(MakeNumber makeNumber) {
+    this(makeNumber.make());
+  }
+
   private void check(List<Integer> lotto) {
     if(lotto.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 6개의 숫자가 필요합니다");
