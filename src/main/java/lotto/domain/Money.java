@@ -15,11 +15,11 @@ public final class Money {
   }
 
   public Money divideBy(Money otherMoney) {
-    return new Money(this.money / otherMoney.money);
+    return new Money(money / otherMoney.money);
   }
 
   public Money sum(Money otherMoney) {
-    return new Money(this.money + otherMoney.money);
+    return new Money(money + otherMoney.money);
   }
 
   public Money multiply(int multiplier) {
