@@ -5,7 +5,6 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.machine.LottoMachine;
-import lotto.domain.machine.RandomLottoGenerator;
 
 public class LottoShop {
     private final static long LOTTO_PRICE = 1000;
@@ -13,12 +12,10 @@ public class LottoShop {
     private final LottoMachine lottoMachine;
     private long balance;
 
-    public LottoShop(long balance) {
-        this.lottoMachine = new LottoMachine(new RandomLottoGenerator());
-        this.balance = balance;
-    }
-
     public LottoShop(long balance, LottoGenerator lottoGenerator) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+        }
         this.lottoMachine = new LottoMachine(lottoGenerator);
         this.balance = balance;
     }

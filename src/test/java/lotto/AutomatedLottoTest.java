@@ -69,7 +69,7 @@ public class AutomatedLottoTest {
     @DisplayName("구입 금액이 음수이면, 예외를 발생시킨다.")
     void lottoShopNegativeBalanceTest() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoShop(-3000))
+                .isThrownBy(() -> new LottoShop(-3000, new TestLottoGenerator()))
                 .withMessage("금액은 음수일 수 없습니다.");
     }
 
