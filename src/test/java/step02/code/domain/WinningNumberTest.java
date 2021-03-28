@@ -17,7 +17,7 @@ public class WinningNumberTest {
   
   @ParameterizedTest
   @NullAndEmptySource
-  @DisplayName("null or empty 값의 경우 error 체크")
+  @DisplayName("null or empty 값의 경우, error 테스트")
   public void checkEmpty(String str) {
     assertThatThrownBy(() -> {
       WinningNumber.check(str);
@@ -26,7 +26,7 @@ public class WinningNumberTest {
 
   @ParameterizedTest
   @ValueSource(strings = {".fwe", "2f"})
-  @DisplayName("숫자가 아닌 경우 error")
+  @DisplayName("숫자가 아닌 경우, error 테스트")
   public void checkNumber(String str) {
     assertThatThrownBy(() -> {
       WinningNumber.check(str);
@@ -35,7 +35,7 @@ public class WinningNumberTest {
 
   @ParameterizedTest
   @MethodSource("winningNumberStringAndResult")
-  @DisplayName("winning number 가 원하는 값으로 만들어 지는지 테스트")
+  @DisplayName("string 값으로 지난주 당첨번호가 의도한 값으로 생성되는지 테스트")
   public void make(String str, List<Integer> result) {
     WinningNumber winningNumber = WinningNumber.makeWinningNumberByString(str);
 

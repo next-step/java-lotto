@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoTest {
   
   @Test
-  @DisplayName("6자리의 숫자가 들어오는지 체크")
+  @DisplayName("lotto 생성시, 6자리의 숫자가 들어오지 않으면, error 출력 테스트")
   public void checkLottoLength() {
     assertThatThrownBy(() -> {
       new Lotto(Arrays.asList(1,2,3,4,5));
@@ -23,7 +23,7 @@ public class LottoTest {
   }
 
   @Test
-  @DisplayName("중복되는 숫자가 존재하는지 체크")
+  @DisplayName("lotto 생성시, 중복되는 숫자가 존재하면, error 출력 테스트")
   public void checkSameNumber() {
     assertThatThrownBy(() -> {
       new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5));
@@ -32,7 +32,7 @@ public class LottoTest {
 
   @ParameterizedTest
   @MethodSource("lottoAndWinningNumberAndMatch")
-  @DisplayName("등수 반환 체크")
+  @DisplayName("lotto 와 지난주 당첨번호와 비교후, 동일한 숫자 갯수를 리턴하는지 테스트")
   public void grade(List<Integer> lottoNumber, String winningNumber, int match) {
     Lotto lotto = new Lotto(lottoNumber);
     WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);

@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottosTest {
 
   @Test
-  @DisplayName("lotto 구입금액이 올바르지 않을 경우 예외처리 테스트")
+  @DisplayName("lotto 최소 구매 금액 이하인경우, lotto 구입후 잔액이 남은경우 에러 발생 테스트")
   public void check() {
     assertThatThrownBy(() -> {
       // 로또 최소 구매 금액 이하인경우
@@ -31,7 +31,7 @@ public class LottosTest {
   }
 
   @RepeatedTest(value = 100)
-  @DisplayName("lotto number 생성 테스트")
+  @DisplayName("lotto 생성시, 최소값 1, 최대값 45 안의 6자리 숫자가 생성되는지 테스트")
   public void lottoNumber() {
     List<Integer> lotto = Lottos.lottoNumbers(new RandomNumber());
     int min = lotto.stream().min(Integer::compare).orElse(-1);
@@ -44,7 +44,7 @@ public class LottosTest {
 
   @ParameterizedTest
   @CsvSource(value = {"1000:1", "15000:15"}, delimiter = ':')
-  @DisplayName("구매 금액에 맞춰서 정확한 갯수의 로또가 구매되는지 테스트")
+  @DisplayName("구매 금액에 맞춰서 정확한 갯수의 lotto 가 생성되는지 테스트")
   public void buy(int money, int number) {
     List<Lotto> lottos = Lottos.buy(money);
 
@@ -53,7 +53,7 @@ public class LottosTest {
 
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("winning number 와 비교해 맞는갯수를 담은 list 가 return 되는지 테스트")
+  @DisplayName("lotto 와 지난주 번호와 비교후 일치 갯수 리스트 테스트")
   public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
     WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
     List<Integer> matched = lottos.match(winning.number());
@@ -96,7 +96,7 @@ public class LottosTest {
 
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("결과 합산된 데이터가 정확히 만들어 지는지 테스트")
+  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
   public void result(Lottos lottos, String winningNumber, List<Integer> mustMatched, Map<Integer, Integer> mustResult) {
     WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
     Map<Integer, Integer> result = lottos.result(winning.number());
