@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumberTest {
+public class LottoNumbersTest {
 
     @Test
     @DisplayName("로또 번호 객체 생성")
