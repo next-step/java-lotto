@@ -21,6 +21,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     return String.valueOf(lottoNumber);
   }
 
+  public static LottoNumber valueOf(String lottoNumber) {
+    return new LottoNumber(Integer.parseInt(lottoNumber));
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

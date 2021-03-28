@@ -17,8 +17,7 @@ public final class LottoNumbers {
 
   public LottoNumbers(String[] winningNumbers) {
     this.lottoNumbers = Arrays.stream(winningNumbers)
-        .map(Integer::parseInt)
-        .map(LottoNumber::new)
+        .map(LottoNumber::valueOf)
         .collect(Collectors.toList());
   }
 
