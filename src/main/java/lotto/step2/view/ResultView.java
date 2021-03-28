@@ -1,13 +1,12 @@
 package lotto.step2.view;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.LottoBoard;
 import lotto.step2.domain.Lottos;
-import lotto.step2.domain.enums.LottoBoardMatcher;
+import lotto.step2.domain.enums.LottoMatcher;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -47,24 +46,12 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
 
-        Map<Long, Long> map = lottoBoard.stream().collect(
-            Collectors.groupingBy(Function.identity(), Collectors.counting())
-        );
+        Map<LottoMatcher, Integer> board = lottoBoard.getBoard();
 
-        LongStream.rangeClosed(LottoBoardMatcher.THREE.getMatchCount(), LottoBoardMatcher.SIX.getMatchCount())
-            .forEach(matchCount -> {
-                System.out.println(String.format(WINNING_MATCH_MSG, matchCount, LottoBoardMatcher.getWinningBonus(matchCount), valueToLong(map, matchCount)));
-            }
-        );
+        LottoMatcher.getLottoBoardMatcher().forEach(i -> {
+            System.out.println(String.format(WINNING_MATCH_MSG, i.getMatchCount(), i.getWinningBonus(), board.get(i)));
+        });
 
-        System.out.println(String.format(WINNING_RATIO, LottoBoardMatcher.winningRatio(map)));
-    }
-
-    private static Long valueToLong(Map<Long, Long> map, Long key) {
-        Long value = map.get(key);
-        if (value == null) {
-            return 0L;
-        }
-        return value;
+        System.out.println(String.format(WINNING_RATIO, lottoBoard.getWinningRatio()));
     }
 }

@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.enums.LottoMatcher;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,6 +11,7 @@ public class LottoGame {
     private final static int LOTTO_START_INCLUSIVE_VALUE = 0;
     private final static LottoGenerator lottoGenerator = LottoGenerator.getInstance();
     private final Lottos lottos;
+    private LottoBoard lottoBoard;
 
     private LottoGame(final int lottoAmount) {
         List<Lotto> lottoList = IntStream.range(LOTTO_START_INCLUSIVE_VALUE, lottoAmount)
@@ -28,10 +31,16 @@ public class LottoGame {
         return lottos;
     }
 
-    public LottoBoard calculateWinnings(WinningNumber winningNumber) {
-        return LottoBoard.of(lottos.stream()
+    public void calculateWinnings(WinningNumber winningNumber) {
+        LottoBoard lottoBoard = new LottoBoard();
+        lottos.stream()
                 .map(lotto -> winningNumber.getLottoMatchCount(lotto))
-                .collect(Collectors.toList())
-        );
+                .forEach(i -> lottoBoard.calculate(LottoMatcher.match(i)));
+
+        this.lottoBoard = lottoBoard;
+    }
+
+    public LottoBoard getLottoBoard() {
+        return lottoBoard;
     }
 }
