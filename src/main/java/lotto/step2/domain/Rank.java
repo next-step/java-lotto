@@ -20,9 +20,14 @@ public enum Rank {
         this.message = message;
     }
 
-    public static Rank from(long hit) {
+    public static Rank from(long hit, boolean bonusNumber) {
         return Arrays.stream(values())
-                .filter(rank -> rank.hit == hit)
+                .filter(rank -> {
+                    if (rank.hit == 5) {
+                        return bonusNumber ? rank.amount == 30_000_000 : rank.amount == 1_500_000;
+                    }
+                    return rank.hit == hit;
+                })
                 .findFirst()
                 .orElse(MISS);
     }
