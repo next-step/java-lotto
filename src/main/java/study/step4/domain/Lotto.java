@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public Lotto(String[] numbers) {
-        for(String number : numbers) {
+        for (String number : numbers) {
             lottoNumbers.add(LottoNumber.of(Integer.parseInt(number.trim())));
         }
     }
@@ -26,7 +26,8 @@ public class Lotto {
     }
 
     public boolean matchBonus(LottoNumber bonusBall) {
-        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+        return lottoNumbers.stream()
+            .anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
     public List<LottoNumber> getLottoNumbers() {

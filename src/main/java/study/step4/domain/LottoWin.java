@@ -43,6 +43,6 @@ public class LottoWin {
     }
 
     public BigDecimal profit(Amount amount) {
-        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(amount.getAmount()), 2, BigDecimal.ROUND_CEILING);
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(amount.getAmount()), 2, BigDecimal.ROUND_FLOOR);
     }
 }

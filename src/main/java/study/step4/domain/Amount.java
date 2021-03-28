@@ -14,7 +14,7 @@ public class Amount {
     }
 
     private void valid(int amount) {
-        if ((amount < 0) || (amount / LOTTO_PRICE == 0)) {
+        if ((amount < 0) || (amount % LOTTO_PRICE != 0)) {
             throw new IllegalArgumentException("로또 구매 최저 금액은 " + LOTTO_PRICE + "원 입니다.");
         }
     }

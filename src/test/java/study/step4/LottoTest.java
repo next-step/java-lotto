@@ -53,4 +53,14 @@ public class LottoTest {
         assertThat(lotto.match(winInput)).isEqualTo(expect);
     }
 
+    @ParameterizedTest(name = "로또 넘버 맞춤 테스트")
+    @CsvSource(value={"1:true", "6:true", "7:false"}, delimiter = ':')
+    public void matchBonus(int inputs, boolean expect) {
+        // given
+        String[] numbers = "1,2,3,4,5,6".split(",");
+        Lotto lotto = new Lotto(numbers);
+        // when & then
+        assertThat(lotto.matchBonus(LottoNumber.of(inputs))).isEqualTo(expect);
+    }
+
 }
