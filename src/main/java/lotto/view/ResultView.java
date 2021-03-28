@@ -12,7 +12,8 @@ import lotto.domain.Result;
 public class ResultView {
 
   public static void showAmountOfLotto(Amount amount) {
-    System.out.println(amount.getAmount() + "개를 구매했습니다.");
+    System.out.println(
+        "수동으로 " + amount.getManualAmount() + "장, 자동으로 " + amount.getAutoAmount() + "개를 구매했습니다.");
   }
 
   public static void showLottoNumbers(Lottos lottos) {

@@ -10,7 +10,7 @@ import lotto.view.ResultView;
 public class LottoGame {
 
   public void run() {
-    Amount amount = new Amount(InputView.inputPriceOfBuy());
+    Amount amount = new Amount(InputView.inputPriceOfBuy(),InputView.inputManualBuy());
     Lottos lottos = new Lottos(amount);
 
     ResultView.showAmountOfLotto(amount);

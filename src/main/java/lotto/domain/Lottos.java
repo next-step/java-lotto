@@ -7,7 +7,7 @@ public class Lottos {
   private final List<LottoNumbers> lottos;
 
   public Lottos(Amount amount) {
-    this.lottos = LottoStore.generateLottos(amount.getAmount());
+    this.lottos = LottoStore.generateLottos(amount.getAutoAmount());
   }
 
   public List<LottoNumbers> getLottos() {
