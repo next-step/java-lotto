@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinningResultResponseDtoTest {
 
-    @DisplayName("LottoWinningResultResponseDto 인스턴스 생성 검증 테스트")
+    @DisplayName("LottoWinningResultResponseDto 인스턴스 생성 여부 테스트")
     @Test
-    void 생성 (){
+    void 생성() {
         //given
         Map<WinningScore, Integer> testMap = new HashMap<>();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
@@ -26,5 +26,21 @@ class LottoWinningResultResponseDtoTest {
         // then
         assertThat(responseDto).isNotNull();
     }
+
+    @DisplayName("LottoWinningResultResponseDto 인스턴스 소유값 반환 여부 테스트")
+    @Test
+    void 반환() {
+        //given
+        Map<WinningScore, Integer> expected = new HashMap<>();
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(expected);
+
+        // when
+        LottoWinningResultResponseDto responseDto = LottoWinningResultResponseDto.newInstance(winningScoreBoard);
+        Map<WinningScore, Integer> actual = responseDto.getWinningScoreBoard();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
 }
