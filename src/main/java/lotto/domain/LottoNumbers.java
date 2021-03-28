@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +19,30 @@ public class LottoNumbers {
   public LottoNumbers(List<LottoNumber> numbers) {
     this.numbers = generateLottoNumbers(numbers);
   }
+
+  public LottoNumbers(String inputNumbers) {
+    this.numbers = generateLottoNumbers(inputNumbers);
+  }
+
+  private List<LottoNumber> generateLottoNumbers(String inputNumbers) {
+    List<LottoNumber> lottoNumbers = stringToList(inputNumbers).stream()
+        .mapToInt(Integer::parseInt)
+        .mapToObj(LottoNumber::of)
+        .collect(Collectors.toList());
+
+    validateSize(lottoNumbers);
+    validateDuplication(lottoNumbers);
+    return lottoNumbers;
+  }
+
+  public List<String> stringToList(String text) {
+    return Arrays.asList(splitString(text));
+  }
+
+  private String[] splitString(String text) {
+    return text.split(Constant.BASIC_REGEX);
+  }
+
 
   public List<LottoNumber> generateLottoNumbers(List<LottoNumber> numbers) {
     validateSize(numbers);
