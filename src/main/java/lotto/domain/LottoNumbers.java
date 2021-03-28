@@ -35,14 +35,13 @@ public class LottoNumbers {
     return lottoNumbers;
   }
 
-  public List<String> stringToList(String text) {
+  private List<String> stringToList(String text) {
     return Arrays.asList(splitString(text));
   }
 
   private String[] splitString(String text) {
     return text.split(Constant.BASIC_REGEX);
   }
-
 
   public List<LottoNumber> generateLottoNumbers(List<LottoNumber> numbers) {
     validateSize(numbers);
