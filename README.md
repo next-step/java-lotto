@@ -26,26 +26,16 @@
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
     * getWinningNumbers(return : 게임 당첨 번호)
   * Rank(enum)   
-    * 형식 : 등수(int matchCount, int winningMoney) (등수 : 1등~5등, 꽝)
+    * 형식 : 등수(int matchCount, int winningMoney) (등수 : 1등~5등, 나머지)
     * Rank 생성자(param : matchCount)   
     * valueOf
-  
-
-* module
-  * Game(interface)
-    * generate   
-    * getWinner   
-    * getYield   
-  * LottoGame implments Game
-    * generate
-    * getWinner
-    * getYield  
+  * Parser
+  * Split
   * Statistics   
-    * 변수 : statistics = map<Rank, count>
-    * 변수 : 구매금액
+    * 변수 : statistics = map<rank, count>
     * 통계 생성자(Lottos, WinningNumber)   
     * 수익률   
-    * 손해유무   
+    * 손해유무 
 
 * ui   
   * InputView   
