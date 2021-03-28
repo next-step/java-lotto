@@ -4,6 +4,7 @@ import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningStatistics;
 import lotto.io.InputView;
 import lotto.io.Printer;
 
@@ -20,7 +21,10 @@ public final class LottoManager {
       Printer.printLottos(userLottos);
 
       Lotto winningLotto = inputView.inputLastWinningNumber();
-      Printer.printWinningStatistics(userLottos, winningLotto, userMoney);
+
+      WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
+      Printer.printRank(winningStatistics);
+      Printer.printResult(winningStatistics, userMoney);
     }
   }
 }

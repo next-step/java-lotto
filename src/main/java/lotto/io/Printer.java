@@ -17,6 +17,8 @@ import lotto.domain.WinningStatistics;
 
 public final class Printer {
 
+  public static final int CRITERION = 1;
+
   private Printer() {}
 
   public static void printLottoCount(Lottos userLottos) {
@@ -36,23 +38,24 @@ public final class Printer {
         .collect(Collectors.joining(", ", "[", "]")));
   }
 
-  public static void printWinningStatistics(Lottos userLottos, Lotto winningLotto, Money userMoney) {
+  public static void printRank(WinningStatistics winningStatistics) {
     System.out.println("당첨 통계");
     System.out.println("----------");
-    WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
 
     printMessageAndCountOfRank(winningStatistics, THREE);
     printMessageAndCountOfRank(winningStatistics, FOUR);
     printMessageAndCountOfRank(winningStatistics, FIVE);
     printMessageAndCountOfRank(winningStatistics, SIX);
+  }
 
+  public static void printResult(WinningStatistics winningStatistics, Money userMoney) {
     long winnings = winningStatistics.totalMoney().toInteger();
     double yield = (double) winnings / userMoney.toInteger();
 
     System.out.println("당첨금: " + winnings + "원");
     System.out.printf("총 수익률은 %.2f입니다.", yield);
-    if (yield < 1) {
-      System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    if (yield < CRITERION) {
+      System.out.print("(기준이 " + CRITERION + "이기 때문에 결과적으로 손해라는 의미임)");
     }
     System.out.println();
   }
