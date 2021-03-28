@@ -11,6 +11,6 @@ public class LottoTicketPriceTest {
     @DisplayName("로또 가격 객체 생성")
     public void create() throws Exception {
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
-        assertThat(lottoTicketPrice.price()).isEqualTo(1000);
+        assertThat(lottoTicketPrice.price()).isEqualTo(1_000);
     }
 }

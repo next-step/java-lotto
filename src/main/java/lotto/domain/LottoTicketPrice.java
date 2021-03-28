@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoTicketPrice {
 
-    private static final int STANDARD_PRICE = 1000;
+    private static final int STANDARD_PRICE = 1_000;
     private final int lottoTicketPrice;
 
     public LottoTicketPrice() {

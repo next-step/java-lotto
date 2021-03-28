@@ -10,7 +10,7 @@ public class TotalPrizeTest {
     @Test
     @DisplayName("총 당첨 금액 생성")
     public void create() throws Exception {
-        TotalPrize totalPrize = new TotalPrize(1000);
-        assertThat(totalPrize).isEqualTo(new TotalPrize(1000));
+        TotalPrize totalPrize = new TotalPrize(1_000);
+        assertThat(totalPrize).isEqualTo(new TotalPrize(1_000));
     }
 }

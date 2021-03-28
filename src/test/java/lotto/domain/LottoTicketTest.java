@@ -30,6 +30,6 @@ public class LottoTicketTest {
         int price = lottoTicket.price();
 
         //then
-        assertThat(price).isEqualTo(1000);
+        assertThat(price).isEqualTo(1_000);
     }
 }
