@@ -3,15 +3,18 @@ package step02.code.common;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import step02.code.domain.Lotto;
+
 public class ResultView {
-  public static void myLotto(List<List<Integer>> lottos) {
+  public static void myLotto(List<Lotto> lottos) {
     System.out.println(lottos.size() + "를 구매했습니다.");
     lottos.forEach(ResultView::lotto);
   }
 
-  public static void lotto(List<Integer> lotto) {
-    String str = lotto.stream()
-                  .map(Object::toString)
+  public static void lotto(Lotto lotto) {
+    String str = lotto.lotto()
+                  .stream()
+                  .map((number) -> Integer.toString(number.number()))
                   .collect(Collectors.joining(", "));
     System.out.println("[" + str + "]");
   }

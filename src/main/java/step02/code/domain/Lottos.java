@@ -49,9 +49,8 @@ public class Lottos {
       .collect(Collectors.toMap(matched -> matched, matched -> 1, Integer::sum));
   }
 
-  public List<List<Integer>> lottos() {
+  public List<Lotto> lottos() {
     return lottos.stream()
-      .map(Lotto::lotto)
       .collect(Collectors.toList());
   }
 }

@@ -33,9 +33,9 @@ public class LottosTest {
   @RepeatedTest(value = 100)
   @DisplayName("lotto 생성시, 최소값 1, 최대값 45 안의 6자리 숫자가 생성되는지 테스트")
   public void lottoNumber() {
-    List<Integer> lotto = new Lotto(new RandomNumber()).lotto();
-    int min = lotto.stream().min(Integer::compare).orElse(-1);
-    int max = lotto.stream().max(Integer::compare).orElse(46);
+    List<Number> lotto = new Lotto(new RandomNumber()).lotto();
+    int min = lotto.stream().map(Number::number).min(Integer::compare).orElse(-1);
+    int max = lotto.stream().map(Number::number).max(Integer::compare).orElse(46);
 
     assertThat(lotto.size()).isEqualTo(6);
     assertThat(min).isGreaterThan(0);
