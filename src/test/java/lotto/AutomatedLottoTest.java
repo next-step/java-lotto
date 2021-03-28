@@ -40,7 +40,7 @@ public class AutomatedLottoTest {
 
         Lotto lotto = lottoMachine.generate();
 
-        assertThat(lotto).isEqualTo(new Lotto(10, 13, 44, 17, 20, 33));
+        assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
 
     @Test
