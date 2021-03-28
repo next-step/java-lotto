@@ -1,0 +1,38 @@
+package lotto;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+/**
+ * [ 기능 구현 목록 ]
+ * 1. LottoMachine은 1~45까지 범위에서 숫자 6개를 Lotto 객체를 만든다.
+ *     - 추첨 정책은 인터페이스를 활용하여 갈아 끼울 수 있도록 한다.
+ *
+ * 2. 로또 구입 금액을 입력하면, 구입 금액에 해당하는 만큼의 로또를 발급한다.
+ *     - 로또 1장당 금액은 1,000원이다.
+ *
+ * 3. Lotto 객체 간에 서로 번호를 비교하여, 일치하는 번호 개수를 반환할 수 있도록 한다.
+ *
+ * 4. 일치하는 번호 개수에 해당하는 Prize를 반환할 수 있도록 한다.
+ *
+ * 5. 당첨 번호를 입력하면, 일치하는 번호 개수에 따라 Prize를 매긴다.
+ *     - 6개면 Prize.FIRST, 5개면 Prize.SECOND, 4개면 Prize.THIRD, 3개면 Prize.FOURTH.
+ *
+ * 6. 총 로또 구입액과 당첨 금액으로 수익률을 계산한다.
+ */
+public class AutomatedLottoTest {
+
+    @Test
+    @DisplayName("1~45까지 범위에서 숫자 6개를 가진 Lotto 객체를 만든다.")
+    void lottoCreateTest() {
+        LottoMachine lottoMachine = new LottoMachine();
+
+        Lotto lotto = lottoMachine.generate();
+
+        assertThat(lotto).isEqualTo(new Lotto(10, 13, 44, 17, 20, 33));
+    }
+}
