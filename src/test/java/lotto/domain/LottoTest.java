@@ -29,7 +29,7 @@ class LottoTest {
         LottoRank lottoRank = lotto.inquiryRank(Arrays.stream(winNumbers.split(",")).mapToInt(Integer::valueOf).toArray());
 
         // then
-        assertThat(LottoRank.getEnum(matchCount)).isEqualTo(lottoRank);
+        assertThat(LottoRank.inquiryRank(matchCount)).isEqualTo(lottoRank);
     }
 
     @Test

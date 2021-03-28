@@ -22,7 +22,7 @@ public class Lotto {
         for (LottoNumber lottoNumber : lottoNumberList) {
             matchCount += Arrays.stream(winNumbers).filter(winNumber -> lottoNumber.getLottoNumber() == winNumber).count();
         }
-        return LottoRank.getEnum(matchCount);
+        return LottoRank.inquiryRank(matchCount);
     }
 
     public static void validateLottoNumbers(int[] winNumbers) {

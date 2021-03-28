@@ -23,7 +23,7 @@ public enum LottoRank {
         return winAmount;
     }
 
-    public static LottoRank getEnum(int matchCount) {
+    public static LottoRank inquiryRank(int matchCount) {
         if (isLose(matchCount)) {
             return LOSE;
         }
