@@ -58,7 +58,7 @@ public class AutomatedLottoTest {
     @CsvSource(value = {"1200:1", "3800:3", "8800:8", "0:0", "100:0", "16000:16"}, delimiter = ':')
     @DisplayName("구입 금액을 입력하면, 금액에 해당하는 만큼 로또를 발급한다.")
     void lottoPurchaseTest(long money, long lottoQuantity) {
-        LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator());
+        LottoShop lottoShop = new LottoShop(money, new TestLottoGenerator());
 
         List<Lotto> lottories = lottoShop.purchase();
 
