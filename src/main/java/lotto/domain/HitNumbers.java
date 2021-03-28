@@ -10,9 +10,6 @@ public class HitNumbers {
     this.bonusNumber = generateBonusNumber(bonusNumber);
   }
 
-  public HitNumbers() {
-  }
-
   private LottoNumber generateBonusNumber(int bonusNumber) {
     LottoNumber number = LottoNumber.of(bonusNumber);
     validateBonus(number);
