@@ -11,10 +11,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
   public static final String ILLEGAL_LOTTO_NUMBER = "유효한 로또 번호가 아닙니다.";
   public static final int MIN = 1;
   public static final int MAX = 45;
-  private static final List<LottoNumber> lottoNumberPool;
+  public static final List<LottoNumber> LOTTO_NUMBER_POOL;
 
   static {
-    lottoNumberPool = Collections.unmodifiableList(
+    LOTTO_NUMBER_POOL = Collections.unmodifiableList(
         IntStream.rangeClosed(MIN, MAX)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList()));
@@ -34,7 +34,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
       throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
     }
     int lottoNumberIndex = lottoNumber - 1;
-    return lottoNumberPool.get(lottoNumberIndex);
+    return LOTTO_NUMBER_POOL.get(lottoNumberIndex);
   }
 
   public static LottoNumber valueOf(String lottoNumber) {
