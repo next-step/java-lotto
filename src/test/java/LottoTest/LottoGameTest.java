@@ -1,5 +1,6 @@
 package LottoTest;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +39,17 @@ public class LottoGameTest {
         assertThat(lottoGame.contains(LottoNumber.create(number))).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("numbers()의 반환값이 Immutable인지 테스트")
+    void When_Number_Then_ImmutableObject() {
+        LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        List<LottoNumber> lottoNumbers = lottoGame.numbers();
+
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+                .isThrownBy(() -> lottoNumbers.add(LottoNumber.create(10)));
+    }
+    
     @ParameterizedTest
     @MethodSource("provideCountOfMatchTestInput")
     @DisplayName("countOfMatch 테스트")

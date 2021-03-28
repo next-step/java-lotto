@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-    Set<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public LottoGame(String numbers) {
         this(castToListInteger(numbers));
@@ -33,9 +33,10 @@ public class LottoGame {
     }
 
     public List<LottoNumber> numbers() {
-        return new ArrayList<>(this.numbers).stream()
-                .sorted(LottoNumber::compare)
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(
+                new ArrayList<>(numbers).stream()
+                        .sorted(LottoNumber::compare)
+                        .collect(Collectors.toList()));
     }
 
     @Override
