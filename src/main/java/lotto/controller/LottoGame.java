@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Amount;
 import lotto.domain.HitNumbers;
-import lotto.domain.Lottery;
+import lotto.domain.LotteryMachine;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,7 +18,7 @@ public class LottoGame {
 
     HitNumbers hitNumbers = new HitNumbers(InputView.inputPrizeNumber(),
         InputView.inputBonusNumber());
-    Lottery lottery = new Lottery(hitNumbers);
+    LotteryMachine lottery = new LotteryMachine(hitNumbers);
     lottery.draw(lottos);
 
     ResultView.showLotteryResult(lottery, amount);

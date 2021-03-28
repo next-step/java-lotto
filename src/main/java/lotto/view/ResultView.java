@@ -5,7 +5,7 @@ import java.util.Collections;
 import lotto.constant.Constant;
 import lotto.domain.Amount;
 import lotto.domain.Hit;
-import lotto.domain.Lottery;
+import lotto.domain.LotteryMachine;
 import lotto.domain.Lottos;
 import lotto.domain.Result;
 
@@ -21,7 +21,7 @@ public class ResultView {
     System.out.println();
   }
 
-  public static void showLotteryResult(Lottery lottery, Amount amount) {
+  public static void showLotteryResult(LotteryMachine lottery, Amount amount) {
     Result result = lottery.getResult();
     System.out.println("\n당첨 통계\n---------");
     System.out.println(showLotteryResult(result));

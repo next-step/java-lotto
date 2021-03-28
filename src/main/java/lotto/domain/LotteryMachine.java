@@ -1,11 +1,11 @@
 package lotto.domain;
 
-public class Lottery {
+public class LotteryMachine {
 
   private final HitNumbers hitNumbers;
   private final Result result = new Result();
 
-  public Lottery(HitNumbers hitNumbers) {
+  public LotteryMachine(HitNumbers hitNumbers) {
     this.hitNumbers = hitNumbers;
   }
 
