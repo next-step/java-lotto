@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
@@ -12,10 +13,22 @@ public class WinningNumbers {
     private final Set<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
 
+    public WinningNumbers(String[] numbers, String bonusNumber) {
+        this(new ArrayList<LottoNumber>(Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())), new LottoNumber(bonusNumber));
+    }
+
+    public WinningNumbers(String[] numbers, int bonusNumber) {
+        this(new ArrayList<LottoNumber>(Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())), new LottoNumber(bonusNumber));
+    }
+
     public WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
-        this.bonusNumber = bonusNumber;
         validateLottoSize();
+        this.bonusNumber = bonusNumber;
         validateBonusNumber();
     }
 
