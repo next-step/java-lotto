@@ -29,6 +29,16 @@ public class RanksCount {
         }
     }
 
+    public TotalPrize totalPrize() {
+        int totalPrize = 0;
+
+        for (Map.Entry<WinningRank, Integer> rank : ranksCount.entrySet()) {
+            totalPrize += rank.getKey().prize() * rank.getValue();
+        }
+
+        return new TotalPrize(totalPrize);
+    }
+
     public int countOf(WinningRank rank) {
         return ranksCount.get(rank);
     }

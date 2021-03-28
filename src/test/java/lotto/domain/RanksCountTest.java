@@ -40,4 +40,18 @@ public class RanksCountTest {
         //then
         assertThat(count).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("총 당첨 금액 구하기")
+    public void totalPrize() throws Exception {
+        //given
+        RanksCount ranksCount = new RanksCount();
+        ranksCount.add(Arrays.asList(WinningRank.FIRST_PLACE, WinningRank.FIRST_PLACE, WinningRank.SECOND_PLACE, WinningRank.THIRD_PLACE));
+
+        //when
+        TotalPrize totalPrize = ranksCount.totalPrize();
+
+        //then
+        assertThat(totalPrize.totalPrize()).isEqualTo(2_000_000_000 + 2_000_000_000 + 1_500_000 + 50_000);
+    }
 }
