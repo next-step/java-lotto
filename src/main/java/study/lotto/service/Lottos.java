@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static study.lotto.util.Constants.LOTTO_PRICE;
+import static study.lotto.domain.Money.LOTTO_PRICE;
 
 /**
  * Lotto 클래스의 일급 컬렉션

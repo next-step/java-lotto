@@ -7,9 +7,11 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static study.lotto.util.Constants.*;
-
 public class WinningLotto {
+    public static final String GUIDE_ERR_DONT_CONTAINS_BONUS_NUMBER = "보너스 번호는 당첨 번호에 포함될 수 없습니다.";
+    public static final String SPACIAL_CHARACTER_SPACE = "\\s";
+    public static final String SPLIT_DELIMITER = ",";
+    public static final String WHITE_SPACE = "";
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;

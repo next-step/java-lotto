@@ -8,13 +8,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static study.lotto.service.LottoFactory.LOTTO_MAX_SIZE;
-import static study.lotto.util.Constants.GUIDE_ERR_LOTTO_SIZE;
 
 /**
  * 하나의 로또 게임 하나
  */
 public class Lotto {
-
+    public static final String GUIDE_ERR_LOTTO_SIZE = "로또 번호가 6개가 아닙니다.";
     private final Set<LottoNumber> lottoNumbers;
 
     private Lotto(final Collection<LottoNumber> lottoNumbers) {

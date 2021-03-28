@@ -5,11 +5,11 @@ import study.lotto.exception.LottoException;
 
 import java.util.Objects;
 
-import static study.lotto.util.Constants.GUIDE_ERR_CANNOT_PARSE_STRING_TO_INTEGER;
-import static study.lotto.util.Constants.GUIDE_ERR_NOT_FOUND_MONEY;
 import static study.lotto.util.Validation.isNotNullAndIsBlank;
 
 public class RequestLottoArgument {
+    public static final String GUIDE_ERR_CANNOT_PARSE_STRING_TO_INTEGER = "숫자로 캐스팅 할 수 없는 값 입니다.";
+    public static final String GUIDE_ERR_NOT_FOUND_MONEY = "금액을 지불하셔야 합니다.";
 
     private final Money money;
     private final int autoCount;

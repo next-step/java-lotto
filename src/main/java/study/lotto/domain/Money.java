@@ -5,9 +5,11 @@ import study.lotto.exception.LottoException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import static study.lotto.util.Constants.*;
-
 public class Money {
+    public static final String GUIDE_ERR_GREATER_THAN_LOTTO_COUNT = "구매할 수 있는 로또 갯수보다 많습니다.";
+    public static final String GUIDE_ERR_CANNOT_BUY_LOTTO = "구매가 불가능합니다.";
+    public static final String GUIDE_ERR_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
+    public static final int LOTTO_PRICE = 1000;
 
     private final BigDecimal money;
 
