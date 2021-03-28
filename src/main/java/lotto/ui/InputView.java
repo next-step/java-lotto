@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoStrategy.LOTTO_SIZE;
 import static lotto.domain.Price.LOTTO_PRICE;
+import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
 
 public class InputView {
 
@@ -18,6 +20,7 @@ public class InputView {
     public static final String BUYING_MESSAGE_AFTER = "개를 구매했습니다.";
     public static final String WINNING_MESSAGE_BEFORE = "지난주 당첨 번호를 입력해 주세요. (구분자는 ', ')";
     public static final String DELIMITER = ", ";
+
 
     private static Scanner sc;
 
@@ -33,6 +36,7 @@ public class InputView {
     public static List<LottoNumber> inputWinning() {
         System.out.println(WINNING_MESSAGE_BEFORE);
         String[] result = sc.nextLine().split(DELIMITER);
+        checkNumber(result);
 
         return Arrays.stream(result)
                 .map(Integer::parseInt)
@@ -44,6 +48,13 @@ public class InputView {
         if (sc == null) {
             sc = new Scanner(System.in);
         }
+    }
+
+    private static boolean checkNumber(String[] result) {
+        if (result.length != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ILLEGAL_LOTTO_SIZE);
+        }
+        return true;
     }
 
 }
