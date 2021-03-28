@@ -8,7 +8,7 @@ public class RanksCount {
     private static final int INIT = 0;
     private static final int MATCHED_COUNT_MIN = 3;
     private static final int PLUS = 1;
-    private final TreeMap<WinningRank, Integer> ranksCount;
+    private final Map<WinningRank, Integer> ranksCount;
 
     public RanksCount() {
         this.ranksCount = new TreeMap<>(Comparator.comparingInt(WinningRank::matchedCount));
