@@ -21,4 +21,19 @@ class WinningScoreTest {
         );
 
     }
+
+    @DisplayName("WinningScore 값 반환 테스트")
+    @Test
+    void 값_반환() {
+
+        assertAll(
+                () -> assertThat(WinningScore.MISS.getWinningAmount()).isEqualTo(0),
+                () -> assertThat(WinningScore.THREE.getWinningAmount()).isEqualTo(5_000),
+                () -> assertThat(WinningScore.FOUR.getWinningAmount()).isEqualTo(50_000),
+                () -> assertThat(WinningScore.FIVE.getWinningAmount()).isEqualTo(1_500_000),
+                () -> assertThat(WinningScore.SIX.getWinningAmount()).isEqualTo(1_500_000)
+        );
+
+    }
+
 }

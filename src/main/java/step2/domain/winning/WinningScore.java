@@ -8,7 +8,7 @@ public enum WinningScore {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    SIX(6, 1_500_000);
 
     private final int correctCount;
     private final long winningAmount;
@@ -22,6 +22,14 @@ public enum WinningScore {
         WinningScore winningScore = Arrays.stream(WinningScore.values())
                 .filter(operation -> operation.correctCount == realCorrectCount)
                 .findFirst().orElse(WinningScore.MISS);
+    }
+
+    public final int getCorrectCount() {
+        return correctCount;
+    }
+
+    public final long getWinningAmount() {
+        return winningAmount;
     }
 
     @Override
