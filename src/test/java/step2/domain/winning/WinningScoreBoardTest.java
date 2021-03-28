@@ -69,4 +69,25 @@ class WinningScoreBoardTest {
                 () -> assertThat(winningScoreBoard.get(WinningScore.SIX)).isEqualTo(expected)
         );
     }
+
+    @DisplayName("WinningScoreBoard 인스턴스가 총 수익률을 반환하는지 테스트")
+    @Test
+    void 반환_수익률() {
+        // then
+        Map<WinningScore, Integer> testMap = new HashMap<>();
+        int expected = 2_001_555_000;
+
+        // when
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
+        winningScoreBoard.increaseCount(WinningScore.MISS);
+        winningScoreBoard.increaseCount(WinningScore.THREE);
+        winningScoreBoard.increaseCount(WinningScore.FOUR);
+        winningScoreBoard.increaseCount(WinningScore.FIVE);
+        winningScoreBoard.increaseCount(WinningScore.SIX);
+
+        int actual = winningScoreBoard.getYield();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
 }
