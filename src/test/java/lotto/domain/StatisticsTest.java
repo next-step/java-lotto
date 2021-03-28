@@ -2,45 +2,38 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
 import lotto.view.StatisticsDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class StatisticsTest {
 
-  @DisplayName("통계 계산 케이스 1")
+  private Statistics statistics;
+
+  @BeforeEach
+  void setUp() {
+    statistics = new Statistics();
+  }
+
+  @DisplayName("2등이 1에서 2로 되면 2를 출력")
   @Test
-  void calculate_statistics_case1() {
-    Statistics statistics = new Statistics(Arrays.asList(0, 0, 3));
-    long result = statistics.calculateStatistics(new StatisticsDto(3, new Money(1000)));
-    assertThat(result).isEqualTo(1);
+  void count_game() {
+    statistics.recordRanking(Ranking.SECOND);
+    Integer countGame = statistics.countGame(new StatisticsDto(Ranking.SECOND));
+    assertThat(countGame).isEqualTo(1);
 
-    double earningRate = statistics.getEarningRate(new Money(3000));
-    assertThat(earningRate).isEqualTo(calculate(1000, 3000));
+    statistics.recordRanking(Ranking.SECOND);
+    Integer updatedCountGame = statistics.countGame(new StatisticsDto(Ranking.SECOND));
+    assertThat(updatedCountGame).isEqualTo(2);
   }
 
-  @DisplayName("통계 계산 케이스 2")
+  @DisplayName("수익률 계산")
   @Test
-  void calculate_statistics_case2() {
-    Statistics statistics = new Statistics(Arrays.asList(0, 0, 3, 4, 3, 4, 3, 3, 4, 4, 4, 4));
-    long result3 = statistics.calculateStatistics(new StatisticsDto(3, new Money(1000)));
-    long result4 = statistics.calculateStatistics(new StatisticsDto(4, new Money(10000)));
-
-    assertThat(result3).isEqualTo(4);
-    assertThat(result4).isEqualTo(6);
-
-    double earningRate = statistics.getEarningRate(new Money(12000));
-    assertThat(earningRate).isEqualTo(calculate(64000,12000));
+  void calculate_earning_rate() {
+    statistics.recordRanking(Ranking.THIRD);
+    assertThat(statistics.getEarningRate(new Money(10000))).isEqualTo(5.00);
   }
 
-  private double calculate(int win, int invest) {
-    return
-        new BigDecimal(win)
-            .divide(new BigDecimal(invest), 2, RoundingMode.HALF_UP)
-            .doubleValue();
-  }
 
 }

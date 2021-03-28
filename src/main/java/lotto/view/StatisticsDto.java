@@ -1,19 +1,24 @@
 package lotto.view;
 
 import lotto.domain.Money;
+import lotto.domain.Ranking;
 
 public class StatisticsDto {
 
-  private int count;
+  private Ranking ranking;
   private Money price;
 
-  public StatisticsDto(int count, Money price) {
-    this.count = count;
+  public StatisticsDto(Ranking ranking) {
+    this.ranking = ranking;
+  }
+
+  public StatisticsDto(Ranking ranking, Money price) {
+    this.ranking = ranking;
     this.price = price;
   }
 
-  public int getCount() {
-    return count;
+  public Ranking getRanking() {
+    return ranking;
   }
 
   public Money getPrice() {

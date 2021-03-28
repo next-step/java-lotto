@@ -23,9 +23,6 @@ public class InputView {
     List<Integer> result  = Arrays.stream(winNumberString.split(","))
         .map(Integer::parseInt)
         .collect(Collectors.toList());
-    if (result.size() < 6) {
-      throw new IllegalArgumentException("당첨번호는 6개 이상 입력해야 합니다.");
-    }
     return result;
   }
 }

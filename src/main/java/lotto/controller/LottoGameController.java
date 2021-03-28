@@ -1,9 +1,13 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoGames;
+import java.util.stream.Collectors;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoBalls;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
+import lotto.domain.Ranking;
 import lotto.domain.Statistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -20,17 +24,24 @@ public class LottoGameController {
       return;
     }
 
-    LottoStore lottoStore = new LottoStore();
-    LottoGames lottoGames = lottoStore.sell(money);
+    LottoGame lottoGame = LottoStore.sell(money);
 
-    resultView.printBuyingLottoGame(lottoGames);
-
-    List<Integer> winNumbers = inputView.inputWinNumbers();
-    Statistics statistics = lottoGames.calculateStatistics(winNumbers);
-
-    resultView.printLottoResult(money,statistics);
+    resultView.printLottoBuySize(lottoGame);
+    resultView.printBuyingLottoGame(lottoGame);
 
 
+    LottoBalls winLottoBalls = toLottoBallList(inputView.inputWinNumbers());
+    Statistics statistics = lottoGame.countMatchLottoNumber(winLottoBalls);
+
+    resultView.printLottoResult(money, statistics);
+  }
+
+  private LottoBalls toLottoBallList(List<Integer> winNumbers) {
+    return new LottoBalls(
+        winNumbers.stream()
+            .map(LottoBall::new)
+            .collect(Collectors.toList())
+    );
   }
 
 }
