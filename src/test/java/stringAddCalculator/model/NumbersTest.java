@@ -34,4 +34,9 @@ class NumbersTest {
     }
 
 
+    @Test
+    @DisplayName("adding Numbers Test")
+    void getAddingResult() {
+        assertThat(numbers.getAddingResult()).isEqualTo(11);
+    }
 }
