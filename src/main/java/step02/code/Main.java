@@ -34,7 +34,7 @@ public class Main {
       ResultView.result(i, grade.prize(), matched);
     }
 
-    float rate = total / money;
+    float rate = (float) total / money;
     ResultView.rate(rate);
     
     InputView.close();
