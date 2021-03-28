@@ -15,6 +15,14 @@ public class HitCount {
         this.isHitBonusNumber = isHitBonusNumber;
     }
 
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public boolean isHitBonusNumber() {
+        return isHitBonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,10 +38,9 @@ public class HitCount {
 
     @Override
     public String toString() {
-        String message = Integer.toString(hitCount).concat("개 일치");
-        if (isHitBonusNumber) {
-            message = message.concat(", 보너스 볼 일치");
-        }
-        return message;
+        return "HitCount{" +
+                "hitCount=" + hitCount +
+                ", isHitBonusNumber=" + isHitBonusNumber +
+                '}';
     }
 }

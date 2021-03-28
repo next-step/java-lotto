@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.HitCount;
 import lotto.domain.Prize;
 import lotto.domain.Stats;
 
@@ -28,10 +29,19 @@ public class LottoStatsView {
         Map<String, Integer> countHitStats = stats.countHitStats();
 
         for (Prize prize : Prize.values()) {
-            System.out.println(String.format("%s (%,d원)- %d개", prize.getHitCount(),
+            System.out.println(String.format("%s (%,d원)- %d개",
+                    makeHitCountMessage(prize.getHitCount()),
                     prize.getPrizeMoney().getHitMoney(),
                     countHitStats.get(prize.name())));
         }
+    }
+
+    private String makeHitCountMessage(HitCount hitCount) {
+        String message = hitCount.getHitCount() + "개 일치";
+        if (hitCount.isHitBonusNumber()) {
+            message = message.concat(", 보너스 볼 일치");
+        }
+        return message;
     }
 
     private void printReturnRate() {
