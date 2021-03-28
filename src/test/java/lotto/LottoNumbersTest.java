@@ -33,6 +33,17 @@ public class LottoNumbersTest {
   }
 
   @Test
+  @DisplayName("[LottoNumbers] 입력 값으로으로 로또 번호 생성 테스트")
+  void createLottoNumbers_inputNumbers() {
+    String inputNumbers = "1, 2, 3, 4, 5, 6";
+    lottoNumbers = new LottoNumbers(inputNumbers);
+
+    int size = lottoNumbers.numbers().size();
+
+    assertThat(size).isEqualTo(6);
+  }
+
+  @Test
   @DisplayName("[LottoNumbers] 로또 번호 크기 검증 테스트")
   void validateSizeTest() {
     List<LottoNumber> numbers = IntStream.rangeClosed(1, 7)
