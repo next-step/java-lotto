@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface MakeNumber {
-  public List<Integer> make();
+  List<Integer> make();
 }
