@@ -15,4 +15,9 @@ public class InputView {
         System.out.println(Message.LAST_PRIZE);
         return scanner.nextLine();
     }
+
+    public static int getBonus() {
+        System.out.println(Message.BONUS);
+        return Integer.parseInt(scanner.nextLine());
+    }
 }
