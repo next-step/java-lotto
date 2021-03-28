@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LastWeekWinnerNumber;
 import lotto.domain.Lotteries;
+import lotto.domain.LottoNumber;
 import lotto.domain.RankingResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -17,6 +18,7 @@ public class LottoController {
 			Lotteries lotteries = getLottoGames(purchasePrice);
 			RankingResult rankingResult = getRankingResult(lotteries);
 			printStatus(rankingResult, purchasePrice);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -41,9 +43,8 @@ public class LottoController {
 
 		InputView inputBonusNumberView = new InputView("보너스 번호를 입력해주세요.");
 		int bonusNumberInput = inputBonusNumberView.getInputInt();
-
 		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber(lastWeekWinnerNumberInput,
-			bonusNumberInput);
+			new LottoNumber(bonusNumberInput));
 		return lotteries.calculateRanking(lastWeekWinnerNumber);
 	}
 
