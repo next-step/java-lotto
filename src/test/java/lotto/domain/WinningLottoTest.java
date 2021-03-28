@@ -32,4 +32,16 @@ public class WinningLottoTest {
         lottoNumberList.add(new LottoNumber(6));
         assertThatThrownBy(() -> new WinningLotto(lottoNumberList, lottoNumberList.get(6))).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("당첨 로또와 비교해 결과를 반환한다")
+    @Test
+    void lottoIsWinTest() {
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumberList.add(new LottoNumber(i));
+        }
+        Lotto createdLotto = new Lotto(lottoNumberList);
+        WinningLotto prizeLotto = new WinningLotto(lottoNumberList, new LottoNumber(7));
+        assertThat(prizeLotto.howMatch(createdLotto)).isEqualTo(ResultMap.FIRST);
+    }
 }
