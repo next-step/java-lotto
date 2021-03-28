@@ -6,13 +6,12 @@ import java.util.stream.Collectors;
 public class ResultView {
   public static void myLotto(List<List<Integer>> lottos) {
     System.out.println(lottos.size() + "를 구매했습니다.");
-    lottos.stream()
-      .forEach(ResultView::lotto);
+    lottos.forEach(ResultView::lotto);
   }
 
   public static void lotto(List<Integer> lotto) {
     String str = lotto.stream()
-                  .map(num -> num.toString())
+                  .map(Object::toString)
                   .collect(Collectors.joining(", "));
     System.out.println("[" + str + "]");
   }
