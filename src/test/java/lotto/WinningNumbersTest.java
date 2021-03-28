@@ -45,17 +45,22 @@ class WinningNumbersTest {
     @Test
     @DisplayName("보너스번호 포함한 우승번호찾기")
     void isWinnerWithBonusNumber() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(5,7,9,11,13));
+        LottoNumbers lottoNumbers3 = new LottoNumbers(Arrays.asList(15,17,19,21,23));
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(lottoNumbers);
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,5});
-        winningNumbers.bonusNumber(7);
+        lottoNumbersList.add(lottoNumbers1);
+        lottoNumbersList.add(lottoNumbers2);
+        lottoNumbersList.add(lottoNumbers3);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,9,11,13,15,17,19,21,25});
+        winningNumbers.bonusNumber(23);
         Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lottoNumbersList);
         Map<Integer, Integer> bonusNumberMap = winningNumbers.getBonusNumber();
         System.out.println(winNumbersMap.toString());
-        assertThat(winNumbersMap.get(3)).isEqualTo(0);
+        assertThat(winNumbersMap.get(3)).isEqualTo(2);
         assertThat(winNumbersMap.get(4)).isEqualTo(1);
         assertThat(winNumbersMap.get(5)).isEqualTo(0);
+        assertThat(bonusNumberMap.get(3)).isEqualTo(0);
         assertThat(bonusNumberMap.get(4)).isEqualTo(1);
     }
 

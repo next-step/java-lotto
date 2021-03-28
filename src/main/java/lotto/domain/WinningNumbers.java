@@ -50,8 +50,7 @@ public class WinningNumbers {
             }
         }
         if (lottoNumber.contains(bonusNumber)) {
-            correct++;
-            bonusMap.put(correct, map.getOrDefault(correct, 0) + 1);
+            bonusMap.put(correct, 1);
         }
         map.put(correct, map.getOrDefault(correct, 0) + 1);
     }
