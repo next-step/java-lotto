@@ -9,13 +9,13 @@ import static study.lotto.util.Constants.*;
 
 public class Money {
 
-    private final int money;
+    private final BigDecimal money;
 
     private Money(final int money) {
         if(money < LOTTO_PRICE) {
             throw new LottoException(GUIDE_ERR_CANNOT_BUY_LOTTO);
         }
-        this.money = money;
+        this.money = new BigDecimal(money);
     }
 
     public static Money of(final int money) {
@@ -36,21 +36,18 @@ public class Money {
     }
 
     public int autoSize(final int manualCount) {
-        return BigDecimal.valueOf(money)
-                .divide(BigDecimal.valueOf(LOTTO_PRICE))
+        return money.divide(BigDecimal.valueOf(LOTTO_PRICE))
                 .subtract(BigDecimal.valueOf(manualCount))
                 .intValue();
     }
 
     public int totalSize() {
-        return BigDecimal.valueOf(money)
-                .divide(BigDecimal.valueOf(LOTTO_PRICE))
+        return money.divide(BigDecimal.valueOf(LOTTO_PRICE))
                 .intValue();
     }
 
     public void ensureBuyLotto(int manualCount) {
-        int totalSize = BigDecimal.valueOf(money)
-                .divide(BigDecimal.valueOf(LOTTO_PRICE))
+        int totalSize = money.divide(BigDecimal.valueOf(LOTTO_PRICE))
                 .intValue();
         if(manualCount > totalSize) {
             throw new LottoException(GUIDE_ERR_GREATER_THAN_LOTTO_COUNT);
@@ -58,11 +55,11 @@ public class Money {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Money)) return false;
         final Money money1 = (Money) o;
-        return money == money1.money;
+        return Objects.equals(money, money1.money);
     }
 
     @Override
