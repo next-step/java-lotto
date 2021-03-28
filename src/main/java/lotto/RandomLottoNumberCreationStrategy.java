@@ -15,7 +15,7 @@ public class RandomLottoNumberCreationStrategy implements LottoNumberCreationStr
   static {
     lottoNumberPool = new ArrayList<>(LottoNumber.MAX);
     for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
-      lottoNumberPool.add(new LottoNumber(i));
+      lottoNumberPool.add(LottoNumber.valueOf(i));
     }
   }
 

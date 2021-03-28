@@ -16,7 +16,7 @@ class LottoNumberTest {
   @DisplayName("로또 번호 생성 테스트")
   @ValueSource(ints = {1, 2, 3, 4, 5})
   void create(int value) {
-    assertThat(new LottoNumber(value)).isEqualTo(new LottoNumber(value));
+    assertThat(LottoNumber.valueOf(value)).isEqualTo(LottoNumber.valueOf(value));
   }
 
   @ParameterizedTest
@@ -24,7 +24,7 @@ class LottoNumberTest {
   @ValueSource(ints = {0, 46})
   void createFail(int value) {
     assertThatIllegalArgumentException()
-        .isThrownBy(() -> new LottoNumber(value))
+        .isThrownBy(() -> LottoNumber.valueOf(value))
         .withMessage(ILLEGAL_LOTTO_NUMBER);
   }
 
@@ -32,8 +32,8 @@ class LottoNumberTest {
   @DisplayName("로또 번호 비교 테스트")
   void compare() {
     // given
-    LottoNumber smaller = new LottoNumber(1);
-    LottoNumber bigger = new LottoNumber(6);
+    LottoNumber smaller = LottoNumber.valueOf(1);
+    LottoNumber bigger = LottoNumber.valueOf(6);
 
     // when
     // then

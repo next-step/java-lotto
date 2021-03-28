@@ -1,28 +1,48 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
   public static final String ILLEGAL_LOTTO_NUMBER = "유효한 로또 번호가 아닙니다.";
   public static final int MIN = 1;
   public static final int MAX = 45;
+  private static final List<LottoNumber> lottoNumberPool;
+
+  static {
+    lottoNumberPool = Collections.unmodifiableList(
+        IntStream.rangeClosed(MIN, MAX)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList()));
+  }
 
   private final int lottoNumber;
 
-  public LottoNumber(int lottoNumber) {
+  private LottoNumber(int lottoNumber) {
     if (lottoNumber < MIN || lottoNumber > MAX) {
       throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
     }
     this.lottoNumber = lottoNumber;
   }
 
-  public String toStringValue() {
-    return String.valueOf(lottoNumber);
+  public static LottoNumber valueOf(int lottoNumber) {
+    if (lottoNumber < MIN || lottoNumber > MAX) {
+      throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
+    }
+    int lottoNumberIndex = lottoNumber - 1;
+    return lottoNumberPool.get(lottoNumberIndex);
   }
 
   public static LottoNumber valueOf(String lottoNumber) {
-    return new LottoNumber(Integer.parseInt(lottoNumber));
+    return valueOf(Integer.parseInt(lottoNumber));
+  }
+
+  public String toStringValue() {
+    return String.valueOf(lottoNumber);
   }
 
   @Override

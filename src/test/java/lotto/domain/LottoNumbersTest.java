@@ -33,7 +33,7 @@ class LottoNumbersTest {
   @DisplayName("생성")
   void create() {
     LottoNumberCreationStrategy lottoNumberCreationStrategy = () -> Stream.of(1, 2, 3, 4, 5, 6)
-        .map(LottoNumber::new)
+        .map(LottoNumber::valueOf)
         .collect(Collectors.toList());
     assertThat(new LottoNumbers(lottoNumberCreationStrategy).size()).isEqualTo(LOTTO_NUMBER_COUNT);
   }
