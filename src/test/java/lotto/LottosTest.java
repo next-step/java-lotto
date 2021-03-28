@@ -13,7 +13,7 @@ public class LottosTest {
         int payLotto = 14000;
         Lottos lottos;
         // WHEN
-        lottos = new Lottos(payLotto, new NumbersGenerator());
+        lottos = new Lottos(payLotto);
         // THEN
         assertThat(lottos.getLottos().size()).isEqualTo(14);
 

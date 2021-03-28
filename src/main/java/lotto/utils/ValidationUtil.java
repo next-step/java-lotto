@@ -13,7 +13,7 @@ public class ValidationUtil {
     }
 
     public static void isPurchaseAmount(String num) {
-        if (Integer.parseInt(num) <= 1000) {
+        if (Integer.parseInt(num) < 1000) {
             throw new IllegalArgumentException(ERROR_AMOUNT_MSG);
         }
     }

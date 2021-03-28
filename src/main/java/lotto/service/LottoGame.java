@@ -13,12 +13,11 @@ public class LottoGame {
     }
 
     public void start() {
-        Lottos lottos = new Lottos(payLotto, new NumbersGenerator());
+        Lottos lottos = new Lottos(payLotto);
         ResultView.printLottoNumber(lottos);
-        Lotto winningLotto = new Lotto(new NumbersSelector(InputView.enterLastNumber()));
+        Lotto winningLotto = new Lotto(InputView.enterLastNumber());
         Prize prize = new Prize(lottos, winningLotto);
-        Stats stats = new Stats(prize);
         ResultView.printLottoResult(prize);
-        ResultView.printLottoYield(stats, payLotto);
+        ResultView.printLottoYield(prize, payLotto);
     }
 }

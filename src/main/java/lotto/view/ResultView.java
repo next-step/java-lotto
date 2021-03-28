@@ -36,8 +36,8 @@ public class ResultView {
         System.out.println("================");
     }
 
-    public static void printLottoYield(Stats stats, int payLotto) {
-        double yield = stats.calYield(payLotto);
+    public static void printLottoYield(Prize prize, int payLotto) {
+        double yield = prize.calYield(payLotto);
         System.out.format(YIELD_FORMAT_STRING, yield);
     }
 }

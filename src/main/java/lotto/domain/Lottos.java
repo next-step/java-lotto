@@ -8,6 +8,10 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Lottos(int payNum) {
         this.lottos = generateLotto(payNum / PRICE);
     }
