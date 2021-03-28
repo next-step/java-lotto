@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class HitNumbers {
 
-  private LottoNumbers hitNumbers;
-  private LottoNumber bonusNumber;
+  private final LottoNumbers hitNumbers;
+  private final LottoNumber bonusNumber;
 
   public HitNumbers(String inputHit, int bonusNumber) {
     this.hitNumbers = new LottoNumbers(inputHit);
