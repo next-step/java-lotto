@@ -7,7 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class Lotto { 
+public final class Lotto {
+
     private static final String COMMA = ",";
     private final List<LottoNumber> lottoNumbers;
 
@@ -34,7 +35,8 @@ public final class Lotto {
         return lottoNumbers == null;
     }
 
-    private static List<LottoNumber> toLottoNumberList(String sentence) {
+
+    private static final List<LottoNumber> toLottoNumberList(String sentence) {
         return Stream.of(sentence.split(COMMA))
                 .map(String::trim)
                 .map(Integer::valueOf)
@@ -42,12 +44,20 @@ public final class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public final List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public final int getCountContaining(Lotto other) {
+        return lottoNumbers.stream()
+                .filter(other::contains)
+                .mapToInt(i -> 1)
+                .sum();
     }
 
-    public final int getCountContaining(Lotto other) {
-        return 1;
+    public final boolean contains(LottoNumber element) {
+        return lottoNumbers.contains(element);
+    }
+
+
+    public final List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 
@@ -65,7 +75,4 @@ public final class Lotto {
     }
 
 
-    public final boolean contains(LottoNumber element) {
-        return lottoNumbers.contains(element);
-    }
 }

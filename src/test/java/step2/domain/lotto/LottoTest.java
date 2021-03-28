@@ -104,7 +104,7 @@ class LottoTest {
 
     @DisplayName("Lotto 인스턴스가 소유값을 기준으로 몇개가 일치하는지 판단 테스트")
     @Test
-    void 포함_갯() {
+    void 포함_갯수() {
         // given
         Lotto firstLotto = Lotto.newInstance(lottoNumbers);
         Lotto secondLotto = Lotto.newInstance(lottoNumbers);
