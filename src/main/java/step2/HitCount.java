@@ -2,16 +2,16 @@ package step2;
 
 import java.util.Objects;
 
-public class HitCount {
+public class HitCount{
 
-    private long hitCount;
+    private int hitCount;
     private boolean bonusBallHit;
 
-    public HitCount(long hitCount) {
+    public HitCount(int hitCount) {
         this(hitCount,false);
     }
 
-    public HitCount(long hitCount,boolean bonusBallHit) {
+    public HitCount(int hitCount,boolean bonusBallHit) {
         this.hitCount = hitCount;
         this.bonusBallHit = bonusBallHit;
     }

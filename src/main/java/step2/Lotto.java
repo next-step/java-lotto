@@ -42,9 +42,9 @@ public class Lotto {
     }
 
     public HitCount isWinningLottoList(WinningLotto winningLotto){
-        return new HitCount(winningLotto.getLottoNumberList().stream()
+        return new HitCount(Long.valueOf(winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber->lottoNumberList.contains(winningNumber))
-                .count());
+                .count()).intValue());
     }
 
     public List<LottoNumber> getLottoNumberList(){

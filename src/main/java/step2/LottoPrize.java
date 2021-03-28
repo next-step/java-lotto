@@ -11,7 +11,6 @@ public enum LottoPrize {
     FIFTH(5000,new HitCount(3)),
     BLANK(0);
 
-    private long rank;
     private long prize;
     private HitCount hitCount;
 
@@ -29,6 +28,14 @@ public enum LottoPrize {
                 .filter(lottoPrize -> lottoPrize.hitCount.equals(hitCount))
                 .findAny()
                 .orElse(BLANK);
+    }
+
+    public long prize() {
+        return prize;
+    }
+
+    public HitCount hitCount(){
+        return hitCount;
     }
 
 }

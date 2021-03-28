@@ -19,12 +19,13 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-//    public void makeStatistic(WinningLotto winningLotto){
-//
-//        for(Lotto lotto : lottoList){
-//            LottoStatistic lottoStatistic = new LottoStatistic(lotto.isWinningLottoList(winningLotto));
-//        }
-//    }
+    public List<LottoStatistic> makeStatistic(WinningLotto winningLotto){
+        List<LottoStatistic> statistics = new ArrayList<>();
+        for(Lotto lotto : lottoList){
+            statistics.add(new LottoStatistic(lotto.isWinningLottoList(winningLotto)));
+        }
+        return statistics;
+    }
 
     public List<Lotto> getLottos() {
         return lottoList;

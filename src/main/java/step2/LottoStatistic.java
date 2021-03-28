@@ -8,7 +8,8 @@ public class LottoStatistic {
         lottoPrize = LottoPrize.getPrizeInfoByHitCount(hitCount);
     }
 
-    public LottoPrize lottoPrize() {
+    public LottoPrize lottoPrize(){
         return lottoPrize;
     }
+
 }
