@@ -12,14 +12,14 @@ public class LottoController {
     private final Lottos lottos;
 
     public LottoController() {
-        this.amount = Money.from(InputView.inputAmount());              // 구매 금액 입력
+        this.amount = Money.from(InputView.inputAmount());
         this.lottos = Lottos.of(new LottoNumberGenerator(), amount);
     }
 
     public void run() {
-        ResultView.printPurchaseCount(lottos);                          // 구매 개수 출력
-        ResultView.printLottos(lottos);                                 // 구매된 로또 리스트 출력
-        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());     // 지난주 당첨번호 입력
-        ResultView.printPrizeStats(lottos.getPrizes(prizeLotto));       // 당첨통계 출력
+        ResultView.printLottos(lottos);
+        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());
+        ResultView.printStatistics(lottos, prizeLotto);
+        ResultView.printRevenueRate(lottos, prizeLotto, amount);
     }
 }

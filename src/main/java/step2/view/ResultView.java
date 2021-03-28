@@ -1,57 +1,51 @@
 package step2.view;
 
-import step2.domain.Lotto;
-import step2.domain.Lottos;
 import step2.domain.Number;
-import step2.domain.Prize;
+import step2.domain.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    /* 로또 구매 개수 출력 */
-    public static void printPurchaseCount(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
-    }
-
-    /* 구입된 로또 모두 출력 */
     public static void printLottos(Lottos lottos) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(getPrintLottoMessage(lotto));
+            System.out.println(prettyString(lotto));
         }
     }
 
-    /* 로또 출력 메시지 생성 */
-    private static String getPrintLottoMessage(Lotto lotto) {
-        return String.format("%s%s%s", "[", String.join(", ", toStringList(lotto)), "]");
+    private static String prettyString(Lotto lotto) {
+        return String.format("%s%s%s", "[",
+                        lotto.getNumbers()
+                                .stream()
+                                .map(Number::getNumber)
+                                .map(i -> String.valueOf(i))
+                                .collect(Collectors.joining(", ")),
+                "]");
     }
 
-    private static List<String> toStringList(Lotto lotto) {
-        return lotto.getNumbers()
-                .stream()
-                .map(Number::getNumber)
-                .map(i -> String.valueOf(i))
-                .collect(Collectors.toList());
-    }
-
-    /* 당첨 통계 출력 */
-    public static void printPrizeStats(List<Prize> prizes) {
-        System.out.println("");
-        System.out.println("당첨통계");
+    public static void printStatistics(Lottos lottos, Lotto prizeLotto) {
+        System.out.println("\n당첨통계");
         System.out.println("---------");
-
-        for (Prize prize : Prize.values()) {
-            int prizeSize = Prize.findMatchPrizes(prizes, prize).size();
-            ResultView.printMatchCount(prize, prizeSize);
-        }
+        System.out.println(prettyString(lottos, prizeLotto, Prize.THREE_MATCH));
+        System.out.println(prettyString(lottos, prizeLotto, Prize.FOUR_MATCH));
+        System.out.println(prettyString(lottos, prizeLotto, Prize.FIVE_MATCH));
+        System.out.println(prettyString(lottos, prizeLotto, Prize.ALL_MATCH));
     }
 
-    public static void printMatchCount(Prize prize, int totalCount) {
-        if (prize.equals(Prize.FAIL)) {
-            return;
+    private static String prettyString(Lottos lottos, Lotto prizeLotto, Prize prize) {
+        return String.format("%d개 일치 (%d원)- %d개", prize.getMatchCount(), prize.getAmount(),
+                lottos.getPrizeCount(prizeLotto, prize));
+    }
+
+    public static void printRevenueRate(Lottos lottos, Lotto prizeLotto, Money amount) {
+        double revenueRate = amount.getRevenueRate(lottos.getTotalPrizeAmount(prizeLotto));
+        System.out.print("총 수익률은 " + String.format("%.2f", revenueRate) + "입니다.");
+        if (revenueRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
-        String message = String.format("%d개 일치 (%d원)- %d개", prize.getMatchCount(), prize.getAmount(), totalCount);
-        System.out.println(message);
+        if (revenueRate > 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+        }
     }
 }

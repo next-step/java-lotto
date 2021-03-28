@@ -1,11 +1,8 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Prize {
-
     FAIL(0, 0),
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
@@ -25,12 +22,6 @@ public enum Prize {
                 .filter(o -> o.matchCount == matchCount)
                 .findFirst()
                 .orElse(Prize.FAIL);
-    }
-
-    public static List<Prize> findMatchPrizes(List<Prize> prizes, Prize prize) {
-        return prizes.stream()
-                .filter(o -> o.equals(prize))
-                .collect(Collectors.toList());
     }
 
     public int getMatchCount() {

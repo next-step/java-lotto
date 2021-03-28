@@ -5,7 +5,6 @@ import step2.generator.NumberGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -16,18 +15,27 @@ public class Lottos {
 
     public static Lottos of(NumberGenerator numberGenerator, Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        while (money.isPossibleBuyLotto()) {
-            money.buyLotto();
+        int purchaseCount = 1;
+        while (money.isPossibleBuyLotto(purchaseCount)) {
             lottos.add(Lotto.from(numberGenerator));
+            purchaseCount++;
         }
         return new Lottos(lottos);
     }
 
-    public List<Prize> getPrizes(Lotto prizeLotto) {
+    public int getPrizeCount(Lotto prizeLotto, Prize prize) {
+        return (int) lottos.stream()
+                .map(lotto -> lotto.getMatchCount(prizeLotto))
+                .filter(matchCount -> matchCount == prize.getMatchCount())
+                .count();
+    }
+
+    public int getTotalPrizeAmount(Lotto prizeLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.getMatchCount(prizeLotto))
                 .map(matchCount -> Prize.findPrize(matchCount))
-                .collect(Collectors.toList());
+                .map(Prize::getAmount)
+                .reduce(0, Integer::sum);
     }
 
     public List<Lotto> getLottos() {
