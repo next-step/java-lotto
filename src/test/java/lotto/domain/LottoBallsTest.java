@@ -28,7 +28,7 @@ class LottoBallsTest {
   @ParameterizedTest
   @CsvSource(value = {"3,4,7,8,9,10:2", "1,3,5,7,8,9:3", "1,2,3,4,5,6:6"} , delimiter = ':')
   void test(String winLottoNumber, String result) {
-    int count = lottoBalls.countContainingWinNumbers(createLottoList(winLottoNumber));
+    int count = lottoBalls.countContainingWinNumbers(new LottoBalls(createLottoList(winLottoNumber)));
     assertThat(count).isEqualTo(Integer.parseInt(result));
   }
 

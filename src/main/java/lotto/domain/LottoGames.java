@@ -22,7 +22,7 @@ public final class LottoGames {
   }
 
   public Statistics calculateStatistics(List<Integer> winNumbers) {
-    List<LottoBall> winBalls = toLottoBallList(winNumbers);
+    LottoBalls winBalls = toLottoBallList(winNumbers);
     List<Integer> countList = new ArrayList<>();
     for (LottoGame lottoGame : lottoGames) {
       countList.add(lottoGame.countMatchNumber(winBalls));
@@ -30,9 +30,11 @@ public final class LottoGames {
     return new Statistics(countList);
   }
 
-  private List<LottoBall> toLottoBallList(List<Integer> winNumbers) {
-    return winNumbers.stream()
+  private LottoBalls toLottoBallList(List<Integer> winNumbers) {
+    return new LottoBalls(
+        winNumbers.stream()
         .map(LottoBall::new)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList())
+    );
   }
 }

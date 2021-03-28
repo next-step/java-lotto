@@ -32,4 +32,8 @@ public final class Money {
         .doubleValue()
         ;
   }
+
+  public boolean availableBuyLotto() {
+    return this.money >= 1000;
+  }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public final class LottoBall implements Comparable<LottoBall> {
   private static final int MIN = 1;
   private static final int MAX = 45;
   private static final List<LottoBall> CACHE_LOTTOBALL = new ArrayList<>();
+  private final int number;
 
   static {
     for (int i = MIN ; i <= MAX ; i++ ) {
@@ -15,11 +17,12 @@ public final class LottoBall implements Comparable<LottoBall> {
     }
   }
 
-  public static List<LottoBall> values() {
-    return CACHE_LOTTOBALL;
+  public static List<LottoBall> draw() {
+    Collections.shuffle(CACHE_LOTTOBALL);
+    List<LottoBall> ballsDraw = new ArrayList<>(CACHE_LOTTOBALL.subList(0, 6));
+    Collections.sort(ballsDraw);
+    return ballsDraw;
   }
-
-  private final int number;
 
   public LottoBall(final int number) {
     if (number < MIN || number > MAX) {
@@ -28,13 +31,14 @@ public final class LottoBall implements Comparable<LottoBall> {
     this.number = number;
   }
 
-  public int getNumber() {
-    return this.number;
+  @Override
+  public String toString() {
+    return String.valueOf(this.number);
   }
 
   @Override
   public int compareTo(LottoBall other) {
-    return this.number > other.getNumber() ? 1 : -1;
+    return Integer.compare(this.number,other.number);
   }
 
   @Override

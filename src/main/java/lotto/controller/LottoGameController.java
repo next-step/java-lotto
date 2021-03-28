@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import java.awt.geom.RectangularShape;
 import java.util.List;
-import lotto.domain.LottoBallMachine;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoStore;
 import lotto.domain.Money;
@@ -14,15 +12,17 @@ public class LottoGameController {
 
   public void start() {
     InputView inputView = new InputView();
+    ResultView resultView = new ResultView();
+
     Money money = inputView.inputMoney();
+    if (!money.availableBuyLotto()) {
+      resultView.printUnavailableGame();
+      return;
+    }
 
-    LottoBallMachine lottoBallMachine = new LottoBallMachine();
-    lottoBallMachine.initialize();
-
-    LottoStore lottoStore = new LottoStore(lottoBallMachine);
+    LottoStore lottoStore = new LottoStore();
     LottoGames lottoGames = lottoStore.sell(money);
 
-    ResultView resultView = new ResultView();
     resultView.printBuyingLottoGame(lottoGames);
 
     List<Integer> winNumbers = inputView.inputWinNumbers();

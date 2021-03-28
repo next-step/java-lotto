@@ -9,14 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
-  private static LottoBallMachine lottoBallMachine;
-
-  @BeforeAll
-  static void setUp() {
-    lottoBallMachine = new LottoBallMachine();
-    lottoBallMachine.initialize();
-  }
-
   @DisplayName("로또 공 개수가 6개가 아니면 예외 발생")
   @Test
   void lottoBall_no_six_then_exception() {

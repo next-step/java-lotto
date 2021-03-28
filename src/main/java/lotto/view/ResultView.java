@@ -9,6 +9,8 @@ public class ResultView {
 
   private static final String BUY_COMMENT = "개를 구매했습니다.";
   private static final String STATISTICS = "당첨통계";
+  private static final String UNAVAILABLE_GAME = "로또 게임을 진행할 수 없습니다.";
+
   private static final int THREE = 3;
   private static final int FOUR = 4;
   private static final int FIVE = 5;
@@ -50,5 +52,9 @@ public class ResultView {
 
   private double calculateEarningRate(Money investMoney, Statistics statistics) {
     return statistics.getEarningRate(investMoney);
+  }
+
+  public void printUnavailableGame() {
+    System.out.println(UNAVAILABLE_GAME);
   }
 }

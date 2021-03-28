@@ -3,22 +3,18 @@ package lotto.domain;
 import java.util.List;
 
 public final class LottoGame {
-  private static final int SIX = 6;
 
   private final LottoBalls lottoBalls;
 
   public LottoGame(final LottoBalls lottoBalls) {
-    if (lottoBalls.size() != SIX) {
-      throw new IllegalArgumentException("로또 공 개수가 6개가 아닙니다.");
-    }
     this.lottoBalls = lottoBalls;
   }
 
   public String getLottoBallNumbersString() {
-    return lottoBalls.numbersString();
+    return lottoBalls.toString();
   }
 
-  public int countMatchNumber(List<LottoBall> winNumbers) {
+  public int countMatchNumber(LottoBalls winNumbers) {
     return lottoBalls.countContainingWinNumbers(winNumbers);
   }
 }
