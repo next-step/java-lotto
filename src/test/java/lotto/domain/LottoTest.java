@@ -15,7 +15,7 @@ public class LottoTest {
     @Test
     void createLottoTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 6; i++) {
+        for (int i = 1; i <= 6; i++) {
             lottoNumberList.add(new LottoNumber(i));
         }
         Lotto createdLotto = new Lotto(lottoNumberList);
@@ -26,25 +26,12 @@ public class LottoTest {
     @Test
     void createLottoExceptionTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             lottoNumberList.add(new LottoNumber(i));
         }
-        assertThatThrownBy(()->new Lotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
         lottoNumberList.add(new LottoNumber(8));
         lottoNumberList.add(new LottoNumber(9));
-        assertThatThrownBy(()->new Lotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(lottoNumberList)).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @DisplayName("당첨 로또와 비교해 결과를 반환한다")
-    @Test
-    void lottoIsWinTest() {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 6; i++) {
-            lottoNumberList.add(new LottoNumber(i));
-        }
-        Lotto createdLotto = new Lotto(lottoNumberList);
-        Lotto prizeLotto = new Lotto(lottoNumberList);
-        assertThat(createdLotto.howMatch(prizeLotto)).isEqualTo(6);
-    }
-
 }

@@ -9,9 +9,22 @@ public class LottoNumber {
 
     private int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    protected LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
         validateLottoNumber();
+    }
+
+    public static LottoNumber of(String lottoNumber) {
+        validateParsable(lottoNumber);
+        return new LottoNumber(Integer.parseInt(lottoNumber));
+    }
+
+    private static void validateParsable(String lottoNumber) {
+        try {
+            Integer.parseInt(lottoNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요");
+        }
     }
 
     private void validateLottoNumber() {

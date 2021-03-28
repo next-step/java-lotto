@@ -22,7 +22,7 @@ public class LottoMachine {
         return new LottosDto(lottos);
     }
 
-    public ResultGroup getResult(Lotto winingLotto) {
+    public ResultGroup getResult(WinningLotto winingLotto) {
         return lottos.getResult(winingLotto);
     }
 }
