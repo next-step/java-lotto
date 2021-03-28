@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import lotto.constant.Constant;
 
 public class LottoNumberStore {
+
   private final List<LottoNumber> baseNumbers;
 
   public LottoNumberStore() {
