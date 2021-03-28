@@ -5,6 +5,7 @@ import java.util.*;
 public class Lotto {
     private final static int MATCHED = 1;
     private final static int MISMATCHED = 0;
+    private final static int LOTTO_SIZE = 6;
     private final static String ILLEGAL_LOTTO = "로또는 6개의 서로 다른 숫자로 만들어져야 합니다";
     private Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
@@ -14,14 +15,14 @@ public class Lotto {
     }
 
     public Lotto(String[] numbers) {
-        for(String number : numbers) {
+        for (String number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
         validateLottoSize();
     }
 
-    private void validateLottoSize(){
-        if(lottoNumbers.size() != 6){
+    private void validateLottoSize() {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ILLEGAL_LOTTO);
         }
     }
