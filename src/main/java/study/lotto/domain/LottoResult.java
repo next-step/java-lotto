@@ -11,11 +11,11 @@ public class LottoResult {
     private final Lottos resultLotto;
     private final WinningLotto winningLotto;
 
-    LottoResult(final Lottos lotto) {
+    private LottoResult(final Lottos lotto) {
         this(lotto, null);
     }
 
-    LottoResult(final Lottos resultLotto, final WinningLotto winningLotto) {
+    private LottoResult(final Lottos resultLotto, final WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
         this.resultLotto = resultLotto;
     }

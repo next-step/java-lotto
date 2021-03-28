@@ -14,7 +14,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+    private WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if(winningLotto.contains(bonusNumber)) {
             throw new LottoException(GUIDE_ERR_DONT_CONTAINS_BONUS_NUMBER);
         }
@@ -33,7 +33,7 @@ public class WinningLotto {
     private static Lotto parseLotto(final String winningLotto) {
         String[] split = parseSplit(winningLotto);
         return Lotto.of(Arrays.stream(split)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
