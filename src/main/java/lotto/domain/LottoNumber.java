@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   public static LottoNumber of(int number) {
     LottoNumber lottoNumber = lottoNumbers.get(number);
     if (lottoNumber == null) {
-      throw new IllegalArgumentException("로또 번호는 1에서 45 사이 값만 가합니다.");
+      throw new IllegalArgumentException("로또 번호는 1에서 45 사이 값만 가능합니다.");
     }
     return lottoNumber;
   }
@@ -52,6 +52,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   @Override
   public int compareTo(LottoNumber o) {
-    return 0;
+    return number - o.number;
   }
 }
