@@ -27,7 +27,7 @@ public final class InputView {
 
     private final int inputMoneyByClient() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 
     private final String inputLottoNumbersByClient() {

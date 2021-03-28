@@ -1,7 +1,9 @@
 package step2.controller;
 
+import step2.domain.checker.LottoWinningChecker;
 import step2.domain.generator.LottoGenerator;
 import step2.domain.lotto.LottoList;
+import step2.dto.LottoConfirmationRequestDto;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.strategy.LottoRandomShuffleStrategy;
@@ -36,6 +38,11 @@ public final class LottoController {
             lottoGenerator.next();
         }
         return LottoExpressionResponseDto.newInstance(lottoList);
+    }
+
+    public final void 비즈니스로직(LottoConfirmationRequestDto confirmationRequestDto) {
+        LottoWinningChecker.newInstance(confirmationRequestDto.getLotto()).비즈니스_로직을_검증하기위한_메서드(lottoList);
+
     }
 
 }

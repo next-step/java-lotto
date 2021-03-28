@@ -27,6 +27,8 @@ public final class LottoApplication {
     public final void generateAndShowLottoList() {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
         resultView.printLottoList(lottoController.generateLottoList(lottoCreationRequestDto));
+
+        lottoController.비즈니스로직(inputView.getLottoConfirmationRequestDto());
     }
 
 }

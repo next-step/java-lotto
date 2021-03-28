@@ -35,7 +35,6 @@ public final class Lotto {
         return lottoNumbers == null;
     }
 
-
     private static final List<LottoNumber> toLottoNumberList(String sentence) {
         return Stream.of(sentence.split(COMMA))
                 .map(String::trim)
