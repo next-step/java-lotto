@@ -1,50 +1,33 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.exception.LottoNumberDuplicationException;
+import lotto.util.AutoLottoNumberGenerateStrategy;
 import lotto.util.LottoNumberGenerator;
+import lotto.util.ManualLottoNumberGenerateStrategy;
 
 public class Lotto {
 
   private static final int LOTTO_SIZE = 6;
 
-  private List<Number> numbers;
+  private final List<Number> numbers;
 
   public Lotto(List<Number> numbers) {
-    updateLotto(numbers);
     validation(numbers);
+    this.numbers = numbers;
   }
 
-  public static Lotto generatedAutoLottoNumber() {
-    return createAutoLottoNumbers();
+  public static Lotto generateAutoLottoNumber() {
+    return LottoNumberGenerator
+        .createAutoLottoNumbers(new AutoLottoNumberGenerateStrategy());
   }
 
-  public static Lotto generatedManualLottoNumber(List<Integer> inputNumbers) {
-    return createManualLottoNumbers(inputNumbers);
-  }
-
-  private static Lotto createManualLottoNumbers(List<Integer> numbers) {
-    List<Number> numberList =  new ArrayList<>();
-    for(int i = 0; i < LOTTO_SIZE; i++) {
-      numberList.add(Number.generateNumber(numbers.get(i)));
-    }
-    return new Lotto(numberList);
-  }
-
-  private static Lotto createAutoLottoNumbers() {
-    List<Number> numberList =  new ArrayList<>();
-    LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.createLottoNumbers();
-    Collections.shuffle(lottoNumberGenerator.getLottos());
-
-    for(int i = 0; i < LOTTO_SIZE; i++) {
-      numberList.add(Number.generateNumber(lottoNumberGenerator.getOne(i)));
-    }
-    return new Lotto(numberList);
+  public static Lotto generateManualLottoNumber(List<Integer> inputNumbers) {
+    return LottoNumberGenerator
+        .createManualLottoNumbers(new ManualLottoNumberGenerateStrategy(inputNumbers));
   }
 
   private void validation(List<Number> numbers) {
@@ -53,19 +36,15 @@ public class Lotto {
   }
 
   private void validateDuplicated(List<Number> numbers) {
-    Set<Number> numberSet = new HashSet<>(numbers);
-    hasDuplicatedNumber(numbers, numberSet);
-  }
-
-  private void hasDuplicatedNumber(List<Number> numbers, Set<Number> numberSet) {
-    if(numberSet.size() != numbers.size()){
+    if(isDuplicatedNumber(numbers)) {
       throw new LottoNumberDuplicationException("로또는 중복 값을 가질 수 없습니다.");
     }
   }
 
-  private void updateLotto(List<Number> numbers) {
-    Collections.sort(numbers);
-    this.numbers = numbers;
+  private boolean isDuplicatedNumber(List<Number> numbers) {
+    return numbers.stream()
+        .distinct()
+        .count() != numbers.size();
   }
 
   private void validateLength(List<Number> numbers) {
@@ -80,7 +59,10 @@ public class Lotto {
 
   @Override
   public String toString() {
-    return  numbers + "\n";
+    List<Number> numbers = getNumbers();
+    return numbers.stream()
+        .map(Number::toString)
+        .collect(Collectors.joining(", "));
   }
 
   @Override
