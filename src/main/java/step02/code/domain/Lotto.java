@@ -18,7 +18,7 @@ public class Lotto {
     this.lotto = lotto;
   }
 
-  public static void check(List<Integer> lotto) {
+  private void check(List<Integer> lotto) {
     if(lotto.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 6개의 숫자가 필요합니다");
     }
@@ -30,10 +30,6 @@ public class Lotto {
     if(overlapRemoved.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 중복된 숫자를 가질수 없습니다");
     }
-  }
-
-  public void check() {
-    check(this.lotto);
   }
 
   public int match(List<Integer> winningNumber) {

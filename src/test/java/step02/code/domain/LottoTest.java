@@ -18,7 +18,7 @@ public class LottoTest {
   @DisplayName("6자리의 숫자가 들어오는지 체크")
   public void checkLottoLength() {
     assertThatThrownBy(() -> {
-      Lotto.check(Arrays.asList(1,2,3,4,5));
+      new Lotto(Arrays.asList(1,2,3,4,5));
     }).isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -26,10 +26,10 @@ public class LottoTest {
   @DisplayName("숫자의 min, max 체크 / 0 ~ 45")
   public void checkMinMax() {
     assertThatThrownBy(() -> {
-      Lotto.check(Arrays.asList(0, 1, 2, 3, 4, 45));
+      new Lotto(Arrays.asList(0, 1, 2, 3, 4, 45));
     }).isInstanceOf(IllegalArgumentException.class);
     assertThatThrownBy(() -> {
-      Lotto.check(Arrays.asList(1, 2, 3, 4, 5, 46));
+      new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46));
     }).isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -37,7 +37,7 @@ public class LottoTest {
   @DisplayName("중복되는 숫자가 존재하는지 체크")
   public void checkSameNumber() {
     assertThatThrownBy(() -> {
-      Lotto.check(Arrays.asList(1, 2, 3, 4, 5, 5));
+      new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5));
     }).isInstanceOf(IllegalArgumentException.class);
   }
 

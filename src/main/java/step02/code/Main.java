@@ -17,7 +17,8 @@ public class Main {
     ResultView.myLotto(lottos.lottos());
 
     WinningNumber winningNumber = WinningNumber.makeWinningNumberByString(InputView.winningNumber());
-    Lotto.check(winningNumber.number());
+    // winningNumber validation check 용
+    new Lotto(winningNumber.number());
 
     // 결과
     System.out.println("당첨 통계");
