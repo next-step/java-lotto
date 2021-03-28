@@ -58,8 +58,9 @@ public class LottosTest {
     WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
     List<Integer> matched = lottos.match(winning.number());
 
-    assertThat(matched.size()).isEqualTo(mustMatched.size());
-    assertThat(matched).hasSameElementsAs(mustMatched);
+    assertThat(matched)
+      .hasSize(mustMatched.size())
+      .hasSameElementsAs(mustMatched);
   }
 
   private static Stream<Arguments> lottosAndWinningNumberAndMatch() {
@@ -75,7 +76,7 @@ public class LottosTest {
           )
         ),
         "1,2,3,4,5,6",
-        Arrays.asList(6, 6, 5, 5, 5),
+        Arrays.asList(6, 5, 5, 5, 6),
         Map.of(6, 2, 5, 3)
       ),
       Arguments.of(
