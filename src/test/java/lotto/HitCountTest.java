@@ -11,6 +11,13 @@ public class HitCountTest {
     @Test
     public void hitCount() {
         HitCount hitCount = new HitCount(5);
-        assertThat(hitCount.toString()).isEqualTo("5");
+        assertThat(hitCount.getHitCount()).isEqualTo(5);
+    }
+
+    @DisplayName("번호 당첨 여부를 생성한다")
+    @Test
+    public void hitCountBonus() {
+        HitCount hitCount = new HitCount(5, true);
+        assertThat(hitCount.isHitBonusNumber()).isEqualTo(true);
     }
 }
