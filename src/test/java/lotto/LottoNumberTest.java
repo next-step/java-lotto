@@ -14,13 +14,14 @@ public class LottoNumberTest {
 
   @BeforeEach
   void setUp() {
-    lottoNumber = new LottoNumber(3);
+    lottoNumber = LottoNumber.of(3);
   }
 
   @Test
   @DisplayName("[LottoNumber] LottoNumber 생성 테스트")
   void createLottoNumberTest() {
-    assertThat(lottoNumber).isEqualTo(new LottoNumber(3));
+    assertThat(lottoNumber).isEqualTo(LottoNumber.of(3));
+    assertThat(lottoNumber == LottoNumber.of(3)).isTrue();
   }
 
   @Test
@@ -28,7 +29,7 @@ public class LottoNumberTest {
   void validateRangeTest() {
     int number = 46;
 
-    assertThatThrownBy(() -> lottoNumber.validateRange(number))
+    assertThatThrownBy(() -> LottoNumber.of(number))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }
