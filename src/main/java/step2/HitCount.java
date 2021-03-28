@@ -16,6 +16,9 @@ public class HitCount{
         this.bonusBallHit = bonusBallHit;
     }
 
+    public int hit(){
+        return hitCount;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

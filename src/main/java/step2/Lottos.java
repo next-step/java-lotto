@@ -1,7 +1,12 @@
 package step2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class Lottos {
 
@@ -19,12 +24,9 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    public List<LottoStatistic> makeStatistic(WinningLotto winningLotto){
-        List<LottoStatistic> statistics = new ArrayList<>();
-        for(Lotto lotto : lottoList){
-            statistics.add(new LottoStatistic(lotto.isWinningLottoList(winningLotto)));
-        }
-        return statistics;
+    public Rank makeStatistic(WinningLotto winningLotto){
+        return new Rank(lottoList.stream()
+                .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto))));
     }
 
     public List<Lotto> getLottos() {

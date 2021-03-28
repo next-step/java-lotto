@@ -3,10 +3,10 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
@@ -43,22 +43,41 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("지난주 당첨 번호와 몇 개 일치했는지 통계 생성 테스트")
+    @DisplayName("지난주 당첨 번호와 몇 개 일치했는지 통계 생성 테스트 - 3개일치 1개, 4개 일치 1개")
     void statistic_test(){
         String winningNumbers = "1,2,3,4,5,6";
-
-        String purchasedNumbers = "1,2,3,43,44,45";
-        String purchasedNumbers2 = "1,2,42,43,44,45";
+        String purchasedNumbers1 = "1,2,3,43,44,45";
+        String purchasedNumbers2="1,2,3,4,44,45";
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        Lotto purchasedLotto = new Lotto(purchasedNumbers);
-        Lotto purchasedLotto2 = new Lotto(purchasedNumbers2);
-        LottoStatistic lottoStatistic = new LottoStatistic(purchasedLotto.isWinningLottoList(winningLotto));
-        LottoStatistic lottoStatistic2 = new LottoStatistic(purchasedLotto2.isWinningLottoList(winningLotto));
+        List<Lotto> lottoList = new ArrayList<>();
+        Lotto lotto1 = new Lotto(purchasedNumbers1);
+        Lotto lotto2 = new Lotto(purchasedNumbers2);
+        lottoList.add(lotto1);
+        lottoList.add(lotto2);
 
-        Rank rank = new Rank();
-        Map<LottoPrize,Integer> result = rank.rank(Arrays.asList(lottoStatistic,lottoStatistic2));
+        Map<HitCount,List<Lotto>> rankInfo = lottoList.stream()
+                .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto)));
 
-        assertThat(result.get(lottoStatistic.lottoPrize())).isEqualTo(1);
+        assertThat(rankInfo.keySet()).contains(new HitCount(3),new HitCount(4));
+    }
+
+    @Test
+    @DisplayName("당첨 된 통계 리스트 개수 테스트")
+    void statistic_test_size(){
+        String winningNumbers = "1,2,3,4,5,6";
+        String purchasedNumbers1 = "1,2,3,43,44,45";
+
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        List<Lotto> lottoList = new ArrayList<>();
+        Lotto lotto1 = new Lotto(purchasedNumbers1);
+        lottoList.add(lotto1);
+
+        Rank rankInfo = new Rank(lottoList.stream()
+                .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto))));
+
+        assertThat(rankInfo.size(new HitCount(3))).isEqualTo(1);
+        assertThat(rankInfo.size(new HitCount(4))).isEqualTo(0);
+
     }
 }

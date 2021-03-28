@@ -1,6 +1,8 @@
 package step2;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -30,15 +32,14 @@ public class ResultView {
         System.out.print("]");
     }
 
-//    public void printLottoStatistic(Lottos lottos,WinningLotto winningLotto) {
-//        lottos.makeStatistic(winningLotto)
-//                .stream()
-//                .map(statistic->statistic.lottoPrize())
-//                .forEach(this::printLottoPrize);
-//    }
-//
-//    private void printLottoPrize(LottoPrize lottoPrize) {
-//        System.out.println(lottoPrize.hitCount()+"개 일치 ("+lottoPrize.prize()+")원 - ");
-//    }
-
+    public void printLottoStatistic(Lottos lottos, WinningLotto winningLotto) {
+        Rank ranking = lottos.makeStatistic(winningLotto);
+        System.out.println("당첨통계");
+        System.out.println("------");
+        for(int rank = 3; rank <= 6;rank++){
+            HitCount hitCount = new HitCount(rank);
+            System.out.println(String.format("%d개 일치 (%d)원 - %d개",
+                    rank,LottoPrize.getPrizeInfoByHitCount(hitCount).prize(),ranking.size(hitCount)));
+        }
+    }
 }

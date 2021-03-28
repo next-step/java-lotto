@@ -2,7 +2,7 @@ package step2;
 
 import java.util.Arrays;
 
-public enum LottoPrize {
+public enum LottoPrize implements Comparable<LottoPrize>{
 
     FIRST(2000000000,new HitCount(6)),
     SECOND(10000000,new HitCount(5,true)),
