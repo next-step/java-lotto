@@ -18,15 +18,6 @@ public class PurchaseAmountTest {
     }
 
     @Test
-    @DisplayName("구매한 티켓 장수 구하기")
-    public void numberOfTicket() throws Exception {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
-        LottoTicket lottoTicket = new LottoTicket(new LottoNumbers());
-        NumberOfTicket numberOfTicket = purchaseAmount.numberOfTicket(lottoTicket.price());
-        assertThat(numberOfTicket.count()).isEqualTo(1);
-    }
-
-    @Test
     @DisplayName("1000원 미만일 시 예외")
     public void checkMinimum() throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount(999));
