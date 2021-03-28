@@ -19,9 +19,9 @@ public enum Prize {
 
     public static Prize findPrize(int matchCount) {
         return Arrays.stream(Prize.values())
-                .filter(o -> o.matchCount == matchCount)
+                .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElse(Prize.FAIL);
+                .orElse(FAIL);
     }
 
     public int getMatchCount() {
