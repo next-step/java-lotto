@@ -11,42 +11,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RanksCountTest {
 
     @Test
-    @DisplayName("일치하는 번호 개수에 따른 등수 카운트 추가")
-    public void add() throws Exception {
+    @DisplayName("당첨 등수 세기")
+    public void count() throws Exception {
         //given
-        int matchedCount = 3;
-        WinningRank rank = WinningRank.findByMacthedCount(matchedCount);
-        RanksCount ranksCount = new RanksCount();
-        RanksCount fourthRanksCount = new RanksCount();
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        LottoTicket firstTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket secondTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket));
+        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
 
         //when
-        ranksCount.add(rank);
-        fourthRanksCount.add(WinningRank.FOURTH_PLACE);
+        ranksCount.count();
 
         //then
-        assertThat(ranksCount).isEqualTo(fourthRanksCount);
-    }
-
-    @Test
-    @DisplayName("해당하는 등수의 개수 반환")
-    public void countOf() throws Exception {
-        //given
-        RanksCount ranksCount = new RanksCount();
-        ranksCount.add(Arrays.asList(WinningRank.FIRST_PLACE, WinningRank.FIRST_PLACE, WinningRank.FIRST_PLACE));
-
-        //when
-        int count = ranksCount.countOf(WinningRank.FIRST_PLACE);
-
-        //then
-        assertThat(count).isEqualTo(3);
+        assertThat(ranksCount.countOf(WinningRank.FIRST_PLACE)).isEqualTo(1);
+        assertThat(ranksCount.countOf(WinningRank.SECOND_PLACE)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("총 당첨 금액 구하기")
     public void totalPrize() throws Exception {
         //given
-        RanksCount ranksCount = new RanksCount();
-        ranksCount.add(Arrays.asList(WinningRank.FIRST_PLACE, WinningRank.FIRST_PLACE, WinningRank.SECOND_PLACE, WinningRank.THIRD_PLACE));
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        LottoTicket firstTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket secondTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket thirdTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoTicket fourthTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket, thirdTicket, fourthTicket));
+        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
+        ranksCount.count();
 
         //when
         TotalPrize totalPrize = ranksCount.totalPrize();

@@ -9,9 +9,21 @@ public class RanksCount {
     private static final int MATCHED_COUNT_MIN = 3;
     private static final int PLUS = 1;
     private final Map<WinningRank, Integer> ranksCount;
+    private final WinningNumbers winningNumbers;
+    private final LottoTickets lottoTickets;
 
-    public RanksCount() {
+    public RanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+        this.winningNumbers = winningNumbers;
+        this.lottoTickets = lottoTickets;
         this.ranksCount = initialValue();
+    }
+
+    public void count() {
+        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
+            MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount());
+            add(rank);
+        }
     }
 
     public void add(WinningRank rank) {
