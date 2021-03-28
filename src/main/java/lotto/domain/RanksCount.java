@@ -11,8 +11,7 @@ public class RanksCount {
     private final Map<WinningRank, Integer> ranksCount;
 
     public RanksCount() {
-        this.ranksCount = new TreeMap<>(Comparator.comparingInt(WinningRank::matchedCount));
-        init();
+        this.ranksCount = initialValue();
     }
 
     public void add(WinningRank rank) {
@@ -47,10 +46,14 @@ public class RanksCount {
         return Collections.unmodifiableMap(ranksCount);
     }
 
-    private void init() {
+    private TreeMap<WinningRank, Integer> initialValue() {
+        TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>(Comparator.comparingInt(WinningRank::matchedCount));
+
         Arrays.stream(WinningRank.values())
                 .filter(rank -> rank.matchedCount() >= MATCHED_COUNT_MIN)
                 .forEach(rank -> ranksCount.put(rank, INIT));
+
+        return ranksCount;
     }
 
     @Override
