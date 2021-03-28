@@ -34,8 +34,4 @@ public enum LottoPrize implements Comparable<LottoPrize>{
         return prize;
     }
 
-    public HitCount hitCount(){
-        return hitCount;
-    }
-
 }
