@@ -33,14 +33,9 @@ public class Lotteries {
 	public RankingResult calculateRanking(LastWeekWinnerNumber lastWeekWinnerNumber) {
 		RankingResult rankingResult = new RankingResult();
 		Map<Integer, Integer> winnerCountPerRanking = new HashMap<>();
-		lotteries.forEach(lottoGame -> {
-			int equalCount = (int)lottoGame.getGameNumberList()
-				.stream()
-				.filter(
-					lottoNumber -> lastWeekWinnerNumber.getLastWinnerNumber().getGameNumberList().contains(lottoNumber))
-				.count();
-
-			winnerCountPerRanking.put(equalCount, winnerCountPerRanking.getOrDefault(equalCount, 0) + 1);
+		lotteries.forEach(lotto -> {
+			int matchCount = lastWeekWinnerNumber.getMatchCount(lotto);
+			winnerCountPerRanking.put(matchCount, winnerCountPerRanking.getOrDefault(matchCount, 0) + 1);
 		});
 		rankingResult.saveRanking(winnerCountPerRanking);
 		return rankingResult;

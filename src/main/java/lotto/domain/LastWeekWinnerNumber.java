@@ -10,4 +10,12 @@ public class LastWeekWinnerNumber {
 	public Lotto getLastWinnerNumber() {
 		return winnerNumber;
 	}
+
+	public int getMatchCount(Lotto lotto) {
+		return (int)lotto.getGameNumberList()
+			.stream()
+			.filter(
+				lottoNumber -> winnerNumber.getGameNumberList().contains(lottoNumber))
+			.count();
+	}
 }
