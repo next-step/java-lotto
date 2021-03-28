@@ -47,6 +47,7 @@ public final class Lotto {
     }
 
     public final int getCountContaining(Lotto other) {
+        return 1;
     }
 
 
@@ -64,4 +65,7 @@ public final class Lotto {
     }
 
 
+    public final boolean contains(LottoNumber element) {
+        return lottoNumbers.contains(element);
+    }
 }

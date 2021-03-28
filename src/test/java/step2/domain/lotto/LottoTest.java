@@ -93,9 +93,10 @@ class LottoTest {
     void 포함() {
         // given
         Lotto firstLotto = Lotto.newInstance(lottoNumbers);
+        LottoNumber testElement = LottoNumber.valueOf(1);
 
         // when
-        boolean actual = firstLotto.contains(1);
+        boolean actual = firstLotto.contains(testElement);
 
         // then
         assertThat(actual).isTrue();
