@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
 
@@ -48,10 +49,7 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (int i = LottoConstant.MIN_LOTTO_NUMBER; i <= LottoConstant.MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(i);
-        }
+        List<Integer> lottoNumbers = IntStream.range(LottoConstant.MIN_LOTTO_NUMBER, LottoConstant.MAX_LOTTO_NUMBER + LottoConstant.MIN_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.stream().limit(LottoConstant.MAX_LOTTO_COUNT).mapToInt(Integer::intValue).toArray();
     }
