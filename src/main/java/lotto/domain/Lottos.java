@@ -11,8 +11,11 @@ public class Lottos {
         this.Lottos = new ArrayList<>();
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.Lottos = lottos;
+    }
+
     public List<Rank> winningResults(WinningNumber winningNumber) {
         return new ArrayList<Rank>();
     }
-
 }

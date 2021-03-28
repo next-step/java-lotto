@@ -10,6 +10,10 @@ public class WinningNumber {
         winningNumbers = new ArrayList<>();
     }
 
+    public WinningNumber(int[] winningNumber) {
+        winningNumbers = new ArrayList<>();
+    }
+
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }
