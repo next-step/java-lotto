@@ -76,7 +76,7 @@ class LottoTest {
         assertThat(actual).isEqualTo(lottoNumbers);
     }
 
-    @DisplayName("Lotto 인스턴스가 소유교 값을 기준으로 동등 판단 여부 테스트")
+    @DisplayName("Lotto 인스턴스가 소유값을 기준으로 동등 판단 여부 테스트")
     @Test
     void 비교() {
 
@@ -87,4 +87,19 @@ class LottoTest {
         // then
         assertThat(firstLotto).isEqualTo(secondLotto);
     }
+
+    @DisplayName("Lotto 인스턴스가 소유값을 기준으로 몇개가 일치하는지 판단 테스트")
+    @Test
+    void 포함() {
+        // given
+        Lotto firstLotto = Lotto.newInstance(lottoNumbers);
+        Lotto secondLotto = Lotto.newInstance(lottoNumbers);
+
+        // when
+        int actual = firstLotto.getCountContaining(secondLotto);
+
+        // then
+        assertThat(actual).isEqualTo(6);
+    }
+
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class Lotto {
+public final class Lotto { 
     private static final String COMMA = ",";
     private final List<LottoNumber> lottoNumbers;
 
