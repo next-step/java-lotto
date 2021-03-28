@@ -23,7 +23,7 @@ public class Amount {
       throw new IllegalArgumentException("구입 금액은 " + Constant.UNIT_OF_DIVISION + "원 단위여야 합니다.");
     }
 
-    if ((price % Constant.UNIT_OF_DIVISION) < manualAmount) {
+    if ((price / Constant.UNIT_OF_DIVISION) < manualAmount) {
       throw new IllegalArgumentException("수동 구매 수량은 전체 구입 수량보다 클 수 없습니다.");
     }
   }
