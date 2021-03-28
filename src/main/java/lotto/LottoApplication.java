@@ -6,7 +6,6 @@ import lotto.utils.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,15 +33,10 @@ public class LottoApplication {
     }
 
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
-        NumberOfTicket numberOfTicket = purchaseAmount.numberOfTicket(new LottoTicketPrice().price());
+        TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
+        NumberOfTicket numberOfTicket = ticketOffice.numberOfTicket(purchaseAmount);
         ResultView.purchaseTickets(numberOfTicket.count());
-        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
-
-        for (int i = 0; i < numberOfTicket.count(); i++) {
-            lottoTickets.add(new LottoTicket(new LottoNumbers()));
-        }
-
-        return lottoTickets;
+        return ticketOffice.sale(numberOfTicket);
     }
 
     private static void printLottoTickets(LottoTickets lottoTickets) {
@@ -78,7 +72,7 @@ public class LottoApplication {
     }
 
     private static ProfitRate createProfitRate(RanksCount ranksCount, PurchaseAmount purchaseAmount) {
-        return new ProfitRate(new TotalPrize(WinningRank.totalPrize(ranksCount)), purchaseAmount);
+        return new ProfitRate(ranksCount.totalPrize(), purchaseAmount);
     }
 
     private static void printProfitRate(ProfitRate profitRate) {
