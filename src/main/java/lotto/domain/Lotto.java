@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private List<LottoGame> games;
@@ -12,16 +13,16 @@ public class Lotto {
         this(money, null, lottoNumberGenerator);
     }
 
-    public Lotto(int money, List<LottoGame> manualLottoGame, LottoNumberGenerator lottoNumberGenerator) {
+    public Lotto(int money, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
         if (money < LottoRule.price()) {
             throw new IllegalArgumentException("최소 구매 금액은 1000원입니다.");
         }
 
-        if (manualLottoGame == null) {
-            manualLottoGame = new ArrayList<>();
+        if (manualLottoNumbers == null) {
+            manualLottoNumbers = new ArrayList<>();
         }
 
-        initLottoGame(money, manualLottoGame, lottoNumberGenerator);
+        initLottoGame(money, manualLottoNumbers, lottoNumberGenerator);
     }
 
     public List<LottoGame> games() {
@@ -45,14 +46,18 @@ public class Lotto {
         return numberOfManualGames;
     }
 
-    private void initLottoGame(int money, List<LottoGame> manualLottoGame, LottoNumberGenerator lottoNumberGenerator) {
+    private void initLottoGame(int money, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
         games = new ArrayList<>();
 
-        appendManualGames(manualLottoGame);
-        appendGeneratedGames(money, manualLottoGame.size(), lottoNumberGenerator);
+        appendManualGames(manualLottoNumbers);
+        appendGeneratedGames(money, manualLottoNumbers.size(), lottoNumberGenerator);
     }
 
-    private void appendManualGames(List<LottoGame> manualLottoGame) {
+    private void appendManualGames(List<String> manualLottoNumbers) {
+        List<LottoGame> manualLottoGame = manualLottoNumbers.stream()
+                .map(LottoGame::new)
+                .collect(Collectors.toList());
+
         numberOfManualGames = manualLottoGame.size();
         games.addAll(manualLottoGame);
     }

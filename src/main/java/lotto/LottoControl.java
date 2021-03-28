@@ -15,11 +15,8 @@ public class LottoControl {
 
         int numberOfManualGames = View.numberOfManualGames(scanner);
         List<String> manualGameNumbers = View.manualGameNumbers(numberOfManualGames, scanner);
-        List<LottoGame> manualLottoGames = manualGameNumbers.stream()
-                .map(LottoGame::new)
-                .collect(Collectors.toList());
 
-        Lotto lotto = new Lotto(money, manualLottoGames, new RandomLottoNumberGenerator());
+        Lotto lotto = new Lotto(money, manualGameNumbers, new RandomLottoNumberGenerator());
         View.print(lotto);
 
         LottoGame typedWinningNumber = new LottoGame(View.winningNumber(scanner));

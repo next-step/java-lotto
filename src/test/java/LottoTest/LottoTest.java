@@ -36,7 +36,7 @@ public class LottoTest {
     @Test
     @DisplayName("수동 로또 입력 받기 테스트")
     void Given_ManualLottoGame_When_New_Then_InstanceCreated() {
-        List<LottoGame> manualLottoGame = null;
+        List<String> manualLottoGame = null;
 
         assertDoesNotThrow(() -> {
             lotto = new Lotto(MONEY, manualLottoGame, lottoNumberGenerator);
@@ -44,25 +44,25 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("수동 로또가 있을 때 lotto.games()가 알맞은 값을 리턴하는지 테스트")
-    void Given_ManualLottoGame_When_Game_Then_NumberOfGame() {
-        List<LottoGame> manualLottoGame = Arrays.asList(new LottoGame("1, 2, 3, 4, 5, 6"));
+    @DisplayName("문자열 형식의 수동 로또 입력 받기")
+    void Given_StringManualLottoNumbers_When_New_Then_IstanceCreated() {
+        List<String> manualLottoNumbers = Arrays.asList(
+                "1,2,3,4,5,6",
+                "10,11,2,3,4,30"
+        );
 
-        lotto = new Lotto(MONEY, manualLottoGame, lottoNumberGenerator);
-
-        //when
-        List<LottoGame> games = lotto.games();
-
-        //then
-        assertThat(games.size()).isEqualTo(NUMBER_OF_GAMES);
+        assertDoesNotThrow(() -> {
+            lotto = new Lotto(MONEY, manualLottoNumbers, lottoNumberGenerator);
+        });
     }
+
 
     @Test
     @DisplayName("로또 금액보다 수동 로또가 더 많으면 Exception")
     void Given_TooManyLottoGame_When_New_Then_Exception() {
-        List<LottoGame> manualLottoGame = Arrays.asList(
-                new LottoGame("1, 2, 3, 4, 5, 6"),
-                new LottoGame("1, 2, 3, 4, 5, 6")
+        List<String> manualLottoGame = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 6"
         );
 
 
