@@ -18,7 +18,7 @@ class LottoTest {
   public void isCreateByNumbers() throws Exception {
     //given
     //when
-    Lotto lotto = Lotto.generatedManualLottoNumber(Arrays.asList(1,2,3,4,5,6));
+    Lotto lotto = Lotto.generateManualLottoNumber(Arrays.asList(1,2,3,4,5,6));
 
     //then
     assertEquals(lotto.getNumbers(), lotto.getNumbers());
@@ -41,5 +41,17 @@ class LottoTest {
             () -> new Lotto(numbers));
 
     assertTrue(thrown.getMessage().contains("중복"));
+  }
+
+  @Test
+  @DisplayName("오름차순으로 정렬이 제대로 되는가")
+  public void sort() throws Exception {
+    //given
+    Lotto descLotto = Lotto.generateManualLottoNumber(Arrays.asList(6,5,4,3,2,1));
+    Lotto ascLotto = Lotto.generateManualLottoNumber(Arrays.asList(1,2,3,4,5,6));
+
+    //when
+    //then
+    assertEquals(descLotto, ascLotto);
   }
 }
