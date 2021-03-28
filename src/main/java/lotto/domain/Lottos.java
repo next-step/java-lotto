@@ -24,9 +24,7 @@ public class Lottos {
     public ResultGroup getResult(WinningLotto winingLotto) {
         ResultGroup resultGroup = new ResultGroup();
         for (Lotto lotto : lottos) {
-            int howMatch = lotto.howMatch(winingLotto);
-            boolean matchBonus = lotto.matchBonus(winingLotto);
-            resultGroup.update(ResultMap.of(howMatch, matchBonus));
+            resultGroup.update(winingLotto.howMatch(lotto));
         }
         return resultGroup;
     }

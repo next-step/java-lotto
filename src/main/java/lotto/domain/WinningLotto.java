@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class WinningLotto {
@@ -24,11 +23,11 @@ public class WinningLotto {
         return lottoNumbers.size();
     }
 
-    public List<LottoNumber> of() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public ResultMap howMatch(Lotto lotto) {
+        int howMatch = (int) lottoNumbers.stream()
+                .filter(lotto::hasValue)
+                .count();
+        boolean matchBonus = lotto.hasValue(bonusNumber);
+        return ResultMap.of(howMatch, matchBonus);
     }
 }
