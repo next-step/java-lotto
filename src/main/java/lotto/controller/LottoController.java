@@ -39,7 +39,11 @@ public class LottoController {
 		InputView inputLastWeekWinnerView = new InputView("지난 주 당첨 번호를 입력해주세요.");
 		String lastWeekWinnerNumberInput = inputLastWeekWinnerView.getInputString();
 
-		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber(lastWeekWinnerNumberInput);
+		InputView inputBonusNumberView = new InputView("보너스 번호를 입력해주세요.");
+		int bonusNumberInput = inputBonusNumberView.getInputInt();
+
+		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber(lastWeekWinnerNumberInput,
+			bonusNumberInput);
 		return lotteries.calculateRanking(lastWeekWinnerNumber);
 	}
 

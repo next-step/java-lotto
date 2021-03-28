@@ -2,9 +2,15 @@ package lotto.domain;
 
 public class LastWeekWinnerNumber {
 	private final Lotto winnerNumber;
+	private final int bonusNumber;
 
 	public LastWeekWinnerNumber(String inputNumber) {
-		winnerNumber = new Lotto(inputNumber);
+		this(inputNumber, 0);
+	}
+
+	public LastWeekWinnerNumber(String inputNumber, int bonusNumber) {
+		this.winnerNumber = new Lotto(inputNumber);
+		this.bonusNumber = bonusNumber;
 	}
 
 	public Lotto getLastWinnerNumber() {
