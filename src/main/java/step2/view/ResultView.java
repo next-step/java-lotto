@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
+        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottoCount()));
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(prettyString(lotto));
         }

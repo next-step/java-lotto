@@ -38,6 +38,10 @@ public class Lottos {
                 .reduce(0, Integer::sum);
     }
 
+    public int getLottoCount() {
+        return lottos.size();
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
