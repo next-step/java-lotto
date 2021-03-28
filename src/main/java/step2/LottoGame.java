@@ -15,6 +15,6 @@ public class LottoGame {
         Lottos lottos = Lottos.of(new RandomLottoNumberGenerator(purchaseManager));
         resultView.printPurchaseNumber(purchaseManager);
         resultView.printLottoList(lottos);
-        resultView.printLottoStatistic(lottos,inputView.winningLotto());
+        resultView.printLottoStatistic(lottos,inputView.winningLotto(),purchaseManager);
     }
 }

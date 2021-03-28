@@ -1,8 +1,5 @@
 package step2;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -32,7 +29,7 @@ public class ResultView {
         System.out.print("]");
     }
 
-    public void printLottoStatistic(Lottos lottos, WinningLotto winningLotto) {
+    public void printLottoStatistic(Lottos lottos, WinningLotto winningLotto, PurchaseManager purchaseManager) {
         Rank ranking = lottos.makeStatistic(winningLotto);
         System.out.println("당첨통계");
         System.out.println("------");
@@ -41,5 +38,7 @@ public class ResultView {
             System.out.println(String.format("%d개 일치 (%d)원 - %d개",
                     rank,LottoPrize.getPrizeInfoByHitCount(hitCount).prize(),ranking.size(hitCount)));
         }
+        Profit profit = new Profit(purchaseManager,ranking);
+        System.out.println(String.format("총 수익률은 %.2f 입니다.", profit.profitRate()));
     }
 }
