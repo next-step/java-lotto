@@ -7,6 +7,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.machine.LottoMachine;
 import lotto.domain.machine.TestLottoGenerator;
+import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -82,6 +83,14 @@ public class AutomatedLottoTest {
         long counts = myLotto.getEqualNumberCountFrom(yourLotto);
 
         assertThat(counts).isEqualTo(2L);
+    }
+
+    @Test
+    @DisplayName("일치하는 개수에 따라 Prize(당첨금)을 반환한다.")
+    void lottoPrizeMappingTest() {
+        long prize = Prize.getPrizeByEqualNumberCount(6);
+
+        assertThat(prize).isEqualTo(2_000_000_000L);
     }
 
 }
