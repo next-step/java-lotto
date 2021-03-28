@@ -44,9 +44,11 @@ public class LottoTest {
   @ParameterizedTest
   @MethodSource("lottoAndWinningNumberAndMatch")
   @DisplayName("등수 반환 체크")
-  public void grade(List<Integer> lottoNumber, List<Integer> winningNumber, int match) {
+  public void grade(List<Integer> lottoNumber, String winningNumber, int match) {
     Lotto lotto = new Lotto(lottoNumber);
-    int numberOfMatched = lotto.match(winningNumber);
+    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
+
+    int numberOfMatched = lotto.match(winning.number());
 
     assertThat(numberOfMatched).isEqualTo(match);
   }
@@ -55,12 +57,12 @@ public class LottoTest {
     return Stream.of(
       Arguments.of(
         Arrays.asList(1, 2, 3, 4, 5, 6),
-        Arrays.asList(1, 2, 3, 4, 5, 6),
+        "1,2,3,4,5,6",
         6
       ),
       Arguments.of(
         Arrays.asList(1, 2, 3, 4, 5, 6),
-        Arrays.asList(1, 2, 3, 4, 5, 7),
+        "1,2,3,4,5,7",
         5
       )
     );

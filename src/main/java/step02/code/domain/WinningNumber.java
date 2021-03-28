@@ -1,21 +1,23 @@
 package step02.code.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
-  private List<Integer> winningNumber;
+  private List<Number> winningNumber;
 
-  private WinningNumber(List<Integer> winningNumber) {
+  public WinningNumber(List<Number> winningNumber) {
     this.winningNumber = winningNumber;
   };
 
   public static WinningNumber makeWinningNumberByString(String str) {
-    List<Integer> winningNumber = Arrays.stream(str.split(","))
+    List<Number> winningNumber = Arrays.stream(str.split(","))
       .map(String::trim)
       .map(WinningNumber::check)
       .map(Integer::parseInt)
+      .map(Number::new)
       .collect(Collectors.toList());
     return new WinningNumber(winningNumber);
   }
@@ -32,7 +34,7 @@ public class WinningNumber {
     return str;
   }
 
-  public List<Integer> number() {
-    return winningNumber;
+  public List<Number> number() {
+    return Collections.unmodifiableList(winningNumber);
   }
 }

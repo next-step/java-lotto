@@ -5,7 +5,6 @@ import java.util.Map;
 import step02.code.common.InputView;
 import step02.code.common.ResultView;
 import step02.code.domain.GradeEnum;
-import step02.code.domain.Lotto;
 import step02.code.domain.Lottos;
 import step02.code.domain.WinningNumber;
 
@@ -17,8 +16,6 @@ public class Main {
     ResultView.myLotto(lottos.lottos());
 
     WinningNumber winningNumber = WinningNumber.makeWinningNumberByString(InputView.winningNumber());
-    // winningNumber validation check 용
-    new Lotto(winningNumber.number());
 
     // 결과
     System.out.println("당첨 통계");

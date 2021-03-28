@@ -42,13 +42,13 @@ public class Lottos {
       .collect(Collectors.toList());
   }
 
-  public List<Integer> match(List<Integer> winningNumber) {
+  public List<Integer> match(List<Number> winningNumber) {
     return lottos.stream()
       .map(lotto -> lotto.match(winningNumber))
       .collect(Collectors.toList());
   }
 
-  public Map<Integer, Integer> result(List<Integer> winningNumber) {
+  public Map<Integer, Integer> result(List<Number> winningNumber) {
     return match(winningNumber)
       .stream()
       .collect(Collectors.toMap(matched -> matched, matched -> 1, Integer::sum));

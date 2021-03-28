@@ -54,8 +54,9 @@ public class LottosTest {
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
   @DisplayName("winning number 와 비교해 맞는갯수를 담은 list 가 return 되는지 테스트")
-  public void match(Lottos lottos, List<Integer> winningNumber, List<Integer> mustMatched) {
-    List<Integer> matched = lottos.match(winningNumber);
+  public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
+    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
+    List<Integer> matched = lottos.match(winning.number());
 
     assertThat(matched.size()).isEqualTo(mustMatched.size());
     assertThat(matched).hasSameElementsAs(mustMatched);
@@ -73,7 +74,7 @@ public class LottosTest {
             new Lotto(Arrays.asList(1,2,3,4,5,7))
           )
         ),
-        Arrays.asList(1, 2, 3, 4, 5, 6),
+        "1,2,3,4,5,6",
         Arrays.asList(6, 6, 5, 5, 5),
         Map.of(6, 2, 5, 3)
       ),
@@ -85,7 +86,7 @@ public class LottosTest {
             new Lotto(Arrays.asList(1,2,3,4,5,45))
           )
         ),
-        Arrays.asList(40, 41, 42, 43, 44, 45),
+        "40,41,42,43,44,45",
         Arrays.asList(4, 2, 1),
         Map.of(4, 1, 2, 1, 1, 1)
       )
@@ -95,8 +96,9 @@ public class LottosTest {
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
   @DisplayName("결과 합산된 데이터가 정확히 만들어 지는지 테스트")
-  public void result(Lottos lottos, List<Integer> winningNumber, List<Integer> mustMatched, Map<Integer, Integer> mustResult) {
-    Map<Integer, Integer> result = lottos.result(winningNumber);
+  public void result(Lottos lottos, String winningNumber, List<Integer> mustMatched, Map<Integer, Integer> mustResult) {
+    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
+    Map<Integer, Integer> result = lottos.result(winning.number());
 
     assertThat(result.equals(mustResult)).isTrue();
   }

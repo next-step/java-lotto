@@ -5,27 +5,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class Lotto {
   private static final int LOTTO_SIZE = 6;
-  private static final int MIN_NUM = 1;
-  private static final int MAX_NUM = 45;
 
-  private final List<Integer> lotto;
+  private final List<Number> lotto;
 
   public Lotto(List<Integer> lotto) {
     check(lotto);
-    this.lotto = lotto;
+    this.lotto = lotto.stream().map(Number::new).collect(Collectors.toList());
   }
 
   private void check(List<Integer> lotto) {
     if(lotto.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException("lotto 는 6개의 숫자가 필요합니다");
-    }
-    boolean isNotCovered = lotto.stream().anyMatch((num) -> num < MIN_NUM || num > MAX_NUM);
-    if(isNotCovered) {
-      throw new IllegalArgumentException("lotto 는 " + MIN_NUM + " 부터 " + MAX_NUM + " 사이의 값이어야 합니다");
     }
     Set<Integer> overlapRemoved = new HashSet<>(lotto);
     if(overlapRemoved.size() != LOTTO_SIZE) {
@@ -33,14 +28,16 @@ public class Lotto {
     }
   }
 
-  public int match(List<Integer> winningNumber) {
-    List<Integer> lotto = new ArrayList<>(this.lotto);
+  public int match(List<Number> winningNumber) {
+    List<Number> lotto = new ArrayList<>(this.lotto);
     lotto.removeAll(winningNumber);
     return LOTTO_SIZE - lotto.size();
   }
 
   public List<Integer> lotto() {
-    return Collections.unmodifiableList(lotto);
+    return lotto.stream()
+      .map(Number::number)
+      .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
   }
   
 }
