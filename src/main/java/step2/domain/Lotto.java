@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.constants.Constants;
 import step2.generator.NumberGenerator;
 
 import java.util.ArrayList;
@@ -22,7 +23,16 @@ public class Lotto {
     }
 
     public static Lotto from(List<Number> lotto) {
+        if (lotto.size() != Constants.LOTTO_SIZE) {
+            throw new RuntimeException("로또 숫자는 6개이여야 합니다.");
+        }
         return new Lotto(lotto);
+    }
+
+    public int getMatchCount(Lotto prizeLotto) {
+        return (int) prizeLotto.getNumbers().stream()
+                .filter(number -> this.lotto.contains(number))
+                .count();
     }
 
     public List<Number> getNumbers() {

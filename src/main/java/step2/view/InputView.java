@@ -20,7 +20,7 @@ public class InputView {
     }
 
     public static List<Number> inputPrizeLotto() {
-        printNewLine();
+        System.out.println("");
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] prizeNumbers = scanner.next().split(",");
         List<Number> prizeLotto = new ArrayList<>();
@@ -28,9 +28,5 @@ public class InputView {
             prizeLotto.add(Number.from(Integer.valueOf(number)));
         }
         return prizeLotto;
-    }
-
-    private static void printNewLine() {
-        System.out.println("");
     }
 }
