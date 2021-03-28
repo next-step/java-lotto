@@ -75,7 +75,8 @@ class WinningScoreBoardTest {
     void 반환_수익률() {
         // then
         Map<WinningScore, Integer> testMap = new HashMap<>();
-        int expected = 2_001_555_000;
+        int inputMoney = 2_001_555_000;
+        double expected = 1;
 
         // when
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
@@ -85,7 +86,7 @@ class WinningScoreBoardTest {
         winningScoreBoard.increaseCount(WinningScore.FIVE);
         winningScoreBoard.increaseCount(WinningScore.SIX);
 
-        int actual = winningScoreBoard.getYield();
+        double actual = winningScoreBoard.getYield(inputMoney);
 
         // then
         assertThat(actual).isEqualTo(expected);

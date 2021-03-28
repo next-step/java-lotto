@@ -30,7 +30,7 @@ public final class LottoApplication {
         resultView.printLottoList(lottoController.generateLottoList(lottoCreationRequestDto));
 
         LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoController.checkWinning(inputView.getLottoConfirmationRequestDto());
-        resultView.printLottoResult(lottoWinningResultResponseDto);
+        resultView.printLottoResult(lottoWinningResultResponseDto, lottoCreationRequestDto.getMoney());
     }
 
 }

@@ -1,9 +1,6 @@
 package step2.dto;
 
-import step2.domain.winning.WinningScore;
 import step2.domain.winning.WinningScoreBoard;
-
-import java.util.Map;
 
 public class LottoWinningResultResponseDto {
 

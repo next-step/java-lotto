@@ -18,17 +18,34 @@ public class WinningScoreBoard {
     }
 
     private void init(Map<WinningScore, Integer> winningScoreBoard) {
-        for(WinningScore winningScore: WinningScore.values()){
+        for (WinningScore winningScore : WinningScore.values()) {
             winningScoreBoard.put(winningScore, ZERO);
         }
     }
 
     public final void increaseCount(WinningScore winningScore) {
-        winningScoreBoard.put(winningScore, get(winningScore)+INCREASE);
+        winningScoreBoard.put(winningScore, get(winningScore) + INCREASE);
     }
 
     public final int get(WinningScore winningScore) {
         return winningScoreBoard.get(winningScore);
     }
+
+    public final double getYield(int inputMoney) {
+        return divideRevenueByInput(inputMoney);
+    }
+
+    private final int getRevenue() {
+        int sum = 0;
+        for (WinningScore winningScore : WinningScore.values()) {
+            sum += Math.multiplyExact(winningScore.getWinningAmount(), get(winningScore));
+        }
+        return sum;
+    }
+
+    private final double divideRevenueByInput(int inputMoney) {
+        return ((double)getRevenue() / (double)inputMoney);
+    }
+
 
 }

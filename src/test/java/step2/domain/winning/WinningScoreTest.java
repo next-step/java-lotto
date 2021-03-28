@@ -31,7 +31,7 @@ class WinningScoreTest {
                 () -> assertThat(WinningScore.THREE.getWinningAmount()).isEqualTo(5_000),
                 () -> assertThat(WinningScore.FOUR.getWinningAmount()).isEqualTo(50_000),
                 () -> assertThat(WinningScore.FIVE.getWinningAmount()).isEqualTo(1_500_000),
-                () -> assertThat(WinningScore.SIX.getWinningAmount()).isEqualTo(1_500_000)
+                () -> assertThat(WinningScore.SIX.getWinningAmount()).isEqualTo(2_000_000_000)
         );
 
     }
