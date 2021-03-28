@@ -27,22 +27,19 @@ public enum LottoRank {
         if (isLose(matchCount)) {
             return LOSE;
         }
-        if (FIRST.getMatchCount() == matchCount) {
-            return FIRST;
-        }
-        if (THIRD.getMatchCount() == matchCount) {
-            return THIRD;
-        }
-        if (FOURTH.getMatchCount() == matchCount) {
-            return FOURTH;
-        }
-        if (FIFTH.getMatchCount() == matchCount) {
-            return FIFTH;
+        for (LottoRank rank : LottoRank.values()) {
+            if (rank.match(matchCount)) {
+                return rank;
+            }
         }
         throw new IllegalArgumentException();
     }
 
     private static boolean isLose(int matchCount) {
         return matchCount >= LOSE.getMatchCount() && matchCount < FIFTH.getMatchCount();
+    }
+
+    private boolean match(int matchCount) {
+        return this.matchCount == matchCount;
     }
 }
