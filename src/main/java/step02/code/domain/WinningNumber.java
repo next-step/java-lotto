@@ -12,7 +12,7 @@ public class WinningNumber {
   };
 
   public static WinningNumber makeWinningNumberByString(String str) {
-    List<Integer> winningNumber = Arrays.asList(str.split(",")).stream()
+    List<Integer> winningNumber = Arrays.stream(str.split(","))
       .map(String::trim)
       .map(WinningNumber::check)
       .map(Integer::parseInt)
