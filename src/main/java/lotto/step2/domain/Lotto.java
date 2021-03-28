@@ -27,10 +27,12 @@ public class Lotto {
         }
     }
 
-    public int match(Lotto winningNumbers) {
-        return lottoNumbers.stream()
-                .mapToInt(number -> winningNumbers.lottoNumbers.contains(number) ? MATCHED : MISMATCHED)
+    public Rank match(WinningNumbers winningNumbers) {
+        int hit = lottoNumbers.stream()
+                .mapToInt(number -> winningNumbers.lottoNumbers().contains(number) ? MATCHED : MISMATCHED)
                 .sum();
+        boolean bonusNumber = lottoNumbers.contains(winningNumbers.bonusNumber());
+        return Rank.from(hit, bonusNumber);
     }
 
     public List<LottoNumber> lottoNumbers() {

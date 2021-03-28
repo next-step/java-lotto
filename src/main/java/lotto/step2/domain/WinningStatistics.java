@@ -14,11 +14,11 @@ public class WinningStatistics {
     private final Map<Rank, Integer> winningStatistics = new HashMap<>();
     private final long lottoCount;
 
-    public WinningStatistics(Lottos lottos, Lotto winningLotto) {
+    public WinningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
         Arrays.stream(Rank.values())
                 .forEach(rank -> winningStatistics.put(rank, 0));
         lottos.lottos()
-                .forEach(lotto -> hit(lotto.match(winningLotto)));
+                .forEach(lotto -> hit(lotto.match(winningNumbers)));
         lottoCount = lottos.lottos().size();
     }
 
@@ -26,14 +26,13 @@ public class WinningStatistics {
         return Collections.unmodifiableMap(winningStatistics);
     }
 
-    public void hit(long hit) {
-        Rank rank = Rank.from(hit);
+    public void hit(Rank rank) {
         winningStatistics.put(rank, winningStatistics.get(rank) + 1);
     }
 
     private long sum() {
         long sum = 0;
-        for(Rank rank : winningStatistics.keySet()) {
+        for (Rank rank : winningStatistics.keySet()) {
             long multiple = rank.amount() * winningStatistics.get(rank);
             sum += multiple;
         }
@@ -43,7 +42,7 @@ public class WinningStatistics {
     public double profits() {
         BigDecimal purchasingAmount = BigDecimal.valueOf(lottoCount * PRICE_PER_LOTTO);
         return BigDecimal.valueOf(sum())
-                .divide(purchasingAmount,SCALE,BigDecimal.ROUND_DOWN)
+                .divide(purchasingAmount, SCALE, BigDecimal.ROUND_DOWN)
                 .doubleValue();
     }
 
