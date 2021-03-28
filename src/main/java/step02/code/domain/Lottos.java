@@ -17,8 +17,8 @@ public class Lottos {
   }
 
   public Lottos(int money) { 
+    this(buy(money));
     check(money);
-    this.lottos = buy(money);
   }
 
   private void check(int money) {
