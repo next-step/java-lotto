@@ -76,7 +76,45 @@ public class LottosTest {
           )
         ),
         "1,2,3,4,5,6",
-        Arrays.asList(6, 5, 5, 5, 6),
+        Arrays.asList(6, 5, 5, 5, 6)
+      ),
+      Arguments.of(
+        new Lottos(
+          Arrays.asList(
+            new Lotto(Arrays.asList(1,2,41,42,43,44)),
+            new Lotto(Arrays.asList(1,2,3,4,43,44)),
+            new Lotto(Arrays.asList(1,2,3,4,5,45))
+          )
+        ),
+        "40,41,42,43,44,45",
+        Arrays.asList(4, 2, 1)
+      )
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("lottosAndWinningNumberAndResult")
+  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
+  public void result(Lottos lottos, String winningNumber, Map<Integer, Integer> mustResult) {
+    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
+    Map<Integer, Integer> result = lottos.result(winning.number());
+
+    assertThat(result.equals(mustResult)).isTrue();
+  }
+
+  private static Stream<Arguments> lottosAndWinningNumberAndResult() {
+    return Stream.of(
+      Arguments.of(
+        new Lottos(
+          Arrays.asList(
+            new Lotto(Arrays.asList(1,2,3,4,5,6)),
+            new Lotto(Arrays.asList(1,2,3,4,5,6)),
+            new Lotto(Arrays.asList(1,2,3,4,5,7)),
+            new Lotto(Arrays.asList(1,2,3,4,5,7)),
+            new Lotto(Arrays.asList(1,2,3,4,5,7))
+          )
+        ),
+        "1,2,3,4,5,6",
         Map.of(6, 2, 5, 3)
       ),
       Arguments.of(
@@ -88,19 +126,8 @@ public class LottosTest {
           )
         ),
         "40,41,42,43,44,45",
-        Arrays.asList(4, 2, 1),
         Map.of(4, 1, 2, 1, 1, 1)
       )
     );
-  }
-
-  @ParameterizedTest
-  @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
-  public void result(Lottos lottos, String winningNumber, List<Integer> mustMatched, Map<Integer, Integer> mustResult) {
-    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
-    Map<Integer, Integer> result = lottos.result(winning.number());
-
-    assertThat(result.equals(mustResult)).isTrue();
   }
 }
