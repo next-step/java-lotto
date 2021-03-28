@@ -42,6 +42,23 @@ public class LastWeekWinnerNumberTest {
 	}
 
 	@Test
+	@DisplayName("당첨 번호 일치 갯수 테스트")
+	void matchCountTest() {
+		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber("1,2,3,4,5,45");
+		int matchCount = lastWeekWinnerNumber.getMatchCount(new Lotto(() -> {
+			List<LottoNumber> gameNumberList = new ArrayList<>();
+			gameNumberList.add(new LottoNumber(1));
+			gameNumberList.add(new LottoNumber(2));
+			gameNumberList.add(new LottoNumber(3));
+			gameNumberList.add(new LottoNumber(4));
+			gameNumberList.add(new LottoNumber(5));
+			gameNumberList.add(new LottoNumber(44));
+			return gameNumberList;
+		}));
+		assertThat(matchCount).isEqualTo(5);
+	}
+
+	@Test
 	@DisplayName("수익률 테스트")
 	void RorTest() {
 		Lotteries lotteries = new Lotteries(
