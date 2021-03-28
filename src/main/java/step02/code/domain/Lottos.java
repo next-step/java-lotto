@@ -1,5 +1,6 @@
 package step02.code.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +51,6 @@ public class Lottos {
   }
 
   public List<Lotto> lottos() {
-    return lottos.stream()
-      .collect(Collectors.toList());
+    return Collections.unmodifiableList(lottos);
   }
 }

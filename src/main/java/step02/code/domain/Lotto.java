@@ -67,8 +67,7 @@ public class Lotto {
   }
 
   public List<Number> lotto() {
-    return lotto.stream()
-      .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    return Collections.unmodifiableList(lotto);
   }
   
 
