@@ -1,17 +1,32 @@
 package lotto.domain;
 
-public class Lotto {
-    private final int[] lotto;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-    public Lotto(int i, int i1, int i2, int i3, int i4, int i5) {
-        lotto = new int[]{};
+public class Lotto {
+    private final List<Integer> rangeNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private final List<Integer> lotto;
+
+
+    public Lotto() {
+        Collections.shuffle(rangeNumbers);
+        lotto = rangeNumbers.stream()
+                .sorted()
+                .limit(6)
+                .collect(Collectors.toList());
     }
 
-    public Lotto(int[] randomNumbers) {
+    public Lotto(List<Integer> randomNumbers) {
         lotto = randomNumbers;
     }
 
     public Rank winningResult(WinningNumber winningNumber) {
-        return Rank.OTHER;
+        int matchCount = (int) winningNumber.getWinningNumbers()
+                .stream()
+                .filter(number -> this.lotto.contains(number))
+                .count();
+        return Rank.valueOf(matchCount);
     }
 }

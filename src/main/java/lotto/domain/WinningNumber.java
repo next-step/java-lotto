@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
-    public final List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public WinningNumber() {
         winningNumbers = new ArrayList<>();
     }
 
-    public WinningNumber(int[] winningNumber) {
-        winningNumbers = new ArrayList<>();
+    public WinningNumber(List<Integer> winningNumber) {
+        this.winningNumbers = winningNumber;
     }
 
     public List<Integer> getWinningNumbers() {
