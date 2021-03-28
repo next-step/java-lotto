@@ -21,7 +21,7 @@ public class WinningNumber {
 
     public WinningNumber(LottoGame winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("당첨번호와 보너스 번호는 중복될 수 없습니다.");
         }
 
         this.winningNumber = winningNumber;
