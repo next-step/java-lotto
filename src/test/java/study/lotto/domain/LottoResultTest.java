@@ -33,9 +33,7 @@ class LottoResultTest {
     private static Stream<Arguments> winningEntry() {
         return Stream.of(
             Arguments.of(
-                    new WinningLotto(Lotto.of(IntStream.range(1, 7)
-                            .mapToObj(LottoNumber::of).collect(Collectors.toList()))
-                            , LottoNumber.of(8)),
+                    WinningLotto.of("1,2,3,4,5,6", LottoNumber.of(8)),
                     LottoMatch.RANK_FIRST,
                     1
             )
@@ -44,9 +42,7 @@ class LottoResultTest {
     private static Stream<Arguments> winningRateEntry() {
         return Stream.of(
             Arguments.of(
-                    new WinningLotto(Lotto.of(IntStream.range(1, 7)
-                            .mapToObj(LottoNumber::of).collect(Collectors.toList()))
-                            , LottoNumber.of(8)),
+                    WinningLotto.of("1,2,3,4,5,6", LottoNumber.of(8)),
                     ProfitMessage.PROFIT
             )
         );
@@ -60,7 +56,7 @@ class LottoResultTest {
         // given
         Lottos lottos = new Lottos(lottoList);
         // when
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
         long count = lottoResult.count(match);
         // then
         assertThat(count).isEqualTo(matchCount);
@@ -73,7 +69,7 @@ class LottoResultTest {
         // given
         Lottos lottos = new Lottos(lottoList);
         // when
-        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+        LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
         double winningRate = lottoResult.winningRate();
         ProfitMessage actual = ProfitMessage.of(winningRate);
         // then

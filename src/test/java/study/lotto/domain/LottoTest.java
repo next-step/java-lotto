@@ -19,7 +19,7 @@ public class LottoTest {
         List<LottoNumber> collect = IntStream.range(1, 7)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
-        lotto = new Lotto(collect);
+        lotto = Lotto.of(collect);
     }
 
     @DisplayName("로또 생성 및 match 된 숫자 테스트")
@@ -27,9 +27,9 @@ public class LottoTest {
     void match_로또_번호_생성_및_숫자매칭() {
         // given
         List<LottoNumber> collect = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
-        Lotto given = new Lotto(collect);
+        Lotto given = Lotto.of(collect);
         // when
         long match = lotto.match(given);
         // then
