@@ -7,6 +7,7 @@ import step02.code.common.ResultView;
 import step02.code.domain.GradeEnum;
 import step02.code.domain.Lotto;
 import step02.code.domain.Lottos;
+import step02.code.domain.Outcome;
 
 public class Main {
   public static void main(String[] args) {
@@ -21,8 +22,10 @@ public class Main {
     System.out.println("당첨 통계");
     System.out.println("---------------");
 
+    Outcome outcome = new Outcome(money, lottos, winningNumber);
+
     int total = 0;
-    Map<Integer, Integer> result = lottos.result(winningNumber.lotto());
+    Map<Integer, Integer> result = outcome.statistic();
     for(int i = 3; i <= 6; i++) {
       GradeEnum grade = GradeEnum.fromGrade(i);
       int matched = result.getOrDefault(i, 0);
@@ -32,8 +35,7 @@ public class Main {
       ResultView.result(i, grade.prize(), matched);
     }
 
-    float rate = (float) total / money;
-    ResultView.rate(rate);
+    ResultView.rate(outcome.profit(total));
     
     InputView.close();
   } 

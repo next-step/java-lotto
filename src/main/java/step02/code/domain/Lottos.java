@@ -2,7 +2,6 @@ package step02.code.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -36,18 +35,6 @@ public class Lottos {
       .boxed()
       .map((i) -> new Lotto(new RandomNumber()))
       .collect(Collectors.toList());
-  }
-
-  public List<Integer> match(List<Number> winningNumber) {
-    return lottos.stream()
-      .map(lotto -> lotto.match(winningNumber))
-      .collect(Collectors.toList());
-  }
-
-  public Map<Integer, Integer> result(List<Number> winningNumber) {
-    return match(winningNumber)
-      .stream()
-      .collect(Collectors.toMap(matched -> matched, matched -> 1, Integer::sum));
   }
 
   public List<Lotto> lottos() {
