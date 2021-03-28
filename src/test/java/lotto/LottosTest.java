@@ -12,7 +12,7 @@ public class LottosTest {
   @Test
   @DisplayName("[Lottos] 입력한 가격만큼 로또 생성 되는지 테스트")
   void createLottosTest() {
-    Amount amount = new Amount(14000);
+    Amount amount = new Amount(14000, 0);
     Lottos lottos = new Lottos(amount);
 
     int size = lottos.getLottos().size();
