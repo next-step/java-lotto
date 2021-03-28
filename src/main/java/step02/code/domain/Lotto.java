@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class Lotto {
   }
 
   public static Lotto makeLottoByString(String str) {
+    isEmpty(str);
     List<Integer> lotto = Arrays.stream(str.split(","))
       .map(String::trim)
       .map(Lotto::check)
@@ -32,10 +34,14 @@ public class Lotto {
     return new Lotto(lotto);
   }
 
-  public static String check(String str) {
+  public static void isEmpty(String str) {
     if(str == null || str.equals("")) {
       throw new IllegalArgumentException("null or 빈값이 들어올 수 없습니다.");
     }
+  }
+
+  public static String check(String str) {
+    isEmpty(str);
     try {
       Integer.parseInt(str);
     } catch (Exception e) {
@@ -65,4 +71,21 @@ public class Lotto {
       .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
   }
   
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this)
+        return true;
+    if (!(o instanceof Lotto)) {
+        return false;
+    }
+    Lotto lotto = (Lotto) o;
+    return Objects.equals(this.lotto, lotto.lotto);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(lotto);
+  }
+
 }

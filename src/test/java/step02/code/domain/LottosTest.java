@@ -55,8 +55,8 @@ public class LottosTest {
   @MethodSource("lottosAndWinningNumberAndMatch")
   @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트 테스트")
   public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
-    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
-    List<Integer> matched = lottos.match(winning.number());
+    Lotto winning = Lotto.makeLottoByString(winningNumber);
+    List<Integer> matched = lottos.match(winning.lotto());
 
     assertThat(matched)
       .hasSize(mustMatched.size())
@@ -96,8 +96,8 @@ public class LottosTest {
   @MethodSource("lottosAndWinningNumberAndResult")
   @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
   public void result(Lottos lottos, String winningNumber, Map<Integer, Integer> mustResult) {
-    WinningNumber winning = WinningNumber.makeWinningNumberByString(winningNumber);
-    Map<Integer, Integer> result = lottos.result(winning.number());
+    Lotto winning = Lotto.makeLottoByString(winningNumber);
+    Map<Integer, Integer> result = lottos.result(winning.lotto());
 
     assertThat(result.equals(mustResult)).isTrue();
   }
