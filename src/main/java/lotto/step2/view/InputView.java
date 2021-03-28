@@ -23,10 +23,9 @@ public class InputView {
         scanner.nextLine();
         return scanner.nextLine().split(DELIMITER_COMMA);
     }
-    
+
     public static String enterBonusNumber() {
         System.out.println(MESSAGE_BONUS_NUMBER);
-        scanner.nextLine();
         return scanner.next();
     }
 }

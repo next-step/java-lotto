@@ -26,6 +26,7 @@ public class ResultView {
     }
 
     public static void printResult(WinningStatistics winningStatistics) {
+        System.out.println();
         System.out.println(MESSAGE_WINNING_RESULT);
         winningStatistics.statistics()
                 .keySet()
