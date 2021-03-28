@@ -10,9 +10,9 @@ import lotto.constant.Constant;
 public class LottoNumbers {
 
   private final List<LottoNumber> numbers;
-  private LottoNumberStore store = new LottoNumberStore();
 
   public LottoNumbers() {
+    LottoNumberStore store = new LottoNumberStore();
     this.numbers = generateLottoNumbers(store.createLottoNumbers());
   }
 
