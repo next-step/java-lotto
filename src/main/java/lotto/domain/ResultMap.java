@@ -31,7 +31,7 @@ public enum ResultMap {
         return resultMap;
     }
 
-    public static List<ResultMap> all() {
+    public static List<ResultMap> winningResults() {
         return Arrays.asList(FIVE, FOUR, THIRD, SECOND, FIRST);
     }
 

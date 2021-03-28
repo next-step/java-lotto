@@ -19,7 +19,7 @@ public class ResultGroup {
 
     public String showResult() {
         StringBuilder resultBuilder = new StringBuilder();
-        for (ResultMap resultMap : ResultMap.all()) {
+        for (ResultMap resultMap : ResultMap.winningResults()) {
             resultBuilder.append(String.format("%s - %d개", resultMap.showResult(), result.get(resultMap))).append("\n");
         }
         return resultBuilder.toString();
@@ -36,7 +36,7 @@ public class ResultGroup {
 
     private double getProfit() {
         double profit = 0;
-        for (ResultMap resultMap : ResultMap.all()) {
+        for (ResultMap resultMap : ResultMap.winningResults()) {
             profit += resultMap.prize() * result.get(resultMap);
         }
         return profit;
