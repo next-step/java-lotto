@@ -31,27 +31,13 @@ public class InputView {
     }
 
     private static LottoNumber parseBonusBall(String bonusBall) {
-        validateNumber(bonusBall);
-        int parseBonusBall = Integer.parseInt(bonusBall);
-        return new LottoNumber(parseBonusBall);
+        return LottoNumber.of(bonusBall);
     }
 
     private static List<LottoNumber> parseLottoNumber(String[] inputWinner) {
-        for (String number : inputWinner) {
-            validateNumber(number);
-        }
         return Arrays.stream(inputWinner)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
-    }
-
-    private static void validateNumber(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해 주세요");
-        }
     }
 
     private static void validateInputWinner(String[] inputWinner, String bonusBall) {
