@@ -65,4 +65,12 @@ public class AutomatedLottoTest {
         assertThat(lottories.size()).isEqualTo(lottoQuantity);
     }
 
+    @Test
+    @DisplayName("구입 금액이 음수이면, 예외를 발생시킨다.")
+    void lottoShopNegativeBalanceTest() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoShop(-3000))
+                .withMessage("금액은 음수일 수 없습니다.");
+    }
+
 }
