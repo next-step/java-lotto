@@ -5,9 +5,9 @@ import study.lotto.util.Validation;
 
 import java.util.Objects;
 
+import static study.lotto.domain.Money.GUIDE_ERR_NOT_USE_VALUE;
 import static study.lotto.service.LottoFactory.MAX_NUMBER_BOUND;
 import static study.lotto.service.LottoFactory.MIN_NUMBER_BOUND;
-import static study.lotto.util.Constants.GUIDE_ERR_NOT_USE_VALUE;
 
 /**
  * 로또 숫자 번호에 대한 wrapper class

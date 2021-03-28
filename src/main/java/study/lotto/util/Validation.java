@@ -4,7 +4,7 @@ import study.lotto.exception.LottoException;
 
 import java.util.Objects;
 
-import static study.lotto.util.Constants.GUIDE_ERR_NOT_USE_VALUE;
+import static study.lotto.domain.Money.GUIDE_ERR_NOT_USE_VALUE;
 
 public class Validation {
 
