@@ -9,13 +9,11 @@ import lotto.domain.shop.LottoShop;
 
 public class LottoEarningRateCalculator {
     private final long principal; // 원금
-    private final Lotto winnerLotto;
-    private final List<Lotto> winnerCandidates;
+    private final LottoScoreBoard lottoScoreBoard;
 
     public LottoEarningRateCalculator(Lotto winnerLotto, List<Lotto> winnerCandidates) {
         principal = winnerCandidates.size() * LottoShop.LOTTO_PRICE;
-        this.winnerLotto = winnerLotto;
-        this.winnerCandidates = winnerCandidates;
+        this.lottoScoreBoard = new LottoScoreBoard(winnerLotto, winnerCandidates);
     }
 
     public String resultToString() {
@@ -31,9 +29,11 @@ public class LottoEarningRateCalculator {
         }
 
         long prizeTotal = 0L;
-        for (Lotto lotto : winnerCandidates) {
-            long equalNumberCount = winnerLotto.getEqualNumberCountFrom(lotto);
-            prizeTotal += Prize.getPrizeByEqualNumberCount(equalNumberCount);
+        lottoScoreBoard.scoring();
+
+        for (Prize prize : Prize.values()) {
+            Long winnings = lottoScoreBoard.getWinningsByEqualNumberCount(prize.getEqualNumberCount());
+            prizeTotal += prize.getPrizeAmount() * winnings;
         }
         return prizeTotal / (double) principal;
     }

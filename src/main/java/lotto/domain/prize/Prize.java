@@ -22,6 +22,10 @@ public enum Prize {
                         .findAny().map(Prize::getPrizeAmount).orElse(0L);
     }
 
+    public long getEqualNumberCount() {
+        return this.equalNumberCount;
+    }
+
     private boolean isSameNumberAs(long equalNumberCount) {
         if (this.equalNumberCount == equalNumberCount) {
             return true;
@@ -29,7 +33,7 @@ public enum Prize {
         return false;
     }
 
-    private long getPrizeAmount() {
+    public long getPrizeAmount() {
         return this.prizeAmount;
     }
 
