@@ -30,7 +30,7 @@ public final class LottoWinningChecker {
         this.WinningLotto = WinningLotto;
     }
 
-    public LottoWinningResultResponseDto 비즈니스_로직을_검증하기위한_메서드(LottoList lottoList) {
+    public LottoWinningResultResponseDto getLottoWinningResultResponseDto(LottoList lottoList) {
         List<Lotto> lottos = lottoList.getLottoList();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
         for(Lotto lotto : lottos) {

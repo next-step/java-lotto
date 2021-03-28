@@ -24,7 +24,7 @@ class WinningScoreTest {
 
     @DisplayName("WinningScore 값 반환 테스트")
     @Test
-    void 값_반환() {
+    void 반환_값() {
 
         assertAll(
                 () -> assertThat(WinningScore.MISS.getWinningAmount()).isEqualTo(0),
@@ -32,6 +32,20 @@ class WinningScoreTest {
                 () -> assertThat(WinningScore.FOUR.getWinningAmount()).isEqualTo(50_000),
                 () -> assertThat(WinningScore.FIVE.getWinningAmount()).isEqualTo(1_500_000),
                 () -> assertThat(WinningScore.SIX.getWinningAmount()).isEqualTo(1_500_000)
+        );
+
+    }
+
+    @DisplayName("WinningScore 값 반환 테스트")
+    @Test
+    void 반환_맞은갯수() {
+
+        assertAll(
+                () -> assertThat(WinningScore.MISS.getCorrectCount()).isEqualTo(0),
+                () -> assertThat(WinningScore.THREE.getCorrectCount()).isEqualTo(3),
+                () -> assertThat(WinningScore.FOUR.getCorrectCount()).isEqualTo(4),
+                () -> assertThat(WinningScore.FIVE.getCorrectCount()).isEqualTo(5),
+                () -> assertThat(WinningScore.SIX.getCorrectCount()).isEqualTo(6)
         );
 
     }

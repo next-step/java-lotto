@@ -2,6 +2,7 @@ package step2;
 
 import step2.controller.LottoController;
 import step2.dto.LottoCreationRequestDto;
+import step2.dto.LottoWinningResultResponseDto;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -28,7 +29,8 @@ public final class LottoApplication {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
         resultView.printLottoList(lottoController.generateLottoList(lottoCreationRequestDto));
 
-        lottoController.비즈니스로직(inputView.getLottoConfirmationRequestDto());
+        LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoController.checkWinning(inputView.getLottoConfirmationRequestDto());
+        resultView.printLottoResult(lottoWinningResultResponseDto);
     }
 
 }
