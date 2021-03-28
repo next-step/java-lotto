@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class TestLottoNumberGenerator implements NumberGenerator {
     private static final List<Integer> allLottoNumbers =
-            IntStream.range(1, 7)
+            IntStream.rangeClosed(1, 6)
                     .boxed()
                     .collect(Collectors.toList());
 
