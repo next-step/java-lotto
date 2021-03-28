@@ -27,12 +27,12 @@ public class HitNumbers {
     return new LottoNumbers(inputNumbers
         .stream()
         .mapToInt(Integer::parseInt)
-        .mapToObj(LottoNumber::new)
+        .mapToObj(LottoNumber::of)
         .collect(Collectors.toList()));
   }
 
   private LottoNumber generateBonusNumber(int bonusNumber) {
-    LottoNumber number = new LottoNumber(bonusNumber);
+    LottoNumber number = LottoNumber.of(bonusNumber);
     validateBonus(number);
     return number;
   }

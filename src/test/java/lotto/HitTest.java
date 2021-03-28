@@ -18,7 +18,7 @@ public class HitTest {
   @DisplayName("[Hit] 당첨 번호 갯수 count 테스트")
   void countHitTest() {
     List<LottoNumber> numbers = IntStream.rangeClosed(1, 6)
-        .mapToObj(LottoNumber::new)
+        .mapToObj(LottoNumber::of)
         .collect(Collectors.toList());
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
     HitNumbers hitNumbers = new HitNumbers("1, 2, 3, 4, 5, 7", 10);

@@ -15,7 +15,7 @@ public class LottoNumberStore {
 
   public List<LottoNumber> createBaseNumbers() {
     return IntStream.rangeClosed(Constant.MIN_NUM, Constant.MAX_NUM)
-        .mapToObj(LottoNumber::new)
+        .mapToObj(LottoNumber::of)
         .collect(Collectors.toList());
   }
 
