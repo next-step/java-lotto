@@ -3,26 +3,26 @@ package step2.domain;
 import step2.constants.Constants;
 import step2.generator.NumberGenerator;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Lotto {
-    private final List<Number> lotto;
+    private final Set<Number> lotto;
 
-    private Lotto(final List<Number> lotto) {
+    private Lotto(final Set<Number> lotto) {
         this.lotto = lotto;
     }
 
     public static Lotto from(NumberGenerator numberGenerator) {
-        List<Number> lotto = new ArrayList<>();
+        Set<Number> lotto = new HashSet<>();
         for (Integer number : numberGenerator.generator()) {
             lotto.add(Number.from(number));
         }
         return new Lotto(lotto);
     }
 
-    public static Lotto from(List<Number> lotto) {
+    public static Lotto from(Set<Number> lotto) {
         if (lotto.size() != Constants.LOTTO_SIZE) {
             throw new RuntimeException("로또 숫자는 6개이여야 합니다.");
         }
@@ -36,7 +36,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<Number> getNumbers() {
-        return Collections.unmodifiableList(lotto);
+    public Set<Number> getNumbers() {
+        return Collections.unmodifiableSet(lotto);
     }
 }

@@ -4,8 +4,8 @@ import step2.constants.Constants;
 import step2.domain.Number;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -20,11 +20,11 @@ public class InputView {
         return price;
     }
 
-    public static List<Number> inputPrizeLotto() {
+    public static Set<Number> inputPrizeLotto() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String[] prizeNumbers = scanner.next().split(",");
         return Arrays.stream(prizeNumbers)
                 .map(number -> Number.from(Integer.valueOf(number)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

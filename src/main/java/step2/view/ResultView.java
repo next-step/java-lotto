@@ -19,6 +19,7 @@ public class ResultView {
                         lotto.getNumbers()
                                 .stream()
                                 .map(Number::getNumber)
+                                .sorted()
                                 .map(i -> String.valueOf(i))
                                 .collect(Collectors.joining(", ")),
                 "]");

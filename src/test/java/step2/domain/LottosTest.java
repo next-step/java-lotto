@@ -6,7 +6,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step2.generator.TestLottoNumberGenerator;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,10 +36,10 @@ class LottosTest {
         Lottos lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(1000));
         Prize prize = Prize.findPrize(matchCount);
 
-        List<Number> numbers = Arrays.asList(purchaseNumber.split(","))
+        Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
                 .map(i -> Number.from(Integer.valueOf(i)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         Lotto prizeLotto = Lotto.from(numbers);
 
         // when
@@ -54,10 +55,10 @@ class LottosTest {
             "1,2,3,4,5,6:2000000000"}, delimiter = ':')
     void getTotalPrizeAmount(String purchaseNumber, int expectedTotalPrizeAmount) {
         // given
-        List<Number> numbers = Arrays.asList(purchaseNumber.split(","))
+        Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
                 .map(i -> Number.from(Integer.valueOf(i)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         Lotto prizeLotto = Lotto.from(numbers);
         Lottos lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(1000));
 

@@ -18,7 +18,6 @@ public class LottoNumberGenerator implements NumberGenerator {
         Collections.shuffle(allLottoNumbers);
         return allLottoNumbers.stream()
                 .limit(Constants.LOTTO_SIZE)
-                .sorted()
                 .collect(Collectors.toList());
     }
 }
