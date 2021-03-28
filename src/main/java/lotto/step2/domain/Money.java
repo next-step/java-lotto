@@ -1,6 +1,5 @@
 package lotto.step2.domain;
 
-import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 public class Money {
@@ -11,7 +10,7 @@ public class Money {
     private final static String NUMERIC_REGEX = "^[-]?[0-9]+$";
     private final static Pattern PATTERN_NUMERIC = Pattern.compile(NUMERIC_REGEX);
 
-    public Money(String money){
+    public Money(String money) {
         this(checkNumeric(money));
     }
 
@@ -20,8 +19,8 @@ public class Money {
         this.money = money;
     }
 
-    private static long checkNumeric(String number){
-        if(!PATTERN_NUMERIC.matcher(number).matches()){
+    private static long checkNumeric(String number) {
+        if (!PATTERN_NUMERIC.matcher(number).matches()) {
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
         }
         return Integer.parseInt(number);
