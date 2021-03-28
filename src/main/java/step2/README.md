@@ -10,24 +10,39 @@
     - 3,4,5,6개 일치된 개수 출력
     - 투자금액 대비 당첨된 금액으로 총 수익률 출력
 
-## 구조
+## 구조(구현 전)
 - domain
     - Number
     - Lotto
     - Lottos
     - Money
-  
 - service
     - LottoService
-  
 - controller
     - LottoController
-    
 - generator
     - LottoNumberStrategy
     - NumberGenerator
     - TestLottoNumberStrategy
-  
+- view
+    - InputView
+    - ResultView
+
+## 구조(구현 후)
+- constants
+    - Constants
+- domain
+    - Lotto
+    - Lottos
+    - Money
+    - Number
+    - Prize
+- controller
+    - LottoController
+- generator
+    - LottoNumberStrategy
+    - NumberGenerator
+    - TestLottoNumberStrategy
 - view
     - InputView
     - ResultView
