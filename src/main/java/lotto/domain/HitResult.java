@@ -15,7 +15,12 @@ public class HitResult {
 
     public HitMoney hitMoney() {
         Prize prize = Prize.findPrize(hitCount());
-        return prize == null ? new HitMoney(0) : prize.getPrizeMoney();
+
+        if (prize == null) {
+            return new HitMoney(0);
+        }
+
+        return prize.getPrizeMoney();
     }
 
     public boolean isHitPrize(Prize prize) {
