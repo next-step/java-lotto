@@ -21,7 +21,7 @@ public class Lottos {
     this.lottos = buy(money);
   }
 
-  public static void check(int money) {
+  private void check(int money) {
     if(money < LOTTO_PRICE) {
       throw new IllegalArgumentException("lotto 구입의 최소 금액보다 작습니다");
     }

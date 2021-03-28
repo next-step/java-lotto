@@ -22,11 +22,11 @@ public class LottosTest {
   public void check() {
     assertThatThrownBy(() -> {
       // 로또 최소 구매 금액 이하인경우
-      Lottos.check(500);
+      new Lottos(500);
     }).isInstanceOf(IllegalArgumentException.class);
     assertThatThrownBy(() -> {
       // 로또 구매후 잔액이 남는 경우
-      Lottos.check(1500);
+      new Lottos(1500);
     }).isInstanceOf(IllegalArgumentException.class);
   }
 
