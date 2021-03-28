@@ -1,6 +1,7 @@
 package step02.code.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -14,12 +15,33 @@ public class Lotto {
   private final List<Number> lotto;
 
   public Lotto(List<Integer> lotto) {
-    check(lotto);
     this.lotto = lotto.stream().map(Number::new).collect(Collectors.toList());
+    check(lotto);
   }
 
   public Lotto(MakeNumber makeNumber) {
     this(makeNumber.make());
+  }
+
+  public static Lotto makeLottoByString(String str) {
+    List<Integer> lotto = Arrays.stream(str.split(","))
+      .map(String::trim)
+      .map(Lotto::check)
+      .map(Integer::parseInt)
+      .collect(Collectors.toList());
+    return new Lotto(lotto);
+  }
+
+  public static String check(String str) {
+    if(str == null || str.equals("")) {
+      throw new IllegalArgumentException("null or 빈값이 들어올 수 없습니다.");
+    }
+    try {
+      Integer.parseInt(str);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("not int error");
+    }
+    return str;
   }
 
   private void check(List<Integer> lotto) {
@@ -38,9 +60,8 @@ public class Lotto {
     return LOTTO_SIZE - lotto.size();
   }
 
-  public List<Integer> lotto() {
+  public List<Number> lotto() {
     return lotto.stream()
-      .map(Number::number)
       .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
   }
   
