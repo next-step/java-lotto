@@ -12,7 +12,7 @@ public class LottoGame {
 
     public void start(){
         PurchaseManager purchaseManager = new PurchaseManager(inputView.buyLotto());
-        Lottos lottos = Lottos.of(purchaseManager);
+        Lottos lottos = Lottos.of(purchaseManager,new RandomLottoNumberGenerator());
         resultView.printPurchaseNumber(purchaseManager);
         resultView.printLottoList(lottos);
         resultView.printLottoStatistic(lottos,inputView.winningLotto());

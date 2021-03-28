@@ -11,7 +11,7 @@ public class PurchaseTest {
     @DisplayName("로또 구매시 Lottos 번호 6개 자동 생성 테스트")
     void 로또번호_6개_자동생성_테스트(){
         PurchaseManager manager = new PurchaseManager(new Money(14000));
-        Lottos lottos = Lottos.of(manager);
+        Lottos lottos = Lottos.of(manager,new RandomLottoNumberGenerator());
         assertThat(lottos.getLottos().size()).isEqualTo(manager.getPurchasedLottoNumber().getNumber());
     }
 

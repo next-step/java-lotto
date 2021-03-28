@@ -16,10 +16,10 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public static Lottos of(PurchaseManager manager){
+    public static Lottos of(PurchaseManager manager,LottoNumberGenerator generator){
         List<Lotto> lottoList = new ArrayList<>();
         for(int i=0; i<manager.getPurchasedLottoNumber().getNumber();i++){
-            lottoList.add(Lotto.generate());
+            lottoList.add(generator.generate());
         }
         return new Lottos(lottoList);
     }
