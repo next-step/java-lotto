@@ -46,9 +46,13 @@
     - static void check(int money);
     - static List<Lotto> buy(int money);
       - 돈에 따라서 로또 구입
-    - List<Integer> match(List<Integer> numbers);
-      - 당첨번호를 받아서, 등수 list 를 return
-    - Map<Integer, Integer> result();
-      - result 출력 할 수 있도록 map 으로 등수 합산
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
+- ## OutCome.java
+  - field
+  - constructor
+    - public OutCome(int money, Lottos lottos, Lotto winningNumber);
+  - method
+    - List<Integer> match(List<Number winningNumber>);
+    - Map<Integer, Integer> statistic();
+    - float profit(int income);
