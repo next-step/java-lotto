@@ -6,7 +6,7 @@ import lotto.constant.Constant;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-  private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+  private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
   private final int number;
 
   static {
