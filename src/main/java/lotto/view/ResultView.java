@@ -20,11 +20,18 @@ public class ResultView {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("------------");
-		for (Ranking ranking : Ranking.values()) {
-			System.out.println(
-				ranking.getMatchCount() + "개 일치 (" + ranking.getPrice() + "원) - " + rankingResult.getResult()
-					.get(ranking) + "개");
+		Ranking[] rankings = Ranking.values();
+		for (int i = 0; i < rankings.length; i++) {
+			printLine(rankingResult, rankings[i]);
 		}
 		System.out.println("총 수익률은 " + ror + "입니다.");
+	}
+
+	private void printLine(RankingResult rankingResult, Ranking ranking) {
+		String matchCount =
+			(ranking.equals(Ranking.SECOND)) ? ranking.getMatchCount() + "개 일치, 보너스 볼 일치" : ranking.getMatchCount() + "개 일치";
+		System.out.println(
+			matchCount + " (" + ranking.getPrice() + "원) - " + rankingResult.getResult()
+				.get(ranking) + "개");
 	}
 }

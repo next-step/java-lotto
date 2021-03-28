@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -32,17 +30,11 @@ public class Lotteries {
 
 	public RankingResult calculateRanking(LastWeekWinnerNumber lastWeekWinnerNumber) {
 		RankingResult rankingResult = new RankingResult();
-		Map<Integer, Integer> winnerCountPerRanking = new HashMap<>();
-		lotteries.forEach(lottoGame -> {
-			int equalCount = (int)lottoGame.getGameNumberList()
-				.stream()
-				.filter(
-					lottoNumber -> lastWeekWinnerNumber.getLastWinnerNumber().getGameNumberList().contains(lottoNumber))
-				.count();
-
-			winnerCountPerRanking.put(equalCount, winnerCountPerRanking.getOrDefault(equalCount, 0) + 1);
+		lotteries.forEach(lotto -> {
+			int matchCount = lastWeekWinnerNumber.getMatchCount(lotto);
+			boolean matchBonusCount = lastWeekWinnerNumber.getMatchBonusCount(lotto);
+			rankingResult.saveRanking(matchCount, matchBonusCount);
 		});
-		rankingResult.saveRanking(winnerCountPerRanking);
 		return rankingResult;
 	}
 
