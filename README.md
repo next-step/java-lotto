@@ -14,11 +14,9 @@
 
 ## 구현 객체
 
-* Domain   
-  * LottoNumber   
-    * 로또 번호 생성자(1~45 까지의 숫자)   
+* Domain    
   * Lotto   
-    * 로또 1회 생성자(6개의 LottoNumber를 갖고 있음)   
+    * 로또 1회 생성자(6개의 LottoNumber(1~45 까지의 숫자)를 갖고 있음)   
     * 당첨결과(param : WinningNumbers, return : Rank)   
   * Lottos   
     * 로또 n회 생성자(n = 구매금액 / 로또 가격)   
@@ -28,8 +26,9 @@
     * 게임 당첨 번호 생성자(input된 당첨 번호)   
     * getWinningNumbers(return : 게임 당첨 번호)
   * Rank(enum)   
-    * 형식 : 등수(int matchCount, int winningMoney) (등수 : 1등~꽝)
-    * 당첨등수 생성자(param : matchCount)   
+    * 형식 : 등수(int matchCount, int winningMoney) (등수 : 1등~5등, 꽝)
+    * Rank 생성자(param : matchCount)   
+    * valueOf
   
 
 * module
@@ -42,8 +41,11 @@
     * getWinner
     * getYield  
   * Statistics   
-    * 당첨 통계(6개일치,5개일치,4개일치,3개일치,꽝)   
+    * 변수 : statistics = map<Rank, count>
+    * 변수 : 구매금액
+    * 통계 생성자(Lottos, WinningNumber)   
     * 수익률   
+    * 손해유무   
 
 * ui   
   * InputView   
