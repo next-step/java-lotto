@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoGameUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +35,9 @@ public class WinNumbers {
     public HitCount hitNumberCount(Numbers numbers) {
         int hitCount = 0;
         for (int winNumber : this.winNumbers) {
-            hitCount = hitCount + zeroOrOne(numbers.contains(winNumber));
+            hitCount = hitCount + LottoGameUtil.zeroOrOne(numbers.contains(winNumber));
         }
 
         return new HitCount(hitCount, numbers.contains(bonusNumber));
-    }
-
-    private int zeroOrOne(boolean isContain) {
-        return isContain ? 1 : 0;
     }
 }

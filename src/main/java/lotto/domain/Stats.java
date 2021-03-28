@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.LottoGameUtil;
 import lotto.util.MathUtil;
 
 import java.util.HashMap;
@@ -42,12 +43,8 @@ public class Stats {
     private int prizeCount(Prize prize) {
         int prizeCount = 0;
         for (HitResult hitResult : hitResults.getHitResults()) {
-            prizeCount = prizeCount + zeroOrOne(hitResult.isHitPrize(prize));
+            prizeCount = prizeCount + LottoGameUtil.zeroOrOne(hitResult.isHitPrize(prize));
         }
         return prizeCount;
-    }
-
-    private int zeroOrOne(boolean isHitPrize) {
-        return isHitPrize ? 1 : 0;
     }
 }
