@@ -3,9 +3,6 @@ package step2.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PrizeTest {
@@ -16,31 +13,5 @@ class PrizeTest {
         Prize prize = Prize.findPrize(findCount);
         assertThat(prize.getMatchCount()).isEqualTo(expectedCount);
         assertThat(prize.getAmount()).isEqualTo(expectedAmount);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"3,1", "4,2", "5,3", "6,4"})
-    void findMatchPrizes(int findCount, int expectedSize) {
-        // given
-        List<Prize> prizes = new ArrayList<>();
-        prizes.add(Prize.THREE_MATCH);
-
-        prizes.add(Prize.FOUR_MATCH);
-        prizes.add(Prize.FOUR_MATCH);
-
-        prizes.add(Prize.FIVE_MATCH);
-        prizes.add(Prize.FIVE_MATCH);
-        prizes.add(Prize.FIVE_MATCH);
-
-        prizes.add(Prize.ALL_MATCH);
-        prizes.add(Prize.ALL_MATCH);
-        prizes.add(Prize.ALL_MATCH);
-        prizes.add(Prize.ALL_MATCH);
-
-        // when
-        int prizesSize = Prize.findMatchPrizes(prizes, Prize.findPrize(findCount)).size();
-
-        // then
-        assertThat(prizesSize).isEqualTo(expectedSize);
     }
 }
