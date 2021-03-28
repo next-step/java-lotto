@@ -15,45 +15,40 @@
   - field
     - List<Integer> lotto;
   - constructor
-    - Lotto();
-      - 자동생성, random 6 자리 생성
     - Lotto(List<Integer> numbers);
       - 수동생성
+    - Lotto(MakeNumber makeNumber);
+      - 자동생성, random 6 자리 생성
+    - Lotto makeLottoByString(String str)
+      - string 값으로 winning number 생성하는 용도
   - method
-    - void check();
-      - redirect to check(List<Integer> lotto);
+    - void isEmpty();
+      - null or empty check
+    - String check(String str);
+      - string 으로 생성시 check 용도
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
       - 동일한 숫자가 없는지
       <!-- - List<Integer> lottoNumbers(AutoNumber autoNumber); -->
     - int match(List<Integer> winningNumber);
       - 당첨번호와 맞춰본후 등수를 return;
+    - List<Number> lotto()
+      - 불변객체로 lotto 반환
 - ## Lottos.java
   - field
     - List<Lotto> lottos;
   - constructor
+    - Lottos(List<Lotto> lottos);
+      - 주 생성자
     - Lottos(int money);
       - 돈을 받고, lotto list 생성
   - method
     - static void check(int money);
     - static List<Lotto> buy(int money);
       - 돈에 따라서 로또 구입
-    - Iterator<List<Integer>> lottos();
-      - 구매한 lotto 번호를 확인하기 위해, list return
-      - 이부분은 return 값을 iterator 로 구현해볼 예정
     - List<Integer> match(List<Integer> numbers);
       - 당첨번호를 받아서, 등수 list 를 return
-    - List<Integer> lottoNumbers();
-      - 로또 숫자 6자리 생성
-      - set 으로 생성해서 동일한 숫자가 안겹치도록
     - Map<Integer, Integer> result();
       - result 출력 할 수 있도록 map 으로 등수 합산
-- ## WinningNumber.java
-  - field
-    - List<Integer> winningNumber;
-  - constructor
-    - private WinningNumber();
-  - method
-    - public static WinningNumber makeWinningNumberByString(String str);
-    - public void check(String str);
-    - public List<Integer> number();
+    - List<Lotto> lottos();
+      - 불변객체로 lottos 반환
