@@ -15,12 +15,15 @@ public class Game {
         this.numbers = init(numbers);
     }
 
-    public Integer containCount(Game prize) {
+    public Rank containCount(Game prize, Bonus bonus) {
         long count = numbers.stream()
             .filter(prize.numbers::contains)
             .count();
 
-        return Long.valueOf(count).intValue();
+        boolean matchBonus = numbers.stream()
+            .anyMatch(bonus.ball()::equals);
+
+        return Rank.valueOf(Long.valueOf(count).intValue(), matchBonus);
     }
 
     public List<Number> numbers() {

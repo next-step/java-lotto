@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class Candidate {
 
-    private final Map<Integer, List<Game>> rank;
+    private final Map<Rank, List<Game>> rank;
 
-    public Candidate(Map<Integer, List<Game>> rank) {
+    public Candidate(Map<Rank, List<Game>> rank) {
         this.rank = rank;
     }
 
-    public Map<Integer, List<Game>> rank() {
+    public Map<Rank, List<Game>> rank() {
         return this.rank;
     }
 
-    public Integer count(int prizeRank) {
+    public Integer count(Rank prizeRank) {
         if (rank.get(prizeRank) == null) {
             return 0;
         }

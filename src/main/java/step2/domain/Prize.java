@@ -5,32 +5,44 @@ import static step2.util.StringConstant.DELIMITER_COMMA;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Prize {
 
     private final Game last;
+    private final Bonus bonus;
 
-    public Prize(String input) {
+    public Prize(String input, String bonus) {
         this.last = new Game(toNumbers(input));
+        this.bonus = new Bonus(toNumber(bonus));
     }
 
     public double profit(Candidate candidate, Seed seed) {
-        int sum = 0;
-        for (int prizeRank = 3; prizeRank <= 6; ++prizeRank) {
-            Integer money = Payout.money(prizeRank);
-            Integer count = candidate.count(prizeRank);
-            sum += (money * count);
-        }
-        return (sum * 1.0) / seed.amount();
+        AtomicInteger sum = new AtomicInteger();
+        Arrays.stream(Rank.values())
+            .forEach(rank -> {
+                Integer money = rank.getWinningMoney();
+                Integer count = candidate.count(rank);
+                sum.addAndGet(money * count);
+            });
+        return (sum.get() * 1.0) / seed.amount();
     }
 
     public Game last() {
         return this.last;
     }
 
+    public Bonus bonus() {
+        return this.bonus;
+    }
+
     private List<Integer> toNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER_COMMA))
             .map(Integer::parseInt)
             .collect(toList());
+    }
+
+    private Number toNumber(String bonus) {
+        return new Number(Integer.parseInt(bonus));
     }
 }

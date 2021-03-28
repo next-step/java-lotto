@@ -24,9 +24,9 @@ public class Lotto {
             .collect(collectingAndThen(toList(), games::addAll));
     }
 
-    public Map<Integer, List<Game>> candidate(Prize prize) {
+    public Map<Rank, List<Game>> candidate(Prize prize) {
         return games.stream()
-            .collect(Collectors.groupingBy(game -> game.containCount(prize.last())));
+            .collect(Collectors.groupingBy(game -> game.containCount(prize.last(), prize.bonus())));
     }
 
     public int size() {

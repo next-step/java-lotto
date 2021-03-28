@@ -9,19 +9,19 @@ import step2.view.OutputView;
 
 public class LottoApplication {
 
-    public static final int lengthPerGame = 6;
-    public static final int pricePerGame = 1000;
+    public static final int LENGTH_PER_GAME = 6;
+    public static final int PRICE_PER_GAME = 1000;
 
     public static void main(String[] args) {
         Lotto lotto = new Lotto();
         Seed seed = new Seed(InputView.getSeed());
 
-        lotto.init(seed.amount() / pricePerGame, lengthPerGame);
+        lotto.init(seed.amount() / PRICE_PER_GAME, LENGTH_PER_GAME);
 
         OutputView.printGameSize(lotto);
         OutputView.printGames(lotto);
 
-        Prize prize = new Prize(InputView.getPrize());
+        Prize prize = new Prize(InputView.getPrize(), InputView.getBonus());
 
         Candidate candidate = new Candidate(lotto.candidate(prize));
         OutputView.printStatistics();

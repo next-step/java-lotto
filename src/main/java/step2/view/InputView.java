@@ -16,8 +16,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int getBonus() {
+    public static String getBonus() {
         System.out.println(Message.BONUS);
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
 }

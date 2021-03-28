@@ -3,9 +3,10 @@ package step2.view;
 import static step2.util.StringConstant.NEW_LINE;
 import static step2.view.Message.SAME_COUNT;
 
+import java.util.Arrays;
 import step2.domain.Candidate;
 import step2.domain.Lotto;
-import step2.domain.Payout;
+import step2.domain.Rank;
 
 public class OutputView {
 
@@ -24,14 +25,16 @@ public class OutputView {
 
     public static void printResult(Candidate candidate) {
         StringBuilder result = new StringBuilder();
-        for (int prizeRank = 3; prizeRank <= 6; ++prizeRank) {
-            result.append(prizeRank)
-                .append(SAME_COUNT)
-                .append(Payout.money(prizeRank))
-                .append(" - ")
-                .append(candidate.count(prizeRank))
-                .append(NEW_LINE);
-        }
+        Arrays.stream(Rank.values())
+            .filter(rank -> !rank.equals(Rank.MISS))
+            .forEach(rank -> {
+                result.append(rank.getCountOfMatch())
+                    .append(SAME_COUNT)
+                    .append(rank.getWinningMoney())
+                    .append(" - ")
+                    .append(candidate.count(rank))
+                    .append(NEW_LINE);
+            });
 
         System.out.println(result);
     }
