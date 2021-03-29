@@ -18,11 +18,8 @@ class LottosTest {
     void lottos_of(int input, int expected) {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
         List<Lotto> lottos = IntStream.range(0, input)
-                .mapToObj(i ->
-                        Lotto.of(lottoGenerator.generateShuffledLotto())
-                )
+                .mapToObj(i -> Lotto.of(lottoGenerator.generateShuffledLotto()))
                 .collect(Collectors.toList());
-
         assertThat(Lottos.of(lottos).getSize()).isEqualTo(expected);
     }
 }
