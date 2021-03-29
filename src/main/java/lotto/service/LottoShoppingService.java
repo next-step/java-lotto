@@ -9,10 +9,10 @@ import lotto.view.dto.LottoDto;
 import lotto.view.dto.LottoOrderDto;
 import lotto.view.dto.LottoOrderResultDto;
 
-public class LottoService {
+public class LottoShoppingService {
     private final LottoGenerator lottoGenerator;
 
-    public LottoService(LottoGenerator lottoGenerator) {
+    public LottoShoppingService(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
     }
 

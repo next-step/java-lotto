@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.machine.TestLottoGenerator;
 import lotto.service.LottoScoringService;
-import lotto.service.LottoService;
+import lotto.service.LottoShoppingService;
 import lotto.view.dto.LottoDto;
 import lotto.view.dto.LottoOrderDto;
 import lotto.view.dto.LottoOrderResultDto;
@@ -18,7 +18,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("구입 금액에 따라 로또를 구매하는 서비스")
     void lottoOrderingServiceTest() {
-        LottoService lottoService = new LottoService(new TestLottoGenerator());
+        LottoShoppingService lottoService = new LottoShoppingService(new TestLottoGenerator());
         LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
 
         LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
@@ -29,7 +29,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("당첨 번호를 입력하면, 구매한 로또와 비교해주는 서비스")
     void lottoWinnerScoringServiceTest() {
-        LottoService lottoService = new LottoService(new TestLottoGenerator());
+        LottoShoppingService lottoService = new LottoShoppingService(new TestLottoGenerator());
         LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
         LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
         LottoDto winnerLottoDto = new LottoDto(17, 18, 19, 20, 21, 22);
