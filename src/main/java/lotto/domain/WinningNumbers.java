@@ -10,7 +10,6 @@ public class WinningNumbers {
     public static final int SECOND_COUNT = 5;
     int[] winNumbers;
     int bonusNumber;
-    Map<Integer, Integer> map;
     private Map<Rank, Integer> ranks;
 
     public WinningNumbers(String[] winNumbers) {
@@ -18,12 +17,6 @@ public class WinningNumbers {
     }
 
     public WinningNumbers(int[] winNumbers) {
-        map = new HashMap<>();
-        map.put(6, 0); //1등 - 6개일치
-        map.put(2, 0); //2등 - 5개일치 + 보너스
-        map.put(3, 0); //3등 - 5개일치
-        map.put(4, 0); //4등 - 4개일치
-        map.put(5, 0); //5등 - 3개일치
         this.winNumbers = winNumbers;
         this.ranks = new HashMap<>();
         for(Rank rank : Rank.values()) {
@@ -61,10 +54,11 @@ public class WinningNumbers {
     }
 
     public double earningsRate(int price) {
-        int total = map.get(3) * 5000;
-        total += map.get(4) * 50000;
-        total += map.get(5) * 1500000;
-        total += map.get(6) * 2000000000;
+        int total = this.ranks.get(Rank.FIRST) * Rank.FIRST.getWinningMoney()
+        + this.ranks.get(Rank.SECOND) * Rank.SECOND.getWinningMoney()
+        + this.ranks.get(Rank.THIRD) * Rank.THIRD.getWinningMoney()
+        + this.ranks.get(Rank.FOURTH) * Rank.FOURTH.getWinningMoney()
+        + this.ranks.get(Rank.FIFTH) * Rank.FIFTH.getWinningMoney();
         System.out.println(total);
         return Math.floor((double) total / price * 100.0) / 100.0;
     }
