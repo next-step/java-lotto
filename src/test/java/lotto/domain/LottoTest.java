@@ -96,6 +96,21 @@ class LottoTest {
         () -> assertThat(match1.getMatchCount()).isEqualTo(expectedCount1),
         () -> assertThat(match2.getMatchCount()).isEqualTo(expectedCount2)
     );
+  }
 
+  @Test
+  @DisplayName("로또 번호 포함하는지 테스트")
+  void contains() {
+    // given
+    Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+    LottoNumber containedLottoNumber = LottoNumber.valueOf("6");
+    LottoNumber notContainedLottoNumber = LottoNumber.valueOf("6");
+
+    // when
+    // then
+    assertAll(
+        () -> assertThat(lotto.contains(containedLottoNumber)).isTrue(),
+        () -> assertThat(lotto.contains(notContainedLottoNumber)).isFalse()
+    );
   }
 }

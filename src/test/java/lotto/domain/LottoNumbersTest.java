@@ -40,6 +40,8 @@ class LottoNumbersTest {
     assertThat(new LottoNumbers(lottoNumberCreationStrategy).size()).isEqualTo(LOTTO_NUMBER_COUNT);
   }
 
+  // TODO: 생성 실패 테스트
+
   @ParameterizedTest
   @DisplayName("당첨번호 목록을 입력받아 생성")
   @MethodSource("winningNumbersSource")
