@@ -4,17 +4,15 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public enum Rank {
     NO_MATCH(0, 0L),
-    THREE_MATCH_PRICE(3, 5000L),
-    FOUR_MATCH_PRICE(4, 50_000L),
-    FIVE_MATCH_PRICE(5, 1_500_000L),
-    SIX_MATCH_PRICE(6, 2_000_000_000L);
+    THREE_MATCH(3, 5000L),
+    FOUR_MATCH(4, 50_000L),
+    FIVE_MATCH(5, 1_500_000L),
+    SIX_MATCH(6, 2_000_000_000L);
 
     public static final int LOTTO_PRICE = 1000;
-    private static Rank[] prices = {NO_MATCH, NO_MATCH, NO_MATCH, THREE_MATCH_PRICE, FOUR_MATCH_PRICE, FIVE_MATCH_PRICE, SIX_MATCH_PRICE};
 
     private final int matchNo;
     private final Long winningMoney;
@@ -26,14 +24,6 @@ public enum Rank {
 
     public Long getWinningMoney() {
         return winningMoney;
-    }
-
-    public static Long calculate(int[] match) {
-        return IntStream.range(0, match.length)
-                .mapToLong(i -> {
-                    return match[i] * prices[i].winningMoney;
-                })
-                .sum();
     }
 
     public static Rank matchRank(int matchNum) {

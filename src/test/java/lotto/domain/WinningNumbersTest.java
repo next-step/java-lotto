@@ -47,23 +47,6 @@ public class WinningNumbersTest {
         assertThat(rank).isEqualTo(Rank.matchRank(matchNum));
     }
 
-//    @Test
-//    void yieldTest() {
-//        //given
-//        int buyNum = 14;
-//        Long buyMoney = buyNum * 1000L;
-//        int[] match = new int[]{0, 1, 2, 3, 4, 5, 6};
-//        Long expectMatch = 0 * 0 + 1 * 0 + 2 * 0 + 3 * THREE_PRICE + 4 * FOUR_PRICE + 5 * FIVE_PRICE + 6 * SIX_PRICE;
-//        double expect = expectMatch / buyMoney;
-//        WinningNumbers winning = new WinningNumbers(winningNumbers, match);
-//
-//        //when
-//        double result = winning.yield(buyNum);
-//
-//        //then
-//        assertThat(result).isEqualTo(expect);
-//    }
-
     Lotto createLotto(int matchNum) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = WINNING_LOWER_BOUND + matchNum; i <= WINNING_SIZE + matchNum; i++) {
