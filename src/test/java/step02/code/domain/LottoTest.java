@@ -99,4 +99,15 @@ public class LottoTest {
     );
   }
 
+  @Test
+  @DisplayName("로또번호에, 보너스 숫자와 match 된는 값이 있는경우 true")
+  public void matchWithBonusNumber() {
+    Lotto matched = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto noneMatched = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+    int bonus = 1;
+
+    assertThat(matched.isMatchBonus(bonus)).isTrue();
+    assertThat(noneMatched.isMatchBonus(bonus)).isFalse();
+  }
+
 }

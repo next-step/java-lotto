@@ -65,6 +65,10 @@ public class Lotto {
     return LOTTO_SIZE - lotto.size();
   }
 
+  public boolean isMatchBonus(int bonus) {
+    return lotto.stream().anyMatch(number -> number.isMatch(bonus));
+  }
+
   public List<Number> lotto() {
     return Collections.unmodifiableList(lotto);
   }

@@ -25,4 +25,15 @@ public class NumberTest {
       Number.numberByString("j");
     }).isInstanceOf(IllegalArgumentException.class);
   }
+
+  @Test
+  @DisplayName("숫자가 일치하면 true")
+  public void isMatch() {
+    Number matched = new Number(1);
+    Number noneMatched = new Number(2);
+    int number = 1;
+
+    assertThat(matched.isMatch(number)).isTrue();
+    assertThat(noneMatched.isMatch(number)).isFalse();
+  }
 }
