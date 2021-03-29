@@ -21,7 +21,7 @@ class LottoTest {
     Lotto case3
         = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 7));
 
-    LottoNumber bonusNumber = new LottoNumber(7);
+    LottoNumber bonusNumber = LottoNumber.generateManual(7);
 
     return Stream.of(
         Arguments.of(case1, bonusNumber, LottoResult.FIRST),

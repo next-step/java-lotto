@@ -12,6 +12,7 @@ public class ResultView {
 
   private static final String DAMAGE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
   private static final String DELIMITER = ", ";
+  public static final String BUY_COUNT_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
   public static void printLottos(Lottos lottos) {
     for (Lotto ticket : lottos.getTickets()) {
@@ -67,5 +68,10 @@ public class ResultView {
     if (incomePercent < 1) {
       System.out.println(DAMAGE_MESSAGE);
     }
+  }
+
+  public static void printLottosCount(int manualTicketCount, int autoTicketCount) {
+    String message = String.format(BUY_COUNT_MESSAGE_FORMAT, manualTicketCount, autoTicketCount);
+    System.out.println(message);
   }
 }

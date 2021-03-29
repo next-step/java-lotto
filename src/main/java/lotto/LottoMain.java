@@ -9,11 +9,17 @@ import lotto.view.ResultView;
 
 public class LottoMain {
 
-  public static final LottoMachine LOTTO_MACHINE = new LottoMachine();
+  public static final LottoMachine lottoMachine = new LottoMachine();
 
   public static void main(String[] args) {
     Money money = new Money(InputView.inputMoney());
-    Lottos lottos = buyLottos(money);
+    int buyableLottoCount = money.getBuyableCount();
+    int manualTicketCount = InputView.inputManualTicketCount();
+    int autoTicketCount = buyableLottoCount - manualTicketCount;
+
+    Lottos lottos = buyManual(manualTicketCount);
+    lottos.addAll(lottoMachine.buyAuto(autoTicketCount));
+    ResultView.printLottosCount(manualTicketCount, autoTicketCount);
     ResultView.printLottos(lottos);
 
     List<Integer> winnerNumber = InputView.inputWinnerNumber();
@@ -23,9 +29,14 @@ public class LottoMain {
     ResultView.printIncomePercent(lottos.calculateIncomePercent());
   }
 
-  private static Lottos buyLottos(Money money) {
-    int count = money.getBuyableCount();
-    return LOTTO_MACHINE.generateAuto(count);
+  private static Lottos buyManual(int manualTicketCount) {
+    InputView.printInputManualLotto();
+    Lottos lottos = new Lottos();
+    for (int i = 0; i < manualTicketCount; i++) {
+      List<Integer> numbers = InputView.inputManualLottoNumbers();
+      lottos.add(lottoMachine.generateManual(numbers));
+    }
+    return lottos;
   }
 
 

@@ -17,7 +17,7 @@ public class Lotto {
   private static Set<LottoNumber> createLotto(List<Integer> numbers) {
     Set<LottoNumber> ticket = new HashSet<>();
     for (Integer number : numbers) {
-      ticket.add(new LottoNumber(number));
+      ticket.add(LottoNumber.generateManual(number));
     }
     return ticket;
   }
