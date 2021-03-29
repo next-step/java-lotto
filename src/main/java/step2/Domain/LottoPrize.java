@@ -2,13 +2,13 @@ package step2.Domain;
 
 import java.util.Arrays;
 
-public enum LottoPrize implements Comparable<LottoPrize> {
+public enum LottoPrize {
 
-    FIRST(2000000000, new HitCount(6)),
-    SECOND(10000000, new HitCount(5, true)),
-    THIRD(1500000, new HitCount(5)),
-    FOURTH(50000, new HitCount(4)),
-    FIFTH(5000, new HitCount(3)),
+    FIRST(2_000_000_000, new HitCount(6)),
+    SECOND(10_000_000, new HitCount(5, true)),
+    THIRD(1_500_000, new HitCount(5)),
+    FOURTH(50_000, new HitCount(4)),
+    FIFTH(5_000, new HitCount(3)),
     BLANK(0);
 
     private long prize;
