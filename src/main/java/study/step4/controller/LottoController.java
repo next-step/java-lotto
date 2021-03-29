@@ -21,7 +21,7 @@ public class LottoController {
         ResultView.printPurchaseLottoCount(amount.totalCount());
         ResultView.printLottoNumbers(autoLottoList.getLottos());
 
-        Lotto lotto = new Lotto(InputView.inputWinNumber());
+        Lotto lotto = InputView.inputWinNumber();
         LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
         LottoWin lottoWin = autoLottoList.result(lotto, bonusBall);
         ResultView.printResult(lottoWin);

@@ -28,10 +28,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String[] inputWinNumber() {
+    public static Lotto inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
         scanner.nextLine();
-        return scanner.nextLine().split(SPLIT_DELIMITER);
+        return new Lotto(scanner.nextLine().split(SPLIT_DELIMITER));
     }
 
     public static String inputBonusBall() {
