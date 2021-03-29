@@ -11,7 +11,7 @@ public class LottoGame {
 
     public static void main(String[] args) {
         LottoFactory.setLottoStrategy(new AutoLottoStrategy());
-        LottoFactory.lottoNumbers();
+        LottoFactory.defaultLottoNumbers();
 
         Lottos lottos = LottoFactory.lottos(InputView.inputBuy());
         ResultView.printLottos(lottos);

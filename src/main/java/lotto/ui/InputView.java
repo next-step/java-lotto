@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoStrategy.LOTTO_SIZE;
 import static lotto.domain.Price.LOTTO_PRICE;
 import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
+import static lotto.util.Message.OVERLAP_NUMBER;
 
 public class InputView {
 
@@ -36,7 +37,8 @@ public class InputView {
     public static List<LottoNumber> inputWinning() {
         System.out.println(WINNING_MESSAGE_BEFORE);
         String[] result = sc.nextLine().split(DELIMITER);
-        checkNumber(result);
+        checkNumberSize(result);
+        checkNumberOverlap(result);
 
         return Arrays.stream(result)
                 .map(Integer::parseInt)
@@ -50,10 +52,20 @@ public class InputView {
         }
     }
 
-    private static boolean checkNumber(String[] result) {
+    private static boolean checkNumberSize(String[] result) {
         if (result.length != LOTTO_SIZE) {
             throw new IllegalArgumentException(ILLEGAL_LOTTO_SIZE);
         }
+        return true;
+    }
+
+    private static boolean checkNumberOverlap(String[] result) {
+        if(Arrays.stream(result)
+                .distinct()
+                .count() != result.length) {
+            throw new IllegalArgumentException(OVERLAP_NUMBER);
+        }
+
         return true;
     }
 

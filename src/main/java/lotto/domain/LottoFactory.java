@@ -13,20 +13,20 @@ public class LottoFactory {
 
     private static LottoStrategy lottoStrategy;
 
-    public static List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public static List<LottoNumber> defaultLottoNumbers = new ArrayList<>();
 
     public static void setLottoStrategy(LottoStrategy strategy) {
         lottoStrategy = strategy;
     }
 
-    public static void lottoNumbers() {
+    public static void defaultLottoNumbers() {
         for (int i = LOTTO_START_NUM; i < LOTTO_BOUND; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            defaultLottoNumbers.add(new LottoNumber(i));
         }
     }
 
     public static Lotto lotto() {
-        return new Lotto(lottoStrategy.makeLotto(lottoNumbers));
+        return new Lotto(lottoStrategy.makeLotto(defaultLottoNumbers));
     }
 
     public static Lottos lottos(int lottoCount) {
