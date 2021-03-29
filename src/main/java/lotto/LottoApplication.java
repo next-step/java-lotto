@@ -48,7 +48,7 @@ public class LottoApplication {
     private static WinningNumbers createWinningNumbers() {
         try {
             List<String> winningNumbers = SplitUtil.splitByComma(InputView.winningNumbers());
-            return new WinningNumbers(winningNumbers);
+            return WinningNumbers.createBystrings(winningNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return createWinningNumbers();
@@ -56,14 +56,8 @@ public class LottoApplication {
     }
 
     private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        RanksCount ranksCount = new RanksCount();
-
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
-            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount());
-            ranksCount.add(rank);
-        }
-
+        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
+        ranksCount.count();
         return ranksCount;
     }
 

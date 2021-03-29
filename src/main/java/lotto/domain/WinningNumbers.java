@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.utils.ConvertUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,58 +12,56 @@ public class WinningNumbers {
     private static final int BOUND_MAX = 45;
     private static final int BOUND_MIN = 1;
     private static final String CHECK_LENGTH = String.format("당첨 번호의 길이는 %d(이)여야 합니다.", NUMBER_LENGTH);
-    private static final String CHECK_INTEGER = "당첨 번호는 모두 숫자여야 합니다.";
     private static final String CHECK_BOUND = String.format("당첨 번호는 %d ~ %d 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
     private static final String CHECK_DUPLICATION = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
-    private final List<Integer> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
-    public WinningNumbers(List<String> winningNumbers) {
+    public WinningNumbers(List<LottoNumber> winningNumbers) {
         validate(winningNumbers);
-        this.winningNumbers = winningNumbers.stream()
-                .mapToInt(Integer::parseInt)
-                .boxed().collect(Collectors.toList());
+        this.winningNumbers = new ArrayList<>(winningNumbers);
     }
 
-    private void validate(List<String> winningNumbers) {
-        checkLength(winningNumbers);
-        checkInteger(winningNumbers);
-        checkBound(winningNumbers);
-        checkDuplication(winningNumbers);
+    public static WinningNumbers createBystrings(List<String> winningNumbers) {
+        return new WinningNumbers(ConvertUtil.toIntegers(winningNumbers)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
-    public MatchedCount countMatchingNumbers(List<Integer> lottoNumbers) {
-        int count = (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
+    public static WinningNumbers createByintegers(List<Integer> winningNumbers) {
+        return new WinningNumbers(winningNumbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    public MatchedCount countMatchingNumbers(List<LottoNumber> lottoNumbers) {
+        long result = 0L;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                result++;
+            }
+        }
+        int count = (int) result;
 
         return new MatchedCount(count);
     }
 
-    private void checkLength(List<String> winningNumbers) {
+    private void validate(List<LottoNumber> winningNumbers) {
+        checkLength(winningNumbers);
+        checkBound(winningNumbers);
+        checkDuplication(winningNumbers);
+    }
+
+    private void checkLength(List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != NUMBER_LENGTH) {
             throw new IllegalArgumentException(CHECK_LENGTH);
         }
     }
 
-    private void checkInteger(List<String> winningNumbers) {
-        for (String winningNumber : winningNumbers) {
-            checkInteger(winningNumber);
-        }
-    }
-
-    private void checkInteger(String winningNumber) {
-        try {
-            Integer.parseInt(winningNumber);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(CHECK_INTEGER);
-        }
-    }
-
-    private void checkBound(List<
-            String> winningNumbers) {
-        for (String winningNumber : winningNumbers) {
-            int number = Integer.parseInt(winningNumber);
-            checkBound(number);
+    private void checkBound(List<LottoNumber> winningNumbers) {
+        for (LottoNumber winningNumber : winningNumbers) {
+            checkBound(winningNumber.lottoNumber());
         }
     }
 
@@ -70,7 +71,7 @@ public class WinningNumbers {
         }
     }
 
-    private void checkDuplication(List<String> winningNumbers) {
+    private void checkDuplication(List<LottoNumber> winningNumbers) {
         long countAfterDeduplication = winningNumbers.stream()
                 .distinct()
                 .count();

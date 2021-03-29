@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.enums.WinningRank;
 
 import java.util.List;
@@ -21,8 +22,9 @@ public class ResultView {
         System.out.printf((GOT_TICKETS) + "%n", numberOfTickets);
     }
 
-    public static void lottoNumbers(List<Integer> lottoNumbers) {
+    public static void lottoNumbers(List<LottoNumber> lottoNumbers) {
         String numbers = lottoNumbers.stream()
+                .map(LottoNumber::lottoNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
         System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);

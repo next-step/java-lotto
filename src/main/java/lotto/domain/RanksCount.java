@@ -72,12 +72,14 @@ public class RanksCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RanksCount ranksCount1 = (RanksCount) o;
-        return Objects.equals(ranksCount, ranksCount1.ranksCount);
+        RanksCount that = (RanksCount) o;
+        return Objects.equals(ranksCount, that.ranksCount) &&
+                Objects.equals(winningNumbers, that.winningNumbers) &&
+                Objects.equals(lottoTickets, that.lottoTickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ranksCount);
+        return Objects.hash(ranksCount, winningNumbers, lottoTickets);
     }
 }

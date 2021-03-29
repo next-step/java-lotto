@@ -14,7 +14,7 @@ public class RanksCountTest {
     @DisplayName("당첨 등수 세기")
     public void count() throws Exception {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket));
@@ -32,7 +32,7 @@ public class RanksCountTest {
     @DisplayName("총 당첨 금액 구하기")
     public void totalPrize() throws Exception {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.createByintegers((Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket thirdTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));

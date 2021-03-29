@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
@@ -12,11 +11,8 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> lottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers.lottoNumbers()
-                .stream()
-                .map(LottoNumber::lottoNumber)
-                .collect(Collectors.toList()));
+    public List<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers.lottoNumbers());
     }
 
     @Override
