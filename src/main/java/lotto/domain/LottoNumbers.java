@@ -52,4 +52,8 @@ public final class LottoNumbers {
   public List<LottoNumber> getLottoNumbers() {
     return lottoNumbers;
   }
+
+  public boolean contains(LottoNumber lottoNumber) {
+    return false;
+  }
 }

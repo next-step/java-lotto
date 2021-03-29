@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Collectors;
@@ -62,5 +63,21 @@ class LottoNumbersTest {
 
     // then
     assertThat(match.getMatchCount()).isEqualTo(expectedCount);
+  }
+
+  @Test
+  @DisplayName("LottoNumber 포함여부를 반환한다.")
+  void contains() {
+    // given
+    LottoNumbers lottoNumbers = new LottoNumbers(new String[]{"1", "2", "3", "4", "5", "6"});
+    LottoNumber containedLottoNumber = LottoNumber.valueOf("6");
+    LottoNumber notContainedLottoNumber = LottoNumber.valueOf("7");
+
+    // when
+    // then
+    assertAll(
+        () -> assertThat(lottoNumbers.contains(containedLottoNumber)).isTrue(),
+        () -> assertThat(lottoNumbers.contains(notContainedLottoNumber)).isFalse()
+    );
   }
 }
