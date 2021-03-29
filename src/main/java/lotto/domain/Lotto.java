@@ -34,7 +34,7 @@ public class Lotto {
     public long matchCount(Lotto lotto) {
         List<Integer> numberList = lotto.stream().collect(Collectors.toList());
         return numbers.stream()
-                .filter(number -> numberList.contains(number))
+                .filter(numberList::contains)
                 .count();
     }
 

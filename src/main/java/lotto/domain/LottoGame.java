@@ -8,7 +8,7 @@ public class LottoGame {
     private final static int LOTTO_INIT_COUNT = 0;
     private final static LottoGenerator lottoGenerator = LottoGenerator.getInstance();
     private final Lottos lottos;
-    private LottoBoard lottoBoard;
+    private final LottoBoard lottoBoard;
 
     private LottoGame(final int lottoAmount) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -16,6 +16,7 @@ public class LottoGame {
             lottoList.add(Lotto.of(lottoGenerator.generateShuffledLotto()));
         }
         this.lottos = Lottos.of(lottoList);
+        this.lottoBoard = new LottoBoard();
     }
 
     public static LottoGame of(final int lottoAmount) {
@@ -27,12 +28,9 @@ public class LottoGame {
     }
 
     public void calculateWinnings(WinningNumber winningNumber) {
-        LottoBoard lottoBoard = new LottoBoard();
         lottos.stream()
-                .map(lotto -> winningNumber.rankMatch(lotto))
-                .forEach(rank -> lottoBoard.calculate(rank));
-
-        this.lottoBoard = lottoBoard;
+                .map(winningNumber::rankMatch)
+                .forEach(lottoBoard::calculate);
     }
 
     public LottoBoard getLottoBoard() {
