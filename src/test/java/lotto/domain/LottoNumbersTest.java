@@ -27,7 +27,7 @@ class LottoNumbersTest {
 
   static Stream<Arguments> comparingSource() {
     return Stream.of(
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9"},
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9", "10"},
             LottoNumber.valueOf("7"), 2),
         arguments(new String[]{"45", "44", "43", "42", "41", "40"}, new String[]{"1", "2", "3", "4", "5", "6"},
             LottoNumber.valueOf("7"), 0)
