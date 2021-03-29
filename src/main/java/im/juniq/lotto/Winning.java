@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Winning {
-	SIX_NUMBERS_MATCHED(6, 2000000000L),
-	FIVE_NUMBERS_MATCHED(5, 15000000L),
-	FOUR_NUMBERS_MATCHED(4, 50000L),
-	THREE_NUMBERS_MATCHED(3, 5000L),
+	FIRST(6, 2000000000L),
+	SECOND(5, 15000000L),
+	THIRD(4, 50000L),
+	FOURTH(3, 5000L),
 	LOSING(2, 0L);
 
 	private int matchedCount;

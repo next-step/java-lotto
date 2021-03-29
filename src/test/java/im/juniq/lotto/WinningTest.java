@@ -8,10 +8,10 @@ class WinningTest {
 
     @Test
     void findByMatchedCount() {
-        assertThat(Winning.findByMatchedCount(6)).isEqualTo(Winning.SIX_NUMBERS_MATCHED);
-        assertThat(Winning.findByMatchedCount(5)).isEqualTo(Winning.FIVE_NUMBERS_MATCHED);
-        assertThat(Winning.findByMatchedCount(4)).isEqualTo(Winning.FOUR_NUMBERS_MATCHED);
-        assertThat(Winning.findByMatchedCount(3)).isEqualTo(Winning.THREE_NUMBERS_MATCHED);
+        assertThat(Winning.findByMatchedCount(6)).isEqualTo(Winning.FIRST);
+        assertThat(Winning.findByMatchedCount(5)).isEqualTo(Winning.SECOND);
+        assertThat(Winning.findByMatchedCount(4)).isEqualTo(Winning.THIRD);
+        assertThat(Winning.findByMatchedCount(3)).isEqualTo(Winning.FOURTH);
         assertThat(Winning.findByMatchedCount(2)).isEqualTo(Winning.LOSING);
         assertThat(Winning.findByMatchedCount(1)).isEqualTo(Winning.LOSING);
         assertThat(Winning.findByMatchedCount(0)).isEqualTo(Winning.LOSING);

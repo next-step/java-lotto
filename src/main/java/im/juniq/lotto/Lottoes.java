@@ -53,10 +53,10 @@ public class Lottoes implements Iterable<Lotto>{
 
 	public double yield(WinningNumbers winningNumbers, Price price) {
 		double winningAmount = 0;
-		winningAmount += Winning.SIX_NUMBERS_MATCHED.amount() * numberOfLottoesMatched(6, winningNumbers);
-		winningAmount += Winning.FIVE_NUMBERS_MATCHED.amount() * numberOfLottoesMatched(5, winningNumbers);
-		winningAmount += Winning.FOUR_NUMBERS_MATCHED.amount() * numberOfLottoesMatched(4, winningNumbers);
-		winningAmount += Winning.THREE_NUMBERS_MATCHED.amount() * numberOfLottoesMatched(3, winningNumbers);
+		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(6, winningNumbers);
+		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(5, winningNumbers);
+		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(4, winningNumbers);
+		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(3, winningNumbers);
 
 		return price.yield(winningAmount);
 	}

@@ -23,10 +23,10 @@ public class ResultView {
 	public static void winningStatus(Lottoes lottoes, WinningNumbers winningNumbers, Price price) {
 		System.out.println("당첨통계");
 		System.out.println("---------");
-		System.out.println("3개 일치 (" + Winning.THREE_NUMBERS_MATCHED.amount() + "원)- " + lottoes.numberOfLottoesMatched(3, winningNumbers) + "개");
-		System.out.println("4개 일치 (" + Winning.FOUR_NUMBERS_MATCHED.amount() + "원)- " + lottoes.numberOfLottoesMatched(4, winningNumbers) + "개");
-		System.out.println("5개 일치 (" + Winning.FIVE_NUMBERS_MATCHED.amount() + "원)- " + lottoes.numberOfLottoesMatched(5, winningNumbers) + "개");
-		System.out.println("6개 일치 (" + Winning.SIX_NUMBERS_MATCHED.amount() + "원)- " + lottoes.numberOfLottoesMatched(6, winningNumbers) + "개");
+		System.out.println("3개 일치 (" + Winning.FOURTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(3, winningNumbers) + "개");
+		System.out.println("4개 일치 (" + Winning.THIRD.amount() + "원)- " + lottoes.numberOfLottoesMatched(4, winningNumbers) + "개");
+		System.out.println("5개 일치 (" + Winning.SECOND.amount() + "원)- " + lottoes.numberOfLottoesMatched(5, winningNumbers) + "개");
+		System.out.println("6개 일치 (" + Winning.FIRST.amount() + "원)- " + lottoes.numberOfLottoesMatched(6, winningNumbers) + "개");
 		System.out.println("총 수익률은 " + lottoes.yield(winningNumbers, price) + "입니다.");
 	}
 
