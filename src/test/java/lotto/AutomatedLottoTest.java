@@ -12,6 +12,7 @@ import lotto.domain.shop.LottoShop;
 import lotto.domain.stats.LottoEarningRateCalculator;
 
 import lotto.domain.stats.LottoScoreBoard;
+import lotto.view.dto.LottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

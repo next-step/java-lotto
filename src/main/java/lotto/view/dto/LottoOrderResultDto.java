@@ -3,13 +3,14 @@ package lotto.view.dto;
 import java.util.List;
 
 public class LottoOrderResultDto {
-    private final List<List<Integer>> orderedResult;
+    private final List<LottoDto> orderedResult;
 
-    public LottoOrderResultDto(List<List<Integer>> orderedResult) {
+    public LottoOrderResultDto(List<LottoDto> orderedResult) {
         this.orderedResult = orderedResult;
     }
 
-    public List<List<Integer>> getOrderedResult() {
+    public List<LottoDto> getOrderedResult() {
         return orderedResult;
     }
+
 }

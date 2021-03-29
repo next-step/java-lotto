@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -43,10 +44,7 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+    public List<Integer> copyLottoNumbers() {
+        return new ArrayList<>(numbers);
     }
 }

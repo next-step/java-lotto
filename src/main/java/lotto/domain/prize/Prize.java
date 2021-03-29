@@ -8,8 +8,8 @@ public enum Prize {
     THIRD(4, 50_000L),
     FOURTH(3, 5_000L);
 
-    private long equalNumberCount;
-    private long prizeAmount;
+    private final long equalNumberCount;
+    private final long prizeAmount;
 
     Prize(long equalNumberCount, long prizeAmount) {
         this.equalNumberCount = equalNumberCount;
