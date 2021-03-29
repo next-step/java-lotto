@@ -16,15 +16,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoTest {
-    private final Money money = new Money(10000);
-    private final int NUMBER_OF_GAMES = money.numberOfGames();
+    private final PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
+    private final int NUMBER_OF_GAMES = purchaseAmount.numberOfGames();
     private final LottoNumberGenerator lottoNumberGenerator = new FixedLottoNumberGenerator();
     private Lotto lotto;
 
     @Test
     @DisplayName("로또 게임 구매 테스트")
     void When_Game_Then_LottoNumberList() {
-        lotto = new Lotto(money, lottoNumberGenerator);
+        lotto = new Lotto(purchaseAmount, lottoNumberGenerator);
 
         //when
         List<LottoGame> games = lotto.games();
@@ -39,7 +39,7 @@ public class LottoTest {
         List<String> manualLottoGame = null;
 
         assertDoesNotThrow(() -> {
-            lotto = new Lotto(money, manualLottoGame, lottoNumberGenerator);
+            lotto = new Lotto(purchaseAmount, manualLottoGame, lottoNumberGenerator);
         });
     }
 
@@ -52,7 +52,7 @@ public class LottoTest {
         );
 
         assertDoesNotThrow(() -> {
-            lotto = new Lotto(money, manualLottoNumbers, lottoNumberGenerator);
+            lotto = new Lotto(purchaseAmount, manualLottoNumbers, lottoNumberGenerator);
         });
     }
 
@@ -83,7 +83,7 @@ public class LottoTest {
     void When_Result(List<Integer> givenWinningNumber, int bonusNumber, Rank expectedRank) {
         //given
         WinningNumber winningNumber = new WinningNumber(new LottoGame(givenWinningNumber), bonusNumber);
-        lotto = new Lotto(money, lottoNumberGenerator);
+        lotto = new Lotto(purchaseAmount, lottoNumberGenerator);
 
         //when
         Winners winners = lotto.winners(winningNumber);
@@ -106,10 +106,10 @@ public class LottoTest {
 
     @Test
     void Given_MoneyInstance_When_New_Then_NoException() {
-        Money money = new Money(10000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
 
         assertDoesNotThrow(() -> {
-            new Lotto(money, lottoNumberGenerator);
+            new Lotto(purchaseAmount, lottoNumberGenerator);
         });
     }
 }

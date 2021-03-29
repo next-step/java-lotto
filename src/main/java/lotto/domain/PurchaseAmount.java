@@ -1,9 +1,9 @@
 package lotto.domain;
 
-public class Money {
+public class PurchaseAmount {
     private final int money;
 
-    public Money(int money) {
+    public PurchaseAmount(int money) {
         if (money < LottoRule.price()) {
             throw new IllegalArgumentException("구매금액은 1000원 이상이여야 합니다.");
         }

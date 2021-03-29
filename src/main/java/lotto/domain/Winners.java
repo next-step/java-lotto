@@ -22,7 +22,7 @@ public class Winners {
         winnersMap.put(rank, wins + 1);
     }
 
-    public double yield(Money cost) {
+    public double yield(PurchaseAmount cost) {
         double totalPrize = 0;
         for (Rank r : Rank.values()) {
             totalPrize = totalPrize + r.prize() * wins(r);

@@ -1,6 +1,6 @@
 package LottoTest;
 
-import lotto.domain.Money;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 import lotto.domain.Winners;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +38,6 @@ public class WinnersTest {
     void When_Yield() {
         winners.increase(Rank.FIFTH);
 
-        assertThat(winners.yield(new Money(10000))).isEqualTo(Rank.FIFTH.prize() / 10000d);
+        assertThat(winners.yield(new PurchaseAmount(10000))).isEqualTo(Rank.FIFTH.prize() / 10000d);
     }
 }

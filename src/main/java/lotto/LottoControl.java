@@ -9,11 +9,11 @@ import java.util.List;
 public class LottoControl {
     public void play() {
 
-        Money money = new Money(View.purchaseAmount());
+        PurchaseAmount purchaseAmount = new PurchaseAmount(View.purchaseAmount());
         int numberOfManualGames = View.numberOfManualGames();
 
         List<String> manualGameNumbers = View.manualGameNumbers(numberOfManualGames);
-        Lotto lotto = new Lotto(money, manualGameNumbers, new RandomLottoNumberGenerator());
+        Lotto lotto = new Lotto(purchaseAmount, manualGameNumbers, new RandomLottoNumberGenerator());
         View.print(lotto);
 
         LottoGame typedWinningNumber = new LottoGame(View.winningNumber());
@@ -26,6 +26,6 @@ public class LottoControl {
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.countOfMatch() != 0)
                 .forEach(rank -> View.print(rank, winners.wins(rank)));
-        View.printYield(winners.yield(money));
+        View.printYield(winners.yield(purchaseAmount));
     }
 }

@@ -10,23 +10,23 @@ public class Lotto {
     private int numberOfGeneratedGames;
 
     public Lotto(int money, LottoNumberGenerator lottoNumberGenerator) {
-        this(new Money(money), null, lottoNumberGenerator);
+        this(new PurchaseAmount(money), null, lottoNumberGenerator);
     }
 
-    public Lotto(Money money, LottoNumberGenerator lottoNumberGenerator) {
-        this(money, null, lottoNumberGenerator);
+    public Lotto(PurchaseAmount purchaseAmount, LottoNumberGenerator lottoNumberGenerator) {
+        this(purchaseAmount, null, lottoNumberGenerator);
     }
 
     public Lotto(int money, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
-        this(new Money(money), manualLottoNumbers, lottoNumberGenerator);
+        this(new PurchaseAmount(money), manualLottoNumbers, lottoNumberGenerator);
     }
 
-    public Lotto(Money money, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
+    public Lotto(PurchaseAmount purchaseAmount, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
         if (manualLottoNumbers == null) {
             manualLottoNumbers = new ArrayList<>();
         }
 
-        initLottoGame(money, manualLottoNumbers, lottoNumberGenerator);
+        initLottoGame(purchaseAmount, manualLottoNumbers, lottoNumberGenerator);
     }
 
     public List<LottoGame> games() {
@@ -50,11 +50,11 @@ public class Lotto {
         return numberOfManualGames;
     }
 
-    private void initLottoGame(Money money, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
+    private void initLottoGame(PurchaseAmount purchaseAmount, List<String> manualLottoNumbers, LottoNumberGenerator lottoNumberGenerator) {
         games = new ArrayList<>();
 
         appendManualGames(manualLottoNumbers);
-        appendGeneratedGames(money, manualLottoNumbers.size(), lottoNumberGenerator);
+        appendGeneratedGames(purchaseAmount, manualLottoNumbers.size(), lottoNumberGenerator);
     }
 
     private void appendManualGames(List<String> manualLottoNumbers) {
@@ -66,15 +66,15 @@ public class Lotto {
         games.addAll(manualLottoGame);
     }
 
-    private void appendGeneratedGames(Money money, int numberOfManualGames, LottoNumberGenerator lottoNumberGenerator) {
-        numberOfGeneratedGames = numberOfGeneratedGames(money, numberOfManualGames);
+    private void appendGeneratedGames(PurchaseAmount purchaseAmount, int numberOfManualGames, LottoNumberGenerator lottoNumberGenerator) {
+        numberOfGeneratedGames = numberOfGeneratedGames(purchaseAmount, numberOfManualGames);
         for (int i = 0; i < numberOfGeneratedGames; i++) {
             games.add(lottoNumberGenerator.numbers());
         }
     }
 
-    private int numberOfGeneratedGames(Money money, int numberOfManualGames) {
-        int numberOfGames = money.numberOfGames() - numberOfManualGames;
+    private int numberOfGeneratedGames(PurchaseAmount purchaseAmount, int numberOfManualGames) {
+        int numberOfGames = purchaseAmount.numberOfGames() - numberOfManualGames;
         if (numberOfGames < 0) {
             throw new IllegalArgumentException("구매 금액이 부족합니다.");
         }
