@@ -28,7 +28,7 @@ public class Lotto {
     assureNotEmpty(str);
     List<Integer> lotto = Arrays.stream(str.split(","))
       .map(String::trim)
-      .map(Lotto::check)
+      .map(Lotto::assureNumericString)
       .map(Integer::parseInt)
       .collect(Collectors.toList());
     return new Lotto(lotto);
@@ -40,8 +40,7 @@ public class Lotto {
     }
   }
 
-  public static String check(String str) {
-    assureNotEmpty(str);
+  public static String assureNumericString(String str) {
     try {
       Integer.parseInt(str);
     } catch (Exception e) {
