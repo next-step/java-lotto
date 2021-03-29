@@ -4,13 +4,9 @@
 package lotto.ui;
 
 import lotto.domain.Lottos;
-import lotto.domain.Price;
-import lotto.domain.WinningLotto;
+import lotto.domain.WinningNumbers;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
-
-import static lotto.domain.WinningLotto.MINIMUM_MATCH;
 
 public class ResultView {
 
@@ -32,11 +28,11 @@ public class ResultView {
         System.out.println(lottosStr.substring(1, lottosStr.length() - 1));
     }
 
-    public static void printResult(WinningLotto winning, int buyNum) {
+    public static void printResult(WinningNumbers winning, int buyNum) {
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_MESSAGE_LINE);
         System.out.println(changeResultStr(winning.toString()));
-        printYield(winning.yield(buyNum));
+//        printYield(winning.yield(buyNum));
     }
 
     public static void printYield(double yield) {
@@ -56,12 +52,12 @@ public class ResultView {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        IntStream.range(0, result.length)
-                .filter(i -> i >= MINIMUM_MATCH)
-                .forEach(i -> {
-                    sb.append(i + "개 일치 (" + Price.winningPrice(i) + "원) - " + result[i] + "개");
-                    sb.append((System.getProperty("line.separator")));
-                });
+//        IntStream.range(0, result.length)
+//                .filter(i -> i >= MINIMUM_MATCH)
+//                .forEach(i -> {
+//                    sb.append(i + "개 일치 (" + Rank.winningPrice(i) + "원) - " + result[i] + "개");
+//                    sb.append((System.getProperty("line.separator")));
+//                });
         return sb.toString();
     }
 

@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.AutoLottoStrategy;
 import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
+import lotto.domain.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 import lotto.domain.LottoFactory;
@@ -15,7 +15,7 @@ public class LottoGame {
 
         Lottos lottos = LottoFactory.lottos(InputView.inputBuy());
         ResultView.printLottos(lottos);
-        WinningLotto winning = LottoFactory.winning(InputView.inputWinning());
+        WinningNumbers winning = LottoFactory.winning(InputView.inputWinning());
         lottos.checkWinning(winning);
 
         ResultView.printResult(winning, lottos.getBuyNum());

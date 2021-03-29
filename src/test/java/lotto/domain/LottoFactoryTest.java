@@ -54,9 +54,9 @@ public class LottoFactoryTest {
         }
 
         //when
-        WinningLotto winning = LottoFactory.winning(winningNumber);
+        WinningNumbers winning = LottoFactory.winning(winningNumber);
 
         //then
-        assertThat(winning.getWinningNumbers()).containsAll(winningNumber);
+        assertThat(winning).isEqualTo(new WinningNumbers(winningNumber));
     }
 }

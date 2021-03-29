@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoStrategy.LOTTO_SIZE;
-import static lotto.domain.Price.LOTTO_PRICE;
+import static lotto.domain.Rank.LOTTO_PRICE;
 import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
 import static lotto.util.Message.OVERLAP_NUMBER;
 

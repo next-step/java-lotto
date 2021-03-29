@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PriceTest {
+public class RankTest {
 
     public static final Long THREE_PRICE = 5000L;
     public static final Long FOUR_PRICE = 50_000L;
@@ -13,13 +13,13 @@ public class PriceTest {
 
     @Test
     void winningPriceTest() {
-        assertThat(Price.winningPrice(0)).isEqualTo(0L);
-        assertThat(Price.winningPrice(1)).isEqualTo(0L);
-        assertThat(Price.winningPrice(2)).isEqualTo(0L);
-        assertThat(Price.winningPrice(3)).isEqualTo(THREE_PRICE);
-        assertThat(Price.winningPrice(4)).isEqualTo(FOUR_PRICE);
-        assertThat(Price.winningPrice(5)).isEqualTo(FIVE_PRICE);
-        assertThat(Price.winningPrice(6)).isEqualTo(SIX_PRICE);
+        assertThat(Rank.matchRank(0).getWinningMoney()).isEqualTo(0L);
+        assertThat(Rank.matchRank(1).getWinningMoney()).isEqualTo(0L);
+        assertThat(Rank.matchRank(2).getWinningMoney()).isEqualTo(0L);
+        assertThat(Rank.matchRank(3).getWinningMoney()).isEqualTo(THREE_PRICE);
+        assertThat(Rank.matchRank(4).getWinningMoney()).isEqualTo(FOUR_PRICE);
+        assertThat(Rank.matchRank(5).getWinningMoney()).isEqualTo(FIVE_PRICE);
+        assertThat(Rank.matchRank(6).getWinningMoney()).isEqualTo(SIX_PRICE);
     }
 
 
@@ -32,7 +32,7 @@ public class PriceTest {
                 + 3 * THREE_PRICE + 4 * FOUR_PRICE + 5 * FIVE_PRICE + 6 * SIX_PRICE;
 
         //when
-        Long result = Price.calculate(match);
+        Long result = Rank.calculate(match);
 
         //then
         assertThat(result).isEqualTo(expectMatch);

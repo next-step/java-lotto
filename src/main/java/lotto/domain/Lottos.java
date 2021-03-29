@@ -5,6 +5,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -17,11 +18,10 @@ public class Lottos {
     /*
     * 보유중인 로또의 당첨 개수를 확인하고, 해당하는 갯수만큼 matches 시켜준다.
     * */
-    public void checkWinning(WinningLotto winning) {
-        List<LottoNumber> winningNumbers = winning.getWinningNumbers();
-        lottoList.forEach(lotto -> {
-            winning.matches(lotto.contains(winningNumbers));
-        });
+    public List<Rank> checkWinning(WinningNumbers winningNumbers) {
+        return lottoList.stream()
+                .map(lotto -> winningNumbers.matches(lotto))
+                .collect(Collectors.toList());
     }
 
     public int getBuyNum() {
