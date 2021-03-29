@@ -11,6 +11,7 @@ public class WinningNumbers {
     int[] winNumbers;
     int bonusNumber;
     Map<Integer, Integer> map;
+    private Map<Rank, Integer> ranks;
 
     public WinningNumbers(String[] winNumbers) {
         this(Stream.of(winNumbers).mapToInt(Integer::parseInt).toArray());
@@ -18,24 +19,16 @@ public class WinningNumbers {
 
     public WinningNumbers(int[] winNumbers) {
         map = new HashMap<>();
-        map.put(1, 0); //1등 - 6개일치
+        map.put(6, 0); //1등 - 6개일치
         map.put(2, 0); //2등 - 5개일치 + 보너스
         map.put(3, 0); //3등 - 5개일치
         map.put(4, 0); //4등 - 4개일치
         map.put(5, 0); //5등 - 3개일치
         this.winNumbers = winNumbers;
+        this.ranks = new HashMap<>();
     }
 
-    public Map<Integer, Integer> getWinNumbers(Lotto lotto) {
-        return this.getWinNumbers(lotto.lotto());
-    }
-
-    public Map<Integer, Integer> getWinNumbers(List<LottoNumbers> lottoNumbers) {
-        choose(lottoNumbers);
-        return map;
-    }
-
-    private void choose(List<LottoNumbers> lottoNumbers) {
+    public void choose(List<LottoNumbers> lottoNumbers) {
         for (LottoNumbers lottoNumber : lottoNumbers) {
             count(lottoNumber);
         }
@@ -43,19 +36,25 @@ public class WinningNumbers {
 
     private void count(LottoNumbers lottoNumber) {
         int correct = 0;
+        boolean bonus = false;
         for (int win : winNumbers) {
             if (lottoNumber.contains(win)) {
                 correct++;
             }
         }
-        if (lottoNumber.contains(bonusNumber) && correct == SECOND_COUNT) {
-            map.put(correct, 1);
+        if (lottoNumber.contains(bonusNumber)) {
+            bonus = true;
         }
-        map.put(correct, map.getOrDefault(correct, 0) + 1);
+        Rank rank = Rank.valueOf(correct, bonus);
+        this.ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
     }
 
     public void bonusNumber(int bonusNumber) {
         this.bonusNumber =  bonusNumber;
+    }
+
+    public Map<Rank, Integer> ranks() {
+        return ranks;
     }
 
     public double earningsRate(int price) {

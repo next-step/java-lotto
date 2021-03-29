@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,9 +38,9 @@ class WinningNumbersTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
-        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbers.toString());
-        assertThat(winNumbers.get(3)).isEqualTo(1);
+        winningNumbers.choose(lottoNumbersList);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -58,13 +59,14 @@ class WinningNumbersTest {
         lottoNumbersList.add(lottoNumbers5);
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3, 8,9,10,11, 17,18,19,20,21, 30,31,32,33,34, 36,37,38,39,40,41});
         winningNumbers.bonusNumber(35);
-        Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbersMap.toString());
-        assertThat(winNumbersMap.get(1)).isEqualTo(0);
-        assertThat(winNumbersMap.get(2)).isEqualTo(1);
-        assertThat(winNumbersMap.get(3)).isEqualTo(1);
-        assertThat(winNumbersMap.get(4)).isEqualTo(1);
-        assertThat(winNumbersMap.get(5)).isEqualTo(1);
+        winningNumbers.choose(lottoNumbersList);
+
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(ranks.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(ranks.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -75,11 +77,11 @@ class WinningNumbersTest {
         lottoNumbersList.add(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,5});
         winningNumbers.bonusNumber(7);
-        Map<Integer, Integer> winNumbersMap = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbersMap.toString());
-        assertThat(winNumbersMap.get(3)).isEqualTo(1);
-        assertThat(winNumbersMap.get(4)).isEqualTo(0);
-        assertThat(winNumbersMap.get(5)).isEqualTo(0);
+        winningNumbers.choose(lottoNumbersList);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(ranks.get(Rank.THIRD)).isEqualTo(0);
         assertThat(winningNumbers.earningsRate(1000)).isEqualTo(5);
     }
 
@@ -111,13 +113,15 @@ class WinningNumbersTest {
         lottoNumbers.add(lottoNumbers14);
 
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(3))
+        winningNumbers.choose(lottoNumbers);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH))
                 .isEqualTo(1);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(4))
+        assertThat(ranks.get(Rank.FOURTH))
                 .isEqualTo(0);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(5))
+        assertThat(ranks.get(Rank.THIRD))
                 .isEqualTo(0);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(6))
+        assertThat(ranks.get(Rank.FIRST))
                 .isEqualTo(0);
     }
 
