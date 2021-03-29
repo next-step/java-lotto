@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class WinningNumbers {
-    public static final int SECOND_COUNT = 5;
     int[] winNumbers;
     int bonusNumber;
     private Map<Rank, Integer> ranks;
