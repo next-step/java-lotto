@@ -10,10 +10,10 @@ import study.step4.domain.Amount;
 
 public class InputView {
     private final static String MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-    private final static String MESSAGE_WIN_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    private final static String MESSAGE_BONUS_BALL = "보너스 볼을 입력해주세요.";
-    private final static String MESSAGE_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private final static String MESSAGE_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해주세요.";
+    private final static String MESSAGE_WIN_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private final static String MESSAGE_BONUS_BALL = "\n보너스 볼을 입력해주세요.";
+    private final static String MESSAGE_MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private final static String MESSAGE_MANUAL_NUMBER = "\n수동으로 구매할 번호를 입력해주세요.";
     private final static Scanner scanner = new Scanner(System.in);
     private final static String SPLIT_DELIMITER = ",";
 
@@ -27,7 +27,6 @@ public class InputView {
 
     public static String[] inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
-        scanner.nextLine();
         return scanner.nextLine().split(SPLIT_DELIMITER);
     }
 

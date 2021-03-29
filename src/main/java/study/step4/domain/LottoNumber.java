@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static LottoNumber of(String number) {
-        return of(Integer.parseInt(number));
+        return of(Integer.parseInt(number.trim()));
     }
 
     public static LottoNumber of(int number) {

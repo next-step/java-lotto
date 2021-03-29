@@ -3,25 +3,27 @@ package study.step4.view;
 import java.math.BigDecimal;
 import java.util.List;
 
+import study.step4.domain.Amount;
 import study.step4.domain.Lotto;
 import study.step4.domain.LottoRank;
 import study.step4.domain.LottoWin;
+import study.step4.domain.Lottos;
 
 public class ResultView {
-    private final static String MESSAGE_PURCHASE_COUNT = "개를 구입하셨습니다.";
+    private final static String MESSAGE_PURCHASE = "구입하셨습니다.";
     private final static String MESSAGE_WIN_RESULT = "당첨 통계\n---------";
     private final static String MESSAGE_BONUS_BALL = ", 보너스 일치";
-    private static final String MESSAGE_EMPTY = " ";
+    private final static String MESSAGE_EMPTY = " ";
 
-    public static void printPurchaseLottoCount(int count) {
-        System.out.println(count + MESSAGE_PURCHASE_COUNT);
+    public static void printPurchaseLottoCount(Amount amount) {
+        System.out.println("수동으로 " + amount.getManualCount() + "장, 자동으로 " + amount.getAutoCount() + "장을 " + MESSAGE_PURCHASE);
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.stream().forEach(lotto -> {
-            System.out.println(lotto.getLottoNumbers());
-        });
-        System.out.println();
+    public static void printLottoNumbers(Lottos lottos) {
+        lottos.getLottos().stream()
+            .forEach(lotto -> {
+                System.out.println(lotto.getLottoNumbers());
+            });
     }
 
     public static void printResult(LottoWin lottoWin) {

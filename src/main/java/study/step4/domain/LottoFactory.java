@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -33,6 +34,14 @@ public class LottoFactory {
         return new Lotto(Arrays.stream(lottoNumbers.split(SPLIT_DELIMITER))
             .map(i -> LottoNumber.of(i.trim()))
             .collect(toList()));
+    }
+
+    public static Lottos purchase(Amount amount, List<String> manualNumbers) {
+        Lottos autoLottos = purchaseAutoLotto(amount);
+        Lottos manualLottos = purchaseManualLotto(manualNumbers);
+
+        return new Lottos(Stream.concat(manualLottos.getLottos().stream(), autoLottos.getLottos().stream())
+            .collect(Collectors.toList()));
     }
 
     public static Lottos purchaseAutoLotto(Amount amount) {

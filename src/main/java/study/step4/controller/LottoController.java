@@ -1,5 +1,7 @@
 package study.step4.controller;
 
+import java.util.List;
+
 import study.step4.domain.Amount;
 import study.step4.domain.Lotto;
 import study.step4.domain.LottoFactory;
@@ -15,15 +17,16 @@ public class LottoController {
 
     public void play() {
         Amount amount = new Amount(InputView.inputPurchaseAmount(), InputView.inputManualCount());
-        Lottos manualLottoList = LottoFactory.purchaseManualLotto(InputView.inputManualNumber(amount));
-        Lottos autoLottoList = LottoFactory.purchaseAutoLotto(amount);
+        List<String> manualNumbers = InputView.inputManualNumber(amount);
+        Lottos lottos = LottoFactory.purchase(amount, manualNumbers);
 
-        ResultView.printPurchaseLottoCount(amount.totalCount());
-        ResultView.printLottoNumbers(autoLottoList.getLottos());
+        ResultView.printPurchaseLottoCount(amount);
+        ResultView.printLottoNumbers(lottos);
 
         Lotto lotto = new Lotto(InputView.inputWinNumber());
         LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
-        LottoWin lottoWin = autoLottoList.result(lotto, bonusBall);
+        LottoWin lottoWin = lottos.result(lotto, bonusBall);
+
         ResultView.printResult(lottoWin);
         ResultView.printProfit(lottoWin.profit(amount));
     }
