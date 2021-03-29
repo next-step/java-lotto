@@ -20,11 +20,11 @@ public class NonNegativeIntegerTest {
         assertThat(new NonNegativeInteger(7)).isEqualTo(new NonNegativeInteger("7"));
     }
 
-    @ParameterizedTest(name = "illegalArgumentExceptionTest")
+    @ParameterizedTest(name = "runtimeExceptionTest")
     @ValueSource(strings = {"-1", "-3"})
-    public void illegalArgumentExceptionTest(String input) {
+    public void runtimeExceptionTest(String input) {
         assertThatThrownBy(() -> new NonNegativeInteger(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @ParameterizedTest(name = "sumTest")
