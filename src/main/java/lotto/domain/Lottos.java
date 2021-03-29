@@ -30,11 +30,6 @@ public class Lottos {
         return Collections.unmodifiableList(new ArrayList<>(lottoList));
     }
 
-    public int getBuyNum() {
-        return lottoList.size();
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
