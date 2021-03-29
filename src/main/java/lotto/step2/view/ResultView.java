@@ -6,7 +6,7 @@ import lotto.step2.domain.WinningStatistics;
 public class ResultView {
 
     private final static String MESSAGE_PURCHASING_COUNT = "개를 구입하셨습니다.";
-    private final static String MESSAGE_WINNING_RESULT = "당첨 통계" + System.lineSeparator() + "---------";
+    private final static String MESSAGE_WINNING_RESULT = String.format("당첨 통계", System.lineSeparator(), "---------");
     private final static String MESSAGE_OPEN_PARENTHESES = " (";
     private final static String MESSAGE_WON_CLOSE_PARENTHESES = "원)- ";
     private final static String MESSAGE_COUNT = "개";
@@ -33,7 +33,7 @@ public class ResultView {
                 .stream()
                 .filter(rank -> rank.hit() > 0)
                 .sorted()
-                .forEach(rank -> System.out.println(rank.message() + MESSAGE_OPEN_PARENTHESES + rank.amount() + MESSAGE_WON_CLOSE_PARENTHESES + winningStatistics.statistics().get(rank) + MESSAGE_COUNT));
+                .forEach(rank -> System.out.println(String.format(rank.message(), MESSAGE_OPEN_PARENTHESES, rank.amount(), MESSAGE_WON_CLOSE_PARENTHESES, winningStatistics.statistics().get(rank), MESSAGE_COUNT)));
         System.out.println(MESSAGE_TOTAL_PROFITS + winningStatistics.profits() + MESSAGE_IS);
     }
 
