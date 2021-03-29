@@ -17,6 +17,14 @@ public final class LastWinningNumber {
     this.bonusNumber = bonusNumber;
   }
 
+  public Lotto getLastWinningLotto() {
+    return lastWinningLotto;
+  }
+
+  public LottoNumber getBonusNumber() {
+    return bonusNumber;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

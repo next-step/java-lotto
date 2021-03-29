@@ -1,6 +1,7 @@
 package lotto.io;
 
 import java.util.Scanner;
+import lotto.domain.LastWinningNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
@@ -24,7 +25,14 @@ public final class InputView {
     return Integer.parseInt(scanner.nextLine());
   }
 
-  public Lotto inputLastWinningNumber() {
+  public LastWinningNumber inputLastWinningNumber() {
+    Lotto lastWinningLotto = inputLastWinningLotto();
+    LottoNumber bonusNumber = inputBonusNumber();
+
+    return new LastWinningNumber(lastWinningLotto, bonusNumber);
+  }
+
+  private Lotto inputLastWinningLotto() {
     System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER);
     String winningNumberString = scanner.nextLine();
 
@@ -32,7 +40,7 @@ public final class InputView {
     return new Lotto(winningNumbers);
   }
 
-  public LottoNumber inputBonusNumber() {
+  private LottoNumber inputBonusNumber() {
     System.out.println(INPUT_BONUS_NUMBER);
     String bonusNumberString = scanner.nextLine();
 
