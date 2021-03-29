@@ -10,11 +10,15 @@ import lotto.LottoNumberCreationStrategy;
 public final class LottoNumbers {
 
   public static final int LOTTO_NUMBER_COUNT = 6;
+  public static final String LOTTO_NUMBER_CREATION_FAILURE = "로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.";
 
   private final List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(LottoNumberCreationStrategy lottoNumberCreationStrategy) {
     lottoNumbers = lottoNumberCreationStrategy.create();
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
+    }
   }
 
   public LottoNumbers(String[] winningNumbers) {

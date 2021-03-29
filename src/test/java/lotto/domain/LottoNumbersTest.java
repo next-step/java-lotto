@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
+import static lotto.domain.LottoNumbers.LOTTO_NUMBER_CREATION_FAILURE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -62,7 +63,7 @@ class LottoNumbersTest {
     // when
     // then
     assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(failureStrategy))
-        .withMessage("로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.");
+        .withMessage(LOTTO_NUMBER_CREATION_FAILURE);
   }
 
   @ParameterizedTest
