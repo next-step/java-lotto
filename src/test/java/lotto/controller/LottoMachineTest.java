@@ -20,7 +20,15 @@ public class LottoMachineTest {
     @Test
     void getLottoCountTest() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.purchaseLotto(money);
-        assertThat(lottoMachine.getPurchaseLottoCount()).isEqualTo(14);
+        lottoMachine.purchaseAutoLotto(money);
+        assertThat(lottoMachine.getPurchaseLottoCount().getAutoCount()).isEqualTo(14);
+    }
+
+    @DisplayName("금액에 맞는 수동 로또 갯수를 반환한다.")
+    @Test
+    void getManualLottoCountTest() {
+        LottoMachine lottoMachine = new LottoMachine();
+        lottoMachine.purchaseAutoLotto(money);
+        assertThat(lottoMachine.getPurchaseLottoCount().getAutoCount()).isEqualTo(14);
     }
 }
