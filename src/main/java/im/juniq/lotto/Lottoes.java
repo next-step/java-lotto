@@ -40,7 +40,6 @@ public class Lottoes implements Iterable<Lotto>{
 		for (Lotto lotto : lottoes) {
 			countMatchedLotto += countMatchedLottoes(count, lotto, winningNumbers);
 		}
-
 		return countMatchedLotto;
 	}
 
