@@ -10,16 +10,16 @@ import static org.assertj.core.api.Assertions.*;
 
 class NumbersTest {
 
-    @DisplayName("음수를 입력하면 RuntimeException 발생한다.")
     @Test
+    @DisplayName("숫자가 아닌 문자가 입력될 경우 RuntimeException 발생한다")
     void validate() {
         List<String> inputs = Arrays.asList("1", "2", "삼");
         assertThatThrownBy(() -> Numbers.from(inputs))
                 .isInstanceOf(RuntimeException.class);
     }
 
-    @DisplayName("숫자의 합계가 반환된다.")
     @Test
+    @DisplayName("숫자의 합계가 반환된다")
     void sum() {
         // given
         List<String> inputs = Arrays.asList("1", "2", "3");
