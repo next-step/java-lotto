@@ -37,4 +37,8 @@ public enum Winning {
 	public Long amount() {
 		return amount;
 	}
+
+	public int matchedCount() {
+		return matchedCount;
+	}
 }
