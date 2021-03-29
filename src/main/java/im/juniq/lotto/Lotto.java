@@ -40,7 +40,7 @@ public class Lotto {
 		return results;
 	}
 
-	public int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
+	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
 		int matchedCount = 0;
 		for (int number : numbers) {
 			matchedCount += countMatched(winningNumbers, number);

@@ -45,7 +45,7 @@ public class Lottoes implements Iterable<Lotto>{
 	}
 
 	private int countMatchedLottoes(int matchingCount, Lotto lotto, WinningNumbers winningNumbers) {
-		if (lotto.numberOfMatchedWinningNumber(winningNumbers) == matchingCount) {
+		if (lotto.winning(winningNumbers).matchedCount() == matchingCount) {
 			return 1;
 		}
 		return 0;
