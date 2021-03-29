@@ -4,16 +4,17 @@ public class Profit {
 
     private PurchaseManager manager;
     private Rank rank;
-    public Profit(PurchaseManager manager, Rank rank){
+
+    public Profit(PurchaseManager manager, Rank rank) {
         this.manager = manager;
         this.rank = rank;
     }
 
-    public double profitRate(){
+    public double profitRate() {
         return profitSum() / manager.money().getMoney();
     }
 
-    public double profitSum(){
+    public double profitSum() {
         return rank.getRank().keySet()
                 .stream()
                 .filter(hitCount -> rank.size(hitCount) > 0)

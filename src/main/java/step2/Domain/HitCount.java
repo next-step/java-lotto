@@ -2,16 +2,16 @@ package step2.Domain;
 
 import java.util.Objects;
 
-public class HitCount{
+public class HitCount {
 
     private int hitCount;
     private boolean bonusBallHit;
 
     public HitCount(int hitCount) {
-        this(hitCount,false);
+        this(hitCount, false);
     }
 
-    public HitCount(int hitCount,boolean bonusBallHit) {
+    public HitCount(int hitCount, boolean bonusBallHit) {
         this.hitCount = hitCount;
         this.bonusBallHit = bonusBallHit;
     }

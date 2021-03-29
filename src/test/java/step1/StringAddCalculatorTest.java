@@ -12,8 +12,8 @@ public class StringAddCalculatorTest {
     private StringAddCalculator stringAddCalculator;
 
     @BeforeEach
-    void init(){
-         stringAddCalculator = new StringAddCalculator();
+    void init() {
+        stringAddCalculator = new StringAddCalculator();
     }
 
     @Test
@@ -46,14 +46,14 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 하는 테스트")
-    void sum_콤마_구분자_테스트(){
+    void sum_콤마_구분자_테스트() {
         int result = stringAddCalculator.sum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
     @DisplayName("구분자 여러 개(콤마, 콜론)일때 숫자의 합을 더하는 하는 테스트")
-    void sum_구분자_여러개_테스트(){
+    void sum_구분자_여러개_테스트() {
         int result = stringAddCalculator.sum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
@@ -68,7 +68,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 문자 1개")
     void sum_음수_문자1개_테스트() throws Exception {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             stringAddCalculator.sum("-1");
         }).isInstanceOf(RuntimeException.class);
     }
@@ -76,7 +76,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 디폴트 구분자")
     void sum_음수_디폴트_구분자_테스트() throws Exception {
-        assertThatThrownBy(()-> {
+        assertThatThrownBy(() -> {
             stringAddCalculator.sum("-1,2,3");
         }).isInstanceOf(RuntimeException.class);
     }
@@ -84,7 +84,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("음수가 들어왔을때 RuntimeException 발생 - 커스텀 구분자")
     void sum_음수_커스텀_구분자_테스트() throws Exception {
-        assertThatThrownBy(()-> {
+        assertThatThrownBy(() -> {
             stringAddCalculator.sum("//;\n1;2;-3");
         }).isInstanceOf(RuntimeException.class);
 

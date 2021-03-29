@@ -9,23 +9,23 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumberList;
 
-    public Lotto(String lottoNumberList){
+    public Lotto(String lottoNumberList) {
         this(Arrays.stream(lottoNumberList.split(","))
-                .map(number->new LottoNumber(Integer.parseInt(number)))
+                .map(number -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList()));
     }
 
-    public Lotto(List<LottoNumber> lottoNumberList){
+    public Lotto(List<LottoNumber> lottoNumberList) {
         this.lottoNumberList = lottoNumberList;
     }
 
-    public HitCount isWinningLottoList(WinningLotto winningLotto){
+    public HitCount isWinningLottoList(WinningLotto winningLotto) {
         return new HitCount(Long.valueOf(winningLotto.getLottoNumberList().stream()
-                .filter(winningNumber->lottoNumberList.contains(winningNumber))
+                .filter(winningNumber -> lottoNumberList.contains(winningNumber))
                 .count()).intValue());
     }
 
-    public List<LottoNumber> getLottoNumberList(){
+    public List<LottoNumber> getLottoNumberList() {
         return lottoNumberList;
     }
 
