@@ -21,7 +21,7 @@ public class WinningNumbersTest {
 
     static Stream<Arguments> 보너스_번호_중복_Provider() {
         return Stream.of(
-                Arguments.of((Object) new String[]{"1", "4", "5", "7", "3", "15"}, 15)
+                Arguments.of(new String[]{"1", "4", "5", "7", "3", "15"}, 15)
         );
     }
 
@@ -36,7 +36,7 @@ public class WinningNumbersTest {
 
     static Stream<Arguments> 보너스_번호_범위_Provider() {
         return Stream.of(
-                Arguments.of((Object) new String[]{"1", "4", "5", "7", "3", "15"}, -3)
+                Arguments.of(new String[]{"1", "4", "5", "7", "3", "15"}, -3)
         );
     }
 
@@ -50,8 +50,8 @@ public class WinningNumbersTest {
 
     static Stream<Arguments> 보너스_번호_타입_Provider() {
         return Stream.of(
-                Arguments.of((Object) new String[]{"1", "4", "5", "7", "3", "15"}, "a")
+                Arguments.of(new String[]{"1", "4", "5", "7", "3", "15"}, "a")
         );
     }
-    
+
 }

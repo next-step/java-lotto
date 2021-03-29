@@ -19,12 +19,12 @@ public class RankTest {
 
     static Stream<Arguments> arrayProvider() {
         return Stream.of(
-                Arguments.of((Object) Rank.from(3, false), 5_000),
-                Arguments.of((Object) Rank.from(4, false), 50_000),
-                Arguments.of((Object) Rank.from(5, false), 1_500_000),
-                Arguments.of((Object) Rank.from(5, true), 30_000_000),
-                Arguments.of((Object) Rank.from(6, false), 2_000_000_000),
-                Arguments.of((Object) Rank.from(7, false), 0)
+                Arguments.of(Rank.from(3, false), 5_000),
+                Arguments.of(Rank.from(4, false), 50_000),
+                Arguments.of(Rank.from(5, false), 1_500_000),
+                Arguments.of(Rank.from(5, true), 30_000_000),
+                Arguments.of(Rank.from(6, false), 2_000_000_000),
+                Arguments.of(Rank.from(7, false), 0)
         );
     }
 

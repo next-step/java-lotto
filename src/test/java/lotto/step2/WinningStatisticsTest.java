@@ -25,7 +25,7 @@ public class WinningStatisticsTest {
     static Stream<Arguments> arrayProvider() {
 
         return Stream.of(
-                Arguments.of((Object) new Lottos(new ArrayList<Lotto>() {
+                Arguments.of(new Lottos(new ArrayList<Lotto>() {
                             {
                                 add(new Lotto(new String[]{"1", "2", "3", "4", "5", "7"}));
                                 add(new Lotto(new String[]{"1", "2", "3", "4", "7", "8"}));
@@ -34,7 +34,7 @@ public class WinningStatisticsTest {
                             }
                         }
                         )
-                        , (Object) new WinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 45), 7900)
+                        , new WinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 45), 7900)
         );
     }
 }
