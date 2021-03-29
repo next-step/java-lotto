@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.enums.LottoMatcher;
+import lotto.domain.enums.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class LottoGame {
         LottoBoard lottoBoard = new LottoBoard();
         lottos.stream()
                 .map(lotto -> winningNumber.getLottoMatchCount(lotto))
-                .forEach(i -> lottoBoard.calculate(LottoMatcher.match(i)));
+                .forEach(i -> lottoBoard.calculate(Rank.match(i)));
 
         this.lottoBoard = lottoBoard;
     }

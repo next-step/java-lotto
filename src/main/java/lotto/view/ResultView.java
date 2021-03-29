@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBoard;
 import lotto.domain.Lottos;
-import lotto.domain.enums.LottoMatcher;
+import lotto.domain.enums.Rank;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,9 +46,9 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
 
-        Map<LottoMatcher, Integer> board = lottoBoard.getBoard();
+        Map<Rank, Integer> board = lottoBoard.getBoard();
 
-        LottoMatcher.getLottoBoardMatcher().forEach(i -> {
+        Rank.getLottoBoardMatcher().forEach(i -> {
             System.out.println(String.format(WINNING_MATCH_MSG, i.getMatchCount(), i.getWinningBonus(), board.get(i)));
         });
 

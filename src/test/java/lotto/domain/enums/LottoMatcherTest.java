@@ -14,17 +14,17 @@ class LottoMatcherTest {
     @DisplayName("매치카운트에 맞춰서 상금 잘 가져오는지 체크")
     @ParameterizedTest
     @MethodSource("provideLottoMatcher")
-    void getWinningBonusTest(long input, LottoMatcher expected) {
-        assertThat(LottoMatcher.match(input)).isEqualTo(expected);
+    void getWinningBonusTest(long input, Rank expected) {
+        assertThat(Rank.match(input)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideLottoMatcher() {
         return Stream.of(
-                Arguments.of(1L, LottoMatcher.MATCH_ZERO),
-                Arguments.of(3L, LottoMatcher.MATCH_THREE),
-                Arguments.of(4L, LottoMatcher.MATCH_FOUR),
-                Arguments.of(5L, LottoMatcher.MATCH_FIVE),
-                Arguments.of(6L, LottoMatcher.MATCH_SIX)
+                Arguments.of(1L, Rank.MISS),
+                Arguments.of(3L, Rank.FIFTH),
+                Arguments.of(4L, Rank.FOURTH),
+                Arguments.of(5L, Rank.THIRD),
+                Arguments.of(6L, Rank.FIRST)
         );
     }
 }
