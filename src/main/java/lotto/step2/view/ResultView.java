@@ -6,7 +6,7 @@ import lotto.step2.domain.WinningStatistics;
 public class ResultView {
 
     private final static String MESSAGE_PURCHASING_COUNT = "개를 구입하셨습니다.";
-    private final static String MESSAGE_WINNING_RESULT = "당첨 통계\n---------";
+    private final static String MESSAGE_WINNING_RESULT = "당첨 통계" + System.lineSeparator() + "---------";
     private final static String MESSAGE_OPEN_PARENTHESES = " (";
     private final static String MESSAGE_WON_CLOSE_PARENTHESES = "원)- ";
     private final static String MESSAGE_COUNT = "개";
