@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.enums.Rank;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +29,8 @@ public class LottoGame {
     public void calculateWinnings(WinningNumber winningNumber) {
         LottoBoard lottoBoard = new LottoBoard();
         lottos.stream()
-                .map(lotto -> winningNumber.getLottoMatchCount(lotto))
-                .forEach(i -> lottoBoard.calculate(Rank.match(i)));
+                .map(lotto -> winningNumber.rankMatch(lotto))
+                .forEach(rank -> lottoBoard.calculate(rank));
 
         this.lottoBoard = lottoBoard;
     }

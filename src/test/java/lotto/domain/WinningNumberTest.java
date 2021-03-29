@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -32,10 +33,10 @@ class WinningNumberTest {
         );
     }
 
-    @DisplayName("당첨번호와 로또번호 조회하여 몇개 일치하는지 테스트")
+    @DisplayName("당첨번호와 로또번호, 보너스매치를 조회하여 RANK 테스트")
     @ParameterizedTest
     @MethodSource("provideLottos")
-    void getLottoMatchCount(int[] input, int bonusNumber, int expected) {
+    void getLottoMatchCount(int[] input, int bonusNumber, Rank expected) {
         String winningNumbers = "1, 3, 5, 7, 9, 11";
         WinningNumber winningNumber = WinningNumber.of(winningNumbers, bonusNumber);
 
@@ -44,14 +45,17 @@ class WinningNumberTest {
                 .collect(Collectors.toSet()));
         Lotto lotto = Lotto.of(lottoSet);
 
-        assertThat(winningNumber.getLottoMatchCount(lotto)).isEqualTo(expected);
+        assertThat(winningNumber.rankMatch(lotto)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideLottos() {
         return Stream.of(
-                Arguments.of(new int[]{1, 3, 5, 7, 9, 11}, 10, 6),
-                Arguments.of(new int[]{1, 3, 5, 7, 9, 45}, 12, 5),
-                Arguments.of(new int[]{1, 3, 5, 7, 10, 43}, 15, 4)
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 11}, 10, Rank.FIRST),
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 12}, 12, Rank.SECOND),
+                Arguments.of(new int[]{1, 3, 5, 7, 9, 45}, 12, Rank.THIRD),
+                Arguments.of(new int[]{1, 3, 5, 7, 10, 43}, 15, Rank.FOURTH),
+                Arguments.of(new int[]{1, 3, 5, 40, 41, 45}, 12, Rank.FIFTH),
+                Arguments.of(new int[]{1, 3, 2, 40, 41, 45}, 12, Rank.MISS)
         );
     }
 }

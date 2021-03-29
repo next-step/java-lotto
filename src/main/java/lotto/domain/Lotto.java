@@ -2,8 +2,10 @@ package lotto.domain;
 
 import lotto.exception.LottoException;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
@@ -24,6 +26,18 @@ public class Lotto {
     public Stream<Integer> stream() {
         return numbers.stream();
     }
+
+    public boolean containBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
+    public long matchCount(Lotto lotto) {
+        List<Integer> numberList = lotto.stream().collect(Collectors.toList());
+        return numbers.stream()
+                .filter(number -> numberList.contains(number))
+                .count();
+    }
+
 
     private void validation(final Set<Integer> numbers) {
         if (numbers.size() != LOTTO_MADE_OF_NUMBERS) {

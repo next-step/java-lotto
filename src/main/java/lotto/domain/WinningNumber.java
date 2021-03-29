@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import lotto.domain.enums.Rank;
+
+import java.util.Objects;
 
 public class WinningNumber {
 
@@ -18,11 +19,10 @@ public class WinningNumber {
         return new WinningNumber(winningNumbers, bonusNumber);
     }
 
-    public long getLottoMatchCount(Lotto lotto) {
-        List<Integer> list = lotto.stream().collect(Collectors.toList());
-        return winningNumbers.stream()
-                .filter(i -> list.contains(i))
-                .count();
+    public Rank rankMatch(Lotto lotto) {
+        boolean bonusMatch = lotto.containBonusNumber(bonusNumber);
+        long matchCount = winningNumbers.matchCount(lotto);
+        return Rank.of(matchCount, bonusMatch);
     }
 
     @Override

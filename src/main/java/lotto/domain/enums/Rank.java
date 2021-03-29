@@ -21,9 +21,10 @@ public enum Rank {
         this.winningBonus = winningBonus;
     }
 
-    public static Rank match(Long matchCount) {
+    public static Rank of(Long matchCount, boolean bonusMatch) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getMatchCount() == matchCount)
+                .filter(rank -> !rank.equals(SECOND) | bonusMatch)
                 .findFirst()
                 .orElse(MISS);
     }
