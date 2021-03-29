@@ -9,8 +9,9 @@ import java.util.List;
 public class LottoControl {
     public void play() {
 
-        PurchaseAmount purchaseAmount = new PurchaseAmount(View.purchaseAmount());
+        int typedPurchaseAmount = View.purchaseAmount();
         int numberOfManualGames = View.numberOfManualGames();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(typedPurchaseAmount, numberOfManualGames);
 
         List<String> manualGameNumbers = View.manualGameNumbers(numberOfManualGames);
         Lotto lotto = new Lotto(purchaseAmount, manualGameNumbers, new RandomLottoNumberGenerator());

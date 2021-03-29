@@ -11,11 +11,28 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class PurchaseAmountTest {
     @Test
-    @DisplayName("Money 인스턴스 생성")
+    @DisplayName(" 인스턴스 생성")
     void When_New_Then_InstanceCreate() {
         assertDoesNotThrow(() -> {
             new PurchaseAmount(1000);
         });
+    }
+
+    @Test
+    @DisplayName("인스턴스 생성 시 수동 게임 개수 받기")
+    void Given_NumberOfManualGames_When_New_Then_NoException() {
+        int numberOfManualGames = 1;
+        assertDoesNotThrow(() -> {
+            new PurchaseAmount(1000, numberOfManualGames);
+        });
+    }
+
+    @Test
+    @DisplayName("수동 게임이 돈보다 많으면 Exception")
+    void Given_TooMuchNumberOfManualGames_When_New_Then_Exception() {
+        int numberOfManualGames = 100;
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new PurchaseAmount(1000, numberOfManualGames));
     }
 
     @Test
