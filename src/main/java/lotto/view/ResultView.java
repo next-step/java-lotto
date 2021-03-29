@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.util.LottoCountDto;
 import lotto.util.LottosDto;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
@@ -28,8 +29,8 @@ public class ResultView {
         return " 이익입니다.";
     }
 
-    public static void showCount(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다", lottoCount));
+    public static void showCount(LottoCountDto lottoCount) {
+        System.out.println(String.format("수동 %d개, 자동 %d개를 구매했습니다", lottoCount.getManualCount(), lottoCount.getAutoCount()));
     }
 
     public static void showLottos(LottosDto lottos) {
