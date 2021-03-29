@@ -1,4 +1,8 @@
-package step2;
+package step2.View;
+
+import step2.Domain.Lottos;
+import step2.Domain.PurchaseManager;
+import step2.Domain.RandomLottoNumberGenerator;
 
 public class LottoGame {
 

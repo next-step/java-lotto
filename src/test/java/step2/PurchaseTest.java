@@ -2,6 +2,10 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.Domain.Lottos;
+import step2.Domain.Money;
+import step2.Domain.PurchaseManager;
+import step2.Domain.RandomLottoNumberGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

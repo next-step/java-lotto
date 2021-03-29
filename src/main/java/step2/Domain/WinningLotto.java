@@ -1,4 +1,4 @@
-package step2;
+package step2.Domain;
 
 public class WinningLotto extends Lotto{
 

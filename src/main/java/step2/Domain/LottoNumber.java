@@ -1,4 +1,4 @@
-package step2;
+package step2.Domain;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

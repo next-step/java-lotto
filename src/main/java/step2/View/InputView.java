@@ -1,4 +1,7 @@
-package step2;
+package step2.View;
+
+import step2.Domain.Money;
+import step2.Domain.WinningLotto;
 
 import java.util.Scanner;
 

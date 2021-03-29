@@ -1,4 +1,4 @@
-package step2;
+package step2.Domain;
 
 import java.util.Arrays;
 import java.util.List;
