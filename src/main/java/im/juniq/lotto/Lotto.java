@@ -54,4 +54,8 @@ public class Lotto {
 		}
 		return 0;
 	}
+
+	public Winning winning(WinningNumbers winningNumbers) {
+		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers));
+	}
 }
