@@ -80,6 +80,9 @@ public final class ResultView {
     }
 
     public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
+        if(inputMoney == 0) {
+            return 0;
+        }
         return ((double)getRevenue(winningScoreBoard) / (double)inputMoney);
     }
 
