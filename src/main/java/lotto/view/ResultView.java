@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Collections;
 import java.util.List;
 import lotto.view.dto.LottoDto;
 import lotto.view.dto.LottoOrderResultDto;
@@ -19,6 +20,8 @@ public class ResultView {
         System.out.println("---------");
 
         List<LottoWinnerDto> winnerDtoList = lottoScoringResultDto.getWinnerDtoList();
+        Collections.sort(winnerDtoList);
+
         for (LottoWinnerDto winnerDto : winnerDtoList) {
             System.out.println(winnerDto);
         }

@@ -1,11 +1,9 @@
 package lotto.view;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -25,10 +23,10 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputString = this.scanner.nextLine();
 
-        inputString.replaceAll(" ", "");
         String[] inputNumbers = inputString.split(",");
 
         return Arrays.stream(inputNumbers)
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
