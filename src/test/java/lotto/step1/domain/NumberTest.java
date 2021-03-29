@@ -26,6 +26,6 @@ class NumberTest {
     @CsvSource(value = {"1:1", "5:5", "10:10"}, delimiter = ':')
     void number_상태값_테스트(int input, int expected) {
         Number number = Number.of(input);
-        assertThat(number.getNumber()).isEqualTo(expected);
+        assertThat(number).isEqualTo(Number.of(expected));
     }
 }

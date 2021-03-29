@@ -14,9 +14,8 @@ public class Numbers {
         return new Numbers(numbers);
     }
 
-    public int getSum() {
+    public Number getSum() {
         return numbers.stream()
-                .reduce(Number.of(0), Number::sum)
-                .getNumber();
+                .reduce(Number.of(0), Number::sum);
     }
 }
