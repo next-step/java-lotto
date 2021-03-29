@@ -2,28 +2,29 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum Prize {
-    FAIL(0, 0,""),
-    THREE_MATCH(3, 5000, "3개 일치 (5000원)"),
-    FOUR_MATCH(4, 50000, "4개 일치 (50000원)"),
-    FIVE_MATCH(5, 1500000, "5개 일치 (1500000원)"),
-    ALL_MATCH(6, 2000000000, "6개 일치 (2000000000원)");
+public enum Rank {
+    FIRST(6, 2_000_000_000, "6개 일치 (2,000,000,000원)"),
+    SECOND(5, 30_000_000, "보너스 볼 일치(30,000,000원)"),
+    THIRD(5, 1_500_000, "5개 일치 (1,500,000원)"),
+    FOURTH(4, 50_000, "4개 일치 (50,000원)"),
+    FIFTH(3, 5_000, "3개 일치 (5,000원)"),
+    MISS(0, 0,"");
 
     private int matchCount;
     private int amount;
     private String message;
 
-    Prize(final int matchCount, final int amount, final String message) {
+    Rank(final int matchCount, final int amount, final String message) {
         this.matchCount = matchCount;
         this.amount = amount;
         this.message = message;
     }
 
-    public static Prize findPrize(final int matchCount) {
-        return Arrays.stream(Prize.values())
+    public static Rank valueOf(final int matchCount) {
+        return Arrays.stream(Rank.values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElse(FAIL);
+                .orElse(MISS);
     }
 
     public int getMatchCount() {

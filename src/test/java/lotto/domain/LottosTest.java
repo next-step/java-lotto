@@ -34,7 +34,7 @@ class LottosTest {
     void getPrizeCount(String purchaseNumber, int matchCount, int expectedPrizeCount) {
         // given
         Lottos lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(1000));
-        Prize prize = Prize.findPrize(matchCount);
+        Rank rank = Rank.valueOf(matchCount);
 
         Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
@@ -43,7 +43,7 @@ class LottosTest {
         Lotto prizeLotto = Lotto.from(numbers);
 
         // when
-        int prizeCount = lottos.getPrizeCount(prizeLotto, prize);
+        int prizeCount = lottos.getRankCount(prizeLotto, rank);
 
         // then
         assertThat(prizeCount).isEqualTo(expectedPrizeCount);

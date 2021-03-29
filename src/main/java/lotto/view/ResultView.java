@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Number;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -34,14 +34,14 @@ public class ResultView {
     public static void printStatistics(LottoStatistics lottoStatistics) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
-        Map<Prize, Integer> LottoPrizeResult = lottoStatistics.getLottoPrizeResult();
-        Arrays.stream(Prize.values())
-                .filter(prize -> !prize.equals(Prize.FAIL))
+        Map<Rank, Integer> LottoPrizeResult = lottoStatistics.getLottoPrizeResult();
+        Arrays.stream(Rank.values())
+                .filter(prize -> !prize.equals(Rank.MISS))
                 .forEach(prize -> System.out.println(prettyString(prize, LottoPrizeResult.get(prize))));
     }
 
-    private static String prettyString(Prize prize, Integer prizeCount) {
-        return String.format("%s- %d개", prize.getMessage(), prizeCount);
+    private static String prettyString(Rank rank, Integer prizeCount) {
+        return String.format("%s- %d개", rank.getMessage(), prizeCount);
     }
 
     public static void printRevenueRate(BigDecimal revenueRate) {

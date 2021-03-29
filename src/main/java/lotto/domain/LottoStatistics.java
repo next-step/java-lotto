@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoStatistics {
-    private Map<Prize, Integer> lottoPrizeResult;
+    private Map<Rank, Integer> lottoPrizeResult;
     private BigDecimal purchaseAmount;
 
     private LottoStatistics(final int amount) {
@@ -21,26 +21,26 @@ public class LottoStatistics {
     }
 
     public void makeStatisticsResult(final Lottos lottos, final Lotto prizeLotto) {
-        Arrays.stream(Prize.values())
-                .filter(prize -> !prize.equals(Prize.FAIL))
-                .forEach(prize -> lottoPrizeResult.put(prize, lottos.getPrizeCount(prizeLotto, prize)));
+        Arrays.stream(Rank.values())
+                .filter(prize -> !prize.equals(Rank.MISS))
+                .forEach(prize -> lottoPrizeResult.put(prize, lottos.getRankCount(prizeLotto, prize)));
     }
 
-    private int getTotalPrizeAmount(final Lottos lottos, final Lotto prizeLotto) {
+    private int getTotalPrizeMoney(final Lottos lottos, final Lotto prizeLotto) {
         return lottos.getLottos()
                 .stream()
                 .map(lotto -> lotto.getMatchCount(prizeLotto))
-                .map(matchCount -> Prize.findPrize(matchCount))
-                .map(Prize::getAmount)
+                .map(matchCount -> Rank.valueOf(matchCount))
+                .map(Rank::getAmount)
                 .reduce(0, Integer::sum);
     }
 
     public BigDecimal getRevenueRate(final Lottos lottos, final Lotto prizeLotto) {
-        BigDecimal totalPrizeAmount = new BigDecimal(String.valueOf(getTotalPrizeAmount(lottos, prizeLotto)));
+        BigDecimal totalPrizeAmount = new BigDecimal(String.valueOf(getTotalPrizeMoney(lottos, prizeLotto)));
         return totalPrizeAmount.divide(this.purchaseAmount, 2, RoundingMode.HALF_EVEN);
     }
 
-    public Map<Prize, Integer> getLottoPrizeResult() {
+    public Map<Rank, Integer> getLottoPrizeResult() {
         return Collections.unmodifiableMap(lottoPrizeResult);
     }
 }
