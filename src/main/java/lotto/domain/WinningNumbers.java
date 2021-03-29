@@ -59,7 +59,6 @@ public class WinningNumbers {
         + this.ranks.get(Rank.THIRD) * Rank.THIRD.getWinningMoney()
         + this.ranks.get(Rank.FOURTH) * Rank.FOURTH.getWinningMoney()
         + this.ranks.get(Rank.FIFTH) * Rank.FIFTH.getWinningMoney();
-        System.out.println(total);
         return Math.floor((double) total / price * 100.0) / 100.0;
     }
 }
