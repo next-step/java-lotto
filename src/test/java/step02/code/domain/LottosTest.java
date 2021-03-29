@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class LottosTest {
 
   @Test
-  @DisplayName("lotto 최소 구매 금액 이하인경우, lotto 구입후 잔액이 남은경우 에러 발생 테스트")
+  @DisplayName("lotto 최소 구매 금액 이하인경우, lotto 구입후 잔액이 남은경우 error")
   public void check() {
     assertThatThrownBy(() -> {
       // 로또 최소 구매 금액 이하인경우
@@ -26,7 +26,7 @@ public class LottosTest {
   }
 
   @RepeatedTest(value = 100)
-  @DisplayName("lotto 생성시, 최소값 1, 최대값 45 안의 6자리 숫자가 생성되는지 테스트")
+  @DisplayName("lotto 생성시, 최소값 1, 최대값 45 안의 6자리 숫자가 생성확인")
   public void lottoNumber() {
     List<Number> lotto = new Lotto(new RandomNumber()).lotto();
     int min = lotto.stream().map(Number::number).min(Integer::compare).orElse(-1);
@@ -39,7 +39,7 @@ public class LottosTest {
 
   @ParameterizedTest
   @CsvSource(value = {"1000:1", "15000:15"}, delimiter = ':')
-  @DisplayName("구매 금액에 맞춰서 정확한 갯수의 lotto 가 생성되는지 테스트")
+  @DisplayName("구매 금액에 맞춰서 정확한 갯수의 lotto 가 생성확인")
   public void buy(int money, int number) {
     List<Lotto> lottos = Lottos.buy(money);
 

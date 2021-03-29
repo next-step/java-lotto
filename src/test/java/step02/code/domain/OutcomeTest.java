@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class OutcomeTest {
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트 테스트")
+  @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트")
   public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
     Lotto winning = Lotto.makeLottoByString(winningNumber);
     Outcome outcome = new Outcome(0, lottos, winning);
@@ -57,7 +57,7 @@ public class OutcomeTest {
 
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndResult")
-  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
+  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value)")
   public void result(Lottos lottos, String winningNumber, Map<Integer, Integer> mustResult) {
     Lotto winning = Lotto.makeLottoByString(winningNumber);
     Outcome outcome = new Outcome(0, lottos, winning);
