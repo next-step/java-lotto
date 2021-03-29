@@ -104,7 +104,7 @@ public class LottoTest {
   public void matchWithBonusNumber() {
     Lotto matched = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     Lotto noneMatched = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
-    int bonus = 1;
+    Number bonus = new Number(1);
 
     assertThat(matched.isMatchBonus(bonus)).isTrue();
     assertThat(noneMatched.isMatchBonus(bonus)).isFalse();

@@ -31,7 +31,7 @@ public class NumberTest {
   public void isMatch() {
     Number matched = new Number(1);
     Number noneMatched = new Number(2);
-    int number = 1;
+    Number number = new Number(1);
 
     assertThat(matched.isMatch(number)).isTrue();
     assertThat(noneMatched.isMatch(number)).isFalse();

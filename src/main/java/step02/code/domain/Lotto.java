@@ -65,7 +65,7 @@ public class Lotto {
     return LOTTO_SIZE - lotto.size();
   }
 
-  public boolean isMatchBonus(int bonus) {
+  public boolean isMatchBonus(Number bonus) {
     return lotto.stream().anyMatch(number -> number.isMatch(bonus));
   }
 

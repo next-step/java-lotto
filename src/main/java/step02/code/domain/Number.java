@@ -33,8 +33,8 @@ public class Number {
     return number;
   }
 
-  public boolean isMatch(int number) {
-    return this.number == number;
+  public boolean isMatch(Number number) {
+    return this.equals(number);
   }
 
 
