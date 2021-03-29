@@ -104,7 +104,7 @@ class LottoTest {
     // given
     Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
     LottoNumber containedLottoNumber = LottoNumber.valueOf("6");
-    LottoNumber notContainedLottoNumber = LottoNumber.valueOf("6");
+    LottoNumber notContainedLottoNumber = LottoNumber.valueOf("7");
 
     // when
     // then
