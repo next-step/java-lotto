@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public int calculate(String input) {
-        Delimiter.addDelimiter(",|:");
         String checkedParam = checkStringParam(input);
         if ("".equals(checkedParam)) {
             return 0;
@@ -29,10 +28,7 @@ public class StringAddCalculator {
     }
 
     private String checkStringParam(String input) {
-        if (input == null) {
-            return "";
-        }
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return "";
         }
         return input;

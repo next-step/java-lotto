@@ -17,14 +17,14 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("음수")
+    @DisplayName("invalid param test : negative number")
     void negativeNumberTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> stringAddCalculator.calculate("-1,2"));
     }
 
 
     @Test
-    @DisplayName("null_또는_빈문자")
+    @DisplayName("invalid param test : null or empty String")
     public void nullEmptyTest() {
         int result = stringAddCalculator.calculate(null);
         assertThat(result).isEqualTo(0);
@@ -34,41 +34,41 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("문자 테스트")
+    @DisplayName("invalid param test : not number String")
     void stringTest1() {
         assertThatIllegalArgumentException().isThrownBy(() -> stringAddCalculator.calculate("test"));
     }
 
     @Test
-    @DisplayName("문자 테스트")
+    @DisplayName("invalid param test : contain not number String")
     void stringTest2() {
         assertThatIllegalArgumentException().isThrownBy(() -> stringAddCalculator.calculate("test,2"));
     }
 
     @Test
-    @DisplayName("숫자 1개 ")
+    @DisplayName("single number test")
     void singleNumbewrTest() {
         int result = stringAddCalculator.calculate("1");
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("쉼표로 구분된 문자열 ")
+    @DisplayName("number string separated by comma")
     void commaTest() {
         int result = stringAddCalculator.calculate("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
-    @DisplayName("쉼표, 콜론으로 구분된 문자열 ")
+    @DisplayName("number string separated by comma and colon")
     void commaColonTest() {
         int result = stringAddCalculator.calculate("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("커스텀 구분자 설정")
-    void customDelimetetTest() {
+    @DisplayName("number string with custom delimiter test")
+    void customDelimiterTest() {
         int result = stringAddCalculator.calculate("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
