@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,27 +8,34 @@ public class LottoNumbers {
     private static final int NUMBER_OF_LOTTO_NUMBER = 6;
     private static final int BOUND_MIN = 1;
     private static final int BOUND_MAX = 46;
-    private static final List<Integer> numbers = IntStream.range(BOUND_MIN, BOUND_MAX)
+    private static final List<LottoNumber> numbers = IntStream.range(BOUND_MIN, BOUND_MAX)
             .boxed()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
         this(autoNumbers());
     }
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    private static List<Integer> autoNumbers() {
+    public static LottoNumbers integers(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    private static List<LottoNumber> autoNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(0, NUMBER_OF_LOTTO_NUMBER));
-        Collections.sort(lottoNumbers);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, NUMBER_OF_LOTTO_NUMBER));
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::lottoNumber));
         return lottoNumbers;
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
