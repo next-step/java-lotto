@@ -2,10 +2,7 @@ package lotto.domain.stats;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.prize.Prize;
-import lotto.domain.shop.LottoShop;
 
 public class LottoEarningRateCalculator {
     private final long principal; // 원금

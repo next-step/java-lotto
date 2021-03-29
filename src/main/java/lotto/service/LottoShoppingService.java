@@ -27,6 +27,4 @@ public class LottoShoppingService {
 
         return new LottoOrderResultDto(lottoDtoList);
     }
-
-
 }

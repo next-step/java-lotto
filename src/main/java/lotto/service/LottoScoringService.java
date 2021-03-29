@@ -13,21 +13,13 @@ import lotto.view.dto.LottoScoringDto;
 import lotto.view.dto.LottoScoringResultDto;
 import lotto.view.dto.LottoWinnerDto;
 
-
 public class LottoScoringService {
 
     public LottoScoringResultDto score(LottoScoringDto lottoScoringDto) {
-        List<LottoWinnerDto> winnerDtoList = new ArrayList<>();
         LottoScoreBoard lottoScoreBoard = getRenewedScoreBoard(lottoScoringDto);
 
-        for (Prize prize : Prize.values()) {
-            long equalNumberCount = prize.getEqualNumberCount();
-            long prizeAmount = prize.getPrizeAmount();
-
-            winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
-                    lottoScoreBoard.getWinningsByEqualNumberCount(equalNumberCount)));
-        }
         String earningRate = calculateEarningRate(lottoScoringDto, lottoScoreBoard);
+        List<LottoWinnerDto> winnerDtoList = getWinnerDtoFromBoard(lottoScoreBoard);
         return new LottoScoringResultDto(winnerDtoList, earningRate);
     }
 
@@ -43,6 +35,19 @@ public class LottoScoringService {
             LottoScoreBoard lottoScoreBoard) {
         long principal = lottoScoringDto.getLottoOrderedNumber().size() * LottoShop.LOTTO_PRICE;
         return new LottoEarningRateCalculator(principal, lottoScoreBoard).resultToString();
+    }
+
+    private List<LottoWinnerDto> getWinnerDtoFromBoard(LottoScoreBoard lottoScoreBoard) {
+        List<LottoWinnerDto> winnerDtoList = new ArrayList<>();
+
+        for (Prize prize : Prize.values()) {
+            long equalNumberCount = prize.getEqualNumberCount();
+            long prizeAmount = prize.getPrizeAmount();
+
+            winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
+                    lottoScoreBoard.getWinningsByEqualNumberCount(equalNumberCount)));
+        }
+        return winnerDtoList;
     }
 
     private List<Lotto> convertToLottoListFromDto(LottoScoringDto lottoScoringDto) {

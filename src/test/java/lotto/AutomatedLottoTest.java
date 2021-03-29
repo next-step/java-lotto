@@ -114,5 +114,4 @@ public class AutomatedLottoTest {
 
         assertThat(earningRate).isEqualTo("0.35");
     }
-
 }
