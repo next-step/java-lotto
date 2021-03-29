@@ -21,11 +21,11 @@ public class InputView {
     public static String[] enterWinningNumbers() {
         System.out.println(MESSAGE_WINNING_NUMBER);
         scanner.nextLine();
-        return scanner.nextLine().split(DELIMITER_COMMA);
+        return scanner.nextLine().trim().split(DELIMITER_COMMA);
     }
 
     public static String enterBonusNumber() {
         System.out.println(MESSAGE_BONUS_NUMBER);
-        return scanner.next();
+        return scanner.nextLine().trim();
     }
 }
