@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -32,6 +33,17 @@ class LottoNumbersTest {
     );
   }
 
+  static Stream<LottoNumberCreationStrategy> lottoCreationFailureSource() {
+    return Stream.of(
+        () -> Stream.of(1, 2, 3, 4, 5)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList()),
+        () -> Stream.of(1, 2, 3, 4, 5, 6, 7)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList())
+    );
+  }
+
   @Test
   @DisplayName("생성")
   void create() {
@@ -41,7 +53,17 @@ class LottoNumbersTest {
     assertThat(new LottoNumbers(lottoNumberCreationStrategy).size()).isEqualTo(LOTTO_NUMBER_COUNT);
   }
 
-  // TODO: 생성 실패 테스트
+  @ParameterizedTest
+  @DisplayName("로또 생성 실패")
+  @MethodSource("lottoCreationFailureSource")
+  void createFail(LottoNumberCreationStrategy failureStrategy) {
+    // given
+
+    // when
+    // then
+    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(failureStrategy))
+        .withMessage("로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.");
+  }
 
   @ParameterizedTest
   @DisplayName("당첨번호 목록을 입력받아 생성")
