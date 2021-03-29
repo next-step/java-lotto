@@ -20,8 +20,8 @@ public final class Lotto {
     return lottoNumbers.size();
   }
 
-  public int compare(Lotto winningLotto) {
-    return lottoNumbers.compare(winningLotto.lottoNumbers);
+  public Match compare(Lotto winningLotto, LottoNumber bonusNumber) {
+    return lottoNumbers.compare(winningLotto.lottoNumbers, bonusNumber);
   }
 
   public LottoNumbers getLottoNumbers() {

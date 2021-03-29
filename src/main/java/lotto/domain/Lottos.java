@@ -30,11 +30,11 @@ public final class Lottos {
     return lottos;
   }
 
-  public List<Integer> compare(final Lotto winningLotto) {
-    List<Integer> list = new ArrayList<>();
+  public List<Match> compare(final Lotto winningLotto, LottoNumber bonusNumber) {
+    List<Match> list = new ArrayList<>();
 
     for (Lotto lotto : lottos) {
-      list.add(lotto.compare(winningLotto));
+      list.add(lotto.compare(winningLotto, bonusNumber));
     }
     return list;
   }
