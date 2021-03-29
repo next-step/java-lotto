@@ -1,10 +1,6 @@
 package lotto.io;
 
-import static lotto.domain.Rank.FIVE;
-import static lotto.domain.Rank.FOUR;
 import static lotto.domain.Rank.NONE;
-import static lotto.domain.Rank.SIX;
-import static lotto.domain.Rank.THREE;
 
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -42,10 +38,9 @@ public final class Printer {
     System.out.println("당첨 통계");
     System.out.println("----------");
 
-    printMessageAndCountOfRank(winningStatistics, THREE);
-    printMessageAndCountOfRank(winningStatistics, FOUR);
-    printMessageAndCountOfRank(winningStatistics, FIVE);
-    printMessageAndCountOfRank(winningStatistics, SIX);
+    for (Rank rank : Rank.values()) {
+      printMessageAndCountOfRank(winningStatistics, rank);
+    }
   }
 
   public static void printResult(WinningStatistics winningStatistics, Money userMoney) {
