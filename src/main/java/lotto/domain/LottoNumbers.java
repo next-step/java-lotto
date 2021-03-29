@@ -15,16 +15,20 @@ public final class LottoNumbers {
   private final List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(LottoNumberCreationStrategy lottoNumberCreationStrategy) {
-    lottoNumbers = lottoNumberCreationStrategy.create();
-    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
-    }
+    this(lottoNumberCreationStrategy.create());
   }
 
   public LottoNumbers(String[] winningNumbers) {
-    this.lottoNumbers = Arrays.stream(winningNumbers)
+    this(Arrays.stream(winningNumbers)
         .map(LottoNumber::valueOf)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()));
+  }
+
+  public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
+    }
+    this.lottoNumbers = lottoNumbers;
   }
 
   public int size() {

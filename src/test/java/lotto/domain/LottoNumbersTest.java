@@ -62,7 +62,7 @@ class LottoNumbersTest {
 
     // when
     // then
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(failureStrategy))
+    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(failureStrategy.create()))
         .withMessage(LOTTO_NUMBER_CREATION_FAILURE);
   }
 
