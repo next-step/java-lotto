@@ -10,8 +10,7 @@ public enum Rank {
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
-    MISS(0, 0),
-    ;
+    MISS(0, 0);
 
     private final long matchCount;
     private final int winningBonus;
