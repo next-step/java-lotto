@@ -7,7 +7,7 @@ import lotto.view.dto.LottoScoringResultDto;
 import lotto.view.dto.LottoWinnerDto;
 
 public class ResultView {
-    public static void printLottoPurchaseResult(LottoOrderResultDto lottoOrderResultDto) {
+    public static void printLottoOrderResult(LottoOrderResultDto lottoOrderResultDto) {
         System.out.printf("%d개를 구매했습니다.\n", lottoOrderResultDto.getOrderedResult().size());
 
         List<LottoDto> lottoNumberList = lottoOrderResultDto.getOrderedResult();
