@@ -13,7 +13,7 @@ public class Main {
   public static void main(String[] args) {
     int money = InputView.buy();
 
-    Lottos lottos = new Lottos(money);
+    Lottos lottos = Lottos.buy(money);
     ResultView.myLotto(lottos.lottos());
 
     Lotto winningNumber = Lotto.makeLottoByString(InputView.winningNumber());

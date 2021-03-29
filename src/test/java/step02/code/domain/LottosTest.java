@@ -17,11 +17,11 @@ public class LottosTest {
   public void check() {
     assertThatThrownBy(() -> {
       // 로또 최소 구매 금액 이하인경우
-      new Lottos(500);
+      Lottos.buy(500);
     }).isInstanceOf(IllegalArgumentException.class);
     assertThatThrownBy(() -> {
       // 로또 구매후 잔액이 남는 경우
-      new Lottos(1500);
+      Lottos.buy(1500);
     }).isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -41,7 +41,7 @@ public class LottosTest {
   @CsvSource(value = {"1000:1", "15000:15"}, delimiter = ':')
   @DisplayName("구매 금액에 맞춰서 정확한 갯수의 lotto 가 생성확인")
   public void buy(int money, int number) {
-    List<Lotto> lottos = Lottos.buy(money);
+    List<Lotto> lottos = Lottos.buy(money).lottos();
 
     assertThat(lottos.size()).isEqualTo(number);
   }

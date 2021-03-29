@@ -16,12 +16,7 @@ public class Lottos {
     this.lottos = lottos;
   }
 
-  public Lottos(int money) { 
-    this(buy(money));
-    check(money);
-  }
-
-  private void check(int money) {
+  private static void check(int money) {
     if(money < LOTTO_PRICE) {
       throw new IllegalArgumentException("lotto 구입의 최소 금액보다 작습니다");
     }
@@ -30,11 +25,13 @@ public class Lottos {
     }
   }
 
-  public static List<Lotto> buy(int money) {
-    return IntStream.range(INIT_NUM, money / LOTTO_PRICE)
+  public static Lottos buy(int money) {
+    check(money);
+    List<Lotto> lottos = IntStream.range(INIT_NUM, money / LOTTO_PRICE)
       .boxed()
       .map((i) -> new Lotto(new RandomNumber()))
       .collect(Collectors.toList());
+    return new Lottos(lottos);
   }
 
   public List<Lotto> lottos() {
