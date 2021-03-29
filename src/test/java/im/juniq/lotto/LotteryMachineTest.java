@@ -39,17 +39,17 @@ class LotteryMachineTest {
 		assertThat(lottoes.numberOfLottoesMatched(4, new WinningNumbers(1, 2, 3, 4, 8, 9))).isEqualTo(14);
 	}
 
-	@Test
-	void calculateYield() {
-		LotteryMachine lotteryMachine = new LotteryMachine(1000, new NoShuffleStrategy());
-
-		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 6));
-		assertThat(lotteryMachine.yield()).isEqualTo(2000000);
-		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 7));
-		assertThat(lotteryMachine.yield()).isEqualTo(15000);
-		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 7, 8));
-		assertThat(lotteryMachine.yield()).isEqualTo(50);
-		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 7, 8, 9));
-		assertThat(lotteryMachine.yield()).isEqualTo(5);
-	}
+//	@Test
+//	void calculateYield() {
+//		LotteryMachine lotteryMachine = new LotteryMachine(1000, new NoShuffleStrategy());
+//
+//		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 6));
+//		assertThat(lotteryMachine.yield()).isEqualTo(2000000);
+//		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 5, 7));
+//		assertThat(lotteryMachine.yield()).isEqualTo(15000);
+//		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 4, 7, 8));
+//		assertThat(lotteryMachine.yield()).isEqualTo(50);
+//		lotteryMachine.setWinningNumbers(new WinningNumbers(1, 2, 3, 7, 8, 9));
+//		assertThat(lotteryMachine.yield()).isEqualTo(5);
+//	}
 }

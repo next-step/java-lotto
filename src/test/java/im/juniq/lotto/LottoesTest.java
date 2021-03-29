@@ -29,4 +29,14 @@ class LottoesTest {
 		assertThat(new Lottoes(numberOfCreated, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
 			new Lottoes(lottoes));
 	}
+
+	@Test
+	void calculateYield() {
+		Lottoes lottoes = new Lottoes(1, new NoShuffleStrategy());
+
+		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 5, 6), new Price(1000))).isEqualTo(2000000);
+		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 5, 7), new Price(1000))).isEqualTo(15000);
+		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 7, 8), new Price(1000))).isEqualTo(50);
+		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 7, 8, 9), new Price(1000))).isEqualTo(5);
+	}
 }
