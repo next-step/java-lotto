@@ -54,6 +54,6 @@ public final class LottoNumbers {
   }
 
   public boolean contains(LottoNumber lottoNumber) {
-    return false;
+    return lottoNumbers.contains(lottoNumber);
   }
 }
