@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.ListNullPointerException;
+import step2.exception.LottoSizeMissMatchException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             Lotto.newInstance(lottoNumbers);
         }).isInstanceOf(LottoSizeMissMatchException.class)
-                .hasMessageContaining("로또 갯수가 맞지 않습니다.");
+                .hasMessageContaining("로또 숫자 갯수가 맞지 않습니다.");
 
     }
 

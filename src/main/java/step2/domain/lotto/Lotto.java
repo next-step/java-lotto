@@ -1,6 +1,7 @@
 package step2.domain.lotto;
 
 import step2.exception.ListNullPointerException;
+import step2.exception.LottoSizeMissMatchException;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,9 @@ import java.util.stream.Stream;
 public final class Lotto {
 
     private static final String COMMA = ",";
+    private static final int LOTTO_SIZE = 6;
+    private static final int EACH_COUNT = 1;
+
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(String sentence) {
@@ -19,6 +23,9 @@ public final class Lotto {
     private Lotto(List<LottoNumber> lottoNumbers) {
         if (isListNull(lottoNumbers)) {
             throw new ListNullPointerException();
+        }
+        if(isSizeMissNatch(lottoNumbers)) {
+            throw new LottoSizeMissMatchException();
         }
         this.lottoNumbers = lottoNumbers;
     }
@@ -43,12 +50,16 @@ public final class Lotto {
     public final int getCorrectCount(Lotto other) {
         return lottoNumbers.stream()
                 .filter(other::contains)
-                .mapToInt(i -> 1)
+                .mapToInt(i -> EACH_COUNT)
                 .sum();
     }
 
     private final boolean isListNull(List<LottoNumber> lottoNumbers) {
         return lottoNumbers == null;
+    }
+
+    private final boolean isSizeMissNatch(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.size() != LOTTO_SIZE;
     }
 
 

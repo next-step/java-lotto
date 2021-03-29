@@ -24,7 +24,7 @@ class LottoExpressionResponseDtoTest {
     void setUp() {
         List<LottoNumber> testLottoNumbers =
                 IntStream
-                .range(1, 6)
+                .range(1, 7)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
