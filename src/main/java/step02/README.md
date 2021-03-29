@@ -22,9 +22,9 @@
     - Lotto makeLottoByString(String str)
       - string 값으로 winning number 생성하는 용도
   - method
-    - void isEmpty();
+    - void assureNotEmpty();
       - null or empty check
-    - String check(String str);
+    - String assureNumericString(String str);
       - string 으로 생성시 check 용도
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
@@ -40,11 +40,9 @@
   - constructor
     - Lottos(List<Lotto> lottos);
       - 주 생성자
-    - Lottos(int money);
-      - 돈을 받고, lotto list 생성
   - method
     - static void check(int money);
-    - static List<Lotto> buy(int money);
+    - static Lottos buy(int money);
       - 돈에 따라서 로또 구입
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
