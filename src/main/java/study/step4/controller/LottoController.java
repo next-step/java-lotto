@@ -16,9 +16,9 @@ public class LottoController {
     }
 
     public void play() {
-        Amount amount = new Amount(InputView.inputPurchaseAmount());
+        Amount amount = new Amount(InputView.inputPurchaseAmount(), InputView.inputManualCount());
         lottos = LottoFactory.purchase(amount);
-        ResultView.printPurchaseLottoCount(amount.getPurchaseLottoCount());
+        ResultView.printPurchaseLottoCount(amount.totalCount());
         ResultView.printLottoNumbers(lottos.getLottos());
 
         Lotto lotto = new Lotto(InputView.inputWinNumber());
