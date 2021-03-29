@@ -4,7 +4,7 @@ import step2.domain.winning.WinningScore;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoList;
 import step2.domain.winning.WinningScoreBoard;
-import step2.dto.LottoConfirmationRequestDto;
+import step2.dto.LottoWinningCheckRequestDto;
 import step2.dto.LottoWinningResultResponseDto;
 
 import java.util.EnumMap;
@@ -14,15 +14,15 @@ public final class LottoWinningChecker {
 
     private final Lotto WinningLotto;
 
-    private LottoWinningChecker(LottoConfirmationRequestDto confirmationRequestDto) {
-        this(confirmationRequestDto.getLotto());
+    private LottoWinningChecker(LottoWinningCheckRequestDto confirmationRequestDto) {
+        this(confirmationRequestDto.getWinningLotto());
     }
 
     private LottoWinningChecker(Lotto WinningLotto) {
         this.WinningLotto = WinningLotto;
     }
 
-    public static final LottoWinningChecker newInstance(LottoConfirmationRequestDto confirmationRequestDto) {
+    public static final LottoWinningChecker newInstance(LottoWinningCheckRequestDto confirmationRequestDto) {
         return new LottoWinningChecker(confirmationRequestDto);
     }
 

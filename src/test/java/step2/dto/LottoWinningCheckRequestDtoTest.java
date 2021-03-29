@@ -6,7 +6,7 @@ import step2.domain.lotto.Lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoConfirmationRequestDtoTest {
+class LottoWinningCheckRequestDtoTest {
 
     @DisplayName("LottoConfirmationRequestDto 인스턴스 생성 여부 테스트")
     @Test
@@ -15,7 +15,7 @@ class LottoConfirmationRequestDtoTest {
         String testInputLottoNumbers = "1, 2, 3, 4, 5, 6";
 
         // when
-        LottoConfirmationRequestDto requestDto = LottoConfirmationRequestDto.newInstance(testInputLottoNumbers);
+        LottoWinningCheckRequestDto requestDto = LottoWinningCheckRequestDto.newInstance(testInputLottoNumbers);
 
         // then
         assertThat(requestDto).isNotNull();
@@ -30,8 +30,8 @@ class LottoConfirmationRequestDtoTest {
         Lotto expected = Lotto.newInstance(testInputLottoNumbers);
 
         // when
-        LottoConfirmationRequestDto requestDto = LottoConfirmationRequestDto.newInstance(expected);
-        Lotto actual = requestDto.getLotto();
+        LottoWinningCheckRequestDto requestDto = LottoWinningCheckRequestDto.newInstance(expected);
+        Lotto actual = requestDto.getWinningLotto();
 
         // then
         assertThat(actual).isEqualTo(expected);

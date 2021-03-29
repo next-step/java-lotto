@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.ListNullPointerException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -59,6 +60,21 @@ class LottoTest {
             Lotto.newInstance(nullLottoNumbers);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
+
+    }
+
+    @DisplayName("Lotto 인스턴스에 갯수가 맞지 않는 값 주입시 예외처리 테스트")
+    @Test
+    void 검증_6개_미만_및_초과() {
+
+        // given
+        lottoNumbers.add(LottoNumber.valueOf(7));
+
+        // when and then
+        assertThatThrownBy(() -> {
+            Lotto.newInstance(lottoNumbers);
+        }).isInstanceOf(LottoSizeMissMatchException.class)
+                .hasMessageContaining("로또 갯수가 맞지 않습니다.");
 
     }
 

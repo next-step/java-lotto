@@ -3,7 +3,7 @@ package step2.controller;
 import step2.domain.checker.LottoWinningChecker;
 import step2.domain.generator.LottoGenerator;
 import step2.domain.lotto.LottoList;
-import step2.dto.LottoConfirmationRequestDto;
+import step2.dto.LottoWinningCheckRequestDto;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
 import step2.dto.LottoWinningResultResponseDto;
@@ -32,7 +32,7 @@ public final class LottoController {
         return new LottoController(strategy);
     }
 
-    public final LottoExpressionResponseDto generateLottoList(LottoCreationRequestDto creationRequestDto) {
+    public final LottoExpressionResponseDto getExpressionLottoList(LottoCreationRequestDto creationRequestDto) {
         LottoGenerator lottoGenerator = LottoGenerator.newInstance(creationRequestDto, strategy);
         while (lottoGenerator.hasNext()) {
             lottoList.add(lottoGenerator.generateLotto());
@@ -41,7 +41,7 @@ public final class LottoController {
         return LottoExpressionResponseDto.newInstance(lottoList);
     }
 
-    public final LottoWinningResultResponseDto checkWinning(LottoConfirmationRequestDto confirmationRequestDto) {
+    public final LottoWinningResultResponseDto getWinningResult(LottoWinningCheckRequestDto confirmationRequestDto) {
         LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto);
         return winningChecker.getLottoWinningResultResponseDto(lottoList);
     }

@@ -56,7 +56,7 @@ class LottoControllerTest {
         LottoController lottoController = LottoController.newInstance(lottoShuffleStrategy);
 
         // when
-        LottoExpressionResponseDto actual = lottoController.generateLottoList(creationRequestDto);
+        LottoExpressionResponseDto actual = lottoController.getExpressionLottoList(creationRequestDto);
 
         // then
         assertThat(actual).isNotNull();

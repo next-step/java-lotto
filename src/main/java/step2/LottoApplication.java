@@ -1,7 +1,9 @@
 package step2;
 
 import step2.controller.LottoController;
+import step2.dto.LottoWinningCheckRequestDto;
 import step2.dto.LottoCreationRequestDto;
+import step2.dto.LottoExpressionResponseDto;
 import step2.dto.LottoWinningResultResponseDto;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -27,9 +29,11 @@ public final class LottoApplication {
 
     public final void generateAndShowLottoList() {
         LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
-        resultView.printLottoList(lottoController.generateLottoList(lottoCreationRequestDto));
+        LottoExpressionResponseDto expressionLottoList = lottoController.getExpressionLottoList(lottoCreationRequestDto);
+        resultView.printLottoList(expressionLottoList);
 
-        LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoController.checkWinning(inputView.getLottoConfirmationRequestDto());
+        LottoWinningCheckRequestDto lottoWinningCheckRequestDto = inputView.getLottoConfirmationRequestDto();
+        LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoController.getWinningResult(lottoWinningCheckRequestDto);
         resultView.printLottoResult(lottoWinningResultResponseDto, lottoCreationRequestDto.getMoney());
     }
 
