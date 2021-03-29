@@ -1,41 +1,37 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
-    List<Integer> numbers;
+    private final int number;
+    private static final Map<Integer, LottoNumber> numbersCache;
 
-    public LottoNumber(List<Integer> numbers) {
-        if (numbers.stream().max(Integer::compare).get() > LottoRule.max()) {
-            throw new IllegalArgumentException();
+    static {
+        numbersCache = new HashMap<>();
+        for (int i = LottoRule.min(); i <= LottoRule.max(); i++) {
+            numbersCache.put(i, new LottoNumber(i));
         }
-        if (numbers.stream().min(Integer::compare).get() < LottoRule.min()) {
-            throw new IllegalArgumentException();
-        }
-
-        if (numbers.stream().distinct().count() != LottoRule.countOfSelection()) {
-            throw new IllegalArgumentException();
-        }
-
-        Collections.sort(numbers);
-        this.numbers = numbers;
     }
 
-    public int countOfMatch(LottoNumber lottoNumber) {
-        return (int) this.numbers
-                .stream()
-                .filter(lottoNumber::contains)
-                .count();
+    private LottoNumber(int number) {
+        this.number = number;
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    public static LottoNumber create(int number) {
+        LottoNumber lottoNumber = numbersCache.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호가 범위를 벗어났습니다.");
+        }
+        return lottoNumber;
     }
 
-    public List<Integer> numbers() {
-        return numbers;
+    public static int compare(LottoNumber first, LottoNumber second) {
+        return Integer.compare(first.number, second.number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
     @Override
@@ -43,11 +39,11 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(numbers, that.numbers);
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(number);
     }
 }

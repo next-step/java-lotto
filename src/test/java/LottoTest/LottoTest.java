@@ -1,7 +1,6 @@
 package LottoTest;
 
 import lotto.domain.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,23 +13,61 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoTest {
-    private final int MONEY = 10000;
-    private final int NUMBER_OF_GAMES = MONEY / LottoRule.price();
+    private final PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
+    private final int NUMBER_OF_GAMES = purchaseAmount.numberOfGames();
     private final LottoNumberGenerator lottoNumberGenerator = new FixedLottoNumberGenerator();
     private Lotto lotto;
 
     @Test
     @DisplayName("로또 게임 구매 테스트")
     void When_Game_Then_LottoNumberList() {
-        lotto = new Lotto(MONEY, lottoNumberGenerator);
+        lotto = new Lotto(purchaseAmount, lottoNumberGenerator);
 
         //when
-        List<LottoNumber> games = lotto.games();
+        List<LottoGame> games = lotto.games();
 
         //then
         assertThat(games.size()).isEqualTo(NUMBER_OF_GAMES);
+    }
+
+    @Test
+    @DisplayName("수동 로또 입력 받기 테스트")
+    void Given_ManualLottoGame_When_New_Then_InstanceCreated() {
+        List<String> manualLottoGame = null;
+
+        assertDoesNotThrow(() -> {
+            lotto = new Lotto(purchaseAmount, manualLottoGame, lottoNumberGenerator);
+        });
+    }
+
+    @Test
+    @DisplayName("문자열 형식의 수동 로또 입력 받기")
+    void Given_StringManualLottoNumbers_When_New_Then_IstanceCreated() {
+        List<String> manualLottoNumbers = Arrays.asList(
+                "1,2,3,4,5,6",
+                "10,11,2,3,4,30"
+        );
+
+        assertDoesNotThrow(() -> {
+            lotto = new Lotto(purchaseAmount, manualLottoNumbers, lottoNumberGenerator);
+        });
+    }
+
+
+    @Test
+    @DisplayName("로또 금액보다 수동 로또가 더 많으면 Exception")
+    void Given_TooManyLottoGame_When_New_Then_Exception() {
+        List<String> manualLottoGame = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 6"
+        );
+
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lotto = new Lotto(1000, manualLottoGame, lottoNumberGenerator));
     }
 
     @Test
@@ -45,8 +82,8 @@ public class LottoTest {
     @MethodSource("provideResultTestInput")
     void When_Result(List<Integer> givenWinningNumber, int bonusNumber, Rank expectedRank) {
         //given
-        WinningNumber winningNumber = new WinningNumber(new LottoNumber(givenWinningNumber), bonusNumber);
-        lotto = new Lotto(MONEY, lottoNumberGenerator);
+        WinningNumber winningNumber = new WinningNumber(new LottoGame(givenWinningNumber), bonusNumber);
+        lotto = new Lotto(purchaseAmount, lottoNumberGenerator);
 
         //when
         Winners winners = lotto.winners(winningNumber);
@@ -65,5 +102,14 @@ public class LottoTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 12, 11, 8), 9, Rank.FIFTH),
                 Arguments.of(Arrays.asList(1, 2, 3, 12, 11, 8), 6, Rank.FIFTH)
         );
+    }
+
+    @Test
+    void Given_MoneyInstance_When_New_Then_NoException() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(10000);
+
+        assertDoesNotThrow(() -> {
+            new Lotto(purchaseAmount, lottoNumberGenerator);
+        });
     }
 }

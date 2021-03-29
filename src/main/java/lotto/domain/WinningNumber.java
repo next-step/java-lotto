@@ -1,26 +1,55 @@
 package lotto.domain;
 
-public class WinningNumber {
-    private LottoNumber winningNumber;
-    private int bonusNumber;
+import java.util.List;
+import java.util.Objects;
 
-    public WinningNumber(LottoNumber winningNumber, int bonusNumber) {
+public class WinningNumber {
+    private LottoGame winningNumber;
+    private LottoNumber bonusNumber;
+
+    public WinningNumber(List<Integer> numbers, int bonusNumber) {
+        this(new LottoGame(numbers), LottoNumber.create(bonusNumber));
+    }
+
+    public WinningNumber(List<Integer> numbers, LottoNumber bonusNumber) {
+        this(new LottoGame(numbers), bonusNumber);
+    }
+
+    public WinningNumber(LottoGame numbers, int bonusNumber) {
+        this(numbers, LottoNumber.create(bonusNumber));
+    }
+
+    public WinningNumber(LottoGame winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException();
-        }
-        if (bonusNumber < LottoRule.min() || bonusNumber > LottoRule.max()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("당첨번호와 보너스 번호는 중복될 수 없습니다.");
         }
 
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean matchBonus(LottoNumber lottoNumber) {
-        return lottoNumber.contains(bonusNumber);
+    public Rank rank(LottoGame game) {
+        return Rank.valueOf(countOfMatch(game), matchBonus(game));
     }
 
-    public int countOfMatch(LottoNumber lottoNumber) {
-        return winningNumber.countOfMatch(lottoNumber);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningNumber that = (WinningNumber) o;
+        return Objects.equals(winningNumber, that.winningNumber) && Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumber, bonusNumber);
+    }
+
+    private boolean matchBonus(LottoGame lottoGame) {
+        return lottoGame.contains(bonusNumber);
+    }
+
+    private int countOfMatch(LottoGame lottoGame) {
+        return winningNumber.countOfMatch(lottoGame);
     }
 }
