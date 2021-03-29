@@ -25,7 +25,7 @@ public class Lotto {
   }
 
   public static Lotto makeLottoByString(String str) {
-    isEmpty(str);
+    assureNotEmpty(str);
     List<Integer> lotto = Arrays.stream(str.split(","))
       .map(String::trim)
       .map(Lotto::check)
@@ -34,14 +34,14 @@ public class Lotto {
     return new Lotto(lotto);
   }
 
-  public static void isEmpty(String str) {
+  public static void assureNotEmpty(String str) {
     if(str == null || str.equals("")) {
       throw new IllegalArgumentException("null or 빈값이 들어올 수 없습니다.");
     }
   }
 
   public static String check(String str) {
-    isEmpty(str);
+    assureNotEmpty(str);
     try {
       Integer.parseInt(str);
     } catch (Exception e) {
