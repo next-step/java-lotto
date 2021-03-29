@@ -15,7 +15,7 @@ public class LottoFactoryTest {
     @CsvSource(value = {"2000:2", "3000:3", "12000:12"}, delimiter = ':')
     public void purchase(int input, int expected) {
         // given
-        Lottos lottos = LottoFactory.purchase(new Amount(input));
+        Lottos lottos = LottoFactory.purchaseAutoLotto(new Amount(input));
         // when & then
         assertThat(lottos.getLottos().size()).isEqualTo(expected);
     }

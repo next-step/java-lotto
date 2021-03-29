@@ -2,14 +2,11 @@ package study.step4.view;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import study.step4.domain.Amount;
-import study.step4.domain.Lotto;
-import study.step4.domain.LottoNumber;
-import study.step4.domain.Lottos;
 
 public class InputView {
     private final static String MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -28,10 +25,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Lotto inputWinNumber() {
+    public static String[] inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
         scanner.nextLine();
-        return new Lotto(scanner.nextLine().split(SPLIT_DELIMITER));
+        return scanner.nextLine().split(SPLIT_DELIMITER);
     }
 
     public static String inputBonusBall() {
@@ -44,17 +41,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Lottos inputManualNumber(Amount amount) {
+    public static List<String> inputManualNumber(Amount amount) {
         System.out.println(MESSAGE_MANUAL_NUMBER);
-        return new Lottos(IntStream.range(0, amount.getManualCount())
+        return IntStream.range(0, amount.getManualCount())
             .mapToObj(i -> scanner.nextLine())
-            .map(InputView::apply)
-            .collect(toList()));
-    }
-
-    private static Lotto apply(String lottoNumbers) {
-        return new Lotto(Arrays.stream(lottoNumbers.split(SPLIT_DELIMITER))
-            .map(i -> LottoNumber.of(i.trim()))
-            .collect(toList()));
+            .collect(toList());
     }
 }

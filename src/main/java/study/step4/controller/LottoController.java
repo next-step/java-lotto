@@ -15,13 +15,13 @@ public class LottoController {
 
     public void play() {
         Amount amount = new Amount(InputView.inputPurchaseAmount(), InputView.inputManualCount());
-        Lottos manualLottoList = InputView.inputManualNumber(amount);
-        Lottos autoLottoList = LottoFactory.purchase(amount);
+        Lottos manualLottoList = LottoFactory.purchaseManualLotto(InputView.inputManualNumber(amount));
+        Lottos autoLottoList = LottoFactory.purchaseAutoLotto(amount);
 
         ResultView.printPurchaseLottoCount(amount.totalCount());
         ResultView.printLottoNumbers(autoLottoList.getLottos());
 
-        Lotto lotto = InputView.inputWinNumber();
+        Lotto lotto = new Lotto(InputView.inputWinNumber());
         LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
         LottoWin lottoWin = autoLottoList.result(lotto, bonusBall);
         ResultView.printResult(lottoWin);
