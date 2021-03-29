@@ -2,7 +2,7 @@ package step2.domain.winning;
 
 import java.util.Map;
 
-public class WinningScoreBoard {
+public final class WinningScoreBoard {
 
     private final Map<WinningScore, Integer> winningScoreBoard;
     private final int ZERO = 0;

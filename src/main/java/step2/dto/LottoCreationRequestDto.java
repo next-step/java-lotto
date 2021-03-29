@@ -6,6 +6,14 @@ public final class LottoCreationRequestDto {
 
     private final Money money;
 
+    public static final LottoCreationRequestDto newInstance(int money) {
+        return new LottoCreationRequestDto(money);
+    }
+
+    public static final LottoCreationRequestDto newInstance(Money money) {
+        return new LottoCreationRequestDto(money);
+    }
+
     private LottoCreationRequestDto(int money) {
         this(Money.valueOf(money));
     }
@@ -14,13 +22,6 @@ public final class LottoCreationRequestDto {
         this.money = money;
     }
 
-    public static final LottoCreationRequestDto newInstance(int money) {
-        return new LottoCreationRequestDto(money);
-    }
-
-    public static final LottoCreationRequestDto newInstance(Money money) {
-        return new LottoCreationRequestDto(money);
-    }
 
     public final Money getMoney() {
         return money;

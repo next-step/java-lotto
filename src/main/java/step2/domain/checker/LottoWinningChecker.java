@@ -14,14 +14,6 @@ public final class LottoWinningChecker {
 
     private final Lotto WinningLotto;
 
-    public static final LottoWinningChecker newInstance(LottoConfirmationRequestDto confirmationRequestDto) {
-        return new LottoWinningChecker(confirmationRequestDto);
-    }
-
-    public static final LottoWinningChecker newInstance(Lotto WinningLotto) {
-        return new LottoWinningChecker(WinningLotto);
-    }
-
     private LottoWinningChecker(LottoConfirmationRequestDto confirmationRequestDto) {
         this(confirmationRequestDto.getLotto());
     }
@@ -30,7 +22,15 @@ public final class LottoWinningChecker {
         this.WinningLotto = WinningLotto;
     }
 
-    public LottoWinningResultResponseDto getLottoWinningResultResponseDto(LottoList lottoList) {
+    public static final LottoWinningChecker newInstance(LottoConfirmationRequestDto confirmationRequestDto) {
+        return new LottoWinningChecker(confirmationRequestDto);
+    }
+
+    public static final LottoWinningChecker newInstance(Lotto WinningLotto) {
+        return new LottoWinningChecker(WinningLotto);
+    }
+
+    public final LottoWinningResultResponseDto getLottoWinningResultResponseDto(LottoList lottoList) {
         List<Lotto> lottos = lottoList.getLottoList();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
         for(Lotto lotto : lottos) {

@@ -24,20 +24,12 @@ public enum WinningScore {
                 .findFirst().orElse(WinningScore.MISS);
     }
 
-    public final long getWinningAmount() {
-        return winningAmount;
-    }
-
     public final int getCorrectCount() {
         return correctCount;
     }
 
-
-    @Override
-    public String toString() {
-        return "WinningScore{" +
-                "correctCount=" + correctCount +
-                ", winningAmount=" + winningAmount +
-                '}';
+    public final long getWinningAmount() {
+        return winningAmount;
     }
+
 }

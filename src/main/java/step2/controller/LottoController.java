@@ -12,16 +12,16 @@ import step2.strategy.LottoShuffleStrategy;
 
 public final class LottoController {
 
-    private final LottoShuffleStrategy strategy;
     private final LottoList lottoList;
+    private final LottoShuffleStrategy strategy;
 
     private LottoController() {
         this(LottoRandomShuffleStrategy.getInstance());
     }
 
     private LottoController(LottoShuffleStrategy strategy) {
-        this.strategy = strategy;
         this.lottoList = LottoList.newInstance();
+        this.strategy = strategy;
     }
 
     public static final LottoController newInstance() {
@@ -42,7 +42,7 @@ public final class LottoController {
     }
 
     public final LottoWinningResultResponseDto checkWinning(LottoConfirmationRequestDto confirmationRequestDto) {
-        LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto.getLotto());
+        LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto);
         return winningChecker.getLottoWinningResultResponseDto(lottoList);
     }
 

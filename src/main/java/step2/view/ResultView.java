@@ -79,7 +79,6 @@ public final class ResultView {
 
     }
 
-
     public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
         return ((double)getRevenue(winningScoreBoard) / (double)inputMoney);
     }

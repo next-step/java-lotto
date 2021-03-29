@@ -20,10 +20,6 @@ public final class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public Lotto(String sentence) {
-        this(toLottoNumberList(sentence));
-    }
-
     private Lotto(List<LottoNumber> lottoNumbers) {
         if (isListNull(lottoNumbers)) {
             throw new ListNullPointerException();
@@ -31,8 +27,8 @@ public final class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private final boolean isListNull(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers == null;
+    private Lotto(String sentence) {
+        this(toLottoNumberList(sentence));
     }
 
     private static final List<LottoNumber> toLottoNumberList(String sentence) {
@@ -41,6 +37,10 @@ public final class Lotto {
                 .map(Integer::valueOf)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    private final boolean isListNull(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers == null;
     }
 
     public final int getCorrectCount(Lotto other) {
