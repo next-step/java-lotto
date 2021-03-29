@@ -18,12 +18,6 @@ public class WinningNumber {
         validation();
     }
 
-    private void validation() {
-        if (winningNumbers.containBonusNumber(bonusNumber)) {
-            throw new LottoException(WINNING_NUMBER_CONTAIN_BONUS_NUMBER_ERROR);
-        }
-    }
-
     public static WinningNumber of(final String winningNumbers, final int bonusNumber) {
         return new WinningNumber(winningNumbers, bonusNumber);
     }
@@ -32,6 +26,12 @@ public class WinningNumber {
         boolean bonusMatch = lotto.containBonusNumber(bonusNumber);
         long matchCount = winningNumbers.matchCount(lotto);
         return Rank.of(matchCount, bonusMatch);
+    }
+
+    private void validation() {
+        if (winningNumbers.containBonusNumber(bonusNumber)) {
+            throw new LottoException(WINNING_NUMBER_CONTAIN_BONUS_NUMBER_ERROR);
+        }
     }
 
     @Override
