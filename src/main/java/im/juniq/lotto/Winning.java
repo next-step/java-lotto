@@ -23,6 +23,10 @@ public enum Winning {
 		for (Winning winning : Winning.values()) {
 			map.put(winning.matchedCount, winning);
 		}
+		return getWinning(numberOfMatchedWinningNumber, map);
+	}
+
+	private static Winning getWinning(int numberOfMatchedWinningNumber, Map<Integer, Winning> map) {
 		Winning gottenWinning = map.get(numberOfMatchedWinningNumber);
 		if (gottenWinning == null) {
 			return LOSING;
