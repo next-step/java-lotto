@@ -35,27 +35,28 @@ public class Lottoes implements Iterable<Lotto>{
 		return lottoes.size();
 	}
 
-	public int numberOfLottoesMatched(int count, WinningNumbers winningNumbers) {
+	public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers, int bonusNumber) {
 		int countMatchedLotto = 0;
 		for (Lotto lotto : lottoes) {
-			countMatchedLotto += countMatchedLottoes(count, lotto, winningNumbers);
+			countMatchedLotto += countMatchedLottoes(winning, lotto, winningNumbers, bonusNumber);
 		}
 		return countMatchedLotto;
 	}
 
-	private int countMatchedLottoes(int matchingCount, Lotto lotto, WinningNumbers winningNumbers) {
-		if (lotto.winning(winningNumbers).matchedCount() == matchingCount) {
+	private int countMatchedLottoes(Winning winning, Lotto lotto, WinningNumbers winningNumbers, int bonusNumber) {
+		if (lotto.winning(winningNumbers, bonusNumber) == winning) {
 			return 1;
 		}
 		return 0;
 	}
 
-	public double yield(WinningNumbers winningNumbers, Price price) {
+	public double yield(WinningNumbers winningNumbers, Price price, int bonusNumber) {
 		double winningAmount = 0;
-		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(6, winningNumbers);
-		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(5, winningNumbers);
-		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(4, winningNumbers);
-		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(3, winningNumbers);
+		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(Winning.FIRST, winningNumbers, bonusNumber);
+		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(Winning.SECOND, winningNumbers, bonusNumber);
+		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(Winning.THIRD, winningNumbers, bonusNumber);
+		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(Winning.FOURTH, winningNumbers, bonusNumber);
+		winningAmount += Winning.FIFTH.amount() * numberOfLottoesMatched(Winning.FIFTH, winningNumbers, bonusNumber);
 
 		return price.yield(winningAmount);
 	}

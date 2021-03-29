@@ -20,14 +20,16 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void winningStatus(Lottoes lottoes, WinningNumbers winningNumbers, Price price) {
+	public static void winningStatus(Lottoes lottoes, WinningNumbers winningNumbers, int bonusNumber, Price price) {
+		System.out.println();
 		System.out.println("당첨통계");
 		System.out.println("---------");
-		System.out.println(Winning.FOURTH.matchedCount() + "개 일치 (" + Winning.FOURTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FOURTH.matchedCount(), winningNumbers) + "개");
-		System.out.println(Winning.THIRD.matchedCount() + "개 일치 (" + Winning.THIRD.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.THIRD.matchedCount(), winningNumbers) + "개");
-		System.out.println(Winning.SECOND.matchedCount() + "개 일치 (" + Winning.SECOND.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.SECOND.matchedCount(), winningNumbers) + "개");
-		System.out.println(Winning.FIRST.matchedCount() + "개 일치 (" + Winning.FIRST.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FIRST.matchedCount(), winningNumbers) + "개");
-		System.out.println("총 수익률은 " + lottoes.yield(winningNumbers, price) + "입니다.");
+		System.out.println(Winning.FIFTH.matchedCount() + "개 일치 (" + Winning.FIFTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FIFTH, winningNumbers, bonusNumber) + "개");
+		System.out.println(Winning.FOURTH.matchedCount() + "개 일치 (" + Winning.FOURTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FOURTH, winningNumbers, bonusNumber) + "개");
+		System.out.println(Winning.THIRD.matchedCount() + "개 일치 (" + Winning.THIRD.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.THIRD, winningNumbers, bonusNumber) + "개");
+		System.out.println(Winning.SECOND.matchedCount() + "개 일치, 보너스 볼 일치(" + Winning.SECOND.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.SECOND, winningNumbers, bonusNumber) + "개");
+		System.out.println(Winning.FIRST.matchedCount() + "개 일치 (" + Winning.FIRST.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FIRST, winningNumbers, bonusNumber) + "개");
+		System.out.println("총 수익률은 " + lottoes.yield(winningNumbers, price, bonusNumber) + "입니다.");
 	}
 
 	private static void addSeparatorIfNotFirst(int index) {

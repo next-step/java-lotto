@@ -7,6 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 		LotteryMachine lotteryMachine = new LotteryMachine(InputView.purchaseAmount());
 		ResultView.lottoes(lotteryMachine.lottoes());
-		ResultView.winningStatus(lotteryMachine.lottoes(), InputView.winningNumbers(), lotteryMachine.price());
+		ResultView.winningStatus(lotteryMachine.lottoes(), InputView.winningNumbers(), InputView.bonusNumber(), lotteryMachine.price());
 	}
 }
