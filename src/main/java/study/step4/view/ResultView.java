@@ -1,17 +1,15 @@
 package study.step4.view;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import study.step4.domain.Amount;
-import study.step4.domain.Lotto;
 import study.step4.domain.LottoRank;
 import study.step4.domain.LottoWin;
 import study.step4.domain.Lottos;
 
 public class ResultView {
     private final static String MESSAGE_PURCHASE = "구입하셨습니다.";
-    private final static String MESSAGE_WIN_RESULT = "당첨 통계\n---------";
+    private final static String MESSAGE_WIN_RESULT = "\n당첨 통계\n---------";
     private final static String MESSAGE_BONUS_BALL = ", 보너스 일치";
     private final static String MESSAGE_EMPTY = " ";
 
