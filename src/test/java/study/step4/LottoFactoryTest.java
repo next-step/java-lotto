@@ -29,13 +29,26 @@ public class LottoFactoryTest {
     @Test
     @DisplayName("수동 구매 테스트")
     public void purchaseManualLotto() {
-        // given
         String[] input = {"1,2,3,4,5,6", "10,11,12,13,14,15"};
         List<String> test = Arrays.stream(input).collect(toList());
+        // given
         Lottos lottos = LottoFactory.purchaseManualLotto(test);
         // when & then
         assertThat(lottos.getLottos().size()).isEqualTo(2);
     }
+
+    @ParameterizedTest(name = "구매 테스트")
+    @CsvSource(value = {"2000:2", "3000:3", "12000:12"}, delimiter = ':')
+    public void purchase(int input, int expected) {
+        // given
+        String[] inputString = {"1,2,3,4,5,6", "10,11,12,13,14,15"};
+        List<String> test = Arrays.stream(inputString).collect(toList());
+        Amount amount = new Amount(input, test.size());
+        Lottos lottos = LottoFactory.purchase(amount, test);
+        // when & then
+        assertThat(lottos.getLottos().size()).isEqualTo(expected);
+    }
+
 }
 
 

@@ -46,7 +46,7 @@ public class LottoFactory {
 
     public static Lottos purchaseAutoLotto(Amount amount) {
         Lottos lottoList = new Lottos();
-        int count = amount.totalCount();
+        int count = amount.getAutoCount();
         for (int i = 0; i < count; i++) {
             lottoList.add(createAutoLotto());
         }
