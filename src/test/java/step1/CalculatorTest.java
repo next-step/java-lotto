@@ -8,13 +8,11 @@ public class CalculatorTest {
     @Test
     public void add_many() {
         //given
-        Integer[] inputNumbers = new Integer[]{1,2,3};
+        Integer[] inputNumbers = new Integer[]{1, 2, 3};
         int expectResult = 6;
-
 
         //when
         int result = Calculator.add(inputNumbers);
-
 
         //then
         assertThat(result).isEqualTo(expectResult);
@@ -28,7 +26,6 @@ public class CalculatorTest {
 
         //when
         int result = Calculator.add(inputNumbers);
-
 
         //then
         assertThat(result).isEqualTo(expectResult);

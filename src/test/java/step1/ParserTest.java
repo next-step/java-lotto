@@ -9,12 +9,11 @@ public class ParserTest {
     @Test
     public void parser_positive() {
         //given
-        String[] inputStrings = new String[]{"1","2","3"};
-        Integer[] expectResults = new Integer[]{1,2,3};
+        String[] inputStrings = new String[]{"1", "2", "3"};
+        Integer[] expectResults = new Integer[]{1, 2, 3};
 
         //when
-        Integer[] results = Parser.parser(inputStrings);
-
+        Integer[] results = Parser.parse(inputStrings);
 
         //then
         assertThat(results).isEqualTo(expectResults);
@@ -23,27 +22,26 @@ public class ParserTest {
     @Test
     public void parser_negative() {
         //given
-        String[] inputStrings = new String[]{"-1","2","3"};
+        String[] inputStrings = new String[]{"-1", "2", "3"};
 
         //when
 
         //then
-        assertThatThrownBy(() -> Parser.parser(inputStrings))
+        assertThatThrownBy(() -> Parser.parse(inputStrings))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     public void parser_other() {
         //given
-        String[] inputStrings = new String[]{"a","b","3"};
+        String[] inputStrings = new String[]{"a", "b", "3"};
 
         //when
 
         //then
-        assertThatThrownBy(() -> Parser.parser(inputStrings))
+        assertThatThrownBy(() -> Parser.parse(inputStrings))
                 .isInstanceOf(RuntimeException.class);
     }
-
 
 
 }
