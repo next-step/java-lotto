@@ -39,7 +39,7 @@ public class LottoTest {
     Lotto lotto = new Lotto(lottoNumber);
     Lotto winning = Lotto.makeLottoByString(winningNumber);
 
-    int numberOfMatched = lotto.match(winning.lotto());
+    int numberOfMatched = lotto.match(winning);
 
     assertThat(numberOfMatched).isEqualTo(match);
   }

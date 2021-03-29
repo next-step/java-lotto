@@ -59,9 +59,9 @@ public class Lotto {
     }
   }
 
-  public int match(List<Number> winningNumber) {
+  public int match(Lotto winningNumber) {
     List<Number> lotto = new ArrayList<>(this.lotto);
-    lotto.removeAll(winningNumber);
+    lotto.removeAll(winningNumber.lotto());
     return LOTTO_SIZE - lotto.size();
   }
 
