@@ -26,7 +26,7 @@ class WinningStatisticsTest {
                     new Lotto(new String[]{"1", "2", "3", "4", "5", "6"}), // SIX
                     new Lotto(new String[]{"1", "2", "3", "4", "5", "7"}), // FIVE_BONUS
                     new Lotto(new String[]{"1", "2", "3", "4", "6", "7"}), // FIVE_BONUS
-                    new Lotto(new String[]{"2", "3", "4", "5", "6", "7"}), // FIVE
+                    new Lotto(new String[]{"2", "3", "4", "5", "6", "8"}), // FIVE
                     new Lotto(new String[]{"3", "4", "5", "6", "7", "8"}), // FOUR
                     new Lotto(new String[]{"4", "5", "6", "7", "8", "9"}), // THREE
                     new Lotto(new String[]{"5", "6", "7", "8", "9", "10"}) // NONE
