@@ -40,6 +40,10 @@ public class Lotto {
 		return results;
 	}
 
+	public Winning winning(WinningNumbers winningNumbers) {
+		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers));
+	}
+
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
 		int matchedCount = 0;
 		for (int number : numbers) {
@@ -53,9 +57,5 @@ public class Lotto {
 			return 1;
 		}
 		return 0;
-	}
-
-	public Winning winning(WinningNumbers winningNumbers) {
-		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers));
 	}
 }
