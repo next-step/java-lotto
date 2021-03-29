@@ -17,4 +17,12 @@ public class NumberTest {
       new Number(46);
     }).isInstanceOf(IllegalArgumentException.class);
   }
+
+  @Test
+  @DisplayName("보너스 생성시, string 값이 int 로 변형 불가인 경우, error")
+  public void numberByString() {
+    assertThatThrownBy(() -> {
+      Number.numberByString("j");
+    }).isInstanceOf(IllegalArgumentException.class);
+  }
 }
