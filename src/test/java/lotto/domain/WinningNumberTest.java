@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.enums.Rank;
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumberTest {
 
@@ -56,6 +58,25 @@ class WinningNumberTest {
                 Arguments.of(new int[]{1, 3, 5, 7, 10, 43}, 15, Rank.FOURTH),
                 Arguments.of(new int[]{1, 3, 5, 40, 41, 45}, 12, Rank.FIFTH),
                 Arguments.of(new int[]{1, 3, 2, 40, 41, 45}, 12, Rank.MISS)
+        );
+    }
+
+    @DisplayName("당첨번호에 보너스 번호가 올 경우 에러")
+    @ParameterizedTest
+    @MethodSource("providewinningNumberContainBonusNumber")
+    void winningNumberContainBonusNumber_에러테스트(String lottoNumber, int bonusNumber) {
+        assertThatThrownBy(() -> {
+            WinningNumber.of(lottoNumber, bonusNumber);
+        }).isInstanceOf(LottoException.class)
+                .hasMessage("당첨번호에 보너스번호가 올 수 없습니다.");
+
+    }
+
+    private static Stream<Arguments> providewinningNumberContainBonusNumber() {
+        return Stream.of(
+                Arguments.of("1, 3, 5, 7, 9, 11", 9),
+                Arguments.of("5, 10, 13, 17, 29, 31", 29),
+                Arguments.of("21, 33, 34, 37, 40, 45", 40)
         );
     }
 }
