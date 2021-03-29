@@ -35,12 +35,13 @@ class LottoTest {
 	void winning() {
 		Lotto lotto = new Lotto(new NoShuffleStrategy());
 
-		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 5, 6))).isEqualTo(Winning.FIRST);
-		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 5, 7))).isEqualTo(Winning.SECOND);
-		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 7, 8))).isEqualTo(Winning.THIRD);
-		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 7, 8, 9))).isEqualTo(Winning.FOURTH);
-		assertThat(lotto.winning(new WinningNumbers(1, 2, 7, 8, 9, 10))).isEqualTo(Winning.LOSING);
-		assertThat(lotto.winning(new WinningNumbers(1, 7, 8, 9, 10, 11))).isEqualTo(Winning.LOSING);
-		assertThat(lotto.winning(new WinningNumbers(7, 8, 9, 10, 11, 12))).isEqualTo(Winning.LOSING);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 5, 6), 7)).isEqualTo(Winning.FIRST);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 5, 7), 6)).isEqualTo(Winning.SECOND);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 5, 7), 8)).isEqualTo(Winning.THIRD);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 4, 7, 8), 9)).isEqualTo(Winning.FOURTH);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 3, 7, 8, 9), 10)).isEqualTo(Winning.FIFTH);
+		assertThat(lotto.winning(new WinningNumbers(1, 2, 7, 8, 9, 10), 11)).isEqualTo(Winning.LOSING);
+		assertThat(lotto.winning(new WinningNumbers(1, 7, 8, 9, 10, 11), 12)).isEqualTo(Winning.LOSING);
+		assertThat(lotto.winning(new WinningNumbers(7, 8, 9, 10, 11, 12), 13)).isEqualTo(Winning.LOSING);
 	}
 }
