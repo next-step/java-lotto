@@ -29,7 +29,6 @@ public class LottoEarningRateCalculator {
         }
 
         long prizeTotal = 0L;
-        lottoScoreBoard.scoring();
 
         for (Prize prize : Prize.values()) {
             Long winnings = lottoScoreBoard.getWinningsByEqualNumberCount(prize.getEqualNumberCount());

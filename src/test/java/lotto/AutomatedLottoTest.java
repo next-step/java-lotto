@@ -104,7 +104,9 @@ public class AutomatedLottoTest {
         LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator());
         Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
         List<Lotto> lotteries = lottoShop.purchase();
+
         LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
+        lottoScoreBoard.scoring();
         final long balance = lotteries.size() * 1000;
         LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
 

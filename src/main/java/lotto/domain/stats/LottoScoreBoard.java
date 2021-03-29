@@ -7,7 +7,7 @@ import java.util.Optional;
 import lotto.domain.Lotto;
 
 public class LottoScoreBoard {
-    private Map<Long, Long> scoreBoard; // Long: 당첨된 볼개수, Integer: 당첨 횟수
+    private final Map<Long, Long> scoreBoard; // Long: 당첨된 볼개수, Integer: 당첨 횟수
     private final Lotto winnerLotto;
     private final List<Lotto> winnerCandidates;
 
@@ -18,9 +18,11 @@ public class LottoScoreBoard {
     }
 
     public void scoring() {
-        winnerCandidates.stream()
-                        .map(winnerLotto::getEqualNumberCountFrom)
-                        .forEach(this::addScore);
+        if (scoreBoard.isEmpty()) {
+            winnerCandidates.stream()
+                    .map(winnerLotto::getEqualNumberCountFrom)
+                    .forEach(this::addScore);
+        }
     }
 
     private void addScore(long equalNumberCount) {

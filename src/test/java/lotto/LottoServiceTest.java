@@ -36,7 +36,8 @@ public class LottoServiceTest {
         LottoScoringDto lottoScoringDto = new LottoScoringDto(winnerLottoDto, lottoOrderResultDto);
 
         LottoScoringService lottoScoringService = new LottoScoringService();
-        LottoScoringResultDto lottoScoringResultDto = lottoScoringService.score(lottoScoringDto);
+        LottoScoringResultDto lottoScoringResultDto =
+                lottoScoringService.score(lottoScoringDto);
 
         assertThat(lottoScoringResultDto.getEarningRate()).isEqualTo("0.35");
     }
