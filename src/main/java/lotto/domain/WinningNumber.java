@@ -7,15 +7,15 @@ public class WinningNumber {
 
     private static final LottoGenerator lottoGenerator = LottoGenerator.getInstance();
     private final Lotto winningNumbers;
+    private final int bonusNumber;
 
-    private WinningNumber(final String winningNumbers) {
-        this.winningNumbers = Lotto.of(
-                lottoGenerator.generateAppointedLotto(winningNumbers)
-        );
+    private WinningNumber(final String winningNumbers, final int bonusNumber) {
+        this.winningNumbers = Lotto.of(lottoGenerator.generateAppointedLotto(winningNumbers));
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumber of(final String winningNumbers) {
-        return new WinningNumber(winningNumbers);
+    public static WinningNumber of(final String winningNumbers, final int bonusNumber) {
+        return new WinningNumber(winningNumbers, bonusNumber);
     }
 
     public long getLottoMatchCount(Lotto lotto) {
@@ -35,12 +35,12 @@ public class WinningNumber {
             return false;
         }
 
-        WinningNumber that = (WinningNumber) object;
-        return Objects.equals(winningNumbers, that.winningNumbers);
+        WinningNumber winningNumber = (WinningNumber) object;
+        return bonusNumber == winningNumber.bonusNumber && Objects.equals(winningNumbers, winningNumber.winningNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumbers);
+        return Objects.hash(winningNumbers, bonusNumber);
     }
 }

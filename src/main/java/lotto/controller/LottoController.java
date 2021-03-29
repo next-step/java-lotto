@@ -15,7 +15,7 @@ public class LottoController {
         LottoGame lottoGame = LottoGame.of(lottoBuyer.getLottoQuantity());
         ResultView.printLottos(lottoGame.getLottos());
 
-        WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers());
+        WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers(), InputView.enterBonusBall());
         lottoGame.calculateWinnings(winningNumber);
         ResultView.printLottoResult(lottoGame.getLottoBoard());
     }
