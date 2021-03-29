@@ -21,6 +21,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
         this.number = number;
     }
 
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
     public static LottoNumber of(int number) {
         LottoNumber lottoNumber = lottoNumberCache.get(number);
         if(lottoNumber == null) {

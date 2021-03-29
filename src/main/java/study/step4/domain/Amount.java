@@ -9,6 +9,14 @@ public class Amount {
         this(amount, 0);
     }
 
+    public Amount(String amount) {
+        this(Integer.parseInt(amount), 0);
+    }
+
+    public Amount(String amount, String manual){
+        this(Integer.parseInt(amount.trim()), Integer.parseInt(manual.trim()));
+    }
+
     public Amount(int amount, int manualCount) {
         this.amount = this.validAmount(amount);
         this.manualCount = this.validManualCount(manualCount);

@@ -10,20 +10,20 @@ import study.step4.view.InputView;
 import study.step4.view.ResultView;
 
 public class LottoController {
-    private static Lottos lottos;
-
     public LottoController() {
     }
 
     public void play() {
         Amount amount = new Amount(InputView.inputPurchaseAmount(), InputView.inputManualCount());
-        lottos = LottoFactory.purchase(amount);
+        Lottos manualLottoList = InputView.inputManualNumber(amount);
+        Lottos autoLottoList = LottoFactory.purchase(amount);
+
         ResultView.printPurchaseLottoCount(amount.totalCount());
-        ResultView.printLottoNumbers(lottos.getLottos());
+        ResultView.printLottoNumbers(autoLottoList.getLottos());
 
         Lotto lotto = new Lotto(InputView.inputWinNumber());
         LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
-        LottoWin lottoWin = lottos.result(lotto, bonusBall);
+        LottoWin lottoWin = autoLottoList.result(lotto, bonusBall);
         ResultView.printResult(lottoWin);
         ResultView.printProfit(lottoWin.profit(amount));
     }
