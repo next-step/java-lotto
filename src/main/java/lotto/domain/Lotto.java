@@ -1,7 +1,7 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.constants.Constants;
-import step2.generator.NumberGenerator;
+import lotto.constants.Constants;
+import lotto.generator.NumberGenerator;
 
 import java.util.Collections;
 import java.util.HashSet;

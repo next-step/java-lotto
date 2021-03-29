@@ -1,4 +1,4 @@
-package step2.constants;
+package lotto.constants;
 
 public class Constants {
     public static final int LOTTO_PRICE = 1000;

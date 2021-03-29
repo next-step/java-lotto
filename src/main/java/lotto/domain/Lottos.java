@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.generator.NumberGenerator;
+import lotto.generator.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;

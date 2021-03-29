@@ -1,12 +1,12 @@
-package step2.controller;
+package lotto.controller;
 
-import step2.domain.Lotto;
-import step2.domain.LottoStatistics;
-import step2.domain.Lottos;
-import step2.domain.Money;
-import step2.generator.LottoNumberGenerator;
-import step2.view.InputView;
-import step2.view.ResultView;
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.generator.LottoNumberGenerator;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoController {
     private final Money amount;

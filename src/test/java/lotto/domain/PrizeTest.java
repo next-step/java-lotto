@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

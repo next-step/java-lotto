@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.constants.Constants;
+import lotto.constants.Constants;
 
 import java.util.Objects;
 

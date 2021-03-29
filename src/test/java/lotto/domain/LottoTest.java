@@ -1,11 +1,11 @@
-package step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.constants.Constants;
-import step2.generator.TestLottoNumberGenerator;
+import lotto.constants.Constants;
+import lotto.generator.TestLottoNumberGenerator;
 
 import java.util.Arrays;
 import java.util.HashSet;

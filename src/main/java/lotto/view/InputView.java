@@ -1,7 +1,7 @@
-package step2.view;
+package lotto.view;
 
-import step2.constants.Constants;
-import step2.domain.Number;
+import lotto.constants.Constants;
+import lotto.domain.Number;
 
 import java.util.Arrays;
 import java.util.Scanner;

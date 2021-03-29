@@ -1,4 +1,4 @@
-package step2.generator;
+package lotto.generator;
 
 import java.util.List;
 

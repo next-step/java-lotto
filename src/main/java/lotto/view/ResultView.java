@@ -1,10 +1,10 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.Lotto;
-import step2.domain.LottoStatistics;
-import step2.domain.Lottos;
-import step2.domain.Number;
-import step2.domain.Prize;
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
+import lotto.domain.Lottos;
+import lotto.domain.Number;
+import lotto.domain.Prize;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
