@@ -26,6 +26,9 @@ public class WinningNumbers {
         map.put(5, 0); //5등 - 3개일치
         this.winNumbers = winNumbers;
         this.ranks = new HashMap<>();
+        for(Rank rank : Rank.values()) {
+            this.ranks.put(rank, 0);
+        }
     }
 
     public void choose(List<LottoNumbers> lottoNumbers) {
