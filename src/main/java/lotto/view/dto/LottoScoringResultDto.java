@@ -1,5 +1,6 @@
 package lotto.view.dto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoScoringResultDto {
@@ -13,5 +14,9 @@ public class LottoScoringResultDto {
 
     public String getEarningRate() {
         return earningRate;
+    }
+
+    public List<LottoWinnerDto> getWinnerDtoList() {
+        return winnerDtoList;
     }
 }

@@ -3,6 +3,7 @@ package lotto.view.dto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoDto {
     private final List<Integer> numbers;
@@ -34,5 +35,11 @@ public class LottoDto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream().map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 }
