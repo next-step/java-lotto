@@ -1,4 +1,4 @@
-package im.juniq;
+package im.juniq.calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
