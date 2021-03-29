@@ -19,11 +19,10 @@ public class LottoGenerator {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-    public static Lottos getLotto(int lottoCount) {
-        List<Lotto> lottos = IntStream.range(0, lottoCount)
+    public static List<Lotto> getLotto(int lottoCount) {
+        return IntStream.range(0, lottoCount)
                 .mapToObj(i -> generateLotto())
                 .collect(Collectors.toList());
-        return new Lottos(Collections.unmodifiableList(lottos));
     }
 
     private static Lotto generateLotto() {

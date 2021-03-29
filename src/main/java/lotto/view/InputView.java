@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String WINNER_DELIMITER = ", ";
+    private static final String LOTTO_DELIMITER = ", ";
     private static final int NUMBER_LENGTH_BOUNDARY = 2;
 
     private InputView() {
@@ -23,7 +23,7 @@ public class InputView {
 
     public static WinningLotto getWinningLotto() {
         System.out.println("지난 주 당첨번호를 입력해 주세요");
-        String[] inputWinner = SCANNER.nextLine().split(WINNER_DELIMITER);
+        String[] inputWinner = SCANNER.nextLine().split(LOTTO_DELIMITER);
         System.out.println("보너스 볼을 입력해 주세요");
         String bonusBall = SCANNER.nextLine();
         validateInputWinner(inputWinner, bonusBall);
@@ -34,8 +34,8 @@ public class InputView {
         return LottoNumber.of(bonusBall);
     }
 
-    private static List<LottoNumber> parseLottoNumber(String[] inputWinner) {
-        return Arrays.stream(inputWinner)
+    private static List<LottoNumber> parseLottoNumber(String[] lottoNumber) {
+        return Arrays.stream(lottoNumber)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
@@ -51,5 +51,30 @@ public class InputView {
         if (bonusBall.length() > NUMBER_LENGTH_BOUNDARY) {
             throw new IllegalArgumentException("보너스 숫자는 최대 45입니다");
         }
+    }
+
+    public static int getManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String inputManualCount = SCANNER.nextLine();
+        validateParsable(inputManualCount);
+        return Integer.parseInt(inputManualCount);
+    }
+
+    private static void validateParsable(String inputManualCount) {
+        try {
+            Integer.parseInt(inputManualCount);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요");
+        }
+    }
+
+    public static List<Lotto> getManualLotto(int manualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0 ; i < manualCount; i++) {
+            String[] inputManualLotto = SCANNER.nextLine().split(LOTTO_DELIMITER);
+            lottos.add(new Lotto(parseLottoNumber(inputManualLotto)));
+        }
+        return lottos;
     }
 }

@@ -28,4 +28,8 @@ public class Lottos {
         }
         return resultGroup;
     }
+
+    public void addLotto(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
 }

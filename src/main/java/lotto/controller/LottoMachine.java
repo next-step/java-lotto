@@ -1,21 +1,32 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.util.LottoCountDto;
 import lotto.util.LottosDto;
+
+import java.util.List;
 
 public class LottoMachine {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private static Lottos lottos;
+    private Lottos lottos;
+    private int autoCount;
+    private int manualCount;
 
-    public void purchaseLotto(Money money) {
-        int lottoCount = money.getLottoCount();
-        lottos = LottoGenerator.getLotto(lottoCount);
+    public void purchaseManualLotto(int manualCount, List<Lotto> lottos) {
+        this.manualCount = manualCount;
+        this.lottos = new Lottos(lottos);
     }
 
-    public int getPurchaseLottoCount() {
-        return lottos.lottoCount();
+    public void purchaseAutoLotto(Money money) {
+        int lottoCount = money.getLottoCount();
+        this.autoCount = lottoCount - this.manualCount;
+        this.lottos.addLotto(LottoGenerator.getLotto(autoCount));
+    }
+
+    public LottoCountDto getPurchaseLottoCount() {
+        return new LottoCountDto(manualCount, autoCount);
     }
 
     public LottosDto getLottos() {
@@ -25,4 +36,5 @@ public class LottoMachine {
     public ResultGroup getResult(WinningLotto winingLotto) {
         return lottos.getResult(winingLotto);
     }
+
 }
