@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.LastWinningNumber.WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -38,6 +39,6 @@ class LastWinningNumberTest {
     // then
     assertThatIllegalArgumentException()
         .isThrownBy(() -> new LastWinningNumber(lastWinningLotto, bonusNumber))
-        .withMessage("보너스 번호는 우승 번호에 포함되어선 안됩니다.");
+        .withMessage(WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
   }
 }
