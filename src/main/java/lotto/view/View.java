@@ -18,22 +18,23 @@ public class View {
     private static final String QUESTION_FOR_GET_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String STATS_HEAD = "당첨 통계";
     private static final String HORIZONTAL_LINE = "---------";
+    private static final Scanner scanner = new Scanner(System.in);
 
-    static public int purchaseAmount(Scanner scanner) {
+    static public int purchaseAmount() {
         System.out.println(QUESTION_FOR_GET_PURCHASE_AMOUNT);
         int purchaseAmount = scanner.nextInt();
         scanner.nextLine();
         return purchaseAmount;
     }
 
-    static public int numberOfManualGames(Scanner scanner) {
+    static public int numberOfManualGames() {
         System.out.println(QUESTION_FOR_GET_NUMBER_OF_MANUAL_GAMES);
         int numberOfManaulGames = scanner.nextInt();
         scanner.nextLine();
         return numberOfManaulGames;
     }
 
-    static public List<Integer> winningNumber(Scanner scanner) {
+    static public List<Integer> winningNumber() {
         System.out.println(QUESTION_FOR_GET_WINNING_NUMBER);
         String[] winningNumbers = scanner.nextLine().split(",");
 
@@ -62,7 +63,7 @@ public class View {
         }
     }
 
-    public static int bonusNumber(Scanner scanner) {
+    public static int bonusNumber() {
         System.out.println(QUESTION_FOR_GET_BONUS_NUMBER);
         int bonusNumber = scanner.nextInt();
         scanner.nextLine();
@@ -77,7 +78,7 @@ public class View {
         System.out.format("%d 개 일치 (%d) - %d개\n", rank.countOfMatch(), rank.prize(), wins);
     }
 
-    public static List<String> manualGameNumbers(int numberOfManualGames, Scanner scanner) {
+    public static List<String> manualGameNumbers(int numberOfManualGames) {
         List<String> manualGameNumbers = new ArrayList<>();
         if (numberOfManualGames == 0)
             return manualGameNumbers;
