@@ -50,8 +50,10 @@ class WinningStatisticsTest {
   void create(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber, long threeCount, long fourCount,
       long fiveCount, long fiveBonusCount, long sixCount, Money total) {
     // given
+    LastWinningNumber lastWinningNumber = new LastWinningNumber(winningLotto, bonusNumber);
+
     // when
-    WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto, bonusNumber);
+    WinningStatistics winningStatistics = new WinningStatistics(lottos, lastWinningNumber);
 
     // then
     assertAll(
