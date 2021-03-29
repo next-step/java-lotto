@@ -53,7 +53,7 @@ public class Lotto {
 	}
 
 	private int countMatched(WinningNumbers winningNumbers, int number) {
-		if (winningNumbers.find(number)) {
+		if (winningNumbers.existent(number)) {
 			return 1;
 		}
 		return 0;

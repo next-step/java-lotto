@@ -8,7 +8,7 @@ class WinningNumbersTest {
 
     @Test
     void existWinningNumber() {
-        assertThat(new WinningNumbers(1, 2, 3, 4, 5, 6).find(1)).isEqualTo(true);
-        assertThat(new WinningNumbers(1, 2, 3, 4, 5, 6).find(1)).isEqualTo(false);
+        assertThat(new WinningNumbers(1, 2, 3, 4, 5, 6).existent(1)).isEqualTo(true);
+        assertThat(new WinningNumbers(1, 2, 3, 4, 5, 6).existent(7)).isEqualTo(false);
     }
 }

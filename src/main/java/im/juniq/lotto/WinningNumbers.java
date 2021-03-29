@@ -17,7 +17,7 @@ public class WinningNumbers {
 		winningNumbers.addAll(Arrays.asList(numbers));
 	}
 
-	public boolean find(int number) {
+	public boolean existent(int number) {
 		return winningNumbers.contains(number);
 	}
 }
