@@ -72,12 +72,26 @@ public final class ResultView {
             stringBuilder.append("-").append(winningScoreBoard.get(winningScore)).append("개\n");
         }
 
-        double yield = doubleFormatting(winningScoreBoard.getYield(money.getMoney()));
+        double yield = doubleFormatting(getYield(winningScoreBoard, money.getMoney()));
         stringBuilder.append("총 수익률은 ").append(yield).append("입니다.");
         stringBuilder.append("(기준이 1이기 때문에 결과적으로 ").append(chekProfitOrLoss(yield)).append("라는 의미임)");
         System.out.println(stringBuilder.toString());
 
     }
+
+
+    public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
+        return ((double)getRevenue(winningScoreBoard) / (double)inputMoney);
+    }
+
+    private final int getRevenue(WinningScoreBoard winningScoreBoard) {
+        int sum = 0;
+        for (WinningScore winningScore : WinningScore.values()) {
+            sum += Math.multiplyExact(winningScore.getWinningAmount(), winningScoreBoard.get(winningScore));
+        }
+        return sum;
+    }
+
     private String chekProfitOrLoss(double yield) {
         return yield >= 1 ? "이익이" : "손해";
     }

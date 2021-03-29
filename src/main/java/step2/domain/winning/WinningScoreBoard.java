@@ -31,21 +31,5 @@ public class WinningScoreBoard {
         return winningScoreBoard.get(winningScore);
     }
 
-    public final double getYield(int inputMoney) {
-        return divideRevenueByInput(inputMoney);
-    }
-
-    private final int getRevenue() {
-        int sum = 0;
-        for (WinningScore winningScore : WinningScore.values()) {
-            sum += Math.multiplyExact(winningScore.getWinningAmount(), get(winningScore));
-        }
-        return sum;
-    }
-
-    private final double divideRevenueByInput(int inputMoney) {
-        return ((double)getRevenue() / (double)inputMoney);
-    }
-
 
 }
