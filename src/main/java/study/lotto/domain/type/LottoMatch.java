@@ -8,21 +8,19 @@ import java.util.List;
  */
 public enum LottoMatch {
 
-    RANK_FIRST(6, 2_000_000_000, "%s 개 일치 (%s원) - %s개"),
-    RANK_BONUS(5, 30_000_000, "%s 개 일치, 보너스볼 일치(%s원) - %s개"),
-    RANK_SECOND(5, 1_500_000, "%s 개 일치 (%s원) - %s개"),
-    RANK_THIRD(4, 50_000, "%s 개 일치 (%s원) - %s개"),
-    RANK_FOURTH(3, 5_000, "%s 개 일치 (%s원) - %s개"),
-    RANK_ETC(0, 0, "");
+    RANK_FIRST(6, 2_000_000_000),
+    RANK_BONUS(5, 30_000_000),
+    RANK_SECOND(5, 1_500_000),
+    RANK_THIRD(4, 50_000),
+    RANK_FOURTH(3, 5_000),
+    RANK_ETC(0, 0);
 
     private final long matchCount;
     private final long winningReward;
-    private final String guideText;
 
-    LottoMatch(final long matchCount, final long winningReward, final String guideText) {
+    LottoMatch(final long matchCount, final long winningReward) {
         this.matchCount = matchCount;
         this.winningReward = winningReward;
-        this.guideText = guideText;
     }
 
     public static List<LottoMatch> all() {
@@ -37,7 +35,7 @@ public enum LottoMatch {
                 .orElse(RANK_ETC);
     }
 
-    private boolean isBonusNumber(final boolean bonusNumber) {
+    public boolean isBonusNumber(final boolean bonusNumber) {
         return !this.equals(RANK_BONUS) || bonusNumber;
     }
 
@@ -47,10 +45,6 @@ public enum LottoMatch {
 
     public long getWinningReward() {
         return winningReward;
-    }
-
-    public String guideLine() {
-        return guideText;
     }
 
     @Override

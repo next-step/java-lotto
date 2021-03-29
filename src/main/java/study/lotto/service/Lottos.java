@@ -1,16 +1,16 @@
 package study.lotto.service;
 
 import study.lotto.domain.Lotto;
-import study.lotto.domain.LottoNumber;
+import study.lotto.domain.WinningLotto;
 import study.lotto.domain.type.LottoMatch;
-import study.lotto.view.dto.RequestMoney;
-import study.lotto.view.dto.RequestWinningNumber;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static study.lotto.domain.Money.LOTTO_PRICE;
 
 /**
  * Lotto 클래스의 일급 컬렉션
@@ -19,29 +19,42 @@ public class Lottos {
 
     // 전체 로또 생성
     private final List<Lotto> lottoList;
-    private final RequestMoney money;
 
-    public Lottos(final List<Lotto> lotteries, final RequestMoney money) {
+    public Lottos(final List<Lotto> lotteries) {
         this.lottoList = lotteries;
-        this.money = money;
+    }
+
+    public long matchStatics(final LottoMatch lottoMatch, final WinningLotto winningLotto) {
+        return lottoList.stream()
+                .collect(groupingBy(winningLotto::match, counting()))
+                .getOrDefault(lottoMatch, 0L);
+    }
+
+    public double winningRate(final WinningLotto winningLotto) {
+        long sum = lottoList.stream()
+                .mapToLong(winningLotto::winningReward)
+                .sum();
+        return rate(sum);
+    }
+
+    private double rate(final long sum) {
+        return (double) sum / (lottoList.size() * LOTTO_PRICE);
     }
 
     public List<Lotto> lottoList() {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public long statics(final LottoMatch lottoMatch, final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
-        return lottoList.stream()
-                .collect(
-                        groupingBy(lotto -> lotto.match(winningNumber, bonusNumber), counting())
-                )
-                .getOrDefault(lottoMatch, 0L);
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Lottos lottos = (Lottos) o;
+        return Objects.equals(lottoList, lottos.lottoList);
     }
 
-    public double winningRate(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
-        long sum = lottoList.stream()
-                .mapToLong(lotto -> lotto.winningReward(winningNumber, bonusNumber))
-                .sum();
-        return money.winningRate(sum);
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoList);
     }
 }

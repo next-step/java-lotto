@@ -1,41 +1,42 @@
 package study.lotto.domain;
 
 import study.lotto.exception.LottoException;
-import study.lotto.generator.LottoNumberGenerator;
+import study.lotto.util.Validation;
 
 import java.util.Objects;
 
-import static study.lotto.view.InputView.isNumeric;
+import static study.lotto.domain.Money.GUIDE_ERR_NOT_USE_VALUE;
+import static study.lotto.service.LottoFactory.MAX_NUMBER_BOUND;
+import static study.lotto.service.LottoFactory.MIN_NUMBER_BOUND;
 
 /**
  * 로또 숫자 번호에 대한 wrapper class
  */
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final String GUIDE_CANNOT_PARSE_STRING_TO_INTEGER = "숫자로 캐스팅 할 수 없는 값 입니다.";
-    public static final String GUIDE_NOT_USE_VALUE = "로또 번호로 사용할 수 없는 값 입니다.";
     private final int number;
 
-    public LottoNumber(final String inputBonusNumber) {
-        this(parseInt(inputBonusNumber));
+    private LottoNumber(final String bonusNumber) {
+        this(Validation.parseInt(bonusNumber));
     }
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         if(isInvalidNumber(number)) {
-            throw new LottoException(GUIDE_NOT_USE_VALUE);
+            throw new LottoException(GUIDE_ERR_NOT_USE_VALUE);
         }
         this.number = number;
     }
 
-    private boolean isInvalidNumber(final int number) {
-        return LottoNumberGenerator.MIN_NUMBER_BOUND > number || LottoNumberGenerator.MAX_NUMBER_BOUND < number;
+    public static LottoNumber of(final String number) {
+        return new LottoNumber(number);
     }
 
-    private static int parseInt(final String inputBonusNumber) {
-        if(!isNumeric(inputBonusNumber)) {
-            throw new LottoException(GUIDE_CANNOT_PARSE_STRING_TO_INTEGER);
-        }
-        return Integer.parseInt(inputBonusNumber);
+    public static LottoNumber of(final int number) {
+        return new LottoNumber(number);
+    }
+
+    private boolean isInvalidNumber(final int number) {
+        return MIN_NUMBER_BOUND > number || MAX_NUMBER_BOUND < number;
     }
 
     @Override
@@ -58,6 +59,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return this.number - o.number;
+        return Integer.compare(number, o.number);
     }
 }

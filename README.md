@@ -95,3 +95,68 @@
 
 
 ![step3](docs/lotto_step3.png)
+
+> 1차 피드백
+- [꼭 필요한 주석?](https://github.com/next-step/java-lotto/pull/1261#discussion_r596771924)
+- [엘레강트 오브젝트](https://github.com/next-step/java-lotto/pull/1261#discussion_r596800376)
+- [지엽적인 변수명](https://github.com/next-step/java-lotto/pull/1261#discussion_r596801645)
+- [순환참조 구조](https://github.com/next-step/java-lotto/pull/1261#discussion_r596803272)
+- [compareTo 이슈 발생 가능성](https://github.com/next-step/java-lotto/pull/1261#discussion_r596806649)
+- [연산처리](https://github.com/next-step/java-lotto/pull/1261#discussion_r596810848)
+- [메서드 내에 유효성검사 간결하게 표현하기](https://github.com/next-step/java-lotto/pull/1261#discussion_r596825348)
+- [객체의 상태값 관리 생각하기](https://github.com/next-step/java-lotto/pull/1261#discussion_r596829039)
+
+
+## 로또 (수동)
+- 기능 요구사항
+    - 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+    - 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+- 프로그래밍 요구사항
+    - 프로그래밍 요구사항
+    - 규칙 3: 모든 원시값과 문자열을 포장한다.
+    - 규칙 5: 줄여쓰지 않는다(축약 금지).
+    - 예외 처리를 통해 에러가 발생하지 않도록 한다.
+    - 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+    - java enum을 적용해 프로그래밍을 구현한다.
+    - 규칙 8: 일급 콜렉션을 쓴다.
+    - indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+    - 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+    - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+    - else 예약어를 쓰지 않는다.
+
+- 힌트
+    - 규칙 3: 모든 원시값과 문자열을 포장한다.
+    - 로또 숫자 하나는 int 타입이다. 이 숫자 하나를 추상화한 LottoNo 객체를 추가해 구현한다.
+    - 예외 처리를 통해 에러가 발생하지 않도록 한다.
+    - 사용자가 잘못된 값을 입력했을 때 java exception으로 에러 처리를 한다.
+    - java8에 추가된 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
+
+- 진행 순서
+    - 결합도가 높은 파라미터는 Wrapper 클래스로 만들어 관리할 수 있도록 생성
+    - 숫자 수동으로 생성하는 클래스 작성
+    - 수동 숫자, 로또 숫자 수동 로직 추가
+    - 기존 테스트는 깨지지 않도록 최대한 생성자를 이용
+
+> 1차 피드백
+- [기본 생성자가 꼭 필요한 것인지?](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077223)
+- [메서드 컨벤션](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077620)
+- [연산 최소화하기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598077940)
+- [boolean 반환 타입 메서드 컨벤션](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078056)
+- [객체 책임](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078595)
+- [객체 비교 테스트](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078862)
+- [JUnit API 더 알아보기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598078901)
+- [예외가 발생하는 시나리오를 파악하기 -> 무분별한 테스트 코드 X](https://github.com/next-step/java-lotto/pull/1273#discussion_r598079069)
+- [인터페이스를 통한 여러 구현체를 사용하는 장점에 대해서 생각해보기](https://github.com/next-step/java-lotto/pull/1273#discussion_r598079685)
+- [static 메서드로 구성된 클래스는 맞는건가?](https://github.com/next-step/java-lotto/pull/1273#discussion_r598080023)
+
+
+- 고민하기
+  - static을 없애기 위해서 어떻게 처리하는게 좋을까
+  - 코드가 너무 자유분방한데 어떻게 응집도있게 짤 수 있을까?
+    - 인터페이스를 통한 명세로 정리해보기
+  - 낮은 결합도를 위해 View와 domain 사이의 데이터 전달을 기본 라이브러리를 사용하도록 변경
+  - 객체가 다양한 타입의 파라미터를 받지 못하고 있음
+  - 전체적인 구조 변경
+
+![step4](docs/lotto_step4.png)

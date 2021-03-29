@@ -13,17 +13,17 @@ class LottoNumberTest {
     @CsvSource(value = {"1", "17", "45"})
     void createLottoNumber_정상_생성_테스트(int given) {
         // given
-        LottoNumber lottoNumber = new LottoNumber(given);
+        LottoNumber lottoNumber = LottoNumber.of(given);
         // when
 
         // then
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(given));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(given));
     }
 
     @ParameterizedTest(name = "{0} 입력 시 예외 발생 테스트")
     @CsvSource(value = {"0", "46"})
     void createLottoNumber_예외_테스트(int given) {
         assertThatExceptionOfType(LottoException.class)
-                .isThrownBy(() -> new LottoNumber(given));
+                .isThrownBy(() -> LottoNumber.of(given));
     }
 }

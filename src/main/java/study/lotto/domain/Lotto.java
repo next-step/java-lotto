@@ -1,43 +1,55 @@
 package study.lotto.domain;
 
-import study.lotto.domain.type.LottoMatch;
-import study.lotto.view.dto.RequestWinningNumber;
+import study.lotto.exception.LottoException;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+
+import static study.lotto.service.LottoFactory.LOTTO_MAX_SIZE;
 
 /**
  * 하나의 로또 게임 하나
  */
 public class Lotto {
+    public static final String GUIDE_ERR_LOTTO_SIZE = "로또 번호가 6개가 아닙니다.";
+    private final Set<LottoNumber> lottoNumbers;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    private Lotto(final Collection<LottoNumber> lottoNumbers) {
+        checkValidation(lottoNumbers);
+        this.lottoNumbers = getLottoNumbers(lottoNumbers);
     }
 
-    public long winningReward(final RequestWinningNumber requestWinningNumber, final LottoNumber bonusNumber) {
-        return match(requestWinningNumber, bonusNumber).getWinningReward();
+    public static Lotto of(final Collection<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
-    public LottoMatch match(final RequestWinningNumber winningNumber, final LottoNumber bonusNumber) {
+    private void checkValidation(final Collection<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != LOTTO_MAX_SIZE) {
+            throw new LottoException(GUIDE_ERR_LOTTO_SIZE);
+        }
+    }
 
-        long count = lottoNumbers.stream()
-                .filter(winningNumber::contains)
+    private Set<LottoNumber> getLottoNumbers(final Collection<LottoNumber> lottoNumbers) {
+        return new TreeSet<>(lottoNumbers);
+    }
+
+    public long match(final Lotto winningLotto) {
+        return lottoNumbers.stream()
+                .filter(winningLotto::contains)
                 .count();
+    }
 
-        boolean hasBonus = lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
-
-        return LottoMatch.of(count, hasBonus);
+    public boolean contains(final LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto1 = (Lotto) o;
+        if (!(o instanceof Lotto)) return false;
+        final Lotto lotto1 = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto1.lottoNumbers);
     }
 

@@ -2,28 +2,37 @@ package study.lotto.domain;
 
 import study.lotto.domain.type.LottoMatch;
 import study.lotto.service.Lottos;
-import study.lotto.view.dto.RequestWinningNumber;
 
 /**
  * Lotto 결과에 대한 통계 클래스
  */
 public class LottoResult {
 
-    private final RequestWinningNumber winningNumber;
-    private final LottoNumber bonusNumber;
-    private final Lottos lottos;
+    private final Lottos resultLotto;
+    private final WinningLotto winningLotto;
 
-    public LottoResult(final RequestWinningNumber winningNumber, final Lottos lottos, final LottoNumber bonusNumber) {
-        this.winningNumber = winningNumber;
-        this.bonusNumber = bonusNumber;
-        this.lottos = lottos;
+    private LottoResult(final Lottos lotto) {
+        this(lotto, null);
+    }
+
+    private LottoResult(final Lottos resultLotto, final WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
+        this.resultLotto = resultLotto;
+    }
+
+    public static LottoResult of(final Lottos lotto) {
+        return new LottoResult(lotto);
+    }
+
+    public static LottoResult of(final Lottos lotto, final WinningLotto winningLotto) {
+        return new LottoResult(lotto, winningLotto);
     }
 
     public long count(final LottoMatch lottoMatch) {
-        return lottos.statics(lottoMatch, winningNumber, bonusNumber);
+        return resultLotto.matchStatics(lottoMatch, winningLotto);
     }
 
     public double winningRate() {
-        return lottos.winningRate(winningNumber, bonusNumber);
+        return resultLotto.winningRate(winningLotto);
     }
 }
