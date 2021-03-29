@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoStore {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -19,21 +18,21 @@ public class LottoStore {
         }
     }
 
-    private LottoStore(){
+    private LottoStore() {
     }
 
     private static Lotto createLotto() {
         Collections.shuffle(allLottoNumbers);
         Lotto lotto = new Lotto(allLottoNumbers.stream()
-                                            .limit(LOTTO_SIZE)
-                                            .collect(Collectors.toList()));
+                .limit(LOTTO_SIZE)
+                .collect(Collectors.toList()));
         return lotto;
     }
 
     public static Lottos purchase(Money money) {
         Lottos lottos = new Lottos();
         long lottoCount = money.lottoCount();
-        for(int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.addLotto(createLotto());
         }
         return lottos;
