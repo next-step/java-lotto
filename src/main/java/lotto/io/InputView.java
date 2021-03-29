@@ -11,6 +11,7 @@ public final class InputView {
   private static final String SPACE_REGEX = "\\s";
   private static final String EMPTY_STRING = "";
   private static final String DELIMITER = ",";
+  private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
 
   private final Scanner scanner;
 
@@ -32,7 +33,7 @@ public final class InputView {
   }
 
   public LottoNumber inputBonusNumber() {
-    System.out.println("보너스 볼을 입력해주세요.");
+    System.out.println(INPUT_BONUS_NUMBER);
     String bonusNumberString = scanner.nextLine();
 
     System.out.println();
