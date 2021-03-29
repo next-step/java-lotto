@@ -42,7 +42,7 @@ public class LottosTest {
 
     @Test
     void toStringTest() {
-        System.out.println(lottos.toString());
+        lottos.lottoList().stream().forEach(lotto -> System.out.println(lotto.numbers()));
     }
 
     @Test

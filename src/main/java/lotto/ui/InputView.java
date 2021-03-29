@@ -10,17 +10,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoStrategy.LOTTO_SIZE;
 import static lotto.domain.Rank.LOTTO_PRICE;
-import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
-import static lotto.util.Message.OVERLAP_NUMBER;
+import static lotto.util.StringUtil.*;
 
 public class InputView {
 
     public static final String BUYING_MESSAGE_BEFORE = "구입금액을 입력해 주세요.";
     public static final String BUYING_MESSAGE_AFTER = "개를 구매했습니다.";
     public static final String WINNING_MESSAGE_BEFORE = "지난주 당첨 번호를 입력해 주세요. (구분자는 ', ')";
-    public static final String DELIMITER = ", ";
 
 
     private static Scanner sc;
@@ -52,21 +49,8 @@ public class InputView {
         }
     }
 
-    private static boolean checkNumberSize(String[] result) {
-        if (result.length != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ILLEGAL_LOTTO_SIZE);
-        }
-        return true;
-    }
 
-    private static boolean checkNumberOverlap(String[] result) {
-        if(Arrays.stream(result)
-                .distinct()
-                .count() != result.length) {
-            throw new IllegalArgumentException(OVERLAP_NUMBER);
-        }
 
-        return true;
-    }
+
 
 }

@@ -3,16 +3,13 @@
  * */
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static lotto.domain.Rank.LOTTO_PRICE;
 
 public class WinningStatistics {
 
-    private Map<Rank, Integer> winningStatistics = new HashMap<>();
+    private Map<Rank, Integer> winningStatistics = new LinkedHashMap<>();
 
     public WinningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
         Arrays.stream(Rank.values())
@@ -38,6 +35,10 @@ public class WinningStatistics {
                 .mapToLong(m -> m.getKey().getWinningMoney() * m.getValue())
                 .sum();
         return totalWinningMoney / buyMoney;
+    }
+
+    public Map<Rank, Integer> winningStatistics() {
+        return Collections.unmodifiableMap(winningStatistics);
     }
 
     @Override

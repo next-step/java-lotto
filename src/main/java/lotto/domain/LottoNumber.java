@@ -12,12 +12,11 @@ public class LottoNumber {
     public static int LOWER_LOTTONUMBER_BOUND = 1;
     public static int UPPER_LOTTONUMBER_BOUND = 45;
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) {
-        if (isLottoNumber(number)) {
-            this.number = number;
-        }
+        isLottoNumber(number);
+        this.number = number;
     }
 
     public boolean isLottoNumber(int number) {
@@ -42,8 +41,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(number)
-                .toString();
+        return String.valueOf(number);
     }
 }

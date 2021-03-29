@@ -22,6 +22,10 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
+    public int getMatchNo() {
+        return matchNo;
+    }
+
     public Long getWinningMoney() {
         return winningMoney;
     }

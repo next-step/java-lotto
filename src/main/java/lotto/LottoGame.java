@@ -1,11 +1,8 @@
 package lotto;
 
-import lotto.domain.AutoLottoStrategy;
-import lotto.domain.Lottos;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import lotto.domain.LottoFactory;
 
 public class LottoGame {
 
@@ -13,12 +10,14 @@ public class LottoGame {
         LottoFactory.setLottoStrategy(new AutoLottoStrategy());
         LottoFactory.defaultLottoNumbers();
 
-        Lottos lottos = LottoFactory.lottos(InputView.inputBuy());
+        int buyNum = InputView.inputBuy();
+        Lottos lottos = LottoFactory.lottos(buyNum);
         ResultView.printLottos(lottos);
         WinningNumbers winning = LottoFactory.winning(InputView.inputWinning());
-        lottos.checkWinning(winning);
+        WinningStatistics winningStatistics = LottoFactory.winningStatistics(lottos, winning);
 
-        ResultView.printResult(winning, lottos.getBuyNum());
+        ResultView.printResult(winningStatistics);
+        ResultView.printYield(winningStatistics.yield(buyNum));
     }
 
 }

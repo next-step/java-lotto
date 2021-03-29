@@ -3,6 +3,8 @@
 * */
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,6 +26,10 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public List<Lotto> lottoList() {
+        return Collections.unmodifiableList(new ArrayList<>(lottoList));
+    }
+
     public int getBuyNum() {
         return lottoList.size();
     }
@@ -40,12 +46,5 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottoList);
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder()
-                .append(lottoList.toString())
-                .toString();
     }
 }

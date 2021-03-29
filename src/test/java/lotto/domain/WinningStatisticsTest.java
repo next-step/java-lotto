@@ -76,4 +76,10 @@ public class WinningStatisticsTest {
         assertThat(result).isEqualTo(predict);
     }
 
+    @Test
+    void printTest() {
+        winningStatistics.winningStatistics().entrySet().stream()
+                .filter(e -> e.getKey().getMatchNo() > 0)
+                .forEach(e -> System.out.println(e.getKey().getMatchNo() + "개" + e.getKey().getWinningMoney() + "원"));
+    }
 }

@@ -8,8 +8,6 @@ import java.util.List;
 @FunctionalInterface
 public interface LottoStrategy {
     int LOTTO_SIZE = 6;
-    int LOTTO_BOUND = 45;
-    int LOTTO_START_NUM = 1;
 
     List<LottoNumber> makeLotto(List<LottoNumber> lottoNumbers);
 }

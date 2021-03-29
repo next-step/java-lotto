@@ -6,8 +6,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoStrategy.LOTTO_BOUND;
-import static lotto.domain.LottoStrategy.LOTTO_START_NUM;
+import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
+import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
 
 public class LottoFactory {
 
@@ -20,7 +20,7 @@ public class LottoFactory {
     }
 
     public static void defaultLottoNumbers() {
-        for (int i = LOTTO_START_NUM; i < LOTTO_BOUND; i++) {
+        for (int i = LOWER_LOTTONUMBER_BOUND; i < UPPER_LOTTONUMBER_BOUND; i++) {
             defaultLottoNumbers.add(new LottoNumber(i));
         }
     }
@@ -40,5 +40,9 @@ public class LottoFactory {
 
     public static WinningNumbers winning(List<LottoNumber> winningNumber) {
         return new WinningNumbers(winningNumber);
+    }
+
+    public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
+        return new WinningStatistics(lottos, winningNumbers);
     }
 }

@@ -4,9 +4,10 @@
 package lotto.ui;
 
 import lotto.domain.Lottos;
-import lotto.domain.WinningNumbers;
+import lotto.domain.Rank;
+import lotto.domain.WinningStatistics;
 
-import java.util.Arrays;
+import java.util.Map;
 
 public class ResultView {
 
@@ -18,21 +19,20 @@ public class ResultView {
     public static final String YIELD_MESSAGE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String YIELD_MESSAGE_PROFIT = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     public static final int YIELD_BOUND = 1;
+    public static final int RESULT_BOUND = 0;
 
-    public static final String DELIMITER = ", ";
-    public static final String DELIMITER_ARRAY = "], ";
-    public static final String REPLACE = "]\n";
 
     public static void printLottos(Lottos lottos) {
-        String lottosStr = lottos.toString().replace(DELIMITER_ARRAY, REPLACE);
-        System.out.println(lottosStr.substring(1, lottosStr.length() - 1));
+        lottos.lottoList().stream()
+                .forEach(lotto -> System.out.println(lotto.numbers()));
     }
 
-    public static void printResult(WinningNumbers winning, int buyNum) {
+    public static void printResult(WinningStatistics statistics) {
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_MESSAGE_LINE);
-        System.out.println(changeResultStr(winning.toString()));
-//        printYield(winning.yield(buyNum));
+        statistics.winningStatistics().entrySet().stream()
+                .filter(ResultView::checkResultBound)
+                .forEach(ResultView::printMap);
     }
 
     public static void printYield(double yield) {
@@ -45,20 +45,18 @@ public class ResultView {
     }
 
 
-    public static String changeResultStr(String str) {
-        StringBuilder sb = new StringBuilder();
-        str = str.substring(1, str.length() - 1);
-        int[] result = Arrays.stream(str.split(DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+    public static boolean checkResultBound(Map.Entry<Rank, Integer> entry) {
+        if(entry.getKey().getMatchNo() > RESULT_BOUND) {
+            return true;
+        }
+        return false;
+    }
 
-//        IntStream.range(0, result.length)
-//                .filter(i -> i >= MINIMUM_MATCH)
-//                .forEach(i -> {
-//                    sb.append(i + "개 일치 (" + Rank.winningPrice(i) + "원) - " + result[i] + "개");
-//                    sb.append((System.getProperty("line.separator")));
-//                });
-        return sb.toString();
+    public static void printMap(Map.Entry<Rank, Integer> entry) {
+        System.out.println(
+                entry.getKey().getMatchNo()+ "개 일치 (" + entry.getKey().getWinningMoney() + "원) - "
+                        + entry.getValue() + "개"
+        );
     }
 
 

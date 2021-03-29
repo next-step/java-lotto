@@ -49,4 +49,9 @@ public class LottoTest {
         assertThat(fiveCorrect).isEqualTo(5);
         assertThat(zeroCorrect).isEqualTo(0);
     }
+
+    @Test
+    void printTest() {
+        System.out.println(lotto.numbers());
+    }
 }
