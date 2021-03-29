@@ -25,8 +25,8 @@ public class LottoScoringService {
 
     private LottoScoreBoard getRenewedScoreBoard(LottoScoringDto lottoScoringDto) {
         LottoScoreBoard lottoScoreBoard =
-                new LottoScoreBoard(convertToWinnerLottoFromDto(lottoScoringDto),
-                                    convertToLottoListFromDto(lottoScoringDto));
+                new LottoScoreBoard(convertFromDtoToWinnerLotto(lottoScoringDto),
+                                    convertFromDtoToLottoList(lottoScoringDto));
         lottoScoreBoard.scoring();
         return lottoScoreBoard;
     }
@@ -50,14 +50,14 @@ public class LottoScoringService {
         return winnerDtoList;
     }
 
-    private List<Lotto> convertToLottoListFromDto(LottoScoringDto lottoScoringDto) {
+    private List<Lotto> convertFromDtoToLottoList(LottoScoringDto lottoScoringDto) {
         return lottoScoringDto.getLottoOrderedNumber().stream()
                 .map(LottoDto::getNumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
     }
 
-    private Lotto convertToWinnerLottoFromDto(LottoScoringDto lottoScoringDto) {
+    private Lotto convertFromDtoToWinnerLotto(LottoScoringDto lottoScoringDto) {
         return new Lotto(lottoScoringDto.getLottoWinnerNumber());
     }
 }
