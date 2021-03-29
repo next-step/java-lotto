@@ -7,6 +7,8 @@
     - Number(int number)
       - range check
   - method
+    - public static Number numberByString(String str)
+      - 보너스 넘버 생성 함수
     - private void rangeCheck(int number)
       - 45를 넘어가는 숫자가 없는지
     - public int number();
