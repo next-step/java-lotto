@@ -1,36 +1,38 @@
 package step2.service;
 
 import step2.domain.Cash;
-import step2.domain.Lotto;
 import step2.domain.Lottos;
+import step2.strategy.LottoStrategy;
 
 public class Mart {
+  private final LottoMaker lottoMaker;
+
   private static final int LOTTO_PRICE = 1000;
   private static final String ERROR_MESSAGE = "로또를 살 수 없습니다.";
 
-  private Mart() {
-
+  public Mart(LottoMaker lottoMaker) {
+    this.lottoMaker = lottoMaker;
   }
 
-  public static Lottos buyAllLotto(Cash money) {
+  public Lottos buyAllLotto(Cash money, LottoStrategy lottoStrategy) {
     Cash lottoPrice = new Cash(LOTTO_PRICE);
     isBuyablePrice(money, lottoPrice);
 
-    return buyAllProduct(money, lottoPrice);
+    return buyAllProduct(money, lottoPrice, lottoStrategy);
   }
 
-  private static void isBuyablePrice(Cash sellerMoney, Cash productPrice){
+  private void isBuyablePrice(Cash sellerMoney, Cash productPrice) {
     if (!sellerMoney.isGreaterEqualProductPrice(productPrice)) {
       throw new RuntimeException(ERROR_MESSAGE);
     }
   }
 
-  private static Lottos buyAllProduct(Cash sellerMoney, Cash productPrice){
+  private Lottos buyAllProduct(Cash sellerMoney, Cash productPrice, LottoStrategy lottoStrategy) {
     Lottos lottos = new Lottos();
     Cash exchangeMoney = sellerMoney;
     while (exchangeMoney.isGreaterEqualProductPrice(productPrice)) {
       exchangeMoney = exchangeMoney.withdrawal(productPrice);
-      lottos.addLotto(new Lotto());
+      lottos.addLotto(lottoMaker.makeLotto(lottoStrategy));
     }
 
     return lottos;

@@ -32,4 +32,14 @@ public class CashTest {
       .isInstanceOf(InvalidPriceException.class)
       .hasMessage("구매를 위한 출금을 할 수 없습니다.");
   }
+
+  @ParameterizedTest
+  @CsvSource(value = {"1000,1000,true", "1000,1001,false"})
+  @DisplayName("구매할 제품의 가격과의 비교를 제대로 하는지 확인")
+  void checkGreatEqualTest(int seller, int product, boolean result){
+    Cash sellerWallet = new Cash(seller);
+    Cash productPrice = new Cash(product);
+
+    Assertions.assertThat(sellerWallet.isGreaterEqualProductPrice(productPrice)).isEqualTo(result);
+  }
 }

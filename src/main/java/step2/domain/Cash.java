@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.domain.number.Number;
 import step2.exception.InvalidPriceException;
 
 import java.util.Objects;
@@ -13,10 +14,22 @@ public class Cash {
   }
 
   public Cash withdrawal(Cash productPrice) {
-    if(!isGreaterEqualProductPrice(productPrice)){
+    if (!isGreaterEqualProductPrice(productPrice)) {
       throw new InvalidPriceException(ERROR_MESSAGE);
     }
     return new Cash(money - productPrice.money);
+  }
+
+  public Cash add(Cash cash){
+    return new Cash(money + cash.money);
+  }
+
+  public Cash multiply(Number count){
+    return new Cash(money * count.showCount());
+  }
+
+  public Double divide(Cash cash){
+    return new Double(money / cash.money);
   }
 
   public boolean isGreaterEqualProductPrice(Cash productPrice) {
