@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,15 @@ public class LottoTest {
         lotto = new Lotto(Arrays.asList(6,5,4,3,2,1).stream()
             .map(i->LottoNumber.of(i))
             .collect(Collectors.toList()));
+    }
+
+    @Test
+    @DisplayName("생성 예외 테스트")
+    public void create() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(1,2,3,4,5).stream()
+            .map(i -> LottoNumber.of(i))
+            .collect(Collectors.toList());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
     }
 
     @Test
