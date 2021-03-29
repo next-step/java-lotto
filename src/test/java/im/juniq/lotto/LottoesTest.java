@@ -31,6 +31,14 @@ class LottoesTest {
 	}
 
 	@Test
+	void countMatchedLottoes() {
+		Lottoes lottoes = new Lottoes(2, new NoShuffleStrategy());
+
+		assertThat(lottoes.numberOfLottoesMatched(3, new WinningNumbers(1, 2, 3, 7, 8, 9))).isEqualTo(2);
+		assertThat(lottoes.numberOfLottoesMatched(4, new WinningNumbers(1, 2, 3, 4, 8, 9))).isEqualTo(2);
+	}
+
+	@Test
 	void calculateYield() {
 		Lottoes lottoes = new Lottoes(1, new NoShuffleStrategy());
 
