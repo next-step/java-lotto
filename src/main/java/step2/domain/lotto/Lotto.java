@@ -62,16 +62,13 @@ public final class Lotto {
         return lottoNumbers.size() != LOTTO_SIZE;
     }
 
-
     public final boolean contains(LottoNumber element) {
         return lottoNumbers.contains(element);
     }
 
-
     public final List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -85,6 +82,5 @@ public final class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
-
 
 }
