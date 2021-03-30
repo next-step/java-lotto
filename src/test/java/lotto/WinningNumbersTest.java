@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,24 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("당첨자테스트")
 class WinningNumbersTest {
-    @Test
-    void isWinner() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(lottoNumbers);
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
-        Map<Integer, Integer> winNumbers = winningNumbers.getWinNumbers(lottoNumbersList);
-        System.out.println(winNumbers.toString());
-        assertThat(winNumbers.get(3)).isEqualTo(1);
-    }
-
     LottoNumbers lottoNumbers1;
     LottoNumbers lottoNumbers2;
     LottoNumbers lottoNumbers3;
@@ -40,6 +30,67 @@ class WinningNumbersTest {
     LottoNumbers lottoNumbers12;
     LottoNumbers lottoNumbers13;
     LottoNumbers lottoNumbers14;
+
+    @Test
+    @DisplayName("우승번호찾기")
+    void isWinner() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3,4,5,6});
+        winningNumbers.choose(lottoNumbersList);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("보너스번호 포함한 우승번호찾기")
+    void isWinnerWithBonusNumber() {
+        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(8,9,10,11,12,13));
+        LottoNumbers lottoNumbers3 = new LottoNumbers(Arrays.asList(17,18,19,20,21,22));
+        LottoNumbers lottoNumbers4 = new LottoNumbers(Arrays.asList(30,31,32,33,34,35));
+        LottoNumbers lottoNumbers5 = new LottoNumbers(Arrays.asList(36,37,38,39,40,41));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers1);
+        lottoNumbersList.add(lottoNumbers2);
+        lottoNumbersList.add(lottoNumbers3);
+        lottoNumbersList.add(lottoNumbers4);
+        lottoNumbersList.add(lottoNumbers5);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,2,3, 8,9,10,11, 17,18,19,20,21, 30,31,32,33,34, 36,37,38,39,40,41});
+        winningNumbers.bonusNumber(35);
+        winningNumbers.choose(lottoNumbersList);
+
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(ranks.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(ranks.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수익률 반환")
+    void earningsRate() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,3,5,7,9));
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        lottoNumbersList.add(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1,3,5});
+        winningNumbers.bonusNumber(7);
+        winningNumbers.choose(lottoNumbersList);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(ranks.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(ranks.get(Rank.THIRD)).isEqualTo(0);
+        assertThat(winningNumbers.earningsRate(1000)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("명시되있지 않지만, 예제를 보면 소수2자릿수까지 내림으로 보여진다")
+    void down() {
+        double result = Math.floor((double) 5000/14000 * 100.0) / 100.0;
+        assertThat(result).isEqualTo(0.35);
+    }
 
     @Test
     @DisplayName("당첨번호의 갯수를 찾는다.")
@@ -62,13 +113,15 @@ class WinningNumbersTest {
         lottoNumbers.add(lottoNumbers14);
 
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(3))
+        winningNumbers.choose(lottoNumbers);
+        Map<Rank, Integer> ranks = winningNumbers.ranks();
+        assertThat(ranks.get(Rank.FIFTH))
                 .isEqualTo(1);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(4))
+        assertThat(ranks.get(Rank.FOURTH))
                 .isEqualTo(0);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(5))
+        assertThat(ranks.get(Rank.THIRD))
                 .isEqualTo(0);
-        assertThat(winningNumbers.getWinNumbers(lottoNumbers).get(6))
+        assertThat(ranks.get(Rank.FIRST))
                 .isEqualTo(0);
     }
 

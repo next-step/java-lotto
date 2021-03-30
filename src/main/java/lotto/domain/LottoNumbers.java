@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,7 @@ public class LottoNumbers {
 
     public LottoNumbers() {
         this.lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_LIMIT_NUMBER; i++) {
+        for (int i = 1; i < LOTTO_LIMIT_NUMBER; i++) {
             lottoNumbers.add(i);
         }
         this.lottoPrice = new LottoPrice();
@@ -29,7 +29,7 @@ public class LottoNumbers {
      */
     public void mark() {
         Collections.shuffle(lottoNumbers);
-        sixNumbers(lottoNumbers);
+        shuffle(lottoNumbers);
     }
 
     /**
@@ -37,7 +37,7 @@ public class LottoNumbers {
      * @param shuffledNumbers
      * @return
      */
-    private void sixNumbers(List<Integer> shuffledNumbers) {
+    private void shuffle(List<Integer> shuffledNumbers) {
         this.lottoNumbers = shuffledNumbers.stream()
                 .limit(MAX_SIZE)
                 .collect(Collectors.toList());
