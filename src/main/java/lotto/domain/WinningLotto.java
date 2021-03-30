@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public final class LastWinningNumber {
+public final class WinningLotto {
 
   public static final String WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER = "보너스 번호는 우승 번호에 포함되어선 안됩니다.";
 
   private final Lotto lastWinningLotto;
   private final LottoNumber bonusNumber;
 
-  public LastWinningNumber(Lotto lastWinningLotto, LottoNumber bonusNumber) {
+  public WinningLotto(Lotto lastWinningLotto, LottoNumber bonusNumber) {
     if (lastWinningLotto.contains(bonusNumber)) {
       throw new IllegalArgumentException(WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
     }
@@ -30,10 +30,10 @@ public final class LastWinningNumber {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof LastWinningNumber)) {
+    if (!(o instanceof WinningLotto)) {
       return false;
     }
-    LastWinningNumber that = (LastWinningNumber) o;
+    WinningLotto that = (WinningLotto) o;
     return Objects.equals(lastWinningLotto, that.lastWinningLotto) && Objects
         .equals(bonusNumber, that.bonusNumber);
   }

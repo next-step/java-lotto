@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.Scanner;
-import lotto.domain.LastWinningNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
 import lotto.io.InputView;
 import lotto.io.Printer;
@@ -20,8 +20,8 @@ public final class LottoManager {
       Printer.printLottoCount(userLottos);
       Printer.printLottos(userLottos);
 
-      LastWinningNumber lastWinningNumber = inputView.inputLastWinningNumber();
-      WinningStatistics winningStatistics = new WinningStatistics(userLottos, lastWinningNumber);
+      WinningLotto winningLotto = inputView.inputLastWinningNumber();
+      WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
       Printer.printRank(winningStatistics);
       Printer.printResult(winningStatistics, userMoney);
     }

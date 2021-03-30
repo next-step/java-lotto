@@ -17,8 +17,8 @@ public final class WinningStatistics {
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
   }
 
-  public WinningStatistics(Lottos lottos, LastWinningNumber lastWinningNumber) {
-    this(lottos, lastWinningNumber.getLastWinningLotto(), lastWinningNumber.getBonusNumber());
+  public WinningStatistics(Lottos lottos, WinningLotto winningLotto) {
+    this(lottos, winningLotto.getLastWinningLotto(), winningLotto.getBonusNumber());
   }
 
   public long countOf(Rank rank) {

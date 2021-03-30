@@ -1,9 +1,9 @@
 package lotto.io;
 
 import java.util.Scanner;
-import lotto.domain.LastWinningNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 public final class InputView {
 
@@ -25,11 +25,11 @@ public final class InputView {
     return Integer.parseInt(scanner.nextLine());
   }
 
-  public LastWinningNumber inputLastWinningNumber() {
+  public WinningLotto inputLastWinningNumber() {
     Lotto lastWinningLotto = inputLastWinningLotto();
     LottoNumber bonusNumber = inputBonusNumber();
 
-    return new LastWinningNumber(lastWinningLotto, bonusNumber);
+    return new WinningLotto(lastWinningLotto, bonusNumber);
   }
 
   private Lotto inputLastWinningLotto() {
