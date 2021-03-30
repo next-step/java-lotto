@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printPurchaseNumber(PurchaseManager manager) {
-        System.out.println(manager.getPurchasedLottoNumber().getNumber() + "개 구매했습니다.");
+    public void printPurchaseNumber(Money money) {
+        System.out.println(new PurchasedLottoNumber(money).getNumber() + "개 구매했습니다.");
     }
 
     public void printLottoList(Lottos lottos) {
@@ -27,7 +27,7 @@ public class ResultView {
         System.out.print("]");
     }
 
-    public void printLottoStatistic(Lottos lottos, WinningLotto winningLotto, PurchaseManager purchaseManager) {
+//    public void printLottoStatistic(Lottos lottos, WinningLotto winningLotto, PurchaseManager purchaseManager) {
 //        Rank ranking = lottos.makeStatistic(winningLotto);
 //        System.out.println("당첨통계");
 //        System.out.println("------");
@@ -38,5 +38,5 @@ public class ResultView {
 //        }
 //        Profit profit = new Profit(purchaseManager, ranking);
 //        System.out.println(String.format("총 수익률은 %.2f 입니다.", profit.profitRate()));
-    }
+//    }
 }

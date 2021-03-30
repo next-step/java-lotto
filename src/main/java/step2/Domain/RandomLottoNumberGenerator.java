@@ -12,10 +12,10 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private static final int LOTTO_VOLUME = 6;
 
     private static List<Integer> numberList;
-    private PurchaseManager manager;
+    private Money money;
 
-    public RandomLottoNumberGenerator(PurchaseManager manager) {
-        this.manager = manager;
+    public RandomLottoNumberGenerator(Money money) {
+        this.money = money;
     }
 
     static {
@@ -26,7 +26,8 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     public List<Lotto> generate() {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < this.manager.getPurchasedLottoNumber().getNumber(); i++) {
+        PurchasedLottoNumber lottoQuantity = new PurchasedLottoNumber(money);
+        for (int i = 0; i < lottoQuantity.getNumber(); i++) {
             Collections.shuffle(numberList);
             lottoList.add(new Lotto(numberList.stream()
                     .limit(LOTTO_VOLUME)
