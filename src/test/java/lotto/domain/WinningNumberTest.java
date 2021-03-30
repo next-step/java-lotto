@@ -42,8 +42,9 @@ class WinningNumberTest {
         String winningNumbers = "1, 3, 5, 7, 9, 11";
         WinningNumber winningNumber = WinningNumber.of(winningNumbers, bonusNumber);
 
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
         Lotto lotto = Lotto.of(lottoSet);
 

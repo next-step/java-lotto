@@ -19,11 +19,13 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottos")
     void lotto_숫자6개구성(int[] input, int[] expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Set<Integer> expectedSet = new TreeSet<>(Arrays.stream(expected)
+        Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(expected)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
 
         Lotto lotto = Lotto.of(lottoSet);
@@ -42,8 +44,9 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottoForBonusNumber")
     public void containBonusNumber(int[] input, int bonusNumber, boolean expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
         Lotto lotto = Lotto.of(lottoSet);
         assertThat(lotto.containBonusNumber(bonusNumber)).isEqualTo(expected);
@@ -61,12 +64,14 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottoForMatchCount")
     public void matchCountTest(int[] WinningNumber, int[] ExpectedNumber, int expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(WinningNumber)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(WinningNumber)
                 .boxed()
+                .map(i -> new LottoNumber(i))
                 .collect(Collectors.toSet()));
         Lotto lotto = Lotto.of(lottoSet);
-        Set<Integer> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
+        Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
         Lotto expectedLotto = Lotto.of(expectedSet);
 

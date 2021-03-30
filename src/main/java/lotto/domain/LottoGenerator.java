@@ -9,7 +9,7 @@ public class LottoGenerator {
     private static final String WINNING_NUMBER_STRING_DELIMITER = ", ";
     private static final int START = 0;
     private static final int END = 6;
-    private static final List<Integer> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(Integer::new).collect(Collectors.toList());
+    private static final List<LottoNumber> AUTO_LOTTO = IntStream.rangeClosed(1, 45).mapToObj(LottoNumber::new).collect(Collectors.toList());
 
     private LottoGenerator() {
     }
@@ -18,11 +18,11 @@ public class LottoGenerator {
         return LazyHolder.instance;
     }
 
-    private Set<Integer> getTreeSetLottoNumbers(Set<Integer> lottoNumbers) {
+    private Set<LottoNumber> getTreeSetLottoNumbers(Set<LottoNumber> lottoNumbers) {
         return new TreeSet<>(lottoNumbers);
     }
 
-    public Set<Integer> generateShuffledLotto() {
+    public Set<LottoNumber> generateShuffledLotto() {
         Collections.shuffle(AUTO_LOTTO);
         return getTreeSetLottoNumbers(
                 AUTO_LOTTO.subList(START, END)
@@ -31,12 +31,13 @@ public class LottoGenerator {
         );
     }
 
-    public Set<Integer> generateAppointedLotto(final String winningNumbers) {
+    public Set<LottoNumber> generateAppointedLotto(final String winningNumbers) {
         List<String> lottoNumberStringList =
                 new ArrayList(Arrays.asList(winningNumbers.split(WINNING_NUMBER_STRING_DELIMITER)));
         return getTreeSetLottoNumbers(
                 lottoNumberStringList.stream()
                         .map(Integer::parseInt)
+                        .map(LottoNumber::new)
                         .collect(Collectors.toSet())
         );
     }

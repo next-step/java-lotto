@@ -2,7 +2,9 @@ package lotto.domain;
 
 import lotto.exception.LottoException;
 
-public class LottoNumber {
+import java.util.Objects;
+
+public class LottoNumber implements Comparable<LottoNumber>{
 
     private static final int NUMBER_RANGE_MIN = 1;
     private static final int NUMBER_RANGE_MAX = 45;
@@ -13,5 +15,30 @@ public class LottoNumber {
         if (number < NUMBER_RANGE_MIN || number > NUMBER_RANGE_MAX) {
             throw new LottoException(NUMBER_RANGE_OFF_MESSAGE);
         }
+        this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        LottoNumber that = (LottoNumber) object;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 }

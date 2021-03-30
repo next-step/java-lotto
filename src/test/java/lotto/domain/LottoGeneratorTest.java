@@ -26,7 +26,7 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {6, 6, 6})
     void getShuffledLottoNumbers(int expected) {
-        Set<Integer> lottoSet = lottoGenerator.generateShuffledLotto();
+        Set<LottoNumber> lottoSet = lottoGenerator.generateShuffledLotto();
         assertThat(lottoSet.size()).isEqualTo(expected);
     }
 
@@ -34,10 +34,11 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @MethodSource("provideNumbers")
     void getSixLottoNumbers(String lottoNumberss, int[] expected) {
-        Set<Integer> lottoSet = lottoGenerator.generateAppointedLotto(lottoNumberss);
-        Set<Integer> expectedSet = new TreeSet(
+        Set<LottoNumber> lottoSet = lottoGenerator.generateAppointedLotto(lottoNumberss);
+        Set<LottoNumber> expectedSet = new TreeSet(
                 Arrays.stream(expected)
                         .boxed()
+                        .map(LottoNumber::new)
                         .collect(Collectors.toSet())
         );
         assertThat(lottoSet).isEqualTo(expectedSet);
