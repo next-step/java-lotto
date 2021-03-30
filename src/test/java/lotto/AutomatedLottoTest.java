@@ -93,7 +93,7 @@ public class AutomatedLottoTest {
     @CsvSource(value = {"6:2000000000", "5:1500000", "4:50000", "3:5000"}, delimiter = ':')
     @DisplayName("일치하는 개수에 따라 Prize(당첨금)을 반환한다.")
     void lottoPrizeMappingTest(long number, long expectedPrize) {
-        long prize = Prize.getPrizeByEqualNumberCount(number);
+        long prize = Prize.getPrizeAmountByEqualNumberCount(number);
 
         assertThat(prize).isEqualTo(expectedPrize);
     }

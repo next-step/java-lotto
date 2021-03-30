@@ -7,7 +7,8 @@ public enum Prize {
     SECOND(5, 30_000_000L),
     THIRD(5, 1_500_000L),
     FOURTH(4, 50_000L),
-    FIFTH(3, 5_000L)
+    FIFTH(3, 5_000L),
+    NOTHING(0, 0)
     ;
 
     private final long equalNumberCount;
@@ -18,7 +19,14 @@ public enum Prize {
         this.prizeAmount = prizeAmount;
     }
 
-    public static long getPrizeByEqualNumberCount(long equalNumberCount) {
+    public static Prize getPrizeByEqualNumberCount(long equalNumberCount) {
+        return Arrays.stream(Prize.values())
+                .filter(prize -> prize.isSameNumberAs(equalNumberCount))
+                .findAny()
+                .orElse(Prize.NOTHING);
+    }
+
+    public static long getPrizeAmountByEqualNumberCount(long equalNumberCount) {
         return Arrays.stream(Prize.values())
                         .filter(prize -> prize.isSameNumberAs(equalNumberCount))
                         .findAny()

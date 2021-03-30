@@ -3,11 +3,11 @@ package lotto.domain.stats;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import lotto.domain.Lotto;
+import lotto.domain.prize.Prize;
 
 public class LottoScoreBoard {
-    private final Map<Long, Long> scoreBoard; // Long: 당첨된 볼개수, Integer: 당첨 횟수
+    private final Map<Prize, Long> scoreBoard;
     private final Lotto winnerLotto;
     private final List<Lotto> winnerCandidates;
 
@@ -27,14 +27,16 @@ public class LottoScoreBoard {
     }
 
     private void addScore(long equalNumberCount) {
-        if (scoreBoard.containsKey(equalNumberCount)) {
-            scoreBoard.put(equalNumberCount, scoreBoard.get(equalNumberCount) + 1L);
+        Prize prize = Prize.getPrizeByEqualNumberCount(equalNumberCount);
+        if (scoreBoard.containsKey(prize)) {
+            scoreBoard.put(prize, scoreBoard.get(prize) + 1L);
             return;
         }
-        scoreBoard.put(equalNumberCount, 1L);
+        scoreBoard.put(prize, 1L);
     }
 
     public Long getWinningsByEqualNumberCount(long equalNumberCount) {
-        return scoreBoard.getOrDefault(equalNumberCount, 0L);
+        Prize prize = Prize.getPrizeByEqualNumberCount(equalNumberCount);
+        return scoreBoard.getOrDefault(prize, 0L);
     }
 }
