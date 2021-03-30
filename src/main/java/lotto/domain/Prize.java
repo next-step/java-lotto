@@ -23,15 +23,15 @@ public class Prize {
         return prize;
     }
 
-    private void getWinningResult( Lottos lottos, Lotto lotto) {
+    private void getWinningResult( Lottos lottos, Lotto lastLottoNumber) {
         for (Lotto paylotto : lottos.getLottos()) {
-            int prizeNum = paylotto.countNumbers(lotto);
-            countResult(prizeNum);
+            int matchNumber = paylotto.countNumbers(lastLottoNumber);
+            countResult(matchNumber);
         }
     }
 
-    private void countResult(int prizeNum) {
-        prize.put(Rank.converterPrize(prizeNum), prize.get(Rank.converterPrize(prizeNum)) + 1);
+    private void countResult(int matchNumber) {
+        prize.put(Rank.converterPrize(matchNumber), prize.get(Rank.converterPrize(matchNumber)) + 1);
     }
 
 

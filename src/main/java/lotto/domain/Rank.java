@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public enum Rank {
 
     FIRST(6, 2_000_000_000),
@@ -26,15 +29,21 @@ public enum Rank {
         return money;
     }
 
-    public static Rank converterPrize(int prizeName) {
-        for (Rank prizelist : values()) {
-            if (prizeName < WINNING_MIN_COUNT) {
-                return MISS;
-            }
-            if (prizelist.getHitNum() == prizeName) {
-                return prizelist;
-            }
+    public static Rank converterPrize(int matchCount) {
+        return Arrays.stream(Rank.values())
+                .map(rank -> rank.matchCountToRank(matchCount))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_VALUE_MSG));
+    }
+
+    private Rank matchCountToRank(int matchCount) {
+        if (matchCount < WINNING_MIN_COUNT) {
+            return MISS;
         }
-        throw new IllegalArgumentException(ERROR_VALUE_MSG);
+        if (getHitNum() == matchCount) {
+            return this;
+        }
+        return null;
     }
 }

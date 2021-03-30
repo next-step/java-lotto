@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoTest {
     @DisplayName("Lotto끼리 비교하여 같은숫자수 반환")
     @Test

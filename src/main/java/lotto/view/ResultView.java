@@ -2,10 +2,12 @@ package lotto.view;
 
 import lotto.domain.Number;
 import lotto.domain.*;
+import lotto.utils.StringUtils;
 
 import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final String LOTTO_FORMAT_STRING = ", ";
     private static final String RANK_FORMAT_STRING =
             "당첨 통계\n"
                     + "---------\n"
@@ -20,8 +22,9 @@ public class ResultView {
     public static void printLottoNumber(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             String str = lotto.getLotto().stream()
-                    .map(Number::getNumToString)
-                    .collect(Collectors.joining(", "));
+                    .map(Number::getNum)
+                    .map(StringUtils::getNumToString)
+                    .collect(Collectors.joining(LOTTO_FORMAT_STRING));
             System.out.println("[" + str + "]");
         }
     }

@@ -22,6 +22,6 @@ public class InputView {
     public static String[] enterLastNumber() {
         System.out.println(INPUT_LAST_LOTTO_MSG);
         String number = scanner.next();
-        return StringUtils.split(number);
+        return StringUtils.getStringToStringArray(number);
     }
 }

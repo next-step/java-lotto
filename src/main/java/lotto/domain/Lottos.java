@@ -8,19 +8,19 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(int payNum, NumbersGenerator lottoNumbers) {
+        this.lottos = generateLotto(payNum / PRICE, lottoNumbers);
     }
 
-    public Lottos(int payNum) {
-        this.lottos = generateLotto(payNum / PRICE);
+    public Lottos(List<Lotto> lottoList) {
+        this.lottos = lottoList;
     }
 
-    private List<Lotto> generateLotto(int payNum) {
+    private List<Lotto> generateLotto(int tryNum, NumbersGenerator lottoNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int num = 0; num < payNum; num++) {
-            lottoList.add(new Lotto(new NumbersGenerator().getNumbers()));
+        for (int num = 0; num < tryNum; num++) {
+            lottoList.add(new Lotto(lottoNumbers.getNumbers()));
         }
         return lottoList;
     }

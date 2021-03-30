@@ -13,7 +13,7 @@ public class LottoGame {
     }
 
     public void start() {
-        Lottos lottos = new Lottos(payLotto);
+        Lottos lottos = new Lottos(payLotto, NumbersGenerator.createNumbers());
         ResultView.printLottoNumber(lottos);
         Lotto winningLotto = new Lotto(InputView.enterLastNumber());
         Prize prize = new Prize(lottos, winningLotto);

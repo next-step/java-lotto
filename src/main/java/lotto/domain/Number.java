@@ -5,6 +5,8 @@ import java.util.Objects;
 public class Number implements Comparable<Number> {
     private final String ERROR_LOTTO_NUM_MSG = "[오류] Lotto 번호가 45이상 입니다.";
     private final String ERROR_NEGATIVE_NUM_MSG = "[오류] 숫자가 음수입니다.";
+    private final int MAX_NUMBER = 45;
+    private final int MIN_NUMBER = 1;
 
     private int num;
 
@@ -14,20 +16,20 @@ public class Number implements Comparable<Number> {
     }
 
     private void isLottoNumber(int num) {
-        if (num > 45) {
+        if (num > MAX_NUMBER) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUM_MSG);
         }
-        if (num < 0) {
+        if (num < MIN_NUMBER) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_NUM_MSG);
         }
     }
 
-    public int getNum() {
-        return num;
+    public static Number createNumber(int number){
+       return new Number(number);
     }
 
-    public String getNumToString() {
-        return String.valueOf(num);
+    public int getNum() {
+        return num;
     }
 
     @Override

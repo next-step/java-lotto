@@ -19,14 +19,4 @@ public class NumberTest {
         assertThatThrownBy(() -> new Number(46))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-    @DisplayName("int형을 String형으로 변환")
-    @Test
-    void getNumToString() {
-        // GIVE
-        Number number = new Number(3);
-        // WHEN
-        // THEN
-        assertThat(number.getNumToString()).isEqualTo("3");
-    }
 }
