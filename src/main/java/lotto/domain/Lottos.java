@@ -12,13 +12,17 @@ public class Lottos {
     tickets.add(lotto);
   }
 
+  public void addAll(Lottos lottos) {
+    tickets.addAll(lottos.tickets);
+  }
+
   public int size() {
     return tickets.size();
   }
   public void checkResult(List<Integer> winNumbers, int bonusNumber) {
     Lotto winner = new Lotto(winNumbers);
     for (Lotto ticket : tickets) {
-      ticket.checkResult(winner, new LottoNumber(bonusNumber));
+      ticket.checkResult(winner, LottoNumber.generateManual(bonusNumber));
     }
   }
 

@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +22,7 @@ class LottoMachineTest {
     Lotto lotto = lottoMachine.generateAuto();
     //then
     assertAll(
-        () -> assertEquals(lotto.getTicket().size(), 6),
-        () -> assertTrue(lottoMachine.lottoNumbers.containsAll(lotto.getTicket()))
+        () -> assertEquals(lotto.getTicket().size(), 6)
     );
   }
 
@@ -38,12 +36,12 @@ class LottoMachineTest {
     //then
     assertAll(
         () -> assertEquals(lotto.getTicket().size(), 6),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(1)),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(2)),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(3)),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(4)),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(5)),
-        () -> assertThat(lotto.getTicket()).contains(new LottoNumber(6))
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(1)),
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(2)),
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(3)),
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(4)),
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(5)),
+        () -> assertThat(lotto.getTicket()).contains(LottoNumber.generateManual(6))
     );
   }
 
@@ -52,8 +50,7 @@ class LottoMachineTest {
   @DisplayName("입력된 갯수만큼 로또를 생성한다.")
   void generateAutoLottos(int count) {
     //given //when
-
-    Lottos lottos = lottoMachine.generateAuto(count);
+    Lottos lottos = lottoMachine.buyAuto(count);
     //then
     assertEquals(lottos.size(), count);
   }
