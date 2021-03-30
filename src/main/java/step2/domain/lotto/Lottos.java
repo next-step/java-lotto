@@ -37,6 +37,10 @@ public final class Lottos {
         return lottos;
     }
 
+    public final int getLottosSize() {
+        return lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,4 +53,6 @@ public final class Lottos {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
+
 }
