@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String PURCHASE_MSG = "개를 구매했습니다.";
+    private static final String PURCHASE_MSG = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String NEWLINE_CHARACTER = "\n";
     private static final String FRONT_BRACKETS = "[";
@@ -24,8 +24,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseAmount(int amount) {
-        System.out.println(amount + PURCHASE_MSG);
+    public static void printPurchaseAmount(int amount, int lottoManualCount) {
+        System.out.println(String.format(PURCHASE_MSG, lottoManualCount, amount - lottoManualCount));
     }
 
     public static void printLottos(Lottos lottos) {

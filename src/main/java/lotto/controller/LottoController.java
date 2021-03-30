@@ -13,9 +13,8 @@ public class LottoController {
 
     public static void main(String[] args) {
         LottoBuyer lottoBuyer = LottoBuyer.of(InputView.enterLottoPurchaseAmount());
-        ResultView.printPurchaseAmount(lottoBuyer.getLottoQuantity());
-
         List<Lotto> lottoList = InputView.enterLottoPurchaseManualCount();
+        ResultView.printPurchaseAmount(lottoBuyer.getLottoQuantity(), lottoList.size());
 
         LottoGame lottoGame = LottoGame.of(lottoBuyer.getLottoQuantity(), lottoList);
         ResultView.printLottos(lottoGame.getLottos());
