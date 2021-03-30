@@ -20,11 +20,11 @@ class StatisticsTest {
   @Test
   void count_game() {
     statistics.recordRanking(Ranking.SECOND);
-    Integer countGame = statistics.countGame(new StatisticsDto(Ranking.SECOND));
+    Integer countGame = statistics.countGame(Ranking.SECOND);
     assertThat(countGame).isEqualTo(1);
 
     statistics.recordRanking(Ranking.SECOND);
-    Integer updatedCountGame = statistics.countGame(new StatisticsDto(Ranking.SECOND));
+    Integer updatedCountGame = statistics.countGame(Ranking.SECOND);
     assertThat(updatedCountGame).isEqualTo(2);
   }
 

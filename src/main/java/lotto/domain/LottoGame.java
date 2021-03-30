@@ -14,7 +14,17 @@ public final class LottoGame {
     return lottoBallsList.size();
   }
 
-  public String getLottoBallNumbersString() {
+  public Statistics countMatchLottoNumber(LottoBalls winBalls) {
+    Statistics statistics = new Statistics();
+    for (LottoBalls lottoBalls : lottoBallsList) {
+      Ranking ranking = Ranking.ofCount(lottoBalls.countContainingWinNumbers(winBalls));
+      statistics.recordRanking(ranking);
+    }
+    return statistics;
+  }
+
+  @Override
+  public String toString() {
     StringBuilder builder = new StringBuilder();
     for (LottoBalls lottoBalls : lottoBallsList) {
       builder.append("[");
@@ -23,15 +33,6 @@ public final class LottoGame {
       builder.append("\n");
     }
     return builder.toString();
-  }
-
-  public Statistics countMatchLottoNumber(LottoBalls winBalls) {
-    Statistics statistics = new Statistics();
-    for (LottoBalls lottoBalls : lottoBallsList) {
-      Ranking ranking = Ranking.ofCount(lottoBalls.countContainingWinNumbers(winBalls));
-      statistics.recordRanking(ranking);
-    }
-    return statistics;
   }
 
 }

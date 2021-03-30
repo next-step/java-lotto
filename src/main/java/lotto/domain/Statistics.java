@@ -16,16 +16,12 @@ public final class Statistics {
 
   public void recordRanking(Ranking ranking) {
     rankMap.computeIfPresent(ranking, (key, value) -> value + 1);
-    rankMap.computeIfAbsent(ranking, key -> 1);
+    rankMap.putIfAbsent(ranking, 1);
     winPrice = winPrice.plus(new Money(ranking.getPrize()));
   }
 
-  public Integer countGame(StatisticsDto statisticsDto) {
-    Integer count = rankMap.get(statisticsDto.getRanking());
-    if (count == null) {
-      return 0;
-    }
-    return count;
+  public Integer countGame(Ranking ranking) {
+    return rankMap.getOrDefault(ranking,0);
   }
 
   public double getEarningRate(Money investMoney) {

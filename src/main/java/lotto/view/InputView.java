@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.LottoBall;
 import lotto.domain.Money;
 
 public class InputView {
@@ -18,12 +19,11 @@ public class InputView {
     return new Money(money);
   }
 
-  public List<Integer> inputWinNumbers() {
+  public List<LottoBall> inputWinNumbers() {
     System.out.println(INPUT_WIN_NUMBERS);
     String winNumberString = scanner.next();
-    List<Integer> result = Arrays.stream(winNumberString.split(","))
-        .map(Integer::parseInt)
+    return Arrays.stream(winNumberString.split(","))
+        .map(number -> new LottoBall(Integer.parseInt(number)))
         .collect(Collectors.toList());
-    return result;
   }
 }

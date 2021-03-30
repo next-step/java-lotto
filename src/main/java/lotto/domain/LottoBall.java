@@ -18,18 +18,18 @@ public final class LottoBall implements Comparable<LottoBall> {
     }
   }
 
-  public static List<LottoBall> draw() {
-    Collections.shuffle(CACHE_LOTTOBALL);
-    List<LottoBall> ballsDraw = new ArrayList<>(CACHE_LOTTOBALL.subList(0, 6));
-    Collections.sort(ballsDraw);
-    return ballsDraw;
-  }
-
   public LottoBall(final int number) {
     if (number < MIN || number > MAX) {
       throw new IllegalArgumentException("로또공 생성가능한 숫자가 아닙니다.");
     }
     this.number = number;
+  }
+
+  public static List<LottoBall> draw() {
+    Collections.shuffle(CACHE_LOTTOBALL);
+    List<LottoBall> ballsDraw = new ArrayList<>(CACHE_LOTTOBALL.subList(0, 6));
+    Collections.sort(ballsDraw);
+    return ballsDraw;
   }
 
   @Override

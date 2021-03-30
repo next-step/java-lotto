@@ -28,18 +28,10 @@ public class LottoGameController {
     resultView.printLottoBuySize(lottoGame);
     resultView.printBuyingLottoGame(lottoGame);
 
-    LottoBalls winLottoBalls = toLottoBallList(inputView.inputWinNumbers());
+    LottoBalls winLottoBalls = new LottoBalls(inputView.inputWinNumbers());
     Statistics statistics = lottoGame.countMatchLottoNumber(winLottoBalls);
 
     resultView.printLottoResult(money, statistics);
-  }
-
-  private LottoBalls toLottoBallList(List<Integer> winNumbers) {
-    return new LottoBalls(
-        winNumbers.stream()
-            .map(LottoBall::new)
-            .collect(Collectors.toList())
-    );
   }
 
 }
