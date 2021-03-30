@@ -57,7 +57,17 @@ public final class Printer {
 
   private static void printMessageAndCountOfRank(WinningStatistics winningStatistics, Rank rank) {
     if (!NONE.equals(rank)) {
-      System.out.println(rank.getMessage() + " - " + winningStatistics.countOf(rank) + "개");
+      printRankMessage(winningStatistics, rank);
     }
+  }
+
+  private static void printRankMessage(WinningStatistics winningStatistics, Rank rank) {
+    StringBuilder rankMessageBuilder = new StringBuilder().append(rank.getMatchCount()).append("개 일치");
+    if (rank.isBonusNumberMatch()) {
+      rankMessageBuilder.append(", 보너스 볼 일치");
+    }
+    rankMessageBuilder.append("(").append(rank.getMoney().toInteger()).append("원) - ")
+        .append(winningStatistics.countOf(rank)).append("개");
+    System.out.println(rankMessageBuilder.toString());
   }
 }

@@ -16,6 +16,10 @@ public final class Match {
     return matchCount;
   }
 
+  public boolean isBonusNumberMatch() {
+    return isBonusNumberMatch;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
