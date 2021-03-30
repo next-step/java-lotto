@@ -43,6 +43,10 @@ public enum GradeEnum {
     return prizeMoney;
   }
 
+  public int matched() {
+    return matched;
+  }
+
   public static List<GradeEnum> sorted() {
     return Arrays.stream(GradeEnum.values())
       .filter(gradeEnum -> !gradeEnum.equals(GradeEnum.NONE))
