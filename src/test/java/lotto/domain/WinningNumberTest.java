@@ -70,7 +70,6 @@ class WinningNumberTest {
             WinningNumber.of(lottoNumber, bonusNumber);
         }).isInstanceOf(LottoException.class)
                 .hasMessage("당첨번호에 보너스번호가 올 수 없습니다.");
-
     }
 
     private static Stream<Arguments> providewinningNumberContainBonusNumber() {
