@@ -1,7 +1,7 @@
 package step2.domain.lotto;
 
 import step2.exception.ListNullPointerException;
-import step2.exception.LottoSizeMissMatchException;
+import step2.exception.LottoNumberMissMatchSizeException;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +25,7 @@ public final class Lotto {
             throw new ListNullPointerException();
         }
         if(isSizeMissNatch(lottoNumbers)) {
-            throw new LottoSizeMissMatchException();
+            throw new LottoNumberMissMatchSizeException();
         }
         this.lottoNumbers = lottoNumbers;
     }

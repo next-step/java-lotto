@@ -2,58 +2,43 @@ package step2.domain.lotto;
 
 import step2.exception.InvalidNumberInputException;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final LottoNumber[] cache;
+    private static final List<LottoNumber> CACHE;
+    private static final int START_INCLUSIVE = 0;
+    private static final int END_EXCLUSIVE = 46;
 
-    private static final int MINIMUM = 1;
-    private static final int MAXIMUM = 45;
-    private static final int ARRAY_LENGTH = MAXIMUM + 1;
-
-    private final Integer lottoNumber;
+    private final int lottoNumber;
 
     static {
-        cache = new LottoNumber[ARRAY_LENGTH];
+        CACHE = IntStream
+                .range(START_INCLUSIVE, END_EXCLUSIVE)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    private LottoNumber(int lottoNumber) {
-        this(Integer.valueOf(lottoNumber));
-    }
-
-    private LottoNumber(Integer lottoNumber) {
+    private LottoNumber(int lottoNumber){
         this.lottoNumber = lottoNumber;
     }
 
-    private static final boolean isCacheNull(Integer index) {
-        return cache[index] == null;
+    public static LottoNumber valueOf(int lottoNumber) {
+        validate(lottoNumber);
+        return CACHE.get(lottoNumber);
     }
 
-    private static final boolean isOutOfBounds(Integer lottoNumber) {
-        return (isLessThanMinimum(lottoNumber) || isExceedMaximum(lottoNumber));
-    }
-
-    public static final LottoNumber valueOf(int lottoNumber) {
-        if (isOutOfBounds(lottoNumber)) {
+    private static void validate(int lottoNumber) {
+        if(lottoNumber <= START_INCLUSIVE || lottoNumber >= END_EXCLUSIVE) {
             throw new InvalidNumberInputException();
         }
-        if (isCacheNull(lottoNumber)) {
-            cache[lottoNumber] = new LottoNumber(lottoNumber);
-        }
-        return cache[lottoNumber];
-    }
-
-    private static final boolean isLessThanMinimum(Integer lottoNumber) {
-        return lottoNumber < MINIMUM;
-    }
-
-    private static final boolean isExceedMaximum(Integer lottoNumber) {
-        return lottoNumber > MAXIMUM;
     }
 
     public final int getLottoNumber() {
-        return lottoNumber.intValue();
+        return lottoNumber;
     }
 
     @Override

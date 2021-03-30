@@ -4,9 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.ListNullPointerException;
-import step2.exception.LottoSizeMissMatchException;
+import step2.exception.LottoNumberMissMatchSizeException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -74,7 +73,7 @@ class LottoTest {
         // when and then
         assertThatThrownBy(() -> {
             Lotto.newInstance(lottoNumbers);
-        }).isInstanceOf(LottoSizeMissMatchException.class)
+        }).isInstanceOf(LottoNumberMissMatchSizeException.class)
                 .hasMessageContaining("로또 숫자 갯수가 맞지 않습니다.");
 
     }
