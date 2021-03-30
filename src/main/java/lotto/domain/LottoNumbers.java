@@ -25,10 +25,14 @@ public final class LottoNumbers {
   }
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    validateLottoNumbersSize(lottoNumbers);
+    this.lottoNumbers = lottoNumbers;
+  }
+
+  private void validateLottoNumbersSize(List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
       throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
     }
-    this.lottoNumbers = lottoNumbers;
   }
 
   public int size() {
