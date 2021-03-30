@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class Lottos {
@@ -27,7 +28,7 @@ public final class Lottos {
   }
 
   public List<Lotto> getLottos() {
-    return lottos;
+    return Collections.unmodifiableList(lottos);
   }
 
   public List<Match> compare(final Lotto winningLotto, LottoNumber bonusNumber) {

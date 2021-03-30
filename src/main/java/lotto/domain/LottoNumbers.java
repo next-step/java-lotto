@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.domain.Rank.FIVE_BONUS;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.LottoNumberCreationStrategy;
@@ -63,7 +64,7 @@ public final class LottoNumbers {
   }
 
   public List<LottoNumber> getLottoNumbers() {
-    return lottoNumbers;
+    return Collections.unmodifiableList(lottoNumbers);
   }
 
   public boolean contains(LottoNumber lottoNumber) {
