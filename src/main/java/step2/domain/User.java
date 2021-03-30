@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class User {
@@ -17,5 +18,16 @@ public class User {
 
     public void buyLotto(Lotto defaultLotto) {
         lottoList.add(defaultLotto.buyLotto());
+    }
+
+
+    public int winningConfirm(Lotto winningLotto, Lotto lotto) {
+        int count = 0;
+        List<Integer> number = lotto.getLottoNumber();
+
+        for (int i = 0; i < number.size(); i++) {
+            count += winningLotto.numberConfirm(number.get(i));
+        }
+        return count;
     }
 }

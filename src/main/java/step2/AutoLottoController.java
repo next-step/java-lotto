@@ -2,9 +2,11 @@ package step2;
 
 import step2.domain.Lotto;
 import step2.domain.User;
+import step2.util.StringUtil;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AutoLottoController {
@@ -25,11 +27,15 @@ public class AutoLottoController {
         int lottoCount = inputView.inputPrize();
         resultView.displayLottoCount(lottoCount);
 
-        // 돈
         buyLotto(lottoCount);
 
-        displayLotto();
-        // 당첨 통계
+        Lotto winningLotto = new Lotto(StringUtil.stringToList(inputView.inputWinningLotto()));
+
+        lottery(winningLotto);
+    }
+
+    private void lottery(Lotto winningLotto) {
+
     }
 
     private void displayLotto() {
@@ -40,15 +46,8 @@ public class AutoLottoController {
         for (int i = 0; i < count; i++) {
             user.buyLotto(defaultLotto);
         }
+        displayLotto();
     }
 
-    public int winningConfirm(Lotto winningLotto, Lotto lotto) {
-        int count = 0;
-        List<Integer> lottoList = lotto.getLottoNumber();
 
-        for (int i = 0; i < lottoList.size(); i++) {
-            count += winningLotto.numberConfirm(lottoList.get(i));
-        }
-        return count;
-    }
 }

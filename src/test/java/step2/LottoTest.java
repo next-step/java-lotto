@@ -13,12 +13,12 @@ public class LottoTest {
     void 로또3등() {
         Lotto winninglotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         Lotto lotto = new Lotto(Arrays.asList(33,44,45,4,5,6));
-        assertThat(new AutoLottoController().winningConfirm(winninglotto, lotto)).isEqualTo(3);
+        assertThat(new User().winningConfirm(winninglotto, lotto)).isEqualTo(3);
     }
     @Test
     void 로또6등() {
         Lotto winninglotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         Lotto lotto = new Lotto(Arrays.asList(4,3,5,2,6,1));
-        assertThat(new AutoLottoController().winningConfirm(winninglotto, lotto)).isEqualTo(6);
+        assertThat(new User().winningConfirm(winninglotto, lotto)).isEqualTo(6);
     }
 }
