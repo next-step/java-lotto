@@ -1,17 +1,18 @@
-package step3.View;
+package step4.View;
 
-import step3.domain.*;
+
+import step4.*;
 
 import java.util.Map;
 
 public class ResultView {
 
-    public void printPurchase(Lottos lottos) {
-        System.out.println(lottos.getLottoList().size() + "를 구매했습니다.");
+    public void printInteger(Lotto lotto) {
+        System.out.println(lotto);
     }
 
-    public void printInteger(Lotto lotto) {
-        System.out.println(lotto.getLotto());
+    public void printPassiveAndAuto(int auto, int passive) {
+        System.out.println("수동으로 " + passive + "장, 자동으로 " + auto + "장 구매했습니다.");
     }
 
     public void printSameLotto(Map<Rank, Integer> statistic) {
@@ -22,7 +23,7 @@ public class ResultView {
                     + statistic.get(rank) + "개");
         }
     }
-    public void printBenefit(Calculator calculator,Price price) {
+    public void printBenefit(LottoYield calculator, Price price) {
         System.out.println("총 수익률은 " + calculator.benefit(price) + "입니다.");
     }
 
