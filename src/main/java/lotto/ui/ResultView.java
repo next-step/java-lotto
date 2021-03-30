@@ -8,8 +8,8 @@ import java.text.DecimalFormat;
 
 public class ResultView {
     private final static DecimalFormat form = new DecimalFormat("#.##");
-
     private final static String PRINT_STATISTICS_START = "당첨 통계\n---------";
+
 
     public static void printPurchaseLotto(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
@@ -23,12 +23,23 @@ public class ResultView {
                 .keySet()
                 .stream()
                 .filter(rank -> rank != Rank.OTHER)
-                .forEach(rank -> System.out.println(String.format("%d개 일치 (%d)원)- %d개"
-                        , rank.getMatchCount()
-                        , rank.getWinningMoney()
-                        , statistics.getStatistics().get(rank)))
-                )
-        ;
+                .forEach(rank -> printStatistic(rank, statistics));
+    }
+
+    private static void printStatistic(Rank rank, Statistics statistics) {
+        if (rank.equals(Rank.SECOND)) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개"
+                    , rank.getMatchCount()
+                    , rank.getWinningMoney()
+                    , statistics.getStatistics().get(rank)));
+        }
+        
+        if (!rank.equals(Rank.SECOND)) {
+            System.out.println(String.format("%d개 일치 (%d원)- %d개"
+                    , rank.getMatchCount()
+                    , rank.getWinningMoney()
+                    , statistics.getStatistics().get(rank)));
+        }
     }
 
     public static void printYield(Statistics statistics, int purchaseAmount) {
