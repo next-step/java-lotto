@@ -9,10 +9,11 @@ public enum Prize {
     THIRD(new HitCount(5), new HitMoney(1_500_000)),
     FOURTH(new HitCount(4), new HitMoney(50_000)),
     FIFTH(new HitCount(3), new HitMoney(5_000)),
+    NO_PRIZE(new HitCount(0), new HitMoney(0)),
     ;
 
-    private HitCount hitCount;
-    private HitMoney prizeMoney;
+    private final HitCount hitCount;
+    private final HitMoney prizeMoney;
 
     Prize(HitCount hitCount, HitMoney prizeMoney) {
         this.hitCount = hitCount;
@@ -28,7 +29,14 @@ public enum Prize {
     }
 
     public static Prize findPrize(HitCount hitCount) {
-        return prizeMap.get(hitCount);
+        if (hitCount.isNoHitCount()) {
+            return Prize.NO_PRIZE;
+        }
+
+        if (prizeMap.containsKey(hitCount)) {
+            return prizeMap.get(hitCount);
+        }
+        throw new IllegalArgumentException("당첨갯수가 당첨상금에 없습니다.");
     }
 
     public HitMoney getPrizeMoney() {

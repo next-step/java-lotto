@@ -2,33 +2,19 @@ package lotto.domain;
 
 public class HitResult {
     private final Numbers numbers;
-    private final WinNumbers winNumbers;
+    private final Prize prize;
 
     public HitResult(Numbers numbers, WinNumbers winNumbers) {
         this.numbers = numbers;
-        this.winNumbers = winNumbers;
+        this.prize = findPrize(winNumbers);
     }
 
-    public HitCount hitCount() {
-        return winNumbers.hitNumberCount(numbers);
+    private Prize findPrize(WinNumbers winNumbers) {
+        HitCount hitCount = winNumbers.hitNumberCount(numbers);
+        return Prize.findPrize(hitCount);
     }
 
-    public HitMoney hitMoney() {
-        Prize prize = Prize.findPrize(hitCount());
-
-        if (isNoHitCount(prize)) {
-            return new HitMoney(0);
-        }
-
-        return prize.getPrizeMoney();
-    }
-
-    private boolean isNoHitCount(Prize prize) {
-        return prize == null;
-    }
-
-    public boolean isHitPrize(Prize prize) {
-        return prize.getHitCount()
-                .equals(hitCount());
+    public Prize getPrize() {
+        return prize;
     }
 }
