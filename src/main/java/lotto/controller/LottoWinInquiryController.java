@@ -36,7 +36,7 @@ public class LottoWinInquiryController {
     private List<WinStatistic> assembleWinStatistics(LottoRanks lottoRanks) {
         List<WinStatistic> winStatisticList = new ArrayList<>();
         for (LottoRank lottoRank : LottoRank.values()) {
-            winStatisticList.add(new WinStatistic(lottoRank.getMatchCount(), lottoRank.getWinAmount(), lottoRanks.matchLottoCount(lottoRank)));
+            winStatisticList.add(new WinStatistic(lottoRank.getMatchCount(), lottoRank.getWinAmount(), lottoRanks.matchLottoCount(lottoRank), true));
         }
         return winStatisticList.stream().filter(winStatistic -> winStatistic.getRankCount() > LottoRank.LOSE.getMatchCount()).collect(Collectors.toList());
     }

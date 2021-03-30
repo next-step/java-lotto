@@ -5,11 +5,13 @@ public class WinStatistic {
     private final int rankCount;
     private final long winAmount;
     private final int matchLottoCount;
+    private final boolean matchBonus;
 
-    public WinStatistic(int rankCount, long winAmount, int matchLottoCount) {
+    public WinStatistic(int rankCount, long winAmount, int matchLottoCount, boolean matchBonus) {
         this.rankCount = rankCount;
         this.winAmount = winAmount;
         this.matchLottoCount = matchLottoCount;
+        this.matchBonus = matchBonus;
     }
 
     public int getRankCount() {
@@ -22,5 +24,9 @@ public class WinStatistic {
 
     public int getMatchLottoCount() {
         return matchLottoCount;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
     }
 }
