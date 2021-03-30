@@ -28,7 +28,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
         HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers));
 
-        assertThat(hitResult.hitCount()).isEqualTo(new HitCount(5));
+        assertThat(hitResult.getPrize().getHitCount()).isEqualTo(new HitCount(5));
     }
 
     @DisplayName("당첨 번호 숫자와 로또 게임 숫자를 비교하여 당첨 금액을 반환한다.")
@@ -40,6 +40,6 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
         HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers));
 
-        assertThat(hitResult.hitMoney()).isEqualTo(new HitMoney(1_500_000));
+        assertThat(hitResult.getPrize().getPrizeMoney()).isEqualTo(new HitMoney(1_500_000));
     }
 }
