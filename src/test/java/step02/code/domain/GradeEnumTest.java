@@ -2,6 +2,8 @@ package step02.code.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,5 +16,14 @@ public class GradeEnumTest {
 
     assertThat(second).isEqualTo(GradeEnum.SECOND);
     assertThat(third).isEqualTo(GradeEnum.THIRD);
+  }
+
+  @Test
+  @DisplayName("enum list 순서 상금 역순으로 return")
+  public void sorted() {
+    List<GradeEnum> list = GradeEnum.sorted();
+    
+    assertThat(list.get(0)).isEqualTo(GradeEnum.NONE);
+    assertThat(list.get(list.size() - 1)).isEqualTo(GradeEnum.FIRST);
   }
 }
