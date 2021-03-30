@@ -7,24 +7,27 @@
     - Number(int number)
       - range check
   - method
+    - public static Number numberByString(String str)
+      - 보너스 넘버 생성 함수
     - private void rangeCheck(int number)
       - 45를 넘어가는 숫자가 없는지
     - public int number();
       - field 값 반환
+    - public boolean isMatch(Number number)
 - ## Lotto.java
   - field
     - List<Integer> lotto;
   - constructor
-    - Lotto(List<Integer> numbers);
+    - Lotto(List<Integer> lotto);
       - 수동생성
     - Lotto(MakeNumber makeNumber);
       - 자동생성, random 6 자리 생성
     - Lotto makeLottoByString(String str)
       - string 값으로 winning number 생성하는 용도
   - method
-    - void isEmpty();
+    - void assureNotEmpty();
       - null or empty check
-    - String check(String str);
+    - String assureNumericString(String str);
       - string 으로 생성시 check 용도
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
@@ -34,25 +37,27 @@
       - 당첨번호와 맞춰본후 등수를 return;
     - List<Number> lotto()
       - 불변객체로 lotto 반환
+    - public boolean isMatchBonus(Number bonus);
+      - 보너스 숫자와 match 되는 값이 있을경우 true
 - ## Lottos.java
   - field
     - List<Lotto> lottos;
   - constructor
     - Lottos(List<Lotto> lottos);
       - 주 생성자
-    - Lottos(int money);
-      - 돈을 받고, lotto list 생성
   - method
     - static void check(int money);
-    - static List<Lotto> buy(int money);
+    - static Lottos buy(int money);
       - 돈에 따라서 로또 구입
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
 - ## OutCome.java
+
   - field
   - constructor
-    - public OutCome(int money, Lottos lottos, Lotto winningNumber);
+    - public OutCome(int money, Lottos lottos, Lotto winningNumber, Number bonus);
   - method
-    - List<Integer> match(List<Number winningNumber>);
-    - Map<Integer, Integer> statistic();
+    - private GradeEnum grade(Lotto lotto);
+    - List<GradeEnum> match();
+    - Map<GradeEnum, Integer> statistic();
     - float profit(int income);

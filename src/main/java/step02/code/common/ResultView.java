@@ -3,6 +3,7 @@ package step02.code.common;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import step02.code.domain.GradeEnum;
 import step02.code.domain.Lotto;
 
 public class ResultView {
@@ -19,8 +20,12 @@ public class ResultView {
     System.out.println("[" + str + "]");
   }
 
-  public static void result(int matched, int prize, int number) {
-    System.out.println(matched + "개 일치 " + "(" + prize + ")" + "- " + number);
+  public static void result(GradeEnum gradeEnum, int number) {
+    if(gradeEnum.equals(GradeEnum.SECOND)) {
+      System.out.println(gradeEnum.matched() + "개 일치, 보너스볼 일치" + "(" + gradeEnum.prize() + "원)" + "- " + number + "개");  
+      return;
+    }
+    System.out.println(gradeEnum.matched() + "개 일치 " + "(" + gradeEnum.prize() + "원)" + "- " + number + "개");
   }
 
   public static void rate(float rate) {
