@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoBoard;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.enums.Rank;
 
@@ -37,6 +38,7 @@ public class ResultView {
 
     private static String lottoToString(Lotto lotto) {
         return FRONT_BRACKETS + lotto.stream()
+                .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
                 + END_BRACKETS + NEWLINE_CHARACTER;
