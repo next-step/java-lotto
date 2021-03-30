@@ -6,7 +6,8 @@ import lotto.step2.view.ResultView;
 
 public class LottoController {
     public void run() {
-        Lottos lottos = LottoStore.purchase(new Money(InputView.enterPurchasingAmount()));
+        Money money = new Money(InputView.enterPurchasingAmount());
+        Lottos lottos = LottoStore.purchase();
         ResultView.printLottoNumbers(lottos);
         WinningNumbers winningNumbers = new WinningNumbers(InputView.enterWinningNumbers(), InputView.enterBonusNumber());
         ResultView.printResult(new WinningStatistics(lottos, winningNumbers));
