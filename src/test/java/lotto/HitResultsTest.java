@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static org.assertj.core.api.AssertionsForClassTypes.entry;
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StatsTest {
+public class HitResultsTest {
     @DisplayName("구입한 금액과 당첨 금액을 비교하여 수익률을 반환한다.")
     @Test
     public void returnRate() {
@@ -30,9 +28,7 @@ public class StatsTest {
         hitResults.add(game4);
         hitResults.add(game5);
 
-        Stats stats = new Stats(hitResults);
-
-        assertThat(stats.returnRate()).isEqualTo(0.33);
+        assertThat(hitResults.returnRate()).isEqualTo(0.33);
 
     }
 
@@ -58,14 +54,10 @@ public class StatsTest {
         hitResults.add(fourth2);
         hitResults.add(fifth);
 
-        Stats stats = new Stats(hitResults);
-
-        Map<String, Integer> countHitStats = stats.countHitStats();
-        assertThat(countHitStats).contains(entry("FIRST", 1)
-                , entry("SECOND", 1)
-                , entry("THIRD", 1)
-                , entry("FOURTH", 2)
-                , entry("FIFTH", 1)
-        );
+        assertThat(hitResults.countPrize(Prize.FIRST)).isEqualTo(1);
+        assertThat(hitResults.countPrize(Prize.SECOND)).isEqualTo(1);
+        assertThat(hitResults.countPrize(Prize.THIRD)).isEqualTo(1);
+        assertThat(hitResults.countPrize(Prize.FOURTH)).isEqualTo(2);
+        assertThat(hitResults.countPrize(Prize.FIFTH)).isEqualTo(1);
     }
 }
