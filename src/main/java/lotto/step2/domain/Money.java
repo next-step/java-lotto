@@ -36,4 +36,7 @@ public class Money {
         return (money / PRICE_PER_LOTTO);
     }
 
+    public void reduction(long lottoCount) {
+        this.money -= lottoCount * PRICE_PER_LOTTO;
+    }
 }

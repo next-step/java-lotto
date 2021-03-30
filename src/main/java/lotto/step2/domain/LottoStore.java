@@ -41,7 +41,7 @@ public class LottoStore {
 
     public static Lotto purchase(String[] numbers) {
         Lotto lotto = new Lotto(allLottoNumbers.stream()
-                .filter(Arrays.asList(numbers)::contains)
+                .filter(number -> Arrays.asList(numbers).contains(String.valueOf(number.number())))
                 .collect(Collectors.toList()));
         return lotto;
     }
