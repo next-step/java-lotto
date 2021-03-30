@@ -11,6 +11,10 @@ public class LottoWinnerDto implements Comparable<LottoWinnerDto> {
         this.winners = winners;
     }
 
+    public long getEqualNumberCount() {
+        return equalNumberCount;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

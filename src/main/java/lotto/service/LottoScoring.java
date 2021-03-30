@@ -13,7 +13,7 @@ import lotto.view.dto.LottoScoringDto;
 import lotto.view.dto.LottoScoringResultDto;
 import lotto.view.dto.LottoWinnerDto;
 
-public class LottoScoringService {
+public class LottoScoring {
 
     public LottoScoringResultDto score(LottoScoringDto lottoScoringDto) {
         LottoScoreBoard lottoScoreBoard = getRenewedScoreBoard(lottoScoringDto);
