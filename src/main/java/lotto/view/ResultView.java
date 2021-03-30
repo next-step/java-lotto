@@ -38,13 +38,14 @@ public class ResultView {
         Arrays.stream(Rank.values())
                 .filter(prize -> !prize.equals(Rank.MISS))
                 .forEach(prize -> System.out.println(prettyString(prize, LottoPrizeResult.get(prize))));
+        printRevenueRate(lottoStatistics.getRevenueRate());
     }
 
     private static String prettyString(Rank rank, Integer prizeCount) {
         return String.format("%s- %d개", rank.getMessage(), prizeCount);
     }
 
-    public static void printRevenueRate(BigDecimal revenueRate) {
+    private static void printRevenueRate(BigDecimal revenueRate) {
         System.out.print("총 수익률은 " + revenueRate + "입니다.");
         if (revenueRate.intValue() < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

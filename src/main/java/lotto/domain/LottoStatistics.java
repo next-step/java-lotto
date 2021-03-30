@@ -20,23 +20,22 @@ public class LottoStatistics {
         return new LottoStatistics(amount);
     }
 
-    public void makeStatisticsResult(final Lottos lottos, final Lotto prizeLotto) {
+    public void makeStatisticsResult(final Lottos lottos, final Number bonusNumber, final Lotto prizeLotto) {
         Arrays.stream(Rank.values())
-                .filter(prize -> !prize.equals(Rank.MISS))
-                .forEach(prize -> lottoPrizeResult.put(prize, lottos.getRankCount(prizeLotto, prize)));
+                .filter(rank -> !rank.equals(Rank.MISS))
+                .forEach(rank -> lottoPrizeResult.put(rank, lottos.getRankCount(prizeLotto, bonusNumber, rank)));
     }
 
-    private int getTotalPrizeMoney(final Lottos lottos, final Lotto prizeLotto) {
-        return lottos.getLottos()
-                .stream()
-                .map(lotto -> lotto.getMatchCount(prizeLotto))
-                .map(matchCount -> Rank.valueOf(matchCount))
-                .map(Rank::getAmount)
-                .reduce(0, Integer::sum);
+    private int getTotalPrizeMoney() {
+        int totalPrizeMoney = 0;
+        for (Rank key : lottoPrizeResult.keySet()) {
+            totalPrizeMoney += key.getAmount() * lottoPrizeResult.get(key);
+        }
+        return totalPrizeMoney;
     }
 
-    public BigDecimal getRevenueRate(final Lottos lottos, final Lotto prizeLotto) {
-        BigDecimal totalPrizeAmount = new BigDecimal(String.valueOf(getTotalPrizeMoney(lottos, prizeLotto)));
+    public BigDecimal getRevenueRate() {
+        BigDecimal totalPrizeAmount = new BigDecimal(String.valueOf(getTotalPrizeMoney()));
         return totalPrizeAmount.divide(this.purchaseAmount, 2, RoundingMode.HALF_EVEN);
     }
 
