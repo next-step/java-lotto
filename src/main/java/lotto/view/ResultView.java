@@ -32,6 +32,8 @@ public class ResultView {
         statistics.countGame(Ranking.THIRD));
     System.out.println("5개 일치 (1500000원) - " +
         statistics.countGame(Ranking.SECOND));
+    System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " +
+        statistics.countGame(Ranking.SECOND_BONUS));
     System.out.println("6개 일치 (2000000000원) - " +
         statistics.countGame(Ranking.FIRST));
     System.out.println("총 수익률은 " + calculateEarningRate(investMoney, statistics) + " 입니다.");
