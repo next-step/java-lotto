@@ -35,6 +35,6 @@ public class LottoScoreBoard {
     }
 
     public Long getWinningsByEqualNumberCount(long equalNumberCount) {
-        return Optional.ofNullable(scoreBoard.get(equalNumberCount)).orElse(0L);
+        return scoreBoard.getOrDefault(equalNumberCount, 0L);
     }
 }
