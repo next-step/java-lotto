@@ -11,7 +11,7 @@ public class SplitTest {
     @Test
     public void split_숫자하나() throws Exception {
         //given
-        List<String> expectResult = Arrays.asList(new String[]{"1"});
+        List<String> expectResult = Arrays.asList("1");
 
         //when
         List<String> result = Split.splitDelimiter("1");
@@ -24,7 +24,7 @@ public class SplitTest {
     @Test
     public void split_쉼표구분자() throws Exception {
         //given
-        List<String> expectResult = Arrays.asList(new String[]{"1", "2"});
+        List<String> expectResult = Arrays.asList("1", "2");
 
         //when
         List<String> result = Split.splitDelimiter("1, 2");

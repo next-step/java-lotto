@@ -6,21 +6,21 @@ import java.util.stream.IntStream;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
-    private final List<Lotto> Lottos;
+    private final List<Lotto> lottos;
     private final int purchaseLotto;
 
     public Lottos(int purchaseAmount) {
         this.purchaseLotto = purchaseAmount / LOTTO_PRICE;
-        this.Lottos = generate();
+        this.lottos = generate();
     }
 
     public Lottos(List<Lotto> lottos) {
         this.purchaseLotto = 0;
-        this.Lottos = lottos;
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
-        return Lottos;
+        return lottos;
     }
 
     public int purchaseLotto() {
@@ -29,8 +29,7 @@ public class Lottos {
 
     public List<Rank> winningResults(WinningNumber winningNumber) {
         List<Rank> result = new ArrayList<>();
-        Lottos.stream()
-                .forEach(lotto -> result.add(lotto.winningResult(winningNumber)));
+        this.lottos.forEach(lotto -> result.add(lotto.winningResult(winningNumber)));
         return result;
     }
 

@@ -24,12 +24,13 @@ public class ResultView {
                 .keySet()
                 .stream()
                 .filter(rank -> rank != Rank.OTHER)
-                .forEach(rank -> System.out.println(rank.getMatchCount()
-                        + "개 일치 ("
-                        + rank.getWinningMoney()
-                        + "원)- "
-                        + statistics.getStatistics().get(rank) + "개")
-                );
+                .forEach(rank -> System.out.println(
+                        String.format("%d개 일치 (%d)원)- %d개"
+                                , rank.getMatchCount()
+                                , rank.getWinningMoney()
+                                , statistics.getStatistics().get(rank)))
+                )
+        ;
     }
 
     public static void printYield(Statistics statistics, int purchaseAmount) {

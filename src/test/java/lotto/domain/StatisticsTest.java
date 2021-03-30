@@ -17,7 +17,7 @@ public class StatisticsTest {
 
     @BeforeEach
     public void setWinningResults() {
-        winningResults = Arrays.asList(new Rank[]{Rank.FIFTH, Rank.OTHER, Rank.FIFTH});
+        winningResults = Arrays.asList(Rank.FIFTH, Rank.OTHER, Rank.FIFTH);
         statistics = new Statistics(winningResults);
     }
 

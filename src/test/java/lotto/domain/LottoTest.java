@@ -16,8 +16,8 @@ public class LottoTest {
 
     private static Stream<Arguments> winningResultParameters() {
         return Stream.of(
-                arguments(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}), Rank.FIRST),
-                arguments(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 7}), Rank.THIRD)
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST),
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD)
         );
     }
 
@@ -25,7 +25,7 @@ public class LottoTest {
     @MethodSource("winningResultParameters")
     public void winningResult(List<Integer> inputNumbers, Rank expectRank) {
         // given
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(inputNumbers);
 
         // when
@@ -39,11 +39,11 @@ public class LottoTest {
     @Test
     public void winningResults() {
         // given
-        List<Rank> expectRanks = Arrays.asList(new Rank[]{Rank.FIRST, Rank.OTHER});
-        List<Integer> winningNumbers = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
+        List<Rank> expectRanks = Arrays.asList(Rank.FIRST, Rank.OTHER);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         WinningNumber winningNumber = new WinningNumber(winningNumbers);
         Lotto firstLotto = new Lotto(winningNumbers);
-        Lotto otherLotto = new Lotto(Arrays.asList(new Integer[]{8, 9, 10, 11, 12, 13}));
+        Lotto otherLotto = new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13));
         List<Lotto> lottoList = Arrays.asList(firstLotto, otherLotto);
         Lottos lottos = new Lottos(lottoList);
 
