@@ -19,11 +19,11 @@ public class GradeEnumTest {
   }
 
   @Test
-  @DisplayName("enum list 순서 상금 역순으로 return")
+  @DisplayName("enum list 순서 상금 역순으로 return / NONE 제외")
   public void sorted() {
     List<GradeEnum> list = GradeEnum.sorted();
     
-    assertThat(list.get(0)).isEqualTo(GradeEnum.NONE);
+    assertThat(list.get(0)).isEqualTo(GradeEnum.FIFTH);
     assertThat(list.get(list.size() - 1)).isEqualTo(GradeEnum.FIRST);
   }
 }
