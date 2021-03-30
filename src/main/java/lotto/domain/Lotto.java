@@ -10,15 +10,9 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private final Set<Number> lotto;
-    private final Number bonusNumber;
 
     private Lotto(final Set<Number> lotto) {
-        this(lotto, Number.from(0));
-    }
-
-    private Lotto(final Set<Number> lotto, Number bonusNumber) {
         this.lotto = lotto;
-        this.bonusNumber = bonusNumber;
     }
 
     public static Lotto from(final NumberGenerator numberGenerator) {
@@ -29,13 +23,13 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    public static Lotto from(final Set<Integer> lottoNumbers, final int bonusNumber) {
+    public static Lotto from(final Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != Constants.LOTTO_SIZE) {
             throw new RuntimeException("로또 숫자는 6개이여야 합니다.");
         }
         return new Lotto(lottoNumbers.stream()
                 .map(number -> Number.from(number))
-                .collect(Collectors.toSet()), Number.from(bonusNumber));
+                .collect(Collectors.toSet()));
     }
 
     public int getMatchCount(final Lotto prizeLotto) {
