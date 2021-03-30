@@ -37,12 +37,11 @@ public class LottoGames {
         return lottoGames;
     }
 
-    public HitResults result(WinNumbers winNumbers) {
+    public HitResults start(WinNumbers winNumbers) {
         HitResults hitResults = new HitResults(payMoney);
         for (LottoGame lottoGame : lottoGames) {
             hitResults.add(lottoGame.lotto(winNumbers));
         }
-
         return hitResults;
     }
 
