@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotteries {
-	private final static int PRICE_PER_GAME = 1000;
+	public final static int PRICE_PER_GAME = 1000;
 	private List<Lotto> lotteries = new ArrayList<>();
+	private int autoPurchaseSize = 0;
+	private int manualPurchaseSize = 0;
 
 	public Lotteries(int purchasePrice) {
 		int lotteriesNumber = purchasePrice / PRICE_PER_GAME;
@@ -16,12 +18,21 @@ public class Lotteries {
 		this.lotteries = IntStream.rangeClosed(1, lotteriesNumber)
 			.mapToObj(n -> new Lotto(new ShuffleMakeStrategy()))
 			.collect(Collectors.toList());
+		this.autoPurchaseSize += lotteriesNumber;
 	}
 
 	public Lotteries(Lotto... lotto) {
 		for (int i = 0; i < lotto.length; i++) {
 			this.lotteries.add(lotto[i]);
 		}
+		this.autoPurchaseSize += lotto.length;
+	}
+
+	public void add(Lotteries newLotteries) {
+		newLotteries.lotteries.stream().forEach(lotto -> {
+			this.lotteries.add(lotto);
+			this.manualPurchaseSize += 1;
+		});
 	}
 
 	public List<Lotto> getLottoGameList() {
