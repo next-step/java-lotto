@@ -9,8 +9,8 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumberList;
 
-    public Lotto(String lottoNumberList) {
-        this(Arrays.stream(lottoNumberList.split(","))
+    public Lotto(String[] lottoNumberList) {
+        this(Arrays.stream(lottoNumberList)
                 .map(number -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList()));
     }

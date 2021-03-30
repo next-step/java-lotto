@@ -1,5 +1,6 @@
 package step2.View;
 
+import step2.Domain.InputNumber;
 import step2.Domain.Money;
 import step2.Domain.WinningLotto;
 
@@ -21,6 +22,6 @@ public class InputView {
     public WinningLotto winningLotto() {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new WinningLotto(scanner.nextLine());
+        return new WinningLotto(new InputNumber(scanner.nextLine()).numbers());
     }
 }
