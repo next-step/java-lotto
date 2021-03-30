@@ -5,15 +5,9 @@ import java.util.Objects;
 public class HitCount {
 
     private int hitCount;
-    private boolean bonusBallHit;
 
     public HitCount(int hitCount) {
-        this(hitCount, false);
-    }
-
-    public HitCount(int hitCount, boolean bonusBallHit) {
         this.hitCount = hitCount;
-        this.bonusBallHit = bonusBallHit;
     }
 
     @Override
@@ -21,12 +15,11 @@ public class HitCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HitCount hitCount1 = (HitCount) o;
-        return hitCount == hitCount1.hitCount &&
-                bonusBallHit == hitCount1.bonusBallHit;
+        return hitCount == hitCount1.hitCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hitCount, bonusBallHit);
+        return Objects.hash(hitCount);
     }
 }
