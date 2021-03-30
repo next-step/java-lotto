@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.FIVE_BONUS;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,32 +10,44 @@ import lotto.LottoNumberCreationStrategy;
 public final class LottoNumbers {
 
   public static final int LOTTO_NUMBER_COUNT = 6;
+  public static final String LOTTO_NUMBER_CREATION_FAILURE = "로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.";
 
   private final List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(LottoNumberCreationStrategy lottoNumberCreationStrategy) {
-    lottoNumbers = lottoNumberCreationStrategy.create();
+    this(lottoNumberCreationStrategy.create());
   }
 
   public LottoNumbers(String[] winningNumbers) {
-    this.lottoNumbers = Arrays.stream(winningNumbers)
-        .map(Integer::parseInt)
-        .map(LottoNumber::new)
-        .collect(Collectors.toList());
+    this(Arrays.stream(winningNumbers)
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toList()));
+  }
+
+  public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
+    }
+    this.lottoNumbers = lottoNumbers;
   }
 
   public int size() {
     return lottoNumbers.size();
   }
 
-  public int compare(LottoNumbers other) {
-    int count = 0;
+  public Match compare(LottoNumbers other, LottoNumber bonusNumber) {
+    int matchCount = 0;
+    boolean bonusMatch = false;
 
     for (LottoNumber lottoNumber : other.lottoNumbers) {
-      count = countMatch(count, lottoNumber);
+      matchCount = countMatch(matchCount, lottoNumber);
     }
 
-    return count;
+    if (matchCount == FIVE_BONUS.getMatchCount()) {
+      bonusMatch = lottoNumbers.contains(bonusNumber);
+    }
+
+    return new Match(matchCount, bonusMatch);
   }
 
   private int countMatch(int count, LottoNumber lottoNumber) {
@@ -43,9 +57,11 @@ public final class LottoNumbers {
     return count;
   }
 
-  public void print() {
-    System.out.println(lottoNumbers.stream()
-        .map(LottoNumber::toStringValue)
-        .collect(Collectors.joining(", ", "[", "]")));
+  public List<LottoNumber> getLottoNumbers() {
+    return lottoNumbers;
+  }
+
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
 }

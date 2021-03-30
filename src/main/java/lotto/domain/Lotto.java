@@ -20,11 +20,15 @@ public final class Lotto {
     return lottoNumbers.size();
   }
 
-  public int compare(Lotto winningLotto) {
-    return lottoNumbers.compare(winningLotto.lottoNumbers);
+  public Match compare(Lotto winningLotto, LottoNumber bonusNumber) {
+    return lottoNumbers.compare(winningLotto.lottoNumbers, bonusNumber);
   }
 
-  public void printLottoNumbers() {
-    lottoNumbers.print();
+  public LottoNumbers getLottoNumbers() {
+    return lottoNumbers;
+  }
+
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
 }

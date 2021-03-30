@@ -2,6 +2,8 @@ package lotto.io;
 
 import java.util.Scanner;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 public final class InputView {
 
@@ -10,6 +12,7 @@ public final class InputView {
   private static final String SPACE_REGEX = "\\s";
   private static final String EMPTY_STRING = "";
   private static final String DELIMITER = ",";
+  private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
 
   private final Scanner scanner;
 
@@ -22,12 +25,26 @@ public final class InputView {
     return Integer.parseInt(scanner.nextLine());
   }
 
-  public Lotto inputLastWinningNumber() {
+  public WinningLotto inputLastWinningNumber() {
+    Lotto lastWinningLotto = inputLastWinningLotto();
+    LottoNumber bonusNumber = inputBonusNumber();
+
+    return new WinningLotto(lastWinningLotto, bonusNumber);
+  }
+
+  private Lotto inputLastWinningLotto() {
     System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER);
     String winningNumberString = scanner.nextLine();
 
     String[] winningNumbers = winningNumberString.replaceAll(SPACE_REGEX, EMPTY_STRING).split(DELIMITER);
-    System.out.println();
     return new Lotto(winningNumbers);
+  }
+
+  private LottoNumber inputBonusNumber() {
+    System.out.println(INPUT_BONUS_NUMBER);
+    String bonusNumberString = scanner.nextLine();
+
+    System.out.println();
+    return LottoNumber.valueOf(bonusNumberString);
   }
 }

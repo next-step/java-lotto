@@ -10,11 +10,15 @@ public final class WinningStatistics {
 
   private final Map<Rank, Long> winningStatistics;
 
-  public WinningStatistics(Lottos lottos, Lotto winningLotto) {
-    List<Integer> matchCounts = lottos.compare(winningLotto);
-    winningStatistics = matchCounts.stream()
-        .map(Rank::of)
+  private WinningStatistics(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+    List<Match> matches = lottos.compare(winningLotto, bonusNumber);
+    winningStatistics = matches.stream()
+        .map(Rank::from)
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+  }
+
+  public WinningStatistics(Lottos lottos, WinningLotto winningLotto) {
+    this(lottos, winningLotto.getLastWinningLotto(), winningLotto.getBonusNumber());
   }
 
   public long countOf(Rank rank) {
