@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class HitCount {
 
-    private int hitCount;
+    private long hitCount;
 
-    public HitCount(int hitCount) {
+    public HitCount(long hitCount) {
         this.hitCount = hitCount;
     }
 
