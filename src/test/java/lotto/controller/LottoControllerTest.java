@@ -59,7 +59,7 @@ class LottoControllerTest {
         lottoNumberInputList.add("1, 2, 3, 4, 5, 7");
         lottoNumberInputList.add("1, 2, 3, 4, 7, 8");
         lottoNumberInputList.add("1, 2, 3, 7, 8, 9");
-        WinInquiryRequest winInquiryRequest = new WinInquiryRequest("1, 2, 3, 4, 5, 6", lottoNumberInputList);
+        WinInquiryRequest winInquiryRequest = new WinInquiryRequest("1, 2, 3, 4, 5, 6", lottoNumberInputList, 7);
 
         // when
         WinInquiryResponse winInquiryResponse = controller.inquiryWin(winInquiryRequest);
