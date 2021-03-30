@@ -23,6 +23,10 @@ public final class LottoBalls {
     return count;
   }
 
+  public boolean containBonusBall(LottoBall bonusBall) {
+    return lottoBalls.contains(bonusBall);
+  }
+
   @Override
   public String toString() {
     return lottoBalls.stream()

@@ -14,10 +14,10 @@ public final class LottoGame {
     return lottoBallsList.size();
   }
 
-  public Statistics countMatchLottoNumber(LottoBalls winBalls) {
+  public Statistics selectPrizeWinning(WinningBall winBalls) {
     Statistics statistics = new Statistics();
     for (LottoBalls lottoBalls : lottoBallsList) {
-      Ranking ranking = Ranking.ofCount(lottoBalls.countContainingWinNumbers(winBalls));
+      Ranking ranking = winBalls.calculateRank(lottoBalls);
       statistics.recordRanking(ranking);
     }
     return statistics;
