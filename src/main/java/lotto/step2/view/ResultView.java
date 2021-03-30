@@ -13,7 +13,7 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoNumbers(Lottos lottos, long lottoCount) {
+    public static void printLottos(Lottos lottos, long lottoCount) {
         System.out.println();
         System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", lottoCount, lottos.size() - lottoCount));
         lottos.lottos()
