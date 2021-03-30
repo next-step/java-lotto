@@ -35,11 +35,11 @@ class LottoTest {
                 .isInstanceOf(RuntimeException.class);
     }
 
-    @DisplayName("당첨번호와 구매번호 일치 개수 확인")
+    @DisplayName("구매한 번호로 당첨 금액을 확인한다")
     @ParameterizedTest
-    @CsvSource(value = {"40,41,42,43,44,45:0", "1,41,42,43,44,45:1", "1,2,42,43,44,45:2", "1,2,3,43,44,45:3", "1,2,3,4,44,45:4",
-            "1,2,3,4,5,45:5", "1,2,3,4,5,6:6"}, delimiter = ':')
-    void getMatchCount(String purchaseNumber, int expectedMatchCount) {
+    @CsvSource(value = {"1,2,3,10,11,12:13:5000", "1,2,3,4,10,11:12:50000", "1,2,3,4,5,7:8:1500000",
+            "1,2,3,4,5,7:6:30000000", "1,2,3,4,5,6:7:2000000000"}, delimiter = ':')
+    void getRank(String purchaseNumber, int bonusNum, int expectedAmount) {
         // given
         Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
         Set<Integer> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
@@ -47,11 +47,12 @@ class LottoTest {
                 .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
         Lotto prizeLotto = Lotto.from(numbers);
+        Number bonusNumber = Number.from(bonusNum);
 
         // when
-        int matchCount = lotto.getMatchCount(prizeLotto);
+        Rank rank = lotto.getRank(prizeLotto, bonusNumber);
 
         // then
-        assertThat(matchCount).isEqualTo(expectedMatchCount);
+        assertThat(rank.getAmount()).isEqualTo(expectedAmount);
     }
 }
