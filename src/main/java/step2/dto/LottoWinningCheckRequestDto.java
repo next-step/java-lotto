@@ -15,7 +15,7 @@ public final class LottoWinningCheckRequestDto {
     }
 
     private LottoWinningCheckRequestDto(String sentence) {
-        this(Lotto.newInstance(sentence));
+        this(Lotto.of(sentence));
     }
 
     private LottoWinningCheckRequestDto(Lotto winningLotto) {

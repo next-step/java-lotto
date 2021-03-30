@@ -26,6 +26,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
+    public static LottoNumber valueOf(String lottoNumber) {
+        return valueOf(Integer.valueOf(lottoNumber));
+    }
+
     public static LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
         return CACHE.get(lottoNumber);

@@ -24,7 +24,7 @@ class LottoListTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        testLottoList.add(Lotto.newInstance(testLottoNumbers));
+        testLottoList.add(Lotto.of(testLottoNumbers));
     }
 
     @DisplayName("LottoList 인스턴스 생성 여부 테스트")

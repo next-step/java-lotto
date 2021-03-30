@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoList;
 import step2.domain.lotto.LottoNumber;
-import step2.exception.LottoListNullPointerException;
+import step2.exception.ListNullPointerException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ class LottoExpressionResponseDtoTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        Lotto testLotto = Lotto.newInstance(testLottoNumbers);
+        Lotto testLotto = Lotto.of(testLottoNumbers);
         List<Lotto> testLottos = new ArrayList<>();
         testLottos.add(testLotto);
         testLottoList = LottoList.newInstance(testLottos);
@@ -54,8 +54,8 @@ class LottoExpressionResponseDtoTest {
         // when and then
         assertThatThrownBy(()-> {
             LottoExpressionResponseDto.newInstance(nullLottoList);
-        }).isInstanceOf(LottoListNullPointerException.class)
-                .hasMessageContaining("LottoList 인스턴스가 null 입니다.");
+        }).isInstanceOf(ListNullPointerException.class)
+                .hasMessageContaining("null인 리스트가 입력되었습니다.");
     }
 
     @DisplayName("LottoExpressionResponseDto가 소유한 값을 반환하는지에 대한 테스트")

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.ListNullPointerException;
-import step2.exception.LottoNumberMissMatchSizeException;
+import step2.exception.MissMatchSizeException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ class LottoTest {
     void 생성() {
 
         // when
-        Lotto lotto = Lotto.newInstance(lottoNumbers);
+        Lotto lotto = Lotto.of(lottoNumbers);
 
         // then
         assertThat(lotto).isNotNull();
@@ -42,7 +42,7 @@ class LottoTest {
         String sentence = "1, 2, 3, 4, 5, 6";
 
         // when
-        Lotto lotto = Lotto.newInstance(sentence);
+        Lotto lotto = Lotto.of(sentence);
 
         // then
         assertThat(lotto).isNotNull();
@@ -57,7 +57,7 @@ class LottoTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            Lotto.newInstance(nullLottoNumbers);
+            Lotto.of(nullLottoNumbers);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
 
@@ -72,9 +72,9 @@ class LottoTest {
 
         // when and then
         assertThatThrownBy(() -> {
-            Lotto.newInstance(lottoNumbers);
-        }).isInstanceOf(LottoNumberMissMatchSizeException.class)
-                .hasMessageContaining("로또 숫자 갯수가 맞지 않습니다.");
+            Lotto.of(lottoNumbers);
+        }).isInstanceOf(MissMatchSizeException.class)
+                .hasMessageContaining("갯수가 맞지 않습니다.");
 
     }
 
@@ -83,7 +83,7 @@ class LottoTest {
     void 반환() {
 
         // given
-        Lotto lotto = Lotto.newInstance(lottoNumbers);
+        Lotto lotto = Lotto.of(lottoNumbers);
 
         // when
         List<LottoNumber> actual = lotto.getLottoNumbers();
@@ -97,8 +97,8 @@ class LottoTest {
     void 비교() {
 
         // when
-        Lotto firstLotto = Lotto.newInstance(lottoNumbers);
-        Lotto secondLotto = Lotto.newInstance(lottoNumbers);
+        Lotto firstLotto = Lotto.of(lottoNumbers);
+        Lotto secondLotto = Lotto.of(lottoNumbers);
 
         // then
         assertThat(firstLotto).isEqualTo(secondLotto);
@@ -108,7 +108,7 @@ class LottoTest {
     @Test
     void 포함() {
         // given
-        Lotto firstLotto = Lotto.newInstance(lottoNumbers);
+        Lotto firstLotto = Lotto.of(lottoNumbers);
         LottoNumber testElement = LottoNumber.valueOf(1);
 
         // when
@@ -122,8 +122,8 @@ class LottoTest {
     @Test
     void 포함_갯수() {
         // given
-        Lotto firstLotto = Lotto.newInstance(lottoNumbers);
-        Lotto secondLotto = Lotto.newInstance(lottoNumbers);
+        Lotto firstLotto = Lotto.of(lottoNumbers);
+        Lotto secondLotto = Lotto.of(lottoNumbers);
 
         // when
         int actual = firstLotto.getCorrectCount(secondLotto);

@@ -33,7 +33,7 @@ class LottoControllerTest {
                 .collect(Collectors.toList());
 
         testLottoList = LottoList.newInstance();
-        testLottoList.add(Lotto.newInstance(lottoNumbers));
+        testLottoList.add(Lotto.of(lottoNumbers));
     }
 
     @DisplayName("LottoController 인스턴스 생성 여부 테스트")

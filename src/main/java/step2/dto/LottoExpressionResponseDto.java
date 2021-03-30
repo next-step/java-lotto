@@ -1,7 +1,7 @@
 package step2.dto;
 
 import step2.domain.lotto.LottoList;
-import step2.exception.LottoListNullPointerException;
+import step2.exception.ListNullPointerException;
 
 public final class LottoExpressionResponseDto {
 
@@ -9,7 +9,7 @@ public final class LottoExpressionResponseDto {
 
     private LottoExpressionResponseDto(LottoList lottoList) {
         if (isNull(lottoList)) {
-            throw new LottoListNullPointerException();
+            throw new ListNullPointerException();
         }
         this.lottoList = lottoList;
     }

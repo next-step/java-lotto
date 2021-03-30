@@ -27,7 +27,7 @@ class LottoWinningCheckRequestDtoTest {
 
         // given
         String testInputLottoNumbers = "1, 2, 3, 4, 5, 6";
-        Lotto expected = Lotto.newInstance(testInputLottoNumbers);
+        Lotto expected = Lotto.of(testInputLottoNumbers);
 
         // when
         LottoWinningCheckRequestDto requestDto = LottoWinningCheckRequestDto.newInstance(expected);

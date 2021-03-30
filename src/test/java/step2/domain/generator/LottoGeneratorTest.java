@@ -71,7 +71,7 @@ class LottoGeneratorTest {
 
         // when
         Lotto actual = lottoGenerator.generateLotto();
-        Lotto expected = Lotto.newInstance(testSortLottoNumbers);
+        Lotto expected = Lotto.of(testSortLottoNumbers);
 
         // then
         assertThat(actual).isEqualTo(expected);
@@ -88,7 +88,7 @@ class LottoGeneratorTest {
 
         // when
         Lotto actual = lottoGenerator.generateLotto();
-        Lotto expected = Lotto.newInstance(reverseAndSortLottoNumbers);
+        Lotto expected = Lotto.of(reverseAndSortLottoNumbers);
 
         // then
         assertThat(actual).isEqualTo(expected);

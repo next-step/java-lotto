@@ -51,7 +51,7 @@ public final class LottoGenerator {
         lottoShuffleStrategy.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
         Collections.sort(lottoNumbers);
-        return Lotto.newInstance(lottoNumbers);
+        return Lotto.of(lottoNumbers);
     }
 
     private final List<LottoNumber> generateAllLottoNumbers() {
