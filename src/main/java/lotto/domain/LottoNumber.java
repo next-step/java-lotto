@@ -23,18 +23,19 @@ public final class LottoNumber implements Comparable<LottoNumber> {
   private final int lottoNumber;
 
   private LottoNumber(int lottoNumber) {
-    if (lottoNumber < MIN || lottoNumber > MAX) {
-      throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
-    }
     this.lottoNumber = lottoNumber;
   }
 
   public static LottoNumber valueOf(int lottoNumber) {
+    validateLottoNumber(lottoNumber);
+    int lottoNumberIndex = lottoNumber - 1;
+    return LOTTO_NUMBER_POOL.get(lottoNumberIndex);
+  }
+
+  private static void validateLottoNumber(int lottoNumber) {
     if (lottoNumber < MIN || lottoNumber > MAX) {
       throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
     }
-    int lottoNumberIndex = lottoNumber - 1;
-    return LOTTO_NUMBER_POOL.get(lottoNumberIndex);
   }
 
   public static LottoNumber valueOf(String lottoNumber) {
