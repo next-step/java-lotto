@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final List<LottoNumber> CACHE;
-    private static final int START_INDEX = 1;
     private static final int START_INCLUSIVE = 0;
+    private static final int START_INDEX = 1;
     private static final int END_EXCLUSIVE = 46;
 
     private final int lottoNumber;

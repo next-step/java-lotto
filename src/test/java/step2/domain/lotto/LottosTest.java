@@ -15,44 +15,59 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottosTest {
 
-    private List<Lotto> testLottoList;
+    private List<Lotto> testLottos;
 
     @BeforeEach
     void setUp() {
-        testLottoList = new ArrayList<>();
+        testLottos = new ArrayList<>();
 
         List<LottoNumber> testLottoNumbers = IntStream
                 .range(1, 7)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        testLottoList.add(Lotto.of(testLottoNumbers));
+        testLottos.add(Lotto.of(testLottoNumbers));
     }
 
-    @DisplayName("LottoList 인스턴스 생성 여부 테스트")
+    @DisplayName("Lottos 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
 
         // when
-        Lottos lottos = Lottos.newInstance(testLottoList);
+        Lottos lottos = Lottos.newInstance(testLottos);
 
         // then
         assertThat(lottos).isNotNull();
     }
 
-    @DisplayName("LottoList 인스턴스가 쇼유한 값을 반환하는지에 대한 테스트")
+    @DisplayName("Lottos 인스턴스가 쇼유한 값을 반환하는지에 대한 테스트")
     @Test
     void 반환() {
 
         // when
-        Lottos lottos = Lottos.newInstance(testLottoList);
+        Lottos lottos = Lottos.newInstance(testLottos);
         List<Lotto> actual = lottos.getLottos();
 
         // then
-        assertThat(actual).isEqualTo(testLottoList);
+        assertThat(actual).isEqualTo(testLottos);
     }
 
-    @DisplayName("LottoList 인스턴스가 null값에 대해 예외처리 여부 테스트")
+
+    @DisplayName("Lottos 인스턴스가 쇼유한 로또의 갯수를 반환하는지 테스트")
+    @Test
+    void 반환_크기() {
+        // given
+        int expected = testLottos.size();
+
+        // when
+        Lottos lottos = Lottos.newInstance(testLottos);
+        int actual = lottos.getLottosSize();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("Lottos 인스턴스가 null값에 대해 예외처리 여부 테스트")
     @Test
     void 검증() {
         // given
@@ -66,16 +81,17 @@ class LottosTest {
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
     }
 
-    @DisplayName("LottoList 인스턴스가 쇼유한 값을 기준으로 비교를 반환하는지 테스트")
+    @DisplayName("Lottos 인스턴스가 쇼유한 값을 기준으로 비교를 반환하는지 테스트")
     @Test
     void 비교() {
 
         // when
-        Lottos actualLottos = Lottos.newInstance(testLottoList);
-        Lottos expectedLottos = Lottos.newInstance(testLottoList);
+        Lottos actualLottos = Lottos.newInstance(testLottos);
+        Lottos expectedLottos = Lottos.newInstance(testLottos);
 
         // then
         assertThat(actualLottos).isEqualTo(expectedLottos);
     }
+
 
 }

@@ -44,7 +44,7 @@ public final class LottoController {
     }
 
     public final LottoWinningResultResponseDto getWinningResult(LottoWinningCheckRequestDto confirmationRequestDto) {
-        LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto);
+        LottoWinningChecker winningChecker = LottoWinningChecker.of(confirmationRequestDto);
         return winningChecker.getLottoWinningResultResponseDto(lottos);
     }
 

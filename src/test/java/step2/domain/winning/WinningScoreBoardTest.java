@@ -18,7 +18,7 @@ class WinningScoreBoardTest {
         Map<WinningScore, Integer> testMap = new HashMap<>();
 
         // when
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.of(testMap);
 
         // then
         assertThat(winningScoreBoard).isNotNull();
@@ -33,7 +33,7 @@ class WinningScoreBoardTest {
         int expected = 0;
 
         // when
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.of(testMap);
 
         // then
         assertAll(
@@ -53,7 +53,7 @@ class WinningScoreBoardTest {
         int expected = 1;
 
         // when
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.of(testMap);
         winningScoreBoard.increaseCount(WinningScore.MISS);
         winningScoreBoard.increaseCount(WinningScore.THREE);
         winningScoreBoard.increaseCount(WinningScore.FOUR);

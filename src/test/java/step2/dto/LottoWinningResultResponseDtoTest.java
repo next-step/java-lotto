@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinningResultResponseDtoTest {
 
@@ -18,7 +17,7 @@ class LottoWinningResultResponseDtoTest {
     void 생성() {
         //given
         Map<WinningScore, Integer> testMap = new HashMap<>();
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(testMap);
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.of(testMap);
 
         // when
         LottoWinningResultResponseDto responseDto = LottoWinningResultResponseDto.newInstance(winningScoreBoard);
@@ -32,7 +31,7 @@ class LottoWinningResultResponseDtoTest {
     void 반환() {
         // given
         Map<WinningScore, Integer> testMap = new HashMap<>();
-        WinningScoreBoard expected = WinningScoreBoard.newInstance(testMap);
+        WinningScoreBoard expected = WinningScoreBoard.of(testMap);
 
         // when
         LottoWinningResultResponseDto responseDto = LottoWinningResultResponseDto.newInstance(expected);

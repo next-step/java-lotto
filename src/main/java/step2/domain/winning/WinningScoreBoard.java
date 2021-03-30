@@ -4,11 +4,12 @@ import java.util.Map;
 
 public final class WinningScoreBoard {
 
-    private final Map<WinningScore, Integer> winningScoreBoard;
-    private final int ZERO = 0;
-    private final int INCREASE = 1;
+    private final static int ZERO = 0;
+    private final static int INCREASE = 1;
 
-    public static WinningScoreBoard newInstance(Map<WinningScore, Integer> winningScore) {
+    private final Map<WinningScore, Integer> winningScoreBoard;
+
+    public static WinningScoreBoard of(Map<WinningScore, Integer> winningScore) {
         return new WinningScoreBoard(winningScore);
     }
 
@@ -17,7 +18,7 @@ public final class WinningScoreBoard {
         this.winningScoreBoard = winningScoreBoard;
     }
 
-    private void init(Map<WinningScore, Integer> winningScoreBoard) {
+    private final void init(Map<WinningScore, Integer> winningScoreBoard) {
         for (WinningScore winningScore : WinningScore.values()) {
             winningScoreBoard.put(winningScore, ZERO);
         }

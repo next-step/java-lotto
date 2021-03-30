@@ -23,7 +23,7 @@ class LottoWinningCheckerTest {
     void 생성() {
 
         // when
-        LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto);
+        LottoWinningChecker winningChecker = LottoWinningChecker.of(confirmationRequestDto);
 
         // then
         assertThat(winningChecker).isNotNull();

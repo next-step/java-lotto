@@ -14,26 +14,22 @@ public final class LottoWinningChecker {
 
     private final Lotto WinningLotto;
 
-    private LottoWinningChecker(LottoWinningCheckRequestDto confirmationRequestDto) {
-        this(confirmationRequestDto.getWinningLotto());
-    }
-
     private LottoWinningChecker(Lotto WinningLotto) {
         this.WinningLotto = WinningLotto;
     }
 
-    public static final LottoWinningChecker newInstance(LottoWinningCheckRequestDto confirmationRequestDto) {
-        return new LottoWinningChecker(confirmationRequestDto);
+    public static final LottoWinningChecker of(LottoWinningCheckRequestDto confirmationRequestDto) {
+        return new LottoWinningChecker(confirmationRequestDto.getWinningLotto());
     }
 
-    public static final LottoWinningChecker newInstance(Lotto WinningLotto) {
+    public static final LottoWinningChecker of(Lotto WinningLotto) {
         return new LottoWinningChecker(WinningLotto);
     }
 
-    public final LottoWinningResultResponseDto getLottoWinningResultResponseDto(Lottos lottoList) {
-        List<Lotto> lottos = lottoList.getLottos();
-        WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
-        for(Lotto lotto : lottos) {
+    public final LottoWinningResultResponseDto getLottoWinningResultResponseDto(Lottos lottos) {
+        List<Lotto> lottoList = lottos.getLottos();
+        WinningScoreBoard winningScoreBoard = WinningScoreBoard.of(new EnumMap<>(WinningScore.class));
+        for (Lotto lotto : lottoList) {
             int correctCount = lotto.getCorrectCount(WinningLotto);
             WinningScore winningScore = WinningScore.valueOf(correctCount);
             winningScoreBoard.increaseCount(winningScore);

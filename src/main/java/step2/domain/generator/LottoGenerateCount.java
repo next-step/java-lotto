@@ -5,8 +5,8 @@ import step2.dto.LottoCreationRequestDto;
 
 public final class LottoGenerateCount {
 
-    private final static int DIVIDE_STANDARD = 1000;
     private final static int FINISH = 0;
+    private final static int DIVIDE_STANDARD = 1000;
 
     private int count;
 
