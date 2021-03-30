@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import lotto.view.StatisticsDto;
 
 public final class Statistics {
 
