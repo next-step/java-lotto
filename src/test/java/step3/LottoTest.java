@@ -3,7 +3,6 @@ package step3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.lottoTests;
 import step3.domain.*;
 
 import java.util.Arrays;
