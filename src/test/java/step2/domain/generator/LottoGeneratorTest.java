@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
+import step2.exception.LottoShuffleNullPointerException;
 import step2.strategy.LottoShuffleStrategy;
 
 import java.util.Collections;
@@ -50,7 +51,7 @@ class LottoGeneratorTest {
         // when
         assertThatThrownBy(()-> {
             LottoGenerator.of(null);
-        }).isInstanceOf(LottoShuffleStrategy.class)
+        }).isInstanceOf(LottoShuffleNullPointerException.class)
                 .hasMessageContaining("셔플 전략이 null 입니다.");
     }
 
