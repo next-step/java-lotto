@@ -23,8 +23,12 @@ public class LottoController {
 
     public void run() {
         ResultView.printLottos(lottos);                                                             // 로또 출력
+
         Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());                                 // 당첨 번호 입력
+
         Number bonusNumber = Number.from(InputView.inputBonusNumber());                             // 보너스 번호 입력
+        prizeLotto.checkValidBonusNumber(bonusNumber);
+
         lottoStatistics.makeStatisticsResult(lottos, bonusNumber, prizeLotto);                      // 당첨 통계용 데이터 생성
         ResultView.printStatistics(lottoStatistics);                                                // 당첨 통계 출력
     }

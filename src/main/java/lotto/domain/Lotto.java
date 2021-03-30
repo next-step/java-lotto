@@ -32,6 +32,12 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
+    public void checkValidBonusNumber(final Number bonusNumber) {
+        if (this.lotto.contains(bonusNumber)) {
+            throw new RuntimeException("보너스번호는 1등 당첨번호와 중복될 수 없습니다.");
+        }
+    }
+
     public Rank getRank(final Lotto prizeLotto, final Number bonusNumber) {
         int matchCount = getMatchCount(prizeLotto);
         boolean matchBonus = matchBonus(bonusNumber);
