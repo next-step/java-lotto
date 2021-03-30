@@ -1,9 +1,9 @@
 package step2.strategy;
 
-import step2.domain.number.Number;
+import step2.domain.number.LottoNumber;
 
 import java.util.List;
 
 public interface LottoStrategy {
-  List<Number> markingNumbers(List<Number> lottoNumbers);
+  List<LottoNumber> markingNumbers(List<LottoNumber> lottoNumbers);
 }

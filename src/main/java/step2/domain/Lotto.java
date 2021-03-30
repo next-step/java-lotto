@@ -1,21 +1,21 @@
 package step2.domain;
 
-import step2.domain.number.Number;
-import step2.domain.number.Numbers;
+import step2.domain.number.Count;
+import step2.domain.number.LottoNumbers;
 
 public class Lotto {
-  private final Numbers numbers;
+  private final LottoNumbers lottoNumbers;
 
-  public Lotto(Numbers numbers) {
-    this.numbers = numbers;
+  public Lotto(LottoNumbers lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
   @Override
   public String toString() {
-    return numbers.toString();
+    return lottoNumbers.sort().toString();
   }
 
-  public Number matchLotto(Lotto prizeLotto){
-    return numbers.matchNumbers(prizeLotto.numbers);
+  public Count matchLotto(Lotto prizeLotto){
+    return lottoNumbers.matchNumbers(prizeLotto.lottoNumbers);
   }
 }

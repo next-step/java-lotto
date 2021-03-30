@@ -1,8 +1,9 @@
 package step2.controller;
 
 import step2.domain.*;
-import step2.domain.number.Number;
-import step2.domain.number.Numbers;
+import step2.domain.number.Count;
+import step2.domain.number.LottoNumber;
+import step2.domain.number.LottoNumbers;
 import step2.service.LottoMaker;
 import step2.service.Mart;
 import step2.strategy.LottoRandomStrategy;
@@ -14,10 +15,12 @@ import step2.view.ResultView;
 import java.util.List;
 
 public class LottoGame {
+  private final Mart mart = new Mart(new LottoMaker());
 
   public void start() {
     Cash cash = getCash();
     Lottos boughtLottos = buyLottos(cash);
+    cash = mart.notifyBoughtAmount(new Count(boughtLottos.quantity()));
     ResultView.firstNotice(boughtLottos);
 
     LottoResult result = checkLottos(boughtLottos);
@@ -31,16 +34,14 @@ public class LottoGame {
   }
 
   private Lottos buyLottos(Cash cash){
-    Mart mart = new Mart(new LottoMaker());
     Lottos boughtLottos = mart.buyAllLotto(cash, new LottoRandomStrategy());
     return boughtLottos;
   }
 
   private LottoResult checkLottos(Lottos boughtLottos){
     String expression = InputView.saveLottoNumbers();
-    CommonView.println("EXPRESSION = " + expression);
-    List<Number> numbers = Splitter.split(expression);
-    Numbers lottoNumbers = new Numbers(numbers);
+    List<LottoNumber> numbers = Splitter.split(expression);
+    LottoNumbers lottoNumbers = new LottoNumbers(numbers);
     Lotto matcherLotto =new Lotto(lottoNumbers);
 
     return  boughtLottos.matchLottos(matcherLotto);

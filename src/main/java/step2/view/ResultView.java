@@ -2,7 +2,7 @@ package step2.view;
 
 import step2.domain.LottoResult;
 import step2.domain.Lottos;
-import step2.domain.number.Number;
+import step2.domain.number.Count;
 
 public class ResultView {
   private static final String MATCHING_THREE = "3개 일치 (5000원)- ";
@@ -14,6 +14,8 @@ public class ResultView {
 
   private static final String QUANTITY_MESSAGE = "개를 구매했습니다.";
 
+  private static final String DIGIT = "개";
+
   private ResultView() {
   }
 
@@ -22,11 +24,11 @@ public class ResultView {
     CommonView.println(lottos.toString());
   }
 
-  public static void showSpecificResult(LottoResult lottoResult){
-    CommonView.println(MATCHING_THREE + lottoResult.toStringSpecificResult(new Number(3)));
-    CommonView.println(MATCHING_FOUR + lottoResult.toStringSpecificResult(new Number(4)));
-    CommonView.println(MATCHING_FIVE + lottoResult.toStringSpecificResult(new Number(5)));
-    CommonView.println(MATCHING_SIX + lottoResult.toStringSpecificResult(new Number(6)));
+  public static void showSpecificResult(LottoResult lottoResult) {
+    CommonView.println(MATCHING_THREE + lottoResult.toStringSpecificResult(new Count(3)) + DIGIT);
+    CommonView.println(MATCHING_FOUR + lottoResult.toStringSpecificResult(new Count(4)) + DIGIT);
+    CommonView.println(MATCHING_FIVE + lottoResult.toStringSpecificResult(new Count(5)) + DIGIT);
+    CommonView.println(MATCHING_SIX + lottoResult.toStringSpecificResult(new Count(6)) + DIGIT);
 
     CommonView.println(YIELD_PREFIX + lottoResult.toStringYield() + YIELD_POSTFIX);
   }

@@ -1,6 +1,6 @@
 package step2.strategy;
 
-import step2.domain.number.Number;
+import step2.domain.number.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,15 +15,15 @@ public class LottoRandomStrategy implements LottoStrategy {
   }
 
   @Override
-  public List<Number> markingNumbers(List<Number> lottoNumbers) {
-    List<Number> pickedNumbers = new ArrayList<>();
-    List<Number> shuffleNumbers = new ArrayList<>(lottoNumbers);
+  public List<LottoNumber> markingNumbers(List<LottoNumber> lottoNumbers) {
+    List<LottoNumber> pickedLottoNumbers = new ArrayList<>();
+    List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(lottoNumbers);
     for (int i = 0; i < LOTTO_LENGTH; i++) {
-      Collections.shuffle(shuffleNumbers);
-      Number targetNumber = shuffleNumbers.get(FIRST_INDEX);
-      pickedNumbers.add(targetNumber);
-      shuffleNumbers.remove(targetNumber);
+      Collections.shuffle(shuffleLottoNumbers);
+      LottoNumber targetLottoNumber = shuffleLottoNumbers.get(FIRST_INDEX);
+      pickedLottoNumbers.add(targetLottoNumber);
+      shuffleLottoNumbers.remove(targetLottoNumber);
     }
-    return pickedNumbers;
+    return pickedLottoNumbers;
   }
 }

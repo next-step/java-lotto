@@ -1,6 +1,7 @@
 package step2.util;
 
-import step2.domain.number.Number;
+import step2.domain.number.LottoNumber;
+import step2.exception.InvalidSplitStringException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,21 +9,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Splitter {
-  private static final String PATTERN_MATCHER = "//(.)\n(.*)";
-  private static final String COLON_MATCHER = ",|:";
-
-  private static final int DELIMITER_MATCHER = 1;
-  private static final int NUMBER_MATCHER = 2;
-
-  private static final Pattern pattern = Pattern.compile(PATTERN_MATCHER);
+  private static final String COLON_MATCHER = ",";
+  private static final String ERROR_MESSAGE = "분해할 수 없는 문자열입니다. 문자열: ";
 
   private Splitter() {
   }
 
-  public static List<Number> split(String expression) {
+  public static List<LottoNumber> split(String expression) {
 
     if (expression == null || expression.trim().isEmpty()) {
-      return splitNullOrEmpty();
+      throw new InvalidSplitStringException(ERROR_MESSAGE + expression);
     }
 
     if (expression.trim().length() == 1) {
@@ -32,43 +28,29 @@ public class Splitter {
     return splitNumbers(expression);
   }
 
-  private static List<Number> splitNullOrEmpty() {
-    List<Number> numbers = new ArrayList<>();
-    numbers.add(new Number(0));
-    return numbers;
-  }
-
-  private static List<Number> splitOneObject(String expression) {
-    List<Number> numbers = new ArrayList<>();
+  private static List<LottoNumber> splitOneObject(String expression) {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
     int number = 0;
     try {
       number = Integer.parseInt(expression);
     } catch (Exception e) {
-      throw new RuntimeException("해당 수식은 수가 아닙니다.");
+      throw new InvalidSplitStringException(ERROR_MESSAGE + expression);
     }
-    numbers.add(new Number(number));
-    return numbers;
+    lottoNumbers.add(new LottoNumber(number));
+    return lottoNumbers;
   }
 
-  private static List<Number> splitNumbers(String expression) {
-    List<Number> numbers = new ArrayList<>();
+  private static List<LottoNumber> splitNumbers(String expression) {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
     String[] tokens = customPatternMatcher(expression);
     for (String token : tokens) {
-      int number = Integer.parseInt(token.trim());
-      numbers.add(new Number(number));
+      lottoNumbers.addAll(splitOneObject(token.trim()));
     }
-    return numbers;
+    return lottoNumbers;
   }
 
   private static String[] customPatternMatcher(String expression) {
-    Matcher m = pattern.matcher(expression);
     String[] tokens;
-    if (m.find()) {
-      String customDelimiter = m.group(DELIMITER_MATCHER);
-      tokens = m.group(NUMBER_MATCHER).split(customDelimiter);
-      return tokens;
-    }
-
     tokens = expression.split(COLON_MATCHER);
     return tokens;
   }

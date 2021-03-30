@@ -2,6 +2,7 @@ package step2.service;
 
 import step2.domain.Cash;
 import step2.domain.Lottos;
+import step2.domain.number.Count;
 import step2.strategy.LottoStrategy;
 
 public class Mart {
@@ -36,5 +37,9 @@ public class Mart {
     }
 
     return lottos;
+  }
+
+  public Cash notifyBoughtAmount(Count boughts){
+    return new Cash(LOTTO_PRICE).multiply(boughts);
   }
 }
