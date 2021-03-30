@@ -24,10 +24,10 @@ class LottosTest {
         List<Integer> referenceNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lottos lottos = Lottos.of(1000, new FixedGenerator(referenceNumbers));
 
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6", 7);
 
         Hit hit = new Hit();
-        hit.hittingLottoStatistics(6);
+        hit.hittingLottoStatistics(6, false);
 
         assertThat(lottos.getWinnerStatistics(winningNumber)).isEqualTo(hit);
     }
