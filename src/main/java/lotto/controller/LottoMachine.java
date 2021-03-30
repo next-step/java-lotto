@@ -9,24 +9,14 @@ import java.util.List;
 public class LottoMachine {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int INVALID_REQUEST_COUNT = 0;
 
     private Lottos lottos;
     private int autoCount;
     private int manualCount;
 
-    public void purchaseManualLotto(int manualCount, List<Lotto> lottos) {
-        this.manualCount = manualCount;
-        this.lottos = new Lottos(lottos);
-    }
-
-    public void purchaseAutoLotto(Money money) {
-        int lottoCount = money.getLottoCount();
-        this.autoCount = lottoCount - this.manualCount;
-        this.lottos.addLotto(LottoGenerator.getLotto(autoCount));
-    }
-
     public LottoCountDto getPurchaseLottoCount() {
-        return new LottoCountDto(manualCount, autoCount);
+        return LottoCountDto.of(manualCount, autoCount);
     }
 
     public LottosDto getLottos() {
@@ -37,4 +27,13 @@ public class LottoMachine {
         return lottos.getResult(winingLotto);
     }
 
+    public void purchaseLotto(Money money, List<Lotto> manualLottos) {
+        int lottoCount = money.getLottoCount();
+        this.manualCount = manualLottos.size();
+        this.autoCount = lottoCount - this.manualCount;
+        if (this.autoCount < INVALID_REQUEST_COUNT) {
+            throw new IllegalArgumentException("금액보다 초과한 매수를 구매할 수 없습니다");
+        }
+        this.lottos = new Lottos(manualLottos, LottoGenerator.getLotto(autoCount));
+    }
 }

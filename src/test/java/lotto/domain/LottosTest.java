@@ -14,14 +14,14 @@ public class LottosTest {
     @Test
     void lottosCreatedTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (int i  = 1; i <= 6; i++) {
+        for (int i = 1; i <= 6; i++) {
             lottoNumberList.add(new LottoNumber(i));
         }
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 1; i <=5 ; i++) {
+        for (int i = 1; i <= 5; i++) {
             lottos.add(new Lotto(lottoNumberList));
         }
-        Lottos lottos1 = new Lottos(lottos);
+        Lottos lottos1 = new Lottos(new ArrayList<>(), lottos);
         assertThat(lottos1.lottoCount()).isEqualTo(5);
     }
 }
