@@ -21,12 +21,12 @@ public class LastWeekWinnerNumber {
 		return (int)lotto.getGameNumberList()
 			.stream()
 			.filter(
-				lottoNumber -> winnerNumber.getGameNumberList().contains(lottoNumber))
+				lottoNumber -> winnerNumber.hasContain(lottoNumber))
 			.count();
 	}
 
 	public boolean getMatchBonusCount(Lotto lotto) {
-		return lotto.getGameNumberList().contains(bonusNumber);
+		return lotto.hasContain(bonusNumber);
 	}
 
 	private void validateBonusNumber(String inputNumber, LottoNumber bonusNumber) {

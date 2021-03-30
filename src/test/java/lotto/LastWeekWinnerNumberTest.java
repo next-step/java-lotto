@@ -60,7 +60,7 @@ public class LastWeekWinnerNumberTest {
 	}
 
 	@Test
-	@DisplayName("보너스 숫자 포함 여 테스트")
+	@DisplayName("보너스 숫자 포함 여부 테스트")
 	void matchBonusNumberTest() {
 		LastWeekWinnerNumber lastWeekWinnerNumber = new LastWeekWinnerNumber("1,2,3,4,5,45", new LottoNumber(33));
 		Lotto lotto = new Lotto(() -> {
@@ -77,6 +77,24 @@ public class LastWeekWinnerNumberTest {
 		boolean matchBonusCount = lastWeekWinnerNumber.getMatchBonusCount(lotto);
 		assertThat(matchCount).isEqualTo(5);
 		assertThat(matchBonusCount).isEqualTo(true);
+	}
+
+	@Test
+	@DisplayName("숫자 포함 여부 메서드 테스트")
+	void hasContainTest() {
+		Lotto lotto = new Lotto(() -> {
+			List<LottoNumber> gameNumberList = new ArrayList<>();
+			gameNumberList.add(new LottoNumber(1));
+			gameNumberList.add(new LottoNumber(2));
+			gameNumberList.add(new LottoNumber(3));
+			gameNumberList.add(new LottoNumber(4));
+			gameNumberList.add(new LottoNumber(5));
+			gameNumberList.add(new LottoNumber(33));
+			return gameNumberList;
+		});
+
+		assertThat(lotto.hasContain(new LottoNumber(1))).isEqualTo(true);
+		assertThat(lotto.hasContain(new LottoNumber(6))).isEqualTo(false);
 	}
 
 	@Test
