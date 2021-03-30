@@ -26,7 +26,7 @@ public class LottoController {
     }
 
     private ResponseWinningDTO exportResponseWinningDTO(Lottos lottos, int purchaseAmount) {
-        WinningNumber winningNumber = new WinningNumber(InputView.inputLastWeekWinningNumber());
+        WinningNumber winningNumber = new WinningNumber(InputView.inputLastWeekWinningNumber(), InputView.inputLastWeekBonusNumber());
         Hit hit = lottos.getWinnerStatistics(winningNumber);
         double yield = Yield.calculateYield(purchaseAmount, hit.getTotalWinningAmount());
 

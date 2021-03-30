@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -27,8 +26,14 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isMatchBonus(WinningNumber winningNumber) {
+        return lotto.stream()
+                .anyMatch(winningNumber::isMatchBonus);
+    }
+
     public List<Integer> getLottoNumbers() {
         return lotto;
     }
+
 
 }

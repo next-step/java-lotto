@@ -25,22 +25,23 @@ public class Lottos {
         return new Lottos(list);
     }
 
+    private static int getLottoPurchaseCount(int price) {
+        return price / Lotto.PRICE_OF_A_PIECE_OF_LOTTO;
+    }
+
     public Hit getWinnerStatistics(WinningNumber winningNumber) {
         Hit hit = new Hit();
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.getMatchCount(winningNumber);
-            hit.hittingLottoStatistics(matchCount);
+            boolean isMatchBonus = lotto.isMatchBonus(winningNumber);
+            hit.hittingLottoStatistics(matchCount, isMatchBonus);
         }
         return hit;
     }
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    private static int getLottoPurchaseCount(int price) {
-        return price / Lotto.PRICE_OF_A_PIECE_OF_LOTTO;
     }
 
     public int getSize() {
