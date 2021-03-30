@@ -10,11 +10,15 @@ public final class WinningLotto {
   private final LottoNumber bonusNumber;
 
   public WinningLotto(Lotto lastWinningLotto, LottoNumber bonusNumber) {
+    validateWinningLotto(lastWinningLotto, bonusNumber);
+    this.lastWinningLotto = lastWinningLotto;
+    this.bonusNumber = bonusNumber;
+  }
+
+  private void validateWinningLotto(Lotto lastWinningLotto, LottoNumber bonusNumber) {
     if (lastWinningLotto.contains(bonusNumber)) {
       throw new IllegalArgumentException(WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
     }
-    this.lastWinningLotto = lastWinningLotto;
-    this.bonusNumber = bonusNumber;
   }
 
   public Lotto getLastWinningLotto() {
@@ -34,8 +38,8 @@ public final class WinningLotto {
       return false;
     }
     WinningLotto that = (WinningLotto) o;
-    return Objects.equals(lastWinningLotto, that.lastWinningLotto) && Objects
-        .equals(bonusNumber, that.bonusNumber);
+    return Objects.equals(lastWinningLotto, that.lastWinningLotto) &&
+        Objects.equals(bonusNumber, that.bonusNumber);
   }
 
   @Override
