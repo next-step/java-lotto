@@ -34,9 +34,9 @@ public enum GradeEnum {
       return true;
     }
     if(isMatchBonus) {
-      return gradeEnum == gradeEnum.SECOND;
+      return gradeEnum == GradeEnum.SECOND;
     }
-    return gradeEnum == gradeEnum.THIRD;
+    return gradeEnum == GradeEnum.THIRD;
   }
 
   public int prize() {
