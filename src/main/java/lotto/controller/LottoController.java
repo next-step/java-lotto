@@ -21,10 +21,10 @@ public class LottoController {
     }
 
     public void run() {
-        ResultView.printLottos(lottos);                                                     // 로또 출력
-        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto());                         // 당첨 번호 입력
-        lottoStatistics.makeStatisticsResult(lottos, prizeLotto);                           // 당첨 통계용 데이터 생성
-        ResultView.printStatistics(lottoStatistics);                                        // 당첨 통계 출력
-        ResultView.printRevenueRate(lottoStatistics.getRevenueRate(lottos, prizeLotto));    // 수익률 출력
+        ResultView.printLottos(lottos);                                                             // 로또 출력
+        Lotto prizeLotto = Lotto.from(InputView.inputPrizeLotto(), InputView.inputBonusNumber());   // 당첨 번호 입력
+        lottoStatistics.makeStatisticsResult(lottos, prizeLotto);                                   // 당첨 통계용 데이터 생성
+        ResultView.printStatistics(lottoStatistics);                                                // 당첨 통계 출력
+        ResultView.printRevenueRate(lottoStatistics.getRevenueRate(lottos, prizeLotto));            // 수익률 출력
     }
 }

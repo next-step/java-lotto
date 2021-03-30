@@ -26,4 +26,10 @@ public class InputView {
                 .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        return bonusNumber;
+    }
 }
