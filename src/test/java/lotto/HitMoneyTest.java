@@ -11,6 +11,6 @@ public class HitMoneyTest {
     @Test
     public void hitMoney() {
         HitMoney hitMoney = new HitMoney(5000);
-        assertThat(hitMoney.toString()).isEqualTo("5000");
+        assertThat(hitMoney).isEqualTo(new HitMoney(5000));
     }
 }
