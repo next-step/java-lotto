@@ -21,12 +21,13 @@ public final class WinningLotto {
     }
   }
 
-  public Lotto getLastWinningLotto() {
-    return lastWinningLotto;
-  }
-
-  public LottoNumber getBonusNumber() {
-    return bonusNumber;
+  public LottoMatch compareLotto(Lotto lotto) {
+    int matchCount = lastWinningLotto.countMatchNumbers(lotto);
+    boolean isBonusNumberMatch = false;
+    if (matchCount == Rank.FIVE.getMatchCount()) {
+      isBonusNumberMatch = lotto.contains(bonusNumber);
+    }
+    return new LottoMatch(matchCount, isBonusNumberMatch);
   }
 
   @Override

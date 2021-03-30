@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.Rank.FIVE_BONUS;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -40,19 +38,14 @@ public final class LottoNumbers {
     return lottoNumbers.size();
   }
 
-  public Match compare(LottoNumbers other, LottoNumber bonusNumber) {
+  public int countMatchNumbers(LottoNumbers other) {
     int matchCount = 0;
-    boolean bonusMatch = false;
 
     for (LottoNumber lottoNumber : other.lottoNumbers) {
       matchCount += countMatchNumber(lottoNumber);
     }
 
-    if (matchCount == FIVE_BONUS.getMatchCount()) {
-      bonusMatch = lottoNumbers.contains(bonusNumber);
-    }
-
-    return new Match(matchCount, bonusMatch);
+    return matchCount;
   }
 
   private int countMatchNumber(LottoNumber lottoNumber) {

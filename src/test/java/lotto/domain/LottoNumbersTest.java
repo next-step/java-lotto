@@ -27,10 +27,8 @@ class LottoNumbersTest {
 
   static Stream<Arguments> comparingSource() {
     return Stream.of(
-        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9", "10"},
-            LottoNumber.valueOf("7"), 2),
-        arguments(new String[]{"45", "44", "43", "42", "41", "40"}, new String[]{"1", "2", "3", "4", "5", "6"},
-            LottoNumber.valueOf("7"), 0)
+        arguments(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"2", "5", "7", "8", "9", "10"}, 2),
+        arguments(new String[]{"45", "44", "43", "42", "41", "40"}, new String[]{"1", "2", "3", "4", "5", "6"}, 0)
     );
   }
 
@@ -76,16 +74,16 @@ class LottoNumbersTest {
   @ParameterizedTest
   @DisplayName("당첨번호와 비교해 일치한 갯수를 반환한다.")
   @MethodSource("comparingSource")
-  void compare(String[] myNumbers, String[] winningNumbers, LottoNumber bonusNumber, int expectedCount) {
+  void compare(String[] myNumbers, String[] winningNumbers, int expectedCount) {
     // given
     LottoNumbers myLottoNumbers = new LottoNumbers(myNumbers);
     LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
 
     // when
-    Match match = myLottoNumbers.compare(winningLottoNumbers, bonusNumber);
+    int matchCount = myLottoNumbers.countMatchNumbers(winningLottoNumbers);
 
     // then
-    assertThat(match.getMatchCount()).isEqualTo(expectedCount);
+    assertThat(matchCount).isEqualTo(expectedCount);
   }
 
   @Test

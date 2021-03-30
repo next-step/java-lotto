@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public final class Match {
+public final class LottoMatch {
 
   private final int matchCount;
   private final boolean isBonusNumberMatch;
 
-  public Match(int matchCount, boolean isBonusNumberMatch) {
+  public LottoMatch(int matchCount, boolean isBonusNumberMatch) {
     this.matchCount = matchCount;
     this.isBonusNumberMatch = isBonusNumberMatch;
   }
@@ -25,11 +25,11 @@ public final class Match {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Match)) {
+    if (!(o instanceof LottoMatch)) {
       return false;
     }
-    Match match = (Match) o;
-    return getMatchCount() == match.getMatchCount() && isBonusNumberMatch == match.isBonusNumberMatch;
+    LottoMatch lottoMatch = (LottoMatch) o;
+    return getMatchCount() == lottoMatch.getMatchCount() && isBonusNumberMatch == lottoMatch.isBonusNumberMatch;
   }
 
   @Override

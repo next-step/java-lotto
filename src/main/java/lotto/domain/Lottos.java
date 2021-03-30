@@ -31,11 +31,11 @@ public final class Lottos {
     return Collections.unmodifiableList(lottos);
   }
 
-  public List<Match> compare(final Lotto winningLotto, LottoNumber bonusNumber) {
-    List<Match> list = new ArrayList<>();
+  public List<LottoMatch> compare(WinningLotto winningLotto) {
+    List<LottoMatch> list = new ArrayList<>();
 
     for (Lotto lotto : lottos) {
-      list.add(lotto.compare(winningLotto, bonusNumber));
+      list.add(winningLotto.compareLotto(lotto));
     }
     return list;
   }
