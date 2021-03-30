@@ -2,24 +2,38 @@ package step2;
 
 import step2.domain.Lotto;
 import step2.domain.User;
+import step2.view.InputView;
+import step2.view.ResultView;
 
 import java.util.List;
 
 public class AutoLottoController {
 
+    InputView inputView;
+    ResultView resultView;
     User user;
     Lotto defaultLotto;
 
     public AutoLottoController() {
+        inputView = new InputView();
+        resultView = new ResultView();
         user = new User();
         defaultLotto = new Lotto();
     }
 
     public void run() {
+        int lottoCount = inputView.inputPrize();
+        resultView.displayLottoCount(lottoCount);
 
+        // 돈
+        buyLotto(lottoCount);
 
-        this.buyLotto(5);
+        displayLotto();
+        // 당첨 통계
+    }
 
+    private void displayLotto() {
+        resultView.displayLotto(user.getLottoList());
     }
 
     private void buyLotto(int count) {

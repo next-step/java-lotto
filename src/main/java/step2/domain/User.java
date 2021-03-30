@@ -11,6 +11,9 @@ public class User {
         this.lottoList = new ArrayList<>();
     }
 
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 
     public void buyLotto(Lotto defaultLotto) {
         lottoList.add(defaultLotto.buyLotto());

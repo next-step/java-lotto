@@ -43,15 +43,16 @@ public class Lotto {
         return list;
     }
 
-    public void display() {
-       System.out.println(Arrays.toString(lottoNumber.toArray()));
-    }
-
     public int lottoSize(){
         return lottoNumber.size();
     }
 
     public int numberConfirm(Integer number){
         return lottoNumber.contains(number) ? 1 : 0 ;
+    }
+
+
+    public String displayLottoNumber() {
+        return Arrays.toString(lottoNumber.toArray());
     }
 }
