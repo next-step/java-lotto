@@ -7,20 +7,25 @@ import java.util.Objects;
 public final class Money {
 
     private static final int ZERO = 0;
-    private final Integer money;
+
+    private final int money;
 
     private Money(int money) {
-        if (isOutOfBounds(money)) {
-            throw new InvalidNumberInputException();
-        }
-        this.money = Integer.valueOf(money);
+        this.money = money;
     }
 
     public static final Money valueOf(int money) {
+        validate(money);
         return new Money(money);
     }
 
-    private final boolean isOutOfBounds(int money) {
+    private static final void validate(int money) {
+        if (isOutOfBounds(money)) {
+            throw new InvalidNumberInputException();
+        }
+    }
+
+    private static final boolean isOutOfBounds(int money) {
         return money < ZERO;
     }
 

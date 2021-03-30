@@ -2,11 +2,13 @@ package step2.domain.generator;
 
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
+import step2.exception.LottoShuffleNullPointerException;
 import step2.strategy.LottoShuffleStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class LottoGenerator {
 
@@ -20,7 +22,14 @@ public final class LottoGenerator {
     }
 
     public static final LottoGenerator of(LottoShuffleStrategy lottoShuffleStrategy) {
+        validate(lottoShuffleStrategy);
         return new LottoGenerator(lottoShuffleStrategy);
+    }
+
+    private static void validate(LottoShuffleStrategy lottoShuffleStrategy) {
+        if(Objects.isNull(lottoShuffleStrategy)){
+            throw new LottoShuffleNullPointerException();
+        }
     }
 
     public final Lotto generateLotto() {

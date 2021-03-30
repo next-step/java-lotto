@@ -6,8 +6,13 @@ import step2.dto.LottoCreationRequestDto;
 public final class LottoGenerateCount {
 
     private final static int DIVIDE_STANDARD = 1000;
-    private final int FINISH = 0;
+    private final static int FINISH = 0;
+
     private int count;
+
+    private LottoGenerateCount(int money) {
+        this.count = (money / DIVIDE_STANDARD);
+    }
 
     public static final LottoGenerateCount newInstance(LottoCreationRequestDto requestDto) {
         return newInstance(requestDto.getMoney());
@@ -19,10 +24,6 @@ public final class LottoGenerateCount {
 
     public static final LottoGenerateCount newInstance(int money) {
         return new LottoGenerateCount(money);
-    }
-
-    private LottoGenerateCount(int money) {
-        this.count = (money / DIVIDE_STANDARD);
     }
 
     public final boolean hasNext() {

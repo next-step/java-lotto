@@ -49,9 +49,12 @@ public final class ResultView {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         return lottoNumbers
                 .stream()
-                .map(lottoNumber -> lottoNumber.getLottoNumber())
-                .map(String::valueOf)
+                .map(ResultView::lottoNumberToString)
                 .collect(Collectors.joining(", ", "[", "]\n"));
+    }
+
+    private static String lottoNumberToString(LottoNumber lottoNumber) {
+        return String.valueOf(lottoNumber.getLottoNumber());
     }
 
     private void stringBuilderReset(){

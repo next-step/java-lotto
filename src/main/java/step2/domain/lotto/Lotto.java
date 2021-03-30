@@ -10,13 +10,12 @@ import java.util.stream.Stream;
 
 public final class Lotto {
 
-    private static final String COMMA_BLANK = ", ";
+    private static final String COMMA_WITH_BLANK = ", ";
     private static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -25,16 +24,17 @@ public final class Lotto {
     }
 
     public static final Lotto of(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
     private static final List<LottoNumber> toLottoNumberList(String sentence) {
-        return Stream.of(sentence.trim().split(COMMA_BLANK))
+        return Stream.of(sentence.trim().split(COMMA_WITH_BLANK))
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
-    private final void validate(List<LottoNumber> lottoNumbers) {
+    private static final void validate(List<LottoNumber> lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             throw new ListNullPointerException();
         }
@@ -43,7 +43,7 @@ public final class Lotto {
         }
     }
 
-    private final boolean isSizeMissNatch(List<LottoNumber> lottoNumbers) {
+    private static final boolean isSizeMissNatch(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_SIZE;
     }
 

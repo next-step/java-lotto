@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGeneratorTest {
 
@@ -41,6 +42,16 @@ class LottoGeneratorTest {
 
         // then
         assertThat(lottoGenerator).isNotNull();
+    }
+
+    @DisplayName("LottoNumbersGenerator 인스턴스에 null 주입시 예외처리 테스트")
+    @Test
+    void 검증() {
+        // when
+        assertThatThrownBy(()-> {
+            LottoGenerator.of(null);
+        }).isInstanceOf(LottoShuffleStrategy.class)
+                .hasMessageContaining("셔플 전략이 null 입니다.");
     }
 
     @DisplayName("LottoNumbersGenerator 인스턴스가 Lotto 인스턴스를 생성하고 반환하는지 테스트")

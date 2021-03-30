@@ -1,13 +1,19 @@
 package step2.domain.lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.InvalidNumberInputException;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
+
 
     @DisplayName("LottoNumber 인스턴스 생성 여부 테스트")
     @Test
@@ -66,13 +72,29 @@ class LottoNumberTest {
 
     @DisplayName("LottoNumber 인스턴스가 소유한 값을 반환하는지에 대한 테스트")
     @Test
-    void 반환() {
+    void 반환_단일값() {
         // given
         int expected = 1;
 
         // when
         LottoNumber firstLottoNumber = LottoNumber.valueOf(expected);
         int actual = firstLottoNumber.getLottoNumber();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("LottoNumber 인스턴스가 모든 로또번호를 반환하는지에 대한 테스트")
+    @Test
+    void 반환_모든_로또번호() {
+        // given
+        List<LottoNumber> expected = IntStream
+                .range(1, 46)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        // when
+        List<LottoNumber> actual = LottoNumber.getAllLottoNumber();
 
         // then
         assertThat(actual).isEqualTo(expected);

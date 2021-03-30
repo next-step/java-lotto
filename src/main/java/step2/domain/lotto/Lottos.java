@@ -11,7 +11,6 @@ public final class Lottos {
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
-        validate(lottos);
         this.lottos = lottos;
     }
 
@@ -19,11 +18,12 @@ public final class Lottos {
         return new Lottos(new ArrayList<>());
     }
 
-    public final static Lottos newInstance(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+    public final static Lottos newInstance(List<Lotto> lottos) {
+        validate(lottos);
+        return new Lottos(lottos);
     }
 
-    private void validate(List<Lotto> lottos) {
+    private static final void validate(List<Lotto> lottos) {
         if(Objects.isNull(lottos)){
             throw new ListNullPointerException();
         }
