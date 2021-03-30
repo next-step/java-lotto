@@ -13,11 +13,12 @@
       - 45를 넘어가는 숫자가 없는지
     - public int number();
       - field 값 반환
+    - public boolean isMatch(Number number)
 - ## Lotto.java
   - field
     - List<Integer> lotto;
   - constructor
-    - Lotto(List<Integer> numbers);
+    - Lotto(List<Integer> lotto);
       - 수동생성
     - Lotto(MakeNumber makeNumber);
       - 자동생성, random 6 자리 생성
@@ -36,6 +37,8 @@
       - 당첨번호와 맞춰본후 등수를 return;
     - List<Number> lotto()
       - 불변객체로 lotto 반환
+    - public boolean isMatchBonus(Number bonus);
+      - 보너스 숫자와 match 되는 값이 있을경우 true
 - ## Lottos.java
   - field
     - List<Lotto> lottos;
@@ -49,10 +52,12 @@
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
 - ## OutCome.java
+
   - field
   - constructor
-    - public OutCome(int money, Lottos lottos, Lotto winningNumber);
+    - public OutCome(int money, Lottos lottos, Lotto winningNumber, Number bonus);
   - method
-    - List<Integer> match(List<Number winningNumber>);
-    - Map<Integer, Integer> statistic();
+    - private GradeEnum grade(Lotto lotto);
+    - List<GradeEnum> match();
+    - Map<GradeEnum, Integer> statistic();
     - float profit(int income);
