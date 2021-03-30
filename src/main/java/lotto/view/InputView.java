@@ -11,6 +11,7 @@ public class InputView {
 
   private static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
   private static final String INPUT_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+  private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
   private final Scanner scanner = new Scanner(System.in);
 
   public Money inputMoney() {
@@ -25,5 +26,10 @@ public class InputView {
     return Arrays.stream(winNumberString.split(","))
         .map(number -> new LottoBall(Integer.parseInt(number)))
         .collect(Collectors.toList());
+  }
+
+  public LottoBall inputBonusBall() {
+    System.out.println(INPUT_BONUS_BALL);
+    return new LottoBall(scanner.nextInt());
   }
 }

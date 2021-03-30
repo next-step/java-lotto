@@ -29,6 +29,8 @@ public class LottoGameController {
     resultView.printBuyingLottoGame(lottoGame);
 
     LottoBalls winLottoBalls = new LottoBalls(inputView.inputWinNumbers());
+    LottoBall bonusBall = inputView.inputBonusBall();
+
     Statistics statistics = lottoGame.countMatchLottoNumber(winLottoBalls);
 
     resultView.printLottoResult(money, statistics);
