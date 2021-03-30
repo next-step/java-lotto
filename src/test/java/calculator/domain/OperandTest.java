@@ -1,7 +1,5 @@
-package Calculator.domain;
+package calculator.domain;
 
-import Calculator.domain.Operand;
-import Calculator.domain.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

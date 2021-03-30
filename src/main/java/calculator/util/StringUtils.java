@@ -1,9 +1,7 @@
 /*
 * 문자열의 확인 및 가공을 담당하는 클래스
 * */
-package Calculator.util;
-
-import Calculator.domain.Delimiter;
+package calculator.util;
 
 import java.util.Arrays;
 
@@ -31,10 +29,6 @@ public class StringUtils {
         return Arrays.stream(strOperands)
                 .mapToInt(Integer::parseInt)
                 .toArray();
-    }
-
-    public static String[] splitWithDelimiter(String input, Delimiter delimiter){
-        return input.split(Mapper.delimiterToString(delimiter));
     }
 
 

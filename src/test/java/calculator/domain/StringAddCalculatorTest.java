@@ -1,12 +1,8 @@
-package Calculator.domain;
+package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -40,23 +36,7 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(predict);
     }
 
-    @Test
-    void intArrToOperandTest() {
-        //given
-        int[] arr = {1, 2, 3};
-        List<Operand> operandList = new ArrayList<>();
-        Arrays.stream(arr).forEach(Integer -> {
-            operandList.add(new Operand(Integer));
-        });
-        Operands predict = new Operands(operandList);
 
-        //when
-        Operands result = StringAddCalculator.intArrToOperands(arr);
-
-
-        //then
-        assertThat(result).isEqualTo(predict);
-    }
 
     @ParameterizedTest
     @CsvSource(value = {"1=1", "1,2=3", "1,2:3=6"}, delimiter = '=')

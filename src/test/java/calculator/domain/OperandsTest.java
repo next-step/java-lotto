@@ -1,12 +1,10 @@
-package Calculator.domain;
+package calculator.domain;
 
-import Calculator.domain.Operand;
-import Calculator.domain.Operands;
-import Calculator.domain.Operator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,5 +45,23 @@ public class OperandsTest {
 
         //then
         assertThat(result).isEqualTo(predictOp);
+    }
+
+    @Test
+    void create_intArr() {
+        //given
+        int[] arr = {1, 2, 3};
+        List<Operand> operandList = new ArrayList<>();
+        Arrays.stream(arr).forEach(Integer -> {
+            operandList.add(new Operand(Integer));
+        });
+        Operands predict = new Operands(operandList);
+
+        //when
+        Operands result = new Operands(arr);
+
+
+        //then
+        assertThat(result).isEqualTo(predict);
     }
 }

@@ -1,7 +1,7 @@
 /*
 * 연산자를 반환하는 클래스
 * */
-package Calculator.domain;
+package calculator.domain;
 
 import java.util.function.BinaryOperator;
 
