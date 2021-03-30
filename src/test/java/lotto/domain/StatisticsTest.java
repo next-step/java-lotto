@@ -17,7 +17,7 @@ public class StatisticsTest {
 
     @BeforeEach
     public void setWinningResults() {
-        winningResults = Arrays.asList(Rank.FIFTH, Rank.OTHER, Rank.FIFTH);
+        winningResults = Arrays.asList(Rank.FIFTH, Rank.OTHER, Rank.FIFTH, Rank.SECOND);
         statistics = new Statistics(winningResults);
     }
 
@@ -26,6 +26,7 @@ public class StatisticsTest {
         // given
         Map<Rank, Integer> expectStatistics = new HashMap<>();
         expectStatistics.put(Rank.FIRST, 0);
+        expectStatistics.put(Rank.SECOND, 1);
         expectStatistics.put(Rank.THIRD, 0);
         expectStatistics.put(Rank.FOURTH, 0);
         expectStatistics.put(Rank.FIFTH, 2);
@@ -42,7 +43,7 @@ public class StatisticsTest {
     public void yield() {
         // given
         int purchaseAmount = 3000;
-        double expectYield = (double) 10000 / purchaseAmount;
+        double expectYield = (double) 30010000 / purchaseAmount;
 
         // when
         double resultYield = statistics.yield(purchaseAmount);

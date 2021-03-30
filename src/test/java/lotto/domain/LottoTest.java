@@ -61,7 +61,7 @@ public class LottoTest {
         int expectSize = 14;
 
         // when
-        int resultSize = lottos.purchaseLotto();
+        int resultSize = lottos.size();
 
         // then
         assertThat(resultSize).isEqualTo(expectSize);

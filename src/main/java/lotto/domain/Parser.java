@@ -9,4 +9,5 @@ public class Parser {
                 .map(v -> Integer.parseInt(v))
                 .collect(Collectors.toList());
     }
+    
 }

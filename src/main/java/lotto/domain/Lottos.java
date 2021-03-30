@@ -1,21 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
-    private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottos;
-    private final int purchaseLotto;
 
     public Lottos(int purchaseAmount) {
-        this.purchaseLotto = purchaseAmount / LOTTO_PRICE;
-        this.lottos = generate();
+        this(generate(purchaseAmount / Lotto.lottoPrice()));
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.purchaseLotto = 0;
         this.lottos = lottos;
     }
 
@@ -23,20 +20,23 @@ public class Lottos {
         return lottos;
     }
 
-    public int purchaseLotto() {
-        return purchaseLotto;
+    public int size() {
+        return lottos.size();
     }
 
     public List<Rank> winningResults(WinningNumber winningNumber) {
-        List<Rank> result = new ArrayList<>();
-        this.lottos.forEach(lotto -> result.add(lotto.winningResult(winningNumber)));
-        return result;
+        return lottos.stream()
+                .map(lotto -> lotto.winningResult(winningNumber))
+                .collect(Collectors.toList());
     }
 
-    private List<Lotto> generate() {
-        List<Lotto> result = new ArrayList<>();
-        IntStream.rangeClosed(1, this.purchaseLotto)
-                .forEach(i -> result.add(new Lotto()));
-        return result;
+    private static List<Lotto> generate(int countOfLotto) {
+        return IntStream.rangeClosed(1, countOfLotto)
+                .mapToObj(i -> new Lotto())
+                .collect(Collectors.toList());
+    }
+
+    public Stream<Lotto> stream() {
+        return this.lottos.stream();
     }
 }
