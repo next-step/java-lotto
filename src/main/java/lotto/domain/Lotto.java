@@ -32,11 +32,22 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public int getMatchCount(final Lotto prizeLotto) {
+    public Rank getRank(final Lotto prizeLotto, final Number bonusNumber) {
+        int matchCount = getMatchCount(prizeLotto);
+        boolean matchBonus = matchBonus(bonusNumber);
+        return Rank.valueOf(matchCount, matchBonus);
+    }
+
+    private int getMatchCount(final Lotto prizeLotto) {
         return (int) prizeLotto.getNumbers()
                 .stream()
                 .filter(number -> this.lotto.contains(number))
                 .count();
+    }
+
+    private boolean matchBonus(final Number bonusNumber) {
+        return lotto.stream()
+                .anyMatch(number -> number.equals(bonusNumber));
     }
 
     public Set<Number> getNumbers() {
