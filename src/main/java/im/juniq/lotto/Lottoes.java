@@ -35,28 +35,28 @@ public class Lottoes implements Iterable<Lotto>{
 		return lottoes.size();
 	}
 
-	public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers, int bonusNumber) {
+	public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers) {
 		int countMatchedLotto = 0;
 		for (Lotto lotto : lottoes) {
-			countMatchedLotto += countMatchedLottoes(winning, lotto, winningNumbers, bonusNumber);
+			countMatchedLotto += countMatchedLottoes(winning, lotto, winningNumbers);
 		}
 		return countMatchedLotto;
 	}
 
-	private int countMatchedLottoes(Winning winning, Lotto lotto, WinningNumbers winningNumbers, int bonusNumber) {
-		if (lotto.winning(winningNumbers, bonusNumber) == winning) {
+	private int countMatchedLottoes(Winning winning, Lotto lotto, WinningNumbers winningNumbers) {
+		if (lotto.winning(winningNumbers) == winning) {
 			return 1;
 		}
 		return 0;
 	}
 
-	public double yield(WinningNumbers winningNumbers, Price price, int bonusNumber) {
+	public double yield(WinningNumbers winningNumbers, Price price) {
 		double winningAmount = 0;
-		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(Winning.FIRST, winningNumbers, bonusNumber);
-		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(Winning.SECOND, winningNumbers, bonusNumber);
-		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(Winning.THIRD, winningNumbers, bonusNumber);
-		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(Winning.FOURTH, winningNumbers, bonusNumber);
-		winningAmount += Winning.FIFTH.amount() * numberOfLottoesMatched(Winning.FIFTH, winningNumbers, bonusNumber);
+		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(Winning.FIRST, winningNumbers);
+		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(Winning.SECOND, winningNumbers);
+		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(Winning.THIRD, winningNumbers);
+		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(Winning.FOURTH, winningNumbers);
+		winningAmount += Winning.FIFTH.amount() * numberOfLottoesMatched(Winning.FIFTH, winningNumbers);
 
 		return price.yield(winningAmount);
 	}

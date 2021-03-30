@@ -31,8 +31,13 @@ public enum Winning {
 
 	public static Winning findByMatchedCount(int numberOfMatchedWinningNumber, boolean matchedBonus) {
 		for (Winning winning : Winning.values()) {
-			if (winning.matchedCount == numberOfMatchedWinningNumber && winning.matchedBonus == matchedBonus) {
-				return winning;
+			if (winning.matchedCount == numberOfMatchedWinningNumber) {
+				if (winning.matchedBonus && matchedBonus) {
+					return winning;
+				}
+				if (!winning.matchedBonus) {
+					return winning;
+				}
 			}
 		}
 		return Winning.LOSING;

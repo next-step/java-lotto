@@ -40,8 +40,8 @@ public class Lotto {
 		return results;
 	}
 
-	public Winning winning(WinningNumbers winningNumbers, int bonusNumber) {
-		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers), numbers.contains(bonusNumber));
+	public Winning winning(WinningNumbers winningNumbers) {
+		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers), matchedBonusNumber(winningNumbers));
 	}
 
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
@@ -54,6 +54,21 @@ public class Lotto {
 
 	private int countMatched(WinningNumbers winningNumbers, int number) {
 		if (winningNumbers.existent(number)) {
+			return 1;
+		}
+		return 0;
+	}
+
+	private boolean matchedBonusNumber(WinningNumbers winningNumbers) {
+		int matchedCount = 0;
+		for (int number : numbers) {
+			matchedCount += countMatchedBonusNumber(winningNumbers, number);
+		}
+		return matchedCount != 0;
+	}
+
+	private int countMatchedBonusNumber(WinningNumbers winningNumbers, int number) {
+		if (winningNumbers.matchedBonusNumber(number)) {
 			return 1;
 		}
 		return 0;

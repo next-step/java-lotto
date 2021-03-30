@@ -3,6 +3,7 @@ package im.juniq.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -34,18 +35,18 @@ class LottoesTest {
 	void countMatchedLottoes() {
 		Lottoes lottoes = new Lottoes(2, new NoShuffleStrategy());
 
-		assertThat(lottoes.numberOfLottoesMatched(Winning.FIFTH, new WinningNumbers(1, 2, 3, 7, 8, 9), 10)).isEqualTo(2);
-		assertThat(lottoes.numberOfLottoesMatched(Winning.FOURTH, new WinningNumbers(1, 2, 3, 4, 8, 9), 10)).isEqualTo(2);
+		assertThat(lottoes.numberOfLottoesMatched(Winning.FIFTH, new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 10))).isEqualTo(2);
+		assertThat(lottoes.numberOfLottoesMatched(Winning.FOURTH, new WinningNumbers(Arrays.asList(1, 2, 3, 4, 8, 9), 10))).isEqualTo(2);
 	}
 
 	@Test
 	void calculateYield() {
 		Lottoes lottoes = new Lottoes(1, new NoShuffleStrategy());
 
-		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 5, 6), new Price(1000), 10)).isEqualTo(2000000);
-		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 5, 7), new Price(1000), 6)).isEqualTo(30000);
-		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 5, 7), new Price(1000), 10)).isEqualTo(1500);
-		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 4, 7, 8), new Price(1000), 10)).isEqualTo(50);
-		assertThat(lottoes.yield(new WinningNumbers(1, 2, 3, 7, 8, 9), new Price(1000), 10)).isEqualTo(5);
+		assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7), new Price(1000))).isEqualTo(2000000);
+		assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 6), new Price(1000))).isEqualTo(30000);
+		assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 8), new Price(1000))).isEqualTo(1500);
+		assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 7, 8), 6), new Price(1000))).isEqualTo(50);
+		assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 6), new Price(1000))).isEqualTo(5);
 	}
 }

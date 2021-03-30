@@ -19,10 +19,6 @@ public class WinningNumbers {
 		}
 	}
 
-	public WinningNumbers(Integer... numbers) {
-		winningNumbers.addAll(Arrays.asList(numbers));
-	}
-
 	public boolean existent(int number) {
 		return winningNumbers.contains(number);
 	}
