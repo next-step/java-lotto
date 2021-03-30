@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -10,17 +9,17 @@ public class LottoGame {
     private final Lottos lottos;
     private final LottoBoard lottoBoard;
 
-    private LottoGame(final int lottoAmount) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int lottoCount = LOTTO_INIT_COUNT; lottoCount < lottoAmount; lottoCount++) {
+    private LottoGame(final int lottoAmount, List<Lotto> lottoList) {
+        int size = lottoAmount - lottoList.size();
+        for (int lottoCount = LOTTO_INIT_COUNT; lottoCount < size; lottoCount++) {
             lottoList.add(Lotto.of(lottoGenerator.generateShuffledLotto()));
         }
         this.lottos = Lottos.of(lottoList);
         this.lottoBoard = new LottoBoard();
     }
 
-    public static LottoGame of(final int lottoAmount) {
-        return new LottoGame(lottoAmount);
+    public static LottoGame of(final int lottoAmount, List<Lotto> lottoList) {
+        return new LottoGame(lottoAmount, lottoList);
     }
 
     public Lottos getLottos() {

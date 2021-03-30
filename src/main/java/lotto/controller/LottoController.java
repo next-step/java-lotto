@@ -1,10 +1,13 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoGame;
 import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -12,9 +15,9 @@ public class LottoController {
         LottoBuyer lottoBuyer = LottoBuyer.of(InputView.enterLottoPurchaseAmount());
         ResultView.printPurchaseAmount(lottoBuyer.getLottoQuantity());
 
-        int manualCount = InputView.enterLottoPurchaseManualCount();
+        List<Lotto> lottoList = InputView.enterLottoPurchaseManualCount();
 
-        LottoGame lottoGame = LottoGame.of(lottoBuyer.getLottoQuantity());
+        LottoGame lottoGame = LottoGame.of(lottoBuyer.getLottoQuantity(), lottoList);
         ResultView.printLottos(lottoGame.getLottos());
 
         WinningNumber winningNumber = WinningNumber.of(InputView.enterWinningNumbers(), InputView.enterBonusBall());

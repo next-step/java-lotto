@@ -12,7 +12,7 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"5:5", "10:10", "14:14"}, delimiter = ':')
     void lottoGame_of(int input, int expected) {
-        LottoGame lottoGame = LottoGame.of(input);
+        LottoGame lottoGame = LottoGame.of(input, null);
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
     }
 }
