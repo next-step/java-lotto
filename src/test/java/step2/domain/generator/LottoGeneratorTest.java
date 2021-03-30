@@ -18,7 +18,6 @@ class LottoGeneratorTest {
 
     private List<LottoNumber> testSortLottoNumbers;
     private List<LottoNumber> reverseAndSortLottoNumbers;
-    private LottoGenerateCount lottoGenerateCount;
 
     @BeforeEach
     void setUp() {
@@ -32,15 +31,13 @@ class LottoGeneratorTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        lottoGenerateCount = LottoGenerateCount.newInstance(1000);
     }
 
     @DisplayName("LottoNumbersGenerator 인스턴스 생성 테스트")
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoNumbers -> {
-        });
+        LottoGenerator lottoGenerator = LottoGenerator.of(lottoNumbers -> {});
 
         // then
         assertThat(lottoGenerator).isNotNull();
@@ -50,8 +47,7 @@ class LottoGeneratorTest {
     @Test
     void 반환_Lotto() {
         // given
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoNumbers -> {
-        });
+        LottoGenerator lottoGenerator = LottoGenerator.of(lottoNumbers -> { });
 
         // when
         Lotto lotto = lottoGenerator.generateLotto();
@@ -67,7 +63,7 @@ class LottoGeneratorTest {
         LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
                 -> Collections.sort(lottoNumbers);
 
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
+        LottoGenerator lottoGenerator = LottoGenerator.of(lottoShuffleStrategy);
 
         // when
         Lotto actual = lottoGenerator.generateLotto();
@@ -84,7 +80,7 @@ class LottoGeneratorTest {
         LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
                 -> Collections.reverse(lottoNumbers);
 
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
+        LottoGenerator lottoGenerator = LottoGenerator.of(lottoShuffleStrategy);
 
         // when
         Lotto actual = lottoGenerator.generateLotto();
@@ -94,36 +90,5 @@ class LottoGeneratorTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("LottoNumbersGenerator 인스턴스가 다음에 로또를 생성할 수 있는지 여부를 테스트")
-    @Test
-    void 반환_다음_로또_생성_카운트() {
-        // given
-        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
-                -> Collections.reverse(lottoNumbers);
-
-
-        // when
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
-        boolean actual = lottoGenerator.hasNext();
-
-        // then
-        assertThat(actual).isTrue();
-    }
-
-    @DisplayName("LottoNumbersGenerator 인스턴스가 로또를 생성한 카운트 증가 테스트")
-    @Test
-    void 반환_다음_카운트로_이동() {
-        // given
-        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
-                -> Collections.reverse(lottoNumbers);
-
-        // when
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(lottoGenerateCount, lottoShuffleStrategy);
-        lottoGenerator.next();
-        boolean actual = lottoGenerator.hasNext();
-
-        // then
-        assertThat(actual).isFalse();
-    }
 
 }

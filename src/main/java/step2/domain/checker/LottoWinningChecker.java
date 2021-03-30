@@ -2,7 +2,7 @@ package step2.domain.checker;
 
 import step2.domain.winning.WinningScore;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.domain.winning.WinningScoreBoard;
 import step2.dto.LottoWinningCheckRequestDto;
 import step2.dto.LottoWinningResultResponseDto;
@@ -30,8 +30,8 @@ public final class LottoWinningChecker {
         return new LottoWinningChecker(WinningLotto);
     }
 
-    public final LottoWinningResultResponseDto getLottoWinningResultResponseDto(LottoList lottoList) {
-        List<Lotto> lottos = lottoList.getLottoList();
+    public final LottoWinningResultResponseDto getLottoWinningResultResponseDto(Lottos lottoList) {
+        List<Lotto> lottos = lottoList.getLottos();
         WinningScoreBoard winningScoreBoard = WinningScoreBoard.newInstance(new EnumMap<>(WinningScore.class));
         for(Lotto lotto : lottos) {
             int correctCount = lotto.getCorrectCount(WinningLotto);

@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.request.Money;
 import step2.domain.winning.WinningScore;
@@ -36,8 +36,8 @@ public final class ResultView {
 
     public final void printLottoList(LottoExpressionResponseDto expressionResponseDto) {
         stringBuilderReset();
-        LottoList lottoList = expressionResponseDto.getLottoList();
-        List<Lotto> list = lottoList.getLottoList();
+        Lottos lottos = expressionResponseDto.getLottoList();
+        List<Lotto> list = lottos.getLottos();
         stringBuilder.append(list.size()).append("개를 구매했습니다.").append("\n");
         for (Lotto lotto : list) {
             stringBuilder.append(joinLottoNumbers(lotto));

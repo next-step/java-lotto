@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
 import step2.exception.ListNullPointerException;
 
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoExpressionResponseDtoTest {
 
-    private LottoList testLottoList;
+    private Lottos testLottos;
 
     @BeforeEach
     void setUp() {
@@ -31,7 +31,7 @@ class LottoExpressionResponseDtoTest {
         Lotto testLotto = Lotto.of(testLottoNumbers);
         List<Lotto> testLottos = new ArrayList<>();
         testLottos.add(testLotto);
-        testLottoList = LottoList.newInstance(testLottos);
+        this.testLottos = Lottos.newInstance(testLottos);
     }
 
     @DisplayName("LottoExpressionResponseDto 인스턴스 생성 여부 테스트")
@@ -39,7 +39,7 @@ class LottoExpressionResponseDtoTest {
     void 생성() {
         // when
         LottoExpressionResponseDto responseDto =
-                LottoExpressionResponseDto.newInstance(testLottoList);
+                LottoExpressionResponseDto.newInstance(testLottos);
 
         // then
         assertThat(responseDto).isNotNull();
@@ -49,11 +49,11 @@ class LottoExpressionResponseDtoTest {
     @Test
     void 검증_Null() {
         // given
-        LottoList nullLottoList = null;
+        Lottos nullLottos = null;
 
         // when and then
         assertThatThrownBy(()-> {
-            LottoExpressionResponseDto.newInstance(nullLottoList);
+            LottoExpressionResponseDto.newInstance(nullLottos);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
     }
@@ -63,13 +63,13 @@ class LottoExpressionResponseDtoTest {
     void 반환() {
         // given
         LottoExpressionResponseDto responseDto =
-                LottoExpressionResponseDto.newInstance(testLottoList);
+                LottoExpressionResponseDto.newInstance(testLottos);
 
         // when
-        LottoList actual = responseDto.getLottoList();
+        Lottos actual = responseDto.getLottoList();
 
         // then
-        assertThat(actual).isEqualTo(testLottoList);
+        assertThat(actual).isEqualTo(testLottos);
     }
 
 

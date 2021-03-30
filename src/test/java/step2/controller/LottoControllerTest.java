@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
@@ -21,7 +21,7 @@ class LottoControllerTest {
 
     private LottoCreationRequestDto creationRequestDto;
     private LottoShuffleStrategy lottoShuffleStrategy;
-    private LottoList testLottoList;
+    private Lottos testLottos;
 
     @BeforeEach
     void setUp() {
@@ -32,8 +32,8 @@ class LottoControllerTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        testLottoList = LottoList.newInstance();
-        testLottoList.add(Lotto.of(lottoNumbers));
+        testLottos = Lottos.newInstance();
+        testLottos.add(Lotto.of(lottoNumbers));
     }
 
     @DisplayName("LottoController 인스턴스 생성 여부 테스트")

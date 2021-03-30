@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final List<LottoNumber> CACHE;
+    private static final int START_INDEX = 1;
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 46;
 
@@ -41,6 +42,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public static final List<LottoNumber> getAllLottoNumber() {
+        return CACHE.subList(START_INDEX, END_EXCLUSIVE);
+    }
+
     public final int getLottoNumber() {
         return lottoNumber;
     }
@@ -50,14 +55,13 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
-
 
     @Override
     public int compareTo(LottoNumber o) {

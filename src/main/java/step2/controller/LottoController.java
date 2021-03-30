@@ -1,8 +1,9 @@
 package step2.controller;
 
 import step2.domain.checker.LottoWinningChecker;
+import step2.domain.generator.LottoGenerateCount;
 import step2.domain.generator.LottoGenerator;
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.dto.LottoWinningCheckRequestDto;
 import step2.dto.LottoCreationRequestDto;
 import step2.dto.LottoExpressionResponseDto;
@@ -12,7 +13,7 @@ import step2.strategy.LottoShuffleStrategy;
 
 public final class LottoController {
 
-    private final LottoList lottoList;
+    private final Lottos lottos;
     private final LottoShuffleStrategy strategy;
 
     private LottoController() {
@@ -20,7 +21,7 @@ public final class LottoController {
     }
 
     private LottoController(LottoShuffleStrategy strategy) {
-        this.lottoList = LottoList.newInstance();
+        this.lottos = Lottos.newInstance();
         this.strategy = strategy;
     }
 
@@ -33,17 +34,18 @@ public final class LottoController {
     }
 
     public final LottoExpressionResponseDto getExpressionLottoList(LottoCreationRequestDto creationRequestDto) {
-        LottoGenerator lottoGenerator = LottoGenerator.newInstance(creationRequestDto, strategy);
-        while (lottoGenerator.hasNext()) {
-            lottoList.add(lottoGenerator.generateLotto());
-            lottoGenerator.next();
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto.getMoney());
+        LottoGenerator lottoGenerator = LottoGenerator.of(strategy);
+        while (lottoGenerateCount.hasNext()) {
+            lottos.add(lottoGenerator.generateLotto());
+            lottoGenerateCount.next();
         }
-        return LottoExpressionResponseDto.newInstance(lottoList);
+        return LottoExpressionResponseDto.newInstance(lottos);
     }
 
     public final LottoWinningResultResponseDto getWinningResult(LottoWinningCheckRequestDto confirmationRequestDto) {
         LottoWinningChecker winningChecker = LottoWinningChecker.newInstance(confirmationRequestDto);
-        return winningChecker.getLottoWinningResultResponseDto(lottoList);
+        return winningChecker.getLottoWinningResultResponseDto(lottos);
     }
 
 }

@@ -1,29 +1,29 @@
 package step2.dto;
 
-import step2.domain.lotto.LottoList;
+import step2.domain.lotto.Lottos;
 import step2.exception.ListNullPointerException;
 
 public final class LottoExpressionResponseDto {
 
-    private final LottoList lottoList;
+    private final Lottos lottos;
 
-    private LottoExpressionResponseDto(LottoList lottoList) {
-        if (isNull(lottoList)) {
+    private LottoExpressionResponseDto(Lottos lottos) {
+        if (isNull(lottos)) {
             throw new ListNullPointerException();
         }
-        this.lottoList = lottoList;
+        this.lottos = lottos;
     }
 
-    public static final LottoExpressionResponseDto newInstance(LottoList lottoList) {
-        return new LottoExpressionResponseDto(lottoList);
+    public static final LottoExpressionResponseDto newInstance(Lottos lottos) {
+        return new LottoExpressionResponseDto(lottos);
     }
 
-    private final boolean isNull(LottoList lottoList) {
-        return lottoList == null;
+    private final boolean isNull(Lottos lottos) {
+        return lottos == null;
     }
 
-    public final LottoList getLottoList() {
-        return lottoList;
+    public final Lottos getLottoList() {
+        return lottos;
     }
 
 }
