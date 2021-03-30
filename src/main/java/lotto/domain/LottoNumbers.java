@@ -44,7 +44,7 @@ public final class LottoNumbers {
     boolean bonusMatch = false;
 
     for (LottoNumber lottoNumber : other.lottoNumbers) {
-      matchCount = countMatch(matchCount, lottoNumber);
+      matchCount += countMatchNumber(lottoNumber);
     }
 
     if (matchCount == FIVE_BONUS.getMatchCount()) {
@@ -54,7 +54,8 @@ public final class LottoNumbers {
     return new Match(matchCount, bonusMatch);
   }
 
-  private int countMatch(int count, LottoNumber lottoNumber) {
+  private int countMatchNumber(LottoNumber lottoNumber) {
+    int count = 0;
     if (lottoNumbers.contains(lottoNumber)) {
       count++;
     }
