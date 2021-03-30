@@ -6,6 +6,7 @@ import lotto.generator.NumberGenerator;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final Set<Number> lotto;
@@ -22,11 +23,13 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    public static Lotto from(final Set<Number> lotto) {
-        if (lotto.size() != Constants.LOTTO_SIZE) {
+    public static Lotto from(final Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != Constants.LOTTO_SIZE) {
             throw new RuntimeException("로또 숫자는 6개이여야 합니다.");
         }
-        return new Lotto(lotto);
+        return new Lotto(lottoNumbers.stream()
+                .map(number -> Number.from(number))
+                .collect(Collectors.toSet()));
     }
 
     public int getMatchCount(final Lotto prizeLotto) {

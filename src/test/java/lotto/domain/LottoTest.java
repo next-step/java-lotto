@@ -27,9 +27,8 @@ class LottoTest {
     @Test
     @DisplayName("로또를 6개 번호로 생성하지 않으면 RuntimeException 발생한다")
     void from_isNotLottoSize() {
-        Set<Number> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5))
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5))
                 .stream()
-                .map(i -> Number.from(i))
                 .collect(Collectors.toSet());
 
         assertThatThrownBy(() -> Lotto.from(numbers))
@@ -43,9 +42,9 @@ class LottoTest {
     void getMatchCount(String purchaseNumber, int expectedMatchCount) {
         // given
         Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
-        Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
-                .map(i -> Number.from(Integer.valueOf(i)))
+                .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
         Lotto prizeLotto = Lotto.from(numbers);
 

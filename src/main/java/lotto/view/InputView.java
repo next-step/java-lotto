@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.constants.Constants;
-import lotto.domain.Number;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,11 +19,11 @@ public class InputView {
         return price;
     }
 
-    public static Set<Number> inputPrizeLotto() {
+    public static Set<Integer> inputPrizeLotto() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String[] prizeNumbers = scanner.next().split(",");
         return Arrays.stream(prizeNumbers)
-                .map(number -> Number.from(Integer.valueOf(number)))
+                .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
     }
 }

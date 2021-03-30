@@ -22,9 +22,9 @@ class LottoStatisticsTest {
     void getRevenueRate(String purchaseNumber, int amount, String expectedRevenueRate) {
         // given
         Lottos lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(amount));
-        Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
-                .map(i -> Number.from(Integer.valueOf(i)))
+                .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
 
         Lotto prizeLotto = Lotto.from(numbers);

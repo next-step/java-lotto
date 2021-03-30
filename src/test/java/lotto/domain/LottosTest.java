@@ -36,9 +36,9 @@ class LottosTest {
         Lottos lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(1000));
         Rank rank = Rank.valueOf(matchCount);
 
-        Set<Number> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(purchaseNumber.split(",")))
                 .stream()
-                .map(i -> Number.from(Integer.valueOf(i)))
+                .map(i -> Integer.valueOf(i))
                 .collect(Collectors.toSet());
         Lotto prizeLotto = Lotto.from(numbers);
 
