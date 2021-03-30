@@ -30,4 +30,5 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
 }

@@ -105,7 +105,7 @@ public class AutomatedLottoTest {
         Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
         List<Lotto> lotteries = lottoShop.purchase();
 
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries, 58);
         lottoScoreBoard.scoring();
         final long balance = lotteries.size() * 1000;
         LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
@@ -113,5 +113,19 @@ public class AutomatedLottoTest {
         String earningRate = calculator.resultToString();
 
         assertThat(earningRate).isEqualTo("0.35");
+    }
+
+    @Test
+    @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
+    void lottoBonusPrizeTest() {
+        LottoShop lottoShop = new LottoShop(2000, new TestLottoGenerator());
+        Lotto winnerLotto = new Lotto(2, 3, 4, 5, 6, 8);
+        List<Lotto> lotteries = lottoShop.purchase();
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries, 1);
+        lottoScoreBoard.scoring();
+
+        long winner = lottoScoreBoard.getWinningsByPrize(Prize.SECOND);
+
+        assertThat(winner).isEqualTo(1L);
     }
 }

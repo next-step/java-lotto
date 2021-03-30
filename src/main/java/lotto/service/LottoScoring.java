@@ -26,7 +26,7 @@ public class LottoScoring {
     private LottoScoreBoard getRenewedScoreBoard(LottoScoringDto lottoScoringDto) {
         LottoScoreBoard lottoScoreBoard =
                 new LottoScoreBoard(convertFromDtoToWinnerLotto(lottoScoringDto),
-                                    convertFromDtoToLottoList(lottoScoringDto));
+                                    convertFromDtoToLottoList(lottoScoringDto), 0);
         lottoScoreBoard.scoring();
         return lottoScoreBoard;
     }
@@ -45,7 +45,7 @@ public class LottoScoring {
             long prizeAmount = prize.getPrizeAmount();
 
             winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
-                    lottoScoreBoard.getWinningsByEqualNumberCount(equalNumberCount)));
+                    lottoScoreBoard.getWinningsByPrize(Prize.getPrizeByEqualNumberCount(equalNumberCount))));
         }
         return winnerDtoList;
     }

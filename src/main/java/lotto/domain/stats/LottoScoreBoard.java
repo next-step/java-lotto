@@ -1,5 +1,6 @@
 package lotto.domain.stats;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,36 +8,49 @@ import lotto.domain.Lotto;
 import lotto.domain.prize.Prize;
 
 public class LottoScoreBoard {
-    private final Map<Prize, Long> scoreBoard;
+    private final Map<Prize, List<Lotto>> scoreBoard;
     private final Lotto winnerLotto;
     private final List<Lotto> winnerCandidates;
+    private final Integer bonusNumber;
 
-    public LottoScoreBoard(Lotto winnerLotto, List<Lotto> winnerCandidates) {
+    public LottoScoreBoard(Lotto winnerLotto, List<Lotto> winnerCandidates, Integer bonusNumber) {
         scoreBoard = new HashMap<>();
         this.winnerLotto = winnerLotto;
         this.winnerCandidates = winnerCandidates;
+        this.bonusNumber = bonusNumber;
     }
 
     public void scoring() {
-        if (scoreBoard.isEmpty()) {
-            winnerCandidates
-                    .stream()
-                    .map(winnerLotto::getEqualNumberCountFrom)
-                    .forEach(this::addScore);
-        }
-    }
-
-    private void addScore(long equalNumberCount) {
-        Prize prize = Prize.getPrizeByEqualNumberCount(equalNumberCount);
-        if (scoreBoard.containsKey(prize)) {
-            scoreBoard.put(prize, scoreBoard.get(prize) + 1L);
+        if (!scoreBoard.isEmpty()) {
             return;
         }
-        scoreBoard.put(prize, 1L);
+        for (Lotto lotto : winnerCandidates) {
+            addScore(findPrize(lotto), lotto);
+        }
     }
 
-    public Long getWinningsByEqualNumberCount(long equalNumberCount) {
-        Prize prize = Prize.getPrizeByEqualNumberCount(equalNumberCount);
-        return scoreBoard.getOrDefault(prize, 0L);
+    private void addScore(Prize prize, Lotto lotto) {
+        if (scoreBoard.containsKey(prize)) {
+            scoreBoard.get(prize).add(lotto);
+            return;
+        }
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
+        scoreBoard.put(prize, lottoList);
+    }
+
+    private Prize findPrize(Lotto lotto) {
+        long equalNumberCount = winnerLotto.getEqualNumberCountFrom(lotto);
+        if (equalNumberCount == 6) {
+            return Prize.FIRST;
+        }
+        if (equalNumberCount == 5 && lotto.traverseCompareTo(bonusNumber) > 0) {
+            return Prize.SECOND;
+        }
+        return Prize.getPrizeByEqualNumberCount(equalNumberCount);
+    }
+
+    public Long getWinningsByPrize(Prize prize) {
+        return (long) scoreBoard.getOrDefault(prize, new ArrayList<>()).size();
     }
 }

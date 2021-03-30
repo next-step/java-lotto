@@ -26,7 +26,7 @@ public class Lotto {
                 .sum();
     }
 
-    private long traverseCompareTo(Integer comparingNumber) {
+    public long traverseCompareTo(Integer comparingNumber) {
         return this.numbers
                 .stream()
                 .filter(number -> number == comparingNumber)
