@@ -19,7 +19,8 @@ public class LottoScoreBoard {
 
     public void scoring() {
         if (scoreBoard.isEmpty()) {
-            winnerCandidates.stream()
+            winnerCandidates
+                    .stream()
                     .map(winnerLotto::getEqualNumberCountFrom)
                     .forEach(this::addScore);
         }

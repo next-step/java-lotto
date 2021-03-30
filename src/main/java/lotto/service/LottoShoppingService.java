@@ -20,7 +20,9 @@ public class LottoShoppingService {
         LottoShop lottoShop = new LottoShop(lottoOrderDto.getMoney(), lottoGenerator);
 
         List<Lotto> lotteries = lottoShop.purchase();
-        List<LottoDto> lottoDtoList = lotteries.stream()
+        List<LottoDto> lottoDtoList =
+                lotteries
+                .stream()
                 .map(Lotto::copyLottoNumbers)
                 .map(LottoDto::new)
                 .collect(Collectors.toList());

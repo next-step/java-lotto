@@ -51,7 +51,8 @@ public class LottoScoringService {
     }
 
     private List<Lotto> convertFromDtoToLottoList(LottoScoringDto lottoScoringDto) {
-        return lottoScoringDto.getLottoOrderedNumber().stream()
+        return lottoScoringDto.getLottoOrderedNumber()
+                .stream()
                 .map(LottoDto::getNumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList());

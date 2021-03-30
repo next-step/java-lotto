@@ -20,11 +20,17 @@ public class Lotto {
     }
 
     public long getEqualNumberCountFrom(Lotto lotto) {
-        return lotto.numbers.stream().mapToLong(this::traverseCompareTo).sum();
+        return lotto.numbers
+                .stream()
+                .mapToLong(this::traverseCompareTo)
+                .sum();
     }
 
     private long traverseCompareTo(Integer comparingNumber) {
-        return this.numbers.stream().filter(number -> number == comparingNumber).count();
+        return this.numbers
+                .stream()
+                .filter(number -> number == comparingNumber)
+                .count();
     }
 
     @Override

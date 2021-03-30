@@ -19,7 +19,9 @@ public enum Prize {
     public static long getPrizeByEqualNumberCount(long equalNumberCount) {
         return Arrays.stream(Prize.values())
                         .filter(prize -> prize.isSameNumberAs(equalNumberCount))
-                        .findAny().map(Prize::getPrizeAmount).orElse(0L);
+                        .findAny()
+                        .map(Prize::getPrizeAmount)
+                        .orElse(0L);
     }
 
     public long getEqualNumberCount() {
