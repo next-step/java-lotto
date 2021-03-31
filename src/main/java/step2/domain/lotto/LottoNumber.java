@@ -24,9 +24,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toList());
     }
 
-    // 생성하는 과정에서 예외발생 할 수 있으므로
     private LottoNumber(int lottoNumber) {
-        validate(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 

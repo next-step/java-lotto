@@ -1,7 +1,17 @@
 package step2.domain.check;
 
-public class LottoWinningCheckMachine {
+import step2.domain.lotto.Lotto;
 
-    public static LottoWinningCheckMachine newInstance() {
+public final class LottoWinningCheckMachine {
+
+    private final Lotto winningLotto;
+
+    private LottoWinningCheckMachine(Lotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
+
+    public static LottoWinningCheckMachine of(Lotto winningLotto) {
+        return new LottoWinningCheckMachine(winningLotto);
+    }
+
 }

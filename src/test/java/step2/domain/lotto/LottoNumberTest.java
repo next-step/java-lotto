@@ -34,9 +34,8 @@ class LottoNumberTest {
         int inputValue = -1;
 
         // when and then
-        assertThatThrownBy(() -> {
-            LottoNumber.valueOf(inputValue);
-        }).isInstanceOf(InvalidNumberInputException.class)
+        assertThatThrownBy(() -> LottoNumber.valueOf(inputValue))
+                .isInstanceOf(InvalidNumberInputException.class)
                 .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
 
     }
