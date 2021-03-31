@@ -45,6 +45,12 @@ public class WinningNumbers {
         return new MatchedCount(matchedCount);
     }
 
+    public void check(LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(CHECK_DUPLICATION);
+        }
+    }
+
     private int match(LottoNumber lottoNumber) {
         if (winningNumbers.contains(lottoNumber)) {
             return PLUS_COUNT;
