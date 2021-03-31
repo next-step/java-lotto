@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumbersTest {
     LottoNumbers lottoNumbers1;
-    LottoNumbers lottoNumbers2;
 
     @Test
     @DisplayName("로또 1장의 가격은 1000원이다.\n" +
@@ -28,6 +27,5 @@ class LottoNumbersTest {
     @BeforeEach
     void init() {
         lottoNumbers1 = new LottoNumbers();
-        lottoNumbers2 = new LottoNumbers();
     }
 }
