@@ -21,7 +21,7 @@ public class LottoWinInquiryController {
     }
 
     public WinInquiryResponse inquiryWin(WinInquiryRequest request) {
-        LottoRanks lottoRanks = lottoAutoService.inquiryWin(request.getConfirmTargetList(), generateWinNumber(request.getWinNumber()));
+        LottoRanks lottoRanks = lottoAutoService.inquiryWin(request.getConfirmTargetList(), generateWinNumber(request.getWinNumber()), request.getBonusNumber());
         return assembleWinResult(lottoRanks);
     }
 
@@ -36,7 +36,7 @@ public class LottoWinInquiryController {
     private List<WinStatistic> assembleWinStatistics(LottoRanks lottoRanks) {
         List<WinStatistic> winStatisticList = new ArrayList<>();
         for (LottoRank lottoRank : LottoRank.values()) {
-            winStatisticList.add(new WinStatistic(lottoRank.getMatchCount(), lottoRank.getWinAmount(), lottoRanks.matchLottoCount(lottoRank), true));
+            winStatisticList.add(new WinStatistic(lottoRank.getMatchCount(), lottoRank.getWinAmount(), lottoRanks.matchLottoCount(lottoRank), lottoRank.isMatchBonusTarget()));
         }
         return winStatisticList.stream().filter(winStatistic -> winStatistic.getRankCount() > LottoRank.LOSE.getMatchCount()).collect(Collectors.toList());
     }
