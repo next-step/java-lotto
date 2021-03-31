@@ -20,6 +20,9 @@ public class LottoNumbers {
         }
     }
 
+    /*
+    * 6개의 번호를 가져야한다.
+    * */
     public boolean hasLottoSize(Set<LottoNumber> lottoNumberSet) {
         if (lottoNumberSet.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ILLEGAL_LOTTO_SIZE);
@@ -27,7 +30,9 @@ public class LottoNumbers {
         return true;
     }
 
-
+    /*
+    * 로또번호들 중에서 일치하는 개수를 반환한다.
+    * */
     public int containsAll(LottoNumbers checkNumbers) {
         return Long.valueOf(checkNumbers.lottoNumberSet.stream()
                 .filter(checkNumber -> this.lottoNumberSet.contains(checkNumber))
@@ -35,6 +40,9 @@ public class LottoNumbers {
                 .intValue();
     }
 
+    /*
+    * 하나의 번호가 로또번호들 중에 포함되어있는지 확인한다.
+    * */
     public boolean containsOne(LottoNumber checkNumber) {
         return lottoNumberSet.contains(checkNumber);
     }
@@ -52,6 +60,8 @@ public class LottoNumbers {
         return Objects.hash(lottoNumberSet);
     }
 
-
-
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumberSet);
+    }
 }
