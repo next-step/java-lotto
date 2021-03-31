@@ -16,8 +16,8 @@ public class LottoApplication {
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
         printLottoTickets(lottoTickets);
         WinningNumbers winningNumbers = createWinningNumbers();
-
-        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
+        BonusBall bonusBall = createBonusBall(winningNumbers);
+        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets, bonusBall);
         printStatistics(ranksCount.ranksCount());
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
@@ -56,13 +56,20 @@ public class LottoApplication {
         }
     }
 
-    private static BonusBall createBonusBall() {
-        return new BonusBall(InputView.bonusBall());
+    private static BonusBall createBonusBall(WinningNumbers winningNumbers) {
+        try {
+            LottoNumber bonusNumber = new LottoNumber(InputView.bonusBall());
+            winningNumbers.check(bonusNumber);
+            return new BonusBall(bonusNumber);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return createBonusBall(winningNumbers);
+        }
     }
 
-    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets, BonusBall bonusBall) {
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.count();
+        ranksCount.count(bonusBall);
         return ranksCount;
     }
 
