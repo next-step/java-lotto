@@ -46,7 +46,7 @@ class WinningNumberTest {
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
 
         assertThat(winningNumber.rankMatch(lotto)).isEqualTo(expected);
     }

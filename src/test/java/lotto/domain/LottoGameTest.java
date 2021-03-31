@@ -13,19 +13,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
 
-    @DisplayName("LottoGame 수동 로또가 없을 경우")
+    @DisplayName("LottoGame 자동")
     @ParameterizedTest
     @CsvSource(value = {"5:5", "10:10", "14:14"}, delimiter = ':')
-    void lottoGame_of_emptyManualLotto(int input, int expected) {
+    void lottoGameOfAllAutoLottos(int input, int expected) {
         List<Lotto> lottoList = new ArrayList<>();
         LottoGame lottoGame = LottoGame.of(input, lottoList);
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
     }
 
-    @DisplayName("LottoGame 수동 로또가 있을 경우")
+    @DisplayName("LottoGame 자동 + 수동")
     @ParameterizedTest
-    @MethodSource("provideNumbersForSomeManualLottos")
-    void lottoGame_of_someManualLotto(int input, String[] inputManualLottoNumbers, int expected) {
+    @MethodSource("provideNumbersHalf")
+    void lottoGameOfHalfLottos(int input, String[] inputManualLottoNumbers, int expected) {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
         List<Lotto> lottoList = new ArrayList<>();
 
@@ -36,11 +36,33 @@ class LottoGameTest {
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> provideNumbersForSomeManualLottos() {
+    private static Stream<Arguments> provideNumbersHalf() {
         return Stream.of(
             Arguments.of(5, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45"}, 5),
             Arguments.of(10, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45", "5, 10, 11, 12, 20, 25"}, 10),
             Arguments.of(7, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45", "5, 10, 11, 12, 20, 25", "10, 15, 20, 21, 5, 9"}, 7)
+        );
+    }
+
+    @DisplayName("LottoGame 수동")
+    @ParameterizedTest
+    @MethodSource("provideNumbersAllManual")
+    void lottoGameOfAllManualLottos(int input, String[] inputManualLottoNumbers, int expected) {
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+        List<Lotto> lottoList = new ArrayList<>();
+
+        for (String lottoNumbers : inputManualLottoNumbers) {
+            lottoList.add(Lotto.of(lottoGenerator.generateAppointedLotto(lottoNumbers)));
+        }
+        LottoGame lottoGame = LottoGame.of(input, lottoList);
+        assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideNumbersAllManual() {
+        return Stream.of(
+            Arguments.of(2, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45"}, 2),
+            Arguments.of(3, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45", "5, 10, 11, 12, 20, 25"}, 3),
+            Arguments.of(4, new String[]{"1, 3, 5, 7, 9, 11", "1, 3, 5, 7, 9, 45", "5, 10, 11, 12, 20, 25", "10, 15, 20, 21, 5, 9"}, 4)
         );
     }
 }

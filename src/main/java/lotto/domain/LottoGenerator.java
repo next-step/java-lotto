@@ -18,11 +18,11 @@ public class LottoGenerator {
         return LazyHolder.instance;
     }
 
-    private Set<LottoNumber> getTreeSetLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        return new TreeSet<>(lottoNumbers);
+    private LottoNumbers getTreeSetLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        return LottoNumbers.of(new TreeSet<>(lottoNumbers));
     }
 
-    public Set<LottoNumber> generateShuffledLotto() {
+    public LottoNumbers generateShuffledLotto() {
         Collections.shuffle(AUTO_LOTTO);
         return getTreeSetLottoNumbers(
                 AUTO_LOTTO.subList(START, END)
@@ -31,7 +31,7 @@ public class LottoGenerator {
         );
     }
 
-    public Set<LottoNumber> generateAppointedLotto(final String appointedNumbers) {
+    public LottoNumbers generateAppointedLotto(final String appointedNumbers) {
         List<String> lottoNumberStringList =
                 new ArrayList(Arrays.asList(appointedNumbers.split(WINNING_NUMBER_STRING_DELIMITER)));
         return getTreeSetLottoNumbers(

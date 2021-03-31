@@ -28,8 +28,8 @@ class LottoTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
 
-        Lotto lotto = Lotto.of(lottoSet);
-        assertThat(lotto).isEqualTo(Lotto.of(expectedSet));
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
+        assertThat(lotto).isEqualTo(Lotto.of(LottoNumbers.of(expectedSet)));
     }
 
     private static Stream<Arguments> provideLottos() {
@@ -48,7 +48,7 @@ class LottoTest {
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
         assertThat(lotto.containBonusNumber(bonusNumber)).isEqualTo(expected);
     }
 
@@ -68,12 +68,12 @@ class LottoTest {
                 .boxed()
                 .map(i -> new LottoNumber(i))
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
         Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto expectedLotto = Lotto.of(expectedSet);
+        Lotto expectedLotto = Lotto.of(LottoNumbers.of(expectedSet));
 
         assertThat(lotto.matchCount(expectedLotto)).isEqualTo(expected);
     }
