@@ -24,7 +24,9 @@ public final class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toList());
     }
 
+    // 생성하는 과정에서 예외발생 할 수 있으므로
     private LottoNumber(int lottoNumber) {
+        validate(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -32,6 +34,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return valueOf(Integer.valueOf(lottoNumber));
     }
 
+    // 캐싱된 값을 가져올 때도 예외발생 할 수 있으므로
     public static final LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
         return CACHE.get(lottoNumber);

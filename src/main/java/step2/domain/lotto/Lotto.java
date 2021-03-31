@@ -53,14 +53,14 @@ public final class Lotto {
         return lottoNumbers.size() != LOTTO_SIZE;
     }
 
-    public final boolean contains(LottoNumber element) {
-        return lottoNumbers.contains(element);
-    }
-
     public final int getCorrectCount(Lotto other) {
         return (int) lottoNumbers.stream()
                 .filter(other::contains)
                 .count();
+    }
+
+    private final boolean contains(LottoNumber element) {
+        return lottoNumbers.contains(element);
     }
 
     public final Set<LottoNumber> getLottoNumbers() {

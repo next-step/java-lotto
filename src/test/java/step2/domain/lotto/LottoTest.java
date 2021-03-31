@@ -104,20 +104,6 @@ class LottoTest {
         assertThat(firstLotto).isEqualTo(secondLotto);
     }
 
-    @DisplayName("Lotto 인스턴스가 특정 값을 소유하고 있는지 판단 테스트")
-    @Test
-    void 포함() {
-        // given
-        Lotto firstLotto = Lotto.of(lottoNumbers);
-        LottoNumber testElement = LottoNumber.valueOf(1);
-
-        // when
-        boolean actual = firstLotto.contains(testElement);
-
-        // then
-        assertThat(actual).isTrue();
-    }
-
     @DisplayName("Lotto 인스턴스가 소유값을 기준으로 몇개가 일치하는지 판단 테스트")
     @Test
     void 포함_갯수() {
