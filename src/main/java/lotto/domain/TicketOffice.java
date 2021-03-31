@@ -13,15 +13,15 @@ public class TicketOffice {
     public LottoTickets sale(NumberOfTicket numberOfTicket) {
         LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
 
-        for (int i = 0; i < numberOfTicket.count(); i++) {
+        for (int i = 0; i < numberOfTicket.numberOfTicket(); i++) {
             lottoTickets.add(new LottoTicket(new LottoNumbers()));
         }
 
         return lottoTickets;
     }
 
-    public NumberOfTicket numberOfTicket(PurchaseAmount purchaseAmount) {
-        return new NumberOfTicket(purchaseAmount.purchaseAmount() / lottoTicketPrice.price());
+    public LottoTicketPrice lottoTicketPrice() {
+        return lottoTicketPrice;
     }
 
     @Override

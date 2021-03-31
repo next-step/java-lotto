@@ -8,7 +8,11 @@ public class LottoTicketPrice {
     private final int lottoTicketPrice;
 
     public LottoTicketPrice() {
-        this.lottoTicketPrice = STANDARD_PRICE;
+        this(STANDARD_PRICE);
+    }
+
+    public LottoTicketPrice(int price) {
+        this.lottoTicketPrice = price;
     }
 
     public int price() {

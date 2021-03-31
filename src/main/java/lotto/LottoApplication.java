@@ -16,6 +16,7 @@ public class LottoApplication {
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
         printLottoTickets(lottoTickets);
         WinningNumbers winningNumbers = createWinningNumbers();
+
         RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
         printStatistics(ranksCount.ranksCount());
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
@@ -34,8 +35,8 @@ public class LottoApplication {
 
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
-        NumberOfTicket numberOfTicket = ticketOffice.numberOfTicket(purchaseAmount);
-        ResultView.purchaseTickets(numberOfTicket.count());
+        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
+        ResultView.purchaseTickets(numberOfTicket.numberOfTicket());
         return ticketOffice.sale(numberOfTicket);
     }
 
@@ -53,6 +54,10 @@ public class LottoApplication {
             System.out.println(e.getMessage());
             return createWinningNumbers();
         }
+    }
+
+    private static BonusBall createBonusBall() {
+        return new BonusBall(InputView.bonusBall());
     }
 
     private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
