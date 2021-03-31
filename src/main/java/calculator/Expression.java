@@ -2,16 +2,20 @@ package calculator;
 
 public class Expression {
     private static final String NEGATIVE_OPERATOR = "-";
+    private static final String DEFAULT = "0";
     private final String expression;
 
     public Expression(String expression) {
+        this.expression = getDefaultOrExpression(expression, DEFAULT);
+        checkNegative(this.expression);
+    }
+
+    private String getDefaultOrExpression(String expression, String defaultExpression) {
         if (isEmptyOrNull(expression)) {
-            this.expression = "0";
-            return;
+            return defaultExpression;
         }
 
-        checkNegative(expression);
-        this.expression = expression;
+        return expression;
     }
 
     public boolean isEmptyOrNull(String expression) {
