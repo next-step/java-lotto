@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import study.step4.domain.LottoTicketCount;
+import study.step4.util.StringUtil;
 
 public class InputView {
     private final static String MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -15,7 +16,6 @@ public class InputView {
     private final static String MESSAGE_MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private final static String MESSAGE_MANUAL_NUMBER = "\n수동으로 구매할 번호를 입력해주세요.";
     private final static Scanner scanner = new Scanner(System.in);
-    private final static String SPLIT_DELIMITER = ",";
 
     private InputView() {
     }
@@ -27,7 +27,7 @@ public class InputView {
 
     public static String[] inputWinNumber() {
         System.out.println(MESSAGE_WIN_NUMBER);
-        return scanner.nextLine().split(SPLIT_DELIMITER);
+        return StringUtil.split(scanner.nextLine());
     }
 
     public static String inputBonusBall() {

@@ -10,11 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import study.step4.util.StringUtil;
+
 public class LottoFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
-    private final static String SPLIT_DELIMITER = ",";
 
     private static List<LottoNumber> allLottoNumbers = new ArrayList<>();
 
@@ -31,8 +32,8 @@ public class LottoFactory {
     }
 
     private static Lotto createManualLotto(String lottoNumbers) {
-        return new Lotto(Arrays.stream(lottoNumbers.split(SPLIT_DELIMITER))
-            .map(i -> LottoNumber.of(i.trim()))
+        return new Lotto(Arrays.stream(StringUtil.split(lottoNumbers))
+            .map(i -> LottoNumber.of(i))
             .collect(toList()));
     }
 
