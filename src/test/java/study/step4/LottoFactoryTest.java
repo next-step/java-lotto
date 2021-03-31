@@ -11,8 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import study.step4.domain.Lotto;
 import study.step4.domain.LottoMoney;
 import study.step4.domain.LottoFactory;
+import study.step4.domain.LottoNumber;
 import study.step4.domain.LottoTicketCount;
 import study.step4.domain.Lottos;
 
@@ -36,6 +38,19 @@ public class LottoFactoryTest {
         Lottos lottos = LottoFactory.buyManualLotto(test);
         // when & then
         assertThat(lottos.getLottos().size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("수동 구매 테스트 - 객체 비교")
+    public  void buyManyalLotto2() {
+        // given
+        String[] input = {"1,2,3,4,5,6"};
+        List<String> manualLotto = Arrays.stream(input).collect(toList());
+        // when
+        Lottos lottos = LottoFactory.buyManualLotto(manualLotto);
+        // then
+        assertThat(lottos.getLottos()).containsExactly(new Lotto(Arrays.asList(LottoNumber.of(1),
+            LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
     }
 
     @ParameterizedTest(name = "구매 테스트")
