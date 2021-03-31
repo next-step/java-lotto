@@ -14,18 +14,19 @@ public class WinningLottoTest {
     @Test
     @DisplayName("지난 주 당첨번호 생성 테스트")
     void create_last_winning_lotto() {
-        String[] input = "1,2,3,4,5,6".split(",");
-        WinningLotto winningLotto = new WinningLotto(input);
+        InputNumber inputNumber = new InputNumber("1,2,3,4,5,6");
+        WinningLotto winningLotto = new WinningLotto(inputNumber.numbers(),new BonusBall(7));
         assertThat(winningLotto.getLottoNumberList().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("지난주 당첨번호와 로또 리스트와 비교하여 맞는 개수 리턴 테스트")
     void lotto_compare() {
-        String[] winningNumbers = "1,2,3,4,5,6".split(",");
-        String[] purchasedNumbers = "1,3,5,7,9,11".split(",");
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        Lotto purchasedLotto = new Lotto(purchasedNumbers);
+        InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
+        InputNumber purchasedNumbers = new InputNumber("1,3,5,7,9,11");
+        BonusBall bonusBall = new BonusBall(7);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(),bonusBall);
+        Lotto purchasedLotto = new Lotto(purchasedNumbers.numbers());
         assertThat(winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber -> purchasedLotto.getLottoNumberList().contains(winningNumber))
                 .count()).isGreaterThan(2);
@@ -36,7 +37,8 @@ public class WinningLottoTest {
     void statistic_test_number() {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers = new InputNumber("1,2,3,4,9,11");
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers());
+        BonusBall bonusBall = new BonusBall(7);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(),bonusBall);
         Lotto purchasedLotto = new Lotto(purchasedNumbers.numbers());
         assertThat(LottoPrize.valueOf(purchasedLotto.isWinningLottoList(winningLotto),false)).
                 isEqualTo(LottoPrize.FOURTH);
@@ -48,8 +50,8 @@ public class WinningLottoTest {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers1 = new InputNumber("1,2,3,43,44,45");
         InputNumber purchasedNumbers2 = new InputNumber("1,2,3,4,44,45");
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers());
+        BonusBall bonusBall = new BonusBall(7);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(),bonusBall);
         LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1.numbers()), new Lotto(purchasedNumbers2.numbers()));
 
         Lottos lottos = Lottos.of(generator);
@@ -64,8 +66,8 @@ public class WinningLottoTest {
     void statistic_test_size() {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers1 = new InputNumber("1,2,3,43,44,45");
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers());
+        BonusBall bonusBall = new BonusBall(7);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(),bonusBall);
         LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1.numbers()));
         Lottos lottoList = Lottos.of(generator);
 
