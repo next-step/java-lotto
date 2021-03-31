@@ -1,15 +1,9 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.Objects;
 
 public class BonusBall {
     private final LottoNumber bonusNumber;
-
-    public BonusBall(String bonusNumber) {
-        this(ConvertUtil.toInt(bonusNumber));
-    }
 
     public BonusBall(int bonusNumber) {
         this(new LottoNumber(bonusNumber));
