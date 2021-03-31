@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Map;
 
@@ -33,13 +34,16 @@ public class LottoClient {
     }
 
     private static void printWinNumbers(InputView inputView, Map<Rank, Integer> ranks, double earningsRate) {
+        ResultView resultView = new ResultView();
         inputView.print("당첨 통계");
         inputView.print("---------");
-        System.out.println("3개 일치 , (5000원)- " + ranks.get(Rank.FIFTH) +"개");
-        System.out.println("4개 일치 , (50000원)- " + ranks.get(Rank.FOURTH) +"개");
-        System.out.println("5개 일치 , (1500000원)- " + ranks.get(Rank.THIRD) +"개");
-        System.out.println("5개 일치 , 보너스 볼 일치 (30000000원)- " + ranks.get(Rank.SECOND) +"개");
-        System.out.println("6개 일치 , (2000000000원)- " + ranks.get(Rank.FIRST) +"개");
-        System.out.println("총 수익률은 " + earningsRate + "입니다.");
+
+        resultView.print("3개 일치 , (5000원)- " + ranks.get(Rank.FIFTH) +"개");
+        resultView.print("3개 일치 , (5000원)- " + ranks.get(Rank.FIFTH) +"개");
+        resultView.print("4개 일치 , (50000원)- " + ranks.get(Rank.FOURTH) +"개");
+        resultView.print("5개 일치 , (1500000원)- " + ranks.get(Rank.THIRD) +"개");
+        resultView.print("5개 일치 , 보너스 볼 일치 (30000000원)- " + ranks.get(Rank.SECOND) +"개");
+        resultView.print("6개 일치 , (2000000000원)- " + ranks.get(Rank.FIRST) +"개");
+        resultView.print("총 수익률은 " + earningsRate + "입니다.");
     }
 }
