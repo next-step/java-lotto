@@ -10,8 +10,8 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public int contains(int number) {
-        return numbers.contains(number) ? 1 : 0;
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     @Override

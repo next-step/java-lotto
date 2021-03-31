@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class NumberGenerator {
-    private static final int CREATION_MAX_COUNT = 6;
-    private static final int BOUND = 45;
+    public static final int CREATION_MAX_COUNT = 6;
+    public static final int CREATION_NUMBER_BOUND = 45;
 
     public static Numbers creation() {
         List<Integer> numbers = new ArrayList<>();
 
-        for (int i = 1; i <= BOUND; i++) {
+        for (int i = 1; i <= CREATION_NUMBER_BOUND; i++) {
             numbers.add(i);
         }
 

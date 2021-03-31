@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGames {
+    private static final int ONE_GAME_MONEY = 1_000;
+
     private final int payMoney;
     private final List<LottoGame> lottoGames;
 
@@ -15,7 +17,7 @@ public class LottoGames {
     private List<LottoGame> makeLottoGames() {
         List<LottoGame> lottoGameList = new ArrayList<>();
 
-        for (int i = 0; i < payMoney / 1000; i++) {
+        for (int i = 0; i < payMoney / ONE_GAME_MONEY; i++) {
             lottoGameList.add(new LottoGame());
         }
         return lottoGameList;
@@ -35,12 +37,11 @@ public class LottoGames {
         return lottoGames;
     }
 
-    public HitResults result(WinNumbers winNumbers) {
+    public HitResults start(WinNumbers winNumbers) {
         HitResults hitResults = new HitResults(payMoney);
         for (LottoGame lottoGame : lottoGames) {
             hitResults.add(lottoGame.lotto(winNumbers));
         }
-
         return hitResults;
     }
 

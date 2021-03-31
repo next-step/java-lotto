@@ -2,10 +2,9 @@ package lotto;
 
 import lotto.domain.HitResults;
 import lotto.domain.LottoGames;
-import lotto.domain.Stats;
+import lotto.view.HitResultView;
 import lotto.view.InputView;
 import lotto.view.LottoGamesView;
-import lotto.view.LottoStatsView;
 
 public class LottoGameApplication {
     public static void main(String[] args) {
@@ -19,10 +18,10 @@ public class LottoGameApplication {
         lottoGamesView.printLottoGamesNumber();
 
         inputView.inputHitNumbers();
-        HitResults hitResults = lottoGames.result(inputView.getWinNumbers());
-        Stats stats = new Stats(hitResults);
+        inputView.inputHitBonusNumber();
+        HitResults hitResults = lottoGames.start(inputView.winNumbers());
 
-        LottoStatsView lottoStatsView = new LottoStatsView(stats);
-        lottoStatsView.printLottoResult();
+        HitResultView hitResultView = new HitResultView(hitResults);
+        hitResultView.printLottoResult();
     }
 }
