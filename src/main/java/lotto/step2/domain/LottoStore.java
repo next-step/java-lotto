@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,4 +38,15 @@ public class LottoStore {
         }
         return lottos;
     }
+
+    public static Lotto purchase(String[] numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        Lotto lotto = new Lotto(allLottoNumbers.stream()
+                .filter(number -> lottoNumbers.contains(number))
+                .collect(Collectors.toList()));
+        return lotto;
+    }
+
 }

@@ -24,8 +24,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private static int checkNumeric(String number){
-        if(!PATTERN_NUMERIC.matcher(number).matches()){
+    private static int checkNumeric(String number) {
+        number = number.trim();
+        if (!PATTERN_NUMERIC.matcher(number).matches()) {
             throw new IllegalArgumentException(MESSAGE_CHECK_NUMERIC);
         }
         return Integer.parseInt(number);

@@ -19,6 +19,14 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+    }
+
+    public long size() {
+        return lottos.size();
+    }
+
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }
