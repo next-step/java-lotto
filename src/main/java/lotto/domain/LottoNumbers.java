@@ -32,6 +32,10 @@ public class LottoNumbers {
         shuffle(lottoNumbers);
     }
 
+    public void mark(List<Integer> manual) {
+        this.lottoNumbers = manual;
+    }
+
     /**
      * 6개의 번호를 전달
      * @param shuffledNumbers
