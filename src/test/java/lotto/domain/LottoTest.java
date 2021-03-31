@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -26,7 +27,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        LottoRank lottoRank = lotto.inquiryRank(Arrays.stream(winNumbers.split(",")).mapToInt(Integer::valueOf).toArray());
+        LottoRank lottoRank = lotto.inquiryRank(Arrays.stream(winNumbers.split(",")).mapToInt(Integer::valueOf).toArray(), 20);
 
         // then
         assertThat(LottoRank.inquiryRank(matchCount, false)).isEqualTo(lottoRank);
@@ -70,6 +71,47 @@ class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(new int[]{1, 48, 2, 3, 5, 6}))
                 .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, 46})
+    @DisplayName("로또당첨 - 유효하지 않은 보너스번호")
+    void lotto_isBonusNumberInvalid(int bonusNumber) {
+        // given
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotto.inquiryRank(new int[] {1, 2, 3, 4, 5, 6}, bonusNumber))
+                .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("로또당첨 - 당첨번호와 보너스번호가 중복될 때")
+    void lotto_inquiryRank_dupBonusNumber() {
+        // given
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotto.inquiryRank(new int[] {1, 2, 3, 4, 5, 6}, 1))
+                .withMessageMatching("보너스 번호와 당첨번호가 중복됩니다. 보너스 번호를 다시 확인해 주세요.");
+    }
+
+    @Test
+    @DisplayName("로또당첨 - 당첨번호와 보너스번호")
+    void lotto_inquiryRank_bonusNumber() {
+        // given
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when
+        LottoRank lottoRank = lotto.inquiryRank(new int[]{1, 2, 3, 4, 5, 7}, 6);
+
+        // then
+        assertThat(LottoRank.SECOND).isEqualTo(lottoRank);
     }
 
 }

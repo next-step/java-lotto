@@ -19,4 +19,8 @@ public class LottoNumber {
         }
     }
 
+    public boolean match(int number) {
+        return this.lottoNumber == number;
+    }
+
 }

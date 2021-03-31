@@ -17,12 +17,28 @@ public class Lotto {
         return lottoNumberList.stream().mapToInt(LottoNumber::getLottoNumber).sorted().toArray();
     }
 
-    public LottoRank inquiryRank(int[] winNumbers) {
+    public LottoRank inquiryRank(int[] winNumbers, int bonusNumber) {
+        validateBonusNumber(winNumbers, bonusNumber);
+        return LottoRank.inquiryRank(matchCount(winNumbers), matchBonus(bonusNumber));
+    }
+
+    private void validateBonusNumber(int[] winNumbers, int bonusNumber) {
+        LottoNumber.validateLottoNumber(bonusNumber);
+        if (Arrays.stream(winNumbers).filter(winNumber -> winNumber == bonusNumber).findAny().isPresent()) {
+            throw new IllegalArgumentException("보너스 번호와 당첨번호가 중복됩니다. 보너스 번호를 다시 확인해 주세요.");
+        }
+    }
+
+    private int matchCount(int[] winNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumberList) {
-            matchCount += Arrays.stream(winNumbers).filter(winNumber -> lottoNumber.getLottoNumber() == winNumber).count();
+            matchCount += Arrays.stream(winNumbers).filter(lottoNumber::match).count();
         }
-        return LottoRank.inquiryRank(matchCount, true); // TODO matchBonus 메서드 만들어 결과 값 넘겨야 함.
+        return matchCount;
+    }
+
+    private boolean matchBonus(int bonusNumber) {
+        return lottoNumberList.stream().anyMatch(lottoNumber -> lottoNumber.match(bonusNumber));
     }
 
     public static void validateLottoNumbers(int[] winNumbers) {
