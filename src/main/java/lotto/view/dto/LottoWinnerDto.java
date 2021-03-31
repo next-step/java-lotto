@@ -4,11 +4,13 @@ public class LottoWinnerDto implements Comparable<LottoWinnerDto> {
     private final long equalNumberCount;
     private final long prizeAmount;
     private final long winners;
+    private final String message;
 
-    public LottoWinnerDto(long equalNumberCount, long prizeAmount, long winners) {
+    public LottoWinnerDto(long equalNumberCount, long prizeAmount, long winners, String message) {
         this.equalNumberCount = equalNumberCount;
         this.prizeAmount = prizeAmount;
         this.winners = winners;
+        this.message = message;
     }
 
     public long getEqualNumberCount() {
@@ -17,17 +19,7 @@ public class LottoWinnerDto implements Comparable<LottoWinnerDto> {
 
     @Override
     public String toString() {
-        if (equalNumberCount == 0) {
-            return "";
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(equalNumberCount);
-        stringBuilder.append("개 일치 (");
-        stringBuilder.append(prizeAmount);
-        stringBuilder.append(")- ");
-        stringBuilder.append(winners);
-        stringBuilder.append("개" + System.lineSeparator());
-        return stringBuilder.toString();
+        return String.format(message, winners);
     }
 
     @Override

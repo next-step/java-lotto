@@ -44,9 +44,9 @@ public class LottoServiceTest {
                         .stream()
                         .filter(dto -> dto.getEqualNumberCount() == 3)
                         .findFirst()
-                        .orElse(new LottoWinnerDto(0, 0, 0));
+                        .orElse(new LottoWinnerDto(0, 0, 0, ""));
 
-        assertThat(resultDto.toString()).isEqualTo("3개 일치 (5000)- 1개");
+        assertThat(resultDto.toString()).isEqualTo("3개 일치 (5000원)- 1개");
     }
 
     @Test

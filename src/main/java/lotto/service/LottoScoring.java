@@ -45,9 +45,11 @@ public class LottoScoring {
             long prizeAmount = prize.getPrizeAmount();
 
             winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
-                    lottoScoreBoard.getWinningsByPrize(prize)));
+                    lottoScoreBoard.getWinningsByPrize(prize), prize.getPrizeMessage()));
         }
-        return winnerDtoList;
+        return winnerDtoList.stream()
+                .filter(dto -> dto.getEqualNumberCount() > 0)
+                .collect(Collectors.toList());
     }
 
     private List<Lotto> convertFromDtoToLottoList(LottoScoringDto lottoScoringDto) {
@@ -58,7 +60,4 @@ public class LottoScoring {
                 .collect(Collectors.toList());
     }
 
-    private Lotto convertFromDtoToWinnerLotto(LottoScoringDto lottoScoringDto) {
-        return new Lotto(lottoScoringDto.getLottoWinnerNumber());
-    }
 }

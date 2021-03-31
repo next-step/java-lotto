@@ -15,10 +15,6 @@ public class LottoScoringDto {
         return winnerLottoDto;
     }
 
-    public List<Integer> getLottoWinnerNumber() {
-        return winnerLottoDto.getNumbers();
-    }
-
     public List<LottoDto> getLottoOrderedNumber() {
         return lottoOrderResultDto.getOrderedResult();
     }
