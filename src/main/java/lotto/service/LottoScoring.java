@@ -45,7 +45,7 @@ public class LottoScoring {
             long prizeAmount = prize.getPrizeAmount();
 
             winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
-                    lottoScoreBoard.getWinningsByPrize(Prize.getPrizeByEqualNumberCount(equalNumberCount))));
+                    lottoScoreBoard.getWinningsByPrize(prize)));
         }
         return winnerDtoList;
     }

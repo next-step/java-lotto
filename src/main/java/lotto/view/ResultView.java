@@ -23,7 +23,7 @@ public class ResultView {
         Collections.sort(winnerDtoList);
 
         for (LottoWinnerDto winnerDto : winnerDtoList) {
-            System.out.println(winnerDto);
+            System.out.print(winnerDto);
         }
         String earningRate = lottoScoringResultDto.getEarningRate();
         System.out.printf("총 수익률은 " + earningRate + "입니다.");

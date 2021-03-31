@@ -17,22 +17,25 @@ public class LottoWinnerDto implements Comparable<LottoWinnerDto> {
 
     @Override
     public String toString() {
+        if (equalNumberCount == 0) {
+            return "";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(equalNumberCount);
         stringBuilder.append("개 일치 (");
         stringBuilder.append(prizeAmount);
         stringBuilder.append(")- ");
         stringBuilder.append(winners);
-        stringBuilder.append("개");
+        stringBuilder.append("개" + System.lineSeparator());
         return stringBuilder.toString();
     }
 
     @Override
     public int compareTo(LottoWinnerDto o) {
-        if (equalNumberCount > o.equalNumberCount) {
+        if (prizeAmount > o.prizeAmount) {
             return 1;
         }
-        if (equalNumberCount < o.equalNumberCount) {
+        if (prizeAmount < o.prizeAmount) {
             return -1;
         }
         return 0;
