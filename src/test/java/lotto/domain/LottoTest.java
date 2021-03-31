@@ -3,46 +3,49 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
+import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private static int LOTTO_SIZE = 6;
     private Lotto lotto;
-    private List<LottoNumber> numbers;
+    private LottoNumbers lottoNumbers;
+    private Set<LottoNumber> numbers = new LinkedHashSet<>();
 
     @BeforeEach
     void setUp() { //given
-        numbers = new ArrayList<>();
         for (int i = LOWER_LOTTONUMBER_BOUND; i <= LOTTO_SIZE; i++) {
             numbers.add(new LottoNumber(i));
         }
-        lotto = new Lotto(numbers);
+        lottoNumbers = new LottoNumbers(numbers);
+        lotto = new Lotto(lottoNumbers);
     }
 
     @Test
     void createTest() {
         //then
-        assertThat(lotto).isEqualTo(new Lotto(numbers));
+        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
     }
 
     @Test
     void containsTest(){
         //given
-        List<LottoNumber> testNumbers = new ArrayList<>();
+        Set<LottoNumber> testNumbers = new LinkedHashSet<>();
+        Set<LottoNumber> zeroMatchs = new LinkedHashSet<>();
         for (int i = LOWER_LOTTONUMBER_BOUND + 1; i <= LOTTO_SIZE + 1; i++) {
             testNumbers.add(new LottoNumber(i));
+            zeroMatchs.add(new LottoNumber(LOTTO_SIZE + 10));
         }
 
+
         //when
-        int allCorrect = lotto.contains(numbers);
-        int fiveCorrect = lotto.contains(testNumbers);
-        int zeroCorrect = lotto.contains(Collections.emptyList());
+        int allCorrect = lotto.contains(lottoNumbers);
+        int fiveCorrect = lotto.contains(new LottoNumbers(testNumbers));
+        int zeroCorrect = lotto.contains(new LottoNumbers(zeroMatchs));
 
         //then
         assertThat(allCorrect).isEqualTo(LOTTO_SIZE);

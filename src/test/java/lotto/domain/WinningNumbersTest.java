@@ -3,8 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,24 +14,22 @@ public class WinningNumbersTest {
     private static final int WINNING_LOWER_BOUND = 1;
 
     private WinningNumbers winning;
-    private List<LottoNumber> winningNumbers = new ArrayList<>();
+    private Set<LottoNumber> winningNumbers = new HashSet<>();
+    private LottoNumbers numbers;
 
     @BeforeEach
     void setUp() {
         for (int i = WINNING_LOWER_BOUND; i <= WINNING_SIZE; i++) {
             winningNumbers.add(new LottoNumber(i));
         }
-        winning = new WinningNumbers(winningNumbers);
+        numbers = new LottoNumbers(winningNumbers);
+        winning = new WinningNumbers(numbers);
     }
 
     @Test
     void createTest() {
-        //then - 동일 생성으로 비교
-        assertThat(winning).isEqualTo(new WinningNumbers(winningNumbers));
-
-        //when, then - field 접근
-        assertThat(winning).hasNoNullFieldsOrProperties()
-                .hasFieldOrPropertyWithValue("winningNumbers", winningNumbers);
+        //then
+        assertThat(winning).isEqualTo(new WinningNumbers(numbers));
     }
 
     @Test
@@ -48,10 +46,10 @@ public class WinningNumbersTest {
     }
 
     Lotto createLotto(int matchNum) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int i = WINNING_LOWER_BOUND + matchNum; i <= WINNING_SIZE + matchNum; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        return new Lotto(lottoNumbers);
+        return new Lotto(new LottoNumbers(lottoNumbers));
     }
 }

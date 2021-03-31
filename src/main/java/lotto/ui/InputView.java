@@ -6,8 +6,9 @@ package lotto.ui;
 import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.LOTTO_PRICE;
@@ -31,7 +32,7 @@ public class InputView {
         return result;
     }
 
-    public static List<LottoNumber> inputWinning() {
+    public static Set<LottoNumber> inputWinning() {
         System.out.println(WINNING_MESSAGE_BEFORE);
         String[] result = sc.nextLine().split(DELIMITER);
         checkNumberSize(result);
@@ -40,7 +41,7 @@ public class InputView {
         return Arrays.stream(result)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public static void openScanner() {

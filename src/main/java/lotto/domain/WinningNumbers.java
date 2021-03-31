@@ -3,14 +3,13 @@
  * */
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class WinningNumbers {
 
-    private List<LottoNumber> winningNumbers;
+    private LottoNumbers winningNumbers;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers) {
+    public WinningNumbers(LottoNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 

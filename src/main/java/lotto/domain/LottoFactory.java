@@ -5,6 +5,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
@@ -13,7 +14,7 @@ public class LottoFactory {
 
     private static LottoStrategy lottoStrategy;
 
-    public static List<LottoNumber> defaultLottoNumbers = new ArrayList<>();
+    public static List<LottoNumber> defaultLottoNumbers;
 
     public static void setLottoStrategy(LottoStrategy strategy) {
         lottoStrategy = strategy;
@@ -38,8 +39,8 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static WinningNumbers winning(List<LottoNumber> winningNumber) {
-        return new WinningNumbers(winningNumber);
+    public static WinningNumbers winning(Set<LottoNumber> winningNumber) {
+        return new WinningNumbers(new LottoNumbers(winningNumber));
     }
 
     public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {

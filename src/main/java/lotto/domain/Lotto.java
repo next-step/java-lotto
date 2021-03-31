@@ -3,28 +3,22 @@
 * */
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    private List<LottoNumber> numbers;
+    private LottoNumbers numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
     }
 
-    public int contains(List<LottoNumber> numbers) {
-        return Long.valueOf(numbers.stream()
-                .filter(number -> this.numbers.contains(number))
-                .count())
-                .intValue();
+    public int contains(LottoNumbers checkNumbers) {
+        return this.numbers.contains(checkNumbers);
     }
 
-    public List<LottoNumber> numbers() {
-        return Collections.unmodifiableList(new ArrayList<>(numbers));
+    public LottoNumbers numbers() {
+        return numbers;
     }
 
     @Override

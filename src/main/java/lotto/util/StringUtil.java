@@ -2,7 +2,7 @@ package lotto.util;
 
 import java.util.Arrays;
 
-import static lotto.domain.LottoStrategy.LOTTO_SIZE;
+import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
 import static lotto.util.Message.OVERLAP_NUMBER;
 
