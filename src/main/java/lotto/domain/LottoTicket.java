@@ -49,7 +49,7 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers() {
-        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoConstant.MIN_LOTTO_NUMBER, LottoConstant.MAX_LOTTO_NUMBER ).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoConstant.MIN_LOTTO_NUMBER, LottoConstant.MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.stream().limit(LottoConstant.MAX_LOTTO_COUNT).mapToInt(Integer::intValue).toArray();
     }

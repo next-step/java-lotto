@@ -186,7 +186,7 @@ class LottoTicketTest {
         LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 7}, 6);
 
         // then
-        assertThat((double)(LottoRank.SECOND.getWinAmount() / 1000)).isEqualTo(lottoRanks.totalReturnRate());
+        assertThat((double) (LottoRank.SECOND.getWinAmount() / 1000)).isEqualTo(lottoRanks.totalReturnRate());
         assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.SECOND));
         assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.LOSE));
         assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIRST));
