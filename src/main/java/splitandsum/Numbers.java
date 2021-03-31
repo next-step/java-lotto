@@ -7,10 +7,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
+    public static final int FILTER_NUMBER = 1;
+    public static final String FILTER_PATTERN = "//(.)\n(.*)";
 
     private final List<Number> numbers;
     private final NumberPattern pattern;
-    private String num ="";
+    private String num = "";
 
     public Numbers(String str) {
         this.num = str;
@@ -37,11 +39,11 @@ public class Numbers {
 
 
     public String find(String number) {
-        Matcher m = Pattern.compile(Constant.FILTER_PATTERN)
+        Matcher m = Pattern.compile(FILTER_PATTERN)
                 .matcher(ValidationNumber.checkNumber(number));
         String customDelimiter = "";
         if (m.find()) {
-            customDelimiter = m.group(Constant.FILTER_NUMBER);
+            customDelimiter = m.group(FILTER_NUMBER);
             this.num = m.group(2);
         }
         return customDelimiter;
