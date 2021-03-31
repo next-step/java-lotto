@@ -60,4 +60,8 @@ public class LottoNumbers {
     public boolean contains(int win) {
         return this.lottoNumbers.contains(win);
     }
+
+    public int contains(int win, int correct) {
+        return (this.lottoNumbers.contains(win)) ? correct + 1 : correct;
+    }
 }

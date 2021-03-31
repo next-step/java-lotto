@@ -19,6 +19,12 @@ class LottoNumbersTest {
                 .isEqualTo(14); //Q: 잔돈이나, 금액 부족한거는 어쩌지? 요구사항에 없으니 일단 pass
     }
 
+    @Test
+    @DisplayName("숫자가 맞으면 1을 더해준다")
+    void contains() {
+        assertThat(lottoNumbers1.contains(10, 5)).isEqualTo(6);
+    }
+
     @BeforeEach
     void init() {
         lottoNumbers1 = new LottoNumbers();
