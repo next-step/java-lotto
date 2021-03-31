@@ -58,4 +58,12 @@ public class WinningNumbersTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.createByintegers((numbers)));
     }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복 시 에러")
+    public void check() throws Exception {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = WinningNumbers.createByintegers(numbers);
+        assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(new LottoNumber(1)));
+    }
 }
