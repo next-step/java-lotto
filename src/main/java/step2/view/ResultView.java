@@ -4,8 +4,8 @@ import step2.domain.lotto.Lotto;
 import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.money.Money;
+import step2.domain.winning.WinningResult;
 import step2.domain.winning.WinningScore;
-import step2.domain.winning.WinningScoreBoard;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,7 +70,7 @@ public final class ResultView {
         STRING_BUILDER.setLength(ZERO);
     }
 
-    public final void printLottoResult(WinningScoreBoard winningScoreBoard, Money money) {
+    public final void printLottoResult(WinningResult winningResult, Money money) {
         stringBuilderReset();
         STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
         STRING_BUILDER.append(PERFORATION);
@@ -79,26 +79,26 @@ public final class ResultView {
         for (WinningScore winningScore : data) {
             int correctCount = winningScore.getCorrectCount();
             int winningAmount = winningScore.getWinningAmount();
-            int winningCount = winningScoreBoard.get(winningScore);
+            int winningCount = winningResult.getMatchCount(winningScore);
             STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, correctCount, winningAmount, winningCount));
         }
 
-        double yield = doubleFormatting(getYield(winningScoreBoard, money.getMoney()));
+        double yield = doubleFormatting(getYield(winningResult, money.getMoney()));
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
+    public final double getYield(WinningResult winningResult, int inputMoney) {
         if (inputMoney == ZERO) {
             return ZERO;
         }
-        return ((double) getRevenue(winningScoreBoard) / (double) inputMoney);
+        return ((double) getRevenue(winningResult) / (double) inputMoney);
     }
 
-    private final int getRevenue(WinningScoreBoard winningScoreBoard) {
+    private final int getRevenue(WinningResult winningResult) {
         return Arrays.stream(WinningScore.values())
                 .mapToInt(winningScore ->
-                        Math.multiplyExact(winningScore.getWinningAmount(), winningScoreBoard.get(winningScore)))
+                        Math.multiplyExact(winningScore.getWinningAmount(), winningResult.getMatchCount(winningScore)))
                 .sum();
     }
 

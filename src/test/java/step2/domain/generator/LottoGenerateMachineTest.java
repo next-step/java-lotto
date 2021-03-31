@@ -3,12 +3,9 @@ package step2.domain.generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
 import step2.exception.LottoShuffleNullPointerException;
-import step2.strategy.LottoShuffleStrategy;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,7 +13,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoGeneratorTest {
+class LottoGenerateMachineTest {
 
     private List<LottoNumber> testSortLottoNumbers;
     private List<LottoNumber> reverseAndSortLottoNumbers;
@@ -35,23 +32,23 @@ class LottoGeneratorTest {
 
     }
 
-    @DisplayName("LottoGenerator 인스턴스 생성 테스트")
+    @DisplayName("LottoGenerateMachine 인스턴스 생성 테스트")
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.from(lottoNumbers -> {
+        LottoGenerateMachine lottoGenerateMachine = LottoGenerateMachine.of(lottoNumbers -> {
         });
 
         // then
-        assertThat(lottoGenerator).isNotNull();
+        assertThat(lottoGenerateMachine).isNotNull();
     }
 
-    @DisplayName("LottoGenerator 인스턴스에 null 주입시 예외처리 테스트")
+    @DisplayName("LottoGenerateMachine 인스턴스에 null 주입시 예외처리 테스트")
     @Test
     void 검증() {
         // when
         assertThatThrownBy(() -> {
-            LottoGenerator.from(null);
+            LottoGenerateMachine.of(null);
         }).isInstanceOf(LottoShuffleNullPointerException.class)
                 .hasMessageContaining("셔플 전략이 null 입니다.");
     }

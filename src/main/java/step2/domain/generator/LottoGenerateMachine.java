@@ -4,27 +4,32 @@ import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.Lottos;
 import step2.exception.LottoShuffleNullPointerException;
+import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
 
 import java.util.*;
 
-public final class LottoGenerator {
+public final class LottoGenerateMachine {
 
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
 
     private final LottoShuffleStrategy lottoShuffleStrategy;
 
-    private LottoGenerator(LottoShuffleStrategy lottoShuffleStrategy) {
+    private LottoGenerateMachine(LottoShuffleStrategy lottoShuffleStrategy) {
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
-    public static final LottoGenerator from(LottoShuffleStrategy lottoShuffleStrategy) {
-        validate(lottoShuffleStrategy);
-        return new LottoGenerator(lottoShuffleStrategy);
+    public static final LottoGenerateMachine of() {
+        return of(LottoRandomShuffleStrategy.getInstance());
     }
 
-    private static void validate(LottoShuffleStrategy lottoShuffleStrategy) {
+    public static final LottoGenerateMachine of(LottoShuffleStrategy lottoShuffleStrategy) {
+        validate(lottoShuffleStrategy);
+        return new LottoGenerateMachine(lottoShuffleStrategy);
+    }
+
+    private static final void validate(LottoShuffleStrategy lottoShuffleStrategy) {
         if (Objects.isNull(lottoShuffleStrategy)) {
             throw new LottoShuffleNullPointerException();
         }
@@ -40,15 +45,10 @@ public final class LottoGenerator {
     }
 
     private final Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = getLottoNumberValues();
+        List<LottoNumber> lottoNumbers = LottoNumber.values();
         lottoShuffleStrategy.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
-        Collections.sort(lottoNumbers);
-        return Lotto.of(lottoNumbers);
+        return Lotto.of(lottoNumbers.subList(FROM_INDEX, TO_INDEX));
     }
 
-    private final List<LottoNumber> getLottoNumberValues() {
-        return new ArrayList<>(LottoNumber.values());
-    }
 
 }

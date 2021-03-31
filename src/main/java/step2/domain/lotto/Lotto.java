@@ -35,7 +35,7 @@ public final class Lotto {
     }
 
     private static final Set<LottoNumber> toLottoNumberSet(String sentence) {
-        return Stream.of(sentence.trim().split(COMMA_WITH_BLANK))
+        return Stream.of(sentence.split(COMMA_WITH_BLANK))
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
     }

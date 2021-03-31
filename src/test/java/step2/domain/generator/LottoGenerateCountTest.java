@@ -2,8 +2,10 @@ package step2.domain.generator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.exception.InvalidNumberInputException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGenerateCountTest {
 
@@ -18,6 +20,19 @@ class LottoGenerateCountTest {
 
         // then
         assertThat(lottoGenerateCount).isNotNull();
+    }
+
+    @DisplayName("LottoGenerateCount 인스턴스에 음수 입력시 예외처리 테스트")
+    @Test
+    void 검증_음수() {
+        // given
+        int testMoney = -1;
+
+        // when and then
+        assertThatThrownBy(() -> LottoGenerateCount.of(testMoney))
+                .isInstanceOf(InvalidNumberInputException.class)
+                .hasMessageContaining("범위를 벗어난 값이 입력되었습니다.");
+
     }
 
     @DisplayName("LottoGenerateCount 인스턴스가 다음 시점으로 넘어갈 수 있는지 테스트")
@@ -48,4 +63,6 @@ class LottoGenerateCountTest {
         // then
         assertThat(actual).isFalse();
     }
+
+
 }

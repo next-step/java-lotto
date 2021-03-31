@@ -1,10 +1,13 @@
 package step2.domain.lotto;
 
+import step2.domain.winning.WinningResult;
 import step2.exception.ListNullPointerException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class Lottos {
 
@@ -27,6 +30,14 @@ public final class Lottos {
         if (Objects.isNull(lottos)) {
             throw new ListNullPointerException();
         }
+    }
+
+    public final WinningResult getWinningResult(Lotto winningLotto){
+        WinningResult winningResult = WinningResult.of();
+        lottos.stream()
+                .map(lotto -> lotto.getCorrectCount(winningLotto))
+                .forEach(winningResult::add);
+        return winningResult;
     }
 
     public final List<Lotto> getLottos() {

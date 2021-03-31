@@ -10,6 +10,7 @@ public final class LottoGenerateCount {
     private int count;
 
     private LottoGenerateCount(int money) {
+        validate(money);
         this.count = (money / DIVIDE_STANDARD);
     }
 
@@ -22,8 +23,8 @@ public final class LottoGenerateCount {
     }
 
     private final void validate(int money) {
-        if(money < ZERO) {
-            throw new IllegalArgumentException(); // 수정 예정
+        if (money < ZERO) {
+            throw new IllegalArgumentException();
         }
     }
 
