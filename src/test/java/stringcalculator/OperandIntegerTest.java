@@ -14,10 +14,10 @@ class OperandIntegerTest {
     @DisplayName("생성자 테스트")
     void create() {
         assertAll(
-                () -> assertEquals(new OperandInteger(0).parseInputInteger(), 0),
-                () -> assertEquals(new OperandInteger(1).parseInputInteger(), 1),
-                () -> assertEquals(new OperandInteger("0").parseInputInteger(), 0),
-                () -> assertEquals(new OperandInteger("1").parseInputInteger(), 1)
+                () -> assertEquals(new OperandInteger(0).parseInteger(), 0),
+                () -> assertEquals(new OperandInteger(1).parseInteger(), 1),
+                () -> assertEquals(new OperandInteger("0").parseInteger(), 0),
+                () -> assertEquals(new OperandInteger("1").parseInteger(), 1)
         );
     }
 
@@ -35,6 +35,6 @@ class OperandIntegerTest {
     @DisplayName("덧셈 테스트")
     void sumTest() {
         OperandInteger expected = new OperandInteger();
-        assertThat(expected.sum(new OperandInteger(1)).parseInputInteger()).isEqualTo(1);
+        assertThat(expected.sum(new OperandInteger(1)).parseInteger()).isEqualTo(1);
     }
 }

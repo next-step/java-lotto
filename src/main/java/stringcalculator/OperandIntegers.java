@@ -22,7 +22,7 @@ public class OperandIntegers {
         for (OperandInteger operandInteger : operandIntegers) {
             total = total.sum(operandInteger);
         }
-        return total.parseInputInteger();
+        return total.parseInteger();
     }
 
     @Override

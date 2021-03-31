@@ -27,7 +27,7 @@ public class OperandInteger {
         return new OperandInteger(this.number + other.number);
     }
 
-    public int parseInputInteger() {
+    public int parseInteger() {
         return number;
     }
 
