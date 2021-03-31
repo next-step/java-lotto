@@ -36,24 +36,24 @@ public class LottoFactory {
             .collect(toList()));
     }
 
-    public static Lottos purchase(Amount amount, List<String> manualNumbers) {
-        Lottos autoLottos = purchaseAutoLotto(amount);
-        Lottos manualLottos = purchaseManualLotto(manualNumbers);
+    public static Lottos buy(LottoTicketCount lottoTicketCount, List<String> manualNumbers) {
+        Lottos autoLottos = buyAutoLotto(lottoTicketCount);
+        Lottos manualLottos = buyManualLotto(manualNumbers);
 
         return new Lottos(Stream.concat(manualLottos.getLottos().stream(), autoLottos.getLottos().stream())
             .collect(Collectors.toList()));
     }
 
-    public static Lottos purchaseAutoLotto(Amount amount) {
+    public static Lottos buyAutoLotto(LottoTicketCount lottoTicketCount) {
         Lottos lottoList = new Lottos();
-        int count = amount.getAutoCount();
+        int count = lottoTicketCount.getLottoTicketCount();
         for (int i = 0; i < count; i++) {
             lottoList.add(createAutoLotto());
         }
         return lottoList;
     }
 
-    public static Lottos purchaseManualLotto(List<String> stringNumbers) {
+    public static Lottos buyManualLotto(List<String> stringNumbers) {
         Lottos lottoList = new Lottos();
         for (int i = 0; i < stringNumbers.size(); i++) {
             lottoList.add(createManualLotto(stringNumbers.get(i)));

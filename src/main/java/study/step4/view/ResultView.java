@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import study.step4.domain.Amount;
 import study.step4.domain.LottoRank;
+import study.step4.domain.LottoTicketCount;
 import study.step4.domain.LottoWin;
 import study.step4.domain.Lottos;
 
@@ -13,8 +14,8 @@ public class ResultView {
     private final static String MESSAGE_BONUS_BALL = ", 보너스 일치";
     private final static String MESSAGE_EMPTY = " ";
 
-    public static void printPurchaseLottoCount(Amount amount) {
-        System.out.println("수동으로 " + amount.getManualCount() + "장, 자동으로 " + amount.getAutoCount() + "장을 " + MESSAGE_PURCHASE);
+    public static void printPurchaseLottoCount(LottoTicketCount autoCount, LottoTicketCount manualCount) {
+        System.out.println("수동으로 " + manualCount.getLottoTicketCount() + "장, 자동으로 " + autoCount.getLottoTicketCount() + "장을 " + MESSAGE_PURCHASE);
     }
 
     public static void printLottoNumbers(Lottos lottos) {

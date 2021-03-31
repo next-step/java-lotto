@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import study.step4.domain.Amount;
+import study.step4.domain.LottoTicketCount;
 
 public class InputView {
     private final static String MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -40,9 +40,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<String> inputManualNumber(Amount amount) {
+    public static List<String> inputManualNumber(LottoTicketCount count) {
         System.out.println(MESSAGE_MANUAL_NUMBER);
-        return IntStream.range(0, amount.getManualCount())
+        return IntStream.range(0, count.getLottoTicketCount())
             .mapToObj(i -> scanner.nextLine())
             .collect(toList());
     }

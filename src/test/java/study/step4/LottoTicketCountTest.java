@@ -13,7 +13,9 @@ public class LottoTicketCountTest {
     @Test
     @DisplayName("생성자 테스트")
     public void create() {
+        // given
         LottoTicketCount count = new LottoTicketCount(10);
+        // when & then
         assertThat(count).isEqualTo(new LottoTicketCount(10));
         assertThat(count).isEqualTo(new LottoTicketCount("10"));
     }
