@@ -26,18 +26,16 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Lotto> enterLottoPurchaseManualCount() {
+    public static List<String> enterLottoPurchaseManualCount() {
         System.out.println(LOTTO_PURCHASE_MANUAL_COUNT_MESSAGE);
         int manualLottoCount = scanner.nextInt();
         scanner.nextLine();
-        System.out.println(MANUAL_NUMBERS_MESSAGE);
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            lottoList.add(
-                    Lotto.of(lottoGenerator.generateAppointedLotto(scanner.nextLine()))
-            );
-        }
 
+        System.out.println(MANUAL_NUMBERS_MESSAGE);
+        List<String> lottoList = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoList.add(scanner.nextLine());
+        }
         return lottoList;
     }
 

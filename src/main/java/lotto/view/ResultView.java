@@ -1,7 +1,9 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBoard;
+import lotto.domain.LottoBuyer;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.enums.Rank;
@@ -24,8 +26,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseAmount(int amount, int lottoManualCount) {
-        System.out.println(String.format(PURCHASE_MSG, lottoManualCount, amount - lottoManualCount));
+    public static void printPurchaseAmount(LottoBuyer lottoBuyer, List<String> lottoList) {
+        System.out.println(String.format(PURCHASE_MSG, lottoList.size(), lottoBuyer.getLottoQuantity() - lottoList.size()));
     }
 
     public static void printLottos(Lottos lottos) {
