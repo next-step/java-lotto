@@ -10,8 +10,9 @@ import java.util.stream.IntStream;
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final List<LottoNumber> CACHE;
+    private static final int LOWER_BOUND = 1;
+    private static final int UPPER_BOUND = 45;
     private static final int START_INCLUSIVE = 0;
-    private static final int START_INDEX = 1;
     private static final int END_EXCLUSIVE = 46;
 
     private final int lottoNumber;
@@ -27,23 +28,23 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber valueOf(String lottoNumber) {
+    public static final LottoNumber valueOf(String lottoNumber) {
         return valueOf(Integer.valueOf(lottoNumber));
     }
 
-    public static LottoNumber valueOf(int lottoNumber) {
+    public static final LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
         return CACHE.get(lottoNumber);
     }
 
-    private static void validate(int lottoNumber) {
-        if(lottoNumber <= START_INCLUSIVE || lottoNumber >= END_EXCLUSIVE) {
+    private static final void validate(int lottoNumber) {
+        if(lottoNumber < LOWER_BOUND || lottoNumber > UPPER_BOUND) {
             throw new InvalidNumberInputException();
         }
     }
 
-    public static final List<LottoNumber> getAllLottoNumber() {
-        return CACHE.subList(START_INDEX, END_EXCLUSIVE);
+    public static final List<LottoNumber> values() {
+        return CACHE.subList(LOWER_BOUND, END_EXCLUSIVE);
     }
 
     public final int getLottoNumber() {

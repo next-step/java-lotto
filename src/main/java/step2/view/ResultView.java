@@ -11,13 +11,27 @@ import step2.dto.LottoWinningResultResponseDto;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class ResultView {
 
+    private static final StringBuilder STRING_BUILDER = new StringBuilder();
+    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String LOTTO_WINNING_STATISTICS_MESSAGE = "당첨 통계\n";
+    private static final String PERFORATION = "---------\n";
+    private static final String CORRECT_WINNING_LOTTO_MESSAGE = "%d개 일치 (%d)원 - %d개\n";
+    private static final String TOTAL_YIELD_ANALYSIS_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]\n";
+    private static final String DELIMITER = ", ";
+
+    private static final double DIGIT_FORMAT = 100.0;
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+
     private static ResultView instance;
-    private final StringBuilder stringBuilder;
-    private final double DIGIT_FORMAT = 100.0;
 
     public final static ResultView getInstance() {
         if (isInstanceNull()) {
@@ -30,27 +44,26 @@ public final class ResultView {
         return instance == null;
     }
 
-    private ResultView() {
-        stringBuilder = new StringBuilder();
-    }
-
     public final void printLottoList(LottoExpressionResponseDto expressionResponseDto) {
         stringBuilderReset();
         Lottos lottos = expressionResponseDto.getLottoList();
-        List<Lotto> list = lottos.getLottos();
-        stringBuilder.append(list.size()).append("개를 구매했습니다.").append("\n");
-        for (Lotto lotto : list) {
-            stringBuilder.append(joinLottoNumbers(lotto));
-        }
-        System.out.println(stringBuilder.toString());
+        STRING_BUILDER.append(String.format(LOTTO_COUNT_MESSAGE, lottos.getLottosSize()));
+        STRING_BUILDER.append(joinLottoNumbers(lottos));
+        System.out.println(STRING_BUILDER.toString());
     }
 
-    private String joinLottoNumbers(Lotto lotto) {
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-        return lottoNumbers
-                .stream()
-                .map(ResultView::lottoNumberToString)
-                .collect(Collectors.joining(", ", "[", "]\n"));
+    private StringBuilder joinLottoNumbers(Lottos lottos) {
+        List<Lotto> lottoList = lottos.getLottos();
+        StringBuilder joinBuilder = new StringBuilder();
+        for(Lotto lotto : lottoList) {
+            Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+            String joinLottoNumber = lottoNumbers
+                    .stream()
+                    .map(ResultView::lottoNumberToString)
+                    .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
+            joinBuilder.append(joinLottoNumber);
+        }
+        return joinBuilder;
     }
 
     private static String lottoNumberToString(LottoNumber lottoNumber) {
@@ -58,47 +71,44 @@ public final class ResultView {
     }
 
     private void stringBuilderReset(){
-        stringBuilder.setLength(0);
+        STRING_BUILDER.setLength(ZERO);
     }
 
     public final void printLottoResult(LottoWinningResultResponseDto lottoWinningResultResponseDto, Money money) {
         stringBuilderReset();
         WinningScoreBoard winningScoreBoard = lottoWinningResultResponseDto.getWinningScoreBoard();
-        stringBuilder.append("당첨 통계\n");
-        stringBuilder.append("---------\n");
+        STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
+        STRING_BUILDER.append(PERFORATION);
         List<WinningScore> data = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
         data.remove(WinningScore.MISS);
-
         for(WinningScore winningScore : data) {
-            stringBuilder.append(winningScore.getCorrectCount()).append("개 일치");
-            stringBuilder.append("(").append(winningScore.getWinningAmount()).append("원)");
-            stringBuilder.append("-").append(winningScoreBoard.get(winningScore)).append("개\n");
+            int correctCount = winningScore.getCorrectCount();
+            int winningAmount = winningScore.getWinningAmount();
+            int winningCount = winningScoreBoard.get(winningScore);
+            STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, correctCount, winningAmount, winningCount));
         }
 
         double yield = doubleFormatting(getYield(winningScoreBoard, money.getMoney()));
-        stringBuilder.append("총 수익률은 ").append(yield).append("입니다.");
-        stringBuilder.append("(기준이 1이기 때문에 결과적으로 ").append(chekProfitOrLoss(yield)).append("라는 의미임)");
-        System.out.println(stringBuilder.toString());
-
+        STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
+        System.out.println(STRING_BUILDER.toString());
     }
 
     public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
-        if(inputMoney == 0) {
-            return 0;
+        if(inputMoney == ZERO) {
+            return ZERO;
         }
         return ((double)getRevenue(winningScoreBoard) / (double)inputMoney);
     }
 
     private final int getRevenue(WinningScoreBoard winningScoreBoard) {
-        int sum = 0;
-        for (WinningScore winningScore : WinningScore.values()) {
-            sum += Math.multiplyExact(winningScore.getWinningAmount(), winningScoreBoard.get(winningScore));
-        }
-        return sum;
+        return Arrays.stream(WinningScore.values())
+                .mapToInt(winningScore ->
+                        Math.multiplyExact(winningScore.getWinningAmount(), winningScoreBoard.get(winningScore)))
+                .sum();
     }
 
     private String chekProfitOrLoss(double yield) {
-        return yield >= 1 ? "이익이" : "손해";
+        return yield >= ONE ? "이익이" : "손해";
     }
 
     private double doubleFormatting(double yield){

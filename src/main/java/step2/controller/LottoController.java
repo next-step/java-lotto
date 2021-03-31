@@ -34,7 +34,7 @@ public final class LottoController {
     }
 
     public final LottoExpressionResponseDto getExpressionLottoList(LottoCreationRequestDto creationRequestDto) {
-        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(creationRequestDto.getMoney());
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.of(creationRequestDto);
         LottoGenerator lottoGenerator = LottoGenerator.of(strategy);
         while (lottoGenerateCount.hasNext()) {
             lottos.add(lottoGenerator.generateLotto());

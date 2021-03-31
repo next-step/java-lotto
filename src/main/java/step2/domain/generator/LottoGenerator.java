@@ -5,10 +5,7 @@ import step2.domain.lotto.LottoNumber;
 import step2.exception.LottoShuffleNullPointerException;
 import step2.strategy.LottoShuffleStrategy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public final class LottoGenerator {
 
@@ -41,7 +38,7 @@ public final class LottoGenerator {
     }
 
     private final List<LottoNumber> getAllLottoNumber() {
-        return new ArrayList<>(LottoNumber.getAllLottoNumber());
+        return new ArrayList<>(LottoNumber.values());
     }
 
 }

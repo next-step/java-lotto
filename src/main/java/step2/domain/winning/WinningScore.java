@@ -11,9 +11,9 @@ public enum WinningScore {
     SIX(6, 2_000_000_000);
 
     private final int correctCount;
-    private final long winningAmount;
+    private final int winningAmount;
 
-    WinningScore(int correctCount, long winningAmount ) {
+    WinningScore(int correctCount, int winningAmount ) {
         this.correctCount = correctCount;
         this.winningAmount = winningAmount;
     }
@@ -21,14 +21,15 @@ public enum WinningScore {
     public static final WinningScore valueOf(int realCorrectCount) {
         return Arrays.stream(WinningScore.values())
                 .filter(operation -> operation.correctCount == realCorrectCount)
-                .findFirst().orElse(WinningScore.MISS);
+                .findFirst()
+                .orElse(WinningScore.MISS);
     }
 
     public final int getCorrectCount() {
         return correctCount;
     }
 
-    public final long getWinningAmount() {
+    public final int getWinningAmount() {
         return winningAmount;
     }
 

@@ -14,7 +14,7 @@ class LottoGenerateCountTest {
         int testMoney = 1000;
 
         // when
-        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(testMoney);
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.of(testMoney);
 
         // then
         assertThat(lottoGenerateCount).isNotNull();
@@ -27,7 +27,7 @@ class LottoGenerateCountTest {
         int testMoney = 1000;
 
         // when
-        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(testMoney);
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.of(testMoney);
         boolean actual = lottoGenerateCount.hasNext();
 
         // then
@@ -41,7 +41,7 @@ class LottoGenerateCountTest {
         int testMoney = 1000;
 
         // when
-        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.newInstance(testMoney);
+        LottoGenerateCount lottoGenerateCount = LottoGenerateCount.of(testMoney);
         lottoGenerateCount.next();
         boolean actual = lottoGenerateCount.hasNext();
 

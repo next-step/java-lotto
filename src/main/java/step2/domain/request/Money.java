@@ -11,15 +11,15 @@ public final class Money {
     private final int money;
 
     private Money(int money) {
+        validate(money);
         this.money = money;
     }
 
     public static final Money valueOf(int money) {
-        validate(money);
         return new Money(money);
     }
 
-    private static final void validate(int money) {
+    private final void validate(int money) {
         if (isOutOfBounds(money)) {
             throw new InvalidNumberInputException();
         }

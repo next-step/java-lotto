@@ -14,15 +14,15 @@ public final class LottoGenerateCount {
         this.count = (money / DIVIDE_STANDARD);
     }
 
-    public static final LottoGenerateCount newInstance(LottoCreationRequestDto requestDto) {
-        return newInstance(requestDto.getMoney());
+    public static final LottoGenerateCount of(LottoCreationRequestDto requestDto) {
+        return of(requestDto.getMoney());
     }
 
-    public static final LottoGenerateCount newInstance(Money money) {
-        return newInstance(money.getMoney());
+    public static final LottoGenerateCount of(Money money) {
+        return of(money.getMoney());
     }
 
-    public static final LottoGenerateCount newInstance(int money) {
+    public static final LottoGenerateCount of(int money) {
         return new LottoGenerateCount(money);
     }
 

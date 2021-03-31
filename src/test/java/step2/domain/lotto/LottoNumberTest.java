@@ -1,6 +1,5 @@
 package step2.domain.lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.exception.InvalidNumberInputException;
@@ -94,7 +93,7 @@ class LottoNumberTest {
                 .collect(Collectors.toList());
 
         // when
-        List<LottoNumber> actual = LottoNumber.getAllLottoNumber();
+        List<LottoNumber> actual = LottoNumber.values();
 
         // then
         assertThat(actual).isEqualTo(expected);

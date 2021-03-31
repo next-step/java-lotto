@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import step2.exception.ListNullPointerException;
 import step2.exception.MissMatchSizeException;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,13 +15,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     @BeforeEach
     void setUp() {
         lottoNumbers = IntStream.range(1, 7)
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @DisplayName("Lotto 인스턴스 생성 여부 테스트")
@@ -53,7 +53,7 @@ class LottoTest {
     void 검증_Null() {
 
         // given
-        List<LottoNumber> nullLottoNumbers = null;
+        Set<LottoNumber> nullLottoNumbers = null;
 
         // when and then
         assertThatThrownBy(() -> {
@@ -86,7 +86,7 @@ class LottoTest {
         Lotto lotto = Lotto.of(lottoNumbers);
 
         // when
-        List<LottoNumber> actual = lotto.getLottoNumbers();
+        Set<LottoNumber> actual = lotto.getLottoNumbers();
 
         // then
         assertThat(actual).isEqualTo(lottoNumbers);
