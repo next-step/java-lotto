@@ -49,11 +49,11 @@ public class LottoScoreBoard {
 
     private Prize findPrize(Lotto lotto) {
         long equalNumberCount = winnerLotto.getEqualNumberCountFrom(lotto);
-        if (equalNumberCount == 6) {
-            return Prize.FIRST;
-        }
         if (equalNumberCount == 5 && lotto.traverseCompareTo(bonusNumber) > 0) {
             return Prize.SECOND;
+        }
+        if (equalNumberCount == 5) {
+            return Prize.THIRD;
         }
         return Prize.getPrizeByEqualNumberCount(equalNumberCount);
     }
