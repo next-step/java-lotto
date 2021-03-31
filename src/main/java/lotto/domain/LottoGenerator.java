@@ -31,9 +31,9 @@ public class LottoGenerator {
         );
     }
 
-    public Set<LottoNumber> generateAppointedLotto(final String winningNumbers) {
+    public Set<LottoNumber> generateAppointedLotto(final String appointedNumbers) {
         List<String> lottoNumberStringList =
-                new ArrayList(Arrays.asList(winningNumbers.split(WINNING_NUMBER_STRING_DELIMITER)));
+                new ArrayList(Arrays.asList(appointedNumbers.split(WINNING_NUMBER_STRING_DELIMITER)));
         return getTreeSetLottoNumbers(
                 lottoNumberStringList.stream()
                         .map(Integer::parseInt)
