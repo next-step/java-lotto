@@ -3,6 +3,7 @@ package step2.domain.check;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
+import step2.exception.LottoNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
