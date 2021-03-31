@@ -21,6 +21,6 @@ public class LottoAutoService {
 
     public LottoRanks inquiryWin(List<String> confirmTargetList, int[] winNumbers) {
         LottoTicket lottoTicket = new LottoTicket(confirmTargetList);
-        return lottoTicket.inquiryRankList(winNumbers);
+        return lottoTicket.inquiryRankList(winNumbers, 0); // TODO: bonusNumber 파라미터 처리
     }
 }
