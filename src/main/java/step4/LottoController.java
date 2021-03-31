@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LottoApp {
+public class LottoController {
 
     InputView inputView = new InputView();
     ResultView resultView = new ResultView();
@@ -31,7 +31,7 @@ public class LottoApp {
             resultView.printInteger(lotto);
         }
 
-        Lotto lastWinner = lottoStore.comma(inputView.inputLastInteger());
+        Lotto lastWinner = inputView.inputLastInteger();
         int bonus = inputView.inputBonus();
         Map<Rank, Integer> gameMap = game.result(new LottoWinner(lastWinner, bonus));
         resultView.printSameLotto(gameMap);
