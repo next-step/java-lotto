@@ -27,12 +27,17 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank rank = null;
         for (Rank value : values()) {
-            if (value.countOfMatch == countOfMatch) {
-                rank = value;
-            }
+            rank = isCorrect(countOfMatch, rank, value);
         }
         if (matchBonus && rank == THIRD) {
             rank = SECOND;
+        }
+        return rank;
+    }
+
+    private static Rank isCorrect(int countOfMatch, Rank rank, Rank value) {
+        if (value.countOfMatch == countOfMatch) {
+            rank = value;
         }
         return rank;
     }
