@@ -3,7 +3,11 @@ package step2.domain.check;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
+import step2.domain.lotto.Lottos;
+import step2.domain.winning.WinningResult;
 import step2.exception.LottoNullPointerException;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -35,6 +39,21 @@ class LottoWinningCheckMachineTest {
                 .isInstanceOf(LottoNullPointerException.class)
                 .hasMessageContaining("null 인 Lotto가 입력되었습니다.");
 
+    }
+
+    @DisplayName("LottoWinningCheckMachine 인스턴스 Lottos 주입시 WinningResult 반환 여부 테스트")
+    @Test
+    void 반환() {
+        // given
+        Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        Lottos lottos = Lottos.of(Arrays.asList(Lotto.of("1, 2, 3, 4, 5, 6")));
+
+        // when
+        LottoWinningCheckMachine machine = LottoWinningCheckMachine.of(winningLotto);
+        WinningResult winningResult = machine.getWinningResult(lottos);
+
+        // then
+        assertThat(winningResult).isNotNull();
     }
 
 }
