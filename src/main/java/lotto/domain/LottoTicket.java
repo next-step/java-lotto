@@ -68,7 +68,7 @@ public class LottoTicket {
 
     public LottoRanks inquiryRankList(int[] winNumbers, int bonusNumber) {
         Lotto.validateLottoNumbers(winNumbers);
-        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList())); // TODO: bonusNumber 세팅메서드 구현
+        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList()));
     }
 
 }
