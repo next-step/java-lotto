@@ -2,6 +2,7 @@ package step2.domain.lotto;
 
 import step2.exception.InvalidNumberInputException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -32,7 +33,6 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return valueOf(Integer.valueOf(lottoNumber));
     }
 
-    // 캐싱된 값을 가져올 때도 예외발생 할 수 있으므로
     public static final LottoNumber valueOf(int lottoNumber) {
         validate(lottoNumber);
         return CACHE.get(lottoNumber);
@@ -45,7 +45,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static final List<LottoNumber> values() {
-        return CACHE.subList(LOWER_BOUND, END_EXCLUSIVE);
+        return new ArrayList<>(CACHE.subList(LOWER_BOUND, END_EXCLUSIVE));
     }
 
     public final int getLottoNumber() {

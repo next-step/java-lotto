@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinningCheckMachineTest {
 
@@ -50,7 +49,7 @@ class LottoWinningCheckMachineTest {
 
         // when
         LottoWinningCheckMachine machine = LottoWinningCheckMachine.of(winningLotto);
-        WinningResult winningResult = machine.getWinningResult(lottos);
+        WinningResult winningResult = machine.generateWinningResult(lottos);
 
         // then
         assertThat(winningResult).isNotNull();

@@ -3,10 +3,10 @@ package step2.domain.lotto;
 import step2.exception.ListNullPointerException;
 import step2.exception.MissMatchSizeException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,7 +27,7 @@ public final class Lotto {
     }
 
     public static final Lotto of(List<LottoNumber> lottoNumbers) {
-        return of(new TreeSet<>(lottoNumbers));
+        return of(new HashSet<>(lottoNumbers));
     }
 
     public static final Lotto of(Set<LottoNumber> lottoNumbers) {

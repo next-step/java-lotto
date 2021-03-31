@@ -16,7 +16,7 @@ public final class ResultView {
 
     private static final StringBuilder STRING_BUILDER = new StringBuilder();
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
-    private static final String LOTTO_WINNING_STATISTICS_MESSAGE = "당첨 통계\n";
+    private static final String LOTTO_WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n";
     private static final String PERFORATION = "---------\n";
     private static final String CORRECT_WINNING_LOTTO_MESSAGE = "%d개 일치 (%d)원 - %d개\n";
     private static final String TOTAL_YIELD_ANALYSIS_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
@@ -30,6 +30,8 @@ public final class ResultView {
     private static final int ONE = 1;
 
     private static ResultView instance;
+
+    private ResultView() { }
 
     public final static ResultView getInstance() {
         if (isInstanceNull()) {
@@ -49,7 +51,7 @@ public final class ResultView {
     }
 
     private StringBuilder joinLottoNumbers(Lottos lottos) {
-        List<Lotto> lottoList = lottos.getLottos();
+        Set<Lotto> lottoList = lottos.getLottos();
         StringBuilder joinBuilder = new StringBuilder();
         for (Lotto lotto : lottoList) {
             Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();

@@ -1,5 +1,6 @@
 package step2.service;
 
+import step2.domain.check.LottoWinningCheckMachine;
 import step2.domain.generator.LottoGenerateCount;
 import step2.domain.generator.LottoGenerateMachine;
 import step2.domain.lotto.Lotto;
@@ -32,7 +33,9 @@ public final class LottoService {
     }
 
     public final WinningResult getWinningResult(Lottos userLottos, Lotto winningLotto) {
-        return userLottos.getWinningResult(winningLotto);
+        LottoWinningCheckMachine winningCheckMachine = LottoWinningCheckMachine.of(winningLotto);
+        WinningResult winningResult = winningCheckMachine.generateWinningResult(userLottos);
+        return winningResult;
     }
 
 }

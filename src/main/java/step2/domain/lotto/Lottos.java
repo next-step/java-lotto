@@ -1,46 +1,30 @@
 package step2.domain.lotto;
 
-import step2.domain.winning.WinningResult;
 import step2.exception.ListNullPointerException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class Lottos {
 
-    private final List<Lotto> lottos;
+    private final Set<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottos) {
+    private Lottos(Set<Lotto> lottos) {
         validate(lottos);
         this.lottos = lottos;
     }
 
-    public final static Lottos of() {
-        return new Lottos(new ArrayList<>());
-    }
-
-    public final static Lottos of(List<Lotto> lottos) {
+    public final static Lottos of(Set<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
-    private final void validate(List<Lotto> lottos) {
+    private final void validate(Set<Lotto> lottos) {
         if (Objects.isNull(lottos)) {
             throw new ListNullPointerException();
         }
     }
 
-    public final WinningResult getWinningResult(Lotto winningLotto){
-        WinningResult winningResult = WinningResult.of();
-        lottos.stream()
-                .map(lotto -> lotto.getCorrectCount(winningLotto))
-                .forEach(winningResult::add);
-        return winningResult;
-    }
-
-    public final List<Lotto> getLottos() {
+    public final Set<Lotto> getLottos() {
         return lottos;
     }
 
