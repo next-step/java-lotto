@@ -22,10 +22,7 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers createBystrings(List<String> winningNumbers) {
-        return new WinningNumbers(ConvertUtil.toIntegers(winningNumbers)
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+        return createByintegers(ConvertUtil.toIntegers(winningNumbers));
     }
 
     public static WinningNumbers createByintegers(List<Integer> winningNumbers) {
