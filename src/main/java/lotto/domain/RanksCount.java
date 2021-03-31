@@ -67,19 +67,4 @@ public class RanksCount {
 
         return ranksCount;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RanksCount that = (RanksCount) o;
-        return Objects.equals(ranksCount, that.ranksCount) &&
-                Objects.equals(winningNumbers, that.winningNumbers) &&
-                Objects.equals(lottoTickets, that.lottoTickets);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ranksCount, winningNumbers, lottoTickets);
-    }
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class TicketOffice {
     private final LottoTicketPrice lottoTicketPrice;
@@ -22,18 +21,5 @@ public class TicketOffice {
 
     public LottoTicketPrice lottoTicketPrice() {
         return lottoTicketPrice;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TicketOffice that = (TicketOffice) o;
-        return Objects.equals(lottoTicketPrice, that.lottoTicketPrice);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoTicketPrice);
     }
 }
