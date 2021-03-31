@@ -13,12 +13,4 @@ public class BonusBallTest {
         BonusBall bonusBall = new BonusBall(1);
         assertThat(bonusBall).isEqualTo(new BonusBall(1));
     }
-
-    @Test
-    @DisplayName("보너스 볼 번호 일치하는지 확인")
-    public void isSame() throws Exception {
-        BonusBall bonusBall = new BonusBall(1);
-        assertThat(bonusBall.isSame(1)).isTrue();
-        assertThat(bonusBall.isSame(2)).isFalse();
-    }
 }

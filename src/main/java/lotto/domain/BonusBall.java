@@ -19,12 +19,8 @@ public class BonusBall {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isSame(int bonusNumber) {
-        return isSame(new BonusBall(bonusNumber));
-    }
-
-    public boolean isSame(BonusBall bonusNumber) {
-        return this.bonusNumber.equals(bonusNumber.bonusNumber);
+    public LottoNumber bonusNumber() {
+        return bonusNumber;
     }
 
     @Override
