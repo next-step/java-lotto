@@ -35,21 +35,22 @@ class LottoGeneratorTest {
 
     }
 
-    @DisplayName("LottoNumbersGenerator 인스턴스 생성 테스트")
+    @DisplayName("LottoGenerator 인스턴스 생성 테스트")
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.from(lottoNumbers -> {});
+        LottoGenerator lottoGenerator = LottoGenerator.from(lottoNumbers -> {
+        });
 
         // then
         assertThat(lottoGenerator).isNotNull();
     }
 
-    @DisplayName("LottoNumbersGenerator 인스턴스에 null 주입시 예외처리 테스트")
+    @DisplayName("LottoGenerator 인스턴스에 null 주입시 예외처리 테스트")
     @Test
     void 검증() {
         // when
-        assertThatThrownBy(()-> {
+        assertThatThrownBy(() -> {
             LottoGenerator.from(null);
         }).isInstanceOf(LottoShuffleNullPointerException.class)
                 .hasMessageContaining("셔플 전략이 null 입니다.");

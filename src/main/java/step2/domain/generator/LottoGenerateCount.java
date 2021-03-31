@@ -1,6 +1,6 @@
 package step2.domain.generator;
 
-import step2.domain.request.Money;
+import step2.domain.money.Money;
 
 public final class LottoGenerateCount {
 

@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.request.Money;
+import step2.domain.money.Money;
 
 import java.util.Scanner;
 

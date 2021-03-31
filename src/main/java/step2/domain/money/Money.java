@@ -1,4 +1,4 @@
-package step2.domain.request;
+package step2.domain.money;
 
 import step2.exception.InvalidNumberInputException;
 

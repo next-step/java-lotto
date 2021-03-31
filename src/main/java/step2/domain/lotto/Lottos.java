@@ -24,7 +24,7 @@ public final class Lottos {
     }
 
     private final void validate(List<Lotto> lottos) {
-        if(Objects.isNull(lottos)){
+        if (Objects.isNull(lottos)) {
             throw new ListNullPointerException();
         }
     }

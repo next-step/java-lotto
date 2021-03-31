@@ -13,7 +13,7 @@ public enum WinningScore {
     private final int correctCount;
     private final int winningAmount;
 
-    WinningScore(int correctCount, int winningAmount ) {
+    WinningScore(int correctCount, int winningAmount) {
         this.correctCount = correctCount;
         this.winningAmount = winningAmount;
     }

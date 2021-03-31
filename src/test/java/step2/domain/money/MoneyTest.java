@@ -1,4 +1,4 @@
-package step2.domain.request;
+package step2.domain.money;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

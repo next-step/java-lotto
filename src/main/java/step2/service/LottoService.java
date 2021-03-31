@@ -1,10 +1,9 @@
 package step2.service;
 
-import step2.domain.checker.LottoWinningChecker;
 import step2.domain.generator.LottoGenerateCount;
 import step2.domain.generator.LottoGenerator;
 import step2.domain.lotto.Lottos;
-import step2.domain.request.Money;
+import step2.domain.money.Money;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
 

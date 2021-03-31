@@ -2,8 +2,7 @@ package step2;
 
 import step2.domain.lotto.Lottos;
 import step2.service.LottoService;
-import step2.domain.lotto.Lotto;
-import step2.domain.request.Money;
+import step2.domain.money.Money;
 import step2.view.InputView;
 import step2.view.ResultView;
 

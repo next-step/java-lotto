@@ -3,7 +3,7 @@ package step2.view;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
-import step2.domain.request.Money;
+import step2.domain.money.Money;
 import step2.domain.winning.WinningScore;
 import step2.domain.winning.WinningScoreBoard;
 
@@ -51,7 +51,7 @@ public final class ResultView {
     private StringBuilder joinLottoNumbers(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottos();
         StringBuilder joinBuilder = new StringBuilder();
-        for(Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList) {
             Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
             String joinLottoNumber = lottoNumbers
                     .stream()
@@ -66,7 +66,7 @@ public final class ResultView {
         return String.valueOf(lottoNumber.getLottoNumber());
     }
 
-    private void stringBuilderReset(){
+    private void stringBuilderReset() {
         STRING_BUILDER.setLength(ZERO);
     }
 
@@ -76,7 +76,7 @@ public final class ResultView {
         STRING_BUILDER.append(PERFORATION);
         List<WinningScore> data = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
         data.remove(WinningScore.MISS);
-        for(WinningScore winningScore : data) {
+        for (WinningScore winningScore : data) {
             int correctCount = winningScore.getCorrectCount();
             int winningAmount = winningScore.getWinningAmount();
             int winningCount = winningScoreBoard.get(winningScore);
@@ -89,10 +89,10 @@ public final class ResultView {
     }
 
     public final double getYield(WinningScoreBoard winningScoreBoard, int inputMoney) {
-        if(inputMoney == ZERO) {
+        if (inputMoney == ZERO) {
             return ZERO;
         }
-        return ((double)getRevenue(winningScoreBoard) / (double)inputMoney);
+        return ((double) getRevenue(winningScoreBoard) / (double) inputMoney);
     }
 
     private final int getRevenue(WinningScoreBoard winningScoreBoard) {
@@ -106,8 +106,8 @@ public final class ResultView {
         return yield >= ONE ? "이익이" : "손해";
     }
 
-    private double doubleFormatting(double yield){
-        return (Math.floor(yield*DIGIT_FORMAT))/DIGIT_FORMAT;
+    private double doubleFormatting(double yield) {
+        return (Math.floor(yield * DIGIT_FORMAT)) / DIGIT_FORMAT;
     }
 
 }

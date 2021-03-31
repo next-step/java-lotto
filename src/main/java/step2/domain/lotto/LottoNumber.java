@@ -24,7 +24,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toList());
     }
 
-    private LottoNumber(int lottoNumber){
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
@@ -38,7 +38,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static final void validate(int lottoNumber) {
-        if(lottoNumber < LOWER_BOUND || lottoNumber > UPPER_BOUND) {
+        if (lottoNumber < LOWER_BOUND || lottoNumber > UPPER_BOUND) {
             throw new InvalidNumberInputException();
         }
     }
