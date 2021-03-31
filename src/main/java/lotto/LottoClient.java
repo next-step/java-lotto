@@ -29,7 +29,7 @@ public class LottoClient {
         lotto.buy(lottoTicketNumber);
 
         for (LottoNumbers marked : lotto.lotto()) {
-            System.out.println(marked.toString());
+            inputView.print(marked.toString());
         }
     }
 
