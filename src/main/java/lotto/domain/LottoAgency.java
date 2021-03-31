@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class LottoAgency {
 
-  private static final int LOTTO_PER_PRICE = 1000;
-
   private final LottoCoupon coupon;
   private final Money money;
 
@@ -21,37 +19,28 @@ public class LottoAgency {
   }
 
   public int getPurchaseQuantity() {
-    return money.toInt() / LOTTO_PER_PRICE;
+    return money.dividePerLotto();
   }
 
   public LottoCoupon getCoupon() {
     return new LottoCoupon(coupon.getLottoCoupon());
   }
 
-  public WinningBoard getTotalResult(Lotto winNumbers) {
-    List<Integer> lottoMatchResult = new ArrayList<>();
+  public LottoScoreBoard getLottoResult(Lotto winNumbers, final Number bonusBall) {
+    List<LottoRank> lottoMatchResult = new ArrayList<>();
     for(int i = 0; i < getPurchaseQuantity(); i++) {
-      lottoMatchResult.add(eachResult(i, winNumbers));
+      lottoMatchResult.add(eachResult(i, winNumbers, bonusBall));
     }
-    return WinningBoard.createLottoResult(lottoMatchResult, money);
+    return LottoScoreBoard.createLottoResult(lottoMatchResult, money);
   }
 
-  private int eachResult(int index, Lotto winNumbers) {
-    List<Number> winNumber = winNumbers.getNumbers();
-    List<Number> targetNumber = coupon.getLottoCoupon().get(index).getNumbers();
+  private LottoRank eachResult(int index, Lotto winNumbers, Number bonusBall) {
+    List<Number> winningNumbers = winNumbers.getNumbers();
+    List<Number> holdingLottoNumbers = coupon.getLottoCoupon()
+        .get(index)
+        .getNumbers();
 
-    int count = 0;
-    for(int i = 0; i < winNumber.size(); i++) {
-      count = isContain(winNumber, targetNumber, count, i);
-    }
-    return count;
-  }
-
-  private int isContain(List<Number> winNumber, List<Number> targetNumber, int count, int index) {
-    if(winNumber.contains(targetNumber.get(index))) {
-      count++;
-    }
-    return count;
+    return LottoRank.matches(winningNumbers, holdingLottoNumbers, bonusBall);
   }
 
   @Override
