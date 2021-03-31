@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public final class LottoStore {
 
-  private static final Integer LOTTO_PRICE = 1000;
+  private static final int LOTTO_PRICE = 1000;
 
   public static LottoGame sell(Money money) {
     int count = money.calculateTryLottoCount(LOTTO_PRICE);

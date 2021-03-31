@@ -12,7 +12,7 @@ public class ResultView {
   private static final String UNAVAILABLE_GAME = "로또 게임을 진행할 수 없습니다.";
 
   public void printBuyingLottoGame(LottoGame lottoGame) {
-    System.out.println(lottoGame.getLottoBallNumbersString());
+    System.out.println(lottoGame.toString());
   }
 
   public void printLottoBuySize(LottoGame lottoGames) {
@@ -27,13 +27,15 @@ public class ResultView {
     System.out.println(STATISTICS);
     System.out.println("------------");
     System.out.println("3개 일치 (5000원) - " +
-        statistics.countGame(new StatisticsDto(Ranking.FOURTH, new Money(5000))));
+        statistics.countGame(Ranking.FOURTH));
     System.out.println("4개 일치 (50000원) - " +
-        statistics.countGame(new StatisticsDto(Ranking.THIRD, new Money(50000))));
+        statistics.countGame(Ranking.THIRD));
     System.out.println("5개 일치 (1500000원) - " +
-        statistics.countGame(new StatisticsDto(Ranking.SECOND, new Money(1500000))));
+        statistics.countGame(Ranking.SECOND));
+    System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " +
+        statistics.countGame(Ranking.SECOND_BONUS));
     System.out.println("6개 일치 (2000000000원) - " +
-        statistics.countGame(new StatisticsDto(Ranking.FIRST, new Money(2000000000))));
+        statistics.countGame(Ranking.FIRST));
     System.out.println("총 수익률은 " + calculateEarningRate(investMoney, statistics) + " 입니다.");
   }
 
