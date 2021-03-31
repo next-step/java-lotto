@@ -27,11 +27,16 @@ public class LottoNumbers {
         return true;
     }
 
-    public int contains(LottoNumbers checkNumbers) {
+
+    public int containsAll(LottoNumbers checkNumbers) {
         return Long.valueOf(checkNumbers.lottoNumberSet.stream()
                 .filter(checkNumber -> this.lottoNumberSet.contains(checkNumber))
                 .count())
                 .intValue();
+    }
+
+    public boolean containsOne(LottoNumber checkNumber) {
+        return lottoNumberSet.contains(checkNumber);
     }
 
     @Override
@@ -46,6 +51,7 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumberSet);
     }
+
 
 
 }

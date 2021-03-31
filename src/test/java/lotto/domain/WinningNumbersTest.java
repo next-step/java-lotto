@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumbersTest {
 
@@ -14,8 +15,10 @@ public class WinningNumbersTest {
     private static final int WINNING_LOWER_BOUND = 1;
 
     private WinningNumbers winning;
+    private WinningNumbers bonusWinning;
     private Set<LottoNumber> winningNumbers = new HashSet<>();
     private LottoNumbers numbers;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
@@ -24,12 +27,27 @@ public class WinningNumbersTest {
         }
         numbers = new LottoNumbers(winningNumbers);
         winning = new WinningNumbers(numbers);
+
+        bonusNumber = new LottoNumber(WINNING_SIZE + 1);
+        bonusWinning = new WinningNumbers(numbers, bonusNumber);
     }
 
     @Test
     void createTest() {
         //then
         assertThat(winning).isEqualTo(new WinningNumbers(numbers));
+        assertThat(bonusWinning).isEqualTo(new WinningNumbers(numbers, bonusNumber));
+    }
+
+    @Test
+    void validExistBounsNumber() {
+        //given
+        LottoNumber testBonus = new LottoNumber(WINNING_SIZE);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            new WinningNumbers(numbers, testBonus);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

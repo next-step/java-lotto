@@ -44,7 +44,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void containsTest() {
+    void containsAllTest() {
         //given
         Set<LottoNumber> testSet = new LinkedHashSet<>(lottoNumberSet);
         testSet.remove(new LottoNumber(1));
@@ -52,10 +52,23 @@ public class LottoNumbersTest {
         LottoNumbers testNumbers = new LottoNumbers(testSet);
 
         //when
-        int result = lottoNumbers.contains(testNumbers);
+        int result = lottoNumbers.containsAll(testNumbers);
 
         //then
         assertThat(result).isEqualTo(LOTTO_SIZE - 1);
+    }
+
+    @Test
+    void containsOneTest() {
+        //given
+        LottoNumber containNumber = new LottoNumber(LOTTO_SIZE);
+        LottoNumber notInNumber = new LottoNumber(LOTTO_SIZE + 1);
+
+        //when, then
+        assertThat(lottoNumbers.containsOne(containNumber)).isTrue();
+        assertThat(lottoNumbers.containsOne(notInNumber)).isFalse();
+
+
     }
 
 }
