@@ -25,9 +25,7 @@ public class Lotteries {
 	}
 
 	public void add(Lotteries newLotteries) {
-		newLotteries.lotteries.stream().forEach(lotto -> {
-			this.lotteries.add(lotto);
-		});
+		this.lotteries.addAll(newLotteries.lotteries);
 	}
 
 	public List<Lotto> getLottoGameList() {

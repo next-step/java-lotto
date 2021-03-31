@@ -3,15 +3,16 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.Ranking;
 import lotto.domain.RankingResult;
 
 public class ResultView {
-	public void printLottoGameList(List<Lotto> lottoList, int purchasePrice, int size) {
-		int autoPurchaseNumbers = (purchasePrice - (size * Lotteries.PRICE_PER_GAME)) / Lotteries.PRICE_PER_GAME;
-		System.out.println("수동으로" + size + "장, 자동으로 " + autoPurchaseNumbers + "개를 구매했습니다.");
+	public void printLottoGameList(List<Lotto> lottoList, PurchaseInfo purchaseInfo) {
+		int manualPurchaseNumbers = purchaseInfo.getManualPurchaseNumbers();
+		int autoPurchaseNumbers = purchaseInfo.calculateAutoPurchaseNumbers();
+		System.out.println("수동으로" + manualPurchaseNumbers + "장, 자동으로 " + autoPurchaseNumbers + "개를 구매했습니다.");
 		lottoList.forEach((lottoGame) -> {
 			System.out.println(Arrays.toString(lottoGame.getGameNumberList().toArray()));
 		});

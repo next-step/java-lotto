@@ -31,7 +31,7 @@ public class LastWeekWinnerNumber {
 
 	private void validateBonusNumber(String inputNumber, LottoNumber bonusNumber) {
 		boolean result = Arrays.stream(inputNumber.split(","))
-			.map(n -> n.trim())
+			.map(n -> new LottoNumber(Integer.valueOf(n.trim())))
 			.collect(Collectors.toList())
 			.contains(bonusNumber);
 		if (result) {

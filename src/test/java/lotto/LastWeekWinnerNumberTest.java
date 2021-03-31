@@ -80,6 +80,18 @@ public class LastWeekWinnerNumberTest {
 	}
 
 	@Test
+	@DisplayName("당첨번호에 보너스 숫자 포함 여부 테스트")
+	void matchBonusNumberConstructTest() {
+		assertThatIllegalArgumentException().isThrownBy(() ->{
+			new LastWeekWinnerNumber("1,2,3,4,5,45", new LottoNumber(5));
+		});
+
+		assertThatCode(() -> {
+			new LastWeekWinnerNumber("1,2,3,4,5,45", new LottoNumber(35));
+		}).doesNotThrowAnyException();
+	}
+
+	@Test
 	@DisplayName("숫자 포함 여부 메서드 테스트")
 	void hasContainTest() {
 		Lotto lotto = new Lotto(() -> {
