@@ -14,8 +14,18 @@ public class LottoTest {
     @DisplayName("14개를 전달하면 14개를 줘야한다")
     void makeLottoNumbers() {
         lotto.buy(14);
-        assertThat(lotto.lotto().size())
+        assertThat(lotto.auto().size())
                 .isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("자동, 수동갯수테스트")
+    void manualAutoCount() {
+        lotto.buyManual(4, 20);
+        assertThat(lotto.auto().size())
+                .isEqualTo(16);
+        assertThat(lotto.manual().size())
+                .isEqualTo(4);
     }
 
     @BeforeEach

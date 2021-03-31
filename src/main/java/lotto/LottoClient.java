@@ -17,7 +17,7 @@ public class LottoClient {
 
         WinningNumbers winningNumbers = new WinningNumbers(inputView.inputQuestion("지난 주 당첨 번호를 입력해 주세요.").replaceAll(" ", "").split(","));
         winningNumbers.bonusNumber(Integer.parseInt(inputView.inputQuestion("보너스 볼을 입력해 주세요.").replaceAll(" ", "")));
-        winningNumbers.choose(lotto.lotto());
+        winningNumbers.choose(lotto.auto());
 
         printWinNumbers(inputView, winningNumbers.ranks(), winningNumbers.earningsRate(receiveMoney));
     }
@@ -28,7 +28,7 @@ public class LottoClient {
         inputView.print(lottoTicketNumber + "개를 구매했습니다.");
         lotto.buy(lottoTicketNumber);
 
-        for (LottoNumbers marked : lotto.lotto()) {
+        for (LottoNumbers marked : lotto.auto()) {
             inputView.print(marked.toString());
         }
     }
