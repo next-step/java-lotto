@@ -1,6 +1,6 @@
-package step2.generator;
+package lotto.generator;
 
-import step2.constants.Constants;
+import lotto.constants.Constants;
 
 import java.util.Collections;
 import java.util.List;

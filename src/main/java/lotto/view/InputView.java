@@ -1,7 +1,6 @@
-package step2.view;
+package lotto.view;
 
-import step2.constants.Constants;
-import step2.domain.Number;
+import lotto.constants.Constants;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,18 +12,24 @@ public class InputView {
 
     public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int price = scanner.nextInt();
+        int price = Integer.parseInt(scanner.nextLine());
         if (price % Constants.LOTTO_PRICE != 0) {
             throw new RuntimeException(String.format("%s원 단위로 구입할 수 있습니다.", Constants.LOTTO_PRICE));
         }
         return price;
     }
 
-    public static Set<Number> inputPrizeLotto() {
+    public static Set<Integer> inputPrizeLotto() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        String[] prizeNumbers = scanner.next().split(",");
+        String[] prizeNumbers = scanner.nextLine().split(",");
         return Arrays.stream(prizeNumbers)
-                .map(number -> Number.from(Integer.valueOf(number)))
+                .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toSet());
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        return bonusNumber;
     }
 }

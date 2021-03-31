@@ -1,10 +1,10 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.Lotto;
-import step2.domain.LottoStatistics;
-import step2.domain.Lottos;
-import step2.domain.Number;
-import step2.domain.Prize;
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
+import lotto.domain.Lottos;
+import lotto.domain.Number;
+import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -34,17 +34,18 @@ public class ResultView {
     public static void printStatistics(LottoStatistics lottoStatistics) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
-        Map<Prize, Integer> LottoPrizeResult = lottoStatistics.getLottoPrizeResult();
-        Arrays.stream(Prize.values())
-                .filter(prize -> !prize.equals(Prize.FAIL))
+        Map<Rank, Integer> LottoPrizeResult = lottoStatistics.getLottoPrizeResult();
+        Arrays.stream(Rank.values())
+                .filter(prize -> !prize.equals(Rank.MISS))
                 .forEach(prize -> System.out.println(prettyString(prize, LottoPrizeResult.get(prize))));
+        printRevenueRate(lottoStatistics.getRevenueRate());
     }
 
-    private static String prettyString(Prize prize, Integer prizeCount) {
-        return String.format("%s- %d개", prize.getMessage(), prizeCount);
+    private static String prettyString(Rank rank, Integer prizeCount) {
+        return String.format("%s- %d개", rank.getMessage(), prizeCount);
     }
 
-    public static void printRevenueRate(BigDecimal revenueRate) {
+    private static void printRevenueRate(BigDecimal revenueRate) {
         System.out.print("총 수익률은 " + revenueRate + "입니다.");
         if (revenueRate.intValue() < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

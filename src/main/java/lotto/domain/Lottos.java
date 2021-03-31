@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.generator.NumberGenerator;
+import lotto.generator.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,10 +22,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int getPrizeCount(final Lotto prizeLotto, final Prize prize) {
+    public int getRankCount(final Lotto prizeLotto, final Number bonusNumber, final Rank criteriaRank) {
         return (int) lottos.stream()
-                .map(lotto -> lotto.getMatchCount(prizeLotto))
-                .filter(matchCount -> matchCount == prize.getMatchCount())
+                .map(lotto -> lotto.getRank(prizeLotto, bonusNumber))
+                .filter(rank -> rank.equals(criteriaRank))
                 .count();
     }
 
