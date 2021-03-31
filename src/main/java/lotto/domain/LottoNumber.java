@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.ConvertUtil;
+
 import java.util.Objects;
 import java.util.Random;
 
@@ -12,6 +14,10 @@ public class LottoNumber {
 
     public LottoNumber() {
         this(autoNumber());
+    }
+
+    public LottoNumber(String lottoNumber) {
+        this(ConvertUtil.toInt(lottoNumber));
     }
 
     public LottoNumber(int lottoNumber) {
