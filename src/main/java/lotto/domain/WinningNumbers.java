@@ -37,7 +37,7 @@ public class WinningNumbers {
      * 로또 당첨 여부를 판단하여 Rank를 반환한다
      * */
     public Rank matches(Lotto lotto) {
-        return Rank.matchRank(lotto.contains(winningNumbers));
+        return Rank.matchRank(lotto.contains(winningNumbers), lotto.containsBouns(bonusNumber));
     }
 
     @Override

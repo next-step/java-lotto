@@ -17,6 +17,13 @@ public class Lotto {
         return this.numbers.containsAll(checkNumbers);
     }
 
+    public boolean containsBouns(LottoNumber checkNumber) {
+        if (checkNumber == null) {
+            return false;
+        }
+        return numbers.containsOne(checkNumber);
+    }
+
     public LottoNumbers numbers() {
         return numbers;
     }

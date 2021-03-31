@@ -53,21 +53,29 @@ public class WinningNumbersTest {
     @Test
     void matchesTest() {
         //given
-        int matchNum = 3;
-        Lotto lotto = createLotto(matchNum);
+        int missMatchNum = 3;
+        int secondMatchNum = 1;
+        Lotto lotto = createLotto(missMatchNum);
+        Lotto secondLotto = createLotto(secondMatchNum);
+        LottoNumber bonus = new LottoNumber(WINNING_SIZE + secondMatchNum);
+        WinningNumbers matchWinning = new WinningNumbers(numbers, bonus);
 
         //when
-        Rank rank = winning.matches(lotto);
+        Rank fifthRank = matchWinning.matches(lotto);
+        Rank secondRank = matchWinning.matches(secondLotto);
+
 
         //then
-        assertThat(rank).isEqualTo(Rank.matchRank(matchNum));
+        assertThat(fifthRank).isEqualTo(Rank.FIFTH);
+        assertThat(secondRank).isEqualTo(Rank.SECOND);
     }
 
-    Lotto createLotto(int matchNum) {
+    Lotto createLotto(int missMatchNum) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = WINNING_LOWER_BOUND + matchNum; i <= WINNING_SIZE + matchNum; i++) {
+        for (int i = WINNING_LOWER_BOUND + missMatchNum; i <= WINNING_SIZE + missMatchNum; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         return new Lotto(new LottoNumbers(lottoNumbers));
     }
+
 }

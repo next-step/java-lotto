@@ -38,10 +38,10 @@ public class WinningStatisticsTest {
     void setUp() {
         List<Rank> ranks = new ArrayList<>();
         for (int i = 0; i < FIVE_MATCH_NUM; i++) {
-            ranks.add(Rank.FIVE_MATCH);
+            ranks.add(Rank.THIRD);
         }
         for (int i = 0; i < SIX_MATCH_NUM; i++) {
-            ranks.add(Rank.SIX_MATCH);
+            ranks.add(Rank.FIRST);
         }
         given(lottos.checkWinning(any())).willReturn(ranks);
         winningStatistics = new WinningStatistics(lottos, winningNumbers);
@@ -51,11 +51,12 @@ public class WinningStatisticsTest {
     @Test
     void createTest() {
         //given
-        statistics.put(Rank.NO_MATCH, 0);
-        statistics.put(Rank.THREE_MATCH, 0);
-        statistics.put(Rank.FOUR_MATCH, 0);
-        statistics.put(Rank.FIVE_MATCH, FIVE_MATCH_NUM);
-        statistics.put(Rank.SIX_MATCH, SIX_MATCH_NUM);
+        statistics.put(Rank.MISS, 0);
+        statistics.put(Rank.FIFTH, 0);
+        statistics.put(Rank.FOURTH, 0);
+        statistics.put(Rank.THIRD, FIVE_MATCH_NUM);
+        statistics.put(Rank.SECOND, 0);
+        statistics.put(Rank.FIRST, SIX_MATCH_NUM);
         WinningStatistics testWinningStatistics = new WinningStatistics(statistics);
 
 
@@ -66,7 +67,7 @@ public class WinningStatisticsTest {
     @Test
     void yieldTest() {
         //given
-        Long totalMoney = (Rank.FIVE_MATCH.getWinningMoney() * FIVE_MATCH_NUM) + (Rank.SIX_MATCH.getWinningMoney() * SIX_MATCH_NUM);
+        Long totalMoney = (Rank.THIRD.getWinningMoney() * FIVE_MATCH_NUM) + (Rank.FIRST.getWinningMoney() * SIX_MATCH_NUM);
         double predict = totalMoney / (buyNum * LOTTO_PRICE);
 
         //when
