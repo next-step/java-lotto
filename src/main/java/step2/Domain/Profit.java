@@ -10,20 +10,20 @@ public class Profit {
         this.rank = rank;
     }
 
-    public double profitRate() {
-        return profitSum() / money.getMoney();
-    }
+//    public double profitRate() {
+//        return profitSum() / money.getMoney();
+//    }
 
     //refactoring 필요
-    public double profitSum() {
-        return rank.getRank().keySet()
-                .stream()
-                .filter(hitCount -> rank.size(hitCount) > 0)
-                .mapToDouble(hitCount ->
-                        Long.valueOf(LottoPrize.valueOf(hitCount,false).prize()).doubleValue()
-                                * rank.size(hitCount))
-                .sum();
-    }
+//    public double profitSum() {
+//        return rank.getRank().keySet()
+//                .stream()
+//                .filter(hitCount -> rank.size(hitCount) > 0)
+//                .mapToDouble(hitCount ->
+//                        Long.valueOf(LottoPrize.valueOf(hitCount,false).prize()).doubleValue()
+//                                * rank.size(hitCount))
+//                .sum();
+//    }
 
     //refactoring 필요
 //    public double profitSum() {

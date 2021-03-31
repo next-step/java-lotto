@@ -5,20 +5,20 @@ import java.util.Map;
 
 public class Rank {
 
-    private Map<HitCount, List<Lotto>> rank;
+    private Map<LottoPrize, List<Lotto>> rank;
 
-    public Rank(Map<HitCount, List<Lotto>> rank) {
+    public Rank(Map<LottoPrize, List<Lotto>> rank) {
         this.rank = rank;
     }
 
-    public int size(HitCount hitCount) {
-        if (rank.get(hitCount) == null) {
+    public int size(LottoPrize lottoPrize) {
+        if (rank.get(lottoPrize) == null) {
             return 0;
         }
-        return rank.get(hitCount).size();
+        return rank.get(lottoPrize).size();
     }
 
-    public Map<HitCount, List<Lotto>> getRank() {
+    public Map<LottoPrize, List<Lotto>> getRank() {
         return rank;
     }
 }

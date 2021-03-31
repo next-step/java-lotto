@@ -19,11 +19,13 @@ public class Lotto {
         this.lottoNumberList = lottoNumberList;
     }
 
-    public HitCount isWinningLottoList(WinningLotto winningLotto) {
+    public LottoPrize isWinningLottoList(WinningLotto winningLotto) {
         long count = winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber -> lottoNumberList.contains(winningNumber))
                 .count();
-        return new HitCount(count);
+        boolean matchBonus = lottoNumberList.stream()
+                .anyMatch(lottoNumber -> lottoNumber.getNumber() == winningLotto.bonusBall().getNumber());
+        return LottoPrize.valueOf(new HitCount(count),matchBonus);
     }
 
     public List<LottoNumber> getLottoNumberList() {

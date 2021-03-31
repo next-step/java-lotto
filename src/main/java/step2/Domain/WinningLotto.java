@@ -16,4 +16,8 @@ public class WinningLotto extends Lotto {
         return this.getLottoNumberList().stream()
                 .anyMatch(lottoNumber -> lottoNumber.getNumber() == bonusBall.getNumber());
     }
+
+    public BonusBall bonusBall(){
+        return bonusBall;
+    }
 }
