@@ -2,10 +2,7 @@ package step4;
 
 import step3.domain.WinningLotto;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LottoGame {
 
@@ -33,6 +30,6 @@ public class LottoGame {
     }
 
     public List<Lotto> allLotto() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 }

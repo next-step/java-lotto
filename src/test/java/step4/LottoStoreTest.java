@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStoreTest {
+
     @Test
     @DisplayName("수동과 자동 생성 테스트")
     public void test1() {

@@ -12,7 +12,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) {
-        if (!(number >= LOTTO_NUMBER_START && number <= LOTTO_NUMBER_LAST)) {
+        if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_LAST) {
             throw new IllegalArgumentException("로또 번호가 올바르지 않습니다.");
         }
         this.number = number;
@@ -39,4 +39,8 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    @Override
+    public String toString() {
+        return number + "";
+    }
 }
