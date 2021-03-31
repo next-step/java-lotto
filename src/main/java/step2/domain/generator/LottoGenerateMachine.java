@@ -17,6 +17,7 @@ public final class LottoGenerateMachine {
     private final LottoShuffleStrategy lottoShuffleStrategy;
 
     private LottoGenerateMachine(LottoShuffleStrategy lottoShuffleStrategy) {
+        validate(lottoShuffleStrategy);
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
@@ -25,11 +26,10 @@ public final class LottoGenerateMachine {
     }
 
     public static final LottoGenerateMachine of(LottoShuffleStrategy lottoShuffleStrategy) {
-        validate(lottoShuffleStrategy);
         return new LottoGenerateMachine(lottoShuffleStrategy);
     }
 
-    private static final void validate(LottoShuffleStrategy lottoShuffleStrategy) {
+    private final void validate(LottoShuffleStrategy lottoShuffleStrategy) {
         if (Objects.isNull(lottoShuffleStrategy)) {
             throw new LottoShuffleNullPointerException();
         }

@@ -1,6 +1,7 @@
 package step2.domain.generator;
 
 import step2.domain.money.Money;
+import step2.exception.InvalidNumberInputException;
 
 public final class LottoGenerateCount {
 
@@ -24,7 +25,7 @@ public final class LottoGenerateCount {
 
     private final void validate(int money) {
         if (money < ZERO) {
-            throw new IllegalArgumentException();
+            throw new InvalidNumberInputException();
         }
     }
 
