@@ -8,17 +8,20 @@ import java.util.stream.Collectors;
 public class RandomGenerator implements LottoNumberGenerator {
     private final static int MIN = 0;
     private final static int MAX = 6;
-    private final List<Integer> referenceNumbers;
 
-    public RandomGenerator() {
-        referenceNumbers = createReferenceNumbers();
+    private static final List<Integer> referenceNumbers = new ArrayList<>();
+
+    static {
+        for (int i = Lotto.LOTTO_FIRST_NUMBER; i <= Lotto.LOTTO_LAST_NUMBER; i++) {
+            referenceNumbers.add(i);
+        }
     }
 
     @Override
     public List<Integer> extractLottoNumber() {
         Collections.shuffle(referenceNumbers);
 
-        return referenceNumbers.subList(RandomGenerator.MIN, RandomGenerator.MAX)
+        return referenceNumbers.subList(MIN, MAX)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());

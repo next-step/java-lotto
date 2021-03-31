@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
     private final static String DEFAULT_REGEX = ",";
+
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
@@ -22,7 +23,7 @@ public class WinningNumber {
         return winningNumbers.contains(lotto);
     }
 
-    public boolean isMatchBonus(int lotto){
+    public boolean isMatchBonus(int lotto) {
         return bonusNumber == lotto;
     }
 }

@@ -14,7 +14,7 @@ public class FixedGenerator implements LottoNumberGenerator {
 
     @Override
     public List<Integer> extractLottoNumber() {
-        return referenceNumbers.subList(FixedGenerator.MIN, FixedGenerator.MAX)
+        return referenceNumbers.subList(MIN, MAX)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
