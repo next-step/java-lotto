@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 public class LottoNumbers {
@@ -13,7 +14,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(final Set<LottoNumber> lottoNumbers) {
-       return new LottoNumbers(lottoNumbers);
+       return new LottoNumbers(new TreeSet(lottoNumbers));
     }
 
     public Stream<LottoNumber> stream() {

@@ -35,12 +35,12 @@ class LottoGeneratorTest {
     @MethodSource("provideNumbers")
     void getSixLottoNumbers(String lottoNumberArray, int[] expected) {
         LottoNumbers lottoNumbers = lottoGenerator.generateAppointedLotto(lottoNumberArray);
-        LottoNumbers expectedNumbers = LottoNumbers.of(new TreeSet(
+        LottoNumbers expectedNumbers = LottoNumbers.of(
                 Arrays.stream(expected)
                         .boxed()
                         .map(LottoNumber::new)
                         .collect(Collectors.toSet())
-        ));
+        );
         assertThat(lottoNumbers).isEqualTo(expectedNumbers);
     }
 

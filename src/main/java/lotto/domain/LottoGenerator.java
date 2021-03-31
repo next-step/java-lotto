@@ -19,7 +19,7 @@ public class LottoGenerator {
     }
 
     private LottoNumbers getTreeSetLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        return LottoNumbers.of(new TreeSet<>(lottoNumbers));
+        return LottoNumbers.of(lottoNumbers);
     }
 
     public LottoNumbers generateShuffledLotto() {

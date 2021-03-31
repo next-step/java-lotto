@@ -23,13 +23,17 @@ class LottoTest {
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
+
         Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(expected)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
+        LottoNumbers expectedLottoNumbers = LottoNumbers.of(expectedSet);
+        Lotto expectedLotto = Lotto.of(expectedLottoNumbers);
 
-        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
-        assertThat(lotto).isEqualTo(Lotto.of(LottoNumbers.of(expectedSet)));
+        assertThat(lotto).isEqualTo(expectedLotto);
     }
 
     private static Stream<Arguments> provideLottos() {
@@ -48,7 +52,9 @@ class LottoTest {
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
+
         assertThat(lotto.containBonusNumber(bonusNumber)).isEqualTo(expected);
     }
 
@@ -68,12 +74,15 @@ class LottoTest {
                 .boxed()
                 .map(i -> new LottoNumber(i))
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(LottoNumbers.of(lottoSet));
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
+
         Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto expectedLotto = Lotto.of(LottoNumbers.of(expectedSet));
+        LottoNumbers expectedLottoNumbers = LottoNumbers.of(expectedSet);
+        Lotto expectedLotto = Lotto.of(expectedLottoNumbers);
 
         assertThat(lotto.matchCount(expectedLotto)).isEqualTo(expected);
     }
