@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class LottoDto {
     private final List<Integer> numbers;
+    private final Integer bonusBall;
 
     public LottoDto(Integer... numbers) {
         this(Arrays.asList(numbers));
@@ -14,6 +15,16 @@ public class LottoDto {
 
     public LottoDto(List<Integer> numbers) {
         this.numbers = numbers;
+        this.bonusBall = -1;
+    }
+
+    public LottoDto(List<Integer> numbers, Integer bonusBall) {
+        this.numbers = numbers;
+        this.bonusBall = bonusBall;
+    }
+
+    public Integer getBonusBall() {
+        return bonusBall;
     }
 
     public List<Integer> getNumbers() {

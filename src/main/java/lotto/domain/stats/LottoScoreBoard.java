@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.prize.Prize;
+import lotto.view.dto.LottoDto;
 
 public class LottoScoreBoard {
     private final Map<Prize, List<Lotto>> scoreBoard;
@@ -13,11 +14,18 @@ public class LottoScoreBoard {
     private final List<Lotto> winnerCandidates;
     private final Integer bonusNumber;
 
-    public LottoScoreBoard(Lotto winnerLotto, List<Lotto> winnerCandidates, Integer bonusNumber) {
+    public LottoScoreBoard(LottoDto winnerLotto, List<Lotto> winnerCandidates) {
+        scoreBoard = new HashMap<>();
+        this.winnerLotto = new Lotto(winnerLotto.getNumbers());
+        this.winnerCandidates = winnerCandidates;
+        this.bonusNumber = winnerLotto.getBonusBall();
+    }
+
+    public LottoScoreBoard(Lotto winnerLotto, List<Lotto> winnerCandidates) {
         scoreBoard = new HashMap<>();
         this.winnerLotto = winnerLotto;
         this.winnerCandidates = winnerCandidates;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = -1;
     }
 
     public void scoring() {

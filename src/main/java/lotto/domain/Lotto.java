@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    protected final List<Integer> numbers;
 
     public Lotto(Integer... numbers) {
         this(Arrays.asList(numbers));

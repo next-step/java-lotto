@@ -25,8 +25,8 @@ public class LottoScoring {
 
     private LottoScoreBoard getRenewedScoreBoard(LottoScoringDto lottoScoringDto) {
         LottoScoreBoard lottoScoreBoard =
-                new LottoScoreBoard(convertFromDtoToWinnerLotto(lottoScoringDto),
-                                    convertFromDtoToLottoList(lottoScoringDto), 0);
+                new LottoScoreBoard(lottoScoringDto.getWinnerLottoDto(),
+                                    convertFromDtoToLottoList(lottoScoringDto));
         lottoScoreBoard.scoring();
         return lottoScoreBoard;
     }

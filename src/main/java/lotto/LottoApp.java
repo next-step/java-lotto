@@ -24,7 +24,7 @@ public class LottoApp {
         ResultView.printLottoOrderResult(lottoOrderResultDto);
 
         LottoScoringDto lottoScoringDto = new LottoScoringDto(
-                new LottoDto(inputView.inputWinnerNumbers()), lottoOrderResultDto);
+                new LottoDto(inputView.inputWinnerNumbers(), inputView.inputBonusNumbers()), lottoOrderResultDto);
         LottoScoringResultDto lottoScoringResultDto = scoringService.score(lottoScoringDto);
         ResultView.printLottoScoringResult(lottoScoringResultDto);
     }

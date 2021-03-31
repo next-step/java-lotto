@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.machine.LottoMachine;
@@ -105,7 +106,7 @@ public class AutomatedLottoTest {
         Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
         List<Lotto> lotteries = lottoShop.purchase();
 
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries, 58);
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
         lottoScoreBoard.scoring();
         final long balance = lotteries.size() * 1000;
         LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
@@ -119,9 +120,10 @@ public class AutomatedLottoTest {
     @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
     void lottoBonusPrizeTest() {
         LottoShop lottoShop = new LottoShop(2000, new TestLottoGenerator());
-        Lotto winnerLotto = new Lotto(2, 3, 4, 5, 6, 8);
+        List<Integer> lottoNumber = Arrays.asList(2, 3, 4, 5, 6, 8);
+        LottoDto winnerLotto = new LottoDto(lottoNumber, 1);
         List<Lotto> lotteries = lottoShop.purchase();
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries, 1);
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
         lottoScoreBoard.scoring();
 
         long winner = lottoScoreBoard.getWinningsByPrize(Prize.SECOND);
