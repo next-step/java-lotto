@@ -1,6 +1,7 @@
 package study.step4;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

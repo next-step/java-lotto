@@ -1,6 +1,7 @@
 package study.step4;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
