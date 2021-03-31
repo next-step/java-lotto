@@ -15,6 +15,10 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoNumbers.lottoNumbers());
     }
 
+    public boolean hasBonusNumber(BonusBall bonusBall) {
+        return lottoNumbers.lottoNumbers().contains(bonusBall.bonusNumber());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

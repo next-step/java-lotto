@@ -17,11 +17,12 @@ public class RanksCountTest {
         WinningNumbers winningNumbers = WinningNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        BonusBall bonusBall = new BonusBall(7);
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket));
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
 
         //when
-        ranksCount.count();
+        ranksCount.count(bonusBall);
 
         //then
         assertThat(ranksCount.countOf(WinningRank.FIRST_PLACE)).isEqualTo(1);
@@ -34,17 +35,17 @@ public class RanksCountTest {
         //given
         WinningNumbers winningNumbers = WinningNumbers.createByintegers((Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket thirdTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        LottoTicket fourthTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket, thirdTicket, fourthTicket));
+        LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoTicket thirdTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        BonusBall bonusBall = new BonusBall(7);
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket, thirdTicket));
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.count();
+        ranksCount.count(bonusBall);
 
         //when
         TotalPrize totalPrize = ranksCount.totalPrize();
 
         //then
-        assertThat(totalPrize.totalPrize()).isEqualTo(2_000_000_000 + 2_000_000_000 + 1_500_000 + 50_000);
+        assertThat(totalPrize.totalPrize()).isEqualTo(WinningRank.FIRST_PLACE.prize() + WinningRank.SECOND_PLACE.prize() + WinningRank.THIRD_PLACE.prize());
     }
 }
