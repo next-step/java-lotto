@@ -34,7 +34,7 @@ public class LottoFactoryTest {
     void createLottosTest() {
         //given
         List<Lotto> testList = new ArrayList<>();
-        for (int i = 0; i<LOTTO_COUNT; i++) {
+        for (int i = 0; i < LOTTO_COUNT; i++) {
             testList.add(new Lotto(lottoNumbers));
         }
 
@@ -49,14 +49,15 @@ public class LottoFactoryTest {
     void createWinningTest() {
         //given
         Set<LottoNumber> winningNumber = new LinkedHashSet<>();
-        for (int i = 1; i<=WINNING_NUM; i++) {
+        for (int i = 1; i <= WINNING_NUM; i++) {
             winningNumber.add(new LottoNumber(i));
         }
+        LottoNumber bonusNumber = new LottoNumber(WINNING_NUM + 1);
 
         //when
-        WinningNumbers winning = LottoFactory.winning(winningNumber);
+        WinningNumbers winning = LottoFactory.winning(winningNumber, bonusNumber);
 
         //then
-        assertThat(winning).isEqualTo(new WinningNumbers(new LottoNumbers(winningNumber)));
+        assertThat(winning).isEqualTo(new WinningNumbers(new LottoNumbers(winningNumber), bonusNumber));
     }
 }

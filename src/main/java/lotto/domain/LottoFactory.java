@@ -39,8 +39,8 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static WinningNumbers winning(Set<LottoNumber> winningNumber) {
-        return new WinningNumbers(new LottoNumbers(winningNumber));
+    public static WinningNumbers winning(Set<LottoNumber> winningNumber, LottoNumber bonusNumber) {
+        return new WinningNumbers(new LottoNumbers(winningNumber), bonusNumber);
     }
 
     public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
