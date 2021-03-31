@@ -24,11 +24,11 @@ public class WinningNumbers {
         this.winningNumbers = new ArrayList<>(winningNumbers);
     }
 
-    public static WinningNumbers createBystrings(List<String> winningNumbers) {
-        return createByintegers(ConvertUtil.toIntegers(winningNumbers));
+    public static WinningNumbers by(List<String> winningNumbers) {
+        return from(ConvertUtil.toIntegers(winningNumbers));
     }
 
-    public static WinningNumbers createByintegers(List<Integer> winningNumbers) {
+    public static WinningNumbers from(List<Integer> winningNumbers) {
         return new WinningNumbers(winningNumbers
                 .stream()
                 .map(LottoNumber::new)
