@@ -39,7 +39,7 @@ class LottoGeneratorTest {
     @Test
     void 생성() {
         // when
-        LottoGenerator lottoGenerator = LottoGenerator.of(lottoNumbers -> {});
+        LottoGenerator lottoGenerator = LottoGenerator.from(lottoNumbers -> {});
 
         // then
         assertThat(lottoGenerator).isNotNull();
@@ -50,56 +50,9 @@ class LottoGeneratorTest {
     void 검증() {
         // when
         assertThatThrownBy(()-> {
-            LottoGenerator.of(null);
+            LottoGenerator.from(null);
         }).isInstanceOf(LottoShuffleNullPointerException.class)
                 .hasMessageContaining("셔플 전략이 null 입니다.");
-    }
-
-    @DisplayName("LottoNumbersGenerator 인스턴스가 Lotto 인스턴스를 생성하고 반환하는지 테스트")
-    @Test
-    void 반환_Lotto() {
-        // given
-        LottoGenerator lottoGenerator = LottoGenerator.of(lottoNumbers -> { });
-
-        // when
-        Lotto lotto = lottoGenerator.generateLotto();
-
-        // then
-        assertThat(lotto).isNotNull();
-    }
-
-    @DisplayName("LottoNumbersGenerator 인스턴스가 LottoShuffleStrategy 대로 정렬 셔플을 진행하는지 테스트")
-    @Test
-    void 반환_Lotto_셔플() {
-        // given
-        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
-                -> Collections.sort(lottoNumbers);
-
-        LottoGenerator lottoGenerator = LottoGenerator.of(lottoShuffleStrategy);
-
-        // when
-        Lotto actual = lottoGenerator.generateLotto();
-        Lotto expected = Lotto.of(testSortLottoNumbers);
-
-        // then
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @DisplayName("LottoNumbersGenerator 인스턴스가 LottoShuffleStrategy 대로 역순 셔플을 진행하는지 테스트")
-    @Test
-    void 반환_Lotto_역순() {
-        // given
-        LottoShuffleStrategy lottoShuffleStrategy = lottoNumbers
-                -> Collections.reverse(lottoNumbers);
-
-        LottoGenerator lottoGenerator = LottoGenerator.of(lottoShuffleStrategy);
-
-        // when
-        Lotto actual = lottoGenerator.generateLotto();
-        Lotto expected = Lotto.of(reverseAndSortLottoNumbers);
-
-        // then
-        assertThat(actual).isEqualTo(expected);
     }
 
 

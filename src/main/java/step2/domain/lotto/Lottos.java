@@ -15,11 +15,11 @@ public final class Lottos {
         this.lottos = lottos;
     }
 
-    public final static Lottos newInstance() {
+    public final static Lottos of() {
         return new Lottos(new ArrayList<>());
     }
 
-    public final static Lottos newInstance(List<Lotto> lottos) {
+    public final static Lottos of(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
@@ -27,10 +27,6 @@ public final class Lottos {
         if(Objects.isNull(lottos)){
             throw new ListNullPointerException();
         }
-    }
-
-    public final void add(Lotto additionalLotto) {
-        lottos.add(additionalLotto);
     }
 
     public final List<Lotto> getLottos() {

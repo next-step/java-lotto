@@ -2,6 +2,7 @@ package step2.domain.generator;
 
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.Lottos;
 import step2.exception.LottoShuffleNullPointerException;
 import step2.strategy.LottoShuffleStrategy;
 
@@ -18,26 +19,35 @@ public final class LottoGenerator {
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
-    public static final LottoGenerator of(LottoShuffleStrategy lottoShuffleStrategy) {
+    public static final LottoGenerator from(LottoShuffleStrategy lottoShuffleStrategy) {
         validate(lottoShuffleStrategy);
         return new LottoGenerator(lottoShuffleStrategy);
     }
 
     private static void validate(LottoShuffleStrategy lottoShuffleStrategy) {
-        if(Objects.isNull(lottoShuffleStrategy)){
+        if (Objects.isNull(lottoShuffleStrategy)) {
             throw new LottoShuffleNullPointerException();
         }
     }
 
-    public final Lotto generateLotto() {
-        List<LottoNumber> lottoNumbers = getAllLottoNumber();
+    public final Lottos generateLottos(LottoGenerateCount generateCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        while (generateCount.hasNext()) {
+            lottos.add(generateLotto());
+            generateCount.next();
+        }
+        return Lottos.of(lottos);
+    }
+
+    private final Lotto generateLotto() {
+        List<LottoNumber> lottoNumbers = getLottoNumberValues();
         lottoShuffleStrategy.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(FROM_INDEX, TO_INDEX);
         Collections.sort(lottoNumbers);
         return Lotto.of(lottoNumbers);
     }
 
-    private final List<LottoNumber> getAllLottoNumber() {
+    private final List<LottoNumber> getLottoNumberValues() {
         return new ArrayList<>(LottoNumber.values());
     }
 

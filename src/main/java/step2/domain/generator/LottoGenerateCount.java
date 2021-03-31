@@ -1,21 +1,16 @@
 package step2.domain.generator;
 
 import step2.domain.request.Money;
-import step2.dto.LottoCreationRequestDto;
 
 public final class LottoGenerateCount {
 
-    private final static int FINISH = 0;
+    private final static int ZERO = 0;
     private final static int DIVIDE_STANDARD = 1000;
 
     private int count;
 
     private LottoGenerateCount(int money) {
         this.count = (money / DIVIDE_STANDARD);
-    }
-
-    public static final LottoGenerateCount of(LottoCreationRequestDto requestDto) {
-        return of(requestDto.getMoney());
     }
 
     public static final LottoGenerateCount of(Money money) {
@@ -26,8 +21,14 @@ public final class LottoGenerateCount {
         return new LottoGenerateCount(money);
     }
 
+    private final void validate(int money) {
+        if(money < ZERO) {
+            throw new IllegalArgumentException(); // 수정 예정
+        }
+    }
+
     public final boolean hasNext() {
-        return count > FINISH;
+        return count > ZERO;
     }
 
     public final void next() {

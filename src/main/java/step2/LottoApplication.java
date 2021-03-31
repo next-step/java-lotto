@@ -1,22 +1,21 @@
 package step2;
 
-import step2.controller.LottoController;
-import step2.dto.LottoWinningCheckRequestDto;
-import step2.dto.LottoCreationRequestDto;
-import step2.dto.LottoExpressionResponseDto;
-import step2.dto.LottoWinningResultResponseDto;
+import step2.domain.lotto.Lottos;
+import step2.service.LottoService;
+import step2.domain.lotto.Lotto;
+import step2.domain.request.Money;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 public final class LottoApplication {
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoController lottoController;
+    private final LottoService lottoService;
 
     private LottoApplication() {
         this.inputView = InputView.getInstance();
         this.resultView = ResultView.getInstance();
-        this.lottoController = LottoController.newInstance();
+        this.lottoService = LottoService.of();
     }
 
     public static final LottoApplication newInstance() {
@@ -28,13 +27,14 @@ public final class LottoApplication {
     }
 
     public final void generateAndShowLottoList() {
-        LottoCreationRequestDto lottoCreationRequestDto = inputView.getLottoCreationRequestDto();
-        LottoExpressionResponseDto expressionLottoList = lottoController.getExpressionLottoList(lottoCreationRequestDto);
-        resultView.printLottoList(expressionLottoList);
-
-        LottoWinningCheckRequestDto lottoWinningCheckRequestDto = inputView.getLottoConfirmationRequestDto();
-        LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoController.getWinningResult(lottoWinningCheckRequestDto);
+        Money userMoney = inputView.getMoneyByClient();
+        Lottos userLottos = lottoService.getLottos(userMoney);
+        resultView.printLottoList(userLottos);
+/*
+        Lotto winningLotto = inputView.getWinningLottoByClient();
+        LottoWinningResultResponseDto lottoWinningResultResponseDto = lottoService.getWinningResult(lottoWinningCheckRequestDto);
         resultView.printLottoResult(lottoWinningResultResponseDto, lottoCreationRequestDto.getMoney());
+*/
     }
 
 }

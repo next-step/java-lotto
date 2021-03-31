@@ -34,7 +34,7 @@ class LottosTest {
     void 생성() {
 
         // when
-        Lottos lottos = Lottos.newInstance(testLottos);
+        Lottos lottos = Lottos.of(testLottos);
 
         // then
         assertThat(lottos).isNotNull();
@@ -45,7 +45,7 @@ class LottosTest {
     void 반환() {
 
         // when
-        Lottos lottos = Lottos.newInstance(testLottos);
+        Lottos lottos = Lottos.of(testLottos);
         List<Lotto> actual = lottos.getLottos();
 
         // then
@@ -60,7 +60,7 @@ class LottosTest {
         int expected = testLottos.size();
 
         // when
-        Lottos lottos = Lottos.newInstance(testLottos);
+        Lottos lottos = Lottos.of(testLottos);
         int actual = lottos.getLottosSize();
 
         // then
@@ -76,7 +76,7 @@ class LottosTest {
 
         // when
         assertThatThrownBy(()->{
-            Lottos.newInstance(nullLottos);
+            Lottos.of(nullLottos);
         }).isInstanceOf(ListNullPointerException.class)
                 .hasMessageContaining("null인 리스트가 입력되었습니다.");
     }
@@ -86,8 +86,8 @@ class LottosTest {
     void 비교() {
 
         // when
-        Lottos actualLottos = Lottos.newInstance(testLottos);
-        Lottos expectedLottos = Lottos.newInstance(testLottos);
+        Lottos actualLottos = Lottos.of(testLottos);
+        Lottos expectedLottos = Lottos.of(testLottos);
 
         // then
         assertThat(actualLottos).isEqualTo(expectedLottos);

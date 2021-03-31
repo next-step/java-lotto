@@ -1,7 +1,7 @@
 package step2.view;
 
-import step2.dto.LottoWinningCheckRequestDto;
-import step2.dto.LottoCreationRequestDto;
+import step2.domain.lotto.Lotto;
+import step2.domain.request.Money;
 
 import java.util.Scanner;
 
@@ -35,12 +35,12 @@ public final class InputView {
         return scanner.nextLine();
     }
 
-    public final LottoCreationRequestDto getLottoCreationRequestDto() {
-        return LottoCreationRequestDto.newInstance(inputMoneyByClient());
+    public final Money getMoneyByClient() {
+        return Money.valueOf(inputMoneyByClient());
     }
 
-    public final LottoWinningCheckRequestDto getLottoConfirmationRequestDto() {
-        return LottoWinningCheckRequestDto.newInstance(inputLottoNumbersByClient());
+    public final Lotto getWinningLottoByClient() {
+        return Lotto.of(inputLottoNumbersByClient());
     }
 
 }

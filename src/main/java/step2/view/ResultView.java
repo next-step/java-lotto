@@ -6,8 +6,6 @@ import step2.domain.lotto.LottoNumber;
 import step2.domain.request.Money;
 import step2.domain.winning.WinningScore;
 import step2.domain.winning.WinningScoreBoard;
-import step2.dto.LottoExpressionResponseDto;
-import step2.dto.LottoWinningResultResponseDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,9 +42,7 @@ public final class ResultView {
         return instance == null;
     }
 
-    public final void printLottoList(LottoExpressionResponseDto expressionResponseDto) {
-        stringBuilderReset();
-        Lottos lottos = expressionResponseDto.getLottoList();
+    public final void printLottoList(Lottos lottos) {
         STRING_BUILDER.append(String.format(LOTTO_COUNT_MESSAGE, lottos.getLottosSize()));
         STRING_BUILDER.append(joinLottoNumbers(lottos));
         System.out.println(STRING_BUILDER.toString());
@@ -74,9 +70,8 @@ public final class ResultView {
         STRING_BUILDER.setLength(ZERO);
     }
 
-    public final void printLottoResult(LottoWinningResultResponseDto lottoWinningResultResponseDto, Money money) {
+    public final void printLottoResult(WinningScoreBoard winningScoreBoard, Money money) {
         stringBuilderReset();
-        WinningScoreBoard winningScoreBoard = lottoWinningResultResponseDto.getWinningScoreBoard();
         STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
         STRING_BUILDER.append(PERFORATION);
         List<WinningScore> data = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
