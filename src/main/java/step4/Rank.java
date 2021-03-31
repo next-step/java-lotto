@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
-public enum Rank {
+public enum Rank implements Bonus{
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -28,7 +28,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank rank(int countOfMatch, boolean bonusMatch) {
+    public Rank rank(int countOfMatch, boolean bonusMatch) {
         Rank[] rank = values();
 
         if (Rank.SECOND.getCountOfMatch() == countOfMatch) {
@@ -40,8 +40,9 @@ public enum Rank {
                 .findFirst()
                 .orElse(Rank.MISS);
     }
-
-    private static Rank bonus(boolean bonusMatch) {
+    
+    @Override
+    public Rank bonus(boolean bonusMatch) {
         if (bonusMatch) {
             return SECOND;
         }
