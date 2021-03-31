@@ -24,6 +24,13 @@ public class InputNumbersTest {
     }
 
     @ParameterizedTest
+    @DisplayName("생성자 테스트")
+    @MethodSource("parameters")
+    void create(String input, String expected) {
+        assertThat(new InputNumbers(input)).isEqualTo(new InputNumbers(expected));
+    }
+
+    @ParameterizedTest
     @DisplayName("기본 구분자 확인")
     @ValueSource(strings = {"1,2,3", "1:2:3"})
     void splitDefault(String input) {
@@ -37,12 +44,5 @@ public class InputNumbersTest {
                 () -> assertThat(new InputNumbers("//;\n1;2;3").numbers()).containsExactly("1", "2", "3"),
                 () -> assertThat(new InputNumbers("// \n1 2 3").numbers()).containsExactly("1", "2", "3")
         );
-    }
-
-    @ParameterizedTest
-    @DisplayName("생성자 테스트")
-    @MethodSource("parameters")
-    void create(String input, String expected) {
-        assertThat(new InputNumbers(input)).isEqualTo(new InputNumbers(expected));
     }
 }
