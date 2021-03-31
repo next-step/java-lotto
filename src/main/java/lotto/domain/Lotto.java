@@ -29,7 +29,7 @@ public class Lotto {
         return numbers.stream();
     }
 
-    public boolean containBonusNumber(int bonusNumber) {
+    public boolean containBonusNumber(final int bonusNumber) {
         return numbers.contains(new LottoNumber(bonusNumber));
     }
 
