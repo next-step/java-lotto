@@ -17,8 +17,8 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"5:5", "10:10", "14:14"}, delimiter = ':')
     void lottoGameOfAllAutoLottos(int input, int expected) {
-        List<Lotto> lottoList = new ArrayList<>();
-        LottoGame lottoGame = LottoGame.of(input, lottoList);
+        List<String> lottoStringList = new ArrayList<>();
+        LottoGame lottoGame = LottoGame.of(input, lottoStringList);
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
     }
 
@@ -26,11 +26,10 @@ class LottoGameTest {
     @ParameterizedTest
     @MethodSource("provideNumbersHalf")
     void lottoGameOfHalfLottos(int input, String[] inputManualLottoNumbers, int expected) {
-        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
-        List<Lotto> lottoList = new ArrayList<>();
+        List<String> lottoList = new ArrayList<>();
 
         for (String lottoNumbers : inputManualLottoNumbers) {
-            lottoList.add(Lotto.of(lottoGenerator.generateAppointedLotto(lottoNumbers)));
+            lottoList.add(lottoNumbers);
         }
         LottoGame lottoGame = LottoGame.of(input, lottoList);
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
@@ -48,11 +47,10 @@ class LottoGameTest {
     @ParameterizedTest
     @MethodSource("provideNumbersAllManual")
     void lottoGameOfAllManualLottos(int input, String[] inputManualLottoNumbers, int expected) {
-        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
-        List<Lotto> lottoList = new ArrayList<>();
+        List<String> lottoList = new ArrayList<>();
 
         for (String lottoNumbers : inputManualLottoNumbers) {
-            lottoList.add(Lotto.of(lottoGenerator.generateAppointedLotto(lottoNumbers)));
+            lottoList.add(lottoNumbers);
         }
         LottoGame lottoGame = LottoGame.of(input, lottoList);
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(expected);
