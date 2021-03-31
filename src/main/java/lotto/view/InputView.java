@@ -1,8 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +13,6 @@ public class InputView {
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
     private InputView() {
     }
@@ -26,9 +22,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<String> enterLottoPurchaseManualCount() {
+    public static int enterLottoPurchaseManualCount() {
         System.out.println(LOTTO_PURCHASE_MANUAL_COUNT_MESSAGE);
-        int manualLottoCount = scanner.nextInt();
+        return scanner.nextInt();
+    }
+
+    public static List<String> enterLottoPurchaseManuals(final int manualLottoCount) {
         scanner.nextLine();
 
         System.out.println(MANUAL_NUMBERS_MESSAGE);

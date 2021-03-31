@@ -11,8 +11,11 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        LottoBuyer lottoBuyer = LottoBuyer.of(InputView.enterLottoPurchaseAmount());
-        List<String> lottoList = InputView.enterLottoPurchaseManualCount();
+        int lottoPurchaseAmount = InputView.enterLottoPurchaseAmount();
+        int lottoManualCount = InputView.enterLottoPurchaseManualCount();
+
+        LottoBuyer lottoBuyer = LottoBuyer.of(lottoPurchaseAmount, lottoManualCount);
+        List<String> lottoList = InputView.enterLottoPurchaseManuals(lottoManualCount);
         ResultView.printPurchaseAmount(lottoBuyer, lottoList);
 
         LottoGame lottoGame = LottoGame.of(lottoBuyer.getLottoQuantity(), lottoList);
