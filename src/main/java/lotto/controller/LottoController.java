@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoGame;
 import lotto.domain.WinningNumber;
