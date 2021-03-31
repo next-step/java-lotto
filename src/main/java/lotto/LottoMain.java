@@ -11,8 +11,11 @@ public class LottoMain {
 
         ResultView.printPurchaseLotto(lottos);
 
-        String inputLine = InputView.getWinningNumber();
-        WinningNumber winningNumber = new WinningNumber(Parser.parse(Split.splitDelimiter(inputLine)));
+        String inputWinningNumber = InputView.getWinningNumber();
+        String inputBonusNumber = InputView.getBonusNumber();
+
+        WinningNumber winningNumber = new WinningNumber(Parser.parse(Split.splitDelimiter(inputWinningNumber))
+                , Integer.parseInt(inputBonusNumber));
 
         Statistics statistics = new Statistics(lottos.winningResults(winningNumber));
 

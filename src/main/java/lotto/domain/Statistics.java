@@ -1,27 +1,33 @@
 package lotto.domain;
 
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Statistics {
-
     private final Map<Rank, Integer> statistics;
 
     public Statistics(List<Rank> winningResults) {
-        this.statistics = generate(winningResults);
+        this(mappingResults(winningResults));
     }
 
-    private Map<Rank, Integer> generate(List<Rank> winningResults) {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            result.put(rank, winningCount(rank, winningResults));
-        }
-        return result;
+    public Statistics(Map<Rank, Integer> statistics) {
+        this.statistics = statistics;
     }
 
-    private Integer winningCount(Rank rank, List<Rank> winningResults) {
+    private static Map<Rank, Integer> mappingResults(List<Rank> winningResults) {
+        return Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(rank -> rank
+                        , rank -> winningCount(rank, winningResults)
+                        , (e1, e2) -> e1
+                        , LinkedHashMap::new
+                ));
+    }
+
+    private static Integer winningCount(Rank rank, List<Rank> winningResults) {
         return (int) winningResults.stream()
                 .filter(v -> v.equals(rank))
                 .count();
