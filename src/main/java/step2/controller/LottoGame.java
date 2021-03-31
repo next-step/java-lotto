@@ -8,7 +8,6 @@ import step2.service.LottoMaker;
 import step2.service.Mart;
 import step2.strategy.LottoRandomStrategy;
 import step2.util.Splitter;
-import step2.view.CommonView;
 import step2.view.InputView;
 import step2.view.ResultView;
 

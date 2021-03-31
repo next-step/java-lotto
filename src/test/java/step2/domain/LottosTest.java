@@ -12,10 +12,28 @@ import step2.util.Splitter;
 import java.util.List;
 
 public class LottosTest {
+
+  @ParameterizedTest
+  @DisplayName("추가 확인 및 개수 확인 테스트")
+  @CsvSource(value = "1,2,3,4,5,6:2,4,6,8,10,12:2", delimiter = ':')
+  void addLottoTest(String firstExpression, String secondExpression, int result) {
+    Lottos lottos = new Lottos();
+    List<LottoNumber> lottoNumbers = Splitter.split(firstExpression);
+    Lotto firstLotto = new Lotto(new LottoNumbers(lottoNumbers));
+
+    lottoNumbers = Splitter.split(secondExpression);
+    Lotto secondLotto = new Lotto(new LottoNumbers(lottoNumbers));
+
+    lottos.addLotto(firstLotto);
+    lottos.addLotto(secondLotto);
+
+    Assertions.assertThat(lottos.quantity()).isEqualTo(result);
+  }
+
   @ParameterizedTest
   @DisplayName("일치 확인하는 지 체크")
-  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:3:1", "2,3,4,5,6,8:2,4,6,8,10,12:4:1"}, delimiter = ':')
-  void resultGetMatchingTest(String lotto, String answer, int targetCount, String result){
+  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:3:1", "2,3,4,5,6,8:2,4,6,8,10,12:4:1", "11,13,15,17,20,25:11,13,15,12,20,25:5:1"}, delimiter = ':')
+  void resultGetMatchingTest(String lotto, String answer, int targetCount, String result) {
 
     //setup source then target
     List<LottoNumber> lottoNumbers = Splitter.split(lotto);
@@ -34,5 +52,4 @@ public class LottosTest {
     System.out.println(lottoResult);
     Assertions.assertThat(lottoResult.toStringSpecificResult(new Count(targetCount))).isEqualTo(result);
   }
-
 }

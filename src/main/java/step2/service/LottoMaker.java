@@ -6,6 +6,7 @@ import step2.domain.number.LottoNumbers;
 import step2.strategy.LottoStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMaker {
@@ -19,6 +20,7 @@ public class LottoMaker {
     for (int i = STARTING_NUMBER; i <= LAST_NUMBER; i++) {
       lottoNumbers.add(new LottoNumber(i));
     }
+    Collections.unmodifiableList(lottoNumbers);
   }
 
   public Lotto makeLotto(LottoStrategy lottoStrategy) {
