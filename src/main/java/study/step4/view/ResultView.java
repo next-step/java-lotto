@@ -2,7 +2,6 @@ package study.step4.view;
 
 import java.math.BigDecimal;
 
-import study.step4.domain.Amount;
 import study.step4.domain.LottoRank;
 import study.step4.domain.LottoTicketCount;
 import study.step4.domain.LottoWin;
@@ -28,7 +27,7 @@ public class ResultView {
     public static void printResult(LottoWin lottoWin) {
         System.out.println(MESSAGE_WIN_RESULT);
         for(LottoRank win : lottoWin.getWin().keySet()) {
-            System.out.println(win.getHit() + "개 일치" + printBonus(win) + "(" + win.getAmount() + "원) - " + lottoWin.getWin().get(win) + "개");
+            System.out.println(win.getHit() + "개 일치" + printBonus(win) + "(" + win.getMoney() + "원) - " + lottoWin.getWin().get(win) + "개");
         }
     }
 

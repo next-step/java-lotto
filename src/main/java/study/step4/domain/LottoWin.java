@@ -36,13 +36,13 @@ public class LottoWin {
     public int sum() {
         int sum = 0;
         for(LottoRank lottoWinType: lottoWin.keySet()) {
-            int multiple = lottoWinType.getAmount() * lottoWin.get(lottoWinType);
+            int multiple = lottoWinType.getMoney() * lottoWin.get(lottoWinType);
             sum += multiple;
         }
         return sum;
     }
 
-    public BigDecimal profit(Amount amount) {
-        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(amount.getAmount()), 2, BigDecimal.ROUND_FLOOR);
+    public BigDecimal profit(LottoMoney lottoMoney) {
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(lottoMoney.getMoney()), 2, BigDecimal.ROUND_FLOOR);
     }
 }

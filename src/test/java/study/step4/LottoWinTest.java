@@ -5,7 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import study.step4.domain.Amount;
+import study.step4.domain.LottoMoney;
 import study.step4.domain.LottoWin;
 
 public class LottoWinTest {
@@ -32,7 +32,7 @@ public class LottoWinTest {
             lottoWin.hit(Integer.parseInt(hit), false);
         }
         // when & then
-        assertThat(lottoWin.profit(new Amount(1000))).isEqualTo(expected);
+        assertThat(lottoWin.profit(new LottoMoney(1000))).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "보너스 수익 테스트")
@@ -45,6 +45,6 @@ public class LottoWinTest {
             lottoWin.hit(Integer.parseInt(hit), true);
         }
         // when & then
-        assertThat(lottoWin.profit(new Amount(1000))).isEqualTo(expected);
+        assertThat(lottoWin.profit(new LottoMoney(1000))).isEqualTo(expected);
     }
 }

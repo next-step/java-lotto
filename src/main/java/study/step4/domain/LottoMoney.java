@@ -1,26 +1,26 @@
 package study.step4.domain;
 
-public class Amount {
+public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
-    private final int amount;
+    private final int money;
 
-    public Amount(String amount) {
-        this(Integer.parseInt(amount));
+    public LottoMoney(String money) {
+        this(Integer.parseInt(money));
     }
 
-    public Amount(int amount) {
-        valid(amount);
-        this.amount = amount;
+    public LottoMoney(int money) {
+        valid(money);
+        this.money = money;
     }
 
-    private void valid(int amount) {
-        if ((amount < 0) || (amount % LOTTO_PRICE != 0)) {
+    private void valid(int money) {
+        if ((money < 0) || (money % LOTTO_PRICE != 0)) {
             throw new IllegalArgumentException("로또 구매 최저 금액은 " + LOTTO_PRICE + "원 입니다.");
         }
     }
 
     public int totalCount() {
-        return amount / LOTTO_PRICE;
+        return money / LOTTO_PRICE;
     }
 
     public int buyableCount(LottoTicketCount manualCount) {
@@ -31,7 +31,7 @@ public class Amount {
         return ticketCount;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getMoney() {
+        return money;
     }
 }

@@ -10,12 +10,12 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private final int amount;
+    private final int money;
     private final int hit;
 
-    LottoRank(int hit, int amount) {
+    LottoRank(int hit, int money) {
         this.hit = hit;
-        this.amount = amount;
+        this.money = money;
     }
 
     public static LottoRank of(int hit) {
@@ -34,8 +34,8 @@ public enum LottoRank {
         return lottoRank;
     }
 
-    public int getAmount() {
-        return this.amount;
+    public int getMoney() {
+        return this.money;
     }
 
     public int getHit() {

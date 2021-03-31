@@ -2,7 +2,7 @@ package study.step4.controller;
 
 import java.util.List;
 
-import study.step4.domain.Amount;
+import study.step4.domain.LottoMoney;
 import study.step4.domain.LottoTicketCount;
 import study.step4.domain.Lotto;
 import study.step4.domain.LottoFactory;
@@ -17,9 +17,9 @@ public class LottoController {
     }
 
     public void play() {
-        Amount amount = new Amount(InputView.inputPurchaseAmount());
+        LottoMoney money = new LottoMoney(InputView.inputPurchaseAmount());
         LottoTicketCount manualCount = new LottoTicketCount(InputView.inputManualCount());
-        LottoTicketCount autoCount = new LottoTicketCount(amount.buyableCount(manualCount));
+        LottoTicketCount autoCount = new LottoTicketCount(money.buyableCount(manualCount));
 
         List<String> manualNumbers = InputView.inputManualNumber(manualCount);
         Lottos lottos = LottoFactory.buy(autoCount, manualNumbers);
@@ -32,6 +32,6 @@ public class LottoController {
         LottoWin lottoWin = lottos.result(lotto, bonusBall);
 
         ResultView.printResult(lottoWin);
-        ResultView.printProfit(lottoWin.profit(amount));
+        ResultView.printProfit(lottoWin.profit(money));
     }
 }

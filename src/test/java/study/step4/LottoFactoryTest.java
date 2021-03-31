@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import study.step4.domain.Amount;
+import study.step4.domain.LottoMoney;
 import study.step4.domain.LottoFactory;
 import study.step4.domain.LottoTicketCount;
 import study.step4.domain.Lottos;
@@ -42,8 +42,8 @@ public class LottoFactoryTest {
     @CsvSource(value = {"2000:2", "3000:3", "12000:12"}, delimiter = ':')
     public void buy(int input, int expected) {
         // given
-        Amount amount = new Amount(input);
-        int buyableCount = amount.buyableCount(new LottoTicketCount(2));
+        LottoMoney lottoMoney = new LottoMoney(input);
+        int buyableCount = lottoMoney.buyableCount(new LottoTicketCount(2));
         LottoTicketCount autoCount = new LottoTicketCount(buyableCount);
         String[] inputString = {"1,2,3,4,5,6", "10,11,12,13,14,15"};
         List<String> test = Arrays.stream(inputString).collect(toList());

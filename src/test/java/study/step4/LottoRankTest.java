@@ -13,8 +13,8 @@ public class LottoRankTest {
 
     @ParameterizedTest(name = "통계 일치 갯수에 따른 상금 테스트")
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
-    public void amountOfHit(int input, int expected) {
-        assertThat(LottoRank.of(input, false).getAmount()).isEqualTo(expected);
+    public void moneyOfHit(int input, int expected) {
+        assertThat(LottoRank.of(input, false).getMoney()).isEqualTo(expected);
     }
 
     @Test
@@ -22,8 +22,8 @@ public class LottoRankTest {
     public void bonus() {
         // given
         int hit = 5;
-        int amount = 30000000;
+        int money = 30000000;
         // when & then
-        assertThat(LottoRank.of(hit, true).getAmount()).isEqualTo(amount);
+        assertThat(LottoRank.of(hit, true).getMoney()).isEqualTo(money);
     }
 }
