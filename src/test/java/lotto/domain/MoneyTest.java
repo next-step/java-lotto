@@ -27,7 +27,7 @@ class MoneyTest {
     //given
     Money money = new Money(14000);
     //when
-    int perLotto = money.dividePerLotto();
+    int perLotto = money.divide(1000);
     //then
     assertEquals(perLotto, 14);
   }
