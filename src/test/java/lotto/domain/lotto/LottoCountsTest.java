@@ -9,7 +9,7 @@ import lotto.exception.NegativeLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoCountTest {
+class LottoCountsTest {
 
   @Test
   @DisplayName("생성 테스트")
@@ -20,7 +20,7 @@ class LottoCountTest {
 
     // when
     // then
-    assertThat(new LottoCount(lottoCount, manualCount)).isEqualTo(new LottoCount(lottoCount, manualCount));
+    assertThat(new LottoCounts(lottoCount, manualCount)).isEqualTo(new LottoCounts(lottoCount, manualCount));
   }
 
   @Test
@@ -30,10 +30,10 @@ class LottoCountTest {
     // when
     // then
     assertAll(
-        () -> assertThatThrownBy(() -> new LottoCount(-10, 4))
+        () -> assertThatThrownBy(() -> new LottoCounts(-10, 4))
             .isInstanceOf(NegativeLottoCountException.class)
             .hasMessage(NegativeLottoCountException.INVALID_LOTTO_COUNT),
-        () -> assertThatThrownBy(() -> new LottoCount(10, -4))
+        () -> assertThatThrownBy(() -> new LottoCounts(10, -4))
             .isInstanceOf(NegativeLottoCountException.class)
             .hasMessage(NegativeLottoCountException.INVALID_LOTTO_COUNT)
     );
@@ -45,7 +45,7 @@ class LottoCountTest {
     // given
     // when
     // then
-    assertThatThrownBy(() -> new LottoCount(1, 4))
+    assertThatThrownBy(() -> new LottoCounts(1, 4))
         .isInstanceOf(MoreManualLottoException.class)
         .hasMessage(MoreManualLottoException.INVALID_MANUAL_LOTTO_COUNT);
   }

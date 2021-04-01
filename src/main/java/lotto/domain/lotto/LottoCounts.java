@@ -1,15 +1,17 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
+import lotto.exception.MoreManualLottoException;
 import lotto.exception.NegativeLottoCountException;
 
-public final class LottoCount {
+public final class LottoCounts {
 
   private final long lottoCount;
   private final long manualCount;
 
-  public LottoCount(long lottoCount, long manualCount) {
+  public LottoCounts(long lottoCount, long manualCount) {
     validateNegativeCount(lottoCount, manualCount);
+    validateManualCount(lottoCount, manualCount);
     this.lottoCount = lottoCount;
     this.manualCount = manualCount;
   }
@@ -20,15 +22,21 @@ public final class LottoCount {
     }
   }
 
+  private void validateManualCount(long lottoCount, long manualCount) {
+    if (manualCount > lottoCount) {
+      throw new MoreManualLottoException();
+    }
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof LottoCount)) {
+    if (!(o instanceof LottoCounts)) {
       return false;
     }
-    LottoCount that = (LottoCount) o;
+    LottoCounts that = (LottoCounts) o;
     return lottoCount == that.lottoCount && manualCount == that.manualCount;
   }
 

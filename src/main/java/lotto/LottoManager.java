@@ -5,6 +5,7 @@ import java.util.Scanner;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCounts;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.io.InputView;
@@ -21,7 +22,7 @@ public final class LottoManager {
       System.out.println();
 
       int manualCount = inputView.inputManualCount();
-      validateManualCount(lottoCount, manualCount);
+      LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
       System.out.println();
 
       Lottos userLottos = new Lottos(lottoCount);
@@ -43,12 +44,6 @@ public final class LottoManager {
   private static void fillAutomaticLotto(long lottoCount, int manualCount, Lottos userLottos) {
     for (int i = 0; i < lottoCount - manualCount; i++) {
       userLottos.addLotto(new Lotto());
-    }
-  }
-
-  private static void validateManualCount(long lottoCount, int manualCount) {
-    if (manualCount > lottoCount) {
-      throw new IllegalArgumentException("구매한 매수보다 수동으로 더 많이 구매할 수 없습니다.");
     }
   }
 }
