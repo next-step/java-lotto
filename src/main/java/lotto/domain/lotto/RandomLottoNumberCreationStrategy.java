@@ -15,8 +15,6 @@ public class RandomLottoNumberCreationStrategy implements LottoNumberCreationStr
   @Override
   public List<LottoNumber> create() {
     Collections.shuffle(lottoNumberPool);
-    List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberPool.subList(BEGIN_COUNT, LOTTO_NUMBER_COUNT));
-    Collections.sort(lottoNumbers);
-    return lottoNumbers;
+    return new ArrayList<>(lottoNumberPool.subList(BEGIN_COUNT, LOTTO_NUMBER_COUNT));
   }
 }

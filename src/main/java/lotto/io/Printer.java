@@ -50,7 +50,7 @@ public final class Printer {
   }
 
   private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-    System.out.println(lottoNumbers.getLottoNumbers().stream()
+    System.out.println(lottoNumbers.getSortedLottoNumbers().stream()
         .map(LottoNumber::toStringValue)
         .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, "[", "]")));
   }
