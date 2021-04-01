@@ -10,30 +10,23 @@ public class LottoShop {
     public final static long LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
-    private long balance;
+    private final Money money;
 
-    public LottoShop(long balance, LottoGenerator lottoGenerator) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
-        }
+    public LottoShop(Money money, LottoGenerator lottoGenerator) {
+        this.money = money;
         this.lottoMachine = new LottoMachine(lottoGenerator);
-        this.balance = balance;
     }
 
     public List<Lotto> purchase() {
-        List<Lotto> lottories = new ArrayList<>();
+        List<Lotto> lottoList = new ArrayList<>();
 
         while(isEnoughToPurchase()) {
-            lottories.add(lottoMachine.generate());
+            lottoList.add(lottoMachine.generate());
         }
-        return lottories;
+        return lottoList;
     }
 
     private boolean isEnoughToPurchase() {
-        if (LOTTO_PRICE > balance) {
-            return false;
-        }
-        balance = balance - LOTTO_PRICE;
-        return true;
+        return money.withdraw(LOTTO_PRICE);
     }
 }
