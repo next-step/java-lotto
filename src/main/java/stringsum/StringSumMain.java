@@ -1,4 +1,4 @@
-package ch02.stringsum;
+package stringsum;
 
 public class StringSumMain {
     public static void main(String[] args) {

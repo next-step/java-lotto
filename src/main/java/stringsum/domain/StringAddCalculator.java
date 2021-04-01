@@ -1,4 +1,4 @@
-package ch02.stringsum.domain;
+package stringsum.domain;
 
 public class StringAddCalculator {
 
