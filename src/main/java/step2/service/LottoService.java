@@ -36,8 +36,7 @@ public final class LottoService {
 
     public final WinningResult getWinningResult(List<Lotto> userLottos, Lotto winningLotto) {
         LottoWinningCheckMachine winningCheckMachine = LottoWinningCheckMachine.of(winningLotto);
-        WinningResult winningResult = winningCheckMachine.generateWinningResult(userLottos);
-        return winningResult;
+        return winningCheckMachine.generateWinningResult(userLottos);
     }
 
 }
