@@ -75,4 +75,18 @@ class LottosTest {
     // then
     assertThat(lottos.getLottos()).containsAnyOf(lotto);
   }
+
+  @Test
+  @DisplayName("로또목록을 추가할 수 있다.")
+  void addLottoList() {
+    // given
+    Lottos lottos = new Lottos();
+    List<Lotto> lottoList = Lists.list(new Lotto(), new Lotto(), new Lotto());
+
+    // when
+    lottos.addLottoList(lottoList);
+
+    // then
+    assertThat(lottos.getLottos()).containsAll(lottoList);
+  }
 }

@@ -42,4 +42,8 @@ public final class Lottos {
   public void addLotto(Lotto lotto) {
     this.lottos.add(lotto);
   }
+
+  public void addLottoList(List<Lotto> lottoList) {
+
+  }
 }
