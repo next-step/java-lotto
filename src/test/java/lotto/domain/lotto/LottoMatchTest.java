@@ -22,6 +22,7 @@ class LottoMatchTest {
   @Test
   @DisplayName("생성 실패 테스트")
   void createFailure() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoMatch(7, false));
+    assertThatIllegalArgumentException().isThrownBy(() -> new LottoMatch(7, false))
+        .withMessage(LottoMatch.INVALID_MATCH_COUNT);
   }
 }
