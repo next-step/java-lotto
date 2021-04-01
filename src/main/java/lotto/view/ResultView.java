@@ -7,7 +7,6 @@ import lotto.domain.Statistics;
 
 public class ResultView {
 
-  private static final String BUY_COMMENT = "개를 구매했습니다.";
   private static final String STATISTICS = "당첨통계";
   private static final String UNAVAILABLE_GAME = "로또 게임을 진행할 수 없습니다.";
 
@@ -15,8 +14,14 @@ public class ResultView {
     System.out.println(lottoGame.toString());
   }
 
-  public void printLottoBuySize(LottoGame lottoGames) {
-    System.out.println(lottoGames.size() + BUY_COMMENT);
+  public void printLottoBuySize(LottoGame lottoGame) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("수동으로 ");
+    builder.append(lottoGame.getManualTryCount());
+    builder.append("장, 자동으로 ");
+    builder.append(lottoGame.getAutoTryCount());
+    builder.append("개를 구매했습니다.");
+    System.out.println(builder.toString());
   }
 
   public void printUnavailableGame() {

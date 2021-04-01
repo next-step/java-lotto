@@ -20,6 +20,7 @@ public final class LottoStore {
         .limit(autoTryCount)
         .collect(Collectors.toList());
     return new LottoGame(
+        new LottoTryCount(manualLottoBalls.size(), autoTryCount),
         Stream.concat(manualLottoBalls.stream(), autoLottoBalls.stream())
             .collect(Collectors.toList())
     );
