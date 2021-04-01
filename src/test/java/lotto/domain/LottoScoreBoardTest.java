@@ -18,6 +18,7 @@ class LottoScoreBoardTest {
 
   @BeforeEach
   public void setUp() {
+    lottoRanks.clear();
     lottoRanks.add(LottoRank.FIFTH);
     lottoRanks.add(LottoRank.FOURTH);
   }
