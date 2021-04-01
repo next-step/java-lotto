@@ -20,7 +20,7 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void winningStatus(Lottoes lottoes, WinningNumbers winningNumbers, int bonusNumber, Price price) {
+	public static void winningStatus(Lottoes lottoes, WinningNumbers winningNumbers, Price price) {
 		System.out.println();
 		System.out.println("당첨통계");
 		System.out.println("---------");

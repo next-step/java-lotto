@@ -1,7 +1,6 @@
 package im.juniq.lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumbers {
@@ -11,12 +10,6 @@ public class WinningNumbers {
 	public WinningNumbers(List<Integer> numbers, int bonusNumber) {
 		winningNumbers.addAll(numbers);
 		this.bonusNumber = bonusNumber;
-	}
-
-	public WinningNumbers(String[] numbers) {
-		for (String number : numbers) {
-			winningNumbers.add(Integer.parseInt(number));
-		}
 	}
 
 	public boolean existent(int number) {
