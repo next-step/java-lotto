@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class LottoAgency {
 
+  private static final int LOTTO_PER_PRICE = 1000;
+
   private final LottoCoupon coupon;
   private final Money money;
 
@@ -19,7 +21,7 @@ public class LottoAgency {
   }
 
   public int getPurchaseQuantity() {
-    return money.dividePerLotto();
+    return money.divide(LOTTO_PER_PRICE);
   }
 
   public LottoCoupon getCoupon() {

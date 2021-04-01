@@ -4,7 +4,6 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 public class Money {
-  private static final int LOTTO_PER_PRICE = 1000;
   private final int money;
 
   public Money(int money) {
@@ -15,8 +14,8 @@ public class Money {
     return total / (double)money;
   }
 
-  public int dividePerLotto() {
-    return money / LOTTO_PER_PRICE;
+  public int divide(final int lottoPrice) {
+    return money / lottoPrice;
   }
 
   public int calculateWinningMoney(Integer resultMapEntry) {
