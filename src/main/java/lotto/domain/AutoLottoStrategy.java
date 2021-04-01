@@ -3,16 +3,16 @@
  * */
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 
 public class AutoLottoStrategy implements LottoStrategy {
 
     @Override
-    public List<LottoNumber> makeLotto(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers makeLotto(List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers, new Random());
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_SIZE));
+        Set<LottoNumber> lottoNumberSet = new LinkedHashSet<>(lottoNumbers.subList(0, LOTTO_SIZE));
+        return new LottoNumbers(lottoNumberSet);
     }
 }

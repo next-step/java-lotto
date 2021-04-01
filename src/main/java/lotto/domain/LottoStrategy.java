@@ -7,7 +7,6 @@ import java.util.List;
 
 @FunctionalInterface
 public interface LottoStrategy {
-    int LOTTO_SIZE = 6;
 
-    List<LottoNumber> makeLotto(List<LottoNumber> lottoNumbers);
+    LottoNumbers makeLotto(List<LottoNumber> lottoNumbers);
 }

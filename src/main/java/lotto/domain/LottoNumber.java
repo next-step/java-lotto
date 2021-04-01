@@ -19,6 +19,9 @@ public class LottoNumber {
         this.number = number;
     }
 
+    /*
+    * 로또번호는 1~45 사이 숫자를 가진다.
+    * */
     public boolean isLottoNumber(int number) {
         if (number < LOWER_LOTTONUMBER_BOUND || number > UPPER_LOTTONUMBER_BOUND) {
             throw new IllegalArgumentException(ILLEGAL_NUMBER);

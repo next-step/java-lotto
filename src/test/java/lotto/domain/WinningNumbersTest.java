@@ -3,10 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumbersTest {
 
@@ -14,44 +15,67 @@ public class WinningNumbersTest {
     private static final int WINNING_LOWER_BOUND = 1;
 
     private WinningNumbers winning;
-    private List<LottoNumber> winningNumbers = new ArrayList<>();
+    private WinningNumbers bonusWinning;
+    private Set<LottoNumber> winningNumbers = new HashSet<>();
+    private LottoNumbers numbers;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
         for (int i = WINNING_LOWER_BOUND; i <= WINNING_SIZE; i++) {
             winningNumbers.add(new LottoNumber(i));
         }
-        winning = new WinningNumbers(winningNumbers);
+        numbers = new LottoNumbers(winningNumbers);
+        winning = new WinningNumbers(numbers);
+
+        bonusNumber = new LottoNumber(WINNING_SIZE + 1);
+        bonusWinning = new WinningNumbers(numbers, bonusNumber);
     }
 
     @Test
     void createTest() {
-        //then - 동일 생성으로 비교
-        assertThat(winning).isEqualTo(new WinningNumbers(winningNumbers));
+        //then
+        assertThat(winning).isEqualTo(new WinningNumbers(numbers));
+        assertThat(bonusWinning).isEqualTo(new WinningNumbers(numbers, bonusNumber));
+    }
 
-        //when, then - field 접근
-        assertThat(winning).hasNoNullFieldsOrProperties()
-                .hasFieldOrPropertyWithValue("winningNumbers", winningNumbers);
+    @Test
+    void validExistBounsNumber() {
+        //given
+        LottoNumber testBonus = new LottoNumber(WINNING_SIZE);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            new WinningNumbers(numbers, testBonus);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void matchesTest() {
         //given
-        int matchNum = 3;
-        Lotto lotto = createLotto(matchNum);
+        int missMatchNum = 3;
+        int secondMatchNum = 1;
+        Lotto lotto = createLotto(missMatchNum);
+        Lotto secondLotto = createLotto(secondMatchNum);
+        LottoNumber bonus = new LottoNumber(WINNING_SIZE + secondMatchNum);
+        WinningNumbers matchWinning = new WinningNumbers(numbers, bonus);
 
         //when
-        Rank rank = winning.matches(lotto);
+        Rank fifthRank = matchWinning.matches(lotto);
+        Rank secondRank = matchWinning.matches(secondLotto);
+
 
         //then
-        assertThat(rank).isEqualTo(Rank.matchRank(matchNum));
+        assertThat(fifthRank).isEqualTo(Rank.FIFTH);
+        assertThat(secondRank).isEqualTo(Rank.SECOND);
     }
 
-    Lotto createLotto(int matchNum) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = WINNING_LOWER_BOUND + matchNum; i <= WINNING_SIZE + matchNum; i++) {
+    Lotto createLotto(int missMatchNum) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (int i = WINNING_LOWER_BOUND + missMatchNum; i <= WINNING_SIZE + missMatchNum; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        return new Lotto(lottoNumbers);
+        return new Lotto(new LottoNumbers(lottoNumbers));
     }
+
 }

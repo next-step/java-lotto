@@ -13,7 +13,7 @@ public class LottoGame {
         int buyNum = InputView.inputBuy();
         Lottos lottos = LottoFactory.lottos(buyNum);
         ResultView.printLottos(lottos);
-        WinningNumbers winning = LottoFactory.winning(InputView.inputWinning());
+        WinningNumbers winning = LottoFactory.winning(InputView.inputWinning(), InputView.inputBonus());
         WinningStatistics winningStatistics = LottoFactory.winningStatistics(lottos, winning);
 
         ResultView.printResult(winningStatistics);

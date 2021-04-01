@@ -6,11 +6,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NO_MATCH(0, 0L),
-    THREE_MATCH(3, 5000L),
-    FOUR_MATCH(4, 50_000L),
-    FIVE_MATCH(5, 1_500_000L),
-    SIX_MATCH(6, 2_000_000_000L);
+    MISS(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
     public static final int LOTTO_PRICE = 1000;
 
@@ -30,11 +31,14 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank matchRank(int matchNum) {
+    public static Rank matchRank(int matchNum, boolean Bonus) {
+        if (matchNum == SECOND.matchNo && !Bonus) {
+            return THIRD;
+        }
         return Arrays.stream(values())
                 .filter(rank -> rank.matchNo == matchNum)
                 .findFirst()
-                .orElse(NO_MATCH);
+                .orElse(MISS);
     }
 
 }

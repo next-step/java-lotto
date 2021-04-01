@@ -3,28 +3,35 @@
 * */
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    private List<LottoNumber> numbers;
+    private LottoNumbers numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
     }
 
-    public int contains(List<LottoNumber> numbers) {
-        return Long.valueOf(numbers.stream()
-                .filter(number -> this.numbers.contains(number))
-                .count())
-                .intValue();
+    /*
+    * 로또 번호들 중에서 일치하는 수를 반환한다.
+    * */
+    public int contains(LottoNumbers checkNumbers) {
+        return this.numbers.containsAll(checkNumbers);
     }
 
-    public List<LottoNumber> numbers() {
-        return Collections.unmodifiableList(new ArrayList<>(numbers));
+    /*
+    * 로또 번호 하나(보너스볼)와 일치하는 것이 있는지 확인한다.
+    * */
+    public boolean containsBouns(LottoNumber checkNumber) {
+        if (checkNumber == null) {
+            return false;
+        }
+        return numbers.containsOne(checkNumber);
+    }
+
+    public LottoNumbers numbers() {
+        return numbers;
     }
 
     @Override
