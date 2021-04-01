@@ -40,10 +40,18 @@ class LottoBallsTest {
   @DisplayName("당첨 번호 개수 구하기")
   @ParameterizedTest
   @CsvSource(value = {"3,4,7,8,9,10:2", "1,3,5,7,8,9:3", "1,2,3,4,5,6:6"}, delimiter = ':')
-  void test(String winLottoNumber, String result) {
+  void count_win_lotto_number_count(String winLottoNumber, String result) {
     int count = lottoBalls
         .countContainingWinNumbers(new LottoBalls(createLottoList(winLottoNumber)));
     assertThat(count).isEqualTo(Integer.parseInt(result));
+  }
+
+  @DisplayName("문자열에 숫자가 6개가 아니면 예외 발생")
+  @Test
+  void create_string_lotto_balls_exception() {
+    String numbers = "1,2,3,4,5";
+    assertThatThrownBy( () -> new LottoBalls(numbers))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   private List<LottoBall> createLottoList(String input) {
