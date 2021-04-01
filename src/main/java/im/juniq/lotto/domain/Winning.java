@@ -1,6 +1,6 @@
 package im.juniq.lotto.domain;
 
-import java.util.Map;
+import java.util.Arrays;
 
 public enum Winning {
 	FIRST(6, false, 2000000000L),
@@ -20,33 +20,32 @@ public enum Winning {
 		this.amount = amount;
 	}
 
-	private static Winning getWinning(int numberOfMatchedWinningNumber, Map<Integer, Winning> map) {
-		Winning gottenWinning = map.get(numberOfMatchedWinningNumber);
-		if (gottenWinning == null) {
-			return LOSING;
-		}
-		return gottenWinning;
-	}
-
-	public static Winning findByMatchedCount(int numberOfMatchedWinningNumber, boolean matchedBonus) {
-		for (Winning winning : Winning.values()) {
-			if (winning.matchedCount == numberOfMatchedWinningNumber) {
-				if (winning.matchedBonus && matchedBonus) {
-					return winning;
-				}
-				if (!winning.matchedBonus) {
-					return winning;
-				}
-			}
-		}
-		return Winning.LOSING;
+	public int matchedCount() {
+		return matchedCount;
 	}
 
 	public Long amount() {
 		return amount;
 	}
 
-	public int matchedCount() {
-		return matchedCount;
+	public static Winning findByMatchedCount(int numberOfMatchedWinningNumber, boolean matchedBonus) {
+		return Arrays.stream(Winning.values()).filter(winning -> comparison(numberOfMatchedWinningNumber, matchedBonus, winning)).findFirst().orElse(LOSING);
+	}
+
+	private static boolean comparison(int numberOfMatchedWinningNumber, boolean matchedBonus, Winning winning) {
+		return equalMatchedCount(numberOfMatchedWinningNumber, winning) && eligibleBonus(matchedBonus, winning)
+			|| equalMatchedCount(numberOfMatchedWinningNumber, winning) && ineligibleBonus(winning);
+	}
+
+	private static boolean equalMatchedCount(int numberOfMatchedWinningNumber, Winning winning) {
+		return winning.matchedCount == numberOfMatchedWinningNumber;
+	}
+
+	private static boolean eligibleBonus(boolean matchedBonus, Winning winning) {
+		return winning.matchedBonus && matchedBonus;
+	}
+
+	private static boolean ineligibleBonus(Winning winning) {
+		return !winning.matchedBonus;
 	}
 }
