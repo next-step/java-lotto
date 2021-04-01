@@ -1,10 +1,13 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
+
+import im.juniq.lotto.domain.LotteryMachine;
+import im.juniq.lotto.domain.Lotto;
+import im.juniq.lotto.domain.Lottoes;
+import im.juniq.lotto.domain.NoShuffleStrategy;
 
 class LotteryMachineTest {
 	@Test

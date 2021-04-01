@@ -1,4 +1,4 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 public class LotteryMachine {
 	private Lottoes lottoes;

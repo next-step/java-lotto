@@ -1,4 +1,4 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;

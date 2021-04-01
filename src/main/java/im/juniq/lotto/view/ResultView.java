@@ -1,10 +1,10 @@
 package im.juniq.lotto.view;
 
-import im.juniq.lotto.Lotto;
-import im.juniq.lotto.Lottoes;
-import im.juniq.lotto.Price;
-import im.juniq.lotto.Winning;
-import im.juniq.lotto.WinningNumbers;
+import im.juniq.lotto.domain.Lotto;
+import im.juniq.lotto.domain.Lottoes;
+import im.juniq.lotto.domain.Price;
+import im.juniq.lotto.domain.Winning;
+import im.juniq.lotto.domain.WinningNumbers;
 
 public class ResultView {
 	public static void lottoes(Lottoes lottoes) {

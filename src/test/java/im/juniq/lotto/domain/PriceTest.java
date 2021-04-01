@@ -1,10 +1,12 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
+
+import im.juniq.lotto.domain.Price;
 
 class PriceTest {
     @Test
