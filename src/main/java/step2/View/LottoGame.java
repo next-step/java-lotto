@@ -2,6 +2,7 @@ package step2.View;
 
 import step2.Domain.Lottos;
 import step2.Domain.Money;
+import step2.Domain.Profit;
 import step2.Domain.RandomLottoNumberGenerator;
 
 public class LottoGame {
@@ -19,6 +20,8 @@ public class LottoGame {
         Lottos lottos = Lottos.of(new RandomLottoNumberGenerator(money));
         resultView.printPurchaseNumber(money);
         resultView.printLottoList(lottos);
-        //resultView.printLottoStatistic(lottos, inputView.winningLotto(), purchaseManager);
+        Profit profit = new Profit(money,lottos.makeStatistic(inputView.winningLotto()));
+        resultView.printLottoStatistic(profit);
+        resultView.printProfitRate(profit);
     }
 }

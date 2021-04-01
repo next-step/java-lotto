@@ -1,5 +1,8 @@
 package step2.Domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Profit {
 
     private Money money;
@@ -10,30 +13,23 @@ public class Profit {
         this.rank = rank;
     }
 
-//    public double profitRate() {
-//        return profitSum() / money.getMoney();
-//    }
+    public double profitRate() {
+        return profitSum() / money.getMoney();
+    }
 
-    //refactoring 필요
-//    public double profitSum() {
-//        return rank.getRank().keySet()
-//                .stream()
-//                .filter(hitCount -> rank.size(hitCount) > 0)
-//                .mapToDouble(hitCount ->
-//                        Long.valueOf(LottoPrize.valueOf(hitCount,false).prize()).doubleValue()
-//                                * rank.size(hitCount))
-//                .sum();
-//    }
+    public double profitSum() {
+        return rank.getRank().keySet().stream().
+                mapToDouble(lottoPrize -> lottoPrize.prize() * rank.size(lottoPrize)).sum();
+    }
 
-    //refactoring 필요
-//    public double profitSum() {
-//        for (int rank = 3; rank <= 6; rank++) {
-//            HitCount hitCount = new HitCount(rank);
-//            System.out.println(String.format("%d개 일치 (%d)원 - %d개",
-//                    rank, LottoPrize.getPrizeInfoByHitCount(hitCount).prize(), ranking.size(hitCount)));
-//        }
-//        Profit profit = new Profit(purchaseManager, ranking);
-//        System.out.println(String.format("총 수익률은 %.2f 입니다.", profit.profitRate()));
-//    }
+    public List<String> profitList() {
+
+        List<String> profits = new ArrayList<>();
+        for(LottoPrize lottoPrize : LottoPrize.values()){
+            profits.add(String.format("%d개 일치 (%d)원 - %d개",
+                    lottoPrize.hitCount().hit(), lottoPrize.prize(), rank.size(lottoPrize)));
+        }
+        return profits;
+    }
 
 }

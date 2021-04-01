@@ -10,6 +10,10 @@ public class HitCount {
         this.hitCount = hitCount;
     }
 
+    public long hit(){
+        return hitCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

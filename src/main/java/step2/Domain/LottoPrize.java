@@ -33,5 +33,7 @@ public enum LottoPrize {
         return prize;
     }
 
-
+    public HitCount hitCount() {
+        return hitCount;
+    }
 }
