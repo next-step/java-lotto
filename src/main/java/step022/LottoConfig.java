@@ -1,0 +1,13 @@
+package step022;
+
+public class LottoConfig {
+    static final int NUMBER_RANGE_END = 45;
+    static final int NUMBER_RANGE_START = 1;
+    static final int LOTTO_NUMBER_MAX_COUNT = 6;
+    static final int LOTTO_PRICE = 1000;
+
+    static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
+    static final String BUY_N_COUNT = "개를 구매하셨습니다.";
+    static final String INPUT_LAST_WINNER_NUMBER = "지난주 당첨 번호를 입력해주세요.";
+    static final String WINNER_AVG = "당첨 통계";
+}
