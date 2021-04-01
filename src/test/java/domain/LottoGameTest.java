@@ -17,6 +17,7 @@ class LottoGameTest {
 
     private List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private LottoNumbers winnerNumbers;
+    private BonusNumber bonusNumber;
 
     @BeforeEach
     public void setup(){
@@ -34,14 +35,21 @@ class LottoGameTest {
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers5));
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers6));
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers7));
-
+        bonusNumber = new BonusNumber(22);
         winnerNumbers = CreateAutoNumberMachine.createNumbers(numbers1);
     }
 
+    @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.")
+    @Test
+    void countPurchaseAmountTicketTest(){
+        LottoGame lottoGame = new LottoGame(10_000);
+        assertThat(lottoGame.getMoney().getTicketCount()).isEqualTo(10);
+    }
 
     @DisplayName("1등 우승자 인원 구하기")
     @Test
-    public void countFirstPlace(){
+    void countFirstPlace(){
+
         List<Rank> ranks = findWinners(winnerNumbers);
         int count = (int) ranks
             .stream()
@@ -55,7 +63,7 @@ class LottoGameTest {
         return this.lottoNumbers
             .stream()
             .filter(lottoNumbers -> lottoNumbers.isRank(winNumbers.getNumbers()))
-            .map(lottoNumbers -> lottoNumbers.convertRank(winNumbers.getNumbers()))
+            .map(lottoNumbers -> lottoNumbers.convertRank(winNumbers.getNumbers(), bonusNumber))
             .collect(Collectors.toList());
     }
 }

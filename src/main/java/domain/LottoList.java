@@ -19,4 +19,9 @@ public class LottoList {
     public List<LottoNumbers> getLottos() {
         return lottos;
     }
+
+    @Override
+    public String toString(){
+        return lottos.toString();
+    }
 }

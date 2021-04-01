@@ -9,6 +9,6 @@ public class LottoController {
     public void start(){
         InputView inputView = new InputView();
         LottoGame lottoGame = new LottoGame(inputView.getMoney());
-        new ResultView(lottoGame.convert(inputView.getWinNumbers()));
+        new ResultView(lottoGame.convert(inputView.getWinNumbers(), inputView.getBonusNumber()));
     }
 }
