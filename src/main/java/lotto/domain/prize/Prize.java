@@ -3,35 +3,37 @@ package lotto.domain.prize;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6, 2_000_000_000L),
-    SECOND(5, 30_000_000L),
-    THIRD(5, 1_500_000L),
-    FOURTH(4, 50_000L),
-    FIFTH(3, 5_000L),
-    NOTHING(0, 0)
+    FIRST(12, 6, 2_000_000_000L),
+    SECOND(11, 5, 30_000_000L),
+    THIRD(10, 5, 1_500_000L),
+    FOURTH(8, 4, 50_000L),
+    FIFTH(6, 3, 5_000L),
+    NOTHING(0, 0, 0L)
     ;
 
-    private final long equalNumberCount;
+    private final long score;
+    private final long matchingBallCount;
     private final long prizeAmount;
 
-    Prize(long equalNumberCount, long prizeAmount) {
-        this.equalNumberCount = equalNumberCount;
+    Prize(long score, long matchingBallCount, long prizeAmount) {
+        this.score = score;
+        this.matchingBallCount = matchingBallCount;
         this.prizeAmount = prizeAmount;
     }
 
-    public static Prize getPrizeByEqualNumberCount(long equalNumberCount) {
+    public static Prize getPrizeByScore(long score) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.isSameNumberAs(equalNumberCount))
+                .filter(prize -> prize.isScoreSameAs(score))
                 .findAny()
                 .orElse(Prize.NOTHING);
     }
 
-    public long getEqualNumberCount() {
-        return this.equalNumberCount;
+    public long getMatchingBallCount() {
+        return this.matchingBallCount;
     }
 
-    private boolean isSameNumberAs(long equalNumberCount) {
-        if (this.equalNumberCount == equalNumberCount) {
+    private boolean isScoreSameAs(long score) {
+        if (this.score == score) {
             return true;
         }
         return false;
