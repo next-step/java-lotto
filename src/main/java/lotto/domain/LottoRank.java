@@ -12,8 +12,6 @@ public enum LottoRank {
   SECOND(5, 30000000),
   FIRST(6, 2000000000);
 
-  private static final int THIRD_OR_SECOND_CRITERIA = 5;
-
   private int matchCount;
   private Money winnerMoney;
 
@@ -42,11 +40,11 @@ public enum LottoRank {
   }
 
   private static boolean isThirdOrSecond(int matchCount) {
-    return matchCount == THIRD_OR_SECOND_CRITERIA;
+    return matchCount == LottoRank.THIRD.matchCount;
   }
 
   private static boolean filterIsSecond(boolean bonusBall, Money winnerMoney) {
-    return bonusBall ? winnerMoney.equals(new Money(30000000)) : winnerMoney.equals(new Money(1500000));
+    return bonusBall ? winnerMoney.equals(LottoRank.SECOND.winnerMoney) : winnerMoney.equals(LottoRank.THIRD.winnerMoney);
   }
 
   public static LottoRank matches(List<Number> winningNumbers, List<Number> holdingLottoNumbers, Number bonusBall) {
