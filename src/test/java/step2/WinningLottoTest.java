@@ -15,7 +15,7 @@ public class WinningLottoTest {
     @DisplayName("지난 주 당첨번호 생성 테스트")
     void create_last_winning_lotto() {
         InputNumber inputNumber = new InputNumber("1,2,3,4,5,6");
-        WinningLotto winningLotto = new WinningLotto(inputNumber.numbers(), new BonusBall(7));
+        WinningLotto winningLotto = new WinningLotto(inputNumber, new BonusBall(7));
         assertThat(winningLotto.getLottoNumberList().size()).isEqualTo(6);
     }
 
@@ -25,8 +25,8 @@ public class WinningLottoTest {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers = new InputNumber("1,3,5,7,9,11");
         BonusBall bonusBall = new BonusBall(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(), bonusBall);
-        Lotto purchasedLotto = new Lotto(purchasedNumbers.numbers());
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+        Lotto purchasedLotto = new Lotto(purchasedNumbers);
         assertThat(winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber -> purchasedLotto.getLottoNumberList().contains(winningNumber))
                 .count()).isGreaterThan(2);
@@ -38,8 +38,8 @@ public class WinningLottoTest {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers = new InputNumber("1,2,3,4,5,7");
         BonusBall bonusBall = new BonusBall(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(), bonusBall);
-        Lotto purchasedLotto = new Lotto(purchasedNumbers.numbers());
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+        Lotto purchasedLotto = new Lotto(purchasedNumbers);
         assertThat(purchasedLotto.isWinningLottoList(winningLotto)).isEqualTo(LottoPrize.SECOND);
     }
 
@@ -50,9 +50,9 @@ public class WinningLottoTest {
         InputNumber purchasedNumbers1 = new InputNumber("1,2,3,43,44,45");
         InputNumber purchasedNumbers2 = new InputNumber("1,2,3,4,44,45");
         BonusBall bonusBall = new BonusBall(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(), bonusBall);
-        LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1.numbers()),
-                new Lotto(purchasedNumbers2.numbers()));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+        LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1),
+                new Lotto(purchasedNumbers2));
 
         Lottos lottos = Lottos.of(generator);
 
@@ -68,8 +68,8 @@ public class WinningLottoTest {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber purchasedNumbers1 = new InputNumber("1,2,3,43,44,45");
         BonusBall bonusBall = new BonusBall(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers.numbers(),bonusBall);
-        LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1.numbers()));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers,bonusBall);
+        LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1));
         Lottos lottoList = Lottos.of(generator);
 
         Rank rankInfo = new Rank(lottoList.getLottos().stream()

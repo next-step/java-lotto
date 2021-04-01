@@ -9,6 +9,10 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumberList;
 
+    public Lotto(InputNumber inputNumber) {
+        this(inputNumber.numbers());
+    }
+
     public Lotto(String[] lottoNumberList) {
         this(Arrays.stream(lottoNumberList)
                 .map(number -> new LottoNumber(Integer.parseInt(number)))

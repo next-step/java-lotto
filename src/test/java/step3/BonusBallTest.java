@@ -15,7 +15,7 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             InputNumber inputNumber = new InputNumber("1,2,3,4,5,7");
             BonusBall bonusBall = new BonusBall(5);
-            WinningLotto winningLotto = new WinningLotto(inputNumber.numbers(), bonusBall);
+            WinningLotto winningLotto = new WinningLotto(inputNumber, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
