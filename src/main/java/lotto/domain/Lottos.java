@@ -39,4 +39,8 @@ public final class Lottos {
     }
     return list;
   }
+
+  public void addLotto(Lotto lotto) {
+
+  }
 }

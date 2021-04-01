@@ -63,4 +63,18 @@ class LottosTest {
     // then
     assertThat(lottoMatches).isEqualTo(expected);
   }
+
+  @Test
+  @DisplayName("로또를 추가할 수 있다.")
+  void addLotto() {
+    // given
+    Lottos lottos = new Lottos(new Money(2000));
+    Lotto lotto = new Lotto();
+
+    // when
+    lottos.addLotto(lotto);
+
+    // then
+    assertThat(lottos.getLottos()).containsAnyOf(lotto);
+  }
 }
