@@ -26,7 +26,7 @@ public class PrizeTest {
         otherNumber = new String[]{"1", "2", "3", "4", "9", "10"};
         lottoList = new ArrayList<>();
         lottoList.add(new Lotto(otherNumber));
-        lottos = new Lottos(lottoList);
+        lottos = new Lottos(() -> lottoList);
         lotto = new Lotto(number);
         prize = new Prize(lottos, lotto);
     }
