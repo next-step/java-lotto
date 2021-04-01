@@ -2,21 +2,19 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public final class Statistics {
 
   private final Map<Ranking, Integer> rankMap;
-  private Money winPrice;
 
   public Statistics() {
     this.rankMap = new HashMap<>();
-    this.winPrice = new Money(0);
   }
 
   public void recordRanking(Ranking ranking) {
     rankMap.computeIfPresent(ranking, (key, value) -> value + 1);
     rankMap.putIfAbsent(ranking, 1);
-    winPrice = winPrice.plus(new Money(ranking.getPrize()));
   }
 
   public Integer countGame(Ranking ranking) {
@@ -24,6 +22,10 @@ public final class Statistics {
   }
 
   public double getEarningRate(Money investMoney) {
-    return winPrice.calculateRate(investMoney);
+    Set<Ranking> rankings = rankMap.keySet();
+    Money totalPrize = rankings.stream()
+        .map(ranking -> new Money(ranking.getPrize()).multiply(rankMap.get(ranking)))
+        .reduce(new Money(0), Money::plus);
+    return totalPrize.calculateRate(investMoney);
   }
 }
