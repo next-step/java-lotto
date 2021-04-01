@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.exception.IllegalLottoNumberSizeException;
 
 public final class LottoNumbers {
 
   public static final int LOTTO_NUMBER_COUNT = 6;
-  public static final String LOTTO_NUMBER_CREATION_FAILURE = "로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.";
 
   private final Set<LottoNumber> lottoNumbers;
 
@@ -33,7 +33,7 @@ public final class LottoNumbers {
 
   private void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
+      throw new IllegalLottoNumberSizeException();
     }
   }
 

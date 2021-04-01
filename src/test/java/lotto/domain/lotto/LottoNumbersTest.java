@@ -1,14 +1,14 @@
 package lotto.domain.lotto;
 
 import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
-import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_CREATION_FAILURE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.exception.IllegalLottoNumberSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,11 +56,11 @@ class LottoNumbersTest {
   @MethodSource("lottoCreationFailureSource")
   void createFail(LottoNumberCreationStrategy failureStrategy) {
     // given
-
     // when
     // then
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(failureStrategy.create()))
-        .withMessage(LOTTO_NUMBER_CREATION_FAILURE);
+    assertThatThrownBy(() -> new LottoNumbers(failureStrategy.create()))
+        .isInstanceOf(IllegalLottoNumberSizeException.class)
+        .hasMessage(IllegalLottoNumberSizeException.LOTTO_NUMBER_CREATION_FAILURE);
   }
 
   @ParameterizedTest
