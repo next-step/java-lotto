@@ -8,7 +8,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.exception.IllegalLottoNumberSizeException;
+import lotto.exception.InvalidLottoNumberSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -59,8 +59,8 @@ class LottoNumbersTest {
     // when
     // then
     assertThatThrownBy(() -> new LottoNumbers(failureStrategy.create()))
-        .isInstanceOf(IllegalLottoNumberSizeException.class)
-        .hasMessage(IllegalLottoNumberSizeException.LOTTO_NUMBER_CREATION_FAILURE);
+        .isInstanceOf(InvalidLottoNumberSizeException.class)
+        .hasMessage(InvalidLottoNumberSizeException.LOTTO_NUMBER_CREATION_FAILURE);
   }
 
   @ParameterizedTest

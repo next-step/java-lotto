@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.exception.IllegalLottoNumberSizeException;
+import lotto.exception.InvalidLottoNumberSizeException;
 
 public final class LottoNumbers {
 
@@ -33,7 +33,7 @@ public final class LottoNumbers {
 
   private void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new IllegalLottoNumberSizeException();
+      throw new InvalidLottoNumberSizeException();
     }
   }
 
