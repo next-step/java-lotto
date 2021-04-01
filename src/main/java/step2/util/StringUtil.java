@@ -1,6 +1,7 @@
 package step2.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StringUtil {
@@ -12,6 +13,7 @@ public class StringUtil {
         for (int i = 0; i < array.length; i++) {
             list.add(Integer.parseInt(array[i]));
         }
+        Collections.sort(list);
         return list;
     }
 }

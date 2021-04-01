@@ -7,4 +7,8 @@ public class PrizeCalculatorUtil {
     public static int getLottoCount(int monney) {
         return monney / LOTTO_PRIZE;
     }
+
+    public static double profitCalculation(int total, int lottoCount){
+        return (double) total / (lottoCount * LOTTO_PRIZE);
+    }
 }

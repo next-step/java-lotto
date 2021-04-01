@@ -35,4 +35,13 @@ public class InputTest {
                     InputViewValidator.validateNumber(data);
                 });
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,1,1,2,3,4", "11,21,13,13,14,16", "11,44,22,23,44,22"})
+    void 당첨번호_중복_입력(String data) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    InputViewValidator.winningLottoValidate(data);
+                });
+    }
 }
