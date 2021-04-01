@@ -44,6 +44,6 @@ public final class Lottos {
   }
 
   public void addLottoList(List<Lotto> lottoList) {
-
+    lottoList.forEach(this::addLotto);
   }
 }
