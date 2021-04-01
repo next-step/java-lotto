@@ -11,48 +11,43 @@ import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
 public class LottoController {
+
   private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-  private static final InputView inputView = new InputView(reader);
-  private static final OutputView outputView = new OutputView();
-
-  private final LottoAgency agency;
-  private final Lotto winNumbers;
-
   public LottoController() throws IOException {
-    this.agency = createLottoAgency();
-    buyLottoPhase();
-    this.winNumbers = inputWinLottoNumbers();
-    lottoResult();
+    LottoAgency agency = createLottoAgency();
+    buyLottoPhase(agency);
+    Lotto winningNumbers = getWinLottoNumbers();
+    lottoResult(winningNumbers, agency);
   }
 
   public static void startLottoGame() throws IOException {
     new LottoController();
   }
 
-  private void lottoResult() throws IOException {
-    Number bonusBall = inputBonusBall();
-    OutputView.printResult(agency.getLottoResult(winNumbers, bonusBall));
+  private void lottoResult(final Lotto winningNumbers, final LottoAgency agency) throws IOException {
+    Number bonusBall = getBonusBall();
+    new OutputView().printResult(agency.getLottoResult(winningNumbers, bonusBall));
   }
 
   private LottoAgency createLottoAgency() throws IOException {
-    return new LottoAgency(inputUserHowManyBuyLotto());
+    return new LottoAgency(getSeedMoney());
   }
 
-  private Lotto inputWinLottoNumbers() throws IOException {
-    return inputView.enterWinnerNumbers();
+  private Lotto getWinLottoNumbers() throws IOException {
+    return new InputView(reader).enterWinnerNumbers();
   }
 
-  private Money inputUserHowManyBuyLotto() throws IOException {
-    return inputView.howManyBuyLottoCoupon();
+  private Money getSeedMoney() throws IOException {
+    return new InputView(reader).howManyBuyLottoCoupon();
   }
 
-  private Number inputBonusBall() throws IOException {
-    return inputView.enterBonusBall();
+  private Number getBonusBall() throws IOException {
+    return new InputView(reader).enterBonusBall();
   }
 
-  private void buyLottoPhase() {
+  private void buyLottoPhase(final LottoAgency agency) {
     agency.purchaseLotto();
-    outputView.printBoughtLottoCoupons(agency);
+    new OutputView().printBoughtLottoCoupons(agency);
   }
 }

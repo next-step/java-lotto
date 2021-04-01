@@ -9,7 +9,7 @@ import lotto.domain.LottoScoreBoard;
 
 public class OutputView {
 
-  public static void printResult(LottoScoreBoard totalResult) {
+  public void printResult(LottoScoreBoard totalResult) {
     System.out.println("지난 주 당첨 번호는 " );
     System.out.println(totalResult.toResultString());
     System.out.println("총 수익률은 " + doubleToStringFormat(totalResult) + "입니다.");
@@ -20,7 +20,7 @@ public class OutputView {
     System.out.println(printLottoCoupon(agency));
   }
 
-  private static String doubleToStringFormat(LottoScoreBoard totalResult) {
+  private String doubleToStringFormat(LottoScoreBoard totalResult) {
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.DOWN);
     return df.format(totalResult.getEarningRate());
