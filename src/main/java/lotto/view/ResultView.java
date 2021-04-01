@@ -1,7 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBoard;
+import lotto.domain.LottoBuyer;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.enums.Rank;
 
@@ -10,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String PURCHASE_MSG = "개를 구매했습니다.";
+    private static final String PURCHASE_MSG = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String NEWLINE_CHARACTER = "\n";
     private static final String FRONT_BRACKETS = "[";
@@ -23,8 +26,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseAmount(int amount) {
-        System.out.println(amount + PURCHASE_MSG);
+    public static void printPurchaseAmount(LottoBuyer lottoBuyer, List<String> lottoList) {
+        System.out.println(String.format(PURCHASE_MSG, lottoList.size(), lottoBuyer.getLottoQuantity() - lottoList.size()));
     }
 
     public static void printLottos(Lottos lottos) {
@@ -37,6 +40,7 @@ public class ResultView {
 
     private static String lottoToString(Lotto lotto) {
         return FRONT_BRACKETS + lotto.stream()
+                .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
                 + END_BRACKETS + NEWLINE_CHARACTER;

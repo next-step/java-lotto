@@ -65,9 +65,9 @@ class LottoBoardTest {
      }
     private static Stream<Arguments> provideLottoMatcherForWinntingRatio() {
         return Stream.of(
-                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.FIFTH}, 0.5),
-                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.THIRD}, 150.0),
-                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.MISS, Rank.FOURTH}, 4.545454545454546)
+                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.FIFTH}, 1.25),
+                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.THIRD}, 375.0),
+                Arguments.of(new Rank[] {Rank.MISS, Rank.MISS, Rank.MISS, Rank.MISS, Rank.FOURTH}, 10.0)
         );
     }
 }

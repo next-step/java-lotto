@@ -19,15 +19,21 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottos")
     void lotto_숫자6개구성(int[] input, int[] expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Set<Integer> expectedSet = new TreeSet<>(Arrays.stream(expected)
-                .boxed()
-                .collect(Collectors.toSet()));
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
 
-        Lotto lotto = Lotto.of(lottoSet);
-        assertThat(lotto).isEqualTo(Lotto.of(expectedSet));
+        Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(expected)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
+        LottoNumbers expectedLottoNumbers = LottoNumbers.of(expectedSet);
+        Lotto expectedLotto = Lotto.of(expectedLottoNumbers);
+
+        assertThat(lotto).isEqualTo(expectedLotto);
     }
 
     private static Stream<Arguments> provideLottos() {
@@ -42,10 +48,13 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottoForBonusNumber")
     public void containBonusNumber(int[] input, int bonusNumber, boolean expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
+
         assertThat(lotto.containBonusNumber(bonusNumber)).isEqualTo(expected);
     }
 
@@ -61,14 +70,19 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideLottoForMatchCount")
     public void matchCountTest(int[] WinningNumber, int[] ExpectedNumber, int expected) {
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(WinningNumber)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(WinningNumber)
                 .boxed()
+                .map(i -> new LottoNumber(i))
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
-        Set<Integer> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
+
+        Set<LottoNumber> expectedSet = new TreeSet<>(Arrays.stream(ExpectedNumber)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto expectedLotto = Lotto.of(expectedSet);
+        LottoNumbers expectedLottoNumbers = LottoNumbers.of(expectedSet);
+        Lotto expectedLotto = Lotto.of(expectedLottoNumbers);
 
         assertThat(lotto.matchCount(expectedLotto)).isEqualTo(expected);
     }

@@ -1,48 +1,41 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.exception.LottoException;
 
 public class Lotto {
 
     private static final String LOTTO_NUMBERS_MADE_OF_SIX_NUMBERS = "로또는 6개의 숫자로 이루어져야 합니다.";
     private static final int LOTTO_MADE_OF_NUMBERS = 6;
-    private Set<Integer> numbers;
+    private final LottoNumbers lottoNumbers;
 
-    private Lotto(final Set<Integer> numbers) {
-        validation(numbers);
-        this.numbers = numbers;
+    private Lotto(final LottoNumbers lottoNumbers) {
+        if (lottoNumbers.getSize() != LOTTO_MADE_OF_NUMBERS) {
+            throw new LottoException(LOTTO_NUMBERS_MADE_OF_SIX_NUMBERS);
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(final Set<Integer> numbers) {
-        return new Lotto(numbers);
+    public static Lotto of(final LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
-    public Stream<Integer> stream() {
-        return numbers.stream();
+    public Stream<LottoNumber> stream() {
+        return lottoNumbers.stream();
     }
 
-    public boolean containBonusNumber(int bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean containBonusNumber(final int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
     }
 
     public long matchCount(Lotto lotto) {
-        List<Integer> numberList = lotto.stream().collect(Collectors.toList());
-        return numbers.stream()
+        List<LottoNumber> numberList = lotto.stream().collect(Collectors.toList());
+        return lottoNumbers.stream()
                 .filter(numberList::contains)
                 .count();
-    }
-
-
-    private void validation(final Set<Integer> numbers) {
-        if (numbers.size() != LOTTO_MADE_OF_NUMBERS) {
-            throw new LottoException(LOTTO_NUMBERS_MADE_OF_SIX_NUMBERS);
-        }
     }
 
     @Override
@@ -50,17 +43,15 @@ public class Lotto {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

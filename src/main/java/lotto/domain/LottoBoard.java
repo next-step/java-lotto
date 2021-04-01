@@ -36,7 +36,7 @@ public class LottoBoard {
 
     private void calculateWinningRatio() {
         int total = TOTAL_INIT;
-        long count = board.values().stream().count();
+        long count = 0l;
         for (Rank lottoBoardMatcher : board.keySet()) {
             total += lottoBoardMatcher.getWinningBonus() * board.get(lottoBoardMatcher);
             count += board.get(lottoBoardMatcher);

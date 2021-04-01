@@ -42,10 +42,12 @@ class WinningNumberTest {
         String winningNumbers = "1, 3, 5, 7, 9, 11";
         WinningNumber winningNumber = WinningNumber.of(winningNumbers, bonusNumber);
 
-        Set<Integer> lottoSet = new TreeSet<>(Arrays.stream(input)
+        Set<LottoNumber> lottoSet = new TreeSet<>(Arrays.stream(input)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Lotto lotto = Lotto.of(lottoSet);
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoSet);
+        Lotto lotto = Lotto.of(lottoNumbers);
 
         assertThat(winningNumber.rankMatch(lotto)).isEqualTo(expected);
     }
@@ -69,7 +71,6 @@ class WinningNumberTest {
             WinningNumber.of(lottoNumber, bonusNumber);
         }).isInstanceOf(LottoException.class)
                 .hasMessage("당첨번호에 보너스번호가 올 수 없습니다.");
-
     }
 
     private static Stream<Arguments> providewinningNumberContainBonusNumber() {
