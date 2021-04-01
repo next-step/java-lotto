@@ -4,35 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lotto.exception.MoreManualLottoException;
-import lotto.exception.NegativeLottoCountException;
 
 public final class LottoCounts {
 
-  private final long lottoCount;
-  private final long manualCount;
+  private final LottoCount lottoCount;
+  private final LottoCount manualCount;
 
-  public LottoCounts(long lottoCount, long manualCount) {
-    validateNegativeCount(lottoCount, manualCount);
+  public LottoCounts(LottoCount lottoCount, LottoCount manualCount) {
     validateManualCount(lottoCount, manualCount);
     this.lottoCount = lottoCount;
     this.manualCount = manualCount;
   }
 
-  private void validateNegativeCount(long lottoCount, long manualCount) {
-    if (lottoCount < 0 || manualCount < 0) {
-      throw new NegativeLottoCountException();
-    }
-  }
-
-  private void validateManualCount(long lottoCount, long manualCount) {
-    if (manualCount > lottoCount) {
+  private void validateManualCount(LottoCount lottoCount, LottoCount manualCount) {
+    if (manualCount.isBiggerThan(lottoCount)) {
       throw new MoreManualLottoException();
     }
   }
 
   public List<Lotto> automaticLottos() {
     List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < lottoCount - manualCount; i++) {
+    for (int i = 0; i < lottoCount.subtract(manualCount).toInteger(); i++) {
       lottos.add(new Lotto());
     }
     return lottos;
@@ -47,7 +39,8 @@ public final class LottoCounts {
       return false;
     }
     LottoCounts that = (LottoCounts) o;
-    return lottoCount == that.lottoCount && manualCount == that.manualCount;
+    return Objects.equals(lottoCount, that.lottoCount) && Objects
+        .equals(manualCount, that.manualCount);
   }
 
   @Override

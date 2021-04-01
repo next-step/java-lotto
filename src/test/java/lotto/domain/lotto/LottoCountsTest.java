@@ -2,11 +2,9 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import lotto.exception.MoreManualLottoException;
-import lotto.exception.NegativeLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,23 +19,8 @@ class LottoCountsTest {
 
     // when
     // then
-    assertThat(new LottoCounts(lottoCount, manualCount)).isEqualTo(new LottoCounts(lottoCount, manualCount));
-  }
-
-  @Test
-  @DisplayName("음수로 생성 시도시 오류발생 테스트")
-  void createNegative() {
-    // given
-    // when
-    // then
-    assertAll(
-        () -> assertThatThrownBy(() -> new LottoCounts(-10, 4))
-            .isInstanceOf(NegativeLottoCountException.class)
-            .hasMessage(NegativeLottoCountException.INVALID_LOTTO_COUNT),
-        () -> assertThatThrownBy(() -> new LottoCounts(10, -4))
-            .isInstanceOf(NegativeLottoCountException.class)
-            .hasMessage(NegativeLottoCountException.INVALID_LOTTO_COUNT)
-    );
+    assertThat(new LottoCounts(new LottoCount(lottoCount), new LottoCount(manualCount)))
+        .isEqualTo(new LottoCounts(new LottoCount(lottoCount), new LottoCount(manualCount)));
   }
 
   @Test
@@ -46,7 +29,7 @@ class LottoCountsTest {
     // given
     // when
     // then
-    assertThatThrownBy(() -> new LottoCounts(1, 4))
+    assertThatThrownBy(() -> new LottoCounts(new LottoCount(1), new LottoCount(4)))
         .isInstanceOf(MoreManualLottoException.class)
         .hasMessage(MoreManualLottoException.INVALID_MANUAL_LOTTO_COUNT);
   }
@@ -59,7 +42,7 @@ class LottoCountsTest {
     long manualCount = 4;
     long automaticCount = lottoCount - manualCount;
 
-    LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
+    LottoCounts lottoCounts = new LottoCounts(new LottoCount(lottoCount), new LottoCount(manualCount));
 
     // when
     List<Lotto> automaticLottos = lottoCounts.automaticLottos();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoCounts;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
@@ -22,7 +23,7 @@ public final class LottoManager {
       System.out.println();
 
       long manualCount = inputView.inputManualCount();
-      LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
+      LottoCounts lottoCounts = new LottoCounts(new LottoCount(lottoCount), new LottoCount(manualCount));
       System.out.println();
 
       Lottos userLottos = new Lottos(lottoCount);
