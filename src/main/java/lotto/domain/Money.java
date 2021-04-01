@@ -15,8 +15,9 @@ public final class Money {
     this.money = money;
   }
 
-  public int calculateTryLottoCount(Integer lottoPrice) {
-    return this.money / lottoPrice;
+  public int calculateTryAutoLottoCount(int manualTryCount, Integer lottoPrice) {
+    int manualLottoTryPrice = lottoPrice * manualTryCount;
+    return (this.money - manualLottoTryPrice) / lottoPrice;
   }
 
   public Money multiply(int count) {

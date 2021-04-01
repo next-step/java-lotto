@@ -26,11 +26,11 @@ class MoneyTest {
     assertThat(money.availableBuyLotto()).isFalse();
   }
 
-  @DisplayName("로또 구입 가능한 개수 구하기")
+  @DisplayName("수동 없이 자동 구입 가능한 개수 구하기")
   @Test
   void count_buying_lotto() {
     Money money = new Money(10500);
-    assertThat(money.calculateTryLottoCount(1000)).isEqualTo(10);
+    assertThat(money.calculateTryAutoLottoCount(0, 1000)).isEqualTo(10);
   }
 
   @DisplayName("수익률 구하기")

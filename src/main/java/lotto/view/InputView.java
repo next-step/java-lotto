@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -38,4 +39,6 @@ public class InputView {
     System.out.println(INPUT_MANUAL_COUNT);
     return scanner.nextInt();
   }
+
+
 }
