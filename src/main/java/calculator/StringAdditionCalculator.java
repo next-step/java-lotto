@@ -14,22 +14,23 @@ public class StringAdditionCalculator {
   private static final String POSITIVE_NUMBER_REGEX = "[+]?\\d*(\\.\\d+)?";
 
   private final String inputValue;
+  private final String delimiter;
+  private final String numbers;
 
-  private StringAdditionCalculator(String inputValue) {
+  private StringAdditionCalculator(String inputValue, String delimiter, String numbers) {
     this.inputValue = inputValue;
+    this.delimiter = delimiter;
+    this.numbers = numbers;
   }
 
   public static StringAdditionCalculator create(String inputValue) {
-    return new StringAdditionCalculator(inputValue);
+    return new StringAdditionCalculator(inputValue, getDelimiterRegexString(inputValue), getNumberString(inputValue));
   }
 
   public Integer sum() {
     if (StringUtil.isBlank(inputValue)) {
       return 0;
     }
-
-    String delimiter = getDelimiterRegexString(inputValue);
-    String numbers = getNumberString(inputValue);
 
     return stringToIntegerList(numbers, delimiter)
             .stream()
@@ -53,6 +54,9 @@ public class StringAdditionCalculator {
   }
 
   public static String getNumberString(String input) {
+    if (StringUtil.isBlank(input)) {
+      return "";
+    }
     Matcher matcher = getMatcher(input);
     if (matcher.find()) {
       return matcher.group(2);
@@ -64,6 +68,10 @@ public class StringAdditionCalculator {
   public static String getDelimiterRegexString(String inputValue) {
     String defaultDelimiter = Arrays.stream(DEFAULT_SEPARATORS)
             .collect(Collectors.joining("|"));
+
+    if (StringUtil.isBlank(inputValue)) {
+      return "";
+    }
 
     String custom = getCustomDelimiter(inputValue);
     if (StringUtil.isBlank(custom)) {
