@@ -16,9 +16,6 @@ public final class Lottos {
 
   public Lottos(long size) {
     lottos = new ArrayList<>((int) size);
-    for (int i = 0; i < size; i++) {
-      lottos.add(new Lotto());
-    }
   }
 
   public Lottos(List<Lotto> lottoList) {

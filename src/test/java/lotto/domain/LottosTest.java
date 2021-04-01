@@ -36,16 +36,16 @@ class LottosTest {
   }
 
   @Test
-  @DisplayName("크기를 입력받아, 해당 크기만큼의 로또 목록을 만든다.")
+  @DisplayName("크기를 입력받아, 로또 목록을 만든다.")
   void create() {
     // given
-    long expectedSize = 14;
+    long size = 14;
 
     // when
-    Lottos lottos = new Lottos(expectedSize);
+    Lottos lottos = new Lottos(size);
 
     // then
-    assertThat(lottos.count()).isEqualTo(expectedSize);
+    assertThat(lottos.getLottos()).isNotNull();
   }
 
   @ParameterizedTest
