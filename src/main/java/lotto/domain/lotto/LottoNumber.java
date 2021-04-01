@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.exception.IllegalLottoNumberException;
+import lotto.exception.InvalidLottoNumberException;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
@@ -34,7 +34,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 
   private static void validateLottoNumber(int lottoNumber) {
     if (lottoNumber < MIN || lottoNumber > MAX) {
-      throw new IllegalLottoNumberException();
+      throw new InvalidLottoNumberException();
     }
   }
 

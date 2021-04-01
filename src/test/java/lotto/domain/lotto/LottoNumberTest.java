@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import lotto.exception.IllegalLottoNumberException;
+import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,8 +24,8 @@ class LottoNumberTest {
   @ValueSource(ints = {0, 46})
   void createFail(int value) {
     assertThatThrownBy(() -> LottoNumber.valueOf(value))
-        .isInstanceOf(IllegalLottoNumberException.class)
-        .hasMessage(IllegalLottoNumberException.ILLEGAL_LOTTO_NUMBER);
+        .isInstanceOf(InvalidLottoNumberException.class)
+        .hasMessage(InvalidLottoNumberException.INVALID_LOTTO_NUMBER);
   }
 
   @Test
