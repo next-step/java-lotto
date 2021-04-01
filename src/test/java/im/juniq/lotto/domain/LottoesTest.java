@@ -10,13 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import im.juniq.lotto.domain.Lotto;
-import im.juniq.lotto.domain.Lottoes;
-import im.juniq.lotto.domain.NoShuffleStrategy;
-import im.juniq.lotto.domain.Price;
-import im.juniq.lotto.domain.Winning;
-import im.juniq.lotto.domain.WinningNumbers;
-
 class LottoesTest {
 	@Test
 	void createOne() {

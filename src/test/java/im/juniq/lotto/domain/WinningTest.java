@@ -1,10 +1,8 @@
 package im.juniq.lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import im.juniq.lotto.domain.Winning;
 
 class WinningTest {
 

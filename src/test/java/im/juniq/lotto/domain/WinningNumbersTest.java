@@ -1,12 +1,10 @@
 package im.juniq.lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-import im.juniq.lotto.domain.WinningNumbers;
 
 class WinningNumbersTest {
     @Test

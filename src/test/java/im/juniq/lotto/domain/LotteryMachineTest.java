@@ -4,11 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import im.juniq.lotto.domain.LotteryMachine;
-import im.juniq.lotto.domain.Lotto;
-import im.juniq.lotto.domain.Lottoes;
-import im.juniq.lotto.domain.NoShuffleStrategy;
-
 class LotteryMachineTest {
 	@Test
 	void buyOneLotto() {

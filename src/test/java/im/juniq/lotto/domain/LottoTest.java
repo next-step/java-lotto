@@ -6,11 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import im.juniq.lotto.domain.Lotto;
-import im.juniq.lotto.domain.NoShuffleStrategy;
-import im.juniq.lotto.domain.Winning;
-import im.juniq.lotto.domain.WinningNumbers;
-
 class LottoTest {
 	@Test
 	void create() {
