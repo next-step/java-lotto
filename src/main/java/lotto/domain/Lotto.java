@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_FIRST_NUMBER = 1;
     public static final int LOTTO_LAST_NUMBER = 45;
     public static final int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
+
     private final List<Integer> lotto;
 
     private Lotto(List<Integer> lottoNumbers) {
@@ -27,8 +27,14 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isMatchBonus(WinningNumber winningNumber) {
+        return lotto.stream()
+                .anyMatch(winningNumber::isMatchBonus);
+    }
+
     public List<Integer> getLottoNumbers() {
         return lotto;
     }
+
 
 }

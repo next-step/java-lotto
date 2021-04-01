@@ -19,12 +19,13 @@ public class Hit {
         hit.put(Statistics.THREE, MIN);
         hit.put(Statistics.FOUR, MIN);
         hit.put(Statistics.FIVE, MIN);
+        hit.put(Statistics.BONUS, MIN);
         hit.put(Statistics.SIX, MIN);
     }
 
-    public void hittingLottoStatistics(int matchCount) {
+    public void hittingLottoStatistics(int matchCount, boolean isMatchBonus) {
         if (matchCount >= MINIMUM_MATCH_COUNT) {
-            Statistics statistics = Statistics.getStatisticsByMatchCount(matchCount);
+            Statistics statistics = Statistics.getStatisticsByMatchCount(matchCount, isMatchBonus);
             hit.computeIfPresent(statistics, (match, hitCount) -> hitCount + 1);
         }
     }

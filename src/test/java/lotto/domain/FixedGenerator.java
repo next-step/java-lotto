@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FixedGenerator implements LottoNumberGenerator {
+    private final static int MIN = 0;
+    private final static int MAX = 6;
     private final List<Integer> referenceNumbers;
 
     public FixedGenerator(List<Integer> referenceNumbers) {
@@ -12,7 +14,7 @@ public class FixedGenerator implements LottoNumberGenerator {
 
     @Override
     public List<Integer> extractLottoNumber() {
-        return referenceNumbers.subList(0, 6)
+        return referenceNumbers.subList(MIN, MAX)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());

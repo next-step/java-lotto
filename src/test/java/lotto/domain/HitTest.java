@@ -14,7 +14,7 @@ class HitTest {
     @DisplayName("3개 이상 당첨됐을경우 당첨개수가 1회 증가한다.")
     void hittingLottoStatistics() {
         Hit hit = new Hit();
-        hit.hittingLottoStatistics(3);
+        hit.hittingLottoStatistics(3, false);
         Map<Statistics, Integer> resultHit = hit.getHit();
 
         assertThat(resultHit.get(Statistics.THREE)).isEqualTo(1);
@@ -24,8 +24,9 @@ class HitTest {
     @DisplayName("로또 당첨 총 금액 구하기")
     void getTotalWinningAmount() {
         Hit hit = new Hit();
-        hit.hittingLottoStatistics(3);
+        hit.hittingLottoStatistics(3, false);
+        hit.hittingLottoStatistics(5, true);
 
-        assertThat(hit.getTotalWinningAmount()).isEqualTo(5000);
+        assertThat(hit.getTotalWinningAmount()).isEqualTo(30005000);
     }
 }
