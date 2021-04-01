@@ -1,10 +1,9 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.LottoNumberCreationStrategy;
 
 public final class LottoNumbers {
 

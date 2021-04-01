@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.WinningLotto.WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER;
+import static lotto.domain.lotto.WinningLotto.WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

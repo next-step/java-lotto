@@ -1,12 +1,11 @@
-package lotto;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumber.LOTTO_NUMBER_POOL;
-import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
+import static lotto.domain.lotto.LottoNumber.LOTTO_NUMBER_POOL;
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoNumber;
 
 public class RandomLottoNumberCreationStrategy implements LottoNumberCreationStrategy {
 

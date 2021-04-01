@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.lotto.LottoMatch;
 
 public enum Rank {
 

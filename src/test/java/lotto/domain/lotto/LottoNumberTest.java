@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumber.ILLEGAL_LOTTO_NUMBER;
+import static lotto.domain.lotto.LottoNumber.ILLEGAL_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;

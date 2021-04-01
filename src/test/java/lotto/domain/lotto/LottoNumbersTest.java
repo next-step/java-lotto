@@ -1,7 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
-import static lotto.domain.LottoNumbers.LOTTO_NUMBER_CREATION_FAILURE;
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_CREATION_FAILURE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -9,7 +9,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.LottoNumberCreationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -3,9 +3,9 @@ package lotto.io;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinningLotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.WinningLotto;
 
 public final class InputView {
 

@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Objects;
+import lotto.domain.Rank;
 
 public final class WinningLotto {
 

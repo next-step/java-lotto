@@ -3,13 +3,13 @@ package lotto.io;
 import static lotto.domain.Rank.NONE;
 
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lottos;
 
 public final class Printer {
 

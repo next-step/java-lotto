@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domain.lotto;
 
 import java.util.List;
-import lotto.domain.LottoNumber;
 
 public interface LottoNumberCreationStrategy {
 

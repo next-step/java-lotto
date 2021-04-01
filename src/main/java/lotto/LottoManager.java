@@ -2,11 +2,11 @@ package lotto;
 
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.io.InputView;
 import lotto.io.Printer;
 

@@ -1,6 +1,4 @@
-package lotto.domain;
-
-import lotto.RandomLottoNumberCreationStrategy;
+package lotto.domain.lotto;
 
 public final class Lotto {
 

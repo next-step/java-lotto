@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.LottoMatch;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 
 public final class WinningStatistics {
 

@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.Money;
 
 public final class Lottos {
 
