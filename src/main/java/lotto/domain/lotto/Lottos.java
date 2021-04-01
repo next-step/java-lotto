@@ -15,8 +15,12 @@ public final class Lottos {
     this(new ArrayList<>());
   }
 
+  public Lottos(LottoCount lottoCount) {
+    this(lottoCount.toInteger());
+  }
+
   public Lottos(long size) {
-    lottos = new ArrayList<>((int) size);
+    this(new ArrayList<>((int) size));
   }
 
   public Lottos(List<Lotto> lottoList) {

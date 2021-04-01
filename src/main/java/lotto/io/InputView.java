@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
 
@@ -24,11 +25,11 @@ public final class InputView {
     this.scanner = scanner;
   }
 
-  public List<Lotto> inputManualLottoNumber(long manualCount) {
+  public List<Lotto> inputManualLottoNumber(LottoCount manualCount) {
     System.out.println(INPUT_MANUAL_NUMBER);
     List<Lotto> manualLottoList = new ArrayList<>();
 
-    for (int i = 0; i < manualCount; i++) {
+    for (int i = 0; i < manualCount.toInteger(); i++) {
       manualLottoList.add(new Lotto(splitNumbers(scanner.nextLine())));
     }
     return manualLottoList;

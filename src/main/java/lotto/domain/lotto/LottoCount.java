@@ -18,6 +18,18 @@ public final class LottoCount {
     }
   }
 
+  public boolean isBiggerThan(LottoCount other) {
+    return lottoCount > other.lottoCount;
+  }
+
+  public LottoCount subtract(LottoCount other) {
+    return new LottoCount(lottoCount - other.lottoCount);
+  }
+
+  public int toInteger() {
+    return (int) lottoCount;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -35,15 +47,7 @@ public final class LottoCount {
     return Objects.hash(lottoCount);
   }
 
-  public boolean isBiggerThan(LottoCount other) {
-    return lottoCount > other.lottoCount;
-  }
-
-  public LottoCount subtract(LottoCount other) {
-    return new LottoCount(lottoCount - other.lottoCount);
-  }
-
-  public int toInteger() {
-    return (int) lottoCount;
+  public long getLottoCount() {
+    return lottoCount;
   }
 }

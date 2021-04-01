@@ -7,6 +7,7 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.Lottos;
@@ -23,20 +24,20 @@ public final class Printer {
 
   private Printer() {}
 
-  public static void printLottoCount(Lottos userLottos, long manualCount) {
-    int lottoCount = userLottos.count();
-    long automaticCount = lottoCount - manualCount;
+  public static void printLottoCount(Lottos userLottos, LottoCount manualCount) {
+    LottoCount lottoCount = new LottoCount(userLottos.count());
+    LottoCount automaticCount = lottoCount.subtract(manualCount);
 
     StringBuilder lottoCountBuilder = new StringBuilder();
 
-    if (manualCount > 0) {
-      lottoCountBuilder.append(MANUALLY).append(manualCount).append(LOTTO_UNIT);
+    if (manualCount.isBiggerThan(new LottoCount(0))) {
+      lottoCountBuilder.append(MANUALLY).append(manualCount.getLottoCount()).append(LOTTO_UNIT);
     }
-    if (manualCount > 0 && automaticCount != 0) {
+    if (manualCount.isBiggerThan(new LottoCount(0)) && automaticCount.toInteger() != 0) {
       lottoCountBuilder.append(COMMA_DELIMITER);
     }
-    if (automaticCount > 0) {
-      lottoCountBuilder.append(AUTOMATICALLY).append(automaticCount).append(LOTTO_UNIT);
+    if (automaticCount.isBiggerThan(new LottoCount(0))) {
+      lottoCountBuilder.append(AUTOMATICALLY).append(automaticCount.getLottoCount()).append(LOTTO_UNIT);
     }
     lottoCountBuilder.append(BOUGHT);
     System.out.println(lottoCountBuilder.toString());
