@@ -14,11 +14,32 @@ import lotto.domain.WinningStatistics;
 public final class Printer {
 
   public static final int CRITERION = 1;
+  private static final String LOTTO_NUMBER_DELIMITER = ", ";
+  private static final String COMMA_DELIMITER = ", ";
+  private static final String MANUALLY = "수동으로 ";
+  private static final String AUTOMATICALLY = "자동으로 ";
+  private static final String LOTTO_UNIT = "장";
+  private static final String BOUGHT = "을 구매했습니다.";
 
   private Printer() {}
 
-  public static void printLottoCount(Lottos userLottos) {
-    System.out.println(userLottos.count() + "개를 구매했습니다.");
+  public static void printLottoCount(Lottos userLottos, int manualCount) {
+    int lottoCount = userLottos.count();
+    int automaticCount = lottoCount - manualCount;
+
+    StringBuilder lottoCountBuilder = new StringBuilder();
+
+    if (manualCount > 0) {
+      lottoCountBuilder.append(MANUALLY).append(manualCount).append(LOTTO_UNIT);
+    }
+    if (manualCount > 0 && automaticCount != 0) {
+      lottoCountBuilder.append(COMMA_DELIMITER);
+    }
+    if (automaticCount > 0) {
+      lottoCountBuilder.append(AUTOMATICALLY).append(automaticCount).append(LOTTO_UNIT);
+    }
+    lottoCountBuilder.append(BOUGHT);
+    System.out.println(lottoCountBuilder.toString());
   }
 
   public static void printLottos(Lottos userLottos) {
@@ -31,7 +52,7 @@ public final class Printer {
   private static void printLottoNumbers(LottoNumbers lottoNumbers) {
     System.out.println(lottoNumbers.getLottoNumbers().stream()
         .map(LottoNumber::toStringValue)
-        .collect(Collectors.joining(", ", "[", "]")));
+        .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, "[", "]")));
   }
 
   public static void printRank(WinningStatistics winningStatistics) {
