@@ -27,6 +27,7 @@ public final class LottoManager {
       Lottos userLottos = new Lottos(lottoCount);
       List<Lotto> manualLottos = inputView.inputManualLottoNumber(manualCount);
       userLottos.addLottoList(manualLottos);
+      fillAutomaticLotto(lottoCount, manualCount, userLottos);
       System.out.println();
 
       Printer.printLottoCount(userLottos, manualCount);
@@ -36,6 +37,12 @@ public final class LottoManager {
       WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
       Printer.printRank(winningStatistics);
       Printer.printResult(winningStatistics, userMoney);
+    }
+  }
+
+  private static void fillAutomaticLotto(long lottoCount, int manualCount, Lottos userLottos) {
+    for (int i = 0; i < lottoCount - manualCount; i++) {
+      userLottos.addLotto(new Lotto());
     }
   }
 
