@@ -6,7 +6,7 @@ import view.ResultView;
 
 public class LottoController {
 
-    public static void main(String[] args){
+    public void start(){
         InputView inputView = new InputView();
         LottoGame lottoGame = new LottoGame(inputView.getMoney());
         new ResultView(lottoGame.convert(inputView.getWinNumbers()));

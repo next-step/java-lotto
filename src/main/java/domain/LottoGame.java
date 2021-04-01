@@ -7,17 +7,21 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private int monkey;
+    private int money;
     private LottoList lottoList;
-    private LottoNumbers winNumbers;
 
-    public LottoGame(int monkey) {
-        this.monkey = monkey;
-        int ticketCount = monkey / LOTTO_TICKET_PRICE;
-        lottoList = new LottoList(ticketCount);
+    public LottoGame(int money) {
+        this.money = money;
+        int ticketCount = money / LOTTO_TICKET_PRICE;
+        this.lottoList = new LottoList(ticketCount);
     }
 
-    public List<Rank> findWinners(){
+    public LottoGame(int money, LottoList lottoList){
+        this.money = money;
+        this.lottoList = lottoList;
+    }
+
+    public List<Rank> findWinners(LottoNumbers winNumbers){
         return lottoList
             .getLottos()
             .stream()
@@ -27,14 +31,13 @@ public class LottoGame {
     }
 
     public LottoResultResponse convert(LottoNumbers winNumbers){
-        this.winNumbers = winNumbers;
-        List<Rank> ranks = findWinners();
+        List<Rank> ranks = findWinners(winNumbers);
         int totalWinnings =
             ranks
                 .stream()
                 .map(Rank::getPrice)
                 .reduce(0, Integer::sum);
-        double yield = Math.round((totalWinnings / monkey));
+        double yield = Math.round((totalWinnings / money));
         return new LottoResultResponse(yield, ranks);
     }
 }
