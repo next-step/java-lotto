@@ -42,8 +42,6 @@ public final class LottoManager {
   }
 
   private static void fillAutomaticLotto(long lottoCount, int manualCount, Lottos userLottos) {
-    for (int i = 0; i < lottoCount - manualCount; i++) {
-      userLottos.addLotto(new Lotto());
-    }
+
   }
 }

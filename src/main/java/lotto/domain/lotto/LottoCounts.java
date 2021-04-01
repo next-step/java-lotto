@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lotto.exception.MoreManualLottoException;
@@ -30,7 +31,11 @@ public final class LottoCounts {
   }
 
   public List<Lotto> automaticLottos() {
-    return null;
+    List<Lotto> lottos = new ArrayList<>();
+    for (int i = 0; i < lottoCount - manualCount; i++) {
+      lottos.add(new Lotto());
+    }
+    return lottos;
   }
 
   @Override
