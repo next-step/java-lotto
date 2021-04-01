@@ -2,16 +2,16 @@ package step2.view;
 
 import step2.domain.Lotto;
 
-import java.util.List;
-
 public class ResultView {
-    public void displayLotto(List<Lotto> lottoList) {
-        for(Lotto lotto : lottoList){
-            System.out.println(lotto.displayLottoNumber());
-        }
+    public void displayLotto(Lotto lotto) {
+        System.out.println(lotto.displayLottoNumber());
     }
 
     public void displayLottoCount(int lottoCount) {
         System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    }
+
+    public void displayWinningStatistics() {
+        System.out.println(String.format("%d 개 일치(%d원)- %d개",1,2,3));
     }
 }

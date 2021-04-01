@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class User {
@@ -16,7 +15,7 @@ public class User {
         return lottoList;
     }
 
-    public void buyLotto(Lotto defaultLotto) {
+    public void buyLottos(Lotto defaultLotto) {
         lottoList.add(defaultLotto.buyLotto());
     }
 

@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.Prize;
+import step2.util.PrizeCalculatorUtil;
 import step2.validation.InputViewValidator;
 
 import java.util.InputMismatchException;
@@ -9,10 +9,9 @@ import java.util.Scanner;
 public class InputView {
 
     public int inputPrize() throws InputMismatchException {
-        Prize prize = new Prize();
         System.out.println("구입금액을 입력해 주세요.");
 
-        int count = prize.getLottoCount(new Scanner(System.in).nextInt());
+        int count = PrizeCalculatorUtil.getLottoCount(new Scanner(System.in).nextInt());
         InputViewValidator.prizeCountValidate(count);
         return count;
     }
