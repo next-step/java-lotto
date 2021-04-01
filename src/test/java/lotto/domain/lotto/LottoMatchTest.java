@@ -29,6 +29,7 @@ class LottoMatchTest {
   @Test
   @DisplayName("보너스 번호 일치가 필요 없는 경우 생성 실패 테스트")
   void createFailureNoBonus() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoMatch(4, true));
+    assertThatIllegalArgumentException().isThrownBy(() -> new LottoMatch(4, true))
+        .withMessage(LottoMatch.INVALID_BONUS_CONDITION);
   }
 }
