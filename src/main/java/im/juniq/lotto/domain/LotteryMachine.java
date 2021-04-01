@@ -1,8 +1,8 @@
 package im.juniq.lotto.domain;
 
 public class LotteryMachine {
-	private Lottoes lottoes;
-	private Price price;
+	private final Lottoes lottoes;
+	private final Price price;
 
 	public LotteryMachine(int price) {
 		this(price, new ShuffleStrategyImpl());

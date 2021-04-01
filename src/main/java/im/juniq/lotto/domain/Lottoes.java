@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Lottoes implements Iterable<Lotto>{
-	private List<Lotto> lottoes = new ArrayList<>();
+	private final List<Lotto> lottoes = new ArrayList<>();
 
 	public Lottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
 		makeLottoes(numberOfCreated, shuffleStrategy);

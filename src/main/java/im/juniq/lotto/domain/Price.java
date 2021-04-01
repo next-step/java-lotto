@@ -3,7 +3,7 @@ package im.juniq.lotto.domain;
 public class Price {
 	private static final int LOTTO_PRICE = 1000;
 
-	private int price;
+	private final int price;
 
 	public Price(int price) {
 		checkPrice(price);

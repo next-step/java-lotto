@@ -10,9 +10,9 @@ public enum Winning {
 	FIFTH(3, false, 5000L),
 	LOSING(2, false, 0L);
 
-	private int matchedCount;
-	private boolean matchedBonus;
-	private Long amount;
+	private final int matchedCount;
+	private final boolean matchedBonus;
+	private final Long amount;
 
 	Winning(int matchedCount, boolean matchedBonus, Long amount) {
 		this.matchedCount = matchedCount;

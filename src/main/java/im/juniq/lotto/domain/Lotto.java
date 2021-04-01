@@ -8,7 +8,7 @@ public class Lotto {
 	private static final int FIRST_LOTTO_NUMBER = 1;
 	private static final int LAST_LOTTO_NUMBER = 45;
 	private static final int NUMBER_OF_PICKUP = 6;
-	private List<Integer> numbers;
+	private final List<Integer> numbers;
 
 	public Lotto() {
 		List<Integer> baseNumbers = makeBaseNumbers();
