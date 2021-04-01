@@ -10,7 +10,7 @@ public final class WinningResult {
         this.winningScoreBoard = winningScoreBoard;
     }
 
-    public static WinningResult of(Map<WinningScore, Integer> winningScore) {
+    public static final WinningResult of(Map<WinningScore, Integer> winningScore) {
         return new WinningResult(winningScore);
     }
 

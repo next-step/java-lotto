@@ -1,6 +1,6 @@
 package step2.exception;
 
-public class LottoShuffleNullPointerException extends RuntimeException {
+public final class LottoShuffleNullPointerException extends RuntimeException {
     private final String message = "셔플 전략이 null 입니다.";
 
     @Override
