@@ -22,6 +22,8 @@ public class LottoGameController {
       return;
     }
 
+    int manualTryCount = inputView.inputManualTryLottoCount();
+
     LottoGame lottoGame = LottoStore.sell(money);
 
     resultView.printLottoBuySize(lottoGame);
