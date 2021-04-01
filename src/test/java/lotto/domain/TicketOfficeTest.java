@@ -15,25 +15,10 @@ public class TicketOfficeTest {
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
 
         //when
-        NumberOfTicket numberOfTicket = ticketOffice.numberOfTicket(purchaseAmount);
+        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
         LottoTickets lottoTickets = ticketOffice.sale(numberOfTicket);
 
         //then
         assertThat(lottoTickets.lottoTickets()).hasSize(10);
-    }
-
-
-    @Test
-    @DisplayName("구매 금액으로 구입할 수 있는 티켓 장수 구하기")
-    public void numberOfTicket() throws Exception {
-        //given
-        PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
-        TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
-
-        //when
-        NumberOfTicket numberOfTicket = ticketOffice.numberOfTicket(purchaseAmount);
-
-        //then
-        assertThat(numberOfTicket.count()).isEqualTo(1);
     }
 }

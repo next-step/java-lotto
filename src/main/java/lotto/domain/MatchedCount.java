@@ -5,6 +5,10 @@ import java.util.Objects;
 public class MatchedCount {
     private final int matchedCount;
 
+    public MatchedCount(long matchedCount) {
+        this((int) matchedCount);
+    }
+
     public MatchedCount(int matchedCount) {
         this.matchedCount = matchedCount;
     }

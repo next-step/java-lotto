@@ -8,6 +8,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
     public static String purchaseAmount() {
         System.out.println(PURCHASE_AMOUNT);
@@ -22,5 +23,13 @@ public class InputView {
         String winningNumbers = scanner.nextLine().trim();
         PreConditionUtil.checkNullOrEmpty(winningNumbers);
         return winningNumbers;
+    }
+
+    public static String bonusBall() {
+        System.out.println();
+        System.out.println(BONUS_BALL);
+        String bonusBall = scanner.nextLine().trim();
+        PreConditionUtil.checkNullOrEmpty(bonusBall);
+        return bonusBall;
     }
 }

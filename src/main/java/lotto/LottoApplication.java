@@ -16,7 +16,8 @@ public class LottoApplication {
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
         printLottoTickets(lottoTickets);
         WinningNumbers winningNumbers = createWinningNumbers();
-        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
+        BonusBall bonusBall = createBonusBall(winningNumbers);
+        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets, bonusBall);
         printStatistics(ranksCount.ranksCount());
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
@@ -34,8 +35,8 @@ public class LottoApplication {
 
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
-        NumberOfTicket numberOfTicket = ticketOffice.numberOfTicket(purchaseAmount);
-        ResultView.purchaseTickets(numberOfTicket.count());
+        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
+        ResultView.purchaseTickets(numberOfTicket.numberOfTicket());
         return ticketOffice.sale(numberOfTicket);
     }
 
@@ -48,16 +49,27 @@ public class LottoApplication {
     private static WinningNumbers createWinningNumbers() {
         try {
             List<String> winningNumbers = SplitUtil.splitByComma(InputView.winningNumbers());
-            return WinningNumbers.createBystrings(winningNumbers);
+            return WinningNumbers.by(winningNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return createWinningNumbers();
         }
     }
 
-    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+    private static BonusBall createBonusBall(WinningNumbers winningNumbers) {
+        try {
+            LottoNumber bonusNumber = new LottoNumber(InputView.bonusBall());
+            winningNumbers.check(bonusNumber);
+            return new BonusBall(bonusNumber);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return createBonusBall(winningNumbers);
+        }
+    }
+
+    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets, BonusBall bonusBall) {
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.count();
+        ranksCount.count(bonusBall);
         return ranksCount;
     }
 

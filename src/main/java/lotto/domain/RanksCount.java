@@ -18,10 +18,11 @@ public class RanksCount {
         this.ranksCount = initialValue();
     }
 
-    public void count() {
+    public void count(BonusBall bonusBall) {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
-            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount());
+            boolean matchBonus = lottoTicket.hasBonusNumber(bonusBall);
+            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount(), matchBonus);
             add(rank);
         }
     }
@@ -59,27 +60,17 @@ public class RanksCount {
     }
 
     private TreeMap<WinningRank, Integer> initialValue() {
-        TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>(Comparator.comparingInt(WinningRank::matchedCount));
+        TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>((o1, o2) -> {
+            if (o1.matchedCount() == o2.matchedCount()) {
+                return o1.prize() - o2.prize();
+            }
+            return o1.matchedCount() - o2.matchedCount();
+        });
 
         Arrays.stream(WinningRank.values())
                 .filter(rank -> rank.matchedCount() >= MATCHED_COUNT_MIN)
                 .forEach(rank -> ranksCount.put(rank, INIT));
 
         return ranksCount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RanksCount that = (RanksCount) o;
-        return Objects.equals(ranksCount, that.ranksCount) &&
-                Objects.equals(winningNumbers, that.winningNumbers) &&
-                Objects.equals(lottoTickets, that.lottoTickets);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ranksCount, winningNumbers, lottoTickets);
     }
 }

@@ -3,14 +3,21 @@ package lotto.domain;
 import java.util.Objects;
 
 public class NumberOfTicket {
-
+    private final PurchaseAmount purchaseAmount;
+    private final LottoTicketPrice lottoTicketPrice;
     private final int numberOfTicket;
 
-    public NumberOfTicket(int numberOfTicket) {
-        this.numberOfTicket = numberOfTicket;
+    public NumberOfTicket(PurchaseAmount purchaseAmount, LottoTicketPrice lottoTicketPrice) {
+        this.purchaseAmount = purchaseAmount;
+        this.lottoTicketPrice = lottoTicketPrice;
+        this.numberOfTicket = count();
     }
 
-    public int count() {
+    private int count() {
+        return purchaseAmount.purchaseAmount() / lottoTicketPrice.price();
+    }
+
+    public int numberOfTicket() {
         return numberOfTicket;
     }
 
