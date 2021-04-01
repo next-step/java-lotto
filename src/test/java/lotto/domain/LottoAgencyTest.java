@@ -25,7 +25,7 @@ class LottoAgencyTest {
   @DisplayName("로또 매치 결과를 얻을 수 있는가")
   public void updateWinnerNumber() throws Exception {
     //given
-    Lotto winningNumbers = Lotto.generateManualLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto winningNumbers = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     LottoAgency agency = new LottoAgency(new Money(5000));
 
     //when

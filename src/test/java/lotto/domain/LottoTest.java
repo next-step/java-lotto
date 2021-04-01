@@ -14,18 +14,6 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
   @Test
-  @DisplayName("List<Number>를 통해서 Lotto 클래스를 생성할 수 있는가")
-  public void isCreateByNumbers() throws Exception {
-    //given
-    //when
-    Lotto lotto = Lotto.generateManualLottoNumber(Arrays.asList(1,2,3,4,5,6));
-
-    //then
-    assertEquals(lotto.getNumbers(), lotto.getNumbers());
-  }
-
-
-  @Test
   @DisplayName("중복 값이 존재할 경우 익셉션이 발생하는가")
   public void isExistDuplicatedUpdateLotto() throws Exception {
     //given
@@ -47,8 +35,8 @@ class LottoTest {
   @DisplayName("오름차순으로 정렬이 제대로 되는가")
   public void sort() throws Exception {
     //given
-    Lotto descLotto = Lotto.generateManualLottoNumber(Arrays.asList(6,5,4,3,2,1));
-    Lotto ascLotto = Lotto.generateManualLottoNumber(Arrays.asList(1,2,3,4,5,6));
+    Lotto descLotto = Lotto.createManualLotto(Arrays.asList(6,5,4,3,2,1));
+    Lotto ascLotto = Lotto.createManualLotto(Arrays.asList(1,2,3,4,5,6));
 
     //when
     //then
