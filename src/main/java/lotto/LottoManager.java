@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
@@ -23,6 +25,10 @@ public final class LottoManager {
       System.out.println();
 
       Lottos userLottos = new Lottos(lottoCount);
+      List<Lotto> manualLottos = inputView.inputManualLottoNumber(manualCount);
+      userLottos.addLottoList(manualLottos);
+      System.out.println();
+
       Printer.printLottoCount(userLottos, manualCount);
       Printer.printLottos(userLottos);
 

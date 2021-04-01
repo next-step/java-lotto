@@ -1,5 +1,7 @@
 package lotto.io;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -14,11 +16,22 @@ public final class InputView {
   private static final String DELIMITER = ",";
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
+  private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
 
   private final Scanner scanner;
 
   public InputView(Scanner scanner) {
     this.scanner = scanner;
+  }
+
+  public List<Lotto> inputManualLottoNumber(int manualCount) {
+    System.out.println(INPUT_MANUAL_NUMBER);
+    List<Lotto> manualLottoList = new ArrayList<>();
+
+    for (int i = 0; i < manualCount; i++) {
+      manualLottoList.add(new Lotto(splitNumbers(scanner.nextLine())));
+    }
+    return manualLottoList;
   }
 
   public int inputMoney() {
@@ -46,8 +59,12 @@ public final class InputView {
     System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER);
     String winningNumberString = scanner.nextLine();
 
-    String[] winningNumbers = winningNumberString.replaceAll(SPACE_REGEX, EMPTY_STRING).split(DELIMITER);
+    String[] winningNumbers = splitNumbers(winningNumberString);
     return new Lotto(winningNumbers);
+  }
+
+  private String[] splitNumbers(String numberString) {
+    return numberString.replaceAll(SPACE_REGEX, EMPTY_STRING).split(DELIMITER);
   }
 
   private LottoNumber inputBonusNumber() {
