@@ -61,10 +61,7 @@ public class LottoBuyerTest {
         final LottoBuyer lottoBuyer = new LottoBuyer(manualLottoTickets, autoLottoTickets);
 
         assertThat(lottoBuyer.allLottoTickets()).isEqualTo(
-                new LottoTickets(
-                        Stream.concat(manualLottoTickets.stream(), autoLottoTickets.stream())
-                                .collect(Collectors.toList())
-                )
+                new LottoTickets(manualLottoTickets).combine(new LottoTickets(autoLottoTickets))
         );
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -15,6 +16,17 @@ public class LottoTickets {
         return lottoTickets.stream()
                 .map(lottoDiscriminator::lottoRank)
                 .collect(Collectors.toList());
+    }
+
+    public int count() {
+        return lottoTickets.size();
+    }
+
+    public LottoTickets combine(LottoTickets that) {
+        return new LottoTickets(
+                Stream.concat(lottoTickets.stream(), that.lottoTickets.stream())
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override
