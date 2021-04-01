@@ -12,7 +12,7 @@ public class Lotto {
 
 	public Lotto() {
 		List<Integer> baseNumbers = makeBaseNumbers();
-		new ShuffleStrategyImpl().shuffle(baseNumbers);
+		new NormalShuffleStrategy().shuffle(baseNumbers);
 		numbers = pickupNumbers(baseNumbers);
 	}
 

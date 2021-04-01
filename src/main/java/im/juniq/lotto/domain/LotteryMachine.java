@@ -5,7 +5,7 @@ public class LotteryMachine {
 	private final Price price;
 
 	public LotteryMachine(int price) {
-		this(price, new ShuffleStrategyImpl());
+		this(price, new NormalShuffleStrategy());
 	}
 
 	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
