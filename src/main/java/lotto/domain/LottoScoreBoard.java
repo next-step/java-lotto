@@ -9,11 +9,6 @@ import java.util.Map.Entry;
 public class LottoScoreBoard {
 
   private static final int INIT_VALUE = 0;
-  private static final String FIFTH_WINNER_KEY = "FIFTH";
-  private static final String FOURTH_WINNER_KEY = "FOURTH";
-  private static final String THIRD_WINNER_KEY = "THIRD";
-  private static final String SECOND_WINNER_KEY = "SECOND";
-  private static final String FIRST_WINNER_KEY = "FIRST";
 
   private final Map<String, Integer> matchResultMap;
   private final Money money;
@@ -39,7 +34,7 @@ public class LottoScoreBoard {
   }
 
   private static void initLottoRankWithPrize(Map<String, Integer> resultMap, LottoRank rankResult) {
-    if(!LottoRank.isNone(rankResult)) {
+    if (!LottoRank.isNone(rankResult)) {
       putLottoMatchResult(resultMap, rankResult);
     }
   }
@@ -74,10 +69,10 @@ public class LottoScoreBoard {
   }
 
   public String toResultString() {
-    return "3개 일치 (5000원) - " + matchResultMap.getOrDefault(FIFTH_WINNER_KEY, INIT_VALUE) + "개\n"
-           + "4개 일치 (50000원) - " + matchResultMap.getOrDefault(FOURTH_WINNER_KEY, INIT_VALUE) + "개\n"
-           + "5개 일치 (1500000원) - " + matchResultMap.getOrDefault(THIRD_WINNER_KEY, INIT_VALUE) + "개\n"
-           + "5개 일치, 보너스 볼 일치(30000000원) - " + matchResultMap.getOrDefault(SECOND_WINNER_KEY, INIT_VALUE) + "개\n"
-           + "6개 일치 (2000000000원) - " + matchResultMap.getOrDefault(FIRST_WINNER_KEY, INIT_VALUE) + "개";
+    return "3개 일치 (5000원) - " + matchResultMap.getOrDefault(LottoRank.FIFTH.name(), INIT_VALUE) + "개\n"
+        + "4개 일치 (50000원) - " + matchResultMap.getOrDefault(LottoRank.FOURTH.name(), INIT_VALUE) + "개\n"
+        + "5개 일치 (1500000원) - " + matchResultMap.getOrDefault(LottoRank.THIRD.name(), INIT_VALUE) + "개\n"
+        + "5개 일치, 보너스 볼 일치(30000000원) - " + matchResultMap.getOrDefault(LottoRank.SECOND.name(), INIT_VALUE) + "개\n"
+        + "6개 일치 (2000000000원) - " + matchResultMap.getOrDefault(LottoRank.FIRST.name(), INIT_VALUE) + "개";
   }
 }
