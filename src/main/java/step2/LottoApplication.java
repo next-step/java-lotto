@@ -7,6 +7,7 @@ import step2.domain.money.Money;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.List;
 import java.util.Set;
 
 public final class LottoApplication {
@@ -30,7 +31,7 @@ public final class LottoApplication {
 
     public final void generateAndShowLottoList() {
         Money money = inputView.getMoneyByClient();
-        Set<Lotto> userLottos = lottoService.getLottos(money);
+        List<Lotto> userLottos = lottoService.getLottos(money);
         resultView.printLottoList(userLottos);
 
         Lotto winningLotto = inputView.getWinningLottoByClient();

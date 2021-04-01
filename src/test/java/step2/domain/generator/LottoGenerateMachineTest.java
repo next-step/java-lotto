@@ -36,8 +36,8 @@ class LottoGenerateMachineTest {
     @Test
     void 생성() {
         // when
-        LottoGenerateMachine lottoGenerateMachine = LottoGenerateMachine.of(lottoNumbers -> {
-        });
+        LottoGenerateMachine lottoGenerateMachine =
+                LottoGenerateMachine.of(lottoNumbers -> { });
 
         // then
         assertThat(lottoGenerateMachine).isNotNull();
@@ -47,9 +47,8 @@ class LottoGenerateMachineTest {
     @Test
     void 검증() {
         // when
-        assertThatThrownBy(() -> {
-            LottoGenerateMachine.of(null);
-        }).isInstanceOf(LottoShuffleNullPointerException.class)
+        assertThatThrownBy(() -> LottoGenerateMachine.of(null))
+                .isInstanceOf(LottoShuffleNullPointerException.class)
                 .hasMessageContaining("셔플 전략이 null 입니다.");
     }
 

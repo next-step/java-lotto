@@ -5,10 +5,7 @@ import step2.domain.winning.WinningResult;
 import step2.domain.winning.WinningScore;
 import step2.exception.LottoNullPointerException;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public final class LottoWinningCheckMachine {
 
@@ -32,7 +29,7 @@ public final class LottoWinningCheckMachine {
         }
     }
 
-    public final WinningResult generateWinningResult(Set<Lotto> lottos) {
+    public final WinningResult generateWinningResult(List<Lotto> lottos) {
         Map<WinningScore, Integer> winningMap = generateAndInitWinningMap();
         lottos.stream()
                 .map(lotto -> lotto.getCorrectCount(winningLotto))

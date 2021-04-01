@@ -9,6 +9,7 @@ import step2.domain.winning.WinningResult;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
 
+import java.util.List;
 import java.util.Set;
 
 public final class LottoService {
@@ -27,13 +28,13 @@ public final class LottoService {
         return new LottoService(strategy);
     }
 
-    public final Set<Lotto> getLottos(Money money) {
+    public final List<Lotto> getLottos(Money money) {
         LottoGenerateCount lottoGenerateCount = LottoGenerateCount.of(money);
         LottoGenerateMachine lottoGenerateMachine = LottoGenerateMachine.of(strategy);
         return lottoGenerateMachine.generateLottos(lottoGenerateCount);
     }
 
-    public final WinningResult getWinningResult(Set<Lotto> userLottos, Lotto winningLotto) {
+    public final WinningResult getWinningResult(List<Lotto> userLottos, Lotto winningLotto) {
         LottoWinningCheckMachine winningCheckMachine = LottoWinningCheckMachine.of(winningLotto);
         WinningResult winningResult = winningCheckMachine.generateWinningResult(userLottos);
         return winningResult;

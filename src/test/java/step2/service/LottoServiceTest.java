@@ -8,6 +8,7 @@ import step2.domain.money.Money;
 import step2.strategy.LottoShuffleStrategy;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +42,7 @@ class LottoServiceTest {
         LottoService lottoService = LottoService.of(lottoShuffleStrategy);
 
         // when
-        Set<Lotto> actual = lottoService.getLottos(Money.valueOf(1000));
+        List<Lotto> actual = lottoService.getLottos(Money.valueOf(1000));
 
         // then
         assertThat(actual).isNotNull();

@@ -34,8 +34,8 @@ public final class LottoGenerateMachine {
         }
     }
 
-    public final Set<Lotto> generateLottos(LottoGenerateCount generateCount) {
-        Set<Lotto> lottos = new HashSet<>();
+    public final List<Lotto> generateLottos(LottoGenerateCount generateCount) {
+        List<Lotto> lottos = new ArrayList<>();
         while (generateCount.hasNext()) {
             lottos.add(generateLotto());
             generateCount.next();

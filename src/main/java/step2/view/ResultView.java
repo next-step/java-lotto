@@ -6,9 +6,7 @@ import step2.domain.money.Money;
 import step2.domain.winning.WinningResult;
 import step2.domain.winning.WinningScore;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class ResultView {
@@ -30,7 +28,8 @@ public final class ResultView {
 
     private static ResultView instance;
 
-    private ResultView() { }
+    private ResultView() {
+    }
 
     public final static ResultView getInstance() {
         if (isInstanceNull()) {
@@ -43,44 +42,66 @@ public final class ResultView {
         return instance == null;
     }
 
-    public final void printLottoList(Set<Lotto> lottos) {
+    public final void printLottoList(List<Lotto> lottos) {
         STRING_BUILDER.append(String.format(LOTTO_COUNT_MESSAGE, lottos.size()));
         STRING_BUILDER.append(joinLottoNumbers(lottos));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private StringBuilder joinLottoNumbers(Set<Lotto> lottos) {
+    private final StringBuilder joinLottoNumbers(List<Lotto> lottos) {
         StringBuilder joinBuilder = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-            String joinLottoNumber = lottoNumbers.stream()
-                    .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
-                    .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
-            joinBuilder.append(joinLottoNumber);
-        }
+        lottos.stream()
+                .map(Lotto::getLottoNumbers)
+                .map(this::getEachLottoString)
+                .forEach(joinBuilder::append);
         return joinBuilder;
     }
+
+    private final String getEachLottoString(Set<LottoNumber> lottoNumbers) {
+        return getJoinedLotto(setToSortedList(lottoNumbers));
+    }
+
+    private final List<LottoNumber> setToSortedList(Set<LottoNumber> lottoNumbers) {
+        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
+        Collections.sort(lottoNumberList);
+        return lottoNumberList;
+    }
+
+    private final String getJoinedLotto(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
+    }
+
 
     public final void printLottoResult(WinningResult winningResult, Money money) {
         stringBuilderReset();
         STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
         STRING_BUILDER.append(PERFORATION);
-        List<WinningScore> data = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
-        data.remove(WinningScore.MISS);
-        for (WinningScore winningScore : data) {
+        List<WinningScore> winningScores = Arrays.stream(WinningScore.values()).collect(Collectors.toList());
+        winningScores.remove(WinningScore.MISS);
+        for (WinningScore winningScore : winningScores) {
             int correctCount = winningScore.getCorrectCount();
             int winningAmount = winningScore.getWinningAmount();
             int winningCount = winningResult.getMatchCount(winningScore);
             STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, correctCount, winningAmount, winningCount));
         }
-
         double yield = doubleFormatting(getYield(winningResult, money.getMoney()));
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private void stringBuilderReset() {
+    private final void stringBuilderReset() {
         STRING_BUILDER.setLength(ZERO);
+    }
+
+    private final String chekProfitOrLoss(double yield) {
+        return yield >= ONE ? "이익이" : "손해";
+    }
+
+    private final double doubleFormatting(double yield) {
+        return (Math.floor(yield * DIGIT_FORMAT)) / DIGIT_FORMAT;
     }
 
 
@@ -93,17 +114,12 @@ public final class ResultView {
 
     private final int getRevenue(WinningResult winningResult) {
         return Arrays.stream(WinningScore.values())
-                .mapToInt(winningScore ->
-                        Math.multiplyExact(winningScore.getWinningAmount(), winningResult.getMatchCount(winningScore)))
+                .mapToInt(winningScore -> getProfit(winningScore, winningResult))
                 .sum();
     }
 
-    private String chekProfitOrLoss(double yield) {
-        return yield >= ONE ? "이익이" : "손해";
-    }
-
-    private double doubleFormatting(double yield) {
-        return (Math.floor(yield * DIGIT_FORMAT)) / DIGIT_FORMAT;
+    private final int getProfit(WinningScore winningScore, WinningResult winningResult) {
+        return Math.multiplyExact(winningScore.getWinningAmount(), winningResult.getMatchCount(winningScore));
     }
 
 }

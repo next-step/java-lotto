@@ -1,12 +1,8 @@
 package step2.domain.winning;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 public final class WinningResult {
-
-    private final static int ZERO = 0;
-    private final static int INCREASE = 1;
 
     private final Map<WinningScore, Integer> winningScoreBoard;
 
