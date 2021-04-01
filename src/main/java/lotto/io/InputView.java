@@ -13,6 +13,7 @@ public final class InputView {
   private static final String EMPTY_STRING = "";
   private static final String DELIMITER = ",";
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
+  private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
 
   private final Scanner scanner;
 
@@ -22,6 +23,15 @@ public final class InputView {
 
   public int inputMoney() {
     System.out.println(INPUT_MONEY);
+    return inputInteger();
+  }
+
+  public int inputManualCount() {
+    System.out.println(INPUT_MANUAL_COUNT);
+    return inputInteger();
+  }
+
+  private int inputInteger() {
     return Integer.parseInt(scanner.nextLine());
   }
 

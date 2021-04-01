@@ -14,6 +14,9 @@ public final class LottoManager {
     try (Scanner scanner = new Scanner(System.in)) {
       InputView inputView = new InputView(scanner);
       int money = inputView.inputMoney();
+      System.out.println();
+      int manualCount = inputView.inputManualCount();
+      System.out.println();
 
       Money userMoney = new Money(money);
       Lottos userLottos = new Lottos(userMoney);
