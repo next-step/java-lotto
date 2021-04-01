@@ -19,8 +19,8 @@ public class LottoWinner {
 
     public Rank match(Lotto userlotto) {
         int count = userlotto.match(this.lotto);
-        boolean matchBonus = userlotto.contains(bonus);
-        return Rank.rank(count, matchBonus);
+
+        return Rank.rank(count, userlotto.contains(this.bonus));
     }
 
 }
