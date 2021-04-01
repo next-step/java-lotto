@@ -1,12 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotteries {
-	private final static int PRICE_PER_GAME = 1000;
+	public final static int PRICE_PER_GAME = 1000;
 	private List<Lotto> lotteries = new ArrayList<>();
 
 	public Lotteries(int purchasePrice) {
@@ -24,8 +25,12 @@ public class Lotteries {
 		}
 	}
 
+	public void add(Lotteries newLotteries) {
+		this.lotteries.addAll(newLotteries.lotteries);
+	}
+
 	public List<Lotto> getLottoGameList() {
-		return lotteries;
+		return Collections.unmodifiableList(lotteries);
 	}
 
 	public RankingResult calculateRanking(LastWeekWinnerNumber lastWeekWinnerNumber) {

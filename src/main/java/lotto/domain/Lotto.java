@@ -31,6 +31,10 @@ public class Lotto {
 		return gameNumberList;
 	}
 
+	public boolean hasContain(LottoNumber number) {
+		return this.gameNumberList.contains(number);
+	}
+
 	private void validateSize(List<LottoNumber> gameNumberList) {
 		if (isNumberSizeInValid(gameNumberList.size())) {
 			throw new IllegalArgumentException("로또 번호는 반드시 6자리로 구성 돼야 합니다.");

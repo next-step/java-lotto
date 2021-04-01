@@ -47,4 +47,5 @@ public class LottoPurchaseTest {
 		lotteries = new Lotteries(1000);
 		assertThat(lotteries.getLottoGameList().size()).isEqualTo(1);
 	}
+
 }
