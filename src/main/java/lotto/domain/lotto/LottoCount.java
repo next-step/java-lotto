@@ -30,6 +30,10 @@ public final class LottoCount {
     return (int) lottoCount;
   }
 
+  public long getLottoCount() {
+    return lottoCount;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -45,9 +49,5 @@ public final class LottoCount {
   @Override
   public int hashCode() {
     return Objects.hash(lottoCount);
-  }
-
-  public long getLottoCount() {
-    return lottoCount;
   }
 }
