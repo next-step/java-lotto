@@ -24,7 +24,7 @@ public final class InputView {
     this.scanner = scanner;
   }
 
-  public List<Lotto> inputManualLottoNumber(int manualCount) {
+  public List<Lotto> inputManualLottoNumber(long manualCount) {
     System.out.println(INPUT_MANUAL_NUMBER);
     List<Lotto> manualLottoList = new ArrayList<>();
 
@@ -34,18 +34,18 @@ public final class InputView {
     return manualLottoList;
   }
 
-  public int inputMoney() {
+  public long inputMoney() {
     System.out.println(INPUT_MONEY);
-    return inputInteger();
+    return inputLong();
   }
 
-  public int inputManualCount() {
+  public long inputManualCount() {
     System.out.println(INPUT_MANUAL_COUNT);
-    return inputInteger();
+    return inputLong();
   }
 
-  private int inputInteger() {
-    return Integer.parseInt(scanner.nextLine());
+  private long inputLong() {
+    return Long.parseLong(scanner.nextLine());
   }
 
   public WinningLotto inputLastWinningNumber() {

@@ -23,9 +23,9 @@ public final class Printer {
 
   private Printer() {}
 
-  public static void printLottoCount(Lottos userLottos, int manualCount) {
+  public static void printLottoCount(Lottos userLottos, long manualCount) {
     int lottoCount = userLottos.count();
-    int automaticCount = lottoCount - manualCount;
+    long automaticCount = lottoCount - manualCount;
 
     StringBuilder lottoCountBuilder = new StringBuilder();
 

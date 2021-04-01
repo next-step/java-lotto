@@ -21,7 +21,7 @@ public final class LottoManager {
       long lottoCount = userMoney.divideBy(Lottos.PRICE).toInteger();
       System.out.println();
 
-      int manualCount = inputView.inputManualCount();
+      long manualCount = inputView.inputManualCount();
       LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
       System.out.println();
 
