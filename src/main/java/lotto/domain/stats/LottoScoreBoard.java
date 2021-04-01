@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.prize.Prize;
 import lotto.view.dto.LottoDto;
 

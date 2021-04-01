@@ -1,7 +1,7 @@
 package lotto.domain.machine;
 
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 
 public class TestLottoGenerator implements LottoGenerator {
     private int offset = 0;

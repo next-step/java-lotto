@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.shop.LottoShop;
 import lotto.view.dto.LottoDto;

@@ -2,7 +2,7 @@ package lotto.domain.machine;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 
 public class LottoMachine {
     private final List<Integer> candidates;

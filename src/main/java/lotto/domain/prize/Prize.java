@@ -26,14 +26,6 @@ public enum Prize {
                 .orElse(Prize.NOTHING);
     }
 
-    public static long getPrizeAmountByEqualNumberCount(long equalNumberCount) {
-        return Arrays.stream(Prize.values())
-                        .filter(prize -> prize.isSameNumberAs(equalNumberCount))
-                        .findAny()
-                        .map(Prize::getPrizeAmount)
-                        .orElse(0L);
-    }
-
     public long getEqualNumberCount() {
         return this.equalNumberCount;
     }
@@ -47,22 +39,6 @@ public enum Prize {
 
     public long getPrizeAmount() {
         return this.prizeAmount;
-    }
-
-    public String getPrizeMessage() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.equalNumberCount);
-        stringBuilder.append("개 일치");
-        if (this.equals(Prize.SECOND)) {
-            stringBuilder.append(", 보너스 볼 일치(");
-            stringBuilder.append(this.prizeAmount);
-            stringBuilder.append("원) - %d개");
-            return stringBuilder.toString();
-        }
-        stringBuilder.append(" (");
-        stringBuilder.append(this.prizeAmount);
-        stringBuilder.append("원)- %d개");
-        return stringBuilder.toString();
     }
 
 }

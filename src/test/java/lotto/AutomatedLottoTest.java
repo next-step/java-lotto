@@ -5,7 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBall;
 import lotto.domain.machine.LottoMachine;
 import lotto.domain.machine.TestLottoGenerator;
 import lotto.domain.prize.Prize;
@@ -37,6 +38,22 @@ import org.junit.jupiter.params.provider.CsvSource;
  * 6. 총 로또 구입액과 당첨 금액으로 수익률을 계산한다.
  */
 public class AutomatedLottoTest {
+
+    @Test
+    @DisplayName("로또 볼에는 1~45까지 숫자만 들어갈 수 있다.")
+    void lottoBallLegitTest() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoBall(0))
+                .withMessage("로또 번호는 1~45 사이 숫자로 입력해주세요.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoBall(-1))
+                .withMessage("로또 번호는 1~45 사이 숫자로 입력해주세요.");
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoBall(46))
+                .withMessage("로또 번호는 1~45 사이 숫자로 입력해주세요.");
+    }
 
     @Test
     @DisplayName("1~45까지 범위에서 숫자 6개를 가진 Lotto 객체를 만든다.")

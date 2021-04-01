@@ -3,7 +3,7 @@ package lotto.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.stats.LottoEarningRateCalculator;

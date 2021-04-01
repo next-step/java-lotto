@@ -1,35 +1,38 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    protected final List<Integer> numbers;
+    protected final List<LottoBall> balls;
 
     public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
+        this(Arrays.stream(numbers)
+                .map(LottoBall::new)
+                .collect(Collectors.toList()));
     }
 
-    public Lotto(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+    public Lotto(List<LottoBall> balls) {
+        if (balls.size() != 6) {
             throw new IllegalArgumentException("로또는 6개 숫자여야 합니다.");
         }
-        this.numbers = numbers;
+        this.balls = balls;
     }
 
     public long getEqualNumberCountFrom(Lotto lotto) {
-        return lotto.numbers
+        return lotto.balls
                 .stream()
                 .mapToLong(this::traverseCompareTo)
                 .sum();
     }
 
-    public long traverseCompareTo(Integer comparingNumber) {
-        return this.numbers
+    public long traverseCompareTo(LottoBall comparingBall) {
+        return this.balls
                 .stream()
-                .filter(number -> number == comparingNumber)
+                .filter(ball -> ball.equals(comparingBall))
                 .count();
     }
 
@@ -42,15 +45,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(balls, lotto.balls);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    public List<Integer> copyLottoNumbers() {
-        return new ArrayList<>(numbers);
+        return Objects.hash(balls);
     }
 }

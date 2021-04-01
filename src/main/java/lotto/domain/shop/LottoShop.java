@@ -2,7 +2,7 @@ package lotto.domain.shop;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.machine.LottoMachine;
 
