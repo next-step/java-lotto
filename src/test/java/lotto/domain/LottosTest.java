@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.Lottos.PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -37,14 +36,13 @@ class LottosTest {
   }
 
   @Test
-  @DisplayName("금액을 입력받아, 로또 금액으로 나눠 개수를 반환한다.")
+  @DisplayName("크기를 입력받아, 해당 크기만큼의 로또 목록을 만든다.")
   void create() {
     // given
-    Money money = new Money(14000);
-    long expectedSize = money.divideBy(PRICE).toInteger();
+    long expectedSize = 14;
 
     // when
-    Lottos lottos = new Lottos(money);
+    Lottos lottos = new Lottos(expectedSize);
 
     // then
     assertThat(lottos.count()).isEqualTo(expectedSize);

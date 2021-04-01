@@ -14,9 +14,7 @@ public final class Lottos {
     this(new ArrayList<>());
   }
 
-  public Lottos(Money money) {
-    long size = money.divideBy(PRICE).toInteger();
-
+  public Lottos(long size) {
     lottos = new ArrayList<>((int) size);
     for (int i = 0; i < size; i++) {
       lottos.add(new Lotto());
