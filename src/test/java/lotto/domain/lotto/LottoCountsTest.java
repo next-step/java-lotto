@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.List;
 import lotto.exception.MoreManualLottoException;
 import lotto.exception.NegativeLottoCountException;
 import org.junit.jupiter.api.DisplayName;
@@ -48,5 +49,22 @@ class LottoCountsTest {
     assertThatThrownBy(() -> new LottoCounts(1, 4))
         .isInstanceOf(MoreManualLottoException.class)
         .hasMessage(MoreManualLottoException.INVALID_MANUAL_LOTTO_COUNT);
+  }
+
+  @Test
+  @DisplayName("수동을 제외한 로또 번호를 자동으로 생성해준다.")
+  void automaticLotto() {
+    // given
+    long lottoCount = 10;
+    long manualCount = 4;
+    long automaticCount = lottoCount - manualCount;
+
+    LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
+
+    // when
+    List<Lotto> automaticLottos = lottoCounts.automaticLottos();
+
+    // then
+    assertThat(automaticLottos).hasSize((int) automaticCount);
   }
 }

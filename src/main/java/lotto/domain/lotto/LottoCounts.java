@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.List;
 import java.util.Objects;
 import lotto.exception.MoreManualLottoException;
 import lotto.exception.NegativeLottoCountException;
@@ -26,6 +27,10 @@ public final class LottoCounts {
     if (manualCount > lottoCount) {
       throw new MoreManualLottoException();
     }
+  }
+
+  public List<Lotto> automaticLottos() {
+    return null;
   }
 
   @Override
