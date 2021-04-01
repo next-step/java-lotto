@@ -2,10 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 import lotto.domain.Rank;
+import lotto.exception.IllegalWinningLottoException;
 
 public final class WinningLotto {
-
-  public static final String WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER = "보너스 번호는 우승 번호에 포함되어선 안됩니다.";
 
   private final Lotto lastWinningLotto;
   private final LottoNumber bonusNumber;
@@ -18,7 +17,7 @@ public final class WinningLotto {
 
   private void validateWinningLotto(Lotto lastWinningLotto, LottoNumber bonusNumber) {
     if (lastWinningLotto.contains(bonusNumber)) {
-      throw new IllegalArgumentException(WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
+      throw new IllegalWinningLottoException();
     }
   }
 
