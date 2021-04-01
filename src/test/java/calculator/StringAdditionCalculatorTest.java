@@ -109,19 +109,6 @@ class StringAdditionCalculatorTest {
 
   @ParameterizedTest
   @MethodSource("customDelimiterArguments")
-  @DisplayName("문자열에 구분 기호가 있는지 확인한다.")
-  void existCustomDelimiter(String input, boolean expected) {
-    // given
-
-    // when
-
-    // then
-    assertThat(StringAdditionCalculator.existCustomDelimiter(input))
-            .isEqualTo(expected);
-  }
-
-  @ParameterizedTest
-  @MethodSource("customDelimiterArguments")
   @DisplayName("문자열을 split 할 정규식 문자열을 반환한다.")
   void getCustomDelimiter(String input, boolean exist, String expected) {
     // given

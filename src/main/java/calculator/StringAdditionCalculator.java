@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.util.StringUtil;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -22,21 +24,14 @@ public class StringAdditionCalculator {
   }
 
   public Integer sum() {
-    if (isBlank(inputValue)) {
+    if (StringUtil.isBlank(inputValue)) {
       return 0;
     }
 
-    if (existCustomDelimiter(inputValue)) {
-      String delimiter = getDelimiterRegexString().concat("|")
-              .concat(getCustomDelimiter(inputValue));
-      String numbers = getNumberString(inputValue);
-      return stringToIntegerList(numbers, delimiter)
-              .stream()
-              .reduce(Integer::sum)
-              .orElse(0);
-    }
+    String delimiter = getDelimiterRegexString(inputValue);
+    String numbers = getNumberString(inputValue);
 
-    return stringToIntegerList(inputValue, getDelimiterRegexString())
+    return stringToIntegerList(numbers, delimiter)
             .stream()
             .reduce(Integer::sum)
             .orElse(0);
@@ -58,7 +53,7 @@ public class StringAdditionCalculator {
   }
 
   public static String getNumberString(String input) {
-    Matcher matcher = getMatcher(CUSTOM_DELIMITER_REGEX, input);
+    Matcher matcher = getMatcher(input);
     if (matcher.find()) {
       return matcher.group(2);
     }
@@ -66,28 +61,27 @@ public class StringAdditionCalculator {
     return input;
   }
 
-  public static boolean existCustomDelimiter(String text) {
-    return getMatcher(CUSTOM_DELIMITER_REGEX, text).find();
+  public static String getDelimiterRegexString(String inputValue) {
+    String defaultDelimiter = Arrays.stream(DEFAULT_SEPARATORS)
+            .collect(Collectors.joining("|"));
+
+    String custom = getCustomDelimiter(inputValue);
+    if (StringUtil.isBlank(custom)) {
+      return defaultDelimiter;
+    }
+
+    return defaultDelimiter.concat("|").concat(custom);
   }
 
-  public static String getCustomDelimiter(String text) {
-    Matcher matcher = getMatcher(CUSTOM_DELIMITER_REGEX, text);
+  public static String getCustomDelimiter(String input) {
+    Matcher matcher = getMatcher(input);
     if (matcher.find()) {
       return matcher.group(1);
     }
     return "";
   }
 
-  public static Matcher getMatcher(String regex, String text) {
-    return Pattern.compile(regex).matcher(text);
-  }
-
-  private static String getDelimiterRegexString() {
-    return Arrays.stream(DEFAULT_SEPARATORS)
-            .collect(Collectors.joining("|"));
-  }
-
-  private static boolean isBlank(String str) {
-    return str == null || str.isEmpty() || str.trim().isEmpty();
+  private static Matcher getMatcher(String input) {
+    return Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(input);
   }
 }
