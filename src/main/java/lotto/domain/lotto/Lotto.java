@@ -22,7 +22,7 @@ public class Lotto {
         this.balls = balls;
     }
 
-    public long getEqualNumberCountFrom(Lotto lotto) {
+    public long getMatchingBallCountFrom(Lotto lotto) {
         return lotto.balls
                 .stream()
                 .mapToLong(this::traverseCompareTo)
