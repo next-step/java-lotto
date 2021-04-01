@@ -1,14 +1,33 @@
 package step2.domain;
 
-public class Prize {
-    private static final int LOTTO_PRIZE = 1000;
+import java.util.Arrays;
 
-    private static final int THIRD_PRIZE = 5000;
-    private static final int FOURTH_PRIZE = 50000;
-    private static final int FIFTH_PRIZE = 1500000;
-    private static final int SIXTH_PRIZE = 2000000000;
+public enum Prize {
+    SIXTH(6, 2000000000),
+    FIFTH(5, 1500000),
+    FOURTH(4, 50000),
+    THIRD(3, 5000);
 
-    public int getLottoCount(int monney) {
-        return monney / LOTTO_PRIZE;
+    public int rank;
+    public int prize;
+
+    Prize(int rank, int prize) {
+        this.rank = rank;
+        this.prize = prize;
+    }
+
+    public static Prize of(int rank){
+        return Arrays.stream(Prize.values())
+                .filter(Prize -> Prize.getRank() == rank)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("일치하지 않습니다."));
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
