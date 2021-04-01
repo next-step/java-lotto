@@ -68,7 +68,7 @@ class LottosTest {
   @DisplayName("로또를 추가할 수 있다.")
   void addLotto() {
     // given
-    Lottos lottos = new Lottos(new Money(2000));
+    Lottos lottos = new Lottos();
     Lotto lotto = new Lotto();
 
     // when

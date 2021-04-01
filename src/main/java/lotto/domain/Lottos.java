@@ -10,6 +10,10 @@ public final class Lottos {
 
   private final List<Lotto> lottos;
 
+  public Lottos() {
+    this(new ArrayList<>());
+  }
+
   public Lottos(Money money) {
     long size = money.divideBy(PRICE).toInteger();
 
@@ -41,6 +45,6 @@ public final class Lottos {
   }
 
   public void addLotto(Lotto lotto) {
-
+    this.lottos.add(lotto);
   }
 }
