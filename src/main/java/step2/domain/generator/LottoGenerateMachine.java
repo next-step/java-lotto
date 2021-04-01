@@ -2,7 +2,6 @@ package step2.domain.generator;
 
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoNumber;
-import step2.domain.lotto.Lottos;
 import step2.exception.LottoShuffleNullPointerException;
 import step2.strategy.LottoRandomShuffleStrategy;
 import step2.strategy.LottoShuffleStrategy;
@@ -35,13 +34,13 @@ public final class LottoGenerateMachine {
         }
     }
 
-    public final Lottos generateLottos(LottoGenerateCount generateCount) {
+    public final Set<Lotto> generateLottos(LottoGenerateCount generateCount) {
         Set<Lotto> lottos = new HashSet<>();
         while (generateCount.hasNext()) {
             lottos.add(generateLotto());
             generateCount.next();
         }
-        return Lottos.of(lottos);
+        return lottos;
     }
 
     private final Lotto generateLotto() {

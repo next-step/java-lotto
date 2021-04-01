@@ -1,12 +1,13 @@
 package step2;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.Lottos;
 import step2.domain.winning.WinningResult;
 import step2.service.LottoService;
 import step2.domain.money.Money;
 import step2.view.InputView;
 import step2.view.ResultView;
+
+import java.util.Set;
 
 public final class LottoApplication {
     private final InputView inputView;
@@ -29,7 +30,7 @@ public final class LottoApplication {
 
     public final void generateAndShowLottoList() {
         Money money = inputView.getMoneyByClient();
-        Lottos userLottos = lottoService.getLottos(money);
+        Set<Lotto> userLottos = lottoService.getLottos(money);
         resultView.printLottoList(userLottos);
 
         Lotto winningLotto = inputView.getWinningLottoByClient();

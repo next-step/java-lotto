@@ -1,7 +1,6 @@
 package step2.view;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.Lottos;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.money.Money;
 import step2.domain.winning.WinningResult;
@@ -44,32 +43,22 @@ public final class ResultView {
         return instance == null;
     }
 
-    public final void printLottoList(Lottos lottos) {
-        STRING_BUILDER.append(String.format(LOTTO_COUNT_MESSAGE, lottos.getLottosSize()));
+    public final void printLottoList(Set<Lotto> lottos) {
+        STRING_BUILDER.append(String.format(LOTTO_COUNT_MESSAGE, lottos.size()));
         STRING_BUILDER.append(joinLottoNumbers(lottos));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private StringBuilder joinLottoNumbers(Lottos lottos) {
-        Set<Lotto> lottoList = lottos.getLottos();
+    private StringBuilder joinLottoNumbers(Set<Lotto> lottos) {
         StringBuilder joinBuilder = new StringBuilder();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-            String joinLottoNumber = lottoNumbers
-                    .stream()
-                    .map(ResultView::lottoNumberToString)
+            String joinLottoNumber = lottoNumbers.stream()
+                    .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
                     .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
             joinBuilder.append(joinLottoNumber);
         }
         return joinBuilder;
-    }
-
-    private static String lottoNumberToString(LottoNumber lottoNumber) {
-        return String.valueOf(lottoNumber.getLottoNumber());
-    }
-
-    private void stringBuilderReset() {
-        STRING_BUILDER.setLength(ZERO);
     }
 
     public final void printLottoResult(WinningResult winningResult, Money money) {
@@ -89,6 +78,11 @@ public final class ResultView {
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
         System.out.println(STRING_BUILDER.toString());
     }
+
+    private void stringBuilderReset() {
+        STRING_BUILDER.setLength(ZERO);
+    }
+
 
     public final double getYield(WinningResult winningResult, int inputMoney) {
         if (inputMoney == ZERO) {

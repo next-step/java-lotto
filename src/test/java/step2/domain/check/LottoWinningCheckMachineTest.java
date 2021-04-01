@@ -1,13 +1,14 @@
 package step2.domain.check;
 
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.Lottos;
 import step2.domain.winning.WinningResult;
 import step2.exception.LottoNullPointerException;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -45,7 +46,7 @@ class LottoWinningCheckMachineTest {
     void 반환() {
         // given
         Lotto winningLotto = Lotto.of("1, 2, 3, 4, 5, 6");
-        Lottos lottos = Lottos.of(Arrays.asList(Lotto.of("1, 2, 3, 4, 5, 6")));
+        Set<Lotto> lottos = Sets.newHashSet(Arrays.asList(Lotto.of("1, 2, 3, 4, 5, 6")));
 
         // when
         LottoWinningCheckMachine machine = LottoWinningCheckMachine.of(winningLotto);

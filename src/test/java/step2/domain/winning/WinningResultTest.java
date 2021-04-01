@@ -30,6 +30,10 @@ class WinningResultTest {
     void 값_반환() {
         // then
         Map<WinningScore, Integer> testMap = new HashMap<>();
+        for(WinningScore winningScore: WinningScore.values()) {
+            testMap.put(winningScore, 0);
+        }
+
         int expected = 0;
 
         // when
@@ -45,30 +49,6 @@ class WinningResultTest {
         );
     }
 
-    @DisplayName("WinningResult 인스턴스가 소유한 map의 값 증가 테스트")
-    @Test
-    void 값_증가() {
-        // then
-        Map<WinningScore, Integer> testMap = new HashMap<>();
-        int expected = 1;
-
-        // when
-        WinningResult winningResult = WinningResult.of(testMap);
-        winningResult.increaseCount(WinningScore.MISS);
-        winningResult.increaseCount(WinningScore.THREE);
-        winningResult.increaseCount(WinningScore.FOUR);
-        winningResult.increaseCount(WinningScore.FIVE);
-        winningResult.increaseCount(WinningScore.SIX);
-
-        // then
-        assertAll(
-                () -> assertThat(winningResult.getMatchCount(WinningScore.MISS)).isEqualTo(expected),
-                () -> assertThat(winningResult.getMatchCount(WinningScore.THREE)).isEqualTo(expected),
-                () -> assertThat(winningResult.getMatchCount(WinningScore.FOUR)).isEqualTo(expected),
-                () -> assertThat(winningResult.getMatchCount(WinningScore.FIVE)).isEqualTo(expected),
-                () -> assertThat(winningResult.getMatchCount(WinningScore.SIX)).isEqualTo(expected)
-        );
-    }
 
 
 }

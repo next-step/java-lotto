@@ -1,7 +1,6 @@
 package step2.domain.check;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.Lottos;
 import step2.domain.winning.WinningResult;
 import step2.domain.winning.WinningScore;
 import step2.exception.LottoNullPointerException;
@@ -9,6 +8,7 @@ import step2.exception.LottoNullPointerException;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public final class LottoWinningCheckMachine {
 
@@ -32,9 +32,9 @@ public final class LottoWinningCheckMachine {
         }
     }
 
-    public WinningResult generateWinningResult(Lottos lottos) {
+    public final WinningResult generateWinningResult(Set<Lotto> lottos) {
         Map<WinningScore, Integer> winningMap = generateAndInitWinningMap();
-        lottos.getLottos().stream()
+        lottos.stream()
                 .map(lotto -> lotto.getCorrectCount(winningLotto))
                 .map(WinningScore::valueOf)
                 .forEach(winningScore -> winningMap.put(winningScore, winningMap.get(winningScore) + INCREASE));
@@ -43,7 +43,7 @@ public final class LottoWinningCheckMachine {
 
     private final Map<WinningScore, Integer> generateAndInitWinningMap() {
         Map<WinningScore, Integer> winningMap = new EnumMap<>(WinningScore.class);
-        for(WinningScore winningScore : WinningScore.values()) {
+        for (WinningScore winningScore : WinningScore.values()) {
             winningMap.put(winningScore, ZERO);
         }
         return winningMap;
