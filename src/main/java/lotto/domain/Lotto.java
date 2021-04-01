@@ -20,14 +20,14 @@ public class Lotto {
     this.numbers = numbers;
   }
 
-  public static Lotto generateAutoLottoNumber() {
-    return LottoNumberGenerator
-        .createAutoLottoNumbers(new AutoLottoNumberGenerateStrategy());
+  public static Lotto createAutoLotto() {
+    return new Lotto(LottoNumberGenerator
+        .createAutoLottoNumbers(new AutoLottoNumberGenerateStrategy()));
   }
 
-  public static Lotto generateManualLottoNumber(List<Integer> inputNumbers) {
-    return LottoNumberGenerator
-        .createManualLottoNumbers(new ManualLottoNumberGenerateStrategy(inputNumbers));
+  public static Lotto createManualLotto(List<Integer> inputNumbers) {
+    return new Lotto(LottoNumberGenerator
+        .createManualLottoNumbers(new ManualLottoNumberGenerateStrategy(inputNumbers)));
   }
 
   private void validation(List<Number> numbers) {
