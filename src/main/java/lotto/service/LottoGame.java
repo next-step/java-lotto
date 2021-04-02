@@ -1,8 +1,11 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoGame {
 
@@ -13,10 +16,16 @@ public class LottoGame {
     }
 
     public void start() {
+        List<Number> lottoLastNumber;
+        Number bonusNumber;
         Lottos lottos = new Lottos(new LottoGenerator(payLotto));
         ResultView.printLottoNumber(lottos);
-        Lotto winningLotto = new Lotto(InputView.enterLastNumber());
-        Prize prize = new Prize(lottos, winningLotto);
+
+        lottoLastNumber = InputView.enterLastNumber();
+        bonusNumber = InputView.enterBonusNumber();
+
+        Lotto lastLottoNumber = new Lotto(lottoLastNumber, bonusNumber);
+        Prize prize = new Prize(lottos, lastLottoNumber);
         ResultView.printLottoResult(prize);
         ResultView.printLottoYield(prize, payLotto);
     }

@@ -51,6 +51,6 @@ public class Number implements Comparable<Number> {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this);
+        return String.valueOf(num).hashCode();
     }
 }

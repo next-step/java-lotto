@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final String ERROR_OVERLAP_MSG = "[오류] 중복된 값을 입력하셨거나, 6자리를 입력하지 않았습니다..";
-    private final List<Number> lotto;
+    private final String ERROR_LOTTO_NUM_MSG = "[오류] Lotto 번호 6자리를 입력해주세요.";
+    private final String ERROR_LAST_LOTTO_NUM_MSG = "[오류] 지난 Lotto번호와 Bonus가 겹칩니다.";
+    private final String ERROR_NUM_MSG = "[오류] 지난 Lotto가 중복된 번호가있습니다.";
 
-    public Lotto(String[] numbers) {
-        checkNumber(numbers);
-        this.lotto = Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(Number::createNumber)
+    private final List<Number> lotto;
+    private Number bonus;
+
+    public Lotto(List<Number> numbers, Number bonus) {
+        checkNumber(numbers, bonus);
+        this.bonus = bonus;
+        this.lotto = numbers.stream()
                 .collect(Collectors.toList());
     }
 
@@ -30,17 +33,26 @@ public class Lotto {
         return count;
     }
 
-    private boolean anyMatch(Number otherNumber) {
+    public boolean anyMatch(Number otherNumber) {
         return lotto.contains(otherNumber);
     }
 
-    private void checkNumber(String[] numbers) {
-        if (Arrays.stream(numbers).distinct().count() != Constant.LOTTO_TOTAL_NUMBER) {
-            throw new IllegalArgumentException(ERROR_OVERLAP_MSG);
+    private void checkNumber(List<Number> numbers, Number bonusNumber) {
+        if (numbers.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException(ERROR_NUM_MSG);
+        }
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ERROR_LOTTO_NUM_MSG);
+        }
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_LAST_LOTTO_NUM_MSG);
         }
     }
-
     public List<Number> getLotto() {
         return lotto;
+    }
+
+    public Number getBonus() {
+        return bonus;
     }
 }

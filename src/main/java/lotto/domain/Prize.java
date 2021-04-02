@@ -10,9 +10,9 @@ public class Prize {
     private BigDecimal totalWinningMoney;
     private double yield;
 
-    public Prize(Lottos lottos, Lotto lotto) {
+    public Prize(Lottos lottos, Lotto lastLottoNumber) {
         this.prize = generatorState();
-        getWinningResult(lottos, lotto);
+        getWinningResult(lottos, lastLottoNumber);
     }
 
     private Map<Rank, Integer> generatorState(){
@@ -26,12 +26,12 @@ public class Prize {
     private void getWinningResult( Lottos lottos, Lotto lastLottoNumber) {
         for (Lotto paylotto : lottos.getLottos()) {
             int matchNumber = paylotto.countNumbers(lastLottoNumber);
-            countResult(matchNumber);
+            countResult(matchNumber, paylotto.anyMatch(lastLottoNumber.getBonus()));
         }
     }
 
-    private void countResult(int matchNumber) {
-        prize.put(Rank.converterPrize(matchNumber), prize.get(Rank.converterPrize(matchNumber)) + 1);
+    private void countResult(int matchNumber, boolean bonus) {
+        prize.put(Rank.converterPrize(matchNumber, bonus), prize.get(Rank.converterPrize(matchNumber, bonus)) + 1);
     }
 
 
