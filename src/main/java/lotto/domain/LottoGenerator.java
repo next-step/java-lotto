@@ -16,7 +16,7 @@ public class LottoGenerator implements Generator {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int num = 0; num < tryNum; num++) {
-            lottoList.add(injection.provideLotto());
+            lottoList.add(Lottoinjection.provideLotto());
         }
         return lottoList;
     }

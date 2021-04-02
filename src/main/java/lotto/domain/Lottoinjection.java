@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class injection {
+public class Lottoinjection {
 
     public static NumbersGenerator provideNumbersGenerator(){
         return new NumbersGenerator();
