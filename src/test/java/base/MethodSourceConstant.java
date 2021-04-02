@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 public final class MethodSourceConstant {
   private static final String CLASS_PATH = "base.MethodSourceConstant";
   public static final String CUSTOM_DELIMITER_ARGUMENTS = CLASS_PATH + "#customDelimiterArguments";
+  public static final String NUMBER_STRING_ARGUMENTS = CLASS_PATH + "#numberStringArguments";
   public static final String IS_POSITIVE_NUMBER_STRING_ARGUMENTS = CLASS_PATH + "#isPositiveNumberStringArguments";
   public static final String SUM_ARGUMENTS = CLASS_PATH + "#sumArguments";
 
@@ -19,6 +20,18 @@ public final class MethodSourceConstant {
             , Arguments.of("//*\n1*2*3", ",|:|*", true)
             , Arguments.of("//\n1;2;3", ",|:", false)
             , Arguments.of("1,2,3", ",|:", false)
+    );
+  }
+
+  static Stream<Arguments> numberStringArguments() {
+    return Stream.of(
+              Arguments.of(null, "0")
+            , Arguments.of("", "0")
+            , Arguments.of(" ", "0")
+            , Arguments.of("1", "1")
+            , Arguments.of("1,2,3", "1,2,3")
+            , Arguments.of("//;\n1;2;3", "1;2;3")
+            , Arguments.of("//*\n1*2*3", "1*2*3")
     );
   }
 
