@@ -21,13 +21,11 @@ public class Lotto {
   }
 
   public static Lotto createAutoLotto() {
-    return new Lotto(LottoNumberGenerator
-        .createAutoLottoNumbers(new AutoLottoNumberGenerateStrategy()));
+    return new Lotto(LottoNumberGenerator.from(new AutoLottoNumberGenerateStrategy()));
   }
 
   public static Lotto createManualLotto(List<Integer> inputNumbers) {
-    return new Lotto(LottoNumberGenerator
-        .createManualLottoNumbers(new ManualLottoNumberGenerateStrategy(inputNumbers)));
+    return new Lotto(LottoNumberGenerator.from(new ManualLottoNumberGenerateStrategy(inputNumbers)));
   }
 
   private void validation(List<Number> numbers) {

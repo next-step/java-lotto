@@ -32,11 +32,11 @@ public class LottoNumberGenerator {
     return new LottoNumberGenerator(lottoNumbers);
   }
 
-  public static List<Number> createManualLottoNumbers(ManualLottoNumberGenerateStrategy strategy) {
+  public static List<Number> from(ManualLottoNumberGenerateStrategy strategy) {
     return sort(strategy.generate());
   }
 
-  public static List<Number> createAutoLottoNumbers(AutoLottoNumberGenerateStrategy strategy) {
+  public static List<Number> from(AutoLottoNumberGenerateStrategy strategy) {
     return sort(strategy.generate());
   }
 
