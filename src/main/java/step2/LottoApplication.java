@@ -1,6 +1,5 @@
 package step2;
 
-import step2.domain.Candidate;
 import step2.domain.Lotto;
 import step2.domain.Prize;
 import step2.domain.Seed;
@@ -16,17 +15,17 @@ public class LottoApplication {
         Lotto lotto = new Lotto();
         Seed seed = new Seed(InputView.getSeed());
 
-        lotto.init(seed.amount() / PRICE_PER_GAME, LENGTH_PER_GAME);
+        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
 
         OutputView.printGameSize(lotto);
         OutputView.printGames(lotto);
 
         Prize prize = new Prize(InputView.getPrize(), InputView.getBonus());
 
-        Candidate candidate = new Candidate(lotto.candidate(prize));
+        lotto.match(prize);
         OutputView.printStatistics();
-        OutputView.printResult(candidate);
+        OutputView.printResult(lotto);
 
-        OutputView.printProfit(prize.profit(candidate, seed));
+        OutputView.printProfit(prize.profit(lotto, seed));
     }
 }

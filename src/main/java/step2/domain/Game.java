@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final List<Number> numbers;
+    private Rank rank;
 
     public Game(int length) {
         this.numbers = init(length);
@@ -15,19 +16,23 @@ public class Game {
         this.numbers = init(numbers);
     }
 
-    public Rank containCount(Game prize, Bonus bonus) {
+    public void match(Game prize, Number bonus) {
         long count = numbers.stream()
             .filter(prize.numbers::contains)
             .count();
 
         boolean matchBonus = numbers.stream()
-            .anyMatch(bonus.ball()::equals);
+            .anyMatch(bonus::equals);
 
-        return Rank.valueOf(Long.valueOf(count).intValue(), matchBonus);
+        this.rank = Rank.valueOf(Long.valueOf(count).intValue(), matchBonus);
     }
 
     public List<Number> numbers() {
         return this.numbers;
+    }
+
+    public Rank rank() {
+        return this.rank;
     }
 
     private List<Number> init(int length) {

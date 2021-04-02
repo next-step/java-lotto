@@ -4,7 +4,12 @@ import static step2.util.StringConstant.NEW_LINE;
 import static step2.view.Message.SAME_COUNT;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import step2.domain.Candidate;
+import step2.domain.Game;
 import step2.domain.Lotto;
 import step2.domain.Rank;
 
@@ -23,7 +28,8 @@ public class OutputView {
         System.out.println("-------");
     }
 
-    public static void printResult(Candidate candidate) {
+    public static void printResult(Lotto lotto) {
+        Map<Rank, List<Game>> candidate = lotto.candidate();
         StringBuilder result = new StringBuilder();
         Arrays.stream(Rank.values())
             .filter(rank -> !rank.equals(Rank.MISS))
@@ -32,7 +38,7 @@ public class OutputView {
                     .append(SAME_COUNT)
                     .append(rank.getWinningMoney())
                     .append(" - ")
-                    .append(candidate.count(rank))
+                    .append(candidate.get(rank).size())
                     .append(NEW_LINE);
             });
 

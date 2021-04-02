@@ -7,11 +7,11 @@ import static step2.LottoApplication.PRICE_PER_GAME;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Candidate;
 import step2.domain.Game;
 import step2.domain.Lotto;
 import step2.domain.Number;
@@ -34,17 +34,15 @@ public class LottoTest {
     @DisplayName("한 게임 당 1000원이고 시드머니가 14000이면 14게임")
     @Test
     void gameSize() {
-        int gameSize = seed.amount() / PRICE_PER_GAME;
+        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
 
-        lotto.init(gameSize, LENGTH_PER_GAME);
-
-        assertEquals(gameSize, lotto.size());
+        assertEquals(seed.amount() / PRICE_PER_GAME, lotto.size());
     }
 
     @DisplayName("입력받은 개수만큼 게임생성")
     @Test
     void generateGames() {
-        lotto.init(seed.amount() / PRICE_PER_GAME, LENGTH_PER_GAME);
+        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
         List<Game> games = lotto.games();
 
         for (int count = 0; count < lotto.size(); ++count) {
@@ -57,7 +55,7 @@ public class LottoTest {
     @DisplayName("당첨번호 생성")
     @Test
     void generateLastPrize() {
-        prize = new Prize("1,2,3,4,5,6","7");
+        prize = new Prize("1,2,3,4,5,6", "7");
         Game lastPrize = prize.last();
         Set<Number> numbers = new HashSet<>(lastPrize.numbers());
         assertEquals(LENGTH_PER_GAME, numbers.size());
@@ -66,12 +64,13 @@ public class LottoTest {
     @DisplayName("당첨테스트")
     @Test
     void prize() {
-        prize = new Prize("1,2,3,4,5,6","7");
+        prize = new Prize("1,2,3,4,5,6", "7");
         List<Game> games = lotto.games();
         initGames(games);
 
-        Candidate candidate = new Candidate(lotto.candidate(prize));
-        candidate.rank().forEach((key, value) -> {
+        lotto.match(prize);
+        Map<Rank, List<Game>> candidate = lotto.candidate();
+        candidate.forEach((key, value) -> {
             if (key.equals(Rank.FIFTH)) {
                 assertEquals(3, value.size());
             } else if (key.equals(Rank.FOURTH)) {
