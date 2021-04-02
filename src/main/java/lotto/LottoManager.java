@@ -14,13 +14,12 @@ public final class LottoManager {
 
   public static void main(String[] args) {
     try (Scanner scanner = new Scanner(System.in)) {
-      start(scanner);
+      InputView inputView = new InputView(scanner);
+      start(inputView);
     }
   }
 
-  private static void start(Scanner scanner) {
-    InputView inputView = new InputView(scanner);
-
+  private static void start(InputView inputView) {
     Money userMoney = inputView.inputMoney();
     LottoCount lottoCount = new LottoCount(userMoney);
     System.out.println();
