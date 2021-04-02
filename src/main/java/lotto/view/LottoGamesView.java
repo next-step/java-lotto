@@ -1,16 +1,16 @@
 package lotto.view;
 
-import lotto.domain.LottoGames;
+import lotto.domain.LottoShop;
 
 public class LottoGamesView {
-    private final LottoGames lottoGames;
+    private final LottoShop lottoShop;
 
-    public LottoGamesView(LottoGames lottoGames) {
-        this.lottoGames = lottoGames;
+    public LottoGamesView(LottoShop lottoShop) {
+        this.lottoShop = lottoShop;
     }
 
     public void printLottoGamesNumber() {
-        System.out.println(lottoGames.getGameCount() + "개를 구매했습니다.");
-        lottoGames.getLottoGames().forEach(lottoGame -> System.out.println(lottoGame.getNumbers()));
+        System.out.println(lottoShop.getGameCount() + "개를 구매했습니다.");
+        lottoShop.getLottoGames().forEach(lottoGame -> System.out.println(lottoGame.getNumbers()));
     }
 }
