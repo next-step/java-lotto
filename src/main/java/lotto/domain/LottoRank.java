@@ -12,47 +12,43 @@ public enum LottoRank {
   SECOND(5, 30000000),
   FIRST(6, 2000000000);
 
-  private int matchCount;
-  private Money winnerMoney;
+  private final int matchCount;
+  private final Money winnerMoney;
 
   LottoRank(int matchCount, int winnerMoney) {
     this.matchCount = matchCount;
     this.winnerMoney = new Money(winnerMoney);
   }
 
-  public Money getWinnerMoney() {
-    return winnerMoney;
+  public boolean isCorrectMatchCount(int matchCount) {
+    return this.matchCount == matchCount;
+  }
+
+  public int calculateWinningMoney(Integer value) {
+    return winnerMoney.multiple(value);
   }
 
   public static LottoRank findRank(String winnerRank) {
-    return Arrays.stream(LottoRank.values())
-        .filter(matches -> matches.name().equals(winnerRank))
-        .findAny()
-        .orElseThrow(IllegalArgumentException::new);
+    return LottoRankPredicates.filterLottoRankWithString(winnerRank);
   }
 
   public static LottoRank valueOf(int matchCount, boolean bonusBall) {
-    return Arrays.stream(LottoRank.values())
-        .filter(rank -> isThirdOrSecond(matchCount) ?
-            filterIsSecond(bonusBall, rank.winnerMoney) : rank.matchCount == matchCount)
-        .findAny()
-        .orElse(LottoRank.NONE);
+    if(isThirdOrSecond(matchCount)) {
+      return LottoRankPredicates.filterLottoRankIsSecondOrThird(bonusBall);
+    }
+    return LottoRankPredicates.filterLottRankIsDefault(matchCount);
   }
 
   private static boolean isThirdOrSecond(int matchCount) {
     return matchCount == LottoRank.THIRD.matchCount;
   }
 
-  private static boolean filterIsSecond(boolean bonusBall, Money winnerMoney) {
-    return bonusBall ? winnerMoney.equals(LottoRank.SECOND.winnerMoney) : winnerMoney.equals(LottoRank.THIRD.winnerMoney);
-  }
-
   public static LottoRank matches(List<Number> winningNumbers, List<Number> holdingLottoNumbers, Number bonusBall) {
     int matchCount =  Math.toIntExact(winningNumbers.stream()
         .filter(holdingLottoNumbers::contains)
         .count());
-    boolean isSecond = holdingLottoNumbers.contains(bonusBall);
-    return LottoRank.valueOf(matchCount, isSecond);
+    boolean hasBonusBall = holdingLottoNumbers.contains(bonusBall);
+    return LottoRank.valueOf(matchCount, hasBonusBall);
   }
 
   public static boolean isNone(LottoRank lottoRank) {

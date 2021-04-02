@@ -5,24 +5,35 @@ import java.util.function.Predicate;
 
 public class LottoRankPredicates {
 
-  public static Predicate<LottoRank> getSecondOrThird(boolean bonusBall) {
+  private static Predicate<LottoRank> isSecondOrThird(boolean bonusBall) {
     return rank -> getSecondOrThird(bonusBall, rank);
   }
 
-  public static Predicate<LottoRank> defaultCase(int matchCount) {
-    return rank -> rank.getMatchCount() == matchCount;
+  private static Predicate<LottoRank> defaultCase(int matchCount) {
+    return rank -> rank.isCorrectMatchCount(matchCount);
+  }
+
+  private static Predicate<LottoRank> findRank(String winnerRank) {
+    return rank -> rank.name().equals(winnerRank);
   }
 
   private static boolean getSecondOrThird(boolean bonusBall, LottoRank rank) {
     if(bonusBall) {
-      return rank.getWinnerMoney().equals(LottoRank.SECOND.getWinnerMoney());
+      return rank == LottoRank.SECOND;
     }
-    return rank.getWinnerMoney().equals(LottoRank.THIRD.getWinnerMoney());
+    return rank == LottoRank.THIRD;
+  }
+
+  public static LottoRank filterLottoRankWithString(String winnerRank) {
+    return Arrays.stream(LottoRank.values())
+        .filter(findRank(winnerRank))
+        .findAny()
+        .orElseThrow(IllegalArgumentException::new);
   }
 
   public static LottoRank filterLottoRankIsSecondOrThird(boolean bonusBall) {
     return Arrays.stream(LottoRank.values())
-        .filter(getSecondOrThird(bonusBall))
+        .filter(isSecondOrThird(bonusBall))
         .findAny()
         .orElse(LottoRank.NONE);
   }
