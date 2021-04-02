@@ -20,10 +20,14 @@ public class OperandInteger {
     }
 
     public OperandInteger(int number) {
-        if (number < ZERO) {
-            throw new RuntimeException();
-        }
+        validate(number);
         this.number = number;
+    }
+
+    private void validate(int number) {
+        if (number < ZERO) {
+            throw new RuntimeException("문자열에 음수값이 포함되어 있습니다.");
+        }
     }
 
     public OperandInteger sum(OperandInteger other) {
