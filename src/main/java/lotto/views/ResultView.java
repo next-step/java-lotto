@@ -29,7 +29,7 @@ public class ResultView {
     }
 
     public static void print(LottoBuyer lottoBuyer) {
-        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
+        System.out.printf("\n수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
                 lottoBuyer.manualLottoTicketsCount(), lottoBuyer.autoLottoTicketsCount()
         );
 
