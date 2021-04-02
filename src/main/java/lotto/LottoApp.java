@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.machine.RandomLottoGenerator;
 import lotto.domain.machine.TestLottoGenerator;
 import lotto.service.LottoScoring;
 import lotto.service.LottoShopping;
@@ -13,7 +14,7 @@ import lotto.view.dto.LottoScoringResultDto;
 
 public class LottoApp {
     private static LottoShopping shoppingService =
-            new LottoShopping(new TestLottoGenerator());
+            new LottoShopping(new RandomLottoGenerator());
     private static LottoScoring scoringService = new LottoScoring();
 
     public static void main(String[] args) {

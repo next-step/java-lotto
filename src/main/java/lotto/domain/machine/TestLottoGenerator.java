@@ -5,7 +5,11 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
 
 public class TestLottoGenerator implements LottoGenerator {
-    private int offset = 0;
+    private int offset;
+
+    public TestLottoGenerator(int offset) {
+        this.offset = offset;
+    }
 
     @Override
     public Lotto generate(List<LottoBall> candidates) {
