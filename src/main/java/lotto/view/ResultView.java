@@ -14,6 +14,7 @@ public class ResultView {
                     + "3개 일치 (5000원)- %d개\n"
                     + "4개 일치 (50000원)- %d개\n"
                     + "5개 일치 (1500000원)- %d개\n"
+                    + "5개 일치, 보너스 볼 일치(3000000원)- %d개\n"
                     + "6개 일치 (2000000000원)- %d개\n";
     private static final String YIELD_FORMAT_STRING =
             "총 수익률은 %.3f입니다.\n";
@@ -32,6 +33,7 @@ public class ResultView {
     public static void printLottoResult(Prize prize) {
 
         System.out.format(RANK_FORMAT_STRING,
+                prize.getPrize().get(Rank.FIFTH),
                 prize.getPrize().get(Rank.FOURTH),
                 prize.getPrize().get(Rank.THIRD),
                 prize.getPrize().get(Rank.SECOND),
