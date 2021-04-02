@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Map.Entry;
 import java.util.Objects;
 
 public class Money {
@@ -18,8 +17,8 @@ public class Money {
     return money / lottoPrice;
   }
 
-  public int calculateWinningMoney(Integer resultMapEntry) {
-    return resultMapEntry * money;
+  public int multiple(Integer value) {
+    return value * money;
   }
 
   @Override

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,8 +57,7 @@ public class LottoScoreBoard {
 
   private int getWinningMoney(Entry<String, Integer> entry) {
     LottoRank prize = LottoRank.findRank(entry.getKey());
-    return prize.getWinnerMoney()
-        .calculateWinningMoney(entry.getValue());
+    return prize.calculateWinningMoney(entry.getValue());
   }
 
   public String toResultString() {
