@@ -13,10 +13,15 @@ public class WinningLotto {
     }
 
     public long getScoreIfMatchingBall(Lotto lotto) {
-        return winningLotto.getMatchingBallCountFrom(lotto) * 2;
+        long matchingBallCount = winningLotto.getMatchingBallCountFrom(lotto);
+        long score = matchingBallCount * 2;
+        if (matchingBallCount == 5) {
+            score += getScoreIfMatchingBonusBall(lotto);
+        }
+        return score;
     }
 
-    public long getScoreIfMatchingBonusBall(Lotto lotto) {
+    private long getScoreIfMatchingBonusBall(Lotto lotto) {
         return lotto.traverseCompareTo(bonusBall);
     }
 }

@@ -17,10 +17,8 @@ public class LottoScoreBoard {
 
     public void scoring() {
         for (Lotto lotto : candidateLottoList) {
-            long scoreTotal = winningLotto.getScoreIfMatchingBall(lotto) +
-                    winningLotto.getScoreIfMatchingBonusBall(lotto);
-
-            prizeBoard.record(Prize.getPrizeByScore(scoreTotal));
+            prizeBoard.record(Prize.getPrizeByScore(
+                    winningLotto.getScoreIfMatchingBall(lotto)));
         }
     }
 
