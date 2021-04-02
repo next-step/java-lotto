@@ -23,13 +23,24 @@ class MoneyTest {
 
   @Test
   @DisplayName("제대로 나누기를 수행하는가")
-  public void dividePerLotto() throws Exception {
+  public void divide() throws Exception {
     //given
     Money money = new Money(14000);
     //when
     int perLotto = money.divide(1000);
     //then
     assertEquals(perLotto, 14);
+  }
+
+  @Test
+  @DisplayName("제대로 곱하기를 수행하는가")
+  public void multiple() throws Exception {
+    //given
+    Money money = new Money(20000);
+    //when
+    int multiple = money.multiple(7);
+    //then
+    assertEquals(multiple, 140000);
   }
 
   @ParameterizedTest
