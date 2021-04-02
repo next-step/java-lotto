@@ -6,9 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static base.MethodSourceConstant.IS_POSITIVE_NUMBER_STRING_ARGUMENTS;
 import static base.MethodSourceConstant.SUM_ARGUMENTS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,20 +42,6 @@ class StringAdditionCalculatorTest {
   }
 
   @ParameterizedTest
-  @NullAndEmptySource
-  @DisplayName("빈 문자열 또는 null인 경우 0을 반환한다.")
-  void operation_Should_zero_When_empty_or_blank_input(String emptyBlankStr) {
-    // given
-
-    // when
-    Number expected = StringAdditionCalculator.create(emptyBlankStr)
-            .sum();
-
-    // then
-    assertThat(expected).isEqualTo(Number.zero());
-  }
-
-  @ParameterizedTest
   @MethodSource(SUM_ARGUMENTS)
   @DisplayName("문자열 더하기 계산기")
   void sum(String input, int expected) {
@@ -72,41 +55,18 @@ class StringAdditionCalculatorTest {
     assertThat(actual).isEqualTo(new Number(expected));
   }
 
-  @Test
-  @DisplayName("문자열 입력값을 Number 리스트로 반환")
-  void stringToIntegerList() {
+  @ParameterizedTest
+  @NullAndEmptySource
+  @DisplayName("빈 문자열 또는 null인 경우 0을 반환한다.")
+  void sum_blankStringInput(String emptyBlankStr) {
     // given
-    String input = "1,2:3";
 
     // when
-    List<Number> numbers = StringAdditionCalculator.positiveNumberList(new NumberString(input), new Delimiter(",|:"));
+    Number expected = StringAdditionCalculator.create(emptyBlankStr)
+            .sum();
 
     // then
-    assertThat(numbers)
-            .isNotNull()
-            .isNotEmpty()
-            .hasSize(3)
-            .containsExactlyElementsOf(Arrays.asList(new Number(1), new Number(2), new Number(3)));
+    assertThat(expected).isEqualTo(Number.zero());
   }
-
-  @Test
-  @DisplayName("Integer 리스트로 반환 - 커스터마이징 구분자 사용")
-  void stringToIntegerList_CustomSeparator() {
-    // given
-    String input = "//;\n1;2;3";
-
-    // when
-    Delimiter delimiter = Delimiter.createDelimiterRegexString(input);
-    NumberString numberString = NumberString.generateNumberString(input);
-
-    // then
-    assertThat(StringAdditionCalculator.positiveNumberList(numberString, delimiter))
-            .isNotNull()
-            .isNotEmpty()
-            .hasSize(3)
-            .containsExactlyElementsOf(Arrays.asList(new Number(1), new Number(2), new Number(3)));
-  }
-
-
 
 }
