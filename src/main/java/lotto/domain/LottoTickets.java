@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,6 +28,10 @@ public class LottoTickets {
                 Stream.concat(lottoTickets.stream(), that.lottoTickets.stream())
                         .collect(Collectors.toList())
         );
+    }
+
+    public List<LottoTicket> lottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     @Override

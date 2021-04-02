@@ -1,9 +1,6 @@
 package lotto.views;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,15 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void print(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-
-        for (final LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(prettyString(lottoTicket));
-        }
-        System.out.println();
-    }
-
     private static String prettyString(LottoTicket lottoTicket) {
         return "[" +
                 lottoTicket.lottoNumbers()
@@ -28,6 +16,28 @@ public class ResultView {
                         .mapToObj(String::valueOf)
                         .collect(Collectors.joining(", ")) +
                 "]";
+    }
+
+    public static void print(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+
+        for (final LottoTicket lottoTicket : lottoTickets) {
+            System.out.println(prettyString(lottoTicket));
+        }
+
+        System.out.println();
+    }
+
+    public static void print(LottoBuyer lottoBuyer) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
+                lottoBuyer.manualLottoTicketsCount(), lottoBuyer.autoLottoTicketsCount()
+        );
+
+        for (final LottoTicket lottoTicket : lottoBuyer.allLottoTickets().lottoTickets()) {
+            System.out.println(prettyString(lottoTicket));
+        }
+
+        System.out.println();
     }
 
     public static void print(LottoStatistics lottoStatistics, int payment) {
