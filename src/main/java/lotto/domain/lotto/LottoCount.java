@@ -9,7 +9,7 @@ public final class LottoCount {
   private final long lottoCount;
 
   public LottoCount(Money money) {
-    this(0);
+    this(money.divideBy(Lottos.PRICE).toInteger());
   }
 
   public LottoCount(long lottoCount) {

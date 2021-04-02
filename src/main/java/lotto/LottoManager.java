@@ -22,7 +22,7 @@ public final class LottoManager {
     InputView inputView = new InputView(scanner);
 
     Money userMoney = inputView.inputMoney();
-    LottoCount lottoCount = new LottoCount(userMoney.divideBy(Lottos.PRICE).toInteger());
+    LottoCount lottoCount = new LottoCount(userMoney);
     System.out.println();
 
     LottoCount manualCount = new LottoCount(inputView.inputManualCount());
