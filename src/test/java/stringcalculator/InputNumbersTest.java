@@ -1,33 +1,23 @@
 package stringcalculator;
 
+import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InputNumbersTest {
 
-    static Stream<Arguments> parameters() {
-        return Stream.of(
-                arguments(null, "0"),
-                arguments("", "0"),
-                arguments(" ", "0")
-        );
-    }
-
     @ParameterizedTest
     @DisplayName("생성자 테스트")
-    @MethodSource("parameters")
-    void create(String input, String expected) {
-        assertThat(new InputNumbers(input)).isEqualTo(new InputNumbers(expected));
+    @NullAndEmptySource
+    void create(String input) {
+        assertTrue(Strings.isNullOrEmpty(input));
     }
 
     @ParameterizedTest
