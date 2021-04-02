@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.util.Number;
 import calculator.util.StringUtil;
 
 import java.util.Arrays;
