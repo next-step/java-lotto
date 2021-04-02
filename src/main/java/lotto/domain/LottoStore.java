@@ -31,6 +31,14 @@ public class LottoStore {
                 .collect(Collectors.toList());
     }
 
+    public LottoCoupon lottoCoupon(int payment) {
+        if (payment < price) {
+            throw new IllegalArgumentException(String.format(PAYMENT_ERROR_MESSAGE, price));
+        }
+
+        return new LottoCoupon(payment / price);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,4 +51,5 @@ public class LottoStore {
     public int hashCode() {
         return Objects.hash(price);
     }
+
 }
