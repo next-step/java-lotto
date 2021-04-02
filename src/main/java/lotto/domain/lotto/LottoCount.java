@@ -1,11 +1,16 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
+import lotto.domain.Money;
 import lotto.exception.NegativeLottoCountException;
 
 public final class LottoCount {
 
   private final long lottoCount;
+
+  public LottoCount(Money money) {
+    this(0);
+  }
 
   public LottoCount(long lottoCount) {
     validateNegativeCount(lottoCount);

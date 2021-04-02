@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import lotto.domain.Money;
 import lotto.exception.NegativeLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,16 @@ class LottoCountTest {
     assertThat(new LottoCount(10)).isEqualTo(new LottoCount(10));
   }
 
+  @Test
+  @DisplayName("Money로 생성 테스트")
+  void createByMoney() {
+    // given
+    int count = 2;
+
+    // when
+    // then
+    assertThat(new LottoCount(new Money(Lotto.PRICE * count))).isEqualTo(new LottoCount(count));
+  }
 
   @Test
   @DisplayName("음수로 생성 시도시 오류발생 테스트")
