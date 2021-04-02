@@ -6,6 +6,8 @@ import lotto.exception.NegativeLottoCountException;
 
 public final class LottoCount {
 
+  public static final LottoCount ZERO = new LottoCount(0);
+
   private final long lottoCount;
 
   public LottoCount(Money money) {

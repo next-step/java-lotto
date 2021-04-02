@@ -30,13 +30,13 @@ public final class Printer {
 
     StringBuilder lottoCountBuilder = new StringBuilder();
 
-    if (manualCount.isBiggerThan(new LottoCount(0))) {
+    if (manualCount.isBiggerThan(LottoCount.ZERO)) {
       lottoCountBuilder.append(MANUALLY).append(manualCount.getLottoCount()).append(LOTTO_UNIT);
     }
-    if (manualCount.isBiggerThan(new LottoCount(0)) && automaticCount.toInteger() != 0) {
+    if (manualCount.isBiggerThan(LottoCount.ZERO) && automaticCount.toInteger() != 0) {
       lottoCountBuilder.append(COMMA_DELIMITER);
     }
-    if (automaticCount.isBiggerThan(new LottoCount(0))) {
+    if (automaticCount.isBiggerThan(LottoCount.ZERO)) {
       lottoCountBuilder.append(AUTOMATICALLY).append(automaticCount.getLottoCount()).append(LOTTO_UNIT);
     }
     lottoCountBuilder.append(BOUGHT);
