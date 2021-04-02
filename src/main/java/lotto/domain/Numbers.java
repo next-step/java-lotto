@@ -1,17 +1,35 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Numbers {
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Numbers(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<Number> nos = new ArrayList<>();
+        for (int number : numbers) {
+            nos.add(new Number(number));
+        }
+        validate(nos);
+        this.numbers = nos;
     }
 
-    public boolean contains(int number) {
+    private void validate(List<Number> numbers) {
+        Set<Number> numberSet = new HashSet<>(numbers);
+
+        if (numberSet.size() > 0 && numberSet.size() < 6) {
+            throw new IllegalArgumentException("중복을 제외한 6개의 숫자를 입력하세요.");
+        }
+    }
+
+    public boolean contains(Number number) {
         return numbers.contains(number);
+    }
+
+    public int sumContainsCount(Numbers numbers) {
+        return (int) this.numbers.stream()
+                .filter(number -> numbers.contains(number))
+                .count();
     }
 
     @Override
@@ -29,6 +47,6 @@ public class Numbers {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return String.valueOf(numbers);
     }
 }
