@@ -50,16 +50,10 @@ public class LottoScoreBoard {
   }
 
   private int getTotalWinningMoney(Map<String, Integer> map) {
-    Iterator<Entry<String, Integer>> entries = map.entrySet().iterator();
-
-    int total = INIT_VALUE;
-
-    while (entries.hasNext()) {
-      Map.Entry<String, Integer> entry = entries.next();
-      total += getWinningMoney(entry);
-    }
-
-    return total;
+    return map.entrySet()
+        .stream()
+        .mapToInt(this::getWinningMoney)
+        .sum();
   }
 
   private int getWinningMoney(Entry<String, Integer> entry) {
