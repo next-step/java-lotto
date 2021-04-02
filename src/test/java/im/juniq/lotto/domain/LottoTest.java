@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
@@ -34,6 +35,7 @@ class LottoTest {
 	}
 
 	@Test
+	@DisplayName("당첨등수 조회")
 	void winning() {
 		Lotto lotto = new Lotto(new NoShuffleStrategy());
 

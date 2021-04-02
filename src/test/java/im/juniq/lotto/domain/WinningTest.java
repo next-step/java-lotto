@@ -2,11 +2,13 @@ package im.juniq.lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningTest {
 
     @Test
+    @DisplayName("당첨번호와 일치되는 숫자 개수와 보너스번호 일치 여부로 등수 조회")
     void findByMatchedCount() {
         assertThat(Winning.findByMatchedCount(6, true)).isEqualTo(Winning.FIRST);
         assertThat(Winning.findByMatchedCount(6, false)).isEqualTo(Winning.FIRST);

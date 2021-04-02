@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,6 +33,7 @@ class LottoesTest {
 	}
 
 	@Test
+	@DisplayName("당첨등수를 기준으로 몇 개가 당첨되었는지 조")
 	void countMatchedLottoes() {
 		Lottoes lottoes = new Lottoes(2, new NoShuffleStrategy());
 
@@ -40,6 +42,7 @@ class LottoesTest {
 	}
 
 	@Test
+	@DisplayName("지출대비 수익률 계산")
 	void calculateYield() {
 		Lottoes lottoes = new Lottoes(1, new NoShuffleStrategy());
 
