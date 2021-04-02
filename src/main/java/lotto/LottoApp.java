@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.RandomLottoGenerator;
 import lotto.domain.shop.Money;
 import lotto.dto.LottoOrderResultDto;

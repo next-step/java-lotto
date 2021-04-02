@@ -3,18 +3,18 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.Arrays;
-import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
+import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.LottoMachine;
 import lotto.domain.machine.TestLottoGenerator;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
+import lotto.domain.shop.Money;
 import lotto.domain.stats.LottoEarningRateCalculator;
 
 import lotto.domain.stats.LottoScoreBoard;
-import lotto.view.dto.LottoDto;
+import lotto.domain.stats.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -58,7 +58,7 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("1~45까지 범위에서 숫자 6개를 가진 Lotto 객체를 만든다.")
     void lottoCreateTest() {
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator(1));
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator(0));
 
         Lotto lotto = lottoMachine.generate();
 
@@ -81,18 +81,18 @@ public class AutomatedLottoTest {
     @CsvSource(value = {"1200:1", "3800:3", "8800:8", "0:0", "100:0", "16000:16"}, delimiter = ':')
     @DisplayName("구입 금액을 입력하면, 금액에 해당하는 만큼 로또를 발급한다.")
     void lottoPurchaseTest(long money, long lottoQuantity) {
-        LottoShop lottoShop = new LottoShop(money, new TestLottoGenerator(1));
+        LottoShop lottoShop = new LottoShop(new Money(money), new TestLottoGenerator(0));
 
-        List<Lotto> lottories = lottoShop.purchase();
+        LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
-        assertThat(lottories.size()).isEqualTo(lottoQuantity);
+        assertThat(lottoOrderedList.getLottoOrderedCount()).isEqualTo(lottoQuantity);
     }
 
     @Test
     @DisplayName("구입 금액이 음수이면, 예외를 발생시킨다.")
     void lottoShopNegativeBalanceTest() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoShop(-3000, new TestLottoGenerator(1)))
+                .isThrownBy(() -> new LottoShop(new Money(-3000), new TestLottoGenerator(0)))
                 .withMessage("금액은 음수일 수 없습니다.");
     }
 
@@ -102,7 +102,7 @@ public class AutomatedLottoTest {
         Lotto myLotto = new Lotto(3, 6, 9, 12, 15, 18);
         Lotto yourLotto = new Lotto(2, 4, 6, 8, 10, 12);
 
-        long counts = myLotto.getEqualNumberCountFrom(yourLotto);
+        long counts = myLotto.getMatchingBallCountFrom(yourLotto);
 
         assertThat(counts).isEqualTo(2L);
     }
@@ -110,13 +110,14 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("로또 14개를 구입했을 때, 당첨금이 5000원인 경우 수익률을 계산한다.")
     void lottoEarningRateCalcuateTest() {
-        LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator(1));
-        Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
-        List<Lotto> lotteries = lottoShop.purchase();
+        LottoShop lottoShop = new LottoShop(new Money(14000), new TestLottoGenerator(0));
+        Lotto lotto = new Lotto(17, 18, 19, 20, 21, 22);
+        WinningLotto winningLotto = new WinningLotto(lotto, new LottoBall(45));
+        LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winningLotto);
         lottoScoreBoard.scoring();
-        final long balance = lotteries.size() * 1000;
+        final long balance = (long) lottoOrderedList.getLottoOrderedCount() * 1000;
         LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
 
         String earningRate = calculator.resultToString();
@@ -127,14 +128,13 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
     void lottoBonusPrizeTest() {
-        LottoShop lottoShop = new LottoShop(2000, new TestLottoGenerator(1));
-        List<Integer> lottoNumber = Arrays.asList(2, 3, 4, 5, 6, 8);
-        LottoDto winnerLotto = new LottoDto(lottoNumber, 1);
-        List<Lotto> lotteries = lottoShop.purchase();
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(winnerLotto, lotteries);
+        LottoShop lottoShop = new LottoShop(new Money(2000), new TestLottoGenerator(0));
+        WinningLotto winnerLotto = new WinningLotto(new Lotto(2, 3, 4, 5, 6, 8), new LottoBall(1));
+        LottoOrderedList lottoOrderedList = lottoShop.purchase();
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winnerLotto);
         lottoScoreBoard.scoring();
 
-        long winner = lottoScoreBoard.getWinningsByPrize(Prize.SECOND);
+        long winner = lottoScoreBoard.getWinnerCountByPrize(Prize.SECOND);
 
         assertThat(winner).isEqualTo(1L);
     }
