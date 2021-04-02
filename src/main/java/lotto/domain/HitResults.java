@@ -7,10 +7,8 @@ import java.util.List;
 
 public class HitResults {
     private final List<HitResult> hitResults;
-    private final int payMoney;
 
-    public HitResults(int payMoney) {
-        this.payMoney = payMoney;
+    public HitResults() {
         this.hitResults = new ArrayList<>();
     }
 
@@ -18,8 +16,8 @@ public class HitResults {
         this.hitResults.add(hitResult);
     }
 
-    public double returnRate() {
-        return MathUtil.roundUp(sumHitMoney() / payMoney);
+    public double returnRate(Money payMoney) {
+        return MathUtil.roundUp(sumHitMoney() / payMoney.intValue());
     }
 
     private double sumHitMoney() {
@@ -27,7 +25,7 @@ public class HitResults {
         for (HitResult hitResult : hitResults) {
             sumPrizeMoney += hitResult.getPrize()
                     .getPrizeMoney()
-                    .getHitMoney();
+                    .getMoney();
         }
         return sumPrizeMoney;
     }
