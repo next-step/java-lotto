@@ -22,7 +22,7 @@ class MoneyTest {
   }
 
   @Test
-  @DisplayName("입력 받은 금액을 토대로 로또의 개수만큼 구매할 수 있는가")
+  @DisplayName("제대로 나누기를 수행하는가")
   public void dividePerLotto() throws Exception {
     //given
     Money money = new Money(14000);
@@ -44,27 +44,5 @@ class MoneyTest {
     df.setRoundingMode(RoundingMode.DOWN);
     //then
     assertEquals(df.format(earning), answer);
-  }
-
-  @ParameterizedTest
-  @ValueSource(ints = {1,2,3,4,5,6})
-  @DisplayName("상금 계산을 수행할 수 있는가")
-  public void calculateWinningMoney(int value) throws Exception {
-    //given
-    LottoRank first = LottoRank.FIRST;
-    LottoRank second = LottoRank.SECOND;
-    LottoRank third = LottoRank.THIRD;
-    LottoRank fourth = LottoRank.FOURTH;
-    LottoRank fifth = LottoRank.FIFTH;
-
-    //when
-    //then
-    assertAll("Test Calculate WinningMoney",
-        () -> assertEquals(first.getWinnerMoney().calculateWinningMoney(value), 2000000000 * value),
-        () -> assertEquals(second.getWinnerMoney().calculateWinningMoney(value), 30000000 * value),
-        () -> assertEquals(third.getWinnerMoney().calculateWinningMoney(value), 1500000 * value),
-        () -> assertEquals(fourth.getWinnerMoney().calculateWinningMoney(value), 50000 * value),
-        () -> assertEquals(fifth.getWinnerMoney().calculateWinningMoney(value), 5000 * value)
-    );
   }
 }
