@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BonusBall {
@@ -13,8 +14,8 @@ public class BonusBall {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumber bonusNumber() {
-        return bonusNumber;
+    public boolean isPartOf(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

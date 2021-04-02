@@ -35,6 +35,10 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public boolean contains(BonusBall bonusBall) {
+        return bonusBall.isPartOf(lottoNumbers);
+    }
+
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

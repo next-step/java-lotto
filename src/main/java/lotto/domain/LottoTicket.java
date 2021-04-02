@@ -16,7 +16,7 @@ public class LottoTicket {
     }
 
     public boolean hasBonusNumber(BonusBall bonusBall) {
-        return lottoNumbers.lottoNumbers().contains(bonusBall.bonusNumber());
+        return lottoNumbers.contains(bonusBall);
     }
 
     @Override
