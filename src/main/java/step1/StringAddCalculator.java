@@ -1,0 +1,27 @@
+package step1;
+
+import java.util.List;
+
+public class StringAddCalculator {
+
+    public static int splitAndSum(String given){
+        if(isNullinitValue(given)){
+            return 0;
+        }
+        Numbers numbers = new Numbers(given);
+        List<Integer> list = numbers.getNumbers();
+
+        int result = 0;
+        for (Integer integer : list) {
+            result += integer;
+        }
+        return result;
+    }
+
+    public static boolean isNullinitValue(String given){
+        if(given == null || given.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+}
