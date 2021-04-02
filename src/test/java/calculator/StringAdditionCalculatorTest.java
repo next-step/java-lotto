@@ -3,14 +3,14 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
+import static base.MethodSourceConstant.IS_POSITIVE_NUMBER_STRING_ARGUMENTS;
+import static base.MethodSourceConstant.SUM_ARGUMENTS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -29,7 +29,7 @@ class StringAdditionCalculatorTest {
   }
 
   @ParameterizedTest
-  @MethodSource("isPositiveNumberStringArguments")
+  @MethodSource(IS_POSITIVE_NUMBER_STRING_ARGUMENTS)
   @DisplayName("입력값이 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다. ")
   void createError(String inputValue, boolean isPositiveNumber) {
     // given
@@ -59,7 +59,7 @@ class StringAdditionCalculatorTest {
   }
 
   @ParameterizedTest
-  @MethodSource("sumArguments")
+  @MethodSource(SUM_ARGUMENTS)
   @DisplayName("문자열 더하기 계산기")
   void sum(String input, int expected) {
     // given
@@ -69,6 +69,7 @@ class StringAdditionCalculatorTest {
     int actual = calculator.sum();
 
     // then
+    System.out.println("input " + input);
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -79,7 +80,7 @@ class StringAdditionCalculatorTest {
     String input = "1,2:3";
 
     // when
-    List<Integer> numbers = StringAdditionCalculator.stringToIntegerList(input, ",|:");
+    List<Integer> numbers = StringAdditionCalculator.stringToIntegerList(input, new Delimiter(",|:"));
 
     // then
     assertThat(numbers)
@@ -96,7 +97,7 @@ class StringAdditionCalculatorTest {
     String input = "//;\n1;2;3";
 
     // when
-    String delimiter = StringAdditionCalculator.getCustomDelimiter(input);
+    Delimiter delimiter = Delimiter.createDelimiterRegexString(input);
     String numberString = StringAdditionCalculator.getNumberString(input);
 
     // then
@@ -108,20 +109,7 @@ class StringAdditionCalculatorTest {
   }
 
   @ParameterizedTest
-  @MethodSource("customDelimiterArguments")
-  @DisplayName("문자열을 split 할 정규식 문자열을 반환한다.")
-  void getCustomDelimiter(String input, boolean exist, String expected) {
-    // given
-
-    // when
-
-    // then
-    assertThat(StringAdditionCalculator.getCustomDelimiter(input))
-            .isEqualTo(expected);
-  }
-
-  @ParameterizedTest
-  @MethodSource("isPositiveNumberStringArguments")
+  @MethodSource(IS_POSITIVE_NUMBER_STRING_ARGUMENTS)
   void isPositiveNumberString(String input, boolean expected) {
     // given
 
@@ -133,38 +121,5 @@ class StringAdditionCalculatorTest {
             .isEqualTo(expected);
   }
 
-  private static Stream<Arguments> isPositiveNumberStringArguments() {
-    return Stream.of(
-            Arguments.of("", true)
-          , Arguments.of("123", true)
-          , Arguments.of("+123", true)
-          , Arguments.of("-123", false)
-          , Arguments.of("-123asdf", false)
-          , Arguments.of("123asdf", false)
-    );
-  }
 
-  private static Stream<Arguments> customDelimiterArguments() {
-    return Stream.of(
-            Arguments.of("//;\n1;2;3", true, ";")
-          , Arguments.of("//*\n1*2*3", true, "*")
-          , Arguments.of("//\n1;2;3", false, "")
-          , Arguments.of("1,2,3", false, "")
-    );
-  }
-
-  private static Stream<Arguments> sumArguments() {
-    return Stream.of(
-              Arguments.of("", 0)
-            , Arguments.of("  ", 0)
-            , Arguments.of(null, 0)
-            , Arguments.of("1", 1)
-            , Arguments.of("2", 2)
-            , Arguments.of("1,2", 3)
-            , Arguments.of("1,2,3", 6)
-            , Arguments.of("1,2:3", 6)
-            , Arguments.of("//;\n1;2;3", 6)
-            , Arguments.of("//;\n1,2:3;4", 10)
-    );
-  }
 }

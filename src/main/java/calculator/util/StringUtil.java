@@ -13,8 +13,12 @@ public final class StringUtil {
   }
 
   public static String defaultBlankString(String str) {
+    return defaultBlankString(str, "");
+  }
+
+  public static String defaultBlankString(String str, String defaultStr) {
     if (isBlank(str)) {
-      return "";
+      return defaultStr;
     }
     return str;
   }

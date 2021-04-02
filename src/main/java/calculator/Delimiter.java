@@ -40,6 +40,10 @@ public class Delimiter {
     return StringUtil.findGroup(input, CUSTOM_DELIMITER_REGEX, CUSTOM_DELIMITER_GROUP_INDEX);
   }
 
+  public String getDelimiter() {
+    return delimiter;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
