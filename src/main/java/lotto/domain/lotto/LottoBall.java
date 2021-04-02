@@ -28,4 +28,8 @@ public class LottoBall {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

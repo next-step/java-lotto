@@ -1,13 +1,13 @@
 package lotto.service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.shop.LottoShop;
-import lotto.view.dto.LottoDto;
-import lotto.view.dto.LottoOrderDto;
-import lotto.view.dto.LottoOrderResultDto;
+import lotto.domain.shop.Money;
+import lotto.dto.LottoOrderResultDto;
+import lotto.dto.LottoOrderedDto;
 
 public class LottoShopping {
     private final LottoGenerator lottoGenerator;
@@ -16,17 +16,17 @@ public class LottoShopping {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public LottoOrderResultDto purchase(LottoOrderDto lottoOrderDto) {
-        LottoShop lottoShop = new LottoShop(lottoOrderDto.getMoney(), lottoGenerator);
+    public LottoOrderResultDto purchase(Money money) {
+        LottoShop lottoShop = new LottoShop(money, lottoGenerator);
 
-        List<Lotto> lotteries = lottoShop.purchase();
-        List<LottoDto> lottoDtoList =
-                lotteries
-                .stream()
-                .map(Lotto::copyLottoNumbers)
-                .map(LottoDto::new)
-                .collect(Collectors.toList());
+        return toDto(lottoShop.purchase());
+    }
 
-        return new LottoOrderResultDto(lottoDtoList);
+    public LottoOrderResultDto toDto(LottoOrderedList lottoOrderedList) {
+        return new LottoOrderResultDto(
+                lottoOrderedList.getLottoList().stream()
+                        .map(Lotto::toList)
+                        .map(LottoOrderedDto::new)
+                        .collect(Collectors.toList()));
     }
 }

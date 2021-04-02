@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -51,5 +50,11 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(balls);
+    }
+
+    public List<Integer> toList() {
+        return balls.stream()
+                .map(LottoBall::getNumber)
+                .collect(Collectors.toList());
     }
 }

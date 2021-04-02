@@ -58,7 +58,7 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("1~45까지 범위에서 숫자 6개를 가진 Lotto 객체를 만든다.")
     void lottoCreateTest() {
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator());
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator(1));
 
         Lotto lotto = lottoMachine.generate();
 
@@ -81,7 +81,7 @@ public class AutomatedLottoTest {
     @CsvSource(value = {"1200:1", "3800:3", "8800:8", "0:0", "100:0", "16000:16"}, delimiter = ':')
     @DisplayName("구입 금액을 입력하면, 금액에 해당하는 만큼 로또를 발급한다.")
     void lottoPurchaseTest(long money, long lottoQuantity) {
-        LottoShop lottoShop = new LottoShop(money, new TestLottoGenerator());
+        LottoShop lottoShop = new LottoShop(money, new TestLottoGenerator(1));
 
         List<Lotto> lottories = lottoShop.purchase();
 
@@ -92,7 +92,7 @@ public class AutomatedLottoTest {
     @DisplayName("구입 금액이 음수이면, 예외를 발생시킨다.")
     void lottoShopNegativeBalanceTest() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoShop(-3000, new TestLottoGenerator()))
+                .isThrownBy(() -> new LottoShop(-3000, new TestLottoGenerator(1)))
                 .withMessage("금액은 음수일 수 없습니다.");
     }
 
@@ -110,7 +110,7 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("로또 14개를 구입했을 때, 당첨금이 5000원인 경우 수익률을 계산한다.")
     void lottoEarningRateCalcuateTest() {
-        LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator());
+        LottoShop lottoShop = new LottoShop(14000, new TestLottoGenerator(1));
         Lotto winnerLotto = new Lotto(17, 18, 19, 20, 21, 22);
         List<Lotto> lotteries = lottoShop.purchase();
 
@@ -127,7 +127,7 @@ public class AutomatedLottoTest {
     @Test
     @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
     void lottoBonusPrizeTest() {
-        LottoShop lottoShop = new LottoShop(2000, new TestLottoGenerator());
+        LottoShop lottoShop = new LottoShop(2000, new TestLottoGenerator(1));
         List<Integer> lottoNumber = Arrays.asList(2, 3, 4, 5, 6, 8);
         LottoDto winnerLotto = new LottoDto(lottoNumber, 1);
         List<Lotto> lotteries = lottoShop.purchase();

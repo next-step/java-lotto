@@ -3,6 +3,7 @@ package lotto.domain.shop;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.machine.LottoMachine;
 
@@ -17,13 +18,13 @@ public class LottoShop {
         this.lottoMachine = new LottoMachine(lottoGenerator);
     }
 
-    public List<Lotto> purchase() {
+    public LottoOrderedList purchase() {
         List<Lotto> lottoList = new ArrayList<>();
 
         while(isEnoughToPurchase()) {
             lottoList.add(lottoMachine.generate());
         }
-        return lottoList;
+        return new LottoOrderedList(lottoList);
     }
 
     private boolean isEnoughToPurchase() {

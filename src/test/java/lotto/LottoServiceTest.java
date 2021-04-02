@@ -19,7 +19,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("14000원을 입력하면 14장 로또를 발급하고 결과를 DTO로 반환한다.")
     void lottoOrderingServiceTest() {
-        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator());
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(1));
         LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
 
         LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
@@ -30,7 +30,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("로또 14장을 구입하고 당첨금이 5000원일때, 당첨조건/당첨금/당첨횟수를 DTO로 반환한다.")
     void lottoWinnerScoringResultDtoTest() {
-        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator());
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(1));
         LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
         LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
         LottoDto winnerLottoDto = new LottoDto(17, 18, 19, 20, 21, 22);
@@ -52,7 +52,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("로또 14장을 구입하고 당첨금이 5000원일때, 수익률을 DTO로 반환한다.")
     void lottoWinnerEarningRateDtoTest() {
-        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator());
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(1));
         LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
         LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
         LottoDto winnerLottoDto = new LottoDto(17, 18, 19, 20, 21, 22);

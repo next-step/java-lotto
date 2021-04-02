@@ -4,60 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBall;
+import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.stats.LottoEarningRateCalculator;
 import lotto.domain.stats.LottoScoreBoard;
-import lotto.view.dto.LottoDto;
-import lotto.view.dto.LottoScoringDto;
-import lotto.view.dto.LottoScoringResultDto;
-import lotto.view.dto.LottoWinnerDto;
+import lotto.domain.stats.WinningLotto;
+import lotto.dto.LottoOrderResultDto;
+import lotto.dto.LottoOrderedDto;
+import lotto.dto.LottoScoreDto;
+import lotto.dto.LottoScoreResultDto;
+
 
 public class LottoScoring {
+    private final LottoScoreBoard lottoScoreBoard;
 
-    public LottoScoringResultDto score(LottoScoringDto lottoScoringDto) {
-        LottoScoreBoard lottoScoreBoard = getRenewedScoreBoard(lottoScoringDto);
-
-        String earningRate = calculateEarningRate(lottoScoringDto, lottoScoreBoard);
-        List<LottoWinnerDto> winnerDtoList = getWinnerDtoFromBoard(lottoScoreBoard);
-        return new LottoScoringResultDto(winnerDtoList, earningRate);
+    public LottoScoring(LottoOrderResultDto lottoOrderResultDto,
+                        List<Integer> numberList,
+                        Integer bonusNumber) {
+        this.lottoScoreBoard = new LottoScoreBoard(
+                convertFromDtoToLottoOrderedList(lottoOrderResultDto),
+                new WinningLotto(convertFromNumberListToLotto(numberList), new LottoBall(bonusNumber))
+        );
     }
 
-    private LottoScoreBoard getRenewedScoreBoard(LottoScoringDto lottoScoringDto) {
-        LottoScoreBoard lottoScoreBoard =
-                new LottoScoreBoard(lottoScoringDto.getWinnerLottoDto(),
-                                    convertFromDtoToLottoList(lottoScoringDto));
+    public LottoScoreResultDto getResult() {
+        List<LottoScoreDto> lottoScoreDtoList = new ArrayList<>();
         lottoScoreBoard.scoring();
-        return lottoScoreBoard;
-    }
-
-    private String calculateEarningRate(LottoScoringDto lottoScoringDto,
-            LottoScoreBoard lottoScoreBoard) {
-        long principal = lottoScoringDto.getLottoOrderedNumber().size() * LottoShop.LOTTO_PRICE;
-        return new LottoEarningRateCalculator(principal, lottoScoreBoard).resultToString();
-    }
-
-    private List<LottoWinnerDto> getWinnerDtoFromBoard(LottoScoreBoard lottoScoreBoard) {
-        List<LottoWinnerDto> winnerDtoList = new ArrayList<>();
 
         for (Prize prize : Prize.values()) {
-            long equalNumberCount = prize.getEqualNumberCount();
-            long prizeAmount = prize.getPrizeAmount();
-
-            winnerDtoList.add(new LottoWinnerDto(equalNumberCount, prizeAmount,
-                    lottoScoreBoard.getWinningsByPrize(prize), prize.getPrizeMessage()));
+            lottoScoreDtoList.add(new LottoScoreDto(
+                    prize.getScore(),
+                    prize.getMatchingBallCount(),
+                    prize.getPrizeAmount(),
+                    lottoScoreBoard.getWinnerCountByPrize(prize)));
         }
-        return winnerDtoList.stream()
-                .filter(dto -> dto.getEqualNumberCount() > 0)
-                .collect(Collectors.toList());
+        return new LottoScoreResultDto(lottoScoreDtoList);
     }
 
-    private List<Lotto> convertFromDtoToLottoList(LottoScoringDto lottoScoringDto) {
-        return lottoScoringDto.getLottoOrderedNumber()
-                .stream()
-                .map(LottoDto::getNumbers)
-                .map(Lotto::new)
+    public String getEarningRate() {
+        long principal = lottoScoreBoard.getLottoOrderedCount() * LottoShop.LOTTO_PRICE;
+        LottoEarningRateCalculator calculator =
+                new LottoEarningRateCalculator(principal, lottoScoreBoard);
+
+        return calculator.resultToString();
+    }
+
+    private LottoOrderedList convertFromDtoToLottoOrderedList(LottoOrderResultDto lottoOrderResultDto) {
+        return new LottoOrderedList(lottoOrderResultDto.getOrderResult().stream()
+                .map(LottoOrderedDto::getLottoNumbers)
+                .map(this::convertFromNumberListToLotto)
+                .collect(Collectors.toList()));
+    }
+
+    private Lotto convertFromNumberListToLotto(List<Integer> numberList) {
+        List<LottoBall> balls = numberList.stream()
+                .map(LottoBall::new)
                 .collect(Collectors.toList());
+        return new Lotto(balls);
     }
 
 }

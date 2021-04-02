@@ -28,6 +28,10 @@ public enum Prize {
                 .orElse(Prize.NOTHING);
     }
 
+    public long getScore() {
+        return score;
+    }
+
     public long getMatchingBallCount() {
         return this.matchingBallCount;
     }
