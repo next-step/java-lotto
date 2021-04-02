@@ -36,7 +36,7 @@ public final class LottoManager {
     Printer.printLottoCount(userLottos, manualCount);
     Printer.printLottos(userLottos);
 
-    WinningLotto winningLotto = inputView.inputLastWinningNumber();
+    WinningLotto winningLotto = inputView.inputWinningLotto();
     WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
     Printer.printRank(winningStatistics);
     Printer.printResult(winningStatistics, userMoney);

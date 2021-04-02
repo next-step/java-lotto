@@ -62,7 +62,7 @@ public final class InputView {
     }
   }
 
-  public WinningLotto inputLastWinningNumber() {
+  public WinningLotto inputWinningLotto() {
     Lotto lastWinningLotto = inputLastWinningLotto();
     LottoNumber bonusNumber = inputBonusNumber();
 
