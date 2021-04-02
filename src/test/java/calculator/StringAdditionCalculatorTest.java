@@ -79,7 +79,7 @@ class StringAdditionCalculatorTest {
     String input = "1,2:3";
 
     // when
-    List<Number> numbers = StringAdditionCalculator.positiveNumberList(input, new Delimiter(",|:"));
+    List<Number> numbers = StringAdditionCalculator.positiveNumberList(new NumberString(input), new Delimiter(",|:"));
 
     // then
     assertThat(numbers)
@@ -97,7 +97,7 @@ class StringAdditionCalculatorTest {
 
     // when
     Delimiter delimiter = Delimiter.createDelimiterRegexString(input);
-    String numberString = StringAdditionCalculator.getNumberString(input);
+    NumberString numberString = NumberString.generateNumberString(input);
 
     // then
     assertThat(StringAdditionCalculator.positiveNumberList(numberString, delimiter))

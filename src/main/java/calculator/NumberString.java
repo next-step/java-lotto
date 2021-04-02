@@ -19,6 +19,10 @@ public class NumberString {
     return new NumberString(defaultBlankString(findGroup(blankSafeString, CUSTOM_DELIMITER_REGEX, 2), blankSafeString));
   }
 
+  public String getNumberString() {
+    return numberString;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
