@@ -33,6 +33,13 @@ public class Lotto {
             .collect(Collectors.groupingBy(Game::rank));
     }
 
+    public double profit() {
+        return games.stream()
+        .map(Game::profit)
+        .reduce(Double::sum)
+        .orElse(0D);
+    }
+
     public int size() {
         return games.size();
     }

@@ -5,8 +5,6 @@ import static step2.util.StringConstant.DELIMITER_COMMA;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Prize {
 
@@ -19,15 +17,7 @@ public class Prize {
     }
 
     public double profit(Lotto lotto, Seed seed) {
-        Map<Rank, List<Game>> candidate = lotto.candidate();
-        AtomicInteger sum = new AtomicInteger();
-        Arrays.stream(Rank.values())
-            .forEach(rank -> {
-                Integer money = rank.getWinningMoney();
-                Integer count = candidate.get(rank).size();
-                sum.addAndGet(money * count);
-            });
-        return (sum.get() * 1.0) / seed.amount();
+        return lotto.profit() / seed.amount();
     }
 
     public Game last() {

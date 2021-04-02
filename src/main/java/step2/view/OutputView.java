@@ -4,11 +4,8 @@ import static step2.util.StringConstant.NEW_LINE;
 import static step2.view.Message.SAME_COUNT;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import step2.domain.Candidate;
 import step2.domain.Game;
 import step2.domain.Lotto;
 import step2.domain.Rank;
@@ -38,7 +35,7 @@ public class OutputView {
                     .append(SAME_COUNT)
                     .append(rank.getWinningMoney())
                     .append(" - ")
-                    .append(candidate.get(rank).size())
+                    .append(candidateSize(candidate,rank))
                     .append(NEW_LINE);
             });
 
@@ -47,5 +44,13 @@ public class OutputView {
 
     public static void printProfit(double profit) {
         System.out.printf("총 수익률은 %s 입니다.\n", String.format("%.2f", profit));
+    }
+
+    private static int candidateSize(Map<Rank, List<Game>> candidate, Rank rank) {
+        List<Game> games = candidate.get(rank);
+        if(games == null){
+            return 0;
+        }
+        return games.size();
     }
 }

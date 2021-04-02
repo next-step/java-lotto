@@ -27,6 +27,10 @@ public class Game {
         this.rank = Rank.valueOf(Long.valueOf(count).intValue(), matchBonus);
     }
 
+    public double profit() {
+        return rank.getWinningMoney() * 1.0;
+    }
+
     public List<Number> numbers() {
         return this.numbers;
     }
