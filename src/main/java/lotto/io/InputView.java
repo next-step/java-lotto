@@ -3,10 +3,12 @@ package lotto.io;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
+import lotto.exception.LottoException;
 
 public final class InputView {
 
@@ -18,6 +20,7 @@ public final class InputView {
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
   private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
+  private static final String NOT_A_NUMBER_FORMAT = "정상적인 숫자를 입력해주세요.";
 
   private final Scanner scanner;
 
@@ -35,9 +38,15 @@ public final class InputView {
     return manualLottoList;
   }
 
-  public long inputMoney() {
-    System.out.println(INPUT_MONEY);
-    return inputLong();
+  public Money inputMoney() {
+    while (true) {
+      try {
+        System.out.println(INPUT_MONEY);
+        return new Money(inputLong());
+      } catch (LottoException e) {
+        System.err.println(e.getMessage());
+      }
+    }
   }
 
   public long inputManualCount() {
@@ -46,7 +55,11 @@ public final class InputView {
   }
 
   private long inputLong() {
-    return Long.parseLong(scanner.nextLine());
+    try {
+      return Long.parseLong(scanner.nextLine());
+    } catch (NumberFormatException e) {
+      throw new LottoException(NOT_A_NUMBER_FORMAT);
+    }
   }
 
   public WinningLotto inputLastWinningNumber() {

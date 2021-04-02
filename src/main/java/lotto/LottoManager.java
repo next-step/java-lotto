@@ -21,7 +21,7 @@ public final class LottoManager {
   private static void start(Scanner scanner) {
     InputView inputView = new InputView(scanner);
 
-    Money userMoney = new Money(inputView.inputMoney());
+    Money userMoney = inputView.inputMoney();
     LottoCount lottoCount = new LottoCount(userMoney.divideBy(Lottos.PRICE).toInteger());
     System.out.println();
 
