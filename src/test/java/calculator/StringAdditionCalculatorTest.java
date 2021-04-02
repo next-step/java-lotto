@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.util.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,11 +52,11 @@ class StringAdditionCalculatorTest {
     // given
 
     // when
-    int expected = StringAdditionCalculator.create(emptyBlankStr)
+    Number expected = StringAdditionCalculator.create(emptyBlankStr)
             .sum();
 
     // then
-    assertThat(expected).isZero();
+    assertThat(expected).isEqualTo(Number.zero());
   }
 
   @ParameterizedTest
@@ -66,28 +67,27 @@ class StringAdditionCalculatorTest {
     StringAdditionCalculator calculator = StringAdditionCalculator.create(input);
 
     // when
-    int actual = calculator.sum();
+    Number actual = calculator.sum();
 
     // then
-    System.out.println("input " + input);
-    assertThat(actual).isEqualTo(expected);
+    assertThat(actual).isEqualTo(new Number(expected));
   }
 
   @Test
-  @DisplayName("문자열 입력값을 Integer 리스트로 반환")
+  @DisplayName("문자열 입력값을 Number 리스트로 반환")
   void stringToIntegerList() {
     // given
     String input = "1,2:3";
 
     // when
-    List<Integer> numbers = StringAdditionCalculator.stringToIntegerList(input, new Delimiter(",|:"));
+    List<Number> numbers = StringAdditionCalculator.positiveNumberList(input, new Delimiter(",|:"));
 
     // then
     assertThat(numbers)
             .isNotNull()
             .isNotEmpty()
             .hasSize(3)
-            .containsExactlyElementsOf(Arrays.asList(1, 2, 3));
+            .containsExactlyElementsOf(Arrays.asList(new Number(1), new Number(2), new Number(3)));
   }
 
   @Test
@@ -101,25 +101,13 @@ class StringAdditionCalculatorTest {
     String numberString = StringAdditionCalculator.getNumberString(input);
 
     // then
-    assertThat(StringAdditionCalculator.stringToIntegerList(numberString, delimiter))
+    assertThat(StringAdditionCalculator.positiveNumberList(numberString, delimiter))
             .isNotNull()
             .isNotEmpty()
             .hasSize(3)
-            .containsExactlyElementsOf(Arrays.asList(1, 2, 3));
+            .containsExactlyElementsOf(Arrays.asList(new Number(1), new Number(2), new Number(3)));
   }
 
-  @ParameterizedTest
-  @MethodSource(IS_POSITIVE_NUMBER_STRING_ARGUMENTS)
-  void isPositiveNumberString(String input, boolean expected) {
-    // given
-
-    // when
-    boolean actual = StringAdditionCalculator.isPositiveNumberString(input);
-
-    // then
-    assertThat(actual)
-            .isEqualTo(expected);
-  }
 
 
 }
