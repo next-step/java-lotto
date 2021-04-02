@@ -57,11 +57,11 @@ class LottoRankTest {
     //when
     //then
     assertAll("Test Calculate WinningMoney",
-        () -> assertEquals(first.getWinnerMoney().calculateWinningMoney(value), 2000000000 * value),
-        () -> assertEquals(second.getWinnerMoney().calculateWinningMoney(value), 30000000 * value),
-        () -> assertEquals(third.getWinnerMoney().calculateWinningMoney(value), 1500000 * value),
-        () -> assertEquals(fourth.getWinnerMoney().calculateWinningMoney(value), 50000 * value),
-        () -> assertEquals(fifth.getWinnerMoney().calculateWinningMoney(value), 5000 * value)
+        () -> assertEquals(first.calculateWinningMoney(value), 2000000000 * value),
+        () -> assertEquals(second.calculateWinningMoney(value), 30000000 * value),
+        () -> assertEquals(third.calculateWinningMoney(value), 1500000 * value),
+        () -> assertEquals(fourth.calculateWinningMoney(value), 50000 * value),
+        () -> assertEquals(fifth.calculateWinningMoney(value), 5000 * value)
     );
   }
 
