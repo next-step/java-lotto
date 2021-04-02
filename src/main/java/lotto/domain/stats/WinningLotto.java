@@ -2,6 +2,7 @@ package lotto.domain.stats;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
+import lotto.domain.prize.Prize;
 
 public class WinningLotto {
     private final Lotto winningLotto;
@@ -15,7 +16,7 @@ public class WinningLotto {
     public long getScoreIfMatchingBall(Lotto lotto) {
         long matchingBallCount = winningLotto.getMatchingBallCountFrom(lotto);
         long score = matchingBallCount * 2;
-        if (matchingBallCount == 5) {
+        if (matchingBallCount == Prize.SECOND.getMatchingBallCount()) {
             score += getScoreIfMatchingBonusBall(lotto);
         }
         return score;
