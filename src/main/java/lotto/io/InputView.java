@@ -49,9 +49,15 @@ public final class InputView {
     }
   }
 
-  public long inputManualCount() {
-    System.out.println(INPUT_MANUAL_COUNT);
-    return inputLong();
+  public LottoCount inputManualCount() {
+    while (true) {
+      try {
+        System.out.println(INPUT_MANUAL_COUNT);
+        return new LottoCount(inputLong());
+      } catch (LottoException e) {
+        System.err.println(e.getMessage());
+      }
+    }
   }
 
   private long inputLong() {

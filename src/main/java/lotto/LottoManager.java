@@ -24,7 +24,7 @@ public final class LottoManager {
     LottoCount lottoCount = new LottoCount(userMoney);
     System.out.println();
 
-    LottoCount manualCount = new LottoCount(inputView.inputManualCount());
+    LottoCount manualCount = inputView.inputManualCount();
     LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
     System.out.println();
 
