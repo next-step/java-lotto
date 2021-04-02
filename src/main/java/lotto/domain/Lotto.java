@@ -24,7 +24,11 @@ public class Lotto {
 
     private void validateBonusNumber(int[] winNumbers, int bonusNumber) {
         LottoNumber.validateLottoNumber(bonusNumber);
-        if (Arrays.stream(winNumbers).filter(winNumber -> winNumber == bonusNumber).findAny().isPresent()) {
+        Arrays.stream(winNumbers).forEach(winNumber -> checkDuplicateBonusNumber(winNumber, bonusNumber));
+    }
+
+    private void checkDuplicateBonusNumber(int winNumber, int bonusNumber) {
+        if (winNumber == bonusNumber) {
             throw new IllegalArgumentException("보너스 번호와 당첨번호가 중복됩니다. 보너스 번호를 다시 확인해 주세요.");
         }
     }
