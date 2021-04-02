@@ -16,8 +16,8 @@ class OperandIntegerTest {
         assertAll(
                 () -> assertEquals(new OperandInteger(0).parseInteger(), 0),
                 () -> assertEquals(new OperandInteger(1).parseInteger(), 1),
-                () -> assertEquals(new OperandInteger("0").parseInteger(), 0),
-                () -> assertEquals(new OperandInteger("1").parseInteger(), 1)
+                () -> assertEquals(OperandInteger.of("0").parseInteger(), 0),
+                () -> assertEquals(OperandInteger.of("1").parseInteger(), 1)
         );
     }
 

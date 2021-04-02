@@ -5,7 +5,6 @@ import java.util.Objects;
 public class OperandInteger {
 
     public static final int ZERO = 0;
-
     private final int number;
 
     public OperandInteger() {
@@ -14,6 +13,10 @@ public class OperandInteger {
 
     public OperandInteger(String number) {
         this(Integer.parseInt(number));
+    }
+
+    public static OperandInteger of(String number) {
+        return new OperandInteger(Integer.parseInt(number));
     }
 
     public OperandInteger(int number) {
