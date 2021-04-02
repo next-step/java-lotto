@@ -20,7 +20,7 @@ class LottoesTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {2, 5, 14})
-	void createTwo(int numberOfCreated) {
+	void createMultiple(int numberOfCreated) {
 		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
 		List<Lotto> lottoes = new ArrayList<>();
 		for (int i = 0; i < numberOfCreated; i++) {
