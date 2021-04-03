@@ -20,5 +20,4 @@ public class ResponseWinningDTO {
     public double getYield() {
         return yield;
     }
-
 }

@@ -25,13 +25,15 @@ public class Lottos {
         return new Lottos(list);
     }
 
+    public static Lottos of(List<Lotto> lottoList) {
+        return new Lottos(lottoList);
+    }
+
     private static int getLottoPurchaseCount(int price) {
         return price / Lotto.PRICE_OF_A_PIECE_OF_LOTTO;
     }
 
-    public Hit getWinnerStatistics(WinningNumber winningNumber) {
-        Hit hit = new Hit();
-
+    public Hit getWinnerStatistics(WinningNumber winningNumber, Hit hit) {
         for (Lotto lotto : lottos) {
             int matchCount = lotto.getMatchCount(winningNumber);
             boolean isMatchBonus = lotto.isMatchBonus(winningNumber);

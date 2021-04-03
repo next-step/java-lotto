@@ -7,9 +7,12 @@ public class Lotto {
     public static final int LOTTO_LAST_NUMBER = 45;
     public static final int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
 
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
-    private Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() < 6) {
+            throw new IllegalArgumentException("중복된 숫자는 입력하실 수 없습니다.");
+        }
         this.lotto = lottoNumbers;
     }
 
@@ -32,7 +35,7 @@ public class Lotto {
                 .anyMatch(winningNumber::isMatchBonus);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lotto;
     }
 
