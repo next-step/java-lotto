@@ -92,4 +92,8 @@ public final class Printer {
         .append(winningStatistics.countOf(rank)).append("개");
     System.out.println(rankMessageBuilder.toString());
   }
+
+  public static void printBlankLine() {
+    System.out.println();
+  }
 }
