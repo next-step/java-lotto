@@ -20,10 +20,10 @@ class LottoControllerTest {
         LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when
-        LottoAutoPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
+        LottoTicketPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
 
         // then
-        assertThat(14).isEqualTo(response.getPurchaseCount());
+        assertThat(14).isEqualTo(response.getAutoPurchaseCount());
         assertThat(14).isEqualTo(response.getLottoNumberList().size());
     }
 
@@ -35,7 +35,7 @@ class LottoControllerTest {
         LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when
-        LottoAutoPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
+        LottoTicketPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
 
         // then
         for (String lottoNumbers : response.getLottoNumberList()) {

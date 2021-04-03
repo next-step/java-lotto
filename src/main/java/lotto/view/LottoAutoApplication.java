@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.controller.LottoAutoPurchaseController;
 import lotto.controller.LottoWinInquiryController;
-import lotto.controller.dto.LottoAutoPurchaseResponse;
+import lotto.controller.dto.LottoTicketPurchaseResponse;
 
 public class LottoAutoApplication {
     public static void main(String[] args) {
@@ -11,9 +11,9 @@ public class LottoAutoApplication {
         LottoAutoPurchaseController lottoAutoPurchaseController = new LottoAutoPurchaseController();
         LottoWinInquiryController lottoWinInquiryController = new LottoWinInquiryController();
 
-        LottoAutoPurchaseResponse lottoAutoPurchaseResponse = lottoAutoPurchaseController.purchaseLottoAutoTicket(inputView.inputPurchaseAmount());
-        resultView.printPurchaseList(lottoAutoPurchaseResponse);
+        LottoTicketPurchaseResponse lottoTicketPurchaseResponse = lottoAutoPurchaseController.purchaseLottoAutoTicket(inputView.inputPurchaseAmount());
+        resultView.printPurchaseList(lottoTicketPurchaseResponse);
         System.out.println();
-        resultView.printLottoWinStatistic(lottoWinInquiryController.inquiryWin(inputView.inputWinInquiry(lottoAutoPurchaseResponse.getLottoNumberList())));
+        resultView.printLottoWinStatistic(lottoWinInquiryController.inquiryWin(inputView.inputWinInquiry(lottoTicketPurchaseResponse.getLottoNumberList())));
     }
 }

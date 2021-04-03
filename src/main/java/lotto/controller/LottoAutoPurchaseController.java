@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.controller.dto.LottoTicketPurchaseRequest;
-import lotto.controller.dto.LottoAutoPurchaseResponse;
+import lotto.controller.dto.LottoTicketPurchaseResponse;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.service.LottoAutoService;
@@ -18,9 +18,9 @@ public class LottoAutoPurchaseController {
         this.lottoAutoService = new LottoAutoService();
     }
 
-    public LottoAutoPurchaseResponse purchaseLottoAutoTicket(LottoTicketPurchaseRequest request) {
+    public LottoTicketPurchaseResponse purchaseLottoAutoTicket(LottoTicketPurchaseRequest request) {
         LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(request.getPurchaseAmount());
-        return new LottoAutoPurchaseResponse(lottoTicket.getCount(), assembleLottoNumbers(lottoTicket.getLottoList()));
+        return new LottoTicketPurchaseResponse(0, lottoTicket.getCount(), assembleLottoNumbers(lottoTicket.getLottoList())); // TODO: 수동로또 구매갯수 세팅로
     }
 
     private List<String> assembleLottoNumbers(List<Lotto> lottoList) {

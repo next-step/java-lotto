@@ -1,14 +1,14 @@
 package lotto.view;
 
-import lotto.controller.dto.LottoAutoPurchaseResponse;
+import lotto.controller.dto.LottoTicketPurchaseResponse;
 import lotto.controller.dto.WinInquiryResponse;
 import lotto.controller.dto.WinStatistic;
 
 import java.util.List;
 
 public class ResultView {
-    public void printPurchaseList(LottoAutoPurchaseResponse response) {
-        System.out.println(response.getPurchaseCount() + " 개를 구매했습니다.");
+    public void printPurchaseList(LottoTicketPurchaseResponse response) {
+        System.out.println("수동으로 " + response.getManualPurchaseCount() + "장, 자동으로 " + response.getAutoPurchaseCount() + "장을 구매했습니다.");
         printLottoNumberList(response.getLottoNumberList());
     }
 
