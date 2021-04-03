@@ -1,10 +1,6 @@
 package lotto.io;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoCount;
 import lotto.exception.LottoException;
 
 public final class InputView {
@@ -17,20 +13,11 @@ public final class InputView {
   private static final String DELIMITER = ",";
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
-  private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
 
   private final Scanner scanner;
 
   public InputView(Scanner scanner) {
     this.scanner = scanner;
-  }
-
-  public List<Lotto> inputManualLottoNumber(LottoCount manualCount) {
-    List<Lotto> manualLottoList = new ArrayList<>();
-    for (int i = 0; i < manualCount.toInteger(); i++) {
-      manualLottoList.add(inputLotto(INPUT_MANUAL_NUMBER));
-    }
-    return manualLottoList;
   }
 
   public long inputMoney() {
@@ -60,17 +47,6 @@ public final class InputView {
       return Long.parseLong(scanner.nextLine());
     } catch (NumberFormatException e) {
       throw new LottoException(NOT_A_NUMBER_FORMAT);
-    }
-  }
-  private Lotto inputLotto(String message) {
-    while (true) {
-      try {
-        System.out.println(message);
-        String[] splitNumbers = splitNumbers(scanner.nextLine());
-        return new Lotto(splitNumbers);
-      } catch (LottoException e) {
-        System.err.println(e.getMessage());
-      }
     }
   }
 

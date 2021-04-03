@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
@@ -31,7 +33,7 @@ public final class LottoManager {
     Printer.printBlankLine();
 
     Lottos userLottos = new Lottos(lottoCount);
-    userLottos.addLottoList(inputView.inputManualLottoNumber(manualCount));
+    userLottos.addLottoList(inputManualLottoNumbers(inputView, manualCount));
     userLottos.addLottoList(lottoCounts.automaticLottos());
     Printer.printBlankLine();
 
@@ -43,5 +45,14 @@ public final class LottoManager {
     WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
     Printer.printRank(winningStatistics);
     Printer.printResult(winningStatistics, userMoney);
+  }
+
+  private static List<Lotto> inputManualLottoNumbers(InputView inputView, LottoCount manualCount) {
+    Printer.printInputManualNumber();
+    List<Lotto> manualLottoList = new ArrayList<>();
+    for (int i = 0; i < manualCount.toInteger(); i++) {
+      manualLottoList.add(new Lotto(inputView.inputWinningLotto()));
+    }
+    return manualLottoList;
   }
 }

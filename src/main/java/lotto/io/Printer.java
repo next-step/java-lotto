@@ -21,6 +21,7 @@ public final class Printer {
   private static final String AUTOMATICALLY = "자동으로 ";
   private static final String LOTTO_UNIT = "장";
   private static final String BOUGHT = "을 구매했습니다.";
+  private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
 
   private Printer() {}
 
@@ -95,5 +96,9 @@ public final class Printer {
 
   public static void printBlankLine() {
     System.out.println();
+  }
+
+  public static void printInputManualNumber() {
+    System.out.println(INPUT_MANUAL_NUMBER);
   }
 }
