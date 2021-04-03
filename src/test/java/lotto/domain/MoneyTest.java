@@ -41,8 +41,9 @@ class MoneyTest {
     //given
     Money money = new Money(20000);
     //when
+    Money multiple = money.multiple(7);;
     //then
-    assertEquals(money.multiple(7), new Money(14000));
+    assertEquals(new Money(140000), multiple);
   }
 
   @Test
