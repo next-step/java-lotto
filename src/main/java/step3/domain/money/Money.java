@@ -23,4 +23,7 @@ public final class Money {
         }
     }
 
+    public final int getMoney() {
+        return money;
+    }
 }
