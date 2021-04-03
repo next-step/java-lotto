@@ -12,22 +12,26 @@ import java.util.List;
 
 public class LottoGameApplication {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        inputView.inputPayMoney();
-        List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
+        try {
+            InputView inputView = new InputView();
+            inputView.inputPayMoney();
+            List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
 
-        Money payMoney = new Money(inputView.getPayMoney());
-        LottoShop lottoShop = new LottoShop();
-        lottoShop.purchase(payMoney, manualNumbers);
+            Money payMoney = new Money(inputView.getPayMoney());
+            LottoShop lottoShop = new LottoShop();
+            lottoShop.purchase(payMoney, manualNumbers);
 
-        LottoGamesView lottoGamesView = new LottoGamesView(lottoShop);
-        lottoGamesView.printLottoGamesNumber();
+            LottoGamesView lottoGamesView = new LottoGamesView(lottoShop);
+            lottoGamesView.printLottoGamesNumber();
 
-        inputView.inputHitNumbers();
-        inputView.inputHitBonusNumber();
-        HitResults hitResults = lottoShop.match(inputView.winNumbers());
+            inputView.inputHitNumbers();
+            inputView.inputHitBonusNumber();
+            HitResults hitResults = lottoShop.match(inputView.winNumbers());
 
-        HitResultView hitResultView = new HitResultView(hitResults, payMoney);
-        hitResultView.printLottoResult();
+            HitResultView hitResultView = new HitResultView(hitResults, payMoney);
+            hitResultView.printLottoResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
