@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoShopTest {
 
@@ -13,7 +12,7 @@ class LottoShopTest {
     void 생성() {
 
         // when
-        LottoShop lottoShop = LottoShop.getInstace();
+        LottoShop lottoShop = LottoShop.getInstance();
 
         // then
         assertThat(lottoShop).isNotNull();
