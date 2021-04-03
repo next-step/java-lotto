@@ -29,15 +29,19 @@ public enum WinningRank {
 
         WinningRank rank = findByMacthedCount(matchedCount);
 
-        if (matchBonus & rank.equals(SECOND_PLACE)) {
+        if (rank.isSecondPlace(matchBonus)) {
             return SECOND_PLACE;
         }
 
-        if (rank.equals(SECOND_PLACE)) {
+        if (rank.isSecondPlace(!matchBonus)) {
             return THIRD_PLACE;
         }
 
         return rank;
+    }
+
+    protected boolean isSecondPlace(boolean matchBonus) {
+        return matchBonus & this.equals(SECOND_PLACE);
     }
 
     public static WinningRank findByMacthedCount(int matchedCount, boolean matchBonus) {
