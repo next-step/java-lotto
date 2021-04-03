@@ -11,7 +11,7 @@ class StatisticsTest {
     @Test
     @DisplayName("matchCount와 맞는 Statistics 객체 반환")
     void getStatisticsByMatchCountTest() {
-        assertThat(Statistics.getStatisticsByMatchCount(3,false)).isEqualTo(Statistics.THREE);
+        assertThat(Statistics.getStatisticsByMatchCount(3, false)).isEqualTo(Statistics.THREE);
         assertThat(Statistics.getStatisticsByMatchCount(4, false)).isEqualTo(Statistics.FOUR);
         assertThat(Statistics.getStatisticsByMatchCount(5, false)).isEqualTo(Statistics.FIVE);
         assertThat(Statistics.getStatisticsByMatchCount(5, true)).isEqualTo(Statistics.BONUS);
