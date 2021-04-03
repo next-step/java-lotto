@@ -49,7 +49,7 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers() {
-        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoConstant.MIN_LOTTO_NUMBER, LottoConstant.MAX_LOTTO_NUMBER ).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoConstant.MIN_LOTTO_NUMBER, LottoConstant.MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.stream().limit(LottoConstant.MAX_LOTTO_COUNT).mapToInt(Integer::intValue).toArray();
     }
@@ -66,9 +66,9 @@ public class LottoTicket {
         return this.lottoList.size();
     }
 
-    public LottoRanks inquiryRankList(int[] winNumbers) {
+    public LottoRanks inquiryRankList(int[] winNumbers, int bonusNumber) {
         Lotto.validateLottoNumbers(winNumbers);
-        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers)).collect(Collectors.toList()));
+        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList()));
     }
 
 }

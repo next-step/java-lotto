@@ -80,7 +80,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
 
         // when
-        LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6});
+        LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6}, 45);
 
         // then
         assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIRST));
@@ -96,7 +96,7 @@ class LottoTicketTest {
 
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoTicket.inquiryRankList(null))
+                .isThrownBy(() -> lottoTicket.inquiryRankList(null, 45))
                 .withMessageMatching("당첨 숫자를 입력해 주세요.");
     }
 
@@ -110,11 +110,11 @@ class LottoTicketTest {
 
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6, 7}))
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6, 7}, 45))
                 .withMessageMatching("당첨 숫자는 6개의 수 여야 합니다.");
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5}))
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5}, 45))
                 .withMessageMatching("당첨 숫자는 6개의 수 여야 합니다.");
     }
 
@@ -128,7 +128,7 @@ class LottoTicketTest {
 
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 2, 4, 5, 6}))
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 2, 4, 5, 6}, 45))
                 .withMessageMatching("중복된 숫자가 존재합니다. 입력값을 확인해주세요.");
     }
 
@@ -142,7 +142,57 @@ class LottoTicketTest {
 
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 48, 2, 3, 5, 6}))
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 48, 2, 3, 5, 6}, 45))
                 .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
     }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회 보너스번호 수 범위 불일치")
+    void lottoTicket_inquiryRank_bonusNumberIsIllegal() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6}, 0))
+                .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("LottoTicket - 등수조회 보너스번호 당첨번호와 중복")
+    void lottoTicket_inquiryRank_bonusNumberIsDup() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 6}, 1))
+                .withMessageMatching("보너스 번호와 당첨번호가 중복됩니다. 보너스 번호를 다시 확인해 주세요.");
+    }
+
+    @Test
+    @DisplayName("등수조회 - 보너스 당첨")
+    void lottoTicket_inquiryRank_winBonus() {
+        // given
+        List<String> lottoNumberInputList = new ArrayList<>();
+        lottoNumberInputList.add("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberInputList);
+
+        // when
+        LottoRanks lottoRanks = lottoTicket.inquiryRankList(new int[]{1, 2, 3, 4, 5, 7}, 6);
+
+        // then
+        assertThat((double) (LottoRank.SECOND.getWinAmount() / 1000)).isEqualTo(lottoRanks.totalReturnRate());
+        assertThat(1).isEqualTo(lottoRanks.matchLottoCount(LottoRank.SECOND));
+        assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.LOSE));
+        assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIRST));
+        assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.THIRD));
+        assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FOURTH));
+        assertThat(0).isEqualTo(lottoRanks.matchLottoCount(LottoRank.FIFTH));
+    }
+
 }

@@ -27,8 +27,12 @@ public class ResultView {
 
     private void printWinStatisticList(List<WinStatistic> winStatisticList) {
         for (WinStatistic winStatistic : winStatisticList) {
-            System.out.println(winStatistic.getRankCount() + "개 일치 (" + winStatistic.getWinAmount() + "원)- " + winStatistic.getMatchLottoCount() + "개");
+            System.out.println(winStatistic.getRankCount() + "개 일치" + printMatchBonus(winStatistic.isMatchBonus()) + "(" + winStatistic.getWinAmount() + "원)- " + winStatistic.getMatchLottoCount() + "개");
         }
+    }
+
+    private String printMatchBonus(boolean matchBonus) {
+        return matchBonus ? ", 보너스 볼 일치" : " ";
     }
 
     private void printTotalReturnRate(double totalReturnRate) {

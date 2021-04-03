@@ -19,8 +19,8 @@ public class LottoAutoService {
         return purchaseAmount / LottoConstant.LOTTO_PRICE;
     }
 
-    public LottoRanks inquiryWin(List<String> confirmTargetList, int[] winNumbers) {
+    public LottoRanks inquiryWin(List<String> confirmTargetList, int[] winNumbers, int bonusNumber) {
         LottoTicket lottoTicket = new LottoTicket(confirmTargetList);
-        return lottoTicket.inquiryRankList(winNumbers);
+        return lottoTicket.inquiryRankList(winNumbers, bonusNumber);
     }
 }
