@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoShopTest {
     @DisplayName("입력한 금액만큼 로또 게임을 생성한다")
@@ -66,5 +67,23 @@ public class LottoShopTest {
                         new LottoGame(new Numbers(Arrays.asList(12, 13, 14, 15, 16, 17))));
 
         assertThat(lottoShop.getAutoGameCount()).isEqualTo(7);
+    }
+
+    @DisplayName("2000원으로 수동 게임을 3게임 입력시 예외를 반환한다.")
+    @Test
+    public void limit() {
+        List<Numbers> numbers = new ArrayList<>();
+        Numbers numbers1 = new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Numbers numbers2 = new Numbers(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Numbers numbers3 = new Numbers(Arrays.asList(12, 13, 14, 15, 16, 17));
+        numbers.add(numbers1);
+        numbers.add(numbers2);
+        numbers.add(numbers3);
+
+        LottoShop lottoShop = new LottoShop();
+
+        assertThatThrownBy(() -> {
+            lottoShop.purchase(new Money(2000), numbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
