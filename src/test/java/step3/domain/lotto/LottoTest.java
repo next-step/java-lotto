@@ -3,6 +3,7 @@ package step3.domain.lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.exception.LottoSizeMissMatchException;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,7 +11,6 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
@@ -41,13 +41,13 @@ class LottoTest {
     @Test
     void 검증_자릿수() {
         // given
-        Set<LottoNumber> sizeMissLottoNumbers = IntStream.range(1, 7)
+        Set<LottoNumber> sizeMissLottoNumbers = IntStream.range(1, 6)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         // when
         assertThatThrownBy(()-> Lotto.of(sizeMissLottoNumbers))
-                .isInstanceOf(InputLottoSizeMissMatchException.class)
+                .isInstanceOf(LottoSizeMissMatchException.class)
                 .hasMessageContaining("로또 숫자가 맞지 않습니다.");
 
 
