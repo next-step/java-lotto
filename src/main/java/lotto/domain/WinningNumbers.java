@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.utils.ConvertUtil;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
@@ -22,14 +19,16 @@ public class WinningNumbers {
         this.winningNumbers = new ArrayList<>(winningNumbers);
     }
 
-    public static WinningNumbers by(List<String> winningNumbers) {
-        return from(ConvertUtil.toIntegers(winningNumbers));
-    }
-
-    public static WinningNumbers from(List<Integer> winningNumbers) {
-        return new WinningNumbers(winningNumbers
+    public static WinningNumbers from(List<String> winningNumbers) {
+        return new WinningNumbers(ConvertUtil.toIntegers(winningNumbers)
                 .stream()
                 .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    public static WinningNumbers from(int... winningNumbers) {
+        return new WinningNumbers(Arrays.stream(winningNumbers)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
 
