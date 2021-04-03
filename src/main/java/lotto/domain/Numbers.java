@@ -17,7 +17,7 @@ public class Numbers {
     private void validate(List<Number> numbers) {
         Set<Number> numberSet = new HashSet<>(numbers);
 
-        if (numberSet.size() > 0 && numberSet.size() < 6) {
+        if (numberSet.size() > 0 && numberSet.size() != AutoNumberService.CREATION_MAX_COUNT) {
             throw new IllegalArgumentException("중복을 제외한 6개의 숫자를 입력하세요.");
         }
     }
