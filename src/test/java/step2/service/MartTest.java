@@ -7,21 +7,27 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.Cash;
+import step2.domain.Lotto;
+import step2.domain.number.Count;
+import step2.domain.number.LottoMatchingNumber;
+import step2.domain.number.LottoNumbers;
 import step2.strategy.LottoRandomStrategy;
+import step2.strategy.LottoStrategy;
+import step2.util.Splitter;
 
 public class MartTest {
   private Mart mart;
 
   @BeforeEach
   void setup() {
-    mart = new Mart(new LottoMaker());
+    mart = new Mart();
   }
 
   @ParameterizedTest
   @CsvSource(value = {"1000:1", "14000:14", "28000:28"}, delimiter = ':')
   @DisplayName("유효한 가격으로 구매 가능한지 테스트")
   void validBuyLottoTest(int sellerMoney, int size) {
-    Assertions.assertThat(mart.buyAllLotto(new Cash(sellerMoney), new LottoRandomStrategy()).quantity()).isEqualTo(size);
+    Assertions.assertThat(mart.buyAllLotto(new Cash(sellerMoney), new LottoRandomStrategy()).quantity().showCount()).isEqualTo(size);
   }
 
   @ParameterizedTest
@@ -31,5 +37,20 @@ public class MartTest {
     Assertions.assertThatThrownBy(() -> mart.buyAllLotto(new Cash(sellerMoney), new LottoRandomStrategy()))
       .isInstanceOf(RuntimeException.class)
       .hasMessage("로또를 살 수 없습니다.");
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = "11,12,13,14,15,16:1000", delimiter = ':')
+  @DisplayName("정확한 로또 갯수대로 생성 테스트")
+  void makeLottoTest(String strNumbers, int money) {
+    LottoNumbers result = new LottoNumbers(Splitter.split(strNumbers));
+    Lotto targetLotto = new Lotto(result);
+    LottoStrategy testStrategy = lottoNumbers -> new LottoNumbers(Splitter.split(strNumbers));
+
+    Assertions.assertThat(
+      mart.buyAllLotto(new Cash(money), testStrategy)
+        .matchLottos(targetLotto)
+        .sendSpecificCount(new LottoMatchingNumber(6))
+    ).isEqualTo(new Count(1));
   }
 }

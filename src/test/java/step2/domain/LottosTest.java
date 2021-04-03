@@ -4,9 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.number.Count;
 import step2.domain.number.LottoNumber;
+import step2.domain.number.LottoMatchingNumber;
 import step2.domain.number.LottoNumbers;
+import step2.domain.result.LottoMatchingResult;
 import step2.util.Splitter;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class LottosTest {
     lottos.addLotto(firstLotto);
     lottos.addLotto(secondLotto);
 
-    Assertions.assertThat(lottos.quantity()).isEqualTo(result);
+    Assertions.assertThat(lottos.quantity().showCount()).isEqualTo(result);
   }
 
   @ParameterizedTest
@@ -48,8 +49,7 @@ public class LottosTest {
     Lottos sourceLottos = new Lottos();
     sourceLottos.addLotto(source);
 
-    LottoResult lottoResult = sourceLottos.matchLottos(target);
-    System.out.println(lottoResult);
-    Assertions.assertThat(lottoResult.toStringSpecificResult(new Count(targetCount))).isEqualTo(result);
+    LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottos(target);
+    Assertions.assertThat(lottoMatchingResult.toStringSpecificResult(new LottoMatchingNumber(targetCount))).isEqualTo(result);
   }
 }

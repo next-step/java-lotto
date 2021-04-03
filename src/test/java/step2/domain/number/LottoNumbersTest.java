@@ -25,7 +25,7 @@ class LottoNumbersTest {
 
     LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
     LottoNumbers prizeLottoNumbers = new LottoNumbers(Splitter.split(answerNum));
-    Count resultCount = new Count(result);
+    Count resultCount = new LottoMatchingNumber(result);
 
     Assertions.assertThat(pickedLottoNumbers.matchNumbers(prizeLottoNumbers)).isEqualTo(resultCount);
   }
@@ -38,6 +38,8 @@ class LottoNumbersTest {
     LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
     LottoNumbers checkingLottoNumbers = new LottoNumbers(Splitter.split(sortedNumbers));
 
-    Assertions.assertThat(pickedLottoNumbers.sort().toString()).isEqualTo(checkingLottoNumbers.toString());
+    pickedLottoNumbers.sort();
+
+    Assertions.assertThat(pickedLottoNumbers.toString()).isEqualTo(checkingLottoNumbers.toString());
   }
 }

@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.domain.number.Count;
+import step2.domain.number.LottoMatchingNumber;
 import step2.domain.number.LottoNumbers;
 
 public class Lotto {
@@ -8,14 +8,15 @@ public class Lotto {
 
   public Lotto(LottoNumbers lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
+    lottoNumbers.sort();
   }
 
   @Override
   public String toString() {
-    return lottoNumbers.sort().toString();
+    return lottoNumbers.toString();
   }
 
-  public Count matchLotto(Lotto prizeLotto){
+  public LottoMatchingNumber matchLotto(Lotto prizeLotto){
     return lottoNumbers.matchNumbers(prizeLotto.lottoNumbers);
   }
 }
