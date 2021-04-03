@@ -31,7 +31,7 @@ public class LottoGame {
                 .stream()
                 .map(Rank::getPrice)
                 .reduce(0, Integer::sum);
-        double yield = Math.round((totalWinnings / money.getMoney()));
+        double yield = money.calcYield(totalWinnings);
         return new LottoResultResponse(yield, ranks, bonusNumber);
     }
 }

@@ -12,6 +12,10 @@ public class Money {
         this.ticketCount = money / LOTTO_TICKET_PRICE;
     }
 
+    public double calcYield(double totalWinnings){
+        return Math.round((totalWinnings / money));
+    }
+
     public int getMoney() {
         return money;
     }
