@@ -26,6 +26,8 @@ public class LottoTest {
                 .isEqualTo(16);
         assertThat(lotto.manual().size())
                 .isEqualTo(4);
+        assertThat(lotto.lotto().size())
+                .isEqualTo(20);
     }
 
     @BeforeEach

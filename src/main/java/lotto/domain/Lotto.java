@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
     private List<LottoNumbers> auto;
@@ -10,6 +12,11 @@ public class Lotto {
     public Lotto() {
         this.auto = new ArrayList<>();
         this.manual = new ArrayList<>();
+    }
+
+    public List<LottoNumbers> lotto() {
+        return Stream.concat(auto.stream(), manual.stream())
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumbers> auto() {
