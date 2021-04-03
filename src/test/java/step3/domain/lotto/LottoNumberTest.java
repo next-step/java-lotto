@@ -94,5 +94,4 @@ class LottoNumberTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-
 }

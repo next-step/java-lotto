@@ -4,7 +4,7 @@ import step3.exception.LottoNumberOutOfRangeException;
 
 import java.util.*;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> CACHE;
     private static final int MINIMUM = 1;
@@ -41,4 +41,8 @@ public final class LottoNumber {
         }
     }
 
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
+    }
 }
