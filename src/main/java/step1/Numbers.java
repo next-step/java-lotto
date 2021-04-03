@@ -23,17 +23,15 @@ public class Numbers {
 
     // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
     public List<String> splitString(){
-        // TODO 자바 코드컨벤션 준수
-        Matcher custom_matcher = CUSTOM_PATTERN.matcher(given);
+        Matcher customMatcher = CUSTOM_PATTERN.matcher(given);
         // TODO Pattern을 상수로 변경
-        Matcher default_matcher = Pattern.compile(DEFAULT_DELIMITERS).matcher(given);
+        Matcher defaultMatcher = Pattern.compile(DEFAULT_DELIMITERS).matcher(given);
 
-        if(custom_matcher.find()){
-            // TODO 자바 코드컨벤션 준수
-            String custom_delimiter = custom_matcher.group(1);
-            tokens = Arrays.asList(custom_matcher.group(2).split(custom_delimiter));
+        if(customMatcher.find()){
+            String customDelimiter = customMatcher.group(1);
+            tokens = Arrays.asList(customMatcher.group(2).split(customDelimiter));
         }
-        if(default_matcher.find()){
+        if(defaultMatcher.find()){
             tokens = Arrays.asList(given.split(DEFAULT_DELIMITERS));
         }
         if(given.length()==1){
