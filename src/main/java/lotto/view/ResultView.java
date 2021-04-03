@@ -31,13 +31,13 @@ public class ResultView {
         System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);
     }
 
-    public static void statistics(List<RankCountDto> rankCount) {
+    public static void statistics(List<RankCountDto> ranksCount) {
         System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
-        for (RankCountDto rank : rankCount) {
-            String bonus = bonus(rank);
-            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rank.matchedCountStandard(), bonus, rank.prize(), rank.matchedCountAfterComparison());
+        for (RankCountDto rankCount : ranksCount) {
+            String bonus = bonus(rankCount);
+            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rankCount.matchedCountStandard(), bonus, rankCount.prize(), rankCount.matchedCountAfterComparison());
         }
     }
 
