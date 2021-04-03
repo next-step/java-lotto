@@ -30,11 +30,25 @@ class LottoNumberTest {
         int secondValue = -1;
 
         // when
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             LottoNumber.valueOf(fistValue);
             LottoNumber.valueOf(secondValue);
         }).isInstanceOf(LottoNumberOutOfRangeException.class)
                 .hasMessageContaining("로또의 범위를 벗아난 숫자가 입력되었습니다.");
 
     }
+
+    @DisplayName("LottoNumber 인스턴스에 46이상의 수 입력시 예외처리 여부 테스트")
+    @Test
+    void 검증_46이상의수() {
+        // given
+        int value = 46;
+
+        // when
+        assertThatThrownBy(() -> LottoNumber.valueOf(value))
+                .isInstanceOf(LottoNumberOutOfRangeException.class)
+                .hasMessageContaining("로또의 범위를 벗아난 숫자가 입력되었습니다.");
+
+    }
+
 }
