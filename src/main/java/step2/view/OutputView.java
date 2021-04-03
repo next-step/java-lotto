@@ -3,9 +3,12 @@ package step2.view;
 import static step2.util.StringConstant.NEW_LINE;
 import static step2.view.Message.SAME_COUNT;
 
-import step2.domain.Candidate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import step2.domain.Game;
 import step2.domain.Lotto;
-import step2.domain.Payout;
+import step2.domain.Rank;
 
 public class OutputView {
 
@@ -22,21 +25,32 @@ public class OutputView {
         System.out.println("-------");
     }
 
-    public static void printResult(Candidate candidate) {
+    public static void printResult(Lotto lotto) {
+        Map<Rank, List<Game>> candidate = lotto.candidate();
         StringBuilder result = new StringBuilder();
-        for (int prizeRank = 3; prizeRank <= 6; ++prizeRank) {
-            result.append(prizeRank)
-                .append(SAME_COUNT)
-                .append(Payout.money(prizeRank))
-                .append(" - ")
-                .append(candidate.count(prizeRank))
-                .append(NEW_LINE);
-        }
+        Arrays.stream(Rank.values())
+            .filter(rank -> !rank.equals(Rank.MISS))
+            .forEach(rank -> {
+                result.append(rank.getCountOfMatch())
+                    .append(SAME_COUNT)
+                    .append(rank.getWinningMoney())
+                    .append(" - ")
+                    .append(candidateSize(candidate,rank))
+                    .append(NEW_LINE);
+            });
 
         System.out.println(result);
     }
 
     public static void printProfit(double profit) {
         System.out.printf("총 수익률은 %s 입니다.\n", String.format("%.2f", profit));
+    }
+
+    private static int candidateSize(Map<Rank, List<Game>> candidate, Rank rank) {
+        List<Game> games = candidate.get(rank);
+        if(games == null){
+            return 0;
+        }
+        return games.size();
     }
 }

@@ -18,15 +18,26 @@ public class Lotto {
         this.games = new ArrayList<>();
     }
 
-    public void init(int gameSize, int lengthPerGame) {
-        IntStream.range(0, gameSize)
+    public void init(int amount, int pricePerGame, int lengthPerGame) {
+        IntStream.range(0, amount / pricePerGame)
             .mapToObj(ignore -> new Game(lengthPerGame))
             .collect(collectingAndThen(toList(), games::addAll));
     }
 
-    public Map<Integer, List<Game>> candidate(Prize prize) {
+    public void match(Prize prize) {
+        games.forEach(game -> game.match(prize.last(), prize.bonus()));
+    }
+
+    public Map<Rank, List<Game>> candidate() {
         return games.stream()
-            .collect(Collectors.groupingBy(game -> game.containCount(prize.last())));
+            .collect(Collectors.groupingBy(Game::rank));
+    }
+
+    public double profit() {
+        return games.stream()
+        .map(Game::profit)
+        .reduce(Double::sum)
+        .orElse(0D);
     }
 
     public int size() {

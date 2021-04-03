@@ -7,4 +7,5 @@ public class Message {
     public static final String GAME_SIZE = "개를 구매했습니다.";
     public static final String GAME_STATISTICS = "당첨 통계";
     public static final String SAME_COUNT = "개 일치 ";
+    public static final String BONUS = "보너스 볼을 입력해 주세요.";
 }
