@@ -50,7 +50,6 @@ class LottoTest {
                 .isInstanceOf(LottoSizeMissMatchException.class)
                 .hasMessageContaining("로또 숫자가 맞지 않습니다.");
 
-
     }
 
 }

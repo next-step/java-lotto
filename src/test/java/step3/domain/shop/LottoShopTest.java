@@ -27,15 +27,16 @@ class LottoShopTest {
     void 반환_로또() {
         // given
         int money = 1000;
-
+        int expected = 1;
+        
         // when
         LottoShop lottoShop = LottoShop.getInstance();
-        List<Lotto> lottos = lottoShop.getLottos(money);
+        List<Lotto> lottos = lottoShop.buyLottos(money);
 
         // then
         assertAll(
                 () -> assertThat(lottos).isNotNull(),
-                () -> assertThat(lottos.size()).isEqualTo(1)
+                () -> assertThat(lottos.size()).isEqualTo(expected)
         );
     }
 
