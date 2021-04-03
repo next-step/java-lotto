@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import lotto.domain.MatchedCount;
+import lotto.domain.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ public class WinningRankTest {
     @Test
     @DisplayName("상금 반환")
     public void prize() throws Exception {
-        int firstPrize = WinningRank.FIRST_PLACE.prize();
-        assertThat(firstPrize).isEqualTo(2_000_000_000);
+        Prize firstPrize = WinningRank.FIRST_PLACE.prize();
+        assertThat(firstPrize.prize()).isEqualTo(2_000_000_000);
     }
 
     @Test

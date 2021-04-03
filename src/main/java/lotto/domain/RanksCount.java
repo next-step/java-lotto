@@ -45,7 +45,7 @@ public class RanksCount {
         int totalPrize = 0;
 
         for (Map.Entry<WinningRank, Integer> rank : ranksCount.entrySet()) {
-            totalPrize += rank.getKey().prize() * rank.getValue();
+            totalPrize += rank.getKey().prize().prize() * rank.getValue();
         }
 
         return new TotalPrize(totalPrize);
@@ -62,7 +62,7 @@ public class RanksCount {
     private TreeMap<WinningRank, Integer> initialValue() {
         TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>((o1, o2) -> {
             if (o1.matchedCount().equals(o2.matchedCount())) {
-                return o1.prize() - o2.prize();
+                return o1.prize().prize() - o2.prize().prize();
             }
             return o1.matchedCount().matchedCount() - o2.matchedCount().matchedCount();
         });

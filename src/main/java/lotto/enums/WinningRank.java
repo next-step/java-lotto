@@ -1,21 +1,22 @@
 package lotto.enums;
 
 import lotto.domain.MatchedCount;
+import lotto.domain.Prize;
 
 import java.util.Arrays;
 
 public enum WinningRank {
-    FIRST_PLACE(new MatchedCount(6), 2_000_000_000),
-    SECOND_PLACE(new MatchedCount(5), 30_000_000),
-    THIRD_PLACE(new MatchedCount(5), 1_500_000),
-    FOURTH_PLACE(new MatchedCount(4), 50_000),
-    FIFTH_PLACE(new MatchedCount(3), 5_000),
-    ETC(new MatchedCount(), 0);
+    FIRST_PLACE(new MatchedCount(6), new Prize(2_000_000_000)),
+    SECOND_PLACE(new MatchedCount(5), new Prize(30_000_000)),
+    THIRD_PLACE(new MatchedCount(5), new Prize(1_500_000)),
+    FOURTH_PLACE(new MatchedCount(4), new Prize(50_000)),
+    FIFTH_PLACE(new MatchedCount(3), new Prize(5_000)),
+    ETC(new MatchedCount(), new Prize(0));
 
     private final MatchedCount matchedCount;
-    private final int prize;
+    private final Prize prize;
 
-    WinningRank(MatchedCount matchedCount, int prize) {
+    WinningRank(MatchedCount matchedCount, Prize prize) {
         this.matchedCount = matchedCount;
         this.prize = prize;
     }
@@ -50,7 +51,7 @@ public enum WinningRank {
                 .orElse(ETC);
     }
 
-    public int prize() {
+    public Prize prize() {
         return prize;
     }
 
