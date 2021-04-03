@@ -29,7 +29,9 @@ public enum Winning {
 	}
 
 	public static Winning findByMatchedCount(int numberOfMatchedWinningNumber, boolean matchedBonus) {
-		return Arrays.stream(Winning.values()).filter(winning -> comparison(numberOfMatchedWinningNumber, matchedBonus, winning)).findFirst().orElse(LOSING);
+		return Arrays.stream(Winning.values())
+				.filter(winning -> comparison(numberOfMatchedWinningNumber, matchedBonus, winning)).findFirst()
+				.orElse(LOSING);
 	}
 
 	private static boolean comparison(int numberOfMatchedWinningNumber, boolean matchedBonus, Winning winning) {

@@ -24,11 +24,17 @@ public class ResultView {
 		System.out.println();
 		System.out.println("당첨통계");
 		System.out.println("---------");
-		System.out.println(Winning.FIFTH.matchedCount() + "개 일치 (" + Winning.FIFTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FIFTH, winningNumbers) + "개");
-		System.out.println(Winning.FOURTH.matchedCount() + "개 일치 (" + Winning.FOURTH.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FOURTH, winningNumbers) + "개");
-		System.out.println(Winning.THIRD.matchedCount() + "개 일치 (" + Winning.THIRD.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.THIRD, winningNumbers) + "개");
-		System.out.println(Winning.SECOND.matchedCount() + "개 일치, 보너스 볼 일치(" + Winning.SECOND.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.SECOND, winningNumbers) + "개");
-		System.out.println(Winning.FIRST.matchedCount() + "개 일치 (" + Winning.FIRST.amount() + "원)- " + lottoes.numberOfLottoesMatched(Winning.FIRST, winningNumbers) + "개");
+		System.out.println(Winning.FIFTH.matchedCount() + "개 일치 (" + Winning.FIFTH.amount() + "원)- " + lottoes
+				.numberOfLottoesMatched(Winning.FIFTH, winningNumbers) + "개");
+		System.out.println(Winning.FOURTH.matchedCount() + "개 일치 (" + Winning.FOURTH.amount() + "원)- " + lottoes
+				.numberOfLottoesMatched(Winning.FOURTH, winningNumbers) + "개");
+		System.out.println(Winning.THIRD.matchedCount() + "개 일치 (" + Winning.THIRD.amount() + "원)- " + lottoes
+				.numberOfLottoesMatched(Winning.THIRD, winningNumbers) + "개");
+		System.out.println(
+				Winning.SECOND.matchedCount() + "개 일치, 보너스 볼 일치(" + Winning.SECOND.amount() + "원)- " + lottoes
+						.numberOfLottoesMatched(Winning.SECOND, winningNumbers) + "개");
+		System.out.println(Winning.FIRST.matchedCount() + "개 일치 (" + Winning.FIRST.amount() + "원)- " + lottoes
+				.numberOfLottoesMatched(Winning.FIRST, winningNumbers) + "개");
 		System.out.println("총 수익률은 " + lottoes.yield(winningNumbers, price) + "입니다.");
 	}
 

@@ -41,7 +41,8 @@ public class Lotto {
 	}
 
 	public Winning winning(WinningNumbers winningNumbers) {
-		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers), matchedBonusNumber(winningNumbers));
+		return Winning
+				.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers), matchedBonusNumber(winningNumbers));
 	}
 
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
