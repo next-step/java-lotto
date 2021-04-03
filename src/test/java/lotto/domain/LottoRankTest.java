@@ -11,20 +11,18 @@ import lotto.util.ManualLottoNumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoRankTest {
 
   @ParameterizedTest
-  @CsvSource({"3, FIFTH", "4, FOURTH", "5, THIRD", "6, FIRST"})
-  @DisplayName("5등, 4등, 3등, 1등을 제대로 검증을 하는가")
-  public void matches(int matchResult, String key) throws Exception {
+  @ValueSource(booleans = {true, false})
+  public void matchFirst(boolean bonusBall) throws Exception {
     //given
-    LottoRank lottoRank = LottoRank.valueOf(matchResult, false);
+    LottoRank lottoRank = LottoRank.valueOf(6, bonusBall);
     //when
     //then
-    assertEquals(lottoRank.name(), key);
+    assertEquals(lottoRank.name(), "FIRST");
   }
 
   @Test
@@ -35,6 +33,47 @@ class LottoRankTest {
     LottoRank lottoRank = LottoRank.valueOf(5, true);
     //then
     assertEquals(lottoRank, LottoRank.SECOND);
+  }
+
+  @Test
+  @DisplayName("보너스 볼을 통해서 3등을 검증 할 수 있는가")
+  public void matchThird() throws Exception {
+    //given
+    //when
+    LottoRank lottoRank = LottoRank.valueOf(5, false);
+    //then
+    assertEquals(lottoRank, LottoRank.THIRD);
+  }
+
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  public void matchFourth(boolean bonusBall) throws Exception {
+    //given
+    LottoRank lottoRank = LottoRank.valueOf(4, bonusBall);
+    //when
+    //then
+    assertEquals(lottoRank.name(), "FOURTH");
+  }
+
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  public void matchFifth(boolean bonusBall) throws Exception {
+    //given
+    LottoRank lottoRank = LottoRank.valueOf(3, bonusBall);
+    //when
+    //then
+    assertEquals(lottoRank.name(), "FIFTH");
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"FIFTH", "FOURTH", "THIRD", "SECOND", "FIRST"})
+  @DisplayName("findRank()를 통해서 올바른 Rank를 찾아낼 수 있는가")
+  public void findRankTest(String value) throws Exception {
+    //given
+    LottoRank rank = LottoRank.findRank(value);
+    //when
+    //then
+    assertEquals(rank.name(), value);
   }
 
   @Test
@@ -57,11 +96,11 @@ class LottoRankTest {
     //when
     //then
     assertAll("Test Calculate WinningMoney",
-        () -> assertEquals(first.calculateWinningMoney(value), 2000000000 * value),
-        () -> assertEquals(second.calculateWinningMoney(value), 30000000 * value),
-        () -> assertEquals(third.calculateWinningMoney(value), 1500000 * value),
-        () -> assertEquals(fourth.calculateWinningMoney(value), 50000 * value),
-        () -> assertEquals(fifth.calculateWinningMoney(value), 5000 * value)
+        () -> assertEquals(first.getMatchedLottoWinningMoney(value), new Money(2000000000 * value)),
+        () -> assertEquals(second.getMatchedLottoWinningMoney(value), new Money(30000000 * value)),
+        () -> assertEquals(third.getMatchedLottoWinningMoney(value), new Money(1500000 * value)),
+        () -> assertEquals(fourth.getMatchedLottoWinningMoney(value), new Money(50000 * value)),
+        () -> assertEquals(fifth.getMatchedLottoWinningMoney(value), new Money(5000 * value))
     );
   }
 
