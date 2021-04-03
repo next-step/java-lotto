@@ -22,12 +22,6 @@ public class Money {
     return new Money(value * money);
   }
 
-  public static int totalMatchedLottoMoneys(List<Money> monies) {
-    return monies.stream()
-        .mapToInt(money -> money.money)
-        .sum();
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -43,5 +37,11 @@ public class Money {
   @Override
   public int hashCode() {
     return Objects.hash(money);
+  }
+
+  public static int totalMonies(List<Money> monies) {
+    return monies.stream()
+        .mapToInt(money -> money.money)
+        .sum();
   }
 }

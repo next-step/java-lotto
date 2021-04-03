@@ -55,12 +55,11 @@ public class LottoScoreBoard {
         .map(this::getWinningMoney)
         .collect(Collectors.toList());
 
-    return Money.totalMatchedLottoMoneys(collect);
+    return Money.totalMonies(collect);
   }
 
   private Money getWinningMoney(Entry<String, Integer> entry) {
-    LottoRank prize = LottoRank.findRank(entry.getKey());
-    return prize.getMatchedLottoWinningMoney(entry.getValue());
+    return LottoRank.getMatchRankWinnerMoney(entry.getKey(), entry.getValue());
   }
 
   public String toResultString() {

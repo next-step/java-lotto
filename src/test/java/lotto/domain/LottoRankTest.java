@@ -65,17 +65,6 @@ class LottoRankTest {
     assertEquals(lottoRank.name(), "FIFTH");
   }
 
-  @ParameterizedTest
-  @ValueSource(strings = {"FIFTH", "FOURTH", "THIRD", "SECOND", "FIRST"})
-  @DisplayName("findRank()를 통해서 올바른 Rank를 찾아낼 수 있는가")
-  public void findRankTest(String value) throws Exception {
-    //given
-    LottoRank rank = LottoRank.findRank(value);
-    //when
-    //then
-    assertEquals(rank.name(), value);
-  }
-
   @Test
   @DisplayName("None 체크를 제대로 하는가")
   public void isNull() throws Exception {
@@ -96,11 +85,16 @@ class LottoRankTest {
     //when
     //then
     assertAll("Test Calculate WinningMoney",
-        () -> assertEquals(first.getMatchedLottoWinningMoney(value), new Money(2000000000 * value)),
-        () -> assertEquals(second.getMatchedLottoWinningMoney(value), new Money(30000000 * value)),
-        () -> assertEquals(third.getMatchedLottoWinningMoney(value), new Money(1500000 * value)),
-        () -> assertEquals(fourth.getMatchedLottoWinningMoney(value), new Money(50000 * value)),
-        () -> assertEquals(fifth.getMatchedLottoWinningMoney(value), new Money(5000 * value))
+        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(first.name(), value),
+            new Money(2000000000 * value)),
+        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(second.name(), value),
+            new Money(30000000 * value)),
+        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(third.name(), value),
+            new Money(1500000 * value)),
+        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(fourth.name(), value),
+            new Money(50000 * value)),
+        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(fifth.name(), value),
+            new Money(5000 * value))
     );
   }
 

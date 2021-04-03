@@ -38,20 +38,14 @@ public enum LottoRank implements LottoRankFilter {
     return this.winnerMoney == winnerMoney;
   }
 
-  public Money getMatchedLottoWinningMoney(int value) {
-    return winnerMoney.multiple(value);
+  public static Money getMatchRankWinnerMoney(String found, int matchCount) {
+    return matchRankWinnerMoney(found)
+        .multiple(matchCount);
   }
 
   @Override
   public boolean filter(boolean bonusBall, Money winnerMoney) {
     return isCorrectMatchCount(matchCount);
-  }
-
-  public static LottoRank findRank(String winnerRank) {
-    return Arrays.stream(LottoRank.values())
-        .filter(rank -> rank.name().equals(winnerRank))
-        .findAny()
-        .orElse(LottoRank.NONE);
   }
 
   public static LottoRank valueOf(int matchCount, boolean bonusBall) {
@@ -72,5 +66,17 @@ public enum LottoRank implements LottoRankFilter {
 
   public static boolean isNone(LottoRank lottoRank) {
     return lottoRank == LottoRank.NONE;
+  }
+
+  private static Money matchRankWinnerMoney(String found) {
+    LottoRank rank = findRank(found);
+    return rank.winnerMoney;
+  }
+
+  private static LottoRank findRank(String winnerRank) {
+    return Arrays.stream(LottoRank.values())
+        .filter(rank -> rank.name().equals(winnerRank))
+        .findAny()
+        .orElse(LottoRank.NONE);
   }
 }
