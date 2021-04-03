@@ -65,4 +65,11 @@ public class WinningNumbersTest {
         WinningNumbers winningNumbers = WinningNumbers.from(numbers);
         assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(new LottoNumber(1)));
     }
+
+    @Test
+    @DisplayName("정수 리스트로 변환")
+    public void toIntegers() throws Exception {
+        List<Integer> integers = Arrays.asList(1, 2, 3);
+        assertThat(WinningNumbers.toIntegers(Arrays.asList("1", "2", "3"))).isEqualTo(integers);
+    }
 }
