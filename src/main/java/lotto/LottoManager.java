@@ -20,11 +20,11 @@ public final class LottoManager {
   }
 
   private static void start(InputView inputView) {
-    Money userMoney = inputView.inputMoney();
+    Money userMoney = new Money(inputView.inputMoney());
     LottoCount lottoCount = new LottoCount(userMoney);
     Printer.printBlankLine();
 
-    LottoCount manualCount = inputView.inputManualCount();
+    LottoCount manualCount = new LottoCount(inputView.inputManualCount());
     LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
     Printer.printBlankLine();
 

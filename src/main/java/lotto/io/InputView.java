@@ -3,7 +3,6 @@ package lotto.io;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoNumber;
@@ -35,22 +34,22 @@ public final class InputView {
     return manualLottoList;
   }
 
-  public Money inputMoney() {
+  public long inputMoney() {
     while (true) {
       try {
         System.out.println(INPUT_MONEY);
-        return new Money(inputLong());
+        return inputLong();
       } catch (LottoException e) {
         System.err.println(e.getMessage());
       }
     }
   }
 
-  public LottoCount inputManualCount() {
+  public long inputManualCount() {
     while (true) {
       try {
         System.out.println(INPUT_MANUAL_COUNT);
-        return new LottoCount(inputLong());
+        return inputLong();
       } catch (LottoException e) {
         System.err.println(e.getMessage());
       }
