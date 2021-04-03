@@ -41,6 +41,10 @@ public class WinNumbers {
     }
 
     public HitCount hitNumberCount(Numbers numbers) {
-        return new HitCount(winNumbers.sumContainsCount(numbers), numbers.contains(bonusNumber));
+        int sumHitCount = winNumbers.sumContainsCount(numbers);
+        if (sumHitCount == Prize.SECOND.getHitCount().getHitCount()) {
+            return new HitCount(sumHitCount, numbers.contains(bonusNumber));
+        }
+        return new HitCount(sumHitCount);
     }
 }
