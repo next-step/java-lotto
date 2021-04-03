@@ -21,17 +21,16 @@ public class WinningNumbersTest {
 
     @Test
     @DisplayName("로또 번호와 비교")
-    public void countMatchingNumbers() throws Exception {
+    public void matchedCountWith() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         //when
-        MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoTicket.lottoNumbers());
+        MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoNumbers.lottoNumbers());
 
         //then
-        assertThat(matchedCount.matchedCount()).isEqualTo(6);
+        assertThat(matchedCount).isEqualTo(new MatchedCount(6));
     }
 
     @Test
