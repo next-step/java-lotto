@@ -19,4 +19,12 @@ public class LottoNumbersTest {
         LottoNumbers newLottoNumbers = LottoNumbers.from(integers);
         assertThat(newLottoNumbers).isEqualTo(new LottoNumbers(newLottoNumbers.lottoNumbers()));
     }
+
+    @Test
+    @DisplayName("보너스 볼의 번호가 로또 번호에 속하는지 확인 여부")
+    public void contains() throws Exception {
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lottoNumbers.contains(new BonusBall(1))).isTrue();
+        assertThat(lottoNumbers.contains(new BonusBall(7))).isFalse();
+    }
 }
