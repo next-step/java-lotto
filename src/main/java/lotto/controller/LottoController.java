@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoAgency;
 import lotto.domain.Money;
 import lotto.domain.Number;
+import lotto.domain.WinningNumber;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -17,17 +18,18 @@ public class LottoController {
   public LottoController() throws IOException {
     LottoAgency agency = createLottoAgency();
     buyLottoPhase(agency);
-    Lotto winningNumbers = getWinLottoNumbers();
-    lottoResult(winningNumbers, agency);
+    lottoResult(agency);
   }
 
   public static void startLottoGame() throws IOException {
     new LottoController();
   }
 
-  private void lottoResult(final Lotto winningNumbers, final LottoAgency agency) throws IOException {
-    Number bonusBall = getBonusBall();
-    new OutputView().printResult(agency.getLottoResult(winningNumbers, bonusBall));
+  private void lottoResult(final LottoAgency agency) throws IOException {
+    WinningNumber winningNumbers = WinningNumber
+        .createWinningNumbers(getWinLottoNumbers(), getBonusBall());
+
+    new OutputView().printResult(agency.getLottoResult(winningNumbers));
   }
 
   private LottoAgency createLottoAgency() throws IOException {

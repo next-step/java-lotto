@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class LottoScoreBoard {
 
@@ -49,15 +50,17 @@ public class LottoScoreBoard {
   }
 
   private int getTotalWinningMoney(Map<String, Integer> map) {
-    return map.entrySet()
+    List<Money> collect = map.entrySet()
         .stream()
-        .mapToInt(this::getWinningMoney)
-        .sum();
+        .map(this::getWinningMoney)
+        .collect(Collectors.toList());
+
+    return Money.totalMatchedLottoMoneys(collect);
   }
 
-  private int getWinningMoney(Entry<String, Integer> entry) {
+  private Money getWinningMoney(Entry<String, Integer> entry) {
     LottoRank prize = LottoRank.findRank(entry.getKey());
-    return prize.calculateWinningMoney(entry.getValue());
+    return prize.getMatchedLottoWinningMoney(entry.getValue());
   }
 
   public String toResultString() {

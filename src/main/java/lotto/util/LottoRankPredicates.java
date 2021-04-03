@@ -1,12 +1,19 @@
-package lotto.domain;
+package lotto.util;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
+import lotto.domain.LottoRank;
 
 public class LottoRankPredicates {
 
-  private static Predicate<LottoRank> isSecondOrThird(boolean bonusBall) {
+  private static final int SECOND_OR_THIRD = 5;
+
+  private static Predicate<LottoRank> getSecondOrThird(boolean bonusBall) {
     return rank -> getSecondOrThird(bonusBall, rank);
+  }
+
+  private static Predicate<LottoRank> isSecondOrThird(int matchCount) {
+    return rank -> rank.isCorrectMatchCount(matchCount);
   }
 
   private static Predicate<LottoRank> defaultCase(int matchCount) {
@@ -24,24 +31,32 @@ public class LottoRankPredicates {
     return rank == LottoRank.THIRD;
   }
 
-  public static LottoRank filterLottoRankWithString(String winnerRank) {
+  public static LottoRank filterLottoRankByName(String winnerRank) {
     return Arrays.stream(LottoRank.values())
         .filter(findRank(winnerRank))
         .findAny()
         .orElseThrow(IllegalArgumentException::new);
   }
 
-  public static LottoRank filterLottoRankIsSecondOrThird(boolean bonusBall) {
+  private static LottoRank filterLottoRankIsSecondOrThird(int matchCount, boolean bonusBall) {
     return Arrays.stream(LottoRank.values())
-        .filter(isSecondOrThird(bonusBall))
+        .filter(isSecondOrThird(matchCount))
+        .filter(getSecondOrThird(bonusBall))
         .findAny()
         .orElse(LottoRank.NONE);
   }
 
-  public static LottoRank filterLottRankIsDefault(int matchCount) {
+  private static LottoRank filterLottRankIsDefault(int matchCount) {
     return Arrays.stream(LottoRank.values())
         .filter(defaultCase(matchCount))
         .findAny()
         .orElse(LottoRank.NONE);
+  }
+
+  public static LottoRank filter(int matchCount, boolean bonusBall) {
+    if(matchCount == SECOND_OR_THIRD) {
+      return filterLottoRankIsSecondOrThird(matchCount, bonusBall);
+    }
+    return filterLottRankIsDefault(matchCount);
   }
 }

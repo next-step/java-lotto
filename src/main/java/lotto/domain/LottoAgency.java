@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class LottoAgency {
@@ -20,6 +18,10 @@ public class LottoAgency {
     return LottoCoupon.createLottoCoupon(getPurchaseQuantity());
   }
 
+  public Money getSeedMoney() {
+    return money.multiple(LOTTO_PER_PRICE);
+  }
+
   public int getPurchaseQuantity() {
     return money.divide(LOTTO_PER_PRICE);
   }
@@ -28,21 +30,8 @@ public class LottoAgency {
     return new LottoCoupon(coupon.getLottoCoupon());
   }
 
-  public LottoScoreBoard getLottoResult(Lotto winNumbers, final Number bonusBall) {
-    List<LottoRank> lottoMatchResult = new ArrayList<>();
-    for(int i = 0; i < getPurchaseQuantity(); i++) {
-      lottoMatchResult.add(eachResult(i, winNumbers, bonusBall));
-    }
-    return LottoScoreBoard.createLottoResult(lottoMatchResult, money);
-  }
-
-  private LottoRank eachResult(int index, Lotto winNumbers, Number bonusBall) {
-    List<Number> winningNumbers = winNumbers.getNumbers();
-    List<Number> holdingLottoNumbers = coupon.getLottoCoupon()
-        .get(index)
-        .getNumbers();
-
-    return LottoRank.matches(winningNumbers, holdingLottoNumbers, bonusBall);
+  public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
+    return winningNumber.generateLottoMatchResult(winningNumber, this);
   }
 
   @Override
