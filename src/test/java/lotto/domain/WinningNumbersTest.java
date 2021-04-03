@@ -28,7 +28,7 @@ public class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         //when
-        MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+        MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoTicket.lottoNumbers());
 
         //then
         assertThat(matchedCount.matchedCount()).isEqualTo(6);

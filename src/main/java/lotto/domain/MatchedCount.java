@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MatchedCount {
@@ -10,6 +11,12 @@ public class MatchedCount {
 
     public MatchedCount() {
         this(BOUND_MIN);
+    }
+
+    public MatchedCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers) {
+        this(lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count());
     }
 
     public MatchedCount(long matchedCount) {

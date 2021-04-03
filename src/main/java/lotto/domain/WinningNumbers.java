@@ -33,12 +33,8 @@ public class WinningNumbers {
                 .collect(Collectors.toList()));
     }
 
-    public MatchedCount countMatchingNumbers(List<LottoNumber> lottoNumbers) {
-        long matchedCount = lottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-
-        return new MatchedCount(matchedCount);
+    public MatchedCount matchedCountWith(List<LottoNumber> lottoNumbers) {
+        return new MatchedCount(winningNumbers, lottoNumbers);
     }
 
     public void check(LottoNumber bonusNumber) {
