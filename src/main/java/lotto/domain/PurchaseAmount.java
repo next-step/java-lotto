@@ -26,6 +26,10 @@ public class PurchaseAmount {
         return lottoTicketPrice.divide(purchaseAmount);
     }
 
+    public int dividedBy(int lottoTicketPrice) {
+        return dividedBy(new LottoTicketPrice(lottoTicketPrice));
+    }
+
     private void checkGreaterThanMinimum(int purchaseAmount) {
         if (purchaseAmount < PURCHASE_AMOUNT_MIN) {
             throw new IllegalArgumentException(GREATER_THAN_MIN);
