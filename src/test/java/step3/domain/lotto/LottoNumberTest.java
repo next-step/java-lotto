@@ -1,13 +1,29 @@
 package step3.domain.lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.exception.LottoNumberOutOfRangeException;
+
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
+
+    private Set<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void beforeEach(){
+        lottoNumbers = IntStream.range(1, 46)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
 
     @DisplayName("LottoNumber 인스턴스 생성 여부 테스트")
     @Test
@@ -63,6 +79,20 @@ class LottoNumberTest {
 
         // then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("LottoNumber 인스턴스가 캐싱된 모든 값들을 반환하는지 테스트")
+    @Test
+    void 반환_캐싱된_모든값() {
+
+        // given
+        Set<LottoNumber> expected = lottoNumbers;
+
+        // when
+        Set<LottoNumber> actual = LottoNumber.values();
+
+        // then
+        assertThat(actual).isSameAs(expected);
     }
 
 
