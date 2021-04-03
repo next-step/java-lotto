@@ -15,6 +15,6 @@ public class NumbersGeneratorTest {
         NumbersGenerator numbersGenerator = new NumbersGenerator();
         // WHEN
         // THAT
-        assertThat(numbersGenerator.getNumbers()).isEqualTo(6);
+        assertThat(numbersGenerator.getNumbers().size()).isEqualTo(6);
     }
 }

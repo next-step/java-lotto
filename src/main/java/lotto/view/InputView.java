@@ -1,13 +1,18 @@
 package lotto.view;
 
+import lotto.domain.Number;
 import lotto.utils.StringUtils;
 import lotto.utils.ValidationUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static final String INPUT_MSG = "구입금액을 입력해주세요.";
     public static final String INPUT_LAST_LOTTO_MSG = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_LOTTO_MSG = "지난 주 보너스 번호를 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -19,9 +24,17 @@ public class InputView {
         return Integer.parseInt(number);
     }
 
-    public static String[] enterLastNumber() {
+    public static List<Number> enterLastNumber() {
         System.out.println(INPUT_LAST_LOTTO_MSG);
         String number = scanner.next();
-        return StringUtils.getStringToStringArray(number);
+        return Arrays.stream(StringUtils.getStringToStringArray(number))
+                .map(Integer::parseInt).map(Number::createNumber)
+                .collect(Collectors.toList());
+    }
+
+    public static Number enterBonusNumber() {
+        System.out.println(INPUT_BONUS_LOTTO_MSG);
+        String number = scanner.next();
+        return new Number(Integer.parseInt(number));
     }
 }

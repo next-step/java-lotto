@@ -1,9 +1,13 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.NumbersGenerator;
+import lotto.domain.*;
+import lotto.domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +19,8 @@ public class LottosTest {
         int payLotto = 14000;
         Lottos lottos;
         // WHEN
-        lottos = new Lottos(payLotto, NumbersGenerator.createNumbers());
+
+        lottos = new Lottos(new LottoGenerator(payLotto));
         // THEN
         assertThat(lottos.getLottos().size()).isEqualTo(14);
 

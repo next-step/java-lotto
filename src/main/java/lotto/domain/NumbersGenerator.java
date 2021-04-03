@@ -11,22 +11,13 @@ public class NumbersGenerator {
     private static final int LOTTO_MAX_NUM = 45;
     private static final int LOTTO_MIN_NUM = 1;
 
-    private List<Number> numbers;
+    public static final List<Number> numbers;
 
-    public NumbersGenerator() {
-        this.numbers = initNumbers();
-    }
-
-    public List<Number> initNumbers() {
-        List<Number> numbers = new ArrayList<>();
+    static{
+        numbers = new ArrayList<>();
         for (int num = LOTTO_MIN_NUM; num <= LOTTO_MAX_NUM; num++) {
             numbers.add(new Number(num));
         }
-        return numbers;
-    }
-
-    public static NumbersGenerator createNumbers(){
-        return new NumbersGenerator();
     }
 
     public List<Number> getNumbers() {
