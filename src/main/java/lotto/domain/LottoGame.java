@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoGame {
-    private Numbers numbers;
-    private LottoNumberService lottoNumberService;
+    private final Numbers numbers;
+    private final LottoNumberService lottoNumberService;
 
     public LottoGame(Numbers numbers) {
         this(new ManualNumberService(numbers));
