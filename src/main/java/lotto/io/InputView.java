@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.WinningLotto;
 import lotto.exception.LottoException;
 
 public final class InputView {
@@ -20,6 +18,7 @@ public final class InputView {
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
   private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
+
   private final Scanner scanner;
 
   public InputView(Scanner scanner) {
@@ -63,20 +62,6 @@ public final class InputView {
       throw new LottoException(NOT_A_NUMBER_FORMAT);
     }
   }
-
-  public WinningLotto inputWinningLotto() {
-    while (true) {
-      try {
-        Lotto lastWinningLotto = inputLotto(INPUT_LAST_WEEK_WINNING_NUMBER);
-        LottoNumber bonusNumber = inputBonusNumber();
-
-        return new WinningLotto(lastWinningLotto, bonusNumber);
-      } catch (LottoException e) {
-        System.err.println(e.getMessage());
-      }
-    }
-  }
-
   private Lotto inputLotto(String message) {
     while (true) {
       try {
@@ -89,15 +74,23 @@ public final class InputView {
     }
   }
 
+  public String[] inputWinningLotto() {
+    return inputLottoNumbers(INPUT_LAST_WEEK_WINNING_NUMBER);
+  }
+
+  public String[] inputLottoNumbers(String message) {
+    System.out.println(message);
+    return splitNumbers(scanner.nextLine());
+  }
+
   private String[] splitNumbers(String numberString) {
     return numberString.replaceAll(SPACE_REGEX, EMPTY_STRING).split(DELIMITER);
   }
 
-  private LottoNumber inputBonusNumber() {
+  public String inputBonusNumber() {
     System.out.println(INPUT_BONUS_NUMBER);
     String bonusNumberString = scanner.nextLine();
-
     Printer.printBlankLine();
-    return LottoNumber.valueOf(bonusNumberString);
+    return bonusNumberString;
   }
 }

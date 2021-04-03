@@ -3,8 +3,10 @@ package lotto;
 import java.util.Scanner;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.LottoCounts;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.io.InputView;
@@ -36,7 +38,8 @@ public final class LottoManager {
     Printer.printLottoCount(userLottos, manualCount);
     Printer.printLottos(userLottos);
 
-    WinningLotto winningLotto = inputView.inputWinningLotto();
+    WinningLotto winningLotto = new WinningLotto(new Lotto(inputView.inputWinningLotto()),
+        LottoNumber.valueOf(inputView.inputBonusNumber()));
     WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
     Printer.printRank(winningStatistics);
     Printer.printResult(winningStatistics, userMoney);
