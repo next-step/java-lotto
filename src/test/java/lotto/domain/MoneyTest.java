@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,9 +41,20 @@ class MoneyTest {
     //given
     Money money = new Money(20000);
     //when
-    int multiple = money.multiple(7);
     //then
-    assertEquals(multiple, 140000);
+    assertEquals(money.multiple(7), new Money(14000));
+  }
+
+  @Test
+  @DisplayName("List<Number> 의 합을 제대로 출력할 수 있는가")
+  public void sumList() throws Exception {
+    //given
+    List<Money> monies = new ArrayList<>();
+    //when
+    monies.add(new Money(10000));
+    monies.add(new Money(5000));
+    //then
+    assertEquals(Money.totalMatchedLottoMoneys(monies), 15000);
   }
 
   @ParameterizedTest
