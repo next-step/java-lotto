@@ -16,7 +16,7 @@ public class Lotto {
     return lottoNumbers.toString();
   }
 
-  public LottoMatchingNumber matchLotto(Lotto prizeLotto){
+  public LottoMatchingNumber matchLotto(Lotto prizeLotto) {
     return lottoNumbers.matchNumbers(prizeLotto.lottoNumbers);
   }
 }

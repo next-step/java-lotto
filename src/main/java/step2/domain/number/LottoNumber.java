@@ -5,12 +5,11 @@ import step2.exception.InvalidLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-  private final int number;
-
   private static final String UNDER_LOTTO_MIN_LIMIT = "로또의 최소 번호는 1입니다.";
   private static final String OVER_LOTTO_MAX_LIMIT = "로또의 최대 번호는 45입니다.";
   private static final int LOTTO_MIN = 1;
   private static final int LOTTO_MAX = 45;
+  private final int number;
 
   public LottoNumber(int number) {
     if (number < LOTTO_MIN) {

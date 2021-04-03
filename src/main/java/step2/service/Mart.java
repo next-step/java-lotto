@@ -3,7 +3,6 @@ package step2.service;
 import step2.domain.Cash;
 import step2.domain.Lotto;
 import step2.domain.Lottos;
-import step2.domain.number.Count;
 import step2.domain.number.LottoNumber;
 import step2.domain.number.LottoNumbers;
 import step2.strategy.LottoStrategy;
@@ -13,9 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Mart {
-  private final LottoMaker lottoMaker;
-
   private static final String ERROR_MESSAGE = "로또를 살 수 없습니다.";
+  private final LottoMaker lottoMaker;
 
   public Mart() {
     this.lottoMaker = new LottoMaker();

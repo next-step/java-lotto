@@ -2,11 +2,10 @@ package step2.controller;
 
 import step2.domain.Cash;
 import step2.domain.Lotto;
-import step2.domain.result.LottoMatchingResult;
 import step2.domain.Lottos;
-import step2.domain.number.Count;
 import step2.domain.number.LottoNumber;
 import step2.domain.number.LottoNumbers;
+import step2.domain.result.LottoMatchingResult;
 import step2.domain.result.LottoRevenueResult;
 import step2.service.Mart;
 import step2.strategy.LottoRandomStrategy;

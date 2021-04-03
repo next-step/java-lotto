@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.domain.Lotto;
 import step2.exception.InvalidLottoNumberException;
 
 class LottoNumberTest {
@@ -38,7 +37,7 @@ class LottoNumberTest {
 
   @ParameterizedTest
   @DisplayName("두 로또 숫자의 비교 결과 테스트")
-  @CsvSource(value = {"1;2;-1","45;1;44","2;2;0"}, delimiter = ';')
+  @CsvSource(value = {"1;2;-1", "45;1;44", "2;2;0"}, delimiter = ';')
   void compareTest(int sourceNumber, int targetNumber, int result) {
     Assertions.assertThat(new LottoNumber(sourceNumber).compareTo(new LottoNumber(targetNumber))).isEqualTo(result);
   }

@@ -6,14 +6,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.Lotto;
 import step2.domain.Lottos;
 import step2.domain.number.Count;
-import step2.domain.number.LottoNumber;
 import step2.domain.number.LottoMatchingNumber;
+import step2.domain.number.LottoNumber;
 import step2.domain.number.LottoNumbers;
 import step2.util.Splitter;
 
-import static org.assertj.core.api.Assertions.*;
-
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMatchingResultTest {
 
