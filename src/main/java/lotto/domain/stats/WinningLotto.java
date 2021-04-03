@@ -9,6 +9,9 @@ public class WinningLotto {
     private final LottoBall bonusBall;
 
     public WinningLotto(Lotto winningLotto, LottoBall bonusBall) {
+        if (winningLotto.traverseCompareTo(bonusBall) > 0) {
+            throw new IllegalArgumentException("보너스볼은 중복되지 않아야 합니다.");
+        }
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }

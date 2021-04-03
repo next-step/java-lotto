@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,6 +18,9 @@ public class Lotto {
     public Lotto(List<LottoBall> balls) {
         if (balls.size() != 6) {
             throw new IllegalArgumentException("로또는 6개 숫자여야 합니다.");
+        }
+        if (new HashSet<>(balls).size() != 6) {
+            throw new IllegalArgumentException("중복되는 숫자가 없어야 합니다.");
         }
         this.balls = balls;
     }
