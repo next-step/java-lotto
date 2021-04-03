@@ -7,12 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
+    // TODO 상수 작성시 누락된 키워드 추가
     private final String DEFAULT_DELIMITERS = ",|:";
     private final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private String given;
+    // TODO 사용하지 않는 변수 삭제
     private List<String> tokens = new ArrayList<>();
-
     private List<Integer> numbers = new ArrayList<>();
 
     public Numbers(String given){
@@ -21,11 +22,15 @@ public class Numbers {
         listConvertedFromArray();
     }
 
+    // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
     public List<String> splitString(){
+        // TODO 자바 코드컨벤션 준수
         Matcher custom_matcher = CUSTOM_PATTERN.matcher(given);
+        // TODO Pattern을 상수로 변경
         Matcher default_matcher = Pattern.compile(DEFAULT_DELIMITERS).matcher(given);
 
         if(custom_matcher.find()){
+            // TODO 자바 코드컨벤션 준수
             String custom_delimiter = custom_matcher.group(1);
             tokens = Arrays.asList(custom_matcher.group(2).split(custom_delimiter));
         }
@@ -38,6 +43,7 @@ public class Numbers {
         return tokens;
     }
 
+    // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
     public void listConvertedFromArray(){
         for (String s : tokens) {
             isNotNumberOrNegativeNumber(s);
@@ -46,11 +52,13 @@ public class Numbers {
         }
     }
 
+    // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
     public void isNotNumberOrNegativeNumber(String s){
         try {
             if(Integer.parseInt(s)<0){
                 throw new RuntimeException();
             }
+            // TODO 예외 상속구조 고려하여 리팩토링
         } catch (NumberFormatException e){
             throw new RuntimeException();
         }

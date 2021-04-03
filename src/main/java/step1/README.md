@@ -19,3 +19,15 @@
 - [x] 쉼표(`,`) 구분자 또는 콜론(`:`)로 문자열 전달할 경우 구분자를 기준으로 문자열 분리 구현
 - [x] `//\n` 사이의 문자를 커스텀 구분자로 인식해서 커스텀 구분자를 기준으로 문자열 분리 구현
 - [x] 숫자 이외의 값 또는 음수를 전달받을 경우 RuntimeException 예외를 던지도록 구현
+
+### 코드 리뷰
+
+- [ ] 상수 선언시 `static` 키워드 누락
+- [ ]  사용하지 않는 변수 및 주석 제거
+- [ ] 생성자에서만 사용되는 메서드의 접근제한자는 `private`로 수정
+- [ ] Numbers에서 사용하는 패턴(`Pattern.compile(DEFAULT_DELIMITERS)`)을 상수로 변경
+- [ ] 자바 코드 컨벤션 준수(지역변수 네이밍은 카멜케이스)
+- [ ] StringAddCalculator.java의 `isNullinitValue()`의 접근제한자를 private로 바꾸거나 공개하지 않으려면 필요한 방법 (힌트: 간접 테스트)
+- [ ] try-catch에서 NumberFormatException을 catch해서 RuntimeException을 throw하는건 의미 없음. 예외간 상속구조 이해 필요.
+- [ ] boolean 값 반환하는 메서드는 인라인으로 간단하게 코드 줄일수 있을듯
+
