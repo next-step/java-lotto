@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoCoupon {
+    private static final int MIN_EXCHANGEABLE_TICKETS_COUNT = 0;
+    private static final String EXCHANGEABLE_ERROR_MESSAGE = "%d ~ %d 값을 입력해주세요.";
+
     private final int exchangeableTicketsCount;
 
     public LottoCoupon(int exchangeableTicketsCount) {
@@ -20,8 +23,10 @@ public class LottoCoupon {
     }
 
     public void validateExchangeable(int count) {
-        if (count < 0 || count > exchangeableTicketsCount) {
-            throw new IllegalArgumentException();
+        if (count < MIN_EXCHANGEABLE_TICKETS_COUNT || count > exchangeableTicketsCount) {
+            throw new IllegalArgumentException(
+                    String.format(EXCHANGEABLE_ERROR_MESSAGE, MIN_EXCHANGEABLE_TICKETS_COUNT, exchangeableTicketsCount)
+            );
         }
     }
 
