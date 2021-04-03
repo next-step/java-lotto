@@ -36,4 +36,11 @@ public class WinningRankTest {
         assertThat(thirdPlace).isEqualTo(WinningRank.THIRD_PLACE);
         assertThat(etc).isEqualTo(WinningRank.ETC);
     }
+
+    @Test
+    @DisplayName("2등인지 판별")
+    public void isSecondPlace() throws Exception {
+        assertThat(WinningRank.SECOND_PLACE.isSecondPlace(true)).isTrue();
+        assertThat(WinningRank.SECOND_PLACE.isSecondPlace(false)).isFalse();
+    }
 }
