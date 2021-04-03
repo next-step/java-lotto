@@ -13,7 +13,7 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 생성")
     public void create() throws Exception {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers());
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(LottoNumbers.createByintegers(
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(LottoNumbers.from(
                 lottoTicket.lottoNumbers()
                         .stream()
                         .map(LottoNumber::lottoNumber)

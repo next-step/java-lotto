@@ -24,7 +24,7 @@ public class WinningNumbersTest {
     public void countMatchingNumbers() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers lottoNumbers = LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         //when

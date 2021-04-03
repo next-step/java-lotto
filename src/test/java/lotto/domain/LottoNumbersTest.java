@@ -16,7 +16,7 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers(lottoNumbers.lottoNumbers()));
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoNumbers newLottoNumbers = LottoNumbers.createByintegers(integers);
+        LottoNumbers newLottoNumbers = LottoNumbers.from(integers);
         assertThat(newLottoNumbers).isEqualTo(new LottoNumbers(newLottoNumbers.lottoNumbers()));
     }
 }

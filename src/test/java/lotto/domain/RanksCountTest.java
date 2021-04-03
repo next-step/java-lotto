@@ -15,8 +15,8 @@ public class RanksCountTest {
     public void count() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoTicket firstTicket = new LottoTicket(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket secondTicket = new LottoTicket(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 7)));
         BonusBall bonusBall = new BonusBall(7);
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket));
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
@@ -34,9 +34,9 @@ public class RanksCountTest {
     public void totalPrize() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from((Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket firstTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket secondTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        LottoTicket thirdTicket = new LottoTicket(LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        LottoTicket firstTicket = new LottoTicket(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket secondTicket = new LottoTicket(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoTicket thirdTicket = new LottoTicket(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 8)));
         BonusBall bonusBall = new BonusBall(7);
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket, thirdTicket));
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);

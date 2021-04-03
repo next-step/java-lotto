@@ -22,7 +22,7 @@ public class LottoNumbers {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoNumbers createByintegers(List<Integer> lottoNumbers) {
+    public static LottoNumbers from(List<Integer> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
