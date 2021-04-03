@@ -15,23 +15,19 @@ public final class InputView {
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
   private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
 
-  private final Scanner scanner;
+  private static final Scanner scanner = new Scanner(System.in);
 
-  public InputView(Scanner scanner) {
-    this.scanner = scanner;
-  }
-
-  public long inputMoney() {
+  public static long inputMoney() {
     System.out.println(INPUT_MONEY);
     return inputLong();
   }
 
-  public long inputManualCount() {
+  public static long inputManualCount() {
     System.out.println(INPUT_MANUAL_COUNT);
     return inputLong();
   }
 
-  private long inputLong() {
+  private static long inputLong() {
     try {
       return Long.parseLong(scanner.nextLine());
     } catch (NumberFormatException e) {
@@ -39,24 +35,24 @@ public final class InputView {
     }
   }
 
-  public String[] inputManualLotto() {
+  public static String[] inputManualLotto() {
     return inputLottoNumbers(INPUT_MANUAL_NUMBER);
   }
 
-  public String[] inputWinningNumberLotto() {
+  public static String[] inputWinningNumberLotto() {
     return inputLottoNumbers(INPUT_LAST_WEEK_WINNING_NUMBER);
   }
 
-  public String[] inputLottoNumbers(String message) {
+  public static String[] inputLottoNumbers(String message) {
     System.out.println(message);
     return splitNumbers(scanner.nextLine());
   }
 
-  private String[] splitNumbers(String numberString) {
+  private static String[] splitNumbers(String numberString) {
     return numberString.replaceAll(SPACE_REGEX, EMPTY_STRING).split(DELIMITER);
   }
 
-  public String inputBonusNumber() {
+  public static String inputBonusNumber() {
     System.out.println(INPUT_BONUS_NUMBER);
     String bonusNumberString = scanner.nextLine();
     Printer.printBlankLine();

@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import lotto.domain.Money;
 import lotto.domain.WinningStatistics;
 import lotto.domain.lotto.Lotto;
@@ -18,94 +17,87 @@ import lotto.io.Printer;
 public final class LottoManager {
 
   public static void main(String[] args) {
-    try (Scanner scanner = new Scanner(System.in)) {
-      InputView inputView = new InputView(scanner);
-      start(inputView);
-    }
-  }
-
-  private static void start(InputView inputView) {
-    Money userMoney = getMoney(inputView);
+    Money userMoney = getMoney();
     LottoCount lottoCount = new LottoCount(userMoney);
     Printer.printBlankLine();
 
-    LottoCount manualCount = getManualCount(inputView);
+    LottoCount manualCount = getManualCount();
     LottoCounts lottoCounts = new LottoCounts(lottoCount, manualCount);
     Printer.printBlankLine();
 
     Lottos userLottos = new Lottos(lottoCount);
-    userLottos.addLottoList(getManualLottoList(inputView, manualCount));
+    userLottos.addLottoList(getManualLottoList(manualCount));
     userLottos.addLottoList(lottoCounts.automaticLottos());
     Printer.printBlankLine();
 
     Printer.printLottoCount(userLottos, manualCount);
     Printer.printLottos(userLottos);
 
-    WinningLotto winningLotto = getWinningLotto(inputView);
+    WinningLotto winningLotto = getWinningLotto();
     WinningStatistics winningStatistics = new WinningStatistics(userLottos, winningLotto);
     Printer.printRank(winningStatistics);
     Printer.printResult(winningStatistics, userMoney);
   }
 
-  private static Money getMoney(InputView inputView) {
+  private static Money getMoney() {
     try {
-      return new Money(inputView.inputMoney());
+      return new Money(InputView.inputMoney());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getMoney(inputView);
+      return getMoney();
     }
   }
 
-  private static LottoCount getManualCount(InputView inputView) {
+  private static LottoCount getManualCount() {
     try {
-      return new LottoCount(inputView.inputManualCount());
+      return new LottoCount(InputView.inputManualCount());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getManualCount(inputView);
+      return getManualCount();
     }
   }
 
-  private static List<Lotto> getManualLottoList(InputView inputView, LottoCount manualCount) {
+  private static List<Lotto> getManualLottoList(LottoCount manualCount) {
     List<Lotto> manualLottoList = new ArrayList<>();
     for (int i = 0; i < manualCount.toInteger(); i++) {
-      manualLottoList.add(getManualLotto(inputView));
+      manualLottoList.add(getManualLotto());
     }
     return manualLottoList;
   }
 
-  private static Lotto getManualLotto(InputView inputView) {
+  private static Lotto getManualLotto() {
     try {
-      return new Lotto(inputView.inputManualLotto());
+      return new Lotto(InputView.inputManualLotto());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getManualLotto(inputView);
+      return getManualLotto();
     }
   }
 
-  private static WinningLotto getWinningLotto(InputView inputView) {
+  private static WinningLotto getWinningLotto() {
     try {
-      return new WinningLotto(getWinningNumberLotto(inputView), getBonusNumber(inputView));
+      return new WinningLotto(getWinningNumberLotto(), getBonusNumber());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getWinningLotto(inputView);
+      return getWinningLotto();
     }
   }
 
-  private static LottoNumber getBonusNumber(InputView inputView) {
+  private static LottoNumber getBonusNumber() {
     try {
-      return LottoNumber.valueOf(inputView.inputBonusNumber());
+      return LottoNumber.valueOf(InputView.inputBonusNumber());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getBonusNumber(inputView);
+      return getBonusNumber();
     }
   }
 
-  private static Lotto getWinningNumberLotto(InputView inputView) {
+  private static Lotto getWinningNumberLotto() {
     try {
-      return new Lotto(inputView.inputWinningNumberLotto());
+      return new Lotto(InputView.inputWinningNumberLotto());
     } catch (LottoException e) {
       System.err.println(e.getMessage());
-      return getWinningNumberLotto(inputView);
+      return getWinningNumberLotto();
     }
   }
 }
