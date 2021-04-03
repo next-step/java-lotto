@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class Numbers {
     private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile(DEFAULT_DELIMITERS);
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private final String given;
@@ -24,8 +25,7 @@ public class Numbers {
     // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
     public List<String> splitString(){
         Matcher customMatcher = CUSTOM_PATTERN.matcher(given);
-        // TODO Pattern을 상수로 변경
-        Matcher defaultMatcher = Pattern.compile(DEFAULT_DELIMITERS).matcher(given);
+        Matcher defaultMatcher = DEFAULT_PATTERN.matcher(given);
 
         if(customMatcher.find()){
             String customDelimiter = customMatcher.group(1);
