@@ -9,7 +9,6 @@ public class AutoNumberService implements LottoNumberService {
 
     @Override
     public Numbers creation() {
-
         List<Integer> numbers = new ArrayList<>(Number.lottoNumber.keySet());
 
         Collections.shuffle(numbers);
