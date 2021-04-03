@@ -1,25 +1,14 @@
 package lotto.utils;
 
-import lotto.exception.IllegalStringException;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
 
 public class ConvertUtil {
 
-    public static int toInt(String input) {
+    public static <T extends Throwable> int toIntOrThrow(String input, Supplier<? extends T> exceptionSupplier) throws T {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalStringException(input);
+            throw exceptionSupplier.get();
         }
-    }
-
-    public static List<Integer> toIntegers(List<String> input) {
-        return new ArrayList<>(Collections.unmodifiableList(input.stream()
-                .map(ConvertUtil::toInt)
-                .collect(Collectors.toList())));
     }
 }
