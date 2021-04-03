@@ -1,26 +1,29 @@
 package lotto;
 
-import lotto.controller.LottoController;
+import lotto.domain.machine.RandomLottoGenerator;
+import lotto.domain.shop.Money;
+import lotto.dto.LottoOrderResultDto;
+import lotto.service.LottoScoring;
+import lotto.service.LottoShopping;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.view.dto.LottoDto;
-import lotto.view.dto.LottoOrderDto;
-import lotto.view.dto.LottoOrderResultDto;
-import lotto.view.dto.LottoScoringDto;
-import lotto.view.dto.LottoScoringResultDto;
+
 
 public class LottoApp {
+    private static LottoShopping shoppingService =
+            new LottoShopping(new RandomLottoGenerator());
 
     public static void main(String[] args) {
         InputView inputView = new InputView(System.in);
-
-        LottoOrderDto lottoOrderDto = new LottoOrderDto(inputView.inputMoney());
-        LottoOrderResultDto lottoOrderResultDto = LottoController.orderLotto(lottoOrderDto);
+        Money money = new Money(inputView.inputMoney());
+        LottoOrderResultDto lottoOrderResultDto = shoppingService.purchase(money);
         ResultView.printLottoOrderResult(lottoOrderResultDto);
 
-        LottoScoringDto lottoScoringDto = new LottoScoringDto(
-                new LottoDto(inputView.inputWinnerNumbers()), lottoOrderResultDto);
-        LottoScoringResultDto lottoScoringResultDto = LottoController.scoreLotto(lottoScoringDto);
-        ResultView.printLottoScoringResult(lottoScoringResultDto);
+        LottoScoring scoringService =
+                new LottoScoring(lottoOrderResultDto,
+                        inputView.inputWinnerNumbers(),
+                        inputView.inputBonusNumbers());
+        ResultView.printLottoScoringResult(scoringService.getResult());
+        ResultView.printLottoEarningRate(scoringService.getEarningRate());
     }
 }

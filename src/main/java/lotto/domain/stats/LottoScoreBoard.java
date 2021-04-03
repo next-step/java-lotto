@@ -1,39 +1,32 @@
 package lotto.domain.stats;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoOrderedList;
+import lotto.domain.prize.Prize;
 
 public class LottoScoreBoard {
-    private final Map<Long, Long> scoreBoard; // Long: 당첨된 볼개수, Integer: 당첨 횟수
-    private final Lotto winnerLotto;
-    private final List<Lotto> winnerCandidates;
+    private final PrizeBoard prizeBoard;
+    private final LottoOrderedList lottoOrderedList;
+    private final WinningLotto winningLotto;
 
-    public LottoScoreBoard(Lotto winnerLotto, List<Lotto> winnerCandidates) {
-        scoreBoard = new HashMap<>();
-        this.winnerLotto = winnerLotto;
-        this.winnerCandidates = winnerCandidates;
+    public LottoScoreBoard(LottoOrderedList lottoOrderedList, WinningLotto winningLotto) {
+        prizeBoard = new PrizeBoard();
+        this.winningLotto = winningLotto;
+        this.lottoOrderedList = lottoOrderedList;
     }
 
     public void scoring() {
-        if (scoreBoard.isEmpty()) {
-            winnerCandidates.stream()
-                    .map(winnerLotto::getEqualNumberCountFrom)
-                    .forEach(this::addScore);
+        for (Lotto lotto : lottoOrderedList.getLottoList()) {
+            prizeBoard.record(Prize.getPrizeByScore(
+                    winningLotto.getScoreIfMatchingBall(lotto)));
         }
     }
 
-    private void addScore(long equalNumberCount) {
-        if (scoreBoard.containsKey(equalNumberCount)) {
-            scoreBoard.put(equalNumberCount, scoreBoard.get(equalNumberCount) + 1L);
-            return;
-        }
-        scoreBoard.put(equalNumberCount, 1L);
+    public long getWinnerCountByPrize(Prize prize) {
+        return prizeBoard.getWinnerCountByPrize(prize);
     }
 
-    public Long getWinningsByEqualNumberCount(long equalNumberCount) {
-        return Optional.ofNullable(scoreBoard.get(equalNumberCount)).orElse(0L);
+    public long getLottoOrderedCount() {
+        return this.lottoOrderedList.getLottoOrderedCount();
     }
 }

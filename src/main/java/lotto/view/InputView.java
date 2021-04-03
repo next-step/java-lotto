@@ -30,4 +30,12 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public Integer inputBonusNumbers() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String inputString = this.scanner.nextLine();
+
+        return Integer.parseInt(inputString);
+    }
+
 }

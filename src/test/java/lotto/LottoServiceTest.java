@@ -2,43 +2,67 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
 import lotto.domain.machine.TestLottoGenerator;
-import lotto.service.LottoScoringService;
-import lotto.service.LottoShoppingService;
-import lotto.view.dto.LottoDto;
-import lotto.view.dto.LottoOrderDto;
-import lotto.view.dto.LottoOrderResultDto;
-import lotto.view.dto.LottoScoringDto;
-import lotto.view.dto.LottoScoringResultDto;
+import lotto.domain.shop.Money;
+import lotto.dto.LottoOrderResultDto;
+import lotto.dto.LottoScoreDto;
+import lotto.dto.LottoScoreResultDto;
+import lotto.service.LottoScoring;
+import lotto.service.LottoShopping;
+import lotto.view.ResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoServiceTest {
 
     @Test
-    @DisplayName("구입 금액에 따라 로또를 구매하는 서비스")
+    @DisplayName("14000원을 입력하면 14장 로또를 발급하고 결과를 DTO로 반환한다.")
     void lottoOrderingServiceTest() {
-        LottoShoppingService lottoService = new LottoShoppingService(new TestLottoGenerator());
-        LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(0));
+        Money money = new Money(14000);
 
-        LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
+        LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(money);
 
-        assertThat(lottoOrderResultDto.getOrderedResult().size()).isEqualTo(14);
+        assertThat(lottoOrderResultDto.getOrderResult().size()).isEqualTo(14);
     }
 
     @Test
-    @DisplayName("당첨 번호를 입력하면, 구매한 로또와 비교해주는 서비스")
-    void lottoWinnerScoringServiceTest() {
-        LottoShoppingService lottoService = new LottoShoppingService(new TestLottoGenerator());
-        LottoOrderDto lottoOrderDto = new LottoOrderDto(14000);
-        LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(lottoOrderDto);
-        LottoDto winnerLottoDto = new LottoDto(17, 18, 19, 20, 21, 22);
-        LottoScoringDto lottoScoringDto = new LottoScoringDto(winnerLottoDto, lottoOrderResultDto);
+    @DisplayName("로또 14장을 구입하고 당첨금이 5000원일때, 당첨조건/당첨금/당첨횟수를 DTO로 반환한다.")
+    void lottoWinnerScoringResultDtoTest() {
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(0));
+        Money money = new Money(14000);
+        LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(money);
+        List<Integer> winnerLottoNumber = Arrays.asList(17, 18, 19, 20, 21, 22);
+        Integer bonusNumber = 30;
 
-        LottoScoringService lottoScoringService = new LottoScoringService();
-        LottoScoringResultDto lottoScoringResultDto =
-                lottoScoringService.score(lottoScoringDto);
+        LottoScoring lottoScoring = new LottoScoring(lottoOrderResultDto, winnerLottoNumber, bonusNumber);
+        LottoScoreResultDto lottoScoreResultDto = lottoScoring.getResult();
+        LottoScoreDto resultDto =
+                lottoScoreResultDto.getLottoScoreDtoList()
+                        .stream()
+                        .filter(dto -> dto.getMatchingBallCount() == 3)
+                        .findFirst()
+                        .orElse(new LottoScoreDto(0, 0, 0, 0));
 
-        assertThat(lottoScoringResultDto.getEarningRate()).isEqualTo("0.35");
+        assertThat(resultDto.getMatchingBallCount()).isEqualTo(3L);
+        assertThat(resultDto.getPrizeAmount()).isEqualTo(5000L);
+        assertThat(resultDto.getWinners()).isEqualTo(1L);
+    }
+
+    @Test
+    @DisplayName("로또 14장을 구입하고 당첨금이 5000원일때, 수익률을 DTO로 반환한다.")
+    void lottoWinnerEarningRateDtoTest() {
+        LottoShopping lottoService = new LottoShopping(new TestLottoGenerator(0));
+        Money money = new Money(14000);
+        LottoOrderResultDto lottoOrderResultDto = lottoService.purchase(money);
+        List<Integer> winnerLottoNumber = Arrays.asList(17, 18, 19, 20, 21, 22);
+        Integer bonusNumber = 30;
+
+        LottoScoring lottoScoring = new LottoScoring(lottoOrderResultDto, winnerLottoNumber, bonusNumber);
+        lottoScoring.getResult();
+
+        assertThat(lottoScoring.getEarningRate()).isEqualTo("0.35");
     }
 }
