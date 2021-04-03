@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-// TODO: 리팩토링 필요
 public class LottoCouponTest {
     private int exchangeableTicketsCount;
 
@@ -33,10 +32,10 @@ public class LottoCouponTest {
     }
 
     @Test
-    public void exchangeable() {
-        final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
-
-        assertThat(lottoCoupon.exchangeable(6)).isTrue();
+    public void create_lessThanZero() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoCoupon(-1);
+        });
     }
 
     @ParameterizedTest
@@ -58,10 +57,11 @@ public class LottoCouponTest {
         assertThat(lottoBuyer.allLottoTickets().count()).isEqualTo(exchangeableTicketsCount);
     }
 
-    @Test
-    public void lottoBuyerWithManualLottoTickets() {
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 10})
+    public void lottoBuyerWithManualLottoTickets(int manualLottoTicketsCount) {
         final List<LottoTicket> manualLottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                .limit(3)
+                .limit(manualLottoTicketsCount)
                 .collect(Collectors.toList());
         final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
 
@@ -77,7 +77,7 @@ public class LottoCouponTest {
             final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
 
             final List<LottoTicket> manualLottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                    .limit(exchangeableTicketsCount + 10)
+                    .limit(exchangeableTicketsCount + 1)
                     .collect(Collectors.toList());
 
             lottoCoupon.lottoBuyer(manualLottoTickets);
