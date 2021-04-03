@@ -22,7 +22,7 @@
 
 ### 코드 리뷰
 
-- [ ] 상수 선언시 `static` 키워드 누락
+- [x] 상수 선언시 `static` 키워드 누락
 - [ ]  사용하지 않는 변수 및 주석 제거
 - [ ] 생성자에서만 사용되는 메서드의 접근제한자는 `private`로 수정
 - [ ] Numbers에서 사용하는 패턴(`Pattern.compile(DEFAULT_DELIMITERS)`)을 상수로 변경

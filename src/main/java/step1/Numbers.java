@@ -7,14 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
-    // TODO 상수 작성시 누락된 키워드 추가
-    private final String DEFAULT_DELIMITERS = ",|:";
-    private final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    private String given;
+    private final String given;
     // TODO 사용하지 않는 변수 삭제
     private List<String> tokens = new ArrayList<>();
-    private List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
     public Numbers(String given){
         this.given = given;
