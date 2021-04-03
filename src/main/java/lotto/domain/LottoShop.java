@@ -51,7 +51,7 @@ public class LottoShop {
     public int getAutoGameCount() {
         return (int) lottoGames.stream()
                 .filter(lottoGame ->
-                        lottoGame.getiNumber().getClass() == AutoNumberService.class)
+                        lottoGame.getLottoNumberService().getClass() == AutoNumberService.class)
                 .count();
     }
 

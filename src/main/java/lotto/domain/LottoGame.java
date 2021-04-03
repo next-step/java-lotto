@@ -23,7 +23,7 @@ public class LottoGame {
         return numbers;
     }
 
-    public LottoNumberService getiNumber() {
+    public LottoNumberService getLottoNumberService() {
         return lottoNumberService;
     }
 
