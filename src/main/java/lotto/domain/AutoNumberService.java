@@ -3,18 +3,18 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AutoNumberService implements LottoNumberService {
     public static final int CREATION_MAX_COUNT = 6;
-    public static final int CREATION_NUMBER_BOUND = 45;
 
     @Override
     public Numbers creation() {
-        List<Integer> numbers = new ArrayList<>();
 
-        for (int i = 1; i <= CREATION_NUMBER_BOUND; i++) {
-            numbers.add(i);
-        }
+        List<Integer> numbers = Number.lottoNumber
+                .keySet()
+                .stream()
+                .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
         numbers = reduce(numbers);
