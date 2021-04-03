@@ -14,7 +14,7 @@ public class NumberOfTicket {
     }
 
     private int count() {
-        return purchaseAmount.purchaseAmount() / lottoTicketPrice.price();
+        return purchaseAmount.dividedBy(lottoTicketPrice);
     }
 
     public int numberOfTicket() {
