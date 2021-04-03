@@ -11,6 +11,7 @@ public class WinningNumbers {
     private static final int BOUND_MIN = 1;
     private static final String CHECK_LENGTH = String.format("당첨 번호의 길이는 %d(이)여야 합니다.", NUMBER_LENGTH);
     private static final String CHECK_BOUND = String.format("당첨 번호는 %d ~ %d 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
+    private static final String CHECK_WINNING_NUMBER = "입력하신 당첨 번호 %s가 숫자인지 확인해주세요.";
     private static final String CHECK_DUPLICATION = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
     private final List<LottoNumber> winningNumbers;
 
@@ -32,9 +33,9 @@ public class WinningNumbers {
                 .collect(Collectors.toList()));
     }
 
-    protected static List<Integer> toIntegers(List<String> inputs) {
-        return new ArrayList<>(Collections.unmodifiableList(inputs.stream()
-                .map(input -> ConvertUtil.toIntOrThrow(input, () -> new IllegalArgumentException(input + "(은)는 정수로 변환할 수 없는 문자입니다.")))
+    protected static List<Integer> toIntegers(List<String> winningNumbers) {
+        return new ArrayList<>(Collections.unmodifiableList(winningNumbers.stream()
+                .map(winningNumber -> ConvertUtil.toIntOrThrow(winningNumber, () -> new IllegalArgumentException(String.format(CHECK_WINNING_NUMBER, winningNumber))))
                 .collect(Collectors.toList())));
     }
 

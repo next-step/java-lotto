@@ -7,10 +7,11 @@ import java.util.Objects;
 public class PurchaseAmount {
     private final static int PURCHASE_AMOUNT_MIN = 1_000;
     private final static String GREATER_THAN_MIN = String.format("구매금액은 최소 %d원 이상이여야 합니다.", PURCHASE_AMOUNT_MIN);
+    private final static String CHECK_PURCHASE_AMOUNT = "입력하신 금액 %s가 숫자인지 확인해주세요.";
     private final int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this(ConvertUtil.toIntOrThrow(purchaseAmount, () -> new IllegalArgumentException(purchaseAmount + "(은)는 정수로 변환할 수 없는 문자입니다.")));
+        this(ConvertUtil.toIntOrThrow(purchaseAmount, () -> new IllegalArgumentException(String.format(CHECK_PURCHASE_AMOUNT, purchaseAmount))));
     }
 
     public PurchaseAmount(int purchaseAmount) {

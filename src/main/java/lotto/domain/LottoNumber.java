@@ -9,6 +9,7 @@ public class LottoNumber {
     private static final int BOUND_MIN = 1;
     private static final int BOUND_MAX = 45;
     private static final String CHECK_BOUND = String.format("로또 번호는 %d ~ %d 범위의 값이어야 합니다.", BOUND_MIN, BOUND_MAX);
+    private static final String CHECK_LOTTO_NUMBER = "입력하신 로또 번호 %s가 숫자인지 확인해주세요.";
     private static final Random random = new Random();
     private final int lottoNumber;
 
@@ -17,7 +18,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String lottoNumber) {
-        this(ConvertUtil.toIntOrThrow(lottoNumber, () -> new IllegalArgumentException(lottoNumber + "(은)는 정수로 변환할 수 없는 문자입니다.")));
+        this(ConvertUtil.toIntOrThrow(lottoNumber, () -> new IllegalArgumentException(String.format(CHECK_LOTTO_NUMBER, lottoNumber))));
     }
 
     public LottoNumber(int lottoNumber) {
