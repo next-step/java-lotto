@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ResultView {
 
-    public ResultView(LottoResultResponse lottoResultResponse){
+    public void result(LottoResultResponse lottoResultResponse){
         System.out.println("당첨 통계");
         System.out.println("---------");
 

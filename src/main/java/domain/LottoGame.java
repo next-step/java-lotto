@@ -9,14 +9,10 @@ public class LottoGame {
     private Money money;
     private LottoList lottoList;
 
-    public LottoGame(int money) {
-        this.money = new Money(money);
-        this.lottoList = new LottoList(this.money.getTicketCount());
+    public LottoGame(Money money) {
+        this.money = money;
+        this.lottoList = new LottoList(money.getTicketCount());
         System.out.println(lottoList.toString());
-    }
-
-    public Money getMoney() {
-        return money;
     }
 
     public List<Rank> findWinners(LottoNumbers winNumbers, BonusNumber bonusNumber){
@@ -30,7 +26,7 @@ public class LottoGame {
 
     public LottoResultResponse convert(LottoNumbers winNumbers, BonusNumber bonusNumber){
         List<Rank> ranks = findWinners(winNumbers, bonusNumber);
-        int totalWinnings =
+        double totalWinnings =
             ranks
                 .stream()
                 .map(Rank::getPrice)
