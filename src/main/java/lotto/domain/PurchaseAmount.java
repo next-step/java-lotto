@@ -30,6 +30,10 @@ public class PurchaseAmount {
         return dividedBy(new LottoTicketPrice(lottoTicketPrice));
     }
 
+    public double divide(int totalPrize) {
+        return (double) totalPrize / purchaseAmount;
+    }
+
     private void checkGreaterThanMinimum(int purchaseAmount) {
         if (purchaseAmount < PURCHASE_AMOUNT_MIN) {
             throw new IllegalArgumentException(GREATER_THAN_MIN);

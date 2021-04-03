@@ -7,7 +7,7 @@ public class ProfitRate {
     private final double profitRate;
 
     public ProfitRate(TotalPrize totalPrize, PurchaseAmount purchaeAmount) {
-        this((double) totalPrize.totalPrize() / purchaeAmount.purchaseAmount());
+        this(totalPrize.dividedBy(purchaeAmount));
     }
 
     public ProfitRate(double profitRate) {

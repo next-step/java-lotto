@@ -13,6 +13,10 @@ public class TotalPrize {
         return totalPrize;
     }
 
+    public double dividedBy(PurchaseAmount purchaeAmount) {
+        return purchaeAmount.divide(totalPrize);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
