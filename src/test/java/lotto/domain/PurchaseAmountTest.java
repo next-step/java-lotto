@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class PurchaseAmountTest {
 
@@ -35,5 +34,14 @@ public class PurchaseAmountTest {
 
         //then
         assertThat(numberOfTicket).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("총 당첨 금액을 구매 금액으로 나누기")
+    public void divide() throws Exception {
+        int amount = 1_000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        int totalPrize = 10_000;
+        assertThat(purchaseAmount.divide(totalPrize)).isEqualTo((double) totalPrize / amount);
     }
 }
