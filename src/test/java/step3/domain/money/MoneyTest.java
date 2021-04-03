@@ -2,6 +2,7 @@ package step3.domain.money;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.exception.InputNegativeAmountException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -28,7 +29,7 @@ class MoneyTest {
         // given
         int amount = -1;
 
-        // when
+        // when and then
         assertThatThrownBy(() -> Money.valueOf(amount))
                 .isInstanceOf(InputNegativeAmountException.class)
                 .hasMessageContaining("음수값의 돈이 입력되었습니다.");
