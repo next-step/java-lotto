@@ -26,6 +26,10 @@ public class Lotto {
         return manual;
     }
 
+    public void addManual(LottoNumbers lottoNumbers) {
+        this.manual.add(lottoNumbers);
+    }
+
     public void buy(int count) {
         for (int i = 0; i < count; i++) {
             auto.add(new LottoNumbers());

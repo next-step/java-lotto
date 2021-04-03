@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,12 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoNumbers(String[] lottoNumbers) {
+        this.lottoNumbers = Arrays.stream(lottoNumbers)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 
     /**
