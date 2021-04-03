@@ -10,7 +10,9 @@ public class LottoGamesView {
     }
 
     public void printLottoGamesNumber() {
-        System.out.println(lottoShop.getGameCount() + "개를 구매했습니다.");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+                lottoShop.getManualGameCount(),
+                lottoShop.getAutoGameCount());
         lottoShop.getLottoGames().forEach(lottoGame -> System.out.println(lottoGame.getNumbers()));
     }
 }
