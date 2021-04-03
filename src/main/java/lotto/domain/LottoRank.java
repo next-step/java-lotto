@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
+import lotto.util.LottoRankPredicates;
 
 public enum LottoRank {
 
@@ -24,23 +24,16 @@ public enum LottoRank {
     return this.matchCount == matchCount;
   }
 
-  public int calculateWinningMoney(Integer value) {
+  public Money getMatchedLottoWinningMoney(int value) {
     return winnerMoney.multiple(value);
   }
 
   public static LottoRank findRank(String winnerRank) {
-    return LottoRankPredicates.filterLottoRankWithString(winnerRank);
+    return LottoRankPredicates.filterLottoRankByName(winnerRank);
   }
 
   public static LottoRank valueOf(int matchCount, boolean bonusBall) {
-    if(isThirdOrSecond(matchCount)) {
-      return LottoRankPredicates.filterLottoRankIsSecondOrThird(bonusBall);
-    }
-    return LottoRankPredicates.filterLottRankIsDefault(matchCount);
-  }
-
-  private static boolean isThirdOrSecond(int matchCount) {
-    return matchCount == LottoRank.THIRD.matchCount;
+    return LottoRankPredicates.filter(matchCount, bonusBall);
   }
 
   public static LottoRank matches(List<Number> winningNumbers, List<Number> holdingLottoNumbers, Number bonusBall) {
