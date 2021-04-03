@@ -12,10 +12,10 @@ public class RankTest {
     @Test
     void converterPrize() {
         // GIVE
-        Rank rank = Rank.converterPrize(6);
+        Rank rank = Rank.converterPrize(5,true);
         // WHEN
         // THAN
-        assertThat(rank).isEqualTo(Rank.FIRST);
+        assertThat(rank).isEqualTo(Rank.SECOND);
 
     }
 
@@ -25,7 +25,7 @@ public class RankTest {
         // GIVE
         // WHEN
         // THAN
-        assertThatThrownBy(() -> Rank.converterPrize(8))
+        assertThatThrownBy(() -> Rank.converterPrize(8,false))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
