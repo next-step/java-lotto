@@ -35,4 +35,19 @@ class MoneyTest {
                 .hasMessageContaining("음수값의 돈이 입력되었습니다.");
 
     }
+
+    @DisplayName("Money 인스턴스가 소유한 값을 반환하는 테스트")
+    @Test
+    void 반환() {
+        // given
+        int expected = 1000;
+
+        // when
+        Money money = Money.valueOf(expected);
+        int actual = money.getMoney();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }
