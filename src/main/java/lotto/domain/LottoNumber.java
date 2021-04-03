@@ -17,7 +17,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String lottoNumber) {
-        this(ConvertUtil.toInt(lottoNumber));
+        this(ConvertUtil.toIntOrThrow(lottoNumber, () -> new IllegalArgumentException(lottoNumber + "(은)는 정수로 변환할 수 없는 문자입니다.")));
     }
 
     public LottoNumber(int lottoNumber) {

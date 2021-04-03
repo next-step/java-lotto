@@ -20,7 +20,7 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers from(List<String> winningNumbers) {
-        return new WinningNumbers(ConvertUtil.toIntegers(winningNumbers)
+        return new WinningNumbers(toIntegers(winningNumbers)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
@@ -30,6 +30,12 @@ public class WinningNumbers {
         return new WinningNumbers(Arrays.stream(winningNumbers)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
+    }
+
+    protected static List<Integer> toIntegers(List<String> inputs) {
+        return new ArrayList<>(Collections.unmodifiableList(inputs.stream()
+                .map(input -> ConvertUtil.toIntOrThrow(input, () -> new IllegalArgumentException(input + "(은)는 정수로 변환할 수 없는 문자입니다.")))
+                .collect(Collectors.toList())));
     }
 
     public MatchedCount matchedCountWith(List<LottoNumber> lottoNumbers) {

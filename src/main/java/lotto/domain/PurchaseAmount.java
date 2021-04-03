@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.utils.ConvertUtil;
 
-import java.util.List;
 import java.util.Objects;
 
 public class PurchaseAmount {
@@ -11,7 +10,7 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this(ConvertUtil.toInt(purchaseAmount));
+        this(ConvertUtil.toIntOrThrow(purchaseAmount, () -> new IllegalArgumentException(purchaseAmount + "(은)는 정수로 변환할 수 없는 문자입니다.")));
     }
 
     public PurchaseAmount(int purchaseAmount) {
