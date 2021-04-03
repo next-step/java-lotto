@@ -55,8 +55,7 @@ public class Numbers {
             if(Integer.parseInt(s)<0){
                 throw new RuntimeException();
             }
-            // TODO 예외 상속구조 고려하여 리팩토링
-        } catch (NumberFormatException e){
+        } catch (Exception e){
             throw new RuntimeException();
         }
     }
