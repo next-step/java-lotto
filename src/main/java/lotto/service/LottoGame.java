@@ -24,8 +24,8 @@ public class LottoGame {
         lottoLastNumber = InputView.enterLastNumber();
         bonusNumber = InputView.enterBonusNumber();
 
-        Lotto lastLottoNumber = new Lotto(lottoLastNumber, bonusNumber);
-        Prize prize = new Prize(lottos, lastLottoNumber);
+        Lotto lastLottoNumber = new Lotto(lottoLastNumber);
+        Prize prize = new Prize(lottos, lastLottoNumber, bonusNumber);
         ResultView.printLottoResult(prize);
         ResultView.printLottoYield(prize, payLotto);
     }
