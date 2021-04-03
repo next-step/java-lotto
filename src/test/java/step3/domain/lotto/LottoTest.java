@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
@@ -34,6 +35,22 @@ class LottoTest {
 
         // then
         assertThat(lotto).isNotNull();
+    }
+
+    @DisplayName("Lotto 인스턴스 자릿수 검증 여부 테스트")
+    @Test
+    void 검증_자릿수() {
+        // given
+        Set<LottoNumber> sizeMissLottoNumbers = IntStream.range(1, 7)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+
+        // when
+        assertThatThrownBy(()-> Lotto.of(sizeMissLottoNumbers))
+                .isInstanceOf(InputLottoSizeMissMatchException.class)
+                .hasMessageContaining("로또 숫자가 맞지 않습니다.");
+
+
     }
 
 }
