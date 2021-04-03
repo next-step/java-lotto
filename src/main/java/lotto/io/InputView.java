@@ -13,6 +13,7 @@ public final class InputView {
   private static final String DELIMITER = ",";
   private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
   private static final String INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해주세요.";
+  private static final String INPUT_MANUAL_NUMBER = "수동으로 구매할 로또 번호를 입력해주세요.";
 
   private final Scanner scanner;
 
@@ -21,25 +22,13 @@ public final class InputView {
   }
 
   public long inputMoney() {
-    while (true) {
-      try {
-        System.out.println(INPUT_MONEY);
-        return inputLong();
-      } catch (LottoException e) {
-        System.err.println(e.getMessage());
-      }
-    }
+    System.out.println(INPUT_MONEY);
+    return inputLong();
   }
 
   public long inputManualCount() {
-    while (true) {
-      try {
-        System.out.println(INPUT_MANUAL_COUNT);
-        return inputLong();
-      } catch (LottoException e) {
-        System.err.println(e.getMessage());
-      }
-    }
+    System.out.println(INPUT_MANUAL_COUNT);
+    return inputLong();
   }
 
   private long inputLong() {
@@ -50,7 +39,11 @@ public final class InputView {
     }
   }
 
-  public String[] inputWinningLotto() {
+  public String[] inputManualLotto() {
+    return inputLottoNumbers(INPUT_MANUAL_NUMBER);
+  }
+
+  public String[] inputWinningNumberLotto() {
     return inputLottoNumbers(INPUT_LAST_WEEK_WINNING_NUMBER);
   }
 
