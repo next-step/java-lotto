@@ -12,7 +12,7 @@ public class LottoNumber {
         if (lottoNumber == null
                 || lottoNumber < LOTTO_NUMBER_RANGE_MIN
                 || lottoNumber > LOTTO_NUMBER_RANGE_MAX)
-            throw new IllegalLottoNumberException("1 ~ 45 이상의 숫자만 입력할수 있습니다");
+            throw new IllegalLottoNumberException("1 ~ 45 이내의 숫자만 입력할수 있습니다");
 
         this.lottoNumber = lottoNumber;
     }
