@@ -10,16 +10,17 @@ import java.util.stream.Stream;
 
 public class LottoCoupon {
     private static final int MIN_EXCHANGEABLE_TICKETS_COUNT = 0;
+    private static final String MIN_EXCHANGEABLE_TICKETS_COUNT_ERROR_MESSAGE = String.format(
+            "exchangeableTicketsCount의 값은 %d 이상이어야 합니다.", MIN_EXCHANGEABLE_TICKETS_COUNT);
     private static final String EXCHANGEABLE_ERROR_MESSAGE = "%d ~ %d 값을 입력해주세요.";
 
     private final int exchangeableTicketsCount;
 
     public LottoCoupon(int exchangeableTicketsCount) {
+        if (exchangeableTicketsCount < MIN_EXCHANGEABLE_TICKETS_COUNT) {
+            throw new IllegalArgumentException(MIN_EXCHANGEABLE_TICKETS_COUNT_ERROR_MESSAGE);
+        }
         this.exchangeableTicketsCount = exchangeableTicketsCount;
-    }
-
-    public boolean exchangeable(int count) {
-        return exchangeableTicketsCount >= count;
     }
 
     public void validateExchangeable(int count) {
