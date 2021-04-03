@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AutoNumberService implements LottoNumberService {
     public static final int CREATION_MAX_COUNT = 6;
@@ -11,10 +10,7 @@ public class AutoNumberService implements LottoNumberService {
     @Override
     public Numbers creation() {
 
-        List<Integer> numbers = Number.lottoNumber
-                .keySet()
-                .stream()
-                .collect(Collectors.toList());
+        List<Integer> numbers = new ArrayList<>(Number.lottoNumber.keySet());
 
         Collections.shuffle(numbers);
         numbers = reduce(numbers);
