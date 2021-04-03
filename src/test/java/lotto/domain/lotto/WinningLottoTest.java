@@ -1,9 +1,9 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.WinningLotto.WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.exception.IllegalWinningLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,8 +37,8 @@ class WinningLottoTest {
 
     // when
     // then
-    assertThatIllegalArgumentException()
-        .isThrownBy(() -> new WinningLotto(lastWinningLotto, bonusNumber))
-        .withMessage(WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
+    assertThatThrownBy(() -> new WinningLotto(lastWinningLotto, bonusNumber))
+        .isInstanceOf(IllegalWinningLottoException.class)
+        .hasMessage(IllegalWinningLottoException.WINNING_NUMBER_CANNOT_CONTAIN_BONUS_NUMBER);
   }
 }

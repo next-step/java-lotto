@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumber.ILLEGAL_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,9 +23,9 @@ class LottoNumberTest {
   @DisplayName("로또 번호 생성 실패 테스트")
   @ValueSource(ints = {0, 46})
   void createFail(int value) {
-    assertThatIllegalArgumentException()
-        .isThrownBy(() -> LottoNumber.valueOf(value))
-        .withMessage(ILLEGAL_LOTTO_NUMBER);
+    assertThatThrownBy(() -> LottoNumber.valueOf(value))
+        .isInstanceOf(InvalidLottoNumberException.class)
+        .hasMessage(InvalidLottoNumberException.INVALID_LOTTO_NUMBER);
   }
 
   @Test

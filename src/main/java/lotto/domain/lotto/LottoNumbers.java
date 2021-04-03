@@ -1,18 +1,19 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import static lotto.domain.Rank.FIVE_BONUS;
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.LottoNumberCreationStrategy;
+import lotto.exception.InvalidLottoNumberSizeException;
 
 public final class LottoNumbers {
 
   public static final int LOTTO_NUMBER_COUNT = 6;
-  public static final String LOTTO_NUMBER_CREATION_FAILURE = "로또는 " + LOTTO_NUMBER_COUNT + "개의 번호로 이루어져야 합니다.";
 
-  private final List<LottoNumber> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
   public LottoNumbers(LottoNumberCreationStrategy lottoNumberCreationStrategy) {
     this(lottoNumberCreationStrategy.create());
@@ -25,40 +26,43 @@ public final class LottoNumbers {
   }
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+    validateLottoNumbersSize(lottoNumberSet);
+    this.lottoNumbers = lottoNumberSet;
+  }
+
+  private void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_CREATION_FAILURE);
+      throw new InvalidLottoNumberSizeException();
     }
-    this.lottoNumbers = lottoNumbers;
   }
 
   public int size() {
     return lottoNumbers.size();
   }
 
-  public Match compare(LottoNumbers other, LottoNumber bonusNumber) {
+  public int countMatchNumbers(LottoNumbers other) {
     int matchCount = 0;
-    boolean bonusMatch = false;
 
     for (LottoNumber lottoNumber : other.lottoNumbers) {
-      matchCount = countMatch(matchCount, lottoNumber);
+      matchCount += countMatchNumber(lottoNumber);
     }
 
-    if (matchCount == FIVE_BONUS.getMatchCount()) {
-      bonusMatch = lottoNumbers.contains(bonusNumber);
-    }
-
-    return new Match(matchCount, bonusMatch);
+    return matchCount;
   }
 
-  private int countMatch(int count, LottoNumber lottoNumber) {
+  private int countMatchNumber(LottoNumber lottoNumber) {
+    int count = 0;
     if (lottoNumbers.contains(lottoNumber)) {
       count++;
     }
     return count;
   }
 
-  public List<LottoNumber> getLottoNumbers() {
-    return lottoNumbers;
+  public List<LottoNumber> getSortedLottoNumbers() {
+    List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
+    Collections.sort(lottoNumberList);
+    return Collections.unmodifiableList(lottoNumberList);
   }
 
   public boolean contains(LottoNumber lottoNumber) {

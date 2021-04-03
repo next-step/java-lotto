@@ -1,14 +1,17 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import static lotto.io.InputView.NOT_A_NUMBER_FORMAT;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.exception.InvalidLottoNumberException;
+import lotto.exception.LottoException;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
-  public static final String ILLEGAL_LOTTO_NUMBER = "유효한 로또 번호가 아닙니다.";
   public static final int MIN = 1;
   public static final int MAX = 45;
   public static final List<LottoNumber> LOTTO_NUMBER_POOL;
@@ -34,12 +37,16 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 
   private static void validateLottoNumber(int lottoNumber) {
     if (lottoNumber < MIN || lottoNumber > MAX) {
-      throw new IllegalArgumentException(ILLEGAL_LOTTO_NUMBER);
+      throw new InvalidLottoNumberException();
     }
   }
 
   public static LottoNumber valueOf(String lottoNumber) {
-    return valueOf(Integer.parseInt(lottoNumber));
+    try {
+      return valueOf(Integer.parseInt(lottoNumber));
+    } catch (NumberFormatException e) {
+      throw new LottoException(NOT_A_NUMBER_FORMAT);
+    }
   }
 
   public String toStringValue() {

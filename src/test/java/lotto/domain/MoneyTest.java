@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
+import lotto.exception.NegativeMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,6 +58,14 @@ class MoneyTest {
   @DisplayName("생성")
   void create() {
     assertThat(new Money(money)).isEqualTo(new Money(money));
+  }
+
+  @Test
+  @DisplayName("음수는 생성되지 않는다.")
+  void createNegative() {
+    assertThatThrownBy(() -> new Money(-1000))
+        .isInstanceOf(NegativeMoneyException.class)
+        .hasMessage(NegativeMoneyException.NEGATIVE_MONEY_NOT_ALLOWED);
   }
 
   @Test

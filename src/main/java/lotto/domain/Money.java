@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.exception.NegativeMoneyException;
 
 public final class Money {
 
@@ -11,7 +12,14 @@ public final class Money {
   }
 
   public Money(long money) {
+    validateNegativeMoney(money);
     this.money = money;
+  }
+
+  private void validateNegativeMoney(long money) {
+    if (money < 0) {
+      throw new NegativeMoneyException();
+    }
   }
 
   public Money divideBy(Money otherMoney) {

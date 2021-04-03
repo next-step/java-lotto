@@ -1,12 +1,11 @@
-package lotto;
+package lotto.domain.lotto;
 
-import static lotto.domain.LottoNumber.LOTTO_NUMBER_POOL;
-import static lotto.domain.LottoNumbers.LOTTO_NUMBER_COUNT;
+import static lotto.domain.lotto.LottoNumber.LOTTO_NUMBER_POOL;
+import static lotto.domain.lotto.LottoNumbers.LOTTO_NUMBER_COUNT;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoNumber;
 
 public class RandomLottoNumberCreationStrategy implements LottoNumberCreationStrategy {
 
@@ -16,8 +15,6 @@ public class RandomLottoNumberCreationStrategy implements LottoNumberCreationStr
   @Override
   public List<LottoNumber> create() {
     Collections.shuffle(lottoNumberPool);
-    List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberPool.subList(BEGIN_COUNT, LOTTO_NUMBER_COUNT));
-    Collections.sort(lottoNumbers);
-    return lottoNumbers;
+    return new ArrayList<>(lottoNumberPool.subList(BEGIN_COUNT, LOTTO_NUMBER_COUNT));
   }
 }
