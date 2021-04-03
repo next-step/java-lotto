@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoGame {
+    public static final int NUMBER_BOUND = 6;
+
     private final Numbers numbers;
     private final LottoNumberService lottoNumberService;
 

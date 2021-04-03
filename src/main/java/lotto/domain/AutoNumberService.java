@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoNumberService implements LottoNumberService {
-    public static final int CREATION_MAX_COUNT = 6;
+import static lotto.domain.LottoGame.NUMBER_BOUND;
 
+public class AutoNumberService implements LottoNumberService {
     @Override
     public Numbers creation() {
         List<Integer> numbers = new ArrayList<>(Number.lottoNumber.keySet());
@@ -20,7 +20,7 @@ public class AutoNumberService implements LottoNumberService {
 
     private List<Integer> reduce(List<Integer> numbers) {
         List<Integer> reduce = new ArrayList<>();
-        for (int i = 0; i < CREATION_MAX_COUNT; i++) {
+        for (int i = 0; i < NUMBER_BOUND; i++) {
             reduce.add(numbers.get(i));
         }
         return reduce;
