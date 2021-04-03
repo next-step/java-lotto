@@ -35,7 +35,7 @@ class LottoAgencyTest {
     assertAll(
         () -> assertEquals(winningNumbers.getNumbers().size(), 6),
         () -> assertEquals(agency.getPurchaseQuantity(), 5),
-        () -> assertNotNull(agency.getLottoResult(winningNumbers, new Number(10)))
+        () -> assertNotNull(agency.getLottoResult(new WinningNumber(winningNumbers, new Number(6))))
     );
   }
 }
