@@ -13,7 +13,7 @@ public class NumberOfTicket {
         this.numberOfTicket = count();
     }
 
-    private int count() {
+    protected int count() {
         return purchaseAmount.dividedBy(lottoTicketPrice);
     }
 

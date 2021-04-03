@@ -27,4 +27,19 @@ public class NumberOfTicketTest {
         //then
         assertThat(numberOfTicket.numberOfTicket()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("구매금액에 따른 구매할 수 있는 로또 티켓 장수 구하기")
+    public void count() throws Exception {
+        //given
+        LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
+        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, lottoTicketPrice);
+
+        //when
+        int count = numberOfTicket.count();
+
+        //then
+        assertThat(count).isEqualTo(1);
+    }
 }
