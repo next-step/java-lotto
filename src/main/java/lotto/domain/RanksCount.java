@@ -22,7 +22,7 @@ public class RanksCount {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
             boolean matchBonus = lottoTicket.hasBonusNumber(bonusBall);
-            WinningRank rank = WinningRank.findByMacthedCount(matchedCount.matchedCount(), matchBonus);
+            WinningRank rank = WinningRank.findByMacthedCount(matchedCount, matchBonus);
             add(rank);
         }
     }
@@ -61,14 +61,14 @@ public class RanksCount {
 
     private TreeMap<WinningRank, Integer> initialValue() {
         TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>((o1, o2) -> {
-            if (o1.matchedCount() == o2.matchedCount()) {
+            if (o1.matchedCount().equals(o2.matchedCount())) {
                 return o1.prize() - o2.prize();
             }
-            return o1.matchedCount() - o2.matchedCount();
+            return o1.matchedCount().matchedCount() - o2.matchedCount().matchedCount();
         });
 
         Arrays.stream(WinningRank.values())
-                .filter(rank -> rank.matchedCount() >= MATCHED_COUNT_MIN)
+                .filter(rank -> rank.matchedCount().isGreaterOrEqualThan(MATCHED_COUNT_MIN))
                 .forEach(rank -> ranksCount.put(rank, INIT));
 
         return ranksCount;

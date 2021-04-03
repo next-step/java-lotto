@@ -38,7 +38,7 @@ public class ResultView {
         System.out.println(BOUNDARY);
         for (WinningRank rank : rankCount.keySet()) {
             String bonus = bonus(rank);
-            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rank.matchedCount(), bonus, rank.prize(), rankCount.get(rank));
+            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rank.matchedCount().matchedCount(), bonus, rank.prize(), rankCount.get(rank));
         }
     }
 
