@@ -1,10 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Dto.RankCountDto;
 import lotto.domain.LottoNumber;
-import lotto.enums.WinningRank;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -32,18 +31,18 @@ public class ResultView {
         System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);
     }
 
-    public static void statistics(Map<WinningRank, Integer> rankCount) {
+    public static void statistics(List<RankCountDto> rankCount) {
         System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
-        for (WinningRank rank : rankCount.keySet()) {
+        for (RankCountDto rank : rankCount) {
             String bonus = bonus(rank);
-            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rank.matchedCount().matchedCount(), bonus, rank.prize().prize(), rankCount.get(rank));
+            System.out.printf((MATCH_PRIZE_COUNT) + "%n", rank.matchedCountStandard(), bonus, rank.prize(), rank.matchedCountAfterComparison());
         }
     }
 
-    private static String bonus(WinningRank rank) {
-        if (rank.equals(WinningRank.SECOND_PLACE)) {
+    private static String bonus(RankCountDto rank) {
+        if (rank.hasBonus()) {
             return MATCH_BONUS;
         }
 

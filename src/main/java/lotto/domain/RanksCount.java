@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.Dto.RankCountDto;
 import lotto.enums.WinningRank;
 
 import java.util.*;
@@ -55,8 +56,15 @@ public class RanksCount {
         return ranksCount.get(rank);
     }
 
-    public Map<WinningRank, Integer> ranksCount() {
-        return Collections.unmodifiableMap(ranksCount);
+    public List<RankCountDto> dtos() {
+        List<RankCountDto> rankCountDtos = new ArrayList<>();
+
+        for (Map.Entry<WinningRank, Integer> rank : ranksCount.entrySet()) {
+            RankCountDto rankCountDto = new RankCountDto(rank.getKey().matchedCount().matchedCount(), rank.getKey().hasBonus(), rank.getKey().prize().prize(), rank.getValue());
+            rankCountDtos.add(rankCountDto);
+        }
+
+        return rankCountDtos;
     }
 
     private TreeMap<WinningRank, Integer> initialValue() {

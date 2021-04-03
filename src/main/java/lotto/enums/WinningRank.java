@@ -41,7 +41,7 @@ public enum WinningRank {
     }
 
     protected boolean isSecondPlace(boolean matchBonus) {
-        return matchBonus & this.equals(SECOND_PLACE);
+        return matchBonus & this.hasBonus();
     }
 
     public static WinningRank findByMacthedCount(int matchedCount, boolean matchBonus) {
@@ -61,5 +61,9 @@ public enum WinningRank {
 
     public MatchedCount matchedCount() {
         return matchedCount;
+    }
+
+    public boolean hasBonus() {
+        return this.equals(SECOND_PLACE);
     }
 }
