@@ -29,5 +29,5 @@
 - [x] 자바 코드 컨벤션 준수(지역변수 네이밍은 카멜케이스)
 - [ ] StringAddCalculator.java의 `isNullinitValue()`의 접근제한자를 private로 바꾸거나 공개하지 않으려면 필요한 방법 (힌트: 간접 테스트)
 - [ ] try-catch에서 NumberFormatException을 catch해서 RuntimeException을 throw하는건 의미 없음. 예외간 상속구조 이해 필요.
-- [ ] boolean 값 반환하는 메서드는 인라인으로 간단하게 코드 줄일수 있을듯
+- [x] boolean 값 반환하는 메서드는 인라인으로 간단하게 코드 줄일수 있을듯
 
