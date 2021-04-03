@@ -19,6 +19,12 @@ public class LottoCoupon {
         return exchangeableTicketsCount >= count;
     }
 
+    public void validateExchangeable(int count) {
+        if (count < 0 || count > exchangeableTicketsCount) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public LottoBuyer lottoBuyer() {
         return lottoBuyer(new ArrayList<>());
     }
@@ -44,4 +50,5 @@ public class LottoCoupon {
     public int hashCode() {
         return Objects.hash(exchangeableTicketsCount);
     }
+
 }

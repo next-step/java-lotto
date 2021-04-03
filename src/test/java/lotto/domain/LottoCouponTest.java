@@ -4,6 +4,8 @@ import lotto.factories.LottoTicketFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +39,15 @@ public class LottoCouponTest {
         assertThat(lottoCoupon.exchangeable(6)).isTrue();
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 11})
+    public void validateExchangeable(int count) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
+
+            lottoCoupon.validateExchangeable(count);
+        });
+    }
 
     @Test
     public void lottoBuyer() {
