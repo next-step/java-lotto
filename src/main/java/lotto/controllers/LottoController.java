@@ -16,27 +16,25 @@ public class LottoController {
         final LottoCoupon lottoCoupon = new LottoStore().lottoCoupon(payment);
 
         final int manualLottoTicketsCount = InputView.manualLottoTicketsCount();
+        lottoCoupon.validateExchangeable(manualLottoTicketsCount);
 
-        if (lottoCoupon.exchangeable(manualLottoTicketsCount)) {
-            final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
+        final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
+        final LottoBuyer lottoBuyer = lottoCoupon.lottoBuyer(
+                manualLottoTicketsInput.stream()
+                        .map(StringUtil::splitCommas)
+                        .map(LottoTicketFactory::from)
+                        .collect(Collectors.toList())
+        );
 
-            final LottoBuyer lottoBuyer = lottoCoupon.lottoBuyer(
-                    manualLottoTicketsInput.stream()
-                            .map(StringUtil::splitCommas)
-                            .map(LottoTicketFactory::from)
-                            .collect(Collectors.toList())
-            );
+        ResultView.print(lottoBuyer);
 
-            ResultView.print(lottoBuyer);
+        final String winnerNumbersInput = InputView.winnerNumbers();
+        final String bonusNumberInput = InputView.bonusNumber();
 
-            final String winnerNumbersInput = InputView.winnerNumbers();
-            final String bonusNumberInput = InputView.bonusNumber();
+        final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(
+                StringUtil.splitCommas(winnerNumbersInput), bonusNumberInput);
+        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoBuyer.allLottoTickets());
 
-            final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(
-                    StringUtil.splitCommas(winnerNumbersInput), bonusNumberInput);
-            final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoBuyer.allLottoTickets());
-
-            ResultView.print(lottoStatistics, payment);
-        }
+        ResultView.print(lottoStatistics, payment);
     }
 }
