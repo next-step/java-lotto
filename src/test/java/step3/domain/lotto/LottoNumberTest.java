@@ -2,6 +2,7 @@ package step3.domain.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.exception.LottoNumberOutOfRangeException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,7 +34,7 @@ class LottoNumberTest {
             LottoNumber.valueOf(fistValue);
             LottoNumber.valueOf(secondValue);
         }).isInstanceOf(LottoNumberOutOfRangeException.class)
-                .hasMessageContaining("로또의 범위가 아닌 숫자가 입력되었습니다.");
+                .hasMessageContaining("로또의 범위를 벗아난 숫자가 입력되었습니다.");
 
     }
 }
