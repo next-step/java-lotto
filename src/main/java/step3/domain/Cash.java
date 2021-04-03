@@ -1,7 +1,7 @@
-package step2.domain;
+package step3.domain;
 
-import step2.domain.number.Count;
-import step2.exception.InvalidPriceException;
+import step3.domain.number.Count;
+import step3.exception.InvalidPriceException;
 
 import java.util.Objects;
 
