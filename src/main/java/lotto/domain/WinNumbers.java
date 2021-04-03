@@ -9,12 +9,17 @@ public class WinNumbers {
 
     public WinNumbers(String[] winNumbers, int bonusNumber) {
         this.winNumbers = toWinNumbers(winNumbers);
-        this.bonusNumber = new Number(bonusNumber);
+        this.bonusNumber = Number.of(bonusNumber);
     }
 
     public WinNumbers(List<Integer> winNumbers, int bonusNumber) {
         this.winNumbers = new Numbers(winNumbers);
-        this.bonusNumber = new Number(bonusNumber);
+        this.bonusNumber = Number.of(bonusNumber);
+    }
+
+    public WinNumbers(Numbers winNumbers, Number bonusNumber) {
+        this.winNumbers = winNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     private Numbers toWinNumbers(String[] winNumber) {

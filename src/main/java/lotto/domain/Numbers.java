@@ -8,7 +8,7 @@ public class Numbers {
     public Numbers(List<Integer> numbers) {
         List<Number> nos = new ArrayList<>();
         for (int number : numbers) {
-            nos.add(new Number(number));
+            nos.add(Number.of(number));
         }
         validate(nos);
         this.numbers = nos;

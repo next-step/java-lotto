@@ -11,7 +11,7 @@ public class NumberTest {
     @ValueSource(ints = {0, 46})
     void create(int number) {
         assertThatThrownBy(() -> {
-            new Number(number);
+            Number.of(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
