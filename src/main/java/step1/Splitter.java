@@ -11,6 +11,11 @@ public class Splitter {
   private static final String PATTERN_MATCHER = "//(.)\n(.*)";
   private static final String COLON_MATCHER = ",|:";
 
+  private static final int DELIMITER_MATCHER = 1;
+  private static final int NUMBER_MATCHER = 2;
+
+  private static final Pattern pattern = Pattern.compile(PATTERN_MATCHER);
+
   private Splitter() {
   }
 
@@ -27,34 +32,39 @@ public class Splitter {
   }
 
   private static List<Number> splitNullOrEmpty() {
-    List<Number> numberList = new ArrayList<>();
-    numberList.add(new Number(0));
-    return numberList;
+    List<Number> numbers = new ArrayList<>();
+    numbers.add(new Number(0));
+    return numbers;
   }
 
   private static List<Number> splitOneObject(String expression) {
-    List<Number> numberList = new ArrayList<>();
-    int number = Integer.parseInt(expression);
-    numberList.add(new Number(number));
-    return numberList;
+    List<Number> numbers = new ArrayList<>();
+    int number = 0;
+    try {
+      number = Integer.parseInt(expression);
+    } catch (Exception e) {
+      throw new RuntimeException("해당 수식은 수가 아닙니다.");
+    }
+    numbers.add(new Number(number));
+    return numbers;
   }
 
   private static List<Number> splitNumbers(String expression) {
-    List<Number> numberList = new ArrayList<>();
+    List<Number> numbers = new ArrayList<>();
     String[] tokens = customPatternMatcher(expression);
     for (String token : tokens) {
       int number = Integer.parseInt(token);
-      numberList.add(new Number(number));
+      numbers.add(new Number(number));
     }
-    return numberList;
+    return numbers;
   }
 
   private static String[] customPatternMatcher(String expression) {
-    Matcher m = Pattern.compile(PATTERN_MATCHER).matcher(expression);
+    Matcher m = pattern.matcher(expression);
     String[] tokens;
     if (m.find()) {
-      String customDelimiter = m.group(1);
-      tokens = m.group(2).split(customDelimiter);
+      String customDelimiter = m.group(DELIMITER_MATCHER);
+      tokens = m.group(NUMBER_MATCHER).split(customDelimiter);
       return tokens;
     }
 
