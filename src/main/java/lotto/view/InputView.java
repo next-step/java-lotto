@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.controller.dto.LottoAutoPurchaseRequest;
+import lotto.controller.dto.LottoTicketPurchaseRequest;
 import lotto.controller.dto.WinInquiryRequest;
 
 import java.util.List;
@@ -15,9 +15,9 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public LottoAutoPurchaseRequest inputPurchaseAmount() {
+    public LottoTicketPurchaseRequest inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoAutoPurchaseRequest(scanner.nextInt());
+        return new LottoTicketPurchaseRequest(scanner.nextInt(), 0, null); // TODO : 수동구매갯수, 수동구입번호 입력로직 추가
     }
 
     public WinInquiryRequest inputWinInquiry(List<String> confirmTargetList) {
