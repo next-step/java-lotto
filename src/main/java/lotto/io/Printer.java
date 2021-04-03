@@ -47,7 +47,7 @@ public final class Printer {
     for (Lotto lotto : userLottos.getLottos()) {
       printLottoNumbers(lotto.getLottoNumbers());
     }
-    System.out.println();
+    printBlankLine();
   }
 
   private static void printLottoNumbers(LottoNumbers lottoNumbers) {
@@ -74,7 +74,7 @@ public final class Printer {
     if (yield < CRITERION) {
       System.out.print("(기준이 " + CRITERION + "이기 때문에 결과적으로 손해라는 의미임)");
     }
-    System.out.println();
+    printBlankLine();
   }
 
   private static void printMessageAndCountOfRank(WinningStatistics winningStatistics, Rank rank) {

@@ -97,7 +97,7 @@ public final class InputView {
     System.out.println(INPUT_BONUS_NUMBER);
     String bonusNumberString = scanner.nextLine();
 
-    System.out.println();
+    Printer.printBlankLine();
     return LottoNumber.valueOf(bonusNumberString);
   }
 }
