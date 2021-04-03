@@ -18,6 +18,10 @@ public class BonusBall {
         return lottoNumbers.contains(bonusNumber);
     }
 
+    public boolean isPartOf(LottoNumbers lottoNumbers) {
+        return isPartOf(lottoNumbers.lottoNumbers());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
