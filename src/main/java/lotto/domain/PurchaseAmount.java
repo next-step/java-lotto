@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.utils.ConvertUtil;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PurchaseAmount {

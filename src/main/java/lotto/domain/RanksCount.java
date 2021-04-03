@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.enums.WinningRank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RanksCount {
     private static final int INIT = 0;
@@ -42,11 +43,10 @@ public class RanksCount {
     }
 
     public TotalPrize totalPrize() {
-        int totalPrize = 0;
-
-        for (Map.Entry<WinningRank, Integer> rank : ranksCount.entrySet()) {
-            totalPrize += rank.getKey().prize().prize() * rank.getValue();
-        }
+        List<Prize> totalPrize = ranksCount.entrySet()
+                .stream()
+                .map(rank -> new Prize(rank.getKey().prize().prize() * rank.getValue()))
+                .collect(Collectors.toList());
 
         return new TotalPrize(totalPrize);
     }

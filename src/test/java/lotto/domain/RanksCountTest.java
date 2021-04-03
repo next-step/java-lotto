@@ -46,6 +46,6 @@ public class RanksCountTest {
         TotalPrize totalPrize = ranksCount.totalPrize();
 
         //then
-        assertThat(totalPrize.totalPrize()).isEqualTo(WinningRank.FIRST_PLACE.prize().prize() + WinningRank.SECOND_PLACE.prize().prize() + WinningRank.THIRD_PLACE.prize().prize());
+        assertThat(totalPrize.sum()).isEqualTo(WinningRank.FIRST_PLACE.prize().prize() + WinningRank.SECOND_PLACE.prize().prize() + WinningRank.THIRD_PLACE.prize().prize());
     }
 }
