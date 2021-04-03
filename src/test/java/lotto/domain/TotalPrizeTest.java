@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TotalPrizeTest {
@@ -28,5 +30,12 @@ public class TotalPrizeTest {
 
         //then
         assertThat(profitRate).isEqualTo((double) prize / amount);
+    }
+
+    @Test
+    @DisplayName("총 당첨 금액 구하기")
+    public void sum() throws Exception {
+        TotalPrize totalPrize = TotalPrize.from(Arrays.asList(1_000, 2_000));
+        assertThat(totalPrize.sum()).isEqualTo(3_000);
     }
 }
