@@ -5,8 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.exception.LottoNumberOutOfRangeException;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-    private Set<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         lottoNumbers = IntStream.range(1, 46)
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toCollection(TreeSet::new));
+                .collect(Collectors.toList());
     }
 
 
@@ -86,13 +85,13 @@ class LottoNumberTest {
     void 반환_캐싱된_모든값() {
 
         // given
-        Set<LottoNumber> expected = lottoNumbers;
+        List<LottoNumber> expected = lottoNumbers;
 
         // when
-        Set<LottoNumber> actual = LottoNumber.values();
+        List<LottoNumber> actual = LottoNumber.values();
 
         // then
-        assertThat(actual).isSameAs(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 
 

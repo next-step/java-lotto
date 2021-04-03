@@ -2,8 +2,7 @@ package step3.domain.lotto;
 
 import step3.exception.LottoNumberOutOfRangeException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class LottoNumber {
 
@@ -14,7 +13,7 @@ public final class LottoNumber {
     private final int lottoNumber;
 
     static {
-        CACHE = new HashMap<>();
+        CACHE = new TreeMap<>();
         for (int i = MINIMUM; i <= MAXIMUM; i++) {
             CACHE.put(i, valueOf(i));
         }
@@ -32,6 +31,9 @@ public final class LottoNumber {
         return new LottoNumber(lottoNumber);
     }
 
+    public static List<LottoNumber> values() {
+        return new ArrayList<>(CACHE.values());
+    }
 
     private final void validateNumber(int lottoNumber) {
         if (lottoNumber < MINIMUM || MAXIMUM < lottoNumber) {
