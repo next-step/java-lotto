@@ -16,8 +16,15 @@ public class LottoShop {
     }
 
     public void purchase(Money payMoney, List<Numbers> manualNumbers) {
+        validatePurchase(payMoney, manualNumbers);
         manualLotto(manualNumbers);
         autoLotto(payMoney.lottoGameCount() - manualNumbers.size());
+    }
+
+    private void validatePurchase(Money payMoney, List<Numbers> manualNumbers) {
+        if (manualNumbers.size() > payMoney.lottoGameCount()) {
+            throw new IllegalArgumentException(String.format("구매할 수 있는 최대 수는 %d 입니다.", payMoney.lottoGameCount()));
+        }
     }
 
     private void autoLotto(int count) {
