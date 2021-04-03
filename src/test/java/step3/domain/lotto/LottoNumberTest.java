@@ -51,4 +51,19 @@ class LottoNumberTest {
 
     }
 
+    @DisplayName("LottoNumber 인스턴스가 캐싱된 값을 반환하는 기능 여부 테스트")
+    @Test
+    void 반환_캐싱된값() {
+        // given
+        int value = 1;
+
+        // when
+        LottoNumber expected = LottoNumber.valueOf(value);
+        LottoNumber actual = LottoNumber.valueOf(value);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+
 }
