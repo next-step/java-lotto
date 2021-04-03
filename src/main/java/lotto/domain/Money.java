@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Money {
@@ -17,8 +18,14 @@ public class Money {
     return money / lottoPrice;
   }
 
-  public int multiple(Integer value) {
-    return value * money;
+  public Money multiple(final Integer value) {
+    return new Money(value * money);
+  }
+
+  public static int totalMatchedLottoMoneys(List<Money> monies) {
+    return monies.stream()
+        .mapToInt(money -> money.money)
+        .sum();
   }
 
   @Override
