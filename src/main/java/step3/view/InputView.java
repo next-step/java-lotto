@@ -1,6 +1,5 @@
 package step3.view;
 
-import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
 import step3.domain.winning.WinningLotto;
 
