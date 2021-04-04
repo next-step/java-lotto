@@ -17,9 +17,7 @@ public class InputView {
     }
 
     public LottoTicketPurchaseRequest inputPurchaseInfo() {
-        int purchaseAmount = inputPurchaseAmount();
-        int manualLottoPurchaseCount = inputManualLottoPurchaseCount();
-        return new LottoTicketPurchaseRequest(purchaseAmount, manualLottoPurchaseCount, inputManualLottoPurchaseNumberList(manualLottoPurchaseCount));
+        return new LottoTicketPurchaseRequest(inputPurchaseAmount(), inputManualLottoPurchaseNumberList(inputManualLottoPurchaseCount()));
     }
 
     private int inputPurchaseAmount() {

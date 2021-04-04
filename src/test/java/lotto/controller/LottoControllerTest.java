@@ -16,7 +16,7 @@ class LottoControllerTest {
     @DisplayName("로또 구입 테스트")
     void purchaseLotto() {
         // given
-        LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, 0, null); // TODO: 수동구매정보 추가입력 테스트
+        LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, new ArrayList<>()); // TODO: 수동구매정보 추가입력 테스트
         LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when
@@ -31,7 +31,7 @@ class LottoControllerTest {
     @DisplayName("로또 구입 시 로또 한 건의 구성 번호는 모두 달라야 한다.")
     void purchaseLotto_lottoNumber_distinct() {
         // given
-        LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, 0, null); // TODO: 수동구매정보 추가입력 테스트
+        LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, new ArrayList<>()); // TODO: 수동구매정보 추가입력 테스트
         LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
 
         // when

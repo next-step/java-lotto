@@ -8,9 +8,9 @@ public class LottoTicketPurchaseRequest {
     private final int manualLottoPurchaseCount;
     private final List<String> manualLottoPurchaseNumberList;
 
-    public LottoTicketPurchaseRequest(int purchaseAmount, int manualLottoPurchaseCount, List<String> manualLottoPurchaseNumberList) {
+    public LottoTicketPurchaseRequest(int purchaseAmount, List<String> manualLottoPurchaseNumberList) {
         this.purchaseAmount = purchaseAmount;
-        this.manualLottoPurchaseCount = manualLottoPurchaseCount;
+        this.manualLottoPurchaseCount = manualLottoPurchaseNumberList.size();
         this.manualLottoPurchaseNumberList = manualLottoPurchaseNumberList;
     }
 
