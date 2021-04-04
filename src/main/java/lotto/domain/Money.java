@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.constants.Constants;
 
 public class Money {
+    private static final int UNIT_CHECK_NUMBER = 0;
+
     private int money;
 
     private Money(final int amount) {
@@ -18,7 +20,7 @@ public class Money {
         if (amount < Constants.LOTTO_PRICE) {
             throw new RuntimeException(String.format("최소 구입 가능한 금액은 %s원 입니다.", Constants.LOTTO_PRICE));
         }
-        if (amount % Constants.LOTTO_PRICE != 0) {
+        if (amount % Constants.LOTTO_PRICE != UNIT_CHECK_NUMBER) {
             throw new RuntimeException(String.format("%s원 단위로 구입할 수 있습니다.", Constants.LOTTO_PRICE));
         }
     }
