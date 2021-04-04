@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
+import step3.exception.LottoNullPointerException;
 import step3.exception.LottoNumberNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,8 +36,8 @@ class WinningLottoTest {
 
         // when
         assertThatThrownBy(()-> WinningLotto.from(lotto, bonusLottoNumber))
-                .isInstanceOf(LottoNumberNullPointerException.class)
-                .hasMessageContaining("LottoNumber 인스턴스가 null 입니다.");
+                .isInstanceOf(LottoNullPointerException.class)
+                .hasMessageContaining("Lotto 인스턴스가 null 입니다.");
 
     }
 
