@@ -21,7 +21,6 @@ public final class WinningStatus {
         }
     }
 
-
     public static final WinningStatus from(int countOfMatch, boolean matchBonus) {
         return new WinningStatus(countOfMatch, matchBonus);
     }

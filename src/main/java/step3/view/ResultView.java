@@ -88,7 +88,7 @@ public final class ResultView {
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private String getWinningResultFormat(Rank rank, int countOfMatch, int winningMoney, int winningCount) {
+    private final String getWinningResultFormat(Rank rank, int countOfMatch, int winningMoney, int winningCount) {
         if (rank == Rank.SECOND) {
             return String.format(CORRECT_WINNING_LOTTO_MESSAGE_IN_SECOND, countOfMatch, winningMoney, winningCount);
         }

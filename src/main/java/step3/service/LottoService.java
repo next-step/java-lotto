@@ -1,7 +1,5 @@
 package step3.service;
 
-
-import step3.config.AppConfig;
 import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
 import step3.domain.shop.LottoShop;
@@ -30,7 +28,7 @@ public final class LottoService {
         this.lottoShuffleStrategy = lottoShuffleStrategy;
     }
 
-    public static LottoService getInstance(LottoShuffleStrategy lottoShuffleStrategy) {
+    public static final LottoService getInstance(LottoShuffleStrategy lottoShuffleStrategy) {
         if (Objects.isNull(instance) || instance.lottoShuffleStrategy != lottoShuffleStrategy) {
             instance = new LottoService(lottoShuffleStrategy);
         }

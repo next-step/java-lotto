@@ -48,7 +48,7 @@ public enum Rank {
         return rank;
     }
 
-    private static boolean isMatchBonusAtFiveCount(Rank rank, boolean matchBonus) {
+    private static final boolean isMatchBonusAtFiveCount(Rank rank, boolean matchBonus) {
         return rank.countOfMatch == FIVE && matchBonus;
     }
 

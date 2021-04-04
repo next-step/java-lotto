@@ -10,9 +10,10 @@ import java.util.stream.Stream;
 
 public final class Lotto {
 
-    public final static int PRICE = 1000;
     private final static String COMMA_WITH_BLANK = ", ";
     private final static int STANDARD_SIZE = 6;
+
+    public final static int PRICE = 1000;
 
     private final Set<LottoNumber> lotto;
 

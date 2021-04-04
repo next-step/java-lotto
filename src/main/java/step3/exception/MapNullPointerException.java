@@ -1,6 +1,7 @@
 package step3.exception;
 
-public class MapNullPointerException extends RuntimeException{
+public final class MapNullPointerException extends RuntimeException{
+
     private final String message = "Map 인스턴스가 Null 입니다.";
 
     @Override

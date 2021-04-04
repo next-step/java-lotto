@@ -28,7 +28,7 @@ public final class WinningResult {
         }
     }
 
-    public static Map<Rank, Integer> values() {
+    public static final Map<Rank, Integer> values() {
         Map<Rank, Integer> winningMap = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             winningMap.put(rank, ZERO);
