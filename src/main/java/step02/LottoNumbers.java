@@ -9,12 +9,12 @@ public class LottoNumbers {
 
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(RandomNumberRule makeRandomNumberRule) {
-        makeNumbers(makeRandomNumberRule);
+    public LottoNumbers(NumberRule numberRule) throws Exception {
+        makeNumbers(numberRule);
     }
 
-    private void makeNumbers(RandomNumberRule makeRandomNumberRule) {
-        for (int numbers : makeRandomNumberRule.makeNumbers()) {
+    private void makeNumbers(NumberRule numberRule) throws Exception {
+        for (int numbers : numberRule.makeNumbers()) {
             lottoNumbers.add(new LottoNumber(numbers));
         }
     }

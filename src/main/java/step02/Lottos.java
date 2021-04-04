@@ -17,9 +17,9 @@ public class Lottos {
         return lottoCount;
     }
 
-    public void makeLotto(RandomNumberRule makeRandomNumberRule) {
+    public void makeLotto(NumberRule numberRule) throws Exception {
         for (int i = 0; i < lottoCount.getCount(); i++) {
-            lottos.add(new LottoNumbers(makeRandomNumberRule));
+            lottos.add(new LottoNumbers(numberRule));
         }
     }
 

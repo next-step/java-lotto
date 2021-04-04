@@ -19,4 +19,6 @@ public class LottoConfig {
     static final String START_LOTTO_SYMBOL = "[";
     static final String END_LOTTO_SYMBOL = "]";
 
+    static final String ERROR_OVER_MAX_NUMBER = "로또 숫자는 " + NUMBER_RANGE_END + "이하의 수를 입력해주세요.";
+
 }
