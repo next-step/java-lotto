@@ -4,7 +4,6 @@ import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lotto;
 import step3.domain.rank.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -22,11 +21,15 @@ public final class WinningCheckMachine {
         return WinningCheckMachineHolder.instance;
     }
 
-
     public WinningResult getWinningResult(List<Lotto> lottos, Lotto winningLotto, BonusLottoNumber bonusLottoNumber) {
         Map<Rank, Integer> winningScoreIntegerMap = new TreeMap<>();
-        lottos.stream()
-                .map(lotto -> lotto.getCorrectCount())
+        for(Lotto lotto: lottos) {
+            boolean matchBonus = bonusLottoNumber.isIncludeByLotto(lotto);
+            int countOfMatch = lotto.getCountOfMatch(winningLotto);
+            Rank rank = Rank.valueOf(countOfMatch, matchBonus);
+            winningScoreIntegerMap.put(rank, winningScoreIntegerMap.get(rank)+1);
+        }
+        return WinningResult.of(winningScoreIntegerMap);
     }
 
 }

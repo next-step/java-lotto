@@ -28,4 +28,7 @@ public final class BonusLottoNumber {
     }
 
 
+    public final boolean isIncludeByLotto(Lotto lotto) {
+        return lotto.isIncludeLottoNumber(bonusLottoNumber);
+    }
 }

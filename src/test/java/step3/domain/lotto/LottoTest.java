@@ -23,7 +23,7 @@ class LottoTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
-        comparedLottoNumber = IntStream.range(7, 13)
+        comparedLottoNumber = IntStream.range(6, 12)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
@@ -98,7 +98,7 @@ class LottoTest {
         Lotto standardLotto = Lotto.of(standardValue);
         Lotto targetLotto = Lotto.of(targetValue);
 
-        int actual = standardLotto.getCorrectCount(targetLotto);
+        int actual = standardLotto.getCountOfMatch(targetLotto);
 
         // then
         assertThat(actual).isEqualTo(expected);

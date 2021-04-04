@@ -42,6 +42,12 @@ public final class Lotto {
         }
     }
 
+    public final int getCountOfMatch(Lotto targetLotto) {
+        return (int)lotto.stream()
+                .filter(targetLotto::isIncludeLottoNumber)
+                .count();
+    }
+
     public final boolean isIncludeLottoNumber(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
@@ -58,5 +64,6 @@ public final class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
 
 }

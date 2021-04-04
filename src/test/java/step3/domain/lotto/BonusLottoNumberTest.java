@@ -6,7 +6,6 @@ import step3.exception.LottoNumberNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BonusLottoNumberTest {
 
@@ -30,8 +29,22 @@ class BonusLottoNumberTest {
         LottoNumber nullLottoNumber = null;
 
         // when and then
-        assertThatThrownBy(()-> BonusLottoNumber.valueOf(nullLottoNumber))
+        assertThatThrownBy(() -> BonusLottoNumber.valueOf(nullLottoNumber))
                 .isInstanceOf(LottoNumberNullPointerException.class)
                 .hasMessageContaining("LottoNumber 인스턴스가 null 입니다.");
+    }
+
+    @DisplayName("BonusLottoNumber 인스턴스가 로또에 포함되었는지에 대한 여부 테스트")
+    @Test
+    void 검증_로또_포함되었는지() {
+        // given
+        LottoNumber lottoNumber = LottoNumber.valueOf(1);
+        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+
+        // when
+        BonusLottoNumber bonusLottoNumber = BonusLottoNumber.valueOf(lottoNumber);
+        boolean actual = bonusLottoNumber.isIncludeByLotto(lotto);
+
+        assertThat(actual).isTrue();
     }
 }
