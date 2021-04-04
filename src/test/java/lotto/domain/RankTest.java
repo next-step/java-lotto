@@ -12,7 +12,7 @@ class RankTest {
             "5,false,5,1500000", "5,true,5,30000000", "6,false,6,2000000000"})
     void findPrize(int findCount, boolean matchBonus, int expectedCount, int expectedAmount) {
         Rank rank = Rank.valueOf(findCount, matchBonus);
-        assertThat(rank.getMatchCount()).isEqualTo(expectedCount);
+        assertThat(rank.matchCount()).isEqualTo(expectedCount);
         assertThat(rank.getAmount()).isEqualTo(expectedAmount);
     }
 }

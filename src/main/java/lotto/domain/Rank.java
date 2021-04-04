@@ -21,7 +21,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(final int matchCount, final boolean matchBonus) {
-        if (matchCount == SECOND.getMatchCount() && matchBonus) {
+        if (matchCount == SECOND.matchCount() && matchBonus) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
@@ -31,7 +31,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public int getMatchCount() {
+    public int matchCount() {
         return matchCount;
     }
 
