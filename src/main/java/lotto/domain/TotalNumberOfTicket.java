@@ -21,6 +21,10 @@ public class TotalNumberOfTicket {
         return numberOfTicket;
     }
 
+    public int minus(ManualNumberOfTicket manualNumberOfTicket) {
+        return numberOfTicket - manualNumberOfTicket.numberOfTicket();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
