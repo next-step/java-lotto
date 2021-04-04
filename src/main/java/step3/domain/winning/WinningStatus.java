@@ -26,4 +26,7 @@ public final class WinningStatus {
         return new WinningStatus(countOfMatch, matchBonus);
     }
 
+    public final int getCountOfMatch() {
+        return countOfMatch;
+    }
 }
