@@ -3,6 +3,8 @@ package step02;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step02.LottoConfig.*;
+
 public class Lottos {
     private List<LottoNumbers> lottos = new ArrayList<>();
     private LottoCount lottoCount;
@@ -25,7 +27,10 @@ public class Lottos {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoNumbers lottoNumbers : lottos) {
-            stringBuilder.append("[").append(lottoNumbers.toString()).append("]").append("\n");
+            stringBuilder.append(START_LOTTO_SYMBOL)
+                    .append(lottoNumbers.toString())
+                    .append(END_LOTTO_SYMBOL)
+                    .append(LINE_BRAKE);
         }
         return stringBuilder.toString();
     }

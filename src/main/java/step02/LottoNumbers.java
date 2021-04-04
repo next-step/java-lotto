@@ -3,6 +3,8 @@ package step02;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step02.LottoConfig.*;
+
 public class LottoNumbers {
 
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -20,10 +22,10 @@ public class LottoNumbers {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < lottoNumbers.size(); i++) {
+        for (int i = ZERO; i < lottoNumbers.size(); i++) {
             stringBuilder.append(lottoNumbers.get(i).getLottoNumber());
-            if (i < lottoNumbers.size() - 1) {
-                stringBuilder.append(", ");
+            if (i < lottoNumbers.size() - ONE) {
+                stringBuilder.append(SEPARATOR_NUMBER);
             }
         }
         return stringBuilder.toString();
