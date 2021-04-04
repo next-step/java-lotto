@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String GOT_TICKETS = "%d개를 구매했습니다";
+    private static final String GOT_TICKETS = "수동으로 %d장, 자동으로 %d장을 구매했습니다";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSED_BRACKET = "]";
     private static final String DELIMITER = ", ";
@@ -19,8 +19,8 @@ public class ResultView {
     private static final String PLUS_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String MINUS_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void purchaseTickets(int numberOfTickets) {
-        System.out.printf((GOT_TICKETS) + "%n", numberOfTickets);
+    public static void purchaseTickets(int manualNumberOfTicket, int autoNumberOfTickets) {
+        System.out.printf((GOT_TICKETS) + "%n", manualNumberOfTicket, autoNumberOfTickets);
     }
 
     public static void lottoNumbers(List<LottoNumber> lottoNumbers) {
