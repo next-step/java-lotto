@@ -55,13 +55,19 @@ class WinningLottoTest {
 
     }
 
-    @DisplayName("WinningLotto 인스턴스 당첨 상태 인스턴스 반환 여부 테스트")
+    @DisplayName("WinningLotto 인스턴스 당첨 상 반환 여부 테스트")
     @Test
     void 반환_당첨상태() {
         // given
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusLottoNumber = null;
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
 
         // when
+        WinningLotto winningLotto = WinningLotto.from(lotto, bonusLottoNumber);
+        WinningStatus winningStatus = winningLotto.getWinnigStatus();
+
+        // then
+        assertThat(winningStatus).isNotNull();
+
     }
 }
