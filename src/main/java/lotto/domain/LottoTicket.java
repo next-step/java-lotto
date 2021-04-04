@@ -9,15 +9,24 @@ public class LottoTicket {
     private static final String NUMBER_DELIMITER = ",";
 
     private final List<Lotto> lottoList;
+    private final LottoTicketType  lottoTicketType;
 
     public LottoTicket(int count) {
         validate(count);
         this.lottoList = generateLottoList(count);
+        this.lottoTicketType = LottoTicketType.AUTO;
     }
 
     public LottoTicket(List<String> lottoNumberList) {
         validate(lottoNumberList);
         this.lottoList = generateLottoList(lottoNumberList);
+        this.lottoTicketType = LottoTicketType.COMPLEX;
+    }
+
+    public LottoTicket(List<String> lottoNumberList, LottoTicketType lottoTicketType) {
+        validate(lottoNumberList);
+        this.lottoList = generateLottoList(lottoNumberList);
+        this.lottoTicketType = lottoTicketType;
     }
 
     private void validate(int count) {
