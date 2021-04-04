@@ -17,10 +17,10 @@ class LottoControllerTest {
     void purchaseLotto() {
         // given
         LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, new ArrayList<>()); // TODO: 수동구매정보 추가입력 테스트
-        LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
+        LottoPurchaseController controller = new LottoPurchaseController();
 
         // when
-        LottoTicketPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
+        LottoTicketPurchaseResponse response = controller.purchaseLottoTicket(request);
 
         // then
         assertThat(14).isEqualTo(response.getAutoPurchaseCount());
@@ -32,10 +32,10 @@ class LottoControllerTest {
     void purchaseLotto_lottoNumber_distinct() {
         // given
         LottoTicketPurchaseRequest request = new LottoTicketPurchaseRequest(14000, new ArrayList<>()); // TODO: 수동구매정보 추가입력 테스트
-        LottoAutoPurchaseController controller = new LottoAutoPurchaseController();
+        LottoPurchaseController controller = new LottoPurchaseController();
 
         // when
-        LottoTicketPurchaseResponse response = controller.purchaseLottoAutoTicket(request);
+        LottoTicketPurchaseResponse response = controller.purchaseLottoTicket(request);
 
         // then
         for (String lottoNumbers : response.getLottoNumberList()) {
