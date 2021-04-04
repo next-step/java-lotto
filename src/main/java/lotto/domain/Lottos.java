@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.LottoConstant;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +12,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int price) {
-        return of(price, new RandomGenerator());
-    }
-
-    public static Lottos of(int price, LottoNumberGenerator lottoNumberGenerator) {
+    public static Lottos newRandomLottos(int price, LottoNumberGenerator lottoNumberGenerator) {
         List<Lotto> list = new ArrayList<>();
         int count = getLottoPurchaseCount(price);
 
@@ -25,13 +23,20 @@ public class Lottos {
         return new Lottos(list);
     }
 
-    private static int getLottoPurchaseCount(int price) {
-        return price / Lotto.PRICE_OF_A_PIECE_OF_LOTTO;
+    public static Lottos newManualLottos(List<String> lottoList) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (String lotto : lottoList) {
+            Lotto manualLotto = Lotto.of(new FixedGenerator(lotto));
+            manualLottos.add(manualLotto);
+        }
+        return new Lottos(manualLottos);
     }
 
-    public Hit getWinnerStatistics(WinningNumber winningNumber) {
-        Hit hit = new Hit();
+    private static int getLottoPurchaseCount(int price) {
+        return price / LottoConstant.PRICE_OF_A_PIECE_OF_LOTTO;
+    }
 
+    public Hit getWinnerStatistics(WinningNumber winningNumber, Hit hit) {
         for (Lotto lotto : lottos) {
             int matchCount = lotto.getMatchCount(winningNumber);
             boolean isMatchBonus = lotto.isMatchBonus(winningNumber);

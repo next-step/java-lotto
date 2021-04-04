@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printPurchaseCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printPurchaseCount(int randomLottoCount, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + randomLottoCount + "개를 구매했습니다.");
     }
 
     public static void printLottoNumber(ResponseLottosDTO responseLottosDTO) {

@@ -1,15 +1,17 @@
 package lotto.domain;
 
+import lotto.constant.LottoConstant;
+import lotto.constant.LottoError;
+
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_FIRST_NUMBER = 1;
-    public static final int LOTTO_LAST_NUMBER = 45;
-    public static final int PRICE_OF_A_PIECE_OF_LOTTO = 1_000;
+    private final List<LottoNumber> lotto;
 
-    private final List<Integer> lotto;
-
-    private Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() < LottoConstant.LOTTO_SIZE_MAX) {
+            throw new IllegalArgumentException(LottoError.LOTTO_SIZE_OVER_EXCEPTION);
+        }
         this.lotto = lottoNumbers;
     }
 
@@ -32,7 +34,7 @@ public class Lotto {
                 .anyMatch(winningNumber::isMatchBonus);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lotto;
     }
 
