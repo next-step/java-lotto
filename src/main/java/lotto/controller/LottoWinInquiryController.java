@@ -5,7 +5,7 @@ import lotto.controller.dto.WinInquiryResponse;
 import lotto.controller.dto.WinStatistic;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRanks;
-import lotto.service.LottoAutoService;
+import lotto.service.LottoWinService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
 
 public class LottoWinInquiryController {
 
-    private final LottoAutoService lottoAutoService;
+    private final LottoWinService lottoWinService;
 
     public LottoWinInquiryController() {
-        this.lottoAutoService = new LottoAutoService();
+        this.lottoWinService = new LottoWinService();
     }
 
     public WinInquiryResponse inquiryWin(WinInquiryRequest request) {
-        LottoRanks lottoRanks = lottoAutoService.inquiryWin(request.getConfirmTargetList(), generateWinNumber(request.getWinNumber()), request.getBonusNumber());
+        LottoRanks lottoRanks = lottoWinService.inquiryWin(request.getConfirmTargetList(), generateWinNumber(request.getWinNumber()), request.getBonusNumber());
         return assembleWinResult(lottoRanks);
     }
 
