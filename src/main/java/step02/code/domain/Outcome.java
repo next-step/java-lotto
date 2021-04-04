@@ -18,8 +18,8 @@ public class Outcome {
       .collect(Collectors.toMap(matched -> matched, matched -> 1, Integer::sum));
   }
 
-  public float profit(int income) {
-    return (float) income / money;
+  public float profit() {
+    return (float) total / money;
   }
 
   public void add(int prize) {

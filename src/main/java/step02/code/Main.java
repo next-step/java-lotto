@@ -38,7 +38,7 @@ public class Main {
         outcome.add(size * gradeEnum.prize());
       });
     
-    ResultView.rate(outcome.profit(outcome.total()));
+    ResultView.rate(outcome.profit());
     
     InputView.close();
   } 
