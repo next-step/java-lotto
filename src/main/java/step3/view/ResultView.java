@@ -70,7 +70,6 @@ public final class ResultView {
                 .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
     }
 
-
     public final void printLottoResult(WinningResult winningResult, Money money) {
         STRING_BUILDER.setLength(ZERO);
         STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
@@ -81,14 +80,14 @@ public final class ResultView {
             int countOfMatch = rank.getCountOfMatch();
             int winningMoney = rank.getWinningMoney();
             int winningCount = winningResult.getWinningCount(rank);
-            STRING_BUILDER.append(getWinningResultFormat(rank, countOfMatch, winningMoney, winningCount));
+            STRING_BUILDER.append(getLottoResultFormat(rank, countOfMatch, winningMoney, winningCount));
         }
         double yield = doubleFormatting(getYield(winningResult, money.getMoney()));
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private final String getWinningResultFormat(Rank rank, int countOfMatch, int winningMoney, int winningCount) {
+    private final String getLottoResultFormat(Rank rank, int countOfMatch, int winningMoney, int winningCount) {
         if (rank == Rank.SECOND) {
             return String.format(CORRECT_WINNING_LOTTO_MESSAGE_IN_SECOND, countOfMatch, winningMoney, winningCount);
         }

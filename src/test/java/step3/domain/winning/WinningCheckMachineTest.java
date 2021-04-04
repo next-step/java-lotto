@@ -30,7 +30,7 @@ class WinningCheckMachineTest {
         WinningLotto winningLotto = WinningLotto.from("4, 5, 6, 7, 8, 9", 10);
 
         WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
-        WinningResult winningResult = winningCheckMachine.getWinningResult(lottos, winningLotto);
+        WinningResult winningResult = winningCheckMachine.checkUserLottoAndWinningLotto(lottos, winningLotto);
 
         assertThat(winningResult).isNotNull();
     }

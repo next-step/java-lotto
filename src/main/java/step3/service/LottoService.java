@@ -35,12 +35,12 @@ public final class LottoService {
         return instance;
     }
 
-    public final List<Lotto> getLottos(Money money) {
+    public final List<Lotto> buyLottos(Money money) {
         return lottoShop.buyLottos(money.getMoney(), lottoShuffleStrategy);
     }
 
-    public final WinningResult getWinningResult(List<Lotto> userLottos, WinningLotto winningLotto) {
-        return winningCheckMachine.getWinningResult(userLottos, winningLotto);
+    public final WinningResult matchWinningLotto(List<Lotto> userLottos, WinningLotto winningLotto) {
+        return winningCheckMachine.checkUserLottoAndWinningLotto(userLottos, winningLotto);
     }
 
 }

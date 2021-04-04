@@ -28,6 +28,10 @@ public final class WinningResult {
         }
     }
 
+    public final int getWinningCount(Rank rank) {
+        return winningResult.get(rank);
+    }
+
     public static final Map<Rank, Integer> values() {
         Map<Rank, Integer> winningMap = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
@@ -36,8 +40,6 @@ public final class WinningResult {
         return winningMap;
     }
 
-    public final int getWinningCount(Rank rank) {
-        return winningResult.get(rank);
-    }
+
 
 }

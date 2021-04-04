@@ -21,7 +21,7 @@ public final class WinningCheckMachine {
         return WinningCheckMachineHolder.instance;
     }
 
-    public final WinningResult getWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
+    public final WinningResult checkUserLottoAndWinningLotto(List<Lotto> lottos, WinningLotto winningLotto) {
         Map<Rank, Integer> winningResultMap = WinningResult.values();
         lottos.stream()
                 .map(winningLotto::getWinningStatus)

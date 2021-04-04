@@ -1,19 +1,13 @@
 package step3.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.config.AppConfig;
 import step3.domain.lotto.Lotto;
-import step3.domain.lotto.LottoNumber;
 import step3.domain.money.Money;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoServiceTest {
 
@@ -38,7 +32,7 @@ class LottoServiceTest {
 
         // when
         LottoService lottoService = LottoService.getInstance(Collections::sort);
-        List<Lotto> acutal = lottoService.getLottos(money);
+        List<Lotto> acutal = lottoService.buyLottos(money);
 
         // then
         assertThat(acutal).isEqualTo(expected);
@@ -55,7 +49,7 @@ class LottoServiceTest {
 
         // when
         LottoService lottoService = LottoService.getInstance(Collections::reverse);
-        List<Lotto> acutal = lottoService.getLottos(money);
+        List<Lotto> acutal = lottoService.buyLottos(money);
 
         // then
         assertThat(acutal).isEqualTo(expected);

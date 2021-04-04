@@ -15,14 +15,14 @@ public final class WinningStatus {
         this.matchBonus = matchBonus;
     }
 
+    public static final WinningStatus from(int countOfMatch, boolean matchBonus) {
+        return new WinningStatus(countOfMatch, matchBonus);
+    }
+
     private final void validateNegative(int countOfMatch) {
         if(countOfMatch < ZERO) {
             throw new InputNegativeAmountException();
         }
-    }
-
-    public static final WinningStatus from(int countOfMatch, boolean matchBonus) {
-        return new WinningStatus(countOfMatch, matchBonus);
     }
 
     public final int getCountOfMatch() {

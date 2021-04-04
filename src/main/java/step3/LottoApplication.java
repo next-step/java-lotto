@@ -33,11 +33,11 @@ public final class LottoApplication {
 
     public final void generateAndShowLottoList() {
         Money money = inputView.getMoneyByClient();
-        List<Lotto> userLottos = lottoService.getLottos(money);
+        List<Lotto> userLottos = lottoService.buyLottos(money);
         resultView.printLottoList(userLottos);
 
         WinningLotto winningLotto = inputView.getWinningLottoByClient();
-        WinningResult winningResult = lottoService.getWinningResult(userLottos, winningLotto);
+        WinningResult winningResult = lottoService.matchWinningLotto(userLottos, winningLotto);
         resultView.printLottoResult(winningResult, money);
 
     }

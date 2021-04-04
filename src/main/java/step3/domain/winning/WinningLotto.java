@@ -13,7 +13,6 @@ public final class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusLottoNumber;
 
-
     private WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         validateLottoNull(winningLotto);
         validateBonusLottoNumberNull(bonusLottoNumber);
