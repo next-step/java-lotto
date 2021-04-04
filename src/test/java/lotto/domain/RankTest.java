@@ -14,7 +14,7 @@ public class RankTest {
     @ParameterizedTest
     @MethodSource("provideRanks")
     void matchRankTest(int matchNum, boolean Bonus, Rank result) {
-        assertThat(Rank.matchRank(matchNum, Bonus)).isEqualTo(result);
+        assertThat(Rank.rank(matchNum, Bonus)).isEqualTo(result);
     }
 
     private static Stream<Arguments> provideRanks() {

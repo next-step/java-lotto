@@ -31,14 +31,21 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank matchRank(int matchNum, boolean Bonus) {
-        if (matchNum == SECOND.matchNo && Bonus) {
-            return SECOND;
+    public static Rank rank(int matchNum, boolean bonus) {
+        if (matchNum == SECOND.matchNo) {
+            return rankSecondAndThird(bonus);
         }
         return Arrays.stream(values())
                 .filter(rank -> rank.matchNo == matchNum)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private static Rank rankSecondAndThird(boolean bonus) {
+        if(bonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public static boolean isWinning(Rank rank) {
