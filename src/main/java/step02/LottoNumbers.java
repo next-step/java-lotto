@@ -14,6 +14,7 @@ public class LottoNumbers {
     }
 
     private void makeNumbers(NumberRule numberRule) throws Exception {
+        Validation.overMaxNumberCount(numberRule.makeNumbers().size());
         for (int numbers : numberRule.makeNumbers()) {
             lottoNumbers.add(new LottoNumber(numbers));
         }

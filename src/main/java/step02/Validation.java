@@ -11,4 +11,10 @@ public class Validation {
             throw new Exception(ERROR_OVER_MAX_NUMBER);
         }
     }
+
+    public static void overMaxNumberCount(int size) throws Exception {
+        if (size > LOTTO_NUMBER_MAX_COUNT) {
+            throw new Exception(ERROR_OVER_MAX_NUMBER_COUNT);
+        }
+    }
 }
