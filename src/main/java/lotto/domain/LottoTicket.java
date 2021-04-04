@@ -9,7 +9,7 @@ public class LottoTicket {
     private static final String NUMBER_DELIMITER = ",";
 
     private final List<Lotto> lottoList;
-    private final LottoTicketType  lottoTicketType;
+    private final LottoTicketType lottoTicketType;
 
     public LottoTicket(int count) {
         validate(count);
