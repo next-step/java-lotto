@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.controller.dto.LottoTicketPurchaseRequest;
 import lotto.controller.dto.WinInquiryRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -15,9 +16,30 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public LottoTicketPurchaseRequest inputPurchaseAmount() {
+    public LottoTicketPurchaseRequest inputPurchaseInfo() {
+        int purchaseAmount = inputPurchaseAmount();
+        int manualLottoPurchaseCount = inputManualLottoPurchaseCount();
+        return new LottoTicketPurchaseRequest(purchaseAmount, manualLottoPurchaseCount, inputManualLottoPurchaseNumberList(manualLottoPurchaseCount)); // TODO : 수동구매갯수, 수동구입번호 입력로직 추가
+    }
+
+    private int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoTicketPurchaseRequest(scanner.nextInt(), 0, null); // TODO : 수동구매갯수, 수동구입번호 입력로직 추가
+        return scanner.nextInt();
+    }
+
+    private int inputManualLottoPurchaseCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+    
+    private List<String> inputManualLottoPurchaseNumberList(int manualLottoPurchaseCount) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        scanner.nextLine();
+        List<String> manualLottoPurchaseNumberList = new ArrayList<>();
+        for (int i = 0; i < manualLottoPurchaseCount; i++) {
+            manualLottoPurchaseNumberList.add(scanner.nextLine());
+        }
+        return manualLottoPurchaseNumberList;
     }
 
     public WinInquiryRequest inputWinInquiry(List<String> confirmTargetList) {

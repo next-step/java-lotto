@@ -11,7 +11,7 @@ public class LottoAutoApplication {
         LottoAutoPurchaseController lottoAutoPurchaseController = new LottoAutoPurchaseController();
         LottoWinInquiryController lottoWinInquiryController = new LottoWinInquiryController();
 
-        LottoTicketPurchaseResponse lottoTicketPurchaseResponse = lottoAutoPurchaseController.purchaseLottoAutoTicket(inputView.inputPurchaseAmount());
+        LottoTicketPurchaseResponse lottoTicketPurchaseResponse = lottoAutoPurchaseController.purchaseLottoAutoTicket(inputView.inputPurchaseInfo());
         resultView.printPurchaseList(lottoTicketPurchaseResponse);
         System.out.println();
         resultView.printLottoWinStatistic(lottoWinInquiryController.inquiryWin(inputView.inputWinInquiry(lottoTicketPurchaseResponse.getLottoNumberList())));
