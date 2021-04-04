@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Outcome {
   private final int money;
   private final Lottos lottos;
+  private int total = 0;
 
   public Outcome(int money, Lottos lottos){
     this.money = money;
@@ -19,5 +20,13 @@ public class Outcome {
 
   public float profit(int income) {
     return (float) income / money;
+  }
+
+  public void add(int prize) {
+    total += prize;
+  }
+
+  public int total() {
+    return total;
   }
 }

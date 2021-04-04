@@ -27,17 +27,18 @@ public class Main {
 
     Outcome outcome = new Outcome(money, lottos);
 
-    int total = 0;
     Map<GradeEnum, Integer> result = outcome.statistic(winningNumber, bonus);
 
     // GradeEnum.values() 대신 none 만 안나오도록 설정해서 다시
-    for(GradeEnum gradeEnum : GradeEnum.sorted()) {
-      int size = result.getOrDefault(gradeEnum, 0);
-      ResultView.result(gradeEnum, size);
-      total += size * gradeEnum.prize();
-    }
+    GradeEnum.sorted()
+      .stream()
+      .forEach(gradeEnum -> {
+        int size = result.getOrDefault(gradeEnum, 0);
+        ResultView.result(gradeEnum, size);
+        outcome.add(size * gradeEnum.prize());
+      });
     
-    ResultView.rate(outcome.profit(total));
+    ResultView.rate(outcome.profit(outcome.total()));
     
     InputView.close();
   } 
