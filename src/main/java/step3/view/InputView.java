@@ -1,27 +1,25 @@
 package step3.view;
 
-
 import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public final class InputView {
 
     private final Scanner scanner;
-    private static InputView instance;
+
+    private static class InputViewHolder {
+        public static final InputView instance = new InputView();
+    }
 
     private InputView() {
         scanner = new Scanner(System.in);
     }
 
     public static final InputView getInstance() {
-        if (Objects.isNull(instance)) {
-            instance = new InputView();
-        }
-        return instance;
+        return InputViewHolder.instance;
     }
 
     private final int inputMoneyByClient() {
