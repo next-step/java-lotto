@@ -15,7 +15,7 @@ public class OutcomeTest {
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndResult")
   @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value)")
-  public void result(Lottos lottos, String winningNumber, Number bonus, Map<Integer, Integer> mustResult) {
+  public void result(Lottos lottos, String winningNumber, Number bonus, Map<GradeEnum, Integer> mustResult) {
     Lotto winning = Lotto.makeLottoByString(winningNumber);
     Outcome outcome = new Outcome(0, lottos);
     Map<GradeEnum, Integer> result = outcome.statistic(winning, bonus);
