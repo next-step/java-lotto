@@ -27,7 +27,7 @@ class WinningCheckMachineTest {
         // when
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(Lotto.of("1, 2, 3, 4, 5, 6"));
-        WinningLotto winningLotto = WinningLotto.from("4, 5, 6, 7, 8, 9", 7);
+        WinningLotto winningLotto = WinningLotto.from("4, 5, 6, 7, 8, 9", 10);
 
         WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
         WinningResult winningResult = winningCheckMachine.getWinningResult(lottos, winningLotto);
