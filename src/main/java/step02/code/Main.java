@@ -25,10 +25,10 @@ public class Main {
     System.out.println("당첨 통계");
     System.out.println("---------------");
 
-    Outcome outcome = new Outcome(money, lottos, winningNumber, bonus);
+    Outcome outcome = new Outcome(money, lottos);
 
     int total = 0;
-    Map<GradeEnum, Integer> result = outcome.statistic();
+    Map<GradeEnum, Integer> result = outcome.statistic(winningNumber, bonus);
 
     // GradeEnum.values() 대신 none 만 안나오도록 설정해서 다시
     for(GradeEnum gradeEnum : GradeEnum.sorted()) {

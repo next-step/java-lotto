@@ -37,4 +37,10 @@ public class Lottos {
   public List<Lotto> lottos() {
     return Collections.unmodifiableList(lottos);
   }
+
+  public List<GradeEnum> match(Lotto winningNumber, Number bonus) {
+    return lottos.stream()
+      .map(lotto -> GradeEnum.fromGrade(lotto.match(winningNumber), lotto.isMatchBonus(bonus)))
+      .collect(Collectors.toList());
+  }
 }
