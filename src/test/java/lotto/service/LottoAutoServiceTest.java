@@ -44,6 +44,20 @@ class LottoAutoServiceTest {
     }
 
     @Test
+    @DisplayName("로또 구매결과 티켓타입은 자동 티켓이다.")
+    void ticketType_Auto() {
+        // given
+        int purchaseCount = 14;
+        LottoAutoService lottoAutoService = new LottoAutoService();
+
+        // when
+        LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(purchaseCount);
+
+        // then
+        assertThat(lottoTicket.isAutoTicket()).isTrue();
+    }
+
+    @Test
     @DisplayName("inquiryWin 기본테스트")
     void inquiryWin() {
         // given
