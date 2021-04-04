@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.generator.NumberGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,12 +11,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(final NumberGenerator numberGenerator, final Money money) {
+    public static Lottos of(final List<Lotto> manualLottos, final List<Lotto> autoLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        while (money.isPossibleBuyLotto()) {
-            lottos.add(Lotto.from(numberGenerator));
-            money.buyLotto();
-        }
+        lottos.addAll(manualLottos);
+        lottos.addAll(autoLottos);
         return new Lottos(lottos);
     }
 

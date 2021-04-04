@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.factory.LottoFactory;
 import lotto.generator.TestLottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +25,9 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         this.amount = 1000;
-        this.lottos = Lottos.of(new TestLottoNumberGenerator(), Money.from(this.amount));
+        List<Lotto> manualLottos = Collections.emptyList();
+        List<Lotto> autoLottos = LottoFactory.buyAutoLottos(new TestLottoNumberGenerator(), Money.from(this.amount));
+        this.lottos = Lottos.of(manualLottos, autoLottos);
         this.lottoStatistics = LottoStatistics.from(amount);
     }
 
