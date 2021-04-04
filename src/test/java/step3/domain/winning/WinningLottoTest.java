@@ -64,7 +64,7 @@ class WinningLottoTest {
 
         // when
         WinningLotto winningLotto = WinningLotto.from(lotto, bonusLottoNumber);
-        WinningStatus winningStatus = winningLotto.getWinnigStatus();
+        WinningStatus winningStatus = winningLotto.getWinningStatus(lotto);
 
         // then
         assertThat(winningStatus).isNotNull();

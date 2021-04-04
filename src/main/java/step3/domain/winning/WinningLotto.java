@@ -10,14 +10,14 @@ import java.util.Objects;
 public final class WinningLotto {
 
     private final Lotto winningLotto;
-    private final LottoNumber bonusLotto;
+    private final LottoNumber bonusLottoNumber;
 
 
     private WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         validateLottoNull(winningLotto);
         validateBonusLottoNumberNull(bonusLottoNumber);
         this.winningLotto = winningLotto;
-        this.bonusLotto = bonusLottoNumber;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public static final WinningLotto from(String lotto, int bonusLottoNumber) {
@@ -40,5 +40,16 @@ public final class WinningLotto {
         }
     }
 
+    public final WinningStatus getWinningStatus(Lotto lotto) {
+        return WinningStatus.from(getCountOfMatch(lotto), isIncludeByLotto(lotto));
+    }
+
+    private final int getCountOfMatch(Lotto lotto) {
+        return winningLotto.getCountOfMatch(lotto);
+    }
+
+    private final boolean isIncludeByLotto(Lotto lotto) {
+        return lotto.isIncludeLottoNumber(bonusLottoNumber);
+    }
 
 }
