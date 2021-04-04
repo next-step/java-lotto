@@ -3,6 +3,7 @@ package step02.code.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -50,6 +51,31 @@ public class OutcomeTest {
         "40,41,42,43,44,45",
         new Number(7),
         Map.of(GradeEnum.FOURTH, 1, GradeEnum.NONE, 2)
+      )
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("profitTestCase")
+  @DisplayName("수익율 계산")
+  public void profit(int money, List<Integer> prizes, float result) {
+    Outcome outcome = new Outcome(money, null);
+    prizes.forEach((prize) -> outcome.add(prize));
+
+    assertThat(outcome.profit()).isEqualTo(result);
+  }
+
+  private static Stream<Arguments> profitTestCase() {
+    return Stream.of(
+      Arguments.of(
+        5000,
+        Arrays.asList(5000, 5000, 5000),
+        3.0f
+      ),
+      Arguments.of(
+        10000,
+        Arrays.asList(5000),
+        0.5f
       )
     );
   }
