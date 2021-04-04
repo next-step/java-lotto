@@ -1,8 +1,6 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package im.juniq.lotto;
+package im.juniq.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,11 +8,11 @@ public class Lotto {
 	private static final int FIRST_LOTTO_NUMBER = 1;
 	private static final int LAST_LOTTO_NUMBER = 45;
 	private static final int NUMBER_OF_PICKUP = 6;
-	private List<Integer> numbers;
+	private final List<Integer> numbers;
 
 	public Lotto() {
 		List<Integer> baseNumbers = makeBaseNumbers();
-		new ShuffleStrategyImpl().shuffle(baseNumbers);
+		new NormalShuffleStrategy().shuffle(baseNumbers);
 		numbers = pickupNumbers(baseNumbers);
 	}
 
@@ -41,15 +41,12 @@ public class Lotto {
 	}
 
 	public Winning winning(WinningNumbers winningNumbers) {
-		return Winning.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers));
+		return Winning
+				.findByMatchedCount(numberOfMatchedWinningNumber(winningNumbers), matchedBonusNumber(winningNumbers));
 	}
 
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
-		int matchedCount = 0;
-		for (int number : numbers) {
-			matchedCount += countMatched(winningNumbers, number);
-		}
-		return matchedCount;
+		return numbers.stream().mapToInt(number -> countMatched(winningNumbers, number)).sum();
 	}
 
 	private int countMatched(WinningNumbers winningNumbers, int number) {
@@ -57,5 +54,21 @@ public class Lotto {
 			return 1;
 		}
 		return 0;
+	}
+
+	private boolean matchedBonusNumber(WinningNumbers winningNumbers) {
+		int sum = numbers.stream().mapToInt(number -> countMatchedBonusNumber(winningNumbers, number)).sum();
+		return sum != 0;
+	}
+
+	private int countMatchedBonusNumber(WinningNumbers winningNumbers, int number) {
+		if (winningNumbers.matchedBonusNumber(number)) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public long prize(WinningNumbers winningNumbers) {
+		return winning(winningNumbers).amount();
 	}
 }
