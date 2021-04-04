@@ -29,4 +29,11 @@ public class ManualNumberOfTicketTest {
         TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(new PurchaseAmount(3_000), new LottoTicketPrice(1_000));
         assertThatIllegalArgumentException().isThrownBy(() -> new ManualNumberOfTicket(4, totalNumberOfTicket));
     }
+
+    @Test
+    @DisplayName("음수일 경우")
+    public void validatePositive() throws Exception {
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(new PurchaseAmount(3_000), new LottoTicketPrice(1_000));
+        assertThatIllegalArgumentException().isThrownBy(() -> new ManualNumberOfTicket(-1, totalNumberOfTicket));
+    }
 }
