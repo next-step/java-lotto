@@ -1,6 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.constant.LottoConstant;
+import lotto.domain.Hit;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.RandomGenerator;
+import lotto.domain.WinningNumber;
+import lotto.domain.Yield;
 import lotto.dto.ResponseLottosDTO;
 import lotto.dto.ResponseWinningDTO;
 import lotto.view.InputView;
@@ -15,8 +21,9 @@ public class LottoController {
         int manualLottoCount = InputView.inputManualLottoCount();
         InputView.showManualLotto();
 
-        Lottos manualLottos = createManualLotto(manualLottoCount);
-        Lottos randomLottos = Lottos.of(calculatePrice(purchaseAmount, manualLottoCount));
+        List<String> manualLottoString = exportManualLottosByInputView(manualLottoCount);
+        Lottos manualLottos = Lottos.newManualLottos(manualLottoString);
+        Lottos randomLottos = Lottos.newRandomLottos(calculatePrice(purchaseAmount, manualLottoCount), new RandomGenerator());
 
         int randomLottoCount = randomLottos.getSize();
 
@@ -28,18 +35,17 @@ public class LottoController {
         ResultView.printWinningStatistics(exportResponseWinningDTO(randomLottos, manualLottos, purchaseAmount));
     }
 
-    private int calculatePrice(int purchaseAmount, int manualLottoCount) {
-        return purchaseAmount - (manualLottoCount * Lotto.PRICE_OF_A_PIECE_OF_LOTTO);
+    private List<String> exportManualLottosByInputView(int manualLottoCount) {
+        List<String> manualLottoList = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            String manualLotto = InputView.inputManualLotto();
+            manualLottoList.add(manualLotto);
+        }
+        return manualLottoList;
     }
 
-    private Lottos createManualLotto(int manualLottoCount) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            Lotto lotto = Lotto.of(new FixedGenerator(InputView.inputManualLotto()));
-            lottoList.add(lotto);
-        }
-
-        return Lottos.of(lottoList);
+    private int calculatePrice(int purchaseAmount, int manualLottoCount) {
+        return purchaseAmount - (manualLottoCount * LottoConstant.PRICE_OF_A_PIECE_OF_LOTTO);
     }
 
     private void printLottosForCount(int count, Lottos randomLottos) {

@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import lotto.constant.LottoConstant;
+import lotto.constant.LottoError;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        if (1 > lottoNumber || lottoNumber > 45) {
-            throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
+        if (LottoConstant.LOTTO_FIRST_NUMBER > lottoNumber || lottoNumber > LottoConstant.LOTTO_LAST_NUMBER) {
+            throw new IllegalArgumentException(LottoError.LOTTO_NUMBER_OVER_EXCEPTION);
         }
         this.lottoNumber = lottoNumber;
     }

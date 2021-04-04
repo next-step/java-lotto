@@ -23,10 +23,15 @@ public enum Statistics {
 
     public static Statistics getStatisticsByMatchCount(int matchCount, boolean isMatchBonus) {
         return Arrays.stream(Statistics.values())
-                .filter(statistics -> statistics.getMatchCount() == matchCount && statistics.isMatchBonus() == isMatchBonus)
+                .filter(statistics -> statistics.isMatched(matchCount, isMatchBonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_EXIST_VALUE));
     }
+
+    private boolean isMatched(int matchCount, boolean isMatchBonus) {
+        return this.getMatchCount() == matchCount && this.isMatchBonus() == isMatchBonus;
+    }
+
 
     public int getMatchCount() {
         return matchCount;
