@@ -45,11 +45,26 @@ class LottoTest {
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
-        // when
-        assertThatThrownBy(()-> Lotto.of(sizeMissLottoNumbers))
+        // when and then
+        assertThatThrownBy(() -> Lotto.of(sizeMissLottoNumbers))
                 .isInstanceOf(LottoSizeMissMatchException.class)
                 .hasMessageContaining("로또 숫자가 맞지 않습니다.");
 
+    }
+
+    @DisplayName("Lotto 인스턴스가 특정 숫자를 포함하는지 검증 여부 테스트")
+    @Test
+    void 비교_포함한숫자() {
+        // given
+        Set<LottoNumber> inputValue = lottoNumbers;
+
+        // when
+        Lotto lotto = Lotto.of(inputValue);
+
+        boolean secondActual = lotto.isInclude(LottoNumber.valueOf(1));
+
+        // then
+        assertThat(secondActual).isTrue();
     }
 
 }
