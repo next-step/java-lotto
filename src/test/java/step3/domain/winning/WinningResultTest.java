@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step2.domain.winning.WinningScore;
 import step3.domain.rank.Rank;
 import step3.exception.MapNullPointerException;
 
@@ -25,9 +24,9 @@ class WinningResultTest {
     @BeforeEach
     void beforeEach() {
         map = WinningResult.values();
-        int value = 0;
+        int value = 6;
         for (Rank rank : Rank.values()) {
-            map.put(rank, map.get(rank) + (++value));
+            map.put(rank, map.get(rank) + (value--));
         }
     }
 
@@ -84,7 +83,7 @@ class WinningResultTest {
         WinningResult winningResult = WinningResult.of(map);
 
         // when
-        int actual = winningResult.getWinningCount(Rank.MISS);
+        int actual = winningResult.getWinningCount(rank);
 
         // then
         assertThat(actual).isEqualTo(expected);

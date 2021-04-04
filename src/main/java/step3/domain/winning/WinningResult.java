@@ -36,4 +36,7 @@ public final class WinningResult {
         return winningMap;
     }
 
+    public final int getWinningCount(Rank rank) {
+        return winningResult.get(rank);
+    }
 }

@@ -78,8 +78,8 @@ public final class ResultView {
         for (Rank rank : ranks) {
             int countOfMatch = rank.getCountOfMatch();
             int winningMoney = rank.getWinningMoney();
-            int winningCount = winningResult.getMatchCount(rank);
-            STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, countOfMatch, winningCount, winningCount));
+            int winningCount = winningResult.getWinningCount(rank);
+            STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, countOfMatch, winningMoney, winningCount));
         }
         double yield = doubleFormatting(getYield(winningResult, money.getMoney()));
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
@@ -113,7 +113,7 @@ public final class ResultView {
     }
 
     private final int getProfit(Rank rank, WinningResult winningResult) {
-        return Math.multiplyExact(rank.getWinningMoney(), winningResult.getMatchCount(winningScore));
+        return Math.multiplyExact(rank.getWinningMoney(), winningResult.getWinningCount(rank));
     }
 
 }
