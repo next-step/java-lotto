@@ -52,3 +52,30 @@
 - view
   - InputView
   - ResultView
+  
+## 구조(구현 후)
+- constants
+  - Constants
+
+- controller
+  - LottoController
+
+- domain
+  - Lotto
+  - Lottos
+  - LottoStatistics
+  - Money
+  - Number
+  - Rank
+  - WinningLotto
+
+- factory
+  - LottoFactory
+
+- generator
+  - LottoNumberGenerator
+  - NumberGenerator
+
+- view
+  - InputView
+  - ResultView
