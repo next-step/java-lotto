@@ -19,7 +19,7 @@ public class InputView {
     public LottoTicketPurchaseRequest inputPurchaseInfo() {
         int purchaseAmount = inputPurchaseAmount();
         int manualLottoPurchaseCount = inputManualLottoPurchaseCount();
-        return new LottoTicketPurchaseRequest(purchaseAmount, manualLottoPurchaseCount, inputManualLottoPurchaseNumberList(manualLottoPurchaseCount)); // TODO : 수동구매갯수, 수동구입번호 입력로직 추가
+        return new LottoTicketPurchaseRequest(purchaseAmount, manualLottoPurchaseCount, inputManualLottoPurchaseNumberList(manualLottoPurchaseCount));
     }
 
     private int inputPurchaseAmount() {
