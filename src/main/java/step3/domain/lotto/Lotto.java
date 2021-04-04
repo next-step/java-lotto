@@ -42,7 +42,7 @@ public final class Lotto {
         }
     }
 
-    public final boolean isInclude(LottoNumber lottoNumber) {
+    public final boolean isIncludeLottoNumber(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
 
