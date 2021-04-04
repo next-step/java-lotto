@@ -6,7 +6,7 @@ public class LottoNumber {
     public static final int LOTTO_NUMBER_RANGE_MIN = 1;
     public static final int LOTTO_NUMBER_RANGE_MAX = 45;
 
-    private Integer lottoNumber;
+    private final Integer lottoNumber;
 
     public LottoNumber(Integer lottoNumber) {
         if (lottoNumber == null

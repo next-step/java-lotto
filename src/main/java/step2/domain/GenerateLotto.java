@@ -13,7 +13,7 @@ public class GenerateLotto {
     public static final int LOTTO_PRICE = 1_000;
     public static final int LOTTO_RANGE = 6;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
     private int cash;
 
     public GenerateLotto(List<Integer> number, int cash) {
