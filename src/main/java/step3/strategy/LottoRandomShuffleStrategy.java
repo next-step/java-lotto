@@ -1,6 +1,6 @@
 package step3.strategy;
 
-import step2.domain.lotto.LottoNumber;
+import step3.domain.lotto.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,4 +24,5 @@ public final class LottoRandomShuffleStrategy implements LottoShuffleStrategy {
     public void shuffle(List<LottoNumber> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
     }
+
 }

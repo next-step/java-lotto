@@ -31,7 +31,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(lottoNumber);
     }
 
-    public static List<LottoNumber> values() {
+    public static final List<LottoNumber> values() {
         return new ArrayList<>(CACHE.values());
     }
 
@@ -39,6 +39,19 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber < MINIMUM || MAXIMUM < lottoNumber) {
             throw new LottoNumberOutOfRangeException();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override
