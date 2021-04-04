@@ -29,7 +29,7 @@ public class LottoTest {
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
-        LottoResultDTO dto = lottos.compareMathNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")));
+        LottoResultDTO dto = lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")));
         assertThat(dto.getMath3()).isEqualTo(1);
         assertThat(dto.getMath4()).isEqualTo(1);
         assertThat(dto.getMath5()).isEqualTo(1);

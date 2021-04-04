@@ -23,20 +23,20 @@ public class Lottos {
         }
     }
 
-    public LottoResultDTO compareMathNumber(LottoNumbers winnerNumbers) {
+    public LottoResultDTO compareMatchNumber(LottoNumbers winnerNumbers) {
         LottoResultDTO resultDTO = new LottoResultDTO();
         for (LottoNumbers numbers : lottos) {
-            int mathCount = numbers.countCompareMathNumber(winnerNumbers);
-            if (mathCount == 3) {
+            int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
+            if (matchCount == Rank.RANK.FOURTH.getMatchCount()) {
                 resultDTO.setMath3(resultDTO.getMath3() + ONE);
             }
-            if (mathCount == 4) {
+            if (matchCount == Rank.RANK.THIRD.getMatchCount()) {
                 resultDTO.setMath4(resultDTO.getMath4() + ONE);
             }
-            if (mathCount == 5) {
+            if (matchCount == Rank.RANK.SECOND.getMatchCount()) {
                 resultDTO.setMath5(resultDTO.getMath5() + ONE);
             }
-            if (mathCount == 6) {
+            if (matchCount == Rank.RANK.FIRST.getMatchCount()) {
                 resultDTO.setMath6(resultDTO.getMath6() + ONE);
             }
         }

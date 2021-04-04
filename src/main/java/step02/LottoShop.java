@@ -13,8 +13,9 @@ public class LottoShop {
 
     public LottoResultDTO showLottoResult() throws Exception {
         LottoNumbers lottoWinner = new LottoNumbers(new InputNumberRule(InputView.inputLastWinnerNumber()));
-        LottoResultDTO resultDTO = lottos.compareMathNumber(lottoWinner);
-        Yield.setYield(money, resultDTO);
+        LottoResultDTO resultDTO = lottos.compareMatchNumber(lottoWinner);
+        resultDTO.setYield(Rank.calculateTotalReward(money, resultDTO));
+
         return resultDTO;
     }
 }

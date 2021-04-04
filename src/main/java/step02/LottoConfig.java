@@ -8,6 +8,8 @@ public class LottoConfig {
 
     static final int ZERO = 0;
     static final int ONE = 1;
+    static final int ONE_HUNDRED = 100;
+    static final double ONE_HUNDRED_D = 100.0;
 
     static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
     static final String INPUT_LAST_WINNER_NUMBER = "지난주 당첨 번호를 입력해주세요.";
