@@ -6,6 +6,7 @@ import lotto.utils.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
@@ -14,11 +15,13 @@ public class LottoApplication {
         PurchaseAmount purchaseAmount = createPurchaseAmount();
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
         printLottoTickets(lottoTickets);
+
         WinningNumbers winningNumbers = createWinningNumbers();
         BonusBall bonusBall = createBonusBall(winningNumbers);
         RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
         matchWith(ranksCount, bonusBall);
         printStatistics(createRanksCountDto(ranksCount));
+
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
     }
@@ -36,9 +39,57 @@ public class LottoApplication {
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
         TicketOffice ticketOffice = new TicketOffice(lottoTicketPrice);
+
         TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, lottoTicketPrice);
-        ResultView.purchaseTickets(totalNumberOfTicket.numberOfTicket());
-        return ticketOffice.sale(totalNumberOfTicket);
+        ManualNumberOfTicket manualNumberOfTicket = manualNumberOfTicket(totalNumberOfTicket);
+        AutoNumberOfTicket autoNumberOfTicket = new AutoNumberOfTicket(manualNumberOfTicket, totalNumberOfTicket);
+
+        LottoTickets manualLottoTickets = createManualLottoTickets(manualNumberOfTicket);
+        LottoTickets autoLottoTickets = createAutoLottoTickets(totalNumberOfTicket, manualNumberOfTicket);
+        ResultView.purchaseTickets(manualNumberOfTicket.numberOfTicket(), autoNumberOfTicket.numberOfTicket());
+
+        return ticketOffice.sale(manualLottoTickets, autoLottoTickets);
+    }
+
+    private static ManualNumberOfTicket manualNumberOfTicket(TotalNumberOfTicket totalNumberOfTicket) {
+        try {
+            return new ManualNumberOfTicket(InputView.manualLottoTicketCount(), totalNumberOfTicket);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return manualNumberOfTicket(totalNumberOfTicket);
+        }
+    }
+
+    private static LottoTickets createManualLottoTickets(ManualNumberOfTicket manualNumberOfTicket) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+
+        InputView.manualLottoNumberPhrase();
+        for (int i = 0; i < manualNumberOfTicket.numberOfTicket(); i++) {
+            LottoTicket manualLottoTicket = manualLottoTicket();
+            manualLottoTickets.add(manualLottoTicket);
+        }
+
+        return new LottoTickets(manualLottoTickets);
+    }
+
+    private static LottoTicket manualLottoTicket() {
+        try {
+            List<String> manualLottoNumbers = SplitUtil.splitByComma(InputView.manualLottoNumbers());
+            return new LottoTicket(LottoNumbers.from(manualLottoNumbers));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return manualLottoTicket();
+        }
+    }
+
+    private static LottoTickets createAutoLottoTickets(TotalNumberOfTicket totalNumberOfTicket, ManualNumberOfTicket manualNumberOfTicket) {
+        LottoTickets autoLottoTickets = new LottoTickets(new ArrayList<>());
+
+        for (int i = 0; i < totalNumberOfTicket.minus(manualNumberOfTicket); i++) {
+            autoLottoTickets.add(new LottoTicket(new LottoNumbers()));
+        }
+
+        return autoLottoTickets;
     }
 
     private static void printLottoTickets(LottoTickets lottoTickets) {
@@ -69,8 +120,7 @@ public class LottoApplication {
     }
 
     private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        return ranksCount;
+        return new RanksCount(winningNumbers, lottoTickets);
     }
 
     private static void matchWith(RanksCount ranksCount, BonusBall bonusBall) {
