@@ -35,7 +35,6 @@ public final class Lotto {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-
     private final void validateSize(Set<LottoNumber> lotto) {
         if (lotto.size() != STANDARD_SIZE) {
             throw new LottoSizeMissMatchException();
@@ -43,13 +42,17 @@ public final class Lotto {
     }
 
     public final int getCountOfMatch(Lotto targetLotto) {
-        return (int)lotto.stream()
+        return (int) lotto.stream()
                 .filter(targetLotto::isIncludeLottoNumber)
                 .count();
     }
 
     public final boolean isIncludeLottoNumber(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+    public final Set<LottoNumber> getLottoNumbers() {
+        return lotto;
     }
 
     @Override
