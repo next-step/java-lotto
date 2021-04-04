@@ -17,15 +17,24 @@ public final class LottoBalls {
   }
 
   public LottoBalls(String numbersString) {
+    String[] numbersSplitted = splitNumberString(numbersString);
+    this.lottoBalls = createLottoBallList(numbersSplitted);
+  }
+
+  private String[] splitNumberString(String numbersString) {
     String[] numbersSplitted = numbersString.split(",");
     if (numbersSplitted.length != SIX) {
       throw new IllegalArgumentException("로또 공 개수가 6개가 아닙니다.");
     }
+    return numbersSplitted;
+  }
+
+  private List<LottoBall> createLottoBallList(String[] numbersSplitted) {
     List<LottoBall> lottoBallList = new ArrayList<>();
     for (String numberString : numbersSplitted) {
       lottoBallList.add(new LottoBall(Integer.parseInt(numberString)));
     }
-    this.lottoBalls = lottoBallList;
+    return lottoBallList;
   }
 
   public int countContainingWinNumbers(LottoBalls winLottoBalls) {

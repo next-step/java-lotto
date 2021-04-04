@@ -4,20 +4,23 @@ import java.util.List;
 
 public final class LottoGame {
 
-  private final LottoTryCount lottoTryCount;
+  private final int manualTryCount;
+  private final int autoTryCount;
   private final List<LottoBalls> lottoBallsList;
 
-  public LottoGame(LottoTryCount lottoTryCount, final List<LottoBalls> lottoBallsList) {
-    this.lottoTryCount = lottoTryCount;
+  public LottoGame(
+      final int manualTryCount, final int autoTryCount, final List<LottoBalls> lottoBallsList) {
+    this.manualTryCount = manualTryCount;
+    this.autoTryCount = autoTryCount;
     this.lottoBallsList = lottoBallsList;
   }
 
   public int getManualTryCount() {
-    return lottoTryCount.getManualTryCount();
+    return manualTryCount;
   }
 
   public int getAutoTryCount() {
-    return lottoTryCount.getAutoTryCount();
+    return autoTryCount;
   }
 
   public Statistics selectPrizeWinning(WinningBall winBalls) {
