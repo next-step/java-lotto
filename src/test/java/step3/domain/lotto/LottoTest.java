@@ -15,10 +15,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
 
     private Set<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> comparedLottoNumber;
 
     @BeforeEach
     void beforeEach() {
         lottoNumbers = IntStream.range(1, 7)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+
+        comparedLottoNumber = IntStream.range(7, 13)
                 .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
@@ -79,6 +84,24 @@ class LottoTest {
 
         // then
         assertThat(actual).isTrue();
+    }
+
+    @DisplayName("Lotto 인스턴스가 특정 숫자를 몇개 포함하는지 검증 여부 테스트")
+    @Test
+    void 비교_포함한숫자_갯수() {
+        // given
+        Set<LottoNumber> standardValue = lottoNumbers;
+        Set<LottoNumber> targetValue = comparedLottoNumber;
+        int expected = 1;
+
+        // when
+        Lotto standardLotto = Lotto.of(standardValue);
+        Lotto targetLotto = Lotto.of(targetValue);
+
+        int actual = standardLotto.getCorrectCount(targetLotto);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 
 }

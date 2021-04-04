@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class WinningResult {
 
-    private Map<Rank, Integer> winningResult;
+    private final Map<Rank, Integer> winningResult;
 
     private WinningResult(Map<Rank, Integer> winningResult) {
         this.winningResult = winningResult;
@@ -15,5 +15,6 @@ public class WinningResult {
     public static WinningResult of(Map<Rank, Integer> winningResult) {
         return new WinningResult(winningResult);
     }
+
 
 }
