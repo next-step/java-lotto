@@ -22,7 +22,7 @@ class NumberTest {
 
     // then
     assertThat(number)
-            .isEqualTo(new Number(123));
+            .isEqualTo(Number.create(123));
   }
 
   @ParameterizedTest

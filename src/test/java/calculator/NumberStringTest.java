@@ -20,6 +20,6 @@ class NumberStringTest {
 
     // then
     assertThat(numberString)
-            .isEqualTo(new NumberString(expected));
+            .isEqualTo(NumberString.create(expected));
   }
 }

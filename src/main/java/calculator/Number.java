@@ -7,12 +7,16 @@ public class Number {
 
   private final int number;
 
-  public Number(int number) {
+  private Number(int number) {
     this.number = number;
   }
 
+  public static Number create(int number) {
+    return new Number(number);
+  }
+
   public static Number zero() {
-    return new Number(0);
+    return Number.create(0);
   }
 
   public static Number positiveValueOf(String str) {
@@ -20,7 +24,7 @@ public class Number {
       throw new RuntimeException(String.format("입력 값(%s)에 숫자 이외의 문자열 또는 음수를 입력할 수 없습니다.", str));
     }
 
-    return new Number(Integer.parseInt(str));
+    return Number.create(Integer.parseInt(str));
   }
 
   public Number sum(Number other) {

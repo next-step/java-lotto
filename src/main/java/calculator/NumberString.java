@@ -10,13 +10,18 @@ public class NumberString {
 
   private final String numberString;
 
-  public NumberString(String numberString) {
+  private NumberString(String numberString) {
     this.numberString = numberString;
+  }
+
+  public static NumberString create(String numberString) {
+    return new NumberString(numberString);
   }
 
   public static NumberString generateNumberString(String input) {
     String blankSafeString = defaultBlankString(input, "0");
-    return new NumberString(defaultBlankString(findGroup(blankSafeString, CUSTOM_DELIMITER_REGEX, 2), blankSafeString));
+    String numberString = defaultBlankString(findGroup(blankSafeString, CUSTOM_DELIMITER_REGEX, 2), blankSafeString);
+    return create(numberString);
   }
 
   public String getNumberString() {

@@ -19,7 +19,7 @@ public class StringAdditionCalculator {
   }
 
   public Number sum() {
-    return PositiveNumbers.create(delimiter, numberString)
+    return PositiveNumbers.generate(delimiter, numberString)
             .sum();
   }
 }
