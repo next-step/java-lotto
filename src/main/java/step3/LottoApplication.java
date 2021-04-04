@@ -1,5 +1,6 @@
 package step3;
 
+import step3.config.AppConfig;
 import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
 import step3.domain.winning.WinningLotto;
@@ -18,7 +19,7 @@ public final class LottoApplication {
     private LottoApplication() {
         this.inputView = InputView.getInstance();
        //this.resultView = ResultView.getInstance();
-        this.lottoService = LottoService.getInstance();
+        this.lottoService = LottoService.getInstance(AppConfig.lottoShuffleStrategy());
     }
 
     public static final LottoApplication newInstance() {
