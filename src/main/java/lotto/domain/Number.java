@@ -2,20 +2,31 @@ package lotto.domain;
 
 import lotto.constants.Constants;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number {
+    private static final Map<Integer, Number> numbers = new HashMap<>();
+
     private final int number;
+
+    static {
+        for (int i = Constants.LOTTO_MIN_BOUND; i < Constants.LOTTO_MAX_BOUND; i++) {
+            numbers.put(i, new Number(i));
+        }
+    }
 
     private Number(final int number) {
         this.number = number;
     }
 
-    public static Number from(final int number) {
-        if (number < Constants.LOTTO_MIN_BOUND || number > Constants.LOTTO_MAX_BOUND) {
+    public static Number from(final int num) {
+        Number number = numbers.get(num);
+        if (number == null) {
             throw new RuntimeException("로또에서 가능한 범위를 초과한 숫자입니다.");
         }
-        return new Number(number);
+        return number;
     }
 
     public int getNumber() {
