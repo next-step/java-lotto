@@ -80,4 +80,12 @@ public class LottoTicket {
         return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList()));
     }
 
+    public boolean isAutoTicket() {
+        return this.lottoTicketType == LottoTicketType.AUTO;
+    }
+
+    public boolean isManualTicket() {
+        return this.lottoTicketType == LottoTicketType.MANUAL;
+    }
+
 }
