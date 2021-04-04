@@ -22,9 +22,15 @@ public class LottoNumbers {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoNumbers from(List<Integer> lottoNumbers) {
+    public static LottoNumbers from(List<String> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
                 .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    public static LottoNumbers from(int... lottoNumbers) {
+        return new LottoNumbers(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
