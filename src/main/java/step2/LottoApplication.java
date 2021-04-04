@@ -15,7 +15,9 @@ public class LottoApplication {
         Lotto lotto = new Lotto();
         Seed seed = new Seed(InputView.getSeed());
 
-        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
+        String manualGames = InputView.getManualGames(InputView.getManualCount());
+        lotto.initManualGames(manualGames);
+        lotto.initAutoGames(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
 
         OutputView.printGameSize(lotto);
         OutputView.printGames(lotto);

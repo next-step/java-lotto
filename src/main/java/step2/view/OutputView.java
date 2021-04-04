@@ -1,6 +1,10 @@
 package step2.view;
 
+import static step2.util.StringConstant.DELIMITER_COMMA;
 import static step2.util.StringConstant.NEW_LINE;
+import static step2.view.Message.BY_AUTO;
+import static step2.view.Message.BY_MANUAL;
+import static step2.view.Message.GAME_SIZE;
 import static step2.view.Message.SAME_COUNT;
 
 import java.util.Arrays;
@@ -13,7 +17,15 @@ import step2.domain.Rank;
 public class OutputView {
 
     public static void printGameSize(Lotto lotto) {
-        System.out.println(lotto.size() + Message.GAME_SIZE);
+        StringBuilder gameSize = new StringBuilder();
+        gameSize.append(BY_MANUAL)
+            .append(lotto.manualGameSize())
+            .append(DELIMITER_COMMA)
+            .append(" ")
+            .append(BY_AUTO)
+            .append(lotto.autoGameSize())
+            .append(GAME_SIZE);
+        System.out.println(gameSize);
     }
 
     public static void printGames(Lotto lotto) {
@@ -35,7 +47,7 @@ public class OutputView {
                     .append(SAME_COUNT)
                     .append(rank.getWinningMoney())
                     .append(" - ")
-                    .append(candidateSize(candidate,rank))
+                    .append(candidateSize(candidate, rank))
                     .append(NEW_LINE);
             });
 
@@ -48,7 +60,7 @@ public class OutputView {
 
     private static int candidateSize(Map<Rank, List<Game>> candidate, Rank rank) {
         List<Game> games = candidate.get(rank);
-        if(games == null){
+        if (games == null) {
             return 0;
         }
         return games.size();
