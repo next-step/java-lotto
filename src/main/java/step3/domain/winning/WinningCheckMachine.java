@@ -1,4 +1,4 @@
-package step3.domain.check;
+package step3.domain.winning;
 
 public final class WinningCheckMachine {
 
