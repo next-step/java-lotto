@@ -13,6 +13,8 @@ public enum GradeEnum {
   FIFTH(3, 5000),
   NONE(0, 0);
 
+  private static final int SECOND_OR_THIRD_NUMBER = 5;
+
   private final int matched;
   private final int prizeMoney;
 
@@ -30,7 +32,7 @@ public enum GradeEnum {
   }
 
   public static boolean isSecond(int matched, GradeEnum gradeEnum, boolean isMatchBonus) {
-    if(matched != 5) {
+    if(matched != SECOND_OR_THIRD_NUMBER) {
       return true;
     }
     if(isMatchBonus) {
