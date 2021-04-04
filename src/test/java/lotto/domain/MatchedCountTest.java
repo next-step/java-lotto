@@ -4,8 +4,6 @@ import lotto.enums.WinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -15,8 +13,8 @@ public class MatchedCountTest {
     @DisplayName("매칭된 수 객체 생성")
     public void create() throws Exception {
         //given
-        LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
 
         //when
         MatchedCount matchedCount = new MatchedCount(winningNumbers.lottoNumbers(), lottoNumbers.lottoNumbers());

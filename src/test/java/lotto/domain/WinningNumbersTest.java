@@ -24,7 +24,7 @@ public class WinningNumbersTest {
     public void matchedCountWith() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
 
         //when
         MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoNumbers.lottoNumbers());
