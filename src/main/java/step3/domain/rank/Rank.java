@@ -1,4 +1,4 @@
-package step3.rank;
+package step3.domain.rank;
 
 import java.util.Arrays;
 
@@ -34,14 +34,14 @@ public enum Rank {
                 .findFirst()
                 .orElse(Rank.MISS);
 
-        if (isNotMatchBonusAtFiveCount(matchBonus, rank)) {
+        if (isNoMatchBonusAtFiveCount(matchBonus, rank)) {
             rank = Rank.THIRD;
         }
 
         return rank;
     }
 
-    private static boolean isNotMatchBonusAtFiveCount(boolean matchBonus, Rank rank) {
+    private static boolean isNoMatchBonusAtFiveCount(boolean matchBonus, Rank rank) {
         return rank.countOfMatch == FIVE && matchBonus == false;
     }
 

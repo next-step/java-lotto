@@ -1,4 +1,4 @@
-package step3.rank;
+package step3.domain.rank;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
