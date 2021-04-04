@@ -39,9 +39,9 @@ public final class InputView {
     public final Money getMoneyByClient() {
         return Money.valueOf(inputMoneyByClient());
     }
-
+/*
     public final Lotto getWinningLottoByClient() {
         return Lotto.of(inputLottoNumbersByClient());
     }
-
+*/
 }

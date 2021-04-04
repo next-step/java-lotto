@@ -24,6 +24,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
+    public static final LottoNumber valueOf(String lottoNumber) {
+        return valueOf(Integer.valueOf(lottoNumber));
+    }
+
     public static final LottoNumber valueOf(int lottoNumber) {
         if (CACHE.containsKey(lottoNumber)) {
             return CACHE.get(lottoNumber);
