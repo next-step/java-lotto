@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,12 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoNumbers(String[] lottoNumbers) {
+        this.lottoNumbers = Arrays.stream(lottoNumbers)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
+
     /**
      * 로또번호를 제공
      * @return
@@ -30,6 +37,10 @@ public class LottoNumbers {
     public void mark() {
         Collections.shuffle(lottoNumbers);
         shuffle(lottoNumbers);
+    }
+
+    public void mark(List<Integer> manual) {
+        this.lottoNumbers = manual;
     }
 
     /**
@@ -59,5 +70,9 @@ public class LottoNumbers {
 
     public boolean contains(int win) {
         return this.lottoNumbers.contains(win);
+    }
+
+    public int contains(int win, int correct) {
+        return (this.lottoNumbers.contains(win)) ? correct + 1 : correct;
     }
 }

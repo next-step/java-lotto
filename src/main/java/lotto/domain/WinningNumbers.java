@@ -33,9 +33,7 @@ public class WinningNumbers {
         int correct = 0;
         boolean bonus = false;
         for (int win : winNumbers) {
-            if (lottoNumber.contains(win)) {
-                correct++;
-            }
+            correct = lottoNumber.contains(win, correct);
         }
         if (lottoNumber.contains(bonusNumber)) {
             bonus = true;

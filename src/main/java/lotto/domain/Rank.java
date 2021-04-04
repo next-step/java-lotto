@@ -11,13 +11,9 @@ public enum Rank {
     private int countOfMatch;
     private int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-    }
-
-    public int getCountOfMatch() {
-        return countOfMatch;
     }
 
     public int getWinningMoney() {
@@ -27,12 +23,17 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank rank = null;
         for (Rank value : values()) {
-            if (value.countOfMatch == countOfMatch) {
-                rank = value;
-            }
+            rank = isCorrect(countOfMatch, rank, value);
         }
         if (matchBonus && rank == THIRD) {
             rank = SECOND;
+        }
+        return rank;
+    }
+
+    private static Rank isCorrect(int countOfMatch, Rank rank, Rank value) {
+        if (value.countOfMatch == countOfMatch) {
+            rank = value;
         }
         return rank;
     }
