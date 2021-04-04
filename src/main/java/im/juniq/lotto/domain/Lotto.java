@@ -1,8 +1,10 @@
 package im.juniq.lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	private static final int FIRST_LOTTO_NUMBER = 1;
@@ -20,6 +22,10 @@ public class Lotto {
 		List<Integer> baseNumbers = makeBaseNumbers();
 		shuffleStrategy.shuffle(baseNumbers);
 		numbers = pickupNumbers(baseNumbers);
+	}
+
+	public Lotto(String lotto) {
+		numbers = Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList());
 	}
 
 	public List<Integer> numbers() {
