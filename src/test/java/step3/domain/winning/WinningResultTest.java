@@ -3,6 +3,7 @@ package step3.domain.winning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.rank.Rank;
+import step3.exception.MapNullPointerException;
 
 import java.util.EnumMap;
 import java.util.Map;
