@@ -58,4 +58,17 @@ public class LottoStoreTest {
             lottoStore.lottoCoupon(paymentLessThanPrice);
         });
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"9800:9:true", "14000:14:true", "5000:7:false"}, delimiter = ':')
+    public void purchasable(String paymentValue, String countValue, String expectedValue) {
+        final int payment = Integer.parseInt(paymentValue);
+        final int count = Integer.parseInt(countValue);
+        final boolean expected = Boolean.parseBoolean(expectedValue);
+
+
+        final boolean result = new LottoStore().purchasable(payment, count);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
