@@ -24,9 +24,9 @@ class WinningResultTest {
     @BeforeEach
     void beforeEach() {
         map = WinningResult.values();
-        int value = 6;
+        int value = 0;
         for (Rank rank : Rank.values()) {
-            map.put(rank, map.get(rank) + (value--));
+            map.put(rank, map.get(rank) + (++value));
         }
     }
 

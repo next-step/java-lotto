@@ -5,12 +5,12 @@ import step3.domain.winning.WinningStatus;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
+    MISS(0, 0),
     FIFTH(3, 5_000),
-    MISS(0, 0);
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private static final int FIVE = 5;
 
@@ -41,15 +41,15 @@ public enum Rank {
                 .findFirst()
                 .orElse(Rank.MISS);
 
-        if (isNoMatchBonusAtFiveCount(matchBonus, rank)) {
-            rank = Rank.THIRD;
+        if (isMatchBonusAtFiveCount(rank, matchBonus)) {
+            rank = Rank.SECOND;
         }
 
         return rank;
     }
 
-    private static boolean isNoMatchBonusAtFiveCount(boolean matchBonus, Rank rank) {
-        return rank.countOfMatch == FIVE && matchBonus == false;
+    private static boolean isMatchBonusAtFiveCount(Rank rank, boolean matchBonus) {
+        return rank.countOfMatch == FIVE && matchBonus;
     }
 
 
