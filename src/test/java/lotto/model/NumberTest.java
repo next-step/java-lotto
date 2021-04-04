@@ -20,7 +20,7 @@ public class NumberTest {
     @DisplayName("create Number by String value Test : success")
     @ValueSource(strings = {"4", "6", "7", "43", "23"})
     void createNumberByStringTest(String input) {
-        assertThat(new Number(input)).isEqualTo(Integer.parseInt(input));
+        assertThat(new Number(input).value()).isEqualTo(Integer.parseInt(input));
     }
 
     @ParameterizedTest

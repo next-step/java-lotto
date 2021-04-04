@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
     private int number;
 
     public Number(int number) {
@@ -31,5 +31,20 @@ public class Number {
 
     public int value() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(Number o) {
+        if (this.number < o.number){
+            return -1;
+        } else if (this.number > o.number){
+            return 1;
+        }
+        return 0;
     }
 }
