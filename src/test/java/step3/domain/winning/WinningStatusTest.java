@@ -24,7 +24,7 @@ class WinningStatusTest {
         assertThat(winningStatus).isNotNull();
     }
 
-    @DisplayName("WinningStatus 인스턴스 음수 반환 여부 테스트")
+    @DisplayName("WinningStatus 인스턴스 음수 주입시 예외처리 여부 테스트")
     @Test
     void 검증_반환() {
         // given
