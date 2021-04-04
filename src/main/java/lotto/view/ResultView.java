@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ResultView {
     public void printPurchaseList(LottoTicketPurchaseResponse response) {
-        System.out.println("수동으로 " + response.getManualPurchaseCount() + "장, 자동으로 " + response.getAutoPurchaseCount() + "장을 구매했습니다.");
+        System.out.println("\n수동으로 " + response.getManualPurchaseCount() + "장, 자동으로 " + response.getAutoPurchaseCount() + "장을 구매했습니다.");
         printLottoNumberList(response.getLottoNumberList());
     }
 

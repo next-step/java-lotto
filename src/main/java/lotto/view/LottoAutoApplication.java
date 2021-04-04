@@ -13,7 +13,6 @@ public class LottoAutoApplication {
 
         LottoTicketPurchaseResponse lottoTicketPurchaseResponse = lottoPurchaseController.purchaseLottoTicket(inputView.inputPurchaseInfo());
         resultView.printPurchaseList(lottoTicketPurchaseResponse);
-        System.out.println();
         resultView.printLottoWinStatistic(lottoWinInquiryController.inquiryWin(inputView.inputWinInquiry(lottoTicketPurchaseResponse.getLottoNumberList())));
     }
 }
