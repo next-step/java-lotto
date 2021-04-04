@@ -37,6 +37,21 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
+    @DisplayName("Lotto 인스턴스 문자열로 생성 여부 테스트")
+    @Test
+    void 생성_문자열() {
+        // given
+        Set<LottoNumber> inputValue = lottoNumbers;
+        String stringInputValue = "1, 2, 3, 4, 5, 6";
+
+        // when
+        Lotto expected = Lotto.of(inputValue);
+        Lotto actual = Lotto.of(stringInputValue);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
     @DisplayName("Lotto 인스턴스 자릿수 검증 여부 테스트")
     @Test
     void 검증_자릿수() {
