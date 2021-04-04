@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
@@ -51,8 +52,12 @@ public class LottoFactory {
     /*
     * 당첨번호와 보너스볼을 가지는 당첨번호를 생성한다.
     * */
-    public static WinningNumbers winning(Set<LottoNumber> winningNumber, LottoNumber bonusNumber) {
-        return new WinningNumbers(new LottoNumbers(winningNumber), bonusNumber);
+    public static WinningNumbers winning(ArrayList<Integer> winningNumber, int bonusNumber) {
+        Set<LottoNumber> lottoNumbers = winningNumber.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        LottoNumber bonus = new LottoNumber(bonusNumber);
+        return new WinningNumbers(new LottoNumbers(lottoNumbers), bonus);
     }
 
     /*

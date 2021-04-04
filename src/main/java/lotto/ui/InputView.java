@@ -3,12 +3,9 @@
  * */
 package lotto.ui;
 
-import lotto.domain.LottoNumber;
-
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.LOTTO_PRICE;
@@ -23,9 +20,6 @@ public class InputView {
 
     private static Scanner sc;
 
-    /*
-    * 구매할 로또 금액을 입력한다.
-    * */
     public static int inputBuy() {
         openScanner();
         System.out.println(BUYING_MESSAGE_BEFORE);
@@ -35,10 +29,7 @@ public class InputView {
         return result;
     }
 
-    /*
-    * 당첨 번호를 입력한다.
-    * */
-    public static Set<LottoNumber> inputWinning() {
+    public static ArrayList<Integer> inputWinning() {
         System.out.println(WINNING_MESSAGE_BEFORE);
         String[] result = sc.nextLine().split(DELIMITER);
         checkNumberSize(result);
@@ -46,19 +37,14 @@ public class InputView {
 
         return Arrays.stream(result)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
-
-    /*
-    * 보너스 볼을 입력한다.
-    * */
-    public static LottoNumber inputBonus() {
+    public static int inputBonus() {
         System.out.println(BONUS_MESSAGE_BEFORE);
         int result = sc.nextInt();
 
-        return new LottoNumber(result);
+        return result;
     }
 
     public static void openScanner() {
