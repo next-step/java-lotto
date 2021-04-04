@@ -35,12 +35,11 @@ public class ManualNumberOfTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ManualNumberOfTicket that = (ManualNumberOfTicket) o;
-        return manualNumberOfTicket == that.manualNumberOfTicket &&
-                Objects.equals(totalNumberOfTicket, that.totalNumberOfTicket);
+        return manualNumberOfTicket == that.manualNumberOfTicket;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalNumberOfTicket, manualNumberOfTicket);
+        return Objects.hash(manualNumberOfTicket);
     }
 }
