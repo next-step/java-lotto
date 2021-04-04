@@ -8,17 +8,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TicketOfficeTest {
 
     @Test
-    @DisplayName("구매 금액만큼의 티켓 생성")
+    @DisplayName("총(수동 + 자동) 티켓 판매")
     public void sale() throws Exception {
         //given
-        PurchaseAmount purchaseAmount = new PurchaseAmount(10_000);
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
+        LottoTickets manualTickets = new LottoTickets(new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6)));
+        LottoTickets autoTickets = new LottoTickets(new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6)));
 
         //when
-        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
-        LottoTickets lottoTickets = ticketOffice.sale(totalNumberOfTicket);
+        long numberOfTickets = ticketOffice.sale(manualTickets, autoTickets)
+                .lottoTickets()
+                .stream()
+                .count();
 
         //then
-        assertThat(lottoTickets.lottoTickets()).hasSize(10);
+        assertThat(numberOfTickets).isEqualTo(2);
     }
 }

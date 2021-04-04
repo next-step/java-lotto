@@ -9,17 +9,15 @@ public class TicketOffice {
         this.lottoTicketPrice = lottoTicketPrice;
     }
 
-    public LottoTickets sale(TotalNumberOfTicket totalNumberOfTicket) {
-        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
+    public LottoTickets sale(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        LottoTickets allLottoTickets = new LottoTickets(new ArrayList<>());
 
-        for (int i = 0; i < totalNumberOfTicket.numberOfTicket(); i++) {
-            lottoTickets.add(new LottoTicket(new LottoNumbers()));
-        }
+        manualLottoTickets.lottoTickets()
+                .forEach(allLottoTickets::add);
 
-        return lottoTickets;
-    }
+        autoLottoTickets.lottoTickets()
+                .forEach(allLottoTickets::add);
 
-    public LottoTicketPrice lottoTicketPrice() {
-        return lottoTicketPrice;
+        return allLottoTickets;
     }
 }
