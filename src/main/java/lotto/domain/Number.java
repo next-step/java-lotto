@@ -4,7 +4,6 @@ import lotto.constants.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Number {
     private static final Map<Integer, Number> numbers = new HashMap<>();
@@ -12,7 +11,7 @@ public class Number {
     private final int number;
 
     static {
-        for (int i = Constants.LOTTO_MIN_BOUND; i < Constants.LOTTO_MAX_BOUND; i++) {
+        for (int i = Constants.LOTTO_MIN_BOUND; i <= Constants.LOTTO_MAX_BOUND; i++) {
             numbers.put(i, new Number(i));
         }
     }
@@ -31,18 +30,5 @@ public class Number {
 
     public int getNumber() {
         return number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 }
