@@ -1,4 +1,7 @@
-package step3.domain.lotto;
+package step3.domain.winning;
+
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoNumber;
 
 public final class WinningLotto {
 
