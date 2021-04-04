@@ -33,7 +33,20 @@ class LottoesTest {
 	}
 
 	@Test
-	@DisplayName("당첨등수를 기준으로 몇 개가 당첨되었는지 조")
+	@DisplayName("자동로또 수동로또 함께 생성")
+	void createWithManual() {
+		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
+		List<Lotto> lottoes = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			lottoes.add(new Lotto(new NoShuffleStrategy()));
+		}
+
+		assertThat(new Lottoes(10, shuffleStrategy, Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6")))
+				.usingRecursiveComparison().isEqualTo(new Lottoes(lottoes));
+	}
+
+	@Test
+	@DisplayName("당첨등수를 기준으로 몇 개가 당첨되었는지 조회")
 	void countMatchedLottoes() {
 		Lottoes lottoes = new Lottoes(2, new NoShuffleStrategy());
 
