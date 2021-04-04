@@ -2,6 +2,8 @@ package step02Test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import step02.Validation;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,14 +16,14 @@ public class ValidationTest {
         assertThatThrownBy(() ->
                 Validation.overMaxNumber(46))
                 .isInstanceOf(Exception.class).hasMessage("로또 숫자는 45이하의 수를 입력해주세요.");
-
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("최대 개수 범위 초과 테스트")
+    @ValueSource(ints = {0, 7})
     void overMaxNumberCount() {
         assertThatThrownBy(() ->
-                Validation.overMaxNumberCount(7))
-                .isInstanceOf(Exception.class).hasMessage("6개 이하의 수를 입력해주세요.");
+                Validation.numberCount(7))
+                .isInstanceOf(Exception.class).hasMessage("6개의 수를 입력해주세요.");
     }
 }

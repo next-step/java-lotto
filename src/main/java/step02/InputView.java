@@ -16,6 +16,6 @@ public class InputView {
 
     public static String inputLastWinnerNumber() {
         System.out.println(INPUT_LAST_WINNER_NUMBER);
-        return String.valueOf(scanner.nextInt());
+        return scanner.next();
     }
 }

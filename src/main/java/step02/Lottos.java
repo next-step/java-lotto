@@ -18,9 +18,29 @@ public class Lottos {
     }
 
     public void makeLotto(NumberRule numberRule) throws Exception {
-        for (int i = 0; i < lottoCount.getCount(); i++) {
+        for (int i = ZERO; i < lottoCount.getCount(); i++) {
             lottos.add(new LottoNumbers(numberRule));
         }
+    }
+
+    public LottoResultDTO compareMathNumber(LottoNumbers winnerNumbers) {
+        LottoResultDTO resultDTO = new LottoResultDTO();
+        for (LottoNumbers numbers : lottos) {
+            int mathCount = numbers.countCompareMathNumber(winnerNumbers);
+            if (mathCount == 3) {
+                resultDTO.setMath3(resultDTO.getMath3() + ONE);
+            }
+            if (mathCount == 4) {
+                resultDTO.setMath4(resultDTO.getMath4() + ONE);
+            }
+            if (mathCount == 5) {
+                resultDTO.setMath5(resultDTO.getMath5() + ONE);
+            }
+            if (mathCount == 6) {
+                resultDTO.setMath6(resultDTO.getMath6() + ONE);
+            }
+        }
+        return resultDTO;
     }
 
     @Override

@@ -14,10 +14,20 @@ public class LottoNumbers {
     }
 
     private void makeNumbers(NumberRule numberRule) throws Exception {
-        Validation.overMaxNumberCount(numberRule.makeNumbers().size());
+        Validation.numberCount(numberRule.makeNumbers().size());
         for (int numbers : numberRule.makeNumbers()) {
             lottoNumbers.add(new LottoNumber(numbers));
         }
+    }
+
+    public int countCompareMathNumber(LottoNumbers winnerNumbers) {
+        int countMath = 0;
+        for (LottoNumber winnerNumber : winnerNumbers.lottoNumbers) {
+            if (lottoNumbers.contains(winnerNumber)) {
+                countMath++;
+            }
+        }
+        return countMath;
     }
 
     @Override
@@ -26,7 +36,7 @@ public class LottoNumbers {
         for (int i = ZERO; i < lottoNumbers.size(); i++) {
             stringBuilder.append(lottoNumbers.get(i).getLottoNumber());
             if (i < lottoNumbers.size() - ONE) {
-                stringBuilder.append(SEPARATOR_NUMBER);
+                stringBuilder.append(REGEX + BLANK);
             }
         }
         return stringBuilder.toString();
