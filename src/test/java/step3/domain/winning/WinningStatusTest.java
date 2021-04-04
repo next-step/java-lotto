@@ -62,6 +62,6 @@ class WinningStatusTest {
         WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
         boolean actual = winningStatus.getMatchBonus();
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isTrue();
     }
 }

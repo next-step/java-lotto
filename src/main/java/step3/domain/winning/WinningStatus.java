@@ -29,4 +29,8 @@ public final class WinningStatus {
     public final int getCountOfMatch() {
         return countOfMatch;
     }
+
+    public final boolean getMatchBonus() {
+        return matchBonus;
+    }
 }
