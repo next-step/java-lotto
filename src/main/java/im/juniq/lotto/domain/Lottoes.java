@@ -51,14 +51,11 @@ public class Lottoes implements Iterable<Lotto> {
 	}
 
 	public double yield(WinningNumbers winningNumbers, Price price) {
-		double winningAmount = 0;
-		winningAmount += Winning.FIRST.amount() * numberOfLottoesMatched(Winning.FIRST, winningNumbers);
-		winningAmount += Winning.SECOND.amount() * numberOfLottoesMatched(Winning.SECOND, winningNumbers);
-		winningAmount += Winning.THIRD.amount() * numberOfLottoesMatched(Winning.THIRD, winningNumbers);
-		winningAmount += Winning.FOURTH.amount() * numberOfLottoesMatched(Winning.FOURTH, winningNumbers);
-		winningAmount += Winning.FIFTH.amount() * numberOfLottoesMatched(Winning.FIFTH, winningNumbers);
+		return price.yield((double) totalPrize(winningNumbers));
+	}
 
-		return price.yield(winningAmount);
+	private long totalPrize(WinningNumbers winningNumbers) {
+		return lottoes.stream().mapToLong(lotto -> lotto.prize(winningNumbers)).sum();
 	}
 
 	@Override

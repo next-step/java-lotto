@@ -67,4 +67,8 @@ public class Lotto {
 		}
 		return 0;
 	}
+
+	public long prize(WinningNumbers winningNumbers) {
+		return winning(winningNumbers).amount();
+	}
 }
