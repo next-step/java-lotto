@@ -36,7 +36,7 @@ public class ResultView {
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_MESSAGE_LINE);
         statistics.winningStatistics().entrySet().stream()
-                .filter(ResultView::checkResultBound)
+                .filter(e -> Rank.isWinning(e.getKey()))
                 .forEach(ResultView::printRank);
     }
 
@@ -50,16 +50,6 @@ public class ResultView {
             return;
         }
         System.out.print(YIELD_MESSAGE_PROFIT);
-    }
-
-    /*
-    * 당첨인 경우만 출력한다.
-    * */
-    public static boolean checkResultBound(Map.Entry<Rank, Integer> entry) {
-        if (entry.getKey() != Rank.MISS) {
-            return true;
-        }
-        return false;
     }
 
     /*

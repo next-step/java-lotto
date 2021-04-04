@@ -41,4 +41,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
+    public static boolean isWinning(Rank rank) {
+        return rank != MISS;
+    }
 }

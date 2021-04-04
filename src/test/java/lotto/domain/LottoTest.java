@@ -47,24 +47,21 @@ public class LottoTest {
     @Test
     void containsTest() {
         //given
-        Set<LottoNumber> testNumbers = new LinkedHashSet<>();
-        Set<LottoNumber> zeroMatches = new LinkedHashSet<>();
+        int matchNum = 5;
+        Set<LottoNumber> matchNumbers = new LinkedHashSet<>();
         for (int i = LOWER_LOTTONUMBER_BOUND + 1; i <= LOTTO_SIZE + 1; i++) {
-            testNumbers.add(new LottoNumber(i));
-            zeroMatches.add(new LottoNumber(LOTTO_SIZE + i + 10));
+            matchNumbers.add(new LottoNumber(i));
         }
-
 
         //when
         int allCorrect = lotto.contains(lottoNumbers);
-        int fiveCorrect = lotto.contains(new LottoNumbers(testNumbers));
-        int zeroCorrect = lotto.contains(new LottoNumbers(zeroMatches));
+        int fiveCorrect = lotto.contains(new LottoNumbers(matchNumbers));
 
         //then
         assertThat(allCorrect).isEqualTo(LOTTO_SIZE);
-        assertThat(fiveCorrect).isEqualTo(5);
-        assertThat(zeroCorrect).isEqualTo(0);
+        assertThat(fiveCorrect).isEqualTo(matchNum);
     }
+
 
     @Test
     void containBounsTest() {
