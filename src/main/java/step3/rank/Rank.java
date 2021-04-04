@@ -1,5 +1,7 @@
 package step3.rank;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -7,6 +9,8 @@ public enum Rank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     MISS(0, 0);
+
+    private static final int FIVE = 5;
 
     private int countOfMatch;
     private int winningMoney;
@@ -25,7 +29,21 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        return null;
+        Rank rank = Arrays.stream(Rank.values())
+                .filter(eachRank -> eachRank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
+
+        if (isNotMatchBonusAtFiveCount(matchBonus, rank)) {
+            rank = Rank.THIRD;
+        }
+
+        return rank;
     }
+
+    private static boolean isNotMatchBonusAtFiveCount(boolean matchBonus, Rank rank) {
+        return rank.countOfMatch == FIVE && matchBonus == false;
+    }
+
+
 }
