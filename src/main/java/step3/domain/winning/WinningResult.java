@@ -4,7 +4,7 @@ import step3.domain.rank.Rank;
 
 import java.util.Map;
 
-public class WinningResult {
+public final class WinningResult {
 
     private final Map<Rank, Integer> winningResult;
 
@@ -12,9 +12,8 @@ public class WinningResult {
         this.winningResult = winningResult;
     }
 
-    public static WinningResult of(Map<Rank, Integer> winningResult) {
+    public static final WinningResult of(Map<Rank, Integer> winningResult) {
         return new WinningResult(winningResult);
     }
-
 
 }

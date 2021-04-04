@@ -1,8 +1,8 @@
 package step3.view;
 
-import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
+import step3.domain.winning.WinningLotto;
 
 import java.util.Scanner;
 
@@ -41,12 +41,8 @@ public final class InputView {
         return Money.valueOf(inputMoneyByClient());
     }
 
-    public final Lotto getWinningLottoByClient() {
-        return Lotto.of(inputLottoNumbersByClient());
-    }
-
-    public final BonusLottoNumber getBonusLottoByClient() {
-        return BonusLottoNumber.valueOf(inputBonusLottoNumbersByClient());
+    public final WinningLotto getWinningLottoByClient() {
+        return WinningLotto.from(inputLottoNumbersByClient(), inputBonusLottoNumbersByClient());
     }
 
 }
