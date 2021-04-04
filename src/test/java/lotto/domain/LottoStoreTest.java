@@ -1,8 +1,14 @@
 package lotto.domain;
 
+import lotto.factories.LottoTicketFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -70,5 +76,19 @@ public class LottoStoreTest {
         final boolean result = new LottoStore().purchasable(payment, count);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 10})
+    public void allLottoTickets(int manualLottoTicketsCount) {
+        final int payment = 10000;
+        final List<LottoTicket> manualLottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
+                .limit(manualLottoTicketsCount)
+                .collect(Collectors.toList());
+        final LottoStore lottoStore = new LottoStore();
+
+        final AllLottoTickets allLottoTickets = lottoStore.allLottoTickets(payment, manualLottoTickets);
+
+        assertThat(allLottoTickets.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
     }
 }
