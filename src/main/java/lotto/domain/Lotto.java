@@ -5,6 +5,7 @@ import lotto.generator.NumberGenerator;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,31 +33,38 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public void checkValidBonusNumber(final Number bonusNumber) {
+    public void validateBonusNumber(final Number bonusNumber) {
         if (this.lotto.contains(bonusNumber)) {
             throw new RuntimeException("보너스번호는 1등 당첨번호와 중복될 수 없습니다.");
         }
     }
 
-    public Rank getRank(final Lotto prizeLotto, final Number bonusNumber) {
-        int matchCount = matchCount(prizeLotto);
-        boolean matchBonus = matchBonus(bonusNumber);
-        return Rank.valueOf(matchCount, matchBonus);
-    }
-
-    private int matchCount(final Lotto prizeLotto) {
+    public int matchCount(final Lotto prizeLotto) {
         return (int) prizeLotto.getNumbers()
                 .stream()
                 .filter(number -> this.lotto.contains(number))
                 .count();
     }
 
-    private boolean matchBonus(final Number bonusNumber) {
+    public boolean matchBonus(final Number bonusNumber) {
         return lotto.stream()
                 .anyMatch(number -> number.equals(bonusNumber));
     }
 
     public Set<Number> getNumbers() {
         return Collections.unmodifiableSet(lotto);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }

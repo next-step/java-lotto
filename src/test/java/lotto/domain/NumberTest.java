@@ -31,4 +31,12 @@ class NumberTest {
         assertThatThrownBy(() -> Number.from(Constants.LOTTO_MAX_BOUND + 1))
                 .isInstanceOf(RuntimeException.class);
     }
+
+
+    @Test
+    @DisplayName("Number 클래스에 equals를 재정의하지 않았는데도 동등한지 확인한다")
+    void caching_test() {
+        Number number = Number.from(1);
+        assertThat(number).isEqualTo(Number.from(1));
+    }
 }

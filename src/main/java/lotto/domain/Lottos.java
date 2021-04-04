@@ -22,9 +22,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int getRankCount(final Lotto prizeLotto, final Number bonusNumber, final Rank criteriaRank) {
+    public int getRankCount(final WinningLotto winningLotto, final Rank criteriaRank) {
         return (int) lottos.stream()
-                .map(lotto -> lotto.getRank(prizeLotto, bonusNumber))
+                .map(lotto -> winningLotto.rank(lotto))
                 .filter(rank -> rank.equals(criteriaRank))
                 .count();
     }

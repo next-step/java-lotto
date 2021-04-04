@@ -20,10 +20,10 @@ public class LottoStatistics {
         return new LottoStatistics(amount);
     }
 
-    public void makeStatisticsResult(final Lottos lottos, final Number bonusNumber, final Lotto prizeLotto) {
+    public void makeStatisticsResult(final Lottos lottos, final WinningLotto winningLotto) {
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.MISS))
-                .forEach(rank -> lottoPrizeResult.put(rank, lottos.getRankCount(prizeLotto, bonusNumber, rank)));
+                .forEach(rank -> lottoPrizeResult.put(rank, lottos.getRankCount(winningLotto, rank)));
     }
 
     private int getTotalPrizeMoney() {
