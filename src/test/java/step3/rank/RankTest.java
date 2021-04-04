@@ -34,6 +34,17 @@ class RankTest {
         );
     }
 
-
+    @DisplayName("Rank 열거형 두번째 열거값 반환 여부 테스트")
+    @Test
+    void 반환_두번째열거값() {
+        assertAll(
+                () -> assertThat(Rank.MISS.getWinningMoney()).isEqualTo(0),
+                () -> assertThat(Rank.FIFTH.getWinningMoney()).isEqualTo(5_000),
+                () -> assertThat(Rank.FOURTH.getWinningMoney()).isEqualTo(50_000),
+                () -> assertThat(Rank.THIRD.getWinningMoney()).isEqualTo(1_500_000),
+                () -> assertThat(Rank.SECOND.getWinningMoney()).isEqualTo(30_000_000),
+                () -> assertThat(Rank.FIRST.getWinningMoney()).isEqualTo(2_000_000_000)
+        );
+    }
 
 }
