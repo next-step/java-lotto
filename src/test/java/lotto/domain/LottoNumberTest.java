@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.LottoError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class LottoNumberTest {
     void createLottoNumberTest() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoNumber(47))
-                .withMessage("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
+                .withMessage(LottoError.LOTTO_NUMBER_OVER_EXCEPTION);
     }
 
     @Test
