@@ -43,4 +43,21 @@ class LottoServiceTest {
         // then
         assertThat(acutal).isEqualTo(expected);
     }
+
+    @DisplayName("LottoService 인스턴스 역순_로또들 반환 여부 테스트")
+    @Test
+    void 반환_역순_로또들() {
+        // given
+        Lotto lotto = Lotto.of("40, 41, 42, 43, 44, 45");
+        List<Lotto> expected = new ArrayList<>();
+        expected.add(lotto);
+        Money money = Money.valueOf(1000);
+
+        // when
+        LottoService lottoService = LottoService.getInstance(Collections::reverse);
+        List<Lotto> acutal = lottoService.getLottos(money);
+
+        // then
+        assertThat(acutal).isEqualTo(expected);
+    }
 }
