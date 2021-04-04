@@ -37,12 +37,6 @@ public class RanksCount {
         ranksCount.put(rank, ranksCount.get(rank) + PLUS);
     }
 
-    public void add(List<WinningRank> ranks) {
-        for (WinningRank rank : ranks) {
-            add(rank);
-        }
-    }
-
     public TotalPrize totalPrize() {
         List<Prize> totalPrize = ranksCount.entrySet()
                 .stream()
