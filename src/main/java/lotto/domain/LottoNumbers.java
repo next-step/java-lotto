@@ -12,6 +12,7 @@ public class LottoNumbers {
             .boxed()
             .map(LottoNumber::of)
             .collect(Collectors.toList());
+    private static final String CHECK_DUPLICATION = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
@@ -19,7 +20,14 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkDuplication(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private void checkDuplication(List<LottoNumber> winningNumbers) {
+        if (new HashSet<>(winningNumbers).size() != NUMBER_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(CHECK_DUPLICATION);
+        }
     }
 
     public static LottoNumbers from(List<String> lottoNumbers) {
