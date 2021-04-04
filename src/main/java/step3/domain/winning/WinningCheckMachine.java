@@ -24,8 +24,8 @@ public final class WinningCheckMachine {
     public WinningResult getWinningResult(List<Lotto> lottos, Lotto winningLotto, BonusLottoNumber bonusLottoNumber) {
         Map<Rank, Integer> winningScoreIntegerMap = new TreeMap<>();
         for(Lotto lotto: lottos) {
+            int countOfMatch =  winningLotto.getCountOfMatch(lotto);
             boolean matchBonus = bonusLottoNumber.isIncludeByLotto(lotto);
-            int countOfMatch = lotto.getCountOfMatch(winningLotto);
             Rank rank = Rank.valueOf(countOfMatch, matchBonus);
             winningScoreIntegerMap.put(rank, winningScoreIntegerMap.get(rank)+1);
         }
