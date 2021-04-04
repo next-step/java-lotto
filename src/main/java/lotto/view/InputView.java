@@ -27,13 +27,17 @@ public class InputView {
         return manualLottoTicketCount;
     }
 
-    public static String manualLottoNumbers() {
+    public static void manualLottoNumberPhrase() {
         System.out.println();
         System.out.println(MANUAL_LOTTO_NUMBERS);
+    }
+
+    public static String manualLottoNumbers() {
         String manualLottoNumbers = scanner.nextLine().trim();
         PreConditionUtil.checkNullOrEmpty(manualLottoNumbers);
         return manualLottoNumbers;
     }
+
 
     public static String winningNumbers() {
         System.out.println();
