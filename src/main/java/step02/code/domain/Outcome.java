@@ -25,8 +25,4 @@ public class Outcome {
   public void add(int prize) {
     total += prize;
   }
-
-  public int total() {
-    return total;
-  }
 }
