@@ -16,6 +16,7 @@ public final class ResultView {
     private static final String LOTTO_WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n";
     private static final String PERFORATION = "---------\n";
     private static final String CORRECT_WINNING_LOTTO_MESSAGE = "%d개 일치 (%d)원 - %d개\n";
+    private static final String CORRECT_WINNING_LOTTO_MESSAGE_IN_SECOND = "%d개 일치, 보너스 볼 일치(%d)원 - %d개\n";
     private static final String TOTAL_YIELD_ANALYSIS_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     private static final String PREFIX = "[";
@@ -30,7 +31,8 @@ public final class ResultView {
         public static final ResultView instance = new ResultView();
     }
 
-    private ResultView() { }
+    private ResultView() {
+    }
 
     public static final ResultView getInstance() {
         return ResultViewHolder.instance;
@@ -70,7 +72,7 @@ public final class ResultView {
 
 
     public final void printLottoResult(WinningResult winningResult, Money money) {
-        stringBuilderReset();
+        STRING_BUILDER.setLength(ZERO);
         STRING_BUILDER.append(LOTTO_WINNING_STATISTICS_MESSAGE);
         STRING_BUILDER.append(PERFORATION);
         List<Rank> ranks = Arrays.stream(Rank.values()).collect(Collectors.toList());
@@ -79,25 +81,23 @@ public final class ResultView {
             int countOfMatch = rank.getCountOfMatch();
             int winningMoney = rank.getWinningMoney();
             int winningCount = winningResult.getWinningCount(rank);
-            STRING_BUILDER.append(String.format(CORRECT_WINNING_LOTTO_MESSAGE, countOfMatch, winningMoney, winningCount));
+            STRING_BUILDER.append(getWinningResultFormat(rank, countOfMatch, winningMoney, winningCount));
         }
         double yield = doubleFormatting(getYield(winningResult, money.getMoney()));
         STRING_BUILDER.append(String.format(TOTAL_YIELD_ANALYSIS_MESSAGE, yield, chekProfitOrLoss(yield)));
         System.out.println(STRING_BUILDER.toString());
     }
 
-    private final void stringBuilderReset() {
-        STRING_BUILDER.setLength(ZERO);
-    }
-
-    private final String chekProfitOrLoss(double yield) {
-        return yield >= ONE ? "이익이" : "손해";
+    private String getWinningResultFormat(Rank rank, int countOfMatch, int winningMoney, int winningCount) {
+        if (rank == Rank.SECOND) {
+            return String.format(CORRECT_WINNING_LOTTO_MESSAGE_IN_SECOND, countOfMatch, winningMoney, winningCount);
+        }
+        return String.format(CORRECT_WINNING_LOTTO_MESSAGE, countOfMatch, winningMoney, winningCount);
     }
 
     private final double doubleFormatting(double yield) {
         return (Math.floor(yield * DIGIT_FORMAT)) / DIGIT_FORMAT;
     }
-
 
     public final double getYield(WinningResult winningResult, int inputMoney) {
         if (inputMoney == ZERO) {
@@ -115,5 +115,10 @@ public final class ResultView {
     private final int getProfit(Rank rank, WinningResult winningResult) {
         return Math.multiplyExact(rank.getWinningMoney(), winningResult.getWinningCount(rank));
     }
+
+    private final String chekProfitOrLoss(double yield) {
+        return yield >= ONE ? "이익이" : "손해";
+    }
+
 
 }

@@ -39,4 +39,5 @@ public final class WinningResult {
     public final int getWinningCount(Rank rank) {
         return winningResult.get(rank);
     }
+
 }
