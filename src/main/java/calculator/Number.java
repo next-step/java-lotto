@@ -27,12 +27,12 @@ public class Number {
     return Number.create(Integer.parseInt(str));
   }
 
-  public Number sum(Number other) {
-    return new Number(number + other.number);
-  }
-
   private static boolean isPositiveNumberString(String str) {
     return str.matches(POSITIVE_NUMBER_REGEX);
+  }
+
+  public Number sum(Number other) {
+    return new Number(number + other.number);
   }
 
   @Override
