@@ -25,23 +25,22 @@ public class Lotto {
   }
 
   public static Lotto makeLottoByString(String str) {
-    isEmpty(str);
+    assureNotEmpty(str);
     List<Integer> lotto = Arrays.stream(str.split(","))
       .map(String::trim)
-      .map(Lotto::check)
+      .map(Lotto::assureNumericString)
       .map(Integer::parseInt)
       .collect(Collectors.toList());
     return new Lotto(lotto);
   }
 
-  public static void isEmpty(String str) {
+  public static void assureNotEmpty(String str) {
     if(str == null || str.equals("")) {
       throw new IllegalArgumentException("null or 빈값이 들어올 수 없습니다.");
     }
   }
 
-  public static String check(String str) {
-    isEmpty(str);
+  public static String assureNumericString(String str) {
     try {
       Integer.parseInt(str);
     } catch (Exception e) {
@@ -60,10 +59,14 @@ public class Lotto {
     }
   }
 
-  public int match(List<Number> winningNumber) {
+  public int match(Lotto winningNumber) {
     List<Number> lotto = new ArrayList<>(this.lotto);
-    lotto.removeAll(winningNumber);
+    lotto.removeAll(winningNumber.lotto());
     return LOTTO_SIZE - lotto.size();
+  }
+
+  public boolean isMatchBonus(Number bonus) {
+    return lotto.stream().anyMatch(number -> number.isMatch(bonus));
   }
 
   public List<Number> lotto() {

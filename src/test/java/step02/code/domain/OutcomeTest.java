@@ -15,11 +15,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class OutcomeTest {
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndMatch")
-  @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트 테스트")
-  public void match(Lottos lottos, String winningNumber, List<Integer> mustMatched) {
+  @DisplayName("lotto 와 지난주 당첨번호와 비교후 일치 갯수 리스트")
+  public void match(Lottos lottos, String winningNumber, Number bonus, List<GradeEnum> mustMatched) {
     Lotto winning = Lotto.makeLottoByString(winningNumber);
-    Outcome outcome = new Outcome(0, lottos, winning);
-    List<Integer> matched = outcome.match(winning.lotto());
+    Outcome outcome = new Outcome(0, lottos, winning, bonus);
+    List<GradeEnum> matched = outcome.match();
 
     assertThat(matched)
       .hasSize(mustMatched.size())
@@ -39,7 +39,8 @@ public class OutcomeTest {
           )
         ),
         "1,2,3,4,5,6",
-        Arrays.asList(6, 5, 5, 5, 6)
+        new Number(7),
+        Arrays.asList(GradeEnum.FIRST, GradeEnum.FIRST, GradeEnum.SECOND, GradeEnum.SECOND, GradeEnum.SECOND)
       ),
       Arguments.of(
         new Lottos(
@@ -50,18 +51,19 @@ public class OutcomeTest {
           )
         ),
         "40,41,42,43,44,45",
-        Arrays.asList(4, 2, 1)
+        new Number(7),
+        Arrays.asList(GradeEnum.FOURTH, GradeEnum.NONE, GradeEnum.NONE)
       )
     );
   }
 
   @ParameterizedTest
   @MethodSource("lottosAndWinningNumberAndResult")
-  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value) 가 맞게 생성되는지 테스트")
-  public void result(Lottos lottos, String winningNumber, Map<Integer, Integer> mustResult) {
+  @DisplayName("lotto 와 지난주 번호와 비교후 map 형태로 일치갯수(key), 일치갯수 size(value)")
+  public void result(Lottos lottos, String winningNumber, Number bonus, Map<Integer, Integer> mustResult) {
     Lotto winning = Lotto.makeLottoByString(winningNumber);
-    Outcome outcome = new Outcome(0, lottos, winning);
-    Map<Integer, Integer> result = outcome.statistic();
+    Outcome outcome = new Outcome(0, lottos, winning, bonus);
+    Map<GradeEnum, Integer> result = outcome.statistic();
 
     assertThat(result.equals(mustResult)).isTrue();
   }
@@ -79,7 +81,8 @@ public class OutcomeTest {
           )
         ),
         "1,2,3,4,5,6",
-        Map.of(6, 2, 5, 3)
+        new Number(7),
+        Map.of(GradeEnum.FIRST, 2, GradeEnum.SECOND, 3)
       ),
       Arguments.of(
         new Lottos(
@@ -90,7 +93,8 @@ public class OutcomeTest {
           )
         ),
         "40,41,42,43,44,45",
-        Map.of(4, 1, 2, 1, 1, 1)
+        new Number(7),
+        Map.of(GradeEnum.FOURTH, 1, GradeEnum.NONE, 2)
       )
     );
   }
