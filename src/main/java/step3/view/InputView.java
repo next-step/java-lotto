@@ -1,9 +1,11 @@
 package step3.view;
 
 
+import step3.domain.lotto.BonusLottoNumber;
 import step3.domain.lotto.Lotto;
 import step3.domain.money.Money;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public final class InputView {
@@ -16,14 +18,10 @@ public final class InputView {
     }
 
     public static final InputView getInstance() {
-        if (isInstanceNull()) {
+        if (Objects.isNull(instance)) {
             instance = new InputView();
         }
         return instance;
-    }
-
-    private static final boolean isInstanceNull() {
-        return instance == null;
     }
 
     private final int inputMoneyByClient() {
@@ -36,12 +34,21 @@ public final class InputView {
         return scanner.nextLine();
     }
 
+    private final int inputBonusLottoNumbersByClient() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
     public final Money getMoneyByClient() {
         return Money.valueOf(inputMoneyByClient());
     }
-/*
+
     public final Lotto getWinningLottoByClient() {
         return Lotto.of(inputLottoNumbersByClient());
     }
-*/
+
+    public final BonusLottoNumber getBonusLottoByClient() {
+        return BonusLottoNumber.valueOf(inputBonusLottoNumbersByClient());
+    }
+
 }
