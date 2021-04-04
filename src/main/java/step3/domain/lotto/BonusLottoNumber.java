@@ -12,7 +12,7 @@ public final class BonusLottoNumber {
         return valueOf(LottoNumber.valueOf(bonusNumber));
     }
 
-    public static BonusLottoNumber valueOf(LottoNumber bonusNumber) {
+    public static final BonusLottoNumber valueOf(LottoNumber bonusNumber) {
         return new BonusLottoNumber(bonusNumber);
     }
 

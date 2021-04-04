@@ -60,11 +60,10 @@ class LottoTest {
 
         // when
         Lotto lotto = Lotto.of(inputValue);
-
-        boolean secondActual = lotto.isInclude(LottoNumber.valueOf(1));
+        boolean actual = lotto.isInclude(LottoNumber.valueOf(1));
 
         // then
-        assertThat(secondActual).isTrue();
+        assertThat(actual).isTrue();
     }
 
 }

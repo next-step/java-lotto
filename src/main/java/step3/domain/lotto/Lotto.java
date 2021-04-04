@@ -27,6 +27,10 @@ public final class Lotto {
         }
     }
 
+    public final boolean isInclude(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
