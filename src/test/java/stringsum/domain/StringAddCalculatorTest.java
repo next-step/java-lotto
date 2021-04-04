@@ -1,5 +1,6 @@
 package stringsum.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,4 +47,34 @@ class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
+
+
+    @Test
+    @DisplayName("숫자만 남아있는지 확인")
+    public void remainedNumbersTest(){
+        String inputText = "1:2,3:4";
+        String[] result = StringAddCalculator.remainedNumbers(inputText);
+
+        assertThat(result).containsExactly("1","2","3","4");
+    }
+
+    @Test
+    @DisplayName("custom한 문자로 숫자만 남아있는지 확인")
+    public void remainedNumbersTestByCustom(){
+        String inputText = "//;\n1;2;3;4";
+        String[] result = StringAddCalculator.remainedNumbers(inputText);
+
+        assertThat(result).containsExactly("1","2","3","4");
+    }
+
+    @Test
+    @DisplayName("숫자 더하기")
+    public void sumTest(){
+        String inputText = "//;\n1;2;3;4";
+        String[] numbers = StringAddCalculator.remainedNumbers(inputText);
+        int result = StringAddCalculator.sum(numbers);
+        assertThat(result).isEqualTo(10);
+    }
+
+
 }
