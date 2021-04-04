@@ -20,9 +20,21 @@ public class Lottoes implements Iterable<Lotto> {
 		this.lottoes.addAll(lottoes);
 	}
 
+	public Lottoes(int numberOfCreated,	ShuffleStrategy shuffleStrategy, List<String> manualLottoes) {
+		makeLottoes(manualLottoes);
+		makeLottoes(numberOfCreated - manualLottoes.size(), shuffleStrategy);
+	}
+
 	private List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
 		for (int i = 0; i < numberOfCreated; i++) {
 			lottoes.add(new Lotto(shuffleStrategy));
+		}
+		return lottoes;
+	}
+
+	private List<Lotto> makeLottoes(List<String> manualLottoes) {
+		for (String lotto : manualLottoes) {
+			lottoes.add(new Lotto(lotto));
 		}
 		return lottoes;
 	}
