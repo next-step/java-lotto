@@ -32,8 +32,8 @@ public enum Rank {
     }
 
     public static Rank matchRank(int matchNum, boolean Bonus) {
-        if (matchNum == SECOND.matchNo && !Bonus) {
-            return THIRD;
+        if (matchNum == SECOND.matchNo && Bonus) {
+            return SECOND;
         }
         return Arrays.stream(values())
                 .filter(rank -> rank.matchNo == matchNum)

@@ -13,11 +13,15 @@ public class WinningNumbers {
     private LottoNumber bonusNumber;
 
     public WinningNumbers(LottoNumbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+        if (winningNumbers.hasLottoSize()) {
+            this.winningNumbers = winningNumbers;
+        }
     }
 
     public WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        this.winningNumbers = winningNumbers;
+        if (winningNumbers.hasLottoSize()){
+            this.winningNumbers = winningNumbers;
+        }
         if (canHaveBonus(bonusNumber)) {
             this.bonusNumber = bonusNumber;
         }

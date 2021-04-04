@@ -9,6 +9,7 @@ import java.util.Set;
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -29,6 +30,18 @@ public class LottoTest {
     void createTest() {
         //then
         assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
+    }
+
+    @Test
+    void validLottoSize() {
+        //given
+        numbers.remove(new LottoNumber(LOTTO_SIZE));
+        LottoNumbers testLottoNumbers = new LottoNumbers(numbers);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            Lotto testLotto = new Lotto(testLottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

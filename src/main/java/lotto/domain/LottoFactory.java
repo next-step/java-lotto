@@ -4,6 +4,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,16 +15,18 @@ public class LottoFactory {
 
     private static LottoStrategy lottoStrategy; // 로또 생성 전략
 
-    public static List<LottoNumber> defaultLottoNumbers = new ArrayList<>(); // 1~45개의 번호를 갖는 기본 로또
+    public static LottoNumbers defaultLottoNumbers; // 1~45개의 번호를 갖는 기본 로또
 
     public static void setLottoStrategy(LottoStrategy strategy) {
         lottoStrategy = strategy;
     }
 
     public static void defaultLottoNumbers() {
+        Set<LottoNumber> lottoNumberSet = new LinkedHashSet<>();
         for (int i = LOWER_LOTTONUMBER_BOUND; i <= UPPER_LOTTONUMBER_BOUND; i++) {
-            defaultLottoNumbers.add(new LottoNumber(i));
+            lottoNumberSet.add(new LottoNumber(i));
         }
+        defaultLottoNumbers = new LottoNumbers(lottoNumberSet);
     }
 
     /*

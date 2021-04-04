@@ -35,10 +35,11 @@ public class LottoNumbersTest {
     void validLottoSize() {
         //given
         lottoNumberSet.remove(new LottoNumber(LOTTO_SIZE));
+        LottoNumbers testLottoNumbers = new LottoNumbers(lottoNumberSet);
 
         //when, then
         assertThatThrownBy(() -> {
-            LottoNumbers testLottoNumbers = new LottoNumbers(lottoNumberSet);
+            testLottoNumbers.hasLottoSize();
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -67,8 +68,19 @@ public class LottoNumbersTest {
         //when, then
         assertThat(lottoNumbers.containsOne(containNumber)).isTrue();
         assertThat(lottoNumbers.containsOne(notInNumber)).isFalse();
-
-
     }
+
+    @Test
+    void takeNumbersTest() {
+        //given
+        int takeNumber = 3;
+
+        //when
+        LottoNumbers testNumbers = lottoNumbers.takeNumbers(takeNumber);
+
+        //then
+        assertThat(testNumbers.size()).isEqualTo(takeNumber);
+    }
+
 
 }

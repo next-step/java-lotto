@@ -10,7 +10,9 @@ public class Lotto {
     private LottoNumbers numbers;
 
     public Lotto(LottoNumbers numbers) {
-        this.numbers = numbers;
+        if(numbers.hasLottoSize()){
+            this.numbers = numbers;
+        }
     }
 
     /*
