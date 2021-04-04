@@ -3,6 +3,7 @@ package step3.domain.winning;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
 import step3.exception.LottoNullPointerException;
+import step3.exception.LottoNumberConflictException;
 import step3.exception.LottoNumberNullPointerException;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ public final class WinningLotto {
     private WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         validateLottoNull(winningLotto);
         validateBonusLottoNumberNull(bonusLottoNumber);
+        validateLottoNumberConflict(winningLotto, bonusLottoNumber);
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
     }
@@ -37,6 +39,12 @@ public final class WinningLotto {
     private final void validateBonusLottoNumberNull(LottoNumber bonusLottoNumber) {
         if (Objects.isNull(bonusLottoNumber)) {
             throw new LottoNumberNullPointerException();
+        }
+    }
+
+    private final void validateLottoNumberConflict(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        if(winningLotto.isIncludeLottoNumber(bonusLottoNumber)) {
+            throw new LottoNumberConflictException();
         }
     }
 

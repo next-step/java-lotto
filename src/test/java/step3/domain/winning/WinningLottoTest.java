@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
 import step3.exception.LottoNullPointerException;
+import step3.exception.LottoNumberConflictException;
 import step3.exception.LottoNumberNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
