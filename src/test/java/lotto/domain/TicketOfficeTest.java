@@ -15,8 +15,8 @@ public class TicketOfficeTest {
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
 
         //when
-        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
-        LottoTickets lottoTickets = ticketOffice.sale(numberOfTicket);
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
+        LottoTickets lottoTickets = ticketOffice.sale(totalNumberOfTicket);
 
         //then
         assertThat(lottoTickets.lottoTickets()).hasSize(10);

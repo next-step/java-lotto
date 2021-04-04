@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class NumberOfTicket {
+public class TotalNumberOfTicket {
     private final PurchaseAmount purchaseAmount;
     private final LottoTicketPrice lottoTicketPrice;
     private final int numberOfTicket;
 
-    public NumberOfTicket(PurchaseAmount purchaseAmount, LottoTicketPrice lottoTicketPrice) {
+    public TotalNumberOfTicket(PurchaseAmount purchaseAmount, LottoTicketPrice lottoTicketPrice) {
         this.purchaseAmount = purchaseAmount;
         this.lottoTicketPrice = lottoTicketPrice;
         this.numberOfTicket = count();
@@ -25,7 +25,7 @@ public class NumberOfTicket {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NumberOfTicket that = (NumberOfTicket) o;
+        TotalNumberOfTicket that = (TotalNumberOfTicket) o;
         return numberOfTicket == that.numberOfTicket;
     }
 

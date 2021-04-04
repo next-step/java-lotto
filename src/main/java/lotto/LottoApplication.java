@@ -36,9 +36,9 @@ public class LottoApplication {
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
         TicketOffice ticketOffice = new TicketOffice(lottoTicketPrice);
-        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, lottoTicketPrice);
-        ResultView.purchaseTickets(numberOfTicket.numberOfTicket());
-        return ticketOffice.sale(numberOfTicket);
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, lottoTicketPrice);
+        ResultView.purchaseTickets(totalNumberOfTicket.numberOfTicket());
+        return ticketOffice.sale(totalNumberOfTicket);
     }
 
     private static void printLottoTickets(LottoTickets lottoTickets) {

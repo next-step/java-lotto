@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NumberOfTicketTest {
+public class TotalNumberOfTicketTest {
 
     @Test
     @DisplayName("티켓의 수 객체 생성")
     public void create() throws Exception {
-        NumberOfTicket numberOfTicket = new NumberOfTicket(new PurchaseAmount(10_000), new LottoTicketPrice(5_000));
-        assertThat(numberOfTicket).isEqualTo(new NumberOfTicket(new PurchaseAmount(4_000), new LottoTicketPrice(2_000)));
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(new PurchaseAmount(10_000), new LottoTicketPrice(5_000));
+        assertThat(totalNumberOfTicket).isEqualTo(new TotalNumberOfTicket(new PurchaseAmount(4_000), new LottoTicketPrice(2_000)));
     }
 
     @Test
@@ -22,10 +22,10 @@ public class NumberOfTicketTest {
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
 
         //when
-        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
 
         //then
-        assertThat(numberOfTicket.numberOfTicket()).isEqualTo(1);
+        assertThat(totalNumberOfTicket.numberOfTicket()).isEqualTo(1);
     }
 
     @Test
@@ -34,10 +34,10 @@ public class NumberOfTicketTest {
         //given
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
         PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
-        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, lottoTicketPrice);
+        TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, lottoTicketPrice);
 
         //when
-        int count = numberOfTicket.count();
+        int count = totalNumberOfTicket.count();
 
         //then
         assertThat(count).isEqualTo(1);
