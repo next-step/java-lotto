@@ -35,7 +35,7 @@ class WinningResultTest {
         Map<Rank, Integer> rankIntegerMap = null;
 
         // when
-        assertThatThrownBy(()->WinningResult.of(rankIntegerMap))
+        assertThatThrownBy(() -> WinningResult.of(rankIntegerMap))
                 .isInstanceOf(MapNullPointerException.class)
                 .hasMessageContaining("Map 인스턴스가 Null 입니다.");
     }
@@ -49,12 +49,12 @@ class WinningResultTest {
 
         // then
         assertAll(
-                ()-> assertThat(actual.get(Rank.MISS)).isEqualTo(0),
-                ()-> assertThat(actual.get(Rank.FIFTH)).isEqualTo(0),
-                ()-> assertThat(actual.get(Rank.FOURTH)).isEqualTo(0),
-                ()-> assertThat(actual.get(Rank.THIRD)).isEqualTo(0),
-                ()-> assertThat(actual.get(Rank.SECOND)).isEqualTo(0),
-                ()-> assertThat(actual.get(Rank.FIRST)).isEqualTo(0)
+                () -> assertThat(actual.get(Rank.MISS)).isEqualTo(0),
+                () -> assertThat(actual.get(Rank.FIFTH)).isEqualTo(0),
+                () -> assertThat(actual.get(Rank.FOURTH)).isEqualTo(0),
+                () -> assertThat(actual.get(Rank.THIRD)).isEqualTo(0),
+                () -> assertThat(actual.get(Rank.SECOND)).isEqualTo(0),
+                () -> assertThat(actual.get(Rank.FIRST)).isEqualTo(0)
 
         );
 
