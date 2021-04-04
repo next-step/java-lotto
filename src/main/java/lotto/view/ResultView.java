@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottoCount()));
+    public static void printLottos(int manualLottoCount, int autoLottoCount, Lottos lottos) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(prettyString(lotto));
         }
