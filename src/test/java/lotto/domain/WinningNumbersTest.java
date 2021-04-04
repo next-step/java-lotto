@@ -63,7 +63,7 @@ public class WinningNumbersTest {
     public void check() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6};
         WinningNumbers winningNumbers = WinningNumbers.from(numbers);
-        assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(new LottoNumber(1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(LottoNumber.of(1)));
     }
 
     @Test

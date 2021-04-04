@@ -10,7 +10,7 @@ public class LottoNumbers {
     private static final int BOUND_MAX = 46;
     private static final List<LottoNumber> numbers = IntStream.range(BOUND_MIN, BOUND_MAX)
             .boxed()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
     private final List<LottoNumber> lottoNumbers;
 
@@ -24,7 +24,7 @@ public class LottoNumbers {
 
     public static LottoNumbers from(List<Integer> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 

@@ -59,7 +59,7 @@ public class LottoApplication {
 
     private static BonusBall createBonusBall(WinningNumbers winningNumbers) {
         try {
-            LottoNumber bonusNumber = new LottoNumber(InputView.bonusBall());
+            LottoNumber bonusNumber = LottoNumber.of(InputView.bonusBall());
             winningNumbers.check(bonusNumber);
             return new BonusBall(bonusNumber);
         } catch (Exception e) {

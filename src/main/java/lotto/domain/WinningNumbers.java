@@ -20,13 +20,13 @@ public class WinningNumbers {
     public static WinningNumbers from(List<String> winningNumbers) {
         return new WinningNumbers(toIntegers(winningNumbers)
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
     public static WinningNumbers from(int... winningNumbers) {
         return new WinningNumbers(Arrays.stream(winningNumbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
