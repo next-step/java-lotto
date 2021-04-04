@@ -1,10 +1,13 @@
-package step022;
+package step02;
 
 public class LottoNumber {
-    int lottoNumber;
+    private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
 }

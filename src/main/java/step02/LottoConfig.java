@@ -1,4 +1,4 @@
-package step022;
+package step02;
 
 public class LottoConfig {
     static final int NUMBER_RANGE_END = 45;

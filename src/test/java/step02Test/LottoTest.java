@@ -1,8 +1,8 @@
-package step022Test;
+package step02Test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step022.Lottos;
+import step02.Lottos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,4 +14,5 @@ public class LottoTest {
         Lottos lotto = new Lottos(4);
         assertThat(lotto.getLottoCount().getCount()).isEqualTo(4);
     }
+
 }

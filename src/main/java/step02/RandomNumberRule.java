@@ -1,12 +1,12 @@
-package step022;
+package step02;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static step022.LottoConfig.*;
+import static step02.LottoConfig.*;
 
-public class MakeRandomNumberRule extends MakeNumberRule {
+public class RandomNumberRule extends NumberRule {
     @Override
     public List<Integer> makeNumbers() {
         Collections.shuffle(integers);
