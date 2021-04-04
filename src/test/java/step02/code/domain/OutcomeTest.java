@@ -20,7 +20,7 @@ public class OutcomeTest {
     Outcome outcome = new Outcome(0, lottos);
     Map<GradeEnum, Integer> result = outcome.statistic(winning, bonus);
 
-    assertThat(result.equals(mustResult)).isTrue();
+    assertThat(result).isEqualTo(mustResult);
   }
 
   private static Stream<Arguments> lottosAndWinningNumberAndResult() {
