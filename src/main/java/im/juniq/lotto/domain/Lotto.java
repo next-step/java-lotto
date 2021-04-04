@@ -46,11 +46,7 @@ public class Lotto {
 	}
 
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
-		int matchedCount = 0;
-		for (int number : numbers) {
-			matchedCount += countMatched(winningNumbers, number);
-		}
-		return matchedCount;
+		return numbers.stream().mapToInt(number -> countMatched(winningNumbers, number)).sum();
 	}
 
 	private int countMatched(WinningNumbers winningNumbers, int number) {
@@ -61,11 +57,8 @@ public class Lotto {
 	}
 
 	private boolean matchedBonusNumber(WinningNumbers winningNumbers) {
-		int matchedCount = 0;
-		for (int number : numbers) {
-			matchedCount += countMatchedBonusNumber(winningNumbers, number);
-		}
-		return matchedCount != 0;
+		int sum = numbers.stream().mapToInt(number -> countMatchedBonusNumber(winningNumbers, number)).sum();
+		return sum != 0;
 	}
 
 	private int countMatchedBonusNumber(WinningNumbers winningNumbers, int number) {
