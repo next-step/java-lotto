@@ -16,8 +16,9 @@ public class LottoApplication {
         printLottoTickets(lottoTickets);
         WinningNumbers winningNumbers = createWinningNumbers();
         BonusBall bonusBall = createBonusBall(winningNumbers);
-        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets, bonusBall);
-        printStatistics(ranksCount.dtos());
+        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
+        matchWith(ranksCount, bonusBall);
+        printStatistics(createRanksCountDto(ranksCount));
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
     }
@@ -33,8 +34,9 @@ public class LottoApplication {
     }
 
     private static LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
-        TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
-        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, ticketOffice.lottoTicketPrice());
+        LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
+        TicketOffice ticketOffice = new TicketOffice(lottoTicketPrice);
+        NumberOfTicket numberOfTicket = new NumberOfTicket(purchaseAmount, lottoTicketPrice);
         ResultView.purchaseTickets(numberOfTicket.numberOfTicket());
         return ticketOffice.sale(numberOfTicket);
     }
@@ -66,10 +68,17 @@ public class LottoApplication {
         }
     }
 
-    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets, BonusBall bonusBall) {
+    private static RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.count(bonusBall);
         return ranksCount;
+    }
+
+    private static void matchWith(RanksCount ranksCount, BonusBall bonusBall) {
+        ranksCount.count(bonusBall);
+    }
+
+    private static List<RankCountDto> createRanksCountDto(RanksCount ranksCount) {
+        return ranksCount.dtos();
     }
 
     private static void printStatistics(List<RankCountDto> ranksCount) {
