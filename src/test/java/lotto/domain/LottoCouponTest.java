@@ -52,9 +52,9 @@ public class LottoCouponTest {
     public void lottoBuyer() {
         final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
 
-        final LottoBuyer lottoBuyer = lottoCoupon.lottoBuyer();
+        final AllLottoTickets allLottoTickets = lottoCoupon.lottoBuyer();
 
-        assertThat(lottoBuyer.allLottoTickets().count()).isEqualTo(exchangeableTicketsCount);
+        assertThat(allLottoTickets.allLottoTickets().count()).isEqualTo(exchangeableTicketsCount);
     }
 
     @ParameterizedTest
@@ -65,9 +65,9 @@ public class LottoCouponTest {
                 .collect(Collectors.toList());
         final LottoCoupon lottoCoupon = new LottoCoupon(exchangeableTicketsCount);
 
-        final LottoBuyer lottoBuyer = lottoCoupon.lottoBuyer(manualLottoTickets);
+        final AllLottoTickets allLottoTickets = lottoCoupon.lottoBuyer(manualLottoTickets);
 
-        assertThat(lottoBuyer.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
+        assertThat(allLottoTickets.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
     }
 
     @DisplayName("수동 로또 티켓 수가 교환 가능한 티켓 수를 넘으면 예외 발생")

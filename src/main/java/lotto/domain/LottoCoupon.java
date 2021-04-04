@@ -31,12 +31,12 @@ public class LottoCoupon {
         }
     }
 
-    public LottoBuyer lottoBuyer() {
+    public AllLottoTickets lottoBuyer() {
         return lottoBuyer(new ArrayList<>());
     }
 
-    public LottoBuyer lottoBuyer(List<LottoTicket> manualLottoTickets) {
-        return new LottoBuyer(
+    public AllLottoTickets lottoBuyer(List<LottoTicket> manualLottoTickets) {
+        return new AllLottoTickets(
                 manualLottoTickets,
                 Stream.generate(LottoTicketFactory::createAutoLottoTicket)
                         .limit(exchangeableTicketsCount - manualLottoTickets.size())

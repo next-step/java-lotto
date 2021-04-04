@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 public class LottoStore {
     private static final String PAYMENT_ERROR_MESSAGE = "%d원보다 높은 금액을 입력해야 합니다.";
     private static final int DEFAULT_PRICE = 1000;
-    private static final int MIN_LOTTO_TICKETS_COUNT = 1;
 
     private final int price;
 
@@ -38,10 +37,6 @@ public class LottoStore {
         }
 
         return new LottoCoupon(payment / price);
-    }
-
-    public boolean purchasable(int payment) {
-        return purchasable(payment, MIN_LOTTO_TICKETS_COUNT);
     }
 
     public boolean purchasable(int payment, int count) {

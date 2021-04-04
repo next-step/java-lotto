@@ -28,12 +28,12 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void print(LottoBuyer lottoBuyer) {
+    public static void print(AllLottoTickets allLottoTickets) {
         System.out.printf("\n수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
-                lottoBuyer.manualLottoTicketsCount(), lottoBuyer.autoLottoTicketsCount()
+                allLottoTickets.manualLottoTicketsCount(), allLottoTickets.autoLottoTicketsCount()
         );
 
-        for (final LottoTicket lottoTicket : lottoBuyer.allLottoTickets().lottoTickets()) {
+        for (final LottoTicket lottoTicket : allLottoTickets.allLottoTickets().lottoTickets()) {
             System.out.println(prettyString(lottoTicket));
         }
 

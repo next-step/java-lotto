@@ -19,21 +19,21 @@ public class LottoController {
         lottoCoupon.validateExchangeable(manualLottoTicketsCount);
 
         final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
-        final LottoBuyer lottoBuyer = lottoCoupon.lottoBuyer(
+        final AllLottoTickets allLottoTickets = lottoCoupon.lottoBuyer(
                 manualLottoTicketsInput.stream()
                         .map(StringUtil::splitCommas)
                         .map(LottoTicketFactory::from)
                         .collect(Collectors.toList())
         );
 
-        ResultView.print(lottoBuyer);
+        ResultView.print(allLottoTickets);
 
         final String winnerNumbersInput = InputView.winnerNumbers();
         final String bonusNumberInput = InputView.bonusNumber();
 
         final LottoDiscriminator lottoDiscriminator = LottoDiscriminatorFactory.from(
                 StringUtil.splitCommas(winnerNumbersInput), bonusNumberInput);
-        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, lottoBuyer.allLottoTickets());
+        final LottoStatistics lottoStatistics = new LottoStatistics(lottoDiscriminator, allLottoTickets.allLottoTickets());
 
         ResultView.print(lottoStatistics, payment);
     }

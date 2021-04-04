@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoBuyerTest {
+public class AllLottoTicketsTest {
     private List<LottoTicket> manualLottoTickets;
     private List<LottoTicket> autoLottoTickets;
 
@@ -34,33 +32,33 @@ public class LottoBuyerTest {
 
     @Test
     public void create() {
-        final LottoBuyer expected = new LottoBuyer(manualLottoTickets, autoLottoTickets);
+        final AllLottoTickets expected = new AllLottoTickets(manualLottoTickets, autoLottoTickets);
 
-        final LottoBuyer result = new LottoBuyer(manualLottoTickets, autoLottoTickets);
+        final AllLottoTickets result = new AllLottoTickets(manualLottoTickets, autoLottoTickets);
 
         assertThat(result).isEqualTo(expected);
     }
 
     @Test
     public void manualLottoTicketsCount() {
-        final LottoBuyer lottoBuyer = new LottoBuyer(manualLottoTickets, autoLottoTickets);
+        final AllLottoTickets allLottoTickets = new AllLottoTickets(manualLottoTickets, autoLottoTickets);
 
-        assertThat(lottoBuyer.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
+        assertThat(allLottoTickets.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
     }
 
 
     @Test
     public void autoLottoTicketsCount() {
-        final LottoBuyer lottoBuyer = new LottoBuyer(manualLottoTickets, autoLottoTickets);
+        final AllLottoTickets allLottoTickets = new AllLottoTickets(manualLottoTickets, autoLottoTickets);
 
-        assertThat(lottoBuyer.autoLottoTicketsCount()).isEqualTo(autoLottoTickets.size());
+        assertThat(allLottoTickets.autoLottoTicketsCount()).isEqualTo(autoLottoTickets.size());
     }
 
     @Test
     public void allLottoTickets() {
-        final LottoBuyer lottoBuyer = new LottoBuyer(manualLottoTickets, autoLottoTickets);
+        final AllLottoTickets allLottoTickets = new AllLottoTickets(manualLottoTickets, autoLottoTickets);
 
-        assertThat(lottoBuyer.allLottoTickets()).isEqualTo(
+        assertThat(allLottoTickets.allLottoTickets()).isEqualTo(
                 new LottoTickets(manualLottoTickets).combine(new LottoTickets(autoLottoTickets))
         );
     }

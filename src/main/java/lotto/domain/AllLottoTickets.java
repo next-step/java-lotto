@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoBuyer {
+public class AllLottoTickets {
     private final LottoTickets manualLottoTickets;
     private final LottoTickets autoLottoTickets;
 
-    public LottoBuyer(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+    public AllLottoTickets(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
         this(new LottoTickets(manualLottoTickets), new LottoTickets(autoLottoTickets));
     }
 
-    public LottoBuyer(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+    public AllLottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         this.manualLottoTickets = manualLottoTickets;
         this.autoLottoTickets = autoLottoTickets;
     }
@@ -32,7 +32,7 @@ public class LottoBuyer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoBuyer that = (LottoBuyer) o;
+        AllLottoTickets that = (AllLottoTickets) o;
         return Objects.equals(manualLottoTickets, that.manualLottoTickets) && Objects.equals(autoLottoTickets, that.autoLottoTickets);
     }
 
