@@ -16,6 +16,11 @@ class LottoTest {
 	}
 
 	@Test
+	void createByString() {
+		assertThat(new Lotto("1,2,3,4,5,6")).isEqualToComparingFieldByField(new Lotto(new NoShuffleStrategy()));
+	}
+
+	@Test
 	void checkDuplicateNumbers() {
 		Lotto lotto = new Lotto();
 
