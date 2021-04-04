@@ -39,4 +39,24 @@ class WinningResultTest {
                 .isInstanceOf(MapNullPointerException.class)
                 .hasMessageContaining("Map 인스턴스가 Null 입니다.");
     }
+
+    @DisplayName("WinningResult 인스턴스가 초기 셋팅값 반환 여부 테스트")
+    @Test
+    void 반환_초기값() {
+
+        // when
+        Map<Rank, Integer> actual = WinningResult.values();
+
+        // then
+        assertAll(
+                ()-> assertThat(actual.get(Rank.MISS)).isEqualTo(0),
+                ()-> assertThat(actual.get(Rank.FIFTH)).isEqualTo(0),
+                ()-> assertThat(actual.get(Rank.FOURTH)).isEqualTo(0),
+                ()-> assertThat(actual.get(Rank.THIRD)).isEqualTo(0),
+                ()-> assertThat(actual.get(Rank.SECOND)).isEqualTo(0),
+                ()-> assertThat(actual.get(Rank.FIRST)).isEqualTo(0)
+
+        );
+
+    }
 }
