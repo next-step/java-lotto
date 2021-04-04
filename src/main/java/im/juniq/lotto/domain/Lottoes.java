@@ -36,11 +36,7 @@ public class Lottoes implements Iterable<Lotto> {
 	}
 
 	public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers) {
-		int countMatchedLotto = 0;
-		for (Lotto lotto : lottoes) {
-			countMatchedLotto += countMatchedLottoes(winning, lotto, winningNumbers);
-		}
-		return countMatchedLotto;
+		return lottoes.stream().mapToInt(lotto -> countMatchedLottoes(winning, lotto, winningNumbers)).sum();
 	}
 
 	private int countMatchedLottoes(Winning winning, Lotto lotto, WinningNumbers winningNumbers) {
