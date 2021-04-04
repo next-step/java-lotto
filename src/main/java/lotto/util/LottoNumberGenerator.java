@@ -32,16 +32,12 @@ public class LottoNumberGenerator {
     return new LottoNumberGenerator(lottoNumbers);
   }
 
-  public static Lotto createManualLottoNumbers(ManualLottoNumberGenerateStrategy strategy) {
-    return createLotto(strategy.generate());
+  public static List<Number> from(ManualLottoNumberGenerateStrategy strategy) {
+    return sort(strategy.generate());
   }
 
-  public static Lotto createAutoLottoNumbers(AutoLottoNumberGenerateStrategy strategy) {
-    return createLotto(strategy.generate());
-  }
-
-  private static Lotto createLotto(List<Number> numberList) {
-    return new Lotto(sort(numberList));
+  public static List<Number> from(AutoLottoNumberGenerateStrategy strategy) {
+    return sort(strategy.generate());
   }
 
   private static List<Number> sort(List<Number> generatedLottoNumber) {

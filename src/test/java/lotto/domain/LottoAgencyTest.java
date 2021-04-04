@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,24 +22,20 @@ class LottoAgencyTest {
   }
 
   @Test
-  @DisplayName("지난 주 로또 번호를 입력 할 수 있는가")
+  @DisplayName("로또 매치 결과를 얻을 수 있는가")
   public void updateWinnerNumber() throws Exception {
     //given
-    List<Number> numbers = new ArrayList<>();
-
-    numbers.add(new Number(1));
-    numbers.add(new Number(2));
-    numbers.add(new Number(3));
-    numbers.add(new Number(4));
-    numbers.add(new Number(5));
-    numbers.add(new Number(6));
-
-    LottoAgency agency = new LottoAgency(new Money(14455));
+    Lotto winningNumbers = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoAgency agency = new LottoAgency(new Money(5000));
 
     //when
-    agency.updateWinLottoNumbers(new Lotto(numbers));
+    agency.purchaseLotto();
 
     //then
-    assertEquals(new Lotto(numbers), agency.getWinLottoNumbers());
+    assertAll(
+        () -> assertEquals(winningNumbers.getNumbers().size(), 6),
+        () -> assertEquals(agency.getPurchaseQuantity(), 5),
+        () -> assertNotNull(agency.getLottoResult(new WinningNumber(winningNumbers, new Number(6))))
+    );
   }
 }

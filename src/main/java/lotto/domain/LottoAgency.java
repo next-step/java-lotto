@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class LottoAgency {
@@ -20,38 +18,20 @@ public class LottoAgency {
     return LottoCoupon.createLottoCoupon(getPurchaseQuantity());
   }
 
+  public Money getSeedMoney() {
+    return money.multiple(LOTTO_PER_PRICE);
+  }
+
   public int getPurchaseQuantity() {
-    return money.toInt() / LOTTO_PER_PRICE;
+    return money.divide(LOTTO_PER_PRICE);
   }
 
   public LottoCoupon getCoupon() {
     return new LottoCoupon(coupon.getLottoCoupon());
   }
 
-  public WinningBoard getTotalResult(Lotto winNumbers) {
-    List<Integer> lottoMatchResult = new ArrayList<>();
-    for(int i = 0; i < getPurchaseQuantity(); i++) {
-      lottoMatchResult.add(eachResult(i, winNumbers));
-    }
-    return WinningBoard.createLottoResult(lottoMatchResult, money);
-  }
-
-  private int eachResult(int index, Lotto winNumbers) {
-    List<Number> winNumber = winNumbers.getNumbers();
-    List<Number> targetNumber = coupon.getLottoCoupon().get(index).getNumbers();
-
-    int count = 0;
-    for(int i = 0; i < winNumber.size(); i++) {
-      count = isContain(winNumber, targetNumber, count, i);
-    }
-    return count;
-  }
-
-  private int isContain(List<Number> winNumber, List<Number> targetNumber, int count, int index) {
-    if(winNumber.contains(targetNumber.get(index))) {
-      count++;
-    }
-    return count;
+  public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
+    return winningNumber.generateLottoMatchResult(winningNumber, this);
   }
 
   @Override

@@ -26,6 +26,11 @@ public class InputView {
     return stringToLotto(reader.readLine());
   }
 
+  public Number enterBonusBall() throws IOException {
+    System.out.println("보너스 볼을 입력해주세요.");
+    return stringToNumber(reader.readLine());
+  }
+
   private Lotto stringToLotto(String enteredWinnerNumbers) {
     List<Number> numbers = new ArrayList<>();
     String[] list = enteredWinnerNumbers.split("[, ]");
@@ -34,5 +39,9 @@ public class InputView {
       numbers.add(new Number(Integer.parseInt(str)));
     }
     return new Lotto(numbers);
+  }
+
+  private Number stringToNumber(String enteredBonusBall) {
+    return new Number(Integer.parseInt(enteredBonusBall));
   }
 }

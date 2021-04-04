@@ -39,8 +39,7 @@ class LottoNumberGeneratorTest {
   public void createManual() throws Exception {
     //given
     //when
-    Lotto manualLottoNumbers = LottoNumberGenerator
-        .createManualLottoNumbers(new ManualLottoNumberGenerateStrategy(Arrays.asList(6, 5, 4, 3, 2, 1)));
+    Lotto manualLottoNumbers = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
 
     //then
     assertEquals(manualLottoNumbers.getNumbers().size(), 6);
@@ -51,8 +50,7 @@ class LottoNumberGeneratorTest {
   public void createAuto() throws Exception {
     //given
     //when
-    Lotto autoLottoNumbers = LottoNumberGenerator
-        .createAutoLottoNumbers(new AutoLottoNumberGenerateStrategy());
+    Lotto autoLottoNumbers = Lotto.createAutoLotto();
 
     //then
     assertEquals(autoLottoNumbers.getNumbers().size(), 6);
