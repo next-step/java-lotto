@@ -74,16 +74,4 @@ class LottoTest {
 
         Assertions.assertEquals(lotto.matchNumberCounts(expectedLotto), expectedMatchedCount);
     }
-
-    @Test
-    void lottoTest() {
-        lotto.getLottoNumbers().clear();
-        Set<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-        lottoNumbers.clear();
-
-        System.out.println("lottoNumbers = " + lottoNumbers.size());
-        System.out.println("lotto.getLottoNumbers().size() = " + lotto.getLottoNumbers().size());
-
-    }
-
 }
