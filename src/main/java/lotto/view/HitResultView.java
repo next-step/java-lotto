@@ -30,7 +30,7 @@ public class HitResultView {
         for (Prize prize : Prize.values()) {
             System.out.printf("%s (%,d원)- %d개%n",
                     makeHitCountMessage(prize.getHitCount()),
-                    prize.getPrizeMoney().getMoney(),
+                    prize.prizeMoney(),
                     hitResults.countPrize(prize));
         }
     }

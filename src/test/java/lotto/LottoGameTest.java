@@ -33,6 +33,6 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
         HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers, bonusNumber));
 
-        assertThat(hitResult.getPrize().getPrizeMoney()).isEqualTo(new Money(1_500_000));
+        assertThat(hitResult.getPrize().prizeMoney()).isEqualTo(1_500_000);
     }
 }

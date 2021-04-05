@@ -21,13 +21,11 @@ public class HitResults {
     }
 
     private double sumHitMoney() {
-        double sumPrizeMoney = 0;
+        HitMoney sumPrizeMoney = new HitMoney(0);
         for (HitResult hitResult : hitResults) {
-            sumPrizeMoney += hitResult.getPrize()
-                    .getPrizeMoney()
-                    .getMoney();
+            sumPrizeMoney = sumPrizeMoney.sum(hitResult.getPrize().prizeMoney());
         }
-        return sumPrizeMoney;
+        return sumPrizeMoney.intValue();
     }
 
     public long countPrize(Prize prize) {

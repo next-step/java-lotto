@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Prize {
-    FIRST(new HitCount(6), new Money(2_000_000_000)),
-    SECOND(new HitCount(5, true), new Money(30_000_0000)),
-    THIRD(new HitCount(5), new Money(1_500_000)),
-    FOURTH(new HitCount(4), new Money(50_000)),
-    FIFTH(new HitCount(3), new Money(5_000)),
-    NO_PRIZE(new HitCount(0), new Money(0)),
+    FIRST(new HitCount(6), new HitMoney(2_000_000_000)),
+    SECOND(new HitCount(5, true), new HitMoney(30_000_0000)),
+    THIRD(new HitCount(5), new HitMoney(1_500_000)),
+    FOURTH(new HitCount(4), new HitMoney(50_000)),
+    FIFTH(new HitCount(3), new HitMoney(5_000)),
+    NO_PRIZE(new HitCount(0), new HitMoney(0)),
     ;
 
     private final HitCount hitCount;
-    private final Money prizeMoney;
+    private final HitMoney prizeMoney;
 
-    Prize(HitCount hitCount, Money prizeMoney) {
+    Prize(HitCount hitCount, HitMoney prizeMoney) {
         this.hitCount = hitCount;
         this.prizeMoney = prizeMoney;
     }
@@ -39,8 +39,8 @@ public enum Prize {
         throw new IllegalArgumentException("당첨갯수가 당첨상금에 없습니다.");
     }
 
-    public Money getPrizeMoney() {
-        return prizeMoney;
+    public int prizeMoney() {
+        return prizeMoney.intValue();
     }
 
     public HitCount getHitCount() {
