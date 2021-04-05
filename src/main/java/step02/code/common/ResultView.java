@@ -7,8 +7,9 @@ import step02.code.domain.GradeEnum;
 import step02.code.domain.Lotto;
 
 public class ResultView {
-  public static void myLotto(List<Lotto> lottos) {
-    System.out.println(lottos.size() + "를 구매했습니다.");
+  public static void myLotto(List<Lotto> lottos, int passiveLottoSize) {
+    System.out.print("수동으로 " + passiveLottoSize + "장, ");
+    System.out.println("자동으로 " + (lottos.size() - passiveLottoSize) + "장을 구매했습니다.");
     lottos.forEach(ResultView::lotto);
   }
 

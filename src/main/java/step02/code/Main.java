@@ -1,5 +1,7 @@
 package step02.code;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import step02.code.common.InputView;
@@ -14,8 +16,15 @@ public class Main {
   public static void main(String[] args) {
     int money = InputView.buy();
 
-    Lottos lottos = Lottos.buy(money);
-    ResultView.myLotto(lottos.lottos());
+    int passiveLottoSize = InputView.passiveLottoSize();
+    List<Lotto> passiveLottos = new ArrayList<>();
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    for(int i = 0; i < passiveLottoSize; i++) {
+      passiveLottos.add(Lotto.makeLottoByString(InputView.passiveLotto()));
+    }
+
+    Lottos lottos = Lottos.buy(money, passiveLottos);
+    ResultView.myLotto(lottos.lottos(), passiveLottoSize);
 
     Lotto winningNumber = Lotto.makeLottoByString(InputView.winningNumber());
 
