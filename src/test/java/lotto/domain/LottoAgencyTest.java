@@ -38,4 +38,31 @@ class LottoAgencyTest {
         () -> assertNotNull(agency.getLottoResult(new WinningNumber(winningNumbers, new Number(6))))
     );
   }
+
+  @Test
+  @DisplayName("입력된 개수에 따라 구매한 로또의 가격이 나오는가")
+  public void purchaseLottoPrice() throws Exception {
+    //given
+    LottoAgency agency = new LottoAgency(new Money(10000));
+
+    //when
+    Money money = agency.lottoPurchaseMoney(new Number(8));
+
+    //then
+    assertEquals(new Money(8000), money);
+  }
+
+  @Test
+  @DisplayName("updateBalance를 통해서 현재까지 구매한 금액을 제외하고 더 구매할 수 있는 수량을 구할 수 있는가")
+  public void updateMoney() throws Exception {
+    //given
+    LottoAgency agency = new LottoAgency(new Money(10000));
+
+    //when
+    Money money = agency.lottoPurchaseMoney(new Number(8));
+    agency.updateBalance(money);
+
+    //then
+    assertEquals(agency.getPurchaseQuantity(), 2);
+  }
 }

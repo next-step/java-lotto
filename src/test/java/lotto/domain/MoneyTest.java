@@ -44,6 +44,17 @@ class MoneyTest {
     assertEquals(140000, multiple);
   }
 
+  @Test
+  @DisplayName("제대로 뺴기를 수행하는가")
+  public void substract() throws Exception {
+    //given
+    Money money = new Money(20000);
+    //when
+    Money subtract = money.subtract(new Money(1000));
+    //then
+    assertEquals(new Money(19000), subtract);
+  }
+
   @ParameterizedTest
   @CsvSource({"5000, 0.35", "50000, 3.57", "1500000, 107.14", "30000000, 2142.85", "2000000000, 142857.14"})
   @DisplayName("전체금액과 구매한 금액을 나눠서 수익률을 계산할 수 있는가")
