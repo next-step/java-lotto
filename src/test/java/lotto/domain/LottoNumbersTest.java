@@ -30,9 +30,9 @@ class LottoNumbersTest {
     LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers();
     List<LottoNumber> list = lottoNumbers.getLottoNumbers();
 
-    assertAll(() -> assertThatThrownBy(() -> list.add(LottoNumber.generate())).isInstanceOf(UnsupportedOperationException.class)
+    assertAll(() -> assertThatThrownBy(() -> list.add(LottoNumber.generate(1))).isInstanceOf(UnsupportedOperationException.class)
             , () -> assertThatThrownBy(() -> list.remove(0)).isInstanceOf(UnsupportedOperationException.class)
-            , () -> assertThatThrownBy(() -> list.replaceAll(lotto -> LottoNumber.generate())).isInstanceOf(UnsupportedOperationException.class)
+            , () -> assertThatThrownBy(() -> list.replaceAll(lotto -> LottoNumber.generate(1))).isInstanceOf(UnsupportedOperationException.class)
     );
   }
 }

@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
+  private static final int LOTTO_NUMBER_GREATER_THAN_OR_EQUALS = 1;
+  private static final int LOTTO_NUMBER_LESS_THAN = 46;
+
   private final List<LottoNumber> lottoNumbers;
 
   private LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -14,10 +17,12 @@ public class LottoNumbers {
   }
 
   public static LottoNumbers generateSixNumbers() {
-    List<LottoNumber> sixLottoNumbers = IntStream.range(0, 6)
-            .mapToObj(index -> LottoNumber.generate())
+    List<LottoNumber> sixLottoNumbers = IntStream.range(LOTTO_NUMBER_GREATER_THAN_OR_EQUALS, LOTTO_NUMBER_LESS_THAN)
+            .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList());
-    return new LottoNumbers(sixLottoNumbers);
+
+    Collections.shuffle(sixLottoNumbers);
+    return new LottoNumbers(sixLottoNumbers.subList(0, 6));
   }
 
   public int size() {
@@ -43,6 +48,6 @@ public class LottoNumbers {
 
   @Override
   public String toString() {
-    return "lottoNumbers=" + lottoNumbers;
+    return String.valueOf(lottoNumbers);
   }
 }
