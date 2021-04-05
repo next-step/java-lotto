@@ -2,9 +2,9 @@ package step2.Domain;
 
 public class WinningLotto extends Lotto {
 
-    private BonusBall bonusBall;
+    private LottoNumber bonusBall;
 
-    public WinningLotto(InputNumber inputNumber , BonusBall bonusBall) {
+    public WinningLotto(InputNumber inputNumber , LottoNumber bonusBall) {
         super(inputNumber);
         if(bonusBallDuplicateCheck(bonusBall)){
             throw new IllegalArgumentException("지난 주 당첨번호와 보너스 볼이 중복됩니다.");
@@ -12,12 +12,12 @@ public class WinningLotto extends Lotto {
         this.bonusBall = bonusBall;
     }
 
-    private boolean bonusBallDuplicateCheck(BonusBall bonusBall){
+    private boolean bonusBallDuplicateCheck(LottoNumber bonusBall){
         return this.getLottoNumberList().stream()
-                .anyMatch(lottoNumber -> lottoNumber.getNumber() == bonusBall.getNumber());
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
-    public BonusBall bonusBall(){
+    public LottoNumber bonusBall(){
         return bonusBall;
     }
 }

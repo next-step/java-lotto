@@ -44,6 +44,20 @@ public class WinningLottoTest {
     }
 
     @Test
+    @DisplayName("숫자 5개 맞췄을때(보너스볼 포함)")
+    void bonus_five_include_bonus_number() {
+        assertThat(LottoPrize.valueOf(new HitCount(5),true)).isEqualTo(LottoPrize.SECOND);
+    }
+
+    @Test
+    @DisplayName("숫자 5개 맞췄을때(보너스볼 미포함) && 4개 맞췄을때, 하나도 안걸렸을때")
+    void bonus_five_exclude_bonus_number() {
+        assertThat(LottoPrize.valueOf(new HitCount(5),false)).isEqualTo(LottoPrize.THIRD);
+        assertThat(LottoPrize.valueOf(new HitCount(4),false)).isEqualTo(LottoPrize.FOURTH);
+        assertThat(LottoPrize.valueOf(new HitCount(4),true)).isEqualTo(LottoPrize.FOURTH);
+    }
+
+    @Test
     @DisplayName("지난주 당첨 번호와 몇 개 일치했는지 통계 생성 테스트 - 3개일치 1개, 4개 일치 1개")
     void statistic_test() {
         InputNumber winningNumbers = new InputNumber("1,2,3,4,5,6");

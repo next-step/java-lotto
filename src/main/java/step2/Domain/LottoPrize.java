@@ -1,30 +1,30 @@
 package step2.Domain;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum LottoPrize {
-    BLANK(0, new HitCount(0)),
-    FIFTH(5_000, new HitCount(3)),
-    FOURTH(50_000, new HitCount(4)),
-    THIRD(1_500_000, new HitCount(5)),
-    SECOND(10_000_000, new HitCount(5)),
-    FIRST(2_000_000_000, new HitCount(6));
 
+    FIRST(2_000_000_000, new HitCount(6), (a, b) -> b.equals(new HitCount(6))),
+    SECOND(10_000_000, new HitCount(5), (a, b) -> a && b.equals(new HitCount(5))),
+    THIRD(1_500_000, new HitCount(5), (a, b) -> b.equals(new HitCount(5))),
+    FOURTH(50_000, new HitCount(4), (a, b) -> b.equals(new HitCount(4))),
+    FIFTH(5_000, new HitCount(3), (a, b) -> b.equals(new HitCount(3))),
+    BLANK(0, new HitCount(0), (a, b) -> b.equals(new HitCount(0)));
 
     private long prize;
     private HitCount hitCount;
+    private BiFunction<Boolean, HitCount, Boolean> biFunction;
 
-    LottoPrize(long prize, HitCount hitCount) {
+    LottoPrize(long prize, HitCount hitCount, BiFunction<Boolean, HitCount, Boolean> biFunction) {
         this.prize = prize;
         this.hitCount = hitCount;
+        this.biFunction = biFunction;
     }
 
     public static LottoPrize valueOf(HitCount hitCount, boolean matchBonus) {
-        if (matchBonus && LottoPrize.SECOND.hitCount.equals(hitCount)) {
-            return LottoPrize.SECOND;
-        }
         return Arrays.stream(LottoPrize.values())
-                .filter(lottoPrize -> lottoPrize.hitCount.equals(hitCount))
+                .filter(lottoPrize -> lottoPrize.filter(matchBonus, hitCount))
                 .findAny()
                 .orElse(BLANK);
     }
@@ -35,5 +35,9 @@ public enum LottoPrize {
 
     public HitCount hitCount() {
         return hitCount;
+    }
+
+    private Boolean filter(Boolean matchBonus, HitCount hitCount) {
+        return biFunction.apply(matchBonus, hitCount);
     }
 }
