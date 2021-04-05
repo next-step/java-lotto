@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Random;
-
 public class LottoNumber {
   private final int lottoNumber;
 
@@ -9,12 +7,12 @@ public class LottoNumber {
     this.lottoNumber = lottoNumber;
   }
 
-  public static LottoNumber generate() {
-    return new LottoNumber(randomNumber());
-  }
-
-  private static int randomNumber() {
-    return new Random().nextInt(45) + 1;
+  public static LottoNumber generate(int number) {
+    LottoNumber newLottoNumber = new LottoNumber(number);
+    if (!newLottoNumber.isValidNumberRange()) {
+      throw new IllegalArgumentException("로또 번호는 1~45의 범위 안의 숫자여야만 한다.");
+    }
+    return newLottoNumber;
   }
 
   public boolean isValidNumberRange() {
@@ -23,6 +21,6 @@ public class LottoNumber {
 
   @Override
   public String toString() {
-    return "lottoNumber=" + lottoNumber;
+    return String.valueOf(lottoNumber);
   }
 }
