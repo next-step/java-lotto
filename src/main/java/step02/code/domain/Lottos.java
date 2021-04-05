@@ -37,7 +37,6 @@ public class Lottos {
   }
 
   private static void checkPassive(int money, List<Lotto> lottos) {
-    check(money);
     if(money - (LOTTO_PRICE * lottos.size()) < 0) {
       throw new IllegalArgumentException("lotto 구입 금액을 초과할수 없습니다.");
     }
@@ -48,14 +47,15 @@ public class Lottos {
     checkPassive(money, lottos);
     int change = money - (LOTTO_PRICE * lottos.size());
 
-    List<Lotto> autoLottos = IntStream.range(INIT_NUM, change / LOTTO_PRICE)
-      .boxed()
-      .map((i) -> new Lotto(new RandomNumber()))
-      .collect(Collectors.toList());
+    Lottos autoLottos = null;
+    if(change > 0) {
+      autoLottos = buy(change);
+    }
 
-    List<Lotto> list = new ArrayList<>();
-    list.addAll(lottos);
-    list.addAll(autoLottos);
+    List<Lotto> list = new ArrayList<>(lottos);
+    if(autoLottos != null) {
+      list.addAll(autoLottos.lottos());
+    }
       
     return new Lottos(list);
   }
