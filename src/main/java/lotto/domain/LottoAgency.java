@@ -7,7 +7,7 @@ public class LottoAgency {
   private static final int LOTTO_PER_PRICE = 1000;
 
   private final LottoCoupon coupon;
-  private final Money money;
+  private Money money;
 
   public LottoAgency(Money money) {
     this.money = money;
@@ -20,6 +20,14 @@ public class LottoAgency {
 
   public Money getSeedMoney() {
     return new Money(money.multiple(LOTTO_PER_PRICE));
+  }
+
+  public Money lottoPurchaseMoney(Number quantity) {
+    return new Money(quantity.multiple(LOTTO_PER_PRICE));
+  }
+
+  public void updateBalance(Money purchaseAmount) {
+    this.money = money.subtract(purchaseAmount);
   }
 
   public int getPurchaseQuantity() {

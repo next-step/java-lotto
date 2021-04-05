@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCoupon;
 import lotto.domain.Money;
 import lotto.domain.Number;
 
@@ -29,6 +30,20 @@ public class InputView {
   public Number enterBonusBall() throws IOException {
     System.out.println("보너스 볼을 입력해주세요.");
     return stringToNumber(reader.readLine());
+  }
+
+  public Number enterManualLottoQuantity() throws IOException {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    return stringToNumber(reader.readLine());
+  }
+
+  public LottoCoupon enterManualLottoNumbers(Number number) throws IOException {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    List<Lotto> lottos = new ArrayList<>();
+    for(int i = 0; i < number.getNumber(); i++) {
+      lottos.add(stringToLotto(reader.readLine()));
+    }
+    return LottoCoupon.asLottoCoupon(lottos);
   }
 
   private Lotto stringToLotto(String enteredWinnerNumbers) {

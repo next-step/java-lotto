@@ -15,8 +15,11 @@ public class OutputView {
     System.out.println("총 수익률은 " + doubleToStringFormat(totalResult) + "입니다.");
   }
 
-  public void printBoughtLottoCoupons(LottoAgency agency) {
-    System.out.println(agency.getPurchaseQuantity() + "장을 구매하셨습니다.");
+  public void printBoughtLottoManualCoupons(LottoAgency agency) {
+    System.out.print("수동으로 " + agency.getPurchaseQuantity() + "장, ");
+  }
+  public void printBoughtLottoAutoCoupons(LottoAgency agency) {
+    System.out.println("자동으로 " + agency.getPurchaseQuantity() + "장을 구매하셨습니다.");
     System.out.println(printLottoCoupon(agency));
   }
 
