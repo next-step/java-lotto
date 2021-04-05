@@ -2,6 +2,7 @@ package im.juniq.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,5 +23,11 @@ class LottoNumbersTest {
         assertThat(new LottoNumbers(numbers).matchedCount(new LottoNumbers(numbers))).isEqualTo(6);
         assertThat(new LottoNumbers(numbers).matchedCount(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)))).isEqualTo(5);
         assertThat(new LottoNumbers(numbers).matchedCount(new LottoNumbers(Arrays.asList(7,8,9,10,11,12)))).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("로또 숫자 개수는 6개 이여야 한다")
+    void checkSixNumber() {
+        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2))).isInstanceOf(IllegalArgumentException.class);
     }
 }

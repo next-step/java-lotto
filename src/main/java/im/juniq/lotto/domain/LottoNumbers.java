@@ -2,12 +2,14 @@ package im.juniq.lotto.domain;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<Integer> {
     private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 6개 이어야 합니다.");
+        }
         this.numbers = numbers;
     }
 
