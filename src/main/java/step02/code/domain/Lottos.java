@@ -1,7 +1,9 @@
 package step02.code.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -34,6 +36,30 @@ public class Lottos {
     return new Lottos(lottos);
   }
 
+  private static void checkPassive(int money, List<Lotto> lottos) {
+    check(money);
+    if(money - (LOTTO_PRICE * lottos.size()) < 0) {
+      throw new IllegalArgumentException("lotto 구입 금액을 초과할수 없습니다.");
+    }
+  }
+
+  // 수동 구매가 포함된 경우
+  public static Lottos buy(int money, List<Lotto> lottos) {
+    checkPassive(money, lottos);
+    int change = money - (LOTTO_PRICE * lottos.size());
+
+    List<Lotto> autoLottos = IntStream.range(INIT_NUM, change / LOTTO_PRICE)
+      .boxed()
+      .map((i) -> new Lotto(new RandomNumber()))
+      .collect(Collectors.toList());
+
+    List<Lotto> list = new ArrayList<>();
+    list.addAll(lottos);
+    list.addAll(autoLottos);
+      
+    return new Lottos(list);
+  }
+
   public List<Lotto> lottos() {
     return Collections.unmodifiableList(lottos);
   }
@@ -43,4 +69,5 @@ public class Lottos {
       .map(lotto -> GradeEnum.fromGrade(lotto.match(winningNumber), lotto.isMatchBonus(bonus)))
       .collect(Collectors.toList());
   }
+
 }
