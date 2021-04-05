@@ -8,6 +8,9 @@ public class Money {
     private final int money;
 
     public Money(int money) {
+        if (money < ONE_GAME_MONEY) {
+            
+        }
         this.money = money;
     }
 
