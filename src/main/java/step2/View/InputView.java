@@ -1,7 +1,7 @@
 package step2.View;
 
-import step2.Domain.BonusBall;
 import step2.Domain.InputNumber;
+import step2.Domain.LottoNumber;
 import step2.Domain.Money;
 import step2.Domain.WinningLotto;
 
@@ -26,8 +26,8 @@ public class InputView {
         return new WinningLotto(new InputNumber(scanner.nextLine()),bonusBall());
     }
 
-    private BonusBall bonusBall() {
+    private LottoNumber bonusBall() {
         System.out.println("보너스 볼을 입력해주세요.");
-        return new BonusBall(scanner.nextInt());
+        return new LottoNumber(scanner.nextInt());
     }
 }

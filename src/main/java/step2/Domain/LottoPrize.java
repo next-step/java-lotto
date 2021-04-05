@@ -5,12 +5,12 @@ import java.util.function.BiFunction;
 
 public enum LottoPrize {
 
-    FIRST(2_000_000_000, new HitCount(6), (a, b) -> b.equals(new HitCount(6))),
-    SECOND(10_000_000, new HitCount(5), (a, b) -> a && b.equals(new HitCount(5))),
-    THIRD(1_500_000, new HitCount(5), (a, b) -> b.equals(new HitCount(5))),
-    FOURTH(50_000, new HitCount(4), (a, b) -> b.equals(new HitCount(4))),
-    FIFTH(5_000, new HitCount(3), (a, b) -> b.equals(new HitCount(3))),
-    BLANK(0, new HitCount(0), (a, b) -> b.equals(new HitCount(0)));
+    FIRST(2_000_000_000, new HitCount(6), (matchBonus, hitCount) -> hitCount.equals(new HitCount(6))),
+    SECOND(10_000_000, new HitCount(5), (matchBonus, hitCount) -> matchBonus && hitCount.equals(new HitCount(5))),
+    THIRD(1_500_000, new HitCount(5), (matchBonus, hitCount) -> hitCount.equals(new HitCount(5))),
+    FOURTH(50_000, new HitCount(4), (matchBonus, hitCount) -> hitCount.equals(new HitCount(4))),
+    FIFTH(5_000, new HitCount(3), (matchBonus, hitCount) -> hitCount.equals(new HitCount(3))),
+    BLANK(0, new HitCount(0), (matchBonus, hitCount) -> hitCount.equals(new HitCount(0)));
 
     private long prize;
     private HitCount hitCount;

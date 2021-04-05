@@ -32,7 +32,7 @@ public class Lotto {
 
     private boolean containBonusBall(WinningLotto winningLotto){
         return lottoNumberList.stream()
-                .anyMatch(lottoNumber -> lottoNumber.getNumber() == winningLotto.bonusBall().getNumber());
+                .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.bonusBall()));
     }
 
     public List<LottoNumber> getLottoNumberList() {
