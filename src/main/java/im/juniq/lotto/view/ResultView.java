@@ -8,7 +8,8 @@ import im.juniq.lotto.domain.WinningNumbers;
 
 public class ResultView {
 	public static void lottoes(Lottoes lottoes) {
-		System.out.println(lottoes.size() + "개를 구매했습니다.");
+		System.out.println("수동으로 " + lottoes.manualLottoSize() + "장,"
+				+ " 자동으로 " + lottoes.autoLottoSize() + "개를 구매했습니다.");
 		for (Lotto lotto : lottoes) {
 			System.out.print("[");
 			for (int i = 0; i < lotto.numbers().size(); i++) {

@@ -7,22 +7,30 @@ import java.util.List;
 
 public class Lottoes implements Iterable<Lotto> {
 	private final List<Lotto> lottoes = new ArrayList<>();
+	private final int autoLottoSize;
+	private final int manualLottoSize;
 
 	public Lottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
-		makeLottoes(numberOfCreated, shuffleStrategy);
+		this(numberOfCreated, shuffleStrategy, new ArrayList<>());
+	}
+
+	public Lottoes(int numberOfCreated,	ShuffleStrategy shuffleStrategy, List<String> manualLottoes) {
+		manualLottoSize = manualLottoes.size();
+		autoLottoSize = numberOfCreated - manualLottoes.size();
+		makeLottoes(manualLottoes);
+		makeLottoes(autoLottoSize, shuffleStrategy);
 	}
 
 	public Lottoes(Lotto... lotto) {
 		lottoes.addAll(Arrays.asList(lotto));
+		autoLottoSize = 0;
+		manualLottoSize = 0;
 	}
 
 	public Lottoes(List<Lotto> lottoes) {
 		this.lottoes.addAll(lottoes);
-	}
-
-	public Lottoes(int numberOfCreated,	ShuffleStrategy shuffleStrategy, List<String> manualLottoes) {
-		makeLottoes(manualLottoes);
-		makeLottoes(numberOfCreated - manualLottoes.size(), shuffleStrategy);
+		autoLottoSize = 0;
+		manualLottoSize = 0;
 	}
 
 	private List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
@@ -64,6 +72,14 @@ public class Lottoes implements Iterable<Lotto> {
 
 	private long totalPrize(WinningNumbers winningNumbers) {
 		return lottoes.stream().mapToLong(lotto -> lotto.prize(winningNumbers)).sum();
+	}
+
+	public int autoLottoSize() {
+		return autoLottoSize;
+	}
+
+	public int manualLottoSize() {
+		return manualLottoSize;
 	}
 
 	@Override
