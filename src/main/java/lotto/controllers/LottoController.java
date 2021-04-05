@@ -2,7 +2,7 @@ package lotto.controllers;
 
 import lotto.domain.*;
 import lotto.factories.LottoDiscriminatorFactory;
-import lotto.utils.LottoTicketsUtil;
+import lotto.factories.LottoTicketsFactory;
 import lotto.utils.StringUtil;
 import lotto.views.InputView;
 import lotto.views.ResultView;
@@ -19,7 +19,7 @@ public class LottoController {
 
         final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
         final AllLottoTickets allLottoTickets = lottoBuyer.allLottoTickets(
-                LottoTicketsUtil.toLottoTicketsList(manualLottoTicketsInput)
+                LottoTicketsFactory.from(manualLottoTicketsInput)
         );
 
         ResultView.print(allLottoTickets);

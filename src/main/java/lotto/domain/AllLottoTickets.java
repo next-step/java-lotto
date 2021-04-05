@@ -11,6 +11,14 @@ public class AllLottoTickets {
         this(new LottoTickets(manualLottoTickets), new LottoTickets(autoLottoTickets));
     }
 
+    public AllLottoTickets(List<LottoTicket> manualLottoTickets, LottoTickets autoLottoTickets) {
+        this(new LottoTickets(manualLottoTickets), autoLottoTickets);
+    }
+
+    public AllLottoTickets(LottoTickets manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+        this(manualLottoTickets, new LottoTickets(autoLottoTickets));
+    }
+
     public AllLottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         this.manualLottoTickets = manualLottoTickets;
         this.autoLottoTickets = autoLottoTickets;

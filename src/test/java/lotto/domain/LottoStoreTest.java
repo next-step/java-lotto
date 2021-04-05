@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,13 +51,15 @@ public class LottoStoreTest {
     @ValueSource(ints = {1, 2, 3, 4, 10})
     public void allLottoTickets(int manualLottoTicketsCount) {
         final int payment = 10000;
-        final List<LottoTicket> manualLottoTickets = Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                .limit(manualLottoTicketsCount)
-                .collect(Collectors.toList());
+        final LottoTickets manualLottoTickets = new LottoTickets(
+                Stream.generate(LottoTicketFactory::createAutoLottoTicket)
+                        .limit(manualLottoTicketsCount)
+                        .collect(Collectors.toList())
+        );
         final LottoStore lottoStore = new LottoStore();
 
         final AllLottoTickets allLottoTickets = lottoStore.allLottoTickets(payment, manualLottoTickets);
 
-        assertThat(allLottoTickets.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.size());
+        assertThat(allLottoTickets.manualLottoTicketsCount()).isEqualTo(manualLottoTickets.count());
     }
 }

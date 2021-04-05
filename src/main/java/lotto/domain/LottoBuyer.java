@@ -35,7 +35,7 @@ public class LottoBuyer {
         }
     }
 
-    public AllLottoTickets allLottoTickets(List<LottoTicket> manualLottoTickets) {
+    public AllLottoTickets allLottoTickets(LottoTickets manualLottoTickets) {
         return lottoStore.allLottoTickets(payment, manualLottoTickets);
     }
 

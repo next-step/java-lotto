@@ -24,11 +24,11 @@ public class LottoStore {
         return purchasableCount(payment) >= count;
     }
 
-    public AllLottoTickets allLottoTickets(int payment, List<LottoTicket> manualLottoTickets) {
+    public AllLottoTickets allLottoTickets(int payment, LottoTickets manualLottoTickets) {
         return new AllLottoTickets(
                 manualLottoTickets,
                 Stream.generate(LottoTicketFactory::createAutoLottoTicket)
-                        .limit(purchasableCount(payment) - manualLottoTickets.size())
+                        .limit(purchasableCount(payment) - manualLottoTickets.count())
                         .collect(Collectors.toList())
         );
     }
