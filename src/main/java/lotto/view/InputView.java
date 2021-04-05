@@ -1,7 +1,7 @@
-package step2.view;
+package lotto.view;
 
-import step2.util.PrizeCalculatorUtil;
-import step2.validation.InputViewValidator;
+import lotto.util.PrizeCalculatorUtil;
+import lotto.validation.InputViewValidator;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

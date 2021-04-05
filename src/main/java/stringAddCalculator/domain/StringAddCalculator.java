@@ -1,6 +1,6 @@
-package step1.domain;
+package stringAddCalculator.domain;
 
-import step1.exceptin.StringAddCaculatorException;
+import stringAddCalculator.exceptin.StringAddCaculatorException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,7 +1,7 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.Lotto;
-import step2.domain.Prize;
+import lotto.domain.Lotto;
+import lotto.domain.Prize;
 
 public class ResultView {
     public void displayLotto(Lotto lotto) {

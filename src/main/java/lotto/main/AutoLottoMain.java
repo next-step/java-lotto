@@ -1,6 +1,6 @@
-package step2.main;
+package lotto.main;
 
-import step2.AutoLottoController;
+import lotto.AutoLottoController;
 
 public class AutoLottoMain {
 

@@ -1,6 +1,6 @@
-package step2.validation;
+package lotto.validation;
 
-import step2.util.StringUtil;
+import lotto.util.StringUtil;
 
 import java.util.List;
 import java.util.stream.Stream;

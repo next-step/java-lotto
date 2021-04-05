@@ -1,4 +1,4 @@
-package step1.exceptin;
+package stringAddCalculator.exceptin;
 
 public class StringAddCaculatorException extends RuntimeException{
 

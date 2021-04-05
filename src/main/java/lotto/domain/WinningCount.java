@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 public class WinningCount {
     private int winningCount;

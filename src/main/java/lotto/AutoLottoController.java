@@ -1,10 +1,10 @@
-package step2;
+package lotto;
 
-import step2.domain.*;
-import step2.util.PrizeCalculatorUtil;
-import step2.util.StringUtil;
-import step2.view.InputView;
-import step2.view.ResultView;
+import lotto.domain.*;
+import lotto.util.PrizeCalculatorUtil;
+import lotto.util.StringUtil;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Iterator;
 import java.util.Map;

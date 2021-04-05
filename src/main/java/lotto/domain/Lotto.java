@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.util.Constant;
+import lotto.util.Constant;
 
 import java.util.ArrayList;
 import java.util.Arrays;

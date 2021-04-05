@@ -1,8 +1,7 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.User;
+import lotto.domain.Lotto;
 
 import java.util.Arrays;
 

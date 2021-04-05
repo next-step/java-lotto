@@ -1,9 +1,9 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.util.PrizeCalculatorUtil;
-import step2.validation.InputViewValidator;
+import lotto.util.PrizeCalculatorUtil;
+import lotto.validation.InputViewValidator;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
