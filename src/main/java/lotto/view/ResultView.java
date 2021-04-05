@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ResultView {
+public class ResultView extends BaseView {
 
     public static void printLottos(int manualLottoCount, int autoLottoCount, Lottos lottos) {
-        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
+        printlnMessageAfterNewLine(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(prettyString(lotto));
+            printlnMessage(prettyString(lotto));
         }
     }
 
@@ -32,8 +32,8 @@ public class ResultView {
     }
 
     public static void printStatistics(LottoStatistics lottoStatistics) {
-        System.out.println("\n당첨통계");
-        System.out.println("---------");
+        printlnMessageAfterNewLine("당첨통계");
+        printlnMessage("---------");
         Map<Rank, Integer> LottoPrizeResult = lottoStatistics.getLottoPrizeResult();
         Arrays.stream(Rank.values())
                 .filter(prize -> !prize.equals(Rank.MISS))
@@ -46,12 +46,12 @@ public class ResultView {
     }
 
     private static void printRevenueRate(BigDecimal revenueRate) {
-        System.out.print("총 수익률은 " + revenueRate + "입니다.");
+        printlnMessage("총 수익률은 " + revenueRate + "입니다.");
         if (revenueRate.intValue() < 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            printlnMessage("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         if (revenueRate.intValue() > 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+            printlnMessage("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
         }
     }
 }
