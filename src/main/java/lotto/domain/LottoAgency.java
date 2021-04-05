@@ -19,7 +19,7 @@ public class LottoAgency {
   }
 
   public Money getSeedMoney() {
-    return money.multiple(LOTTO_PER_PRICE);
+    return new Money(money.multiple(LOTTO_PER_PRICE));
   }
 
   public int getPurchaseQuantity() {

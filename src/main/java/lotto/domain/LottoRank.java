@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoRank implements LottoRankFilter {
 
@@ -38,11 +37,6 @@ public enum LottoRank implements LottoRankFilter {
     return this.winnerMoney == winnerMoney;
   }
 
-  public static Money getMatchRankWinnerMoney(String found, int matchCount) {
-    return matchRankWinnerMoney(found)
-        .multiple(matchCount);
-  }
-
   @Override
   public boolean filter(boolean bonusBall, Money winnerMoney) {
     return isCorrectMatchCount(matchCount);
@@ -72,7 +66,7 @@ public enum LottoRank implements LottoRankFilter {
     return lottoRank == LottoRank.NONE;
   }
 
-  private static Money matchRankWinnerMoney(String found) {
+  public static Money matchRankWinnerMoney(String found) {
     LottoRank rank = findRank(found);
     return rank.winnerMoney;
   }
