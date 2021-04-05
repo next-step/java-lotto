@@ -10,7 +10,7 @@ public class HitCount {
         this.hitCount = hitCount;
     }
 
-    public long hit(){
+    public long getHit(){
         return hitCount;
     }
 

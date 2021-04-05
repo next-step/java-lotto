@@ -27,7 +27,7 @@ public class Profit {
         List<String> profits = new ArrayList<>();
         for(LottoPrize lottoPrize : LottoPrize.values()){
             profits.add(String.format("%d개 일치 (%d)원 - %d개",
-                    lottoPrize.hitCount().hit(), lottoPrize.prize(), rank.size(lottoPrize)));
+                    lottoPrize.hitCount().getHit(), lottoPrize.prize(), rank.size(lottoPrize)));
         }
         return profits;
     }
