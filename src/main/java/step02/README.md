@@ -47,10 +47,16 @@
       - 주 생성자
   - method
     - static void check(int money);
+    - static void checkPassive(int money, List<Lotto> lottos);
+      - passive 구매시 구입금액 초과 체크
     - static Lottos buy(int money);
       - 돈에 따라서 로또 구입
+    - static Lottos buy(int money, List<Lotto> lottos);
+      - 수동 구매 추가
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
+    - List<GradeEnum> match(Lotto winningNumber, Number bonus);
+      - lotto 들을 지난주 당첨번호와 bonus 번호로 비교후 등수 list 반환
 - ## OutCome.java
 
   - field
