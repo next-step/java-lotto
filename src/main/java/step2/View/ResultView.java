@@ -2,6 +2,7 @@ package step2.View;
 
 import step2.Domain.*;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -30,7 +31,11 @@ public class ResultView {
     public void printLottoStatistic(Profit profit) {
         System.out.println("당첨통계");
         System.out.println("------");
-        profit.profitList().stream().forEach(System.out::println);
+        Map<LottoPrize, Integer> profitList = profit.profitList();
+        for (LottoPrize rank : profitList.keySet()) {
+            System.out.println(String.format("%d개 일치 (%d)원 - %d개",
+                    rank.hitCount().getHit(), rank.prize(), profitList.get(rank)));
+        }
     }
 
     public void printProfitRate(Profit profit) {
