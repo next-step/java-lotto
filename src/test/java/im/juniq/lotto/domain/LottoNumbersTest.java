@@ -26,8 +26,14 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 숫자 개수는 6개 이여야 한다")
+    @DisplayName("로또 숫자 개수는 6개 이여야 한다.")
     void checkSixNumber() {
         assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 숫자는 중복 될 수 없다.")
+    void checkDuplicate() {
+        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5))).isInstanceOf(IllegalArgumentException.class);
     }
 }

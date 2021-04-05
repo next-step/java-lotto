@@ -8,6 +8,9 @@ public class WinningNumbers {
 
 	public WinningNumbers(List<Integer> numbers, int bonusNumber) {
 		this.lottoNumbers = new LottoNumbers(numbers);
+		if (lottoNumbers.contain(bonusNumber)) {
+			throw new IllegalArgumentException("보너스번호는 당첨번호와 중복 될 수 없습니다.");
+		}
 		this.bonusNumber = bonusNumber;
 	}
 

@@ -10,6 +10,9 @@ public class LottoNumbers implements Iterable<Integer> {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개 이어야 합니다.");
         }
+        if (numbers.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 중복 될 수 없습니다.");
+        }
         this.numbers = numbers;
     }
 

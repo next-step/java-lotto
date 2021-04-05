@@ -20,7 +20,14 @@ class WinningNumbersTest {
     @DisplayName("보너스번호와 일치하는 숫자인지 확인")
     void matchedBonusNumber() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(new WinningNumbers(numbers, 6).matchedBonusNumber(new LottoNumbers(numbers))).isEqualTo(true);
+        assertThat(new WinningNumbers(numbers, 7).matchedBonusNumber(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(true);
         assertThat(new WinningNumbers(numbers, 7).matchedBonusNumber(new LottoNumbers(numbers))).isEqualTo(false);
+    }
+
+    @Test
+    @DisplayName("로또 숫자는 중복 될 수 없다.")
+    void checkDuplicate() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThatThrownBy(() -> new WinningNumbers(numbers, 6)).isInstanceOf(IllegalArgumentException.class);
     }
 }
