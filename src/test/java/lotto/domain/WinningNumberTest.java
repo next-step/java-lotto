@@ -32,9 +32,24 @@ class WinningNumberTest {
     LottoAgency agency = new LottoAgency(new Money(14000));
 
     //when
-    LottoScoreBoard lottoScoreBoard = winningNumber.generateLottoMatchResult(winningNumber, agency);
+    LottoScoreBoard lottoScoreBoard = winningNumber.generateLottoMatchResult(agency);
 
     //then
     assertNotNull(lottoScoreBoard);
+  }
+
+  @Test
+  @DisplayName("Lotto를 통해서 당첨 비교를 수행할 수 있는가")
+  public void matchTest() throws Exception {
+    //given
+    WinningNumber winningNumber = WinningNumber.createWinningNumbers(
+        Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        new Number(6));
+
+    //when
+    LottoRank match = winningNumber.match(Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+    //then
+    assertEquals(match.name(), "FIRST");
   }
 }
