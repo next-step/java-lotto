@@ -17,7 +17,11 @@ public class InputView {
     }
 
     public LottoTicketPurchaseRequest inputPurchaseInfo() {
-        return new LottoTicketPurchaseRequest(inputPurchaseAmount(), inputManualLottoPurchaseNumberList(inputManualLottoPurchaseCount()));
+        return new LottoTicketPurchaseRequest(inputPurchaseAmount(), inputManualLottoPurchaseCount());
+    }
+
+    public LottoTicketPurchaseRequest inputPurchaseInfo(LottoTicketPurchaseRequest request) {
+        return new LottoTicketPurchaseRequest(request.getPurchaseAmount(), inputManualLottoPurchaseNumberList(request.getManualLottoPurchaseCount()));
     }
 
     private int inputPurchaseAmount() {
@@ -29,14 +33,18 @@ public class InputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextInt();
     }
-    
+
     private List<String> inputManualLottoPurchaseNumberList(int manualLottoPurchaseCount) {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        scanner.nextLine();
         List<String> manualLottoPurchaseNumberList = new ArrayList<>();
-        for (int i = 0; i < manualLottoPurchaseCount; i++) {
-            manualLottoPurchaseNumberList.add(scanner.nextLine());
+        if (manualLottoPurchaseCount > 0) {
+            System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+            scanner.nextLine();
+            for (int i = 0; i < manualLottoPurchaseCount; i++) {
+                manualLottoPurchaseNumberList.add(scanner.nextLine());
+            }
+            return manualLottoPurchaseNumberList;
         }
+        scanner.nextLine();
         return manualLottoPurchaseNumberList;
     }
 
