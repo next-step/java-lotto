@@ -1,8 +1,10 @@
 package step2.util;
 
 public class PrizeCalculatorUtil {
+    private PrizeCalculatorUtil() {
+    }
 
-    private static final int LOTTO_PRIZE = 1000;
+    private static final int LOTTO_PRIZE = Constant.LOTTO_PRIZE;
 
     public static int getLottoCount(int monney) {
         return monney / LOTTO_PRIZE;

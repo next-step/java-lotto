@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class InputViewValidator {
-
+    private InputViewValidator() {
+    }
     private static final int MINIMUM = 1;
     private static final int MAXIMUM = 45;
 

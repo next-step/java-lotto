@@ -8,8 +8,8 @@ public enum Prize {
     FOURTH(4, 50000),
     THIRD(3, 5000);
 
-    public int rank;
-    public int prize;
+    private int rank;
+    private int prize;
 
     Prize(int rank, int prize) {
         this.rank = rank;

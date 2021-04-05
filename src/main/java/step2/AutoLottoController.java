@@ -1,31 +1,22 @@
 package step2;
 
-import step2.domain.AutoLottoMatchCount;
-import step2.domain.Lotto;
-import step2.domain.Prize;
-import step2.domain.User;
+import step2.domain.*;
 import step2.util.PrizeCalculatorUtil;
 import step2.util.StringUtil;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class AutoLottoController {
 
-    InputView inputView;
-    ResultView resultView;
-    User user;
-    Lotto defaultLotto;
-    AutoLottoMatchCount autoLottoMatchCount;
+    private final InputView inputView;
+    private final ResultView resultView;
 
     public AutoLottoController() {
         inputView = new InputView();
         resultView = new ResultView();
-        user = new User();
-        defaultLotto = new Lotto();
-        autoLottoMatchCount = new AutoLottoMatchCount();
     }
 
     public void run() {
@@ -34,50 +25,46 @@ public class AutoLottoController {
         // 로또 구매 갯수 표시
         resultView.displayLottoCount(lottoCount);
 
+        User user = new User();
         // 로또 구매
-        buyLotto(lottoCount);
+        user.buyLotto(lottoCount);
         // 구매 로또 표시
-        displayLotto();
+        displayLotto(user);
 
         // 당첨 번호 입력
         Lotto winningLotto = new Lotto(StringUtil.stringToList(inputView.inputWinningLotto()));
 
+        AutoLottoMatchCount autoLottoMatchCount = new AutoLottoMatchCount();
+
         // 추첨
-        lottery(winningLotto);
+        lottery(user, winningLotto, autoLottoMatchCount);
 
         // 당첨 통계
-        winningStatistics(lottoCount);
+        winningStatistics(autoLottoMatchCount, lottoCount);
     }
 
-    private void buyLotto(int count) {
-        for (int i = 0; i < count; i++) {
-            user.buyLottos(defaultLotto);
-        }
-    }
-
-    private void displayLotto() {
+    private void displayLotto(User user) {
         for (Lotto lotto : user.getLottoList()) {
             resultView.displayLotto(lotto);
         }
     }
 
-    private void lottery(Lotto winningLotto) {
+    private void lottery(User user, Lotto winningLotto, AutoLottoMatchCount autoLottoMatchCount) {
         for (Lotto lotto : user.getLottoList()) {
-            autoLottoMatchCount.lottoCountPlus(user.winningConfirm(winningLotto, lotto));
+            autoLottoMatchCount.lottoCountPlus(winningLotto.winningLottoCount(lotto));
         }
     }
 
-
-    private void winningStatistics(int lottoCount) {
+    private void winningStatistics(AutoLottoMatchCount autoLottoMatchCount, int lottoCount) {
         resultView.displayStatisticsTitle();
         int total = 0;
-        HashMap<Integer, Integer> resultLottoMatchCount = autoLottoMatchCount.getLottoMatchCount();
+        Map<Integer, WinningCount> resultLottoMatchCount = autoLottoMatchCount.getLottoMatchCount();
         Iterator<Integer> lottoMatchKey = resultLottoMatchCount.keySet().iterator();
         while (lottoMatchKey.hasNext()) {
             Integer number = lottoMatchKey.next();
             Prize prize = Prize.of(number);
-            resultView.displayWinningStatistics(number, prize, resultLottoMatchCount.get(number));
-            total += (prize.getPrize() * resultLottoMatchCount.get(number));
+            resultView.displayWinningStatistics(number, prize, resultLottoMatchCount.get(number).getWinningCount());
+            total += (prize.getPrize() * resultLottoMatchCount.get(number).getWinningCount());
         }
 
         resultView.displayProfits(PrizeCalculatorUtil.profitCalculation(total, lottoCount));

@@ -20,9 +20,8 @@ public class UserTest {
 
         List<Lotto> lottoList = Arrays.asList(first, second, three);
         AutoLottoMatchCount autoLottoMatchCount = new AutoLottoMatchCount();
-        User user = new User();
         for (Lotto lotto : lottoList) {
-            autoLottoMatchCount.lottoCountPlus(user.winningConfirm(winningLotto, lotto));
+            autoLottoMatchCount.lottoCountPlus((winningLotto.winningLottoCount(lotto)));
         }
 
         assertThat(autoLottoMatchCount.findLottoNumberCount(3)).isEqualTo(2);

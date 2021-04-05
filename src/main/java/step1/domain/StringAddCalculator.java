@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
-    private static Pattern pattern;
+    private static final Pattern PATTERN = Pattern.compile(CUSTOM_SEPARATOR);
     public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
@@ -18,7 +18,7 @@ public class StringAddCalculator {
     }
 
     private static String[] splite(String input) {
-        Matcher m = pattern.compile(CUSTOM_SEPARATOR).matcher(input);
+        Matcher m = PATTERN.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);

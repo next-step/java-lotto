@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class StringUtil {
-
+    private StringUtil() {
+    }
 
     public static List<Integer> stringToList(String inputWinningLotto) {
         List<Integer> list = new ArrayList<>();

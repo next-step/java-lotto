@@ -15,18 +15,15 @@ public class User {
         return lottoList;
     }
 
-    public void buyLottos(Lotto defaultLotto) {
+    public void buyLotto(int count) {
+        Lotto defaultLotto = new Lotto();
+        for (int i = 0; i < count; i++) {
+            addLotto(defaultLotto);
+        }
+    }
+
+    public void addLotto(Lotto defaultLotto) {
         lottoList.add(defaultLotto.buyLotto());
     }
 
-
-    public int winningConfirm(Lotto winningLotto, Lotto lotto) {
-        int count = 0;
-        List<Integer> number = lotto.getLottoNumber();
-
-        for (int i = 0; i < number.size(); i++) {
-            count += winningLotto.numberConfirm(number.get(i));
-        }
-        return count;
-    }
 }

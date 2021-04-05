@@ -1,33 +1,34 @@
 package step2.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class AutoLottoMatchCount {
-    HashMap<Integer, Integer> lottoMatchCount;
+    Map<Integer, WinningCount> lottoMatchCount;
 
     public AutoLottoMatchCount() {
         this.lottoMatchCount = new HashMap<>();
         initLottoMatchCount();
     }
 
-    public HashMap<Integer, Integer> getLottoMatchCount() {
+    public Map<Integer, WinningCount> getLottoMatchCount() {
         return lottoMatchCount;
     }
 
     private void initLottoMatchCount() {
-        this.lottoMatchCount.put(3, 0);
-        this.lottoMatchCount.put(4, 0);
-        this.lottoMatchCount.put(5, 0);
-        this.lottoMatchCount.put(6, 0);
+        this.lottoMatchCount.put(3, new WinningCount());
+        this.lottoMatchCount.put(4, new WinningCount());
+        this.lottoMatchCount.put(5, new WinningCount());
+        this.lottoMatchCount.put(6, new WinningCount());
     }
 
-    public void lottoCountPlus(Integer number) {
-        if (number > 2) {
-            lottoMatchCount.put(number, lottoMatchCount.get(number) + 1);
+    public void lottoCountPlus(Integer matchCount) {
+        if (matchCount > 2) {
+            lottoMatchCount.get(matchCount).plus();
         }
     }
 
     public int findLottoNumberCount(Integer number){
-        return this.lottoMatchCount.get(number);
+        return this.lottoMatchCount.get(number).getWinningCount();
     }
 }
