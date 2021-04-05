@@ -31,7 +31,7 @@ public class LottoAgency {
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(winningNumber, this);
+    return winningNumber.generateLottoMatchResult(this);
   }
 
   @Override

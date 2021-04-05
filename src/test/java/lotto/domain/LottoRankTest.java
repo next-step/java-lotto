@@ -102,11 +102,9 @@ class LottoRankTest {
   @DisplayName("Matches() 메서드를 통해 제대로 비교할 수 있는지")
   public void matches() throws Exception {
     //given
-    List<Number> holdingNumbers = LottoNumberGenerator
-        .from(new ManualLottoNumberGenerateStrategy(Arrays.asList(7, 6, 4, 3, 2, 1)));
+    Lotto holdingNumbers = Lotto.createManualLotto(Arrays.asList(7, 6, 4, 3, 2, 1));
 
-    List<Number> winningNumbers = LottoNumberGenerator
-        .from(new ManualLottoNumberGenerateStrategy(Arrays.asList(6, 5, 4, 3, 2, 1)));
+    Lotto winningNumbers = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
     //when
     LottoRank expectedMatches = LottoRank.matches(holdingNumbers, winningNumbers, new Number(6));
     //then

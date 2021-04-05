@@ -42,7 +42,7 @@ class LottoNumberGeneratorTest {
     Lotto manualLottoNumbers = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
 
     //then
-    assertEquals(manualLottoNumbers.getNumbers().size(), 6);
+    assertEquals(manualLottoNumbers.toNumbers().size(), 6);
   }
 
   @Test
@@ -53,6 +53,6 @@ class LottoNumberGeneratorTest {
     Lotto autoLottoNumbers = Lotto.createAutoLotto();
 
     //then
-    assertEquals(autoLottoNumbers.getNumbers().size(), 6);
+    assertEquals(autoLottoNumbers.toNumbers().size(), 6);
   }
 }

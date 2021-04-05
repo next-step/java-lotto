@@ -17,29 +17,21 @@ public class WinningNumber {
     return new WinningNumber(winningNumber, bonusBall);
   }
 
-  public LottoScoreBoard generateLottoMatchResult(WinningNumber winningNumber, LottoAgency agency) {
+  public LottoRank match(Lotto holdingNumbers) {
+    return LottoRank.matches(this.winningNumber, holdingNumbers, this.bonusBall);
+  }
+
+  public LottoScoreBoard generateLottoMatchResult(LottoAgency agency) {
     List<LottoRank> lottoMatchResult = new ArrayList<>();
     for(int i = 0; i < agency.getPurchaseQuantity(); i++) {
-      lottoMatchResult.add(eachLottoMatchResult(i, winningNumber, agency));
+      lottoMatchResult.add(eachLottoMatchResult(i, agency));
     }
     return LottoScoreBoard.createLottoResult(lottoMatchResult, agency.getSeedMoney());
   }
 
-  private LottoRank eachLottoMatchResult(int index, WinningNumber winningNumber, LottoAgency agency) {
-    List<Number> winningNumbers = getNumbers(winningNumber);
-    List<Number> holdingLottoNumbers = getNumbers(index, agency);
-    return LottoRank.matches(winningNumbers, holdingLottoNumbers, winningNumber.bonusBall);
-  }
-
-  private List<Number> getNumbers(int index, LottoAgency agency) {
-    return agency.getCoupon()
+  private LottoRank eachLottoMatchResult(int index, LottoAgency agency) {
+    return match(agency.getCoupon()
         .getLottoCoupon()
-        .get(index)
-        .getNumbers();
-  }
-
-  private List<Number> getNumbers(WinningNumber winningNumber) {
-    return winningNumber.winningNumber
-        .getNumbers();
+        .get(index));
   }
 }

@@ -51,13 +51,13 @@ public class Lotto {
     }
   }
 
-  public List<Number> getNumbers() {
+  public List<Number> toNumbers() {
     return new ArrayList<>(numbers);
   }
 
   @Override
   public String toString() {
-    List<Number> numbers = getNumbers();
+    List<Number> numbers = toNumbers();
     return numbers.stream()
         .map(Number::toString)
         .collect(Collectors.joining(", "));
