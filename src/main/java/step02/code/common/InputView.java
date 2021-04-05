@@ -1,9 +1,6 @@
 package step02.code.common;
 
-import java.util.List;
 import java.util.Scanner;
-
-import step02.code.domain.Lotto;
 
 public class InputView {
   private static final Scanner scanner = new Scanner(System.in);
