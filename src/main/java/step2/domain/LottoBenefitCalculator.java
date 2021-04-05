@@ -18,7 +18,7 @@ public class LottoBenefitCalculator {
                 .stream()
                 .mapToLong(matchResult ->
                         LottoMatchResultCount.of(matchResult.getKey())
-                                .getRewardCash(matchResult.getValue()))
+                                .getRewardCash())
                 .sum();
 
         return getCarculatorMoney(price, sum);

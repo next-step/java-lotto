@@ -35,7 +35,7 @@ public class GenerateLotto {
 
     private Lotto getGeneratedLotto() {
         Set<LottoNumber> lottoNumbers = getGeneratedNumbers().stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return new Lotto(lottoNumbers);

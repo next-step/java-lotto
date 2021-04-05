@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
@@ -23,7 +24,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+        return this.lottoNumbers.stream().collect(Collectors.toSet());
     }
 
     @Override

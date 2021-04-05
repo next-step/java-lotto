@@ -41,7 +41,7 @@ public class Main {
     private static Set<LottoNumber> getLottoNumbers(String winnersNumbers) {
         return Arrays.stream(winnersNumbers.split(","))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

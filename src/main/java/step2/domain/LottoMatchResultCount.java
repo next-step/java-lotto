@@ -4,23 +4,24 @@ import step2.exception.IllegalLottoResultCount;
 
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public enum LottoMatchResultCount {
     THREE(3,
-            (matchedCount) -> 5_000),
+            () -> 5_000),
     FOUR(4,
-            (matchedCount) -> 50_000),
+            () -> 50_000),
     FIVE(5,
-            (matchedCount) -> 1_500_000),
+            () -> 1_500_000),
     SIX(6,
-            (matchedCount) -> 2_000_000_000);
+            () -> 2_000_000_000);
 
     private int matchCount;
-    private Function<Long, Integer> matchResultsMessage;
+    private Supplier<Integer> matchResultsMessage;
 
     LottoMatchResultCount(
             int matchCount,
-            Function<Long, Integer> matchResultsMessage) {
+            Supplier<Integer> matchResultsMessage) {
         this.matchCount = matchCount;
         this.matchResultsMessage = matchResultsMessage;
     }
@@ -32,8 +33,8 @@ public enum LottoMatchResultCount {
                 .orElseThrow(() -> new IllegalLottoResultCount("잘못된 입력값입니다."));
     }
 
-    public int getRewardCash(long matchedCount) {
-        return matchResultsMessage.apply(matchedCount);
+    public int getRewardCash() {
+        return matchResultsMessage.get();
     }
 
 }

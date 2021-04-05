@@ -41,7 +41,7 @@ public class ResultView {
     private static int getCash(int index) {
         LottoMatchResultCount lottoMatchResultCount = LottoMatchResultCount.of(index);
 
-        return lottoMatchResultCount.getRewardCash(index);
+        return lottoMatchResultCount.getRewardCash();
     }
 
     public static void printBenefitResult(double benefitPercentage) {
