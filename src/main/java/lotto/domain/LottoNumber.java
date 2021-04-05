@@ -20,4 +20,11 @@ public class LottoNumber {
   public boolean isValidNumberRange() {
     return 0 < lottoNumber && lottoNumber <= 45;
   }
+
+  @Override
+  public String toString() {
+    return "LottoNumber{" +
+            "lottoNumber=" + lottoNumber +
+            '}';
+  }
 }
