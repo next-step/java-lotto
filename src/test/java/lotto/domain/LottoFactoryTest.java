@@ -1,23 +1,27 @@
 package lotto.domain;
 
+import lotto.ui.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mockStatic;
 
 public class LottoFactoryTest {
 
     private static int LOTTO_COUNT = 3;
     private static int WINNING_NUM = 6;
 
+    private static MockedStatic<InputView> inputView;
+
     private LottoNumbers lottoNumbers;
+    private Lotto lotto;
 
     @BeforeEach
     void setUp() {
@@ -26,8 +30,9 @@ public class LottoFactoryTest {
             lottoNumberSet.add(new LottoNumber(i));
         }
         lottoNumbers = new LottoNumbers(lottoNumberSet);
+        lotto = new Lotto(lottoNumbers);
         LottoFactory.setLottoStrategy(() -> {
-            return lottoNumbers;
+            return lotto;
         });
     }
 
@@ -74,4 +79,25 @@ public class LottoFactoryTest {
         //then
         assertThat(winning).isEqualTo(new WinningNumbers(new LottoNumbers(winningNumber), bonusNumber));
     }
+
+    @Test
+    void createMixLottosTest() {
+        //given
+        int manualNum = 2, testLowerBound = 10, testUpperBound = 15;
+        ArrayList<Integer> manualNumbers = new ArrayList<>();
+        for (int i = testLowerBound; i <= testUpperBound; i++) {
+            manualNumbers.add(i);
+        }
+        inputView = mockStatic(InputView.class);
+        given(InputView.inputNumbers()).willReturn(manualNumbers);
+
+        //when
+        Lottos lottos = LottoFactory.mixLottos(LOTTO_COUNT, manualNum);
+        inputView.close();
+
+        //then
+        assertThat(lottos.lottoList().size()).isEqualTo(LOTTO_COUNT);
+        assertThat(lottos.lottoList()).contains(new Lotto(LottoNumbers.of(manualNumbers)));
+    }
+
 }

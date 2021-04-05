@@ -3,6 +3,8 @@
  * */
 package lotto.domain;
 
+import lotto.ui.InputView;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -32,19 +34,42 @@ public class LottoFactory {
     * 설정해준 전략대로 로또를 생성한다.
     * */
     public static Lotto lotto() {
-        return new Lotto(lottoStrategy.makeLotto());
+        return lottoStrategy.makeLotto();
     }
 
     /*
-    * 원하는 갯수만큼의 로또들을 생성한다.
+    * 원하는 갯수만큼의 로또들을 자동으로 생성한다.
     * */
-    public static Lottos lottos(int lottoCount) {
+    public static Lottos lottos(int total) {
+        Lottos lottos = new Lottos(lottoList(total));
+        return lottos;
+    }
+
+    /*
+    * 수동과 자동을 섞은 로또를 생성한다.
+    * */
+    public static Lottos mixLottos(int total, int manualNum) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        // 수동으로 생성한다.
+        InputView.inputManualLotto();
+        setLottoStrategy(new ManualLottoStrategy());
+        lottoList.addAll(lottoList(manualNum));
+        // 자동으로 생성한다.
+        setLottoStrategy(new AutoLottoStrategy());
+        lottoList.addAll(lottoList(total - manualNum));
+
+        return new Lottos(lottoList);
+    }
+
+    /*
+    * 숫자만큼의 로또 리스트를 생성한다.
+    * */
+    private static List<Lotto> lottoList(int num) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
             lottoList.add(lotto());
         }
-        Lottos lottos = new Lottos(lottoList);
-        return lottos;
+        return lottoList;
     }
 
     /*
@@ -60,5 +85,6 @@ public class LottoFactory {
     public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
         return new WinningStatistics(lottos, winningNumbers);
     }
+
 
 }

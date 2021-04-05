@@ -17,7 +17,7 @@ public class InputView {
     public static final String WINNING_MESSAGE_BEFORE = "지난주 당첨 번호를 입력해 주세요. (구분자는 ', ')";
     public static final String BONUS_MESSAGE_BEFORE = "보너스 볼을 입력해 주세요.";
     public static final String MANUAL_LOTTO_SIZE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 
     private static Scanner sc;
@@ -39,6 +39,9 @@ public class InputView {
         return inputNumbers();
     }
 
+    /*
+    * ❗❗ 수동 로또 생성 질문(관련 - LottoFactory의 mixLottos(), ManualLottoStrategy)
+    * */
     public static void inputManualLotto() {
         System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
     }
