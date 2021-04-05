@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Money {
@@ -22,6 +21,10 @@ public class Money {
     return value * money;
   }
 
+  public Money subtract(Money purchaseAmount) {
+    return new Money(money - purchaseAmount.money);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -38,5 +41,4 @@ public class Money {
   public int hashCode() {
     return Objects.hash(money);
   }
-
 }
