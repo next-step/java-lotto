@@ -13,14 +13,14 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GenerateLottoTest {
+class LottoGenerationTest {
 
     @DisplayName("번호 생성 테스트")
     @Test
     void getGeneratedLottosTest() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        GenerateLotto generateLotto = new GenerateLotto(numbers, 1000);
-        List<Lotto> generatedLottos = generateLotto.getGeneratedLottos();
+        LottoGeneration lottoGeneration = new LottoGeneration(numbers, 1000);
+        List<Lotto> generatedLottos = lottoGeneration.getGeneratedLottos();
 
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::valueOf)
@@ -36,8 +36,8 @@ class GenerateLottoTest {
     @CsvSource(value = {"1000:1","2000:2","100000:100","33000:33", "55999:55", "88777:88"}, delimiter = ':')
     void getGeneratedLottosSizeTest(int cash, int counnt) {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        GenerateLotto generateLotto = new GenerateLotto(numbers, cash);
-        List<Lotto> generatedLottos = generateLotto.getGeneratedLottos();
+        LottoGeneration lottoGeneration = new LottoGeneration(numbers, cash);
+        List<Lotto> generatedLottos = lottoGeneration.getGeneratedLottos();
 
         assertEquals(generatedLottos.size(), counnt);
     }
