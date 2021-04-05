@@ -4,7 +4,6 @@ import static step2.util.StringConstant.NEW_LINE;
 import static step2.view.Validator.validateGame;
 import static step2.view.Validator.validateMinManualCount;
 import static step2.view.Validator.validateMinSeed;
-import static step2.view.Validator.validateNumberRange;
 import static step2.view.Validator.validateParesInt;
 
 import java.util.ArrayList;
@@ -32,8 +31,7 @@ public class InputView {
     public static String getBonus() {
         System.out.println(Message.BONUS);
         String bonus = scanner.nextLine();
-        int intValue = validateParesInt(bonus);
-        validateNumberRange(intValue);
+        validateParesInt(bonus);
         return bonus;
     }
 

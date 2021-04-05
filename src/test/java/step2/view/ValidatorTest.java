@@ -31,7 +31,7 @@ class ValidatorTest {
     @DisplayName("숫자 범위는 1~45")
     @Test
     void validateNumberRange() {
-        assertThrows(IllegalArgumentException.class, () -> Validator.validateNumberRange(46));
+        assertThrows(IllegalArgumentException.class, () -> new Number(46));
     }
 
     @DisplayName("번호는 6개를 입력해야함")
@@ -43,13 +43,6 @@ class ValidatorTest {
     @DisplayName("중복된 번호")
     @Test
     void validateDuplicatedNumber() {
-        Set<Number> set = new HashSet<>();
-        set.add(new Number(1));
-        set.add(new Number(2));
-        set.add(new Number(3));
-        set.add(new Number(4));
-        set.add(new Number(5));
-        set.add(new Number(5));
-        assertThrows(IllegalArgumentException.class, () -> Validator.validateDuplicatedNumber(set));
+        assertThrows(IllegalArgumentException.class, () -> Validator.validateGame("1,2,3,4,5,6,6"));
     }
 }

@@ -28,7 +28,6 @@ public class Validator {
         Set<Number> collect = Arrays.stream(stringNumbers)
             .map(stringNumber -> {
                 int intValue = validateParesInt(stringNumber);
-                validateNumberRange(intValue);
                 return new Number(intValue);
             })
             .collect(toSet());
@@ -43,19 +42,13 @@ public class Validator {
         }
     }
 
-    public static void validateNumberRange(int value) {
-        if (value <= 0 || value >= 46) {
-            throw new IllegalArgumentException("1~45까지 입력가능합니다.");
-        }
-    }
-
-    public static void validateGameLength(String[] game) {
-        if (game.length != 6) {
+    public static void validateGameLength(String[] numbers) {
+        if (numbers.length != 6) {
             throw new IllegalArgumentException("번호 6개를 입력하세요.");
         }
     }
 
-    public static void validateDuplicatedNumber(Set<Number> collect) {
+    private static void validateDuplicatedNumber(Set<Number> collect) {
         if (collect.size() != 6) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
