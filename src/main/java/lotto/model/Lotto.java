@@ -22,6 +22,13 @@ public class Lotto {
         this.numbers = new ArrayList<>();
     }
 
+    public Lotto(String[] numbers) {
+        this.numbers = new ArrayList<>();
+        for (String number : numbers ) {
+            addNumber(new Number(number.trim()));
+        }
+    }
+
     public void addNumber(Number number) {
         if (numbers.contains(number)) {
             throw new NumberAlreadyExistsException("Number already exists.");

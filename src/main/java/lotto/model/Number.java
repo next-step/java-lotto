@@ -7,7 +7,7 @@ public class Number implements Comparable<Number> {
 
     public Number(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("1~45 사이의 숫자를 입력하세요.");
+            throw new IllegalArgumentException("input value in 1~45");
         }
         this.number = number;
     }

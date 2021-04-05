@@ -29,10 +29,10 @@ public class InputView {
         try {
             winningNumbers = scanner.nextLine();
         } catch (Exception e) {
-            throw new IllegalArgumentException("유효한 값을 입력하세요.");
+            throw new IllegalArgumentException("input valid number");
         }
         if (winningNumbers.split(DELIMITER).length != 6) {
-            throw new IllegalArgumentException("지난 주 당첨번호 6개를 입력해주세요");
+            throw new IllegalArgumentException("input 6 last winning numbers.");
         }
         return winningNumbers;
     }
@@ -42,7 +42,7 @@ public class InputView {
         try {
             amount = scanner.nextInt();
         } catch (InputMismatchException ime) {
-            throw new IllegalArgumentException("유효한 숫자를 입력하세요");
+            throw new IllegalArgumentException("input valid number");
         }
         return amount;
     }

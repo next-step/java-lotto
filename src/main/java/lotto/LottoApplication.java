@@ -10,8 +10,8 @@ public class LottoApplication {
 
         lottoGame.buyLotto(buyMoney);
 
-
         String winningNumber = inputView.getLastWinningNumbers();
+        lottoGame.lastWinningLotto(winningNumber);
 
     }
 }

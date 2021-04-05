@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
+    static final int LOTTO_PRICE = 1000;
+    final static String DELIMITER = ",";
     OutputView outputView;
     List<Lotto> lottos;
+    Lotto winLotto;
 
     public LottoGame() {
         outputView = new OutputView();
@@ -19,6 +21,10 @@ public class LottoGame {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public Lotto getWinLotto() {
+        return winLotto;
     }
 
 
@@ -37,5 +43,9 @@ public class LottoGame {
             lottos.add(lotto);
         }
         outputView.printLine();
+    }
+
+    public void lastWinningLotto(String winningNumbers){
+        winLotto = new Lotto(winningNumbers.split(DELIMITER));
     }
 }
