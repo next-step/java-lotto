@@ -8,7 +8,7 @@ public class StringAddCalculator {
         if(isNullinitValue(given)){
             return 0;
         }
-        Numbers numbers = new Numbers(given);
+        Numbers numbers = new Numbers(given, new StringSplitter());
         List<Integer> list = numbers.getNumbers();
 
         int result = 0;

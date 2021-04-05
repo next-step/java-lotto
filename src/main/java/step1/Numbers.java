@@ -7,13 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
-    private Splitter splitter;
-    // TODO 사용하지 않는 변수 삭제
     private List<String> tokens;
     private final List<Integer> numbers = new ArrayList<>();
 
-    public Numbers(String given){
-        splitter = new StringSplitter();
+    public Numbers(String given, Splitter splitter){
         tokens = splitter.splitStringIntoList(given);
         listConvertedFromArray();
     }

@@ -55,7 +55,7 @@ class NumbersTest {
         String given = "1,3,5";
 
         // when
-        Numbers numbers = new Numbers(given);
+        Numbers numbers = new Numbers(given, new StringSplitter());
         List<Integer> actual = numbers.getNumbers();
 
         // then
