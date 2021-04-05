@@ -8,13 +8,11 @@ import java.util.regex.Pattern;
 
 public class Numbers {
     private Splitter splitter;
-    private final String given;
     // TODO 사용하지 않는 변수 삭제
-    private List<String> tokens = new ArrayList<>();
+    private List<String> tokens;
     private final List<Integer> numbers = new ArrayList<>();
 
     public Numbers(String given){
-        this.given = given;
         splitter = new StringSplitter();
         tokens = splitter.splitStringIntoList(given);
         listConvertedFromArray();
