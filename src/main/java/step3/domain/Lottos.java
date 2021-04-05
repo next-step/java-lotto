@@ -40,22 +40,6 @@ public class Lottos {
     return lottoMatchingResult;
   }
 
-  /*
-   * 이 부분을 지웠음에도 남기는 이유
-   * 기존 로또들만 가지고 체크하는 로직을 완전 수정해야 하는지,
-   * 혹은 추가된 부분만 추가하고자 할 지 고민을 했을 때 가장
-   *
-  public LottoMatchingResult matchLottos(Lotto prizeLotto) {
-    LottoMatchingResult lottoMatchingResult = new LottoMatchingResult();
-    for (Lotto targetLotto : lottos) {
-      lottoMatchingResult.add(targetLotto.matchLotto(prizeLotto));
-    }
-
-    return lottoMatchingResult;
-  }
-   */
-
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
