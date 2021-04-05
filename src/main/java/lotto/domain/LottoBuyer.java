@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoBuyer {
@@ -32,6 +33,10 @@ public class LottoBuyer {
         if (!lottoStore.purchasable(payment, count)) {
             throw new IllegalArgumentException(EXCEED_PURCHASABLE_COUNT_ERROR_MESSAGE);
         }
+    }
+
+    public AllLottoTickets allLottoTickets(List<LottoTicket> manualLottoTickets) {
+        return lottoStore.allLottoTickets(payment, manualLottoTickets);
     }
 
     @Override

@@ -42,30 +42,6 @@ public class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"9800:9", "14000:14"}, delimiter = ':')
-    public void lottoCoupon(String paymentValue, String exchangeableTicketsCountValue) {
-        final int payment = Integer.parseInt(paymentValue);
-        final int exchangeableTicketsCount = Integer.parseInt(exchangeableTicketsCountValue);
-
-        final LottoCoupon expected = new LottoCoupon(exchangeableTicketsCount);
-
-        final LottoCoupon result = new LottoStore().lottoCoupon(payment);
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void lottoCouponLessThanPrice() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            final int price = 1000;
-            final LottoStore lottoStore = new LottoStore(price);
-            final int paymentLessThanPrice = 500;
-
-            lottoStore.lottoCoupon(paymentLessThanPrice);
-        });
-    }
-
-    @ParameterizedTest
     @CsvSource(value = {"9800:9:true", "14000:14:true", "5000:7:false"}, delimiter = ':')
     public void purchasable(String paymentValue, String countValue, String expectedValue) {
         final int payment = Integer.parseInt(paymentValue);

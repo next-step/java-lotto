@@ -31,14 +31,6 @@ public class LottoStore {
                 .collect(Collectors.toList());
     }
 
-    public LottoCoupon lottoCoupon(int payment) {
-        if (payment < price) {
-            throw new IllegalArgumentException(String.format(PAYMENT_ERROR_MESSAGE, price));
-        }
-
-        return new LottoCoupon(purchasableCount(payment));
-    }
-
     public boolean purchasable(int payment, int count) {
         return purchasableCount(payment) >= count;
     }

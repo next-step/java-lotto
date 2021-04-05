@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 public class LottoController {
     public void run() {
         final int payment = InputView.payment();
-        final LottoCoupon lottoCoupon = new LottoStore().lottoCoupon(payment);
+        final LottoBuyer lottoBuyer = new LottoBuyer(new LottoStore(), payment);
 
         final int manualLottoTicketsCount = InputView.manualLottoTicketsCount();
-        lottoCoupon.validateExchangeable(manualLottoTicketsCount);
+        lottoBuyer.validatePurchasable(manualLottoTicketsCount);
 
         final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
-        final AllLottoTickets allLottoTickets = lottoCoupon.lottoBuyer(
+        final AllLottoTickets allLottoTickets = lottoBuyer.allLottoTickets(
                 manualLottoTicketsInput.stream()
                         .map(StringUtil::splitCommas)
                         .map(LottoTicketFactory::from)
