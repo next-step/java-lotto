@@ -23,7 +23,7 @@ class GenerateLottoTest {
         List<Lotto> generatedLottos = generateLotto.getGeneratedLottos();
 
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Lotto lotto = new Lotto(lottoNumbers);

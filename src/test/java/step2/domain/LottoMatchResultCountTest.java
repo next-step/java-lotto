@@ -30,7 +30,7 @@ class LottoMatchResultCountTest {
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void getMatchResultsMessageTest(int value, int cash) {
 
-        int rewardCash = LottoMatchResultCount.of(value).getRewardCash(1);
+        int rewardCash = LottoMatchResultCount.of(value).getRewardCash();
         assertEquals(rewardCash, cash);
     }
 }

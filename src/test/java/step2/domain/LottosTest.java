@@ -19,23 +19,23 @@ class LottosTest {
     void getMatchResultsTest() {
 
         Set<LottoNumber> firstExpectedLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> secondExpectedLottoNumbers = Stream.of(2, 3, 4, 5, 6, 7)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> thridExpectedLottoNumbers = Stream.of(1, 2, 3, 4, 8, 9)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> fourthExpectedLottoNumbers = Stream.of(1, 2, 3, 7, 8, 9)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> winnerLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Lotto firstLotto = new Lotto(firstExpectedLottoNumbers);
@@ -60,19 +60,19 @@ class LottosTest {
     void getAllNotMatchResultsTest() {
 
         Set<LottoNumber> firstExpectedLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> secondExpectedLottoNumbers = Stream.of(2, 3, 4, 5, 6, 7)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> thridExpectedLottoNumbers = Stream.of(1, 2, 3, 4, 8, 9)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Set<LottoNumber> winnerLottoNumbers = Stream.of(11, 12, 13, 21, 31, 41)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Lotto firstLotto = new Lotto(firstExpectedLottoNumbers);
