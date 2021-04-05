@@ -9,7 +9,7 @@ public class Money {
 
     public Money(int money) {
         if (money < ONE_GAME_MONEY) {
-            
+            throw new IllegalArgumentException(String.format("로또 구입금액은 최소 %d 이상을 입력해 주세요.", ONE_GAME_MONEY));
         }
         this.money = money;
     }
