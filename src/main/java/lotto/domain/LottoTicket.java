@@ -77,7 +77,8 @@ public class LottoTicket {
 
     public LottoRanks inquiryRankList(int[] winNumbers, int bonusNumber) {
         Lotto.validateLottoNumbers(winNumbers);
-        return new LottoRanks(this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList()));
+        List<LottoRank> lottoRankList = this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList());
+        return new LottoRanks(lottoRankList);
     }
 
     public boolean isAutoTicket() {
