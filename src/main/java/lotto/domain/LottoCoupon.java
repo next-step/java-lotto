@@ -24,6 +24,10 @@ public class LottoCoupon {
     return new LottoCoupon(lottoList);
   }
 
+  public static LottoCoupon asLottoCoupon(List<Lotto> lottos) {
+    return new LottoCoupon(lottos);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
