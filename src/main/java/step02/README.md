@@ -32,7 +32,6 @@
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
       - 동일한 숫자가 없는지
-      <!-- - List<Integer> lottoNumbers(AutoNumber autoNumber); -->
     - int match(List<Integer> winningNumber);
       - 당첨번호와 맞춰본후 등수를 return;
     - List<Number> lotto()
