@@ -26,7 +26,7 @@ public class LottoFactoryTest {
             lottoNumberSet.add(new LottoNumber(i));
         }
         lottoNumbers = new LottoNumbers(lottoNumberSet);
-        LottoFactory.setLottoStrategy(a -> {
+        LottoFactory.setLottoStrategy(() -> {
             return lottoNumbers;
         });
     }
@@ -44,7 +44,7 @@ public class LottoFactoryTest {
     void createLottosTest() {
         //given
         List<Lotto> testList = new ArrayList<>();
-        for (int i = 1; i <= LOTTO_COUNT; i++) {
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= LOTTO_COUNT; i++) {
             testList.add(LottoFactory.lotto());
         }
 
@@ -60,7 +60,7 @@ public class LottoFactoryTest {
         //given
         Set<LottoNumber> winningNumber = new LinkedHashSet<>();
         ArrayList<Integer> testWinningNumbers = new ArrayList<>();
-        for (int i = 1; i <= WINNING_NUM; i++) {
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= WINNING_NUM; i++) {
             winningNumber.add(new LottoNumber(i));
             testWinningNumbers.add(i);
         }

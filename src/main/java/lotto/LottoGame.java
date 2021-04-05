@@ -8,7 +8,6 @@ public class LottoGame {
 
     public static void main(String[] args) {
         LottoFactory.setLottoStrategy(new AutoLottoStrategy());
-        LottoFactory.defaultLottoNumbers();
 
         int buyNum = InputView.inputBuy();
         Lottos lottos = LottoFactory.lottos(buyNum);

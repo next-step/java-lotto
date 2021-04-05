@@ -6,5 +6,5 @@ package lotto.domain;
 @FunctionalInterface
 public interface LottoStrategy {
 
-    LottoNumbers makeLotto(LottoNumbers lottoNumbers);
+    LottoNumbers makeLotto();
 }

@@ -39,9 +39,8 @@ public class InputView {
         return inputNumbers();
     }
 
-    public static ArrayList<Integer> inputManualLotto() {
+    public static void inputManualLotto() {
         System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
-        return inputNumbers();
     }
 
     public static int inputBonus() {

@@ -3,9 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -82,5 +84,20 @@ public class LottoNumbersTest {
         assertThat(testNumbers.size()).isEqualTo(takeNumber);
     }
 
+
+    @Test
+    void createLottoNumbersFromArrayIntegers() {
+        //given
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= LOTTO_SIZE; i++) {
+            numbers.add(i);
+        }
+
+        //when
+        LottoNumbers result = LottoNumbers.of(numbers);
+
+        //then
+        assertThat(result).isEqualTo(lottoNumbers);
+    }
 
 }

@@ -4,6 +4,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
 import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
@@ -16,6 +17,17 @@ public class LottoNumbers {
     public LottoNumbers(Set<LottoNumber> lottoNumberSet) {
         this.lottoNumberSet = lottoNumberSet;
     }
+
+    /*
+     * integer 형태의 숫자번호들을 LottoNumbers로 포장한다
+     * */
+    public static LottoNumbers of(ArrayList<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return new LottoNumbers(lottoNumbers);
+    }
+
 
     /*
     * 6개의 번호를 가지는지 확인한다.
