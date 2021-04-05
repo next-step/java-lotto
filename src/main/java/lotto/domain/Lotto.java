@@ -19,7 +19,7 @@ public class Lotto {
 
     public LottoRank inquiryRank(int[] winNumbers, int bonusNumber) {
         validateBonusNumber(winNumbers, bonusNumber);
-        return LottoRank.inquiryRank(matchCount(winNumbers), matchBonus(bonusNumber));
+        return LottoRank.inquiryRank(matchSum(winNumbers), matchBonus(bonusNumber));
     }
 
     private void validateBonusNumber(int[] winNumbers, int bonusNumber) {
@@ -33,12 +33,14 @@ public class Lotto {
         }
     }
 
-    private int matchCount(int[] winNumbers) {
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : lottoNumberList) {
-            matchCount += Arrays.stream(winNumbers).filter(lottoNumber::match).count();
-        }
-        return matchCount;
+    private int matchSum(int[] winNumbers) {
+        return lottoNumberList.stream()
+                .mapToInt(lottoNumber -> matchCount(lottoNumber, winNumbers))
+                .sum();
+    }
+
+    private int matchCount(LottoNumber lottoNumber, int[] winNumbers) {
+        return (int) Arrays.stream(winNumbers).filter(lottoNumber::match).count();
     }
 
     private boolean matchBonus(int bonusNumber) {
