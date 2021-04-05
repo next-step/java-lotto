@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GenerateLotto {
+public class LottoGeneration {
 
     public static final int LOTTO_PRICE = 1_000;
     public static final int LOTTO_RANGE = 6;
@@ -16,7 +16,7 @@ public class GenerateLotto {
     private final List<Integer> numbers;
     private int cash;
 
-    public GenerateLotto(List<Integer> number, int cash) {
+    public LottoGeneration(List<Integer> number, int cash) {
         this.numbers = number;
         this.cash = cash;
     }
