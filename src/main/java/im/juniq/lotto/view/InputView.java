@@ -28,6 +28,7 @@ public class InputView {
 
 	public static List<String> manualLottoes() {
 		int manualLottoesCount = manualLottoesCount();
+		System.out.println();
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
 		List<String> list = new ArrayList<>();
@@ -38,6 +39,7 @@ public class InputView {
 	}
 
 	private static int manualLottoesCount() {
+		System.out.println();
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
 		return Integer.parseInt(scanner.next());
