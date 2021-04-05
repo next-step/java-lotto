@@ -2,13 +2,12 @@ package lotto.controllers;
 
 import lotto.domain.*;
 import lotto.factories.LottoDiscriminatorFactory;
-import lotto.factories.LottoTicketFactory;
+import lotto.utils.LottoTicketsUtil;
 import lotto.utils.StringUtil;
 import lotto.views.InputView;
 import lotto.views.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
     public void run() {
@@ -20,10 +19,7 @@ public class LottoController {
 
         final List<String> manualLottoTicketsInput = InputView.manualLottoTickets(manualLottoTicketsCount);
         final AllLottoTickets allLottoTickets = lottoBuyer.allLottoTickets(
-                manualLottoTicketsInput.stream()
-                        .map(StringUtil::splitCommas)
-                        .map(LottoTicketFactory::from)
-                        .collect(Collectors.toList())
+                LottoTicketsUtil.toLottoTicketsList(manualLottoTicketsInput)
         );
 
         ResultView.print(allLottoTickets);
