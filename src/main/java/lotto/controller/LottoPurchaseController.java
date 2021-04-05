@@ -18,6 +18,11 @@ public class LottoPurchaseController {
         this.lottoAutoService = new LottoPurchaseService();
     }
 
+    public LottoTicketPurchaseRequest validatePurchasable(LottoTicketPurchaseRequest request) {
+        lottoAutoService.validatePurchasable(request.getPurchaseAmount(), request.getManualLottoPurchaseCount());
+        return request;
+    }
+
     public LottoTicketPurchaseResponse purchaseLottoTicket(LottoTicketPurchaseRequest request) {
         return assembleLottoTicketPurchaseResponse(request);
     }
