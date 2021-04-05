@@ -32,11 +32,7 @@ public enum Winning {
 		}
 
 		return Arrays.stream(Winning.values())
-				.filter(winning -> equalMatchedCount(numberOfMatchedWinningNumber, winning)).findFirst()
+				.filter(winning -> winning.matchedCount == numberOfMatchedWinningNumber).findFirst()
 				.orElse(LOSING);
-	}
-
-	private static boolean equalMatchedCount(int numberOfMatchedWinningNumber, Winning winning) {
-		return winning.matchedCount == numberOfMatchedWinningNumber;
 	}
 }

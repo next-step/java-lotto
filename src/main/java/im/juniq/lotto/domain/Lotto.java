@@ -10,26 +10,26 @@ public class Lotto {
 	private static final int FIRST_LOTTO_NUMBER = 1;
 	private static final int LAST_LOTTO_NUMBER = 45;
 	private static final int NUMBER_OF_PICKUP = 6;
-	private final List<Integer> numbers;
+	private LottoNumbers lottoNumbers;
 
 	public Lotto() {
 		List<Integer> baseNumbers = makeBaseNumbers();
 		new NormalShuffleStrategy().shuffle(baseNumbers);
-		numbers = pickupNumbers(baseNumbers);
+		lottoNumbers = new LottoNumbers(pickupNumbers(baseNumbers));
 	}
 
 	public Lotto(ShuffleStrategy shuffleStrategy) {
 		List<Integer> baseNumbers = makeBaseNumbers();
 		shuffleStrategy.shuffle(baseNumbers);
-		numbers = pickupNumbers(baseNumbers);
+		lottoNumbers = new LottoNumbers(pickupNumbers(baseNumbers));
 	}
 
 	public Lotto(String lotto) {
-		numbers = Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList());
+		lottoNumbers = new LottoNumbers(Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
 	}
 
-	public List<Integer> numbers() {
-		return numbers;
+	public LottoNumbers numbers() {
+		return lottoNumbers;
 	}
 
 	private List<Integer> makeBaseNumbers() {
@@ -52,26 +52,11 @@ public class Lotto {
 	}
 
 	private int numberOfMatchedWinningNumber(WinningNumbers winningNumbers) {
-		return numbers.stream().mapToInt(number -> countMatched(winningNumbers, number)).sum();
-	}
-
-	private int countMatched(WinningNumbers winningNumbers, int number) {
-		if (winningNumbers.existent(number)) {
-			return 1;
-		}
-		return 0;
+		return winningNumbers.matchedCount(lottoNumbers);
 	}
 
 	private boolean matchedBonusNumber(WinningNumbers winningNumbers) {
-		int sum = numbers.stream().mapToInt(number -> countMatchedBonusNumber(winningNumbers, number)).sum();
-		return sum != 0;
-	}
-
-	private int countMatchedBonusNumber(WinningNumbers winningNumbers, int number) {
-		if (winningNumbers.matchedBonusNumber(number)) {
-			return 1;
-		}
-		return 0;
+		return winningNumbers.matchedBonusNumber(lottoNumbers);
 	}
 
 	public long prize(WinningNumbers winningNumbers) {

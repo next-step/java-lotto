@@ -15,7 +15,7 @@ class LotteryMachineTest {
 		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
 		LotteryMachine lotteryMachine = new LotteryMachine(1000, shuffleStrategy);
 
-		assertThat(lotteryMachine.lottoes().lotto(0)).isEqualToComparingFieldByField(
+		assertThat(lotteryMachine.lottoes().lotto(0)).usingRecursiveComparison().isEqualTo(
 			new Lotto(shuffleStrategy));
 	}
 

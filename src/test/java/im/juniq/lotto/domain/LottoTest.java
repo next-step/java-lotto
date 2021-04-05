@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
+import java.util.stream.StreamSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,16 +18,15 @@ class LottoTest {
 
 	@Test
 	void createByString() {
-		assertThat(new Lotto("1,2,3,4,5,6")).isEqualToComparingFieldByField(new Lotto(new NoShuffleStrategy()));
+		assertThat(new Lotto("1,2,3,4,5,6")).usingRecursiveComparison().isEqualTo(new Lotto(new NoShuffleStrategy()));
 	}
 
 	@Test
 	void checkDuplicateNumbers() {
 		Lotto lotto = new Lotto();
-
-		long distinctNumberSize = lotto.numbers().stream()
-			.distinct()
-			.count();
+		long distinctNumberSize = StreamSupport.stream(lotto.numbers().spliterator(), false)
+				.distinct()
+				.count();
 
 		assertThat(distinctNumberSize).isEqualTo(lotto.numbers().size());
 	}
@@ -36,7 +36,7 @@ class LottoTest {
 		Lotto lottoA = new Lotto(new NoShuffleStrategy());
 		Lotto lottoB = new Lotto(new NoShuffleStrategy());
 
-		assertThat(lottoA).isEqualToComparingFieldByField(lottoB);
+		assertThat(lottoA).usingRecursiveComparison().isEqualTo(lottoB);
 	}
 
 	@Test
