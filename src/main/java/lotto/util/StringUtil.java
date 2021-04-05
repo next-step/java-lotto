@@ -25,11 +25,16 @@ public class StringUtil {
         return true;
     }
 
-    public static int parseIntWithValid(String input) {
+    public static int parseInt(String input) {
         int result = Integer.parseInt(input);
-        if(Integer.parseInt(input) < 0) {
+        validInt(result);
+        return result;
+    }
+
+    private static boolean validInt(int input) {
+        if(input < 0) {
             throw new IllegalArgumentException(ILLEGAL_NEGATIVE_NUMBER);
         }
-        return result;
+        return true;
     }
 }

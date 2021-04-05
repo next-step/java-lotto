@@ -31,39 +31,43 @@ public class LottoFactory {
     }
 
     /*
-    * 설정해준 전략대로 로또를 생성한다.
-    * */
+     * 설정해준 전략대로 로또를 생성한다.
+     * */
     public static Lotto lotto() {
         return lottoStrategy.makeLotto();
     }
 
     /*
-    * 원하는 갯수만큼의 로또들을 자동으로 생성한다.
-    * */
+     * 원하는 갯수만큼의 로또들을 자동으로 생성한다.
+     * */
     public static Lottos lottos(int total) {
         Lottos lottos = new Lottos(lottoList(total));
         return lottos;
     }
 
     /*
-    * 수동과 자동을 섞은 로또를 생성한다.
-    * */
+     * 수동과 자동을 섞은 로또를 생성한다.
+     * */
     public static Lottos mixLottos(int total, int manualNum) {
         List<Lotto> lottoList = new ArrayList<>();
         // 수동으로 생성한다.
-        InputView.inputManualLotto();
-        setLottoStrategy(new ManualLottoStrategy());
-        lottoList.addAll(lottoList(manualNum));
+        if (manualNum > 0) {
+            InputView.inputManualLotto();
+            setLottoStrategy(new ManualLottoStrategy());
+            lottoList.addAll(lottoList(manualNum));
+        }
         // 자동으로 생성한다.
-        setLottoStrategy(new AutoLottoStrategy());
-        lottoList.addAll(lottoList(total - manualNum));
-
+        int autoNum = total - manualNum;
+        if (autoNum > 0) {
+            setLottoStrategy(new AutoLottoStrategy());
+            lottoList.addAll(lottoList(autoNum));
+        }
         return new Lottos(lottoList);
     }
 
     /*
-    * 숫자만큼의 로또 리스트를 생성한다.
-    * */
+     * 숫자만큼의 로또 리스트를 생성한다.
+     * */
     private static List<Lotto> lottoList(int num) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < num; i++) {
@@ -73,15 +77,15 @@ public class LottoFactory {
     }
 
     /*
-    * 당첨번호와 보너스볼을 가지는 당첨번호를 생성한다.
-    * */
+     * 당첨번호와 보너스볼을 가지는 당첨번호를 생성한다.
+     * */
     public static WinningNumbers winning(ArrayList<Integer> winningNumber, int bonusNumber) {
         return new WinningNumbers(LottoNumbers.of(winningNumber), new LottoNumber(bonusNumber));
     }
 
     /*
-    * 로또들과 당첨번호를 토대로 통계치를 계산해주는 로또통계를 생성한다.
-    * */
+     * 로또들과 당첨번호를 토대로 통계치를 계산해주는 로또통계를 생성한다.
+     * */
     public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
         return new WinningStatistics(lottos, winningNumbers);
     }

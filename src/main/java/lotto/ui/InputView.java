@@ -64,7 +64,7 @@ public class InputView {
     }
 
     private static int inputInt() {
-        return StringUtil.parseIntWithValid(sc.nextLine());
+        return StringUtil.parseInt(sc.nextLine());
     }
 
     public static void openScanner() {
