@@ -3,6 +3,7 @@ package step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.Domain.InputNumber;
+import step2.Domain.Lotto;
 import step2.Domain.LottoNumber;
 import step2.Domain.WinningLotto;
 
@@ -15,7 +16,7 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             InputNumber inputNumber = new InputNumber("1,2,3,4,5,7");
             LottoNumber bonusBall = new LottoNumber(5);
-            WinningLotto winningLotto = new WinningLotto(inputNumber, bonusBall);
+            WinningLotto winningLotto = new WinningLotto(new Lotto(inputNumber), bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

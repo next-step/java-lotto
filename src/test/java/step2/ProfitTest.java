@@ -18,7 +18,7 @@ public class ProfitTest {
         InputNumber purchasedNumbers2 = new InputNumber("1,2,3,4,44,45");
         InputNumber purchasedNumbers3 = new InputNumber("1,2,3,43,44,45");
         LottoNumber bonusBall = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers,bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers),bonusBall);
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1),
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3));
@@ -42,7 +42,7 @@ public class ProfitTest {
         InputNumber purchasedNumbers4 = new InputNumber("1,2,3,4,44,45");
         InputNumber purchasedNumbers5 = new InputNumber("1,2,3,43,44,45");
         LottoNumber bonusBall = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers,bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers),bonusBall);
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1),
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3)
@@ -65,7 +65,7 @@ public class ProfitTest {
         InputNumber purchasedNumbers2 = new InputNumber("1,2,3,4,44,45");
         InputNumber purchasedNumbers3 = new InputNumber("1,2,3,43,44,45");
         LottoNumber bonusBall = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers,bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers),bonusBall);
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1),
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3));
@@ -87,7 +87,7 @@ public class ProfitTest {
         InputNumber purchasedNumbers1 = new InputNumber("1,2,3,4,5,7");
         InputNumber purchasedNumbers2 = new InputNumber("1,2,3,43,44,45");
         LottoNumber bonusBall = new LottoNumber(7);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers,bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers),bonusBall);
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1), new Lotto(purchasedNumbers2));
 

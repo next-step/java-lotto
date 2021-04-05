@@ -27,10 +27,10 @@ public class Lotto {
         long count = winningLotto.getLottoNumberList().stream()
                 .filter(winningNumber -> lottoNumberList.contains(winningNumber))
                 .count();
-        return LottoPrize.valueOf(new HitCount(count),containBonusBall(winningLotto));
+        return LottoPrize.valueOf(new HitCount(count), containBonusBall(winningLotto));
     }
 
-    private boolean containBonusBall(WinningLotto winningLotto){
+    private boolean containBonusBall(WinningLotto winningLotto) {
         return lottoNumberList.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.bonusBall()));
     }

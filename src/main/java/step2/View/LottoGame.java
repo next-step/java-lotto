@@ -20,7 +20,7 @@ public class LottoGame {
         Lottos lottos = Lottos.of(new RandomLottoNumberGenerator(money));
         resultView.printPurchaseNumber(money);
         resultView.printLottoList(lottos);
-        Profit profit = new Profit(money,lottos.makeStatistic(inputView.winningLotto()));
+        Profit profit = new Profit(money, lottos.makeStatistic(inputView.winningLotto()));
         resultView.printLottoStatistic(profit);
         resultView.printProfitRate(profit);
     }
