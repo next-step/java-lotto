@@ -81,12 +81,8 @@ public class LottoTicket {
         return new LottoRanks(lottoRankList);
     }
 
-    public boolean isAutoTicket() {
-        return this.lottoTicketType == LottoTicketType.AUTO;
-    }
-
-    public boolean isManualTicket() {
-        return this.lottoTicketType == LottoTicketType.MANUAL;
+    public boolean typeOf(LottoTicketType lottoTicketType) {
+        return this.lottoTicketType == lottoTicketType;
     }
 
 }

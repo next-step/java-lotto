@@ -12,11 +12,15 @@ public class LottoTickets {
     }
 
     public int calculateManualLottoCount() {
-        return lottoTicketList.stream().filter(LottoTicket::isManualTicket).mapToInt(LottoTicket::getCount).sum();
+        return calculateLottoCount(LottoTicketType.MANUAL);
     }
 
     public int calculateAutoLottoCount() {
-        return lottoTicketList.stream().filter(LottoTicket::isAutoTicket).mapToInt(LottoTicket::getCount).sum();
+        return calculateLottoCount(LottoTicketType.AUTO);
+    }
+
+    private int calculateLottoCount(LottoTicketType lottoTicketType) {
+        return lottoTicketList.stream().filter(lottoTicket -> lottoTicket.typeOf(lottoTicketType)).mapToInt(LottoTicket::getCount).sum();
     }
 
     public List<Lotto> getLottoList() {

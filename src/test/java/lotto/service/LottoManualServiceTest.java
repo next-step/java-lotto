@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +61,6 @@ class LottoManualServiceTest {
         LottoTicket lottoTicket = lottoManualService.purchaseLottoTicket(manualLottoPurchaseNumberList);
 
         // then
-        assertThat(lottoTicket.isManualTicket()).isTrue();
+        assertThat(lottoTicket.typeOf(LottoTicketType.MANUAL)).isTrue();
     }
 }

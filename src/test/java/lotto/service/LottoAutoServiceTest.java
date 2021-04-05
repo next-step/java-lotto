@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,7 +50,7 @@ class LottoAutoServiceTest {
         LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(purchaseCount);
 
         // then
-        assertThat(lottoTicket.isAutoTicket()).isTrue();
+        assertThat(lottoTicket.typeOf(LottoTicketType.AUTO)).isTrue();
     }
 
 }
