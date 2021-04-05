@@ -11,15 +11,7 @@ public class LottoTickets {
         this.lottoTicketList = lottoTicketList;
     }
 
-    public int calculateManualLottoCount() {
-        return calculateLottoCount(LottoTicketType.MANUAL);
-    }
-
-    public int calculateAutoLottoCount() {
-        return calculateLottoCount(LottoTicketType.AUTO);
-    }
-
-    private int calculateLottoCount(LottoTicketType lottoTicketType) {
+    public int calculateLottoCount(LottoTicketType lottoTicketType) {
         return lottoTicketList.stream().filter(lottoTicket -> lottoTicket.typeOf(lottoTicketType)).mapToInt(LottoTicket::getCount).sum();
     }
 

@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoTicketType;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,8 +65,8 @@ class LottoPurchaseServiceTest {
         LottoTickets lottoTickets = lottoPurchaseService.purchaseLottoTickets(7000, manualLottoPurchaseNumberList);
 
         // then
-        assertThat(4).isEqualTo(lottoTickets.calculateAutoLottoCount());
-        assertThat(3).isEqualTo(lottoTickets.calculateManualLottoCount());
+        assertThat(4).isEqualTo(lottoTickets.calculateLottoCount(LottoTicketType.AUTO));
+        assertThat(3).isEqualTo(lottoTickets.calculateLottoCount(LottoTicketType.MANUAL));
         assertThat(7).isEqualTo(lottoTickets.getLottoList().size());
     }
 
