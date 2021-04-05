@@ -2,7 +2,6 @@ package step3.domain;
 
 import step2.exception.InvalidLottoNumberException;
 import step3.domain.number.Count;
-import step3.domain.number.LottoMatchingCount;
 import step3.domain.number.LottoNumber;
 import step3.domain.result.LottoMatchingResult;
 import step3.domain.result.Rank;
@@ -27,14 +26,14 @@ public class Lottos {
     return new Count(lottos.size());
   }
 
-  public LottoMatchingResult matchLottosWithBonusBall(Lotto prizeLotto, LottoNumber bonusNumber){
-    if (prizeLotto.matchSpecificBall(bonusNumber)){
+  public LottoMatchingResult matchLottosWithBonusBall(Lotto prizeLotto, LottoNumber bonusNumber) {
+    if (prizeLotto.matchSpecificBall(bonusNumber)) {
       throw new InvalidLottoNumberException(DUPLICATED_BONUS_BALL_MESSAGE);
     }
     LottoMatchingResult lottoMatchingResult = new LottoMatchingResult();
     for (Lotto targetLotto : lottos) {
       int matchingCount = targetLotto.matchLotto(prizeLotto).showCount();
-      Boolean bonusFlag =targetLotto.matchSpecificBall(bonusNumber);
+      Boolean bonusFlag = targetLotto.matchSpecificBall(bonusNumber);
 
       lottoMatchingResult.add(Rank.findRankByCountOfMatch(matchingCount, bonusFlag));
     }

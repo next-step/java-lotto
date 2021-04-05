@@ -2,7 +2,6 @@ package step3.domain.result;
 
 import step3.domain.Cash;
 import step3.domain.number.Count;
-import step3.domain.number.LottoMatchingCount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +12,7 @@ public class LottoMatchingResult {
 
   private final Count minimalCount = new Count(ADDING_MIN_COUNT);
   private final Map<Rank, Count> matchingCounts;
+
   public LottoMatchingResult() {
     matchingCounts = new HashMap<>();
   }

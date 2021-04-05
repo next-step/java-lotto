@@ -24,7 +24,7 @@ public class InputView {
     return scanner.nextLine();
   }
 
-  public static int saveBonusBall(){
+  public static int saveBonusBall() {
     CommonView.println(INPUT_BONUS_BALL_MESSAGE);
     return scanner.nextInt();
   }

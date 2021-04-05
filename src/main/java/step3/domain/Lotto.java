@@ -21,7 +21,7 @@ public class Lotto {
     return lottoNumbers.matchNumbers(prizeLotto.lottoNumbers);
   }
 
-  public Boolean matchSpecificBall(LottoNumber bonusBall){
+  public Boolean matchSpecificBall(LottoNumber bonusBall) {
     return lottoNumbers.matchSpecificNumber(bonusBall);
   }
 }

@@ -13,17 +13,9 @@ public enum Rank {
   private final int countOfMatch;
   private final int winningMoney;
 
-  private Rank(int countOfMatch, int winningMoney) {
+  Rank(int countOfMatch, int winningMoney) {
     this.countOfMatch = countOfMatch;
     this.winningMoney = winningMoney;
-  }
-
-  public int getCountOfMatch() {
-    return countOfMatch;
-  }
-
-  public int getWinningMoney() {
-    return winningMoney;
   }
 
   public static Rank findRankByCountOfMatch(int countOfMatch, boolean matchBonus) {
@@ -32,18 +24,26 @@ public enum Rank {
       return MISS;
     }
 
-    if(matchBonus & countOfMatch == SECOND.countOfMatch){
+    if (matchBonus & countOfMatch == SECOND.countOfMatch) {
       return SECOND;
     }
 
-    if(!matchBonus & countOfMatch == THIRD.countOfMatch){
+    if (!matchBonus & countOfMatch == THIRD.countOfMatch) {
       return THIRD;
     }
 
     return findRankByCountOfMatch(countOfMatch);
   }
 
-  private static Rank findRankByCountOfMatch(int countOfMatch){
+  private static Rank findRankByCountOfMatch(int countOfMatch) {
     return Arrays.stream(values()).filter(rank -> rank.countOfMatch == countOfMatch).findFirst().orElse(MISS);
+  }
+
+  public int getCountOfMatch() {
+    return countOfMatch;
+  }
+
+  public int getWinningMoney() {
+    return winningMoney;
   }
 }

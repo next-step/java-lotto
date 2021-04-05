@@ -24,7 +24,7 @@ public class LottoNumbers {
     this.lottoNumbers = lottoNumbers;
   }
 
-  private Long distinctSize(List<LottoNumber> lottoNumbers){
+  private Long distinctSize(List<LottoNumber> lottoNumbers) {
     return lottoNumbers.stream().distinct().count();
   }
 
@@ -43,9 +43,9 @@ public class LottoNumbers {
     return new LottoMatchingCount(result);
   }
 
-  public boolean matchSpecificNumber(LottoNumber targetLottoNumber){
+  public boolean matchSpecificNumber(LottoNumber targetLottoNumber) {
     boolean result = false;
-    if(lottoNumbers.contains(targetLottoNumber)){
+    if (lottoNumbers.contains(targetLottoNumber)) {
       result = true;
     }
     return result;

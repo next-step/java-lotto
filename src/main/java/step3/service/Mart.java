@@ -43,10 +43,9 @@ public class Mart {
   }
 
   class LottoMaker {
-    private final List<LottoNumber> lottoNumbers;
-
     private static final int STARTING_NUMBER = 1;
     private static final int LAST_NUMBER = 45;
+    private final List<LottoNumber> lottoNumbers;
 
     protected LottoMaker() {
       List<LottoNumber> lottoNumbers = new ArrayList<>();

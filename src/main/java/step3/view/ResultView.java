@@ -1,10 +1,8 @@
 package step3.view;
 
 import step3.domain.Lottos;
-import step3.domain.number.LottoMatchingCount;
 import step3.domain.result.LottoMatchingResult;
 import step3.domain.result.Rank;
-import step3.util.StringUtil;
 
 public class ResultView {
   private static final String MATCHING_THREE = "3개 일치 (5,000원) - ";

@@ -1,6 +1,5 @@
 package step3.controller;
 
-import step2.exception.InvalidLottoNumberException;
 import step3.domain.Cash;
 import step3.domain.Lotto;
 import step3.domain.Lottos;
@@ -49,7 +48,7 @@ public class LottoGame {
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
     Lotto matcherLotto = new Lotto(lottoNumbers);
 
-    return boughtLottos.matchLottosWithBonusBall(matcherLotto,bonusBall);
+    return boughtLottos.matchLottosWithBonusBall(matcherLotto, bonusBall);
 
   }
 

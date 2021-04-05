@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step3.domain.Cash;
 import step3.domain.Lotto;
 import step3.domain.number.Count;
-import step3.domain.number.LottoMatchingCount;
 import step3.domain.number.LottoNumber;
 import step3.domain.number.LottoNumbers;
 import step3.domain.result.Rank;
