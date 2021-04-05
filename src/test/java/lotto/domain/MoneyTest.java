@@ -39,21 +39,9 @@ class MoneyTest {
     //given
     Money money = new Money(20000);
     //when
-    Money multiple = money.multiple(7);;
+    int multiple = money.multiple(7);
     //then
-    assertEquals(new Money(140000), multiple);
-  }
-
-  @Test
-  @DisplayName("List<Number> 의 합을 제대로 출력할 수 있는가")
-  public void sumList() throws Exception {
-    //given
-    List<Money> monies = new ArrayList<>();
-    //when
-    monies.add(new Money(10000));
-    monies.add(new Money(5000));
-    //then
-    assertEquals(Money.totalMonies(monies), 15000);
+    assertEquals(140000, multiple);
   }
 
   @ParameterizedTest
