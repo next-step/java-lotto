@@ -17,10 +17,10 @@ public class Numbers {
     }
 
     private void checkRegex(String value) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(value);
+        Matcher m = Pattern.compile(REGEX).matcher(value);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            Arrays.stream(m.group(2).split(customDelimiter)).forEach(this::splitString);
+            String customDelimiter = m.group(FIRST);
+            Arrays.stream(m.group(SECOND).split(customDelimiter)).forEach(this::splitString);
             return;
         }
         splitString(value);
