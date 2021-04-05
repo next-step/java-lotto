@@ -1,6 +1,7 @@
 package step3.domain;
 
-import step3.domain.number.LottoMatchingNumber;
+import step3.domain.number.LottoMatchingCount;
+import step3.domain.number.LottoNumber;
 import step3.domain.number.LottoNumbers;
 
 public class Lotto {
@@ -16,7 +17,11 @@ public class Lotto {
     return lottoNumbers.toString();
   }
 
-  public LottoMatchingNumber matchLotto(Lotto prizeLotto) {
+  public LottoMatchingCount matchLotto(Lotto prizeLotto) {
     return lottoNumbers.matchNumbers(prizeLotto.lottoNumbers);
+  }
+
+  public Boolean matchSpecificBall(LottoNumber bonusBall){
+    return lottoNumbers.matchSpecificNumber(bonusBall);
   }
 }

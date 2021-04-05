@@ -12,7 +12,7 @@ public class CashTest {
   @ParameterizedTest
   @CsvSource(value = {"2000,1000", "3000,2000"})
   @DisplayName("제대로 로또 구입액만큼 출금하는지 테스트")
-  void validWithdrawalTest(int sellerMoney, int remainMoney) {
+  void validWithdrawalTest(Long sellerMoney, Long remainMoney) {
     // given
     Cash sellerWallet = new Cash(sellerMoney);
     Cash remainWallet = new Cash(remainMoney);
@@ -21,9 +21,9 @@ public class CashTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {999, 988, 1})
+  @ValueSource(longs = {999, 988, 1})
   @DisplayName("유효하지 않은 금액으로 출금이 불가능한지 테스트")
-  void invalidWithdrawalTest(int sellerMoney) {
+  void invalidWithdrawalTest(Long sellerMoney) {
     Cash sellerWallet = new Cash(sellerMoney);
 
     Assertions.assertThatThrownBy(sellerWallet::withdrawal)
@@ -32,9 +32,9 @@ public class CashTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {-1, -999})
+  @ValueSource(longs = {-1, -999})
   @DisplayName("0원 미만은 생성 불가능")
-  void invalidConstructingTest(int sellerMoney) {
+  void invalidConstructingTest(Long sellerMoney) {
     Assertions.assertThatThrownBy(() -> new Cash(sellerMoney))
       .isInstanceOf(InvalidPriceException.class)
       .hasMessage("0원 미만의 금액은 지원하지 않습니다.");
@@ -44,7 +44,7 @@ public class CashTest {
   @ParameterizedTest
   @CsvSource(value = {"1000,1000,true", "1000,1001,false"})
   @DisplayName("구매할 제품의 가격과의 비교를 제대로 하는지 확인")
-  void checkGreatEqualTest(int seller, int product, boolean result) {
+  void checkGreatEqualTest(Long seller, Long product, boolean result) {
     Cash sellerWallet = new Cash(seller);
     Cash productPrice = new Cash(product);
 

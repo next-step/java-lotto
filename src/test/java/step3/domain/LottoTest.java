@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.number.Count;
-import step3.domain.number.LottoMatchingNumber;
+import step3.domain.number.LottoMatchingCount;
 import step3.domain.number.LottoNumbers;
 import step3.util.Splitter;
 
@@ -21,7 +21,7 @@ public class LottoTest {
     lottoNumbers = new LottoNumbers(Splitter.split(answerNum));
     Lotto pickedLotto = new Lotto(lottoNumbers);
 
-    Count resultCount = new LottoMatchingNumber(result);
+    Count resultCount = new LottoMatchingCount(result);
 
     Assertions.assertThat(boughtLotto.matchLotto(pickedLotto)).isEqualTo(resultCount);
   }

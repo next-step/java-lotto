@@ -45,15 +45,15 @@ public class Mart {
   class LottoMaker {
     private final List<LottoNumber> lottoNumbers;
 
-    private final int STARTING_NUMBER = 1;
-    private final int LAST_NUMBER = 45;
+    private static final int STARTING_NUMBER = 1;
+    private static final int LAST_NUMBER = 45;
 
     protected LottoMaker() {
-      lottoNumbers = new ArrayList<>();
+      List<LottoNumber> lottoNumbers = new ArrayList<>();
       for (int i = STARTING_NUMBER; i <= LAST_NUMBER; i++) {
         lottoNumbers.add(new LottoNumber(i));
       }
-      Collections.unmodifiableList(lottoNumbers);
+      this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     protected Lotto makeLotto(LottoStrategy lottoStrategy) {

@@ -4,10 +4,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.domain.number.LottoMatchingNumber;
+import step3.domain.number.LottoMatchingCount;
 import step3.domain.number.LottoNumber;
 import step3.domain.number.LottoNumbers;
 import step3.domain.result.LottoMatchingResult;
+import step3.domain.result.Rank;
 import step3.util.Splitter;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class LottosTest {
 
   @ParameterizedTest
   @DisplayName("일치 확인하는 지 체크")
-  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:3:1", "2,3,4,5,6,8:2,4,6,8,10,12:4:1", "11,13,15,17,20,25:11,13,15,12,20,25:5:1"}, delimiter = ':')
-  void resultGetMatchingTest(String lotto, String answer, int targetCount, String result) {
+  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:44:3:false:1", "2,3,4,5,6,8:2,4,6,8,10,12:44:4:false:1", "11,13,15,17,20,25:11,13,15,12,20,25:44:5:false:1"}, delimiter = ':')
+  void resultGetMatchingTest(String lotto, String answer, int bonusBall , int targetCount, boolean targetFlag,String result) {
 
     //setup source then target
     List<LottoNumber> lottoNumbers = Splitter.split(lotto);
@@ -49,7 +50,9 @@ public class LottosTest {
     Lottos sourceLottos = new Lottos();
     sourceLottos.addLotto(source);
 
-    LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottos(target);
-    Assertions.assertThat(lottoMatchingResult.toStringSpecificResult(new LottoMatchingNumber(targetCount))).isEqualTo(result);
+    Rank rank = Rank.findRankByCountOfMatch(targetCount, targetFlag);
+
+    LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottosWithBonusBall(target, new LottoNumber(bonusBall));
+    Assertions.assertThat(lottoMatchingResult.toStringSpecificResult(rank)).isEqualTo(result);
   }
 }

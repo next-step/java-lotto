@@ -1,6 +1,6 @@
 package step3.domain.number;
 
-import step3.exception.DuplicatedLottoNumber;
+import step3.exception.DuplicatedLottoNumberException;
 import step3.exception.InvalidNumbersSizeException;
 
 import java.util.Collections;
@@ -17,18 +17,22 @@ public class LottoNumbers {
       throw new InvalidNumbersSizeException(SIZE_ERROR_MESSAGE);
     }
 
-    if (lottoNumbers.stream().distinct().count() != STANDARD_SIZE) {
-      throw new DuplicatedLottoNumber(DUPLICATED_ERROR_MESSAGE);
+    if (distinctSize(lottoNumbers) != STANDARD_SIZE) {
+      throw new DuplicatedLottoNumberException(DUPLICATED_ERROR_MESSAGE);
     }
 
     this.lottoNumbers = lottoNumbers;
+  }
+
+  private Long distinctSize(List<LottoNumber> lottoNumbers){
+    return lottoNumbers.stream().distinct().count();
   }
 
   public void sort() {
     Collections.sort(lottoNumbers);
   }
 
-  public LottoMatchingNumber matchNumbers(LottoNumbers targetLottoNumbers) {
+  public LottoMatchingCount matchNumbers(LottoNumbers targetLottoNumbers) {
     int result = targetLottoNumbers
       .lottoNumbers
       .stream()
@@ -36,7 +40,15 @@ public class LottoNumbers {
       .mapToInt(e -> 1)
       .sum();
 
-    return new LottoMatchingNumber(result);
+    return new LottoMatchingCount(result);
+  }
+
+  public boolean matchSpecificNumber(LottoNumber targetLottoNumber){
+    boolean result = false;
+    if(lottoNumbers.contains(targetLottoNumber)){
+      result = true;
+    }
+    return result;
   }
 
   @Override

@@ -19,14 +19,14 @@ class LottoNumbersTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:3"}, delimiter = ':')
+  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:44:3"}, delimiter = ':')
   @DisplayName("정확하게 일치 숫자의 개수를 확인하는지 테스트")
-  void matchingResultTest(String boughtNum, String answerNum, int result) {
+  void matchingResultTest(String boughtNum, String answerNum,int bonusBall ,int result) {
 
     LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
     LottoNumbers prizeLottoNumbers = new LottoNumbers(Splitter.split(answerNum));
-    Count resultCount = new LottoMatchingNumber(result);
-
+    Count resultCount = new LottoMatchingCount(result);
+    //TODO 수정
     Assertions.assertThat(pickedLottoNumbers.matchNumbers(prizeLottoNumbers)).isEqualTo(resultCount);
   }
 
@@ -41,5 +41,13 @@ class LottoNumbersTest {
     pickedLottoNumbers.sort();
 
     Assertions.assertThat(pickedLottoNumbers.toString()).isEqualTo(checkingLottoNumbers.toString());
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"1,2,3,4,5,6:1:true", "1,2,3,4,5,6:7:false"}, delimiter = ':')
+  @DisplayName("일치/불일치 확인하는지 테스트")
+  void findSpecificMatchingTest(String boughtNum, int targetNumber, boolean result){
+    LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
+    Assertions.assertThat(pickedLottoNumbers.matchSpecificNumber(new LottoNumber(targetNumber))).isEqualTo(result);
   }
 }

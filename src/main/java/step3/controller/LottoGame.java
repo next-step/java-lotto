@@ -1,12 +1,12 @@
 package step3.controller;
 
+import step2.exception.InvalidLottoNumberException;
 import step3.domain.Cash;
 import step3.domain.Lotto;
 import step3.domain.Lottos;
 import step3.domain.number.LottoNumber;
 import step3.domain.number.LottoNumbers;
 import step3.domain.result.LottoMatchingResult;
-import step3.domain.result.LottoRevenueResult;
 import step3.service.Mart;
 import step3.strategy.LottoRandomStrategy;
 import step3.util.Splitter;
@@ -25,15 +25,14 @@ public class LottoGame {
     ResultView.firstNotice(boughtLottos);
 
     LottoMatchingResult result = checkLottos(boughtLottos);
-    LottoRevenueResult revenueResult = new LottoRevenueResult();
     // TODO 수정
-    Cash revenue = revenueResult.calcTotalRevenue(result);
+    Cash revenue = result.calcTotalRevenue();
     ResultView.showSpecificResult(result);
-    ResultView.showYield(revenue.divide(cash));
+    ResultView.showYield(revenue.divideReturningString(cash));
   }
 
   private Cash getCash() {
-    int sellerMoney = InputView.starting();
+    Long sellerMoney = InputView.starting();
     return new Cash(sellerMoney);
   }
 
@@ -45,10 +44,12 @@ public class LottoGame {
   private LottoMatchingResult checkLottos(Lottos boughtLottos) {
     String expression = InputView.saveLottoNumbers();
     List<LottoNumber> numbers = Splitter.split(expression);
+    LottoNumber bonusBall = new LottoNumber(InputView.saveBonusBall());
+
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
     Lotto matcherLotto = new Lotto(lottoNumbers);
 
-    return boughtLottos.matchLottos(matcherLotto);
+    return boughtLottos.matchLottosWithBonusBall(matcherLotto,bonusBall);
 
   }
 
