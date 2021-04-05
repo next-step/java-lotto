@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.function.SixLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class LottoWiningNumbersTest {
     // given
 
     // when
-    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate();
+    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(new SixLottoNumbers());
 
     // then
     assertThat(lottoWiningNumbers).isNotNull();

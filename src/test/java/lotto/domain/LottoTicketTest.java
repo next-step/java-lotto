@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.function.SixLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class LottoTicketTest {
     int money = 2_000;
 
     // when
-    LottoTicket lotto = LottoTicket.toBuy(money);
+    LottoTicket lotto = LottoTicket.toBuy(money, new SixLottoNumbers());
 
     // then
     assertThat(lotto.ticketCount())

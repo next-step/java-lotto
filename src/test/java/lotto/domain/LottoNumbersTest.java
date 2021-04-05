@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.function.SixLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class LottoNumbersTest {
   @DisplayName("6개의 임의의 로또 숫자를 생성한다.")
   void generateSixNumbers() {
     // given
-    LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers();
+    LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers(new SixLottoNumbers());
 
     // when
     int actual = lottoNumbers.size();
@@ -27,7 +28,7 @@ class LottoNumbersTest {
   @Test
   @DisplayName("생성된 로또 번호들에 대해 추가/수정/삭제를 할 수 없다.")
   void generateSixNumbers_immutableList() {
-    LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers();
+    LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers(new SixLottoNumbers());
     List<LottoNumber> list = lottoNumbers.getLottoNumbers();
 
     assertAll(() -> assertThatThrownBy(() -> list.add(LottoNumber.generate(1))).isInstanceOf(UnsupportedOperationException.class)

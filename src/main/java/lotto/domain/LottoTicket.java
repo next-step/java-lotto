@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.function.GenerateNumbers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,15 +16,19 @@ public class LottoTicket {
     this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
   }
 
-  public static LottoTicket toBuy(final int money) {
+  public static LottoTicket toBuy(final int money, final GenerateNumbers generateNumbers) {
     int makeTicketCount = money / LOTTO_SELL_PRICE;
     List<LottoNumbers> lottoNumbers = new ArrayList<>(makeTicketCount);
     while (makeTicketCount > 0) {
-      lottoNumbers.add(LottoNumbers.generateSixNumbers());
+      lottoNumbers.add(LottoNumbers.generateSixNumbers(generateNumbers));
       makeTicketCount--;
     }
 
     return new LottoTicket(lottoNumbers);
+  }
+
+  public List<LottoNumbers> getLottoNumbers() {
+    return lottoNumbers;
   }
 
   public int ticketCount() {
