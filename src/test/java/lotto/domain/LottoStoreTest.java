@@ -14,11 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoStoreTest {
-    @Test
-    public void create() {
-        assertThat(new LottoStore()).isEqualTo(new LottoStore());
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"9800:9", "14000:14"}, delimiter = ':')
     public void lottoTickets(String price, String expected) {
@@ -33,8 +28,7 @@ public class LottoStoreTest {
     @Test
     public void lottoTicketsLessThanPrice() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            final int price = 1000;
-            final LottoStore lottoStore = new LottoStore(price);
+            final LottoStore lottoStore = new LottoStore();
             final int paymentLessThanPrice = 500;
 
             lottoStore.lottoTickets(paymentLessThanPrice);
