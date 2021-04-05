@@ -15,7 +15,7 @@ class StatisticsTest {
     statistics = new Statistics();
   }
 
-  @DisplayName("2등이 1에서 2로 되면 2를 출력")
+  @DisplayName("당첨 로또게임 세기")
   @Test
   void count_game() {
     statistics.recordRanking(Ranking.SECOND);

@@ -26,7 +26,10 @@ public enum Ranking {
     return prize;
   }
 
-  public static Ranking ofCount(int count) {
+  public static Ranking find(int count, boolean containBonusBall) {
+    if (count == 5 && !containBonusBall) {
+      return Ranking.SECOND;
+    }
     return Arrays.stream(values())
         .filter(value -> value.getCount().equals(count))
         .findFirst()

@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoBalls;
 import lotto.domain.LottoGame;
@@ -22,7 +23,9 @@ public class LottoGameController {
       return;
     }
 
-    LottoGame lottoGame = LottoStore.sell(money);
+    List<String> manualLottoNumbers = inputView.inputManualTryLottoNumber();
+
+    LottoGame lottoGame = LottoStore.sell(manualLottoNumbers,money);
 
     resultView.printLottoBuySize(lottoGame);
     resultView.printBuyingLottoGame(lottoGame);
