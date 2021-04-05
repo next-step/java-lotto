@@ -9,7 +9,7 @@ public class TicketOffice {
         this.lottoTicketPrice = lottoTicketPrice;
     }
 
-    public LottoTickets sale(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+    public LottoTickets totalTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         LottoTickets allLottoTickets = new LottoTickets(new ArrayList<>());
 
         manualLottoTickets.lottoTickets()

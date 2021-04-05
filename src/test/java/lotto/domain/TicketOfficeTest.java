@@ -16,7 +16,7 @@ public class TicketOfficeTest {
         LottoTickets autoTickets = new LottoTickets(new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6)));
 
         //when
-        long numberOfTickets = ticketOffice.sale(manualTickets, autoTickets)
+        long numberOfTickets = ticketOffice.totalTickets(manualTickets, autoTickets)
                 .lottoTickets()
                 .stream()
                 .count();
