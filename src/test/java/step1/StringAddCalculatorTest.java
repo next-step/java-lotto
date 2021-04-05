@@ -2,6 +2,8 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,23 +18,25 @@ class StringAddCalculatorTest {
         String given = "1,3,5";
         int expected = 1+3+5;
 
+        // when
         int actual = StringAddCalculator.splitAndSum(given);
 
+        // then
         assertEquals(expected, actual);
     }
 
     @Test
-    @DisplayName("초기값 검증하는 테스트")
+    @DisplayName("초기값 테스트")
     void isNullinitValue() {
-        boolean actual1 = StringAddCalculator.isNullinitValue(null);
-        boolean actual2 = StringAddCalculator.isNullinitValue("");
+        // given
+        String given = "";
 
-        assertAll(
-                () -> assertTrue(actual1),
-                () -> assertTrue(actual2)
-        );
+        // when
+        boolean actual = given == null || given.isEmpty();
+
+        // then
+        assertTrue(actual);
     }
-
 
     @Test
     public void splitAndSum_null_또는_빈문자() {

@@ -18,8 +18,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    // TODO 생성자에서만 사용되는 메서드의 접근제한자 수정
-    public static boolean isNullinitValue(String given){
+    private static boolean isNullinitValue(String given){
         return given == null || given.isEmpty();
     }
 }
