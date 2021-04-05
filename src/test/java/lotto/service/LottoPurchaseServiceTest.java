@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,7 @@ class LottoPurchaseServiceTest {
 
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoPurchaseService.purchaseLottoTickets(purchaseAmount, null))
+                .isThrownBy(() -> lottoPurchaseService.purchaseLottoTickets(purchaseAmount, new ArrayList<>()))
                 .withMessageMatching("최소 1000원 이상의 금액을 입력해 주세요.");
     }
 
@@ -66,5 +67,42 @@ class LottoPurchaseServiceTest {
         assertThat(4).isEqualTo(lottoTickets.calculateAutoLottoCount());
         assertThat(3).isEqualTo(lottoTickets.calculateManualLottoCount());
         assertThat(7).isEqualTo(lottoTickets.getLottoList().size());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1000, 999})
+    @DisplayName("구매가능금액 검증")
+    void validatePurchasable(int purchaseAmount) {
+        // given
+        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoPurchaseService.validatePurchasable(purchaseAmount, 0))
+                .withMessageMatching("최소 1000원 이상의 금액을 입력해 주세요.");
+    }
+
+    @Test
+    @DisplayName("수동로또 구매수량 음수값 입력")
+    void validatePurchasable_negativeCount() {
+        // given
+        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoPurchaseService.validatePurchasable(5000, -1))
+                .withMessageMatching("구매수량은 0 이상으로 입력해 주세요.");
+    }
+
+    @Test
+    @DisplayName("구매가능여부 - 구입금액 부족")
+    void validatePurchasable_lackOfPurchaseAmount() {
+        // given
+        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService();
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoPurchaseService.validatePurchasable(5000, 7))
+                .withMessageMatching("구입금액이 부족합니다. 금액과 구매장수를 확인해 주세요.");
     }
 }
