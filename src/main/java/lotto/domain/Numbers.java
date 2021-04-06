@@ -32,7 +32,7 @@ public class Numbers {
 
     public int sumContainsCount(Numbers numbers) {
         return (int) this.numbers.stream()
-                .filter(number -> numbers.contains(number))
+                .filter(numbers::contains)
                 .count();
     }
 
