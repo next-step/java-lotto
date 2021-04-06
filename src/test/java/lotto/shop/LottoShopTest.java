@@ -31,8 +31,8 @@ public class LottoShopTest {
     void manualLottoPurchaseTest() {
         LottoShop lottoShop = new LottoShop(new Money(4000), new TestLottoGenerator(0));
         List<Lotto> predefined = new ArrayList<>();
-        predefined.add(new Lotto(1,2,3,4,5,6));
-        predefined.add(new Lotto(7,8,9,10,11,12));
+        predefined.add(new Lotto(1, 2, 3, 4, 5, 6));
+        predefined.add(new Lotto(7, 8, 9, 10, 11, 12));
 
         LottoOrderedList lottoOrderedList = lottoShop.purchase(predefined);
 

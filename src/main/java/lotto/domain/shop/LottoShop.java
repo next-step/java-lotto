@@ -28,6 +28,7 @@ public class LottoShop {
     }
 
     public LottoOrderedList purchase(List<Lotto> predefined) {
+        money.withdraw(new Money(LOTTO_PRICE * predefined.size()));
         while(isEnoughToPurchase()) {
             predefined.add(lottoMachine.generate());
         }
