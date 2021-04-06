@@ -1,4 +1,4 @@
-package lotto;
+package lotto.stats;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
