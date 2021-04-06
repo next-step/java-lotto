@@ -22,8 +22,8 @@ public class Money {
         return money;
     }
 
-    public int getMoney() {
-        return money;
+    public Money remainMoney(int purchaseLottoCount) {
+        return new Money(money - (purchaseLottoCount * ONE_GAME_MONEY));
     }
 
     @Override
