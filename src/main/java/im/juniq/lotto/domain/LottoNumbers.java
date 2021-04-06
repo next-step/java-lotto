@@ -15,7 +15,7 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 		if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
 			throw new IllegalArgumentException("로또 숫자는 중복 될 수 없습니다.");
 		}
-		this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+		this.numbers = numbers.stream().sorted().map(LottoNumber::new).collect(Collectors.toList());
 	}
 
 	public int matchedCount(LottoNumbers lottoNumbers) {
