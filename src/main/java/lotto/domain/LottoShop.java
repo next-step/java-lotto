@@ -13,7 +13,7 @@ public class LottoShop {
     public HitResults match(WinNumbers winNumbers) {
         HitResults hitResults = new HitResults();
         for (LottoGame lottoGame : lottoGames) {
-            hitResults.add(lottoGame.lotto(winNumbers));
+            hitResults.add(lottoGame.match(winNumbers));
         }
         return hitResults;
     }

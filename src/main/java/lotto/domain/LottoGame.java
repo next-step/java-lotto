@@ -11,7 +11,7 @@ public class LottoGame {
         this.numbers = numbers;
     }
 
-    public HitResult lotto(WinNumbers winNumbers) {
+    public HitResult match(WinNumbers winNumbers) {
         return new HitResult(numbers, winNumbers);
     }
 

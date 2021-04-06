@@ -21,7 +21,7 @@ public class LottoGameTest {
         int bonusNumber = 41;
 
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
-        HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers, bonusNumber));
+        HitResult hitResult = lottoGame.match(new WinNumbers(winNumbers, bonusNumber));
 
         assertThat(hitResult.getPrizeHitCount()).isEqualTo(5);
     }
@@ -34,7 +34,7 @@ public class LottoGameTest {
         int bonusNumber = 41;
 
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
-        HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers, bonusNumber));
+        HitResult hitResult = lottoGame.match(new WinNumbers(winNumbers, bonusNumber));
 
         assertThat(hitResult.getPrizeMoney()).isEqualTo(1_500_000);
     }
