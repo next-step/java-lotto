@@ -4,7 +4,7 @@ import step2.exception.IllegalLottoNumberException;
 
 public class LottoNumber {
     public static final int LOTTO_NUMBER_RANGE_MIN = 1;
-    public static final int LOTTO_NUMBER_RANGE_MAX = 45;
+    public static final int LOTTO_NUMBER_RANGE_MAX = 46;
 
 
     private final int lottoNumber;
@@ -23,8 +23,13 @@ public class LottoNumber {
 
     private static void lottoNumberValidation(int lottoNumber) {
         if (lottoNumber < LOTTO_NUMBER_RANGE_MIN
-                || lottoNumber > LOTTO_NUMBER_RANGE_MAX)
+                || lottoNumber >= LOTTO_NUMBER_RANGE_MAX)
             throw new IllegalLottoNumberException("1 ~ 45 이내의 숫자만 입력할수 있습니다");
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 
     private static class LottoNumberCache {
@@ -33,7 +38,7 @@ public class LottoNumber {
         static final LottoNumber cache[];
 
         static {
-            cache = new LottoNumber[(high - low) + 2];
+            cache = new LottoNumber[(high - low) + 1];
             for (int i = 1; i < cache.length; i++) {
                 cache[i] = new LottoNumber(i);
             }
