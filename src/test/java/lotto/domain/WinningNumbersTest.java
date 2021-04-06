@@ -20,7 +20,7 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 번호와 비교")
+    @DisplayName("당첨 번호와 로또 번호를 비교하여 매칭된 번호 개수를 구한다.")
     public void matchedCountWith() throws Exception {
         //given
         WinningNumbers winningNumbers = WinningNumbers.from(1, 2, 3, 4, 5, 6);
@@ -34,7 +34,7 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호 길이가 6자 이외일 경우 예외")
+    @DisplayName("당첨 번호 길이가 6자 이외일 경우 예외가 발생한다.")
     public void checkLength() throws Exception {
         int[] overSix = {1, 2, 3, 4, 5, 6, 7};
         assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(overSix));
@@ -43,23 +43,14 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호의 요소 범위가 1 ~ 45가 아닐 경우 예외")
-    public void checkBound() throws Exception {
-        int[] overMax = {1, 2, 3, 4, 5, 46};
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(overMax));
-        int[] lowerMin = {0, 2, 3, 4, 5, 45};
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(lowerMin));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 중 중복되는 숫자가 존재할 경우")
+    @DisplayName("당첨 번호 중 중복되는 숫자가 존재할 경우 예외가 발생한다.")
     public void checkDuplication() throws Exception {
         int[] winningNumbers = {1, 2, 3, 4, 5, 5};
         assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(winningNumbers));
     }
 
     @Test
-    @DisplayName("보너스 번호가 당첨 번호와 중복 시 에러")
+    @DisplayName("보너스 번호가 당첨 번호와 중복 시 예외가 발생한다.")
     public void check() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6};
         WinningNumbers winningNumbers = WinningNumbers.from(numbers);
@@ -67,7 +58,7 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("정수 리스트로 변환")
+    @DisplayName("문자열 리스트를 정수 리스트로 변환한다.")
     public void toIntegers() throws Exception {
         List<Integer> integers = Arrays.asList(1, 2, 3);
         assertThat(WinningNumbers.toIntegers(Arrays.asList("1", "2", "3"))).isEqualTo(integers);

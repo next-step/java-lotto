@@ -16,7 +16,7 @@ public class PrizeTest {
     }
 
     @Test
-    @DisplayName("당첨 금액이 0원 미만일 경우")
+    @DisplayName("당첨 금액이 0원 미만일 경우 예외가 발생한다.")
     public void validateBound() throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> new Prize(-1));
     }

@@ -15,7 +15,7 @@ public class BonusBallTest {
     }
 
     @Test
-    @DisplayName("보너스 볼의 번호가 로또 번호에 속하는지 확인 여부")
+    @DisplayName("보너스 볼의 번호가 로또 번호에 속하면 참을 반환한다.")
     public void isPartOf() throws Exception {
         LottoNumbers lottoNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
         assertThat(new BonusBall(1).isPartOf(lottoNumbers)).isTrue();

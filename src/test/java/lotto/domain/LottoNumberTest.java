@@ -18,7 +18,7 @@ public class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("로또 번호 1 ~ 45 외의 값 에러")
+    @DisplayName("로또 번호가 1 ~ 45 외의 값일 시 예외 발생")
     public void checkBound() throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(0));
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(46));

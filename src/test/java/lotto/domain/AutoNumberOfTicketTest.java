@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AutoNumberOfTicketTest {
 
     @Test
-    @DisplayName("자동 로또 티켓 수 생성")
+    @DisplayName("총 티켓 수와 수동 티켓 수를 가지고 자동 로또 티켓 수 생성한다.")
     public void create() throws Exception {
         TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(new PurchaseAmount(5_000), new LottoTicketPrice(1_000));
         ManualNumberOfTicket manualNumberOfTicket = new ManualNumberOfTicket(3, totalNumberOfTicket);

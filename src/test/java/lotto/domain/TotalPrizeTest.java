@@ -17,7 +17,7 @@ public class TotalPrizeTest {
     }
 
     @Test
-    @DisplayName("총 당첨 금액을 구매 금액으로 나누기")
+    @DisplayName("총 당첨 금액을 구매 금액으로 나누면 수익률이 나온다.")
     public void dividedBy() throws Exception {
         //given
         int prize = 10_000;
@@ -33,7 +33,7 @@ public class TotalPrizeTest {
     }
 
     @Test
-    @DisplayName("총 당첨 금액 구하기")
+    @DisplayName("각 당첨된 금액을 더해 총 당첨 금액을 구한다.")
     public void sum() throws Exception {
         TotalPrize totalPrize = TotalPrize.from(Arrays.asList(1_000, 2_000));
         assertThat(totalPrize.sum()).isEqualTo(3_000);

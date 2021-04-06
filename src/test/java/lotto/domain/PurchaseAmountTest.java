@@ -3,7 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class PurchaseAmountTest {
 
@@ -17,14 +18,14 @@ public class PurchaseAmountTest {
     }
 
     @Test
-    @DisplayName("1000원 미만일 시 예외")
+    @DisplayName("구매 금액이 1000원 미만일 시 예외가 발생한다.")
     public void checkMinimum() throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount(999));
         assertThatIllegalArgumentException().isThrownBy(() -> new PurchaseAmount("999"));
     }
 
     @Test
-    @DisplayName("구매금액에 따른 구매할 수 있는 로또 티켓 장수 구하기")
+    @DisplayName("구매 금액을 로또 티켓 한 장의 값으로 나누면 구매할 수 있는 티켓의 수가 반환된다.")
     public void dividedBy() throws Exception {
         //given
         PurchaseAmount purchaseAmount = new PurchaseAmount(1_000);
@@ -37,7 +38,7 @@ public class PurchaseAmountTest {
     }
 
     @Test
-    @DisplayName("총 당첨 금액을 구매 금액으로 나누기")
+    @DisplayName("총 당첨 금액을 구매 금액으로 나누면 수익률이 나온다.")
     public void divide() throws Exception {
         int amount = 1_000;
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);

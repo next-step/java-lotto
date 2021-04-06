@@ -15,7 +15,7 @@ public class ProfitRateTest {
     }
 
     @Test
-    @DisplayName("수익률 이득 판별")
+    @DisplayName("총 당첨 금액이 구매 금액보다 더 클 경우 참을 반환한다.")
     public void isPositive() throws Exception {
         ProfitRate profitRate = new ProfitRate(14_000, 14_000);
         assertThat(profitRate.isPositive()).isTrue();

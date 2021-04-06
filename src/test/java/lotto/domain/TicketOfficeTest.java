@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TicketOfficeTest {
 
     @Test
-    @DisplayName("총(수동 + 자동) 티켓 판매")
+    @DisplayName("수동 티켓과 자동 티켓을 합쳐 총 티켓을 반환한다.")
     public void sale() throws Exception {
         //given
         TicketOffice ticketOffice = new TicketOffice(new LottoTicketPrice());
