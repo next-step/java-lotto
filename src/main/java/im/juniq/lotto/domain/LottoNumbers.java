@@ -1,7 +1,9 @@
 package im.juniq.lotto.domain;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
@@ -18,13 +20,14 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 		this.numbers = numbers.stream().sorted().map(LottoNumber::new).collect(Collectors.toList());
 	}
 
+	public LottoNumbers(String numbers) {
+		this(Arrays.stream(numbers.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
+	}
+
 	public int matchedCount(LottoNumbers lottoNumbers) {
 		return (int) numbers.stream().filter(lottoNumbers::contain).count();
 	}
 
-	public boolean contain(int number) {
-		return numbers.contains(new LottoNumber(number));
-	}
 	public boolean contain(LottoNumber number) {
 		return numbers.contains(number);
 	}
@@ -40,5 +43,22 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 	@Override
 	public Iterator<LottoNumber> iterator() {
 		return numbers.iterator();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof LottoNumbers)) {
+			return false;
+		}
+		LottoNumbers that = (LottoNumbers) o;
+		return Objects.equals(numbers, that.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }

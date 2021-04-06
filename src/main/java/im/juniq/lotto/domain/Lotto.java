@@ -28,6 +28,10 @@ public class Lotto {
 		lottoNumbers = new LottoNumbers(Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
 	}
 
+	public Lotto(LottoNumbers lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
+
 	public LottoNumbers numbers() {
 		return lottoNumbers;
 	}

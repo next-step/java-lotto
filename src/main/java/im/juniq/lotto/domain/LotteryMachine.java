@@ -7,16 +7,20 @@ public class LotteryMachine {
 	private final Price price;
 
 	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
-		this.price = new Price(price);
+		this(new Price(price), shuffleStrategy);
+	}
+
+	public LotteryMachine(Price price, ShuffleStrategy shuffleStrategy) {
+		this.price = price;
 		lottoes = new Lottoes(this.price.numberOfLottoPurchased() , shuffleStrategy);
 	}
 
-	public LotteryMachine(int price, List<String> manualLottoes) {
+	public LotteryMachine(Price price, List<LottoNumbers> manualLottoes) {
 		this(price, manualLottoes, new NormalShuffleStrategy());
 	}
 
-	public LotteryMachine(int price, List<String> manualLottoes, ShuffleStrategy shuffleStrategy) {
-		this.price = new Price(price);
+	public LotteryMachine(Price price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
+		this.price = price;
 		lottoes = new Lottoes(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
 	}
 

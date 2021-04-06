@@ -37,7 +37,7 @@ class LotteryMachineTest {
 	@DisplayName("자동로또 수동로또 함께 구입")
 	void buyLottoWithManual() {
 		NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
-		LotteryMachine lotteryMachine = new LotteryMachine(3000, Collections.singletonList("1,2,3,4,5,6"), shuffleStrategy);
+		LotteryMachine lotteryMachine = new LotteryMachine(new Price(3000), Collections.singletonList(new LottoNumbers("1,2,3,4,5,6")), shuffleStrategy);
 		List<Lotto> lottoes = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			lottoes.add(new Lotto(shuffleStrategy));

@@ -14,7 +14,7 @@ public class Lottoes implements Iterable<Lotto> {
 		this(numberOfCreated, shuffleStrategy, new ArrayList<>());
 	}
 
-	public Lottoes(int numberOfCreated,	ShuffleStrategy shuffleStrategy, List<String> manualLottoes) {
+	public Lottoes(int numberOfCreated,	ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
 		manualLottoSize = manualLottoes.size();
 		autoLottoSize = numberOfCreated - manualLottoes.size();
 		makeLottoes(manualLottoes);
@@ -40,9 +40,9 @@ public class Lottoes implements Iterable<Lotto> {
 		return lottoes;
 	}
 
-	private List<Lotto> makeLottoes(List<String> manualLottoes) {
-		for (String lotto : manualLottoes) {
-			lottoes.add(new Lotto(lotto));
+	private List<Lotto> makeLottoes(List<LottoNumbers> manualLottoes) {
+		for (LottoNumbers lottoNumbers : manualLottoes) {
+			lottoes.add(new Lotto(lottoNumbers));
 		}
 		return lottoes;
 	}

@@ -10,6 +10,10 @@ public class Price {
 		this.price = price;
 	}
 
+	public Price(String price) {
+		this(Integer.parseInt(price));
+	}
+
 	private void checkPrice(int price) {
 		if (price % LOTTO_PRICE != 0) {
 			throw new RuntimeException("금액은 " + LOTTO_PRICE + "원 단위로 입력해주세요.");

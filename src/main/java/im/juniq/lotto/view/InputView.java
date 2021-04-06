@@ -1,5 +1,8 @@
 package im.juniq.lotto.view;
 
+import im.juniq.lotto.domain.LottoNumber;
+import im.juniq.lotto.domain.LottoNumbers;
+import im.juniq.lotto.domain.Price;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,33 +10,32 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-	public static int purchaseAmount() {
+	public static Price purchaseAmount() {
 		System.out.println("구입금액을 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
-		return Integer.parseInt(scanner.next());
+		return new Price(scanner.next());
 	}
 
-	public static List<Integer> winningNumbers() {
+	public static LottoNumbers winningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
-		String inputString = scanner.next();
-		return Arrays.stream(inputString.split(",")).map(Integer::valueOf).collect(Collectors.toList());
+		return new LottoNumbers(scanner.next());
 	}
 
-	public static int bonusNumber() {
+	public static LottoNumber bonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
-		return Integer.parseInt(scanner.next());
+		return new LottoNumber(scanner.next());
 	}
 
-	public static List<String> manualLottoes() {
+	public static List<LottoNumbers> manualLottoes() {
 		int manualLottoesCount = manualLottoesCount();
 		System.out.println();
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
-		List<String> list = new ArrayList<>();
+		List<LottoNumbers> list = new ArrayList<>();
 		for (int i = 0; i < manualLottoesCount; i++) {
-			list.add(scanner.next());
+			list.add(new LottoNumbers(scanner.next()));
 		}
 		return list;
 	}
