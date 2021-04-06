@@ -1,5 +1,6 @@
 package step4.domain.lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.exception.LottoSizeMissMatchException;
@@ -11,18 +12,22 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
+
+    private Set<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void beforeEach() {
+        lottoNumbers = IntStream.range(1, 7)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(TreeSet::new));
+
+    }
 
     @DisplayName("Lotto 인스턴스 생성 여부 테스트")
     @Test
     void 생성() {
-        // given
-        Set<LottoNumber> lottoNumbers = IntStream.range(1, 7)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toCollection(TreeSet::new));
-
         // when
         Lotto lotto = Lotto.of(lottoNumbers);
 
@@ -43,6 +48,20 @@ class LottoTest {
                 .isInstanceOf(LottoSizeMissMatchException.class)
                 .hasMessageContaining("로또 숫자가 맞지 않습니다.");
 
+    }
+
+    @DisplayName("Lotto 인스턴스가 소유한 값이 특정값을 가졌는지에 대한 테스트")
+    @Test
+    void 비교_포함한_값() {
+        // given
+        LottoNumber lottoNumber = LottoNumber.valueOf(1);
+
+        // when
+        Lotto lotto = Lotto.of(lottoNumbers);
+        boolean actual = lotto.isIncludeLottoNumber(lottoNumber);
+
+        // then
+        assertThat(actual).isTrue();
     }
 
 }
