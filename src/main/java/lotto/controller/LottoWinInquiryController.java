@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.controller.dto.WinInquiryRequest;
 import lotto.controller.dto.WinInquiryResponse;
 import lotto.controller.dto.WinStatistic;
+import lotto.domain.LottoConstant;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRanks;
 import lotto.service.LottoWinService;
@@ -26,7 +27,7 @@ public class LottoWinInquiryController {
     }
 
     private int[] generateWinNumber(String winNumber) {
-        return Arrays.stream(winNumber.split(",")).mapToInt(value -> Integer.parseInt(value.trim())).toArray();
+        return Arrays.stream(winNumber.split(LottoConstant.NUMBER_DELIMITER)).mapToInt(value -> Integer.parseInt(value.trim())).toArray();
     }
 
     private WinInquiryResponse assembleWinResult(LottoRanks lottoRanks) {

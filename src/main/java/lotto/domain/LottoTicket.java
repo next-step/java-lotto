@@ -6,8 +6,6 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
 
-    private static final String NUMBER_DELIMITER = ",";
-
     private final List<Lotto> lottoList;
     private final LottoTicketType lottoTicketType;
 
@@ -64,7 +62,7 @@ public class LottoTicket {
     }
 
     private int[] generateLottoNumbers(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(NUMBER_DELIMITER)).mapToInt(value -> Integer.parseInt(value.trim())).toArray();
+        return Arrays.stream(lottoNumbers.split(LottoConstant.NUMBER_DELIMITER)).mapToInt(value -> Integer.parseInt(value.trim())).toArray();
     }
 
     public List<Lotto> getLottoList() {
