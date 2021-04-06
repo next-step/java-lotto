@@ -2,6 +2,8 @@ package step4.domain.lotto;
 
 import step4.exception.LottoNumberOutOfRangeException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,4 +39,7 @@ public final class LottoNumber {
         }
     }
 
+    public static final List<LottoNumber> values() {
+        return new ArrayList<>(CACHE.values());
+    }
 }

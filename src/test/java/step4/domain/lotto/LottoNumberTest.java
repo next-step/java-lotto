@@ -35,7 +35,7 @@ class LottoNumberTest {
     void 검증(int inputValue) {
 
         // when and then
-        assertThatThrownBy(()-> LottoNumber.valueOf(inputValue))
+        assertThatThrownBy(() -> LottoNumber.valueOf(inputValue))
                 .isInstanceOf(LottoNumberOutOfRangeException.class)
                 .hasMessageContaining("로또의 범위를 벗어난 숫자가 입력되었습니다.");
     }
@@ -60,8 +60,8 @@ class LottoNumberTest {
     void 반환_캐싱된_모든값() {
         // given
         List<LottoNumber> expectedLottoNumbers = IntStream.range(1, 46)
-                                                .mapToObj(LottoNumber::valueOf)
-                                                .collect(Collectors.toList());
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         // when
         List<LottoNumber> actualLottoNumbers = LottoNumber.values();
