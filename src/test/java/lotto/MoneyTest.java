@@ -22,4 +22,11 @@ public class MoneyTest {
             new Money(500);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("지불금액에서 구입한 로또게임 수를 제외한 금액을 반환한다.")
+    @Test
+    public void remain() {
+        Money payMoney = new Money(10000);
+        assertThat(payMoney.remainMoney(3)).isEqualTo(new Money(7000));
+    }
 }
