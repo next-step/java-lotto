@@ -46,7 +46,7 @@ public class MatchedCount implements Comparable<MatchedCount> {
         return this.matchedCount >= matchedCount;
     }
 
-    public boolean isLessThan(int matchedCount) {
+    private boolean isLessThan(int matchedCount) {
         return this.matchedCount < matchedCount;
     }
 
