@@ -21,10 +21,10 @@ public class LottoPurchaseService {
 
     public void validatePurchasable(int purchaseAmount, int manualLottoPurchaseCount) {
         if (purchaseAmount < LottoConstant.LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 1000원 이상의 금액을 입력해 주세요.");
+            throw new IllegalArgumentException("최소 " + LottoConstant.LOTTO_PRICE  + "원 이상의 금액을 입력해 주세요.");
         }
         if (manualLottoPurchaseCount < MIN_LOTTO_PURCHASE_COUNT) {
-            throw new IllegalArgumentException("구매수량은 0 이상으로 입력해 주세요.");
+            throw new IllegalArgumentException("구매수량은 " + MIN_LOTTO_PURCHASE_COUNT + " 이상으로 입력해 주세요.");
         }
         if (purchaseAmount < manualLottoPurchaseCount * LottoConstant.LOTTO_PRICE) {
             throw new IllegalArgumentException("구입금액이 부족합니다. 금액과 구매장수를 확인해 주세요.");
