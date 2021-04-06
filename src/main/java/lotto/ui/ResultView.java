@@ -3,6 +3,7 @@
  * */
 package lotto.ui;
 
+import lotto.domain.BuyNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
@@ -20,8 +21,8 @@ public class ResultView {
     public static final int YIELD_BOUND = 1;
 
 
-    public static void printBuySize(int total, int manual) {
-        System.out.println(String.format(BUY_SIZE_MEESAGE, manual, total - manual));
+    public static void printBuySize(BuyNumber buyNumber) {
+        System.out.println(String.format(BUY_SIZE_MEESAGE, buyNumber.getManualNumber(), buyNumber.getAutoNumber()));
     }
 
     /*

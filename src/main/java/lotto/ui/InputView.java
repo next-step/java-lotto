@@ -41,9 +41,6 @@ public class InputView {
         return inputNumbers();
     }
 
-    /*
-     * ❗❗ 수동 로또 생성 질문(관련 - LottoFactory의 mixLottos(), ManualLottoStrategy)
-     * */
     public static ArrayList<ArrayList<Integer>> inputManualLotto(int size) {
         if (size <= 0) {
             return null;

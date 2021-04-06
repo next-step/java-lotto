@@ -3,8 +3,6 @@
  * */
 package lotto.domain;
 
-import lotto.ui.InputView;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -49,17 +47,16 @@ public class LottoFactory {
     /*
      * 수동과 자동을 섞은 로또를 생성한다.
      * */
-    public static Lottos mixLottos(int total, int manualNum) {
+    public static Lottos mixLottos(BuyNumber buyNumber, ArrayList<ArrayList<Integer>> numbers) {
         List<Lotto> lottoList = new ArrayList<>();
         // 수동으로 생성한다.
-        lottoList.addAll(lottoList(
-                InputView.inputManualLotto(manualNum)
-        ));
+        if(buyNumber.hasManual()) {
+            lottoList.addAll(lottoList(numbers));
+        }
 
         // 자동으로 생성한다.
-        int autoNum = total - manualNum;
         setLottoStrategy(new AutoLottoStrategy());
-        lottoList.addAll(lottoList(autoNum));
+        lottoList.addAll(lottoList(buyNumber.getAutoNumber()));
         return new Lottos(lottoList);
     }
 
