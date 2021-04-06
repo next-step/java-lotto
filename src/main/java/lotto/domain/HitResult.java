@@ -15,7 +15,7 @@ public class HitResult {
     }
 
     public boolean equalPrize(Prize prize) {
-        return this.prize.equals(prize) ? true : false;
+        return this.prize.equals(prize);
     }
 
     public int getPrizeMoney() {
