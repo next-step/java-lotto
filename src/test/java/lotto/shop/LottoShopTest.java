@@ -2,11 +2,15 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.TestLottoGenerator;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.shop.Money;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -20,5 +24,18 @@ public class LottoShopTest {
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
         assertThat(lottoOrderedList.getLottoOrderedCount()).isEqualTo(lottoQuantity);
+    }
+
+    @Test
+    @DisplayName("총 로또 4장을 구입하는데, 수동이 2장이다.")
+    void manualLottoPurchaseTest() {
+        LottoShop lottoShop = new LottoShop(new Money(4000), new TestLottoGenerator(0));
+        List<Lotto> predefined = new ArrayList<>();
+        predefined.add(new Lotto(1,2,3,4,5,6));
+        predefined.add(new Lotto(7,8,9,10,11,12));
+
+        LottoOrderedList lottoOrderedList = lottoShop.purchase(predefined);
+
+        assertThat(lottoOrderedList.getLottoOrderedCount()).isEqualTo(4L);
     }
 }

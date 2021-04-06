@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.prize.Prize;
-import lotto.dto.LottoScoreDto;
 
 public class PrizeBoard {
     private final Map<Prize, Long> board;

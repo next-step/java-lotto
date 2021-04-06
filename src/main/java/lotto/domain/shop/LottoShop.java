@@ -27,6 +27,13 @@ public class LottoShop {
         return new LottoOrderedList(lottoList);
     }
 
+    public LottoOrderedList purchase(List<Lotto> predefined) {
+        while(isEnoughToPurchase()) {
+            predefined.add(lottoMachine.generate());
+        }
+        return new LottoOrderedList(predefined);
+    }
+
     private boolean isEnoughToPurchase() {
         return money.withdraw(new Money(LOTTO_PRICE));
     }
