@@ -9,7 +9,6 @@ public class ManualNumberOfTicket {
     private static final String CHECK_BOUND = "입력하신 구매 티켓 수가 구매 가능한 티켓 수보다 많습니다.";
     private static final String CHECK_POSITIVE = "입력하신 구매 티켓 수가 음수입니다.";
     private static final int MIN = 0;
-    private final TotalNumberOfTicket totalNumberOfTicket;
     private final int manualNumberOfTicket;
 
     public ManualNumberOfTicket(String manualNumberOfTicket, TotalNumberOfTicket totalNumberOfTicket) {
@@ -20,7 +19,6 @@ public class ManualNumberOfTicket {
         validateBound(manualNumberOfTicket, totalNumberOfTicket.count());
         validatePositive(manualNumberOfTicket);
         this.manualNumberOfTicket = manualNumberOfTicket;
-        this.totalNumberOfTicket = totalNumberOfTicket;
     }
 
     private void validatePositive(int manualNumberOfTicket) {
