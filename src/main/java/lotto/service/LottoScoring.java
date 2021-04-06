@@ -7,7 +7,6 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
-import lotto.domain.shop.LottoShop;
 import lotto.domain.stats.LottoScoreBoard;
 import lotto.domain.stats.WinningLotto;
 import lotto.dto.LottoOrderResultDto;

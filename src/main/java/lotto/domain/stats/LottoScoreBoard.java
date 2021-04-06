@@ -9,14 +9,12 @@ import lotto.domain.shop.LottoShop;
 
 public class LottoScoreBoard {
     private final PrizeBoard prizeBoard;
-    private final LottoOrderedList lottoOrderedList;
 
     public LottoScoreBoard(LottoOrderedList lottoOrderedList, WinningLotto winningLotto) {
         prizeBoard = new PrizeBoard();
         for (Lotto lotto : lottoOrderedList.getLottoList()) {
             prizeBoard.record(Prize.getPrizeByScore(winningLotto.getScoreIfMatchingBall(lotto)));
         }
-        this.lottoOrderedList = lottoOrderedList;
     }
 
     public String getEarningRate() {
