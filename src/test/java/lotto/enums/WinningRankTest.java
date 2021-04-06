@@ -5,7 +5,6 @@ import lotto.domain.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningRankTest {
@@ -42,5 +41,12 @@ public class WinningRankTest {
     public void isSecondPlace() throws Exception {
         assertThat(WinningRank.SECOND_PLACE.isSecondPlace(true)).isTrue();
         assertThat(WinningRank.SECOND_PLACE.isSecondPlace(false)).isFalse();
+    }
+
+    @Test
+    @DisplayName("5등의 매치 카운트 3보다 작을 경우 판별")
+    public void hasGreaterThan() throws Exception {
+        assertThat(WinningRank.FIFTH_PLACE.hasGreaterThan(new MatchedCount(3))).isFalse();
+        assertThat(WinningRank.FIFTH_PLACE.hasGreaterThan(new MatchedCount(2))).isTrue();
     }
 }
