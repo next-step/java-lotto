@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int ONE_GAME_MONEY = 1_000;
-    private static boolean DEFAULT_EMPTY_MONEY = false;
+    private static final boolean DEFAULT_EMPTY_MONEY = false;
 
     private final int money;
 
@@ -13,7 +13,7 @@ public class Money {
     }
 
     public Money(int money, boolean isEmptyMoney) {
-        if (isEmptyMoney == false && money < ONE_GAME_MONEY) {
+        if (!isEmptyMoney && money < ONE_GAME_MONEY) {
             throw new IllegalArgumentException(String.format("로또 구입금액은 최소 %d 이상을 입력해 주세요.", ONE_GAME_MONEY));
         }
         this.money = money;
