@@ -21,8 +21,20 @@ public class Money {
     return value * money;
   }
 
+  public int multiple(int size, int lottoPerPrice) {
+    return size * lottoPerPrice;
+  }
+
   public Money subtract(Money purchaseAmount) {
     return new Money(money - purchaseAmount.money);
+  }
+
+  public boolean lagerThan(int value) {
+    return money > value;
+  }
+
+  public Money sum(int value) {
+    return new Money(money + value);
   }
 
   @Override
@@ -40,5 +52,12 @@ public class Money {
   @Override
   public int hashCode() {
     return Objects.hash(money);
+  }
+
+  @Override
+  public String toString() {
+    return "Money{" +
+        "money=" + money +
+        '}';
   }
 }

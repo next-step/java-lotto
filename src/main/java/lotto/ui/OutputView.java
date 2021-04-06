@@ -9,37 +9,31 @@ import lotto.domain.LottoScoreBoard;
 
 public class OutputView {
 
-  public void printResult(LottoScoreBoard totalResult) {
-    System.out.println("지난 주 당첨 번호는 " );
+  public void printMatchResult(LottoScoreBoard totalResult) {
+    System.out.println("당첨 통계");
+    System.out.println("---------");
     System.out.println(totalResult.toResultString());
-    System.out.println("총 수익률은 " + doubleToStringFormat(totalResult) + "입니다.");
+  }
+
+  public void printTotalEarningRate(double earningRate) {
+    System.out.println("총 수익률은 " + doubleToStringFormat(earningRate) + "입니다.");
   }
 
   public void printBoughtLottoManualCoupons(LottoAgency agency) {
-    System.out.print("수동으로 " + agency.getPurchaseQuantity() + "장, ");
+    System.out.print("수동으로 " + agency.currentBoughtCouponQuantity() + "장, ");
   }
-  public void printBoughtLottoAutoCoupons(LottoAgency agency) {
-    System.out.println("자동으로 " + agency.getPurchaseQuantity() + "장을 구매하셨습니다.");
+  public void printBoughtLottoAutoCoupons(LottoAgency agency, int boughtAutoLottoQuantity) {
+    System.out.println("자동으로 " + boughtAutoLottoQuantity + "장을 구매하셨습니다.");
     System.out.println(printLottoCoupon(agency));
   }
 
-  private String doubleToStringFormat(LottoScoreBoard totalResult) {
+  private String doubleToStringFormat(double earningRate) {
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.DOWN);
-    return df.format(totalResult.getEarningRate());
+    return df.format(earningRate);
   }
 
   private String printLottoCoupon(LottoAgency agency) {
-    StringBuilder sb = new StringBuilder();
-    LottoCoupon coupon = agency.getCoupon();
-
-    for(Lotto lotto : coupon.getLottoCoupon()) {
-      sb.append("[")
-          .append(lotto.toString())
-          .append("]")
-          .append("\n");
-    }
-
-    return sb.toString();
+    return agency.lottoCouponToString();
   }
 }

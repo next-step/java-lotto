@@ -15,9 +15,11 @@ public class LottoAgency {
     updateBalance(manualLottoCoupon.size());
   }
 
-  public void purchaseLotto() {
+  public int purchaseLotto() {
     LottoCoupon lottoCoupon = LottoCoupon.createLottoCoupon(availablePurchaseQuantity());
     updateLottoCoupon(lottoCoupon);
+    updateBalance(lottoCoupon.size());
+    return lottoCoupon.size();
   }
 
   public Money originMoney() {
@@ -36,7 +38,7 @@ public class LottoAgency {
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(money, coupon, winningNumber);
+    return winningNumber.generateLottoMatchResult(originMoney(), coupon, winningNumber);
   }
 
   public String lottoCouponToString() {
