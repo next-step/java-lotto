@@ -23,7 +23,7 @@ public enum WinningRank {
 
     public static WinningRank findByMacthedCount(MatchedCount matchedCount, boolean matchBonus) {
 
-        if (FIFTH_PLACE.matchedCount().isGreaterOrEqualThan(matchedCount)) {
+        if (FIFTH_PLACE.hasGreaterThan(matchedCount)) {
             return ETC;
         }
 
@@ -38,6 +38,10 @@ public enum WinningRank {
         }
 
         return rank;
+    }
+
+    protected boolean hasGreaterThan(MatchedCount matchedCount) {
+        return this.matchedCount.isGreaterThan(matchedCount);
     }
 
     protected boolean isSecondPlace(boolean matchBonus) {
