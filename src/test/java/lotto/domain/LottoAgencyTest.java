@@ -16,8 +16,6 @@ class LottoAgencyTest {
     LottoAgency agency = new LottoAgency(new Money(14000), coupon);
 
     //when
-    agency.purchaseLotto();
-
     //then
     assertEquals(agency.availablePurchaseQuantity(), 4);
   }
