@@ -24,11 +24,7 @@ public class Numbers {
     }
 
     private void isNotNumberOrNegativeNumber(String s){
-        try {
-            if(Integer.parseInt(s)<0){
-                throw new RuntimeException();
-            }
-        } catch (Exception e){
+        if(Integer.parseInt(s)<0){
             throw new RuntimeException();
         }
     }

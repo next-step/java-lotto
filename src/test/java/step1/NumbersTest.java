@@ -38,11 +38,7 @@ class NumbersTest {
     void isNotNumberOrNegativeNumber(String given) {
 
         assertThrows(RuntimeException.class, () -> {
-            try {
-                if(Integer.parseInt(given)<0){
-                    throw new RuntimeException();
-                }
-            } catch (Exception e){
+            if(Integer.parseInt(given)<0){
                 throw new RuntimeException();
             }
         });
