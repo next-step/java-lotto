@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber>{
 
     private static final Map<Integer, LottoNumber> CACHE;
 
@@ -41,5 +41,10 @@ public final class LottoNumber {
 
     public static final List<LottoNumber> values() {
         return new ArrayList<>(CACHE.values());
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }
