@@ -12,11 +12,11 @@ class WinningLottoTest {
     @Test
     void 생성() {
         // given
-        String sentence = "1, 2, 3, 4, 5, 6";
-        int money = 1000;
+        String StringWinningLotto = "1, 2, 3, 4, 5, 6";
+        int bonusLottoNumber = 7;
 
         // when
-        WinningLotto winningLotto = WinningLotto.from(sentence, money);
+        WinningLotto winningLotto = WinningLotto.from(StringWinningLotto, bonusLottoNumber);
 
         // then
         assertThat(winningLotto).isNotNull();

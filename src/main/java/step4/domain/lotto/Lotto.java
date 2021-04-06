@@ -30,7 +30,7 @@ public final class Lotto {
         return new Lotto(lotto);
     }
 
-    public static Lotto of(String lotto) {
+    public static final Lotto of(String lotto) {
         return of(convertStringToLottoNumberSet(lotto));
     }
 
