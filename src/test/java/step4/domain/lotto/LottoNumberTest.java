@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.exception.LottoNumberOutOfRangeException;
+import step4.exception.LottoNumberOutOfRangeException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,9 +30,9 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     void 검증(int inputValue) {
 
-        // then
+        // when and then
         assertThatThrownBy(()-> LottoNumber.valueOf(inputValue))
                 .isInstanceOf(LottoNumberOutOfRangeException.class)
-                .hasMessageContaining("로또의 범위를 벗아난 숫자가 입력되었습니다.");
+                .hasMessageContaining("로또의 범위를 벗어난 숫자가 입력되었습니다.");
     }
 }
