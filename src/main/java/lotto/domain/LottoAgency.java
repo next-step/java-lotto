@@ -9,37 +9,46 @@ public class LottoAgency {
   private final LottoCoupon coupon;
   private Money money;
 
-  public LottoAgency(Money money) {
+  public LottoAgency(Money money, LottoCoupon manualLottoCoupon) {
     this.money = money;
-    this.coupon = purchaseLotto();
+    this.coupon = manualLottoCoupon;
+    updateBalance(manualLottoCoupon.size());
   }
 
-  public LottoCoupon purchaseLotto() {
-    return LottoCoupon.createLottoCoupon(getPurchaseQuantity());
+  public void purchaseLotto() {
+    LottoCoupon lottoCoupon = LottoCoupon.createLottoCoupon(availablePurchaseQuantity());
+    updateLottoCoupon(lottoCoupon);
   }
 
-  public Money getSeedMoney() {
-    return new Money(money.multiple(LOTTO_PER_PRICE));
+  public Money originMoney() {
+    if(money.lagerThan(0)) {
+      return money.sum(money.multiple(coupon.size(), LOTTO_PER_PRICE));
+    }
+    return new Money(money.multiple(coupon.size(), LOTTO_PER_PRICE));
   }
 
-  public Money lottoPurchaseMoney(Number quantity) {
-    return new Money(quantity.multiple(LOTTO_PER_PRICE));
-  }
-
-  public void updateBalance(Money purchaseAmount) {
-    this.money = money.subtract(purchaseAmount);
-  }
-
-  public int getPurchaseQuantity() {
+  public int availablePurchaseQuantity() {
     return money.divide(LOTTO_PER_PRICE);
   }
 
-  public LottoCoupon getCoupon() {
-    return new LottoCoupon(coupon.getLottoCoupon());
+  public int currentBoughtCouponQuantity() {
+    return coupon.size();
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(this);
+    return winningNumber.generateLottoMatchResult(money, coupon, winningNumber);
+  }
+
+  public String lottoCouponToString() {
+    return coupon.toString();
+  }
+
+  private void updateLottoCoupon(LottoCoupon lottoCoupon) {
+    this.coupon.add(lottoCoupon);
+  }
+
+  private void updateBalance(int size) {
+    this.money = money.subtract(new Money(money.multiple(size, LOTTO_PER_PRICE)));
   }
 
   @Override
