@@ -35,7 +35,11 @@ public class InputView {
     public int inputManualGameCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        int manualGameCount = scanner.nextInt();
+        if (manualGameCount < 0) {
+            throw new IllegalArgumentException("로또 수는 0이상의 값을 입력해 주세요.");
+        }
+        return manualGameCount;
     }
 
     public List<Numbers> inputManualGameNumbers(int manualGameCount) {
