@@ -13,6 +13,13 @@ public class Score {
         this.winners = winners;
     }
 
+    public Score() {
+        this.score = 0;
+        this.matchingBallCount = 0;
+        this.prizeAmount = 0;
+        this.winners = 0;
+    }
+
     public long getScore() {
         return score;
     }
