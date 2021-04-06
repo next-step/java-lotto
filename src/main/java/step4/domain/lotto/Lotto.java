@@ -5,9 +5,13 @@ import step4.exception.LottoSizeMissMatchException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Lotto {
 
+    public static final String COMMA_WITH_BLANK = ", ";
     public static final int SIZE = 6;
     public static final int AMOUNT = 1000;
 
@@ -24,6 +28,16 @@ public final class Lotto {
 
     public static final Lotto of(Set<LottoNumber> lotto) {
         return new Lotto(lotto);
+    }
+
+    public static Lotto of(String lotto) {
+        return of(convertStringToLottoNumberSet(lotto));
+    }
+
+    private static final Set<LottoNumber> convertStringToLottoNumberSet(String sentence) {
+        return Stream.of(sentence.split(COMMA_WITH_BLANK))
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private final void validateSize(Set<LottoNumber> lotto) {

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public final class LottoNumber implements Comparable<LottoNumber>{
+public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> CACHE;
 

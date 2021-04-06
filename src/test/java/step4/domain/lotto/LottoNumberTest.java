@@ -29,6 +29,19 @@ class LottoNumberTest {
         assertThat(lottoNumber).isNotNull();
     }
 
+    @DisplayName("LottoNumber 인스턴스 문자열로 생성 여부 테스트")
+    @Test
+    void 생성_문자열() {
+        // given
+        String inputValue = "1";
+
+        // when
+        LottoNumber lottoNumber = LottoNumber.valueOf(inputValue);
+
+        // then
+        assertThat(lottoNumber).isNotNull();
+    }
+
     @DisplayName("LottoNumber 인스턴스에 부적절한 값 주입시 예외처리 여부 테스트")
     @ParameterizedTest(name = "{index}번 째 반복, 주입값 : {0}")
     @ValueSource(ints = {-1, 0, 46})
