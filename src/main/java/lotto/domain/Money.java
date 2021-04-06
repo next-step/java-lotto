@@ -23,6 +23,9 @@ public class Money {
     }
 
     public Money remainMoney(int purchaseLottoCount) {
+        if (purchaseLottoCount > lottoGameCount()) {
+            throw new IllegalArgumentException(String.format("구매할 수 있는 최대 수는 %d 입니다.", lottoGameCount()));
+        }
         return new Money(money - (purchaseLottoCount * ONE_GAME_MONEY));
     }
 
