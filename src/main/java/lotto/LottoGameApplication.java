@@ -12,9 +12,9 @@ public class LottoGameApplication {
         try {
             InputView inputView = new InputView();
             inputView.inputPayMoney();
-            List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
-
             Money payMoney = new Money(inputView.getPayMoney());
+
+            List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
             LottoShop lottoShop = new LottoShop(payMoney, new DefaultNumberService(manualNumbers));
 
             Money autoMoney = payMoney.remainMoney(manualNumbers.size());
