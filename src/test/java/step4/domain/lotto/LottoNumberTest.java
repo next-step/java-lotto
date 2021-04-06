@@ -25,6 +25,20 @@ class LottoNumberTest {
         assertThat(lottoNumber).isNotNull();
     }
 
+    @DisplayName("LottoNumber 인스턴스가 캐싱된 값을 반환하는지 테스트")
+    @Test
+    void 비교_캐싱() {
+        // given
+        int inputValue = 1;
+
+        // when
+        LottoNumber expectLottoNumber = LottoNumber.valueOf(inputValue);
+        LottoNumber actualLottoNumber = LottoNumber.valueOf(inputValue);
+
+        // then
+        assertThat(actualLottoNumber).isEqualTo(expectLottoNumber);
+    }
+
     @DisplayName("LottoNumber 인스턴스에 부적절한 값 주입시 예외처리 여부 테스트")
     @ParameterizedTest(name = "{index}번 째 반복, 주입값 : {0}")
     @ValueSource(ints = {-1, 0, 46})
@@ -35,4 +49,7 @@ class LottoNumberTest {
                 .isInstanceOf(LottoNumberOutOfRangeException.class)
                 .hasMessageContaining("로또의 범위를 벗어난 숫자가 입력되었습니다.");
     }
+
+
+
 }
