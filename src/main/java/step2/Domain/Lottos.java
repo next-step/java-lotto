@@ -1,4 +1,4 @@
-package step2;
+package step2.Domain;
 
 import java.util.List;
 
@@ -8,17 +8,17 @@ public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    private Lottos(List<Lotto> lottoList){
+    private Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public static Lottos of(LottoNumberGenerator generator){
+    public static Lottos of(LottoNumberGenerator generator) {
         return new Lottos(generator.generate());
     }
 
-    public Rank makeStatistic(WinningLotto winningLotto){
+    public Rank makeStatistic(WinningLotto winningLotto) {
         return new Rank(lottoList.stream()
-                .collect(groupingBy(lotto->lotto.isWinningLottoList(winningLotto))));
+                .collect(groupingBy(lotto -> lotto.isWinningLottoList(winningLotto))));
     }
 
     public List<Lotto> getLottos() {

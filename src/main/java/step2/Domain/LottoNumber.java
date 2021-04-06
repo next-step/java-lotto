@@ -1,4 +1,4 @@
-package step2;
+package step2.Domain;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -14,15 +14,16 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void check(int number){
-        if(!Pattern.matches(LOTTO_NUMBER_REGEX,String.valueOf(number))){
+    private void check(int number) {
+        if (!Pattern.matches(LOTTO_NUMBER_REGEX, String.valueOf(number))) {
             throw new IllegalArgumentException("로또 번호에 적합하지 않은 숫자입니다.");
         }
     }
 
-    public int getNumber(){
+    public int getNumber() {
         return number;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
