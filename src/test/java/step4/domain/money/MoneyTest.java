@@ -35,5 +35,18 @@ class MoneyTest {
                 .hasMessageContaining("음수값이 입력되었습니다.");
     }
 
+    @DisplayName("Money 인스턴스가 특정 값을 기준으로 구매할 수 있는 갯수 반환 여부 테스트")
+    @Test
+    void 검증_구매할_수_있는_갯수_반환() {
+        // given
+        int value = 10000;
+        int purchaseAmount = 1000;
+
+        // when
+        Money money = Money.valueOf(value);
+        int actual = purchaseQuantity(money);
+
+        assertThat(actual).isEqualTo(10);
+    }
 
 }
