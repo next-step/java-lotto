@@ -21,4 +21,28 @@ public class PrizeBoard {
     public long getWinnerCountByPrize(Prize prize) {
         return board.get(prize);
     }
+
+    public long getWinnerCountWithNothingPrizeTotal() {
+        long winnerCountTotal = 0L;
+        for (Prize prize : Prize.values()) {
+            winnerCountTotal += board.get(prize);
+        }
+        return winnerCountTotal;
+    }
+
+    public long getWinnersPrizeAmountByPrize(Prize prize) {
+        return prize.getPrizeAmount() * board.get(prize);
+    }
+
+    public long getWinnersPrizeAmountTotal() {
+        long prizeAmountTotal = 0L;
+        for (Prize prize : Prize.values()) {
+            prizeAmountTotal += getWinnersPrizeAmountByPrize(prize);
+        }
+        return prizeAmountTotal;
+    }
+
+    public boolean isEmpty() {
+        return board.isEmpty();
+    }
 }

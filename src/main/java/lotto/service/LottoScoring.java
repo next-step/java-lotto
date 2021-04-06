@@ -8,7 +8,6 @@ import lotto.domain.lotto.LottoBall;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
-import lotto.domain.stats.LottoEarningRateCalculator;
 import lotto.domain.stats.LottoScoreBoard;
 import lotto.domain.stats.WinningLotto;
 import lotto.dto.LottoOrderResultDto;
@@ -31,7 +30,6 @@ public class LottoScoring {
 
     public LottoScoreResultDto getResult() {
         List<LottoScoreDto> lottoScoreDtoList = new ArrayList<>();
-        lottoScoreBoard.scoring();
 
         for (Prize prize : Prize.values()) {
             lottoScoreDtoList.add(new LottoScoreDto(
@@ -44,11 +42,7 @@ public class LottoScoring {
     }
 
     public String getEarningRate() {
-        long principal = lottoScoreBoard.getLottoOrderedCount() * LottoShop.LOTTO_PRICE;
-        LottoEarningRateCalculator calculator =
-                new LottoEarningRateCalculator(principal, lottoScoreBoard);
-
-        return calculator.resultToString();
+        return lottoScoreBoard.getEarningRate();
     }
 
     private LottoOrderedList convertFromDtoToLottoOrderedList(LottoOrderResultDto lottoOrderResultDto) {

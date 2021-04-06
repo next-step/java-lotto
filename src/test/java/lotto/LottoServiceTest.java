@@ -11,7 +11,6 @@ import lotto.dto.LottoScoreDto;
 import lotto.dto.LottoScoreResultDto;
 import lotto.service.LottoScoring;
 import lotto.service.LottoShopping;
-import lotto.view.ResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

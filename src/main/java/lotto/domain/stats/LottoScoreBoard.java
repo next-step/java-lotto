@@ -1,32 +1,35 @@
 package lotto.domain.stats;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
+import lotto.domain.shop.LottoShop;
 
 public class LottoScoreBoard {
     private final PrizeBoard prizeBoard;
     private final LottoOrderedList lottoOrderedList;
-    private final WinningLotto winningLotto;
 
     public LottoScoreBoard(LottoOrderedList lottoOrderedList, WinningLotto winningLotto) {
         prizeBoard = new PrizeBoard();
-        this.winningLotto = winningLotto;
+        for (Lotto lotto : lottoOrderedList.getLottoList()) {
+            prizeBoard.record(Prize.getPrizeByScore(winningLotto.getScoreIfMatchingBall(lotto)));
+        }
         this.lottoOrderedList = lottoOrderedList;
     }
 
-    public void scoring() {
-        for (Lotto lotto : lottoOrderedList.getLottoList()) {
-            prizeBoard.record(Prize.getPrizeByScore(
-                    winningLotto.getScoreIfMatchingBall(lotto)));
-        }
+    public String getEarningRate() {
+        long principal = prizeBoard.getWinnerCountWithNothingPrizeTotal() * LottoShop.LOTTO_PRICE;
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+
+        return decimalFormat.format(prizeBoard.getWinnersPrizeAmountTotal() / (double) principal);
     }
 
     public long getWinnerCountByPrize(Prize prize) {
         return prizeBoard.getWinnerCountByPrize(prize);
     }
 
-    public long getLottoOrderedCount() {
-        return this.lottoOrderedList.getLottoOrderedCount();
-    }
 }

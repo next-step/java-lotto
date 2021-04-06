@@ -11,7 +11,6 @@ import lotto.domain.machine.TestLottoGenerator;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.shop.Money;
-import lotto.domain.stats.LottoEarningRateCalculator;
 
 import lotto.domain.stats.LottoScoreBoard;
 import lotto.domain.stats.WinningLotto;
@@ -109,20 +108,15 @@ public class AutomatedLottoTest {
 
     @Test
     @DisplayName("로또 14개를 구입했을 때, 당첨금이 5000원인 경우 수익률을 계산한다.")
-    void lottoEarningRateCalcuateTest() {
+    void lottoEarningRateCalculateTest() {
         LottoShop lottoShop = new LottoShop(new Money(14000), new TestLottoGenerator(0));
         Lotto lotto = new Lotto(17, 18, 19, 20, 21, 22);
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoBall(45));
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
         LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winningLotto);
-        lottoScoreBoard.scoring();
-        final long balance = (long) lottoOrderedList.getLottoOrderedCount() * 1000;
-        LottoEarningRateCalculator calculator = new LottoEarningRateCalculator(balance, lottoScoreBoard);
 
-        String earningRate = calculator.resultToString();
-
-        assertThat(earningRate).isEqualTo("0.35");
+        assertThat(lottoScoreBoard.getEarningRate()).isEqualTo("0.35");
     }
 
     @Test
@@ -132,7 +126,6 @@ public class AutomatedLottoTest {
         WinningLotto winnerLotto = new WinningLotto(new Lotto(2, 3, 4, 5, 6, 8), new LottoBall(1));
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
         LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winnerLotto);
-        lottoScoreBoard.scoring();
 
         long winner = lottoScoreBoard.getWinnerCountByPrize(Prize.SECOND);
 
