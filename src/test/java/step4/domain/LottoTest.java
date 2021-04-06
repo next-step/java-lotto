@@ -1,12 +1,12 @@
-package step3.domain;
+package step4.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.domain.number.Count;
-import step3.domain.number.LottoNumbers;
-import step3.util.Splitter;
+import step4.domain.number.Count;
+import step4.domain.number.LottoNumbers;
+import step4.util.Splitter;
 
 public class LottoTest {
 

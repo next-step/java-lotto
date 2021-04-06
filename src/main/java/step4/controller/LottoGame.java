@@ -1,16 +1,16 @@
-package step3.controller;
+package step4.controller;
 
-import step3.domain.Cash;
-import step3.domain.Lotto;
-import step3.domain.Lottos;
-import step3.domain.number.LottoNumber;
-import step3.domain.number.LottoNumbers;
-import step3.domain.result.LottoMatchingResult;
-import step3.service.Mart;
-import step3.strategy.LottoRandomStrategy;
-import step3.util.Splitter;
-import step3.view.InputView;
-import step3.view.ResultView;
+import step4.domain.Cash;
+import step4.domain.Lotto;
+import step4.domain.Lottos;
+import step4.domain.number.LottoNumber;
+import step4.domain.number.LottoNumbers;
+import step4.domain.result.LottoMatchingResult;
+import step4.service.Mart;
+import step4.strategy.LottoRandomStrategy;
+import step4.util.Splitter;
+import step4.view.InputView;
+import step4.view.ResultView;
 
 import java.util.List;
 

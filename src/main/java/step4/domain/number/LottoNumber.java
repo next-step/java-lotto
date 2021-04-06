@@ -1,6 +1,6 @@
-package step3.domain.number;
+package step4.domain.number;
 
-import step3.exception.InvalidLottoNumberException;
+import step4.exception.InvalidLottoNumberException;
 
 import java.util.Objects;
 

@@ -1,12 +1,12 @@
-package step3.domain.number;
+package step4.domain.number;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.exception.InvalidNumbersSizeException;
-import step3.util.Splitter;
+import step4.exception.InvalidNumbersSizeException;
+import step4.util.Splitter;
 
 class LottoNumbersTest {
 

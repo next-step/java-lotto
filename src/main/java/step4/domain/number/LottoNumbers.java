@@ -1,7 +1,7 @@
-package step3.domain.number;
+package step4.domain.number;
 
-import step3.exception.DuplicatedLottoNumberException;
-import step3.exception.InvalidNumbersSizeException;
+import step4.exception.DuplicatedLottoNumberException;
+import step4.exception.InvalidNumbersSizeException;
 
 import java.util.Collections;
 import java.util.List;
