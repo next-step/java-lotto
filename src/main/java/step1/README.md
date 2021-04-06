@@ -32,3 +32,4 @@
 - [x] boolean 값 반환하는 메서드는 인라인으로 간단하게 코드 줄일수 있을듯
 - [x] 불필요한 try-catch문 삭제.
   - `NumberFormatException`은 `RuntimeException`의 하위 클래스이므로 숫자형식이 맞지않을경우 어차피 `RuntimeException`이 발생. `catch`해서 `throw` 할 필요가 없음
+- [x] JDK 내장 함수에 대한 테스트는 클래스 테스트로 두기보다는 따로 테스트 클래스로 분리해서 해본다.
