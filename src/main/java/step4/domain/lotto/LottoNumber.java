@@ -28,6 +28,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
+    public static final LottoNumber valueOf(String lottoNumber) {
+        return valueOf(Integer.valueOf(lottoNumber));
+    }
+
     public final static LottoNumber valueOf(int lottoNumber) {
         validateRange(lottoNumber);
         return CACHE.get(lottoNumber);
@@ -42,6 +46,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     public static final List<LottoNumber> values() {
         return new ArrayList<>(CACHE.values());
     }
+
+
 
     @Override
     public int compareTo(LottoNumber o) {
