@@ -64,4 +64,21 @@ class LottoTest {
         assertThat(actual).isTrue();
     }
 
+    @DisplayName("Lotto 인스턴스가 소유한 값이 몇개의 특정값을 가졌는지에 대한 테스트")
+    @Test
+    void 비교_포함한_값의_갯수() {
+        // given
+        Set<LottoNumber> anotherLottoNumbers = IntStream.range(6, 12)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        // when
+        Lotto lotto = Lotto.of(lottoNumbers);
+        Lotto anotherLotto = Lotto.of(anotherLottoNumbers);
+        int actual = lotto.match(anotherLotto);
+
+        // then
+        assertThat(actual).isEqualTo(1);
+    }
+
 }
