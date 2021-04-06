@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.HitResults;
-import lotto.domain.LottoShop;
-import lotto.domain.Money;
-import lotto.domain.Numbers;
+import lotto.domain.*;
 import lotto.view.HitResultView;
 import lotto.view.InputView;
 import lotto.view.LottoGamesView;
@@ -18,10 +15,10 @@ public class LottoGameApplication {
             List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
 
             Money payMoney = new Money(inputView.getPayMoney());
-            LottoShop lottoShop = new LottoShop();
-            lottoShop.purchase(payMoney, manualNumbers);
+            LottoShop lottoShop = new LottoShop(payMoney, new DefaultNumberService(manualNumbers));
 
-            LottoGamesView lottoGamesView = new LottoGamesView(lottoShop);
+            Money autoMoney = payMoney.remainMoney(manualNumbers.size());
+            LottoGamesView lottoGamesView = new LottoGamesView(lottoShop, manualNumbers.size(), autoMoney.lottoGameCount());
             lottoGamesView.printLottoGamesNumber();
 
             inputView.inputHitNumbers();

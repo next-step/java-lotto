@@ -6,15 +6,9 @@ public class LottoGame {
     public static final int NUMBER_BOUND = 6;
 
     private final Numbers numbers;
-    private final LottoNumberService lottoNumberService;
 
     public LottoGame(Numbers numbers) {
-        this(new ManualNumberService(numbers));
-    }
-
-    public LottoGame(LottoNumberService lottoNumberService) {
-        this.lottoNumberService = lottoNumberService;
-        this.numbers = this.lottoNumberService.creation();
+        this.numbers = numbers;
     }
 
     public HitResult lotto(WinNumbers winNumbers) {
@@ -23,10 +17,6 @@ public class LottoGame {
 
     public Numbers getNumbers() {
         return numbers;
-    }
-
-    public LottoNumberService getLottoNumberService() {
-        return lottoNumberService;
     }
 
     @Override

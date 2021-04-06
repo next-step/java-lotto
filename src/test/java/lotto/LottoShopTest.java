@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoShop;
-import lotto.domain.Money;
-import lotto.domain.Numbers;
+import lotto.domain.*;
 import org.assertj.core.api.AssertionsForInterfaceTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +16,7 @@ public class LottoShopTest {
     @DisplayName("입력한 금액만큼 로또 게임을 생성한다")
     @Test
     public void make() {
-        LottoShop lottoShop = new LottoShop();
-        lottoShop.purchase(new Money(14500));
+        LottoShop lottoShop = new LottoShop(new Money(14500), new DefaultNumberService(new ArrayList<>(0)));
 
         assertThat(lottoShop.getGameCount()).isEqualTo(14);
     }
@@ -36,8 +32,7 @@ public class LottoShopTest {
         numbers.add(numbers2);
         numbers.add(numbers3);
 
-        LottoShop lottoShop = new LottoShop();
-        lottoShop.purchase(new Money(3000), numbers);
+        LottoShop lottoShop = new LottoShop(new Money(3000), new DefaultNumberService(numbers));
 
         AssertionsForInterfaceTypes.assertThat(lottoShop.getLottoGames())
                 .contains(
@@ -57,8 +52,9 @@ public class LottoShopTest {
         numbers.add(numbers2);
         numbers.add(numbers3);
 
-        LottoShop lottoShop = new LottoShop();
-        lottoShop.purchase(new Money(10000), numbers);
+        Money payMoney = new Money(10000);
+        LottoShop lottoShop = new LottoShop(payMoney, new DefaultNumberService(numbers));
+        Money autoMoney = payMoney.remainMoney(numbers.size());
 
         AssertionsForInterfaceTypes.assertThat(lottoShop.getLottoGames())
                 .contains(
@@ -66,7 +62,7 @@ public class LottoShopTest {
                         new LottoGame(new Numbers(Arrays.asList(7, 8, 9, 10, 11, 12))),
                         new LottoGame(new Numbers(Arrays.asList(12, 13, 14, 15, 16, 17))));
 
-        assertThat(lottoShop.getAutoGameCount()).isEqualTo(7);
+        assertThat(autoMoney.lottoGameCount()).isEqualTo(7);
     }
 
     @DisplayName("2000원으로 수동 게임을 3게임 입력시 예외를 반환한다.")
@@ -80,10 +76,8 @@ public class LottoShopTest {
         numbers.add(numbers2);
         numbers.add(numbers3);
 
-        LottoShop lottoShop = new LottoShop();
-
         assertThatThrownBy(() -> {
-            lottoShop.purchase(new Money(2000), numbers);
+            new LottoShop(new Money(2000), new DefaultNumberService(numbers));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

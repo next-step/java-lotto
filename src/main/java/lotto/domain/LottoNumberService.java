@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface LottoNumberService {
-    Numbers creation();
+    List<LottoGame> creation(Money money);
 }
