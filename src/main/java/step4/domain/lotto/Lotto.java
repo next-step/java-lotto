@@ -25,5 +25,7 @@ public final class Lotto {
         }
     }
 
-
+    public final boolean isIncludeLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
 }
