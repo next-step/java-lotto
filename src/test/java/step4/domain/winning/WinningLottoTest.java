@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
 import step4.exception.LottoNullPointerException;
+import step4.exception.LottoNumberConflictException;
 import step4.exception.LottoNumberNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,6 +53,20 @@ class WinningLottoTest {
         assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
                 .isInstanceOf(LottoNumberNullPointerException.class)
                 .hasMessageContaining("LottoNumber 인스턴스가 null 입니다.");
+
+    }
+
+    @DisplayName("WinningLotto 인스턴스에 중복된 당첨 번호 주입시 예외처리 여부 테스트")
+    @Test
+    void 검증_중복된_당첨번호() {
+        // given
+        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        LottoNumber lottoNumber = LottoNumber.valueOf(6);
+
+        // when
+        assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
+                .isInstanceOf(LottoNumberConflictException.class)
+                .hasMessageContaining("겹치는 LottoNumber 인스턴스가 존재합니다.");
 
     }
 
