@@ -71,6 +71,10 @@ public class LottoTicket {
         return this.lottoList;
     }
 
+    public LottoTicketType getLottoTicketType() {
+        return lottoTicketType;
+    }
+
     public int getCount() {
         return this.lottoList.size();
     }
@@ -79,10 +83,6 @@ public class LottoTicket {
         Lotto.validateLottoNumbers(winNumbers);
         List<LottoRank> lottoRankList = this.lottoList.stream().map(lotto -> lotto.inquiryRank(winNumbers, bonusNumber)).collect(Collectors.toList());
         return new LottoRanks(lottoRankList);
-    }
-
-    public boolean typeOf(LottoTicketType lottoTicketType) {
-        return this.lottoTicketType == lottoTicketType;
     }
 
 }

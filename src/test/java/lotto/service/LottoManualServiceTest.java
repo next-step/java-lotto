@@ -61,6 +61,6 @@ class LottoManualServiceTest {
         LottoTicket lottoTicket = lottoManualService.purchaseLottoTicket(manualLottoPurchaseNumberList);
 
         // then
-        assertThat(lottoTicket.typeOf(LottoTicketType.MANUAL)).isTrue();
+        assertThat(LottoTicketType.MANUAL.equals(lottoTicket.getLottoTicketType())).isTrue();
     }
 }

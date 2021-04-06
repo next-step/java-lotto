@@ -12,7 +12,7 @@ public class LottoTickets {
     }
 
     public int calculateLottoCount(LottoTicketType lottoTicketType) {
-        return lottoTicketList.stream().filter(lottoTicket -> lottoTicket.typeOf(lottoTicketType)).mapToInt(LottoTicket::getCount).sum();
+        return lottoTicketList.stream().filter(lottoTicket -> lottoTicketType.equals(lottoTicket.getLottoTicketType())).mapToInt(LottoTicket::getCount).sum();
     }
 
     public List<Lotto> getLottoList() {

@@ -50,7 +50,7 @@ class LottoAutoServiceTest {
         LottoTicket lottoTicket = lottoAutoService.purchaseLottoTicket(purchaseCount);
 
         // then
-        assertThat(lottoTicket.typeOf(LottoTicketType.AUTO)).isTrue();
+        assertThat(LottoTicketType.AUTO.equals(lottoTicket.getLottoTicketType())).isTrue();
     }
 
 }
