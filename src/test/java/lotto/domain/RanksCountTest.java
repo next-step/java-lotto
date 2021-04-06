@@ -30,22 +30,19 @@ public class RanksCountTest {
     }
 
     @Test
-    @DisplayName("당첨된 로또 티켓의 당첨 금액을 합산하면 총 당첨 금액이 나온다.")
+    @DisplayName("당첨된 로또 티켓의 당첨 금액들을 제공하면 총 당첨 금액이 나온다.")
     public void totalPrize() throws Exception {
-        //given
-        WinningNumbers winningNumbers = WinningNumbers.from(1, 2, 3, 4, 5, 6);
-        LottoTicket firstTicket = new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6));
-        LottoTicket secondTicket = new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 7));
-        LottoTicket thirdTicket = new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 8));
-        BonusBall bonusBall = new BonusBall(7);
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(firstTicket, secondTicket, thirdTicket));
-        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.count(bonusBall);
-
         //when
-        TotalPrize totalPrize = ranksCount.totalPrize();
+        TotalPrize totalPrize = new TotalPrize(Arrays.asList(
+                WinningRank.FIRST_PLACE.prize(),
+                WinningRank.SECOND_PLACE.prize(),
+                WinningRank.THIRD_PLACE.prize()
+        ));
 
         //then
-        assertThat(totalPrize.sum()).isEqualTo(WinningRank.FIRST_PLACE.prize().prize() + WinningRank.SECOND_PLACE.prize().prize() + WinningRank.THIRD_PLACE.prize().prize());
+        assertThat(totalPrize.sum()).isEqualTo(
+                WinningRank.FIRST_PLACE.prize().prize() +
+                        WinningRank.SECOND_PLACE.prize().prize() +
+                        WinningRank.THIRD_PLACE.prize().prize());
     }
 }
