@@ -33,3 +33,6 @@
 - [x] 불필요한 try-catch문 삭제.
   - `NumberFormatException`은 `RuntimeException`의 하위 클래스이므로 숫자형식이 맞지않을경우 어차피 `RuntimeException`이 발생. `catch`해서 `throw` 할 필요가 없음
 - [x] JDK 내장 함수에 대한 테스트는 클래스 테스트로 두기보다는 따로 테스트 클래스로 분리해서 해본다.
+- [x] 간접 테스트 재작성
+  - private 메소드의 경우 테스트할 수가 없는데, 이 경우에 간접 테스트를 통해 private 메서드도 테스트 할 수 있다.
+  - 간접 테스트란 private 메소드의 호출부를 테스트함으로써 간접 테스트 할 수 있다.

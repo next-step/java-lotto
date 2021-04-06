@@ -12,23 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class NumbersTest {
 
-    @ParameterizedTest(name = "음수또는 숫자 타입 검증하는 테스트")
-    @ValueSource(strings = {"-1", "$","a"})
-    void isNotNumberOrNegativeNumber(String given) {
-
+    @ParameterizedTest(name = "음수나 숫자가 아닐경우 RuntimeException 발생")
+    @ValueSource(strings = {"-1","1,-1", "-1,2","-2,3"})
+    void throwsExceptionWhenNotNumberOrNegativeNumber(String given) {
+        System.out.println(given.length());
         assertThrows(RuntimeException.class, () -> {
-            if(Integer.parseInt(given)<0){
-                throw new RuntimeException();
-            }
+            new Numbers(given, new StringSplitter());
         });
     }
 
-    @Test
-    @DisplayName("number getter 테스트")
-    void getNumbers(){
-        // given
-        String given = "1,3,5";
-
+    @ParameterizedTest(name = "number getter 테스트")
+    @ValueSource(strings = {"1,3,5", "1:3:5", "//;\n1;3;5"})
+    void getNumbers(String given){
         // when
         Numbers numbers = new Numbers(given, new StringSplitter());
         List<Integer> actual = numbers.getNumbers();
