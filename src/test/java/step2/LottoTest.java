@@ -34,7 +34,7 @@ public class LottoTest {
     @DisplayName("한 게임 당 1000원이고 시드머니가 14000이면 14게임")
     @Test
     void gameSize() {
-        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
+        lotto.initAutoGames(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
 
         assertEquals(seed.amount() / PRICE_PER_GAME, lotto.size());
     }
@@ -42,7 +42,7 @@ public class LottoTest {
     @DisplayName("입력받은 개수만큼 게임생성")
     @Test
     void generateGames() {
-        lotto.init(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
+        lotto.initAutoGames(seed.amount(), PRICE_PER_GAME, LENGTH_PER_GAME);
         List<Game> games = lotto.games();
 
         for (int count = 0; count < lotto.size(); ++count) {

@@ -1,5 +1,9 @@
 package step2.domain;
 
+import static java.util.stream.Collectors.toList;
+import static step2.util.StringConstant.DELIMITER_COMMA;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +14,10 @@ public class Game {
 
     public Game(int length) {
         this.numbers = init(length);
+    }
+
+    public Game(String manualGame) {
+        this.numbers = init(manualGame);
     }
 
     public Game(List<Integer> numbers) {
@@ -46,7 +54,14 @@ public class Game {
     private List<Number> init(List<Integer> numbers) {
         return numbers.stream()
             .map(Number::new)
-            .collect(Collectors.toList());
+            .collect(toList());
+    }
+
+    private List<Number> init(String manualGame) {
+        return Arrays.stream(manualGame.split(DELIMITER_COMMA))
+            .map(Integer::parseInt)
+            .map(Number::new)
+            .collect(toList());
     }
 
     @Override
