@@ -9,18 +9,25 @@ public final class Money {
     private final int money;
 
     private Money(int money) {
-        validate(money);
+        validateNegative(money);
         this.money = money;
-    }
-
-    private final void validate(int money) {
-        if (money < ZERO) {
-            throw new InputNegativeAmountException();
-        }
     }
 
     public static final Money valueOf(int money) {
         return new Money(money);
     }
+
+    public final int purchaseQuantity(int purchaseAmount) {
+        validateNegative(purchaseAmount);
+        return money / purchaseAmount;
+    }
+
+
+    private final void validateNegative(int money) {
+        if (money < ZERO) {
+            throw new InputNegativeAmountException();
+        }
+    }
+
 
 }

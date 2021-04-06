@@ -44,7 +44,7 @@ class MoneyTest {
 
         // when
         Money money = Money.valueOf(value);
-        int actual = purchaseQuantity(money);
+        int actual = money.purchaseQuantity(purchaseAmount);
 
         assertThat(actual).isEqualTo(10);
     }
