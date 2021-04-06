@@ -106,18 +106,7 @@ public class AutomatedLottoTest {
         assertThat(counts).isEqualTo(2L);
     }
 
-    @Test
-    @DisplayName("로또 14개를 구입했을 때, 당첨금이 5000원인 경우 수익률을 계산한다.")
-    void lottoEarningRateCalculateTest() {
-        LottoShop lottoShop = new LottoShop(new Money(14000), new TestLottoGenerator(0));
-        Lotto lotto = new Lotto(17, 18, 19, 20, 21, 22);
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoBall(45));
-        LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winningLotto);
-
-        assertThat(lottoScoreBoard.getEarningRate()).isEqualTo("0.35");
-    }
 
     @Test
     @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
