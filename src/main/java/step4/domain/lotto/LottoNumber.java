@@ -32,7 +32,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return valueOf(Integer.valueOf(lottoNumber));
     }
 
-    public final static LottoNumber valueOf(int lottoNumber) {
+    public static final LottoNumber valueOf(int lottoNumber) {
         validateRange(lottoNumber);
         return CACHE.get(lottoNumber);
     }

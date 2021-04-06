@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoShop {
+public final class LottoShop {
 
     public static final int FROM_INDEX = 0;
     public static final int TO_INDEX = 6;
