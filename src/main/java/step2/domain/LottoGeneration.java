@@ -25,7 +25,7 @@ public class LottoGeneration {
         int count = getCount();
 
         return IntStream.range(0, count)
-                .mapToObj(index -> getGeneratedLotto())
+                .mapToObj(index -> new Lotto(getGeneratedNumbers()))
                 .collect(Collectors.toList());
     }
 
@@ -33,20 +33,13 @@ public class LottoGeneration {
         return (int) Math.floor(cash / LOTTO_PRICE);
     }
 
-    private Lotto getGeneratedLotto() {
-        Set<LottoNumber> lottoNumbers = getGeneratedNumbers().stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-
-        return new Lotto(lottoNumbers);
-    }
-
-    private Set<Integer> getGeneratedNumbers() {
+    private Set<LottoNumber> getGeneratedNumbers() {
         Collections.shuffle(numbers);
 
         return numbers.stream()
                 .limit(LOTTO_RANGE)
                 .sorted()
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
