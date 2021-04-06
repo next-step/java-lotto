@@ -6,6 +6,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.TestLottoGenerator;
+import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.shop.Money;
 import lotto.domain.stats.LottoScoreBoard;
@@ -34,5 +35,18 @@ public class LottoScoreBoardTest {
         LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winningLotto);
 
         assertThat(lottoScoreBoard.getEarningRate()).isEqualTo("0.35");
+    }
+
+    @Test
+    @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
+    void lottoBonusPrizeTest() {
+        LottoShop lottoShop = new LottoShop(new Money(2000), new TestLottoGenerator(0));
+        WinningLotto winnerLotto = new WinningLotto(new Lotto(2, 3, 4, 5, 6, 8), new LottoBall(1));
+        LottoOrderedList lottoOrderedList = lottoShop.purchase();
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winnerLotto);
+
+        long winner = lottoScoreBoard.getWinnerCountByPrize(Prize.SECOND);
+
+        assertThat(winner).isEqualTo(1L);
     }
 }

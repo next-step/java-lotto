@@ -1,6 +1,7 @@
 package lotto.stats;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoBall;
@@ -20,5 +21,16 @@ public class WinningLottoTest {
         long score = winningLotto.getScoreIfMatchingBall(comparingLotto);
 
         assertThat(score).isEqualTo(11L);
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 보너스 볼은 서로 겹치면 안된다.")
+    void noDuplicateLottoBonusNumber() {
+        Lotto lotto = new Lotto(1,2,3,4,5,6);
+        LottoBall bonusBall = new LottoBall(6);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningLotto(lotto, bonusBall))
+                .withMessage("보너스볼은 중복되지 않아야 합니다.");
     }
 }

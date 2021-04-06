@@ -28,6 +28,6 @@ public class LottoShop {
     }
 
     private boolean isEnoughToPurchase() {
-        return money.withdraw(LOTTO_PRICE);
+        return money.withdraw(new Money(LOTTO_PRICE));
     }
 }
