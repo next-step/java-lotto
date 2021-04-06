@@ -11,11 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringAddCalculatorTest {
 
-    @Test
-    @DisplayName("계산기 합산 테스트")
-    void splitAndSum() {
+    @ParameterizedTest(name = "계산기 합산 테스트")
+    @ValueSource(strings = {"1,3,5", "1:3:5", "9,0", "9"})
+    void splitAndSum(String given) {
         // given
-        String given = "1,3,5";
         int expected = 1+3+5;
 
         // when
@@ -47,10 +46,20 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
-    public void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    @ParameterizedTest(name = "음수 숫자하나에 대한 연산 테스트")
+    @ValueSource(strings = {"-1", "-2"})
+    public void splitAndSum_음수하나(String given) throws Exception {
+        assertThatThrownBy(
+                () -> StringAddCalculator.splitAndSum(given)
+        ).isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest(name = "양수 숫자하나에 대한 연산 테스트")
+    @ValueSource(strings = {"1", "2"})
+    public void splitAndSum_양수하나(String given) throws Exception {
+        int result = StringAddCalculator.splitAndSum(given);
+
+        assertThat(result).isEqualTo(Integer.parseInt(given));
     }
 
     @Test
