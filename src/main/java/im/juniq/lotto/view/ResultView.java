@@ -14,7 +14,7 @@ public class ResultView {
 			System.out.print("[");
 			for (int i = 0; i < lotto.numbers().size(); i++) {
 				addSeparatorIfNotFirst(i);
-				System.out.print(lotto.numbers().get(i));
+				System.out.print(lotto.numbers().get(i).toString());
 			}
 			System.out.println("]");
 		}
