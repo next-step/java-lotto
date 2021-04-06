@@ -14,7 +14,7 @@ public class InputTest {
     void 금액_부족(int data) {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> {
-                InputViewValidator.prizeCountValidate(PrizeCalculatorUtil.getLottoCount(data));
+                InputViewValidator.validatePrizeCount(PrizeCalculatorUtil.getLottoCount(data));
             });
     }
 
@@ -23,7 +23,7 @@ public class InputTest {
     void 당첨번호_갯수_예외(String data) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    InputViewValidator.winningLottoValidate(data);
+                    InputViewValidator.validateWinningLotto(data);
                 });
     }
 
@@ -41,7 +41,7 @@ public class InputTest {
     void 당첨번호_중복_입력(String data) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    InputViewValidator.winningLottoValidate(data);
+                    InputViewValidator.validateWinningLotto(data);
                 });
     }
 }
