@@ -21,11 +21,9 @@ public class HitResults {
     }
 
     private double sumHitMoney() {
-        HitMoney sumPrizeMoney = new HitMoney(0);
-        for (HitResult hitResult : hitResults) {
-            sumPrizeMoney = sumPrizeMoney.sum(hitResult.getPrize().prizeMoney());
-        }
-        return sumPrizeMoney.intValue();
+        return hitResults.stream()
+                .mapToInt(HitResult::getPrizeMoney)
+                .sum();
     }
 
     public long countPrize(Prize prize) {

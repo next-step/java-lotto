@@ -21,4 +21,12 @@ public class HitResult {
     public boolean equalPrize(Prize prize) {
         return this.prize.equals(prize) ? true : false;
     }
+
+    public int getPrizeMoney() {
+        return prize.prizeMoney();
+    }
+
+    public int getPrizeHitCount() {
+        return prize.getHitCount().getHitCount();
+    }
 }

@@ -1,6 +1,9 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.HitResult;
+import lotto.domain.LottoGame;
+import lotto.domain.Numbers;
+import lotto.domain.WinNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +23,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
         HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers, bonusNumber));
 
-        assertThat(hitResult.getPrize().getHitCount()).isEqualTo(new HitCount(5));
+        assertThat(hitResult.getPrizeHitCount()).isEqualTo(5);
     }
 
     @DisplayName("당첨 번호 숫자와 로또 게임 숫자를 비교하여 당첨 금액을 반환한다.")
@@ -33,6 +36,6 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Numbers(numbers));
         HitResult hitResult = lottoGame.lotto(new WinNumbers(winNumbers, bonusNumber));
 
-        assertThat(hitResult.getPrize().prizeMoney()).isEqualTo(1_500_000);
+        assertThat(hitResult.getPrizeMoney()).isEqualTo(1_500_000);
     }
 }
