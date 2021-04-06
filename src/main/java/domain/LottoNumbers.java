@@ -4,7 +4,6 @@ import enums.Rank;
 import exception.DuplicateNumberException;
 import exception.ExceedNumberException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumbers {
@@ -21,7 +20,7 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public Rank convertRank(List<LottoNumber> winnerNumber, BonusNumber bonusNumber) {
+    public Rank convertRank(List<LottoNumber> winnerNumber, LottoNumber bonusNumber) {
         long match = numbers.stream()
             .filter(winnerNumber::contains)
             .count();
@@ -34,7 +33,7 @@ public class LottoNumbers {
         long match = numbers.stream()
             .filter(winnerNumber::contains)
             .count();
-        return match > 3;
+        return match >= 3;
     }
 
 
@@ -57,6 +56,6 @@ public class LottoNumbers {
 
     @Override
     public String toString(){
-        return "\n"+numbers.toString();
+        return String.valueOf(numbers);
     }
 }

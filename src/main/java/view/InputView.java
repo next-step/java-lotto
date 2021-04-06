@@ -1,6 +1,6 @@
 package view;
 
-import domain.BonusNumber;
+import domain.LottoNumber;
 import domain.LottoNumbers;
 import domain.Money;
 import java.util.Arrays;
@@ -12,7 +12,6 @@ import util.CreateAutoNumberMachine;
 public class InputView {
 
     private List<String> winNumbers;
-    private BonusNumber bonusNumber;
 
     public InputView(){
     }
@@ -31,11 +30,11 @@ public class InputView {
         this.winNumbers = Arrays.asList(scanner.nextLine().split(","));
     }
 
-    public BonusNumber addBonusNumber() {
+    public LottoNumber addBonusNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
         int number = Integer.parseInt(scanner.nextLine());
-        return new BonusNumber(number);
+        return new LottoNumber(number);
     }
 
     public LottoNumbers getWinNumbers() {

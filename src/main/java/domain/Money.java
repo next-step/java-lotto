@@ -5,22 +5,31 @@ public class Money {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     private int money;
-    private int ticketCount;
 
     public Money(int money) {
         this.money = money;
-        this.ticketCount = money / LOTTO_TICKET_PRICE;
     }
 
     public double calcYield(double totalWinnings){
-        return Math.round((totalWinnings / money));
-    }
-
-    public int getMoney() {
-        return money;
+        return totalWinnings / money;
     }
 
     public int getTicketCount() {
-        return ticketCount;
+        return money / LOTTO_TICKET_PRICE;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Money money1 = (Money) o;
+
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return money;
     }
 }

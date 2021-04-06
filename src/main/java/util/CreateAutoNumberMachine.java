@@ -19,11 +19,13 @@ public class CreateAutoNumberMachine {
 
     public static LottoNumbers createNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new LottoNumbers(LOTTO_NUMBERS
+        List<Integer> numbers = LOTTO_NUMBERS
             .stream()
             .limit(SIZE)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+        Collections.sort(numbers);
+        return new LottoNumbers(
+            numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public static LottoNumbers createNumbers(List<Integer> list) {

@@ -16,7 +16,7 @@ class LottoGameTest {
 
     private List<LottoNumbers> lottoNumbers = new ArrayList<>();
     private LottoNumbers winnerNumbers;
-    private BonusNumber bonusNumber;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     public void setup(){
@@ -34,7 +34,7 @@ class LottoGameTest {
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers5));
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers6));
         lottoNumbers.add(CreateAutoNumberMachine.createNumbers(numbers7));
-        bonusNumber = new BonusNumber(22);
+        bonusNumber = new LottoNumber(22);
         winnerNumbers = CreateAutoNumberMachine.createNumbers(numbers1);
     }
 

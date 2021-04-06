@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println("5개 일치 (1500000)- "+getCount(ranks, Rank.THIRD_PLACE));
         System.out.println("5개 일치, 보너스 볼 일치(30000000원) - "+getCount(ranks, Rank.SECOND_PLACE));
         System.out.println("6개 일치 (2000000000원)- "+getCount(ranks, Rank.FIRST_PLACE));
-        System.out.println("총 수익률은"+ lottoResultResponse.getYield());
+        System.out.println("총 수익률은"+ String.format("%.2f", lottoResultResponse.getYield()));
     }
 
     private long getCount(List<Rank> ranks, Rank domain) {

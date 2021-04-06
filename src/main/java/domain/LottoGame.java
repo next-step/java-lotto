@@ -12,10 +12,13 @@ public class LottoGame {
     public LottoGame(Money money) {
         this.money = money;
         this.lottoList = new LottoList(money.getTicketCount());
-        System.out.println(lottoList.toString());
+        lottoList
+            .getLottos()
+            .forEach(System.out::println);
+        System.out.println();
     }
 
-    public List<Rank> findWinners(LottoNumbers winNumbers, BonusNumber bonusNumber){
+    public List<Rank> findWinners(LottoNumbers winNumbers, LottoNumber bonusNumber) {
         return lottoList
             .getLottos()
             .stream()
@@ -24,14 +27,15 @@ public class LottoGame {
             .collect(Collectors.toList());
     }
 
-    public LottoResultResponse convert(LottoNumbers winNumbers, BonusNumber bonusNumber){
+    public LottoResultResponse convert(LottoNumbers winNumbers, LottoNumber bonusNumber){
         List<Rank> ranks = findWinners(winNumbers, bonusNumber);
+
         double totalWinnings =
             ranks
                 .stream()
                 .map(Rank::getPrice)
                 .reduce(0, Integer::sum);
         double yield = money.calcYield(totalWinnings);
-        return new LottoResultResponse(yield, ranks, bonusNumber);
+        return new LottoResultResponse(yield, ranks);
     }
 }

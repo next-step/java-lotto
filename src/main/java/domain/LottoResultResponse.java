@@ -5,14 +5,12 @@ import java.util.List;
 
 public class LottoResultResponse {
 
-    private double yield;
-    private List<Rank> ranks;
-    private LottoNumber bonusNumber;
+    private final double yield;
+    private final List<Rank> ranks;
 
-    public LottoResultResponse(double yield, List<Rank> ranks, LottoNumber bonusNumber) {
+    public LottoResultResponse(double yield, List<Rank> ranks) {
         this.yield = yield;
         this.ranks = ranks;
-        this.bonusNumber = bonusNumber;
     }
 
     public List<Rank> getRanks() {
