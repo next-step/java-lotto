@@ -20,12 +20,18 @@ public final class Lotto {
     }
 
     private final void validateSize(Set<LottoNumber> lotto) {
-        if(lotto.size() != SIZE) {
+        if (lotto.size() != SIZE) {
             throw new LottoSizeMissMatchException();
         }
     }
 
     public final boolean isIncludeLottoNumber(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+    public final int match(Lotto anotherLotto) {
+        return (int) lotto.stream()
+                .filter(anotherLotto::isIncludeLottoNumber)
+                .count();
     }
 }
