@@ -2,8 +2,12 @@ package step4.domain.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step4.domain.lotto.Lotto;
+import step4.domain.lotto.LottoNumber;
+import step4.exception.LottoNullPointerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
@@ -20,5 +24,19 @@ class WinningLottoTest {
 
         // then
         assertThat(winningLotto).isNotNull();
+    }
+
+    @DisplayName("WinningLotto 인스턴스에 Null인 Lotto 주입시 예외처리 여부 테스트")
+    @Test
+    void 검증_Null() {
+        // given
+        Lotto lotto = null;
+        LottoNumber lottoNumber = LottoNumber.valueOf(7);
+
+        // when
+        assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
+                .isInstanceOf(LottoNullPointerException.class)
+                .hasMessageContaining("Lotto 인스턴스가 null 입니다.");
+
     }
 }
