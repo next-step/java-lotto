@@ -38,4 +38,11 @@ public class MatchedCountTest {
         assertThat(WinningRank.FIRST_PLACE.matchedCount().isGreaterOrEqualThan(5)).isTrue();
         assertThat(WinningRank.SECOND_PLACE.matchedCount().isGreaterOrEqualThan(6)).isFalse();
     }
+
+    @Test
+    @DisplayName("자신의 매치 카운트 값 크기가 더 큰 경우")
+    public void isGreaterThan() throws Exception {
+        assertThat(new MatchedCount(3).isGreaterThan(new MatchedCount(2))).isTrue();
+        assertThat(new MatchedCount(3).isGreaterThan(new MatchedCount(3))).isFalse();
+    }
 }
