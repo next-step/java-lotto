@@ -62,12 +62,8 @@ public class RanksCount {
     }
 
     private TreeMap<WinningRank, Integer> initialValue() {
-        TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>((o1, o2) -> {
-            if (o1.matchedCount().equals(o2.matchedCount())) {
-                return o1.prize().prize() - o2.prize().prize();
-            }
-            return o1.matchedCount().matchedCount() - o2.matchedCount().matchedCount();
-        });
+        TreeMap<WinningRank, Integer> ranksCount = new TreeMap<>(Comparator.comparing(WinningRank::matchedCount)
+                .thenComparing(WinningRank::prize));
 
         Arrays.stream(WinningRank.values())
                 .filter(rank -> rank.matchedCount().isGreaterOrEqualThan(MATCHED_COUNT_MIN))
