@@ -51,10 +51,6 @@ public class Lottoes implements Iterable<Lotto> {
 		return lottoes.get(index);
 	}
 
-	public int size() {
-		return lottoes.size();
-	}
-
 	public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers) {
 		return lottoes.stream().mapToInt(lotto -> countMatchedLottoes(winning, lotto, winningNumbers)).sum();
 	}
