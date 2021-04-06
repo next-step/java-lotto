@@ -17,11 +17,8 @@ public class LottoScoreBoard {
     this.money = money;
   }
 
-  public Map<String, Integer> getMatchResultMap() {
-    return matchResultMap;
-  }
-
-  public static LottoScoreBoard createLottoResult(List<LottoRank> lottoMatchResult, Money money) {
+  public static LottoScoreBoard createLottoResult(Money money,
+      List<LottoRank> lottoMatchResult) {
 
     Map<String, Integer> resultMap = new HashMap<>();
 
@@ -30,6 +27,18 @@ public class LottoScoreBoard {
     }
 
     return new LottoScoreBoard(resultMap, money);
+  }
+
+  public double totalEarningRate() {
+    return money.calculateEarningRate(getTotalWinningMoney(matchResultMap));
+  }
+
+  public String toResultString() {
+    return "3개 일치 (5000원) - " + matchResultMap.getOrDefault(LottoRank.FIFTH.name(), INIT_VALUE) + "개\n"
+        + "4개 일치 (50000원) - " + matchResultMap.getOrDefault(LottoRank.FOURTH.name(), INIT_VALUE) + "개\n"
+        + "5개 일치 (1500000원) - " + matchResultMap.getOrDefault(LottoRank.THIRD.name(), INIT_VALUE) + "개\n"
+        + "5개 일치, 보너스 볼 일치(30000000원) - " + matchResultMap.getOrDefault(LottoRank.SECOND.name(), INIT_VALUE) + "개\n"
+        + "6개 일치 (2000000000원) - " + matchResultMap.getOrDefault(LottoRank.FIRST.name(), INIT_VALUE) + "개";
   }
 
   private static void initLottoRankWithPrize(Map<String, Integer> resultMap, LottoRank rankResult) {
@@ -43,11 +52,6 @@ public class LottoScoreBoard {
         earningBoard.getOrDefault(key.name(), 0) + 1);
   }
 
-  public double getEarningRate() {
-    Map<String, Integer> matchResultMap = getMatchResultMap();
-    return money.calculateEarningRate(getTotalWinningMoney(matchResultMap));
-  }
-
   private int getTotalWinningMoney(Map<String, Integer> map) {
     return map.entrySet()
         .stream()
@@ -58,13 +62,5 @@ public class LottoScoreBoard {
   private int getWinningMoney(Entry<String, Integer> entry) {
     return LottoRank.matchRankWinnerMoney(entry.getKey())
         .multiple(entry.getValue());
-  }
-
-  public String toResultString() {
-    return "3개 일치 (5000원) - " + matchResultMap.getOrDefault(LottoRank.FIFTH.name(), INIT_VALUE) + "개\n"
-        + "4개 일치 (50000원) - " + matchResultMap.getOrDefault(LottoRank.FOURTH.name(), INIT_VALUE) + "개\n"
-        + "5개 일치 (1500000원) - " + matchResultMap.getOrDefault(LottoRank.THIRD.name(), INIT_VALUE) + "개\n"
-        + "5개 일치, 보너스 볼 일치(30000000원) - " + matchResultMap.getOrDefault(LottoRank.SECOND.name(), INIT_VALUE) + "개\n"
-        + "6개 일치 (2000000000원) - " + matchResultMap.getOrDefault(LottoRank.FIRST.name(), INIT_VALUE) + "개";
   }
 }
