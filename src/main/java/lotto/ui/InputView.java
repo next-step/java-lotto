@@ -42,10 +42,18 @@ public class InputView {
     }
 
     /*
-    * ❗❗ 수동 로또 생성 질문(관련 - LottoFactory의 mixLottos(), ManualLottoStrategy)
-    * */
-    public static void inputManualLotto() {
+     * ❗❗ 수동 로또 생성 질문(관련 - LottoFactory의 mixLottos(), ManualLottoStrategy)
+     * */
+    public static ArrayList<ArrayList<Integer>> inputManualLotto(int size) {
+        if (size <= 0) {
+            return null;
+        }
         System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
+        ArrayList<ArrayList<Integer>> numbers = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            numbers.add(inputNumbers());
+        }
+        return numbers;
     }
 
     public static int inputBonus() {
@@ -72,9 +80,6 @@ public class InputView {
             sc = new Scanner(System.in);
         }
     }
-
-
-
 
 
 }

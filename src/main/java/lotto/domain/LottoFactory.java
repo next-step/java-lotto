@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
@@ -51,17 +52,14 @@ public class LottoFactory {
     public static Lottos mixLottos(int total, int manualNum) {
         List<Lotto> lottoList = new ArrayList<>();
         // 수동으로 생성한다.
-        if (manualNum > 0) {
-            InputView.inputManualLotto();
-            setLottoStrategy(new ManualLottoStrategy());
-            lottoList.addAll(lottoList(manualNum));
-        }
+        lottoList.addAll(lottoList(
+                InputView.inputManualLotto(manualNum)
+        ));
+
         // 자동으로 생성한다.
         int autoNum = total - manualNum;
-        if (autoNum > 0) {
-            setLottoStrategy(new AutoLottoStrategy());
-            lottoList.addAll(lottoList(autoNum));
-        }
+        setLottoStrategy(new AutoLottoStrategy());
+        lottoList.addAll(lottoList(autoNum));
         return new Lottos(lottoList);
     }
 
@@ -74,6 +72,14 @@ public class LottoFactory {
             lottoList.add(lotto());
         }
         return lottoList;
+    }
+
+
+    private static List<Lotto> lottoList(ArrayList<ArrayList<Integer>> numbers) {
+        return numbers.stream()
+                .map(LottoNumbers::of)
+                .map(Lotto::new)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /*

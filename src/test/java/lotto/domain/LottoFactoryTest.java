@@ -1,24 +1,22 @@
 package lotto.domain;
 
-import lotto.ui.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mockStatic;
 
 public class LottoFactoryTest {
 
     private static int LOTTO_COUNT = 3;
     private static int WINNING_NUM = 6;
 
-    private static MockedStatic<InputView> inputView;
 
     private LottoNumbers lottoNumbers;
     private Lotto lotto;
@@ -88,12 +86,9 @@ public class LottoFactoryTest {
         for (int i = testLowerBound; i <= testUpperBound; i++) {
             manualNumbers.add(i);
         }
-        inputView = mockStatic(InputView.class);
-        given(InputView.inputNumbers()).willReturn(manualNumbers);
 
         //when
         Lottos lottos = LottoFactory.mixLottos(LOTTO_COUNT, manualNum);
-        inputView.close();
 
         //then
         assertThat(lottos.lottoList().size()).isEqualTo(LOTTO_COUNT);
