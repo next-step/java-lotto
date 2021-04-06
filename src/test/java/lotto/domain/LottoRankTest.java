@@ -16,7 +16,6 @@ public class LottoRankTest {
         final boolean matchBonus = Boolean.parseBoolean(matchBonusInput);
         final LottoRank result = LottoRank.valueOf(countOfMatch, matchBonus);
 
-        System.out.println(result);
         assertThat(result).isEqualTo(expected);
     }
 
