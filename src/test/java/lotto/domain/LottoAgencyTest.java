@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -10,59 +9,41 @@ import org.junit.jupiter.api.Test;
 
 class LottoAgencyTest {
   @Test
-  @DisplayName("금액 / 1000이 구매 로또 개수와 일치하는가")
-  public void buy() throws Exception {
-    LottoAgency agency = new LottoAgency(new Money(14455));
+  @DisplayName("구매 후 몇 개를 더 구매할 수 있는지 알아낼 수 있는가")
+  public void updateBalance() throws Exception {
+    //given
+    LottoCoupon coupon = LottoCoupon.createLottoCoupon(10);
+    LottoAgency agency = new LottoAgency(new Money(14000), coupon);
 
     //when
     agency.purchaseLotto();
 
     //then
-    assertEquals(agency.getPurchaseQuantity(), 14);
+    assertEquals(agency.availablePurchaseQuantity(), 4);
   }
 
   @Test
-  @DisplayName("로또 매치 결과를 얻을 수 있는가")
-  public void updateWinnerNumber() throws Exception {
+  @DisplayName("전체 구매 금액을 알아낼 수 있는가")
+  public void originMoney() throws Exception {
     //given
-    Lotto winningNumbers = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-    LottoAgency agency = new LottoAgency(new Money(5000));
-
+    LottoCoupon coupon = LottoCoupon.createLottoCoupon(10);
+    LottoAgency agency = new LottoAgency(new Money(14000), coupon);
     //when
-    agency.purchaseLotto();
-
     //then
-    assertAll(
-        () -> assertEquals(winningNumbers.toNumbers().size(), 6),
-        () -> assertEquals(agency.getPurchaseQuantity(), 5),
-        () -> assertNotNull(agency.getLottoResult(new WinningNumber(winningNumbers, new Number(6))))
-    );
+    assertEquals(agency.originMoney(), new Money(14000));
   }
 
   @Test
-  @DisplayName("입력된 개수에 따라 구매한 로또의 가격이 나오는가")
-  public void purchaseLottoPrice() throws Exception {
+  @DisplayName("로또 결과를 얻어올 수 있는가")
+  public void getLottoMatchResult() throws Exception {
     //given
-    LottoAgency agency = new LottoAgency(new Money(10000));
-
+    LottoCoupon coupon = LottoCoupon.createLottoCoupon(10);
+    LottoAgency agency = new LottoAgency(new Money(14000), coupon);
     //when
-    Money money = agency.lottoPurchaseMoney(new Number(8));
-
+    WinningNumber winningNumbers = WinningNumber
+        .createWinningNumbers(Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+            , new Number(7));
     //then
-    assertEquals(new Money(8000), money);
-  }
-
-  @Test
-  @DisplayName("updateBalance를 통해서 현재까지 구매한 금액을 제외하고 더 구매할 수 있는 수량을 구할 수 있는가")
-  public void updateMoney() throws Exception {
-    //given
-    LottoAgency agency = new LottoAgency(new Money(10000));
-
-    //when
-    Money money = agency.lottoPurchaseMoney(new Number(8));
-    agency.updateBalance(money);
-
-    //then
-    assertEquals(agency.getPurchaseQuantity(), 2);
+    assertNotNull(agency.getLottoResult(winningNumbers));
   }
 }
