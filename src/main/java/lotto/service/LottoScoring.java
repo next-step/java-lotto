@@ -8,12 +8,12 @@ import lotto.domain.lotto.LottoBall;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
 import lotto.domain.stats.LottoScoreBoard;
+import lotto.domain.stats.Score;
 import lotto.domain.stats.WinningLotto;
 import lotto.dto.LottoOrderResultDto;
 import lotto.dto.LottoOrderedDto;
 import lotto.dto.LottoScoreDto;
 import lotto.dto.LottoScoreResultDto;
-
 
 public class LottoScoring {
     private final LottoScoreBoard lottoScoreBoard;
@@ -28,15 +28,20 @@ public class LottoScoring {
     }
 
     public LottoScoreResultDto getResult() {
+        return convertFromScoreResultToScoreResultDto(lottoScoreBoard.getScoreResult());
+    }
+
+    private LottoScoreResultDto convertFromScoreResultToScoreResultDto(List<Score> scoreResult) {
         List<LottoScoreDto> lottoScoreDtoList = new ArrayList<>();
 
-        for (Prize prize : Prize.values()) {
-            lottoScoreDtoList.add(new LottoScoreDto(
-                    prize.getScore(),
-                    prize.getMatchingBallCount(),
-                    prize.getPrizeAmount(),
-                    lottoScoreBoard.getWinnerCountByPrize(prize)));
-        }
+        scoreResult.stream()
+                .map(score -> new LottoScoreDto(
+                        score.getScore(),
+                        score.getMatchingBallCount(),
+                        score.getPrizeAmount(),
+                        score.getWinners()))
+                .forEach(lottoScoreDtoList::add);
+
         return new LottoScoreResultDto(lottoScoreDtoList);
     }
 

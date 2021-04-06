@@ -2,6 +2,7 @@ package lotto.domain.stats;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.prize.Prize;
@@ -28,6 +29,10 @@ public class LottoScoreBoard {
 
     public long getWinnerCountByPrize(Prize prize) {
         return prizeBoard.getWinnerCountByPrize(prize);
+    }
+
+    public List<Score> getScoreResult() {
+        return prizeBoard.getScoreResult();
     }
 
 }
