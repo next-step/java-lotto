@@ -9,6 +9,8 @@ import java.util.List;
 
 public class LottoPurchaseService {
 
+    private static final int MIN_LOTTO_PURCHASE_COUNT = 0;
+
     private final LottoManualService lottoManualService;
     private final LottoAutoService lottoAutoService;
 
@@ -21,7 +23,7 @@ public class LottoPurchaseService {
         if (purchaseAmount < LottoConstant.LOTTO_PRICE) {
             throw new IllegalArgumentException("최소 1000원 이상의 금액을 입력해 주세요.");
         }
-        if (manualLottoPurchaseCount < 0) {
+        if (manualLottoPurchaseCount < MIN_LOTTO_PURCHASE_COUNT) {
             throw new IllegalArgumentException("구매수량은 0 이상으로 입력해 주세요.");
         }
         if (purchaseAmount < manualLottoPurchaseCount * LottoConstant.LOTTO_PRICE) {
@@ -56,7 +58,7 @@ public class LottoPurchaseService {
 
     private void purchaseAutoLottoTicket(List<LottoTicket> lottoTicketList, int purchaseAmount, List<String> manualLottoPurchaseNumberList) {
         int autoTicketPurchaseCount = calculateAutoTicketPurchaseCount(purchaseAmount, manualLottoPurchaseNumberList);
-        if (autoTicketPurchaseCount > 0) {
+        if (autoTicketPurchaseCount > MIN_LOTTO_PURCHASE_COUNT) {
             lottoTicketList.add(lottoAutoService.purchaseLottoTicket(autoTicketPurchaseCount));
         }
     }
