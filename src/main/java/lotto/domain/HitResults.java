@@ -31,8 +31,7 @@ public class HitResults {
     public long countPrize(Prize prize) {
         return hitResults.stream()
                 .filter(hitResult ->
-                        hitResult.getPrize()
-                                .equals(prize))
+                        hitResult.equalPrize(prize))
                 .count();
     }
 }

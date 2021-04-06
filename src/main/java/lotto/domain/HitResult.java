@@ -17,4 +17,8 @@ public class HitResult {
     public Prize getPrize() {
         return prize;
     }
+
+    public boolean equalPrize(Prize prize) {
+        return this.prize.equals(prize) ? true : false;
+    }
 }
