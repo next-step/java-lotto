@@ -1,6 +1,5 @@
 package step2.strategy;
 
-import step2.domain.Lotto;
 import step2.domain.number.LottoNumber;
 import step2.domain.number.LottoNumbers;
 

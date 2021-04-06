@@ -5,8 +5,6 @@ import step2.exception.InvalidSplitStringException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Splitter {
   private static final String COLON_MATCHER = ",";

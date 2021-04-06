@@ -5,8 +5,8 @@ import step2.exception.InvalidCountNumberException;
 import java.util.Objects;
 
 public class Count {
-  final int number;
   private static final String UNDER_COUNT_MIN_LIMIT = "회수의 최소 숫자는 0입니다.";
+  final int number;
 
   public Count() {
     this(0);
@@ -31,7 +31,7 @@ public class Count {
     return number;
   }
 
-  public Count addCount(Count operand){
+  public Count addCount(Count operand) {
     return new Count(number + operand.number);
   }
 

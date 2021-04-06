@@ -1,8 +1,8 @@
 package step2.view;
 
+import step2.domain.Lottos;
 import step2.domain.number.LottoMatchingNumber;
 import step2.domain.result.LottoMatchingResult;
-import step2.domain.Lottos;
 import step2.util.StringUtil;
 
 public class ResultView {
