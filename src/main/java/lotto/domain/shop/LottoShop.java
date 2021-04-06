@@ -11,31 +11,28 @@ public class LottoShop {
     public final static long LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
-    private final Money money;
+    private final Order order;
 
     public LottoShop(Money money, LottoGenerator lottoGenerator) {
-        this.money = money;
+        this.order = new Order(money);
+        this.lottoMachine = new LottoMachine(lottoGenerator);
+    }
+
+    public LottoShop(Order order, LottoGenerator lottoGenerator) {
+        this.order = order;
         this.lottoMachine = new LottoMachine(lottoGenerator);
     }
 
     public LottoOrderedList purchase() {
-        List<Lotto> lottoList = new ArrayList<>();
+        order.balanceWithdraw(new Money(LOTTO_PRICE * order.getOrderedLottoCount()));
 
         while(isEnoughToPurchase()) {
-            lottoList.add(lottoMachine.generate());
+            order.addOrderedList(lottoMachine.generate());
         }
-        return new LottoOrderedList(lottoList);
-    }
-
-    public LottoOrderedList purchase(List<Lotto> predefined) {
-        money.withdraw(new Money(LOTTO_PRICE * predefined.size()));
-        while(isEnoughToPurchase()) {
-            predefined.add(lottoMachine.generate());
-        }
-        return new LottoOrderedList(predefined);
+        return new LottoOrderedList(order);
     }
 
     private boolean isEnoughToPurchase() {
-        return money.withdraw(new Money(LOTTO_PRICE));
+        return order.balanceWithdraw(new Money(LOTTO_PRICE));
     }
 }
