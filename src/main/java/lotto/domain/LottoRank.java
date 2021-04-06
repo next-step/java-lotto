@@ -50,18 +50,6 @@ public enum LottoRank implements LottoRankFilter {
         .orElse(LottoRank.NONE);
   }
 
-  public static LottoRank matches(Lotto winningNumbers, Lotto holdingLottoNumbers, Number bonusBall) {
-    int matchCount =  Math.toIntExact(winningNumbers.toNumbers()
-        .stream()
-        .filter(holdingLottoNumbers.toNumbers()::contains)
-        .count());
-
-    boolean hasBonusBall = holdingLottoNumbers.toNumbers()
-        .contains(bonusBall);
-
-    return LottoRank.valueOf(matchCount, hasBonusBall);
-  }
-
   public static boolean isNone(LottoRank lottoRank) {
     return lottoRank == LottoRank.NONE;
   }

@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -80,18 +79,5 @@ class LottoRankTest {
   @DisplayName("None 체크를 제대로 하는가")
   public void isNull() throws Exception {
     assertTrue(LottoRank.isNone(LottoRank.NONE));
-  }
-
-  @Test
-  @DisplayName("Matches() 메서드를 통해 제대로 비교할 수 있는지")
-  public void matches() throws Exception {
-    //given
-    Lotto holdingNumbers = Lotto.createManualLotto(Arrays.asList(7, 6, 4, 3, 2, 1));
-
-    Lotto winningNumbers = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
-    //when
-    LottoRank expectedMatches = LottoRank.matches(holdingNumbers, winningNumbers, new Number(6));
-    //then
-    assertEquals(expectedMatches, LottoRank.SECOND);
   }
 }
