@@ -4,7 +4,6 @@ import enums.Rank;
 import exception.DuplicateNumberException;
 import exception.ExceedNumberException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoNumbers {
@@ -18,22 +17,23 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> numbers){
         validate(numbers);
-        System.out.println(Arrays.toString(numbers.toArray()));
         this.numbers = numbers;
     }
 
-    public Rank convertRank(List<LottoNumber> winnerNumber) {
+    public Rank convertRank(List<LottoNumber> winnerNumber, LottoNumber bonusNumber) {
         long match = numbers.stream()
             .filter(winnerNumber::contains)
             .count();
-        return Rank.find(match);
+
+        boolean matchBonus = numbers.contains(bonusNumber);
+        return Rank.find(match, matchBonus);
     }
 
     public boolean isRank(List<LottoNumber> winnerNumber) {
         long match = numbers.stream()
             .filter(winnerNumber::contains)
             .count();
-        return match > 3;
+        return match >= 3;
     }
 
 
@@ -52,5 +52,10 @@ public class LottoNumbers {
         if(numbers.stream().distinct().count() != SIZE_LIMIT){
             throw new DuplicateNumberException("중복되는 번호가 있습니다.");
         }
+    }
+
+    @Override
+    public String toString(){
+        return String.valueOf(numbers);
     }
 }

@@ -6,38 +6,36 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    private static final int LOTTO_TICKET_PRICE = 1000;
-    private int money;
+    private Money money;
     private LottoList lottoList;
 
-    public LottoGame(int money) {
+    public LottoGame(Money money) {
         this.money = money;
-        int ticketCount = money / LOTTO_TICKET_PRICE;
-        this.lottoList = new LottoList(ticketCount);
+        this.lottoList = new LottoList(money.getTicketCount());
+        lottoList
+            .getLottos()
+            .forEach(System.out::println);
+        System.out.println();
     }
 
-    public LottoGame(int money, LottoList lottoList){
-        this.money = money;
-        this.lottoList = lottoList;
-    }
-
-    public List<Rank> findWinners(LottoNumbers winNumbers){
+    public List<Rank> findWinners(LottoNumbers winNumbers, LottoNumber bonusNumber) {
         return lottoList
             .getLottos()
             .stream()
             .filter(lottoNumbers -> lottoNumbers.isRank(winNumbers.getNumbers()))
-            .map(lottoNumbers -> lottoNumbers.convertRank(winNumbers.getNumbers()))
+            .map(lottoNumbers -> lottoNumbers.convertRank(winNumbers.getNumbers(), bonusNumber))
             .collect(Collectors.toList());
     }
 
-    public LottoResultResponse convert(LottoNumbers winNumbers){
-        List<Rank> ranks = findWinners(winNumbers);
-        int totalWinnings =
+    public LottoResultResponse convert(LottoNumbers winNumbers, LottoNumber bonusNumber){
+        List<Rank> ranks = findWinners(winNumbers, bonusNumber);
+
+        double totalWinnings =
             ranks
                 .stream()
                 .map(Rank::getPrice)
                 .reduce(0, Integer::sum);
-        double yield = Math.round((totalWinnings / money));
+        double yield = money.calcYield(totalWinnings);
         return new LottoResultResponse(yield, ranks);
     }
 }
