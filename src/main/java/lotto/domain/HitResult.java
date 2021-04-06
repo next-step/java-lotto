@@ -14,10 +14,6 @@ public class HitResult {
         return Prize.findPrize(hitCount);
     }
 
-    public Prize getPrize() {
-        return prize;
-    }
-
     public boolean equalPrize(Prize prize) {
         return this.prize.equals(prize) ? true : false;
     }
