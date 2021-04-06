@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
 
+    private static final int MIN_LOTTO_COUNT = 1;
+
     private final List<Lotto> lottoList;
     private final LottoTicketType lottoTicketType;
 
@@ -28,8 +30,8 @@ public class LottoTicket {
     }
 
     private void validate(int count) {
-        if (count < 1) {
-            throw new IllegalArgumentException("최소 1개 이상의 구매수량을 입력해 주세요");
+        if (count < MIN_LOTTO_COUNT) {
+            throw new IllegalArgumentException("최소 " + MIN_LOTTO_COUNT + "개 이상의 구매수량을 입력해 주세요");
         }
     }
 
