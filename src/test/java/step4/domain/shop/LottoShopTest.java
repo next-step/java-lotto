@@ -27,15 +27,17 @@ class LottoShopTest {
     @Test
     void 반환_로또() {
         // given
-        Money money = Money.valueOf(1000);
+        Money money = Money.valueOf(4000);
+        int createdCount = 3;
         LottoShuffleStrategy strategy = lottoNumbers -> {};
 
         // when
         LottoShop lottoShop = LottoShop.getInstance();
-        List<Lotto> lottos = lottoShop.purchaseLotto(money, strategy);
+        List<Lotto> lottos = lottoShop.purchaseLotto(money, createdCount, strategy);
+        int actual = lottos.size();
 
         // then
-        assertThat(lottos).isNotNull();
+        assertThat(actual).isEqualTo(1);
     }
 
 }

@@ -24,9 +24,9 @@ public class LottoShop {
         return LottoShopHolder.lottoShop;
     }
 
-    public final List<Lotto> purchaseLotto(Money money, LottoShuffleStrategy strategy) {
+    public final List<Lotto> purchaseLotto(Money money, int createdCount, LottoShuffleStrategy strategy) {
         return Stream.generate(() -> generateLotto(strategy))
-                .limit(money.purchaseQuantity(Lotto.AMOUNT))
+                .limit(money.purchaseQuantity(Lotto.AMOUNT) - createdCount)
                 .collect(Collectors.toList());
     }
 
