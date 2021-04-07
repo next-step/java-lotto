@@ -9,40 +9,28 @@ public class Lottoes implements Iterable<Lotto> {
 
     private final List<Lotto> lottoes;
 
-    private Lottoes(List<Lotto> lottoes, int autoLottoSize, int manualLottoSize) {
+    private Lottoes(List<Lotto> lottoes) {
         this.lottoes = lottoes;
     }
 
     public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
-        int manualLottoesSize = manualLottoes.size();
-        int autoLottoSize = numberOfCreated - manualLottoesSize;
-        List<Lotto> lottos = makeLottoes(manualLottoes);
-        lottos.addAll(makeLottoes(autoLottoSize, shuffleStrategy));
-        return new Lottoes(lottos, autoLottoSize, manualLottoesSize);
+        return new Lottoes(makeLottoes(numberOfCreated - manualLottoes.size(), shuffleStrategy, manualLottoes));
     }
 
     public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
         return of(numberOfCreated, shuffleStrategy, new ArrayList<>());
     }
 
-    public static Lottoes of(Lotto... lottoes) {
-        return new Lottoes(Arrays.asList(lottoes), 0, 0);
+    public static Lottoes from(List<Lotto> lottoes) {
+        return new Lottoes(lottoes);
     }
 
-    public static Lottoes of(List<Lotto> lottoes) {
-        return new Lottoes(lottoes, 0, 0);
-    }
-
-    private static List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
+    private static List<Lotto> makeLottoes(int numberOfAutoCreated, ShuffleStrategy shuffleStrategy,
+            List<LottoNumbers> manualLottoes) {
         List<Lotto> lottoes = new ArrayList<>();
-        for (int i = 0; i < numberOfCreated; i++) {
+        for (int i = 0; i < numberOfAutoCreated; i++) {
             lottoes.add(Lotto.of(shuffleStrategy));
         }
-        return lottoes;
-    }
-
-    private static List<Lotto> makeLottoes(List<LottoNumbers> manualLottoes) {
-        List<Lotto> lottoes = new ArrayList<>();
         for (LottoNumbers lottoNumbers : manualLottoes) {
             lottoes.add(Lotto.of(lottoNumbers));
         }

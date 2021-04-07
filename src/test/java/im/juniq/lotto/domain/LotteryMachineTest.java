@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ class LotteryMachineTest {
         LotteryMachine lotteryMachine = LotteryMachine.withPrice(1000, shuffleStrategy);
 
         assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(
-            Lottoes.of(Lotto.of(shuffleStrategy)));
+            Lottoes.from(Collections.singletonList(Lotto.of(shuffleStrategy))));
     }
 
     @Test
@@ -26,7 +27,7 @@ class LotteryMachineTest {
         LotteryMachine lotteryMachine = LotteryMachine.withPrice(2000, shuffleStrategy);
 
         assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(
-            Lottoes.of(Lotto.of(shuffleStrategy), Lotto.of(shuffleStrategy)));
+            Lottoes.from(Arrays.asList(Lotto.of(shuffleStrategy), Lotto.of(shuffleStrategy))));
     }
 
     @Test
@@ -46,6 +47,6 @@ class LotteryMachineTest {
             lottoes.add(Lotto.of(shuffleStrategy));
         }
 
-        assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(Lottoes.of(lottoes));
+        assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(Lottoes.from(lottoes));
     }
 }

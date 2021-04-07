@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class LottoesTest {
     void createOne() {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
         assertThat(Lottoes.of(1, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
-            Lottoes.of(Lotto.of(shuffleStrategy)));
+            Lottoes.from(Collections.singletonList(Lotto.of(shuffleStrategy))));
     }
 
     @ParameterizedTest
@@ -29,7 +30,7 @@ class LottoesTest {
         }
 
         assertThat(Lottoes.of(numberOfCreated, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
-            Lottoes.of(lottoes));
+            Lottoes.from(lottoes));
     }
 
     @Test
@@ -43,7 +44,7 @@ class LottoesTest {
 
         assertThat(Lottoes.of(10, shuffleStrategy,
             Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6"))))
-            .usingRecursiveComparison().isEqualTo(Lottoes.of(lottoes));
+            .usingRecursiveComparison().isEqualTo(Lottoes.from(lottoes));
     }
 
     @Test
