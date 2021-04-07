@@ -2,11 +2,15 @@ package step4.domain.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.rank.Rank;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import step4.domain.rank.Rank;
 import step4.exception.MapNullPointerException;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -34,7 +38,7 @@ class WinningResultTest {
         Map<Rank, Integer> inputMap = null;
 
         // when and then
-        assertThatThrownBy(()->WinningResult.of(inputMap))
+        assertThatThrownBy(() -> WinningResult.of(inputMap))
                 .isInstanceOf(MapNullPointerException.class)
                 .hasMessageContaining("Map 인스턴스가 Null 입니다.");
 
