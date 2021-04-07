@@ -17,7 +17,8 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     }
 
     public static LottoNumbers from(String numbers) {
-        return from(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER)).map(Integer::valueOf).collect(Collectors.toList()));
+        return from(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER)).map(Integer::valueOf)
+                .collect(Collectors.toList()));
     }
 
     public static LottoNumbers from(List<Integer> numbers) {

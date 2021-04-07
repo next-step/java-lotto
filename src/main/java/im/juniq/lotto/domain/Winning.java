@@ -24,8 +24,8 @@ public enum Winning {
         }
 
         return Arrays.stream(Winning.values())
-            .filter(winning -> winning.matchedCount == numberOfMatchedWinningNumber).findFirst()
-            .orElse(LOSING);
+                .filter(winning -> winning.matchedCount == numberOfMatchedWinningNumber).findFirst()
+                .orElse(LOSING);
     }
 
     public int matchedCount() {

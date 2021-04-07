@@ -19,7 +19,7 @@ public class LottoNumber {
     public static LottoNumber from(int number) {
         if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
-                "로또 번호는 " + FIRST_LOTTO_NUMBER + " ~ " + LAST_LOTTO_NUMBER + " 범위 안이어야 합니다.");
+                    "로또 번호는 " + FIRST_LOTTO_NUMBER + " ~ " + LAST_LOTTO_NUMBER + " 범위 안이어야 합니다.");
         }
         return new LottoNumber(number);
     }
