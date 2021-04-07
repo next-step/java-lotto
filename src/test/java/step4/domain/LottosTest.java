@@ -13,7 +13,6 @@ import step4.util.Splitter;
 import java.util.List;
 
 public class LottosTest {
-
   @ParameterizedTest
   @DisplayName("추가 확인 및 개수 확인 테스트")
   @CsvSource(value = "1,2,3,4,5,6:2,4,6,8,10,12:2", delimiter = ':')
@@ -53,5 +52,33 @@ public class LottosTest {
 
     LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottosWithBonusBall(target, new LottoNumber(bonusBall));
     Assertions.assertThat(lottoMatchingResult.toStringSpecificResult(rank)).isEqualTo(result);
+  }
+
+  @ParameterizedTest
+  @DisplayName("두 로또 합 테스트")
+  @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:2", "2,3,4,5,6,8:2,4,6,8,10,12:2", "11,13,15,17,20,25:11,13,15,12,20,25:2"}, delimiter = ':')
+  void lottosMergeTest(String lotto, String answer, int result) {
+    //setup source then target
+    List<LottoNumber> lottoNumbers = Splitter.split(lotto);
+    LottoNumbers sourceLottoNumbers = new LottoNumbers(lottoNumbers);
+
+    lottoNumbers = Splitter.split(answer);
+    LottoNumbers targetLottoNumbers = new LottoNumbers(lottoNumbers);
+
+    Lotto source = new Lotto(sourceLottoNumbers);
+    Lottos sourceLottos = new Lottos();
+    sourceLottos.addLotto(source);
+
+    Lotto target = new Lotto(targetLottoNumbers);
+    Lottos targetLottos = new Lottos();
+    targetLottos.addLotto(target);
+
+    Assertions
+      .assertThat(
+        sourceLottos
+          .mergeLottos(targetLottos)
+          .quantity()
+          .showCount()
+      ).isEqualTo(result);
   }
 }

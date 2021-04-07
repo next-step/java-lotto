@@ -3,8 +3,11 @@ package step4.service;
 import step4.domain.Cash;
 import step4.domain.Lotto;
 import step4.domain.Lottos;
+import step4.domain.ManualLottoParameter;
+import step4.domain.number.Count;
 import step4.domain.number.LottoNumber;
 import step4.domain.number.LottoNumbers;
+import step4.exception.InvalidPriceException;
 import step4.strategy.LottoStrategy;
 
 import java.util.ArrayList;
@@ -25,7 +28,22 @@ public class Mart {
     }
   }
 
-  public Lottos buyAllLotto(Cash money, LottoStrategy lottoStrategy) {
+  public Lottos buyAllManualLottos(Cash money, List<ManualLottoParameter> parameters) {
+    Lottos lottos = new Lottos();
+    if (!money.isGreaterEqualProductPrice(Cash.getMultipleLottosPrice(new Count(parameters.size())))) {
+      throw new InvalidPriceException(ERROR_MESSAGE);
+    }
+
+    for (ManualLottoParameter parameter : parameters) {
+      LottoNumbers lottoNumbers = new LottoNumbers(parameter.changeToListOfLottoNumber());
+      lottos.addLotto(new Lotto(lottoNumbers));
+    }
+
+    return lottos;
+  }
+
+  public Lottos buyAllRandomLottos(Cash money, LottoStrategy lottoStrategy) {
+
     isBuyablePrice(money);
 
     return buyLottos(money, lottoStrategy);

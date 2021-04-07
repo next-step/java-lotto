@@ -26,7 +26,6 @@ class LottoNumbersTest {
     LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
     LottoNumbers prizeLottoNumbers = new LottoNumbers(Splitter.split(answerNum));
     Count resultCount = new Count(result);
-    //TODO 수정
     Assertions.assertThat(pickedLottoNumbers.matchNumbers(prizeLottoNumbers)).isEqualTo(resultCount);
   }
 

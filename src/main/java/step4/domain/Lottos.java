@@ -18,12 +18,23 @@ public class Lottos {
     lottos = new ArrayList<>();
   }
 
+  public Lottos(List<Lotto> lottos) {
+    this.lottos = lottos;
+  }
+
   public void addLotto(Lotto lotto) {
     lottos.add(lotto);
   }
 
   public Count quantity() {
     return new Count(lottos.size());
+  }
+
+  public Lottos mergeLottos(Lottos otherLottos) {
+    List<Lotto> sourceLottos = new ArrayList<>(lottos);
+    sourceLottos.addAll(otherLottos.lottos);
+
+    return new Lottos(sourceLottos);
   }
 
   public LottoMatchingResult matchLottosWithBonusBall(Lotto prizeLotto, LottoNumber bonusNumber) {

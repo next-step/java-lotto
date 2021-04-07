@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step4.exception.InvalidPriceException;
 
 public class CashTest {
-
   @ParameterizedTest
   @CsvSource(value = {"2000,1000", "3000,2000"})
   @DisplayName("제대로 로또 구입액만큼 출금하는지 테스트")
@@ -27,6 +26,30 @@ public class CashTest {
     Cash sellerWallet = new Cash(sellerMoney);
 
     Assertions.assertThatThrownBy(sellerWallet::withdrawal)
+      .isInstanceOf(InvalidPriceException.class)
+      .hasMessage("구매를 위한 출금을 할 수 없습니다.");
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"2000,1500,500", "3000,2000,1000"})
+  @DisplayName("사용자 입력 금액 -> 출금 성공 테스트")
+  void validWithdrawalWithParameterTest(Long sellerMoney, Long targetPrice, Long remainMoney) {
+    // given
+    Cash sellerWallet = new Cash(sellerMoney);
+    Cash targetMoney = new Cash(targetPrice);
+    Cash remainWallet = new Cash(remainMoney);
+
+    Assertions.assertThat(sellerWallet.withdrawal(targetMoney)).isEqualTo(remainWallet);
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"1000,1001", "500,501"})
+  @DisplayName("사용자 입력 금액 -> 출금 실패 테스트")
+  void invalidWithdrawalWithParameterTest(Long sellerMoney, Long targetPrice) {
+    Cash sellerWallet = new Cash(sellerMoney);
+    Cash targetMoney = new Cash(targetPrice);
+
+    Assertions.assertThatThrownBy(() -> sellerWallet.withdrawal(targetMoney))
       .isInstanceOf(InvalidPriceException.class)
       .hasMessage("구매를 위한 출금을 할 수 없습니다.");
   }

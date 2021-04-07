@@ -28,14 +28,14 @@ public class MartTest {
   @CsvSource(value = {"1000:1", "14000:14", "28000:28"}, delimiter = ':')
   @DisplayName("유효한 가격으로 구매 가능한지 테스트")
   void validBuyLottoTest(Long sellerMoney, int size) {
-    Assertions.assertThat(mart.buyAllLotto(new Cash(sellerMoney), new LottoRandomStrategy()).quantity().showCount()).isEqualTo(size);
+    Assertions.assertThat(mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy()).quantity().showCount()).isEqualTo(size);
   }
 
   @ParameterizedTest
   @ValueSource(longs = {900, 999})
   @DisplayName("유효하지 않은 금액으로 로또 구매 불가한지 테스트")
   void invalidMoneyTest(Long sellerMoney) {
-    Assertions.assertThatThrownBy(() -> mart.buyAllLotto(new Cash(sellerMoney), new LottoRandomStrategy()))
+    Assertions.assertThatThrownBy(() -> mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy()))
       .isInstanceOf(RuntimeException.class)
       .hasMessage("로또를 살 수 없습니다.");
   }
@@ -49,7 +49,7 @@ public class MartTest {
     LottoStrategy testStrategy = lottoNumbers -> new LottoNumbers(Splitter.split(strNumbers));
 
     Assertions.assertThat(
-      mart.buyAllLotto(new Cash(money), testStrategy)
+      mart.buyAllRandomLottos(new Cash(money), testStrategy)
         .matchLottosWithBonusBall(targetLotto, new LottoNumber(bonusBall))
         .sendSpecificCount(Rank.FIRST)
     ).isEqualTo(new Count(1));

@@ -23,7 +23,6 @@ public class ResultView {
     CommonView.println(lottos.toString());
   }
 
-  // TODO 수정
   public static void showSpecificResult(LottoMatchingResult lottoResult) {
 
     CommonView.println(MATCHING_THREE + lottoResult.toStringSpecificResult(Rank.FIFTH) + DIGIT);

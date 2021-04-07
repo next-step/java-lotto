@@ -23,11 +23,22 @@ public class Cash {
     this.money = money;
   }
 
+  public static Cash getMultipleLottosPrice(Count count) {
+    return new Cash(lottoCache.money * count.showCount());
+  }
+
   public Cash withdrawal() {
     if (!isGreaterEqualProductPrice(lottoCache)) {
       throw new InvalidPriceException(ERROR_MESSAGE);
     }
     return new Cash(money - lottoCache.money);
+  }
+
+  public Cash withdrawal(Cash notifyBoughtAmount) {
+    if (!isGreaterEqualProductPrice(notifyBoughtAmount)) {
+      throw new InvalidPriceException(ERROR_MESSAGE);
+    }
+    return new Cash(money - notifyBoughtAmount.money);
   }
 
   public Cash add(Cash cash) {
@@ -73,4 +84,6 @@ public class Cash {
   public int hashCode() {
     return Objects.hash(money);
   }
+
+
 }
