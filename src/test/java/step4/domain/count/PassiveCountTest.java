@@ -36,15 +36,17 @@ class PassiveCountTest {
 
     }
 
-    @DisplayName("PassiveCount 인스턴스 음수 여부 테스트")
+    @DisplayName("PassiveCount 인스턴스가 소유한 값 반환 여부 테스트")
     @Test
     void 검증_반환() {
         // given
-        int count = 3;
+        int expected = 1;
 
         // when
+        PassiveCount passiveCount = PassiveCount.valueOf(expected);
+        int actual = passiveCount.getCount();
 
-
+        assertThat(actual).isEqualTo(expected);
     }
 
 }
