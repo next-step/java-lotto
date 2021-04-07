@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static lotto.utils.ConvertUtil.toIntOrThrow;
 
 public class WinningNumbers {
     private static final int NUMBER_LENGTH = 6;
@@ -18,8 +18,9 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers from(List<String> winningNumbers) {
-        return new WinningNumbers(toIntegers(winningNumbers)
+        return new WinningNumbers(winningNumbers
                 .stream()
+                .map(WinningNumbers::toInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
@@ -30,10 +31,11 @@ public class WinningNumbers {
                 .collect(Collectors.toList()));
     }
 
-    protected static List<Integer> toIntegers(List<String> winningNumbers) {
-        return new ArrayList<>(Collections.unmodifiableList(winningNumbers.stream()
-                .map(winningNumber -> ConvertUtil.toIntOrThrow(winningNumber, () -> new IllegalArgumentException(String.format(CHECK_WINNING_NUMBER, winningNumber))))
-                .collect(Collectors.toList())));
+    private static Integer toInt(String winningNumber) {
+        return toIntOrThrow(winningNumber,
+                () -> new IllegalArgumentException(
+                        String.format(CHECK_WINNING_NUMBER, winningNumber)
+                ));
     }
 
     public MatchedCount matchedCountWith(List<LottoNumber> lottoNumbers) {
