@@ -68,5 +68,19 @@ class MoneyTest {
         assertThat(actual).isEqualTo(7);
     }
 
+    @DisplayName("Money 인스턴스가 소유한 돈의 크기 반환 여부 테스트")
+    @Test
+    void 반환_돈() {
+        // given
+        int expected = 10000;
+
+        // when
+        Money money = Money.valueOf(expected);
+        int actual = Money.getMoney();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
 }
