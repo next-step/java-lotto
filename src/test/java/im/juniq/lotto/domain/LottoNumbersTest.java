@@ -13,30 +13,30 @@ class LottoNumbersTest {
 
     @Test
     void create() {
-        assertThatCode(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6))).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6))).doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("두 개의 Numbers 객체를 비교하여, 서로 일치하는 숫자 개수를 조회")
     void matchedCount() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(LottoNumbers.of(numbers).matchedCount(LottoNumbers.of(numbers))).isEqualTo(6);
-        assertThat(LottoNumbers.of(numbers).matchedCount(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7))))
+        assertThat(LottoNumbers.from(numbers).matchedCount(LottoNumbers.from(numbers))).isEqualTo(6);
+        assertThat(LottoNumbers.from(numbers).matchedCount(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 7))))
             .isEqualTo(5);
-        assertThat(LottoNumbers.of(numbers).matchedCount(LottoNumbers.of(Arrays.asList(7, 8, 9, 10, 11, 12))))
+        assertThat(LottoNumbers.from(numbers).matchedCount(LottoNumbers.from(Arrays.asList(7, 8, 9, 10, 11, 12))))
             .isEqualTo(0);
     }
 
     @Test
     @DisplayName("로또 숫자 개수는 6개 이여야 한다.")
     void checkSixNumber() {
-        assertThatThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumbers.from(Arrays.asList(1, 2))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("로또 숫자는 중복 될 수 없다.")
     void checkDuplicate() {
-        assertThatThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 5)))
+        assertThatThrownBy(() -> LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 5)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

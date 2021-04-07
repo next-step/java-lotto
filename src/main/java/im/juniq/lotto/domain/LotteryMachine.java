@@ -15,16 +15,16 @@ public class LotteryMachine {
         this.manualLottoes = manualLottoes;
     }
 
-    public static LotteryMachine withManualNumbers(int price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
-        return new LotteryMachine(Price.of(price), manualLottoes, shuffleStrategy);
-    }
-
-    public static LotteryMachine withManualNumbers(Price price, List<LottoNumbers> manualLottoes) {
+    public static LotteryMachine of(Price price, List<LottoNumbers> manualLottoes) {
         return new LotteryMachine(price, manualLottoes, new NormalShuffleStrategy());
     }
 
-    public static LotteryMachine withPrice(int price, ShuffleStrategy shuffleStrategy) {
-        return new LotteryMachine(Price.of(price), new ArrayList<>(), shuffleStrategy);
+    public static LotteryMachine of(int price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(Price.from(price), manualLottoes, shuffleStrategy);
+    }
+
+    public static LotteryMachine of(int price, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(Price.from(price), new ArrayList<>(), shuffleStrategy);
     }
 
     public Lottoes lottoes() {

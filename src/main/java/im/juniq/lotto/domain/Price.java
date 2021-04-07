@@ -10,11 +10,11 @@ public class Price {
         this.price = price;
     }
 
-    public static Price of(String price) {
-        return of(Integer.parseInt(price));
+    public static Price from(String price) {
+        return from(Integer.parseInt(price));
     }
 
-    public static Price of(int price) {
+    public static Price from(int price) {
         checkPrice(price);
         return new Price(price);
     }

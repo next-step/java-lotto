@@ -13,7 +13,7 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers of(List<Integer> numbers, int bonusNumber) {
-        return of(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
+        return of(LottoNumbers.from(numbers), LottoNumber.from(bonusNumber));
     }
 
     public static WinningNumbers of(LottoNumbers numbers, LottoNumber bonusNumber) {

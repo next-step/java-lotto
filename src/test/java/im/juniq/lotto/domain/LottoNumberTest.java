@@ -9,13 +9,13 @@ class LottoNumberTest {
 
     @Test
     void create() {
-        assertThatCode(() -> LottoNumber.of(1)).doesNotThrowAnyException();
-        assertThatCode(() -> LottoNumber.of(45)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumber.from(1)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumber.from(45)).doesNotThrowAnyException();
     }
 
     @Test
     void checkNumber() {
-        assertThatThrownBy(() -> LottoNumber.of(0)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> LottoNumber.of(46)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.from(0)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.from(46)).isInstanceOf(IllegalArgumentException.class);
     }
 }

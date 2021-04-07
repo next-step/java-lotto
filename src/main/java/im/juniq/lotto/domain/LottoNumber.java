@@ -12,11 +12,11 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(String number) {
-        return of(Integer.parseInt(number));
+    public static LottoNumber from(String number) {
+        return from(Integer.parseInt(number));
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber from(int number) {
         if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
                 "로또 번호는 " + FIRST_LOTTO_NUMBER + " ~ " + LAST_LOTTO_NUMBER + " 범위 안이어야 합니다.");

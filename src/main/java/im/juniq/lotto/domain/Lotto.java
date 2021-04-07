@@ -17,26 +17,26 @@ public class Lotto {
         this.lottoType = lottoType;
     }
 
-    public static Lotto of(String lotto) {
-        return Lotto.of(LottoNumbers.of(lotto), LottoType.MANUAL);
+    public static Lotto create() {
+        return from(new NormalShuffleStrategy());
     }
 
-    public static Lotto of(LottoNumbers lottoNumbers) {
-        return new Lotto(lottoNumbers, LottoType.MANUAL);
-    }
-
-    public static Lotto of(LottoNumbers lottoNumbers, LottoType lottoType) {
-        return new Lotto(lottoNumbers, lottoType);
-    }
-
-    public static Lotto of() {
-        return of(new NormalShuffleStrategy());
-    }
-
-    public static Lotto of(ShuffleStrategy shuffleStrategy) {
+    public static Lotto from(ShuffleStrategy shuffleStrategy) {
         List<Integer> baseNumbers = makeBaseNumbers();
         shuffleStrategy.shuffle(baseNumbers);
-        return of(LottoNumbers.of(pickupNumbers(baseNumbers)), LottoType.AUTO);
+        return of(LottoNumbers.from(pickupNumbers(baseNumbers)), LottoType.AUTO);
+    }
+
+    public static Lotto from(String lotto) {
+        return Lotto.of(LottoNumbers.from(lotto), LottoType.MANUAL);
+    }
+
+    public static Lotto from(LottoNumbers lottoNumbers) {
+        return of(lottoNumbers, LottoType.MANUAL);
+    }
+
+    private static Lotto of(LottoNumbers lottoNumbers, LottoType lottoType) {
+        return new Lotto(lottoNumbers, lottoType);
     }
 
     public LottoNumbers numbers() {

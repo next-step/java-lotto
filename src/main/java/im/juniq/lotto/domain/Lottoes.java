@@ -1,7 +1,6 @@
 package im.juniq.lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,12 +12,12 @@ public class Lottoes implements Iterable<Lotto> {
         this.lottoes = lottoes;
     }
 
-    public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
-        return new Lottoes(makeLottoes(numberOfCreated - manualLottoes.size(), shuffleStrategy, manualLottoes));
-    }
-
     public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
         return of(numberOfCreated, shuffleStrategy, new ArrayList<>());
+    }
+
+    public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
+        return new Lottoes(makeLottoes(numberOfCreated - manualLottoes.size(), shuffleStrategy, manualLottoes));
     }
 
     public static Lottoes from(List<Lotto> lottoes) {
@@ -29,10 +28,10 @@ public class Lottoes implements Iterable<Lotto> {
             List<LottoNumbers> manualLottoes) {
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < numberOfAutoCreated; i++) {
-            lottoes.add(Lotto.of(shuffleStrategy));
+            lottoes.add(Lotto.from(shuffleStrategy));
         }
         for (LottoNumbers lottoNumbers : manualLottoes) {
-            lottoes.add(Lotto.of(lottoNumbers));
+            lottoes.add(Lotto.from(lottoNumbers));
         }
         return lottoes;
     }

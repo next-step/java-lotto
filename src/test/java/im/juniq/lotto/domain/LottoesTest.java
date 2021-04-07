@@ -17,7 +17,7 @@ class LottoesTest {
     void createOne() {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
         assertThat(Lottoes.of(1, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
-            Lottoes.from(Collections.singletonList(Lotto.of(shuffleStrategy))));
+            Lottoes.from(Collections.singletonList(Lotto.from(shuffleStrategy))));
     }
 
     @ParameterizedTest
@@ -26,7 +26,7 @@ class LottoesTest {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < numberOfCreated; i++) {
-            lottoes.add(Lotto.of(new NoShuffleStrategy()));
+            lottoes.add(Lotto.from(new NoShuffleStrategy()));
         }
 
         assertThat(Lottoes.of(numberOfCreated, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
@@ -39,11 +39,11 @@ class LottoesTest {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            lottoes.add(Lotto.of(new NoShuffleStrategy()));
+            lottoes.add(Lotto.from(new NoShuffleStrategy()));
         }
 
         assertThat(Lottoes.of(10, shuffleStrategy,
-            Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6"))))
+            Arrays.asList(LottoNumbers.from("1,2,3,4,5,6"), LottoNumbers.from("1,2,3,4,5,6"))))
             .usingRecursiveComparison().isEqualTo(Lottoes.from(lottoes));
     }
 
@@ -53,7 +53,7 @@ class LottoesTest {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
 
         Lottoes lottoes = Lottoes.of(10, shuffleStrategy,
-                Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6")));
+                Arrays.asList(LottoNumbers.from("1,2,3,4,5,6"), LottoNumbers.from("1,2,3,4,5,6")));
 
         assertThat(lottoes.autoLottoSize()).isEqualTo(8);
         assertThat(lottoes.manualLottoSize()).isEqualTo(2);
@@ -80,14 +80,14 @@ class LottoesTest {
     void calculateYield() {
         Lottoes lottoes = Lottoes.of(1, new NoShuffleStrategy());
 
-        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Price.from(1000)))
             .isEqualTo(2000000);
-        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6), Price.from(1000)))
             .isEqualTo(30000);
-        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 8), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 8), Price.from(1000)))
             .isEqualTo(1500);
-        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8), 6), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8), 6), Price.from(1000)))
             .isEqualTo(50);
-        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9), 6), Price.of(1000))).isEqualTo(5);
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9), 6), Price.from(1000))).isEqualTo(5);
     }
 }
