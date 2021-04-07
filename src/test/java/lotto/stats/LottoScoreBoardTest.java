@@ -9,6 +9,7 @@ import lotto.domain.machine.TestLottoGenerator;
 import lotto.domain.prize.Prize;
 import lotto.domain.shop.LottoShop;
 import lotto.domain.shop.Money;
+import lotto.domain.shop.Order;
 import lotto.domain.stats.LottoScoreBoard;
 import lotto.domain.stats.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ public class LottoScoreBoardTest {
     @BeforeEach
     @DisplayName("로또 14개를 구입한다.")
     void prepareTestScenario() {
-        lottoShop = new LottoShop(new Money(14000), new TestLottoGenerator(0));
+        lottoShop = new LottoShop(new Order(new Money(14000)), new TestLottoGenerator(0));
         Lotto lotto = new Lotto(17, 18, 19, 20, 21, 22);
         winningLotto = new WinningLotto(lotto, new LottoBall(45));
     }
@@ -40,7 +41,7 @@ public class LottoScoreBoardTest {
     @Test
     @DisplayName("보너스볼이 들어가면, 2등에 당첨된다.")
     void lottoBonusPrizeTest() {
-        LottoShop lottoShop = new LottoShop(new Money(2000), new TestLottoGenerator(0));
+        LottoShop lottoShop = new LottoShop(new Order(new Money(2000)), new TestLottoGenerator(0));
         WinningLotto winnerLotto = new WinningLotto(new Lotto(2, 3, 4, 5, 6, 8), new LottoBall(1));
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
         LottoScoreBoard lottoScoreBoard = LottoScoreBoard.create(lottoOrderedList, winnerLotto);

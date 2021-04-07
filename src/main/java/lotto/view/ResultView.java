@@ -10,7 +10,9 @@ import lotto.dto.LottoScoreResultDto;
 
 public class ResultView {
     public static void printLottoOrderResult(LottoOrderResultDto lottoOrderResultDto) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoOrderResultDto.getOrderResult().size());
+        int automaticLottoCount = lottoOrderResultDto.getOrderResult().size() - lottoOrderResultDto.getPreOrderedLottoCount();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+                lottoOrderResultDto.getPreOrderedLottoCount(), automaticLottoCount);
 
         List<LottoOrderedDto> lottoNumberList = lottoOrderResultDto.getOrderResult();
         lottoNumberList.forEach(ResultView::printLottoNumber);

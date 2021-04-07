@@ -18,4 +18,8 @@ public class Money {
         return true;
     }
 
+    public long getAvailableLottoCount() {
+        return balance / LottoShop.LOTTO_PRICE;
+    }
+
 }

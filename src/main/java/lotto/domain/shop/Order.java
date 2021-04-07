@@ -9,6 +9,9 @@ public class Order {
     private final List<Lotto> orderedLottoList;
 
     public Order(Money money, List<Lotto> orderedLottoList) {
+        if (orderedLottoList.size() > (int) money.getAvailableLottoCount()) {
+            throw new IllegalArgumentException("로또를 구입하기 위한 금액이 부족합니다.");
+        }
         this.money = money;
         this.orderedLottoList = orderedLottoList;
     }

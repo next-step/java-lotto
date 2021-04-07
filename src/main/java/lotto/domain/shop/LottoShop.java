@@ -1,8 +1,5 @@
 package lotto.domain.shop;
 
-import java.util.ArrayList;
-import java.util.List;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoOrderedList;
 import lotto.domain.machine.LottoGenerator;
 import lotto.domain.machine.LottoMachine;
@@ -12,13 +9,10 @@ public class LottoShop {
 
     private final LottoMachine lottoMachine;
     private final Order order;
-
-    public LottoShop(Money money, LottoGenerator lottoGenerator) {
-        this.order = new Order(money);
-        this.lottoMachine = new LottoMachine(lottoGenerator);
-    }
+    private final int preOrderedLottoCount;
 
     public LottoShop(Order order, LottoGenerator lottoGenerator) {
+        preOrderedLottoCount = order.getOrderedLottoCount();
         this.order = order;
         this.lottoMachine = new LottoMachine(lottoGenerator);
     }
@@ -34,5 +28,9 @@ public class LottoShop {
 
     private boolean isEnoughToPurchase() {
         return order.balanceWithdraw(new Money(LOTTO_PRICE));
+    }
+
+    public int getPreOrderedLottoCount() {
+        return preOrderedLottoCount;
     }
 }
