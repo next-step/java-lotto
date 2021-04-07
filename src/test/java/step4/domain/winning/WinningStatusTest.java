@@ -53,4 +53,20 @@ class WinningStatusTest {
         assertThat(actual).isEqualTo(expected);
 
     }
+
+    @DisplayName("WinningStatus 인스턴스가 소유한 보너스점수 여부를 반환하는지 테스트")
+    @Test
+    void 반환_보너스_boolean() {
+        // given
+        int expected = 3;
+        boolean matchBonus = false;
+
+        // when
+        WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
+        boolean actual = winningStatus.getMatchBonus();
+
+        // then
+        assertThat(actual).isFalse();
+
+    }
 }
