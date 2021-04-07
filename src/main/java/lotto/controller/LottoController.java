@@ -12,8 +12,12 @@ import java.util.List;
 
 public class LottoController {
     private final LottoService lottoService;
+    private final InputView inputView;
+    private final ResultView resultView;
 
-    public LottoController(LottoService lottoService) {
+    public LottoController(InputView inputView, ResultView resultView, LottoService lottoService) {
+        this.inputView = inputView;
+        this.resultView = resultView;
         this.lottoService = lottoService;
     }
 
@@ -34,7 +38,7 @@ public class LottoController {
 
     private PurchaseAmount createPurchaseAmount() {
         try {
-            String purchaseAmount = InputView.purchaseAmount();
+            String purchaseAmount = inputView.purchaseAmount();
             return new PurchaseAmount(purchaseAmount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -52,14 +56,14 @@ public class LottoController {
 
         LottoTickets manualLottoTickets = createManualLottoTickets(manualNumberOfTicket);
         LottoTickets autoLottoTickets = createAutoLottoTickets(totalNumberOfTicket, manualNumberOfTicket);
-        ResultView.purchaseTickets(manualNumberOfTicket.numberOfTicket(), autoNumberOfTicket.numberOfTicket());
+        resultView.purchaseTickets(manualNumberOfTicket.numberOfTicket(), autoNumberOfTicket.numberOfTicket());
 
         return ticketOffice.totalTickets(manualLottoTickets, autoLottoTickets);
     }
 
     private ManualNumberOfTicket manualNumberOfTicket(TotalNumberOfTicket totalNumberOfTicket) {
         try {
-            return new ManualNumberOfTicket(InputView.manualLottoTicketCount(), totalNumberOfTicket);
+            return new ManualNumberOfTicket(inputView.manualLottoTicketCount(), totalNumberOfTicket);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return manualNumberOfTicket(totalNumberOfTicket);
@@ -69,7 +73,7 @@ public class LottoController {
     private LottoTickets createManualLottoTickets(ManualNumberOfTicket manualNumberOfTicket) {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
 
-        InputView.manualLottoNumberPhrase();
+        inputView.manualLottoNumberPhrase();
         for (int i = 0; i < manualNumberOfTicket.numberOfTicket(); i++) {
             LottoTicket manualLottoTicket = manualLottoTicket();
             manualLottoTickets.add(manualLottoTicket);
@@ -80,7 +84,7 @@ public class LottoController {
 
     private LottoTicket manualLottoTicket() {
         try {
-            List<String> manualLottoNumbers = SplitUtil.splitByComma(InputView.manualLottoNumbers());
+            List<String> manualLottoNumbers = SplitUtil.splitByComma(inputView.manualLottoNumbers());
             return new LottoTicket(LottoNumbers.from(manualLottoNumbers));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -100,13 +104,13 @@ public class LottoController {
 
     private void printLottoTickets(LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            ResultView.lottoNumbers(lottoTicket.lottoNumbers());
+            resultView.lottoNumbers(lottoTicket.lottoNumbers());
         }
     }
 
     private WinningNumbers createWinningNumbers() {
         try {
-            List<String> winningNumbers = SplitUtil.splitByComma(InputView.winningNumbers());
+            List<String> winningNumbers = SplitUtil.splitByComma(inputView.winningNumbers());
             return WinningNumbers.from(winningNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -116,7 +120,7 @@ public class LottoController {
 
     private BonusBall createBonusBall(WinningNumbers winningNumbers) {
         try {
-            LottoNumber bonusNumber = LottoNumber.of(InputView.bonusBall());
+            LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
             winningNumbers.check(bonusNumber);
             return new BonusBall(bonusNumber);
         } catch (Exception e) {
@@ -138,7 +142,7 @@ public class LottoController {
     }
 
     private void printStatistics(List<RankCountDto> ranksCount) {
-        ResultView.statistics(ranksCount);
+        resultView.statistics(ranksCount);
     }
 
     private ProfitRate createProfitRate(RanksCount ranksCount, PurchaseAmount purchaseAmount) {
@@ -147,11 +151,11 @@ public class LottoController {
 
     private void printProfitRate(ProfitRate profitRate) {
         if (profitRate.isPositive()) {
-            ResultView.positiveProfitRate(profitRate.profitRate());
+            resultView.positiveProfitRate(profitRate.profitRate());
         }
 
         if (!profitRate.isPositive()) {
-            ResultView.negativeProfitRate(profitRate.profitRate());
+            resultView.negativeProfitRate(profitRate.profitRate());
         }
     }
 }
