@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketTest {
 
@@ -18,7 +19,8 @@ class LottoTicketTest {
     LottoTicket lotto = LottoTicket.toBuy(money, new SixLottoNumbers());
 
     // then
-    assertThat(lotto.ticketCount())
-            .isEqualTo(2);
+    assertAll(() -> assertThat(lotto.ticketCount()).isEqualTo(2)
+            , () -> assertThat(lotto.getLottoNumbers().get(0))
+                    .isNotEqualTo(lotto.getLottoNumbers().get(1)));
   }
 }

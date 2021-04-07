@@ -27,6 +27,10 @@ public class LottoTicket {
     return new LottoTicket(lottoNumbers);
   }
 
+  public int totalMoneySpent() {
+    return LOTTO_SELL_PRICE * ticketCount();
+  }
+
   public List<LottoNumbers> getLottoNumbers() {
     return lottoNumbers;
   }

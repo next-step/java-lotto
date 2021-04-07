@@ -21,6 +21,10 @@ public class LottoNumber {
     return 0 < lottoNumber && lottoNumber <= 45;
   }
 
+  public int getLottoNumber() {
+    return lottoNumber;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
