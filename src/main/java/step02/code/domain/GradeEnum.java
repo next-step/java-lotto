@@ -26,12 +26,12 @@ public enum GradeEnum {
   public static GradeEnum fromGrade(int matched, boolean isMatchBonus) {
     return Arrays.stream(GradeEnum.values())
       .filter(gradeEnum -> gradeEnum.matched == matched)
-      .filter(gradeEnum -> isSecond(gradeEnum, isMatchBonus))
+      .filter(gradeEnum -> isCorrectGrade(gradeEnum, isMatchBonus))
       .findAny()
       .orElse(GradeEnum.NONE);
   }
 
-  public static boolean isSecond(GradeEnum gradeEnum, boolean isMatchBonus) {
+  public static boolean isCorrectGrade(GradeEnum gradeEnum, boolean isMatchBonus) {
     if(gradeEnum.matched != SECOND_OR_THIRD_NUMBER) {
       return true;
     }
