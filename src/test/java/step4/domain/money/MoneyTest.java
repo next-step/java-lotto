@@ -49,4 +49,19 @@ class MoneyTest {
         assertThat(actual).isEqualTo(10);
     }
 
+    @DisplayName("Money 인스턴스가 특정 값을 기준으로 구매할 수 있는지 여부 테스트")
+    @Test
+    void 검증_구매할_수_있는_갯수인지_확인() {
+        // given
+        int value = 10000;
+        int itemAmount = 1000;
+        int purchaseCount = 10;
+
+        // when
+        Money money = Money.valueOf(value);
+        boolean actual = money.isAvailablePurchase(itemAmount, purchaseCount);
+
+        assertThat(actual).isTrue();
+    }
+
 }
