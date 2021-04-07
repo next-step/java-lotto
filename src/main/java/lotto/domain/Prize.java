@@ -1,11 +1,18 @@
 package lotto.domain;
 
+import lotto.enums.WinningRank;
+
+import java.util.Map;
 import java.util.Objects;
 
 public class Prize implements Comparable<Prize> {
     private static final int BOUND_MIN = 0;
     private static final String CHECK_PRIZE_BOUND = String.format("상금은 최소 %d원 이상이여야 합니다.", BOUND_MIN);
     private final int prize;
+
+    public Prize(Map.Entry<WinningRank, Integer> rank) {
+        this(rank.getKey().prize().prize() * rank.getValue());
+    }
 
     public Prize(int prize) {
         validateBound(prize);

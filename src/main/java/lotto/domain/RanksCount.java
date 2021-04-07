@@ -40,7 +40,7 @@ public class RanksCount {
     public TotalPrize totalPrize() {
         List<Prize> totalPrize = ranksCount.entrySet()
                 .stream()
-                .map(rank -> new Prize(rank.getKey().prize().prize() * rank.getValue()))
+                .map(Prize::new)
                 .collect(Collectors.toList());
 
         return new TotalPrize(totalPrize);
