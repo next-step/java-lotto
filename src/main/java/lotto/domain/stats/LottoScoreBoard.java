@@ -11,11 +11,8 @@ import lotto.domain.shop.LottoShop;
 public class LottoScoreBoard {
     private final PrizeBoard prizeBoard;
 
-    public LottoScoreBoard(LottoOrderedList lottoOrderedList, WinningLotto winningLotto) {
+    private LottoScoreBoard() {
         prizeBoard = new PrizeBoard();
-        for (Lotto lotto : lottoOrderedList.getLottoList()) {
-            prizeBoard.record(Prize.getPrizeByScore(winningLotto.getScoreIfMatchingBall(lotto)));
-        }
     }
 
     public String getEarningRate() {
@@ -33,6 +30,15 @@ public class LottoScoreBoard {
 
     public List<Score> getScoreResult() {
         return prizeBoard.getScoreResult();
+    }
+
+    public static LottoScoreBoard create(LottoOrderedList lottoOrderedList, WinningLotto winningLotto) {
+        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard();
+        for (Lotto lotto : lottoOrderedList.getLottoList()) {
+            lottoScoreBoard.prizeBoard.record(
+                    Prize.getPrizeByScore(winningLotto.getScoreIfMatchingBall(lotto)));
+        }
+        return lottoScoreBoard;
     }
 
 }

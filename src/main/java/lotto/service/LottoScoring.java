@@ -20,7 +20,7 @@ public class LottoScoring {
     public LottoScoring(LottoOrderResultDto lottoOrderResultDto,
                         List<Integer> numberList,
                         Integer bonusNumber) {
-        this.lottoScoreBoard = new LottoScoreBoard(
+        this.lottoScoreBoard = LottoScoreBoard.create(
                 convertFromDtoToLottoOrderedList(lottoOrderResultDto),
                 new WinningLotto(convertFromNumberListToLotto(numberList), new LottoBall(bonusNumber))
         );

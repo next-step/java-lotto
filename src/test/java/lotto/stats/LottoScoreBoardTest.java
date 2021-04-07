@@ -32,7 +32,7 @@ public class LottoScoreBoardTest {
     void lottoEarningRateCalculateTest() {
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
 
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winningLotto);
+        LottoScoreBoard lottoScoreBoard = LottoScoreBoard.create(lottoOrderedList, winningLotto);
 
         assertThat(lottoScoreBoard.getEarningRate()).isEqualTo("0.35");
     }
@@ -43,7 +43,7 @@ public class LottoScoreBoardTest {
         LottoShop lottoShop = new LottoShop(new Money(2000), new TestLottoGenerator(0));
         WinningLotto winnerLotto = new WinningLotto(new Lotto(2, 3, 4, 5, 6, 8), new LottoBall(1));
         LottoOrderedList lottoOrderedList = lottoShop.purchase();
-        LottoScoreBoard lottoScoreBoard = new LottoScoreBoard(lottoOrderedList, winnerLotto);
+        LottoScoreBoard lottoScoreBoard = LottoScoreBoard.create(lottoOrderedList, winnerLotto);
 
         long winner = lottoScoreBoard.getWinnerCountByPrize(Prize.SECOND);
 
