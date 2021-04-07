@@ -64,5 +64,37 @@ class WinningResultTest {
 
     }
 
+    @DisplayName("WinningResult 인스턴스가 당첨횟수값 반환 여부 테스트")
+    @ParameterizedTest(name = "루프 : {index} / 첫번째 값 : {0} / 두번째 값 : {1}")
+    @MethodSource("provideRankValuesAndWinningCount")
+    void 반환_당첨횟수(Rank rank, int expected) {
+        // given
+        Map<Rank, Integer> winningMap = WinningResult.values();
+        int value = 0;
+        for (Rank initRank : Rank.values()) {
+            winningMap.put(initRank, winningMap.get(initRank) + (++value));
+            WinningResult winningResult = WinningResult.of(winningMap);
+        }
+
+        // when
+        WinningResult winningResult = WinningResult.of(winningMap);
+        int actual = winningResult.getWinningCount(rank);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideRankValuesAndWinningCount() {
+        return Stream.of(
+                Arguments.of(Rank.MISS, 1),
+                Arguments.of(Rank.FIFTH, 2),
+                Arguments.of(Rank.FOURTH, 3),
+                Arguments.of(Rank.THIRD, 4),
+                Arguments.of(Rank.SECOND, 5),
+                Arguments.of(Rank.FIRST, 6)
+        );
+
+    }
+
 
 }
