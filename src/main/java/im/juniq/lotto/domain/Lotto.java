@@ -1,10 +1,8 @@
 package im.juniq.lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,17 +10,23 @@ public class Lotto {
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final int NUMBER_OF_PICKUP = 6;
     private final LottoNumbers lottoNumbers;
+    private final LottoType lottoType;
 
-    private Lotto(LottoNumbers lottoNumbers) {
+    private Lotto(LottoNumbers lottoNumbers, LottoType lottoType) {
         this.lottoNumbers = lottoNumbers;
+        this.lottoType = lottoType;
     }
 
     public static Lotto of(String lotto) {
-        return Lotto.of(LottoNumbers.of(lotto));
+        return Lotto.of(LottoNumbers.of(lotto), LottoType.MANUAL);
     }
 
     public static Lotto of(LottoNumbers lottoNumbers) {
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers, LottoType.MANUAL);
+    }
+
+    public static Lotto of(LottoNumbers lottoNumbers, LottoType lottoType) {
+        return new Lotto(lottoNumbers, lottoType);
     }
 
     public static Lotto of() {
@@ -32,7 +36,7 @@ public class Lotto {
     public static Lotto of(ShuffleStrategy shuffleStrategy) {
         List<Integer> baseNumbers = makeBaseNumbers();
         shuffleStrategy.shuffle(baseNumbers);
-        return of(LottoNumbers.of(pickupNumbers(baseNumbers)));
+        return of(LottoNumbers.of(pickupNumbers(baseNumbers)), LottoType.AUTO);
     }
 
     public LottoNumbers numbers() {
@@ -68,5 +72,9 @@ public class Lotto {
 
     public long prize(WinningNumbers winningNumbers) {
         return winning(winningNumbers).amount();
+    }
+
+    public boolean isManual() {
+        return lottoType == LottoType.MANUAL;
     }
 }

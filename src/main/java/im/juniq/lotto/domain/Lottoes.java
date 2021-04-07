@@ -8,13 +8,9 @@ import java.util.List;
 public class Lottoes implements Iterable<Lotto> {
 
     private final List<Lotto> lottoes;
-    private final int autoLottoSize;
-    private final int manualLottoSize;
 
     private Lottoes(List<Lotto> lottoes, int autoLottoSize, int manualLottoSize) {
         this.lottoes = lottoes;
-        this.autoLottoSize = autoLottoSize;
-        this.manualLottoSize = manualLottoSize;
     }
 
     public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
@@ -53,10 +49,6 @@ public class Lottoes implements Iterable<Lotto> {
         return lottoes;
     }
 
-    public Lotto lotto(int index) {
-        return lottoes.get(index);
-    }
-
     public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers) {
         return lottoes.stream().mapToInt(lotto -> countMatchedLottoes(winning, lotto, winningNumbers)).sum();
     }
@@ -77,11 +69,11 @@ public class Lottoes implements Iterable<Lotto> {
     }
 
     public int autoLottoSize() {
-        return autoLottoSize;
+        return (int) lottoes.stream().filter(lotto -> !lotto.isManual()).count();
     }
 
     public int manualLottoSize() {
-        return manualLottoSize;
+        return (int) lottoes.stream().filter(Lotto::isManual).count();
     }
 
     @Override
