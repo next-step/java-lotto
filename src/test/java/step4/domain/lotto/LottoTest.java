@@ -94,4 +94,18 @@ class LottoTest {
         assertThat(actual).isEqualTo(1);
     }
 
+    @DisplayName("Lotto 인스턴스가 소유한 값 반환 여부 테스트")
+    @Test
+    void 반환() {
+        // given
+        Set<LottoNumber> expected = lottoNumbers;
+
+        // when
+        Lotto lotto = Lotto.of(expected);
+        Set<LottoNumber> actual = lotto.getLottoNumbers();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }
