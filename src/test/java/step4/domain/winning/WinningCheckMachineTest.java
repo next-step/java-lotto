@@ -18,4 +18,15 @@ class WinningCheckMachineTest {
         assertThat(winningCheckMachine).isNotNull();
     }
 
+
+    @DisplayName("WinningCheckMachine 인스턴스 생성 여부 테스트")
+    @Test
+    void 반환() {
+        // when
+        WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
+
+        // then
+        assertThat(winningCheckMachine).isNotNull();
+    }
+
 }
