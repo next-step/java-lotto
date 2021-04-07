@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.domain.Dto.RankCountDto;
+import lotto.service.LottoService;
 import lotto.utils.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -10,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+    private final LottoService lottoService;
+
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
+    }
 
     public void run() {
         PurchaseAmount purchaseAmount = createPurchaseAmount();
@@ -20,7 +26,7 @@ public class LottoController {
         BonusBall bonusBall = createBonusBall(winningNumbers);
         RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
         matchWith(ranksCount, bonusBall);
-        printStatistics(createRanksCountDto(ranksCount));
+        printStatistics(createRanksCountDtos(ranksCount));
 
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
@@ -127,8 +133,8 @@ public class LottoController {
         ranksCount.count(bonusBall);
     }
 
-    private List<RankCountDto> createRanksCountDto(RanksCount ranksCount) {
-        return ranksCount.dtos();
+    private List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
+        return lottoService.createRanksCountDtos(ranksCount);
     }
 
     private void printStatistics(List<RankCountDto> ranksCount) {
