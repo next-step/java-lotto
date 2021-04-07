@@ -18,8 +18,8 @@ public final class Money {
         return new Money(money);
     }
 
-    public final int purchaseQuantity(int purchaseAmount) {
-        validateNegative(purchaseAmount);
+    private final int purchaseQuantity(int purchaseAmount) {
+        validateZeroOrNegative(purchaseAmount);
         return money / purchaseAmount;
     }
 
@@ -40,8 +40,7 @@ public final class Money {
         return money < (itemAmount * purchaseCount);
     }
 
-    public final int availablePurchaseCount(int itemAmount, PassiveCount passiveCount) {
-        validateZeroOrNegative(itemAmount);
-        return (money/itemAmount)-passiveCount.getCount();
+    public final int availablePurchaseCount(int purchaseAmount, PassiveCount passiveCount) {
+        return purchaseQuantity(purchaseAmount)-passiveCount.getCount();
     }
 }

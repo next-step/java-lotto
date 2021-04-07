@@ -1,9 +1,9 @@
 package step4.view;
 
-import step4.domain.lotto.Lotto;
-import step4.domain.lotto.LottoNumber;
-import step4.domain.money.Money;
-import step4.domain.rank.Rank;
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoNumber;
+import step3.domain.money.Money;
+import step3.domain.rank.Rank;
 import step3.domain.winning.WinningResult;
 
 import java.util.*;

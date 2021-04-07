@@ -47,10 +47,14 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return new ArrayList<>(CACHE.values());
     }
 
-
+    public final int getLottoNumber() {
+        return lottoNumber;
+    }
 
     @Override
     public int compareTo(LottoNumber o) {
         return this.lottoNumber - o.lottoNumber;
     }
+
+
 }
