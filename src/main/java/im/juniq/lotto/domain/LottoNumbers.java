@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers implements Iterable<LottoNumber> {
 
-    public static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    private LottoNumbers(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static LottoNumbers of(String numbers) {
-        return of(Arrays.stream(numbers.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
+        return of(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER)).map(Integer::valueOf).collect(Collectors.toList()));
     }
 
     public static LottoNumbers of(List<Integer> numbers) {
