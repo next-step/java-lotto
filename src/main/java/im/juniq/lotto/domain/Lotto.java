@@ -75,6 +75,6 @@ public class Lotto {
     }
 
     public boolean isManual() {
-        return lottoType == LottoType.MANUAL;
+        return LottoType.isManual(lottoType);
     }
 }
