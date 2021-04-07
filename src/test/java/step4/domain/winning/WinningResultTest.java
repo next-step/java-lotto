@@ -51,7 +51,7 @@ class WinningResultTest {
         // when
         Map<Rank, Integer> actual = WinningResult.values();
 
-        // then
+        // when and then
         assertAll(
                 () -> assertThat(actual.get(Rank.MISS)).isEqualTo(0),
                 () -> assertThat(actual.get(Rank.FIFTH)).isEqualTo(0),
@@ -73,7 +73,6 @@ class WinningResultTest {
         int value = 0;
         for (Rank initRank : Rank.values()) {
             winningMap.put(initRank, winningMap.get(initRank) + (++value));
-            WinningResult winningResult = WinningResult.of(winningMap);
         }
 
         // when

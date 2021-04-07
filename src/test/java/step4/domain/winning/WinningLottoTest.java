@@ -21,7 +21,7 @@ class WinningLottoTest {
         String StringWinningLotto = "1, 2, 3, 4, 5, 6";
         int bonusLottoNumber = 7;
 
-        // when
+        // when and then
         WinningLotto winningLotto = WinningLotto.from(StringWinningLotto, bonusLottoNumber);
 
         // then
@@ -35,8 +35,8 @@ class WinningLottoTest {
         Lotto lotto = null;
         LottoNumber lottoNumber = LottoNumber.valueOf(7);
 
-        // when
-        assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
+        // when and then
+        assertThatThrownBy(() -> WinningLotto.from(lotto, lottoNumber))
                 .isInstanceOf(LottoNullPointerException.class)
                 .hasMessageContaining("Lotto 인스턴스가 null 입니다.");
 
@@ -49,8 +49,8 @@ class WinningLottoTest {
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
         LottoNumber lottoNumber = null;
 
-        // when
-        assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
+        // when and then
+        assertThatThrownBy(() -> WinningLotto.from(lotto, lottoNumber))
                 .isInstanceOf(LottoNumberNullPointerException.class)
                 .hasMessageContaining("LottoNumber 인스턴스가 null 입니다.");
 
@@ -63,8 +63,8 @@ class WinningLottoTest {
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
         LottoNumber lottoNumber = LottoNumber.valueOf(6);
 
-        // when
-        assertThatThrownBy(()-> WinningLotto.from(lotto, lottoNumber))
+        // when and then
+        assertThatThrownBy(() -> WinningLotto.from(lotto, lottoNumber))
                 .isInstanceOf(LottoNumberConflictException.class)
                 .hasMessageContaining("겹치는 LottoNumber 인스턴스가 존재합니다.");
 

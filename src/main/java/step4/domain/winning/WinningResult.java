@@ -30,13 +30,14 @@ public final class WinningResult {
         return winningMap;
     }
 
+    public final int getWinningCount(Rank rank) {
+        return winningResult.get(rank);
+    }
+
     private final void validateNull(Map<Rank, Integer> winningResult) {
         if (Objects.isNull(winningResult)) {
             throw new MapNullPointerException();
         }
     }
 
-    public final int getWinningCount(Rank rank) {
-        return winningResult.get(rank);
-    }
 }
