@@ -2,6 +2,7 @@ package step4.domain.shop;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step4.domain.count.PassiveCount;
 import step4.domain.lotto.Lotto;
 import step4.domain.money.Money;
 import step4.strategy.LottoShuffleStrategy;
@@ -28,12 +29,13 @@ class LottoShopTest {
     void 반환_로또() {
         // given
         Money money = Money.valueOf(4000);
-        int createdCount = 3;
+        PassiveCount passiveCount = PassiveCount.valueOf(3);
+        int availablePurchaseCount = money.availablePurchaseCount(Lotto.AMOUNT, passiveCount);
         LottoShuffleStrategy strategy = lottoNumbers -> {};
 
         // when
         LottoShop lottoShop = LottoShop.getInstance();
-        List<Lotto> lottos = lottoShop.purchaseLotto(money, createdCount, strategy);
+        List<Lotto> lottos = lottoShop.purchaseLotto(availablePurchaseCount, strategy);
         int actual = lottos.size();
 
         // then
