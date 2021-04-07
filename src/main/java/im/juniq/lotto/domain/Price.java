@@ -6,7 +6,7 @@ public class Price {
 
     private final int price;
 
-    public Price(int price) {
+    private Price(int price) {
         this.price = price;
     }
 

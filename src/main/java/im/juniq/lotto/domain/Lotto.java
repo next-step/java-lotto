@@ -13,32 +13,33 @@ public class Lotto {
     private static final int NUMBER_OF_PICKUP = 6;
     private final LottoNumbers lottoNumbers;
 
-    public Lotto() {
-        List<Integer> baseNumbers = makeBaseNumbers();
-        new NormalShuffleStrategy().shuffle(baseNumbers);
-        lottoNumbers = LottoNumbers.of(pickupNumbers(baseNumbers));
+    private Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(ShuffleStrategy shuffleStrategy) {
+    public static Lotto of(String lotto) {
+        return Lotto.of(LottoNumbers.of(lotto));
+    }
+
+    public static Lotto of(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto of() {
+        return of(new NormalShuffleStrategy());
+    }
+
+    public static Lotto of(ShuffleStrategy shuffleStrategy) {
         List<Integer> baseNumbers = makeBaseNumbers();
         shuffleStrategy.shuffle(baseNumbers);
-        lottoNumbers = LottoNumbers.of(pickupNumbers(baseNumbers));
-    }
-
-    public Lotto(String lotto) {
-        lottoNumbers = LottoNumbers.of(
-            Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
-    }
-
-    public Lotto(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        return of(LottoNumbers.of(pickupNumbers(baseNumbers)));
     }
 
     public LottoNumbers numbers() {
         return lottoNumbers;
     }
 
-    private List<Integer> makeBaseNumbers() {
+    private static List<Integer> makeBaseNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = FIRST_LOTTO_NUMBER; i <= LAST_LOTTO_NUMBER; i++) {
             numbers.add(i);
@@ -46,7 +47,7 @@ public class Lotto {
         return numbers;
     }
 
-    private List<Integer> pickupNumbers(List<Integer> baseNumbers) {
+    private static List<Integer> pickupNumbers(List<Integer> baseNumbers) {
         List<Integer> results = baseNumbers.subList(0, NUMBER_OF_PICKUP);
         Collections.sort(results);
         return results;

@@ -36,14 +36,14 @@ public class Lottoes implements Iterable<Lotto> {
 
     private List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
         for (int i = 0; i < numberOfCreated; i++) {
-            lottoes.add(new Lotto(shuffleStrategy));
+            lottoes.add(Lotto.of(shuffleStrategy));
         }
         return lottoes;
     }
 
     private List<Lotto> makeLottoes(List<LottoNumbers> manualLottoes) {
         for (LottoNumbers lottoNumbers : manualLottoes) {
-            lottoes.add(new Lotto(lottoNumbers));
+            lottoes.add(Lotto.of(lottoNumbers));
         }
         return lottoes;
     }

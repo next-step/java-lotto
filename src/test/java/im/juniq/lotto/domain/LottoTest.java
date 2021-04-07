@@ -11,19 +11,17 @@ class LottoTest {
 
     @Test
     void create() {
-        Lotto lotto = new Lotto();
-
-        assertThat(lotto.numbers().size()).isEqualTo(6);
+        assertThat(Lotto.of().numbers().size()).isEqualTo(6);
     }
 
     @Test
     void createByString() {
-        assertThat(new Lotto("1,2,3,4,5,6")).usingRecursiveComparison().isEqualTo(new Lotto(new NoShuffleStrategy()));
+        assertThat(Lotto.of("1,2,3,4,5,6")).usingRecursiveComparison().isEqualTo(Lotto.of(new NoShuffleStrategy()));
     }
 
     @Test
     void checkDuplicateNumbers() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = Lotto.of();
         long distinctNumberSize = StreamSupport.stream(lotto.numbers().spliterator(), false)
             .distinct()
             .count();
@@ -33,8 +31,8 @@ class LottoTest {
 
     @Test
     void equals() {
-        Lotto lottoA = new Lotto(new NoShuffleStrategy());
-        Lotto lottoB = new Lotto(new NoShuffleStrategy());
+        Lotto lottoA = Lotto.of(new NoShuffleStrategy());
+        Lotto lottoB = Lotto.of(new NoShuffleStrategy());
 
         assertThat(lottoA).usingRecursiveComparison().isEqualTo(lottoB);
     }
@@ -42,7 +40,7 @@ class LottoTest {
     @Test
     @DisplayName("당첨등수 조회")
     void winning() {
-        Lotto lotto = new Lotto(new NoShuffleStrategy());
+        Lotto lotto = Lotto.of(new NoShuffleStrategy());
 
         assertThat(lotto.winning(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7))).isEqualTo(Winning.FIRST);
         assertThat(lotto.winning(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 6))).isEqualTo(Winning.SECOND);
@@ -57,7 +55,7 @@ class LottoTest {
     @Test
     @DisplayName("당첨금 조회")
     void prize() {
-        Lotto lotto = new Lotto(new NoShuffleStrategy());
+        Lotto lotto = Lotto.of(new NoShuffleStrategy());
 
         assertThat(lotto.prize(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7)))
             .isEqualTo(Winning.FIRST.amount());
