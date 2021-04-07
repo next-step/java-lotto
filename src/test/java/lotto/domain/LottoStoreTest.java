@@ -1,0 +1,56 @@
+package lotto.domain;
+
+import lotto.domain.place.LottoFirstPlace;
+import lotto.domain.place.LottoPlaces;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class LottoStoreTest {
+
+  private LottoStore store;
+  private List<LottoNumber> winningLottoNumbers;
+
+  @BeforeEach
+  void setUp() {
+    winningLottoNumbers = IntStream.rangeClosed(1, 6)
+            .mapToObj(LottoNumber::generate)
+            .collect(Collectors.toList());
+
+    store = LottoStore.open(() -> winningLottoNumbers);
+  }
+
+  @Test
+  @DisplayName("로또 판매점을 생성한다.")
+  void open() {
+    // given
+
+    // when
+
+    // then
+    assertThat(store).isNotNull();
+  }
+
+  @Test
+  @DisplayName("소비자가 건내준 로또와 당첨 로또 번호와 비교하여 불변 객체로 반환한다.")
+  void exchange() {
+    // given
+    final List<LottoNumber> consumer = IntStream.rangeClosed(1, 6)
+            .mapToObj(LottoNumber::generate)
+            .collect(Collectors.toList());
+    LottoTicket lottoTicket = LottoTicket.toBuy(3000, () -> consumer);
+
+    // when
+    LottoPlaces lottoPlace = store.exchange(lottoTicket).getLottoPlaces();
+
+    // then
+    assertThat(lottoPlace.getLottoPlaces().get(3))
+            .isEqualTo(LottoFirstPlace.create().win().win().win());
+  }
+}
