@@ -11,18 +11,22 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     public static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<LottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static LottoNumbers of(String numbers) {
+        return of(Arrays.stream(numbers.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
+    }
+
+    public static LottoNumbers of(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 " + LOTTO_NUMBERS_SIZE + "개 이어야 합니다.");
         }
         if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 중복 될 수 없습니다.");
         }
-        this.numbers = numbers.stream().sorted().map(LottoNumber::new).collect(Collectors.toList());
-    }
-
-    public LottoNumbers(String numbers) {
-        this(Arrays.stream(numbers.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
+        return new LottoNumbers(numbers.stream().sorted().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public int matchedCount(LottoNumbers lottoNumbers) {

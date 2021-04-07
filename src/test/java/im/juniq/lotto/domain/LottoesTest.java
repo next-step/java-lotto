@@ -42,7 +42,7 @@ class LottoesTest {
         }
 
         assertThat(new Lottoes(10, shuffleStrategy,
-            Arrays.asList(new LottoNumbers("1,2,3,4,5,6"), new LottoNumbers("1,2,3,4,5,6"))))
+            Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6"))))
             .usingRecursiveComparison().isEqualTo(new Lottoes(lottoes));
     }
 

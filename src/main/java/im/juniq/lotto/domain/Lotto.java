@@ -16,17 +16,17 @@ public class Lotto {
     public Lotto() {
         List<Integer> baseNumbers = makeBaseNumbers();
         new NormalShuffleStrategy().shuffle(baseNumbers);
-        lottoNumbers = new LottoNumbers(pickupNumbers(baseNumbers));
+        lottoNumbers = LottoNumbers.of(pickupNumbers(baseNumbers));
     }
 
     public Lotto(ShuffleStrategy shuffleStrategy) {
         List<Integer> baseNumbers = makeBaseNumbers();
         shuffleStrategy.shuffle(baseNumbers);
-        lottoNumbers = new LottoNumbers(pickupNumbers(baseNumbers));
+        lottoNumbers = LottoNumbers.of(pickupNumbers(baseNumbers));
     }
 
     public Lotto(String lotto) {
-        lottoNumbers = new LottoNumbers(
+        lottoNumbers = LottoNumbers.of(
             Arrays.stream(lotto.split(",")).map(Integer::valueOf).collect(Collectors.toList()));
     }
 

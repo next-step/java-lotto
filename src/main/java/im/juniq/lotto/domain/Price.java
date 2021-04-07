@@ -7,15 +7,19 @@ public class Price {
     private final int price;
 
     public Price(int price) {
-        checkPrice(price);
         this.price = price;
     }
 
-    public Price(String price) {
-        this(Integer.parseInt(price));
+    public static Price of(String price) {
+        return of(Integer.parseInt(price));
     }
 
-    private void checkPrice(int price) {
+    public static Price of(int price) {
+        checkPrice(price);
+        return new Price(price);
+    }
+
+    private static void checkPrice(int price) {
         if (price % LOTTO_PRICE != 0) {
             throw new RuntimeException("금액은 " + LOTTO_PRICE + "원 단위로 입력해주세요.");
         }

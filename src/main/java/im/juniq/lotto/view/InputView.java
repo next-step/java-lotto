@@ -12,13 +12,13 @@ public class InputView {
     public static Price purchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return new Price(scanner.next());
+        return Price.of(scanner.next());
     }
 
     public static LottoNumbers winningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return new LottoNumbers(scanner.next());
+        return LottoNumbers.of(scanner.next());
     }
 
     public static LottoNumber bonusNumber() {
@@ -34,7 +34,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         List<LottoNumbers> list = new ArrayList<>();
         for (int i = 0; i < manualLottoesCount; i++) {
-            list.add(new LottoNumbers(scanner.next()));
+            list.add(LottoNumbers.of(scanner.next()));
         }
         return list;
     }

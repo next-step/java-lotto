@@ -40,7 +40,7 @@ class LotteryMachineTest {
     void buyLottoWithManual() {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
         LotteryMachine lotteryMachine = LotteryMachine.withManualNumbers(3000,
-            Collections.singletonList(new LottoNumbers("1,2,3,4,5,6")), shuffleStrategy);
+            Collections.singletonList(LottoNumbers.of("1,2,3,4,5,6")), shuffleStrategy);
         List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             lottoes.add(new Lotto(shuffleStrategy));
