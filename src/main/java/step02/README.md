@@ -59,10 +59,21 @@
 - ## OutCome.java
 
   - field
+    - private final Lottos lottos;
   - constructor
-    - public OutCome(int money, Lottos lottos, Lotto winningNumber, Number bonus);
+    - public Outcome(Lottos lottos);
   - method
-    - private GradeEnum grade(Lotto lotto);
-    - List<GradeEnum> match();
-    - Map<GradeEnum, Integer> statistic();
-    - float profit(int income);
+    - Map<GradeEnum, Integer> statistic(Lottos winningNumber, Number bonus);
+
+- ## ResultCalculator
+  - field
+    - private final int money
+    - private final int total;
+  - constructor
+    - ResultCalculator(int money, int total);
+    - ResultCalculator(int money);
+  - method
+    - calcTotal(Map<GradeEnum, Integer> result);
+      - total 값 계산
+    - profit();
+      - 수익율 계산
