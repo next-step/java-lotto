@@ -15,10 +15,11 @@ public class LottoPlaces {
 
   public static LottoPlaces create() {
     List<LottoPlace> list = Arrays.asList(
-              LottoFirstPlace.create()
-            , LottoSecondPlace.create()
+              LottoFourthPlace.create()
             , LottoThirdPlace.create()
-            , LottoFourthPlace.create());
+            , LottoSecondPlace.create()
+            , LottoFirstPlace.create()
+    );
     return new LottoPlaces(list);
   }
 
@@ -35,6 +36,13 @@ public class LottoPlaces {
 
   public List<LottoPlace> getLottoPlaces() {
     return lottoPlaces;
+  }
+
+  public long totalWinMoney() {
+    return lottoPlaces.stream()
+            .map(LottoPlace::getTotalMoney)
+            .reduce(Long::sum)
+            .orElse(0L);
   }
 
   @Override

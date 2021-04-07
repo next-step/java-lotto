@@ -3,8 +3,8 @@ package lotto.domain.place;
 import java.util.Objects;
 
 public class LottoFirstPlace extends LottoPlace {
-  private static int WIN_MONEY = 2_000_000_000;
-  private static int MATCHED = 6;
+  private static final long WIN_MONEY = 2_000_000_000;
+  private static final int MATCHED = 6;
 
   protected LottoFirstPlace(int count) {
     super(count);
@@ -21,11 +21,16 @@ public class LottoFirstPlace extends LottoPlace {
 
   @Override
   public boolean matchedLottoNumberCount(int matched) {
-    return matched == MATCHED;
+    return matched == getMatched();
   }
 
   @Override
-  protected int getWinMoney() {
+  public int getMatched() {
+    return MATCHED;
+  }
+
+  @Override
+  public long getWinMoney() {
     return WIN_MONEY;
   }
 

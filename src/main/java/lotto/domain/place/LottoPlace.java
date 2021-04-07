@@ -8,15 +8,16 @@ public abstract class LottoPlace {
   }
 
   public abstract LottoPlace win();
+  public abstract int getMatched();
+  public abstract long getWinMoney();
   public abstract boolean matchedLottoNumberCount(int matched);
   public abstract boolean equals(Object o);
   public abstract int hashCode();
   public abstract String toString();
 
 
-  protected abstract int getWinMoney();
 
-  public int getTotalMoney() {
+  public long getTotalMoney() {
     return getWinMoney() * count;
   }
 
