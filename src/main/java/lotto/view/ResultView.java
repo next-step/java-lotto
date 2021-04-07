@@ -19,11 +19,11 @@ public class ResultView {
     private static final String PLUS_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final String MINUS_PROFIT_RATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void purchaseTickets(int manualNumberOfTicket, int autoNumberOfTickets) {
+    public void purchaseTickets(int manualNumberOfTicket, int autoNumberOfTickets) {
         System.out.printf((GOT_TICKETS) + "%n", manualNumberOfTicket, autoNumberOfTickets);
     }
 
-    public static void lottoNumbers(List<LottoNumber> lottoNumbers) {
+    public void lottoNumbers(List<LottoNumber> lottoNumbers) {
         String numbers = lottoNumbers.stream()
                 .map(LottoNumber::lottoNumber)
                 .map(String::valueOf)
@@ -31,7 +31,7 @@ public class ResultView {
         System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);
     }
 
-    public static void statistics(List<RankCountDto> ranksCount) {
+    public void statistics(List<RankCountDto> ranksCount) {
         System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
@@ -41,7 +41,7 @@ public class ResultView {
         }
     }
 
-    private static String bonus(RankCountDto rank) {
+    private String bonus(RankCountDto rank) {
         if (rank.hasBonus()) {
             return MATCH_BONUS;
         }
@@ -49,11 +49,11 @@ public class ResultView {
         return BLANK;
     }
 
-    public static void positiveProfitRate(double profitRate) {
+    public void positiveProfitRate(double profitRate) {
         System.out.printf((PLUS_PROFIT_RATE) + "%n", profitRate);
     }
 
-    public static void negativeProfitRate(double profitRate) {
+    public void negativeProfitRate(double profitRate) {
         System.out.printf((MINUS_PROFIT_RATE) + "%n", profitRate);
     }
 }

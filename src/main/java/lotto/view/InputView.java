@@ -12,14 +12,14 @@ public class InputView {
     private static final String WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
-    public static String purchaseAmount() {
+    public String purchaseAmount() {
         System.out.println(PURCHASE_AMOUNT);
         String purchaseAmount = scanner.nextLine().trim();
         PreConditionUtil.checkNullOrEmpty(purchaseAmount);
         return purchaseAmount;
     }
 
-    public static String manualLottoTicketCount() {
+    public String manualLottoTicketCount() {
         System.out.println();
         System.out.println(MANUAL_LOTTO_TICKET_COUNT);
         String manualLottoTicketCount = scanner.nextLine().trim();
@@ -27,19 +27,19 @@ public class InputView {
         return manualLottoTicketCount;
     }
 
-    public static void manualLottoNumberPhrase() {
+    public void manualLottoNumberPhrase() {
         System.out.println();
         System.out.println(MANUAL_LOTTO_NUMBERS);
     }
 
-    public static String manualLottoNumbers() {
+    public String manualLottoNumbers() {
         String manualLottoNumbers = scanner.nextLine().trim();
         PreConditionUtil.checkNullOrEmpty(manualLottoNumbers);
         return manualLottoNumbers;
     }
 
 
-    public static String winningNumbers() {
+    public String winningNumbers() {
         System.out.println();
         System.out.println(WINNING_NUMBERS);
         String winningNumbers = scanner.nextLine().trim();
@@ -47,7 +47,7 @@ public class InputView {
         return winningNumbers;
     }
 
-    public static String bonusBall() {
+    public String bonusBall() {
         System.out.println();
         System.out.println(BONUS_BALL);
         String bonusBall = scanner.nextLine().trim();
