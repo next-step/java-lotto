@@ -37,4 +37,20 @@ class WinningStatusTest {
                 .hasMessageContaining("음수값이 입력되었습니다.");
 
     }
+
+    @DisplayName("WinningStatus 인스턴스가 소유한 매칭 카운트를 반환하는지 테스트")
+    @Test
+    void 반환_카운트() {
+        // given
+        int expected = 3;
+        boolean matchBonus = false;
+
+        // when
+        WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
+        int actual = winningStatus.getCountOfMatch();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+
+    }
 }
