@@ -11,7 +11,7 @@ public class Prize implements Comparable<Prize> {
     private final int prize;
 
     public Prize(Map.Entry<WinningRank, Integer> rank) {
-        this(rank.getKey().prize().prize() * rank.getValue());
+        this(rank.getKey().multiply(rank.getValue()));
     }
 
     public Prize(int prize) {
@@ -27,6 +27,10 @@ public class Prize implements Comparable<Prize> {
         if (BOUND_MIN > prize) {
             throw new IllegalArgumentException(CHECK_PRIZE_BOUND);
         }
+    }
+
+    public int multiply(Integer count) {
+        return this.prize * count;
     }
 
     @Override

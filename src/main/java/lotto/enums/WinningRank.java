@@ -63,6 +63,10 @@ public enum WinningRank {
         return prize;
     }
 
+    public int multiply(Integer count) {
+        return this.prize.multiply(count);
+    }
+
     public MatchedCount matchedCount() {
         return matchedCount;
     }
