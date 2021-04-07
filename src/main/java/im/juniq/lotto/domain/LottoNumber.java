@@ -8,16 +8,20 @@ public class LottoNumber {
     private static final int LAST_LOTTO_NUMBER = 45;
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
+    public static LottoNumber of(int number) {
         if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
                 "로또 번호는 " + FIRST_LOTTO_NUMBER + " ~ " + LAST_LOTTO_NUMBER + " 범위 안이어야 합니다.");
         }
-        this.number = number;
-    }
-
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
+        return new LottoNumber(number);
     }
 
     @Override

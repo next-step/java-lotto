@@ -8,7 +8,7 @@ public class WinningNumbers {
     private final LottoNumbers lottoNumbers;
 
     public WinningNumbers(List<Integer> numbers, int bonusNumber) {
-        this(LottoNumbers.of(numbers), new LottoNumber(bonusNumber));
+        this(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
     }
 
     public WinningNumbers(LottoNumbers numbers, LottoNumber bonusNumber) {
