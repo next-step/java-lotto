@@ -30,4 +30,7 @@ public final class Money {
     }
 
 
+    public final boolean isAvailablePurchase(int itemAmount, int purchaseCount) {
+        return money >= (itemAmount * purchaseCount);
+    }
 }
