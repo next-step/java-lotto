@@ -27,24 +27,17 @@ public class Lottoes implements Iterable<Lotto> {
     private static List<Lotto> makeLottoes(int numberOfAutoCreated, ShuffleStrategy shuffleStrategy,
             List<LottoNumbers> manualLottoes) {
         List<Lotto> lottoes = new ArrayList<>();
-        for (int i = 0; i < numberOfAutoCreated; i++) {
-            lottoes.add(Lotto.from(shuffleStrategy));
-        }
         for (LottoNumbers lottoNumbers : manualLottoes) {
             lottoes.add(Lotto.from(lottoNumbers));
+        }
+        for (int i = 0; i < numberOfAutoCreated; i++) {
+            lottoes.add(Lotto.from(shuffleStrategy));
         }
         return lottoes;
     }
 
     public int numberOfLottoesMatched(Winning winning, WinningNumbers winningNumbers) {
-        return lottoes.stream().mapToInt(lotto -> countMatchedLottoes(winning, lotto, winningNumbers)).sum();
-    }
-
-    private int countMatchedLottoes(Winning winning, Lotto lotto, WinningNumbers winningNumbers) {
-        if (lotto.winning(winningNumbers) == winning) {
-            return 1;
-        }
-        return 0;
+        return (int) lottoes.stream().filter(lotto -> lotto.matchedWinning(winningNumbers, winning)).count();
     }
 
     public double yield(WinningNumbers winningNumbers, Price price) {

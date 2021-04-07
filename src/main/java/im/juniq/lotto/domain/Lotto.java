@@ -1,5 +1,7 @@
 package im.juniq.lotto.domain;
 
+import static im.juniq.lotto.domain.LottoType.MANUAL;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,11 +30,11 @@ public class Lotto {
     }
 
     public static Lotto from(String lotto) {
-        return Lotto.of(LottoNumbers.from(lotto), LottoType.MANUAL);
+        return Lotto.of(LottoNumbers.from(lotto), MANUAL);
     }
 
     public static Lotto from(LottoNumbers lottoNumbers) {
-        return of(lottoNumbers, LottoType.MANUAL);
+        return of(lottoNumbers, MANUAL);
     }
 
     private static Lotto of(LottoNumbers lottoNumbers, LottoType lottoType) {
@@ -75,6 +77,10 @@ public class Lotto {
     }
 
     public boolean isManual() {
-        return LottoType.isManual(lottoType);
+        return lottoType.equals(MANUAL);
+    }
+
+    public boolean matchedWinning(WinningNumbers winningNumbers, Winning winning) {
+        return winning.equals(winning(winningNumbers));
     }
 }
