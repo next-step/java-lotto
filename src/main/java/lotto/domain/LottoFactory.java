@@ -4,8 +4,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
@@ -13,49 +15,83 @@ import static lotto.domain.LottoNumber.UPPER_LOTTONUMBER_BOUND;
 public class LottoFactory {
 
     private static LottoStrategy lottoStrategy; // 로또 생성 전략
+    public static final LottoNumbers defaultLottoNumbers; // 1~45개의 번호를 갖는 기본 로또
 
-    public static List<LottoNumber> defaultLottoNumbers = new ArrayList<>(); // 1~45개의 번호를 갖는 기본 로또
+    static {
+        Set<LottoNumber> lottoNumberSet = new LinkedHashSet<>();
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= UPPER_LOTTONUMBER_BOUND; i++) {
+            lottoNumberSet.add(new LottoNumber(i));
+        }
+        defaultLottoNumbers = new LottoNumbers(lottoNumberSet);
+    }
 
     public static void setLottoStrategy(LottoStrategy strategy) {
         lottoStrategy = strategy;
     }
 
-    public static void defaultLottoNumbers() {
-        for (int i = LOWER_LOTTONUMBER_BOUND; i <= UPPER_LOTTONUMBER_BOUND; i++) {
-            defaultLottoNumbers.add(new LottoNumber(i));
-        }
-    }
-
     /*
-    * 설정해준 전략대로 로또를 생성한다.
-    * */
+     * 설정해준 전략대로 로또를 생성한다.
+     * */
     public static Lotto lotto() {
-        return new Lotto(lottoStrategy.makeLotto(defaultLottoNumbers));
+        return lottoStrategy.makeLotto();
     }
 
     /*
-    * 원하는 갯수만큼의 로또들을 생성한다.
-    * */
-    public static Lottos lottos(int lottoCount) {
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(lotto());
-        }
-        Lottos lottos = new Lottos(lottoList);
+     * 원하는 갯수만큼의 로또들을 자동으로 생성한다.
+     * */
+    public static Lottos lottos(int total) {
+        Lottos lottos = new Lottos(lottoList(total));
         return lottos;
     }
 
     /*
-    * 당첨번호와 보너스볼을 가지는 당첨번호를 생성한다.
-    * */
-    public static WinningNumbers winning(Set<LottoNumber> winningNumber, LottoNumber bonusNumber) {
-        return new WinningNumbers(new LottoNumbers(winningNumber), bonusNumber);
+     * 수동과 자동을 섞은 로또를 생성한다.
+     * */
+    public static Lottos mixLottos(BuyNumber buyNumber, ArrayList<ArrayList<Integer>> numbers) {
+        List<Lotto> lottoList = new ArrayList<>();
+        // 수동으로 생성한다.
+        if(buyNumber.hasManual()) {
+            lottoList.addAll(lottoList(numbers));
+        }
+
+        // 자동으로 생성한다.
+        setLottoStrategy(new AutoLottoStrategy());
+        lottoList.addAll(lottoList(buyNumber.getAutoNumber()));
+        return new Lottos(lottoList);
     }
 
     /*
-    * 로또들과 당첨번호를 토대로 통계치를 계산해주는 로또통계를 생성한다.
-    * */
+     * 숫자만큼의 로또 리스트를 생성한다.
+     * */
+    private static List<Lotto> lottoList(int num) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            lottoList.add(lotto());
+        }
+        return lottoList;
+    }
+
+
+    private static List<Lotto> lottoList(ArrayList<ArrayList<Integer>> numbers) {
+        return numbers.stream()
+                .map(LottoNumbers::of)
+                .map(Lotto::new)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /*
+     * 당첨번호와 보너스볼을 가지는 당첨번호를 생성한다.
+     * */
+    public static WinningNumbers winning(ArrayList<Integer> winningNumber, int bonusNumber) {
+        return new WinningNumbers(LottoNumbers.of(winningNumber), new LottoNumber(bonusNumber));
+    }
+
+    /*
+     * 로또들과 당첨번호를 토대로 통계치를 계산해주는 로또통계를 생성한다.
+     * */
     public static WinningStatistics winningStatistics(Lottos lottos, WinningNumbers winningNumbers) {
         return new WinningStatistics(lottos, winningNumbers);
     }
+
+
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
+import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -37,6 +38,18 @@ public class WinningNumbersTest {
         //then
         assertThat(winning).isEqualTo(new WinningNumbers(numbers));
         assertThat(bonusWinning).isEqualTo(new WinningNumbers(numbers, bonusNumber));
+    }
+
+    @Test
+    void validLottoSize() {
+        //given
+        winningNumbers.remove(new LottoNumber(LOTTO_SIZE));
+        LottoNumbers testLottoNumbers = new LottoNumbers(winningNumbers);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            WinningNumbers testWinningNumbers = new WinningNumbers(testLottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

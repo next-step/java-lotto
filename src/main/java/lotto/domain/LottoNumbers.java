@@ -3,10 +3,10 @@
 * */
 package lotto.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toCollection;
 import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
 
 public class LottoNumbers {
@@ -15,15 +15,24 @@ public class LottoNumbers {
     private Set<LottoNumber> lottoNumberSet = new LinkedHashSet<>();
 
     public LottoNumbers(Set<LottoNumber> lottoNumberSet) {
-        if(hasLottoSize(lottoNumberSet)) {
-            this.lottoNumberSet = lottoNumberSet;
-        }
+        this.lottoNumberSet = lottoNumberSet;
     }
 
     /*
-    * 6개의 번호를 가져야한다.
+     * integer 형태의 숫자번호들을 LottoNumbers로 포장한다
+     * */
+    public static LottoNumbers of(ArrayList<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return new LottoNumbers(lottoNumbers);
+    }
+
+
+    /*
+    * 6개의 번호를 가지는지 확인한다.
     * */
-    public boolean hasLottoSize(Set<LottoNumber> lottoNumberSet) {
+    public boolean hasLottoSize() {
         if (lottoNumberSet.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ILLEGAL_LOTTO_SIZE);
         }
@@ -47,6 +56,25 @@ public class LottoNumbers {
         return lottoNumberSet.contains(checkNumber);
     }
 
+    public void shuffleNumbers() {
+        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumberSet);
+        Collections.shuffle(lottoNumberList);
+        lottoNumberSet = new LinkedHashSet<>(lottoNumberList);
+    }
+
+    /*
+    * 일정 개수만큼의 번호를 가져온다.
+    * */
+    public LottoNumbers takeNumbers(int takeNumber) {
+        return new LottoNumbers(lottoNumberSet.stream()
+                .limit(takeNumber)
+                .collect(toCollection(LinkedHashSet::new)));
+    }
+
+    public int size() {
+        return lottoNumberSet.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,4 +92,6 @@ public class LottoNumbers {
     public String toString() {
         return String.valueOf(lottoNumberSet);
     }
+
+
 }

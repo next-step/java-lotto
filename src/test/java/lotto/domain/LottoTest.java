@@ -9,6 +9,7 @@ import java.util.Set;
 import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -32,26 +33,35 @@ public class LottoTest {
     }
 
     @Test
+    void validLottoSize() {
+        //given
+        numbers.remove(new LottoNumber(LOTTO_SIZE));
+        LottoNumbers testLottoNumbers = new LottoNumbers(numbers);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            Lotto testLotto = new Lotto(testLottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void containsTest() {
         //given
-        Set<LottoNumber> testNumbers = new LinkedHashSet<>();
-        Set<LottoNumber> zeroMatches = new LinkedHashSet<>();
+        int matchNum = 5;
+        Set<LottoNumber> matchNumbers = new LinkedHashSet<>();
         for (int i = LOWER_LOTTONUMBER_BOUND + 1; i <= LOTTO_SIZE + 1; i++) {
-            testNumbers.add(new LottoNumber(i));
-            zeroMatches.add(new LottoNumber(LOTTO_SIZE + i + 10));
+            matchNumbers.add(new LottoNumber(i));
         }
-
 
         //when
         int allCorrect = lotto.contains(lottoNumbers);
-        int fiveCorrect = lotto.contains(new LottoNumbers(testNumbers));
-        int zeroCorrect = lotto.contains(new LottoNumbers(zeroMatches));
+        int fiveCorrect = lotto.contains(new LottoNumbers(matchNumbers));
 
         //then
         assertThat(allCorrect).isEqualTo(LOTTO_SIZE);
-        assertThat(fiveCorrect).isEqualTo(5);
-        assertThat(zeroCorrect).isEqualTo(0);
+        assertThat(fiveCorrect).isEqualTo(matchNum);
     }
+
 
     @Test
     void containBounsTest() {

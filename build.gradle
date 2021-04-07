@@ -15,6 +15,7 @@ dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
     // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.3.3'
+    testImplementation('org.mockito:mockito-inline:3.4.0') //MockeStatic 이용
 }
 
 test {

@@ -13,11 +13,15 @@ public class WinningNumbers {
     private LottoNumber bonusNumber;
 
     public WinningNumbers(LottoNumbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+        if (winningNumbers.hasLottoSize()) {
+            this.winningNumbers = winningNumbers;
+        }
     }
 
     public WinningNumbers(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        this.winningNumbers = winningNumbers;
+        if (winningNumbers.hasLottoSize()){
+            this.winningNumbers = winningNumbers;
+        }
         if (canHaveBonus(bonusNumber)) {
             this.bonusNumber = bonusNumber;
         }
@@ -37,7 +41,7 @@ public class WinningNumbers {
      * 로또 당첨 여부를 판단하여 Rank를 반환한다
      * */
     public Rank matches(Lotto lotto) {
-        return Rank.matchRank(lotto.contains(winningNumbers), lotto.containsBouns(bonusNumber));
+        return Rank.rank(lotto.contains(winningNumbers), lotto.containsBouns(bonusNumber));
     }
 
     @Override

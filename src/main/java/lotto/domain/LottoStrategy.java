@@ -3,10 +3,8 @@
  * */
 package lotto.domain;
 
-import java.util.List;
-
 @FunctionalInterface
 public interface LottoStrategy {
 
-    LottoNumbers makeLotto(List<LottoNumber> lottoNumbers);
+    Lotto makeLotto();
 }

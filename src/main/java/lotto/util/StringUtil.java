@@ -3,8 +3,7 @@ package lotto.util;
 import java.util.Arrays;
 
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
-import static lotto.util.Message.ILLEGAL_LOTTO_SIZE;
-import static lotto.util.Message.OVERLAP_NUMBER;
+import static lotto.util.Message.*;
 
 public class StringUtil {
 
@@ -22,6 +21,19 @@ public class StringUtil {
                 .distinct()
                 .count() != result.length) {
             throw new IllegalArgumentException(OVERLAP_NUMBER);
+        }
+        return true;
+    }
+
+    public static int parseInt(String input) {
+        int result = Integer.parseInt(input);
+        validInt(result);
+        return result;
+    }
+
+    private static boolean validInt(int input) {
+        if(input < 0) {
+            throw new IllegalArgumentException(ILLEGAL_NEGATIVE_NUMBER);
         }
         return true;
     }

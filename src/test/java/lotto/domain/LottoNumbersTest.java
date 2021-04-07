@@ -3,9 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static lotto.domain.LottoNumber.LOWER_LOTTONUMBER_BOUND;
 import static lotto.domain.LottoNumbers.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -35,10 +37,11 @@ public class LottoNumbersTest {
     void validLottoSize() {
         //given
         lottoNumberSet.remove(new LottoNumber(LOTTO_SIZE));
+        LottoNumbers testLottoNumbers = new LottoNumbers(lottoNumberSet);
 
         //when, then
         assertThatThrownBy(() -> {
-            LottoNumbers testLottoNumbers = new LottoNumbers(lottoNumberSet);
+            testLottoNumbers.hasLottoSize();
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -67,8 +70,34 @@ public class LottoNumbersTest {
         //when, then
         assertThat(lottoNumbers.containsOne(containNumber)).isTrue();
         assertThat(lottoNumbers.containsOne(notInNumber)).isFalse();
+    }
+
+    @Test
+    void takeNumbersTest() {
+        //given
+        int takeNumber = 3;
+
+        //when
+        LottoNumbers testNumbers = lottoNumbers.takeNumbers(takeNumber);
+
+        //then
+        assertThat(testNumbers.size()).isEqualTo(takeNumber);
+    }
 
 
+    @Test
+    void createLottoNumbersFromArrayIntegers() {
+        //given
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = LOWER_LOTTONUMBER_BOUND; i <= LOTTO_SIZE; i++) {
+            numbers.add(i);
+        }
+
+        //when
+        LottoNumbers result = LottoNumbers.of(numbers);
+
+        //then
+        assertThat(result).isEqualTo(lottoNumbers);
     }
 
 }
