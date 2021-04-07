@@ -83,4 +83,18 @@ class LottoNumberTest {
         assertThat(actualLottoNumbers).isEqualTo(expectedLottoNumbers);
     }
 
+    @DisplayName("LottoNumber 인스턴스가 현재 소유한 값을 반환하는지 테스트")
+    @Test
+    void 반환_햔재소유한값() {
+        // given
+        int expected = 1;
+
+        // when
+        LottoNumber lottoNumber = LottoNumber.valueOf(expected);
+        int actual = lottoNumber.getLottoNumber();
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

@@ -23,12 +23,18 @@ public final class InputView {
 
     public final int inputMoneyByClient() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 
     public final int inputPassiveCountByClient() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
+    }
+
+
+    public final String inputPassiveLottoByClient() {
+        System.out.println("수동으로 구매할 로또를 입력해 주세요.");
+        return scanner.nextLine();
     }
 
 
@@ -39,7 +45,7 @@ public final class InputView {
 
     public final int inputBonusLottoNumbersByClient() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.valueOf(scanner.nextLine());
     }
 
 

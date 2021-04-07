@@ -36,8 +36,8 @@ public final class Money {
         }
     }
 
-    public final boolean isAvailablePurchase(int itemAmount, int purchaseCount) {
-        return money >= (itemAmount * purchaseCount);
+    public final boolean isNotAvailablePurchase(int itemAmount, int purchaseCount) {
+        return money < (itemAmount * purchaseCount);
     }
 
     public final int availablePurchaseCount(int itemAmount, PassiveCount passiveCount) {
