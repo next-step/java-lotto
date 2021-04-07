@@ -21,4 +21,8 @@ public final class PassiveCount {
             throw new InputNegativeAmountException();
         }
     }
+
+    public final int getCount() {
+        return count;
+    }
 }

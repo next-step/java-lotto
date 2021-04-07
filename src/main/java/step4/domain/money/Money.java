@@ -42,6 +42,6 @@ public final class Money {
 
     public final int availablePurchaseCount(int itemAmount, PassiveCount passiveCount) {
         validateZeroOrNegative(itemAmount);
-        return (money/itemAmount)-passiveCount;
+        return (money/itemAmount)-passiveCount.getCount();
     }
 }
