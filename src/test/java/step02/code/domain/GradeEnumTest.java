@@ -9,26 +9,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class GradeEnumTest {
   @ParameterizedTest
-  @MethodSource("gradeTestCase")
+  @CsvSource(value = {
+    "6:false:FIRST",
+    "5:true:SECOND",
+    "5:false:THIRD",
+    "4:false:FOURTH",
+    "3:false:FIFTH"
+  }, delimiter = ':')
   @DisplayName("보너스 숫자가 맞을때 2등, 틀릴때 3등 return")
   public void grade(int matched, boolean isMatchBonus, GradeEnum grade) {
     GradeEnum gradeEnum = GradeEnum.fromGrade(matched, isMatchBonus);
 
     assertThat(gradeEnum).isEqualTo(grade);
-  }
-
-  private static Stream<Arguments> gradeTestCase() {
-    return Stream.of(
-      Arguments.of(6, false, GradeEnum.FIRST),
-      Arguments.of(5, true, GradeEnum.SECOND),
-      Arguments.of(5, false, GradeEnum.THIRD),
-      Arguments.of(4, false, GradeEnum.FOURTH),
-      Arguments.of(3, false, GradeEnum.FIFTH)
-    );
   }
 
   @Test
