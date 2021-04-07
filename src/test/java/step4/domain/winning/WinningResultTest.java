@@ -16,10 +16,10 @@ class WinningResultTest {
     @Test
     void 생성() {
         // given
-        Map<Rank, Integer> map = new EnumMap<Rank, Integer>(Rank.class);
+        Map<Rank, Integer> inputMap = new EnumMap<Rank, Integer>(Rank.class);
 
         // when
-        WinningResult winningResult = WinningResult(map);
+        WinningResult winningResult = WinningResult.of(inputMap);
 
         // then
         assertThat(winningResult).isNotNull();
