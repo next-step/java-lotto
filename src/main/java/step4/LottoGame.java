@@ -16,7 +16,7 @@ import step4.view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LottoApplication {
+public final class LottoGame {
     private static final InputView INPUT_VIEW = InputView.getInstance();
     private static final ResultView RESULT_VIEW = ResultView.getInstance();
 

@@ -10,7 +10,6 @@ import java.util.TreeMap;
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> CACHE;
-
     private static final int MINIMUM = 1;
     private static final int MAXIMUM = 45;
 
