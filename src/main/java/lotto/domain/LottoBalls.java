@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGenerator.LOTTO_SIZE;
+import static lotto.exception.Message.SIZE_MESSAGE;
 
 public class LottoBalls {
     private final Set<LottoBall> lottoBalls;
@@ -36,7 +37,7 @@ public class LottoBalls {
 
     private static void validateSize(List<Integer> lottoBallList) {
         if (lottoBallList.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자 개수가 6개가 아닙니다.");
+            throw new IllegalArgumentException(SIZE_MESSAGE);
         }
     }
 

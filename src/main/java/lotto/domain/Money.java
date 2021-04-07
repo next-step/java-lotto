@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.exception.Message.MONEY_MESSAGE;
+
 public class Money {
     public static final int LOTTO_PRICE = 1000;
     private final int money;
@@ -17,7 +19,7 @@ public class Money {
 
     private static void validate(int payment) {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 금액은 1000원 입니다.");
+            throw new IllegalArgumentException(MONEY_MESSAGE);
         }
     }
 

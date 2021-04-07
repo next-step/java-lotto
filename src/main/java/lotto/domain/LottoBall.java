@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.exception.Message.RANGE_MESSAGE;
+
 public class LottoBall implements Comparable<LottoBall> {
 
     public static final int MIN = 1;
@@ -30,7 +32,7 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private static void validate(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException("유효하지 않은 숫자");
+            throw new IllegalArgumentException(RANGE_MESSAGE);
         }
     }
 
