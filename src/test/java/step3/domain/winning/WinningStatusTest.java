@@ -46,7 +46,7 @@ class WinningStatusTest {
 
         // when
         WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
-        int actual = winningStatus.getCountOfMatch();
+        long actual = winningStatus.getCountOfMatch();
 
         assertThat(actual).isEqualTo(expected);
     }

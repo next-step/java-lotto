@@ -4,28 +4,28 @@ import step3.exception.InputNegativeAmountException;
 
 public final class WinningStatus {
 
-    private static final int ZERO = 0;
+    private static final long ZERO = 0;
 
-    private final int countOfMatch;
+    private final long countOfMatch;
     private final boolean matchBonus;
 
-    private WinningStatus(int countOfMatch, boolean matchBonus) {
+    private WinningStatus(long countOfMatch, boolean matchBonus) {
         validateNegative(countOfMatch);
         this.countOfMatch = countOfMatch;
         this.matchBonus = matchBonus;
     }
 
-    public static final WinningStatus from(int countOfMatch, boolean matchBonus) {
+    public static final WinningStatus from(long countOfMatch, boolean matchBonus) {
         return new WinningStatus(countOfMatch, matchBonus);
     }
 
-    private final void validateNegative(int countOfMatch) {
+    private final void validateNegative(long countOfMatch) {
         if(countOfMatch < ZERO) {
             throw new InputNegativeAmountException();
         }
     }
 
-    public final int getCountOfMatch() {
+    public final long getCountOfMatch() {
         return countOfMatch;
     }
 

@@ -52,7 +52,7 @@ public final class WinningLotto {
         return WinningStatus.from(getCountOfMatch(lotto), isIncludeLottoNumber(lotto));
     }
 
-    private final int getCountOfMatch(Lotto lotto) {
+    private final long getCountOfMatch(Lotto lotto) {
         return winningLotto.getCountMatch(lotto);
     }
 

@@ -9,32 +9,32 @@ import java.util.Objects;
 
 public final class WinningResult {
 
-    public static final int ZERO = 0;
+    public static final long ZERO = 0L;
 
-    private final Map<Rank, Integer> winningResult;
+    private final Map<Rank, Long> winningResult;
 
-    private WinningResult(Map<Rank, Integer> winningResult) {
+    private WinningResult(Map<Rank, Long> winningResult) {
         validateNull(winningResult);
         this.winningResult = winningResult;
     }
 
-    public static final WinningResult of(Map<Rank, Integer> winningResult) {
+    public static final WinningResult of(Map<Rank, Long> winningResult) {
         return new WinningResult(winningResult);
     }
 
-    public static final Map<Rank, Integer> values() {
-        Map<Rank,Integer> winningMap = new EnumMap<>(Rank.class);
+    public static final Map<Rank, Long> values() {
+        Map<Rank,Long> winningMap = new EnumMap<>(Rank.class);
         for(Rank rank : Rank.values()) {
             winningMap.put(rank, ZERO);
         }
         return winningMap;
     }
 
-    public final int getWinningCount(Rank rank) {
+    public final long getWinningCount(Rank rank) {
         return winningResult.get(rank);
     }
 
-    private final void validateNull(Map<Rank, Integer> winningResult) {
+    private final void validateNull(Map<Rank, Long> winningResult) {
         if (Objects.isNull(winningResult)) {
             throw new MapNullPointerException();
         }

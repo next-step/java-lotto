@@ -58,8 +58,8 @@ public final class Lotto {
         return lotto.contains(lottoNumber);
     }
 
-    public final int getCountMatch(Lotto anotherLotto) {
-        return (int) lotto.stream()
+    public final long getCountMatch(Lotto anotherLotto) {
+        return lotto.stream()
                 .filter(anotherLotto::isIncludeLottoNumber)
                 .count();
     }

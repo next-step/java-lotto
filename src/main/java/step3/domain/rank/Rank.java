@@ -35,7 +35,7 @@ public enum Rank {
         return valueOf(winningStatus.getCountOfMatch(), winningStatus.getMatchBonus());
     }
 
-    public static final Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static final Rank valueOf(long countOfMatch, boolean matchBonus) {
         Rank rank = Arrays.stream(Rank.values())
                 .filter(eachRank -> eachRank.countOfMatch == countOfMatch)
                 .findFirst()

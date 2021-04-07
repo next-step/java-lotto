@@ -22,7 +22,7 @@ class WinningResultTest {
     @Test
     void 생성() {
         // given
-        Map<Rank, Integer> inputMap = new EnumMap<>(Rank.class);
+        Map<Rank, Long> inputMap = new EnumMap<>(Rank.class);
 
         // when
         WinningResult winningResult = WinningResult.of(inputMap);
@@ -35,7 +35,7 @@ class WinningResultTest {
     @Test
     void 검증_Null() {
         // given
-        Map<Rank, Integer> inputMap = null;
+        Map<Rank, Long> inputMap = null;
 
         // when and then
         assertThatThrownBy(() -> WinningResult.of(inputMap))
@@ -49,7 +49,7 @@ class WinningResultTest {
     void 반환_초기값() {
 
         // when
-        Map<Rank, Integer> actual = WinningResult.values();
+        Map<Rank, Long> actual = WinningResult.values();
 
         // when and then
         assertAll(
@@ -67,17 +67,17 @@ class WinningResultTest {
     @DisplayName("WinningResult 인스턴스가 당첨횟수값 반환 여부 테스트")
     @ParameterizedTest(name = "루프 : {index} / 첫번째 값 : {0} / 두번째 값 : {1}")
     @MethodSource("provideRankValuesAndWinningCount")
-    void 반환_당첨횟수(Rank rank, int expected) {
+    void 반환_당첨횟수(Rank rank, long expected) {
         // given
-        Map<Rank, Integer> winningMap = WinningResult.values();
-        int value = 0;
+        Map<Rank, Long> winningMap = WinningResult.values();
+        long value = 0;
         for (Rank initRank : Rank.values()) {
             winningMap.put(initRank, winningMap.get(initRank) + (++value));
         }
 
         // when
         WinningResult winningResult = WinningResult.of(winningMap);
-        int actual = winningResult.getWinningCount(rank);
+        long actual = winningResult.getWinningCount(rank);
 
         // then
         assertThat(actual).isEqualTo(expected);
