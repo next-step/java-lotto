@@ -7,9 +7,13 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
     private final LottoNumbers lottoNumbers;
 
-    public WinningNumbers(LottoNumbers numbers, LottoNumber bonusNumber) {
+    private WinningNumbers(LottoNumbers numbers, LottoNumber bonusNumber) {
         this.lottoNumbers = numbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static WinningNumbers of(List<Integer> numbers, int bonusNumber) {
+        return of(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
     }
 
     public static WinningNumbers of(LottoNumbers numbers, LottoNumber bonusNumber) {
@@ -18,10 +22,6 @@ public class WinningNumbers {
         }
 
         return new WinningNumbers(numbers, bonusNumber);
-    }
-
-    public static WinningNumbers of(List<Integer> numbers, int bonusNumber) {
-        return of(LottoNumbers.of(numbers), LottoNumber.of(bonusNumber));
     }
 
     public int matchedCount(LottoNumbers lottoNumbers) {

@@ -8,9 +8,9 @@ import im.juniq.lotto.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        LotteryMachine lotteryMachine = LotteryMachine.withManualNumbers(InputView.purchaseAmount(), InputView.manualLottoes());
+        LotteryMachine lotteryMachine = LotteryMachine.of(InputView.purchaseAmount(), InputView.manualLottoes());
         ResultView.lottoes(lotteryMachine.lottoes());
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.winningNumbers(), InputView.bonusNumber());
+        WinningNumbers winningNumbers = WinningNumbers.of(InputView.winningNumbers(), InputView.bonusNumber());
         ResultView.winningStatus(lotteryMachine.lottoes(), winningNumbers, lotteryMachine.price());
     }
 }
