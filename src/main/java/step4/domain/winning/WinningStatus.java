@@ -4,6 +4,8 @@ import step4.exception.InputNegativeAmountException;
 
 public final class WinningStatus {
 
+    public static final int ZERO = 0;
+
     private final int countOfMatch;
     private final boolean matchBonus;
 
@@ -18,12 +20,16 @@ public final class WinningStatus {
     }
 
     private final void validateNegative(int countOfMatch) {
-        if (countOfMatch < 0) {
+        if (countOfMatch < ZERO) {
             throw new InputNegativeAmountException();
         }
     }
 
     public final int getCountOfMatch() {
         return countOfMatch;
+    }
+
+    public final boolean getMatchBonus() {
+        return matchBonus;
     }
 }
