@@ -27,6 +27,7 @@ public class InputView {
     private String getStringInput() {
         String winningNumbers;
         try {
+            scanner.nextLine();
             winningNumbers = scanner.nextLine();
         } catch (Exception e) {
             throw new IllegalArgumentException("input valid number");
