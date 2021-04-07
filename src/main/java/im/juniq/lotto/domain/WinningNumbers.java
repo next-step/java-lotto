@@ -1,22 +1,34 @@
 package im.juniq.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
-	private final List<Integer> winningNumbers = new ArrayList<>();
-	private final int bonusNumber;
 
-	public WinningNumbers(List<Integer> numbers, int bonusNumber) {
-		winningNumbers.addAll(numbers);
-		this.bonusNumber = bonusNumber;
-	}
+    private final LottoNumber bonusNumber;
+    private final LottoNumbers lottoNumbers;
 
-	public boolean existent(int number) {
-		return winningNumbers.contains(number);
-	}
+    private WinningNumbers(LottoNumbers numbers, LottoNumber bonusNumber) {
+        this.lottoNumbers = numbers;
+        this.bonusNumber = bonusNumber;
+    }
 
-	public boolean matchedBonusNumber(int number) {
-		return bonusNumber == number;
-	}
+    public static WinningNumbers of(List<Integer> numbers, int bonusNumber) {
+        return of(LottoNumbers.from(numbers), LottoNumber.from(bonusNumber));
+    }
+
+    public static WinningNumbers of(LottoNumbers numbers, LottoNumber bonusNumber) {
+        if (numbers.contain(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 중복 될 수 없습니다.");
+        }
+
+        return new WinningNumbers(numbers, bonusNumber);
+    }
+
+    public int matchedCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.matchedCount(lottoNumbers);
+    }
+
+    public boolean matchedBonusNumber(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contain(bonusNumber);
+    }
 }

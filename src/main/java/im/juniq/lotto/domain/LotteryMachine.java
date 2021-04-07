@@ -1,23 +1,37 @@
 package im.juniq.lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LotteryMachine {
-	private final Lottoes lottoes;
-	private final Price price;
 
-	public LotteryMachine(int price) {
-		this(price, new NormalShuffleStrategy());
-	}
+    private final Price price;
+    private final ShuffleStrategy shuffleStrategy;
+    private final List<LottoNumbers> manualLottoes;
 
-	public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
-		this.price = new Price(price);
-		lottoes = new Lottoes(this.price.numberOfLottoPurchased() , shuffleStrategy);
-	}
+    private LotteryMachine(Price price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
+        this.price = price;
+        this.shuffleStrategy = shuffleStrategy;
+        this.manualLottoes = manualLottoes;
+    }
 
-	public Lottoes lottoes() {
-		return lottoes;
-	}
+    public static LotteryMachine of(Price price, List<LottoNumbers> manualLottoes) {
+        return new LotteryMachine(price, manualLottoes, new NormalShuffleStrategy());
+    }
 
-	public Price price() {
-		return price;
-	}
+    public static LotteryMachine of(int price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(Price.from(price), manualLottoes, shuffleStrategy);
+    }
+
+    public static LotteryMachine of(int price, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(Price.from(price), new ArrayList<>(), shuffleStrategy);
+    }
+
+    public Lottoes lottoes() {
+        return Lottoes.of(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
+    }
+
+    public Price price() {
+        return price;
+    }
 }
