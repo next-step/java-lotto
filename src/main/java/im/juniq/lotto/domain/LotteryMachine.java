@@ -1,11 +1,13 @@
 package im.juniq.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryMachine {
 
-    private final Lottoes lottoes;
     private final Price price;
+    private final ShuffleStrategy shuffleStrategy;
+    private final List<LottoNumbers> manualLottoes;
 
     public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
         this(new Price(price), shuffleStrategy);
@@ -13,7 +15,8 @@ public class LotteryMachine {
 
     public LotteryMachine(Price price, ShuffleStrategy shuffleStrategy) {
         this.price = price;
-        lottoes = new Lottoes(this.price.numberOfLottoPurchased(), shuffleStrategy);
+        this.shuffleStrategy = shuffleStrategy;
+        this.manualLottoes = new ArrayList<>();
     }
 
     public LotteryMachine(Price price, List<LottoNumbers> manualLottoes) {
@@ -22,11 +25,12 @@ public class LotteryMachine {
 
     public LotteryMachine(Price price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
         this.price = price;
-        lottoes = new Lottoes(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
+        this.shuffleStrategy = shuffleStrategy;
+        this.manualLottoes = manualLottoes;
     }
 
     public Lottoes lottoes() {
-        return lottoes;
+        return new Lottoes(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
     }
 
     public Price price() {
