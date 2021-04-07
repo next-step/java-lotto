@@ -47,6 +47,19 @@ class LottoesTest {
     }
 
     @Test
+    @DisplayName("자동로또 수동로또 생성 개수 조회")
+    void countLottoType() {
+        NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
+
+        Lottoes lottoes = Lottoes.of(10, shuffleStrategy,
+                Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6")));
+
+        assertThat(lottoes.autoLottoSize()).isEqualTo(8);
+        assertThat(lottoes.manualLottoSize()).isEqualTo(2);
+    }
+
+
+    @Test
     @DisplayName("당첨등수를 기준으로 몇 개가 당첨되었는지 조회")
     void countMatchedLottoes() {
         Lottoes lottoes = Lottoes.of(2, new NoShuffleStrategy());
