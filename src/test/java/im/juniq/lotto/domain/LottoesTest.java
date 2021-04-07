@@ -52,10 +52,12 @@ class LottoesTest {
         Lottoes lottoes = Lottoes.of(2, new NoShuffleStrategy());
 
         assertThat(
-            lottoes.numberOfLottoesMatched(Winning.FIFTH, new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 10)))
+            lottoes.numberOfLottoesMatched(Winning.FIFTH,
+                    WinningNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9), 10)))
             .isEqualTo(2);
         assertThat(
-            lottoes.numberOfLottoesMatched(Winning.FOURTH, new WinningNumbers(Arrays.asList(1, 2, 3, 4, 8, 9), 10)))
+            lottoes.numberOfLottoesMatched(Winning.FOURTH,
+                    WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 8, 9), 10)))
             .isEqualTo(2);
     }
 
@@ -64,14 +66,14 @@ class LottoesTest {
     void calculateYield() {
         Lottoes lottoes = Lottoes.of(1, new NoShuffleStrategy());
 
-        assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Price.of(1000)))
             .isEqualTo(2000000);
-        assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 6), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6), Price.of(1000)))
             .isEqualTo(30000);
-        assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), 8), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7), 8), Price.of(1000)))
             .isEqualTo(1500);
-        assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 7, 8), 6), Price.of(1000)))
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8), 6), Price.of(1000)))
             .isEqualTo(50);
-        assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 6), Price.of(1000))).isEqualTo(5);
+        assertThat(lottoes.yield(WinningNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9), 6), Price.of(1000))).isEqualTo(5);
     }
 }
