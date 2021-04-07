@@ -1,11 +1,14 @@
 package im.juniq.lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PriceTest {
+
     @Test
     void create() {
         assertThatCode(() -> new Price(1000)).doesNotThrowAnyException();

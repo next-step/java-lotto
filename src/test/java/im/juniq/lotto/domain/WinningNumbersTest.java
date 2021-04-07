@@ -1,14 +1,15 @@
 package im.juniq.lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningNumbersTest {
+
     final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @Test
@@ -20,7 +21,8 @@ class WinningNumbersTest {
     @Test
     @DisplayName("보너스번호와 일치하는 숫자인지 확인")
     void matchedBonusNumber() {
-        assertThat(new WinningNumbers(numbers, 7).matchedBonusNumber(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(true);
+        assertThat(new WinningNumbers(numbers, 7).matchedBonusNumber(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7))))
+            .isEqualTo(true);
         assertThat(new WinningNumbers(numbers, 7).matchedBonusNumber(new LottoNumbers(numbers))).isEqualTo(false);
     }
 
