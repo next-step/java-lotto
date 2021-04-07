@@ -1,5 +1,6 @@
 package step4.domain.lotto;
 
+import step4.exception.InputInvalidStringLottoException;
 import step4.exception.LottoSizeMissMatchException;
 
 import java.util.HashSet;
@@ -43,7 +44,7 @@ public final class Lotto {
 
     private static void validateStringFormat(String sentence) {
         if(sentence.split(COMMA_WITH_BLANK).length != SIZE) {
-            throw
+            throw new InputInvalidStringLottoException();
         }
     }
 

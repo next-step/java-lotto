@@ -38,7 +38,7 @@ public final class LottoApplication {
         try {
             return Lotto.of(INPUT_VIEW.inputPassiveLottoByClient());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()+"\n다시 입력해주세요");
             return getPassiveLotto();
         }
     }
