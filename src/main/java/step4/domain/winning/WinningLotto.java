@@ -48,7 +48,16 @@ public final class WinningLotto {
         }
     }
 
-
     public WinningStatus getWinningStatus(Lotto lotto) {
+        return WinningStatus.from(getCountOfMatch(lotto), isIncludeLottoNumber(lotto));
     }
+
+    private final int getCountOfMatch(Lotto lotto) {
+        return winningLotto.getCountMatch(lotto);
+    }
+
+    private final boolean isIncludeLottoNumber(Lotto lotto) {
+        return lotto.isIncludeLottoNumber(bonusLottoNumber);
+    }
+
 }
