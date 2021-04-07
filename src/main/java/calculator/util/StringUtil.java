@@ -1,7 +1,10 @@
 package calculator.util;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public final class StringUtil {
 
@@ -39,5 +42,14 @@ public final class StringUtil {
   private static Matcher getMatcher(String str, String regex) {
     Matcher matcher = Pattern.compile(regex).matcher(str);
     return matcher;
+  }
+
+  public static List<String> splitToList(String str) {
+    return Arrays.stream(defaultBlankString(str).split(","))
+            .collect(Collectors.toList());
+  }
+
+  public static String trim(String str) {
+    return defaultBlankString(str).trim();
   }
 }
