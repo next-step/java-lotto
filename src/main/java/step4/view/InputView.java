@@ -1,8 +1,5 @@
 package step4.view;
 
-import step4.domain.money.Money;
-import step4.domain.winning.WinningLotto;
-
 import java.util.Scanner;
 
 public final class InputView {
@@ -38,7 +35,6 @@ public final class InputView {
     public final String inputPassiveLottoByClient() {
         return scanner.nextLine();
     }
-
 
     public final String inputLottoNumbersByClient() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");

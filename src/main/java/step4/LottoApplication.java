@@ -2,9 +2,12 @@ package step4;
 
 import step4.domain.count.PassiveCount;
 import step4.domain.lotto.Lotto;
+import step4.domain.lotto.LottoNumber;
 import step4.domain.money.Money;
 import step4.domain.shop.LottoShop;
 import step4.domain.winning.WinningCheckMachine;
+import step4.domain.winning.WinningLotto;
+import step4.domain.winning.WinningResult;
 import step4.strategy.LottoRandomShuffleStrategy;
 import step4.strategy.LottoShuffleStrategy;
 import step4.view.InputView;
@@ -35,13 +38,42 @@ public final class LottoApplication {
         RESULT_VIEW.printLottoList(lottos);
 
         WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
+        WinningLotto winningLotto = getWinningLotto();
+        WinningResult winningResult = winningCheckMachine.checkUserLottoAndWinningLotto(lottos, winningLotto);
+    }
+
+
+    private static final WinningLotto getWinningLotto() {
+        try {
+            return WinningLotto.from(getWinningLottoNumbers(), getBonusLottoNumber());
+        } catch (Exception e) {
+            return getWinningLotto();
+        }
+    }
+
+    private static final LottoNumber getBonusLottoNumber() {
+        try {
+            return LottoNumber.valueOf(INPUT_VIEW.inputBonusLottoNumbersByClient());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getBonusLottoNumber();
+        }
+    }
+
+    private static final Lotto getWinningLottoNumbers() {
+        try {
+            return Lotto.of(INPUT_VIEW.inputLottoNumbersByClient());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getWinningLottoNumbers();
+        }
     }
 
     private static final Lotto getPassiveLotto() {
         try {
             return Lotto.of(INPUT_VIEW.inputPassiveLottoByClient());
         } catch (Exception e) {
-            System.out.println(e.getMessage()+"\n다시 입력해주세요");
+            System.out.println(e.getMessage() + "\n다시 입력해주세요");
             return getPassiveLotto();
         }
     }
