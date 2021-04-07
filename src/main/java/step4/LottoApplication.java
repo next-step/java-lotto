@@ -4,6 +4,7 @@ import step4.domain.count.PassiveCount;
 import step4.domain.lotto.Lotto;
 import step4.domain.money.Money;
 import step4.domain.shop.LottoShop;
+import step4.domain.winning.WinningCheckMachine;
 import step4.strategy.LottoRandomShuffleStrategy;
 import step4.strategy.LottoShuffleStrategy;
 import step4.view.InputView;
@@ -32,6 +33,8 @@ public final class LottoApplication {
         LottoShop lottoShop = LottoShop.getInstance();
         lottos.addAll(lottoShop.purchaseLotto(availablePurchaseCount, STRATEGY));
         RESULT_VIEW.printLottoList(lottos);
+
+        WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
     }
 
     private static Lotto getPassiveLotto() {
