@@ -1,27 +1,34 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class LottoGame {
-    private Numbers numbers;
+    public static final int NUMBER_BOUND = 6;
 
-    public LottoGame() {
-        this(new Numbers(new ArrayList<>()));
-    }
+    private final Numbers numbers;
 
     public LottoGame(Numbers numbers) {
         this.numbers = numbers;
     }
 
-    public void makeNumbers() {
-        numbers = NumberGenerator.creation();
+    public HitResult match(WinNumbers winNumbers) {
+        return new HitResult(numbers, winNumbers);
     }
 
     public Numbers getNumbers() {
         return numbers;
     }
 
-    public HitResult lotto(WinNumbers winNumbers) {
-        return new HitResult(numbers, winNumbers);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(numbers, lottoGame.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

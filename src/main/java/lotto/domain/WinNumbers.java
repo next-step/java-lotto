@@ -4,44 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinNumbers {
-    private final static int BONUS_NUMBER_INIT = 0;
-
-    private final List<Integer> winNumbers;
-    private final int bonusNumber;
+    private final Numbers winNumbers;
+    private final Number bonusNumber;
 
     public WinNumbers(String[] winNumbers, int bonusNumber) {
         this.winNumbers = toWinNumbers(winNumbers);
-        this.bonusNumber = bonusNumber;
-    }
-
-    public WinNumbers(List<Integer> winNumbers) {
-        this(winNumbers, BONUS_NUMBER_INIT);
+        this.bonusNumber = Number.of(bonusNumber);
     }
 
     public WinNumbers(List<Integer> winNumbers, int bonusNumber) {
+        this.winNumbers = new Numbers(winNumbers);
+        this.bonusNumber = Number.of(bonusNumber);
+    }
+
+    public WinNumbers(Numbers winNumbers, Number bonusNumber) {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private List<Integer> toWinNumbers(String[] winNumber) {
+    private Numbers toWinNumbers(String[] winNumber) {
         List<Integer> winNumberList = new ArrayList<>();
         for (String number : winNumber) {
+            validateNumberFormat(number);
             winNumberList.add(Integer.parseInt(number));
         }
 
-        return winNumberList;
+        return new Numbers(winNumberList);
+    }
+
+    private void validateNumberFormat(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력해 주세요.");
+        }
     }
 
     public HitCount hitNumberCount(Numbers numbers) {
-        int hitCount = 0;
-        for (int winNumber : this.winNumbers) {
-            hitCount += toInteger(numbers.contains(winNumber));
+        int sumHitCount = winNumbers.sumContainsCount(numbers);
+        if (sumHitCount == Prize.SECOND.getHitCount().getHitCount()) {
+            return new HitCount(sumHitCount, numbers.contains(bonusNumber));
         }
-
-        return new HitCount(hitCount, numbers.contains(bonusNumber));
-    }
-
-    private int toInteger(boolean isContain) {
-        return isContain ? 1 : 0;
+        return new HitCount(sumHitCount);
     }
 }

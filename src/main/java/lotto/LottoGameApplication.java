@@ -1,27 +1,34 @@
 package lotto;
 
-import lotto.domain.HitResults;
-import lotto.domain.LottoGames;
+import lotto.domain.*;
 import lotto.view.HitResultView;
 import lotto.view.InputView;
 import lotto.view.LottoGamesView;
 
+import java.util.List;
+
 public class LottoGameApplication {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        inputView.inputPayMoney();
+        try {
+            InputView inputView = new InputView();
+            inputView.inputPayMoney();
+            Money payMoney = new Money(inputView.getPayMoney());
 
-        LottoGames lottoGames = new LottoGames(inputView.getPayMoney());
-        lottoGames.makeNumbers();
+            List<Numbers> manualNumbers = inputView.inputManualGameNumbers(inputView.inputManualGameCount());
+            LottoShop lottoShop = new LottoShop(payMoney, new DefaultNumberService(manualNumbers));
 
-        LottoGamesView lottoGamesView = new LottoGamesView(lottoGames);
-        lottoGamesView.printLottoGamesNumber();
+            Money autoMoney = payMoney.remainMoney(manualNumbers.size());
+            LottoGamesView lottoGamesView = new LottoGamesView(lottoShop, manualNumbers.size(), autoMoney.lottoGameCount());
+            lottoGamesView.printLottoGamesNumber();
 
-        inputView.inputHitNumbers();
-        inputView.inputHitBonusNumber();
-        HitResults hitResults = lottoGames.start(inputView.winNumbers());
+            inputView.inputHitNumbers();
+            inputView.inputHitBonusNumber();
+            HitResults hitResults = lottoShop.match(inputView.winNumbers());
 
-        HitResultView hitResultView = new HitResultView(hitResults);
-        hitResultView.printLottoResult();
+            HitResultView hitResultView = new HitResultView(hitResults, payMoney);
+            hitResultView.printLottoResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

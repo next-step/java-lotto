@@ -13,7 +13,7 @@ public class HitResultsTest {
     @DisplayName("구입한 금액과 당첨 금액을 비교하여 수익률을 반환한다.")
     @Test
     public void returnRate() {
-        WinNumbers winNumbers = new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinNumbers winNumbers = new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         HitResult game1 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 43, 44, 45)), winNumbers);
         HitResult game2 = new HitResult(new Numbers(Arrays.asList(8, 9, 10, 11, 12, 13)), winNumbers);
@@ -21,14 +21,14 @@ public class HitResultsTest {
         HitResult game4 = new HitResult(new Numbers(Arrays.asList(8, 9, 10, 11, 12, 13)), winNumbers);
         HitResult game5 = new HitResult(new Numbers(Arrays.asList(8, 9, 10, 11, 12, 13)), winNumbers);
 
-        HitResults hitResults = new HitResults(15000);
+        HitResults hitResults = new HitResults();
         hitResults.add(game1);
         hitResults.add(game2);
         hitResults.add(game3);
         hitResults.add(game4);
         hitResults.add(game5);
 
-        assertThat(hitResults.returnRate()).isEqualTo(0.33);
+        assertThat(hitResults.returnRate(new Money(15000))).isEqualTo(0.33);
 
     }
 
@@ -46,7 +46,7 @@ public class HitResultsTest {
         HitResult fourth2 = new HitResult(new Numbers(Arrays.asList(1, 2, 3, 4, 23, 41)), winNumbers);
         HitResult fifth = new HitResult(new Numbers(Arrays.asList(1, 2, 6, 14, 30, 41)), winNumbers);
 
-        HitResults hitResults = new HitResults(5000);
+        HitResults hitResults = new HitResults();
         hitResults.add(first);
         hitResults.add(second);
         hitResults.add(third);

@@ -1,17 +1,39 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
+import static lotto.domain.LottoGame.NUMBER_BOUND;
 
 public class Numbers {
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Numbers(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<Number> nos = new ArrayList<>();
+        for (int number : numbers) {
+            nos.add(Number.of(number));
+        }
+        validate(nos);
+        this.numbers = nos;
     }
 
-    public boolean contains(int number) {
+    private void validate(List<Number> numbers) {
+        Set<Number> numberSet = new HashSet<>(numbers);
+
+        if (numberSet.size() > 0 && numberSet.size() != NUMBER_BOUND) {
+            throw new IllegalArgumentException(String.format(
+                    "중복을 제외한 %d개의 숫자를 입력하세요.",
+                    NUMBER_BOUND));
+        }
+    }
+
+    public boolean contains(Number number) {
         return numbers.contains(number);
+    }
+
+    public int sumContainsCount(Numbers numbers) {
+        return (int) this.numbers.stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     @Override
@@ -29,6 +51,6 @@ public class Numbers {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return String.valueOf(numbers);
     }
 }

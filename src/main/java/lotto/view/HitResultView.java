@@ -2,14 +2,17 @@ package lotto.view;
 
 import lotto.domain.HitCount;
 import lotto.domain.HitResults;
+import lotto.domain.Money;
 import lotto.domain.Prize;
 
 public class HitResultView {
     private final HitResults hitResults;
+    private final Money payMoney;
 
-    public HitResultView(final HitResults hitResults) {
+    public HitResultView(final HitResults hitResults, Money payMoney) {
         printHeader();
         this.hitResults = hitResults;
+        this.payMoney = payMoney;
     }
 
     private void printHeader() {
@@ -27,7 +30,7 @@ public class HitResultView {
         for (Prize prize : Prize.values()) {
             System.out.printf("%s (%,d원)- %d개%n",
                     makeHitCountMessage(prize.getHitCount()),
-                    prize.getPrizeMoney().getHitMoney(),
+                    prize.prizeMoney(),
                     hitResults.countPrize(prize));
         }
     }
@@ -41,6 +44,6 @@ public class HitResultView {
     }
 
     private void printReturnRate() {
-        System.out.printf("총 수익률은 %s 입니다.%n", hitResults.returnRate());
+        System.out.printf("총 수익률은 %s 입니다.%n", hitResults.returnRate(payMoney));
     }
 }

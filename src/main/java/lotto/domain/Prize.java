@@ -39,8 +39,8 @@ public enum Prize {
         throw new IllegalArgumentException("당첨갯수가 당첨상금에 없습니다.");
     }
 
-    public HitMoney getPrizeMoney() {
-        return prizeMoney;
+    public int prizeMoney() {
+        return prizeMoney.intValue();
     }
 
     public HitCount getHitCount() {

@@ -9,7 +9,7 @@ public class HitMoney {
         this.hitMoney = hitMoney;
     }
 
-    public int getHitMoney() {
+    public int intValue() {
         return hitMoney;
     }
 
@@ -26,8 +26,7 @@ public class HitMoney {
         return Objects.hash(hitMoney);
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(hitMoney);
+    public HitMoney sum(int hitMoney) {
+        return new HitMoney(this.hitMoney + hitMoney);
     }
 }
