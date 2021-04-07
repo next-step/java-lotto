@@ -1,7 +1,7 @@
 package step4.domain.money;
 
 import step4.domain.count.PassiveCount;
-import step4.exception.InputNegativeAmountException;
+import step4.exception.InputNumberLessThanZeroException;
 
 public final class Money {
 
@@ -10,7 +10,7 @@ public final class Money {
     private final int money;
 
     private Money(int money) {
-        validateNegative(money);
+        validateRange(money);
         this.money = money;
     }
 
@@ -18,21 +18,9 @@ public final class Money {
         return new Money(money);
     }
 
-    private final int purchaseQuantity(int purchaseAmount) {
-        validateZeroOrNegative(purchaseAmount);
-        return money / purchaseAmount;
-    }
-
-
-    private final void validateNegative(int money) {
-        if (money < ZERO) {
-            throw new InputNegativeAmountException();
-        }
-    }
-
-    private final void validateZeroOrNegative(int money) {
+    private final void validateRange(int money) {
         if (money <= ZERO) {
-            throw new InputNegativeAmountException();
+            throw new InputNumberLessThanZeroException();
         }
     }
 
@@ -41,6 +29,11 @@ public final class Money {
     }
 
     public final int availablePurchaseCount(int purchaseAmount, PassiveCount passiveCount) {
-        return purchaseQuantity(purchaseAmount)-passiveCount.getCount();
+        return purchaseQuantity(purchaseAmount) - passiveCount.getCount();
+    }
+
+    private final int purchaseQuantity(int purchaseAmount) {
+        validateRange(purchaseAmount);
+        return money / purchaseAmount;
     }
 }

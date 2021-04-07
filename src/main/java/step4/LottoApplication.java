@@ -7,12 +7,15 @@ import step4.domain.shop.LottoShop;
 import step4.strategy.LottoRandomShuffleStrategy;
 import step4.strategy.LottoShuffleStrategy;
 import step4.view.InputView;
+import step4.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class LottoApplication {
     private static final InputView INPUT_VIEW = InputView.getInstance();
+    private static final ResultView RESULT_VIEW = ResultView.getInstance();
+
     private static final LottoShuffleStrategy STRATEGY = LottoRandomShuffleStrategy.getInstance();
 
     public static void main(String[] args) {
@@ -26,7 +29,7 @@ public final class LottoApplication {
         int availablePurchaseCount = money.availablePurchaseCount(Lotto.AMOUNT, count);
         LottoShop lottoShop = LottoShop.getInstance();
         lottos.addAll(lottoShop.purchaseLotto(availablePurchaseCount, STRATEGY));
-
+        // RESULT_VIEW.printLottoList(lottos);
     }
 
     private static Lotto getPassiveLotto() {

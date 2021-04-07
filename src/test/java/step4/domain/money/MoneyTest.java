@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.domain.count.PassiveCount;
 import step4.exception.InputNegativeAmountException;
+import step4.exception.InputNumberLessThanZeroException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -31,8 +32,8 @@ class MoneyTest {
 
         // when
         assertThatThrownBy(()-> Money.valueOf(value))
-                .isInstanceOf(InputNegativeAmountException.class)
-                .hasMessageContaining("음수값이 입력되었습니다.");
+                .isInstanceOf(InputNumberLessThanZeroException.class)
+                .hasMessageContaining("0이하의 값이 입력되었습니다.");
     }
 
     @DisplayName("Money 인스턴스가 특정 값을 기준으로 구매할 수 있는지 여부 테스트")
@@ -67,6 +68,7 @@ class MoneyTest {
         // then
         assertThat(actual).isEqualTo(7);
     }
+
 
 
 }
