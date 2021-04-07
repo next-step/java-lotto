@@ -35,9 +35,16 @@ public final class Lotto {
     }
 
     private static final Set<LottoNumber> convertStringToLottoNumberSet(String sentence) {
+        validateStringFormat(sentence);
         return Stream.of(sentence.split(COMMA_WITH_BLANK))
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    private static void validateStringFormat(String sentence) {
+        if(sentence.split(COMMA_WITH_BLANK).length != SIZE) {
+            throw
+        }
     }
 
     private final void validateSize(Set<LottoNumber> lotto) {

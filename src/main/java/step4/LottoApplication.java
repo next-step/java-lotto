@@ -21,6 +21,8 @@ public final class LottoApplication {
     public static void main(String[] args) {
         Money money = getInputMoney();
         PassiveCount count = getPassiveCount(money);
+
+        InputView.printInputPassiveLotto();
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < count.getCount()) {
             lottos.add(getPassiveLotto());
@@ -29,7 +31,7 @@ public final class LottoApplication {
         int availablePurchaseCount = money.availablePurchaseCount(Lotto.AMOUNT, count);
         LottoShop lottoShop = LottoShop.getInstance();
         lottos.addAll(lottoShop.purchaseLotto(availablePurchaseCount, STRATEGY));
-        // RESULT_VIEW.printLottoList(lottos);
+        RESULT_VIEW.printLottoList(lottos);
     }
 
     private static Lotto getPassiveLotto() {

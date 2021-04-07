@@ -31,9 +31,11 @@ public final class InputView {
         return Integer.valueOf(scanner.nextLine());
     }
 
+    public static final void printInputPassiveLotto() {
+        System.out.println("수동으로 구매할 로또를 입력해 주세요.");
+    }
 
     public final String inputPassiveLottoByClient() {
-        System.out.println("수동으로 구매할 로또를 입력해 주세요.");
         return scanner.nextLine();
     }
 

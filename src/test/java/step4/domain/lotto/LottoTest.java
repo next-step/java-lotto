@@ -3,6 +3,7 @@ package step4.domain.lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step4.exception.InputInvalidStringLottoException;
 import step4.exception.LottoSizeMissMatchException;
 
 import java.util.Set;
@@ -60,6 +61,19 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.of(invalidLottoNumbers))
                 .isInstanceOf(LottoSizeMissMatchException.class)
                 .hasMessageContaining("로또 숫자가 맞지 않습니다.");
+
+    }
+
+    @DisplayName("Lotto 인스턴스가 잘못된 문자열을 받았을시에 예외처리 반환 여부 테스트")
+    @Test
+    void 검증_잘못된_문자열() {
+        // given
+        String stringLottoNumbers = "1,2,3,4,5,6";
+
+        // when
+        assertThatThrownBy(()->Lotto.of(stringLottoNumbers))
+                .isInstanceOf(InputInvalidStringLottoException.class)
+                .hasMessageContaining("잘못된 형식의 문자열이 입력되었습니다.");
 
     }
 
