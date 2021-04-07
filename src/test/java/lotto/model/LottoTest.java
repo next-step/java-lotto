@@ -46,6 +46,7 @@ class LottoTest {
     void createNumberTest() {
         assertTrue(testLotto.contain(testNumberA));
     }
+
     @Test
     @DisplayName("create Random Numbers Test")
     void createRandomNumberTest() {
@@ -78,5 +79,15 @@ class LottoTest {
         assertThatThrownBy(() -> testLotto.addNumber(testNumberG))
                 .isInstanceOf(LottoNumbersSizeOverException.class)
                 .hasMessage("Numbers can contain 6 numbers.");
+    }
+
+    @Test
+    @DisplayName("getPrize test ")
+    void getPrizeTest() {
+        testLotto.addNumber(testNumberF);
+        Lotto loseLotto = new Lotto(Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)));
+        assertThat(testLotto.getPrize(testLotto)).isEqualTo(LottoPrize.FIRST);
+        assertThat(loseLotto.getPrize(testLotto)).isEqualTo(null);
+
     }
 }

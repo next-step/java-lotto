@@ -24,7 +24,7 @@ public class Lotto {
 
     public Lotto(String[] numbers) {
         this.numbers = new ArrayList<>();
-        for (String number : numbers ) {
+        for (String number : numbers) {
             addNumber(new Number(number.trim()));
         }
     }
@@ -57,5 +57,16 @@ public class Lotto {
     @Override
     public String toString() {
         return "[" + numbers.stream().map(String::valueOf).collect(Collectors.joining(",")) + ']';
+    }
+
+    public LottoPrize getPrize(Lotto winLotto) {
+        int matchs = 0;
+        for (Number number : numbers) {
+            if (winLotto.numbers.contains(number)) {
+                matchs++;
+            }
+
+        }
+        return LottoPrize.getByMathes(matchs);
     }
 }
