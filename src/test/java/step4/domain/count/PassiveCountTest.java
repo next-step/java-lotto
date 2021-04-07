@@ -35,4 +35,16 @@ class PassiveCountTest {
                 .hasMessageContaining("음수값이 입력되었습니다.");
 
     }
+
+    @DisplayName("PassiveCount 인스턴스 음수 여부 테스트")
+    @Test
+    void 검증_반환() {
+        // given
+        int count = 3;
+
+        // when
+
+
+    }
+
 }
