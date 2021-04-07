@@ -6,6 +6,7 @@ import java.util.Map;
 
 import step02.code.common.InputView;
 import step02.code.common.ResultView;
+import step02.code.domain.Buy;
 import step02.code.domain.GradeEnum;
 import step02.code.domain.Lotto;
 import step02.code.domain.Lottos;
@@ -24,7 +25,7 @@ public class Main {
       passiveLottos.add(Lotto.makeLottoByString(InputView.passiveLotto()));
     }
 
-    Lottos lottos = Lottos.buy(money, passiveLottos);
+    Lottos lottos = Buy.lottos(money, passiveLottos);
     ResultView.myLotto(lottos.lottos(), passiveLottoSize);
 
     Lotto winningNumber = Lotto.makeLottoByString(InputView.winningNumber());
@@ -39,7 +40,7 @@ public class Main {
     Map<GradeEnum, Integer> result = outcome.statistic(winningNumber, bonus);
     
     ResultCalculator resultCalculator = new ResultCalculator(money);
-    
+
     ResultView.result(result);
 
     // 불변 객체로 구현해 보고 싶어서 이런식으로 구현해봤습니다.
