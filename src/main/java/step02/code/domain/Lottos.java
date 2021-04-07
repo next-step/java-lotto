@@ -46,15 +46,13 @@ public class Lottos {
     checkPassive(money, lottos);
     int change = money - (LOTTO_PRICE * lottos.size());
 
-    Lottos autoLottos = null;
+    Lottos autoLottos = new Lottos(new ArrayList<>());
     if(change > 0) {
       autoLottos = buy(change);
     }
 
     List<Lotto> list = new ArrayList<>(lottos);
-    if(autoLottos != null) {
-      list.addAll(autoLottos.lottos());
-    }
+    list.addAll(autoLottos.lottos());
       
     return new Lottos(list);
   }
