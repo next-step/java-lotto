@@ -15,6 +15,10 @@ public class LottoWiningNumbers {
     return new LottoWiningNumbers(LottoNumbers.generateSixNumbers(generateNumbers));
   }
 
+  public int matchLottoNumber(LottoNumbers lottoNumbers) {
+    return lottoWinningNumbers.matchLottoNumber(lottoNumbers);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
