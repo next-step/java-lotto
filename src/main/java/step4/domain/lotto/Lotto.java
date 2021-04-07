@@ -55,4 +55,8 @@ public final class Lotto {
                 .filter(anotherLotto::isIncludeLottoNumber)
                 .count();
     }
+
+    public final Set<LottoNumber> getLotto() {
+        return lotto;
+    }
 }

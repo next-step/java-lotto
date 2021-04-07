@@ -102,7 +102,7 @@ class LottoTest {
 
         // when
         Lotto lotto = Lotto.of(expected);
-        Set<LottoNumber> actual = lotto.getLottoNumbers();
+        Set<LottoNumber> actual = lotto.getLotto();
 
         // then
         assertThat(actual).isEqualTo(expected);
