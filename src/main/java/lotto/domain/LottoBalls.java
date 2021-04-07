@@ -20,11 +20,17 @@ public class LottoBalls {
         return LottoBalls.of(Arrays.asList(lottoBalls));
     }
 
+    public static LottoBalls createWinningLottoBalls(List<Integer> lottoBallList) {
+        validateSize(lottoBallList);
+        return new LottoBalls(lottoBallList.stream()
+                .map(LottoBall::new)
+                .collect(Collectors.toList()));
+    }
+
     public static LottoBalls of(List<Integer> lottoBallList) {
         validateSize(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
-                .mapToInt(lottoBall -> lottoBall)
-                .mapToObj(LottoBall::valueOf)
+                .map(LottoBall::valueOf)
                 .collect(Collectors.toList()));
     }
 
@@ -38,4 +44,24 @@ public class LottoBalls {
         return lottoBalls.size();
     }
 
+    public int count(LottoBalls winningLottoBalls) {
+        int lottoCount = 0;
+        for (LottoBall winningLottoBall : winningLottoBalls.lottoBalls) {
+            lottoCount += check(winningLottoBall);
+        }
+        return lottoCount;
+    }
+
+    private int check(LottoBall winningLottoBall) {
+        int count = 0;
+        if (lottoBalls.contains(winningLottoBall)) {
+            count++;
+        }
+        return count;
+    }
+
+    public List<LottoBall> getSortedLottoBalls() {
+        List<LottoBall> sortedLottoBalls = new ArrayList<>(lottoBalls);
+        return Collections.unmodifiableList(sortedLottoBalls.stream().sorted().collect(Collectors.toList()));
+    }
 }
