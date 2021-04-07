@@ -36,4 +36,8 @@ public final class Money {
         validateRange(purchaseAmount);
         return money / purchaseAmount;
     }
+
+    public final int getMoney() {
+        return money;
+    }
 }

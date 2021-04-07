@@ -76,7 +76,7 @@ class MoneyTest {
 
         // when
         Money money = Money.valueOf(expected);
-        int actual = Money.getMoney();
+        int actual = money.getMoney();
 
         // then
         assertThat(actual).isEqualTo(expected);
