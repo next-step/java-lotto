@@ -43,9 +43,9 @@ class LotteryMachineTest {
         LotteryMachine lotteryMachine = LotteryMachine.of(3000,
             Collections.singletonList(LottoNumbers.from("1,2,3,4,5,6")), shuffleStrategy);
         List<Lotto> lottoes = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            lottoes.add(Lotto.from(shuffleStrategy));
-        }
+        lottoes.add(Lotto.from(shuffleStrategy));
+        lottoes.add(Lotto.from(shuffleStrategy));
+        lottoes.add(Lotto.from(LottoNumbers.from("1,2,3,4,5,6")));
 
         assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(Lottoes.from(lottoes));
     }
