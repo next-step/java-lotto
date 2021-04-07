@@ -1,6 +1,6 @@
 package step4.domain;
 
-import step2.exception.InvalidLottoNumberException;
+import step4.exception.InvalidLottoNumberException;
 import step4.domain.number.Count;
 import step4.domain.number.LottoNumber;
 import step4.domain.result.LottoMatchingResult;
