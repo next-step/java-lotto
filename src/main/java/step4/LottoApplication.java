@@ -40,41 +40,15 @@ public final class LottoApplication {
         WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
         WinningLotto winningLotto = getWinningLotto();
         WinningResult winningResult = winningCheckMachine.checkUserLottoAndWinningLotto(lottos, winningLotto);
+        RESULT_VIEW.printLottoResult(winningResult, money);
     }
 
-
-    private static final WinningLotto getWinningLotto() {
+    private static final Money getInputMoney() {
         try {
-            return WinningLotto.from(getWinningLottoNumbers(), getBonusLottoNumber());
-        } catch (Exception e) {
-            return getWinningLotto();
-        }
-    }
-
-    private static final LottoNumber getBonusLottoNumber() {
-        try {
-            return LottoNumber.valueOf(INPUT_VIEW.inputBonusLottoNumbersByClient());
+            return Money.valueOf(INPUT_VIEW.inputMoneyByClient());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return getBonusLottoNumber();
-        }
-    }
-
-    private static final Lotto getWinningLottoNumbers() {
-        try {
-            return Lotto.of(INPUT_VIEW.inputLottoNumbersByClient());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return getWinningLottoNumbers();
-        }
-    }
-
-    private static final Lotto getPassiveLotto() {
-        try {
-            return Lotto.of(INPUT_VIEW.inputPassiveLottoByClient());
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "\n다시 입력해주세요");
-            return getPassiveLotto();
+            return getInputMoney();
         }
     }
 
@@ -99,12 +73,39 @@ public final class LottoApplication {
         }
     }
 
-    private static final Money getInputMoney() {
+    private static final Lotto getPassiveLotto() {
         try {
-            return Money.valueOf(INPUT_VIEW.inputMoneyByClient());
+            return Lotto.of(INPUT_VIEW.inputPassiveLottoByClient());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "\n다시 입력해주세요");
+            return getPassiveLotto();
+        }
+    }
+
+    private static final WinningLotto getWinningLotto() {
+        try {
+            return WinningLotto.from(getWinningLottoNumbers(), getBonusLottoNumber());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return getInputMoney();
+            return getWinningLotto();
+        }
+    }
+
+    private static final LottoNumber getBonusLottoNumber() {
+        try {
+            return LottoNumber.valueOf(INPUT_VIEW.inputBonusLottoNumbersByClient());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getBonusLottoNumber();
+        }
+    }
+
+    private static final Lotto getWinningLottoNumbers() {
+        try {
+            return Lotto.of(INPUT_VIEW.inputLottoNumbersByClient());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getWinningLottoNumbers();
         }
     }
 }
