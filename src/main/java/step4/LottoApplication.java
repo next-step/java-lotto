@@ -19,7 +19,7 @@ public final class LottoApplication {
 
     private static final LottoShuffleStrategy STRATEGY = LottoRandomShuffleStrategy.getInstance();
 
-    public static void main(String[] args) {
+    public static final void main(String[] args) {
         Money money = getInputMoney();
         PassiveCount count = getPassiveCount(money);
 
@@ -37,7 +37,7 @@ public final class LottoApplication {
         WinningCheckMachine winningCheckMachine = WinningCheckMachine.getInstance();
     }
 
-    private static Lotto getPassiveLotto() {
+    private static final Lotto getPassiveLotto() {
         try {
             return Lotto.of(INPUT_VIEW.inputPassiveLottoByClient());
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public final class LottoApplication {
         }
     }
 
-    private static PassiveCount getPassiveCount(Money money) {
+    private static final PassiveCount getPassiveCount(Money money) {
         try {
             return getPassiveCountWithValidate(money);
         } catch (Exception e) {

@@ -2,7 +2,6 @@ package step4.domain.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.winning.WinningStatus;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
 import step4.exception.LottoNullPointerException;
@@ -83,7 +82,11 @@ class WinningLottoTest {
         WinningStatus winningStatus = winningLotto.getWinningStatus(lotto);
 
         // then
-        assertThat(winningStatus).isNotNull();
+        assertAll(
+                () -> assertThat(winningStatus).isNotNull(),
+                () -> assertThat(winningStatus.getCountOfMatch()).isEqualTo(6),
+                () -> assertThat(winningStatus.getMatchBonus()).isFalse()
+        );
 
     }
 

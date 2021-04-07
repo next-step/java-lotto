@@ -1,5 +1,7 @@
 package step4.domain.rank;
 
+import step4.domain.winning.WinningStatus;
+
 import java.util.Arrays;
 
 public enum Rank {
@@ -16,7 +18,7 @@ public enum Rank {
     private final int countOfMatch;
     private final int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
@@ -27,6 +29,10 @@ public enum Rank {
 
     public final int getWinningMoney() {
         return winningMoney;
+    }
+
+    public static final Rank valueOf(WinningStatus winningStatus) {
+        return valueOf(winningStatus.getCountOfMatch(), winningStatus.getMatchBonus());
     }
 
     public static final Rank valueOf(long countOfMatch, boolean matchBonus) {

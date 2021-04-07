@@ -2,7 +2,6 @@ package step4.domain.shop;
 
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
-import step4.domain.money.Money;
 import step4.strategy.LottoShuffleStrategy;
 
 import java.util.List;

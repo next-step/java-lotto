@@ -30,7 +30,7 @@ class PassiveCountTest {
         int count = -1;
 
         // when
-        assertThatThrownBy(()-> PassiveCount.valueOf(count))
+        assertThatThrownBy(() -> PassiveCount.valueOf(count))
                 .isInstanceOf(InputNegativeAmountException.class)
                 .hasMessageContaining("음수값이 입력되었습니다.");
 

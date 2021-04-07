@@ -1,5 +1,6 @@
 package step4.domain.winning;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +18,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningResultTest {
+
+    private Map<Rank, Long> winningMap;
+
+    @BeforeEach
+    void beforeEach() {
+        winningMap = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            winningMap.put(rank, 0L);
+        }
+    }
+
 
     @DisplayName("WinningResult 인스턴스 생성 여부 테스트")
     @Test
@@ -49,7 +61,7 @@ class WinningResultTest {
     void 반환_초기값() {
 
         // when
-        Map<Rank, Long> actual = WinningResult.values();
+        Map<Rank, Long> actual = winningMap;
 
         // when and then
         assertAll(
@@ -69,14 +81,15 @@ class WinningResultTest {
     @MethodSource("provideRankValuesAndWinningCount")
     void 반환_당첨횟수(Rank rank, long expected) {
         // given
-        Map<Rank, Long> winningMap = WinningResult.values();
+        Map<Rank, Long> testMap = winningMap;
+
         long value = 0;
         for (Rank initRank : Rank.values()) {
-            winningMap.put(initRank, winningMap.get(initRank) + (++value));
+            testMap.put(initRank, testMap.get(initRank) + (++value));
         }
 
         // when
-        WinningResult winningResult = WinningResult.of(winningMap);
+        WinningResult winningResult = WinningResult.of(testMap);
         long actual = winningResult.getWinningCount(rank);
 
         // then

@@ -3,7 +3,6 @@ package step4.domain.money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.domain.count.PassiveCount;
-import step4.exception.InputNegativeAmountException;
 import step4.exception.InputNumberLessThanZeroException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +30,7 @@ class MoneyTest {
         int value = -1;
 
         // when
-        assertThatThrownBy(()-> Money.valueOf(value))
+        assertThatThrownBy(() -> Money.valueOf(value))
                 .isInstanceOf(InputNumberLessThanZeroException.class)
                 .hasMessageContaining("0이하의 값이 입력되었습니다.");
     }
@@ -68,7 +67,6 @@ class MoneyTest {
         // then
         assertThat(actual).isEqualTo(7);
     }
-
 
 
 }

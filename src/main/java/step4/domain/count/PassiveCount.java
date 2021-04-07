@@ -5,6 +5,7 @@ import step4.exception.InputNegativeAmountException;
 public final class PassiveCount {
 
     public static final int ZERO = 0;
+
     private final int count;
 
     private PassiveCount(int count) {
@@ -17,7 +18,7 @@ public final class PassiveCount {
     }
 
     private final void validateNegative(int count) {
-        if(count < ZERO) {
+        if (count < ZERO) {
             throw new InputNegativeAmountException();
         }
     }

@@ -42,7 +42,7 @@ public final class Lotto {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    private static void validateStringFormat(String sentence) {
+    private static final void validateStringFormat(String sentence) {
         if (sentence.split(COMMA_WITH_BLANK).length != SIZE) {
             throw new InputInvalidStringLottoException();
         }

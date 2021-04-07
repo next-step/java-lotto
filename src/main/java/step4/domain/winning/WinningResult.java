@@ -3,7 +3,6 @@ package step4.domain.winning;
 import step4.domain.rank.Rank;
 import step4.exception.MapNullPointerException;
 
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,14 +19,6 @@ public final class WinningResult {
 
     public static final WinningResult of(Map<Rank, Long> winningResult) {
         return new WinningResult(winningResult);
-    }
-
-    public static final Map<Rank, Long> values() {
-        Map<Rank,Long> winningMap = new EnumMap<>(Rank.class);
-        for(Rank rank : Rank.values()) {
-            winningMap.put(rank, ZERO);
-        }
-        return winningMap;
     }
 
     public final long getWinningCount(Rank rank) {

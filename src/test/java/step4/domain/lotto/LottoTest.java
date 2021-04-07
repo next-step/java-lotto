@@ -71,7 +71,7 @@ class LottoTest {
         String stringLottoNumbers = "1,2,3,4,5,6";
 
         // when
-        assertThatThrownBy(()->Lotto.of(stringLottoNumbers))
+        assertThatThrownBy(() -> Lotto.of(stringLottoNumbers))
                 .isInstanceOf(InputInvalidStringLottoException.class)
                 .hasMessageContaining("잘못된 형식의 문자열이 입력되었습니다.");
 
