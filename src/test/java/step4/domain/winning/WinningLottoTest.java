@@ -2,6 +2,7 @@ package step4.domain.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.domain.winning.WinningStatus;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
 import step4.exception.LottoNullPointerException;
@@ -67,6 +68,22 @@ class WinningLottoTest {
         assertThatThrownBy(() -> WinningLotto.from(lotto, lottoNumber))
                 .isInstanceOf(LottoNumberConflictException.class)
                 .hasMessageContaining("겹치는 LottoNumber 인스턴스가 존재합니다.");
+
+    }
+
+    @DisplayName("WinningLotto 인스턴스 당첨 상태 반환 여부 테스트")
+    @Test
+    void 반환_당첨상태() {
+        // given
+        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
+
+        // when
+        WinningLotto winningLotto = WinningLotto.from(lotto, bonusLottoNumber);
+        WinningStatus winningStatus = winningLotto.getWinningStatus(lotto);
+
+        // then
+        assertThat(winningStatus).isNotNull();
 
     }
 

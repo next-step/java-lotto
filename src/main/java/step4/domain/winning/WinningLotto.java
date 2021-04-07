@@ -1,5 +1,6 @@
 package step4.domain.winning;
 
+import step3.domain.winning.WinningStatus;
 import step4.exception.LottoNullPointerException;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
@@ -48,4 +49,6 @@ public final class WinningLotto {
     }
 
 
+    public WinningStatus getWinningStatus(Lotto lotto) {
+    }
 }

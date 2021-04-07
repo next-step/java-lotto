@@ -102,7 +102,7 @@ class LottoTest {
         // when
         Lotto lotto = Lotto.of(lottoNumbers);
         Lotto anotherLotto = Lotto.of(anotherLottoNumbers);
-        int actual = lotto.match(anotherLotto);
+        int actual = lotto.getCountMatch(anotherLotto);
 
         // then
         assertThat(actual).isEqualTo(1);

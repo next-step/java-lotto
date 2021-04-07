@@ -43,7 +43,7 @@ public final class Lotto {
     }
 
     private static void validateStringFormat(String sentence) {
-        if(sentence.split(COMMA_WITH_BLANK).length != SIZE) {
+        if (sentence.split(COMMA_WITH_BLANK).length != SIZE) {
             throw new InputInvalidStringLottoException();
         }
     }
@@ -58,7 +58,7 @@ public final class Lotto {
         return lotto.contains(lottoNumber);
     }
 
-    public final int match(Lotto anotherLotto) {
+    public final int getCountMatch(Lotto anotherLotto) {
         return (int) lotto.stream()
                 .filter(anotherLotto::isIncludeLottoNumber)
                 .count();
