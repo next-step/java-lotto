@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public final class WinningCheckMachine {
 
-
     private static class WinningCheckMachineHolder {
         private static WinningCheckMachine instance = new WinningCheckMachine();
     }
