@@ -9,24 +9,22 @@ public class LotteryMachine {
     private final ShuffleStrategy shuffleStrategy;
     private final List<LottoNumbers> manualLottoes;
 
-    public LotteryMachine(int price, ShuffleStrategy shuffleStrategy) {
-        this(new Price(price), shuffleStrategy);
-    }
-
-    public LotteryMachine(Price price, ShuffleStrategy shuffleStrategy) {
-        this.price = price;
-        this.shuffleStrategy = shuffleStrategy;
-        this.manualLottoes = new ArrayList<>();
-    }
-
-    public LotteryMachine(Price price, List<LottoNumbers> manualLottoes) {
-        this(price, manualLottoes, new NormalShuffleStrategy());
-    }
-
     public LotteryMachine(Price price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
         this.price = price;
         this.shuffleStrategy = shuffleStrategy;
         this.manualLottoes = manualLottoes;
+    }
+
+    public static LotteryMachine withManualNumbers(int price, List<LottoNumbers> manualLottoes, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(new Price(price), manualLottoes, shuffleStrategy);
+    }
+
+    public static LotteryMachine withManualNumbers(Price price, List<LottoNumbers> manualLottoes) {
+        return new LotteryMachine(price, manualLottoes, new NormalShuffleStrategy());
+    }
+
+    public static LotteryMachine withPrice(int price, ShuffleStrategy shuffleStrategy) {
+        return new LotteryMachine(new Price(price), new ArrayList<>(), shuffleStrategy);
     }
 
     public Lottoes lottoes() {
