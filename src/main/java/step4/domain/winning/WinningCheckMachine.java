@@ -26,9 +26,7 @@ public final class WinningCheckMachine {
     }
 
     public final WinningResult checkUserLottoAndWinningLotto(List<Lotto> lottos, WinningLotto winningLotto) {
-        lottos.stream()
-                .map(winningLotto::getWinningStatus)
-                .map(Rank::values)
+        return null;
     }
 
 }

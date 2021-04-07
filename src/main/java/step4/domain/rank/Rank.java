@@ -29,10 +29,6 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static final Rank valueOf(WinningStatus winningStatus) {
-        return valueOf(winningStatus.getCountOfMatch(), winningStatus.getMatchBonus());
-    }
-
     public static final Rank valueOf(long countOfMatch, boolean matchBonus) {
         Rank rank = Arrays.stream(Rank.values())
                 .filter(eachRank -> eachRank.countOfMatch == countOfMatch)
