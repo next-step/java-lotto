@@ -23,4 +23,7 @@ public final class WinningStatus {
         }
     }
 
+    public final int getCountOfMatch() {
+        return countOfMatch;
+    }
 }
