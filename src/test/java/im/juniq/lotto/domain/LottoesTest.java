@@ -15,8 +15,8 @@ class LottoesTest {
     @Test
     void createOne() {
         NoShuffleStrategy shuffleStrategy = new NoShuffleStrategy();
-        assertThat(new Lottoes(1, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
-            new Lottoes(Lotto.of(shuffleStrategy)));
+        assertThat(Lottoes.of(1, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
+            Lottoes.of(Lotto.of(shuffleStrategy)));
     }
 
     @ParameterizedTest
@@ -28,8 +28,8 @@ class LottoesTest {
             lottoes.add(Lotto.of(new NoShuffleStrategy()));
         }
 
-        assertThat(new Lottoes(numberOfCreated, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
-            new Lottoes(lottoes));
+        assertThat(Lottoes.of(numberOfCreated, shuffleStrategy)).usingRecursiveComparison().isEqualTo(
+            Lottoes.of(lottoes));
     }
 
     @Test
@@ -41,15 +41,15 @@ class LottoesTest {
             lottoes.add(Lotto.of(new NoShuffleStrategy()));
         }
 
-        assertThat(new Lottoes(10, shuffleStrategy,
+        assertThat(Lottoes.of(10, shuffleStrategy,
             Arrays.asList(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("1,2,3,4,5,6"))))
-            .usingRecursiveComparison().isEqualTo(new Lottoes(lottoes));
+            .usingRecursiveComparison().isEqualTo(Lottoes.of(lottoes));
     }
 
     @Test
     @DisplayName("당첨등수를 기준으로 몇 개가 당첨되었는지 조회")
     void countMatchedLottoes() {
-        Lottoes lottoes = new Lottoes(2, new NoShuffleStrategy());
+        Lottoes lottoes = Lottoes.of(2, new NoShuffleStrategy());
 
         assertThat(
             lottoes.numberOfLottoesMatched(Winning.FIFTH, new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 10)))
@@ -62,7 +62,7 @@ class LottoesTest {
     @Test
     @DisplayName("지출대비 수익률 계산")
     void calculateYield() {
-        Lottoes lottoes = new Lottoes(1, new NoShuffleStrategy());
+        Lottoes lottoes = Lottoes.of(1, new NoShuffleStrategy());
 
         assertThat(lottoes.yield(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7), Price.of(1000)))
             .isEqualTo(2000000);

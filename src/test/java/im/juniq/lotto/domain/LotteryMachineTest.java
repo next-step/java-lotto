@@ -26,7 +26,7 @@ class LotteryMachineTest {
         LotteryMachine lotteryMachine = LotteryMachine.withPrice(2000, shuffleStrategy);
 
         assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(
-            new Lottoes(Lotto.of(shuffleStrategy), Lotto.of(shuffleStrategy)));
+            Lottoes.of(Lotto.of(shuffleStrategy), Lotto.of(shuffleStrategy)));
     }
 
     @Test
@@ -46,6 +46,6 @@ class LotteryMachineTest {
             lottoes.add(Lotto.of(shuffleStrategy));
         }
 
-        assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(new Lottoes(lottoes));
+        assertThat(lotteryMachine.lottoes()).usingRecursiveComparison().isEqualTo(Lottoes.of(lottoes));
     }
 }

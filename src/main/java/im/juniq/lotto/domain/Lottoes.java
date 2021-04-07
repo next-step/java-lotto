@@ -7,41 +7,46 @@ import java.util.List;
 
 public class Lottoes implements Iterable<Lotto> {
 
-    private final List<Lotto> lottoes = new ArrayList<>();
+    private final List<Lotto> lottoes;
     private final int autoLottoSize;
     private final int manualLottoSize;
 
-    public Lottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
-        this(numberOfCreated, shuffleStrategy, new ArrayList<>());
+    private Lottoes(List<Lotto> lottoes, int autoLottoSize, int manualLottoSize) {
+        this.lottoes = lottoes;
+        this.autoLottoSize = autoLottoSize;
+        this.manualLottoSize = manualLottoSize;
     }
 
-    public Lottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
-        manualLottoSize = manualLottoes.size();
-        autoLottoSize = numberOfCreated - manualLottoes.size();
-        makeLottoes(manualLottoes);
-        makeLottoes(autoLottoSize, shuffleStrategy);
+    public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy, List<LottoNumbers> manualLottoes) {
+        int manualLottoesSize = manualLottoes.size();
+        int autoLottoSize = numberOfCreated - manualLottoesSize;
+        List<Lotto> lottos = makeLottoes(manualLottoes);
+        lottos.addAll(makeLottoes(autoLottoSize, shuffleStrategy));
+        return new Lottoes(lottos, autoLottoSize, manualLottoesSize);
     }
 
-    public Lottoes(Lotto... lotto) {
-        lottoes.addAll(Arrays.asList(lotto));
-        autoLottoSize = 0;
-        manualLottoSize = 0;
+    public static Lottoes of(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
+        return of(numberOfCreated, shuffleStrategy, new ArrayList<>());
     }
 
-    public Lottoes(List<Lotto> lottoes) {
-        this.lottoes.addAll(lottoes);
-        autoLottoSize = 0;
-        manualLottoSize = 0;
+    public static Lottoes of(Lotto... lottoes) {
+        return new Lottoes(Arrays.asList(lottoes), 0, 0);
     }
 
-    private List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
+    public static Lottoes of(List<Lotto> lottoes) {
+        return new Lottoes(lottoes, 0, 0);
+    }
+
+    private static List<Lotto> makeLottoes(int numberOfCreated, ShuffleStrategy shuffleStrategy) {
+        List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < numberOfCreated; i++) {
             lottoes.add(Lotto.of(shuffleStrategy));
         }
         return lottoes;
     }
 
-    private List<Lotto> makeLottoes(List<LottoNumbers> manualLottoes) {
+    private static List<Lotto> makeLottoes(List<LottoNumbers> manualLottoes) {
+        List<Lotto> lottoes = new ArrayList<>();
         for (LottoNumbers lottoNumbers : manualLottoes) {
             lottoes.add(Lotto.of(lottoNumbers));
         }

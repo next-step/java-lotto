@@ -28,7 +28,7 @@ public class LotteryMachine {
     }
 
     public Lottoes lottoes() {
-        return new Lottoes(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
+        return Lottoes.of(this.price.numberOfLottoPurchased(), shuffleStrategy, manualLottoes);
     }
 
     public Price price() {
