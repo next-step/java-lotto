@@ -11,6 +11,7 @@ import step02.code.domain.Lotto;
 import step02.code.domain.Lottos;
 import step02.code.domain.Number;
 import step02.code.domain.Outcome;
+import step02.code.domain.ResultCalculator;
 
 public class Main {
   public static void main(String[] args) {
@@ -34,20 +35,16 @@ public class Main {
     System.out.println("당첨 통계");
     System.out.println("---------------");
 
-    Outcome outcome = new Outcome(money, lottos);
-
+    Outcome outcome = new Outcome(lottos);
     Map<GradeEnum, Integer> result = outcome.statistic(winningNumber, bonus);
-
-    // GradeEnum.values() 대신 none 만 안나오도록 설정해서 다시
-    GradeEnum.sorted()
-      .stream()
-      .forEach(gradeEnum -> {
-        int size = result.getOrDefault(gradeEnum, 0);
-        ResultView.result(gradeEnum, size);
-        outcome.add(size * gradeEnum.prize());
-      });
     
-    ResultView.rate(outcome.profit());
+    ResultCalculator resultCalculator = new ResultCalculator(money);
+    
+    ResultView.result(result);
+
+    // 불변 객체로 구현해 보고 싶어서 이런식으로 구현해봤습니다.
+    resultCalculator = resultCalculator.calcTotal(result);
+    ResultView.rate(resultCalculator.profit());
     
     InputView.close();
   } 
