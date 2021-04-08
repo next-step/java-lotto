@@ -33,17 +33,17 @@ public class ResultView {
 
         Arrays.stream(Rank.values())
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
+                .filter(rank -> !rank.equals(Rank.MISS))
                 .forEach(rank -> {
-                    if (!rank.equals(Rank.MISS)) {
-                        Long amount = matchResults.getOrDefault(rank, 0L);
-                        System.out.println(
-                                rank.getCountOfMatch()
-                                        + "개 일치 ("
-                                        + rank.getWinningMoney()
-                                        + "원)- "
-                                        + amount
-                                        + "개");
-                    }
+                    Long amount = matchResults.getOrDefault(rank, 0L);
+                    System.out.println(
+                            rank.getCountOfMatch()
+                                    + "개 일치 ("
+                                    + rank.getWinningMoney()
+                                    + "원)- "
+                                    + amount
+                                    + "개");
+
                 });
     }
 
