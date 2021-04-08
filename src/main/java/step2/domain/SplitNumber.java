@@ -11,7 +11,6 @@ public class SplitNumber {
 
     public static Set<LottoNumber> getLottoNumbers(String winnersNumbers) {
         return Arrays.stream(winnersNumbers.split(","))
-                .map(Integer::parseInt)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }

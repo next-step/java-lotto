@@ -13,6 +13,10 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public static LottoNumber valueOf(String lottoNumber) {
+        return valueOf(Integer.parseInt(lottoNumber));
+    }
+
     public static LottoNumber valueOf(int lottoNumber) {
         lottoNumberValidation(lottoNumber);
         if (LottoNumberCache.cache[lottoNumber] != null)
