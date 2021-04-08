@@ -9,13 +9,13 @@ import step2.exception.IllegalLottoResultCount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoMatchResultCountTest {
+class RankTest {
 
     @DisplayName("팩토리메소드 정상생성")
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6})
     void FactoryTest(int value) {
-        assertDoesNotThrow(() -> LottoMatchResultCount.of(value));
+        assertDoesNotThrow(() -> Rank.of(value));
     }
 
     @DisplayName("팩토리메소드 익셉션 발생")
