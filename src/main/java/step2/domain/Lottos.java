@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -17,10 +18,15 @@ public class Lottos {
         return this.lottos;
     }
 
-    public Map<Integer, Long> getMatchResults(Lotto winnerLotto) {
+    public Map<Rank, Long> getMatchResults(Lotto winnerLotto, LottoBonusNumber lottoBonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.matchNumberCounts(winnerLotto))
-                .filter(matchedNumbers -> matchedNumbers >= LOTTO_WINNING_MIN_COUNT)
-                .collect(Collectors.groupingBy(matchedNumbers -> matchedNumbers, Collectors.counting()));
+                .map(lotto -> {
+                    LottoNumber lottoNumber = lottoBonusNumber.getLottoBonusNumber();
+                    boolean matchBonus = lotto.isContains(lottoNumber);
+                    int countOfMatch = lotto.matchNumberCounts(winnerLotto);
+                    return Rank.valueOf(countOfMatch, matchBonus);
+                })
+                .filter(rank -> rank != Rank.MISS)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
