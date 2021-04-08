@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.place.LottoPlaces;
-import lotto.function.GenerateNumbers;
 
 public class LottoStore {
   private final LottoWiningNumbers lottoWiningNumbers;
@@ -14,10 +13,6 @@ public class LottoStore {
   private LottoStore(LottoWiningNumbers lottoWiningNumbers, LottoPlaces lottoPlaces) {
     this.lottoWiningNumbers = lottoWiningNumbers;
     this.lottoPlaces = lottoPlaces;
-  }
-
-  public static LottoStore open(GenerateNumbers generateNumbers) {
-    return open(LottoWiningNumbers.generate(generateNumbers));
   }
 
   public static LottoStore open(LottoWiningNumbers lottoWiningNumbers) {

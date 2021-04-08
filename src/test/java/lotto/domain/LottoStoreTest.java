@@ -15,15 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoStoreTest {
 
   private LottoStore store;
-  private List<LottoNumber> winningLottoNumbers;
 
   @BeforeEach
   void setUp() {
-    winningLottoNumbers = IntStream.rangeClosed(1, 6)
+    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(() -> IntStream.rangeClosed(1, 6)
             .mapToObj(LottoNumber::generate)
-            .collect(Collectors.toList());
-
-    store = LottoStore.open(() -> winningLottoNumbers);
+            .collect(Collectors.toList()));
+    store = LottoStore.open(lottoWiningNumbers);
   }
 
   @Test
