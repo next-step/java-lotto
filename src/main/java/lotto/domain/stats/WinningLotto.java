@@ -5,6 +5,7 @@ import lotto.domain.lotto.LottoBall;
 import lotto.domain.prize.Prize;
 
 public class WinningLotto {
+    public static final long MATCHING_SCORE = 2;
     private final Lotto winningLotto;
     private final LottoBall bonusBall;
 
@@ -18,7 +19,7 @@ public class WinningLotto {
 
     public long getScoreIfMatchingBall(Lotto lotto) {
         long matchingBallCount = winningLotto.getMatchingBallCountFrom(lotto);
-        long score = matchingBallCount * 2;
+        long score = matchingBallCount * MATCHING_SCORE;
         if (matchingBallCount == Prize.SECOND.getMatchingBallCount()) {
             score += getScoreIfMatchingBonusBall(lotto);
         }

@@ -10,11 +10,16 @@ public class Money {
         this.balance = money;
     }
 
-    public boolean withdraw(long amount) {
-        if (amount > balance) {
+    public boolean withdraw(Money money) {
+        if (money.balance > balance) {
             return false;
         }
-        this.balance -= amount;
+        this.balance -= money.balance;
         return true;
     }
+
+    public long getAvailableLottoCount() {
+        return balance / LottoShop.LOTTO_PRICE;
+    }
+
 }
