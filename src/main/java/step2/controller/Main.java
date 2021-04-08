@@ -18,8 +18,10 @@ public class Main {
 
         String winnersNumbers = InputView.getWinnersNumber();
         Set<LottoNumber> lottoNumbers = SplitNumber.getLottoNumbers(winnersNumbers);
+        LottoBonusNumber lottoBonusNumber = new LottoBonusNumber(InputView.getBonusNumber(), lottoNumbers);
         Lotto winnerLotto = new Lotto(lottoNumbers);
-        Map<Integer, Long> matchResults = lottos.getMatchResults(winnerLotto);
+        Map<Rank, Long> matchResults = lottos.getMatchResults(winnerLotto, lottoBonusNumber);
+
         ResultView.printMatchResults(matchResults);
 
         LottoBenefit lottoBenefitCalculator =
