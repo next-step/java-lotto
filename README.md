@@ -50,8 +50,6 @@
 - 로또 6개 번들 객체
 ### Lottos
 - 구매한만큼의 로또들을 관리하는 객체
-### LottoGenerator, AutoLottoGenerator
-- 함수형 인터페이스 활용
 ### WinningLotto
 - 지난 주 당첨 로또 객체
 ### Money
