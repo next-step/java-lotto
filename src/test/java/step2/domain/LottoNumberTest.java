@@ -9,6 +9,7 @@ import step2.exception.IllegalLottoNumberException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class LottoNumberTest {
 
 
@@ -35,6 +36,4 @@ class LottoNumberTest {
 
         assertEquals(lottoNumber,expectedNumber);
     }
-
-
 }
