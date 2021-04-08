@@ -66,7 +66,7 @@ public class Lotto {
   }
 
   public boolean isMatchBonus(Number bonus) {
-    return lotto.stream().anyMatch(number -> number.isMatch(bonus));
+    return lotto.contains(bonus);
   }
 
   public List<Number> lotto() {

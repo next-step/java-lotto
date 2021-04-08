@@ -32,7 +32,6 @@
     - void check(List<Integer> lotto);
       - 6자리의 숫자가 맞는지
       - 동일한 숫자가 없는지
-      <!-- - List<Integer> lottoNumbers(AutoNumber autoNumber); -->
     - int match(List<Integer> winningNumber);
       - 당첨번호와 맞춰본후 등수를 return;
     - List<Number> lotto()
@@ -46,18 +45,39 @@
     - Lottos(List<Lotto> lottos);
       - 주 생성자
   - method
-    - static void check(int money);
-    - static Lottos buy(int money);
-      - 돈에 따라서 로또 구입
     - List<Lotto> lottos();
       - 불변객체로 lottos 반환
+    - List<GradeEnum> match(Lotto winningNumber, Number bonus);
+      - lotto 들을 지난주 당첨번호와 bonus 번호로 비교후 등수 list 반환
+- ## Buy.java
+  - field
+  - constructor
+  - method
+    - static void check(int money);
+    - static void checkPassive(int money, List<Lotto> lottos);
+      - passive 구매시 구입금액 초과 체크
+    - static Lottos lottos(int money);
+      - 자동 구매
+    - static Lottos lottos(int money, List<Lotto> lottos);
+      - 수동 구매
 - ## OutCome.java
 
   - field
+    - private final Lottos lottos;
   - constructor
-    - public OutCome(int money, Lottos lottos, Lotto winningNumber, Number bonus);
+    - public Outcome(Lottos lottos);
   - method
-    - private GradeEnum grade(Lotto lotto);
-    - List<GradeEnum> match();
-    - Map<GradeEnum, Integer> statistic();
-    - float profit(int income);
+    - Map<GradeEnum, Integer> statistic(Lottos winningNumber, Number bonus);
+
+- ## ResultCalculator
+  - field
+    - private final int money
+    - private final int total;
+  - constructor
+    - ResultCalculator(int money, int total);
+    - ResultCalculator(int money);
+  - method
+    - calcTotal(Map<GradeEnum, Integer> result);
+      - total 값 계산
+    - profit();
+      - 수익율 계산

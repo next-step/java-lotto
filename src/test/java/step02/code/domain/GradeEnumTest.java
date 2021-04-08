@@ -6,16 +6,23 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class GradeEnumTest {
-  @Test
+  @ParameterizedTest
+  @CsvSource(value = {
+    "6:false:FIRST",
+    "5:true:SECOND",
+    "5:false:THIRD",
+    "4:false:FOURTH",
+    "3:false:FIFTH"
+  }, delimiter = ':')
   @DisplayName("보너스 숫자가 맞을때 2등, 틀릴때 3등 return")
-  public void secondOrThird() {
-    GradeEnum second = GradeEnum.fromGrade(5, true);
-    GradeEnum third = GradeEnum.fromGrade(5, false);
+  public void grade(int matched, boolean isMatchBonus, GradeEnum grade) {
+    GradeEnum gradeEnum = GradeEnum.fromGrade(matched, isMatchBonus);
 
-    assertThat(second).isEqualTo(GradeEnum.SECOND);
-    assertThat(third).isEqualTo(GradeEnum.THIRD);
+    assertThat(gradeEnum).isEqualTo(grade);
   }
 
   @Test
