@@ -18,6 +18,11 @@ public abstract class LottoPlace {
   public long getTotalMoney() {
     return getWinMoney() * count;
   }
+
+  public long getReturnOnInvestment() {
+    return getTotalMoney() / getWinMoney();
+  }
+
   protected int plusCount() {
     return count + 1;
   }

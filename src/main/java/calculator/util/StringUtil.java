@@ -1,5 +1,6 @@
 package calculator.util;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -51,5 +52,10 @@ public final class StringUtil {
 
   public static String trim(String str) {
     return defaultBlankString(str).trim();
+  }
+
+  public static String convertMoneyFormatting(long money) {
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
+    return decimalFormat.format(money);
   }
 }

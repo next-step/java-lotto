@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoStore;
-import lotto.domain.LottoTicket;
 import lotto.domain.place.LottoPlaces;
 
-import java.text.DecimalFormat;
+import static calculator.util.StringUtil.convertMoneyFormatting;
 
 public class ResultView {
   private static final String ALARM_WINNING_STATISTICS = "당첨 통계";
@@ -12,27 +10,21 @@ public class ResultView {
   private static final String RETURN_ON_INVESTMENT_FORMAT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
   private static final String LOTTO_PLACES_RESULT_FORMAT = "%d개 일치 (%s원)- %s개\n";
 
-  public static void print(LottoTicket boughtLottoTicket, LottoStore store) {
+  public static void print(LottoPlaces places, long returnOnInvestment) {
     System.out.println(ALARM_WINNING_STATISTICS);
     System.out.println(INCISION_LINE);
 
-    LottoPlaces places = store.getLottoPlaces();
     printPlaces(places);
 
-    long total = places.totalWinMoney();
-    System.out.format(RETURN_ON_INVESTMENT_FORMAT, convertMoneyFormatting(total / boughtLottoTicket.totalMoneySpent()));
+    System.out.format(RETURN_ON_INVESTMENT_FORMAT, convertMoneyFormatting(returnOnInvestment));
   }
 
-  private static void printPlaces(LottoPlaces places) {
+  public static void printPlaces(LottoPlaces places) {
     places.getLottoPlaces()
             .forEach(lottoPlace -> System.out.format(LOTTO_PLACES_RESULT_FORMAT, lottoPlace.getMatched()
                     , convertMoneyFormatting(lottoPlace.getWinMoney())
-                    , convertMoneyFormatting(lottoPlace.getTotalMoney() / lottoPlace.getWinMoney()))
+                    , convertMoneyFormatting(lottoPlace.getReturnOnInvestment()))
             );
   }
 
-  private static String convertMoneyFormatting(long l) {
-    DecimalFormat decimalFormat = new DecimalFormat("###,###");
-    return decimalFormat.format(l);
-  }
 }

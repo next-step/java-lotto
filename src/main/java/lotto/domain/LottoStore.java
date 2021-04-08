@@ -23,6 +23,10 @@ public class LottoStore {
     return new LottoStore(lottoWiningNumbers, ticket.getMatchedLottoPlaces(lottoWiningNumbers));
   }
 
+  public long totalWinMoney() {
+    return this.lottoPlaces.totalWinMoney();
+  }
+
   public LottoPlaces getLottoPlaces() {
     return lottoPlaces;
   }
