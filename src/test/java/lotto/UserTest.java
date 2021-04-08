@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 import lotto.domain.AutoLottoMatchCount;
 import lotto.domain.Lotto;
@@ -20,9 +21,9 @@ public class UserTest {
         List<Lotto> lottoList = Arrays.asList(first, second, three);
         AutoLottoMatchCount autoLottoMatchCount = new AutoLottoMatchCount();
         for (Lotto lotto : lottoList) {
-            autoLottoMatchCount.lottoCountPlus((winningLotto.winningLottoCount(lotto)));
+           autoLottoMatchCount.lottoCountPlus((winningLotto.winningLottoCount(lotto,33)));
         }
 
-        assertThat(autoLottoMatchCount.findLottoNumberCount(3)).isEqualTo(2);
+        assertThat(autoLottoMatchCount.findLottoNumberCount(Rank.FIFTH)).isEqualTo(2);
     }
 }

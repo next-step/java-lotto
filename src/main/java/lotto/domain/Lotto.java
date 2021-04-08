@@ -53,18 +53,19 @@ public class Lotto {
         return Arrays.toString(lottoNumber.toArray());
     }
 
-    public int winningLottoCount(Lotto lotto) {
+    public WinningCount winningLottoCount(Lotto lotto, int bonusNumber) {
         WinningCount winningCount = new WinningCount();
         List<Integer> lottoNumber = lotto.getLottoNumber();
         for (Integer number: lottoNumber){
-            plusWinningCount(winningCount, number);
+            plusWinningCount(winningCount, number, bonusNumber);
         }
-        return winningCount.getWinningCount();
+
+        return winningCount;
     }
 
-    public void plusWinningCount(WinningCount winningCount, Integer number){
+    public void plusWinningCount(WinningCount winningCount, Integer number, int bonusNumber){
         if(lottoNumber.contains(number)){
-            winningCount.plus();
+            winningCount.plus(number == bonusNumber);
         }
     }
 }

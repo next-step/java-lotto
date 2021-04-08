@@ -1,16 +1,16 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PrizeTest {
+public class RankTest {
     @Test
     void 당첨통계_4개일치_상금확인() {
         int matchCount = 4;
-        Prize prize = Prize.of(matchCount);
-        assertThat(prize.getPrize()).isEqualTo(50000);
+        Rank rank = Rank.of(matchCount, false);
+        assertThat(rank.getWinningMoney()).isEqualTo(50000);
     }
 
 }

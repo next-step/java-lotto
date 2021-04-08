@@ -6,8 +6,7 @@ import lotto.util.StringUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class AutoLottoController {
 
@@ -36,8 +35,9 @@ public class AutoLottoController {
 
         AutoLottoMatchCount autoLottoMatchCount = new AutoLottoMatchCount();
 
+        int bonusNumber = inputView.inputSpecialNumber();
         // 추첨
-        lottery(user, winningLotto, autoLottoMatchCount);
+        lottery(user, winningLotto, autoLottoMatchCount, bonusNumber);
 
         // 당첨 통계
         winningStatistics(autoLottoMatchCount, lottoCount);
@@ -49,22 +49,23 @@ public class AutoLottoController {
         }
     }
 
-    private void lottery(User user, Lotto winningLotto, AutoLottoMatchCount autoLottoMatchCount) {
+    private void lottery(User user, Lotto winningLotto, AutoLottoMatchCount autoLottoMatchCount, int bonusNumber) {
         for (Lotto lotto : user.getLottoList()) {
-            autoLottoMatchCount.lottoCountPlus(winningLotto.winningLottoCount(lotto));
+            autoLottoMatchCount.lottoCountPlus(winningLotto.winningLottoCount(lotto, bonusNumber));
         }
     }
 
     private void winningStatistics(AutoLottoMatchCount autoLottoMatchCount, int lottoCount) {
         resultView.displayStatisticsTitle();
         int total = 0;
-        Map<Integer, WinningCount> resultLottoMatchCount = autoLottoMatchCount.getLottoMatchCount();
-        Iterator<Integer> lottoMatchKey = resultLottoMatchCount.keySet().iterator();
+        Map<Rank, WinningCount> resultLottoMatchCount = autoLottoMatchCount.getLottoMatchCount();
+        TreeMap<Rank, WinningCount> treeMap = new TreeMap<>(resultLottoMatchCount);
+
+        Iterator<Rank> lottoMatchKey = treeMap.descendingKeySet().iterator();
         while (lottoMatchKey.hasNext()) {
-            Integer number = lottoMatchKey.next();
-            Prize prize = Prize.of(number);
-            resultView.displayWinningStatistics(number, prize, resultLottoMatchCount.get(number).getWinningCount());
-            total += (prize.getPrize() * resultLottoMatchCount.get(number).getWinningCount());
+            Rank rank = lottoMatchKey.next();
+            resultView.displayWinningStatistics(rank, resultLottoMatchCount.get(rank).getWinningCount());
+            total += (rank.getWinningMoney() * resultLottoMatchCount.get(rank).getWinningCount());
         }
 
         resultView.displayProfits(PrizeCalculatorUtil.profitCalculation(total, lottoCount));
