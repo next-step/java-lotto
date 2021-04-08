@@ -20,7 +20,7 @@ public class LottoStore {
   }
 
   public LottoStore exchange(LottoTicket ticket) {
-    return new LottoStore(lottoWiningNumbers, ticket.matchedLottoPlaces(lottoWiningNumbers));
+    return new LottoStore(lottoWiningNumbers, ticket.getMatchedLottoPlaces(lottoWiningNumbers));
   }
 
   public LottoPlaces getLottoPlaces() {

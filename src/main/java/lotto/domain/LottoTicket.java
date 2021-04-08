@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-  private static final int LOTTO_SELL_PRICE = 1_000;
+  private static final int LOTTO_PRICE = 1_000;
 
   private final List<LottoNumbers> list;
 
@@ -18,17 +18,15 @@ public class LottoTicket {
   }
 
   public static LottoTicket toBuy(final int money, final GenerateNumbers generateNumbers) {
-    int makeTicketCount = money / LOTTO_SELL_PRICE;
+    final int makeTicketCount = money / LOTTO_PRICE;
     List<LottoNumbers> lottoNumbers = new ArrayList<>(makeTicketCount);
-    while (makeTicketCount > 0) {
+    for (int i = 0; i < makeTicketCount; i++) {
       lottoNumbers.add(LottoNumbers.generateSixNumbers(generateNumbers));
-      makeTicketCount--;
     }
-
     return new LottoTicket(lottoNumbers);
   }
 
-  public LottoPlaces matchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers) {
+  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers) {
     LottoPlaces lottoPlaces = LottoPlaces.create();
     for (LottoNumbers lottoNumbers : list) {
       int matchedLottoNumberCount = lottoWiningNumbers.matchLottoNumber(lottoNumbers);
@@ -38,7 +36,7 @@ public class LottoTicket {
   }
 
   public int totalMoneySpent() {
-    return LOTTO_SELL_PRICE * ticketCount();
+    return LOTTO_PRICE * ticketCount();
   }
 
   public List<LottoNumbers> getList() {

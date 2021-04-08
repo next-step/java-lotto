@@ -35,7 +35,7 @@ class LottoTicketTest {
             .collect(Collectors.toList()));
 
     // when
-    LottoPlaces lottoPlaces = lottoTicket.matchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
+    LottoPlaces lottoPlaces = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
 
     // then
     assertThat(lottoPlaces.firstPlace())
