@@ -3,11 +3,11 @@ package step2.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6,2_000_000_000),
-    BONUS(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
 
@@ -20,13 +20,13 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == BONUS.countOfMatch && matchBonus) {
-             return Rank.BONUS;
+        if (countOfMatch == SECOND.countOfMatch && matchBonus) {
+            return Rank.SECOND;
         }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
-                .filter(rank -> rank != rank.BONUS)
+                .filter(rank -> rank != rank.SECOND)
                 .findFirst()
                 .orElseGet(() -> Rank.MISS);
     }
