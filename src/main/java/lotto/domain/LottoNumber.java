@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.constants.BaseConstants.LOTTO_NUMBER_GREATER_THAN_OR_EQUALS;
+import static lotto.constants.BaseConstants.LOTTO_NUMBER_LESS_THAN_OR_EQUALS;
+
 public class LottoNumber {
   private static final String EXCEPTION_MESSAGE = "로또 번호는 1~45의 범위 안의 숫자여야만 한다.";
-  private static final int LOTTO_NUMBER_GREATER_THAN_OR_EQUALS = 1;
-  private static final int LOTTO_NUMBER_LESS_THAN = 45;
 
   private final int value;
 
@@ -22,7 +23,7 @@ public class LottoNumber {
   }
 
   private static boolean isValidNumberRange(int value) {
-    return LOTTO_NUMBER_GREATER_THAN_OR_EQUALS <= value && value <= LOTTO_NUMBER_LESS_THAN;
+    return LOTTO_NUMBER_GREATER_THAN_OR_EQUALS <= value && value <= LOTTO_NUMBER_LESS_THAN_OR_EQUALS;
   }
 
   public int getValue() {
