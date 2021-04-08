@@ -9,8 +9,8 @@ import java.util.Map;
 public class LottoMatchingResult {
   private static final int ADDING_MIN_COUNT = 1;
   private static final int ZERO = 0;
+  private static final Count minimalCount = new Count(ADDING_MIN_COUNT);
 
-  private final Count minimalCount = new Count(ADDING_MIN_COUNT);
   private final Map<Rank, Count> matchingCounts;
 
   public LottoMatchingResult() {

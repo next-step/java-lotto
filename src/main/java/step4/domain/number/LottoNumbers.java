@@ -23,6 +23,7 @@ public class LottoNumbers {
     }
 
     this.lottoNumbers = lottoNumbers;
+    Collections.sort(lottoNumbers);
   }
 
   private Long distinctSize(List<LottoNumber> lottoNumbers) {
@@ -55,5 +56,10 @@ public class LottoNumbers {
   @Override
   public String toString() {
     return lottoNumbers.toString();
+  }
+
+  public static LottoNumbers convertStringToLottoNumbers(String lottoParameter){
+    // TODO 문자열 -> 로또 번호 생성 메소드 구현(리팩토링)
+    return new LottoNumbers(Collections.emptyList());
   }
 }

@@ -9,7 +9,6 @@ public class Lotto {
 
   public Lotto(LottoNumbers lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
-    lottoNumbers.sort();
   }
 
   @Override

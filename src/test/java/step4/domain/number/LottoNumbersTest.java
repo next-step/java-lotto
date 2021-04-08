@@ -37,8 +37,6 @@ class LottoNumbersTest {
     LottoNumbers pickedLottoNumbers = new LottoNumbers(Splitter.split(boughtNum));
     LottoNumbers checkingLottoNumbers = new LottoNumbers(Splitter.split(sortedNumbers));
 
-    pickedLottoNumbers.sort();
-
     Assertions.assertThat(pickedLottoNumbers.toString()).isEqualTo(checkingLottoNumbers.toString());
   }
 

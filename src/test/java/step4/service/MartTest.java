@@ -1,6 +1,6 @@
 package step4.service;
 
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,9 +12,12 @@ import step4.domain.number.Count;
 import step4.domain.number.LottoNumber;
 import step4.domain.number.LottoNumbers;
 import step4.domain.result.Rank;
+import step4.exception.InvalidPriceException;
 import step4.strategy.LottoRandomStrategy;
 import step4.strategy.LottoStrategy;
 import step4.util.Splitter;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class MartTest {
   private Mart mart;
@@ -28,15 +31,20 @@ public class MartTest {
   @CsvSource(value = {"1000:1", "14000:14", "28000:28"}, delimiter = ':')
   @DisplayName("유효한 가격으로 구매 가능한지 테스트")
   void validBuyLottoTest(Long sellerMoney, int size) {
-    Assertions.assertThat(mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy()).quantity().showCount()).isEqualTo(size);
+    assertThat(
+      mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy())
+        .quantity()
+        .showCount()
+    ).isEqualTo(size);
   }
 
   @ParameterizedTest
   @ValueSource(longs = {900, 999})
   @DisplayName("유효하지 않은 금액으로 로또 구매 불가한지 테스트")
   void invalidMoneyTest(Long sellerMoney) {
-    Assertions.assertThatThrownBy(() -> mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy()))
-      .isInstanceOf(RuntimeException.class)
+    assertThatThrownBy(() ->
+      mart.buyAllRandomLottos(new Cash(sellerMoney), new LottoRandomStrategy()))
+      .isInstanceOf(InvalidPriceException.class)
       .hasMessage("로또를 살 수 없습니다.");
   }
 
@@ -48,10 +56,10 @@ public class MartTest {
     Lotto targetLotto = new Lotto(result);
     LottoStrategy testStrategy = lottoNumbers -> new LottoNumbers(Splitter.split(strNumbers));
 
-    Assertions.assertThat(
-      mart.buyAllRandomLottos(new Cash(money), testStrategy)
-        .matchLottosWithBonusBall(targetLotto, new LottoNumber(bonusBall))
-        .sendSpecificCount(Rank.FIRST)
-    ).isEqualTo(new Count(1));
+    Count matchingCount = mart.buyAllRandomLottos(new Cash(money), testStrategy)
+      .matchLottosWithBonusBall(targetLotto, new LottoNumber(bonusBall))
+      .sendSpecificCount(Rank.FIRST);
+
+    assertThat(matchingCount).isEqualTo(new Count(1));
   }
 }

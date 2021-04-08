@@ -54,7 +54,7 @@ public class LottoGame {
       lottoParameters.add(new ManualLottoParameter(typedLottoParameter));
     }
 
-    return mart.buyAllManualLottos(cash, lottoParameters);
+    return mart.sellAllManualLottos(cash, lottoParameters);
   }
 
   private Cash getCash() {

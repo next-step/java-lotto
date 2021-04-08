@@ -54,6 +54,7 @@ public class LottosTest {
     Assertions.assertThat(lottoMatchingResult.toStringSpecificResult(rank)).isEqualTo(result);
   }
 
+  // TODO 간소화(리팩토링)
   @ParameterizedTest
   @DisplayName("두 로또 합 테스트")
   @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:2", "2,3,4,5,6,8:2,4,6,8,10,12:2", "11,13,15,17,20,25:11,13,15,12,20,25:2"}, delimiter = ':')

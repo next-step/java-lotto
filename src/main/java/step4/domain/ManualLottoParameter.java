@@ -5,6 +5,7 @@ import step4.util.Splitter;
 
 import java.util.List;
 
+// TODO LottoNumbers로 이관 후 삭제(리팩토링)
 public class ManualLottoParameter {
   private final String lottoParameter;
 

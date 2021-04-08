@@ -24,11 +24,11 @@ public class Mart {
 
   private void isBuyablePrice(Cash sellerMoney) {
     if (!sellerMoney.isAvailableToBuyLotto()) {
-      throw new RuntimeException(ERROR_MESSAGE);
+      throw new InvalidPriceException(ERROR_MESSAGE);
     }
   }
 
-  public Lottos buyAllManualLottos(Cash money, List<ManualLottoParameter> parameters) {
+  public Lottos sellAllManualLottos(Cash money, List<ManualLottoParameter> parameters) {
     Lottos lottos = new Lottos();
     if (!money.isGreaterEqualProductPrice(Cash.getMultipleLottosPrice(new Count(parameters.size())))) {
       throw new InvalidPriceException(ERROR_MESSAGE);
