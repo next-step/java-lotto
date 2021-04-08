@@ -36,15 +36,20 @@ public class ResultView {
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .forEach(rank -> {
                     Long amount = matchResults.getOrDefault(rank, 0L);
-                    System.out.println(
-                            rank.getCountOfMatch()
-                                    + "개 일치 ("
-                                    + rank.getWinningMoney()
-                                    + "원)- "
-                                    + amount
-                                    + "개");
+                    printCountOfMatch(rank, amount);
 
                 });
+    }
+
+    private static void printCountOfMatch(Rank rank, Long amount) {
+        String message = rank != Rank.SECOND ? "개 일치 (" : "개 일치, 보너스 볼 일치 (";
+        System.out.println(
+                rank.getCountOfMatch()
+                        + message
+                        + rank.getWinningMoney()
+                        + "원)- "
+                        + amount
+                        + "개");
     }
 
     public static void printBenefitResult(double benefitPercentage) {
