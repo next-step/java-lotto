@@ -5,7 +5,6 @@ import lotto.function.GenerateNumbers;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
   private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
@@ -29,11 +28,14 @@ public class LottoNumbers {
     return list.size();
   }
 
-  public int matchLottoNumber(final LottoNumbers otherNumber) {
-    return list.stream()
-            .filter(lottoNumber -> otherNumber.list.contains(lottoNumber))
-            .collect(Collectors.toList())
-            .size();
+  public int matchLottoNumber(final LottoNumbers otherNumbers) {
+    return (int) list.stream()
+            .filter(otherNumbers::contains)
+            .count();
+  }
+
+  public boolean contains(LottoNumber lottoNumber) {
+    return list.contains(lottoNumber);
   }
 
   public List<LottoNumber> getList() {

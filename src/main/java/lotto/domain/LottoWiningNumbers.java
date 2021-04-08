@@ -28,7 +28,7 @@ public class LottoWiningNumbers {
     return generate(() -> lottoWiningNumbers);
   }
 
-  public int matchLottoNumber(LottoNumbers lottoNumbers) {
+  public int matchLottoNumber(final LottoNumbers lottoNumbers) {
     return list.matchLottoNumber(lottoNumbers);
   }
 
