@@ -3,15 +3,12 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoGenerator.LOTTO_SIZE;
 import static lotto.exception.Message.SIZE_MESSAGE;
 
 public class LottoBalls {
-    private final Set<LottoBall> lottoBalls;
 
-    public LottoBalls(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.createAutoLotto());
-    }
+    private static final int LOTTO_SIZE = 6;
+    private final Set<LottoBall> lottoBalls;
 
     public LottoBalls(List<LottoBall> lottoBalls) {
         this.lottoBalls = new HashSet<>(lottoBalls);

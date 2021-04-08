@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
 
+    public static final int LOTTO_SIZE = 6;
     private final LottoBalls lottoBalls;
 
     public Lotto() {
-        lottoBalls = new LottoBalls(this::createAutoLotto);
+        lottoBalls = new LottoBalls(createAutoLotto());
     }
 
     public Lotto(LottoBalls lottoBalls) {
