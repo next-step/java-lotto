@@ -18,7 +18,7 @@ class LottoPlacesTest {
     places = places.record(matchedLottoCount);
 
     // then
-    assertThat(places.getLottoPlaces().get(3))
+    assertThat(places.firstPlace())
             .isEqualTo(LottoFirstPlace.create().win());
   }
 }

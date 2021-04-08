@@ -6,6 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.constants.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
+import static lotto.constants.BaseConstants.LOTTO_FOURTH_PLACE_INDEX;
+import static lotto.constants.BaseConstants.LOTTO_SECOND_PLACE_INDEX;
+import static lotto.constants.BaseConstants.LOTTO_THIRD_PLACE_INDEX;
+
 public class LottoPlaces {
   private final List<LottoPlace> lottoPlaces;
 
@@ -32,6 +37,22 @@ public class LottoPlaces {
       result.add(lottoPlace);
     }
     return new LottoPlaces(result);
+  }
+
+  public LottoPlace firstPlace() {
+    return lottoPlaces.get(LOTTO_FIRST_PLACE_INDEX);
+  }
+
+  public LottoPlace secondPlace() {
+    return lottoPlaces.get(LOTTO_SECOND_PLACE_INDEX);
+  }
+
+  public LottoPlace thirdPlace() {
+    return lottoPlaces.get(LOTTO_THIRD_PLACE_INDEX);
+  }
+
+  public LottoPlace fourthPlace() {
+    return lottoPlaces.get(LOTTO_FOURTH_PLACE_INDEX);
   }
 
   public List<LottoPlace> getLottoPlaces() {

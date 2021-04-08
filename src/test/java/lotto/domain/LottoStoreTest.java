@@ -48,7 +48,7 @@ class LottoStoreTest {
     LottoPlaces lottoPlace = store.exchange(lottoTicket).getLottoPlaces();
 
     // then
-    assertThat(lottoPlace.getLottoPlaces().get(3))
+    assertThat(lottoPlace.firstPlace())
             .isEqualTo(LottoFirstPlace.create().win().win().win());
   }
 }
