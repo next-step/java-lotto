@@ -8,6 +8,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+  private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
+  private static final String EXCEPTION_MESSAGE = "로또는 6자리 숫자로 생성해야 됩니다.";
+
   private final List<LottoNumber> list;
 
   private LottoNumbers(List<LottoNumber> list) {
@@ -16,8 +19,8 @@ public class LottoNumbers {
 
   public static LottoNumbers generateSixNumbers(final GenerateNumbers generateNumbers) {
     List<LottoNumber> lottoNumbers = generateNumbers.get();
-    if (lottoNumbers.size() != 6) {
-      throw new IllegalArgumentException("로또는 6자리 숫자로 생성해야 됩니다.");
+    if (lottoNumbers.size() != LOTTO_NUMBER_TOTAL_COUNT) {
+      throw new IllegalArgumentException(EXCEPTION_MESSAGE);
     }
     return new LottoNumbers(lottoNumbers);
   }

@@ -3,22 +3,26 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+  private static final String EXCEPTION_MESSAGE = "로또 번호는 1~45의 범위 안의 숫자여야만 한다.";
+  private static final int LOTTO_NUMBER_GREATER_THAN_OR_EQUALS = 1;
+  private static final int LOTTO_NUMBER_LESS_THAN = 45;
+
   private final int value;
 
   private LottoNumber(int value) {
     this.value = value;
   }
 
-  public static LottoNumber generate(int number) {
-    LottoNumber newLottoNumber = new LottoNumber(number);
-    if (!newLottoNumber.isValidNumberRange()) {
-      throw new IllegalArgumentException("로또 번호는 1~45의 범위 안의 숫자여야만 한다.");
+  public static LottoNumber generate(int value) {
+    if (!isValidNumberRange(value)) {
+      throw new IllegalArgumentException(EXCEPTION_MESSAGE);
     }
-    return newLottoNumber;
+
+    return new LottoNumber(value);
   }
 
-  public boolean isValidNumberRange() {
-    return 0 < value && value <= 45;
+  private static boolean isValidNumberRange(int value) {
+    return LOTTO_NUMBER_GREATER_THAN_OR_EQUALS <= value && value <= LOTTO_NUMBER_LESS_THAN;
   }
 
   public int getValue() {

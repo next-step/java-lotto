@@ -17,13 +17,13 @@ class LottoNumberTest {
   @RepeatedTest(value = 1_000, name = LONG_DISPLAY_NAME)
   void generate() {
     // given
-    LottoNumber lottoNumber = LottoNumber.generate(randomNumber());
+    int random = randomNumber();
 
     // when
-    boolean actual = lottoNumber.isValidNumberRange();
+    LottoNumber lottoNumber = LottoNumber.generate(random);
 
     // then
-    assertThat(actual).isTrue();
+    assertThat(lottoNumber).isNotNull();
   }
 
   @Test

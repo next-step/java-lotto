@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-  private static final int LOTTO_SELL_PRICE = 1000;
+  private static final int LOTTO_SELL_PRICE = 1_000;
 
   private final List<LottoNumbers> list;
 
