@@ -1,10 +1,10 @@
-package step3.domain.winning;
+package step4.domain.winning;
 
-import step3.exception.InputNegativeAmountException;
+import step4.exception.InputNegativeAmountException;
 
 public final class WinningStatus {
 
-    private static final long ZERO = 0;
+    public static final long ZERO = 0L;
 
     private final long countOfMatch;
     private final boolean matchBonus;
@@ -20,7 +20,7 @@ public final class WinningStatus {
     }
 
     private final void validateNegative(long countOfMatch) {
-        if(countOfMatch < ZERO) {
+        if (countOfMatch < ZERO) {
             throw new InputNegativeAmountException();
         }
     }

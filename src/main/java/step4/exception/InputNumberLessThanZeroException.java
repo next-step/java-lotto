@@ -1,0 +1,12 @@
+package step4.exception;
+
+public final class InputNumberLessThanZeroException extends RuntimeException{
+
+    private final String message = "0이하의 값이 입력되었습니다.";
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+}

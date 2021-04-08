@@ -1,10 +1,11 @@
-package step3.domain.rank;
+package step4.domain.rank;
 
-import step3.domain.winning.WinningStatus;
+import step4.domain.winning.WinningStatus;
 
 import java.util.Arrays;
 
 public enum Rank {
+
     MISS(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
@@ -17,7 +18,7 @@ public enum Rank {
     private final int countOfMatch;
     private final int winningMoney;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
@@ -29,7 +30,6 @@ public enum Rank {
     public final int getWinningMoney() {
         return winningMoney;
     }
-
 
     public static final Rank valueOf(WinningStatus winningStatus) {
         return valueOf(winningStatus.getCountOfMatch(), winningStatus.getMatchBonus());

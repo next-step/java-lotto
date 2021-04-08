@@ -1,12 +1,11 @@
-package step3.domain.winning;
+package step4.domain.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.exception.InputNegativeAmountException;
+import step4.exception.InputNegativeAmountException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningStatusTest {
 
@@ -24,7 +23,7 @@ class WinningStatusTest {
         assertThat(winningStatus).isNotNull();
     }
 
-    @DisplayName("WinningStatus 인스턴스 음수 주입시 예외처리 여부 테스트")
+    @DisplayName("WinningStatus 인스턴스 음수 주입시 예외처리 검증 테스트")
     @Test
     void 검증_음수() {
         // given
@@ -32,14 +31,15 @@ class WinningStatusTest {
         boolean matchBonus = false;
 
         // when
-        assertThatThrownBy(()-> WinningStatus.from(countOfMatch, matchBonus))
+        assertThatThrownBy(() -> WinningStatus.from(countOfMatch, matchBonus))
                 .isInstanceOf(InputNegativeAmountException.class)
-                .hasMessageContaining("음수값의 돈이 입력되었습니다.");
+                .hasMessageContaining("음수값이 입력되었습니다.");
+
     }
 
-    @DisplayName("WinningStatus 인스턴스가 소유한 카운트값 반환 여부 테스트")
+    @DisplayName("WinningStatus 인스턴스가 소유한 매칭 카운트를 반환하는지 테스트")
     @Test
-    void 반환_카운트값() {
+    void 반환_카운트() {
         // given
         int expected = 3;
         boolean matchBonus = false;
@@ -48,20 +48,24 @@ class WinningStatusTest {
         WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
         long actual = winningStatus.getCountOfMatch();
 
+        // then
         assertThat(actual).isEqualTo(expected);
+
     }
 
-    @DisplayName("WinningStatus 인스턴스가 소유한 보너스 당첨 상태값 반환 여부 테스트")
+    @DisplayName("WinningStatus 인스턴스가 소유한 보너스점수 여부를 반환하는지 테스트")
     @Test
-    void 반환_보너스당첨상태값() {
+    void 반환_보너스_boolean() {
         // given
         int expected = 3;
-        boolean matchBonus = true;
+        boolean matchBonus = false;
 
         // when
         WinningStatus winningStatus = WinningStatus.from(expected, matchBonus);
         boolean actual = winningStatus.getMatchBonus();
 
-        assertThat(actual).isTrue();
+        // then
+        assertThat(actual).isFalse();
+
     }
 }
