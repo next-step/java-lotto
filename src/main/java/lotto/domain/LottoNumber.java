@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-  private final int lottoNumber;
+  private final int value;
 
-  private LottoNumber(int lottoNumber) {
-    this.lottoNumber = lottoNumber;
+  private LottoNumber(int value) {
+    this.value = value;
   }
 
   public static LottoNumber generate(int number) {
@@ -18,11 +18,11 @@ public class LottoNumber {
   }
 
   public boolean isValidNumberRange() {
-    return 0 < lottoNumber && lottoNumber <= 45;
+    return 0 < value && value <= 45;
   }
 
-  public int getLottoNumber() {
-    return lottoNumber;
+  public int getValue() {
+    return value;
   }
 
   @Override
@@ -30,16 +30,16 @@ public class LottoNumber {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoNumber that = (LottoNumber) o;
-    return lottoNumber == that.lottoNumber;
+    return value == that.value;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumber);
+    return Objects.hash(value);
   }
 
   @Override
   public String toString() {
-    return String.valueOf(lottoNumber);
+    return String.valueOf(value);
   }
 }

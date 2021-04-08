@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-  private final List<LottoNumber> lottoNumbers;
+  private final List<LottoNumber> list;
 
-  private LottoNumbers(List<LottoNumber> lottoNumbers) {
-    this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+  private LottoNumbers(List<LottoNumber> list) {
+    this.list = Collections.unmodifiableList(list);
   }
 
   public static LottoNumbers generateSixNumbers(final GenerateNumbers generateNumbers) {
@@ -23,18 +23,18 @@ public class LottoNumbers {
   }
 
   public int size() {
-    return lottoNumbers.size();
+    return list.size();
   }
 
   public int matchLottoNumber(final LottoNumbers otherNumber) {
-    return lottoNumbers.stream()
-            .filter(lottoNumber -> otherNumber.lottoNumbers.contains(lottoNumber))
+    return list.stream()
+            .filter(lottoNumber -> otherNumber.list.contains(lottoNumber))
             .collect(Collectors.toList())
             .size();
   }
 
-  public List<LottoNumber> getLottoNumbers() {
-    return lottoNumbers;
+  public List<LottoNumber> getList() {
+    return list;
   }
 
   @Override
@@ -42,16 +42,16 @@ public class LottoNumbers {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoNumbers that = (LottoNumbers) o;
-    return Objects.equals(lottoNumbers, that.lottoNumbers);
+    return Objects.equals(list, that.list);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumbers);
+    return Objects.hash(list);
   }
 
   @Override
   public String toString() {
-    return String.valueOf(lottoNumbers);
+    return String.valueOf(list);
   }
 }

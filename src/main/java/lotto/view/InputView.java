@@ -29,7 +29,7 @@ public class InputView {
 
   private static void printBoughtLottoNumber(LottoTicket lottoTicket) {
     System.out.println(String.format(ISSUED_LOTTO_TICKET_FORMAT, lottoTicket.ticketCount()));
-    for (LottoNumbers lottoNumbers : lottoTicket.getLottoNumbers()) {
+    for (LottoNumbers lottoNumbers : lottoTicket.getList()) {
       System.out.println(lottoNumbers);
     }
   }

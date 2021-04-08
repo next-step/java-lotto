@@ -20,7 +20,7 @@ class LottoTicketTest {
 
     // then
     assertAll(() -> assertThat(lotto.ticketCount()).isEqualTo(2)
-            , () -> assertThat(lotto.getLottoNumbers().get(0))
-                    .isNotEqualTo(lotto.getLottoNumbers().get(1)));
+            , () -> assertThat(lotto.getList().get(0))
+                    .isNotEqualTo(lotto.getList().get(1)));
   }
 }

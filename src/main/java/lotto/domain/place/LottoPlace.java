@@ -15,14 +15,10 @@ public abstract class LottoPlace {
   public abstract int hashCode();
   public abstract String toString();
 
-
-
   public long getTotalMoney() {
     return getWinMoney() * count;
   }
-
   protected int plusCount() {
     return count + 1;
   }
-
 }

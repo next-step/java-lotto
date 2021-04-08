@@ -10,10 +10,10 @@ import java.util.Objects;
 public class LottoTicket {
   private static final int LOTTO_SELL_PRICE = 1000;
 
-  private final List<LottoNumbers> lottoNumbers;
+  private final List<LottoNumbers> list;
 
-  private LottoTicket(List<LottoNumbers> lottoNumbers) {
-    this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+  private LottoTicket(List<LottoNumbers> list) {
+    this.list = Collections.unmodifiableList(list);
   }
 
   public static LottoTicket toBuy(final int money, final GenerateNumbers generateNumbers) {
@@ -31,12 +31,12 @@ public class LottoTicket {
     return LOTTO_SELL_PRICE * ticketCount();
   }
 
-  public List<LottoNumbers> getLottoNumbers() {
-    return lottoNumbers;
+  public List<LottoNumbers> getList() {
+    return list;
   }
 
   public int ticketCount() {
-    return lottoNumbers.size();
+    return list.size();
   }
 
   @Override
@@ -44,16 +44,16 @@ public class LottoTicket {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoTicket that = (LottoTicket) o;
-    return Objects.equals(lottoNumbers, that.lottoNumbers);
+    return Objects.equals(list, that.list);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumbers);
+    return Objects.hash(list);
   }
 
   @Override
   public String toString() {
-    return "LottoTicket=" + lottoNumbers;
+    return "LottoTicket=" + list;
   }
 }
