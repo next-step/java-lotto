@@ -2,9 +2,11 @@ package step2.view;
 
 
 import step2.domain.Lotto;
-import step2.domain.LottoMatchResultCount;
 import step2.domain.Lottos;
+import step2.domain.Rank;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -26,27 +28,30 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public static void printMatchResults(Map<Integer, Long> matchResults) {
+    public static void printMatchResults(Map<Rank, Long> matchResults) {
         System.out.println("\n당첨 통계\n---------");
-        IntStream.range(3, 7)
-                .forEach(index -> {
-                    int cash = getCash(index);
-                    Long amount = matchResults.getOrDefault(index, 0L);
 
-                    System.out.println(
-                            index + "개 일치 (" + cash + "원)- " + amount + "개");
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.comparing(Rank::getWinningMoney))
+                .forEach(rank -> {
+                    if (!rank.equals(Rank.MISS)) {
+                        Long amount = matchResults.getOrDefault(rank, 0L);
+                        System.out.println(
+                                rank.getCountOfMatch()
+                                        + "개 일치 ("
+                                        + rank.getWinningMoney()
+                                        + "원)- "
+                                        + amount
+                                        + "개");
+                    }
                 });
-    }
-
-    private static int getCash(int index) {
-        LottoMatchResultCount lottoMatchResultCount = LottoMatchResultCount.of(index);
-
-        return lottoMatchResultCount.getRewardCash();
     }
 
     public static void printBenefitResult(double benefitPercentage) {
         System.out.println(
-                "총 수익률은 " + benefitPercentage + "입니다.(기준이 1이기 때문에 결과적으로 "
+                "총 수익률은 "
+                        + benefitPercentage
+                        + "입니다.(기준이 1이기 때문에 결과적으로 "
                         + getGainOrLoss(benefitPercentage)
                         + "라는 의미임)");
     }
