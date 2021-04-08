@@ -20,16 +20,7 @@ public class LottoStore {
   }
 
   public LottoStore exchange(LottoTicket ticket) {
-    LottoStore store = this;
-    for (LottoNumbers lottoNumbers : ticket.getList()) {
-      int matchedLottoNumberCount = lottoWiningNumbers.matchLottoNumber(lottoNumbers);
-      store = new LottoStore(store.lottoWiningNumbers, store.lottoPlaces.record(matchedLottoNumberCount));
-    }
-    return store;
-  }
-
-  public LottoWiningNumbers getLottoWiningNumbers() {
-    return lottoWiningNumbers;
+    return new LottoStore(lottoWiningNumbers, ticket.matchedLottoPlaces(lottoWiningNumbers));
   }
 
   public LottoPlaces getLottoPlaces() {

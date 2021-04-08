@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketTest {
 
@@ -21,12 +20,10 @@ class LottoTicketTest {
     int money = 2_000;
 
     // when
-    LottoTicket lotto = LottoTicket.toBuy(money, new SixLottoNumbers());
+    LottoTicket lottoTicket = LottoTicket.toBuy(money, new SixLottoNumbers());
 
     // then
-    assertAll(() -> assertThat(lotto.ticketCount()).isEqualTo(2)
-            , () -> assertThat(lotto.getList().get(0))
-                    .isNotEqualTo(lotto.getList().get(1)));
+    assertThat(lottoTicket.ticketCount()).isEqualTo(2);
   }
 
   @Test
