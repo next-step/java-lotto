@@ -35,10 +35,9 @@ public class LottoNumber {
     private static class LottoNumberCache {
         static final int low = LOTTO_NUMBER_RANGE_MIN;
         static final int high = LOTTO_NUMBER_RANGE_MAX;
-        static final LottoNumber cache[];
+        static final LottoNumber[] cache = new LottoNumber[high];
 
         static {
-            cache = new LottoNumber[(high - low) + 1];
             for (int i = 1; i < cache.length; i++) {
                 cache[i] = new LottoNumber(i);
             }
