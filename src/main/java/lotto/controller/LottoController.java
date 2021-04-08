@@ -36,7 +36,7 @@ public class LottoController {
         printProfitRate(profitRate);
     }
 
-    private PurchaseAmount createPurchaseAmount() {
+    protected PurchaseAmount createPurchaseAmount() {
         try {
             String purchaseAmount = inputView.purchaseAmount();
             return new PurchaseAmount(purchaseAmount);
@@ -46,7 +46,7 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
+    protected LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
         TicketOffice ticketOffice = new TicketOffice(lottoTicketPrice);
 
@@ -102,13 +102,13 @@ public class LottoController {
         return autoLottoTickets;
     }
 
-    private void printLottoTickets(LottoTickets lottoTickets) {
+    protected void printLottoTickets(LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             resultView.lottoNumbers(lottoTicket.lottoNumbers());
         }
     }
 
-    private WinningNumbers createWinningNumbers() {
+    protected WinningNumbers createWinningNumbers() {
         try {
             List<String> winningNumbers = SplitUtil.splitByComma(inputView.winningNumbers());
             return WinningNumbers.from(winningNumbers);
@@ -118,7 +118,7 @@ public class LottoController {
         }
     }
 
-    private BonusBall createBonusBall(WinningNumbers winningNumbers) {
+    protected BonusBall createBonusBall(WinningNumbers winningNumbers) {
         try {
             LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
             winningNumbers.check(bonusNumber);
@@ -133,15 +133,15 @@ public class LottoController {
         return new RanksCount(winningNumbers, lottoTickets);
     }
 
-    private void matchWith(RanksCount ranksCount, BonusBall bonusBall) {
+    protected void matchWith(RanksCount ranksCount, BonusBall bonusBall) {
         ranksCount.count(bonusBall);
     }
 
-    private List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
+    protected List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
         return lottoService.createRanksCountDtos(ranksCount);
     }
 
-    private void printStatistics(List<RankCountDto> ranksCount) {
+    protected void printStatistics(List<RankCountDto> ranksCount) {
         resultView.statistics(ranksCount);
     }
 
@@ -149,7 +149,7 @@ public class LottoController {
         return new ProfitRate(ranksCount.totalPrize(), purchaseAmount);
     }
 
-    private void printProfitRate(ProfitRate profitRate) {
+    protected void printProfitRate(ProfitRate profitRate) {
         if (profitRate.isPositive()) {
             resultView.positiveProfitRate(profitRate.profitRate());
         }
