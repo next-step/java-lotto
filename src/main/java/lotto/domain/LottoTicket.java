@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.place.LottoPlaces;
 import lotto.function.GenerateNumbers;
 
 import java.util.ArrayList;
@@ -25,6 +26,15 @@ public class LottoTicket {
     }
 
     return new LottoTicket(lottoNumbers);
+  }
+
+  public LottoPlaces matchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers) {
+    LottoPlaces lottoPlaces = LottoPlaces.create();
+    for (LottoNumbers lottoNumbers : list) {
+      int matchedLottoNumberCount = lottoWiningNumbers.matchLottoNumber(lottoNumbers);
+      lottoPlaces = lottoPlaces.record(matchedLottoNumberCount);
+    }
+    return lottoPlaces;
   }
 
   public int totalMoneySpent() {

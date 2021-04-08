@@ -1,8 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.place.LottoFirstPlace;
+import lotto.domain.place.LottoPlaces;
 import lotto.function.SixLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -22,5 +27,23 @@ class LottoTicketTest {
     assertAll(() -> assertThat(lotto.ticketCount()).isEqualTo(2)
             , () -> assertThat(lotto.getList().get(0))
                     .isNotEqualTo(lotto.getList().get(1)));
+  }
+
+  @Test
+  @DisplayName("로또 당첨번호와 비교하여 로또 등수 일급 컬렉션 클래스를 반환한다.")
+  void matchedLottoPlaces() {
+    // given
+    LottoTicket lottoTicket = LottoTicket.toBuy(3_000, () -> IntStream.rangeClosed(1, 6)
+            .mapToObj(LottoNumber::generate)
+            .collect(Collectors.toList()));
+
+    // when
+    LottoPlaces lottoPlaces = lottoTicket.matchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
+
+    // then
+    assertThat(lottoPlaces.firstPlace())
+            .isNotNull()
+            .isEqualTo(LottoFirstPlace.create().win().win().win());
+
   }
 }
