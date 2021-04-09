@@ -19,7 +19,11 @@ public class Money {
     }
 
     public Money remain(PurchasedLottoNumber purchasedLottoNumber){
-        return new Money(money - purchasedLottoNumber.getNumber() * DEFAULT_LOTTO_PRICE);
+        int remainMoney = money - purchasedLottoNumber.getNumber() * DEFAULT_LOTTO_PRICE;
+        if(remainMoney < 0){
+            throw new IllegalArgumentException("구매 금액보다 더 많은 로또를 구매 할 수 없습니다.");
+        }
+        return new Money(remainMoney);
     }
 
     public int getMoney() {
