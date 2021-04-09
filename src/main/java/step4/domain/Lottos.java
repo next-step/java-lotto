@@ -1,10 +1,10 @@
 package step4.domain;
 
-import step4.exception.InvalidLottoNumberException;
 import step4.domain.number.Count;
 import step4.domain.number.LottoNumber;
 import step4.domain.result.LottoMatchingResult;
 import step4.domain.result.Rank;
+import step4.exception.InvalidLottoNumberException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,28 +62,28 @@ public class Lottos {
   }
 
   // 질문용 클래스
-  public static class Builder{
-    private List<Lotto> lottos;
+  public static class Builder {
+    private final List<Lotto> lottos;
 
-    public Builder(){
+    public Builder() {
       this(new ArrayList<Lotto>());
     }
 
-    public Builder(List<Lotto> lottos){
+    public Builder(List<Lotto> lottos) {
       this.lottos = lottos;
     }
 
-    public Builder add(Lotto lotto){
+    public Builder add(Lotto lotto) {
       lottos.add(lotto);
       return this;
     }
 
-    public Builder addAll(List<Lotto> lottos){
+    public Builder addAll(List<Lotto> lottos) {
       this.lottos.addAll(lottos);
       return this;
     }
 
-    public Lottos build(){
+    public Lottos build() {
       return new Lottos(Collections.unmodifiableList(lottos));
     }
   }

@@ -15,9 +15,9 @@ import step4.domain.result.Rank;
 import step4.exception.InvalidPriceException;
 import step4.strategy.LottoRandomStrategy;
 import step4.strategy.LottoStrategy;
-import step4.util.Splitter;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MartTest {
   private Mart mart;
@@ -52,9 +52,8 @@ public class MartTest {
   @CsvSource(value = "11,12,13,14,15,16:44:1000", delimiter = ':')
   @DisplayName("정확한 로또 갯수대로 생성 테스트")
   void makeLottoTest(String strNumbers, int bonusBall, Long money) {
-    LottoNumbers result = new LottoNumbers(Splitter.split(strNumbers));
-    Lotto targetLotto = new Lotto(result);
-    LottoStrategy testStrategy = lottoNumbers -> new LottoNumbers(Splitter.split(strNumbers));
+    Lotto targetLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(strNumbers));
+    LottoStrategy testStrategy = lottoNumbers -> LottoNumbers.convertStringToLottoNumbers(strNumbers);
 
     Count matchingCount = mart.buyAllRandomLottos(new Cash(money), testStrategy)
       .matchLottosWithBonusBall(targetLotto, new LottoNumber(bonusBall))

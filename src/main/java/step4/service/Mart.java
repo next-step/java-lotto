@@ -3,7 +3,6 @@ package step4.service;
 import step4.domain.Cash;
 import step4.domain.Lotto;
 import step4.domain.Lottos;
-import step4.domain.ManualLottoParameter;
 import step4.domain.number.Count;
 import step4.domain.number.LottoNumber;
 import step4.domain.number.LottoNumbers;
@@ -28,15 +27,14 @@ public class Mart {
     }
   }
 
-  public Lottos sellAllManualLottos(Cash money, List<ManualLottoParameter> parameters) {
+  public Lottos sellAllManualLottos(Cash money, List<String> parameters) {
     Lottos lottos = new Lottos();
     if (!money.isGreaterEqualProductPrice(Cash.getMultipleLottosPrice(new Count(parameters.size())))) {
       throw new InvalidPriceException(ERROR_MESSAGE);
     }
 
-    for (ManualLottoParameter parameter : parameters) {
-      LottoNumbers lottoNumbers = new LottoNumbers(parameter.changeToListOfLottoNumber());
-      lottos.addLotto(new Lotto(lottoNumbers));
+    for (String parameter : parameters) {
+      lottos.addLotto(new Lotto(LottoNumbers.convertStringToLottoNumbers(parameter)));
     }
 
     return lottos;
