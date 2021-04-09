@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,10 +35,6 @@ public class Lotto {
     return Math.toIntExact(numbers.stream()
         .filter(holdingNumbers.numbers::contains)
         .count());
-  }
-
-  public int size() {
-    return numbers.size();
   }
 
   private void validation(List<Number> numbers) {

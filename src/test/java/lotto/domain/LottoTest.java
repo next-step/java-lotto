@@ -67,14 +67,4 @@ class LottoTest {
     //then
     assertEquals(manualLotto.matchCount(targetLotto), 6);
   }
-
-  @Test
-  @DisplayName("size를 알아낼 수 있는가")
-  public void size() throws Exception {
-    //given
-    Lotto autoLotto = Lotto.createAutoLotto();
-    //when
-    //then
-    assertEquals(autoLotto.size(), 6);
-  }
 }
