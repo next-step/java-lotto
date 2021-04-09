@@ -1,9 +1,6 @@
 package step2.View;
 
-import step2.Domain.Lottos;
-import step2.Domain.Money;
-import step2.Domain.Profit;
-import step2.Domain.RandomLottoNumberGenerator;
+import step2.Domain.*;
 
 public class LottoGame {
 
@@ -17,10 +14,14 @@ public class LottoGame {
 
     public void start() {
         Money money = inputView.buyLotto();
-        Lottos lottos = Lottos.of(new RandomLottoNumberGenerator(money));
+        PurchasedLottoNumber manualBuyNumber = inputView.buyManualLotto();
+        Lottos manualLottos = Lottos.of(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber)));
+        //테스트
+        resultView.printLottoList(manualLottos);
+        Lottos autoLottos = Lottos.of(new RandomLottoNumberGenerator(money.remain(manualBuyNumber)));
         resultView.printPurchaseNumber(money);
-        resultView.printLottoList(lottos);
-        Profit profit = new Profit(money, lottos.makeStatistic(inputView.winningLotto()));
+        resultView.printLottoList(autoLottos);
+        Profit profit = new Profit(money, autoLottos.makeStatistic(inputView.winningLotto()));
         resultView.printLottoStatistic(profit);
         resultView.printProfitRate(profit);
     }

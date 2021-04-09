@@ -1,5 +1,7 @@
 package step2.Domain;
 
+import step2.Validation.StringValidator;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -21,15 +23,7 @@ public class InputNumber {
 
     public List<LottoNumber> numbers() {
         return numbers.stream()
-                .map(num -> new LottoNumber(parseStringToInt(num.trim())))
+                .map(num -> new LottoNumber(StringValidator.parseStringToInt(num.trim())))
                 .collect(Collectors.toList());
-    }
-
-    private int parseStringToInt(String number){
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 숫자만 입력해주세요.");
-        }
     }
 }
