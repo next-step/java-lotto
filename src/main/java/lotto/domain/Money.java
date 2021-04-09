@@ -21,22 +21,6 @@ public class Money {
     return value * money;
   }
 
-  public int multiple(int size, int lottoPerPrice) {
-    return size * lottoPerPrice;
-  }
-
-  public Money subtract(Money purchaseAmount) {
-    return new Money(money - purchaseAmount.money);
-  }
-
-  public boolean lagerThan(int value) {
-    return money > value;
-  }
-
-  public Money sum(int value) {
-    return new Money(money + value);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {

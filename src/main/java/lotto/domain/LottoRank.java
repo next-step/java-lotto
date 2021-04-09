@@ -50,18 +50,18 @@ public enum LottoRank implements LottoRankFilter {
         .orElse(LottoRank.NONE);
   }
 
-  public static boolean isNone(LottoRank lottoRank) {
-    return lottoRank == LottoRank.NONE;
+  public static boolean isNotNone(LottoRank lottoRank) {
+    return lottoRank != LottoRank.NONE;
   }
 
-  public static Money matchRankWinnerMoney(String found) {
+  public static Money matchRankWinnerMoney(LottoRank found) {
     LottoRank rank = findRank(found);
     return rank.winnerMoney;
   }
 
-  private static LottoRank findRank(String winnerRank) {
+  private static LottoRank findRank(LottoRank found) {
     return Arrays.stream(LottoRank.values())
-        .filter(rank -> rank.name().equals(winnerRank))
+        .filter(rank -> rank.equals(found))
         .findAny()
         .orElse(LottoRank.NONE);
   }

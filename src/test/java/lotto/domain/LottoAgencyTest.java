@@ -21,17 +21,6 @@ class LottoAgencyTest {
   }
 
   @Test
-  @DisplayName("전체 구매 금액을 알아낼 수 있는가")
-  public void originMoney() throws Exception {
-    //given
-    LottoCoupon coupon = LottoCoupon.createLottoCoupon(10);
-    LottoAgency agency = new LottoAgency(new Money(14000), coupon);
-    //when
-    //then
-    assertEquals(agency.originMoney(), new Money(14000));
-  }
-
-  @Test
   @DisplayName("로또 결과를 얻어올 수 있는가")
   public void getLottoMatchResult() throws Exception {
     //given

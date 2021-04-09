@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,7 +67,7 @@ class LottoRankTest {
   @ParameterizedTest
   @DisplayName("입력된 String을 통해서 해당 등수의 상금을 알아낼 수 있는")
   @CsvSource({"FIRST , 2000000000", "SECOND, 30000000", "THIRD, 1500000", "FOURTH, 50000", "FIFTH, 5000"})
-  public void findRankTest(String value, int prize) throws Exception {
+  public void findRankTest(LottoRank value, int prize) throws Exception {
     //given
     Money money = LottoRank.matchRankWinnerMoney(value);
     //when
@@ -76,8 +76,8 @@ class LottoRankTest {
   }
 
   @Test
-  @DisplayName("None 체크를 제대로 하는가")
+  @DisplayName("None이 아님을 체크를 잘하는가")
   public void isNull() throws Exception {
-    assertTrue(LottoRank.isNone(LottoRank.NONE));
+    assertFalse(LottoRank.isNotNone(LottoRank.NONE));
   }
 }

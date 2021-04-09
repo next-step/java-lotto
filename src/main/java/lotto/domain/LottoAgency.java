@@ -7,30 +7,21 @@ public class LottoAgency {
   private static final int LOTTO_PER_PRICE = 1000;
 
   private final LottoCoupon coupon;
-  private Money money;
+  private final Money money;
 
   public LottoAgency(Money money, LottoCoupon manualLottoCoupon) {
     this.money = money;
     this.coupon = manualLottoCoupon;
-    updateBalance(manualLottoCoupon.size());
   }
 
   public int purchaseLotto() {
     LottoCoupon lottoCoupon = LottoCoupon.createLottoCoupon(availablePurchaseQuantity());
     updateLottoCoupon(lottoCoupon);
-    updateBalance(lottoCoupon.size());
     return lottoCoupon.size();
   }
 
-  public Money originMoney() {
-    if(money.lagerThan(0)) {
-      return money.sum(money.multiple(coupon.size(), LOTTO_PER_PRICE));
-    }
-    return new Money(money.multiple(coupon.size(), LOTTO_PER_PRICE));
-  }
-
   public int availablePurchaseQuantity() {
-    return money.divide(LOTTO_PER_PRICE);
+    return money.divide(LOTTO_PER_PRICE) - coupon.size();
   }
 
   public int currentBoughtCouponQuantity() {
@@ -38,7 +29,7 @@ public class LottoAgency {
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(originMoney(), coupon);
+    return winningNumber.generateLottoMatchResult(money, coupon);
   }
 
   public String lottoCouponToString() {
@@ -47,10 +38,6 @@ public class LottoAgency {
 
   private void updateLottoCoupon(LottoCoupon lottoCoupon) {
     this.coupon.add(lottoCoupon);
-  }
-
-  private void updateBalance(int size) {
-    this.money = money.subtract(new Money(money.multiple(size, LOTTO_PER_PRICE)));
   }
 
   @Override
