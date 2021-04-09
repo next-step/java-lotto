@@ -24,10 +24,10 @@ public class LottoCoupon {
     return new LottoCoupon(lottos);
   }
 
-  public List<LottoRank> matches(WinningNumber winningNumber) {
-    return lottoCoupon.stream()
+  public LottoRanks matches(WinningNumber winningNumber) {
+    return new LottoRanks(lottoCoupon.stream()
         .map(winningNumber::match)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()));
   }
 
   public int size() {

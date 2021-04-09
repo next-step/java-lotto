@@ -46,12 +46,12 @@ class LottoCouponTest {
 
     //when
     LottoCoupon lottoCoupon = LottoCoupon.asLottoCoupon(lottos);
-    List<LottoRank> matches = lottoCoupon.matches(winningNumbers);
+    LottoRanks matches = lottoCoupon.matches(winningNumbers);
 
     //then
     assertAll(
-        () -> assertEquals(matches.get(0).name(), "FIRST"),
-        () -> assertEquals(matches.get(1).name(), "FOURTH")
+        () -> assertTrue(matches.getMatchResult().containsKey(LottoRank.FIRST)),
+        () -> assertTrue(matches.getMatchResult().containsKey(LottoRank.FOURTH))
     );
   }
 

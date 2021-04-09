@@ -14,13 +14,13 @@ import org.junit.jupiter.api.Test;
 
 class LottoScoreBoardTest {
 
-  private static final List<LottoRank> lottoRanks = new ArrayList<>();
+  private static final List<LottoRank> lottoRankList = new ArrayList<>();
 
   @BeforeEach
   public void setUp() {
-    lottoRanks.clear();
-    lottoRanks.add(LottoRank.FIFTH);
-    lottoRanks.add(LottoRank.FOURTH);
+    lottoRankList.clear();
+    lottoRankList.add(LottoRank.FIFTH);
+    lottoRankList.add(LottoRank.FOURTH);
   }
 
   @Test
@@ -28,6 +28,7 @@ class LottoScoreBoardTest {
   public void create() {
     //given
     Money money = new Money(14000);
+    LottoRanks lottoRanks = new LottoRanks(lottoRankList);
     //when
     LottoScoreBoard lottoResult = LottoScoreBoard.createLottoResult(money, lottoRanks);
 
@@ -43,6 +44,7 @@ class LottoScoreBoardTest {
   public void validateTotalEarningRate() throws Exception {
     //given
     Money money = new Money(14000);
+    LottoRanks lottoRanks = new LottoRanks(lottoRankList);
     LottoScoreBoard lottoResult = LottoScoreBoard.createLottoResult(money, lottoRanks);
 
     //when
