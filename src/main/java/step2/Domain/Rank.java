@@ -1,7 +1,10 @@
 package step2.Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Rank {
 
@@ -20,5 +23,15 @@ public class Rank {
 
     public Map<LottoPrize, List<Lotto>> getRank() {
         return rank;
+    }
+
+    public Rank merge(Rank anotherRank){
+        return new Rank(Stream.of(this.rank, anotherRank.getRank())
+                .flatMap(mergedMap -> mergedMap.entrySet().stream())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        v -> new ArrayList<>(v.getValue()),
+                        (left, right) -> {left.addAll(right); return left;}
+                )));
     }
 }

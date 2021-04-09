@@ -15,12 +15,14 @@ public class LottoGame {
     public void start() {
         Money money = inputView.buyLotto();
         PurchasedLottoNumber manualBuyNumber = inputView.buyManualLotto();
-        Money remainMoney =  money.remain(manualBuyNumber);
+        Money remainMoney = money.remain(manualBuyNumber);
         Lottos manualLottos = Lottos.of(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber)));
         Lottos autoLottos = Lottos.of(new RandomLottoNumberGenerator(remainMoney));
-        resultView.printPurchaseNumber(money);
+        resultView.printPurchaseNumber(manualBuyNumber,new PurchasedLottoNumber(remainMoney));
         resultView.printLottoList(autoLottos);
-        Profit profit = new Profit(money, autoLottos.makeStatistic(inputView.winningLotto()));
+        WinningLotto winningLotto = inputView.winningLotto();
+        Rank rank = autoLottos.makeStatistic(winningLotto).merge(manualLottos.makeStatistic(winningLotto));
+        Profit profit = new Profit(money, rank);
         resultView.printLottoStatistic(profit);
         resultView.printProfitRate(profit);
     }
