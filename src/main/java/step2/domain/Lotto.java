@@ -1,6 +1,11 @@
 package step2.domain;
 
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
@@ -23,7 +28,9 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+        return this.lottoNumbers.stream()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
     }
 
     @Override

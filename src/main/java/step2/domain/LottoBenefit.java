@@ -3,12 +3,12 @@ package step2.domain;
 
 import java.util.Map;
 
-public class LottoBenefitCalculator {
+public class LottoBenefit {
 
-    private final Map<Integer, Long> matchResult;
+    private final Map<Rank, Long> matchResult;
     private final int price;
 
-    public LottoBenefitCalculator(int price, Map<Integer, Long> matchResult) {
+    public LottoBenefit(int price, Map<Rank, Long> matchResult) {
         this.price = price;
         this.matchResult = matchResult;
     }
@@ -17,10 +17,8 @@ public class LottoBenefitCalculator {
         double sum = matchResult.entrySet()
                 .stream()
                 .mapToLong(matchResult ->
-                        LottoMatchResultCount.of(matchResult.getKey())
-                                .getRewardCash(matchResult.getValue()))
+                        matchResult.getKey().getWinningMoney() * matchResult.getValue())
                 .sum();
-
         return getCarculatorMoney(price, sum);
     }
 

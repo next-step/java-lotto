@@ -4,6 +4,7 @@ package step2.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,7 +23,7 @@ class LottoTest {
     @BeforeEach
     void init() {
         lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         lotto = new Lotto(lottoNumbers);
@@ -33,17 +34,17 @@ class LottoTest {
     @CsvSource(value = {"1:2:3:4:5:6", "10:11:12:13:15:16", "17:18:19:20:33:45"}, delimiter = ':')
     void lottoIsContainTest(int first, int second, int third, int fourth, int fifth, int sixth) {
         Set<LottoNumber> lottoNumbers = Stream.of(first, second, third, fourth, fifth, sixth)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Lotto lotto = new Lotto(lottoNumbers);
 
         Assertions.assertAll(
-                () -> assertTrue(lotto.isContains(new LottoNumber(first))),
-                () -> assertTrue(lotto.isContains(new LottoNumber(second))),
-                () -> assertTrue(lotto.isContains(new LottoNumber(third))),
-                () -> assertTrue(lotto.isContains(new LottoNumber(fifth))),
-                () -> assertTrue(lotto.isContains(new LottoNumber(sixth))));
+                () -> assertTrue(lotto.isContains(LottoNumber.valueOf(first))),
+                () -> assertTrue(lotto.isContains(LottoNumber.valueOf((second)))),
+                () -> assertTrue(lotto.isContains(LottoNumber.valueOf((third)))),
+                () -> assertTrue(lotto.isContains(LottoNumber.valueOf((fifth)))),
+                () -> assertTrue(lotto.isContains(LottoNumber.valueOf((sixth)))));
     }
 
     @DisplayName("로또 일치 테스트")
@@ -65,7 +66,7 @@ class LottoTest {
             int sixth,
             int expectedMatchedCount) {
         Set<LottoNumber> expectedLottoNumbers = Stream.of(first, second, third, fourth, fifth, sixth)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
 
         Lotto lotto = new Lotto(lottoNumbers);
@@ -73,6 +74,4 @@ class LottoTest {
 
         Assertions.assertEquals(lotto.matchNumberCounts(expectedLotto), expectedMatchedCount);
     }
-
-
 }
