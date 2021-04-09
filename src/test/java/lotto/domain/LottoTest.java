@@ -44,7 +44,7 @@ class LottoTest {
   }
 
   @Test
-  @DisplayName("Lotto를 통해서 당첨 비교를 수행할 수 있는가")
+  @DisplayName("Lotto를 통해서 몇 개가 일치했는지를 알 수 있는가")
   public void matchTest() throws Exception {
     //given
     Lotto manualLotto = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));

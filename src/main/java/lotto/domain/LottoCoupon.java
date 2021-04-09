@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoCoupon {
   private final List<Lotto> lottoCoupon;
@@ -24,13 +25,9 @@ public class LottoCoupon {
   }
 
   public List<LottoRank> matches(WinningNumber winningNumber) {
-    List<LottoRank> lottoRanks = new ArrayList<>();
-    for (Lotto lotto : lottoCoupon) {
-      int matchCount = winningNumber.contains(lotto);
-      boolean hasBonusBall = winningNumber.hasBonusBall(lotto);
-      lottoRanks.add(LottoRank.valueOf(matchCount, hasBonusBall));
-    }
-    return lottoRanks;
+    return lottoCoupon.stream()
+        .map(winningNumber::match)
+        .collect(Collectors.toList());
   }
 
   public int size() {

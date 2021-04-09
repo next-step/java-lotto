@@ -38,7 +38,7 @@ public class LottoAgency {
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(originMoney(), coupon, winningNumber);
+    return winningNumber.generateLottoMatchResult(originMoney(), coupon);
   }
 
   public String lottoCouponToString() {

@@ -36,7 +36,7 @@ class LottoAgencyTest {
   public void getLottoMatchResult() throws Exception {
     //given
     LottoCoupon coupon = LottoCoupon.createLottoCoupon(10);
-    LottoAgency agency = new LottoAgency(new Money(14000), coupon);
+    LottoAgency agency = new LottoAgency(new Money(14900), coupon);
     //when
     WinningNumber winningNumbers = WinningNumber
         .createWinningNumbers(Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6))

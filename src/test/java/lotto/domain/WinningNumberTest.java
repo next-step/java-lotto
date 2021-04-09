@@ -37,26 +37,24 @@ class WinningNumberTest {
     LottoCoupon coupon = new LottoCoupon(lottos);
 
     //when
-    LottoScoreBoard lottoScoreBoard = winningNumber.generateLottoMatchResult(new Money(2000000000), coupon, winningNumber);
+    LottoScoreBoard lottoScoreBoard = winningNumber.generateLottoMatchResult(new Money(2000000000), coupon);
 
     //then
     assertEquals(lottoScoreBoard.totalEarningRate(), 1);
   }
 
   @Test
-  @DisplayName("보너스 볼을 가졌는지 판단할 수 있는가")
-  public void hasBonusBall() throws Exception {
+  @DisplayName("2등 당첨 여부 확인")
+  public void match() throws Exception {
     //given
     WinningNumber winningNumber = WinningNumber.createWinningNumbers(
-        Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
         new Number(6));
 
     Lotto manualLotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-    //when
-    boolean hasBonusBall = winningNumber.hasBonusBall(manualLotto);
-
     //then
-    assertTrue(hasBonusBall);
+    LottoRank rank = winningNumber.match(manualLotto);
+    assertEquals(rank, LottoRank.SECOND);
   }
 }
