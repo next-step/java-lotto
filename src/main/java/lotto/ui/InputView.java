@@ -2,6 +2,7 @@ package lotto.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
@@ -11,11 +12,7 @@ import lotto.domain.Number;
 
 public class InputView {
 
-  private final BufferedReader reader;
-
-  public InputView(BufferedReader reader) {
-    this.reader = reader;
-  }
+  private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
   public Money howManyBuyLottoCoupon() throws IOException {
     System.out.println("구입금액을 입력해 주세요.");
