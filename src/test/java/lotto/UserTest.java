@@ -1,9 +1,9 @@
-package step2;
+package lotto;
 
+import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
-import step2.domain.AutoLottoMatchCount;
-import step2.domain.Lotto;
-import step2.domain.User;
+import lotto.domain.AutoLottoMatchCount;
+import lotto.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +20,10 @@ public class UserTest {
 
         List<Lotto> lottoList = Arrays.asList(first, second, three);
         AutoLottoMatchCount autoLottoMatchCount = new AutoLottoMatchCount();
-        User user = new User();
         for (Lotto lotto : lottoList) {
-            autoLottoMatchCount.lottoCountPlus(user.winningConfirm(winningLotto, lotto));
+           autoLottoMatchCount.lottoCountPlus((winningLotto.winningLottoCount(lotto,33)));
         }
 
-        assertThat(autoLottoMatchCount.findLottoNumberCount(3)).isEqualTo(2);
+        assertThat(autoLottoMatchCount.findLottoNumberCount(Rank.FIFTH)).isEqualTo(2);
     }
 }

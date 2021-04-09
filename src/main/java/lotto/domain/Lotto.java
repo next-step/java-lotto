@@ -1,4 +1,6 @@
-package step2.domain;
+package lotto.domain;
+
+import lotto.util.Constant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public class Lotto {
 
     private List<Integer> initLottoNumber() {
         List<Integer> list = new ArrayList<>();
-        for (Integer i = 1; i < 46; i++) {
+        for (int i = Constant.LOTTO_RANGE_START; i <= Constant.LOTTO_RANGE_END; i++) {
             list.add(i);
         }
         return list;
@@ -36,7 +38,7 @@ public class Lotto {
     private List<Integer> draw() {
         List<Integer> list = new ArrayList<>();
         Collections.shuffle(lottoNumber);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Constant.LOTTO_COUNT; i++) {
             list.add(lottoNumber.get(i));
         }
         Collections.sort(list);
@@ -47,12 +49,23 @@ public class Lotto {
         return lottoNumber.size();
     }
 
-    public int numberConfirm(Integer number){
-        return lottoNumber.contains(number) ? 1 : 0 ;
-    }
-
-
     public String displayLottoNumber() {
         return Arrays.toString(lottoNumber.toArray());
+    }
+
+    public WinningCount winningLottoCount(Lotto lotto, int bonusNumber) {
+        WinningCount winningCount = new WinningCount();
+        List<Integer> lottoNumber = lotto.getLottoNumber();
+        for (Integer number: lottoNumber){
+            plusWinningCount(winningCount, number, bonusNumber);
+        }
+
+        return winningCount;
+    }
+
+    public void plusWinningCount(WinningCount winningCount, Integer number, int bonusNumber){
+        if(lottoNumber.contains(number)){
+            winningCount.plus(number == bonusNumber);
+        }
     }
 }

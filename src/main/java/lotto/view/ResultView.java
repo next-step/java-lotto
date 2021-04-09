@@ -1,7 +1,7 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.Lotto;
-import step2.domain.Prize;
+import lotto.domain.Lotto;
+import lotto.domain.Rank;
 
 public class ResultView {
     public void displayLotto(Lotto lotto) {
@@ -12,8 +12,11 @@ public class ResultView {
         System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
     }
 
-    public void displayWinningStatistics(Integer number, Prize prize, Integer winningCount) {
-        System.out.println(String.format("%d 개 일치(%d원)- %d개", number, prize.getPrize(), winningCount));
+    public void displayWinningStatistics(Rank rank, Integer winningCount) {
+        if(rank == Rank.MISS){
+            return ;
+        }
+        System.out.println(String.format("%d 개 일치(%d원)- %d개", rank.getCountOfMatch(), rank.getWinningMoney(), winningCount));
     }
 
     public void displayProfits(double result) {
