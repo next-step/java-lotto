@@ -35,15 +35,16 @@ public class LottoMachine {
 
         List<Number> numberList = new ArrayList<>();
 
-        for(int number : lottoNumberList){
+        for (int number : lottoNumberList) {
             numberList.add(new Number(number));
         }
 
         LottoNumber lottoNumber = new LottoNumber(numberList);
         WinLottoNumber winLottoNumber = new WinLottoNumber(lottoNumber);
 
-        for (int i = 0; i < this.lottoNumbers.lottoNumbers().size(); i++) {
-            int resultCount = winLottoNumber.checkDuplicationLotto(this.lottoNumbers.lottoNumbers().get(i));
+
+        for (LottoNumber purchasedLottoNumber : this.lottoNumbers.lottoNumbers()) {
+            int resultCount = winLottoNumber.checkDuplicationLotto(purchasedLottoNumber);
             plusCount(resultCount);
         }
 

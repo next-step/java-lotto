@@ -18,11 +18,11 @@ public class LottoMain {
 
         Clerk clerk = new Clerk(new Money(money));
 
-        int lottoCnt = clerk.returnedLottoCount();
-        OutputView outputView = new OutputView(lottoCnt);
+        int lottoCount = clerk.returnedLottoCount();
+        OutputView outputView = new OutputView(lottoCount);
         outputView.printLottoCnt();
 
-        for (int i = 0; i < lottoCnt; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             WholeLottoNumbers wholeLottoNumbers = new WholeLottoNumbers();
             wholeLottoNumbers.createNumber();
             Shuffle shuffle = new Shuffle(wholeLottoNumbers);

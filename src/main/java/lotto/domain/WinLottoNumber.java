@@ -4,11 +4,20 @@ public class WinLottoNumber {
 
     private static boolean[] duplicationLottoNumberArr = new boolean[46];
     private LottoNumber winLottoNumber;
-
+    private int duplicationCount = 0;
 
     public WinLottoNumber(LottoNumber winLottoNumber) {
         this.winLottoNumber = winLottoNumber;
         checkWinLotto();
+    }
+
+
+    public int checkDuplicationLotto(LottoNumber lottoNumber) {
+
+        for (Number number : lottoNumber.numbers()) {
+            increaseCount(number);
+        }
+        return duplicationCount;
     }
 
     private void checkWinLotto() {
@@ -17,15 +26,10 @@ public class WinLottoNumber {
         }
     }
 
-    public int checkDuplicationLotto(LottoNumber lottoNumber) {
-        int duplicationCount = 0;
-
-        for (Number number : lottoNumber.numbers()) {
-            if (duplicationLottoNumberArr[number.number()]) {
-                duplicationCount++;
-            }
+    private void increaseCount(Number number) {
+        if (duplicationLottoNumberArr[number.number()]) {
+            duplicationCount++;
         }
-        return duplicationCount;
     }
 
 
