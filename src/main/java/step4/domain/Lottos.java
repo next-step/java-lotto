@@ -15,16 +15,8 @@ public class Lottos {
 
   private final List<Lotto> lottos;
 
-  public Lottos() {
-    lottos = new ArrayList<>();
-  }
-
-  public Lottos(List<Lotto> lottos) {
+  private Lottos(List<Lotto> lottos) {
     this.lottos = lottos;
-  }
-
-  public void addLotto(Lotto lotto) {
-    lottos.add(lotto);
   }
 
   public Count quantity() {
@@ -32,10 +24,11 @@ public class Lottos {
   }
 
   public Lottos mergeLottos(Lottos otherLottos) {
+
     List<Lotto> sourceLottos = new ArrayList<>(lottos);
     sourceLottos.addAll(otherLottos.lottos);
 
-    return new Lottos(sourceLottos);
+    return new Builder().addAll(lottos).addAll(otherLottos.lottos).build();
   }
 
   public LottoMatchingResult matchLottosWithBonusBall(Lotto prizeLotto, LottoNumber bonusNumber) {

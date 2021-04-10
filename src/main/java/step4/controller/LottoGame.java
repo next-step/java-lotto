@@ -61,7 +61,7 @@ public class LottoGame {
 
   private LottoMatchingResult checkLottos(Lottos boughtLottos) {
     String expression = InputView.saveLottoNumbers();
-    Lotto matcherLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(expression));
+    Lotto matcherLotto = new Lotto(new LottoNumbers(expression));
 
     LottoNumber bonusBall = new LottoNumber(InputView.saveBonusBall());
 

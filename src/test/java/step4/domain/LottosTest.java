@@ -15,12 +15,13 @@ public class LottosTest {
   @DisplayName("추가 확인 및 개수 확인 테스트")
   @CsvSource(value = "1,2,3,4,5,6:2,4,6,8,10,12:2", delimiter = ':')
   void addLottoTest(String firstExpression, String secondExpression, int result) {
-    Lottos lottos = new Lottos();
-    Lotto firstLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(firstExpression));
-    Lotto secondLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(secondExpression));
+    Lotto firstLotto = new Lotto(new LottoNumbers(firstExpression));
+    Lotto secondLotto = new Lotto(new LottoNumbers(secondExpression));
 
-    lottos.addLotto(firstLotto);
-    lottos.addLotto(secondLotto);
+    Lottos lottos = new Lottos.Builder()
+      .add(firstLotto)
+      .add(secondLotto)
+      .build();
 
     assertThat(lottos.quantity().showCount()).isEqualTo(result);
   }
@@ -31,11 +32,12 @@ public class LottosTest {
   void resultGetMatchingTest(String lotto, String answer, int bonusBall, int targetCount, boolean targetFlag, String result) {
 
     //setup source then target
-    Lotto source = new Lotto(LottoNumbers.convertStringToLottoNumbers(lotto));
-    Lotto target = new Lotto(LottoNumbers.convertStringToLottoNumbers(answer));
+    Lotto source = new Lotto(new LottoNumbers(lotto));
+    Lotto target = new Lotto(new LottoNumbers(answer));
 
-    Lottos sourceLottos = new Lottos();
-    sourceLottos.addLotto(source);
+    Lottos sourceLottos = new Lottos.Builder()
+      .add(source)
+      .build();
 
     Rank rank = Rank.findRankByCountOfMatch(targetCount, targetFlag);
 
@@ -52,13 +54,15 @@ public class LottosTest {
   void lottosMergeTest(String lotto, String answer, int result) {
     //setup source then target
 
-    Lotto source = new Lotto(LottoNumbers.convertStringToLottoNumbers(lotto));
-    Lottos sourceLottos = new Lottos();
-    sourceLottos.addLotto(source);
+    Lotto source = new Lotto(new LottoNumbers(lotto));
+    Lottos sourceLottos = new Lottos.Builder()
+      .add(source)
+      .build();
 
-    Lotto target = new Lotto(LottoNumbers.convertStringToLottoNumbers(answer));
-    Lottos targetLottos = new Lottos();
-    targetLottos.addLotto(target);
+    Lotto target = new Lotto(new LottoNumbers(answer));
+    Lottos targetLottos = new Lottos.Builder()
+      .add(target)
+      .build();
 
     assertThat(
       sourceLottos

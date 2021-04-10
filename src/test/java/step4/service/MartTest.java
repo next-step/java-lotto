@@ -52,8 +52,8 @@ public class MartTest {
   @CsvSource(value = "11,12,13,14,15,16:44:1000", delimiter = ':')
   @DisplayName("정확한 로또 갯수대로 생성 테스트")
   void makeLottoTest(String strNumbers, int bonusBall, Long money) {
-    Lotto targetLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(strNumbers));
-    LottoStrategy testStrategy = lottoNumbers -> LottoNumbers.convertStringToLottoNumbers(strNumbers);
+    Lotto targetLotto = new Lotto(new LottoNumbers(strNumbers));
+    LottoStrategy testStrategy = lottoNumbers -> new LottoNumbers(strNumbers);
 
     Count matchingCount = mart.buyAllRandomLottos(new Cash(money), testStrategy)
       .matchLottosWithBonusBall(targetLotto, new LottoNumber(bonusBall))

@@ -28,16 +28,15 @@ public class Mart {
   }
 
   public Lottos sellAllManualLottos(Cash money, List<String> parameters) {
-    Lottos lottos = new Lottos();
+    Lottos.Builder builder = new Lottos.Builder();
     if (!money.isGreaterEqualProductPrice(Cash.getMultipleLottosPrice(new Count(parameters.size())))) {
       throw new InvalidPriceException(ERROR_MESSAGE);
     }
 
-    for (String parameter : parameters) {
-      lottos.addLotto(new Lotto(LottoNumbers.convertStringToLottoNumbers(parameter)));
-    }
+    parameters.forEach(parameter ->
+      builder.add(new Lotto(new LottoNumbers(parameter))));
 
-    return lottos;
+    return builder.build();
   }
 
   public Lottos buyAllRandomLottos(Cash money, LottoStrategy lottoStrategy) {
@@ -48,14 +47,14 @@ public class Mart {
   }
 
   private Lottos buyLottos(Cash sellerMoney, LottoStrategy lottoStrategy) {
-    Lottos lottos = new Lottos();
+    Lottos.Builder lottosBuilder = new Lottos.Builder();
     Cash exchangeMoney = sellerMoney;
     while (exchangeMoney.isAvailableToBuyLotto()) {
       exchangeMoney = exchangeMoney.withdrawal();
-      lottos.addLotto(lottoMaker.makeLotto(lottoStrategy));
+      lottosBuilder.add(lottoMaker.makeLotto(lottoStrategy));
     }
 
-    return lottos;
+    return lottosBuilder.build();
   }
 
   class LottoMaker {

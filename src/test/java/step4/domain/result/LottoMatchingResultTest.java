@@ -19,13 +19,15 @@ class LottoMatchingResultTest {
   @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:2,4,6,41,42,43:45:false:3:2"}, delimiter = ':')
   void calcYieldTest(String lottoA, String lottoB, String targetLotto, int bonusBall, boolean bonusFlag, int matchingNumber, int count) {
     //setup source then target
-    Lotto aLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(lottoA));
-    Lotto bLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(lottoB));
-    Lotto target = new Lotto(LottoNumbers.convertStringToLottoNumbers(targetLotto));
+    Lotto aLotto = new Lotto(new LottoNumbers(lottoA));
+    Lotto bLotto = new Lotto(new LottoNumbers(lottoB));
+    Lotto target = new Lotto(new LottoNumbers(targetLotto));
 
-    Lottos sourceLottos = new Lottos();
-    sourceLottos.addLotto(aLotto);
-    sourceLottos.addLotto(bLotto);
+
+    Lottos sourceLottos = new Lottos.Builder()
+      .add(aLotto)
+      .add(bLotto)
+      .build();
 
     LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottosWithBonusBall(target, new LottoNumber(bonusBall));
     Rank rank = Rank.findRankByCountOfMatch(matchingNumber, bonusFlag);
@@ -38,13 +40,14 @@ class LottoMatchingResultTest {
   @CsvSource(value = {"1,2,3,4,5,6:2,4,6,8,10,12:2,4,6,41,42,43:14000:40:0.71"}, delimiter = ':')
   void calcYieldTest(String lottoA, String lottoB, String targetLotto, Long sellerMoney, int bonusBall, String result) {
     //setup source then target
-    Lotto aLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(lottoA));
-    Lotto bLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(lottoB));
-    Lotto target = new Lotto(LottoNumbers.convertStringToLottoNumbers(targetLotto));
+    Lotto aLotto = new Lotto(new LottoNumbers(lottoA));
+    Lotto bLotto = new Lotto(new LottoNumbers(lottoB));
+    Lotto target = new Lotto(new LottoNumbers(targetLotto));
 
-    Lottos sourceLottos = new Lottos();
-    sourceLottos.addLotto(aLotto);
-    sourceLottos.addLotto(bLotto);
+    Lottos sourceLottos = new Lottos.Builder()
+      .add(aLotto)
+      .add(bLotto)
+      .build();
 
     LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottosWithBonusBall(target, new LottoNumber(bonusBall));
     Cash revenue = lottoMatchingResult.calcTotalRevenue();
@@ -57,11 +60,12 @@ class LottoMatchingResultTest {
   @DisplayName("2등 찾는지 수익으로 체크")
   @CsvSource(value = {"1,2,3,4,5,6:1,2,3,4,5,7:6"}, delimiter = ':')
   void findingSecondRevenueTest(String lottoString, String targetString, int bonusBall) {
-    Lotto boughtLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(lottoString));
-    Lotto prizeLotto = new Lotto(LottoNumbers.convertStringToLottoNumbers(targetString));
+    Lotto boughtLotto = new Lotto(new LottoNumbers(lottoString));
+    Lotto prizeLotto = new Lotto(new LottoNumbers(targetString));
 
-    Lottos boughtLottos = new Lottos();
-    boughtLottos.addLotto(boughtLotto);
+    Lottos boughtLottos = new Lottos.Builder()
+      .add(boughtLotto)
+      .build();
 
     assertThat(
       boughtLottos.matchLottosWithBonusBall(prizeLotto, new LottoNumber(bonusBall)).calcTotalRevenue()

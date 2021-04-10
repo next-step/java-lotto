@@ -16,7 +16,7 @@ class LottoNumbersTest {
   @DisplayName("로또 숫자의 개수와 맞지 않을 때의 익셉션 호출 테스트")
   void lengthCheckTest(String lottoNumbers) {
     assertThatThrownBy(() ->
-      LottoNumbers.convertStringToLottoNumbers(lottoNumbers)
+      new LottoNumbers(lottoNumbers)
     ).isInstanceOf(InvalidNumbersSizeException.class)
       .hasMessage("숫자 개수가 일치하지 않습니다.");
   }
@@ -26,8 +26,8 @@ class LottoNumbersTest {
   @DisplayName("정확하게 일치 숫자의 개수를 확인하는지 테스트")
   void matchingResultTest(String boughtNum, String answerNum, int bonusBall, int result) {
 
-    LottoNumbers pickedLottoNumbers = LottoNumbers.convertStringToLottoNumbers(boughtNum);
-    LottoNumbers prizeLottoNumbers = LottoNumbers.convertStringToLottoNumbers(answerNum);
+    LottoNumbers pickedLottoNumbers = new LottoNumbers(boughtNum);
+    LottoNumbers prizeLottoNumbers = new LottoNumbers(answerNum);
     Count resultCount = new Count(result);
     assertThat(
       pickedLottoNumbers
@@ -40,8 +40,8 @@ class LottoNumbersTest {
   @DisplayName("정렬 테스트")
   void sortTest(String boughtNum, String sortedNumbers) {
 
-    LottoNumbers pickedLottoNumbers = LottoNumbers.convertStringToLottoNumbers(boughtNum);
-    LottoNumbers checkingLottoNumbers = LottoNumbers.convertStringToLottoNumbers(sortedNumbers);
+    LottoNumbers pickedLottoNumbers = new LottoNumbers(boughtNum);
+    LottoNumbers checkingLottoNumbers = new LottoNumbers(sortedNumbers);
 
     assertThat(pickedLottoNumbers.toString())
       .isEqualTo(checkingLottoNumbers.toString());
@@ -51,7 +51,7 @@ class LottoNumbersTest {
   @CsvSource(value = {"1,2,3,4,5,6:1:true", "1,2,3,4,5,6:7:false"}, delimiter = ':')
   @DisplayName("일치/불일치 확인하는지 테스트")
   void findSpecificMatchingTest(String boughtNum, int targetNumber, boolean result) {
-    LottoNumbers pickedLottoNumbers = LottoNumbers.convertStringToLottoNumbers(boughtNum);
+    LottoNumbers pickedLottoNumbers = new LottoNumbers(boughtNum);
     assertThat(
       pickedLottoNumbers
         .matchSpecificNumber(new LottoNumber(targetNumber))
