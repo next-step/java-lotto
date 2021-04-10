@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -34,5 +35,17 @@ class LottoRanksTest {
 
     //then
     assertTrue(matchResult.containsKey(value));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH"})
+  public void getMatchCountTest(LottoRank value) throws Exception {
+    //given
+    LottoRanks lottoRanks = new LottoRanks(lottoRankList);
+    //when
+    Long count = lottoRanks.toStringMatchCount(value);
+
+    //then
+    assertEquals(count, 1L);
   }
 }
