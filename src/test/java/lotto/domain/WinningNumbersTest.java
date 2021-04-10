@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.WinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,45 +13,28 @@ public class WinningNumbersTest {
     @DisplayName("로또 당첨 번호 생성")
     public void create() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6};
-        WinningNumbers winningNumbers = WinningNumbers.from((numbers));
-        assertThat(winningNumbers).isEqualTo(WinningNumbers.from((numbers)));
+        WinningNumbers winningNumbers = new WinningNumbers(7, numbers);
+        assertThat(winningNumbers).isEqualTo(new WinningNumbers(7, numbers));
     }
 
     @Test
     @DisplayName("당첨 번호와 로또 번호를 비교하여 매칭된 번호 개수를 구한다.")
-    public void matchedCountWith() throws Exception {
+    public void matchWith() throws Exception {
         //given
-        WinningNumbers winningNumbers = WinningNumbers.from(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6));
 
         //when
-        MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoNumbers.lottoNumbers());
+        WinningRank winningRank = winningNumbers.matchWith(lottoTicket);
 
         //then
-        assertThat(matchedCount).isEqualTo(new MatchedCount(6));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 길이가 6자 이외일 경우 예외가 발생한다.")
-    public void checkLength() throws Exception {
-        int[] overSix = {1, 2, 3, 4, 5, 6, 7};
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(overSix));
-        int[] lowerSix = {1, 2, 3, 4, 5};
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(lowerSix));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 중 중복되는 숫자가 존재할 경우 예외가 발생한다.")
-    public void checkDuplication() throws Exception {
-        int[] winningNumbers = {1, 2, 3, 4, 5, 5};
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from(winningNumbers));
+        assertThat(winningRank).isEqualTo(WinningRank.FIRST_PLACE);
     }
 
     @Test
     @DisplayName("보너스 번호가 당첨 번호와 중복 시 예외가 발생한다.")
-    public void check() throws Exception {
+    public void checkDuplication() throws Exception {
         int[] numbers = {1, 2, 3, 4, 5, 6};
-        WinningNumbers winningNumbers = WinningNumbers.from(numbers);
-        assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(LottoNumber.of(1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(6, numbers));
     }
 }
