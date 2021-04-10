@@ -1,15 +1,14 @@
-package step3.domain;
+package step4.domain;
 
-import step3.domain.number.Count;
-import step3.domain.number.LottoNumber;
-import step3.domain.number.LottoNumbers;
+import step4.domain.number.Count;
+import step4.domain.number.LottoNumber;
+import step4.domain.number.LottoNumbers;
 
 public class Lotto {
   private final LottoNumbers lottoNumbers;
 
   public Lotto(LottoNumbers lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
-    lottoNumbers.sort();
   }
 
   @Override

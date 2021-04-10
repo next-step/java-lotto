@@ -26,7 +26,6 @@ public class LottoGame {
 
     LottoMatchingResult result = checkLottos(boughtLottos);
     LottoRevenueResult revenueResult = new LottoRevenueResult();
-    // TODO 수정
     Cash revenue = revenueResult.calcTotalRevenue(result);
     ResultView.showSpecificResult(result);
     ResultView.showYield(revenue.divide(cash));

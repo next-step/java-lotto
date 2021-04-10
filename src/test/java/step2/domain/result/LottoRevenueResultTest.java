@@ -35,7 +35,6 @@ class LottoRevenueResultTest {
     sourceLottos.addLotto(aLotto);
     sourceLottos.addLotto(bLotto);
 
-    // TODO 수정
     LottoMatchingResult lottoMatchingResult = sourceLottos.matchLottos(target);
     LottoRevenueResult lottoRevenueResult = new LottoRevenueResult();
     Cash revenue = lottoRevenueResult.calcTotalRevenue(lottoMatchingResult);

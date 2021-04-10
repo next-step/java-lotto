@@ -1,6 +1,6 @@
-package step3.domain.number;
+package step4.domain.number;
 
-import step3.exception.InvalidCountNumberException;
+import step4.exception.InvalidCountNumberException;
 
 import java.util.Objects;
 
