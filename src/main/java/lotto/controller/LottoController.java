@@ -77,13 +77,7 @@ public class LottoController {
     }
 
     private LottoTickets createAutoLottoTickets(TotalNumberOfTicket totalNumberOfTicket, ManualNumberOfTicket manualNumberOfTicket) {
-        LottoTickets autoLottoTickets = new LottoTickets(new ArrayList<>());
-
-        for (int i = 0; i < totalNumberOfTicket.minus(manualNumberOfTicket); i++) {
-            autoLottoTickets.add(new LottoTicket(new LottoNumbers()));
-        }
-
-        return autoLottoTickets;
+        return LottoTickets.createBy(totalNumberOfTicket.minus(manualNumberOfTicket));
     }
 
     protected void printLottoTickets(LottoTickets lottoTickets) {

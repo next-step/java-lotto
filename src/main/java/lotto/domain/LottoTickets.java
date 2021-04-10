@@ -15,6 +15,16 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
+    public static LottoTickets createBy(int numberOfTicket) {
+        LottoTickets autoLottoTickets = new LottoTickets(new ArrayList<>());
+
+        for (int i = 0; i < numberOfTicket; i++) {
+            autoLottoTickets.add(new LottoTicket(new LottoNumbers()));
+        }
+
+        return autoLottoTickets;
+    }
+
     public void add(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
     }
