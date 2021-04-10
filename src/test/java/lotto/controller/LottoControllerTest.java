@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.*;
 import lotto.domain.Dto.RankCountDto;
+import lotto.domain.*;
 import lotto.enums.WinningRank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -45,25 +45,14 @@ class LottoControllerTest {
     @DisplayName("입력 뷰에서 당첨 번호를 입력받아 당첨 번호 생성한다.")
     public void createWinningNumbers() throws Exception {
         WinningNumbers winningNumbers = systemUnderTest.createWinningNumbers();
-        assertThat(String.join(" -> ", record)).isEqualTo("winningNumbers");
-        assertThat(winningNumbers).isEqualTo(WinningNumbers.from(1, 2, 3, 4, 5, 6));
-    }
-
-    @Test
-    @DisplayName("입력 뷰에서 보너스 볼 번호를 입력받아 보너스 볼 생성한다.")
-    public void createBonusBall() throws Exception {
-        BonusBall bonusBall = systemUnderTest.createBonusBall(WinningNumbers.from(1, 2, 3, 4, 5, 6));
-        assertThat(String.join(" -> ", record)).isEqualTo("bonusBall");
-        assertThat(bonusBall).isEqualTo(new BonusBall(7));
+        assertThat(String.join(" -> ", record)).isEqualTo("winningNumbers -> bonusBall");
+        assertThat(winningNumbers).isEqualTo(new WinningNumbers(7, 1, 2, 3, 4, 5, 6));
     }
 
     @Test
     @DisplayName("당첨 등수 객체를 인자로 받아 당첨 등수 DTO 생성한다.")
     public void createRanksCountDtos() throws Exception {
-        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
-        List<RankCountDto> ranksCountDtos = systemUnderTest.createRanksCountDtos(
-                new RanksCount(WinningNumbers.from(lottoNumbers),
-                        new LottoTickets(new LottoTicket(LottoNumbers.from(lottoNumbers)))));
+        List<RankCountDto> ranksCountDtos = systemUnderTest.createRanksCountDtos(new RanksCount());
         assertThat(ranksCountDtos).hasSize(WinningRank.values().length - 1);
     }
 

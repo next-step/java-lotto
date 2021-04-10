@@ -26,12 +26,21 @@ public class LottoController {
         resultView.printLottoNumbers(lottoTickets);
 
         WinningNumbers winningNumbers = createWinningNumbers();
-        BonusBall bonusBall = createBonusBall(winningNumbers);
-        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
-        ranksCount.matchWith(bonusBall);
+        RanksCount ranksCount = matchWith(winningNumbers, lottoTickets);
         resultView.printStatistics(createRanksCountDtos(ranksCount));
 
         printProfitRate(new ProfitRate(ranksCount.totalPrize(), purchaseAmount));
+    }
+
+    private RanksCount matchWith(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+        RanksCount ranksCount = new RanksCount();
+
+        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
+            WinningRank winningRank = winningNumbers.matchWith(lottoTicket);
+            ranksCount.add(winningRank);
+        }
+
+        return ranksCount;
     }
 
     protected PurchaseAmount createPurchaseAmount() {
@@ -69,14 +78,9 @@ public class LottoController {
     }
 
     protected WinningNumbers createWinningNumbers() {
-        List<String> winningNumbers = SplitUtil.splitByComma(inputView.winningNumbers());
-        return WinningNumbers.from(winningNumbers);
-    }
-
-    protected BonusBall createBonusBall(WinningNumbers winningNumbers) {
-        LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
-        winningNumbers.check(bonusNumber);
-        return new BonusBall(bonusNumber);
+        LottoNumbers winningNumbers = LottoNumbers.from(SplitUtil.splitByComma(inputView.winningNumbers()));
+        BonusBall bonusBall = new BonusBall(LottoNumber.of(inputView.bonusBall()));
+        return new WinningNumbers(bonusBall, winningNumbers);
     }
 
     protected List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
