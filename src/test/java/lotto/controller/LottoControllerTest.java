@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.domain.Dto.RankCountDto;
 import lotto.enums.WinningRank;
-import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,7 @@ class LottoControllerTest {
     @BeforeEach
     void setUp() {
         record = new ArrayList<>();
-        systemUnderTest = new LottoController(new TestingInputView(), new TestingResultView(), new LottoService());
+        systemUnderTest = new LottoController(new TestingInputView(), new TestingResultView());
     }
 
     @Test

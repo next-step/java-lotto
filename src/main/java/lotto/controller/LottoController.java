@@ -2,23 +2,22 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.domain.Dto.RankCountDto;
-import lotto.service.LottoService;
+import lotto.enums.WinningRank;
 import lotto.utils.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
-    private final LottoService lottoService;
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LottoController(InputView inputView, ResultView resultView, LottoService lottoService) {
+    public LottoController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
@@ -138,7 +137,14 @@ public class LottoController {
     }
 
     protected List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
-        return lottoService.createRanksCountDtos(ranksCount);
+        List<RankCountDto> rankCountDtos = new ArrayList<>();
+
+        for (Map.Entry<WinningRank, Integer> rank : ranksCount.entrySet()) {
+            RankCountDto rankCountDto = new RankCountDto(rank.getKey(), rank.getValue());
+            rankCountDtos.add(rankCountDto);
+        }
+
+        return rankCountDtos;
     }
 
     protected void printStatistics(List<RankCountDto> ranksCount) {
