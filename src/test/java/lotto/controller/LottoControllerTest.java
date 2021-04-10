@@ -68,14 +68,6 @@ class LottoControllerTest {
     }
 
     @Test
-    @DisplayName("당첨 등수 DTO를 인자로 받아 당첨 등수 출력한다.")
-    public void printStatistics() throws Exception {
-        List<RankCountDto> rankCountDtos = Collections.singletonList(new RankCountDto(WinningRank.FIRST_PLACE, 6));
-        systemUnderTest.printStatistics(rankCountDtos);
-        assertThat(String.join(" -> ", record)).isEqualTo("statistics");
-    }
-
-    @Test
     @DisplayName("수익률을 인자로 받아 수익률을 출력한다. ")
     public void printProfitRate() throws Exception {
         systemUnderTest.printProfitRate(new ProfitRate(1));

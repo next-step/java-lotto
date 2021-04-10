@@ -31,8 +31,7 @@ public class LottoController {
         ranksCount.matchWith(bonusBall);
         resultView.printStatistics(createRanksCountDtos(ranksCount));
 
-        ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
-        printProfitRate(profitRate);
+        printProfitRate(new ProfitRate(ranksCount.totalPrize(), purchaseAmount));
     }
 
     protected PurchaseAmount createPurchaseAmount() {
@@ -89,14 +88,6 @@ public class LottoController {
         }
 
         return rankCountDtos;
-    }
-
-    protected void printStatistics(List<RankCountDto> ranksCount) {
-        resultView.printStatistics(ranksCount);
-    }
-
-    private ProfitRate createProfitRate(RanksCount ranksCount, PurchaseAmount purchaseAmount) {
-        return new ProfitRate(ranksCount.totalPrize(), purchaseAmount);
     }
 
     protected void printProfitRate(ProfitRate profitRate) {
