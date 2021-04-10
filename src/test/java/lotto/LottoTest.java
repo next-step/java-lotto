@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
 
-//    InputView inputView;
     Lotto lotto;
     LottoResult lottoResult;
     LottoMachine lottoMachine;
@@ -26,45 +25,24 @@ public class LottoTest {
 
     @BeforeEach
     public void setup(){
-//        inputView = new InputView();
         lotto = new Lotto();
         lottoResult = new LottoResult();
         lottoMachine = new LottoMachine();
-        winningNumbers = new WinningNumbers("1,2,3,4,5,6", 7);
+        winningNumbers = new WinningNumbers("1,2,3,4,5,6", LottoNumber.lottoNumber(7));
         buyLottoNumbers = new ArrayList<>();
     }
 
-//    @Test
-//    @DisplayName("입력 받은 금액 정합성 체크")
-//    public void inputMoneyNormal(){
-//        assertTrue(inputView.normal(15000));
-//        assertFalse(inputView.normal(15999));
-//        assertFalse(inputView.normal(-1000));
-//    }
-//
-//    @Test
-//    @DisplayName("입력 받은 금액 / 1000 만큼 구매")
-//    public void buyLottoCount(){
-//        assertEquals(inputView.count(15000), 15);
-//    }
-
     @Test
-    @DisplayName("자동 구매 로또 번호 범위는 0 ~ 45")
-    public void authLottoArrange(){
-        assertTrue(lottoMachine.lottoNumbers(1).get(0).normal());
+    @DisplayName("입력 받은 금액 / 1000 만큼 구매")
+    public void buyLottoCount(){
+        assertEquals(lottoMachine.buyCount(15000), 15);
     }
 
     @Test
-    @DisplayName("중복 번호 없는 자동 구매")
-    public void lottoNumberDuplicate(){
-        assertTrue(lottoMachine.lottoNumbers(1).get(0).normalSize());
-    }
-
-    @Test
-    @DisplayName("번호가 1 ~ 45가 아닐 경우")
+    @DisplayName("범위를 벗어나는 로또 번호")
     public void lottoNumberValid(){
         assertThatIllegalArgumentException().isThrownBy (
-                () -> new LottoNumbers("1,2,3,4,5,50")
+                () -> new LottoNumbers("1,2,3,4,5,55")
         );
     }
 

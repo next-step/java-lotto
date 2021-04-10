@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.common.LottoConstants;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,8 +15,9 @@ public class Lotto {
 
     public void lotto(){
 
-        int buyCount = inputView.count();
+        int buyMoney = inputView.count();
 
+        int buyCount = lottoMachine.buyCount(buyMoney);
         resultView.print(buyCount);
 
         List<LottoNumbers> lottoNumbers = lottoMachine.lottoNumbers(buyCount);
@@ -23,13 +25,14 @@ public class Lotto {
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();
-        int bonusBall = inputView.bonusBall();
+        int bonusNumber = inputView.bonusBall();
 
-        while (!lottoMachine.useAbleBonusBall(numbers, bonusBall)) {
+        while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
             System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
-            bonusBall = inputView.bonusBall();
+            bonusNumber = inputView.bonusBall();
         }
 
+        LottoNumber bonusBall = LottoNumber.lottoNumber(bonusNumber);
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusBall);
 
         String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);

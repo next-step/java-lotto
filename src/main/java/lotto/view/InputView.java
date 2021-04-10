@@ -16,7 +16,7 @@ public class InputView {
             inputMoney = inputMoney();
         }
 
-        return count(inputMoney);
+        return inputMoney;
     }
 
     public int inputMoney(){
@@ -43,10 +43,6 @@ public class InputView {
             return false;
         }
         return money % LottoConstants.LOTTO_PRICE == LottoConstants.ZERO;
-    }
-
-    public int count(int buyMoney) {
-        return buyMoney / LottoConstants.LOTTO_PRICE;
     }
 
     public int bonusBall() {

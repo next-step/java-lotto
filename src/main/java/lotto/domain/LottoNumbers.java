@@ -6,47 +6,42 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(List<LottoNumber> numbers) {
+        normalSize(numbers);
+        this.lottoNumbers = numbers;
+    }
 
     public LottoNumbers(String number) {
         this(lottoNumbers(number));
     }
 
-    public LottoNumbers(List<Integer> numbers) {
-        this.numbers = numbers;
+    private static List<LottoNumber> lottoNumbers(String lottoNumber) {
+        return Arrays.stream(lottoNumber.split(","))
+                .map(String::trim)
+                .map(LottoNumber::lottoNumber)
+                .collect(Collectors.toList());
+    }
 
-        if (!normal() || !normalSize()) {
+    private void normalSize(List<LottoNumber> lottoNumbers) {
+        if (!(new HashSet<>(lottoNumbers).size() == LottoConstants.LOTTO_NUMBER_COUNT)) {
             throw new IllegalArgumentException("로또 번호 생성에 실패 했습니다.");
         }
     }
 
-    private static List<Integer> lottoNumbers(String lottoNumber) {
-        return Arrays.stream(lottoNumber.split(","))
-                .map(String::trim)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
-    }
-
-    public boolean normal() {
-        return Collections.min(numbers) >= LottoConstants.MIN_LOTTO_NUMBER && Collections.max(numbers) <= LottoConstants.MAX_LOTTO_NUMBER;
-    }
-
-    public boolean normalSize() {
-        return new HashSet<>(numbers).size() == LottoConstants.LOTTO_NUMBER_COUNT;
-    }
-
-    public int correctCount(List<Integer> winningNumbers) {
-        List<Integer> tempNumbers = new ArrayList<>(winningNumbers);
-        tempNumbers.removeAll(numbers);
+    public int correctCount(List<LottoNumber> winningNumbers) {
+        List<LottoNumber> tempNumbers = new ArrayList<>(winningNumbers);
+        tempNumbers.removeAll(lottoNumbers);
         return LottoConstants.LOTTO_NUMBER_COUNT - tempNumbers.size();
     }
 
-    public boolean matchedBonusBall(int bonusBall) {
-        return numbers.stream().anyMatch(number -> number == bonusBall);
+    public boolean matchedBonusBall(LottoNumber bonusBall) {
+        return lottoNumbers.stream().anyMatch(number -> number == bonusBall);
     }
 
     public String printInfo(){
-        return ((List<Integer>) new ArrayList<>(numbers)).toString();
+        return ((List<LottoNumber>) new ArrayList<>(lottoNumbers)).toString();
     }
 
 }
