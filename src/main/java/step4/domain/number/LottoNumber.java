@@ -51,7 +51,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   public static LottoNumber splitOneToken(String token) {
     int number = ZERO;
     try {
-      number = Integer.parseInt(token);
+      number = Integer.parseInt(token.trim());
     } catch (NumberFormatException numberFormatException) {
       throw new InvalidSplitStringException(SPLIT_ERROR_MESSAGE + token);
     }
