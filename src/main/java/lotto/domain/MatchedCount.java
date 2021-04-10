@@ -13,6 +13,10 @@ public class MatchedCount implements Comparable<MatchedCount> {
         this(BOUND_MIN);
     }
 
+    public MatchedCount(LottoNumbers winningNumbers, LottoTicket lottoTicket) {
+        this(winningNumbers.lottoNumbers(), lottoTicket.lottoNumbers());
+    }
+
     public MatchedCount(List<LottoNumber> winningNumbers, List<LottoNumber> lottoNumbers) {
         this(lottoNumbers.stream()
                 .filter(winningNumbers::contains)
