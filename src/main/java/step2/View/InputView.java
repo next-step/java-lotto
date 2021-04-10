@@ -4,6 +4,7 @@ import step2.Domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -16,7 +17,7 @@ public class InputView {
 
     public Money buyLotto() {
         System.out.println("구매 금액을 입력해주세요.");
-        return new Money(scanner.nextLine());
+        return Optional.of(new Money(scanner.nextLine())).orElseGet(()->new Money(0));
     }
 
     public PurchasedLottoNumber buyManualLotto() {
