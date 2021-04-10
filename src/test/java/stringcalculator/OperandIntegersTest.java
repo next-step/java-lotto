@@ -18,8 +18,8 @@ class OperandIntegersTest {
 
     static Stream<Arguments> parameters() {
         return Stream.of(
-                arguments(new String[]{"0", "1"}, Lists.list(new OperandInteger(0), new OperandInteger(1))),
-                arguments(new String[]{"1", "2"}, Lists.list(new OperandInteger(1), new OperandInteger(2)))
+                arguments(new String[]{"0", "1"}, Lists.list(OperandInteger.of("0"), OperandInteger.of("1"))),
+                arguments(new String[]{"1", "2"}, Lists.list(OperandInteger.of("1"), OperandInteger.of("2")))
         );
     }
 

@@ -14,8 +14,6 @@ class OperandIntegerTest {
     @DisplayName("생성자 테스트")
     void create() {
         assertAll(
-                () -> assertEquals(new OperandInteger(0).parseInteger(), 0),
-                () -> assertEquals(new OperandInteger(1).parseInteger(), 1),
                 () -> assertEquals(OperandInteger.of("0").parseInteger(), 0),
                 () -> assertEquals(OperandInteger.of("1").parseInteger(), 1)
         );
@@ -25,9 +23,8 @@ class OperandIntegerTest {
     @DisplayName("생성자 예외 테스트")
     void validate() {
         assertAll(
-                () -> assertThatThrownBy(() -> new OperandInteger(-1)).isInstanceOf(RuntimeException.class),
-                () -> assertThatThrownBy(() -> new OperandInteger("-1")).isInstanceOf(RuntimeException.class),
-                () -> assertThatThrownBy(() -> new OperandInteger("a")).isInstanceOf(RuntimeException.class)
+                () -> assertThatThrownBy(() -> OperandInteger.of("-1")).isInstanceOf(RuntimeException.class),
+                () -> assertThatThrownBy(() -> OperandInteger.of("a")).isInstanceOf(RuntimeException.class)
         );
     }
 
@@ -35,6 +32,6 @@ class OperandIntegerTest {
     @DisplayName("덧셈 테스트")
     void sumTest() {
         OperandInteger expected = new OperandInteger();
-        assertThat(expected.sum(new OperandInteger(1)).parseInteger()).isEqualTo(1);
+        assertThat(expected.sum(OperandInteger.of("1")).parseInteger()).isEqualTo(1);
     }
 }

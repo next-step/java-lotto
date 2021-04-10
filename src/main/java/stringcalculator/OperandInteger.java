@@ -19,7 +19,7 @@ public class OperandInteger {
         return new OperandInteger(Integer.parseInt(number));
     }
 
-    public OperandInteger(int number) {
+    private OperandInteger(int number) {
         validate(number);
         this.number = number;
     }
