@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.SplitUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,14 +21,25 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public static LottoTickets createBy(int numberOfTicket) {
-        LottoTickets autoLottoTickets = new LottoTickets(new ArrayList<>());
+    public static LottoTickets createBy(List<String> allLottoNumbers) {
+        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
 
-        for (int i = 0; i < numberOfTicket; i++) {
-            autoLottoTickets.add(new LottoTicket(new LottoNumbers()));
+        for (String lottoNumbers : allLottoNumbers) {
+            List<String> splitedLottoNumbers = SplitUtil.splitByComma(lottoNumbers);
+            lottoTickets.add(new LottoTicket(LottoNumbers.from(splitedLottoNumbers)));
         }
 
-        return autoLottoTickets;
+        return lottoTickets;
+    }
+
+    public static LottoTickets createBy(int numberOfTicket) {
+        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>());
+
+        for (int i = 0; i < numberOfTicket; i++) {
+            lottoTickets.add(new LottoTicket(new LottoNumbers()));
+        }
+
+        return lottoTickets;
     }
 
     public static List<LottoTicket> combine(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
