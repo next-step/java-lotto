@@ -23,7 +23,7 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = createPurchaseAmount();
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
-        resultView.printLottoNumbers(lottoTickets);
+        resultView.printLottoNumbers(lottoTickets.lottoTickets());
 
         WinningNumbers winningNumbers = createWinningNumbers();
         RanksCount ranksCount = matchWith(winningNumbers, lottoTickets);

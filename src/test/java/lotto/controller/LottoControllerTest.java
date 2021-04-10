@@ -108,7 +108,7 @@ class LottoControllerTest {
         }
 
         @Override
-        public void printLottoNumbers(LottoTickets lottoTickets) {
+        public void printLottoNumbers(List<LottoTicket> lottoTickets) {
             record.add("lottoNumbers");
         }
 
