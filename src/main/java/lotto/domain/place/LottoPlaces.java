@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.constants.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
-
 public class LottoPlaces {
+  private static final int LOTTO_FIRST_PLACE_INDEX = 3;
+
   private final List<LottoPlace> values;
 
   private LottoPlaces(List<LottoPlace> values) {

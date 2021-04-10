@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.constants.BaseConstants.LOTTO_NUMBER_GREATER_THAN_OR_EQUALS;
-import static lotto.constants.BaseConstants.LOTTO_NUMBER_LESS_THAN_OR_EQUALS;
-
 public class SixLottoNumbers implements GenerateNumbers {
   private static final List<LottoNumber> values;
 
   static {
-    values = IntStream.rangeClosed(LOTTO_NUMBER_GREATER_THAN_OR_EQUALS, LOTTO_NUMBER_LESS_THAN_OR_EQUALS)
+    values = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
             .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList());
   }
