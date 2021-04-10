@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,12 +10,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
 class WinLottoNumberTest {
 
     private WinLottoNumber winLottoNumber;
+
     @BeforeEach
-    void SetUp(){
+    void SetUp() {
 
         Number number1 = new Number(3);
         Number number2 = new Number(11);
@@ -40,7 +39,7 @@ class WinLottoNumberTest {
 
     @Test
     @DisplayName("로또 번호 몇개를 맞추었는지 확인 TEST")
-    public void checkDuplicationLottoTest(){
+    public void checkDuplicationLottoTest() {
 
         Number number1 = new Number(3);
         Number number2 = new Number(11);
@@ -61,7 +60,7 @@ class WinLottoNumberTest {
 
         int resultNumber = winLottoNumber.checkDuplicationLotto(lottoNumber);
 
-        Assertions.assertThat(resultNumber).isEqualTo(5);
+        assertThat(resultNumber).isEqualTo(5);
 
 
     }

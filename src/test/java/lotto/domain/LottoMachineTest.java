@@ -14,8 +14,7 @@ class LottoMachineTest {
 
     private List<Number> winLottoNumbersList = new ArrayList<>();
     private List<Number> lottoNumberList = new ArrayList<>();
-    private LottoNumber lottoNumber;
-    private LottoNumbers lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
     private void SetUp() {
@@ -43,14 +42,14 @@ class LottoMachineTest {
         lottoNumberList.add(number4);
         lottoNumberList.add(number5);
         lottoNumberList.add(number7);
-        lottoNumber = new LottoNumber(lottoNumberList);
 
         LottoNumber lottoNumber = new LottoNumber(lottoNumberList);
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
         lottoNumberList.add(lottoNumber);
-        lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        lottoNumbers.add(lottoNumber);
     }
 
     @Test

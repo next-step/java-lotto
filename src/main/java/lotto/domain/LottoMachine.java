@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private static OutputView outputView = new OutputView();
 
-    private LottoNumbers lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     private static final Number threeNumber = new Number(3);
     private static final Number fourNumber = new Number(4);
@@ -22,7 +19,7 @@ public class LottoMachine {
 
     private Money expense;
 
-    public LottoMachine(final LottoNumbers lottoNumbers, Money expense) {
+    public LottoMachine(final List<LottoNumber> lottoNumbers, Money expense) {
         this.lottoNumbers = lottoNumbers;
         this.expense = expense;
     }
@@ -43,7 +40,7 @@ public class LottoMachine {
         WinLottoNumber winLottoNumber = new WinLottoNumber(lottoNumber);
 
 
-        for (LottoNumber purchasedLottoNumber : this.lottoNumbers.lottoNumbers()) {
+        for (LottoNumber purchasedLottoNumber : this.lottoNumbers) {
             int resultCount = winLottoNumber.checkDuplicationLotto(purchasedLottoNumber);
             plusCount(resultCount);
         }
@@ -74,7 +71,7 @@ public class LottoMachine {
 
     private void printLotto() {
 
-        for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers()) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.toString());
         }
     }

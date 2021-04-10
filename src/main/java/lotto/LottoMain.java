@@ -31,7 +31,7 @@ public class LottoMain {
             lottoNumberList.add(lottoNumber);
         }
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoNumbers(lottoNumberList), new Money(money));
+        LottoMachine lottoMachine = new LottoMachine(lottoNumberList, new Money(money));
 
         lottoMachine.startLottoGame();
 
