@@ -7,7 +7,7 @@ import lotto.view.ResultView;
 public class LottoController {
     public void start() {
         Money money = Money.of(InputView.inputMoney());
-        Lottos lottos = Lottos.of(Lottos.exchange(money));
+        Lottos lottos = Lottos.of(money);
         ResultView.printPurchase(lottos);
 
         WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumbers());
