@@ -18,4 +18,11 @@ public class LottoRanks {
         .filter(LottoRank::isNotNone)
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
   }
+
+  public Long toStringMatchCount(LottoRank lottoRank) {
+    return lottoRanks.stream()
+        .filter(LottoRank::isNotNone)
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        .getOrDefault(lottoRank,0L);
+  }
 }
