@@ -4,7 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoMachine {
+public class LottoController {
     public void start() {
         Money money = Money.of(InputView.inputMoney());
         Lottos lottos = Lottos.of(Lottos.exchange(money));
