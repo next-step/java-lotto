@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.utils.PreConditionUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -32,12 +34,16 @@ public class InputView {
         System.out.println(MANUAL_LOTTO_NUMBERS);
     }
 
-    public String manualLottoNumbers() {
-        String manualLottoNumbers = scanner.nextLine().trim();
-        PreConditionUtil.checkNullOrEmpty(manualLottoNumbers);
+    public List<String> manualLottoNumbers(int manualNumberOfTicket) {
+        List<String> manualLottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < manualNumberOfTicket; i++) {
+            String lottoNumbers = scanner.nextLine().trim();
+            PreConditionUtil.checkNullOrEmpty(lottoNumbers);
+            manualLottoNumbers.add(lottoNumbers);
+        }
         return manualLottoNumbers;
     }
-
 
     public String winningNumbers() {
         System.out.println();
