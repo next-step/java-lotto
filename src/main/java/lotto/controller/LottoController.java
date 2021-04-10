@@ -42,7 +42,6 @@ public class LottoController {
 
     protected LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
         LottoTicketPrice lottoTicketPrice = new LottoTicketPrice();
-        TicketOffice ticketOffice = new TicketOffice(lottoTicketPrice);
 
         TotalNumberOfTicket totalNumberOfTicket = new TotalNumberOfTicket(purchaseAmount, lottoTicketPrice);
         ManualNumberOfTicket manualNumberOfTicket = manualNumberOfTicket(totalNumberOfTicket);
@@ -52,7 +51,7 @@ public class LottoController {
         LottoTickets autoLottoTickets = createAutoLottoTickets(totalNumberOfTicket, manualNumberOfTicket);
         resultView.purchaseTickets(manualNumberOfTicket.numberOfTicket(), autoNumberOfTicket.numberOfTicket());
 
-        return ticketOffice.totalTickets(manualLottoTickets, autoLottoTickets);
+        return new LottoTickets(manualLottoTickets, autoLottoTickets);
     }
 
     private ManualNumberOfTicket manualNumberOfTicket(TotalNumberOfTicket totalNumberOfTicket) {

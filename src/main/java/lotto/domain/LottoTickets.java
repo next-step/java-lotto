@@ -11,6 +11,10 @@ public class LottoTickets {
         this(Collections.singletonList(lottoTicket));
     }
 
+    public LottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        this(combine(manualLottoTickets, autoLottoTickets));
+    }
+
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
@@ -23,6 +27,14 @@ public class LottoTickets {
         }
 
         return autoLottoTickets;
+    }
+
+    public static List<LottoTicket> combine(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        List<LottoTicket> allLottoTickets = new ArrayList<>();
+        allLottoTickets.addAll(manualLottoTickets.lottoTickets());
+        allLottoTickets.addAll(autoLottoTickets.lottoTickets());
+
+        return allLottoTickets;
     }
 
     public void add(LottoTicket lottoTicket) {
