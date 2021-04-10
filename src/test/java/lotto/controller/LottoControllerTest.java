@@ -42,13 +42,6 @@ class LottoControllerTest {
     }
 
     @Test
-    @DisplayName("생성한 총 로또 티켓 번호들을 출력한다.")
-    public void printLottoTickets() throws Exception {
-        systemUnderTest.printLottoTickets(new LottoTickets(new LottoTicket(new LottoNumbers())));
-        assertThat(String.join(" -> ", record)).isEqualTo("lottoNumbers");
-    }
-
-    @Test
     @DisplayName("입력 뷰에서 당첨 번호를 입력받아 당첨 번호 생성한다.")
     public void createWinningNumbers() throws Exception {
         WinningNumbers winningNumbers = systemUnderTest.createWinningNumbers();
@@ -109,9 +102,9 @@ class LottoControllerTest {
         }
 
         @Override
-        public String manualLottoNumbers() {
+        public List<String> manualLottoNumbers(int manualNumberOfTicket) {
             record.add("manualLottoNumbers");
-            return "1, 2, 3, 4, 5, 6";
+            return Collections.singletonList("1, 2, 3, 4, 5, 6");
         }
 
         @Override
@@ -134,22 +127,22 @@ class LottoControllerTest {
         }
 
         @Override
-        public void lottoNumbers(LottoTickets lottoTickets) {
+        public void printLottoNumbers(LottoTickets lottoTickets) {
             record.add("lottoNumbers");
         }
 
         @Override
-        public void statistics(List<RankCountDto> ranksCount) {
+        public void printStatistics(List<RankCountDto> ranksCount) {
             record.add("statistics");
         }
 
         @Override
-        public void positiveProfitRate(double profitRate) {
+        public void printPositiveProfitRate(double profitRate) {
             record.add("positiveProfitRate");
         }
 
         @Override
-        public void negativeProfitRate(double profitRate) {
+        public void printNegativeProfitRate(double profitRate) {
             record.add("negativeProfitRate");
         }
     }

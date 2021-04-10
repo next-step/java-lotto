@@ -23,13 +23,13 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = createPurchaseAmount();
         LottoTickets lottoTickets = createLottoTickets(purchaseAmount);
-        printLottoTickets(lottoTickets);
+        resultView.printLottoNumbers(lottoTickets);
 
         WinningNumbers winningNumbers = createWinningNumbers();
         BonusBall bonusBall = createBonusBall(winningNumbers);
-        RanksCount ranksCount = createRanksCount(winningNumbers, lottoTickets);
-        matchWith(ranksCount, bonusBall);
-        printStatistics(createRanksCountDtos(ranksCount));
+        RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
+        ranksCount.matchWith(bonusBall);
+        resultView.printStatistics(createRanksCountDtos(ranksCount));
 
         ProfitRate profitRate = createProfitRate(ranksCount, purchaseAmount);
         printProfitRate(profitRate);
@@ -59,28 +59,14 @@ public class LottoController {
     }
 
     private LottoTickets createManualLottoTickets(ManualNumberOfTicket manualNumberOfTicket) {
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
-
         inputView.manualLottoNumberPhrase();
-        for (int i = 0; i < manualNumberOfTicket.numberOfTicket(); i++) {
-            LottoTicket manualLottoTicket = manualLottoTicket();
-            manualLottoTickets.add(manualLottoTicket);
-        }
+        List<String> manualLottoTickets = inputView.manualLottoNumbers(manualNumberOfTicket.numberOfTicket());
 
-        return new LottoTickets(manualLottoTickets);
-    }
-
-    private LottoTicket manualLottoTicket() {
-        List<String> manualLottoNumbers = SplitUtil.splitByComma(inputView.manualLottoNumbers());
-        return new LottoTicket(LottoNumbers.from(manualLottoNumbers));
+        return LottoTickets.createBy(manualLottoTickets);
     }
 
     private LottoTickets createAutoLottoTickets(TotalNumberOfTicket totalNumberOfTicket, ManualNumberOfTicket manualNumberOfTicket) {
         return LottoTickets.createBy(totalNumberOfTicket.minus(manualNumberOfTicket));
-    }
-
-    protected void printLottoTickets(LottoTickets lottoTickets) {
-        resultView.lottoNumbers(lottoTickets);
     }
 
     protected WinningNumbers createWinningNumbers() {
@@ -92,14 +78,6 @@ public class LottoController {
         LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
         winningNumbers.check(bonusNumber);
         return new BonusBall(bonusNumber);
-    }
-
-    private RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        return new RanksCount(winningNumbers, lottoTickets);
-    }
-
-    protected void matchWith(RanksCount ranksCount, BonusBall bonusBall) {
-        ranksCount.count(bonusBall);
     }
 
     protected List<RankCountDto> createRanksCountDtos(RanksCount ranksCount) {
@@ -114,7 +92,7 @@ public class LottoController {
     }
 
     protected void printStatistics(List<RankCountDto> ranksCount) {
-        resultView.statistics(ranksCount);
+        resultView.printStatistics(ranksCount);
     }
 
     private ProfitRate createProfitRate(RanksCount ranksCount, PurchaseAmount purchaseAmount) {
@@ -123,11 +101,11 @@ public class LottoController {
 
     protected void printProfitRate(ProfitRate profitRate) {
         if (profitRate.isPositive()) {
-            resultView.positiveProfitRate(profitRate.profitRate());
+            resultView.printPositiveProfitRate(profitRate.profitRate());
         }
 
         if (!profitRate.isPositive()) {
-            resultView.negativeProfitRate(profitRate.profitRate());
+            resultView.printNegativeProfitRate(profitRate.profitRate());
         }
     }
 }
