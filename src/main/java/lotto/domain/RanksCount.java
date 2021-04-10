@@ -10,22 +10,9 @@ public class RanksCount {
     private static final int MATCHED_COUNT_MIN = 3;
     private static final int PLUS = 1;
     private final Map<WinningRank, Integer> ranksCount;
-    private final WinningNumbers winningNumbers;
-    private final LottoTickets lottoTickets;
 
-    public RanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        this.winningNumbers = winningNumbers;
-        this.lottoTickets = lottoTickets;
+    public RanksCount() {
         this.ranksCount = initialValue();
-    }
-
-    public void matchWith(BonusBall bonusBall) {
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoTicket.lottoNumbers());
-            boolean matchBonus = lottoTicket.hasBonusNumber(bonusBall);
-            WinningRank rank = WinningRank.findByMacthedCount(matchedCount, matchBonus);
-            add(rank);
-        }
     }
 
     public void add(WinningRank rank) {
@@ -44,10 +31,6 @@ public class RanksCount {
                 .collect(Collectors.toList());
 
         return new TotalPrize(totalPrize);
-    }
-
-    public int countOf(WinningRank rank) {
-        return ranksCount.get(rank);
     }
 
     public Iterable<? extends Map.Entry<WinningRank, Integer>> entrySet() {
