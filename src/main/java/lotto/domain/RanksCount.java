@@ -19,7 +19,7 @@ public class RanksCount {
         this.ranksCount = initialValue();
     }
 
-    public void count(BonusBall bonusBall) {
+    public void matchWith(BonusBall bonusBall) {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             MatchedCount matchedCount = winningNumbers.matchedCountWith(lottoTicket.lottoNumbers());
             boolean matchBonus = lottoTicket.hasBonusNumber(bonusBall);

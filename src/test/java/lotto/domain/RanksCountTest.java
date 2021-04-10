@@ -22,7 +22,7 @@ public class RanksCountTest {
         RanksCount ranksCount = new RanksCount(winningNumbers, lottoTickets);
 
         //when
-        ranksCount.count(bonusBall);
+        ranksCount.matchWith(bonusBall);
 
         //then
         assertThat(ranksCount.countOf(WinningRank.FIRST_PLACE)).isEqualTo(1);
