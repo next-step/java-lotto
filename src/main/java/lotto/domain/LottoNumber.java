@@ -21,7 +21,15 @@ public class LottoNumber {
     }
 
     public static LottoNumber lottoNumber(String number) {
-        return lottoNumber(Integer.parseInt(number));
+        int lottoNumber;
+
+        try {
+            lottoNumber = Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            throw new NumberFormatException("수동 구매 번호를 잘 못 입력하셨습니다.");
+        }
+
+        return lottoNumber(lottoNumber);
     }
 
     public static LottoNumber lottoNumber(int number){

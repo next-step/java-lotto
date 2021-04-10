@@ -39,6 +39,14 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("전체 구매 개수보다 수동 구매 개수가 클 경우")
+    public void manualLottoCountValid(){
+        assertThatIllegalArgumentException().isThrownBy (
+                () -> lottoMachine.buyCountValid(10, 15)
+        );
+    }
+
+    @Test
     @DisplayName("범위를 벗어나는 로또 번호")
     public void lottoNumberValid(){
         assertThatIllegalArgumentException().isThrownBy (

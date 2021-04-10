@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.common.LottoConstants;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,13 +14,17 @@ public class Lotto {
 
     public void lotto(){
 
-        int buyMoney = inputView.count();
+        int buyCount = lottoMachine.buyCount(inputView.count());
+        int manualBuyCount = inputView.manualBuyCount();
+        int autoBuyCount = buyCount - manualBuyCount;
 
-        int buyCount = lottoMachine.buyCount(buyMoney);
-        resultView.print(buyCount);
+        lottoMachine.buyCountValid(buyCount, manualBuyCount);
 
-        List<LottoNumbers> lottoNumbers = lottoMachine.lottoNumbers(buyCount);
+        List<String> manualLotto = inputView.manualBuy(manualBuyCount);
 
+        List<LottoNumbers> lottoNumbers = lottoMachine.getLottoNumbers(manualLotto, autoBuyCount);
+
+        resultView.print(manualBuyCount, autoBuyCount);
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();
@@ -35,10 +38,8 @@ public class Lotto {
         LottoNumber bonusBall = LottoNumber.lottoNumber(bonusNumber);
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusBall);
 
-        String resultInfo = lottoResult.result(lottoNumbers, winningNumbers);
-
         resultView.print();
-        resultView.print(resultInfo);
+        resultView.print(lottoResult.result(lottoNumbers, winningNumbers));
 
     }
 

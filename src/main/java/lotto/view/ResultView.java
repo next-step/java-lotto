@@ -5,8 +5,8 @@ import lotto.domain.LottoNumbers;
 import java.util.List;
 
 public class ResultView {
-    public void print(int buyCount){
-        System.out.println(buyCount + "개를 구매했습니다.");
+    public void print(int manualBuyCount, int autoBuyCount){
+        System.out.println("수동으로 " + manualBuyCount + "장 자동으로 " + autoBuyCount + "개를 구매했습니다.");
     }
 
     public void print(List<LottoNumbers> lottoNumbers) {
