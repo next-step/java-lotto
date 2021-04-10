@@ -9,15 +9,15 @@ public class Money {
     private final int money;
 
     private Money(int money) {
+        validate(money);
         this.money = money;
     }
 
     public static Money of(int payment) {
-        validate(payment);
         return new Money(payment);
     }
 
-    private static void validate(int payment) {
+    private void validate(int payment) {
         if (payment < LOTTO_PRICE) {
             throw new IllegalArgumentException(MONEY_MESSAGE);
         }
