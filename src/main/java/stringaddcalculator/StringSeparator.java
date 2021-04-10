@@ -23,8 +23,8 @@ public class StringSeparator {
   }
 
   private String generateSplitRegex() {
-    String splitRegex = String.join("\\", this.separatorList);
-    return "[\\" + splitRegex + "]";
+    String splitRegex = String.join("", this.separatorList);
+    return "[" + splitRegex + "]";
   }
 
 }
