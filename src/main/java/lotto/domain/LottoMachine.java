@@ -1,12 +1,8 @@
 package lotto.domain;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMachine {
-
-    private static InputView inputView = new InputView();
     private static OutputView outputView = new OutputView();
 
     private LottoNumbers lottoNumbers;
@@ -66,6 +62,7 @@ public class LottoMachine {
 
 
     private void printLotto() {
+
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers()) {
             outputView.printPurchasedLotto(lottoNumber);
         }

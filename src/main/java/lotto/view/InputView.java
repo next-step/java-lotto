@@ -13,10 +13,6 @@ public class InputView {
 
     private Scanner sc = new Scanner(System.in);
 
-    public InputView() {
-
-    }
-
     public InputData inputDataMoney() {
         System.out.println("구입금액을 입력해 주세요.(1,000원 단위)");
         sc = new Scanner(System.in);

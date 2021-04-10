@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class Shuffle {
@@ -12,9 +10,9 @@ public class Shuffle {
         this.wholeLottoNumbers = wholeLottoNumbers;
     }
 
-    public void shuffle(){
+    public void shuffle() {
         long seed = System.nanoTime();
-        Collections.shuffle(this.wholeLottoNumbers.lottoNumberList() ,new Random(seed));
+        Collections.shuffle(this.wholeLottoNumbers.lottoNumberList(), new Random(seed));
     }
 
     public LottoNumber extractLottoNumber() {
@@ -22,6 +20,4 @@ public class Shuffle {
         Collections.sort(lottoNumber.numbers());
         return lottoNumber;
     }
-
-
 }

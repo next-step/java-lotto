@@ -42,7 +42,7 @@ class LottoMachineTest {
         lottoNumberList.add(number3);
         lottoNumberList.add(number4);
         lottoNumberList.add(number5);
-        lottoNumberList.add(number6);
+        lottoNumberList.add(number7);
         lottoNumber = new LottoNumber(lottoNumberList);
 
         LottoNumber lottoNumber = new LottoNumber(lottoNumberList);
@@ -63,7 +63,7 @@ class LottoMachineTest {
 
         OutputData outputData = lottoMachine.showResult(winLottoNumber);
 
-        assertThat(outputData.fiveWin().number()).isEqualTo(0);
+        assertThat(outputData.fiveWin().number()).isEqualTo(1);
 
 
     }
