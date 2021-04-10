@@ -1,6 +1,6 @@
 package step2.Domain;
 
-import step2.Validation.StringValidator;
+import step2.util.Parser;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class InputNumber {
 
     public List<LottoNumber> numbers() {
         return numbers.stream()
-                .map(num -> new LottoNumber(StringValidator.parseStringToInt(num.trim())))
+                .map(num -> new LottoNumber(Parser.parseStringToInt(num.trim())))
                 .collect(Collectors.toList());
     }
 }

@@ -17,7 +17,7 @@ public class InputView {
 
     public Money buyLotto() {
         System.out.println("구매 금액을 입력해주세요.");
-        return Optional.of(new Money(scanner.nextLine())).orElseGet(()->new Money(0));
+        return Optional.of(new Money(scanner.nextLine())).orElseGet(() -> new Money(0));
     }
 
     public PurchasedLottoNumber buyManualLotto() {

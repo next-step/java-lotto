@@ -21,9 +21,9 @@ public class LottoGame {
         MergeGenerator mergeGenerator =
                 new MergeGenerator(
                         Arrays.asList(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber))
-                                ,new RandomLottoNumberGenerator(remainMoney)));
+                                , new RandomLottoNumberGenerator(remainMoney)));
         Lottos lottos = Lottos.of(mergeGenerator);
-        resultView.printPurchaseNumber(manualBuyNumber,new PurchasedLottoNumber(remainMoney));
+        resultView.printPurchaseNumber(manualBuyNumber, new PurchasedLottoNumber(remainMoney));
         resultView.printLottoList(lottos);
         WinningLotto winningLotto = inputView.winningLotto();
         Profit profit = new Profit(money, lottos.makeStatistic(winningLotto));

@@ -1,6 +1,6 @@
-package step2.Validation;
+package step2.util;
 
-public class StringValidator {
+public class Parser {
 
     public static int parseStringToInt(String number){
         try {

@@ -1,8 +1,5 @@
 package step2.Domain;
 
-import step2.Domain.InputNumber;
-import step2.Domain.LottoNumberGenerator;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

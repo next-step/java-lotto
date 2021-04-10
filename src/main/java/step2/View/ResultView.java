@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printPurchaseNumber(PurchasedLottoNumber manualNumber,PurchasedLottoNumber autoNumber) {
+    public void printPurchaseNumber(PurchasedLottoNumber manualNumber, PurchasedLottoNumber autoNumber) {
         System.out.println();
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
-                manualNumber.getNumber(),autoNumber.getNumber()));
+                manualNumber.getNumber(), autoNumber.getNumber()));
     }
 
     public void printLottoList(Lottos lottos) {

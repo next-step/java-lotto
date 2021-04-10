@@ -1,6 +1,6 @@
 package step2.Domain;
 
-import step2.Validation.StringValidator;
+import step2.util.Parser;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -12,7 +12,7 @@ public class LottoNumber {
     private int number;
 
     public LottoNumber(String number) {
-        this(StringValidator.parseStringToInt(number));
+        this(Parser.parseStringToInt(number));
     }
 
     public LottoNumber(int number) {

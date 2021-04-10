@@ -1,13 +1,13 @@
 package step2.Domain;
 
-import step2.Validation.StringValidator;
+import step2.util.Parser;
 
 public class PurchasedLottoNumber {
 
     private int number;
 
     public PurchasedLottoNumber(String number) {
-        this(StringValidator.parseStringToInt(number));
+        this(Parser.parseStringToInt(number));
     }
 
     public PurchasedLottoNumber(int number) {

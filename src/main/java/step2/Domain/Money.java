@@ -1,6 +1,6 @@
 package step2.Domain;
 
-import step2.Validation.StringValidator;
+import step2.util.Parser;
 
 public class Money {
 
@@ -8,7 +8,7 @@ public class Money {
     private int money;
 
     public Money(String money) {
-        this(StringValidator.parseStringToInt(money));
+        this(Parser.parseStringToInt(money));
     }
 
     public Money(int money) {
@@ -18,9 +18,9 @@ public class Money {
         this.money = money;
     }
 
-    public Money remain(PurchasedLottoNumber purchasedLottoNumber){
+    public Money remain(PurchasedLottoNumber purchasedLottoNumber) {
         int remainMoney = money - purchasedLottoNumber.getNumber() * DEFAULT_LOTTO_PRICE;
-        if(remainMoney < 0){
+        if (remainMoney < 0) {
             throw new IllegalArgumentException("구매 금액보다 더 많은 로또를 구매 할 수 없습니다.");
         }
         return new Money(remainMoney);
