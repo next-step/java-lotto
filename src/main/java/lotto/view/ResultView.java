@@ -21,7 +21,7 @@ public class ResultView {
         System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다%n", manualNumberOfTicket, autoNumberOfTickets);
     }
 
-    public void lottoNumbers(LottoTickets lottotickets) {
+    public void printLottoNumbers(LottoTickets lottotickets) {
         for (LottoTicket lottoTicket : lottotickets.lottoTickets()) {
             String numbers = lottoTicket.lottoNumbers().stream()
                     .map(LottoNumber::lottoNumber)
@@ -31,7 +31,7 @@ public class ResultView {
         }
     }
 
-    public void statistics(List<RankCountDto> ranksCount) {
+    public void printStatistics(List<RankCountDto> ranksCount) {
         System.out.println();
         System.out.println(WINNING_STATISTICS);
         System.out.println(BOUNDARY);
@@ -49,11 +49,11 @@ public class ResultView {
         return BLANK;
     }
 
-    public void positiveProfitRate(double profitRate) {
+    public void printPositiveProfitRate(double profitRate) {
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)%n", profitRate);
     }
 
-    public void negativeProfitRate(double profitRate) {
+    public void printNegativeProfitRate(double profitRate) {
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", profitRate);
     }
 }
