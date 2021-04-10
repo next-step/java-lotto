@@ -12,10 +12,10 @@ import static lotto.constants.BaseConstants.LOTTO_SECOND_PLACE_INDEX;
 import static lotto.constants.BaseConstants.LOTTO_THIRD_PLACE_INDEX;
 
 public class LottoPlaces {
-  private final List<LottoPlace> lottoPlaces;
+  private final List<LottoPlace> values;
 
-  private LottoPlaces(List<LottoPlace> lottoPlaces) {
-    this.lottoPlaces = Collections.unmodifiableList(lottoPlaces);
+  private LottoPlaces(List<LottoPlace> values) {
+    this.values = Collections.unmodifiableList(values);
   }
 
   public static LottoPlaces create() {
@@ -30,7 +30,7 @@ public class LottoPlaces {
 
   public LottoPlaces record(int matchedLottoNumberCount) {
     List<LottoPlace> result = new ArrayList<>();
-    for (LottoPlace lottoPlace : lottoPlaces) {
+    for (LottoPlace lottoPlace : values) {
       if (lottoPlace.matchedLottoNumberCount(matchedLottoNumberCount)) {
         lottoPlace = lottoPlace.win();
       }
@@ -40,27 +40,27 @@ public class LottoPlaces {
   }
 
   public LottoPlace firstPlace() {
-    return lottoPlaces.get(LOTTO_FIRST_PLACE_INDEX);
+    return values.get(LOTTO_FIRST_PLACE_INDEX);
   }
 
   public LottoPlace secondPlace() {
-    return lottoPlaces.get(LOTTO_SECOND_PLACE_INDEX);
+    return values.get(LOTTO_SECOND_PLACE_INDEX);
   }
 
   public LottoPlace thirdPlace() {
-    return lottoPlaces.get(LOTTO_THIRD_PLACE_INDEX);
+    return values.get(LOTTO_THIRD_PLACE_INDEX);
   }
 
   public LottoPlace fourthPlace() {
-    return lottoPlaces.get(LOTTO_FOURTH_PLACE_INDEX);
+    return values.get(LOTTO_FOURTH_PLACE_INDEX);
   }
 
-  public List<LottoPlace> getLottoPlaces() {
-    return lottoPlaces;
+  public List<LottoPlace> getValues() {
+    return values;
   }
 
   public long totalWinMoney() {
-    return lottoPlaces.stream()
+    return values.stream()
             .map(LottoPlace::getTotalMoney)
             .reduce(Long::sum)
             .orElse(0L);
@@ -71,18 +71,18 @@ public class LottoPlaces {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoPlaces that = (LottoPlaces) o;
-    return Objects.equals(lottoPlaces, that.lottoPlaces);
+    return Objects.equals(values, that.values);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoPlaces);
+    return Objects.hash(values);
   }
 
   @Override
   public String toString() {
     return "LottoPlaces{" +
-            "lottoPlaces=" + lottoPlaces +
+            "lottoPlaces=" + values +
             '}';
   }
 }

@@ -21,7 +21,7 @@ public final class InputView {
 
   public static void printBoughtLottoNumbers(LottoTicket lottoTicket) {
     System.out.println(String.format(ISSUED_LOTTO_TICKET_FORMAT, lottoTicket.ticketCount()));
-    for (LottoNumbers lottoNumbers : lottoTicket.getList()) {
+    for (LottoNumbers lottoNumbers : lottoTicket.getValues()) {
       System.out.println(lottoNumbers);
     }
   }

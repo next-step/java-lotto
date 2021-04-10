@@ -36,7 +36,7 @@ class LottoNumbersTest {
   void generateSixNumbers_immutableList() {
     // given
     List<LottoNumber> list = LottoNumbers.generateSixNumbers(new SixLottoNumbers())
-            .getList();
+            .getValues();
 
     // when
 

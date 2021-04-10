@@ -11,10 +11,10 @@ import java.util.Objects;
 public class LottoTicket {
   private static final int LOTTO_PRICE = 1_000;
 
-  private final List<LottoNumbers> list;
+  private final List<LottoNumbers> values;
 
-  private LottoTicket(List<LottoNumbers> list) {
-    this.list = Collections.unmodifiableList(list);
+  private LottoTicket(List<LottoNumbers> values) {
+    this.values = Collections.unmodifiableList(values);
   }
 
   public static LottoTicket toBuy(final int money, final GenerateNumbers generateNumbers) {
@@ -28,7 +28,7 @@ public class LottoTicket {
 
   public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers) {
     LottoPlaces lottoPlaces = LottoPlaces.create();
-    for (LottoNumbers lottoNumbers : list) {
+    for (LottoNumbers lottoNumbers : values) {
       int matchedLottoNumberCount = lottoWiningNumbers.matchLottoNumber(lottoNumbers);
       lottoPlaces = lottoPlaces.record(matchedLottoNumberCount);
     }
@@ -39,12 +39,12 @@ public class LottoTicket {
     return LOTTO_PRICE * ticketCount();
   }
 
-  public List<LottoNumbers> getList() {
-    return list;
+  public List<LottoNumbers> getValues() {
+    return values;
   }
 
   public int ticketCount() {
-    return list.size();
+    return values.size();
   }
 
   @Override
@@ -52,16 +52,16 @@ public class LottoTicket {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoTicket that = (LottoTicket) o;
-    return Objects.equals(list, that.list);
+    return Objects.equals(values, that.values);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(list);
+    return Objects.hash(values);
   }
 
   @Override
   public String toString() {
-    return "LottoTicket=" + list;
+    return "LottoTicket=" + values;
   }
 }

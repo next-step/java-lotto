@@ -20,7 +20,7 @@ public class ResultView {
   }
 
   public static void printPlaces(LottoPlaces places) {
-    places.getLottoPlaces()
+    places.getValues()
             .forEach(lottoPlace -> System.out.format(LOTTO_PLACES_RESULT_FORMAT, lottoPlace.getMatched()
                     , convertMoneyFormatting(lottoPlace.getWinMoney())
                     , convertMoneyFormatting(lottoPlace.getReturnOnInvestment()))

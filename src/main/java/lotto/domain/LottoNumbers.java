@@ -10,10 +10,10 @@ public class LottoNumbers {
   private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
   private static final String EXCEPTION_MESSAGE = "로또는 6자리 숫자로 생성해야 됩니다.";
 
-  private final List<LottoNumber> list;
+  private final List<LottoNumber> values;
 
-  private LottoNumbers(List<LottoNumber> list) {
-    this.list = Collections.unmodifiableList(list);
+  private LottoNumbers(List<LottoNumber> values) {
+    this.values = Collections.unmodifiableList(values);
   }
 
   public static LottoNumbers generateSixNumbers(final GenerateNumbers generateNumbers) {
@@ -25,21 +25,21 @@ public class LottoNumbers {
   }
 
   public int size() {
-    return list.size();
+    return values.size();
   }
 
   public int matchLottoNumber(final LottoNumbers otherNumbers) {
-    return (int) list.stream()
+    return (int) values.stream()
             .filter(otherNumbers::contains)
             .count();
   }
 
   public boolean contains(LottoNumber lottoNumber) {
-    return list.contains(lottoNumber);
+    return values.contains(lottoNumber);
   }
 
-  public List<LottoNumber> getList() {
-    return list;
+  public List<LottoNumber> getValues() {
+    return values;
   }
 
   @Override
@@ -47,16 +47,16 @@ public class LottoNumbers {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoNumbers that = (LottoNumbers) o;
-    return Objects.equals(list, that.list);
+    return Objects.equals(values, that.values);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(list);
+    return Objects.hash(values);
   }
 
   @Override
   public String toString() {
-    return String.valueOf(list);
+    return String.valueOf(values);
   }
 }

@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoWiningNumbers {
-  private final LottoNumbers list;
+  private final LottoNumbers value;
 
-  private LottoWiningNumbers(LottoNumbers list) {
-    this.list = list;
+  private LottoWiningNumbers(LottoNumbers value) {
+    this.value = value;
   }
 
   public static LottoWiningNumbers generate(final GenerateNumbers generateNumbers) {
@@ -29,7 +29,7 @@ public class LottoWiningNumbers {
   }
 
   public int matchLottoNumber(final LottoNumbers lottoNumbers) {
-    return list.matchLottoNumber(lottoNumbers);
+    return value.matchLottoNumber(lottoNumbers);
   }
 
   @Override
@@ -37,16 +37,16 @@ public class LottoWiningNumbers {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoWiningNumbers that = (LottoWiningNumbers) o;
-    return Objects.equals(list, that.list);
+    return Objects.equals(value, that.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(list);
+    return Objects.hash(value);
   }
 
   @Override
   public String toString() {
-    return String.valueOf(list);
+    return String.valueOf(value);
   }
 }
