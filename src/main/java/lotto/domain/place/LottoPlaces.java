@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static lotto.constants.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
-import static lotto.constants.BaseConstants.LOTTO_FOURTH_PLACE_INDEX;
-import static lotto.constants.BaseConstants.LOTTO_SECOND_PLACE_INDEX;
-import static lotto.constants.BaseConstants.LOTTO_THIRD_PLACE_INDEX;
 
 public class LottoPlaces {
   private final List<LottoPlace> values;
@@ -41,18 +38,6 @@ public class LottoPlaces {
 
   public LottoPlace firstPlace() {
     return values.get(LOTTO_FIRST_PLACE_INDEX);
-  }
-
-  public LottoPlace secondPlace() {
-    return values.get(LOTTO_SECOND_PLACE_INDEX);
-  }
-
-  public LottoPlace thirdPlace() {
-    return values.get(LOTTO_THIRD_PLACE_INDEX);
-  }
-
-  public LottoPlace fourthPlace() {
-    return values.get(LOTTO_FOURTH_PLACE_INDEX);
   }
 
   public List<LottoPlace> getValues() {
