@@ -1,38 +1,36 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.OutputData;
-
 public class OutputView {
-    private int lottoCnt = 0;
+    private int lottoCount = 0;
+    private int threeWinCount = 0;
+    private int fourWinCount = 0;
+    private int fiveWinCount = 0;
+    private int sixWinCount = 0;
 
     public OutputView() {
 
     }
 
-    public OutputView(int lottoCnt) {
-        this.lottoCnt = lottoCnt;
+    public OutputView(int lottoCount) {
+        this.lottoCount = lottoCount;
     }
 
     public void printLottoCnt() {
-        System.out.println(this.lottoCnt + "개를 구매했습니다.");
+        System.out.println(this.lottoCount + "개를 구매했습니다.");
     }
 
-    public void printPurchasedLotto(LottoNumber lottoNumber) {
-        System.out.println(lottoNumber.toString());
-    }
 
-    public void printLottoResult(OutputData inputOutputData) {
+    public void printLottoResult(int threeWinCount, int fourWinCount, int fiveWinCount, int sixWinCount) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        System.out.println("3개 일치(5,000원)- " + inputOutputData.threeWin().number() + "개");
-        System.out.println("4개 일치(50,000원)- " + inputOutputData.fourWin().number() + "개");
-        System.out.println("5개 일치(1,500,000원)- " + inputOutputData.fiveWin().number() + "개");
-        System.out.println("6개 일치(2,000,000,000원)- " + inputOutputData.sixWin().number() + "개");
+        System.out.println("3개 일치(5,000원)- " + threeWinCount + "개");
+        System.out.println("4개 일치(50,000원)- " + fourWinCount + "개");
+        System.out.println("5개 일치(1,500,000원)- " + fiveWinCount + "개");
+        System.out.println("6개 일치(2,000,000,000원)- " + sixWinCount + "개");
     }
 
-    public void printRate(OutputData outputData) {
-        System.out.println("총 수익률은 " + outputData.calculateRate());
+    public void printRate(float rate) {
+        System.out.println("총 수익률은 " + rate);
     }
 
 }

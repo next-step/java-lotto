@@ -2,6 +2,9 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoMachine {
     private static OutputView outputView = new OutputView();
 
@@ -19,7 +22,7 @@ public class LottoMachine {
 
     private Money expense;
 
-    public LottoMachine(final LottoNumbers lottoNumbers,Money expense) {
+    public LottoMachine(final LottoNumbers lottoNumbers, Money expense) {
         this.lottoNumbers = lottoNumbers;
         this.expense = expense;
     }
@@ -28,8 +31,15 @@ public class LottoMachine {
         printLotto();
     }
 
-    public OutputData showResult(LottoNumber lottoNumber) {
+    public OutputData showResult(List<Integer> lottoNumberList) {
 
+        List<Number> numberList = new ArrayList<>();
+
+        for(int number : lottoNumberList){
+            numberList.add(new Number(number));
+        }
+
+        LottoNumber lottoNumber = new LottoNumber(numberList);
         WinLottoNumber winLottoNumber = new WinLottoNumber(lottoNumber);
 
         for (int i = 0; i < this.lottoNumbers.lottoNumbers().size(); i++) {
@@ -64,7 +74,7 @@ public class LottoMachine {
     private void printLotto() {
 
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers()) {
-            outputView.printPurchasedLotto(lottoNumber);
+            System.out.println(lottoNumber.toString());
         }
     }
 

@@ -57,11 +57,17 @@ class LottoMachineTest {
     @DisplayName("로또번호를 몇개나 맞추었는지 비교 테스트 ")
     void winLottoTest() {
 
-        LottoMachine lottoMachine = new LottoMachine(lottoNumbers,new Money(2000));
+        LottoMachine lottoMachine = new LottoMachine(lottoNumbers, new Money(2000));
 
         LottoNumber winLottoNumber = new LottoNumber(winLottoNumbersList);
 
-        OutputData outputData = lottoMachine.showResult(winLottoNumber);
+        List<Integer> winLottoList = new ArrayList<>();
+
+        for (Number number : winLottoNumber.numbers()) {
+            winLottoList.add(number.number());
+        }
+
+        OutputData outputData = lottoMachine.showResult(winLottoList);
 
         assertThat(outputData.fiveWin().number()).isEqualTo(1);
 

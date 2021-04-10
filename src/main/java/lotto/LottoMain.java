@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,9 +14,9 @@ public class LottoMain {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
         InputView inputView = new InputView();
-        InputData inputDataMoney = inputView.inputDataMoney();
+        int money = inputView.inputDataMoney();
 
-        Clerk clerk = new Clerk(inputDataMoney.money());
+        Clerk clerk = new Clerk(new Money(money));
 
         int lottoCnt = clerk.returnedLottoCount();
         OutputView outputView = new OutputView(lottoCnt);
@@ -30,17 +31,18 @@ public class LottoMain {
             lottoNumberList.add(lottoNumber);
         }
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoNumbers(lottoNumberList),inputDataMoney.money());
+        LottoMachine lottoMachine = new LottoMachine(new LottoNumbers(lottoNumberList), new Money(money));
 
         lottoMachine.startLottoGame();
 
-        InputData inputWinLottoNumber = inputView.inputDataWinLotto();
+        List<Integer> list = inputView.inputDataWinLotto();
 
-        OutputData resultData = lottoMachine.showResult(inputWinLottoNumber.lottoNumber());
 
-        outputView.printLottoResult(resultData);
+        OutputData resultData = lottoMachine.showResult(list);
 
-        outputView.printRate(resultData);
+        outputView.printLottoResult(resultData.threeWin().number(), resultData.fourWin().number(), resultData.fiveWin().number(), resultData.sixWin().number());
+
+        outputView.printRate(resultData.calculateRate());
 
     }
 }
