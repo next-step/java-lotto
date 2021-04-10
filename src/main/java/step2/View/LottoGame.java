@@ -2,6 +2,8 @@ package step2.View;
 
 import step2.Domain.*;
 
+import java.util.Arrays;
+
 public class LottoGame {
 
     private InputView inputView;
@@ -16,13 +18,15 @@ public class LottoGame {
         Money money = inputView.buyLotto();
         PurchasedLottoNumber manualBuyNumber = inputView.buyManualLotto();
         Money remainMoney = money.remain(manualBuyNumber);
-        Lottos manualLottos = Lottos.of(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber)));
-        Lottos autoLottos = Lottos.of(new RandomLottoNumberGenerator(remainMoney));
+        MergeGenerator mergeGenerator =
+                new MergeGenerator(
+                        Arrays.asList(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber))
+                                ,new RandomLottoNumberGenerator(remainMoney)));
+        Lottos lottos = Lottos.of(mergeGenerator);
         resultView.printPurchaseNumber(manualBuyNumber,new PurchasedLottoNumber(remainMoney));
-        resultView.printLottoList(autoLottos);
+        resultView.printLottoList(lottos);
         WinningLotto winningLotto = inputView.winningLotto();
-        Rank rank = autoLottos.makeStatistic(winningLotto).merge(manualLottos.makeStatistic(winningLotto));
-        Profit profit = new Profit(money, rank);
+        Profit profit = new Profit(money, lottos.makeStatistic(winningLotto));
         resultView.printLottoStatistic(profit);
         resultView.printProfitRate(profit);
     }

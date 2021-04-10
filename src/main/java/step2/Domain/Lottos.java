@@ -12,7 +12,7 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public static Lottos of(LottoNumberGenerator generator) {
+    public static Lottos of(MergeGenerator generator) {
         return new Lottos(generator.generate());
     }
 

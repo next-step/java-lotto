@@ -52,7 +52,8 @@ public class ManualLottoTest {
         InputNumber manualNumbers = new InputNumber("1,2,3,4,5,6");
         InputNumber manualNumbers2 = new InputNumber("1,22,33,40,41,42");
         InputNumber manualNumbers3 = new InputNumber("1,15,23,40,43,45");
-        Lottos manualLottos = Lottos.of(new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3)));
+        LottoNumberGenerator generator = new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3));
+        Lottos manualLottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
         assertThat(manualLottos.getLottos()).contains(new Lotto(manualNumbers),new Lotto(manualNumbers2),new Lotto(manualNumbers3));
     }
 
@@ -63,24 +64,14 @@ public class ManualLottoTest {
         InputNumber manualNumbers = new InputNumber("1,2,3,10,20,30");
         InputNumber manualNumbers2 = new InputNumber("1,2,3,10,20,7");
         InputNumber manualNumbers3 = new InputNumber("1,2,3,40,43,45");
-        Lottos manualLottos = Lottos.of(new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3)));
-        Lottos autoLottos = Lottos.of(new RandomLottoNumberGenerator(new Money(5000)));
+        LottoNumberGenerator manualGenerator = new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3));
+        LottoNumberGenerator autoGenerator = new RandomLottoNumberGenerator(new Money(5000));
+        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(manualGenerator,autoGenerator)));
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new LottoNumber(7));
-        Rank manualRank = manualLottos.makeStatistic(winningLotto);
-        Rank autoRank = autoLottos.makeStatistic(winningLotto);
 
-        Map<LottoPrize, List<Lotto>> mergedLotto = Stream.of(manualRank, autoRank)
-                .flatMap(mergedMap -> mergedMap.getRank().entrySet().stream())
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        v -> new ArrayList<>(v.getValue()),
-                        (left, right) -> {left.addAll(right); return left;}
-                ));
-
-        assertThat(mergedLotto.keySet()).contains(LottoPrize.FIRST,LottoPrize.SECOND,LottoPrize.FIFTH);
-        Rank mergeRank = new Rank(mergedLotto);
+        Rank rank = lottos.makeStatistic(winningLotto);
         assertThat(Arrays.stream(LottoPrize.values())
-                .mapToInt(lottoPrize -> mergeRank.size(lottoPrize))
+                .mapToInt(lottoPrize -> rank.size(lottoPrize))
                 .sum()).isEqualTo(8);
     }
 

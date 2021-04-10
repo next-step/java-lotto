@@ -23,7 +23,7 @@ public class ProfitTest {
                 Arrays.asList(new Lotto(purchasedNumbers1),
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3));
 
-        Lottos lottos = Lottos.of(generator);
+        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
         Rank rank = lottos.makeStatistic(winningLotto);
 
         double sum = rank.getRank().keySet().stream().
@@ -48,7 +48,7 @@ public class ProfitTest {
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3)
                     ,new Lotto(purchasedNumbers4),new Lotto(purchasedNumbers5));
 
-        Lottos lottos = Lottos.of(generator);
+        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
         Rank rank = lottos.makeStatistic(winningLotto);
 
         double sum = rank.getRank().keySet().stream().
@@ -69,7 +69,7 @@ public class ProfitTest {
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1),
                         new Lotto(purchasedNumbers2), new Lotto(purchasedNumbers3));
-        Lottos lottos = Lottos.of(generator);
+        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
 
         Rank rank = lottos.makeStatistic(winningLotto);
         Money money= new Money(3000);
@@ -91,7 +91,7 @@ public class ProfitTest {
         LottoNumberGenerator generator = () ->
                 Arrays.asList(new Lotto(purchasedNumbers1), new Lotto(purchasedNumbers2));
 
-        Lottos lottos = Lottos.of(generator);
+        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
         Rank rank = lottos.makeStatistic(winningLotto);
 
         double sum = rank.getRank().keySet().stream().
