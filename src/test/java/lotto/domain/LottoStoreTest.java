@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static base.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStoreTest {
@@ -45,10 +46,10 @@ class LottoStoreTest {
     LottoTicket lottoTicket = LottoTicket.toBuy(3000, () -> consumer);
 
     // when
-    LottoPlaces lottoPlace = store.exchange(lottoTicket).getLottoPlaces();
+    LottoPlaces places = store.exchange(lottoTicket).getLottoPlaces();
 
     // then
-    assertThat(lottoPlace.firstPlace())
+    assertThat(places.getValues().get(LOTTO_FIRST_PLACE_INDEX))
             .isEqualTo(LottoFirstPlace.create().win().win().win());
   }
 }

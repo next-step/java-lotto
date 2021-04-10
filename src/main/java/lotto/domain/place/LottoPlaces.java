@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoPlaces {
-  private static final int LOTTO_FIRST_PLACE_INDEX = 3;
-
   private final List<LottoPlace> values;
 
   private LottoPlaces(List<LottoPlace> values) {
@@ -34,10 +32,6 @@ public class LottoPlaces {
       result.add(lottoPlace);
     }
     return new LottoPlaces(result);
-  }
-
-  public LottoPlace firstPlace() {
-    return values.get(LOTTO_FIRST_PLACE_INDEX);
   }
 
   public List<LottoPlace> getValues() {

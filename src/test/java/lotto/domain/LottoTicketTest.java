@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static base.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
@@ -35,10 +36,10 @@ class LottoTicketTest {
             .collect(Collectors.toList()));
 
     // when
-    LottoPlaces lottoPlaces = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
+    LottoPlaces places = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
 
     // then
-    assertThat(lottoPlaces.firstPlace())
+    assertThat(places.getValues().get(LOTTO_FIRST_PLACE_INDEX))
             .isNotNull()
             .isEqualTo(LottoFirstPlace.create().win().win().win());
 
