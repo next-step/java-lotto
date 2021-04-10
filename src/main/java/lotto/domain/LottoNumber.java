@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+
+import static lotto.utils.ConvertUtil.toInt;
 
 public class LottoNumber {
     private static final int BOUND_MIN = 1;
@@ -31,7 +31,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(String lottoNumber) {
-        return of(ConvertUtil.toIntOrThrow(lottoNumber, () -> new IllegalArgumentException(String.format(CHECK_LOTTO_NUMBER, lottoNumber))));
+        return of(toInt(CHECK_LOTTO_NUMBER, lottoNumber));
     }
 
     public static LottoNumber of(int lottoNumber) {

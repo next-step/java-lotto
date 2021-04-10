@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.utils.ConvertUtil.toIntOrThrow;
+import static lotto.utils.ConvertUtil.toInt;
 
 public class WinningNumbers {
     private static final int NUMBER_LENGTH = 6;
@@ -20,7 +20,7 @@ public class WinningNumbers {
     public static WinningNumbers from(List<String> winningNumbers) {
         return new WinningNumbers(winningNumbers
                 .stream()
-                .map(WinningNumbers::toInt)
+                .map(winningNumber -> toInt(CHECK_WINNING_NUMBER, winningNumber))
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
@@ -29,13 +29,6 @@ public class WinningNumbers {
         return new WinningNumbers(Arrays.stream(winningNumbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
-    }
-
-    private static Integer toInt(String winningNumber) {
-        return toIntOrThrow(winningNumber,
-                () -> new IllegalArgumentException(
-                        String.format(CHECK_WINNING_NUMBER, winningNumber)
-                ));
     }
 
     public MatchedCount matchedCountWith(List<LottoNumber> lottoNumbers) {

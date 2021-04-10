@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.Objects;
+
+import static lotto.utils.ConvertUtil.toInt;
 
 public class ManualNumberOfTicket {
     private static final String CHECK_MANUAL_NUMBER_OF_TICKET = "입력하신 구매 티켓 수 %s가 숫자인지 확인해주세요.";
@@ -12,7 +12,7 @@ public class ManualNumberOfTicket {
     private final int manualNumberOfTicket;
 
     public ManualNumberOfTicket(String manualNumberOfTicket, TotalNumberOfTicket totalNumberOfTicket) {
-        this(ConvertUtil.toIntOrThrow(manualNumberOfTicket, () -> new IllegalArgumentException(String.format(CHECK_MANUAL_NUMBER_OF_TICKET, manualNumberOfTicket))), totalNumberOfTicket);
+        this(toInt(CHECK_MANUAL_NUMBER_OF_TICKET, manualNumberOfTicket), totalNumberOfTicket);
     }
 
     public ManualNumberOfTicket(int manualNumberOfTicket, TotalNumberOfTicket totalNumberOfTicket) {

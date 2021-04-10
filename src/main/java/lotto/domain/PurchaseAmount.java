@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.Objects;
+
+import static lotto.utils.ConvertUtil.toInt;
 
 public class PurchaseAmount {
     private final static int PURCHASE_AMOUNT_MIN = 1_000;
@@ -11,7 +11,7 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this(ConvertUtil.toIntOrThrow(purchaseAmount, () -> new IllegalArgumentException(String.format(CHECK_PURCHASE_AMOUNT, purchaseAmount))));
+        this(toInt(CHECK_PURCHASE_AMOUNT, purchaseAmount));
     }
 
     public PurchaseAmount(int purchaseAmount) {
