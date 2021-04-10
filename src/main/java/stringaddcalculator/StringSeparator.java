@@ -1,14 +1,20 @@
 package stringaddcalculator;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class StringSeparator {
 
-  private final List<String> separatorList;
+  private final Set<String> separatorList;
 
-  public StringSeparator(List<String> separatorList) {
+  public StringSeparator(Set<String> separatorList) {
     this.separatorList = separatorList;
+  }
+
+  public StringSeparator(String separator) {
+    this.separatorList = Collections.singleton(separator);
   }
 
   public List<String> separateString(String value) {
