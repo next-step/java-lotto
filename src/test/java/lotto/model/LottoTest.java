@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.LottoNumbersSizeOverException;
+import lotto.exception.LottoNumbersSizeException;
 import lotto.exception.NumberAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +37,12 @@ class LottoTest {
 
         List<Number> numberList = new ArrayList<>(Arrays.asList(testNumberA, testNumberB, testNumberC, testNumberD, testNumberE));
 
-        testLotto = new Lotto(numberList);
+        testLotto = new Lotto();
+        testLotto.addNumber(testNumberA);
+        testLotto.addNumber(testNumberB);
+        testLotto.addNumber(testNumberC);
+        testLotto.addNumber(testNumberD);
+        testLotto.addNumber(testNumberE);
     }
 
 
@@ -52,7 +57,7 @@ class LottoTest {
     void createRandomNumberTest() {
         Lotto randomLotto = new Lotto();
         randomLotto.createRandomNumber();
-        assertThat(randomLotto.toString().split(",").length).isEqualTo(6);
+        assertThat(randomLotto.getNumbers().size()).isEqualTo(6);
 
     }
 
@@ -77,7 +82,7 @@ class LottoTest {
     void addNumberFailTest2() {
         testLotto.addNumber(testNumberF);
         assertThatThrownBy(() -> testLotto.addNumber(testNumberG))
-                .isInstanceOf(LottoNumbersSizeOverException.class)
+                .isInstanceOf(LottoNumbersSizeException.class)
                 .hasMessage("Numbers can contain 6 numbers.");
     }
 
@@ -85,7 +90,7 @@ class LottoTest {
     @DisplayName("getPrize test ")
     void getPrizeTest() {
         testLotto.addNumber(testNumberF);
-        Lotto loseLotto = new Lotto(Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)));
+        Lotto loseLotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(testLotto.getPrize(testLotto)).isEqualTo(LottoPrize.FIRST);
         assertThat(loseLotto.getPrize(testLotto)).isEqualTo(null);
 

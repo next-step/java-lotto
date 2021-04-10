@@ -1,8 +1,11 @@
 package lotto;
 
-import lotto.exception.LottoNumbersSizeOverException;
+import lotto.exception.LottoNumbersSizeException;
 import lotto.exception.MoneyNotEnoughException;
 import lotto.exception.NumberAlreadyExistsException;
+import lotto.model.Lotto;
+import lotto.model.Money;
+import lotto.model.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,17 +19,19 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = {9000, 1000, 25000, 4000})
     @DisplayName("buy lotto test : success")
-    void buyLottoTest(int money) {
+    void buyLottoTest(int moneyAmount) {
+        Money money = new Money(moneyAmount);
         LottoGame lottoGame = new LottoGame();
         lottoGame.buyLotto(money);
-        assertThat(lottoGame.getLottos().size()).isEqualTo(money / 1000);
+        assertThat(lottoGame.getLottos().size()).isEqualTo(money.amount() / 1000);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {900, 100, 250, 10, 400})
     @DisplayName("buy lotto test : fail")
-    void buyLottoFailTest(int money) {
+    void buyLottoFailTest(int moneyAmount) {
         LottoGame lottoGame = new LottoGame();
+        Money money = new Money(moneyAmount);
         assertThatThrownBy(() -> lottoGame.buyLotto(money))
                 .isInstanceOf(MoneyNotEnoughException.class)
                 .hasMessage("Money is not enough to buy lotto");
@@ -38,9 +43,11 @@ class LottoGameTest {
     @DisplayName("buy lotto test : success")
     void lastWinningLottoTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.lastWinningLotto(numbers);
-        String[] testNumbers = numbers.replace(" ","").split(",");
-        assertThat(lottoGame.getWinLotto().toString()).contains(testNumbers);
+        lottoGame.lastWinningLotto(new Lotto(numbers));
+        String[] testNumbers = numbers.replace(" ","").split(Lotto.DELIMITER);
+        for (String testNumber: testNumbers){
+            assertThat(lottoGame.getWinLotto().getNumbers()).contains(new Number(testNumber));
+        }
     }
 
     @ParameterizedTest
@@ -48,7 +55,7 @@ class LottoGameTest {
     @DisplayName("buy lotto test : success")
     void lastWinningLottoFailTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
-        assertThatThrownBy(() -> lottoGame.lastWinningLotto(numbers))
+        assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(NumberAlreadyExistsException.class)
                 .hasMessage("Number already exists.");
     }
@@ -58,8 +65,8 @@ class LottoGameTest {
     @DisplayName("buy lotto test : success")
     void lastWinningLottoFailTest2(String numbers) {
         LottoGame lottoGame = new LottoGame();
-        assertThatThrownBy(() -> lottoGame.lastWinningLotto(numbers))
-                .isInstanceOf(LottoNumbersSizeOverException.class)
+        assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
+                .isInstanceOf(LottoNumbersSizeException.class)
                 .hasMessage("Numbers can contain 6 numbers.");
     }
 
@@ -68,7 +75,7 @@ class LottoGameTest {
     @DisplayName("buy lotto test : success")
     void lastWinningLottoFailTes3(String numbers) {
         LottoGame lottoGame = new LottoGame();
-        assertThatThrownBy(() -> lottoGame.lastWinningLotto(numbers))
+        assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("input value in 1~45");
     }

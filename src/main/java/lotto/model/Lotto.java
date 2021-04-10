@@ -1,28 +1,27 @@
 package lotto.model;
 
-import lotto.exception.LottoNumbersSizeOverException;
+import lotto.exception.LottoNumbersSizeException;
 import lotto.exception.NumberAlreadyExistsException;
 import lotto.util.RandomIntUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
+    public final static String DELIMITER = ",";
+    private final static int WINNING_NUMBER_COUNTS = 6;
     private List<Number> numbers;
-
-
-    public Lotto(List<Number> numbers) {
-        this.numbers = numbers;
-        Collections.sort(numbers);
-    }
 
     public Lotto() {
         this.numbers = new ArrayList<>();
     }
 
-    public Lotto(String[] numbers) {
+    public Lotto(String winningNumbers) {
+        String[] numbers = winningNumbers.split(DELIMITER);
+        if(numbers.length != 6){
+            throw new LottoNumbersSizeException("Please input 6 numbers which last won game");
+        }
         this.numbers = new ArrayList<>();
         for (String number : numbers) {
             addNumber(new Number(number.trim()));
@@ -33,8 +32,9 @@ public class Lotto {
         if (numbers.contains(number)) {
             throw new NumberAlreadyExistsException("Number already exists.");
         }
-        if (numbers.size() >= 6) {
-            throw new LottoNumbersSizeOverException("Numbers can contain 6 numbers.");
+
+        if (numbers.size() >= WINNING_NUMBER_COUNTS) {
+            throw new LottoNumbersSizeException("Numbers can contain 6 numbers.");
         }
         numbers.add(number);
         Collections.sort(numbers);
@@ -54,11 +54,6 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    @Override
-    public String toString() {
-        return "[" + numbers.stream().map(String::valueOf).collect(Collectors.joining(",")) + ']';
-    }
-
     public LottoPrize getPrize(Lotto winLotto) {
         int matchs = 0;
         for (Number number : numbers) {
@@ -69,4 +64,9 @@ public class Lotto {
         }
         return LottoPrize.getByMathes(matchs);
     }
+
+    public List<Number> getNumbers() {
+        return numbers;
+    }
 }
+

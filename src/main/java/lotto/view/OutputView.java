@@ -3,15 +3,19 @@ package lotto.view;
 import lotto.model.Lotto;
 import lotto.model.LottoPrize;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public void printBoughtLottoCount(int buyAmount) {
         System.out.printf("%s개를 구매했습니다.%n", buyAmount);
     }
 
-    public void printLottoNumbers(Lotto lotto) {
-        System.out.println(lotto);
+    public void printLottoNumbers(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            System.out.println("[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(",")) + ']');
+        }
     }
 
     public void printLine() {
@@ -22,7 +26,7 @@ public class OutputView {
     public void printLottoStatistics(Map<LottoPrize, Integer> lottoGameStatistics) {
         System.out.println("당첨 통계");
         for (LottoPrize lottoPrize : lottoGameStatistics.keySet()) {
-            System.out.println(String.format("%s개 일치 (%s원)- %s개", lottoPrize.getMatchs(), lottoPrize.getPrize(), lottoGameStatistics.get(lottoPrize)));
+            System.out.printf("%s개 일치 (%s원)- %s개%n", lottoPrize.getMatchs(), lottoPrize.getPrize(), lottoGameStatistics.get(lottoPrize));
         }
     }
 
@@ -31,6 +35,7 @@ public class OutputView {
         if (profit < 1) {
             message.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
-        System.out.println(String.format(String.valueOf(message), profit));
+        System.out.printf((message) + "%n", profit);
     }
 }
+
