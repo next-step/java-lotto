@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.Dto.RankCountDto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,12 +25,14 @@ public class ResultView {
         System.out.printf((GOT_TICKETS) + "%n", manualNumberOfTicket, autoNumberOfTickets);
     }
 
-    public void lottoNumbers(List<LottoNumber> lottoNumbers) {
-        String numbers = lottoNumbers.stream()
-                .map(LottoNumber::lottoNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER));
-        System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);
+    public void lottoNumbers(LottoTickets lottotickets) {
+        for (LottoTicket lottoTicket : lottotickets.lottoTickets()) {
+            String numbers = lottoTicket.lottoNumbers().stream()
+                    .map(LottoNumber::lottoNumber)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(DELIMITER));
+            System.out.println(OPEN_BRACKET + numbers + CLOSED_BRACKET);
+        }
     }
 
     public void statistics(List<RankCountDto> ranksCount) {

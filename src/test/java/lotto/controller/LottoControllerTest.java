@@ -134,7 +134,7 @@ class LottoControllerTest {
         }
 
         @Override
-        public void lottoNumbers(List<LottoNumber> lottoNumbers) {
+        public void lottoNumbers(LottoTickets lottoTickets) {
             record.add("lottoNumbers");
         }
 

@@ -87,9 +87,7 @@ public class LottoController {
     }
 
     protected void printLottoTickets(LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            resultView.lottoNumbers(lottoTicket.lottoNumbers());
-        }
+        resultView.lottoNumbers(lottoTickets);
     }
 
     protected WinningNumbers createWinningNumbers() {
