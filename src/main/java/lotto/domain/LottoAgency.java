@@ -29,7 +29,7 @@ public class LottoAgency {
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(money, coupon);
+    return LottoScoreBoard.createLottoResult(money, coupon.matches(winningNumber));
   }
 
   public String lottoCouponToString() {

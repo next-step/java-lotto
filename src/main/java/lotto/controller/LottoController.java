@@ -54,7 +54,7 @@ public class LottoController {
     return new InputView().enterManualLottoNumbers(number);
   }
 
-  private void buyLottoPhase(final LottoAgency agency) throws IOException {
+  private void buyLottoPhase(final LottoAgency agency) {
     new OutputView().printBoughtLottoManualCoupons(agency);
     int boughtAutoLottoQuantity = agency.purchaseLotto();
     new OutputView().printBoughtLottoAutoCoupons(agency, boughtAutoLottoQuantity);

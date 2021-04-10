@@ -14,10 +14,6 @@ public class WinningNumber {
     return new WinningNumber(winningNumber, bonusBall);
   }
 
-  public LottoScoreBoard generateLottoMatchResult(Money money, LottoCoupon coupon) {
-    return LottoScoreBoard.createLottoResult(money, coupon.matches(this));
-  }
-
   public LottoRank match(Lotto manualLotto) {
     return LottoRank.valueOf(winningNumber.matchCount(manualLotto),
         hasBonusBall(manualLotto));
