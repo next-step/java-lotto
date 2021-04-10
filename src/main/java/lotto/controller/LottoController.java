@@ -36,13 +36,8 @@ public class LottoController {
     }
 
     protected PurchaseAmount createPurchaseAmount() {
-        try {
-            String purchaseAmount = inputView.purchaseAmount();
-            return new PurchaseAmount(purchaseAmount);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return createPurchaseAmount();
-        }
+        String purchaseAmount = inputView.purchaseAmount();
+        return new PurchaseAmount(purchaseAmount);
     }
 
     protected LottoTickets createLottoTickets(PurchaseAmount purchaseAmount) {
@@ -61,12 +56,7 @@ public class LottoController {
     }
 
     private ManualNumberOfTicket manualNumberOfTicket(TotalNumberOfTicket totalNumberOfTicket) {
-        try {
-            return new ManualNumberOfTicket(inputView.manualLottoTicketCount(), totalNumberOfTicket);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return manualNumberOfTicket(totalNumberOfTicket);
-        }
+        return new ManualNumberOfTicket(inputView.manualLottoTicketCount(), totalNumberOfTicket);
     }
 
     private LottoTickets createManualLottoTickets(ManualNumberOfTicket manualNumberOfTicket) {
@@ -82,13 +72,8 @@ public class LottoController {
     }
 
     private LottoTicket manualLottoTicket() {
-        try {
-            List<String> manualLottoNumbers = SplitUtil.splitByComma(inputView.manualLottoNumbers());
-            return new LottoTicket(LottoNumbers.from(manualLottoNumbers));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return manualLottoTicket();
-        }
+        List<String> manualLottoNumbers = SplitUtil.splitByComma(inputView.manualLottoNumbers());
+        return new LottoTicket(LottoNumbers.from(manualLottoNumbers));
     }
 
     private LottoTickets createAutoLottoTickets(TotalNumberOfTicket totalNumberOfTicket, ManualNumberOfTicket manualNumberOfTicket) {
@@ -108,24 +93,14 @@ public class LottoController {
     }
 
     protected WinningNumbers createWinningNumbers() {
-        try {
-            List<String> winningNumbers = SplitUtil.splitByComma(inputView.winningNumbers());
-            return WinningNumbers.from(winningNumbers);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return createWinningNumbers();
-        }
+        List<String> winningNumbers = SplitUtil.splitByComma(inputView.winningNumbers());
+        return WinningNumbers.from(winningNumbers);
     }
 
     protected BonusBall createBonusBall(WinningNumbers winningNumbers) {
-        try {
-            LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
-            winningNumbers.check(bonusNumber);
-            return new BonusBall(bonusNumber);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return createBonusBall(winningNumbers);
-        }
+        LottoNumber bonusNumber = LottoNumber.of(inputView.bonusBall());
+        winningNumbers.check(bonusNumber);
+        return new BonusBall(bonusNumber);
     }
 
     private RanksCount createRanksCount(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
