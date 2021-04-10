@@ -34,22 +34,20 @@ public class ResultView {
         Arrays.stream(Rank.values())
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
                 .filter(rank -> !rank.equals(Rank.MISS))
-                .forEach(rank -> {
+                .map(rank -> {
                     Long amount = matchResults.getOrDefault(rank, 0L);
-                    printCountOfMatch(rank, amount);
-
-                });
+                    return printCountOfMatch(rank, amount);})
+                .forEach(System.out::println);
     }
 
-    private static void printCountOfMatch(Rank rank, Long amount) {
+    private static String printCountOfMatch(Rank rank, Long amount) {
         String message = rank != Rank.SECOND ? "개 일치 (" : "개 일치, 보너스 볼 일치 (";
-        System.out.println(
-                rank.getCountOfMatch()
-                        + message
-                        + rank.getWinningMoney()
-                        + "원)- "
-                        + amount
-                        + "개");
+        return rank.getCountOfMatch()
+                + message
+                + rank.getWinningMoney()
+                + "원)- "
+                + amount
+                + "개";
     }
 
     public static void printBenefitResult(double benefitPercentage) {
