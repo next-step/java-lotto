@@ -14,7 +14,7 @@ class LottoMachineTest {
 
     private List<Number> winLottoNumbersList = new ArrayList<>();
     private List<Number> lottoNumberList = new ArrayList<>();
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     @BeforeEach
     private void SetUp() {
