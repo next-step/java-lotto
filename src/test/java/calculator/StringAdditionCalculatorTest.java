@@ -52,7 +52,7 @@ class StringAdditionCalculatorTest {
     Number actual = calculator.sum();
 
     // then
-    assertThat(actual).isEqualTo(new Number(expected));
+    assertThat(actual).isEqualTo(Number.create(expected));
   }
 
   @ParameterizedTest

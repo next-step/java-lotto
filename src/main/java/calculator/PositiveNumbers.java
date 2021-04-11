@@ -8,11 +8,15 @@ import java.util.stream.Collectors;
 public class PositiveNumbers {
   private final List<Number> positiveNumbers;
 
-  public PositiveNumbers(List<Number> positiveNumbers) {
+  private PositiveNumbers(List<Number> positiveNumbers) {
     this.positiveNumbers = positiveNumbers;
   }
 
-  public static PositiveNumbers create(Delimiter delimiter, NumberString numberString) {
+  public static PositiveNumbers create(List<Number> positiveNumbers) {
+    return new PositiveNumbers(positiveNumbers);
+  }
+
+  public static PositiveNumbers generate(Delimiter delimiter, NumberString numberString) {
     return new PositiveNumbers(Arrays.stream(numberString.getNumberString().split(delimiter.getDelimiter()))
             .map(Number::positiveValueOf)
             .collect(Collectors.toList()));

@@ -16,12 +16,12 @@ class PositiveNumbersTest {
     String input = "1,2:3";
 
     // when
-    PositiveNumbers actual = PositiveNumbers.create(new Delimiter(",|:"), new NumberString(input));
+    PositiveNumbers actual = PositiveNumbers.generate(Delimiter.create(",|:"), NumberString.create(input));
 
     // then
     assertThat(actual)
             .isNotNull()
-            .isEqualTo(new PositiveNumbers(Arrays.asList(new Number(1), new Number(2), new Number(3))));
+            .isEqualTo(PositiveNumbers.create(Arrays.asList(Number.create(1), Number.create(2), Number.create(3))));
   }
 
   @Test
@@ -31,11 +31,11 @@ class PositiveNumbersTest {
     String input = "//;\n1;2;3";
 
     // when
-    PositiveNumbers actual = PositiveNumbers.create(Delimiter.createDelimiterRegexString(input), NumberString.generateNumberString(input));
+    PositiveNumbers actual = PositiveNumbers.generate(Delimiter.createDelimiterRegexString(input), NumberString.generateNumberString(input));
 
     // then
     assertThat(actual)
             .isNotNull()
-            .isEqualTo(new PositiveNumbers(Arrays.asList(new Number(1), new Number(2), new Number(3))));
+            .isEqualTo(PositiveNumbers.create(Arrays.asList(Number.create(1), Number.create(2), Number.create(3))));
   }
 }

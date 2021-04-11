@@ -14,12 +14,16 @@ public class Delimiter {
 
   private final String delimiter;
 
-  public Delimiter(String delimiter) {
+  private Delimiter(String delimiter) {
     this.delimiter = delimiter;
   }
 
+  public static Delimiter create(String delimiter) {
+    return new Delimiter(delimiter);
+  }
+
   public static Delimiter createDelimiterRegexString(String input) {
-    return new Delimiter(generateDelimiterRegexString(input));
+    return Delimiter.create(generateDelimiterRegexString(input));
   }
 
   private static String generateDelimiterRegexString(String inputValue) {

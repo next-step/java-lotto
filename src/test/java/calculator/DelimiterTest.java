@@ -20,7 +20,7 @@ class DelimiterTest {
 
     // then
     assertThat(delimiter)
-            .isEqualTo(new Delimiter(expected));
+            .isEqualTo(Delimiter.create(expected));
   }
 
 }
