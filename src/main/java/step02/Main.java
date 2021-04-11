@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         LottoShop lottoShop = new LottoShop();
 
-        Lottos lottos = lottoShop.buyLotto(new RandomNumberRule());
+        LottosDTO lottos = lottoShop.buyLotto(new RandomNumberRule());
         ResultView.showBuyLottoResult(lottos);
 
         ResultView.showLottoWinnerResult(lottoShop.showLottoResult());

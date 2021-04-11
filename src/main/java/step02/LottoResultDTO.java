@@ -2,8 +2,8 @@ package step02;
 
 public class LottoResultDTO {
 
-    private Double yield = 0.0;
     private Ranks ranks = new Ranks();
+    private Double yield = 0.0;
 
     public void setRanks(Ranks ranks) {
         this.ranks = ranks;

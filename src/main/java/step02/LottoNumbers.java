@@ -35,23 +35,9 @@ public class LottoNumbers {
         return ZERO;
     }
 
-    private void addSeparate(int index, StringBuilder stringBuilder) {
-        if (index < lottoNumbers.size() - ONE) {
-            stringBuilder.append(REGEX + BLANK);
-        }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        int index = ZERO;
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            stringBuilder.append(lottoNumber.getLottoNumber());
-            addSeparate(index, stringBuilder);
-            index++;
-        }
-
-        return stringBuilder.toString();
+    public LottoNumbersDTO getLottoNumbersResult() {
+        LottoNumbersDTO lottoDTO = new LottoNumbersDTO();
+        lottoDTO.setLottoNumbers(lottoNumbers);
+        return lottoDTO;
     }
 }

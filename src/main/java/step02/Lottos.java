@@ -13,10 +13,6 @@ public class Lottos {
         lottoCount = new LottoCount(count);
     }
 
-    public LottoCount getLottoCount() {
-        return lottoCount;
-    }
-
     public void makeLotto(NumberRule numberRule) {
         for (int i = ZERO; i < lottoCount.getCount(); i++) {
             lottos.add(new LottoNumbers(numberRule));
@@ -32,15 +28,11 @@ public class Lottos {
         return ranks;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LottoNumbers lottoNumbers : lottos) {
-            stringBuilder.append(START_LOTTO_SYMBOL)
-                    .append(lottoNumbers.toString())
-                    .append(END_LOTTO_SYMBOL)
-                    .append(LINE_BRAKE);
-        }
-        return stringBuilder.toString();
+    public LottosDTO getLottoResult() {
+        LottosDTO lottosDTO = new LottosDTO();
+        lottosDTO.setLottos(lottos);
+        lottosDTO.setLottoCount(lottoCount);
+        return lottosDTO;
     }
+
 }

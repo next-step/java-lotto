@@ -4,11 +4,11 @@ public class LottoShop {
     private Lottos lottos;
     private LottoPrice price;
 
-    public Lottos buyLotto(NumberRule numberRule) {
+    public LottosDTO buyLotto(NumberRule numberRule) {
         price = new LottoPrice(InputView.inputMoney());
         lottos = new Lottos(LottoPrice.calculationCount(price));
         lottos.makeLotto(numberRule);
-        return lottos;
+        return lottos.getLottoResult();
     }
 
     public LottoResultDTO showLottoResult() {
