@@ -27,7 +27,7 @@ public class Lotto {
         int matchCount = (int) winningNumber.stream()
                 .filter(this.lotto::contains)
                 .count();
-        Boolean isBonusMatch = this.lottoNumbers.contains(winningNumber.getBonusNumber());
+        boolean isBonusMatch = winningNumber.isContained(this.lottoNumbers);
         return Rank.valueOf(matchCount, isBonusMatch);
     }
 

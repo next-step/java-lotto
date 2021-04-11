@@ -16,15 +16,11 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
-    }
-
     public Stream<Integer> stream() {
         return winningNumbers.stream();
     }
 
-    public Integer getBonusNumber() {
-        return bonusNumber;
+    public boolean isContained(List<Integer> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
