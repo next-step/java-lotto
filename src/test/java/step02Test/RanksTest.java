@@ -31,4 +31,10 @@ public class RanksTest {
         assertThat(ranks.getNumberOfEachRank(Rank.SECOND)).isEqualTo(1);
         assertThat(ranks.getNumberOfEachRank(Rank.THIRD)).isEqualTo(2);
     }
+
+    @Test
+    void getMatchRankWithBonus() {
+        assertThat(Rank.getMatchRank(5, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.getMatchRank(5, false)).isEqualTo(Rank.THIRD);
+    }
 }

@@ -9,6 +9,8 @@ public class LottoResultDTO {
         this.ranks = ranks;
     }
 
+    public int getRankFifthCount() { return ranks.getNumberOfEachRank(Rank.FIFTH); }
+
     public int getRankFourthCount() {
         return ranks.getNumberOfEachRank(Rank.FOURTH);
     }

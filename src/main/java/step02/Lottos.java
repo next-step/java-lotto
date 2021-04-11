@@ -19,11 +19,12 @@ public class Lottos {
         }
     }
 
-    public Ranks compareMatchNumber(LottoNumbers winnerNumbers) {
+    public Ranks compareMatchNumber(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         Ranks ranks = new Ranks();
         lottos.forEach(numbers -> {
             int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
-            ranks.addRanks(Rank.getMatchRank(matchCount));
+            boolean matchBonus = numbers.compareMatchBonusNumber(bonusNumber);
+            ranks.addRanks(Rank.getMatchRank(matchCount, matchBonus));
         });
         return ranks;
     }

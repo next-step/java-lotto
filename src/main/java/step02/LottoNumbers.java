@@ -23,12 +23,16 @@ public class LottoNumbers {
     public int countCompareMatchNumber(LottoNumbers winnerNumbers) {
         int countMatch = ZERO;
         for (LottoNumber winnerNumber : winnerNumbers.lottoNumbers) {
-            countMatch += mathingCount(winnerNumber);
+            countMatch += matchingCount(winnerNumber);
         }
         return countMatch;
     }
 
-    private int mathingCount(LottoNumber winnerNumber) {
+    public boolean compareMatchBonusNumber(LottoNumber bonusNumber) {
+        return matchingCount(bonusNumber) == ONE;
+    }
+
+    private int matchingCount(LottoNumber winnerNumber) {
         if (lottoNumbers.contains(winnerNumber)) {
             return ONE;
         }

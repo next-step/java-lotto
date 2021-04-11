@@ -14,8 +14,9 @@ public class LottoShop {
     public LottoResultDTO showLottoResult() {
         LottoNumbers lottoWinner = new LottoNumbers(new InputNumberRule(InputView.inputLastWinnerNumber()));
         LottoResultDTO resultDTO = new LottoResultDTO();
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusBall());
 
-        Ranks ranks = lottos.compareMatchNumber(lottoWinner);
+        Ranks ranks = lottos.compareMatchNumber(lottoWinner, bonusNumber);
         resultDTO.setRanks(ranks);
         resultDTO.setYield(LottoPrice.calculateTotalReward(price, ranks));
 

@@ -18,4 +18,9 @@ public class InputView {
         System.out.println(INPUT_LAST_WINNER_NUMBER);
         return scanner.next();
     }
+
+    public static int inputBonusBall() {
+        System.out.println(INPUT_BONUS_BALL);
+        return scanner.nextInt();
+    }
 }
