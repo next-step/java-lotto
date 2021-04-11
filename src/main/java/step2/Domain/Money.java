@@ -1,6 +1,6 @@
 package step2.Domain;
 
-import step2.util.Parser;
+import step2.util.StringParser;
 
 public class Money {
 
@@ -8,7 +8,7 @@ public class Money {
     private int money;
 
     public Money(String money) {
-        this(Parser.parseStringToInt(money));
+        this(StringParser.parseStringToInt(money));
     }
 
     public Money(int money) {

@@ -1,6 +1,6 @@
 package step2.util;
 
-public class Parser {
+public class StringParser {
 
     public static int parseStringToInt(String number){
         try {

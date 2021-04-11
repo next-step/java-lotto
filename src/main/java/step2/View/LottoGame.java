@@ -2,8 +2,6 @@ package step2.View;
 
 import step2.Domain.*;
 
-import java.util.Arrays;
-
 public class LottoGame {
 
     private InputView inputView;

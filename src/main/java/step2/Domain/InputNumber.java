@@ -1,6 +1,6 @@
 package step2.Domain;
 
-import step2.util.Parser;
+import step2.util.StringParser;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class InputNumber {
 
     public List<LottoNumber> numbers() {
         return numbers.stream()
-                .map(num -> new LottoNumber(Parser.parseStringToInt(num.trim())))
+                .map(num -> new LottoNumber(StringParser.parseStringToInt(num.trim())))
                 .collect(Collectors.toList());
     }
 }

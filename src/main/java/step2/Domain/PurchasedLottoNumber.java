@@ -1,13 +1,13 @@
 package step2.Domain;
 
-import step2.util.Parser;
+import step2.util.StringParser;
 
 public class PurchasedLottoNumber {
 
     private int number;
 
     public PurchasedLottoNumber(String number) {
-        this(Parser.parseStringToInt(number));
+        this(StringParser.parseStringToInt(number));
     }
 
     public PurchasedLottoNumber(int number) {
