@@ -14,7 +14,7 @@ public class LottoTest {
     @Test
     @DisplayName("입력한 만큼 로또가 생성되는지 확인")
     void lottoCount() {
-        Lottos lotto = new Lottos(4);
+        Lottos lotto = new Lottos(4000);
         assertThat(lotto.getLottoCount().getCount()).isEqualTo(4);
     }
 

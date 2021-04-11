@@ -7,7 +7,7 @@ public class ResultView {
     private ResultView() {}
 
     public static void showBuyLottoResult(Lottos lottos) {
-        System.out.println(lottos.getLottoCount().getCount() + RESULT_BUY_N_COUNT);
+        System.out.printf(RESULT_BUY_N_COUNT + LINE_BRAKE, lottos.getLottoCount().getCount());
         System.out.println(lottos.toString());
     }
 

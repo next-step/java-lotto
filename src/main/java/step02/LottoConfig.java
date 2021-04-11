@@ -23,6 +23,7 @@ public class LottoConfig {
 
     static final String ERROR_OVER_MAX_NUMBER = "로또 숫자는 " + NUMBER_RANGE_END + "이하의 수를 입력해주세요.";
     static final String ERROR_OVER_MAX_NUMBER_COUNT = LOTTO_NUMBER_MAX_COUNT + "개의 수를 입력해주세요.";
+    static final String ERROR_MIN_PRICE = "최소 구매 금액은 " + LOTTO_PRICE + "원 입니다.";
 
     static final String RESULT_WINNER_AVG = "당첨 통계\n---------";
     static final String RESULT_3_MATCHES = "3개 일치 (5000원)- %d개";

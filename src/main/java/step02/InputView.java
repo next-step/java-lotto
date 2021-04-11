@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static step02.LottoConfig.*;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {}
 

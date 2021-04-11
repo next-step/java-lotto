@@ -27,16 +27,16 @@ public class Lottos {
         LottoResultDTO resultDTO = new LottoResultDTO();
         for (LottoNumbers numbers : lottos) {
             int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
-            if (matchCount == Rank.RANK.FOURTH.getMatchCount()) {
+            if (matchCount == RANK.FOURTH.getMatchCount()) {
                 resultDTO.setMath3(resultDTO.getMath3() + ONE);
             }
-            if (matchCount == Rank.RANK.THIRD.getMatchCount()) {
+            if (matchCount == RANK.THIRD.getMatchCount()) {
                 resultDTO.setMath4(resultDTO.getMath4() + ONE);
             }
-            if (matchCount == Rank.RANK.SECOND.getMatchCount()) {
+            if (matchCount == RANK.SECOND.getMatchCount()) {
                 resultDTO.setMath5(resultDTO.getMath5() + ONE);
             }
-            if (matchCount == Rank.RANK.FIRST.getMatchCount()) {
+            if (matchCount == RANK.FIRST.getMatchCount()) {
                 resultDTO.setMath6(resultDTO.getMath6() + ONE);
             }
         }
