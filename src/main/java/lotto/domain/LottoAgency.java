@@ -9,29 +9,35 @@ public class LottoAgency {
   private final LottoCoupon coupon;
   private final Money money;
 
-  public LottoAgency(Money money) {
+  public LottoAgency(Money money, LottoCoupon manualLottoCoupon) {
     this.money = money;
-    this.coupon = purchaseLotto();
+    this.coupon = manualLottoCoupon;
   }
 
-  public LottoCoupon purchaseLotto() {
-    return LottoCoupon.createLottoCoupon(getPurchaseQuantity());
+  public int purchaseLotto() {
+    LottoCoupon lottoCoupon = LottoCoupon.createLottoCoupon(availablePurchaseQuantity());
+    updateLottoCoupon(lottoCoupon);
+    return lottoCoupon.size();
   }
 
-  public Money getSeedMoney() {
-    return money.multiple(LOTTO_PER_PRICE);
+  public int availablePurchaseQuantity() {
+    return money.divide(LOTTO_PER_PRICE) - coupon.size();
   }
 
-  public int getPurchaseQuantity() {
-    return money.divide(LOTTO_PER_PRICE);
-  }
-
-  public LottoCoupon getCoupon() {
-    return new LottoCoupon(coupon.getLottoCoupon());
+  public int currentBoughtCouponQuantity() {
+    return coupon.size();
   }
 
   public LottoScoreBoard getLottoResult(WinningNumber winningNumber) {
-    return winningNumber.generateLottoMatchResult(winningNumber, this);
+    return LottoScoreBoard.createLottoResult(money, coupon.matches(winningNumber));
+  }
+
+  public String lottoCouponToString() {
+    return coupon.toString();
+  }
+
+  private void updateLottoCoupon(LottoCoupon lottoCoupon) {
+    this.coupon.add(lottoCoupon);
   }
 
   @Override

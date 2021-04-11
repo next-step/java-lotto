@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Money {
@@ -18,8 +17,8 @@ public class Money {
     return money / lottoPrice;
   }
 
-  public Money multiple(final Integer value) {
-    return new Money(value * money);
+  public int multiple(final int value) {
+    return value * money;
   }
 
   @Override
@@ -39,9 +38,10 @@ public class Money {
     return Objects.hash(money);
   }
 
-  public static int totalMonies(List<Money> monies) {
-    return monies.stream()
-        .mapToInt(money -> money.money)
-        .sum();
+  @Override
+  public String toString() {
+    return "Money{" +
+        "money=" + money +
+        '}';
   }
 }

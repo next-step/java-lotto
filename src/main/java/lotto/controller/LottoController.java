@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAgency;
+import lotto.domain.LottoCoupon;
+import lotto.domain.LottoScoreBoard;
 import lotto.domain.Money;
 import lotto.domain.Number;
 import lotto.domain.WinningNumber;
@@ -12,8 +12,6 @@ import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
 public class LottoController {
-
-  private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
   public LottoController() throws IOException {
     LottoAgency agency = createLottoAgency();
@@ -29,27 +27,36 @@ public class LottoController {
     WinningNumber winningNumbers = WinningNumber
         .createWinningNumbers(getWinLottoNumbers(), getBonusBall());
 
-    new OutputView().printResult(agency.getLottoResult(winningNumbers));
+    LottoScoreBoard lottoResult = agency.getLottoResult(winningNumbers);
+
+    new OutputView().printMatchResult(lottoResult);
+    new OutputView().printTotalEarningRate(lottoResult.totalEarningRate());
   }
 
   private LottoAgency createLottoAgency() throws IOException {
-    return new LottoAgency(getSeedMoney());
+    return new LottoAgency(getSeedMoney(), getManualLottoQuantity());
   }
 
   private Lotto getWinLottoNumbers() throws IOException {
-    return new InputView(reader).enterWinnerNumbers();
+    return new InputView().enterWinnerNumbers();
   }
 
   private Money getSeedMoney() throws IOException {
-    return new InputView(reader).howManyBuyLottoCoupon();
+    return new InputView().howManyBuyLottoCoupon();
   }
 
   private Number getBonusBall() throws IOException {
-    return new InputView(reader).enterBonusBall();
+    return new InputView().enterBonusBall();
+  }
+
+  private LottoCoupon getManualLottoQuantity() throws IOException {
+    Number number = new InputView().enterManualLottoQuantity();
+    return new InputView().enterManualLottoNumbers(number);
   }
 
   private void buyLottoPhase(final LottoAgency agency) {
-    agency.purchaseLotto();
-    new OutputView().printBoughtLottoCoupons(agency);
+    new OutputView().printBoughtLottoManualCoupons(agency);
+    int boughtAutoLottoQuantity = agency.purchaseLotto();
+    new OutputView().printBoughtLottoAutoCoupons(agency, boughtAutoLottoQuantity);
   }
 }

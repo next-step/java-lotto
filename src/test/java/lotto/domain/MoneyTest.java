@@ -39,22 +39,11 @@ class MoneyTest {
     //given
     Money money = new Money(20000);
     //when
-    Money multiple = money.multiple(7);;
+    int multiple = money.multiple(7);
     //then
-    assertEquals(new Money(140000), multiple);
+    assertEquals(140000, multiple);
   }
 
-  @Test
-  @DisplayName("List<Number> 의 합을 제대로 출력할 수 있는가")
-  public void sumList() throws Exception {
-    //given
-    List<Money> monies = new ArrayList<>();
-    //when
-    monies.add(new Money(10000));
-    monies.add(new Money(5000));
-    //then
-    assertEquals(Money.totalMonies(monies), 15000);
-  }
 
   @ParameterizedTest
   @CsvSource({"5000, 0.35", "50000, 3.57", "1500000, 107.14", "30000000, 2142.85", "2000000000, 142857.14"})

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoRank implements LottoRankFilter {
 
@@ -38,11 +37,6 @@ public enum LottoRank implements LottoRankFilter {
     return this.winnerMoney == winnerMoney;
   }
 
-  public static Money getMatchRankWinnerMoney(String found, int matchCount) {
-    return matchRankWinnerMoney(found)
-        .multiple(matchCount);
-  }
-
   @Override
   public boolean filter(boolean bonusBall, Money winnerMoney) {
     return isCorrectMatchCount(matchCount);
@@ -56,26 +50,18 @@ public enum LottoRank implements LottoRankFilter {
         .orElse(LottoRank.NONE);
   }
 
-  public static LottoRank matches(List<Number> winningNumbers, List<Number> holdingLottoNumbers, Number bonusBall) {
-    int matchCount =  Math.toIntExact(winningNumbers.stream()
-        .filter(holdingLottoNumbers::contains)
-        .count());
-    boolean hasBonusBall = holdingLottoNumbers.contains(bonusBall);
-    return LottoRank.valueOf(matchCount, hasBonusBall);
+  public static boolean isNotNone(LottoRank lottoRank) {
+    return lottoRank != LottoRank.NONE;
   }
 
-  public static boolean isNone(LottoRank lottoRank) {
-    return lottoRank == LottoRank.NONE;
-  }
-
-  private static Money matchRankWinnerMoney(String found) {
+  public static Money matchRankWinnerMoney(LottoRank found) {
     LottoRank rank = findRank(found);
     return rank.winnerMoney;
   }
 
-  private static LottoRank findRank(String winnerRank) {
+  private static LottoRank findRank(LottoRank found) {
     return Arrays.stream(LottoRank.values())
-        .filter(rank -> rank.name().equals(winnerRank))
+        .filter(rank -> rank.equals(found))
         .findAny()
         .orElse(LottoRank.NONE);
   }

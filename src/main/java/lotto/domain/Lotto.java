@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,6 +27,16 @@ public class Lotto {
     return new Lotto(LottoNumberGenerator.from(new ManualLottoNumberGenerateStrategy(inputNumbers)));
   }
 
+  public boolean contains(Number bonusBall) {
+    return numbers.contains(bonusBall);
+  }
+
+  public int matchCount(Lotto holdingNumbers) {
+    return Math.toIntExact(numbers.stream()
+        .filter(holdingNumbers.numbers::contains)
+        .count());
+  }
+
   private void validation(List<Number> numbers) {
     validateLength(numbers);
     validateDuplicated(numbers);
@@ -51,13 +60,8 @@ public class Lotto {
     }
   }
 
-  public List<Number> getNumbers() {
-    return new ArrayList<>(numbers);
-  }
-
   @Override
   public String toString() {
-    List<Number> numbers = getNumbers();
     return numbers.stream()
         .map(Number::toString)
         .collect(Collectors.joining(", "));

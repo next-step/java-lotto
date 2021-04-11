@@ -42,4 +42,29 @@ class LottoTest {
     //then
     assertEquals(descLotto, ascLotto);
   }
+
+  @Test
+  @DisplayName("Lotto를 통해서 몇 개가 일치했는지를 알 수 있는가")
+  public void matchTest() throws Exception {
+    //given
+    Lotto manualLotto = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
+
+    //when
+    int matchCount = manualLotto.matchCount(Lotto.createManualLotto(Arrays.asList(6, 7, 8, 9, 10, 11)));
+
+    //then
+    assertEquals(matchCount, 1);
+  }
+
+  @Test
+  @DisplayName("Lotto의 숫자가 몇개가 맞았는지 알아낼 수 있는가")
+  public void matchCount() throws Exception {
+    //given
+    Lotto manualLotto = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
+    Lotto targetLotto = Lotto.createManualLotto(Arrays.asList(6, 5, 4, 3, 2, 1));
+
+    //when
+    //then
+    assertEquals(manualLotto.matchCount(targetLotto), 6);
+  }
 }

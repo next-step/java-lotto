@@ -28,6 +28,10 @@ public class Number implements Comparable<Number> {
     }
   }
 
+  public int multiple(final int value) {
+    return generatedNumber * value;
+  }
+
   public int getNumber() {
     return generatedNumber;
   }

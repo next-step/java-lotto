@@ -1,21 +1,18 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.util.Arrays;
-import java.util.List;
-import lotto.util.LottoNumberGenerator;
-import lotto.util.ManualLottoNumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoRankTest {
 
   @ParameterizedTest
+  @DisplayName("1등인지 파악할 수 있는가")
   @ValueSource(booleans = {true, false})
   public void matchFirst(boolean bonusBall) throws Exception {
     //given
@@ -46,6 +43,7 @@ class LottoRankTest {
   }
 
   @ParameterizedTest
+  @DisplayName("4등인지 파악할 수 있는가")
   @ValueSource(booleans = {true, false})
   public void matchFourth(boolean bonusBall) throws Exception {
     //given
@@ -56,6 +54,7 @@ class LottoRankTest {
   }
 
   @ParameterizedTest
+  @DisplayName("5등인지 파악할 수 있는가")
   @ValueSource(booleans = {true, false})
   public void matchFifth(boolean bonusBall) throws Exception {
     //given
@@ -65,51 +64,20 @@ class LottoRankTest {
     assertEquals(lottoRank.name(), "FIFTH");
   }
 
-  @Test
-  @DisplayName("None 체크를 제대로 하는가")
-  public void isNull() throws Exception {
-    assertTrue(LottoRank.isNone(LottoRank.NONE));
-  }
-
   @ParameterizedTest
-  @ValueSource(ints = {1,2,3,4,5,6})
-  @DisplayName("상금 계산을 수행할 수 있는가")
-  public void calculateWinningMoney(int value) throws Exception {
+  @DisplayName("입력된 String을 통해서 해당 등수의 상금을 알아낼 수 있는")
+  @CsvSource({"FIRST , 2000000000", "SECOND, 30000000", "THIRD, 1500000", "FOURTH, 50000", "FIFTH, 5000"})
+  public void findRankTest(LottoRank value, int prize) throws Exception {
     //given
-    LottoRank first = LottoRank.FIRST;
-    LottoRank second = LottoRank.SECOND;
-    LottoRank third = LottoRank.THIRD;
-    LottoRank fourth = LottoRank.FOURTH;
-    LottoRank fifth = LottoRank.FIFTH;
-
+    Money money = LottoRank.matchRankWinnerMoney(value);
     //when
     //then
-    assertAll("Test Calculate WinningMoney",
-        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(first.name(), value),
-            new Money(2000000000 * value)),
-        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(second.name(), value),
-            new Money(30000000 * value)),
-        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(third.name(), value),
-            new Money(1500000 * value)),
-        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(fourth.name(), value),
-            new Money(50000 * value)),
-        () -> assertEquals(LottoRank.getMatchRankWinnerMoney(fifth.name(), value),
-            new Money(5000 * value))
-    );
+    assertEquals(money, new Money(prize));
   }
 
   @Test
-  @DisplayName("Matches() 메서드를 통해 제대로 비교할 수 있는지")
-  public void matches() throws Exception {
-    //given
-    List<Number> holdingNumbers = LottoNumberGenerator
-        .from(new ManualLottoNumberGenerateStrategy(Arrays.asList(7, 6, 4, 3, 2, 1)));
-
-    List<Number> winningNumbers = LottoNumberGenerator
-        .from(new ManualLottoNumberGenerateStrategy(Arrays.asList(6, 5, 4, 3, 2, 1)));
-    //when
-    LottoRank expectedMatches = LottoRank.matches(holdingNumbers, winningNumbers, new Number(6));
-    //then
-    assertEquals(expectedMatches, LottoRank.SECOND);
+  @DisplayName("None이 아님을 체크를 잘하는가")
+  public void isNull() throws Exception {
+    assertFalse(LottoRank.isNotNone(LottoRank.NONE));
   }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
@@ -22,19 +23,17 @@ class WinningNumberTest {
   }
 
   @Test
-  @DisplayName("로또 매칭 결과를 제대로 생성할 수 있는가")
-  public void generateLottoResultTest() throws Exception {
+  @DisplayName("2등 당첨 여부 확인")
+  public void match() throws Exception {
     //given
     WinningNumber winningNumber = WinningNumber.createWinningNumbers(
-        Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
         new Number(6));
 
-    LottoAgency agency = new LottoAgency(new Money(14000));
-
-    //when
-    LottoScoreBoard lottoScoreBoard = winningNumber.generateLottoMatchResult(winningNumber, agency);
+    Lotto manualLotto = Lotto.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     //then
-    assertNotNull(lottoScoreBoard);
+    LottoRank rank = winningNumber.match(manualLotto);
+    assertEquals(rank, LottoRank.SECOND);
   }
 }
