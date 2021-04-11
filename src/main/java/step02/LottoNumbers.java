@@ -1,5 +1,6 @@
 package step02;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class LottoNumbers {
 
     public LottoNumbersDTO getLottoNumbersResult() {
         LottoNumbersDTO lottoDTO = new LottoNumbersDTO();
-        lottoDTO.setLottoNumbers(lottoNumbers);
+        lottoDTO.setLottoNumbers(new ArrayList(lottoNumbers));
         return lottoDTO;
     }
 }

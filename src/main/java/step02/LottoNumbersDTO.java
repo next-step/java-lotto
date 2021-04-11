@@ -1,26 +1,27 @@
 package step02;
 
-import java.util.Set;
+import java.util.*;
 
 import static step02.LottoConfig.*;
-import static step02.LottoConfig.BLANK;
 
 public class LottoNumbersDTO {
-    private Set<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public void setLottoNumbers(Set<LottoNumber> lottoNumbers) {
+    public void setLottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public String getLottoNumbersToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        int index = ZERO;
+        final int[] index = {ZERO};
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            stringBuilder.append(lottoNumber.getLottoNumber());
-            addSeparate(index, stringBuilder);
-            index++;
-        }
+        lottoNumbers.stream().sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                .forEach(lottoNumber -> {
+                    stringBuilder.append(lottoNumber.getLottoNumber());
+                    addSeparate(index[0], stringBuilder);
+                    index[0]++;
+                });
+
         return stringBuilder.toString();
     }
 
