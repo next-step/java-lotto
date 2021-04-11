@@ -18,6 +18,16 @@ public class LottoGame {
         System.out.println();
     }
 
+    public LottoGame(Money money, List<LottoNumbers> stickLottoNumbers) {
+        this.money = money;
+        this.lottoList = new LottoList(money.getTicketCount());
+        lottoList
+            .getLottos()
+            .forEach(System.out::println);
+        this.lottoList.getLottos().addAll(stickLottoNumbers);
+        System.out.println();
+    }
+
     public List<Rank> findWinners(LottoNumbers winNumbers, LottoNumber bonusNumber) {
         return lottoList
             .getLottos()
