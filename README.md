@@ -9,6 +9,5 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 # 구현 목록
-## 테스트 코드 작성
-## 구현 코드 작성
-## 구현 코드 리팩토링
+## 수동으로 구매할 번호 추가
+## 수동구매 자동구매의 분리

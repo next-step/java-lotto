@@ -1,15 +1,14 @@
-package step2.view;
+package step4.view;
 
 
-import step2.domain.Lotto;
-import step2.domain.Lottos;
-import step2.domain.Rank;
+import step4.domain.Lotto;
+import step4.domain.Lottos;
+import step4.domain.Rank;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class ResultView {
 
