@@ -23,7 +23,8 @@
         * 로또 1회 생성자(6개의 LottoNumber(1~45 까지의 숫자)를 갖고 있음)
         * 당첨결과(param : WinningNumbers, return : Rank)
     * Lottos
-        * 로또 n회 생성자(n = 구매금액 / 로또 가격)
+        * 로또 n회 생성자(n = 구매금액)
+        * 로또 n회 생성자(구매금액 / 수동 구매 수)
         * 구매금액
         * 당첨결과(param :WinningNumbers, return : List\<Rank\>)
     * WinningNumber

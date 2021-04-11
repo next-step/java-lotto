@@ -19,8 +19,8 @@ public class Lotto {
         this(randomNumberGenerate());
     }
 
-    public Lotto(List<Integer> randomNumbers) {
-        this.lotto = randomNumbers;
+    public Lotto(List<Integer> numbers) {
+        this.lotto = numbers;
     }
 
     public Rank winningResult(WinningNumber winningNumber) {
