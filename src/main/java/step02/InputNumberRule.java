@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static step02.LottoConfig.REGEX;
+import static step02.LottoConfig.*;
 
 public class InputNumberRule extends NumberRule {
     List<Integer> inputNumber;
@@ -19,7 +19,8 @@ public class InputNumberRule extends NumberRule {
     }
 
     private List<Integer> splitNumber(String numbers) {
-       return Arrays.stream(numbers.trim().split(REGEX))
+       String numbersNoBlank = numbers.replaceAll(BLANK, NO_BLANK);
+       return Arrays.stream(numbersNoBlank.trim().split(REGEX))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

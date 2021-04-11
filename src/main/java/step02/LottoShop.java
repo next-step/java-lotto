@@ -13,8 +13,11 @@ public class LottoShop {
 
     public LottoResultDTO showLottoResult() throws Exception {
         LottoNumbers lottoWinner = new LottoNumbers(new InputNumberRule(InputView.inputLastWinnerNumber()));
-        LottoResultDTO resultDTO = lottos.compareMatchNumber(lottoWinner);
-        resultDTO.setYield(LottoPrice.calculateTotalReward(price, resultDTO));
+        LottoResultDTO resultDTO = new LottoResultDTO();
+
+        Ranks ranks = lottos.compareMatchNumber(lottoWinner);
+        resultDTO.setRanks(ranks);
+        resultDTO.setYield(LottoPrice.calculateTotalReward(price, ranks));
 
         return resultDTO;
     }

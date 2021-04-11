@@ -12,13 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
 
     @Test
-    @DisplayName("입력한 만큼 로또가 생성되는지 확인")
-    void lottoCount() {
-        Lottos lotto = new Lottos(4000);
-        assertThat(lotto.getLottoCount().getCount()).isEqualTo(4);
-    }
-
-    @Test
     @DisplayName("3,4,5,6개 매칭되는 개수 테스트")
     void compareMathNumber() throws Exception {
         Lottos lottos = new Lottos(1);
@@ -29,10 +22,12 @@ public class LottoTest {
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
-        LottoResultDTO dto = lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")));
-        assertThat(dto.getMath3()).isEqualTo(1);
-        assertThat(dto.getMath4()).isEqualTo(1);
-        assertThat(dto.getMath5()).isEqualTo(1);
-        assertThat(dto.getMath6()).isEqualTo(4);
+        LottoResultDTO dto = new LottoResultDTO();
+        dto.setRanks(lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44"))));
+//        LottoResultDTO dto = lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")));
+        assertThat(dto.getRankFourthCount()).isEqualTo(1);
+        assertThat(dto.getRankThirdCount()).isEqualTo(1);
+        assertThat(dto.getRankSecondCount()).isEqualTo(1);
+        assertThat(dto.getRankFirstCount()).isEqualTo(4);
     }
 }

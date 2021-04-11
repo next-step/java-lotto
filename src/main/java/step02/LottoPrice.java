@@ -14,12 +14,12 @@ public class LottoPrice {
         return price.buyPrice / LOTTO_PRICE;
     }
 
-    public static double calculateTotalReward(LottoPrice price, LottoResultDTO lottoResultDTO) {
+    public static double calculateTotalReward(LottoPrice price, Ranks ranks) {
         int totalReward = 0;
-        totalReward += RANK.calculate(RANK.FIRST.name(), lottoResultDTO.getMath6());
-        totalReward += RANK.calculate(RANK.SECOND.name(), lottoResultDTO.getMath5());
-        totalReward += RANK.calculate(RANK.THIRD.name(), lottoResultDTO.getMath4());
-        totalReward += RANK.calculate(RANK.FOURTH.name(), lottoResultDTO.getMath3());
+        totalReward += Rank.calculate(Rank.FIRST, ranks.getNumberOfEachRank(Rank.FIRST));
+        totalReward += Rank.calculate(Rank.SECOND, ranks.getNumberOfEachRank(Rank.SECOND));
+        totalReward += Rank.calculate(Rank.THIRD, ranks.getNumberOfEachRank(Rank.THIRD));
+        totalReward += Rank.calculate(Rank.FOURTH, ranks.getNumberOfEachRank(Rank.FOURTH));
 
         return calculateYield(price.buyPrice, totalReward);
     }
