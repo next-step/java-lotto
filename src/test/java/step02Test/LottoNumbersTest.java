@@ -11,7 +11,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("매징되는 숫자 카운트 테스트")
-    void compareMathNumber() throws Exception {
+    void compareMathNumber() {
         LottoNumbers lottoNumbers = new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         assertThat(lottoNumbers.countCompareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")))).isEqualTo(6);
     }

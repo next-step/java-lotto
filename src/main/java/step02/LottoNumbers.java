@@ -9,11 +9,11 @@ public class LottoNumbers {
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public LottoNumbers(NumberRule numberRule) throws Exception {
+    public LottoNumbers(NumberRule numberRule)  {
         makeNumbers(numberRule);
     }
 
-    private void makeNumbers(NumberRule numberRule) throws Exception {
+    private void makeNumbers(NumberRule numberRule) {
         Validation.numberCount(numberRule.makeNumbers().size());
         for (int numbers : numberRule.makeNumbers()) {
             lottoNumbers.add(new LottoNumber(numbers));

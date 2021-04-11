@@ -12,7 +12,7 @@ public class LottoCountTest {
     private LottoPrice lottoPrice;
 
     @BeforeEach
-    void setLottoPrice() throws Exception {
+    void setLottoPrice() {
         lottoPrice = new LottoPrice(5000);
     }
 

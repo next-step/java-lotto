@@ -13,7 +13,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("3,4,5,6개 매칭되는 개수 테스트")
-    void compareMathNumber() throws Exception {
+    void compareMathNumber() {
         Lottos lottos = new Lottos(1);
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 27, 39, 43"));
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 39, 43"));

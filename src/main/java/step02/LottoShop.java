@@ -4,14 +4,14 @@ public class LottoShop {
     private Lottos lottos;
     private LottoPrice price;
 
-    public Lottos buyLotto(NumberRule numberRule) throws Exception {
+    public Lottos buyLotto(NumberRule numberRule) {
         price = new LottoPrice(InputView.inputMoney());
         lottos = new Lottos(LottoPrice.calculationCount(price));
         lottos.makeLotto(numberRule);
         return lottos;
     }
 
-    public LottoResultDTO showLottoResult() throws Exception {
+    public LottoResultDTO showLottoResult() {
         LottoNumbers lottoWinner = new LottoNumbers(new InputNumberRule(InputView.inputLastWinnerNumber()));
         LottoResultDTO resultDTO = new LottoResultDTO();
 

@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
     private int lottoNumber;
 
-    public LottoNumber(int lottoNumber) throws Exception {
+    public LottoNumber(int lottoNumber) {
         Validation.overMaxNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

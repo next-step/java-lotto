@@ -9,7 +9,7 @@ public class LottoShopTest {
     private LottoShop lottoShop = new LottoShop();
 
     @BeforeEach
-    void setLottoShop() throws Exception {
+    void setLottoShop() {
         lottoShop.buyLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
     }
 }
