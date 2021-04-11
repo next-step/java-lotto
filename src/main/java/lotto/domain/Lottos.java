@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -21,7 +22,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-
     public int size() {
         return lottos.size();
     }
@@ -33,8 +33,9 @@ public class Lottos {
     }
 
     private static List<Lotto> generate(int countOfLotto, List<Lotto> manualLottos) {
-        manualLottos.addAll(generateAuto(countOfLotto));
-        return manualLottos;
+        List<Lotto> totalLottos = new ArrayList<>(manualLottos);
+        totalLottos.addAll(generateAuto(countOfLotto));
+        return totalLottos;
     }
 
     private static List<Lotto> generateAuto(int countOfLotto) {
