@@ -17,4 +17,13 @@ public class LottoTicketsTest {
         lottoTickets.add(new LottoTicket(new LottoNumbers()));
         assertThat(lottoTickets.lottoTickets()).hasSize(2);
     }
+
+    @Test
+    @DisplayName("로또 티켓이 보너스 볼을 포함하면 참을 반환한다.")
+    public void hasBonusNumber() throws Exception {
+        LottoNumbers lottoNumbers = LottoNumbers.from(1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        assertThat(lottoTicket.hasBonusNumber(new BonusBall(1))).isTrue();
+        assertThat(lottoTicket.hasBonusNumber(new BonusBall(7))).isFalse();
+    }
 }

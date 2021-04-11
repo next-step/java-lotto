@@ -13,7 +13,11 @@ public class LottoTicketPrice {
         this.lottoTicketPrice = price;
     }
 
+    public int divide(int purchaseAmount) {
+        return purchaseAmount / lottoTicketPrice;
+    }
     public int price() {
         return lottoTicketPrice;
     }
+
 }

@@ -10,8 +10,9 @@ public class LottoNumbers {
     private static final int BOUND_MAX = 46;
     private static final List<LottoNumber> numbers = IntStream.range(BOUND_MIN, BOUND_MAX)
             .boxed()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
+    private static final String CHECK_DUPLICATION = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
@@ -19,12 +20,25 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkDuplication(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoNumbers createByintegers(List<Integer> lottoNumbers) {
+    private void checkDuplication(List<LottoNumber> winningNumbers) {
+        if (new HashSet<>(winningNumbers).size() != NUMBER_OF_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(CHECK_DUPLICATION);
+        }
+    }
+
+    public static LottoNumbers from(List<String> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    public static LottoNumbers from(int... lottoNumbers) {
+        return new LottoNumbers(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
@@ -33,6 +47,10 @@ public class LottoNumbers {
         List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, NUMBER_OF_LOTTO_NUMBER));
         lottoNumbers.sort(Comparator.comparingInt(LottoNumber::lottoNumber));
         return lottoNumbers;
+    }
+
+    public boolean contains(BonusBall bonusBall) {
+        return bonusBall.isPartOf(lottoNumbers);
     }
 
     public List<LottoNumber> lottoNumbers() {

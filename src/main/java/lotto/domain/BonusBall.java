@@ -1,20 +1,25 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BonusBall {
     private final LottoNumber bonusNumber;
 
     public BonusBall(int bonusNumber) {
-        this(new LottoNumber(bonusNumber));
+        this(LottoNumber.of(bonusNumber));
     }
 
     public BonusBall(LottoNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumber bonusNumber() {
-        return bonusNumber;
+    public boolean isPartOf(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public boolean isPartOf(LottoNumbers lottoNumbers) {
+        return isPartOf(lottoNumbers.lottoNumbers());
     }
 
     @Override

@@ -1,10 +1,8 @@
 package lotto.domain;
 
+import lotto.enums.WinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -14,56 +12,29 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("로또 당첨 번호 생성")
     public void create() throws Exception {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumbers winningNumbers = WinningNumbers.from((numbers));
-        assertThat(winningNumbers).isEqualTo(WinningNumbers.from((numbers)));
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        WinningNumbers winningNumbers = new WinningNumbers(7, numbers);
+        assertThat(winningNumbers).isEqualTo(new WinningNumbers(7, numbers));
     }
 
     @Test
-    @DisplayName("로또 번호와 비교")
-    public void countMatchingNumbers() throws Exception {
+    @DisplayName("당첨 번호와 로또 번호를 비교하여 매칭된 번호 개수를 구한다.")
+    public void matchWith() throws Exception {
         //given
-        WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers lottoNumbers = LottoNumbers.createByintegers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(7, 1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumbers.from(1, 2, 3, 4, 5, 6));
 
         //when
-        MatchedCount matchedCount = winningNumbers.countMatchingNumbers(lottoTicket.lottoNumbers());
+        WinningRank winningRank = winningNumbers.matchWith(lottoTicket);
 
         //then
-        assertThat(matchedCount.matchedCount()).isEqualTo(6);
+        assertThat(winningRank).isEqualTo(WinningRank.FIRST_PLACE);
     }
 
     @Test
-    @DisplayName("당첨 번호 길이가 6자 이외일 경우 예외")
-    public void checkLength() throws Exception {
-        List<Integer> overSix = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from((overSix)));
-        List<Integer> lowerSix = Arrays.asList(1, 2, 3, 4, 5);
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from((lowerSix)));
-    }
-
-    @Test
-    @DisplayName("당첨 번호의 요소 범위가 1 ~ 45가 아닐 경우 예외")
-    public void checkBound() throws Exception {
-        List<Integer> overMax = Arrays.asList(1, 2, 3, 4, 5, 46);
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from((overMax)));
-        List<Integer> lowerMin = Arrays.asList(0, 2, 3, 4, 5, 45);
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from((lowerMin)));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 중 중복되는 숫자가 존재할 경우")
+    @DisplayName("보너스 번호가 당첨 번호와 중복 시 예외가 발생한다.")
     public void checkDuplication() throws Exception {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningNumbers.from((numbers)));
-    }
-
-    @Test
-    @DisplayName("보너스 번호가 당첨 번호와 중복 시 에러")
-    public void check() throws Exception {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumbers winningNumbers = WinningNumbers.from(numbers);
-        assertThatIllegalArgumentException().isThrownBy(() -> winningNumbers.check(new LottoNumber(1)));
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(6, numbers));
     }
 }

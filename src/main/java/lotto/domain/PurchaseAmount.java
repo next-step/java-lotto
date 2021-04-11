@@ -1,16 +1,17 @@
 package lotto.domain;
 
-import lotto.utils.ConvertUtil;
-
 import java.util.Objects;
+
+import static lotto.utils.ConvertUtil.toInt;
 
 public class PurchaseAmount {
     private final static int PURCHASE_AMOUNT_MIN = 1_000;
     private final static String GREATER_THAN_MIN = String.format("구매금액은 최소 %d원 이상이여야 합니다.", PURCHASE_AMOUNT_MIN);
+    private final static String CHECK_PURCHASE_AMOUNT = "입력하신 금액 %s가 숫자인지 확인해주세요.";
     private final int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmount) {
-        this(ConvertUtil.toInt(purchaseAmount));
+        this(toInt(CHECK_PURCHASE_AMOUNT, purchaseAmount));
     }
 
     public PurchaseAmount(int purchaseAmount) {
@@ -20,6 +21,18 @@ public class PurchaseAmount {
 
     public int purchaseAmount() {
         return purchaseAmount;
+    }
+
+    public int dividedBy(LottoTicketPrice lottoTicketPrice) {
+        return lottoTicketPrice.divide(purchaseAmount);
+    }
+
+    public int dividedBy(int lottoTicketPrice) {
+        return dividedBy(new LottoTicketPrice(lottoTicketPrice));
+    }
+
+    public double divide(int totalPrize) {
+        return (double) totalPrize / purchaseAmount;
     }
 
     private void checkGreaterThanMinimum(int purchaseAmount) {
@@ -40,5 +53,4 @@ public class PurchaseAmount {
     public int hashCode() {
         return Objects.hash(purchaseAmount);
     }
-
 }

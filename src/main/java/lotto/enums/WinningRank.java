@@ -1,54 +1,77 @@
 package lotto.enums;
 
+import lotto.domain.MatchedCount;
+import lotto.domain.Prize;
+
 import java.util.Arrays;
 
 public enum WinningRank {
-    FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(5, 30_000_000),
-    THIRD_PLACE(5, 1_500_000),
-    FOURTH_PLACE(4, 50_000),
-    FIFTH_PLACE(3, 5_000),
-    ETC(0, 0);
+    FIRST_PLACE(new MatchedCount(6), new Prize(2_000_000_000)),
+    SECOND_PLACE(new MatchedCount(5), new Prize(30_000_000)),
+    THIRD_PLACE(new MatchedCount(5), new Prize(1_500_000)),
+    FOURTH_PLACE(new MatchedCount(4), new Prize(50_000)),
+    FIFTH_PLACE(new MatchedCount(3), new Prize(5_000)),
+    ETC(new MatchedCount(), new Prize(0));
 
-    private final int matchedCount;
-    private final int prize;
+    private final MatchedCount matchedCount;
+    private final Prize prize;
 
-    WinningRank(int matchedCount, int prize) {
+    WinningRank(MatchedCount matchedCount, Prize prize) {
         this.matchedCount = matchedCount;
         this.prize = prize;
     }
 
-    public static WinningRank findByMacthedCount(int matchedCount, boolean matchBonus) {
+    public static WinningRank findByMacthedCount(MatchedCount matchedCount, boolean matchBonus) {
 
-        if (matchedCount < FIFTH_PLACE.matchedCount()) {
+        if (FIFTH_PLACE.hasGreaterThan(matchedCount)) {
             return ETC;
         }
 
-        WinningRank winningRank = findByMacthedCount(matchedCount);
+        WinningRank rank = findByMacthedCount(matchedCount);
 
-        if (matchBonus & winningRank.matchedCount == SECOND_PLACE.matchedCount) {
+        if (rank.isSecondPlace(matchBonus)) {
             return SECOND_PLACE;
         }
 
-        if (winningRank.matchedCount == SECOND_PLACE.matchedCount) {
+        if (rank.isSecondPlace(!matchBonus)) {
             return THIRD_PLACE;
         }
 
-        return winningRank;
+        return rank;
     }
 
-    private static WinningRank findByMacthedCount(int matchedCount) {
+    protected boolean hasGreaterThan(MatchedCount matchedCount) {
+        return this.matchedCount.isGreaterThan(matchedCount);
+    }
+
+    protected boolean isSecondPlace(boolean matchBonus) {
+        return matchBonus & this.hasBonus();
+    }
+
+    public static WinningRank findByMacthedCount(int matchedCount, boolean matchBonus) {
+        return findByMacthedCount(new MatchedCount(matchedCount), matchBonus);
+    }
+
+    private static WinningRank findByMacthedCount(MatchedCount matchedCount) {
         return Arrays.stream(values())
-                .filter(winningRank -> winningRank.matchedCount == matchedCount)
+                .filter(winningRank -> winningRank.matchedCount.equals(matchedCount))
                 .findAny()
                 .orElse(ETC);
     }
 
-    public int prize() {
+    public Prize prize() {
         return prize;
     }
 
-    public int matchedCount() {
+    public int multiply(Integer count) {
+        return this.prize.multiply(count);
+    }
+
+    public MatchedCount matchedCount() {
         return matchedCount;
+    }
+
+    public boolean hasBonus() {
+        return this.equals(SECOND_PLACE);
     }
 }
