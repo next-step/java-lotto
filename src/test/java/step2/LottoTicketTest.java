@@ -2,6 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.utils.AutoNumberGenerator;
 import step2.domain.LottoTicket;
 
 import java.util.List;
@@ -16,7 +17,7 @@ class LottoTicketTest {
     void getLotto() {
         int expected = 6;
 
-        LottoTicket lotto = new LottoTicket();
+        LottoTicket lotto = new LottoTicket(new AutoNumberGenerator());
         List<Integer> numbers = lotto.getNumbers();
         int actual = numbers.size();
 
