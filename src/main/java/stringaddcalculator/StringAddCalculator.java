@@ -9,15 +9,23 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-  private final static String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
   public final static Set<String> DEFAULT_SEPARATORS = new HashSet<>(Arrays.asList(",", ":"));
+
+  private final static String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+  private final static Pattern defaultPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
   private StringSeparator stringSeparator;
   private final NumberConverter numberConverter;
 
+
   public StringAddCalculator() {
     this.stringSeparator = new StringSeparator(DEFAULT_SEPARATORS);
     this.numberConverter = new DefaultNumberConverter();
+  }
+
+  public StringAddCalculator(StringSeparator stringSeparator, NumberConverter numberConverter) {
+    this.stringSeparator = stringSeparator;
+    this.numberConverter = numberConverter;
   }
 
   public int sumString(String input) {
@@ -40,14 +48,13 @@ public class StringAddCalculator {
         .sum();
   }
 
-
   private boolean hasCustomDelimiter(String calculatedStr) {
-    Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(calculatedStr);
+    Matcher m = defaultPattern.matcher(calculatedStr);
     return m.find();
   }
 
   private void setCustomSeparator(String calculatedStr) {
-    Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(calculatedStr);
+    Matcher m = defaultPattern.matcher(calculatedStr);
     if (m.find()) {
       String separator = m.group(1);
       this.stringSeparator = new StringSeparator(separator);
@@ -55,7 +62,7 @@ public class StringAddCalculator {
   }
 
   private String extractCalculatedStr(String calculatedStr) {
-    Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(calculatedStr);
+    Matcher m = defaultPattern.matcher(calculatedStr);
     if (m.find()) {
       return m.group(2);
     }

@@ -7,17 +7,15 @@ public class DefaultNumberConverter implements NumberConverter{
 
   @Override
   public List<Integer> convert(List<String> list) {
-    List<Integer> ints = list.stream()
+    return list.stream()
         .map(Integer::parseInt)
+        .peek(this::validPositiveValue)
         .collect(Collectors.toList());
-    if(hasNegativeValue(ints)) {
-      throw new NumberFormatException();
-    }
-    return ints;
   }
 
-  private boolean hasNegativeValue(List<Integer> list) {
-    return list.stream()
-        .anyMatch(value -> value < 0);
+  private void validPositiveValue(int number) {
+    if(number < 0) {
+      throw new NumberFormatException();
+    }
   }
 }
