@@ -1,23 +1,27 @@
 package step02;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import static step02.LottoConfig.ONE;
+import static step02.LottoConfig.ZERO;
 
 public class Ranks {
-
-    private List<Rank> ranks = new ArrayList<>();
-
-    public void setRanks(List<Rank> ranks) {
-        this.ranks = ranks;
-    }
+    private Map<Rank, Integer> ranks = new HashMap<>();
 
     public void addRanks(Rank rank) {
-        ranks.add(rank);
+        if (ranks.containsKey(rank)) {
+            int count = ranks.get(rank);
+            ranks.put(rank, ++count);
+            return;
+        }
+        ranks.put(rank, ONE);
     }
 
     public int getNumberOfEachRank(Rank rank) {
-        return ranks.stream()
-                .filter(rankCount -> rankCount == rank)
-                .toArray().length;
+        if (ranks.containsKey(rank)) {
+            return ranks.get(rank);
+        }
+        return ZERO;
     }
 }

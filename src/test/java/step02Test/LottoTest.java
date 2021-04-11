@@ -24,7 +24,6 @@ public class LottoTest {
         lottos.makeLotto(new InputNumberRule("7, 8, 10, 20, 40, 44"));
         LottoResultDTO dto = new LottoResultDTO();
         dto.setRanks(lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44"))));
-//        LottoResultDTO dto = lottos.compareMatchNumber(new LottoNumbers(new InputNumberRule("7, 8, 10, 20, 40, 44")));
         assertThat(dto.getRankFourthCount()).isEqualTo(1);
         assertThat(dto.getRankThirdCount()).isEqualTo(1);
         assertThat(dto.getRankSecondCount()).isEqualTo(1);

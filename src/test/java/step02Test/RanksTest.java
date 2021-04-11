@@ -16,8 +16,13 @@ public class RanksTest {
 
     @BeforeEach
     void setRanks() {
-        ranks.setRanks(Arrays.asList(Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.THIRD));
+        ranks.addRanks(Rank.FIRST);
+        ranks.addRanks(Rank.FIRST);
+        ranks.addRanks(Rank.SECOND);
+        ranks.addRanks(Rank.THIRD);
+        ranks.addRanks(Rank.THIRD);
     }
+
 
     @Test
     @DisplayName("총 로또 rank 개수 리턴 테스트")
