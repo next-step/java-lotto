@@ -4,6 +4,7 @@ public class WinLottoNumber {
 
     private static boolean[] duplicationLottoNumberArr = new boolean[46];
     private LottoNumber winLottoNumber;
+    private LottoNumber bonusNumber;
     private int duplicationCount = 0;
 
     public WinLottoNumber(LottoNumber winLottoNumber) {
@@ -12,7 +13,7 @@ public class WinLottoNumber {
     }
 
 
-    public int checkDuplicationLotto(LottoNumber lottoNumber) {
+    public int duplicationLotto(LottoNumber lottoNumber) {
 
         for (Number number : lottoNumber.numbers()) {
             increaseCount(number);
@@ -30,6 +31,10 @@ public class WinLottoNumber {
         if (duplicationLottoNumberArr[number.number()]) {
             duplicationCount++;
         }
+    }
+
+    private boolean bonusNumber(Number number){
+        return false;
     }
 
 

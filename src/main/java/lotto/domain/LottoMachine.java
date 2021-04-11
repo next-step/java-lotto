@@ -41,13 +41,17 @@ public class LottoMachine {
 
 
         for (LottoNumber purchasedLottoNumber : this.lottoNumbers) {
-            int resultCount = winLottoNumber.checkDuplicationLotto(purchasedLottoNumber);
+            int resultCount = winLottoNumber.duplicationLotto(purchasedLottoNumber);
             plusCount(resultCount);
         }
 
         OutputData result = new OutputData(threeWinnerCnt, fourWinnerCnt, fiveWinnerCnt, sixWinnerCnt, expense);
         result.calculateRate();
         return result;
+    }
+
+    private void inputBonusBall(){
+
     }
 
     private void plusCount(int resultCount) {

@@ -58,7 +58,7 @@ class WinLottoNumberTest {
 
         LottoNumber lottoNumber = new LottoNumber(numberList);
 
-        int resultNumber = winLottoNumber.checkDuplicationLotto(lottoNumber);
+        int resultNumber = winLottoNumber.duplicationLotto(lottoNumber);
 
         assertThat(resultNumber).isEqualTo(5);
 
