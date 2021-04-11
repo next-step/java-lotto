@@ -1,6 +1,5 @@
 package step2.controller;
 
-import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -8,25 +7,24 @@ import step2.view.ResultView;
 import java.util.List;
 
 public class LottoController {
-    private int numberOfLottoTickets;
-    private List<LottoTicket> lottoTickets;
+    private LottoTickets lottoTickets;
+    private List<Integer> winningNumbers;
 
-    public void run(){
+    public LottoController(){
         buyLottoTicket();
-        result();
+        inputWinningNumbers();
     }
 
     private void buyLottoTicket(){
         InputView.inputPayments();
-        numberOfLottoTickets = InputView.getNumberOfLottoTickets();
-
-        LottoTickets lottoTickets = new LottoTickets(numberOfLottoTickets);
-        this.lottoTickets = lottoTickets.getLottoTickets();
+        int numberOfLottoTickets = InputView.getNumberOfLottoTickets();
+        lottoTickets = new LottoTickets(numberOfLottoTickets);
+        ResultView.printMyLottoTickets(lottoTickets);
     }
 
-    private void result(){
-        ResultView.printMyLottoTickets(lottoTickets, numberOfLottoTickets);
-        ResultView.printLottoPrizeNumber();
+    private void inputWinningNumbers(){
+        InputView.inputWinningNumberS();
+        winningNumbers = InputView.getWinningNumbers();
     }
 
 }
