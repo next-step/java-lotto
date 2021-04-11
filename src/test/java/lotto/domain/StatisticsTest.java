@@ -3,10 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,19 +21,24 @@ public class StatisticsTest {
     @Test
     public void statistics() {
         // given
-        Map<Rank, Integer> expectStatistics = new HashMap<>();
-        expectStatistics.put(Rank.FIRST, 0);
-        expectStatistics.put(Rank.SECOND, 1);
-        expectStatistics.put(Rank.THIRD, 0);
-        expectStatistics.put(Rank.FOURTH, 0);
-        expectStatistics.put(Rank.FIFTH, 2);
+        Map<Rank, Integer> expectStatistics = new LinkedHashMap<>();
         expectStatistics.put(Rank.OTHER, 1);
+        expectStatistics.put(Rank.FIFTH, 2);
+        expectStatistics.put(Rank.FOURTH, 0);
+        expectStatistics.put(Rank.THIRD, 0);
+        expectStatistics.put(Rank.SECOND, 1);
+        expectStatistics.put(Rank.FIRST, 0);
+        Iterator<Rank> expectIterator = expectStatistics.keySet().iterator();
 
         // when
         Map<Rank, Integer> resultStatistics = statistics.getStatistics();
+        Iterator<Rank> resultIterator = resultStatistics.keySet().iterator();
+
 
         // then
-        assertThat(resultStatistics).isEqualTo(expectStatistics);
+        while (resultIterator.hasNext() && expectIterator.hasNext()) {
+            assertThat(resultIterator.next()).isEqualTo(expectIterator.next());
+        }
     }
 
     @Test
