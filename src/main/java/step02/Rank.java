@@ -17,14 +17,6 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
     public static Rank getMatchRank(int matchCount) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
