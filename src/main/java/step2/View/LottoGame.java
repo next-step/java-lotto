@@ -20,8 +20,8 @@ public class LottoGame {
         Money remainMoney = money.remain(manualBuyNumber);
         MergeGenerator mergeGenerator =
                 new MergeGenerator(
-                        Arrays.asList(new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber))
-                                , new RandomLottoNumberGenerator(remainMoney)));
+                        new ManualLottoGenerator(inputView.inputLottoNumbers(manualBuyNumber))
+                                , new RandomLottoNumberGenerator(remainMoney));
         Lottos lottos = Lottos.of(mergeGenerator);
         resultView.printPurchaseNumber(manualBuyNumber, new PurchasedLottoNumber(remainMoney));
         resultView.printLottoList(lottos);

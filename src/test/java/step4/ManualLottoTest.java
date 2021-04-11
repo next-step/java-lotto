@@ -53,7 +53,7 @@ public class ManualLottoTest {
         InputNumber manualNumbers2 = new InputNumber("1,22,33,40,41,42");
         InputNumber manualNumbers3 = new InputNumber("1,15,23,40,43,45");
         LottoNumberGenerator generator = new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3));
-        Lottos manualLottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
+        Lottos manualLottos = Lottos.of(new MergeGenerator(generator));
         assertThat(manualLottos.getLottos()).contains(new Lotto(manualNumbers),new Lotto(manualNumbers2),new Lotto(manualNumbers3));
     }
 
@@ -66,7 +66,7 @@ public class ManualLottoTest {
         InputNumber manualNumbers3 = new InputNumber("1,2,3,40,43,45");
         LottoNumberGenerator manualGenerator = new ManualLottoGenerator(Arrays.asList(manualNumbers,manualNumbers2,manualNumbers3));
         LottoNumberGenerator autoGenerator = new RandomLottoNumberGenerator(new Money(5000));
-        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(manualGenerator,autoGenerator)));
+        Lottos lottos = Lottos.of(new MergeGenerator(manualGenerator,autoGenerator));
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new LottoNumber(7));
 
         Rank rank = lottos.makeStatistic(winningLotto);

@@ -19,8 +19,8 @@ public class GeneratorTest {
 
         InputNumber manualNumbers = new InputNumber("1,2,3,10,20,30");
         MergeGenerator mergeGenerator =
-                new MergeGenerator(Arrays.asList(new ManualLottoGenerator(Arrays.asList(manualNumbers)),
-                        new RandomLottoNumberGenerator(new Money(3000))));
+                new MergeGenerator(new ManualLottoGenerator(Arrays.asList(manualNumbers)),
+                        new RandomLottoNumberGenerator(new Money(3000)));
         assertThat(mergeGenerator.generate()).hasSize(4);
     }
 }

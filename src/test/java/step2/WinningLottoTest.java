@@ -70,7 +70,7 @@ public class WinningLottoTest {
         LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1),
                 new Lotto(purchasedNumbers2));
 
-        Lottos lottos = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
+        Lottos lottos = Lottos.of(new MergeGenerator(generator));
 
         Map<LottoPrize, List<Lotto>> rankInfo = lottos.getLottos().stream()
                 .collect(groupingBy(lotto -> lotto.isWinningLottoList(winningLotto)));
@@ -86,7 +86,7 @@ public class WinningLottoTest {
         LottoNumber bonusBall = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers),bonusBall);
         LottoNumberGenerator generator = () -> Arrays.asList(new Lotto(purchasedNumbers1));
-        Lottos lottoList = Lottos.of(new MergeGenerator(Arrays.asList(generator)));
+        Lottos lottoList = Lottos.of(new MergeGenerator(generator));
 
         Rank rankInfo = new Rank(lottoList.getLottos().stream()
                 .collect(groupingBy(lotto -> lotto.isWinningLottoList(winningLotto))));
