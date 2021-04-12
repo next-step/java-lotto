@@ -1,5 +1,7 @@
 package step2.Domain;
 
+import step2.util.StringParser;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -8,6 +10,10 @@ public class LottoNumber {
     private static final String LOTTO_NUMBER_REGEX = "^[1-9]$|^[1-3][0-9]$|^4[0-5]$";
 
     private int number;
+
+    public LottoNumber(String number) {
+        this(StringParser.parseStringToInt(number));
+    }
 
     public LottoNumber(int number) {
         check(number);

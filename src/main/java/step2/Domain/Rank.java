@@ -21,4 +21,5 @@ public class Rank {
     public Map<LottoPrize, List<Lotto>> getRank() {
         return rank;
     }
+
 }

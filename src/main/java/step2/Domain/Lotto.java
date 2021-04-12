@@ -1,9 +1,7 @@
 package step2.Domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,12 +9,6 @@ public class Lotto {
 
     public Lotto(InputNumber inputNumber) {
         this(inputNumber.numbers());
-    }
-
-    public Lotto(String[] lottoNumberList) {
-        this(Arrays.stream(lottoNumberList)
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toList()));
     }
 
     public Lotto(List<LottoNumber> lottoNumberList) {
