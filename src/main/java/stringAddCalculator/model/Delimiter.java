@@ -1,7 +1,7 @@
 package stringAddCalculator.model;
 
 public class Delimiter {
-    private static String delimiter = "";
+    private static String delimiter = ":|,";
 
     private Delimiter() {
     }
