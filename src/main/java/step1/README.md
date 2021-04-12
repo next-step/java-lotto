@@ -28,14 +28,5 @@
 - [x] Numbers에서 사용하는 패턴(`Pattern.compile(DEFAULT_DELIMITERS)`)을 상수로 변경
 - [x] 자바 코드 컨벤션 준수(지역변수 네이밍은 카멜케이스)
 - [x] StringAddCalculator.java의 `isNullinitValue()`의 접근제한자를 private로 바꾸거나 공개하지 않으려면 필요한 방법 (힌트: 간접 테스트)
-- [x] try-catch에서 `NumberFormatException`을 catch해서 `RuntimeException`을 `throw`하는건 의미 없음. 예외간 상속구조 이해 필요.
+- [x] try-catch에서 NumberFormatException을 catch해서 RuntimeException을 throw하는건 의미 없음. 예외간 상속구조 이해 필요.
 - [x] boolean 값 반환하는 메서드는 인라인으로 간단하게 코드 줄일수 있을듯
-- [x] 불필요한 try-catch문 삭제.
-  - `NumberFormatException`은 `RuntimeException`의 하위 클래스이므로 숫자형식이 맞지않을경우 어차피 `RuntimeException`이 발생. `catch`해서 `throw` 할 필요가 없음
-- [x] JDK 내장 함수에 대한 테스트는 클래스 테스트로 두기보다는 따로 테스트 클래스로 분리해서 해본다.
-- [x] 간접 테스트 재작성
-  - private 메소드의 경우 테스트할 수가 없는데, 이 경우에 간접 테스트를 통해 private 메서드도 테스트 할 수 있다.
-  - 간접 테스트란 private 메소드의 호출부를 테스트함으로써 간접 테스트 할 수 있다.
-- [x] 내부 로직 수정
-  - `-1` 이 들어올 경우 `length()`는 1이 아니라 2.
-  - 이 경우 `1,2` 와 구분하기 위해서 split전에 먼저 validation 하는걸로 내부 로직 순서 변경

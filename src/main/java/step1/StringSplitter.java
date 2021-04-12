@@ -24,7 +24,7 @@ public class StringSplitter implements Splitter{
         if(defaultMatcher.find()){
             tokens = Arrays.asList(given.split(DEFAULT_DELIMITERS));
         }
-        if(given.length()<=2){
+        if(given.length()==1){
             tokens.add(given);
         }
         return tokens;
