@@ -3,13 +3,13 @@ package lotto.domain.place;
 import java.util.Arrays;
 import java.util.function.BiPredicate;
 
-public enum Rank {
-  FIRST(6, 2_000_000_000, (countOfMatch, matchBonus) -> countOfMatch == 6),
-  SECOND(5, 30_000_000, (countOfMatch, matchBonus) -> countOfMatch == 5 && matchBonus == true),
-  THIRD(5, 1_500_000, (countOfMatch, matchBonus) -> countOfMatch == 5 && matchBonus == false),
-  FOURTH(4, 50_000, (countOfMatch, matchBonus) -> countOfMatch == 4),
-  FIFTH(3, 5_000, (countOfMatch, matchBonus) -> countOfMatch == 3),
-  MISS(0, 0, (countOfMatch, matchBonus) -> countOfMatch < 3);
+public enum Rank implements BaseRank {
+  FIRST(FIRST_COUNT_OF_MATCH, 2_000_000_000, (countOfMatch, matchBonus) -> countOfMatch == FIRST_COUNT_OF_MATCH),
+  SECOND(SECOND_COUNT_OF_MATCH, 30_000_000, (countOfMatch, matchBonus) -> countOfMatch == SECOND_COUNT_OF_MATCH && matchBonus == true),
+  THIRD(THIRD_COUNT_OF_MATCH, 1_500_000, (countOfMatch, matchBonus) -> countOfMatch == THIRD_COUNT_OF_MATCH && matchBonus == false),
+  FOURTH(FOURTH_COUNT_OF_MATCH, 50_000, (countOfMatch, matchBonus) -> countOfMatch == FOURTH_COUNT_OF_MATCH),
+  FIFTH(FIFTH_COUNT_OF_MATCH, 5_000, (countOfMatch, matchBonus) -> countOfMatch == FIFTH_COUNT_OF_MATCH),
+  MISS(0, 0, (countOfMatch, matchBonus) -> countOfMatch < FIFTH_COUNT_OF_MATCH);
 
   private final int countOfMatch;
   private final int winningMoney;
