@@ -5,19 +5,16 @@ import step2.domain.LottoTickets;
 import step2.domain.PrizeMoney;
 import step2.domain.ResultDto;
 import step2.utils.StringUtil;
-import step2.view.InputView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    private final PrizeMoney prizeMoney;
     private final ResultDto resultDto;
     private final Map<Integer, Integer> lottoPrizeMap;
 
-    public LottoService(PrizeMoney prizeMoney, ResultDto resultDto){
-        this.prizeMoney = prizeMoney;
+    public LottoService(ResultDto resultDto){
         this.resultDto = resultDto;
         lottoPrizeMap = initializeLottoPrizeMap();
     }

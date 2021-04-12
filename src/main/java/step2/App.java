@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
         PrizeMoney prizeMoney = new PrizeMoney();
         ResultDto resultDto = new ResultDto();
-        LottoService lottoService = new LottoService(prizeMoney, resultDto);
+        LottoService lottoService = new LottoService(resultDto);
         LottoNumberGenerator lottoNumberGenerator = new AutoNumberGenerator();
 
         LottoController lottoController = new LottoController(lottoService, lottoNumberGenerator, prizeMoney, resultDto);

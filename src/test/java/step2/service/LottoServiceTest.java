@@ -29,7 +29,7 @@ class LottoServiceTest {
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
         PrizeMoney prizeMoney = new PrizeMoney();
         ResultDto resultDto = new ResultDto();
-        LottoService lottoService = new LottoService(prizeMoney, resultDto);
+        LottoService lottoService = new LottoService(resultDto);
 
         // when
         lottoService.calculateTheMatchingNumberCompareToTheWinningNumbers(lottoTickets.getLottoTickets(), winningNumbers,
