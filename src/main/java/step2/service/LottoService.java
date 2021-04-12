@@ -1,17 +1,24 @@
 package step2.service;
 
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 import step2.domain.PrizeMoney;
 import step2.domain.ResultDto;
+import step2.utils.StringUtil;
+import step2.view.InputView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoService {
+    private final PrizeMoney prizeMoney;
+    private final ResultDto resultDto;
     private final Map<Integer, Integer> lottoPrizeMap;
 
-    public LottoService(){
+    public LottoService(PrizeMoney prizeMoney, ResultDto resultDto){
+        this.prizeMoney = prizeMoney;
+        this.resultDto = resultDto;
         lottoPrizeMap = initializeLottoPrizeMap();
     }
 
@@ -23,8 +30,7 @@ public class LottoService {
         return map;
     }
 
-    public void calculateNumberOfMatchToWinningNumbers(List<LottoTicket> myLottoTickets, List<Integer> winningNumbers
-            , PrizeMoney prizeMoney, ResultDto resultDto){
+    public void calculateTheMatchingNumberCompareToTheWinningNumbers(List<LottoTicket> myLottoTickets, List<Integer> winningNumbers, PrizeMoney prizeMoney, ResultDto resultDto){
         for (int i = 0; i < myLottoTickets.size(); i++) {
              LottoTicket lottoSingleTicket = myLottoTickets.get(i);
              List<Integer> myLottoNumbers = lottoSingleTicket.getNumbers();
@@ -44,5 +50,13 @@ public class LottoService {
             lottoPrizeMap.put(match, lottoPrizeMap.get(match)+1);
             resultDto.setPrizeMoney(prizeMoney.getPrizeMoneyAsMatchCount(match));
         }
+    }
+
+    public void calculateEarningRatio(LottoTickets lottoTickets){
+        int amountOfPrizeMoney = prizeMoney.getAmountOfPrizeMoney();
+        List<LottoTicket> lottoTicketsList = lottoTickets.getLottoTickets();
+        int cost = LottoTicket.LOTTO_PRICE*lottoTicketsList.size();
+        double earningEatio = amountOfPrizeMoney/cost;
+        resultDto.setEarningRatio(StringUtil.splitDouble(earningEatio));
     }
 }

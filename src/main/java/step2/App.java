@@ -9,14 +9,15 @@ import step2.service.LottoService;
 
 public class App {
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService();
-        LottoNumberGenerator lottoNumberGenerator = new AutoNumberGenerator();
         PrizeMoney prizeMoney = new PrizeMoney();
         ResultDto resultDto = new ResultDto();
+        LottoService lottoService = new LottoService(prizeMoney, resultDto);
+        LottoNumberGenerator lottoNumberGenerator = new AutoNumberGenerator();
 
         LottoController lottoController = new LottoController(lottoService, lottoNumberGenerator, prizeMoney, resultDto);
 
         lottoController.buyLottoTicket();
+        lottoController.printPurchaseHistory();
         lottoController.inputWinningNumbers();
         lottoController.showResult();
     }

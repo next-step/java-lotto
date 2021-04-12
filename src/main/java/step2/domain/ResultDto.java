@@ -19,4 +19,11 @@ public class ResultDto {
     public Map<Integer, Integer> getMatchCount(){
         return matchCountMap;
     }
+
+    public void setEarningRatio(double earningRatio){
+        this.earningRatio = earningRatio;
+    }
+    public double getEarningRatio(){
+        return earningRatio;
+    }
 }

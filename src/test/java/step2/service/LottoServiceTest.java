@@ -2,7 +2,6 @@ package step2.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.utils.AutoNumberGenerator;
 import step2.domain.LottoTickets;
 import step2.domain.PrizeMoney;
 import step2.domain.ResultDto;
@@ -28,13 +27,12 @@ class LottoServiceTest {
         LottoTickets lottoTickets = new LottoTickets(numberOfLottoTickets, lottoNumberGenerator);
 
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
-
-        LottoService lottoService = new LottoService();
         PrizeMoney prizeMoney = new PrizeMoney();
         ResultDto resultDto = new ResultDto();
+        LottoService lottoService = new LottoService(prizeMoney, resultDto);
 
         // when
-        lottoService.calculateNumberOfMatchToWinningNumbers(lottoTickets.getLottoTickets(), winningNumbers,
+        lottoService.calculateTheMatchingNumberCompareToTheWinningNumbers(lottoTickets.getLottoTickets(), winningNumbers,
                 prizeMoney, resultDto);
 
         // then

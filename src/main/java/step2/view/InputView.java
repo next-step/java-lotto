@@ -7,14 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static int purchasedAmount;
     private static int numberOfLottoTickets;
     private static String[] givenWinningNumbers;
 
     public static void inputPayments(){
         Scanner scan = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        purchasedAmount = scan.nextInt();
+        int purchasedAmount = scan.nextInt();
         numberOfLottoTickets = purchasedAmount / LottoTicket.LOTTO_PRICE;
     }
 

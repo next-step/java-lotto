@@ -11,6 +11,7 @@ import step2.view.ResultView;
 import java.util.List;
 
 public class LottoController {
+    private int numberOfLottoTickets;
     private LottoTickets lottoTickets;
     private List<Integer> winningNumbers;
     private final LottoService lottoService;
@@ -27,7 +28,10 @@ public class LottoController {
 
     public void buyLottoTicket(){
         InputView.inputPayments();
-        int numberOfLottoTickets = InputView.getNumberOfLottoTickets();
+        numberOfLottoTickets = InputView.getNumberOfLottoTickets();
+    }
+
+    public void printPurchaseHistory(){
         lottoTickets = new LottoTickets(numberOfLottoTickets, lottoNumberGenerator);
         ResultView.printMyLottoTickets(lottoTickets);
     }
@@ -38,7 +42,8 @@ public class LottoController {
     }
 
     public void showResult(){
-        lottoService.calculateNumberOfMatchToWinningNumbers(lottoTickets.getLottoTickets(), winningNumbers, prizeMoney, resultDto);
+        lottoService.calculateTheMatchingNumberCompareToTheWinningNumbers(lottoTickets.getLottoTickets(), winningNumbers, prizeMoney, resultDto);
+        lottoService.calculateEarningRatio(lottoTickets);
         ResultView.prizeResult(prizeMoney, resultDto);
     }
 

@@ -1,5 +1,9 @@
 package step2.domain;
 
+import step2.utils.StringUtil;
+
+import java.util.List;
+
 public class PrizeMoney {
     public static final int LOWEST_RANK_FOR_PRIZE = 4;
     public static final int HIGHEST_RANK_FOR_PRIZE = 1;
@@ -14,7 +18,11 @@ public class PrizeMoney {
     public static final int PRIZE_MONEY_FOR_SECOND_PLACE = 1500000;
     public static final int PRIZE_MONEY_FOR_FIRST_PLACE = 2000000000;
 
-    private int amountOfPrizeMoney = 0;
+    private int amountOfPrizeMoney;
+
+    public PrizeMoney(){
+        amountOfPrizeMoney = 0;
+    }
 
     public int getPrizeMoneyAsMatchCount(int matchCount){
         if(matchCount== MATCH_COUNT_FOR_FOURTH_PLACE){
@@ -50,5 +58,9 @@ public class PrizeMoney {
             return MATCH_COUNT_FOR_FIRST_PLACE;
         }
         return 0;
+    }
+
+    public int getAmountOfPrizeMoney(){
+        return amountOfPrizeMoney;
     }
 }
