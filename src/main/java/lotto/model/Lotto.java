@@ -19,12 +19,12 @@ public class Lotto {
 
     public Lotto(String winningNumbers) {
         String[] numbers = winningNumbers.split(DELIMITER);
-        if(numbers.length != 6){
-            throw new LottoNumbersSizeException("Please input 6 numbers which last won game");
+        if (numbers.length != 6) {
+            throw new LottoNumbersSizeException("Please input 6 numbers which last won game.");
         }
         this.numbers = new ArrayList<>();
         for (String number : numbers) {
-            addNumber(new Number(number.trim()));
+            addNumber(new Number(Integer.parseInt(number.trim())));
         }
     }
 

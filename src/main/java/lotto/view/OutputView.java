@@ -2,10 +2,11 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoPrize;
+import lotto.model.Number;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.StringJoiner;
 
 public class OutputView {
     public void printBoughtLottoCount(int buyAmount) {
@@ -14,8 +15,16 @@ public class OutputView {
 
     public void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            System.out.println("[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(",")) + ']');
+            System.out.println(getLottoNumbers(lotto));
         }
+    }
+
+    private String getLottoNumbers(Lotto lotto) {
+        StringJoiner lottoNumbers = new StringJoiner(Lotto.DELIMITER, "[", "]");
+        for (Number number : lotto.getNumbers()) {
+            lottoNumbers.add(number.toString());
+        }
+        return lottoNumbers.toString();
     }
 
     public void printLine() {

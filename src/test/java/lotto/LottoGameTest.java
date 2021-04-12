@@ -18,7 +18,7 @@ class LottoGameTest {
 
     @ParameterizedTest
     @ValueSource(ints = {9000, 1000, 25000, 4000})
-    @DisplayName("buy lotto test : success")
+    @DisplayName("buy lotto test by money : success")
     void buyLottoTest(int moneyAmount) {
         Money money = new Money(moneyAmount);
         LottoGame lottoGame = new LottoGame();
@@ -28,8 +28,8 @@ class LottoGameTest {
 
     @ParameterizedTest
     @ValueSource(ints = {900, 100, 250, 10, 400})
-    @DisplayName("buy lotto test : fail")
-    void buyLottoFailTest(int moneyAmount) {
+    @DisplayName("buy lotto test by money : fail - not enough money")
+    void buyLottoFailNotEnoughMoneyTest(int moneyAmount) {
         LottoGame lottoGame = new LottoGame();
         Money money = new Money(moneyAmount);
         assertThatThrownBy(() -> lottoGame.buyLotto(money))
@@ -40,20 +40,20 @@ class LottoGameTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6", "11, 22, 25, 45, 1, 3"})
-    @DisplayName("buy lotto test : success")
+    @DisplayName("input(make) last winning lotto test : success")
     void lastWinningLottoTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
         lottoGame.lastWinningLotto(new Lotto(numbers));
-        String[] testNumbers = numbers.replace(" ","").split(Lotto.DELIMITER);
-        for (String testNumber: testNumbers){
-            assertThat(lottoGame.getWinLotto().getNumbers()).contains(new Number(testNumber));
+        String[] testNumbers = numbers.replace(" ", "").split(Lotto.DELIMITER);
+        for (String testNumber : testNumbers) {
+            assertThat(lottoGame.getWinLotto().getNumbers()).contains(new Number(Integer.parseInt(testNumber)));
         }
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 3, 5, 6", "11, 22, 25, 45, 11, 3"})
-    @DisplayName("buy lotto test : success")
-    void lastWinningLottoFailTest(String numbers) {
+    @DisplayName("input(make) last winning lotto test : fail - duplicate nubmer")
+    void lastWinningLottoFailDuplicateNumberTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(NumberAlreadyExistsException.class)
@@ -61,19 +61,19 @@ class LottoGameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 13, 3, 5, 6,45", "11, 22, 25, 45, 14, 3,2"})
-    @DisplayName("buy lotto test : success")
-    void lastWinningLottoFailTest2(String numbers) {
+    @ValueSource(strings = {"1, 2, 5, 6,45", "11, 22, 25, 45, 14, 3,2"})
+    @DisplayName("input(make) last winning lotto test : fail - wrong nubmer counts")
+    void lastWinningLottoFailWrongCountsNumbersTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(LottoNumbersSizeException.class)
-                .hasMessage("Numbers can contain 6 numbers.");
+                .hasMessage("Please input 6 numbers which last won game.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"-1, 2, 3, 3, 5, 6", "11, 22, 25, 46, 11, 3"})
-    @DisplayName("buy lotto test : success")
-    void lastWinningLottoFailTes3(String numbers) {
+    @DisplayName("input(make) last winning lotto test : fail - wrong range number")
+    void lastWinningLottoFailWrongRangeNumberTest(String numbers) {
         LottoGame lottoGame = new LottoGame();
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)

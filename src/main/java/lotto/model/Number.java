@@ -12,10 +12,6 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public Number(String number) {
-        this(Integer.parseInt(number));
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,9 +36,9 @@ public class Number implements Comparable<Number> {
 
     @Override
     public int compareTo(Number o) {
-        if (this.number < o.number){
+        if (this.number < o.number) {
             return -1;
-        } else if (this.number > o.number){
+        } else if (this.number > o.number) {
             return 1;
         }
         return 0;
