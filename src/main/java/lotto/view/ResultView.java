@@ -21,8 +21,8 @@ public class ResultView {
 
   public static void printPlaces(LottoPlaces places) {
     places.getValues()
-            .forEach(lottoPlace -> System.out.format(LOTTO_PLACES_RESULT_FORMAT, lottoPlace.getMatched()
-                    , convertMoneyFormatting(lottoPlace.getWinMoney())
+            .forEach(lottoPlace -> System.out.format(LOTTO_PLACES_RESULT_FORMAT, lottoPlace.getCountOfMatch()
+                    , convertMoneyFormatting(lottoPlace.getWinningMoney())
                     , convertMoneyFormatting(lottoPlace.getReturnOnInvestment()))
             );
   }

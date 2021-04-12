@@ -8,19 +8,22 @@ public abstract class LottoPlace {
   }
 
   public abstract LottoPlace win();
-  public abstract int getMatched();
-  public abstract long getWinMoney();
+  public abstract int getCountOfMatch();
+  public abstract long getWinningMoney();
   public abstract boolean matchedLottoNumberCount(int matched);
   public abstract boolean equals(Object o);
   public abstract int hashCode();
-  public abstract String toString();
 
   public long getTotalMoney() {
-    return getWinMoney() * count;
+    return getWinningMoney() * count;
   }
 
   public long getReturnOnInvestment() {
-    return getTotalMoney() / getWinMoney();
+    return getTotalMoney() / getWinningMoney();
+  }
+
+  public String toString() {
+    return "count : " + this.count + ", winMoney : " + getWinningMoney();
   }
 
   protected int plusCount() {

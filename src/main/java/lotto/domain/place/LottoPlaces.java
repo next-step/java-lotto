@@ -15,10 +15,11 @@ public class LottoPlaces {
 
   public static LottoPlaces create() {
     List<LottoPlace> list = Arrays.asList(
-              LottoFourthPlace.create()
-            , LottoThirdPlace.create()
-            , LottoSecondPlace.create()
-            , LottoFirstPlace.create()
+            LottoFifthPlace.create(),
+            LottoFourthPlace.create(),
+            LottoThirdPlace.create(),
+            LottoSecondPlace.create(),
+            LottoFirstPlace.create()
     );
     return new LottoPlaces(list);
   }

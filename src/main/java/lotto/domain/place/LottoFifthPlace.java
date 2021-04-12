@@ -2,25 +2,20 @@ package lotto.domain.place;
 
 import java.util.Objects;
 
-public class LottoSecondPlace extends LottoPlace {
-  private final Rank value = Rank.SECOND;
+public class LottoFifthPlace extends LottoPlace {
+  private final Rank value = Rank.FIFTH;
 
-  protected LottoSecondPlace(int count) {
+  protected LottoFifthPlace(int count) {
     super(count);
   }
 
   public static LottoPlace create() {
-    return new LottoSecondPlace(0);
+    return new LottoFifthPlace(0);
   }
 
   @Override
   public LottoPlace win() {
-    return new LottoSecondPlace(plusCount());
-  }
-
-  @Override
-  public boolean matchedLottoNumberCount(int matched) {
-    return matched == getCountOfMatch();
+    return new LottoFifthPlace(plusCount());
   }
 
   @Override
@@ -34,10 +29,15 @@ public class LottoSecondPlace extends LottoPlace {
   }
 
   @Override
+  public boolean matchedLottoNumberCount(int matched) {
+    return matched == getCountOfMatch();
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoSecondPlace that = (LottoSecondPlace) o;
+    LottoFifthPlace that = (LottoFifthPlace) o;
     return Objects.equals(count, that.count);
   }
 
