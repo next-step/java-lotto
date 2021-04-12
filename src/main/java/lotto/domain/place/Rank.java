@@ -28,13 +28,11 @@ public enum Rank implements BaseRank {
             .orElseThrow(() -> new IllegalArgumentException("입력 값이 맞지 않습니다."));
   }
 
-  public int getCountOfMatch() {
+  int getCountOfMatch() {
     return countOfMatch;
   }
 
-  public int getWinningMoney() {
+  int getWinningMoney() {
     return winningMoney;
   }
-
-
 }

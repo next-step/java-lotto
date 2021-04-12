@@ -23,7 +23,7 @@ public class ResultView {
     places.getValues()
             .forEach(lottoPlace -> System.out.format(LOTTO_PLACES_RESULT_FORMAT, lottoPlace.getCountOfMatch()
                     , convertMoneyFormatting(lottoPlace.getWinningMoney())
-                    , convertMoneyFormatting(lottoPlace.getReturnOnInvestment()))
+                    , convertMoneyFormatting(lottoPlace.getPercentOfInvestment()))
             );
   }
 

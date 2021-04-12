@@ -27,7 +27,7 @@ public class LottoPlaces {
   public LottoPlaces record(int matchedLottoNumberCount) {
     List<LottoPlace> result = new ArrayList<>();
     for (LottoPlace lottoPlace : values) {
-      if (lottoPlace.matchedLottoNumberCount(matchedLottoNumberCount)) {
+      if (lottoPlace.isMatch(matchedLottoNumberCount)) {
         lottoPlace = lottoPlace.win();
       }
       result.add(lottoPlace);
@@ -41,7 +41,7 @@ public class LottoPlaces {
 
   public long totalWinMoney() {
     return values.stream()
-            .map(LottoPlace::getTotalMoney)
+            .map(LottoPlace::getTotalWinningMoney)
             .reduce(Long::sum)
             .orElse(0L);
   }

@@ -17,7 +17,7 @@ class LottoPlaceTest {
     first = first.win().win();
 
     // then
-    assertThat(first.getTotalMoney())
+    assertThat(first.getTotalWinningMoney())
             .isEqualTo(first.getWinningMoney() * 2);
   }
 }
