@@ -26,11 +26,11 @@ public class LottoTicket {
     return new LottoTicket(lottoNumbers);
   }
 
-  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers, int lottoBonusBall) {
+  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers, LottoBonusBall lottoBonusBall) {
     LottoPlaces lottoPlaces = LottoPlaces.create();
     for (LottoNumbers lottoNumbers : values) {
       int countOfMatch = lottoWiningNumbers.countOfMatch(lottoNumbers);
-      boolean matchBonus = lottoNumbers.contains(LottoNumber.generate(lottoBonusBall));
+      boolean matchBonus = lottoBonusBall.isMatch(lottoNumbers);
       lottoPlaces = lottoPlaces.record(countOfMatch, matchBonus);
     }
     return lottoPlaces;

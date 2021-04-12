@@ -5,13 +5,13 @@ import lotto.domain.place.LottoPlaces;
 public class LottoStore {
   private final LottoWiningNumbers lottoWiningNumbers;
   private final LottoPlaces lottoPlaces;
-  private final int lottoBonusBall;
+  private final LottoBonusBall lottoBonusBall;
 
-  private LottoStore(LottoWiningNumbers lottoWiningNumbers, int lottoBonusBall) {
-    this(lottoWiningNumbers, lottoBonusBall, LottoPlaces.create());
+  private LottoStore(LottoWiningNumbers lottoWiningNumbers, int lottoBonusBallNumber) {
+    this(lottoWiningNumbers, LottoBonusBall.create(lottoBonusBallNumber), LottoPlaces.create());
   }
 
-  private LottoStore(LottoWiningNumbers lottoWiningNumbers, int lottoBonusBall, LottoPlaces lottoPlaces) {
+  private LottoStore(LottoWiningNumbers lottoWiningNumbers, LottoBonusBall lottoBonusBall, LottoPlaces lottoPlaces) {
     this.lottoWiningNumbers = lottoWiningNumbers;
     this.lottoPlaces = lottoPlaces;
     this.lottoBonusBall = lottoBonusBall;

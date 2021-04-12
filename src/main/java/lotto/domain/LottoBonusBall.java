@@ -13,6 +13,10 @@ public class LottoBonusBall {
     return new LottoBonusBall(LottoNumber.generate(number));
   }
 
+  public boolean isMatch(LottoNumbers lottoNumbers) {
+    return lottoNumbers.contains(value);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
