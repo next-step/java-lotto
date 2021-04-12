@@ -3,7 +3,6 @@ package lotto.domain.place;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static base.BaseConstants.LOTTO_FIRST_PLACE_INDEX;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoPlacesTest {
@@ -19,7 +18,7 @@ class LottoPlacesTest {
     places = places.record(matchedLottoCount);
 
     // then
-    assertThat(places.getValues().get(LOTTO_FIRST_PLACE_INDEX))
-            .isEqualTo(LottoFirstPlace.create().win());
+    assertThat(places.getValues().contains(LottoFirstPlace.create().win()))
+            .isTrue();
   }
 }
