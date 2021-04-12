@@ -37,6 +37,9 @@ public class LottoMain {
 
         List<Integer> list = inputView.inputDataWinLotto();
 
+        Number bonusNumber = new Number(inputView.inputBonusNumber());
+
+
 
         OutputData resultData = lottoMachine.showResult(list);
 

@@ -27,5 +27,9 @@ public class InputView {
         return numbers;
     }
 
-
+    public int inputBonusNumber(){
+        System.out.println("Bonus 번호를 입력해주세요");
+        sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
 }

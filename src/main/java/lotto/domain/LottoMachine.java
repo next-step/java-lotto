@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +43,8 @@ public class LottoMachine {
 
 
         for (LottoNumber purchasedLottoNumber : this.lottoNumbers) {
-            int resultCount = winLottoNumber.duplicationLotto(purchasedLottoNumber);
-            plusCount(resultCount);
+            Rank rank = winLottoNumber.duplicationLotto(purchasedLottoNumber);
+//            plusCount(resultCount);
         }
 
         OutputData result = new OutputData(threeWinnerCnt, fourWinnerCnt, fiveWinnerCnt, sixWinnerCnt, expense);
@@ -50,26 +52,23 @@ public class LottoMachine {
         return result;
     }
 
-    private void inputBonusBall(){
 
-    }
-
-    private void plusCount(int resultCount) {
-        if (resultCount == threeNumber.number()) {
-            threeWinnerCnt = new Number(threeWinnerCnt.number() + 1);
-        }
-
-        if (resultCount == fourNumber.number()) {
-            fourWinnerCnt = new Number(fourWinnerCnt.number() + 1);
-        }
-
-        if (resultCount == fiveNumber.number()) {
-            fiveWinnerCnt = new Number(fiveWinnerCnt.number() + 1);
-        }
-
-        if (resultCount == sixNumber.number()) {
-            sixWinnerCnt = new Number(sixWinnerCnt.number() + 1);
-        }
+    private void plusCount(Rank rank) {
+//        if (rank.FIFTH.) {
+//            threeWinnerCnt = new Number(threeWinnerCnt.number() + 1);
+//        }
+//
+//        if (resultCount == Rank.FOURTH.getCountOfMatch()) {
+//            fourWinnerCnt = new Number(fourWinnerCnt.number() + 1);
+//        }
+//
+//        if (resultCount == Rank.THIRD.getCountOfMatch()) {
+//            fiveWinnerCnt = new Number(fiveWinnerCnt.number() + 1);
+//        }
+//
+//        if (resultCount == Rank.FIRST.getCountOfMatch()) {
+//            sixWinnerCnt = new Number(sixWinnerCnt.number() + 1);
+//        }
     }
 
 
