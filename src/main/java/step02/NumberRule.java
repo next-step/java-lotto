@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import static step02.LottoConfig.*;
 
 public abstract class NumberRule {
-    List<Integer> integers = IntStream
+    static final List<Integer> INTEGERS = IntStream
             .range(NUMBER_RANGE_START, NUMBER_RANGE_END)
             .boxed()
             .collect(Collectors.toList());

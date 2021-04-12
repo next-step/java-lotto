@@ -13,45 +13,27 @@ public class Lottos {
         lottoCount = new LottoCount(count);
     }
 
-    public LottoCount getLottoCount() {
-        return lottoCount;
-    }
-
-    public void makeLotto(NumberRule numberRule) throws Exception {
+    public void makeLotto(NumberRule numberRule) {
         for (int i = ZERO; i < lottoCount.getCount(); i++) {
             lottos.add(new LottoNumbers(numberRule));
         }
     }
 
-    public LottoResultDTO compareMatchNumber(LottoNumbers winnerNumbers) {
-        LottoResultDTO resultDTO = new LottoResultDTO();
-        for (LottoNumbers numbers : lottos) {
+    public Ranks compareMatchNumber(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
+        Ranks ranks = new Ranks();
+        lottos.forEach(numbers -> {
             int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
-            if (matchCount == Rank.RANK.FOURTH.getMatchCount()) {
-                resultDTO.setMath3(resultDTO.getMath3() + ONE);
-            }
-            if (matchCount == Rank.RANK.THIRD.getMatchCount()) {
-                resultDTO.setMath4(resultDTO.getMath4() + ONE);
-            }
-            if (matchCount == Rank.RANK.SECOND.getMatchCount()) {
-                resultDTO.setMath5(resultDTO.getMath5() + ONE);
-            }
-            if (matchCount == Rank.RANK.FIRST.getMatchCount()) {
-                resultDTO.setMath6(resultDTO.getMath6() + ONE);
-            }
-        }
-        return resultDTO;
+            boolean matchBonus = numbers.compareMatchBonusNumber(bonusNumber);
+            ranks.addRanks(Rank.getMatchRank(matchCount, matchBonus));
+        });
+        return ranks;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LottoNumbers lottoNumbers : lottos) {
-            stringBuilder.append(START_LOTTO_SYMBOL)
-                    .append(lottoNumbers.toString())
-                    .append(END_LOTTO_SYMBOL)
-                    .append(LINE_BRAKE);
-        }
-        return stringBuilder.toString();
+    public LottosDTO getLottoResult() {
+        LottosDTO lottosDTO = new LottosDTO();
+        lottosDTO.setLottos(lottos);
+        lottosDTO.setLottoCount(lottoCount);
+        return lottosDTO;
     }
+
 }

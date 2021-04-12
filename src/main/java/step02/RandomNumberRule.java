@@ -9,8 +9,8 @@ import static step02.LottoConfig.*;
 public class RandomNumberRule extends NumberRule {
     @Override
     public List<Integer> makeNumbers() {
-        Collections.shuffle(integers);
-        return integers.stream()
+        Collections.shuffle(INTEGERS);
+        return INTEGERS.stream()
                 .limit(LOTTO_NUMBER_MAX_COUNT)
                 .collect(Collectors.toList());
     }

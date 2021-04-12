@@ -2,19 +2,23 @@ package step02;
 
 public class LottoShop {
     private Lottos lottos;
-    int money = 0;
+    private LottoPrice price;
 
-    public Lottos buyLotto(NumberRule numberRule) throws Exception {
-        money = InputView.inputMoney();
-        lottos = new Lottos(LottoCount.calculationCount(money));
+    public LottosDTO buyLotto(NumberRule numberRule) {
+        price = new LottoPrice(InputView.inputMoney());
+        lottos = new Lottos(LottoPrice.calculationCount(price));
         lottos.makeLotto(numberRule);
-        return lottos;
+        return lottos.getLottoResult();
     }
 
-    public LottoResultDTO showLottoResult() throws Exception {
+    public LottoResultDTO showLottoResult() {
         LottoNumbers lottoWinner = new LottoNumbers(new InputNumberRule(InputView.inputLastWinnerNumber()));
-        LottoResultDTO resultDTO = lottos.compareMatchNumber(lottoWinner);
-        resultDTO.setYield(Rank.calculateTotalReward(money, resultDTO));
+        LottoResultDTO resultDTO = new LottoResultDTO();
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusBall());
+
+        Ranks ranks = lottos.compareMatchNumber(lottoWinner, bonusNumber);
+        resultDTO.setRanks(ranks);
+        resultDTO.setYield(LottoPrice.calculateTotalReward(price, ranks));
 
         return resultDTO;
     }

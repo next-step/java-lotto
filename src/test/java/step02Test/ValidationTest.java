@@ -26,4 +26,11 @@ public class ValidationTest {
                 Validation.numberCount(7))
                 .isInstanceOf(Exception.class).hasMessage("6개의 수를 입력해주세요.");
     }
+
+    @Test
+    void checkMinPrice() {
+        assertThatThrownBy(() ->
+                Validation.checkMinPrice(500))
+                .isInstanceOf(Exception.class).hasMessage("최소 구매 금액은 1000원 입니다.");
+    }
 }
