@@ -28,9 +28,9 @@ public class LottoNumbers {
     return values.size();
   }
 
-  public int matchLottoNumber(final LottoNumbers otherNumbers) {
+  public int matchLottoNumber(final LottoNumbers other) {
     return (int) values.stream()
-            .filter(otherNumbers::contains)
+            .filter(other::contains)
             .count();
   }
 

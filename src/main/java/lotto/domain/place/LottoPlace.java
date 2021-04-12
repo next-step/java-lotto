@@ -21,8 +21,8 @@ public abstract class LottoPlace {
     return getTotalWinningMoney() / getWinningMoney();
   }
 
-  public boolean isMatch(int countOfMatch) {
-    return countOfMatch == getCountOfMatch();
+  public boolean isMatch(int countOfMatch, boolean matchBonus) {
+    return value == Rank.valueOf(countOfMatch, matchBonus);
   }
 
   public int getCountOfMatch() {

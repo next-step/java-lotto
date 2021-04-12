@@ -16,8 +16,8 @@ public class LottoApplication {
 
     String lottoWiningNumbersString = InputView.writeLottoWiningNumbersString();
     LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(lottoWiningNumbersString);
-
-    LottoStore store = LottoStore.open(lottoWiningNumbers)
+    int lottoBonusBallNumber = 0;
+    LottoStore store = LottoStore.open(lottoWiningNumbers, lottoBonusBallNumber)
             .exchange(boughtLottoTicket);
 
     long totalWinMoney = store.totalWinMoney();

@@ -24,10 +24,10 @@ public class LottoPlaces {
     return new LottoPlaces(list);
   }
 
-  public LottoPlaces record(int matchedLottoNumberCount) {
+  public LottoPlaces record(int countOfMatch, boolean matchBonus) {
     List<LottoPlace> result = new ArrayList<>();
     for (LottoPlace lottoPlace : values) {
-      if (lottoPlace.isMatch(matchedLottoNumberCount)) {
+      if (lottoPlace.isMatch(countOfMatch, matchBonus)) {
         lottoPlace = lottoPlace.win();
       }
       result.add(lottoPlace);

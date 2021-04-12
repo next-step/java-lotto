@@ -14,12 +14,13 @@ class LottoPlacesTest {
     LottoPlaces places = LottoPlaces.create();
 
     // when
-    final int matchedLottoCount = 6;
-    places = places.record(matchedLottoCount);
+    places = places.record(BaseRank.FIRST_COUNT_OF_MATCH, false);
+    places = places.record(BaseRank.SECOND_COUNT_OF_MATCH, true);
 
     // then
-    assertThat(places.getValues()
-            .contains(LottoFirstPlace.create().win()))
-            .isTrue();
+    assertThat(places.getValues())
+            .contains(LottoFirstPlace.create().win(),
+                    LottoSecondPlace.create().win(),
+                    LottoThirdPlace.create());
   }
 }

@@ -33,12 +33,13 @@ class LottoTicketTest {
     LottoTicket lottoTicket = LottoTicket.toBuy(3_000, () -> IntStream.rangeClosed(1, 6)
             .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList()));
+    int bonusBall = 1;
 
     // when
-    LottoPlaces places = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"));
+    LottoPlaces places = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"), bonusBall);
 
     // then
-    assertThat(places.getValues().contains(LottoFirstPlace.create().win().win().win()))
-            .isTrue();
+    assertThat(places.getValues())
+            .contains(LottoFirstPlace.create().win().win().win());
   }
 }

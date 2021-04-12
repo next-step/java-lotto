@@ -28,8 +28,8 @@ public class LottoWiningNumbers {
     return generate(() -> lottoWiningNumbers);
   }
 
-  public int matchLottoNumber(final LottoNumbers lottoNumbers) {
-    return value.matchLottoNumber(lottoNumbers);
+  public int countOfMatch(final LottoNumbers other) {
+    return value.matchLottoNumber(other);
   }
 
   @Override

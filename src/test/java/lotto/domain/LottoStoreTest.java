@@ -21,7 +21,8 @@ class LottoStoreTest {
     LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(() -> IntStream.rangeClosed(1, 6)
             .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList()));
-    store = LottoStore.open(lottoWiningNumbers);
+    int lottoBonusBallNumber = 1;
+    store = LottoStore.open(lottoWiningNumbers, lottoBonusBallNumber);
   }
 
   @Test
