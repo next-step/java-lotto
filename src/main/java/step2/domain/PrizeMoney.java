@@ -1,9 +1,5 @@
 package step2.domain;
 
-import step2.utils.StringUtil;
-
-import java.util.List;
-
 public class PrizeMoney {
     public static final int LOWEST_RANK_FOR_PRIZE = 4;
     public static final int HIGHEST_RANK_FOR_PRIZE = 1;

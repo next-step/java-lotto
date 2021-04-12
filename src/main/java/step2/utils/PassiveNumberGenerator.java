@@ -1,7 +1,5 @@
 package step2.utils;
 
-import step2.domain.LottoTicket;
-
 import java.util.List;
 
 public class PassiveNumberGenerator implements LottoNumberGenerator {

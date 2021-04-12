@@ -48,12 +48,13 @@ public class LottoService {
         }
         if(match >= PrizeMoney.getMatchCountForPrize(PrizeMoney.LOWEST_RANK_FOR_PRIZE)){
             lottoPrizeMap.put(match, lottoPrizeMap.get(match)+1);
-            resultDto.setPrizeMoney(prizeMoney.getPrizeMoneyAsMatchCount(match));
+            prizeMoney.getPrizeMoneyAsMatchCount(match);
+            resultDto.setPrizeMoney(prizeMoney.getAmountOfPrizeMoney());
         }
     }
 
     public void calculateEarningRatio(LottoTickets lottoTickets){
-        int amountOfPrizeMoney = prizeMoney.getAmountOfPrizeMoney();
+        int amountOfPrizeMoney = resultDto.getSumOfPrizeMoney();
         List<LottoTicket> lottoTicketsList = lottoTickets.getLottoTickets();
         int cost = LottoTicket.LOTTO_PRICE*lottoTicketsList.size();
         double earningEatio = amountOfPrizeMoney/cost;

@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResultDto {
-    private int sumOfPrizeMoney = 0;
+    private int sumOfPrizeMoney;
     private Map<Integer, Integer> matchCountMap = new HashMap<>();
     private double earningRatio;
+
+    public ResultDto(){
+        sumOfPrizeMoney = 0;
+    }
 
     public void setMatchCount(Map<Integer, Integer> matchCountMap){
         this.matchCountMap = matchCountMap;
@@ -25,5 +29,9 @@ public class ResultDto {
     }
     public double getEarningRatio(){
         return earningRatio;
+    }
+
+    public int getSumOfPrizeMoney(){
+        return sumOfPrizeMoney;
     }
 }

@@ -3,13 +3,11 @@ package step2.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.utils.AutoNumberGenerator;
-import step2.domain.LottoTicket;
-import step2.domain.LottoTickets;
 import step2.utils.LottoNumberGenerator;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoTicketsTest {
 
