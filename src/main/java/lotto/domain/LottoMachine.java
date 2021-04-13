@@ -3,72 +3,72 @@ package lotto.domain;
 import lotto.enums.Rank;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoMachine {
 
     private List<LottoNumber> lottoNumbers;
-
-    private static final Number threeNumber = new Number(3);
-    private static final Number fourNumber = new Number(4);
-    private static final Number fiveNumber = new Number(5);
-    private static final Number sixNumber = new Number(6);
-
-    private Number threeWinnerCnt = new Number(0);
-    private Number fourWinnerCnt = new Number(0);
-    private Number fiveWinnerCnt = new Number(0);
-    private Number sixWinnerCnt = new Number(0);
-
+    private HashMap<Rank, Integer> winCountMap = new HashMap<>();
     private Money expense;
 
     public LottoMachine(final List<LottoNumber> lottoNumbers, Money expense) {
         this.lottoNumbers = lottoNumbers;
         this.expense = expense;
+        makeWinCountMap();
+    }
+
+    private void makeWinCountMap() {
+        for (Rank rank : Rank.values()) {
+            winCountMap.put(rank, 0);
+        }
     }
 
     public void startLottoGame() {
         printLotto();
     }
 
-    public OutputData showResult(List<Integer> lottoNumberList) {
+    public OutputData showResult(List<Integer> lottoNumberList, Number bonusNumber) {
 
+        WinLottoNumber winLottoNumber = new WinLottoNumber(changedListIntegerToLottoNumber(lottoNumberList), bonusNumber);
+
+        for (LottoNumber purchasedLottoNumber : this.lottoNumbers) {
+            Rank rank = winLottoNumber.duplicationLottoRank(purchasedLottoNumber);
+            countWinner(rank);
+        }
+
+        return new OutputData(winCountMap, expense);
+    }
+
+
+    private void countWinner(Rank rank) {
+        boolean existWinner = winCountMap.containsKey(rank);
+        if (existWinner) {
+            int existCount = winCountMap.get(rank);
+            winCountMap.put(rank, existCount++);
+        }
+
+        if (!existWinner) {
+            winCountMap.put(rank, 1);
+        }
+    }
+
+
+    private int sumWinAmount(Rank rank) {
+        return rank.getWinningMoney();
+    }
+
+    private float calculateRate(Money winAmount, Money expense) {
+        return winAmount.won() / expense.won();
+    }
+
+    private LottoNumber changedListIntegerToLottoNumber(List<Integer> lottoNumberList) {
         List<Number> numberList = new ArrayList<>();
 
         for (int number : lottoNumberList) {
             numberList.add(new Number(number));
         }
-
-        LottoNumber lottoNumber = new LottoNumber(numberList);
-        WinLottoNumber winLottoNumber = new WinLottoNumber(lottoNumber);
-
-
-        for (LottoNumber purchasedLottoNumber : this.lottoNumbers) {
-            Rank rank = winLottoNumber.duplicationLotto(purchasedLottoNumber);
-//            plusCount(resultCount);
-        }
-
-        OutputData result = new OutputData(threeWinnerCnt, fourWinnerCnt, fiveWinnerCnt, sixWinnerCnt, expense);
-        result.calculateRate();
-        return result;
-    }
-
-
-    private void plusCount(Rank rank) {
-//        if (rank.FIFTH.) {
-//            threeWinnerCnt = new Number(threeWinnerCnt.number() + 1);
-//        }
-//
-//        if (resultCount == Rank.FOURTH.getCountOfMatch()) {
-//            fourWinnerCnt = new Number(fourWinnerCnt.number() + 1);
-//        }
-//
-//        if (resultCount == Rank.THIRD.getCountOfMatch()) {
-//            fiveWinnerCnt = new Number(fiveWinnerCnt.number() + 1);
-//        }
-//
-//        if (resultCount == Rank.FIRST.getCountOfMatch()) {
-//            sixWinnerCnt = new Number(sixWinnerCnt.number() + 1);
-//        }
+        return new LottoNumber(numberList);
     }
 
 

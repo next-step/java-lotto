@@ -7,37 +7,24 @@ public class WinLottoNumber {
     private static boolean[] duplicationLottoNumberArr = new boolean[46];
     private LottoNumber winLottoNumber;
     private Number bonusNumber;
+    private boolean matchedBonusNumber = false;
     private int duplicationCount = 0;
 
-    public WinLottoNumber(LottoNumber winLottoNumber,Number bonusNumber){
-        this(winLottoNumber);
+    public WinLottoNumber(LottoNumber winLottoNumber, Number bonusNumber) {
         this.bonusNumber = bonusNumber;
-    }
-
-    public WinLottoNumber(LottoNumber winLottoNumber) {
         this.winLottoNumber = winLottoNumber;
         checkWinLotto();
     }
 
-
-//    public int duplicationLotto(LottoNumber lottoNumber) {
-//
-//        for (Number number : lottoNumber.numbers()) {
-//            increaseCount(number);
-//        }
-//        return duplicationCount;
-//    }
-
-    public Rank duplicationLotto(LottoNumber lottoNumber) {
-
+    public Rank duplicationLottoRank(LottoNumber lottoNumber) {
         for (Number number : lottoNumber.numbers()) {
-            increaseCount(number);
+            increaseCountAndCheckBonusNumber(number);
         }
         return checkedWinLotto(duplicationCount);
     }
 
     private Rank checkedWinLotto(int duplicationCount) {
-        return Rank.valueOf(duplicationCount,false);
+        return Rank.valueOf(duplicationCount, matchedBonusNumber);
     }
 
     private void checkWinLotto() {
@@ -46,15 +33,14 @@ public class WinLottoNumber {
         }
     }
 
-    private void increaseCount(Number number) {
+    private void increaseCountAndCheckBonusNumber(Number number) {
         if (duplicationLottoNumberArr[number.number()]) {
             duplicationCount++;
         }
-    }
 
-    private Number bonusNumber(Number number) {
-        return this.bonusNumber;
+        if (number.number() == bonusNumber.number()) {
+            matchedBonusNumber = true;
+        }
     }
-
 
 }

@@ -11,6 +11,7 @@ public enum Rank {
     private int countOfMatch;
     private int winningMoney;
     private static Rank foundRank;
+    private static final int five = 5;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -42,7 +43,7 @@ public enum Rank {
             foundRank = rank;
         }
 
-        if(matchBonus && rank.countOfMatch == 5){
+        if (matchBonus && foundRank.countOfMatch == five) {
             foundRank = Rank.SECOND;
         }
     }
