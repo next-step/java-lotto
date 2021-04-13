@@ -3,6 +3,8 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoSalesPersonTest {
@@ -20,4 +22,21 @@ class LottoSalesPersonTest {
         // then
         assertEquals(5, actual);
     }
+
+    @Test
+    @DisplayName("로또 장수에 맞춰 로또 발급되었는지 테스트")
+    void makeLotto(){
+        // given
+        int amount = 10_000;
+        int expected = amount/1000;
+        LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(amount));
+
+        // when
+        List<LottoTicket> lottoCollection = lottoSalesPerson.makeLotto(expected);
+        int actual = lottoCollection.size();
+
+        // then
+        assertEquals(expected, actual);
+    }
+    
 }
