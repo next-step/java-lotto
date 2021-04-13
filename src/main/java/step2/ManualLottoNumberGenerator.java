@@ -6,8 +6,8 @@ public class ManualLottoNumberGenerator implements LottoNumberGenerator{
 
     private final List<Integer> numbers;
 
-    public ManualLottoNumberGenerator(List<Integer> numbers){
-        this.numbers = numbers;
+    public ManualLottoNumberGenerator(List<Integer> lottoNumbers){
+        this.numbers = lottoNumbers;
     }
 
     @Override
