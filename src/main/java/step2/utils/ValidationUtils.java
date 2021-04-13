@@ -21,8 +21,6 @@ public class ValidationUtils {
 
     private static boolean isNotRangeOfLottoNumbers(List<Integer> numbers){
         boolean bool = false;
-        System.out.println(whichSmallestNumber(numbers));
-        System.out.println(whichBigNumbers(numbers));
         if(whichSmallestNumber(numbers)< LottoNumberGenerator.lottoMinNumber || whichBigNumbers(numbers)>LottoNumberGenerator.lottoMaxNumber){
             bool = true;
         }
