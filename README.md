@@ -23,10 +23,16 @@
         * 로또 1회 생성자(6개의 LottoNumber(1~45 까지의 숫자)를 갖고 있음)
         * 당첨결과(param : WinningNumbers, return : Rank)
     * Lottos
-        * 로또 n회 생성자(n = 구매금액)
-        * 로또 n회 생성자(구매금액 / 수동 구매 수)
-        * 구매금액
+        * 로또 자동 생성자(n = 구매금액)
+        * 로또 수동 생성자(List<Lotto> manualLottos)
+        * size
         * 당첨결과(param :WinningNumbers, return : List\<Rank\>)
+    * Ticket
+        * instance 변수 : autoLottos, manualLottos
+        * Ticket 생성자(autoLottos, manualLottos)
+        * autoLottosSize
+        * manualLottosSize
+        * total당첨결과
     * WinningNumber
         * 게임 당첨 번호 생성자(input된 당첨 번호)
         * 보너스 당첨번호 생성자(input된 보너스 번호)
