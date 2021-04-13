@@ -11,7 +11,7 @@ public class Lotto {
     private final static int NUMBER_OF_LOTTO_NUMBERS = 6;
     private final static int LOTTO_PRICE = 1000;
 
-    private static List<Integer> lottoNumbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
+    private final static List<Integer> lottoNumbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
     private final List<Integer> lotto;
 
 
@@ -27,7 +27,7 @@ public class Lotto {
         int matchCount = (int) winningNumber.stream()
                 .filter(this.lotto::contains)
                 .count();
-        boolean isBonusMatch = winningNumber.isContained(this.lottoNumbers);
+        boolean isBonusMatch = winningNumber.isContained(this.lotto);
         return Rank.valueOf(matchCount, isBonusMatch);
     }
 
