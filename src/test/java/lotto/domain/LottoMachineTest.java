@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ class LottoMachineTest {
 
     private List<Number> winLottoNumbersList = new ArrayList<>();
     private List<Number> lottoNumberList = new ArrayList<>();
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     @BeforeEach
     private void SetUp() {
@@ -66,9 +67,10 @@ class LottoMachineTest {
             winLottoList.add(number.number());
         }
 
-        OutputData outputData = lottoMachine.showResult(winLottoList);
+        Number bonusNumber = new Number(23);
+        OutputData outputData = lottoMachine.showResult(winLottoList, bonusNumber);
 
-        assertThat(outputData.fiveWin().number()).isEqualTo(1);
+        assertThat(outputData.rankMap().get(Rank.THIRD)).isEqualTo(1);
 
 
     }

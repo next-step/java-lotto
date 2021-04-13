@@ -15,9 +15,7 @@ public class LottoMain {
 
         InputView inputView = new InputView();
         int money = inputView.inputDataMoney();
-
         Clerk clerk = new Clerk(new Money(money));
-
         int lottoCount = clerk.returnedLottoCount();
         OutputView outputView = new OutputView(lottoCount);
         outputView.printLottoCnt();
@@ -32,17 +30,15 @@ public class LottoMain {
         }
 
         LottoMachine lottoMachine = new LottoMachine(lottoNumberList, new Money(money));
-
         lottoMachine.startLottoGame();
 
         List<Integer> list = inputView.inputDataWinLotto();
+        Number bonusNumber = new Number(inputView.inputBonusNumber());
 
+        OutputData resultData = lottoMachine.showResult(list, bonusNumber);
 
-        OutputData resultData = lottoMachine.showResult(list);
-
-        outputView.printLottoResult(resultData.threeWin().number(), resultData.fourWin().number(), resultData.fiveWin().number(), resultData.sixWin().number());
-
-        outputView.printRate(resultData.calculateRate());
+        outputView.printLottoResult(resultData.rankMap());
+        outputView.printRate(resultData.calculateWinRate());
 
     }
 }
