@@ -51,18 +51,4 @@ public class LottoTest {
         // then
         assertThat(resultSize).isEqualTo(expectSize);
     }
-
-    @Test
-    public void manualLottos() {
-        // given
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lottos expectLottos = new Lottos(Arrays.asList(lotto1, lotto2));
-
-        // when
-        Lottos resultLottos = new Lottos(2000, Arrays.asList(lotto1, lotto2));
-
-        // then
-        assertThat(resultLottos).isEqualTo(expectLottos);
-    }
 }

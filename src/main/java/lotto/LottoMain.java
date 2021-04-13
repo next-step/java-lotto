@@ -10,14 +10,14 @@ import java.util.List;
 public class LottoMain {
     public static void main(String[] args) {
         int purchaseAmount = InputView.getPurchaseAmount();
-        List<Lotto> manualLottos = getManualLottos();
-        Lottos lottos = new Lottos(purchaseAmount, manualLottos);
+        Lottos manualLottos = getManualLottos();
+        Ticket ticket = new Ticket(purchaseAmount, manualLottos);
 
-        ResultView.printPurchaseLotto(lottos, manualLottos);
+        ResultView.printPurchaseLotto(ticket);
 
         WinningNumber winningNumber = getWinningNumber();
 
-        Statistics statistics = new Statistics(lottos.winningResults(winningNumber));
+        Statistics statistics = new Statistics(ticket.winningResults(winningNumber));
 
         ResultView.printStatistics(statistics);
         ResultView.printYield(statistics, purchaseAmount);
@@ -32,7 +32,7 @@ public class LottoMain {
         return winningNumber;
     }
 
-    private static List<Lotto> getManualLottos() {
+    private static Lottos getManualLottos() {
         int manualLottoNum = InputView.getManualLotto();
         List<Lotto> manualLottos = new ArrayList<>();
         InputView.printManualLottoNumbers();
@@ -41,6 +41,6 @@ public class LottoMain {
             Lotto manualLotto = new Lotto(Parser.parse(Split.splitDelimiter(inputManualLottoNumber)));
             manualLottos.add(manualLotto);
         }
-        return manualLottos;
+        return new Lottos(manualLottos);
     }
 }

@@ -1,23 +1,23 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.Statistics;
+import lotto.domain.Ticket;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 public class ResultView {
     private final static DecimalFormat form = new DecimalFormat("#.##");
     private final static String PRINT_STATISTICS_START = "당첨 통계\n---------";
 
 
-    public static void printPurchaseLotto(Lottos lottos, List<Lotto> manualLottos) {
+    public static void printPurchaseLotto(Ticket ticket) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다."
-                , manualLottos.size()
-                , lottos.size() - manualLottos.size()));
-        lottos.stream()
+                , ticket.manualLottoSize()
+                , ticket.autoLottoSize()));
+        ticket.manualStream()
+                .forEach(lotto -> System.out.println(lotto.toString()));
+        ticket.autoStream()
                 .forEach(lotto -> System.out.println(lotto.toString()));
     }
 

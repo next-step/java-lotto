@@ -36,7 +36,7 @@ public class TicketTest {
         // given
         int expectManualSize = 3;
         // when
-        int resultManualSize = testTicket.manualSizeSize();
+        int resultManualSize = testTicket.manualLottoSize();
         // then
         assertThat(resultManualSize).isEqualTo(expectManualSize);
     }
@@ -45,11 +45,28 @@ public class TicketTest {
     public void totalWinningResults() {
         // given
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        List<Rank> expectWinningResults = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FIFTH, Rank.FIRST, Rank.SECOND);
+        List<Rank> expectWinningResults = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.FOURTH, Rank.FIRST, Rank.SECOND);
         // when
         List<Rank> resultWinningResults = testTicket.winningResults(winningNumber);
         // then
         assertThat(resultWinningResults).isEqualTo(expectWinningResults);
+    }
+
+    @Test
+    public void Ticket생성자_manual로만_만드는_경우() {
+        // given
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Ticket expectTicket = new Ticket(2, new Lottos(Arrays.asList(lotto1, lotto2)));
+        int expectAutoSize = 0;
+        int expectManualSize = 2;
+        // when
+        int resultAutoSize = expectTicket.autoLottoSize();
+        int resultManualSize = expectTicket.manualLottoSize();
+
+        // then
+        assertThat(resultAutoSize).isEqualTo(expectAutoSize);
+        assertThat(resultManualSize).isEqualTo(expectManualSize);
     }
 
 }
