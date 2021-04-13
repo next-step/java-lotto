@@ -1,16 +1,15 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoSalesPerson {
     private static final int LOTTO_PRICE = 1_000;
     private final TheMethodOfPurchase purchase;
-    private final List<LottoTicket> lottoCollection;
+    private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoSalesPerson(TheMethodOfPurchase purchase){
+    public LottoSalesPerson(TheMethodOfPurchase purchase, LottoNumberGenerator lottoNumberGenerator){
         this.purchase = purchase;
-        lottoCollection = new ArrayList<>();
+        this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
     public int howManyBuyLotto(){
@@ -20,9 +19,7 @@ public class LottoSalesPerson {
     }
 
     public List<LottoTicket> makeLotto(int theNumberOfLottoTicket){
-        for (int i = 0; i < theNumberOfLottoTicket; i++) {
-            lottoCollection.add(new LottoTicket());
-        }
-        return lottoCollection;
+        LottoTickets lottoTickets = new LottoTickets(theNumberOfLottoTicket, lottoNumberGenerator);
+        return lottoTickets.getLottoCollection();
     }
 }

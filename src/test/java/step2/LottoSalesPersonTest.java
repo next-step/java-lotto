@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoSalesPersonTest {
 
@@ -14,7 +14,8 @@ class LottoSalesPersonTest {
     void howManyBuyLotto() {
         // given
         int purchasingAmount = 5_000;
-        LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(purchasingAmount));
+        LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(purchasingAmount),
+                new AutoLottoNumberGenerator());
 
         // when
         int actual = lottoSalesPerson.howManyBuyLotto();
@@ -29,7 +30,8 @@ class LottoSalesPersonTest {
         // given
         int amount = 10_000;
         int expected = amount/1000;
-        LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(amount));
+
+        LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(amount), new AutoLottoNumberGenerator());
 
         // when
         List<LottoTicket> lottoCollection = lottoSalesPerson.makeLotto(expected);
@@ -38,5 +40,4 @@ class LottoSalesPersonTest {
         // then
         assertEquals(expected, actual);
     }
-    
 }
