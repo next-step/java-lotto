@@ -7,8 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -34,7 +33,7 @@ class LottoTicketTest {
         List<Integer> numbers = Arrays.asList(1,2,3,43,44,45);
 
         // when
-        LottoNumberGenerator lottoNumberGenerator = new ManualLottoNumberGenerator(numbers);
+        LottoNumberGenerator lottoNumberGenerator = new TestLottoNumberGenerator(numbers);
         LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
         List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
 
@@ -46,6 +45,21 @@ class LottoTicketTest {
                 () -> assertThat(minNumber).isGreaterThanOrEqualTo(LottoNumberGenerator.lottoMinNumber),
                 () -> assertThat(maxNumber).isLessThanOrEqualTo(LottoNumberGenerator.lottoMaxNumber)
         );
+    }
+
+    @Test
+    @DisplayName("로또 번호에 중복된 숫자가 있을때 RuntimeException 던지는지 테스트")
+    void checkDuplicationNumbers(){
+        // given
+        List<Integer> numbers = Arrays.asList(1,7,27,41,44,44);
+
+        // when
+        LottoNumberGenerator lottoNumberGenerator = new TestLottoNumberGenerator(numbers);
+
+        // then
+        assertThrows(RuntimeException.class, () -> {
+            new LottoTicket(lottoNumberGenerator);
+        });
     }
 
     int whichSmallestNumber(List<Integer> list){

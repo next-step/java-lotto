@@ -31,7 +31,7 @@ class LottoTicketsTest {
     void isSaveLottoInList(){
         // given
         List<Integer> expected = Arrays.asList(1,2,44,7, 17, 21);
-        LottoNumberGenerator lottoNumberGenerator = new ManualLottoNumberGenerator(expected);
+        LottoNumberGenerator lottoNumberGenerator = new TestLottoNumberGenerator(expected);
 
         // when
         LottoTickets lottoCollection = new LottoTickets(expected.size(),lottoNumberGenerator);

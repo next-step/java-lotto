@@ -2,11 +2,11 @@ package step2;
 
 import java.util.List;
 
-public class ManualLottoNumberGenerator implements LottoNumberGenerator{
+public class TestLottoNumberGenerator implements LottoNumberGenerator{
 
     private final List<Integer> numbers;
 
-    public ManualLottoNumberGenerator(List<Integer> lottoNumbers){
+    public TestLottoNumberGenerator(List<Integer> lottoNumbers){
         this.numbers = lottoNumbers;
     }
 
