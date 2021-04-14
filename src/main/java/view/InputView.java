@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoNumber;
 import domain.LottoNumbers;
+import domain.LottoResultRequest;
 import domain.Money;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,7 @@ public class InputView {
         int buyMoney = Integer.parseInt(BufferedReaderUtil.readLine());
         stickLotto();
         Money money = new Money(buyMoney, manualLottoNumbers.size());
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoNumbers.size(), money.getTicketCount() - manualLottoNumbers.size());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoNumbers.size(), money.getTicketCount());
         return money;
     }
 
@@ -39,10 +40,10 @@ public class InputView {
     private void getManualLottoNumbers(int manualCount) {
         for(int count = 0; count < manualCount; count++){
             String[] list = BufferedReaderUtil.readLine().split(",");
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-            for(String str : list){
-                lottoNumbers.add(new LottoNumber(Integer.parseInt(str)));
-            }
+            List<LottoNumber> lottoNumbers = Arrays
+                .stream(list)
+                .map(str -> new LottoNumber(Integer.parseInt(str)))
+                .collect(Collectors.toList());
             this.manualLottoNumbers.add(new LottoNumbers(lottoNumbers));
         }
     }
@@ -60,6 +61,10 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         int number = Integer.parseInt(BufferedReaderUtil.readLine());
         return new LottoNumber(number);
+    }
+
+    public LottoResultRequest convert(){
+        return new LottoResultRequest(getWinNumbers(), this.addBonusNumber());
     }
 
     public LottoNumbers getWinNumbers() {
