@@ -2,7 +2,6 @@ package domain;
 
 import enums.Rank;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -18,17 +17,18 @@ public class LottoGame {
         System.out.println();
     }
 
-    public List<Rank> findWinners(LottoNumbers winNumbers, LottoNumber bonusNumber) {
-        return lottoList
+    public LottoGame(Money money, List<LottoNumbers> stickLottoNumbers) {
+        this.money = money;
+        this.lottoList = new LottoList(money.getTicketCount());
+        lottoList
             .getLottos()
-            .stream()
-            .filter(lottoNumbers -> lottoNumbers.isRank(winNumbers.getNumbers()))
-            .map(lottoNumbers -> lottoNumbers.convertRank(winNumbers.getNumbers(), bonusNumber))
-            .collect(Collectors.toList());
+            .forEach(System.out::println);
+        this.lottoList.getLottos().addAll(stickLottoNumbers);
+        System.out.println();
     }
 
-    public LottoResultResponse convert(LottoNumbers winNumbers, LottoNumber bonusNumber){
-        List<Rank> ranks = findWinners(winNumbers, bonusNumber);
+    public LottoResultResponse convert(LottoResultRequest lottoResultRequest){
+        List<Rank> ranks = lottoResultRequest.findWinners(lottoList.getLottos());
 
         double totalWinnings =
             ranks
@@ -38,4 +38,5 @@ public class LottoGame {
         double yield = money.calcYield(totalWinnings);
         return new LottoResultResponse(yield, ranks);
     }
+
 }

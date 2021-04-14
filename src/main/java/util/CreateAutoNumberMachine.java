@@ -34,10 +34,4 @@ public class CreateAutoNumberMachine {
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
-
-    public static List<LottoNumber> createNumber(List<Integer> list) {
-        return list.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 }

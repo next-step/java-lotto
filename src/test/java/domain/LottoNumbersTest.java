@@ -17,11 +17,10 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 충족하지 않을 때 ExceedSizeException 발생")
     @Test
     public void checkExceedSizeNumbers(){
-        List<LottoNumber> list = CreateAutoNumberMachine
-            .createNumber(
-                Arrays.asList(1,2,3,4,5,6,7));
         assertThatThrownBy(() ->
-            new LottoNumbers(list))
+            CreateAutoNumberMachine
+                .createNumbers(
+                    Arrays.asList(1,2,3,4,5,6,7)))
             .isInstanceOf(ExceedNumberException.class);
     }
 

@@ -5,9 +5,22 @@ public class Money {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     private int money;
+    private int manualCount;
 
     public Money(int money) {
         this.money = money;
+    }
+
+    public Money(int money, int manualCount) {
+        validate(money, manualCount);
+        this.money = money;
+        this.manualCount = manualCount;
+    }
+
+    private void validate(int money, int manualCount) {
+        if( money < (manualCount * LOTTO_TICKET_PRICE)){
+            throw new IllegalArgumentException();
+        }
     }
 
     public double calcYield(double totalWinnings){
@@ -15,7 +28,7 @@ public class Money {
     }
 
     public int getTicketCount() {
-        return money / LOTTO_TICKET_PRICE;
+        return (money / LOTTO_TICKET_PRICE) - manualCount;
     }
 
     @Override
