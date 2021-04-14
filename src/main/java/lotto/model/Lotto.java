@@ -54,15 +54,15 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public LottoPrize getPrize(Lotto winLotto) {
+    public LottoPrize getPrize(Lotto winLotto, Number bonusNumber) {
         int matchs = 0;
         for (Number number : numbers) {
             if (winLotto.numbers.contains(number)) {
                 matchs++;
             }
-
         }
-        return LottoPrize.getByMathes(matchs);
+
+        return LottoPrize.checkWithMatchsAndBonusMatch(matchs, numbers.contains(bonusNumber));
     }
 
     public List<Number> getNumbers() {

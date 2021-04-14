@@ -4,8 +4,12 @@ import lotto.exception.MoneyNotEnoughException;
 import lotto.model.Lotto;
 import lotto.model.LottoPrize;
 import lotto.model.Money;
+import lotto.model.Number;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
     private final static int LOTTO_PRICE = 1000;
@@ -13,7 +17,8 @@ public class LottoGame {
     private List<Lotto> lottos;
     private Lotto winLotto;
     private Map<LottoPrize, Integer> lottoGameStatistics;
-    private Money money;
+    private Money buyMoney;
+    private Number bonusNumber;
 
     public LottoGame() {
         lottos = new ArrayList<>();
@@ -32,7 +37,7 @@ public class LottoGame {
         if (buyAmount <= 0) {
             throw new MoneyNotEnoughException("Money is not enough to buy lotto");
         }
-        this.money = buyMoney;
+        this.buyMoney = buyMoney;
         for (int i = 0; i < buyAmount; i++) {
             Lotto lotto = new Lotto();
             lotto.createRandomNumber();
@@ -41,12 +46,15 @@ public class LottoGame {
     }
 
     public void lastWinningLotto(Lotto winningLotto) {
+        if (winningLotto.contain(bonusNumber)) {
+            throw new IllegalArgumentException("winning number can't contain bonus number");
+        }
         this.winLotto = winningLotto;
     }
 
     public void lottoWinners() {
         for (Lotto lotto : lottos) {
-            LottoPrize lottoPrize = lotto.getPrize(winLotto);
+            LottoPrize lottoPrize = lotto.getPrize(winLotto, bonusNumber);
             if (lottoPrize != null) {
                 lottoGameStatistics.put(lottoPrize, lottoGameStatistics.getOrDefault(lottoPrize, 0) + 1);
             }
@@ -61,7 +69,7 @@ public class LottoGame {
         if (winPrize == 0) {
             return 0;
         }
-        return ((float) winPrize / money.amount());
+        return ((float) winPrize / buyMoney.amount());
     }
 
 
@@ -77,4 +85,7 @@ public class LottoGame {
         return winLotto;
     }
 
+    public void setBonusNumber(Number bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
 }

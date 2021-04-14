@@ -24,6 +24,7 @@ class LottoTest {
     private Number testNumberE;
     private Number testNumberF;
     private Number testNumberG;
+    private Number bonusNumber;
 
     @BeforeEach
     void initializeNumbersTest() {
@@ -34,6 +35,7 @@ class LottoTest {
         testNumberE = new Number(12);
         testNumberF = new Number(22);
         testNumberG = new Number(35);
+        bonusNumber = new Number(45);
 
         List<Number> numberList = new ArrayList<>(Arrays.asList(testNumberA, testNumberB, testNumberC, testNumberD, testNumberE));
 
@@ -91,8 +93,17 @@ class LottoTest {
     void getPrizeTest() {
         testLotto.addNumber(testNumberF);
         Lotto loseLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(testLotto.getPrize(testLotto)).isEqualTo(LottoPrize.FIRST);
-        assertThat(loseLotto.getPrize(testLotto)).isEqualTo(null);
+        assertThat(testLotto.getPrize(testLotto, bonusNumber)).isEqualTo(LottoPrize.FIRST);
+        assertThat(loseLotto.getPrize(testLotto, bonusNumber)).isEqualTo(null);
+    }
 
+    @Test
+    @DisplayName("getPrize test : SecondPrize ")
+    void getSecondPrizeTest() {
+        testLotto.addNumber(testNumberF);
+        Lotto secondPrizeLotto = new Lotto("9,2,5,23,12,45");
+        Lotto thirdPrizeLotto = new Lotto("9,2,5,23,12,44");
+        assertThat(secondPrizeLotto.getPrize(testLotto, bonusNumber)).isEqualTo(LottoPrize.SECOND);
+        assertThat(thirdPrizeLotto.getPrize(testLotto, bonusNumber)).isEqualTo(LottoPrize.THIRD);
     }
 }
