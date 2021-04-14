@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.*;
 import lotto.domain.Number;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMain {
-
     public static void main(String[] args) {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
@@ -39,6 +38,7 @@ public class LottoMain {
 
         outputView.printLottoResult(resultData.rankMap());
         outputView.printRate(resultData.calculateWinRate());
+
 
     }
 }
