@@ -72,6 +72,5 @@ class LottoMachineTest {
 
         assertThat(outputData.rankMap().get(Rank.THIRD)).isEqualTo(1);
 
-
     }
 }

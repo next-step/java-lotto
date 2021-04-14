@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.enums.Rank;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class OutputView {
     private int lottoCount = 0;
@@ -16,7 +16,7 @@ public class OutputView {
     }
 
 
-    public void printLottoResult(HashMap<Rank, Integer> rankMap) {
+    public void printLottoResult(Map<Rank, Integer> rankMap) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.println("3개 일치(5,000원)- " + rankMap.get(Rank.FIFTH) + "개");

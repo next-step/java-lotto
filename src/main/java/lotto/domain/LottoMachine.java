@@ -5,11 +5,12 @@ import lotto.enums.Rank;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
 
     private List<LottoNumber> lottoNumbers;
-    private HashMap<Rank, Integer> winCountMap = new HashMap<>();
+    private Map<Rank, Integer> winCountMap = new HashMap<>();
     private Money expense;
 
     public LottoMachine(final List<LottoNumber> lottoNumbers, Money expense) {
@@ -45,7 +46,7 @@ public class LottoMachine {
         boolean existWinner = winCountMap.containsKey(rank);
         if (existWinner) {
             int existCount = winCountMap.get(rank);
-            winCountMap.put(rank, existCount++);
+            winCountMap.put(rank, ++existCount);
         }
 
         if (!existWinner) {
