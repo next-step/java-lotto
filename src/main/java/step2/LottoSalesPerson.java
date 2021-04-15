@@ -1,7 +1,5 @@
 package step2;
 
-import java.util.List;
-
 public class LottoSalesPerson {
     private static final int LOTTO_PRICE = 1_000;
     private final TheMethodOfPurchase purchase;
@@ -18,8 +16,7 @@ public class LottoSalesPerson {
         return purchasingAmount/LOTTO_PRICE;
     }
 
-    public List<LottoTicket> makeLotto(int theNumberOfLottoTicket){
-        LottoTickets lottoTickets = new LottoTickets(theNumberOfLottoTicket, lottoNumberGenerator);
-        return lottoTickets.getLottoCollection();
+    public LottoTickets makeLotto(int theNumberOfLottoTicket){
+        return new LottoTickets(theNumberOfLottoTicket, lottoNumberGenerator);
     }
 }

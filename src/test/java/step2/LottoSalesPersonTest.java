@@ -34,8 +34,9 @@ class LottoSalesPersonTest {
         LottoSalesPerson lottoSalesPerson = new LottoSalesPerson(new PurchaseTest(amount), new AutoLottoNumberGenerator());
 
         // when
-        List<LottoTicket> lottoCollection = lottoSalesPerson.makeLotto(expected);
-        int actual = lottoCollection.size();
+        LottoTickets lottoCollection = lottoSalesPerson.makeLotto(expected);
+        List<LottoTicket> lottoTickets = lottoCollection.getLottoCollection();
+        int actual = lottoTickets.size();
 
         // then
         assertEquals(expected, actual);
