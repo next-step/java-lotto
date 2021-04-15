@@ -33,4 +33,8 @@ public class PrizeMoney {
     public int getSumOfPrizeMoney(){
         return sumOfPrizeMoney;
     }
+
+    public double calculateEarningRatio(int purchasingAmount){
+        return (double) sumOfPrizeMoney/purchasingAmount;
+    }
 }
