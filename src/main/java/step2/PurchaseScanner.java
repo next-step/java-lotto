@@ -8,6 +8,7 @@ public class PurchaseScanner implements TheMethodOfPurchase {
     @Override
     public void input() {
         Scanner scan = new Scanner(System.in);
+        System.out.println("구입금액을 입력해 주세요.");
         amount = scan.nextInt();
     }
 
