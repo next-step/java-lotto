@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoTickets {
     private final int theNumberOfLottoTickets;
     private final LottoNumberGenerator lottoNumberGenerator;
-    private final List<LottoTicket> lottoCollection = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public LottoTickets(int theNumberOfLottoTickets, LottoNumberGenerator lottoNumberGenerator){
         this.theNumberOfLottoTickets = theNumberOfLottoTickets;
@@ -16,11 +16,15 @@ public class LottoTickets {
 
     private void generateLottoCollection(){
         for (int i = 0; i < theNumberOfLottoTickets; i++) {
-            lottoCollection.add(new LottoTicket(lottoNumberGenerator));
+            lottoTickets.add(new LottoTicket(lottoNumberGenerator));
         }
     }
 
-    public List<LottoTicket> getLottoCollection(){
-        return lottoCollection;
+    public List<LottoTicket> getLottoTickets(){
+        return lottoTickets;
+    }
+
+    public int getTheNumberOfLottoTickets() {
+        return theNumberOfLottoTickets;
     }
 }

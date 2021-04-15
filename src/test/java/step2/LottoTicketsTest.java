@@ -19,7 +19,7 @@ class LottoTicketsTest {
 
         // when
         LottoTickets lottoCollections = new LottoTickets(numberOfLotto, new AutoLottoNumberGenerator());
-        List<LottoTicket> lottoTickets = lottoCollections.getLottoCollection();
+        List<LottoTicket> lottoTickets = lottoCollections.getLottoTickets();
         int actual = lottoTickets.size();
 
         // then
@@ -35,7 +35,7 @@ class LottoTicketsTest {
 
         // when
         LottoTickets lottoCollection = new LottoTickets(expected.size(),lottoNumberGenerator);
-        List<LottoTicket> lottoTickets = lottoCollection.getLottoCollection();
+        List<LottoTicket> lottoTickets = lottoCollection.getLottoTickets();
         LottoTicket lottoNumbers = lottoTickets.get(0);
         List<Integer> actual = lottoNumbers.getLottoNumbers();
 

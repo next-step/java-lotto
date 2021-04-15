@@ -5,6 +5,7 @@ import step2.utils.ValidationUtils;
 import java.util.List;
 
 public class LottoTicket {
+    public static final int PRICE = 1_000;
     private final LottoNumberGenerator lottoNumberGenerator;
     private List<Integer> lottoNumbers;
 

@@ -35,7 +35,7 @@ class LottoSalesPersonTest {
 
         // when
         LottoTickets lottoCollection = lottoSalesPerson.makeLotto(expected);
-        List<LottoTicket> lottoTickets = lottoCollection.getLottoCollection();
+        List<LottoTicket> lottoTickets = lottoCollection.getLottoTickets();
         int actual = lottoTickets.size();
 
         // then

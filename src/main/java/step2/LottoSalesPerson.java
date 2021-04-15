@@ -1,9 +1,9 @@
 package step2;
 
 public class LottoSalesPerson {
-    private static final int LOTTO_PRICE = 1_000;
     private final TheMethodOfPurchase purchase;
     private final LottoNumberGenerator lottoNumberGenerator;
+    private int purchasingAmount;
 
     public LottoSalesPerson(TheMethodOfPurchase purchase, LottoNumberGenerator lottoNumberGenerator){
         this.purchase = purchase;
@@ -12,8 +12,12 @@ public class LottoSalesPerson {
 
     public int howManyBuyLotto(){
         purchase.input();
-        int purchasingAmount = purchase.getAmount();
-        return purchasingAmount/LOTTO_PRICE;
+        purchasingAmount = purchase.getAmount();
+        return purchasingAmount/LottoTicket.PRICE;
+    }
+
+    public int getPurchasingAmount(){
+        return purchasingAmount;
     }
 
     public LottoTickets makeLotto(int theNumberOfLottoTicket){

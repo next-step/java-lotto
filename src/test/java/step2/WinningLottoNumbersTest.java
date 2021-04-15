@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class WinningNumbersTest {
+class WinningLottoNumbersTest {
 
     @Test
     @DisplayName("당첨번호가 저장되는지 테스트")
@@ -21,8 +21,8 @@ class WinningNumbersTest {
         LottoNumberGenerator lottoNumberGenerator = new TestLottoNumberGenerator(numbers);
 
         // when
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumberGenerator);
-        List<Integer> actual = winningNumbers.getWinningNumbers();
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumberGenerator);
+        List<Integer> actual = winningLottoNumbers.getWinningNumbers();
 
         // then
         assertThat(actual).contains(1,2,45,11,7,17);
@@ -37,7 +37,7 @@ class WinningNumbersTest {
 
         // then
         assertThrows(RuntimeException.class, () -> {
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumberGenerator);
+            WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumberGenerator);
         });
     }
 
@@ -53,9 +53,9 @@ class WinningNumbersTest {
         // when
         List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,6);
         LottoNumberGenerator winningNumberGenerator = new TestLottoNumberGenerator(winningNumber);
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberGenerator);
-        winningNumbers.compareToWinningNumbers(myLotto);
-        Map<Integer, Integer> result = winningNumbers.getMatchCountMap();
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumberGenerator);
+        winningLottoNumbers.compareToWinningNumbers(myLotto);
+        Map<Integer, Integer> result = winningLottoNumbers.getMatchCountMap();
 
         // then
         int expected = numberOfLotto;

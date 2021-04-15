@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningNumbers {
+public class WinningLottoNumbers {
     private final LottoNumberGenerator lottoNumberGenerator;
     private List<Integer> winningNumbers = new ArrayList<>();
     private final Map<Integer, Integer> matchCountMap;
 
-    public WinningNumbers(LottoNumberGenerator lottoNumberGenerator){
+    public WinningLottoNumbers(LottoNumberGenerator lottoNumberGenerator){
         this.lottoNumberGenerator = lottoNumberGenerator;
         makeWinningNumbers();
         matchCountMap = initializeMatchCountMap();
@@ -38,7 +38,7 @@ public class WinningNumbers {
     }
 
     public void compareToWinningNumbers(LottoTickets lottoTickets){
-        List<LottoTicket> lottoCollections = lottoTickets.getLottoCollection();
+        List<LottoTicket> lottoCollections = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoCollections) {
             List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
             calculateMatchNumbers(lottoNumbers);
