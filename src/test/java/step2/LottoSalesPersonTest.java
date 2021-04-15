@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoSalesPerson;
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 
 import java.util.List;
 
