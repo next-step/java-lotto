@@ -14,8 +14,8 @@ class LottoPlacesTest {
     LottoPlaces places = LottoPlaces.create();
 
     // when
-    places = places.record(Rank.FIRST_COUNT_OF_MATCH, false);
-    places = places.record(Rank.SECOND_COUNT_OF_MATCH, true);
+    places = places.record(Rank.FIRST.getCountOfMatch(), false);
+    places = places.record(Rank.SECOND.getCountOfMatch(), true);
 
     // then
     assertThat(places.getValues())
