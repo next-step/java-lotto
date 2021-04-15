@@ -1,8 +1,8 @@
 package step2.view;
 
+import step2.domain.Prize;
 import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
-import step2.domain.PrizeMoney;
 import step2.utils.StringUtil;
 
 import java.util.List;
@@ -19,11 +19,11 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void showResult(Map<Integer, Integer> result, PrizeMoney prizeMoney){
+    public static void showResult(Map<Integer, Integer> result){
         System.out.println("당첨 통계\n---------");
 
-        for (int i = PrizeMoney.MATCH_NUMBERS_NEED_TO_FOURTH_GRADE; i <= PrizeMoney.MATCH_NUMBERS_NEED_TO_FIRST_GRADE; i++) {
-            System.out.println(i+"개 일치 ("+prizeMoney.getPrizeMoney(i)+") - "+result.get(i));
+        for (int i = Prize.FOURTH.getMatchNumber(); i <= Prize.FIRST.getMatchNumber(); i++) {
+            System.out.println(i+"개 일치 ("+ Prize.getPrize(i) +") - "+result.get(i));
         }
     }
 

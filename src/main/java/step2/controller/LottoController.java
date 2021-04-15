@@ -3,7 +3,7 @@ package step2.controller;
 import step2.*;
 import step2.domain.LottoSalesPerson;
 import step2.domain.LottoTickets;
-import step2.domain.PrizeMoney;
+import step2.domain.Prize;
 import step2.domain.WinningLottoNumbers;
 import step2.view.ResultView;
 
@@ -40,10 +40,9 @@ public class LottoController {
     }
 
     public void showResult(){
-        PrizeMoney prizeMoney = new PrizeMoney();
-        prizeMoney.calculateSumOfPrizeMoney(result);
-        double earningRatio = prizeMoney.calculateEarningRatio(lottoSalesPerson.getPurchasingAmount());
-        ResultView.showResult(result, prizeMoney);
+        int sumOfPrizeMoney = Prize.calculateSumOfPrizeMoney(result);
+        double earningRatio = Prize.calculateEarningRatio(sumOfPrizeMoney, lottoSalesPerson.getPurchasingAmount());
+        ResultView.showResult(result);
         ResultView.showEarningRatio(earningRatio);
     }
 }

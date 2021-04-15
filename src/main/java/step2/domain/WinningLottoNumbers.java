@@ -31,10 +31,10 @@ public class WinningLottoNumbers {
 
     private Map<Integer, Integer> initializeMatchCountMap(){
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(PrizeMoney.MATCH_NUMBERS_NEED_TO_FIRST_GRADE,0);
-        map.put(PrizeMoney.MATCH_NUMBERS_NEED_TO_SECOND_GRADE,0);
-        map.put(PrizeMoney.MATCH_NUMBERS_NEED_TO_THIRD_GRADE,0);
-        map.put(PrizeMoney.MATCH_NUMBERS_NEED_TO_FOURTH_GRADE,0);
+        map.put(Prize.FOURTH.getMatchNumber(),0);
+        map.put(Prize.THIRD.getMatchNumber(),0);
+        map.put(Prize.SECOND.getMatchNumber(),0);
+        map.put(Prize.FIRST.getMatchNumber(),0);
         return map;
     }
 
@@ -53,7 +53,7 @@ public class WinningLottoNumbers {
                 match++;
             }
         }
-        if(match>=PrizeMoney.MATCH_NUMBERS_NEED_TO_FOURTH_GRADE){
+        if(match>=Prize.FOURTH.getMatchNumber()){
             matchCountMap.put(match, matchCountMap.get(match)+1);
         }
     }

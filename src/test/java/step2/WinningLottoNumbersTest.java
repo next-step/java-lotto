@@ -3,7 +3,7 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoTickets;
-import step2.domain.PrizeMoney;
+import step2.domain.Prize;
 import step2.domain.WinningLottoNumbers;
 
 import java.util.Arrays;
@@ -62,7 +62,7 @@ class WinningLottoNumbersTest {
 
         // then
         int expected = numberOfLotto;
-        int actual = result.get(PrizeMoney.MATCH_NUMBERS_NEED_TO_FIRST_GRADE);
+        int actual = result.get(Prize.FIRST.getMatchNumber());
         assertEquals(expected, actual);
     }
 }
