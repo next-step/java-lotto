@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InputNumberGenerator implements LottoNumberGenerator{
+public class ManualNumberGenerator implements LottoNumberGenerator{
     @Override
     public List<Integer> generateNumbers() {
         Scanner scan = new Scanner(System.in);
