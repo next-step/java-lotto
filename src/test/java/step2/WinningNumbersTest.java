@@ -60,7 +60,7 @@ class WinningNumbersTest {
 
         // then
         int expected = numberOfLotto;
-        int actual = result.get(PrizeMoney.PRIZE_FIRST_GRADE);
+        int actual = result.get(PrizeMoney.MATCH_NUMBERS_NEED_TO_FIRST_GRADE);
         assertEquals(expected, actual);
     }
 }
