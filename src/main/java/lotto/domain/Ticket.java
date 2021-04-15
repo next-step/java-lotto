@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public class Ticket {
@@ -21,19 +22,23 @@ public class Ticket {
         return purchaseAmount - manualLottos.size() * Lotto.lottoPrice();
     }
 
+    public List<Rank> winningResults(WinningNumber winningNumber) {
+        List<Rank> result = new ArrayList<>();
+        result.addAll(new ArrayList<>(manualLottos.winningResults(winningNumber)));
+        result.addAll(new ArrayList<>(autoLottos.winningResults(winningNumber)));
+        return result;
+    }
+
+    public <R> R handleLottos(BiFunction<Lottos, Lottos, R> lottosFunction) {
+        return lottosFunction.apply(autoLottos, manualLottos);
+    }
+
     public int autoLottoSize() {
         return autoLottos.size();
     }
 
     public int manualLottoSize() {
         return manualLottos.size();
-    }
-
-    public List<Rank> winningResults(WinningNumber winningNumber) {
-        List<Rank> result = new ArrayList<>();
-        result.addAll(new ArrayList<>(manualLottos.winningResults(winningNumber)));
-        result.addAll(new ArrayList<>(autoLottos.winningResults(winningNumber)));
-        return result;
     }
 
     public Stream<Lotto> autoStream() {
@@ -43,6 +48,7 @@ public class Ticket {
     public Stream<Lotto> manualStream() {
         return this.manualLottos.stream();
     }
+
 }
 
 
