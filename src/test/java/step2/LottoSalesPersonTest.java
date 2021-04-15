@@ -2,6 +2,8 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoSalesPerson;
+import step2.domain.LottoTicket;
 
 import java.util.List;
 

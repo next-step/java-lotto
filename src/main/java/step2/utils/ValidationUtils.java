@@ -1,6 +1,8 @@
 package step2.utils;
 
 import step2.LottoNumberGenerator;
+import step2.exceptions.DuplicationLottoNumbers;
+import step2.exceptions.OutOfLottoNumberRange;
 
 import java.util.HashSet;
 import java.util.List;

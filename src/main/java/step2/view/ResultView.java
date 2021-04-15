@@ -1,8 +1,8 @@
 package step2.view;
 
-import step2.LottoTicket;
-import step2.LottoTickets;
-import step2.PrizeMoney;
+import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
+import step2.domain.PrizeMoney;
 import step2.utils.StringUtil;
 
 import java.util.List;

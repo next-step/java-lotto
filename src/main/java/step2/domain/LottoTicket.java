@@ -1,5 +1,6 @@
-package step2;
+package step2.domain;
 
+import step2.LottoNumberGenerator;
 import step2.utils.ValidationUtils;
 
 import java.util.List;

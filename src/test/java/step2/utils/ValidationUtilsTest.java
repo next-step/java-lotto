@@ -2,6 +2,8 @@ package step2.utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.exceptions.DuplicationLottoNumbers;
+import step2.exceptions.OutOfLottoNumberRange;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,7 @@
-package step2;
+package step2.domain;
+
+import step2.LottoNumberGenerator;
+import step2.TheMethodOfPurchase;
 
 public class LottoSalesPerson {
     private final TheMethodOfPurchase purchase;

@@ -1,4 +1,4 @@
-package step2.utils;
+package step2.exceptions;
 
 public class OutOfLottoNumberRange extends RuntimeException {
     public OutOfLottoNumberRange(String message){

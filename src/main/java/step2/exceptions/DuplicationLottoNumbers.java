@@ -1,4 +1,4 @@
-package step2.utils;
+package step2.exceptions;
 
 public class DuplicationLottoNumbers extends RuntimeException{
     public DuplicationLottoNumbers(){
