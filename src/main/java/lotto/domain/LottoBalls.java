@@ -21,7 +21,7 @@ public class LottoBalls {
     public static LottoBalls createWinningLottoBalls(List<Integer> lottoBallList) {
         validateSize(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::valueOf)
                 .collect(Collectors.toList()));
     }
 

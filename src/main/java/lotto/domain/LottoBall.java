@@ -22,12 +22,12 @@ public class LottoBall implements Comparable<LottoBall> {
     private final int number;
 
     public LottoBall(int number) {
+        validate(number);
         this.number = number;
     }
 
     public static LottoBall valueOf(int number) {
-        validate(number);
-        return LOTTO_BALL_CACHE.get(number - 1);
+        return new LottoBall(number);
     }
 
     private static void validate(int number) {
