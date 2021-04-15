@@ -33,7 +33,7 @@ class LottoTicketTest {
     LottoTicket lottoTicket = LottoTicket.toBuy(3_000, () -> IntStream.rangeClosed(1, 6)
             .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList()));
-    LottoBonusBall lottoBonusBall = LottoBonusBall.create(1);
+    LottoBonusBall lottoBonusBall = LottoBonusBall.valueOf(1);
 
     // when
     LottoPlaces places = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"), lottoBonusBall);

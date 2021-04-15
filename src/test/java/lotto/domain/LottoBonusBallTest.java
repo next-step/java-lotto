@@ -14,7 +14,7 @@ class LottoBonusBallTest {
     int number = 1;
 
     // when
-    LottoBonusBall bonusBall = LottoBonusBall.create(number);
+    LottoBonusBall bonusBall = LottoBonusBall.valueOf(number);
 
     // then
     assertThat(bonusBall).isEqualTo(LottoNumber.generate(1));

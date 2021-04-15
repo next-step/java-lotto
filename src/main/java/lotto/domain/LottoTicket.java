@@ -36,7 +36,7 @@ public class LottoTicket {
     return lottoPlaces;
   }
 
-  public int totalMoneySpent() {
+  public int totalSpentMoney() {
     return LOTTO_PRICE * ticketCount();
   }
 

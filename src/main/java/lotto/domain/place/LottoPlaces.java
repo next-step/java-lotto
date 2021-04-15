@@ -39,7 +39,7 @@ public class LottoPlaces {
     return values;
   }
 
-  public long totalWinMoney() {
+  public long totalWinningMoney() {
     return values.stream()
             .map(LottoPlace::getTotalWinningMoney)
             .reduce(Long::sum)

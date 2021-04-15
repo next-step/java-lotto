@@ -10,13 +10,13 @@ public class ResultView {
   private static final String RETURN_ON_INVESTMENT_FORMAT = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
   private static final String LOTTO_PLACES_RESULT_FORMAT = "%d개 일치 (%s원)- %s개\n";
 
-  public static void print(LottoPlaces places, long returnOnInvestment) {
+  public static void print(LottoPlaces places, long percentOfInvestment) {
     System.out.println(ALARM_WINNING_STATISTICS);
     System.out.println(INCISION_LINE);
 
     printPlaces(places);
 
-    System.out.format(RETURN_ON_INVESTMENT_FORMAT, convertMoneyFormatting(returnOnInvestment));
+    System.out.format(RETURN_ON_INVESTMENT_FORMAT, convertMoneyFormatting(percentOfInvestment));
   }
 
   public static void printPlaces(LottoPlaces places) {

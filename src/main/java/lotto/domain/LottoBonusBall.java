@@ -9,7 +9,7 @@ public class LottoBonusBall {
     this.value = value;
   }
 
-  public static LottoBonusBall create(int number) {
+  public static LottoBonusBall valueOf(int number) {
     return new LottoBonusBall(LottoNumber.generate(number));
   }
 
