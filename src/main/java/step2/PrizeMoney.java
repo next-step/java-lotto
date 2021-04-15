@@ -16,18 +16,34 @@ public class PrizeMoney {
     private int sumOfPrizeMoney = 0;
 
     public void calculateSumOfPrizeMoney(Map<Integer, Integer> result){
-        if(result.get(MATCH_NUMBERS_NEED_TO_FOURTH_GRADE)>0){
-            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_FOURTH_GRADE)*PRIZE_MONEY_FOR_FOURTH_GRADE;
-        }
-        if(result.get(MATCH_NUMBERS_NEED_TO_THIRD_GRADE)>0){
-            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_THIRD_GRADE)*PRIZE_MONEY_FOR_THIRD_GRADE;
+        if(result.get(MATCH_NUMBERS_NEED_TO_FIRST_GRADE)>0) {
+            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_FIRST_GRADE) * getPrizeMoney(MATCH_NUMBERS_NEED_TO_FIRST_GRADE);
         }
         if(result.get(MATCH_NUMBERS_NEED_TO_SECOND_GRADE)>0){
-            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_SECOND_GRADE)*PRIZE_MONEY_FOR_SECOND_GRADE;
+            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_SECOND_GRADE)*getPrizeMoney(MATCH_NUMBERS_NEED_TO_SECOND_GRADE);
         }
-        if(result.get(MATCH_NUMBERS_NEED_TO_FIRST_GRADE)>0){
-            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_FIRST_GRADE)*PRIZE_MONEY_FOR_FIRST_GRADE;
+        if(result.get(MATCH_NUMBERS_NEED_TO_THIRD_GRADE)>0){
+            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_THIRD_GRADE)*getPrizeMoney(MATCH_NUMBERS_NEED_TO_THIRD_GRADE);
         }
+        if(result.get(MATCH_NUMBERS_NEED_TO_FOURTH_GRADE)>0){
+            sumOfPrizeMoney += result.get(MATCH_NUMBERS_NEED_TO_FOURTH_GRADE)*getPrizeMoney(MATCH_NUMBERS_NEED_TO_FOURTH_GRADE);
+        }
+    }
+
+    public int getPrizeMoney(int matchNumbers){
+        if(matchNumbers==MATCH_NUMBERS_NEED_TO_FIRST_GRADE){
+            return PRIZE_MONEY_FOR_FIRST_GRADE;
+        }
+        if(matchNumbers==MATCH_NUMBERS_NEED_TO_SECOND_GRADE){
+            return PRIZE_MONEY_FOR_SECOND_GRADE;
+        }
+        if(matchNumbers==MATCH_NUMBERS_NEED_TO_THIRD_GRADE){
+            return PRIZE_MONEY_FOR_THIRD_GRADE;
+        }
+        if(matchNumbers==MATCH_NUMBERS_NEED_TO_FOURTH_GRADE){
+            return PRIZE_MONEY_FOR_FOURTH_GRADE;
+        }
+        return 0;
     }
 
     public int getSumOfPrizeMoney(){
