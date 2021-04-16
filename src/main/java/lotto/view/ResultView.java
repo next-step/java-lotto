@@ -7,6 +7,9 @@ import java.math.RoundingMode;
 import java.util.stream.Collectors;
 
 public class ResultView {
+
+    private ResultView() {}
+
     private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String RESULT_DELIMITER = "---------";
