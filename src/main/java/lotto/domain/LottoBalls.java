@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.exception.Message.DUPLICATION_MESSAGE;
 import static lotto.exception.Message.SIZE_MESSAGE;
 
 public class LottoBalls {
@@ -19,22 +20,25 @@ public class LottoBalls {
     }
 
     public static LottoBalls createWinningLottoBalls(List<Integer> lottoBallList) {
-        validateSize(lottoBallList);
+        validate(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
                 .map(LottoBall::valueOf)
                 .collect(Collectors.toList()));
     }
 
     public static LottoBalls of(List<Integer> lottoBallList) {
-        validateSize(lottoBallList);
+        validate(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
                 .map(LottoBall::valueOf)
                 .collect(Collectors.toList()));
     }
 
-    private static void validateSize(List<Integer> lottoBallList) {
+    private static void validate(List<Integer> lottoBallList) {
         if (lottoBallList.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(SIZE_MESSAGE);
+        }
+        if (lottoBallList.stream().distinct().count() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(DUPLICATION_MESSAGE);
         }
     }
 
