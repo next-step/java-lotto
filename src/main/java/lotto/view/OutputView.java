@@ -5,14 +5,23 @@ import lotto.enums.Rank;
 import java.util.Map;
 
 public class OutputView {
-    private int lottoCount = 0;
+    private int totalLottoCount = 0;
+    private int autoLottoCount = 0;
+    private int manualLottoCount = 0;
 
-    public OutputView(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public OutputView(int totalLottoCount, int autoLottoCount, int manualLottoCount) {
+        this(totalLottoCount);
+        this.autoLottoCount = autoLottoCount;
+        this.manualLottoCount = manualLottoCount;
     }
 
+    public OutputView(int totalLottoCount) {
+        this.totalLottoCount = totalLottoCount;
+    }
+
+
     public void printLottoCnt() {
-        System.out.println(this.lottoCount + "개를 구매했습니다.");
+        System.out.println("총 " + this.totalLottoCount + "장 구입, 수동으로 " + this.manualLottoCount + "장, 쟈동으로 " + this.autoLottoCount + "개를 구매했습니다.");
     }
 
 

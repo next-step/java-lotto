@@ -54,15 +54,6 @@ public class LottoMachine {
         }
     }
 
-
-    private int sumWinAmount(Rank rank) {
-        return rank.getWinningMoney();
-    }
-
-    private float calculateRate(Money winAmount, Money expense) {
-        return winAmount.won() / expense.won();
-    }
-
     private LottoNumber changedListIntegerToLottoNumber(List<Integer> lottoNumberList) {
         List<Number> numberList = new ArrayList<>();
 
@@ -71,7 +62,6 @@ public class LottoMachine {
         }
         return new LottoNumber(numberList);
     }
-
 
     private void printLotto() {
 

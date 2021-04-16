@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class WinLottoNumberTest {
@@ -191,14 +192,6 @@ class WinLottoNumberTest {
     @DisplayName("로또 번호 꽝 TEST")
     public void checkWinMissLottoTest() {
 
-        /*
-        Number number1 = new Number(3);
-        Number number2 = new Number(11);
-        Number number3 = new Number(12);
-        Number number4 = new Number(31);
-        Number number5 = new Number(34);
-        Number number6 = new Number(41);
-         */
         //given
         Number number1 = new Number(1);
         Number number2 = new Number(3);
@@ -224,4 +217,31 @@ class WinLottoNumberTest {
         assertThat(resultRank).isEqualTo(Rank.MISS);
     }
 
+
+    @Test
+    @DisplayName("1등로또와 보너스 번호가 중복이 있는지 확인")
+    void inspectDuplicationNumberTest(){
+
+        Number number1 = new Number(3);
+        Number number2 = new Number(11);
+        Number number3 = new Number(12);
+        Number number4 = new Number(31);
+        Number number5 = new Number(34);
+        Number number6 = new Number(41);
+        Number bonusNumber = new Number(12);
+
+        List<Number> winLottoNumberList = new ArrayList<>();
+        winLottoNumberList.add(number1);
+        winLottoNumberList.add(number2);
+        winLottoNumberList.add(number3);
+        winLottoNumberList.add(number4);
+        winLottoNumberList.add(number5);
+        winLottoNumberList.add(number6);
+
+        LottoNumber lottoNumber = new LottoNumber(winLottoNumberList);
+
+        assertThatThrownBy(() -> new WinLottoNumber(lottoNumber, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("중복된 1등 로또 번호가 있습니다.");
+    }
 }
