@@ -47,19 +47,8 @@ public class LottoBalls {
     }
 
     public int count(LottoBalls winningLottoBalls) {
-        int lottoCount = 0;
-        for (LottoBall winningLottoBall : winningLottoBalls.lottoBalls) {
-            lottoCount += check(winningLottoBall);
-        }
-        return lottoCount;
-    }
-
-    private int check(LottoBall winningLottoBall) {
-        int count = 0;
-        if (lottoBalls.contains(winningLottoBall)) {
-            count++;
-        }
-        return count;
+        return (int) lottoBalls.stream()
+                .filter(winningLottoBalls.lottoBalls::contains).count();
     }
 
     public List<LottoBall> getSortedLottoBalls() {
