@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
+    private static final int ROUNDING = 2;
     private final Map<Prize, Long> prizeResult;
 
     public LottoResult(Map<Prize, Long> prizeResult) {
@@ -25,7 +27,11 @@ public class LottoResult {
         return prizeResult.getOrDefault(prize, 0L);
     }
 
-    public BigDecimal profit() {
+    public BigDecimal earningRate(BigDecimal price) {
+        return profit().divide(price, ROUNDING, RoundingMode.HALF_EVEN);
+    }
+
+    private BigDecimal profit() {
         BigDecimal total = BigDecimal.ZERO;
         for (Map.Entry<Prize, Long> entry : prizeResult.entrySet()) {
             Prize prize = entry.getKey();
