@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Prize {
 
@@ -25,6 +26,10 @@ public enum Prize {
                 .filter(prize -> prize.winningCount == winningCount)
                 .findAny()
                 .orElseGet(() -> Prize.ZERO);
+    }
+
+    public static List<Prize> prizeList() {
+        return Arrays.asList(Prize.THREE, Prize.FOUR, Prize.FIVE, Prize.SIX);
     }
 
     public String getMessage() {

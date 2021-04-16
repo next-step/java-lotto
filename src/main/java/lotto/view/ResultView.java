@@ -33,10 +33,7 @@ public class ResultView {
         System.out.println();
         System.out.println(RESULT_MESSAGE);
         System.out.println(RESULT_DELIMITER);
-        printPrizeResult(result, Prize.THREE);
-        printPrizeResult(result, Prize.FOUR);
-        printPrizeResult(result, Prize.FIVE);
-        printPrizeResult(result, Prize.SIX);
+        System.out.println(prizeResult(result));
     }
 
     public static void printEarningRate(Money payment, LottoResult result) {
@@ -47,7 +44,15 @@ public class ResultView {
         }
     }
 
-    private static void printPrizeResult(LottoResult result, Prize prize) {
-        System.out.println(prize.getMessage() + " - " + result.counts(prize) + "개");
+    private static String prizeResult(LottoResult result) {
+        return Prize.prizeList()
+                .stream()
+                .map(prize -> printString(prize, result.counts(prize)))
+                .reduce("", String::concat);
+    }
+
+    private static String printString(Prize prize, long count) {
+        String format = "%s- %d개\n";
+        return String.format(format, prize.getMessage(), count);
     }
 }
