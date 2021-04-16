@@ -24,7 +24,7 @@ public enum Prize {
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.winningCount == winningCount)
                 .findAny()
-                .orElse(Prize.ZERO);
+                .orElseGet(() -> Prize.ZERO);
     }
 
     public String getMessage() {
