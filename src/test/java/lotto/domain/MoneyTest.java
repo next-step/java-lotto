@@ -19,7 +19,8 @@ class MoneyTest {
     @DisplayName("생성자 예외 테스트")
     void validate() {
         assertThatThrownBy(() -> Money.of(900))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("최소 금액은 1000원 입니다.");
     }
 
     @Test
@@ -34,6 +35,8 @@ class MoneyTest {
     @Test
     @DisplayName("비정상 구매 예외 테스트")
     void validate_purchase() {
-        assertThatThrownBy(() -> Money.of(900).purchase()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Money.of(900).purchase())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("최소 금액은 1000원 입니다.");
     }
 }
