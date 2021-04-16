@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -24,11 +25,11 @@ public class LottoResult {
         return prizeResult.getOrDefault(prize, 0L);
     }
 
-    public double profit() {
-        long total = 0;
+    public BigDecimal profit() {
+        BigDecimal total = new BigDecimal(0);
         for (Map.Entry<Prize, Long> entry : prizeResult.entrySet()) {
             Prize prize = entry.getKey();
-            total += prize.getReward() * entry.getValue();
+            total = total.add(BigDecimal.valueOf(prize.getReward() * entry.getValue()));
         }
         return total;
     }

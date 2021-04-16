@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -37,9 +38,9 @@ public class ResultView {
 
     public static void printEarningRate(Money payment, LottoResult result) {
         int price = payment.getMoney();
-        double earningRate = result.profit() / price;
-        System.out.printf("총 수익률은 %.2f입니다.",earningRate);
-        if (earningRate < 1) {
+        BigDecimal earningRate = (result.profit()).divide(BigDecimal.valueOf(price), 2, BigDecimal.ROUND_CEILING);
+        System.out.printf("총 수익률은 %.2f입니다.", earningRate);
+        if (earningRate.intValue() < 1) {
             System.out.println(PROFIT_MESSAGE);
         }
     }
