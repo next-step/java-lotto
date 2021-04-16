@@ -15,18 +15,19 @@ public class LottoPlaces {
 
   public static LottoPlaces create() {
     List<LottoPlace> list = Arrays.asList(
-              LottoFourthPlace.create()
-            , LottoThirdPlace.create()
-            , LottoSecondPlace.create()
-            , LottoFirstPlace.create()
+            LottoFifthPlace.create(),
+            LottoFourthPlace.create(),
+            LottoThirdPlace.create(),
+            LottoSecondPlace.create(),
+            LottoFirstPlace.create()
     );
     return new LottoPlaces(list);
   }
 
-  public LottoPlaces record(int matchedLottoNumberCount) {
+  public LottoPlaces record(int countOfMatch, boolean matchBonus) {
     List<LottoPlace> result = new ArrayList<>();
     for (LottoPlace lottoPlace : values) {
-      if (lottoPlace.matchedLottoNumberCount(matchedLottoNumberCount)) {
+      if (lottoPlace.isMatch(countOfMatch, matchBonus)) {
         lottoPlace = lottoPlace.win();
       }
       result.add(lottoPlace);
@@ -38,9 +39,9 @@ public class LottoPlaces {
     return values;
   }
 
-  public long totalWinMoney() {
+  public long totalWinningMoney() {
     return values.stream()
-            .map(LottoPlace::getTotalMoney)
+            .map(LottoPlace::getTotalWinningMoney)
             .reduce(Long::sum)
             .orElse(0L);
   }

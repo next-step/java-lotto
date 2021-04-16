@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStore;
+import lotto.domain.LottoBonusBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWiningNumbers;
 import lotto.domain.place.LottoPlaces;
@@ -17,14 +17,13 @@ public class LottoApplication {
     String lottoWiningNumbersString = InputView.writeLottoWiningNumbersString();
     LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(lottoWiningNumbersString);
 
-    LottoStore store = LottoStore.open(lottoWiningNumbers)
-            .exchange(boughtLottoTicket);
+    int lottoBonusBallNumber = InputView.writeBonusBall();
 
-    long totalWinMoney = store.totalWinMoney();
-    long returnOnInvestment = totalWinMoney / boughtLottoTicket.totalMoneySpent();
+    LottoBonusBall bonusBall = LottoBonusBall.valueOf(lottoBonusBallNumber);
+    LottoPlaces places = boughtLottoTicket.getMatchedLottoPlaces(lottoWiningNumbers, bonusBall);
 
-    LottoPlaces places = store.getLottoPlaces();
-
-    ResultView.print(places, returnOnInvestment);
+    long percentOfInvestment = places.totalWinningMoney()
+            / boughtLottoTicket.totalSpentMoney();
+    ResultView.print(places, percentOfInvestment);
   }
 }

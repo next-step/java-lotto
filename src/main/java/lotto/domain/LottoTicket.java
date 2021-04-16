@@ -26,16 +26,17 @@ public class LottoTicket {
     return new LottoTicket(lottoNumbers);
   }
 
-  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers) {
+  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers, LottoBonusBall lottoBonusBall) {
     LottoPlaces lottoPlaces = LottoPlaces.create();
     for (LottoNumbers lottoNumbers : values) {
-      int matchedLottoNumberCount = lottoWiningNumbers.matchLottoNumber(lottoNumbers);
-      lottoPlaces = lottoPlaces.record(matchedLottoNumberCount);
+      int countOfMatch = lottoWiningNumbers.countOfMatch(lottoNumbers);
+      boolean matchBonus = lottoBonusBall.isMatch(lottoNumbers);
+      lottoPlaces = lottoPlaces.record(countOfMatch, matchBonus);
     }
     return lottoPlaces;
   }
 
-  public int totalMoneySpent() {
+  public int totalSpentMoney() {
     return LOTTO_PRICE * ticketCount();
   }
 
