@@ -5,7 +5,8 @@ import java.util.Objects;
 import static lotto.exception.Message.MONEY_MESSAGE;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
+
+    private static final int LOTTO_PRICE = 1000;
     private final int money;
 
     private Money(int money) {
