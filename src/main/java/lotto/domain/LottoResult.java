@@ -26,7 +26,7 @@ public class LottoResult {
     }
 
     public BigDecimal profit() {
-        BigDecimal total = new BigDecimal(0);
+        BigDecimal total = BigDecimal.ZERO;
         for (Map.Entry<Prize, Long> entry : prizeResult.entrySet()) {
             Prize prize = entry.getKey();
             total = total.add(BigDecimal.valueOf(prize.getReward() * entry.getValue()));
