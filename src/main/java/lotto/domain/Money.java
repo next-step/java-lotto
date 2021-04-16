@@ -2,7 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.exception.Message.MONEY_MESSAGE;
+import static lotto.exception.Message.INPUT_MONEY_MESSAGE;
+import static lotto.exception.Message.MINIMUM_MONEY_MESSAGE;
 
 public class Money {
 
@@ -20,7 +21,10 @@ public class Money {
 
     private void validate(int payment) {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException(MONEY_MESSAGE);
+            throw new IllegalArgumentException(MINIMUM_MONEY_MESSAGE);
+        }
+        if (payment % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(INPUT_MONEY_MESSAGE);
         }
     }
 

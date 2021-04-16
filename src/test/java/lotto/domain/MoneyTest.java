@@ -33,10 +33,18 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("비정상 구매 예외 테스트")
-    void validate_purchase() {
+    @DisplayName("비정상 구매 예외 테스트 - 최소 금액")
+    void validate_minimum_purchase() {
         assertThatThrownBy(() -> Money.of(900).purchase())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("최소 금액은 1000원 입니다.");
+    }
+
+    @Test
+    @DisplayName("비정상 구매 예외 테스트 - 단위 금액")
+    void validate_input_purchase() {
+        assertThatThrownBy(() -> Money.of(1500).purchase())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("금액은 1000원 단위 입니다.");
     }
 }
