@@ -10,7 +10,13 @@ public class OperandIntegers {
     private final List<OperandInteger> operandIntegers;
 
     public OperandIntegers(String[] inputIntegers) {
-        this(Arrays.stream(inputIntegers).map(OperandInteger::new).collect(Collectors.toList()));
+        this.operandIntegers = createOperandIntegers(inputIntegers);
+    }
+
+    private List<OperandInteger> createOperandIntegers(String[] inputIntegers) {
+        return Arrays.stream(inputIntegers)
+                .map(OperandInteger::new)
+                .collect(Collectors.toList());
     }
 
     public OperandIntegers(List<OperandInteger> operandIntegers) {
