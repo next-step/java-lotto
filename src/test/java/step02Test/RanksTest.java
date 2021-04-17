@@ -3,10 +3,8 @@ package step02Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.Rank;
-import step02.Ranks;
-
-import java.util.Arrays;
+import step02.model.rank.Rank;
+import step02.model.rank.Ranks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

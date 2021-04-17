@@ -2,7 +2,11 @@ package step02Test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.*;
+import step02.dto.LottoResultDTO;
+import step02.model.lotto.LottoNumber;
+import step02.model.lotto.LottoNumbers;
+import step02.model.lotto.Lottos;
+import step02.model.numberRule.InputNumberRule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

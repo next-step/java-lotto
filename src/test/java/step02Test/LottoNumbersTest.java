@@ -3,9 +3,9 @@ package step02Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.InputNumberRule;
-import step02.LottoNumber;
-import step02.LottoNumbers;
+import step02.model.numberRule.InputNumberRule;
+import step02.model.lotto.LottoNumber;
+import step02.model.lotto.LottoNumbers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

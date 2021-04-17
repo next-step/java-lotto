@@ -1,4 +1,7 @@
-package step02;
+package step02.dto;
+
+import step02.model.rank.Rank;
+import step02.model.rank.Ranks;
 
 public class LottoResultDTO {
 

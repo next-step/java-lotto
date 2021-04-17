@@ -1,9 +1,14 @@
-package step02;
+package step02.model.lotto;
+
+import step02.dto.LottosDTO;
+import step02.model.numberRule.NumberRule;
+import step02.model.rank.Rank;
+import step02.model.rank.Ranks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class Lottos {
     private List<LottoNumbers> lottos = new ArrayList<>();

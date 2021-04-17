@@ -1,10 +1,10 @@
-package step02;
+package step02.model.numberRule;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class InputNumberRule extends NumberRule {
     List<Integer> inputNumber;

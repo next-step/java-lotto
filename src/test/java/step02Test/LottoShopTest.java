@@ -1,8 +1,8 @@
 package step02Test;
 
 import org.junit.jupiter.api.BeforeEach;
-import step02.InputNumberRule;
-import step02.LottoShop;
+import step02.model.numberRule.InputNumberRule;
+import step02.model.lotto.LottoShop;
 
 public class LottoShopTest {
 

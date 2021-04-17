@@ -1,6 +1,6 @@
-package step02;
+package step02.utils;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class Validation {
 

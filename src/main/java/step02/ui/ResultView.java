@@ -1,6 +1,9 @@
-package step02;
+package step02.ui;
 
-import static step02.LottoConfig.*;
+import step02.dto.LottoResultDTO;
+import step02.dto.LottosDTO;
+
+import static step02.utils.LottoConfig.*;
 
 public class ResultView {
 

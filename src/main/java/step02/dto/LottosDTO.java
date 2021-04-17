@@ -1,8 +1,11 @@
-package step02;
+package step02.dto;
+
+import step02.model.lotto.LottoCount;
+import step02.model.lotto.LottoNumbers;
 
 import java.util.List;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class LottosDTO {
     private List<LottoNumbers> lottos;

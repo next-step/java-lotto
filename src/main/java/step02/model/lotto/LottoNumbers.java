@@ -1,10 +1,14 @@
-package step02;
+package step02.model.lotto;
+
+import step02.model.numberRule.NumberRule;
+import step02.utils.Validation;
+import step02.dto.LottoNumbersDTO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class LottoNumbers {
 

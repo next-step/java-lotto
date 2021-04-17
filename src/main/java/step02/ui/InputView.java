@@ -1,8 +1,8 @@
-package step02;
+package step02.ui;
 
 import java.util.Scanner;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);

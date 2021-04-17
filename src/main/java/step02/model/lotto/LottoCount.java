@@ -1,4 +1,4 @@
-package step02;
+package step02.model.lotto;
 
 public class LottoCount {
     private final int count;

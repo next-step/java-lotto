@@ -1,6 +1,10 @@
-package step02;
+package step02.model.lotto;
 
-import static step02.LottoConfig.*;
+import step02.model.rank.Rank;
+import step02.model.rank.Ranks;
+import step02.utils.Validation;
+
+import static step02.utils.LottoConfig.*;
 
 public class LottoPrice {
     private final int buyPrice;
