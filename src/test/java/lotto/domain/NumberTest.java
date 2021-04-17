@@ -25,4 +25,6 @@ class NumberTest {
         assertThat(number.number()).isEqualTo(45);
     }
 
+
+
 }

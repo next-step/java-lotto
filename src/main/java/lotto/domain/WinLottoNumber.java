@@ -11,12 +11,27 @@ public class WinLottoNumber {
     private int duplicationCount = 0;
 
     public WinLottoNumber(LottoNumber winLottoNumber, Number bonusNumber) {
+        inspectDuplicationNumber(winLottoNumber, bonusNumber);
         this.bonusNumber = bonusNumber;
         this.winLottoNumber = winLottoNumber;
         checkWinLotto();
     }
 
+    private void inspectDuplicationNumber(LottoNumber winLottoNumber, Number bonusNumber) {
+        for (Number number : winLottoNumber.numbers()) {
+            compareNumbers(number, bonusNumber);
+        }
+    }
+
+    private void compareNumbers(Number number, Number bonusNumber) {
+        if (number.number() == bonusNumber.number()) {
+            throw new IllegalArgumentException("중복된 1등 로또 번호가 있습니다.");
+        }
+    }
+
+
     public Rank duplicationLottoRank(LottoNumber lottoNumber) {
+        duplicationCount = 0;
         for (Number number : lottoNumber.numbers()) {
             increaseCountAndCheckBonusNumber(number);
         }

@@ -2,14 +2,14 @@ package lotto.domain;
 
 import lotto.enums.Rank;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class OutputData {
 
     private Money expense;
-    private HashMap<Rank, Integer> rankMap;
+    private Map<Rank, Integer> rankMap;
 
-    public OutputData(HashMap<Rank, Integer> rankMap, Money expense) {
+    public OutputData(Map<Rank, Integer> rankMap, Money expense) {
         this.rankMap = rankMap;
         this.expense = expense;
     }
@@ -18,7 +18,7 @@ public class OutputData {
         return sumWinAmount() / this.expense.won();
     }
 
-    public HashMap<Rank, Integer> rankMap() {
+    public Map<Rank, Integer> rankMap() {
         return this.rankMap;
     }
 
