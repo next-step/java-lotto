@@ -77,5 +77,21 @@ public class TicketTest {
         assertThat(resultManualSize).isEqualTo(expectManualSize);
     }
 
+    @Test
+    public void Enum을_이용한_size() {
+        // given
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Ticket expectTicket = new Ticket(2, new Lottos(Arrays.asList(lotto1, lotto2)));
+        int expectAutoSize = 0;
+        int expectManualSize = 2;
+        // when
+        int resultAutoSize = expectTicket.lottoSize(LottoKinds.AUTO);
 
+        int resultManualSize = expectTicket.lottoSize(LottoKinds.MANUAL);
+
+        // then
+        assertThat(resultAutoSize).isEqualTo(expectAutoSize);
+        assertThat(resultManualSize).isEqualTo(expectManualSize);
+    }
 }

@@ -32,6 +32,17 @@ public class Ticket {
         return lottosFunction.apply(autoLottos, manualLottos);
     }
 
+    public int lottoSize(LottoKinds kinds) {
+        if (kinds.equals(LottoKinds.MANUAL)) {
+            return manualLottos.size();
+        }
+
+        if (kinds.equals(LottoKinds.AUTO)) {
+            return autoLottos.size();
+        }
+
+        return 0;
+    }
 }
 
 
