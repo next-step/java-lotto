@@ -9,12 +9,18 @@ public class InputView {
 
     public static int inputPurchaseAmount() {
         System.out.println("구매 금액을 입력해주세요.");
-        return SCANNER.nextInt();
+        int result =  SCANNER.nextInt();
+        clearInputBuffer();
+        return result;
     }
 
     public static String inputWinNumber(){
         System.out.println("지난주 당첨 번호 6개 입력해 주세요. ex) 1, 2, 3, 4, 5, 6");
         return SCANNER.nextLine();
+    }
+
+    private static void clearInputBuffer() {
+        SCANNER.nextLine();
     }
 
 

@@ -1,14 +1,14 @@
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.Statistic;
+import lotto.dto.InfoDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LottoTest {
 
@@ -89,7 +89,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("맞은 개수들 반환")
+    @DisplayName("lotto 맞은 개수들 반환")
     public void get_correct_numbers(){
         lottos.calculatePurchaseNum(5000);
         lottos.initializeLottoNumbers();
@@ -98,4 +98,18 @@ public class LottoTest {
         System.out.println(correctNumbers);
     }
 
+    @Test
+    @DisplayName("각 lotto 의 맞은개수를 받아 통계를 잘 추합하는지 확인")
+    public void lotto_statistic(){
+        Map<Long, Integer> statistic = lottos.statistic(Arrays.asList(3L, 3L, 3L, 4L, 5L, 3L));
+        Assertions.assertThat(statistic.get(3L)).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("통계 내용을 잘 전달하는지 확인")
+    public void statistic(){
+        Map<Long, Integer> statistic = lottos.statistic(Arrays.asList(3L, 3L, 3L, 4L, 5L, 3L));
+        Statistic lottoStatistic = new Statistic(6000,statistic);
+        Assertions.assertThat(lottoStatistic.getInfoDtos().size()).isEqualTo(4);
+    }
 }

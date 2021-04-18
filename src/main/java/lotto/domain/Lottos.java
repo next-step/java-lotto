@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -66,8 +63,15 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-//    public HashMap<Integer,Integer> correctNumbersHashMap(List<Long> correctNumbersForEachLotto){
-//
-//    }
+    public Map<Long, Integer> statistic(List<Long> countLottoForEachCorrectNum){
+            Map<Long,Integer> statistic = new HashMap<>();
+
+            countLottoForEachCorrectNum
+                    .forEach(correctNum -> {
+                         statistic.put(correctNum,statistic.getOrDefault(correctNum, 0) + 1);
+                    });
+
+            return statistic;
+    }
 
 }

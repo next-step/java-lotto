@@ -1,3 +1,7 @@
+package calculator;
+
+import calculator.NotValidCalculatorValue;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
