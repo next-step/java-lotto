@@ -5,11 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TicketTest {
     Ticket testTicket;
+    private final BiFunction<Lottos, Lottos, Integer> autoLottoSize = (autoLottos, manualLottos) -> {
+        return autoLottos.size();
+    };
+    private final BiFunction<Lottos, Lottos, Integer> manualLottoSize = (autoLottos, manualLottos) -> {
+        return manualLottos.size();
+    };
 
     @BeforeEach
     public void setTicket() {
@@ -26,7 +33,7 @@ public class TicketTest {
         // given
         int expectAutoSize = 2;
         // when
-        int resultAutoSize = testTicket.autoLottoSize();
+        int resultAutoSize = testTicket.handleLottos(autoLottoSize);
         // then
         assertThat(resultAutoSize).isEqualTo(expectAutoSize);
     }
@@ -36,7 +43,7 @@ public class TicketTest {
         // given
         int expectManualSize = 3;
         // when
-        int resultManualSize = testTicket.manualLottoSize();
+        int resultManualSize = testTicket.handleLottos(manualLottoSize);
         // then
         assertThat(resultManualSize).isEqualTo(expectManualSize);
     }
@@ -61,12 +68,14 @@ public class TicketTest {
         int expectAutoSize = 0;
         int expectManualSize = 2;
         // when
-        int resultAutoSize = expectTicket.autoLottoSize();
-        int resultManualSize = expectTicket.manualLottoSize();
+        int resultAutoSize = expectTicket.handleLottos(autoLottoSize);
+
+        int resultManualSize = expectTicket.handleLottos(manualLottoSize);
 
         // then
         assertThat(resultAutoSize).isEqualTo(expectAutoSize);
         assertThat(resultManualSize).isEqualTo(expectManualSize);
     }
+
 
 }
