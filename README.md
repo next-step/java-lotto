@@ -23,9 +23,16 @@
         * 로또 1회 생성자(6개의 LottoNumber(1~45 까지의 숫자)를 갖고 있음)
         * 당첨결과(param : WinningNumbers, return : Rank)
     * Lottos
-        * 로또 n회 생성자(n = 구매금액 / 로또 가격)
-        * 구매금액
+        * 로또 자동 생성자(n = 구매금액)
+        * 로또 수동 생성자(List<Lotto> manualLottos)
+        * size
         * 당첨결과(param :WinningNumbers, return : List\<Rank\>)
+    * Ticket
+        * instance 변수 : autoLottos, manualLottos
+        * Ticket 생성자(autoLottos, manualLottos)
+        * autoLottosSize
+        * manualLottosSize
+        * total당첨결과
     * WinningNumber
         * 게임 당첨 번호 생성자(input된 당첨 번호)
         * 보너스 당첨번호 생성자(input된 보너스 번호)
@@ -59,7 +66,16 @@
 ```
 구입금액을 입력해 주세요.
 14000
-14개를 구매했습니다.
+
+수동으로 구매할 로또 수를 입력해 주세요.
+3
+
+수동으로 구매할 번호를 입력해 주세요.
+8, 21, 23, 41, 42, 43
+3, 5, 11, 16, 32, 38
+7, 11, 16, 35, 36, 44
+
+수동으로 3장, 자동으로 11개를 구매했습니다.
 [8, 21, 23, 41, 42, 43]
 [3, 5, 11, 16, 32, 38]
 [7, 11, 16, 35, 36, 44]

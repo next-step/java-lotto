@@ -24,7 +24,7 @@ public class RankTest {
 
     @ParameterizedTest
     @MethodSource("valueOfRank")
-    public void valueOf(int matchCount, Boolean isBonusMatch, Rank expectRank) {
+    public void valueOf(int matchCount, boolean isBonusMatch, Rank expectRank) {
         // given
 
         // when

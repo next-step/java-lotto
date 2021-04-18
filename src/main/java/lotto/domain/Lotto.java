@@ -11,7 +11,7 @@ public class Lotto {
     private final static int NUMBER_OF_LOTTO_NUMBERS = 6;
     private final static int LOTTO_PRICE = 1000;
 
-    private static List<Integer> lottoNumbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
+    private final static List<Integer> lottoNumbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
     private final List<Integer> lotto;
 
 
@@ -19,15 +19,15 @@ public class Lotto {
         this(randomNumberGenerate());
     }
 
-    public Lotto(List<Integer> randomNumbers) {
-        this.lotto = randomNumbers;
+    public Lotto(List<Integer> numbers) {
+        this.lotto = numbers;
     }
 
     public Rank winningResult(WinningNumber winningNumber) {
         int matchCount = (int) winningNumber.stream()
                 .filter(this.lotto::contains)
                 .count();
-        Boolean isBonusMatch = this.lottoNumbers.contains(winningNumber.getBonusNumber());
+        boolean isBonusMatch = winningNumber.isContained(this.lotto);
         return Rank.valueOf(matchCount, isBonusMatch);
     }
 

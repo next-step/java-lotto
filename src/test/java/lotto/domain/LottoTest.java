@@ -14,18 +14,22 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoTest {
 
-    private static Stream<Arguments> winningResultParameters() {
+    private static Stream<Arguments> lottoParameters() {
         return Stream.of(
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 7), Rank.THIRD)
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.SECOND),
+                arguments(Arrays.asList(2, 3, 4, 5, 6, 7), Rank.FIRST),
+                arguments(Arrays.asList(3, 4, 5, 6, 7, 8), Rank.THIRD),
+                arguments(Arrays.asList(4, 5, 6, 7, 8, 9), Rank.FOURTH),
+                arguments(Arrays.asList(5, 6, 7, 8, 9, 10), Rank.FIFTH),
+                arguments(Arrays.asList(6, 7, 8, 9, 10, 11), Rank.OTHER)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("winningResultParameters")
+    @MethodSource("lottoParameters")
     public void winningResult(List<Integer> inputNumbers, Rank expectRank) {
         // given
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(2, 3, 4, 5, 6, 7), 1);
         Lotto lotto = new Lotto(inputNumbers);
 
         // when
@@ -33,25 +37,6 @@ public class LottoTest {
 
         // then
         assertThat(resultRank).isEqualTo(expectRank);
-    }
-
-
-    @Test
-    public void winningResults() {
-        // given
-        List<Rank> expectRanks = Arrays.asList(Rank.FIRST, Rank.OTHER);
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumber winningNumber = new WinningNumber(winningNumbers);
-        Lotto firstLotto = new Lotto(winningNumbers);
-        Lotto otherLotto = new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13));
-        List<Lotto> lottoList = Arrays.asList(firstLotto, otherLotto);
-        Lottos lottos = new Lottos(lottoList);
-
-        // when
-        List<Rank> resultRanks = lottos.winningResults(winningNumber);
-
-        // then
-        assertThat(resultRanks).isEqualTo(expectRanks);
     }
 
     @Test
