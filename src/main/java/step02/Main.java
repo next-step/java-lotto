@@ -10,9 +10,9 @@ public class Main {
     public static void main(String[] args) {
         LottoShop lottoShop = new LottoShop();
 
-        LottosDTO lottos = lottoShop.buyLotto(new RandomNumberRule());
-        ResultView.showBuyLottoResult(lottos);
+        LottosDTO lottos = lottoShop.buyLotto();
 
+        ResultView.showBuyLottoResult(lottos);
         ResultView.showLottoWinnerResult(lottoShop.showLottoResult());
     }
 }

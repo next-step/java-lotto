@@ -1,20 +1,24 @@
 package step02.model.lotto;
 
-import step02.model.numberRule.InputNumberRule;
-import step02.model.numberRule.NumberRule;
-import step02.model.rank.Ranks;
 import step02.dto.LottoResultDTO;
 import step02.dto.LottosDTO;
+import step02.model.numberRule.InputNumberRule;
+import step02.model.rank.Ranks;
 import step02.ui.InputView;
 
 public class LottoShop {
     private Lottos lottos;
     private LottoPrice price;
 
-    public LottosDTO buyLotto(NumberRule numberRule) {
+    public LottosDTO buyLotto() {
         price = new LottoPrice(InputView.inputMoney());
-        lottos = new Lottos(LottoPrice.calculationCount(price));
-        lottos.makeLotto(numberRule);
+
+        lottos = new Lottos();
+
+        lottos.setLottoCount(price.calculationCount());
+        lottos.makeManualLotto();
+        lottos.makeAutomaticLotto();
+
         return lottos.getLottoResult();
     }
 

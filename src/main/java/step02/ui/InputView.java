@@ -23,4 +23,15 @@ public class InputView {
         System.out.println(INPUT_BONUS_BALL);
         return scanner.nextInt();
     }
+
+    public static int inputManualLottoCount() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT);
+        return scanner.nextInt();
+    }
+
+    public static String inputManualLotto(int count) {
+        System.out.println(INPUT_MANUAL_NUMBER);
+        return scanner.next();
+
+    }
 }

@@ -10,7 +10,7 @@ public class ResultView {
     private ResultView() {}
 
     public static void showBuyLottoResult(LottosDTO lottosDTO) {
-        System.out.printf(RESULT_BUY_N_COUNT + LINE_BRAKE, lottosDTO.getLottoCount());
+        System.out.printf(RESULT_BUY_N_COUNT + LINE_BRAKE, lottosDTO.getManualLottoCount(), lottosDTO.getAutomaticLottoCount());
         System.out.println(lottosDTO.getLottosToString());
     }
 

@@ -25,4 +25,10 @@ public class Validation {
         }
     }
 
+    public static void checkMakeableLotto(int totalCount, int count) {
+        if (totalCount < count) {
+            throw new IllegalArgumentException(ERROR_OUT_OF_TOTAL_COUNT);
+        }
+    }
+
 }

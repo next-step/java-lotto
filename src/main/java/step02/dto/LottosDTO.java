@@ -32,7 +32,11 @@ public class LottosDTO {
         this.lottoCount = lottoCount;
     }
 
-    public int getLottoCount() {
-        return lottoCount.getCount();
+    public int getManualLottoCount() {
+        return this.lottoCount.getManualCount();
+    }
+
+    public int getAutomaticLottoCount() {
+        return this.lottoCount.getAutomaticCount();
     }
 }

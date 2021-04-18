@@ -14,8 +14,8 @@ public class LottoPrice {
         this.buyPrice = price;
     }
 
-    public static int calculationCount(LottoPrice price) {
-        return price.buyPrice / LOTTO_PRICE;
+    public int calculationCount() {
+        return buyPrice / LOTTO_PRICE;
     }
 
     public static double calculateTotalReward(LottoPrice price, Ranks ranks) {

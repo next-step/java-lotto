@@ -33,4 +33,12 @@ public class ValidationTest {
                 Validation.checkMinPrice(500))
                 .isInstanceOf(Exception.class).hasMessage("최소 구매 금액은 1000원 입니다.");
     }
+
+    @Test
+    @DisplayName("총 수량이 만들려고 하는 수량보다 큰지 테스트")
+    void checkMackableLotto() {
+        assertThatThrownBy(() ->
+                Validation.checkMakeableLotto(10, 11))
+                .isInstanceOf(Exception.class).hasMessage("총 구매 수량보다 많습니다.");
+    }
 }
