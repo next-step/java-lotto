@@ -5,31 +5,17 @@ import step02.model.lotto.LottoNumbers;
 
 import java.util.List;
 
-import static step02.utils.LottoConfig.*;
-
 public class LottosDTO {
-    private List<LottoNumbers> lottos;
-    private LottoCount lottoCount;
+    private final List<LottoNumbers> lottos;
+    private final LottoCount lottoCount;
 
-
-    public void setLottos(List<LottoNumbers> lottoNumbers) {
-        this.lottos = lottoNumbers;
-    }
-
-    public String getLottosToString() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (LottoNumbers lottoNumbers : lottos) {
-            stringBuilder.append(START_LOTTO_SYMBOL)
-                    .append(lottoNumbers.getLottoNumbersResult().getLottoNumbersToString())
-                    .append(END_LOTTO_SYMBOL)
-                    .append(LINE_BRAKE);
-        }
-        return stringBuilder.toString();
-    }
-
-    public void setLottoCount(LottoCount lottoCount) {
+    public LottosDTO(List<LottoNumbers> lottos, LottoCount lottoCount) {
+        this.lottos = lottos;
         this.lottoCount = lottoCount;
+    }
+
+    public List<LottoNumbers> getLottos() {
+        return lottos;
     }
 
     public int getManualLottoCount() {

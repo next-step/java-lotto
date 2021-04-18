@@ -53,10 +53,7 @@ public class Lottos {
     }
 
     public LottosDTO getLottoResult() {
-        LottosDTO lottosDTO = new LottosDTO();
-        lottosDTO.setLottos(lottos);
-        lottosDTO.setLottoCount(lottoCount);
-        return lottosDTO;
+        return new LottosDTO(lottos, lottoCount);
     }
 
 }

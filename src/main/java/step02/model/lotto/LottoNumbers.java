@@ -45,8 +45,6 @@ public class LottoNumbers {
     }
 
     public LottoNumbersDTO getLottoNumbersResult() {
-        LottoNumbersDTO lottoDTO = new LottoNumbersDTO();
-        lottoDTO.setLottoNumbers(new ArrayList(lottoNumbers));
-        return lottoDTO;
+        return new LottoNumbersDTO(new ArrayList(lottoNumbers));
     }
 }
