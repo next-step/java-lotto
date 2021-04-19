@@ -11,6 +11,8 @@ import step02.ui.InputView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step02.utils.LottoConfig.*;
+
 public class Lottos {
     private List<LottoNumbers> lottos = new ArrayList<>();
     private LottoCount lottoCount;
@@ -38,11 +40,17 @@ public class Lottos {
 
     public Ranks compareMatchNumber(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         Ranks ranks = new Ranks();
-        lottos.forEach(numbers -> {
+
+        for (LottoNumbers numbers : lottos) {
+            if (numbers.duplicateNumber(bonusNumber)) {
+                throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
+            }
+
             int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
             boolean matchBonus = numbers.compareMatchBonusNumber(bonusNumber);
             ranks.addRanks(Rank.getMatchRank(matchCount, matchBonus));
-        });
+        }
+
         return ranks;
     }
 

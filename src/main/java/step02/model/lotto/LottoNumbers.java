@@ -37,6 +37,10 @@ public class LottoNumbers {
         return matchingCount(bonusNumber) == ONE;
     }
 
+    public boolean duplicateNumber(LottoNumber bonusNumber) {
+       return lottoNumbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    }
+
     private int matchingCount(LottoNumber winnerNumber) {
         if (lottoNumbers.contains(winnerNumber)) {
             return ONE;

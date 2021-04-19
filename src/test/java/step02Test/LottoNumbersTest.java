@@ -30,4 +30,11 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.compareMatchBonusNumber(new LottoNumber(7))).isEqualTo(true);
         assertThat(lottoNumbers.compareMatchBonusNumber(new LottoNumber(1))).isEqualTo(false);
     }
+
+    @Test
+    @DisplayName("중복 숫자 테스트")
+    void duplicateNumber() {
+        assertThat(lottoNumbers.duplicateNumber(new LottoNumber(7))).isEqualTo(true);
+        assertThat(lottoNumbers.duplicateNumber(new LottoNumber(1))).isEqualTo(false);
+    }
 }
