@@ -17,10 +17,14 @@ public class Lotto {
         this.numbers = new ArrayList<>();
     }
 
+    public Lotto(List<Number> randomNumbers) {
+        this.numbers = randomNumbers;
+    }
+
     public Lotto(String winningNumbers) {
         String[] numbers = winningNumbers.split(DELIMITER);
         if (numbers.length != 6) {
-            throw new LottoNumbersSizeException("Please input 6 numbers which last won game.");
+            throw new LottoNumbersSizeException("Please input 6 numbers.");
         }
         this.numbers = new ArrayList<>();
         for (String number : numbers) {
@@ -44,15 +48,6 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public void createRandomNumber() {
-        while (numbers.size() < 6) {
-            Number number = new Number(RandomIntUtil.getRandomInt());
-            if (!numbers.contains(number)) {
-                numbers.add(number);
-            }
-        }
-        Collections.sort(numbers);
-    }
 
     public LottoPrize getPrize(Lotto winLotto, Number bonusNumber) {
         int matchs = 0;

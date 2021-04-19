@@ -37,9 +37,6 @@ public class InputView {
         } catch (Exception e) {
             throw new IllegalArgumentException("input valid number");
         }
-        if (winningNumbers.split(DELIMITER).length != 6) {
-            throw new IllegalArgumentException("input 6 last winning numbers.");
-        }
         return winningNumbers;
     }
 

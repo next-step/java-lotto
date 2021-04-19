@@ -12,21 +12,20 @@ public class LottoApplication {
         OutputView outputView = new OutputView();
 
         Money buyMoney = new Money(inputView.getBuyLottoAmount());
-        Number bonusNumber = new Number(inputView.getBonusNumber());
 
         LottoGame lottoGame = new LottoGame();
 
         lottoGame.initializeStatistics();
-
         lottoGame.buyLotto(buyMoney);
-        lottoGame.setBonusNumber(bonusNumber);
 
         outputView.printBoughtLottoCount(lottoGame.getLottos().size());
         outputView.printLottoNumbers(lottoGame.getLottos());
         outputView.printLine();
 
         Lotto winningLotto = new Lotto(inputView.getLastWinningNumbers());
+        Number bonusNumber = new Number(inputView.getBonusNumber());
         lottoGame.lastWinningLotto(winningLotto);
+        lottoGame.setBonusNumber(bonusNumber);
 
         lottoGame.lottoWinners();
         outputView.printLottoStatistics(lottoGame.getLottoGameStatistics());

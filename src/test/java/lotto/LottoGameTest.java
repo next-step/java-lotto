@@ -67,7 +67,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(LottoNumbersSizeException.class)
-                .hasMessage("Please input 6 numbers which last won game.");
+                .hasMessage("Please input 6 numbers.");
     }
 
     @ParameterizedTest
@@ -88,6 +88,6 @@ class LottoGameTest {
         lottoGame.setBonusNumber(new Number(1));
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("winning number can't contain bonus number");
+                .hasMessage("bonus number already exists in winning numbers");
     }
 }

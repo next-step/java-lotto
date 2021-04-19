@@ -5,11 +5,9 @@ import lotto.model.Lotto;
 import lotto.model.LottoPrize;
 import lotto.model.Money;
 import lotto.model.Number;
+import lotto.util.RandomIntUtil;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoGame {
     private final static int LOTTO_PRICE = 1000;
@@ -39,16 +37,24 @@ public class LottoGame {
         }
         this.buyMoney = buyMoney;
         for (int i = 0; i < buyAmount; i++) {
-            Lotto lotto = new Lotto();
-            lotto.createRandomNumber();
+            Lotto lotto = new Lotto(createRandomNumber());
             lottos.add(lotto);
         }
     }
 
-    public void lastWinningLotto(Lotto winningLotto) {
-        if (winningLotto.contain(bonusNumber)) {
-            throw new IllegalArgumentException("winning number can't contain bonus number");
+    private List<Number> createRandomNumber() {
+        List<Number> numbers = new ArrayList<>();
+        while (numbers.size() < 6) {
+            Number number = new Number(RandomIntUtil.getRandomInt());
+            if (!numbers.contains(number)) {
+                numbers.add(number);
+            }
         }
+        Collections.sort(numbers);
+        return numbers;
+    }
+
+    public void lastWinningLotto(Lotto winningLotto) {
         this.winLotto = winningLotto;
     }
 
@@ -86,6 +92,9 @@ public class LottoGame {
     }
 
     public void setBonusNumber(Number bonusNumber) {
+        if (winLotto.contain(bonusNumber)) {
+            throw new IllegalArgumentException("bonus number already exists in winning numbers");
+        }
         this.bonusNumber = bonusNumber;
     }
 }
