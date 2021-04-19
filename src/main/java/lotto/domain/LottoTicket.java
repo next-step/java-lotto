@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
-  private static final String EXCEPTION_MESSAGE_OF_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT = "구입 금액에 맞는 구매할 로또 총 수는 %d 입니다.";
+  private static final String ERROR_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT = "구입 금액에 맞는 구매할 로또 총 수는 %d 입니다.";
   private static final int LOTTO_PRICE = 1_000;
 
   private final List<LottoNumbers> values;
@@ -41,7 +41,7 @@ public class LottoTicket {
 
   private static void checkBoughtManualLottoExceedMoney(int money, int countOfManualLotto) {
     if (countOfTotalLottoNumbers(money) - countOfManualLotto < 0) {
-      throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_OF_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT, countOfTotalLottoNumbers(money)));
+      throw new IllegalArgumentException(String.format(ERROR_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT, countOfTotalLottoNumbers(money)));
     }
   }
 
