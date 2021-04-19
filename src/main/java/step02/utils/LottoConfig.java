@@ -28,6 +28,7 @@ public class LottoConfig {
     public static final String ERROR_OVER_MAX_NUMBER_COUNT = LOTTO_NUMBER_MAX_COUNT + "개의 수를 입력해주세요.";
     public static final String ERROR_MIN_PRICE = "최소 구매 금액은 " + LOTTO_PRICE + "원 입니다.";
     public static final String ERROR_OUT_OF_TOTAL_COUNT = "총 구매 수량보다 많습니다.";
+    public static final String ERROR_DUPLICATED_NUMBER = "중복된 숫자가 있습니다.";
 
     public static final String RESULT_WINNER_AVG = "당첨 통계\n---------";
     public static final String RESULT_FIFTH = "3개 일치 (5000원)- %d개";
