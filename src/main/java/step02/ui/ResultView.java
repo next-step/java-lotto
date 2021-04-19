@@ -21,13 +21,14 @@ public class ResultView {
     }
 
     public static void showLottoWinnerResult(LottoResultDTO resultDTO) {
-        System.out.println(RESULT_WINNER_AVG);
-        System.out.printf(RESULT_FIFTH + LINE_BRAKE, resultDTO.getRankFifthCount());
-        System.out.printf(RESULT_FORTH + LINE_BRAKE, resultDTO.getRankFourthCount());
-        System.out.printf(RESULT_THIRD + LINE_BRAKE, resultDTO.getRankThirdCount());
-        System.out.printf(RESULT_SECOND + LINE_BRAKE, resultDTO.getRankSecondCount());
-        System.out.printf(RESULT_FIRST + LINE_BRAKE, resultDTO.getRankFirstCount());
-        System.out.printf(RESULT_TOTAL_YIELD + LINE_BRAKE, resultDTO.getYield());
+        String result = RESULT_WINNER_AVG + LINE_BRAKE +
+                String.format(RESULT_FIFTH + LINE_BRAKE, resultDTO.getRankFifthCount()) +
+                String.format(RESULT_FORTH + LINE_BRAKE, resultDTO.getRankFourthCount()) +
+                String.format(RESULT_THIRD + LINE_BRAKE, resultDTO.getRankThirdCount()) +
+                String.format(RESULT_SECOND + LINE_BRAKE, resultDTO.getRankSecondCount()) +
+                String.format(RESULT_FIRST + LINE_BRAKE, resultDTO.getRankFirstCount()) +
+                String.format(RESULT_TOTAL_YIELD + LINE_BRAKE, resultDTO.getYield());
+        System.out.println(result);
     }
 
     private static String getLottoNumbersToString(LottoNumbersDTO lottoNumbersDTO) {
