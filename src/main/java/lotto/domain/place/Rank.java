@@ -28,7 +28,7 @@ public enum Rank {
     return Arrays.stream(Rank.values())
             .filter(rank -> rank.countOfMatch == countOfMatch && rank.matchBonus == matchBonus)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("입력 값이 맞지 않습니다."));
+            .orElse(MISS);
   }
 
   int getCountOfMatch() {
