@@ -17,6 +17,14 @@ public class Count {
         this.count++;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public boolean isBigger(Count manualCount) {
+        return Integer.compare(this.count, manualCount.getCount()) < 0 ;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
