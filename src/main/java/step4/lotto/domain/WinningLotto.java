@@ -3,7 +3,7 @@ package step4.lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class WinningLotto {
+public class WinningLotto implements Matchable{
     private Lotto winningLotto;
     private int bonusNumber;
 
@@ -13,6 +13,7 @@ public class WinningLotto {
     }
 
 
+    @Override
     public Rank match(List<Integer> userLotto) {
         int matchCount = winningLotto.match(new Lotto(userLotto));
         boolean matchBonus = userLotto.contains(bonusNumber);
