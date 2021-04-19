@@ -4,6 +4,8 @@ import lotto.exception.MoneyNotEnoughException;
 import lotto.model.Lotto;
 import lotto.model.LottoPrize;
 import lotto.model.Money;
+import lotto.model.Number;
+import lotto.util.RandomIntUtil;
 
 import java.util.*;
 
@@ -13,7 +15,8 @@ public class LottoGame {
     private List<Lotto> lottos;
     private Lotto winLotto;
     private Map<LottoPrize, Integer> lottoGameStatistics;
-    private Money money;
+    private Money buyMoney;
+    private Number bonusNumber;
 
     public LottoGame() {
         lottos = new ArrayList<>();
@@ -32,12 +35,23 @@ public class LottoGame {
         if (buyAmount <= 0) {
             throw new MoneyNotEnoughException("Money is not enough to buy lotto");
         }
-        this.money = buyMoney;
+        this.buyMoney = buyMoney;
         for (int i = 0; i < buyAmount; i++) {
-            Lotto lotto = new Lotto();
-            lotto.createRandomNumber();
+            Lotto lotto = new Lotto(createRandomNumber());
             lottos.add(lotto);
         }
+    }
+
+    private List<Number> createRandomNumber() {
+        List<Number> numbers = new ArrayList<>();
+        while (numbers.size() < 6) {
+            Number number = new Number(RandomIntUtil.getRandomInt());
+            if (!numbers.contains(number)) {
+                numbers.add(number);
+            }
+        }
+        Collections.sort(numbers);
+        return numbers;
     }
 
     public void lastWinningLotto(Lotto winningLotto) {
@@ -46,7 +60,7 @@ public class LottoGame {
 
     public void lottoWinners() {
         for (Lotto lotto : lottos) {
-            LottoPrize lottoPrize = lotto.getPrize(winLotto);
+            LottoPrize lottoPrize = lotto.getPrize(winLotto, bonusNumber);
             if (lottoPrize != null) {
                 lottoGameStatistics.put(lottoPrize, lottoGameStatistics.getOrDefault(lottoPrize, 0) + 1);
             }
@@ -61,7 +75,7 @@ public class LottoGame {
         if (winPrize == 0) {
             return 0;
         }
-        return ((float) winPrize / money.amount());
+        return ((float) winPrize / buyMoney.amount());
     }
 
 
@@ -77,4 +91,10 @@ public class LottoGame {
         return winLotto;
     }
 
+    public void setBonusNumber(Number bonusNumber) {
+        if (winLotto.contain(bonusNumber)) {
+            throw new IllegalArgumentException("bonus number already exists in winning numbers");
+        }
+        this.bonusNumber = bonusNumber;
+    }
 }

@@ -34,8 +34,15 @@ public class OutputView {
 
     public void printLottoStatistics(Map<LottoPrize, Integer> lottoGameStatistics) {
         System.out.println("당첨 통계");
+        StringBuilder message = new StringBuilder();
         for (LottoPrize lottoPrize : lottoGameStatistics.keySet()) {
-            System.out.printf("%s개 일치 (%s원)- %s개%n", lottoPrize.getMatchs(), lottoPrize.getPrize(), lottoGameStatistics.get(lottoPrize));
+            message.setLength(0);
+            message.append("%s개 일치");
+            if (LottoPrize.SECOND.equals(lottoPrize)) {
+                message.append(", 보너스 볼 일치");
+            }
+            message.append(" (%s원)- %s개%n");
+            System.out.printf(message.toString(), lottoPrize.getMatchs(), lottoPrize.getPrize(), lottoGameStatistics.get(lottoPrize));
         }
     }
 

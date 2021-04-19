@@ -67,7 +67,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(LottoNumbersSizeException.class)
-                .hasMessage("Please input 6 numbers which last won game.");
+                .hasMessage("Please input 6 numbers.");
     }
 
     @ParameterizedTest
@@ -78,5 +78,16 @@ class LottoGameTest {
         assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("input value in 1~45");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 6", "11, 22, 25, 45, 1, 3"})
+    @DisplayName("input(make) last winning lotto test : fail - contain BonusNumber")
+    void lastWinningLottoFailContainBonusNumberTest(String numbers) {
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.setBonusNumber(new Number(1));
+        assertThatThrownBy(() -> lottoGame.lastWinningLotto(new Lotto(numbers)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("bonus number already exists in winning numbers");
     }
 }
