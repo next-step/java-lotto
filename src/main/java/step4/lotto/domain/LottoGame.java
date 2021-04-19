@@ -5,7 +5,6 @@ import java.util.List;
 public class LottoGame {
 
     public static Rank match(List<Integer> userLotto, List<Integer> winningLotto, int bonusNumber){
-
         Lotto user = new Lotto(userLotto);
         Lotto winning = new Lotto(winningLotto);
 
@@ -14,4 +13,7 @@ public class LottoGame {
         return Rank.rank(matchCount,matchBonus);
     }
 
+    public static Rank match(List<Integer> userLotto, WinningLotto winningLotto){
+        return winningLotto.match(userLotto);
+    }
 }
