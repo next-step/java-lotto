@@ -22,13 +22,14 @@ public class InputNumberRule extends NumberRule {
 
     private List<Integer> splitNumber(String numbers) {
         String numbersNoBlank = numbers.replaceAll(BLANK, NO_BLANK);
-        Stream<Integer> numberSplit = Arrays.stream(numbersNoBlank.trim().split(REGEX))
-                .map(Integer::parseInt);
+        List<Integer> numberSplit = Arrays.stream(numbersNoBlank.trim().split(REGEX))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
 
-        boolean unique = numberSplit.allMatch(new HashSet<>()::add);
+        boolean unique = numberSplit.stream().allMatch(new HashSet<>()::add);
 
         if (unique) {
-            return numberSplit.collect(Collectors.toList());
+            return numberSplit;
         }
         throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
     }
