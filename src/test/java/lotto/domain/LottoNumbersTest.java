@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -45,6 +46,28 @@ class LottoNumbersTest {
             , () -> assertThatThrownBy(() -> list.remove(0)).isInstanceOf(UnsupportedOperationException.class)
             , () -> assertThatThrownBy(() -> list.replaceAll(lotto -> LottoNumber.generate(1))).isInstanceOf(UnsupportedOperationException.class)
     );
+  }
+
+  @Test
+  @DisplayName("문자열의 파라미터로 로또 번호들을 생성한다.")
+  void generateSixNumbers_stringLottoNumberParam() {
+    // given
+    String param = "8, 21, 23, 41, 42, 43";
+
+    // when
+    LottoNumbers actual = LottoNumbers.generateSixNumbers(param);
+
+    // then
+    assertThat(actual).isNotNull()
+            .isEqualTo(LottoNumbers.generateSixNumbers(()
+                    -> Arrays.asList(
+                            LottoNumber.generate(8),
+                            LottoNumber.generate(21),
+                            LottoNumber.generate(23),
+                            LottoNumber.generate(41),
+                            LottoNumber.generate(42),
+                            LottoNumber.generate(43)
+            )));
   }
 
   @ParameterizedTest

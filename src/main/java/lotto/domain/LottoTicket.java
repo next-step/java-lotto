@@ -3,30 +3,54 @@ package lotto.domain;
 import lotto.domain.place.LottoPlaces;
 import lotto.function.GenerateNumbers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
+  private static final String EXCEPTION_MESSAGE_OF_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT = "구입 금액에 맞는 구매할 로또 총 수는 %d 입니다.";
   private static final int LOTTO_PRICE = 1_000;
 
   private final List<LottoNumbers> values;
+  private final List<LottoNumbers> valuesOfManual;
 
-  private LottoTicket(List<LottoNumbers> values) {
-    this.values = Collections.unmodifiableList(values);
+  private LottoTicket(List<LottoNumbers> autoValues, List<LottoNumbers> valuesOfManual) {
+    this.values = Collections.unmodifiableList(autoValues);
+    this.valuesOfManual = Collections.unmodifiableList(valuesOfManual);
   }
 
-  public static LottoTicket toBuy(final int money, final GenerateNumbers generateNumbers) {
-    final int makeTicketCount = money / LOTTO_PRICE;
-    List<LottoNumbers> lottoNumbers = new ArrayList<>(makeTicketCount);
-    for (int i = 0; i < makeTicketCount; i++) {
-      lottoNumbers.add(LottoNumbers.generateSixNumbers(generateNumbers));
+  public static LottoTicket toBuy(final int money,
+                                  final GenerateNumbers generateNumbers,
+                                  final List<String> manualLottoStrings) {
+    int countOfManualLotto = manualLottoStrings.size();
+    checkBoughtManualLottoExceedMoney(money, countOfManualLotto);
+
+    int availableMoney = money - ( countOfManualLotto * LOTTO_PRICE );
+    int countOfMakeAutoLottoNumbers = countOfTotalLottoNumbers(availableMoney);
+    
+    List<LottoNumbers> lottoNumbers = IntStream.range(0, countOfMakeAutoLottoNumbers)
+            .mapToObj(i -> LottoNumbers.generateSixNumbers(generateNumbers))
+            .collect(Collectors.toList());
+    
+    return new LottoTicket(lottoNumbers, manualLottoStrings.stream()
+            .map(LottoNumbers::generateSixNumbers)
+            .collect(Collectors.toList()));
+  }
+
+  private static void checkBoughtManualLottoExceedMoney(int money, int countOfManualLotto) {
+    if (countOfTotalLottoNumbers(money) - countOfManualLotto < 0) {
+      throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_OF_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT, countOfTotalLottoNumbers(money)));
     }
-    return new LottoTicket(lottoNumbers);
   }
 
-  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers, LottoBonusBall lottoBonusBall) {
+  private static int countOfTotalLottoNumbers(int money) {
+    return money / LOTTO_PRICE;
+  }
+
+  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers,
+                                           LottoBonusBall lottoBonusBall) {
     LottoPlaces lottoPlaces = LottoPlaces.create();
     for (LottoNumbers lottoNumbers : values) {
       int countOfMatch = lottoWiningNumbers.countOfMatch(lottoNumbers);
@@ -46,6 +70,10 @@ public class LottoTicket {
 
   public int ticketCount() {
     return values.size();
+  }
+
+  public int ticketManualCount() {
+    return valuesOfManual.size();
   }
 
   @Override

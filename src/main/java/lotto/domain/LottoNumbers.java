@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import calculator.util.StringUtil;
 import lotto.function.GenerateNumbers;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
   private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
@@ -22,6 +24,17 @@ public class LottoNumbers {
       throw new IllegalArgumentException(EXCEPTION_MESSAGE);
     }
     return new LottoNumbers(lottoNumbers);
+  }
+
+  public static LottoNumbers generateSixNumbers(final String generateNumbers) {
+    return generateSixNumbers(() -> StringUtil.splitToList(generateNumbers)
+            .stream()
+            .map(StringUtil::splitToList)
+            .flatMap(List::stream)
+            .map(StringUtil::trim)
+            .map(Integer::parseInt)
+            .map(LottoNumber::generate)
+            .collect(Collectors.toList()));
   }
 
   public int size() {
