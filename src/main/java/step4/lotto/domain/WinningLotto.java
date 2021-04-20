@@ -4,29 +4,29 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto implements Matchable{
-    private Lotto winningLotto;
-    private int bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> lotto, int bonusNumber) {
         this.winningLotto = new Lotto(lotto);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.of(bonusNumber);
+        if(this.winningLotto.contains(this.bonusNumber)){
+            throw new IllegalArgumentException("보너스 번호는 당첨번호에 포함될수 없습니다.");
+        }
     }
 
-
-    @Override
     public Rank match(List<Integer> userLotto) {
         int matchCount = winningLotto.match(new Lotto(userLotto));
-        boolean matchBonus = userLotto.contains(bonusNumber);
+        boolean matchBonus = bonusNumber.contains(userLotto);
         return Rank.rank(matchCount,matchBonus);
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber && Objects.equals(winningLotto, that.winningLotto);
+        return Objects.equals(winningLotto, that.winningLotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override

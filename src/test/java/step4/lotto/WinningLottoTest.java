@@ -21,8 +21,8 @@ public class WinningLottoTest {
 
     @Test
     void create() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,7), bonusNumber );
-        assertThat(winningLotto).isEqualTo(new WinningLotto(Arrays.asList(1,2,3,4,5,7), bonusNumber ));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6), bonusNumber );
+        assertThat(winningLotto).isEqualTo(new WinningLotto(Arrays.asList(1,2,3,4,5,6), bonusNumber ));
     }
 
     @Test

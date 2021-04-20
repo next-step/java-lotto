@@ -13,15 +13,16 @@ public class LottoNumberTest {
 
     @Test
     void init() {
-        LottoNumber lottoNumber = new LottoNumber(3);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(3));
+        LottoNumber lottoNumber = LottoNumber.of("3");
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(3));
+        assertThat(LottoNumber.of(3) == lottoNumber).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1,0,46,75})
     void 로또번호_예외값_입력(int number) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(number);
+            LottoNumber.of(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
