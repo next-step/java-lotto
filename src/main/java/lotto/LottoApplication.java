@@ -21,7 +21,7 @@ public class LottoApplication {
             new SixLottoNumbers(),
             manualLottoNumberStringList);
 
-    InputView.printBoughtLottoNumbers(boughtLottoTicket);
+    InputView.printBoughtLottoNumbers(boughtLottoTicket, countOfBoughtManualLotto);
 
     String lottoWiningNumbersString = InputView.getLottoWiningNumbersString();
     LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(lottoWiningNumbersString);

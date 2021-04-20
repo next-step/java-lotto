@@ -39,9 +39,8 @@ public final class InputView {
             .collect(Collectors.toList());
   }
 
-  public static void printBoughtLottoNumbers(LottoTicket lottoTicket) {
+  public static void printBoughtLottoNumbers(LottoTicket lottoTicket, int totalCountOfManual) {
     int totalCount = lottoTicket.ticketCount();
-    int totalCountOfManual = lottoTicket.ticketManualCount();
     int totalCountOfAuto = totalCount - totalCountOfManual;
     System.out.println(String.format(ISSUED_LOTTO_TICKET_FORMAT, totalCountOfManual, totalCountOfAuto));
     for (LottoNumbers lottoNumbers : lottoTicket.getValues()) {

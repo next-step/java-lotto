@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.place.LottoPlaces;
 import lotto.function.GenerateNumbers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -14,11 +15,9 @@ public class LottoTicket {
   private static final int LOTTO_PRICE = 1_000;
 
   private final List<LottoNumbers> values;
-  private final List<LottoNumbers> valuesOfManual;
 
-  private LottoTicket(List<LottoNumbers> autoValues, List<LottoNumbers> valuesOfManual) {
-    this.values = Collections.unmodifiableList(autoValues);
-    this.valuesOfManual = Collections.unmodifiableList(valuesOfManual);
+  private LottoTicket(List<LottoNumbers> values) {
+    this.values = Collections.unmodifiableList(values);
   }
 
   public static LottoTicket toBuy(final int money,
@@ -29,14 +28,19 @@ public class LottoTicket {
 
     int availableMoney = money - ( countOfManualLotto * LOTTO_PRICE );
     int countOfMakeAutoLottoNumbers = countOfTotalLottoNumbers(availableMoney);
-    
-    List<LottoNumbers> lottoNumbers = IntStream.range(0, countOfMakeAutoLottoNumbers)
+
+    List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    List<LottoNumbers> manualLottoNumbers = manualLottoStrings.stream()
+            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
+            .collect(Collectors.toList());
+
+    List<LottoNumbers> autoLottoNumbers = IntStream.range(0, countOfMakeAutoLottoNumbers)
             .mapToObj(i -> LottoNumbers.generateSixNumbers(generateNumbers))
             .collect(Collectors.toList());
-    
-    return new LottoTicket(lottoNumbers, manualLottoStrings.stream()
-            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
-            .collect(Collectors.toList()));
+
+    lottoNumbers.addAll(manualLottoNumbers);
+    lottoNumbers.addAll(autoLottoNumbers);
+    return new LottoTicket(lottoNumbers);
   }
 
   private static void checkBoughtManualLottoExceedMoney(int money, int countOfManualLotto) {
@@ -55,6 +59,7 @@ public class LottoTicket {
     for (LottoNumbers lottoNumbers : values) {
       int countOfMatch = lottoWiningNumbers.countOfMatch(lottoNumbers);
       boolean matchBonus = lottoBonusBall.isMatch(lottoNumbers);
+      System.out.println(countOfMatch);
       lottoPlaces = lottoPlaces.record(countOfMatch, matchBonus);
     }
     return lottoPlaces;
@@ -70,10 +75,6 @@ public class LottoTicket {
 
   public int ticketCount() {
     return values.size();
-  }
-
-  public int ticketManualCount() {
-    return valuesOfManual.size();
   }
 
   @Override
