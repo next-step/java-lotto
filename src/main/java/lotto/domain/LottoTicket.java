@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
   private static final String ERROR_BOUGHT_LIMIT_FOR_LOTTO_OVER_FORMAT = "구입 금액에 맞는 구매할 로또 총 수는 %d 입니다.";
-  private static final int LOTTO_PRICE = 1_000;
+  private static final int PRICE = 1_000;
 
   private final List<LottoNumbers> values;
 
@@ -23,24 +23,27 @@ public class LottoTicket {
   public static LottoTicket toBuy(final int money,
                                   final GenerateNumbers generateNumbers,
                                   final List<String> manualLottoStrings) {
-    int countOfManualLotto = manualLottoStrings.size();
-    checkBoughtManualLottoExceedMoney(money, countOfManualLotto);
+    final int countOfManualLotto = manualLottoStrings.size();
 
-    int availableMoney = money - ( countOfManualLotto * LOTTO_PRICE );
-    int countOfMakeAutoLottoNumbers = countOfTotalLottoNumbers(availableMoney);
+    List<LottoNumbers> values = new ArrayList<>(countOfTotalLottoNumbers(money));
+    values.addAll(getManualLottoNumbers(money, manualLottoStrings, countOfManualLotto));
+    values.addAll(getAutoLottoNumbers(money, generateNumbers, countOfManualLotto));
+    return new LottoTicket(values);
+  }
 
-    List<LottoNumbers> lottoNumbers = new ArrayList<>();
-    List<LottoNumbers> manualLottoNumbers = manualLottoStrings.stream()
-            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
-            .collect(Collectors.toList());
-
-    List<LottoNumbers> autoLottoNumbers = IntStream.range(0, countOfMakeAutoLottoNumbers)
+  private static List<LottoNumbers> getAutoLottoNumbers(int money, GenerateNumbers generateNumbers, int countOfManualLotto) {
+    final int availableMoney = money - ( countOfManualLotto * PRICE );
+    final int countOfMakeAutoLottoNumbers = countOfTotalLottoNumbers(availableMoney);
+    return IntStream.range(0, countOfMakeAutoLottoNumbers)
             .mapToObj(i -> LottoNumbers.generateSixNumbers(generateNumbers))
             .collect(Collectors.toList());
+  }
 
-    lottoNumbers.addAll(manualLottoNumbers);
-    lottoNumbers.addAll(autoLottoNumbers);
-    return new LottoTicket(lottoNumbers);
+  private static List<LottoNumbers> getManualLottoNumbers(int money, List<String> manualLottoStrings, int countOfManualLotto) {
+    checkBoughtManualLottoExceedMoney(money, countOfManualLotto);
+    return manualLottoStrings.stream()
+            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
+            .collect(Collectors.toList());
   }
 
   private static void checkBoughtManualLottoExceedMoney(int money, int countOfManualLotto) {
@@ -50,7 +53,7 @@ public class LottoTicket {
   }
 
   private static int countOfTotalLottoNumbers(int money) {
-    return money / LOTTO_PRICE;
+    return money / PRICE;
   }
 
   public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers,
@@ -66,7 +69,7 @@ public class LottoTicket {
   }
 
   public int totalSpentMoney() {
-    return LOTTO_PRICE * ticketCount();
+    return PRICE * ticketCount();
   }
 
   public List<LottoNumbers> getValues() {
