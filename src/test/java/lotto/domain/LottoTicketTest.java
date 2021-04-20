@@ -42,7 +42,7 @@ class LottoTicketTest {
 
     // then
     assertThat(lottoTicket.getValues())
-            .contains(LottoNumbers.generateSixNumbers("1, 2, 3, 4, 5, 6"));
+            .contains(LottoNumbers.generateSixNumbersFromStringNumbers("1, 2, 3, 4, 5, 6"));
   }
 
   @Test

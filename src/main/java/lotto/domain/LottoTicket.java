@@ -35,7 +35,7 @@ public class LottoTicket {
             .collect(Collectors.toList());
     
     return new LottoTicket(lottoNumbers, manualLottoStrings.stream()
-            .map(LottoNumbers::generateSixNumbers)
+            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
             .collect(Collectors.toList()));
   }
 

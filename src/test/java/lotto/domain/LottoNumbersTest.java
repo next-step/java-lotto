@@ -55,7 +55,7 @@ class LottoNumbersTest {
     String param = "8, 21, 23, 41, 42, 43";
 
     // when
-    LottoNumbers actual = LottoNumbers.generateSixNumbers(param);
+    LottoNumbers actual = LottoNumbers.generateSixNumbersFromStringNumbers(param);
 
     // then
     assertThat(actual).isNotNull()

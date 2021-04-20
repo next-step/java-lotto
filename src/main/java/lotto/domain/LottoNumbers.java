@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-  private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
-  private static final String ERROR_DIGITS_EXCEED_MESSAGE = "로또는 6자리 숫자로 생성해야 됩니다.";
+  private static final int SIZE = 6;
+  private static final String ERROR_DIGITS_EXCEED_FORMAT = "로또는 %d자리 숫자로 생성해야 됩니다.";
 
   private final List<LottoNumber> values;
 
@@ -20,13 +20,13 @@ public class LottoNumbers {
 
   public static LottoNumbers generateSixNumbers(final GenerateNumbers generateNumbers) {
     List<LottoNumber> lottoNumbers = generateNumbers.get();
-    if (lottoNumbers.size() != LOTTO_NUMBER_TOTAL_COUNT) {
-      throw new IllegalArgumentException(ERROR_DIGITS_EXCEED_MESSAGE);
+    if (lottoNumbers.size() != SIZE) {
+      throw new IllegalArgumentException(String.format(ERROR_DIGITS_EXCEED_FORMAT, SIZE));
     }
     return new LottoNumbers(lottoNumbers);
   }
 
-  public static LottoNumbers generateSixNumbers(final String generateNumbers) {
+  public static LottoNumbers generateSixNumbersFromStringNumbers(final String generateNumbers) {
     return generateSixNumbers(() -> StringUtil.splitToList(generateNumbers)
             .stream()
             .map(StringUtil::splitToList)
