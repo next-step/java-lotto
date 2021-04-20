@@ -17,10 +17,6 @@ public class Lotto {
         this.lottoBalls = lottoBalls;
     }
 
-    public static Lotto of(Integer... lottoBalls) {
-        return new Lotto(LottoBalls.of(lottoBalls));
-    }
-
     public static Lotto of(List<Integer> winningBalls) {
         return new Lotto(LottoBalls.createWinningLottoBalls(winningBalls));
     }
@@ -31,10 +27,6 @@ public class Lotto {
         return lottoBallList.stream()
                 .limit(LOTTO_SIZE)
                 .collect(Collectors.toList());
-    }
-
-    public int countSize() {
-        return lottoBalls.size();
     }
 
     public int countMatch(WinningLotto winningLotto) {
