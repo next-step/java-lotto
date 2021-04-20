@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     public List<LottoBall> createAutoLotto() {
-        List<LottoBall> lottoBallList = LottoBall.getAllBalls();
+        List<LottoBall> lottoBallList = LottoBall.LOTTO_BALL_CACHE;
         Collections.shuffle(lottoBallList);
         return lottoBallList.stream()
                 .limit(LOTTO_SIZE)

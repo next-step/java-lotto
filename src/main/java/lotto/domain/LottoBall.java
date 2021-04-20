@@ -11,7 +11,7 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
-    private static final List<LottoBall> LOTTO_BALL_CACHE;
+    public static final List<LottoBall> LOTTO_BALL_CACHE;
 
     static {
         LOTTO_BALL_CACHE = IntStream.range(MIN, MAX + 1)
