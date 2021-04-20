@@ -16,7 +16,15 @@ public class LottoCount {
         this.manualCount = new Count(count);
     }
 
+    public Count autoCount() {
+        Count totalCount = new Count(money.divide(LOTTO_PRIZE));
 
+        if(totalCount.comapre(this.manualCount)){
+            throw new IllegalArgumentException();
+        }
+
+        return totalCount;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -29,15 +37,5 @@ public class LottoCount {
     @Override
     public int hashCode() {
         return Objects.hash(money, manualCount);
-    }
-
-    public Count autoCount() {
-        Count totalCount = new Count(money.divide(LOTTO_PRIZE));
-
-        if(totalCount.isBigger(this.manualCount)){
-            throw new IllegalArgumentException();
-        }
-
-        return new Count();
     }
 }

@@ -21,7 +21,7 @@ public class Count {
         return count;
     }
 
-    public boolean isBigger(Count manualCount) {
+    public boolean comapre(Count manualCount) {
         return Integer.compare(this.count, manualCount.getCount()) < 0 ;
     }
 

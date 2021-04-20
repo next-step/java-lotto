@@ -15,7 +15,6 @@ public class LottoGame {
     }
 
     public void run() {
-
         // 로또 금액입력
         int money = inputLottoView.inputMoney();
         // 로또 수동처리
@@ -25,10 +24,9 @@ public class LottoGame {
         LottoCount lottoCount = new LottoCount(money, manualCount);
 
         // 수동처리가 로또 카운트보다 작아야함
-
         // 수동 입력 횟수
-
         // 로또 자동 생성
+        Lottos lottos = new Lottos();
 
 
         // 입력값 처리 ( 금액, 자동생성 숫자, 수동 생성 번호)

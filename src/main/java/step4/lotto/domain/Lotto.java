@@ -1,24 +1,39 @@
 package step4.lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    private Set<Integer> lotto;
+    private Set<LottoNumber> lotto;
 
     public Lotto(List<Integer> lotto) {
-        this.lotto = new HashSet<>(lotto);
+        this(toMap(lotto));
+    }
 
-        if(this.lotto.size() != LOTTO_SIZE){
+    public Lotto(Set<LottoNumber> lotto) {
+        this.lotto = lotto;
+    }
+
+    public Lotto(String lotto) {
+
+    }
+
+    private static Set<LottoNumber> toMap(List<Integer> lotto){
+        Set<LottoNumber> lottoNumber = new HashSet<>();
+
+        for(Integer number : lotto){
+            lottoNumber.add(new LottoNumber(number));
+        }
+
+        if(lottoNumber.size() != LOTTO_SIZE){
             throw new IllegalArgumentException("로또는 6개의 값이어야 합니다.");
         }
+        return lottoNumber;
     }
+
     public int match(Lotto winning) {
         int count = 0;
-        for(Integer userNumber : lotto){
+        for(LottoNumber userNumber : lotto){
             if(winning.contains(userNumber)){
                 count ++;
             }
@@ -26,7 +41,7 @@ public class Lotto {
         return count;
     }
 
-    public boolean contains(Integer userNumber) {
+    public boolean contains(LottoNumber userNumber) {
         return lotto.contains(userNumber);
     }
 
