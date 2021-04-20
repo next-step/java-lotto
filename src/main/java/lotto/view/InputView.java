@@ -11,6 +11,7 @@ public class InputView {
 
     private static final String INPUT_MESSAGE = "구입금액을 입력해주세요.";
     private static final String LAST_WEEK_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String SPLIT_DELIMITER = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int inputMoney() {
@@ -20,7 +21,7 @@ public class InputView {
 
     public static List<Integer> inputWinningNumbers() {
         System.out.println(LAST_WEEK_LOTTO);
-        String[] inputNumbers = scanner.nextLine().split(",");
+        String[] inputNumbers = scanner.nextLine().split(SPLIT_DELIMITER);
         return parseInteger(inputNumbers);
     }
 
