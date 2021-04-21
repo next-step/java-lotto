@@ -1,9 +1,6 @@
 package step4.lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -15,7 +12,6 @@ public class Lotto {
 
     private static Set<LottoNumber> toMap(List<Integer> lotto){
         Set<LottoNumber> lottoNumber = new HashSet<>();
-
         for(Integer number : lotto){
             lottoNumber.add(LottoNumber.of(number));
         }

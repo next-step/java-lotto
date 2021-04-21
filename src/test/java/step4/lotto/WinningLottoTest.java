@@ -2,6 +2,7 @@ package step4.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step4.lotto.domain.Lotto;
 import step4.lotto.domain.Rank;
 import step4.lotto.domain.WinningLotto;
 
@@ -30,6 +31,6 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonusNumber );
         List<Integer> secondLottoNumber = Arrays.asList(1,2,3,4,5,7);
 
-        assertThat(winningLotto.match(secondLottoNumber)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.match(new Lotto(secondLottoNumber))).isEqualTo(Rank.SECOND);
     }
 }

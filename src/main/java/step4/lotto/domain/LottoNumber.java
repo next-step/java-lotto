@@ -1,13 +1,11 @@
 package step4.lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
     private static final int LOTTO_NUMBER_RANGE_MAX = 45;
     private static final int LOTTO_NUMBER_RANGE_MIN = 1;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private static Map<Integer,LottoNumber> lottoNumbers = new HashMap<>();
     private final int lottoNumber;
 
@@ -31,6 +29,16 @@ public class LottoNumber {
             throw new IllegalArgumentException("로또 번호 범위가 아닙니다");
         }
         return lottoNumber;
+    }
+
+    public static Set<LottoNumber> autoNumber() {
+        List keys = new ArrayList(lottoNumbers.keySet());
+        Collections.shuffle(keys);
+        List<LottoNumber> auto = new ArrayList<>();
+        for(Object object : keys){
+            auto.add(lottoNumbers.get(object));
+        }
+        return new HashSet<>(auto.subList(0, LOTTO_NUMBER_COUNT));
     }
 
     public boolean contains(List<Integer> userLotto) {

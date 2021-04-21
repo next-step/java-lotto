@@ -15,9 +15,9 @@ public class WinningLotto implements Matchable{
         }
     }
 
-    public Rank match(List<Integer> userLotto) {
-        int matchCount = winningLotto.match(new Lotto(userLotto));
-        boolean matchBonus = bonusNumber.contains(userLotto);
+    public Rank match(Lotto userLotto) {
+        int matchCount = winningLotto.match(userLotto);
+        boolean matchBonus = userLotto.contains(bonusNumber);
         return Rank.rank(matchCount,matchBonus);
     }
 
