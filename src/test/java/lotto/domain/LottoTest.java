@@ -7,15 +7,33 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
 
     @Test
-    public void 로또_생성_테스트() {
+    public void createTest() {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @Test
-    public void 로또_번호_갯수_초과() {
+    public void exceedLottoNumberCountTest() {
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1,2,3,4,5))
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void duplicateCheck() {
+        assertThatThrownBy(
+                () -> new Lotto(Arrays.asList(1,2,3,4,5,5))
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void matchTest() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        int count = lotto.match(winningLotto);
+        assertThat(count).isEqualTo(6);
+
+    }
+
 }
