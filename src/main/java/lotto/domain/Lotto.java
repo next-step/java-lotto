@@ -1,22 +1,36 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
+    public static final int LOTTO_SIZE = 6;
 
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() < 6) {
-            throw new IllegalArgumentException("로또 갯수는 6개 이상이어야 합니다.");
-        }
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers;
+        if (this.lottoNumbers.size() < LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호 갯수는 6개여야 합니다.");
+        }
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
+    }
+
+    public int match(Lotto winningLotto) {
+        int count = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningLotto.contains(lottoNumber)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean contains(int lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

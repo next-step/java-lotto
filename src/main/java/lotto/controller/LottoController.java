@@ -1,9 +1,10 @@
 package lotto.controller;
 
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Map;
 
 public class LottoController {
 
@@ -11,18 +12,17 @@ public class LottoController {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        // 로또 가격 입력
         int price = inputView.inputLottoPrice();
 
-        // 로또 구매 갯수 출력
         int lottoCount = new Money().buyCount(price);
         resultView.printLottoCount(lottoCount);
 
-        // 로또 초기화
         Lottos lottos = new Lottos(lottoCount);
-
-        // 로또 번호 출력
         resultView.printLottos(lottos);
 
+        String winningLottoNumbers = inputView.inputWinningLotto();
+        Statistics statistics = new Statistics(lottos.getLottos(), winningLottoNumbers);
+        Map<Rank, Integer> lottoRankMap = statistics.getStatistics();
+        resultView.printLottoRank(lottoRankMap, price);
     }
 }
