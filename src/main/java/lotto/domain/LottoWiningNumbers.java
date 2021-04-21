@@ -3,7 +3,6 @@ package lotto.domain;
 import calculator.util.StringUtil;
 import lotto.function.GenerateNumbers;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -19,13 +18,12 @@ public class LottoWiningNumbers {
   }
 
   public static LottoWiningNumbers generate(final String winningNumbersString) {
-    final List<LottoNumber> lottoWiningNumbers = StringUtil.splitToList(winningNumbersString)
+    return generate(() -> StringUtil.splitToList(winningNumbersString)
             .stream()
             .map(StringUtil::trim)
             .map(Integer::parseInt)
             .map(LottoNumber::generate)
-            .collect(Collectors.toList());
-    return generate(() -> lottoWiningNumbers);
+            .collect(Collectors.toList()));
   }
 
   public int countOfMatch(final LottoNumbers other) {

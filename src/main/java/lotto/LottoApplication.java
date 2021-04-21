@@ -8,16 +8,25 @@ import lotto.function.SixLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoApplication {
 
   public static void main(String[] args) {
-    LottoTicket boughtLottoTicket = LottoTicket.toBuy(InputView.buyLotto(), new SixLottoNumbers());
-    InputView.printBoughtLottoNumbers(boughtLottoTicket);
+    int money = InputView.getMoneyOfBoughtLotto();
+    int countOfBoughtManualLotto = InputView.getCountOfManualLotto();
+    List<String> manualLottoNumberStringList = InputView.getManualLottoNumberStringList(countOfBoughtManualLotto);
 
-    String lottoWiningNumbersString = InputView.writeLottoWiningNumbersString();
+    LottoTicket boughtLottoTicket = LottoTicket.toBuy(money,
+            new SixLottoNumbers(),
+            manualLottoNumberStringList);
+
+    InputView.printBoughtLottoNumbers(boughtLottoTicket, countOfBoughtManualLotto);
+
+    String lottoWiningNumbersString = InputView.getLottoWiningNumbersString();
     LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(lottoWiningNumbersString);
 
-    int lottoBonusBallNumber = InputView.writeBonusBall();
+    int lottoBonusBallNumber = InputView.getBonusBall();
 
     LottoBonusBall bonusBall = LottoBonusBall.valueOf(lottoBonusBallNumber);
     LottoPlaces places = boughtLottoTicket.getMatchedLottoPlaces(lottoWiningNumbers, bonusBall);

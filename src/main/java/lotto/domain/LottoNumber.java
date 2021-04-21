@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
   public static final int MIN = 1;
   public static final int MAX = 45;
-  private static final String EXCEPTION_MESSAGE = String.format("로또 번호는 %d~%d의 범위 안의 숫자여야만 한다.", MIN, MAX);
+  private static final String ERROR_LOTTO_NUMBER_RANGE_EXCEED_FORMAT = String.format("로또 번호는 %d~%d의 범위 안의 숫자여야만 한다.", MIN, MAX);
 
   private final int value;
 
@@ -15,7 +15,7 @@ public class LottoNumber {
 
   public static LottoNumber generate(int value) {
     if (!isValidNumberRange(value)) {
-      throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+      throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_RANGE_EXCEED_FORMAT);
     }
 
     return new LottoNumber(value);
