@@ -1,10 +1,8 @@
 package lotto.View;
 
 import lotto.domain.Statistic;
-import lotto.dto.InfoDto;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
 public class ResultView {
 
@@ -16,16 +14,17 @@ public class ResultView {
         System.out.println(lottoNumbers);
     }
 
-    public static void printStatistics(Statistic statistic){
+    public static void printStatistics(int purchasedAmount,Map<Long,Integer> countLottoPerCorrectNumber){
         System.out.println("당첨통계");
         System.out.println("-----------------------");
-        List<InfoDto> infoDtos = statistic.getInfoDtos();
-        infoDtos.forEach(info->{
-                    System.out.println(info.getCorrectNum()+"개 일치 ("+
-                            info.getWinningPrice()+"원) - "+
-                            info.getLottoNumWithCorrectNum()+"개");
-                });
-        System.out.println("총 수익률은 "+statistic.getRevenueRate()+"입니다.");
+
+        countLottoPerCorrectNumber.entrySet().stream()
+                .forEach( entry ->
+                        System.out.println(entry.getKey()+"개 일치 ("+
+                                Statistic.WINNINGPRICE[Math.toIntExact(entry.getKey())]+"원)- "+
+                        entry.getValue()+"개"));
+
+        System.out.println("총 수익률은 "+Statistic.getRevenueRate(purchasedAmount,countLottoPerCorrectNumber)+"입니다.");
 
     }
 

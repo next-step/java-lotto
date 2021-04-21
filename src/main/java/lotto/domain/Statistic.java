@@ -1,33 +1,38 @@
 package lotto.domain;
 
-import lotto.dto.InfoDto;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Statistic {
 
     // 상금
-    private final int[] Winnings = {0,0,0,5000,50000,1500000,2000000000};
-    double revenueRate;
-    List<InfoDto> infoDtos;
+    public static final int[] WINNINGPRICE = {0,0,0,5000,50000,1500000,2000000000};
+    private static final int PRICE_START_NUM = 3;
+    private static final int PRICE_MAX_NUM = 6;
 
-    public Statistic(int purchaseAmount, Map<Long,Integer> lottoStatistic){
-        infoDtos = new ArrayList<>();
-        float revenue = 0;
-        for(int correctNum = 3; correctNum<=6 ; correctNum++){
-            int count = lottoStatistic.getOrDefault(Long.valueOf(correctNum),0);
-            InfoDto infoDto = new InfoDto(correctNum,Winnings[correctNum],count);
-            infoDtos.add(infoDto);
-            revenue += (count*Winnings[correctNum]);
-        }
-        revenueRate = Math.round((revenue / purchaseAmount) * 100) / 100.0;
+
+    public static Map<Long, Integer> countLottoPerCorrectNum(List<Long> countLottoForEachCorrectNum){
+        Map<Long,Integer> statistic = new HashMap<>();
+
+        countLottoForEachCorrectNum.stream()
+                .filter( correctNum -> correctNum >= PRICE_START_NUM )
+                .forEach(correctNum -> {
+                    statistic.put(correctNum,statistic.getOrDefault(correctNum, 0) + 1);
+                });
+
+        return statistic;
     }
 
-    public double getRevenueRate() {
+    public static double getRevenueRate(int purchaseAmount, Map<Long,Integer> countLottoPerCorrectNum){
+        float revenue = 0;
+        for(int correctNum = PRICE_START_NUM; correctNum<=PRICE_MAX_NUM ; correctNum++){
+            int count = countLottoPerCorrectNum.getOrDefault(Long.valueOf(correctNum),0);
+            revenue += (count*WINNINGPRICE[correctNum]);
+        }
+        double revenueRate = Math.round((revenue / purchaseAmount) * 100) / 100.0;
         return revenueRate;
     }
 
-    public List<InfoDto> getInfoDtos() {
-        return infoDtos;
-    }
+
 }
