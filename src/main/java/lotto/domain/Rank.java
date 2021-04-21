@@ -28,7 +28,7 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static Integer countMatchlottos(Rank rank, List<Lotto> lottos, Lotto winningLotto) {
+    public static Integer countMatchLottos(Rank rank, List<Lotto> lottos, Lotto winningLotto) {
         return (int) lottos.stream()
                         .filter(lotto -> rank.match == lotto.match(winningLotto))
                         .count();
@@ -44,8 +44,5 @@ public enum Rank {
 
     public int getPrice() {
         return this.price;
-    }
-    public int getMatch() {
-        return this.match;
     }
 }

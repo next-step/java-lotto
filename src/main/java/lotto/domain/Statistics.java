@@ -22,7 +22,7 @@ public class Statistics {
 
     public Map<Rank, Integer> getStatistics() {
         Arrays.stream(Rank.values())
-                .forEach(prize -> lottoRank.put(prize, Rank.countMatchlottos(prize, lottos, winningLotto)));
+                .forEach(prize -> lottoRank.put(prize, Rank.countMatchLottos(prize, lottos, winningLotto)));
 
         return lottoRank;
     }
