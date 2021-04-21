@@ -53,4 +53,9 @@ public class LottoTest {
         assertThat(userLotto.match(winning)).isEqualTo(5);
     }
 
+    @Test
+    void display() {
+        Lotto userLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        System.out.println(userLotto.toString());
+    }
 }

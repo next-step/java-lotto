@@ -59,4 +59,8 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
+    }
 }

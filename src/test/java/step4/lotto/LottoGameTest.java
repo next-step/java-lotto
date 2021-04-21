@@ -10,5 +10,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGameTest {
 
+    @Test
+    void 로또_결과() {
 
+
+
+
+
+
+
+    }
 }

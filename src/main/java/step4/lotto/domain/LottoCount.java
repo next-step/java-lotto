@@ -16,13 +16,16 @@ public class LottoCount {
         this.manualCount = new Count(count);
     }
 
+    public Count getManualCount() {
+        return manualCount;
+    }
+
     public Count autoCount() {
         Count totalCount = new Count(money.divide(LOTTO_PRIZE));
 
         if(totalCount.comapre(this.manualCount)){
             throw new IllegalArgumentException();
         }
-
         return totalCount;
     }
 

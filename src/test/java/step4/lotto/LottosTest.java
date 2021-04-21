@@ -30,7 +30,7 @@ public class LottosTest {
     void 로또_수동_2개_추가() {
         List<String> lottoList = Arrays.asList("1,2,3,4,5,6", "4,5,6,7,8,9");
         Lottos lottos = new Lottos();
-        lottos.createManualLottos(lottoList);
+        lottos.addLotto(lottoList);
         assertThat(lottos.lottoCount()).isEqualTo(2);
     }
 
@@ -39,14 +39,22 @@ public class LottosTest {
         List<String> lottoList = Arrays.asList("2,3,4,5,6", "444,5,6,7,8,9");
         Lottos lottos = new Lottos();
         assertThatThrownBy(() -> {
-            lottos.createManualLottos(lottoList);
+            lottos.addLotto(lottoList);
        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또_자동_3개() {
         Lottos lottos = new Lottos();
-        lottos.createAutoLottos(3);
+        lottos.addLotto(3);
         assertThat(lottos.lottoCount()).isEqualTo(3);
+    }
+
+    @Test
+    void display() {
+        Lottos lottos = new Lottos();
+        lottos.addLotto(3);
+        System.out.println(lottos.toString());
+
     }
 }

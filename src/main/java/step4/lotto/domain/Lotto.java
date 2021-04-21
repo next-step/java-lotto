@@ -40,7 +40,9 @@ public class Lotto {
         return lotto.contains(userNumber);
     }
 
-
+    public Set<LottoNumber> getLotto() {
+        return lotto;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,4 +57,8 @@ public class Lotto {
         return Objects.hash(lotto);
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(lotto);
+    }
 }

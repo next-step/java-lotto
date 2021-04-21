@@ -17,29 +17,33 @@ public class LottoGame {
 
     public void run() {
         // 로또 금액입력
-        int money = inputLottoView.inputMoney();
+        Money money = new Money(inputLottoView.inputMoney());
+
         // 로또 수동처리
         int manualCount = inputLottoView.inputManualCount();
 
-        // 돈에 해당하는 로또 갯수 구하기
-        LottoCount lottoCount = new LottoCount(money, manualCount);
         //로또 수동 입력
         List<String> manualLotto = inputLottoView.inputManualNumber(manualCount);
 
-        // 로또 생성
         Lottos lottos = new Lottos();
-        lottos.createManualLottos(manualLotto);
-        lottos.createAutoLottos(lottoCount.autoCount().getCount());
+        lottos.addLotto(money.lottoCount() - manualCount);
+        lottos.addLotto(manualLotto);
 
-        // 당첨 번호 입력
+       // 당첨
+        resultInputView.displayLotto(money.lottoCount() ,manualCount, lottos.toString());
+
         WinningLotto winningLotto = new WinningLotto(
                 StringUtil.stringToList(inputLottoView.inputWinningLotto()) ,
                 inputLottoView.inputBonusNumber());
 
+        Result result = lottos.match(winningLotto);
+
+        resultInputView.displayResultTitle();
+        resultInputView.display(result.displayResult());
+        resultInputView.display(money.profits(result.prize()));
+
+
     }
 
 
-    public Rank match(Lotto userLotto, WinningLotto winningLotto){
-        return winningLotto.match(userLotto);
-    }
 }
