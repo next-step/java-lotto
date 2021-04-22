@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.place.LottoFirstPlace;
-import lotto.domain.place.LottoPlaces;
+import lotto.domain.place.FirstPlace;
+import lotto.domain.place.Places;
 import lotto.function.SixLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ class LottoTicketTest {
 
     // then
     assertThat(lottoTicket.getValues())
-            .contains(LottoNumbers.generateSixNumbersFromStringNumbers("1, 2, 3, 4, 5, 6"));
+            .contains(Lottery.generateSixNumbersFromStringNumbers("1, 2, 3, 4, 5, 6"));
   }
 
   @Test
@@ -70,11 +70,11 @@ class LottoTicketTest {
                     .collect(Collectors.toList()), new ArrayList<>());
 
     // when
-    LottoPlaces places = lottoTicket.getMatchedLottoPlaces(LottoWiningNumbers.generate("1,2,3,4,5,6"),
-            LottoBonusBall.valueOf(10));
+    Places places = lottoTicket.getMatchedPlaces(WiningLottery.generate("1,2,3,4,5,6"),
+            BonusBall.valueOf(10));
 
     // then
     assertThat(places.getValues())
-            .contains(LottoFirstPlace.create().win().win().win());
+            .contains(FirstPlace.create().win().win().win());
   }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lottery;
 import lotto.domain.LottoTicket;
 
 import java.util.List;
@@ -43,8 +43,8 @@ public final class InputView {
     int totalCount = lottoTicket.ticketCount();
     int totalCountOfAuto = totalCount - totalCountOfManual;
     System.out.println(String.format(ISSUED_LOTTO_TICKET_FORMAT, totalCountOfManual, totalCountOfAuto));
-    for (LottoNumbers lottoNumbers : lottoTicket.getValues()) {
-      System.out.println(lottoNumbers);
+    for (Lottery lottery : lottoTicket.getValues()) {
+      System.out.println(lottery);
     }
   }
 

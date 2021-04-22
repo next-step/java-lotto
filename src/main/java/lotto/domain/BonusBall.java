@@ -2,18 +2,18 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoBonusBall {
+public class BonusBall {
   private final LottoNumber value;
 
-  private LottoBonusBall(LottoNumber value) {
+  private BonusBall(LottoNumber value) {
     this.value = value;
   }
 
-  public static LottoBonusBall valueOf(int number) {
-    return new LottoBonusBall(LottoNumber.generate(number));
+  public static BonusBall valueOf(int number) {
+    return new BonusBall(LottoNumber.generate(number));
   }
 
-  public boolean isMatch(LottoNumbers lottoNumbers) {
+  public boolean isMatch(Lottery lottoNumbers) {
     return lottoNumbers.contains(value);
   }
 
@@ -22,8 +22,8 @@ public class LottoBonusBall {
     if (this == o) return true;
     if (o == null) return false;
 
-    if (o instanceof LottoBonusBall) {
-      LottoBonusBall bonusBall = (LottoBonusBall) o;
+    if (o instanceof BonusBall) {
+      BonusBall bonusBall = (BonusBall) o;
       return Objects.equals(value, bonusBall.value);
     } else if (o instanceof LottoNumber) {
       LottoNumber lottoNumber = (LottoNumber) o;

@@ -6,6 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface GenerateNumbers {
-
   List<LottoNumber> get();
 }

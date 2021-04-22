@@ -6,18 +6,18 @@ import lotto.function.GenerateNumbers;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoWiningNumbers {
-  private final LottoNumbers value;
+public class WiningLottery {
+  private final Lottery value;
 
-  private LottoWiningNumbers(LottoNumbers value) {
+  private WiningLottery(Lottery value) {
     this.value = value;
   }
 
-  public static LottoWiningNumbers generate(final GenerateNumbers generateNumbers) {
-    return new LottoWiningNumbers(LottoNumbers.generateSixNumbers(generateNumbers));
+  public static WiningLottery generate(final GenerateNumbers generateNumbers) {
+    return new WiningLottery(Lottery.generateSixNumbers(generateNumbers));
   }
 
-  public static LottoWiningNumbers generate(final String winningNumbersString) {
+  public static WiningLottery generate(final String winningNumbersString) {
     return generate(() -> StringUtil.splitToList(winningNumbersString)
             .stream()
             .map(StringUtil::trim)
@@ -26,7 +26,7 @@ public class LottoWiningNumbers {
             .collect(Collectors.toList()));
   }
 
-  public int countOfMatch(final LottoNumbers other) {
+  public int countOfMatch(final Lottery other) {
     return value.matchLottoNumber(other);
   }
 
@@ -34,7 +34,7 @@ public class LottoWiningNumbers {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoWiningNumbers that = (LottoWiningNumbers) o;
+    WiningLottery that = (WiningLottery) o;
     return Objects.equals(value, that.value);
   }
 

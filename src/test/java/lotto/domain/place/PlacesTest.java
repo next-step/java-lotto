@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoPlacesTest {
+class PlacesTest {
 
   @Test
   @DisplayName("로또 등수 일급 컬렉션 클래스를 생성한다.")
   void create() {
     // given
-    LottoPlaces places = LottoPlaces.create();
+    Places places = Places.create();
 
     // when
     places = places.record(Rank.FIRST.getCountOfMatch(), false);
@@ -19,8 +19,8 @@ class LottoPlacesTest {
 
     // then
     assertThat(places.getValues())
-            .contains(LottoFirstPlace.create().win(),
-                    LottoSecondPlace.create().win(),
-                    LottoThirdPlace.create());
+            .contains(FirstPlace.create().win(),
+                    SecondPlace.create().win(),
+                    ThirdPlace.create());
   }
 }

@@ -8,25 +8,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lottery {
   private static final int SIZE = 6;
   private static final String ERROR_DIGITS_EXCEED_FORMAT = "로또는 %d자리 숫자로 생성해야 됩니다.";
 
   private final List<LottoNumber> values;
 
-  private LottoNumbers(List<LottoNumber> values) {
+  private Lottery(List<LottoNumber> values) {
     this.values = Collections.unmodifiableList(values);
   }
 
-  public static LottoNumbers generateSixNumbers(final GenerateNumbers generateNumbers) {
+  public static Lottery generateSixNumbers(final GenerateNumbers generateNumbers) {
     List<LottoNumber> lottoNumbers = generateNumbers.get();
     if (lottoNumbers.size() != SIZE) {
       throw new IllegalArgumentException(String.format(ERROR_DIGITS_EXCEED_FORMAT, SIZE));
     }
-    return new LottoNumbers(lottoNumbers);
+    return new Lottery(lottoNumbers);
   }
 
-  public static LottoNumbers generateSixNumbersFromStringNumbers(final String generateNumbers) {
+  public static Lottery generateSixNumbersFromStringNumbers(final String generateNumbers) {
     return generateSixNumbers(() -> StringUtil.splitToList(generateNumbers)
             .stream()
             .map(StringUtil::splitToList)
@@ -41,7 +41,7 @@ public class LottoNumbers {
     return values.size();
   }
 
-  public int matchLottoNumber(final LottoNumbers other) {
+  public int matchLottoNumber(final Lottery other) {
     return (int) values.stream()
             .filter(other::contains)
             .count();
@@ -59,7 +59,7 @@ public class LottoNumbers {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoNumbers that = (LottoNumbers) o;
+    Lottery that = (Lottery) o;
     return Objects.equals(values, that.values);
   }
 
