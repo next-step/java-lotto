@@ -15,9 +15,12 @@ public class Numbers {
   }
 
   public void validatorNumbers() {
-    numbers.stream().filter(number -> number < 0).forEach(number -> {
+    boolean result = numbers.stream().anyMatch(number -> number < 0);
+
+    if (result = true) {
       throw new RuntimeException();
-    });
+    }
+
   }
 
 }
