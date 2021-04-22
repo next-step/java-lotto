@@ -2,11 +2,11 @@ package study.step1;
 
 import java.util.List;
 
-public class Numbers {
+public class PositiveNumbers {
 
   private final List<Integer> numbers;
 
-  public Numbers(List<Integer> numbers) {
+  public PositiveNumbers(List<Integer> numbers) {
     this.numbers = numbers;
   }
 

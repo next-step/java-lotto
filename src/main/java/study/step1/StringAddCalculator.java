@@ -18,11 +18,11 @@ public class StringAddCalculator {
 
     List<Integer> convertedNumbers = convertNumbers(tokenDelimiter.getNumberTokens());
 
-    Numbers numbers = new Numbers(convertedNumbers);
+    PositiveNumbers positiveNumbers = new PositiveNumbers(convertedNumbers);
 
-    numbers.validatorNumbers();
+    positiveNumbers.validatorNumbers();
 
-    return numbers.sum();
+    return positiveNumbers.sum();
   }
 
   public List<Integer> convertNumbers(String[] tokenNumber) {
