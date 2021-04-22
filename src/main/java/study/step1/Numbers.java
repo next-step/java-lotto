@@ -17,10 +17,9 @@ public class Numbers {
   public void validatorNumbers() {
     boolean result = numbers.stream().anyMatch(number -> number < 0);
 
-    if (result = true) {
+    if (result) {
       throw new RuntimeException();
     }
-
   }
 
 }
