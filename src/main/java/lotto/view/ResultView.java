@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
@@ -25,27 +26,36 @@ public class ResultView {
         System.out.println("[" + lottoNumbers+ "]");
     }
 
-    public void printLottoRank(Map<Rank, Integer> lottoPrizeMap, int price) {
+    public void printLottoRank(Map<Rank, Integer> lottoPrizeMap, Money money) {
         System.out.println("===당첨통계===");
 
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.NOT_MATCH) && lottoPrizeMap.get(rank) != 0)
                 .forEach(rank -> printRank(rank, lottoPrizeMap));
 
-         System.out.println("총 수익률: " + getRevenueRate(lottoPrizeMap, price));
-
-    }
-
-    private double getRevenueRate(Map<Rank, Integer> lottoPrizeMap, int price) {
-        int totalPrice = lottoPrizeMap.keySet().stream()
-                            .filter(prize -> prize != Rank.NOT_MATCH)
-                            .mapToInt(prize -> lottoPrizeMap.get(prize) * prize.getPrice())
-                            .sum();
-
-        return Math.round((totalPrice/price)*100)/(double) 100;
+         System.out.println("총 수익률: " + money.revenueRate(lottoPrizeMap));
     }
 
     private void printRank(Rank rank, Map<Rank, Integer> lottoPrizeMap) {
-        System.out.println(rank.getMessage() + " " + lottoPrizeMap.get(rank) + "개");
+        System.out.println(getRankMessage(rank) + " " + lottoPrizeMap.get(rank) + "개");
+    }
+
+    private String getRankMessage(Rank rank) {
+        if (Rank.FIRST == rank)
+            return "6개 일치 (2,000,000,000원)";
+
+        if (Rank.SECOND == rank)
+            return "5개 일치 (30,000,000원)";
+
+        if (Rank.THIRD == rank)
+            return "4개 일치 (1,500,000원)";
+
+        if (Rank.FOURTH == rank)
+            return "3개 일치 (50,000원)";
+
+        if (Rank.FIFTH == rank)
+            return "2개 일치 (5,000원)";
+
+        return "";
     }
 }

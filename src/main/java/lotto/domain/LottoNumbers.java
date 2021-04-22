@@ -17,8 +17,18 @@ public class LottoNumbers {
                     .forEach(lottoNumbers::add);
     }
 
-    public List<Integer> getLottoResult() {
+    public List<Integer> generateLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
+        return generateShuffleNumber();
+    }
+
+    public List<Integer> generateShuffleNumber() {
+        return lottoNumbers.stream()
+                .limit(LOTTO_NUMBER_COUNT)
+                .collect(Collectors.toList());
+    }
+
+    public int lottoNumbersCount() {
+        return lottoNumbers.size();
     }
 }

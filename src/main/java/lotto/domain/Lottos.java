@@ -15,7 +15,7 @@ public class Lottos {
     }
 
     private List<Integer> getLottoNumbers() {
-        return new LottoNumbers().getLottoResult();
+        return new LottoNumbers().generateLottoNumbers();
     }
 
     public List<Lotto> getLottos() {

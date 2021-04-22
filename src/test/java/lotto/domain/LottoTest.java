@@ -33,7 +33,13 @@ class LottoTest {
 
         int count = lotto.match(winningLotto);
         assertThat(count).isEqualTo(6);
+    }
 
+    @Test
+    public void lottoRangeTest() {
+        assertThatThrownBy(
+                () -> new Lotto(Arrays.asList(1,2,33,44,55,6))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

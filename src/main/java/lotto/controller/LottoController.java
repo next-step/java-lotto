@@ -14,15 +14,17 @@ public class LottoController {
 
         int price = inputView.inputLottoPrice();
 
-        int lottoCount = new Money().buyCount(price);
+        Money money = new Money(price);
+
+        int lottoCount = money.buyCount();
         resultView.printLottoCount(lottoCount);
 
         Lottos lottos = new Lottos(lottoCount);
         resultView.printLottos(lottos);
 
         String winningLottoNumbers = inputView.inputWinningLotto();
-        Statistics statistics = new Statistics(lottos.getLottos(), winningLottoNumbers);
-        Map<Rank, Integer> lottoRankMap = statistics.getStatistics();
-        resultView.printLottoRank(lottoRankMap, price);
+        Statistics statistics = new Statistics(winningLottoNumbers);
+        Map<Rank, Integer> lottoRankMap = statistics.getStatistics(lottos.getLottos());
+        resultView.printLottoRank(lottoRankMap, money);
     }
 }
