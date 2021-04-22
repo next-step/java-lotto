@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.place.LottoPlaces;
+import lotto.domain.place.Places;
 import lotto.function.GenerateNumbers;
 
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ public class LottoTicket {
   private static final String ERROR_LIMIT_BOUGHT_LOTTO_OVER_FORMAT = "구입 금액에 맞는 구매할 로또 총 수는 %d 입니다.";
   private static final int PRICE = 1_000;
 
-  private final List<LottoNumbers> values;
+  private final List<Lottery> values;
 
-  private LottoTicket(List<LottoNumbers> values) {
+  private LottoTicket(List<Lottery> values) {
     this.values = Collections.unmodifiableList(values);
   }
 
@@ -25,30 +25,30 @@ public class LottoTicket {
                                   final List<String> manualLottoStrings) {
     final int countOfManualLotto = manualLottoStrings.size();
 
-    List<LottoNumbers> values = new ArrayList<>(countOfTotalLottery(myMoney));
-    values.addAll(getManualLottoNumbers(myMoney, manualLottoStrings, countOfManualLotto));
-    values.addAll(getAutoLottoNumbers(myMoney, generateNumbers, countOfManualLotto));
+    List<Lottery> values = new ArrayList<>(countOfTotalLottery(myMoney));
+    values.addAll(getManualLotteries(myMoney, manualLottoStrings, countOfManualLotto));
+    values.addAll(getAutoLotteries(myMoney, generateNumbers, countOfManualLotto));
     return new LottoTicket(values);
   }
 
-  private static List<LottoNumbers> getAutoLottoNumbers(int myMoney, GenerateNumbers generateNumbers, int countOfManualLotto) {
+  private static List<Lottery> getAutoLotteries(int myMoney, GenerateNumbers generateNumbers, int countOfManualLotto) {
     final int availableMoney = myMoney - ( countOfManualLotto * PRICE );
-    final int countOfAutoLotto = countOfTotalLottery(availableMoney);
-    checkExceedMaximumBuyToLotto(availableMoney, countOfAutoLotto);
-    return IntStream.range(0, countOfAutoLotto)
-            .mapToObj(i -> LottoNumbers.generateSixNumbers(generateNumbers))
+    final int countOfAutoLottery = countOfTotalLottery(availableMoney);
+    checkExceedMaximumBuyToLottery(availableMoney, countOfAutoLottery);
+    return IntStream.range(0, countOfAutoLottery)
+            .mapToObj(i -> Lottery.generateSixNumbers(generateNumbers))
             .collect(Collectors.toList());
   }
 
-  private static List<LottoNumbers> getManualLottoNumbers(int myMoney, List<String> manualLottoStrings, int countOfManualLotto) {
-    checkExceedMaximumBuyToLotto(myMoney, countOfManualLotto);
+  private static List<Lottery> getManualLotteries(int myMoney, List<String> manualLottoStrings, int countOfManualLottery) {
+    checkExceedMaximumBuyToLottery(myMoney, countOfManualLottery);
     return manualLottoStrings.stream()
-            .map(LottoNumbers::generateSixNumbersFromStringNumbers)
+            .map(Lottery::generateSixNumbersFromStringNumbers)
             .collect(Collectors.toList());
   }
 
-  private static void checkExceedMaximumBuyToLotto(int myMoney, int countOfBoughtLotto) {
-    if (countOfTotalLottery(myMoney) - countOfBoughtLotto < 0) {
+  private static void checkExceedMaximumBuyToLottery(int myMoney, int countOfBoughtLottery) {
+    if (countOfTotalLottery(myMoney) - countOfBoughtLottery < 0) {
       throw new IllegalArgumentException(String.format(ERROR_LIMIT_BOUGHT_LOTTO_OVER_FORMAT, countOfTotalLottery(myMoney)));
     }
   }
@@ -57,23 +57,22 @@ public class LottoTicket {
     return money / PRICE;
   }
 
-  public LottoPlaces getMatchedLottoPlaces(LottoWiningNumbers lottoWiningNumbers,
-                                           LottoBonusBall lottoBonusBall) {
-    LottoPlaces lottoPlaces = LottoPlaces.create();
-    for (LottoNumbers lottoNumbers : values) {
-      int countOfMatch = lottoWiningNumbers.countOfMatch(lottoNumbers);
-      boolean matchBonus = lottoBonusBall.isMatch(lottoNumbers);
-      System.out.println(countOfMatch);
-      lottoPlaces = lottoPlaces.record(countOfMatch, matchBonus);
+  public Places getMatchedPlaces(WiningLottery winingLottery,
+                                 BonusBall bonusBall) {
+    Places places = Places.create();
+    for (Lottery lottery : values) {
+      int countOfMatch = winingLottery.countOfMatch(lottery);
+      boolean matchBonus = bonusBall.isMatch(lottery);
+      places = places.record(countOfMatch, matchBonus);
     }
-    return lottoPlaces;
+    return places;
   }
 
   public int totalSpentMoney() {
     return PRICE * ticketCount();
   }
 
-  public List<LottoNumbers> getValues() {
+  public List<Lottery> getValues() {
     return values;
   }
 

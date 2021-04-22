@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.LottoBonusBall;
+import lotto.domain.BonusBall;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoWiningNumbers;
-import lotto.domain.place.LottoPlaces;
+import lotto.domain.WiningLottery;
+import lotto.domain.place.Places;
 import lotto.function.SixLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -24,12 +24,12 @@ public class LottoApplication {
     InputView.printBoughtLottoNumbers(boughtLottoTicket, countOfBoughtManualLotto);
 
     String lottoWiningNumbersString = InputView.getLottoWiningNumbersString();
-    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(lottoWiningNumbersString);
+    WiningLottery winingLottery = WiningLottery.generate(lottoWiningNumbersString);
 
     int lottoBonusBallNumber = InputView.getBonusBall();
 
-    LottoBonusBall bonusBall = LottoBonusBall.valueOf(lottoBonusBallNumber);
-    LottoPlaces places = boughtLottoTicket.getMatchedLottoPlaces(lottoWiningNumbers, bonusBall);
+    BonusBall bonusBall = BonusBall.valueOf(lottoBonusBallNumber);
+    Places places = boughtLottoTicket.getMatchedPlaces(winingLottery, bonusBall);
 
     long percentOfInvestment = places.totalWinningMoney()
             / boughtLottoTicket.totalSpentMoney();

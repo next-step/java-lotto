@@ -17,16 +17,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class LottoNumbersTest {
+class LotteryTest {
 
   @Test
   @DisplayName("6개의 임의의 로또 숫자를 생성한다.")
   void generateSixNumbers() {
     // given
-    LottoNumbers lottoNumbers = LottoNumbers.generateSixNumbers(new SixLottoNumbers());
+    Lottery lottery = Lottery.generateSixNumbers(new SixLottoNumbers());
 
     // when
-    int actual = lottoNumbers.size();
+    int actual = lottery.size();
 
     // then
     assertThat(actual).isEqualTo(6);
@@ -36,7 +36,7 @@ class LottoNumbersTest {
   @DisplayName("생성된 로또 번호들에 대해 추가/수정/삭제를 할 수 없다.")
   void generateSixNumbers_immutableList() {
     // given
-    List<LottoNumber> list = LottoNumbers.generateSixNumbers(new SixLottoNumbers())
+    List<LottoNumber> list = Lottery.generateSixNumbers(new SixLottoNumbers())
             .getValues();
 
     // when
@@ -55,11 +55,11 @@ class LottoNumbersTest {
     String param = "8, 21, 23, 41, 42, 43";
 
     // when
-    LottoNumbers actual = LottoNumbers.generateSixNumbersFromStringNumbers(param);
+    Lottery actual = Lottery.generateSixNumbersFromStringNumbers(param);
 
     // then
     assertThat(actual).isNotNull()
-            .isEqualTo(LottoNumbers.generateSixNumbers(()
+            .isEqualTo(Lottery.generateSixNumbers(()
                     -> Arrays.asList(
                             LottoNumber.generate(8),
                             LottoNumber.generate(21),
@@ -75,18 +75,18 @@ class LottoNumbersTest {
   @DisplayName("로또 당첨 번호와 비교하여 총 맞은 번호 갯수를 반환한다.")
   void matchLottoNumber(int startNumber, int endNumber, int matchCount) {
     // given
-    LottoNumbers lottoWiningNumbers = getLottoNumbers(1, 6);
+    Lottery winingLottery = getLottery(1, 6);
 
     // when
-    LottoNumbers lottoNumbers = getLottoNumbers(startNumber, endNumber);
+    Lottery lottery = getLottery(startNumber, endNumber);
 
     // then
-    assertThat(lottoWiningNumbers.matchLottoNumber(lottoNumbers))
+    assertThat(winingLottery.matchLottoNumber(lottery))
             .isEqualTo(matchCount);
   }
 
-  private LottoNumbers getLottoNumbers(final int startNumber, final int endNumber) {
-    return LottoNumbers.generateSixNumbers(() -> IntStream.rangeClosed(startNumber, endNumber)
+  private Lottery getLottery(final int startNumber, final int endNumber) {
+    return Lottery.generateSixNumbers(() -> IntStream.rangeClosed(startNumber, endNumber)
             .mapToObj(LottoNumber::generate)
             .collect(Collectors.toList()));
   }

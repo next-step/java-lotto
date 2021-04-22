@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWiningNumbersTest {
+class WiningLotteryTest {
 
   @Test
   @DisplayName("로또 당첨 번호를 생성한다.")
@@ -17,10 +17,10 @@ class LottoWiningNumbersTest {
     // given
 
     // when
-    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate(new SixLottoNumbers());
+    WiningLottery winingLottery = WiningLottery.generate(new SixLottoNumbers());
 
     // then
-    assertThat(lottoWiningNumbers).isNotNull();
+    assertThat(winingLottery).isNotNull();
   }
 
   @Test
@@ -29,12 +29,12 @@ class LottoWiningNumbersTest {
     // given
 
     // when
-    LottoWiningNumbers lottoWiningNumbers = LottoWiningNumbers.generate("1, 2, 3, 4, 5, 6");
+    WiningLottery winingLottery = WiningLottery.generate("1, 2, 3, 4, 5, 6");
 
     // then
-    assertThat(lottoWiningNumbers)
+    assertThat(winingLottery)
             .isNotNull()
-            .isEqualTo(LottoWiningNumbers.generate(() -> Arrays.asList(1, 2, 3, 4, 5, 6)
+            .isEqualTo(WiningLottery.generate(() -> Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream().map(LottoNumber::generate)
                     .collect(Collectors.toList())));
   }

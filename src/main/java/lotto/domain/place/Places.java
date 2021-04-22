@@ -6,42 +6,42 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoPlaces {
-  private final List<LottoPlace> values;
+public class Places {
+  private final List<Place> values;
 
-  private LottoPlaces(List<LottoPlace> values) {
+  private Places(List<Place> values) {
     this.values = Collections.unmodifiableList(values);
   }
 
-  public static LottoPlaces create() {
-    List<LottoPlace> list = Arrays.asList(
-            LottoFifthPlace.create(),
-            LottoFourthPlace.create(),
-            LottoThirdPlace.create(),
-            LottoSecondPlace.create(),
-            LottoFirstPlace.create()
+  public static Places create() {
+    List<Place> list = Arrays.asList(
+            FifthPlace.create(),
+            FourthPlace.create(),
+            ThirdPlace.create(),
+            SecondPlace.create(),
+            FirstPlace.create()
     );
-    return new LottoPlaces(list);
+    return new Places(list);
   }
 
-  public LottoPlaces record(int countOfMatch, boolean matchBonus) {
-    List<LottoPlace> result = new ArrayList<>();
-    for (LottoPlace lottoPlace : values) {
+  public Places record(int countOfMatch, boolean matchBonus) {
+    List<Place> result = new ArrayList<>();
+    for (Place lottoPlace : values) {
       if (lottoPlace.isMatch(countOfMatch, matchBonus)) {
         lottoPlace = lottoPlace.win();
       }
       result.add(lottoPlace);
     }
-    return new LottoPlaces(result);
+    return new Places(result);
   }
 
-  public List<LottoPlace> getValues() {
+  public List<Place> getValues() {
     return values;
   }
 
   public long totalWinningMoney() {
     return values.stream()
-            .map(LottoPlace::getTotalWinningMoney)
+            .map(Place::getTotalWinningMoney)
             .reduce(Long::sum)
             .orElse(0L);
   }
@@ -50,7 +50,7 @@ public class LottoPlaces {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoPlaces that = (LottoPlaces) o;
+    Places that = (Places) o;
     return Objects.equals(values, that.values);
   }
 

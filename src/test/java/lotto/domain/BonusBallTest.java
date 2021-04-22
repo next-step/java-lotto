@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoBonusBallTest {
+class BonusBallTest {
 
   @Test
   @DisplayName("보너스 볼을 생성한다.")
@@ -14,7 +14,7 @@ class LottoBonusBallTest {
     int number = 1;
 
     // when
-    LottoBonusBall bonusBall = LottoBonusBall.valueOf(number);
+    BonusBall bonusBall = BonusBall.valueOf(number);
 
     // then
     assertThat(bonusBall).isEqualTo(LottoNumber.generate(1));

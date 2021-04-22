@@ -2,16 +2,16 @@ package lotto.domain.place;
 
 import java.util.Objects;
 
-public abstract class LottoPlace {
+public abstract class Place {
   protected final Rank value;
   protected final int count;
 
-  protected LottoPlace(Rank value, int count) {
+  protected Place(Rank value, int count) {
     this.value = value;
     this.count = count;
   }
 
-  public abstract LottoPlace win();
+  public abstract Place win();
 
   public long getTotalWinningMoney() {
     return getWinningMoney() * count;
@@ -40,7 +40,7 @@ public abstract class LottoPlace {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LottoPlace that = (LottoPlace) o;
+    Place that = (Place) o;
     return Objects.equals(count, that.count)
             && Objects.equals(value, that.value);
   }
