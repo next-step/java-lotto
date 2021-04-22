@@ -11,7 +11,7 @@ public class PositiveNumbers {
   }
 
   public int sum() {
-    return numbers.stream().mapToInt(i -> i).sum();
+    return numbers.stream().reduce(0, Integer::sum);
   }
 
   public void validatorNumbers() {
