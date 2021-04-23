@@ -11,6 +11,7 @@ public class InputView {
 
     private static final String INPUT_MESSAGE = "구입금액을 입력해주세요.";
     private static final String LAST_WEEK_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_LOTTO = "보너스 볼을 입력해 주세요.";
     private static final String SPLIT_DELIMITER = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -31,5 +32,10 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println(BONUS_LOTTO);
+        return scanner.nextInt();
     }
 }
