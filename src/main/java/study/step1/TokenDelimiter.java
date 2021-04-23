@@ -7,13 +7,13 @@ public class TokenDelimiter {
 
   private final String text;
 
-  private final String PATTERN_EXPRESION = "//(.)\n(.*)";
+  private static final String PATTERN_EXPRESION = "//(.)\n(.*)";
 
-  private final int DELIMITER = 1;
+  private static final int DELIMITER = 1;
 
-  private final int MATCHED_TEXT = 2;
+  private static final int MATCHED_TEXT = 2;
 
-  private final String SPLIT_TEXT = ",|:";
+  private static final String SPLIT_TEXT = ",|:";
 
   public TokenDelimiter(String text) {
     this.text = text;
