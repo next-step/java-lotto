@@ -9,8 +9,9 @@ public class StringAddCalculator {
     private static final String DELIMITER = ",|:";
 
     public static int splitAndSum(String text) {
-        if (isEmpty(text))
+        if (isEmpty(text)) {
             return 0;
+        }
 
         return sum(getNumbers(text));
     }
@@ -20,8 +21,9 @@ public class StringAddCalculator {
     }
 
     private static int sum(String[] numbers) {
-        if (numbers.length == 1)
+        if (numbers.length == 1) {
             return convertStringToInt(numbers[0]);
+        }
 
         return Arrays.stream(numbers)
                 .map(number -> convertStringToInt(number))
@@ -40,8 +42,9 @@ public class StringAddCalculator {
     }
 
     private static int convertStringToInt(String number) {
-        if (Integer.parseInt(number) < 0 || isNumeric(number))
+        if (Integer.parseInt(number) < 0 || !isNumeric(number)) {
             throw new RuntimeException();
+        }
 
         return Integer.parseInt(number);
     }
