@@ -6,4 +6,5 @@ public class Message {
     public static final String MINIMUM_MONEY_MESSAGE = "최소 금액은 1000원 입니다.";
     public static final String INPUT_MONEY_MESSAGE = "금액은 1000원 단위 입니다.";
     public static final String DUPLICATION_MESSAGE = "당첨 로또에 중복된 값이 있습니다.";
+    public static final String BONUS_DUPLICATION_MESSAGE = "보너스볼은 중복될 수 없습니다.";
 }
