@@ -14,7 +14,7 @@ public class Money {
         this.money = money;
     }
 
-    public int lottoCount(){
+    public int totalCount(){
         return money/LOTTO_PRIZE;
     }
 

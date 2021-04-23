@@ -32,11 +32,11 @@ public class LottoNumber {
     }
 
     public static Set<LottoNumber> autoNumber() {
-        List keys = new ArrayList(lottoNumbers.keySet());
+        List <Integer> keys = new ArrayList<>(lottoNumbers.keySet());
         Collections.shuffle(keys);
         List<LottoNumber> auto = new ArrayList<>();
-        for(Object object : keys){
-            auto.add(lottoNumbers.get(object));
+        for(Integer key : keys){
+            auto.add(lottoNumbers.get(key));
         }
         return new HashSet<>(auto.subList(0, LOTTO_NUMBER_COUNT));
     }

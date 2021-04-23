@@ -1,6 +1,10 @@
-package step4.lotto.domain;
+package step4.lotto.controller;
 
 import lotto.util.StringUtil;
+import step4.lotto.domain.Lottos;
+import step4.lotto.domain.Money;
+import step4.lotto.domain.Result;
+import step4.lotto.domain.WinningLotto;
 import step4.lotto.view.InputLottoView;
 import step4.lotto.view.ResultInputView;
 
@@ -25,24 +29,20 @@ public class LottoGame {
         //로또 수동 입력
         List<String> manualLotto = inputLottoView.inputManualNumber(manualCount);
 
-        Lottos lottos = new Lottos();
-        lottos.addLotto(money.lottoCount() - manualCount);
-        lottos.addLotto(manualLotto);
+        Lottos lottos = new Lottos(manualLotto,money.totalCount() - manualCount);
 
-       // 당첨
-        resultInputView.displayLotto(money.lottoCount() ,manualCount, lottos.toString());
+        // 당첨
+        resultInputView.displayLotto(money.totalCount(), manualCount, lottos.toString());
 
         WinningLotto winningLotto = new WinningLotto(
-                StringUtil.stringToList(inputLottoView.inputWinningLotto()) ,
+                StringUtil.stringToList(inputLottoView.inputWinningLotto()),
                 inputLottoView.inputBonusNumber());
 
-        Result result = lottos.match(winningLotto);
+        Result result = lottos.matching(winningLotto);
 
         resultInputView.displayResultTitle();
         resultInputView.display(result.displayResult());
         resultInputView.display(money.profits(result.prize()));
-
-
     }
 
 

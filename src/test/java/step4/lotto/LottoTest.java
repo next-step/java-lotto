@@ -3,13 +3,11 @@ package step4.lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import step4.lotto.domain.Lotto;
-import step4.lotto.domain.LottoGame;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     private List<Integer> winningLotto ;
@@ -21,7 +19,8 @@ public class LottoTest {
 
     @Test
     void create() {
-        assertThat(new Lotto(Arrays.asList(1,2,3,4,5,6))).isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        assertThatCode(() -> new Lotto(Arrays.asList(1,2,3,4,5,6)))
+                .doesNotThrowAnyException();
     }
 
     @Test

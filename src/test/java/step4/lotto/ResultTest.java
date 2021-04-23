@@ -10,11 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultTest {
 
     @Test
-    void init() {
-        assertThat(new Result()).isEqualTo(new Result());
-    }
-
-    @Test
     void 로또_1등_2회() {
         Result result = new Result();
         result.plusRankCount(Rank.FIRST);

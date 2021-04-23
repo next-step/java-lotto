@@ -1,72 +1,47 @@
 package step4.lotto.domain;
 
-import lotto.util.StringUtil;
+import step4.lotto.util.StringUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lottos {
-    List<Lotto> lottos;
+    private ManualLotto manualLotto;
+    private AutoLotto autoLotto;
 
-    public Lottos() {
-        this.lottos = new ArrayList<>();
+    public Lottos(List<String> manualLotto, int autoCount) {
+        this.manualLotto = new ManualLotto(manualLotto);
+        this.autoLotto = new AutoLotto(autoCount);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int lottoCount() {
-        return lottos.size();
-    }
-
-    public void add(Lotto userLotto) {
-        this.lottos.add(userLotto);
-    }
-
-    public void addLotto(int autoCount) {
-        for (int i = 0; i < autoCount; i++) {
-            add(new Lotto(LottoNumber.autoNumber()));
-        }
-    }
-
-    public void addLotto(List<String> manualLotto) {
-        for (String numbers : manualLotto) {
-            add(new Lotto(StringUtil.stringToList(numbers)));
-        }
-    }
-
-    public Result match(WinningLotto winningLotto){
+    public Result matching(WinningLotto winningLotto){
         Result result = new Result();
-        lottos.stream()
-                .forEach(lotto -> result.plusRankCount(match(lotto, winningLotto)));
+        manualLotto.matching(result, winningLotto);
+        autoLotto.matching(result, winningLotto);
         return result;
-    }
-
-    public Rank match(Lotto userLotto, WinningLotto winningLotto) {
-        return winningLotto.match(userLotto);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(manualLotto, lottos.manualLotto) && Objects.equals(autoLotto, lottos.autoLotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(manualLotto, autoLotto);
     }
 
     @Override
     public String toString() {
-        String result = lottos.stream()
-                        .map(n -> n.toString())
-                        .collect(Collectors.joining("\n"));
-        return result;
+        String manualText = manualLotto.toString();
+        String autoText = autoLotto.toString();
+        return StringUtil.checkString(manualText) ? manualText + "\n" + autoText : autoText;
+    }
+
+    public int lottoSize() {
+        return  manualLotto.size() + autoLotto.size();
     }
 }

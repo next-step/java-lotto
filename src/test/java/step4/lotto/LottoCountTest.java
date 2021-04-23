@@ -4,15 +4,14 @@ import org.junit.jupiter.api.Test;
 import step4.lotto.domain.Count;
 import step4.lotto.domain.LottoCount;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoCountTest {
 
     @Test
     void init() {
-        LottoCount lottoCount = new LottoCount();
-        assertThat(lottoCount).isEqualTo(new LottoCount());
+        assertThatCode(() -> new LottoCount())
+                .doesNotThrowAnyException();
     }
 
     @Test

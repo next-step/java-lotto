@@ -17,4 +17,8 @@ public class StringUtil {
         Collections.sort(list);
         return list;
     }
+
+    public static boolean checkString(String text){
+        return text == null || text.trim().isEmpty();
+    }
 }

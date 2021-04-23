@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step4.lotto.domain.LottoNumber;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +30,7 @@ public class LottoNumberTest {
 
     @Test
     void 자동번호_6개_추출() {
+
         Set<LottoNumber> auto = LottoNumber.autoNumber();
         assertThat(auto.size()).isEqualTo(6);
     }
