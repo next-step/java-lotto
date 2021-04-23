@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LottoTest {
 
     @Test
-    @DisplayName("로또 생성 테스트")
+    @DisplayName("로또 생성 테스트 - 개수 확인")
     void create_lotto_size_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
@@ -21,7 +21,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 생성 테스트")
+    @DisplayName("로또 생성 테스트 - 중복 확인")
     void create_lotto_duplication_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
@@ -40,7 +40,7 @@ class LottoTest {
 
         //when
         Lotto lotto = new Lotto(lottoBalls);
-        int winningCounts = lotto.countMatch(WinningLotto.of(1, 2, 3, 4, 5, 6));
+        int winningCounts = lotto.countMatch(WinningLotto.of(1, 2, 3, 4, 5, 6, 7));
 
         //then
         assertThat(winningCounts).isEqualTo(6);
