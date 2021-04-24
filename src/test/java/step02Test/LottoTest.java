@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private Lottos lottos = new Lottos();
+    private Lottos lottos = new Lottos(4);
     LottoResultDTO dto = new LottoResultDTO();
 
     @Test

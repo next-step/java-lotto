@@ -18,8 +18,13 @@ public class Lottos {
     private LottoCount lottoCount;
 
 
-    public Lottos() {
-        lottoCount = new LottoCount();
+    public Lottos(int lottoCount) {
+        this.lottoCount = new LottoCount(lottoCount);
+    }
+
+    public void setLottoCount() {
+        lottoCount.setLottoManualCount(InputView.inputManualLottoCount());
+        lottoCount.setLottoAutomaticCount();
     }
 
     public void makeLotto(NumberRule numberRule) {
@@ -43,7 +48,7 @@ public class Lottos {
 
         for (LottoNumbers numbers : lottos) {
             if (numbers.duplicateNumber(bonusNumber)) {
-                throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
+                throw new IllegalArgumentException(ERROR_INPUT_WINNER_NUMBER);
             }
 
             int matchCount = numbers.countCompareMatchNumber(winnerNumbers);
@@ -52,12 +57,6 @@ public class Lottos {
         }
 
         return ranks;
-    }
-
-    public void setLottoCount(int totalCount) {
-        lottoCount.setTotalCount(totalCount);
-        lottoCount.setLottoManualCount(InputView.inputManualLottoCount());
-        lottoCount.setLottoAutomaticCount(LottoCount.calculationRemain(totalCount,lottoCount.getManualCount()));
     }
 
     public LottosDTO getLottoResult() {

@@ -13,9 +13,8 @@ public class LottoShop {
     public LottosDTO buyLotto() {
         price = new LottoPrice(InputView.inputMoney());
 
-        lottos = new Lottos();
-
-        lottos.setLottoCount(price.calculationCount());
+        lottos = new Lottos(price.calculationCount());
+        lottos.setLottoCount();
         lottos.makeManualLotto();
         lottos.makeAutomaticLotto();
 

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static step02.utils.LottoConfig.*;
 
@@ -26,11 +25,22 @@ public class InputNumberRule extends NumberRule {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        boolean unique = numberSplit.stream().allMatch(new HashSet<>()::add);
-
-        if (unique) {
+        if (checkNumbersUnique(numberSplit)) {
             return numberSplit;
         }
-        throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
+        throw new IllegalArgumentException(ERROR_INPUT_WINNER_NUMBER);
     }
+
+    private boolean checkNumbersUnique(List<Integer> numberSplit) {
+        if (numberSplit.stream().allMatch(new HashSet<>()::add)) {
+            return checkNumberCountIsSix(numberSplit.size());
+        }
+       return false;
+    }
+
+    private boolean checkNumberCountIsSix(int listSize) {
+        return listSize == 6;
+    }
+
+
 }
