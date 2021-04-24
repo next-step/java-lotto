@@ -3,9 +3,9 @@ package step02Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.InputNumberRule;
-import step02.LottoNumber;
-import step02.LottoNumbers;
+import step02.model.numberRule.InputNumberRule;
+import step02.model.lotto.LottoNumber;
+import step02.model.lotto.LottoNumbers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,5 +29,12 @@ public class LottoNumbersTest {
     void matchBonusNumber() {
         assertThat(lottoNumbers.compareMatchBonusNumber(new LottoNumber(7))).isEqualTo(true);
         assertThat(lottoNumbers.compareMatchBonusNumber(new LottoNumber(1))).isEqualTo(false);
+    }
+
+    @Test
+    @DisplayName("중복 숫자 테스트")
+    void duplicateNumber() {
+        assertThat(lottoNumbers.duplicateNumber(new LottoNumber(7))).isEqualTo(true);
+        assertThat(lottoNumbers.duplicateNumber(new LottoNumber(1))).isEqualTo(false);
     }
 }

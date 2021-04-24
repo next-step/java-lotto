@@ -1,6 +1,6 @@
-package step02;
+package step02.utils;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class Validation {
 
@@ -22,6 +22,12 @@ public class Validation {
     public static void checkMinPrice(int price){
         if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_MIN_PRICE);
+        }
+    }
+
+    public static void checkMakeableLotto(int totalCount, int count) {
+        if (totalCount < count) {
+            throw new IllegalArgumentException(ERROR_OUT_OF_TOTAL_COUNT);
         }
     }
 

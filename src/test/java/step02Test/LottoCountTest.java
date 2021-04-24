@@ -1,24 +1,17 @@
 package step02Test;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.LottoPrice;
+import step02.model.lotto.LottoCount;
+import step02.model.lotto.LottoCountNumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoCountTest {
 
-    private LottoPrice lottoPrice;
-
-    @BeforeEach
-    void setLottoPrice() {
-        lottoPrice = new LottoPrice(5000);
-    }
-
     @Test
-    @DisplayName("입력한 돈에 맞게 로또 개수 출력 테스트")
-    void calculationCount() {
-        assertThat(LottoPrice.calculationCount(lottoPrice)).isEqualTo(5);
+    @DisplayName("남은 로또 갯수 테스트")
+    void calculateRemainCount() {
+        assertThat(LottoCount.calculationRemain(new LottoCountNumber(10), new LottoCountNumber(6))).isEqualTo(4);
     }
 }

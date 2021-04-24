@@ -1,4 +1,4 @@
-package step02;
+package step02.model.rank;
 
 import java.util.Arrays;
 

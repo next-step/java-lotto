@@ -1,10 +1,14 @@
-package step02;
+package step02.model.lotto;
+
+import step02.model.numberRule.NumberRule;
+import step02.utils.Validation;
+import step02.dto.LottoNumbersDTO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static step02.LottoConfig.*;
+import static step02.utils.LottoConfig.*;
 
 public class LottoNumbers {
 
@@ -33,6 +37,10 @@ public class LottoNumbers {
         return matchingCount(bonusNumber) == ONE;
     }
 
+    public boolean duplicateNumber(LottoNumber bonusNumber) {
+       return lottoNumbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    }
+
     private int matchingCount(LottoNumber winnerNumber) {
         if (lottoNumbers.contains(winnerNumber)) {
             return ONE;
@@ -41,8 +49,6 @@ public class LottoNumbers {
     }
 
     public LottoNumbersDTO getLottoNumbersResult() {
-        LottoNumbersDTO lottoDTO = new LottoNumbersDTO();
-        lottoDTO.setLottoNumbers(new ArrayList(lottoNumbers));
-        return lottoDTO;
+        return new LottoNumbersDTO(new ArrayList(lottoNumbers));
     }
 }

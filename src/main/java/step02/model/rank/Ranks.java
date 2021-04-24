@@ -1,10 +1,10 @@
-package step02;
+package step02.model.rank;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static step02.LottoConfig.ONE;
-import static step02.LottoConfig.ZERO;
+import static step02.utils.LottoConfig.ONE;
+import static step02.utils.LottoConfig.ZERO;
 
 public class Ranks {
     private Map<Rank, Integer> ranks = new HashMap<>();

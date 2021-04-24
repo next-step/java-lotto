@@ -1,6 +1,10 @@
-package step02;
+package step02.model.lotto;
 
-import static step02.LottoConfig.*;
+import step02.model.rank.Rank;
+import step02.model.rank.Ranks;
+import step02.utils.Validation;
+
+import static step02.utils.LottoConfig.*;
 
 public class LottoPrice {
     private final int buyPrice;
@@ -10,8 +14,8 @@ public class LottoPrice {
         this.buyPrice = price;
     }
 
-    public static int calculationCount(LottoPrice price) {
-        return price.buyPrice / LOTTO_PRICE;
+    public int calculationCount() {
+        return buyPrice / LOTTO_PRICE;
     }
 
     public static double calculateTotalReward(LottoPrice price, Ranks ranks) {

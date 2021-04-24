@@ -1,4 +1,6 @@
-package step02;
+package step02.model.lotto;
+
+import step02.utils.Validation;
 
 import java.util.Objects;
 

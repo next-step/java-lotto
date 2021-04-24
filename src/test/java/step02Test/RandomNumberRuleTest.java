@@ -2,7 +2,7 @@ package step02Test;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step02.RandomNumberRule;
+import step02.model.numberRule.RandomNumberRule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
