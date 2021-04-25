@@ -1,31 +1,43 @@
 package study.step2.validator;
 
+import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
+import static study.step2.utils.MessageUtil.VALIDATOR_MONEY_MESSAGE;
+import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
+
+import java.util.HashSet;
 import java.util.List;
-import study.step2.utils.MessageUtil;
 
 public class Validator {
 
   private static final int VALIDATOR_MONEY = 1000;
+  private static final int NUMBER_OF_LOTTO_NUMBER = 6;
 
   private Validator() {}
 
   public static void validatorMoney(int money) {
     if (money < VALIDATOR_MONEY) {
-      throw new IllegalArgumentException(MessageUtil.VALIDATOR_MONEY_MESSAGE);
+      throw new IllegalArgumentException(VALIDATOR_MONEY_MESSAGE);
     }
   }
 
   public static void isEmpty(String text) {
     if (text == null || text.isEmpty()) {
-      throw new IllegalArgumentException(MessageUtil.VALIDATOR_NUMBER_MESSAGE);
+      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
     }
   }
 
-  public static void validatorNumbers(List<Integer> numbers) {
+  public static void validatorPositiveNumbers(List<Integer> numbers) {
     boolean result = numbers.stream().anyMatch(number -> number < 0);
 
     if (result) {
-      throw new RuntimeException();
+      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
     }
   }
+
+  public static void checkDuplication(List<Integer> numbers) {
+    if (new HashSet<>(numbers).size() != NUMBER_OF_LOTTO_NUMBER) {
+      throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED);
+    }
+  }
+
 }
