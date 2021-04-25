@@ -16,8 +16,8 @@ public class Lottos {
 
     public Result matching(WinningLotto winningLotto){
         Result result = new Result();
-        manualLotto.matching(result, winningLotto);
-        autoLotto.matching(result, winningLotto);
+        manualLotto.lottoMatching(result, winningLotto);
+        autoLotto.lottoMatching(result, winningLotto);
         return result;
     }
 
@@ -38,7 +38,7 @@ public class Lottos {
     public String toString() {
         String manualText = manualLotto.toString();
         String autoText = autoLotto.toString();
-        return StringUtil.checkString(manualText) ? manualText + "\n" + autoText : autoText;
+        return !StringUtil.isEmpty(manualText) ? manualText + "\n" + autoText : autoText;
     }
 
     public int lottoSize() {

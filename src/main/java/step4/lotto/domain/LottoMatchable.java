@@ -1,7 +1,7 @@
 package step4.lotto.domain;
 
 public interface LottoMatchable {
-    void matching(Result result, WinningLotto winningLotto);
+    void lottoMatching(Result result, WinningLotto winningLotto);
 
-    Rank match(Lotto userLotto, WinningLotto winningLotto);
+    Rank lottoRank(Lotto userLotto, WinningLotto winningLotto);
 }

@@ -25,13 +25,13 @@ public class ManualLotto implements LottoMatchable{
     }
 
     @Override
-    public void matching(Result result, WinningLotto winningLotto) {
+    public void lottoMatching(Result result, WinningLotto winningLotto) {
         this.manualLottos.stream()
-                .forEach(lotto -> result.plusRankCount(match(lotto, winningLotto)));
+                .forEach(lotto -> result.plusRankCount(lottoRank(lotto, winningLotto)));
     }
 
     @Override
-    public Rank match(Lotto userLotto, WinningLotto winningLotto) {
+    public Rank lottoRank(Lotto userLotto, WinningLotto winningLotto) {
         return winningLotto.match(userLotto);
     }
 

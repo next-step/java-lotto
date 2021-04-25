@@ -18,7 +18,7 @@ public class StringUtil {
         return list;
     }
 
-    public static boolean checkString(String text){
+    public static boolean isEmpty(String text){
         return text == null || text.trim().isEmpty();
     }
 }
