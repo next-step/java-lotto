@@ -18,6 +18,12 @@ public class Lotto {
     return lottoNumbers;
   }
 
+  public int matchCount(List<Integer> lottoNumbers) {
+    return (int) this.lottoNumbers.stream()
+        .filter(lottoNumbers::contains)
+        .count();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
