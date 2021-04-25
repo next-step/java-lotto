@@ -35,7 +35,9 @@ public class InputView {
         .map(Integer::parseInt)
         .collect(Collectors.toList());
 
-    Validator.validatorNumbers(numbers);
+    Validator.validatorPositiveNumbers(numbers);
+
+    Validator.checkDuplication(numbers);
 
     Collections.sort(numbers);
 
