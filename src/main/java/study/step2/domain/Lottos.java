@@ -1,11 +1,12 @@
 package study.step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
 
-  private List<Lotto> lottos;
+  private List<Lotto> lottos = new ArrayList<>();
 
   public Lottos() {
   }
@@ -16,6 +17,20 @@ public class Lottos {
 
   public List<Lotto> getLottos() {
     return lottos;
+  }
+
+  public void add(Lotto lotto) {
+    this.lottos.add(lotto);
+  }
+
+  public LottoResult match(Lotto winningLotto) {
+    LottoResult lottoResult = new LottoResult();
+
+    lottos.stream().mapToInt(lotto -> lotto.matchCount(winningLotto.getLottoNumbers()))
+        .mapToObj(Rank::find)
+        .forEach(lottoResult::add);
+
+    return lottoResult;
   }
 
   @Override
@@ -34,4 +49,5 @@ public class Lottos {
   public int hashCode() {
     return Objects.hash(lottos);
   }
+
 }
