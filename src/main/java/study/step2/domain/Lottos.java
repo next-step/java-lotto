@@ -19,10 +19,6 @@ public class Lottos {
     return lottos;
   }
 
-  public void add(Lotto lotto) {
-    this.lottos.add(lotto);
-  }
-
   public LottoResult match(Lotto winningLotto) {
     LottoResult lottoResult = new LottoResult();
 

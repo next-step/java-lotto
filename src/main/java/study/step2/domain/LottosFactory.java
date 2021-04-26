@@ -1,18 +1,21 @@
 package study.step2.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottosFactory {
 
   public static Lottos makeLottos(int lottoCount) {
-    Lottos lottos = new Lottos();
+    List<Lotto> lottoList = new ArrayList<>();
 
     for (int i = 0; i < lottoCount; i++) {
       LottoNumber pickedLottoNumbers = new LottoNumber(LottoMachine.pick());
 
       Lotto lotto = new Lotto(pickedLottoNumbers);
-      lottos.add(lotto);
+      lottoList.add(lotto);
     }
 
-    return lottos;
+    return new Lottos(lottoList);
   }
 
 }
