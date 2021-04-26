@@ -14,10 +14,10 @@ public class LottoMachine {
   private static final int LOTTO_START_RANGE_NUMBER = 0;
   private static final int LOTTO_END_RANGE_NUMBER = 6;
 
-  private static final List<Integer> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+  private static final List<Integer> lottoNumbers = IntStream
+      .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
       .boxed()
-      .collect(Collectors.toList())
-      .subList(LOTTO_START_RANGE_NUMBER, LOTTO_END_RANGE_NUMBER);
+      .collect(Collectors.toList());
 
   private LottoMachine() {
   }
@@ -25,7 +25,7 @@ public class LottoMachine {
   public static Set<Integer> pick() {
     Collections.shuffle(lottoNumbers);
 
-    return new TreeSet<>(lottoNumbers);
+    return new TreeSet<>(lottoNumbers.subList(LOTTO_START_RANGE_NUMBER, LOTTO_END_RANGE_NUMBER));
   }
 
 }
