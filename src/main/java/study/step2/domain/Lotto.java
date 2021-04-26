@@ -1,26 +1,25 @@
 package study.step2.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class Lotto {
 
-  private Set<Integer> lottoNumbers;
+  private LottoNumber lottoNumber;
 
   public Lotto() {
   }
 
-  public Lotto(Set<Integer> lottoNumbers) {
-    this.lottoNumbers = lottoNumbers;
+  public Lotto(LottoNumber lottoNumber) {
+    this.lottoNumber = lottoNumber;
   }
 
-  public Set<Integer> getLottoNumbers() {
-    return lottoNumbers;
+  public LottoNumber getLottoNumbers() {
+    return lottoNumber;
   }
 
-  public int matchCount(Set<Integer> lottoNumbers) {
-    return (int) this.lottoNumbers.stream()
-        .filter(lottoNumbers::contains)
+  public int matchCount(LottoNumber winningLottoNumber) {
+    return (int) this.lottoNumber.getLottoNumbers().stream()
+        .filter(winningLottoNumber::isContains)
         .count();
   }
 
@@ -33,12 +32,11 @@ public class Lotto {
       return false;
     }
     Lotto lotto = (Lotto) o;
-    return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    return Objects.equals(lottoNumber, lotto.lottoNumber);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumbers);
+    return Objects.hash(lottoNumber);
   }
-
 }

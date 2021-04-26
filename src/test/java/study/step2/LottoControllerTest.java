@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.controller.LottoController;
 import study.step2.domain.Lotto;
+import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
 
@@ -50,10 +51,11 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
-    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
+    Set<Integer> pickedLottoNumberSet = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
+    LottoNumber pickedLottoNumber = new LottoNumber(pickedLottoNumberSet);
 
-    Lotto lotto = new Lotto(pickedLottoNumbers);
-    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+    Lotto lotto = new Lotto(pickedLottoNumber);
+    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumber))));
 
     LottoController lottoController = new LottoController();
 

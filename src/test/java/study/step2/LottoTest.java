@@ -3,12 +3,12 @@ package study.step2;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
 import study.step2.domain.LottoMachine;
+import study.step2.domain.LottoNumber;
 
 public class LottoTest {
 
@@ -16,7 +16,7 @@ public class LottoTest {
   @Test
   void createLotto() {
     // given
-    Set<Integer> pickedLottoNumbers = LottoMachine.pick();
+    LottoNumber pickedLottoNumbers = new LottoNumber(LottoMachine.pick());
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -29,7 +29,7 @@ public class LottoTest {
   @Test
   void createLottoFail() {
     // given
-    Set<Integer> pickedLottoNumbers = new TreeSet<>();
+    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>());
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -42,8 +42,8 @@ public class LottoTest {
   @Test
   void lottoNumberMatch() {
     // given
-    Set<Integer> winningLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
+    LottoNumber winningLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16)));
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -56,8 +56,8 @@ public class LottoTest {
   @Test
   void lottoNumberMatchFail() {
     // given
-    Set<Integer> winningLottoNumbers = new TreeSet<>(Arrays.asList(10, 11, 17, 18, 19, 20));
-    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
+    LottoNumber winningLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(10, 11, 17, 18, 19, 20)));
+    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16)));
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);

@@ -1,6 +1,6 @@
 package study.step2.domain;
 
-import java.util.Set;
+import study.step2.view.InputView;
 
 public class LottosFactory {
 
@@ -8,7 +8,8 @@ public class LottosFactory {
     Lottos lottos = new Lottos();
 
     for (int i = 0; i < lottoCount; i++) {
-      Set<Integer> pickedLottoNumbers = LottoMachine.pick();
+      LottoNumber pickedLottoNumbers = new LottoNumber(LottoMachine.pick());
+
       Lotto lotto = new Lotto(pickedLottoNumbers);
       lottos.add(lotto);
     }
