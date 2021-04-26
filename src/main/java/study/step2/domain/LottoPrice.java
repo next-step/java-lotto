@@ -13,7 +13,7 @@ public class LottoPrice {
   }
 
   public int lottoCount() {
-    return this.money / LOTTO_PRICE;
+    return money / LOTTO_PRICE;
   }
 
   @Override

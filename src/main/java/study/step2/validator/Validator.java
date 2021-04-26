@@ -4,8 +4,6 @@ import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
 import static study.step2.utils.MessageUtil.VALIDATOR_MONEY_MESSAGE;
 import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Validator {

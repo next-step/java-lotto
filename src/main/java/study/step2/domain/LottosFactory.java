@@ -1,7 +1,5 @@
 package study.step2.domain;
 
-import study.step2.view.InputView;
-
 public class LottosFactory {
 
   public static Lottos makeLottos(int lottoCount) {

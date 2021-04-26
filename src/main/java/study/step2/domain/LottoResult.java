@@ -26,7 +26,7 @@ public class LottoResult {
   }
 
   public Integer getValue(Rank rank) {
-    return this.rankMap.get(rank);
+    return rankMap.get(rank);
   }
 
   public double calculateYield(int money) {
