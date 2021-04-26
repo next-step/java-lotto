@@ -1,18 +1,15 @@
 package study.step2.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
 
-  private final Map<Rank, Integer> rankMap;
+  private final Map<Rank, Integer> rankMap = new HashMap<>();
 
   public LottoResult() {
-    this.rankMap = new HashMap<>();
-    rankMap.put(Rank.FIRST, 0);
-    rankMap.put(Rank.SECOND, 0);
-    rankMap.put(Rank.THIRD, 0);
-    rankMap.put(Rank.FOURTH, 0);
+    Arrays.stream(Rank.values()).forEach(rank -> rankMap.put(rank, 0));
   }
 
   public void add(Rank rank) {
