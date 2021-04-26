@@ -2,13 +2,13 @@ package study.step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
-import study.step2.domain.LottoNumbers;
+import study.step2.domain.LottoMachine;
 
 public class LottoTest {
 
@@ -16,7 +16,7 @@ public class LottoTest {
   @Test
   void createLotto() {
     // given
-    List<Integer> pickedLottoNumbers = LottoNumbers.pick();
+    Set<Integer> pickedLottoNumbers = LottoMachine.pick();
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -29,7 +29,7 @@ public class LottoTest {
   @Test
   void createLottoFail() {
     // given
-    List<Integer> pickedLottoNumbers = new ArrayList<>();
+    Set<Integer> pickedLottoNumbers = new TreeSet<>();
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -42,8 +42,8 @@ public class LottoTest {
   @Test
   void lottoNumberMatch() {
     // given
-    List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> pickedLottoNumbers = Arrays.asList(1, 2, 3, 12, 15, 16);
+    Set<Integer> winningLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);
@@ -56,8 +56,8 @@ public class LottoTest {
   @Test
   void lottoNumberMatchFail() {
     // given
-    List<Integer> winningLottoNumbers = Arrays.asList(10, 11, 17, 18, 19, 20);
-    List<Integer> pickedLottoNumbers = Arrays.asList(1, 2, 3, 12, 15, 16);
+    Set<Integer> winningLottoNumbers = new TreeSet<>(Arrays.asList(10, 11, 17, 18, 19, 20));
+    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
 
     // when
     Lotto lotto = new Lotto(pickedLottoNumbers);

@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.validator.Validator;
@@ -60,7 +61,7 @@ public class ValidatorTest {
   @Test
   void validatorPositiveNumbersNumbers() {
     // given
-    List<Integer> positiveNumbers = Arrays.asList(1, -1, 3, 4, 6, 11);
+    Set<Integer> positiveNumbers = new HashSet<>(Arrays.asList(1, -1, 3, 4, 6, 11));
 
     // when
     Throwable thrown = catchThrowable(() -> {
@@ -75,7 +76,7 @@ public class ValidatorTest {
   @Test
   void checkDuplication() {
     // given
-    List<Integer> numbers = Arrays.asList(1, 1, 3, 4, 6, 11);
+    Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 1, 3, 4, 6, 11));
 
     // when
     Throwable thrown = catchThrowable(() -> {

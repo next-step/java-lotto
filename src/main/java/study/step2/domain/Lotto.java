@@ -1,24 +1,24 @@
 package study.step2.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
-  private List<Integer> lottoNumbers;
+  private Set<Integer> lottoNumbers;
 
   public Lotto() {
   }
 
-  public Lotto(List<Integer> lottoNumbers) {
+  public Lotto(Set<Integer> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public List<Integer> getLottoNumbers() {
+  public Set<Integer> getLottoNumbers() {
     return lottoNumbers;
   }
 
-  public int matchCount(List<Integer> lottoNumbers) {
+  public int matchCount(Set<Integer> lottoNumbers) {
     return (int) this.lottoNumbers.stream()
         .filter(lottoNumbers::contains)
         .count();

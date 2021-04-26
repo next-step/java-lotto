@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.controller.LottoController;
@@ -49,7 +50,7 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
-    List<Integer> pickedLottoNumbers = Arrays.asList(1, 2, 3, 12, 15, 16);
+    Set<Integer> pickedLottoNumbers = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
 
     Lotto lotto = new Lotto(pickedLottoNumbers);
     Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));

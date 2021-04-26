@@ -6,6 +6,7 @@ import static study.step2.utils.MessageUtil.LOTTO_RESULT_MESSAGE;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
 import study.step2.domain.Rank;
@@ -25,7 +26,7 @@ public class ResultView {
     printNextLine();
   }
 
-  private static void printLottoNumbers(List<Integer> lottoNumbers) {
+  private static void printLottoNumbers(Set<Integer> lottoNumbers) {
     System.out.println(lottoNumbers.toString());
   }
 

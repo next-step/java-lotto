@@ -6,6 +6,7 @@ import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Validator {
 
@@ -26,7 +27,7 @@ public class Validator {
     }
   }
 
-  public static void validatorPositiveNumbers(List<Integer> numbers) {
+  public static void validatorPositiveNumbers(Set<Integer> numbers) {
     boolean result = numbers.stream().anyMatch(number -> number < 0);
 
     if (result) {
@@ -34,8 +35,8 @@ public class Validator {
     }
   }
 
-  public static void checkDuplication(List<Integer> numbers) {
-    if (new HashSet<>(numbers).size() != NUMBER_OF_LOTTO_NUMBER) {
+  public static void checkDuplication(Set<Integer> numbers) {
+    if (numbers.size() != NUMBER_OF_LOTTO_NUMBER) {
       throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED);
     }
   }
