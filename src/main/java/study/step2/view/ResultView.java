@@ -12,6 +12,9 @@ import study.step2.domain.Rank;
 
 public class ResultView {
 
+  private static final String lottoResultString = "%d개 일치 (%d)- %d개";
+  private static final String yieldString = "총 수익률은 %.2f 입니다.";
+
   private ResultView() {
   }
 
@@ -42,17 +45,11 @@ public class ResultView {
     Map<Rank, Integer> rankMap = result.getRankMap();
 
     rankMap.keySet().stream().sorted(Comparator.comparingInt(Rank::getMatchCount))
-        .map(rank -> rank.getMatchCount()
-        + "개 일치 ("
-        + rank.getPrizeMoney()
-        + ")- "
-        + rankMap.get(rank)
-        + "개")
-        .forEach(System.out::println);
+        .forEach(rank -> System.out.println(String.format(lottoResultString, rank.getMatchCount(), rank.getPrizeMoney(), rankMap.get(rank))));
   }
 
   public static void printYield(LottoResult result, int money) {
-    System.out.println(String.format("총 수익률은 %.2f 입니다.", result.calculateYield(money)));
+    System.out.println(String.format(yieldString, result.calculateYield(money)));
   }
 
 }
