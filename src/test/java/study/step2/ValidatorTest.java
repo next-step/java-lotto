@@ -3,9 +3,6 @@ package study.step2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.validator.Validator;
@@ -51,36 +48,6 @@ public class ValidatorTest {
     // when
     Throwable thrown = catchThrowable(() -> {
       Validator.isEmpty(text);
-    });
-
-    // then
-    assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @DisplayName("입력한 로또 번호에 음수가 포함되어있을 경우 Exception 테스트")
-  @Test
-  void validatorPositiveNumbersNumbers() {
-    // given
-    Set<Integer> positiveNumbers = new HashSet<>(Arrays.asList(1, -1, 3, 4, 6, 11));
-
-    // when
-    Throwable thrown = catchThrowable(() -> {
-      Validator.validatorPositiveNumbers(positiveNumbers);
-    });
-
-    // then
-    assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-  }
-
-  @DisplayName("입력한 로또 번호에 중복된 번호가 포함되어있을 경우 Exception 테스트")
-  @Test
-  void checkDuplication() {
-    // given
-    Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 1, 3, 4, 6, 11));
-
-    // when
-    Throwable thrown = catchThrowable(() -> {
-      Validator.checkDuplication(numbers);
     });
 
     // then

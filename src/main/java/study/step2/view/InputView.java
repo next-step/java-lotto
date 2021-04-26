@@ -22,24 +22,14 @@ public class InputView {
     return money;
   }
 
-  public static Set<Integer> inputLastLottoNumbers() {
+  public static String[] inputLastLottoNumbers() {
     SCANNER.nextLine();
     System.out.println(MessageUtil.LAST_LOTTO_NUMBER_MESSAGE);
     String inputText = SCANNER.nextLine();
 
     Validator.isEmpty(inputText);
 
-    String[] splitNumbers = inputText.split(", ");
-
-    Set<Integer> numbers = Arrays.stream(splitNumbers)
-        .map(Integer::parseInt)
-        .collect(Collectors.toCollection(TreeSet::new));
-
-    Validator.validatorPositiveNumbers(numbers);
-
-    Validator.checkDuplication(numbers);
-
-    return numbers;
+    return inputText.split(", ");
   }
 
 }
