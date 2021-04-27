@@ -1,14 +1,16 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
+
+    public Lottos(List<Lotto> lottoList) {
+        this.lottos = lottoList;
+    }
 
     private Lottos(Money money) {
         this.lottos = exchange(money);
@@ -28,12 +30,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> match(WinningLotto winningLotto) {
-        List<Integer> list = new ArrayList<>();
+    public List<Hit> matchHit(WinningLotto winningLotto) {
+        List<Hit> hitList = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            list.add(lotto.countMatch(winningLotto));
+            hitList.add(new Hit(lotto.countMatch(winningLotto), lotto.containsBonus(winningLotto)));
         }
-        return list;
+        return hitList;
     }
 
     public List<Lotto> getLottos() {
