@@ -17,8 +17,8 @@ public class LottoResult {
     }
 
     public static LottoResult of(Lottos lottos, WinningLotto winningLotto) {
-        List<Integer> winningCounts = lottos.match(winningLotto);
-        return new LottoResult(winningCounts.stream()
+        List<Hit> hitList = lottos.matchHit(winningLotto);
+        return new LottoResult(hitList.stream()
                 .map(Prize::of)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
