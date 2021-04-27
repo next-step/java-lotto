@@ -40,7 +40,7 @@ class LottoTest {
 
         //when
         Lotto lotto = new Lotto(lottoBalls);
-        int winningCounts = lotto.countMatch(WinningLotto.of(1, 2, 3, 4, 5, 6, 7));
+        int winningCounts = lotto.countMatch(WinningLotto.of(7, 1, 2, 3, 4, 5, 6));
 
         //then
         assertThat(winningCounts).isEqualTo(6);
