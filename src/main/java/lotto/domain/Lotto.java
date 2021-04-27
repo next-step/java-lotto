@@ -33,6 +33,10 @@ public class Lotto {
         return lottoBalls.count(winningLotto.getWinningLottoBalls());
     }
 
+    public boolean containsBonus(WinningLotto winningLotto) {
+        return lottoBalls.checkBonus(winningLotto.getBonusBall());
+    }
+
     public LottoBalls getLottoBalls() {
         return lottoBalls;
     }

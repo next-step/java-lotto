@@ -42,13 +42,13 @@ public class LottoBalls {
         }
     }
 
-    public int size() {
-        return lottoBalls.size();
-    }
-
     public int count(LottoBalls winningLottoBalls) {
         return (int) lottoBalls.stream()
                 .filter(winningLottoBalls.lottoBalls::contains).count();
+    }
+
+    public boolean checkBonus(LottoBall bonusBall) {
+        return lottoBalls.contains(bonusBall);
     }
 
     public List<LottoBall> getSortedLottoBalls() {
