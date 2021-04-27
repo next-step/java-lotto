@@ -9,9 +9,9 @@ import static lotto.exception.Message.RANGE_MESSAGE;
 
 public class LottoBall implements Comparable<LottoBall> {
 
+    public static final List<LottoBall> LOTTO_BALL_CACHE;
     private static final int MIN = 1;
     private static final int MAX = 45;
-    public static final List<LottoBall> LOTTO_BALL_CACHE;
 
     static {
         LOTTO_BALL_CACHE = IntStream.range(MIN, MAX + 1)
@@ -34,10 +34,6 @@ public class LottoBall implements Comparable<LottoBall> {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(RANGE_MESSAGE);
         }
-    }
-
-    public static List<LottoBall> getAllBalls() {
-        return LOTTO_BALL_CACHE;
     }
 
     public String toStringValue() {
