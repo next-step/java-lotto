@@ -23,8 +23,8 @@ class LottosTest {
     void check() {
         Money money = Money.of(14000);
         Lottos lottos = Lottos.of(money);
-        List<Integer> winningCounts = lottos.match(WinningLotto.of(1, 2, 3, 4, 5, 6));
+        List<Hit> hitList = lottos.matchHit(WinningLotto.of(1, 2, 3, 4, 5, 6, 7));
 
-        assertThat(winningCounts).isNotNull();
+        assertThat(hitList).isNotNull();
     }
 }
