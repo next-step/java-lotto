@@ -11,4 +11,5 @@ public class MessageUtil {
   public static final String VALIDATOR_NUMBER_MESSAGE = "번호의 개수는 6개여야 합니다.";
   public static final String LOTTO_RESULT_MESSAGE = "당첨 통계";
   public static final String LOTTO_NUMBER_DUPLICATED = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
+  public static final String LOTTO_NUMBER_INVALID_RANGE = "로또 번호 범위를 확인해주세요.";
 }

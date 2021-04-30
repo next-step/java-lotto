@@ -2,13 +2,9 @@ package study.step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
-import study.step2.domain.LottoMachine;
-import study.step2.domain.LottoNumber;
 
 public class LottoTest {
 
@@ -16,54 +12,56 @@ public class LottoTest {
   @Test
   void createLotto() {
     // given
-    LottoNumber pickedLottoNumbers = new LottoNumber(LottoMachine.pick());
+    String inputText = "1, 3, 5, 10, 11, 19";
 
     // when
-    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lotto lotto = new Lotto(inputText);
 
     // then
-    assertThat(lotto).isEqualTo(new Lotto(pickedLottoNumbers));
+    assertThat(lotto).isEqualTo(new Lotto(inputText));
   }
 
   @DisplayName("번호를 입력하지 않았을 때, 로또 번호가 없는 빈 lotto 객체 생성")
   @Test
   void createLottoFail() {
     // given
-    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>());
+    String inputText = "1, 3, 5, 10, 11, 19";
 
     // when
-    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lotto lotto = new Lotto(inputText);
 
     // then
-    assertThat(lotto).isEqualTo(new Lotto(pickedLottoNumbers));
+    assertThat(lotto).isEqualTo(new Lotto(inputText));
   }
 
   @DisplayName("당첨 번호와 로또 번호가 몇개 맞는지 테스트")
   @Test
   void lottoNumberMatch() {
     // given
-    LottoNumber winningLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16)));
+    String winningLottoNumbers = "1, 2, 3, 4, 5, 6";
+    String pickedLottoNumbers = "1, 2, 3, 4, 5, 6";
 
     // when
-    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lotto pickedLotto = new Lotto(pickedLottoNumbers);
+    Lotto winingLotto = new Lotto(winningLottoNumbers);
 
     // then
-    assertThat(lotto.matchCount(winningLottoNumbers)).isEqualTo(3);
+    assertThat(winingLotto.matchCount(pickedLotto.getLottoNumbers())).isEqualTo(6);
   }
 
   @DisplayName("당첨 번호와 로또 번호가 맞지 않는지 테스트")
   @Test
   void lottoNumberMatchFail() {
     // given
-    LottoNumber winningLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(10, 11, 17, 18, 19, 20)));
-    LottoNumber pickedLottoNumbers = new LottoNumber(new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16)));
+    String winningLottoNumbers = "10, 11, 17, 18, 19, 20";
+    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
 
     // when
-    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lotto pickedLotto = new Lotto(pickedLottoNumbers);
+    Lotto winingLotto = new Lotto(winningLottoNumbers);
 
     // then
-    assertThat(lotto.matchCount(winningLottoNumbers)).isEqualTo(0);
+    assertThat(winingLotto.matchCount(pickedLotto.getLottoNumbers())).isEqualTo(0);
   }
 
 }

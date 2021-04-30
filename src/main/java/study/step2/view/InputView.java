@@ -1,10 +1,6 @@
 package study.step2.view;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 import study.step2.utils.MessageUtil;
 import study.step2.validator.Validator;
 
@@ -22,14 +18,15 @@ public class InputView {
     return money;
   }
 
-  public static String[] inputLastLottoNumbers() {
+  public static String inputLastLottoNumbers() {
     SCANNER.nextLine();
+
     System.out.println(MessageUtil.LAST_LOTTO_NUMBER_MESSAGE);
     String inputText = SCANNER.nextLine();
 
     Validator.isEmpty(inputText);
 
-    return inputText.split(", ");
+    return inputText;
   }
 
 }
