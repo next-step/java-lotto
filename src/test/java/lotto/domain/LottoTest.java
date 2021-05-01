@@ -2,11 +2,24 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoTest {
+
+    static Stream<Arguments> lottoSource() {
+        return Stream.of(arguments(
+                new Lotto(LottoBalls.of(1, 2, 3, 4, 5, 6)),
+                WinningLotto.of(1, 2, 3, 4, 5, 6, 7)
+        ));
+    }
 
     @Test
     @DisplayName("로또 생성 테스트 - 개수 확인")
@@ -32,17 +45,21 @@ class LottoTest {
         }).withMessage("당첨 로또에 중복된 값이 있습니다.");
     }
 
-    @Test
+    @ParameterizedTest
+    @DisplayName("보너스볼 일치 여부 테스트")
+    @MethodSource("lottoSource")
+    void check_bonus_ball(Lotto lotto, WinningLotto winningLotto) {
+
+        boolean checkBonus = lotto.containsBonus(winningLotto);
+        assertThat(checkBonus).isTrue();
+    }
+
+    @ParameterizedTest
     @DisplayName("두 로또 번호를 비교해 맞은 개수 반환 테스트")
-    void count_match_numbers() {
-        //given
-        LottoBalls lottoBalls = LottoBalls.of(1, 2, 3, 4, 5, 6);
+    @MethodSource("lottoSource")
+    void count_match_numbers(Lotto lotto, WinningLotto winningLotto) {
 
-        //when
-        Lotto lotto = new Lotto(lottoBalls);
-        int winningCounts = lotto.countMatch(WinningLotto.of(7, 1, 2, 3, 4, 5, 6));
-
-        //then
-        assertThat(winningCounts).isEqualTo(6);
+        int winningCounts = lotto.countMatch(winningLotto);
+        assertThat(winningCounts).isEqualTo(5);
     }
 }
