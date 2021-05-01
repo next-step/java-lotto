@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -45,8 +46,7 @@ public class ResultView {
     }
 
     private static String prizeResult(LottoResult result) {
-        return Prize.prizeList()
-                .stream()
+        return Arrays.stream(Prize.values())
                 .map(prize -> printString(prize, result.counts(prize)))
                 .reduce("", String::concat);
     }
