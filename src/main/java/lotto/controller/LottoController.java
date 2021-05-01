@@ -10,7 +10,7 @@ public class LottoController {
         Lottos lottos = Lottos.of(money);
         ResultView.printPurchase(lottos);
 
-        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumbers());
+        WinningLotto winningLotto = WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         LottoResult result = LottoResult.of(lottos, winningLotto);
         ResultView.printWinningResult(result);
         ResultView.printEarningRate(money, result);
