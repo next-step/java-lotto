@@ -12,7 +12,9 @@ public class InputView {
 
   public static int inputMoney() {
     System.out.println(MessageUtil.INPUT_MONEY_MESSAGE);
+
     int money = SCANNER.nextInt();
+
     Validator.validatorMoney(money);
 
     return money;
@@ -22,11 +24,18 @@ public class InputView {
     SCANNER.nextLine();
 
     System.out.println(MessageUtil.LAST_LOTTO_NUMBER_MESSAGE);
+
     String inputText = SCANNER.nextLine();
 
     Validator.isEmpty(inputText);
 
     return inputText;
+  }
+
+  public static int inputBonusNumber() {
+    System.out.println(MessageUtil.INPUT_BONUS_NUMBER_MESSAGE);
+
+    return SCANNER.nextInt();
   }
 
 }

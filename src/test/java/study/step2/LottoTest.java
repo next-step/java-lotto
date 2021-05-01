@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
+import study.step2.domain.LottoNumber;
 
 public class LottoTest {
 
@@ -62,6 +63,38 @@ public class LottoTest {
 
     // then
     assertThat(winingLotto.matchCount(pickedLotto.getLottoNumbers())).isEqualTo(0);
+  }
+
+  @DisplayName("보너스 번호를 입력했을 때, 뽑은 번호에 포함 되어 있는지 테스트")
+  @Test
+  void matchBonusNumberTest() {
+    // given
+    String pickedLottoNumbers = "10, 11, 17, 18, 19, 16";
+
+    LottoNumber bonusNumber = new LottoNumber(16);
+    Lotto pickedLotto = new Lotto(pickedLottoNumbers);
+
+    // when
+    boolean isMatchBonus = pickedLotto.isMatchBonus(bonusNumber);
+
+    // then
+    assertThat(isMatchBonus).isTrue();
+  }
+
+  @DisplayName("보너스 번호를 입력했을 때, 뽑은 번호에 포함이 안되어 있는지 테스트")
+  @Test
+  void matchBonusNumberFailTest() {
+    // given
+    String pickedLottoNumbers = "10, 11, 17, 18, 19, 16";
+
+    LottoNumber bonusNumber = new LottoNumber(22);
+    Lotto pickedLotto = new Lotto(pickedLottoNumbers);
+
+    // when
+    boolean isMatchBonus = pickedLotto.isMatchBonus(bonusNumber);
+
+    // then
+    assertThat(isMatchBonus).isFalse();
   }
 
 }

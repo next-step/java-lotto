@@ -49,6 +49,15 @@ public class Lotto {
         .count();
   }
 
+  public boolean isMatchBonus(LottoNumber bonusNumber) {
+    return lottoNumbers.contains(bonusNumber);
+  }
+
+  public void bonusValidation(LottoNumber bonusNumber) {
+    if (lottoNumbers.contains(bonusNumber))
+      throw new IllegalArgumentException("보너스 번호는 지난 담청 번호 6개와 같을 수 없습니다.");
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -13,7 +13,7 @@ import study.step2.domain.Rank;
 
 public class ResultView {
 
-  private static final String lottoResultString = "%d개 일치 (%d)- %d개";
+  private static final String lottoResultString = "%d개 일치 (%d원)- %d개";
   private static final String yieldString = "총 수익률은 %.2f 입니다.";
 
   private ResultView() {
@@ -38,6 +38,7 @@ public class ResultView {
   }
 
   public static void printLottoResultMessage() {
+    System.out.println();
     System.out.println(LOTTO_RESULT_MESSAGE);
     System.out.println("---------");
   }
@@ -45,7 +46,10 @@ public class ResultView {
   public static void printLottoResult(LottoResult result) {
     Map<Rank, Integer> rankMap = result.getRankMap();
 
-    rankMap.keySet().stream().sorted(Comparator.comparingInt(Rank::getMatchCount))
+    rankMap.remove(Rank.MISS);
+
+    rankMap.keySet().stream()
+        .sorted(Comparator.comparingInt(Rank::getMatchCount))
         .forEach(rank -> System.out.println(String.format(lottoResultString, rank.getMatchCount(), rank.getPrizeMoney(), rankMap.get(rank))));
   }
 
