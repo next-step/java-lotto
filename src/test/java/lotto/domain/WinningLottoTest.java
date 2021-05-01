@@ -30,7 +30,7 @@ class WinningLottoTest {
 
             //when & then
             WinningLotto winningLotto = new WinningLotto(lottoBalls, bonusBall);
-        }).withMessage("보너스볼은 중복될 수 없습니다.");
+        }).withMessage("보너스볼이 당첨 번호에 포함되어 있습니다. 다른 값을 입력하세요.");
     }
 
 }
