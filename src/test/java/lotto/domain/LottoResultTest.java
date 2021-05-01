@@ -19,13 +19,16 @@ class LottoResultTest {
         return Stream.of(arguments(
                 new Lottos(
                         Lists.list(
+                                new Lotto(LottoBalls.of(40, 41, 42, 43, 44, 45)), //Prize.ZERO
+                                new Lotto(LottoBalls.of(40, 41, 42, 43, 44, 45)), //Prize.ZERO
                                 new Lotto(LottoBalls.of(1, 2, 3, 4, 5, 6)), //Prize.THREE
-                                new Lotto(LottoBalls.of(1, 2, 13, 14, 15, 16)), //Prize.BONUS
+                                new Lotto(LottoBalls.of(1, 2, 3, 13, 5, 6)), //Prize.FOUR
+                                new Lotto(LottoBalls.of(1, 2, 13, 14, 15, 6)), //Prize.BONUS
                                 new Lotto(LottoBalls.of(1, 2, 3, 13, 14, 26)), //Prize.FIVE
-                                new Lotto(LottoBalls.of(31, 32, 33, 34, 35, 36))
+                                new Lotto(LottoBalls.of(1, 2, 3, 13, 14, 15)) //Prize.SIX
                         )
                 ),
-                new WinningLotto(LottoBalls.of(1, 2, 3, 13, 14, 15), LottoBall.valueOf(16)))
+                new WinningLotto(LottoBalls.of(1, 2, 3, 13, 14, 15), LottoBall.valueOf(6)))
         );
     }
 
@@ -46,11 +49,12 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
 
         assertAll(
+                () -> assertThat(lottoResult.counts(Prize.ZERO)).isEqualTo(2L),
                 () -> assertThat(lottoResult.counts(Prize.THREE)).isEqualTo(1L),
-                () -> assertThat(lottoResult.counts(Prize.FOUR)).isEqualTo(0),
+                () -> assertThat(lottoResult.counts(Prize.FOUR)).isEqualTo(1L),
                 () -> assertThat(lottoResult.counts(Prize.FIVE)).isEqualTo(1L),
                 () -> assertThat(lottoResult.counts(Prize.BONUS)).isEqualTo(1L),
-                () -> assertThat(lottoResult.counts(Prize.SIX)).isEqualTo(0)
+                () -> assertThat(lottoResult.counts(Prize.SIX)).isEqualTo(1L)
         );
     }
 
@@ -61,6 +65,6 @@ class LottoResultTest {
 
         LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
 
-        assertThat(lottoResult.earningRate(BigDecimal.valueOf(4000))).isEqualTo(BigDecimal.valueOf(7876.25));
+        assertThat(lottoResult.earningRate(BigDecimal.valueOf(7000))).isEqualTo(BigDecimal.valueOf(290222.14));
     }
 }
