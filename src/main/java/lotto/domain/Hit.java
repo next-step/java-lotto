@@ -12,17 +12,25 @@ public class Hit {
         this.bonus = bonus;
     }
 
+    public int getWinningCount() {
+        return winningCount;
+    }
+
+    public boolean isBonus() {
+        return bonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hit hit = (Hit) o;
-        return winningCount == hit.winningCount &&
-                bonus == hit.bonus;
+        return getWinningCount() == hit.getWinningCount() &&
+                isBonus() == hit.isBonus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningCount, bonus);
+        return Objects.hash(getWinningCount(), isBonus());
     }
 }
