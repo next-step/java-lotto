@@ -23,8 +23,9 @@ public enum Prize {
     }
 
     public static Prize of(Hit result) {
+        if (result.getWinningCount() == BONUS.hit.getWinningCount() && result.isBonus()) return BONUS;
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.hit.equals(result))
+                .filter(prize -> prize.hit.getWinningCount() == result.getWinningCount())
                 .findAny()
                 .orElseGet(() -> Prize.ZERO);
     }
