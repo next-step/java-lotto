@@ -19,6 +19,12 @@ public class StringcalculateTest {
     }
 
     @Test
+    void split2() {
+        String str = "//;\n1,2:3;4";
+        assertThat(stringCalculator.split(str)).containsExactly(1, 2, 3, 4);
+    }
+
+    @Test
     void add() {
         List<Integer> strcharList = Arrays.asList(1, 2, 3);
         assertThat(stringCalculator.add(strcharList)).isEqualTo(6);
