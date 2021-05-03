@@ -2,6 +2,8 @@ package StringCalculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
    public int add(final String text){
@@ -17,8 +19,7 @@ public class StringCalculator {
    }
 
    public List<String> splitText(final String text) {
-       String[] partOfText = text.split(",|:");
-       return Arrays.asList(partOfText);
+       return Arrays.asList(customSpliter(text));
    }
 
    public String isEmptyText(final String text) {
@@ -36,5 +37,16 @@ public class StringCalculator {
            return true;
        }
        return false;
+   }
+
+   public String[] customSpliter(final String text) {
+       Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+       if (m.find()) {
+           String customDelimiter = m.group(1);
+           String[] tokens= m.group(2).split(customDelimiter);
+
+           return tokens;
+       }
+       return text.split(",|:");
    }
 }
