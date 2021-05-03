@@ -20,4 +20,13 @@ public class Word {
         }
         return true;
     }
+
+    public ArrayList<String> customSeparate(String input) {
+        ArrayList<String> numbers = new ArrayList<>();
+        String[] inputs = input.split("");
+        for(int i = 0 ; i < inputs.length; i++) {
+            numbers.add(inputs[i]);
+        }
+        return numbers;
+    }
 }
