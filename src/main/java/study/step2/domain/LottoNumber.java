@@ -1,49 +1,30 @@
 package study.step2.domain;
 
-import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
-import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
-import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
-import java.util.Arrays;
+import static study.step2.utils.MessageUtil.LOTTO_NUMBER_INVALID_RANGE;
+
 import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
 
-  private Set<Integer> lottoNumbers;
+  private static final int LOTTO_MIN_NUMBER = 1;
+  private static final int LOTTO_MAX_NUMBER = 45;
 
-  public LottoNumber(Set<Integer> lottoNumbers) {
-    this.lottoNumbers = lottoNumbers;
-  }
+  private final int lottoNumber;
 
-  public LottoNumber(String[] lottoNumbers) {
-    this.lottoNumbers = Arrays.stream(lottoNumbers)
-        .map(Integer::parseInt)
-        .collect(Collectors.toCollection(TreeSet::new));
-  }
-
-  public Set<Integer> getLottoNumbers() {
-    return lottoNumbers;
-  }
-
-  public boolean isContains(int lottoNumber) {
-    return lottoNumbers.contains(lottoNumber);
-  }
-
-  public void validatorPositiveNumbers() {
-    boolean result = lottoNumbers.stream().anyMatch(number -> number < 0);
-
-    if (result) {
-      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
+  public LottoNumber(int lottoNumber) {
+    if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+      throw new IllegalArgumentException(LOTTO_NUMBER_INVALID_RANGE);
     }
+    this.lottoNumber = lottoNumber;
   }
 
-  public void checkDuplication() {
-    if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED);
-    }
+  public LottoNumber(String inputNumber) {
+    this(Integer.parseInt(inputNumber));
+  }
+
+  public int getLottoNumber() {
+    return lottoNumber;
   }
 
   @Override
@@ -55,17 +36,22 @@ public class LottoNumber {
       return false;
     }
     LottoNumber that = (LottoNumber) o;
-    return Objects.equals(lottoNumbers, that.lottoNumbers);
+    return lottoNumber == that.lottoNumber;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumbers);
+    return Objects.hash(lottoNumber);
   }
 
   @Override
   public String toString() {
-    return lottoNumbers.toString();
+    return String.valueOf(lottoNumber);
+  }
+
+  @Override
+  public int compareTo(LottoNumber o) {
+    return this.lottoNumber - o.lottoNumber;
   }
 
 }

@@ -1,11 +1,13 @@
 package study.step2.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoMachine {
 
@@ -14,18 +16,31 @@ public class LottoMachine {
   private static final int LOTTO_START_RANGE_NUMBER = 0;
   private static final int LOTTO_END_RANGE_NUMBER = 6;
 
-  private static final List<Integer> lottoNumbers = IntStream
-      .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-      .boxed()
-      .collect(Collectors.toList());
+  private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+  private static final List<Integer> lottoNumberKeys;
+
+  static {
+    for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+      lottoNumberMap.put(i, new LottoNumber(i));
+    }
+
+    lottoNumberKeys = new ArrayList<>(lottoNumberMap.keySet());
+  }
 
   private LottoMachine() {
   }
 
-  public static Set<Integer> pick() {
-    Collections.shuffle(lottoNumbers);
+  public static Map<Integer, LottoNumber> getLottoNumberMap() {
+    return lottoNumberMap;
+  }
 
-    return new TreeSet<>(lottoNumbers.subList(LOTTO_START_RANGE_NUMBER, LOTTO_END_RANGE_NUMBER));
+  public static Set<LottoNumber> pick() {
+    Collections.shuffle(lottoNumberKeys);
+
+    List<Integer> pickedLottoNumbers = lottoNumberKeys.subList(LOTTO_START_RANGE_NUMBER, LOTTO_END_RANGE_NUMBER);
+
+    return pickedLottoNumbers.stream().map(lottoNumberMap::get)
+        .collect(Collectors.toCollection(TreeSet::new));
   }
 
 }

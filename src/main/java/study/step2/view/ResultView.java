@@ -5,6 +5,7 @@ import static study.step2.utils.MessageUtil.LOTTO_RESULT_MESSAGE;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
@@ -12,7 +13,7 @@ import study.step2.domain.Rank;
 
 public class ResultView {
 
-  private static final String lottoResultString = "%d개 일치 (%d)- %d개";
+  private static final String lottoResultString = "%d개 일치 (%d원)- %d개";
   private static final String yieldString = "총 수익률은 %.2f 입니다.";
 
   private ResultView() {
@@ -28,8 +29,8 @@ public class ResultView {
     printNextLine();
   }
 
-  private static void printLottoNumbers(LottoNumber lottoNumber) {
-    System.out.println(lottoNumber.toString());
+  private static void printLottoNumbers(Set<LottoNumber> lottoNumbers) {
+    System.out.println(lottoNumbers.toString());
   }
 
   public static void printNextLine() {
@@ -37,6 +38,7 @@ public class ResultView {
   }
 
   public static void printLottoResultMessage() {
+    System.out.println();
     System.out.println(LOTTO_RESULT_MESSAGE);
     System.out.println("---------");
   }
@@ -44,7 +46,10 @@ public class ResultView {
   public static void printLottoResult(LottoResult result) {
     Map<Rank, Integer> rankMap = result.getRankMap();
 
-    rankMap.keySet().stream().sorted(Comparator.comparingInt(Rank::getMatchCount))
+    rankMap.remove(Rank.MISS);
+
+    rankMap.keySet().stream()
+        .sorted(Comparator.comparingInt(Rank::getMatchCount))
         .forEach(rank -> System.out.println(String.format(lottoResultString, rank.getMatchCount(), rank.getPrizeMoney(), rankMap.get(rank))));
   }
 

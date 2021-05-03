@@ -14,12 +14,13 @@ public class LottoMain {
     LottoController lottoController = new LottoController();
     Lottos lottos = lottoController.createLottos(money);
 
-    LottoNumber lottoNumber = new LottoNumber(InputView.inputLastLottoNumbers());
-    lottoNumber.validatorPositiveNumbers();
-    lottoNumber.checkDuplication();
+    Lotto winningLotto = new Lotto(InputView.inputLastLottoNumbers());
+    winningLotto.validatorPositiveNumbers();
+    winningLotto.checkDuplication();
 
-    Lotto winningLotto = new Lotto(lottoNumber);
-    lottoController.findLottoWinning(lottos, winningLotto, money);
+    LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+
+    lottoController.findLottoWinning(lottos, winningLotto, money, bonusNumber);
   }
 
 }

@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.controller.LottoController;
@@ -13,6 +11,7 @@ import study.step2.domain.Lotto;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
+import study.step2.domain.Rank;
 
 public class LottoControllerTest {
 
@@ -51,19 +50,64 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
-    Set<Integer> pickedLottoNumberSet = new TreeSet<>(Arrays.asList(1, 2, 3, 12, 15, 16));
-    LottoNumber pickedLottoNumber = new LottoNumber(pickedLottoNumberSet);
+    LottoNumber bonusNumber = new LottoNumber(16);
 
-    Lotto lotto = new Lotto(pickedLottoNumber);
-    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumber))));
+    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
+
+    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
 
     // then
     assertThat(lottoResult).isNotNull();
+  }
+
+  @DisplayName("번호를 다 맞췄을 때, 1등인지 테스트")
+  @Test
+  void findLottoWinningFirst() {
+    // given
+    int money = 1000;
+    LottoNumber bonusNumber = new LottoNumber(16);
+
+    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
+
+    Lotto lotto = new Lotto(pickedLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+
+    LottoController lottoController = new LottoController();
+
+    // when
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
+
+    // then
+    assertThat(lottoResult.getValue(Rank.FIRST)).isEqualTo(1);
+  }
+
+  @DisplayName("번호를 5개 맞추고 보너스 번호까지 맞췄을 경우 2등인지 테스트")
+  @Test
+  void findLottoWinningSecondWithBonus() {
+    // given
+    int money = 1000;
+
+    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
+    String winingLottoNumbers = "1, 2, 3, 12, 15, 19";
+
+    LottoNumber bonusNumber = new LottoNumber(16);
+
+    Lotto lotto = new Lotto(winingLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+
+    LottoController lottoController = new LottoController();
+
+    // when
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
+
+    // then
+    assertThat(lottoResult.getValue(Rank.SECOND)).isEqualTo(1);
   }
 
 }

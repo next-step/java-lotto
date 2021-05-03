@@ -1,15 +1,11 @@
 package study.step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
 
-  private List<Lotto> lottos = new ArrayList<>();
-
-  public Lottos() {
-  }
+  private final List<Lotto> lottos;
 
   public Lottos(List<Lotto> lottos) {
     this.lottos = lottos;
@@ -19,11 +15,10 @@ public class Lottos {
     return lottos;
   }
 
-  public LottoResult match(Lotto winningLotto) {
+  public LottoResult match(Lotto winningLotto, LottoNumber bonusNumber) {
     LottoResult lottoResult = new LottoResult();
 
-    lottos.stream().mapToInt(lotto -> lotto.matchCount(winningLotto.getLottoNumbers()))
-        .mapToObj(Rank::find)
+    lottos.stream().map(lotto -> Rank.find(lotto.matchCount(winningLotto.getLottoNumbers()), lotto.isMatchBonus(bonusNumber)))
         .forEach(lottoResult::add);
 
     return lottoResult;

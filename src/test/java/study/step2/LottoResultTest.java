@@ -9,7 +9,7 @@ import study.step2.domain.Rank;
 
 public class LottoResultTest {
 
-  @DisplayName("로또 번호 일치하는 갯수 테스트")
+  @DisplayName("로또 결과 맞춘 갯수 테스트")
   @Test
   void lottoResult() {
     // given
@@ -23,7 +23,7 @@ public class LottoResultTest {
     assertThat(lottoResult.getValue(Rank.THIRD)).isEqualTo(2);
   }
 
-  @DisplayName("로또 번호 일치하는 갯수 테스트")
+  @DisplayName("로또 결과 맞춘 갯수 실패 테스트")
   @Test
   void lottoResultFail() {
     // given

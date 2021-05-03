@@ -1,6 +1,7 @@
 package study.step2.controller;
 
 import study.step2.domain.Lotto;
+import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoPrice;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
@@ -25,8 +26,10 @@ public class LottoController {
     return lottos;
   }
 
-  public LottoResult findLottoWinning(Lottos lottos, Lotto winningLotto, int money) {
-    LottoResult lottoResult = lottos.match(winningLotto);
+  public LottoResult findLottoWinning(Lottos lottos, Lotto winningLotto, int money, LottoNumber bonusNumber) {
+    LottoResult lottoResult = lottos.match(winningLotto, bonusNumber);
+
+    winningLotto.bonusValidation(bonusNumber);
 
     ResultView.printLottoResultMessage();
 
