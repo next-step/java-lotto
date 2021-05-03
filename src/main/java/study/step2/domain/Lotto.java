@@ -1,7 +1,6 @@
 package study.step2.domain;
 
 import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
-import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
 import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
@@ -30,11 +29,7 @@ public class Lotto {
   }
 
   public void validatorPositiveNumbers() {
-    boolean result = lottoNumbers.stream().anyMatch(number -> number.getLottoNumber() < 0);
-
-    if (result) {
-      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
-    }
+    lottoNumbers.forEach(LottoNumber::validatorPositiveNumber);
   }
 
   public void checkDuplication() {

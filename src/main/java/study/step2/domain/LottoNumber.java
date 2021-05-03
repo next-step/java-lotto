@@ -2,6 +2,7 @@ package study.step2.domain;
 
 
 import static study.step2.utils.MessageUtil.LOTTO_NUMBER_INVALID_RANGE;
+import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
 
 import java.util.Objects;
 
@@ -19,12 +20,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
     this.lottoNumber = lottoNumber;
   }
 
-  public LottoNumber(String inputNumber) {
-    this(Integer.parseInt(inputNumber));
-  }
-
   public int getLottoNumber() {
     return lottoNumber;
+  }
+
+  public void validatorPositiveNumber() {
+    if (lottoNumber < 0) {
+      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
+    }
   }
 
   @Override
