@@ -28,4 +28,14 @@ public class WordTest {
         assertThat(numbers.get(1)).isEqualTo("2");
     }
 
+    @DisplayName("쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다.")
+    @Test
+    public void customSeparateTest() {
+        String input = "//;/n1;2;3";
+        List<String> numbers = new Word().makeNumbers(input);
+        assertThat(numbers.get(0)).isEqualTo("1");
+        assertThat(numbers.get(1)).isEqualTo("2");
+        assertThat(numbers.get(2)).isEqualTo("3");
+    }
+
 }
