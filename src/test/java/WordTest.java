@@ -28,6 +28,15 @@ public class WordTest {
         assertThat(numbers.get(1)).isEqualTo("2");
     }
 
+    @DisplayName("입력된 문자의 시작값이 숫자인지 '/' 인지 판별한다.")
+    @Test
+    public void isCustomInputTest() {
+        Word word = new Word();
+        String input = "//;/n1;2;3";
+        Boolean isCustom = word.isCustomInput(input);
+        assertThat(isCustom).isTrue();
+    }
+
     @DisplayName("쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다.")
     @Test
     public void customSeparateTest() {
@@ -37,5 +46,7 @@ public class WordTest {
         assertThat(numbers.get(1)).isEqualTo("2");
         assertThat(numbers.get(2)).isEqualTo("3");
     }
+
+
 
 }
