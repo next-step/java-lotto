@@ -25,6 +25,16 @@ public class StringCalculator {
        if(text == null || text.length() == 0) {
            return "0";
        }
+       if(isNegative(text)) {
+           throw new RuntimeException("음수는 불가능.");
+       }
        return text;
+   }
+
+   public boolean isNegative(final String text) {
+       if(text.contains("-")) {
+           return true;
+       }
+       return false;
    }
 }
