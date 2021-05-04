@@ -1,10 +1,32 @@
-### 요구사항 
+#요구사항
+
 -----
-##### 기능 요구 사항
- - [x] 구분자(쉼표,콜론)를 기준으로 분리한 값을 반환한다. #Word#makeNumbers(String)
- - [x] 입력된 문자의 시작값이 숫자인지 '/' 인지 판별한다. #Word#isCustomInput(String)
- - [x] 분리한 값의 합을 반환 할 수 있다. #Calculator#sumNumbers(List)
- - [x] 쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다. #Word#CustomSeparate()
- - [x] 커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다. #Word#findCustomSeparator(String)
- - [x] 입력값이 음수인 경우 `RuntimeException` throw 한다. #Word#inputValidation(List)
- - [x] 입력값이 빈 문자열 또는 `NULL`인 경우 `0`을 반환 한다. #Word#emptyOrNullTest(String)
+
+## 문자열 계산기
+### 기능 요구 사항
+ - [x] 구분자(쉼표,콜론)를 기준으로 분리한 값을 반환한다. #calculator#Word#makeNumbers(String)
+ - [x] 입력된 문자의 시작값이 숫자인지 '/' 인지 판별한다. #calculator#Word#isCustomInput(String)
+ - [x] 분리한 값의 합을 반환 할 수 있다. #calculator#Calculator#sumNumbers(List)
+ - [x] 쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다. #calculator#Word#CustomSeparate()
+ - [x] 커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다. #calculator#Word#findCustomSeparator(String)
+ - [x] 입력값이 음수인 경우 `RuntimeException` throw 한다. #calculator#Word#inputValidation(List)
+ - [x] 입력값이 빈 문자열 또는 `NULL`인 경우 `0`을 반환 한다. #calculator#Word#emptyOrNullTest(String)
+
+----------
+
+## 로또
+### 기능 요구사항
+
+- [ ] 금액 입력시 구임 금액에 해당하는 로또를 발급해야한다.
+- [ ] 입력된 금액에서 구매가능한 로또의 수를 출력한다.
+- [ ] 구매된 로또들의 로또번호를 각각 출력한다.
+   - [ ] 각각 출력되는 로또번호는 6개의 서로다른 정수이다.
+- [ ] 당첨번호 입력시 발급 된 로또와 같은 수가 있는지 비교 할 수있다.
+   - [ ] 당첨번호는 6개의 당첨번호와 1개의 보너스 볼이다.
+   - [ ] 지난 주 당첨 번호를 입력받는다.
+   - [ ] 보너스 볼을 입력 받는다.
+- [ ] 당첨번호와 로또번호 비교시 총 몇개의 같은 숫자가 일치하는지 알 수있다.
+- [ ] 당첨 통계를 출력한다.
+  - [ ] 일치된 숫자에 따라 수익률을 알 수있다.
+  - [ ] 수익률은 당첨금액 / 구매금액 이다.
+  - [ ] 수익률에 따른 손익 메세지를 확인할 수있다.   
