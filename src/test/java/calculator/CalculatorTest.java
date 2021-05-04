@@ -46,4 +46,11 @@ public class CalculatorTest {
         assertThat(calculator.add(input)).isSameAs(6);
     }
 
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3"})
+    void customDelimiter(final String input) {
+        assertThat(calculator.add(input)).isSameAs(6);
+    }
+
 }
