@@ -19,10 +19,16 @@ public class LottoAutomaticResultView {
     }
 
     public void resultLottoList(ArrayList<List> lottoList) {
-
-
         for(List lotto : lottoList) {
             System.out.println(lotto);
         }
     }
+
+    public void resultWinningStatistics() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+    }
+
+
 }
