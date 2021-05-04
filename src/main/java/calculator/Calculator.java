@@ -11,6 +11,11 @@ public class Calculator {
             return 0;
         }
 
+        String[] numbers = input.split(",|:");
+        for(String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
         return sum;
     }
 

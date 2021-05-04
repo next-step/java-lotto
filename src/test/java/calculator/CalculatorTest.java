@@ -24,4 +24,12 @@ public class CalculatorTest {
     void emptyOrNull(final String input) {
         assertThat(calculator.add(input)).isZero();
     }
+
+    @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1"})
+    void oneNumber(final String input) {
+        assertThat(calculator.add(input)).isSameAs(Integer.parseInt(input));
+    }
+
 }
