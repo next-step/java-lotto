@@ -24,4 +24,9 @@ public class LottoTest {
         assertThat(lotto.buyLotto(money)).isEqualTo(14);
     }
 
+    @Test
+    void getRandomNumber(){
+        assertThat(lotto.getRandomNumber()).isBetween(1, 45);
+    }
+
 }
