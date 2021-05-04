@@ -10,11 +10,11 @@ public class LottoMachine {
         return purchaseAmount / 1000;
     }
 
-    public List<List> makeBunchOfLotto(int purchaseAmount) {
-        List<List> bunchOfLotto = new ArrayList<>();
+    public List<Lotto> makeBunchOfLotto(int purchaseAmount) {
+        List<Lotto> bunchOfLotto = new ArrayList<>();
         int lottoCount = countPurchasable(purchaseAmount);
         for (int i = 0; i < lottoCount; i++) {
-            bunchOfLotto.add(Arrays.asList("1,2,3,4,5,6"));
+            bunchOfLotto.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
         }
         return bunchOfLotto;
     }

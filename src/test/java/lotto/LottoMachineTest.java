@@ -14,7 +14,7 @@ public class LottoMachineTest {
     @Test
     public void makeBunchOfLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<List> bunchOfLotto = lottoMachine.makeBunchOfLotto(14000);
+        List<Lotto> bunchOfLotto = lottoMachine.makeBunchOfLotto(14000);
         Assertions.assertThat(bunchOfLotto.size()).isEqualTo(lottoMachine.countPurchasable(14000));
     }
 
