@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.in;
 
 public class WordTest {
+    private static String CUSTOM_EXPRESSION = "//;/n1;2;3";
     private Word word;
 
     @BeforeEach
@@ -21,8 +22,8 @@ public class WordTest {
     @DisplayName("입력한 값을 반환한다.")
     @Test
     public void makeNumbersTest() {
-        String input = "1,2";
-        List<String> numbers = word.makeNumbers(input);
+        String expression = "1,2";
+        List<String> numbers = word.makeNumbers(expression);
         assertThat(numbers.get(0)).isEqualTo("1");
         assertThat(numbers.get(1)).isEqualTo("2");
     }
@@ -39,21 +40,25 @@ public class WordTest {
     @DisplayName("입력된 문자의 시작값이 숫자인지 '/' 인지 판별한다.")
     @Test
     public void isCustomInputTest() {
-        String input = "//;/n1;2;3";
-        Boolean isCustom = word.isCustomInput(input);
+        Boolean isCustom = word.isCustomInput(CUSTOM_EXPRESSION);
         assertThat(isCustom).isTrue();
     }
 
     @DisplayName("쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다.")
     @Test
     public void customSeparateTest() {
-        String input = "//;/n1;2;3";
         ArrayList<String> numbers = new ArrayList<>();
-        if(word.isCustomInput(input)){
-            numbers = word.customSeparate(input);
+        if(word.isCustomInput(CUSTOM_EXPRESSION)){
+            numbers = word.customSeparate(CUSTOM_EXPRESSION);
         }
         assertThat(numbers.get(0)).isEqualTo("/");
         assertThat(numbers.get(2)).isEqualTo(";");
         assertThat(numbers.get(5)).isEqualTo("1");
+    }
+    @DisplayName("커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다.")
+    @Test
+    public void findCustomSeparator(){
+        String customSeparator = word.findCustomSeparator(CUSTOM_EXPRESSION);
+        assertThat(customSeparator).isEqualTo(";");
     }
 }
