@@ -2,13 +2,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
+import static org.assertj.core.api.Assertions.*;
 
 public class WordTest {
     private static String CUSTOM_EXPRESSION = "//;/n1;2;3";
@@ -47,18 +46,36 @@ public class WordTest {
     @DisplayName("쉼표랑 콜론외에 커스텀 구분자를 지정 할 수 있다.")
     @Test
     public void customSeparateTest() {
-        ArrayList<String> numbers = new ArrayList<>();
-        if(word.isCustomInput(CUSTOM_EXPRESSION)){
+        List<String> numbers = null;
+        if (word.isCustomInput(CUSTOM_EXPRESSION)) {
             numbers = word.customSeparate(CUSTOM_EXPRESSION);
         }
         assertThat(numbers.get(0)).isEqualTo("/");
         assertThat(numbers.get(2)).isEqualTo(";");
         assertThat(numbers.get(5)).isEqualTo("1");
     }
+
     @DisplayName("커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다.")
     @Test
-    public void findCustomSeparator(){
+    public void findCustomSeparatorTest() {
         String customSeparator = word.findCustomSeparator(CUSTOM_EXPRESSION);
         assertThat(customSeparator).isEqualTo(";");
+    }
+
+    @DisplayName("입력값이 음수인 경우 `RuntimeException` throw 한다.")
+    @Test
+    public void validationTest() {
+        String expression = "-1,2,3";
+
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            word.validation(word.makeNumbers(expression));
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {""})
+    @NullSource
+    void emptyOrNullTest(final String text) {
+        assertThat(word.isEmptyOrNull(text)).isTrue();
     }
 }
