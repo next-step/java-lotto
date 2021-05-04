@@ -8,65 +8,61 @@ public class StringCalculator {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    public int zero() {
-        return 0;
-    }
+
     public int one(String text) {
-        int number = Integer.parseInt(text);
-        return number;
+        if (text.matches("\\d+")) {
+            int number = Integer.parseInt(text);
+            return number;
+        }
+        throw new RuntimeException();
     }
-    public int two(String text) {
-        String[] numbers = text.split(",");
-        return sum(numbers);
+
+    public int colon(String text) {
+        String[] tokens = text.split(",|:");
+        for (int i=0;i<tokens.length;i++) {
+            if (tokens[i] == "") {
+                tokens[i] = "0";
+            }
+        }
+        return sum(tokens);
     }
 
     private int sum(String[] numbers) {
         int sum = 0;
         for (int i = 0; i < numbers.length; i++) {
-            int num = Integer.parseInt(numbers[i]);
-            sum += num;
+            int number = Integer.parseInt(numbers[i]);
+            sum += number;
         }
         return sum;
     }
 
-    public int colone(String text) {
-        String[] tokens= text.split(",|:");
-        return sum(tokens);
-    }
     public int custom(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-        int sum=0;
+        int sum = 0;
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens= m.group(2).split(customDelimiter);
+            String[] tokens = m.group(2).split(customDelimiter);
             sum = sum(tokens);
         }
         return sum;
     }
+
     public int add(String text) {
-        int num=0;
-        if (text == null) {
-            num = zero();
-            return num;
-        }
-        if (text.isEmpty()) {
-            num = zero();
-        }
-        if (text.length() == 1) {
-            num = one(text);
-        }
-        if (text.contains(",")&&!text.contains(":")) {
-            num = two(text);
-        }
-        if (text.contains(":") && text.contains(",")){
-            num = colone(text);
-        }
-        if (text.contains("//")&&text.contains(("\n"))){
-            num = custom(text);
+        if (text == null || text.isEmpty()) {
+            return 0;
         }
         if (text.contains("-")) {
             throw new RuntimeException();
         }
-        return num;
+        if (text.length() == 1) {
+            return one(text);
+        }
+        if (text.contains(":") || text.contains(",")) {
+            return colon(text);
+        }
+        if (text.contains("//") && text.contains(("\n"))) {
+            return custom(text);
+        }
+        throw new RuntimeException();
     }
 }
