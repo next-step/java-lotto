@@ -11,6 +11,10 @@ public class Calculator {
             return 0;
         }
 
+        if(Integer.parseInt(input) < 0) {
+            throw new RuntimeException();
+        }
+
         String delimiter = ",|:";
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
