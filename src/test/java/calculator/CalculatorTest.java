@@ -32,4 +32,11 @@ public class CalculatorTest {
         assertThat(calculator.add(input)).isSameAs(Integer.parseInt(input));
     }
 
+    @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2"})
+    void twoNumbers(final String input) {
+        assertThat(calculator.add(input)).isSameAs(3);
+    }
+
 }
