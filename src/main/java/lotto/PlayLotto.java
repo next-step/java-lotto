@@ -24,5 +24,10 @@ class PlayLotto {
 
         return lotto;
     }
-
+    
+    public static void countSameNumbers(Lotto initLotto, Lotto myLotto, Counter count, int index) {
+        if (myLotto.getNumbers().contains(initLotto.getNumbers().get(index))) {
+            count.add(1);
+        }
+    }
 }
