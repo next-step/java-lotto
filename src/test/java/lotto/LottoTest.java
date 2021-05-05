@@ -31,20 +31,20 @@ public class LottoTest {
     }
 
     @Test
-    void getRandomNumber(){
+    void getRandomNumber() {
         assertThat(playLotto.getRandomNumber()).isBetween(1, 45);
     }
 
     @RepeatedTest(value = 6)
-    void createLotto(RepetitionInfo repetitionInfo){
+    void createLotto(RepetitionInfo repetitionInfo) {
         assertThat(playLotto.createLotto().get(repetitionInfo.getCurrentRepetition() - 1)).isBetween(1, 45);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
     void countSameNumbers(int index) {
-        Lotto lastWeekLWinningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6,7));
-        Lotto thisWeekMyLotto = new Lotto(Arrays.asList(3,4,5,6,7,8));
+        Lotto lastWeekLWinningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        Lotto thisWeekMyLotto = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
         Counter counter = new Counter();
 
         PlayLotto.countSameNumbers(lastWeekLWinningLotto, thisWeekMyLotto, counter, index);

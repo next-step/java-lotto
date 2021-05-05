@@ -16,7 +16,7 @@ class PlayLotto {
 
     public ArrayList<Integer> createLotto() {
         ArrayList<Integer> lotto = new ArrayList<Integer>();
-        for(int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++) {
             lotto.add(getRandomNumber());
         }
 
@@ -24,7 +24,7 @@ class PlayLotto {
 
         return lotto;
     }
-    
+
     public static void countSameNumbers(Lotto initLotto, Lotto myLotto, Counter count, int index) {
         if (myLotto.getNumbers().contains(initLotto.getNumbers().get(index))) {
             count.add(1);
