@@ -30,4 +30,13 @@ class PlayLotto {
             count.add(1);
         }
     }
+
+    public int compareNumbers(Lotto initLotto, Lotto myLotto) {
+        Counter count = new Counter();
+        for (int i = 0; i < 7; i++) {
+            countSameNumbers(initLotto, myLotto, count, i);
+        }
+        return count.getCount();
+    }
+
 }
