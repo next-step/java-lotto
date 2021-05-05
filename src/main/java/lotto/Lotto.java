@@ -1,27 +1,15 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.List;
 
-public class Lotto {
-    public int buyLotto(int money) {
-        return money / 1000;
+public class Lotto{
+    private List<Integer> numbers;
+
+    Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public int getRandomNumber() {
-        Random random = new Random();
-        return random.nextInt(44) + 1;
-    }
-
-    public ArrayList<Integer> createLotto() {
-        ArrayList<Integer> lotto = new ArrayList<Integer>();
-        for(int i = 0; i < 6; i++) {
-            lotto.add(getRandomNumber());
-        }
-
-        Collections.sort(lotto);
-
-        return lotto;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
