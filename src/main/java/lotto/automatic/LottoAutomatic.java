@@ -15,17 +15,23 @@ public class LottoAutomatic {
         int buyCount = inputView.inputBuyPrice();
         List<Integer> lottoNumberList = numberList();
         ArrayList<List> lottoList = new ArrayList<>();
-        for (int i = 1; i < buyCount; i++) {
+
+        for (int i = 0; i < buyCount; i++) {
             lottoList.add(lottoOne(lottoNumberList));
         }
+
         resultView.resultLottoList(lottoList);
 
         String winningNumber = inputView.inputWinningNumber();
-        List<Integer> winningNumberList = new ArrayList<>();
-        for (String element : winningNumber.split(", ")) {
-            winningNumberList.add(Integer.valueOf(element));
-        }
-        int BonusNumber = inputView.inputBonus();
+        List<Integer> winningNumberList = winningNumberList(winningNumber);
+
+
+
+        int bonusNumber = inputView.inputBonus();
+
+        numberOfWinnings(lottoList, winningNumberList, bonusNumber);
+
+
 
     }
 
@@ -46,11 +52,26 @@ public class LottoAutomatic {
         return lottoNumberList;
     }
 
-    public int proceeds(ArrayList<List> lottoList ,String winNumbers){
-        List<Integer> winNumbersTest = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
-
-        return 1;
+    public List winningNumberList(String winningNumber){
+        List<Integer> winningNumberList =new ArrayList<>();
+        for (String element : winningNumber.split(", ")) {
+            winningNumberList.add(Integer.valueOf(element));
+        }
+        return  winningNumberList;
     }
+
+    public void numberOfWinnings(ArrayList<List> lottoList, List<Integer> winningNumberList, int bonusNumber){
+        int numberOfWinnings = 0;
+
+        for(List<Integer> lotto : lottoList){
+            for (int lottoNum : lotto){
+                if(winningNumberList.contains(lotto.get(lottoNum))==true){
+                    numberOfWinnings++;
+                }
+            }
+        }
+    }
+
 
 
 }
