@@ -8,12 +8,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class StringCalculatorTest {
-    private StringCalculator calculator;
+class StringAdditionCalculatorTest {
+    private StringAdditionCalculator calculator;
 
     @BeforeEach
     void setUp() {
-        calculator = new StringCalculator();
+        calculator = new StringAdditionCalculator();
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")

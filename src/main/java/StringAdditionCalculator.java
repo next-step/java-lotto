@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCalculator {
+public class StringAdditionCalculator {
 
     public String input() {
         Scanner scanner = new Scanner(System.in);
