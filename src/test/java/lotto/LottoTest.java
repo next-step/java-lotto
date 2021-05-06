@@ -25,7 +25,12 @@ public class LottoTest {
     @DisplayName("로또 공은 1~45까지이다.")
     @Test
     void createLottoBallTest(){
-
         assertThat(lotto.createLottoBall().get(0)).isBetween(1,45);
+    }
+
+    @DisplayName("로또 공은 무작위 숫자를 가져온다.")
+    @Test
+    void shuffleLottoBallTest(){
+        assertThat(lotto.shuffleLottoBall().get(0)).isBetween(1,45);
     }
 }
