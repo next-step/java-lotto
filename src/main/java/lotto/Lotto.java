@@ -36,9 +36,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public List<Integer> sortLottoNumber(){
-        List<Integer> sortNumbers = createLottoNumber();
-        Collections.sort(sortNumbers);
+    public List<Integer> sortLottoNumber(List<Integer> lottoNumbers){
+        Collections.sort(lottoNumbers);
+        List<Integer> sortNumbers = lottoNumbers;
         return sortNumbers;
     }
 }

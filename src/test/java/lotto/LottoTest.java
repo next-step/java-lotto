@@ -1,9 +1,14 @@
 package lotto;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,15 +27,24 @@ public class LottoTest {
         assertThat(lotto.buyLotto(14000)).isEqualTo(14);
     }
 
-    @DisplayName("로또 공은 1~45까지이다.")
+    @DisplayName("로또 공은 1~45까지 무작위 숫자를 가져온다.")
     @Test
     void createLottoBallTest(){
-        assertThat(lotto.createLottoBall().get(0)).isBetween(1,45);
+        assertThat(lotto.shuffleLottoBall().get(0)).isBetween(1,45);
     }
 
-    @DisplayName("로또 공은 무작위 숫자를 가져온다.")
+    @DisplayName("로또번호는 숫자 6개이다.")
     @Test
-    void shuffleLottoBallTest(){
-        assertThat(lotto.shuffleLottoBall().get(0)).isBetween(1,45);
+    void createLottoNumberTest(){
+        assertThat(lotto.createLottoNumber().size()).isEqualTo(6);
+    }
+
+    @DisplayName("로또번호는 숫자 6개가 오름차순으로 정렬된다.")
+    @Test
+    void sortLottoNumberTest(){
+        List<Integer> unSortedLottoNumbers = Arrays.asList(35, 26, 42, 5, 7, 13);
+        List<Integer> SortedLottoNumbers = Arrays.asList(35, 26, 42, 5, 7, 13);
+        Collections.sort(SortedLottoNumbers);
+        assertThat(lotto.sortLottoNumber(unSortedLottoNumbers)).isEqualTo(SortedLottoNumbers);
     }
 }
