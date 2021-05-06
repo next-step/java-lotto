@@ -22,5 +22,10 @@ public class LottoTest {
         assertThat(lotto.buyLotto(14000)).isEqualTo(14);
     }
 
-    @DisplayName("")
+    @DisplayName("로또 공은 1~45까지이다.")
+    @Test
+    void createLottoBallTest(){
+
+        assertThat(lotto.createLottoBall().get(0)).isBetween(1,45);
+    }
 }
