@@ -7,6 +7,7 @@ public class View {
     }
 
 }
+
 class InputView{
     Scanner scanner = new Scanner(System.in);
 

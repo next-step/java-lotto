@@ -47,4 +47,6 @@ public class LottoTest {
         Collections.sort(SortedLottoNumbers);
         assertThat(lotto.sortLottoNumber(unSortedLottoNumbers)).isEqualTo(SortedLottoNumbers);
     }
+
+    @DisplayName()
 }
