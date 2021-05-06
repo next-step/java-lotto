@@ -21,4 +21,14 @@ public class LottoTest {
                     new Lotto(Arrays.asList(lottoNumbers));
                 });
     }
+
+    @DisplayName("로또에서 로또 번호 리스트를 가져올 수 있다.")
+    @Test
+    void getLottoNumbersTest() {
+        Integer[] lottoNumbers = {1,2,3,4,5,6};
+
+        assertThat(new Lotto(Arrays.asList(lottoNumbers))
+                .getLottoNumbers()
+                .size()).isEqualTo(Lotto.CORRECT_LOTTO_NUMBERS_SIZE);
+    }
 }
