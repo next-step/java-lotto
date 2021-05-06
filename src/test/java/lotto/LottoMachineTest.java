@@ -24,4 +24,12 @@ public class LottoMachineTest {
         int purchaseAmount = 14000;
         assertThat(purchaseAmount / 1000).isEqualTo(14);
     }
+
+    @Test
+    void makeLottoNumbers() {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Integer> lottoNumbers = lottoMachine.makeLottoNumbers();
+        System.out.println("lottoNumbers.size() = " + lottoNumbers.size());
+        System.out.println("lottoNumbers.toString() = " + lottoNumbers.toString());
+    }
 }
