@@ -7,11 +7,21 @@ import java.util.List;
 
 import static lotto.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
+import static lotto.ui.Output.printLottoNumbers;
 
 public class LottoMachine {
+    // private 로 하고싶은데 테스트에서 사용하려면 public 이어야하고 그렇다는건 메서드가 다른 클래스로 가야할지도..?
+    public static List<Integer> makeLottoNumbers() {
+        HashSet<Integer> lottoNumbers = new HashSet<>();
+        while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE){
+            lottoNumbers.add(makeLottoNumber());
+        }
+        List lottoNumberList = new ArrayList(lottoNumbers);
+        return lottoNumberList;
+    }
 
-    public int countPurchasable(int purchaseAmount) {
-        return purchaseAmount / 1000;
+    private static Integer makeLottoNumber() {
+        return (int)(Math.random() * CANDIDATE_LOTTO_NUMBER_SIZE) + 1;
     }
 
     public List<Lotto> makeBunchOfLotto(int purchaseAmount) {
@@ -22,16 +32,15 @@ public class LottoMachine {
         }
         return bunchOfLotto;
     }
-    // private 로 하고싶은데 테스트에서 사용하려면 public 이어야하고 그렇다는건 메서드가 다른 클래스로 가야할지도..?
-    public static List<Integer> makeLottoNumbers() {
-        HashSet<Integer> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE){
-            lottoNumbers.add(makeLottoNumber());
+
+    public int countPurchasable(int purchaseAmount) {
+        return purchaseAmount / 1000;
+    }
+
+    public void printBunchOfLottoNumbers(List<Lotto> bunchOfLotto) {
+        for(Lotto lotto:bunchOfLotto){
+            printLottoNumbers(lotto.getLottoNumbers());
         }
-        List lottoNumberList = new ArrayList(lottoNumbers);
-        return lottoNumberList;
     }
-    private static Integer makeLottoNumber() {
-        return (int)(Math.random() * CANDIDATE_LOTTO_NUMBER_SIZE) + 1;
-    }
+
 }
