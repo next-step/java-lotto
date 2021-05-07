@@ -10,6 +10,7 @@ public class View {
         InputView inputView = new InputView();
         Lotto lotto = new Lotto();
         ResultView resultView = new ResultView();
+        WinningNumber winningNumber = new WinningNumber();
 
         System.out.println("구매 금액을 입력해 주세요");
         int money = inputView.insertPayMoney();
@@ -19,12 +20,14 @@ public class View {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = inputView.insertWinningNumber();
+
         System.out.println("보너스 볼을 입력해 주세요.");
         inputView.insertBonusNumber();
 
         System.out.println("당첨 통계");
         System.out.println("--------------------------------------------");
 
+        winningNumber.grade(lotto.sortLottoNumber(lotto.createLottoNumber()),winningNumbers);
     }
 
 }
@@ -37,11 +40,15 @@ class InputView {
     }
 
     public List<Integer> insertWinningNumber() {
-        String input = scanner.next();
-        List<String> splitInputs = Arrays.asList(input.split(", "));
+        String input = scanner.nextLine();
+
+        List<String> splitInputs = new ArrayList<>(Arrays.asList(input.split(", ")));
+
         List<Integer> winningNumbers = new ArrayList<>();
+
         for(int i = 0; i < splitInputs.size(); i++){
-            winningNumbers.add(Integer.parseInt(splitInputs.get(i)));
+            System.out.println(splitInputs.get(i));
+//            winningNumbers.add(Integer.parseInt(splitInputs.get(i)));
         }
         return winningNumbers;
     }
@@ -62,6 +69,7 @@ class ResultView {
             System.out.println(lotto.sortLottoNumber(lotto.createLottoNumber()));
         }
     }
+
 
 
 
