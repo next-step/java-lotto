@@ -36,7 +36,7 @@ public class LottoTest {
     @DisplayName("로또번호는 숫자 6개이다.")
     @Test
     void createLottoNumberTest(){
-        assertThat(lotto.createLottoNumber().size()).isEqualTo(6);
+        assertThat(lotto.createLottoNumber(lotto.shuffleLottoBall()).size()).isEqualTo(6);
     }
 
     @DisplayName("로또번호는 숫자 6개가 오름차순으로 정렬된다.")

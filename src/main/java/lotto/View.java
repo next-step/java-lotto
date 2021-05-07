@@ -27,34 +27,39 @@ public class View {
         System.out.println("당첨 통계");
         System.out.println("--------------------------------------------");
 
-        winningNumber.grade(lotto.sortLottoNumber(lotto.createLottoNumber()),winningNumbers);
+        winningNumber.grade(lotto.sortLottoNumber(lotto.createLottoNumber(lotto.shuffleLottoBall())),winningNumbers);
     }
 
 }
 
 class InputView {
-    Scanner scanner = new Scanner(System.in);
+
+    Scanner scanner;
 
     public int insertPayMoney() {
+        scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
+    public List<String> splitWinningNumber(String input) {
+        List<String> splitInputs = new ArrayList<>(Arrays.asList(input.replaceAll(" ", "").split(",")));
+        return splitInputs;
+    }
+
     public List<Integer> insertWinningNumber() {
+        scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-
-        List<String> splitInputs = new ArrayList<>(Arrays.asList(input.split(", ")));
-
+        List<String> splitInputs = splitWinningNumber(input);
         List<Integer> winningNumbers = new ArrayList<>();
-
         for(int i = 0; i < splitInputs.size(); i++){
-            System.out.println(splitInputs.get(i));
-//            winningNumbers.add(Integer.parseInt(splitInputs.get(i)));
+            winningNumbers.add(Integer.parseInt(splitInputs.get(i)));
         }
         return winningNumbers;
     }
 
 
     public String insertBonusNumber() {
+        scanner = new Scanner(System.in);
         return scanner.next();
     }
 
@@ -64,13 +69,11 @@ class ResultView {
     Lotto lotto = new Lotto();
 
     public void createLotto(int lottoCount) {
-        System.out.println(lottoCount+"개를 구매했습니다.");
+        System.out.println(lottoCount + "개를 구매했습니다.");
         for (int i = 0; i < lottoCount; i++) {
-            System.out.println(lotto.sortLottoNumber(lotto.createLottoNumber()));
+            System.out.println(lotto.sortLottoNumber(lotto.createLottoNumber(lotto.shuffleLottoBall())));
         }
     }
-
-
 
 
 }

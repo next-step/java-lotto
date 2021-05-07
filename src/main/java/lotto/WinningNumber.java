@@ -26,7 +26,7 @@ public class WinningNumber {
 
     Lotto lotto = new Lotto();
 
-    public void grade(List<Integer> lottoNumbers,List<Integer> winningNumber){
+    public int grade(List<Integer> lottoNumbers,List<Integer> winningNumber){
         int containCount = 0;
         List<Boolean> containNumber = isContain(lottoNumbers, winningNumber);
 
@@ -34,7 +34,7 @@ public class WinningNumber {
         for(boolean trueCount : containNumber) {
             map.put(trueCount, map.getOrDefault(trueCount, 0)+1);
         }
-        System.out.println(map);
+        return map.get(true);
     }
 
     public List<Boolean> isContain(List<Integer> lottoNumbers,List<Integer> winningNumber){
@@ -44,6 +44,7 @@ public class WinningNumber {
             containNumber.add(lottoNumbers.contains(winningNumber.get(i)));
         }
 
+        System.out.println(containNumber);
         return containNumber;
     }
 }

@@ -28,10 +28,10 @@ public class Lotto {
         return shuffleBalls;
     }
 
-    public List<Integer> createLottoNumber() {
+    public List<Integer> createLottoNumber(List<Integer> shuffleBalls) {
         List<Integer> lottoNumbers = new ArrayList<Integer>();
         for (int i = 0; i < 6; i++) {
-            lottoNumbers.add(shuffleLottoBall().get(i));
+            lottoNumbers.add(shuffleBalls.get(i));
         }
         return lottoNumbers;
     }
