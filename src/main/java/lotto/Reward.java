@@ -3,10 +3,9 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public enum Reward {
+    NOT_MATCH(0, 0, 0),
     MATCH_3(3, 0, 5000),
     MATCH_4(4, 0, 50000),
     MATCH_5(5, 0, 1500000),
@@ -35,9 +34,13 @@ public enum Reward {
     }
 
     public static Reward getReward(List<Integer> matchCounts) {
-        return Arrays.stream(Reward.values())
-                .filter(reward -> reward.getMatchCounts().toString().equals(matchCounts.toString()))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException());
+        try {
+            return Arrays.stream(Reward.values())
+                    .filter(reward -> reward.getMatchCounts().toString().equals(matchCounts.toString()))
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException());
+        } catch (Exception e) {
+            return NOT_MATCH;
+        }
     }
 }

@@ -1,21 +1,23 @@
 package lotto.ui;
 
-import java.util.List;
 import java.util.Scanner;
+
+import static lotto.ui.Output.*;
 
 public class Input {
     private static Scanner scanner = new Scanner(System.in);
 
     public static Integer inputMoneyForPurchase() {
-        return scanner.nextInt();
+        String purchase = scanner.nextLine();
+        return Integer.parseInt(purchase);
     }
 
     public static String inputWinningNumbers() {
-
         return scanner.nextLine();
     }
 
-    public static Integer inputBonusNumber() {
-        return scanner.nextInt();
+    public static String inputBonusNumber() {
+        printInputBonusBall();
+        return scanner.nextLine();
     }
 }

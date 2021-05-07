@@ -1,12 +1,10 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static lotto.Reward.getReward;
 import static org.assertj.core.api.Assertions.*;
@@ -29,4 +27,5 @@ public class RewardTest {
         assertThat(reward.getPrizeMoney()).isEqualTo(30000000);
         assertThat(reward2.getPrizeMoney()).isEqualTo(50000);
     }
+
 }

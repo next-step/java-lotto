@@ -5,7 +5,8 @@ import java.util.List;
 
 public class TypeConvert {
     public static String STRING_SEPARATOR = ",";
-    public static List<Integer> convertStringListToIntegerList(List<String > stringList) {
+
+    public static List<Integer> convertStringListToIntegerList(List<String> stringList) {
         List<Integer> convertedList = new ArrayList<>();
         for (String element : stringList) {
             convertedList.add(Integer.parseInt(element));
@@ -19,5 +20,9 @@ public class TypeConvert {
             convertedList.add(element);
         }
         return convertedList;
+    }
+
+    public static Integer convertStringToInteger(String string) {
+        return Integer.parseInt(string);
     }
 }
