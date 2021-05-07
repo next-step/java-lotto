@@ -3,10 +3,7 @@ package lotto;
 import lotto.ui.Input;
 import lotto.ui.TypeConvert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static lotto.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
@@ -53,6 +50,7 @@ public class LottoMachine {
                 (convertStringToStringList
                         (inputWinningNumbers()
                         ));
+        Collections.sort(winningNumbers);
         winningNumbers.add(inputBonusNumber());
 
         return winningNumbers;
