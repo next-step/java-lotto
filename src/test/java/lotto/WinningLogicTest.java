@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.ui.TypeConvert.convertStringListToIntegerList;
@@ -21,6 +22,7 @@ public class WinningLogicTest {
 
         Lotto lotto = new Lotto(lottoNumbers);
 
-        Assertions.assertThat(winningLogic.checkWinningCount(lotto.getLottoNumbers(),winningNumbers)).isEqualTo(3);
+        Assertions.assertThat(winningLogic.makeMatchCounts(lotto.getLottoNumbers(),winningNumbers))
+                .isEqualTo(Arrays.asList(3,0));
     }
 }
