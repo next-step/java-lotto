@@ -48,5 +48,12 @@ public class LottoTest {
         assertThat(lotto.sortLottoNumber(unSortedLottoNumbers)).isEqualTo(SortedLottoNumbers);
     }
 
-    @DisplayName()
+    @DisplayName("당첨번호 및 보너스번호와 로또 번호를 비교 할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {7, 5, 11, 15, 35, 9})
+    void lottoNumberCompareTest(int compareNumber){
+        List<Integer> lottoNumber = Arrays.asList(35, 24, 15, 5, 7, 11);
+
+    }
+
 }
