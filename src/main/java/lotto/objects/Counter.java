@@ -1,4 +1,4 @@
-package lotto;
+package lotto.objects;
 
 public class Counter {
     private int count = 0;
