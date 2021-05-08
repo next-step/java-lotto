@@ -20,7 +20,7 @@ public class InputView {
 
         Scanner scanner = new Scanner(System.in);
         String numbers = scanner.nextLine();
-        String[] splitNumbers = numbers.split(", ");
+        String[] splitNumbers = numbers.replace(" ", "").split(",");
 
         for (String number : splitNumbers) {
             lastWinningLotto.addNumber(Integer.valueOf(number));
