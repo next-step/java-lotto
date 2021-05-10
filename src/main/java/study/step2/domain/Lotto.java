@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -20,8 +21,10 @@ public class Lotto {
   }
 
   public Lotto(String inputText) {
-    Arrays.stream(inputText.split(", "))
-        .forEach(inputNumber -> lottoNumbers.add(LottoMachine.getLottoNumberMap().get(Integer.parseInt(inputNumber))));
+    lottoNumbers = Arrays.stream(inputText.split(","))
+        .map(String::trim)
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toSet());
   }
 
   public Set<LottoNumber> getLottoNumbers() {

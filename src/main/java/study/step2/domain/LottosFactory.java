@@ -8,7 +8,7 @@ public class LottosFactory {
 
   public static Lottos makeLottos(int lottoCount) {
     List<Lotto> lottoList = IntStream.range(0, lottoCount)
-        .mapToObj(i -> LottoMachine.pick())
+        .mapToObj(i -> LottoNumber.pick())
         .map(Lotto::new)
         .collect(Collectors.toList());
 
