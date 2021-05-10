@@ -13,4 +13,5 @@ public class MessageUtil {
   public static final String LOTTO_RESULT_MESSAGE = "당첨 통계";
   public static final String LOTTO_NUMBER_DUPLICATED = "중복되는 숫자가 포함되어 있는지 확인해주세요.";
   public static final String LOTTO_NUMBER_INVALID_RANGE = "로또 번호 범위를 확인해주세요.";
+  public static final String BONUS_NUMBER_INVALID_MESSAGE = "보너스 번호는 지난 담청 번호 6개와 같을 수 없습니다.";
 }

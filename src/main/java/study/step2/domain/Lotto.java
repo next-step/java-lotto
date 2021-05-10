@@ -1,6 +1,7 @@
 package study.step2.domain;
 
-import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
+import static study.step2.Exception.CustomException.BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
+import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCEPTION;
 import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
@@ -37,7 +38,7 @@ public class Lotto {
 
   public void checkDuplication() {
     if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED);
+      throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;
     }
   }
 
@@ -53,7 +54,7 @@ public class Lotto {
 
   public void bonusValidation(LottoNumber bonusNumber) {
     if (lottoNumbers.contains(bonusNumber))
-      throw new IllegalArgumentException("보너스 번호는 지난 담청 번호 6개와 같을 수 없습니다.");
+      throw BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
   }
 
   @Override
