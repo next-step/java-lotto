@@ -27,7 +27,7 @@ public class View {
         System.out.println("당첨 통계");
         System.out.println("--------------------------------------------");
 
-        winningNumber.grade(lotto.sortLottoNumber(lotto.createLottoNumber(lotto.shuffleLottoBall())),winningNumbers);
+//        winningNumber.grade(lotto.sortLottoNumber(lotto.createLottoNumber(lotto.shuffleLottoBall())),winningNumbers);
     }
 
 }
@@ -74,6 +74,4 @@ class ResultView {
             System.out.println(lotto.sortLottoNumber(lotto.createLottoNumber(lotto.shuffleLottoBall())));
         }
     }
-
-
 }
