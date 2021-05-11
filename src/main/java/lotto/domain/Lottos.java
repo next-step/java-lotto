@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,14 +18,22 @@ public class Lottos {
         this.lottos = exchange(money);
     }
 
-    private static List<Lotto> exchange(Money money) {
-        return IntStream.range(0, money.purchase())
+    public static Lottos of(Money money) {
+        return new Lottos(money);
+    }
+
+    private List<Lotto> exchange(Money money) {
+        return IntStream.range(0, money.purchaseAuto())
                 .mapToObj(n -> new Lotto())
                 .collect(Collectors.toList());
     }
 
-    public static Lottos of(Money money) {
-        return new Lottos(money);
+    public void addLottoList(List<Lotto> lottoList) {
+        lottoList.forEach(this::addLotto);
+    }
+
+    private void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 
     public int size() {
