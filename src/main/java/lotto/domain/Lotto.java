@@ -17,8 +17,8 @@ public class Lotto {
         this.lottoBalls = lottoBalls;
     }
 
-    public static Lotto of(List<Integer> winningBalls) {
-        return new Lotto(LottoBalls.createWinningLottoBalls(winningBalls));
+    public static Lotto createManualLotto(List<Integer> manualBalls) {
+        return new Lotto(LottoBalls.createManualLottoBalls(manualBalls));
     }
 
     public List<LottoBall> createAutoLotto() {
