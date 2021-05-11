@@ -1,6 +1,6 @@
 package lotto;
 
-public enum LottoGame {
+public enum Rank {
     MISS_MATCH(0,0),
     MATCH_3(3,5000 ),
     MATCH_4(4,50000),
@@ -11,7 +11,7 @@ public enum LottoGame {
     private final int match;
     private final int money;
 
-    LottoGame(int match, int money){
+    Rank(int match, int money){
         this.match = match;
         this.money = money;
     }
