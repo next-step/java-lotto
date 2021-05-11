@@ -13,6 +13,7 @@ import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
 import study.step2.domain.Rank;
+import study.step2.domain.WinningLotto;
 
 public class LottosTest {
 
@@ -47,7 +48,7 @@ public class LottosTest {
   void winingMatchTest() {
     //given
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    Lotto winingLotto = new Lotto("1, 2, 3, 12, 15, 16");
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16");
     LottoNumber bonusNumber = new LottoNumber(16);
 
     // when
@@ -63,7 +64,7 @@ public class LottosTest {
   void winingMatchTestWithBonusNumber() {
     //given
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    Lotto winingLotto = new Lotto("1, 2, 3, 12, 15, 44");
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 44");
     LottoNumber bonusNumber = new LottoNumber(16);
 
     // when

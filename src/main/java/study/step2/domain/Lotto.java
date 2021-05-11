@@ -1,8 +1,6 @@
 package study.step2.domain;
 
 import static study.step2.Exception.CustomException.BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
-import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCEPTION;
-import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,29 +31,10 @@ public class Lotto {
     return lottoNumbers;
   }
 
-  public void validatorPositiveNumbers() {
-    lottoNumbers.forEach(LottoNumber::validatorPositiveNumber);
-  }
-
-  public void checkDuplication() {
-    if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-      throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;
-    }
-  }
-
   public int matchCount(Set<LottoNumber> winningLottoNumbers) {
     return (int) lottoNumbers.stream()
         .filter(winningLottoNumbers::contains)
         .count();
-  }
-
-  public boolean isMatchBonus(LottoNumber bonusNumber) {
-    return lottoNumbers.contains(bonusNumber);
-  }
-
-  public void bonusValidation(LottoNumber bonusNumber) {
-    if (lottoNumbers.contains(bonusNumber))
-      throw BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
   }
 
   public static Lottos makeLottos(int lottoCount) {
@@ -65,6 +44,10 @@ public class Lotto {
         .collect(Collectors.toList());
 
     return new Lottos(lottoList);
+  }
+
+  public boolean isMatchBonus(LottoNumber bonusNumber) {
+    return lottoNumbers.contains(bonusNumber);
   }
 
   @Override

@@ -15,7 +15,7 @@ public class Lottos {
     return lottos;
   }
 
-  public LottoResult match(Lotto winningLotto, LottoNumber bonusNumber) {
+  public LottoResult match(WinningLotto winningLotto, LottoNumber bonusNumber) {
     LottoResult lottoResult = new LottoResult();
 
     lottos.stream().map(lotto -> Rank.find(lotto.matchCount(winningLotto.getLottoNumbers()), lotto.isMatchBonus(bonusNumber)))

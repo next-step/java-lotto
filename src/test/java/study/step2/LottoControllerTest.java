@@ -1,9 +1,10 @@
 package study.step2;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.controller.LottoController;
@@ -12,6 +13,7 @@ import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
 import study.step2.domain.Rank;
+import study.step2.domain.WinningLotto;
 
 public class LottoControllerTest {
 
@@ -50,17 +52,17 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
-    LottoNumber bonusNumber = new LottoNumber(16);
+    LottoNumber bonusNumber = new LottoNumber(19);
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
 
-    Lotto lotto = new Lotto(pickedLottoNumbers);
-    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
 
     // then
     assertThat(lottoResult).isNotNull();
@@ -71,17 +73,17 @@ public class LottoControllerTest {
   void findLottoWinningFirst() {
     // given
     int money = 1000;
-    LottoNumber bonusNumber = new LottoNumber(16);
+    LottoNumber bonusNumber = new LottoNumber(19);
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
 
-    Lotto lotto = new Lotto(pickedLottoNumbers);
-    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
 
     // then
     assertThat(lottoResult.getValue(Rank.FIRST)).isEqualTo(1);
@@ -98,16 +100,40 @@ public class LottoControllerTest {
 
     LottoNumber bonusNumber = new LottoNumber(16);
 
-    Lotto lotto = new Lotto(winingLottoNumbers);
-    Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(new Lotto(pickedLottoNumbers))));
+    WinningLotto winingLotto = new WinningLotto(winingLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, lotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
 
     // then
     assertThat(lottoResult.getValue(Rank.SECOND)).isEqualTo(1);
+  }
+
+  @DisplayName("당첨번호와 보너스 번호가 동일한 번호가 있을 경우 에러 테스트")
+  @Test
+  void findLottoWinningSecondWithBonusFail() {
+    // given
+    int money = 1000;
+
+    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
+    String winingLottoNumbers = "1, 2, 3, 12, 15, 19";
+
+    LottoNumber bonusNumber = new LottoNumber(19);
+
+    WinningLotto winingLotto = new WinningLotto(winingLottoNumbers);
+    Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
+
+    LottoController lottoController = new LottoController();
+
+    // when
+    Throwable thrown =  catchThrowable(() -> lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber));
+
+    //then
+    assertThat(thrown).isInstanceOf(RuntimeException.class);
+
   }
 
 }

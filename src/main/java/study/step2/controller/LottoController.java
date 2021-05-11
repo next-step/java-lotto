@@ -5,6 +5,7 @@ import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoPrice;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
+import study.step2.domain.WinningLotto;
 import study.step2.view.ResultView;
 
 public class LottoController {
@@ -25,7 +26,7 @@ public class LottoController {
     return lottos;
   }
 
-  public LottoResult findLottoWinning(Lottos lottos, Lotto winningLotto, int money, LottoNumber bonusNumber) {
+  public LottoResult findLottoWinning(Lottos lottos, WinningLotto winningLotto, int money, LottoNumber bonusNumber) {
     LottoResult lottoResult = lottos.match(winningLotto, bonusNumber);
 
     winningLotto.bonusValidation(bonusNumber);
