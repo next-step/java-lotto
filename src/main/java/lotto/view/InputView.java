@@ -37,6 +37,16 @@ public class InputView {
         }
     }
 
+    public static List<List<Integer>> inputManualLottoNumbers(int inputManualCounts) {
+        System.out.println(INPUT_MANUAL_LOTTO);
+        List<List<Integer>> manualNumbersList = new ArrayList<>();
+        while (inputManualCounts-- > 0) {
+            String[] inputNumbers = scanner.nextLine().split(SPLIT_DELIMITER);
+            manualNumbersList.add(parseInteger(inputNumbers));
+        }
+        return manualNumbersList;
+    }
+
     public static List<Integer> inputWinningNumbers() {
         System.out.println(LAST_WEEK_LOTTO);
         String[] inputNumbers = scanner.nextLine().split(SPLIT_DELIMITER);
