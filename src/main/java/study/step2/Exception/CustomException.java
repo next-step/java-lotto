@@ -5,6 +5,7 @@ import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
 import static study.step2.utils.MessageUtil.LOTTO_NUMBER_INVALID_RANGE;
 
 public class CustomException extends RuntimeException {
+
   private CustomException(String message){
     super(message);
   }

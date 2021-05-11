@@ -5,14 +5,15 @@ import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCE
 import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
-  private Set<LottoNumber> lottoNumbers = new HashSet<>();
+  private Set<LottoNumber> lottoNumbers;
 
   public Lotto() {
   }
@@ -55,6 +56,15 @@ public class Lotto {
   public void bonusValidation(LottoNumber bonusNumber) {
     if (lottoNumbers.contains(bonusNumber))
       throw BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
+  }
+
+  public static Lottos makeLottos(int lottoCount) {
+    List<Lotto> lottoList = IntStream.range(0, lottoCount)
+        .mapToObj(i -> LottoNumber.pick())
+        .map(Lotto::new)
+        .collect(Collectors.toList());
+
+    return new Lottos(lottoList);
   }
 
   @Override
