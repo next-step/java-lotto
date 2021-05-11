@@ -12,7 +12,7 @@ class WinningLottoTest {
     void create_winningLotto_size_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
-            LottoBalls lottoBalls = LottoBalls.of(1, 2, 3, 4, 5);
+            LottoBalls lottoBalls = LottoBalls.createManualLottoBalls(1, 2, 3, 4, 5);
             LottoBall bonusBall = LottoBall.valueOf(45);
 
             //when & then
@@ -25,7 +25,7 @@ class WinningLottoTest {
     void create_winningLotto_duplication_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
-            LottoBalls lottoBalls = LottoBalls.of(1, 2, 3, 4, 5, 6);
+            LottoBalls lottoBalls = LottoBalls.createManualLottoBalls(1, 2, 3, 4, 5, 6);
             LottoBall bonusBall = LottoBall.valueOf(1);
 
             //when & then
