@@ -39,7 +39,7 @@ public class ResultView {
     }
 
     public static void printEarningRate(Money money, LottoResult result) {
-        BigDecimal earningRate = result.earningRate(BigDecimal.valueOf(money.getPayment()));
+        BigDecimal earningRate = result.earningRate(BigDecimal.valueOf(money.getTotalPayment()));
         System.out.printf("총 수익률은 %.2f입니다.", earningRate);
         if (earningRate.intValue() < 1) {
             System.out.println(PROFIT_MESSAGE);
