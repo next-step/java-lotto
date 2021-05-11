@@ -15,8 +15,8 @@ public class LottoBalls {
         this.lottoBalls = new HashSet<>(lottoBalls);
     }
 
-    public static LottoBalls of(Integer... lottoBalls) {
-        return LottoBalls.of(Arrays.asList(lottoBalls));
+    public static LottoBalls createManualLottoBalls(Integer... lottoBalls) {
+        return LottoBalls.createManualLottoBalls(Arrays.asList(lottoBalls));
     }
 
     public static LottoBalls createWinningLottoBalls(List<Integer> lottoBallList) {
@@ -26,7 +26,7 @@ public class LottoBalls {
                 .collect(Collectors.toList()));
     }
 
-    public static LottoBalls of(List<Integer> lottoBallList) {
+    public static LottoBalls createManualLottoBalls(List<Integer> lottoBallList) {
         validate(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
                 .map(LottoBall::valueOf)
