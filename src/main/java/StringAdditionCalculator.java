@@ -12,6 +12,7 @@ public class StringAdditionCalculator {
     public int one(String text) {
         if (text.matches("\\d+")) {
             int number = Integer.parseInt(text);
+            System.out.println(number);
             return number;
         }
         throw new RuntimeException();
@@ -33,6 +34,7 @@ public class StringAdditionCalculator {
             int number = Integer.parseInt(numbers[i]);
             sum += number;
         }
+        System.out.println(sum);
         return sum;
     }
 
@@ -44,11 +46,13 @@ public class StringAdditionCalculator {
             String[] tokens = m.group(2).split(customDelimiter);
             sum = sum(tokens);
         }
+        System.out.println(sum);
         return sum;
     }
 
     public int add(String text) {
         if (text == null || text.isEmpty()) {
+            System.out.println(0);
             return 0;
         }
         if (text.contains("-")) {
