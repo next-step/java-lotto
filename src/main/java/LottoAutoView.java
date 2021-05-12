@@ -20,6 +20,7 @@ public class LottoAutoView {
     public String inputWinningNumbers() {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("");
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
@@ -32,6 +33,7 @@ public class LottoAutoView {
     }
 
     public void outputWinningStatistic(float earningRate) {
+        System.out.println("");
         System.out.println("당첨 통계");
         System.out.println("--------");
 
