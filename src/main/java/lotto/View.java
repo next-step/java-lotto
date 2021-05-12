@@ -28,8 +28,5 @@ public class View {
 
         System.out.println("당첨 통계");
         System.out.println("---------------");
-
-
-
     }
 }

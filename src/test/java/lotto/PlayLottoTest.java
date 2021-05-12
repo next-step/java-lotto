@@ -18,14 +18,14 @@ public class PlayLottoTest {
 
     @DisplayName("로또 공은 1~45까지이다.")
     @RepeatedTest(value = 45)
-    void lottoNumbersTest(RepetitionInfo repetitionInfo){
+    void lottoNumbersTest(RepetitionInfo repetitionInfo) {
         Lotto lotto = new Lotto();
         assertThat(lotto.createLottoNumbers()).contains(repetitionInfo.getCurrentRepetition());
     }
 
     @DisplayName("로또번호는 숫자 6개로 이루어져있다.")
     @Test
-    void lottoSizeTest(){
+    void lottoSizeTest() {
         Lotto lotto = new Lotto();
         lotto.createLottoNumbers();
 
@@ -34,13 +34,12 @@ public class PlayLottoTest {
 
     @DisplayName("로또번호는 오름차순으로 정렬된다.")
     @Test
-    void lottoSortTest(){
+    void lottoSortTest() {
         Lotto lotto = new Lotto();
         lotto.createLottoNumbers();
 
         assertThat(lotto.sortLottoNumbers()).isSorted();
     }
-
 
 
 }
