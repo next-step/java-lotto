@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class LottoAutoView {
 
-
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
 
@@ -43,5 +42,8 @@ public class LottoAutoView {
         System.out.println("6개 일치 (2000000000원)- " + LottoAutoController.winningResult.first.numberOfWinnings + "개");
 
         System.out.println("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
+        if (earningRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 }
