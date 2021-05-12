@@ -1,6 +1,6 @@
-public class mainStringCalculator {
+public class StringAdditionCalculatorMain {
     public static void main(String[] args) {
-        StringCalculator calculator = new StringCalculator();
+        StringAdditionCalculator calculator = new StringAdditionCalculator();
         String text = calculator.input();
         calculator.add(text);
     }
