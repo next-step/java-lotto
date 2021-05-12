@@ -21,6 +21,7 @@ public class View {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
         String[] lastNumbers = scanner.nextLine().replaceAll(" ", "").split(",");
+        lotto.lastWeekNumber(lastNumbers);
 
         System.out.println("보너스 번호를 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
@@ -28,6 +29,7 @@ public class View {
         System.out.println("당첨 통계");
         System.out.println("---------------");
 
-        lotto.compareNumber();
+
+
     }
 }
