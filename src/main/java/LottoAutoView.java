@@ -2,9 +2,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoAutoView {
-    Scanner scanner = new Scanner(System.in);
+
 
     public int inputPrice() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextInt();
     }
@@ -17,16 +19,20 @@ public class LottoAutoView {
     }
 
     public String inputWinningNumbers() {
-        System.out.println("winning numbers 지난 주 당첨 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
 
     public String inputBonusNumber() {
-        System.out.println("bonus number 보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public void outputWinningStatistic(double earningRate) {
+    public void outputWinningStatistic(float earningRate) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
@@ -36,6 +42,6 @@ public class LottoAutoView {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + LottoAutoController.winningResult.second.numberOfWinnings + "개");
         System.out.println("6개 일치 (2000000000원)- " + LottoAutoController.winningResult.first.numberOfWinnings + "개");
 
-        System.out.println("총 수익률은 " + earningRate + "입니다.");
+        System.out.println("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
     }
 }
