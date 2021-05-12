@@ -20,7 +20,7 @@ public class LottoAutoView {
     public String inputWinningNumbers() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("");
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
@@ -33,7 +33,7 @@ public class LottoAutoView {
     }
 
     public void outputWinningStatistic(float earningRate) {
-        System.out.println("");
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
@@ -43,7 +43,7 @@ public class LottoAutoView {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + LottoAutoController.winningResult.second.numberOfWinnings + "개");
         System.out.println("6개 일치 (2000000000원)- " + LottoAutoController.winningResult.first.numberOfWinnings + "개");
 
-        System.out.println("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
+        System.out.print("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
         if (earningRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
