@@ -23,7 +23,7 @@ public class LottoManualController {
         int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
 
         getWinningResult(lottos, winningNumbers, bonusNumber);
-        view.outputWinningStatistics(getEarningRate(price));
+        view.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
     }
 
     public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
@@ -139,12 +139,15 @@ public class LottoManualController {
         }
     }
 
-    private float getEarningRate(int price) {
-        float floatPrice = (float) price;
+    private float getEarningRate(int earningPrice, int purchasePrice) {
+        return (float) earningPrice/ (float) purchasePrice;
+    }
+
+    public int getEarningPrice() {
         return (winningResult.fifth.getWinningPrice() * winningResult.fifth.getNumberOfWinnings()
                 + winningResult.fourth.getWinningPrice() * winningResult.fourth.getNumberOfWinnings()
                 + winningResult.third.getWinningPrice() * winningResult.third.getNumberOfWinnings()
                 + winningResult.second.getWinningPrice() * winningResult.second.getNumberOfWinnings()
-                + winningResult.first.getWinningPrice() * winningResult.first.getNumberOfWinnings()) / floatPrice;
+                + winningResult.first.getWinningPrice() * winningResult.first.getNumberOfWinnings());
     }
 }
