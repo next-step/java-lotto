@@ -63,17 +63,24 @@ public class LottoAutomatic {
         int numberOfWinnings = 0;
 
         boolean bonus = false;
+        //로또 개수만큼
         for(List<Integer> lotto : lottoList){
+            //로또 당첨 번호 맞추기
             for (int lottoNum : lotto){
+                //맞춘 개수
                 if(winningNumberList.contains(lotto.get(lottoNum))){
                     numberOfWinnings++;
                 }
             }
+            //보너스 번호 당첨 여부
             if(winningNumberList.contains(bonusNumber)){
                 bonus =true;
             }
 
+
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
+
+            //몇개 당첨 됐는지 저장하는 리스트 ? 해쉬맵 ?? 작성해야함 --------
             System.out.println(rank);
 
         }
