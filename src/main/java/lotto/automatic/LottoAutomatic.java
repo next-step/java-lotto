@@ -1,7 +1,6 @@
 package lotto.automatic;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoAutomatic {
 
@@ -16,6 +15,7 @@ public class LottoAutomatic {
         List<Integer> lottoNumberList = numberList();
         ArrayList<List> lottoList = new ArrayList<>();
 
+        //구매 수량만큼 자동 로또
         for (int i = 0; i < buyCount; i++) {
             lottoList.add(lottoOne(lottoNumberList));
         }
@@ -25,16 +25,21 @@ public class LottoAutomatic {
         String winningNumber = inputView.inputWinningNumber();
         List<Integer> winningNumberList = winningNumberList(winningNumber);
 
-
-
         int bonusNumber = inputView.inputBonus();
 
-        numberOfWinnings(lottoList, winningNumberList, bonusNumber);
-
-
+        rank(lottoList, winningNumberList, bonusNumber);
 
     }
 
+
+    //로또 추첨을 위한 1~45까지의 번호 리스트
+    public List<Integer> numberList() {
+        for (int i = 1; i <= LOTTO_MAX_NUM; i++) {
+            lottoNumberList.add(i);
+        }
+        return lottoNumberList;
+    }
+    //자동 로또 뽑기
     public List<Integer> lottoOne(List<Integer> lottoNumberList) {
         Collections.shuffle(lottoNumberList);
         List<Integer> lotto = new ArrayList<>();
@@ -44,14 +49,7 @@ public class LottoAutomatic {
         Collections.sort(lotto);
         return lotto;
     }
-
-     public List<Integer> numberList() {
-        for (int i = 1; i <= LOTTO_MAX_NUM; i++) {
-            lottoNumberList.add(i);
-        }
-        return lottoNumberList;
-    }
-
+    //지난주 로또 당첨 번호
     public List winningNumberList(String winningNumber){
         List<Integer> winningNumberList =new ArrayList<>();
         for (String element : winningNumber.split(", ")) {
@@ -60,15 +58,24 @@ public class LottoAutomatic {
         return  winningNumberList;
     }
 
-    public void numberOfWinnings(ArrayList<List> lottoList, List<Integer> winningNumberList, int bonusNumber){
+    //당첨 개수 비교
+    public void rank(ArrayList<List> lottoList, List<Integer> winningNumberList, int bonusNumber){
         int numberOfWinnings = 0;
 
+        boolean bonus = false;
         for(List<Integer> lotto : lottoList){
             for (int lottoNum : lotto){
-                if(winningNumberList.contains(lotto.get(lottoNum))==true){
+                if(winningNumberList.contains(lotto.get(lottoNum))){
                     numberOfWinnings++;
                 }
             }
+            if(winningNumberList.contains(bonusNumber)){
+                bonus =true;
+            }
+
+            Rank rank = Rank.getRank(numberOfWinnings, bonus);
+            System.out.println(rank);
+
         }
     }
 
