@@ -12,11 +12,11 @@ public class LottoManualController {
         int manualQuantity = view.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
-        List<String> manualNumbersString = view.inputManualLottoNumbers(manualQuantity);
+        List<String> manualNumbers = view.inputManualLottoNumbers(manualQuantity);
 
         List<LottoModel> lottos = new ArrayList<>();
-        setManualLotto(manualQuantity, manualNumbersString, lottos);
-        setAutoLotto(autoQuantity, lottos);
+        setManualLottos(manualQuantity, manualNumbers, lottos);
+        setAutoLottos(autoQuantity, lottos);
         view.printLottos(manualQuantity, autoQuantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
@@ -26,7 +26,7 @@ public class LottoManualController {
         view.outputWinningStatistics(getEarningRate(price));
     }
 
-    public void setManualLotto(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
+    public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
         for (int i = 0; i < manualQuantity; i++) {
             List<Integer> manualNumbers = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class LottoManualController {
         }
     }
 
-    public void setAutoLotto(int autoQuantity, List<LottoModel> lottos) {
+    public void setAutoLottos(int autoQuantity, List<LottoModel> lottos) {
         for (int i = 0; i < autoQuantity; i++) {
             List<Integer> autoNumbers = new ArrayList<>();
 
