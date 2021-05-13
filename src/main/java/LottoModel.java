@@ -11,7 +11,7 @@ public class LottoModel {
         return numbers;
     }
 
-    public int setWinningResult(List<Integer> winningNumbers) {
+    public int countWinningNumbers(List<Integer> winningNumbers) {
         int count = 0;
         for (int i = 0; i < 6; i++) {
             if (numbers.contains(winningNumbers.get(i))) {

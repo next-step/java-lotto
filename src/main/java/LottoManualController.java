@@ -118,7 +118,7 @@ public class LottoManualController {
 
     private void getWinningResult(List<LottoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
         for (LottoModel lotto : lottos) {
-            int count = lotto.setWinningResult(winningNumbers);
+            int count = lotto.countWinningNumbers(winningNumbers);
             boolean bonus = lotto.getNumbers().contains(bonusNumber);
             winningResult.addCount(count, bonus);
         }
