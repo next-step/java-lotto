@@ -3,8 +3,11 @@ import java.util.List;
 public class LottoModel {
     private List<Integer> numbers;
 
-    LottoModel(List<Integer> numbers) {
-        this.numbers = numbers;
+    LottoModel() {
+    }
+
+    public void addNumber(int number) {
+        numbers.add(number);
     }
 
     public List<Integer> getNumbers() {

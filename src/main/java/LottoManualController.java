@@ -30,9 +30,7 @@ public class LottoManualController {
         for (int i = 0; i < manualQuantity; i++) {
             String[] splitManualNumber = splitBySeparator(manualNumbersString.get(i));
 
-            List<Integer> manualNumbers = setManualLotto(splitManualNumber);
-
-            lottos.add(new LottoModel(manualNumbers));
+            lottos.add(setManualLotto(splitManualNumber));
         }
     }
 
@@ -41,12 +39,12 @@ public class LottoManualController {
         return numbers.split(separator);
     }
 
-    private List<Integer> setManualLotto(String[] splitManualNumber) {
-        List<Integer> manualNumbers = new ArrayList<>();
-        for (int i = 0; i < splitManualNumber.length; i++) {
-            manualNumbers.add(convertToInt(splitManualNumber[i]));
+    private LottoModel setManualLotto(String[] manualNumbers) {
+        LottoModel lotto = new LottoModel();
+        for (int i = 0; i < manualNumbers.length; i++) {
+            lotto.addNumber(convertToInt(manualNumbers[i]));
         }
-        return manualNumbers;
+        return lotto;
     }
 
     private int convertToInt(String s) {
@@ -68,7 +66,11 @@ public class LottoManualController {
             }
             Collections.sort(autoNumbers);
 
-            lottos.add(new LottoModel(autoNumbers));
+            LottoModel lotto = new LottoModel();
+            for (int k = 0; k < 6; k++) {
+                lotto.addNumber(autoNumbers.get(k));
+            }
+            lottos.add(lotto);
         }
     }
 
