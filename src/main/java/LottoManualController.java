@@ -28,16 +28,29 @@ public class LottoManualController {
 
     public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
         for (int i = 0; i < manualQuantity; i++) {
-            List<Integer> manualNumbers = new ArrayList<>();
+            String[] splitManualNumber = splitBySeparator(manualNumbersString.get(i));
 
-            String[] splitManualNumbers = manualNumbersString.get(i).split(", ");
-            for (int j = 0; j < splitManualNumbers.length; j++) {
-                int number = Integer.parseInt(splitManualNumbers[j]);
-                manualNumbers.add(number);
-            }
+            List<Integer> manualNumbers = setManualLotto(splitManualNumber);
 
             lottos.add(new LottoModel(manualNumbers));
         }
+    }
+
+    public String[] splitBySeparator(String numbers) {
+        String separator = ", ";
+        return numbers.split(separator);
+    }
+
+    private List<Integer> setManualLotto(String[] splitManualNumber) {
+        List<Integer> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < splitManualNumber.length; i++) {
+            manualNumbers.add(convertToInt(splitManualNumber[i]));
+        }
+        return manualNumbers;
+    }
+
+    private int convertToInt(String s) {
+        return Integer.parseInt(s);
     }
 
     public void setAutoLottos(int autoQuantity, List<LottoModel> lottos) {
