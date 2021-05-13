@@ -11,8 +11,8 @@
  - [x] 커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다. #calculator#Word#findCustomSeparator(String)
  - [x] 입력값이 음수인 경우 `RuntimeException` throw 한다. #calculator#Word#inputValidation(List)
  - [x] 입력값이 빈 문자열 또는 `NULL`인 경우 `0`을 반환 한다. #calculator#Word#emptyOrNullTest(String)
- - [ ] 쉼표 또는 콜론을 구분자로 가지는 문자열을 전달 하는 경우 구분자를 기준으로 각 숫자의 합을 반환. #calculator#Calculator#sumNumbers(List)
- - [ ] 앞의 기본 구분자 이외의 커스텀 구분자("//" 와 "/n" 사이에 위치하는 문자)를 기준으로 각 숫자의 합을 반환.#calculator#Calculator#sumExpression(List)
+ - [x] 쉼표 또는 콜론을 구분자로 가지는 문자열을 전달 하는 경우 구분자를 기준으로 각 숫자의 합을 반환. #calculator#Calculator#sumNumbers(List)
+ - [x] 앞의 기본 구분자 이외의 커스텀 구분자("//" 와 "/n" 사이에 위치하는 문자)를 기준으로 각 숫자의 합을 반환.#calculator#Calculator#sumExpression(List)
 
 ----------
 

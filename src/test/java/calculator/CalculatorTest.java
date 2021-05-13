@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +20,13 @@ public class CalculatorTest {
 
     @Test
     public void sumNumbers() {
-        List<Integer> numbers = Arrays.asList(2,3);
+        List<Integer> numbers = Arrays.asList(2, 3);
         assertThat(calculator.sumNumbers(numbers)).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2,3", "//;/n1;2;3"})
+    public void sumExpression(String input) {
+        assertThat(calculator.sumExpression(input)).isEqualTo(6);
     }
 }

@@ -5,7 +5,6 @@ import java.util.*;
 import static lotto.Reward.*;
 
 public class WinningLogic {
-
     public static Integer INITIALIZE_NUMBER = 0;
 
     public static List<Integer> makeMatchCounts(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
