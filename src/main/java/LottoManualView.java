@@ -32,7 +32,7 @@ public class LottoManualView {
         return manualNumbers;
     }
 
-    public void printLotto(int manualQuantity, int autoQuantity, List<LottoModel> lottos) {
+    public void printLottos(int manualQuantity, int autoQuantity, List<LottoModel> lottos) {
         System.out.println();
         System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "개를 구매했습니다.");
         for (LottoModel lotto : lottos) {
@@ -55,7 +55,7 @@ public class LottoManualView {
         return scanner.nextLine();
     }
 
-    public void outputWinningStatistic(float earningRate) {
+    public void outputWinningStatistics(float earningRate) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");

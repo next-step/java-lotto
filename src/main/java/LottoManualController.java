@@ -17,13 +17,13 @@ public class LottoManualController {
         List<LottoModel> lottos = new ArrayList<>();
         setManualLotto(manualQuantity, manualNumbersString, lottos);
         setAutoLotto(autoQuantity, lottos);
-        view.printLotto(manualQuantity, autoQuantity, lottos);
+        view.printLottos(manualQuantity, autoQuantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
 
         getWinningResult(lottos, winningNumbers, bonusNumber);
-        view.outputWinningStatistic(getEarningRate(price));
+        view.outputWinningStatistics(getEarningRate(price));
     }
 
     public void setManualLotto(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
