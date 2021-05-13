@@ -22,7 +22,7 @@ public class LottoAutomaticResultViewTest {
 
     @DisplayName("리스트 출력")
     @Test
-    void resulLottoList(){
+    void resultLottoList(){
         ArrayList<List> list = new ArrayList<>();
 
         list.add(Arrays.asList(1,3,12,23,34,44));
