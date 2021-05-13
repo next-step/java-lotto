@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoManualController {
@@ -12,9 +11,8 @@ public class LottoManualController {
         int manualQuantity = view.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
-        List<String> manualNumbers = view.inputManualLottoNumbers(manualQuantity);
-
         List<LottoModel> lottos = new ArrayList<>();
+        List<String> manualNumbers = view.inputManualLottoNumbers(manualQuantity);
         setManualLottos(manualQuantity, manualNumbers, lottos);
         setAutoLottos(autoQuantity, lottos);
         view.printLottos(manualQuantity, autoQuantity, lottos);
@@ -28,49 +26,13 @@ public class LottoManualController {
 
     public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
         for (int i = 0; i < manualQuantity; i++) {
-            String[] splitManualNumber = splitBySeparator(manualNumbersString.get(i));
-
-            lottos.add(setManualLotto(splitManualNumber));
+            lottos.add(new LottoModel(manualNumbersString.get(i)));
         }
-    }
-
-    public String[] splitBySeparator(String numbers) {
-        String separator = ", ";
-        return numbers.split(separator);
-    }
-
-    private LottoModel setManualLotto(String[] manualNumbers) {
-        LottoModel lotto = new LottoModel();
-        for (int i = 0; i < manualNumbers.length; i++) {
-            lotto.addNumber(convertToInt(manualNumbers[i]));
-        }
-        return lotto;
-    }
-
-    private int convertToInt(String s) {
-        return Integer.parseInt(s);
     }
 
     public void setAutoLottos(int autoQuantity, List<LottoModel> lottos) {
         for (int i = 0; i < autoQuantity; i++) {
-            List<Integer> autoNumbers = new ArrayList<>();
-
-            List<Integer> rangeOfNumbers = new ArrayList<>();
-            for (int j = 0; j < 45; j++) {
-                rangeOfNumbers.add(j + 1);
-            }
-
-            Collections.shuffle(rangeOfNumbers);
-            for (int j = 0; j < 6; j++) {
-                autoNumbers.add(rangeOfNumbers.get(j));
-            }
-            Collections.sort(autoNumbers);
-
-            LottoModel lotto = new LottoModel();
-            for (int k = 0; k < 6; k++) {
-                lotto.addNumber(autoNumbers.get(k));
-            }
-            lottos.add(lotto);
+            lottos.add(new LottoModel());
         }
     }
 
@@ -140,7 +102,7 @@ public class LottoManualController {
     }
 
     private float getEarningRate(int earningPrice, int purchasePrice) {
-        return (float) earningPrice/ (float) purchasePrice;
+        return (float) earningPrice / (float) purchasePrice;
     }
 
     public int getEarningPrice() {
