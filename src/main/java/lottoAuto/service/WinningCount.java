@@ -11,7 +11,6 @@ public enum WinningCount {
     FIFTH(3, 5000,"3개 일치 (5000원)"),
     NO_MATCH(0,0,"일치 되는 거 없음");
 
-    private static int count=0;
     private int test;
     private int prize;
     private String message;
@@ -23,10 +22,8 @@ public enum WinningCount {
     }
     public static WinningCount match(int winning_count, int bonus_count) {
         if (winning_count == bonus_count) {
-            count++;
             return SECOND;
         }
-        count++;
         return Arrays.stream(WinningCount.values())
                 .filter(winningCount -> winningCount.test == winning_count)
                 .findAny()
@@ -37,7 +34,4 @@ public enum WinningCount {
         return message;
     }
 
-    public int getCount() {
-        return count;
-    }
 }

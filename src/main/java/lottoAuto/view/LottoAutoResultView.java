@@ -43,11 +43,10 @@ public class LottoAutoResultView extends LottoAutoInputView {
         for(int i=0;i<winning_count.size();i++){
             winningCounts.add(WinningCount.match(winning_count.get(i),bonus_count.get(i)));
         }
-        winningCounts = winningCounts.stream().distinct().collect(Collectors.toList());
 
         System.out.println(winningCounts);
         for(WinningCount winningCount : winningCounts){
-            System.out.println(winningCount.getMessage()+" - "+winningCount.getCount()+"개");
+            System.out.println(winningCount.getMessage()+" - ");
         }
     }
 
