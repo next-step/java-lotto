@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
     public void start() {
@@ -14,10 +13,7 @@ public class LottoController {
         Money money = Money.of(inputMoney, inputManualCounts);
         List<List<Integer>> manualNumbersList = InputView.inputManualLottoNumbers(inputManualCounts);
 
-        Lottos lottos = new Lottos(manualNumbersList.stream()
-                .map(Lotto::createManualLotto)
-                .collect(Collectors.toList()));
-        lottos.addLottoList(Lottos.of(money).getLottos());
+        Lottos lottos = LottoMachine.createLottos(manualNumbersList, money);
 
         ResultView.printPurchase(lottos, inputManualCounts);
 
