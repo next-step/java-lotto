@@ -5,10 +5,10 @@ import java.util.*;
 import static lotto.Reward.*;
 
 public class WinningLogic {
-    public static Integer INITIALIZE_NUMBER = 0;
+    public static final int INITIALIZE_NUMBER = 0;
 
-    public static List<Integer> makeMatchCounts(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
-        List matchCounts = new ArrayList();
+    public List<Integer> makeMatchCounts(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
+        List<Integer> matchCounts = new ArrayList();
         Integer winningCount = INITIALIZE_NUMBER;
         for (int i = 0; i < Lotto.CORRECT_LOTTO_NUMBERS_SIZE; i++) {
             winningCount += countIsSame(lottoNumbers, winningNumbers.get(i));
@@ -19,22 +19,22 @@ public class WinningLogic {
         return matchCounts;
     }
 
-    public static Integer checkBonusCount(List<Integer> lottoNumbers, Integer bonusNumber) {
-        Integer bonusCount = INITIALIZE_NUMBER;
-        for (int i = INITIALIZE_NUMBER; i < Lotto.CORRECT_LOTTO_NUMBERS_SIZE; i++) {
-            bonusCount += countIsSame(lottoNumbers, bonusNumber);
+    private int checkBonusCount(List<Integer> lottoNumbers, int bonusNumber) {
+        int bonusCount = INITIALIZE_NUMBER;
+        if (lottoNumbers.contains(bonusNumber)) {
+            bonusCount += 1;
         }
         return bonusCount;
     }
 
-    public static Integer countIsSame(List<Integer> lottoNumbers, Integer winningNumber) {
+    private Integer countIsSame(List<Integer> lottoNumbers, Integer winningNumber) {
         if (lottoNumbers.contains(winningNumber)) {
             return 1;
         }
         return 0;
     }
 
-    public static TreeMap<Integer, Integer> makePrizes(List<Reward> rewards) {
+    public TreeMap<Integer, Integer> makePrizes(List<Reward> rewards) {
         TreeMap<Integer, Integer> prizes = new TreeMap<>();
 
         for (Reward reward : values()) {
@@ -48,18 +48,18 @@ public class WinningLogic {
         return prizes;
     }
 
-    public static Integer makePrizeMoney(TreeMap<Integer, Integer> prizes) {
+    public Integer makePrizeMoney(TreeMap<Integer, Integer> prizes) {
         Integer prizeMoney = INITIALIZE_NUMBER;
-        prizeMoney += MATCH_3.getPrizeMoney() * prizes.get(MATCH_3.getPrizeMoney());
-        prizeMoney += MATCH_4.getPrizeMoney() * prizes.get(MATCH_4.getPrizeMoney());
-        prizeMoney += MATCH_5.getPrizeMoney() * prizes.get(MATCH_5.getPrizeMoney());
-        prizeMoney += MATCH_6_WITH_BONUS.getPrizeMoney() * prizes.get(MATCH_6_WITH_BONUS.getPrizeMoney());
-        prizeMoney += MATCH_6.getPrizeMoney() * prizes.get(MATCH_6.getPrizeMoney());
+        prizeMoney += FIFTH_PRIZE.getPrizeMoney() * prizes.get(FIFTH_PRIZE.getPrizeMoney());
+        prizeMoney += FOURTH_PRIZE.getPrizeMoney() * prizes.get(FOURTH_PRIZE.getPrizeMoney());
+        prizeMoney += THIRD_PRIZE.getPrizeMoney() * prizes.get(THIRD_PRIZE.getPrizeMoney());
+        prizeMoney += SECOND_PRIZE.getPrizeMoney() * prizes.get(SECOND_PRIZE.getPrizeMoney());
+        prizeMoney += FIRST_PRIZE.getPrizeMoney() * prizes.get(FIRST_PRIZE.getPrizeMoney());
 
         return prizeMoney;
     }
 
-    public static Double makeYield(Integer purchaseAmount, Integer prizeMoney) {
+    public Double makeYield(Integer purchaseAmount, Integer prizeMoney) {
         return prizeMoney / (double) purchaseAmount;
     }
 

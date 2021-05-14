@@ -15,12 +15,12 @@ public class RewardTest {
     @Test
     @DisplayName("로또번호와 똑같은 숫자에 따른 상금이 같은지 비교한다.")
     void getRewardTest() {
-        List matchCounts = new ArrayList();
-        List matchCounts2 = new ArrayList();
-        matchCounts.add("5");
-        matchCounts.add("1");
-        matchCounts2.add("4");
-        matchCounts2.add("0");
+        List<Integer> matchCounts = new ArrayList();
+        List<Integer> matchCounts2 = new ArrayList();
+        matchCounts.add(5);
+        matchCounts.add(1);
+        matchCounts2.add(4);
+        matchCounts2.add(0);
         Reward reward = getReward(matchCounts);
         Reward reward2 = getReward(matchCounts2);
 

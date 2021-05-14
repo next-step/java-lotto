@@ -5,18 +5,18 @@ import lotto.Lotto;
 import java.util.List;
 
 public class Output {
-    private static String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해주세요.";
-    private static String PURCHASABLE_MESSAGE = "%d 개를 구매했습니다.";
-    private static String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static String WIN_STATIC_MESSAGE = "당첨 통계";
-    private static String SEPARATOR = "---------";
-    private static String YIELD_MESSAGE = "수익률은 %.2f 입니다.";
-    private static String MATCH_MESSAGE_3 = "3개 일치 (5000원)- %d 개";
-    private static String MATCH_MESSAGE_4 = "4개 일치 (50000원)- %d 개";
-    private static String MATCH_MESSAGE_5 = "5개 일치 (1500000원)- %d 개";
-    private static String MATCH_MESSAGE_6 = "6개 일치 (2000000000원)- %d 개";
-    private static String MATCH_MESSAGE_6_WITH_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
+    private static final String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String PURCHASABLE_MESSAGE = "%d 개를 구매했습니다.";
+    private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String WIN_STATIC_MESSAGE = "당첨 통계";
+    private static final String SEPARATOR = "---------";
+    private static final String YIELD_MESSAGE = "수익률은 %.2f 입니다.";
+    private static final String MATCH_MESSAGE_3 = "3개 일치 (5000원)- %d 개";
+    private static final String MATCH_MESSAGE_4 = "4개 일치 (50000원)- %d 개";
+    private static final String MATCH_MESSAGE_5 = "5개 일치 (1500000원)- %d 개";
+    private static final String MATCH_MESSAGE_6 = "6개 일치 (2000000000원)- %d 개";
+    private static final String MATCH_MESSAGE_6_WITH_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
 
     public static void printStartMessage() {
         System.out.println(INPUT_PURCHASE_MESSAGE);

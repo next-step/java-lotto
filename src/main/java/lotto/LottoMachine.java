@@ -4,8 +4,7 @@ import java.util.*;
 
 import static lotto.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
-import static lotto.Reward.*;
-import static lotto.WinningLogic.*;
+
 import static lotto.ui.Input.*;
 import static lotto.ui.Output.*;
 import static lotto.ui.TypeConvert.*;
@@ -22,32 +21,35 @@ public class LottoMachine {
 
         printBunchOfLottoNumbers(bunchOfLotto);
         printInputWinningNumber();
-        TreeMap<Integer,Integer> prizes = makePrizes(makeRewards(bunchOfLotto, makeWinningNumbers()));
+        WinningLogic winningLogic = new WinningLogic();
+        TreeMap<Integer,Integer> prizes = winningLogic.makePrizes(makeRewards(bunchOfLotto, makeWinningNumbers()));
 
-        print3Match(prizes.get(MATCH_3.getPrizeMoney()));
-        print4Match(prizes.get(MATCH_4.getPrizeMoney()));
-        print5Match(prizes.get(MATCH_5.getPrizeMoney()));
-        print6MatchWithBonus(prizes.get(MATCH_6_WITH_BONUS.getPrizeMoney()));
-        print6Match(prizes.get(MATCH_6.getPrizeMoney()));
+        printWinStatics();
+        print3Match(prizes.get(Reward.FIFTH_PRIZE.getPrizeMoney()));
+        print4Match(prizes.get(Reward.FOURTH_PRIZE.getPrizeMoney()));
+        print5Match(prizes.get(Reward.THIRD_PRIZE.getPrizeMoney()));
+        print6MatchWithBonus(prizes.get(Reward.SECOND_PRIZE.getPrizeMoney()));
+        print6Match(prizes.get(Reward.FIRST_PRIZE.getPrizeMoney()));
 
-        printYield(makeYield(purchaseAmount, makePrizeMoney(prizes)));
+        printYield(winningLogic.makeYield(purchaseAmount, winningLogic.makePrizeMoney(prizes)));
     }
 
     private List<Reward> makeRewards(List<Lotto> bunchOfLotto, List<Integer> winningNumbers) {
         List<Reward> rewards = new ArrayList<>();
+        WinningLogic winningLogic = new WinningLogic();
         for (Lotto lotto : bunchOfLotto) {
-            rewards.add(getReward(makeMatchCounts(lotto.getLottoNumbers(), winningNumbers)));
+            rewards.add(Reward.getReward(winningLogic.makeMatchCounts(lotto.getLottoNumbers(), winningNumbers)));
         }
         return rewards;
     }
 
     // private 로 하고싶은데 테스트에서 사용하려면 public 이어야하고 그렇다는건 메서드가 다른 클래스로 가야할지도..?
     public static List<Integer> makeLottoNumbers() {
-        HashSet<Integer> lottoNumbers = new HashSet<>();
+        Set<Integer> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE) {
             lottoNumbers.add(makeLottoNumber());
         }
-        List lottoNumberList = new ArrayList(lottoNumbers);
+        List<Integer> lottoNumberList = new ArrayList(lottoNumbers);
         return lottoNumberList;
     }
 
@@ -69,12 +71,9 @@ public class LottoMachine {
     }
 
     public List<Integer> makeWinningNumbers() {
-        List<Integer> winningNumbers = convertStringListToIntegerList
-                (convertStringToStringList
-                        (inputWinningNumbers()
-                        ));
+        List<Integer> winningNumbers = convertStringToIntegerList(inputWinningNumbers());
         Collections.sort(winningNumbers);
-        winningNumbers.add(convertStringToInteger(inputBonusNumber()));
+        winningNumbers.add(Integer.parseInt(inputBonusNumber()));
 
         return winningNumbers;
     }
