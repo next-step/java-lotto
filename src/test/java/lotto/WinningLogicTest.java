@@ -1,12 +1,16 @@
 package lotto;
 
+import lotto.model.Lotto;
+import lotto.model.Reward;
+import lotto.model.WinningLogic;
+import lotto.model.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static lotto.Reward.*;
-import static lotto.ui.TypeConvert.convertStringToIntegerList;
+import static lotto.model.Reward.*;
+import static lotto.util.TypeConvert.convertStringToIntegerList;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -28,10 +32,10 @@ WinningLogicTest {
         WinningLotto threeMatchedWinningLottoWithBonus = winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbersWithBonus);
 
         assertAll(
-                () -> assertThat(threeMatchedWinningLotto.matchedCount).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLotto.bonusBall).isFalse(),
-                () -> assertThat(threeMatchedWinningLottoWithBonus.matchedCount).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLottoWithBonus.bonusBall).isTrue()
+                () -> assertThat(threeMatchedWinningLotto.getMatchedCount()).isEqualTo(3),
+                () -> assertThat(threeMatchedWinningLotto.isBonusBall()).isFalse(),
+                () -> assertThat(threeMatchedWinningLottoWithBonus.getMatchedCount()).isEqualTo(3),
+                () -> assertThat(threeMatchedWinningLottoWithBonus.isBonusBall()).isTrue()
         );
     }
 

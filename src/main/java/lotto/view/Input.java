@@ -1,8 +1,8 @@
-package lotto.ui;
+package lotto.view;
 
 import java.util.Scanner;
 
-import static lotto.ui.Output.*;
+import static lotto.view.Output.*;
 
 public class Input {
     private static Scanner scanner = new Scanner(System.in);

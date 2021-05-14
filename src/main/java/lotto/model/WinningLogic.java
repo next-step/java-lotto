@@ -1,8 +1,12 @@
-package lotto;
+package lotto.model;
+
+import lotto.model.Lotto;
+import lotto.model.Reward;
+import lotto.model.WinningLotto;
 
 import java.util.*;
 
-import static lotto.Reward.*;
+import static lotto.model.Reward.*;
 
 public class WinningLogic {
     public static final int INITIALIZE_NUMBER = 0;

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.controller.LottoMachine;
+import lotto.model.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

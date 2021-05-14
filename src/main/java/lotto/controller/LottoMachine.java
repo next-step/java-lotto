@@ -1,13 +1,17 @@
-package lotto;
+package lotto.controller;
+
+import lotto.model.Lotto;
+import lotto.model.Reward;
+import lotto.model.WinningLogic;
 
 import java.util.*;
 
-import static lotto.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
-import static lotto.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
+import static lotto.model.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
+import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
 
-import static lotto.ui.Input.*;
-import static lotto.ui.Output.*;
-import static lotto.ui.TypeConvert.*;
+import static lotto.view.Input.*;
+import static lotto.view.Output.*;
+import static lotto.util.TypeConvert.*;
 
 public class LottoMachine {
     public static Integer LOTTERY_PRICE = 1000;

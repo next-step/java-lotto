@@ -1,12 +1,11 @@
 package lotto;
 
+import lotto.model.Reward;
+import lotto.model.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static lotto.Reward.getReward;
+import static lotto.model.Reward.getReward;
 import static org.assertj.core.api.Assertions.*;
 
 
