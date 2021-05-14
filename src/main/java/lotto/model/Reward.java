@@ -30,9 +30,11 @@ public enum Reward {
 
     public static Reward getReward(WinningLotto winningLotto) {
         if (winningLotto.bonusBall == true) {
+            System.out.println("winningLotto.getMatchedCount() = " + winningLotto.getMatchedCount());
+            System.out.println("winningLotto.isBonusBall() = " + winningLotto.isBonusBall());
             return Arrays.stream(Reward.values())
                     //질문사항 get 으로 가져오는거 vs 그냥 접근하는거 차이?, get 할때 return matchCount 랑 return this.matchCount 차이
-                    .filter(reward -> reward.getMatchCount() == winningLotto.getMatchedCount())
+                    .filter(reward -> reward.getMatchCount() == winningLotto.getMatchedCount() && winningLotto.bonusBall == reward.bonusBall)
                     .findAny()
                     .orElse(SIXTH_PRIZE);
         }
