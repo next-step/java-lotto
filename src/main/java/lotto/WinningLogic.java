@@ -7,24 +7,24 @@ import static lotto.Reward.*;
 public class WinningLogic {
     public static final int INITIALIZE_NUMBER = 0;
 
-    public List<Integer> makeMatchCounts(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
-        List<Integer> matchCounts = new ArrayList();
-        Integer winningCount = INITIALIZE_NUMBER;
+    public WinningLotto makeWinningLotto(List<Integer> lottoNumbers, List<Integer> winningNumbers) {
+        int winningCount = INITIALIZE_NUMBER;
+
         for (int i = 0; i < Lotto.CORRECT_LOTTO_NUMBERS_SIZE; i++) {
             winningCount += countIsSame(lottoNumbers, winningNumbers.get(i));
         }
-        matchCounts.add(winningCount);
-        matchCounts.add(checkBonusCount(lottoNumbers, winningNumbers.get(Lotto.CORRECT_LOTTO_NUMBERS_SIZE)));
 
-        return matchCounts;
+        int bonusBallNumber = winningNumbers.get(Lotto.CORRECT_LOTTO_NUMBERS_SIZE);
+        WinningLotto winningLotto = new WinningLotto(winningCount, checkBonusCount(lottoNumbers, bonusBallNumber));
+
+        return winningLotto;
     }
 
-    private int checkBonusCount(List<Integer> lottoNumbers, int bonusNumber) {
-        int bonusCount = INITIALIZE_NUMBER;
+    private boolean checkBonusCount(List<Integer> lottoNumbers, int bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
-            bonusCount += 1;
+            return true;
         }
-        return bonusCount;
+        return false;
     }
 
     private Integer countIsSame(List<Integer> lottoNumbers, Integer winningNumber) {

@@ -24,12 +24,14 @@ WinningLogicTest {
         List<Integer> winningNumbersWithBonus = convertStringToIntegerList((winningNumberWithBonus));
 
         Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto threeMatchedWinningLotto = winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbers);
+        WinningLotto threeMatchedWinningLottoWithBonus = winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbersWithBonus);
 
         assertAll(
-                () -> assertThat(winningLogic.makeMatchCounts(lotto.getLottoNumbers(), winningNumbers))
-                        .isEqualTo(Arrays.asList(3, 0)),
-                () -> assertThat(winningLogic.makeMatchCounts(lotto.getLottoNumbers(), winningNumbersWithBonus))
-                        .isEqualTo(Arrays.asList(3, 1))
+                () -> assertThat(threeMatchedWinningLotto.matchedCount).isEqualTo(3),
+                () -> assertThat(threeMatchedWinningLotto.bonusBall).isFalse(),
+                () -> assertThat(threeMatchedWinningLottoWithBonus.matchedCount).isEqualTo(3),
+                () -> assertThat(threeMatchedWinningLottoWithBonus.bonusBall).isTrue()
         );
     }
 

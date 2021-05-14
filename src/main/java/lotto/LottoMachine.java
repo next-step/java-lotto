@@ -38,12 +38,11 @@ public class LottoMachine {
         List<Reward> rewards = new ArrayList<>();
         WinningLogic winningLogic = new WinningLogic();
         for (Lotto lotto : bunchOfLotto) {
-            rewards.add(Reward.getReward(winningLogic.makeMatchCounts(lotto.getLottoNumbers(), winningNumbers)));
+            rewards.add(Reward.getReward(winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbers)));
         }
         return rewards;
     }
 
-    // private 로 하고싶은데 테스트에서 사용하려면 public 이어야하고 그렇다는건 메서드가 다른 클래스로 가야할지도..?
     public static List<Integer> makeLottoNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE) {

@@ -15,17 +15,13 @@ public class RewardTest {
     @Test
     @DisplayName("로또번호와 똑같은 숫자에 따른 상금이 같은지 비교한다.")
     void getRewardTest() {
-        List<Integer> matchCounts = new ArrayList();
-        List<Integer> matchCounts2 = new ArrayList();
-        matchCounts.add(5);
-        matchCounts.add(1);
-        matchCounts2.add(4);
-        matchCounts2.add(0);
-        Reward reward = getReward(matchCounts);
-        Reward reward2 = getReward(matchCounts2);
+       WinningLotto secondPrize = new WinningLotto(5, true);
+        WinningLotto fourthPrize = new WinningLotto(4,false);
+        Reward secondReward = getReward(secondPrize);
+        Reward fourthReward = getReward(fourthPrize);
 
-        assertThat(reward.getPrizeMoney()).isEqualTo(30000000);
-        assertThat(reward2.getPrizeMoney()).isEqualTo(50000);
+        assertThat(secondReward.getPrizeMoney()).isEqualTo(30000000);
+        assertThat(fourthReward.getPrizeMoney()).isEqualTo(50000);
     }
 
 }

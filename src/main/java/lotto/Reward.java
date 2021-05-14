@@ -1,24 +1,22 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public enum Reward {
-    SIXTH_PRIZE(0, 0, 0),
-    FIFTH_PRIZE(3, 0, 5000),
-    FOURTH_PRIZE(4, 0, 50000),
-    THIRD_PRIZE(5, 0, 1500000),
-    SECOND_PRIZE(5, 1, 30000000),
-    FIRST_PRIZE(6, 0, 2000000000);
+    SIXTH_PRIZE(0, false, 0),
+    FIFTH_PRIZE(3, false, 5000),
+    FOURTH_PRIZE(4, false, 50000),
+    THIRD_PRIZE(5, false, 1500000),
+    SECOND_PRIZE(5, true, 30000000),
+    FIRST_PRIZE(6, false, 2000000000);
 
     private final int matchCount;
-    private final int bonusCount;
+    private final boolean bonusBall;
     private final int prizeMoney;
 
-    Reward(int matchCount, int bonusMatch, int reward) {
+    Reward(int matchCount, boolean bonusBall, int reward) {
         this.matchCount = matchCount;
-        this.bonusCount = bonusMatch;
+        this.bonusBall = bonusBall;
         this.prizeMoney = reward;
     }
 
@@ -26,17 +24,21 @@ public enum Reward {
         return prizeMoney;
     }
 
-    private List<Integer> getMatchCounts() {
-        List<Integer> matchCounts = new ArrayList<>();
-        matchCounts.add(matchCount);
-        matchCounts.add(bonusCount);
-        return matchCounts;
+    private int getMatchCount() {
+        return this.matchCount;
     }
 
-    public static Reward getReward(List<Integer> matchCounts) {
+    public static Reward getReward(WinningLotto winningLotto) {
+        if (winningLotto.bonusBall == true) {
             return Arrays.stream(Reward.values())
-                    .filter(reward -> reward.getMatchCounts().equals(matchCounts))
+                    //질문사항 get 으로 가져오는거 vs 그냥 접근하는거 차이?, get 할때 return matchCount 랑 return this.matchCount 차이
+                    .filter(reward -> reward.getMatchCount() == winningLotto.getMatchedCount())
                     .findAny()
                     .orElse(SIXTH_PRIZE);
+        }
+        return Arrays.stream(Reward.values())
+                .filter(reward -> reward.getMatchCount() == winningLotto.getMatchedCount() && reward.bonusBall == reward.bonusBall)
+                .findAny()
+                .orElse(SIXTH_PRIZE);
     }
 }
