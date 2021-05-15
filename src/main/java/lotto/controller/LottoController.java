@@ -5,13 +5,14 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
     public void start() {
         int inputMoney = InputView.inputMoney();
         int inputManualCount = InputView.inputManualLottoCount();
         Money money = Money.of(inputMoney, inputManualCount);
-        List<List<Integer>> manualNumbersList = InputView.inputManualLottoNumbers(inputManualCount);
+        List<Set<Integer>> manualNumbersList = InputView.inputManualLottoNumbers(inputManualCount);
 
         Lottos lottos = LottoMachine.createLottos(manualNumbersList, money);
 

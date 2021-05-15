@@ -8,6 +8,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,6 +54,8 @@ class LottosTest {
     void check(List<Lotto> lottoList) {
         Lottos lottos = new Lottos(lottoList);
 
-        assertThat(lottos.matchHit(WinningLotto.of(1, 2, 3, 4, 15, 16, 17))).isNotNull();
+        Set<Integer> lottoSet = IntStream.range(1, 7).boxed().collect(Collectors.toSet());
+
+        assertThat(lottos.matchHit(WinningLotto.of(lottoSet, 15))).isNotNull();
     }
 }

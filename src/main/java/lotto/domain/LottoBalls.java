@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.exception.Message.DUPLICATION_MESSAGE;
 import static lotto.exception.Message.SIZE_MESSAGE;
 
 public class LottoBalls {
@@ -16,23 +15,23 @@ public class LottoBalls {
     }
 
     public static LottoBalls createLottoBalls(Integer... lottoBalls) {
-        return LottoBalls.createLottoBalls(Arrays.stream(lottoBalls).collect(Collectors.toList()));
+        return LottoBalls.createLottoBalls(Arrays.stream(lottoBalls).collect(Collectors.toSet()));
     }
 
-    public static LottoBalls createLottoBalls(List<Integer> lottoBallList) {
+    public static LottoBalls createLottoBalls(Set<Integer> lottoBallList) {
         validate(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
                 .map(LottoBall::valueOf)
                 .collect(Collectors.toList()));
     }
 
-    private static void validate(List<Integer> lottoBallList) {
+    private static void validate(Set<Integer> lottoBallList) {
         if (lottoBallList.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(SIZE_MESSAGE);
         }
-        if (lottoBallList.stream().distinct().count() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(DUPLICATION_MESSAGE);
-        }
+//        if (lottoBallList.stream().distinct().count() != LOTTO_SIZE) {
+//            throw new IllegalArgumentException(DUPLICATION_MESSAGE);
+//        }
     }
 
     public int count(LottoBalls winningLottoBalls) {

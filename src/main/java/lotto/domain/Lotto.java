@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -17,8 +18,8 @@ public class Lotto {
         this.lottoBalls = lottoBalls;
     }
 
-    public static Lotto createManualLotto(List<Integer> manualBalls) {
-        return new Lotto(LottoBalls.createManualLottoBalls(manualBalls));
+    public static Lotto createManualLotto(Set<Integer> manualBalls) {
+        return new Lotto(LottoBalls.createLottoBalls(manualBalls));
     }
 
     public List<LottoBall> createAutoLotto() {
