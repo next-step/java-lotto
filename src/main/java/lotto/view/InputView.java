@@ -1,9 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -38,9 +35,9 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> inputManualLottoNumbers(int inputManualCounts) {
+    public static List<Set<Integer>> inputManualLottoNumbers(int inputManualCounts) {
         System.out.println(INPUT_MANUAL_LOTTO);
-        List<List<Integer>> manualNumbersList = new ArrayList<>();
+        List<Set<Integer>> manualNumbersList = new ArrayList<>();
         while (inputManualCounts-- > 0) {
             String[] inputNumbers = scanner.nextLine().split(SPLIT_DELIMITER);
             manualNumbersList.add(parseInteger(inputNumbers));
@@ -48,18 +45,18 @@ public class InputView {
         return manualNumbersList;
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Set<Integer> inputWinningNumbers() {
         System.out.println(LAST_WEEK_LOTTO);
         String[] inputNumbers = scanner.nextLine().split(SPLIT_DELIMITER);
         return parseInteger(inputNumbers);
     }
 
-    private static List<Integer> parseInteger(String[] inputNumbers) {
+    private static Set<Integer> parseInteger(String[] inputNumbers) {
         return Arrays.stream(inputNumbers)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static int inputBonusNumber() {
