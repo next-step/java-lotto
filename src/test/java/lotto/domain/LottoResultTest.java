@@ -19,16 +19,16 @@ class LottoResultTest {
         return Stream.of(arguments(
                 new Lottos(
                         Lists.list(
-                                new Lotto(LottoBalls.of(40, 41, 42, 43, 44, 45)), //Prize.ZERO
-                                new Lotto(LottoBalls.of(40, 41, 42, 43, 44, 45)), //Prize.ZERO
-                                new Lotto(LottoBalls.of(1, 2, 3, 4, 5, 6)), //Prize.THREE
-                                new Lotto(LottoBalls.of(1, 2, 3, 13, 5, 6)), //Prize.FOUR
-                                new Lotto(LottoBalls.of(1, 2, 13, 14, 15, 6)), //Prize.BONUS
-                                new Lotto(LottoBalls.of(1, 2, 3, 13, 14, 26)), //Prize.FIVE
-                                new Lotto(LottoBalls.of(1, 2, 3, 13, 14, 15)) //Prize.SIX
+                                new Lotto(LottoBalls.createLottoBalls(40, 41, 42, 43, 44, 45)), //Prize.ZERO
+                                new Lotto(LottoBalls.createLottoBalls(40, 41, 42, 43, 44, 45)), //Prize.ZERO
+                                new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6)), //Prize.THREE
+                                new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 13, 5, 6)), //Prize.FOUR
+                                new Lotto(LottoBalls.createLottoBalls(1, 2, 13, 14, 15, 6)), //Prize.BONUS
+                                new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 13, 14, 26)), //Prize.FIVE
+                                new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 13, 14, 15)) //Prize.SIX
                         )
                 ),
-                new WinningLotto(LottoBalls.of(1, 2, 3, 13, 14, 15), LottoBall.valueOf(6)))
+                new WinningLotto(LottoBalls.createLottoBalls(1, 2, 3, 13, 14, 15), LottoBall.valueOf(6)))
         );
     }
 

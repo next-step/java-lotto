@@ -30,10 +30,6 @@ public enum Prize {
                 .orElseGet(() -> Prize.ZERO);
     }
 
-    public static List<Prize> prizeList() {
-        return Arrays.asList(Prize.THREE, Prize.FOUR, Prize.FIVE, Prize.BONUS, Prize.SIX);
-    }
-
     public String getMessage() {
         return message;
     }

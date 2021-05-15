@@ -17,8 +17,8 @@ class LottoBallsTest {
     static Stream<Arguments> comparingList() {
         return Stream.of(
                 arguments(
-                        LottoBalls.of(1, 2, 3, 4, 5, 6),
-                        LottoBalls.of(1, 12, 3, 4, 5, 6),
+                        LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6),
+                        LottoBalls.createLottoBalls(1, 12, 3, 4, 5, 6),
                         5
                 )
         );
@@ -27,19 +27,19 @@ class LottoBallsTest {
     @Test
     @DisplayName("로또 생성")
     void create() {
-        assertThat(LottoBalls.of(1, 2, 3, 4, 5, 6)).isNotNull();
+        assertThat(LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6)).isNotNull();
     }
 
     @Test
     @DisplayName("로또 생성 범위 오류")
     void validate_range() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoBalls.of(51, 52, 53, 54, 55, 56));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoBalls.createLottoBalls(51, 52, 53, 54, 55, 56));
     }
 
     @Test
     @DisplayName("로또 생성 개수 오류")
     void validate_size() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoBalls.of(1, 2, 3, 4, 5));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoBalls.createLottoBalls(1, 2, 3, 4, 5));
     }
 
     @ParameterizedTest

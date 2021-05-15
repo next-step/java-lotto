@@ -2,50 +2,62 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.exception.Message.INPUT_MONEY_MESSAGE;
-import static lotto.exception.Message.MINIMUM_MONEY_MESSAGE;
+import static lotto.exception.Message.*;
 
 public class Money {
 
     private static final int LOTTO_PRICE = 1000;
-    private final int money;
+    private final int totalPayment;
+    private final int manualCount;
+    private final int autoCount;
 
-    private Money(int money) {
-        validate(money);
-        this.money = money;
+    private Money(int totalPayment, int manualCount) {
+        validate(totalPayment, manualCount);
+        this.totalPayment = totalPayment;
+        this.manualCount = manualCount;
+        this.autoCount = totalLottoCount() - manualCount;
     }
 
-    public static Money of(int payment) {
-        return new Money(payment);
+    public static Money of(int totalPayment, int manualCount) {
+        return new Money(totalPayment, manualCount);
     }
 
-    private void validate(int payment) {
-        if (payment < LOTTO_PRICE) {
+    private void validate(int totalPayment, int manualCount) {
+        if (totalPayment < LOTTO_PRICE) {
             throw new IllegalArgumentException(MINIMUM_MONEY_MESSAGE);
         }
-        if (payment % LOTTO_PRICE != 0) {
+        if (totalPayment % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(INPUT_MONEY_MESSAGE);
+        }
+        if (totalPayment < manualCount * LOTTO_PRICE) {
+            throw new IllegalArgumentException(MANUAL_MAXIMUM_MESSAGE);
         }
     }
 
-    public int purchase() {
-        return money / LOTTO_PRICE;
+    public int purchaseAuto() {
+        return autoCount;
     }
 
-    public int getMoney() {
-        return money;
+    public int getTotalPayment() {
+        return totalPayment;
+    }
+
+    private int totalLottoCount() {
+        return totalPayment / LOTTO_PRICE;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money1 = (Money) o;
-        return money == money1.money;
+        Money money = (Money) o;
+        return getTotalPayment() == money.getTotalPayment() &&
+                manualCount == money.manualCount &&
+                autoCount == money.autoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(getTotalPayment(), manualCount, autoCount);
     }
 }
