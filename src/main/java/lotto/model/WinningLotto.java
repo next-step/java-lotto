@@ -10,10 +10,10 @@ public class WinningLotto {
     }
 
     public int getMatchedCount() {
-        return matchedCount;
+        return this.matchedCount;
     }
 
     public boolean isBonusBall() {
-        return bonusBall;
+        return this.bonusBall;
     }
 }

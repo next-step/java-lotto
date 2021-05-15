@@ -1,9 +1,5 @@
 package lotto.model;
 
-import lotto.model.Lotto;
-import lotto.model.Reward;
-import lotto.model.WinningLotto;
-
 import java.util.*;
 
 import static lotto.model.Reward.*;
@@ -66,5 +62,4 @@ public class WinningLogic {
     public Double makeYield(Integer purchaseAmount, Integer prizeMoney) {
         return prizeMoney / (double) purchaseAmount;
     }
-
 }
