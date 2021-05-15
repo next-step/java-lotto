@@ -47,4 +47,17 @@ public class LottoBalls {
         List<LottoBall> sortedLottoBalls = new ArrayList<>(lottoBalls);
         return Collections.unmodifiableList(sortedLottoBalls.stream().sorted().collect(Collectors.toList()));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoBalls that = (LottoBalls) o;
+        return Objects.equals(lottoBalls, that.lottoBalls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoBalls);
+    }
 }

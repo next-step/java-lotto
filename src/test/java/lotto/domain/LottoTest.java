@@ -6,7 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ class LottoTest {
     static Stream<Arguments> lottoSource() {
         return Stream.of(arguments(
                 new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6)),
-                WinningLotto.of(1, 2, 3, 4, 5, 6, 7)
+                WinningLotto.of(IntStream.range(2, 8).boxed().collect(Collectors.toSet()), 1)
         ));
     }
 
@@ -35,10 +36,12 @@ class LottoTest {
     @Test
     @DisplayName("수동 로또 생성 테스트")
     void create_manual_lotto_test() {
-        List<Integer> list = IntStream.range(1, 7).boxed().collect(Collectors.toList());
-        Lotto lotto = Lotto.createManualLotto(list);
+        Set<Integer> numberSet = IntStream.range(1, 7).boxed().collect(Collectors.toSet());
+        Lotto lotto = Lotto.createManualLotto(numberSet);
 
-        assertThat(lotto).isNotNull();
+        assertThat(lotto.getLottoBalls()).isEqualTo(new LottoBalls(
+                Arrays.asList(LottoBall.valueOf(1), LottoBall.valueOf(2), LottoBall.valueOf(3),
+                        LottoBall.valueOf(4), LottoBall.valueOf(5), LottoBall.valueOf(6))));
     }
 
     @Test
