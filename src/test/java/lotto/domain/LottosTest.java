@@ -18,8 +18,8 @@ class LottosTest {
     static Stream<Arguments> lottoSource() {
         return Stream.of(arguments(
                 Lists.list(
-                        new Lotto(LottoBalls.createManualLottoBalls(1, 2, 3, 4, 5, 6)),
-                        new Lotto(LottoBalls.createManualLottoBalls(2, 3, 4, 5, 6, 7))
+                        new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6)),
+                        new Lotto(LottoBalls.createLottoBalls(2, 3, 4, 5, 6, 7))
                 )
         ));
     }

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static lotto.exception.Message.BONUS_DUPLICATION_MESSAGE;
 
@@ -17,12 +18,12 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public static WinningLotto of(int bonusBall, Integer... winningBalls) {
-        return WinningLotto.of(Arrays.asList(winningBalls), bonusBall);
+    public static WinningLotto of(Integer... winningBalls, int bonusBall) {
+        return WinningLotto.of(Arrays.stream(winningBalls).collect(Collectors.toList()), bonusBall);
     }
 
     public static WinningLotto of(List<Integer> winningBalls, int bonusBall) {
-        return new WinningLotto(LottoBalls.createWinningLottoBalls(winningBalls), LottoBall.valueOf(bonusBall));
+        return new WinningLotto(LottoBalls.createLottoBalls(winningBalls), LottoBall.valueOf(bonusBall));
     }
 
     private static void validate(LottoBalls winningBalls, LottoBall bonusBall) {

@@ -19,7 +19,7 @@ class LottoTest {
 
     static Stream<Arguments> lottoSource() {
         return Stream.of(arguments(
-                new Lotto(LottoBalls.createManualLottoBalls(1, 2, 3, 4, 5, 6)),
+                new Lotto(LottoBalls.createLottoBalls(1, 2, 3, 4, 5, 6)),
                 WinningLotto.of(1, 2, 3, 4, 5, 6, 7)
         ));
     }
@@ -46,7 +46,7 @@ class LottoTest {
     void create_manual_lotto_size_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
-            LottoBalls lottoBalls = LottoBalls.createManualLottoBalls(1, 2, 3, 43, 44);
+            LottoBalls lottoBalls = LottoBalls.createLottoBalls(1, 2, 3, 43, 44);
 
             //when & then
             Lotto lotto = new Lotto(lottoBalls);
@@ -58,7 +58,7 @@ class LottoTest {
     void create_lotto_duplication_test() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             //given
-            LottoBalls lottoBalls = LottoBalls.createManualLottoBalls(1, 1, 3, 43, 44, 45);
+            LottoBalls lottoBalls = LottoBalls.createLottoBalls(1, 1, 3, 43, 44, 45);
 
             //when & then
             Lotto lotto = new Lotto(lottoBalls);

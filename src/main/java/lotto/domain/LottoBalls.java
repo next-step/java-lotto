@@ -15,18 +15,11 @@ public class LottoBalls {
         this.lottoBalls = new HashSet<>(lottoBalls);
     }
 
-    public static LottoBalls createManualLottoBalls(Integer... lottoBalls) {
-        return LottoBalls.createManualLottoBalls(Arrays.asList(lottoBalls));
+    public static LottoBalls createLottoBalls(Integer... lottoBalls) {
+        return LottoBalls.createLottoBalls(Arrays.stream(lottoBalls).collect(Collectors.toList()));
     }
 
-    public static LottoBalls createWinningLottoBalls(List<Integer> lottoBallList) {
-        validate(lottoBallList);
-        return new LottoBalls(lottoBallList.stream()
-                .map(LottoBall::valueOf)
-                .collect(Collectors.toList()));
-    }
-
-    public static LottoBalls createManualLottoBalls(List<Integer> lottoBallList) {
+    public static LottoBalls createLottoBalls(List<Integer> lottoBallList) {
         validate(lottoBallList);
         return new LottoBalls(lottoBallList.stream()
                 .map(LottoBall::valueOf)
