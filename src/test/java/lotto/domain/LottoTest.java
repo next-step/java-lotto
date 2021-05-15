@@ -65,7 +65,7 @@ class LottoTest {
 
             //when & then
             Lotto lotto = new Lotto(lottoBalls);
-        }).withMessage("로또에 중복된 값이 있습니다.");
+        }).withMessage("로또 숫자 개수가 6개가 아닙니다.");
     }
 
     @ParameterizedTest
