@@ -1,6 +1,5 @@
 package study.step2.view;
 
-import static study.step2.utils.MessageUtil.LOTTO_COUNT_MESSAGE;
 import static study.step2.utils.MessageUtil.LOTTO_RESULT_MESSAGE;
 
 import java.util.Comparator;

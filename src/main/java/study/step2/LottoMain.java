@@ -1,6 +1,5 @@
 package study.step2;
 
-import java.util.List;
 import study.step2.controller.LottoController;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.Lottos;
