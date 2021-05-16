@@ -4,13 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
+import study.step2.domain.ManualLottos;
 import study.step2.domain.Rank;
 import study.step2.domain.WinningLotto;
 
@@ -31,6 +34,27 @@ public class LottoControllerTest {
 
     // then
     assertThat(lottos.getLottos().size()).isEqualTo(lottoCount);
+  }
+
+  @DisplayName("구매 금액을 입력 후 수동 번호 입력 후 자동 번호 생성 테스트")
+  @Test
+  void createLottosWithManualLottos() {
+    // given
+    int money = 5000;
+    int manualLottosCount = 1;
+
+    List<String> inputText = new ArrayList<>(Arrays.asList("8, 21, 23, 41, 42, 43"));
+
+    ManualLottos manualLottos = new ManualLottos(inputText);
+
+    LottoController lottoController = new LottoController();
+
+    // when
+    Lottos lottos = lottoController.createLottos(money, manualLottosCount);
+    lottos.addManualLottos(manualLottos);
+
+    // then
+    assertThat(lottos.getLottos().size()).isEqualTo(5);
   }
 
   @DisplayName("구매 금액을 0으로 입력했을 때, lottos 객체 크기가 0인지 테스트")
