@@ -6,9 +6,15 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 public class RunLotto {
-    private static InputView inputView = new InputView();
-    private static ResultView resultView = new ResultView();
-    private static PlayLotto playLotto = new PlayLotto();
+    private static InputView inputView;
+    private static ResultView resultView;
+    private static PlayLotto playLotto;
+
+    public RunLotto() {
+        inputView = new InputView();
+        resultView = new ResultView();
+        playLotto = new PlayLotto();
+    }
 
     public void runLotto() {
         Lottos createdLottos;
