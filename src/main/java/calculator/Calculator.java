@@ -1,18 +1,15 @@
 package calculator;
 
+import calculator.objects.Number;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
     public int add(String input) {
-        int sum = 0;
 
         if (input == null || input.isEmpty()) {
             return 0;
-        }
-
-        if (Integer.parseInt(input) < 0) {
-            throw new RuntimeException();
         }
 
         String delimiter = ",|:";
@@ -21,15 +18,22 @@ public class Calculator {
             delimiter = m.group(1);
             String[] numbers = m.group(2).split(delimiter);
 
-            for (String number : numbers) {
-                sum += Integer.parseInt(number);
-            }
-
-            return sum;
+            return getSum(numbers);
         }
 
         String[] numbers = input.split(delimiter);
+
+        return getSum(numbers);
+    }
+
+    public int getSum(String[] numbers) {
+        int sum = 0;
+
         for (String number : numbers) {
+            if (Number.isNegative(number)) {
+                throw new RuntimeException();
+            }
+
             sum += Integer.parseInt(number);
         }
 
