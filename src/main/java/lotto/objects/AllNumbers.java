@@ -16,6 +16,7 @@ public class AllNumbers {
 
         this.allNumbers = initNumbers;
     }
+
     public AllNumbers(List<Integer> allNumbers) {
         this.allNumbers = allNumbers;
     }

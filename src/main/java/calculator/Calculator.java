@@ -7,11 +7,11 @@ public class Calculator {
     public int add(String input) {
         int sum = 0;
 
-        if(input == null || input.isEmpty()){
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
-        if(Integer.parseInt(input) < 0) {
+        if (Integer.parseInt(input) < 0) {
             throw new RuntimeException();
         }
 
@@ -21,7 +21,7 @@ public class Calculator {
             delimiter = m.group(1);
             String[] numbers = m.group(2).split(delimiter);
 
-            for(String number : numbers) {
+            for (String number : numbers) {
                 sum += Integer.parseInt(number);
             }
 
@@ -29,7 +29,7 @@ public class Calculator {
         }
 
         String[] numbers = input.split(delimiter);
-        for(String number : numbers) {
+        for (String number : numbers) {
             sum += Integer.parseInt(number);
         }
 

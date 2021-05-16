@@ -9,6 +9,7 @@ public class Counts {
     public Counts() {
         this.counts = new ArrayList<>();
     }
+
     public Counts(List<Integer> counts) {
         this.counts = counts;
     }
