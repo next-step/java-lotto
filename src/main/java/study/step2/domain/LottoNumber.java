@@ -70,6 +70,12 @@ public class LottoNumber {
     return lottoNumber;
   }
 
+  public void validatorPositiveNumber() {
+    if (lottoNumber < 0) {
+      throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
+    }
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

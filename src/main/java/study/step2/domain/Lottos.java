@@ -24,6 +24,10 @@ public class Lottos {
     return lottoResult;
   }
 
+  public void addManualLottos(ManualLottos manualLottos) {
+    lottos.addAll(manualLottos.getLottos());
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

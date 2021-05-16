@@ -1,5 +1,6 @@
 package study.step2.validator;
 
+import static study.step2.utils.MessageUtil.NUMBER_AVAILABLE_PURCHASES_MESSAGE;
 import static study.step2.utils.MessageUtil.VALIDATOR_MONEY_MESSAGE;
 import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
 
@@ -23,4 +24,11 @@ public class Validator {
     }
   }
 
+  public static void validatorManualInputLottoCount(int manualInputLottoCount, int money) {
+    int numberOfAvailablePurchases = money / VALIDATOR_MONEY;
+
+    if (manualInputLottoCount > numberOfAvailablePurchases) {
+      throw new IllegalArgumentException(NUMBER_AVAILABLE_PURCHASES_MESSAGE);
+    }
+  }
 }

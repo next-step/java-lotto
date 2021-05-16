@@ -13,13 +13,13 @@ public class LottoController {
   public LottoController() {
   }
 
-  public Lottos createLottos(int money) {
+  public Lottos createLottos(int money, int manualLottosSize) {
     LottoPrice lottoPrice  = new LottoPrice(money);
-    int lottoCount = lottoPrice.lottoCount();
+    int lottoCount = lottoPrice.lottoCount() - manualLottosSize;
 
     Lottos lottos = Lotto.makeLottos(lottoCount);
 
-    ResultView.printLottoCount(lottos.getLottos().size());
+    ResultView.printLottoCount(manualLottosSize, lottos.getLottos().size());
 
     ResultView.printLottos(lottos);
 

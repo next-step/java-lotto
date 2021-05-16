@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.controller.LottoController;
 import study.step2.domain.Lotto;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
@@ -23,10 +22,12 @@ public class LottoControllerTest {
     // given
     int money = 3000;
     int lottoCount = 3;
+    int manualLottosCount = 0;
+
     LottoController lottoController = new LottoController();
 
     // when
-    Lottos lottos = lottoController.createLottos(money);
+    Lottos lottos = lottoController.createLottos(money, manualLottosCount);
 
     // then
     assertThat(lottos.getLottos().size()).isEqualTo(lottoCount);
@@ -38,10 +39,12 @@ public class LottoControllerTest {
     // given
     int money = 0;
     int lottoCount = 0;
+    int manualLottosCount = 0;
+
     LottoController lottoController = new LottoController();
 
     // when
-    Lottos lottos = lottoController.createLottos(money);
+    Lottos lottos = lottoController.createLottos(money, manualLottosCount);
 
     // then
     assertThat(lottos.getLottos().size()).isEqualTo(lottoCount);
@@ -52,6 +55,7 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
+
     LottoNumber bonusNumber = new LottoNumber(19);
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
