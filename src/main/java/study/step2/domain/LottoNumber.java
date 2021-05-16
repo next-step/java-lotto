@@ -1,7 +1,6 @@
 package study.step2.domain;
 
 
-import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCEPTION;
 import static study.step2.Exception.CustomException.LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
 
 import java.util.ArrayList;
@@ -65,12 +64,6 @@ public class LottoNumber {
     return pickedLottoNumbers.stream()
         .map(LottoNumber::valueOf)
         .collect(Collectors.toCollection(LinkedHashSet::new));
-  }
-
-  public void validatorPositiveNumber() {
-    if (lottoNumber < 0) {
-      throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
-    }
   }
 
   public int getLottoNumber() {

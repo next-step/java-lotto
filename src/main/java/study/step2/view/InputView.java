@@ -38,4 +38,16 @@ public class InputView {
     return SCANNER.nextInt();
   }
 
+  public static String manualInputLottoCount() {
+    SCANNER.nextLine();
+
+    System.out.println(MessageUtil.MANUAL_LOTTO_COUNT_MESSAGE);
+
+    String inputText = SCANNER.nextLine();
+
+    Validator.isEmpty(inputText);
+
+    return inputText;
+  }
+
 }

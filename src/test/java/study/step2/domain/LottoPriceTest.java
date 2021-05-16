@@ -1,10 +1,9 @@
-package study.step2;
+package study.step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.domain.LottoPrice;
 
 public class LottoPriceTest {
 

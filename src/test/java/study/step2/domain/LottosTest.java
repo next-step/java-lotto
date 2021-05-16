@@ -1,4 +1,4 @@
-package study.step2;
+package study.step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,12 +8,6 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.domain.Lotto;
-import study.step2.domain.LottoNumber;
-import study.step2.domain.LottoResult;
-import study.step2.domain.Lottos;
-import study.step2.domain.Rank;
-import study.step2.domain.WinningLotto;
 
 public class LottosTest {
 

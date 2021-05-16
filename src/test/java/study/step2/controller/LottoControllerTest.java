@@ -1,4 +1,4 @@
-package study.step2;
+package study.step2.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
