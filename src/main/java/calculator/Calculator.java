@@ -12,16 +12,15 @@ public class Calculator {
             return 0;
         }
 
-        String delimiter = ",|:";
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
-            delimiter = m.group(1);
-            String[] numbers = m.group(2).split(delimiter);
+            String customDelimiter = m.group(1);
+            String[] numbers = m.group(2).split(customDelimiter);
 
             return getSum(numbers);
         }
 
-        String[] numbers = input.split(delimiter);
+        String[] numbers = input.split(",|:");
 
         return getSum(numbers);
     }
