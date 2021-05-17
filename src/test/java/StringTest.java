@@ -45,4 +45,14 @@ public class StringTest {
 		assertThat(result.charAt(2)).isEqualTo('c');
 	}
 
+	@Test
+	@DisplayName(value = "요청 index 가 실제 size 를 넘어가는 경우 IndexOutOfBoundException 을 발생시킨다")
+	void charAtOutOfBound() {
+		String result = "abc";
+
+		assertThatThrownBy(() -> result.charAt(3))
+			.isInstanceOf(IndexOutOfBoundsException.class)
+			.hasMessageContaining("String index out of range: 3");
+	}
+
 }
