@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringUtilsTest {
 
@@ -58,5 +57,15 @@ public class StringUtilsTest {
                 StringUtils.getCharAtIndex(input, 5)
         ).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessage("String index out of range: 5");
+    }
+
+    @DisplayName("문자열의 길이를 벗어난 특정위치의 문자 가져올때 익셉션확인(assertThatExceptionOfType사용)")
+    @Test
+    public void charAtExceptionAnotherTest() {
+        String input = "abc";
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() ->
+                        StringUtils.getCharAtIndex(input, 5)
+                ).withMessageMatching("String index out of range: 5");
     }
 }
