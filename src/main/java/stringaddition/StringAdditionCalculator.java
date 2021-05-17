@@ -1,3 +1,5 @@
+package stringaddition;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +22,7 @@ public class StringAdditionCalculator {
     public int colon(String text) {
         String[] tokens = text.split(",|:");
         for (int i=0;i<tokens.length;i++) {
-            if (tokens[i] == "") {
+            if (tokens[i] == "" || tokens[i].isEmpty()) {
                 tokens[i] = "0";
             }
         }
@@ -41,6 +43,7 @@ public class StringAdditionCalculator {
         int sum = 0;
         if (m.find()) {
             String customDelimiter = m.group(1);
+
             String[] tokens = m.group(2).split(customDelimiter);
             sum = sum(tokens);
         }
