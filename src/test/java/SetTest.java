@@ -26,4 +26,12 @@ public class SetTest {
 		assertThat(numbers.size()).isEqualTo(3);
 	}
 
+	@Test
+	@DisplayName(value = "set에 1, 2, 3 element 가 존재하는지 검증한다")
+	void setContains() {
+		assertThat(numbers.contains(1)).isTrue();
+		assertThat(numbers.contains(2)).isTrue();
+		assertThat(numbers.contains(3)).isTrue();
+	}
+
 }
