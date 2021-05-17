@@ -31,7 +31,11 @@ public class StringAddCalculator {
     }
 
     private static final int parseInt(String input) {
-        return Integer.parseInt(input);
+        int number = Integer.parseInt(input);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+        return number;
     }
 
     private static boolean isNullOrEmpty(String input) {
