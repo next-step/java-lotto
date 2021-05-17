@@ -17,13 +17,14 @@ public class RunLotto {
     }
 
     public void runLotto() {
-        Lottos createdLottos;
         Lotto lastWinningLotto = new Lotto();
 
         int money = inputView.enterPurchaseMoney();
         int totalLotto = playLotto.buyLotto(money);
 
-        createdLottos = resultView.showCreatedLottos(totalLotto);
+        Lottos createdLottos = playLotto.autoCreateLottos(totalLotto);
+
+        resultView.showCreatedLottos(totalLotto, createdLottos);
 
         inputView.enterLastWeekWinningNumbers(lastWinningLotto);
         inputView.enterBonusBallNumber(lastWinningLotto);

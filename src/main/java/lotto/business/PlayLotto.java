@@ -1,10 +1,11 @@
 package lotto.business;
 
+import lotto.interfaces.Play;
 import lotto.objects.*;
 
 import java.util.*;
 
-public class PlayLotto {
+public class PlayLotto implements Play {
     public int buyLotto(int money) {
         return money / 1000;
     }
