@@ -1,6 +1,5 @@
 package lottoAuto.view;
 
-import lottoAuto.service.LottoAutoInputService;
 import lottoAuto.service.LottoAutoResultService;
 
 import java.util.List;
@@ -28,7 +27,6 @@ public class LottoAutoInputView {
     public int inputBonusBall() {
         int bonusBall = scanner.nextInt();
 
-        //lottoAutoResultService.inputBonusBall(bonusBall);
         return bonusBall;
     }
 }
