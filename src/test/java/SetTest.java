@@ -6,6 +6,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
 
@@ -26,12 +28,11 @@ public class SetTest {
 		assertThat(numbers.size()).isEqualTo(3);
 	}
 
-	@Test
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
 	@DisplayName(value = "set에 1, 2, 3 element 가 존재하는지 검증한다")
-	void setContains() {
-		assertThat(numbers.contains(1)).isTrue();
-		assertThat(numbers.contains(2)).isTrue();
-		assertThat(numbers.contains(3)).isTrue();
+	void setContains(int element) {
+		assertThat(numbers.contains(element)).isTrue();
 	}
 
 }
