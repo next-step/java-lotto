@@ -1,20 +1,33 @@
 package StringCalculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return 0;
         }
-        return split(input);
+        return add(split(input));
     }
 
-    private static int split(String input) {
-        String[] splited = input.split(",|:");
+    private static int add(String[] split) {
         int result = 0;
-        for (String number : splited) {
+        for (String number : split) {
             result += parseInt(number);
         }
         return result;
+    }
+
+    private static String[] split(String input) {
+        Matcher matcher = CUSTOM_PATTERN.matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
+        return input.split(",|:");
     }
 
     private static final int parseInt(String input) {
