@@ -27,3 +27,6 @@
 
 ## 요구사항 2
 - [x] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지를 확인하는 학습테스트를 구현한다.(ParameterizedTest 활용)
+
+## 요구사항 3
+- [x] 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
