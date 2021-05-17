@@ -15,4 +15,11 @@ public class StringTest {
         assertThat("1".split(","))
                 .containsExactly("1");
     }
+
+    @Test
+    @DisplayName("substring을 하여 인덱스를 기준으로 자를 수 있다.")
+    public void substring을_하여_인덱스를_기준으로_자를_수_있다() {
+        assertThat("(1,2)".substring(1,4))
+                .isEqualTo("1,2");
+    }
 }
