@@ -27,4 +27,10 @@ public class SetTest {
 		assertThat(numbers.size()).isEqualTo(3);
 	}
 
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3})
+	void contains(int input) {
+		assertThat(numbers.contains(input)).isTrue();
+	}
+
 }
