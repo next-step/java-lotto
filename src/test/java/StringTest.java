@@ -27,5 +27,12 @@ public class StringTest {
 		assertThat(result.length).isEqualTo(1);
 	}
 
+	@Test
+	@DisplayName(value = "substring의 begin index와 end index 를 사용해 그 사이의 문자열을 추출한다")
+	void subString() {
+		String result = "(1,2)".substring(1, 4);
+
+		assertThat(result).isEqualTo("1,2");
+	}
 
 }
