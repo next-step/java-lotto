@@ -6,18 +6,26 @@ import lotto.objects.*;
 import java.util.*;
 
 public class PlayLotto implements Play {
+    private static final int PRICE_PER_LOTTO = 1000;
+    private static final int NUMBER_COUNT_PER_GAME = 6;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int RANK_FOURTH = 3;
+    private static final int RANK_THIRD = 4;
+    private static final int RANK_SECOND = 5;
+    private static final int RANK_FIRST = 6;
+
     public int buyLotto(int money) {
-        return money / 1000;
+        return money / PRICE_PER_LOTTO;
     }
 
     public int getRandomNumber() {
         Random random = new Random();
-        return random.nextInt(44) + 1;
+        return random.nextInt(MAXIMUM_NUMBER - 1) + 1;
     }
 
     public ArrayList<Integer> createLotto() {
         ArrayList<Integer> lotto = new ArrayList<Integer>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
             lotto.add(getRandomNumber());
         }
 
@@ -31,7 +39,7 @@ public class PlayLotto implements Play {
 
         List<Integer> randomNumbers = allNumbers.getRandomNumbers();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
             lotto.addNumber(randomNumbers.get(i));
         }
 
@@ -46,23 +54,23 @@ public class PlayLotto implements Play {
 
     public int compareNumbers(Lotto initLotto, Lotto myLotto) { // not use
         Counter count = new Counter();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < NUMBER_COUNT_PER_GAME + 1; i++) {
             countSameNumbers(initLotto, myLotto, count, i);
         }
         return count.getCount();
     }
 
     public WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto) {
-        if (count == 3) {
+        if (count == RANK_FOURTH) {
             return WinningType.THREE;
         }
-        if (count == 4) {
+        if (count == RANK_THIRD) {
             return WinningType.FOUR;
         }
-        if (count == 5) {
+        if (count == RANK_SECOND) {
             return compareBonusNumber(bonusNumber, myLotto);
         }
-        if (count == 6) {
+        if (count == RANK_FIRST) {
             return WinningType.SIX;
         }
         return WinningType.LOSE;
@@ -77,7 +85,7 @@ public class PlayLotto implements Play {
 
     public WinningType findSameNumbers(Lotto initLotto, Lotto myLotto) {
         Counter count = new Counter();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
             countSameNumbers(initLotto, myLotto, count, i);
         }
 
