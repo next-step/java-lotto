@@ -8,12 +8,12 @@ public enum Rank {
     MATCH_5_BONUS(5,true,30000000),
     MATCH_6(6,false, 2000000000);
 
-    private final int matchConut;
+    private final int matchCount;
     private final boolean matchBonus;
     private final int prize;
 
-    Rank(int matchConut,boolean matchBonus, int prize) {
-        this.matchConut = matchConut;
+    Rank(int matchCount,boolean matchBonus, int prize) {
+        this.matchCount = matchCount;
         this.matchBonus=matchBonus;
         this.prize = prize;
 
