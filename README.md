@@ -24,3 +24,6 @@
 # Set Collection에 대한 학습 테스트
 ## 요구사항 1
 - [x] Set의 size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트를 구현한다.
+
+## 요구사항 2
+- [x] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재하는지를 확인하는 학습테스트를 구현한다.(ParameterizedTest 활용)
