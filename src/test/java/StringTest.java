@@ -35,4 +35,14 @@ public class StringTest {
 		assertThat(result).isEqualTo("1,2");
 	}
 
+	@Test
+	@DisplayName(value = "charAt 을 이용해 'abc' 에서 특정 문자열을 추출한다")
+	void charAtTest() {
+		String result = "abc";
+
+		assertThat(result.charAt(0)).isEqualTo('a');
+		assertThat(result.charAt(1)).isEqualTo('b');
+		assertThat(result.charAt(2)).isEqualTo('c');
+	}
+
 }
