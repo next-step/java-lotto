@@ -2,6 +2,8 @@ package utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -41,18 +43,11 @@ public class StringUtilsTest {
     }
 
     @DisplayName("charAt을 사용하여 특정위치의 문자확인")
-    @Test
-    public void charAtTest() {
-        String input = "abc";
-
-        String firstChar = StringUtils.getCharAtIndex(input, 0);
-        assertThat(firstChar).isEqualTo("a");
-
-        String secondChar = StringUtils.getCharAtIndex(input, 1);
-        assertThat(secondChar).isEqualTo("b");
-
-        String lastChar = StringUtils.getCharAtIndex(input, 2);
-        assertThat(lastChar).isEqualTo("c");
+    @ParameterizedTest
+    @CsvSource(value = {"abc:a:0", "abc:b:1", "abc:c:2"}, delimiter = ':')
+    public void charAtTest(String input, String expectedChar, int index) {
+        String firstChar = StringUtils.getCharAtIndex(input, index);
+        assertThat(firstChar).isEqualTo(expectedChar);
     }
 
     @DisplayName("문자열의 길이를 벗어난 특정위치의 문자 가져올때 익셉션확인")
