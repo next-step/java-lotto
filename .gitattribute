@@ -1,0 +1,10 @@
+*.java text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+
+# exception for visual studio project configuration
+*.sln text eol=crlf
+*.vs text eol=crlf
+*.csproj eol=crlf
+*.props eol=crlf
+*.filters eol=crlf
