@@ -28,4 +28,14 @@ public class StringUtilsTest {
         assertThat(splitStrings).containsExactly("1");
         assertThat(splitStrings).hasSize(1);
     }
+
+    @DisplayName("(1,2) 값이 주어졌을 때 ()제거 확인")
+    @Test
+    public void substringTest() {
+        String input = "(1,2)";
+
+        String removedParenthesis = StringUtils.removeParenthesis(input);
+
+        assertThat(removedParenthesis).isEqualTo("1,2");
+    }
 }
