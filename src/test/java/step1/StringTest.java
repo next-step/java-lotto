@@ -1,6 +1,7 @@
 package step1;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,23 @@ public class StringTest {
         String input = "(1,2)";
         String result = input.substring(input.indexOf("(") + 1, input.indexOf(")"));
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName(" \"abc\" 값이 주어졌을 때 charAt()을 통해 특정 위치의 문자를 가져온다")
+    void splitTest4() {
+        String input = "abc";
+        assertThat(input.charAt(0)).isEqualTo('a');
+        assertThat(input.charAt(1)).isEqualTo('b');
+        assertThat(input.charAt(2)).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName(" String charAt() StringIndexOutOfBoundsException 발생 테스트")
+    void splitTest5() {
+        assertThrows(StringIndexOutOfBoundsException.class, () -> {
+            "abc".charAt(10);
+        });
     }
 
 }
