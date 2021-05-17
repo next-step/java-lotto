@@ -7,4 +7,8 @@ public class StringUtils {
     public static String[] split(String input) {
         return input.split(SEPARATOR_STRING_COMMA);
     }
+
+    public static String removeParenthesis(String input) {
+        return input.substring(1, input.length() - 1);
+    }
 }
