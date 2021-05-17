@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
 
+    @DisplayName("split 테스트")
     @Test
     void split() {
         //when
@@ -17,6 +18,7 @@ public class StringTest {
         assertThat(result).containsExactly("1", "2");
     }
 
+    @DisplayName("substring 테스트")
     @Test
     void substring() {
         //given
@@ -43,6 +45,7 @@ public class StringTest {
     @Test
     void charAtInvokeException() {
         //when, then
-        assertThatThrownBy(() -> "abc".charAt(3)).isInstanceOf(IndexOutOfBoundsException.class);
+        assertThatThrownBy(() -> "abc".charAt(3)).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
     }
 }
