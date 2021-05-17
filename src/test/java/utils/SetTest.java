@@ -3,6 +3,8 @@ package utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,4 +32,10 @@ public class SetTest {
         assertThat(numbers.size()).isEqualTo(size);
     }
 
+    @DisplayName("set 에 값이 존재하는지 확인하는 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    public void containsValueCheckTest(int input) {
+        assertThat(numbers.contains(input)).isTrue();
+    }
 }
