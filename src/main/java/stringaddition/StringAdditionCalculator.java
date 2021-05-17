@@ -21,7 +21,7 @@ public class StringAdditionCalculator {
 
     public int colon(String text) {
         String[] tokens = text.split(",|:");
-        for (int i=0;i<tokens.length;i++) {
+        for (int i = 0; i < tokens.length; i++) {
             if (tokens[i] == "" || tokens[i].isEmpty()) {
                 tokens[i] = "0";
             }

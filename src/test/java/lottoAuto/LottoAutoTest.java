@@ -14,20 +14,23 @@ public class LottoAutoTest {
     public LottoAutoService lottoAutoService = new LottoAutoService();
     public List<LottoResultVo> expected = new ArrayList<>();
     public LottoAutoResultView lottoAutoResultView = new LottoAutoResultView();
+
     @Test
     public void winningCountTest() {
-        this.expected.add(new LottoResultVo(Rank.findByRank(5, false),1));
-        this.expected.add(new LottoResultVo(Rank.findByRank(3, false),1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(5, false), 1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(3, false), 1));
     }
+
     @Test
     public void bonusCountTest() {
-        this.expected.add(new LottoResultVo(Rank.findByRank(5, true),1));
-        this.expected.add(new LottoResultVo(Rank.findByRank(3, false),1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(5, true), 1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(3, false), 1));
     }
+
     @Test
     public void distinctCountTest() {
-        this.expected.add(new LottoResultVo(Rank.findByRank(3, false),1));
-        this.expected.add(new LottoResultVo(Rank.findByRank(3, false),1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(3, false), 1));
+        this.expected.add(new LottoResultVo(Rank.findByRank(3, false), 1));
 
     }
 

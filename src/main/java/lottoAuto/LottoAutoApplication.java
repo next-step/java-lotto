@@ -16,10 +16,10 @@ public class LottoAutoApplication {
         List<Integer> winningNumber = lotto.showWinningNumber();
         int bonusBall = lotto.showBonusBall();
 
-        List<Integer> winning_count = lottoAutoService.statistic(myLottoNumber,winningNumber);
-        List<Boolean> bonus_count = lottoAutoService.statisticBonus(myLottoNumber,bonusBall);
+        List<Integer> winning_count = lottoAutoService.statistic(myLottoNumber, winningNumber);
+        List<Boolean> bonus_count = lottoAutoService.statisticBonus(myLottoNumber, bonusBall);
 
-        List<LottoResultVo> lottoResultVo = lottoAutoService.setWinningStatistic(winning_count,bonus_count);
+        List<LottoResultVo> lottoResultVo = lottoAutoService.setWinningStatistic(winning_count, bonus_count);
         lotto.showWinningStatistic(lottoResultVo);
     }
 }

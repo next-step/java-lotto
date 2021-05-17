@@ -1,3 +1,5 @@
+package stringaddition;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 
 class StringAdditionCalculatorTest {
     private StringAdditionCalculator calculator;
@@ -73,12 +76,14 @@ class StringAdditionCalculatorTest {
     void zeroAndColons(final String text) {
         assertThat(calculator.add(text)).isSameAs(3);
     }
+
     @DisplayName(value = "//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3"})
     void customDelimiter(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
+
     @DisplayName(value = "//와 \n 문자 사이에 커스텀 구분자와 기존 구분자 (, 와 :)를 혼용할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2,3"})
