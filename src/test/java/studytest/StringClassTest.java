@@ -2,8 +2,10 @@ package studytest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class StringClassTest {
 
@@ -30,5 +32,20 @@ class StringClassTest {
 
     String result = given.substring(openBracketIndex + 1 , closeBracketIndex);
     assertThat(result).isEqualTo("1,2");
+  }
+
+  @DisplayName("abc 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트를 구현한다.")
+  @CsvSource(value = {"0,a", "1,b", "2,c"})
+  @ParameterizedTest
+  void carAtInboundTest(int index, char expectation) {
+    String given = "abc";
+    assertThat(given.charAt(index)).isEqualTo(expectation);
+  }
+
+  @DisplayName("String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는 부분에 대한 학습 테스트를 구현한다.")
+  @Test
+  void charAt() {
+    String given = "abc";
+    assertThatThrownBy(()->given.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class);
   }
 }
