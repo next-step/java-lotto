@@ -1,11 +1,8 @@
 package lottoAuto.view;
 
-import lottoAuto.service.WinningCount;
+import lottoAuto.vo.LottoResultVo;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoAutoResultView extends LottoAutoInputView {
     public List<List> showMyLottoInformation() {
@@ -32,22 +29,9 @@ public class LottoAutoResultView extends LottoAutoInputView {
         return bonusBall;
     }
 
-    public void showWinningStatistic(List<Integer> winning_count,List<Integer> bonus_count) {
+    public void showWinningStatistic(List<LottoResultVo> lottoResultVo) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-
-        System.out.println(winning_count);
-        System.out.println(bonus_count);
-
-        List<WinningCount> winningCounts = new ArrayList<>();
-        for(int i=0;i<winning_count.size();i++){
-            winningCounts.add(WinningCount.match(winning_count.get(i),bonus_count.get(i)));
-        }
-
-        System.out.println(winningCounts);
-        for(WinningCount winningCount : winningCounts){
-            System.out.println(winningCount.getMessage()+" - ");
-        }
     }
 
 }
