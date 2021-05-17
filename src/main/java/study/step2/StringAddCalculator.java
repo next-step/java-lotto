@@ -40,7 +40,25 @@ public class StringAddCalculator {
 
     private static int sum(String ...number) {
         return Arrays.stream(number)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(StringAddCalculator::parseInt)
                 .sum();
+    }
+
+    private static int parseInt(String number) {
+        try {
+            Integer num = Integer.parseInt(number);
+
+            return parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구분자를 제외한 텍스트는 숫자형식만 가능합니다.");
+        }
+    }
+
+    private static int parseInt(Integer num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("음수 값 덧셈은 지원하지 않습니다.");
+        }
+
+        return num;
     }
 }

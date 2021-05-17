@@ -1,7 +1,6 @@
 package study.step2;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -41,9 +40,11 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @Disabled
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a:2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
 }
