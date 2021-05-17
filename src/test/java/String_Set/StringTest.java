@@ -33,7 +33,7 @@ public class StringTest {
     void testSubstring() {
         String input = "(1,2)";
 
-        String numbers = input.substring(1, 4);
+        String numbers = input.substring(1, input.length() - 1);
 
         assertThat(numbers).isEqualTo("1,2");
     }
