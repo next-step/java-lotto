@@ -22,4 +22,11 @@ public class StringTest {
         assertThat("(1,2)".substring(1,4))
                 .isEqualTo("1,2");
     }
+
+    @Test
+    @DisplayName("charAt 함수를 통해 원하는 위치의 문자열을 가져와야 한다")
+    public void charAt_함수를_통해_원하는_위치의_문자열을_가져와야_한다() {
+        assertThat("abc".charAt(1))
+                .isEqualTo('b');
+    }
 }
