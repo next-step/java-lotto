@@ -20,4 +20,15 @@ class StringClassTest {
     String[] result = "1".split(",");
     assertThat(result).containsExactly("1");
   }
+
+  @DisplayName("(1,2) 값이 주어졌을 때 String의 substring() 메소드를 활용해 ()을 제거하고 1,2를 반환하도록 구현한다.")
+  @Test
+  void subString() {
+    String given = "(1,2)";
+    int openBracketIndex = given.indexOf("(");
+    int closeBracketIndex = given.indexOf(")");
+
+    String result = given.substring(openBracketIndex + 1 , closeBracketIndex);
+    assertThat(result).isEqualTo("1,2");
+  }
 }
