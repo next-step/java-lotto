@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringTest {
 
@@ -41,5 +42,35 @@ public class StringTest {
 
         // then
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("특정 위치의 문자 가져오기")
+    void charAt() {
+        // given
+        String abc = "abc";
+
+        // when
+        char a = abc.charAt(0);
+        char b = abc.charAt(1);
+        char c = abc.charAt(2);
+
+        // then
+        assertThat(a).isEqualTo('a');
+        assertThat(b).isEqualTo('b');
+        assertThat(c).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName("특정 위치의 문자 가져오기 - 범위를 벗어날 경우")
+    void charAt_outOfIndex() {
+        // given
+        String abc = "abc";
+
+        // when then
+        assertThatThrownBy(() ->
+            abc.charAt(3)
+        ).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
     }
 }
