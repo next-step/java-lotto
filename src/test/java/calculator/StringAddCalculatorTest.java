@@ -21,6 +21,12 @@ public class StringAddCalculatorTest {
 		verifyResult("1", 1);
 	}
 
+	@Test
+	@DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫나의 합을 반환한다.")
+	public void splitAndSum_쉼표구분자() throws Exception {
+		verifyResult("1,2", 3);
+	}
+
 	private void verifyResult(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
