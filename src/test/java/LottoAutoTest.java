@@ -18,23 +18,26 @@ public class LottoAutoTest {
         assertThat(controller.convertWinningNumbersToInt("1, 2, 3, 4, 5, 6")).isEqualTo(winningNumbers);
     }
 
-    @DisplayName(value = "당첨결과 enum 에서 당첨금액을 가져와 보여준다.")
+    @DisplayName(value = "당첨금액 enum 에서 당첨금액을 가져와 보여준다.")
     @Test
     void show_winningPrice() {
-        assertThat(LottoAutoController.WinningResult.fifth.getWinningPrice()).isEqualTo(5000);
+        assertThat(WinningPrice.FIFTHPRICE.getPrice()).isEqualTo(5000);
     }
 
-    @DisplayName(value = "당첨결과 enum 에서 당첨횟수를 가져와 보여준다.")
+    @DisplayName(value = "당첨결과 클래스 에서 당첨횟수를 가져와 보여준다.")
     @Test
     void show_The_Number_of_Winnings() {
-        assertThat(LottoAutoController.WinningResult.fifth.getNumberOfWinnings()).isEqualTo(0);
+        WinningResult winningResult = new WinningResult();
+
+        assertThat(winningResult.getNumberOfFifthPlace()).isEqualTo(0);
     }
 
     @DisplayName(value = "당첨번호와 동일한 번호가 4개이면 4등 당첨횟수가 증가한다.")
     @Test
     void add_The_Number_of_Winnings() {
-        LottoAutoController.WinningResult.addCount(4, true);
+        WinningResult winningResult = new WinningResult();
+        winningResult.addCount(4, true);
 
-        assertThat(LottoAutoController.WinningResult.fourth.getNumberOfWinnings()).isEqualTo(1);
+        assertThat(winningResult.getNumberOfFourthPlace()).isEqualTo(1);
     }
 }

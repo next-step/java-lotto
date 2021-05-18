@@ -16,7 +16,8 @@ public class LottoAutoController {
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
 
-        getWinningResult(lottos, winningNumbers, bonusNumber);
+        WinningResult winningResult = new WinningResult();
+        winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
         view.outputWinningStatistic(getEarningRate(price));
     }
 
@@ -41,62 +42,13 @@ public class LottoAutoController {
         return bonusNumber;
     }
 
-    enum WinningResult {
-        fifth(5000, 0),
-        fourth(50000, 0),
-        third(1500000, 0),
-        second(30000000, 0),
-        first(2000000000, 0);
-
-        int winningPrice;
-        int numberOfWinnings;
-
-        WinningResult(int winningPrice, int numberOfWinnings) {
-            this.winningPrice = winningPrice;
-            this.numberOfWinnings = numberOfWinnings;
-        }
-
-        public int getWinningPrice() {
-            return winningPrice;
-        }
-
-        public int getNumberOfWinnings() {
-            return numberOfWinnings;
-        }
-
-        public static void addCount(int count, boolean bonus) {
-            if (count == 3) {
-                WinningResult.fifth.numberOfWinnings++;
-            }
-            if (count == 4) {
-                WinningResult.fourth.numberOfWinnings++;
-            }
-            if (count == 5 && !bonus) {
-                WinningResult.third.numberOfWinnings++;
-            }
-            if (count == 5 && bonus) {
-                WinningResult.second.numberOfWinnings++;
-            }
-            if (count == 6) {
-                WinningResult.first.numberOfWinnings++;
-            }
-        }
-    }
-
-    private void getWinningResult(List<LottoAutoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        for (LottoAutoModel lotto : lottos) {
-            int count = lotto.setWinningResult(winningNumbers);
-            boolean bonus = lotto.getAutoNumbers().contains(bonusNumber);
-            WinningResult.addCount(count, bonus);
-        }
-    }
 
     private float getEarningRate(int price) {
         float floatPrice = (float) price;
-        return (WinningResult.fifth.getWinningPrice() * WinningResult.fifth.getNumberOfWinnings()
-                + WinningResult.fourth.getWinningPrice() * WinningResult.fourth.getNumberOfWinnings()
-                + WinningResult.third.getWinningPrice() * WinningResult.third.getNumberOfWinnings()
-                + WinningResult.second.getWinningPrice() * WinningResult.second.getNumberOfWinnings()
-                + WinningResult.first.getWinningPrice() * WinningResult.first.getNumberOfWinnings()) / floatPrice;
+        return (WinningPrice.FIFTHPRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
+                + WinningPrice.FOURTHPRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
+                + WinningPrice.THIRDPRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
+                + WinningPrice.SECONDPRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
+                + WinningPrice.FIRSTPRICE.getPrice() * WinningResult.getNumberOfFirstPlace()) / floatPrice;
     }
 }

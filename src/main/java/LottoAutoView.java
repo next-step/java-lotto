@@ -37,11 +37,11 @@ public class LottoAutoView {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        System.out.println("3개 일치 (5000원)- " + LottoAutoController.WinningResult.fifth.numberOfWinnings + "개");
-        System.out.println("4개 일치 (50000원)- " + LottoAutoController.WinningResult.fourth.numberOfWinnings + "개");
-        System.out.println("5개 일치 (1500000원)- " + LottoAutoController.WinningResult.third.numberOfWinnings + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + LottoAutoController.WinningResult.second.numberOfWinnings + "개");
-        System.out.println("6개 일치 (2000000000원)- " + LottoAutoController.WinningResult.first.numberOfWinnings + "개");
+        System.out.println("3개 일치 (5000원)- " + WinningResult.getNumberOfFifthPlace() + "개");
+        System.out.println("4개 일치 (50000원)- " + WinningResult.getNumberOfFourthPlace() + "개");
+        System.out.println("5개 일치 (1500000원)- " + WinningResult.getNumberOfThirdPlace() + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + WinningResult.getNumberOfSecondPlace() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + WinningResult.getNumberOfFirstPlace() + "개");
 
         System.out.print("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
         if (earningRate < 1) {
