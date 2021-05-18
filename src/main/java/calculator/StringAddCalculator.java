@@ -17,16 +17,14 @@ public class StringAddCalculator {
             return DEFAULT_SUM_NUMBER;
         }
 
-        return addNumbers(input);
+        return addNumbers(splitText(input));
     }
 
-    private static int addNumbers(String input) {
+    private static int addNumbers(String[] splitedNumberText) {
         InputNumber sum = InputNumber.create(DEFAULT_SUM_NUMBER);
 
-        String[] splitedText = splitText(input);
-
-        for (String text : splitedText) {
-            sum.add(InputNumber.create(Integer.parseInt(text)));
+        for (String numberText : splitedNumberText) {
+            sum.add(InputNumber.create(Integer.parseInt(numberText)));
         }
 
         return sum.getNumber();
