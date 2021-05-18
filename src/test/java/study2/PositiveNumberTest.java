@@ -13,8 +13,7 @@ public class PositiveNumberTest {
     @DisplayName("생성 테스트")
     void create() {
         // given & when & then
-        assertThat(PositiveNumber.of("0")).isEqualTo(0);
-        assertThat(PositiveNumber.of(0)).isEqualTo(0);
+        assertThat(PositiveNumber.of("0")).isEqualTo(PositiveNumber.of(0));
     }
 
     @Test
