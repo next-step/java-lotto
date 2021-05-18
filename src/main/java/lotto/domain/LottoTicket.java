@@ -7,7 +7,7 @@ import java.util.Set;
 import static java.lang.String.format;
 
 public class LottoTicket {
-    private final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
