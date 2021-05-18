@@ -9,10 +9,9 @@ public class StringCalculatorNumber {
 		this.number = number;
 	}
 
-	public StringCalculatorNumber add(int number) {
+	public void add(int number) {
 		validationNumber(number);
 		this.number += number;
-		return this;
 	}
 
 	public int get() {
