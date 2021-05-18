@@ -7,7 +7,7 @@ public class StringAddCalculator {
         if (validateNullOrEmpty(text)) {
             return DEFAULT_RETURN_VALUE;
         }
-        return -1;
+        return Integer.parseInt(text);
     }
 
     private static boolean validateNullOrEmpty(String text) {
