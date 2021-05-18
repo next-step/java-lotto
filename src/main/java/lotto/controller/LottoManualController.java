@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoManualController {
 
-    public void start() {
+    public void start(List<LottoModel> lottos) {
         LottoManualView view = new LottoManualView();
 
         int price = view.inputPrice();
@@ -16,7 +16,6 @@ public class LottoManualController {
         int manualQuantity = view.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
-        List<LottoModel> lottos = new ArrayList<>();
         List<String> manualNumbers = view.inputManualLottoNumbers(manualQuantity);
         setManualLottos(manualQuantity, manualNumbers, lottos);
         setAutoLottos(autoQuantity, lottos);
