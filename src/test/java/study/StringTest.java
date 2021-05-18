@@ -37,4 +37,24 @@ public class StringTest {
         // then
         assertThat(result).isEqualTo("1,2");
     }
+
+    @Test
+    @DisplayName("abc 값 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는지 확인")
+    void charAt() {
+        // given
+        String test = "abc";
+        // when & then
+        assertThat(test.charAt(0)).isEqualTo('a');
+        assertThat(test.charAt(1)).isEqualTo('b');
+        assertThat(test.charAt(2)).isEqualTo('c');
+    }
+
+    @Test
+    @DisplayName("charAt 메서드 활용해 범위를 벗어났을 경우 확인")
+    void indexOutOfBoundsByCharAt() {
+        // given
+        String test = "abc";
+        // when & then
+        assertThatThrownBy(() -> test.charAt(5)).isInstanceOf(IndexOutOfBoundsException.class);
+    }
 }
