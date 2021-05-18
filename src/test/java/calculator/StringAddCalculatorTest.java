@@ -33,7 +33,13 @@ public class StringAddCalculatorTest {
 		verifyResult("1,2:3", 6);
 	}
 
-	private void verifyResult(String input, int expected) {
+	@Test
+	@DisplayName("(//) 와 (\n) 사이에 커스텀 구분자를 지정할 수 있다.")
+	public void splitAndSum_custom_구분자() throws Exception {
+		verifyResult("//;\n1;2;3", 6);
+	}
+
+		private void verifyResult(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
 	}
