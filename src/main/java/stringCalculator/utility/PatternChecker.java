@@ -11,7 +11,7 @@ public class PatternChecker {
     private final Matcher matcher;
 
     public PatternChecker(String input) {
-        matcher = Pattern.compile(Constant.PATTERN).matcher(input);
+        matcher = Pattern.compile(Constant.CUSTOM_PATTERN).matcher(input);
     }
 
     public boolean isCustomDelimiter() {
