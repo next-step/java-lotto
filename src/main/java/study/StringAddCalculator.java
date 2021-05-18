@@ -14,7 +14,7 @@ public class StringAddCalculator {
 		if (text == null || text.trim().isEmpty()) {
 			return 0;
 		}
-		return sumNumbersBySeperators(removeCustomSeperatorsString(text), getSeperators(text));
+		return sumNumbersBySeperators(removeCustomSeperatorsString(text), findSeperators(text));
 	}
 
 	private static String removeCustomSeperatorsString(String text) {
@@ -25,7 +25,7 @@ public class StringAddCalculator {
 		return text;
 	}
 
-	private static String getSeperators(String text) {
+	private static String findSeperators(String text) {
 		Matcher customSeperatorMatcher = CUSTOM_SEPARATORS_PATTERN.matcher(text);
 		if (customSeperatorMatcher.find()) {
 			return customSeperatorMatcher.group(GROUP_CUSTOM_SEPARATORS_PATTERN);
