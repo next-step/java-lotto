@@ -8,7 +8,7 @@ public class StringAddCalculator {
             return sum;
         }
 
-        return sum;
+        return Integer.parseInt(input);
     }
 
     private static boolean validationCheck(String input) {
