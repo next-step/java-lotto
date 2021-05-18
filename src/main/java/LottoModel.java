@@ -49,6 +49,10 @@ public class LottoModel {
         return numbers;
     }
 
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public int countWinningNumbers(List<Integer> winningNumbers) {
         int count = 0;
         for (int i = 0; i < numberOfNumbers; i++) {
