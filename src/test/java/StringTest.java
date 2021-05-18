@@ -11,4 +11,11 @@ public class StringTest {
 		assertThat("1,2".split(",")).containsExactly("1", "2");
 		assertThat("1".split(",")).containsExactly("1");
 	}
+	@Test
+	@DisplayName("요구사항2 : substring 테스트")
+	void substring() {
+		String input = "(1,2)";
+		assertThat(input.substring(1, input.length() - 1)).isEqualTo("1,2");
+	}
+
 }
