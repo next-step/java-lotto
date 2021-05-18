@@ -14,7 +14,7 @@ public class StringCalculatorNumber {
 		this.number += number;
 	}
 
-	public int getNumber() {
+	public int get() {
 		return this.number;
 	}
 

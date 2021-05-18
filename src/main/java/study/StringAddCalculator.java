@@ -46,7 +46,7 @@ public class StringAddCalculator {
 		for (String number : numbers) {
 			result.add(Integer.parseInt(number));
 		}
-		return result.getNumber();
+		return result.get();
 	}
 
 }
