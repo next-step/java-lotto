@@ -1,25 +1,20 @@
 package lotto.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.model.LottoNumber;
+
+import java.util.*;
 
 public class TypeConvert {
     public static String STRING_SEPARATOR = ",";
 
-    public static List<Integer> convertStringToIntegerList(String inputSting) {
-        List<String> stringList = convertStringToStringList(inputSting);
-        List<Integer> convertedList = new ArrayList<>();
-        for (String element : stringList) {
-            convertedList.add(Integer.parseInt(element));
-        }
-        return convertedList;
-    }
+    public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
+        List<String> stringList = Arrays.asList(inputSting.split(STRING_SEPARATOR));
+        Set<LottoNumber> convertedSet = new HashSet<>();
 
-    private static List<String> convertStringToStringList(String string) {
-        List<String> convertedList = new ArrayList<>();
-        for (String element : string.split(STRING_SEPARATOR)) {
-            convertedList.add(element);
+        for (String element : stringList) {
+            convertedSet.add(new LottoNumber(Integer.parseInt(element)));
         }
-        return convertedList;
+
+        return convertedSet;
     }
 }

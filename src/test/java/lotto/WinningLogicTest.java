@@ -1,16 +1,13 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.Reward;
-import lotto.model.WinningLogic;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import static lotto.model.Reward.*;
-import static lotto.util.TypeConvert.convertStringToIntegerList;
+import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -18,24 +15,26 @@ public class
 WinningLogicTest {
     @DisplayName("당첨번호와 로또번호 `비교`시 총 몇개의 같은 숫자가 일치하는지 알 수있다.")
     @Test
-    void checkWinningCountTest() {
+    void makeWinningStateTest() {
         WinningLogic winningLogic = new WinningLogic();
         String lottoNumber = "1,2,3,4,5,6";
-        String winningNumber = "1,2,3,11,22,33,7";
-        String winningNumberWithBonus = "1,2,3,11,22,33,6";
-        List<Integer> lottoNumbers = convertStringToIntegerList((lottoNumber));
-        List<Integer> winningNumbers = convertStringToIntegerList((winningNumber));
-        List<Integer> winningNumbersWithBonus = convertStringToIntegerList((winningNumberWithBonus));
+        String winningNumber = "1,2,11,22,33,3";
+        LottoNumber incorrectBonusBall = new LottoNumber(7);
+        LottoNumber correctBonusBall = new LottoNumber(6);
+        Set<LottoNumber> lottoNumbers = convertStringToLottoNumberSet((lottoNumber));
+        Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
 
         Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto threeMatchedWinningLotto = winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbers);
-        WinningLotto threeMatchedWinningLottoWithBonus = winningLogic.makeWinningLotto(lotto.getLottoNumbers(), winningNumbersWithBonus);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers,incorrectBonusBall);
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLottoNumbers,correctBonusBall);
+        WinningState threeMatchedWinningLotto = winningLogic.makeWinningState(lotto, winningLotto);
+        WinningState threeMatchedWinningLottoWithBonus = winningLogic.makeWinningState(lotto, winningLottoWithBonus);
 
         assertAll(
                 () -> assertThat(threeMatchedWinningLotto.getMatchedCount()).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLotto.isBonusBall()).isFalse(),
+                () -> assertThat(threeMatchedWinningLotto.getBonusBallState()).isFalse(),
                 () -> assertThat(threeMatchedWinningLottoWithBonus.getMatchedCount()).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLottoWithBonus.isBonusBall()).isTrue()
+                () -> assertThat(threeMatchedWinningLottoWithBonus.getBonusBallState()).isTrue()
         );
     }
 
@@ -50,7 +49,7 @@ WinningLogicTest {
         rewards.add(THIRD_PRIZE);
         rewards.add(FIFTH_PRIZE);
 
-        TreeMap prizes = winningLogic.makePrizes(rewards);
+        Map prizes = winningLogic.makePrizes(rewards);
 
         assertAll(
                 () -> assertThat(prizes.get(5000)).isEqualTo(2),

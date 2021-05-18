@@ -1,12 +1,13 @@
 package lotto;
 
 import lotto.model.Reward;
-import lotto.model.WinningLotto;
+import lotto.model.WinningState;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static lotto.model.Reward.getReward;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 public class RewardTest {
@@ -14,13 +15,17 @@ public class RewardTest {
     @Test
     @DisplayName("로또번호와 똑같은 숫자에 따른 상금이 같은지 비교한다.")
     void getRewardTest() {
-       WinningLotto secondPrize = new WinningLotto(5, true);
-        WinningLotto fourthPrize = new WinningLotto(4,false);
+        WinningState secondPrize = new WinningState(5, true);
+        WinningState thirdPrize = new WinningState(5, false);
         Reward secondReward = getReward(secondPrize);
-        Reward fourthReward = getReward(fourthPrize);
+        Reward thirdReward = getReward(thirdPrize);
 
-        assertThat(secondReward.getPrizeMoney()).isEqualTo(30000000);
-        assertThat(fourthReward.getPrizeMoney()).isEqualTo(50000);
+        assertAll(
+                () -> assertThat(thirdReward.getPrizeMoney()).isEqualTo(1_500_000),
+                () -> assertThat(secondReward.getPrizeMoney()).isEqualTo(30_000_000)
+        );
+
+
     }
 
 }

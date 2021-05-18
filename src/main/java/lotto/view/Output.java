@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.Reward;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Output {
     private static final String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해주세요.";
@@ -12,11 +15,11 @@ public class Output {
     private static final String WIN_STATIC_MESSAGE = "당첨 통계";
     private static final String SEPARATOR = "---------";
     private static final String YIELD_MESSAGE = "수익률은 %.2f 입니다.";
-    private static final String MATCH_MESSAGE_3 = "3개 일치 (5000원)- %d 개";
-    private static final String MATCH_MESSAGE_4 = "4개 일치 (50000원)- %d 개";
-    private static final String MATCH_MESSAGE_5 = "5개 일치 (1500000원)- %d 개";
-    private static final String MATCH_MESSAGE_6 = "6개 일치 (2000000000원)- %d 개";
-    private static final String MATCH_MESSAGE_6_WITH_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
+    private static final String FIFTH_PRIZE_MESSAGE = "3개 일치 (5000원)- %d 개";
+    private static final String FORTH_PRIZE_MESSAGE = "4개 일치 (50000원)- %d 개";
+    private static final String THIRD_PRIZE_MESSAGE = "5개 일치 (1500000원)- %d 개";
+    private static final String SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
+    private static final String FIRST_PRIZE_MESSAGE = "6개 일치 (2000000000원)- %d 개";
 
     public static void printStartMessage() {
         System.out.println(INPUT_PURCHASE_MESSAGE);
@@ -26,11 +29,11 @@ public class Output {
         System.out.println(String.format(PURCHASABLE_MESSAGE,purchased));
     }
 
-    public static void printLottoNumbers(List<Integer> lottoNumbers) {
+    public static void printLottoNumbers(Set<LottoNumber> lottoNumbers) {
         System.out.println(lottoNumbers);
     }
 
-    public static void printBunchOfLottoNumbers(List<Lotto> bunchOfLotto) {
+    public static void printBunchOfLottoNumbers(Set<Lotto> bunchOfLotto) {
         for (Lotto lotto : bunchOfLotto) {
             printLottoNumbers(lotto.getLottoNumbers());
         }
@@ -50,27 +53,35 @@ public class Output {
         System.out.println(SEPARATOR);
     }
 
+    public static void printPrize(Map<Integer, Integer> prizes) {
+        printFirstPrize(prizes.get(Reward.FIRST_PRIZE.getPrizeMoney()));
+        printSecondPrize(prizes.get(Reward.SECOND_PRIZE.getPrizeMoney()));
+        printThirdPrize(prizes.get(Reward.THIRD_PRIZE.getPrizeMoney()));
+        printForthPrize(prizes.get(Reward.FOURTH_PRIZE.getPrizeMoney()));
+        printFifthPrize(prizes.get(Reward.FIFTH_PRIZE.getPrizeMoney()));
+    }
+
+    private static void printFirstPrize(Integer winCount) {
+        System.out.println(String.format(FIRST_PRIZE_MESSAGE, winCount));
+    }
+
+    private static void printSecondPrize(Integer winCount) {
+        System.out.println(String.format(SECOND_PRIZE_MESSAGE, winCount));
+    }
+
+    private static void printThirdPrize(Integer winCount) {
+        System.out.println(String.format(THIRD_PRIZE_MESSAGE, winCount));
+    }
+
+    private static void printForthPrize(Integer winCount) {
+        System.out.println(String.format(FORTH_PRIZE_MESSAGE, winCount));
+    }
+
+    private static void printFifthPrize(Integer winCount) {
+        System.out.println(String.format(FIFTH_PRIZE_MESSAGE, winCount));
+    }
+
     public static void printYield(double yield) {
         System.out.println(String.format(YIELD_MESSAGE, yield));
-    }
-
-    public static void print3Match(Integer winCount) {
-        System.out.println(String.format(MATCH_MESSAGE_3, winCount));
-    }
-
-    public static void print4Match(Integer winCount) {
-        System.out.println(String.format(MATCH_MESSAGE_4, winCount));
-    }
-
-    public static void print5Match(Integer winCount) {
-        System.out.println(String.format(MATCH_MESSAGE_5, winCount));
-    }
-
-    public static void print6Match(Integer winCount) {
-        System.out.println(String.format(MATCH_MESSAGE_6, winCount));
-    }
-
-    public static void print6MatchWithBonus(Integer winCount) {
-        System.out.println(String.format(MATCH_MESSAGE_6_WITH_BONUS, winCount));
     }
 }

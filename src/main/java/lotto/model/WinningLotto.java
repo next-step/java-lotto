@@ -1,19 +1,33 @@
 package lotto.model;
 
-public class WinningLotto {
-    final int matchedCount;
-    final boolean bonusBall;
+import java.util.Set;
 
-    public WinningLotto(int matchedCount, boolean bonusBall) {
-        this.matchedCount = matchedCount;
+import static lotto.model.Lotto.*;
+
+public class WinningLotto {
+    private final Set<LottoNumber> lottoNumbers;
+    private final LottoNumber bonusBall;
+
+    public WinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber bonusBall) {
+        validate(lottoNumbers, bonusBall);
+        this.lottoNumbers = lottoNumbers;
         this.bonusBall = bonusBall;
     }
 
-    public int getMatchedCount() {
-        return this.matchedCount;
+    private void validate(Set<LottoNumber> lottoNumbers, LottoNumber bonusBall) {
+        if (lottoNumbers.size() != CORRECT_LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(NOT_CORRECT_LOTTO_NUMBERS_MESSAGE);
+        }
+        if (lottoNumbers.contains(bonusBall)) {
+            throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_MESSAGE);
+        }
     }
 
-    public boolean isBonusBall() {
-        return this.bonusBall;
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
     }
 }
