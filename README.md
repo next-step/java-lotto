@@ -20,6 +20,7 @@
   * 숫자를 나타내는 int primitive type을 포장하는 클래스
   * 숫자 정수형이 입력되었나 확인하는 기능을 갖는다
   * 숫자 양수값이 입력되었나 확인하는 기능을 갖는다.
+  * 두 Number 객체를 더해서 더한 값을 갖는 새로운 Number 객체를 반환하는 기능을 갖는다.
 * OperatorSelector
   * 연산자를 선택하는 enum
   * 문자열 형태에 따라 default delimiter operator인지 custom delimiter operator인지 선택할수 있다.
