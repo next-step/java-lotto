@@ -16,4 +16,17 @@ public class StringTest {
     // Then
     assertThat(splitNumbers).containsExactly("1", "2");
   }
+
+  @Test
+  void givenNumber_whenSplitByDelimiter_thenGetOnlyNumber() {
+    // Given
+    String number = "1";
+    String delimiter = ",";
+
+    // When
+    String[] splitNumber = number.split(delimiter);
+
+    // Then
+    assertThat(splitNumber).containsExactly("1");
+  }
 }
