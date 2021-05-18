@@ -51,31 +51,13 @@ public class StringTest {
 	}
 
 	@Test
-	@DisplayName("charAt 예외발생 테스트1")
-	void charAtException1() {
+	@DisplayName("charAt 예외발생 테스트")
+	void charAtException() {
 		String str = "abc";
 
-		assertThatThrownBy(() -> {
-
-			char searchChar = str.charAt(3);
-			assertThat(searchChar).isEqualTo('e');
-
-		}).isInstanceOf(IndexOutOfBoundsException.class)
-			.hasMessageContaining("String index out of range: 3");
-	}
-
-	@Test
-	@DisplayName("charAt 예외발생 테스트2")
-	void charAtException2() {
-		String str = "abc";
-
-		assertThatExceptionOfType(IndexOutOfBoundsException.class)
-			.isThrownBy(() -> {
-
-				char searchChar = str.charAt(4);
-				assertThat(searchChar).isEqualTo('e');
-
-			}).withMessageMatching("String index out of range: \\d+");
+		assertThatThrownBy(() -> str.charAt(3))
+				.isInstanceOf(IndexOutOfBoundsException.class)
+				.hasMessageContaining("String index out of range: 3");
 	}
 
 	@Test
