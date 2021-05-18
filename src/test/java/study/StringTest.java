@@ -26,4 +26,15 @@ public class StringTest {
         assertThat(test).contains("1");
         assertThat(test).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("(1,2) 값 substring() 메소드를 활용해 ()을 제거하고 1,2를 반환 확인")
+    void substring() {
+        // given
+        String test = "(1,2)";
+        // when
+        String result = test.substring(1, test.length() - 1);
+        // then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
