@@ -7,6 +7,8 @@ public class StringAddCalculator {
 
 	private static final String SEPARATORS = ",|:";
 	private static final Pattern CUSTOM_SEPARATORS_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final int GROUP_CUSTOM_SEPARATORS_PATTERN = 1;
+	private static final int GROUP_NUMBERS = 2;
 
 	public static int splitAndSum(String text) {
 		if (text == null || text.trim().isEmpty()) {
@@ -21,7 +23,7 @@ public class StringAddCalculator {
 	private static String removeCustomSeperatorsString(String text) {
 		Matcher customSeperatorMatcher = CUSTOM_SEPARATORS_PATTERN.matcher(text);
 		if (customSeperatorMatcher.find()) {
-			return customSeperatorMatcher.group(2);
+			return customSeperatorMatcher.group(GROUP_NUMBERS);
 		}
 		return text;
 	}
@@ -29,7 +31,7 @@ public class StringAddCalculator {
 	private static String getSeperators(String text) {
 		Matcher customSeperatorMatcher = CUSTOM_SEPARATORS_PATTERN.matcher(text);
 		if (customSeperatorMatcher.find()) {
-			return customSeperatorMatcher.group(1);
+			return customSeperatorMatcher.group(GROUP_CUSTOM_SEPARATORS_PATTERN);
 		}
 		return SEPARATORS;
 	}
