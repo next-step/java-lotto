@@ -11,16 +11,24 @@ public class SixBall {
 
     private SixBall(Set<Ball> balls) {
         this.balls = balls.stream()
+                .limit(LENGTH)
                 .sorted().collect(Collectors.toList());
     }
 
-    public static SixBall get() {
-        Set<Ball> balls = new HashSet<>();
+    public static SixBall get(int ...fix) {
+        Set<Ball> balls = initTempCollection(fix);
+
         while(balls.size() < LENGTH) {
             balls.add(Machine.draw());
         }
 
         return new SixBall(balls);
+    }
+
+    private static Set<Ball> initTempCollection(int[] fixs) {
+        return Arrays.stream(fixs)
+                .boxed().map(Machine::draw)
+                .collect(Collectors.toSet());
     }
 
     public Stream<Ball> stream() {

@@ -1,5 +1,8 @@
 package lotto.core;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(of = "number")
 public class Ball implements Comparable {
     public static final int MIN = 1;
     public static final int MAX = 45;

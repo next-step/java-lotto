@@ -20,4 +20,10 @@ public class Machine {
 
         return list.get(0);
     }
+
+    public static Ball draw(int number) {
+        int index = list.indexOf(new Ball(number));
+
+        return list.get(index);
+    }
 }
