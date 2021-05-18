@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringTest {
@@ -55,5 +56,18 @@ public class StringTest {
 
     // Then
     assertEquals('a', c);
+  }
+
+  @Test
+  @DisplayName("String 의 index 범위 밖 특정 위치 문자를 가져오려고 할 경우, StringIndexOutOfBoundsException 발생")
+  void givenCharacters_whenCharAtOutOfBounds_thenThrowStringIndexOutOfBoundsException() {
+    // Given
+    String alphabets = "abc";
+    int indexOutOfBounds = 3;
+
+    // When, Then
+    assertThatThrownBy(() -> alphabets.charAt(indexOutOfBounds))
+        .isInstanceOf(StringIndexOutOfBoundsException.class)
+        .hasMessageContaining("String index out of range: " + indexOutOfBounds);
   }
 }
