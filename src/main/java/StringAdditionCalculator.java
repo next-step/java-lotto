@@ -43,7 +43,8 @@ public class StringAdditionCalculator {
         int sum = 0;
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
+            String delimiters = customDelimiter + "|,|:";
+            String[] tokens = m.group(2).split(delimiters);
             sum = sum(tokens);
         }
         System.out.println(sum);
@@ -61,11 +62,11 @@ public class StringAdditionCalculator {
         if (text.length() == 1) {
             return one(text);
         }
-        if (text.contains(":") || text.contains(",")) {
-            return colon(text);
-        }
         if (text.contains("//") && text.contains(("\n"))) {
             return custom(text);
+        }
+        if (text.contains(":") || text.contains(",")) {
+            return colon(text);
         }
         throw new RuntimeException();
     }
