@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.domain.InputNumber;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,15 +21,15 @@ public class StringAddCalculator {
     }
 
     private static int addNumbers(String input) {
-        int sum = DEFAULT_SUM_NUMBER;
+        InputNumber sum = InputNumber.create(DEFAULT_SUM_NUMBER);
 
         String[] splitedText = splitText(input);
 
         for (String text : splitedText) {
-            sum += Integer.parseInt(text);
+            sum.add(InputNumber.create(Integer.parseInt(text)));
         }
 
-        return sum;
+        return sum.getNumber();
     }
 
     private static String[] splitText(String input) {
