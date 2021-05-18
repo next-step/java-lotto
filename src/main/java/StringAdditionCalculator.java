@@ -30,8 +30,8 @@ public class StringAdditionCalculator {
 
     private int sum(String[] numbers) {
         int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            int number = Integer.parseInt(numbers[i]);
+        for (String s : numbers) {
+            int number = Integer.parseInt(s);
             sum += number;
         }
         System.out.println(sum);
