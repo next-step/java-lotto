@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private static String EXPRESSION_DEFAULT_SEPARATOR = ",|:";
+    private static String CUSTOM_SEPARATOR_FIND_EXPRESSION = "//(.)\n(.*)";
+    private static int CUSTOM_SEPARATOR_INDEX = 1;
+    private static int CUSTOM_FORMULA_INDEX = 2;
 
     public static int splitAndSum(String expression) {
         if (expression == null || expression.isEmpty()) {
@@ -28,11 +31,11 @@ public class StringAddCalculator {
     }
 
     private static CalculatorExpression getCalculatorExpression(String expression) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_FIND_EXPRESSION).matcher(expression);
 
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            String formula = m.group(2);
+            String customDelimiter = m.group(CUSTOM_SEPARATOR_INDEX);
+            String formula = m.group(CUSTOM_FORMULA_INDEX);
 
             return new CalculatorExpression(customDelimiter, formula);
         }
