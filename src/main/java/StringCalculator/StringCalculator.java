@@ -16,7 +16,6 @@ public class StringCalculator {
         List<String> splitText = splitText(newText);
         int result = 0;
 
-
         for (String number : splitText) {
             result += Integer.parseInt(number);
         }
@@ -24,24 +23,9 @@ public class StringCalculator {
         return result;
     }
 
-    public boolean format(final String text) {
-        if (text.contains(",") || text.contains(":")) {
-            return false;
-        }
-        return true;
-    }
 
-    public String isEmptyText(final String text) {
-        if (text == null || text.length() == 0) {
-            return "0";
-        }
-        if (format(text)) {
-            throw new RuntimeException("계산할수 없는 타입입니다.");
-        }
-        if (isNegative(text)) {
-            throw new RuntimeException("음수는 불가능.");
-        }
-        return text;
+    public boolean notNumber(final String text) {
+        return !text.matches(".*[0-9]*");
     }
 
     public boolean isNegative(final String text) {
@@ -51,13 +35,25 @@ public class StringCalculator {
         return false;
     }
 
+    public String isEmptyText(final String text) {
+        if (text == null || text.length() == 0) {
+            return "0";
+        }
+        if (isNegative(text)) {
+            throw new RuntimeException("음수는 불가능합니다");
+        }
+        return text;
+    }
+
     private String[] customSpliter(final String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens = m.group(2).split(customDelimiter);
-
             return tokens;
+        }
+        if(notNumber(text)){
+            throw new RuntimeException("숫자가 아닙니다");
         }
         return text.split(",|:");
     }

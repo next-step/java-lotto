@@ -25,18 +25,19 @@ public class StringCalculatorTest {
         assertThat(calculator.add(text)).isZero();
     }
 
-    @DisplayName(value = "포맷에 맞지 않은 input이 들어오는 경우")
-    @ParameterizedTest
-    @ValueSource(strings = {"ab"})
-    void formatTest(final String text) {
-        assertThat(calculator.format(text)).isEqualTo(true);
-    }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1"})
+    @ValueSource(strings = {"2"})
     void oneNumberTest(final String text) {
         assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text));
+    }
+
+    @DisplayName(value = "숫자가 아닌 것이 더해지는 경우")
+    @ParameterizedTest
+    @ValueSource(strings = {"0"})
+    void notNumberTest(final String text) {
+        assertThat(calculator.notNumber(text)).isEqualTo(false);
     }
 
     @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
