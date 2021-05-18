@@ -10,7 +10,7 @@ public class StringAddCalculator {
 		if (isEmpty(input)) {
 			return new String[]{};
 		}
-		return input.split(",");
+		return input.split("[,:]");
 	}
 
 	private static int sum(String[] inputs) {

@@ -27,6 +27,12 @@ public class StringAddCalculatorTest {
 		verifyResult("1,2", 3);
 	}
 
+	@Test
+	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+	public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+		verifyResult("1,2:3", 6);
+	}
+
 	private void verifyResult(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
