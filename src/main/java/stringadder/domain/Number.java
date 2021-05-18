@@ -30,6 +30,10 @@ public class Number {
     this.inputNumber = inputNumber;
   }
 
+  public static Number sum(Number one, Number theOther) {
+    return new Number(one.inputNumber + theOther.inputNumber);
+  }
+
   private void validatePositiveNumber(int number) {
     if(number < ZERO) {
       throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED);
