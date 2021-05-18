@@ -5,11 +5,16 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    public static final String NOT_AVAILABLE_NEGATIVE_MESSAGE = "음수를 입력할 수 없습니다.";
+    public static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    public static final int MIN_NUMBER = 0;
+    public static final int GROUP_FIRST = 1;
+    public static final int GROUP_SECOND = 2;
 
     public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
-            return 0;
+            return MIN_NUMBER;
         }
         return sum(splitByDelimiter(input));
 
@@ -18,14 +23,14 @@ public class StringAddCalculator {
     private static String[] splitByDelimiter(String input) {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(GROUP_FIRST);
+            return matcher.group(GROUP_SECOND).split(customDelimiter);
         }
-        return input.split(",|:");
+        return input.split(DEFAULT_DELIMITER);
     }
 
     private static int sum(String[] splits) {
-        int result = 0;
+        int result = MIN_NUMBER;
         for (String split : splits) {
             result += parseIntPositive(split);
         }
@@ -35,7 +40,7 @@ public class StringAddCalculator {
     private static int parseIntPositive(String split) {
         int result = Integer.parseInt(split);
         if (result < 0) {
-            throw new RuntimeException("음수를 입력할 수 없습니다.");
+            throw new RuntimeException(NOT_AVAILABLE_NEGATIVE_MESSAGE);
         }
         return result;
     }
