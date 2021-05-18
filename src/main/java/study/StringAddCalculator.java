@@ -14,9 +14,6 @@ public class StringAddCalculator {
 		if (text == null || text.trim().isEmpty()) {
 			return 0;
 		}
-		if (isNumeric(text)) {
-			return Integer.parseInt(text);
-		}
 		return sumNumbersBySeperators(removeCustomSeperatorsString(text), getSeperators(text));
 	}
 
@@ -50,14 +47,6 @@ public class StringAddCalculator {
 			result.add(Integer.parseInt(number));
 		}
 		return result.get();
-	}
-
-	private static boolean isNumeric(String text) {
-		if (text == null || text.trim().isEmpty()) {
-			return false;
-		}
-		String regex = "[0-9]+";
-		return text.matches(regex);
 	}
 
 }
