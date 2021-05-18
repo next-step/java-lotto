@@ -48,11 +48,6 @@ public class StringAddCalculator {
             return false;
         }
 
-        if (input.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !input.isEmpty();
     }
-
-
 }
