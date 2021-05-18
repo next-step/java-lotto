@@ -33,7 +33,8 @@ public class LottoManualController {
         checkWinningNumbers(winningNumbers);
         checkBonusNumber(bonusNumber);
 
-        getWinningResult(lottos, winningNumbers, bonusNumber);
+        WinningResult winningResult = new WinningResult();
+        winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
         view.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
     }
 
@@ -77,14 +78,6 @@ public class LottoManualController {
     private void checkNumber(int number) {
         if (number < 1 || 45 < number) {
             throw new IllegalArgumentException("당첨번호는 1부터 45까지의 숫자입니다.");
-        }
-    }
-
-    private void getWinningResult(List<LottoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        for (LottoModel lotto : lottos) {
-            int count = lotto.countWinningNumbers(winningNumbers);
-            boolean bonus = lotto.getNumbers().contains(bonusNumber);
-            winningResult.addCount(count, bonus);
         }
     }
 
