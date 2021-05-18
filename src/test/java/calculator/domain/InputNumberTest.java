@@ -15,7 +15,7 @@ public class InputNumberTest {
     public void createNumberTest() {
         int number = 1;
 
-        InputNumber inputNumber = InputNumber.create(number);
+        InputNumber inputNumber = InputNumber.createPositiveNumber(number);
 
         assertThat(inputNumber.getNumber()).isEqualTo(number);
     }
@@ -26,7 +26,7 @@ public class InputNumberTest {
         int inputNumber = -1;
 
         assertThatThrownBy(() ->
-                InputNumber.create(inputNumber)
+                InputNumber.createPositiveNumber(inputNumber)
         ).isInstanceOf(RuntimeException.class);
     }
 
@@ -35,8 +35,8 @@ public class InputNumberTest {
     @CsvSource(value = {"1:2:3", "2:3:5", "0:1:1"}, delimiter = ':')
     public void addNumberTest(int firstNumber, int secondNumber, int totalNumber) {
 
-        InputNumber number = InputNumber.create(firstNumber);
-        InputNumber addNumber = InputNumber.create(secondNumber);
+        InputNumber number = InputNumber.createPositiveNumber(firstNumber);
+        InputNumber addNumber = InputNumber.createPositiveNumber(secondNumber);
 
         number.add(addNumber);
 
