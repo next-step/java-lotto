@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private static String EXPRESSION_DEFAULT_SEPARATOR = ",|:";
+    private static int DEFAULT_NUMBER = 0;
     private static String CUSTOM_SEPARATOR_FIND_EXPRESSION = "//(.)\n(.*)";
     private static int CUSTOM_SEPARATOR_INDEX = 1;
     private static int CUSTOM_FORMULA_INDEX = 2;
 
     public static int splitAndSum(String expression) {
         if (expression == null || expression.isEmpty()) {
-            return 0;
+            return DEFAULT_NUMBER;
         }
 
         CalculatorExpression calculatorExpression = getCalculatorExpression(expression);
