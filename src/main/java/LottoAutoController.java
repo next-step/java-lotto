@@ -3,13 +3,12 @@ import java.util.List;
 
 public class LottoAutoController {
 
-    public void start() {
+    public void start(List<LottoModel> lottos) {
         LottoAutoView view = new LottoAutoView();
 
         int price = view.inputPrice();
         int quantity = price / 1000;
 
-        List<LottoModel> lottos = new ArrayList<>();
         setLotto(quantity, lottos);
         view.printLotto(quantity, lottos);
 
