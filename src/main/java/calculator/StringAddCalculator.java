@@ -7,8 +7,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-	private final static Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
-	private final static String DEFAULT_DELIMITER = "[,:]";
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
+	private static final int CUSTOM_DELIMITER_GROUP = 1;
+	private static final int CUSTOM_INPUT_GROUP = 2;
+	private static final String DEFAULT_DELIMITER = "[,:]";
 
 	public static int splitAndSum(String input) {
 		return sum(parseToNonNegativeNumbers(split(input)));
@@ -20,8 +22,9 @@ public class StringAddCalculator {
 		}
 		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
 		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			return matcher.group(2).split(customDelimiter);
+			String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+			String customInput = matcher.group(CUSTOM_INPUT_GROUP);
+			return customInput.split(customDelimiter);
 		}
 		return input.split(DEFAULT_DELIMITER);
 	}
