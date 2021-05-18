@@ -9,7 +9,8 @@ public class StringAddCalculator {
     private static final String EXPRESSION_DEFAULT_SEPARATOR = ",|:";
     private static final int DEFAULT_NUMBER = 0;
 
-    private static final Pattern CUSTOM_SEPARATOR_FIND_EXPRESSION_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String CUSTOM_SEPARATOR_FIND_EXPRESSION = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_SEPARATOR_FIND_EXPRESSION_PATTERN = Pattern.compile(CUSTOM_SEPARATOR_FIND_EXPRESSION);
     private static final int CUSTOM_SEPARATOR_INDEX = 1;
     private static final int CUSTOM_FORMULA_INDEX = 2;
 
