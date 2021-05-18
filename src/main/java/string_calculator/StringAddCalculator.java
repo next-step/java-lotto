@@ -10,14 +10,14 @@ public class StringAddCalculator {
     private static final int FIRST_MATCH = 1;
     private static final int SECOND_MATCH = 2;
 
-    public static int splitAndSum(String input) {
+    public int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return DEFAULT_NUMBER;
         }
         return add(split(input));
     }
 
-    private static int add(String[] split) {
+    private int add(String[] split) {
         int result = DEFAULT_NUMBER;
         for (String number : split) {
             result += parseInt(number);
@@ -25,7 +25,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    private static String[] split(String input) {
+    private String[] split(String input) {
         Matcher matcher = CUSTOM_PATTERN.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(FIRST_MATCH);
@@ -34,7 +34,7 @@ public class StringAddCalculator {
         return input.split(DECIDED_DELIMITER);
     }
 
-    private static final int parseInt(String input) {
+    private int parseInt(String input) {
         int number = Integer.parseInt(input);
         if (number < DEFAULT_NUMBER) {
             throw new RuntimeException();
@@ -42,7 +42,7 @@ public class StringAddCalculator {
         return number;
     }
 
-    private static boolean isNullOrEmpty(String input) {
+    private boolean isNullOrEmpty(String input) {
         return input == null || input.trim().isEmpty();
     }
 }
