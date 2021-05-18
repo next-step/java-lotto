@@ -39,4 +39,8 @@ public class PositiveNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    public int number() {
+        return number;
+    }
 }
