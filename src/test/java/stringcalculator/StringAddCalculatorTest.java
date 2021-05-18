@@ -32,4 +32,10 @@ public class StringAddCalculatorTest {
         int result1 = StringAddCalculator.splitAndSum("1,2,5");
         assertThat(result1).isEqualTo(8);
     }
+
+    @Test
+    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }
