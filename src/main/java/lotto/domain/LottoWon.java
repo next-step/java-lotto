@@ -16,4 +16,10 @@ public class LottoWon {
             throw new IllegalArgumentException(format("로또승리는 %d개의 번호를 가져야 합니다.", LottoTicket.LOTTO_NUMBERS_SIZE));
         }
     }
+
+    public int match(LottoTicket lottoTicket) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> lottoTicket.contains(number))
+                .count();
+    }
 }
