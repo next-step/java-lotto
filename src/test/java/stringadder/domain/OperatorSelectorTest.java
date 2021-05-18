@@ -2,6 +2,7 @@ package stringadder.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +30,13 @@ class OperatorSelectorTest {
   @ParameterizedTest
   void unexpectedFormInputTest(String given) {
     assertThatThrownBy(() -> selectOperator(given)).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @DisplayName("기본 구분자 형태, 커스텀 구분자 형태에 따라 알맞은 합계를 계산하는지 테스트")
+  @CsvSource(value = {"//;\\n1;2;3$6", "//!\\n4!7!9$20", "//@\\n11@23@74$108", "1,2,3$6", "4:5:6$15", "24,55:11$90"}, delimiter = '$')
+  @ParameterizedTest
+  void calculateTest(String given, String expectation) {
+    assertThat(selectOperator(given).calculate(given)).isEqualTo(new Number(expectation));
   }
 
 }
