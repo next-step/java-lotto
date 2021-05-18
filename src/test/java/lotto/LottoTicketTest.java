@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,20 +28,13 @@ public class LottoTicketTest {
     @DisplayName("로또티켓은 고유한 6개의 로또번호가 아니면 IllegalArgumentException이 발생한다")
     public void 로또티켓은_고유한_6개의_로또번호가_아니면_IllegalArgumentException이_발생한다(String fixtureLottoNumber) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(convertStringToLottoNumberList(fixtureLottoNumber)));
+                .isThrownBy(() -> new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList(fixtureLottoNumber)));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6", "1,2,3,5,8,9", "10,11,12,13,14,15"})
     @DisplayName("로또티켓은 6개의 로또번호를 가진다")
     public void 로또티켓은_6개의_로또번호를_가진다(String fixtureLottoNumber) {
-        assertDoesNotThrow(() -> new LottoTicket(convertStringToLottoNumberList(fixtureLottoNumber)));
-    }
-
-    private List<LottoNumber> convertStringToLottoNumberList(String fixtureLottoNumber) {
-        return Arrays.stream(fixtureLottoNumber.split(","))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(toList());
+        assertDoesNotThrow(() -> new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList(fixtureLottoNumber)));
     }
 }
