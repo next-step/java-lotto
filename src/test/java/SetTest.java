@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Set Collection에 대한 학습 테스트")
@@ -33,5 +34,13 @@ public class SetTest {
 	@DisplayName("요구사항 2 : contains() 메소드를 활용한 값이 존재 유무 확인 ")
 	void contains(int number) {
 		assertThat(numbers.contains(number)).isTrue();
+	}
+
+	@ParameterizedTest(name = "Case : {argumentsWithNames}")
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
+	@DisplayName("요구사항 3 : contains() 메소드를 활용한 값이 포함 결과값 확인")
+	void containsWithResult(String input, String expected) {
+		String result = numbers.contains(Integer.parseInt(input)) ? "true" : "false";
+		assertThat(result).isEqualTo(expected);
 	}
 }
