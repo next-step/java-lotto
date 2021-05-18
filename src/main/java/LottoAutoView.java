@@ -10,10 +10,10 @@ public class LottoAutoView {
         return scanner.nextInt();
     }
 
-    public void printLotto(int quantity, List<LottoAutoModel> lottos) {
+    public void printLotto(int quantity, List<LottoModel> lottos) {
         System.out.println(quantity + "개를 구매했습니다.");
-        for (LottoAutoModel lotto : lottos) {
-            System.out.println(lotto.getAutoNumbers());
+        for (LottoModel lotto : lottos) {
+            System.out.println(lotto.getNumbers());
         }
     }
 

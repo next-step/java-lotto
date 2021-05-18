@@ -9,7 +9,7 @@ public class LottoAutoController {
         int price = view.inputPrice();
         int quantity = price / 1000;
 
-        List<LottoAutoModel> lottos = new ArrayList<>();
+        List<LottoModel> lottos = new ArrayList<>();
         setLotto(quantity, lottos);
         view.printLotto(quantity, lottos);
 
@@ -21,9 +21,9 @@ public class LottoAutoController {
         view.outputWinningStatistic(getEarningRate(price));
     }
 
-    public void setLotto(int quantity, List<LottoAutoModel> lottos) {
+    public void setLotto(int quantity, List<LottoModel> lottos) {
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new LottoAutoModel());
+            lottos.add(new LottoModel());
         }
     }
 

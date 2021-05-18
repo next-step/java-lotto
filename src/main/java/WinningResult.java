@@ -49,9 +49,9 @@ public class WinningResult {
         }
     }
 
-    public void getWinningResult(List<LottoAutoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        for (LottoAutoModel lotto : lottos) {
-            int count = lotto.setWinningResult(winningNumbers);
+    public void getWinningResult(List<LottoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
+        for (LottoModel lotto : lottos) {
+            int count = lotto.countWinningNumbers(winningNumbers);
             boolean bonus = lotto.contains(bonusNumber);
             WinningResult.addCount(count, bonus);
         }
