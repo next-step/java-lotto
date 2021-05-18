@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringTest {
 
@@ -28,5 +29,17 @@ public class StringTest {
 
     // Then
     assertThat(splitNumber).containsExactly("1");
+  }
+
+  @Test
+  void givenNumbersWithParentheses_whenSubstring_thenGetNumbersWithoutParentheses() {
+    // Given
+    String numbersWithParentheses = "(1,2)";
+
+    // When
+    String numbers = numbersWithParentheses.substring(1, numbersWithParentheses.length() - 1);
+
+    // Then
+    assertEquals("1,2", numbers);
   }
 }
