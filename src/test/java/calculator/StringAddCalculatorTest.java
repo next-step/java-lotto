@@ -36,4 +36,12 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1:2,3|6", "4:3,2|9"}, delimiter = '|')
+    @DisplayName("쉼표(,), 콜론(:)를 구분자로 문자열을 전달하면 숫자 합을 계산")
+    void splitByColonAndCommaTest(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
