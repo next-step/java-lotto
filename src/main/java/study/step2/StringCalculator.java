@@ -5,8 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    private final String CUSTOM_DELIMITER_REGEX = "^//(.)\n";
-    private final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private final static String CUSTOM_DELIMITER_REGEX = "^//(.)\n";
+    private final static String DEFAULT_DELIMITER_REGEX = "[,:]";
+
+    private Pattern customPattern;
+
+    public StringCalculator() {
+        customPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    }
 
     public int sum(String text) {
         if (isEmpty(text)) {
@@ -28,36 +34,37 @@ public class StringCalculator {
     }
 
     private String getCustomDelimiter(String text) {
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
+        final int firstMatchIndex = 1;
 
-        if (m.find()) {
-            return m.group(1);
+        Matcher matcher = customPattern.matcher(text);
+        if (matcher.find()) {
+            return matcher.group(firstMatchIndex);
         }
 
         return DEFAULT_DELIMITER_REGEX;
     }
 
-    private int sum(String ...number) {
-        return Arrays.stream(number)
+    private int sum(String ...num) {
+        return Arrays.stream(num)
                 .mapToInt(this::parseInt)
                 .sum();
     }
 
-    private int parseInt(String number) {
+    private int parseInt(String num) {
         try {
-            Integer num = Integer.parseInt(number);
+            int number = Integer.parseInt(num);
 
-            return parseInt(num);
+            return parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구분자를 제외한 텍스트는 숫자형식만 가능합니다.");
         }
     }
 
-    private int parseInt(Integer num) {
-        if (num < 0) {
+    private int parseInt(int number) {
+        if (number < 0) {
             throw new IllegalArgumentException("음수 값 덧셈은 지원하지 않습니다.");
         }
 
-        return num;
+        return number;
     }
 }
