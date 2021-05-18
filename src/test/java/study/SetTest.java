@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class SetTest {
 	private Set<Integer> numbers;
@@ -28,9 +28,9 @@ public class SetTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = {1, 2, 3})
-	void contains(int input) {
-		assertThat(numbers.contains(input)).isTrue();
+	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "0:false"}, delimiter = ':')
+	void contains(int input, boolean expected) {
+		assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 
 }
