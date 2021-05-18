@@ -2,7 +2,7 @@ package study;
 
 public class StringAddCalculator {
 
-	public static final String SEPERATORS = ",|:";
+	private static final String SEPERATORS = ",|:";
 
 	public static int splitAndSum(String text) {
 		if (text == null || text.trim().isEmpty()) {
