@@ -13,7 +13,16 @@
 - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외 throw
 
 ## 구현 기능 목록
-- 구분자 기능
-- 문자열 덧셈 기능
-- 커스텀 구분자 지정 기능
-- 예외 처리 기능
+- StringCalculator Class
+  - 구분자 기능 / 커스텀 구분자 지정 기능
+  - 구분자 기준으로 문자열 Split  
+  - 덧셈 기능 PositiveNumbers 역할 위임
+  
+- PositiveNumbers Class
+  - PositiveNumber List
+  - 문자열 덧셈 기능
+
+- PositiveNumber Class
+  - 양수 데이터 저장
+  - 예외 처리 기능
+    
