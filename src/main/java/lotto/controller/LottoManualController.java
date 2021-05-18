@@ -1,3 +1,8 @@
+package lotto.controller;
+
+import lotto.view.LottoManualView;
+import lotto.model.LottoModel;
+
 import java.util.ArrayList;
 import java.util.List;
 

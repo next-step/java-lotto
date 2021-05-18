@@ -36,13 +36,13 @@
 [ x ] 당첨 결과를 출력한다.\
 [ x ] 총 수익률(당첨금액/구매금액) 을 계산하여 출력한다.
 
-### LottoAutoModel 의 역할
+### lotto.model.LottoAutoModel 의 역할
 - 1부터 45까지의 숫자를 갖고 있다.
 - 1부터 45까지의 숫자를 섞어서 6개의 숫자를 자동으로 선정한다.
 - 외부에서 로또 번호들을 볼 수 있다.
 - 외부로부터 당첨번호와 보너스번호를 입력받으면 몇등에 당첨되었는지 반환해준다.
 
-### LottoAutoView 의 역할
+### lotto.view.LottoAutoView 의 역할
 - 사용자로부터 로또구매금액을 입력받는다.
 - 사용자로부터 당첨번호와 보너스번호를 입력받는다.
   
@@ -51,7 +51,7 @@
 
 - 사용자가 구매한 로또들의 당첨 결과와 총 수익률을 출력해준다.
 
-### LottoAutoController 의 역할
+### lotto.controller.LottoAutoController 의 역할
 
 # 로또 수동
 ## Lotto Manual 구현 기능 목록
@@ -71,12 +71,12 @@
 [ x ] 당첨 결과를 출력한다.\
 [ x ] 총 수익률(당첨금액/구매금액) 을 계산하여 출력한다.
 
-### LottoModel 의 역할
+### lotto.model.LottoModel 의 역할
 - 로또 한 장 안에 사용자가 수동으로 입력하거나 자동으로 선택된 번호 6개가 저장되어 있다.
 - 외부에서 로또 번호들을 볼 수 있다.
 - 외부로부터 당첨번호와 보너스번호를 입력받으면 몇등에 당첨되었는지 반환해준다.
 
-### LottoManualView 의 역할
+### lotto.view.LottoManualView 의 역할
 - 사용자로부터 로또구매금액을 입력받는다.
 - 사용자로부터 로또수동갯수를 입력받는다.
 - 사용자로부터 로또수동번호들을 입력받는다.
@@ -87,6 +87,6 @@
 
 - 사용자가 구매한 로또들의 당첨 결과와 총 수익률을 출력해준다.
 
-### LottoManualController 의 역할
+### lotto.controller.LottoManualController 의 역할
 
 

@@ -1,3 +1,5 @@
+package lotto.model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +9,7 @@ public class LottoModel {
     private static final int numberOfNumbers = 6;
     private static final int maxNumber = 45;
 
-    LottoModel(String manualNumbers) {
+    public LottoModel(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
         setManualLotto(splitManualNumbers);
     }
@@ -27,7 +29,7 @@ public class LottoModel {
         }
     }
 
-    LottoModel() {
+    public LottoModel() {
         List<Integer> rangeOfNumbers = new ArrayList<>();
         for (int j = 0; j < maxNumber; j++) {
             rangeOfNumbers.add(j + 1);

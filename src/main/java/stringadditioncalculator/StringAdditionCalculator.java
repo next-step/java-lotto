@@ -1,17 +1,17 @@
-import java.util.Arrays;
+package stringadditioncalculator;
+
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAdditionCalculatorMain {
-    public static void main(String[] args) {
-//        StringAdditionCalculator calculator = new StringAdditionCalculator();
-//        String text = calculator.input();
-//        calculator.add(text);
+public class StringAdditionCalculator {
 
-        int custom = add("//;\n1;2,3");
-        System.out.println(custom);
+    public String input() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
-    public static int one(String text) {
+
+    public int one(String text) {
         if (text.matches("\\d+")) {
             int number = Integer.parseInt(text);
             System.out.println(number);
@@ -20,7 +20,7 @@ public class StringAdditionCalculatorMain {
         throw new RuntimeException();
     }
 
-    public static int colon(String text) {
+    public int colon(String text) {
         String[] tokens = text.split(",|:");
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].equals("")) {
@@ -29,26 +29,8 @@ public class StringAdditionCalculatorMain {
         }
         return sum(tokens);
     }
-    public static int add(String text) {
-        if (text == null || text.isEmpty()) {
-            System.out.println(0);
-            return 0;
-        }
-        if (text.contains("-")) {
-            throw new RuntimeException();
-        }
-        if (text.length() == 1) {
-            return one(text);
-        }
-        if (text.contains(":") || text.contains(",")) {
-            return colon(text);
-        }
-        if (text.contains("//") && text.contains(("\n"))) {
-            return custom(text);
-        }
-        throw new RuntimeException();
-    }
-    private static int sum(String[] numbers) {
+
+    private int sum(String[] numbers) {
         int sum = 0;
         for (String s : numbers) {
             int number = Integer.parseInt(s);
@@ -58,7 +40,7 @@ public class StringAdditionCalculatorMain {
         return sum;
     }
 
-    public static int custom(String text) {
+    public int custom(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         int sum = 0;
         if (m.find()) {
@@ -69,5 +51,25 @@ public class StringAdditionCalculatorMain {
         }
         System.out.println(sum);
         return sum;
+    }
+
+    public int add(String text) {
+        if (text == null || text.isEmpty()) {
+            System.out.println(0);
+            return 0;
+        }
+        if (text.contains("-")) {
+            throw new RuntimeException();
+        }
+        if (text.length() == 1) {
+            return one(text);
+        }
+        if (text.contains("//") && text.contains(("\n"))) {
+            return custom(text);
+        }
+        if (text.contains(":") || text.contains(",")) {
+            return colon(text);
+        }
+        throw new RuntimeException();
     }
 }

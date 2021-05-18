@@ -1,3 +1,5 @@
+package lotto;
+
 public enum WinningPrice {
     FIFTHPRICE(5_000),
     FOURTHPRICE(50_000),

@@ -1,7 +1,14 @@
+package lotto.view;
+
+import lotto.WinningResult;
+import lotto.controller.LottoManualController;
+import lotto.model.LottoModel;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LottoAutoView {
+public class LottoManualView {
 
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
@@ -10,8 +17,30 @@ public class LottoAutoView {
         return scanner.nextInt();
     }
 
-    public void printLotto(int quantity, List<LottoModel> lottos) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    public int inputManualLottoQuantity() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public List<String> inputManualLottoNumbers(int manualQuantity) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<String> manualNumbers = new ArrayList<>();
+
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualQuantity; i++) {
+            manualNumbers.add(scanner.nextLine());
+        }
+        return manualNumbers;
+    }
+
+    public void printLottos(int manualQuantity, int autoQuantity, List<LottoModel> lottos) {
+        System.out.println();
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "개를 구매했습니다.");
         for (LottoModel lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
@@ -32,7 +61,7 @@ public class LottoAutoView {
         return scanner.nextLine();
     }
 
-    public void outputWinningStatistic(float earningRate) {
+    public void outputWinningStatistics(float earningRate) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");

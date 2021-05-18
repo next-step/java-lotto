@@ -1,3 +1,7 @@
+package lotto;
+
+import lotto.model.LottoModel;
+
 import java.util.List;
 
 public class WinningResult {
@@ -8,7 +12,7 @@ public class WinningResult {
     private static int numberOfFourthPlace = 0;
     private static int numberOfFifthPlace = 0;
 
-    WinningResult() {
+    public WinningResult() {
     }
 
     public static int getNumberOfFirstPlace() {
