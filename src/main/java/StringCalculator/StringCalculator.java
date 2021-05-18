@@ -6,25 +6,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+
+    private List<String> splitText(final String text) {
+        return Arrays.asList(customSpliter(text));
+    }
+
     public int add(final String text) {
         String newText = isEmptyText(text);
-        List<String> splittedText = splitText(newText);
+        List<String> splitText = splitText(newText);
         int result = 0;
 
-        for (String number : splittedText) {
+
+        for (String number : splitText) {
             result += Integer.parseInt(number);
         }
 
         return result;
     }
 
-    public List<String> splitText(final String text) {
-        return Arrays.asList(customSpliter(text));
+    public boolean format(final String text) {
+        if (text.contains(",") || text.contains(":")) {
+            return false;
+        }
+        return true;
     }
 
     public String isEmptyText(final String text) {
         if (text == null || text.length() == 0) {
             return "0";
+        }
+        if (format(text)) {
+            throw new RuntimeException("계산할수 없는 타입입니다.");
         }
         if (isNegative(text)) {
             throw new RuntimeException("음수는 불가능.");
@@ -39,7 +51,7 @@ public class StringCalculator {
         return false;
     }
 
-    public String[] customSpliter(final String text) {
+    private String[] customSpliter(final String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);

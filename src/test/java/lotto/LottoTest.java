@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class PlayLottoTest {
+public class LottoTest {
 
     @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.")
     @Test
@@ -40,6 +40,4 @@ public class PlayLottoTest {
 
         assertThat(lotto.sortLottoNumbers()).isSorted();
     }
-
-
 }
