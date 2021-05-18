@@ -3,7 +3,7 @@ package calculator;
 public class StringAddCalculator {
 
     private static final int DEFAULT_SUM_NUMBER = 0;
-    private static final String SEPARATOR_COMMA = ",";
+    private static final String SEPARATOR = ",|:";
 
     public static int splitAndSum(String input) {
         if (!validationCheck(input)) {
@@ -16,7 +16,7 @@ public class StringAddCalculator {
     private static int addNumbers(String input) {
         int sum = DEFAULT_SUM_NUMBER;
 
-        String[] splitedText = input.split(SEPARATOR_COMMA);
+        String[] splitedText = input.split(SEPARATOR);
         for (String text : splitedText) {
             sum += Integer.parseInt(text);
         }
