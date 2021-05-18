@@ -30,6 +30,9 @@ public class LottoManualController {
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
 
+        checkWinningNumbers(winningNumbers);
+        checkBonusNumber(bonusNumber);
+
         getWinningResult(lottos, winningNumbers, bonusNumber);
         view.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
     }
