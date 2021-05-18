@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static stringadder.domain.DefaultDelimiterOperator.makeDefaultDelimiterOperatorFromOperatorSelector;
 
 class DefaultDelimiterOperatorTest {
@@ -15,6 +16,13 @@ class DefaultDelimiterOperatorTest {
   @ParameterizedTest
   void makeDefaultDelimiterOperatorFromOperatorSelectorTest(String given) {
     assertThat(makeDefaultDelimiterOperatorFromOperatorSelector(given)).isEqualTo(makeDefaultDelimiterOperatorFromOperatorSelector(given));
+  }
+
+  @DisplayName("기본 구분자 형태의 문자열이 들어오지 않으면 IllegalArgumentException 던짐")
+  @ValueSource(strings = {"//;\\n1;2;3", "//!\\n4!7!9", "//@\\n11@23@74"})
+  @ParameterizedTest
+  void invalidFormatTest(String given) {
+    assertThatThrownBy(() -> makeDefaultDelimiterOperatorFromOperatorSelector(given)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @DisplayName("입력값의 합계를 구하는 테스트")
