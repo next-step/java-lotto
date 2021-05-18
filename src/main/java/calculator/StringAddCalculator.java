@@ -27,7 +27,15 @@ public class StringAddCalculator {
     private static int sum(String[] splits) {
         int result = 0;
         for (String split : splits) {
-            result += Integer.parseInt(split);
+            result += parseIntPositive(split);
+        }
+        return result;
+    }
+
+    private static int parseIntPositive(String split) {
+        int result = Integer.parseInt(split);
+        if (result < 0) {
+            throw new RuntimeException("음수를 입력할 수 없습니다.");
         }
         return result;
     }

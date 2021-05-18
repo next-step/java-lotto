@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -53,5 +54,14 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
 
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,-1,2", "-1,-2,-3"})
+    @DisplayName("음수를 전달할 경우 예외 발생")
+    void splitNegativeTest(String input) {
+
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class);
     }
 }
