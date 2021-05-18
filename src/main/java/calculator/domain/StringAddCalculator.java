@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static final String EXPRESSION_DEFAULT_SEPARATOR = ",|:";
     private static final int DEFAULT_NUMBER = 0;
 
-    private static final String CUSTOM_SEPARATOR_FIND_EXPRESSION = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_SEPARATOR_FIND_EXPRESSION_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_SEPARATOR_INDEX = 1;
     private static final int CUSTOM_FORMULA_INDEX = 2;
 
@@ -33,11 +33,11 @@ public class StringAddCalculator {
     }
 
     private static CalculatorExpression getCalculatorExpression(String expression) {
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_FIND_EXPRESSION).matcher(expression);
+        Matcher customSeparatorFindMatcher = CUSTOM_SEPARATOR_FIND_EXPRESSION_PATTERN.matcher(expression);
 
-        if (m.find()) {
-            String customDelimiter = m.group(CUSTOM_SEPARATOR_INDEX);
-            String formula = m.group(CUSTOM_FORMULA_INDEX);
+        if (customSeparatorFindMatcher.find()) {
+            String customDelimiter = customSeparatorFindMatcher.group(CUSTOM_SEPARATOR_INDEX);
+            String formula = customSeparatorFindMatcher.group(CUSTOM_FORMULA_INDEX);
 
             return new CalculatorExpression(customDelimiter, formula);
         }
