@@ -18,4 +18,19 @@ public class StringTest {
 		assertThat(input.substring(1, input.length() - 1)).isEqualTo("1,2");
 	}
 
+	@Test
+	@DisplayName("요구사항3 : charAt 테스트")
+	void charAtSuccess() {
+		String input = "abc";
+		assertThat(input.charAt(0)).isEqualTo('a');
+		assertThat(input.charAt(1)).isEqualTo('b');
+		assertThat(input.charAt(2)).isEqualTo('c');
+	}
+
+	@Test
+	@DisplayName("요구사항3 : charAt 실패 테스트")
+	void charAtFail() {
+		assertThatThrownBy(() -> "abc".charAt(3)).isInstanceOf(IndexOutOfBoundsException.class)
+			.hasMessageContaining("String index out of range: 3");
+	}
 }
