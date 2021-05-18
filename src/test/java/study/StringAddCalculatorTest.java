@@ -14,6 +14,9 @@ public class StringAddCalculatorTest {
 
 		result = StringAddCalculator.splitAndSum("");
 		assertThat(result).isEqualTo(0);
+
+		result = StringAddCalculator.splitAndSum(" ");
+		assertThat(result).isEqualTo(0);
 	}
 
 	@Test
