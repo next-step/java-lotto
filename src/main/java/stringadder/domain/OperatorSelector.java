@@ -3,7 +3,7 @@ package stringadder.domain;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public enum Operator {
+public enum OperatorSelector {
   CUSTOM_DELIMITER(Pattern.compile("//(.)\\\\n(\\d+\\1)*\\d+")),
   DEFAULT_DELIMITER(Pattern.compile("(\\d+[,:])+\\d+"));
 
@@ -11,13 +11,13 @@ public enum Operator {
 
   private final Pattern matchSelector;
 
-  Operator(Pattern matchSelector) {
+  OperatorSelector(Pattern matchSelector) {
     this.matchSelector = matchSelector;
   }
 
-  public static Operator selectOperator(String input) {
+  public static OperatorSelector selectOperator(String input) {
     return Arrays.stream(values())
-            .filter(operator -> isInputMatched(operator.matchSelector, input))
+            .filter(operatorSelector -> isInputMatched(operatorSelector.matchSelector, input))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(INVALID_FORMAT_INPUT));
   }

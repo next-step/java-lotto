@@ -6,9 +6,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static stringadder.domain.Operator.*;
+import static stringadder.domain.OperatorSelector.*;
 
-class OperatorTest {
+class OperatorSelectorTest {
 
   @DisplayName("기본 구분자 형태의 문자열이 전달되면 DEFAULT_DELIMITER enum 반환")
   @ValueSource(strings = {"1,2,3", "4:5:6", "24,55:11"})
