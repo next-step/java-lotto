@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,5 +24,11 @@ public class SetTest {
 	public void sizeTest() {
 		int actualSize = numbers.size();
 		assertThat(actualSize).isEqualTo(3);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 1, 2, 3 })
+	public void setTest2(int number) {
+		assertThat(numbers.contains(number)).isTrue();
 	}
 }
