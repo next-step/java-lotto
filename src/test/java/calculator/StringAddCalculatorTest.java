@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,4 +18,12 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1,1", "2,2", "3,3"})
+    @DisplayName("숫자 1개 입력 시 해당 숫자 반환")
+    void oneNumberTest(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
