@@ -1,3 +1,4 @@
+import javax.xml.bind.PrintConversionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,9 @@ public class LottoAutoController {
         LottoAutoView view = new LottoAutoView();
 
         int price = view.inputPrice();
-        int quantity = price / 1000;
+
+        LottoPrice lottoPrice = new LottoPrice();
+        int quantity = lottoPrice.getQuantity(price);
 
         setLotto(quantity, lottos);
         view.printLotto(quantity, lottos);
