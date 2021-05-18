@@ -15,6 +15,12 @@ public class StringAddCalculatorTest {
 		verifyResult("", 0);
 	}
 
+	@Test
+	@DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+	public void splitAndSum_숫자하나() throws Exception {
+		verifyResult("1", 1);
+	}
+
 	private void verifyResult(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
