@@ -17,9 +17,7 @@ public class LottoAutomaticMain {
         resultView.resultBuyPrice(buyCount);
 
         Lottos lottos = lottoGame.getLottos(buyCount);
+        resultView.resultLottos(lottos);
 
-        for(LottoAuto lotto : lottos){
-            System.out.println(lotto.getlotto());
-        }
     }
 }
