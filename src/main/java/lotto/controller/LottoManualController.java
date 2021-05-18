@@ -61,45 +61,19 @@ public class LottoManualController {
         return bonusNumber;
     }
 
-    enum winningResult {
-        fifth(5000, 0),
-        fourth(50000, 0),
-        third(1500000, 0),
-        second(30000000, 0),
-        first(2000000000, 0);
-
-        int winningPrice;
-        int numberOfWinnings;
-
-        winningResult(int winningPrice, int numberOfWinnings) {
-            this.winningPrice = winningPrice;
-            this.numberOfWinnings = numberOfWinnings;
+    private void checkWinningNumbers(List<Integer> winningNumbers) {
+        for (int number : winningNumbers) {
+            checkNumber(number);
         }
+    }
 
-        public int getWinningPrice() {
-            return winningPrice;
-        }
+    private void checkBonusNumber(int bonusNumber) {
+        checkNumber(bonusNumber);
+    }
 
-        public int getNumberOfWinnings() {
-            return numberOfWinnings;
-        }
-
-        public static void addCount(int count, boolean bonus) {
-            if (count == 3) {
-                winningResult.fifth.numberOfWinnings++;
-            }
-            if (count == 4) {
-                winningResult.fourth.numberOfWinnings++;
-            }
-            if (count == 5 && !bonus) {
-                winningResult.third.numberOfWinnings++;
-            }
-            if (count == 5 && bonus) {
-                winningResult.second.numberOfWinnings++;
-            }
-            if (count == 6) {
-                winningResult.first.numberOfWinnings++;
-            }
+    private void checkNumber(int number) {
+        if (number < 1 || 45 < number) {
+            throw new IllegalArgumentException("당첨번호는 1부터 45까지의 숫자입니다.");
         }
     }
 
