@@ -18,7 +18,7 @@ public class DefaultDelimiterOperator {
   }
 
   static DefaultDelimiterOperator makeDefaultDelimiterOperatorFromOperatorSelector(String input) {
-    if (isValidInputFormat(input)) {
+    if (!isValidInputFormat(input)) {
       throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_STRING_FORMAT);
     }
     return new DefaultDelimiterOperator(input);
