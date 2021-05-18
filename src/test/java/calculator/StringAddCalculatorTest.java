@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-
     @Test
     @DisplayName("SplitAndSum null 또는 빈문자")
     public void splitAndSum_null_또는_빈문자() {
@@ -26,7 +25,7 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("SplitAndSum 숫자하나")
-    public void splitAndSum_숫자하나() throws Exception {
+    public void splitAndSum_숫자하나() {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
@@ -34,14 +33,14 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @MethodSource(value = "calculatorResultsFixture")
     @DisplayName("SplitAndSum 기본구분자 및 커스텀 구분자")
-    public void splitAndSum_기본구분자_및_커스텀구분자(CalculatorResult expressionWithExceptSum) throws Exception {
+    public void splitAndSum_기본구분자_및_커스텀구분자(CalculatorResult expressionWithExceptSum) {
         int result = StringAddCalculator.splitAndSum(expressionWithExceptSum.getExpression());
         assertThat(result).isEqualTo(expressionWithExceptSum.getExceptSum());
     }
 
     @Test
     @DisplayName("SplitAndSum 음수")
-    public void splitAndSum_negative() throws Exception {
+    public void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
@@ -54,7 +53,6 @@ public class StringAddCalculatorTest {
                 new CalculatorResult("//@\n1@2@3", 6)
         );
     }
-
 
     static class CalculatorResult {
         private String expression;
