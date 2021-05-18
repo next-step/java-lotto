@@ -3,7 +3,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoAutoModel {
-
     private final List<Integer> autoNumbers = new ArrayList<>();
     private static final int numberOfNumbers = 6;
     private static final int maxNumber = 45;

@@ -4,6 +4,8 @@ import java.util.List;
 
 public class LottoModel {
     private List<Integer> numbers = new ArrayList<>();
+    private static final int numberOfNumbers = 6;
+    private static final int maxNumber = 45;
 
     LottoModel(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
@@ -27,12 +29,12 @@ public class LottoModel {
 
     LottoModel() {
         List<Integer> rangeOfNumbers = new ArrayList<>();
-        for (int j = 0; j < 45; j++) {
+        for (int j = 0; j < maxNumber; j++) {
             rangeOfNumbers.add(j + 1);
         }
 
         Collections.shuffle(rangeOfNumbers);
-        for (int j = 0; j < 6; j++) {
+        for (int j = 0; j < numberOfNumbers; j++) {
             addNumber(rangeOfNumbers.get(j));
         }
         Collections.sort(numbers);
@@ -49,7 +51,7 @@ public class LottoModel {
 
     public int countWinningNumbers(List<Integer> winningNumbers) {
         int count = 0;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < numberOfNumbers; i++) {
             if (numbers.contains(winningNumbers.get(i))) {
                 count++;
             }
