@@ -1,26 +1,31 @@
 package lottoAuto.view;
 
+import lottoAuto.service.Lotto;
+import lottoAuto.service.Lottos;
 import lottoAuto.vo.LottoResultVo;
 
 import java.util.*;
 
 public class LottoAutoResultView extends LottoAutoInputView {
-    public List<List> showMyLottoInformation() {
+    public int showAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        inputPrice();
-
-        System.out.println(lottoAutoResultService.showAmount() + "개를 구매했습니다.");
-        List<List> myLottoNumber = lottoAutoResultService.showLottoNumber();
-        for (int i = 0; i < myLottoNumber.size(); i++) {
-            System.out.println(myLottoNumber.get(i));
-        }
-        return myLottoNumber;
+        int amount = inputPrice();
+        return amount;
     }
 
-    public List<Integer> showWinningNumber() {
+    public List<Lotto> showMyLottoInformation(int amount) {
+        System.out.println(amount + "개를 구매했습니다.");
+        List<Lotto> userLotto = lottoAutoInputService.inputUserLottoNumber(amount);
+        for (int i = 0; i < userLotto.size(); i++) {
+            System.out.println(userLotto.get(i));
+        }
+        return userLotto;
+    }
+
+    public Lotto showWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> winningNumber = inputWinningNumber();
-        return winningNumber;
+        Lotto winningLotto = inputWinningNumber();
+        return winningLotto;
     }
 
     public int showBonusBall() {
