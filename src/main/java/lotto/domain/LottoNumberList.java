@@ -1,20 +1,22 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberList {
 
     final static int LOTTO_MAX_NUM = 45;
-    final static int LOTTO_SELECT_NUM = 6;
+    final static int LOTTO_MIN_NUM = 1;
+    public static final List<Integer> LOTTO_NUMBER_LIST = new ArrayList<>();
 
-    List<Integer> lottoNumberList;
 
-    public LottoNumberList() {
-        List<Integer> lottoNumberList = new ArrayList<>();
-        for (int i = 1; i <= LOTTO_MAX_NUM; i++) {
-            lottoNumberList.add(i);
+    static {
+        for (int i = LOTTO_MIN_NUM; i <= LOTTO_MAX_NUM; i++) {
+            LOTTO_NUMBER_LIST.add(i);
         }
-        this.lottoNumberList = lottoNumberList;
     }
+
+
+
 }
