@@ -41,7 +41,7 @@ public class LottoAutoController {
         return bonusNumber;
     }
 
-    enum winningResult {
+    enum WinningResult {
         fifth(5000, 0),
         fourth(50000, 0),
         third(1500000, 0),
@@ -51,7 +51,7 @@ public class LottoAutoController {
         int winningPrice;
         int numberOfWinnings;
 
-        winningResult(int winningPrice, int numberOfWinnings) {
+        WinningResult(int winningPrice, int numberOfWinnings) {
             this.winningPrice = winningPrice;
             this.numberOfWinnings = numberOfWinnings;
         }
@@ -66,19 +66,19 @@ public class LottoAutoController {
 
         public static void addCount(int count, boolean bonus) {
             if (count == 3) {
-                winningResult.fifth.numberOfWinnings++;
+                WinningResult.fifth.numberOfWinnings++;
             }
             if (count == 4) {
-                winningResult.fourth.numberOfWinnings++;
+                WinningResult.fourth.numberOfWinnings++;
             }
             if (count == 5 && !bonus) {
-                winningResult.third.numberOfWinnings++;
+                WinningResult.third.numberOfWinnings++;
             }
             if (count == 5 && bonus) {
-                winningResult.second.numberOfWinnings++;
+                WinningResult.second.numberOfWinnings++;
             }
             if (count == 6) {
-                winningResult.first.numberOfWinnings++;
+                WinningResult.first.numberOfWinnings++;
             }
         }
     }
@@ -87,16 +87,16 @@ public class LottoAutoController {
         for (LottoAutoModel lotto : lottos) {
             int count = lotto.setWinningResult(winningNumbers);
             boolean bonus = lotto.getAutoNumbers().contains(bonusNumber);
-            winningResult.addCount(count, bonus);
+            WinningResult.addCount(count, bonus);
         }
     }
 
     private float getEarningRate(int price) {
         float floatPrice = (float) price;
-        return (winningResult.fifth.getWinningPrice() * winningResult.fifth.getNumberOfWinnings()
-                + winningResult.fourth.getWinningPrice() * winningResult.fourth.getNumberOfWinnings()
-                + winningResult.third.getWinningPrice() * winningResult.third.getNumberOfWinnings()
-                + winningResult.second.getWinningPrice() * winningResult.second.getNumberOfWinnings()
-                + winningResult.first.getWinningPrice() * winningResult.first.getNumberOfWinnings()) / floatPrice;
+        return (WinningResult.fifth.getWinningPrice() * WinningResult.fifth.getNumberOfWinnings()
+                + WinningResult.fourth.getWinningPrice() * WinningResult.fourth.getNumberOfWinnings()
+                + WinningResult.third.getWinningPrice() * WinningResult.third.getNumberOfWinnings()
+                + WinningResult.second.getWinningPrice() * WinningResult.second.getNumberOfWinnings()
+                + WinningResult.first.getWinningPrice() * WinningResult.first.getNumberOfWinnings()) / floatPrice;
     }
 }

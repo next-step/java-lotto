@@ -21,20 +21,20 @@ public class LottoAutoTest {
     @DisplayName(value = "당첨결과 enum 에서 당첨금액을 가져와 보여준다.")
     @Test
     void show_winningPrice() {
-        assertThat(LottoAutoController.winningResult.fifth.getWinningPrice()).isEqualTo(5000);
+        assertThat(LottoAutoController.WinningResult.fifth.getWinningPrice()).isEqualTo(5000);
     }
 
     @DisplayName(value = "당첨결과 enum 에서 당첨횟수를 가져와 보여준다.")
     @Test
     void show_The_Number_of_Winnings() {
-        assertThat(LottoAutoController.winningResult.fifth.getNumberOfWinnings()).isEqualTo(0);
+        assertThat(LottoAutoController.WinningResult.fifth.getNumberOfWinnings()).isEqualTo(0);
     }
 
     @DisplayName(value = "당첨번호와 동일한 번호가 4개이면 4등 당첨횟수가 증가한다.")
     @Test
     void add_The_Number_of_Winnings() {
-        LottoAutoController.winningResult.addCount(4, true);
+        LottoAutoController.WinningResult.addCount(4, true);
 
-        assertThat(LottoAutoController.winningResult.fourth.getNumberOfWinnings()).isEqualTo(1);
+        assertThat(LottoAutoController.WinningResult.fourth.getNumberOfWinnings()).isEqualTo(1);
     }
 }
