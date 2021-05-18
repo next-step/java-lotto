@@ -34,8 +34,12 @@ public class Number {
     return new Number(one.inputNumber + theOther.inputNumber);
   }
 
+  public int getValue() {
+    return inputNumber;
+  }
+
   private void validatePositiveNumber(int number) {
-    if(number < ZERO) {
+    if (number < ZERO) {
       throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED);
     }
   }
