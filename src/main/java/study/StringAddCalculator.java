@@ -43,11 +43,11 @@ public class StringAddCalculator {
 	}
 
 	private static int sum(String[] numbers) {
-		int result = 0;
+		StringCalculatorNumber result = new StringCalculatorNumber(0);
 		for (String number : numbers) {
-			result += Integer.parseInt(number);
+			result.add(Integer.parseInt(number));
 		}
-		return result;
+		return result.get();
 	}
 
 	private static boolean isNumeric(String text) {
