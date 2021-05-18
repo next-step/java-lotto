@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,5 +44,14 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(input);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//'\n1'2'3"})
+    @DisplayName("(//)와 (\\n) 문자 사이에 커스텀 구분자 지정")
+    void splitByCustomDelimiterTest(String input) {
+        int result = StringAddCalculator.splitAndSum(input);
+
+        assertThat(result).isEqualTo(6);
     }
 }
