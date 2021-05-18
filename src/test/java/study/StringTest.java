@@ -37,4 +37,14 @@ public class StringTest {
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
                 .isThrownBy(() -> "abc".charAt(100));
     }
+
+    @Test
+    @DisplayName("split 사용시 pipe를 사용하면 여러개의 문자 기준으로 나눌 수 있다.")
+    public void split_사용시_pipe를_사용하면_여러개의_문자_기준으로_니눌_수_있다() {
+        String expression = "1,2:3";
+        String splitter = ",|:";
+
+        assertThat(expression.split(splitter))
+                .containsExactly("1", "2", "3");
+    }
 }
