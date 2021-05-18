@@ -39,7 +39,14 @@ public class StringAddCalculatorTest {
 		verifyResult("//;\n1;2;3", 6);
 	}
 
-		private void verifyResult(String input, int expected) {
+	@Test
+	@DisplayName("음수를 전달할 경우 RuntimeException 이 발생해야 한다.")
+	public void splitAndSum_negative() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+			.isInstanceOf(RuntimeException.class);
+	}
+
+	private void verifyResult(String input, int expected) {
 		int result = StringAddCalculator.splitAndSum(input);
 		assertThat(result).isEqualTo(expected);
 	}

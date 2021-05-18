@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +11,7 @@ public class StringAddCalculator {
 	private final static String DEFAULT_DELIMITER = "[,:]";
 
 	public static int splitAndSum(String input) {
-		return sum(split(input));
+		return sum(parseToPositiveNumberOrZero(split(input)));
 	}
 
 	private static String[] split(String input) {
@@ -24,10 +26,26 @@ public class StringAddCalculator {
 		return input.split(DEFAULT_DELIMITER);
 	}
 
-	private static int sum(String[] inputs) {
+	private static List<Integer> parseToPositiveNumberOrZero(String[] inputs) {
+		List<Integer> numbers = new ArrayList<>();
+		for (String input : inputs) {
+			numbers.add(parseToPositiveNumberOrZero(input));
+		}
+		return numbers;
+	}
+
+	private static int parseToPositiveNumberOrZero(String string) {
+		int number = Integer.parseInt(string);
+		if (number < 0) {
+			throw new RuntimeException("음수는 계산할 수 없습니다.");
+		}
+		return number;
+	}
+
+	private static int sum(List<Integer> numbers) {
 		int sum = 0;
-		for (String s : inputs) {
-			sum += Integer.parseInt(s);
+		for (Integer number : numbers) {
+			sum += number;
 		}
 		return sum;
 	}
