@@ -3,7 +3,7 @@ package study.calculator;
 import java.util.List;
 
 /**
- * 계산과정을 처리하한다.
+ * 계산과정을 처리한다.
  */
 public class CalculateProcessor {
     /**
