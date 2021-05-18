@@ -16,6 +16,9 @@ public class LottoAutoController {
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
 
+        checkWinningNumbers(winningNumbers);
+        checkBonusNumber(bonusNumber);
+
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
         view.outputWinningStatistic(getEarningRate(price));
@@ -42,6 +45,21 @@ public class LottoAutoController {
         return bonusNumber;
     }
 
+    private void checkWinningNumbers(List<Integer> winningNumbers) {
+        for (int number : winningNumbers) {
+            checkNumber(number);
+        }
+    }
+
+    private void checkBonusNumber(int bonusNumber) {
+        checkNumber(bonusNumber);
+    }
+
+    private void checkNumber(int number) {
+        if (number < 1 || 45 < number) {
+            throw new IllegalArgumentException("당첨번호는 1부터 45까지의 숫자입니다.");
+        }
+    }
 
     private float getEarningRate(int price) {
         float floatPrice = (float) price;
