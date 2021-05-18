@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,5 +42,18 @@ public class StringTest {
 
     // Then
     assertEquals("1,2", numbers);
+  }
+
+  @Test
+  @DisplayName("String 의 특정 위치 문자를 가져옴")
+  void givenCharacters_whenCharAt_thenGetOneCharacter() {
+    // Given
+    String abc = "abc";
+
+    // When
+    char c = abc.charAt(0);
+
+    // Then
+    assertEquals('a', c);
   }
 }
