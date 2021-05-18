@@ -30,7 +30,7 @@ public class LottoAutoController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
-        view.outputWinningStatistic(getEarningRate(price));
+        view.outputWinningStatistic(getEarningRate(getEarningPrice(), price));
     }
 
     public void setLotto(int quantity, List<LottoModel> lottos) {
@@ -70,12 +70,15 @@ public class LottoAutoController {
         }
     }
 
-    private float getEarningRate(int price) {
-        float floatPrice = (float) price;
+    private float getEarningRate(int earningPrice, int purchasePrice) {
+        return (float) earningPrice / (float) purchasePrice;
+    }
+
+    private int getEarningPrice() {
         return (WinningPrice.FIFTHPRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
                 + WinningPrice.FOURTHPRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
                 + WinningPrice.THIRDPRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
                 + WinningPrice.SECONDPRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
-                + WinningPrice.FIRSTPRICE.getPrice() * WinningResult.getNumberOfFirstPlace()) / floatPrice;
+                + WinningPrice.FIRSTPRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
     }
 }
