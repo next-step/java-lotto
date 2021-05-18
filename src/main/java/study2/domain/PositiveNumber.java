@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class PositiveNumber {
 
+    private static final int MIN_NUMBER = 0;
+
     private final int number;
 
     private PositiveNumber(int number) {
@@ -12,7 +14,7 @@ public class PositiveNumber {
     }
 
     private void validate(int number) {
-        if (number < 0) {
+        if (number < MIN_NUMBER) {
             throw new RuntimeException("음수가 존재합니다.");
         }
     }
