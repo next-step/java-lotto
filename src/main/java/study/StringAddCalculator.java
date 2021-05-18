@@ -2,7 +2,7 @@ package study;
 
 public class StringAddCalculator {
 
-	public static final String SEPERATOR = ",";
+	public static final String SEPERATORS = ",|:";
 
 	public static int splitAndSum(String text) {
 		if (text == null || text.trim().isEmpty()) {
@@ -11,15 +11,15 @@ public class StringAddCalculator {
 		if (isNumeric(text)) {
 			return Integer.parseInt(text);
 		}
-		return sumNumbersBySeperator(text, SEPERATOR);
+		return sumNumbersBySeperators(text, SEPERATORS);
 	}
 
-	private static int sumNumbersBySeperator(String text, String seperator) {
-		return sum(split(text, seperator));
+	private static int sumNumbersBySeperators(String text, String seperators) {
+		return sum(split(text, seperators));
 	}
 
-	private static String[] split(String text, String seperator) {
-		return text.split(seperator);
+	private static String[] split(String text, String seperators) {
+		return text.split(seperators);
 	}
 
 	private static int sum(String[] numbers) {
