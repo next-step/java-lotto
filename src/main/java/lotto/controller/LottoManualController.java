@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import lotto.view.LottoManualView;
+import lotto.LottoPrice;
+import lotto.WinningPrice;
+import lotto.WinningResult;
 import lotto.model.LottoModel;
 
 import java.util.ArrayList;
@@ -12,7 +15,10 @@ public class LottoManualController {
         LottoManualView view = new LottoManualView();
 
         int price = view.inputPrice();
-        int quantity = price / 1000;
+
+        LottoPrice lottoPrice = new LottoPrice();
+        int quantity = lottoPrice.getQuantity(price);
+
         int manualQuantity = view.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
