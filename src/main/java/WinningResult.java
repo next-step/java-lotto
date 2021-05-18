@@ -52,7 +52,7 @@ public class WinningResult {
     public void getWinningResult(List<LottoAutoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
         for (LottoAutoModel lotto : lottos) {
             int count = lotto.setWinningResult(winningNumbers);
-            boolean bonus = lotto.getAutoNumbers().contains(bonusNumber);
+            boolean bonus = lotto.contains(bonusNumber);
             WinningResult.addCount(count, bonus);
         }
     }

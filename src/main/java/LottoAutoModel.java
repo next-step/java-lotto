@@ -23,6 +23,10 @@ public class LottoAutoModel {
         return autoNumbers;
     }
 
+    public boolean contains(int bonusNumber) {
+            return autoNumbers.contains(bonusNumber);
+    }
+
     public int setWinningResult(List<Integer> winningNumbers) {
         int count = 0;
         for (int i = 0; i < 6; i++) {
