@@ -11,7 +11,7 @@ public class StringAddCalculator {
 	private final static String DEFAULT_DELIMITER = "[,:]";
 
 	public static int splitAndSum(String input) {
-		return sum(parseToPositiveNumberOrZero(split(input)));
+		return sum(parseToNonNegativeNumbers(split(input)));
 	}
 
 	private static String[] split(String input) {
@@ -26,15 +26,15 @@ public class StringAddCalculator {
 		return input.split(DEFAULT_DELIMITER);
 	}
 
-	private static List<Integer> parseToPositiveNumberOrZero(String[] inputs) {
+	private static List<Integer> parseToNonNegativeNumbers(String[] inputs) {
 		List<Integer> numbers = new ArrayList<>();
 		for (String input : inputs) {
-			numbers.add(parseToPositiveNumberOrZero(input));
+			numbers.add(parseNonNegativeNumber(input));
 		}
 		return numbers;
 	}
 
-	private static int parseToPositiveNumberOrZero(String string) {
+	private static int parseNonNegativeNumber(String string) {
 		int number = Integer.parseInt(string);
 		if (number < 0) {
 			throw new RuntimeException("음수는 계산할 수 없습니다.");
