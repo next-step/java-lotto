@@ -1,0 +1,26 @@
+package lotto;
+
+import lotto.domain.Amount;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+public class AmountTest {
+    @ParameterizedTest
+    @ValueSource(ints = {-1000, 0})
+    @DisplayName("금액은 음수 또는 0원이면 안된다")
+    public void 금액은_음수_또는_0원이면_안된다(int amount) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Amount(amount));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 100, 1000})
+    @DisplayName("금액은 양수이면 된다.")
+    public void 금액은_양수이면_안된다(int amount) {
+        assertDoesNotThrow(() -> new Amount(amount));
+    }
+}
