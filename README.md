@@ -7,3 +7,7 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 과정
+- [ ] 로또 번호는 1~45까지 가질 수 있다.
+- [ ] 로또 티켓은 6개의 숫자를 갖는다.
