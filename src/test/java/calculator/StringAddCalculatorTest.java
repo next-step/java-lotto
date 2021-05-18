@@ -1,13 +1,21 @@
 package calculator;
 
 import calculator.domain.StringAddCalculator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
+
     @Test
+    @DisplayName("SplitAndSum null 또는 빈문자")
     public void splitAndSum_null_또는_빈문자() {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
@@ -17,32 +25,52 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("SplitAndSum 숫자하나")
     public void splitAndSum_숫자하나() throws Exception {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
 
-    @Test
-    public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+    @ParameterizedTest
+    @MethodSource(value = "calculatorResultsFixture")
+    @DisplayName("SplitAndSum 기본구분자 및 커스텀 구분자")
+    public void splitAndSum_기본구분자_및_커스텀구분자(CalculatorResult expressionWithExceptSum) throws Exception {
+        int result = StringAddCalculator.splitAndSum(expressionWithExceptSum.getExpression());
+        assertThat(result).isEqualTo(expressionWithExceptSum.getExceptSum());
     }
 
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
+    @DisplayName("SplitAndSum 음수")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    public static List<CalculatorResult> calculatorResultsFixture() {
+        return Arrays.asList(
+                new CalculatorResult("1,2", 3),
+                new CalculatorResult("1,2:3", 6),
+                new CalculatorResult("//;\n1;2;3", 6),
+                new CalculatorResult("//@\n1@2@3", 6)
+        );
+    }
+
+
+    static class CalculatorResult {
+        private String expression;
+        private int exceptSum;
+
+        public CalculatorResult(String expression, int exceptSum) {
+            this.expression = expression;
+            this.exceptSum = exceptSum;
+        }
+
+        public String getExpression() {
+            return expression;
+        }
+
+        public int getExceptSum() {
+            return exceptSum;
+        }
     }
 }
