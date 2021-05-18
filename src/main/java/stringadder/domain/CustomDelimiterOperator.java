@@ -18,12 +18,12 @@ public class CustomDelimiterOperator {
 
   private CustomDelimiterOperator(String input) {
     String necessaryPart = PREFIX_PATTERN.matcher(input)
-                                        .replaceAll(EMPTY_STRING);
+                                          .replaceAll(EMPTY_STRING);
     this.inputNumbers = toNumbers(necessaryPart);
   }
 
   static CustomDelimiterOperator makeCustomDelimiterOperatorFromOperatorSelector(String input) {
-    if(!isValidInputFormat(input)) {
+    if (!isValidInputFormat(input)) {
       throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_STRING_FORMAT);
     }
     return new CustomDelimiterOperator(input);
@@ -31,7 +31,7 @@ public class CustomDelimiterOperator {
 
   private static boolean isValidInputFormat(String input) {
     return VALID_CUSTOM_DELIMITER_PATTERN.matcher(input)
-                                .matches();
+                                          .matches();
   }
 
   private List<Number> toNumbers(String input) {
@@ -45,7 +45,7 @@ public class CustomDelimiterOperator {
 
   public Number sum() {
     return inputNumbers.stream()
-                      .reduce(Number.ZERO_NUMBER, Number::sum);
+        .reduce(Number.ZERO_NUMBER, Number::sum);
   }
 
   @Override
