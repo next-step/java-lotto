@@ -1,14 +1,27 @@
 package calculator;
 
 public class StringAddCalculator {
-    public static int splitAndSum(String input) {
-        int sum = 0;
 
+    private static final int DEFAULT_SUM_NUMBER = 0;
+    private static final String SEPARATOR_COMMA = ",";
+
+    public static int splitAndSum(String input) {
         if (!validationCheck(input)) {
-            return sum;
+            return DEFAULT_SUM_NUMBER;
         }
 
-        return Integer.parseInt(input);
+        return addNumbers(input);
+    }
+
+    private static int addNumbers(String input) {
+        int sum = DEFAULT_SUM_NUMBER;
+
+        String[] splitedText = input.split(SEPARATOR_COMMA);
+        for (String text : splitedText) {
+            sum += Integer.parseInt(text);
+        }
+
+        return sum;
     }
 
     private static boolean validationCheck(String input) {
@@ -21,4 +34,6 @@ public class StringAddCalculator {
         }
         return true;
     }
+
+
 }
