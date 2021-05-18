@@ -13,23 +13,23 @@ public class LottoGame {
 
     final static int PRICE = 1000;
 
-    public int getBuyCount(int buyPrice){
-        return buyPrice/PRICE;
+    public int getBuyCount(int buyPrice) {
+        return buyPrice / PRICE;
     }
 
-    public Lotto getLotto(){
+    public Lotto getLotto() {
         return new Lotto();
     }
 
     public LottoList getLottoList(int buyCount) {
-        for(int i =0; i<buyCount; i ++){
+        for (int i = 0; i < buyCount; i++) {
             lottoList.add(getLotto());
         }
         return lottoList;
     }
 
-    public WinningLottoNumbers getWinningNumbers(String winningNumbers,int bonusNumber) {
-        winningLottoNumbers = new WinningLottoNumbers(winningNumbers,bonusNumber);
+    public WinningLottoNumbers getWinningNumbers(String winningNumbers, int bonusNumber) {
+        winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
 
         return winningLottoNumbers;
     }
@@ -37,16 +37,16 @@ public class LottoGame {
 
     public void getWinning() {
         List<Rank> list = new ArrayList<>();
-        for(Lotto lotto : lottoList){
+        for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
             boolean bonus = false;
-            for(int lottoNumber : lotto.getLotto()){
-                if(winningLottoNumbers.getWinningLottoNumbers().contains(lottoNumber)){
+            for (int lottoNumber : lotto.getLotto()) {
+                if (winningLottoNumbers.getWinningLottoNumbers().contains(lottoNumber)) {
                     numberOfWinnings++;
                 }
             }
-            if(lotto.getLotto().contains(winningLottoNumbers.getBonusNumber())){
-                bonus =true;
+            if (lotto.getLotto().contains(winningLottoNumbers.getBonusNumber())) {
+                bonus = true;
             }
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
             list.add(rank);

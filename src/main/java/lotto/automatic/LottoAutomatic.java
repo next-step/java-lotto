@@ -1,6 +1,8 @@
 package lotto.automatic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoAutomatic {
 
@@ -39,6 +41,7 @@ public class LottoAutomatic {
         }
         return lottoNumberList;
     }
+
     //자동 로또 뽑기
     public List<Integer> lottoOne(List<Integer> lottoNumberList) {
         Collections.shuffle(lottoNumberList);
@@ -49,32 +52,33 @@ public class LottoAutomatic {
         Collections.sort(lotto);
         return lotto;
     }
+
     //지난주 로또 당첨 번호
-    public List winningNumberList(String winningNumber){
-        List<Integer> winningNumberList =new ArrayList<>();
+    public List winningNumberList(String winningNumber) {
+        List<Integer> winningNumberList = new ArrayList<>();
         for (String element : winningNumber.split(", ")) {
             winningNumberList.add(Integer.valueOf(element));
         }
-        return  winningNumberList;
+        return winningNumberList;
     }
 
     //당첨 개수 비교
-    public void rank(ArrayList<List> lottoList, List<Integer> winningNumberList, int bonusNumber){
+    public void rank(ArrayList<List> lottoList, List<Integer> winningNumberList, int bonusNumber) {
         int numberOfWinnings = 0;
 
         boolean bonus = false;
         //로또 개수만큼
-        for(List<Integer> lotto : lottoList){
+        for (List<Integer> lotto : lottoList) {
             //로또 당첨 번호 맞추기
-            for (int lottoNum : lotto){
+            for (int lottoNum : lotto) {
                 //맞춘 개수
-                if(winningNumberList.contains(lotto.get(lottoNum))){
+                if (winningNumberList.contains(lotto.get(lottoNum))) {
                     numberOfWinnings++;
                 }
             }
             //보너스 번호 당첨 여부
-            if(winningNumberList.contains(bonusNumber)){
-                bonus =true;
+            if (winningNumberList.contains(bonusNumber)) {
+                bonus = true;
             }
 
 
@@ -85,7 +89,6 @@ public class LottoAutomatic {
 
         }
     }
-
 
 
 }

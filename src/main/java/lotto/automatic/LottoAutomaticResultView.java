@@ -19,7 +19,7 @@ public class LottoAutomaticResultView {
     }
 
     public void resultLottoList(ArrayList<List> lottoList) {
-        for(List lotto : lottoList) {
+        for (List lotto : lottoList) {
             System.out.println(lotto);
         }
     }

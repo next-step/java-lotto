@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -16,7 +15,6 @@ public class LottoNumbers {
             LOTTO_NUMBER_LIST.add(i);
         }
     }
-
 
 
 }

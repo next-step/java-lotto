@@ -6,6 +6,7 @@ import java.util.List;
 public class WinningLottoNumbers {
     private List<Integer> winningLottoNumbers;
     private int bonusNumber;
+
     public WinningLottoNumbers(String winningNumbers, int bonusNumber) {
         List<Integer> winningLottoNumbers = new ArrayList<>();
         for (String element : winningNumbers.split(",| ,")) {

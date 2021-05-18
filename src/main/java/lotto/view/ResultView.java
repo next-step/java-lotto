@@ -9,8 +9,8 @@ public class ResultView {
         System.out.println(buyCount + "개를 구매했습니다.");
     }
 
-    public void resultLottoList(LottoList lottoList){
-        for(Lotto lotto : lottoList){
+    public void resultLottoList(LottoList lottoList) {
+        for (Lotto lotto : lottoList) {
             System.out.println(lotto.getAutoLotto());
         }
     }

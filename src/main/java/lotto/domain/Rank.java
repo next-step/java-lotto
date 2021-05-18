@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -31,7 +27,7 @@ public enum Rank {
 
     public static Rank getRank(int winningOfNumber, boolean bonus) {
         return Arrays.stream(Rank.values())
-                .map(rank -> rank.matchCountToRank(winningOfNumber,bonus))
+                .map(rank -> rank.matchCountToRank(winningOfNumber, bonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_VALUE_MSG));
     }

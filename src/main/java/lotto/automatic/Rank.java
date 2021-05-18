@@ -27,7 +27,7 @@ public enum Rank {
 
     public static Rank getRank(int winningOfNumber, boolean bonus) {
         return Arrays.stream(Rank.values())
-                .map(rank -> rank.matchCountToRank(winningOfNumber,bonus))
+                .map(rank -> rank.matchCountToRank(winningOfNumber, bonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_VALUE_MSG));
     }
