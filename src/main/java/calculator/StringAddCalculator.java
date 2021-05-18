@@ -21,10 +21,10 @@ public class StringAddCalculator {
     }
 
     private static int addNumbers(String[] splitedNumberText) {
-        InputNumber sum = InputNumber.create(DEFAULT_SUM_NUMBER);
+        InputNumber sum = InputNumber.createZeroNumber();
 
         for (String numberText : splitedNumberText) {
-            sum.add(InputNumber.create(Integer.parseInt(numberText)));
+            sum.add(InputNumber.createPositiveNumber(Integer.parseInt(numberText)));
         }
 
         return sum.getNumber();
