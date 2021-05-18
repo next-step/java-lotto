@@ -14,7 +14,7 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> incrementedLottoNumberBySize) {
         this.lottoNumbers = new HashSet<>(incrementedLottoNumberBySize);
 
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(format("로또티켓은 %d개의 번호를 가져야 합니다.", LOTTO_NUMBERS_SIZE));
         }
     }
