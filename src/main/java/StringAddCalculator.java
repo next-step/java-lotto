@@ -4,6 +4,6 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		return 0;
+		return Integer.parseInt(inputText);
 	}
 }
