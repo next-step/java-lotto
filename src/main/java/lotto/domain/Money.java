@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
-
     public static final Money NONE = from(0);
+    private static final int SECOND_DECIMAL_PLACES = 2;
+
     private final BigDecimal money;
 
     public Money(BigDecimal money) {
@@ -17,7 +18,7 @@ public class Money {
     }
 
     public Money divide(Money price) {
-        return new Money(money.divide(price.money, 2, BigDecimal.ROUND_FLOOR));
+        return new Money(money.divide(price.money, SECOND_DECIMAL_PLACES, BigDecimal.ROUND_FLOOR));
     }
 
     public Money sum(Money input) {

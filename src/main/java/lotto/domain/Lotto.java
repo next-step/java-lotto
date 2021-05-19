@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Set;
 
 public class Lotto {
+    public static final int MININUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
     public static final long PRICE = 1_000L;
 
     private final LottoNumbers lottoNumbers;
