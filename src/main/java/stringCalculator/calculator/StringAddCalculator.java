@@ -1,6 +1,5 @@
 package stringCalculator.calculator;
 
-import stringCalculator.common.Constant;
 import stringCalculator.number.Positive;
 import stringCalculator.utility.PatternChecker;
 import stringCalculator.utility.Separator;
@@ -8,22 +7,21 @@ import stringCalculator.utility.Validator;
 
 public class StringAddCalculator {
     private final Separator separator;
+    private final PatternChecker patternChecker;
 
     public StringAddCalculator() {
         separator = new Separator();
+        patternChecker = new PatternChecker();
     }
 
     public int splitAndSum(String input) {
         if (!Validator.isValidInput(input)) {
             return 0;
         }
-        PatternChecker patternChecker = new PatternChecker(input);
-        String delimiter = Constant.DEFAULT_DELIMITER;
-        if (patternChecker.isCustomDelimiter()) {
-            input = patternChecker.getText();
-            delimiter = patternChecker.getDelimiter();
-        }
-        return sumPositive(separator.splitNumber(input, delimiter));
+        patternChecker.setTextAndDelimiter(input);
+        String text = patternChecker.getText();
+        String delimiter = patternChecker.getDelimiter();
+        return sumPositive(separator.splitNumber(text, delimiter));
     }
 
     private int sumPositive(String[] numbers) {

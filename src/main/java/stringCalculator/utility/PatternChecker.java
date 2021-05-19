@@ -6,23 +6,28 @@ import java.util.regex.Pattern;
 import stringCalculator.common.Constant;
 
 public class PatternChecker {
-    private static final int DELIMITER_INDEX = 1;
-    private static final int TEXT_INDEX = 2;
-    private final Matcher matcher;
+    String delimiter;
+    String text;
 
-    public PatternChecker(String input) {
-        matcher = Pattern.compile(Constant.CUSTOM_PATTERN).matcher(input);
+    public void setTextAndDelimiter(String input) {
+        initTextAndDelimiter(input);
+        Matcher matcher = Pattern.compile(Constant.CUSTOM_PATTERN).matcher(input);
+        if (matcher.find()) {
+            delimiter = matcher.group(Constant.DELIMITER_GROUP);
+            text = matcher.group(Constant.TEXT_GROUP);
+        }
     }
 
-    public boolean isCustomDelimiter() {
-        return matcher.find();
+    private void initTextAndDelimiter(String input) {
+        text = input;
+        delimiter = Constant.DEFAULT_DELIMITER;
     }
 
     public String getDelimiter() {
-        return matcher.group(DELIMITER_INDEX);
+        return delimiter;
     }
 
     public String getText() {
-        return matcher.group(TEXT_INDEX);
+        return text;
     }
 }
