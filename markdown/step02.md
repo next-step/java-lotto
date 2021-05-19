@@ -152,6 +152,7 @@ public class StringAddCalculatorTest {
     - [x] 2-5.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
 - [x] 3.분석 및 설계
     - [x] 3-1.Step02.md 작성
+    - [x] 3-2.도메인 주도 설계 이미지 작성
 - [ ] 4.구현
     - [x] 4-1.StringAddCalculator
         - [x] 4-1-1.splitAndSum_null_또는_빈문자
@@ -162,10 +163,29 @@ public class StringAddCalculatorTest {
         - [x] 4-1-6.splitAndSum_custom_구분자 - 구분자 사이 값이 없어 null이 포함된 경우 1,,1 -> null을 `0`으로 취급하여 처리
         - [x] 4-1-7.splitAndSum_negative
     - [ ] 4-2.Refactoring
-        - [ ] 4-2-1.
+        - [x] 4-2-1.도메인 주도 설계 이미지 작성
+        - [x] 4-2-2.Value Object
+            - [x] 4-2-2-1.Number class
+                - [x] 4-2-2-1-1.parse() : String을 int로 리턴
+                - [x] 4-2-2-1-2.parse() : `null` 또는 `""`입력시 `0`으로 리턴
+                - [x] 4-2-2-1-3.parse() : 음수 입력시 RuntimeException 발생
+            - [x] 4-2-2-2.InputText class
+                - [x] 4-2-2-2-1.split() : 쉼표구분자 또는 콜론 구분자
+                - [x] 4-2-2-2-2.split() : 커스텀 구분자
+        - [ ] 4-2-3.Aggregate
+            - [ ] 4-2-3-1.NumberGroup class
+                - [ ] 4-2-3-1-1.parse() : InputText를 Numbergroup으로 파싱
+        - [ ] 4-2-4.Service
+            - [ ] 4-2-4-1.StringAddCalculator
+                - [ ] 4-2-4-1-1.sum() : NumberGroup의 값 모두 계산
+        - [ ] 4-2-5.자바 8에 추가된 stream api를 사용하여 간결하게 작성
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
     - [ ] 5-2.checkstyle 문제없는지 확인
+    - [ ] 5-3.요구사항 조건들 충족했는지 확인
+        - [ ] 5-3-1.< 2 Depth 규칙
+        - [ ] 5-3-2.else 예약어 금지
+        - [ ] 5-3-3.함수(또는 메서드) 10라인 이하
 - [ ] 6.인수인계
     - [ ] 6-1.소감 및 피드백 정리
         - [ ] 6-1-1.느낀점 & 배운점 작성
@@ -176,11 +196,20 @@ public class StringAddCalculatorTest {
     - [ ] 6-3.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
 
 ### 2.3. 설계
-**_도메인 주도 설계 내용 작성_**
+> **_다른 분의 작성된 코드 리뷰에서 영감을 얻어 해당 부분을 추가 :_** [[로또 - 2단계] 문자열 덧셈 계산기 코드 리뷰 요청 #1524](https://github.com/next-step/java-lotto/pull/1524)
+#### 2.3.1. Domain-Driven-Design (DDD)
+![image](../documents/step2/StringAddCalculator-DDD.jpeg)
+- (Value Object) InputText에서 입력된 text를 split 해줌
+- (Value Object) Number에서 parsing의 조건을 다룰 수 있도록 함
+- (Aggregate) NumberGroup에서 InputText에서 split한 값을 parsing하여 그룹으로 리턴
+- (Service) NumberGroup의 Data를 계산을 수행
+
 
 ## 3. 인수인계
 ### 3.1. 느낀점 & 배운점
-**_느낀점 배운점 작성_**
+- 같은 요구사항 다른 소스코드
+  - 모든 분들의 소스코드를 참조해서 볼 수 있었다면 배울 점이 많다고 생각합니다.
+  - 시간적으로 여유가 된다면 다른 분들의 소스코드를 참조하여 더 많은 부분을 습득하도록 하겠습니다.
 
 ### 3.2. 피드백 요청
 **_피드백 요청 내용 작성_**
