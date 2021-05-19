@@ -15,4 +15,32 @@ public class StringCalculator {
 
         return input.split(DEFAULT_SEPARATOR);
     }
+
+    public static int[] stringsToInts(String input) {
+        String[] splited = split(input);
+
+        int[] result = new int[splited.length];
+
+        for(int i = 0; i < result.length; i++) {
+            result[i] = stringToInteger(splited[i]);
+        }
+
+        return result;
+    }
+
+    private static Integer stringToInteger(String s) {
+        Integer result = null;
+
+        try {
+            result = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 이외의 값을 전달할 수 없습니다.");
+        }
+
+        if(result < 0) {
+            throw new RuntimeException("음수를 전달할 수 없습니다.");
+        }
+
+        return result;
+    }
 }
