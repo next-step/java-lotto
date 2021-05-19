@@ -1,4 +1,4 @@
-package String_Set;
+package stringset;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
