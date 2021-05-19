@@ -20,7 +20,7 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator {
 
         return numbersBetweenLottoNumberRange.stream()
                 .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 }

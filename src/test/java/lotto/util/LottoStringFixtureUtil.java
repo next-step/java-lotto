@@ -11,7 +11,7 @@ public class LottoStringFixtureUtil {
     public static List<LottoNumber> convertStringToLottoNumberList(String fixtureLottoNumber) {
         return Arrays.stream(fixtureLottoNumber.split(","))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(toList());
     }
 }
