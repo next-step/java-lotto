@@ -11,12 +11,7 @@ public class StringAddCalculator {
 		}
 
 		String[] tokens = split(text);
-		int sum = 0;
-
-		for (String num : tokens) {
-			sum += Integer.parseInt(num);
-		}
-		return sum;
+		return sum(tokens);
 	}
 
 	private static String[] split(String text) {
@@ -27,5 +22,21 @@ public class StringAddCalculator {
 			text = m.group(2);
 		}
 		return text.split(delimiter);
+	}
+
+	private static int sum(String[] tokens) {
+		int sum = 0;
+		for (String token : tokens) {
+			sum += tokenToNumber(token);
+		}
+		return sum;
+	}
+
+	private static int tokenToNumber(String text) {
+		int num = Integer.parseInt(text);
+		if (num < 0) {
+			throw new IllegalArgumentException("주어진 값은 0보다 작을 수 없습니다.");
+		}
+		return num;
 	}
 }

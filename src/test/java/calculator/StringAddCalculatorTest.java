@@ -38,4 +38,11 @@ public class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(6);
 	}
 
+	@Test
+	public void splitAndSum_negative() throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+			.isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,a,3"))
+			.isInstanceOf(RuntimeException.class);
+	}
 }
