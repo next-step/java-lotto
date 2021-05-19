@@ -26,6 +26,7 @@ class NumberTest {
     @Test
     void validate_negative() {
         assertThatThrownBy(() -> Number.from(-1))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Negative numbers are not possible");
     }
 }
