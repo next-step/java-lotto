@@ -28,6 +28,9 @@ public class StringAddCalculator {
         if (number == null || number.isEmpty()) {
             return 0;
         }
+        if (!number.matches("\\d+")) {
+            throw new NumberFormatException("숫자 형식이 맞지 않습니다");
+        }
         return Integer.parseInt(number);
     }
 
