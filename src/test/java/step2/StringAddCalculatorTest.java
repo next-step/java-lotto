@@ -26,6 +26,32 @@ public class StringAddCalculatorTest {
 
     }
     @Test
+    @DisplayName("숫자가 하나일때 해당 숫자 리턴")
+    public void aNumberTest() {
+        String aNumberString1 = "1";
+        String aNumberString2 = "10";
+
+        int result1 = calculator.calculate(aNumberString1);
+        int result2 = calculator.calculate(aNumberString2);
+
+        assertThat(result1).isEqualTo(1);
+        assertThat(result2).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("숫자가 두개일 경우 합을 반환한다.")
+    public void numbersTest() {
+        String numbers1 = "1,2";
+        String numbers2 = "10,20";
+
+        int result1 = calculator.calculate(numbers1);
+        int result2 = calculator.calculate(numbers2);
+
+        assertThat(result1).isEqualTo(3);
+        assertThat(result2).isEqualTo(30);
+    }
+
+    @Test
     @DisplayName("쉼표,콜론으로 구분된 문자열 계산")
     public void splitWithDefaultDelimiter() {
         String data1 = "1,2,3";
