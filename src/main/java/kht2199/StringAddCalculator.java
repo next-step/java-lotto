@@ -6,18 +6,18 @@ import java.util.regex.Pattern;
 @SuppressWarnings("SameParameterValue")
 public class StringAddCalculator {
 
-	private static final String regex = "[,:]";
+	private static final String TOKEN_REGEX = "[,:]";
 
-	private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+	private static final Pattern TOKEN_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String text) {
 		if (!checkValidationInputText(text)) {
 			return 0;
 		}
 
-		String[] tokens = parseTokensByMatcher(pattern, text);
+		String[] tokens = parseTokensByMatcher(TOKEN_PATTERN, text);
 		if (tokens == null) {
-			tokens = text.split(regex);
+			tokens = text.split(TOKEN_REGEX);
 		}
 
 		Integer[] intTokens = stringToInt(tokens);
