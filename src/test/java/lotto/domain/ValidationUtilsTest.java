@@ -32,29 +32,11 @@ public class ValidationUtilsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideListForValidLottoLength")
-    @DisplayName("로또 번호는 6자리 수이다")
-    void validateLottoNumberBoundaryTest(List<Integer> numbers, boolean expected) {
-        boolean result = ValidationUtils.isValidLottoNumbersLength(numbers);
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
     @MethodSource("provideListForValidLottoNotDuplicate")
     @DisplayName("로또 번호는 서로 중복되지 않는다.")
     void validateLottoNumberNotDuplicateTest(List<Integer> numbers, boolean expected) {
         boolean result = ValidationUtils.isNotDuplicateNumbers(numbers);
         assertThat(result).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> provideListForValidLottoLength() {
-        return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true),
-                Arguments.of(Collections.emptyList(), false),
-                Arguments.of(null, false),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5), false),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), false)
-        );
     }
 
     private static Stream<Arguments> provideListForValidLottoNotDuplicate() {
