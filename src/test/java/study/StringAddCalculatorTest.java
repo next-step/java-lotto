@@ -48,10 +48,17 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("음수가 나올 경우, Exception을 던진다")
+    @DisplayName("음수가 나올 경우, IllegalArgumentException을 던진다")
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> stringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("Custom 구분자가 여러 개일 경우, IllegalArgumentException을 던진다")
+    @Test
+    public void splitAndSum_numerous_custom_delimiter() throws Exception {
+        assertThatThrownBy(() -> stringAddCalculator.splitAndSum("//;a\n1;2;3"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
