@@ -17,4 +17,13 @@ public class LottoNumbersGroup {
 			.map(LottoNumbers::getNumbers)
 			.collect(Collectors.toList());
 	}
+
+	public LottoResult match(LottoNumbers winningNumbers) {
+		LottoResult lottoResult = new LottoResult();
+		for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
+			int matchCount = lottoNumbers.match(winningNumbers);
+			lottoResult.add(matchCount);
+		}
+		return lottoResult;
+	}
 }

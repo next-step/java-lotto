@@ -15,7 +15,7 @@ public class LottoNumbers {
 	public LottoNumbers(List<Integer> inputNumbers) {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
-		this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(inputNumbers));
+		this.lottoNumbers = mapToLottoNumbers(inputNumbers);
 	}
 
 	private void validateDuplicate(List<Integer> numbers) {
@@ -32,7 +32,7 @@ public class LottoNumbers {
 	private List<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
 		return numbers.stream()
 			.map(LottoNumber::new)
-			.collect(toList());
+			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	List<Integer> getNumbers() {

@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoNumbersGenerator;
 import lotto.model.LottoNumbersGroup;
+import lotto.model.LottoResult;
 import lotto.model.Money;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
@@ -25,6 +26,7 @@ public class LottoApp {
 		LottoNumbersGroup lottoNumbersGroup = buyLottoNumbersGroup();
 		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
 		LottoNumbers winningNumbers = inputWinningNumbers();
+		LottoResult matchResult = lottoNumbersGroup.match(winningNumbers);
 	}
 
 	private LottoNumbersGroup buyLottoNumbersGroup() {
