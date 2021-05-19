@@ -15,7 +15,7 @@ public class GameTest {
     @Test
     @DisplayName("금액을 주어, 로또를 생성하고 결과를 확인한다")
     public void 금액을_주어_로또를_생성하고_결과를_확인한다() {
-        Amount money = new Amount(6500);
+        PositiveInteger money = new PositiveInteger(6500);
         Game game = Game.createByMoneyAndGenerator(money, createLottoGenerator());
         LottoWon lottoWon = new LottoWon(LottoStringFixtureUtil.convertStringToLottoNumberList("1,2,3,4,5,6"));
 

@@ -27,6 +27,20 @@ public class LottoRanks {
         return new LottoRanks(countOfLottoRank);
     }
 
+
+    public PositiveInteger sumReward() {
+        PositiveInteger positiveInteger = new PositiveInteger(0);
+        for (LottoRank lottoRank : LottoRank.values()) {
+            positiveInteger = positiveInteger.plus(sumOfRank(lottoRank));
+        }
+
+        return positiveInteger;
+    }
+
+    private PositiveInteger sumOfRank(LottoRank rank) {
+        return new PositiveInteger(countOf(rank) * rank.getAmount());
+    }
+
     public Integer countOf(LottoRank lottoRank) {
         if(countOfLottoRank.containsKey(lottoRank)) {
             return countOfLottoRank.get(lottoRank);
