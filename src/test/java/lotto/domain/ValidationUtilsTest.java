@@ -39,6 +39,14 @@ public class ValidationUtilsTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("provideListForValidLottoNotDuplicate")
+    @DisplayName("로또 번호는 서로 중복되지 않는다.")
+    void validateLottoNumberNotDuplicateTest(List<Integer> numbers, boolean expected) {
+        boolean result = ValidationUtils.isNotDuplicateNumbers(numbers);
+        assertThat(result).isEqualTo(expected);
+    }
+
     private static Stream<Arguments> provideListForValidLottoLength() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true),
@@ -46,6 +54,13 @@ public class ValidationUtilsTest {
                 Arguments.of(null, false),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5), false),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), false)
+        );
+    }
+
+    private static Stream<Arguments> provideListForValidLottoNotDuplicate() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true),
+                Arguments.of(Arrays.asList(1, 1, 2, 3, 4, 5), false)
         );
     }
 }

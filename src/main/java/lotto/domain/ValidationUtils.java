@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ValidationUtils {
@@ -19,5 +20,9 @@ public class ValidationUtils {
 
     public static boolean isValidLottoNumbersLength(List<Integer> numbers) {
         return numbers != null && numbers.size() == LOTTO_NUMBERS_LENGTH;
+    }
+
+    public static boolean isNotDuplicateNumbers(List<Integer> numbers) {
+        return new HashSet<>(numbers).size() == LOTTO_NUMBERS_LENGTH;
     }
 }
