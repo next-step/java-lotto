@@ -7,30 +7,30 @@ import static java.lang.String.format;
 public class PositiveInteger {
     private static final int MINIMUM_AMOUNT = 0;
 
-    private int amount;
+    private int value;
 
-    public PositiveInteger(int amount) {
-        if(amount < MINIMUM_AMOUNT) {
+    public PositiveInteger(int value) {
+        if(value < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(format("숫자는 %d원 미만은 안됩니다.", MINIMUM_AMOUNT));
         }
 
-        this.amount = amount;
+        this.value = value;
     }
 
-    public int divide(PositiveInteger target) {
-        return amount / target.amount;
+    public PositiveInteger divide(PositiveInteger target) {
+        return new PositiveInteger(value / target.value);
     }
 
-    public PositiveInteger multiple(int multiple) {
-        return new PositiveInteger(amount * multiple);
+    public PositiveInteger multiple(PositiveInteger target) {
+        return new PositiveInteger(value * target.getValue());
     }
 
     public PositiveInteger plus(PositiveInteger target) {
-        return new PositiveInteger(amount + target.getAmount());
+        return new PositiveInteger(value + target.getValue());
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class PositiveInteger {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PositiveInteger positiveInteger1 = (PositiveInteger) o;
-        return amount == positiveInteger1.amount;
+        return value == positiveInteger1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(value);
     }
 }

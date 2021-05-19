@@ -17,7 +17,7 @@ public class Game {
     }
 
     public static Game createByMoneyAndGenerator(PositiveInteger money, LottoNumberGenerator lottoNumberGenerator) {
-        int countOfTicket = money.divide(TICKET_PRICE);
+        PositiveInteger countOfTicket = money.divide(TICKET_PRICE);
 
         return new Game(LottoTickets.createByGenerator(lottoNumberGenerator, countOfTicket));
     }
@@ -31,6 +31,6 @@ public class Game {
     }
 
     public PositiveInteger totalPriceOfTickets() {
-        return TICKET_PRICE.multiple(lottoTickets.size());
+        return TICKET_PRICE.multiple(new PositiveInteger(lottoTickets.size()));
     }
 }

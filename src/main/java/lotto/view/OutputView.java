@@ -49,7 +49,7 @@ public class OutputView {
         PositiveInteger reward = match.sumReward();
         PositiveInteger positiveInteger = game.totalPriceOfTickets();
 
-        System.out.println(format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", (double)reward.getAmount() / (double) positiveInteger.getAmount() / 100));
+        System.out.println(format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", (double)reward.getValue() / (double) positiveInteger.getValue() / 100));
     }
 
     private void printRankInfo(LottoRanks ranks, LottoRank from) {

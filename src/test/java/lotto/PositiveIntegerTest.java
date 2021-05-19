@@ -14,42 +14,42 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class PositiveIntegerTest {
     @ParameterizedTest
     @ValueSource(ints = {-1000})
-    @DisplayName("금액은 음수면 안된다")
-    public void 금액은_음수면_안된다(int amount) {
+    @DisplayName("양수숫자는 음수면 안된다")
+    public void 양수숫자는은_음수면_안된다(int amount) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new PositiveInteger(amount));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 10, 100, 1000})
-    @DisplayName("금액은 양수이면 된다.")
-    public void 금액은_양수이면_안된다(int amount) {
+    @DisplayName("양수숫자는 양수이면 된다.")
+    public void 양수숫자는_양수이면_안된다(int amount) {
         assertDoesNotThrow(() -> new PositiveInteger(amount));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"14000,1000,14", "13500,1000,13", "12001,1000,12"}, delimiter = ',')
-    @DisplayName("숫자를 누눌 수 있다")
-    public void 숫자를_나눌_수_있다(int source, int dest, int except) {
+    @DisplayName("양수숫자는 누눌 수 있다")
+    public void 양수숫자는_나눌_수_있다(int source, int dest, int except) {
         PositiveInteger total = new PositiveInteger(source);
         PositiveInteger target = new PositiveInteger(dest);
 
         assertThat(total.divide(target))
-                .isEqualTo(except);
+                .isEqualTo(new PositiveInteger(except));
     }
 
     @Test
-    @DisplayName("Amount와 숫자를 곱할 수 있다")
+    @DisplayName("양수숫자는 양수숫자와 곱할 수 있다")
     public void Amount와_숫자를_곱할_수_있다() {
         PositiveInteger positiveInteger = new PositiveInteger(5000);
 
-        assertThat(positiveInteger.multiple(5))
+        assertThat(positiveInteger.multiple(new PositiveInteger(5)))
                 .isEqualTo(new PositiveInteger(5000 * 5));
     }
 
     @Test
-    @DisplayName("Amount와 Amount는 더할 수 있다")
-    public void Amount와_Amount는_더할_수_있다() {
+    @DisplayName("양수숫자와 양수숫자는 더할 수 있다")
+    public void 양수숫자와_양수숫자는_더할_수_있다() {
         PositiveInteger zero = new PositiveInteger(0);
         PositiveInteger target = new PositiveInteger(1000);
 
