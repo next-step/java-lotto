@@ -25,7 +25,9 @@ public class LottoNumbers {
         return new TreeSet<>(lottoNumbers);
     }
 
-    public int matchNumbers(LottoNumbers lottoNumbers) {
-        return 0;
+    public int matchNumbers(LottoNumbers other) {
+        List<Integer> retainNumbers = new ArrayList<>(other.lottoNumbers);
+        retainNumbers.retainAll(this.lottoNumbers);
+        return retainNumbers.size();
     }
 }

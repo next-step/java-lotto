@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    public static final long PRICE = 1000L;
+    public static final long PRICE = 1_000L;
 
     private final LottoNumbers lottoNumbers;
 

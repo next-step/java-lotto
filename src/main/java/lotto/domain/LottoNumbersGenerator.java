@@ -11,7 +11,6 @@ public class LottoNumbersGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-
     public static LottoNumbers generate() {
         Collections.shuffle(LOTTONUMBERS);
         return new LottoNumbers(
