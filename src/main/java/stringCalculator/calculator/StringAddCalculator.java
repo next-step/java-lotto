@@ -7,18 +7,16 @@ import stringCalculator.utility.Separator;
 import stringCalculator.utility.Validator;
 
 public class StringAddCalculator {
-    private final Validator validator;
     private final Separator separator;
     private final Positive positive;
 
     public StringAddCalculator() {
-        validator = new Validator();
         separator = new Separator();
         positive = new Positive(Constant.DEFAULT_POSITIVE_VALUE);
     }
 
     public int splitAndSum(String input) {
-        if (!validator.isValidInput(input)) {
+        if (!Validator.isValidInput(input)) {
             return 0;
         }
         PatternChecker patternChecker = new PatternChecker(input);
