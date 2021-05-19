@@ -40,4 +40,15 @@ public class LottoNumbers {
 			.map(LottoNumber::getNumber)
 			.collect(toList());
 	}
+
+	int match(LottoNumbers otherNumbers) {
+		long matchCount = lottoNumbers.stream()
+			.filter(otherNumbers::contains)
+			.count();
+		return Math.toIntExact(matchCount);
+	}
+
+	private boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
 }

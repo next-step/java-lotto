@@ -7,20 +7,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.model.LottoNumbers;
-
 public class LottoNumbersTest {
+
+	private LottoNumbers lottoNumbers;
+
+	@BeforeEach
+	public void setup() {
+		lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+	}
 
 	@Test
 	@DisplayName("LottoNumbers 는 LottoNumber 6개로 구성된다.")
 	public void createLottoNumbersTest() {
-		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-
 		assertThat(lottoNumbers.getNumbers()).contains(1, 2, 3, 4, 5, 6);
 	}
 
@@ -38,5 +43,16 @@ public class LottoNumbersTest {
 		return Stream.of(split)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+	}
+
+	@ParameterizedTest
+	@DisplayName("LottoNumbers 는 당첨번호와 비교해서 일치하는 개수를 반환한다.")
+	@CsvSource(value = {"1,2,3,4,5,6:6", "10,30,20,35,9,19:0", "2,3,1,7,9,8:3"}, delimiter = ':')
+	public void matchTest(String inputWinningNumbers, int expectedMatchCount) {
+		LottoNumbers winningNumbers = new LottoNumbers(splitAndMapToInt(inputWinningNumbers));
+
+		int matchCount = lottoNumbers.match(winningNumbers);
+
+		assertThat(matchCount).isEqualTo(expectedMatchCount);
 	}
 }
