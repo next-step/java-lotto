@@ -17,8 +17,26 @@ class LottoTicketTest {
     @MethodSource("provideListForNotValidLength")
     @DisplayName("6자리가 아닐 경우 예외가 발생한다")
     void lottoNumbersLengthExceptionTest(List<Integer> lottoNumbers) {
+        assertThatThrownByCreateLottoTickets(lottoNumbers);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideListForValidLottoNotDuplicate")
+    @DisplayName("번호가 중복될 경우 예외가 발생한다")
+    void validateLottoNumberNotDuplicateTest(List<Integer> lottoNumbers) {
+        assertThatThrownByCreateLottoTickets(lottoNumbers);
+    }
+
+    private void assertThatThrownByCreateLottoTickets(List<Integer> lottoNumbers) {
         assertThatThrownBy(() -> LottoTicket.of(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> provideListForValidLottoNotDuplicate() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 5)),
+                Arguments.of(Arrays.asList(1, 1, 2, 3, 4, 5))
+        );
     }
 
     private static Stream<Arguments> provideListForNotValidLength() {
