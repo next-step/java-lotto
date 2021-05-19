@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoNumberGenerator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,5 +29,9 @@ public class LottoTickets {
 
     public int size() {
         return lottoTickets.size();
+    }
+
+    public List<LottoTicket> getTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

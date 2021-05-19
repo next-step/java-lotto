@@ -1,11 +1,9 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWon;
+import lotto.domain.*;
 import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -43,5 +41,35 @@ public class LottoWonTest {
 
         assertThat(lottoWon.match(lottoTicket))
                 .isEqualTo(exceptLottoRank);
+    }
+
+    @Test
+    @DisplayName("로또 티켓들을 입력받아 등수를 알 수 있다")
+    public void 로또_티켓들을_입력받아_등수를_알_수_있다() {
+        LottoWon lottoWon = new LottoWon(LottoStringFixtureUtil.convertStringToLottoNumberList("1,2,3,4,5,6"));
+        LottoTickets lottoTickets = new LottoTickets(
+                Arrays.asList(
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("1,2,3,4,5,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,2,3,4,5,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,12,3,4,5,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,12,13,4,5,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,12,13,14,5,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,12,13,14,15,6")),
+                        new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList("11,12,13,14,15,16"))
+                )
+        );
+
+        LottoRanks match = lottoWon.match(lottoTickets);
+
+        assertThat(match.countOf(LottoRank.FIRST))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.SECOND))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.THIRD))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.FOURTH))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.MISS))
+                .isEqualTo(3);
     }
 }
