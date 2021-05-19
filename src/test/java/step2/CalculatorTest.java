@@ -1,6 +1,7 @@
 package step2;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +29,16 @@ public class CalculatorTest {
     @CsvSource(value = {"'//;\n1;2;3':6", "'//ㅋ\n1ㅋ2ㅋ3':6", "'//ㅋ\n':0"}, delimiter = ':')
     void addNumberBetweenSeparatorTest2(String input, int result) {
         assertThat(calculator.addNumberBetweenSeparator(input)).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @DisplayName("음수 또는 숫자가 아닌 수 RuntimeException 확인")
+    @CsvSource(value = {"'1:2:-1':'음수가 아닌 숫자만 가능합니다.'", "'1:ㅁ:1':'음수가 아닌 숫자만 가능합니다.'"}, delimiter = ':')
+    void validationTest(String input, String result) {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            calculator.addNumberBetweenSeparator(input);
+        });
+        assertThat(exception.getMessage()).isEqualTo(result);
     }
 
 }

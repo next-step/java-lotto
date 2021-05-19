@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
+    private static final String IS_NOT_VALIDE_NUMBER = "음수가 아닌 숫자만 가능합니다.";
+
     public int addNumberBetweenSeparator(String input) {
         String[] numbers = separateWithSeparator(input);
         return addNumbers(numbers);
@@ -20,7 +22,18 @@ public class Calculator {
     }
 
     private int parseNumber(String numbesr) {
-        return !checkNull(numbesr) ? Integer.parseInt(numbesr) : 0;
+        int result = 0;
+        if (!checkNull(numbesr)) {
+            checkValidation(numbesr);
+            result = Integer.parseInt(numbesr);
+        }
+        return result;
+    }
+
+    private void checkValidation(String numbesr) {
+        if (!Pattern.matches("^[0-9]+$", numbesr)) {
+            throw new IllegalArgumentException(IS_NOT_VALIDE_NUMBER);
+        }
     }
 
     private String[] separateWithSeparator(String input) {
