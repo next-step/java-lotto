@@ -1,4 +1,4 @@
-package string_calculator;
+package stringcalculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +37,7 @@ public class StringAddCalculator {
     private int parseInt(String input) {
         int number = Integer.parseInt(input);
         if (number < DEFAULT_NUMBER) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("숫자값에는 음수가 올 수 없습니다.");
         }
         return number;
     }
