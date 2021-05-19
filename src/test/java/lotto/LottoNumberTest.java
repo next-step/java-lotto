@@ -18,7 +18,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,43,44,45})
+    @ValueSource(ints = {1, 2, 3, 43, 44, 45})
     @DisplayName("로또번호는 1~45의 숫자를 갖는다.")
     public void 로또번호는_1_45의_숫자를_갖는다(int number) {
         assertDoesNotThrow(() -> new LottoNumber(number));

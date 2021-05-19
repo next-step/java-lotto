@@ -10,7 +10,7 @@ public class PositiveInteger {
     private int value;
 
     public PositiveInteger(int value) {
-        if(value < MINIMUM_AMOUNT) {
+        if (value < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(format("숫자는 %d원 미만은 안됩니다.", MINIMUM_AMOUNT));
         }
 

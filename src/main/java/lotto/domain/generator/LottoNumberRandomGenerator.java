@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberRandomGenerator implements LottoNumberGenerator{
+public class LottoNumberRandomGenerator implements LottoNumberGenerator {
     @Override
     public Set<LottoNumber> generate() {
         List<Integer> numbersBetweenLottoNumberRange = IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)

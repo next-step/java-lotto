@@ -17,7 +17,7 @@ public class LottoRanks {
 
         for (LottoRank lottoRank : lottoRanks) {
             int count = 0;
-            if(countOfLottoRank.containsKey(lottoRank)) {
+            if (countOfLottoRank.containsKey(lottoRank)) {
                 count = countOfLottoRank.get(lottoRank);
             }
 
@@ -42,7 +42,7 @@ public class LottoRanks {
     }
 
     public Integer countOf(LottoRank lottoRank) {
-        if(countOfLottoRank.containsKey(lottoRank)) {
+        if (countOfLottoRank.containsKey(lottoRank)) {
             return countOfLottoRank.get(lottoRank);
         }
 
