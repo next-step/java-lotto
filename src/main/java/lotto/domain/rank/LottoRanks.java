@@ -15,6 +15,8 @@ public class LottoRanks {
     }
 
     public static LottoRanks createByList(List<LottoRank> lottoRanks) {
+        final int PER_COUNT_INCREMENT = 1;
+
         Map<LottoRank, Integer> countOfLottoRank = new HashMap<>();
 
         for (LottoRank lottoRank : lottoRanks) {
@@ -23,7 +25,7 @@ public class LottoRanks {
                 count = countOfLottoRank.get(lottoRank);
             }
 
-            countOfLottoRank.put(lottoRank, count + 1);
+            countOfLottoRank.put(lottoRank, count + PER_COUNT_INCREMENT);
         }
 
         return new LottoRanks(countOfLottoRank);
