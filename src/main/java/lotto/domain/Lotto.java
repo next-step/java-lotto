@@ -17,7 +17,7 @@ public class Lotto {
         return new Lotto(LottoNumbersGenerator.generate());
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return lottoNumbers.getValue();
     }
 

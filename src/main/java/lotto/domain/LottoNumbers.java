@@ -9,14 +9,14 @@ public class LottoNumbers {
     private static final String SIZE_EXCEPTION = "로또 번호는 6자리여야 합니다.";
     private static final String DELIMITER = ",";
 
-    private final Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<Integer> lottoNumbers) {
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateSize(Set<Integer> lottoNumbers) {
+    private void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE_EXCEPTION);
         }
@@ -26,9 +26,9 @@ public class LottoNumbers {
         this(initNumbers(lottoNumber));
     }
 
-    private static Set<Integer> initNumbers(int[] lottoNumber) {
+    private static Set<LottoNumber> initNumbers(int[] lottoNumber) {
         return Arrays.stream(lottoNumber)
-                    .boxed()
+                    .mapToObj(LottoNumber::new)
                     .collect(Collectors.toSet());
     }
 
@@ -36,17 +36,17 @@ public class LottoNumbers {
         String[] splited = lottoNumbers.split(DELIMITER);
         return new LottoNumbers(
                 Arrays.stream(splited)
-                    .map(Integer::parseInt)
+                    .map(LottoNumber::valueOf)
                     .collect(Collectors.toSet())
         );
     }
 
-    public Set<Integer> getValue() {
+    public Set<LottoNumber> getValue() {
         return new TreeSet<>(lottoNumbers);
     }
 
     public int matchNumbers(LottoNumbers other) {
-        List<Integer> retainNumbers = new ArrayList<>(other.lottoNumbers);
+        List<LottoNumber> retainNumbers = new ArrayList<>(other.lottoNumbers);
         retainNumbers.retainAll(this.lottoNumbers);
         return retainNumbers.size();
     }

@@ -14,7 +14,7 @@ class LottoTest {
     void generateAuto() {
         Lotto generated = Lotto.auto();
 
-        Set<Integer> numbers = generated.getNumbers();
+        Set<LottoNumber> numbers = generated.getNumbers();
 
         assertThat(numbers).hasSize(6);
     }
