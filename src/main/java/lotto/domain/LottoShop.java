@@ -13,6 +13,6 @@ public class LottoShop {
     }
 
     private int getLottoCountForBuying(long price) {
-        return Money.from(price).divide(Lotto.PRICE);
+        return Money.from(price).divide(Money.from(Lotto.PRICE)).intValue();
     }
 }

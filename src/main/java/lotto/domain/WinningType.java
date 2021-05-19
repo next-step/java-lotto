@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.stream.Stream;
 
 public enum WinningType {
-    FIRST(6, 2_000_000_000L),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000L),
-    FOURTH(3, 5_000L),
-    NOTHING(0, 0L);
+    FIRST(6, Money.from(2_000_000_000L)),
+    SECOND(5, Money.from(1_500_000)),
+    THIRD(4, Money.from(50_000L)),
+    FOURTH(3, Money.from(5_000L)),
+    NOTHING(0, Money.from(0L));
 
     private final int matchCount;
-    private final long prize;
+    private final Money prize;
 
-    WinningType(int matchCount, long prize) {
+    WinningType(int matchCount, Money prize) {
         this.matchCount = matchCount;
         this.prize = prize;
     }
@@ -26,5 +26,9 @@ public enum WinningType {
                 .filter(winningType -> winningType.isSameCount(countOfMatch))
                 .findFirst()
                 .orElse(NOTHING);
+    }
+
+    public Money getPrize() {
+        return prize;
     }
 }
