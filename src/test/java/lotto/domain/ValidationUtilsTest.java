@@ -16,4 +16,11 @@ public class ValidationUtilsTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1,true", "45,true", "0,false", "46,false"})
+    @DisplayName("로또 번호는 1 ~ 45 사이의 수이다")
+    void validateLottoNumberBoundaryTest(int number, boolean expected) {
+        boolean result = ValidationUtils.isValidLottoNumberBoundary(number);
+        assertThat(result).isEqualTo(expected);
+    }
 }
