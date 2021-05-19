@@ -35,7 +35,7 @@ public class StringAddCalculatorTest {
     @DisplayName("배열의 sum 반환 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1,2:3=6", "2:2:4=8", "1:2,3,10=16", "10:24,1,1:1=37", "224,111=335"}, delimiter = '=')
-    public void sumNumbers(String input, int expected){
+    public void sumNumbers(String input, int expected) {
         Numbers numbers = new Numbers(stringAddCalculator.splitInput(input));
         int result = stringAddCalculator.sumNumbers(numbers.getNumbers());
         assertThat(result).isEqualTo(expected);

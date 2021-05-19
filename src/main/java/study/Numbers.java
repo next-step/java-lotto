@@ -10,14 +10,17 @@ public class Numbers {
 
     public  Numbers(String[] numberList) {
         for (int i = 0; i < numberList.length; i++) {
-            if ( !numberList[i].matches(MATCH_NUMBER) ) {
-                throw new RuntimeException(EXCEPTION_MESSAGE);
-            }
+            validateNumberList(numberList[i]);
             this.numbers.add(Integer.parseInt(numberList[i]));
         }
     }
 
-    public ArrayList<Integer> getNumbers(){
+    public void validateNumberList(String number) {
+        if (!number.matches(MATCH_NUMBER)) {
+            throw new RuntimeException(EXCEPTION_MESSAGE);
+        }
+    }
+    public ArrayList<Integer> getNumbers() {
         return this.numbers;
     }
 }

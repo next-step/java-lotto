@@ -14,7 +14,7 @@ public class StringAddCalculator {
     private static final int CUSTOM_SEPARATOR_SECOND_INDEX = 2;
 
     public int splitAndSum(String input) {
-        if ( !validateInput(input)) {
+        if (!validateInput(input)) {
             return MINIMUM_NUMBER;
         }
         if (input.length() == ONE_SIZE_NUMBER) {
@@ -31,7 +31,7 @@ public class StringAddCalculator {
         return true;
     }
 
-    public String[] splitInput(String input){
+    public String[] splitInput(String input) {
         Matcher m = CUSTOM_SEPARATOR_PATTERN.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_SEPARATOR_INDEX);

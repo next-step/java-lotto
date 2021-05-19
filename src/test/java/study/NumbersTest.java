@@ -23,7 +23,7 @@ class NumbersTest {
         assertThatThrownBy(() -> {
             new Numbers(stringAddCalculator.splitInput(input));
         }).isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("음수 또는 정수 이외의 값은 더할수없습니다.");
+                .hasMessageContaining("음수 또는 정수 이외의 값은 더할 수 없습니다.");
     }
 
     @DisplayName("getNumbers 테스트")
