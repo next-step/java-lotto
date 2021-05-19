@@ -15,7 +15,7 @@ public class StringCalculator {
 	private static final int DELIMITER_GROUP = 1;
 	private static final int TEXT_GROUP = 2;
 
-	public static int sumByDelimiter(String text) {
+	public static int splitAndSum(String text) {
 		if (isEmpty(text)) {
 			return 0;
 		}
