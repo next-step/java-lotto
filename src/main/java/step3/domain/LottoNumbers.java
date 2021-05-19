@@ -11,17 +11,28 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
 
-        if (numbers == null || numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
-        }
-
-        if (isLottoNumberRange(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 사용해야 합니다.");
-        }
+        validateNumbersSize(numbers);
+        validateNumbersRange(numbers);
 
         numbers.sort(Comparator.naturalOrder());
         this.numbers = Collections.unmodifiableList(numbers);
 
+        validateDuplicateNumber();
+    }
+
+    private void validateNumbersSize(List<Integer> numbers) {
+        if (numbers == null || numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+        }
+    }
+
+    private void validateNumbersRange(List<Integer> numbers) {
+        if (isLottoNumberRange(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 사용해야 합니다.");
+        }
+    }
+
+    private void validateDuplicateNumber() {
         if (hasDuplicateNumber()) {
             throw new IllegalArgumentException("로또 번호는 중복된 수를 포함하면 안됩니다.");
         }
