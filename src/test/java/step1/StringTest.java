@@ -24,4 +24,12 @@ public class StringTest {
 		String[] result = word.split(",");
 		assertThat(result).containsExactly("1");
 	}
+
+	@Test
+	@DisplayName(value = "1,2 문자열이 반환 된다.")
+	public void removeParenthesesUsingSubstring() throws Exception {
+		String str = "(1,2)";
+		String result = str.substring(1, str.length() - 1);
+		assertThat(result).isEqualTo("1,2");
+	}
 }
