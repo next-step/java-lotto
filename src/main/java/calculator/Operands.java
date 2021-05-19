@@ -14,4 +14,13 @@ public class Operands {
         return operands.size();
     }
 
+    public int add() {
+        int total = 0;
+
+        for (Operand operand : operands) {
+            total += operand.getNumber();
+        }
+
+        return total;
+    }
 }
