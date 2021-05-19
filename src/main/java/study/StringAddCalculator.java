@@ -1,5 +1,6 @@
 package study;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,8 @@ public class StringAddCalculator {
     private static final int ONE_SIZE_NUMBER = 1;
     private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final Pattern CUSTOM_SEPARATOR_PATTERN = Pattern.compile(CUSTOM_SEPARATOR);
+    private static final int CUSTOM_SEPARATOR_INDEX = 1;
+    private static final int CUSTOM_SEPARATOR_SECOND_INDEX = 2;
 
     public int splitAndSum(String input) {
         if ( !validateInput(input)) {
@@ -17,7 +20,8 @@ public class StringAddCalculator {
         if (input.length() == ONE_SIZE_NUMBER) {
             return Integer.parseInt(input);
         }
-        return sumNumbers(splitInput(input));
+        Numbers numbers = new Numbers(splitInput(input));
+        return sumNumbers(numbers.getNumbers());
     }
 
     public boolean validateInput(String input) {
@@ -30,16 +34,16 @@ public class StringAddCalculator {
     public String[] splitInput(String input){
         Matcher m = CUSTOM_SEPARATOR_PATTERN.matcher(input);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(CUSTOM_SEPARATOR_INDEX);
+            return m.group(CUSTOM_SEPARATOR_SECOND_INDEX).split(customDelimiter);
         }
         return input.split(DEFAULT_SEPARATOR);
     }
 
-    public int sumNumbers(String[] numbers) {
+    public int sumNumbers(ArrayList<Integer> numbers) {
         int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += Integer.parseInt(numbers[i]);
+        for (int i = 0; i < numbers.size(); i++) {
+            sum += numbers.get(i);
         }
         return sum;
     }
