@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
@@ -72,8 +75,14 @@ public class StringAddCalculatorTest {
 
     @Test
     public void delimiterMatchesTest() {
-        String data = "//^\\n1^2^3";
-        String pattern = "^//(.)\n";
-        assertThat(data.matches(pattern)).isTrue();
+        String data = "//^\n1^2^3";
+        String pattern = "//(.)\n(.*)";
+        Matcher m = Pattern.compile(pattern).matcher(data);
+        if(m.find()) {
+            String delimiter = m.group(1);
+            assertThat(delimiter).isEqualTo("^");
+            String remains = m.group(2);
+            assertThat(remains).isEqualTo("1^2^3");
+        }
     }
 }
