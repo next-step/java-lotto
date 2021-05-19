@@ -2,7 +2,7 @@ package study;
 
 public abstract class StringAddSplitter {
 
-	private static final int ZERO = 0;
+	private final static int ZERO = 0;
 
 	protected String stringNumbers;
 	protected String[] tokens;
