@@ -5,11 +5,13 @@ public class StringAddCalculator {
 	private final static String CUSTOM_CONTAIN = "//";
 	private final static int ZERO = 0;
 
-	private StringAddCalculator () {}
+	private StringAddCalculator() {
+	}
 
 	public static int splitAndSum(String stringNumbers) {
-		if (isNullOrEmpty(stringNumbers))
+		if (isNullOrEmpty(stringNumbers)) {
 			return ZERO;
+		}
 		StringAddSplitter stringAddSplitter = getSplitter(stringNumbers);
 		stringAddSplitter.split();
 		String[] tokens = stringAddSplitter.getTokens();
