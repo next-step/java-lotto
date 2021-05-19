@@ -5,7 +5,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
         SumCalculator sumCalCulator = new SumCalculator(input);
-        if(sumCalCulator.isUnUsable()){
+        if(sumCalCulator.isUnusable()){
             return DEFAULT_VALUE;
         }
 

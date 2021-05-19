@@ -6,7 +6,7 @@ public class SumCalculator {
         this.input = input;
     }
 
-    public boolean isUnUsable() {
+    public boolean isUnusable() {
         return isNull() || isEmpty();
     }
 
