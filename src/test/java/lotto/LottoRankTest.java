@@ -12,7 +12,7 @@ public class LottoRankTest {
     @CsvSource(value = {
             "1,MISS",
             "2,MISS",
-            "3,FORTH",
+            "3,FOURTH",
             "4,THIRD",
             "5,SECOND",
             "6,FIRST"
