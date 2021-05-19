@@ -14,4 +14,8 @@ public class Amount {
 
         this.amount = amount;
     }
+
+    public int divide(Amount target) {
+        return amount / target.amount;
+    }
 }
