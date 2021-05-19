@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoShopTest {
 
@@ -14,8 +13,8 @@ class LottoShopTest {
         long price = 14000L;
         LottoShop lottoShop = new LottoShop();
 
-        List<Lotto> lottos = lottoShop.buyLottos(price);
+        Lottos lottos = lottoShop.buyLottos(price);
 
-        Assertions.assertThat(lottos).hasSize(14);
+        assertThat(lottos.getValues()).hasSize(14);
     }
 }

@@ -31,4 +31,8 @@ public enum WinningType {
     public Money getPrize() {
         return prize;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
 }

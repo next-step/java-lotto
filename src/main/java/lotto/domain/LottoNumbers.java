@@ -21,6 +21,15 @@ public class LottoNumbers {
                     .collect(Collectors.toSet());
     }
 
+    public static LottoNumbers valueOf(String lottoNumbers) {
+        String[] splited = lottoNumbers.split(",");
+        return new LottoNumbers(
+                Arrays.stream(splited)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet())
+        );
+    }
+
     public Set<Integer> getValue() {
         return new TreeSet<>(lottoNumbers);
     }

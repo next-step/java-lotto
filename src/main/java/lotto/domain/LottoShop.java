@@ -1,15 +1,14 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoShop {
 
-    public List<Lotto> buyLottos(long price) {
+    public Lottos buyLottos(long price) {
         return IntStream.rangeClosed(1, getLottoCountForBuying(price))
                         .mapToObj(count -> Lotto.auto())
-                        .collect(Collectors.toList());
+                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     private int getLottoCountForBuying(long price) {
