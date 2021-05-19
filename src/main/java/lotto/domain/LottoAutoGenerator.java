@@ -20,9 +20,9 @@ public class LottoAutoGenerator {
      *
      * @return 생성된 로또 번호 목록
      */
-    public static LottoNumbers getLottoNumbers() {
+    public static List<LottoNumber> getLottoNumbers() {
         final List<LottoNumber> numbers = createNumbers();
-        return new LottoNumbers(numbers.subList(0, MAX_LOTTO_COUNT));
+        return numbers.subList(0, MAX_LOTTO_COUNT);
     }
 
     private static List<LottoNumber> createNumbers() {
