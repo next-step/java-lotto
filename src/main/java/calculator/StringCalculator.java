@@ -1,11 +1,13 @@
 package calculator;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public static int sumByDelimiter(String text) {
 		if (isEmpty(text)) {
@@ -16,6 +18,28 @@ public class StringCalculator {
 		}
 		String[] tokens = tokenizing(text);
 		return sumTokens(tokens);
+	}
+
+	public static int sumByCustomDelimiter(String delimiterAndText) {
+		if (isEmpty(delimiterAndText)) {
+			return 0;
+		}
+		customDelimiterValidation(delimiterAndText);
+		Matcher matched = CUSTOM_DELIMITER_PATTERN.matcher(delimiterAndText);
+		String delimiter = matched.group(1);
+		String text  = matched.group(2);
+		String[] token = tokenizing(text, delimiter);
+		return sumTokens(token);
+	}
+
+	private static void customDelimiterValidation(String text) {
+		if (!hasCustomDelimiter(text)) {
+			throw new RuntimeException(" “//”와 “\\n\\” 사이에 custom 구분자가 명시되어 있지 않습니다");
+		}
+	}
+
+	private static boolean hasCustomDelimiter(String text) {
+		return CUSTOM_DELIMITER_PATTERN.matcher(text).find();
 	}
 
 	private static void validate(String token) {

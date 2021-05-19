@@ -45,4 +45,13 @@ public class StringCalculatorTest {
 			.isInstanceOf(RuntimeException.class);
 	}
 
+	@Test
+	@DisplayName(value = "delimiter 가 포함된 text 가 null 혹은 empty string 을 전달하면 0을 반환한다")
+	void emptyStringCustom() {
+		int empty = StringCalculator.sumByCustomDelimiter("");
+		int inputNull = StringCalculator.sumByCustomDelimiter(null);
+		assertThat(empty).isEqualTo(0);
+		assertThat(inputNull).isEqualTo(0);
+	}
+
 }
