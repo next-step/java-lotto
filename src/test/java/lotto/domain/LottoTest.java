@@ -29,9 +29,8 @@ class LottoTest {
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,7));
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        WinningResult winningResult = lotto.match(winningLotto);
+        WinningType winningType = lotto.match(winningLotto);
 
-        assertThat(winningResult.getResults()).hasSize(1);
-        assertThat(winningResult.getResults()).isEqualTo(Arrays.asList(WinningType.SECOND));
+        assertThat(winningType).isEqualTo(WinningType.SECOND);
     }
 }
