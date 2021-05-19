@@ -7,4 +7,8 @@ public class StringUtils {
 	public static boolean isNumeric(String numberString) {
 		return numberString.matches(NUMERIC_REGEX);
 	}
+
+	public static boolean isBlank(String input) {
+		return input == null || input.isEmpty();
+	}
 }

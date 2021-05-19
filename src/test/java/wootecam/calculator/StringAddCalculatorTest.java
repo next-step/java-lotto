@@ -1,5 +1,6 @@
 package wootecam.calculator;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +10,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringAddCalculatorTest {
 	@Test
+	@DisplayName("빈문자, null 입력시 결과값 0 반환 테스트")
 	void splitAndSum_null_또는_빈문자() {
+		int nullResult = StringAddCalculator.splitAndSum(null);
+		assertThat(nullResult).isEqualTo(0);
 
+		int emptyResult = StringAddCalculator.splitAndSum("");
+		assertThat(emptyResult).isEqualTo(0);
 	}
 
 	@ParameterizedTest
