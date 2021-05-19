@@ -43,4 +43,15 @@ public class StringCalculator {
 
         return result;
     }
+
+    public static int sum(String s) {
+        int[] ints = stringsToInts(s);
+
+        int result = 0;
+        for(int ele: ints) {
+            result += ele;
+        }
+
+        return result;
+    }
 }

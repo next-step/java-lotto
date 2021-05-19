@@ -35,7 +35,15 @@ public class StringCalculatorTest {
                 .hasMessageContaining("음수를 전달할 수 없습니다.");
 
         assertThat(StringCalculator.stringsToInts("1,2")).containsExactly(1, 2);
-        assertThat(StringCalculator.stringsToInts("1,2,3")).containsExactly(1, 2, 3);
         assertThat(StringCalculator.stringsToInts("1,2:3")).containsExactly(1, 2, 3);
+        assertThat(StringCalculator.stringsToInts("//;\n1;2;3")).containsExactly(1, 2, 3);
+    }
+
+    @DisplayName("합계 테스트")
+    @Test
+    void sum() {
+        assertThat(StringCalculator.sum("1,2")).isEqualTo(3);
+        assertThat(StringCalculator.sum("1,2:3")).isEqualTo(6);
+        assertThat(StringCalculator.sum("//;\n1;2;3")).isEqualTo(6);
     }
 }
