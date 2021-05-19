@@ -6,12 +6,8 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     public int addNumberBetweenSeparator(String input) {
-        int result = 0;
-        if (!checkNull(input)) {
-            String[] numbers = separateWithSeparator(input);
-            result = addNumbers(numbers);
-        }
-        return result;
+        String[] numbers = separateWithSeparator(input);
+        return addNumbers(numbers);
     }
 
     private int addNumbers(String[] numbers) {
