@@ -14,6 +14,18 @@ public class StringAddCalculatorTest {
         calculator = new StringAddCalculator();
     }
     @Test
+    @DisplayName("null 혹은 \"\"일때 0을 리턴")
+    public void nullOrEmptyStringTest() {
+        String nullString = null;
+        String emptyString = "";
+        int nullResult = calculator.calculate(nullString);
+        int emptyStringResult = calculator.calculate(emptyString);
+
+        assertThat(nullResult).isEqualTo(0);
+        assertThat(emptyStringResult).isEqualTo(0);
+
+    }
+    @Test
     @DisplayName("쉼표,콜론으로 구분된 문자열 계산")
     public void splitWithDefaultDelimiter() {
         String data1 = "1,2,3";
@@ -27,7 +39,15 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("커스텀한 구분 문자열 지정하여 계산")
     public void splitWithCustomDelimiter() {
-        String customDelimiter = "w";
         String data1 = "//w\n1w2w3";
+        int result1 = calculator.calculate(data1);
+        assertThat(result1).isEqualTo(6);
+    }
+
+    @Test
+    public void delimiterMatchesTest() {
+        String data = "//^\\n1^2^3";
+        String pattern = "^//(.)\n";
+        assertThat(data.matches(pattern)).isTrue();
     }
 }
