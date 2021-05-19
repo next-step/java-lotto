@@ -11,7 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StringTest {
+@DisplayName("String 학습 테스트")
+class StringTest {
 
     @DisplayName("split, comma(,) argument")
     @ParameterizedTest
@@ -35,10 +36,10 @@ public class StringTest {
         String expectedResult = "1,2";
 
         // When
-        String substringResult = testingTarget.substring(1, testingTarget.length() - 1);
+        String actualResult = testingTarget.substring(1, testingTarget.length() - 1);
 
         // Then
-        assertEquals(expectedResult, substringResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @ParameterizedTest
@@ -46,7 +47,7 @@ public class StringTest {
     @CsvSource({"0,a"
             , "1,b"
             , "2,c"})
-    public void charAtSpecificIndex(int index, char expectedResult) {
+    void charAtSpecificIndex(int index, char expectedResult) {
         // Given
         String givenText = "abc";
 
@@ -59,7 +60,7 @@ public class StringTest {
 
     @Test
     @DisplayName("charAt, 범위 밖 인덱스 문자 읽기 예외 확인")
-    public void charAtOutOfGBoundsIndex() {
+    void charAtOutOfGBoundsIndex() {
         // Given
         String givenText = "abc";
         int outOfBoundsIndex = Integer.MAX_VALUE;
@@ -69,7 +70,7 @@ public class StringTest {
                 .isThrownBy(() -> givenText.charAt(outOfBoundsIndex));
     }
 
-    private static Stream<Arguments> provideSourceToSplitWithComma() {
+    static Stream<Arguments> provideSourceToSplitWithComma() {
         return Stream.of(
                 Arguments.of("1,2", new String[]{"1", "2"}),
                 Arguments.of("1", new String[]{"1"})
