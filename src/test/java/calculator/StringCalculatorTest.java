@@ -54,4 +54,15 @@ public class StringCalculatorTest {
 		assertThat(inputNull).isEqualTo(0);
 	}
 
+	@ParameterizedTest
+	@CsvSource(value = {"'//,\n1,2,3,4,5,6,7,8,9':45", "'//,\n123,456,789':1368"}, delimiter = ':')
+	@DisplayName(value = ", 혹은 | 구분자를 사용하는 경우 숫자로 분리하여 합한 값을 반환한다")
+	void sumTokenizingCustom(String text, int value) {
+		int resultByComma = StringCalculator.sumByCustomDelimiter(text);
+		assertThat(resultByComma).isEqualTo(value);
+		int resultByVerticalBar = StringCalculator.sumByCustomDelimiter(text);
+		assertThat(resultByVerticalBar).isEqualTo(value);
+	}
+
+
 }

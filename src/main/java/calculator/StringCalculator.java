@@ -7,7 +7,10 @@ public class StringCalculator {
 
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
+
+	private static final int DELIMITER_GROUP = 1;
+	private static final int TEXT_GROUP = 2;
 
 	public static int sumByDelimiter(String text) {
 		if (isEmpty(text)) {
@@ -24,22 +27,30 @@ public class StringCalculator {
 		if (isEmpty(delimiterAndText)) {
 			return 0;
 		}
-		customDelimiterValidation(delimiterAndText);
 		Matcher matched = CUSTOM_DELIMITER_PATTERN.matcher(delimiterAndText);
-		String delimiter = matched.group(1);
-		String text  = matched.group(2);
+		customDelimiterValidation(matched);
+		String delimiter = extractDelimiter(matched);
+		String text = extractText(matched);
 		String[] token = tokenizing(text, delimiter);
 		return sumTokens(token);
 	}
 
-	private static void customDelimiterValidation(String text) {
-		if (!hasCustomDelimiter(text)) {
-			throw new RuntimeException(" “//”와 “\\n\\” 사이에 custom 구분자가 명시되어 있지 않습니다");
+	private static String extractDelimiter(Matcher matched) {
+		return matched.group(DELIMITER_GROUP);
+	}
+
+	private static String extractText(Matcher matched) {
+		return matched.group(TEXT_GROUP);
+	}
+
+	private static void customDelimiterValidation(Matcher matcher) {
+		if (!hasCustomDelimiter(matcher)) {
+			throw new RuntimeException(" “//”와 “\n” 사이에 custom 구분자가 명시되어 있지 않습니다");
 		}
 	}
 
-	private static boolean hasCustomDelimiter(String text) {
-		return CUSTOM_DELIMITER_PATTERN.matcher(text).find();
+	private static boolean hasCustomDelimiter(Matcher matcher) {
+		return matcher.find();
 	}
 
 	private static void validate(String token) {
