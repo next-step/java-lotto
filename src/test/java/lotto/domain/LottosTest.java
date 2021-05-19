@@ -23,5 +23,6 @@ class LottosTest {
 
         assertThat(winningResult.getResults())
                 .containsExactly(WinningType.FIRST, WinningType.SECOND, WinningType.SECOND);
+        assertThat(winningResult.count(WinningType.SECOND)).isEqualTo(2);
     }
 }
