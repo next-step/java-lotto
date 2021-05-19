@@ -10,8 +10,9 @@ public class StringAddCalculator {
         if (StringUtils.isBlank(input)) {
             return 0;
         }
+
         Values values = Values.init(input);
-        Numbers numbers = Numbers.from(values.getValues());
+        Numbers numbers = Numbers.from(values);
         return numbers.sum();
     }
 }
