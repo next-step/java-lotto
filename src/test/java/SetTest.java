@@ -28,4 +28,13 @@ class SetTest {
 		assertThat(numbers.size())
 			.isEqualTo(3); // Set Collection 특성 때문에 중복이 제거되고 3개만 있어야한다.
 	}
+
+	@ParameterizedTest(name = "Set Collection, contains 테스트. value={0}")
+	@ValueSource(ints = {
+		1, 2, 3
+	})
+	void containsTest(final int value) {
+		assertThat(numbers.contains(value))
+			.isTrue();
+	}
 }
