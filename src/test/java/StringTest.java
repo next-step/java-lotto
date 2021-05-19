@@ -25,6 +25,20 @@ public class StringTest {
         assertThat(splitTarget).containsExactly(expectedResult);
     }
 
+    @DisplayName("bracket을 제거하는 substring 테스트")
+    @Test
+    void substringBracket() {
+        // Given
+        String testingTarget = "(1,2)";
+        String expectedResult = "1,2";
+
+        // When
+        String substringResult = testingTarget.substring(1, testingTarget.length() - 1);
+
+        // Then
+        assertEquals(expectedResult, substringResult);
+    }
+
     private static Stream<Arguments> provideSourceToSplitWithComma() {
         return Stream.of(
                 Arguments.of("1,2", new String[]{"1", "2"}),
