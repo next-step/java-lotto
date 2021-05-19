@@ -7,9 +7,9 @@ import stringCalculator.utility.Separator;
 import stringCalculator.utility.Validator;
 
 public class StringAddCalculator {
-    Validator validator;
-    Separator separator;
-    Positive positive;
+    private final Validator validator;
+    private final Separator separator;
+    private final Positive positive;
 
     public StringAddCalculator() {
         validator = new Validator();
