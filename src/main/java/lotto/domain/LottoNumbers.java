@@ -1,17 +1,31 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private final Set<Integer> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoNumbers(Set<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getValue() {
-        return new ArrayList<>(lottoNumbers);
+    public LottoNumbers(int... lottoNumber) {
+        this(initNumbers(lottoNumber));
+    }
+
+    private static Set<Integer> initNumbers(int[] lottoNumber) {
+        return Arrays.stream(lottoNumber)
+                    .boxed()
+                    .collect(Collectors.toSet());
+    }
+
+    public Set<Integer> getValue() {
+        return new TreeSet<>(lottoNumbers);
+    }
+
+    public int matchNumbers(LottoNumbers lottoNumbers) {
+        return 0;
     }
 }

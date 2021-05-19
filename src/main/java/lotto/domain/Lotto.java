@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final long PRICE = 1000L;
@@ -16,7 +16,15 @@ public class Lotto {
         return new Lotto(LottoNumbersGenerator.generate());
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return lottoNumbers.getValue();
+    }
+
+    private int countOfMatch(Lotto winningLotto) {
+        return lottoNumbers.matchNumbers(winningLotto.lottoNumbers);
+    }
+
+    public WinningType match(Lotto winningLotto) {
+        return WinningType.findType(this.countOfMatch(winningLotto));
     }
 }
