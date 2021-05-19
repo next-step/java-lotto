@@ -141,19 +141,19 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
     - [ ] 2-6.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
 - [x] 3.분석 및 설계
     - [x] 3-1.Step01.md 작성
-- [ ] 4.구현
-    - [ ] 4-1.String 클래스에 대한 학습 테스트
-        - [ ] 4-1-1.split() 
-        - [ ] 4-1-2.assertj : contains(), containsExactly() 
-        - [ ] 4-1-3.substring() : `()`제거
-        - [ ] 4-1-4.charAt()
-        - [ ] 4-1-5.StringIndexOutOfBoundsException Test Code
-        - [ ] 4-1-6.@DisplayName 활용
-    - [ ] 4-2.Set Collection에 대한 학습 테스트
-        - [ ] 4-2-1.size()
-        - [ ] 4-2-2.contains()
-        - [ ] 4-2-3.JUnit : ParameterizedTest
-        - [ ] 4-2-4.JUnit : CsvSource
+- [x] 4.구현
+    - [x] 4-1.String 클래스에 대한 학습 테스트
+        - [x] 4-1-1.split() 
+        - [x] 4-1-2.assertj : contains(), containsExactly() 
+        - [x] 4-1-3.substring() : `()`제거
+        - [x] 4-1-4.charAt()
+        - [x] 4-1-5.StringIndexOutOfBoundsException Test Code
+        - [x] 4-1-6.@DisplayName 활용
+    - [x] 4-2.Set Collection에 대한 학습 테스트
+        - [x] 4-2-1.size()
+        - [x] 4-2-2.contains()
+        - [x] 4-2-3.JUnit : ParameterizedTest
+        - [x] 4-2-4.JUnit : CsvSource
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
     - [ ] 5-2.checkstyle 문제없는지 확인
