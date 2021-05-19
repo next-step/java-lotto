@@ -21,4 +21,7 @@
 1. split string | null => string[]
 2. sum string[] => int
 
+### 유의사항
+1. string.split 의경우 regex를 인자로 받는데 meta character의 경우에 literal한 문자로 인식하게 위해서는 Pattern.quote를 사용
+
 
