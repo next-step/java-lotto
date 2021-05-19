@@ -10,39 +10,75 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    @DisplayName("splitAndSum null 또는 빈 문자")
+    @DisplayName("null 또는 빈 문자를 넣으면 0 이 리턴 되는지")
     @ParameterizedTest
     @NullAndEmptySource
     public void splitAndSum_null_or_empty(String input) {
-        assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(0);
+        //given
+        int expected = 0;
+        int result;
+
+        //when
+        result = StringAddCalculator.splitAndSum(input);
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("splitAndSum 숫자 하나")
+    @DisplayName("String 1 을 넣으면 int 1 이 리턴 되는지")
     public void splitAndSum_only_one() {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+        //given
+        int expected = 1;
+        int result;
+
+        //when
+        result = StringAddCalculator.splitAndSum("1");
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("splitAndSum 쉼표 구분자")
+    @DisplayName("1,2를 넣었을 때 ,(쉼표)로 구분자를 정해서 3이 리턴되는지")
     public void splitAndSum_comma_separator() {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+        //given
+        int expected = 3;
+        int result;
+
+        //when
+        result = StringAddCalculator.splitAndSum("1,2");
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("splitAndSum 쉼표 또는 콜론 구분자")
+    @DisplayName("1,2:3을 넣었을 때 ,(쉼표)와 :(콜론)으로 구분자를 정해서 6이 리턴되는지")
     public void splitAndSum_comma_or_colon_separator() {
-        int result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+        //given
+        int expected = 6;
+        int result;
+
+        //when
+        result = StringAddCalculator.splitAndSum("1,2:3");
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("// 와 \\n 사이로 들어오는 값을 구분자로 정해서 합계가 잘 나오는지?")
+    @DisplayName("// 와 \\n 사이로 들어오는 값을 구분자로 정해서 합계가 잘 나오는지")
     public void splitAndSum_custom_separator() {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+        //given
+        int expected = 6;
+        int result;
+
+        //when
+        result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+
+        //then¬
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
