@@ -1,0 +1,26 @@
+package lotto.utils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StringUtils {
+
+    public static final String INPUT_NUMBER_ERROR_MESSAGE = "숫자만 입력 가능합니다.";
+
+    public static List<Integer> toIntegerList(String numbers) {
+        return Arrays.stream(numbers.split(","))
+                .map(StringUtils::parseInteger)
+                .collect(Collectors.toList());
+    }
+
+    private static int parseInteger(String s) {
+        int result;
+        try {
+            result = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INPUT_NUMBER_ERROR_MESSAGE, e);
+        }
+        return result;
+    }
+}

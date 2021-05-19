@@ -34,4 +34,17 @@ public class LottoTicket {
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
+
+    public Prize match(LottoTicket winningNumbers) {
+        int matchCount = (int) lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+
+        return Prize.findByMatchCount(matchCount);
+    }
+
+    private boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
 }
