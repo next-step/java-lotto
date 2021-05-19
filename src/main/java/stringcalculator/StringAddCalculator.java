@@ -14,7 +14,7 @@ public class StringAddCalculator {
     private static final String REGEX_TEXT = "//(.)\n(.*)";
 
     public static int splitAndSum(String text) {
-        if (validateNullOrEmpty(text) || validateNullOrEmpty(getTextNumbers(text))) {
+        if (validateNullOrEmpty(text)) {
             return DEFAULT_RETURN_VALUE;
         }
         String delimiters = getDelimiter(text);
@@ -33,14 +33,18 @@ public class StringAddCalculator {
     }
 
     private static String getTextNumbers(String text) {
+        String resultText = text;
         Matcher matcher = Pattern.compile(REGEX_TEXT).matcher(text);
         if (matcher.find()) {
-            text = matcher.group(REGEX_GROUP_INDEX_TEXT);
+            resultText = matcher.group(REGEX_GROUP_INDEX_TEXT);
         }
-        return text;
+        return resultText;
     }
 
     private static int getSumStringNumbers(String numbers, String delimiters) {
+        if (validateNullOrEmpty(numbers)) {
+            return DEFAULT_RETURN_VALUE;
+        }
         int sumNumbers = DEFAULT_RETURN_VALUE;
         for (String number : numbers.split(delimiters)) {
             sumNumbers += toIntegerNumber(number);
@@ -49,8 +53,11 @@ public class StringAddCalculator {
     }
 
     private static int toIntegerNumber(String number) {
-        if (validateNotNumber(number) || validateMinusNumber(number)) {
-            throw new RuntimeException();
+        if (validateNotNumber(number)) {
+            throw new RuntimeException("입력문자는 숫자만 가능합니다. 숫자가 아닌 문자가 입력되었습니다.");
+        }
+        if (validateMinusNumber(number)) {
+            throw new RuntimeException("입력된 숫자는 음수일 수 없습니다.");
         }
         return Integer.parseInt(number);
     }
