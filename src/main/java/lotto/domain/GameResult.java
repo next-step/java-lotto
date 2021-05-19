@@ -75,14 +75,14 @@ public class GameResult {
      * 로또 결과를 리턴한다.
      */
     public GameResult getResult() {
-        GameResult gameResult = new GameResult(this.purchasedLottos, this.winningLotto);
-        for (Lotto lotto : this.purchasedLottos) {
+        final GameResult gameResult = new GameResult(this.purchasedLottos, this.winningLotto);
+        for (final Lotto lotto : purchasedLottos) {
             gameResult.addWinResult(this.winningLotto.getPrizeMatch(lotto));
         }
         return gameResult;
     }
 
-    private int getTotal(Prize prize) {
+    private int getTotal(final Prize prize) {
         return result.get(prize) * prize.getAmount();
     }
 }

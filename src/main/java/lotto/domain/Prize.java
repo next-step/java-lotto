@@ -8,8 +8,8 @@ import java.util.function.Function;
  */
 public enum Prize {
     MISS(0, 0, (match) -> match < 3),
-    FOURTH(4, 5000, (match) -> match == 3),
-    THIRD(5, 50_000, (match) -> match == 4),
+    FOURTH(3, 5000, (match) -> match == 3),
+    THIRD(4, 50_000, (match) -> match == 4),
     SECOND(5, 1_500_000, (match) -> match == 5),
     FIRST(6, 2000_000_000, (match) -> match == 6);
 
