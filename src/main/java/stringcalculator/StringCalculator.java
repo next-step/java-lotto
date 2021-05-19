@@ -17,12 +17,12 @@ public class StringCalculator {
     }
 
     public static int[] stringsToInts(String input) {
-        String[] splited = split(input);
+        String[] pieces = split(input);
 
-        int[] result = new int[splited.length];
+        int[] result = new int[pieces.length];
 
-        for(int i = 0; i < result.length; i++) {
-            result[i] = stringToInteger(splited[i]);
+        for(int i = 0; i < pieces.length; i++) {
+            result[i] = stringToInteger(pieces[i]);
         }
 
         return result;
