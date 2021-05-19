@@ -27,7 +27,7 @@ public class CalculatorExpressionFactoryTest {
         assertEquals(expectedSeparator, calculatorExpression.getSeparator());
         assertEquals(expectedFormula, calculatorExpression.getFormula());
     }
-    
+
     static Stream<Arguments> provideSourceToOf() {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", ",|:|;", "1;2;3"),
