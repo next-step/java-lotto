@@ -5,13 +5,19 @@ import java.util.List;
 
 public class WinningResult {
 
-    private final List<WinningType> winningType;
+    private final List<WinningType> winningTypes;
 
-    public WinningResult(List<WinningType> winningType) {
-        this.winningType = winningType;
+    public WinningResult(List<WinningType> winningTypes) {
+        this.winningTypes = winningTypes;
+    }
+
+    public long count(WinningType winningType) {
+        return winningTypes.stream()
+                    .filter(type -> type.equals(winningType))
+                    .count();
     }
 
     public List<WinningType> getResults() {
-        return new ArrayList<>(winningType);
+        return new ArrayList<>(winningTypes);
     }
 }
