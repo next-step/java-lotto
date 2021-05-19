@@ -2,8 +2,11 @@ package lotto.controller;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoList;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Map;
 
 public class LottoAutomaticMain {
     static InputView inputView = new InputView();
@@ -21,7 +24,8 @@ public class LottoAutomaticMain {
 
         lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-        lottoGame.getWinning();
-
+        Map<Rank, Long> winning =  lottoGame.getWinning();
+        resultView.resultStatistics(winning);
+lottoGame.getStatistics(winning);
     }
 }

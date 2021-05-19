@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.automatic.Rank;
+import lotto.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class LottoGame {
     }
 
 
-    public void getWinning() {
+    public Map<Rank, Long> getWinning() {
         List<Rank> list = new ArrayList<>();
         for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
@@ -53,5 +53,14 @@ public class LottoGame {
         }
         Map<Rank, Long> collect = list.stream()
                 .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+
+        return collect;
+    }
+
+
+    public double getStatistics(Map<Rank,Long> statistics){
+
+
+        return 0;
     }
 }
