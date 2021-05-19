@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.model.LottoNumbers;
 import lotto.model.LottoNumbersGenerator;
+import lotto.model.LottoNumbersGroup;
 import lotto.model.Money;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
@@ -21,14 +22,15 @@ public class LottoApp {
 	}
 
 	public void run() {
-		List<LottoNumbers> lottoNumbers = buyLotto();
-		System.out.println(lottoNumbers);
+		LottoNumbersGroup lottoNumbersGroup = buyLottoNumbersGroup();
+		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
 	}
 
-	private List<LottoNumbers> buyLotto() {
+	private LottoNumbersGroup buyLottoNumbersGroup() {
 		lottoAppOutput.printMoneyInputView();
 		Money money = lottoAppInput.inputMoney();
 		int lottoCount = money.calculateLottoCount();
-		return lottoNumbersGenerator.generateRandomly(lottoCount);
+		lottoAppOutput.printBoughtLottoCountView(lottoCount);
+		return new LottoNumbersGroup(lottoNumbersGenerator.generateRandomly(lottoCount));
 	}
 }

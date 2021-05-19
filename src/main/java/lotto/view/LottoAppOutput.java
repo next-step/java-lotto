@@ -1,8 +1,15 @@
 package lotto.view;
 
 import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import lotto.model.LottoNumbers;
+import lotto.model.LottoNumbersGroup;
 
 public class LottoAppOutput {
+	private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
 	private final PrintStream printStream;
 
@@ -16,5 +23,23 @@ public class LottoAppOutput {
 
 	public void printBoughtLottoCountView(int lottoCount) {
 		printStream.println(lottoCount + "개를 구매했습니다.");
+	}
+
+	public void printLottoNumbersGroup(LottoNumbersGroup lottoNumbersGroup) {
+		for (List<Integer> lottoNumbers : lottoNumbersGroup.getLottoNumbersGroup()) {
+			printLottoNumbers(lottoNumbers);
+		}
+	}
+
+	void printLottoNumbers(List<Integer> lottoNumbers) {
+		Collections.sort(lottoNumbers);
+		String lottoNumberText = renderLottoNumbers(lottoNumbers);
+		printStream.println("[" + lottoNumberText + "]");
+	}
+
+	private String renderLottoNumbers(List<Integer> lottoNumbers) {
+		return lottoNumbers.stream()
+			.map(String::valueOf)
+			.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
 	}
 }

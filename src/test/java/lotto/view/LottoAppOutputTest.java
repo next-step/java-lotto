@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,6 +38,14 @@ public class LottoAppOutputTest {
 		lottoAppOutput.printBoughtLottoCountView(lottoCount);
 
 		assertThat(outputStream.toString()).contains(lottoCount + "개를 구매했습니다.");
+	}
+
+	@Test
+	@DisplayName("하나의 로또 번호는 오름차순 정렬이 되어 출력된다.")
+	public void printLottoNumbersTest() {
+		lottoAppOutput.printLottoNumbers(Arrays.asList(4, 3, 2, 5, 6, 1));
+
+		assertThat(outputStream.toString()).contains("[1, 2, 3, 4, 5, 6]");
 	}
 
 }
