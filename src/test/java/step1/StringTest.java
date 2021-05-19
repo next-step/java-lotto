@@ -32,4 +32,22 @@ public class StringTest {
 		String result = str.substring(1, str.length() - 1);
 		assertThat(result).isEqualTo("1,2");
 	}
+
+	@Test
+	@DisplayName(value = "각 위치의 따른 문자를 확인한다.")
+	public void getCharacterUsingCharAt() throws Exception {
+		String str = "abc";
+		assertThat(str.charAt(0)).isEqualTo('a');
+		assertThat(str.charAt(1)).isEqualTo('b');
+		assertThat(str.charAt(2)).isEqualTo('c');
+	}
+
+	@Test
+	@DisplayName(value = "인덱스를 벗어나 예외가 발생한다.")
+	public void getOutOfBoundCharacter() throws Exception {
+		String str = "abc";
+		assertThatThrownBy(() -> str.charAt(3))
+			.isInstanceOf(StringIndexOutOfBoundsException.class)
+			.hasMessageContaining("String index out of range: 3");
+	}
 }
