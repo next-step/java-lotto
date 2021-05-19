@@ -46,4 +46,12 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.sum("1,2:3")).isEqualTo(6);
         assertThat(StringCalculator.sum("//;\n1;2;3")).isEqualTo(6);
     }
+
+    @DisplayName("빈문자열 또는 null 합계 테스트")
+    @Test
+    void sum_빈문자열또는null() {
+        assertThat(StringCalculator.sum(null)).isEqualTo(0);
+        assertThat(StringCalculator.sum("")).isEqualTo(0);
+    }
+
 }

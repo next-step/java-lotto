@@ -45,11 +45,16 @@ public class StringCalculator {
     }
 
     public static int sum(String s) {
+        int result = 0;
+
+        if(s == null || s.isEmpty()) {
+            return result;
+        }
+
         int[] ints = stringsToInts(s);
 
-        int result = 0;
-        for(int ele: ints) {
-            result += ele;
+        for(int element: ints) {
+            result += element;
         }
 
         return result;
