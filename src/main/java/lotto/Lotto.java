@@ -9,8 +9,8 @@ public class Lotto {
 
     public void startPurchase() {
         inputView.printInputPurchasePrice();
-        int price = calculatePrice(validateInputPrice(inputView.inputPurchasePrice()));
-        inputView.printPurchasePrice(price);
+        int lottoCount = calculatePrice(validateInputPrice(inputView.inputPurchasePrice()));
+        inputView.printPurchasePrice(lottoCount);
     }
 
     protected int validateInputPrice(String price) {

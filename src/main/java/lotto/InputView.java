@@ -23,8 +23,8 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public void printPurchasePrice(int price) {
-        System.out.println(price+PURCHASE_PRINT);
+    public void printPurchasePrice(int lottoCount) {
+        System.out.println(lottoCount + PURCHASE_PRINT);
     }
 
     public void printLastWeeksWinningNumber() {
