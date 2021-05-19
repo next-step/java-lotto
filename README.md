@@ -17,6 +17,6 @@
     * [x] String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져올 때 위치 값을 벗어나면 StringIndexOutOfBoundsException이 발생하는 부분에 대한 학습 테스트를 구현한다.
     * [x] JUnit의 @DisplayName을 활용해 테스트 메소드의 의도를 드러낸다.
 * [ ] Set Collection 학습 테스트
-    * [ ] Set의 size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트를 구현한다.
+    * [x] Set의 size() 메소드를 활용해 Set의 크기를 확인하는 학습테스트를 구현한다.
     * [ ] Set의 contains() 메소드를 활용해 1, 2, 3의 값이 존재 하는지를 확인하는 학습 테스트를 구현. (*. ParameterizedTest, ValueSource 활용)
     * [ ] 입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능하도록 구현한다. 예를 들어 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
