@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain.ticket;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

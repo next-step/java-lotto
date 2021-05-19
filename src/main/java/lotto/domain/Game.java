@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.generator.LottoNumberRandomGenerator;
+import lotto.domain.rank.LottoRanks;
+import lotto.domain.ticket.LottoTickets;
 
 public class Game {
     private static final PositiveInteger TICKET_PRICE = new PositiveInteger(1000);

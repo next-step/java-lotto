@@ -1,7 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.*;
 import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.LottoRanks;
 import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

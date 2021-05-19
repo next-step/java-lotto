@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.LottoRanks;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

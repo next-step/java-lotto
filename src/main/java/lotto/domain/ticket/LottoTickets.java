@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
+import lotto.domain.PositiveInteger;
 import lotto.domain.generator.LottoNumberGenerator;
 
 import java.util.Collections;

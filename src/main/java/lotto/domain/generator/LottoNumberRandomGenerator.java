@@ -1,7 +1,7 @@
 package lotto.domain.generator;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;

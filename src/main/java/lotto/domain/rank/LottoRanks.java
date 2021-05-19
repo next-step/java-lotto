@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.rank;
+
+import lotto.domain.PositiveInteger;
 
 import java.util.HashMap;
 import java.util.List;

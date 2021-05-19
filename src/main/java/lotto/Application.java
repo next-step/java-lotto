@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.PositiveInteger;
 import lotto.domain.Game;
-import lotto.domain.LottoRanks;
+import lotto.domain.rank.LottoRanks;
 import lotto.domain.LottoWon;
 import lotto.view.InputView;
 import lotto.view.OutputView;
