@@ -11,12 +11,16 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> incrementedLottoNumberBySize) {
-        this.lottoNumbers = new HashSet<>(incrementedLottoNumberBySize);
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
+    }
 
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(format("로또티켓은 %d개의 번호를 가져야 합니다.", LOTTO_NUMBERS_SIZE));
         }
+
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
