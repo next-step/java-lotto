@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import static java.lang.String.format;
 
 public class OutputView {
+    private static final String NUMBER_JOIN_DELIMITER_STRING = ",";
+
     private final Game game;
 
     public OutputView(Game game) {
@@ -32,7 +34,7 @@ public class OutputView {
                 .map(item -> String.valueOf(item.getNumber()))
                 .collect(Collectors.toList());
 
-        System.out.println(format("[%s]", String.join(",", numbers)));
+        System.out.println(format("[%s]", String.join(NUMBER_JOIN_DELIMITER_STRING, numbers)));
     }
 
     public void printRanks(LottoRanks match) {
@@ -47,9 +49,11 @@ public class OutputView {
 
     public void printYields(LottoRanks match) {
         PositiveInteger reward = match.sumReward();
-        PositiveInteger positiveInteger = game.totalPriceOfTickets();
+        PositiveInteger totalPrice = game.totalPriceOfTickets();
 
-        System.out.println(format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", (double) reward.getValue() / (double) positiveInteger.getValue() / 100));
+        LottoYield lottoYield = new LottoYield(reward, totalPrice);
+
+        System.out.println(format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottoYield.calc()));
     }
 
     private void printRankInfo(LottoRanks ranks, LottoRank from) {
