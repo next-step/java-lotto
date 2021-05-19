@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -40,5 +41,17 @@ public class SetTest {
     void contain_specificInt(int input) {
         // Then
         assertTrue(numbers.contains(input));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiterString = ":")
+    @DisplayName("Set.contain, 특정 int 포함/미포함 여부 확인 테스트")
+    void contain_withSpecificIntAndExpectedResult(int input, boolean expectedResult) {
+
+        // When
+        boolean actualResult = numbers.contains(input);
+
+        // Then
+        assertEquals(expectedResult, actualResult);
     }
 }
