@@ -2,11 +2,9 @@ package calculator.domain;
 
 import calculator.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
 
 public class Numbers {
     private final List<Number> numbers;
@@ -16,11 +14,18 @@ public class Numbers {
     }
 
     public static Numbers from(final List<String> values) {
-        return values.stream()
-                .filter(StringUtils::isNumber)
-                .map(value -> Number.from(Integer.parseInt(value)))
-                .collect(collectingAndThen(toList(),
-                        Numbers::new));
+        List<Number> numbers = new ArrayList<>();
+        for (String value : values) {
+            validateValue(value);
+            numbers.add(Number.from(Integer.parseInt(value)));
+        }
+        return new Numbers(numbers);
+    }
+
+    private static void validateValue(final String value) {
+        if (!StringUtils.isNumber(value)) {
+            throw new RuntimeException("only number are available");
+        }
     }
 
     public int sum() {

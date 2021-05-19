@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NumbersTest {
 
@@ -24,17 +25,17 @@ class NumbersTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("숫자가 아닌 문자를 입력하면 제외하고 합계가 반환된다")
+    @DisplayName("숫자가 아닌 문자를 입력하면 예외가 발생한다")
     @Test
-    void sum_exclude_non_number() {
+    void validate_number() {
         // given
         List<String> values = Arrays.asList("1", "2", "삼", "one");
-        Numbers numbers = Numbers.from(values);
 
         // when
-        int result = numbers.sum();
 
         // then
-        assertThat(result).isEqualTo(3);
+        assertThatThrownBy(() -> Numbers.from(values))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("only number are available");
     }
 }
