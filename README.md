@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## 3단계 - 로또(자동)
+* 구입 금액에 해당하는 로또 구매
+* 로또 번호 자동 생성
+* 당첨 번호 생성(자동 생성 활용)
+* 당첨 통계
+* UI로직 구현
