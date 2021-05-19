@@ -2,21 +2,15 @@ package study;
 
 public class StringSeparator {
 
+	private final Delimiter delimiter;
 	private final String text;
 
-	private String delimiter;
-
-	public StringSeparator(String delimiter, String text) {
+	public StringSeparator(Delimiter delimiter, String text) {
 		this.delimiter = delimiter;
-
-		if (delimiter == null || delimiter.isEmpty()) {
-			this.delimiter = Delimiter.DEFAULT_DELIMITER;
-		}
-
 		this.text = text;
 	}
 
 	public String[] split() {
-		return text.split(delimiter);
+		return text.split(delimiter.get());
 	}
 }

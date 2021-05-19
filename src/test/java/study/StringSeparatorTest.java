@@ -13,14 +13,14 @@ public class StringSeparatorTest {
 	@NullSource
 	@EmptySource
 	void default_delimiter(String input) {
-		StringSeparator separator = new StringSeparator(input, "1,2:3");
+		StringSeparator separator = new StringSeparator(new Delimiter(input), "1,2:3");
 
 		assertThat(separator.split()).containsExactly("1", "2", "3");
 	}
 
 	@Test
 	void custom_delimiter() {
-		StringSeparator separator = new StringSeparator("!", "4!5!6");
+		StringSeparator separator = new StringSeparator(new Delimiter("!"), "4!5!6");
 
 		assertThat(separator.split()).containsExactly("4", "5", "6");
 	}
