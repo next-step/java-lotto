@@ -25,7 +25,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_쉼표구분자() throws Exception {
+    @DisplayName("splitAndSum 쉼표 구분자")
+    public void splitAndSum_comma_separator() {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
