@@ -3,6 +3,7 @@ package kht2199;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("SameParameterValue")
 public class StringAddCalculator {
 
 	private static final String regex = "[,:]";
@@ -14,30 +15,41 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] tokens = splitText(text, pattern, regex);
-		Integer[] intTokens = stringToInt(tokens);;
+		String[] tokens = parseTokensByMatcher(pattern, text);
+		if (tokens == null) {
+			tokens = text.split(regex);
+		}
+
+		Integer[] intTokens = stringToInt(tokens);
 		for (Integer token : intTokens) {
 			checkValidationToken(token);
 		}
 
-		return accumulation(intTokens);
+		return accumulate(intTokens);
 	}
 
-	private static int accumulation(Integer[] values) {
+	private static String[] parseTokensByMatcher(Pattern pattern, String text) {
+		Matcher matcher = pattern.matcher(text);
+		if (!matcher.find()) {
+			return null;
+		}
+		checkValidationMatcherGroupCount(matcher);
+		return matcher.group(2).split(matcher.group(1));
+	}
+
+	private static void checkValidationMatcherGroupCount(Matcher matcher) {
+		int groupCount = matcher.groupCount();
+		if (groupCount != 2) {
+			throw new RuntimeException("invalid group count. " + groupCount);
+		}
+	}
+
+	private static int accumulate(Integer[] values) {
 		int sum = 0;
 		for (Integer integer : values) {
 			sum += integer;
 		}
 		return sum;
-	}
-
-	private static String[] splitText(String text, Pattern pattern, String regex) {
-		Matcher matcher = pattern.matcher(text);
-		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			return matcher.group(2).split(customDelimiter);
-		}
-		return text.split(regex);
 	}
 
 	/**
