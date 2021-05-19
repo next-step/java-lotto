@@ -9,6 +9,9 @@ public class StringCalculator {
 	private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
 
+	private static final char NUMERIC_CHARACTER_START_0 = '0';
+	private static final char NUMERIC_CHARACTER_END_9 = '9';
+
 	private static final int DELIMITER_GROUP = 1;
 	private static final int TEXT_GROUP = 2;
 
@@ -64,7 +67,7 @@ public class StringCalculator {
 	}
 
 	private static void numberValidation(char ch) {
-		if ('0' > ch || '9' < ch) {
+		if (NUMERIC_CHARACTER_START_0 > ch || NUMERIC_CHARACTER_END_9 < ch) {
 			throw new RuntimeException("양수인 숫자만 연산이 가능합니다");
 		}
 	}
