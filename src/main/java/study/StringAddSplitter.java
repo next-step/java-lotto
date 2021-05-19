@@ -2,6 +2,8 @@ package study;
 
 public abstract class StringAddSplitter {
 
+	private static final int ZERO = 0;
+
 	protected String stringNumbers;
 	protected String[] tokens;
 
@@ -29,7 +31,7 @@ public abstract class StringAddSplitter {
 	}
 
 	private void negativeValidToken(String token) {
-		if (Integer.parseInt(token) < 0)
+		if (Integer.parseInt(token) < ZERO)
 			throw new RuntimeException("음수입니다.");
 	}
 
