@@ -23,10 +23,10 @@ public class LottoApp {
 	}
 
 	public void run() {
-		Money money = inputMoney();
-		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup((int) money.divided(Money.LOTTO_PRICE));
+		Money inputMoney = inputMoney();
+		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup((int) inputMoney.divided(Money.LOTTO_PRICE));
 		LottoNumbers winningNumbers = inputWinningNumbers();
-		printLottoResult(lottoNumbersGroup.match(winningNumbers), money);
+		printLottoResult(lottoNumbersGroup.match(winningNumbers), inputMoney);
 	}
 
 	private Money inputMoney() {
@@ -48,7 +48,7 @@ public class LottoApp {
 
 	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {
 		Rate earningRate = lottoResult.calculateEarningRate(inputMoney);
-		LottoResultDto resultDto = LottoResultDto.from(lottoResult, earningRate);
+		LottoResultDto resultDto = LottoResultDto.toDto(lottoResult, earningRate);
 		lottoAppOutput.printLottoResult(resultDto);
 	}
 }

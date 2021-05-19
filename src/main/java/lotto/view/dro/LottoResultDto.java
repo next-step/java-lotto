@@ -20,7 +20,7 @@ public class LottoResultDto {
 		this.lottoEarningRateDto = lottoEarningRateDto;
 	}
 
-	public static LottoResultDto from(LottoResult lottoResult, Rate earningRate) {
+	public static LottoResultDto toDto(LottoResult lottoResult, Rate earningRate) {
 		List<LottoRank> lottoRanksToRender = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
 		List<LottoRankResultDto> lottoRankResultDtos = lottoRanksToRender.stream()
 			.map(lottoRank -> new LottoRankResultDto(lottoRank, lottoResult.count(lottoRank)))
