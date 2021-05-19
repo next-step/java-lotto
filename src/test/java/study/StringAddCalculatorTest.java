@@ -3,13 +3,17 @@ package study;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class StringAddCalculatorTest {
 
-	@Test
-	public void splitAndSum_null_또는_빈문자() {
-		assertThat(StringAddCalculator.splitAndSum(null)).isEqualTo(0);
-		assertThat(StringAddCalculator.splitAndSum("")).isEqualTo(0);
+	@ParameterizedTest
+	@NullSource
+	@EmptySource
+	public void splitAndSum_null_또는_빈문자(String input) {
+		assertThat(StringAddCalculator.splitAndSum(input)).isEqualTo(0);
 	}
 
 	@Test
