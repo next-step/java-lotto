@@ -39,7 +39,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    public void splitAndSum_custom_구분자() throws Exception {
+    @DisplayName("// 와 \\n 사이로 들어오는 값을 구분자로 정해서 합계가 잘 나오는지?")
+    public void splitAndSum_custom_separator() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
