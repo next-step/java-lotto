@@ -1,5 +1,20 @@
+// 2. editorconfig plugin setting
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.ec4j.gradle:editorconfig-gradle-plugin:0.0.3"
+    }
+}
+// 2. end
+
+apply plugin: 'org.ec4j.editorconfig'
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
 
 version = '1.0.0'
 sourceCompatibility = 1.8
@@ -7,6 +22,27 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
+
+// 1. Endcoding setting
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+// 1. end
+
+// 2. editorconfig plugin setting
+editorconfig {
+    excludes = ['build']
+}
+check.dependsOn editorconfigCheck
+// 2. end
+
+// 3. Checkstyle plugin setting
+checkstyle {
+    maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail을 내고 싶다면 이 선언을 추가한다.
+    configFile = file("${rootDir}/config/naver-checkstyle-rules.xml")
+    configProperties = ["suppressionFile" : "${rootDir}/config/naver-checkstyle-suppressions.xml"]
+    toolVersion ="8.24"  // checkstyle 버전 8.24 이상 선언
+}
+// 3. end
 
 dependencies {
     testCompile('org.junit.jupiter:junit-jupiter:5.6.0')
