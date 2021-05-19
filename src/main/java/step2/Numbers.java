@@ -4,32 +4,32 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
-    private static final int emptyNumber = 0;
-    private static final String defaultCommaDelimiter = ",";
-    private static final String defaultColonDelimiter = ":";
-    private static final Pattern customDelimiterPattern = Pattern.compile("//(.)\n(.*)");
-    private static final String isNumberRegex = "[0-9]+";
-    private static final int customDelimiterGroup = 1;
-    private static final int customNumbersGroup = 2;
+    private static final int EMPTY_NUMBER = 0;
+    private static final String DEFAULT_COMMA_DELIMITER = ",";
+    private static final String DEFAULT_COLON_DELIMITER = ":";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int CUSTOM_NUMBER_ARRAY_GROUP = 2;
+    private static final String NUMBER_FORMAT_CHECK_REGEX = "[0-9]+";
     private static final String invalidNumberFormatErrorMessage = "Invalid input number.";
 
     public int[] getNumberArray(String input) {
         if(input == null || input.isEmpty()) {
-            return new int[] {emptyNumber};
+            return new int[] {EMPTY_NUMBER};
         }
 
         return convertStringArrayToIntArray(split(input));
     }
 
     private String[] split(String input) {
-        Matcher matcher = customDelimiterPattern.matcher(input);
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
         if(matcher.find()) {
-            String customDelimiter = matcher.group(customDelimiterGroup);
-            String customNumberInput = matcher.group(customNumbersGroup);
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+            String customNumberInput = matcher.group(CUSTOM_NUMBER_ARRAY_GROUP);
             return customNumberInput.split(customDelimiter);
         }
 
-        return input.split(defaultCommaDelimiter + "|" + defaultColonDelimiter);
+        return input.split(DEFAULT_COMMA_DELIMITER + "|" + DEFAULT_COLON_DELIMITER);
     }
 
     private int[] convertStringArrayToIntArray(String[] strings) {
@@ -43,7 +43,7 @@ public class Numbers {
     }
 
     private void throwInvalidNumberFormatException(String input) {
-        if(!input.matches(isNumberRegex)) {
+        if(!input.matches(NUMBER_FORMAT_CHECK_REGEX)) {
             throw new RuntimeException(invalidNumberFormatErrorMessage);
         }
     }
