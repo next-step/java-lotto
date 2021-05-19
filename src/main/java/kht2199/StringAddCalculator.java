@@ -14,7 +14,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] tokens = splitText(text);
+		String[] tokens = splitText(text, pattern, regex);
 		Integer[] intTokens = stringToInt(tokens);;
 		for (Integer token : intTokens) {
 			checkValidationToken(token);
@@ -31,7 +31,7 @@ public class StringAddCalculator {
 		return sum;
 	}
 
-	private static String[] splitText(String text) {
+	private static String[] splitText(String text, Pattern pattern, String regex) {
 		Matcher matcher = pattern.matcher(text);
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(1);
