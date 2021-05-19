@@ -36,8 +36,8 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2:3=6", "2:2:4=8", "1:2,3,10=16", "10:24,1,1:1=37", "224,111=335"}, delimiter = '=')
     public void sumNumbers(String input, int expected){
-        String[] inputArray = stringAddCalculator.splitInput(input);
-        int result = stringAddCalculator.sumNumbers(inputArray);
+        Numbers numbers = new Numbers(stringAddCalculator.splitInput(input));
+        int result = stringAddCalculator.sumNumbers(numbers.getNumbers());
         assertThat(result).isEqualTo(expected);
     }
 
@@ -60,24 +60,24 @@ public class StringAddCalculatorTest {
     @DisplayName("splitAndSum 함수 쉼표 또는 콜론 구분자 결과 확인")
     @ParameterizedTest
     @CsvSource(value = {"1,2:3=6", "2:2:4=8", "1:2,3,10=16", "10:24,1,1:1=37", "224,111=335"}, delimiter = '=')
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = stringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(6);
+    public void splitAndSum_쉼표_또는_콜론_구분자(String input, int expected) {
+        int result = stringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
     @DisplayName("input 문자열 custom 구분자로 구분하여 문자열 반환 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//-\n1-2-3", "//@\n1@2@3", "// \n1 2 3"})
-    public void splitAndSum_custom_구분자(String input) {
+    public void splitAndSum_custom_split(String input) {
         String[] result = stringAddCalculator.splitInput(input);
         assertThat(result).containsExactly("1","2","3");
     }
 
     @DisplayName("splitAndSum 함수 custom 구분자 sum 결과 확인")
     @ParameterizedTest
-    @CsvSource(value = {"//;\n1;2;3=6", "//-\n2-2-4=8", "// \n1 2 3 10=16", "//@\n10@24@1@1@1=37", "//^\n224^111=335"}, delimiter = '=')
-    public void splitAndSum_custom_구분자() {
-        int result = stringAddCalculator.splitAndSum("1,2:3");
+    @ValueSource(strings = {"//;\n1;2;3", "//-\n1-2-3", "// \n1 2 3", "//@\n1@2@3"})
+    public void splitAndSum_custom_구분자_더하기(String input) {
+        int result = stringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(6);
     }
 }
