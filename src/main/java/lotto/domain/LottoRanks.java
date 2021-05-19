@@ -27,7 +27,6 @@ public class LottoRanks {
         return new LottoRanks(countOfLottoRank);
     }
 
-
     public PositiveInteger sumReward() {
         PositiveInteger positiveInteger = PositiveInteger.ZERO;
         for (LottoRank lottoRank : LottoRank.values()) {
