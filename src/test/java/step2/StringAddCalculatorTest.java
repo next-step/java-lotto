@@ -25,7 +25,7 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("숫자 하나 입력 테스트")
-    void oneInput_shouldBeOneInput() {
+    void oneInput_shouldBeSameInput() {
         assertThat(stringAddCalculator.calculate("1")).isEqualTo(1);
     }
 

@@ -32,21 +32,21 @@ public class NumbersTest {
     @ParameterizedTest
     @DisplayName("Array 생성 테스트")
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "//;\n1;2;3"})
-    void testCreateDefaultNumbers(String input) {
+    void createDefaultNumbers_shouldSplitToArray(String input) {
         assertThat(numbers.getNumberArray(input)).isEqualTo(new int[]{1,2,3});
     }
 
     @ParameterizedTest
     @DisplayName("중복문자열 Array 생성 테스트")
     @ValueSource(strings = {"1,1,3", "1:1:3", "1,1:3", "//;\n1;1;3"})
-    void testCreateDuplicatedNumbers(String input) {
+    void createDuplicatedNumbers_shouldSplitToArray(String input) {
         assertThat(numbers.getNumberArray(input)).isEqualTo(new int[]{1,1,3});
     }
 
     @ParameterizedTest
     @DisplayName("음수 또는 잘못된 입력 테스트")
     @ValueSource(strings = {"-1,2,3", "1,-2,3", "//;1,2", "abc,1:2", "abc"})
-    void negativeInput_shouldBeRuntimeException(String input) {
+    void invalidInput_shouldBeRuntimeException(String input) {
         assertThatThrownBy(() -> numbers.getNumberArray(input))
                 .isInstanceOf(RuntimeException.class).hasMessage("Invalid input number.");
     }
