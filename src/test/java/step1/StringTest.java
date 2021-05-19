@@ -9,19 +9,19 @@ public class StringTest {
 	
 	@Test
 	@DisplayName(value = "1,2가 정상적으로 분리된다.")
-	public void splitWord() throws Exception {
-		String word = "1,2";
-		String[] result = word.split(",");
+	public void splitString() throws Exception {
+		String str = "1,2";
+		String[] result = str.split(",");
 		assertThat(result).hasSize(2);
 		assertThat(result).contains("1");
 		assertThat(result).contains("2");
 	}
 
 	@Test
-	@DisplayName("1만 포함하는 배열로 반환된다.")
-	public void splitSingleWord() throws Exception {
-		String word = "1,";
-		String[] result = word.split(",");
+	@DisplayName(value = "1만 포함하는 배열로 반환된다.")
+	public void splitSingleString() throws Exception {
+		String str = "1,";
+		String[] result = str.split(",");
 		assertThat(result).containsExactly("1");
 	}
 
