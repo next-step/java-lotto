@@ -16,7 +16,7 @@ public class Lotto {
         }
 
         if (isLottoNumberRange(numbers)) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 사용해야 합니다.");
         }
 
         numbers.sort(Comparator.naturalOrder());
