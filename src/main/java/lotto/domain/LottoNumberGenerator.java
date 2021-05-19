@@ -7,12 +7,12 @@ import java.util.List;
 /**
  * 로또번호 자동 생성기.
  */
-public class LottoAutoGenerator {
+public class LottoNumberGenerator {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final int MAX_LOTTO_COUNT = 6;
 
-    private LottoAutoGenerator() {
+    private LottoNumberGenerator() {
     }
 
     /**
