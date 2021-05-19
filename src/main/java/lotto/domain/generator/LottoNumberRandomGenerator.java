@@ -17,7 +17,7 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator{
                 .boxed()
                 .collect(Collectors.toList());
 
-        Collections.shuffle(numbersBetweenLottoNumberRange, new Random(System.currentTimeMillis()));
+        Collections.shuffle(numbersBetweenLottoNumberRange);
 
         return numbersBetweenLottoNumberRange.stream()
                 .limit(LottoTicket.LOTTO_NUMBERS_SIZE)
