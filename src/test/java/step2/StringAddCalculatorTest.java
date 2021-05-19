@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -74,6 +75,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("pattern 테스트")
     public void delimiterMatchesTest() {
         String data = "//^\n1^2^3";
         String pattern = "//(.)\n(.*)";
@@ -84,5 +86,22 @@ public class StringAddCalculatorTest {
             String remains = m.group(2);
             assertThat(remains).isEqualTo("1^2^3");
         }
+    }
+
+    @Test
+    @DisplayName("숫자 이외의 문자나 음수일 경우 Runtime Exception")
+    public void inputValidTest() {
+        String data1 = "-1,2,3";
+        String data2 = "//&\n10a&20&30";
+
+        assertThatThrownBy(()->{
+            calculator.calculate(data1);
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessage("invalid data");
+
+        assertThatThrownBy(()->{
+            calculator.calculate(data2);
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessage("invalid data");
     }
 }

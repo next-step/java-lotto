@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = ",|;";
     private static final String DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String VALID_DATA_PATTERN = "^[0-9]+$";
 
     public int calculate(String data) {
         if (data == null || data.isEmpty()) {
@@ -18,9 +19,17 @@ public class StringAddCalculator {
     private int addNumbers(String[] numbers) {
         int total = 0;
         for ( String number : numbers) {
-            total += Integer.parseInt(number);
+            total += parseInt(number);
         }
         return total;
+    }
+
+    private int parseInt(String number) {
+        Matcher matcher = Pattern.compile(VALID_DATA_PATTERN).matcher(number);
+        if (matcher.find()) {
+            return Integer.parseInt(number);
+        }
+        throw new RuntimeException("invalid data");
     }
 
     private String[] splitToNumbers(String data) {
