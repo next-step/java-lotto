@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Money {
 
@@ -29,5 +30,22 @@ public class Money {
 
     public double doubleValue() {
         return money.doubleValue();
+    }
+
+    public long longValue() {
+        return money.longValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return Objects.equals(money, money1.money);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
