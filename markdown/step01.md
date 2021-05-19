@@ -94,6 +94,7 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
 |요구사항|힌트|
 |:---|---|
 |• [Introduction to AssertJ](https://www.baeldung.com/introduction-to-assertj) 문서 참고해 assertj의 다양한 활용법 익힌다.| |
+<br>
 
 ### 1.4. 코드리뷰 요청 및 피드백
 - 실습을 끝내면 [코드 리뷰 1단계](https://github.com/next-step/nextstep-docs/blob/master/codereview/review-step1.md) 문서의 7단계, 8단계를 참고해 자신의 저장소에 push한다.
@@ -107,27 +108,30 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
 
 - 온라인 코드리뷰 요청 2단계 동영상<br>
   [![온라인 코드리뷰 요청 2단계 동영상](https://img.youtube.com/vi/HnTdFJd0PtU/0.jpg)](https://www.youtube.com/watch?v=HnTdFJd0PtU)
+  <br>
 
 ### 1.5. 다음 단계 미션 진행을 위한 준비
 - Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행한다.
 - 온라인 코드리뷰 요청 3단계 동영상<br>
   [![온라인 코드리뷰 요청 3단계 동영상](https://img.youtube.com/vi/fzrT3eoecUw/0.jpg)](https://www.youtube.com/watch?v=fzrT3eoecUw)
+  <br>
 
 ## 2. 분석 및 설계
 ### 2.1. 이번 Step 핵심 목표
 - TDD (Test-Driven Developmet) : production code보다 test code를 먼저 작성한다.
 > Cycle : Test Fail ---> Test Passes ---> Refactor ---> Test Fail ---> ...
+<br>
 
 ### 2.2. Todo List
 - [x] 0.기본 세팅
     - [x] 0-1.git fork/clone
     - [x] 0-2.요구사항 정리
-    - [x] 0-3.AngularJS Commit Message Conventions 참고
-- [ ] 1.자바 코드 컨벤션을 위한 세팅
-    - [ ] 1-1.gradle-editorconfig 적용
-    - [ ] 1-2.gradle-checkstyle 적용
-    - [ ] 1-3.IntelliJ 적용
-    - [ ] 1-4.Github 적용
+    - [x] 0-3.[AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#generating-changelogmd) 참고
+- [x] 1.자바 코드 컨벤션을 위한 세팅
+    - [x] 1-1.[gradle-editorconfig](https://naver.github.io/hackday-conventions-java/#editorconfig) 적용
+    - [x] 1-2.[gradle-checkstyle](https://naver.github.io/hackday-conventions-java/#checkstyle) 적용
+    - [x] 1-3.[IntelliJ](https://naver.github.io/hackday-conventions-java/#_intellij) 적용
+    - [x] 1-4.[Github](https://naver.github.io/hackday-conventions-java/#_github) 적용
 - [x] 2.학습
     - [x] 2-1.[AssertJ Exception Assertions](https://joel-costigliola.github.io/assertj/assertj-core-features-highlight.html#exception-assertion) 문서 참고
     - [x] 2-2.[Guide to JUnit 5 Parameterized Tests](https://www.baeldung.com/parameterized-tests-junit-5)
@@ -155,4 +159,4 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
     - [ ] 5-2.checkstyle 문제없는지 확인
 - [ ] 6.인수인계
     - [ ] 6-1.코드리뷰 요청 및 피드백
-    - [ ] 6-2.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행    
+    - [ ] 6-2.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
