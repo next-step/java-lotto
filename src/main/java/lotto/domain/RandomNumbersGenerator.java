@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.ValidationUtils.*;
+import static lotto.domain.LottoNumber.MAXIMUM_NUMBER;
+import static lotto.domain.LottoNumber.MINIMUM_NUMBER;
+import static lotto.domain.LottoTicket.LOTTO_NUMBERS_LENGTH;
 
 public class RandomNumbersGenerator implements LottoNumbersGenerator {
 
