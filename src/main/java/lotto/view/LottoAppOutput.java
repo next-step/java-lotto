@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.LottoNumbersGroup;
+import lotto.view.dro.LottoEarningRateDto;
 import lotto.view.dro.LottoRankResultDto;
 import lotto.view.dro.LottoResultDto;
 
@@ -56,6 +57,7 @@ public class LottoAppOutput {
 		for (LottoRankResultDto lottoRankResultDto : lottoResultDto.getLottoRankResultDtos()) {
 			printLottoRankResult(lottoRankResultDto);
 		}
+		printLottoEarningsRate(lottoResultDto.getLottoEarningRateDto());
 	}
 
 	void printLottoRankResult(LottoRankResultDto lottoRankResultDto) {
@@ -67,5 +69,13 @@ public class LottoAppOutput {
 
 	private void printNewLine() {
 		printStream.println();
+	}
+
+	public void printLottoEarningsRate(LottoEarningRateDto lottoEarningRateDto) {
+		String profitOrLoss = lottoEarningRateDto.getEarningsRate() > 1 ? "이익이라는" : "손해라는";
+		String render = String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s 의미임)",
+			lottoEarningRateDto.getEarningsRate(),
+			profitOrLoss);
+		printStream.println(render);
 	}
 }

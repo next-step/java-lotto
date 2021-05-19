@@ -1,29 +1,41 @@
 package lotto.view.dro;
 
+import static lotto.model.LottoRank.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.LottoRank;
 import lotto.model.LottoResult;
+import lotto.model.Rate;
 
 public class LottoResultDto {
 
-	List<LottoRankResultDto> lottoRankResultDtos;
+	private List<LottoRankResultDto> lottoRankResultDtos;
+	private LottoEarningRateDto lottoEarningRateDto;
 
-	public LottoResultDto(List<LottoRankResultDto> lottoRankResultDtos) {
+	public LottoResultDto(List<LottoRankResultDto> lottoRankResultDtos, LottoEarningRateDto lottoEarningRateDto) {
 		this.lottoRankResultDtos = lottoRankResultDtos;
+		this.lottoEarningRateDto = lottoEarningRateDto;
 	}
 
-	public static LottoResultDto from(LottoResult lottoResult) {
-		List<LottoRank> lottoRanksToRender = Arrays.asList(LottoRank.FOUR, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
-		List<LottoRankResultDto> collect = lottoRanksToRender.stream()
+	public static LottoResultDto from(LottoResult lottoResult, Rate earningRate) {
+		List<LottoRank> lottoRanksToRender = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+		List<LottoRankResultDto> lottoRankResultDtos = lottoRanksToRender.stream()
 			.map(lottoRank -> new LottoRankResultDto(lottoRank, lottoResult.count(lottoRank)))
 			.collect(Collectors.toList());
-		return new LottoResultDto(collect);
+
+		LottoEarningRateDto lottoEarningRateDto = new LottoEarningRateDto(earningRate);
+
+		return new LottoResultDto(lottoRankResultDtos, lottoEarningRateDto);
 	}
 
 	public List<LottoRankResultDto> getLottoRankResultDtos() {
 		return lottoRankResultDtos;
+	}
+
+	public LottoEarningRateDto getLottoEarningRateDto() {
+		return lottoEarningRateDto;
 	}
 }

@@ -9,8 +9,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoRank;
+import lotto.model.Rate;
+import lotto.view.dro.LottoEarningRateDto;
 import lotto.view.dro.LottoRankResultDto;
 import lotto.view.dro.LottoResultDto;
 
@@ -64,11 +68,11 @@ public class LottoAppOutputTest {
 	@DisplayName("당첨 통계는 등수 별 일치하는 로또 번호 개수, 당첨 금액, 당첨 개수를 출력한다.")
 	public void printLottoResultTest() {
 		LottoResultDto lottoResultDto = new LottoResultDto(Arrays.asList(
-			new LottoRankResultDto(LottoRank.FOUR, 1),
+			new LottoRankResultDto(LottoRank.FOURTH, 1),
 			new LottoRankResultDto(LottoRank.THIRD, 0),
 			new LottoRankResultDto(LottoRank.SECOND, 1),
 			new LottoRankResultDto(LottoRank.FIRST, 0)
-		));
+		), new LottoEarningRateDto(Rate.of(1.1)));
 
 		lottoAppOutput.printLottoResult(lottoResultDto);
 
@@ -77,5 +81,19 @@ public class LottoAppOutputTest {
 			+ "4개 일치 (50000원)- 0개\n"
 			+ "5개 일치 (1500000원)- 1개\n"
 			+ "6개 일치 (2000000000원)- 0개\n");
+	}
+
+	@ParameterizedTest
+	@DisplayName("수익률은 소수점 2자리 까지 출력하고 1을 기준으로 손해 or 이익 이라는 메시지를 포함하여 출력한다.")
+	@CsvSource(value = {
+		"0.351234f:총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+		"1.1f:총 수익률은 1.10입니다.(기준이 1이기 때문에 결과적으로 이익이라는 의미임)",
+	}, delimiter = ':')
+	public void printLottoRateResultTest(double earningRate, String expectedMessage) {
+		LottoEarningRateDto lottoEarningRateDto = new LottoEarningRateDto(Rate.of(earningRate));
+
+		lottoAppOutput.printLottoEarningsRate(lottoEarningRateDto);
+
+		assertThat(outputStream.toString()).contains(expectedMessage);
 	}
 }

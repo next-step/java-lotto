@@ -5,7 +5,8 @@ import java.util.Objects;
 public class Money {
 	private static final int ZERO = 0;
 	static final Money ZERO_WONS = Money.wons(ZERO);
-	private static final int LOTTO_PRICE = 1000;
+	public static final Money LOTTO_PRICE = Money.wons(1000);
+
 	private final int money;
 
 	private Money(int money) {
@@ -27,8 +28,19 @@ public class Money {
 		return money;
 	}
 
-	public int calculateLottoCount() {
-		return money / LOTTO_PRICE;
+	Money times(int count) {
+		return new Money(this.money * count);
+	}
+
+	Money plus(Money other) {
+		return new Money(this.money + other.money);
+	}
+
+	public double divided(Money other) {
+		if (other.equals(ZERO_WONS)) {
+			throw new IllegalArgumentException("0 원으로 나눌 수 없습니다.");
+		}
+		return this.money / (double) other.money;
 	}
 
 	@Override

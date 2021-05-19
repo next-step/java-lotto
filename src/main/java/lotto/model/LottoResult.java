@@ -16,8 +16,22 @@ public class LottoResult {
 		return countByLottoRank.getOrDefault(rank, DEFAULT_COUNT);
 	}
 
-	void add(int matchCount) {
-		LottoRank lottoRank = LottoRank.of(matchCount);
+	void increaseCountOfRank(LottoRank lottoRank) {
 		countByLottoRank.put(lottoRank, count(lottoRank) + COUNT_INCREMENT_UNIT);
+	}
+
+	Money sumTotalPrize() {
+		Money totalPrize = Money.ZERO_WONS;
+		for (LottoRank lottoRank : countByLottoRank.keySet()) {
+			Money prize = lottoRank.getPrize();
+			Money prizeOfRank = prize.times(count(lottoRank));
+			totalPrize = totalPrize.plus(prizeOfRank);
+		}
+		return totalPrize;
+	}
+
+	public Rate calculateEarningRate(Money capital) {
+		double earningRate = sumTotalPrize().divided(capital);
+		return Rate.of(earningRate);
 	}
 }

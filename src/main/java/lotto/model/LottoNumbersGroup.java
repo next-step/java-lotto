@@ -22,7 +22,8 @@ public class LottoNumbersGroup {
 		LottoResult lottoResult = new LottoResult();
 		for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
 			int matchCount = lottoNumbers.match(winningNumbers);
-			lottoResult.add(matchCount);
+			LottoRank lottoRank = LottoRank.of(matchCount);
+			lottoResult.increaseCountOfRank(lottoRank);
 		}
 		return lottoResult;
 	}

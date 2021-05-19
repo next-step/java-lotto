@@ -41,7 +41,8 @@ public class LottoNumbersGroupTest {
 
 	@ParameterizedTest
 	@DisplayName("당첨 번호에 따라 로또 그룹의 등수 별 당첨 수가 나온다.")
-	@CsvSource(value = {"SEVENTH:0", "SIXTH:0", "FIFTH:0", "FOUR:1", "THIRD:1", "SECOND:1", "FIRST:1"}, delimiter = ':')
+	@CsvSource(value = {"SEVENTH:0", "SIXTH:0", "FIFTH:0", "FOURTH:1", "THIRD:1", "SECOND:1", "FIRST:1"},
+		delimiter = ':')
 	public void resultTest(LottoRank lottoRank, int expectedCount) {
 		LottoNumbers winningNumbers = new LottoNumbers(asList(1, 5, 40, 2, 6, 26));
 

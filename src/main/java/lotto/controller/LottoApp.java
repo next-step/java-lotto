@@ -5,6 +5,7 @@ import lotto.model.LottoNumbersGenerator;
 import lotto.model.LottoNumbersGroup;
 import lotto.model.LottoResult;
 import lotto.model.Money;
+import lotto.model.Rate;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
 import lotto.view.dro.LottoResultDto;
@@ -23,9 +24,9 @@ public class LottoApp {
 
 	public void run() {
 		Money money = inputMoney();
-		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup(money.calculateLottoCount());
+		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup((int) money.divided(Money.LOTTO_PRICE));
 		LottoNumbers winningNumbers = inputWinningNumbers();
-		printLottoResult(lottoNumbersGroup.match(winningNumbers));
+		printLottoResult(lottoNumbersGroup.match(winningNumbers), money);
 	}
 
 	private Money inputMoney() {
@@ -45,8 +46,9 @@ public class LottoApp {
 		return new LottoNumbers(lottoAppInput.inputWinningNumbers());
 	}
 
-	private void printLottoResult(LottoResult lottoResult) {
-		LottoResultDto resultDto = LottoResultDto.from(lottoResult);
+	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {
+		Rate earningRate = lottoResult.calculateEarningRate(inputMoney);
+		LottoResultDto resultDto = LottoResultDto.from(lottoResult, earningRate);
 		lottoAppOutput.printLottoResult(resultDto);
 	}
 }
