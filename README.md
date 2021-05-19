@@ -17,8 +17,6 @@
 ## Steps
 
 1. [학습 테스트 실습](doc/01.md)
-   - String
-   - Set
 2. [문자열 덧셈 계산기](doc/02.md)
 3. [로또 (자동)](doc/03.md)
 4. [로또 (2등)](doc/04.md)
@@ -43,3 +41,22 @@
 ## 온라인 코드 리뷰 과정
 
 - [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+---
+
+## 코드 스타일
+
+[캠퍼스 핵데이 Java 코딩 컨벤션](https://naver.github.io/hackday-conventions-java/)
+
+1. IntelliJ IDEA → Preferences
+2. Editor → Code Style → Java
+   - Scheme: `naver-intellij-formatter.xml`
+3. Tools → Checkstyle
+   - version: `8.24`
+   - Scan Scope: All sources (including tests)
+   - Treat Checkstyle errors as warnings
+   - `Lotto Checkstyle Rules`: `naver-checkstyle-rules.xml`
+     - suppressionFile: `naver-checkstyle-suppressions.xml`
+4. Save Actions
+   - Active save actions on save
+   - Reformat file
