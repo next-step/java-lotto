@@ -9,7 +9,7 @@ public class StringAddCalculator {
 		}
 
 		return Arrays.stream(getStringTokens(inputText))
-				.map(Integer::parseInt)
+				.map(StringAddCalculator::parsePositiveInt)
 				.reduce(0, Integer::sum);
 	}
 
@@ -21,5 +21,13 @@ public class StringAddCalculator {
 		}
 
 		return text.split("[,:]");
+	}
+
+	private static int parsePositiveInt(String text) {
+		int parsedInt = Integer.parseInt(text);
+		if (parsedInt < 0) {
+			throw new RuntimeException("양수만 입력 가능합니다");
+		}
+		return parsedInt;
 	}
 }
