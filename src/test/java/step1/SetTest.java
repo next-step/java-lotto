@@ -24,9 +24,9 @@ public class SetTest {
 	}
 	
 	@Test
-	@DisplayName(value = "Set의 사이즈를 확인한다.")
+	@DisplayName(value = "size 메서드가 정상 동작한다.")
 	public void checkSize() throws Exception {
-		assertThat(numbers).hasSize(3);
+		assertThat(numbers.size()).isEqualTo(3);
 	}
 
 	@ParameterizedTest
