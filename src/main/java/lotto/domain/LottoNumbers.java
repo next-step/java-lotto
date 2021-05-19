@@ -28,7 +28,7 @@ public class LottoNumbers {
 
     private static Set<LottoNumber> initNumbers(int[] lottoNumber) {
         return Arrays.stream(lottoNumber)
-                    .mapToObj(LottoNumber::new)
+                    .mapToObj(LottoNumber::from)
                     .collect(Collectors.toSet());
     }
 

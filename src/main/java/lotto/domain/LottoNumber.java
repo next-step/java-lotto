@@ -2,20 +2,29 @@ package lotto.domain;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("(^[0-9]*$)");
     private static final String NUMBER_EXCEPTION_MESSAGE = "숫자가 아닌 값은 로또번호로 입력할 수 없습니다.";
     private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 1과 45사이의 숫자여야 합니다.";
 
+    private static final LottoNumber[] CACHE = IntStream.rangeClosed(Lotto.MININUM_NUMBER, Lotto.MAXIMUM_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .toArray(LottoNumber[]::new);
+
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        validateNumberRange(lottoNumber);
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    private void validateNumberRange(int lottoNumber) {
+    public static LottoNumber from(int lottoNumber) {
+        validateNumberRange(lottoNumber);
+        return CACHE[--lottoNumber];
+    }
+
+    private static void validateNumberRange(int lottoNumber) {
         if (!isLottoNumber(lottoNumber)) {
             throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
         }
@@ -36,7 +45,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return NUMBER_PATTERN.matcher(lottoNumber).find();
     }
 
-    private boolean isLottoNumber(int lottoNumber) {
+    private static boolean isLottoNumber(int lottoNumber) {
         return lottoNumber >= Lotto.MININUM_NUMBER && lottoNumber <= Lotto.MAXIMUM_NUMBER;
     }
 
