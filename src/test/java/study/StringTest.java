@@ -23,4 +23,12 @@ public class StringTest {
         assertThat(result).isEqualTo(new String[]{"1"});
     }
 
+    @Test
+    @DisplayName("요구사항2")
+    void subString(){
+        String value="(1,2)";
+        String result=value.substring(value.indexOf("(")+1,value.indexOf(")"));
+        assertThat(result).isEqualTo("1,2");
+    }
+
 }
