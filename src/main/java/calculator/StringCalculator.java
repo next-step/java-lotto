@@ -18,9 +18,22 @@ public class StringCalculator {
 		return sumTokens(tokens);
 	}
 
+	private static void validate(String token) {
+		for (char ch : token.toCharArray()) {
+			numberValidation(ch);
+		}
+	}
+
+	private static void numberValidation(char ch) {
+		if ('0' > ch || '9' < ch) {
+			throw new RuntimeException("양수인 숫자만 연산이 가능합니다");
+		}
+	}
+
 	private static int sumTokens(String[] tokens) {
 		int result = 0;
 		for (String token : tokens) {
+			validate(token);
 			result += Integer.parseInt(token);
 		}
 		return result;
