@@ -3,8 +3,8 @@ package stringCalculator.number;
 import stringCalculator.common.ErrorMessage;
 
 public class Positive {
-    private final int value;
     private static final int MIN_VALUE = 0;
+    private final int value;
 
     public Positive(String value) {
         this.value = toInteger(value);
