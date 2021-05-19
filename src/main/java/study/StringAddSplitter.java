@@ -25,7 +25,7 @@ public abstract class StringAddSplitter {
 		return this.tokens;
 	}
 
-	protected void validTokens() throws RuntimeException {
+	protected void validateTokens() throws RuntimeException {
 		for (String token : this.tokens)
 			negativeValidToken(token);
 	}

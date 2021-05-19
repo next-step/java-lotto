@@ -11,6 +11,6 @@ public class StringAddDefaultSplitter extends StringAddSplitter {
 	@Override
 	public void split() {
 		this.tokens = stringNumbers.split(DEFAULT_DELIMITER);
-		validTokens();
+		validateTokens();
 	}
 }

@@ -19,7 +19,7 @@ public class StringAddCustomSplitter extends StringAddSplitter {
 		if (matcher.find()) {
 			String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
 			this.tokens = matcher.group(CUSTOM_STRING_NUMBERS_INDEX).split(customDelimiter);
-			validTokens();
+			validateTokens();
 		}
 	}
 }
