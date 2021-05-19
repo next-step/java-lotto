@@ -15,12 +15,12 @@ public class NumberPatternExtractor {
 	private String numberText;
 
 	public NumberPatternExtractor(String str) {
-		matchValues(NUMBER_PATTERN.matcher(convertBlankToDefault(str)));
+		matchValues(getMatcher(convertBlankToDefault(str)));
 	}
 
 	private String convertBlankToDefault(String str) {
 		if (isBlank(str)) {
-			str = DEFAULT_NUMBER_TEXT;
+			return DEFAULT_NUMBER_TEXT;
 		}
 
 		return str;
@@ -32,6 +32,10 @@ public class NumberPatternExtractor {
 
 	private boolean isNull(String str) {
 		return str == null;
+	}
+
+	private Matcher getMatcher(String patterString) {
+		return NUMBER_PATTERN.matcher(patterString);
 	}
 
 	private void matchValues(Matcher matcher) {
