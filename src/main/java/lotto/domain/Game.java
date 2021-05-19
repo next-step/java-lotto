@@ -21,8 +21,4 @@ public class Game {
 
         return new Game(LottoTickets.createByGenerator(lottoNumberGenerator, countOfTicket));
     }
-
-    public LottoTickets getLottoTickets() {
-        return lottoTickets;
-    }
 }
