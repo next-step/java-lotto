@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWon;
 import lotto.util.LottoStringFixtureUtil;
@@ -25,22 +26,22 @@ public class LottoWonTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "1,2,3,4,5,6#6",
-                    "11,2,3,4,5,6#5",
-                    "11,12,3,4,5,6#4",
-                    "11,12,13,4,5,6#3",
-                    "11,12,13,14,5,6#2",
-                    "11,12,13,14,15,6#1",
-                    "11,12,13,14,15,16#0"
+                    "1,2,3,4,5,6#FIRST",
+                    "11,2,3,4,5,6#SECOND",
+                    "11,12,3,4,5,6#THIRD",
+                    "11,12,13,4,5,6#FOURTH",
+                    "11,12,13,14,5,6#MISS",
+                    "11,12,13,14,15,6#MISS",
+                    "11,12,13,14,15,16#MISS"
             },
             delimiter = '#'
     )
-    @DisplayName("로또를 입력받아 몇개를 맞췄는지 알 수 있다.")
-    public void 로또를_입력받아_몇개를_맞췄는지_알_수_있다(String fixtureLottoNumber, int countOfMatched) {
+    @DisplayName("로또를 입력받아 등수를 알 수 있다.")
+    public void 로또를_입력받아_등수를_알_수_있다(String fixtureLottoNumber, LottoRank exceptLottoRank) {
         LottoWon lottoWon = new LottoWon(LottoStringFixtureUtil.convertStringToLottoNumberList("1,2,3,4,5,6"));
         LottoTicket lottoTicket = new LottoTicket(LottoStringFixtureUtil.convertStringToLottoNumberList(fixtureLottoNumber));
 
         assertThat(lottoWon.match(lottoTicket))
-                .isEqualTo(countOfMatched);
+                .isEqualTo(exceptLottoRank);
     }
 }

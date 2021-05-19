@@ -17,9 +17,11 @@ public class LottoWon {
         }
     }
 
-    public int match(LottoTicket lottoTicket) {
-        return (int) lottoNumbers.stream()
+    public LottoRank match(LottoTicket lottoTicket) {
+        int countOfMatched = (int) lottoNumbers.stream()
                 .filter(number -> lottoTicket.contains(number))
                 .count();
+
+        return LottoRank.valueOf(countOfMatched);
     }
 }
