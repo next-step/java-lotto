@@ -5,7 +5,8 @@ import lotto.domain.Game;
 import lotto.domain.rank.LottoRanks;
 import lotto.domain.LottoWon;
 import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.InfoView;
+import lotto.view.MatchResultView;
 
 public class Application {
     public static void main(String[] args) {
@@ -13,15 +14,17 @@ public class Application {
         PositiveInteger money = inputView.money();
 
         Game game = Game.createByMoney(money);
-        OutputView outputView = new OutputView(game);
+        InfoView infoView = new InfoView(game);
 
-        outputView.countOfTicket();
-        outputView.ticketNumbers();
+        infoView.countOfTicket();
+        infoView.ticketNumbers();
 
         LottoWon lottoWon = inputView.wonNumbers();
         LottoRanks match = game.match(lottoWon);
 
-        outputView.printRanks(match);
-        outputView.printYields(match);
+        MatchResultView matchResultView = new MatchResultView(game, match);
+
+        matchResultView.printRanks(match);
+        matchResultView.printYields(match);
     }
 }
