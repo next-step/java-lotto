@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Word {
-    public static String SEPARATOR = "[,:]";
-    public static String IS_NUMBER = "[0-9]";
-    public static int CUSTOM_LETTER_INDEX = 2;
-    public static String NEGATIVE_NUMBER_MESSAGE = "음수가 입력 되었습니다.";
+    private static final String SEPARATOR = "[,:]";
+    private static final String IS_NUMBER = "[0-9]";
+    private static final int CUSTOM_LETTER_INDEX = 2;
+    private static final String NEGATIVE_NUMBER_MESSAGE = "음수가 입력 되었습니다.";
 
     public List<String> makeNumbers(String expression) {
         return Arrays.asList(expression.split(SEPARATOR));
