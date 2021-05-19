@@ -137,8 +137,8 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
     - [x] 2-2.[Guide to JUnit 5 Parameterized Tests](https://www.baeldung.com/parameterized-tests-junit-5)
     - [x] 2-3.[Introduction to AssertJ](https://www.baeldung.com/introduction-to-assertj) 문서 참고
     - [x] 2-4.[온라인 코드리뷰 요청 1단계 동영상](https://www.youtube.com/watch?v=YkgBUt7zG5k)
-    - [ ] 2-5.[온라인 코드리뷰 요청 2단계 동영상](https://www.youtube.com/watch?v=HnTdFJd0PtU)
-    - [ ] 2-6.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
+    - [x] 2-5.[온라인 코드리뷰 요청 2단계 동영상](https://www.youtube.com/watch?v=HnTdFJd0PtU)
+    - [x] 2-6.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
 - [x] 3.분석 및 설계
     - [x] 3-1.Step01.md 작성
 - [x] 4.구현
@@ -157,6 +157,6 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
 - [x] 5.테스트
     - [x] 5-1.Gradle build Success 확인
     - [x] 5-2.checkstyle 문제없는지 확인
-- [ ] 6.인수인계
-    - [ ] 6-1.코드리뷰 요청 및 피드백
-    - [ ] 6-2.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
+- [x] 6.인수인계
+    - [x] 6-1.코드리뷰 요청 및 피드백
+    - [x] 6-2.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
