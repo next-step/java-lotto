@@ -16,4 +16,11 @@ public class StringTest {
         assertThat(result).containsExactly("1","2");
     }
 
+    @Test
+    @DisplayName("요구사항1-2")
+    void singleSplit(){
+        String[] result="1".split(",");
+        assertThat(result).isEqualTo(new String[]{"1"});
+    }
+
 }
