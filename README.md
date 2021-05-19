@@ -7,3 +7,12 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## 문자열 덧셈 계산기
+
+### 기능 요구사항
+1. 구분자(쉼표,콜론)으로 분리된 숫자의 합 계산
+2. 커스텀 구분자 사용가능
+3. 숫자가 아니거나, 음수일경우 RuntimeException
+
