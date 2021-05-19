@@ -76,10 +76,10 @@ public class StringAddCalculator {
 		return !text.isEmpty();
 	}
 
-	private static Integer[] stringToInt(String[] stringTokens) {
-		Integer[] result = new Integer[stringTokens.length];
-		for (int i = 0, stringTokensLength = stringTokens.length; i < stringTokensLength; i++) {
-			result[i] = Integer.parseInt(stringTokens[i]);
+	private static Integer[] stringToInt(String[] string) {
+		Integer[] result = new Integer[string.length];
+		for (int index = 0; index < string.length; index++) {
+			result[index] = Integer.parseInt(string[index]);
 		}
 		return result;
 	}
