@@ -154,9 +154,9 @@ void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String ex
         - [x] 4-2-2.contains()
         - [x] 4-2-3.JUnit : ParameterizedTest
         - [x] 4-2-4.JUnit : CsvSource
-- [ ] 5.테스트
-    - [ ] 5-1.Gradle build Success 확인
-    - [ ] 5-2.checkstyle 문제없는지 확인
+- [x] 5.테스트
+    - [x] 5-1.Gradle build Success 확인
+    - [x] 5-2.checkstyle 문제없는지 확인
 - [ ] 6.인수인계
     - [ ] 6-1.코드리뷰 요청 및 피드백
     - [ ] 6-2.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
