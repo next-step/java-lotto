@@ -144,22 +144,23 @@ public class StringAddCalculatorTest {
     - [x] 1-2.[gradle-checkstyle](https://naver.github.io/hackday-conventions-java/#checkstyle) 적용
     - [x] 1-3.[IntelliJ](https://naver.github.io/hackday-conventions-java/#_intellij) 적용
     - [x] 1-4.[Github](https://naver.github.io/hackday-conventions-java/#_github) 적용
-- [ ] 2.학습
+- [x] 2.학습
     - [x] 2-1.[AssertJ Exception Assertions](https://joel-costigliola.github.io/assertj/assertj-core-features-highlight.html#exception-assertion) 문서 참고
-    - [ ] 2-2.junit4 expected exception 검색
+    - [x] 2-2.junit4 expected exception 검색
     - [x] 2-3.[온라인 코드리뷰 요청 1단계 동영상](https://www.youtube.com/watch?v=YkgBUt7zG5k)
     - [x] 2-4.[온라인 코드리뷰 요청 2단계 동영상](https://www.youtube.com/watch?v=HnTdFJd0PtU)
     - [x] 2-5.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
 - [x] 3.분석 및 설계
     - [x] 3-1.Step02.md 작성
 - [ ] 4.구현
-    - [ ] 4-1.StringAddCalculator
-        - [ ] 4-1-1.splitAndSum_null_또는_빈문자
-        - [ ] 4-1-2.splitAndSum_숫자하나
-        - [ ] 4-1-3.splitAndSum_쉼표구분자
-        - [ ] 4-1-4.splitAndSum_쉼표_또는_콜론_구분자
-        - [ ] 4-1-5.splitAndSum_custom_구분자
-        - [ ] 4-1-6.splitAndSum_negative
+    - [x] 4-1.StringAddCalculator
+        - [x] 4-1-1.splitAndSum_null_또는_빈문자
+        - [x] 4-1-2.splitAndSum_숫자하나
+        - [x] 4-1-3.splitAndSum_쉼표구분자
+        - [x] 4-1-4.splitAndSum_쉼표_또는_콜론_구분자
+        - [x] 4-1-5.splitAndSum_custom_구분자
+        - [x] 4-1-6.splitAndSum_custom_구분자 - 구분자 사이 값이 없어 null이 포함된 경우 1,,1 -> null을 `0`으로 취급하여 처리
+        - [x] 4-1-7.splitAndSum_negative
     - [ ] 4-2.Refactoring
         - [ ] 4-2-1.
 - [ ] 5.테스트
