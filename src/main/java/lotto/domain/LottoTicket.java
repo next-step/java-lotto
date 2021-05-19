@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.StringUtils;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +35,10 @@ public class LottoTicket {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket of(String numbers) {
+        return of(StringUtils.toIntegerList(numbers));
     }
 
     public Prize match(LottoTicket winningNumbers) {

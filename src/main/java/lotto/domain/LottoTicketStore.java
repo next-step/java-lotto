@@ -20,7 +20,7 @@ public class LottoTicketStore {
         for (int i = 0; i < price / MINIMUM_PRICE; i++) {
             lottoTickets.add(LottoTicket.of(lottoNumbersGenerator.generate()));
         }
-        return LottoTickets.of(lottoTickets);
+        return new LottoTickets(lottoTickets);
     }
 
     private void validatePrice(int price) {
