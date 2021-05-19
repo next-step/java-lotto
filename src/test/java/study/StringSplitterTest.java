@@ -4,14 +4,12 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class StringSplitterTest {
 
 	@ParameterizedTest
-	@NullSource
-	@EmptySource
+	@NullAndEmptySource
 	void default_delimiter(String input) {
 		StringSplitter separator = new StringSplitter(new Delimiter(input), "1,2:3");
 

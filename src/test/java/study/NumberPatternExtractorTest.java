@@ -4,15 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class NumberPatternExtractorTest {
 
 	@ParameterizedTest
-	@NullSource
-	@EmptySource
+	@NullAndEmptySource
 	void getNumberText_default(String input) {
 		NumberPatternExtractor extractor = new NumberPatternExtractor(input);
 
@@ -35,8 +33,7 @@ public class NumberPatternExtractorTest {
 	}
 
 	@ParameterizedTest
-	@NullSource
-	@EmptySource
+	@NullAndEmptySource
 	void getDelimiter_default(String input) {
 		NumberPatternExtractor extractor = new NumberPatternExtractor(input);
 
