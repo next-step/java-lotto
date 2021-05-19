@@ -35,7 +35,7 @@ public class StringParser {
 
         int converted = Integer.parseInt(s);
         if (converted < 0) {
-            throw new RuntimeException("양의 정수만 입력해주세요.");
+            throw new IllegalArgumentException("양의 정수만 입력해주세요.");
         }
 
         return converted;
