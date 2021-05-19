@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringTest {
 
     @Test
-    @DisplayName("요구사항1-1")
+    @DisplayName("split이 delimeter를 기준으로 분리되는지 테스트")
     void arraySplit(){
         String[] result="1,2".split(",");
         assertThat(result).contains("1");
@@ -18,14 +18,14 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("요구사항1-2")
+    @DisplayName("split이 delimeter를 기준으로 특정 배열값만 분리되는지 테스트")
     void singleSplit(){
         String[] result="1".split(",");
         assertThat(result).isEqualTo(new String[]{"1"});
     }
 
     @Test
-    @DisplayName("요구사항2")
+    @DisplayName("substring으로 내부값이 반환되는지 테스트")
     void subString(){
         String value="(1,2)";
         String result=value.substring(value.indexOf("(")+1,value.indexOf(")"));
@@ -33,7 +33,7 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("요구사항3-1")
+    @DisplayName("charAt이 특정위치의 문자를 반환하는지 테스트")
     void charAt(){
         String value="abc";
         assertThat(value.charAt(0)).isEqualTo('a');
@@ -42,7 +42,7 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("요구사항3-2")
+    @DisplayName("charAt이 범위를 넘어가는 index에 예외를 발생시키는지 테스트")
     void charAtException(){
         String value="abc";
         assertThatThrownBy(()->{
