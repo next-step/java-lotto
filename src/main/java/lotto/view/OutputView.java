@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static java.lang.String.format;
 
 public class OutputView {
-    private Game game;
+    private final Game game;
 
     public OutputView(Game game) {
         this.game = game;

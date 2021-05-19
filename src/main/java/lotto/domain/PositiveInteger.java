@@ -9,7 +9,7 @@ public class PositiveInteger {
 
     public static final PositiveInteger ZERO = new PositiveInteger(0);
 
-    private int value;
+    private final int value;
 
     public PositiveInteger(int value) {
         if (value < MINIMUM_AMOUNT) {

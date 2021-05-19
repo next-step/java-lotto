@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class LottoRanks {
     private static final int EMPTY_COUNT = 0;
-    private Map<LottoRank, Integer> countOfLottoRank;
+    private final Map<LottoRank, Integer> countOfLottoRank;
 
     public LottoRanks(Map<LottoRank, Integer> countOfLottoRank) {
         this.countOfLottoRank = new HashMap<>(countOfLottoRank);

@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    Scanner scanner;
+    private final Scanner scanner;
 
     public InputView() {
         scanner = new Scanner(System.in);
