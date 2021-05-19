@@ -23,4 +23,8 @@ public enum Prize {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_MATCH_RESULT));
     }
+
+    public int calculateProfit(int count) {
+        return this.rewardPrice * count;
+    }
 }
