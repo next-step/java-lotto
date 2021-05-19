@@ -16,16 +16,9 @@ public class LottoVendingMachine {
         return instance;
     }
 
-    public List<Lotto> buyLottos(int money) {
-
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("금액은 1,000원 단위로 입력해주세요.");
-        }
-
-        int size = money / 1000;
-
+    public List<Lotto> buyLottos(Money money) {
         return Stream.generate(LottoCreator::create)
-                     .limit(size)
+                     .limit(money.getBuyableLottoSize())
                      .collect(toList());
     }
 }
