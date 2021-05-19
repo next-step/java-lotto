@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
+	private StringCalculator() {}
+
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
