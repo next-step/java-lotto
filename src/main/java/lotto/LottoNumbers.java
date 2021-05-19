@@ -15,7 +15,6 @@ public class LottoNumbers {
 	LottoNumbers(List<Integer> inputNumbers) {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
-		Collections.sort(inputNumbers);
 		this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(inputNumbers));
 	}
 

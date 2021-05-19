@@ -31,14 +31,6 @@ public class LottoNumbersTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@Test
-	@DisplayName("LottoNumbers 는 오름차순으로 정렬되어서 저장이 된다.")
-	public void sortLottoNumbersTest() {
-		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(4, 5, 1, 2, 3, 6));
-
-		assertThat(lottoNumbers.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-	}
-
 	private List<Integer> splitAndMapToInt(String input) {
 		String[] split = input.split(",");
 		return Stream.of(split)
