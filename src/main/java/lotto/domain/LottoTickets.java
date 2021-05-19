@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoTickets {
+    public static final int ZERO = 0;
+    public static final int ADD_NUMBER = 1;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -30,7 +32,7 @@ public class LottoTickets {
         Map<Prize, Integer> result = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             Prize prize = lottoTicket.match(winningNumbers);
-            result.put(prize, result.getOrDefault(prize, 0) + 1);
+            result.put(prize, result.getOrDefault(prize, ZERO) + ADD_NUMBER);
         }
         return new LottoResult(result);
     }
