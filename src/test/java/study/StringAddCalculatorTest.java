@@ -64,4 +64,20 @@ public class StringAddCalculatorTest {
         int result = stringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
+    @DisplayName("input 문자열 custom 구분자로 구분하여 문자열 반환 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//-\n1-2-3", "//@\n1@2@3", "// \n1 2 3"})
+    public void splitAndSum_custom_구분자(String input) {
+        String[] result = stringAddCalculator.splitInput(input);
+        assertThat(result).containsExactly("1","2","3");
+    }
+
+    @DisplayName("splitAndSum 함수 custom 구분자 sum 결과 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"//;\n1;2;3=6", "//-\n2-2-4=8", "// \n1 2 3 10=16", "//@\n10@24@1@1@1=37", "//^\n224^111=335"}, delimiter = '=')
+    public void splitAndSum_custom_구분자() {
+        int result = stringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }
