@@ -12,10 +12,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class StringTokenizerTest {
 
 	private DefaultStringTokenizer defaultStringTokenizer;
+	private CustomStringTokenizer customStringTokenizer;
 
 	@BeforeEach
 	void setup() {
 		defaultStringTokenizer = new DefaultStringTokenizer();
+		customStringTokenizer = new CustomStringTokenizer();
 	}
 
 	@ParameterizedTest
@@ -32,5 +34,23 @@ public class StringTokenizerTest {
 	void test_쉼표_또는_콜론구분자(String input) {
 		List<String> numbers = defaultStringTokenizer.getNumbers(input);
 		assertThat(numbers).containsExactly("1", "2", "3");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"//;\n1;2;3", "//_\n1_2_3"})
+	@DisplayName("커스텀 구분자로 문자열 분리 테스트")
+	void test_커스텀구분자(String input) {
+		List<String> numbers = customStringTokenizer.getNumbers(input);
+		assertThat(numbers).containsExactly("1", "2", "3");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"test", "123"})
+	@DisplayName("커스텀 구분자 입력 패턴이 잘못되었을 때 문자열 분리 테스트")
+	void test_잘못된_커스텀구분자(String input) {
+		assertThatThrownBy(() -> {
+			customStringTokenizer.getNumbers(input);
+		}).isInstanceOf(RuntimeException.class)
+			.hasMessageContaining("입력 패턴을 확인하세요.");
 	}
 }
