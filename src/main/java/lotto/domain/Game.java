@@ -21,4 +21,8 @@ public class Game {
 
         return new Game(LottoTickets.createByGenerator(lottoNumberGenerator, countOfTicket));
     }
+
+    public LottoRanks match(LottoWon lottoWon) {
+        return lottoWon.match(lottoTickets);
+    }
 }
