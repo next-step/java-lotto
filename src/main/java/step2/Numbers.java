@@ -11,7 +11,7 @@ public class Numbers {
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_NUMBER_ARRAY_GROUP = 2;
     private static final String NUMBER_FORMAT_CHECK_REGEX = "[0-9]+";
-    private static final String invalidNumberFormatErrorMessage = "Invalid input number.";
+    private static final String INVALID_NUMBER_FORMAT_ERROR_MESSAGE = "Invalid input number.";
 
     public int[] getNumberArray(String input) {
         if(input == null || input.isEmpty()) {
@@ -44,7 +44,7 @@ public class Numbers {
 
     private void throwInvalidNumberFormatException(String input) {
         if(!input.matches(NUMBER_FORMAT_CHECK_REGEX)) {
-            throw new RuntimeException(invalidNumberFormatErrorMessage);
+            throw new RuntimeException(INVALID_NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
 }
