@@ -6,17 +6,17 @@ import java.util.List;
 public class Lotto {
     public static final long PRICE = 1000L;
 
-    private final List<Integer> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto auto() {
-        return new Lotto(LottoNumbers.generateAuto());
+        return new Lotto(LottoNumbersGenerator.generate());
     }
 
     public List<Integer> getNumbers() {
-        return new ArrayList<>(lottoNumbers);
+        return lottoNumbers.getValue();
     }
 }
