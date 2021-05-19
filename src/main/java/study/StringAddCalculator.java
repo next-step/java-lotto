@@ -6,14 +6,12 @@ public class StringAddCalculator {
 	private final static int ZERO = 0;
 
 	public static int splitAndSum(String stringNumbers) {
-		int sum = 0;
 		if (isNullOrEmpty(stringNumbers))
 			return ZERO;
 		StringAddSplitter stringAddSplitter = getSplitter(stringNumbers);
 		stringAddSplitter.split();
 		String[] tokens = stringAddSplitter.getTokens();
-		sum = getSumByTokens(tokens);
-		return sum;
+		return getSumByTokens(tokens);
 	}
 
 	private static boolean isNullOrEmpty(String stringNumbers) {
