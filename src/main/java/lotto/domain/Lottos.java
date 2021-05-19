@@ -14,8 +14,8 @@ public class Lottos {
 
     public WinningResult matches(Lotto winningLotto) {
         return lottos.stream()
-                    .map(lotto -> lotto.match(winningLotto))
-                    .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
+                .map(lotto -> lotto.match(winningLotto))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
     }
 
     public List<Lotto> getValues() {

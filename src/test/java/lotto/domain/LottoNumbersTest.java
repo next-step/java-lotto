@@ -11,9 +11,9 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또번호가 중복이거나 입력이 추가/부족 일 경우(6자리가 아닐경우) 예외발생")
     void checkLottoNumbersSize() {
-        assertThatThrownBy(()-> new LottoNumbers(1,2,3,4,5,5))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 6자리여야 합니다.");
+        assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5, 5))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 6자리여야 합니다.");
     }
 
     @Test

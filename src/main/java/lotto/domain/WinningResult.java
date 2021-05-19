@@ -13,15 +13,15 @@ public class WinningResult {
 
     public long count(WinningType winningType) {
         return winningTypes.stream()
-                    .filter(type -> type.equals(winningType))
-                    .count();
+                .filter(type -> type.equals(winningType))
+                .count();
     }
 
     public Money sumPrizes() {
         return winningTypes.stream()
-                    .map(WinningType::getPrize)
-                    .reduce((money, money2) -> money.sum(money2))
-                    .orElse(Money.NONE);
+                .map(WinningType::getPrize)
+                .reduce(Money::sum)
+                .orElse(Money.NONE);
     }
 
     public List<WinningType> getResults() {

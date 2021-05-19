@@ -8,8 +8,8 @@ public class LottoShop {
 
     public Lottos buyLottos(long price) {
         return IntStream.rangeClosed(MINIMUM_QUANTITY, getLottoCountForBuying(price))
-                        .mapToObj(count -> Lotto.auto())
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .mapToObj(count -> Lotto.auto())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     private int getLottoCountForBuying(long price) {

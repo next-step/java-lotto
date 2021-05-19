@@ -12,9 +12,9 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46, 47, -1})
     @DisplayName("로또 번호가 1~45 이외의 값이 입력될 경우 예외발생")
     void validateNumber(int input) {
-        assertThatThrownBy(()->LottoNumber.from(input))
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("로또 번호는 1과 45사이의 숫자여야 합니다.");
+        assertThatThrownBy(() -> LottoNumber.from(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 1과 45사이의 숫자여야 합니다.");
     }
 
     @ParameterizedTest
@@ -30,7 +30,7 @@ public class LottoNumberTest {
     @ValueSource(strings = {"@@", "$", "!", "A"})
     @DisplayName("숫자 형태가 아닌 문자열을 입력시 로또번호 객체 예외발생")
     void validateStringNumber(String input) {
-        assertThatThrownBy(()-> LottoNumber.valueOf(input))
+        assertThatThrownBy(() -> LottoNumber.valueOf(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자가 아닌 값은 로또번호로 입력할 수 없습니다.");
     }

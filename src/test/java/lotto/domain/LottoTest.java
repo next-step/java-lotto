@@ -22,10 +22,10 @@ class LottoTest {
     @Test
     @DisplayName("지난 주 당첨번호와 매칭 테스트")
     void match() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1,2,3,4,5,6);
+        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(1,2,3,4,5,7);
+        LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
         Lotto winningLotto = new Lotto(winningNumbers);
 
         WinningType winningType = lotto.match(winningLotto);

@@ -29,14 +29,14 @@ public class ResultView {
 
     public static void printStatistics(WinningResult result, ProfitStatistics statistics) {
         System.out.println(Stream.of(WinningType.values())
-               .filter(type -> !type.equals(WinningType.NOTHING))
-               .sorted(Collections.reverseOrder())
-               .map(type -> format(MATCHING_COUNT_MESSAGE,
-                       type.getMatchCount(), type.getPrize().longValue(), result.count(type)))
-               .collect(Collectors.joining(System.lineSeparator())));
+                .filter(type -> !type.equals(WinningType.NOTHING))
+                .sorted(Collections.reverseOrder())
+                .map(type -> format(MATCHING_COUNT_MESSAGE,
+                        type.getMatchCount(), type.getPrize().longValue(), result.count(type)))
+                .collect(Collectors.joining(System.lineSeparator())));
 
         double profitRate = statistics.calculateProfitRate();
         System.out.println(format(PROFIT_RATE_MESSAGE,
-                profitRate, profitRate < 1? NOT_PROFIT_RESULT_MESSAGE : PROFIT_RESULT_MESSAGE));
+                profitRate, profitRate < 1 ? NOT_PROFIT_RESULT_MESSAGE : PROFIT_RESULT_MESSAGE));
     }
 }

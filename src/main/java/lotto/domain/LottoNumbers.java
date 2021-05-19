@@ -28,16 +28,16 @@ public class LottoNumbers {
 
     private static Set<LottoNumber> initNumbers(int[] lottoNumber) {
         return Arrays.stream(lottoNumber)
-                    .mapToObj(LottoNumber::from)
-                    .collect(Collectors.toSet());
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
     }
 
     public static LottoNumbers valueOf(String lottoNumbers) {
         String[] splited = lottoNumbers.split(DELIMITER);
         return new LottoNumbers(
                 Arrays.stream(splited)
-                    .map(LottoNumber::valueOf)
-                    .collect(Collectors.toSet())
+                        .map(LottoNumber::valueOf)
+                        .collect(Collectors.toSet())
         );
     }
 
