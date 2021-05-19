@@ -18,7 +18,8 @@ public class StringAddCalculator {
     }
 
     private int calculate(String text) {
-        return Arrays.stream(StringParser.toIntArray(text))
+        StringParser parser = StringParser.getInstance();
+        return Arrays.stream(parser.toIntArray(text))
                      .sum();
     }
 }

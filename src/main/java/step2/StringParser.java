@@ -4,12 +4,20 @@ import java.util.Arrays;
 
 public class StringParser {
 
+    private static final StringParser instance = new StringParser();
+
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String FULL_PATTERN = "^//.\\\\n.+$";
     private static final String START_PATTERN = "^//.\\\\n";
     private static final String BLANK = "";
 
-    public static int[] toIntArray(String text) {
+    private StringParser() { }
+
+    public static StringParser getInstance() {
+        return instance;
+    }
+
+    public int[] toIntArray(String text) {
 
         String delimiter = DEFAULT_DELIMITER;
 
@@ -19,11 +27,11 @@ public class StringParser {
         }
 
         return Arrays.stream(text.split(delimiter))
-                     .mapToInt(StringParser::toInt)
+                     .mapToInt(this::toInt)
                      .toArray();
     }
 
-    private static int toInt(String s) {
+    private int toInt(String s) {
 
         int converted = Integer.parseInt(s);
         if (converted < 0) {
