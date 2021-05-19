@@ -18,7 +18,6 @@ public class StringAddCalculatorTest {
     @DisplayName("기본 덧셈 계산 테스트")
     void testSum() {
         //given
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
         //when
         int result = stringAddCalculator.splitAndSum("1,2,3");
         //then
