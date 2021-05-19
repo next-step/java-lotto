@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("CalculatorExpressionFactory 테스트")
-public class CalculatorExpressionFactoryTest {
+class CalculatorExpressionFactoryTest {
 
     private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
