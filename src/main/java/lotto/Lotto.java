@@ -11,6 +11,7 @@ public class Lotto {
 
     private LottoCount lottoCount;
     private List<Integer> defaultLottoNumbers;
+    private WinningNumbers winningNumbers;
 
     public Lotto() {
         defaultLottoNumbers = new ArrayList<>();
@@ -25,6 +26,8 @@ public class Lotto {
         inputView.printPurchasePrice(lottoCount);
         List<LottoTicket> tickets = createLottoRandomNumbers(this.lottoCount.getLottoCount());
         resultView.printLottoNumbers(tickets);
+        inputView.printLastWeeksWinningNumber();
+        winningNumbers = new WinningNumbers(inputView.inputLastWeeksWinningNumber());
     }
 
     protected int validateInputPrice(String price) {

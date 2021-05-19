@@ -1,7 +1,5 @@
 package lotto;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.util.Scanner;
 
 public class InputView {
