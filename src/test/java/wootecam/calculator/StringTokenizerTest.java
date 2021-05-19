@@ -37,7 +37,7 @@ public class StringTokenizerTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"//;\n1;2;3", "//_\n1_2_3"})
+	@ValueSource(strings = {"//;\\n1;2;3", "//_\\n1_2_3"})
 	@DisplayName("커스텀 구분자로 문자열 분리 테스트")
 	void test_커스텀구분자(String input) {
 		List<String> numbers = customStringTokenizer.getNumbers(input);
