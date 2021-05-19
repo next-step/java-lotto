@@ -6,11 +6,15 @@ public class Delimiter {
 	private final String value;
 
 	public Delimiter(String str) {
+		this.value = convertBlankToDefault(str);
+	}
+
+	private String convertBlankToDefault(String str) {
 		if (isBlank(str)) {
-			str = DEFAULT_DELIMITER;
+			return DEFAULT_DELIMITER;
 		}
 
-		this.value = str;
+		return str;
 	}
 
 	private boolean isBlank(String str) {
