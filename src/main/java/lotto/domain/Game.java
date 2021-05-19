@@ -28,11 +28,11 @@ public class Game {
         return lottoWon.match(lottoTickets);
     }
 
-    public LottoTickets getLottoTickets() {
-        return lottoTickets;
-    }
-
     public PositiveInteger totalPriceOfTickets() {
         return TICKET_PRICE.multiple(new PositiveInteger(lottoTickets.size()));
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 }
