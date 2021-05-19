@@ -26,7 +26,7 @@ public class StringTest {
 	}
 
 	@Test
-	@DisplayName(value = "1,2 문자열이 반환 된다.")
+	@DisplayName(value = "괄호가 빠진 1,2 문자열이 반환 된다.")
 	public void removeParenthesesUsingSubstring() throws Exception {
 		String str = "(1,2)";
 		String result = str.substring(1, str.length() - 1);
