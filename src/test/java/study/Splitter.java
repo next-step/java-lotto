@@ -1,5 +1,10 @@
 package study;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Splitter {
-    //TODO: 유틸성 클래스로 분류
+    public static List<String> split(String input) {
+        return Arrays.asList(input);
+    }
 }
