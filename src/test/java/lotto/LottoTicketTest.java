@@ -1,16 +1,11 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 

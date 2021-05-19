@@ -16,7 +16,7 @@ public class LottoRanks {
         Map<LottoRank, Integer> countOfLottoRank = new HashMap<>();
 
         for (LottoRank lottoRank : lottoRanks) {
-            int count = 0;
+            int count = EMPTY_COUNT;
             if (countOfLottoRank.containsKey(lottoRank)) {
                 count = countOfLottoRank.get(lottoRank);
             }
@@ -29,7 +29,7 @@ public class LottoRanks {
 
 
     public PositiveInteger sumReward() {
-        PositiveInteger positiveInteger = new PositiveInteger(0);
+        PositiveInteger positiveInteger = PositiveInteger.ZERO;
         for (LottoRank lottoRank : LottoRank.values()) {
             positiveInteger = positiveInteger.plus(sumOfRank(lottoRank));
         }

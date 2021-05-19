@@ -7,6 +7,8 @@ import static java.lang.String.format;
 public class PositiveInteger {
     private static final int MINIMUM_AMOUNT = 0;
 
+    public static final PositiveInteger ZERO = new PositiveInteger(0);
+
     private int value;
 
     public PositiveInteger(int value) {
