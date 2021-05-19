@@ -14,7 +14,24 @@ public class StringCalculator {
 		if (!hasDelimiter(text, DEFAULT_DELIMITER_PATTERN)) {
 			return Integer.parseInt(text);
 		}
-		return 1;
+		String[] tokens = tokenizing(text);
+		return sumTokens(tokens);
+	}
+
+	private static int sumTokens(String[] tokens) {
+		int result = 0;
+		for (String token : tokens) {
+			result += Integer.parseInt(token);
+		}
+		return result;
+	}
+
+	private static String[] tokenizing(String text) {
+		return tokenizing(text, DEFAULT_DELIMITER);
+	}
+
+	private static String[] tokenizing(String text, String delimiter) {
+		return text.split(delimiter);
 	}
 
 	private static boolean hasDelimiter(String text, Pattern pattern) {
