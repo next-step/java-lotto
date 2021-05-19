@@ -19,10 +19,12 @@ public class Lotto {
 
     public void startPurchase() {
         InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
         inputView.printInputPurchasePrice();
         this.lottoCount = new LottoCount(calculatePrice(validateInputPrice(inputView.inputPurchasePrice())));
         inputView.printPurchasePrice(lottoCount);
-        createLottoRandomNumbers(this.lottoCount.getLottoCount());
+        List<LottoTicket> tickets = createLottoRandomNumbers(this.lottoCount.getLottoCount());
+        resultView.printLottoNumbers(tickets);
     }
 
     protected int validateInputPrice(String price) {
@@ -56,6 +58,7 @@ public class Lotto {
         List<Integer> sixNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             sixNumbers.add(defaultLottoNumbers.get(i));
+
         }
         return sixNumbers;
     }

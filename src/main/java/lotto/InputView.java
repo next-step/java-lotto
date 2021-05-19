@@ -11,6 +11,7 @@ public class InputView {
     private static final String WINNING_STATISTICS = "당첨통계";
 
     private Scanner sc;
+
     public InputView() {
         sc = new Scanner(System.in);
     }
