@@ -1,18 +1,18 @@
 package study;
 
+import static study.PatternGroup.*;
+import static study.DefaultText.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NumberPatternExtractor {
 
 	private static final String NUMBER_PATTERN_REGEX = "(//(.)\n)?(-?\\d.*)";
-	private static final String DEFAULT_NUMBER_TEXT = "0";
 	private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_PATTERN_REGEX);
-	private static final int DELIMITER_GROUP_NO = 2;
-	private static final int TEXT_GROUP_NO = 3;
 
-	private String delimiter;
-	private String numberText;
+	private String delimiter = "";
+	private String numberText = "";
 
 	public NumberPatternExtractor(String str) {
 		matchValues(getMatcher(convertBlankToDefault(str)));
@@ -20,7 +20,7 @@ public class NumberPatternExtractor {
 
 	private String convertBlankToDefault(String str) {
 		if (isBlank(str)) {
-			return DEFAULT_NUMBER_TEXT;
+			return NUMBER.getText();
 		}
 
 		return str;
@@ -34,30 +34,26 @@ public class NumberPatternExtractor {
 		return str == null;
 	}
 
-	private Matcher getMatcher(String patterString) {
-		return NUMBER_PATTERN.matcher(patterString);
+	private Matcher getMatcher(String patternString) {
+		return NUMBER_PATTERN.matcher(patternString);
 	}
 
 	private void matchValues(Matcher matcher) {
 		if (matcher.find()) {
-			delimiter = matcher.group(DELIMITER_GROUP_NO);
-			numberText = matcher.group(TEXT_GROUP_NO);
+			delimiter = matcher.group(DELIMITER.getNo());
+			numberText = matcher.group(TEXT.getNo());
 		}
 	}
 
 	public String getDelimiterText() {
 		if (isNull(delimiter)) {
-			return "";
+			return EMPTY.getText();
 		}
 
 		return delimiter;
 	}
 
 	public String getNumberText() {
-		if (isNull(numberText)) {
-			return "";
-		}
-
 		return numberText;
 	}
 }
