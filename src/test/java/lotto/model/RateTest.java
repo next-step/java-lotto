@@ -19,4 +19,13 @@ public class RateTest {
 		assertThat(floorRate).isEqualTo(Rate.of(expectedFloorRate));
 	}
 
+	@ParameterizedTest
+	@DisplayName("double 형 데이터와 크기 비교를 할 수 있다.")
+	@CsvSource(value = {"1.0:true", "0.5:true", "1.1:false"}, delimiter = ':')
+	public void greaterThanTest(double other, boolean expected) {
+		Rate rate = Rate.of(1.0);
+
+		assertThat(rate.equalOrGreaterThan(other)).isEqualTo(expected);
+	}
+
 }

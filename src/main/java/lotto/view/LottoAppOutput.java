@@ -72,7 +72,7 @@ public class LottoAppOutput {
 	}
 
 	public void printLottoEarningsRate(LottoEarningRateDto lottoEarningRateDto) {
-		String profitOrLoss = lottoEarningRateDto.getEarningsRate() > 1 ? "이익이라는" : "손해라는";
+		String profitOrLoss = lottoEarningRateDto.isProfit() ? "이익이라는" : "손해라는";
 		String render = String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s 의미임)",
 			lottoEarningRateDto.getEarningsRate(),
 			profitOrLoss);

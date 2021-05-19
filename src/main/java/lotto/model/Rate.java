@@ -23,6 +23,10 @@ public class Rate {
 		return new Rate(Math.floor(rate * powerOfTen) / powerOfTen);
 	}
 
+	public boolean equalOrGreaterThan(double otherRate) {
+		return rate >= otherRate;
+	}
+
 	@Override
 	public boolean equals(Object other) {
 		if (this == other) {
