@@ -1,7 +1,6 @@
 package study;
 
 public class StringSeparator {
-	private static final String DEFAULT_DELIMITER = "[,:]";
 
 	private final String text;
 
@@ -11,7 +10,7 @@ public class StringSeparator {
 		this.delimiter = delimiter;
 
 		if (delimiter == null || delimiter.isEmpty()) {
-			this.delimiter = DEFAULT_DELIMITER;
+			this.delimiter = Delimiter.DEFAULT_DELIMITER;
 		}
 
 		this.text = text;
