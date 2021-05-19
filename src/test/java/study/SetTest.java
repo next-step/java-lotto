@@ -29,8 +29,7 @@ public class SetTest {
 	@Test
 	@DisplayName("set 크기 테스트")
 	void sizeCheck() {
-		int size = this.numbers.size();
-		assertThat(size).isEqualTo(3);
+		assertThat(this.numbers).hasSize(3);
 	}
 
 	@ParameterizedTest
