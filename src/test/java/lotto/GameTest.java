@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.Amount;
 import lotto.domain.Game;
-import lotto.domain.generator.LottoNumberRandomGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +15,7 @@ public class GameTest {
     public void 금액을_입력받아_로또를_생성할_수_잇다(int source, int countOfLotto) {
         Amount total = new Amount(source);
 
-        assertThat(Game.createByMoneyAndGenerator(total, new LottoNumberRandomGenerator(), null)
+        assertThat(Game.createByMoney(total)
                         .getLottoTickets()
                         .size())
                 .isEqualTo(countOfLotto);
