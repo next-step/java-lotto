@@ -40,14 +40,14 @@ public class NumberPatternExtractorTest {
 	void getDelimiter_default(String input) {
 		NumberPatternExtractor extractor = new NumberPatternExtractor(input);
 
-		assertThat(extractor.getDelimiter()).isEqualTo("");
+		assertThat(extractor.getDelimiterText()).isEqualTo("");
 	}
 
 	@Test
 	void getDelimiter() {
 		NumberPatternExtractor extractor = new NumberPatternExtractor("//#\n4#5#6");
 
-		assertThat(extractor.getDelimiter()).isEqualTo("#");
+		assertThat(extractor.getDelimiterText()).isEqualTo("#");
 	}
 
 }

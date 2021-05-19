@@ -41,7 +41,7 @@ public class NumberPatternExtractor {
 		}
 	}
 
-	public String getDelimiter() {
+	public String getDelimiterText() {
 		if (isNull(delimiter)) {
 			return "";
 		}
