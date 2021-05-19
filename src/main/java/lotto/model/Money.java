@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
+	private static final int ZERO = 0;
+	static final Money ZERO_WONS = Money.wons(ZERO);
 	private static final int LOTTO_PRICE = 1000;
 	private final int money;
 
@@ -12,13 +14,17 @@ public class Money {
 	}
 
 	private void validateNonNegative(int money) {
-		if (money < 0) {
+		if (money < ZERO) {
 			throw new IllegalArgumentException("음수는 돈이 될 수 없다.");
 		}
 	}
 
-	public static Money of(int input) {
+	public static Money wons(int input) {
 		return new Money(input);
+	}
+
+	public int getMoney() {
+		return money;
 	}
 
 	public int calculateLottoCount() {

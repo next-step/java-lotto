@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
-
 import lotto.model.LottoNumbers;
 import lotto.model.LottoNumbersGenerator;
 import lotto.model.LottoNumbersGroup;
@@ -9,6 +7,7 @@ import lotto.model.LottoResult;
 import lotto.model.Money;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
+import lotto.view.dro.LottoResultDto;
 
 public class LottoApp {
 	private final LottoAppOutput lottoAppOutput;
@@ -23,22 +22,31 @@ public class LottoApp {
 	}
 
 	public void run() {
-		LottoNumbersGroup lottoNumbersGroup = buyLottoNumbersGroup();
-		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
+		Money money = inputMoney();
+		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup(money.calculateLottoCount());
 		LottoNumbers winningNumbers = inputWinningNumbers();
-		LottoResult matchResult = lottoNumbersGroup.match(winningNumbers);
+		printLottoResult(lottoNumbersGroup.match(winningNumbers));
 	}
 
-	private LottoNumbersGroup buyLottoNumbersGroup() {
+	private Money inputMoney() {
 		lottoAppOutput.printMoneyInputView();
-		Money money = lottoAppInput.inputMoney();
-		int lottoCount = money.calculateLottoCount();
+		return lottoAppInput.inputMoney();
+	}
+
+	private LottoNumbersGroup inputLottoNumbersGroup(int lottoCount) {
 		lottoAppOutput.printBoughtLottoCountView(lottoCount);
-		return new LottoNumbersGroup(lottoNumbersGenerator.generateRandomly(lottoCount));
+		LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(lottoNumbersGenerator.generateRandomly(lottoCount));
+		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
+		return lottoNumbersGroup;
 	}
 
 	private LottoNumbers inputWinningNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
 		return new LottoNumbers(lottoAppInput.inputWinningNumbers());
+	}
+
+	private void printLottoResult(LottoResult lottoResult) {
+		LottoResultDto resultDto = LottoResultDto.from(lottoResult);
+		lottoAppOutput.printLottoResult(resultDto);
 	}
 }

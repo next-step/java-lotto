@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.LottoNumbersGroup;
+import lotto.view.dro.LottoRankResultDto;
+import lotto.view.dro.LottoResultDto;
 
 public class LottoAppOutput {
 	private static final String LOTTO_NUMBER_OUTPUT_DELIMITER = ", ";
@@ -28,7 +30,7 @@ public class LottoAppOutput {
 		for (List<Integer> lottoNumbers : lottoNumbersGroup.getLottoNumbersGroup()) {
 			printLottoNumbers(lottoNumbers);
 		}
-		printStream.println();
+		printNewLine();
 	}
 
 	void printLottoNumbers(List<Integer> lottoNumbers) {
@@ -45,5 +47,25 @@ public class LottoAppOutput {
 
 	public void printWinningNumbersInputView() {
 		printStream.println("지난 주 당첨 번호를 입력해 주세요.");
+	}
+
+	public void printLottoResult(LottoResultDto lottoResultDto) {
+		printNewLine();
+		printStream.println("당첨 통계");
+		printStream.println("---------");
+		for (LottoRankResultDto lottoRankResultDto : lottoResultDto.getLottoRankResultDtos()) {
+			printLottoRankResult(lottoRankResultDto);
+		}
+	}
+
+	void printLottoRankResult(LottoRankResultDto lottoRankResultDto) {
+		String render = String.format("%s개 일치 (%s원)- %s개", lottoRankResultDto.getMatchCount(),
+			lottoRankResultDto.getPrize(),
+			lottoRankResultDto.getResultCount());
+		printStream.println(render);
+	}
+
+	private void printNewLine() {
+		printStream.println();
 	}
 }
