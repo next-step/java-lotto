@@ -18,8 +18,11 @@ public class StringAddCalculator {
 
     private String[] splitToNumbers(String data) {
         String delimiter = DelimiterExtractor.extractDelimiter(data);
-        String splitData = DelimiterExtractor.getSplitData();
+        return splitDataWithDelimiter(delimiter);
+    }
 
+    private String[] splitDataWithDelimiter(String delimiter) {
+        String splitData = DelimiterExtractor.getSplitData();
         return splitData.split(delimiter);
     }
 
