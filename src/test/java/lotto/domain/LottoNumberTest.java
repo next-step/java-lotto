@@ -25,4 +25,24 @@ public class LottoNumberTest {
 
         assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"@@", "$", "!", "A"})
+    @DisplayName("숫자 형태가 아닌 문자열을 입력시 로또번호 객체 예외발생")
+    void validateStringNumber(String input) {
+        assertThatThrownBy(()-> LottoNumber.valueOf(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자가 아닌 값은 로또번호로 입력할 수 없습니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "5", "45", "2"})
+    @DisplayName("숫자 형태 문자열을 입력시 로또번호 객체 정상생성")
+    void createStringNumber(String input) {
+        LottoNumber lottoNumber = LottoNumber.valueOf(input);
+
+        int number = lottoNumber.getValue();
+
+        assertThat(number).isEqualTo(Integer.parseInt(input));
+    }
 }
