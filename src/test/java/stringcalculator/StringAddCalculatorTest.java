@@ -12,12 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    private StringAddCalculator stringAddCalculator;
-
-    @BeforeEach
-    void setUp() {
-        stringAddCalculator = new StringAddCalculator();
-    }
+    private StringAddCalculator stringAddCalculator = new StringAddCalculator();
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -45,6 +40,7 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_음수_전달시_예외발생() {
         assertThatThrownBy(() -> stringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자값에는 음수가 올 수 없습니다.");
     }
 }
