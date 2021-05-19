@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
 
@@ -17,5 +15,14 @@ public class LottoNumberTest {
         assertThatThrownBy(()->new LottoNumber(input))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("로또 번호는 1과 45사이의 숫자여야 합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45, 33, 7})
+    @DisplayName("로또 번호가 1~45 내의 값이 입력될 경우 정상생성")
+    void createNumber(int input) {
+        LottoNumber lottoNumber = new LottoNumber(input);
+
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
     }
 }
