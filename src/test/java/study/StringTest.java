@@ -20,4 +20,9 @@ public class StringTest {
         assertThat(stringArray).containsOnly("1");
     }
 
+    @Test
+    void subStringTest() {
+        String stringData = "(1,2)";
+        assertThat(stringData.substring(1, stringData.length() - 1)).isEqualTo("1,2");
+    }
 }
