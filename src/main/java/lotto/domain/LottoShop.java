@@ -15,5 +15,4 @@ public class LottoShop {
     private int getLottoCountForBuying(long price) {
         return Money.from(price).divide(Lotto.PRICE);
     }
-
 }
