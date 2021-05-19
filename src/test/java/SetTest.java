@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -29,12 +30,12 @@ class SetTest {
 			.isEqualTo(3); // Set Collection 특성 때문에 중복이 제거되고 3개만 있어야한다.
 	}
 
-	@ParameterizedTest(name = "Set Collection, contains 테스트. value={0}")
-	@ValueSource(ints = {
-		1, 2, 3
+	@ParameterizedTest(name = "Set Collection, contains 테스트. value={0}, expected:{1}")
+	@CsvSource(value = {
+		"1,true", "2,true", "3,true", "4,false", "5,false"
 	})
-	void containsTest(final int value) {
+	void containsTest(final int value, final boolean expected) {
 		assertThat(numbers.contains(value))
-			.isTrue();
+			.isEqualTo(expected);
 	}
 }
