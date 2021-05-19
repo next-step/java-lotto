@@ -1,10 +1,10 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Numbers {
+    private static final int emptyNumber = 0;
     private static final String defaultCommaDelimiter = ",";
     private static final String defaultColonDelimiter = ":";
     private static final Pattern customDelimiterPattern = Pattern.compile("//(.)\n(.*)");
@@ -15,7 +15,7 @@ public class Numbers {
 
     public int[] getNumberArray(String input) {
         if(input == null || input.isEmpty()) {
-            return new int[] {0};
+            return new int[] {emptyNumber};
         }
 
         return convertStringArrayToIntArray(split(input));

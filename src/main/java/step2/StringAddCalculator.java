@@ -2,15 +2,12 @@ package step2;
 
 public class StringAddCalculator {
 
-    int calculate(String input) {
-        return sum(new Numbers().getNumberArray(input));
-    }
-
-    private int sum(int[] numberArray) {
+    public int calculate(String input) {
         int result = 0;
-        for(int number : numberArray) {
+        for(int number : new Numbers().getNumberArray(input)) {
             result += number;
         }
+
         return result;
     }
 }
