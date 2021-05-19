@@ -9,6 +9,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private static final String LOTTO_WON_DELIMITER = ",";
+
     private final Scanner scanner;
 
     public InputView() {
@@ -26,7 +28,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.next();
 
-        return new LottoWon(Arrays.stream(numbers.split(","))
+        return new LottoWon(Arrays.stream(numbers.split(LOTTO_WON_DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
