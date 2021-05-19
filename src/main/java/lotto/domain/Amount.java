@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 import static java.lang.String.format;
 
 public class Amount {
@@ -17,5 +19,22 @@ public class Amount {
 
     public int divide(Amount target) {
         return amount / target.amount;
+    }
+
+    public Amount multiple(int multiple) {
+        return new Amount(amount * multiple);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Amount amount1 = (Amount) o;
+        return amount == amount1.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }

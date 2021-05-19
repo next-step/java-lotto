@@ -37,4 +37,13 @@ public class AmountTest {
         assertThat(total.divide(target))
                 .isEqualTo(except);
     }
+
+    @Test
+    @DisplayName("Amount와 숫자를 곱할 수 있다")
+    public void Amount와_숫자를_곱할_수_있다() {
+        Amount amount = new Amount(5000);
+
+        assertThat(amount.multiple(5))
+                .isEqualTo(new Amount(5000 * 5));
+    }
 }
