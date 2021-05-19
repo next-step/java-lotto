@@ -31,4 +31,13 @@ public class StringTest {
         assertThat(result).isEqualTo("1,2");
     }
 
+    @Test
+    @DisplayName("요구사항3-1")
+    void charAt(){
+        String value="abc";
+        assertThat(value.charAt(0)).isEqualTo('a');
+        assertThat(value.charAt(1)).isEqualTo('b');
+        assertThat(value.charAt(2)).isEqualTo('c');
+    }
+
 }
