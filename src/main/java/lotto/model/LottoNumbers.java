@@ -12,7 +12,7 @@ public class LottoNumbers {
 	static final int LENGTH = 6;
 	private final List<LottoNumber> lottoNumbers;
 
-	LottoNumbers(List<Integer> inputNumbers) {
+	public LottoNumbers(List<Integer> inputNumbers) {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
 		this.lottoNumbers = Collections.unmodifiableList(mapToLottoNumbers(inputNumbers));

@@ -24,6 +24,7 @@ public class LottoApp {
 	public void run() {
 		LottoNumbersGroup lottoNumbersGroup = buyLottoNumbersGroup();
 		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
+		LottoNumbers winningNumbers = inputWinningNumbers();
 	}
 
 	private LottoNumbersGroup buyLottoNumbersGroup() {
@@ -32,5 +33,10 @@ public class LottoApp {
 		int lottoCount = money.calculateLottoCount();
 		lottoAppOutput.printBoughtLottoCountView(lottoCount);
 		return new LottoNumbersGroup(lottoNumbersGenerator.generateRandomly(lottoCount));
+	}
+
+	private LottoNumbers inputWinningNumbers() {
+		lottoAppOutput.printWinningNumbersInputView();
+		return new LottoNumbers(lottoAppInput.inputWinningNumbers());
 	}
 }

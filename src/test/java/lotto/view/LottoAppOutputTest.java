@@ -48,4 +48,11 @@ public class LottoAppOutputTest {
 		assertThat(outputStream.toString()).contains("[1, 2, 3, 4, 5, 6]");
 	}
 
+	@Test
+	@DisplayName("당첨 번호를 입력 받을 때는 '지난 주 당첨 번호를 입력해 주세요.' 라고 출력해야 한다.")
+	public void printWinningNumberInputViewTest() {
+		lottoAppOutput.printWinningNumbersInputView();
+
+		assertThat(outputStream.toString()).contains("지난 주 당첨 번호를 입력해 주세요.");
+	}
 }
