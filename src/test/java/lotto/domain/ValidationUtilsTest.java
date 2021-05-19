@@ -2,7 +2,14 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,5 +29,23 @@ public class ValidationUtilsTest {
     void validateLottoNumberBoundaryTest(int number, boolean expected) {
         boolean result = ValidationUtils.isValidLottoNumberBoundary(number);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideListForValidLottoLength")
+    @DisplayName("로또 번호는 6자리 수이다")
+    void validateLottoNumberBoundaryTest(List<Integer> numbers, boolean expected) {
+        boolean result = ValidationUtils.isValidLottoNumbersLength(numbers);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideListForValidLottoLength() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true),
+                Arguments.of(Collections.emptyList(), false),
+                Arguments.of(null, false),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5), false),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7), false)
+        );
     }
 }
