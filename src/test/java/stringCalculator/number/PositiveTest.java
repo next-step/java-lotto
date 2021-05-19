@@ -23,7 +23,7 @@ public class PositiveTest {
         Positive positive1 = new Positive("1");
         Positive positive2 = new Positive("2");
         //when
-        int result = positive1.sum(positive2);
+        int result = positive1.getValue() + positive2.getValue();
         //then
         assertThat(result).isEqualTo(3);
     }

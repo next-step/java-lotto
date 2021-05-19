@@ -8,11 +8,9 @@ import stringCalculator.utility.Validator;
 
 public class StringAddCalculator {
     private final Separator separator;
-    private final Positive positive;
 
     public StringAddCalculator() {
         separator = new Separator();
-        positive = new Positive(Constant.DEFAULT_POSITIVE_VALUE);
     }
 
     public int splitAndSum(String input) {
@@ -31,7 +29,8 @@ public class StringAddCalculator {
     private int sumPositive(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
-            result += this.positive.sum(new Positive((number)));
+            Positive positive = new Positive(number);
+            result += positive.getValue();
         }
         return result;
     }

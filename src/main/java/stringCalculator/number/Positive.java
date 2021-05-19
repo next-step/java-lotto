@@ -10,8 +10,8 @@ public class Positive {
         this.value = toInteger(value);
     }
 
-    public int sum(Positive positive) {
-        return this.value + positive.value;
+    public int getValue() {
+        return value;
     }
 
     private int toInteger(String value) {
