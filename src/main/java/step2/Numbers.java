@@ -5,8 +5,7 @@ import java.util.regex.Pattern;
 
 public class Numbers {
     private static final int EMPTY_NUMBER = 0;
-    private static final String DEFAULT_COMMA_DELIMITER = ",";
-    private static final String DEFAULT_COLON_DELIMITER = ":";
+    private static final String DEFAULT_SPLIT_REGEX = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_DELIMITER_GROUP = 1;
     private static final int CUSTOM_NUMBER_ARRAY_GROUP = 2;
@@ -29,7 +28,7 @@ public class Numbers {
             return customNumberInput.split(customDelimiter);
         }
 
-        return input.split(DEFAULT_COMMA_DELIMITER + "|" + DEFAULT_COLON_DELIMITER);
+        return input.split(DEFAULT_SPLIT_REGEX);
     }
 
     private int[] convertStringArrayToIntArray(String[] strings) {
