@@ -45,24 +45,14 @@ public class StringCalculatorTest {
 			.isInstanceOf(RuntimeException.class);
 	}
 
-	@Test
-	@DisplayName(value = "delimiter 가 포함된 text 가 null 혹은 empty string 을 전달하면 0을 반환한다")
-	void emptyStringCustom() {
-		int empty = StringCalculator.sumByCustomDelimiter("");
-		int inputNull = StringCalculator.sumByCustomDelimiter(null);
-		assertThat(empty).isEqualTo(0);
-		assertThat(inputNull).isEqualTo(0);
-	}
-
 	@ParameterizedTest
 	@CsvSource(value = {"'//,\n1,2,3,4,5,6,7,8,9':45", "'//,\n123,456,789':1368"}, delimiter = ':')
 	@DisplayName(value = ", 혹은 | 구분자를 사용하는 경우 숫자로 분리하여 합한 값을 반환한다")
 	void sumTokenizingCustom(String text, int value) {
-		int resultByComma = StringCalculator.sumByCustomDelimiter(text);
+		int resultByComma = StringCalculator.sumByDelimiter(text);
 		assertThat(resultByComma).isEqualTo(value);
-		int resultByVerticalBar = StringCalculator.sumByCustomDelimiter(text);
+		int resultByVerticalBar = StringCalculator.sumByDelimiter(text);
 		assertThat(resultByVerticalBar).isEqualTo(value);
 	}
-
 
 }

@@ -16,6 +16,9 @@ public class StringCalculator {
 		if (isEmpty(text)) {
 			return 0;
 		}
+		if (hasCustomDelimiter(text)) {
+			return sumByCustomDelimiter(text);
+		}
 		if (!hasDelimiter(text, DEFAULT_DELIMITER_PATTERN)) {
 			return Integer.parseInt(text);
 		}
@@ -23,10 +26,7 @@ public class StringCalculator {
 		return sumTokens(tokens);
 	}
 
-	public static int sumByCustomDelimiter(String delimiterAndText) {
-		if (isEmpty(delimiterAndText)) {
-			return 0;
-		}
+	private static int sumByCustomDelimiter(String delimiterAndText) {
 		Matcher matched = CUSTOM_DELIMITER_PATTERN.matcher(delimiterAndText);
 		customDelimiterValidation(matched);
 		String delimiter = extractDelimiter(matched);
@@ -47,6 +47,10 @@ public class StringCalculator {
 		if (!hasCustomDelimiter(matcher)) {
 			throw new RuntimeException(" “//”와 “\n” 사이에 custom 구분자가 명시되어 있지 않습니다");
 		}
+	}
+
+	private static boolean hasCustomDelimiter(String text) {
+		return CUSTOM_DELIMITER_PATTERN.matcher(text).find();
 	}
 
 	private static boolean hasCustomDelimiter(Matcher matcher) {
