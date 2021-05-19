@@ -14,6 +14,7 @@ public class StringTest {
 	}
 
 	@Test
+	@DisplayName("문자열이 , 를 기준으로 split을 하고 문자열 배열에 1이 있어야 한다")
 	public void splitTest2() {
 		String givenString = "1";
 		String[] splitString = givenString.split(",");

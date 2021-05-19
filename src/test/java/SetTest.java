@@ -27,13 +27,13 @@ public class SetTest {
 		assertThat(actualSize).isEqualTo(3);
 	}
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "[{index}] contains 테스트 {0}값이 존재하면 True를 반환한다")
 	@ValueSource(ints = {1, 2, 3})
 	public void setTest2(int number) {
 		assertThat(numbers.contains(number)).isTrue();
 	}
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "[{index}] contains 테스트 {0}는 {1}를 반환해야 한다")
 	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
 	public void setTest3(int input, boolean expected) {
 		boolean actual = numbers.contains(input);
