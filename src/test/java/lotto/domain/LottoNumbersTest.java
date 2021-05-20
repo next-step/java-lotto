@@ -25,4 +25,12 @@ class LottoNumbersTest {
 
         Assertions.assertThat(matchCount).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("로또 번호들 입력받을 때 비정상적인 입력시 예외발생")
+    void validateStringLottoNumbers() {
+        assertThatThrownBy(() -> LottoNumbers.valueOf(""))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또번호는 Null이나 빈 값을 입력할 수 없습니다.");
+    }
 }
