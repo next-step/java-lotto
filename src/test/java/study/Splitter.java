@@ -12,15 +12,13 @@ public class Splitter {
     private static final int MATCHER_CUSTOM_SEPARATOR_INDEX = 1;
     private static final int MATCHER_STRING_INDEX = 2;
 
-    public static List<String> split(String input) {
-        String currentSeparator = DEFAULT_SEPARATOR;
-
+    public static List<String> split(final String input) {
         Matcher customMatcher = CUSTOM_PATTERN.matcher(input);
         if (customMatcher.find()) {
-            currentSeparator = customMatcher.group(MATCHER_CUSTOM_SEPARATOR_INDEX);
-            input = customMatcher.group(MATCHER_STRING_INDEX);
+            String customSeparator = customMatcher.group(MATCHER_CUSTOM_SEPARATOR_INDEX);
+            return Arrays.asList(customMatcher.group(MATCHER_STRING_INDEX).split(customSeparator));
         }
 
-        return Arrays.asList(input.split(currentSeparator));
+        return Arrays.asList(input.split(DEFAULT_SEPARATOR));
     }
 }
