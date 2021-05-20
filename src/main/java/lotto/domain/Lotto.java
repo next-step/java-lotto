@@ -28,4 +28,8 @@ public class Lotto {
     public WinningType match(Lotto winningLotto) {
         return WinningType.findType(this.countOfMatch(winningLotto));
     }
+
+    public boolean isContains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

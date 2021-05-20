@@ -58,4 +58,8 @@ public class LottoNumbers {
         retainNumbers.retainAll(this.lottoNumbers);
         return retainNumbers.size();
     }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }
