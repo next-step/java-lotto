@@ -6,12 +6,12 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(Collection<Integer> numbers) {
-        lottoNumbers = new LottoNumbers(numbers);
-    }
-
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(Collection<Integer> numbers) {
+        this(new LottoNumbers(numbers));
     }
 
     public static Lotto of(Collection<Integer> numbers) {
