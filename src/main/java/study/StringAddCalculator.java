@@ -6,26 +6,24 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
 	public static int splitAndSum(String input) {
-		int result = 0;
 		if (input == null || input.isEmpty()) {
-			return result;
+			return 0;
 		}
-
-		String regex = ",|:";
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			String[] tokens = m.group(2).split(customDelimiter);
-			result = sum(result, tokens);
-		} else {
-			String[] inputs = input.split(regex);
-			result = sum(result, inputs);
-		}
-
-		return result;
+		return sum(splitStr(input));
 	}
 
-	private static int sum(int result, String[] inputs) {
+	private static String[] splitStr(String text){
+		String regex = ",|:";
+		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+		if (m.find()) {
+			String customDelimiter = m.group(1);
+			return m.group(2).split(customDelimiter);
+		}
+		return text.split(regex);
+	}
+
+	private static int sum(String[] inputs) {
+		int result = 0;
 		for (String str : inputs) {
 			int num = Integer.parseInt(str);
 			if (num < 0) {
