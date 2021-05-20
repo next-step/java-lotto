@@ -36,4 +36,10 @@ public class LottoNumbers {
   public int hashCode() {
     return Objects.hash(numbers);
   }
+
+  public int match(LottoNumbers gameNumbers) {
+    return (int) numbers.stream()
+                        .filter(gameNumbers.numbers::contains)
+                        .count();
+  }
 }
