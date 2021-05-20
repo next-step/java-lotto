@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.TestUtil.toNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -42,11 +43,4 @@ class LottoNumbersTest {
     //when & then
     assertThat(new LottoNumbers(numbers).match(winningNumbers)).isEqualTo(expectation);
   }
-
-  private List<LottoNumber> toNumbers(String numbersString) {
-    return Arrays.stream(numbersString.split(","))
-        .map(numberString -> new LottoNumber(Integer.parseInt(numberString)))
-        .collect(Collectors.toList());
-  }
-
 }
