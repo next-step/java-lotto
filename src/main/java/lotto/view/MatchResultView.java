@@ -16,18 +16,18 @@ public class MatchResultView {
         this.matchedRanks = matched;
     }
 
-    public void printRanks(LottoRanks match) {
+    public void printRanks() {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        printRankInfo(match, LottoRank.FOURTH);
-        printRankInfo(match, LottoRank.THIRD);
-        printRankInfo(match, LottoRank.SECOND);
-        printRankInfo(match, LottoRank.FIRST);
+        printRankInfo(matchedRanks, LottoRank.FOURTH);
+        printRankInfo(matchedRanks, LottoRank.THIRD);
+        printRankInfo(matchedRanks, LottoRank.SECOND);
+        printRankInfo(matchedRanks, LottoRank.FIRST);
     }
 
-    public void printYields(LottoRanks match) {
-        PositiveInteger reward = match.sumReward();
+    public void printYields() {
+        PositiveInteger reward = matchedRanks.sumReward();
         PositiveInteger totalPrice = game.totalPriceOfTickets();
 
         LottoYield lottoYield = new LottoYield(reward, totalPrice);

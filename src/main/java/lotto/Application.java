@@ -24,7 +24,7 @@ public class Application {
 
         MatchResultView matchResultView = new MatchResultView(game, match);
 
-        matchResultView.printRanks(match);
-        matchResultView.printYields(match);
+        matchResultView.printRanks();
+        matchResultView.printYields();
     }
 }
