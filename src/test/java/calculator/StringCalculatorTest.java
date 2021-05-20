@@ -55,5 +55,8 @@ public class StringCalculatorTest {
     void 분해한_숫자들_합산_Test() {
         calculator.putNumberString("1:2,3");
         assertThat(calculator.calculate()).isEqualTo(6);
+
+        calculator.putNumberString("//;\n6;5;4");
+        assertThat(calculator.calculate()).isEqualTo(15);
     }
 }

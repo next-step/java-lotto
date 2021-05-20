@@ -19,4 +19,7 @@ public class Number {
         return Integer.toString(number);
     }
 
+    public int accumulate(int sum) {
+        return number + sum;
+    }
 }

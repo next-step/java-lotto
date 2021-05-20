@@ -23,4 +23,12 @@ public class Numbers {
         }
         return list;
     }
+
+    public int sum() {
+        int sum = 0;
+        for (Number number : numbers) {
+            sum = number.accumulate(sum);
+        }
+        return sum;
+    }
 }
