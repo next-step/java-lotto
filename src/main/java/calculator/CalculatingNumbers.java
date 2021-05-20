@@ -1,5 +1,7 @@
 package calculator;
 
+import common.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,6 +22,7 @@ public class CalculatingNumbers {
     }
 
     private String[] delimitFormula(String formula) {
+        validateFormula(formula);
         Matcher m = FORMULA_PATTERN.matcher(formula);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
@@ -27,6 +30,12 @@ public class CalculatingNumbers {
         }
 
         return formula.split(DEFAULT_DELIMITER);
+    }
+
+    private void validateFormula(String formula) {
+        if (StringUtils.isBlank(formula)) {
+            throw new IllegalArgumentException("수식을 입력해 주세요.");
+        }
     }
 
     private List<CalculatingNumber> parseCalculatorNumbers(String[] formula) {
