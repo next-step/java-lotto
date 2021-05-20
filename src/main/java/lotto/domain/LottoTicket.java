@@ -7,7 +7,7 @@ public class LottoTicket {
 
     private List<LottoNumber> lottoNumbers;
 
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
+    protected LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
