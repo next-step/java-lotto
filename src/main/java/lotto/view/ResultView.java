@@ -27,12 +27,12 @@ public class ResultView {
         }
     }
 
-    public static void printStatistics(WinningResult result, ProfitStatistics statistics) {
+    public static void printStatistics(WinningResults results, ProfitStatistics statistics) {
         System.out.println(Stream.of(WinningType.values())
                 .filter(type -> !type.equals(WinningType.NOTHING))
                 .sorted(Collections.reverseOrder())
                 .map(type -> format(MATCHING_COUNT_MESSAGE,
-                        type.getMatchCount(), type.getPrize().longValue(), result.count(type)))
+                        type.getMatchCount(), type.getPrize().longValue(), results.count(type)))
                 .collect(Collectors.joining(System.lineSeparator())));
 
         double profitRate = statistics.calculateProfitRate();

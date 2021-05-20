@@ -11,7 +11,7 @@ public class LottoGameLauncher {
         return lottoShop.buyLottos(inputPrice);
     }
 
-    private static WinningResult progressMatchingLottos(Lottos lottos, String numbers) {
+    private static WinningResults progressMatchingLottos(Lottos lottos, String numbers) {
         Lotto winningLotto = new Lotto(LottoNumbers.valueOf(numbers));
         return lottos.matches(winningLotto);
     }
@@ -22,8 +22,8 @@ public class LottoGameLauncher {
         ResultView.printLottos(lottos);
 
         String numbers = InputView.inputLastWinningNumbers();
-        WinningResult winningResult = progressMatchingLottos(lottos, numbers);
-        ProfitStatistics profitStatistics = new ProfitStatistics(winningResult, Money.from(inputPrice));
-        ResultView.printStatistics(winningResult, profitStatistics);
+        WinningResults winningResults = progressMatchingLottos(lottos, numbers);
+        ProfitStatistics profitStatistics = new ProfitStatistics(winningResults, Money.from(inputPrice));
+        ResultView.printStatistics(winningResults, profitStatistics);
     }
 }

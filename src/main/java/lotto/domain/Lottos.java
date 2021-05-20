@@ -12,10 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinningResult matches(Lotto winningLotto) {
+    public WinningResults matches(Lotto winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.match(winningLotto))
-                .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResult::new));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResults::new));
     }
 
     public List<Lotto> getValues() {

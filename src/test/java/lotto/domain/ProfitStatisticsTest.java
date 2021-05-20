@@ -13,10 +13,10 @@ class ProfitStatisticsTest {
     @DisplayName("수익률 계산")
     void calculateProfit() {
         long inputPrice = 14000L;
-        WinningResult winningResult = new WinningResult(Arrays.asList(WinningType.FOURTH));
+        WinningResults winningResults = new WinningResults(Arrays.asList(WinningType.FOURTH));
         Money inputMoney = Money.from(inputPrice);
 
-        ProfitStatistics profitStatistics = new ProfitStatistics(winningResult, inputMoney);
+        ProfitStatistics profitStatistics = new ProfitStatistics(winningResults, inputMoney);
 
         assertThat(profitStatistics.calculateProfitRate()).isEqualTo(0.35);
     }

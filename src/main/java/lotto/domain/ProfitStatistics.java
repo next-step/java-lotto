@@ -2,16 +2,16 @@ package lotto.domain;
 
 public class ProfitStatistics {
 
-    private final WinningResult winningResult;
+    private final WinningResults winningResults;
     private final Money input;
 
-    public ProfitStatistics(WinningResult winningResult, Money input) {
-        this.winningResult = winningResult;
+    public ProfitStatistics(WinningResults winningResults, Money input) {
+        this.winningResults = winningResults;
         this.input = input;
     }
 
     public double calculateProfitRate() {
-        Money totalPrize = winningResult.sumPrizes();
+        Money totalPrize = winningResults.sumPrizes();
         return totalPrize.divide(input).doubleValue();
     }
 }
