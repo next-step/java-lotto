@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class RandomNumberTest {
     @Test
@@ -21,6 +22,16 @@ public class RandomNumberTest {
     public void 랜덤번호_범위검증(int invalidNumber) {
         assertThatThrownBy(()->new RandomNumber(invalidNumber))
                 .isInstanceOf(InvalidLottoNumber.class);
+    }
+
+    @Test
+    public void equals체크() {
+        RandomNumber number1 = new RandomNumber(30);
+        RandomNumber number2 = new RandomNumber(30);
+        assertThat(number1.equals(number2)).isTrue();
+
+        RandomNumber number3 = new RandomNumber(31);
+        assertThat(number1.equals(number3)).isFalse();
     }
 
 }
