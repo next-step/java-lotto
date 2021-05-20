@@ -42,7 +42,7 @@ public class Lotto {
                 .count());
     }
 
-    private boolean isMatch(LottoNumber lottoNumber) {
+    public boolean isMatch(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

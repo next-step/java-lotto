@@ -19,6 +19,7 @@ class GameResultTest {
     private GameResult gameResult;
     private Lotto lotto;
     private Lotto winningLotto;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
@@ -27,6 +28,7 @@ class GameResultTest {
 
         lotto = new Lotto(lottoNumbers);
         winningLotto = new Lotto(lottoNumbers);
+        bonusNumber = new LottoNumber(7);
     }
 
     @DisplayName("로또 게임의 총 수익률을 리턴한다.")
@@ -39,11 +41,11 @@ class GameResultTest {
         double actual = gameResult.getProfit(purchasedAmount);
 
         // then
-        assertThat(actual).isEqualTo(0.25);
+        assertThat(actual).isEqualTo(2.5);
     }
 
     @Test
     void matchLottoNumber() {
-        assertThat(gameResult.getPrizeMatch(lotto, winningLotto)).isSameAs(Prize.FIRST);
+        assertThat(gameResult.getPrizeMatch(lotto, winningLotto, bonusNumber)).isSameAs(Prize.FIRST);
     }
 }

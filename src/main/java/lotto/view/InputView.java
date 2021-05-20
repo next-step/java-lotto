@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class InputView {
     private static final String MONEY_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
     private static final String PRIZE_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_PRIZE_QUESTION = "보너스 볼을 입력해 주세요.";
     private final Scanner scanner;
 
     public InputView() {
@@ -26,5 +27,10 @@ public class InputView {
     public List<LottoNumber> askLastPrizeNumber() {
         System.out.println(PRIZE_NUMBER_QUESTION);
         return TextParser.parseToLottoNumbers(scanner.nextLine());
+    }
+
+    public int askBonusPrizeNumber() {
+        System.out.println(BONUS_PRIZE_QUESTION);
+        return Integer.parseInt(scanner.nextLine());
     }
 }

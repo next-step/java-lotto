@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.GameResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -28,8 +29,9 @@ public class LottoController {
         outputView.showInputResult(purchasedLottos, money);
 
         final Lotto winningLotto = new Lotto(inputView.askLastPrizeNumber());
+        final LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
         final GameResult gameResult = new GameResult(purchasedLottos);
-        outputView.showResult(gameResult, winningLotto);
-        outputView.showProfit(money, gameResult, winningLotto);
+        outputView.showResult(gameResult, winningLotto, bonusNumber);
+        outputView.showProfit(money, gameResult.getResult(winningLotto, bonusNumber));
     }
 }

@@ -69,10 +69,10 @@ public class GameResult {
     /**
      * 로또 결과를 리턴한다.
      */
-    public GameResult getResult(final Lotto winningLotto) {
+    public GameResult getResult(final Lotto winningLotto, final LottoNumber bonusNumber) {
         final GameResult gameResult = new GameResult(this.purchasedLottos);
         for (final Lotto lotto : purchasedLottos) {
-            gameResult.addWinResult(this.getPrizeMatch(lotto, winningLotto));
+            gameResult.addWinResult(this.getPrizeMatch(lotto, winningLotto, bonusNumber));
         }
         return gameResult;
     }
@@ -88,8 +88,9 @@ public class GameResult {
      * @param winningLotto 당첨 로또
      * @return 맞은 갯수에 해당하는 상금
      */
-    public Prize getPrizeMatch(final Lotto lotto, Lotto winningLotto) {
+    public Prize getPrizeMatch(final Lotto lotto, final Lotto winningLotto, LottoNumber bonusNumber) {
         int matchCount = winningLotto.getLottoMatchCount(lotto);
-        return Prize.of(matchCount);
+        boolean isBonusNumberMatch = lotto.isMatch(bonusNumber);
+        return Prize.of(matchCount, isBonusNumberMatch);
     }
 }

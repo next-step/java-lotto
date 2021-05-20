@@ -15,20 +15,21 @@ class PrizeTest {
     @DisplayName("당첨 일치 갯수와 당첨 금액을 리턴한다.")
     @ParameterizedTest
     @MethodSource("paramsForPrize")
-    void matchPrize(Prize prize, int match, int amount) {
+    void matchPrize(Prize prize, int match, boolean bonusNumber, int amount) {
         assertAll(
-                () -> assertThat(prize).isEqualTo(Prize.of(match)),
+                () -> assertThat(prize).isEqualTo(Prize.of(match, bonusNumber)),
                 () -> assertThat(prize.getAmount()).isEqualTo(amount)
         );
     }
 
     private static Stream<Arguments> paramsForPrize() {
         return Stream.of(
-                Arguments.of(Prize.FIRST, 6, 200_000_0000),
-                Arguments.of(Prize.SECOND, 5, 1500000),
-                Arguments.of(Prize.THIRD, 4, 50000),
-                Arguments.of(Prize.FOURTH, 3, 5000),
-                Arguments.of(Prize.MISS, 0, 0)
+                Arguments.of(Prize.FIRST, 6, false, 2000_000_000),
+                Arguments.of(Prize.SECOND, 5, true, 30_000_000),
+                Arguments.of(Prize.THIRD, 5, false, 150_0000),
+                Arguments.of(Prize.FOURTH, 4, false, 50_000),
+                Arguments.of(Prize.FIFTH, 3, false, 5000),
+                Arguments.of(Prize.MISS, 0, false, 0)
         );
     }
 }
