@@ -13,7 +13,10 @@ class LottoVendingMachineTest {
     @ValueSource(ints = {1000, 2000, 3000, 5000, 10000, 20000, 25000})
     @ParameterizedTest
     void buyLottosTest(int amount) {
-        List<Lotto> lottos = LottoVendingMachine.getInstance().buyLottos(Money.of(amount));
+
+        List<Lotto> lottos = LottoVendingMachine.defaultVendingMachine()
+                                                .buyLottos(Money.of(amount));
+
         int expected = amount / 1000;
         assertEquals(expected, lottos.size());
     }
