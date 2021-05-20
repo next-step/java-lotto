@@ -26,9 +26,8 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
-        Lotto winningLotto = new Lotto(winningNumbers);
-
-        WinningType winningType = lotto.match(winningLotto);
+        LottoNumber bonusNumber = LottoNumber.from(6);
+        WinningType winningType = lotto.match(winningNumbers, bonusNumber);
 
         assertThat(winningType).isEqualTo(WinningType.SECOND);
     }
