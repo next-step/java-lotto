@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.PositiveInteger;
+import lotto.domain.PositiveNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWon;
 
@@ -17,11 +17,11 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public PositiveInteger money() {
+    public PositiveNumber money() {
         System.out.println("구입금액을 입력해 주세요.");
         int money = Integer.parseInt(scanner.next());
 
-        return new PositiveInteger(money);
+        return new PositiveNumber(money);
     }
 
     public LottoWon wonNumbers() {

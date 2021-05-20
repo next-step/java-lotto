@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.PositiveInteger;
+import lotto.domain.PositiveNumber;
 import lotto.domain.Game;
 import lotto.domain.rank.LottoRanks;
 import lotto.domain.LottoWon;
@@ -11,7 +11,7 @@ import lotto.view.MatchResultView;
 public class Application {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        PositiveInteger money = inputView.money();
+        PositiveNumber money = inputView.money();
 
         Game game = Game.createByMoney(money);
         InfoView infoView = new InfoView(game);

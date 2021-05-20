@@ -1,12 +1,12 @@
 package lotto.view;
 
-import lotto.domain.PositiveInteger;
+import lotto.domain.PositiveNumber;
 
 public class LottoYield {
-    private PositiveInteger reward;
-    private PositiveInteger totalPrice;
+    private PositiveNumber reward;
+    private PositiveNumber totalPrice;
 
-    public LottoYield(PositiveInteger reward, PositiveInteger totalPrice) {
+    public LottoYield(PositiveNumber reward, PositiveNumber totalPrice) {
         this.reward = reward;
         this.totalPrice = totalPrice;
     }

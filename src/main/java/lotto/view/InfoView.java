@@ -1,9 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Game;
-import lotto.domain.PositiveInteger;
-import lotto.domain.rank.LottoRank;
-import lotto.domain.rank.LottoRanks;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.LottoNumber;

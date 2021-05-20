@@ -10,9 +10,9 @@ public enum LottoRank {
     MISS(0, 0);
 
     private int countOfMatched;
-    private int amount;
+    private long amount;
 
-    LottoRank(int countOfMatched, int amount) {
+    LottoRank(int countOfMatched, long amount) {
         this.countOfMatched = countOfMatched;
         this.amount = amount;
     }
@@ -28,7 +28,7 @@ public enum LottoRank {
         return countOfMatched;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 }

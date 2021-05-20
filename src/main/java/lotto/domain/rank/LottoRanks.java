@@ -1,6 +1,6 @@
 package lotto.domain.rank;
 
-import lotto.domain.PositiveInteger;
+import lotto.domain.PositiveNumber;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +31,8 @@ public class LottoRanks {
         return new LottoRanks(countOfLottoRank);
     }
 
-    public PositiveInteger sumReward() {
-        PositiveInteger sumRewardOfRanks = PositiveInteger.ZERO;
+    public PositiveNumber sumReward() {
+        PositiveNumber sumRewardOfRanks = PositiveNumber.ZERO;
         for (LottoRank lottoRank : LottoRank.values()) {
             sumRewardOfRanks = sumRewardOfRanks.plus(sumOfRank(lottoRank));
         }
@@ -40,8 +40,8 @@ public class LottoRanks {
         return sumRewardOfRanks;
     }
 
-    private PositiveInteger sumOfRank(LottoRank rank) {
-        return new PositiveInteger(countOf(rank) * rank.getAmount());
+    private PositiveNumber sumOfRank(LottoRank rank) {
+        return new PositiveNumber(countOf(rank) * rank.getAmount());
     }
 
     public Integer countOf(LottoRank lottoRank) {

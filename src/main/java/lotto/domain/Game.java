@@ -6,7 +6,7 @@ import lotto.domain.rank.LottoRanks;
 import lotto.domain.ticket.LottoTickets;
 
 public class Game {
-    private static final PositiveInteger TICKET_PRICE = new PositiveInteger(1000);
+    private static final PositiveNumber TICKET_PRICE = new PositiveNumber(1000);
 
     private final LottoTickets lottoTickets;
 
@@ -14,12 +14,12 @@ public class Game {
         this.lottoTickets = lottoTickets;
     }
 
-    public static Game createByMoney(PositiveInteger money) {
+    public static Game createByMoney(PositiveNumber money) {
         return createByMoneyAndGenerator(money, new LottoNumberRandomGenerator());
     }
 
-    public static Game createByMoneyAndGenerator(PositiveInteger money, LottoNumberGenerator lottoNumberGenerator) {
-        PositiveInteger countOfTicket = money.divide(TICKET_PRICE);
+    public static Game createByMoneyAndGenerator(PositiveNumber money, LottoNumberGenerator lottoNumberGenerator) {
+        PositiveNumber countOfTicket = money.divide(TICKET_PRICE);
 
         return new Game(LottoTickets.createByGenerator(lottoNumberGenerator, countOfTicket));
     }
@@ -28,8 +28,8 @@ public class Game {
         return lottoWon.match(lottoTickets);
     }
 
-    public PositiveInteger totalPriceOfTickets() {
-        return TICKET_PRICE.multiple(new PositiveInteger(lottoTickets.size()));
+    public PositiveNumber totalPriceOfTickets() {
+        return TICKET_PRICE.multiple(new PositiveNumber(lottoTickets.size()));
     }
 
     public LottoTickets getLottoTickets() {

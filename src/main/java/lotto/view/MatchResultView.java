@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Game;
-import lotto.domain.PositiveInteger;
+import lotto.domain.PositiveNumber;
 import lotto.domain.rank.LottoRank;
 import lotto.domain.rank.LottoRanks;
 
@@ -27,8 +27,8 @@ public class MatchResultView {
     }
 
     public void printYields() {
-        PositiveInteger reward = matchedRanks.sumReward();
-        PositiveInteger totalPrice = game.totalPriceOfTickets();
+        PositiveNumber reward = matchedRanks.sumReward();
+        PositiveNumber totalPrice = game.totalPriceOfTickets();
 
         LottoYield lottoYield = new LottoYield(reward, totalPrice);
 
