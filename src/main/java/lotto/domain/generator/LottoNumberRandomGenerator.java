@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberRandomGenerator implements LottoNumberGenerator {
-    private static final List<Integer> numbersBetweenLottoNumberRange = IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
+    private static final List<Integer> numbersBetweenLottoNumberRange
+            = IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
