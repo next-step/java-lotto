@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoTickets {
     public static final int ZERO = 0;
@@ -35,5 +32,14 @@ public class LottoTickets {
             result.put(prize, result.getOrDefault(prize, ZERO) + ADD_NUMBER);
         }
         return new LottoResult(result);
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner("\n");
+        for (LottoTicket lottoTicket : lottoTickets) {
+            joiner.add(lottoTicket.toString());
+        }
+        return joiner.toString();
     }
 }

@@ -9,12 +9,12 @@ public class StringUtils {
     public static final String INPUT_NUMBER_ERROR_MESSAGE = "숫자만 입력 가능합니다.";
 
     public static List<Integer> toIntegerList(String numbers) {
-        return Arrays.stream(numbers.split(","))
+        return Arrays.stream(numbers.split(",|, "))
                 .map(StringUtils::parseInteger)
                 .collect(Collectors.toList());
     }
 
-    private static int parseInteger(String s) {
+    public static int parseInteger(String s) {
         int result;
         try {
             result = Integer.parseInt(s);

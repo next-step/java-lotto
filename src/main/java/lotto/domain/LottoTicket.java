@@ -33,6 +33,7 @@ public class LottoTicket {
     public static LottoTicket of(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
+                .sorted()
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
@@ -53,4 +54,8 @@ public class LottoTicket {
         return lottoNumbers.contains(number);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
