@@ -10,7 +10,7 @@ public class Ball implements Comparable {
     private int number;
 
     protected Ball(int number) {
-        if (number < MIN || number > MAX) {
+        if (validation(number)) {
             throw new IllegalArgumentException(String.format("번호는 %d이상 %d이하의 숫자만 존재할수있습니다.", MIN, MAX));
         }
 
@@ -19,6 +19,10 @@ public class Ball implements Comparable {
 
     public int get() {
         return number;
+    }
+
+    public static boolean validation(int number) {
+        return number < MIN || number > MAX;
     }
 
     @Override
