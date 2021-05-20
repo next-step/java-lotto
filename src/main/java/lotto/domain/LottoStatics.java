@@ -35,11 +35,11 @@ public class LottoStatics {
         return rankStatics.getOrDefault(rank,0);
     }
 
-    public double getProfit() {
+    public Profit getProfit() {
         double total = 0;
         for (int rank : rankStatics.keySet()) {
             total += getRankCount(rank) * RANK_PRIZE[rank];
         }
-        return Math.floor(total/ (LottoGame.PRICE * totalGames)*100)/100.0;
+        return new Profit(total,totalGames * LottoGame.PRICE);
     }
 }
