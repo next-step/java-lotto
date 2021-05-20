@@ -10,7 +10,6 @@ import static stringadder.domain.OperatorSelector.selectOperator;
 public class StringAdder {
 
   private static final Pattern SPACE_PATTERN = Pattern.compile("\\s");
-  private static final String EMPTY_STRING = "";
   private static final int SINGLE_STRING_LENGTH = 1;
 
   private StringAdder() {
@@ -39,6 +38,6 @@ public class StringAdder {
 
   private static String removeSpace(String input) {
     return SPACE_PATTERN.matcher(input)
-                        .replaceAll(EMPTY_STRING);
+                        .replaceAll("");
   }
 }

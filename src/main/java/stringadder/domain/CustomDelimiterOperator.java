@@ -12,13 +12,12 @@ public class CustomDelimiterOperator {
   private static final Pattern PREFIX_PATTERN = Pattern.compile("//(.)\\\\n");
   private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
   private static final String INVALID_CUSTOM_DELIMITER_STRING_FORMAT = "커스텀 구분자 형태의 문자열이 아닙니다.";
-  private static final String EMPTY_STRING = "";
 
   private final List<Number> inputNumbers;
 
   private CustomDelimiterOperator(String input) {
     String necessaryPart = PREFIX_PATTERN.matcher(input)
-                                          .replaceAll(EMPTY_STRING);
+                                          .replaceAll("");
     this.inputNumbers = toNumbers(necessaryPart);
   }
 
