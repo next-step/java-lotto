@@ -1,10 +1,9 @@
 package stringadder;
 
-import stringadder.domain.Number;
-
 import java.util.regex.Pattern;
 
 import static stringadder.domain.Number.ZERO_NUMBER;
+import static stringadder.domain.Number.fromString;
 import static stringadder.domain.Operator.selectOperator;
 
 public class StringAdder {
@@ -21,7 +20,7 @@ public class StringAdder {
     }
     String trimmedInput = removeSpace(input);
     if (isSingleLengthString(trimmedInput)) {
-      return new Number(trimmedInput).getValue();
+      return fromString(trimmedInput).getValue();
     }
     return selectOperator(trimmedInput).calculate(trimmedInput)
                                         .getValue();

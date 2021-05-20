@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static stringadder.domain.Number.fromString;
+
 public enum Operator {
   CUSTOM_DELIMITER(Operator::isMatchingCustomDelimiterFormat,
                     Operator::addCustomDelimiterString),
@@ -73,7 +75,7 @@ public enum Operator {
     Matcher numberPatternMatcher = NUMBER_PATTERN.matcher(necessaryPart);
     List<Number> returnNumbers = new ArrayList<>();
     while (numberPatternMatcher.find()) {
-      returnNumbers.add(new Number(numberPatternMatcher.group()));
+      returnNumbers.add(fromString(numberPatternMatcher.group()));
     }
     return returnNumbers;
   }
@@ -99,7 +101,7 @@ public enum Operator {
   private static List<Number> toNumberDefaultDelimiterNecessaryPart(String necessaryPart) {
     return Arrays.stream(DEFAULT_DELIMITER_PATTERN
                 .split(necessaryPart))
-                .map(Number::new)
+                .map(Number::fromString)
                 .collect(Collectors.toList());
   }
 
