@@ -40,7 +40,7 @@ public class IOManager {
         output.printLine(count + "개를 구매했습니다.");
     }
 
-    public void printLint(String text) {
+    public void printLine(String text) {
         output.printLine(text);
     }
 

@@ -30,7 +30,7 @@ public class LottoGame {
                                                 .buyLottos(money);
 
         for (Lotto lotto : lottos) {
-            ioManager.printLint(lotto.toString());
+            ioManager.printLine(lotto.toString());
         }
 
         return lottos;
@@ -38,7 +38,7 @@ public class LottoGame {
 
     private void drawWinningLotto(List<Lotto> lottos) {
 
-        ioManager.printLint("지난 주 당첨 번호를 입력해주세요.");
+        ioManager.printLine("지난 주 당첨 번호를 입력해주세요.");
         Lotto winningLotto = Lotto.of(ioManager.inputNumbers());
 
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto);
