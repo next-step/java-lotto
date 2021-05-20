@@ -1,3 +1,4 @@
+import exception.StringAddCalculatorException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static exception.StringAddCalculatorExceptionCode.NEGATIVE_TEXT;
 
 class StringUtilsTest {
 
@@ -60,7 +62,8 @@ class StringUtilsTest {
 		String[] texts = {"1", "-2", "3"};
 
 		// when
-		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(()->StringUtils.sumWithOutNegative(texts));
+		assertThatExceptionOfType(StringAddCalculatorException.class)
+			.isThrownBy(()->StringUtils.sumWithOutNegative(texts))
+			.withMessageContaining(NEGATIVE_TEXT.getMessage());
 	}
 }

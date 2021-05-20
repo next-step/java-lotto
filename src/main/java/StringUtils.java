@@ -1,4 +1,8 @@
+import exception.StringAddCalculatorException;
+
 import java.util.Arrays;
+
+import static exception.StringAddCalculatorExceptionCode.NEGATIVE_TEXT;
 
 public class StringUtils {
 
@@ -27,7 +31,7 @@ public class StringUtils {
 
 	private static boolean isNotNegative(final int value){
 		if(value < 0) {
-			throw new RuntimeException("");
+			throw StringAddCalculatorException.of(NEGATIVE_TEXT);
 		}
 		return true;
 	}
