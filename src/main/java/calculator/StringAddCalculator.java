@@ -16,7 +16,7 @@ public class StringAddCalculator {
     }
 
     private int add(Operands operands) {
-        return operands.add();
+        return operands.sum();
     }
 
     private boolean checkWhetherZeroOrNull(String input) {

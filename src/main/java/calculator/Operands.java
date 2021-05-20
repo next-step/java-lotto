@@ -14,7 +14,7 @@ public class Operands {
         return operands.size();
     }
 
-    public int add() {
+    public int sum() {
         int total = 0;
 
         for (Operand operand : operands) {
