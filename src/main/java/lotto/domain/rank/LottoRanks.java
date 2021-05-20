@@ -32,12 +32,12 @@ public class LottoRanks {
     }
 
     public PositiveInteger sumReward() {
-        PositiveInteger positiveInteger = PositiveInteger.ZERO;
+        PositiveInteger sumRewardOfRanks = PositiveInteger.ZERO;
         for (LottoRank lottoRank : LottoRank.values()) {
-            positiveInteger = positiveInteger.plus(sumOfRank(lottoRank));
+            sumRewardOfRanks = sumRewardOfRanks.plus(sumOfRank(lottoRank));
         }
 
-        return positiveInteger;
+        return sumRewardOfRanks;
     }
 
     private PositiveInteger sumOfRank(LottoRank rank) {
