@@ -52,7 +52,7 @@ public class OutputView {
         if (Prize.MISS == prize) {
             return;
         }
-        printSecond(prize, gameResult);
+        printSecondPrize(prize, gameResult);
         if (Prize.SECOND != prize) {
             System.out.println(
                     String.format(GAME_RESULT, prize.getMatch(), prize.getAmount(), gameResult.getWinResult(prize))
@@ -60,7 +60,7 @@ public class OutputView {
         }
     }
 
-    private void printSecond(Prize prize, GameResult gameResult) {
+    private void printSecondPrize(Prize prize, GameResult gameResult) {
         if (Prize.SECOND == prize) {
             System.out.println(String.format(SECOND_PRIZE_PRINT,
                     prize.getMatch(),
