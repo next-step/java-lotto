@@ -30,13 +30,14 @@ public class StringCalculatorTest {
     @Test
     void 문자열에서_숫자문자열_추출_Test() {
         calculator.putNumberString("//;\n1;2;3");
-        assertThat(calculator.numbers()).isEqualTo("1;2;3");
+        assertThat(calculator.numbersString()).isEqualTo("1;2;3");
 
         calculator.putNumberString("1,2");
-        assertThat(calculator.numbers()).isEqualTo("1,2");
+        assertThat(calculator.numbersString()).isEqualTo("1,2");
 
         calculator.putNumberString("3");
-        assertThat(calculator.numbers()).isEqualTo("3");
+        assertThat(calculator.numbersString()).isEqualTo("3");
+    }
 
     @Test
     void 숫자문자열에서_숫자들_분해_Test() {
