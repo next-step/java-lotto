@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Calculator {
     private static final String NUMBER_REGEX = "(-)?[0-9]+";
+    private static final int ZERO = 0;
 
     public static int sum(String text) {
         if (isNullOrEmpty(text)) {
@@ -12,7 +13,8 @@ public class Calculator {
         if (isNumber(text)) {
             return parseNumber(text);
         }
-        return 1;
+        // TODO : 리팩토링
+        return parseNumber(text);
     }
 
     private static boolean isNullOrEmpty(String text) {
@@ -24,9 +26,22 @@ public class Calculator {
     }
 
     private static int parseNumber(String text) {
+        shouldBeNumber(text);
         int value = Integer.parseInt(text);
+        shouldNotNegative(value);
         return value;
     }
 
+    private static void shouldBeNumber(String text) {
+        if (!isNumber(text)) {
+            throw new IllegalArgumentException("숫자값을 입력해주세요.");
+        }
+    }
+
+    private static void shouldNotNegative(int number) {
+        if (number < ZERO) {
+            throw new IllegalArgumentException("양수만 입력해주세요.");
+        }
+    }
 }
 

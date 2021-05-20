@@ -4,7 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class CalculatorTest {
     @ParameterizedTest
@@ -20,4 +20,17 @@ class CalculatorTest {
         assertThat(Calculator.sum(text)).isEqualTo(value);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "$", "일"})
+    void 숫자_이외의_값을_입력하면_IllegalArgumentException_을_던진다(String text) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Calculator.sum(text));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "-100", "-99"})
+    void 음수_값을_입력하면_IllegalArgumentException_을_던진다(String text) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Calculator.sum(text));
+    }
 }
