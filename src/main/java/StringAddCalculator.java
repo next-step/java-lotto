@@ -5,7 +5,7 @@ public class StringAddCalculator {
 
 	private static final String PATTERN = "//(.)\n(.*)";
 
-	public static SperatedText findSeperator(final String text){
+	public static SeparatedText findSeparator(final String text){
 		if(isEmpty(text)) {
 			return null;
 		}
@@ -15,7 +15,7 @@ public class StringAddCalculator {
 		}
 		String delimiter = m.group(1);
 		String texts= m.group(2);
-		return new SperatedText(delimiter, texts);
+		return new SeparatedText(delimiter, texts);
 	}
 
 	private static boolean isEmpty(final String text){
