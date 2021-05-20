@@ -24,6 +24,6 @@ class WinningResultsTest {
     @Test
     @DisplayName("결과값 객체에서 총 상금 합계 구하기 테스트")
     void sumPrizes() {
-        assertThat(winningResults.sumPrizes()).isEqualTo(Money.from(3_005_000L));
+        assertThat(winningResults.sumPrizes()).isEqualTo(Money.from(60_050_000L));
     }
 }
