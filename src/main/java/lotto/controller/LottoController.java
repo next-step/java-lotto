@@ -17,7 +17,6 @@ public class LottoController {
         printView.printLottoNumbers(lottoTickets);
 
         LottoResult lottoResult = lottoTickets.matchResult(LottoTicket.of(inputView.inputWinningNumbers()));
-        printView.printResult(lottoResult);
-        printView.printProfitRate(lottoResult.calculateProfitRate(price));
+        printView.printResult(lottoResult, price);
     }
 }

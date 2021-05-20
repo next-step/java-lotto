@@ -18,13 +18,15 @@ public class PrintView {
         System.out.println();
     }
 
-    public void printResult(LottoResult lottoResult) {
+    public void printResult(LottoResult lottoResult, int price) {
+        System.out.println();
         System.out.println(RESULT_TITLE_MESSAGE);
         System.out.println(DELIMITER_LINE);
         System.out.print(lottoResult.resultMessage());
+        printProfitRate(lottoResult.calculateProfitRate(price));
     }
 
-    public void printProfitRate(double calculateProfitRate) {
+    private void printProfitRate(double calculateProfitRate) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(PROFIT_RATE_NOTICE_MESSAGE, calculateProfitRate));
 
