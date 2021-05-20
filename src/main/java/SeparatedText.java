@@ -2,6 +2,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SeparatedText {
+	private static final int DELIMITER_GROUP_NUMBER = 1;
+	private static final int TEXTS_GROUP_NUMBER = 2;
 	private static final String PATTERN = "//(.)\n(.*)";
 	private static final String DEFAULT_DELIMITER = ",|:";
 
@@ -30,8 +32,8 @@ public class SeparatedText {
 		if (false == m.find()) {
 			return new SeparatedText(DEFAULT_DELIMITER, text);
 		}
-		String delimiter = m.group(1);
-		String texts= m.group(2);
+		String delimiter = m.group(DELIMITER_GROUP_NUMBER);
+		String texts= m.group(TEXTS_GROUP_NUMBER);
 		return new SeparatedText(addDelimiter(delimiter), texts);
 	}
 

@@ -1,13 +1,15 @@
 public class StringAddCalculator {
 
+	private static final int DEFAULT_RETURN_NUMBER = 0;
+
 	public static int splitAndSum(final String text){
 		SeparatedText separatedText = SeparatedText.findSeparator(text);
 		if(null == separatedText){
-			return 0;
+			return DEFAULT_RETURN_NUMBER;
 		}
 		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
 		if(null == texts){
-			return 0;
+			return DEFAULT_RETURN_NUMBER;
 		}
 		return StringUtils.sumWithOutNegative(texts);
 	}
