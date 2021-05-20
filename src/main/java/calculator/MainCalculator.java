@@ -7,6 +7,7 @@ public class MainCalculator {
         Scanner scanner = new Scanner(System.in);
 
         StringCalculator stringCalculator = new StringCalculator();
+
         System.out.println(stringCalculator.calculate(scanner.next()));
     }
 }

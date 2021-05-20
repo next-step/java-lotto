@@ -15,10 +15,6 @@ public class Number {
         this.number = number;
     }
 
-    public String toString() {
-        return Integer.toString(number);
-    }
-
     public int accumulate(int sum) {
         return number + sum;
     }

@@ -14,13 +14,20 @@ public class StringCalculator {
 
     public StringCalculator() { }
 
-    public boolean isNullOrZero(String numberString) {
-        return (numberString == null || numberString.equals("0"));
+    public int calculate(String inputString) {
+        if (isNullOrZero(inputString)) {
+            return 0;
+        }
+
+        splitDelimiterAndNumbers(inputString);
+
+        numbers = new Numbers(numbersString.split(delimiter));
+
+        return numbers.sum();
     }
 
-    public void putNumberString(String inputString) {
-        splitDelimiterAndNumbers(inputString);
-        numbers = new Numbers(numbersString.split(delimiter));
+    protected boolean isNullOrZero(String numberString) {
+        return (numberString == null || numberString.equals("0"));
     }
 
     private void splitDelimiterAndNumbers(String inputString) {
@@ -32,10 +39,6 @@ public class StringCalculator {
         }
         delimiter = DEFAULT_DELIMITER;
         numbersString = inputString;
-    }
-
-    public int calculate() {
-        return numbers.sum();
     }
 
     public String delimiter() {
