@@ -14,8 +14,8 @@ public class StringCalculatorTest {
     }
 
     @Test
-    private void 문자열_0_또는_null_Test() {
-        assertThat(calculator.putNumberString("0")).isEqualTo(0);
-        assertThat(calculator.putNumberString(null)).isEqualTo(0);
+    void 문자열_0_또는_null_Test() {
+        assertThat(calculator.isNullOrZero("0")).isTrue();
+        assertThat(calculator.isNullOrZero(null)).isTrue();
     }
 }
