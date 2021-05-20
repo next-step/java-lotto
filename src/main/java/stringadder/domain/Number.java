@@ -4,9 +4,7 @@ import java.util.Objects;
 
 public class Number {
 
-  public static final int ZERO = 0;
-
-  public static final Number ZERO_NUMBER = new Number(ZERO);
+  public static final Number ZERO_NUMBER = new Number(0);
 
   private static final String NEGATIVE_NOT_ALLOWED = "숫자는 양수로 입력해주세요.";
 
@@ -39,7 +37,7 @@ public class Number {
   }
 
   private void validatePositiveNumber(int number) {
-    if (number < ZERO) {
+    if (number < 0) {
       throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED);
     }
   }
