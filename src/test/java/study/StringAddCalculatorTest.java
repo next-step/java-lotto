@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringAddCalculatorTest {
 
@@ -16,10 +18,9 @@ public class StringAddCalculatorTest {
     public void splitAndSum_null_or_empty(String input) {
         //given
         int expected = 0;
-        int result;
 
         //when
-        result = StringAddCalculator.splitAndSum(input);
+        int result = StringAddCalculator.splitAndSum(input);
 
         //then
         assertThat(result).isEqualTo(expected);
@@ -31,10 +32,9 @@ public class StringAddCalculatorTest {
         //given
         String input = "1";
         int expected = 1;
-        int result;
 
         //when
-        result = StringAddCalculator.splitAndSum(input);
+        int result = StringAddCalculator.splitAndSum(input);
 
         //then
         assertThat(result).isEqualTo(expected);
@@ -46,10 +46,9 @@ public class StringAddCalculatorTest {
         //given
         String input = "1,2";
         int expected = 3;
-        int result;
 
         //when
-        result = StringAddCalculator.splitAndSum(input);
+        int result = StringAddCalculator.splitAndSum(input);
 
         //then
         assertThat(result).isEqualTo(expected);
@@ -61,10 +60,9 @@ public class StringAddCalculatorTest {
         //given
         String input = "1,2:3";
         int expected = 6;
-        int result;
 
         //when
-        result = StringAddCalculator.splitAndSum(input);
+        int result = StringAddCalculator.splitAndSum(input);
 
         //then
         assertThat(result).isEqualTo(expected);
@@ -76,10 +74,9 @@ public class StringAddCalculatorTest {
         //given
         String input = "//;\n1;2;3";
         int expected = 6;
-        int result;
 
         //when
-        result = StringAddCalculator.splitAndSum(input);
+        int result = StringAddCalculator.splitAndSum(input);
 
         //then¬
         assertThat(result).isEqualTo(expected);
@@ -96,5 +93,19 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContainingAll("최소값 보다 작은 값은 더할 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("String 으로 들어온 문자를 숫자로 변환하여 이어붙이기")
+    void splitAndConcat() {
+        //given
+        String input = "1,2,3";
+        int expected = 123;
+
+        //when
+        int result = StringAddCalculator.splitAndConcat(input);
+
+        //then
+        assertEquals(result, expected);
     }
 }
