@@ -2,15 +2,15 @@ package step3.domain;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoNumbers {
 
     private final Set<Integer> numbers;
 
     public LottoNumbers(Collection<Integer> numbers) {
-        this.numbers = Collections.unmodifiableSet(new HashSet<>(numbers));
+        this.numbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
 
         validateNumbersSizeAndDuplicateNumbers();
         validateNumbersRange();
