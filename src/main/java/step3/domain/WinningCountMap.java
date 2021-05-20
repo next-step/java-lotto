@@ -5,11 +5,11 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 
-public class WinnerCountMap {
+public class WinningCountMap {
 
     private final Map<Integer, PrizeCalculator> winnerCounterMap;
 
-    public WinnerCountMap() {
+    public WinningCountMap() {
         winnerCounterMap = Stream.iterate(3, i -> i + 1)
                                  .limit(4)
                                  .collect(toMap(i -> i, PrizeCalculator::new));
@@ -33,5 +33,17 @@ public class WinnerCountMap {
                                .stream()
                                .mapToLong(PrizeCalculator::getResult)
                                .sum();
+    }
+
+    public String toStringOf(int matchCount) {
+        validateMatchCount(matchCount);
+        return winnerCounterMap.get(matchCount)
+                               .toString();
+    }
+
+    private void validateMatchCount(int matchCount) {
+        if (matchCount < 3 || matchCount > 6) {
+            throw new IllegalArgumentException("맞은 숫자의 개수가 3개부터 6개까지인 데이터만 출력할 수 있습니다.");
+        }
     }
 }
