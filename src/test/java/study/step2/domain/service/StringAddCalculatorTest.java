@@ -21,14 +21,16 @@ public class StringAddCalculatorTest {
 	@DisplayName("4-2-4-1-1.sum() : NumberGroup의 값 모두 계산 - 기본구분자")
 	@ParameterizedTest(name = "{index} - text : {0}, expectedSum : {1}, isNotThrowException : {2}")
 	@Order(1)
-	@CsvSource(value = {"1,2|3|true", "1:2|3|true", "1,2:3|6|true", "12,12:12|36|true", "12;12|24|false"}, delimiter = '|')
+	@CsvSource(value = {"1,2|3|true", "1:2|3|true", "1,2:3|6|true",
+		"12,12:12|36|true", "12;12|24|false"}, delimiter = '|')
 	void split(String text, int expectedSum, boolean isNotThrowException) {
 		if (isNotThrowException) {
 			List<Number> numbers = NumberGroup.generate(InputText.split(text)).numbers();
 			assertThat(StringAddCalculator.sum(numbers)).isEqualTo(expectedSum);
 			return;
 		}
-		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers()).isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers())
+			.isInstanceOf(RuntimeException.class);
 	}
 
 	@DisplayName("4-2-4-1-2.sum() : NumberGroup의 값 모두 계산 - 기본구분자 + 커스텀구분자")
@@ -46,6 +48,7 @@ public class StringAddCalculatorTest {
 			assertThat(StringAddCalculator.sum(numbers)).isEqualTo(expectedSum);
 			return;
 		}
-		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers()).isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers())
+			.isInstanceOf(RuntimeException.class);
 	}
 }

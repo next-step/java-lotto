@@ -24,10 +24,10 @@ public class StringAddCalculator {
 	}
 
 	private static String[] splitText(String text) {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-		if (m.find()) {
-			String customDelimiter = m.group(1) + "|" + BASIC_DELIMITER;
-			return m.group(2).split(customDelimiter);
+		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+		if (matcher.find()) {
+			String customDelimiter = matcher.group(1) + "|" + BASIC_DELIMITER;
+			return matcher.group(2).split(customDelimiter);
 		}
 		return text.split(BASIC_DELIMITER);
 	}
