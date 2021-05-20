@@ -19,4 +19,9 @@ public class CustomStringTokenizer implements StringTokenizer {
 		String customDelimiter = matcher.group(1);
 		return Arrays.asList(matcher.group(2).split(customDelimiter));
 	}
+
+	@Override
+	public boolean supportForTokenizing(String input) {
+		return input.startsWith("//");
+	}
 }

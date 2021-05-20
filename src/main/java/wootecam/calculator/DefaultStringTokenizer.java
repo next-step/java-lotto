@@ -11,4 +11,9 @@ public class DefaultStringTokenizer implements StringTokenizer {
 	public List<String> getNumbers(String input) {
 		return Arrays.asList(input.split(SEPARATOR));
 	}
+
+	@Override
+	public boolean supportForTokenizing(String input) {
+		return true;
+	}
 }

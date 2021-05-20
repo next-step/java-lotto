@@ -11,7 +11,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		StringTokenizer stringTokenizer = StringTokenizerFactory.getStringTokenizer(input);
+		StringTokenizer stringTokenizer = StringTokenizerFactory.getInstance().getStringTokenizer(input);
 		List<String> numbers = stringTokenizer.getNumbers(input);
 
 		return sum(numbers);
