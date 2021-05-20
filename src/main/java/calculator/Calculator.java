@@ -16,13 +16,15 @@ public class Calculator {
         String[] tokens = StringParser.parse(text);
         return sum(tokens);
     }
-    private static int sum(String[] tokens){
+
+    private static int sum(String[] tokens) {
         int sum = 0;
         for (String token : tokens) {
             sum += parseNumber(token);
         }
         return sum;
     }
+
     private static boolean isNullOrEmpty(String text) {
         return Objects.isNull(text) || text.isEmpty();
     }

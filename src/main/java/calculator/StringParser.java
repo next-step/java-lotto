@@ -7,13 +7,10 @@ public class StringParser {
     public final static String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    public StringParser(String csv) {
-    }
-
     public static String[] parse(String text) {
         Matcher matcher = CUSTOM_PATTERN.matcher(text);
         boolean isCustom = matcher.find();
-        if(isCustom){
+        if (isCustom) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }

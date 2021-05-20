@@ -48,7 +48,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3","//&\n1&2&3"})
+    @ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3", "//&\n1&2&3"})
     void 커스텀_구분자를_지정할_수_있다(String csv) {
         assertThat(Calculator.sum(csv)).isEqualTo(6);
     }
