@@ -19,7 +19,7 @@ class BallTest {
     public void init1(int num) {
         Ball ball = new Ball(num);
 
-        assertThat(num).isEqualTo(ball.get());
+        assertThat(num).isEqualTo(ball.number());
     }
 
 

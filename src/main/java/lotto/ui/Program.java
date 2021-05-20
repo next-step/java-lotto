@@ -1,6 +1,9 @@
 package lotto.ui;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
@@ -26,15 +29,18 @@ public class Program {
     public void print(Report report) {
         gameOutput.println("당첨 통계");
         gameOutput.println("---------");
-        gameOutput.println(report.getRankFormat(Rank.FIFTH));
-        gameOutput.println(report.getRankFormat(Rank.FOURTH));
-        gameOutput.println(report.getRankFormat(Rank.SECOND));
-        gameOutput.println(report.getRankFormat(Rank.FIRST));
+        gameOutput.println(statisticsToString(x->report.getRankFormat(x), Rank.FIFTH, Rank.FOURTH, Rank.SECOND, Rank.FIRST));
+        gameOutput.println(yieldsToString(report.getYields()));
+    }
 
-        double yields = report.getYields();
-        gameOutput.println(
-                String.format("총 수익률은 %.2f입니다.%s", yields, yields < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "")
-        );
+    private String statisticsToString(Function<Rank, String> function, Rank ...ranks) {
+        return Arrays.stream(ranks)
+            .map(rank->function.apply(rank))
+            .collect(Collectors.joining("\n"));
+    }
+
+    private String yieldsToString(double yields) {
+        return String.format("총 수익률은 %.2f입니다.%s", yields, yields < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : "");
     }
 
 }

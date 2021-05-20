@@ -4,7 +4,7 @@ import lotto.core.omr.Omr;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
-import lotto.util.DiffCalc;
+import lotto.util.RateUtils;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -25,11 +25,11 @@ public class Report {
         int size = getSize(rank);
         String bonusMessage = getBonusMessage(rank);
 
-        return String.format("%d개 일치%s(%d원)- %d개", rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(), size);
+        return String.format("%d개 일치%s(%d원)- %d개", rank.countOfMatch(), bonusMessage, rank.winningMoney(), size);
     }
 
     public double getYields() {
-        return DiffCalc.getRate(totalPrice, totalWinningMoney);
+        return RateUtils.getRate(totalPrice, totalWinningMoney);
     }
 
     public String getTotalPrice() {
@@ -70,7 +70,7 @@ public class Report {
 
     private double calcTotalWinningMoney() {
         return result.keySet().stream()
-                    .mapToInt(key->result.get(key).size() * key.getWinningMoney())
+                    .mapToInt(key->result.get(key).size() * key.winningMoney())
                     .sum();
     }
 

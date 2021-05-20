@@ -55,7 +55,7 @@ public class GameInput {
         }
 
         if (money < OmrCard.PRICE) {
-            throw new RuntimeException(String.format("구입 최소금액은 %d입니다.", OmrCard.PRICE));
+            throw new RuntimeException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
         }
 
         return money;

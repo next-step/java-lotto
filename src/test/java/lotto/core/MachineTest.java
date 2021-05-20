@@ -15,7 +15,7 @@ class MachineTest {
     @RepeatedTest(100)
     @DisplayName("랜덤 뽑기")
     public void init1() {
-        int number = Machine.draw().get();
+        int number = Machine.draw().number();
 
         assertThat(number).isBetween(min, max);
     }
@@ -29,7 +29,7 @@ class MachineTest {
     @DisplayName("지정값 뽑기")
     public void init2(int num) {
         //Machine.draw();
-        int number = Machine.draw(num).get();
+        int number = Machine.draw(num).number();
 
         assertThat(number).isEqualTo(num);
     }

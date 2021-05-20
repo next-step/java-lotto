@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class Machine {
     private static final List<Ball> list;
+    private static final int RANDOM_PICK = 0;
 
     static {
         list = IntStream.rangeClosed(Ball.MIN, Ball.MAX)
@@ -18,7 +19,7 @@ public class Machine {
     public static Ball draw() {
         Collections.shuffle(list);
 
-        return list.get(0);
+        return list.get(RANDOM_PICK);
     }
 
     public static Ball draw(int number) {

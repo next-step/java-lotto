@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DiffCalcTest {
+class RateUtilsTest {
     private final double total = 14000;
     private final double val = 5000;
 
@@ -13,7 +13,7 @@ class DiffCalcTest {
     @DisplayName("수익률 계산")
     public void getRateTest() {
 
-        double result = DiffCalc.getRate(total, val);
+        double result = RateUtils.getRate(total, val);
 
         double expected = 0.35;
         assertThat(result).isBetween(expected, expected + 0.01);
@@ -22,7 +22,7 @@ class DiffCalcTest {
     @Test
     @DisplayName("수익률 퍼센트 계산")
     public void getRatePcTest() {
-        double result = DiffCalc.getRatePc(total, val);
+        double result = RateUtils.getRatePc(total, val);
 
         double expected = 35;
         assertThat(result).isBetween(expected, expected + 1);

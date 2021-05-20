@@ -6,12 +6,14 @@ import lotto.core.SixBall;
 import java.util.stream.Stream;
 
 public class Round {
+    private static final int DEFAULT_ROUND = 0;
+
     private final int round;
     private final SixBall sixBall;
     private final Ball bonusBall;
 
     public Round(SixBall sixBall, int bonus) {
-        this(0, sixBall, bonus);
+        this(DEFAULT_ROUND, sixBall, bonus);
     }
 
     public Round(int round, SixBall sixBall, int bonus) {
