@@ -37,7 +37,9 @@ public class InfoView {
 
     private void printNumbers(Set<LottoNumber> lottoNumbers) {
         List<String> numbers = lottoNumbers.stream()
-                .map(item -> String.valueOf(item.getNumber()))
+                .map(item -> item.getNumber())
+                .sorted()
+                .map(String::valueOf)
                 .collect(Collectors.toList());
 
         System.out.println(format("[%s]", String.join(NUMBER_JOIN_DELIMITER_STRING, numbers)));
