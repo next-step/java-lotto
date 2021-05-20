@@ -6,15 +6,22 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static int splitAndSum(String text) {
-        if (text == null || text.isEmpty()) return 0;
-        if (text.length() == 1) return Integer.parseInt(text);
+        if (isNullOrEmpty(text)) return 0;
+        if (hasOneSize(text)) return Integer.parseInt(text);
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-
         if (m.find()) {
             return getSumOfTokens(m.group(2), m.group(1));
         }
         return getSumOfTokens(text,",|:");
+    }
+
+    private static boolean hasOneSize(String text) {
+        return text.length() == 1;
+    }
+
+    private static boolean isNullOrEmpty(String text) {
+        return text == null || text.isEmpty();
     }
 
     private static int getSumOfTokens(String text, String delimiter) {
