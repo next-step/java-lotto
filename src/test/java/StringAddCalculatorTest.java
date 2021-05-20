@@ -1,127 +1,29 @@
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class StringAddCalculatorTest {
 
-	@Test
-	@DisplayName("구분자를 찾아 분리하는 기능 테스트")
-	void findSeparatorTest(){
-		// given
-		final String text = "//;\n1;2;3";
-
-		// when
-		SeparatedText separatedText = StringAddCalculator.findSeparator(text);
-
-		// then
-		assertThat(separatedText).as("구분자 분리에 실패했습니다.").isNotNull();
-		assertThat(separatedText.getDelimiter()).isNotEmpty().isEqualTo(",|:|;");
-		assertThat(separatedText.getTexts()).isNotEmpty().isEqualTo("1;2;3");
-	}
-
-	@Test
-	@DisplayName("구분자 분리 동작시 입력값이 null일때 케이스 테스트")
-	void findSeparatorTestWithNull(){
-		assertThat(StringAddCalculator.findSeparator(null))
-			.isNull();
-	}
-
-	@ParameterizedTest(name = "입력받은 구분자를 기준으로 문자열 split 테스트. delimter={0}, text={1}")
+	@ParameterizedTest(name = "splitAndSum 기능 테스트. text={0}, expected={1}")
 	@CsvSource(value = {
-		";$1;2;3", "@$1@2@3", ",$1,2,3"
+		"$0", "''$0", "1$1", "1,2$3", "1,2:3$6"
 	}, delimiter = '$')
-	void splitTest(final String delimiter, final String text){
-		assertThat(StringAddCalculator.split(delimiter, text))
-			.containsExactly("1", "2", "3");
-	}
-
-	@ParameterizedTest(name = "split이 불가능한 테스트 케이스. delimiter={0}, text={1}")
-	@CsvSource(value = {
-		"$", "$1;2;3", ";$"
-	}, delimiter = '$')
-	void splitTestFailedTest(final String delimiter, final String text){
-		assertThat(StringAddCalculator.split(delimiter, text))
-			.isNull();
+	public void splitAndSum_null_또는_빈문자(String text, int expected) {
+		int result = StringAddCalculator.splitAndSum(text);
+		assertThat(result).isEqualTo(expected);
 	}
 
 	@Test
-	@DisplayName("문자를 숫자로 변환하여 총합을 구하는 기능 테스트")
-	void sum(){
-		String[] texts = {"1", "2", "3"};
-		assertThat(StringAddCalculator.sum(texts))
-			.isEqualTo(6);
-	}
-
-	@ParameterizedTest(name = "Sum, int로 변환이 불가능한 케이스 테스트. value={0}")
-	@MethodSource("parameterForSumWithNullAndEmpty")
-	void sumWithNullAndEmpty(String[] texts){
-		assertThatExceptionOfType(NumberFormatException.class)
-			.isThrownBy(()->StringAddCalculator.sum(texts));
-	}
-
-	private static Stream<Arguments> parameterForSumWithNullAndEmpty(){
-		return Stream.of(
-			Arguments.of((Object) new String[]{"1", "", "3"}), 		// 빈값
-			Arguments.of((Object) new String[]{"1", null, "3"}),	// null
-			Arguments.of((Object) new String[]{"1", "$2", "3"}) 	// 숫자가 아닌 형태
-						);
-	}
-
-	@Test
-	@DisplayName("Sum, 음수가 포함된 케이스 테스트")
-	void sumWithNagative(){
-		// given
-		String[] texts = {"1", "-2", "3"};
-
-		// when
-		assertThatExceptionOfType(RuntimeException.class)
-			.isThrownBy(()->StringAddCalculator.sum(texts));
-	}
-
-
-	@Test
-	public void splitAndSum_null_또는_빈문자() {
-		int result = StringAddCalculator.splitAndSum(null);
-		assertThat(result).isEqualTo(0);
-
-		result = StringAddCalculator.splitAndSum("");
-		assertThat(result).isEqualTo(0);
-	}
-
-	@Test
-	public void splitAndSum_숫자하나() throws Exception {
-		int result = StringAddCalculator.splitAndSum("1");
-		assertThat(result).isEqualTo(1);
-	}
-
-	@Test
-	public void splitAndSum_쉼표구분자() throws Exception {
-		int result = StringAddCalculator.splitAndSum("1,2");
-		assertThat(result).isEqualTo(3);
-	}
-
-	@Test
-	public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-		int result = StringAddCalculator.splitAndSum("1,2:3");
-		assertThat(result).isEqualTo(6);
-	}
-
-	@Test
-	public void splitAndSum_custom_구분자() throws Exception {
+	public void splitAndSum_custom_구분자() {
 		int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
 		assertThat(result).isEqualTo(6);
 	}
 
 	@Test
-	public void splitAndSum_negative() throws Exception {
+	public void splitAndSum_negative(){
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}
