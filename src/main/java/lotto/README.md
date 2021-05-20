@@ -50,3 +50,6 @@
 * LottoNumbersFactory
   * 1 ~ 46의 고정된 LottoNumber 풀에서 랜덤한 LottoNumbers를 생성해내는 클래스
 
+* LottoRanking
+  * 숫자를 맞춘 개수에 따라 등수 정할 수 있는 enum
+  * 등수를 나타내는 enum마다 당첨금을 나타낼 수 있다.
