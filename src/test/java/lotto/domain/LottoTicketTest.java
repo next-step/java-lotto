@@ -13,7 +13,7 @@ class LottoTicketTest {
     @DisplayName("로또 티켓 생성하기")
     @Test
     public void createLottoTicket() {
-        List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 

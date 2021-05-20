@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber create(int number) {
-        if(number < 1 || number > 45) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException("잘못된 로또 범위 입니다. (1~45사이)");
         }
         return new LottoNumber(number);
@@ -32,11 +32,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        if(this.number > o.number) {
+        if (this.number > o.number) {
             return 1;
         }
 
-        if(this.number < o.number) {
+        if (this.number < o.number) {
             return -1;
         }
 

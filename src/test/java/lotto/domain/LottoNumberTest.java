@@ -11,7 +11,7 @@ class LottoNumberTest {
 
     @DisplayName("로또번호의 정상적인 생성확인")
     @ParameterizedTest
-    @ValueSource(ints = {1,10,45})
+    @ValueSource(ints = {1, 10, 45})
     public void createLottoNumber(int number) {
         LottoNumber lottoNumber = LottoNumber.create(number);
 
@@ -20,7 +20,7 @@ class LottoNumberTest {
 
     @DisplayName("로또번호의 비정상적인 범위에서의 예외확인")
     @ParameterizedTest
-    @ValueSource(ints = {-1,0,46})
+    @ValueSource(ints = {-1, 0, 46})
     public void createInvalidLottoNumber(int number) {
         assertThatThrownBy(() -> LottoNumber.create(number))
                 .isInstanceOf(IllegalArgumentException.class);
