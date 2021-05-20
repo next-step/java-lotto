@@ -67,4 +67,13 @@ public class StringAddCalculatorTest {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum(input.toString()))
 			.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	@DisplayName("구분자의 길이가 2를 초과하거나 특수문자가 아닌 것이 포함되면 에러 발생")
+	public void custom_delimiter_length_exceed_two_or_contains_non_special_symbols() {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("//;a\n1;a2;a3"))
+			.isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("//;:#\n1;:#2;:#3"))
+			.isInstanceOf(RuntimeException.class);
+	}
 }

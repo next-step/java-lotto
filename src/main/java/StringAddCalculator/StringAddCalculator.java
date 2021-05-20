@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-	public static final String DEFAULT_DELIMITER = ",|:";
 	public static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
 	private static Pattern customDelimiterPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
@@ -16,11 +15,13 @@ public class StringAddCalculator {
 		Matcher customDelimiterMatcher = getCustomDelimiterMatcher(input);
 
 		if (customDelimiterMatcher.find()) {
-			return new Numbers(splitInput(getInput(customDelimiterMatcher), getCustomDelimiter(customDelimiterMatcher)))
+			return new Numbers(
+				splitInput(getInput(customDelimiterMatcher),
+					new Delimiter(customDelimiterMatcher.group(1)).getDelimiter()))
 				.getSum();
 		}
 
-		return new Numbers(splitInput(input, DEFAULT_DELIMITER)).getSum();
+		return new Numbers(splitInput(input, new Delimiter().getDelimiter())).getSum();
 	}
 
 	private static String[] splitInput(String input, String delimiter) {
@@ -33,11 +34,5 @@ public class StringAddCalculator {
 
 	private static String getInput(Matcher customDelimiterMatcher) {
 		return customDelimiterMatcher.group(2);
-	}
-
-	private static String getCustomDelimiter(Matcher matcher) {
-		String customDelimiter = matcher.group(1);
-
-		return customDelimiter;
 	}
 }
