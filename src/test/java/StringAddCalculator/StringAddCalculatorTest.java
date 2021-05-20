@@ -23,4 +23,12 @@ public class StringAddCalculatorTest {
 	public void input_one_number_return_the_number() {
 		assertThat(StringAddCalculator.splitAndReturnSum("3")).isEqualTo(3);
 	}
+
+	@Test
+	@DisplayName("쉼표 혹은 콜론을 구분자로 가지는 문자열 전달 시 구분자 기준으로 분리한 숫자의 합 반환")
+	public void input_string_contains_numbers_that_is_separated_by_comma_or_colon_return_sum() {
+		assertThat(StringAddCalculator.splitAndReturnSum("1,2")).isEqualTo(3);
+		assertThat(StringAddCalculator.splitAndReturnSum("1,2,3")).isEqualTo(6);
+		assertThat(StringAddCalculator.splitAndReturnSum("1,2:3")).isEqualTo(6);
+	}
 }
