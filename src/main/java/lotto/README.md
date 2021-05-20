@@ -41,11 +41,11 @@
 * LottoNumber
   * 로또 숫자를 나타내는 클래스
   * 1 ~ 45 사이의 숫자인지 validation 할 수 있다.
-    
 * LottoNumbers
   * 로또 숫자들의 집합을 나타내는 일급 컬렉션
   * 중복 되지 않는 숫자들의 집합이다.
   * 로또 한 게임의 숫자 개수인 6개가 맞는지 validation할 수 있다.
+  * 다른 LottoNumbers와 몇개의 숫자가 동일한지 반환할 수 있다.
   
 * LottoNumbersFactory
   * 1 ~ 46의 고정된 LottoNumber 풀에서 랜덤한 LottoNumbers를 생성해내는 클래스
