@@ -1,30 +1,14 @@
-package kr.insup.calculator;
+package kr.insup.calculator.domain;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAddCalculator {
+public class InputParser {
 
     private static final Pattern pattern = Pattern.compile("^//(.)\n(.*)");
     private static final String DEFAULT_DELIMITER = "[:,]";
 
-    public int calculate(String input) {
-        String delimiter = getDelimiter(input);
-        String onlyNumbers = getOnlyNumbers(input);
-        String[] numbers = onlyNumbers.split(delimiter);
-
-        return calculateNumbers(numbers);
-    }
-
-    private int calculateNumbers(String[] numbers) {
-        int sum = 0;
-        for (String number : numbers) {
-            sum += stringToIntConverter(number);
-        }
-        return sum;
-    }
-
-    private int stringToIntConverter(String number) {
+    public static int stringToIntConverter(String number) {
         if (number == null || number.isEmpty()) {
             return 0;
         }
@@ -34,7 +18,7 @@ public class StringAddCalculator {
         return Integer.parseInt(number);
     }
 
-    public String getDelimiter(String input) {
+    public static String getDelimiter(String input) {
         Matcher m = pattern.matcher(input);
         if (m.find()) {
             String delimiter = m.group(1);
@@ -43,7 +27,7 @@ public class StringAddCalculator {
         return DEFAULT_DELIMITER;
     }
 
-    public String getOnlyNumbers(String input) {
+    public static String getOnlyNumbers(String input) {
         Matcher m = pattern.matcher(input);
         if (m.find()) {
             return m.group(2);
@@ -51,7 +35,7 @@ public class StringAddCalculator {
         return input;
     }
 
-    private String escapeCharacter(String delimiter) {
+    private static String escapeCharacter(String delimiter) {
         if ("\\[](){}*+?|^$.".contains(delimiter)) {
             return "\\" + delimiter;
         }
