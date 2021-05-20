@@ -1,13 +1,10 @@
 package study;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class SumCalculator implements Calculator {
+public class ConcatCalculator implements Calculator {
     private final String input;
     private final int minValue;
 
-    public SumCalculator(String input, int minValue) {
+    public ConcatCalculator(String input, int minValue) {
         this.input = input;
         this.minValue = minValue;
     }
@@ -17,9 +14,7 @@ public class SumCalculator implements Calculator {
             return minValue;
         }
 
-        return stringToInts(input).stream()
-                .mapToInt(this::toValueGreaterThanMinValue)
-                .sum();
+        return stringToInt(input);
     }
 
     private boolean isUnusable() {
@@ -34,11 +29,12 @@ public class SumCalculator implements Calculator {
         return input == null;
     }
 
-    private List<Integer> stringToInts(String input) {
-        return Splitter.split(input)
-                .stream()
-                .map(this::parseInt)
-                .collect(Collectors.toList());
+    private int stringToInt(String input) {
+        StringBuilder sb = new StringBuilder();
+        for (String stringNumber : Splitter.split(input)) {
+            sb.append(stringNumber);
+        }
+        return toValueGreaterThanMinValue(parseInt(sb.toString()));
     }
 
     private int parseInt(String input) {
