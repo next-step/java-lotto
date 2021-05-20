@@ -4,7 +4,6 @@ import lotto.domain.LottoNumber;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static java.lang.String.format;
@@ -14,15 +13,8 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this(new HashSet<>(lottoNumbers));
-    }
-
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(format("로또티켓은 %d개의 번호를 가져야 합니다.", LOTTO_NUMBERS_SIZE));
-        }
-
+        validate(lottoNumbers);
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
@@ -32,5 +24,11 @@ public class LottoTicket {
 
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    private void validate(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(format("로또티켓은 %d개의 번호를 가져야 합니다.", LOTTO_NUMBERS_SIZE));
+        }
     }
 }

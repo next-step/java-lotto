@@ -31,6 +31,6 @@ public class InputView {
         return new LottoWon(Arrays.stream(numbers.split(LOTTO_WON_DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 }
