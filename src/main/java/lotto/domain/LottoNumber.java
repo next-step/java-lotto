@@ -17,6 +17,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
+    public int value() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
