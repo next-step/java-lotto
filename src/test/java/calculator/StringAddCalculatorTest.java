@@ -1,3 +1,9 @@
+package calculator;
+
+import calculator.InputValidator;
+import calculator.NumberAdder;
+import calculator.StringAddCalculator;
+import calculator.StringSplitter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

@@ -1,3 +1,5 @@
+package calculator;
+
 public class StringAddCalculator {
 
   private final StringSplitter stringSplitter;

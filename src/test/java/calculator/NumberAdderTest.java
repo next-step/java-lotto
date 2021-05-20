@@ -1,3 +1,6 @@
+package calculator;
+
+import calculator.NumberAdder;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

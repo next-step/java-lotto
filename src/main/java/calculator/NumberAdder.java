@@ -1,3 +1,5 @@
+package calculator;
+
 public class NumberAdder {
 
   public int add(String[] numbers) {
