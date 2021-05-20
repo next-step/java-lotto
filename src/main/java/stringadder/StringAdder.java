@@ -5,7 +5,7 @@ import stringadder.domain.Number;
 import java.util.regex.Pattern;
 
 import static stringadder.domain.Number.ZERO_NUMBER;
-import static stringadder.domain.OperatorSelector.selectOperator;
+import static stringadder.domain.Operator.selectOperator;
 
 public class StringAdder {
 
