@@ -5,13 +5,20 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> numbers() {
+    public static LottoTicket create(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 넘버의 갯수는 6개여야합니다.");
+        }
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public List<LottoNumber> numbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 }
