@@ -47,4 +47,11 @@ public class StringAddCalculatorTest {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("a,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	@DisplayName("1000만 이상의 값이 입력되면 에러 발생")
+	public void input_contains_few_numbers_that_are_over_one_million_return_runtime_exception() {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("1000000000,2,3"))
+			.isInstanceOf(RuntimeException.class);
+	}
 }
