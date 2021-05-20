@@ -5,12 +5,15 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final String DEFAULT_SEPARATOR =  ",|:";
+    private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\n(.*)";
+    private static final int SUBSEQUENCE_FIRST_SEPARATOR = 1;
+    private static final int SUBSEQUENCE_SECOND_INPUT = 2;
 
     public static String[] split(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_REGEX).matcher(input);
         if (m.find()) {
-            String customSeparator = m.group(1);
-            return m.group(2).split(customSeparator);
+            String customSeparator = m.group(SUBSEQUENCE_FIRST_SEPARATOR);
+            return m.group(SUBSEQUENCE_SECOND_INPUT).split(customSeparator);
         }
 
         return input.split(DEFAULT_SEPARATOR);

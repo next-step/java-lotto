@@ -54,4 +54,18 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.sum("")).isEqualTo(0);
     }
 
+    @DisplayName("이상한문자 또는 음수 합계 테스트")
+    @Test
+    void sum_이상한문자또는음수() {
+        assertThatThrownBy(()->StringCalculator.sum("ㅋㅋ"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("숫자 이외의 값을 전달할 수 없습니다.");
+        assertThatThrownBy(()->StringCalculator.sum("@"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("숫자 이외의 값을 전달할 수 없습니다.");
+
+        assertThatThrownBy(()->StringCalculator.sum("-1"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("음수를 전달할 수 없습니다.");
+    }
 }
