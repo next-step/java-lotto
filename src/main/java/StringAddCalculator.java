@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
 	private static final String PATTERN = "//(.)\n(.*)";
+	private static final String DEFAULT_DELIMITER = ",|:";
 
 	public static SeparatedText findSeparator(final String text){
 		if(isEmpty(text)) {
@@ -12,11 +13,18 @@ public class StringAddCalculator {
 		}
 		Matcher m = Pattern.compile(PATTERN).matcher(text);
 		if (false == m.find()) {
-			return null;
+			return new SeparatedText(DEFAULT_DELIMITER, text);
 		}
 		String delimiter = m.group(1);
 		String texts= m.group(2);
-		return new SeparatedText(delimiter, texts);
+		return new SeparatedText(addDelimiter(delimiter), texts);
+	}
+
+	private static String addDelimiter(final String delimiter){
+		return new StringBuilder(DEFAULT_DELIMITER)
+			.append("|")
+			.append(delimiter)
+			.toString();
 	}
 
 	public static String[] split(String delimiter, String text) {
@@ -47,5 +55,18 @@ public class StringAddCalculator {
 			throw new RuntimeException("");
 		}
 		return true;
+	}
+
+
+	public static int splitAndSum(final String text){
+		SeparatedText separatedText = findSeparator(text);
+		if(null == separatedText){
+			return 0;
+		}
+		String[] texts = split(separatedText.getDelimiter(), separatedText.getTexts());
+		if(null == texts){
+			return 0;
+		}
+		return sum(texts);
 	}
 }
