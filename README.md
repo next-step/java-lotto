@@ -23,22 +23,10 @@
   * 두 Number 객체를 더해서 더한 값을 갖는 새로운 Number 객체를 반환하는 기능을 갖는다.
   * 내부의 int 값을 노출하는 기능을 갖는다.
 
-* OperatorSelector
-  * 연산자를 선택하는 enum
+* Operator
+  * 알맞은 연산자를 선택해서 계산값을 반환할 수 있는 enum
   * 문자열 형태에 따라 default delimiter operator인지 custom delimiter operator인지 선택할수 있다.
   * caculate method를 사용하면 계산값을 반환 할 수 있다.
-  
-* DefaultDelimiterOperator
-  * 기본 구분자 형태의 문자열을 계산하는 클래스
-  * 기본 구분자 형태로 입력이 들어왔는지 판별할 수 있다.
-  * 입력 받은 기본 구분자 형태의 문자열에서 숫자만 추출해 멤버변수로 갖는다.
-  * 멤버변수의 합을 반환할수 있다.
-
-* CustomDelimiterOperator
-  * 커스텀 구분자 형태의 문자열을 계산하는 클래스
-  * 커스텀 구분자 형태로 입력이 들어왔는지 판별할 수 있다.
-  * 입력 받은 기본 구분자 형태의 문자열에서 숫자만 추출해 멤버변수로 갖는다.
-  * 멤버변수의 합을 반환할수 있다.
 
 * StringAdder
   * 계산할 때 사용할 클래스
