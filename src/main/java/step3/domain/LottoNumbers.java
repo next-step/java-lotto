@@ -1,33 +1,34 @@
 package step3.domain;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class LottoNumbers {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(Collection<Integer> numbers) {
+        this.numbers = Collections.unmodifiableSet(new HashSet<>(numbers));
 
-        validateNumbersSize(numbers);
-        validateNumbersRange(numbers);
-
-        numbers.sort(Comparator.naturalOrder());
-        this.numbers = Collections.unmodifiableList(numbers);
-
+        validateNumbersSize();
+        validateNumbersRange();
         validateDuplicateNumber();
     }
 
-    private void validateNumbersSize(List<Integer> numbers) {
+    public static LottoNumbers of(Collection<Integer> numbers) {
+        return new LottoNumbers(numbers);
+    }
+
+    private void validateNumbersSize() {
         if (numbers == null || numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
     }
 
-    private void validateNumbersRange(List<Integer> numbers) {
-        if (isLottoNumberRange(numbers)) {
+    private void validateNumbersRange() {
+        if (isLottoNumberRange()) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 사용해야 합니다.");
         }
     }
@@ -38,13 +39,24 @@ public class LottoNumbers {
         }
     }
 
-    private boolean isLottoNumberRange(List<Integer> numbers) {
+    private boolean isLottoNumberRange() {
         return numbers.stream()
                       .anyMatch(number -> number < 1 || number > 45);
     }
 
     private boolean hasDuplicateNumber() {
         return new HashSet<>(numbers).size() != 6;
+    }
+
+    public Set<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public int getMatchCount(LottoNumbers lottoNumbers) {
+        return (int) lottoNumbers.getNumbers()
+                                 .stream()
+                                 .filter(this.numbers::contains)
+                                 .count();
     }
 
     @Override

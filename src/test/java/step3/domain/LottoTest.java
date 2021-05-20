@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoTest {
 
@@ -55,6 +56,38 @@ class LottoTest {
     void duplicateTest() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)));
+    }
+
+    @DisplayName("두 로또 번호 일치 개수 검증")
+    @MethodSource("lottoNumberMatchTestCase")
+    @ParameterizedTest
+    void lottoNumberMatchTest(LottoNumbers lottoNumbers,
+                              LottoNumbers target,
+                              int expected) {
+
+        Lotto lotto1 = Lotto.of(lottoNumbers);
+        Lotto lotto2 = Lotto.of(target);
+        int actual = lotto1.getMatchCount(lotto2);
+
+        assertEquals(expected, actual);
+    }
+
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> lottoNumberMatchTestCase() {
+        return Stream.of(
+            Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                         LottoNumbers.of(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                         3),
+            Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                         LottoNumbers.of(Arrays.asList(3, 4, 5, 6, 7, 8)),
+                         4),
+            Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                         LottoNumbers.of(Arrays.asList(2, 3, 4, 5, 6, 7)),
+                         5),
+            Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                         LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                         6)
+        );
     }
 
     @DisplayName("로또 정상 생성 및 출력")
