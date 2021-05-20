@@ -18,4 +18,10 @@ public class StringCalculatorTest {
         assertThat(calculator.isNullOrZero("0")).isTrue();
         assertThat(calculator.isNullOrZero(null)).isTrue();
     }
+
+    @Test
+    void 문자열에_커스텀구분자_유무확인() {
+        calculator.putNumberString("//;\n1;2;3");
+        assertThat(calculator.delimiter()).isEqualTo(";");
+    }
 }
