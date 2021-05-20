@@ -16,24 +16,15 @@ public class StringAddCalculator {
 		Matcher customDelimiterMatcher = getCustomDelimiterMatcher(input);
 
 		if (customDelimiterMatcher.find()) {
-			return getSum(getNumbers(getInput(customDelimiterMatcher), getCustomDelimiter(customDelimiterMatcher)));
+			return new Numbers(splitInput(getInput(customDelimiterMatcher), getCustomDelimiter(customDelimiterMatcher)))
+				.getSum();
 		}
 
-		return getSum(getNumbers(input, DEFAULT_DELIMITER));
+		return new Numbers(splitInput(input, DEFAULT_DELIMITER)).getSum();
 	}
 
-	private static String[] getNumbers(String input, String delimiter) {
+	private static String[] splitInput(String input, String delimiter) {
 		return input.split(delimiter);
-	}
-
-	private static int getSum(String[] numbers) {
-		int sum = 0;
-
-		for (String stringNumber : numbers) {
-			sum += new Number(stringNumber).getNumber();
-		}
-
-		return sum;
 	}
 
 	private static Matcher getCustomDelimiterMatcher(String input) {

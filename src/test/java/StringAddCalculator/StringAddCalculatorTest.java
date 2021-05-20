@@ -54,4 +54,17 @@ public class StringAddCalculatorTest {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("1000000000,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	@DisplayName("100개 이상의 값이 입력되면 에러 발생")
+	public void input_contains_numbers_that_count_over_one_hundred_return_runtime_exception() {
+		StringBuilder input = new StringBuilder();
+
+		for (int i = 0; i < 100; i++) {
+			input.append("100,");
+		}
+		input.append("100");
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum(input.toString()))
+			.isInstanceOf(RuntimeException.class);
+	}
 }
