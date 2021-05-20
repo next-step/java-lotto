@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private static final String EMPTY_NUMBER = "0";
     private static final String DEFAULT_SEPARATOR = ",|:";
+    private static final int PATTERN_SEPARATOR_NUMBER = 1;
+    private static final int PATTERN_MATCH_NUMBER = 2;
+
     private static final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
 
@@ -26,8 +29,8 @@ public class StringCalculator {
         String separator = DEFAULT_SEPARATOR;
         Matcher m = customPattern.matcher(input);
         if (m.find()) {
-            separator = m.group(1);
-            return m.group(2).split(separator);
+            separator = m.group(PATTERN_SEPARATOR_NUMBER);
+            return m.group(PATTERN_MATCH_NUMBER).split(separator);
         }
         return input.split(separator);
     }
