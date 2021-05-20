@@ -16,6 +16,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.create(number);
 
         assertThat(lottoNumber).isEqualTo(LottoNumber.create(number));
+        assertThat(lottoNumber.value()).isEqualTo(number);
     }
 
     @DisplayName("로또번호의 비정상적인 범위에서의 예외확인")
