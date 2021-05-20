@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningCountMapTest {
@@ -54,6 +57,17 @@ class WinningCountMapTest {
             Arguments.of(Arrays.asList(1, 5, 6, 3)),
             Arguments.of(Arrays.asList(1, 5, 6, 3)),
             Arguments.of(Arrays.asList(5, 3, 2, 1))
+        );
+    }
+
+    @DisplayName("당첨 개수 (3, 4, 5, 6) 외에 다른 수 데이터를 요청하면 오류 발생")
+    @ValueSource(ints = {0, 1, 2, 7, 8, 9, 10})
+    @ParameterizedTest
+    void name(int matchCount) {
+        WinningCountMap winningCountMap = new WinningCountMap();
+
+        assertThatIllegalArgumentException().isThrownBy(() ->
+            winningCountMap.toStringOf(matchCount)
         );
     }
 }
