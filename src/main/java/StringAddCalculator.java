@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,5 +33,19 @@ public class StringAddCalculator {
 			return true;
 		}
 		return false;
+	}
+
+	public static int sum(String[] texts) {
+		return Arrays.stream(texts)
+			  		.mapToInt(Integer::parseInt)
+					.filter(StringAddCalculator::isNotNegative)
+					.reduce(0, Integer::sum);
+	}
+
+	private static boolean isNotNegative(final int value){
+		if(value < 0) {
+			throw new RuntimeException("");
+		}
+		return true;
 	}
 }
