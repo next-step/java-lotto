@@ -15,6 +15,7 @@ public class LottoTicket {
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
+
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
