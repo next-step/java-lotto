@@ -53,3 +53,7 @@
 * LottoRanking
   * 숫자를 맞춘 개수에 따라 등수 정할 수 있는 enum
   * 등수를 나타내는 enum마다 당첨금을 나타낼 수 있다.
+  
+* LottoGame
+  * LottoNumbers를 멤버변수로 갖는 하나의 로또 게임을 나타내는 클래스
+  * 전달 받은 LottoGame(당첨 게임)과 비교해서 당첨 결과인 LottoRanking을 반환할 수 있다.
