@@ -18,16 +18,30 @@ public class Lotto {
         createLottoDefaultNumberRange();
     }
 
-    public void startPurchase() {
+    public void purchaseLotto() {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         inputView.printInputPurchasePrice();
-        this.lottoCount = new LottoCount(calculatePrice(validateInputPrice(inputView.inputPurchasePrice())));
+        String purchasePrice = inputView.inputPurchasePrice();
+        this.lottoCount = new LottoCount(calculatePrice(validateInputPrice(purchasePrice)));
         inputView.printPurchasePrice(lottoCount);
+        List<LottoTicket> tickets = createLottoTickets(inputView, resultView);
+        showLottoWinningStatistics(tickets, purchasePrice);
+    }
+
+    public List<LottoTicket> createLottoTickets(InputView inputView, ResultView resultView) {
         List<LottoTicket> tickets = createLottoRandomNumbers(this.lottoCount.getLottoCount());
         resultView.printLottoNumbers(tickets);
         inputView.printLastWeeksWinningNumber();
         winningNumbers = new WinningNumbers(inputView.inputLastWeeksWinningNumber());
+        return tickets;
+    }
+
+    public void showLottoWinningStatistics(List<LottoTicket> tickets, String purchasePrice) {
+        WinningStatistics winningStatistics = new WinningStatistics();
+        winningStatistics.calculateTotalWinningPoint(tickets,winningNumbers.getWinningNumbers());
+        winningStatistics.showWinningStatistics(Integer.parseInt(purchasePrice));
+
     }
 
     protected int validateInputPrice(String price) {
