@@ -3,13 +3,20 @@ package lotto;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoTicket;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNumber> lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public int lottoTicketSize() {
+        return lottoTicket.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoTicket=" + lottoTicket +
+                '}';
     }
 }
