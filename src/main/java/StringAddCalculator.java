@@ -18,9 +18,17 @@ public class StringAddCalculator {
 		return new SeparatedText(delimiter, texts);
 	}
 
+	public static String[] split(String delimiter, String text) {
+		if(isEmpty(delimiter)
+		   || isEmpty(text)){
+			return null;
+		}
+		return text.split(delimiter);
+	}
+
 	private static boolean isEmpty(final String text){
 		if(null == text
-			|| text.isEmpty()){
+		   || text.isEmpty()){
 			return true;
 		}
 		return false;
