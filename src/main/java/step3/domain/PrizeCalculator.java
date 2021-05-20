@@ -17,4 +17,9 @@ public class PrizeCalculator {
     public long getResult() {
         return (long) winnerCount * winningType.getPrize();
     }
+
+    @Override
+    public String toString() {
+        return winningType.getMatchCount() + "개 일치(" + winningType.getPrize() + "원)- " + winnerCount + "개";
+    }
 }
