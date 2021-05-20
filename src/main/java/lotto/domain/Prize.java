@@ -1,14 +1,16 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public enum Prize {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
+    FOURTH(3, 5_000),
     THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
+    NONE(0, 0);
 
-    public static final String NOT_FOUND_MATCH_RESULT = "일치하는 결과값이 없습니다.";
     private final int matchCount;
     private final int rewardPrice;
 
@@ -21,10 +23,26 @@ public enum Prize {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_MATCH_RESULT));
+                .orElse(NONE);
     }
 
     public int calculateProfit(int count) {
         return this.rewardPrice * count;
+    }
+
+    public static Map<Prize, Integer> defaultResultMap() {
+        Map<Prize, Integer> defaultMap = new LinkedHashMap<>();
+        for (Prize prize : values()) {
+            defaultMap.put(prize, 0);
+        }
+        return defaultMap;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getRewardPrice() {
+        return rewardPrice;
     }
 }

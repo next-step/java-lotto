@@ -19,6 +19,7 @@ public class InputView {
     public void inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMbERS_MESSAGE);
         winningNumbers = SCANNER.nextLine();
+        System.out.println();
     }
 
     public String getPrice() {

@@ -26,7 +26,7 @@ public class LottoTickets {
     }
 
     public LottoResult matchResult(LottoTicket winningNumbers) {
-        Map<Prize, Integer> result = new HashMap<>();
+        Map<Prize, Integer> result = Prize.defaultResultMap();
         for (LottoTicket lottoTicket : lottoTickets) {
             Prize prize = lottoTicket.match(winningNumbers);
             result.put(prize, result.getOrDefault(prize, ZERO) + ADD_NUMBER);
