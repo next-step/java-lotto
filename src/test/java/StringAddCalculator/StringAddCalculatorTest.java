@@ -31,4 +31,20 @@ public class StringAddCalculatorTest {
 		assertThat(StringAddCalculator.splitAndReturnSum("1,2,3")).isEqualTo(6);
 		assertThat(StringAddCalculator.splitAndReturnSum("1,2:3")).isEqualTo(6);
 	}
+
+	@Test
+	@DisplayName("커스텀 구분자 설정")
+	public void custom_delimiter_set_up() {
+		assertThat(StringAddCalculator.splitAndReturnSum("//;\n1;2;3")).isEqualTo(6);
+		assertThat(StringAddCalculator.splitAndReturnSum("//:;\n2:;3:;4")).isEqualTo(9);
+	}
+
+	@Test
+	@DisplayName("음수나 숫자 외의 값이 입력 되었을 경우 런타임 에러 발생")
+	public void input_contains_negative_or_something_that_is_not_number_return_runtime_exception() {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("-1,2,3"))
+			.isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> StringAddCalculator.splitAndReturnSum("a,2,3"))
+			.isInstanceOf(RuntimeException.class);
+	}
 }
