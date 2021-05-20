@@ -21,15 +21,19 @@ public class Lotto {
         return lottoNumbers.getValue();
     }
 
-    private int countOfMatch(Lotto winningLotto) {
-        return lottoNumbers.matchNumbers(winningLotto.lottoNumbers);
+    public WinningType match(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return WinningType.findType(countOfMatch(winningNumbers), isBonusMatch(winningNumbers, bonusNumber));
     }
 
-    public WinningType match(Lotto winningLotto) {
-        return WinningType.findType(this.countOfMatch(winningLotto));
+    private int countOfMatch(LottoNumbers winningNumbers) {
+        return lottoNumbers.matchNumbers(winningNumbers);
     }
 
-    public boolean isContains(LottoNumber bonusNumber) {
+    private boolean isBonusMatch(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return countOfMatch(winningNumbers) == 5 && iscontainsBonus(bonusNumber);
+    }
+
+    public boolean iscontainsBonus(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }

@@ -12,9 +12,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public WinningResults matches(Lotto winningLotto) {
+    public WinningResults matches(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winningLotto))
+                .map(lotto -> winningLotto.matchWinning(lotto))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResults::new));
     }
 

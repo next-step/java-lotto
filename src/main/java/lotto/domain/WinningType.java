@@ -3,27 +3,30 @@ package lotto.domain;
 import java.util.stream.Stream;
 
 public enum WinningType {
-    FIRST(6, Money.from(2_000_000_000L)),
-    SECOND(5, Money.from(1_500_000)),
-    THIRD(4, Money.from(50_000L)),
-    FOURTH(3, Money.from(5_000L)),
-    NOTHING(0, Money.from(0L));
+    FIRST(Money.from(2_000_000_000L), 6, false),
+    SECOND(Money.from(30_000_000L), 5, true),
+    THIRD(Money.from(1_500_000L), 5, false),
+    FOURTH(Money.from(50_000L), 4, false),
+    FIFTH(Money.from(5_000L), 3, false),
+    NOTHING(Money.from(0L), 0, false);
 
-    private final int matchCount;
     private final Money prize;
+    private final int matchCount;
+    private final boolean isBonusMatch;
 
-    WinningType(int matchCount, Money prize) {
-        this.matchCount = matchCount;
+    WinningType(Money prize, int matchCount, boolean isBonusMatch) {
         this.prize = prize;
+        this.matchCount = matchCount;
+        this.isBonusMatch = isBonusMatch;
     }
 
-    private boolean isSameCount(int countOfMatch) {
-        return this.matchCount == countOfMatch;
+    private boolean isMatched(int countOfMatch, boolean isBonusMatch) {
+        return this.matchCount == countOfMatch && this.isBonusMatch == isBonusMatch;
     }
 
-    public static WinningType findType(int countOfMatch) {
+    public static WinningType findType(int countOfMatch, boolean isBonusMatch) {
         return Stream.of(values())
-                .filter(winningType -> winningType.isSameCount(countOfMatch))
+                .filter(winningType -> winningType.isMatched(countOfMatch, isBonusMatch))
                 .findFirst()
                 .orElse(NOTHING);
     }
