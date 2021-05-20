@@ -40,9 +40,16 @@ public class StringAddCalculatorTest {
 
 	@DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있는지 테스트")
 	@Test
-	public void splitAndSum_custom_구분자() throws Exception {
+	public void splitAndSum_custom_구분자() {
 		int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
 		assertThat(result).isEqualTo(6);
+	}
+
+	@DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생하는지 테스트")
+	@Test
+	public void splitAndSum_negative() {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+			.isInstanceOf(RuntimeException.class);
 	}
 
 }
