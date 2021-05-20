@@ -1,6 +1,5 @@
 package stringcalculator;
 
-import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,47 +8,44 @@ public class StringAddCalculator {
     private static final int DEFAULT_RETURN_VALUE = 0;
     private static final int REGEX_GROUP_INDEX_DELIMITER = 1;
     private static final int REGEX_GROUP_INDEX_TEXT = 2;
-    private static final String JOINER_DELIMITER = "|";
     private static final String SPLIT_DEFAULT_DELIMITERS = ",|:";
     private static final String REGEX_TEXT = "//(.)\n(.*)";
+    private static final String DELIMITER_JOINER = "|";
 
     public static int splitAndSum(String text) {
         if (validateNullOrEmpty(text)) {
             return DEFAULT_RETURN_VALUE;
         }
-        String delimiters = getDelimiter(text);
-        String numbers = getTextNumbers(text);
-        return getSumStringNumbers(numbers, delimiters);
+        String delimiter = getDelimiter(text);
+        String textNumber = getTextNumber(text);
+        return sumTextNumber(textNumber, delimiter);
     }
 
     private static String getDelimiter(String text) {
-        StringJoiner delimiters = new StringJoiner(JOINER_DELIMITER);
-        delimiters.add(SPLIT_DEFAULT_DELIMITERS);
         Matcher matcher = Pattern.compile(REGEX_TEXT).matcher(text);
         if (matcher.find()) {
-            delimiters.add(matcher.group(REGEX_GROUP_INDEX_DELIMITER));
+            return SPLIT_DEFAULT_DELIMITERS + DELIMITER_JOINER + matcher.group(REGEX_GROUP_INDEX_DELIMITER);
         }
-        return delimiters.toString();
+        return SPLIT_DEFAULT_DELIMITERS;
     }
 
-    private static String getTextNumbers(String text) {
-        String resultText = text;
+    private static String getTextNumber(String text) {
         Matcher matcher = Pattern.compile(REGEX_TEXT).matcher(text);
         if (matcher.find()) {
-            resultText = matcher.group(REGEX_GROUP_INDEX_TEXT);
+            return matcher.group(REGEX_GROUP_INDEX_TEXT);
         }
-        return resultText;
+        return text;
     }
 
-    private static int getSumStringNumbers(String numbers, String delimiters) {
-        if (validateNullOrEmpty(numbers)) {
+    private static int sumTextNumber(String textNumber, String delimiter) {
+        if (validateNullOrEmpty(textNumber)) {
             return DEFAULT_RETURN_VALUE;
         }
-        int sumNumbers = DEFAULT_RETURN_VALUE;
-        for (String number : numbers.split(delimiters)) {
-            sumNumbers += toIntegerNumber(number);
+        int sumNumber = DEFAULT_RETURN_VALUE;
+        for (String number : textNumber.split(delimiter)) {
+            sumNumber += toIntegerNumber(number);
         }
-        return sumNumbers;
+        return sumNumber;
     }
 
     private static int toIntegerNumber(String number) {
@@ -63,17 +59,11 @@ public class StringAddCalculator {
     }
 
     private static boolean validateNullOrEmpty(String text) {
-        if (text == null || text.isEmpty()) {
-            return true;
-        }
-        return false;
+        return text == null || text.isEmpty();
     }
 
     private static boolean validateMinusNumber(String number) {
-        if (Integer.parseInt(number) < MINUS_EXCEPTION_MINIMUM_VALUE) {
-            return true;
-        }
-        return false;
+        return Integer.parseInt(number) < MINUS_EXCEPTION_MINIMUM_VALUE;
     }
 
     private static boolean validateNotNumber(String number) {
