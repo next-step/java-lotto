@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String NUMBER_EXCEPTION_MESSAGE = "숫자가 아닌 값은 로또번호로 입력할 수 없습니다.";
     private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 1과 45사이의 숫자여야 합니다.";
 
-    private static final LottoNumber[] CACHE = IntStream.rangeClosed(Lotto.MININUM_NUMBER, Lotto.MAXIMUM_NUMBER)
+    private static final LottoNumber[] CACHE = IntStream.rangeClosed(Lotto.MINIMUM_NUMBER, Lotto.MAXIMUM_NUMBER)
             .mapToObj(LottoNumber::new)
             .toArray(LottoNumber[]::new);
 
@@ -46,7 +46,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static boolean isLottoNumber(int lottoNumber) {
-        return lottoNumber >= Lotto.MININUM_NUMBER && lottoNumber <= Lotto.MAXIMUM_NUMBER;
+        return lottoNumber >= Lotto.MINIMUM_NUMBER && lottoNumber <= Lotto.MAXIMUM_NUMBER;
     }
 
     @Override
