@@ -12,8 +12,15 @@ public class LottoNumber {
     }
 
     private void validateLottoNumber() {
-        if(number < MIN_NUMBER || number > MAX_NUMBER) {
+        if(number < MIN_NUMBER && number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1~45까지 입니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }
