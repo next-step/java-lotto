@@ -33,14 +33,14 @@ public class LottoRanksTest {
         LottoRanks lottoRanks = LottoRanks.createByList(lottoRankList);
 
         assertThat(lottoRanks.countOf(LottoRank.FIRST))
-                .isEqualTo(5);
+                .isEqualTo(5L);
         assertThat(lottoRanks.countOf(LottoRank.SECOND))
-                .isEqualTo(4);
+                .isEqualTo(4L);
         assertThat(lottoRanks.countOf(LottoRank.THIRD))
-                .isEqualTo(3);
+                .isEqualTo(3L);
         assertThat(lottoRanks.countOf(LottoRank.FOURTH))
-                .isEqualTo(2);
+                .isEqualTo(2L);
         assertThat(lottoRanks.countOf(LottoRank.MISS))
-                .isEqualTo(0);
+                .isEqualTo(0L);
     }
 }

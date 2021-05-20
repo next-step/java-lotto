@@ -5,30 +5,21 @@ import lotto.domain.PositiveNumber;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoRanks {
-    private static final int EMPTY_COUNT = 0;
-    private final Map<LottoRank, Integer> countOfLottoRank;
+    private static final long EMPTY_COUNT = 0;
+    private final Map<LottoRank, Long> countOfLottoRank;
 
-    public LottoRanks(Map<LottoRank, Integer> countOfLottoRank) {
+    public LottoRanks(Map<LottoRank, Long> countOfLottoRank) {
         this.countOfLottoRank = new HashMap<>(countOfLottoRank);
     }
 
     public static LottoRanks createByList(List<LottoRank> lottoRanks) {
-        final int PER_COUNT_INCREMENT = 1;
-
-        Map<LottoRank, Integer> countOfLottoRank = new HashMap<>();
-
-        for (LottoRank lottoRank : lottoRanks) {
-            int count = EMPTY_COUNT;
-            if (countOfLottoRank.containsKey(lottoRank)) {
-                count = countOfLottoRank.get(lottoRank);
-            }
-
-            countOfLottoRank.put(lottoRank, count + PER_COUNT_INCREMENT);
-        }
-
-        return new LottoRanks(countOfLottoRank);
+        return new LottoRanks(lottoRanks.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        );
     }
 
     public PositiveNumber sumReward() {
@@ -44,7 +35,7 @@ public class LottoRanks {
         return new PositiveNumber(countOf(rank) * rank.getAmount());
     }
 
-    public Integer countOf(LottoRank lottoRank) {
+    public long countOf(LottoRank lottoRank) {
         if (countOfLottoRank.containsKey(lottoRank)) {
             return countOfLottoRank.get(lottoRank);
         }
