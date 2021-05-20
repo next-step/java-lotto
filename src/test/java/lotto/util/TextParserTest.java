@@ -1,0 +1,62 @@
+package lotto.util;
+
+import lotto.domain.LottoNumber;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
+@DisplayName("텍스트 파서 클래스")
+class TextParserTest {
+
+    @Nested
+    @DisplayName("로또 번호 파서는")
+    class Describe_parseToLottoNumber {
+
+        @Nested
+        @DisplayName("로또 문자열이 주어지면")
+        class Context_with_valid_text {
+            final String text = "1,2,3,4,5,6";
+
+            @DisplayName(",을 기준으로 로또 숫자 목록을 리턴한다")
+            @Test
+            void it_return_lotto_numbers() {
+                List<LottoNumber> lottoNumbers = TextParser.parseToLottoNumbers(text);
+                assertThat(lottoNumbers).containsExactly(
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                );
+            }
+        }
+
+        @Nested
+        @DisplayName("유효하지 않은 로또 문자열이 주어지면")
+        class Context_with_invalid_text {
+            final String text = "a,b,d,e,f,g";
+
+            @DisplayName("예외를 던진다")
+            @Test
+            void it_throws_exception() {
+                assertThatExceptionOfType(NumberFormatException.class)
+                        .isThrownBy(() -> TextParser.parseToLottoNumbers(text));
+            }
+        }
+
+        @Nested
+        @DisplayName("로또 숫자가 덜 입력된 문자열이 주어지면")
+        class Context_with_not_enough_number_text {
+            final String text = "1,2,3";
+
+            @DisplayName("예외를 던진다")
+            @Test
+            void it_throws_exception() {
+                assertThatExceptionOfType(IllegalArgumentException.class)
+                        .isThrownBy(() -> TextParser.parseToLottoNumbers(text));
+            }
+        }
+    }
+}
