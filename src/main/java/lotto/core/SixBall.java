@@ -35,6 +35,10 @@ public class SixBall {
         return balls.stream();
     }
 
+    public boolean contains(Ball ball) {
+        return balls.contains(ball);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(balls);
