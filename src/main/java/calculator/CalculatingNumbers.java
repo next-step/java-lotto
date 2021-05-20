@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class CalculatingNumbers {
 
-    private static final String ZERO = "0";
     private static final int CUSTOM_DELIMITER_INDEX = 1;
     private static final int CALCULATE_TARGET_INDEX = 2;
     private static final Pattern FORMULA_PATTERN = Pattern.compile("//(.)\n(.*)");
