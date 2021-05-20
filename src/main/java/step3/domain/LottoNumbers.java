@@ -12,18 +12,17 @@ public class LottoNumbers {
     public LottoNumbers(Collection<Integer> numbers) {
         this.numbers = Collections.unmodifiableSet(new HashSet<>(numbers));
 
-        validateNumbersSize();
+        validateNumbersSizeAndDuplicateNumbers();
         validateNumbersRange();
-        validateDuplicateNumber();
     }
 
     public static LottoNumbers of(Collection<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
 
-    private void validateNumbersSize() {
+    private void validateNumbersSizeAndDuplicateNumbers() {
         if (numbers == null || numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 중복 없는 6개의 수를 사용해야 합니다.");
         }
     }
 
@@ -33,19 +32,9 @@ public class LottoNumbers {
         }
     }
 
-    private void validateDuplicateNumber() {
-        if (hasDuplicateNumber()) {
-            throw new IllegalArgumentException("로또 번호는 중복된 수를 포함하면 안됩니다.");
-        }
-    }
-
     private boolean isLottoNumberRange() {
         return numbers.stream()
                       .anyMatch(number -> number < 1 || number > 45);
-    }
-
-    private boolean hasDuplicateNumber() {
-        return new HashSet<>(numbers).size() != 6;
     }
 
     public Set<Integer> getNumbers() {

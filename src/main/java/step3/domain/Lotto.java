@@ -14,10 +14,6 @@ public class Lotto {
         this(new LottoNumbers(numbers));
     }
 
-    public static Lotto of(Collection<Integer> numbers) {
-        return new Lotto(numbers);
-    }
-
     public static Lotto of(LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
