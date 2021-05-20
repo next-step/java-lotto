@@ -23,7 +23,7 @@ public class LottoController {
     }
 
     public void start() {
-        final Money money = new Money(inputView.askNumberOfAmount());
+        final Money money = new Money(inputView.askMoneyInput());
         final LottoGenerator lottoGenerator = new LottoGenerator(money);
         final List<Lotto> purchasedLottos = lottoGenerator.getPurchasedLottos();
         outputView.showInputResult(purchasedLottos, money);

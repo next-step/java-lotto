@@ -10,16 +10,16 @@ import java.util.Scanner;
  * 사용자의 입력을 처리한다.
  */
 public class InputView {
-    private static final String AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
-    public static final String PRIZE_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MONEY_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
+    private static final String PRIZE_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
     private final Scanner scanner;
 
     public InputView() {
         scanner = new Scanner(System.in);
     }
 
-    public long askNumberOfAmount() {
-        System.out.println(AMOUNT_QUESTION);
+    public long askMoneyInput() {
+        System.out.println(MONEY_AMOUNT_QUESTION);
         return Long.parseLong(scanner.nextLine());
     }
 
