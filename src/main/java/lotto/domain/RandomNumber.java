@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoNumber;
+import lotto.util.MessageContainer;
 
 import java.util.Objects;
 import java.util.Random;
@@ -27,7 +28,7 @@ public class RandomNumber implements Comparable<RandomNumber> {
 
     private void isValid(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new InvalidLottoNumber(String.format("invalid lotto number %d", number));
+            throw new InvalidLottoNumber(String.format("%s %d", MessageContainer.INVALID_LOTTO_NUMBER, number));
         }
     }
 

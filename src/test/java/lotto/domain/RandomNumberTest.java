@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoNumber;
+import lotto.util.MessageContainer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,7 +22,8 @@ public class RandomNumberTest {
     @ValueSource(ints = {0,46})
     public void 랜덤번호_범위검증(int invalidNumber) {
         assertThatThrownBy(()->new RandomNumber(invalidNumber))
-                .isInstanceOf(InvalidLottoNumber.class);
+                .isInstanceOf(InvalidLottoNumber.class)
+                .hasMessageContaining(MessageContainer.INVALID_LOTTO_NUMBER);
     }
 
     @Test
