@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private static final String EMPTY_NUMBER = "0";
     private static final String DEFAULT_SEPARATOR = ",|:";
-    private static final String CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    private static final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
+
 
     private final PositiveNumbers numbers;
 
@@ -23,7 +24,7 @@ public class StringCalculator {
 
     private String[] splitInput(String input) {
         String separator = DEFAULT_SEPARATOR;
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR).matcher(input);
+        Matcher m = customPattern.matcher(input);
         if (m.find()) {
             separator = m.group(1);
             return m.group(2).split(separator);
