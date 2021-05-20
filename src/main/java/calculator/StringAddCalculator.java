@@ -5,6 +5,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+	public static final String DEFAULT_DELIMITER = "[,:]";
+	public static final Pattern CUSTOM_GROUP_PATTERN = Pattern.compile("//(.)\n(.*)");;
+	public static final int CUSTOM_GROUP_DELIMITER = 1;
+	public static final int CUSTOM_GROUP_NUMBER = 2;
+	public static final int MIN_SCOPE = 0;
+
 	public static int splitAndSum(String text) {
 		if (Objects.isNull(text) || text.isEmpty()) {
 			return 0;
@@ -15,11 +21,12 @@ public class StringAddCalculator {
 	}
 
 	private static String[] split(String text) {
-		String delimiter = ",|:";
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+		String delimiter = DEFAULT_DELIMITER;
+		Matcher m = CUSTOM_GROUP_PATTERN.matcher(text);
+
 		if (m.find()) {
-			delimiter = m.group(1);
-			text = m.group(2);
+			delimiter = m.group(CUSTOM_GROUP_DELIMITER);
+			text = m.group(CUSTOM_GROUP_NUMBER);
 		}
 		return text.split(delimiter);
 	}
@@ -34,7 +41,7 @@ public class StringAddCalculator {
 
 	private static int tokenToNumber(String text) {
 		int num = Integer.parseInt(text);
-		if (num < 0) {
+		if (num < MIN_SCOPE) {
 			throw new IllegalArgumentException("주어진 값은 0보다 작을 수 없습니다.");
 		}
 		return num;
