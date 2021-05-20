@@ -22,6 +22,12 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void 음수_포함_문자_Exception_Test() throws Exception {
+        assertThatThrownBy(() -> calculator.putNumberString("-1,3,2"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     void 문자열에_커스텀구분자_적용_Test() {
         calculator.putNumberString("//;\n1;2;3");
         assertThat(calculator.delimiter()).isEqualTo(";");
