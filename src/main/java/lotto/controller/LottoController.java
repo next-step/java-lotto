@@ -11,15 +11,12 @@ public class LottoController {
         PrintView printView = new PrintView();
         LottoTicketStore store = new LottoTicketStore(new RandomNumbersGenerator());
 
-        inputView.inputPrice();
-        int price = StringUtils.parseInteger(inputView.getPrice());
+        int price = inputView.inputPrice();
 
         LottoTickets lottoTickets = store.buy(price);
-
         printView.printLottoNumbers(lottoTickets);
-        inputView.inputWinningNumbers();
 
-        LottoResult lottoResult = lottoTickets.matchResult(LottoTicket.of(inputView.getWinningNumbers()));
+        LottoResult lottoResult = lottoTickets.matchResult(LottoTicket.of(inputView.inputWinningNumbers()));
         printView.printResult(lottoResult);
         printView.printProfitRate(lottoResult.calculateProfitRate(price));
     }

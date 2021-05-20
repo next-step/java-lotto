@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.utils.StringUtils;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -8,25 +10,13 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private String price;
-    private String winningNumbers;
-
-    public void inputPrice() {
+    public int inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
-        price = SCANNER.nextLine();
+        return StringUtils.parseInteger(SCANNER.nextLine());
     }
 
-    public void inputWinningNumbers() {
+    public String inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMbERS_MESSAGE);
-        winningNumbers = SCANNER.nextLine();
-        System.out.println();
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getWinningNumbers() {
-        return winningNumbers;
+        return SCANNER.nextLine();
     }
 }
