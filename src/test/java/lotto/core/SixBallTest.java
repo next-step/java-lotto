@@ -1,11 +1,10 @@
 package lotto.core;
 
+import lotto.util.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,7 +47,7 @@ class SixBallTest {
     @DisplayName("정상적인 직접입력 로또 6개의 값")
     public void directTest(String source) {
         //Given
-        int[] fixs = csvToIntArray(source);
+        int[] fixs = StringUtils.csvToIntArray(source);
 
         //When
         SixBall sixBall = SixBall.get(fixs);
@@ -70,7 +69,7 @@ class SixBallTest {
     @DisplayName("비정상 직접입력 로또 6개의 값")
     public void directTest2(String source) {
         //Given
-        int[] fixs = csvToIntArray(source);
+        int[] fixs = StringUtils.csvToIntArray(source);
 
         //When
         SixBall sixBall = SixBall.get(fixs);
@@ -80,11 +79,4 @@ class SixBallTest {
         assertThat(sixBall.stream().count()).isEqualTo(6);
         assertThat(sixBall.stream().distinct().count()).isEqualTo(6);
     }
-
-    private int[] csvToIntArray(String source) {
-        return Arrays.stream(source.split(","))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-    }
-
 }
