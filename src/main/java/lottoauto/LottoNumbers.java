@@ -1,5 +1,6 @@
 package lottoauto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,15 @@ public class LottoNumbers {
     }
 
     public boolean isBetween1To45() {
-        return !lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber < LOTTO_NUMBER_START || lottoNumber > LOTTO_NUMBER_END);
+        return lottoNumbers.stream()
+                .noneMatch(lottoNumber -> lottoNumber < LOTTO_NUMBER_START || lottoNumber > LOTTO_NUMBER_END);
+    }
+
+    @Override
+    public String toString() {
+        List<Integer> arrayList = new ArrayList<>(lottoNumbers);
+        Collections.sort(arrayList);
+
+        return arrayList.toString();
     }
 }
