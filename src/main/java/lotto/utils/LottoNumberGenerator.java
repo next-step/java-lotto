@@ -1,6 +1,7 @@
 package lotto.utils;
 
-import java.util.ArrayList;
+import lotto.domain.LottoNumber;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,41 +9,38 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    public static List<Integer> manualGenerator(List<String> numbers) {
-        List<Integer> lottoNumbers = transStringNumbersToIntegerNumbers(numbers);
+    public static List<LottoNumber> manualGenerator(List<String> numbers) {
+        List<LottoNumber> lottoNumbers = transStringNumbersToIntegerNumbers(numbers);
 
         Collections.sort(lottoNumbers);
 
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private static List<Integer> transStringNumbersToIntegerNumbers(List<String> numbers) {
-        List<Integer> lottoNumbers = new ArrayList<>();
-
-        for (String number : numbers) {
-            lottoNumbers.add(Integer.valueOf(number));
-        }
-
-        return lottoNumbers;
+    private static List<LottoNumber> transStringNumbersToIntegerNumbers(List<String> numbers) {
+        return numbers.stream()
+                .map(number -> Integer.valueOf(number))
+                .map(LottoNumber::create)
+                .collect(Collectors.toList());
     }
 
-    public static List<Integer> autoGenerator() {
-        List<Integer> lottoNumbers = randomSixLottoNumbers();
+    public static List<LottoNumber> autoGenerator() {
+        List<LottoNumber> lottoNumbers = randomSixLottoNumbers();
 
         Collections.sort(lottoNumbers);
 
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private static List<Integer> randomSixLottoNumbers() {
-        List<Integer> availableLottoNumbers = availableAllLottoNumbers();
+    private static List<LottoNumber> randomSixLottoNumbers() {
+        List<LottoNumber> availableLottoNumbers = availableAllLottoNumbers();
         Collections.shuffle(availableLottoNumbers);
 
         return availableLottoNumbers.subList(0, 6);
     }
 
-    private static List<Integer> availableAllLottoNumbers() {
+    private static List<LottoNumber> availableAllLottoNumbers() {
         return IntStream.range(1, 45)
-                .mapToObj(i->i).collect(Collectors.toList());
+                .mapToObj(LottoNumber::create).collect(Collectors.toList());
     }
 }
