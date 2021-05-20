@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.rank.LottoRank;
 import lotto.domain.rank.LottoRanks;
