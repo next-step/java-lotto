@@ -11,9 +11,9 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨로또를 유저가 작성한 로또와 비교하여 당첨여부 확인 테스트")
     void matchWinningLotto() {
-        Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.from(7);
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         Lotto winningFirst = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
         Lotto winningSecond = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7));
@@ -33,10 +33,10 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 번호를 입력받아 당첨로또 생성시 유효성 검사 (보너스 번호가 로또번호와 중복시 예외발생)")
     void validateWinningLotto() {
-        Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = LottoNumber.from(6);
 
-        assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 번호는 로또번호와 중복될 수 없습니다.");
     }
