@@ -17,4 +17,10 @@ public class StringAddCalculatorTest {
 	public void input_null_return_0() {
 		assertThat(StringAddCalculator.splitAndReturnSum(null)).isEqualTo(0);
 	}
+
+	@Test
+	@DisplayName("숫자 하나 입력 시 해당 수 반환")
+	public void input_one_number_return_the_number() {
+		assertThat(StringAddCalculator.splitAndReturnSum("3")).isEqualTo(3);
+	}
 }
