@@ -1,3 +1,6 @@
+package io.mwkwon.lotto;
+
+import io.mwkwon.lotto.domain.Lotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

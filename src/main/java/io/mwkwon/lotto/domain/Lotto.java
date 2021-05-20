@@ -1,11 +1,13 @@
+package io.mwkwon.lotto.domain;
+
 import java.util.*;
 
-public class Lotto {
+public final class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
     public static final int FROM_INDEX = 0;
     public static final int LOTTO_BOUND = 6;
 
-    Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     static {
         for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
@@ -13,7 +15,7 @@ public class Lotto {
         }
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 

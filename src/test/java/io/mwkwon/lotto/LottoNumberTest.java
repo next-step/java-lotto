@@ -1,3 +1,6 @@
+package io.mwkwon.lotto;
+
+import io.mwkwon.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,7 +14,7 @@ public class LottoNumberTest {
     @Test
     void 로또_넘버_정상_생성_여부_테스트() {
         LottoNumber lottoNumber = new LottoNumber(1);
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
     }
 
     @ParameterizedTest
