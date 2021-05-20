@@ -6,8 +6,8 @@ public class LottoNumber {
 
   private static final String OVER_NUMBER_RANGE = "로또 숫자의 범위를 초과했습니다.";
 
-  private static final int LOTTO_MIN_NUM = 1;
-  private static final int LOTTO_MAX_NUM = 45;
+  static final int LOTTO_MIN_NUM = 1;
+  static final int LOTTO_MAX_NUM = 45;
 
   private final int number;
 
