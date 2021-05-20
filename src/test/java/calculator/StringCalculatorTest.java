@@ -3,7 +3,9 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
     private StringCalculator calculator;
@@ -35,5 +37,16 @@ public class StringCalculatorTest {
 
         calculator.putNumberString("3");
         assertThat(calculator.numbers()).isEqualTo("3");
+
+    @Test
+    void 숫자문자열에서_숫자들_분해_Test() {
+        calculator.putNumberString("1,2");
+        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2");
+
+        calculator.putNumberString("1:2,3");
+        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2", "3");
+
+        calculator.putNumberString("//;\n1;2;3");
+        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2", "3");
     }
 }
