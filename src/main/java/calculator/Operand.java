@@ -24,8 +24,8 @@ public class Operand {
         }
     }
 
-    public int getNumber() {
-        return this.number;
+    public int sumToTotal(int total) {
+        return total + number;
     }
 
     @Override

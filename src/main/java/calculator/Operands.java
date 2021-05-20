@@ -19,21 +19,17 @@ public class Operands {
         return results;
     }
 
-    public int size() {
-        return operands.size();
-    }
-
     public int sum() {
         int total = 0;
 
         for (Operand operand : operands) {
-            total += operand.getNumber();
+            total = operand.sumToTotal(total);
         }
 
         return total;
     }
 
-    public List<Operand> getOperands() {
-        return operands;
+    public boolean contains(Operand o) {
+        return operands.contains(o);
     }
 }

@@ -29,11 +29,11 @@ public class SplitUtil {
         return byDefaultDelimiter(input, DEFAULT_DELIMITER);
     }
 
-    private static String[] byCustomDelimiter(String operands, String delimiter) throws IllegalArgumentException{
-        if (delimiter.length() > ACCEPTED_NUMBER_OF_CUSTOM_DELIMITER){
+    private static String[] byCustomDelimiter(String operands, String delimiter) throws IllegalArgumentException {
+        if (delimiter.length() > ACCEPTED_NUMBER_OF_CUSTOM_DELIMITER) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_OF_CUSTOM_DELIMITER);
         }
-        return operands.split(DEFAULT_DELIMITER+"|"+delimiter);
+        return operands.split(DEFAULT_DELIMITER + "|" + delimiter);
     }
 
     private static String[] byDefaultDelimiter(String operands, String delimiter) {

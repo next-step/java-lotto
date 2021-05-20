@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,7 +21,7 @@ public class SplitUtilTest {
         Operands operands = new Operands(SplitUtil.splitByDelimiter(str));
 
         //Then
-        assertThat(operands.getOperands()).contains(new Operand(input));
+        assertThat(operands.contains(new Operand(input))).isTrue();
     }
 
     @DisplayName("Custom 구분자로 문자열 Split하는지 테스트")
@@ -38,7 +35,7 @@ public class SplitUtilTest {
         Operands operands = new Operands(SplitUtil.splitByDelimiter(str));
 
         //Then
-        assertThat(operands.getOperands()).contains(new Operand(input));
+        assertThat(operands.contains(new Operand(input))).isTrue();
     }
 
     @DisplayName("Default+Custom 구분자로 문자열 Split하는지 테스트")
@@ -52,7 +49,7 @@ public class SplitUtilTest {
         Operands operands = new Operands(SplitUtil.splitByDelimiter(str));
 
         //Then
-        assertThat(operands.getOperands()).contains(new Operand(input));
+        assertThat(operands.contains(new Operand(input))).isTrue();
     }
 
     @DisplayName("Custom 구분자가 여러 개인 경우, IllegalArgumentException을 반환하는지 테스트")
