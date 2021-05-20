@@ -14,14 +14,9 @@ public class SplitUtil {
 
     private static final String ERROR_INVALID_NUMBER_OF_CUSTOM_DELIMITER = "한 개의 커스텀 구분자만 입력해주세요.";
 
-    public static Operands splitByDelimiter(String input) {
+    public static String[] splitByDelimiter(String input) {
         List<Operand> operands = new ArrayList<>();
-
-        String[] splitString = splitAccordingly(input);
-        for (String operand : splitString) {
-            operands.add(new Operand(operand));
-        }
-        return new Operands(operands);
+        return splitAccordingly(input);
     }
 
     private static String[] splitAccordingly(String input) {

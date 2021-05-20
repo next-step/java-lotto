@@ -15,7 +15,7 @@ public class SplitUtilTest {
         String input = "1:2,3";
 
         //When
-        Operands operands = SplitUtil.splitByDelimiter(input);
+        Operands operands = new Operands(SplitUtil.splitByDelimiter(input));
 
         //Then
         assertThat(operands.size()).isEqualTo(3);
@@ -28,7 +28,7 @@ public class SplitUtilTest {
         String input = "//a\n1a2a3";
 
         //When
-        Operands operands = SplitUtil.splitByDelimiter(input);
+        Operands operands = new Operands(SplitUtil.splitByDelimiter(input));
 
         //Then
         assertThat(operands.size()).isEqualTo(3);
@@ -41,7 +41,7 @@ public class SplitUtilTest {
         String input = "//a\n1:2a3,4";
 
         //When
-        Operands operands = SplitUtil.splitByDelimiter(input);
+        Operands operands = new Operands(SplitUtil.splitByDelimiter(input));
 
         //Then
         assertThat(operands.size()).isEqualTo(4);

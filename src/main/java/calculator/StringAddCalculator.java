@@ -1,21 +1,20 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 
     public static final int DEFAULT_NUMBER = 0;
-
-    public StringAddCalculator() {
-    }
 
     public int splitAndSum(String input) {
         if (checkWhetherZeroOrNull(input)) {
             return DEFAULT_NUMBER;
         }
-        Operands operands = SplitUtil.splitByDelimiter(input);
-        return add(operands);
+        Operands operands = new Operands(SplitUtil.splitByDelimiter(input));
+        return sum(operands);
     }
 
-    private int add(Operands operands) {
+    private int sum(Operands operands) {
         return operands.sum();
     }
 
