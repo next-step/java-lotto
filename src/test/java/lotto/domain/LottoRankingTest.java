@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.domain.LottoRanking.NONE;
-import static lotto.domain.LottoRanking.confirmRanking;
+import static lotto.domain.LottoRanking.confirm;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankingTest {
@@ -14,14 +14,14 @@ class LottoRankingTest {
   @ParameterizedTest
   @ValueSource(ints = {3, 4, 5, 6})
   void testMatchedRanking(int givenMatchCount) {
-    assertThat(confirmRanking(givenMatchCount)).isNotSameAs(NONE);
+    assertThat(confirm(givenMatchCount)).isNotSameAs(NONE);
   }
 
   @DisplayName("정해진 등수가 없는 숫자를 입력하면 NONE 반환")
   @ParameterizedTest
   @ValueSource(ints = {0, 1, 2, 7})
   void testNoneMatchedRanking(int givenMatchCount) {
-    assertThat(confirmRanking(givenMatchCount)).isSameAs(NONE);
+    assertThat(confirm(givenMatchCount)).isSameAs(NONE);
   }
 
 }

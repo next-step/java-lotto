@@ -18,7 +18,7 @@ public enum LottoRanking {
     this.winningAmount = winningAmount;
   }
 
-  public static LottoRanking confirmRanking(int matchCount) {
+  public static LottoRanking confirm(int matchCount) {
     return Arrays.stream(values())
                 .filter(lottoRanking -> lottoRanking.matchCount == matchCount)
                 .findFirst()
