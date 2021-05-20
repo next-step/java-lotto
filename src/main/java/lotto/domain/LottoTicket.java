@@ -13,7 +13,7 @@ public class LottoTicket {
 
     public static LottoTicket create(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("로또 넘버의 갯수는 6개여야합니다.");
+            throw new IllegalArgumentException("로또 번호의 갯수는 6개여야합니다.");
         }
         return new LottoTicket(lottoNumbers);
     }
