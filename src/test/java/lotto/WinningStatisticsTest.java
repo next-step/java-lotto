@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.winning.WinningStatistics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

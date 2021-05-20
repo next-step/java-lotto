@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.view.InputView;
+import lotto.view.ResultView;
+import lotto.winning.WinningNumbers;
+import lotto.winning.WinningStatistics;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

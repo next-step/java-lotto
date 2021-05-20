@@ -1,4 +1,6 @@
-package lotto;
+package lotto.view;
+
+import lotto.LottoCount;
 
 import java.util.Scanner;
 

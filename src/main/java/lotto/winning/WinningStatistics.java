@@ -1,6 +1,8 @@
-package lotto;
+package lotto.winning;
 
-import javax.xml.transform.Result;
+import lotto.LottoTicket;
+import lotto.view.ResultView;
+
 import java.util.Arrays;
 import java.util.List;
 
