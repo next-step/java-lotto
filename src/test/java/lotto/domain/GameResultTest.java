@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 class GameResultTest {
     private List<LottoNumber> lottoNumbers = Arrays.asList(
@@ -20,6 +21,7 @@ class GameResultTest {
     private Lotto lotto;
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
+    private LottoNumber duplicatedNumber;
 
     @BeforeEach
     void setUp() {
@@ -29,6 +31,7 @@ class GameResultTest {
         lotto = new Lotto(lottoNumbers);
         winningLotto = new Lotto(lottoNumbers);
         bonusNumber = new LottoNumber(7);
+        duplicatedNumber = new LottoNumber(1);
     }
 
     @DisplayName("로또 게임의 총 수익률을 리턴한다.")
@@ -47,5 +50,12 @@ class GameResultTest {
     @Test
     void matchLottoNumber() {
         assertThat(gameResult.getPrizeMatch(lotto, winningLotto, bonusNumber)).isSameAs(Prize.FIRST);
+    }
+
+    @DisplayName("당첨번호와 보너스 번호 중복시 예외를 던진다")
+    @Test
+    void bonusNumberDuplicated() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> gameResult.getPrizeMatch(lotto, winningLotto, duplicatedNumber));
     }
 }

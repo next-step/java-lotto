@@ -9,6 +9,7 @@ import java.util.Map;
  * 로또 결과를 처리한다.
  */
 public class GameResult {
+    private static final String DUPLICATED_BONUS_NUMBER = "당첨 번호와 보너스 번호가 중복되었습니다.";
     /**
      * 로또 결과.
      */
@@ -86,10 +87,14 @@ public class GameResult {
      *
      * @param lotto        주어진 로또
      * @param winningLotto 당첨 로또
-     * @return 맞은 갯수에 해당하는 상금
+     * @param bonusNumber  보너스 숫자
+     * @return 상금
      */
-    public Prize getPrizeMatch(final Lotto lotto, final Lotto winningLotto, LottoNumber bonusNumber) {
+    public Prize getPrizeMatch(final Lotto lotto, final Lotto winningLotto, final LottoNumber bonusNumber) {
         int matchCount = winningLotto.getLottoMatchCount(lotto);
+        if (winningLotto.isMatch(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER);
+        }
         boolean isBonusNumberMatch = lotto.isMatch(bonusNumber);
         return Prize.of(matchCount, isBonusNumberMatch);
     }
