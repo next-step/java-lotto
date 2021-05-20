@@ -153,7 +153,7 @@ public class StringAddCalculatorTest {
 - [x] 3.분석 및 설계
     - [x] 3-1.Step02.md 작성
     - [x] 3-2.도메인 주도 설계 이미지 작성
-- [ ] 4.구현
+- [x] 4.구현
     - [x] 4-1.StringAddCalculator
         - [x] 4-1-1.splitAndSum_null_또는_빈문자
         - [x] 4-1-2.splitAndSum_숫자하나
@@ -162,7 +162,7 @@ public class StringAddCalculatorTest {
         - [x] 4-1-5.splitAndSum_custom_구분자
         - [x] 4-1-6.splitAndSum_custom_구분자 - 구분자 사이 값이 없어 null이 포함된 경우 1,,1 -> null을 `0`으로 취급하여 처리
         - [x] 4-1-7.splitAndSum_negative
-    - [ ] 4-2.Refactoring
+    - [x] 4-2.Refactoring
         - [x] 4-2-1.도메인 주도 설계 이미지 작성
         - [x] 4-2-2.Value Object
             - [x] 4-2-2-1.Number class
@@ -172,13 +172,14 @@ public class StringAddCalculatorTest {
             - [x] 4-2-2-2.InputText class
                 - [x] 4-2-2-2-1.split() : 쉼표구분자 또는 콜론 구분자
                 - [x] 4-2-2-2-2.split() : 커스텀 구분자
-        - [ ] 4-2-3.Aggregate
-            - [ ] 4-2-3-1.NumberGroup class
-                - [ ] 4-2-3-1-1.parse() : InputText를 Numbergroup으로 파싱
-        - [ ] 4-2-4.Service
-            - [ ] 4-2-4-1.StringAddCalculator
-                - [ ] 4-2-4-1-1.sum() : NumberGroup의 값 모두 계산
-        - [ ] 4-2-5.자바 8에 추가된 stream api를 사용하여 간결하게 작성
+        - [x] 4-2-3.Aggregate
+            - [x] 4-2-3-1.NumberGroup class
+                - [x] 4-2-3-1-1.parse() : InputText를 Numbergroup으로 파싱
+        - [x] 4-2-4.Service
+            - [x] 4-2-4-1.StringAddCalculator
+                - [x] 4-2-4-1-1.sum() : NumberGroup의 값 모두 계산 - 기본구분자 
+                - [x] 4-2-4-1-2.sum() : NumberGroup의 값 모두 계산 - 기본구분자 + 커스텀구분자
+        - [x] 4-2-5.자바 8에 추가된 stream api를 사용하여 간결하게 작성
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
     - [ ] 5-2.checkstyle 문제없는지 확인
@@ -212,4 +213,6 @@ public class StringAddCalculatorTest {
   - 시간적으로 여유가 된다면 다른 분들의 소스코드를 참조하여 더 많은 부분을 습득하도록 하겠습니다.
 
 ### 3.2. 피드백 요청
-**_피드백 요청 내용 작성_**
+- 테스트 코드는 깔끔해야 한다?!
+  - 프로덕션 코드를 가독성 좋게 하는 것은 기본이지만, 테스트 코드 또한 프로덕션 코드만큼 가독성이 좋아야 한다고 생각합니다.
+  - 위와 같은 생각을 가진 부분이 너무 이상적인 것인지, 아니면 당연히 테스트 코드도 가독성이 좋아서 이해할 수 있게 작성되어야 하는 것인지 궁금합니다.

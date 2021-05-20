@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,9 +25,16 @@ public class InputTextTest {
 		assertThat(InputText.split(text)).doesNotContainSequence(expectedStringArr);
 	}
 
-	@DisplayName("4-2-2-2-2.split() : 커스텀 구분자")
 	@ParameterizedTest(name = "{index} - text : {0}")
 	@Order(2)
+	@ValueSource(strings = {"//;\n1;2;3"})
+	void equal(String text) {
+		assertThat("//;\n1;2;3").isEqualTo(text);
+	}
+
+	@DisplayName("4-2-2-2-2.split() : 커스텀 구분자")
+	@ParameterizedTest(name = "{index} - text : {0}")
+	@Order(3)
 	@ValueSource(strings = {"//;\n1;2;3!!!1,2,3!!!true", "//;\n1:2,3;4!!!1,2,3,4!!!true", "1,2;3!!!1,2,3!!!false"})
 	void splitWithCustomDelimiter(String valueSource) {
 		String[] expectedValues = valueSource.split("!!!");
@@ -41,12 +47,6 @@ public class InputTextTest {
 			return;
 		}
 		assertThat(InputText.split(text)).doesNotContainSequence(expectedStringArr);
-	}
-
-	@ParameterizedTest(name = "{index} - text : {0}")
-	@ValueSource(strings = {"//;\n1;2;3"})
-	void equal(String text) {
-		assertThat("//;\n1;2;3").isEqualTo(text);
 	}
 
 

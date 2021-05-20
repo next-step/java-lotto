@@ -19,10 +19,10 @@ public class NumberTest {
 	@CsvSource(value = {"one;1;false", "1;1;true", "zero;0;false", "12a;12;false", "1234;1234;true"}, delimiter = ';')
 	void parseToInt(String text, int expectedNumber, boolean exceptedNotThrownException) {
 		if (exceptedNotThrownException) {
-			assertThat(Number.generate(text).getNumber()).isEqualTo(expectedNumber);
+			assertThat(Number.generate(text).value()).isEqualTo(expectedNumber);
 			return;
 		}
-		assertThatThrownBy(() -> Number.generate(text).getNumber()).isInstanceOf(NumberFormatException.class);
+		assertThatThrownBy(() -> Number.generate(text).value()).isInstanceOf(NumberFormatException.class);
 	}
 
 	@DisplayName("4-2-2-1-2.parse():null_또는_\"\"입력시_0으로_리턴")
@@ -31,10 +31,10 @@ public class NumberTest {
 	@ValueSource(strings = {"null", "", " "})
 	void parseToIntWithNullAndEmpty(String str) {
 		if ("null".equals(str)) {
-			assertThat(Number.generate(null).getNumber()).isEqualTo(0);
+			assertThat(Number.generate(null).value()).isEqualTo(0);
 			return;
 		}
-		assertThat(Number.generate(str).getNumber()).isEqualTo(0);
+		assertThat(Number.generate(str).value()).isEqualTo(0);
 	}
 
 	@DisplayName("4-2-2-1-3.parse()_:_음수_입력시_RuntimeException_발생")
@@ -43,9 +43,9 @@ public class NumberTest {
 	@CsvSource(value = {"1;1;true", "-1;-1;false", "12;12;true", "0;0;true", "-100;-100;false"}, delimiter = ';')
 	void parseToIntWithoutNegative(String text, int expectedNumber, boolean exceptedNotThrownException) {
 		if (exceptedNotThrownException) {
-			assertThat(Number.generate(text).getNumber()).isEqualTo(expectedNumber);
+			assertThat(Number.generate(text).value()).isEqualTo(expectedNumber);
 			return;
 		}
-		assertThatThrownBy(() -> Number.generate(text).getNumber()).isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> Number.generate(text).value()).isInstanceOf(RuntimeException.class);
 	}
 }
