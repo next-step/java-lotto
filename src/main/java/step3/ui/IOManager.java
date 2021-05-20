@@ -28,8 +28,11 @@ public class IOManager {
     }
 
     public List<Integer> inputNumbers() {
+        output.printLine("지난 주 당첨 번호를 입력해주세요.");
         input.nextLine();
         String data = input.nextLine();
+        output.printLine("");
+
         return Arrays.stream(data.split(","))
                      .map(String::trim)
                      .map(Integer::parseInt)
@@ -46,5 +49,9 @@ public class IOManager {
 
     public void printMultiLine(List<String> statistics) {
         statistics.forEach(output::printLine);
+    }
+
+    public void printEarningRate(double rate) {
+        output.printLine(String.format("총 수익률은 %.2f입니다.", rate));
     }
 }

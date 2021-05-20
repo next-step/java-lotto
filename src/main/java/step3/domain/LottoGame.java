@@ -37,12 +37,17 @@ public class LottoGame {
     }
 
     private void drawWinningLotto(List<Lotto> lottos) {
-
-        ioManager.printLine("지난 주 당첨 번호를 입력해주세요.");
         Lotto winningLotto = Lotto.of(ioManager.inputNumbers());
+        printStatistics(lottos, winningLotto);
+    }
 
+    private void printStatistics(List<Lotto> lottos, Lotto winningLotto) {
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto);
-        List<String> statistics = lottoStatistics.getStatistics(lottos);
-        ioManager.printMultiLine(statistics);
+        lottoStatistics.analyzeLottosData(lottos);
+
+        ioManager.printLine("당첨 통계");
+        ioManager.printLine("---------");
+        ioManager.printMultiLine(lottoStatistics.getStatistics());
+        ioManager.printEarningRate(lottoStatistics.getEarningsRate(lottos.size() * 1000));
     }
 }
