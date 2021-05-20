@@ -1,26 +1,31 @@
-package lotto.ui;
+package lotto.ui.input;
 
-import lotto.core.Ball;
 import lotto.core.SixBall;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Round;
+import lotto.ui.input.validation.InputValidation;
+import lotto.ui.output.Output;
 import lotto.util.StringUtils;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameInput {
-    private GameOutput output;
-    private Scanner sc;
+    private static final int ZERO = 0;
 
-    public GameInput(GameOutput output, Scanner sc) {
+    private Output output;
+    private Scanner scanner;
+    private InputValidation validation;
+
+    public GameInput(Output output, Scanner scanner) {
         this.output = output;
-        this.sc = sc;
+        this.scanner = scanner;
+        this.validation = new InputValidation();
     }
 
     public OmrCard inputOmrInfo() {
         try {
-            int money = getMoney();
-            int size = getSize(money);
+            int money = money();
+            int size = size(money);
 
             OmrCard omrCard = new OmrCard();
             markings(size, omrCard);
@@ -33,19 +38,20 @@ public class GameInput {
     }
 
     private void markings(int size, OmrCard omrCard) {
+        //리뷰어님 시작 index도 상수화를 해야하는건가요?
         for (int i = 0; i < size; i++) {
             omrCard.marking(SixBall.get());
         }
     }
 
     public Round inputRound() {
-        int[] fix = getFix();
-        int bonus = getBonus(fix);
+        int[] fix = fixs();
+        int bonus = bonus(fix);
 
         return new Round(SixBall.get(fix), bonus);
     }
 
-    private int getMoney() {
+    private int money() {
         int money;
         try {
             String strMoney = (String) response("구입금액을 입력해 주세요.");
@@ -61,11 +67,11 @@ public class GameInput {
         return money;
     }
 
-    private int getSize(int money) {
+    private int size(int money) {
         int size = money / OmrCard.PRICE;
         int change = money % OmrCard.PRICE;
 
-        if (change > 0) {
+        if (change > ZERO) {
             output.println(String.format("거스름돈 %d원을 돌려드립니다.", change));
         }
 
@@ -74,24 +80,26 @@ public class GameInput {
         return size;
     }
 
-    private int[] getFix() {
+    private int[] fixs() {
         try {
             String text = (String) response("지난 주 당첨 번호를 입력해 주세요.");
-            int[] fix = StringUtils.csvToIntArray(text);
+            int[] fixs = StringUtils.csvToIntArray(text);
 
-            Arrays.stream(fix).forEach(this::ballValidation);
+            validation.winningSixBallValidation(fixs);
 
-            return fix;
+            Arrays.stream(fixs).forEach(validation::ballValidation);
+
+            return fixs;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("시도 횟수는 숫자만 가능합니다.");
         }
     }
 
-    private int getBonus(int[] fix) {
+    private int bonus(int[] fixs) {
         try {
             int bonus = Integer.parseInt((String) response("보너스 볼을 입력해 주세요."));
 
-            bonusBallValidation(fix, bonus);
+            validation.bonusBallValidation(fixs, bonus);
 
             return bonus;
         } catch (NumberFormatException e) {
@@ -99,27 +107,10 @@ public class GameInput {
         }
     }
 
-    private boolean bonusBallValidation(int[] fix, int bonus) {
-        int index = 0;
-        if (fix[index++] == bonus) {
-            throw new IllegalArgumentException("보너스 볼이 당첨 번호에 포함되어 있습니다.");
-        }
-
-        return ballValidation(bonus);
-    }
-
-    private boolean ballValidation(int bonus) {
-        if (Ball.validation(bonus)) {
-            throw new IllegalArgumentException(String.format("번호는 %d이상 %d이하의 숫자만 존재할수있습니다.", Ball.MIN, Ball.MAX));
-        }
-
-        return true;
-    }
-
     private Object response(String messaage) {
         output.println(messaage);
 
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 
 }

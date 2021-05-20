@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SixBall {
-    private static final int LENGTH = 6;
+    public static final int LENGTH = 6;
 
     private final List<Ball> balls;
 

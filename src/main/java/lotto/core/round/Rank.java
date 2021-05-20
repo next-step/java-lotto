@@ -1,5 +1,6 @@
 package lotto.core.round;
 
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000, true),
@@ -53,6 +54,20 @@ public enum Rank {
 
     public boolean ifWinning() {
         return this.countOfMatch >= FIFTH.countOfMatch;
+    }
+
+    //TODO
+    public static Rank[] winningValues() {
+        Rank[] ranks = {FIFTH, FOURTH, SECOND, FIRST};
+
+        return ranks;
+    }
+
+    //TODO
+    public static Rank[] duplicateMatchValues() {
+        Rank[] ranks = {SECOND, THIRD};
+
+        return ranks;
     }
 
 }
