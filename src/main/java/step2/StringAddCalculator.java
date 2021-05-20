@@ -23,15 +23,17 @@ public class StringAddCalculator {
 
     private String[] splitToNumbers(String data) {
         // class 분리
-//        String delimiter = DelimiterExtractor.extractDelimiter(data);
-//        return splitDataWithDelimiter(DelimiterExtractor.getSplitData(),delimiter);
+
+        DelimiterExtractor extractor = new DelimiterExtractor();
+        String delimiter = extractor.extractDelimiter(data);
+        return splitDataWithDelimiter(extractor.getSplitData(),delimiter);
 
         // 메소드 분리
-        String[] delimiterAndSplitData = getDelimiterAndSplitData(data);
-        String delimiter = delimiterAndSplitData[DELIMITER_INDEX_IN_ARRAY];
-        String splitData = delimiterAndSplitData[SPLIT_DATA_INDEX_IN_ARRAY];
-
-        return splitDataWithDelimiter(splitData, delimiter);
+//        String[] delimiterAndSplitData = getDelimiterAndSplitData(data);
+//        String delimiter = delimiterAndSplitData[DELIMITER_INDEX_IN_ARRAY];
+//        String splitData = delimiterAndSplitData[SPLIT_DATA_INDEX_IN_ARRAY];
+//
+//        return splitDataWithDelimiter(splitData, delimiter);
     }
 
     private String[] getDelimiterAndSplitData(String data) {
