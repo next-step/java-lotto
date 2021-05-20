@@ -20,7 +20,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void 문자열에_커스텀구분자_유무확인() {
+    void 문자열에_커스텀구분자_적용_Test() {
         calculator.putNumberString("//;\n1;2;3");
         assertThat(calculator.delimiter()).isEqualTo(";");
     }
