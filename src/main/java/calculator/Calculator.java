@@ -13,10 +13,16 @@ public class Calculator {
         if (isNumber(text)) {
             return parseNumber(text);
         }
-        // TODO : 리팩토링
-        return parseNumber(text);
+        String[] tokens = StringParser.parse(text);
+        return sum(tokens);
     }
-
+    private static int sum(String[] tokens){
+        int sum = 0;
+        for (String token : tokens) {
+            sum += parseNumber(token);
+        }
+        return sum;
+    }
     private static boolean isNullOrEmpty(String text) {
         return Objects.isNull(text) || text.isEmpty();
     }
