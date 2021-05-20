@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,17 +15,22 @@ class LottoNumberGeneratorTest {
     @DisplayName("입력받은 문자열 번호를 정수형 리스트로 생성 확인")
     @Test
     public void createLottoNumbers() {
-        List<String> inputLottoNumbers = Arrays.asList("1","2","3","4","5","6");
+        List<String> inputLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
 
-        List<Integer> lottoNumbers = LottoNumberGenerator.manualGenerator(inputLottoNumbers);
+        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(inputLottoNumbers);
 
-        assertThat(lottoNumbers).containsExactly(1,2,3,4,5,6);
+        assertThat(lottoNumbers).containsExactly(LottoNumber.create(1)
+                , LottoNumber.create(2)
+                , LottoNumber.create(3)
+                , LottoNumber.create(4)
+                , LottoNumber.create(5)
+                , LottoNumber.create(6));
     }
 
     @DisplayName("자동 로또번호의 생성확인")
     @Test
     public void createAutoGenerator() {
-        List<Integer> lottoNumbers = LottoNumberGenerator.autoGenerator();
+        List<LottoNumber> lottoNumbers = LottoNumberGenerator.autoGenerator();
 
         assertThat(lottoNumbers).hasSize(6);
     }
