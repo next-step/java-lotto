@@ -15,6 +15,6 @@ public class PrizeCalculator {
     }
 
     public long getResult() {
-        return winnerCount * winningType.getPrize();
+        return (long) winnerCount * winningType.getPrize();
     }
 }
