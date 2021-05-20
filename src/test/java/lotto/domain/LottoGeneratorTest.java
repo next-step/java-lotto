@@ -30,9 +30,4 @@ class LottoGeneratorTest {
         assertThat(lottoGenerator.getPurchasedLottos().size()).isEqualTo(5);
     }
 
-    @DisplayName("당첨 로또를 생성한다")
-    @Test
-    void generateWinningLotto() {
-        assertThat(lottoGenerator.generateWinningLotto(lottoNumbers)).isNotNull();
-    }
 }

@@ -21,11 +21,11 @@ public class OutputView {
 
     private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-    public void showResult(GameResult gameResult) {
+    public void showResult(GameResult gameResult, Lotto winningLotto) {
         System.out.println(WINNING_RESULT);
         System.out.println(DASH);
         for (Prize prize : Prize.values()) {
-            showGameResult(prize, gameResult.getResult());
+            showGameResult(prize, gameResult.getResult(winningLotto));
         }
     }
 
@@ -35,7 +35,6 @@ public class OutputView {
 
         sb.append(count).append(UNITS);
         sb.append(System.lineSeparator());
-
         for (Lotto lotto : lottos) {
             sb.append(lotto);
             sb.append(System.lineSeparator());
@@ -43,8 +42,8 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
-        GameResult result = gameResult.getResult();
+    public void showProfit(final Money purchasedAmount, final GameResult gameResult, final Lotto lotto) {
+        GameResult result = gameResult.getResult(lotto);
 
         System.out.println(TOTAL_PROFIT + decimalFormat.format(result.getProfit(purchasedAmount)) + PROFIT_END);
     }

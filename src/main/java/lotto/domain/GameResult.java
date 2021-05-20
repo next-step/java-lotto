@@ -17,19 +17,14 @@ public class GameResult {
      * 구매한 로또.
      */
     private List<Lotto> purchasedLottos;
-    /**
-     * 당첨 로또.
-     */
-    private WinningLotto winningLotto;
 
     public GameResult() {
         initialize();
     }
 
-    public GameResult(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
+    public GameResult(List<Lotto> purchasedLottos) {
         initialize();
         this.purchasedLottos = new ArrayList<>(purchasedLottos);
-        this.winningLotto = winningLotto;
     }
 
     private void initialize() {
@@ -74,15 +69,27 @@ public class GameResult {
     /**
      * 로또 결과를 리턴한다.
      */
-    public GameResult getResult() {
-        final GameResult gameResult = new GameResult(this.purchasedLottos, this.winningLotto);
+    public GameResult getResult(final Lotto winningLotto) {
+        final GameResult gameResult = new GameResult(this.purchasedLottos);
         for (final Lotto lotto : purchasedLottos) {
-            gameResult.addWinResult(this.winningLotto.getPrizeMatch(lotto));
+            gameResult.addWinResult(this.getPrizeMatch(lotto, winningLotto));
         }
         return gameResult;
     }
 
     private int getTotal(final Prize prize) {
         return result.get(prize) * prize.getAmount();
+    }
+
+    /**
+     * 주어진 로또와 우승 로또를 비교하여 상금을 리턴한다.
+     *
+     * @param lotto        주어진 로또
+     * @param winningLotto 당첨 로또
+     * @return 맞은 갯수에 해당하는 상금
+     */
+    public Prize getPrizeMatch(final Lotto lotto, Lotto winningLotto) {
+        int matchCount = winningLotto.getLottoMatchCount(lotto);
+        return Prize.of(matchCount);
     }
 }

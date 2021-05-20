@@ -30,10 +30,4 @@ public class LottoGenerator {
         }
         return generatedLottos;
     }
-
-    public WinningLotto generateWinningLotto(List<LottoNumber> lottoNumbers) {
-        final Lotto lotto = new Lotto(lottoNumbers);
-        return new WinningLotto(lotto);
-    }
-
 }

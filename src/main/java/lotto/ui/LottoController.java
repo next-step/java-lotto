@@ -4,7 +4,6 @@ import lotto.domain.GameResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
-import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -28,9 +27,9 @@ public class LottoController {
         final List<Lotto> purchasedLottos = lottoGenerator.getPurchasedLottos();
         outputView.showInputResult(purchasedLottos, money);
 
-        final WinningLotto winningLotto = lottoGenerator.generateWinningLotto(inputView.askLastPrizeNumber());
-        GameResult gameResult = new GameResult(purchasedLottos, winningLotto);
-        outputView.showResult(gameResult);
-        outputView.showProfit(money, gameResult);
+        final Lotto winningLotto = new Lotto(inputView.askLastPrizeNumber());
+        final GameResult gameResult = new GameResult(purchasedLottos);
+        outputView.showResult(gameResult, winningLotto);
+        outputView.showProfit(money, gameResult, winningLotto);
     }
 }
