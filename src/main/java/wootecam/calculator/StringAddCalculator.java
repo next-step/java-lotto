@@ -20,7 +20,7 @@ public class StringAddCalculator {
 	private static Integer sum(List<String> numbers) {
 		return numbers.stream()
 			.map(CalculatorNumber::new)
-			.map(CalculatorNumber::parseNumber)
+			.map(CalculatorNumber::getNumber)
 			.reduce(0, Integer::sum);
 	}
 }

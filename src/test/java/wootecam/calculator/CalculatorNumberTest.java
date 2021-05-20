@@ -13,7 +13,7 @@ class CalculatorNumberTest {
 	@DisplayName("계산기에 전달되는 값이 숫자인지 테스트")
 	void testCalculatorNumber(String input) {
 		CalculatorNumber calculatorNumber = new CalculatorNumber(input);
-		assertThat(calculatorNumber.parseNumber()).isInstanceOf(Integer.class);
+		assertThat(calculatorNumber.getNumber()).isInstanceOf(Integer.class);
 	}
 
 	@ParameterizedTest
