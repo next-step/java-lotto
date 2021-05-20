@@ -1,7 +1,5 @@
 package calculator;
 
-import common.utils.StringUtils;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -22,10 +20,6 @@ public class CalculatingNumbers {
     }
 
     private String[] delimitFormula(String formula) {
-        if (StringUtils.isBlank(formula)) {
-            return new String[]{ZERO};
-        }
-
         Matcher m = FORMULA_PATTERN.matcher(formula);
         if (m.find()) {
             String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
