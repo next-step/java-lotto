@@ -32,4 +32,8 @@ public class Operands {
 
         return total;
     }
+
+    public List<Operand> getOperands() {
+        return operands;
+    }
 }
