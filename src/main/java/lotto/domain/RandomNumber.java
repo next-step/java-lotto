@@ -21,11 +21,11 @@ public class RandomNumber implements Comparable<RandomNumber> {
     }
 
     public RandomNumber(final int number) {
-        isValidNumber(number);
+        isValid(number);
         this.number = number;
     }
 
-    private void isValidNumber(int number) {
+    private void isValid(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new InvalidLottoNumber(String.format("invalid lotto number %d", number));
         }
