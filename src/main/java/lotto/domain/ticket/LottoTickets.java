@@ -16,10 +16,13 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public static LottoTickets createByGenerator(LottoNumberGenerator lottoNumberGenerator, PositiveInteger sizeOfTickets) {
+    public static LottoTickets createByGenerator(
+            LottoNumberGenerator lottoNumberGenerator,
+            PositiveInteger sizeOfTickets) {
         final int LOOP_BEGIN_INDEX = 0;
 
-        return new LottoTickets(IntStream.range(LOOP_BEGIN_INDEX, sizeOfTickets.getValue()).mapToObj(i -> new LottoTicket(lottoNumberGenerator.generate()))
+        return new LottoTickets(IntStream.range(LOOP_BEGIN_INDEX, sizeOfTickets.getValue())
+                .mapToObj(i -> new LottoTicket(lottoNumberGenerator.generate()))
                 .collect(Collectors.toList()));
     }
 
