@@ -12,6 +12,7 @@ import static java.lang.String.format;
 public class ResultView {
     private static final String BUYING_COUNT_MESSAGE = "%d 개를 구매했습니다.";
     private static final String MATCHING_COUNT_MESSAGE = "%d개 일치 (%d원)-%d개";
+    private static final String MATCHING_COUNT_MESSAGE_FOR_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)-%d개";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다 (%s)";
     private static final String PROFIT_RESULT_MESSAGE = "기준이 1이기 때문에 결과적으로 이익이라는 의미임";
     private static final String NOT_PROFIT_RESULT_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임";
@@ -31,7 +32,8 @@ public class ResultView {
         System.out.println(Stream.of(WinningType.values())
                 .filter(type -> !type.equals(WinningType.NOTHING))
                 .sorted(Collections.reverseOrder())
-                .map(type -> format(MATCHING_COUNT_MESSAGE,
+                .map(type -> format(
+                        type.equals(WinningType.SECOND) ? MATCHING_COUNT_MESSAGE_FOR_SECOND : MATCHING_COUNT_MESSAGE,
                         type.getMatchCount(), type.getPrize().longValue(), results.count(type)))
                 .collect(Collectors.joining(System.lineSeparator())));
 
