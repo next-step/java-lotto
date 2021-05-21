@@ -48,7 +48,7 @@ class WinnerStatisticsTest {
 
         WinnerStatistics winnerStatistics = LottoLotteryUtils.lotteryThisWeek(tickets, winnerNumbers);
 
-        assertThat(winnerStatistics.incomeRate()).isEqualTo(expectedRate);
+        assertThat(winnerStatistics.getIncomeRate()).isEqualTo(expectedRate);
     }
 
     @DisplayName("로또당첨 손실여부 테스트(5장구입기준)")

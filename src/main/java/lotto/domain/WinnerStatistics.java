@@ -18,26 +18,24 @@ public class WinnerStatistics {
         return new WinnerStatistics(lotteryResult);
     }
 
-    public String incomeRate() {
-
-
+    public String getIncomeRate() {
         double incomeRate = calculateRate();
 
         return String.format("%.2f", incomeRate);
     }
 
     private long calculateRate() {
-        long totalTickets = totalTicketCount();
-        long totalRewards = totalReward();
+        long totalTickets = getCountOfTickets();
+        long totalRewards = getTotalReward();
 
         return totalRewards / (totalTickets * LOTTO_TICKET_PRICE);
     }
 
-    public long ticketCountFindByLottoRank(LottoRank lottoRank) {
+    public long getNumberOfWinners(LottoRank lottoRank) {
         return lotteryResult.getOrDefault(lottoRank, TICKET_COUNT_ZERO);
     }
 
-    private long totalTicketCount() {
+    private long getCountOfTickets() {
         Set<LottoRank> lottoRanks = lotteryResult.keySet();
 
         return lottoRanks.stream()
@@ -45,7 +43,7 @@ public class WinnerStatistics {
                 .sum();
     }
 
-    private long totalReward() {
+    private long getTotalReward() {
         Set<LottoRank> lottoRanks = lotteryResult.keySet();
 
         return lottoRanks.stream()

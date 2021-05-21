@@ -53,7 +53,7 @@ public class PrintView {
     }
 
     private void printRateLine(WinnerStatistics winnerStatistics) {
-        String incomeRateText = String.format(MESSAGE_INCOME_RATE, winnerStatistics.incomeRate());
+        String incomeRateText = String.format(MESSAGE_INCOME_RATE, winnerStatistics.getIncomeRate());
         StringBuilder sb = new StringBuilder(incomeRateText);
         if (winnerStatistics.isLoss()) {
             sb.append(MESSAGE_LOSS_DESC);
@@ -63,7 +63,7 @@ public class PrintView {
     }
 
     private void printBodyLine(LottoRank lottoRank, WinnerStatistics winnerStatistics) {
-        System.out.printf(MESSAGE_MATCH, lottoRank.matchCount(), lottoRank.reward(), winnerStatistics.ticketCountFindByLottoRank(lottoRank));
+        System.out.printf(MESSAGE_MATCH, lottoRank.matchCount(), lottoRank.reward(), winnerStatistics.getNumberOfWinners(lottoRank));
     }
 
     private void showResultHeadLine() {
