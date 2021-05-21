@@ -23,6 +23,7 @@ public class MatchResultView {
         printRankInfo(matchedRanks, LottoRank.FIFTH);
         printRankInfo(matchedRanks, LottoRank.FOURTH);
         printRankInfo(matchedRanks, LottoRank.THIRD);
+        printRankInfo(matchedRanks, LottoRank.SECOND);
         printRankInfo(matchedRanks, LottoRank.FIRST);
     }
 
@@ -36,6 +37,11 @@ public class MatchResultView {
     }
 
     private void printRankInfo(LottoRanks ranks, LottoRank from) {
-        System.out.println(format("%d개 일치 (%d원)- %d개", from.getCountOfMatched(), from.getAmount(), ranks.countOf(from)));
+        String format = "%d개 일치 (%d원)- %d개";
+        if(from.isBonusMatched()) {
+            format = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+        }
+
+        System.out.println(format(format, from.getCountOfMatched(), from.getAmount(), ranks.countOf(from)));
     }
 }
