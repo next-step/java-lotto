@@ -15,14 +15,10 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public List<LottoNumber> lottoNumbers() {
-		return this.numbers;
-	}
-
 	//todo : indent 2 streams
 	public int matchesCount(Lotto lotto) {
 		int matchesCount = 0;
-		for (LottoNumber lottoNumber : lotto.lottoNumbers()) {
+		for (LottoNumber lottoNumber : lotto.numbers) {
 			if (containNumber(lottoNumber))
 				matchesCount++;
 		}
@@ -39,8 +35,8 @@ public class Lotto {
 		if (lotto instanceof Lotto) {
 			Lotto anotherLotto = (Lotto)lotto;
 			Collections.sort(this.numbers);
-			Collections.sort(anotherLotto.lottoNumbers());
-			return this.numbers == anotherLotto.lottoNumbers();
+			Collections.sort(anotherLotto.numbers);
+			return this.numbers == anotherLotto.numbers;
 		}
 		return false;
 	}
