@@ -28,6 +28,20 @@ public class Lotto {
                         Lotto::new));
     }
 
+    public static Lotto from(final Set<Integer> lottoNumbers) {
+        checkLottoNumbersSize(lottoNumbers);
+        return lottoNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(collectingAndThen(toSet(),
+                        Lotto::new));
+    }
+
+    private static void checkLottoNumbersSize(final Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException(String.format("로또 번호는 중복되지 않은 %s자리 이어야 합니다.", NUMBER_SIZE));
+        }
+    }
+
     public Set<LottoNumber> getLotto() {
         return Collections.unmodifiableSet(lotto);
     }

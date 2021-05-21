@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
@@ -21,5 +22,7 @@ public class LottoController {
         LottoGame lottoGame = LottoGame.init(inputView.inputAmount());
         lottoGame.buyLotto(numberGenerator);
         resultView.printLottoes(lottoGame);
+
+        Lotto winnerLotto = Lotto.from(inputView.inputWinnerLottoNumbers());
     }
 }
