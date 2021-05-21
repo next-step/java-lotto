@@ -30,5 +30,4 @@ public class StringCalculator {
 
         return new Numbers(inputString.split(DEFAULT_DELIMITER));
     }
-
 }
