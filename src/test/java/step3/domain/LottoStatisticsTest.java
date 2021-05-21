@@ -19,14 +19,11 @@ class LottoStatisticsTest {
     @Test
     void dataSizeTest() {
         RandomLottoCreator creator = new RandomLottoCreator();
-        LottoStatistics lottoStatistics = new LottoStatistics(creator.create());
-
         List<Lotto> lottos = Stream.generate(creator::create)
                                    .limit(5)
                                    .collect(toList());
 
-        lottoStatistics.analyzeLottosData(lottos);
-
+        LottoStatistics lottoStatistics = new LottoStatistics(creator.create(), lottos);
         assertEquals(4, lottoStatistics.getStatistics().size());
     }
 
@@ -35,15 +32,13 @@ class LottoStatisticsTest {
     @ParameterizedTest
     void earningRateTest(List<Integer> numbers, int prize) {
 
-        LottoStatistics lottoStatistics = new LottoStatistics(
-            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
         LottoCreator creator = () -> Lotto.of(numbers);
         List<Lotto> lottos = Stream.generate(creator::create)
                                    .limit(5)
                                    .collect(toList());
 
-        lottoStatistics.analyzeLottosData(lottos);
+        LottoStatistics lottoStatistics =
+            new LottoStatistics(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), lottos);
 
         double expected = (double) prize * 5 / 5000;
         assertEquals(expected, lottoStatistics.getEarningsRate(lottos.size() * 1000));

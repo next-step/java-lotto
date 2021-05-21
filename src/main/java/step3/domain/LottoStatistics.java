@@ -10,13 +10,11 @@ public class LottoStatistics {
     private final Lotto winningLotto;
     private final WinningCountMap winningCountMap;
 
-    public LottoStatistics(Lotto winningLotto) {
+    public LottoStatistics(Lotto winningLotto, List<Lotto> lottos) {
         this.winningLotto = winningLotto;
         this.winningCountMap = new WinningCountMap();
-    }
 
-    public void analyzeLottosData(List<Lotto> lottos) {
-        lottos.forEach(lotto -> winningCountMap.addCount(winningLotto.getMatchCount(lotto)));
+        analyzeLottosData(lottos);
     }
 
     public List<String> getStatistics() {
@@ -28,5 +26,9 @@ public class LottoStatistics {
 
     public double getEarningsRate(int totalLottoPrice) {
         return winningCountMap.getTotalResult() / (double) totalLottoPrice;
+    }
+
+    private void analyzeLottosData(List<Lotto> lottos) {
+        lottos.forEach(lotto -> winningCountMap.addCount(winningLotto.getMatchCount(lotto)));
     }
 }

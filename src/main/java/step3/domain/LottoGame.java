@@ -38,12 +38,11 @@ public class LottoGame {
 
     private void drawWinningLotto(List<Lotto> lottos) {
         Lotto winningLotto = Lotto.of(ioManager.inputNumbers());
-        printStatistics(lottos, winningLotto);
+        printStatistics(winningLotto, lottos);
     }
 
-    private void printStatistics(List<Lotto> lottos, Lotto winningLotto) {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto);
-        lottoStatistics.analyzeLottosData(lottos);
+    private void printStatistics(Lotto winningLotto, List<Lotto> lottos) {
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
 
         ioManager.printLine("당첨 통계");
         ioManager.printLine("---------");
