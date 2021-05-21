@@ -82,3 +82,6 @@
 * OrderedInfos
   * 주문한 로또들의 갯수와 로또 번호를 노출시키기 위한 DTO 클래스 OrderedInfo의 일급컬렉션이다.
   * 출력 포맷에 맞춰 toString 오버라이드
+
+* OutputView
+  * 구매한 로또 출력과 당첨 결과 출력을 책임지는 UI 클래스
