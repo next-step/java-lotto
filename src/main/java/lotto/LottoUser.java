@@ -3,6 +3,8 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.rank.LottoRank;
+
 public class LottoUser {
 
 	private final List<Lotto> lottos;
@@ -19,11 +21,20 @@ public class LottoUser {
 		}
 	}
 
-	public List<Lotto> userLottos() {
-		return this.lottos;
+	public int lottoCount() {
+		return this.lottos.size();
+	}
+
+	public LottoResult lottoResult(Lotto winningLotto) {
+		List<LottoRank> userLottoRanks = new ArrayList<>();
+		for (Lotto lotto : this.lottos) {
+			userLottoRanks.add(LottoScratcher.scratchLotto(winningLotto.matchesCount(lotto)));
+		}
+		return new LottoResult(userLottoRanks);
 	}
 
 	private int getBuyLottoCount(int price) {
 		return price / Lotto.LOTTO_PRICE;
 	}
+
 }

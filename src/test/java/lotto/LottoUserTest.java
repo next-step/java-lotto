@@ -1,6 +1,6 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,11 @@ public class LottoUserTest {
 	@Test
 	public void createLottoUserTest() {
 		assertThat(user).isNotNull();
-		assertThat(user.userLottos()).isNotNull();
 	}
 
 	@Test
-	public void buyLottoTest() throws Exception {
+	public void buyLottoTest() {
 		user.buyLottos(10500);
-		assertThat(user.userLottos().size()).isEqualTo(10);
+		assertThat(user.lottoCount()).isEqualTo(10);
 	}
 }
