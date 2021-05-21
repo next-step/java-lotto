@@ -3,14 +3,9 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static lotto.domain.TestUtil.getOneToSixLottoNumbers;
-import static lotto.domain.TestUtil.toNumbers;
+import static lotto.util.TestUtil.getOneToSixLottoNumbers;
+import static lotto.util.TestUtil.toNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 

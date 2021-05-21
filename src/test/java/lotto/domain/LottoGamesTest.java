@@ -10,8 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.TestUtil.getOneToSixLottoNumbers;
-import static lotto.domain.TestUtil.toNumbers;
+import static lotto.util.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGamesTest {
@@ -53,11 +52,4 @@ class LottoGamesTest {
     );
 
   }
-
-  private static LottoGame createLottoGameFromLottoNumbers(String numbers) {
-    return new LottoGame(new LottoNumbers(toNumbers(numbers)));
-  }
-
-
-
 }
