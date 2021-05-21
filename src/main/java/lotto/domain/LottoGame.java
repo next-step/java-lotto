@@ -19,6 +19,9 @@ public class LottoGame {
         this.values = values;
     }
 
+    public int size() {
+        return values.size();
+    }
 
     @Override
     public boolean equals(Object o) {
