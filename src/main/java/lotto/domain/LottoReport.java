@@ -2,15 +2,9 @@ package lotto.domain;
 
 import java.util.List;
 
+import static lotto.domain.Winnings.*;
+
 public class LottoReport {
-    public static final int METRIC_COUNT_THREE = 3;
-    public static final int METRIC_COUNT_FOUR = 4;
-    public static final int METRIC_COUNT_FIVE = 5;
-    public static final int METRIC_COUNT_SIX = 6;
-    public static final int WINNINGS_FOR_THREE_MATCHED = 5000;
-    public static final int WINNINGS_FOR_FOUR_MATCHED = 50000;
-    public static final int WINNINGS_FOR_FIVE_MATCHED = 1500000;
-    public static final int WINNINGS_FOR_SIX_MATCHED = 2000000000;
     private int threeMatched;
     private int fourMatched;
     private int fiveMatched;
@@ -28,18 +22,10 @@ public class LottoReport {
 
     private void updateMatchedNumberMetrics(Lotto winners, Lotto test) {
         int matched = test.matchCountWith(winners);
-        if (matched == METRIC_COUNT_THREE) {
-            threeMatched++;
-        }
-        if (matched == METRIC_COUNT_FOUR) {
-            fourMatched++;
-        }
-        if (matched == METRIC_COUNT_FIVE) {
-            fiveMatched++;
-        }
-        if (matched == METRIC_COUNT_SIX) {
-            sixMatched++;
-        }
+        FIFTH.ifMatchedThan(matched, () -> threeMatched++);
+        FOURTH.ifMatchedThan(matched, () -> fourMatched++);
+        THIRD.ifMatchedThan(matched, () -> fiveMatched++);
+        FIRST.ifMatchedThan(matched, () -> sixMatched++);
     }
 
     private void updateYield(int lottoSize) {
@@ -49,10 +35,10 @@ public class LottoReport {
     }
 
     private void updateWinnings() {
-        this.winnings = threeMatched * WINNINGS_FOR_THREE_MATCHED +
-                fourMatched * WINNINGS_FOR_FOUR_MATCHED +
-                fiveMatched * WINNINGS_FOR_FIVE_MATCHED +
-                sixMatched * WINNINGS_FOR_SIX_MATCHED;
+        this.winnings = threeMatched * FIFTH.winnings +
+                fourMatched * FOURTH.winnings +
+                fiveMatched * THIRD.winnings +
+                sixMatched * FIRST.winnings;
     }
 
     public int threeMatched() {
