@@ -28,9 +28,9 @@ public class LottoAppInputTest {
 	}
 
 	@Test
-	@DisplayName("당첨 번호는 ', ' 를 구분자로 입력 받은 후 Integer List 로 리턴한다.")
+	@DisplayName("당첨 번호는 ',' 또는 ', ' 를 구분자로 입력 받은 후 Integer List 로 리턴한다.")
 	public void inputWinningNumbersTest() {
-		String inputWinningNumbers = "1, 2, 3, 4, 5, 6" + INPUT_NEW_LINE;
+		String inputWinningNumbers = "1,2, 3,4, 5,6" + INPUT_NEW_LINE;
 		LottoAppInput lottoAppInput = createLottoAppInput(inputWinningNumbers);
 
 		List<Integer> winningNumbers = lottoAppInput.inputWinningNumbers();

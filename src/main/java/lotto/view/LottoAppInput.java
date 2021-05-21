@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import lotto.model.Money;
 
 public class LottoAppInput {
-	private static final String LOTTO_NUMBER_INPUT_DELIMITER = ", ";
+	private static final String LOTTO_NUMBER_SPLIT_REGEX = ", |,";
 
 	private final Scanner scanner;
 
@@ -28,7 +28,7 @@ public class LottoAppInput {
 	}
 
 	private List<Integer> splitAndParseInt(String inputNumbers) {
-		String[] numbers = inputNumbers.split(LOTTO_NUMBER_INPUT_DELIMITER);
+		String[] numbers = inputNumbers.split(LOTTO_NUMBER_SPLIT_REGEX);
 		return Stream.of(numbers)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
