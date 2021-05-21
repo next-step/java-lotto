@@ -4,8 +4,6 @@ import lotto.domain.rank.LottoRank;
 import lotto.domain.rank.LottoRanks;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
-import lotto.util.LottoStringFixtureUtil;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

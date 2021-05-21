@@ -3,11 +3,9 @@ package lotto.domain;
 import lotto.domain.generator.LottoNumberGenerator;
 import lotto.domain.rank.LottoRank;
 import lotto.domain.rank.LottoRanks;
-import lotto.util.LottoStringFixtureUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static lotto.util.LottoStringFixtureUtil.convertStringToLottoNumberList;

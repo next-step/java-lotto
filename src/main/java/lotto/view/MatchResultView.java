@@ -38,7 +38,7 @@ public class MatchResultView {
 
     private void printRankInfo(LottoRanks ranks, LottoRank from) {
         String format = "%d개 일치 (%d원)- %d개";
-        if(from.isBonusMatched()) {
+        if (from.isBonusMatched()) {
             format = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
         }
 
