@@ -31,3 +31,10 @@
 * StringAdder
   * 계산할 때 사용할 클래스
   * input 값을 받으면 문자열의 합을 반환하는 static 메서드를 갖는다.
+
+### 코드리뷰 사항 리팩토링
+* Adder
+  * sum이라는 메서드를 갖는 인터페이스
+  * Operator enum에서 구현해서 sum이라는 기능을 각 구현체가 갖게 한다.
+* Operator
+  * static 메서드 였던 sum을 Adder 인터페이스의 추상 메서드를 구현한 메서드로 바꾼다.
