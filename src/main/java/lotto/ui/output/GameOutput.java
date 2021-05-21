@@ -1,14 +1,22 @@
 package lotto.ui.output;
 
-public class GameOutput implements Output {
+import java.io.OutputStream;
+import java.io.PrintStream;
 
-    @Override
-    public void println(String text) {
-        System.out.println(text);
+public class GameOutput implements Output {
+    private PrintStream out;
+
+    public GameOutput(OutputStream out) {
+        this.out = (PrintStream) out;
     }
 
     @Override
-    public void print(String text) {
-        System.out.print(text);
+    public void println(String text) {
+        out.println(text);
+    }
+
+    @Override
+    public void error(String text) {
+        out.print(String.format("[부적합한 입력값] %s\n", text));
     }
 }
