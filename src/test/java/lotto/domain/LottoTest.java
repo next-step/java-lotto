@@ -8,6 +8,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class LottoTest {
 
     @Test
+    void 구매개수만큼_로또_생성_Test() {
+        LottoGenerator generator = new LottoGenerator();
+        Lottos lottos = generator.execute(5);
+        assertThat(lottos.count()).isEqualTo(5);
+    }
+
+    @Test
     void 유효한_로또구매금액_Test() {
         LottoPurchaseBudget budget = new  LottoPurchaseBudget(1000);
         assertThat(budget.equals(new LottoPurchaseBudget(1000)));
