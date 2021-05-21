@@ -30,10 +30,10 @@ public class WinningCountMap {
                                 .sum();
     }
 
-    public String toStringOf(int matchCount) {
+    public LottoWinningData toDataSet(int matchCount) {
         validateMatchCount(matchCount);
         WinningType winningType = findType(matchCount);
-        return winningType.toResultString(winningCounterMap.get(winningType));
+        return new LottoWinningData(winningType, winningCounterMap.get(winningType));
     }
 
     private long getPrizeOf(WinningType winningType) {

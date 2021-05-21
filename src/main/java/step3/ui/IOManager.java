@@ -2,6 +2,7 @@ package step3.ui;
 
 import java.util.Arrays;
 import java.util.List;
+import step3.domain.LottoWinningData;
 
 import static java.util.stream.Collectors.toList;
 
@@ -47,8 +48,11 @@ public class IOManager {
         output.printLine(text);
     }
 
-    public void printMultiLine(List<String> statistics) {
-        statistics.forEach(output::printLine);
+    public void printStatistics(List<LottoWinningData> statistics) {
+        statistics.forEach(data ->
+            output.printLine(data.getMatchCount() + "개 일치(" + data.getPrize() + "원)- " +
+                                 data.getWinningCount() + "개")
+        );
     }
 
     public void printEarningRate(double rate) {

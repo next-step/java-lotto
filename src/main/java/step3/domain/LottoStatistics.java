@@ -1,11 +1,13 @@
 package step3.domain;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoStatistics {
+
+    private static final List<Integer> LOTTO_WINNING_COUNTS = Arrays.asList(3, 4, 5, 6);
 
     private final Lotto winningLotto;
     private final WinningCountMap winningCountMap;
@@ -17,11 +19,10 @@ public class LottoStatistics {
         analyzeLottosData(lottos);
     }
 
-    public List<String> getStatistics() {
-        return Stream.iterate(3, i -> i + 1)
-                     .limit(4)
-                     .map(winningCountMap::toStringOf)
-                     .collect(toList());
+    public List<LottoWinningData> getStatistics() {
+        return LOTTO_WINNING_COUNTS.stream()
+                                   .map(winningCountMap::toDataSet)
+                                   .collect(toList());
     }
 
     public double getEarningsRate(int totalLottoPrice) {
