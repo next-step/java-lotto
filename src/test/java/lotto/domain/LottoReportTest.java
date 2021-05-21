@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 
 import static lotto.domain.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 public class LottoReportTest {
@@ -34,19 +33,17 @@ public class LottoReportTest {
     @Test
     void 로또통계를_3부터_6개까지_우승번호와_일치하는_경우의_수를_알려준다() {
         LottoReport report = new LottoReport(우승번호, lottos);
-        assertAll(
-                () -> assertThat(report.countWinnings(Rank.FIFTH)).isEqualTo(1),
-                () -> assertThat(report.countWinnings(Rank.FOURTH)).isEqualTo(2),
-                () -> assertThat(report.countWinnings(Rank.THIRD)).isEqualTo(3),
-                () -> assertThat(report.countWinnings(Rank.FIRST)).isEqualTo(4)
-        );
+        assertThat(report.threeMatched()).isEqualTo(1);
+        assertThat(report.fourMatched()).isEqualTo(2);
+        assertThat(report.fiveMatched()).isEqualTo(3);
+        assertThat(report.sixMatched()).isEqualTo(4);
     }
 
     @ParameterizedTest
     @MethodSource("provider_당첨통계는_수익률을_알려준다")
     void 당첨통계는_수익률을_알려준다(List<Lotto> lottos, double 수익률) {
         LottoReport report = new LottoReport(우승번호, lottos);
-        assertThat(report.profitRate()).isEqualTo(수익률);
+        assertThat(report.yield()).isEqualTo(수익률);
     }
 
     static Stream<Arguments> provider_당첨통계는_수익률을_알려준다() {
