@@ -12,7 +12,7 @@ public class LottoNumberTest {
     @DisplayName("로또번호 숫자를 11,22,33 으로 생성시 11,22,33 으로 리턴하는지")
     @ParameterizedTest
     @ValueSource(ints = {11, 22, 33})
-    void create(final int number) {
+    void lotto_number_create(final int number) {
         assertThat(new LottoNumber(number).getNumber()).isEqualTo(number);
     }
 

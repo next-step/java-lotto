@@ -13,7 +13,7 @@ public class LottoGeneratorTest {
 
     @DisplayName("로또번호 자동생성했을시 6자리 숫자가 맞는지")
     @Test
-    void create() {
+    void lotto_generator_draw_lots() {
         //given
         int expected = 6;
 

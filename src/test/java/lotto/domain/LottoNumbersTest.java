@@ -12,7 +12,7 @@ public class LottoNumbersTest {
 
     @DisplayName("서로다른 로또번호 6개 주입시 size()가 6개로 리턴하는지")
     @Test
-    void create() {
+    void different_lotto_numbers() {
         //given
         int expected = 6;
 
@@ -32,7 +32,7 @@ public class LottoNumbersTest {
 
     @DisplayName("중복된 로또번호 6개 주입시 Exception 발생하는지")
     @Test
-    void create_exception() {
+    void equals_lotto_numbers_exception() {
         assertThatIllegalArgumentException().isThrownBy(()->{
             new LottoNumbers(Arrays.asList(
                     new LottoNumber(1),
