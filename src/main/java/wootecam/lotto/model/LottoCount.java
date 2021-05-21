@@ -18,8 +18,8 @@ public class LottoCount {
 		this.count = calculateCount(money);
 	}
 
-	private int calculateCount(String amount) {
-		return Integer.parseInt(amount) / LOTTO_PRICE;
+	private int calculateCount(String money) {
+		return Integer.parseInt(money) / LOTTO_PRICE;
 	}
 
 	@Override
