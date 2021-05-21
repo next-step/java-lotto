@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.BuyableLottoCount;
-import lotto.dto.PaymentMoney;
+import lotto.dto.PurchaseMoney;
 
 import static lotto.dto.BuyableLottoCount.calculateBuyableCount;
 
@@ -12,9 +12,9 @@ public class LottoSeller {
         this.lottoGameGenerator = lottoGameGenerator;
     }
 
-    public LottoGames sell(PaymentMoney paymentMoney) {
-        LottoPrice.isEnoughMoney(paymentMoney);
-        BuyableLottoCount buyableLottoCount = calculateBuyableCount(paymentMoney);
+    public LottoGames sell(PurchaseMoney purchaseMoney) {
+        LottoPrice.isEnoughMoney(purchaseMoney);
+        BuyableLottoCount buyableLottoCount = calculateBuyableCount(purchaseMoney);
 
         return generate(buyableLottoCount);
     }

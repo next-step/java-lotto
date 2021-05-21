@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.PaymentMoney;
+import lotto.dto.PurchaseMoney;
 import lotto.exception.NotEnoughMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,10 +43,10 @@ class LottoSellerTest {
         // Given
         LottoGames expectedResult = new LottoGames(mockLottoGameList);
         LottoSeller lottoSeller = new LottoSeller(mockLottoGameGenerator);
-        PaymentMoney paymentMoney = new PaymentMoney(5000);
+        PurchaseMoney purchaseMoney = new PurchaseMoney(5_000);
 
         // When
-        LottoGames actualResult = lottoSeller.sell(paymentMoney);
+        LottoGames actualResult = lottoSeller.sell(purchaseMoney);
 
         // Then
         assertEquals(expectedResult, actualResult);
@@ -57,10 +57,10 @@ class LottoSellerTest {
     void sell_예외() {
         // Given
         LottoSeller lottoSeller = new LottoSeller(new LottoGameAutoGenerator());
-        PaymentMoney paymentMoney = new PaymentMoney(990);
+        PurchaseMoney purchaseMoney = new PurchaseMoney(990);
 
         // When, Then
         assertThatExceptionOfType(NotEnoughMoneyException.class)
-                .isThrownBy(() ->  lottoSeller.sell(paymentMoney));
+                .isThrownBy(() ->  lottoSeller.sell(purchaseMoney));
     }
 }

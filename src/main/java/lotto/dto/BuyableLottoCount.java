@@ -15,8 +15,8 @@ public class BuyableLottoCount {
         return value > comparingValue;
     }
 
-    public static BuyableLottoCount calculateBuyableCount(PaymentMoney paymentMoney) {
-        int result = paymentMoney.getValue() / LOTTO_PRICE;
+    public static BuyableLottoCount calculateBuyableCount(PurchaseMoney purchaseMoney) {
+        int result = purchaseMoney.getValue() / LOTTO_PRICE;
         return new BuyableLottoCount(result);
     }
 }
