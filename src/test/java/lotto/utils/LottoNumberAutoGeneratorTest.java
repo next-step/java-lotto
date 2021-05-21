@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGeneratorTest {
+public class LottoNumberAutoGeneratorTest {
 
     @DisplayName("로또번호 자동생성했을시 6자리 숫자가 맞는지")
     @Test
@@ -17,7 +17,7 @@ public class LottoGeneratorTest {
         int expected = 6;
 
         //when
-        List<LottoNumber> lottoNumbers =  LottoGenerator.drawLots();
+        List<LottoNumber> lottoNumbers =  LottoNumberAutoGenerator.drawLots();
 
         //then
         assertThat(lottoNumbers.size()).isEqualTo(expected);

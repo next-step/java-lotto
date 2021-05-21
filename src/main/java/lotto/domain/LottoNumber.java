@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
+import lotto.utils.LottoOptions;
 
 import java.util.Objects;
 
@@ -14,8 +14,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumber(int number) {
-        if (number < LottoGenerator.MIN_NUMBER ||
-                number > LottoGenerator.MAX_NUMBER) {
+        if (number < LottoOptions.MIN_NUMBER ||
+                number > LottoOptions.MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE);
         }
     }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
+import lotto.utils.LottoNumberAutoGenerator;
+import lotto.utils.LottoOptions;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,7 @@ public final class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(LottoGenerator.drawLots());
+        this(LottoNumberAutoGenerator.drawLots());
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -24,7 +25,7 @@ public final class Lotto {
     }
 
     private void checkDistinct() {
-        if (lottoNumbers.size() < LottoGenerator.LOTTO_SIZE) {
+        if (lottoNumbers.size() < LottoOptions.LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }
