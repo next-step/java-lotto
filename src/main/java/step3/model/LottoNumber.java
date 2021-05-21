@@ -1,6 +1,6 @@
 package step3.model;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -21,6 +21,11 @@ public final class LottoNumber {
 
     private boolean isAvailableRange(int number) {
         return (number >= MIN_NUMBER) && (number <= MAX_NUMBER);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return (number > other.number) ? 1 : 0;
     }
 
 }
