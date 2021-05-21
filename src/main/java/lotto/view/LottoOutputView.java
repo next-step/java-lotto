@@ -10,4 +10,10 @@ public class LottoOutputView {
     public void printLottoGamesSize(LottoGames lottoGames) {
         System.out.println(format(MESSAGE_LOTTO_GAMES_SIZE_, lottoGames.size()));
     }
+
+    public void printLottoGame(LottoGames lottoGames) {
+        for(int i = 0; i < lottoGames.size(); i++) {
+            System.out.println(lottoGames.get(i));
+        }
+    }
 }

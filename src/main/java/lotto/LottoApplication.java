@@ -38,5 +38,6 @@ public class LottoApplication {
 
     private void printPurchaseResult(LottoGames lottoGames) {
         lottoOutputView.printLottoGamesSize(lottoGames);
+        lottoOutputView.printLottoGame(lottoGames);
     }
 }
