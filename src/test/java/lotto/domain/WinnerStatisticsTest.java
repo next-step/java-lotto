@@ -50,4 +50,19 @@ class WinnerStatisticsTest {
 
         assertThat(winnerStatistics.incomeRate()).isEqualTo(expectedRate);
     }
+
+    @DisplayName("로또당첨 손실여부 테스트(5장구입기준)")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:false", "1,2,3,30,35,40:false", "1,2,25,30,35,40:true"}, delimiter = ':')
+    public void isLossTest(String lottoNumber, boolean expectedLoss) {
+        String[] splitedLottoNumber = StringUtils.split(lottoNumber);
+
+        List<String> lottoNumberText = Arrays.asList(splitedLottoNumber);
+        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
+        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
+
+        WinnerStatistics winnerStatistics = LottoLotteryUtils.lotteryThisWeek(tickets, winnerNumbers);
+
+        assertThat(winnerStatistics.isLoss()).isEqualTo(expectedLoss);
+    }
 }
