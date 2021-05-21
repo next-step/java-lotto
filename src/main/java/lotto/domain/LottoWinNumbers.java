@@ -14,13 +14,17 @@ public class LottoWinNumbers {
     }
 
     private void initWinNumbers(String[] winNums) {
-        if (winNums.length != LOTTO_NUMBER_COUNT) {
+        if (invalid(winNums)) {
             throw new IllegalArgumentException();
         }
 
         for (String num : winNums) {
             addWinNumber(Integer.parseInt(num));
         }
+    }
+
+    private boolean invalid(String[] winNums) {
+        return winNums.length != LOTTO_NUMBER_COUNT;
     }
 
     private void addWinNumber(int num) {
@@ -45,21 +49,15 @@ public class LottoWinNumbers {
         int match = 0;
 
         for (int i = 0; i < LOTTO_NUMBER_COUNT; ++i) {
-            match += countIfWinNumContains(lotto.numbers(i));
+            final int index = i;
+            match += winNumbers.stream().filter(n -> n == lotto.numbers(index)).count();
         }
 
         return measureLucky(match);
     }
 
-    private int countIfWinNumContains(int number) {
-        if (winNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
     private LottoResult measureLucky(int count) {
-        return LottoResult.valueOf(LottoResult.MATCH_.toString() + count);
+        return MAP_LOTTO_RESULT.get(count);
     }
 
 }
