@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
+
+import java.util.List;
 
 public class PrintView {
 
@@ -9,9 +11,11 @@ public class PrintView {
     public static final String RESULT_TITLE_MESSAGE = "당첨 통계";
     public static final String DELIMITER_LINE = "---------";
 
-    public void printLottoNumbers(LottoTickets lottoTickets) {
+    public void printLottoNumbers(List<LottoNumbers> lottoTickets) {
         System.out.printf(BUY_RESULT_MESSAGE, lottoTickets.size());
-        System.out.println(lottoTickets);
+        for (LottoNumbers lottoTicket : lottoTickets) {
+            System.out.println(lottoTicket);
+        }
         System.out.println();
     }
 

@@ -4,18 +4,22 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
+import java.util.List;
+
 public class LottoController {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         PrintView printView = new PrintView();
-        LottoTicketStore store = new LottoTicketStore(new RandomNumbersGenerator());
+        LottoNumbersGenerator store = new LottoNumbersGenerator(new RandomNumbersGenerator());
 
         int price = inputView.inputPrice();
 
-        LottoTickets lottoTickets = store.buy(price);
-        printView.printLottoNumbers(lottoTickets);
+        List<LottoNumbers> lottoNumbersList = store.generate(price);
+        printView.printLottoNumbers(lottoNumbersList);
 
-        LottoResult lottoResult = lottoTickets.matchResult(LottoTicket.of(inputView.inputWinningNumbers()));
+        LottoTickets lottoTickets = LottoTickets.of(lottoNumbersList, LottoNumbers.of(inputView.inputWinningNumbers()));
+
+        LottoResult lottoResult = lottoTickets.matchResult();
         printView.printResult(lottoResult, price);
     }
 }

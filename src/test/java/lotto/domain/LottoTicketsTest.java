@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,10 +18,14 @@ class LottoTicketsTest {
     @MethodSource("provideListForStringNumbers")
     @DisplayName("당첨 번호 입력 시 결과를 반환한다")
     void makeStatisticsTest(List<String> numbers, int firstCount, int secondCount, int thirdCount, int fourthCount) {
-        LottoTickets lottoTickets = LottoTickets.of(numbers);
-        LottoTicket winningNumbers = LottoTicket.of("1,2,3,4,5,6");
+        LottoNumbers winningNumbers = LottoNumbers.of("1,2,3,4,5,6");
+        List<LottoNumbers> lottoNumbersList = numbers.stream()
+                .map(LottoNumbers::of)
+                .collect(Collectors.toList());
 
-        LottoResult result = lottoTickets.matchResult(winningNumbers);
+        LottoTickets lottoTickets = LottoTickets.of(lottoNumbersList, winningNumbers);
+        LottoResult result = lottoTickets.matchResult();
+
         assertThat(result.prizeCount(Prize.FIRST)).isEqualTo(firstCount);
         assertThat(result.prizeCount(Prize.SECOND)).isEqualTo(secondCount);
         assertThat(result.prizeCount(Prize.THIRD)).isEqualTo(thirdCount);

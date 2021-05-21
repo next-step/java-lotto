@@ -1,36 +1,32 @@
 package lotto.domain;
 
-import lotto.utils.StringUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
-import java.util.*;
+import static java.util.stream.Collectors.*;
 
 public class LottoTickets {
-    public static final int ZERO = 0;
-    public static final int ADD_NUMBER = 1;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets of(List<String> tickets) {
+    public static LottoTickets of(List<LottoNumbers> lottoNumbersList, LottoNumbers winningNumbers) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (String ticket : tickets) {
-            lottoTickets.add(LottoTicket.of(StringUtils.toIntegerList(ticket)));
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            lottoTickets.add(LottoTicket.of(lottoNumbers, winningNumbers));
         }
         return new LottoTickets(lottoTickets);
     }
 
-    public int size() {
-        return this.lottoTickets.size();
-    }
-
-    public LottoResult matchResult(LottoTicket winningNumbers) {
+    public LottoResult matchResult() {
         Map<Prize, Integer> result = Prize.defaultResultMap();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            Prize prize = lottoTicket.match(winningNumbers);
-            result.put(prize, result.getOrDefault(prize, ZERO) + ADD_NUMBER);
-        }
+        lottoTickets.stream()
+                .collect(toMap(LottoTicket::getPrize, ticket -> 1, Integer::sum))
+                .forEach((prize, count) -> result.put(prize, result.get(prize) + count));
         return new LottoResult(result);
     }
 

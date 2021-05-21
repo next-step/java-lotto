@@ -1,57 +1,29 @@
 package lotto.domain;
 
-import lotto.utils.StringUtils;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-
-
 public class LottoTicket {
 
-    public static final int LOTTO_NUMBERS_LENGTH = 6;
-    public static final String LOTTO_NUMBERS_LENGTH_ERROR_MESSAGE = "로또 번호는 6자리 수여야 합니다.";
-    public static final String LOTTO_NUMBERS_DUPLICATE_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
+    public static final String NOT_FOUND_PRIZE_ERROR_MESSAGE = "prize 가 존재하지 않습니다.";
+    private final LottoNumbers lottoNumbers;
+    private final Prize prize;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
+    public LottoTicket(LottoNumbers lottoNumbers, Prize prize) {
+        validatePrize(prize);
         this.lottoNumbers = lottoNumbers;
+        this.prize = prize;
     }
 
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_LENGTH_ERROR_MESSAGE);
-        }
-
-        if (new HashSet<>(lottoNumbers).size() < LOTTO_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_DUPLICATE_ERROR_MESSAGE);
+    private void validatePrize(Prize prize) {
+        if (prize == null) {
+            throw new IllegalArgumentException(NOT_FOUND_PRIZE_ERROR_MESSAGE);
         }
     }
 
-    public static LottoTicket of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .sorted()
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
+    public static LottoTicket of(LottoNumbers lottoNumbers, LottoNumbers winningNumbers) {
+        return new LottoTicket(lottoNumbers, lottoNumbers.match(winningNumbers));
     }
 
-    public static LottoTicket of(String numbers) {
-        return of(StringUtils.toIntegerList(numbers));
-    }
-
-    public Prize match(LottoTicket winningNumbers) {
-        int matchCount = (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-
-        return Prize.findByMatchCount(matchCount);
-    }
-
-    private boolean contains(LottoNumber number) {
-        return lottoNumbers.contains(number);
+    public Prize getPrize() {
+        return prize;
     }
 
     @Override

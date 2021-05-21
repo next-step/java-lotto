@@ -25,11 +25,11 @@ public class LottoResult {
         for (Map.Entry<Prize, Integer> entry : result.entrySet()) {
             profit += entry.getKey().calculateProfit(entry.getValue());
         }
-        return Math.floor((double) profit / price * HUNDRED) / HUNDRED ;
+        return Math.floor((double) profit / price * HUNDRED) / HUNDRED;
     }
 
     public String resultMessage(int price) {
-        return statisticsMessage() +
+        return statisticsMessage() + "\n"+
                 profitRateMessage(calculateProfitRate(price));
     }
 
