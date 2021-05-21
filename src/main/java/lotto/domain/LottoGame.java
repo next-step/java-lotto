@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -63,12 +64,12 @@ public class LottoGame {
 	}
 
 	private HashMap<Rank, Integer> initRankMap() {
-		HashMap<Rank, Integer> rankMap = new HashMap<>();
-		rankMap.put(Rank.FIRST, 0);
-		rankMap.put(Rank.SECOND, 0);
-		rankMap.put(Rank.THIRD, 0);
-		rankMap.put(Rank.FOURTH, 0);
+		HashMap<Rank, Integer> rankMap = new LinkedHashMap<>();
 		rankMap.put(Rank.NONE, 0);
+		rankMap.put(Rank.FOURTH, 0);
+		rankMap.put(Rank.THIRD, 0);
+		rankMap.put(Rank.SECOND, 0);
+		rankMap.put(Rank.FIRST, 0);
 		return rankMap;
 	}
 
