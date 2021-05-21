@@ -1,14 +1,28 @@
 package lotto.domain;
 
+import jdk.jfr.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class LottoTest {
+
+    @Test
+    void 로또결과들의_총수익률_Test() {
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        Lottos lottos = new Lottos(Arrays.asList(
+                new Lotto(Arrays.asList(1,4,5,6,17,38)),        // 1개 - 4개 맞춤, 3등, 50000
+                new Lotto(Arrays.asList(1,2,3,4,5,6)),          // 1개 - 6개 맞춤, 1등, 2,000,000,000
+                new Lotto(Arrays.asList(41,34,25,16,7,8))));    // 1개 - 0개 맞춤, -등,
+
+        LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
+
+        assertThat(resultPack.calculateProfitRatio(new LottoPurchaseBudget(3000)))
+                                            .isEqualTo(0.000001499962, within(0.0000001));
+    }
 
     @Test
     void 당첨번호와_로또들_비교_결과_Test() {

@@ -31,4 +31,22 @@ public class LottoResultPack {
     public int countOf(LottoResult lottoResult) {
         return lottoResultPack.get(lottoResult);
     }
+
+    public double calculateProfitRatio(LottoPurchaseBudget purchaseBudget) {
+        return (double)purchaseBudget.budget() / sumOfProfit();
+    }
+
+    private int sumOfProfit() {
+        int sum = 0;
+
+        Set<Integer> set = MAP_LOTTO_RESULT.keySet();
+        Iterator<Integer> it = set.iterator();
+        while (it.hasNext()) {
+            LottoResult result = MAP_LOTTO_RESULT.get(it.next());
+            sum += result.profit() * lottoResultPack.get(result);
+        }
+
+        return sum;
+    }
+
 }

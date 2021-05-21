@@ -45,7 +45,7 @@ public class LottoWinNumbers {
         return resultPack;
     }
 
-    public LottoResult matchResultOf(Lotto lotto) {
+    protected LottoResult matchResultOf(Lotto lotto) {
         int match = 0;
 
         for (int i = 0; i < LOTTO_NUMBER_COUNT; ++i) {
