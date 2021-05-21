@@ -1,10 +1,13 @@
+package lotto;
+
+import type.LottoRewardType;
 import ui.ResultView;
 
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class LottoResult implements SumResult{
+public final class LottoResult implements SumResult{
 
 	private Map<LottoRewardType, Integer> lottoRewardMap;
 

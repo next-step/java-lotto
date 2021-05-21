@@ -1,3 +1,5 @@
+package type;
+
 import java.util.Arrays;
 
 public enum LottoRewardType {

@@ -2,6 +2,10 @@ package utils;
 
 public class StringUtils {
 
+	private StringUtils(){
+		// empty
+	}
+
 	public static String[] split(String delimiter, String text) {
 		if(isEmpty(delimiter)
 		   || isEmpty(text)){

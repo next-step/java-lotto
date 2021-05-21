@@ -1,4 +1,4 @@
-package exception;
+package type;
 
 public enum LottoExceptionType {
 	NEGATIVE_TEXT("문자열에 음수는 포함될 수 없습니다."),

@@ -1,9 +1,9 @@
-import ui.ResultView;
+package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNumbersFactory {
+public final class LottoNumbersFactory {
 
 	private List<LottoNumbers> lottoList;
 

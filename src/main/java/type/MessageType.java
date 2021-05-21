@@ -1,4 +1,4 @@
-package ui;
+package type;
 
 public enum MessageType {
 

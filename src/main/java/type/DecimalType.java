@@ -1,4 +1,4 @@
-package utils;
+package type;
 
 public enum DecimalType {
 

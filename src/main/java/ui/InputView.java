@@ -1,7 +1,8 @@
 package ui;
 
 import exception.LottoException;
-import exception.LottoExceptionType;
+import type.LottoExceptionType;
+import type.MessageType;
 import utils.ConsoleUtils;
 
 public class InputView {

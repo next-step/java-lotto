@@ -1,3 +1,5 @@
+package lotto;
+
 import java.util.Objects;
 
 public final class LottoNumber implements Comparable<LottoNumber>{

@@ -1,3 +1,5 @@
+package lotto;
+
 import ui.ResultView;
 
 import java.util.Collections;

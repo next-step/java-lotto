@@ -1,6 +1,10 @@
+package lotto;
+
+import utils.DrawNumber;
+
 import java.util.List;
 
-public class LottoGenerator {
+public final class LottoGenerator {
 	private final static int LOTTO_NUMBER_COUNT = 6;
 	private final static int LOTTO_PRICE = 1000;
 

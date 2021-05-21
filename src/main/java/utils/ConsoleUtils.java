@@ -3,6 +3,11 @@ package utils;
 import java.util.Scanner;
 
 public class ConsoleUtils {
+
+	private ConsoleUtils(){
+		// empty
+	}
+
 	public static void printLine(String message){
 		System.out.println(message);
 	}

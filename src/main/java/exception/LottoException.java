@@ -1,5 +1,7 @@
 package exception;
 
+import type.LottoExceptionType;
+
 public class LottoException extends RuntimeException {
 
 	private LottoException(LottoExceptionType code){

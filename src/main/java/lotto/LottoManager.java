@@ -1,18 +1,18 @@
+package lotto;
+
 import exception.LottoException;
+import type.DecimalType;
 import ui.InputView;
 import ui.ResultView;
-import utils.DecimalType;
-import utils.NumberUtils;
-import utils.SeparatedText;
-import utils.StringUtils;
+import utils.*;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import static exception.LottoExceptionType.WRONG_LOTTO_NUMBER;
-import static ui.MessageType.*;
+import static type.LottoExceptionType.WRONG_LOTTO_NUMBER;
+import static type.MessageType.*;
 
-public class LottoManager {
+public final class LottoManager {
 	private static final double DEFAULT_REVENUE_VALUE = 0.0;
 	private static final int LOTTO_MIN_NUMBER = 1;
 	private static final int LOTTO_MAX_NUMBER = 45;
