@@ -6,11 +6,27 @@ public class LottoNumbersFactory {
 	private List<LottoNumbers> lottoList;
 
 	public LottoNumbersFactory(){
-		lottoList = new ArrayList<>();
+		this(new ArrayList<>());
+	}
+
+	LottoNumbersFactory(final List<LottoNumbers> lottoList){
+		this.lottoList = lottoList;
 	}
 
 	public void add(final LottoNumbers lottoNumbers){
 		this.lottoList.add(lottoNumbers);
+	}
+
+	public LottoResult summary(final LottoNumbers winningLottoNumbers){
+		LottoResult result = new LottoResult();
+		if(size() == 0){
+			return result;
+		}
+
+		lottoList.stream()
+				 .map(lottoNumbers -> lottoNumbers.matches(winningLottoNumbers))
+				 .forEach(result::add);
+		return result;
 	}
 
 	public int size(){

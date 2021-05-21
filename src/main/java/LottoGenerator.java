@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class LottoGenerator {
 	private final static int LOTTO_NUMBER_COUNT = 6;
 	private final static int LOTTO_PRICE = 1000;
@@ -22,7 +24,12 @@ public class LottoGenerator {
 		}
 	}
 
-	public int lottoSize(){
+	public LottoResult summary(final List<Integer> winnerNumbers){
+		LottoNumbers winnerLottoNumbers = new LottoNumbers(winnerNumbers);
+		return lottoNumbersFactory.summary(winnerLottoNumbers);
+	}
+
+	int lottoSize(){
 		return lottoNumbersFactory.size();
 	}
 }

@@ -20,10 +20,10 @@ public class LottoResult {
 
 	public void add(final int collect){
 		LottoRewardType lottoRewardType = LottoRewardType.of(collect);
-		lottoRewardMap.computeIfPresent(lottoRewardType, ((key, value) -> value + lottoRewardType.reward()));
+		lottoRewardMap.computeIfPresent(lottoRewardType, ((key, value) -> value += 1));
 	}
 
-	public int sum(final LottoRewardType lottoRewardType){
+	public int count(final LottoRewardType lottoRewardType){
 		return lottoRewardMap.getOrDefault(lottoRewardType, 0);
 	}
 
