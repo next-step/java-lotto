@@ -5,6 +5,7 @@ import static java.util.Objects.*;
 public class AddCalculatorModel {
 
 	private String userInput;
+	private final long sum = 0L;
 
 	public AddCalculatorModel(String userInput) {
 		setUserInput(userInput);
@@ -29,12 +30,13 @@ public class AddCalculatorModel {
 			}
 		}
 
-		long sum = 0L;
+		return calculate(sum);
+	}
 
+	private long calculate(long sum) {
 		for (String s : userInput.split(",")) {
 			sum += Long.parseLong(s);
 		}
-
 		return sum;
 	}
 
