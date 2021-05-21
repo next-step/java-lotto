@@ -15,6 +15,24 @@ public class StringCalculatorTest {
     }
 
     @Test
+    void 유효하지_않은_문자_예외_Test() {
+        assertThatThrownBy(() -> calculator.calculate("3;4;5"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("//.\n3;4;5"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("/.\n3;4;5"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("3,4;5"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("3,4;5"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("text123"))
+                .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> calculator.calculate("1,2,3//2"))
+                .isInstanceOf(NumberFormatException.class);
+    }
+
+    @Test
     void 문자열_0_또는_null_Test() {
         assertThat(calculator.isNullOrEmpty("")).isTrue();
         assertThat(calculator.isNullOrEmpty(null)).isTrue();
