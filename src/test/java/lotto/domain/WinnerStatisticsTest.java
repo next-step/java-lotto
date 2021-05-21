@@ -32,17 +32,18 @@ class WinnerStatisticsTest {
             String number = String.valueOf(startNumber + i);
             lottoNumbers.add(number);
         }
-        return LottoNumberGenerator.manualGenerator(lottoNumbers);
+
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+
+        return lottoNumberGenerator.generator(lottoNumbers);
     }
 
     @DisplayName("로또당첨등수별 수익률 테스트(5장구입기준)")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:400000.00", "1,2,3,4,5,40:300.00", "1,2,3,4,35,40:10.00", "1,2,3,30,35,40:1.00", "1,2,25,30,35,40:0.00"}, delimiter = ':')
     public void incomeRateTest(String lottoNumber, String expectedRate) {
-        String[] splitedLottoNumber = StringUtils.split(lottoNumber);
+        List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumber);
 
-        List<String> lottoNumberText = Arrays.asList(splitedLottoNumber);
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
 
         WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
@@ -54,14 +55,20 @@ class WinnerStatisticsTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:false", "1,2,3,30,35,40:false", "1,2,25,30,35,40:true"}, delimiter = ':')
     public void isLossTest(String lottoNumber, boolean expectedLoss) {
-        String[] splitedLottoNumber = StringUtils.split(lottoNumber);
+        List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumber);
 
-        List<String> lottoNumberText = Arrays.asList(splitedLottoNumber);
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
 
         WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 
         assertThat(winnerStatistics.isLoss()).isEqualTo(expectedLoss);
+    }
+
+    private List<LottoNumber> makeLottoNumbers(String lottoNumber) {
+        String[] splitedLottoNumber = StringUtils.split(lottoNumber);
+
+        List<String> lottoNumberText = Arrays.asList(splitedLottoNumber);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        return lottoNumberGenerator.generator(lottoNumberText);
     }
 }

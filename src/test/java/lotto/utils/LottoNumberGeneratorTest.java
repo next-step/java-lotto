@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberGeneratorTest {
 
@@ -17,7 +16,8 @@ class LottoNumberGeneratorTest {
     public void createLottoNumbers() {
         List<String> inputLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
 
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(inputLottoNumbers);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(inputLottoNumbers);
 
         assertThat(lottoNumbers).containsExactly(LottoNumber.create(1)
                 , LottoNumber.create(2)
@@ -25,14 +25,6 @@ class LottoNumberGeneratorTest {
                 , LottoNumber.create(4)
                 , LottoNumber.create(5)
                 , LottoNumber.create(6));
-    }
-
-    @DisplayName("자동 로또번호의 생성확인")
-    @Test
-    public void createAutoGenerator() {
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.autoGenerator();
-
-        assertThat(lottoNumbers).hasSize(6);
     }
 
 }

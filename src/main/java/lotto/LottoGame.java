@@ -38,8 +38,8 @@ public class LottoGame {
 
     private WinnerNumbers generatorWinnerNumber() {
         List<String> inputWinnerNumbers = inputView.inputWinnerNumber();
-
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(inputWinnerNumbers);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(inputWinnerNumbers);
 
         WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
 

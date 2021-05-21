@@ -16,7 +16,8 @@ class LottoTicketTest {
     @Test
     public void createLottoTicket() {
         List<String> lottoNumberText = Arrays.asList("1", "2", "3", "4", "5", "6");
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
+        List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumberText);
+
         LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
 
         assertThat(lottoTicket.getNumbers()).hasSize(6);
@@ -26,10 +27,15 @@ class LottoTicketTest {
     @Test
     public void invalidLottoNumberCountTest() {
         List<String> lottoNumberText = Arrays.asList("1", "2", "3", "4", "5");
-        List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
+        List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumberText);
 
         assertThatThrownBy(() -> LottoTicket.create(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private List<LottoNumber> makeLottoNumbers(List<String> lottoNumberText) {
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        return lottoNumberGenerator.generator(lottoNumberText);
     }
 
 }
