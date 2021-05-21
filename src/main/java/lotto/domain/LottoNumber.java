@@ -15,6 +15,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
+    private void validateLottoNumber(Integer lottoNumber) {
+        if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
+        }
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(lottoNumber);
@@ -29,19 +35,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return false;
     }
 
-    private void validateLottoNumber(Integer lottoNumber) {
-        if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
-        }
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.lottoNumber.compareTo(other.lottoNumber);
     }
 
     @Override
     public String toString() {
         return lottoNumber.toString();
-    }
-
-    @Override
-    public int compareTo(LottoNumber other) {
-        return this.lottoNumber.compareTo(other.lottoNumber);
     }
 }
