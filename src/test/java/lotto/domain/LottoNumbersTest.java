@@ -23,9 +23,9 @@ class LottoNumbersTest {
     assertThat(new LottoNumbers(numbers)).isEqualTo(new LottoNumbers(numbers));
   }
 
-  @DisplayName("객체 생성 실패 테스트 - 숫자가 6개가 아닐때, 범위에서 벗어난 숫자가 포함되었을 때")
+  @DisplayName("객체 생성 실패 테스트 - 숫자가 6개가 아닐때")
   @ParameterizedTest
-  @ValueSource(strings = {"1,2,3,4,5", "-1,2,3,4,5,6", "1,2,3,4,5,46"})
+  @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
   void failTestConstruct(String givenNumbers) {
     List<LottoNumber> numbers = toNumbers(givenNumbers);
     assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
