@@ -6,7 +6,6 @@ import lotto.domain.LottoMachine;
 import lotto.view.UserView;
 
 public class LottoManager {
-    private static boolean validLottoNumbers;
     private static int money;
     private static LottoMachine machine = new LottoMachine();
     private static UserView view = new UserView();
