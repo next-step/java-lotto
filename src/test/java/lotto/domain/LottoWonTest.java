@@ -68,21 +68,26 @@ public class LottoWonTest {
     @Test
     @DisplayName("로또 티켓들을 입력받아 등수를 알 수 있다")
     public void 로또_티켓들을_입력받아_등수를_알_수_있다() {
+        String lottoNumbersSortedByRank[] = lottoNumbersSortedByRank();
+
         LottoTickets lottoTickets = new LottoTickets(
                 Arrays.asList(
-                        new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,2,3,4,5,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,12,3,4,5,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,12,13,4,5,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,12,13,14,5,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,12,13,14,15,6")),
-                        new LottoTicket(convertStringToLottoNumberList("11,12,13,14,15,16"))
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[1])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[2])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[3])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[4])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[5])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[6])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[7])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[8]))
                 )
         );
 
         LottoRanks match = lottoWon.match(lottoTickets);
 
         assertThat(match.countOf(LottoRank.FIRST))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.SECOND))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.THIRD))
                 .isEqualTo(1);
