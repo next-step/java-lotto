@@ -3,7 +3,11 @@ package lotto.core.round;
 import lotto.core.SixBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 특정회차 테스트")
 class RoundTest {
@@ -24,5 +28,13 @@ class RoundTest {
 
         System.out.println(round);
         assertThat(round).isNotNull();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, -1, 0, 46})
+    @DisplayName("잘못된 보너스볼")
+    public void wrongBonusBallTest(int bonus) {
+        assertThatThrownBy(() -> new Round(1, SixBall.get(1, 2, 3, 4, 5, 6), bonus))
+                .isInstanceOf(RuntimeException.class);
     }
 }

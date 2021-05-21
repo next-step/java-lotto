@@ -20,6 +20,10 @@ public class Round {
         this.round = round;
         this.sixBall = sixBall;
         this.bonusBall = Machine.draw(bonus);
+
+        if (validation()) {
+            throw new IllegalArgumentException("보너스 볼이 당첨 번호에 포함되어 있습니다.");
+        }
     }
 
     public Stream<Ball> stream() {
@@ -28,6 +32,10 @@ public class Round {
 
     public Ball getBonusBall() {
         return bonusBall;
+    }
+
+    private boolean validation() {
+        return sixBall.contains(bonusBall);
     }
 
     @Override

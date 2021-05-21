@@ -38,7 +38,11 @@ public class OmrCardInfo implements Info<OmrCard> {
         String textMoney = (String) input.request("구입금액을 입력해 주세요.");
         int money = parseIntMoney(textMoney);
 
-        return validateMinimumAmount(money);
+        if (isValidateMinimumAmount(money)) {
+            throw new RuntimeException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
+        }
+
+        return money;
     }
 
     private int parseIntMoney(String textMoney) {
@@ -49,12 +53,8 @@ public class OmrCardInfo implements Info<OmrCard> {
         }
     }
 
-    private int validateMinimumAmount(int money) {
-        if (money < OmrCard.PRICE) {
-            throw new RuntimeException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
-        }
-
-        return money;
+    private boolean isValidateMinimumAmount(int money) {
+        return money < OmrCard.PRICE;
     }
 
     private int size(int money) {
@@ -69,5 +69,4 @@ public class OmrCardInfo implements Info<OmrCard> {
 
         return size;
     }
-
 }
