@@ -24,11 +24,11 @@ public class GameTest {
 
         assertThat(match.countOf(LottoRank.FIRST))
                 .isEqualTo(1);
-        assertThat(match.countOf(LottoRank.SECOND))
-                .isEqualTo(1);
         assertThat(match.countOf(LottoRank.THIRD))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.FOURTH))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.FIFTH))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.MISS))
                 .isEqualTo(2);

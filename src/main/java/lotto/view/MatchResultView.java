@@ -20,9 +20,9 @@ public class MatchResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
+        printRankInfo(matchedRanks, LottoRank.FIFTH);
         printRankInfo(matchedRanks, LottoRank.FOURTH);
         printRankInfo(matchedRanks, LottoRank.THIRD);
-        printRankInfo(matchedRanks, LottoRank.SECOND);
         printRankInfo(matchedRanks, LottoRank.FIRST);
     }
 

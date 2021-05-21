@@ -32,7 +32,7 @@ public class LottoWon {
                 .filter(number -> lottoTicket.contains(number))
                 .count();
 
-        return LottoRank.valueOf(countOfMatched);
+        return LottoRank.valueOf(countOfMatched, false);
     }
 
     private void validate(Set<LottoNumber> lottoWonNumbers) {

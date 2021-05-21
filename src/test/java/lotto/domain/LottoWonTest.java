@@ -28,9 +28,9 @@ public class LottoWonTest {
     @CsvSource(
             value = {
                     "1,2,3,4,5,6#FIRST",
-                    "11,2,3,4,5,6#SECOND",
-                    "11,12,3,4,5,6#THIRD",
-                    "11,12,13,4,5,6#FOURTH",
+                    "11,2,3,4,5,6#THIRD",
+                    "11,12,3,4,5,6#FOURTH",
+                    "11,12,13,4,5,6#FIFTH",
                     "11,12,13,14,5,6#MISS",
                     "11,12,13,14,15,6#MISS",
                     "11,12,13,14,15,16#MISS"
@@ -66,11 +66,11 @@ public class LottoWonTest {
 
         assertThat(match.countOf(LottoRank.FIRST))
                 .isEqualTo(1);
-        assertThat(match.countOf(LottoRank.SECOND))
-                .isEqualTo(1);
         assertThat(match.countOf(LottoRank.THIRD))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.FOURTH))
+                .isEqualTo(1);
+        assertThat(match.countOf(LottoRank.FIFTH))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.MISS))
                 .isEqualTo(3);
