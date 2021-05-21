@@ -1,5 +1,8 @@
+package utils;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import utils.SeparatedText;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

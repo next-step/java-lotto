@@ -1,3 +1,5 @@
+package utils;
+
 import exception.StringAddCalculatorException;
 
 import java.util.Arrays;

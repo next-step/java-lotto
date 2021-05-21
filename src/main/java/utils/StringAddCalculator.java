@@ -1,3 +1,5 @@
+package utils;
+
 public class StringAddCalculator {
 
 	private static final int DEFAULT_RETURN_NUMBER = 0;
