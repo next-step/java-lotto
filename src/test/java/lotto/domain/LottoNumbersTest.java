@@ -46,15 +46,23 @@ public class LottoNumbersTest {
 	@DisplayName("로또번호 리스트에 당첨번호가 포함되어 있는지 테스트")
 	void contains(int number) {
 		Assertions.assertThat(winLottoNumbers.contains(number)).isTrue();
+		Assertions.assertThat(winLottoNumbers.contains(7)).isFalse();
 	}
 
 	@Test
-	@DisplayName("일치하는 당첨번호 개수 테스트")
-	void matchCount() {
-		LottoNumbers myLottoNumbers = new LottoNumbers(1, 2, 3, 11, 12, 13);
+	@DisplayName("당첨번호와 비교하여 랭킹을 구하는 테스트")
+	void rank() {
+		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 5, 6)
+				.findRank(winLottoNumbers)).isEqualTo(Rank.FIRST);
 
-		int matchCount = myLottoNumbers.getMatchCount(winLottoNumbers);
-		Assertions.assertThat(matchCount).isEqualTo(3);
+		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 5, 45)
+				.findRank(winLottoNumbers)).isEqualTo(Rank.SECOND);
+
+		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 44, 45)
+				.findRank(winLottoNumbers)).isEqualTo(Rank.THIRD);
+
+		Assertions.assertThat(new LottoNumbers(1, 2, 3, 43, 44, 45)
+				.findRank(winLottoNumbers)).isEqualTo(Rank.FOURTH);
 	}
 
 }

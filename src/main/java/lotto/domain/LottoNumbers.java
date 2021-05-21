@@ -60,6 +60,30 @@ public class LottoNumbers {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
+	public Rank findRank(LottoNumbers winLottoNumbers) {
+		int matchCount = this.findMatchCount(winLottoNumbers);
+		return this.findRankByMatchCount(matchCount);
+	}
+
+	protected int findMatchCount(LottoNumbers winLottoNumbers) {
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : lottoNumbers) {
+			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
+		}
+		return matchCount;
+	}
+
+	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
+		if (winLottoNumbers.contains(lottoNumber)) {
+			return 1;
+		}
+		return 0;
+	}
+
+	protected Rank findRankByMatchCount(int matchCount) {
+		return Rank.findRankByMatchCount(matchCount);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -77,22 +101,5 @@ public class LottoNumbers {
 	public String toString() {
 		return lottoNumbers.toString();
 	}
-
-	public int getMatchCount(LottoNumbers winLottoNumbers) {
-		int matchCount = 0;
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
-		}
-		return matchCount;
-	}
-
-	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
-		boolean isContain = winLottoNumbers.contains(lottoNumber);
-		if (isContain == true) {
-			return 1;
-		}
-		return 0;
-	}
-
 
 }
