@@ -1,8 +1,8 @@
 package lotto;
 
-public class PurchaseAmount {
+public class InputAmount {
     private int amount;
-    PurchaseAmount(int amount) {
+    InputAmount(int amount) {
         this.amount = amount;
     }
 }
