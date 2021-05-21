@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumberGeneratorTest {
 
-    @DisplayName("입력받은 문자열 번호를 정수형 리스트로 생성 확인")
+    @DisplayName("입력받은 문자열 번호를 통하여 로또티켓과 해당 티켓에 로또번호가 존재하는지 확인")
     @Test
     public void createLottoNumbers() {
         List<String> inputLottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");

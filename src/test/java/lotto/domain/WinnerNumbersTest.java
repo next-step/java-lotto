@@ -28,7 +28,7 @@ class WinnerNumbersTest {
         winnerNumbers = WinnerNumbers.create(lottoNumbers);
     }
     
-    @DisplayName("당첨 번호가 6개가 아닐때 예외")
+    @DisplayName("로또당첨번호의 갯수는 6개여야한다.")
     @Test
     public void invalidWinnerNumberCountTest() {
         List<String> lottoNumberText = Arrays.asList("1", "2", "3", "4", "5");

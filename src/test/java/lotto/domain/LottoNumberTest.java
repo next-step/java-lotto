@@ -10,17 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-    @DisplayName("로또번호의 정상적인 생성확인")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 10, 45})
-    public void createLottoNumber(int number) {
-        LottoNumber lottoNumber = LottoNumber.create(number);
-
-        assertThat(lottoNumber).isEqualTo(LottoNumber.create(number));
-        assertThat(lottoNumber.value()).isEqualTo(number);
-    }
-
-    @DisplayName("로또번호의 비정상적인 범위에서의 예외확인")
+    @DisplayName("로또번호는 1~45사이 숫자여야한다.")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     public void createInvalidLottoNumber(int number) {
