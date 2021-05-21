@@ -24,7 +24,7 @@ public class LottoApp {
 
 	public void run() {
 		Money money = inputMoney();
-		LottoTicket lottoTicket = inputLottoNumbersGroup((int) money.divided(Money.LOTTO_PRICE));
+		LottoTicket lottoTicket = inputLottoTicket(money.countOfLottoNumbers());
 		LottoNumbers winningNumbers = inputWinningNumbers();
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
@@ -34,9 +34,9 @@ public class LottoApp {
 		return lottoAppInput.inputMoney();
 	}
 
-	private LottoTicket inputLottoNumbersGroup(int lottoCount) {
-		lottoAppOutput.printBoughtLottoCountView(lottoCount);
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbersGenerator.generateRandomly(lottoCount));
+	private LottoTicket inputLottoTicket(int lottoNumbersCount) {
+		lottoAppOutput.printBoughtLottoNumbersCountView(lottoNumbersCount);
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbersGenerator.generateRandomly(lottoNumbersCount));
 		lottoAppOutput.printLottoTicket(lottoTicket);
 		return lottoTicket;
 	}

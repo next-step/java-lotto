@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Money {
 	private static final int ZERO = 0;
 	static final Money ZERO_WONS = Money.ofWons(ZERO);
-	public static final Money LOTTO_PRICE = Money.ofWons(1000);
+	static final Money LOTTO_PRICE = Money.ofWons(1000);
 
 	private final int amount;
 
@@ -26,6 +26,10 @@ public class Money {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public int countOfLottoNumbers() {
+		return (int) divided(LOTTO_PRICE);
 	}
 
 	Money times(int count) {

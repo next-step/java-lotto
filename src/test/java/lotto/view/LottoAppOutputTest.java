@@ -43,7 +43,7 @@ public class LottoAppOutputTest {
 	public void printLottoCountViewTest() {
 		int lottoCount = 10;
 
-		lottoAppOutput.printBoughtLottoCountView(lottoCount);
+		lottoAppOutput.printBoughtLottoNumbersCountView(lottoCount);
 
 		assertThat(outputStream.toString()).contains(lottoCount + "개를 구매했습니다.");
 	}

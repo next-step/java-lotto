@@ -23,8 +23,8 @@ public class LottoAppOutput {
 		printStream.println("구매금액을 입력해 주세요.");
 	}
 
-	public void printBoughtLottoCountView(int lottoCount) {
-		printStream.println(lottoCount + "개를 구매했습니다.");
+	public void printBoughtLottoNumbersCountView(int lottoNumbersCount) {
+		printStream.println(lottoNumbersCount + "개를 구매했습니다.");
 	}
 
 	public void printLottoTicket(LottoTicket lottoTicket) {

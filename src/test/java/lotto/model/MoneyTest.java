@@ -21,7 +21,7 @@ public class MoneyTest {
 	@CsvSource(value = {"500:0", "1000:1", "1500:1"}, delimiter = ':')
 	public void calculateLottoCountTest(int inputMoney, int expectedLottoCount) {
 		Money money = Money.ofWons(inputMoney);
-		int lottoCount = (int) money.divided(Money.LOTTO_PRICE);
+		int lottoCount = money.countOfLottoNumbers();
 		assertThat(lottoCount).isEqualTo(expectedLottoCount);
 	}
 }
