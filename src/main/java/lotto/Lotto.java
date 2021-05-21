@@ -50,4 +50,18 @@ public final class Lotto {
 		}
 		return numbers;
 	}
+
+	private boolean contain(LottoNo lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
+	public Prize match(Lotto win) {
+		int count = 0;
+		for (LottoNo lottoNumber : lottoNumbers) {
+			count = win.contain(lottoNumber) ? count + 1 : count;
+		}
+		return Prize.getPrizeByCount(count);
+	}
+
+
 }
