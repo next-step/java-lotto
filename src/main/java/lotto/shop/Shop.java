@@ -17,9 +17,7 @@ public class Shop {
     public List<Lotto> selectAuto(int amount) {
         List<Lotto> lottoBundle = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            Lotto lotto = new Lotto();
-            generateNumber(lotto);
-            lottoBundle.add(lotto);
+            lottoBundle.add(createAutoLotto());
         }
         return lottoBundle;
     }
@@ -28,6 +26,12 @@ public class Shop {
         if (money.amount() < PURCHASE_PRICE) {
             throw new RuntimeException(ErrorMessage.NOT_ENOUGH_MONEY);
         }
+    }
+
+    private Lotto createAutoLotto() {
+        Lotto lotto = new Lotto();
+        generateNumber(lotto);
+        return lotto;
     }
 
     private void generateNumber(Lotto lotto) {
