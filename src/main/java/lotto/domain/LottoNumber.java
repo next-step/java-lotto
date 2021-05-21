@@ -1,15 +1,25 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> numberCache = new HashMap<>();
+
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            numberCache.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int number;
 
     public static LottoNumber of(int number) {
         validateNumber(number);
-        return new LottoNumber(number);
+        return numberCache.get(number);
     }
 
     private static void validateNumber(int number) {
