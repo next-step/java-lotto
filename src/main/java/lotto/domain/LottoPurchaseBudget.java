@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import static lotto.domain.LottoGameOptions.LOTTO_PRICE;
+
 public class LottoPurchaseBudget {
     private final int purchaseBudget;
-
-    private static final int LOTTO_PRICE = 1000;
 
     public LottoPurchaseBudget(int money) {
         if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
