@@ -32,4 +32,13 @@ public class LottoGameTest {
 		assertThat(lottoGame.hasSize()).isEqualTo(14);
 	}
 
+	@Test
+	@DisplayName("구매한 로또의 당첨 결과를 구하는 테스트")
+	void findWinningResult() {
+		LottoGame lottoGame = new LottoGame(1000, new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6}));
+		LottoResult lottoResult = lottoGame.findWinningResult(new LottoNumbers(1, 2, 3, 43, 44, 45));
+		assertThat(lottoResult.getStatMap().get(Rank.FOURTH)).isEqualTo(1);
+		assertThat(lottoResult.findPercentageOfRevenue()).isEqualTo(5.0f);
+	}
+
 }

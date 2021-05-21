@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -45,6 +46,30 @@ public class LottoGame {
 
 	public int hasSize() {
 		return this.lottos.size();
+	}
+
+	public LottoResult findWinningResult(LottoNumbers winLottoNumbers) {
+		HashMap<Rank, Integer> rankMap = initRankMap();
+
+		for (LottoNumbers lottoNumbers : this.lottos) {
+			Rank rank = lottoNumbers.findRank(winLottoNumbers);
+			this.addRank(rankMap, rank);
+		}
+		return new LottoResult(this.purchaseAmount, rankMap);
+	}
+
+	private void addRank(HashMap<Rank, Integer> rankMap, Rank rank) {
+		rankMap.put(rank, rankMap.get(rank) + 1);
+	}
+
+	private HashMap<Rank, Integer> initRankMap() {
+		HashMap<Rank, Integer> rankMap = new HashMap<>();
+		rankMap.put(Rank.FIRST, 0);
+		rankMap.put(Rank.SECOND, 0);
+		rankMap.put(Rank.THIRD, 0);
+		rankMap.put(Rank.FOURTH, 0);
+		rankMap.put(Rank.NONE, 0);
+		return rankMap;
 	}
 
 }
