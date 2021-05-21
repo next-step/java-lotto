@@ -65,3 +65,6 @@
 * LottoGames
   * LottoGame의 집합을 나타내는 일급 컬렉션
   * 당첨 게임을 인자로 전달받아 LottoGame의 집합의 당첨 결과를 TotalRankings로 반환할 수 있다.
+  
+* OrderSheet
+  * 입력받은 구매 금액을 도메인 객체에 전달하는 DTO 클래스
