@@ -25,4 +25,8 @@ public final class Price {
         return price < MIN_VALUE;
     }
 
+    public int getBuyCount() {
+        return price / MIN_VALUE;
+    }
+
 }
