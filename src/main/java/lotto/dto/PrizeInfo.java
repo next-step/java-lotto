@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class PrizeInfo {
 
+  private static final String ANALYSIS_FORMAT = "%d개 일치 (%d원)- %d개";
+
   private final int matchCountPerGame;
   private final long winningAmount;
   private final long winningCount;
@@ -16,16 +18,17 @@ public class PrizeInfo {
     this.winningCount = winningCount;
   }
 
-  public int getMatchCountPerGame() {
-    return matchCountPerGame;
-  }
-
   public long getWinningAmount() {
     return winningAmount;
   }
 
   public long getWinningCount() {
     return winningCount;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(ANALYSIS_FORMAT, matchCountPerGame, winningAmount, winningCount);
   }
 
   @Override
