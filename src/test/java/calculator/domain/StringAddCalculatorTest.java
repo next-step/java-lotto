@@ -42,7 +42,7 @@ class StringAddCalculatorTest {
         String expression = "-1:0,5";
 
         // When, Then
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> StringAddCalculator.calculate(expression));
     }
 }

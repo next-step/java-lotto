@@ -6,19 +6,19 @@ import static java.lang.Integer.parseInt;
 
 public class CalculatorNumber {
     private static final int MINIMUM_NUMBER = 0;
+    private static final String NO_NEGATIVE_MESSAGE = "음수는 가질 수 없습니다.";
 
     private int value;
 
     public CalculatorNumber(String number) {
-        this.value = parseInt(number);
+        int allocatingValue = parseInt(number);
+        validate(allocatingValue);
 
-        if (this.value < MINIMUM_NUMBER) {
-            throw new RuntimeException("음수는 가질 수 없습니다.");
-        }
+        this.value = allocatingValue;
     }
 
     public int getValue() {
-        return value;
+        return this.value;
     }
 
     @Override
@@ -32,5 +32,11 @@ public class CalculatorNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    private void validate(int allocatingValue) {
+        if (allocatingValue < MINIMUM_NUMBER) {
+            throw new IllegalArgumentException(NO_NEGATIVE_MESSAGE);
+        }
     }
 }

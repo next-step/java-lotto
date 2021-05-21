@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,16 @@ public class CalculatorNumbers {
         return calculatorNumberList.stream()
                 .mapToInt(CalculatorNumber::getValue)
                 .sum();
+    }
+
+    public static CalculatorNumbers from(String[] numbers) {
+        List<CalculatorNumber> calculatorNumberList = new ArrayList<>();
+
+        for (String number : numbers) {
+            calculatorNumberList.add(new CalculatorNumber(number));
+        }
+
+        return new CalculatorNumbers(calculatorNumberList);
     }
 
     @Override

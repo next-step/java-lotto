@@ -17,7 +17,7 @@ class CalculatorNumberTest {
         String input = valueOf(Integer.MIN_VALUE);
 
         // When, Then
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new CalculatorNumber(input));
     }
 }
