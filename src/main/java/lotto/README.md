@@ -61,3 +61,7 @@
 * TotalRankings
   * 로또 게임들의 당첨 결과인 여러개의 LottoRanking를 갖는 일급 컬렉션
   * LottoRanking List를 받으면 LottoRanking 별로 그룹핑해서 당첨 갯수를 담고 있는다.
+
+* LottoGames
+  * LottoGame의 집합을 나타내는 일급 컬렉션
+  * 당첨 게임을 인자로 전달받아 LottoGame의 집합의 당첨 결과를 TotalRankings로 반환할 수 있다.
