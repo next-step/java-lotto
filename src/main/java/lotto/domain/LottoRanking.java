@@ -24,4 +24,11 @@ public enum LottoRanking {
                 .findFirst()
                 .orElse(NONE);
   }
+
+  public int matchCount() {
+    return matchCount;
+  }
+  public long winningAmount() {
+    return winningAmount;
+  }
 }
