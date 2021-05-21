@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.domain.TestUtil.getOneToSixLottoNumbers;
 import static lotto.domain.TestUtil.toNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -19,10 +20,7 @@ class LottoGameTest {
 
   @BeforeAll
   static void setUp() {
-    List<LottoNumber> givenNumbers = IntStream.range(1, 7)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
-    winningNumbers = new LottoNumbers(givenNumbers);
+    winningNumbers = new LottoNumbers(getOneToSixLottoNumbers());
   }
 
   @DisplayName("객체 생성 & 동등성 테스트")
