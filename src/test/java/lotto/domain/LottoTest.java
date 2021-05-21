@@ -1,11 +1,23 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
+
+    @DisplayName("랜덤으로 1~ 45 사이의 중복없는 번호들 생성")
+    @Test
+    void 구매_로또_번호생성_Test() {
+        Lotto lotto = new Lotto();
+        String[] nums = lotto.toString().substring(1, lotto.toString().length()-2).split(", ");
+        for (int i = 0; i < nums.length; ++i) {
+            assertThat(Integer.parseInt(nums[i])).isGreaterThanOrEqualTo(1);
+            assertThat(Integer.parseInt(nums[i])).isLessThanOrEqualTo(45);
+        }
+    }
 
     @Test
     void 입력된_유효하지않은_당첨번호_Test() {
