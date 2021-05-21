@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,14 +38,6 @@ public class LottoGame {
     private void validate(Set<LottoNumber> values) {
         if (values.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
-        }
-    }
-
-    private void allocateValues(Set<Integer> initializingValues) {
-        values = new HashSet<>();
-
-        for(int initializingValue : initializingValues) {
-            values.add(LottoNumber.from(initializingValue));
         }
     }
 }
