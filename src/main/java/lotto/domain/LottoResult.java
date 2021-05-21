@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    public static final int ZERO = 0;
     public static final int HUNDRED = 100;
     public static final int BENEFIT_STANDARD_RATE = 1;
     public static final String PRIZE_RESULT_FORMAT_MESSAGE = "%d개 일치 (%d원)- %d개";
@@ -18,11 +17,11 @@ public class LottoResult {
     }
 
     public int prizeCount(Prize prize) {
-        return result.getOrDefault(prize, ZERO);
+        return result.getOrDefault(prize, 0);
     }
 
     public double calculateProfitRate(int price) {
-        int profit = ZERO;
+        int profit = 0;
         for (Map.Entry<Prize, Integer> entry : result.entrySet()) {
             profit += entry.getKey().calculateProfit(entry.getValue());
         }
