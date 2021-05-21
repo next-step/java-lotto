@@ -1,17 +1,18 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * 당첨.
  */
 public enum Prize {
-    MISS(0, 0, (match) -> match < 3),
-    FOURTH(3, 5000, (match) -> match == 3),
-    THIRD(4, 50_000, (match) -> match == 4),
-    SECOND(5, 1_500_000, (match) -> match == 5),
-    FIRST(6, 2000_000_000, (match) -> match == 6);
+    MISS(0, 0, (match, bonusNumber) -> match < 3),
+    FIFTH(3, 5000, (match, bonusNumber) -> match == 3),
+    FOURTH(4, 50_000, (match, bonusNumber) -> match == 4),
+    THIRD(5, 150_0000, (match, bonusNumber) -> match == 5 && !bonusNumber),
+    SECOND(5, 30_000_000, (match, bonusNumber) -> match == 5 && bonusNumber),
+    FIRST(6, 2000_000_000, (match, bonusNumber) -> match == 6);
 
     /**
      * 당첨 일치 갯수.
@@ -24,9 +25,9 @@ public enum Prize {
     /**
      * 당선 일치여부 조건.
      */
-    private final Function<Integer, Boolean> matcher;
+    private BiFunction<Integer, Boolean, Boolean> matcher;
 
-    Prize(int match, int amount, Function<Integer, Boolean> matcher) {
+    Prize(int match, int amount, BiFunction<Integer, Boolean, Boolean> matcher) {
         this.match = match;
         this.amount = amount;
         this.matcher = matcher;
@@ -38,9 +39,9 @@ public enum Prize {
      * @param matchCount 번호 일치 갯수
      * @return 맞춘 갯수에 해당하는 상금
      */
-    public static Prize of(int matchCount) {
+    public static Prize of(int matchCount, boolean bonusNumber) {
         return Arrays.stream(values())
-                .filter(v -> v.match(matchCount))
+                .filter(v -> v.match(matchCount, bonusNumber))
                 .findFirst()
                 .orElse(Prize.MISS);
     }
@@ -53,7 +54,7 @@ public enum Prize {
         return amount;
     }
 
-    private Boolean match(int matchCount) {
-        return matcher.apply(matchCount);
+    private Boolean match(int matchCount, boolean bonusNumber) {
+        return matcher.apply(matchCount, bonusNumber);
     }
 }
