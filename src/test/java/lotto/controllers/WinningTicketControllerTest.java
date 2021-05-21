@@ -2,6 +2,9 @@ package lotto.controllers;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,12 +14,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.Lotto;
 import lotto.Model;
+import lotto.Purchase;
+import lotto.Ticket;
 import lotto.exceptions.DuplicateNumbersException;
 import lotto.exceptions.InsufficientNumbersException;
 import lotto.exceptions.InvalidPatternException;
 import lotto.exceptions.NumberOutOfBoundsException;
 
 public class WinningTicketControllerTest {
+
+	private static final String cash = "12345";
+	private static final int amount = 12;
+
+	List<Ticket> tickets;
+	Ticket winningTicket;
 
 	Model model;
 	Lotto lotto;
@@ -25,7 +36,19 @@ public class WinningTicketControllerTest {
 
 	@BeforeEach
 	void setUp() {
+		Purchase purchase = new Purchase(cash);
+		this.winningTicket = new Ticket("1,2,3,4,5,6");
+		this.tickets = Arrays.asList(
+			new Ticket("1,2,3,4,5,6"),
+			new Ticket("1,2,3,4,5,6"),
+			new Ticket("1,2,3,4,5,11"),
+			new Ticket("1,2,3,4,10,11")
+		);
+
 		this.model = new Model();
+		this.model.savePurchase(purchase);
+		this.model.saveAutomatedTickets(this.tickets);
+		this.model.saveWinningTicket(this.winningTicket);
 		this.lotto = new Lotto(model);
 		this.winningTicketController = new WinningTicketController(this.lotto);
 	}
@@ -82,6 +105,6 @@ public class WinningTicketControllerTest {
 	@Test
 	void toNextController() {
 		winningTicketController.toNextController();
-		assertThat(lotto.compareController(EndController.class)).isTrue();
+		assertThat(lotto.compareController(ResultController.class)).isTrue();
 	}
 }

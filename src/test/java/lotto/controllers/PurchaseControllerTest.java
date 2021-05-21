@@ -58,7 +58,7 @@ public class PurchaseControllerTest {
 	@Test
 	void toNextController() {
 		purchaseController.toNextController();
-		assertThat(lotto.compareController(EndController.class)).isTrue();
+		assertThat(lotto.compareController(AutomaticTicketingController.class)).isTrue();
 	}
 
 }

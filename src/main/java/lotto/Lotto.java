@@ -1,8 +1,11 @@
 package lotto;
 
+import lotto.controllers.AutomaticTicketingController;
 import lotto.controllers.Controller;
 import lotto.controllers.EndController;
 import lotto.controllers.PurchaseController;
+import lotto.controllers.ResultController;
+import lotto.controllers.WinningTicketController;
 
 public class Lotto {
 
@@ -32,6 +35,18 @@ public class Lotto {
 
 	public void toEndController() {
 		this.controller = new EndController();
+	}
+
+	public void toAutomaticTicketingController() {
+		this.controller = new AutomaticTicketingController(this);
+	}
+
+	public void toWinningTicketController() {
+		this.controller = new WinningTicketController(this);
+	}
+
+	public void toResultController() {
+		this.controller = new ResultController(this);
 	}
 
 }

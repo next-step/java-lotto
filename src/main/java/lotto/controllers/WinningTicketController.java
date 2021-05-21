@@ -26,7 +26,7 @@ public class WinningTicketController extends InteractionController {
 	}
 
 	private void saveWinningTicket(Ticket ticket) {
-		lotto.storage().saveWinningTicket(ticket);
+		this.lotto.storage().saveWinningTicket(ticket);
 	}
 
 	@Override
@@ -36,6 +36,6 @@ public class WinningTicketController extends InteractionController {
 
 	@Override
 	protected void toNextController() {
-		lotto.toEndController();
+		this.lotto.toResultController();
 	}
 }

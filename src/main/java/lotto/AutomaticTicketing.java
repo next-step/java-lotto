@@ -21,7 +21,7 @@ public class AutomaticTicketing {
 
 	public Ticket newTicket() {
 		shuffle(numbers);
-		List<Integer> selectedNumbers = numbers.subList(0, Ticket.SIZE);
+		List<Integer> selectedNumbers = new ArrayList<>(numbers.subList(0, Ticket.SIZE));
 		return new Ticket(selectedNumbers);
 	}
 

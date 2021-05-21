@@ -11,7 +11,9 @@ public enum ErrorMessage {
 
 	CASH_OUT_OF_BOUNDS("지불 가능 금액은 1000원 ~ 1000000입니다."),
 
-	TICKETS_OUT_OF_BOUNDS("티켓 수는 0보다 커야 합니다.");
+	TICKETS_OUT_OF_BOUNDS("티켓 수는 0보다 커야 합니다."),
+
+	PRIZE_OUT_OF_BOUNDS("0 ~ 6 사이의 숫자를 입력하세요");
 
 	private String errorMessage;
 

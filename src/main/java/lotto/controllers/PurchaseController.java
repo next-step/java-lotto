@@ -27,7 +27,7 @@ public class PurchaseController extends InteractionController {
 	}
 
 	private void savePurchase(Purchase purchase) {
-		lotto.storage().savePurchase(purchase);
+		this.lotto.storage().savePurchase(purchase);
 	}
 
 	private Purchase pay(String money) {
@@ -36,7 +36,7 @@ public class PurchaseController extends InteractionController {
 
 	@Override
 	protected void toNextController() {
-		lotto.toEndController();
+		lotto.toAutomaticTicketingController();
 	}
 
 }

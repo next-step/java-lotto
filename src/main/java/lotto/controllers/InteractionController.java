@@ -2,7 +2,6 @@ package lotto.controllers;
 
 import lotto.Lotto;
 import lotto.views.Display;
-import lotto.views.Keyboard;
 
 public abstract class InteractionController extends SimpleController {
 
