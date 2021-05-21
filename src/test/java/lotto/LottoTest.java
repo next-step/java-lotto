@@ -25,7 +25,7 @@ public class LottoTest {
 
     @Test
     public void generateLottoNumber_validate() {
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
         testLottoNumber = lottoNumber.generateLottoNumber();
 
         assertThat(lottoNumberRange.contains(testLottoNumber.get(0))).isTrue();
@@ -37,8 +37,17 @@ public class LottoTest {
     }
 
     @Test
-    public void purchasingLottoCount_validate() {
-        int result = PurchaseLotto.purchasingLottoCount(14000);
-        assertThat(result).isEqualTo(14);
+    public void availablePurchaseLottoCount_validate() {
+        PurchaseLotto purchaseLotto = new PurchaseLotto();
+        int lottoCount = purchaseLotto.availablePurchaseLottoCount(14000);
+        assertThat(lottoCount).isEqualTo(14);
     }
+
+    @Test
+    public void purchasedLotto_count_validate() {
+        PurchaseLotto purchaseLotto = new PurchaseLotto();
+        purchaseLotto.purchaseLottos(14);
+        assertThat(purchaseLotto.getLottoNumberList().size()).isEqualTo(14);
+    }
+
 }
