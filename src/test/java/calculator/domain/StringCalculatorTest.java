@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static calculator.utils.UtilsString.isNullOrEmpty;
 import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
@@ -19,7 +20,7 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> calculator.calculate("3;4;5"))
                 .isInstanceOf(NumberFormatException.class);
         assertThatThrownBy(() -> calculator.calculate("//.\n3;4;5"))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> calculator.calculate("/.\n3;4;5"))
                 .isInstanceOf(NumberFormatException.class);
         assertThatThrownBy(() -> calculator.calculate("3,4;5"))
@@ -34,8 +35,8 @@ public class StringCalculatorTest {
 
     @Test
     void 문자열_0_또는_null_Test() {
-        assertThat(calculator.isNullOrEmpty("")).isTrue();
-        assertThat(calculator.isNullOrEmpty(null)).isTrue();
+        assertThat(isNullOrEmpty("")).isTrue();
+        assertThat(isNullOrEmpty(null)).isTrue();
     }
 
     @Test

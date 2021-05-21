@@ -3,10 +3,16 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static calculator.utils.UtilsString.isNullOrEmpty;
+
 public class Numbers {
     List<Number> numbers = new ArrayList<>();
 
     public Numbers(String[] numbers) {
+        if (numbers.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
         for (String number : numbers) {
             addToNumbers(new Number(number));
         }
