@@ -2,35 +2,96 @@ package lotto;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static lotto.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LottoReportTest {
+    List<Lotto> lottos = Lists.newArrayList(
+            번호_6개_일치,
+            번호_6개_일치,
+            번호_6개_일치,
+            번호_6개_일치,
+            번호_5개_일치,
+            번호_5개_일치,
+            번호_5개_일치,
+            번호_4개_일치,
+            번호_4개_일치,
+            번호_3개_일치,
+            번호_2개_일치,
+            번호_1개_일치,
+            번호_0개_일치
+    );
+
     @Test
     void 로또통계를_3부터_6개까지_우승번호와_일치하는_경우의_수를_알려준다() {
-        List<Lotto> lottos = Lists.newArrayList(
-                번호_6개_일치,
-                번호_6개_일치,
-                번호_6개_일치,
-                번호_6개_일치,
-                번호_5개_일치,
-                번호_5개_일치,
-                번호_5개_일치,
-                번호_4개_일치,
-                번호_4개_일치,
-                번호_3개_일치,
-                번호_2개_일치,
-                번호_1개_일치,
-                번호_0개_일치
-        );
         LottoReport report = new LottoReport(우승번호, lottos);
         assertThat(report.threeMatched()).isEqualTo(1);
         assertThat(report.fourMatched()).isEqualTo(2);
         assertThat(report.fiveMatched()).isEqualTo(3);
         assertThat(report.sixMatched()).isEqualTo(4);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provider_당첨통계는_수익률을_알려준다")
+    void 당첨통계는_수익률을_알려준다(List<Lotto> lottos, double 수익률) {
+        LottoReport report = new LottoReport(우승번호, lottos);
+        assertThat(report.yield()).isEqualTo(수익률);
+    }
+
+    static Stream<Arguments> provider_당첨통계는_수익률을_알려준다() {
+        return Stream.of(
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_3개_일치
+                ), 0.35),
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_3개_일치
+                ), 1),
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_4개_일치
+                ), 10),
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_5개_일치
+                ), 300),
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_6개_일치
+                ), 400000)
+        );
     }
 }
