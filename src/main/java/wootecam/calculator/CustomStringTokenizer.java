@@ -8,9 +8,11 @@ import java.util.regex.Pattern;
 public class CustomStringTokenizer implements StringTokenizer {
 	private static final String CUSTOM_PATTERN_REGEX = "\\/\\/(.)\\\\n(.*)";
 
+	private static final Pattern pattern = Pattern.compile(CUSTOM_PATTERN_REGEX);
+
 	@Override
 	public List<String> getNumbers(String input) {
-		Matcher matcher = Pattern.compile(CUSTOM_PATTERN_REGEX).matcher(input);
+		Matcher matcher = pattern.matcher(input);
 
 		if (!matcher.find()) {
 			throw new RuntimeException("입력 패턴을 확인하세요.");
