@@ -13,6 +13,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public int number() {
+        return number;
+    }
+
     private void validation(int number) {
         if (!isAvailableRange(number)) {
             throw new IllegalArgumentException(NOT_IN_RANGE);

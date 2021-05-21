@@ -1,5 +1,7 @@
 package step3.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,6 +31,15 @@ public final class LottoNumbers {
 
     public int size() {
         return lottoNumbers.size();
+    }
+
+    public List<Integer> numbers() {
+        List<Integer> result = new ArrayList<>();
+        for (LottoNumber number : lottoNumbers) {
+            result.add(number.number());
+        }
+
+        return result;
     }
 
 }
