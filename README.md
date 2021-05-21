@@ -3,7 +3,6 @@
 ## TODO
 * refac
     - [ ] UI에 String 메세지들 분리
-    - [ ] Rank enum 클래스 커스텀 values() 수정
 * feat
     - [ ] 수동 로또 UI 추가
 

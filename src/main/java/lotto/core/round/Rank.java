@@ -1,5 +1,8 @@
 package lotto.core.round;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.Predicate;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -52,22 +55,24 @@ public enum Rank {
         return isDuplicateMatch;
     }
 
-    public boolean ifWinning() {
-        return this.countOfMatch >= FIFTH.countOfMatch;
+    public boolean isWinning() {
+        return this.winningMoney > 0;
     }
 
-    //TODO
     public static Rank[] winningValues() {
-        Rank[] ranks = {FIFTH, FOURTH, SECOND, FIRST};
-
-        return ranks;
+        return values(Rank::isWinning);
     }
 
-    //TODO
     public static Rank[] duplicateMatchValues() {
-        Rank[] ranks = {SECOND, THIRD};
-
-        return ranks;
+        return values(Rank::isDuplicateMatch);
     }
 
+    private static Rank[] values(Predicate<Rank> predicate) {
+        Rank[] ranks = Rank.values();
+
+        return Arrays.stream(ranks)
+                .filter(predicate)
+                .sorted(Comparator.comparing(Rank::winningMoney))
+                .toArray(Rank[]::new);
+    }
 }

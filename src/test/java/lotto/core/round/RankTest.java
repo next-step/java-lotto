@@ -65,4 +65,20 @@ class RankTest {
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
+    @Test
+    @DisplayName("당청금이 존재하는 등급 확인")
+    public void winningValuesTest() {
+        Rank[] ranks = Rank.winningValues();
+
+        assertThat(ranks).containsExactly(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("로또 정답갯수가 동일한 등급 확인")
+    public void duplicateMatchValuesTest() {
+        Rank[] ranks = Rank.duplicateMatchValues();
+
+        assertThat(ranks).containsExactly(Rank.THIRD, Rank.SECOND);
+    }
+
 }
