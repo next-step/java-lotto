@@ -21,7 +21,7 @@ public class LottoTest {
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
         assertThat(resultPack.calculateProfitRatio(new LottoPurchaseBudget(3000)))
-                                            .isEqualTo(0.000001499962, within(0.0000001));
+                                            .isEqualTo(666683.3333, within(0.1));
     }
 
     @Test

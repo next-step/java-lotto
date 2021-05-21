@@ -33,7 +33,7 @@ public class LottoResultPack {
     }
 
     public double calculateProfitRatio(LottoPurchaseBudget purchaseBudget) {
-        return (double)purchaseBudget.budget() / sumOfProfit();
+        return (double)sumOfProfit() / purchaseBudget.budget();
     }
 
     private int sumOfProfit() {
