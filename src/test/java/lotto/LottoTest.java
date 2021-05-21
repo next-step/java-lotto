@@ -16,4 +16,11 @@ public class LottoTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
 			.withMessage("잘못된 번호 모음입니다.");
 	}
+
+	@Test
+	@DisplayName("정렬 테스트")
+	void sorted() {
+		Lotto lotto = new Lotto(Arrays.asList(4, 3, 2, 1, 6, 5));
+		assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+	}
 }
