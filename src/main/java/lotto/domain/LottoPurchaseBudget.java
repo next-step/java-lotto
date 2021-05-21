@@ -1,14 +1,19 @@
 package lotto.domain;
 
 public class LottoPurchaseBudget {
-
     private final int purchaseBudget;
 
+    private static final int LOTTO_PRICE = 1000;
+
     public LottoPurchaseBudget(int money) {
-        if (money < 1000 || money % 1000 != 0) {
+        if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException();
         }
         purchaseBudget = money;
+    }
+
+    public int countOfAvailableLotto() {
+        return purchaseBudget / LOTTO_PRICE;
     }
 
     @Override
