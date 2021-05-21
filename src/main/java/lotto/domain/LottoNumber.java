@@ -4,7 +4,7 @@ import lotto.utils.LottoGenerator;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public final class LottoNumber implements Comparable<LottoNumber> {
     public static final String LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE = "로또번호는 1-45 사이의 숫자만 가능합니다.";
     private final int number;
 
