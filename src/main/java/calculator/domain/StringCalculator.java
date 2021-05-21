@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private final String DEFAULT_DELIMITER = ":|,";
     private final String DEFAULT_REGEX_PATTERN = "//(.)\n(.*)";
-
-    private int delimiterSection = 1;
-    private int numbersSection = 2;
+    private final int DELIMITER_SECTION = 1;
+    private final int NUMBERS_SECTION = 2;
 
     public StringCalculator() { }
 
@@ -22,15 +21,12 @@ public class StringCalculator {
     }
 
     public Numbers makeNumbersUsing(String inputString) {
-        String delimiter = DEFAULT_DELIMITER;
-        String numbersString = inputString;
-
         Matcher m = Pattern.compile(DEFAULT_REGEX_PATTERN).matcher(inputString);
         if (m.find()) {
-            delimiter = m.group(delimiterSection);
-            numbersString = m.group(numbersSection);
+            new Numbers(m.group(NUMBERS_SECTION).split(m.group(DELIMITER_SECTION)));
         }
-        return new Numbers(numbersString.split(delimiter));
+
+        return new Numbers(inputString.split(DEFAULT_DELIMITER));
     }
 
     protected boolean isNullOrEmpty(String numberString) {
