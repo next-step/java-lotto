@@ -12,21 +12,18 @@ import lotto.Purchase;
 
 public class AutomaticTicketingControllerTest {
 
-	private static final String cash = "12345";
 	private static final int amount = 12;
+	Purchase purchase = new Purchase("12345");
 
-	Model model;
-	Lotto lotto;
+	Model model = new Model();
+	Lotto lotto = new Lotto(model);
 
 	AutomaticTicketingController automaticTicketingController;
 
 	@BeforeEach
 	void setUp() {
-		Purchase purchase = new Purchase(cash);
-		this.model = new Model();
-		this.model.savePurchase(purchase);
-		this.lotto = new Lotto(model);
-		this.automaticTicketingController = new AutomaticTicketingController(this.lotto);
+		lotto.storage().savePurchase(purchase);
+		automaticTicketingController = new AutomaticTicketingController(lotto);
 	}
 
 	@DisplayName("티켓 수 불러오기")

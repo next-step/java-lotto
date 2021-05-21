@@ -11,20 +11,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.Lotto;
 import lotto.Model;
+import lotto.Purchase;
 import lotto.exceptions.CashOutOfBoundsException;
 import lotto.exceptions.InvalidNumberException;
 
 public class PurchaseControllerTest {
 
-	Model model;
-	Lotto lotto;
+	Model model = new Model();
+	Lotto lotto = new Lotto(model);
+
 	PurchaseController purchaseController;
 
 	@BeforeEach
 	void setUp() {
-		this.model = new Model();
-		this.lotto = new Lotto(model);
-		this.purchaseController = new PurchaseController(this.lotto);
+		this.purchaseController = new PurchaseController(lotto);
 	}
 
 	@DisplayName("로또 구입 성공")
@@ -57,7 +57,11 @@ public class PurchaseControllerTest {
 	@DisplayName("다음 컨트롤러로 변경한다.")
 	@Test
 	void toNextController() {
+		Purchase purchase = new Purchase("12345");
+		lotto.storage().savePurchase(purchase);
+
 		purchaseController.toNextController();
+
 		assertThat(lotto.compareController(AutomaticTicketingController.class)).isTrue();
 	}
 

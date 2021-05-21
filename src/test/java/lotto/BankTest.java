@@ -13,25 +13,19 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class BankTest {
 
-	List<Ticket> tickets;
-	Ticket winningTicket;
-
-	@BeforeEach
-	void setUp() {
-		this.winningTicket = new Ticket("1,2,3,4,5,6");
-		this.tickets = Arrays.asList(
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,11"),
-			new Ticket("1,2,3,4,10,11")
-		);
-	}
+	List<Ticket> tickets = Arrays.asList(
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,11"),
+		new Ticket("1,2,3,4,10,11")
+	);
+	Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
 	@DisplayName("당첨된 티켓 수를 센다.")
 	@Test
 	void countScores() {
 		List<Integer> expected = Arrays.asList(0, 0, 0, 0, 1, 1, 2);
-		assertThat(Bank.countScores(this.tickets, this.winningTicket)).isEqualTo(expected);
+		assertThat(Bank.countScores(tickets, winningTicket)).isEqualTo(expected);
 	}
 
 	@DisplayName("총 당첨금을 계산한다.")

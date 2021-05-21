@@ -23,34 +23,27 @@ import lotto.exceptions.NumberOutOfBoundsException;
 
 public class WinningTicketControllerTest {
 
-	private static final String cash = "12345";
-	private static final int amount = 12;
+	Purchase purchase = new Purchase("12345");
+	List<Ticket> tickets = Arrays.asList(
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,11"),
+		new Ticket("1,2,3,4,10,11")
+	);
+	Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
-	List<Ticket> tickets;
-	Ticket winningTicket;
-
-	Model model;
-	Lotto lotto;
+	Model model = new Model();
+	Lotto lotto = new Lotto(model);
 
 	WinningTicketController winningTicketController;
 
 	@BeforeEach
 	void setUp() {
-		Purchase purchase = new Purchase(cash);
-		this.winningTicket = new Ticket("1,2,3,4,5,6");
-		this.tickets = Arrays.asList(
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,11"),
-			new Ticket("1,2,3,4,10,11")
-		);
+		lotto.storage().savePurchase(purchase);
+		lotto.storage().saveAutomatedTickets(tickets);
+		lotto.storage().saveWinningTicket(winningTicket);
 
-		this.model = new Model();
-		this.model.savePurchase(purchase);
-		this.model.saveAutomatedTickets(this.tickets);
-		this.model.saveWinningTicket(this.winningTicket);
-		this.lotto = new Lotto(model);
-		this.winningTicketController = new WinningTicketController(this.lotto);
+		winningTicketController = new WinningTicketController(lotto);
 	}
 
 	@DisplayName("당첨 번호 입력 성공")

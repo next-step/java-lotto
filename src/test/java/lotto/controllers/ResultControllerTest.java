@@ -16,52 +16,45 @@ import lotto.Ticket;
 
 public class ResultControllerTest {
 
-	private static final String cash = "12345";
-	private static final int amount = 12;
+	Purchase purchase = new Purchase("12345");
+	List<Ticket> tickets = Arrays.asList(
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,6"),
+		new Ticket("1,2,3,4,5,11"),
+		new Ticket("1,2,3,4,10,11")
+	);
+	Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
-	List<Ticket> tickets;
-	Ticket winningTicket;
-
-	Model model;
-	Lotto lotto;
+	Model model = new Model();
+	Lotto lotto = new Lotto(model);
 
 	ResultController resultController;
 
 	@BeforeEach
 	void setUp() {
-		Purchase purchase = new Purchase(cash);
-		this.winningTicket = new Ticket("1,2,3,4,5,6");
-		this.tickets = Arrays.asList(
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,6"),
-			new Ticket("1,2,3,4,5,11"),
-			new Ticket("1,2,3,4,10,11")
-		);
+		lotto.storage().savePurchase(purchase);
+		lotto.storage().saveAutomatedTickets(tickets);
+		lotto.storage().saveWinningTicket(winningTicket);
 
-		this.model = new Model();
-		this.model.savePurchase(purchase);
-		this.model.saveAutomatedTickets(this.tickets);
-		this.model.saveWinningTicket(this.winningTicket);
-		this.lotto = new Lotto(model);
-		this.resultController = new ResultController(this.lotto);
+		resultController = new ResultController(lotto);
 	}
 
 	@DisplayName("당첨 번호 불러오기")
 	@Test
 	void loadWinningTicket() {
-		assertThat(resultController.loadWinningTicket().toString()).isEqualTo(this.winningTicket.toString());
+		assertThat(resultController.loadWinningTicket().toString()).isEqualTo(winningTicket.toString());
 	}
 
 	@DisplayName("티켓 불러오기")
 	@Test
 	void loadTickets() {
-		assertThat(resultController.loadTickets().size()).isEqualTo(this.tickets.size());
+		assertThat(resultController.loadTickets().size()).isEqualTo(tickets.size());
 	}
 
 	@DisplayName("구입 금액 불러오기")
 	@Test
 	void loadPayment() {
-		assertThat(resultController.loadPayment()).isEqualTo(amount * 1000);
+		assertThat(resultController.loadPayment()).isEqualTo(12000);
 	}
 
 	@DisplayName("다음 컨트롤러로 변경한다.")
