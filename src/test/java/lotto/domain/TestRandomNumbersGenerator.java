@@ -1,30 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestRandomNumbersGenerator implements RandomNumbersGenerator {
 
-	private int number;
+	private final List<Integer> numbers;
 
-	public TestRandomNumbersGenerator() {
-		this.number = MIN;
+	public TestRandomNumbersGenerator(Integer[] numbers) {
+		this.numbers = Arrays.asList(numbers);
 	}
 
 	@Override
 	public List<Integer> generateNumbers() {
-		List<Integer> numbers = new ArrayList<>();
-		for (int i = 0; i < LottoNumbers.LOTTO_NUMBER_LENGTH; i++) {
-			numbers.add(getNextNumber());
-		}
-		return numbers;
-	}
-
-	private int getNextNumber() {
-		if (number > MAX) {
-			number = MIN;
-		}
-		return number++;
+		return this.numbers;
 	}
 
 }

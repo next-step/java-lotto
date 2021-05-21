@@ -10,18 +10,16 @@ import java.util.List;
 public class RandomNumbersGeneratorTest {
 
 	@Test
-	@DisplayName("랜덤하게 생성한 로또번호가 6개인지 테스트")
-	void testRandomNumbers() {
-		TestRandomNumbersGenerator generator = new TestRandomNumbersGenerator();
-		for (int i = 0; i < 8; i++) {
-			List<Integer> numbers = generator.generateNumbers();
-			Assertions.assertThat(numbers).hasSize(6);
-		}
+	@DisplayName("테스트용 랜덤번호 생성기 테스트 - 로또번호가 6개인지 테스트")
+	void generateTestRandomNumbers() {
+		TestRandomNumbersGenerator generator = new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6});
+		List<Integer> numbers = generator.generateNumbers();
+		Assertions.assertThat(numbers).hasSize(6);
 	}
 
 	@Test
-	@DisplayName("랜덤하게 생성한 로또번호가 6개인지 테스트")
-	void lottoRandomNumbers() {
+	@DisplayName("랜덤번호 생성기 테스트 - 로또번호가 6개인지 테스트")
+	void generateLottoRandomNumbers() {
 		LottoRandomNumbersGenerator generator = new LottoRandomNumbersGenerator();
 		List<Integer> numbers = generator.generateNumbers();
 		Assertions.assertThat(numbers).hasSize(6);
