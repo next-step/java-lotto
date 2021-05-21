@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     void 구매_로또_번호생성_Test() {
         Lotto lotto = new Lotto();
-        String[] nums = lotto.toString().substring(1, lotto.toString().length()-2).split(", ");
+        String[] nums = lotto.lottoNumberString().substring(1, lotto.toString().length()-2).split(", |,");
         for (int i = 0; i < nums.length; ++i) {
             assertThat(Integer.parseInt(nums[i])).isGreaterThanOrEqualTo(1);
             assertThat(Integer.parseInt(nums[i])).isLessThanOrEqualTo(45);

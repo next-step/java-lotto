@@ -5,7 +5,7 @@ import java.util.*;
 import static lotto.domain.LottoGameOptions.*;
 
 public class Lotto {
-    private List<Integer> numbers = new ArrayList<>();
+    private LottoNumbers numbers;
     private LottoResult result;
 
     public Lotto() {
@@ -14,21 +14,26 @@ public class Lotto {
 
     public Lotto(boolean auto) {
         if (auto) {
+            this.numbers = new LottoNumbers();
             generateNumbers();
         }
     }
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = new LottoNumbers(numbers);
+
+        if (this.numbers.sizeIsNotSameWith(LOTTO_NUMBER_COUNT)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void generateNumbers() {
-        Stack<Integer> lottoNumbers = makeWholeLottoNumbers(LOTTO_NUMBERS_FROM, LOTTO_NUMBERS_TO);
+        Stack<Integer> wholeLottoNumbers = makeWholeLottoNumbers(LOTTO_NUMBERS_FROM, LOTTO_NUMBERS_TO);
 
-        Collections.shuffle(lottoNumbers);
+        Collections.shuffle(wholeLottoNumbers);
 
-        while (numbers.size() != LOTTO_NUMBER_COUNT) {
-            numbers.add(lottoNumbers.pop());
+        while (numbers.sizeIsNotSameWith(LOTTO_NUMBER_COUNT)) {
+            numbers.add(wholeLottoNumbers.pop());
         }
     }
 
@@ -38,6 +43,10 @@ public class Lotto {
             numbers.push(number);
         }
         return numbers;
+    }
+
+    public String lottoNumberString() {
+        return numbers.formattedString();
     }
 
     @Override
