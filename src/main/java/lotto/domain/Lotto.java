@@ -22,18 +22,14 @@ public class Lotto {
     }
 
     public WinningType match(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        return WinningType.findType(countOfMatch(winningNumbers), isBonusMatch(winningNumbers, bonusNumber));
+        return WinningType.findType(countOfMatch(winningNumbers), isBonusMatch(bonusNumber));
     }
 
     private int countOfMatch(LottoNumbers winningNumbers) {
         return lottoNumbers.matchNumbers(winningNumbers);
     }
 
-    private boolean isBonusMatch(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        return countOfMatch(winningNumbers) == 5 && iscontainsBonus(bonusNumber);
-    }
-
-    public boolean iscontainsBonus(LottoNumber bonusNumber) {
+    private boolean isBonusMatch(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }
