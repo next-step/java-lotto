@@ -18,13 +18,13 @@ public class LottoGame {
     }
 
     private void start() {
-        LottoWallet lottoWallet = buyLotto();
+        LottoWallet lottoWallet = buyingLotto();
 
         lottery(lottoWallet.takeOutLottoTickets());
     }
 
-    private LottoWallet buyLotto() {
-        LottoWallet lottoWallet = buyLottoTickets();
+    private LottoWallet buyingLotto() {
+        LottoWallet lottoWallet = buyingLottoTickets();
         printView.showStatusBuyTicket(lottoWallet);
         return lottoWallet;
     }
@@ -47,8 +47,8 @@ public class LottoGame {
         return winnerNumbers;
     }
 
-    private LottoWallet buyLottoTickets() {
-        Money money = inputView.amountMoneyOfBuyTicket();
+    private LottoWallet buyingLottoTickets() {
+        Money money = inputView.inputMoneyForBuyTicket();
 
         LottoWallet lottoWallet = LottoWallet.create(money);
         lottoWallet.buyingLotto();

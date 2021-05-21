@@ -18,7 +18,7 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public Money amountMoneyOfBuyTicket() {
+    public Money inputMoneyForBuyTicket() {
         System.out.println(MESSAGE_QUESTION_HOW_MANY_BUY);
         String inputMoney = scanner.nextLine();
 
