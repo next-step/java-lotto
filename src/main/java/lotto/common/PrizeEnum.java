@@ -1,5 +1,7 @@
 package lotto.common;
 
+import java.util.Map;
+
 public enum PrizeEnum {
     FOURTH(3, 5000, "3개 일치 (5000원)- "),
     THIRD(4,50000, "4개 일치 (50000원)- "),
@@ -16,15 +18,11 @@ public enum PrizeEnum {
         this.message = message;
     }
 
-    public int answer() {
-        return answer;
+    public void print(Map<Integer, Integer> matchAnswer) {
+        System.out.println(message + matchAnswer.getOrDefault(answer, 0) + PrintMessage.ANSWER_UNIT.message());
     }
 
-    public void print(int count) {
-        System.out.println(message + count + PrintMessage.ANSWER_UNIT.message());
-    }
-
-    public int prize(int count) {
-        return prize * count;
+    public int prize(Map<Integer, Integer> matchAnswer) {
+        return prize * matchAnswer.getOrDefault(answer, 0);
     }
 }
