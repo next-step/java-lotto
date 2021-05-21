@@ -49,6 +49,19 @@ public class StatisticsTest {
 		assertThat(statistics.status(Prize.FOUR)).isEqualTo(2);
 		assertThat(statistics.status(Prize.THREE)).isEqualTo(1);
 	}
+	@Test
+	@DisplayName("수익률 계산")
+	void profitRate() {
+		statistics.addLotto(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(21, 22, 23, 24, 15, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
+		statistics.addLotto(new Lotto(Arrays.asList(1, 2, 3, 14, 15, 16)));
 
+		Profit profit = statistics.profit();
+		assertThat(profit.rate()).isEqualTo(0.71);
+	}
 }
 

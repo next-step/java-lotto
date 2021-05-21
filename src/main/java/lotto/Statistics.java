@@ -33,4 +33,18 @@ public class Statistics {
 	public int status(Prize prize) {
 		return statusMap.get(prize);
 	}
+
+	public Profit profit() {
+		int totalWinAmount = getTotalWinAmount();
+		int totalAmount = lottos.size() * Store.LOTTO_PRICE;
+		return new Profit(totalWinAmount, totalAmount);
+	}
+
+	private int getTotalWinAmount() {
+		int winAmount = 0;
+		for (Prize prize : Prize.values()) {
+			winAmount += prize.winAmount() * statusMap.get(prize);
+		}
+		return winAmount;
+	}
 }
