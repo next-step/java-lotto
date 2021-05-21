@@ -9,10 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MoneyTest {
 
+    @DisplayName("금액은 0보다 큰 정수를 입력해야 함")
+    @ValueSource(ints = {0, -100, -1000, -10000})
+    @ParameterizedTest
+    void positiveTest(int amount) {
+        Assertions.assertThatIllegalArgumentException()
+                  .isThrownBy(() -> new Money(amount));
+    }
+
     @DisplayName("금액은 1,000원 단위로 입력해야 함")
     @ValueSource(ints = {500, 1500, 2200, 12345})
     @ParameterizedTest
-    void moneyTest(int amount) {
+    void moneyUnitTest(int amount) {
         Assertions.assertThatIllegalArgumentException()
                   .isThrownBy(() -> new Money(amount));
     }
