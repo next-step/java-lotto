@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.utils.LottoNumberGenerator;
+import lotto.domain.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
