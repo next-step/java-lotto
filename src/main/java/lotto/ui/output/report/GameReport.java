@@ -81,8 +81,14 @@ public class GameReport {
     public void print(Output output) {
         output.println("당첨 통계");
         output.println("---------");
-        output.println(statisticsToString(x-> rankFormat(x), Rank.winningValues()));
+        output.println(statisticsToString(x-> rankFormat(x), ignoreThirdWinners()));
         output.println(yieldsToString(yields()));
+    }
+
+    private Rank[] ignoreThirdWinners() {
+        return Arrays.stream(Rank.winningValues())
+            .filter(x->x != Rank.THIRD)
+            .toArray(Rank[]::new);
     }
 
     private String statisticsToString(Function<Rank, String> function, Rank ...ranks) {
