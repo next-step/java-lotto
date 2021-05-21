@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,6 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("로또번호 (일급콜렉션) 테스트")
 public class LottoNumbersTest {
+
+	private LottoNumbers winLottoNumbers;
+
+	@BeforeEach
+	void setUp() {
+		winLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+	}
 
 	@Test
 	@DisplayName("생성된 로또번호가 6개인지 테스트")
@@ -37,15 +45,13 @@ public class LottoNumbersTest {
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	@DisplayName("로또번호 리스트에 당첨번호가 포함되어 있는지 테스트")
 	void contains(int number) {
-		LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-		Assertions.assertThat(lottoNumbers.contains(number)).isTrue();
+		Assertions.assertThat(winLottoNumbers.contains(number)).isTrue();
 	}
 
 	@Test
 	@DisplayName("일치하는 당첨번호 개수 테스트")
 	void matchCount() {
 		LottoNumbers myLottoNumbers = new LottoNumbers(1, 2, 3, 11, 12, 13);
-		LottoNumbers winLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
 
 		int matchCount = myLottoNumbers.getMatchCount(winLottoNumbers);
 		Assertions.assertThat(matchCount).isEqualTo(3);
