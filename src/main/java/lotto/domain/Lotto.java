@@ -10,6 +10,7 @@ import java.util.TreeSet;
  */
 public class Lotto {
     private static final String LOTTO_COUNT_NOT_MATCH = "로또 갯수가 일치하지 않습니다.";
+    private static final String DUPLICATED_BONUS_NUMBER = "당첨 번호와 보너스 번호가 중복되었습니다.";
     private static int MAX_LOTTO_COUNT = 6;
     private final Set<LottoNumber> lottoNumbers;
 
@@ -30,24 +31,34 @@ public class Lotto {
                 .count());
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     /**
-     * 로또 번호가 일치하는 갯수를 리턴한다.
+     * 주어진 로또와 우승 로또를 비교하여 상금을 리턴한다.
      *
-     * @param lotto 비교하고자는 로또
-     * @return 숫자가 일치하는 갯수
+     * @param winningLotto 당첨 로또
+     * @param bonusNumber  보너스 숫자
+     * @return 상금
      */
-    public int getLottoMatchCount(Lotto lotto) {
+    public Prize getPrizeMatch(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        int matchCount = winningLotto.getLottoMatchCount();
+        if (winningLotto.isMatch(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER);
+        }
+        boolean isBonusNumberMatch = this.isMatch(bonusNumber);
+        return Prize.of(matchCount, isBonusNumberMatch);
+    }
+
+    private int getLottoMatchCount() {
         return Math.toIntExact(lottoNumbers.stream()
-                .filter(lotto::isMatch)
+                .filter(this::isMatch)
                 .count());
     }
 
-    public boolean isMatch(LottoNumber lottoNumber) {
+    private boolean isMatch(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     @Override

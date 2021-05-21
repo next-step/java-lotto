@@ -38,20 +38,18 @@ class LottoTest {
     private Lotto lotto1;
     private Lotto lotto2;
 
+    private Lotto winningLotto;
+    private LottoNumber bonusNumber;
+    private LottoNumber duplicatedNumber;
+
     @BeforeEach
     void setUp() {
         lotto1 = new Lotto(lottoNumbers1);
         lotto2 = new Lotto(lottoNumbers2);
+        winningLotto = lotto1;
+        bonusNumber = new LottoNumber(7);
+        duplicatedNumber = new LottoNumber(1);
     }
-
-    @DisplayName("주어진 로또와 새로운 로또의 일치하는 갯수를 리턴한다.")
-    @Test
-    void lottoMatchCount() {
-        int lottoMatchCount = lotto1.getLottoMatchCount(lotto2);
-
-        assertThat(lottoMatchCount).isEqualTo(3);
-    }
-
 
     @Test
     void lottoAscendingOrder() {
@@ -102,5 +100,17 @@ class LottoTest {
                         .isThrownBy(() -> new Lotto(numbers));
             }
         }
+    }
+
+    @Test
+    void matchLottoNumber() {
+        assertThat(lotto1.getPrizeMatch(winningLotto, bonusNumber)).isSameAs(Prize.FIRST);
+    }
+
+    @DisplayName("당첨번호와 보너스 번호 중복시 예외를 던진다")
+    @Test
+    void bonusNumberDuplicated() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> lotto1.getPrizeMatch(winningLotto, duplicatedNumber));
     }
 }

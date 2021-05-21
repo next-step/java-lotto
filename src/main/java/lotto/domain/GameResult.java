@@ -1,15 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * 로또 결과를 처리한다.
  */
 public class GameResult {
-    private static final String DUPLICATED_BONUS_NUMBER = "당첨 번호와 보너스 번호가 중복되었습니다.";
     /**
      * 로또 결과.
      */
@@ -17,15 +14,15 @@ public class GameResult {
     /**
      * 구매한 로또.
      */
-    private List<Lotto> purchasedLottos;
+    private Lottos purchasedLottos;
 
     public GameResult() {
         initialize();
     }
 
-    public GameResult(List<Lotto> purchasedLottos) {
+    public GameResult(Lottos purchasedLottos) {
         initialize();
-        this.purchasedLottos = new ArrayList<>(purchasedLottos);
+        this.purchasedLottos = purchasedLottos;
     }
 
     private void initialize() {
@@ -71,9 +68,9 @@ public class GameResult {
      * 로또 결과를 리턴한다.
      */
     public GameResult getResult(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        final GameResult gameResult = new GameResult(this.purchasedLottos);
-        for (final Lotto lotto : purchasedLottos) {
-            gameResult.addWinResult(this.getPrizeMatch(lotto, winningLotto, bonusNumber));
+        final GameResult gameResult = new GameResult();
+        for (final Lotto lotto : purchasedLottos.getLottos()) {
+            gameResult.addWinResult(lotto.getPrizeMatch(winningLotto, bonusNumber));
         }
         return gameResult;
     }
@@ -82,20 +79,4 @@ public class GameResult {
         return result.get(prize) * prize.getAmount();
     }
 
-    /**
-     * 주어진 로또와 우승 로또를 비교하여 상금을 리턴한다.
-     *
-     * @param lotto        주어진 로또
-     * @param winningLotto 당첨 로또
-     * @param bonusNumber  보너스 숫자
-     * @return 상금
-     */
-    public Prize getPrizeMatch(final Lotto lotto, final Lotto winningLotto, final LottoNumber bonusNumber) {
-        int matchCount = winningLotto.getLottoMatchCount(lotto);
-        if (winningLotto.isMatch(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER);
-        }
-        boolean isBonusNumberMatch = lotto.isMatch(bonusNumber);
-        return Prize.of(matchCount, isBonusNumberMatch);
-    }
 }
