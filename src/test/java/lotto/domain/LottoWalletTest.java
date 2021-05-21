@@ -24,7 +24,7 @@ class LottoWalletTest {
 
     @DisplayName("1000원 미만의 금액은 로또를 구입할수 없다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, 500, 999})
+    @ValueSource(strings = {"0", "500", "999"})
     public void invalidAmountMoneyTest(String inputMoney) {
         Money money = Money.create(inputMoney);
 
