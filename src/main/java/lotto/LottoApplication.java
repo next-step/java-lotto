@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGameAutoGenerator;
-import lotto.domain.LottoGames;
-import lotto.domain.LottoSeller;
+import lotto.domain.*;
 import lotto.dto.PurchaseMoney;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -26,14 +23,12 @@ public class LottoApplication {
     }
 
     private void run() {
-        PurchaseMoney purchaseMoney = questionPurchaseMoney();
-        LottoGames lottoGames = lottoSeller.sell(purchaseMoney);
-        printPurchaseResult(lottoGames);
-    }
-
-    private PurchaseMoney questionPurchaseMoney() {
         PurchaseMoney purchaseMoney = lottoInputView.questionPurchaseMoney();
-        return purchaseMoney;
+        LottoGames lottoGames = lottoSeller.sell(purchaseMoney);
+
+        printPurchaseResult(lottoGames);
+
+        WinningLottoNumber winningLottoNumber = lottoInputView.questionLastPrizeNumber();
     }
 
     private void printPurchaseResult(LottoGames lottoGames) {
