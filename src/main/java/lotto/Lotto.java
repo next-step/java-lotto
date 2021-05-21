@@ -3,14 +3,16 @@ package lotto;
 import static java.util.Collections.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public final class Lotto {
 	public static final int NUMBERS_SIZE = 6;
 	private final List<LottoNo> lottoNumbers = new ArrayList<>();
 
-	public Lotto(List<Integer> numbers) {
+	protected Lotto(List<Integer> numbers) {
 		validateNumbers(numbers);
 		for (Integer number : numbers) {
 			LottoNo lottoNo = new LottoNo(number);
@@ -18,6 +20,15 @@ public final class Lotto {
 			lottoNumbers.add(lottoNo);
 		}
 		sort(lottoNumbers);
+
+	}
+
+	public static Lotto publish() {
+		Set<Integer> numbers = new HashSet<>();
+		while(numbers.size() < NUMBERS_SIZE) {
+			numbers.add(LottoNo.randomNumber());
+		}
+		return new Lotto(new ArrayList<>(numbers));
 	}
 
 	private void validateNumbers(List<Integer> numbers) {

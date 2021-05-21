@@ -15,6 +15,10 @@ public class LottoNo implements Comparable<LottoNo>{
 		this.number = number;
 	}
 
+	public static int randomNumber() {
+		return (int)(Math.random() * MAX) + MIN;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
