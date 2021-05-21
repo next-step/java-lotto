@@ -13,23 +13,21 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (input.matches(NUMBER_PATTERN)){
-            return Integer.parseInt(input);
-        }
+        String[] stringNumbers = stringSplit(input);
 
+        return stringSum(stringNumbers);
+    }
+
+    private static String[] stringSplit(String input) {
+        if (input.matches(NUMBER_PATTERN)){
+            return new String[]{input};
+        }
         Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
         if (m.find()){
             String customDelimiter = m.group(1);
-            String[] stringNumbers = m.group(2).split(customDelimiter);
-            return stringSum(stringNumbers);
+            return m.group(2).split(customDelimiter);
         }
-
-        if (input.contains(",") || input.contains(";")){
-            String[] stringNumbers = input.split(",|:");
-            return stringSum(stringNumbers);
-        }
-
-        throw new RuntimeException();
+        return input.split(",|:");
     }
 
     private static boolean isEmpty(String input) {
