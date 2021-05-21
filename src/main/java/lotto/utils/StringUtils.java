@@ -16,12 +16,10 @@ public class StringUtils {
     }
 
     public static int parseInteger(String s) {
-        int result;
         try {
-            result = Integer.parseInt(s);
+            return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_NUMBER_ERROR_MESSAGE, e);
         }
-        return result;
     }
 }
