@@ -18,8 +18,8 @@ public class LottoNumber {
 		}
 	}
 
-	public boolean matchNumber(int prizeNumber) {
-		return this.number == prizeNumber;
+	public boolean matchNumber(int winNumber) {
+		return this.number == winNumber;
 	}
 
 	@Override
