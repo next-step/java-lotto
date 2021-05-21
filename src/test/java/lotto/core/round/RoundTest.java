@@ -1,6 +1,7 @@
 package lotto.core.round;
 
 import lotto.core.SixBall;
+import lotto.core.exception.LottoRuleException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,6 +36,6 @@ class RoundTest {
     @DisplayName("잘못된 보너스볼")
     public void wrongBonusBallTest(int bonus) {
         assertThatThrownBy(() -> new Round(1, SixBall.get(1, 2, 3, 4, 5, 6), bonus))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(LottoRuleException.class);
     }
 }

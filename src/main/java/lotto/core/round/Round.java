@@ -3,6 +3,7 @@ package lotto.core.round;
 import lotto.core.Ball;
 import lotto.core.Machine;
 import lotto.core.SixBall;
+import lotto.core.exception.LottoRuleException;
 import java.util.stream.Stream;
 
 public class Round {
@@ -22,7 +23,7 @@ public class Round {
         this.bonusBall = Machine.draw(bonus);
 
         if (validation()) {
-            throw new IllegalArgumentException("보너스 볼이 당첨 번호에 포함되어 있습니다.");
+            throw new LottoRuleException("보너스 볼이 당첨 번호에 포함되어 있습니다.");
         }
     }
 

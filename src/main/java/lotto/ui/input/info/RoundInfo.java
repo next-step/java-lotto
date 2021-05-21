@@ -4,6 +4,7 @@ import lotto.core.SixBall;
 import lotto.core.round.Round;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
+import lotto.ui.input.exception.InputException;
 import lotto.util.StringUtils;
 
 public class RoundInfo implements Info<Round> {
@@ -26,30 +27,30 @@ public class RoundInfo implements Info<Round> {
         }
     }
 
-    private int[] fixs() throws Exception {
+    private int[] fixs() throws InputException {
         int[] fixs = fixArray();
 
         if (isWinningSixBallValidation(fixs.length)) {
-            throw new IllegalArgumentException(String.format("당첨 번호는 총 %d개를 입력해주셔야 합니다.", SixBall.LENGTH));
+            throw new InputException(String.format("당첨 번호는 총 %d개를 입력해주셔야 합니다.", SixBall.LENGTH));
         }
 
         return fixs;
     }
 
-    private int[] fixArray() {
+    private int[] fixArray() throws InputException{
         try {
             String text = (String) input.request("지난 주 당첨 번호를 입력해 주세요.");
             return StringUtils.csvToIntArray(text);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("시도 횟수는 숫자만 가능합니다.");
+            throw new InputException("시도 횟수는 숫자만 가능합니다.");
         }
     }
 
-    private int bonus() throws Exception {
+    private int bonus() throws InputException {
         try {
             return Integer.parseInt((String) input.request("보너스 볼을 입력해 주세요."));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 볼은 숫자만 가능합니다.");
+            throw new InputException("보너스 볼은 숫자만 가능합니다.");
         }
     }
 

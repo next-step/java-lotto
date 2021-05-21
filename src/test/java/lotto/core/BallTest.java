@@ -1,5 +1,6 @@
 package lotto.core;
 
+import lotto.core.exception.LottoRuleException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -28,6 +29,6 @@ class BallTest {
     @DisplayName("비정상번호 생성 확인")
     public void init2(int num) {
         assertThatThrownBy(() -> new Ball(num))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(LottoRuleException.class);
     }
 }

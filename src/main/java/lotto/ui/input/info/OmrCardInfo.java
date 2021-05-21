@@ -4,6 +4,7 @@ import lotto.core.SixBall;
 import lotto.core.omr.OmrCard;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
+import lotto.ui.input.exception.InputException;
 
 public class OmrCardInfo implements Info<OmrCard> {
     private GameInput input;
@@ -34,22 +35,22 @@ public class OmrCardInfo implements Info<OmrCard> {
         }
     }
 
-    private int money() throws Exception {
+    private int money() throws InputException {
         String textMoney = (String) input.request("구입금액을 입력해 주세요.");
         int money = parseIntMoney(textMoney);
 
         if (isValidateMinimumAmount(money)) {
-            throw new RuntimeException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
+            throw new InputException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
         }
 
         return money;
     }
 
-    private int parseIntMoney(String textMoney) {
+    private int parseIntMoney(String textMoney) throws InputException {
         try {
             return Integer.parseInt(textMoney);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("금액은 숫자만 가능합니다.");
+            throw new InputException("금액은 숫자만 가능합니다.");
         }
     }
 
