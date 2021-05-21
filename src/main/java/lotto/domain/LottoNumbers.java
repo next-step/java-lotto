@@ -52,6 +52,14 @@ public class LottoNumbers {
 		return this.lottoNumbers.size() == size;
 	}
 
+	public boolean contains(int number) {
+		return this.lottoNumbers.contains(new LottoNumber(number));
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
