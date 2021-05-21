@@ -6,6 +6,10 @@ public class Calculator {
     private static final String NUMBER_REGEX = "(-)?[0-9]+";
     private static final int ZERO = 0;
 
+    private Calculator() {
+
+    }
+
     public static int sum(String text) {
         if (isNullOrEmpty(text)) {
             return 0;
