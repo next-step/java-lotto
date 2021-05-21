@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -30,7 +30,7 @@ public class LottoNumbers {
   }
 
   private Set<LottoNumber> toSet(List<LottoNumber> lottoNumbers) {
-    Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
+    Set<LottoNumber> uniqueNumbers = new TreeSet<>(lottoNumbers);
     if(uniqueNumbers.size() != NUMBER_COUNT_PER_GAME) {
       throw new IllegalArgumentException(String.format(INVALID_NUMBER_COUNT_FORMAT, NUMBER_COUNT_PER_GAME));
     }

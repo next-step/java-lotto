@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final String OVER_NUMBER_RANGE = "로또 숫자의 범위를 초과했습니다.";
 
@@ -24,6 +24,11 @@ public class LottoNumber {
 
   private boolean isValidRange(int number) {
     return number >= LOTTO_MIN_NUM && number <= LOTTO_MAX_NUM;
+  }
+
+  @Override
+  public int compareTo(LottoNumber o) {
+    return Integer.compare(number, o.number);
   }
 
   @Override
