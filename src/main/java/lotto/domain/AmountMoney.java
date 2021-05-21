@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class AmountMoney {
 
+    private static final int LOTTO_TICKET_PRICE = 1000;
+
     private int money;
 
     private AmountMoney(int money) {
@@ -11,14 +13,14 @@ public class AmountMoney {
     }
 
     public static AmountMoney create(int inputAmountMoney) {
-        if (inputAmountMoney < 1000) {
+        if (inputAmountMoney < LOTTO_TICKET_PRICE) {
             throw new IllegalArgumentException("최소 구입금액은 1000원입니다.");
         }
         return new AmountMoney(inputAmountMoney);
     }
 
     public int couldBuyTicketAmount() {
-        return money / 1000;
+        return money / LOTTO_TICKET_PRICE;
     }
 
     @Override

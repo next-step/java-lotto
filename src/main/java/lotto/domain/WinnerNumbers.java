@@ -9,7 +9,7 @@ public class WinnerNumbers extends LottoTicket {
     }
 
     public static WinnerNumbers create(List<LottoNumber> winnerNumbers) {
-        if (winnerNumbers.size() != 6) {
+        if (winnerNumbers.size() != NORMAL_COUNT_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 당첨번호의 갯수는 6개여야합니다.");
         }
         return new WinnerNumbers(winnerNumbers);
