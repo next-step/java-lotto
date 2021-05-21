@@ -29,4 +29,11 @@ public enum Rank {
 		return NONE;
 	}
 
+	public int getMatchCount() {
+		return matchCount;
+	}
+
+	public int getWinningMoney() {
+		return winningMoney;
+	}
 }

@@ -49,6 +49,10 @@ public class LottoGame {
 		return this.lottos.size();
 	}
 
+	public List<LottoNumbers> getLottos() {
+		return lottos;
+	}
+
 	public LottoResult findWinningResult(LottoNumbers winLottoNumbers) {
 		HashMap<Rank, Integer> rankMap = initRankMap();
 
