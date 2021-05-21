@@ -15,7 +15,7 @@ public class WinnerNumbers extends LottoTicket {
         return new WinnerNumbers(winnerNumbers);
     }
 
-    public LottoRank matchCount(LottoTicket lottoTicket) {
+    public LottoRank checkLottoTicket(LottoTicket lottoTicket) {
         List<LottoNumber> lottoNumbers = lottoTicket.numbers();
 
         int matchCount = (int) this.numbers().stream()

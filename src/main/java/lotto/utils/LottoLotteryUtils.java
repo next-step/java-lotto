@@ -14,7 +14,7 @@ public class LottoLotteryUtils {
 
     public static WinnerStatistics lotteryThisWeek(List<LottoTicket> lottoTickets, WinnerNumbers winnerNumbers) {
         Map<LottoRank, Long> lotteryResylt = lottoTickets.stream()
-                .map(lottoTicket -> winnerNumbers.matchCount(lottoTicket))
+                .map(lottoTicket -> winnerNumbers.checkLottoTicket(lottoTicket))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return WinnerStatistics.create(lotteryResylt);
     }

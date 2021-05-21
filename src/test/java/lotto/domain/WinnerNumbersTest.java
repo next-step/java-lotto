@@ -51,7 +51,7 @@ class WinnerNumbersTest {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
 
-        LottoRank lottoRank = winnerNumbers.matchCount(lottoTicket);
+        LottoRank lottoRank = winnerNumbers.checkLottoTicket(lottoTicket);
 
         assertThat(lottoRank).isEqualTo(LottoRank.valueOf(rankName));
     }
