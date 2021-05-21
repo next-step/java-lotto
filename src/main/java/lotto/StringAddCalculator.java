@@ -21,16 +21,14 @@ public final class StringAddCalculator {
 		1. 구분자
 		2. 숫자 목록
 	 */
-	private static final String PATTERN = "^(?://([^\\d\\n\\r])\\\\n)*(\\d+(?:(?:(?:\\1)|(?:[,:]))(?:\\d+))*)$";
-	private static final Pattern PRECOMPILED_PATTERN = Pattern.compile(PATTERN);
+	private static final Pattern PRECOMPILED_PATTERN = Pattern.compile(
+		"^(?://([^\\d\\n\\r])\\\\n)*(\\d+(?:(?:(?:\\1)|(?:[,:]))(?:\\d+))*)$");
 	private static final int DELIMITER_POSITION = 1;
 	private static final int NUMBERS_POSITION = 2;
 
 	private static final List<String> DELIMITERS = Arrays.asList(",", ":");
 	private static final String OR = "|";
 	private static final String ESCAPED = "\\%s";
-
-	private static final int ZERO = 0;
 
 	private static final String INVALID_PATTERN_MESSAGE = "형식에 맞게 입력해주세요.\n  예) 1,2:3 혹은 //;\\n1,2:3;4";
 
@@ -39,7 +37,7 @@ public final class StringAddCalculator {
 
 	public static int compute(String text) {
 		if (isEmpty(text)) {
-			return ZERO;
+			return 0;
 		}
 		return sum(captureNumbers(text));
 	}
@@ -49,7 +47,7 @@ public final class StringAddCalculator {
 	}
 
 	public static int sum(List<String> numbers) {
-		int result = ZERO;
+		int result = 0;
 		for (String number : numbers) {
 			result += Integer.parseInt(number);
 		}
