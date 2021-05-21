@@ -16,9 +16,9 @@ public class WinnerNumbers extends LottoTicket {
     }
 
     public LottoRank checkLottoTicket(LottoTicket lottoTicket) {
-        List<LottoNumber> lottoNumbers = lottoTicket.numbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getNumbers();
 
-        int matchCount = (int) this.numbers().stream()
+        int matchCount = (int) this.getNumbers().stream()
                 .filter(ticketNumber -> lottoNumbers
                         .contains(ticketNumber))
                 .count();

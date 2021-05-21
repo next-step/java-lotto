@@ -20,7 +20,7 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public List<LottoNumber> numbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 }

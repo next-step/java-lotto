@@ -30,7 +30,7 @@ public class PrintView {
     private void printLottoTicket(LottoTicket lottoTicket) {
         StringJoiner lottoNumberJoiner = new StringJoiner(LOTTO_TICKET_DELIMITER, LOTTO_TICKET_PREFIX, LOTTO_TICKET_SUFFIX);
 
-        for (LottoNumber lottoNumber : lottoTicket.numbers()) {
+        for (LottoNumber lottoNumber : lottoTicket.getNumbers()) {
             int number = lottoNumber.value();
             lottoNumberJoiner.add(String.valueOf(number));
         }

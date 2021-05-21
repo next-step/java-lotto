@@ -19,7 +19,7 @@ class LottoTicketTest {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
 
-        assertThat(lottoTicket.numbers()).hasSize(6);
+        assertThat(lottoTicket.getNumbers()).hasSize(6);
     }
 
     @DisplayName("로도 번호가 6개가 아닐때 예외")
