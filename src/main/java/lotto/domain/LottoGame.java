@@ -9,4 +9,5 @@ public class LottoGame {
         }
         return lottos;
     }
+
 }

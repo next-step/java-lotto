@@ -30,9 +30,9 @@ public class LottoNumbers {
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < lottoNumbers.size(); ++i) {
-            sb.append(lottoNumbers.get(i) + ",");
+            sb.append(lottoNumbers.get(i) + ", ");
         }
-        sb.replace(sb.length()-1, sb.length()-1, "]");
+        sb.replace(sb.length()-2, sb.length()-1, "]");
 
         return sb.toString();
     }

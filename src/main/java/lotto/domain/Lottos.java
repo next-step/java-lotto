@@ -1,14 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 import static lotto.domain.LottoGameOptions.*;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto> {
     private List<Lotto> lottos = new ArrayList<>();
+
+    public Lottos() {
+        this(0);
+    }
+
+    public Lottos(int count) {
+        while (count-- > 0) {
+            buy();
+        }
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
 
     public int count() {
         return lottos.size();
@@ -36,5 +47,27 @@ public class Lottos {
             numbers.push(number);
         }
         return numbers;
+    }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return new Iterator<Lotto>() {
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < lottos.size();
+            }
+
+            @Override
+            public Lotto next() {
+                return lottos.get(index++);
+            }
+        };
     }
 }

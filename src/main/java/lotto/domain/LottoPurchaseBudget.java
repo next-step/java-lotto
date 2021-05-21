@@ -12,6 +12,10 @@ public class LottoPurchaseBudget {
         purchaseBudget = money;
     }
 
+    public int budget() {
+        return purchaseBudget;
+    }
+
     public int countOfAvailableLotto() {
         return purchaseBudget / LOTTO_PRICE;
     }
