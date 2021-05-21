@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.LottoFixture.*;
+import static lotto.domain.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

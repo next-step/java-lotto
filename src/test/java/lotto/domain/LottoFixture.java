@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.Lotto;
 import org.assertj.core.util.Lists;
-
-import java.util.List;
 
 public class LottoFixture {
     public static final Lotto 우승번호 = new Lotto(Lists.newArrayList(1,2,3,4,5,6));
