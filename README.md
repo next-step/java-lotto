@@ -8,4 +8,6 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 ---
-[1단계 - 학습 테스트 실습](./markdown/step01.md)
+1단계 - 학습 테스트 실습 : [[Markdown 보기]](./markdown/step01.md)
+
+2단계 - 문자열 덧셈 계산기 : [[Markdown 보기]](./markdown/step02.md)
