@@ -13,15 +13,11 @@ public class LottoResult {
 		this.statMap = statMap;
 	}
 
-	public int getTotalPurchases() {
-		return totalPurchases;
-	}
-
 	public HashMap<Rank, Integer> getStatMap() {
 		return statMap;
 	}
 
-	public float findPercentageOfRevenue() {
+	public double calculateProfitRate() {
 		long sumWinAmount = 0;
 		Iterator<Rank> rankIterator = statMap.keySet().iterator();
 		while (rankIterator.hasNext()) {
@@ -31,6 +27,6 @@ public class LottoResult {
 		if (sumWinAmount == 0) {
 			return 0;
 		}
-		return sumWinAmount / this.totalPurchases;
+		return (double) sumWinAmount / this.totalPurchases;
 	}
 }

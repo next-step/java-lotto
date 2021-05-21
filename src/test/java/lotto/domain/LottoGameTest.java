@@ -38,7 +38,7 @@ public class LottoGameTest {
 		LottoGame lottoGame = new LottoGame(1000, new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6}));
 		LottoResult lottoResult = lottoGame.findWinningResult(new LottoNumbers(1, 2, 3, 43, 44, 45));
 		assertThat(lottoResult.getStatMap().get(Rank.FOURTH)).isEqualTo(1);
-		assertThat(lottoResult.findPercentageOfRevenue()).isEqualTo(5.0f);
+		assertThat(lottoResult.calculateProfitRate()).isEqualTo(5.0f);
 	}
 
 }
