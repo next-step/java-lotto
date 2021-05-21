@@ -13,7 +13,9 @@ public final class Lotto {
 	public Lotto(List<Integer> numbers) {
 		validateNumbers(numbers);
 		for (Integer number : numbers) {
-			lottoNumbers.add(new LottoNo(number));
+			LottoNo lottoNo = new LottoNo(number);
+			duplicatedNumber(lottoNo);
+			lottoNumbers.add(lottoNo);
 		}
 		sort(lottoNumbers);
 	}
@@ -21,6 +23,12 @@ public final class Lotto {
 	private void validateNumbers(List<Integer> numbers) {
 		if (Objects.isNull(numbers) || numbers.size() != NUMBERS_SIZE) {
 			throw new IllegalArgumentException("잘못된 번호 모음입니다.");
+		}
+	}
+
+	private void duplicatedNumber(LottoNo lottoNo) {
+		if (lottoNumbers.contains(lottoNo)) {
+			throw new IllegalArgumentException(String.format("중복된 로또 번호가 존재합니다 : %d", lottoNo.number()));
 		}
 	}
 
