@@ -18,6 +18,10 @@ public class LottoNumber {
     this.number = number;
   }
 
+  public int number() {
+    return number;
+  }
+
   private boolean isValidRange(int number) {
     return number >= LOTTO_MIN_NUM && number <= LOTTO_MAX_NUM;
   }

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -14,6 +15,18 @@ public class LottoNumbers {
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
     this.numbers = toSet(lottoNumbers);
+  }
+
+  public List<Integer> numbers() {
+    return numbers.stream()
+            .map(LottoNumber::number)
+            .collect(Collectors.toList());
+  }
+
+  public int match(LottoNumbers gameNumbers) {
+    return (int) numbers.stream()
+        .filter(gameNumbers.numbers::contains)
+        .count();
   }
 
   private Set<LottoNumber> toSet(List<LottoNumber> lottoNumbers) {
@@ -35,11 +48,5 @@ public class LottoNumbers {
   @Override
   public int hashCode() {
     return Objects.hash(numbers);
-  }
-
-  public int match(LottoNumbers gameNumbers) {
-    return (int) numbers.stream()
-                        .filter(gameNumbers.numbers::contains)
-                        .count();
   }
 }
