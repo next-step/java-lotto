@@ -3,31 +3,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-	public static int splitAndSum(String inputText) {
-		if (inputText == null || inputText.isEmpty()) {
-			return 0;
-		}
+    private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
 
-		return Arrays.stream(getStringTokens(inputText))
-				.map(StringAddCalculator::parsePositiveInt)
-				.reduce(0, Integer::sum);
-	}
+    private static final Integer FIRST_MATCH = 1;
+    private static final Integer SECOND_MATCH = 2;
 
-	private static String[] getStringTokens(String text) {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			return m.group(2).split(customDelimiter);
-		}
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
-		return text.split("[,:]");
-	}
+    public static int splitAndSum(String inputText) {
+        if (inputText == null || inputText.isEmpty()) {
+            return 0;
+        }
 
-	private static int parsePositiveInt(String text) {
-		int parsedInt = Integer.parseInt(text);
-		if (parsedInt < 0) {
-			throw new RuntimeException("양수만 입력 가능합니다");
-		}
-		return parsedInt;
-	}
+        return Arrays.stream(getStringTokens(inputText))
+                .map(StringAddCalculator::parsePositiveInt)
+                .reduce(0, Integer::sum);
+    }
+
+    private static String[] getStringTokens(String text) {
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(FIRST_MATCH);
+            return matcher.group(SECOND_MATCH).split(customDelimiter);
+        }
+
+        return text.split(DEFAULT_DELIMITER_REGEX);
+    }
+
+    private static int parsePositiveInt(String text) {
+        int parsedInt = Integer.parseInt(text);
+        if (parsedInt < 0) {
+            throw new AllowedOnlyPositiveNumberException();
+        }
+        return parsedInt;
+    }
 }
