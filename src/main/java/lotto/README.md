@@ -57,3 +57,7 @@
 * LottoGame
   * LottoNumbers를 멤버변수로 갖는 하나의 로또 게임을 나타내는 클래스
   * 전달 받은 LottoGame(당첨 게임)과 비교해서 당첨 결과인 LottoRanking을 반환할 수 있다.
+  
+* TotalRankings
+  * 로또 게임들의 당첨 결과인 여러개의 LottoRanking를 갖는 일급 컬렉션
+  * LottoRanking List를 받으면 LottoRanking 별로 그룹핑해서 당첨 갯수를 담고 있는다.
