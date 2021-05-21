@@ -22,8 +22,8 @@ public class StringAdder {
     if (isSingleLengthString(trimmedInput)) {
       return fromString(trimmedInput).getValue();
     }
-    return selectOperator(trimmedInput).calculate(trimmedInput)
-                                        .getValue();
+    return selectOperator(trimmedInput).add(trimmedInput)
+                .getValue();
   }
 
   private static boolean isNullOrEmpty(String input) {

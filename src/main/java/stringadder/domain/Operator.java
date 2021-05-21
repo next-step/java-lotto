@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 import static stringadder.domain.Number.fromString;
 
-public enum Operator {
+public enum Operator implements Adder {
   CUSTOM_DELIMITER(Operator::isMatchingCustomDelimiterFormat,
-                    Operator::addCustomDelimiterString),
+                    Operator::transformToNumbersCustomDelimiterString),
   DEFAULT_DELIMITER(Operator::isMatchingDefaultDelimiterFormat,
-                    Operator::addDefaultDelimiterString);
+                    Operator::transformToNumbersDefaultDelimiterString);
 
   private static final String INVALID_FORMAT_INPUT = "잘못 된 형태의 입력입니다.";
   private static final String INVALID_CUSTOM_DELIMITER_STRING_FORMAT = "커스텀 구분자 형태의 문자열이 아닙니다.";
@@ -28,11 +28,11 @@ public enum Operator {
   private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile("[,:]");
 
   private final Predicate<String> matchSelector;
-  private final Function<String, Number> calculator;
+  private final Function<String, List<Number>> numberSeparator;
 
-  Operator(Predicate<String> matchSelector, Function<String, Number> calculator) {
+  Operator(Predicate<String> matchSelector, Function<String, List<Number>> numberSeparator) {
     this.matchSelector = matchSelector;
-    this.calculator = calculator;
+    this.numberSeparator = numberSeparator;
   }
 
   public static Operator selectOperator(String input) {
@@ -43,22 +43,18 @@ public enum Operator {
         .orElseThrow(() -> new IllegalArgumentException(INVALID_FORMAT_INPUT));
   }
 
-  public Number calculate(String input) {
-    return this.calculator.apply(input);
-  }
-
   private static boolean isMatchingCustomDelimiterFormat(String input) {
     return VALID_CUSTOM_DELIMITER_PATTERN
         .matcher(input)
         .matches();
   }
 
-  private static Number addCustomDelimiterString(String input) {
+  private static List<Number> transformToNumbersCustomDelimiterString(String input) {
     if (!isValidInputFormatForCustomDelimiter(input)) {
       throw new IllegalArgumentException(INVALID_CUSTOM_DELIMITER_STRING_FORMAT);
     }
     String necessaryPart = stripCustomDelimiterPrefix(input);
-    return sum(toNumberCustomDelimiterNecessaryPart(necessaryPart));
+    return toNumberCustomDelimiterNecessaryPart(necessaryPart);
   }
 
   private static boolean isValidInputFormatForCustomDelimiter(String input) {
@@ -86,11 +82,11 @@ public enum Operator {
         .matches();
   }
 
-  private static Number addDefaultDelimiterString(String input) {
+  private static List<Number> transformToNumbersDefaultDelimiterString(String input) {
     if (!isValidInputFormatForDefaultDelimiter(input)) {
       throw new IllegalArgumentException(INVALID_DEFAULT_DELIMITER_STRING_FORMAT);
     }
-    return sum(toNumberDefaultDelimiterNecessaryPart(input));
+    return toNumberDefaultDelimiterNecessaryPart(input);
   }
 
   private static boolean isValidInputFormatForDefaultDelimiter(String input) {
@@ -105,8 +101,10 @@ public enum Operator {
                 .collect(Collectors.toList());
   }
 
-  private static Number sum(List<Number> toSumNumbers) {
-    return toSumNumbers.stream()
-        .reduce(Number.ZERO_NUMBER, Number::sum);
+  @Override
+  public Number add(String input) {
+    return numberSeparator.apply(input)
+            .stream()
+            .reduce(Number.ZERO_NUMBER, Number::sum);
   }
 }
