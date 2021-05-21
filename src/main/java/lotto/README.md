@@ -74,3 +74,11 @@
   
 * PrizeInfo
   * 일치한 번호 수, 당첨금액, 구매한 로또 중 당첨된 로또 수를 OutputView에 전달하는 DTO 클래스 
+  
+* OrderedInfo
+  * 주문한 로또의 번호를 노출시키기 위해 로또 번호를 전달하는 DTO 클래스
+  * 출력 포맷에 맞춰 toString 오버라이드
+
+* OrderedInfos
+  * 주문한 로또들의 갯수와 로또 번호를 노출시키기 위한 DTO 클래스 OrderedInfo의 일급컬렉션이다.
+  * 출력 포맷에 맞춰 toString 오버라이드
