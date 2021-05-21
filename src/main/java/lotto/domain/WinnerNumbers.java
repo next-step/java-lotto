@@ -16,9 +16,11 @@ public class WinnerNumbers extends LottoTicket {
     }
 
     public LottoRank matchCount(LottoTicket lottoTicket) {
-        return LottoRank.of((int) this.numbers().stream()
-                .filter(ticketNumber -> lottoTicket.numbers()
-                        .contains(ticketNumber))
-                .count());
+        int matchCount = (int) this.numbers().stream()
+                        .filter(ticketNumber -> lottoTicket.numbers()
+                            .contains(ticketNumber))
+                        .count();
+
+        return LottoRank.of(matchCount);
     }
 }
