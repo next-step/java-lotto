@@ -8,7 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import javax.print.attribute.HashAttributeSet;
+import java.util.*;
 
 public class ShopTest {
     Shop shop;
@@ -61,5 +62,26 @@ public class ShopTest {
         List<Lotto> lottoBundle = shop.selectAuto(amount);
         //then
         assertThat(lottoBundle.size()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("번호가 맞는지")
+    void testAnswer() {
+        //given
+        List<Lotto> lottoBundle = new ArrayList<>();
+        Set<Integer> answer = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Lotto lotto = new Lotto();
+        lotto.addNumber(1);
+        lotto.addNumber(2);
+        lotto.addNumber(3);
+        lotto.addNumber(10);
+        lotto.addNumber(11);
+        lotto.addNumber(12);
+        lottoBundle.add(lotto);
+        //when
+        Map<Integer, Integer> match = shop.matchAnswer(lottoBundle, answer);
+        //then
+        assertThat(match.get(3)).isEqualTo(1);
     }
 }

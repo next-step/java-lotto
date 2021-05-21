@@ -17,6 +17,10 @@ public class Lotto {
         return numbers.size() >= MAX_COUNT;
     }
 
+    public Set<Integer> numbers() {
+        return numbers;
+    }
+
     private boolean isContain(int number) {
         return numbers.contains(number);
     }

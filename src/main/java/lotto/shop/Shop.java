@@ -1,10 +1,13 @@
 package lotto.shop;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import lotto.common.ErrorMessage;
 import lotto.lotto.Lotto;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;
@@ -20,6 +23,17 @@ public class Shop {
             lottoBundle.add(createAutoLotto());
         }
         return lottoBundle;
+    }
+
+    public Map<Integer, Integer> matchAnswer(List<Lotto> lottoBundle, Set<Integer> answer) {
+        Map<Integer, Integer> match = new HashMap<>();
+        lottoBundle.forEach(lotto -> {
+            lotto.numbers().retainAll(answer);
+            int size = lotto.numbers().size();
+            int count = match.getOrDefault(size, 0);
+            match.put(size, ++count);
+        });
+        return match;
     }
 
     private void checkMoney(Money money) {
