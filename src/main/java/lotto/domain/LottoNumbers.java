@@ -7,7 +7,7 @@ public class LottoNumbers {
     List<Integer> lottoNumbers;
 
     public LottoNumbers() {
-        this(new ArrayList<Integer>());
+        this(new ArrayList<>());
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
