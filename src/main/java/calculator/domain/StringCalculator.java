@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +15,7 @@ public class StringCalculator {
     public StringCalculator() { }
 
     public int calculate(String inputString) {
-        if (isNullOrZero(inputString)) {
+        if (isNullOrEmpty(inputString)) {
             return 0;
         }
 
@@ -26,8 +26,8 @@ public class StringCalculator {
         return numbers.sum();
     }
 
-    protected boolean isNullOrZero(String numberString) {
-        return (numberString == null || numberString.equals("0"));
+    protected boolean isNullOrEmpty(String numberString) {
+        return (numberString == null || numberString.equals(""));
     }
 
     private void splitDelimiterAndNumbers(String inputString) {

@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.domain.StringCalculator;
+
 import java.util.Scanner;
 
 public class MainCalculator {

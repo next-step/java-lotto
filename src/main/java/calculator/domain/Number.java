@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Number {
 
@@ -17,5 +17,9 @@ public class Number {
 
     public int accumulate(int sum) {
         return number + sum;
+    }
+
+    public String toString() {
+        return Integer.toString(number);
     }
 }

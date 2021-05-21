@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +16,8 @@ public class StringCalculatorTest {
 
     @Test
     void 문자열_0_또는_null_Test() {
-        assertThat(calculator.isNullOrZero("0")).isTrue();
-        assertThat(calculator.isNullOrZero(null)).isTrue();
+        assertThat(calculator.isNullOrEmpty("")).isTrue();
+        assertThat(calculator.isNullOrEmpty(null)).isTrue();
     }
 
     @Test
