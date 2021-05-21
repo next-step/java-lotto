@@ -1,15 +1,15 @@
 package calculator;
 
 import calculator.domain.StringCalculator;
+import calculator.ui.InputHandler;
 
 import java.util.Scanner;
 
 public class MainCalculator {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
         StringCalculator stringCalculator = new StringCalculator();
 
-        System.out.println(stringCalculator.calculate(scanner.next()));
+        String inputString = InputHandler.INSTANCE.readLine();
+        System.out.println(stringCalculator.calculate(inputString));
     }
 }
