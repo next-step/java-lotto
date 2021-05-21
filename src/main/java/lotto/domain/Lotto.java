@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Set;
 
 public class Lotto {
-    public static final int MININUM_NUMBER = 1;
+    public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
     public static final long PRICE = 1_000L;
 
@@ -21,11 +21,15 @@ public class Lotto {
         return lottoNumbers.getValue();
     }
 
-    private int countOfMatch(Lotto winningLotto) {
-        return lottoNumbers.matchNumbers(winningLotto.lottoNumbers);
+    public WinningType match(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return WinningType.findType(countOfMatch(winningNumbers), isBonusMatch(bonusNumber));
     }
 
-    public WinningType match(Lotto winningLotto) {
-        return WinningType.findType(this.countOfMatch(winningLotto));
+    private int countOfMatch(LottoNumbers winningNumbers) {
+        return lottoNumbers.matchNumbers(winningNumbers);
+    }
+
+    private boolean isBonusMatch(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }

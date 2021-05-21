@@ -15,14 +15,14 @@ class LottosTest {
         Lotto lotto1 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7));
         Lotto lotto3 = new Lotto(new LottoNumbers(1, 2, 3, 4, 6, 7));
-        Lotto winningLotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.from(7));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        WinningResult winningResult = lottos.matches(winningLotto);
+        WinningResults winningResults = lottos.matches(winningLotto);
 
-        assertThat(winningResult.getResults())
+        assertThat(winningResults.getResults())
                 .containsExactly(WinningType.FIRST, WinningType.SECOND, WinningType.SECOND);
-        assertThat(winningResult.count(WinningType.SECOND)).isEqualTo(2);
+        assertThat(winningResults.count(WinningType.SECOND)).isEqualTo(2);
     }
 }

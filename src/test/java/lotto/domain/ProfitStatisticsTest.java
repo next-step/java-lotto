@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,10 +13,10 @@ class ProfitStatisticsTest {
     @DisplayName("수익률 계산")
     void calculateProfit() {
         long inputPrice = 14000L;
-        WinningResult winningResult = new WinningResult(Arrays.asList(WinningType.FOURTH));
+        WinningResults winningResults = new WinningResults(Collections.singletonList(WinningType.FIFTH));
         Money inputMoney = Money.from(inputPrice);
 
-        ProfitStatistics profitStatistics = new ProfitStatistics(winningResult, inputMoney);
+        ProfitStatistics profitStatistics = new ProfitStatistics(winningResults, inputMoney);
 
         assertThat(profitStatistics.calculateProfitRate()).isEqualTo(0.35);
     }
