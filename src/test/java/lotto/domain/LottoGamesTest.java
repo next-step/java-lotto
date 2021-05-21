@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.OrderedInfos;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,9 +37,14 @@ class LottoGamesTest {
 
   }
 
+  @DisplayName("도메인 객체를 노출시키지 않고 값만 노출 시키는 DTO 객체를 반환한다.")
+  @Test
+  void peekGameInfosTest() {
+    List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
+    assertThat(new LottoGames(given).peekGameInfos()).isEqualTo(new OrderedInfos(given));
+  }
+
   private static Stream<Arguments> provideMatchRankingsSource() {
-
-
     return Stream.of(
         Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"))),
                     new TotalRankings(Lists.newArrayList(LottoRanking.FIRST))
@@ -50,6 +56,5 @@ class LottoGamesTest {
             new TotalRankings(Lists.newArrayList(LottoRanking.NONE, LottoRanking.FOURTH))
         )
     );
-
   }
 }

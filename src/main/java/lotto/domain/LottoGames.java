@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.OrderedInfos;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,6 +19,10 @@ public class LottoGames {
         .map(game -> game.checkWinning(winningGame))
         .collect(Collectors.toList());
     return new TotalRankings(matchResult);
+  }
+
+  public OrderedInfos peekGameInfos() {
+    return new OrderedInfos(games);
   }
 
   @Override
