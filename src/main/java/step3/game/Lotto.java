@@ -6,6 +6,8 @@ import java.util.List;
 
 import step3.model.LottoNumber;
 import step3.model.LottoNumbers;
+import step3.model.Price;
+import step3.model.TotalLotto;
 
 public class Lotto {
 
@@ -33,4 +35,12 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public TotalLotto pickLottoWithPrice(Price price) {
+        TotalLotto totalLotto = new TotalLotto();
+        int totalCount = price.getBuyCount();
+        for (int index = 0; index < totalCount; index++) {
+            totalLotto.addLottoOne(pickLottoOne());
+        }
+        return totalLotto;
+    }
 }
