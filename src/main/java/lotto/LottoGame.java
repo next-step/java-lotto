@@ -48,9 +48,9 @@ public class LottoGame {
     }
 
     private LottoWallet buyLottoTickets() {
-        AmountMoney amountMoney = inputView.amountMoneyOfBuyTicket();
+        Money money = inputView.amountMoneyOfBuyTicket();
 
-        LottoWallet lottoWallet = new LottoWallet(amountMoney.couldBuyTicketAmount());
+        LottoWallet lottoWallet = LottoWallet.create(money);
         lottoWallet.buyLotto();
         return lottoWallet;
     }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.AmountMoney;
+import lotto.domain.Money;
 import utils.StringUtils;
 
 import java.util.Arrays;
@@ -18,11 +18,11 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public AmountMoney amountMoneyOfBuyTicket() {
+    public Money amountMoneyOfBuyTicket() {
         System.out.println(MESSAGE_QUESTION_HOW_MANY_BUY);
-        int inputAmountMoney = Integer.parseInt(scanner.nextLine());
+        String inputMoney = scanner.nextLine();
 
-        return AmountMoney.create(inputAmountMoney);
+        return Money.create(inputMoney);
     }
 
     public List<String> inputWinnerNumber() {
