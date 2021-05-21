@@ -3,10 +3,20 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
+
+    @Test
+    void 로또와_당첨번호_비교_Test() {
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.matchCountOf(winNumbers).result()).isEqualTo(6);
+    }
 
     @DisplayName("랜덤으로 1~ 45 사이의 중복없는 번호들 생성")
     @Test
