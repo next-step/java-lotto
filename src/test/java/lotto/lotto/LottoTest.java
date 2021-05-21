@@ -18,11 +18,12 @@ public class LottoTest {
     @DisplayName("숫자가 있는지 확인")
     void testContain() {
         //given
-        int number = 1;
         //when
-        lotto.addNumber(number);
+        for (int i = 0; i < 6; i++) {
+            lotto.addNumber(1);
+        }
         //then
-        assertThat(lotto.isContain(number)).isTrue();
+        assertThat(lotto.isSelectComplete()).isFalse();
     }
 
     @Test
