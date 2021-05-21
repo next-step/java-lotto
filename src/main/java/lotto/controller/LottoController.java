@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.utils.StringUtils;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
