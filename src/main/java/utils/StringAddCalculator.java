@@ -13,6 +13,6 @@ public class StringAddCalculator {
 		if(null == texts){
 			return DEFAULT_RETURN_NUMBER;
 		}
-		return StringUtils.sumWithOutNegative(texts);
+		return NumberUtils.sumWithOutNegative(texts);
 	}
 }

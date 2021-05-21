@@ -12,16 +12,22 @@ public class LottoGenerator {
 		this.drawNumber = drawNumber;
 	}
 
-	public void buy(final int price){
+	public int buy(final int price){
 		int lottoNumber = price / LOTTO_PRICE;
 		if (lottoNumber <= 0) {
-			return;
+			return 0;
 		}
 
 		for(int i = 0; i < lottoNumber; ++i){
 			LottoNumbers lottoNumbers = new LottoNumbers(drawNumber.draw(LOTTO_NUMBER_COUNT));
 			lottoNumbersFactory.add(lottoNumbers);
 		}
+		return lottoNumber;
+	}
+
+	public static boolean isValidLottoCount(List<Integer> numbers){
+		if(numbers == null) return false;
+		return numbers.size() == LOTTO_NUMBER_COUNT;
 	}
 
 	public LottoResult summary(final List<Integer> winnerNumbers){
@@ -29,7 +35,7 @@ public class LottoGenerator {
 		return lottoNumbersFactory.summary(winnerLottoNumbers);
 	}
 
-	int lottoSize(){
-		return lottoNumbersFactory.size();
+	public void printLottoAll(){
+		lottoNumbersFactory.printAll();
 	}
 }

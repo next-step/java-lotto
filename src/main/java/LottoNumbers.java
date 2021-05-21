@@ -1,3 +1,5 @@
+import ui.ResultView;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,5 +35,9 @@ public final class LottoNumbers {
 			return 1;
 		}
 		return 0;
+	}
+
+	public void print(){
+		ResultView.printMessage(lottoNumberList.toString());
 	}
 }

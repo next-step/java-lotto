@@ -21,11 +21,7 @@ class LottoGeneratorTest {
 		"10000, 10", "10500, 10", "11000, 11", "0, 0", "-1000, 0"
 	})
 	void buyTest(final int price, final int expectedSize) {
-		// when
-		lottoGenerator.buy(price);
-
-		// then
-		assertThat(lottoGenerator.lottoSize())
+		assertThat(lottoGenerator.buy(price))
 			.isEqualTo(expectedSize);
 	}
 }

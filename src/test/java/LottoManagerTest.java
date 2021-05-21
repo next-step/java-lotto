@@ -6,8 +6,7 @@ class LottoManagerTest {
 
 	@Test
 	void calculateRevenueTest(){
-		LottoManager lottoManager = new LottoManager();
-		assertThat(lottoManager.calculateRevenue( ()->10000, 15000))
+		assertThat(LottoManager.calculateRevenue( ()->10000, 15000))
 			.isEqualTo(0.67); // 0.6666666에서 반올림
 	}
 }

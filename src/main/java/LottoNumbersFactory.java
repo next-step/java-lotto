@@ -1,3 +1,5 @@
+import ui.ResultView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +33,10 @@ public class LottoNumbersFactory {
 
 	public int size(){
 		return this.lottoList.size();
+	}
+
+	public void printAll(){
+		lottoList.stream()
+				 .forEach(LottoNumbers::print);
 	}
 }

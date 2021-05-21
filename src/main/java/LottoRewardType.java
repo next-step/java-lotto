@@ -8,12 +8,22 @@ public enum LottoRewardType {
 	PLACE_4TH(3, 5_000),
 	;
 
-	private int collect;
-	private int reward;
+	private final int collect;
+	private final int reward;
+	private final String message;
 
 	LottoRewardType(final int collect, final int reward){
 		this.collect = collect;
 		this.reward = reward;
+		this.message = makeMessage();
+	}
+
+	private String makeMessage(){
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.append(this.collect)
+							.append("개 일치 (")
+							.append(this.reward)
+							.append(")").toString();
 	}
 
 	public static LottoRewardType of(final int collect){
@@ -26,4 +36,5 @@ public enum LottoRewardType {
 	public int reward(){
 		return this.reward;
 	}
+	public String message(){ return this.message; }
 }

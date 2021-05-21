@@ -1,11 +1,5 @@
 package utils;
 
-import exception.StringAddCalculatorException;
-
-import java.util.Arrays;
-
-import static exception.StringAddCalculatorExceptionCode.NEGATIVE_TEXT;
-
 public class StringUtils {
 
 	public static String[] split(String delimiter, String text) {
@@ -22,19 +16,5 @@ public class StringUtils {
 			return true;
 		}
 		return false;
-	}
-
-	public static int sumWithOutNegative(String[] texts) {
-		return Arrays.stream(texts)
-					 .mapToInt(Integer::parseInt)
-					 .filter(StringUtils::isNotNegative)
-					 .reduce(0, Integer::sum);
-	}
-
-	private static boolean isNotNegative(final int value){
-		if(value < 0) {
-			throw StringAddCalculatorException.of(NEGATIVE_TEXT);
-		}
-		return true;
 	}
 }

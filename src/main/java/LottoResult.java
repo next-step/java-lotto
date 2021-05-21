@@ -1,3 +1,5 @@
+import ui.ResultView;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
@@ -37,7 +39,23 @@ public class LottoResult implements SumResult{
 		return lottoRewardMap.entrySet()
 							 .stream()
 							 .filter(entry -> entry.getKey() != LottoRewardType.NONE)
-							 .map(Map.Entry::getValue)
+							 .map(entry -> entry.getKey().reward() * entry.getValue())
 							 .reduce(0, Integer::sum);
+	}
+
+	public void printResult(){
+		lottoRewardMap.entrySet().stream()
+					  .filter(entry -> entry.getKey() != LottoRewardType.NONE)
+					  .map(LottoResult::makeMessage)
+					  .forEach(ResultView::printMessage);
+	}
+
+	private static String makeMessage(Map.Entry<LottoRewardType, Integer> entry){
+		return new StringBuilder()
+			.append(entry.getKey().message())
+			.append("- ")
+			.append(entry.getValue())
+			.append("개")
+			.toString();
 	}
 }
