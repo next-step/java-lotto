@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 import static java.lang.String.format;
+import static java.lang.String.valueOf;
 
 public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -33,6 +34,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public String toString() {
+        return valueOf(value);
     }
 
     private void validate(int value) {

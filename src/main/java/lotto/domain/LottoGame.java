@@ -35,6 +35,11 @@ public class LottoGame {
         return Objects.hash(values);
     }
 
+    @Override
+    public String toString() {
+        return values.toString();
+    }
+
     private void validate(Set<LottoNumber> values) {
         if (values.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);

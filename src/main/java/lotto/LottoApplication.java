@@ -27,10 +27,16 @@ public class LottoApplication {
 
     private void run() {
         PurchaseMoney purchaseMoney = questionPurchaseMoney();
+        LottoGames lottoGames = lottoSeller.sell(purchaseMoney);
+        printPurchaseResult(lottoGames);
     }
 
     private PurchaseMoney questionPurchaseMoney() {
         PurchaseMoney purchaseMoney = lottoInputView.questionPurchaseMoney();
         return purchaseMoney;
+    }
+
+    private void printPurchaseResult(LottoGames lottoGames) {
+        lottoOutputView.printLottoGamesSize(lottoGames);
     }
 }
