@@ -16,10 +16,14 @@ public enum LottoRewardType {
 		this.reward = reward;
 	}
 
-	public static LottoRewardType reward(final int collect){
+	public static LottoRewardType of(final int collect){
 		return Arrays.stream(values())
 					 .filter(value -> value.collect == collect)
 					 .findFirst()
 					 .orElse(NONE);
+	}
+
+	public int reward(){
+		return this.reward;
 	}
 }
