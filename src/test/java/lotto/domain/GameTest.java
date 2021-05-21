@@ -48,10 +48,8 @@ public class GameTest {
 
             @Override
             public Set<LottoNumber> generate() {
-                index++;
-
                 String[] lottoNumbersSortedByRank = lottoNumbersSortedByRank();
-                return convertStringToLottoNumberList(lottoNumbersSortedByRank[index]);
+                return convertStringToLottoNumberList(lottoNumbersSortedByRank[++index]);
             }
         };
     }
