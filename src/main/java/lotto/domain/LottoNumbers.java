@@ -40,7 +40,7 @@ public class LottoNumbers {
 		}
 	}
 
-	public List<Integer> removeDuplicateNumbers(List<Integer> numbers) {
+	private List<Integer> removeDuplicateNumbers(List<Integer> numbers) {
 		Set<Integer> set = new LinkedHashSet<>();
 		for (Integer number : numbers) {
 			set.add(number);
@@ -48,7 +48,7 @@ public class LottoNumbers {
 		return new ArrayList<>(set);
 	}
 
-	public boolean hasSize(int size) {
+	protected boolean hasSize(int size) {
 		return this.lottoNumbers.size() == size;
 	}
 
