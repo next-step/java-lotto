@@ -10,7 +10,7 @@ public class Profit {
     }
 
     public double calculateRate() {
-        return Math.floor(this.totalPrize / totalGameCost * 100) / 100.0;
+        return Math.floor(this.totalPrize / totalGameCost * 100) / 100;
     }
 
 }

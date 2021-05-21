@@ -49,4 +49,9 @@ public class RandomNumber implements Comparable<RandomNumber> {
     public int compareTo(RandomNumber o) {
         return number - o.number;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
 }

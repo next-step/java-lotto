@@ -40,4 +40,9 @@ public class LottoNumberTest {
         assertThat(lottoNumbers.size()).isEqualTo(4);
     }
 
+    @Test
+    public void 출력() {
+        assertThat(new LottoNumber(new RandomNumber(31)).toString()).isEqualTo("31");
+    }
+
 }

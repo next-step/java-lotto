@@ -41,6 +41,14 @@ public class LottoGameTest {
                 .hasMessageContaining(MessageContainer.INVALID_LOTTO_GAME);
     }
 
+    @Test
+    public void 당첨번호_출력() {
+        assertThat(new LottoGame(1,2,3,4,5,6).toString())
+                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(new LottoGame(6,5,4,3,2,1).toString())
+                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
     public static class IntArrayConverter extends SimpleArgumentConverter {
 
         @Override

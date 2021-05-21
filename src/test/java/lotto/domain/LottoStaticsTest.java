@@ -63,4 +63,5 @@ public class LottoStaticsTest {
         LottoStatics statics = machine.calculateStatics(winLottoGame);
         assertThat(statics.getProfit().calculateRate()).isEqualTo(0.35);
     }
+
 }

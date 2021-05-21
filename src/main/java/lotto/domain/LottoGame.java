@@ -3,9 +3,7 @@ package lotto.domain;
 import lotto.exception.InvalidLottoGame;
 import lotto.util.MessageContainer;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class LottoGame {
     public static final int PRICE = 1000;
@@ -78,5 +76,12 @@ public class LottoGame {
 
     private boolean containsNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        List<LottoNumber> numbers = new ArrayList<LottoNumber>(lottoNumbers);
+        Collections.sort(numbers);
+        return numbers.toString();
     }
 }

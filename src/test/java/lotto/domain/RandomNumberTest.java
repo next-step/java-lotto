@@ -36,4 +36,9 @@ public class RandomNumberTest {
         assertThat(number1.equals(number3)).isFalse();
     }
 
+    @Test
+    public void 출력() {
+        assertThat(new RandomNumber(11).toString()).isEqualTo("11");
+    }
+
 }
