@@ -18,6 +18,8 @@ public class LottoRanksTest {
                 LottoRank.FIRST,
                 LottoRank.FIRST,
                 LottoRank.FIRST,
+                LottoRank.SECOND,
+                LottoRank.SECOND,
                 LottoRank.THIRD,
                 LottoRank.THIRD,
                 LottoRank.THIRD,
@@ -34,6 +36,8 @@ public class LottoRanksTest {
 
         assertThat(lottoRanks.countOf(LottoRank.FIRST))
                 .isEqualTo(5L);
+        assertThat(lottoRanks.countOf(LottoRank.SECOND))
+                .isEqualTo(2L);
         assertThat(lottoRanks.countOf(LottoRank.THIRD))
                 .isEqualTo(4L);
         assertThat(lottoRanks.countOf(LottoRank.FOURTH))
