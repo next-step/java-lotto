@@ -42,12 +42,6 @@ public class StringAddCalculatorTest {
     @Test
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    public void splitAndSum_noNumber() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
-                .isInstanceOf(RuntimeException.class).hasMessage("정수만 입력 가능합니다.");
+                .isInstanceOf(RuntimeException.class).hasMessage("양수만 입력 가능합니다.");
     }
 }
