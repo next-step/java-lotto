@@ -41,4 +41,14 @@ public class LottoNumbersTest {
 		Assertions.assertThat(lottoNumbers.contains(number)).isTrue();
 	}
 
+	@Test
+	@DisplayName("일치하는 당첨번호 개수 테스트")
+	void matchCount() {
+		LottoNumbers myLottoNumbers = new LottoNumbers(1, 2, 3, 11, 12, 13);
+		LottoNumbers winLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+
+		int matchCount = myLottoNumbers.getMatchCount(winLottoNumbers);
+		Assertions.assertThat(matchCount).isEqualTo(3);
+	}
+
 }

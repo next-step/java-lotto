@@ -77,4 +77,22 @@ public class LottoNumbers {
 	public String toString() {
 		return lottoNumbers.toString();
 	}
+
+	public int getMatchCount(LottoNumbers winLottoNumbers) {
+		int matchCount = 0;
+		for (LottoNumber lottoNumber : lottoNumbers) {
+			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
+		}
+		return matchCount;
+	}
+
+	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
+		boolean isContain = winLottoNumbers.contains(lottoNumber);
+		if (isContain == true) {
+			return 1;
+		}
+		return 0;
+	}
+
+
 }
