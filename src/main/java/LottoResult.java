@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class LottoResult {
+public class LottoResult implements SumResult{
 
 	private Map<LottoRewardType, Integer> lottoRewardMap;
 
@@ -30,5 +30,14 @@ public class LottoResult {
 	private void init(Map<LottoRewardType, Integer> lottoRewardMap){
 		Arrays.stream(LottoRewardType.values())
 			  .forEach(type -> lottoRewardMap.putIfAbsent(type, 0));
+	}
+
+	@Override
+	public int sumRevenue(){
+		return lottoRewardMap.entrySet()
+							 .stream()
+							 .filter(entry -> entry.getKey() != LottoRewardType.NONE)
+							 .map(Map.Entry::getValue)
+							 .reduce(0, Integer::sum);
 	}
 }
