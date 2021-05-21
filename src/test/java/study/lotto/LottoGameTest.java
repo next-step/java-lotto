@@ -7,16 +7,16 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PurchaseTest {
+public class LottoGameTest {
 
-    @DisplayName("입력한 금액만큼 로또 구매")
+    @DisplayName("입력한 금액만큼 구매 가능한 장수를 확인한다")
     @Test
-    public void buyTest(){
+    public void purchaseableLottoTest(){
         //given
         BigDecimal paymentAmount = BigDecimal.valueOf(14000);
 
-        LottoQuantity result = LottoQuantity.purchase(paymentAmount);
-        assertThat(result.getLottoQuantity()).isEqualTo(14);
+        int result = LottoGame.purchaseableLotto(paymentAmount);
+        assertThat(result).isEqualTo(14);
     }
 
 
