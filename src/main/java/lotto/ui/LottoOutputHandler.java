@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchaseBudget;
-import lotto.domain.LottoWinNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.Iterator;
 
@@ -18,14 +15,23 @@ public class LottoOutputHandler {
         while(it.hasNext()) {
             System.out.println(it.next().toString());
         }
+        System.out.println();
     }
 
-    public void printWinnerStatistics(Lottos lottos, LottoWinNumbers winNumbers) {
-        System.out.println("당첨 통계\n---------");
-        System.out.println("3개 일치 (5000원)- " + 1 + "개");
-        System.out.println("4개 일치 (5000원)- " + 1 + "개");
-        System.out.println("5개 일치 (5000원)- " + 1 + "개");
-        System.out.println("6개 일치 (5000원)- " + 1 + "개");
+    public void printWinnerStatistics(LottoResultPack resultPack) {
+        System.out.println("\n당첨 통계\n--------");
+        System.out.println("3개 일치 (" + LottoResult.MATCH_3.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_3) + "개");
+        System.out.println("4개 일치 (" + LottoResult.MATCH_4.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_4) + "개");
+        System.out.println("5개 일치 (" + LottoResult.MATCH_5.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_5) + "개");
+        System.out.println("6개 일치 (" + LottoResult.MATCH_6.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_6) + "개");
     }
 
+    public void printProfitRatio(double calculateProfitRatio) {
+        System.out.print("총 수익률은 " + calculateProfitRatio + "입니다. ");
+        if (calculateProfitRatio >= 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해는 아니라는 의미임)");
+            return;
+        }
+        System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
 }

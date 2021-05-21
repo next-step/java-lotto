@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoPurchaseBudget;
-import lotto.domain.LottoWinNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.ui.LottoInputHandler;
 import lotto.ui.LottoOutputHandler;
 
@@ -20,11 +17,10 @@ public class MainLotto {
         output.printBought(lottos);
 
         LottoWinNumbers winNumbers = input.scanLottoWinNumbers();
+        LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
-
-
-        output.printWinnerStatistics(lottos, winNumbers);
-//        output.printProfit(purchaseBudget, )
+        output.printWinnerStatistics(resultPack);
+        output.printProfitRatio(resultPack.calculateProfitRatio(purchaseBudget));
     }
 
 }
