@@ -15,6 +15,7 @@ class LottoRankTest {
         LottoRank lottoRank = LottoRank.valueOf(rankName);
         assertThat(lottoRank).isEqualTo(LottoRank.of(matchCount));
         assertThat(lottoRank.reward()).isEqualTo(reward);
+        assertThat(lottoRank.matchCount()).isEqualTo(matchCount);
     }
 
 }
