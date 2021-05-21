@@ -8,7 +8,7 @@ public final class StringUtils {
 		return s.split(regex);
 	}
 
-	public static boolean isBlank(String userInput) {
-		return isNull(userInput) || userInput.equals("");
+	public static boolean isBlank(String s) {
+		return isNull(s) || s.equals("");
 	}
 }
