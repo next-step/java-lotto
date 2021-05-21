@@ -21,14 +21,14 @@ class WinningCountMapTest {
     @DisplayName("맞은 숫자 개수에 따른 결과값 검증")
     @CsvSource(value = {"1,1", "3,4", "6,1", "4,10", "5,100"})
     @ParameterizedTest
-    void resultTest(int matchCount, int winnerCount) {
+    void resultTest(int matchCount, int winningCount) {
         WinningCountMap winningCountMap = new WinningCountMap();
 
-        for (int i = 0; i < winnerCount; i++) {
+        for (int i = 0; i < winningCount; i++) {
             winningCountMap.addCount(matchCount);
         }
 
-        long expected = (long) PRIZES[matchCount] * winnerCount;
+        long expected = (long) PRIZES[matchCount] * winningCount;
         assertEquals(expected, winningCountMap.getResultOf(matchCount));
     }
 
@@ -36,16 +36,21 @@ class WinningCountMapTest {
     @DisplayName("맞은 숫자 개수에 따른 결과값 검증")
     @MethodSource("totalResultTestCase")
     @ParameterizedTest
-    void totalResultTest(List<Integer> winnerCounts) {
+    void totalResultTest(List<Integer> winningCounts) {
         WinningCountMap winningCountMap = new WinningCountMap();
 
         long expected = 0L;
 
-        for (int i = 3; i <= 6; i++) {
-            for (int j = 0; j < winnerCounts.get(i - 3); j++) {
-                winningCountMap.addCount(i);
+        for (int i = 0; i < 4; i++) {
+
+            int matchCount = i + 3;
+            int winningCount = winningCounts.get(i);
+
+            for (int j = 0; j < winningCount; j++) {
+                winningCountMap.addCount(matchCount);
             }
-            expected += (long) PRIZES[i] * winnerCounts.get(i - 3);
+
+            expected += (long) PRIZES[matchCount] * winningCount;
         }
 
         assertEquals(expected, winningCountMap.getTotalResult());

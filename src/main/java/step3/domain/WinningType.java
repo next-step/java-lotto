@@ -41,4 +41,8 @@ public enum WinningType {
     public int getPrize() {
         return prize;
     }
+
+    public String toResultString(int winningCount) {
+        return matchCount + "개 일치(" + prize + "원)- " + winningCount + "개";
+    }
 }
