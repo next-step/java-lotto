@@ -35,4 +35,10 @@ public class LottoTest {
         assertThat(lottoNumberRange.contains(testLottoNumber.get(4))).isTrue();
         assertThat(lottoNumberRange.contains(testLottoNumber.get(5))).isTrue();
     }
+
+    @Test
+    public void purchasingLottoCount_validate() {
+        int result = PurchaseLotto.purchasingLottoCount(14000);
+        assertThat(result).isEqualTo(14);
+    }
 }

@@ -2,12 +2,14 @@ package lotto;
 
 public class PurchaseLotto {
     private static final int LOTTO_PRICE = 1000;
-    private static InputAmount inputAmount;
+    private int purchasedLottoCount;
+    //private static InputAmount inputAmount;
 
+    public PurchaseLotto(int inputAmount) {
+        purchasedLottoCount = purchasingLottoCount(inputAmount);
+    }
 
-    public PurchaseLotto() {
-        InputView inputView = new InputView();
-        inputAmount = new InputAmount(inputView.inputPurchaseAmount());
-
+    public static int purchasingLottoCount(int amount) {
+        return amount/LOTTO_PRICE;
     }
 }
