@@ -6,6 +6,7 @@ import static lotto.domain.LottoGameOptions.*;
 
 public class Lotto {
     private List<Integer> numbers = new ArrayList<>();
+    private LottoResult result;
 
     public Lotto() {
         this(true);
@@ -17,9 +18,15 @@ public class Lotto {
         }
     }
 
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     private void generateNumbers() {
         Stack<Integer> lottoNumbers = makeWholeLottoNumbers(LOTTO_NUMBERS_FROM, LOTTO_NUMBERS_TO);
+
         Collections.shuffle(lottoNumbers);
+
         while (numbers.size() != LOTTO_NUMBER_COUNT) {
             numbers.add(lottoNumbers.pop());
         }
@@ -37,4 +44,9 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
+
+    public int numbers(int index) {
+        return numbers.get(index);
+    }
+
 }

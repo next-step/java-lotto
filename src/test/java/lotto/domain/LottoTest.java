@@ -14,8 +14,11 @@ public class LottoTest {
     void 로또와_당첨번호_비교_Test() {
         LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(6);
 
-        assertThat(lotto.matchCountOf(winNumbers).result()).isEqualTo(6);
+        winNumbers = new LottoWinNumbers("1, 21, 13, 4, 5, 6");
+        lotto = new Lotto(Arrays.asList(1, 2, 13, 4, 3, 5));
+        assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(4);
     }
 
     @DisplayName("랜덤으로 1~ 45 사이의 중복없는 번호들 생성")
