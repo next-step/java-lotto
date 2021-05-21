@@ -2,11 +2,11 @@ package calculator;
 
 import static java.util.Objects.*;
 
-public class CalculatorModel {
+public class AddCalculatorModel {
 
 	private String userInput;
 
-	public CalculatorModel(String userInput) {
+	public AddCalculatorModel(String userInput) {
 		setUserInput(userInput);
 	}
 
@@ -24,11 +24,9 @@ public class CalculatorModel {
 		}
 
 		for (char c : userInput.toCharArray()) {
-
 			if (c == '-' || Character.isAlphabetic(c)) {
 				throw new RuntimeException("유효하지 않은 입력입니다");
 			}
-
 		}
 
 		long sum = 0L;
