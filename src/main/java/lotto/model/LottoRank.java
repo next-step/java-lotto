@@ -10,10 +10,10 @@ public enum LottoRank {
 	SEVENTH(0, Money.ZERO_WONS),
 	SIXTH(1, Money.ZERO_WONS),
 	FIFTH(2, Money.ZERO_WONS),
-	FOURTH(3, Money.wons(5000)),
-	THIRD(4, Money.wons((50_000))),
-	SECOND(5, Money.wons(1_500_000)),
-	FIRST(6, Money.wons(2_000_000_000));
+	FOURTH(3, Money.ofWons(5000)),
+	THIRD(4, Money.ofWons((50_000))),
+	SECOND(5, Money.ofWons(1_500_000)),
+	FIRST(6, Money.ofWons(2_000_000_000));
 
 	private final int matchCount;
 	private final Money prize;

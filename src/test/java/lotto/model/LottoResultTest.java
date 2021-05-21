@@ -12,7 +12,7 @@ public class LottoResultTest {
 	public void sumTotalPrizeTest() {
 		LottoResult lottoResult = creatLottoResult(LottoRank.FIRST, LottoRank.THIRD, LottoRank.THIRD);
 
-		assertThat(lottoResult.sumTotalPrize()).isEqualTo(Money.wons(2_000_100_000));
+		assertThat(lottoResult.sumTotalPrize()).isEqualTo(Money.ofWons(2_000_100_000));
 	}
 
 	@Test
@@ -20,7 +20,7 @@ public class LottoResultTest {
 	public void calculateEarningRateTest() {
 		LottoResult lottoResult = creatLottoResult(LottoRank.FOURTH);
 
-		Rate rate = lottoResult.calculateEarningRate(Money.wons(14000));
+		Rate rate = lottoResult.calculateEarningRate(Money.ofWons(14000));
 
 		assertThat(rate.floor(2)).isEqualTo(Rate.of(0.35));
 	}

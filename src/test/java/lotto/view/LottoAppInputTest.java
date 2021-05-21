@@ -24,7 +24,7 @@ public class LottoAppInputTest {
 
 		Money money = lottoAppInput.inputMoney();
 
-		assertThat(money).isEqualTo(Money.wons(inputMoneyValue));
+		assertThat(money).isEqualTo(Money.ofWons(inputMoneyValue));
 	}
 
 	@Test

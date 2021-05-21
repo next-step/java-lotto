@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class LottoNumbersGroupTest {
+public class LottoTicketTest {
 
-	private LottoNumbersGroup lottoNumbersGroup;
+	private LottoTicket lottoTicket;
 	private List<LottoNumbers> inputLottoNumbers;
 
 	@BeforeEach
@@ -26,7 +26,7 @@ public class LottoNumbersGroupTest {
 			new LottoNumbers(asList(1, 5, 6, 26, 34, 40))
 		);
 
-		lottoNumbersGroup = new LottoNumbersGroup(inputLottoNumbers);
+		lottoTicket = new LottoTicket(inputLottoNumbers);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class LottoNumbersGroupTest {
 			.map(LottoNumbers::getNumbers)
 			.collect(Collectors.toList());
 
-		assertThat(lottoNumbersGroup.getLottoNumbersGroup()).isEqualTo(expected);
+		assertThat(lottoTicket.getLottoNumbersGroup()).isEqualTo(expected);
 	}
 
 	@ParameterizedTest
@@ -46,7 +46,7 @@ public class LottoNumbersGroupTest {
 	public void resultTest(LottoRank lottoRank, int expectedCount) {
 		LottoNumbers winningNumbers = new LottoNumbers(asList(1, 5, 40, 2, 6, 26));
 
-		LottoResult lottoResult = lottoNumbersGroup.match(winningNumbers);
+		LottoResult lottoResult = lottoTicket.match(winningNumbers);
 
 		assertThat(lottoResult.count(lottoRank)).isEqualTo(expectedCount);
 	}

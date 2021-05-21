@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbersGroup {
+public class LottoTicket {
 
 	private final List<LottoNumbers> lottoNumbersGroup;
 
-	public LottoNumbersGroup(List<LottoNumbers> lottoNumbersGroup) {
+	public LottoTicket(List<LottoNumbers> lottoNumbersGroup) {
 		this.lottoNumbersGroup = Collections.unmodifiableList(lottoNumbersGroup);
 	}
 

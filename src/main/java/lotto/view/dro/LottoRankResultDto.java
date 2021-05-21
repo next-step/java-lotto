@@ -11,7 +11,7 @@ public class LottoRankResultDto {
 	public LottoRankResultDto(LottoRank lottoRank, int resultCount) {
 		this.matchCount = lottoRank.getMatchCount();
 		Money prize = lottoRank.getPrize();
-		this.prize = prize.getMoney();
+		this.prize = prize.getAmount();
 		this.resultCount = resultCount;
 	}
 

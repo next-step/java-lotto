@@ -2,8 +2,8 @@ package lotto.controller;
 
 import lotto.model.LottoNumbers;
 import lotto.model.LottoNumbersGenerator;
-import lotto.model.LottoNumbersGroup;
 import lotto.model.LottoResult;
+import lotto.model.LottoTicket;
 import lotto.model.Money;
 import lotto.model.Rate;
 import lotto.view.LottoAppInput;
@@ -23,10 +23,10 @@ public class LottoApp {
 	}
 
 	public void run() {
-		Money inputMoney = inputMoney();
-		LottoNumbersGroup lottoNumbersGroup = inputLottoNumbersGroup((int) inputMoney.divided(Money.LOTTO_PRICE));
+		Money money = inputMoney();
+		LottoTicket lottoTicket = inputLottoNumbersGroup((int) money.divided(Money.LOTTO_PRICE));
 		LottoNumbers winningNumbers = inputWinningNumbers();
-		printLottoResult(lottoNumbersGroup.match(winningNumbers), inputMoney);
+		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
 	private Money inputMoney() {
@@ -34,11 +34,11 @@ public class LottoApp {
 		return lottoAppInput.inputMoney();
 	}
 
-	private LottoNumbersGroup inputLottoNumbersGroup(int lottoCount) {
+	private LottoTicket inputLottoNumbersGroup(int lottoCount) {
 		lottoAppOutput.printBoughtLottoCountView(lottoCount);
-		LottoNumbersGroup lottoNumbersGroup = new LottoNumbersGroup(lottoNumbersGenerator.generateRandomly(lottoCount));
-		lottoAppOutput.printLottoNumbersGroup(lottoNumbersGroup);
-		return lottoNumbersGroup;
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbersGenerator.generateRandomly(lottoCount));
+		lottoAppOutput.printLottoTicket(lottoTicket);
+		return lottoTicket;
 	}
 
 	private LottoNumbers inputWinningNumbers() {

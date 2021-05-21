@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.LottoNumbersGroup;
+import lotto.model.LottoTicket;
 import lotto.view.dro.LottoEarningRateDto;
 import lotto.view.dro.LottoRankResultDto;
 import lotto.view.dro.LottoResultDto;
@@ -27,8 +27,8 @@ public class LottoAppOutput {
 		printStream.println(lottoCount + "개를 구매했습니다.");
 	}
 
-	public void printLottoNumbersGroup(LottoNumbersGroup lottoNumbersGroup) {
-		for (List<Integer> lottoNumbers : lottoNumbersGroup.getLottoNumbersGroup()) {
+	public void printLottoTicket(LottoTicket lottoTicket) {
+		for (List<Integer> lottoNumbers : lottoTicket.getLottoNumbersGroup()) {
 			printLottoNumbers(lottoNumbers);
 		}
 		printNewLine();
