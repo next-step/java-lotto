@@ -51,7 +51,7 @@ public class LottoGame {
         Money money = inputView.amountMoneyOfBuyTicket();
 
         LottoWallet lottoWallet = LottoWallet.create(money);
-        lottoWallet.buyLotto();
+        lottoWallet.buyingLotto();
         return lottoWallet;
     }
 }

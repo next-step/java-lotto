@@ -32,7 +32,7 @@ public class LottoWallet {
         return money / LOTTO_TICKET_PRICE;
     }
 
-    public void buyLotto() {
+    public void buyingLotto() {
         for (int i = 0; i < countOfLottoTicket; i++) {
             List<LottoNumber> lottoNumbers = LottoNumberGenerator.autoGenerator();
             LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
