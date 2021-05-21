@@ -27,10 +27,10 @@ public class StringCalculator {
 
     private String[] splitInput(String input) {
         String separator = DEFAULT_SEPARATOR;
-        Matcher m = customPattern.matcher(input);
-        if (m.find()) {
-            separator = m.group(PATTERN_SEPARATOR_NUMBER);
-            return m.group(PATTERN_MATCH_NUMBER).split(separator);
+        Matcher matcher = customPattern.matcher(input);
+        if (matcher.find()) {
+            separator = matcher.group(PATTERN_SEPARATOR_NUMBER);
+            return matcher.group(PATTERN_MATCH_NUMBER).split(separator);
         }
         return input.split(separator);
     }
