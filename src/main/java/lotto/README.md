@@ -71,3 +71,6 @@
 
 * InputView
   * 로또 구입 금액과 당첨 번호를 입력 받는 UI 클래스
+  
+* PrizeInfo
+  * 일치한 번호 수, 당첨금액, 구매한 로또 중 당첨된 로또 수를 OutputView에 전달하는 DTO 클래스 
