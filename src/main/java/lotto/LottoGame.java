@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.utils.LottoLotteryUtils;
 import lotto.utils.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.PrintView;
@@ -32,7 +31,7 @@ public class LottoGame {
     private void lottery(List<LottoTicket> lottoTickets) {
         WinnerNumbers winnerNumbers = generatorWinnerNumber();
 
-        WinnerStatistics winnerStatistics = LottoLotteryUtils.lotteryThisWeek(lottoTickets, winnerNumbers);
+        WinnerStatistics winnerStatistics = WinnerStatistics.create(lottoTickets, winnerNumbers);
 
         printView.showLottoResult(winnerStatistics);
     }

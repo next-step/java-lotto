@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.LottoLotteryUtils;
 import lotto.utils.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -46,7 +45,7 @@ class WinnerStatisticsTest {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
 
-        WinnerStatistics winnerStatistics = LottoLotteryUtils.lotteryThisWeek(tickets, winnerNumbers);
+        WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 
         assertThat(winnerStatistics.getIncomeRate()).isEqualTo(expectedRate);
     }
@@ -61,7 +60,7 @@ class WinnerStatisticsTest {
         List<LottoNumber> lottoNumbers = LottoNumberGenerator.manualGenerator(lottoNumberText);
         WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
 
-        WinnerStatistics winnerStatistics = LottoLotteryUtils.lotteryThisWeek(tickets, winnerNumbers);
+        WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 
         assertThat(winnerStatistics.isLoss()).isEqualTo(expectedLoss);
     }

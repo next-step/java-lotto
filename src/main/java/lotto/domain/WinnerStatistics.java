@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinnerStatistics {
 
@@ -14,7 +17,11 @@ public class WinnerStatistics {
         this.lotteryResult = lotteryResult;
     }
 
-    public static WinnerStatistics create(Map<LottoRank, Long> lotteryResult) {
+    public static WinnerStatistics create(List<LottoTicket> lottoTickets, WinnerNumbers winnerNumbers) {
+        Map<LottoRank, Long> lotteryResult = lottoTickets.stream()
+                .map(lottoTicket -> winnerNumbers.checkLottoTicket(lottoTicket))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
         return new WinnerStatistics(lotteryResult);
     }
 
