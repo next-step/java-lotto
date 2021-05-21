@@ -41,4 +41,8 @@ public enum LottoRank {
 	public Money getPrize() {
 		return prize;
 	}
+
+	Money multiplyPrize(int count) {
+		return prize.times(count);
+	}
 }

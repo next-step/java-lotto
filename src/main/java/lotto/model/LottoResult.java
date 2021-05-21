@@ -23,9 +23,8 @@ public class LottoResult {
 	Money sumTotalPrize() {
 		Money totalPrize = Money.ZERO_WONS;
 		for (LottoRank lottoRank : countByLottoRank.keySet()) {
-			Money prize = lottoRank.getPrize();
-			Money prizeOfRank = prize.times(count(lottoRank));
-			totalPrize = totalPrize.plus(prizeOfRank);
+			Money prizeOfLank = lottoRank.multiplyPrize(count(lottoRank));
+			totalPrize = totalPrize.plus(prizeOfLank);
 		}
 		return totalPrize;
 	}
