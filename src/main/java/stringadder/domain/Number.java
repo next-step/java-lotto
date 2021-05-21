@@ -13,12 +13,12 @@ public class Number {
   private final int inputNumber;
 
   Number(int inputNumber) {
-    validatePositiveNumber(inputNumber);
     this.inputNumber = inputNumber;
   }
 
   public static Number fromString(String input) {
     int inputNumber = parseInt(input);
+    validatePositiveNumber(inputNumber);
     return new Number(inputNumber);
   }
 
@@ -39,7 +39,7 @@ public class Number {
     return inputNumber;
   }
 
-  private void validatePositiveNumber(int number) {
+  private static void validatePositiveNumber(int number) {
     if (number < 0) {
       throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED);
     }
