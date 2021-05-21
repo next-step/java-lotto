@@ -7,6 +7,9 @@ import java.util.stream.IntStream;
 
 public class RandomNumberGenerator {
 
+    private RandomNumberGenerator() {
+    }
+
     public static List<String> randomSixNumbers() {
         List<String> availableNumbers = availableAllNumbers();
         Collections.shuffle(availableNumbers);
