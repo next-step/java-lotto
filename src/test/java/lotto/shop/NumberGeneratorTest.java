@@ -11,9 +11,8 @@ public class NumberGeneratorTest {
     @DisplayName("숫자 발생")
     void generate() {
         //given
-        NumberGenerator numberGenerator = new NumberGenerator();
         //when
-        int number = numberGenerator.generate();
+        int number = NumberGenerator.generate();
         //then
         assertThat(number).isGreaterThan(0);
     }
@@ -22,9 +21,8 @@ public class NumberGeneratorTest {
     @DisplayName("숫자 유효성 체크")
     void checkNumber() {
         //given
-        NumberGenerator numberGenerator = new NumberGenerator();
         //when
-        int number = numberGenerator.generate();
+        int number = NumberGenerator.generate();
         //then
         assertThat(number).isGreaterThan(0);
         assertThat(number).isLessThanOrEqualTo(45);
