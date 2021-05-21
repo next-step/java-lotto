@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -35,43 +36,28 @@ class AddCalculatorModelTest {
 			.isInstanceOf(RuntimeException.class);
 	}
 
-	@Test
-	void 숫자_두개를_컴마구분자로_입력할_경우_두숫자의_합을_반환한다() {
-
-		sut = new AddCalculatorModel("0,1");
-		assertThat(sut.execute()).isEqualTo(1);
-
-		sut = new AddCalculatorModel("1,2");
-		assertThat(sut.execute()).isEqualTo(3);
-
-		sut = new AddCalculatorModel("999999999999,999999999999");
-		assertThat(sut.execute()).isEqualTo(999999999999L * 2);
-	}
-
-	@Test
-	void 구분자를_컴마_뿐만_아니라_콜론도_가능() {
-		sut = new AddCalculatorModel("1,2:3");
-		assertThat(sut.execute()).isEqualTo(6);
-
-		sut = new AddCalculatorModel("1:2:3");
-		assertThat(sut.execute()).isEqualTo(6);
-	}
-
-	@Test
-	@DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정하면 지정된 커스텀 구분자로 구분된다")
-	void _1() {
-		sut = new AddCalculatorModel("//;\n1;2;3");
-		assertThat(sut.execute()).isEqualTo(6);
-
-		sut = new AddCalculatorModel("//a\n1a2a3");
-		assertThat(sut.execute()).isEqualTo(6);
-
-		sut = new AddCalculatorModel("//!\n1!2!3");
-		assertThat(sut.execute()).isEqualTo(6);
-	}
-
 	@ParameterizedTest
-	@DisplayName("유효하지 않는 커스텀 구분자를 지정하면 예외 호출한다")
+	@CsvSource(value = {"0,1:1", "1,2:3", "999999999999,999999999999:1999999999998"}, delimiterString = ":")
+	void 숫자_두개를_컴마구분자로_입력할_경우_두숫자의_합을_반환한다(String userInput, Long expected) {
+		sut = new AddCalculatorModel(userInput);
+		assertThat(sut.execute()).isEqualTo(expected);
+	}
+
+	@ParameterizedTest(name = "구분자를_컴마_뿐만_아니라_콜론도_가능")
+	@ValueSource(strings = {"1,2:3","1:2:3"})
+	void 구분자를_컴마_뿐만_아니라_콜론도_가능(String value) {
+		sut = new AddCalculatorModel(value);
+		assertThat(sut.execute()).isEqualTo(6);
+	}
+
+	@ParameterizedTest(name = "[{index}]({argumentsWithNames})“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정하면 지정된 커스텀 구분자로 구분된다.")
+	@ValueSource(strings = {"//;\n1;2;3","//a\n1a2a3", "//!\n1!2!3"})
+	void _1(String value) {
+		sut = new AddCalculatorModel(value);
+		assertThat(sut.execute()).isEqualTo(6);
+	}
+
+	@ParameterizedTest(name = "[{index}] 유효하지 않는 커스텀 구분자({argumentsWithNames})를 지정하면 예외 호출한다.")
 	@ValueSource(strings = {"//abc\n1abc2abc3", "//;\n1;2:3", "//!\n1!2,3"})
 	void _2(String value) {
 		sut = new AddCalculatorModel(value);
