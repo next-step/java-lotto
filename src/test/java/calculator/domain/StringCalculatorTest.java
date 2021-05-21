@@ -27,36 +27,6 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void 문자열에_커스텀구분자_적용_Test() {
-        calculator.calculate("//;\n1;2;3");
-        assertThat(calculator.delimiter()).isEqualTo(";");
-    }
-
-    @Test
-    void 문자열에서_숫자문자열_추출_Test() {
-        calculator.calculate("//;\n1;2;3");
-        assertThat(calculator.numbersString()).isEqualTo("1;2;3");
-
-        calculator.calculate("1,2");
-        assertThat(calculator.numbersString()).isEqualTo("1,2");
-
-        calculator.calculate("3");
-        assertThat(calculator.numbersString()).isEqualTo("3");
-    }
-
-    @Test
-    void 숫자문자열에서_숫자들_분해_Test() {
-        calculator.calculate("1,2");
-        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2");
-
-        calculator.calculate("1:2,3");
-        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2", "3");
-
-        calculator.calculate("//;\n1;2;3");
-        assertThat(calculator.numbers().toStringList()).containsExactly("1", "2", "3");
-    }
-
-    @Test
     void 분해한_숫자들_합산_Test() {
         assertThat(calculator.calculate("1:2,3")).isEqualTo(6);
 

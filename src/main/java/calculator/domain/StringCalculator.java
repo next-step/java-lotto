@@ -5,12 +5,10 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     private final String DEFAULT_DELIMITER = ":|,";
+    private final String DEFAULT_REGEX_PATTERN = "//(.)\n(.*)";
+
     private int delimiterSection = 1;
     private int numbersSection = 2;
-
-    private String numbersString;
-    private String delimiter;
-    private Numbers numbers;
 
     public StringCalculator() { }
 
@@ -18,39 +16,25 @@ public class StringCalculator {
         if (isNullOrEmpty(inputString)) {
             return 0;
         }
-
-        splitDelimiterAndNumbers(inputString);
-
-        numbers = new Numbers(numbersString.split(delimiter));
+        Numbers numbers = makeNumbersUsing(inputString);
 
         return numbers.sum();
     }
 
-    protected boolean isNullOrEmpty(String numberString) {
-        return (numberString == null || numberString.equals(""));
-    }
+    public Numbers makeNumbersUsing(String inputString) {
+        String delimiter = DEFAULT_DELIMITER;
+        String numbersString = inputString;
 
-    private void splitDelimiterAndNumbers(String inputString) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputString);
+        Matcher m = Pattern.compile(DEFAULT_REGEX_PATTERN).matcher(inputString);
         if (m.find()) {
             delimiter = m.group(delimiterSection);
             numbersString = m.group(numbersSection);
-            return;
         }
-        delimiter = DEFAULT_DELIMITER;
-        numbersString = inputString;
+        return new Numbers(numbersString.split(delimiter));
     }
 
-    public String delimiter() {
-        return delimiter;
-    }
-
-    public String numbersString() {
-        return numbersString;
-    }
-
-    public Numbers numbers() {
-        return numbers;
+    protected boolean isNullOrEmpty(String numberString) {
+        return (numberString == null || numberString.equals(""));
     }
 
 }
