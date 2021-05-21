@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     public static final int ZERO = 0;
@@ -29,20 +30,22 @@ public class LottoResult {
     }
 
     public String resultMessage(int price) {
-        StringBuilder sb = new StringBuilder();
-        result.entrySet()
-                .stream()
-                .filter(entry -> entry.getKey() != Prize.NONE)
-                .forEach(entry -> {
-                    Prize prize = entry.getKey();
-                    sb.append(String.format(PRIZE_RESULT_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue()))
-                            .append("\n");
-                });
-        sb.append(printProfitRate(calculateProfitRate(price)));
-        return sb.toString();
+        return statisticsMessage() +
+                profitRateMessage(calculateProfitRate(price));
     }
 
-    private String printProfitRate(double calculateProfitRate) {
+    private String statisticsMessage() {
+        return result.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() != Prize.NONE)
+                .map(entry -> {
+                    Prize prize = entry.getKey();
+                    return String.format(PRIZE_RESULT_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue());
+                })
+                .collect(Collectors.joining("\n"));
+    }
+
+    private String profitRateMessage(double calculateProfitRate) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(PROFIT_RATE_NOTICE_MESSAGE, calculateProfitRate));
 
