@@ -44,4 +44,18 @@ public class LottoNumbersTest {
             ));
         });
     }
+
+    @DisplayName("로또번호 6개 미만으로 주입시 Exception 발생하는지")
+    @Test
+    void lotto_number_less_than_6_exception() {
+        assertThatIllegalArgumentException().isThrownBy(()->{
+            new LottoNumbers(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5)
+            ));
+        });
+    }
 }
