@@ -85,3 +85,6 @@
 
 * OutputView
   * 구매한 로또 출력과 당첨 결과 출력을 책임지는 UI 클래스
+
+* GainLossDiscriminator
+  * 수익률에 따라 달라지는 메세지를 선택하기위한 enum 
