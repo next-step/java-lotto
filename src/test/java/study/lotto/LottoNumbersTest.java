@@ -30,19 +30,20 @@ public class LottoNumbersTest {
     public void autoLottoNumbersTest(){
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<Integer> autoCreatedNumbers = lottoNumbers.autoCreatedNumbers();
-        assertThat(autoCreatedNumbers.size()).isEqualTo(6);
+
+        availableLottoNumbersTest(autoCreatedNumbers);
+    }
+
+    public static void availableLottoNumbersTest(List<Integer> numbers){
+        assertThat(numbers.size()).isEqualTo(6);
         Set<Integer> numberSet = new HashSet<>();
-        for (Integer lottoNumber : autoCreatedNumbers) {
+        for (Integer lottoNumber : numbers) {
             assertThat(lottoNumber).isBetween(1,45);
             numberSet.add(lottoNumber);
         }
         assertThat(numberSet.size()).isEqualTo(6);  //중복없이 6개인지 확인
+
     }
-
-
-
-
-
 
 
 }

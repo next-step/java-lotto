@@ -19,12 +19,6 @@ public class MarkedLottoNumbersTest {
         List<Integer> markedNumbers = markedLottoNumbers.lottoNumbers();
 
         //then
-        assertThat(markedNumbers.size()).isEqualTo(6);
-        Set<Integer> numberSet = new HashSet<>();
-        for (Integer lottoNumber : markedNumbers) {
-            assertThat(lottoNumber).isBetween(1,45);
-            numberSet.add(lottoNumber);
-        }
-        assertThat(numberSet.size()).isEqualTo(6);
+        LottoNumbersTest.availableLottoNumbersTest(markedNumbers);
     }
 }
