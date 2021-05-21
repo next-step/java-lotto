@@ -29,7 +29,7 @@ public final class DelimiterMatcher {
 			String group = matcher.group(2);
 			return group.split(getDelimiter());
 		}
-		return new String[]{};
+		return new String[] {};
 	}
 
 	private String getDelimiter() {
@@ -38,8 +38,4 @@ public final class DelimiterMatcher {
 		}
 		return "";
 	}
-
-
-
-
 }
