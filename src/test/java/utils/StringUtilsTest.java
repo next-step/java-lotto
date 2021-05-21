@@ -22,6 +22,6 @@ class StringUtilsTest {
 	}, delimiter = '$')
 	void splitTestFailedTest(final String delimiter, final String text){
 		assertThat(StringUtils.split(delimiter, text))
-			.isNull();
+			.isEmpty();
 	}
 }

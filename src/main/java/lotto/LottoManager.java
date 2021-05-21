@@ -6,6 +6,7 @@ import ui.InputView;
 import ui.ResultView;
 import utils.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -80,7 +81,9 @@ public final class LottoManager {
 		String inputText = InputView.inputWinningNumber();
 		SeparatedText separatedText = SeparatedText.findSeparator(inputText);
 		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
-
+		if(StringUtils.isEmptyArray(texts)){
+			return Collections.emptyList();
+		}
 		List<Integer> lottoNumbers = NumberUtils.parseInts(texts, LottoManager.lottoNumberCondition());
 		if(LottoGenerator.isValidLottoCount(lottoNumbers) == false){
 			throw LottoException.of(WRONG_LOTTO_NUMBER);

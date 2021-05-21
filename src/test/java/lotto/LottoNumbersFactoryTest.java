@@ -1,6 +1,9 @@
+package lotto;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import type.LottoRewardType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +29,7 @@ class LottoNumbersFactoryTest {
 	@DisplayName("당첨 로또 번호를 가지고 Summary하는 기능 테스트")
 	void summaryTest(){
 		// given
-		LottoNumbers winnerLottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+		LottoNumbers winnerLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		// when
 		LottoResult lottoResult = lottoNumbersFactory.summary(winnerLottoNumbers);
