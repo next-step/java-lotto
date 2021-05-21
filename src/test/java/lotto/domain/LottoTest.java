@@ -11,6 +11,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class LottoTest {
 
     @Test
+    void 당첨번호와_로또들_비교_결과_Test() {
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        Lottos lottos = new Lottos(Arrays.asList(
+                                        new Lotto(Arrays.asList(1,4,5,6,7,8)),
+                                        new Lotto(Arrays.asList(1,4,5,6,7,8)),
+                                        new Lotto(Arrays.asList(1,4,5,6,7,8))));
+
+        LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
+    }
+
+    @Test
     void 로또와_당첨번호_비교_Test() {
         LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
