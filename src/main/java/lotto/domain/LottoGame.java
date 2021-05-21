@@ -23,6 +23,10 @@ public class LottoGame {
         }
     }
 
+    public int getLottoCount() {
+        return lottoes.getLottoCount();
+    }
+
     public List<Lotto> getLottoes() {
         return lottoes.getLottoes();
     }
