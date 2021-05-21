@@ -27,4 +27,8 @@ public final class LottoNumbers {
         return lottoNumbers.size() < MAX_SIZE;
     }
 
+    public int size() {
+        return lottoNumbers.size();
+    }
+
 }

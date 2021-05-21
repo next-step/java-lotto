@@ -20,6 +20,14 @@ public class LottoNumbersTest {
         assertThat(exception.getMessage()).isEqualTo("6개의 숫자까지만 담을 수 있습니다.");
     }
 
+    @Test
+    @DisplayName("size 크기반환 테스트")
+    void sizeTest() {
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        lottoNumbers.addNumber(new LottoNumber(1));
+        assertThat(lottoNumbers.size()).isEqualTo(1);
+    }
+
     private void setLottoNumbersOverSix(LottoNumbers lottoNumbers) {
         for (int index = 1; index <= 10; index++) {
             lottoNumbers.addNumber(new LottoNumber(index));

@@ -69,5 +69,6 @@
 ## 기능 목록
  - [x] 숫자는 1부터 45까지이며, 잘못된 값이 들어 올 시 IllegalArgumentException을 발생시킨다.
  - [x] add 시 LottoNumbers 배열에 숫자를 삽입 한다. LottoNumbers 크기가 6 이상일 시 IllegalArgumentException을 발생시킨다.
+ - [x] 중복되지 않은 6개의 로또 숫자를 뽑는다.
  - [ ] 가격을 입력 시 가격에 맞는 수 많큼 로또 번호를 생성한다.
  - [ ] 지난 주 당첨 번호를 입력 받아 당첨자 통계를 출력한다.
