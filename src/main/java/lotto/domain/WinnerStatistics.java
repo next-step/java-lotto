@@ -54,7 +54,7 @@ public class WinnerStatistics {
     }
 
     public boolean isLoss() {
-        if(calculateRate() < 1) {
+        if (calculateRate() < 1) {
             return true;
         }
         return false;

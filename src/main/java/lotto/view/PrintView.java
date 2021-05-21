@@ -55,7 +55,7 @@ public class PrintView {
     private void printRateLine(WinnerStatistics winnerStatistics) {
         String incomeRateText = String.format(MESSAGE_INCOME_RATE, winnerStatistics.incomeRate());
         StringBuilder sb = new StringBuilder(incomeRateText);
-        if(winnerStatistics.isLoss()) {
+        if (winnerStatistics.isLoss()) {
             sb.append(MESSAGE_LOSS_DESC);
         }
 
