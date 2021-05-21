@@ -20,8 +20,8 @@ public class PrintView {
     private static final String LOTTO_TICKET_SUFFIX = "]";
 
     public void showStatusBuyTicket(LottoWallet lottoWallet) {
-        List<LottoTicket> lottoTickets = lottoWallet.lottoTickets();
-        System.out.printf(MESSAGE_BUY_COUNT, lottoWallet.ticketCount());
+        List<LottoTicket> lottoTickets = lottoWallet.takeOutLottoTickets();
+        System.out.printf(MESSAGE_BUY_COUNT, lottoWallet.getTicketCount());
         for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }

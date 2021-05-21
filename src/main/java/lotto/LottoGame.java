@@ -20,7 +20,7 @@ public class LottoGame {
     private void start() {
         LottoWallet lottoWallet = buyLotto();
 
-        lottery(lottoWallet.lottoTickets());
+        lottery(lottoWallet.takeOutLottoTickets());
     }
 
     private LottoWallet buyLotto() {

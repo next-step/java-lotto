@@ -18,8 +18,8 @@ class LottoWalletTest {
         LottoWallet lottoWallet = LottoWallet.create(money);
         lottoWallet.buyLotto();
 
-        assertThat(lottoWallet.lottoTickets()).hasSize(ticketCount);
-        assertThat(lottoWallet.ticketCount()).isEqualTo(ticketCount);
+        assertThat(lottoWallet.takeOutLottoTickets()).hasSize(ticketCount);
+        assertThat(lottoWallet.getTicketCount()).isEqualTo(ticketCount);
     }
 
     @DisplayName("1000원 미만의 금액은 로또를 구입할수 없다.")

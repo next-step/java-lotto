@@ -41,11 +41,11 @@ public class LottoWallet {
         }
     }
 
-    public int ticketCount() {
+    public int getTicketCount() {
         return countOfLottoTicket;
     }
 
-    public List<LottoTicket> lottoTickets() {
+    public List<LottoTicket> takeOutLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 }
