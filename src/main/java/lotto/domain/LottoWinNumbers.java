@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static lotto.domain.LottoGameOptions.*;
@@ -29,6 +30,17 @@ public class LottoWinNumbers {
         winNumbers.add(num);
     }
 
+    public LottoResultPack checkAllOf(Lottos lottos) {
+        LottoResultPack resultPack = new LottoResultPack();
+
+        Iterator<Lotto> it = lottos.iterator();
+        while (it.hasNext()) {
+            resultPack.put(matchResultOf(it.next()));
+        }
+
+        return resultPack;
+    }
+
     public LottoResult matchResultOf(Lotto lotto) {
         int match = 0;
 
@@ -49,4 +61,5 @@ public class LottoWinNumbers {
     private LottoResult measureLucky(int count) {
         return LottoResult.valueOf(LottoResult.MATCH_.toString() + count);
     }
+
 }

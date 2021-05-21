@@ -14,11 +14,19 @@ public class LottoTest {
     void 당첨번호와_로또들_비교_결과_Test() {
         LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
         Lottos lottos = new Lottos(Arrays.asList(
-                                        new Lotto(Arrays.asList(1,4,5,6,7,8)),
-                                        new Lotto(Arrays.asList(1,4,5,6,7,8)),
-                                        new Lotto(Arrays.asList(1,4,5,6,7,8))));
+                                        new Lotto(Arrays.asList(1,4,5,6,17,38)),        // 4개 3등
+                                        new Lotto(Arrays.asList(1,2,3,4,5,6)),          // 6개 1등
+                                        new Lotto(Arrays.asList(41,34,25,16,7,8))));    // 0개 -등
 
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
+
+        assertThat(resultPack.countOf(LottoResult.MATCH_0)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoResult.MATCH_1)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoResult.MATCH_2)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoResult.MATCH_3)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoResult.MATCH_4)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoResult.MATCH_5)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoResult.MATCH_6)).isEqualTo(1);
     }
 
     @Test
