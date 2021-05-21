@@ -7,6 +7,10 @@ public class LottoNumbers {
 	public static final int LOTTO_NUMBER_LENGTH = 6;
 	private final List<LottoNumber> lottoNumbers;
 
+	public LottoNumbers(Integer... numbers) {
+		this(Arrays.asList(numbers));
+	}
+
 	public LottoNumbers(List<Integer> numbers) {
 		validationNumbers(numbers);
 		lottoNumbers = new ArrayList<>();
