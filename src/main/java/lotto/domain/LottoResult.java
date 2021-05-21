@@ -37,11 +37,13 @@ public class LottoResult {
         return result.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey() != Prize.NONE)
-                .map(entry -> {
-                    Prize prize = entry.getKey();
-                    return String.format(PRIZE_RESULT_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue());
-                })
+                .map(this::statisticsMessageFormat)
                 .collect(Collectors.joining("\n"));
+    }
+
+    private String statisticsMessageFormat(Map.Entry<Prize, Integer> entry) {
+        Prize prize = entry.getKey();
+        return String.format(PRIZE_RESULT_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue());
     }
 
     private String profitRateMessage(double calculateProfitRate) {
