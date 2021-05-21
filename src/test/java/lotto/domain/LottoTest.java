@@ -24,8 +24,8 @@ public class LottoTest {
     @Test
     void 구매개수만큼_로또_생성_Test() {
         LottoPurchaseBudget budget = new  LottoPurchaseBudget(5000);
-        LottoGenerator generator = new LottoGenerator();
-        Lottos lottos = generator.execute(budget.countOfAvailableLotto());
+        LottoGame game = new LottoGame();
+        Lottos lottos = game.buyLottos(budget.countOfAvailableLotto());
 
         assertThat(lottos.count()).isEqualTo(5);
     }
