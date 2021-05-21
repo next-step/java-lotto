@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import calculator.domain.StringAddCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,6 +26,28 @@ class LottoNumberTest {
     }
 
     static Stream<Arguments> provideSource_new_정상() {
+        List<Arguments> argumentsList = new ArrayList<>();
+
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            argumentsList.add(Arguments.of(i));
+        }
+
+        return argumentsList.stream();
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideSource_from_정상")
+    @DisplayName("from_정상")
+    void from_정상(int value) {
+        // Given
+        LottoNumber lottoNumberUsingNew = new LottoNumber(value);
+        LottoNumber lottoNumberUsingFrom = LottoNumber.from(value);
+
+        // When, Then
+        assertEquals(lottoNumberUsingFrom, lottoNumberUsingNew);
+    }
+
+    static Stream<Arguments> provideSource_from_정상() {
         List<Arguments> argumentsList = new ArrayList<>();
 
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {

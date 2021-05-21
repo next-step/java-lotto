@@ -18,10 +18,8 @@ public class LottoNumber {
         this.value = value;
     }
 
-    private void validate(int value) {
-        if (MIN_LOTTO_NUMBER > value || value > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
-        }
+    public static LottoNumber from(int value) {
+        return new LottoNumber(value);
     }
 
     @Override
@@ -35,5 +33,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    private void validate(int value) {
+        if (MIN_LOTTO_NUMBER > value || value > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
+        }
     }
 }
