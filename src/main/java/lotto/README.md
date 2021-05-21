@@ -88,3 +88,6 @@
 
 * GainLossDiscriminator
   * 수익률에 따라 달라지는 메세지를 선택하기위한 enum 
+  
+* AnalysisSheet
+  * 당첨 결과와 수익률을 노출시키기 위한 DTO 클래스. PrizeInfo 목록을 포함하고 있다.
