@@ -23,11 +23,16 @@ public final class Lotto {
     public LottoReward reward(Set<Integer> winningNumbers) {
         int sameCount = 0;
         for (int number : lottoNumbers) {
-            if (winningNumbers.contains(number)) {
-                sameCount++;
-            }
+            sameCount += addOneIfContains(winningNumbers, number);
         }
         return findReward(sameCount);
+    }
+
+    private int addOneIfContains(Set<Integer> winningNumbers, int number) {
+        if (winningNumbers.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 
     private LottoReward findReward(int sameCount) {

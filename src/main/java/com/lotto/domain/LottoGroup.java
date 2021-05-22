@@ -21,12 +21,16 @@ public class LottoGroup {
         Map<LottoReward, Integer> winningLottoMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
             LottoReward reward = lotto.reward(winningNumbers);
-            if (reward != LottoReward.NOTHING) {
-                winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
-            }
+            mapOnlyWinningLotto(winningLottoMap, reward);
         }
 
         return winningLottoMap;
+    }
+
+    private void mapOnlyWinningLotto(Map<LottoReward, Integer> winningLottoMap, LottoReward reward) {
+        if (reward != LottoReward.NOTHING) {
+            winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
+        }
     }
 
     public int totalReward(Set<Integer> winningNumbers) {
