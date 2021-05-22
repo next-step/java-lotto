@@ -12,16 +12,16 @@ public enum LottoRank {
 
     private int countOfMatched;
     private long amount;
-    private boolean bonusMatched;
+    private boolean requireBonusMatched;
 
     LottoRank(int countOfMatched, long amount) {
         this(countOfMatched, amount, false);
     }
 
-    LottoRank(int countOfMatched, long amount, boolean bonusMatched) {
+    LottoRank(int countOfMatched, long amount, boolean requireBonusMatched) {
         this.countOfMatched = countOfMatched;
         this.amount = amount;
-        this.bonusMatched = bonusMatched;
+        this.requireBonusMatched = requireBonusMatched;
     }
 
 
@@ -33,8 +33,8 @@ public enum LottoRank {
     }
 
     private boolean matched(int countOfMatched, boolean bonusMatched) {
-        if (this == SECOND && !bonusMatched) {
-            return false;
+        if (this.requireBonusMatched) {
+            return this.countOfMatched == countOfMatched && bonusMatched;
         }
 
         return this.countOfMatched == countOfMatched;
@@ -48,7 +48,7 @@ public enum LottoRank {
         return amount;
     }
 
-    public boolean isBonusMatched() {
-        return bonusMatched;
+    public boolean isRequireBonusMatched() {
+        return requireBonusMatched;
     }
 }
