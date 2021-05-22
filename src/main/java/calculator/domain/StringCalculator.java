@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static calculator.utils.UtilsString.isNullOrEmpty;
+import static calculator.utils.StringUtils.isNullOrEmpty;
 
 public class StringCalculator {
     private final String DEFAULT_DELIMITER = ":|,";

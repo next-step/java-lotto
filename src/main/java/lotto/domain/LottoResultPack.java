@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import static lotto.domain.LottoGameOptions.MAP_LOTTO_RESULT;
 
@@ -17,10 +15,8 @@ public class LottoResultPack {
     }
 
     private void initEachResultCount() {
-        Set<Integer> set = MAP_LOTTO_RESULT.keySet();
-        Iterator<Integer> it = set.iterator();
-        while (it.hasNext()) {
-            lottoResultPack.put(MAP_LOTTO_RESULT.get(it.next()), 0);
+        for (LottoResult result : MAP_LOTTO_RESULT.values()) {
+            lottoResultPack.put(result, 0);
         }
     }
 
@@ -39,10 +35,7 @@ public class LottoResultPack {
     private int sumOfProfit() {
         int sum = 0;
 
-        Set<Integer> set = MAP_LOTTO_RESULT.keySet();
-        Iterator<Integer> it = set.iterator();
-        while (it.hasNext()) {
-            LottoResult result = MAP_LOTTO_RESULT.get(it.next());
+        for (LottoResult result : MAP_LOTTO_RESULT.values()) {
             sum += result.profit() * lottoResultPack.get(result);
         }
 
