@@ -6,7 +6,7 @@ import static lotto.domain.LottoOptions.MAX_NUMBER;
 import static lotto.domain.LottoOptions.MIN_NUMBER;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
-    public static final String LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE = "로또번호는 1-45 사이의 숫자만 가능합니다.";
+    private static final String LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE = "로또번호는 1-45 사이의 숫자만 가능합니다.";
     private final int number;
 
     public LottoNumber(int number) {
