@@ -37,7 +37,7 @@ public class LottoGame {
     }
 
     private void drawWinningLotto(List<Lotto> lottos) {
-        Lotto winningLotto = Lotto.of(ioManager.inputNumbers());
+        Lotto winningLotto = Lotto.of(ioManager.inputNumbers(), ioManager.inputBonusNumber());
         printStatistics(winningLotto, lottos);
     }
 

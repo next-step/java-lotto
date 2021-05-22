@@ -21,7 +21,7 @@ class LottoTest {
     @ParameterizedTest
     void lottoNumberSizeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(numbers));
+            .isThrownBy(() -> new Lotto(numbers, 45));
     }
 
     @SuppressWarnings("unused")
@@ -40,7 +40,7 @@ class LottoTest {
     @ParameterizedTest
     void lottoNumberRangeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(numbers));
+            .isThrownBy(() -> new Lotto(numbers, 15));
     }
 
     @SuppressWarnings("unused")
@@ -55,7 +55,7 @@ class LottoTest {
     @Test
     void duplicateTest() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)));
+            .isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5), 45));
     }
 
     @DisplayName("두 로또 번호 일치 개수 검증")
@@ -65,8 +65,8 @@ class LottoTest {
                               List<Integer> target,
                               int expected) {
 
-        Lotto lotto1 = Lotto.of(numbers);
-        Lotto lotto2 = Lotto.of(target);
+        Lotto lotto1 = Lotto.of(numbers, 45);
+        Lotto lotto2 = Lotto.of(target, 45);
         int actual = lotto1.getMatchCount(lotto2);
 
         assertEquals(expected, actual);
@@ -94,7 +94,7 @@ class LottoTest {
     @Test
     void success() {
         assertDoesNotThrow(() -> {
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
             System.out.println(lotto);
         });
     }

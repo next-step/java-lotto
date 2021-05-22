@@ -5,21 +5,27 @@ import java.util.Collection;
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
+    private final int bonusNumber;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public Lotto(Collection<Integer> numbers) {
-        this(new LottoNumbers(numbers));
+    public Lotto(Collection<Integer> numbers, int bonusNumber) {
+        this(new LottoNumbers(numbers), bonusNumber);
     }
 
-    public static Lotto of(Collection<Integer> numbers) {
-        return new Lotto(numbers);
+    public static Lotto of(Collection<Integer> numbers, int bonusNumber) {
+        return new Lotto(numbers, bonusNumber);
     }
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
     public int getMatchCount(Lotto lotto) {

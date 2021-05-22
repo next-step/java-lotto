@@ -40,6 +40,11 @@ public class IOManager {
                      .collect(toList());
     }
 
+    public int inputBonusNumber() {
+        output.printLine("보너스 볼을 입력해 주세요.");
+        return input.nextInt();
+    }
+
     public void printBuyCount(int count) {
         output.printLine(count + "개를 구매했습니다.");
     }

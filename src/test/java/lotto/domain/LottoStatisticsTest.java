@@ -32,13 +32,13 @@ class LottoStatisticsTest {
     @ParameterizedTest
     void earningRateTest(List<Integer> numbers, int prize) {
 
-        LottoCreator creator = () -> Lotto.of(numbers);
+        LottoCreator creator = () -> Lotto.of(numbers, 45);
         List<Lotto> lottos = Stream.generate(creator::create)
                                    .limit(5)
                                    .collect(toList());
 
         LottoStatistics lottoStatistics =
-            new LottoStatistics(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), lottos);
+            new LottoStatistics(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 45), lottos);
 
         double expected = (double) prize * 5 / 5000;
         assertEquals(expected, lottoStatistics.getEarningsRate(lottos.size() * 1000));
@@ -47,10 +47,10 @@ class LottoStatisticsTest {
     @SuppressWarnings("unused")
     private static Stream<Arguments> earningRateTestCase() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), WinningType.ofMatchCount(6).getPrize()),
-            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), WinningType.ofMatchCount(5).getPrize()),
-            Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), WinningType.ofMatchCount(4).getPrize()),
-            Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), WinningType.ofMatchCount(3).getPrize())
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), WinningType.find(6).getPrize()),
+            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), WinningType.find(5).getPrize()),
+            Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), WinningType.find(4).getPrize()),
+            Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), WinningType.find(3).getPrize())
         );
     }
 }

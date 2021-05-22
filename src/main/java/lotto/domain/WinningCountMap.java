@@ -47,6 +47,6 @@ public class WinningCountMap {
     }
 
     private WinningType findType(int matchCount) {
-        return WinningType.ofMatchCount(matchCount);
+        return WinningType.find(matchCount);
     }
 }
