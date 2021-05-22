@@ -17,4 +17,9 @@ public class ConsoleInputView implements InputView {
         return scanner.nextLine();
     }
 
+    @Override
+    public String getVictoryNumbers() {
+        return scanner.nextLine();
+    }
+
 }

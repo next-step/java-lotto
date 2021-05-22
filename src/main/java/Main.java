@@ -10,7 +10,7 @@ public class Main {
         InputView inputView = new ConsoleInputView();
         ResultView resultView = new ConsoleResultView();
         Lotto lotto = new Lotto(inputView, resultView);
-        lotto.buy();
+        lotto.start();
     }
 
 }

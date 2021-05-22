@@ -12,4 +12,12 @@ public interface ResultView {
 
     void showTotalLotto(List<List<Integer>> lotto);
 
+    void showInputVictoryNumber();
+
+    void showEmptyLine();
+
+    void showWinning(List<Integer> winningWithNumbers);
+
+    void showBenefit(String benefit);
+
 }
