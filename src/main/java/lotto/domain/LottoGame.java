@@ -6,7 +6,7 @@ import lotto.util.MessageContainer;
 import java.util.*;
 
 public class LottoGame {
-    public static final int PRICE = 1000;
+    public static final int PRICE = 1_000;
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
