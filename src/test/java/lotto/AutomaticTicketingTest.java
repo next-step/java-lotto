@@ -2,6 +2,9 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,11 +14,13 @@ import lotto.exceptions.TicketsOutOfBoundsException;
 
 public class AutomaticTicketingTest {
 
+    AutomaticTicketing automaticTicketing = new AutomaticTicketing(
+        numbers -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
     @DisplayName("로또 번호 6개를 생성한다.")
-    @ParameterizedTest(name = "입력: \"{0}\", 출력: \"{1}\"")
-    @CsvSource(value = {"6:[1, 2, 3, 4, 5, 6]"}, delimiter = ':')
-    void newTicket(int input, String expected) {
-        AutomaticTicketing automaticTicketing = new AutomaticTicketing(input);
+    @ParameterizedTest(name = "출력: \"{1}\"")
+    @ValueSource(strings = {"[1, 2, 3, 4, 5, 6]"})
+    void newTicket(String expected) {
         assertThat(automaticTicketing.newTicket().toString()).isEqualTo(expected);
     }
 
@@ -23,7 +28,6 @@ public class AutomaticTicketingTest {
     @ParameterizedTest(name = "입력: \"{0}\", 출력: \"{1}\"")
     @CsvSource(value = {"1:1", "3:3"}, delimiter = ':')
     void newTickets(int input, int expected) {
-        AutomaticTicketing automaticTicketing = new AutomaticTicketing();
         assertThat(automaticTicketing.newTickets(input).size()).isEqualTo(expected);
     }
 
@@ -31,7 +35,6 @@ public class AutomaticTicketingTest {
     @ParameterizedTest(name = "입력: \"{0}\"")
     @ValueSource(ints = {-1, 0})
     void newTickets(int input) {
-        AutomaticTicketing automaticTicketing = new AutomaticTicketing();
         assertThatExceptionOfType(TicketsOutOfBoundsException.class).isThrownBy(() -> {
             automaticTicketing.newTickets(input);
         });

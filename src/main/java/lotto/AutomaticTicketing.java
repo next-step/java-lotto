@@ -9,24 +9,21 @@ import lotto.exceptions.TicketsOutOfBoundsException;
 
 public class AutomaticTicketing {
 
-    public static final int SIZE = 6;
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
 
     private List<Integer> numbers;
+    private AutomaticStrategy strategy;
 
-    public AutomaticTicketing() {
-        this(MAX_VALUE);
-    }
-
-    public AutomaticTicketing(int size) {
-        this.numbers = numbers(size);
+    public AutomaticTicketing(AutomaticStrategy strategy) {
+        this.numbers = numbers();
+        this.strategy = strategy;
     }
 
     public Ticket newTicket() {
-        shuffle(numbers);
-        List<Integer> selectedNumbers = new ArrayList<>(numbers.subList(0, SIZE));
-        return new Ticket(selectedNumbers);
+        shuffle(this.numbers);
+        List<Integer> chosenNumbers = this.strategy.choose(this.numbers);
+        return new Ticket(chosenNumbers);
     }
 
     public List<Ticket> newTickets(int count) {
@@ -45,9 +42,9 @@ public class AutomaticTicketing {
         }
     }
 
-    private static List<Integer> numbers(int size) {
-        List<Integer> digits = new ArrayList<>(size);
-        for (int i = MIN_VALUE; i <= size; i++) {
+    private static List<Integer> numbers() {
+        List<Integer> digits = new ArrayList<>(MAX_VALUE);
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             digits.add(i);
         }
         return digits;

@@ -4,13 +4,14 @@ import java.util.List;
 
 import lotto.AutomaticTicketing;
 import lotto.Lotto;
+import lotto.SublistStrategy;
 import lotto.Ticket;
 import lotto.enums.Message;
 import lotto.views.Display;
 
 public class AutomaticTicketingController implements Controller {
 
-    private AutomaticTicketing automaticTicketing = new AutomaticTicketing();
+    private AutomaticTicketing automaticTicketing = new AutomaticTicketing(new SublistStrategy());
 
     private Lotto lotto;
 
