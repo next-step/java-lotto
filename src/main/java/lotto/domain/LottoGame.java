@@ -1,7 +1,7 @@
-package step3.domain;
+package lotto.domain;
 
 import java.util.List;
-import step3.ui.IOManager;
+import lotto.ui.IOManager;
 
 public class LottoGame {
 

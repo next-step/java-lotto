@@ -1,10 +1,10 @@
-package step3.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.ui.IOManager;
-import step3.ui.Input;
-import step3.ui.StandardOutput;
+import lotto.ui.IOManager;
+import lotto.ui.Input;
+import lotto.ui.StandardOutput;
 
 class LottoGameTest {
 

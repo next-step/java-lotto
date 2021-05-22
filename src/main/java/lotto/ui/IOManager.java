@@ -1,8 +1,8 @@
-package step3.ui;
+package lotto.ui;
 
 import java.util.Arrays;
 import java.util.List;
-import step3.domain.LottoWinningData;
+import lotto.domain.LottoWinningData;
 
 import static java.util.stream.Collectors.toList;
 

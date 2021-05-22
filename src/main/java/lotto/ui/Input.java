@@ -1,4 +1,4 @@
-package step3.ui;
+package lotto.ui;
 
 public interface Input {
 

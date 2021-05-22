@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
