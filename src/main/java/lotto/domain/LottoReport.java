@@ -5,10 +5,11 @@ import java.util.List;
 import static lotto.domain.Rank.*;
 
 public class LottoReport {
-    private int threeMatched;
-    private int fourMatched;
-    private int fiveMatched;
-    private int sixMatched;
+    private int fifthCount;
+    private int fourthCount;
+    private int thirdCount;
+    private int secondCount;
+    private int firstCount;
     private double purchasedAmount;
     private double yield;
     private long winnings;
@@ -21,7 +22,13 @@ public class LottoReport {
     }
 
     private void updateMatchedNumberMetrics(WinningLotto winners, Lotto test) {
-        // TODO: 변경
+        int countOfMatch = test.matchCountWith(winners);
+        boolean matchBonus = test.matchBonus(winners.bonusNumber);
+        FIFTH.ifMatchedThan(countOfMatch, matchBonus, () -> fifthCount++);
+        FOURTH.ifMatchedThan(countOfMatch, matchBonus, () -> fourthCount++);
+        THIRD.ifMatchedThan(countOfMatch, matchBonus, () -> thirdCount++);
+        SECOND.ifMatchedThan(countOfMatch, matchBonus, () -> secondCount++);
+        FIRST.ifMatchedThan(countOfMatch, matchBonus, () -> firstCount++);
     }
 
     private void updateYield(int lottoSize) {
@@ -31,30 +38,35 @@ public class LottoReport {
     }
 
     private void updateWinnings() {
-        this.winnings = threeMatched * FIFTH.winningMoney +
-                fourMatched * FOURTH.winningMoney +
-                fiveMatched * THIRD.winningMoney +
-                sixMatched * FIRST.winningMoney;
+        this.winnings = fifthCount * FIFTH.winningMoney +
+                fourthCount * FOURTH.winningMoney +
+                thirdCount * THIRD.winningMoney +
+                secondCount * SECOND.winningMoney +
+                firstCount * FIRST.winningMoney;
     }
 
-    public int countWinnings(Rank rank){
+    public int countWinnings(Rank rank) {
         return rank.lottoReportMatchedNumGetter.apply(this);
     }
 
-    int threeMatched() {
-        return threeMatched;
+    int fifthCount() {
+        return fifthCount;
     }
 
-    int fourMatched() {
-        return fourMatched;
+    int fourthCount() {
+        return fourthCount;
     }
 
-    int fiveMatched() {
-        return fiveMatched;
+    int thirdCount() {
+        return thirdCount;
     }
 
-    int sixMatched() {
-        return sixMatched;
+    int secondCount() {
+        return secondCount;
+    }
+
+    int firstCount() {
+        return firstCount;
     }
 
     public double yield() {
