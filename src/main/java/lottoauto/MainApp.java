@@ -13,11 +13,16 @@ public class MainApp {
         LottoStore lottoStore = new LottoStore();
 
         User user = new User(money);
-        List<LottoTicket> lottoTickets = user.buyLottoTickets(lottoStore);
+        user.buyLottoTickets(lottoStore);
 
-        for(LottoTicket lottoTicket: lottoTickets) {
-            outputView.print(lottoTicket);
-            outputView.print("\n");
-        }
+        user.printLottoTickets(outputView);
+
+
+        outputView.println("지난 주 당첨 번호를 입력해 주세요.");
+        String winningNumberStr = inputView.next();
+
+        WinningNumber winningNumber = new WinningNumber(winningNumberStr);
+
+        user.checkWinning(winningNumber);
     }
 }

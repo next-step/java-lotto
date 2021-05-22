@@ -19,6 +19,10 @@ public class LottoNumbers {
         this.lottoNumbers = generateLottoNumbers();
     }
 
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private List<Integer> generateLottoNumbers() {
         List<Integer> lottoNumberList = IntStream.rangeClosed(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
                 .boxed()
@@ -43,5 +47,9 @@ public class LottoNumbers {
         Collections.sort(arrayList);
 
         return arrayList.toString();
+    }
+
+    public boolean contains(int number) {
+        return lottoNumbers.contains(number);
     }
 }
