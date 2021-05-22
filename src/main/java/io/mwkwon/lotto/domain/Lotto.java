@@ -1,5 +1,7 @@
 package io.mwkwon.lotto.domain;
 
+import io.mwkwon.lotto.enums.Rank;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -63,6 +65,21 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    public Rank calcLottoRank(Lotto winningLotto) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : winningLotto.lottoNumbers) {
+            matchCount = calcMatchCount(matchCount, lottoNumber);
+        }
+        return Rank.getRankByMatchCount(matchCount);
+    }
+
+    private int calcMatchCount(int matchCount, LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            matchCount++;
+        }
+        return matchCount;
     }
 
     private static List<LottoNumber> createAutoLottoNumbers() {
