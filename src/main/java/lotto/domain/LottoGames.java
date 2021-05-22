@@ -8,9 +8,8 @@ public class LottoGames implements Iterable<LottoGame>{
     private List<LottoGame> lottoGames = new ArrayList<>();
 
     public LottoGames(int money) {
-        while(LottoGame.isAffordable(money)) {
+        for (int currentMoney = money; currentMoney >= LottoGame.PRICE; currentMoney -= LottoGame.PRICE) {
             lottoGames.add(new LottoGame());
-            money -= LottoGame.PRICE;
         }
     }
 

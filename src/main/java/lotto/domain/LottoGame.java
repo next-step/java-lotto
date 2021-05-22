@@ -25,10 +25,6 @@ public class LottoGame {
         }
     }
 
-    public static boolean isAffordable(int money) {
-        return money >= PRICE;
-    }
-
     private void addRandomNumber(int number) {
         lottoNumbers.add(new LottoNumber(new RandomNumber(number)));
     }
