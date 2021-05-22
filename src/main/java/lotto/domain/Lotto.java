@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import lotto.input.WinningNumber;
 
 import java.util.Arrays;
@@ -22,13 +23,24 @@ public final class Lotto {
     System.out.println(Arrays.toString(numbers.toArray()));
   }
 
-  public int getMatchCountFrom(WinningNumber winningNumber) {
+  public Rank getRankBy(WinningNumber winningNumber) {
+    return Rank.valueOf(
+        getMatchCountFrom(winningNumber),
+        isMatchBonusNumber(winningNumber)
+    );
+  }
+
+  private int getMatchCountFrom(WinningNumber winningNumber) {
     int count = 0;
     for (int number : winningNumber.getWinningNumbers()) {
       count += numbers.contains(number) ? 1 : 0;
     }
 
     return count;
+  }
+
+  private boolean isMatchBonusNumber(WinningNumber winningNumber) {
+    return numbers.contains(winningNumber.getBonusNumber());
   }
 
   @Override
