@@ -17,7 +17,7 @@ public class LottoTicket {
         return numbers.size();
     }
 
-    public MatchStatus matchResultWith(WinningNumbers winningNumbers) {
+    public MatchStatus matchingStatusWith(WinningNumbers winningNumbers) {
         int matchCount = 0;
         for (LottoNumber number : numbers) {
             matchCount += increaseCountWhenMatch(number, winningNumbers);

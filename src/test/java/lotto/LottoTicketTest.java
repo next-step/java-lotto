@@ -22,7 +22,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //When
-        MatchStatus matchStatus = lottoTicket.matchResultWith(winningNumbers);
+        MatchStatus matchStatus = lottoTicket.matchingStatusWith(winningNumbers);
 
         //
         assertThat(matchStatus).isEqualTo(MatchStatus.ZERO);
