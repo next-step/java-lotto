@@ -6,8 +6,8 @@ import java.util.Iterator;
 
 public class LottoOutputHandler {
 
-    public void printCount(int count) {
-        System.out.println(count+"개를 구매했습니다.");
+    public void printCount(int manualCount, int autoCount) {
+        System.out.println("수동으로 "+manualCount+"자동으로 "+autoCount +"개를 구매했습니다.");
     }
 
     public void printBought(Lottos lottos) {
