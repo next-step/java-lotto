@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoNumbers {
 
-	public static final int LOTTO_NUMBER_LENGTH = 6;
+	public static final int LENGTH = 6;
 	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(Integer... numbers) {
@@ -29,13 +29,13 @@ public class LottoNumbers {
 	}
 
 	private void validationDuplicate(List<Integer> numbers) {
-		if (removeDuplicateNumbers(numbers).size() != LOTTO_NUMBER_LENGTH) {
+		if (removeDuplicateNumbers(numbers).size() != LENGTH) {
 			throw new IllegalArgumentException("로또번호중에서 중복된 숫자가 포함되어 있습니다.");
 		}
 	}
 
 	private void validationSize(List<Integer> numbers) {
-		if (numbers == null || numbers.size() != LOTTO_NUMBER_LENGTH) {
+		if (numbers == null || numbers.size() != LENGTH) {
 			throw new IllegalArgumentException("로또는 숫자6개로 이루어져야 합니다.");
 		}
 	}
