@@ -8,11 +8,11 @@ class NumberTest {
 	public void 빈문자열_또는_null을_입력할_경우_0을_반환해야한다(){
 		Number zeroForNull = new Number();
 
-		assertThat(zeroForNull).isEqualTo(0);
+		assertThat(0).isEqualTo(zeroForNull.number());
 
 		Number zeroForEmpty = new Number("");
 
-		assertThat(zeroForEmpty).isEqualTo(0);
+		assertThat(0).isEqualTo(zeroForEmpty.number());
 	}
 
 	@Test
@@ -20,4 +20,9 @@ class NumberTest {
 
 	}
 
+
+	@Test
+	public void 음수를_전달할경우_RuntimeException예외가_발생해야한다(){
+
+	}
 }
