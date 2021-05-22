@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.Lotto;
@@ -58,5 +60,19 @@ public class LottoTest {
             .collect(Collectors.toList()));
         // when & then
         assertThat(lotto).isEqualTo(test);
+    }
+
+    @ParameterizedTest(name = "로또 넘버 맞춤 테스트")
+    @CsvSource(value={"1,2,3,4,5,6:5", "1,2,3,4,10,11:4", "1,2,3,10,11,17:3", "1,2,7,9,10,11:2", "1,13,14,10,11,20:1", "10,12,13,14,15,17:0"}, delimiter = ':')
+    public void match(String inputs, int expect) {
+        // given
+        String[] inputNumbers = inputs.split(",");
+        Lotto lotto = new Lotto(inputNumbers);
+        List<LottoNumber> winInput = new ArrayList<>();
+        for(int i = 1; i <= 5; i++) {
+            winInput.add(LottoNumber.of(i));
+        }
+        // when & then
+        assertThat(lotto.match(winInput)).isEqualTo(expect);
     }
 }
