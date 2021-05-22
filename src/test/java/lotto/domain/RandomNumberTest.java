@@ -15,30 +15,30 @@ public class RandomNumberTest {
         // random하게 생성
         RandomNumber number1 = new RandomNumber();
         // 특정 수로 생성
-        RandomNumber number2 = new RandomNumber(30);
+        CustomNumber number2 = new CustomNumber(30);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0,46})
     public void 랜덤번호_범위검증(int invalidNumber) {
-        assertThatThrownBy(()->new RandomNumber(invalidNumber))
+        assertThatThrownBy(()->new CustomNumber(invalidNumber))
                 .isInstanceOf(InvalidLottoNumber.class)
                 .hasMessageContaining(MessageContainer.INVALID_LOTTO_NUMBER);
     }
 
     @Test
     public void equals체크() {
-        RandomNumber number1 = new RandomNumber(30);
-        RandomNumber number2 = new RandomNumber(30);
+        CustomNumber number1 = new CustomNumber(30);
+        CustomNumber number2 = new CustomNumber(30);
         assertThat(number1.equals(number2)).isTrue();
 
-        RandomNumber number3 = new RandomNumber(31);
+        CustomNumber number3 = new CustomNumber(31);
         assertThat(number1.equals(number3)).isFalse();
     }
 
     @Test
     public void 출력() {
-        assertThat(new RandomNumber(11).toString()).isEqualTo("11");
+        assertThat(new CustomNumber(11).toString()).isEqualTo("11");
     }
 
 }

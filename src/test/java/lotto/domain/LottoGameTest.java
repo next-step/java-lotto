@@ -9,11 +9,6 @@ import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -31,7 +26,7 @@ public class LottoGameTest {
         LottoGame game1 = new LottoGame(numbers1);
         LottoGame game2 = new LottoGame(numbers2);
 
-        assertThat(game1.getRank(game2)).isEqualTo(matchingCount);
+        assertThat(game1.matchCount(game2)).isEqualTo(matchingCount);
     }
 
     @Test

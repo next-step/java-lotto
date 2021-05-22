@@ -26,7 +26,7 @@ public class LottoGame {
     }
 
     private void addRandomNumber(int number) {
-        lottoNumbers.add(new LottoNumber(new RandomNumber(number)));
+        lottoNumbers.add(new LottoNumber(new CustomNumber(number)));
     }
 
     private void fillRandomNumbers() {
@@ -50,7 +50,7 @@ public class LottoGame {
         return true;
     }
 
-    public int getRank(LottoGame game2) {
+    public int matchCount(LottoGame game2) {
         int count = 0;
         for (LottoNumber number : lottoNumbers) {
             count = game2.increaseCountIfContains(number,count);

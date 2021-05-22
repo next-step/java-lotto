@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private RandomNumber number;
+    private Number number;
 
-    public LottoNumber(RandomNumber randomNumber) {
-        this.number = randomNumber;
+    public LottoNumber(Number number) {
+        this.number = number;
     }
 
     @Override

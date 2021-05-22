@@ -22,7 +22,7 @@ public class LottoGames implements Iterable<LottoGame>{
     public LottoStatics calculateStatics(LottoGame winGame) {
         LottoStatics statics = new LottoStatics();
         for (LottoGame game : lottoGames) {
-            statics.addStatic(winGame.getRank(game));
+            statics.addStatic(winGame.matchCount(game));
         }
         return statics;
     }
