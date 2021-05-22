@@ -12,7 +12,7 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers generate() {
+    public static LottoNumbers generate() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(LottoNumber.of(i));
