@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
+    private static final int PRINT_MIN_MATCH_NUMBER = 3;
+    private static final int PRINT_MAX_MATCH_NUMBER = 6;
+    private static final String SPLIT_REGEX = ",";
     private int amount;
     private Lottos lottos;
     private LottoNumbers winningLottoNumber;
@@ -32,24 +35,21 @@ public class LottoMachine {
     
     public void inputWinningNumber() {
         OutputUI.printInputWinningLottoNumbers();
-        String winningNumbers = InputUI.inputWinnigNumbers();
+        String winningNumbers = InputUI.inputWinningNumbers();
         this.winningLottoNumber = new LottoNumbers(convertStringToList(winningNumbers));
     }
 
     public void printStatistics() {
         LottoStatistics lottoStatistics = lottos.getStatistics(winningLottoNumber);
-        System.out.println("1 : "+lottoStatistics.count(1));
-        System.out.println("2 : "+lottoStatistics.count(2));
-        System.out.println("3 : "+lottoStatistics.count(3));
-        System.out.println("4 : "+lottoStatistics.count(4));
-        System.out.println("5 : "+lottoStatistics.count(5));
-        System.out.println("6 : "+lottoStatistics.count(6));
+        for (int i = PRINT_MIN_MATCH_NUMBER; i <= PRINT_MAX_MATCH_NUMBER; i++) {
+            OutputUI.printStatistics(i, lottoStatistics.count(i));
+        }
+        OutputUI.printRateOfReturn(((double)lottoStatistics.totalPayout() / amount));
 
-        System.out.println("수익률 : " + lottoStatistics.totalPayout()/amount );
     }
 
     public List<Integer> convertStringToList(String data) {
-        return Arrays.stream(data.split(","))
+        return Arrays.stream(data.split(SPLIT_REGEX))
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());
     }
