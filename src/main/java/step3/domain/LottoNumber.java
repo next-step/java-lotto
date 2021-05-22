@@ -18,4 +18,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber o) {
         return this.lottoNumber - o.lottoNumber;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj!=null && obj.getClass() == this.getClass()) {
+            return ((LottoNumber)obj).lottoNumber == this.lottoNumber;
+        }
+        return super.equals(obj);
+    }
 }

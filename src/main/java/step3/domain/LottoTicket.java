@@ -5,7 +5,7 @@ import step3.common.ErrorCode;
 import java.util.List;
 
 public class LottoTicket {
-    private static final int LOTTO_NUMBERS_LENGTH = 6;
+    public static final int LOTTO_NUMBERS_LENGTH = 6;
     private List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {

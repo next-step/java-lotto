@@ -16,5 +16,14 @@ public enum WinningType {
         this.matchCount = matchCount;
         this.prize = prize;
     }
+
+    public static WinningType of(int matchCount) {
+        for(WinningType winningType: WinningType.values()) {
+            if (winningType.matchCount == matchCount) {
+                return winningType;
+            }
+        }
+        return SEVENTH;
+    }
 }
 

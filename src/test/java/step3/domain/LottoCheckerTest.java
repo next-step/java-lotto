@@ -27,7 +27,7 @@ public class LottoCheckerTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         ));
         winningType = lottoChecker.check(userFirstLottoTicket, winningLottoTicket);
-        assertThat(winningType == WinningType.FIRST).isTrue();
+        assertThat(winningType).isEqualTo(WinningType.FIRST);
 
         // 4개 일치 시에는 3등
         LottoTicket userThirdLottoTicket = new LottoTicket(Arrays.asList(
@@ -35,7 +35,7 @@ public class LottoCheckerTest {
                 new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
         ));
         winningType = lottoChecker.check(userThirdLottoTicket, winningLottoTicket);
-        assertThat(winningType == WinningType.THIRD).isTrue();
+        assertThat(winningType).isEqualTo(WinningType.FORTH);
 
         // 0개 일치 시에는 7등
         LottoTicket userSeventhLottoTicket = new LottoTicket(Arrays.asList(
@@ -43,7 +43,7 @@ public class LottoCheckerTest {
                 new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
         ));
         winningType = lottoChecker.check(userSeventhLottoTicket, winningLottoTicket);
-        assertThat(winningType == WinningType.SEVENTH).isTrue();
+        assertThat(winningType).isEqualTo(WinningType.SEVENTH);
 
     }
 }
