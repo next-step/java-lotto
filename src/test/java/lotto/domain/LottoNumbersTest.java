@@ -18,7 +18,7 @@ public class LottoNumbersTest {
 	}
 
 	@Test
-	@DisplayName("생성된 로또번호가 6개인지 테스트")
+	@DisplayName("생성된 로또번호가 6개가 아닐 경우 예외발생 테스트")
 	void createLottoNumbers_sizeCheck() {
 		Assertions.assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5))
 				.isInstanceOf(IllegalArgumentException.class);
