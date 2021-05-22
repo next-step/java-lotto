@@ -23,11 +23,11 @@ public class PrizeTest {
 		);
 	}
 
-	@DisplayName("ENUM 숫자 변환")
+	@DisplayName("ENUM 인덱스 변환")
 	@ParameterizedTest(name = "입력: \"{0}\", 숫자: \"{1}\"")
 	@MethodSource
 	void toInteger(Prize input, int expected) {
-		assertThat(input.ordinal()).isEqualTo(expected);
+		assertThat(input.getIndex()).isEqualTo(expected);
 	}
 
 	private static Stream<Arguments> toPrize() {

@@ -22,9 +22,9 @@ public final class Bank {
 
 	public static long sumPrizeMoney(List<Integer> scores) {
 		long sum = 0;
-		for (int i = 0; i < scores.size(); i++) {
-			long money = Prize.valueOf(i).getPrize();
-			sum += scores.get(i) * money;
+		for (int index = 0; index < scores.size(); index++) {
+			long money = Prize.valueOf(index).getPrize();
+			sum += scores.get(index) * money;
 		}
 		return sum;
 	}

@@ -1,21 +1,36 @@
 package lotto.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lotto.exceptions.NumberOutOfBoundsException;
 
 public enum Prize {
-	ZERO(0),
-	ONE(0),
-	TWO(0),
-	THREE(5_000),
-	FOUR(50_000),
-	FIVE(1_500_000),
-	SIX(2_000_000_000);
 
-	private int prize;
+	ZERO(0, 0),
+	ONE(1, 0),
+	TWO(2, 0),
+	THREE(3, 5_000),
+	FOUR(4, 50_000),
+	FIVE(5, 1_500_000),
+	SIX(6, 2_000_000_000);
+
 	private static final int MIN_NUMBER = 0;
 	private static final int MAX_NUMBER = 6;
 
-	Prize(int prize) {
+	private static final Map<Integer, Prize> lookup = new HashMap<>();
+
+	static {
+		for (Prize prize : Prize.values()) {
+			lookup.put(prize.index, prize);
+		}
+	}
+
+	private int index;
+	private int prize;
+
+	Prize(int index, int prize) {
+		this.index = index;
 		this.prize = prize;
 	}
 
@@ -23,11 +38,14 @@ public enum Prize {
 		return this.prize;
 	}
 
-	public static Prize valueOf(int number) {
-		if (number < MIN_NUMBER || MAX_NUMBER < number) {
+	public int getIndex() {
+		return this.index;
+	}
+
+	public static Prize valueOf(int index) {
+		if (index < MIN_NUMBER || MAX_NUMBER < index) {
 			throw new NumberOutOfBoundsException(ErrorMessage.PRIZE_OUT_OF_BOUNDS.toString());
 		}
-		Prize[] prizes = Prize.values();
-		return prizes[number];
+		return lookup.get(index);
 	}
 }
