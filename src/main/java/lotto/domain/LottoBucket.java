@@ -1,11 +1,19 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import lotto.input.WinningNumber;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static lotto.enums.Rank.FIFTH;
+import static lotto.enums.Rank.FIRST;
+import static lotto.enums.Rank.FOURTH;
+import static lotto.enums.Rank.MISS;
+import static lotto.enums.Rank.SECOND;
+import static lotto.enums.Rank.THIRD;
 
 public final class LottoBucket {
 
@@ -16,24 +24,24 @@ public final class LottoBucket {
   }
 
   public MatchNumberCount getMatchNumberCountWith(WinningNumber winningNumber) {
-    Map<Integer, Integer> count = getDefaultCount();
+    Map<Rank, Integer> count = getDefaultCount();
 
     for (Lotto lotto : lottos) {
-      int matchCount = lotto.getMatchCountFrom(winningNumber);
-      if (matchCount >= 3) {
-        count.put(matchCount, count.get(matchCount) + 1);
-      }
+      Rank rank = lotto.getRankBy(winningNumber);
+      count.put(rank, count.get(rank) + 1);
     }
 
     return new MatchNumberCount(count);
   }
 
-  private Map<Integer, Integer> getDefaultCount() {
-    return new HashMap<Integer, Integer>() {{
-      put(3, 0);
-      put(4, 0);
-      put(5, 0);
-      put(6, 0);
+  private Map<Rank, Integer> getDefaultCount() {
+    return new HashMap<Rank, Integer>() {{
+      put(FIRST, 0);
+      put(SECOND, 0);
+      put(THIRD, 0);
+      put(FOURTH, 0);
+      put(FIFTH, 0);
+      put(MISS, 0);
     }};
   }
 
