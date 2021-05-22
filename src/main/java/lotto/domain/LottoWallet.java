@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.RandomNumberGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,10 +30,10 @@ public class LottoWallet {
         return money / LOTTO_TICKET_PRICE;
     }
 
-    public void buyingLotto() {
+    public void buyingLotto(NumberGeneratorStrategy numberGeneratorStrategy) {
         for (int i = 0; i < countOfLottoTicket; i++) {
             LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(RandomNumberGenerator.randomSixNumbers());
+            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(numberGeneratorStrategy.generator());
             LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
 
             lottoTickets.add(lottoTicket);
