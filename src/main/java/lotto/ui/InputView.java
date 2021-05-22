@@ -39,4 +39,9 @@ public class InputView {
         }
         return integerList;
     }
+
+    public static int getBonusNumber() {
+        String line = SCANNER.nextLine();
+        return parseInt(line);
+    }
 }
