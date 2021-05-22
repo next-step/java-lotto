@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Place {
-    First(6, 2000000000),
-    Second(5, 1500000),
-    Third(4, 50000),
-    Fourth(3, 5000),
+    First(6, 2000),
+    Second(5, 150),
+    Third(4, 50),
+    Fourth(3, 5),
     None(0, 0);
 
     private final int match;
@@ -30,5 +30,9 @@ public enum Place {
             return placeMap.get(match);
         }
         return None;
+    }
+
+    public int getWinnings() {
+        return winnings;
     }
 }
