@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int LOTTO_NUMBERS_COUNT = 6;
+    public static final int LOTTO_NUMBERS_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
