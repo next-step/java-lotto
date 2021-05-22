@@ -14,7 +14,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets of(List<LottoNumbers> lottoNumbersList, LottoNumbers winningNumbers) {
+    public static LottoTickets of(List<LottoNumbers> lottoNumbersList, WinningNumbers winningNumbers) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             lottoTickets.add(LottoTicket.of(lottoNumbers, winningNumbers));

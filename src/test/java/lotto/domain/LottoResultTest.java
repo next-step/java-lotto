@@ -17,7 +17,8 @@ class LottoResultTest {
         map.put(Prize.FIRST, 0);
         map.put(Prize.SECOND, 0);
         map.put(Prize.THIRD, 0);
-        map.put(Prize.FOURTH, 1);
+        map.put(Prize.FOURTH, 0);
+        map.put(Prize.FIFTH, 1);
 
         LottoResult lottoResult = new LottoResult(map);
         double profitRate = lottoResult.calculateProfitRate(14000);

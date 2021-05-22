@@ -17,8 +17,8 @@ class LottoTicketsTest {
     @ParameterizedTest
     @MethodSource("provideListForStringNumbers")
     @DisplayName("당첨 번호 입력 시 결과를 반환한다")
-    void makeStatisticsTest(List<String> numbers, int firstCount, int secondCount, int thirdCount, int fourthCount) {
-        LottoNumbers winningNumbers = LottoNumbers.of("1,2,3,4,5,6");
+    void makeStatisticsTest(List<String> numbers, int firstCount, int secondCount, int thirdCount, int fourthCount, int fifthCount) {
+        WinningNumbers winningNumbers = WinningNumbers.of("1,2,3,4,5,6", "6");
         List<LottoNumbers> lottoNumbersList = numbers.stream()
                 .map(LottoNumbers::of)
                 .collect(Collectors.toList());
@@ -30,12 +30,13 @@ class LottoTicketsTest {
         assertThat(result.prizeCount(Prize.SECOND)).isEqualTo(secondCount);
         assertThat(result.prizeCount(Prize.THIRD)).isEqualTo(thirdCount);
         assertThat(result.prizeCount(Prize.FOURTH)).isEqualTo(fourthCount);
+        assertThat(result.prizeCount(Prize.FIFTH)).isEqualTo(fifthCount);
     }
 
     private static Stream<Arguments> provideListForStringNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8"), 1, 1, 1, 0),
-                Arguments.of(Arrays.asList("1,2,3,6,7,8", "2,3,4,5,6,7", "3,4,5,6,7,8", "1,2,3,7,8,9"), 0, 1, 2, 1)
+                Arguments.of(Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "1,3,4,5,6,7"), 1, 2, 0, 0, 0),
+                Arguments.of(Arrays.asList("1,2,3,6,7,8", "2,3,4,5,6,7", "3,4,5,6,7,8", "1,2,3,7,8,9"), 0, 1, 0, 2, 1)
         );
     }
 }

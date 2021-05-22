@@ -18,7 +18,7 @@ public class LottoTicket {
         }
     }
 
-    public static LottoTicket of(LottoNumbers lottoNumbers, LottoNumbers winningNumbers) {
+    public static LottoTicket of(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
         return new LottoTicket(lottoNumbers, lottoNumbers.match(winningNumbers));
     }
 
