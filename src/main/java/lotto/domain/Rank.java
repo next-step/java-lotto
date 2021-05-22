@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 
 public enum Rank {
 
@@ -19,14 +19,10 @@ public enum Rank {
 	}
 
 	public static Rank findRankByMatchCount(int matchCount) {
-		HashMap<Integer, Rank> rankMap = new HashMap<>();
-		for (Rank rank : Rank.values()) {
-			rankMap.put(rank.matchCount, rank);
-		}
-		if (rankMap.get(matchCount) != null) {
-			return rankMap.get(matchCount);
-		}
-		return NONE;
+		return Arrays.stream(Rank.values())
+				.filter(rank -> rank.matchCount == matchCount)
+				.findFirst()
+				.orElse(NONE);
 	}
 
 	public int getMatchCount() {
