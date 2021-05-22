@@ -3,17 +3,17 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("로또숫자 테스트")
 public class LottoNumberTest {
 
-	@Test
-	@DisplayName("로또 숫자 생성 테스트")
-	void createLottoNumber() {
-		Assertions.assertThatThrownBy(() -> new LottoNumber(0))
-				.isInstanceOf(IllegalArgumentException.class);
-
-		Assertions.assertThatThrownBy(() -> new LottoNumber(46))
+	@ParameterizedTest
+	@ValueSource(ints = {0, 46})
+	@DisplayName("범위밖의 로또숫자를 생성할 경우 예외발생 테스트")
+	void createWrongRangeLottoNumber(int wrongNumber) {
+		Assertions.assertThatThrownBy(() -> new LottoNumber(wrongNumber))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
