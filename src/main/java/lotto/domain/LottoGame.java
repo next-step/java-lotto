@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.generator.NumberGenerator;
 
-import java.util.List;
-
 public class LottoGame {
     private final Lottoes lottoes;
     private final Money money;
