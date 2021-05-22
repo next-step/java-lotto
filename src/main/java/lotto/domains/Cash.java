@@ -1,9 +1,10 @@
 package lotto.domains;
 
 public class Cash {
+    private static final int MINIMUM_AMOUNT = 1000;
     private final int amount;
 
-    public Cash(int amount) {
+    public Cash(final int amount) {
         isGreaterThanZero(amount);
         this.amount = amount;
     }
@@ -13,7 +14,7 @@ public class Cash {
     }
 
     private void isGreaterThanZero(int amount){
-        if (amount < 1000){
+        if (amount < MINIMUM_AMOUNT){
             throw new IllegalArgumentException("1000 보다 큰숫자를 입력해주세요");
         }
     }
