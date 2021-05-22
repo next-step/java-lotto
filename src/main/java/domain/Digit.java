@@ -17,6 +17,10 @@ public class Digit {
         }
     }
 
+    public int digit(){
+        return digit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
