@@ -16,6 +16,7 @@ public class LottoManager {
     public void control() {
         int totalCount = inputPrice() / Lotto.UNIT_PRICE;
         LottoGroup lottoGroup = createLottoGroup(totalCount);
+        OutputView.confirmBuyCount(totalCount);
         OutputView.buyLottoList(lottoGroup.lottoList());
 
         Set<Integer> winningNumbers = inputWinningNumbers();
