@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -53,7 +52,7 @@ public class WinningTicketControllerTest {
         "45,44,43,42,41,40:[40, 41, 42, 43, 44, 45]"
     }, delimiter = ':')
     void askWinningTicket(String input, String expected) {
-        winningTicketController.askWinningTicket(input);
+        winningTicketController.saveWinningTicket(input);
 
         assertThat(lotto.storage().loadWinningTicket().toString()).isEqualTo(expected);
     }
@@ -63,7 +62,7 @@ public class WinningTicketControllerTest {
     @ValueSource(strings = {"", "a"})
     void createTicket_InvalidPattern_ExceptionThrown(String input) {
         assertThatExceptionOfType(InvalidPatternException.class).isThrownBy(() -> {
-            winningTicketController.askWinningTicket(input);
+            winningTicketController.saveWinningTicket(input);
         });
     }
 
@@ -72,7 +71,7 @@ public class WinningTicketControllerTest {
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void createTicket_Not6_ExceptionThrown(String input) {
         assertThatExceptionOfType(InsufficientNumbersException.class).isThrownBy(() -> {
-            winningTicketController.askWinningTicket(input);
+            winningTicketController.saveWinningTicket(input);
         });
     }
 
@@ -81,7 +80,7 @@ public class WinningTicketControllerTest {
     @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,99"})
     void createTicket_NumberOutOfBounds_ExceptionThrown(String input) {
         assertThatExceptionOfType(NumberOutOfBoundsException.class).isThrownBy(() -> {
-            winningTicketController.askWinningTicket(input);
+            winningTicketController.saveWinningTicket(input);
         });
     }
 
@@ -90,14 +89,7 @@ public class WinningTicketControllerTest {
     @ValueSource(strings = {"1,2,2,3,4,5"})
     void createTicket_OutOfBoundNumber_ExceptionThrown(String input) {
         assertThatExceptionOfType(DuplicateNumbersException.class).isThrownBy(() -> {
-            winningTicketController.askWinningTicket(input);
+            winningTicketController.saveWinningTicket(input);
         });
-    }
-
-    @DisplayName("다음 컨트롤러로 변경한다.")
-    @Test
-    void toNextController() {
-        winningTicketController.toNextController();
-        assertThat(lotto.compareController(ResultController.class)).isTrue();
     }
 }

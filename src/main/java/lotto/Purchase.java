@@ -19,12 +19,12 @@ public class Purchase {
         this.cash = cash;
     }
 
-    public int totalTickets() {
+    public int ticketsAmount() {
         return this.cash / TICKET_PRICE;
     }
 
     public int payment() {
-        return totalTickets() * TICKET_PRICE;
+        return ticketsAmount() * TICKET_PRICE;
     }
 
     private void verifyBounds(int cash) {

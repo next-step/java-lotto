@@ -6,36 +6,40 @@ import lotto.enums.Message;
 import lotto.views.Display;
 import lotto.views.Keyboard;
 
-public class WinningTicketController extends InteractionController {
+public class WinningTicketController implements Controller {
+
+    private Lotto lotto;
 
     public WinningTicketController(Lotto lotto) {
-        super(lotto);
+        this.lotto = lotto;
     }
 
     @Override
-    protected void action() {
-        askWinningTicket(Keyboard.read());
+    public void run() {
+        show();
+
+        try {
+            action();
+            toResultController();
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+        }
     }
 
-    protected void askWinningTicket(String input) {
-        saveWinningTicket(readTicket(input));
-    }
-
-    private Ticket readTicket(String text) {
-        return new Ticket(text);
-    }
-
-    private void saveWinningTicket(Ticket ticket) {
-        this.lotto.storage().saveWinningTicket(ticket);
-    }
-
-    @Override
-    protected void show() {
+    private void show() {
         Display.show(Message.WINNING_TICKET);
     }
 
-    @Override
-    protected void toNextController() {
+    private void action() {
+        saveWinningTicket(Keyboard.read());
+    }
+
+    protected void saveWinningTicket(String numbers) {
+        Ticket ticket = new Ticket(numbers);
+        this.lotto.storage().saveWinningTicket(ticket);
+    }
+
+    private void toResultController() {
         this.lotto.toResultController();
     }
 }

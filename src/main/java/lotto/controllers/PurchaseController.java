@@ -6,37 +6,41 @@ import lotto.enums.Message;
 import lotto.views.Display;
 import lotto.views.Keyboard;
 
-public class PurchaseController extends InteractionController {
+public class PurchaseController implements Controller {
+
+    private Lotto lotto;
 
     public PurchaseController(Lotto lotto) {
-        super(lotto);
+        this.lotto = lotto;
     }
 
     @Override
-    protected void show() {
+    public void run() {
+        show();
+
+        try {
+            action();
+            toAutomaticTicketingController();
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+        }
+    }
+
+    private void show() {
         Display.show(Message.PURCHASE);
     }
 
-    @Override
-    protected void action() {
+    private void action() {
         buyTickets(Keyboard.read());
     }
 
-    protected void buyTickets(String input) {
-        savePurchase(pay(input));
-    }
-
-    private void savePurchase(Purchase purchase) {
+    protected void buyTickets(String money) {
+        Purchase purchase = new Purchase(money);
         this.lotto.storage().savePurchase(purchase);
     }
 
-    private Purchase pay(String money) {
-        return new Purchase(money);
-    }
-
-    @Override
-    protected void toNextController() {
-        lotto.toAutomaticTicketingController();
+    private void toAutomaticTicketingController() {
+        this.lotto.toAutomaticTicketingController();
     }
 
 }

@@ -17,7 +17,7 @@ public class PurchaseTest {
     @CsvSource(value = {"1000,1", "12345,12"})
     void totalTickets(String input, int expected) {
         Purchase purchase = new Purchase(input);
-        assertThat(purchase.totalTickets()).isEqualTo(expected);
+        assertThat(purchase.ticketsAmount()).isEqualTo(expected);
     }
 
     @DisplayName("숫자가 아닌 문자열은 티켓 구매를 실패한다.")

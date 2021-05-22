@@ -8,24 +8,35 @@ import lotto.Ticket;
 import lotto.enums.Message;
 import lotto.views.Display;
 
-public class AutomaticTicketingController extends SimpleController {
+public class AutomaticTicketingController implements Controller {
 
-    AutomaticTicketing automaticTicketing = new AutomaticTicketing();
+    private AutomaticTicketing automaticTicketing = new AutomaticTicketing();
 
-    int amount;
-    List<Ticket> tickets;
+    private Lotto lotto;
 
     public AutomaticTicketingController(Lotto lotto) {
-        super(lotto);
-
-        this.amount = loadTotalTickets();
-        this.tickets = loadNewTickets(amount);
+        this.lotto = lotto;
     }
 
     @Override
-    protected void show() {
-        displayTicketAmount(this.amount);
-        displayTickets(this.tickets);
+    public void run() {
+        int amount = loadTicketsAmount();
+        List<Ticket> tickets = buyNewTickets(amount);
+
+        displayTicketAmount(amount);
+        displayTickets(tickets);
+
+        toWinningTicketController();
+    }
+
+    protected int loadTicketsAmount() {
+        return this.lotto.storage().loadPurchase().ticketsAmount();
+    }
+
+    protected List<Ticket> buyNewTickets(int amount) {
+        List<Ticket> tickets = this.automaticTicketing.newTickets(amount);
+        this.lotto.storage().saveAutomatedTickets(tickets);
+        return tickets;
     }
 
     private void displayTicketAmount(int amount) {
@@ -38,18 +49,7 @@ public class AutomaticTicketingController extends SimpleController {
         }
     }
 
-    protected int loadTotalTickets() {
-        return this.lotto.storage().loadPurchase().totalTickets();
-    }
-
-    protected List<Ticket> loadNewTickets(int amount) {
-        List<Ticket> tickets = this.automaticTicketing.newTickets(amount);
-        this.lotto.storage().saveAutomatedTickets(tickets);
-        return tickets;
-    }
-
-    @Override
-    protected void toNextController() {
+    private void toWinningTicketController() {
         this.lotto.toWinningTicketController();
     }
 }

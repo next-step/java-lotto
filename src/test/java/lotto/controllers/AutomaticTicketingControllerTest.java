@@ -28,21 +28,14 @@ public class AutomaticTicketingControllerTest {
 
     @DisplayName("티켓 수 불러오기")
     @Test
-    void loadTotalTickets() {
-        assertThat(automaticTicketingController.loadTotalTickets()).isEqualTo(amount);
+    void loadTicketsAmount() {
+        assertThat(automaticTicketingController.loadTicketsAmount()).isEqualTo(amount);
     }
 
-    @DisplayName("자동 티켓 불러오기")
+    @DisplayName("자동 티켓 구매")
     @Test
-    void loadNewTickets() {
-        assertThat(automaticTicketingController.loadNewTickets(amount).size()).isEqualTo(amount);
-    }
-
-    @DisplayName("다음 컨트롤러로 변경한다.")
-    @Test
-    void toNextController() {
-        automaticTicketingController.toNextController();
-        assertThat(lotto.compareController(WinningTicketController.class)).isTrue();
+    void buyNewTickets() {
+        assertThat(automaticTicketingController.buyNewTickets(amount).size()).isEqualTo(amount);
     }
 
 }

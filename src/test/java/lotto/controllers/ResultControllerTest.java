@@ -57,10 +57,4 @@ public class ResultControllerTest {
         assertThat(resultController.loadPayment()).isEqualTo(12000);
     }
 
-    @DisplayName("다음 컨트롤러로 변경한다.")
-    @Test
-    void toNextController() {
-        resultController.toNextController();
-        assertThat(lotto.compareController(EndController.class)).isTrue();
-    }
 }
