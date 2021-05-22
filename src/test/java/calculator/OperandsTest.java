@@ -13,9 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OperandsTest {
 
     @ParameterizedTest
-    @MethodSource("generateSumParameter")
+    @MethodSource("generateSumArguments")
     @DisplayName("입력받은 숫자들의 합을 구한다.")
-    void sum_test(List<Integer> input, int expectedAnswer) {
+    void sum_test(int expectedAnswer, List<Integer> input) {
         //given
         Operands operands = new Operands(input);
 
@@ -26,11 +26,15 @@ public class OperandsTest {
         assertThat(sum).isEqualTo(expectedAnswer);
     }
 
-    static Stream<Arguments> generateSumParameter() {
+    static Stream<Arguments> generateSumArguments() {
         return Stream.of(
-                Arguments.of(List.of(5, 10), 15),
-                Arguments.of(List.of(0, 10, 4), 14),
-                Arguments.of(List.of(0), 0)
+                generateSumArgument(15, 5, 10),
+                generateSumArgument(14, 0, 10, 4),
+                generateSumArgument(0, 0)
         );
+    }
+
+    private static Arguments generateSumArgument(int exptecdAnswer, Integer...input) {
+        return Arguments.of(exptecdAnswer, List.of(input));
     }
 }
