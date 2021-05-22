@@ -354,24 +354,60 @@ public class Number {
     - [x] 2-3.[온라인 코드리뷰 요청 3단계 동영상](https://www.youtube.com/watch?v=fzrT3eoecUw)
 - [x] 3.분석 및 설계
     - [x] 3-1.Step03.md 작성
-    - [ ] 3-2.도메인 주도 설계 이미지 작성
-- [ ] 4.구현 **_설계 후 추가 작성한다._**
-    - [ ] 4-1.
-        - [ ] 4-1-1.
-    - [ ] 4-2.Refactoring
-        - [ ] 4-2-1.도메인 주도 설계 이미지 작성
-        - [ ] 4-2-2.Value Object
-            - [ ] 4-2-2-1.
-                - [ ] 4-2-2-1-1.
-        - [ ] 4-2-3.Aggregate
-            - [ ] 4-2-3-1.
-                - [ ] 4-2-3-1-1.
-        - [ ] 4-2-4.DomainService
-            - [ ] 4-2-4-1.
-                - [ ] 4-2-4-1-1. 
+    - [x] 3-2.도메인 주도 설계 이미지 작성
+- [ ] 4.구현
+    - [ ] 4-1.Lotto Context
+        - [x] 4-1-1.도메인 주도 설계 이미지 작성
+        - [ ] 4-1-2.`Value Object` & `Aggregate`
+            - [ ] 4-1-2-1.`Ball(VO)`
+                - [ ] 4-1-2-1-1.`validate()` : 1~45의 자연수 유효성 체크
+                - [ ] 4-1-2-1-2.`generate()` : Ball 생성
+                - [ ] 4-1-2-1-3.`equals()` : 등가성 비교
+            - [ ] 4-1-2-2.`BallGroup(Aggregate)`
+                - [ ] 4-1-2-2-1.`allBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.
+            - [ ] 4-1-2-3.`Game(VO)`
+                - [ ] 4-1-2-3-1.`generateAuto()` : 모든 볼의 정보를 토대로 게임을 자동으로 생성한다.
+                - [ ] 4-1-2-3-2.`generateCustom()` : 모든 볼의 정보를 토대로 게임을 수동으로 생성한다.
+            - [ ] 4-1-2-4.`GameGroup(Aggregate)`
+                - [ ] 4-1-2-4-1.`generateGames()` : 여러 개의 게임을 생성한다.
+                - [ ] 4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.
+            - [ ] 4-1-2-5.`GameWinningCondition(VO)`
+                - [ ] 4-1-2-5-1.`generate()` : 게임 당첨 조건을 생성한다.
+                - [ ] 4-1-2-5-2.`winningStatistics()` : 당첨 통계를 생성한다.
+            - [ ] 4-1-2-6.`Money(VO)`
+                - [ ] 4-1-2-6-1.`validate()` : 돈 유효성 체크(0 이상)
+                - [ ] 4-1-2-6-2.`generate()` : 돈 생성
+                - [ ] 4-1-2-6-3.`buyGames()` : 금액에 따라 게임을 구매한다.
+        - [ ] 4-1-3.`Entity`
+            - [ ] 4-1-3-1.`Round`
+                - [ ] 4-1-3-1-1.Field 생성 : `GameWinningCondition`, `GameGroup`, `Money`
+    - [ ] 4-2.IO Context
+        - [ ] 4-2-1.`Value Object`
+            - [ ] 4-2-1-1.`InputText`
+                - [ ] 4-2-1-1-1.`split()` : 쉼표`,`를 구분자로 사용한다. `trim()`을 활용하여 공백을 제거한 숫자로 표출한다.
+            - [ ] 4-2-1-2.`ViewCode`
+                - [ ] 4-2-1-2-1.`is~()` : 등가성 비교 
+        - [ ] 4-2-2.View
+            - [ ] 4-2-2-1.`TicketBoxView`
+            - [ ] 4-2-2-2.`GameWinningConditionView`
+            - [ ] 4-2-2-3.`WinningStaticsView`
+    - [ ] 4-3.Refactoring
+        - [ ] 4-3-1.**_1차 구현 후 UI, IO class를 제외한 내용을 추가 작성한다._**
+            - [ ] 4-3-1-1.
+                - [ ] 4-3-1-1-1. 
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
-        - [ ] 5-1-1. **_설계 후 UI, IO class를 제외한 내용을 추가 작성한다._**
+        - [ ] 5-1-1.`Value Object` & `Aggregate`
+            - [ ] 5-1-1-1.`Ball(VO)`
+            - [ ] 5-1-1-2.`BallGroup(Aggregate)`
+            - [ ] 5-1-1-3.`Game(VO)`
+            - [ ] 5-1-1-4.`GameGroup(Aggregate)`
+            - [ ] 5-1-1-5.`GameWinningCondition(VO)`
+            - [ ] 5-1-1-6.`Money(VO)`
+            - [ ] 5-1-1-7.`InputText(VO)`
+            - [ ] 5-1-1-8.`ViewCode(VO)`
+      - [ ] 5-1-2.`Entity`
+            - [ ] 5-1-2-1.`Round`
     - [ ] 5-2.checkstyle 문제없는지 확인 (Java Convention)
     - [ ] 5-3.요구사항 조건들 충족했는지 확인
         - [ ] 5-3-1.< 2 Depth 규칙
@@ -388,7 +424,7 @@ public class Number {
 
 ### 2.3. 설계
 #### 2.3.1. Domain-Driven-Design (DDD)
-**_그림 교체할 것_** ![image](../documents/step3/DDD.jpeg)
+![image](../documents/step3/Lotto-DDD-step3.jpeg)
 
 ## 3. 인수인계
 ### 3.1. 느낀점 & 배운점
