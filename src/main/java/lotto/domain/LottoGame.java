@@ -13,7 +13,7 @@ public class LottoGame {
 	private final RandomNumbersGenerator randomNumbersGenerator;
 
 	public LottoGame(int purchaseAmount) {
-		validationpurchaseAmount(purchaseAmount);
+		validationPurchaseAmount(purchaseAmount);
 		this.purchaseAmount = purchaseAmount;
 		this.lottos = new ArrayList<>();
 		this.randomNumbersGenerator = new LottoRandomNumbersGenerator();
@@ -21,14 +21,14 @@ public class LottoGame {
 	}
 
 	public LottoGame(int purchaseAmount, RandomNumbersGenerator randomNumbersGenerator) {
-		validationpurchaseAmount(purchaseAmount);
+		validationPurchaseAmount(purchaseAmount);
 		this.purchaseAmount = purchaseAmount;
 		this.lottos = new ArrayList<>();
 		this.randomNumbersGenerator = randomNumbersGenerator;
 		this.purchaseLottos();
 	}
 
-	private void validationpurchaseAmount(int purchaseAmount) {
+	private void validationPurchaseAmount(int purchaseAmount) {
 		if (purchaseAmount < PURCHASE_AMOUNT_PER_LOTTO) {
 			throw new IllegalArgumentException("로또를 구입하려면 최소 1000원 이상 있어야 합니다.");
 		}
