@@ -7,10 +7,10 @@ import lotto.ui.input.Input;
 import lotto.ui.input.exception.InputException;
 import lotto.util.StringUtils;
 
-public class RoundInfo implements Info<Round> {
+public class RoundInputData implements InputData<Round> {
     private GameInput input;
 
-    public RoundInfo(Input input) {
+    public RoundInputData(Input input) {
         this.input = (GameInput) input;
     }
 

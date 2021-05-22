@@ -1,5 +1,5 @@
 package lotto.ui.input.info;
 
-public interface Info<T> {
+public interface InputData<T> {
     T get();
 }

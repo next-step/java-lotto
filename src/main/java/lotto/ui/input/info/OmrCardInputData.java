@@ -6,10 +6,10 @@ import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
 import lotto.ui.input.exception.InputException;
 
-public class OmrCardInfo implements Info<OmrCard> {
+public class OmrCardInputData implements InputData<OmrCard> {
     private GameInput input;
 
-    public OmrCardInfo(Input input) {
+    public OmrCardInputData(Input input) {
         this.input = (GameInput) input;
     }
 
