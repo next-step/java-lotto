@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.function.Function;
 
 public enum Winnings {
-    FIRST(6, 2000000000, lottoReport -> lottoReport.sixMatched()),
-    THIRD(5, 1500000, lottoReport -> lottoReport.fiveMatched()),
-    FOURTH(4, 50000, lottoReport -> lottoReport.fourMatched()),
     FIFTH(3, 5000, lottoReport -> lottoReport.threeMatched()),
+    FOURTH(4, 50000, lottoReport -> lottoReport.fourMatched()),
+    THIRD(5, 1500000, lottoReport -> lottoReport.fiveMatched()),
+    FIRST(6, 2000000000, lottoReport -> lottoReport.sixMatched()),
     ;
     public int matched;
     public int winnings;
