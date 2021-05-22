@@ -36,6 +36,10 @@ public class TotalLottoTest {
             new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
         assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
             .isEqualTo("0.35");
+        victoryNumber = new LottoNumbers(
+            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 8, 9)));
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("3.57");
     }
 
     @Test

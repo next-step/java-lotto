@@ -63,15 +63,30 @@ public class TotalLotto {
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
         List<Integer> winning = getWinningWithNumbers(victoryNumber);
 
-        BigDecimal result = calculator(WinnerPrice.TREE.price(), winning,
-            THREE);
-        result.add(calculator(WinnerPrice.FOUR.price(), winning, FOUR));
-        result.add(calculator(WinnerPrice.FIVE.price(), winning, FIVE));
-        result.add(calculator(WinnerPrice.SIX.price(), winning, SIX));
+        BigDecimal result = addThreePrice(winning);
+        result = addFourPrice(winning, result);
+        result = addFivePrice(winning, result);
+        result = addSixPrice(winning, result);
 
         return result
             .divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN)
             .toString();
+    }
+
+    private BigDecimal addSixPrice(List<Integer> winning, BigDecimal result) {
+        return result.add(calculator(WinnerPrice.SIX.price(), winning, SIX));
+    }
+
+    private BigDecimal addFivePrice(List<Integer> winning, BigDecimal result) {
+        return result.add(calculator(WinnerPrice.FIVE.price(), winning, FIVE));
+    }
+
+    private BigDecimal addFourPrice(List<Integer> winning, BigDecimal result) {
+        return result.add(calculator(WinnerPrice.FOUR.price(), winning, FOUR));
+    }
+
+    private BigDecimal addThreePrice(List<Integer> winning) {
+        return calculator(WinnerPrice.TREE.price(), winning, THREE);
     }
 
     private BigDecimal calculator(int price, List<Integer> winning, int index) {
