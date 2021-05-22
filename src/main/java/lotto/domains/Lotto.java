@@ -10,12 +10,11 @@ public class Lotto {
         lottoNumbers = new LottoNumbers();
     }
 
-    public Lotto(LottoNumbers lottoNumbers) {
-
+    public Lotto(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int checkNumber(LottoNumbers winningNumber) {
+    public int matchingNumberCount(LottoNumbers winningNumber) {
         int matchingNumberCount = 0;
         for (int lottoNumber : lottoNumbers.lottoNumbers()) {
             if (winningNumber.contains(lottoNumber)) {
