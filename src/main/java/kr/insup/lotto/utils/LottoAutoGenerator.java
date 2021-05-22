@@ -10,7 +10,7 @@ public class LottoAutoGenerator implements NumberGenerator {
         List<String> allNumbers = NumberGenerator.allNumbers();
         Collections.shuffle(allNumbers);
         List<String> lottoAutoNumbers = allNumbers.subList(0, LottoConfig.PICK_NUMBER);
-        Collections.sort(lottoAutoNumbers);
+        Collections.sort(lottoAutoNumbers, Comparator.comparing(Integer::valueOf));
         return lottoAutoNumbers;
     }
 
