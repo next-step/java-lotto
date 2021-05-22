@@ -24,6 +24,10 @@ public class LottoNumberGenerator {
         return shuffle;
     }
 
+    public static int getBonusBall() {
+        return shuffledList().get(0);
+    }
+
     private static List<Integer> shuffledList() {
         List<Integer> shuffle = new ArrayList<>(SAMPLE);
         Collections.shuffle(shuffle);
