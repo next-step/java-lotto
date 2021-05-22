@@ -10,8 +10,10 @@ public class PrintView {
     private static final String ASK_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.\n";
     private static final String SHOW_PURCHASED_LOTTO_AMOUNT = "%d개를 구매했습니다.\n";
     private static final String ASK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.\n";
+    private static final String ASK_BONUS_NUMBER = "보너스 볼을 입력해 주세요.\n";
     private static final String SHOW_LOTTO_REPORT = "당첨통계\n---------\n";
     private static final String SHOW_TOTAL_YIELD = "총 수익률은 %s입니다.";
+    private static final String EMPTY = "";
     private static final int YIELD_TIP_THRESHOLD = 1;
     private static final String SHOW_TOTAL_YIELD_TIP = String.format("(기준이 %d이기 때문에 결과적으로 손해라는 의미임)",
             YIELD_TIP_THRESHOLD);
@@ -25,7 +27,7 @@ public class PrintView {
 
     public static void showPurchasedLotto(List<Lotto> lottos) {
         showPurchasedLottoAmount(lottos.size());
-        for(Lotto lotto: lottos){
+        for (Lotto lotto : lottos) {
             System.out.print(formatLotto(lotto));
         }
         System.out.println();
@@ -45,6 +47,10 @@ public class PrintView {
 
     public static void askWinningNumber() {
         System.out.print(ASK_WINNING_NUMBER);
+    }
+
+    public static void askBonusNumber() {
+        System.out.print(ASK_BONUS_NUMBER);
     }
 
     public static void showLottoReport(LottoReport lottoReport) {
