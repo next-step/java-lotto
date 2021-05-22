@@ -19,6 +19,9 @@ public final class ResultView {
   }
 
   private void print(MatchNumberCount matchNumberCount, LottoRoi lottoRoi) {
+    System.out.println("\n당첨 통계");
+    System.out.println("---------");
+
     matchNumberCount.print();
     lottoRoi.print();
   }
