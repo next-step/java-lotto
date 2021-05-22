@@ -6,10 +6,30 @@ import java.util.List;
 public class Calculator {
 
     public static final int MINIMUM_OPERAND_VALUE = 0;
+    public static final int DELIMITER_POSITION = 1;
+
     private final Operands operands;
+
+    public Calculator(String input) {
+        char delimiter = ValidateAndExtractDelimiter(input);
+
+        this.operands = makeOperandsByInput(input, String.valueOf(delimiter));
+    }
 
     public Calculator(String input, String delimiter) {
         this.operands = makeOperandsByInput(input, delimiter);
+    }
+
+    private char ValidateAndExtractDelimiter(String input) {
+        char delimiter = extractDelimiter(input);
+
+        Delimiters.validateExistDelimiter(delimiter);
+
+        return delimiter;
+    }
+
+    private char extractDelimiter(String input) {
+        return input.charAt(DELIMITER_POSITION);
     }
 
     public int sumOperands() {
@@ -19,17 +39,17 @@ public class Calculator {
     private Operands makeOperandsByInput(String input, String delimiter) {
         String[] splitedInput = splitOperandsByDelimiter(input, delimiter);
 
-        return new Operands(validateOperands(splitedInput));
+        return validateOperands(splitedInput);
     }
 
-    private List<Integer> validateOperands(String[] splitedInput) {
+    private Operands validateOperands(String[] splitedInput) {
         List<Integer> parseInts = new ArrayList<>();
 
         for (String operand : splitedInput) {
             validateOperand(parseInts, operand);
         }
 
-        return parseInts;
+        return new Operands(parseInts);
     }
 
     private void validateOperand(List<Integer> parseInts, String operand) {
@@ -41,7 +61,7 @@ public class Calculator {
             parseInts.add(parsedOperand);
 
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 연산값입니다. : " + operand);
+            throw new IllegalArgumentException("잘못된 연산 값입니다. : " + operand);
         }
     }
 
