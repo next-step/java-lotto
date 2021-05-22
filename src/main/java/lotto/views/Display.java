@@ -9,8 +9,8 @@ public final class Display {
         System.out.println(message.toString());
     }
 
-    public static void show(Message message, Object... args) {
-        System.out.println(String.format(message.toString(), args));
+    public static void show(Message message, Number number) {
+        System.out.println(String.format(message.toString(), number));
     }
 
     public static void show(Ticket ticket) {

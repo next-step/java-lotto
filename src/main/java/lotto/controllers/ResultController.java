@@ -2,20 +2,14 @@ package lotto.controllers;
 
 import java.util.List;
 
-import lotto.Bank;
+import lotto.LottoSponsor;
 import lotto.Lotto;
+import lotto.Purchase;
 import lotto.Ticket;
-import lotto.enums.Message;
-import lotto.enums.Prize;
-import lotto.views.Display;
 
 public class ResultController implements Controller {
 
     private Lotto lotto;
-
-    private List<Integer> scores;
-    private long totalPrizeMoney;
-    private float earningRate;
 
     public ResultController(Lotto lotto) {
         this.lotto = lotto;
@@ -23,40 +17,29 @@ public class ResultController implements Controller {
 
     @Override
     public void run() {
-        compute(loadTickets(), loadWinningTicket(), loadPayment());
-        show();
+        delegateToLottoSponsor();
+        toEndController();
     }
 
-    protected Ticket loadWinningTicket() {
+    private void delegateToLottoSponsor() {
+        List<Ticket> automatedTickets = loadAutomatedTickets();
+        Ticket winningTicket = loadWinningTicket();
+        Purchase purchase = loadPurchase();
+
+        LottoSponsor lottoSponsor = new LottoSponsor(automatedTickets, winningTicket, purchase);
+        lottoSponsor.show();
+    }
+
+    private Ticket loadWinningTicket() {
         return this.lotto.storage().loadWinningTicket();
     }
 
-    protected List<Ticket> loadTickets() {
+    private List<Ticket> loadAutomatedTickets() {
         return this.lotto.storage().loadAutomatedTickets();
     }
 
-    protected int loadPayment() {
-        return this.lotto.storage().loadPurchase().payment();
-    }
-
-    protected void compute(List<Ticket> tickets, Ticket winningTicket, int payment) {
-        this.scores = Bank.countScores(tickets, winningTicket);
-        this.totalPrizeMoney = Bank.sumPrizeMoney(this.scores);
-        this.earningRate = Bank.convertToEarningRate(this.totalPrizeMoney, payment);
-    }
-
-    private void show() {
-        Display.show(Message.RESULT_HEAD);
-        Display.show(Message.RESULT_3, scoreAt(Prize.THREE.getIndex()));
-        Display.show(Message.RESULT_4, scoreAt(Prize.FOUR.getIndex()));
-        Display.show(Message.RESULT_5, scoreAt(Prize.FIVE.getIndex()));
-        Display.show(Message.RESULT_6, scoreAt(Prize.SIX.getIndex()));
-        Display.show(Message.RESULT_TOTAL, this.totalPrizeMoney);
-        Display.show(Message.RESULT_TAIL, this.earningRate);
-    }
-
-    private int scoreAt(int index) {
-        return this.scores.get(index);
+    private Purchase loadPurchase() {
+        return this.lotto.storage().loadPurchase();
     }
 
     private void toEndController() {

@@ -3,7 +3,9 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class BankTest {
+import lotto.enums.Prize;
+
+public class LottoSponsorTest {
 
     List<Ticket> tickets = Arrays.asList(
         new Ticket("1,2,3,4,5,6"),
@@ -20,26 +24,35 @@ public class BankTest {
         new Ticket("1,2,3,4,10,11")
     );
     Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    Purchase purchase = new Purchase("1000");
+    LottoSponsor lottoSponsor = new LottoSponsor(tickets, winningTicket, purchase);
+    Map<Prize, Integer> scores = new HashMap<>();
+
+    @BeforeEach
+    void setUp() {
+        scores.put(Prize.SIX, 2);
+        scores.put(Prize.FIVE, 1);
+        scores.put(Prize.FOUR, 1);
+    }
 
     @DisplayName("당첨된 티켓 수를 센다.")
     @Test
     void countScores() {
-        List<Integer> expected = Arrays.asList(0, 0, 0, 0, 1, 1, 2);
-        assertThat(Bank.countScores(tickets, winningTicket)).isEqualTo(expected);
+        assertThat(lottoSponsor.countScores(tickets, winningTicket)).isEqualTo(scores);
     }
 
     @DisplayName("총 당첨금을 계산한다.")
     @Test
     void sumPrizeMoney() {
-        List<Integer> scores = Arrays.asList(0, 0, 0, 1, 2, 3, 4);
-        Long expected = 8_004_605_000L;
-        assertThat(Bank.sumPrizeMoney(scores)).isEqualTo(expected);
+        Long expectedTotalPrizeMoney = 4_001_550_000L;
+
+        assertThat(lottoSponsor.sumPrizeMoney(scores)).isEqualTo(expectedTotalPrizeMoney);
     }
 
     @DisplayName("수익률을 계산한다.")
     @ParameterizedTest(name = "총 당첨금: \"{0}\", 구매 금액: \"{1}\", 수익률: \"{1}\"")
     @CsvSource(value = {"0,1000,-1.00", "2000000000,1000,1999999.00", "55000,2000,26.50"})
     void convertToEarningRate(long money, int payment, float rate) {
-        assertThat(Bank.convertToEarningRate(money, payment)).isEqualTo(rate);
+        assertThat(lottoSponsor.convertToEarningRate(money, payment)).isEqualTo(rate);
     }
 }
