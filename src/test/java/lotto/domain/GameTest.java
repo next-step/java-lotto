@@ -16,7 +16,7 @@ public class GameTest {
     @Test
     @DisplayName("금액을 주어, 로또를 생성하고 결과를 확인한다")
     public void 금액을_주어_로또를_생성하고_결과를_확인한다() {
-        int ticketSize = 8;
+        int ticketSize = 10;
         int dummyMoney = 500;
         int moneyInHand = ticketSize * 1000 + dummyMoney;
 
@@ -33,9 +33,9 @@ public class GameTest {
         assertThat(match.countOf(LottoRank.THIRD))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.FOURTH))
-                .isEqualTo(1);
+                .isEqualTo(2);
         assertThat(match.countOf(LottoRank.FIFTH))
-                .isEqualTo(1);
+                .isEqualTo(2);
         assertThat(match.countOf(LottoRank.MISS))
                 .isEqualTo(3);
     }

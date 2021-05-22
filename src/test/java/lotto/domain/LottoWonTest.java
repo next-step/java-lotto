@@ -51,7 +51,9 @@ public class LottoWonTest {
                     "5#FIFTH",
                     "6#MISS",
                     "7#MISS",
-                    "8#MISS"
+                    "8#MISS",
+                    "9#FOURTH",
+                    "10#FIFTH",
             },
             delimiter = '#'
     )
@@ -77,7 +79,9 @@ public class LottoWonTest {
                         new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[5])),
                         new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[6])),
                         new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[7])),
-                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[8]))
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[8])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[9])),
+                        new LottoTicket(convertStringToLottoNumberList(lottoNumbersSortedByRank[10]))
                 )
         );
 
@@ -90,9 +94,9 @@ public class LottoWonTest {
         assertThat(match.countOf(LottoRank.THIRD))
                 .isEqualTo(1);
         assertThat(match.countOf(LottoRank.FOURTH))
-                .isEqualTo(1);
+                .isEqualTo(2);
         assertThat(match.countOf(LottoRank.FIFTH))
-                .isEqualTo(1);
+                .isEqualTo(2);
         assertThat(match.countOf(LottoRank.MISS))
                 .isEqualTo(3);
     }
