@@ -29,17 +29,18 @@ public class LottoView {
         }
     }
 
-    public static void showWinningNumber() {
+    public static String showWinningNumber() {
         System.out.println("지난 주 당첨번호를 입력해 주세요");
+        return scanner.nextLine();
     }
 
     public static void showWinningStatistic(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("-------");
-        System.out.println("1등" + statistics.firstPlace());
-        System.out.println("1등" + statistics.firstPlace());
-        System.out.println("1등" + statistics.firstPlace());
-        System.out.println("1등" + statistics.firstPlace());
+        System.out.println("1등 " + statistics.firstPlace());
+        System.out.println("2등 " + statistics.secondPlace());
+        System.out.println("3등 " + statistics.thirdPlace());
+        System.out.println("4등 " + statistics.fourthPlace());
         System.out.println("수익률은 " + statistics.calculateBenefitRate());
     }
 }
