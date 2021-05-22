@@ -11,7 +11,7 @@ public class StoreTest {
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "1200:1", "1900:1", "0:0", "3000:3"}, delimiter = ':')
 	@DisplayName("구매 테스트")
-	void buy(int amount, int expected) {
+	void buy(Money amount, int expected) {
 		Lottos lottos = Store.buy(amount);
 		assertThat(lottos.count()).isEqualTo(expected);
 	}

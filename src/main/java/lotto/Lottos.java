@@ -39,15 +39,14 @@ public class Lottos {
 	}
 
 	public Profit profit() {
-		int totalWinAmount = getTotalWinAmount();
-		int totalAmount = lottos.size() * Store.LOTTO_PRICE;
-		return new Profit(totalWinAmount, totalAmount);
+		return new Profit(totalWinAmount(), new Money(Store.LOTTO_PRICE * count()));
 	}
 
-	private int getTotalWinAmount() {
-		int winAmount = 0;
+	private Money totalWinAmount() {
+		Money winAmount = new Money(0);
 		for (Prize prize : Prize.values()) {
-			winAmount += prize.winAmount() * statusMap.get(prize);
+			Money amount = prize.winAmount().multiply(statusMap.get(prize));
+			winAmount = winAmount.plus(amount.money());
 		}
 		return winAmount;
 	}

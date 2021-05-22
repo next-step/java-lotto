@@ -1,16 +1,16 @@
 package lotto;
 
 public enum Prize {
-	SIX(6, 2000000000),
-	FIVE(5, 1500000),
-	FOUR(4, 50000),
-	THREE(3, 5000),
-	NOTHING(-1, 0);
+	SIX(6, new Money(2000000000)),
+	FIVE(5, new Money(1500000)),
+	FOUR(4, new Money(50000)),
+	THREE(3, new Money(5000)),
+	NOTHING(-1, new Money(0));
 
 	private final int count;
-	private final long winAmount;
+	private final Money winAmount;
 
-	Prize(int count, long winAmount) {
+	Prize(int count, Money winAmount) {
 		this.count = count;
 		this.winAmount = winAmount;
 	}
@@ -27,7 +27,7 @@ public enum Prize {
 		return count;
 	}
 
-	public long winAmount() {
+	public Money winAmount() {
 		return winAmount;
 	}
 }

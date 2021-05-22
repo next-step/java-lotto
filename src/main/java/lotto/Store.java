@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-	public static final int LOTTO_PRICE = 1000;
+	public static final long LOTTO_PRICE = 1000L;
 
-	public static Lottos buy(int amount) {
+	public static Lottos buy(Money amount) {
 		List<Lotto> lottos = new ArrayList<>();
-
 		while (isBuyable(amount)) {
 			Lotto lotto = Lotto.publish();
 			lottos.add(lotto);
-			amount -= LOTTO_PRICE;
+			amount = amount.minus(LOTTO_PRICE);
 		}
 		return new Lottos(lottos);
 	}
 
-	private static boolean isBuyable(int amount) {
-		return amount >= LOTTO_PRICE;
+	private static boolean isBuyable(Money amount) {
+		return amount.greaterThan(LOTTO_PRICE);
 	}
 }
