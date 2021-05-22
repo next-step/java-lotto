@@ -31,7 +31,9 @@ public class LottoStoreTest {
                 new Lotto("1,2,7,8,9,10")
         );
         LottoStore lottoStore = new LottoStore(lottos);
-        List<Rank> ranks = lottoStore.calcLottosRank(winningLotto);
-        assertThat(ranks).isEqualTo(Arrays.asList(Rank.values()));
+        WinningRanks excepted = new WinningRanks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FIFTH));
+
+        WinningRanks ranks = lottoStore.calcLottosRank(winningLotto);
+        assertThat(ranks).isEqualTo(excepted);
     }
 }

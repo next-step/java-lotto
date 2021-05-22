@@ -5,6 +5,7 @@ import io.mwkwon.lotto.enums.Rank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoStore {
 
@@ -29,12 +30,13 @@ public final class LottoStore {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public List<Rank> calcLottosRank(Lotto winningLotto) {
+    public WinningRanks calcLottosRank(Lotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             Rank rank = lotto.calcLottoRank(winningLotto);
             ranks.add(rank);
         }
-        return ranks;
+        List<Rank> winningRanks = ranks.stream().filter(rank -> rank != Rank.MISS).collect(Collectors.toList());
+        return new WinningRanks(winningRanks);
     }
 }
