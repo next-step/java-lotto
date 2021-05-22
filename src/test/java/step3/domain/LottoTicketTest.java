@@ -2,8 +2,8 @@ package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step3.common.ErrorCode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class LottoTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         );
-        assertThat(new Lottoticket(lottoNumbers1)).isInstanceOf(LottoTicket.class);
+        assertThat(new LottoTicket(lottoNumbers1)).isInstanceOf(LottoTicket.class);
 
 
         // failed
@@ -34,9 +34,9 @@ public class LottoTicketTest {
                 new LottoNumber(4)
         );
 
-        assertThatThrownBy(()->new Lottoticket(lottoNumbers2)
+        assertThatThrownBy(()->new LottoTicket(lottoNumbers2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(""));
+                .hasMessage(ErrorCode.INVALID_LOTTO_NUMEBRS_LENGTH.getErrorMessage());
     }
 
 }
