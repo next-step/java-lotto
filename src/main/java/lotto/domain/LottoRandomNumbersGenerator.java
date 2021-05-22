@@ -18,17 +18,13 @@ public class LottoRandomNumbersGenerator implements RandomNumbersGenerator {
 	@Override
 	public List<Integer> generateNumbers() {
 		List<Integer> numbers = this.generateRandomNumbers(LottoNumbers.LENGTH);
-		sortAsc(numbers);
+		Collections.sort(numbers);
 		return numbers;
 	}
 
 	private List<Integer> generateRandomNumbers(int length) {
 		Collections.shuffle(this.numbers);
 		return new ArrayList<>(this.numbers.subList(this.numbers.size() - length, this.numbers.size()));
-	}
-
-	private void sortAsc(List<Integer> numbers) {
-		Collections.sort(numbers);
 	}
 
 }
