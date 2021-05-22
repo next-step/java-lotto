@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoMachine;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
