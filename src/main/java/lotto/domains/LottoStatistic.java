@@ -1,5 +1,7 @@
 package lotto.domains;
 
+import lotto.enums.Payout;
+
 public class LottoStatistic {
     private int count;
     private int payout;
@@ -9,10 +11,9 @@ public class LottoStatistic {
         this.payout = 0;
     }
 
-    public void add() {
-        //TODO Enum적용 예정
+    public void add(int matchNumber) {
         this.count++;
-        this.payout += 5000;
+        this.payout += Payout.getPayout(matchNumber);
     }
 
     public int count() {
