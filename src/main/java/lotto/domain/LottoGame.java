@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoGame {
 
-	public static final int PURCHASE_AMOUNT_PER_LOTTO = 1000;
+	public static final int PURCHASE_AMOUNT_PER_LOTTO = 1_000;
 	private final int purchaseAmount;
 	private final List<LottoNumbers> lottos;
 	private final RandomNumbersGenerator randomNumbersGenerator;
