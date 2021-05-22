@@ -39,7 +39,7 @@ public class RoundInfo implements Info<Round> {
 
     private int[] fixArray() throws InputException{
         try {
-            String text = (String) input.request("지난 주 당첨 번호를 입력해 주세요.");
+            String text = input.request("지난 주 당첨 번호를 입력해 주세요.");
             return StringUtils.csvToIntArray(text);
         } catch (NumberFormatException e) {
             throw new InputException("시도 횟수는 숫자만 가능합니다.");
@@ -48,7 +48,7 @@ public class RoundInfo implements Info<Round> {
 
     private int bonus() throws InputException {
         try {
-            return Integer.parseInt((String) input.request("보너스 볼을 입력해 주세요."));
+            return Integer.parseInt(input.request("보너스 볼을 입력해 주세요."));
         } catch (NumberFormatException e) {
             throw new InputException("보너스 볼은 숫자만 가능합니다.");
         }

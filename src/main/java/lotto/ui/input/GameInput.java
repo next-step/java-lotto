@@ -14,7 +14,7 @@ public class GameInput implements Input {
     }
 
     @Override
-    public Object request(String message) {
+    public String request(String message) {
         response(message);
 
         return scanner.nextLine();

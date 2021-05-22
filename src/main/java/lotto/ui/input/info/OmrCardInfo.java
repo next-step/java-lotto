@@ -41,7 +41,7 @@ public class OmrCardInfo implements Info<OmrCard> {
     }
 
     private int money() throws InputException {
-        String textMoney = (String) input.request("구입금액을 입력해 주세요.");
+        String textMoney = input.request("구입금액을 입력해 주세요.");
         int money = parseIntMoney(textMoney);
 
         if (isValidateMinimumAmount(money)) {
