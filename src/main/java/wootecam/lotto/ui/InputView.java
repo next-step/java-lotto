@@ -12,7 +12,7 @@ public class InputView extends View {
 		return this.scanner.nextLine();
 	}
 
-	public void closeScanner() {
+	public void close() {
 		this.scanner.close();
 	}
 
