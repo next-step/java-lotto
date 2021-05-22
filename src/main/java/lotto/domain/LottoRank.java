@@ -21,6 +21,10 @@ public enum LottoRank {
         return this.amount;
     }
 
+    public int hit() {
+        return this.hit;
+    }
+
     public static LottoRank of(int hit) {
         return Arrays.stream(LottoRank.values())
             .filter(resultType -> resultType.hit == hit)

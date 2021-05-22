@@ -13,6 +13,10 @@ public class LottoWin {
         lottoWin.put(LottoRank.FIRST, 0);
     }
 
+    public Map<LottoRank, Integer> win() {
+        return lottoWin;
+    }
+
     public void hit(int match) {
         LottoRank lottoWinType = LottoRank.of(match);
         if(lottoWinType != LottoRank.MISS) {

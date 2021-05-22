@@ -26,6 +26,10 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
+    public int money() {
+        return this.money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
