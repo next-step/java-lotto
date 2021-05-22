@@ -10,6 +10,25 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoTest {
 
     @Test
+    void 로또매칭_각각에_대한_결과_정확한_테스트케이스_Test() {
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
+
+        Lotto lottoFirst = new Lotto(Arrays.asList(1,2,3,4,5,6));       // 6개 맞춤 + 보너스 무관, 1등, 2,000,000,000
+        Lotto lottoSecond = new Lotto(Arrays.asList(1,2,3,4,5,7));      // 5개 맞춤 + 보너스 맞춤, 2등, 30,000,000
+        Lotto lottoThird = new Lotto(Arrays.asList(2,3,4,5,6,8));       // 5개 맞춤 + 보너스 X  , 3등
+        Lotto lottoFourth = new Lotto(Arrays.asList(3,4,5,6,7,8));      // 4개 맞춤 + 보너스 무관, 4등
+        Lotto lottoFifth = new Lotto(Arrays.asList(4,5,6,7,8,9));       // 3개 맞춤 + 보너스 무관, 5등
+        Lotto lottoMiss = new Lotto(Arrays.asList(7,8,9,10,11,12));     // 0개 맞춤 + 보너스 무관, -등(MISS)
+
+        assertThat(winNumbers.matchResultOf(lottoFirst)).isEqualTo(LottoRank.FIRST);
+        assertThat(winNumbers.matchResultOf(lottoSecond)).isEqualTo(LottoRank.SECOND);
+        assertThat(winNumbers.matchResultOf(lottoThird)).isEqualTo(LottoRank.THIRD);
+        assertThat(winNumbers.matchResultOf(lottoFourth)).isEqualTo(LottoRank.FOURTH);
+        assertThat(winNumbers.matchResultOf(lottoFifth)).isEqualTo(LottoRank.FIFTH);
+        assertThat(winNumbers.matchResultOf(lottoMiss)).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
     void 로또_기존결과에_보너스번호_Test() {
         LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
 
