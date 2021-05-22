@@ -22,4 +22,8 @@ public class LastWonLottoNumber {
     public boolean contains(int number) {
         return lastWonLottoNumbers.contains(number);
     }
+
+    public List<Integer> getLastWonLottoNumbers() {
+        return lastWonLottoNumbers;
+    }
 }

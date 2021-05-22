@@ -5,10 +5,12 @@ public class LottoController {
         InputView inputView = new InputView();
         PurchaseLotto purchaseLotto = new PurchaseLotto();
         ResultView resultView = new ResultView();
-        int lottoCount = purchaseLotto.availablePurchaseLottoCount(inputView.inputPurchaseAmount());
+        int inputPurchaseAmount = inputView.inputPurchaseAmount();
+        int lottoCount = purchaseLotto.availablePurchaseLottoCount(inputPurchaseAmount);
         resultView.printPurchasedCount(lottoCount);
-        purchaseLotto.purchaseLotto(lottoCount);
+        purchaseLotto.purchaseAvailableLotto(lottoCount);
         resultView.printPurchasedLottos(purchaseLotto.getLottoNumberList());
-        purchaseLotto.checkWinOrLose(inputView.inputLastWonLottoNumbers());
+        purchaseLotto.resultLottoGame(inputView.inputLastWonLottoNumbers());
+        resultView.printLottoGameResult(purchaseLotto.getResultAll(), inputPurchaseAmount);
     }
 }

@@ -48,7 +48,7 @@ public class LottoTest {
     @Test
     public void purchasedLotto_count_validate() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
-        purchaseLotto.purchaseLotto(14);
+        purchaseLotto.purchaseAvailableLotto(14);
         assertThat(purchaseLotto.getLottoNumberList().count()).isEqualTo(14);
     }
 
@@ -60,12 +60,24 @@ public class LottoTest {
     }
 
     @Test
-    public void CheckWinOrLose_validate() {
+    public void countWonNumbers_validate() {
+        LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy = new LottoNumberGeneratorStrategy() {
+            @Override
+            public List<Integer> generateLottoNumber() {
+                List<Integer> lottoNumber = new ArrayList<Integer>();
+                lottoNumber.add(1);
+                lottoNumber.add(2);
+                lottoNumber.add(3);
+                lottoNumber.add(4);
+                lottoNumber.add(5);
+                lottoNumber.add(6);
+                return lottoNumber;
+            }
+        };
+        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
+
         PurchaseLotto purchaseLotto = new PurchaseLotto();
-        //purchaseLotto.
-        //purchaseLotto.setLastWonLottoNumbers("1,2,3,4,5,6");
+        assertThat(purchaseLotto.countWonNumbers(lottoNumberGeneratorStrategy.generateLottoNumber(), lastWonLottoNumber.getLastWonLottoNumbers())).isEqualTo(6);
     }
-
-
 
 }

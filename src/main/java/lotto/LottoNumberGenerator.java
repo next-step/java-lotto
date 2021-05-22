@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.*;
 
-public class LottoNumberGenerator {
+public class LottoNumberGenerator implements LottoNumberGeneratorStrategy {
     private static List<Integer> lottoNumberRange;
 
     public LottoNumberGenerator() {
