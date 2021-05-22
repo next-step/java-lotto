@@ -3,9 +3,11 @@ package io.mwkwon.lotto.domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoPaymentTest {
 
@@ -19,7 +21,7 @@ public class LottoPaymentTest {
     void 로또_구매_금액이_1000_보다_작은_금액_입력_시_에러_발생_테스트() {
         assertThatThrownBy(() -> new LottoPayment(100))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 구입 가능 금액은 1000원 이상 입니다.");
+                .hasMessage("최소 로또 구입 가능 금액은 1000원 입니다.");
     }
 
     @ParameterizedTest
@@ -28,5 +30,13 @@ public class LottoPaymentTest {
         LottoPayment lottoPayment = new LottoPayment(value);
         int lottoBuyQuantity = lottoPayment.calcLottoBuyQuantity();
         assertThat(lottoBuyQuantity).isEqualTo(excepted);
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @NullSource
+    @ValueSource(strings = {"천원", "만원"})
+    void 숫자가_아닌_값_입력_시_에러_발생_테스트(String value) {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoPayment(value));
     }
 }
