@@ -39,7 +39,7 @@ public class LottoTest {
 		assertThat(lotto.isRunning()).isFalse();
 	}
 
-	@DisplayName("로또 자동 뽑기")
+	@DisplayName("로또 자동 뽑기 후 다음 단계로 넘어간다.")
 	@Test
 	void automaticTicketing() {
 		lotto.storage().savePurchase(purchase);
@@ -51,7 +51,7 @@ public class LottoTest {
 		assertThat(lotto.compareController(WinningTicketController.class)).isTrue();
 	}
 
-	@DisplayName("당첨 결과 발표")
+	@DisplayName("당첨 결과 발표 후 종료한다.")
 	@Test
 	void automatic() {
 		lotto.storage().savePurchase(purchase);

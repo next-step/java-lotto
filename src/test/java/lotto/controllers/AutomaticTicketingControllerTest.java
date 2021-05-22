@@ -28,13 +28,13 @@ public class AutomaticTicketingControllerTest {
 
 	@DisplayName("티켓 수 불러오기")
 	@Test
-	void totalTickets() {
+	void loadTotalTickets() {
 		assertThat(automaticTicketingController.loadTotalTickets()).isEqualTo(amount);
 	}
 
-	@DisplayName("자동 티켓 생성")
+	@DisplayName("자동 티켓 불러오기")
 	@Test
-	void newTickets() {
+	void loadNewTickets() {
 		assertThat(automaticTicketingController.loadNewTickets(amount).size()).isEqualTo(amount);
 	}
 

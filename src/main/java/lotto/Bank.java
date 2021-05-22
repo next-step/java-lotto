@@ -13,9 +13,9 @@ public final class Bank {
 	public static List<Integer> countScores(List<Ticket> tickets, Ticket answer) {
 		List<Integer> scores = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
 		for (Ticket ticket : tickets) {
-			int count = ticket.countSameNumbers(answer);
-			int temp = scores.get(count);
-			scores.set(count, temp + 1);
+			int index = ticket.countSameNumbers(answer);
+			int score = scores.get(index);
+			scores.set(index, score + 1);
 		}
 		return scores;
 	}

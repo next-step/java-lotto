@@ -24,15 +24,15 @@ public class ResultController extends SimpleController {
 	@Override
 	protected void show() {
 		Display.show(Message.RESULT_HEAD);
-		Display.show(Message.RESULT_3, scoreIn(Prize.THREE.getIndex()));
-		Display.show(Message.RESULT_4, scoreIn(Prize.FOUR.getIndex()));
-		Display.show(Message.RESULT_5, scoreIn(Prize.FIVE.getIndex()));
-		Display.show(Message.RESULT_6, scoreIn(Prize.SIX.getIndex()));
+		Display.show(Message.RESULT_3, scoreAt(Prize.THREE.getIndex()));
+		Display.show(Message.RESULT_4, scoreAt(Prize.FOUR.getIndex()));
+		Display.show(Message.RESULT_5, scoreAt(Prize.FIVE.getIndex()));
+		Display.show(Message.RESULT_6, scoreAt(Prize.SIX.getIndex()));
 		Display.show(Message.RESULT_TOTAL, this.totalPrizeMoney);
 		Display.show(Message.RESULT_TAIL, this.earningRate);
 	}
 
-	private int scoreIn(int index) {
+	private int scoreAt(int index) {
 		return this.scores.get(index);
 	}
 
