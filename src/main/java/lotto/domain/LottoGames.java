@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 public class LottoGames implements Iterable<LottoGame>{
     private List<LottoGame> lottoGames = new ArrayList<>();
@@ -25,6 +23,13 @@ public class LottoGames implements Iterable<LottoGame>{
         }
     }
 
+    public LottoStatics calculateStatics(LottoGame winGame) {
+        LottoStatics statics = new LottoStatics();
+        for (LottoGame game : lottoGames) {
+            statics.addStatic(winGame.getRank(game));
+        }
+        return statics;
+    }
     public int size() {
         return lottoGames.size();
     }
