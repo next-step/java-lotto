@@ -21,4 +21,10 @@ public class LottoRanks {
                 .mapToLong(LottoRank::winAmount)
                 .sum();
     }
+
+    public int count(LottoRank rank) {
+        return (int) lottoRanks.stream()
+                .filter(lottoRank -> lottoRank == rank)
+                .count();
+    }
 }
