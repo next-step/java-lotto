@@ -41,19 +41,23 @@ public class LottoReport {
                 sixMatched * FIRST.winnings;
     }
 
-    public int threeMatched() {
+    public int countWinnings(Winnings winnings){
+        return winnings.lottoReportMatchedNumGetter.apply(this);
+    }
+
+    int threeMatched() {
         return threeMatched;
     }
 
-    public int fourMatched() {
+    int fourMatched() {
         return fourMatched;
     }
 
-    public int fiveMatched() {
+    int fiveMatched() {
         return fiveMatched;
     }
 
-    public int sixMatched() {
+    int sixMatched() {
         return sixMatched;
     }
 
