@@ -1,16 +1,68 @@
 package lotto.view;
 
+import lotto.domain.LottoGame;
+
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class InputView {
-    Scanner view = new Scanner(System.in);
+    private static final String REQUEST_MONEY_INPUT_MESSAGE = "구입금을 입력해 주세요.";
+    private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String REQUEST_WIN_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
-    public String nextLine() {
-        return view.nextLine();
+    Scanner input = new Scanner(System.in);
+    PrintStream output = new PrintStream(System.out);
+
+    public int takeMoney() {
+        output.println(REQUEST_MONEY_INPUT_MESSAGE);
+        int money = 0;
+        while(money <= 0) {
+            money = parseMoney();
+        }
+        output.println(String.format(LOTTO_COUNT_MESSAGE, money / LottoGame.PRICE));
+        return money;
     }
 
-    public int[] nextIntArray() {
-        String userInput = view.nextLine();
+    private Integer parseMoney() {
+        try {
+            return Integer.parseInt(nextLine());
+        } catch(Exception e) {
+            showErrorMessage();
+            return 0;
+        }
+    }
+
+    private void showErrorMessage() {
+        output.println(WRONG_INPUT_MESSAGE);
+    }
+
+    public int[] takeLottoNumbers() {
+        int[] lottoNumbers = null;
+        output.println(REQUEST_WIN_LOTTO_NUMBER_MESSAGE);
+        while (lottoNumbers == null) {
+            lottoNumbers = parseLottoNumbers();
+        }
+        enter();
+        return lottoNumbers;
+    }
+
+    private int[] parseLottoNumbers() {
+        try {
+            return nextIntArray();
+        } catch (Exception e) {
+            showErrorMessage();
+        }
+        return null;
+    }
+
+
+    private String nextLine() {
+        return input.nextLine();
+    }
+
+    private int[] nextIntArray() {
+        String userInput = input.nextLine();
         String[] stringNumbers = userInput.split("\\s*,\\s*");
         int[] intArr = new int[stringNumbers.length];
         int idx = 0;
@@ -19,5 +71,10 @@ public class InputView {
         }
         return intArr;
     }
+
+    public void enter() {
+        output.println("");
+    }
+
 
 }
