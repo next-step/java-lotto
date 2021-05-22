@@ -13,12 +13,12 @@ public class InputView {
 
     }
 
-    public int getLottoPurchaseAmount() {
+    public static int getLottoPurchaseAmount() {
         String line = SCANNER.nextLine();
         return parseInt(line);
     }
 
-    private int parseInt(String numericString) {
+    private static int parseInt(String numericString) {
         try {
             return Integer.parseInt(numericString);
         } catch (NumberFormatException e) {
@@ -26,14 +26,14 @@ public class InputView {
         }
     }
 
-    public List<Integer> getLastWinningNumber() {
+    public static List<Integer> getLastWinningNumber() {
         String line = SCANNER.nextLine();
         String[] numericStrings = line.split(DELIMITER);
 
         return toIntegerList(numericStrings);
     }
 
-    private List<Integer> toIntegerList(String[] numericStrings) {
+    private static List<Integer> toIntegerList(String[] numericStrings) {
         List<Integer> integerList = new ArrayList<>();
         for (String numericString : numericStrings) {
             integerList.add(parseInt(numericString));
