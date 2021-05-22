@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.wrapper;
 
 import static lotto.domain.LottoGameOptions.LOTTO_PRICE;
 
@@ -25,7 +25,7 @@ public class LottoPurchaseBudget {
         if (src == null || src.getClass() != this.getClass()) {
             return false;
         }
-        
+
         return super.equals(src) && ((LottoPurchaseBudget)src).purchaseBudget == purchaseBudget;
     }
 
@@ -35,5 +35,9 @@ public class LottoPurchaseBudget {
         int prime = 17;
 
         return result * prime + purchaseBudget;
+    }
+
+    public boolean isUnderManualBudgetOf(int manualCount) {
+        return purchaseBudget - (manualCount * LOTTO_PRICE) < 0;
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.wrapper.LottoPurchase;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +30,8 @@ public class LottoResultPack {
         return lottoResultPack.get(lottoResult);
     }
 
-    public double calculateProfitRatio(LottoPurchaseBudget purchaseBudget) {
-        return (double)sumOfProfit() / purchaseBudget.budget();
+    public double calculateProfitRatio(LottoPurchase purchase) {
+        return (double)sumOfProfit() / purchase.budget();
     }
 
     private int sumOfProfit() {

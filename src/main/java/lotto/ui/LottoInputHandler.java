@@ -1,15 +1,15 @@
 package lotto.ui;
 
-import lotto.domain.LottoPurchaseBudget;
+import lotto.domain.wrapper.LottoPurchase;
 
 import java.util.Scanner;
 
 public class LottoInputHandler {
-    public LottoPurchaseBudget scanLottoPurchaseBudget() {
+    public LottoPurchase scanLottoPurchaseBudget() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        return new LottoPurchaseBudget(scanner.nextInt());
+        return new LottoPurchase(scanner.nextInt());
     }
 
     public String scanLottoWinNumbersString() {
