@@ -31,30 +31,21 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        if (matchCount == 5 && matchBonus) {
-            return LottoRank.SECOND;
-        }
-        if (matchCount == 5) {
-            return LottoRank.THIRD;
-        }
-        if (matchCount > 2) {
-            return MAP_LOTTO_RESULT.get(matchCount);
-        }
-        return MAP_LOTTO_RESULT.get(0);
+        return MAP_LOTTO_RANK.get(matchCount + Boolean.hashCode(matchBonus));
     }
 
-    public static final Map<Integer, LottoRank> MAP_LOTTO_RESULT;
+    public static final Map<Integer, LottoRank> MAP_LOTTO_RANK;
     static {
-        Map<Integer, LottoRank> mapLottoResult = new HashMap<>();
-        mapLottoResult.put(0, LottoRank.MISS);
-        mapLottoResult.put(1, LottoRank.MISS);
-        mapLottoResult.put(2, LottoRank.MISS);
-        mapLottoResult.put(3, LottoRank.FIFTH);
-        mapLottoResult.put(4, LottoRank.FOURTH);
-        mapLottoResult.put(5, LottoRank.THIRD);
+        Map<Integer, LottoRank> mapLottoRank = new HashMap<>();
+        mapLottoRank.put(0 + Boolean.hashCode(false), LottoRank.MISS);
+        mapLottoRank.put(1 + Boolean.hashCode(false), LottoRank.MISS);
+        mapLottoRank.put(2 + Boolean.hashCode(false), LottoRank.MISS);
+        mapLottoRank.put(3 + Boolean.hashCode(false), LottoRank.FIFTH);
+        mapLottoRank.put(4 + Boolean.hashCode(false), LottoRank.FOURTH);
+        mapLottoRank.put(5 + Boolean.hashCode(false), LottoRank.THIRD);
+        mapLottoRank.put(5 + Boolean.hashCode(true), LottoRank.SECOND);
+        mapLottoRank.put(6 + Boolean.hashCode(false), LottoRank.FIRST);
 
-        mapLottoResult.put(6, LottoRank.FIRST);
-        MAP_LOTTO_RESULT = Collections.unmodifiableMap(mapLottoResult);
+        MAP_LOTTO_RANK = Collections.unmodifiableMap(mapLottoRank);
     }
 }
