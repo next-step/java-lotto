@@ -16,12 +16,13 @@ public class LottoGame {
     }
 
     public LottoGame(int... numbers) {
-        // 수동 x 개
+        if (numbers.length > LOTTO_NUMBER_COUNT) {
+            throw new InvalidLottoGame(String.format("%s %s",MessageContainer.INVALID_LOTTO_GAME,lottoNumbers.size()));
+        }
+
         for (int number : numbers) {
             addRandomNumber(number);
         }
-        // 나머지 y 개
-        fillRandomNumbers();
     }
 
     public static boolean isAffordable(int money) {
@@ -33,14 +34,17 @@ public class LottoGame {
     }
 
     private void fillRandomNumbers() {
-        while(lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
             addRandomNumber();
         }
-        isValid();
     }
 
     private void addRandomNumber() {
-        lottoNumbers.add(new LottoNumber(new RandomNumber()));
+        LottoNumber number = new LottoNumber(new RandomNumber());
+        while (lottoNumbers.contains(number)) {
+            number = new LottoNumber(new RandomNumber());
+        }
+        lottoNumbers.add(number);
     }
 
     public boolean isValid() {
