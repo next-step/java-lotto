@@ -21,8 +21,8 @@ public class Delimiter {
 		validateCustomDelimiterContents(customDelimiter);
 	}
 
-	public String getDelimiter() {
-		return this.delimiter;
+	public String[] splitInput(String input) {
+		return input.split(delimiter);
 	}
 
 	private static void validateCustomDelimiterContents(String customDelimiter) {

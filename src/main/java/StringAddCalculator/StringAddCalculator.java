@@ -8,24 +8,38 @@ public class StringAddCalculator {
 	private static Pattern customDelimiterPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
 	public static int splitAndReturnSum(String input) {
-		if (input == null || input.isEmpty()) {
+		if (validateInput(input)) {
 			return 0;
 		}
 
 		Matcher customDelimiterMatcher = getCustomDelimiterMatcher(input);
 
 		if (customDelimiterMatcher.find()) {
-			return new Numbers(
-				splitInput(getInput(customDelimiterMatcher),
-					new Delimiter(customDelimiterMatcher.group(1)).getDelimiter()))
-				.getSum();
+			return getSum(split(getInput(customDelimiterMatcher),
+				new Delimiter(getCustomDelimiter(customDelimiterMatcher))));
 		}
-
-		return new Numbers(splitInput(input, new Delimiter().getDelimiter())).getSum();
+		return getSum(split(input, new Delimiter()));
 	}
 
-	private static String[] splitInput(String input, String delimiter) {
-		return input.split(delimiter);
+	private static boolean validateInput(String input) {
+		if (input == null || input.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+	private static String getCustomDelimiter(Matcher customDelimiterMatcher) {
+		return customDelimiterMatcher.group(1);
+	}
+
+	private static String[] split(String input, Delimiter delimiter) {
+		return delimiter.splitInput(input);
+	}
+
+	private static int getSum(String[] stringNumbers) {
+		Numbers numbers = new Numbers(stringNumbers);
+
+		return numbers.getSum();
 	}
 
 	private static Matcher getCustomDelimiterMatcher(String input) {
