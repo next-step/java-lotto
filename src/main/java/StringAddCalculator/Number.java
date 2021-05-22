@@ -17,7 +17,7 @@ public class Number {
 		return this.number;
 	}
 
-	private static void validateNegativeNumber(int number) {
+	private void validateNegativeNumber(int number) {
 		if (number < MINIMUM_VALUE) {
 			throw new RuntimeException("input contains few negative numbers");
 		}
