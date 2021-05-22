@@ -1,7 +1,15 @@
 package lotto;
 
+import java.util.List;
+
 public class Lottos {
-	public int size() {
-		return 14;
+	private final List<Lotto> lottos;
+
+	public Lottos(List<Lotto> lottos) {
+		this.lottos = lottos;
+	}
+
+	public List<Lotto> lottos() {
+		return lottos;
 	}
 }

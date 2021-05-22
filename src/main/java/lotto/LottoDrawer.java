@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoDrawer {
+	private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
 	private final List<Integer> lottoNumbers;
 
 	public LottoDrawer() {
@@ -16,7 +17,14 @@ public class LottoDrawer {
 	}
 
 	public Lottos draw(BigDecimal receivedMoney) {
-		return new Lottos();
+		return new Lottos(IntStream.rangeClosed(1, numberOfLottosToBuy(receivedMoney))
+				.mapToObj((it) -> draw())
+				.collect(Collectors.toList()));
+	}
+
+	private int numberOfLottosToBuy(BigDecimal receivedMoney) {
+		return receivedMoney.divide(LOTTO_PRICE)
+				.intValue();
 	}
 
 	public Lotto draw() {
