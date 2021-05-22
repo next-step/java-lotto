@@ -1,6 +1,7 @@
 package io.mwkwon.lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class LottoStore {
@@ -18,7 +19,7 @@ public final class LottoStore {
         }
     }
 
-    public List<Lotto> getBuyLottos() {
-        return this.lottos;
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(this.lottos);
     }
 }
