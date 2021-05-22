@@ -9,7 +9,7 @@ public class PurchaseLotto {
     private int purchasedLottoCount;
     private LottoNumber lottoNumber;
     private List<LottoNumber> lottoNumberList;
-
+    private List<Integer> lastWonLottoNumbers;
     //private static InputAmount inputAmount;
 
     public int availablePurchaseLottoCount(int amount) {
@@ -26,5 +26,22 @@ public class PurchaseLotto {
 
     public List<LottoNumber> getLottoNumberList() {
         return this.lottoNumberList;
+    }
+
+    public List<Integer> getLastWonLottoNumbers() {
+        return this.lastWonLottoNumbers;
+    }
+
+    public void checkWinOrLose(String lastWonLottoNumbers) {
+        setLastWonLottoNumbers(lastWonLottoNumbers);
+
+    }
+
+    public void setLastWonLottoNumbers(String lastWonLottoNumbers) {
+        this.lastWonLottoNumbers = new ArrayList<Integer>();
+        String[] tempLastWonLottoNumbers = lastWonLottoNumbers.split(",");
+        for(int i=0; i<tempLastWonLottoNumbers.length; i++) {
+            this.lastWonLottoNumbers.add(Integer.parseInt(tempLastWonLottoNumbers[i]));
+        }
     }
 }

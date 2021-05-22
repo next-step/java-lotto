@@ -9,5 +9,6 @@ public class LottoController {
         resultView.printPurchasedCount(lottoCount);
         purchaseLotto.purchaseLottos(lottoCount);
         resultView.printPurchasedLottos(purchaseLotto.getLottoNumberList());
+        purchaseLotto.checkWinOrLose(inputView.inputLastWonLottoNumbers());
     }
 }
