@@ -3,22 +3,27 @@ package lotto.domains;
 import java.util.*;
 
 public class LottoNumbers {
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers() {
         this.lottoNumbers = makeLottoNumbers();
     }
+
     public LottoNumbers(List<Integer> lottoNumbers) {
         validateNumber(lottoNumbers);
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
+
     private List<Integer> makeLottoNumbers() {
         List<Integer> lottoNumberList;
         List<Integer> numberList = new ArrayList<>();
-        for (int i = 1; i < 46; i++) {
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
             numberList.add(i);
         }
         Collections.shuffle(numberList);
@@ -29,9 +34,13 @@ public class LottoNumbers {
 
     private void validateNumber(List<Integer> lottoNumbers) {
         for (int lottoNumber : lottoNumbers) {
-            if (lottoNumber < 1 || lottoNumber > 45) {
-                throw new IllegalArgumentException("로또번호는 1부터 45까지의 값을 입력해주세요");
-            }
+            validateMaxMinNumber(lottoNumber);
+        }
+    }
+
+    private void validateMaxMinNumber(int lottoNumber) {
+        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("로또번호는 1부터 45까지의 값을 입력해주세요");
         }
     }
 
@@ -43,7 +52,7 @@ public class LottoNumbers {
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또번호는 여섯자리를 입력해주세요");
         }
     }
