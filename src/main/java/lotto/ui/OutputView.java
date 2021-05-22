@@ -1,4 +1,7 @@
-package lotto;
+package lotto.ui;
+
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
 

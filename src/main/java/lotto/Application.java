@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.LottoTickets;
+import lotto.domain.WinningNumbers;
+import lotto.ui.InputView;
+import lotto.ui.OutputView;
+
 public class Application {
 
     public static void main(String[] args) {

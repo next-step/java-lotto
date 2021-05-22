@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 
@@ -8,7 +8,7 @@ public enum MatchStatus {
     FOUR(4, 50000),
     FIVE(5, 1500000),
     SIX(6, 2000000000),
-    ELSE(-1,0);
+    ELSE(-1, 0);
 
     private int matchCount;
     private int price;
@@ -29,7 +29,7 @@ public enum MatchStatus {
     }
 
     static MatchStatus findStatusByMatchCount(int matchCount) {
-        if(countMap.containsKey(matchCount)){
+        if (countMap.containsKey(matchCount)) {
             return countMap.get(matchCount);
         }
         return ELSE;

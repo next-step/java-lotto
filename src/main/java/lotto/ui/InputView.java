@@ -1,6 +1,7 @@
-package lotto;
+package lotto.ui;
 
 import calculator.SplitUtil;
+import lotto.ui.OutputView;
 
 import java.util.Arrays;
 import java.util.HashSet;

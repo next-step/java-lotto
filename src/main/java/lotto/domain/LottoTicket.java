@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class LottoTicket {
             stringBuilder.append(lottoNumber.number());
             stringBuilder.append(",");
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         stringBuilder.append("]");
 
         return stringBuilder.toString();

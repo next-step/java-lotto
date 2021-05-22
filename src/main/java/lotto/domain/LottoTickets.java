@@ -1,17 +1,17 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
 
-    public static final String ERROR_AMOUNT_CANNOT_BE_DIVIDED = "로또 가격으로 정확히 나누어떨어지는 금액을 입력해주세요.";
-    public static final String ERROR_AMOUNT_OUT_OF_RANGE = "1천원 이상, 10만원 이하의 금액을 입력해주세요.";
-    public static final String TOTAL_COUNT_FORMAT = "%d개를 구매했습니다.%n";
+    private final String ERROR_AMOUNT_CANNOT_BE_DIVIDED = "로또 가격으로 정확히 나누어떨어지는 금액을 입력해주세요.";
+    private final String ERROR_AMOUNT_OUT_OF_RANGE = "1천원 이상, 10만원 이하의 금액을 입력해주세요.";
+    private final String TOTAL_COUNT_FORMAT = "%d개를 구매했습니다.%n";
 
-    public static final int PRICE_PER_TICKET = 1000;
-    public static final int MINIMUM_PURCHASE_AMOUNT = 1000;
-    public static final int MAXIMUM_PURCHASE_AMOUNT = 100000;
+    private final int PRICE_PER_TICKET = 1000;
+    private final int MINIMUM_PURCHASE_AMOUNT = 1000;
+    private final int MAXIMUM_PURCHASE_AMOUNT = 100000;
 
     private int purchaseAmount;
     private final List<LottoTicket> lottoTickets;
@@ -23,10 +23,6 @@ public class LottoTickets {
         lottoResult = new LottoResult(amount);
         this.purchaseAmount = amount;
         this.lottoTickets = issueTickets(purchaseAmount / PRICE_PER_TICKET);
-    }
-
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
     }
 
     private List<LottoTicket> issueTickets(int count) {

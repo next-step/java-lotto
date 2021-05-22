@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashSet;
 import java.util.TreeSet;
 
 public class WinningNumbers {
 
-    public static final int NUMBER_COUNT = 6;
+    private final int NUMBER_COUNT = 6;
 
     private final TreeSet<LottoNumber> numbers;
 

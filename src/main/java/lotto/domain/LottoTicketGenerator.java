@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,9 +8,9 @@ public class LottoTicketGenerator {
 
     private static LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
 
-    public static final int MIN_VALUE = 1;
-    public static final int MAX_VALUE = 45;
-    public static final int NUMBER_COUNT_PER_TICKET = 6;
+    private final int MIN_VALUE = 1;
+    private final int MAX_VALUE = 45;
+    private final int NUMBER_COUNT_PER_TICKET = 6;
 
     private final List<LottoNumber> numberPool;
 
