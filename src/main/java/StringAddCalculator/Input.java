@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Input {
 	private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
+	private static final String[] ZERO = new String[] {"0"};
 	private static Pattern customDelimiterPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
 	private String input;
@@ -15,8 +16,7 @@ public class Input {
 
 	public String[] getStringNumbers() {
 		if (isEmptyOrNull(input)) {
-			String[] returnValue = {"0"};
-			return returnValue;
+			return ZERO;
 		}
 
 		Matcher customDelimiterMatcher = getCustomDelimiterMatcher(input);
