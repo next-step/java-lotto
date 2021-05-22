@@ -7,7 +7,14 @@ public class LottoNumber {
 	private int number;
 
 	public LottoNumber(int number) {
+		validate(number);
 		this.number = number;
+	}
+
+	private void validate(int number) {
+		if (number < 1 || number > 46) {
+			throw new IllegalArgumentException("로또의 숫자의 범위는 1~46 입니다");
+		}
 	}
 
 	@Override
