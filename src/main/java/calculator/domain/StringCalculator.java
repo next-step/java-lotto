@@ -3,6 +3,8 @@ package calculator.domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static calculator.utils.UtilsString.isNullOrEmpty;
+
 public class StringCalculator {
     private final String DEFAULT_DELIMITER = ":|,";
     private final String DEFAULT_REGEX_PATTERN = "//(.)\n(.*)";
@@ -23,14 +25,9 @@ public class StringCalculator {
     public Numbers makeNumbersUsing(String inputString) {
         Matcher m = Pattern.compile(DEFAULT_REGEX_PATTERN).matcher(inputString);
         if (m.find()) {
-            new Numbers(m.group(NUMBERS_SECTION).split(m.group(DELIMITER_SECTION)));
+            return new Numbers(m.group(NUMBERS_SECTION).split(m.group(DELIMITER_SECTION)));
         }
 
         return new Numbers(inputString.split(DEFAULT_DELIMITER));
     }
-
-    protected boolean isNullOrEmpty(String numberString) {
-        return (numberString == null || numberString.equals(""));
-    }
-
 }
