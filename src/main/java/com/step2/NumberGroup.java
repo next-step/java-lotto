@@ -1,31 +1,23 @@
 package com.step2;
 
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class NumberGroup {
-    private static final String ONLY_ZERO_POSITIVE_PATTERN = "^[0-9]+$";
-    private final Pattern pattern;
-    private final String[] tokens;
+    private final List<PositiveNumber> tokens;
 
     public NumberGroup(String[] tokens) {
-        this.tokens = tokens;
-        this.pattern = Pattern.compile(ONLY_ZERO_POSITIVE_PATTERN);
+        this.tokens = Arrays.stream(tokens).map(PositiveNumber::new).collect(Collectors.toList());
     }
 
     public int calculateAddition() {
         int sum = 0;
 
-        for (String sNumber : tokens) {
-            validatePositiveNumber(sNumber);
-            sum += Integer.parseInt(sNumber);
+        for (PositiveNumber positiveNumber : tokens) {
+            sum += Integer.parseInt(positiveNumber.number());
         }
 
         return sum;
-    }
-
-    private void validatePositiveNumber(String number) {
-        if(!pattern.matcher(number).find()) {
-            throw new RuntimeException();
-        }
     }
 }
