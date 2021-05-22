@@ -11,7 +11,7 @@ public class Calculator {
     private final Operands operands;
 
     public Calculator(String input) {
-        char delimiter = ValidateAndExtractDelimiter(input);
+        char delimiter = validateAndExtractDelimiter(input);
 
         this.operands = makeOperandsByInput(input, String.valueOf(delimiter));
     }
@@ -20,7 +20,7 @@ public class Calculator {
         this.operands = makeOperandsByInput(input, delimiter);
     }
 
-    private char ValidateAndExtractDelimiter(String input) {
+    private char validateAndExtractDelimiter(String input) {
         char delimiter = extractDelimiter(input);
 
         Delimiters.validateExistDelimiter(delimiter);
