@@ -17,7 +17,7 @@ public class LottoInput {
         scanner = new Scanner(System.in);
     }
 
-    public Money inputMoneyToBuyLotto() {
+    public Money inputMoneyToPurchaseLotto() {
         while (true) {
             try {
                 System.out.println(INPUT_MONEY_MESSAGE);

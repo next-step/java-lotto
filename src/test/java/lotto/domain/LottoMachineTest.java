@@ -9,7 +9,7 @@ public class LottoMachineTest {
 
     @DisplayName("10000원 일때 로또 10장이 리턴되는지")
     @Test
-    void buy_lotto_as_money() {
+    void purchase_lotto_as_money() {
         //given
         int money = 10000;
         LottoMachine lottoMachine = new LottoMachine(new Money(money));
