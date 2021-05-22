@@ -4,7 +4,6 @@ package lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -49,18 +48,23 @@ public class LottoTest {
     @Test
     public void purchasedLotto_count_validate() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
-        purchaseLotto.purchaseLottos(14);
-        assertThat(purchaseLotto.getLottoNumberList().size()).isEqualTo(14);
+        purchaseLotto.purchaseLotto(14);
+        assertThat(purchaseLotto.getLottoNumberList().count()).isEqualTo(14);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5,6})
     public void setLastWonLottoNumbers_init(int number) {
-        PurchaseLotto purchaseLotto = new PurchaseLotto();
-        purchaseLotto.setLastWonLottoNumbers("1,2,3,4,5,6");
-        assertThat(purchaseLotto.getLastWonLottoNumbers().contains(number)).isTrue();
+        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
+        assertThat(lastWonLottoNumber.contains(number)).isTrue();
     }
 
+    @Test
+    public void CheckWinOrLose_validate() {
+        PurchaseLotto purchaseLotto = new PurchaseLotto();
+        //purchaseLotto.
+        //purchaseLotto.setLastWonLottoNumbers("1,2,3,4,5,6");
+    }
 
 
 

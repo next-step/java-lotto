@@ -7,7 +7,7 @@ public class LottoController {
         ResultView resultView = new ResultView();
         int lottoCount = purchaseLotto.availablePurchaseLottoCount(inputView.inputPurchaseAmount());
         resultView.printPurchasedCount(lottoCount);
-        purchaseLotto.purchaseLottos(lottoCount);
+        purchaseLotto.purchaseLotto(lottoCount);
         resultView.printPurchasedLottos(purchaseLotto.getLottoNumberList());
         purchaseLotto.checkWinOrLose(inputView.inputLastWonLottoNumbers());
     }
