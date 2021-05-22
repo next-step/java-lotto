@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
-import lotto.util.MessageContainer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
@@ -33,7 +32,7 @@ public class LottoGameTest {
     public void 당첨번호_갯수이상() {
         assertThatThrownBy(()->new LottoGame(1,2,3,4,5,6,7))
                 .isInstanceOf(InvalidLottoGame.class)
-                .hasMessageContaining(MessageContainer.INVALID_LOTTO_GAME);
+                .hasMessageContaining(InvalidLottoGame.INVALID_LOTTO_GAME);
     }
 
     @Test

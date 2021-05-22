@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoNumber;
-import lotto.util.MessageContainer;
-
 import java.util.Objects;
 import java.util.Random;
 

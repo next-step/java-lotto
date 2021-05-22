@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
-import lotto.util.MessageContainer;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ public class LottoGame {
 
     public LottoGame(int... numbers) {
         if (numbers.length > LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",MessageContainer.INVALID_LOTTO_GAME,lottoNumbers.size()));
+            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lottoNumbers.size()));
         }
 
         for (int number : numbers) {
@@ -45,7 +44,7 @@ public class LottoGame {
 
     public boolean isValid() {
         if (this.lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",MessageContainer.INVALID_LOTTO_GAME,lottoNumbers.size()));
+            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lottoNumbers.size()));
         }
         return true;
     }
