@@ -15,7 +15,7 @@ public class SixBall {
                 .sorted().collect(Collectors.toList());
     }
 
-    public static SixBall get(int ...fixedBalls) {
+    public static SixBall valueOf(int ...fixedBalls) {
         Set<Ball> balls = initTempCollection(fixedBalls);
 
         while(balls.size() < LENGTH) {

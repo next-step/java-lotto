@@ -22,26 +22,26 @@ class OmrTest {
 
     @BeforeAll
     public static void mySixBall() {
-        round = new Round(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6), WIN_BONUS);
+        round = new Round(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6), WIN_BONUS);
     }
 
     @Test
     @DisplayName("꽝 확인")
     public void missTest() {
-        assertThat(new Omr(SixBall.get(11, 12, 13, 14, 15, 16)).grade(round))
+        assertThat(new Omr(SixBall.valueOf(11, 12, 13, 14, 15, 16)).grade(round))
                 .isEqualTo(Rank.MISS);
 
-        assertThat(new Omr(SixBall.get(WIN_NUM1, 12, 13, 14, 15, 16)).grade(round))
+        assertThat(new Omr(SixBall.valueOf(WIN_NUM1, 12, 13, 14, 15, 16)).grade(round))
                 .isEqualTo(Rank.MISS);
 
-        assertThat(new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, 13, 14, 15, 16)).grade(round))
+        assertThat(new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, 13, 14, 15, 16)).grade(round))
                 .isEqualTo(Rank.MISS);
     }
 
     @Test
     @DisplayName("5등 확인")
     public void fifthTest() {
-        Omr omr = new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, 14, 15, 16));
+        Omr omr = new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, 14, 15, 16));
         Rank rank = omr.grade(round);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -50,7 +50,7 @@ class OmrTest {
     @Test
     @DisplayName("4등 확인")
     public void fourthTest() {
-        Omr omr = new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, 15, 16));
+        Omr omr = new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, 15, 16));
         Rank rank = omr.grade(round);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -59,7 +59,7 @@ class OmrTest {
     @Test
     @DisplayName("3등 확인")
     public void thirdTest() {
-        Omr omr = new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, 16));
+        Omr omr = new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, 16));
         Rank rank = omr.grade(round);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -68,7 +68,7 @@ class OmrTest {
     @Test
     @DisplayName("2등 확인")
     public void secondTest() {
-        Omr omr = new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_BONUS));
+        Omr omr = new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_BONUS));
         Rank rank = omr.grade(round);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -77,7 +77,7 @@ class OmrTest {
     @Test
     @DisplayName("1등 확인")
     public void firstTest() {
-        Omr omr = new Omr(SixBall.get(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6));
+        Omr omr = new Omr(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6));
         Rank rank = omr.grade(round);
 
         assertThat(rank).isEqualTo(Rank.FIRST);

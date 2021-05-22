@@ -16,7 +16,7 @@ class RoundTest {
     @Test
     @DisplayName("로또 당첨번호 자동생성")
     public void autoTest() {
-        Round round = new Round(1, SixBall.get(), 45);
+        Round round = new Round(1, SixBall.valueOf(), 45);
 
         System.out.println(round);
         assertThat(round).isNotNull();
@@ -25,7 +25,7 @@ class RoundTest {
     @Test
     @DisplayName("로또 당첨번호 직접입력")
     public void fixedBallsTest() {
-        Round round = new Round(1, SixBall.get(1, 2, 3, 4, 5, 6), 7);
+        Round round = new Round(1, SixBall.valueOf(1, 2, 3, 4, 5, 6), 7);
 
         System.out.println(round);
         assertThat(round).isNotNull();
@@ -35,7 +35,7 @@ class RoundTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, -1, 0, 46})
     @DisplayName("잘못된 보너스볼")
     public void wrongBonusBallTest(int bonus) {
-        assertThatThrownBy(() -> new Round(1, SixBall.get(1, 2, 3, 4, 5, 6), bonus))
+        assertThatThrownBy(() -> new Round(1, SixBall.valueOf(1, 2, 3, 4, 5, 6), bonus))
                 .isInstanceOf(LottoRuleException.class);
     }
 }

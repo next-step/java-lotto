@@ -31,7 +31,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
 
     private void markings(int count, OmrCard omrCard) {
         for (int i = 0; i < count; i++) {
-            SixBall sixBall = SixBall.get();
+            SixBall sixBall = SixBall.valueOf();
             omrCard.marking(sixBall);
 
             input.response(sixBall.toString());

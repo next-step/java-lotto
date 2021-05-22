@@ -14,7 +14,7 @@ class SixBallTest {
     @RepeatedTest(100)
     @DisplayName("자동생성 로또6개 길이 확인")
     public void lengthTest() {
-        SixBall sixBall = SixBall.get();
+        SixBall sixBall = SixBall.valueOf();
 
         long count = sixBall.stream().count();
 
@@ -25,7 +25,7 @@ class SixBallTest {
     @RepeatedTest(100)
     @DisplayName("자동생성 로또6개 중복되지 않은 서로 다른값 확인")
     public void duplicateTest() {
-        SixBall sixBall = SixBall.get();
+        SixBall sixBall = SixBall.valueOf();
 
         long count = sixBall.stream()
                 .distinct()
@@ -50,7 +50,7 @@ class SixBallTest {
         int[] fixedBalls = StringUtils.csvToIntArray(source);
 
         //When
-        SixBall sixBall = SixBall.get(fixedBalls);
+        SixBall sixBall = SixBall.valueOf(fixedBalls);
 
         //Then
         System.out.println(sixBall);
@@ -72,7 +72,7 @@ class SixBallTest {
         int[] fixedBalls = StringUtils.csvToIntArray(source);
 
         //When
-        SixBall sixBall = SixBall.get(fixedBalls);
+        SixBall sixBall = SixBall.valueOf(fixedBalls);
 
         //Then
         System.out.println(sixBall);

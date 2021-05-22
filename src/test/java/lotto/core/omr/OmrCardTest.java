@@ -19,14 +19,14 @@ class OmrCardTest {
         //Given
         OmrCard omrCard = new OmrCard();
 
-        omrCard.marking(SixBall.get(1, 2, 3, 4, 5, 6));
-        omrCard.marking(SixBall.get(1, 2, 3, 4, 5, 16));
-        omrCard.marking(SixBall.get(11, 12, 13, 14, 15, 16));
-        omrCard.marking(SixBall.get(21, 22, 23, 24, 25, 26));
-        omrCard.marking(SixBall.get(31, 32, 33, 34, 35, 36));
+        omrCard.marking(SixBall.valueOf(1, 2, 3, 4, 5, 6));
+        omrCard.marking(SixBall.valueOf(1, 2, 3, 4, 5, 16));
+        omrCard.marking(SixBall.valueOf(11, 12, 13, 14, 15, 16));
+        omrCard.marking(SixBall.valueOf(21, 22, 23, 24, 25, 26));
+        omrCard.marking(SixBall.valueOf(31, 32, 33, 34, 35, 36));
 
         //When
-        Round round = new Round(SixBall.get(1, 2, 3, 4, 5, 6), 7);
+        Round round = new Round(SixBall.valueOf(1, 2, 3, 4, 5, 6), 7);
 
         //Then
         Map<Rank, List<Omr>> rankListMap = omrCard.grade(round);
