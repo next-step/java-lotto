@@ -16,7 +16,7 @@ class LottoWalletTest {
     public void createLottoWallet(String inputMoney, int ticketCount) {
         Money money = Money.create(inputMoney);
         LottoWallet lottoWallet = LottoWallet.create(money);
-        lottoWallet.buyingLotto();
+        lottoWallet.buyingLotto(new TestNumberGeneratorStrategy());
 
         assertThat(lottoWallet.takeOutLottoTickets()).hasSize(ticketCount);
         assertThat(lottoWallet.getTicketCount()).isEqualTo(ticketCount);
