@@ -15,6 +15,10 @@ public final class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<Integer> numbers() {
+        return lottoNumbers;
+    }
+
     public LottoReward reward(Set<Integer> winningNumbers) {
         int sameCount = 0;
         for (int number : lottoNumbers) {
