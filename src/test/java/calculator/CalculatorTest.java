@@ -25,8 +25,8 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5,b/,", "a:c/:", ",:0/:"}, delimiter = '/')
-    @DisplayName("구분자를 제외한 값들이 숫자가 아닌 경우 예외처리한다.")
+    @CsvSource(value = {"5,b/,", "a:c/:", ",:0/:", "-1,10/,", "10,-5/,"}, delimiter = '/')
+    @DisplayName("구분자를 제외한 값들이 숫자가 아니거나 음수인경우 예외처리한다.")
     void validateOperands_test(String input, String delimiter) {
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input, delimiter));

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Calculator {
 
+    public static final int MINIMUM_OPERAND_VALUE = 0;
     private final Operands operands;
 
     public Calculator(String input, String delimiter) {
@@ -33,9 +34,20 @@ public class Calculator {
 
     private void validateOperand(List<Integer> parseInts, String operand) {
         try {
-            parseInts.add(Integer.parseInt(operand));
+            int parsedOperand = Integer.parseInt(operand);
+
+            validatePositiveOperand(parsedOperand);
+
+            parseInts.add(parsedOperand);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 연산값입니다. : " + operand);
+        }
+    }
+
+    private void validatePositiveOperand(int parsedOperand) {
+        if (parsedOperand < MINIMUM_OPERAND_VALUE) {
+            throw new NumberFormatException();
         }
     }
 
