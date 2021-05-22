@@ -1,10 +1,10 @@
 package StringAddCalculator;
 
 public class StringAddCalculator {
-	public static int splitAndReturnSum(String input) {
-		Input input1 = new Input(input);
+	public static int splitAndReturnSum(String inputFromUser) {
+		Input input = new Input(inputFromUser);
 
-		return getSum(input1.getStringNumbers());
+		return getSum(input.getStringNumbers());
 	}
 
 	private static int getSum(String[] stringNumbers) {

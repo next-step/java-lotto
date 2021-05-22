@@ -3,10 +3,10 @@ package StringAddCalculator;
 import java.util.regex.Pattern;
 
 public class Delimiter {
-	public static final String DEFAULT = ",|:";
-	public static final String NOT_ABLE_CHARACTER_REGEX = "([0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+)";
-	public static final int MINIMUM_LENGTH = 1;
-	public static final int MAXIMUM_LENGTH = 2;
+	private static final String DEFAULT = ",|:";
+	private static final String NOT_ABLE_CHARACTER_REGEX = "([0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+)";
+	private static final int MINIMUM_LENGTH = 1;
+	private static final int MAXIMUM_LENGTH = 2;
 	private static Pattern notAbleCharacterPattern = Pattern.compile(NOT_ABLE_CHARACTER_REGEX);
 
 	private String delimiter;

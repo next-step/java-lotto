@@ -1,8 +1,8 @@
 package StringAddCalculator;
 
 public class Number {
-	public static final int MINIMUM_VALUE = 0;
-	public static final int MAXIMUM_VALUE = 10000000;
+	private static final int MINIMUM_VALUE = 0;
+	private static final int MAXIMUM_VALUE = 10000000;
 
 	int number;
 

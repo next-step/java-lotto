@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Input {
-	public static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
+	private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
 	private static Pattern customDelimiterPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
 	private String input;

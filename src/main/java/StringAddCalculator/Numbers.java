@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Numbers {
-	public static final int MAXIMUM_COUNT = 100;
+	private static final int MAXIMUM_COUNT = 100;
 
 	private List<Number> numbers = new ArrayList<>();
 
