@@ -16,8 +16,8 @@ public class OmrCardInputData implements InputData<OmrCard> {
     @Override
     public OmrCard get() {
         try {
-            int money = money();
-            int count = count(money);
+            int money = requestMoney();
+            int count = requestCount(money);
 
             OmrCard omrCard = new OmrCard();
             markings(count, omrCard);
@@ -40,7 +40,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
         input.response("\n");
     }
 
-    private int money() throws InputException {
+    private int requestMoney() throws InputException {
         String textMoney = input.request("구입금액을 입력해 주세요.");
         int money = parseIntMoney(textMoney);
 
@@ -63,7 +63,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
         return money < OmrCard.PRICE;
     }
 
-    private int count(int money) {
+    private int requestCount(int money) {
         int count = money / OmrCard.PRICE;
         int change = money % OmrCard.PRICE;
 

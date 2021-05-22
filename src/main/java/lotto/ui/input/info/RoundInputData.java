@@ -17,27 +17,27 @@ public class RoundInputData implements InputData<Round> {
     @Override
     public Round get() {
         try {
-            int[] fix = fixs();
-            int bonus = bonus();
+            int[] fixedBalls = requestFixedBalls();
+            int bonus = requestBonus();
 
-            return new Round(SixBall.get(fix), bonus);
+            return new Round(SixBall.get(fixedBalls), bonus);
         } catch (Exception e) {
             input.redirectResponse(e.getMessage());
             return get();
         }
     }
 
-    private int[] fixs() throws InputException {
-        int[] fixs = fixArray();
+    private int[] requestFixedBalls() throws InputException {
+        int[] fixedBalls = requestWinningNumber();
 
-        if (isWinningSixBallValidation(fixs.length)) {
+        if (isWinningSixBallValidation(fixedBalls.length)) {
             throw new InputException(String.format("당첨 번호는 총 %d개를 입력해주셔야 합니다.", SixBall.LENGTH));
         }
 
-        return fixs;
+        return fixedBalls;
     }
 
-    private int[] fixArray() throws InputException{
+    private int[] requestWinningNumber() throws InputException{
         try {
             String text = input.request("지난 주 당첨 번호를 입력해 주세요.");
             return StringUtils.csvToIntArray(text);
@@ -46,7 +46,7 @@ public class RoundInputData implements InputData<Round> {
         }
     }
 
-    private int bonus() throws InputException {
+    private int requestBonus() throws InputException {
         try {
             return Integer.parseInt(input.request("보너스 볼을 입력해 주세요."));
         } catch (NumberFormatException e) {

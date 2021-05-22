@@ -15,8 +15,8 @@ public class SixBall {
                 .sorted().collect(Collectors.toList());
     }
 
-    public static SixBall get(int ...fix) {
-        Set<Ball> balls = initTempCollection(fix);
+    public static SixBall get(int ...fixedBalls) {
+        Set<Ball> balls = initTempCollection(fixedBalls);
 
         while(balls.size() < LENGTH) {
             balls.add(Machine.draw());
@@ -25,8 +25,8 @@ public class SixBall {
         return new SixBall(balls);
     }
 
-    private static Set<Ball> initTempCollection(int[] fixs) {
-        return Arrays.stream(fixs)
+    private static Set<Ball> initTempCollection(int[] fixedBalls) {
+        return Arrays.stream(fixedBalls)
                 .boxed().map(Machine::draw)
                 .collect(Collectors.toSet());
     }

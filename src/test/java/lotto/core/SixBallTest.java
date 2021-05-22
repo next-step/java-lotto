@@ -47,10 +47,10 @@ class SixBallTest {
     @DisplayName("정상적인 직접입력 로또 6개의 값")
     public void directTest(String source) {
         //Given
-        int[] fixs = StringUtils.csvToIntArray(source);
+        int[] fixedBalls = StringUtils.csvToIntArray(source);
 
         //When
-        SixBall sixBall = SixBall.get(fixs);
+        SixBall sixBall = SixBall.get(fixedBalls);
 
         //Then
         System.out.println(sixBall);
@@ -69,10 +69,10 @@ class SixBallTest {
     @DisplayName("비정상 직접입력 로또 6개의 값")
     public void directTest2(String source) {
         //Given
-        int[] fixs = StringUtils.csvToIntArray(source);
+        int[] fixedBalls = StringUtils.csvToIntArray(source);
 
         //When
-        SixBall sixBall = SixBall.get(fixs);
+        SixBall sixBall = SixBall.get(fixedBalls);
 
         //Then
         System.out.println(sixBall);

@@ -24,7 +24,7 @@ class RoundTest {
 
     @Test
     @DisplayName("로또 당첨번호 직접입력")
-    public void fixTest() {
+    public void fixedBallsTest() {
         Round round = new Round(1, SixBall.get(1, 2, 3, 4, 5, 6), 7);
 
         System.out.println(round);
