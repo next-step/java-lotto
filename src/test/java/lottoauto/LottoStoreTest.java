@@ -11,12 +11,12 @@ public class LottoStoreTest {
 
     LottoStore lottoStore = new LottoStore();
 
-    @DisplayName("돈을 지불하여 lotto티켓을 사는 테스트")
+    @DisplayName("돈을 받아 lotto티켓을 주는 테스트")
     @Test
     void buyLottoTickets() {
-        assertThat(lottoStore.buyLottoTickets(14000).size()).isEqualTo(14);
-        assertThat(lottoStore.buyLottoTickets(13500).size()).isEqualTo(13);
-        assertThat(lottoStore.buyLottoTickets(1000).size()).isEqualTo(1);
+        assertThat(lottoStore.giveLottoTickets(14000).size()).isEqualTo(14);
+        assertThat(lottoStore.giveLottoTickets(13500).size()).isEqualTo(13);
+        assertThat(lottoStore.giveLottoTickets(1000).size()).isEqualTo(1);
     }
 
     @DisplayName("로또티켓 가격 테스트")

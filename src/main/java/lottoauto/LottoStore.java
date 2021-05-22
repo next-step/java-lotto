@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoStore {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
-    public List<LottoTicket> buyLottoTickets(int money) {
+    public List<LottoTicket> giveLottoTickets(int money) {
         int lottoTotalCount = money / LOTTO_TICKET_PRICE;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -17,7 +17,6 @@ public class LottoStore {
 
         return lottoTickets;
     }
-
 
     public int price() {
         return LOTTO_TICKET_PRICE;
