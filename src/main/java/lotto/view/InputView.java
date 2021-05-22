@@ -10,6 +10,7 @@ public class InputView {
     private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String REQUEST_WIN_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String DELIMITER = "\\s*,\\s*";
 
     Scanner input = new Scanner(System.in);
     PrintStream output = new PrintStream(System.out);
@@ -63,7 +64,8 @@ public class InputView {
 
     private int[] nextIntArray() {
         String userInput = input.nextLine();
-        String[] stringNumbers = userInput.split("\\s*,\\s*");
+
+        String[] stringNumbers = userInput.split(DELIMITER);
         int[] intArr = new int[stringNumbers.length];
         int idx = 0;
         for (String number : stringNumbers) {

@@ -1,12 +1,17 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,16 +25,25 @@ public class LottoGameTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value={"1,2,3,4,5,6:1,2,3,41,42,43:3","1,2,3,4,5,6:11,12,13,14,15,16:0","1,2,3,4,5,6:1,2,3,4,5,6:6"},delimiterString = ":")
-    public void 지난주_당첨번호와_일치하는갯수(@ConvertWith(IntArrayConverter.class) int[] numbers1, @ConvertWith(IntArrayConverter.class)int[] numbers2, int matchingCount) {
-        LottoGame game1 = new LottoGame(numbers1);
-        LottoGame game2 = new LottoGame(numbers2);
-
-        assertThat(game1.matchCount(game2)).isEqualTo(matchingCount);
+    @MethodSource("provideLottoNumbers")
+    public void 당첨번호와_로또게임이_일치하는_숫자갯수(int[] lastWeekNumbers, int[] myLottoNumbers, int matchCount) {
+        LottoGame winLotto = new LottoGame(lastWeekNumbers);
+        LottoGame myLotto = new LottoGame(myLottoNumbers);
+        assertThat(winLotto.matchCount(myLotto)).isEqualTo(matchCount);
     }
 
+    private static Stream<Arguments> provideLottoNumbers() {
+        return Stream.of(
+                Arguments.of(new int[]{1,2,3,4,5,6},new int[] {1,2,3,41,42,43},3),
+                Arguments.of(new int[]{1,2,3,4,5,6},new int[] {11,12,13,14,15,16},0),
+                Arguments.of(new int[]{1,2,3,4,5,6},new int[] {1,2,3,4,5,6},6)
+        );
+    }
+
+
     @Test
-    public void 당첨번호_갯수이상() {
+    @DisplayName("당첨번호 갯수가 6개 이상일 때 InvalidLottoGame 에러발생")
+    public void 당첨번호가_6개이상입력() {
         assertThatThrownBy(()->new LottoGame(1,2,3,4,5,6,7))
                 .isInstanceOf(InvalidLottoGame.class)
                 .hasMessageContaining(InvalidLottoGame.INVALID_LOTTO_GAME);
