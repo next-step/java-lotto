@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoReport;
 import lotto.domain.Winnings;
 
+import java.util.List;
+
 public class PrintView {
     private static final String ASK_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.\n";
     private static final String SHOW_PURCHASED_LOTTO_AMOUNT = "%d개를 구매했습니다.\n";
@@ -22,16 +24,16 @@ public class PrintView {
         System.out.print(ASK_PURCHASE_AMOUNT);
     }
 
-    public static void showPurchasedLottoAmount(int count) {
+    public static void showPurchasedLotto(List<Lotto> lottos) {
+        showPurchasedLottoAmount(lottos.size());
+        for(Lotto lotto: lottos){
+            System.out.print(formatLotto(lotto));
+        }
+        System.out.println();
+    }
+
+    private static void showPurchasedLottoAmount(int count) {
         System.out.printf(SHOW_PURCHASED_LOTTO_AMOUNT, count);
-    }
-
-    public static void askWinningNumber() {
-        System.out.print(ASK_WINNING_NUMBER);
-    }
-
-    public static void showLottoReport() {
-        System.out.print(SHOW_LOTTO_REPORT);
     }
 
     static String formatLotto(Lotto lotto) {
@@ -39,10 +41,15 @@ public class PrintView {
         for (int i = 1; i < lotto.numbers.size(); i++) {
             lottoCsv += "," + lotto.numbers.get(i);
         }
-        return String.format("[%s]", lottoCsv);
+        return String.format("[%s]\n", lottoCsv);
+    }
+
+    public static void askWinningNumber() {
+        System.out.print(ASK_WINNING_NUMBER);
     }
 
     public static void showLottoReport(LottoReport lottoReport) {
+        System.out.println();
         System.out.print(SHOW_LOTTO_REPORT);
         System.out.print(formatLottoReport(lottoReport));
         System.out.printf(SHOW_TOTAL_YIELD, lottoReport.yield());
@@ -66,7 +73,7 @@ public class PrintView {
     }
 
     static String formatWinningMetric(Winnings winnings, LottoReport report) {
-        return String.format("%d개 일치 (%d) - %d개", winnings.matched, winnings.winnings, report.countWinnings(winnings));
+        return String.format("%d개 일치 (%d)- %d개\n", winnings.matched, winnings.winnings, report.countWinnings(winnings));
     }
 
 }
