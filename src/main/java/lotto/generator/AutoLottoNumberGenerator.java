@@ -33,6 +33,10 @@ public class AutoLottoNumberGenerator implements Generator {
 		List<Integer> pickedNumbers = pickNumbers();
 		Collections.sort(pickedNumbers);
 		List<LottoNumber> lottoNumberList = NumberToLotto.convert(pickedNumbers);
+		appendLottoNumber(lottoNumbers, lottoNumberList);
+	}
+
+	private void appendLottoNumber(LottoNumbers lottoNumbers, List<LottoNumber> lottoNumberList) {
 		for (LottoNumber lottoNumber : lottoNumberList) {
 			lottoNumbers.add(lottoNumber);
 		}
