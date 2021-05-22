@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 public class LottoResult {
     public static final int HUNDRED = 100;
     public static final int BENEFIT_STANDARD_RATE = 1;
-    public static final String PRIZE_RESULT_FORMAT_MESSAGE = "%d개 일치 (%d원)- %d개";
+    public static final String MATCH_COUNT_FORMAT_MESSAGE = "%d개 일치";
+    public static final String REWARD_FORMAT_MESSAGE = "(%d원)- %d개";
+
     public static final String PROFIT_RATE_NOTICE_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String APPEND_MESSAGE_BY_CONDITION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String BONUS_BALL_MATCH_MESSAGE = ", 보너스 볼 일치";
 
     private final Map<Prize, Integer> result;
 
@@ -43,7 +46,11 @@ public class LottoResult {
 
     private String statisticsMessageFormat(Map.Entry<Prize, Integer> entry) {
         Prize prize = entry.getKey();
-        return String.format(PRIZE_RESULT_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue());
+        String message = MATCH_COUNT_FORMAT_MESSAGE;
+        if (prize == Prize.SECOND) {
+            message += BONUS_BALL_MATCH_MESSAGE;
+        }
+        return String.format(message + REWARD_FORMAT_MESSAGE, prize.getMatchCount(), prize.getRewardPrice(), entry.getValue());
     }
 
     private String profitRateMessage(double calculateProfitRate) {
