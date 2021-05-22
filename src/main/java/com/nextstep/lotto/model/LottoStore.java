@@ -12,6 +12,10 @@ public class LottoStore {
 		this.money = money;
 	}
 
+	public int getMoney() {
+		return this.money;
+	}
+
 	public int lottoCount() {
 		return this.money / LOTTO_PRICE;
 	}

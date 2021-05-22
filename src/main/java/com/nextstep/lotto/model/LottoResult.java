@@ -7,4 +7,8 @@ public class LottoResult {
 	public LottoResult(int matchedCount) {
 		this.matchedCount = matchedCount;
 	}
+
+	public int getMatchedCount() {
+		return this.matchedCount;
+	}
 }
