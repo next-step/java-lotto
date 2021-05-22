@@ -33,12 +33,20 @@ public class LottoNumbers implements Iterable<LottoNumber> {
             throw new IllegalArgumentException("로또번호를 입력해 주세요.");
         }
         if (lottoNumbers.size() != MAX_LOTTO_COUNT) {
-            throw new IllegalArgumentException("로또번호는 " +  MAX_LOTTO_COUNT + " 개의 숫자로 이루어져야 합니다.");
+            throw new IllegalArgumentException("로또번호는 " + MAX_LOTTO_COUNT + " 개의 숫자로 이루어져야 합니다.");
         }
         int distinctCount = (int) lottoNumbers.stream().distinct().count();
         if (distinctCount < MAX_LOTTO_COUNT) {
             throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
+    }
+
+    public int matchCount(LottoNumbers matchTarget) {
+        int matchCount = 0;
+        for (LottoNumber targetNumber : matchTarget) {
+            matchCount += (int) lottoNumbers.stream().filter(lottoNumber -> lottoNumber.equals(targetNumber)).count();
+        }
+        return matchCount;
     }
 
     @Override

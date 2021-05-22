@@ -63,4 +63,49 @@ class LottoNumbersTest {
                 .isThrownBy(() -> new LottoNumbers(lottoNumberList))
                 .withMessageMatching("중복된 번호가 존재합니다.");
     }
+
+    @Test
+    @DisplayName("숫자 매칭 - 전체 일치")
+    void matchCount() {
+        // given
+        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
+        List<LottoNumber> targetNumberList = Stream.of(21, 8, 41, 23, 42, 43).map(LottoNumber::of).collect(Collectors.toList());
+
+        // when
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers targetNumbers = new LottoNumbers(targetNumberList);
+
+        // then
+        assertThat(lottoNumbers.matchCount(targetNumbers)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("숫자 매칭 - 일부 일치")
+    void matchCount_someOf() {
+        // given
+        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
+        List<LottoNumber> targetNumberList = Stream.of(21, 8, 22, 15, 42, 43).map(LottoNumber::of).collect(Collectors.toList());
+
+        // when
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers targetNumbers = new LottoNumbers(targetNumberList);
+
+        // then
+        assertThat(lottoNumbers.matchCount(targetNumbers)).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("숫자 매칭 - 전체 불일치")
+    void matchCount_notMatch() {
+        // given
+        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
+        List<LottoNumber> targetNumberList = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toList());
+
+        // when
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers targetNumbers = new LottoNumbers(targetNumberList);
+
+        // then
+        assertThat(lottoNumbers.matchCount(targetNumbers)).isEqualTo(0);
+    }
 }
