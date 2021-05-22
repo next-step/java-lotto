@@ -20,11 +20,20 @@ public class LottoReportTest {
             번호_6개_일치,
             번호_6개_일치,
             번호_6개_일치,
+            번호_6개_일치,
+
+            번호_5개_일치_보너스번호_일치,
+            번호_5개_일치_보너스번호_일치,
+            번호_5개_일치_보너스번호_일치,
+            번호_5개_일치_보너스번호_일치,
+
             번호_5개_일치,
             번호_5개_일치,
             번호_5개_일치,
+
             번호_4개_일치,
             번호_4개_일치,
+
             번호_3개_일치,
             번호_2개_일치,
             번호_1개_일치,
@@ -38,7 +47,8 @@ public class LottoReportTest {
                 () -> assertThat(report.countWinnings(Rank.FIFTH)).isEqualTo(1),
                 () -> assertThat(report.countWinnings(Rank.FOURTH)).isEqualTo(2),
                 () -> assertThat(report.countWinnings(Rank.THIRD)).isEqualTo(3),
-                () -> assertThat(report.countWinnings(Rank.FIRST)).isEqualTo(4)
+                () -> assertThat(report.countWinnings(Rank.SECOND)).isEqualTo(4),
+                () -> assertThat(report.countWinnings(Rank.FIRST)).isEqualTo(5)
         );
     }
 
@@ -88,6 +98,13 @@ public class LottoReportTest {
                         번호_0개_일치,
                         번호_5개_일치
                 ), 300),
+                Arguments.of(Lists.newArrayList(
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_0개_일치,
+                        번호_5개_일치_보너스번호_일치
+                ), 6000),
                 Arguments.of(Lists.newArrayList(
                         번호_0개_일치,
                         번호_0개_일치,

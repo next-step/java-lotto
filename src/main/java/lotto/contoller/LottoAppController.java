@@ -3,6 +3,7 @@ package lotto.contoller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoReport;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.PrintView;
 
@@ -26,6 +27,7 @@ public class LottoAppController {
     private LottoReport getReport(List<Lotto> purchasedLottos) {
         PrintView.askWinningNumber();
         List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
-        return new LottoReport(new Lotto(lastWinningNumbers), purchasedLottos);
+        // TODO bonusNumber 사용자에게 입력 받은 값으로 변경
+        return new LottoReport(new WinningLotto(lastWinningNumbers, 1), purchasedLottos);
     }
 }

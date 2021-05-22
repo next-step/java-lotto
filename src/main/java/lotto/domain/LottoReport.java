@@ -13,19 +13,15 @@ public class LottoReport {
     private double yield;
     private long winnings;
 
-    public LottoReport(Lotto winners, List<Lotto> lottos) {
+    public LottoReport(WinningLotto winners, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             updateMatchedNumberMetrics(winners, lotto);
         }
         updateYield(lottos.size());
     }
 
-    private void updateMatchedNumberMetrics(Lotto winners, Lotto test) {
-        int matched = test.matchCountWith(winners);
-        FIFTH.ifMatchedThan(matched, () -> threeMatched++);
-        FOURTH.ifMatchedThan(matched, () -> fourMatched++);
-        THIRD.ifMatchedThan(matched, () -> fiveMatched++);
-        FIRST.ifMatchedThan(matched, () -> sixMatched++);
+    private void updateMatchedNumberMetrics(WinningLotto winners, Lotto test) {
+        // TODO: 변경
     }
 
     private void updateYield(int lottoSize) {
