@@ -73,7 +73,7 @@ public class InputService {
 			throw new IllegalArgumentException("구입금액은 숫자만 입력가능합니다.");
 		}
 		if (Integer.parseInt(inputAmount) < LottoGame.PURCHASE_AMOUNT_PER_LOTTO) {
-			throw new IllegalArgumentException("구입금액은 최소 " + LottoGame.PURCHASE_AMOUNT_PER_LOTTO + "원 이상이어야 합니다.");
+			throw new IllegalArgumentException(String.format("구입금액은 최소 %,d원 이상이어야 합니다.", LottoGame.PURCHASE_AMOUNT_PER_LOTTO));
 		}
 		return true;
 	}

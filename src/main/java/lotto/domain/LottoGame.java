@@ -30,7 +30,7 @@ public class LottoGame {
 
 	private void validationPurchaseAmount(int purchaseAmount) {
 		if (purchaseAmount < PURCHASE_AMOUNT_PER_LOTTO) {
-			throw new IllegalArgumentException("로또를 구입하려면 최소 1000원 이상 있어야 합니다.");
+			throw new IllegalArgumentException(String.format("로또를 구입하려면 최소 %,d원 이상 있어야 합니다.", PURCHASE_AMOUNT_PER_LOTTO));
 		}
 	}
 
