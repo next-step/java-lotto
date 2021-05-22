@@ -1,6 +1,5 @@
-package io.mwkwon.lotto;
+package io.mwkwon.lotto.domain;
 
-import io.mwkwon.lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -9,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-
 
     @Test
     void 로또_넘버_정상_생성_여부_테스트() {

@@ -1,4 +1,4 @@
-package io.mwkwon.lotto;
+package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.domain.Lotto;
 import io.mwkwon.lotto.domain.LottoNumber;
