@@ -4,25 +4,18 @@ import kr.insup.lotto.config.LottoConfig;
 
 import java.util.*;
 
-public class LottoAutoGenerator implements NumberGeneratingStrategy {
+public class LottoAutoGenerator implements NumberGenerator {
 
-    private List<Integer> allNumbers() {
-        List<Integer> allNumbers = new ArrayList<>();
-        for (int i = LottoConfig.MIN_NUMBER; i < LottoConfig.MAX_NUMBER; i++) {
-            allNumbers.add(i);
-        }
-        return allNumbers;
-    }
-
-    private List<Integer> lottoAutoNumbers() {
-        Collections.shuffle(allNumbers());
-        List<Integer> lottoAutoNumbers = allNumbers().subList(0, LottoConfig.PICK_NUMBER);
+    private List<String> lottoAutoNumbers() {
+        List<String> allNumbers = NumberGenerator.allNumbers();
+        Collections.shuffle(allNumbers);
+        List<String> lottoAutoNumbers = allNumbers.subList(0, LottoConfig.PICK_NUMBER);
         Collections.sort(lottoAutoNumbers);
         return lottoAutoNumbers;
     }
 
     @Override
-    public List<Integer> generateNumber() {
+    public List<String> generateNumber() {
         return lottoAutoNumbers();
     }
 }
