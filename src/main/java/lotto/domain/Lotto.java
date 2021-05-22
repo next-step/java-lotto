@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -15,14 +14,8 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	//todo : indent 2 streams
-	public int matchesCount(Lotto lotto) {
-		int matchesCount = 0;
-		for (LottoNumber lottoNumber : lotto.numbers) {
-			if (containNumber(lottoNumber))
-				matchesCount++;
-		}
-		return matchesCount;
+	public long getMatchesCount(Lotto lotto) {
+		return lotto.numbers.stream().filter(lottoNumber -> containNumber(lottoNumber)).count();
 	}
 
 	@Override
@@ -34,8 +27,6 @@ public class Lotto {
 	public boolean equals(Object lotto) {
 		if (lotto instanceof Lotto) {
 			Lotto anotherLotto = (Lotto)lotto;
-			Collections.sort(this.numbers);
-			Collections.sort(anotherLotto.numbers);
 			return this.numbers == anotherLotto.numbers;
 		}
 		return false;
