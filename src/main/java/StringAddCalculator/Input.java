@@ -14,7 +14,7 @@ public class Input {
 	}
 
 	public String[] getStringNumbers() {
-		if (validateInput(input)) {
+		if (isEmptyOrNull(input)) {
 			String[] returnValue = {"0"};
 			return returnValue;
 		}
@@ -33,7 +33,7 @@ public class Input {
 		return delimiter.splitInput(input);
 	}
 
-	private static boolean validateInput(String input) {
+	private static boolean isEmptyOrNull(String input) {
 		if (input == null || input.isEmpty()) {
 			return true;
 		}
