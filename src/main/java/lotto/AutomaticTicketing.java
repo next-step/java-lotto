@@ -27,19 +27,15 @@ public class AutomaticTicketing {
     }
 
     public List<Ticket> newTickets(int count) {
-        verifyCount(count);
+        if (count < 1) {
+            throw new TicketsOutOfBoundsException(ErrorMessage.TICKETS_OUT_OF_BOUNDS.toString());
+        }
 
         List<Ticket> tickets = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             tickets.add(newTicket());
         }
         return tickets;
-    }
-
-    private void verifyCount(int count) {
-        if (count < 1) {
-            throw new TicketsOutOfBoundsException(ErrorMessage.TICKETS_OUT_OF_BOUNDS.toString());
-        }
     }
 
     private static List<Integer> numbers() {

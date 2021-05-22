@@ -14,7 +14,9 @@ public class Purchase {
     public Purchase(String text) {
         int cash = Converter.toInteger(text);
 
-        verifyBounds(cash);
+        if (cash < MIN_PURCHASE_PRICE || MAX_PURCHASE_PRICE < cash) {
+            throw new CashOutOfBoundsException(ErrorMessage.CASH_OUT_OF_BOUNDS.toString());
+        }
 
         this.cash = cash;
     }
@@ -25,12 +27,6 @@ public class Purchase {
 
     public int payment() {
         return ticketsAmount() * TICKET_PRICE;
-    }
-
-    private void verifyBounds(int cash) {
-        if (cash < MIN_PURCHASE_PRICE || MAX_PURCHASE_PRICE < cash) {
-            throw new CashOutOfBoundsException(ErrorMessage.CASH_OUT_OF_BOUNDS.toString());
-        }
     }
 
 }
