@@ -6,7 +6,7 @@ import wootecam.util.StringUtils;
 public class LottoNumber {
 	private static final int MAX_NUMBER = 45;
 	private static final int MIN_NUMBER = 1;
-	private int number;
+	private final int number;
 
 	public LottoNumber(String numberInput) {
 		if (!StringUtils.isNumeric(numberInput)) {
