@@ -23,7 +23,7 @@ public enum Prize {
 		return findResult;
 	}
 
-	private int count() {
+	public int count() {
 		return count;
 	}
 
