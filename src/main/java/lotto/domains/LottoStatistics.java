@@ -20,7 +20,7 @@ public class LottoStatistics {
     }
 
     public void add(int key) {
-        statisticsMap.get(key).add();
+        statisticsMap.get(key).add(key);
     }
 
     public int totalPayout() {
