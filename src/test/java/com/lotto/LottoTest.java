@@ -49,8 +49,27 @@ public class LottoTest {
         assertThat(lottoReward.reward()).isEqualTo(LottoReward.NOTHING.reward());
     }
 
+    @DisplayName("로또담청 총수익금 확인")
     @Test
     void 로또담청_총수익금_확인() {
+        Lotto lotto1 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 35)); // SIX
+        Lotto lotto2 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 34)); // FIVE
+        Lotto lotto3 = new Lotto(Arrays.asList(2, 5, 10, 23, 31, 34)); // FOUR
+        List<Lotto> lottoList = new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3));
+
+        LottoGroup lottoGroup = new LottoGroup(lottoList);
+
+        //when
+        int totalReward = lottoGroup.totalReward(new HashSet<>(Arrays.asList(2, 5, 10, 23, 32, 35)));
+
+        //then
+        assertThat(totalReward)
+                .isEqualTo(LottoReward.SIX.reward() + LottoReward.FIVE.reward() + LottoReward.FOUR.reward());
+    }
+
+    @DisplayName("로똠담청 총수익률 확인")
+    @Test
+    void 로또담청_총수익률_확인() {
         Lotto lotto1 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 35));
         Lotto lotto2 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 34));
         Lotto lotto3 = new Lotto(Arrays.asList(2, 5, 10, 23, 31, 34));
@@ -58,9 +77,10 @@ public class LottoTest {
 
         LottoGroup lottoGroup = new LottoGroup(lottoList);
 
-        int totalReward = lottoGroup.totalReward(new HashSet<>(Arrays.asList(2, 5, 10, 23, 32, 35)));
+        //when
+        double yield = lottoGroup.yield(new HashSet<>(Arrays.asList(1, 2, 5, 10, 11, 23)));
 
-        assertThat(totalReward)
-                .isEqualTo(LottoReward.SIX.reward() + LottoReward.FIVE.reward() + LottoReward.FOUR.reward());
+        //then
+        assertThat(yield).isEqualTo(50.0);
     }
 }

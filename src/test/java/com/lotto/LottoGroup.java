@@ -15,7 +15,7 @@ public class LottoGroup {
 
     public Map<LottoReward, Integer> winningLottoMap(Set<Integer> winningNumbers) {
         Map<LottoReward, Integer> winningLottoMap = new HashMap<>();
-        for(Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList) {
             LottoReward reward = lotto.reward(winningNumbers);
             winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
         }
@@ -26,10 +26,17 @@ public class LottoGroup {
     public int totalReward(Set<Integer> winningNumbers) {
         int totalReward = 0;
         Map<LottoReward, Integer> winningLottoMap = winningLottoMap(winningNumbers);
-        for(LottoReward reward : winningLottoMap.keySet()) {
+        for (LottoReward reward : winningLottoMap.keySet()) {
             totalReward += reward.totalReward(winningLottoMap.get(reward));
         }
 
         return totalReward;
+    }
+
+    public double yield(Set<Integer> winningNumbers) {
+        int investment = lottoList.size() * Lotto.UNIT_PRICE;
+        int totalReward = totalReward(winningNumbers);
+
+        return totalReward/investment;
     }
 }
