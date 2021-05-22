@@ -6,7 +6,7 @@ import java.util.List;
 public class Store {
 	public static final int LOTTO_PRICE = 1000;
 
-	public static List<Lotto> buy(int amount) {
+	public static Lottos buy(int amount) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		while (isBuyable(amount)) {
@@ -14,7 +14,7 @@ public class Store {
 			lottos.add(lotto);
 			amount -= LOTTO_PRICE;
 		}
-		return lottos;
+		return new Lottos(lottos);
 	}
 
 	private static boolean isBuyable(int amount) {

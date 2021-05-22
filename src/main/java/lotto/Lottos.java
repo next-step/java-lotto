@@ -1,33 +1,37 @@
 package lotto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-public class Statistics {
+public class Lottos {
 
-	private final List<Lotto> lottos = new ArrayList<>();
-	private final Lotto prizeLotto;
-	EnumMap<Prize, Integer> statusMap = new EnumMap<>(Prize.class);
-	public Statistics(Lotto prizeLotto) {
-		this.prizeLotto = prizeLotto;
+	private final List<Lotto> lottos;
+	private final EnumMap<Prize, Integer> statusMap;
+
+	public Lottos(List<Lotto> lottos) {
+		this.lottos = Collections.unmodifiableList(lottos);
+		this.statusMap = new EnumMap<>(Prize.class);
+		initMap();
+	}
+
+	private void initMap() {
+		statusMap.clear();
 		for (Prize prize : Prize.values()) {
 			statusMap.put(prize, 0);
 		}
 	}
 
-	public void addLotto(Lotto lotto) {
-		lottos.add(lotto);
-		Prize prize = lotto.match(prizeLotto);
-		statusMap.put(prize, statusMap.get(prize) + 1);
+	public int count() {
+		return lottos.size();
 	}
 
-	public boolean contains(Lotto lotto) {
-		return lottos.contains(lotto);
-	}
-
-	public List<Integer> prizeLottoNumbers() {
-		return  prizeLotto.numbers();
+	public void statistics(Lotto prizeLotto) {
+		initMap();
+		for (Lotto lotto : lottos) {
+			Prize prize = lotto.match(prizeLotto);
+			statusMap.put(prize, statusMap.get(prize) + 1);
+		}
 	}
 
 	public int status(Prize prize) {
