@@ -16,7 +16,15 @@ public final class Lotto {
     }
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
+        checkDuplicateLottoNumber(lottoNumbers);
         this.lottoNumbers = new HashSet<>(lottoNumbers);
+    }
+
+    private void checkDuplicateLottoNumber(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
+        if (numbers.size() < LOTTO_BOUND) {
+            throw new IllegalArgumentException("서로다른 로또번호 6개가 아닙니다.");
+        }
     }
 
     public static Lotto createAutoLotto() {
