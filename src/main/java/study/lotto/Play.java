@@ -1,7 +1,8 @@
 package study.lotto;
 
 public class Play {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IllegalAccessException {
         LottoGame lottoGame = new LottoGame();
         InputView inputView = new InputView(lottoGame);
         inputView.purchase();
@@ -9,7 +10,5 @@ public class Play {
 
         ResultView resultView = new ResultView(lottoGame);
         resultView.winningResult();
-
-
     }
 }

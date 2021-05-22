@@ -1,8 +1,6 @@
 package study.lotto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -15,13 +13,27 @@ public class InputView {
     }
 
     public void purchase() {
-        System.out.println("구입금액을 입력해주세요.");
-        Scanner scanner = new Scanner(System.in);
-        purchaseAmount = BigDecimal.valueOf(scanner.nextInt());
+        purchaseAmount = inputPurchaseAmount();
         lottoGame.purchase(purchaseAmount);
         purchaseCount = lottoGame.purchaseableLotto(purchaseAmount);
         System.out.println(purchaseCount+"개를 구매했습니다.");
         print(lottoGame.purchasedLotto());
+    }
+
+    private BigDecimal inputPurchaseAmount() {
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
+        boolean isRightPrice = false;
+        while (!isRightPrice){
+            System.out.println("구입금액을 입력해주세요.");
+            input = scanner.next();
+            isRightPrice = checkInput(input);
+        }
+        return BigDecimal.valueOf(Long.parseLong(input));
+    }
+
+    private boolean checkInput(String input) {
+        return input.chars().allMatch(Character::isDigit) && Long.parseLong(input) >= 1000;
     }
 
     private void print(PurchasedLottos purchasedLottos) {
@@ -30,15 +42,11 @@ public class InputView {
         }
     }
 
-    public void draw() {
+    public void draw() throws IllegalAccessException {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String inputWinningNumbers = scanner.nextLine();
-        inputWinningNumbers = inputWinningNumbers.replaceAll(" ","");
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (String stringNumber : inputWinningNumbers.split(",")) {
-            winningNumbers.add(Integer.parseInt(stringNumber));
-        }
-        lottoGame.draw(new WinningNumbers(winningNumbers));
+        lottoGame.draw(new WinningNumbers(inputWinningNumbers));
     }
+
 }
