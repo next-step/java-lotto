@@ -43,4 +43,25 @@ public class LottoTest {
                 new LottoNumber(4), new LottoNumber(5)
         )));
     }
+
+    @DisplayName("로또번호 갯수가 일치하는지")
+    @Test
+    void match_count(){
+        //given
+        Lotto lotto = new Lotto(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+        ));
+        Lotto toCompareLotto = new Lotto(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(7), new LottoNumber(8)
+        ));
+        int expected = 4;
+
+        //when
+        int matchCount = lotto.matchCount(toCompareLotto);
+
+        //then
+        assertThat(matchCount).isEqualTo(expected);
+    }
 }
