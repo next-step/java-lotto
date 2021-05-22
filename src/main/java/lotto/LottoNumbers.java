@@ -27,4 +27,8 @@ public class LottoNumbers {
 	private boolean isLessThan() {
 		return lottoNumbers.size() <= LOTTO_SIZE && !isComplete();
 	}
+
+	public boolean hasWinLottoNumber(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
 }

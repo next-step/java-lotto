@@ -16,10 +16,15 @@ public class AutoLottoNumberGenerator implements Generator {
 	private static final int RANDOM_RANGE_START = 0;
 	private static final int RANDOM_RANGE_END = 6;
 
-	private static final List<Integer> LOTTO_RANDOM_SET = new ArrayList<>(LOTTO_END);
+	private final List<Integer> LOTTO_RANDOM_SET;
 
 	public AutoLottoNumberGenerator() {
+		LOTTO_RANDOM_SET = new ArrayList<>(LOTTO_END);
 		init();
+	}
+
+	protected AutoLottoNumberGenerator(List<Integer> numbers) {
+		LOTTO_RANDOM_SET = numbers;
 	}
 
 	private void init() {
