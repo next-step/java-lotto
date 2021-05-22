@@ -1,6 +1,5 @@
 package study.lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ public class LottoGameTest {
         BigDecimal paymentAmount = BigDecimal.valueOf(12000);
 
         lottoGame.purchase(paymentAmount);
-        PurchasedLotto result = lottoGame.purchasedLotto();
+        PurchasedLottos result = lottoGame.purchasedLotto();
         assertThat(result.values().size()).isEqualTo(12);
     }
 
@@ -68,8 +67,8 @@ public class LottoGameTest {
         lottoPapers.add(new LottoPaper(Arrays.asList(1,2,6,34,35,42)));
         lottoPapers.add(new LottoPaper(Arrays.asList(1,2,16,34,35,42)));
 
-        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoPapers);
-        return new LottoGame(winningNumbers, purchasedLotto);
+        PurchasedLottos purchasedLottos = new PurchasedLottos(lottoPapers);
+        return new LottoGame(winningNumbers, purchasedLottos);
     }
 
 

@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PurchasedLottoTest {
+public class PurchasedLottosTest {
 
     @DisplayName("주어진 장수만큼 로또를 구매한다")
     @Test
     public void lottoPapersTest(){
-        PurchasedLotto purchasedLotto = new PurchasedLotto(3);
-        assertThat(purchasedLotto.values().size()).isEqualTo(3);
+        PurchasedLottos purchasedLottos = new PurchasedLottos(3);
+        assertThat(purchasedLottos.values().size()).isEqualTo(3);
     }
 
 }
