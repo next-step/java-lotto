@@ -37,6 +37,10 @@ public class User {
         }
     }
 
+    public void printStatement(OutputView outputView) {
+
+    }
+
     public void printLottoTickets(OutputView outputView) {
         for(LottoTicket lottoTicket: lottoTickets) {
             outputView.print(lottoTicket);

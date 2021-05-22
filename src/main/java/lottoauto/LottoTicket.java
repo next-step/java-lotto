@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
-    private int hitCount = 0;
+    private final HitCount hitCount = new HitCount();
 
     public LottoTicket() {
         this.lottoNumbers = new LottoNumbers();
@@ -14,7 +14,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int hitCount() {
+    public HitCount hitCount() {
         return hitCount;
     }
 
@@ -25,7 +25,7 @@ public class LottoTicket {
 
     public void checkWinning(List<Integer> winningNumber) {
         for(int number: winningNumber) {
-            hitCount += lottoNumbers.containNumber(number);
+            hitCount.accumulate(lottoNumbers.containNumber(number));
         }
     }
 }

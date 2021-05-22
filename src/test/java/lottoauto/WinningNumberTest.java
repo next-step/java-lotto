@@ -14,6 +14,6 @@ public class WinningNumberTest {
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)));
 
         winningNumber.checkWinning(lottoTicket);
-        assertThat(lottoTicket.hitCount()).isEqualTo(5);
+        assertThat(lottoTicket.hitCount()).isEqualTo(new HitCount(5));
     }
 }
