@@ -29,4 +29,8 @@ public final class Price {
         return price / MIN_VALUE;
     }
 
+    public int value() {
+        return price;
+    }
+
 }

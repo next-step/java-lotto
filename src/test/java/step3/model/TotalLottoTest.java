@@ -28,6 +28,17 @@ public class TotalLottoTest {
     }
 
     @Test
+    @DisplayName("로또 수익률 테스트")
+    void getBenefitTest() {
+        TotalLotto totalLotto = new TotalLotto();
+        addLotto(totalLotto, new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoNumbers victoryNumber = new LottoNumbers(
+            new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("0.35");
+    }
+
+    @Test
     @DisplayName("당첨 번호를 받아  등수별 총 수를 반환한다.")
     void winningLottoTest() {
         TotalLotto totalLotto = new TotalLotto();
