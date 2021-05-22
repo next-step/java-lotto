@@ -12,13 +12,13 @@ public class UserTest {
 
     @BeforeEach
     void setUp() {
-        user = new User(14000);
+        user = new User(new Money(14000));
     }
 
     @DisplayName("돈을 얼마를 가지는지 테스트")
     @Test
     void money() {
-        assertThat(user.amountForPurchasingLotto()).isEqualTo(14000);
+        assertThat(user.amountForPurchasingLotto()).isEqualTo(new Money(14000));
     }
 
     @DisplayName("로또티켓 구매 테스트")

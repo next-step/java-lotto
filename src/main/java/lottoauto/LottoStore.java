@@ -6,12 +6,12 @@ import java.util.List;
 public class LottoStore {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
-    public List<LottoTicket> giveLottoTickets(int money) {
-        int lottoTotalCount = money / LOTTO_TICKET_PRICE;
+    public List<LottoTicket> giveLottoTickets(Money money) {
+        int lottoCount = money.calcLottoCount(LOTTO_TICKET_PRICE);
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < lottoTotalCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket());
         }
 

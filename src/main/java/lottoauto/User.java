@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private final int amountForPurchasingLotto;
+    private final Money amountForPurchasingLotto;
 
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public User(int amountForPurchasingLotto) {
+    public User(Money amountForPurchasingLotto) {
         this.amountForPurchasingLotto = amountForPurchasingLotto;
     }
 
-    public int amountForPurchasingLotto() {
+    public Money amountForPurchasingLotto() {
         return amountForPurchasingLotto;
     }
 
