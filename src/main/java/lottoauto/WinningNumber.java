@@ -1,7 +1,6 @@
 package lottoauto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumber {
@@ -20,15 +19,7 @@ public class WinningNumber {
         }
     }
 
-    public int checkWinning(LottoTicket lottoTicket) {
-        int result = 0;
-
-        for(int number: winningNumber) {
-            if(lottoTicket.contains(number)) {
-                result++;
-            }
-        }
-
-        return result;
+    public void checkWinning(LottoTicket lottoTicket) {
+        lottoTicket.checkWinning(winningNumber);
     }
 }

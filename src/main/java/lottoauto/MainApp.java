@@ -24,5 +24,6 @@ public class MainApp {
         WinningNumber winningNumber = new WinningNumber(winningNumberStr);
 
         user.checkWinning(winningNumber);
+        user.printHitCount(outputView);
     }
 }

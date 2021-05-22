@@ -13,6 +13,7 @@ public class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6));
         LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)));
 
-        assertThat(winningNumber.checkWinning(lottoTicket)).isEqualTo(5);
+        winningNumber.checkWinning(lottoTicket);
+        assertThat(lottoTicket.hitCount()).isEqualTo(5);
     }
 }

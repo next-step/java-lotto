@@ -49,7 +49,11 @@ public class LottoNumbers {
         return arrayList.toString();
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.contains(number);
+    public int containNumber(int number) {
+        if(lottoNumbers.contains(number)) {
+            return 1;
+        }
+
+        return 0;
     }
 }

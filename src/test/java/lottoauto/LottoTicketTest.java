@@ -1,13 +1,8 @@
 package lottoauto;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Arrays;
 
 public class LottoTicketTest {
 
@@ -15,8 +10,10 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        lottoTicket = new LottoTicket();
+        lottoTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
+
+
 
 
 }

@@ -30,6 +30,13 @@ public class User {
         }
     }
 
+    public void printHitCount(OutputView outputView) {
+        for(LottoTicket lottoTicket: lottoTickets) {
+            outputView.print(lottoTicket.hitCount());
+            outputView.print("\n");
+        }
+    }
+
     public void printLottoTickets(OutputView outputView) {
         for(LottoTicket lottoTicket: lottoTickets) {
             outputView.print(lottoTicket);
