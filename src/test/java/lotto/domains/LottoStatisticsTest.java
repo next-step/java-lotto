@@ -14,9 +14,9 @@ public class LottoStatisticsTest {
     @Test
     void add_테스트() {
         LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.add(1);
-        lottoStatistics.add(1);
-        assertThat(lottoStatistics.count(1)).isEqualTo(2);
+        lottoStatistics.add(3);
+        lottoStatistics.add(3);
+        assertThat(lottoStatistics.count(3)).isEqualTo(2);
         assertThat(lottoStatistics.totalPayout()).isEqualTo(10000);
     }
 }
