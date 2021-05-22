@@ -9,7 +9,7 @@ public interface Number extends Comparable<Number> {
 
     int number();
 
-    default void isValid(int number) {
+    default void verifyNumbers(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new InvalidLottoNumber(String.format("%s %d", MessageContainer.INVALID_LOTTO_NUMBER, number));
         }

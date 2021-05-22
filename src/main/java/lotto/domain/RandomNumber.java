@@ -21,7 +21,7 @@ public class RandomNumber implements Number {
     }
 
     private RandomNumber(final int number) {
-        isValid(number);
+        verifyNumbers(number);
         this.number = number;
     }
 

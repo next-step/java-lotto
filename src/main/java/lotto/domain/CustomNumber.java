@@ -6,7 +6,7 @@ public class CustomNumber implements Number{
     private final int number;
 
     public CustomNumber(int number) {
-        isValid(number);
+        verifyNumbers(number);
         this.number = number;
     }
 
