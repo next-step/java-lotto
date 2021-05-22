@@ -26,7 +26,7 @@ public class WinningNumbers {
 
     private void checkNumberCount(int[] input) throws IllegalArgumentException {
         if (input.length > NUMBER_COUNT) {
-            throw new IllegalArgumentException("test");
+            throw new IllegalArgumentException();
         }
     }
 

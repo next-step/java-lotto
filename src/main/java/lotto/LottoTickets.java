@@ -7,6 +7,7 @@ public class LottoTickets {
 
     public static final String ERROR_AMOUNT_CANNOT_BE_DIVIDED = "로또 가격으로 정확히 나누어떨어지는 금액을 입력해주세요.";
     public static final String ERROR_AMOUNT_OUT_OF_RANGE = "1천원 이상, 10만원 이하의 금액을 입력해주세요.";
+    public static final String TOTAL_COUNT_FORMAT = "%d개를 구매했습니다.%n";
 
     public static final int PRICE_PER_TICKET = 1000;
     public static final int MINIMUM_PURCHASE_AMOUNT = 1000;
@@ -60,6 +61,7 @@ public class LottoTickets {
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format(TOTAL_COUNT_FORMAT, lottoTickets.size()));
         for (LottoTicket ticket : lottoTickets) {
             stringBuilder.append(ticket.toString());
             stringBuilder.append(System.lineSeparator());
