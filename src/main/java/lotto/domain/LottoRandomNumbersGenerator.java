@@ -10,7 +10,7 @@ public class LottoRandomNumbersGenerator implements RandomNumbersGenerator {
 
 	public LottoRandomNumbersGenerator() {
 		this.numbers = new ArrayList<>();
-		for (int number = MIN; number <= MAX; number++) {
+		for (int number = LottoNumber.MIN; number <= LottoNumber.MAX; number++) {
 			numbers.add(number);
 		}
 	}
