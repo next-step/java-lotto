@@ -6,7 +6,6 @@ import static lotto.domain.LottoGameOptions.*;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
-    private LottoResult result;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -33,4 +32,7 @@ public class Lotto {
         return lottoNumbers.get(index);
     }
 
+    public List<Integer> numbers() {
+        return lottoNumbers.lottoNumbers();
+    }
 }

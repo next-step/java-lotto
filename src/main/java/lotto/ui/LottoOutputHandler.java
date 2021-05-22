@@ -20,10 +20,11 @@ public class LottoOutputHandler {
 
     public void printWinnerStatistics(LottoResultPack resultPack) {
         System.out.println("\n당첨 통계\n--------");
-        System.out.println("3개 일치 (" + LottoResult.MATCH_3.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_3) + "개");
-        System.out.println("4개 일치 (" + LottoResult.MATCH_4.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_4) + "개");
-        System.out.println("5개 일치 (" + LottoResult.MATCH_5.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_5) + "개");
-        System.out.println("6개 일치 (" + LottoResult.MATCH_6.profit() + "원)- " + resultPack.countOf(LottoResult.MATCH_6) + "개");
+        System.out.println("3개 일치 (" + LottoRank.FIFTH.profit() + "원)- " + resultPack.countOf(LottoRank.FIFTH) + "개");
+        System.out.println("4개 일치 (" + LottoRank.FOURTH.profit() + "원)- " + resultPack.countOf(LottoRank.FOURTH) + "개");
+        System.out.println("5개 일치 (" + LottoRank.THIRD.profit() + "원)- " + resultPack.countOf(LottoRank.THIRD) + "개");
+        System.out.println("5개 일치, 보너스볼 일치(" + LottoRank.SECOND.profit() + "원)- " + resultPack.countOf(LottoRank.SECOND) + "개");
+        System.out.println("6개 일치 (" + LottoRank.FIRST.profit() + "원)- " + resultPack.countOf(LottoRank.FIRST) + "개");
     }
 
     public void printProfitRatio(double calculateProfitRatio) {

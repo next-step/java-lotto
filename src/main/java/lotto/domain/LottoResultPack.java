@@ -1,14 +1,12 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-import static lotto.domain.LottoGameOptions.MAP_LOTTO_RESULT;
+import static lotto.domain.LottoRank.MAP_LOTTO_RANK;
 
 public class LottoResultPack {
-    private Map<LottoResult, Integer> lottoResultPack;
+    private Map<LottoRank, Integer> lottoResultPack;
 
     public LottoResultPack() {
         lottoResultPack = new HashMap<>();
@@ -17,18 +15,16 @@ public class LottoResultPack {
     }
 
     private void initEachResultCount() {
-        Set<Integer> set = MAP_LOTTO_RESULT.keySet();
-        Iterator<Integer> it = set.iterator();
-        while (it.hasNext()) {
-            lottoResultPack.put(MAP_LOTTO_RESULT.get(it.next()), 0);
+        for (LottoRank result : MAP_LOTTO_RANK.values()) {
+            lottoResultPack.put(result, 0);
         }
     }
 
-    public void put(LottoResult matchResult) {
+    public void put(LottoRank matchResult) {
         lottoResultPack.merge(matchResult, 1, Integer::sum);
     }
 
-    public int countOf(LottoResult lottoResult) {
+    public int countOf(LottoRank lottoResult) {
         return lottoResultPack.get(lottoResult);
     }
 
@@ -39,10 +35,7 @@ public class LottoResultPack {
     private int sumOfProfit() {
         int sum = 0;
 
-        Set<Integer> set = MAP_LOTTO_RESULT.keySet();
-        Iterator<Integer> it = set.iterator();
-        while (it.hasNext()) {
-            LottoResult result = MAP_LOTTO_RESULT.get(it.next());
+        for (LottoRank result : MAP_LOTTO_RANK.values()) {
             sum += result.profit() * lottoResultPack.get(result);
         }
 
