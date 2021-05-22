@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class LottoRanks {
+public class LottoRanks implements Iterable<LottoRank> {
 
     private final List<LottoRank> lottoRanks;
 
@@ -26,5 +27,10 @@ public class LottoRanks {
         return (int) lottoRanks.stream()
                 .filter(lottoRank -> lottoRank == rank)
                 .count();
+    }
+
+    @Override
+    public Iterator<LottoRank> iterator() {
+        return lottoRanks.iterator();
     }
 }
