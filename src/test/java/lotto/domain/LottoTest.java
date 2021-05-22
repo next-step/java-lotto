@@ -55,7 +55,7 @@ class LottoTest {
     void lottoAscendingOrder() {
         Lotto actual = new Lotto(unOrderedNumber);
 
-        assertThat(actual).hasToString(actual.toString());
+        assertThat(actual).hasToString(lottoNumbers1.toString());
     }
 
     @Nested
