@@ -5,9 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class LottoScoreMap {
 
+	public static final int LOTTO_AMOUNT = 1_000;
 	private final Map<LottoResult, Integer> lottoScores;
-
-	private double earningRate;
 
 	public LottoScoreMap() {
 		this.lottoScores = new ConcurrentHashMap<>();
@@ -27,4 +26,17 @@ public class LottoScoreMap {
 	public Map<LottoResult, Integer> getLottoScores() {
 		return this.lottoScores;
 	}
+
+	public double getEarningRate() {
+		int totalCount = 0;
+		int winningPrizeMoney = 0;
+		for (LottoResult lottoResult : this.lottoScores.keySet()) {
+			int resultCount = this.lottoScores.get(lottoResult);
+			int resultPrizeMoney = lottoResult.getWinningMoney() * resultCount;
+			totalCount += resultCount;
+			winningPrizeMoney += resultPrizeMoney;
+		}
+		return (double)winningPrizeMoney / (totalCount * LOTTO_AMOUNT);
+	}
+
 }

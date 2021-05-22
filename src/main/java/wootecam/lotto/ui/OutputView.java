@@ -35,4 +35,8 @@ public class OutputView extends View {
 					lottoScoreMap.getLottoScores().get(lottoResult));
 			});
 	}
+
+	public void printEarningRate(LottoScoreMap lottoScoreMap) {
+		out.printf("총 수익률은 %.2f입니다.(기준이 1이기때문에 결과적으로 손해라는 의미임)", lottoScoreMap.getEarningRate());
+	}
 }

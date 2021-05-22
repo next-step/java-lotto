@@ -33,5 +33,6 @@ public class LottoExecutor {
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
 		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
 		this.outputView.printLottoScoreMap(lottoScoreMap);
+		this.outputView.printEarningRate(lottoScoreMap);
 	}
 }

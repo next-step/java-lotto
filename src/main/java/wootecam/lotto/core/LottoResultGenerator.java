@@ -7,6 +7,7 @@ import wootecam.lotto.model.LottoResult;
 import wootecam.lotto.model.LottoScoreMap;
 
 public class LottoResultGenerator {
+
 	public LottoResult getLottoResult(Lotto targetLotto, Lotto winningLotto) {
 		int matchCount = this.getMatchCount(targetLotto, winningLotto);
 		return LottoResult.findByMatchedCount(matchCount);
