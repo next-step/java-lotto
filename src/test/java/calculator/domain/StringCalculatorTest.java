@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static calculator.utils.UtilsString.isNullOrEmpty;
+import static calculator.utils.StringUtils.isNullOrEmpty;
 
 import static org.assertj.core.api.Assertions.*;
 

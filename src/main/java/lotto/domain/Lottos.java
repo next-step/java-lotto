@@ -70,4 +70,8 @@ public class Lottos implements Iterable<Lotto> {
             }
         };
     }
+
+    public List<Lotto> values() {
+        return this.lottos;
+    }
 }

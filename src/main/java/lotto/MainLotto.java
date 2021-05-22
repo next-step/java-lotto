@@ -16,7 +16,10 @@ public class MainLotto {
         Lottos lottos = game.buyLottos(purchaseBudget.countOfAvailableLotto());
         output.printBought(lottos);
 
-        LottoWinNumbers winNumbers = input.scanLottoWinNumbers();
+        String normalNumbers  = input.scanLottoWinNumbersString();
+        int bonusNumber = input.scanLottoBonusNumber();
+        LottoWinNumbers winNumbers = new LottoWinNumbers(normalNumbers, bonusNumber);
+
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
         output.printWinnerStatistics(resultPack);
