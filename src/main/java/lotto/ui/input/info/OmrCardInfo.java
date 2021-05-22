@@ -17,10 +17,10 @@ public class OmrCardInfo implements Info<OmrCard> {
     public OmrCard get() {
         try {
             int money = money();
-            int size = size(money);
+            int count = count(money);
 
             OmrCard omrCard = new OmrCard();
-            markings(size, omrCard);
+            markings(count, omrCard);
 
             return omrCard;
         } catch (Exception e) {
@@ -29,8 +29,8 @@ public class OmrCardInfo implements Info<OmrCard> {
         }
     }
 
-    private void markings(int size, OmrCard omrCard) {
-        for (int i = 0; i < size; i++) {
+    private void markings(int count, OmrCard omrCard) {
+        for (int i = 0; i < count; i++) {
             SixBall sixBall = SixBall.get();
             omrCard.marking(sixBall);
 
@@ -63,16 +63,16 @@ public class OmrCardInfo implements Info<OmrCard> {
         return money < OmrCard.PRICE;
     }
 
-    private int size(int money) {
-        int size = money / OmrCard.PRICE;
+    private int count(int money) {
+        int count = money / OmrCard.PRICE;
         int change = money % OmrCard.PRICE;
 
         if (change > 0) {
             input.response((String.format("거스름돈 %d원을 돌려드립니다.", change)));
         }
 
-        input.response((String.format("%d개를 구매했습니다.", size)));
+        input.response((String.format("%d개를 구매했습니다.", count)));
 
-        return size;
+        return count;
     }
 }
