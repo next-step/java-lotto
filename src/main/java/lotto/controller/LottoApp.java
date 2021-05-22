@@ -1,7 +1,8 @@
 package lotto.controller;
 
+import static lotto.model.LottoNumbersGenerator.*;
+
 import lotto.model.LottoNumbers;
-import lotto.model.LottoNumbersGenerator;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
@@ -13,13 +14,10 @@ import lotto.view.dro.LottoResultDto;
 public class LottoApp {
 	private final LottoAppOutput lottoAppOutput;
 	private final LottoAppInput lottoAppInput;
-	private final LottoNumbersGenerator lottoNumbersGenerator;
 
-	public LottoApp(LottoAppOutput lottoAppOutput, LottoAppInput lottoAppInput,
-		LottoNumbersGenerator lottoNumbersGenerator) {
+	public LottoApp(LottoAppOutput lottoAppOutput, LottoAppInput lottoAppInput) {
 		this.lottoAppOutput = lottoAppOutput;
 		this.lottoAppInput = lottoAppInput;
-		this.lottoNumbersGenerator = lottoNumbersGenerator;
 	}
 
 	public void run() {
@@ -36,7 +34,7 @@ public class LottoApp {
 
 	private LottoTicket inputLottoTicket(int lottoNumbersCount) {
 		lottoAppOutput.printBoughtLottoNumbersCountView(lottoNumbersCount);
-		LottoTicket lottoTicket = new LottoTicket(lottoNumbersGenerator.generateRandomly(lottoNumbersCount));
+		LottoTicket lottoTicket = new LottoTicket(generateRandomly(lottoNumbersCount));
 		lottoAppOutput.printLottoTicket(lottoTicket);
 		return lottoTicket;
 	}

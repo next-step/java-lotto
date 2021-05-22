@@ -8,30 +8,27 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbersGenerator {
+public final class LottoNumbersGenerator {
 	private static final int FROM_ZERO = 0;
-	private static final int ONE_FOR_EXCLUSIVE = 1;
+	private static final Random random = new Random();
 
-	private final Random random;
-
-	public LottoNumbersGenerator(Random random) {
-		this.random = random;
+	private LottoNumbersGenerator() {
 	}
 
-	public List<LottoNumbers> generateRandomly(int count) {
+	public static List<LottoNumbers> generateRandomly(int count) {
 		return IntStream.range(FROM_ZERO, count)
 			.mapToObj((i) -> new LottoNumbers(generateRandomNumbers()))
 			.collect(Collectors.toList());
 	}
 
-	private List<Integer> generateRandomNumbers() {
+	private static List<Integer> generateRandomNumbers() {
 		List<Integer> candidateNumbers = generateLottoCandidateNumbers();
 		Collections.shuffle(candidateNumbers, random);
 		return candidateNumbers.subList(FROM_ZERO, LottoNumbers.LENGTH);
 	}
 
-	private List<Integer> generateLottoCandidateNumbers() {
-		return IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + ONE_FOR_EXCLUSIVE)
+	private static List<Integer> generateLottoCandidateNumbers() {
+		return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
 			.boxed()
 			.collect(toList());
 	}
