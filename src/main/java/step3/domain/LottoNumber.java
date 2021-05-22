@@ -2,9 +2,9 @@ package step3.domain;
 
 import step3.common.ErrorCode;
 
-public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -12,5 +12,10 @@ public class LottoNumber {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE.getErrorMessage());
         }
         this.lottoNumber = lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }
