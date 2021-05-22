@@ -17,9 +17,14 @@ public class LottoTest {
 	@ValueSource(strings = {"1,2,3,4,5,6"})
 	void test_지난주당첨번호테스트생성테스트(String input) {
 		List<Integer> inputList = getNumberList(input);
-
 		Lotto lotto = new Lotto(inputList);
-		assertThat(lotto.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+
+		assertThat(lotto.contains(1)).isTrue();
+		assertThat(lotto.contains(2)).isTrue();
+		assertThat(lotto.contains(3)).isTrue();
+		assertThat(lotto.contains(4)).isTrue();
+		assertThat(lotto.contains(5)).isTrue();
+		assertThat(lotto.contains(6)).isTrue();
 	}
 
 	@ParameterizedTest

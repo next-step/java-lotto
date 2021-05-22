@@ -9,17 +9,8 @@ import wootecam.lotto.model.LottoScoreMap;
 public class LottoResultGenerator {
 
 	private LottoResult getLottoResult(Lotto targetLotto, Lotto winningLotto) {
-		int matchCount = this.getMatchCount(targetLotto, winningLotto);
+		int matchCount = targetLotto.getNumberMatchCount(winningLotto);
 		return LottoResult.findByMatchedCount(matchCount);
-	}
-
-	private int getMatchCount(Lotto targetLotto, Lotto winningLotto) {
-		List<Integer> lottoNumbers = targetLotto.getLottoNumbers();
-		List<Integer> winningNumbers = winningLotto.getLottoNumbers();
-
-		return (int)lottoNumbers.stream()
-			.filter(winningNumbers::contains)
-			.count();
 	}
 
 	public LottoScoreMap getLottoResults(List<Lotto> lottos, Lotto winningLotto) {

@@ -35,4 +35,14 @@ public class Lotto {
 			.map(Object::toString)
 			.collect(Collectors.joining(","));
 	}
+
+	public int getNumberMatchCount(Lotto winningLotto) {
+		return (int)this.lottoNumbers.stream()
+			.filter(winningLotto::contains)
+			.count();
+	}
+
+	public boolean contains(int number) {
+		return this.lottoNumbers.contains(number);
+	}
 }
