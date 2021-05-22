@@ -18,7 +18,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input, delimiter);
 
         //when
-        int sum = calculator.sum();
+        int sum = calculator.sumOperands();
 
         //then
         assertThat(sum).isEqualTo(expectedAnswer);
@@ -32,7 +32,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input, ",");
 
         //when
-        int sum = calculator.sum();
+        int sum = calculator.sumOperands();
 
         //then
         assertThat(sum).isEqualTo(15);

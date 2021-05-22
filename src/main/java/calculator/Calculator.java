@@ -5,33 +5,27 @@ import java.util.List;
 
 public class Calculator {
 
-    private final List<Integer> values;
+    private final Operands operands;
 
     public Calculator(String input, String delimiter) {
-        this.values = makeOperandsByInput(input, delimiter);
+        this.operands = makeOperandsByInput(input, delimiter);
     }
 
-    private List<Integer> makeOperandsByInput(String input, String delimiter) {
+    public int sumOperands() {
+        return operands.sum();
+    }
+
+    private Operands makeOperandsByInput(String input, String delimiter) {
         List<Integer> values = new ArrayList<>();
 
         for (String value : splitOperandsByDelimiter(input, delimiter)) {
             values.add(Integer.parseInt(value));
         }
 
-        return values;
+        return new Operands(values);
     }
 
     private String[] splitOperandsByDelimiter(String input, String delimiter) {
         return input.split(delimiter);
-    }
-
-    public int sum() {
-        int sum = 0;
-
-        for (int value : values) {
-            sum += value;
-        }
-
-        return sum;
     }
 }
