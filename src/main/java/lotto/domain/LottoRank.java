@@ -11,7 +11,7 @@ public enum LottoRank {
     FIFTH(3, 5_000);
 
     private final int matchCount;
-    private final int winAmount;
+    private final long winAmount;
 
     LottoRank(int matchCount, int winAmount) {
         this.matchCount = matchCount;
@@ -22,7 +22,7 @@ public enum LottoRank {
         return matchCount;
     }
 
-    public int winAmount() {
+    public long winAmount() {
         return winAmount;
     }
 
