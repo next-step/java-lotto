@@ -14,10 +14,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-
     public int matchCountWith(Lotto other) {
         Set<Integer> union = new HashSet<>(numbers);
         union.addAll(other.numbers);
         return LOTTO_SIZE * 2 - union.size();
+    }
+
+    public boolean matchBonus(int bonusBall) {
+        return numbers.contains(bonusBall);
     }
 }

@@ -26,20 +26,46 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다")
-    void 로또는_입력받은_로또와_일치하는_번호의_수를_알려준다(Lotto lotto, int expected) {
+    @MethodSource("provider_로또는_당첨번호와_일치하는_번호의_수를_알려준다")
+    void 로또는_당첨번호와_일치하는_번호의_수를_알려준다(Lotto lotto, int expected) {
         assertThat(lotto.matchCountWith(우승번호)).isEqualTo(expected);
     }
 
-    static Stream<Arguments> provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다() {
+    static Stream<Arguments> provider_로또는_당첨번호와_일치하는_번호의_수를_알려준다() {
         return Stream.of(
                 Arguments.of(번호_6개_일치, 6),
                 Arguments.of(번호_5개_일치, 5),
+                Arguments.of(번호_5개_일치_보너스번호_일치, 5),
                 Arguments.of(번호_4개_일치, 4),
                 Arguments.of(번호_3개_일치, 3),
                 Arguments.of(번호_2개_일치, 2),
                 Arguments.of(번호_1개_일치, 1),
                 Arguments.of(번호_0개_일치, 0)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provider_로또는_보너스번호와_일치하는지_여부를_알려준다")
+    void 로또는_보너스번호와_일치하는지_여부를_알려준다(Lotto lotto, boolean expected) {
+        assertThat(lotto.matchBonus(우승번호.bonusNumber)).isEqualTo(expected);
+
+    }
+
+    static Stream<Arguments> provider_로또는_보너스번호와_일치하는지_여부를_알려준다() {
+        return Stream.of(
+                Arguments.of(번호_6개_일치, false),
+                Arguments.of(번호_5개_일치, false),
+                Arguments.of(번호_5개_일치_보너스번호_일치, true),
+                Arguments.of(번호_4개_일치, false),
+                Arguments.of(번호_4개_일치_보너스번호_일치, true),
+                Arguments.of(번호_3개_일치, false),
+                Arguments.of(번호_3개_일치_보너스번호_일치, true),
+                Arguments.of(번호_2개_일치, false),
+                Arguments.of(번호_2개_일치_보너스번호_일치, true),
+                Arguments.of(번호_1개_일치, false),
+                Arguments.of(번호_1개_일치_보너스번호_일치, true),
+                Arguments.of(번호_0개_일치, false),
+                Arguments.of(번호_0개_일치_보너스번호_일치, true)
         );
     }
 }
