@@ -6,9 +6,9 @@ public class LottoWinNumbers {
     private LottoWinNormalNumbers normalNumbers;
     private LottoWinBonusNumber bonusNumber;
 
-    public LottoWinNumbers(String numbers) {
-        normalNumbers = new LottoWinNormalNumbers(numbers);
-        bonusNumber = new LottoWinBonusNumber(0);
+    public LottoWinNumbers(String normalNumbers, int bonusNumber) {
+        this.normalNumbers = new LottoWinNormalNumbers(normalNumbers);
+        this.bonusNumber = new LottoWinBonusNumber(bonusNumber);
     }
 
     public LottoResultPack checkAllOf(Lottos lottos) {
@@ -35,7 +35,4 @@ public class LottoWinNumbers {
         return LottoRank.valueOf(matchCount, matchBonus);
     }
 
-    public void addBonusNumber(int bonusNumber) {
-        this.bonusNumber = new LottoWinBonusNumber(bonusNumber);
-    }
 }

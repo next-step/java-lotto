@@ -11,8 +11,7 @@ public class LottoTest {
 
     @Test
     void 로또_기존결과에_보너스번호_Test() {
-        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
-        winNumbers.addBonusNumber(7);
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
 
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1,2,3,4,5,7)),          // 1개 - 5개 + 보너스 맞춤, 2등, 30,000,000
@@ -21,12 +20,14 @@ public class LottoTest {
 
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
+        assertThat(resultPack.countOf(LottoRank.FIRST)).isEqualTo(1);
         assertThat(resultPack.countOf(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoRank.MISS)).isEqualTo(1);
     }
 
     @Test
     void 로또결과들의_총수익률_Test() {
-        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1,4,5,6,17,38)),        // 1개 - 4개 맞춤, 3등, 50000
                 new Lotto(Arrays.asList(1,2,3,4,5,6)),          // 1개 - 6개 맞춤, 1등, 2,000,000,000
@@ -40,9 +41,9 @@ public class LottoTest {
 
     @Test
     void 당첨번호와_로또들_비교_결과_Test() {
-        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
         Lottos lottos = new Lottos(Arrays.asList(
-                                        new Lotto(Arrays.asList(1,4,5,6,17,38)),        // 4개 3등
+                                        new Lotto(Arrays.asList(1,4,5,6,17,38)),        // 4개 4등
                                         new Lotto(Arrays.asList(1,2,3,4,5,6)),          // 6개 1등
                                         new Lotto(Arrays.asList(41,34,25,16,7,8))));    // 0개 -등
 
@@ -51,18 +52,18 @@ public class LottoTest {
         assertThat(resultPack.countOf(LottoRank.MISS)).isEqualTo(1);
         assertThat(resultPack.countOf(LottoRank.FIFTH)).isEqualTo(0);
         assertThat(resultPack.countOf(LottoRank.FOURTH)).isEqualTo(1);
-        // 보너스 포함된 2등은 없음.
         assertThat(resultPack.countOf(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoRank.SECOND)).isEqualTo(0);
         assertThat(resultPack.countOf(LottoRank.FIRST)).isEqualTo(1);
     }
 
     @Test
     void 로또와_당첨번호_비교_Test() {
-        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6", 7);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(6);
 
-        winNumbers = new LottoWinNumbers("1, 21, 13, 4, 5, 6");
+        winNumbers = new LottoWinNumbers("1, 21, 13, 4, 5, 6", 7);
         lotto = new Lotto(Arrays.asList(1, 2, 13, 4, 3, 5));
         assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(4);
     }
@@ -80,15 +81,15 @@ public class LottoTest {
 
     @Test
     void 입력된_유효하지않은_당첨번호_Test() {
-        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5, b"))
+        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5, b", 7))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5"))
+        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5", 7))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5, 6, 7"))
+        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, 4, 5, 6, 7", 7))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 59, 4, 5, 5"))
+        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 59, 4, 5, 5", 7))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, -1, 5, 6"))
+        assertThatThrownBy(() -> new LottoWinNumbers("1, 2, 3, -1, 5, 6", 7))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

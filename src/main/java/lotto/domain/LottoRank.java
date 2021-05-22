@@ -31,7 +31,10 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
-        return MAP_LOTTO_RANK.get(matchCount + Boolean.hashCode(matchBonus));
+        if (matchCount == 5) {
+            return MAP_LOTTO_RANK.get(matchCount + Boolean.hashCode(matchBonus));
+        }
+        return MAP_LOTTO_RANK.get(matchCount + Boolean.hashCode(false));
     }
 
     public static final Map<Integer, LottoRank> MAP_LOTTO_RANK;
