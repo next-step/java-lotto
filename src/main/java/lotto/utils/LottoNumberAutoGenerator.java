@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.utils.LottoOptions.*;
+
 public final class LottoNumberAutoGenerator {
-    private static final List<LottoNumber> NUMBER_BOX = new ArrayList<>(LottoOptions.MAX_NUMBER);
+    private static final List<LottoNumber> NUMBER_BOX = new ArrayList<>(MAX_NUMBER);
 
     static {
-        for (int i = LottoOptions.MIN_NUMBER; i < LottoOptions.MAX_NUMBER; i++) {
+        for (int i = MIN_NUMBER; i < MAX_NUMBER; i++) {
             NUMBER_BOX.add(new LottoNumber(i));
         }
     }
@@ -20,6 +22,6 @@ public final class LottoNumberAutoGenerator {
 
     public static List<LottoNumber> drawLots() {
         Collections.shuffle(NUMBER_BOX);
-        return NUMBER_BOX.subList(0, LottoOptions.LOTTO_SIZE);
+        return NUMBER_BOX.subList(0, LOTTO_SIZE);
     }
 }

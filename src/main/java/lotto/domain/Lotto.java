@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import lotto.utils.LottoNumberAutoGenerator;
-import lotto.utils.LottoOptions;
 
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import static lotto.utils.LottoOptions.LOTTO_SIZE;
 
 public final class Lotto {
     public static final String LOTTO_NUMBER_SIZE_MESSAGE = "로또 번호는 중복되지 않은 숫자로 최소 6개를 가지고 있어야 합니다.";
@@ -17,15 +18,15 @@ public final class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
-        checkDistinct();
+        validateLottoNumbers();
     }
 
     public Lotto(Lotto lotto) {
         this.lottoNumbers = lotto.lottoNumbers;
     }
 
-    private void checkDistinct() {
-        if (lottoNumbers.size() < LottoOptions.LOTTO_SIZE) {
+    private void validateLottoNumbers() {
+        if (lottoNumbers.size() < LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_MESSAGE);
         }
     }

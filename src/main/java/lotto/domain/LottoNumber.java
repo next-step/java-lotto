@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import lotto.utils.LottoOptions;
-
 import java.util.Objects;
+
+import static lotto.utils.LottoOptions.MAX_NUMBER;
+import static lotto.utils.LottoOptions.MIN_NUMBER;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
     public static final String LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE = "로또번호는 1-45 사이의 숫자만 가능합니다.";
@@ -14,8 +15,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumber(int number) {
-        if (number < LottoOptions.MIN_NUMBER ||
-                number > LottoOptions.MAX_NUMBER) {
+        if (number < MIN_NUMBER ||
+                number > MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE);
         }
     }
