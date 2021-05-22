@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
+import wootecam.lotto.model.LottoNumber;
 
 public class LottoGameGenerator {
 
@@ -28,7 +29,8 @@ public class LottoGameGenerator {
 
 	public Lotto getWinningLotto(String winningLottoInput) {
 		List<Integer> winningLottoList = Arrays.stream(winningLottoInput.split(","))
-			.map(Integer::parseInt)
+			.map(s -> new LottoNumber(s).getNumber())
+			.distinct()
 			.collect(Collectors.toList());
 		return new Lotto(winningLottoList);
 	}
