@@ -9,7 +9,7 @@ public class InputUI {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static String inputWinnigNumbers() {
+    public static String inputWinningNumbers() {
         return scanner.nextLine();
     }
 }
