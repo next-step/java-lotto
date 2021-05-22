@@ -13,7 +13,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
 
         if (this.lottoNumbers.sizeIsNotSameWith(LOTTO_NUMBER_COUNT)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또를 구성하는 로또 번호들의 개수가 적합하지 않습니다.");
         }
     }
 
@@ -21,17 +21,9 @@ public class Lotto {
         this(new LottoNumbers(numbers));
     }
 
-    public String lottoNumberString() {
-        return lottoNumbers.formattedString();
-    }
-
     @Override
     public String toString() {
         return lottoNumbers.toString();
-    }
-
-    public int numbers(int index) {
-        return lottoNumbers.get(index);
     }
 
     public List<LottoNumber> numbers() {

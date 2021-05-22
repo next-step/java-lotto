@@ -7,7 +7,7 @@ public class LottoPurchaseBudget {
 
     public LottoPurchaseBudget(int money) {
         if (money < LOTTO_PRICE || money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 구매금액 입력은 1000원 이상의 1000단위 금액만 가능합니다.");
         }
         purchaseBudget = money;
     }

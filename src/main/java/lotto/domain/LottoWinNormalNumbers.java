@@ -18,7 +18,7 @@ public class LottoWinNormalNumbers {
 
     private void initWinNumbers(String[] winNums) {
         if (invalid(winNums)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 당첨 일반번호의 개수로 유효하지 않습니다.");
         }
 
         for (String winNum : winNums) {
