@@ -6,7 +6,7 @@ public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public Lottos(List<Lotto> lottoList) {
+    public Lottos(final List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
@@ -23,7 +23,7 @@ public class Lottos {
     public LottoStatistics getStatistics(LottoNumbers winningLottoNumbers) {
         LottoStatistics lottoStatistics = new LottoStatistics();
         for (Lotto lotto : lottoList) {
-            lottoStatistics.add(lotto.checkNumber(winningLottoNumbers));
+            lottoStatistics.add(lotto.matchingNumberCount(winningLottoNumbers));
         }
         return lottoStatistics;
     }
