@@ -19,7 +19,6 @@ public class LottoNumbers {
 			return;
 		}
 		lottoNumbers.add(lottoNumber);
-		Collections.shuffle(lottoNumbers);
 	}
 
 	public boolean isComplete() {
