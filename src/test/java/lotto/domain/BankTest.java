@@ -29,7 +29,7 @@ public class BankTest {
 
         //when
         Bank bank = new Bank(answerLotto);
-        LottoResult result = bank.lottoResult(toCompareLotto);
+        LottoResult result = bank.matchLotto(toCompareLotto);
 
         //then
         assertThat(result.getMatchCount()).isEqualTo(expectedMatchCount);
@@ -49,7 +49,7 @@ public class BankTest {
 
         //when
         Bank bank = new Bank(answerLotto);
-        LottoResult result = bank.lottoResult(toCompareLotto);
+        LottoResult result = bank.matchLotto(toCompareLotto);
 
         //then
         assertThat(result.getMatchCount()).isEqualTo(expectedMatchCount);
@@ -70,7 +70,7 @@ public class BankTest {
 
         //when
         Bank bank = new Bank(answerLotto);
-        LottoResult result = bank.lottoResult(toCompareLotto);
+        LottoResult result = bank.matchLotto(toCompareLotto);
 
         //then
         assertThat(result.getMatchCount()).isEqualTo(expectedMatchCount);
@@ -91,7 +91,7 @@ public class BankTest {
 
         //when
         Bank bank = new Bank(answerLotto);
-        LottoResult result = bank.lottoResult(toCompareLotto);
+        LottoResult result = bank.matchLotto(toCompareLotto);
 
         //then
         assertThat(result.getMatchCount()).isEqualTo(expectedMatchCount);
@@ -112,7 +112,7 @@ public class BankTest {
 
         //when
         Bank bank = new Bank(answerLotto);
-        LottoResult result = bank.lottoResult(toCompareLotto);
+        LottoResult result = bank.matchLotto(toCompareLotto);
 
         //then
         assertThat(result.getMatchCount()).isEqualTo(expectedMatchCount);

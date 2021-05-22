@@ -7,7 +7,7 @@ public final class Bank {
         this.answerLotto = answerLotto;
     }
 
-    public LottoResult lottoResult(Lotto unidentifiedLotto) {
+    public LottoResult matchLotto(Lotto unidentifiedLotto) {
         return LottoResult.findByMatchCount(answerLotto.matchCount(unidentifiedLotto));
     }
 }
