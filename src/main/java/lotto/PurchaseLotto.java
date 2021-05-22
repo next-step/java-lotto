@@ -1,20 +1,29 @@
 package lotto;
-
-import com.sun.org.apache.regexp.internal.RE;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class PurchaseLotto {
     private static final int LOTTO_PRICE = 1000;
-    //private int purchasedLottoCount;
     private LottoNumber lottoNumber;
     private LottoNumberList lottoNumberList;
     private LastWonLottoNumber lastWonLottoNumber;
     private ResultAll resultAll;
+    private InputView inputView;
+    private ResultView resultView;
 
     public PurchaseLotto() {
+        inputView = new InputView();
+        resultView = new ResultView();
+    }
+
+    public void LottoStart() {
+        inputView.inputPurchaseAmount();
+        int lottoCount = availablePurchaseLottoCount(inputView.getInputAmount());
+        resultView.printPurchasedCount(lottoCount);
+        purchaseAvailableLotto(lottoCount);
+        resultView.printPurchasedLottos(lottoNumberList);
+        inputView.inputLastWonLottoNumbers();
+        resultLottoGame(inputView.getInputLastWonLottoNumbers());
+        resultView.printLottoGameResult(resultAll, inputView.getInputAmount());
     }
 
     public int availablePurchaseLottoCount(int amount) {
@@ -35,14 +44,6 @@ public class PurchaseLotto {
 
     public LottoNumberList getLottoNumberList() {
         return this.lottoNumberList;
-    }
-
-    public LastWonLottoNumber getLastWonLottoNumbers() {
-        return this.lastWonLottoNumber;
-    }
-
-    public ResultAll getResultAll() {
-        return resultAll;
     }
 
     public void resultLottoGame(String lastWonLottoNumbers) {

@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class ResultView {
     public void printPurchasedCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
@@ -24,11 +22,11 @@ public class ResultView {
     }
 
     private void printYield(ResultAll resultAll, int inputPurchaseAmount) {
-        float yield = calcuateYield(resultAll, inputPurchaseAmount);
+        float yield = calculateYield(resultAll, inputPurchaseAmount);
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
-    private float calcuateYield(ResultAll resultAll, int inputPurchaseAmount) {
+    private float calculateYield(ResultAll resultAll, int inputPurchaseAmount) {
         return ((resultAll.getResultThreeWon().getWonMoney() +
                 resultAll.getResultFourWon().getWonMoney() +
                 resultAll.getResultFiveWon().getWonMoney() +

@@ -26,7 +26,7 @@ public class LottoTest {
     }
 
     @Test
-    public void generateLottoNumber_validate() {
+    public void generateLottoNumber_로또번호1_45범위내생성확인() {
         LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
         testLottoNumber = lottoNumber.generateLottoNumber();
 
@@ -39,14 +39,14 @@ public class LottoTest {
     }
 
     @Test
-    public void availablePurchaseLottoCount_validate() {
+    public void availablePurchaseLottoCount_구매가능매수확인() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
         int lottoCount = purchaseLotto.availablePurchaseLottoCount(14000);
         assertThat(lottoCount).isEqualTo(14);
     }
 
     @Test
-    public void purchasedLotto_count_validate() {
+    public void purchaseAvailableLotto_구매로또번호생성검증() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
         purchaseLotto.purchaseAvailableLotto(14);
         assertThat(purchaseLotto.getLottoNumberList().count()).isEqualTo(14);
@@ -54,13 +54,13 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1,2,3,4,5,6})
-    public void setLastWonLottoNumbers_init(int number) {
+    public void lastWonLottoNumbers_지난당첨번호문자열파싱검증(int number) {
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
         assertThat(lastWonLottoNumber.contains(number)).isTrue();
     }
 
     @Test
-    public void countWonNumbers_validate() {
+    public void countWonNumbers_두개로또번호비교검증() {
         LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy = new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
