@@ -31,13 +31,14 @@ class LottoNumbersTest {
     }
     
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,7,8,9:3", "1,2,3,4,7,8:4", "1,2,3,4,5,7:5", "1,2,3,4,5,6:6"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,7,8,9:3", "1,2,3,4,7,8:4", "1,2,4,5,6,7:5", "1,2,3,4,5,6:6"}, delimiter = ':')
     @DisplayName("로또 번호와 당첨 번호의 일치하는 숫자를 구한다")
     void ticketMatchTest(String numbers, int expected) {
-        LottoNumbers winningNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.of("1, 2, 3, 4, 5, 6", "3");
         LottoNumbers lottoTicket = LottoNumbers.of(StringUtils.toIntegerList(numbers));
+
         Prize prize = lottoTicket.match(winningNumbers);
-        assertThat(prize).isEqualTo(Prize.findByMatchCount(expected));
+        assertThat(prize).isEqualTo(Prize.valueOf(expected, false));
     }
 
     private void assertThatThrownByCreateLottoTickets(List<Integer> lottoNumbers) {

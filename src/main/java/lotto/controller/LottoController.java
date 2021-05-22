@@ -17,7 +17,7 @@ public class LottoController {
         List<LottoNumbers> lottoNumbersList = store.generate(price);
         printView.printLottoNumbers(lottoNumbersList);
 
-        LottoTickets lottoTickets = LottoTickets.of(lottoNumbersList, LottoNumbers.of(inputView.inputWinningNumbers()));
+        LottoTickets lottoTickets = LottoTickets.of(lottoNumbersList, WinningNumbers.of(inputView.inputWinningNumbers(), inputView.inputBonusNumber()));
 
         LottoResult lottoResult = lottoTickets.matchResult();
         printView.printResult(lottoResult, price);

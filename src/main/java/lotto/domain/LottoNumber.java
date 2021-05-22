@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.StringUtils;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -19,6 +21,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_BOUNDARY_ERROR_MESSAGE);
         }
+    }
+
+    public static LottoNumber of(String number) {
+        return new LottoNumber(StringUtils.parseInteger(number));
     }
 
     @Override

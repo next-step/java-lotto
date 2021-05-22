@@ -14,7 +14,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -24,19 +24,25 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
+        return new LottoNumbers(toLottoNumberList(numbers));
+    }
+
+    protected static List<LottoNumber> toLottoNumberList(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
     }
 
-    public Prize match(LottoNumbers winningNumbers) {
+    public Prize match(WinningNumbers winningNumbers) {
         int matchCount = (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
 
-        return Prize.findByMatchCount(matchCount);
+        boolean hasBonusNumber = lottoNumbers.stream()
+                .anyMatch(winningNumbers::isSameAsBonusNumber);
+
+        return Prize.valueOf(matchCount, hasBonusNumber);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -49,7 +55,7 @@ public class LottoNumbers {
         }
     }
 
-    private boolean contains(LottoNumber number) {
+    protected boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
