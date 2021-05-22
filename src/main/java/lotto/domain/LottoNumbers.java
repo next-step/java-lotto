@@ -5,18 +5,18 @@ import java.util.*;
 public class LottoNumbers {
 
 	public static final int LENGTH = 6;
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(Integer... numbers) {
 		this(Arrays.asList(numbers));
 	}
 
 	public LottoNumbers(List<Integer> numbers) {
-		validationNumbers(numbers);
-		lottoNumbers = new ArrayList<>();
+		lottoNumbers = new LinkedHashSet<>();
 		for (Integer number : numbers) {
 			lottoNumbers.add(new LottoNumber(number));
 		}
+		validationNumbers(numbers);
 	}
 
 	public LottoNumbers(RandomNumbersGenerator randomNumbersGenerator) {
@@ -25,11 +25,11 @@ public class LottoNumbers {
 
 	private void validationNumbers(List<Integer> numbers) {
 		validationSize(numbers);
-		validationDuplicate(numbers);
+		validationDuplicate();
 	}
 
-	private void validationDuplicate(List<Integer> numbers) {
-		if (removeDuplicateNumbers(numbers).size() != LENGTH) {
+	private void validationDuplicate() {
+		if (this.lottoNumbers.size() != LENGTH) {
 			throw new IllegalArgumentException("로또번호중에서 중복된 숫자가 포함되어 있습니다.");
 		}
 	}
@@ -38,14 +38,6 @@ public class LottoNumbers {
 		if (numbers == null || numbers.size() != LENGTH) {
 			throw new IllegalArgumentException("로또는 숫자6개로 이루어져야 합니다.");
 		}
-	}
-
-	private List<Integer> removeDuplicateNumbers(List<Integer> numbers) {
-		Set<Integer> set = new LinkedHashSet<>();
-		for (Integer number : numbers) {
-			set.add(number);
-		}
-		return new ArrayList<>(set);
 	}
 
 	protected boolean hasSize(int size) {
