@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import jdk.jfr.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +8,21 @@ import java.util.Arrays;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class LottoTest {
+
+    @Test
+    void 로또_기존결과에_보너스번호_Test() {
+        LottoWinNumbers winNumbers = new LottoWinNumbers("1, 2, 3, 4, 5, 6");
+        winNumbers.addBonusNumber(7);
+
+        Lottos lottos = new Lottos(Arrays.asList(
+                new Lotto(Arrays.asList(1,2,3,4,5,7)),          // 1개 - 5개 + 보너스 맞춤, 2등, 30,000,000
+                new Lotto(Arrays.asList(1,2,3,4,5,6)),          // 1개 - 6개 맞춤, 1등, 2,000,000,000
+                new Lotto(Arrays.asList(41,34,25,16,7,8))));    // 1개 - 0개 맞춤, -등,
+
+        LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
+
+        assertThat(resultPack.countOf(LottoResult.SECOND)).isEqualTo(1);
+    }
 
     @Test
     void 로또결과들의_총수익률_Test() {
