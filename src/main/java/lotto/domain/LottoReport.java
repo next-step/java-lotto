@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-import static lotto.domain.Winnings.*;
+import static lotto.domain.Rank.*;
 
 public class LottoReport {
     private int threeMatched;
@@ -35,14 +35,14 @@ public class LottoReport {
     }
 
     private void updateWinnings() {
-        this.winnings = threeMatched * FIFTH.winnings +
-                fourMatched * FOURTH.winnings +
-                fiveMatched * THIRD.winnings +
-                sixMatched * FIRST.winnings;
+        this.winnings = threeMatched * FIFTH.winningMoney +
+                fourMatched * FOURTH.winningMoney +
+                fiveMatched * THIRD.winningMoney +
+                sixMatched * FIRST.winningMoney;
     }
 
-    public int countWinnings(Winnings winnings){
-        return winnings.lottoReportMatchedNumGetter.apply(this);
+    public int countWinnings(Rank rank){
+        return rank.lottoReportMatchedNumGetter.apply(this);
     }
 
     int threeMatched() {
