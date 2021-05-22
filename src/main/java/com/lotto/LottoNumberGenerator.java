@@ -7,10 +7,12 @@ import java.util.List;
 
 public class LottoNumberGenerator {
     private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
+    private static final int LOTTO_START_NUM = 1;
+    private static final int LOTTO_END_NUM = 45;
     private static final List<Integer> range = new ArrayList<>();
 
     static {
-        for(int i=1; i<=45; i++) {
+        for(int i=LOTTO_START_NUM; i<=LOTTO_END_NUM; i++) {
             range.add(i);
         }
     }
