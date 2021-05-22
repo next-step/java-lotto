@@ -29,4 +29,21 @@ public class LottoNumbersTest {
 		assertThat(lottoNumber.isComplete()).isFalse();
 	}
 
+	@Test
+	@DisplayName(value = "로또 넘버는 6개까지만 add가 가능하다")
+	void addLessThanEqualSix() {
+		LottoNumbers lottoNumber = new LottoNumbers();
+		lottoNumber.add(new LottoNumber(1));
+		lottoNumber.add(new LottoNumber(2));
+		lottoNumber.add(new LottoNumber(3));
+		lottoNumber.add(new LottoNumber(4));
+		lottoNumber.add(new LottoNumber(5));
+		lottoNumber.add(new LottoNumber(6));
+		lottoNumber.add(new LottoNumber(7));
+		lottoNumber.add(new LottoNumber(8));
+		lottoNumber.add(new LottoNumber(9));
+		assertThat(lottoNumber.isComplete()).isTrue();
+	}
+
+
 }
