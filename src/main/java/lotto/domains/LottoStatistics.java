@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoStatistics {
+    private static final int MIN_MATCH_COUNT = 0;
+    private static final int MAX_MATCH_COUNT = 6;
 
     private final Map<Integer,LottoStatistic> statisticsMap = new HashMap<>();
 
     public LottoStatistics() {
-        for (int i = 0; i < 7; i++) {
-            statisticsMap.put(i, new LottoStatistic());
+        for (int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++) {
+            statisticsMap.put(matchCount, new LottoStatistic());
         }
     }
 
