@@ -53,9 +53,9 @@ public class LottoSponsorTest {
         assertThat(lottoSponsor.sumPrizeMoney(scores)).isEqualTo(expectedTotalPrizeMoney);
     }
 
-    @DisplayName("수익률을 계산한다.")
+    @DisplayName("수익률을 계산한다. 소수점 2자리 아래 버림")
     @ParameterizedTest(name = "총 당첨금: \"{0}\", 구매 금액: \"{1}\", 수익률: \"{1}\"")
-    @CsvSource(value = {"0,1000,-1.00", "2000000000,1000,1999999.00", "55000,2000,26.50"})
+    @CsvSource(value = {"0,1000,0.00", "2000000000,1000,2000000.00", "55000,2000,27.50", "5000,14000,0.35"})
     void convertToEarningRate(long money, int payment, float rate) {
         assertThat(lottoSponsor.convertToEarningRate(money, payment)).isEqualTo(rate);
     }

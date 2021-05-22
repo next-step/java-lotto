@@ -51,7 +51,7 @@ public class LottoSponsor {
     }
 
     protected float convertToEarningRate(long totalPrizeMoney, int payment) {
-        return totalPrizeMoney / (float)payment;
+        return (float)(Math.floor(totalPrizeMoney / (float)payment * 100) / 100.0);
     }
 
     public void show() {
