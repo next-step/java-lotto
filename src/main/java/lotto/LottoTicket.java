@@ -1,19 +1,12 @@
 package lotto;
 
-import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
     private List<LottoNumber> lottoTicket;
 
-    public Lotto(List<LottoNumber> lottoTicket) {
+    public LottoTicket(List<LottoNumber> lottoTicket) {
         this.lottoTicket = lottoTicket;
-        sortLottoNumbers();
-        System.out.println(lottoTicket);
-    }
-
-    private void sortLottoNumbers() {
-        Collections.sort(lottoTicket);
     }
 
     public int lottoTicketSize() {

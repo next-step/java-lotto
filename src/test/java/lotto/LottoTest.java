@@ -11,17 +11,18 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoTest {
     private LottoNumber lottoNumber;
-    private LottoNumberCreator lottoNumberCreator;
-    private Lotto lotto;
-    private Lottos lottos;
+    private LottoCreator lottoCreator;
+    private LottoTicket lottoTicket;
+    private LottoTickets lottoTickets;
 
     @BeforeEach
     void setUp() {
-        lottoNumberCreator = new LottoNumberCreator();
-        lotto = lottoNumberCreator.makeLotto();
+        lottoCreator = new LottoCreator();
+        lottoTicket = lottoCreator.makeLottoTicket();
+        lottoTickets = lottoCreator.makeLottoTickets(5);
     }
 
-    @DisplayName("로또 번호는 1~45이다.")
+    @DisplayName("로또 번호는 1~45로 구성되어있다.")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void validateLottoNumberTest(int number) {
@@ -32,7 +33,13 @@ class LottoTest {
 
     @DisplayName("로또는 6개의 서로다른 정수로 구성되어있다.")
     @Test
-    void makeLottoTest() {
-        assertThat(lotto.lottoTicketSize()).isEqualTo(6);
+    void makeLottoTicketTest() {
+        assertThat(lottoTicket.lottoTicketSize()).isEqualTo(6);
+    }
+
+    @DisplayName("로또티켓은 여러장 일 수 있다.")
+    @Test
+    void makeLottoTicketsTest() {
+        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(5);
     }
 }
