@@ -20,8 +20,6 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName("생성된 로또번호가 6개인지 테스트")
 	void createLottoNumbers_sizeCheck() {
-		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 5, 6).hasSize(6)).isTrue();
-
 		Assertions.assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
@@ -36,17 +34,23 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName("랜덤생성기를 이용한 로또번호 생성 테스트")
 	void createLottoNumbersByRandomNumberGenerator() {
-		LottoRandomNumbersGenerator randomNumbersGenerator = new LottoRandomNumbersGenerator();
+		TestRandomNumbersGenerator randomNumbersGenerator = new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6});
 		LottoNumbers lottoNumbers = new LottoNumbers(randomNumbersGenerator);
-		Assertions.assertThat(lottoNumbers.hasSize(6)).isTrue();
+
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(2))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(3))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(4))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(5))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(6))).isTrue();
+		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(7))).isFalse();
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	@DisplayName("로또번호 리스트에 당첨번호가 포함되어 있는지 테스트")
 	void contains(int number) {
-		Assertions.assertThat(winLottoNumbers.contains(number)).isTrue();
-		Assertions.assertThat(winLottoNumbers.contains(7)).isFalse();
+		Assertions.assertThat(winLottoNumbers.contains(new LottoNumber(number))).isTrue();
 	}
 
 	@Test

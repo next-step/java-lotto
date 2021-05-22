@@ -40,14 +40,6 @@ public class LottoNumbers {
 		}
 	}
 
-	protected boolean hasSize(int size) {
-		return this.lottoNumbers.size() == size;
-	}
-
-	public boolean contains(int number) {
-		return this.lottoNumbers.contains(new LottoNumber(number));
-	}
-
 	public boolean contains(LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
