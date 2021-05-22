@@ -60,17 +60,36 @@ public final class LottoNumbers {
         return result;
     }
 
-    public int countWinning(ArrayList<Integer> winningNumber) {
+    public int countWinning(LottoNumbers victoryNumber) {
         int result = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            result += getMatchNumber(lottoNumber, winningNumber);
+            result = compareTwoNumber(victoryNumber, lottoNumber, result);
         }
         return result;
     }
 
-    private int getMatchNumber(LottoNumber lottoNumber,
-            List<Integer> winningNumber) {
-        return winningNumber.contains(lottoNumber.number()) ? 1 : 0;
+    private int compareTwoNumber(LottoNumbers victoryNumber,
+            LottoNumber lottoNumber, int result) {
+
+        return victoryNumber.hasNumber(lottoNumber) ? result + 1 : result;
+    }
+
+    private boolean hasNumber(LottoNumber inputNumber) {
+        boolean result = false;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            result = isEqualsNumber(inputNumber, result, lottoNumber);
+        }
+        return result;
+    }
+
+    private boolean isEqualsNumber(LottoNumber inputNumber, boolean result,
+            LottoNumber lottoNumber) {
+
+        if (!result && lottoNumber.equals(inputNumber)) {
+            result = true;
+        }
+
+        return result;
     }
 
 }

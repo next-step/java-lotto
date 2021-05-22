@@ -34,7 +34,7 @@ public class TotalLottoTest {
         setLottos(totalLotto);
 
         List<Integer> winning = totalLotto.getWinningWithNumbers(
-            new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
+            new LottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
 
         assertThat(winning.get(3)).isEqualTo(1);
         assertThat(winning.get(4)).isEqualTo(2);

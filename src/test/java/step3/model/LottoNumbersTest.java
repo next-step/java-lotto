@@ -46,26 +46,31 @@ public class LottoNumbersTest {
 
     private void checkSix(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))))
-                .isEqualTo(6);
+            .countWinning(new LottoNumbers(
+                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))))
+                    .isEqualTo(6);
     }
 
     private void checkFive(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7))))
-                .isEqualTo(5);
+            .countWinning(new LottoNumbers(
+                new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7)))))
+                    .isEqualTo(5);
     }
 
     private void checkFour(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8))))
-                .isEqualTo(4);
+            .countWinning(new LottoNumbers(
+                new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)))))
+                    .isEqualTo(4);
+
     }
 
     private void checkThree(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9))))
-                .isEqualTo(3);
+            .countWinning(new LottoNumbers(
+                new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9)))))
+                    .isEqualTo(3);
     }
 
     private void setLottoNumbersOverSix(LottoNumbers lottoNumbers) {

@@ -33,11 +33,11 @@ public class TotalLotto {
     }
 
     public List<Integer> getWinningWithNumbers(
-            ArrayList<Integer> winningNumber) {
+            LottoNumbers victoryNumber) {
 
         List<Integer> result = initWithNumbers();
         for (LottoNumbers lotto : totalLotto) {
-            int countWinning = lotto.countWinning(winningNumber);
+            int countWinning = lotto.countWinning(victoryNumber);
             result.set(countWinning, result.get(countWinning) + 1);
         }
 
