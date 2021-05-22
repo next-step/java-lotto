@@ -14,4 +14,8 @@ public class LottoTicket {
         }
         this.lottoNumbers = lottoNumbers;
     }
+
+    public LottoNumber[] toArray() {
+        return new LottoNumber[] {};
+    }
 }
