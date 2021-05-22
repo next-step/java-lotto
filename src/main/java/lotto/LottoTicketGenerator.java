@@ -35,7 +35,10 @@ public class LottoTicketGenerator {
 
     public LottoTicket extract() {
         Collections.shuffle(numberPool);
-        List<LottoNumber> extracted = numberPool.subList(0,NUMBER_COUNT_PER_TICKET);
+        List<LottoNumber> extracted = new ArrayList<>();
+        for (int i = 0; i < NUMBER_COUNT_PER_TICKET; i++) {
+            extracted.add(numberPool.get(i));
+        }
         Collections.sort(extracted);
         return new LottoTicket(extracted);
     }
