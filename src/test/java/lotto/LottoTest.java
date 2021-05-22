@@ -34,7 +34,7 @@ public class LottoTest {
             .map(i -> LottoNumber.of(i))
             .collect(Collectors.toList());
         // then
-        assertThat(lotto).isEqualTo(lottoNumbers);
+        assertThat(lotto.lottoNumbers()).isEqualTo(lottoNumbers);
     }
 
     @Test

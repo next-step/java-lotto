@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -29,4 +30,10 @@ public class LottoNumber {
         return Optional.ofNullable(lottoNumberCache.get(number))
             .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 로또번호입니다."));
     }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number - o.number;
+    }
+
 }
