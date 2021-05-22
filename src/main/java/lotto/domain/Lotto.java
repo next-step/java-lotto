@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.wrapper.LottoNumber;
+
 import java.util.*;
 
 import static lotto.domain.LottoGameOptions.*;
@@ -32,7 +34,7 @@ public class Lotto {
         return lottoNumbers.get(index);
     }
 
-    public List<Integer> numbers() {
+    public List<LottoNumber> numbers() {
         return lottoNumbers.lottoNumbers();
     }
 }

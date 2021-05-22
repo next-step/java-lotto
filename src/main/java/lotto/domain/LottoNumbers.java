@@ -1,17 +1,19 @@
 package lotto.domain;
 
+import lotto.domain.wrapper.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    List<Integer> lottoNumbers;
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers() {
-        this(new ArrayList<>());
-    }
+    public LottoNumbers() { }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        for (Integer number : lottoNumbers) {
+            this.lottoNumbers.add(LottoNumber.of(number));
+        }
     }
 
     public boolean sizeIsNotSameWith(int lottoNumberCount) {
@@ -19,11 +21,11 @@ public class LottoNumbers {
     }
 
     public void add(Integer number) {
-        lottoNumbers.add(number);
+        lottoNumbers.add(LottoNumber.of(number));
     }
 
     public int get(int index) {
-        return lottoNumbers.get(index);
+        return lottoNumbers.get(index).number();
     }
 
     @Override
@@ -41,7 +43,7 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
   
-    public List<Integer> lottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
 }

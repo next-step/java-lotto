@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -85,17 +84,6 @@ public class LottoTest {
         winNumbers = new LottoWinNumbers("1, 21, 13, 4, 5, 6", 7);
         lotto = new Lotto(Arrays.asList(1, 2, 13, 4, 3, 5));
         assertThat(winNumbers.matchResultOf(lotto).matchCount()).isEqualTo(4);
-    }
-
-    @DisplayName("랜덤으로 1~ 45 사이의 중복없는 번호들 생성")
-    @Test
-    void 구매_로또_번호생성_Test() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        String[] nums = lotto.lottoNumberString().substring(1, lotto.toString().length()-2).split(", |,");
-        for (int i = 0; i < nums.length; ++i) {
-            assertThat(Integer.parseInt(nums[i])).isGreaterThanOrEqualTo(1);
-            assertThat(Integer.parseInt(nums[i])).isLessThanOrEqualTo(45);
-        }
     }
 
     @Test

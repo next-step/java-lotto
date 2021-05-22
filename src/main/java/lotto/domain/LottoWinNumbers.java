@@ -30,7 +30,7 @@ public class LottoWinNumbers {
                     .count();
         }
         boolean matchBonus = lotto.numbers().stream()
-                .anyMatch(lottoNum -> bonusNumber.isMatch(lottoNum));
+                .anyMatch(lottoNumber -> bonusNumber.isMatch(lottoNumber.number()));
 
         return LottoRank.valueOf(matchCount, matchBonus);
     }
