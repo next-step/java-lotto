@@ -1,10 +1,12 @@
 package wootecam.lotto.core;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import wootecam.lotto.model.Lotto;
@@ -12,30 +14,9 @@ import wootecam.lotto.model.LottoResult;
 import wootecam.lotto.model.LottoScoreMap;
 
 public class LottoResultGeneratorTest {
-	@Test
-	void testLottoResult() {
-		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
-	}
 
 	@Test
-	void test_로또6개모두매칭확인() {
-		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
-		Lotto myLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		LottoResult lottoResult = lottoResultGenerator.getLottoResult(myLotto, winningLotto);
-		Assertions.assertThat(lottoResult).isEqualTo(LottoResult.SIX_MATCHING);
-	}
-
-	@Test
-	void test_로또번호가몇개맞았는지테스트() {
-		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
-		Lotto myLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		int matchedCount = lottoResultGenerator.getMatchCount(myLotto, winningLotto);
-		Assertions.assertThat(matchedCount).isEqualTo(6);
-	}
-
-	@Test
+	@DisplayName("로또 세트에 대해 로또 결과 통계가 정상적으로 반환되는지 테스트")
 	void test_전체로또세트에대해결과통계테스트() {
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
 		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -50,7 +31,11 @@ public class LottoResultGeneratorTest {
 		lottos.add(lotto4);
 
 		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FIVE_MATCHING)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FOUR_MATCHING)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.THREE_MATCHING)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.SIX_MATCHING)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.DEFEAT)).isEqualTo(0);
 
 	}
-
 }

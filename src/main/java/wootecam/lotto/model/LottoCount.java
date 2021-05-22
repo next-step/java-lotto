@@ -9,7 +9,7 @@ public class LottoCount {
 
 	private static final int LOTTO_PRICE = 1_000;
 
-	private int count;
+	private final int count;
 
 	public LottoCount(String money) {
 		if (!StringUtils.isNumeric(money)) {
