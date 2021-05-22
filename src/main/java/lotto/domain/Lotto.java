@@ -35,5 +35,4 @@ public class Lotto {
     public List<Integer> numbers() {
         return lottoNumbers.lottoNumbers();
     }
-
 }

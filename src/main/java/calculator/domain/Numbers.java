@@ -3,6 +3,8 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static calculator.utils.UtilsString.isNullOrEmpty;
+
 public class Numbers {
     List<Number> numbers = new ArrayList<>();
 

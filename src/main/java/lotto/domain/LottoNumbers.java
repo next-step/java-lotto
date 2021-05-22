@@ -40,7 +40,7 @@ public class LottoNumbers {
     public String formattedString() {
         return lottoNumbers.toString();
     }
-
+  
     public List<Integer> lottoNumbers() {
         return lottoNumbers;
     }
