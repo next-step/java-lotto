@@ -19,6 +19,7 @@ public class InputView {
     public int getInputAmount() {
         return inputAmount;
     }
+
     public void inputLastWonLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         inputLastWonLottoNumber = scan.next();

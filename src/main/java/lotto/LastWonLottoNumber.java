@@ -12,8 +12,8 @@ public class LastWonLottoNumber {
     }
 
     private List<Integer> parsingInputString(String inputLastWonLottoNumberString) {
-        String [] numbers = inputLastWonLottoNumberString.split(",");
-        for(int i=0; i<numbers.length; i++) {
+        String[] numbers = inputLastWonLottoNumberString.split(",");
+        for (int i = 0; i < numbers.length; i++) {
             lastWonLottoNumbers.add(Integer.parseInt(numbers[i]));
         }
         return lastWonLottoNumbers;

@@ -6,7 +6,7 @@ public class ResultView {
     }
 
     public void printPurchasedLottos(LottoNumberList lottoNumberList) {
-        for(int i=0; i<lottoNumberList.count(); i++) {
+        for (int i = 0; i < lottoNumberList.count(); i++) {
             System.out.println(lottoNumberList.get(i).getLottoNumbers());
         }
     }
@@ -18,7 +18,7 @@ public class ResultView {
         System.out.println(resultAll.getResultFourWon().getResult());
         System.out.println(resultAll.getResultFiveWon().getResult());
         System.out.println(resultAll.getResultSixWon().getResult());
-        printYield(resultAll,inputPurchaseAmount);
+        printYield(resultAll, inputPurchaseAmount);
     }
 
     private void printYield(ResultAll resultAll, int inputPurchaseAmount) {

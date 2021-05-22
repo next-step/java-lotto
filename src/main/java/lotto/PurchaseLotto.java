@@ -1,4 +1,5 @@
 package lotto;
+
 import java.util.List;
 
 public class PurchaseLotto {
@@ -27,12 +28,12 @@ public class PurchaseLotto {
     }
 
     public int availablePurchaseLottoCount(int amount) {
-        return amount/LOTTO_PRICE;
+        return amount / LOTTO_PRICE;
     }
 
     public void purchaseAvailableLotto(int lottoCount) {
         lottoNumberList = new LottoNumberList();
-        for (int i=0; i<lottoCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottoNumberList.appendLottoNumber(purchaseOneLotto());
         }
     }
@@ -51,20 +52,20 @@ public class PurchaseLotto {
         resultAll = new ResultAll();
 
         int wonCountForOneLotto = 0;
-        for(int i=0; i<lottoNumberList.count(); i++) {
+        for (int i = 0; i < lottoNumberList.count(); i++) {
             wonCountForOneLotto = countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
             updateResultLotto(wonCountForOneLotto);
         }
     }
 
     private void updateResultLotto(int wonCountForOneLotto) {
-        if(wonCountForOneLotto == 3)
+        if (wonCountForOneLotto == 3)
             resultAll.getResultThreeWon().won();
-        if(wonCountForOneLotto == 4)
+        if (wonCountForOneLotto == 4)
             resultAll.getResultFourWon().won();
-        if(wonCountForOneLotto == 5)
+        if (wonCountForOneLotto == 5)
             resultAll.getResultFiveWon().won();
-        if(wonCountForOneLotto == 6)
+        if (wonCountForOneLotto == 6)
             resultAll.getResultSixWon().won();
     }
 
@@ -74,7 +75,7 @@ public class PurchaseLotto {
 
     public int countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
         WonCount wonCount = new WonCount();
-        for ( int oneLottoNumber : generateLottoNumber) {
+        for (int oneLottoNumber : generateLottoNumber) {
             wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumbers));
         }
         return wonCount.getWonCount();
