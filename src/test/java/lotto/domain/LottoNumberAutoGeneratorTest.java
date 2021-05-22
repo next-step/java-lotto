@@ -1,6 +1,7 @@
-package lotto.utils;
+package lotto.domain;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberAutoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

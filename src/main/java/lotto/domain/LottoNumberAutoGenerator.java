@@ -1,12 +1,10 @@
-package lotto.utils;
-
-import lotto.domain.LottoNumber;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.utils.LottoOptions.*;
+import static lotto.domain.LottoOptions.*;
 
 public final class LottoNumberAutoGenerator {
     private static final List<LottoNumber> NUMBER_BOX = new ArrayList<>(MAX_NUMBER);

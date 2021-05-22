@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.domain;
 
 /**
  * 로또 옵션 설정
