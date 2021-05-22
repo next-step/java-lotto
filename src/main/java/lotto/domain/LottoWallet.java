@@ -7,9 +7,9 @@ public class LottoWallet {
     private Map<LottoResult, Integer> lottoResultCounts;
     private final Money money;
 
-    public LottoWallet(int money) {
+    public LottoWallet(Money money) {
         initLottoResultCounts();
-        this.money = new Money(money);
+        this.money = money;
     }
 
     private void initLottoResultCounts() {
@@ -36,5 +36,9 @@ public class LottoWallet {
 
     private int getReward(LottoResult lottoResult) {
         return lottoResultCounts.get(lottoResult) * lottoResult.getReward();
+    }
+
+    public Map<LottoResult, Integer> getLottoResultCounts() {
+        return lottoResultCounts;
     }
 }

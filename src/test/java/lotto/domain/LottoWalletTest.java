@@ -17,7 +17,7 @@ public class LottoWalletTest {
     })
     void get_profit_rate_when_fourth(final int money, final int matchCount, final float expectedProfitRate) {
         //given
-        LottoWallet lottoWallet = new LottoWallet(money);
+        LottoWallet lottoWallet = new LottoWallet(new Money(money));
 
         //when
         lottoWallet.addLottoResult(LottoResult.findByMatchCount(matchCount));
