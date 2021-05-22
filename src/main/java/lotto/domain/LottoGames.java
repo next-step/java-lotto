@@ -7,12 +7,9 @@ import java.util.List;
 public class LottoGames implements Iterable<LottoGame>{
     private List<LottoGame> lottoGames = new ArrayList<>();
 
-    public LottoGames() {
-    }
-
     public LottoGames(int money) {
         while(LottoGame.isAffordable(money)) {
-            lottoGames.add(LottoGame.buy(money));
+            lottoGames.add(new LottoGame());
             money -= LottoGame.PRICE;
         }
     }

@@ -7,28 +7,12 @@ import java.util.*;
 
 public class LottoGame {
     public static final int PRICE = 1_000;
-
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public LottoGame() {
         fillRandomNumbers();
-    }
-
-    private void fillRandomNumbers() {
-        while(lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
-            addRandomNumber();
-        }
-        isValid();
-    }
-
-    private void addRandomNumber() {
-        lottoNumbers.add(new LottoNumber(new RandomNumber()));
-    }
-
-    public LottoGame(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoGame(int... numbers) {
@@ -40,16 +24,23 @@ public class LottoGame {
         fillRandomNumbers();
     }
 
-    private void addRandomNumber(int number) {
-        lottoNumbers.add(new LottoNumber(new RandomNumber(number)));
-    }
-
     public static boolean isAffordable(int money) {
         return money >= PRICE;
     }
 
-    public static LottoGame buy(int money) {
-        return new LottoGame();
+    private void addRandomNumber(int number) {
+        lottoNumbers.add(new LottoNumber(new RandomNumber(number)));
+    }
+
+    private void fillRandomNumbers() {
+        while(lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
+            addRandomNumber();
+        }
+        isValid();
+    }
+
+    private void addRandomNumber() {
+        lottoNumbers.add(new LottoNumber(new RandomNumber()));
     }
 
     public boolean isValid() {

@@ -5,9 +5,6 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private RandomNumber number;
 
-    public LottoNumber() {
-    }
-
     public LottoNumber(RandomNumber randomNumber) {
         this.number = randomNumber;
     }
