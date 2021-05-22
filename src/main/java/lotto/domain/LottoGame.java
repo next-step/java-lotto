@@ -25,6 +25,10 @@ public class LottoGame {
         return lottoes.getLottoCount();
     }
 
+    public int getMoney() {
+        return money.getMoney();
+    }
+
     public Lottoes getLottoes() {
         return lottoes;
     }

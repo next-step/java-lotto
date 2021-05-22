@@ -24,6 +24,10 @@ public class Money {
         return money > (count * Lotto.PRICE);
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
