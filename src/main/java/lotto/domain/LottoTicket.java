@@ -10,11 +10,15 @@ public class LottoTicket {
         return new LottoTicket(LottoNumbers.generate());
     }
 
-    private LottoTicket(LottoNumbers lottoNumbers) {
+    public LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers lottoNumbers() {
         return this.lottoNumbers;
+    }
+
+    public LottoRank rank(LottoNumbers matchTarget) {
+        return LottoRank.of(lottoNumbers().matchCount(matchTarget));
     }
 }
