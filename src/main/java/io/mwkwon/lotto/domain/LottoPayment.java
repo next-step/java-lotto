@@ -8,11 +8,11 @@ public final class LottoPayment {
     private final int value;
 
     public LottoPayment(int value) {
-        checkMinmumLottoPayment(value);
+        checkMinimumLottoPayment(value);
         this.value = value;
     }
 
-    private void checkMinmumLottoPayment(int value) {
+    private void checkMinimumLottoPayment(int value) {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
