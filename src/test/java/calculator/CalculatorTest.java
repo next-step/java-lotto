@@ -45,4 +45,11 @@ public class CalculatorTest {
         assertThat(sum).isEqualTo(expectedAnswer);
     }
 
+    @ParameterizedTest
+    @CsvSource({"5]10", "10<20", "20'30"})
+    @DisplayName("커스텀 구분자가 아닌경우 기본 구분자를 입력하지 않았을 때 에외처리한다.")
+    void wrongDefaultDelimiter_test(String input) {
+        //when
+        assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input));
+    }
 }
