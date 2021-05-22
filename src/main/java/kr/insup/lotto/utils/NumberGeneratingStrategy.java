@@ -1,4 +1,4 @@
-package kr.insup.lotto.domain;
+package kr.insup.lotto.utils;
 
 import java.util.List;
 

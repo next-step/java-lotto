@@ -1,6 +1,7 @@
 package kr.insup.lotto.domain;
 
-import java.util.ArrayList;
+import kr.insup.lotto.utils.NumberGeneratingStrategy;
+
 import java.util.List;
 
 public class Lotto {

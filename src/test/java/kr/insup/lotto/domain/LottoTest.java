@@ -16,7 +16,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        //when
+        //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.First);
     }
 
@@ -26,7 +26,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        //when
+        //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Second);
     }
 
@@ -36,7 +36,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 7, 8);
-        //when
+        //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Third);
     }
 
@@ -46,7 +46,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
-        //when
+        //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Fourth);
     }
 
@@ -56,7 +56,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> winningNumbers = Arrays.asList(1, 2, 7, 8, 9, 10);
-        //when
+        //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.None);
     }
 

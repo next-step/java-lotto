@@ -1,7 +1,6 @@
 package kr.insup.lotto.utils;
 
 import kr.insup.lotto.config.LottoConfig;
-import kr.insup.lotto.domain.NumberGeneratingStrategy;
 
 import java.util.*;
 
