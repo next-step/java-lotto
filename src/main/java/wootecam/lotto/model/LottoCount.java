@@ -2,6 +2,7 @@ package wootecam.lotto.model;
 
 import java.util.Objects;
 
+import wootecam.lotto.core.AddLottoFunction;
 import wootecam.lotto.exception.LottoException;
 import wootecam.util.StringUtils;
 
@@ -43,5 +44,11 @@ public class LottoCount {
 
 	public boolean isGreaterThanZero() {
 		return this.count > 0;
+	}
+
+	public void foreach(AddLottoFunction addLottoFunction) {
+		for (int i = 0; i < this.count; i++) {
+			addLottoFunction.apply();
+		}
 	}
 }

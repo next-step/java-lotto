@@ -20,10 +20,11 @@ public class LottoGameGenerator {
 	public List<Lotto> getLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		for (int i = 0; i < lottoCount.getCount(); i++) {
+		lottoCount.foreach(() -> {
 			Lotto lotto = this.automaticLottoGenerator.getNumbers();
 			lottos.add(lotto);
-		}
+		});
+
 		return lottos;
 	}
 
