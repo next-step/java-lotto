@@ -2,6 +2,13 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -24,14 +31,12 @@ public class LottoStaticsTest {
         });
     }
 
-    @Test
-    public void 로또통계() {
+    @ParameterizedTest
+    @CsvSource({"3,3","4,2","5,0","6,1"})
+    public void 로또통계(int rank, int rankCount) {
         LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
         LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
-        assertThat(statics.getRankCount(3)).isEqualTo(3);
-        assertThat(statics.getRankCount(4)).isEqualTo(2);
-        assertThat(statics.getRankCount(5)).isEqualTo(0);
-        assertThat(statics.getRankCount(6)).isEqualTo(1);
+        assertThat(statics.getRankCount(rank)).isEqualTo(rankCount);
     }
 
     @Test
@@ -41,27 +46,32 @@ public class LottoStaticsTest {
         assertThat(statics.getProfit()).isEqualTo(200011.5);
     }
 
-    @Test
-    public void 수익률2() {
-        LottoGames machine = new LottoGames(new int[][] {
-                {8, 21, 23, 41, 42, 43},
-                {3, 5, 11, 16, 32, 38},
-                {7, 11, 16, 35, 36, 44},
-                {1, 8, 11, 31, 41, 42},
-                {13, 14, 16, 38, 42, 45},
-                {7, 11, 30, 40, 42, 43},
-                {2, 13, 22, 32, 38, 45},
-                {23, 25, 33, 36, 39, 41},
-                {1, 3, 5, 14, 22, 45},
-                {5, 9, 38, 41, 43, 44},
-                {2, 8, 9, 18, 19, 21},
-                {13, 14, 18, 21, 23, 35},
-                {17, 21, 29, 37, 42, 45},
-                {3, 8, 27, 30, 35, 44},
-        });
+    @ParameterizedTest
+    @MethodSource("provideLottoGames")
+    public void 수익률2(LottoGames lottoGames) {
         LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
-        LottoStatics statics = machine.calculateStatics(winLottoGame);
+        LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
         assertThat(statics.getProfit()).isEqualTo(0.35);
+    }
+
+    private static Stream<Arguments> provideLottoGames() {
+        return Stream.of(
+                Arguments.of(new LottoGames(new int[][] {
+                        {8, 21, 23, 41, 42, 43},
+                        {3, 5, 11, 16, 32, 38},
+                        {7, 11, 16, 35, 36, 44},
+                        {1, 8, 11, 31, 41, 42},
+                        {13, 14, 16, 38, 42, 45},
+                        {7, 11, 30, 40, 42, 43},
+                        {2, 13, 22, 32, 38, 45},
+                        {23, 25, 33, 36, 39, 41},
+                        {1, 3, 5, 14, 22, 45},
+                        {5, 9, 38, 41, 43, 44},
+                        {2, 8, 9, 18, 19, 21},
+                        {13, 14, 18, 21, 23, 35},
+                        {17, 21, 29, 37, 42, 45},
+                        {3, 8, 27, 30, 35, 44},
+                })));
     }
 
 }
