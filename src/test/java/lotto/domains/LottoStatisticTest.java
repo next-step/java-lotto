@@ -10,9 +10,7 @@ public class LottoStatisticTest {
         LottoStatistic lottoStatistic = new LottoStatistic();
         assertThat(lottoStatistic.count()).isEqualTo(0);
         assertThat(lottoStatistic.payout()).isEqualTo(0);
-
-        lottoStatistic.add();
-
+        lottoStatistic.add(3);
         assertThat(lottoStatistic.count()).isEqualTo(1);
         assertThat(lottoStatistic.payout()).isEqualTo(5000);
 
