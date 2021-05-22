@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -8,13 +9,19 @@ public class Lotto {
     public static final long PRICE = 1_000L;
 
     private final LottoNumbers lottoNumbers;
+    private final LottoType lottoType;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers, LottoType lottoType) {
         this.lottoNumbers = lottoNumbers;
+        this.lottoType = lottoType;
     }
 
     public static Lotto auto() {
-        return new Lotto(LottoNumbersGenerator.generate());
+        return new Lotto(LottoNumbersGenerator.generate(), LottoType.AUTO);
+    }
+
+    public static Lotto manual(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers, LottoType.MANUAL);
     }
 
     public Set<LottoNumber> getNumbers() {
@@ -31,5 +38,27 @@ public class Lotto {
 
     private boolean isBonusMatch(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public boolean isAuto() {
+        return LottoType.isAuto(this.lottoType);
+    }
+
+    public boolean isManual() {
+        return LottoType.isManual(this.lottoType);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers) &&
+                lottoType == lotto.lottoType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers, lottoType);
     }
 }

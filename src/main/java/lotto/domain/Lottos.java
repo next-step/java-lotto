@@ -14,11 +14,27 @@ public class Lottos {
 
     public WinningResults matches(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> winningLotto.matchWinning(lotto))
+                .map(winningLotto::matchWinning)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), WinningResults::new));
     }
 
     public List<Lotto> getValues() {
         return new ArrayList<>(lottos);
+    }
+
+    public List<Lotto> getAutos() {
+        return lottos.stream()
+                .filter(Lotto::isAuto)
+                .collect(Collectors.toList());
+    }
+
+    public List<Lotto> getManuals() {
+        return lottos.stream()
+                .filter(Lotto::isManual)
+                .collect(Collectors.toList());
+    }
+
+    public void add(Lottos buyAutoLottos) {
+        this.lottos.addAll(buyAutoLottos.lottos);
     }
 }
