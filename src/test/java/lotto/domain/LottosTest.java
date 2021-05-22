@@ -12,9 +12,9 @@ class LottosTest {
     @Test
     @DisplayName("당첨된 로또 갯수 확인")
     void matches() {
-        Lotto lotto1 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7));
-        Lotto lotto3 = new Lotto(new LottoNumbers(1, 2, 3, 4, 6, 7));
+        Lotto lotto1 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6), LottoType.MANUAL);
+        Lotto lotto2 = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7), LottoType.MANUAL);
+        Lotto lotto3 = new Lotto(new LottoNumbers(1, 2, 3, 4, 6, 7), LottoType.MANUAL);
         WinningLotto winningLotto = new WinningLotto(new LottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.from(7));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));

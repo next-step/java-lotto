@@ -32,7 +32,9 @@ class LottoShopTest {
 
         Lottos lottos = lottoShop.buyLottos(price, Arrays.asList(manualNumbers_1, manualNumbers_2, manualNumbers_3));
 
-        assertThat(lottos.getAutoCount()).isEqualTo(11);
-        assertThat(lottos.getManualCount()).isEqualTo(3);
+        assertThat(lottos.getAutos()).hasSize(11);
+        assertThat(lottos.getManuals()).hasSize(3);
+        assertThat(lottos.getManuals()).contains(new Lotto(manualNumbers_1, LottoType.MANUAL),
+                new Lotto(manualNumbers_2, LottoType.MANUAL), new Lotto(manualNumbers_3, LottoType.MANUAL));
     }
 }

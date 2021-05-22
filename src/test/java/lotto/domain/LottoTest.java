@@ -23,7 +23,7 @@ class LottoTest {
     @DisplayName("지난 주 당첨번호와 매칭 테스트")
     void match() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers, LottoType.MANUAL);
 
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
         LottoNumber bonusNumber = LottoNumber.from(6);
