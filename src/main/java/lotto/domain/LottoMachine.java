@@ -11,7 +11,7 @@ public class LottoMachine {
         int lottoSize = amount / Lotto.PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = lottoSize; i > 0; i--) {
-            lottos.add(new Lotto(LottoNumberGenerator.get()));
+            lottos.add(new Lotto(LottoNumberGenerator.getBalls()));
         }
         return lottos;
     }

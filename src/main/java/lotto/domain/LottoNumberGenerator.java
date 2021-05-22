@@ -17,11 +17,16 @@ public class LottoNumberGenerator {
 
     }
 
-    public static List<Integer> get() {
-        List<Integer> shuffle = new ArrayList<>(SAMPLE);
-        Collections.shuffle(shuffle);
+    public static List<Integer> getBalls() {
+        List<Integer> shuffle = shuffledList();
         shuffle = shuffle.subList(0, Lotto.LOTTO_SIZE);
         shuffle.sort(Integer::compareTo);
+        return shuffle;
+    }
+
+    private static List<Integer> shuffledList() {
+        List<Integer> shuffle = new ArrayList<>(SAMPLE);
+        Collections.shuffle(shuffle);
         return shuffle;
     }
 }
