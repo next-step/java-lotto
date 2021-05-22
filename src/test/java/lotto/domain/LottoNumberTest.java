@@ -19,10 +19,10 @@ public class LottoNumberTest {
 
 	@Test
 	@DisplayName("당첨번호와 일치하는지 여부를 테스트")
-	void matchNumber() {
+	void equals() {
 		LottoNumber lottoNumber = new LottoNumber(1);
-		Assertions.assertThat(lottoNumber.matchNumber(1)).isTrue();
-		Assertions.assertThat(lottoNumber.matchNumber(2)).isFalse();
+		Assertions.assertThat(lottoNumber.equals(new LottoNumber(1))).isTrue();
+		Assertions.assertThat(lottoNumber.equals(new LottoNumber(2))).isFalse();
 	}
 
 }

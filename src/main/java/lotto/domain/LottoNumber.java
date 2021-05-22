@@ -18,10 +18,6 @@ public class LottoNumber {
 		}
 	}
 
-	public boolean matchNumber(int winNumber) {
-		return this.number == winNumber;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
