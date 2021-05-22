@@ -1,8 +1,10 @@
 package lotto.domain.generator;
 
-import lotto.domain.Lottos;
+import java.util.List;
+
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 
 public interface LottosGenerator {
-    Lottos generate(Money money);
+    List<Lotto> generate(Money money);
 }
