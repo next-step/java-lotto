@@ -16,6 +16,7 @@ public class OutputView extends View {
 	public static final String EARNING_RATE_FORMAT = "총 수익률은 %.2f입니다.";
 	public static final String SCORE_BOARD_TITLE = "당첨 통계";
 	public static final String LINE_TEXT = "--------";
+	public static final String EXIT_LOTTO_MESSAGE = "구매한 로또가 없어 로또 게임을 종료합니다.";
 
 	public void printLottoCount(LottoCount lottoCount) {
 		out.printf(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getCount());
@@ -47,5 +48,9 @@ public class OutputView extends View {
 		if (earningRate < 1) {
 			out.print(EARNING_RATE_LOSS_MESSAGE);
 		}
+	}
+
+	public void printExitLottoGame() {
+		out.println(EXIT_LOTTO_MESSAGE);
 	}
 }

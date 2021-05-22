@@ -40,4 +40,8 @@ public class LottoCount {
 	public int getCount() {
 		return count;
 	}
+
+	public boolean isGreaterThanZero() {
+		return this.count > 0;
+	}
 }

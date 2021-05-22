@@ -23,6 +23,15 @@ public class LottoExecutor {
 		LottoCount lottoCount = new LottoCount(purchaseMoneyInput);
 		this.outputView.printLottoCount(lottoCount);
 
+		if (!lottoCount.isGreaterThanZero()) {
+			this.outputView.printExitLottoGame();
+			return;
+		}
+
+		this.playLotto(lottoCount);
+	}
+
+	private void playLotto(LottoCount lottoCount) {
 		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
 		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
 		this.outputView.printAutomaticLotto(lottos);
