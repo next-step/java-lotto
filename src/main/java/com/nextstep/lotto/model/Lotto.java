@@ -1,7 +1,9 @@
 package com.nextstep.lotto.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 public class Lotto {
@@ -12,6 +14,14 @@ public class Lotto {
 
 	public Lotto() {
 		generateNumbers();
+	}
+
+	public Lotto(List<LottoNumber> lottoNumbers) {
+		Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+		if (lottoNumberSet.size() != LOTTO_SIZE) {
+			throw new IllegalArgumentException("로또의 숫자는 6개만 가능합니다.");
+		}
+		this.lottoNumbers = lottoNumbers;
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
