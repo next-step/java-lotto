@@ -1,4 +1,4 @@
-package com.lotto;
+package com.lotto.ui;
 
 public enum Message {
     REQUIRE_LOTTO_PRICE("구매금액을 입력해 주세요."),
@@ -8,7 +8,9 @@ public enum Message {
     WINNING_STATISTICS_DETAIL("%s개 일치 (%s)- %d개"),
     INVESTMENT("총 수익률은 %.2f 입니다."),
     PRICE_FORMAT_EXCEPTION("가격이 올바르지 않습니다."),
-    WRONG_INPUT("입력값이 올바르지 않습니다.");
+    WRONG_INPUT("입력값이 올바르지 않습니다."),
+    WRONG_LOTTO_NUMBER_COUNT("로또 번호는 6개여야만 합니다."),
+    UNDER_UNIT_PRICE("가격은 1000원 이상의 숫자만 가능합나다.");
 
     private String message;
 

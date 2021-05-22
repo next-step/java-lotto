@@ -1,4 +1,4 @@
-package com.lotto;
+package com.lotto.domain;
 
 public enum LottoReward {
     THREE(5000) {

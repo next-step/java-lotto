@@ -1,4 +1,4 @@
-package com.lotto;
+package com.lotto.domain;
 
 import java.util.*;
 
@@ -13,11 +13,17 @@ public class LottoGroup {
         return lottoList.size();
     }
 
+    public List<Lotto> lottoList() {
+        return lottoList;
+    }
+
     public Map<LottoReward, Integer> winningLottoMap(Set<Integer> winningNumbers) {
         Map<LottoReward, Integer> winningLottoMap = new HashMap<>();
         for (Lotto lotto : lottoList) {
             LottoReward reward = lotto.reward(winningNumbers);
-            winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
+            if (reward != LottoReward.NOTHING) {
+                winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
+            }
         }
 
         return winningLottoMap;
@@ -37,6 +43,6 @@ public class LottoGroup {
         int investment = lottoList.size() * Lotto.UNIT_PRICE;
         int totalReward = totalReward(winningNumbers);
 
-        return totalReward/investment;
+        return totalReward / investment;
     }
 }

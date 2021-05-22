@@ -1,9 +1,9 @@
-package com.lotto;
+package com.lotto.domain;
 
 import java.util.List;
 import java.util.Set;
 
-import static com.lotto.LottoReward.*;
+import static com.lotto.domain.LottoReward.*;
 
 public final class Lotto {
 

@@ -1,9 +1,12 @@
-package com.lotto;
+package com.lotto.ui;
+
+import com.lotto.domain.Lotto;
+import com.lotto.domain.LottoReward;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.lotto.Message.*;
+import static com.lotto.ui.Message.*;
 
 public class OutputView {
 
