@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoTickets {
 
@@ -16,11 +14,12 @@ public class LottoTickets {
 
     private int purchaseAmount;
     private final List<LottoTicket> lottoTickets;
-    private final LottoResult lottoResult = new LottoResult(purchaseAmount);
+    private LottoResult lottoResult;
 
     public LottoTickets(int amount) throws IllegalArgumentException {
         checkValidInput(amount);
         checkDividable(amount);
+        lottoResult = new LottoResult(amount);
         this.purchaseAmount = amount;
         this.lottoTickets = issueTickets(purchaseAmount / PRICE_PER_TICKET);
     }
@@ -39,7 +38,6 @@ public class LottoTickets {
     }
 
     public LottoResult matchingResultWith(WinningNumbers winningNumbers) {
-        Map<MatchStatus, Integer> result = new HashMap<>();
         for (LottoTicket ticket : lottoTickets) {
             MatchStatus status = ticket.matchingStatusWith(winningNumbers);
             lottoResult.updateValue(status);
