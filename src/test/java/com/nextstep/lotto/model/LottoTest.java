@@ -2,6 +2,10 @@ package com.nextstep.lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +23,14 @@ public class LottoTest {
 	void 로또가_6개의_로또넘버를_가지는지_테스트() {
 		Lotto lotto = new Lotto();
 		assertThat(lotto.size()).isEqualTo(6);
+	}
+
+	@DisplayName("랜덤한 중복되지 않는 숫자를 발생시키는지 테스트")
+	@Test
+	void 랜덤한_중복되지않는_숫자를_발생새키는지_테스트() {
+		Lotto lotto = new Lotto();
+		List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+		Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+		assertThat(lottoNumbers.size() == lottoNumberSet.size()).isTrue();
 	}
 }

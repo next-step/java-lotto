@@ -1,6 +1,7 @@
 package com.nextstep.lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -13,10 +14,11 @@ public class Lotto {
 	}
 
 	private void generateNumbers() {
-		lottoNumbers = new ArrayList<>();
-		for (int i = 0; i < LOTTO_SIZE; i++) {
-			lottoNumbers.add(new LottoNumber(i + 1));
+		List<Integer> numberList = new ArrayList<>();
+		for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
+			numberList.add(i);
 		}
+		lottoNumbers = makeRandomNumber(numberList);
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
@@ -25,5 +27,14 @@ public class Lotto {
 
 	public int size() {
 		return this.lottoNumbers.size();
+	}
+
+	private List<LottoNumber> makeRandomNumber(List<Integer> numberList) {
+		Collections.shuffle(numberList);
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		for (int i = 0; i < LOTTO_SIZE; i++) {
+			lottoNumbers.add(new LottoNumber(numberList.get(i)));
+		}
+		return lottoNumbers;
 	}
 }
