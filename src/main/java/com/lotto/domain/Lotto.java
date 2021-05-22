@@ -8,6 +8,7 @@ import static com.lotto.domain.LottoReward.*;
 public final class Lotto {
 
     public static final int UNIT_PRICE = 1000;
+    public static final int LOTTO_COUNT = 6;
 
     private List<Integer> lottoNumbers;
 

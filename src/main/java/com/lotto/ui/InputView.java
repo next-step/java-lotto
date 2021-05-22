@@ -1,5 +1,7 @@
 package com.lotto.ui;
 
+import com.lotto.domain.Lotto;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -13,7 +15,7 @@ public class InputView {
         int inputPrice = 0;
         try {
             inputPrice = Integer.parseInt(scanner.nextLine());
-            if(inputPrice < 1000) {
+            if(inputPrice < Lotto.UNIT_PRICE) {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {
@@ -33,7 +35,7 @@ public class InputView {
             for (String number : numbers) {
                 winningNumbers.add(Integer.valueOf(number.trim()));
             }
-            if (winningNumbers.size() != 6) {
+            if (winningNumbers.size() != Lotto.LOTTO_COUNT) {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException exception) {
