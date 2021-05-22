@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
 	private Lottos lottos;
-
+	private List<Lotto> lottoList;
 	@BeforeEach
 	void before() {
-		List<Lotto> lottoList = new ArrayList<>();
-
+		lottoList = new ArrayList<>();
 		lottoList.add(new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16)));
 		lottoList.add(new Lotto(Arrays.asList(21, 22, 23, 24, 15, 16)));
 		lottoList.add(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
@@ -35,6 +34,9 @@ public class LottosTest {
 		assertThat(lottos).isNotNull();
 		for (Prize prize : Prize.values()) {
 			assertThat(lottos.status(prize)).isEqualTo(0);
+		}
+		for (Lotto lotto : lottos.findAll()) {
+			assertThat(lottoList.contains(lotto)).isTrue();
 		}
 	}
 

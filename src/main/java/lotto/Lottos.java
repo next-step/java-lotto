@@ -50,4 +50,8 @@ public class Lottos {
 		}
 		return winAmount;
 	}
+
+	public List<Lotto> findAll() {
+		return lottos;
+	}
 }
