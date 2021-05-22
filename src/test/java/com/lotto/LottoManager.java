@@ -10,7 +10,7 @@ public class LottoManager {
 
     public LottoGroup issue(String price) {
         if (!pattern.matcher(price).find()) {
-            throw new IllegalArgumentException("price value is wrong.");
+            throw new IllegalArgumentException("가격 값이 올바르지 않습니다.");
         }
 
         int totalCount = Integer.parseInt(price) / Lotto.UNIT_PRICE;
