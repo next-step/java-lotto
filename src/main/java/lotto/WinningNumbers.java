@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class WinningNumbers {
 
-    private final int NUMBER_COUNT = 6;
+    public static final int NUMBER_COUNT = 6;
 
     private final TreeSet<LottoNumber> numbers;
 
