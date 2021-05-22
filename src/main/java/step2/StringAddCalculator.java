@@ -1,23 +1,18 @@
 package step2;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringAddCalculator {
 
+    private static final int BASE_ZERO_NUMBER = 0;
+
     public static int splitAndSum(String text) {
-        if (isNullOrEmpty(text)) return 0;
-        if (hasOneSize(text)) return Integer.parseInt(text);
+        if (isNullOrEmpty(text)) return BASE_ZERO_NUMBER;
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-        if (m.find()) {
-            return getSumOfTokens(m.group(2), m.group(1));
+
+        StringMatcher stringMatcher = new StringMatcher(text);
+        if (stringMatcher.find()) {
+            return getSumOfTokens(stringMatcher.text(), stringMatcher.delimiter());
         }
-        return getSumOfTokens(text,",|:");
-    }
-
-    private static boolean hasOneSize(String text) {
-        return text.length() == 1;
+        return getSumOfTokens(text, StringMatcher.DEFAULT_REGEX);
     }
 
     private static boolean isNullOrEmpty(String text) {
@@ -25,26 +20,16 @@ public class StringAddCalculator {
     }
 
     private static int getSumOfTokens(String text, String delimiter) {
-        String[] tokens = findNoNegativeTokens(text, delimiter);
-        return calculateTokens(tokens);
+        PositiveNumbers positiveNumbers = new PositiveNumbers(text.split(delimiter));
+        return calculateTokens(positiveNumbers);
     }
 
-    private static String[] findNoNegativeTokens(String input, String delimiter) {
-        String[] result = input.split(delimiter);
-        for (int i = 0; i < result.length; ++i) {
-            negativeCheck(result[i]);
-        }
-        return result;
-    }
-
-    private static void negativeCheck(String text) {
-        if (Integer.parseInt(text) < 0)
-            throw new RuntimeException("음수 입니다.");
-    }
-
-    private static int calculateTokens(String[] tokens) {
+    private static int calculateTokens(PositiveNumbers positiveNumbers) {
         int sum = 0;
-        for (int i = 0; i < tokens.length; ++i) sum += Integer.parseInt(tokens[i]);
+
+        for (int i = 0; i < positiveNumbers.length(); ++i) {
+            sum += positiveNumbers.getIntValue(i);
+        }
         return sum;
     }
 }
