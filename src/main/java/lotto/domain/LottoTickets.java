@@ -27,6 +27,19 @@ public class LottoTickets implements Iterable<LottoTicket> {
         this.lottoTickets = lottoTickets;
     }
 
+    public double totalReturnRate(LottoNumbers winNumber) {
+        double totalWinAmount = totalWinAmount(winNumber);
+        double purchaseAmount = lottoTickets.size() * LottoTicket.PRICE;
+        return Math.floor(totalWinAmount / purchaseAmount * 100) / 100;
+    }
+
+    private long totalWinAmount(LottoNumbers winNumber) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.rank(winNumber))
+                .mapToLong(LottoRank::winAmount)
+                .sum();
+    }
+
     @Override
     public Iterator<LottoTicket> iterator() {
         return lottoTickets.iterator();
