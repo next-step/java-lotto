@@ -26,6 +26,7 @@ public class LottoMachine {
 
     public LottoWin result(Lotto winLotto) {
         LottoWin lottoWin = new LottoWin();
+        lottos.forEach(lotto -> lottoWin.hit(lotto.match(winLotto.lottoNumbers())));
         return lottoWin;
     }
 }
