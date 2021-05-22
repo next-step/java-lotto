@@ -3,7 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +26,17 @@ public class LottoSponsorTest {
     Ticket winningTicket = new Ticket("1,2,3,4,5,6");
     Purchase purchase = new Purchase("1000");
     LottoSponsor lottoSponsor = new LottoSponsor(tickets, winningTicket, purchase);
-    Map<Prize, Integer> scores = new HashMap<>();
+    Map<Prize, Integer> scores = new EnumMap<>(Prize.class);
 
     @BeforeEach
     void setUp() {
         scores.put(Prize.SIX, 2);
         scores.put(Prize.FIVE, 1);
         scores.put(Prize.FOUR, 1);
+        scores.put(Prize.THREE, 0);
+        scores.put(Prize.TWO, 0);
+        scores.put(Prize.ONE, 0);
+        scores.put(Prize.ZERO, 0);
     }
 
     @DisplayName("당첨된 티켓 수를 센다.")

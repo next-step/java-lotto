@@ -12,7 +12,7 @@ public enum Message {
     RESULT_5("5개 일치 (1,500,000원) - %d개"),
     RESULT_6("6개 일치 (2,000,000,000원) - %d개"),
     RESULT_TOTAL("당첨금은 %d 원 입니다."),
-    RESULT_TAIL("총 수익률은 %.2f 입니다. (0 기준)");
+    RESULT_TAIL("총 수익률은 %.2f 입니다. (1 기준)");
 
     private String message;
 

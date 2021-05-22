@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,18 +25,17 @@ public class LottoSponsor {
     }
 
     protected Map<Prize, Integer> countScores(List<Ticket> tickets, Ticket winningTicket) {
-        Map<Prize, Integer> scores = new HashMap<>();
+        Map<Prize, Integer> scores = new EnumMap<>(Prize.class);
+        for (Prize prize : Prize.values()) {
+            scores.put(prize, 0);
+        }
 
         for (Ticket ticket : tickets) {
             int index = ticket.countSameNumbers(winningTicket);
-
             Prize key = Prize.valueOf(index);
-
-            int score = scores.getOrDefault(key, 0) + 1;
-
+            int score = scores.get(key) + 1;
             scores.put(key, score);
         }
-
         return scores;
     }
 
@@ -52,8 +51,7 @@ public class LottoSponsor {
     }
 
     protected float convertToEarningRate(long totalPrizeMoney, int payment) {
-        long difference = totalPrizeMoney - payment;
-        return difference / (float)payment;
+        return totalPrizeMoney / (float)payment;
     }
 
     public void show() {
