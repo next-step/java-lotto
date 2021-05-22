@@ -31,8 +31,13 @@ public class OmrCardInfo implements Info<OmrCard> {
 
     private void markings(int size, OmrCard omrCard) {
         for (int i = 0; i < size; i++) {
-            omrCard.marking(SixBall.get());
+            SixBall sixBall = SixBall.get();
+            omrCard.marking(sixBall);
+
+            input.response(sixBall.toString());
         }
+
+        input.response("\n");
     }
 
     private int money() throws InputException {
