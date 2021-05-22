@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-import static lotto.domain.LottoGameOptions.MAP_LOTTO_RESULT;
+import static lotto.domain.LottoRank.MAP_LOTTO_RESULT;
 
 public class LottoResultPack {
-    private Map<LottoResult, Integer> lottoResultPack;
+    private Map<LottoRank, Integer> lottoResultPack;
 
     public LottoResultPack() {
         lottoResultPack = new HashMap<>();
@@ -15,16 +15,16 @@ public class LottoResultPack {
     }
 
     private void initEachResultCount() {
-        for (LottoResult result : MAP_LOTTO_RESULT.values()) {
+        for (LottoRank result : MAP_LOTTO_RESULT.values()) {
             lottoResultPack.put(result, 0);
         }
     }
 
-    public void put(LottoResult matchResult) {
+    public void put(LottoRank matchResult) {
         lottoResultPack.merge(matchResult, 1, Integer::sum);
     }
 
-    public int countOf(LottoResult lottoResult) {
+    public int countOf(LottoRank lottoResult) {
         return lottoResultPack.get(lottoResult);
     }
 
@@ -35,7 +35,7 @@ public class LottoResultPack {
     private int sumOfProfit() {
         int sum = 0;
 
-        for (LottoResult result : MAP_LOTTO_RESULT.values()) {
+        for (LottoRank result : MAP_LOTTO_RESULT.values()) {
             sum += result.profit() * lottoResultPack.get(result);
         }
 

@@ -6,7 +6,7 @@ import static lotto.domain.LottoGameOptions.*;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
-    private LottoResult result;
+    private LottoRank result;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

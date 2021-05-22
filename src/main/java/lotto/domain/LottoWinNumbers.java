@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static lotto.domain.LottoGameOptions.*;
+import static lotto.domain.LottoRank.MAP_LOTTO_RESULT;
 
 public class LottoWinNumbers {
     private List<Integer> winNumbers = new ArrayList<>();
+    private int bonusNumber = 0;
 
     public LottoWinNumbers(String numbers) {
         initWinNumbers(numbers.split(", |,"));
@@ -37,27 +38,41 @@ public class LottoWinNumbers {
     public LottoResultPack checkAllOf(Lottos lottos) {
         LottoResultPack resultPack = new LottoResultPack();
 
-        Iterator<Lotto> it = lottos.iterator();
-        while (it.hasNext()) {
-            resultPack.put(matchResultOf(it.next()));
+        for (Lotto lotto : lottos.values()) {
+            resultPack.put(matchResultOf(lotto));
         }
 
         return resultPack;
     }
 
-    protected LottoResult matchResultOf(Lotto lotto) {
-        int match = 0;
-
+    protected LottoRank matchResultOf(Lotto lotto) {
+        int matchCount = 0;
+        boolean matchBonus = false;
         for (int i = 0; i < LOTTO_NUMBER_COUNT; ++i) {
-            final int index = i;
-            match += winNumbers.stream().filter(n -> n == lotto.numbers(index)).count();
+            for (int j = 0; j < LOTTO_NUMBER_COUNT; ++j) {
+                if (winNumbers.get(i) == lotto.numbers(j)) {
+                    ++matchCount;
+                }
+                if (this.bonusNumber == lotto.numbers(j)) {
+                    matchBonus = true;
+                }
+            }
+//            final int index = i;
+//            matchCount += winNumbers.stream()
+//                                    .filter(n -> n == lotto.numbers(index))
+//                                    .count();
         }
 
-        return measureLucky(match);
+        return LottoRank.valueOf(matchCount, matchBonus);
+
+//        return measureLucky(matchCount);
     }
 
-    private LottoResult measureLucky(int count) {
-        return MAP_LOTTO_RESULT.get(count);
+    private LottoRank measureLucky(int matchCount) {
+        return MAP_LOTTO_RESULT.get(matchCount);
     }
 
+    public void addBonusNumber(int bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
 }

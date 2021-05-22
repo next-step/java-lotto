@@ -21,7 +21,7 @@ public class LottoTest {
 
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
-        assertThat(resultPack.countOf(LottoResult.SECOND)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
@@ -48,13 +48,12 @@ public class LottoTest {
 
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
-        assertThat(resultPack.countOf(LottoResult.MATCH_0)).isEqualTo(1);
-        assertThat(resultPack.countOf(LottoResult.MATCH_1)).isEqualTo(0);
-        assertThat(resultPack.countOf(LottoResult.MATCH_2)).isEqualTo(0);
-        assertThat(resultPack.countOf(LottoResult.MATCH_3)).isEqualTo(0);
-        assertThat(resultPack.countOf(LottoResult.MATCH_4)).isEqualTo(1);
-        assertThat(resultPack.countOf(LottoResult.MATCH_5)).isEqualTo(0);
-        assertThat(resultPack.countOf(LottoResult.MATCH_6)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoRank.MISS)).isEqualTo(1);
+        assertThat(resultPack.countOf(LottoRank.FIFTH)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoRank.FOURTH)).isEqualTo(1);
+        // 보너스 포함된 2등은 없음.
+        assertThat(resultPack.countOf(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(resultPack.countOf(LottoRank.FIRST)).isEqualTo(1);
     }
 
     @Test
