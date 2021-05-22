@@ -27,7 +27,8 @@ public class LottoAppController {
     private LottoReport getReport(List<Lotto> purchasedLottos) {
         PrintView.askWinningNumber();
         List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
-        // TODO bonusNumber 사용자에게 입력 받은 값으로 변경
-        return new LottoReport(new WinningLotto(lastWinningNumbers, 1), purchasedLottos);
+        PrintView.askBonusNumber();
+        int bonusNumber = InputView.getBonusNumber();
+        return new LottoReport(new WinningLotto(lastWinningNumbers, bonusNumber), purchasedLottos);
     }
 }
