@@ -22,8 +22,12 @@ public class LottoExecutor {
 		LottoCount lottoCount = new LottoCount(purchaseMoneyInput);
 		this.outputView.printLottoCount(lottoCount);
 
-		LottoGame lottoGame = new LottoGame(new AutomaticLottoGenerator());
-		List<Lotto> lottos = lottoGame.getLottos(lottoCount);
+		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
+		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
 		this.outputView.printAutomaticLotto(lottos);
+
+		String winningNumberInput = this.inputView.makeWinningNumberInput();
+		Lotto winningLotto = lottoGameGenerator.getWinningLotto(winningNumberInput);
+
 	}
 }
