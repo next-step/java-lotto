@@ -23,81 +23,81 @@ import lotto.exceptions.NumberOutOfBoundsException;
 
 public class WinningTicketControllerTest {
 
-	Purchase purchase = new Purchase("12345");
-	List<Ticket> tickets = Arrays.asList(
-		new Ticket("1,2,3,4,5,6"),
-		new Ticket("1,2,3,4,5,6"),
-		new Ticket("1,2,3,4,5,11"),
-		new Ticket("1,2,3,4,10,11")
-	);
-	Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    Purchase purchase = new Purchase("12345");
+    List<Ticket> tickets = Arrays.asList(
+        new Ticket("1,2,3,4,5,6"),
+        new Ticket("1,2,3,4,5,6"),
+        new Ticket("1,2,3,4,5,11"),
+        new Ticket("1,2,3,4,10,11")
+    );
+    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
-	Model model = new Model();
-	Lotto lotto = new Lotto(model);
+    Model model = new Model();
+    Lotto lotto = new Lotto(model);
 
-	WinningTicketController winningTicketController;
+    WinningTicketController winningTicketController;
 
-	@BeforeEach
-	void setUp() {
-		lotto.storage().savePurchase(purchase);
-		lotto.storage().saveAutomatedTickets(tickets);
-		lotto.storage().saveWinningTicket(winningTicket);
+    @BeforeEach
+    void setUp() {
+        lotto.storage().savePurchase(purchase);
+        lotto.storage().saveAutomatedTickets(tickets);
+        lotto.storage().saveWinningTicket(winningTicket);
 
-		winningTicketController = new WinningTicketController(lotto);
-	}
+        winningTicketController = new WinningTicketController(lotto);
+    }
 
-	@DisplayName("당첨 번호 입력 성공")
-	@ParameterizedTest(name = "입력: \"{0}\", 출력: \"{1}\"")
-	@CsvSource(value = {
-		"1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]",
-		"45,44,43,42,41,40:[40, 41, 42, 43, 44, 45]"
-	}, delimiter = ':')
-	void askWinningTicket(String input, String expected) {
-		winningTicketController.askWinningTicket(input);
+    @DisplayName("당첨 번호 입력 성공")
+    @ParameterizedTest(name = "입력: \"{0}\", 출력: \"{1}\"")
+    @CsvSource(value = {
+        "1,2,3,4,5,6:[1, 2, 3, 4, 5, 6]",
+        "45,44,43,42,41,40:[40, 41, 42, 43, 44, 45]"
+    }, delimiter = ':')
+    void askWinningTicket(String input, String expected) {
+        winningTicketController.askWinningTicket(input);
 
-		assertThat(lotto.storage().loadWinningTicket().toString()).isEqualTo(expected);
-	}
+        assertThat(lotto.storage().loadWinningTicket().toString()).isEqualTo(expected);
+    }
 
-	@DisplayName("잘못된 입력으로 당첨 번호 입력을 실패한다.")
-	@ParameterizedTest(name = "입력: \"{0}\"")
-	@ValueSource(strings = {"", "a"})
-	void createTicket_InvalidPattern_ExceptionThrown(String input) {
-		assertThatExceptionOfType(InvalidPatternException.class).isThrownBy(() -> {
-			winningTicketController.askWinningTicket(input);
-		});
-	}
+    @DisplayName("잘못된 입력으로 당첨 번호 입력을 실패한다.")
+    @ParameterizedTest(name = "입력: \"{0}\"")
+    @ValueSource(strings = {"", "a"})
+    void createTicket_InvalidPattern_ExceptionThrown(String input) {
+        assertThatExceptionOfType(InvalidPatternException.class).isThrownBy(() -> {
+            winningTicketController.askWinningTicket(input);
+        });
+    }
 
-	@DisplayName("숫자 6개가 아니면 당첨 번호 입력을 실패한다.")
-	@ParameterizedTest(name = "입력: \"{0}\"")
-	@ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
-	void createTicket_Not6_ExceptionThrown(String input) {
-		assertThatExceptionOfType(InsufficientNumbersException.class).isThrownBy(() -> {
-			winningTicketController.askWinningTicket(input);
-		});
-	}
+    @DisplayName("숫자 6개가 아니면 당첨 번호 입력을 실패한다.")
+    @ParameterizedTest(name = "입력: \"{0}\"")
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    void createTicket_Not6_ExceptionThrown(String input) {
+        assertThatExceptionOfType(InsufficientNumbersException.class).isThrownBy(() -> {
+            winningTicketController.askWinningTicket(input);
+        });
+    }
 
-	@DisplayName("1 ~ 45를 벗어난 숫자를 입력하여 티켓 생성을 실패한다.")
-	@ParameterizedTest(name = "입력: \"{0}\"")
-	@ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,99"})
-	void createTicket_NumberOutOfBounds_ExceptionThrown(String input) {
-		assertThatExceptionOfType(NumberOutOfBoundsException.class).isThrownBy(() -> {
-			winningTicketController.askWinningTicket(input);
-		});
-	}
+    @DisplayName("1 ~ 45를 벗어난 숫자를 입력하여 티켓 생성을 실패한다.")
+    @ParameterizedTest(name = "입력: \"{0}\"")
+    @ValueSource(strings = {"0,1,2,3,4,5", "1,2,3,4,5,99"})
+    void createTicket_NumberOutOfBounds_ExceptionThrown(String input) {
+        assertThatExceptionOfType(NumberOutOfBoundsException.class).isThrownBy(() -> {
+            winningTicketController.askWinningTicket(input);
+        });
+    }
 
-	@DisplayName("중복된 숫자를 입력하여 당첨 번호 입력을 실패한다.")
-	@ParameterizedTest(name = "입력: \"{0}\"")
-	@ValueSource(strings = {"1,2,2,3,4,5"})
-	void createTicket_OutOfBoundNumber_ExceptionThrown(String input) {
-		assertThatExceptionOfType(DuplicateNumbersException.class).isThrownBy(() -> {
-			winningTicketController.askWinningTicket(input);
-		});
-	}
+    @DisplayName("중복된 숫자를 입력하여 당첨 번호 입력을 실패한다.")
+    @ParameterizedTest(name = "입력: \"{0}\"")
+    @ValueSource(strings = {"1,2,2,3,4,5"})
+    void createTicket_OutOfBoundNumber_ExceptionThrown(String input) {
+        assertThatExceptionOfType(DuplicateNumbersException.class).isThrownBy(() -> {
+            winningTicketController.askWinningTicket(input);
+        });
+    }
 
-	@DisplayName("다음 컨트롤러로 변경한다.")
-	@Test
-	void toNextController() {
-		winningTicketController.toNextController();
-		assertThat(lotto.compareController(ResultController.class)).isTrue();
-	}
+    @DisplayName("다음 컨트롤러로 변경한다.")
+    @Test
+    void toNextController() {
+        winningTicketController.toNextController();
+        assertThat(lotto.compareController(ResultController.class)).isTrue();
+    }
 }

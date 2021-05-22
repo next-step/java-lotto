@@ -2,10 +2,10 @@ package lotto.controllers;
 
 public class EndController implements Controller {
 
-	public EndController() {
-	}
+    public EndController() {
+    }
 
-	@Override
-	public void run() {
-	}
+    @Override
+    public void run() {
+    }
 }

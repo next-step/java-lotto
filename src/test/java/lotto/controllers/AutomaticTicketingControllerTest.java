@@ -12,37 +12,37 @@ import lotto.Purchase;
 
 public class AutomaticTicketingControllerTest {
 
-	private static final int amount = 12;
-	Purchase purchase = new Purchase("12345");
+    private static final int amount = 12;
+    Purchase purchase = new Purchase("12345");
 
-	Model model = new Model();
-	Lotto lotto = new Lotto(model);
+    Model model = new Model();
+    Lotto lotto = new Lotto(model);
 
-	AutomaticTicketingController automaticTicketingController;
+    AutomaticTicketingController automaticTicketingController;
 
-	@BeforeEach
-	void setUp() {
-		lotto.storage().savePurchase(purchase);
-		automaticTicketingController = new AutomaticTicketingController(lotto);
-	}
+    @BeforeEach
+    void setUp() {
+        lotto.storage().savePurchase(purchase);
+        automaticTicketingController = new AutomaticTicketingController(lotto);
+    }
 
-	@DisplayName("티켓 수 불러오기")
-	@Test
-	void loadTotalTickets() {
-		assertThat(automaticTicketingController.loadTotalTickets()).isEqualTo(amount);
-	}
+    @DisplayName("티켓 수 불러오기")
+    @Test
+    void loadTotalTickets() {
+        assertThat(automaticTicketingController.loadTotalTickets()).isEqualTo(amount);
+    }
 
-	@DisplayName("자동 티켓 불러오기")
-	@Test
-	void loadNewTickets() {
-		assertThat(automaticTicketingController.loadNewTickets(amount).size()).isEqualTo(amount);
-	}
+    @DisplayName("자동 티켓 불러오기")
+    @Test
+    void loadNewTickets() {
+        assertThat(automaticTicketingController.loadNewTickets(amount).size()).isEqualTo(amount);
+    }
 
-	@DisplayName("다음 컨트롤러로 변경한다.")
-	@Test
-	void toNextController() {
-		automaticTicketingController.toNextController();
-		assertThat(lotto.compareController(WinningTicketController.class)).isTrue();
-	}
+    @DisplayName("다음 컨트롤러로 변경한다.")
+    @Test
+    void toNextController() {
+        automaticTicketingController.toNextController();
+        assertThat(lotto.compareController(WinningTicketController.class)).isTrue();
+    }
 
 }

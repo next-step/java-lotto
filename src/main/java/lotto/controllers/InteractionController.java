@@ -5,24 +5,24 @@ import lotto.views.Display;
 
 public abstract class InteractionController extends SimpleController {
 
-	public InteractionController(Lotto lotto) {
-		super(lotto);
-	}
+    public InteractionController(Lotto lotto) {
+        super(lotto);
+    }
 
-	@Override
-	public void run() {
-		show();
-		process();
-	}
+    @Override
+    public void run() {
+        show();
+        process();
+    }
 
-	private void process() {
-		try {
-			action();
-			toNextController();
-		} catch (Exception e) {
-			Display.error(e.getMessage());
-		}
-	}
+    private void process() {
+        try {
+            action();
+            toNextController();
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+        }
+    }
 
-	abstract void action();
+    abstract void action();
 }
