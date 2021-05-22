@@ -7,12 +7,22 @@ import java.util.Map;
 
 public class LottoTickets {
 
+    public static final String ERROR_AMOUNT_CANNOT_BE_DIVIDED = "로또 가격으로 정확히 나누어떨어지는 금액을 입력해주세요.";
+    public static final String ERROR_AMOUNT_OUT_OF_RANGE = "1천원 이상, 10만원 이하의 금액을 입력해주세요.";
+
+    public static final int PRICE_PER_TICKET = 1000;
+    public static final int MINIMUM_PURCHASE_AMOUNT = 1000;
+    public static final int MAXIMUM_PURCHASE_AMOUNT = 100000;
+
+    private int purchaseAmount;
     private final List<LottoTicket> lottoTickets;
+    private final LottoResult lottoResult = new LottoResult(purchaseAmount);
 
-    private final LottoResult lottoResult = new LottoResult();
-
-    public LottoTickets(int count) {
-        this.lottoTickets = issueTickets(count);
+    public LottoTickets(int amount) throws IllegalArgumentException {
+        checkValidInput(amount);
+        checkDividable(amount);
+        this.purchaseAmount = amount;
+        this.lottoTickets = issueTickets(purchaseAmount / PRICE_PER_TICKET);
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -28,10 +38,6 @@ public class LottoTickets {
         return ticketList;
     }
 
-    public int counts() {
-        return lottoTickets.size();
-    }
-
     public LottoResult matchingResultWith(WinningNumbers winningNumbers) {
         Map<MatchStatus, Integer> result = new HashMap<>();
         for (LottoTicket ticket : lottoTickets) {
@@ -39,6 +45,19 @@ public class LottoTickets {
             lottoResult.updateValue(status);
         }
         return lottoResult;
+    }
+
+    private void checkValidInput(int amount) throws IllegalArgumentException {
+        if (amount < MINIMUM_PURCHASE_AMOUNT
+                || amount > MAXIMUM_PURCHASE_AMOUNT) {
+            throw new IllegalArgumentException(ERROR_AMOUNT_OUT_OF_RANGE);
+        }
+    }
+
+    private void checkDividable(int amount) throws IllegalArgumentException {
+        if (amount % PRICE_PER_TICKET != 0) {
+            throw new IllegalArgumentException(ERROR_AMOUNT_CANNOT_BE_DIVIDED);
+        }
     }
 
     public String toString() {

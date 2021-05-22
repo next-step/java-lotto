@@ -26,7 +26,7 @@ public class LottoTicketTest {
         MatchStatus matchStatus = lottoTicket.matchingStatusWith(winningNumbers);
 
         //
-        assertThat(matchStatus).isEqualTo(MatchStatus.ZERO);
+        assertThat(matchStatus).isEqualTo(MatchStatus.ELSE);
     }
 
     @DisplayName("[,] 출력 포맷 점검")
