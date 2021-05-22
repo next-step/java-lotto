@@ -7,18 +7,25 @@ public class Calculator {
 
     private final List<Integer> values;
 
-    public Calculator(String input) {
-        String[] split = input.split(",");
+    public Calculator(String input, String delimiter) {
+        this.values = makeOperandsByInput(input, delimiter);
+    }
 
+    private List<Integer> makeOperandsByInput(String input, String delimiter) {
         List<Integer> values = new ArrayList<>();
-        for (String value : split) {
+
+        for (String value : splitOperandsByDelimiter(input, delimiter)) {
             values.add(Integer.parseInt(value));
         }
 
-        this.values = values;
+        return values;
     }
 
-    public int sum2() {
+    private String[] splitOperandsByDelimiter(String input, String delimiter) {
+        return input.split(delimiter);
+    }
+
+    public int sum() {
         int sum = 0;
 
         for (int value : values) {
@@ -26,9 +33,5 @@ public class Calculator {
         }
 
         return sum;
-    }
-
-    public static int sum(int left, int right) {
-        return left + right;
     }
 }
