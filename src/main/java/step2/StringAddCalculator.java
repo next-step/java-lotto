@@ -21,10 +21,10 @@ public class StringAddCalculator {
 
     private static int getSumOfTokens(String text, String delimiter) {
         PositiveNumbers positiveNumbers = new PositiveNumbers(text.split(delimiter));
-        return calculateTokens(positiveNumbers);
+        return calculateText(positiveNumbers);
     }
 
-    private static int calculateTokens(PositiveNumbers positiveNumbers) {
+    private static int calculateText(PositiveNumbers positiveNumbers) {
         int sum = 0;
 
         for (int i = 0; i < positiveNumbers.length(); ++i) {
