@@ -19,10 +19,6 @@ public final class Lotto {
         validateLottoNumbers();
     }
 
-    public Lotto(Lotto lotto) {
-        this.lottoNumbers = lotto.lottoNumbers;
-    }
-
     private void validateLottoNumbers() {
         if (lottoNumbers.size() < LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_MESSAGE);
@@ -41,5 +37,10 @@ public final class Lotto {
 
     private boolean isContains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumbers);
     }
 }
