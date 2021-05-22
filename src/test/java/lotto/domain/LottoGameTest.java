@@ -18,8 +18,9 @@ class LottoGameTest {
 
         // when
         lottoGame.buyLotto(new TestLottoNumberGenerator());
+        Lottoes lottoes = lottoGame.getLottoes();
 
         // then
-        assertThat(lottoGame.getLottoes().size()).isEqualTo(expectedCount);
+        assertThat(lottoes.getLottoCount()).isEqualTo(expectedCount);
     }
 }

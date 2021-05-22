@@ -42,6 +42,16 @@ public class Lotto {
         }
     }
 
+    public Rank getRank(final Lotto winnerLotto) {
+        return Rank.valueOf(getMatchCount(winnerLotto));
+    }
+
+    private int getMatchCount(final Lotto winnerLotto) {
+        return (int) winnerLotto.getLotto().stream()
+                .filter(lottoNumber -> this.lotto.contains(lottoNumber))
+                .count();
+    }
+
     public Set<LottoNumber> getLotto() {
         return Collections.unmodifiableSet(lotto);
     }

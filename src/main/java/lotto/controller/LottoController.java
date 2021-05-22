@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoStatistics;
 import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
 import lotto.view.InputView;
@@ -11,11 +12,13 @@ public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
     private final NumberGenerator numberGenerator;
+    private final LottoStatistics lottoStatistics;
 
     public LottoController() {
         this.inputView = new InputView();
         this.resultView = new ResultView();
         this.numberGenerator = new LottoNumberGenerator();
+        this.lottoStatistics = new LottoStatistics();
     }
 
     public void play() {
@@ -24,5 +27,8 @@ public class LottoController {
         resultView.printLottoes(lottoGame);
 
         Lotto winnerLotto = Lotto.from(inputView.inputWinnerLottoNumbers());
+        lottoStatistics.init(lottoGame, winnerLotto);
+
+        resultView.printStatistics(lottoStatistics);
     }
 }

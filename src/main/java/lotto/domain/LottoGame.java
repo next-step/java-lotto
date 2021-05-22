@@ -27,7 +27,7 @@ public class LottoGame {
         return lottoes.getLottoCount();
     }
 
-    public List<Lotto> getLottoes() {
-        return lottoes.getLottoes();
+    public Lottoes getLottoes() {
+        return lottoes;
     }
 }

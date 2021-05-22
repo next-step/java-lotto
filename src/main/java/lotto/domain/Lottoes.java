@@ -26,6 +26,13 @@ public class Lottoes {
         return lottoes.size();
     }
 
+    public int getRankCount(final Lotto winnerLotto, final Rank rank) {
+        return (int) lottoes.stream()
+                .map(lotto -> lotto.getRank(winnerLotto))
+                .filter(rank1 -> rank1.equals(rank))
+                .count();
+    }
+
     public List<Lotto> getLottoes() {
         return Collections.unmodifiableList(lottoes);
     }
