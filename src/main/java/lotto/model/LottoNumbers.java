@@ -31,7 +31,7 @@ public class LottoNumbers {
 
 	private List<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
 		return numbers.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
