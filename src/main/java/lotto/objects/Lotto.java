@@ -16,7 +16,6 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        Collections.sort(numbers);
 
         return numbers;
     }

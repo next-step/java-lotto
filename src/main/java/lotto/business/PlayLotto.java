@@ -3,7 +3,6 @@ package lotto.business;
 import lotto.interfaces.Play;
 import lotto.objects.AllNumbers;
 import lotto.objects.Counter;
-import lotto.objects.Counts;
 import lotto.objects.Lotto;
 import lotto.objects.Lottos;
 import lotto.objects.WinningType;
@@ -18,10 +17,6 @@ public class PlayLotto implements Play {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final int NUMBER_COUNT_PER_GAME = 6;
     private static final int MAXIMUM_NUMBER = 45;
-    private static final int RANK_FOURTH = 3;
-    private static final int RANK_THIRD = 4;
-    private static final int RANK_SECOND = 5;
-    private static final int RANK_FIRST = 6;
 
     public int buyLotto(int money) {
         return money / PRICE_PER_LOTTO;
@@ -70,16 +65,16 @@ public class PlayLotto implements Play {
     }
 
     public WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto) {
-        if (count == RANK_FOURTH) {
+        if (count == WinningType.THREE.getCounts()) {
             return WinningType.THREE;
         }
-        if (count == RANK_THIRD) {
+        if (count == WinningType.FOUR.getCounts()) {
             return WinningType.FOUR;
         }
-        if (count == RANK_SECOND) {
+        if (count == WinningType.FIVE.getCounts()) {
             return compareBonusNumber(bonusNumber, myLotto);
         }
-        if (count == RANK_FIRST) {
+        if (count == WinningType.SIX.getCounts()) {
             return WinningType.SIX;
         }
         return WinningType.LOSE;
@@ -101,34 +96,13 @@ public class PlayLotto implements Play {
         return decideWinningType(count.getCount(), initLotto.getNumbers().get(6), myLotto);
     }
 
-    public Counts getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto) {
-        Counts counts = new Counts(Arrays.asList(0, 0, 0, 0, 0));
+    public List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto) {
+        List<WinningType> wins = new ArrayList<>();
         for (Lotto lotto : createdLottos.getLottos()) {
-            WinningType winningType = findSameNumbers(lastWinningLotto, lotto);
-
-            counts = upCount(winningType, counts);
+            wins.add(findSameNumbers(lastWinningLotto, lotto));
         }
 
-        return counts;
-    }
-
-    public Counts upCount(WinningType winningType, Counts counts) {
-        if (winningType == WinningType.THREE) {
-            counts.updateCount(0);
-        }
-        if (winningType == WinningType.FOUR) {
-            counts.updateCount(1);
-        }
-        if (winningType == WinningType.FIVE) {
-            counts.updateCount(2);
-        }
-        if (winningType == WinningType.FIVE_AND_BONUS) {
-            counts.updateCount(3);
-        }
-        if (winningType == WinningType.SIX) {
-            counts.updateCount(4);
-        }
-        return counts;
+        return wins;
     }
 
     public Lottos autoCreateLottos(int totalLotto) {

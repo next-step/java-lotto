@@ -3,6 +3,10 @@ package lotto.ui;
 import lotto.business.PlayLotto;
 import lotto.objects.*;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class ResultView {
     private static PlayLotto playLotto;
     private WinningStatistics winningStatistics;
@@ -20,14 +24,15 @@ public class ResultView {
     public void showWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int money) {
         Print.printStatistics();
 
-        Counts counts = playLotto.getWinningStatistics(createdLottos, lastWinningLotto);
+        List<WinningType> wins = playLotto.getWinningStatistics(createdLottos, lastWinningLotto);
 
-        winningStatistics = new WinningStatistics();
+        Map<Object, Long> result = wins.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 
-        for (int i = 0; i < counts.getCounts().size(); i++) {
-            Print.printResult(winningStatistics, counts, i);
+        WinningType[] winningTypes = WinningType.values();
+        for (WinningType winningType : winningTypes) {
+            Print.printResult(winningType, result);
         }
 
-        Print.printYield(counts, winningStatistics, money);
+        Print.printYield(result, money);
     }
 }

@@ -3,6 +3,7 @@ package lotto.interfaces;
 import lotto.objects.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Play {
     int buyLotto(int money);
@@ -13,7 +14,6 @@ public interface Play {
     WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto);
     WinningType compareBonusNumber(int bonusNumber, Lotto myLotto);
     WinningType findSameNumbers(Lotto initLotto, Lotto myLotto);
-    Counts getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto);
-    Counts upCount(WinningType winningType, Counts counts);
+    List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto);
     Lottos autoCreateLottos(int totalLotto);
 }
