@@ -11,3 +11,5 @@
 1단계 - 학습 테스트 실습 : [[Markdown 보기]](./markdown/step01.md)
 
 2단계 - 문자열 덧셈 계산기 : [[Markdown 보기]](./markdown/step02.md)
+
+3단계 - 로또(자동) : [[Markdown 보기]](./markdown/step03.md)
