@@ -49,4 +49,8 @@ public class WinningNumbers {
     public int count() {
         return this.numbers.size();
     }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
 }
