@@ -10,12 +10,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class CalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"5,10/15/,", "0:10/10/:", "0:0/0/:"}, delimiter = '/')
+    @CsvSource(value = {"5,10|15", "0:10|10", "0:0|0"}, delimiter = '|')
     @DisplayName("입력받은 숫자들과 구분자를 분리하여 합을 구한다.")
-    void sum_test(String input, int expectedAnswer, String delimiter) {
-
+    void sum_test(String input, int expectedAnswer) {
         //given
-        Calculator calculator = new Calculator(input, delimiter);
+        Calculator calculator = new Calculator(input);
 
         //when
         int sum = calculator.sumOperands();
@@ -31,4 +30,19 @@ public class CalculatorTest {
         //when
         assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input, delimiter));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5//10|15|//", "0n10|10|n", "0:0|0|:"}, delimiter = '|')
+    @DisplayName("앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.")
+    void sumByCustomDelimiter_test(String input, int expectedAnswer, String delimiter) {
+        //given
+        Calculator calculator = new Calculator(input, delimiter);
+
+        //when
+        int sum = calculator.sumOperands();
+
+        //then
+        assertThat(sum).isEqualTo(expectedAnswer);
+    }
+
 }
