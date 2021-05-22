@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class LottoStatics {
     // 3개 이상부터 통계
-    private static final int MIN_STATIC_RANK = 3;
-    private static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
+    public static final int MIN_STATIC_RANK = 3;
+    public static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
     private static final String ENTER = "\n";
 
 
@@ -17,6 +17,14 @@ public class LottoStatics {
 
     public LottoStatics() {
         init();
+    }
+
+    public Profit getProfit() {
+        double total = 0;
+        for (int rank : rankStatics.keySet()) {
+            total += getRankCount(rank) * RANK_PRIZE[rank];
+        }
+        return new Profit(total,totalGames * LottoGame.PRICE);
     }
 
     private void init() {
@@ -37,28 +45,4 @@ public class LottoStatics {
         return rankStatics.getOrDefault(rank,0);
     }
 
-    public Profit getProfit() {
-        double total = 0;
-        for (int rank : rankStatics.keySet()) {
-            total += getRankCount(rank) * RANK_PRIZE[rank];
-        }
-        return new Profit(total,totalGames * LottoGame.PRICE);
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("당첨 통계").append(ENTER)
-                .append("---------").append(ENTER);
-        for( int rank = MIN_STATIC_RANK; rank <= LottoGame.LOTTO_NUMBER_COUNT; rank++) {
-            buffer.append(rank)
-                    .append("개 일치 (")
-                    .append(RANK_PRIZE[rank])
-                    .append(")- ")
-                    .append(rankStatics.get(rank))
-                    .append("개").append(ENTER);
-        }
-        buffer.append("총 수익률은 ").append(getProfit().calculateRate()).append("입니다.");
-        return buffer.toString();
-    }
 }
