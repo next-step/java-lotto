@@ -26,3 +26,4 @@
 - PurchaseAmountQuantity : 사용자에 의해 입력된 구매 금액과 수량을 저장하며, 수익률을 계산한다.
 - InputView : 사용자에 의해 입력을 받는다.
 - ResultView : 결과를 출력한다.
+- Rank : 1등부터 5등까지 등수를 나타낸다.
