@@ -43,7 +43,7 @@ public class LottoNumbers {
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() > 6) {
+        if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또번호는 여섯자리를 입력해주세요");
         }
     }
