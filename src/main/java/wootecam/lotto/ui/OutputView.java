@@ -1,9 +1,12 @@
 package wootecam.lotto.ui;
 
+import java.util.Arrays;
 import java.util.List;
 
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
+import wootecam.lotto.model.LottoResult;
+import wootecam.lotto.model.LottoScoreMap;
 
 public class OutputView extends View {
 
@@ -17,5 +20,19 @@ public class OutputView extends View {
 		lottos.stream()
 			.map(lotto -> "[" + lotto.toLottoNumberString() + "]")
 			.forEach(out::println);
+	}
+
+	public void printLottoScoreMap(LottoScoreMap lottoScoreMap) {
+		out.println("당첨 통계");
+		out.println("--------");
+
+		Arrays.stream(LottoResult.values())
+			.filter(lottoResult -> lottoResult != LottoResult.DEFEAT)
+			.forEach(lottoResult -> {
+				out.printf("%d개 일치 (%d원) - %d%n",
+					lottoResult.getMatchedCount(),
+					lottoResult.getWinningMoney(),
+					lottoScoreMap.getLottoScores().get(lottoResult));
+			});
 	}
 }

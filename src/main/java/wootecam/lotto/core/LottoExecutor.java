@@ -4,6 +4,7 @@ import java.util.List;
 
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
+import wootecam.lotto.model.LottoScoreMap;
 import wootecam.lotto.ui.InputView;
 import wootecam.lotto.ui.OutputView;
 
@@ -29,5 +30,8 @@ public class LottoExecutor {
 		String winningNumberInput = this.inputView.makeWinningNumberInput();
 		Lotto winningLotto = lottoGameGenerator.getWinningLotto(winningNumberInput);
 
+		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
+		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
+		this.outputView.printLottoScoreMap(lottoScoreMap);
 	}
 }

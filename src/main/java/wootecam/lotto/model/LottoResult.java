@@ -23,4 +23,12 @@ public enum LottoResult {
 			.findAny()
 			.orElse(DEFEAT);
 	}
+
+	public int getMatchedCount() {
+		return matchedCount;
+	}
+
+	public int getWinningMoney() {
+		return winningMoney;
+	}
 }
