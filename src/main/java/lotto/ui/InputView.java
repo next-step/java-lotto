@@ -20,9 +20,9 @@ public class InputView {
 
     private static int parseInt(String numericString) {
         try {
-            return Integer.parseInt(numericString);
+            return Integer.parseInt(numericString.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
+            throw new IllegalArgumentException("숫자를 입력해주세요 " + numericString);
         }
     }
 
