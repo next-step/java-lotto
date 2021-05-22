@@ -4,11 +4,14 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.Collections;
+
 public class LottoGameLauncher {
 
     private static Lottos progressBuyingLottos(long inputPrice) {
         LottoShop lottoShop = new LottoShop();
-        return lottoShop.buyLottos(inputPrice);
+        //TODO EMPTY_LIST 부분 바꿔주어야 함
+        return lottoShop.buyLottos(inputPrice, Collections.EMPTY_LIST);
     }
 
     private static WinningLotto progressInitWinningLotto(String numbers, int bonusBall) {
