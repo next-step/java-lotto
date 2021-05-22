@@ -26,6 +26,7 @@ public class AutomaticLottoGenerator {
 		Collections.shuffle(this.autoLottoNumbers);
 		List<Integer> autoNumberList = this.autoLottoNumbers.subList(0, 6);
 		Collections.sort(autoNumberList);
+
 		return new Lotto(autoNumberList);
 	}
 }

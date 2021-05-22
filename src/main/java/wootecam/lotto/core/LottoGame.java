@@ -15,9 +15,11 @@ public class LottoGame {
 	}
 
 	public List<Lotto> getLottos(LottoCount lottoCount) {
-		List<Lotto> lottos = new ArrayList<>(lottoCount.getCount());
+		List<Lotto> lottos = new ArrayList<>();
+
 		for (int i = 0; i < lottoCount.getCount(); i++) {
-			lottos.add(this.automaticLottoGenerator.getNumbers());
+			Lotto lotto = this.automaticLottoGenerator.getNumbers();
+			lottos.add(lotto);
 		}
 		return lottos;
 	}

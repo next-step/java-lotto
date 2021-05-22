@@ -1,5 +1,8 @@
 package wootecam.lotto.ui;
 
+import java.util.List;
+
+import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
 
 public class OutputView extends View {
@@ -8,5 +11,11 @@ public class OutputView extends View {
 
 	public void printLottoCount(LottoCount lottoCount) {
 		out.println(String.format(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getCount()));
+	}
+
+	public void printAutomaticLotto(List<Lotto> lottos) {
+		lottos.stream()
+			.map(lotto -> "[" + lotto.toLottoNumberString() + "]")
+			.forEach(out::println);
 	}
 }
