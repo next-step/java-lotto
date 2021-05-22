@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -25,6 +26,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        return lottoNumberCache.get(number);
+        return Optional.ofNullable(lottoNumberCache.get(number))
+            .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 로또번호입니다."));
     }
 }
