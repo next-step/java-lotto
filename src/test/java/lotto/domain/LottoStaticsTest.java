@@ -38,7 +38,7 @@ public class LottoStaticsTest {
     public void 수익률() {
         LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
         LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
-        assertThat(statics.getProfit().calculateRate()).isEqualTo(200011.5);
+        assertThat(statics.getProfit()).isEqualTo(200011.5);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class LottoStaticsTest {
         });
         LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
         LottoStatics statics = machine.calculateStatics(winLottoGame);
-        assertThat(statics.getProfit().calculateRate()).isEqualTo(0.35);
+        assertThat(statics.getProfit()).isEqualTo(0.35);
     }
 
 }

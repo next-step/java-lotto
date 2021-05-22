@@ -39,7 +39,7 @@ public class ResultView {
                     .append(statics.getRankCount(rank))
                     .append("개").append(ENTER);
         }
-        buffer.append("총 수익률은 ").append(profit.calculateRate()).append("입니다.");
+        buffer.append("총 수익률은 ").append(profit).append("입니다.");
         view.println(buffer);
     }
 }
