@@ -6,8 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -48,5 +47,20 @@ public class LottoTest {
 
         assertThat(lottoReward).isEqualTo(LottoReward.NOTHING);
         assertThat(lottoReward.reward()).isEqualTo(LottoReward.NOTHING.reward());
+    }
+
+    @Test
+    void 로또담청_총수익금_확인() {
+        Lotto lotto1 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 35));
+        Lotto lotto2 = new Lotto(Arrays.asList(2, 5, 10, 23, 32, 34));
+        Lotto lotto3 = new Lotto(Arrays.asList(2, 5, 10, 23, 31, 34));
+        List<Lotto> lottoList = new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3));
+
+        LottoGroup lottoGroup = new LottoGroup(lottoList);
+
+        int totalReward = lottoGroup.totalReward(new HashSet<>(Arrays.asList(2, 5, 10, 23, 32, 35)));
+
+        assertThat(totalReward)
+                .isEqualTo(LottoReward.SIX.reward() + LottoReward.FIVE.reward() + LottoReward.FOUR.reward());
     }
 }
