@@ -1,5 +1,7 @@
 package lotto.domains;
 
+import java.util.Arrays;
+
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
@@ -21,5 +23,9 @@ public class Lotto {
             }
         }
         return matchingNumberCount;
+    }
+
+    public String lottoNumbers() {
+        return Arrays.toString(lottoNumbers.lottoNumbers().toArray());
     }
 }

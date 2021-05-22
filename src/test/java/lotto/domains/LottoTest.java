@@ -20,4 +20,10 @@ public class LottoTest {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1,2,31,10,11,12)));
         assertThat(lotto.checkNumber(new LottoNumbers(winningNumber))).isEqualTo(2);
     }
+
+    @Test
+    void 로또번호_가져오기_테스트() {
+        Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(lotto.lottoNumbers()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }
