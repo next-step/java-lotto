@@ -17,8 +17,8 @@ public final class Lotto {
 
     public LottoReward reward(Set<Integer> winningNumbers) {
         int sameCount = 0;
-        for(int number : lottoNumbers) {
-            if(winningNumbers.contains(number)) {
+        for (int number : lottoNumbers) {
+            if (winningNumbers.contains(number)) {
                 sameCount++;
             }
         }
@@ -27,11 +27,16 @@ public final class Lotto {
 
     private LottoReward findReward(int sameCount) {
         switch (sameCount) {
-            case 3: return THREE;
-            case 4: return FOUR;
-            case 5: return FIVE;
-            case 6: return SIX;
-            default: return NOTHING;
+            case 3:
+                return THREE;
+            case 4:
+                return FOUR;
+            case 5:
+                return FIVE;
+            case 6:
+                return SIX;
+            default:
+                return NOTHING;
         }
     }
 }

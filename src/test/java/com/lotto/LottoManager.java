@@ -9,11 +9,11 @@ public class LottoManager {
     private final Pattern pattern = Pattern.compile(PRICE_PATTERN);
 
     public LottoGroup issue(String price) {
-        if(!pattern.matcher(price).find()) {
+        if (!pattern.matcher(price).find()) {
             throw new IllegalArgumentException("price value is wrong.");
         }
 
-        int totalCount = Integer.parseInt(price)/Lotto.UNIT_PRICE;
+        int totalCount = Integer.parseInt(price) / Lotto.UNIT_PRICE;
         List<Lotto> lottoList = createLottoList(totalCount);
 
         return new LottoGroup(lottoList);
@@ -22,7 +22,7 @@ public class LottoManager {
     private List<Lotto> createLottoList(int totalCount) {
         List<Lotto> lottoList = new ArrayList<>();
 
-        for(int i = 0; i< totalCount; i++) {
+        for (int i = 0; i < totalCount; i++) {
             Lotto lotto = new Lotto(LottoNumberGenerator.generate());
             lottoList.add(lotto);
         }

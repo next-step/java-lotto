@@ -12,7 +12,7 @@ public class LottoNumberGenerator {
     private static final List<Integer> range = new ArrayList<>();
 
     static {
-        for(int i=LOTTO_START_NUM; i<=LOTTO_END_NUM; i++) {
+        for (int i = LOTTO_START_NUM; i <= LOTTO_END_NUM; i++) {
             range.add(i);
         }
     }
