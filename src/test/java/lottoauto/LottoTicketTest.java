@@ -18,9 +18,5 @@ public class LottoTicketTest {
         lottoTicket = new LottoTicket();
     }
 
-    @DisplayName("로또티켓 가격 테스트")
-    @Test
-    void 로또티켓가격() {
-        assertThat(lottoTicket.price()).isEqualTo(1000);
-    }
+
 }
