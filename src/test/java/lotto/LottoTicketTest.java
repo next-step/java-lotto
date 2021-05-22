@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,5 +27,21 @@ public class LottoTicketTest {
 
         //
         assertThat(matchStatus).isEqualTo(MatchStatus.ZERO);
+    }
+
+    @DisplayName("[,] 출력 포맷 점검")
+    @Test
+    void check_toString_print_result(){
+        //Given
+        Pattern pattern = Pattern.compile("\\[.*,*]");
+
+        //Pattern pattern = Pattern.compile("[0-9]");
+        LottoTicket lottoTicket = LottoTicketGenerator.start().extract();
+
+        //When
+        String print = lottoTicket.toString();
+
+        //Then
+        assertThat(print).matches(pattern);
     }
 }

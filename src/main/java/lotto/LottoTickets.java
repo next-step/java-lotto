@@ -22,7 +22,8 @@ public class LottoTickets {
     private List<LottoTicket> issueTickets(int count) {
         List<LottoTicket> ticketList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            ticketList.add(LottoTicketGenerator.start().extract());
+            LottoTicket ticket = LottoTicketGenerator.start().extract();
+            ticketList.add(ticket);
         }
         return ticketList;
     }
@@ -38,5 +39,14 @@ public class LottoTickets {
             lottoResult.updateValue(status);
         }
         return lottoResult;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoTicket ticket : lottoTickets) {
+            stringBuilder.append(ticket.toString());
+            stringBuilder.append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
     }
 }

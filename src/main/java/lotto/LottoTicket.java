@@ -31,4 +31,17 @@ public class LottoTicket {
         }
         return INCREMENT_WHEN_NO_MATCH;
     }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (LottoNumber lottoNumber : numbers) {
+            stringBuilder.append(lottoNumber.number());
+            stringBuilder.append(",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append("]");
+
+        return stringBuilder.toString();
+    }
 }
