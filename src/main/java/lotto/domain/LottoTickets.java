@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets implements Iterable<LottoTicket> {
 
@@ -27,17 +28,11 @@ public class LottoTickets implements Iterable<LottoTicket> {
         this.lottoTickets = lottoTickets;
     }
 
-    public double totalReturnRate(LottoNumbers winNumber) {
-        double totalWinAmount = totalWinAmount(winNumber);
-        double purchaseAmount = lottoTickets.size() * LottoTicket.PRICE;
-        return Math.floor(totalWinAmount / purchaseAmount * 100) / 100;
-    }
-
-    private long totalWinAmount(LottoNumbers winNumber) {
-        return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.rank(winNumber))
-                .mapToLong(LottoRank::winAmount)
-                .sum();
+    public LottoRanks ranks(LottoNumbers winNumbers) {
+        List<LottoRank> lottoRanks = lottoTickets.stream()
+                .map(ticket -> ticket.rank(winNumbers))
+                .collect(Collectors.toList());
+        return new LottoRanks(lottoRanks);
     }
 
     @Override
