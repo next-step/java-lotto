@@ -17,7 +17,7 @@ public class InputView {
     private static final String PRIZE_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_PRIZE_QUESTION = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_OF_MANUAL_PURCHASE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String MANUAL_LOTTO_NUMBER_QUEST = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER_QUESTION = "수동으로 구매할 번호를 입력해 주세요.";
     private final Scanner scanner;
 
     public InputView() {
@@ -53,7 +53,7 @@ public class InputView {
 
     private List<Lotto> getManualLottos(PurchaseInformation purchaseInformation) {
         final List<Lotto> lottos = new ArrayList<>();
-        System.out.println(MANUAL_LOTTO_NUMBER_QUEST);
+        System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
         for (int i = 0; i < purchaseInformation.getManualPurchaseCount(); i++) {
             Lotto lotto = new Lotto(TextParser.parseToLottoNumbers(scanner.nextLine()));
             lottos.add(lotto);
