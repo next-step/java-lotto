@@ -18,11 +18,16 @@ public class InputTextTest {
 	@CsvSource(value = {"1,2|1,2|true", "1:2|1,2|true", "1,2:3|1,2,3|true",
 		"12,12:12|12,12,12|true", "12;12|12,12|false"}, delimiter = '|')
 	void split(String text, String expectedStringArrText, boolean exceptedResult) {
+		//given
 		String[] expectedStringArr = expectedStringArrText.split(",");
+
+		//when
 		if (exceptedResult) {
+			//then - true
 			assertThat(InputText.split(text)).containsExactly(expectedStringArr);
 			return;
 		}
+		//then - false
 		assertThat(InputText.split(text)).doesNotContainSequence(expectedStringArr);
 	}
 
@@ -38,15 +43,19 @@ public class InputTextTest {
 	@Order(3)
 	@ValueSource(strings = {"//;\n1;2;3!!!1,2,3!!!true", "//;\n1:2,3;4!!!1,2,3,4!!!true", "1,2;3!!!1,2,3!!!false"})
 	void splitWithCustomDelimiter(String valueSource) {
+		//given
 		String[] expectedValues = valueSource.split("!!!");
 		String text = expectedValues[0];
 		String[] expectedStringArr = expectedValues[1].split(",");
 		boolean exceptedResult = Boolean.valueOf(expectedValues[2]);
 
+		//when
 		if (exceptedResult) {
+			//then - true
 			assertThat(InputText.split(text)).containsExactly(expectedStringArr);
 			return;
 		}
+		//then - false
 		assertThat(InputText.split(text)).doesNotContainSequence(expectedStringArr);
 	}
 

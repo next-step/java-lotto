@@ -337,6 +337,12 @@ public class Number {
         - [x] 0-4-6.원본(next-step) git repository에서 merge된 나의 branch(gregolee)를 fetch : `git fetch upstream gregolee`
         - [x] 0-4-7.remote에서 가져온 나의 branch로 rebase : `git rebase upstream/gregolee`
         - [x] 0-4-7.gregolee -> step3로 체크아웃 : `git checkout -b step3`
+    - [x] 0-5.리뷰어님의 리뷰를 반영한 코드로 수정
+        - [x] 0-5-1.테스트 코드 `given`, `when`, `then` 적용
+        - [x] 0-5-2.`Pattern` 초기화 시에만 `compile`
+        - [x] 0-5-3.매직넘버 추출 : src/main/java/study/step2/StringAddCalculator.java, src/main/java/study/step2/domain/value/Number.java
+        - [x] 0-5-4.`is~`, `validate~` 구분하여 명칭 작성 : src/main/java/study/step2/StringAddCalculator.java 
+        - [x] 0-5-5.불변객체로 선언 [[참고자료]](https://os94.tistory.com/153) : src/main/java/study/step2/StringAddCalculator.java 
 - [x] 1.자바 코드 컨벤션을 위한 세팅
     - [x] 1-1.[gradle-editorconfig](https://naver.github.io/hackday-conventions-java/#editorconfig) 적용
     - [x] 1-2.[gradle-checkstyle](https://naver.github.io/hackday-conventions-java/#checkstyle) 적용
