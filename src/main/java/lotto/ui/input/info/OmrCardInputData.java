@@ -14,7 +14,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
     }
 
     @Override
-    public OmrCard get() {
+    public OmrCard request() {
         try {
             int money = requestMoney();
             int count = requestCount(money);
@@ -25,7 +25,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
             return omrCard;
         } catch (Exception e) {
             input.redirectResponse(e.getMessage());
-            return get();
+            return request();
         }
     }
 

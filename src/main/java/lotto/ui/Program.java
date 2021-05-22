@@ -20,8 +20,8 @@ public class Program {
     }
 
     public void run() {
-        OmrCard omrCard = new OmrCardInputData(input).get();
-        Round round = new RoundInputData(input).get();
+        OmrCard omrCard = new OmrCardInputData(input).request();
+        Round round = new RoundInputData(input).request();
 
         GameReport report = new GameReport(omrCard, round);
         report.print(output);

@@ -15,7 +15,7 @@ public class RoundInputData implements InputData<Round> {
     }
 
     @Override
-    public Round get() {
+    public Round request() {
         try {
             int[] fixedBalls = requestFixedBalls();
             int bonus = requestBonus();
@@ -23,7 +23,7 @@ public class RoundInputData implements InputData<Round> {
             return new Round(SixBall.valueOf(fixedBalls), bonus);
         } catch (Exception e) {
             input.redirectResponse(e.getMessage());
-            return get();
+            return request();
         }
     }
 
