@@ -16,7 +16,7 @@ public class MarkedLottoNumbers {
         this.markedlottoNumbers = lottoNumbers.autoCreatedNumbers();
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<Integer> value() {
         return markedlottoNumbers;
     }
 

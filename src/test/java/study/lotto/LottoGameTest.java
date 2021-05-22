@@ -5,25 +5,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
-    private LottoGame lottoGame;
-
-    @BeforeEach
-    void lottoGame(){
-        lottoGame = new LottoGame();
-    }
-
 
     @DisplayName("입력한 금액만큼 구매 가능한 장수를 확인한다")
     @Test
     public void purchaseableLottoTest(){
         //given
+        LottoGame lottoGame = new LottoGame();
         BigDecimal paymentAmount = BigDecimal.valueOf(14000);
 
         int result = lottoGame.purchaseableLotto(paymentAmount);
@@ -34,20 +26,50 @@ public class LottoGameTest {
     @Test
     public void purchaseTest(){
         //given
+        LottoGame lottoGame = new LottoGame();
         BigDecimal paymentAmount = BigDecimal.valueOf(12000);
 
-        PurchasedLotto result = lottoGame.purchase(paymentAmount);
+        lottoGame.purchase(paymentAmount);
+        PurchasedLotto result = lottoGame.purchasedLotto();
         assertThat(result.values().size()).isEqualTo(12);
     }
 
     @DisplayName("당첨 번호를 생성한다")
     @Test
     public void winningNumbersTest(){
+        LottoGame lottoGame = new LottoGame();
         lottoGame.draw();
         WinningNumbers winningNumbers = lottoGame.winningNumbers();
         List<Integer> numbers = winningNumbers.value();
 
         LottoNumbersTest.availableLottoNumbersTest(numbers);
+    }
+
+    @DisplayName("당첨 확인")
+    @Test
+    public void winningCheck(){
+        LottoGame lottoGame = gameSet();
+        lottoGame.checkPrize();
+        WinningLottos lottoPrize = lottoGame.winningLottos();
+        assertThat(lottoPrize.prizeCount(3)).isEqualTo(2);
+        assertThat(lottoPrize.prizeCount(4)).isEqualTo(1);
+        assertThat(lottoPrize.prizeCount(5)).isEqualTo(1);
+        assertThat(lottoPrize.prizeCount(6)).isEqualTo(1);
+    }
+
+    private LottoGame gameSet() {
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6));
+
+        List<LottoPaper> lottoPapers = new ArrayList<>();
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,3,4,5,6)));
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,3,4,5,16)));
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,3,4,15,16)));
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,3,14,15,16)));
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,6,34,35,42)));
+        lottoPapers.add(new LottoPaper(Arrays.asList(1,2,16,34,35,42)));
+
+        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoPapers);
+        return new LottoGame(winningNumbers, purchasedLotto);
     }
 
 
