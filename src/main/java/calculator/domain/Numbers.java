@@ -13,9 +13,9 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    public static Numbers from(final List<String> values) {
+    public static Numbers from(final Values values) {
         List<Number> numbers = new ArrayList<>();
-        for (String value : values) {
+        for (String value : values.getValues()) {
             validateValue(value);
             numbers.add(Number.from(Integer.parseInt(value)));
         }

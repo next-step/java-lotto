@@ -1,7 +1,9 @@
 package calculator.utils;
 
 public class StringUtils {
-    public static final String NUMBER_EXPRESSION = "^(0|-?[1-9][0-9]*)$";
+    private static final String NUMBER_EXPRESSION = "^(0|-?[1-9][0-9]*)$";
+
+    private StringUtils() {}
 
     public static boolean isBlank(final String value) {
         return value == null || value.trim().isEmpty();

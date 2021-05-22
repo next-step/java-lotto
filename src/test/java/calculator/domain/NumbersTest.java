@@ -15,8 +15,7 @@ class NumbersTest {
     @Test
     void sum() {
         // given
-        List<String> values = Arrays.asList("1", "2", "3");
-        Numbers numbers = Numbers.from(values);
+        Numbers numbers = Numbers.from(Values.init("1,2,3"));
 
         // when
         int result = numbers.sum();
@@ -28,13 +27,7 @@ class NumbersTest {
     @DisplayName("숫자가 아닌 문자를 입력하면 예외가 발생한다")
     @Test
     void validate_number() {
-        // given
-        List<String> values = Arrays.asList("1", "2", "삼", "one");
-
-        // when
-
-        // then
-        assertThatThrownBy(() -> Numbers.from(values))
+        assertThatThrownBy(() -> Numbers.from(Values.init("1,2,삼,one")))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("only number are available");
     }
