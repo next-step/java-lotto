@@ -6,8 +6,11 @@ import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.PurchaseInformation;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
 
 /**
  * 로또의 사용자 요청을 처리한다.
@@ -23,9 +26,11 @@ public class LottoController {
 
     public void start() {
         final Money money = new Money(inputView.askMoneyInput());
-        final LottoGenerator lottoGenerator = new LottoGenerator(money);
-        final Lottos purchasedLottos = new Lottos(lottoGenerator.getPurchasedLottos());
-        outputView.showInputResult(purchasedLottos, money);
+        final PurchaseInformation purchaseInformation = new PurchaseInformation(money, inputView.askManualPurchaseCount());
+        final LottoGenerator lottoGenerator = new LottoGenerator(purchaseInformation);
+        final List<Lotto> manualPurchasedLottos = inputView.askManualLottos(purchaseInformation);
+        final Lottos purchasedLottos = new Lottos(lottoGenerator.getPurchasedLottos(), manualPurchasedLottos);
+        outputView.showInputResult(purchasedLottos, purchaseInformation);
 
         final Lotto winningLotto = new Lotto(inputView.askLastPrizeNumber());
         final LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
