@@ -17,6 +17,10 @@ public class OmrCard {
         this.omrList = new ArrayList<>();
     }
 
+    public static boolean isValidateMinimumAmount(int money) {
+        return money < PRICE;
+    }
+
     public void marking(SixBall sixBall) {
         Omr omr = new Omr(sixBall);
         omrList.add(omr);

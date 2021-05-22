@@ -44,7 +44,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
         String textMoney = input.request("구입금액을 입력해 주세요.");
         int money = parseIntMoney(textMoney);
 
-        if (isValidateMinimumAmount(money)) {
+        if (OmrCard.isValidateMinimumAmount(money)) {
             throw new InputException(String.format("구입 최소금액은 %d원 입니다.", OmrCard.PRICE));
         }
 
@@ -57,10 +57,6 @@ public class OmrCardInputData implements InputData<OmrCard> {
         } catch (NumberFormatException e) {
             throw new InputException("금액은 숫자만 가능합니다.");
         }
-    }
-
-    private boolean isValidateMinimumAmount(int money) {
-        return money < OmrCard.PRICE;
     }
 
     private int requestCount(int money) {
