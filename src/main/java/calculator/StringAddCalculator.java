@@ -21,16 +21,12 @@ public class StringAddCalculator {
 			tokens = m.group(2).split(customDelimiter);
 		}
 
-		int sum = 0;
-		for(String input : tokens) {
-			int num = Integer.parseInt(input);
+		Numbers numbers = new Numbers();
 
-			if (num < 0) {
-				throw new RuntimeException();
-			}
-			sum += num;
+		for(String input : tokens) {
+			numbers.add(new Number(input));
 		}
 
-		return sum;
+		return numbers.sum();
 	}
 }
