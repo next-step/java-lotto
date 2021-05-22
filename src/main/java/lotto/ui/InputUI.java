@@ -9,7 +9,7 @@ public class InputUI {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static int receiveMoveCycleCount() {
-        return Integer.parseInt(scanner.nextLine());
+    public static String inputWinnigNumbers() {
+        return scanner.nextLine();
     }
 }
