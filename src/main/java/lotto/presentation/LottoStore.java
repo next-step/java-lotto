@@ -2,6 +2,9 @@ package lotto.presentation;
 
 import lotto.domain.*;
 
+/**
+ * 비즈니스 호출 객체
+ */
 public class LottoStore {
     private final LottoInput lottoInput;
     private final LottoOutput lottoOutput;

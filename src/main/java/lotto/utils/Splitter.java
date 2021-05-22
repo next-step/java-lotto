@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoOptions.LOTTO_SIZE;
 
+/**
+ * 콤마를 기준으로 스플릿하는 객체
+ */
 public class Splitter {
     private static final String DEFAULT_SEPARATOR = "[,]";
     private static final String INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다.";

@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 당첨 결과를 갖고있는 객체
+ */
 public class LottoWallet {
     private Map<LottoResult, Integer> lottoResultCounts;
     private final Money money;

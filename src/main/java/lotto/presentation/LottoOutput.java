@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 출력 객체
+ */
 public class LottoOutput {
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
@@ -25,6 +28,11 @@ public class LottoOutput {
         System.out.println(sb);
     }
 
+    /**
+     * 당첨 통계 출력
+     * 
+     * @param lottoWallet
+     */
     public void printWinningStatistics(LottoWallet lottoWallet) {
         Map<LottoResult, Integer> lottoResultCounts = lottoWallet.getLottoResultCounts();
         System.out.println("당첨 통계");
@@ -37,6 +45,11 @@ public class LottoOutput {
                 .forEach(System.out::println);
     }
 
+    /**
+     * 총 수익률 출력
+     *
+     * @param profitRate
+     */
     public void printProfitRate(double profitRate) {
         System.out.println("총 수익률은 " + DECIMAL_FORMAT.format(profitRate) +
                 "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

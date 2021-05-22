@@ -2,6 +2,9 @@ package lotto.domain;
 
 import static lotto.domain.LottoOptions.LOTTO_PRICE;
 
+/**
+ * 로또 구매할 돈
+ */
 public final class Money {
     private static final String INVALID_LOTTO_PRICE_MESSAGE = "로또를 구매하려면 최소 1000원 이상을 입력해야합니다.";
     private final int money;

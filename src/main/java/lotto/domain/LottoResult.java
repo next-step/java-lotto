@@ -2,6 +2,9 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+/**
+ * 당첨 결과에 따른 조건과 보상
+ */
 public enum LottoResult {
     NONE(0, 0),
     FOURTH(3, 5000),

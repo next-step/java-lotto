@@ -7,6 +7,9 @@ import lotto.utils.Splitter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * 입력 객체
+ */
 public class LottoInput {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_MONEY_ERROR_MESSAGE = "숫자만 입력해주세요.";
@@ -17,6 +20,11 @@ public class LottoInput {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * 로또 구매할 돈 입력
+     * 
+     * @return
+     */
     public Money inputMoneyToPurchaseLotto() {
         while (true) {
             try {
@@ -32,6 +40,11 @@ public class LottoInput {
         }
     }
 
+    /**
+     * 지난주 당첨번호 입력
+     * 
+     * @return
+     */
     public Lotto inputAnswerLottoNumbers() {
         while (true) {
             try {

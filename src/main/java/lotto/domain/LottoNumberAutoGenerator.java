@@ -6,6 +6,9 @@ import java.util.List;
 
 import static lotto.domain.LottoOptions.*;
 
+/**
+ * 로또 번호를 랜덤으로 생성
+ */
 public final class LottoNumberAutoGenerator {
     private static final List<LottoNumber> NUMBER_BOX = new ArrayList<>(MAX_NUMBER);
 
