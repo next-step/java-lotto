@@ -45,16 +45,11 @@ public class LottoNumbers {
 	}
 
 	public Rank findRank(LottoNumbers winLottoNumbers) {
-		int matchCount = this.findMatchCount(winLottoNumbers);
-		return this.findRankByMatchCount(matchCount);
-	}
-
-	private int findMatchCount(LottoNumbers winLottoNumbers) {
 		int matchCount = 0;
 		for (LottoNumber lottoNumber : lottoNumbers) {
 			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
 		}
-		return matchCount;
+		return this.findRankByMatchCount(matchCount);
 	}
 
 	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
