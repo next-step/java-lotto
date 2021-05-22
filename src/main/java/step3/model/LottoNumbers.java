@@ -16,6 +16,24 @@ public final class LottoNumbers {
         this.lottoNumbers = new TreeSet<>();
     }
 
+    public LottoNumbers(List<Integer> numbers) {
+        if (!isAddAvailableInput(numbers)) {
+            throw new IllegalArgumentException(CHECK_SIZE);
+        }
+        this.lottoNumbers = new TreeSet<>();
+        addNumbers(numbers);
+    }
+
+    private void addNumbers(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+    }
+
+    private boolean isAddAvailableInput(List<Integer> numbers) {
+        return numbers.size() < MAX_SIZE;
+    }
+
     public void addNumber(LottoNumber lottoNumber) {
 
         if (!isAddAvailable()) {
@@ -40,6 +58,19 @@ public final class LottoNumbers {
         }
 
         return result;
+    }
+
+    public int countWinning(ArrayList<Integer> winningNumber) {
+        int result = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            result += getMatchNumber(lottoNumber, winningNumber);
+        }
+        return result;
+    }
+
+    private int getMatchNumber(LottoNumber lottoNumber,
+            List<Integer> winningNumber) {
+        return winningNumber.contains(lottoNumber.number()) ? 1 : 0;
     }
 
 }
