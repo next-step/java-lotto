@@ -15,19 +15,19 @@ public enum LottoResult {
     private final int matchCount;
     private final int reward;
 
-    LottoResult(int matchCount, int reward) {
+    LottoResult(final int matchCount, final int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
 
-    public static LottoResult findByMatchCount(int matchCount) {
+    public static LottoResult findByMatchCount(final int matchCount) {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.isMatch(matchCount))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    private boolean isMatch(int matchCount){
+    private boolean isMatch(final int matchCount) {
         return this.matchCount == matchCount;
     }
 

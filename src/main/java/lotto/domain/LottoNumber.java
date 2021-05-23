@@ -12,12 +12,12 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     private static final String LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE = "로또번호는 1-45 사이의 숫자만 가능합니다.";
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validateNumber(number);
         this.number = number;
     }
 
-    private void validateNumber(int number) {
+    private void validateNumber(final int number) {
         if (number < MIN_NUMBER ||
                 number > MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_NOT_BETWEEN_1_AND_45_MESSAGE);
@@ -29,10 +29,14 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
 
@@ -42,7 +46,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber lottoNumber) {
+    public int compareTo(final LottoNumber lottoNumber) {
         return this.number - lottoNumber.number;
     }
 

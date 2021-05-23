@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * 입력 객체
  */
-public class LottoInput {
+public final class LottoInput {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_MONEY_ERROR_MESSAGE = "숫자만 입력해주세요.";
     private static final String INPUT_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
@@ -22,7 +22,7 @@ public class LottoInput {
 
     /**
      * 로또 구매할 돈 입력
-     * 
+     *
      * @return
      */
     public Money inputMoneyToPurchaseLotto() {
@@ -30,9 +30,9 @@ public class LottoInput {
             try {
                 System.out.println(INPUT_MONEY_MESSAGE);
                 return new Money(scanner.nextInt());
-            } catch (InputMismatchException e) {
+            } catch (final InputMismatchException e) {
                 System.out.println(INPUT_MONEY_ERROR_MESSAGE);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 System.out.println(e.getMessage());
             } finally {
                 scanner.nextLine();
@@ -42,16 +42,16 @@ public class LottoInput {
 
     /**
      * 지난주 당첨번호 입력
-     * 
+     *
      * @return
      */
     public Lotto inputAnswerLottoNumbers() {
         while (true) {
             try {
                 System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
-                String answerLottoNumbers = scanner.next();
+                final String answerLottoNumbers = scanner.next();
                 return new Lotto(Splitter.split(answerLottoNumbers));
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 System.out.println(e.getMessage());
             } finally {
                 scanner.nextLine();

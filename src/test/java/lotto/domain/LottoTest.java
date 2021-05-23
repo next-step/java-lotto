@@ -10,14 +10,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
 
-    @DisplayName("서로다른 로또번호 6개 주입시 size()가 6개로 리턴하는지")
+    @DisplayName("로또는 6개의 서로 다른 번호로 만들어진다.")
     @Test
     void different_lotto_numbers() {
         //given
-        int expected = 6;
+        final int expected = 6;
 
         //when
-        Lotto lottoNumbers = new Lotto(Arrays.asList(
+        final Lotto lottoNumbers = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         ));
@@ -26,7 +26,7 @@ public class LottoTest {
         assertThat(lottoNumbers.size()).isEqualTo(expected);
     }
 
-    @DisplayName("중복된 로또번호 6개 주입시 Exception 발생하는지")
+    @DisplayName("중복된 로또번호가 있을시 예외를 발생시킨다.")
     @Test
     void equals_lotto_numbers_exception() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(
@@ -35,7 +35,7 @@ public class LottoTest {
         )));
     }
 
-    @DisplayName("로또번호 6개 미만으로 주입시 Exception 발생하는지")
+    @DisplayName("로또번호가 6개 미만이면 예외를 발생시킨다.")
     @Test
     void lotto_number_less_than_6_exception() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(
@@ -44,22 +44,22 @@ public class LottoTest {
         )));
     }
 
-    @DisplayName("로또번호 갯수가 일치하는지")
+    @DisplayName("로또의 당첨은 로또숫자가 같은지를 확인한다.")
     @Test
-    void match_count(){
+    void match_count() {
         //given
-        Lotto lotto = new Lotto(Arrays.asList(
+        final Lotto lotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         ));
-        Lotto toCompareLotto = new Lotto(Arrays.asList(
+        final Lotto toCompareLotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(7), new LottoNumber(8)
         ));
-        int expected = 4;
+        final int expected = 4;
 
         //when
-        int matchCount = lotto.matchCount(toCompareLotto);
+        final int matchCount = lotto.matchCount(toCompareLotto);
 
         //then
         assertThat(matchCount).isEqualTo(expected);
