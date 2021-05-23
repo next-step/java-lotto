@@ -3,13 +3,13 @@ package lotto.lotto;
 import java.util.Set;
 
 public class Answer {
-    Set<Integer> numbers;
+    Set<LottoNumber> numbers;
 
-    public Answer(Set<Integer> numbers) {
+    public Answer(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public Set<Integer> numbers() {
+    public Set<LottoNumber> numbers() {
         return numbers;
     }
 }

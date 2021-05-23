@@ -1,7 +1,6 @@
 package lotto.ui;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 import lotto.common.ErrorMessage;
 import lotto.common.PrintMessage;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.shop.Money;
 
@@ -27,14 +27,14 @@ public class Command {
         return new Money(toInteger(input));
     }
 
-    public Set<Integer> inputAnswer() {
+    public Set<LottoNumber> inputAnswer() {
         println(MessageEnum.INPUT_LOTTO_ANSWER.message());
         String input = scanner.nextLine();
         String[] answer = input.split(NUMBER_DELIMITER);
         checkAnswer(answer);
         return Arrays.stream(answer)
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 

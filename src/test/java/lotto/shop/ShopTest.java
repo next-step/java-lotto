@@ -2,14 +2,15 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
-import lotto.lotto.Answer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.lotto.Answer;
+import lotto.lotto.LottoNumber;
 import lotto.error.ErrorMessage;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoTicket;
@@ -51,9 +52,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        int amount = shop.buyLotto(money);
+        int lottoCount = shop.buyLotto(money);
         //then
-        assertThat(amount).isEqualTo(10);
+        assertThat(lottoCount).isEqualTo(10);
     }
 
     @Test
@@ -62,8 +63,8 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        int amount = shop.buyLotto(money);
-        LottoTicket lottoTicket = shop.selectAuto(amount);
+        int lottoCount = shop.buyLotto(money);
+        LottoTicket lottoTicket = shop.selectAuto(lottoCount);
         //then
         assertThat(lottoTicket.tickets().size()).isEqualTo(10);
     }
@@ -73,16 +74,21 @@ public class ShopTest {
     void testAnswer() {
         //given
         LottoTicket lottoTicket = new LottoTicket();
+        Set<LottoNumber> numbers = new HashSet<>();
+        for (int i = 1; i < 7; i++) {
+            LottoNumber lottoNumber = new LottoNumber(i);
+            numbers.add(lottoNumber);
+        }
 
-        Answer answer = new Answer(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
+        Answer answer = new Answer(numbers);
 
         Lotto lotto = new Lotto();
-        lotto.addNumber(1);
-        lotto.addNumber(2);
-        lotto.addNumber(3);
-        lotto.addNumber(10);
-        lotto.addNumber(11);
-        lotto.addNumber(12);
+        lotto.addNumber(new LottoNumber(1));
+        lotto.addNumber(new LottoNumber(2));
+        lotto.addNumber(new LottoNumber(3));
+        lotto.addNumber(new LottoNumber(10));
+        lotto.addNumber(new LottoNumber(11));
+        lotto.addNumber(new LottoNumber(12));
         lottoTicket.add(lotto);
         //when
         MatchedAnswer match = shop.matchAnswer(lottoTicket, answer);

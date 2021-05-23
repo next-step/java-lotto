@@ -43,7 +43,7 @@ public class Shop {
 
     private void generateNumber(Lotto lotto) {
         while (!lotto.isSelectComplete()) {
-            lotto.addNumber(NumberGenerator.generate());
+            lotto.addNumber(new LottoNumber(NumberGenerator.generate()));
         }
     }
 }

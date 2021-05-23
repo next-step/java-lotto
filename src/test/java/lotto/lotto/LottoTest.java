@@ -15,12 +15,12 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("숫자가 있는지 확인")
+    @DisplayName("같은 숫자를 넣었을 때")
     void testContain() {
         //given
         //when
-        for (int i = 0; i < 6; i++) {
-            lotto.addNumber(1);
+        for (int i = 1; i < 7; i++) {
+            lotto.addNumber(new LottoNumber(1));
         }
         //then
         assertThat(lotto.isSelectComplete()).isFalse();
@@ -32,7 +32,7 @@ public class LottoTest {
         //given
         int number = 1;
         //when
-        lotto.addNumber(number);
+        lotto.addNumber(new LottoNumber(number));
         //then
         assertThat(lotto.isSelectComplete()).isFalse();
     }
@@ -42,8 +42,8 @@ public class LottoTest {
     void testSelectComplete() {
         //given
         //when
-        for (int i = 0; i < 6; i++) {
-            lotto.addNumber(i);
+        for (int i = 1; i < 7; i++) {
+            lotto.addNumber(new LottoNumber(i));
         }
         //then
         assertThat(lotto.isSelectComplete()).isTrue();
