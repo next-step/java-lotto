@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoNumber {
@@ -24,6 +26,10 @@ public class LottoNumber {
     public static LottoNumber of(int number) {
         validateNumber(number);
         return numberCache.get(number);
+    }
+
+    public static List<LottoNumber> ofAll() {
+        return new ArrayList<>(numberCache.values());
     }
 
     private static void validateNumber(int number) {

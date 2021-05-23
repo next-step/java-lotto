@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -28,5 +30,15 @@ class LottoNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.of(param))
                 .withMessageMatching("로또 숫자는 1과 45사이의 정수 이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("전체 값 조회")
+    void ofAll() {
+        // given when
+        List<LottoNumber> lottoNumbers = LottoNumber.ofAll();
+
+        // then
+        assertThat(lottoNumbers.size()).isEqualTo(45);
     }
 }
