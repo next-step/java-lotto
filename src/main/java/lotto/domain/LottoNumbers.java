@@ -15,10 +15,7 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     }
 
     public static LottoNumbers generate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(LottoNumber.of(i));
-        }
+        List<LottoNumber> lottoNumbers = LottoNumber.ofAll();
         Collections.shuffle(lottoNumbers);
         return new LottoNumbers(lottoNumbers.stream()
                 .limit(MAX_LOTTO_COUNT)
