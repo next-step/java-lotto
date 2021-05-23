@@ -1,5 +1,8 @@
 package step3;
 
+import step3.domain.Lotto;
+import step3.domain.LottoGame;
+import step3.domain.Money;
 import step3.ui.InputView;
 
 public class Main {

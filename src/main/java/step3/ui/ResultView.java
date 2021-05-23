@@ -1,6 +1,6 @@
 package step3.ui;
 
-import step3.Lotto;
+import step3.domain.Lotto;
 
 import java.util.List;
 

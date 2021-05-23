@@ -1,4 +1,4 @@
-package step3;
+package step3.domain;
 
 import step3.ui.ResultView;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static step3.LottoConstants.*;
+import static step3.domain.LottoConstants.*;
 
 public class LottoGame {
 
