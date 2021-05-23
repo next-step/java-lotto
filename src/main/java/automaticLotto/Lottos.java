@@ -1,11 +1,17 @@
 package automaticLotto;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
+	private static final int WINNER_MINIMUM_CONDITION = 3;
+	private static final int WINNER_MAXIMUM_CONDITION = 6;
+	private static final int NOTHING = 0;
 	private static final int MAXIMUM_LOTTOS_SIZE = 100;
 
 	private final List<Lotto> lottos;
+	private Map<Integer, Integer> winnerCountByMatchedNumber;
 
 	public Lottos(List<Lotto> lottos) {
 		this.lottos = lottos;
@@ -13,7 +19,7 @@ public class Lottos {
 	}
 
 	private void validateLottosSize() {
-		if (this.lottos.size() > MAXIMUM_LOTTOS_SIZE) {
+		if (lottos.size() > MAXIMUM_LOTTOS_SIZE) {
 			throw new RuntimeException("the size of lottos can not exceed 100");
 		}
 	}
@@ -22,13 +28,33 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public WinnerStatics announce(List<Integer> winnerLotto) {
-		WinnerStatics winnerStatics = new WinnerStatics();
+	public Map<Integer, Integer> announce(List<Integer> winnerLotto) {
+		winnerCountByMatchedNumber = new HashMap<>();
+		initiateWinnerCountByMatchedNumber();
 
 		for (Lotto lotto : lottos) {
-			winnerStatics.addMatchedNumberCount(lotto.match(winnerLotto));
+			addMatchedNumberCount(lotto.match(winnerLotto));
 		}
 
-		return winnerStatics;
+		return winnerCountByMatchedNumber;
+	}
+
+	private void addMatchedNumberCount(int matchedNumber) {
+		int count;
+
+		if (hasNumber(matchedNumber)) {
+			count = winnerCountByMatchedNumber.get(matchedNumber);
+			winnerCountByMatchedNumber.replace(matchedNumber, ++count);
+		}
+	}
+
+	private boolean hasNumber(int matchedNumber) {
+		return winnerCountByMatchedNumber.containsKey(matchedNumber);
+	}
+
+	private void initiateWinnerCountByMatchedNumber() {
+		for (int i = WINNER_MINIMUM_CONDITION; i <= WINNER_MAXIMUM_CONDITION; i++) {
+			winnerCountByMatchedNumber.put(i, NOTHING);
+		}
 	}
 }
