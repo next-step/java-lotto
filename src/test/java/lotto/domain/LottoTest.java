@@ -98,4 +98,11 @@ class LottoTest {
             System.out.println(lotto);
         });
     }
+
+    @DisplayName("로또에 사용되는 6개의 번호와 1개의 보너스 번호는 모두 달라야 한다.")
+    @Test
+    void duplicateBonusNumberTest() {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(1)));
+    }
 }

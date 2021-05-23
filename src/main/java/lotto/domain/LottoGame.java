@@ -47,7 +47,7 @@ public class LottoGame {
 
         ioManager.printLine("당첨 통계");
         ioManager.printLine("---------");
-        ioManager.printStatistics(lottoStatistics.getStatistics());
-        ioManager.printEarningRate(lottoStatistics.getEarningsRate(lottos.size() * 1000));
+        ioManager.printStatistics(lottoStatistics.getStatisticsData());
+        ioManager.printEarningRate(lottoStatistics.getEarningsRate(lottos.size()));
     }
 }

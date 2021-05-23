@@ -2,7 +2,7 @@ package lotto.ui;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.LottoWinningData;
+import lotto.domain.WinningLottoDto;
 
 import static java.util.stream.Collectors.toList;
 
@@ -53,9 +53,10 @@ public class IOManager {
         output.printLine(text);
     }
 
-    public void printStatistics(List<LottoWinningData> statistics) {
+    public void printStatistics(List<WinningLottoDto> statistics) {
         statistics.forEach(data ->
-            output.printLine(data.getMatchCount() + "개 일치(" + data.getPrize() + "원)- " +
+            output.printLine(data.getMatchCount() + "개 일치(" +
+                                 String.format("%,d", data.getPrize()) + "원)- " +
                                  data.getWinningCount() + "개")
         );
     }

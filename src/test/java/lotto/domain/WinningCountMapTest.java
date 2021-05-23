@@ -4,74 +4,58 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningCountMapTest {
 
-    private static final int[] PRIZES = new int[] {0, 0, 0, 5000, 50000, 1500000, 2000000000};
+    private static final WinningType[] TYPES = new WinningType[] {
+        WinningType.FIRST, WinningType.SECOND, WinningType.THIRD, WinningType.FOURTH, WinningType.FIFTH
+    };
 
-    @DisplayName("맞은 숫자 개수에 따른 결과값 검증")
-    @CsvSource(value = {"1,1", "3,4", "6,1", "4,10", "5,100"})
+    @DisplayName("총 상금 검증")
+    @MethodSource("totalPrizeTestCase")
     @ParameterizedTest
-    void resultTest(int matchCount, int winningCount) {
-        WinningCountMap winningCountMap = new WinningCountMap();
+    void totalPrizeTest(List<Integer> winningCounts) {
 
-        for (int i = 0; i < winningCount; i++) {
-            winningCountMap.addCount(matchCount);
-        }
-
-        long expected = (long) PRIZES[matchCount] * winningCount;
-        assertEquals(expected, winningCountMap.getResultOf(matchCount));
-    }
-
-
-    @DisplayName("맞은 숫자 개수에 따른 결과값 검증")
-    @MethodSource("totalResultTestCase")
-    @ParameterizedTest
-    void totalResultTest(List<Integer> winningCounts) {
         WinningCountMap winningCountMap = new WinningCountMap();
 
         long expected = 0L;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < TYPES.length; i++) {
 
-            int matchCount = i + 3;
-            int winningCount = winningCounts.get(i);
-
-            for (int j = 0; j < winningCount; j++) {
-                winningCountMap.addCount(matchCount);
+            int size = winningCounts.get(i);
+            for (int j = 0; j < winningCounts.get(i); j++) {
+                winningCountMap.addCount(TYPES[i]);
             }
 
-            expected += (long) PRIZES[matchCount] * winningCount;
+            expected += (long) TYPES[i].getPrize() * (long) size;
         }
 
-        assertEquals(expected, winningCountMap.getTotalResult());
+        assertEquals(expected, winningCountMap.getTotalPrize());
     }
 
     @SuppressWarnings("unused")
-    private static Stream<Arguments> totalResultTestCase() {
+    private static Stream<Arguments> totalPrizeTestCase() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 5, 6, 3)),
-            Arguments.of(Arrays.asList(1, 5, 6, 3)),
-            Arguments.of(Arrays.asList(5, 3, 2, 1))
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+            Arguments.of(Arrays.asList(2, 3, 4, 5, 1)),
+            Arguments.of(Arrays.asList(3, 4, 5, 1, 2)),
+            Arguments.of(Arrays.asList(4, 5, 1, 2, 3)),
+            Arguments.of(Arrays.asList(5, 1, 2, 3, 4))
         );
     }
 
-    @DisplayName("당첨 개수 (3, 4, 5, 6) 외에 다른 수 데이터를 요청하면 오류 발생")
-    @ValueSource(ints = {0, 1, 2, 7, 8, 9, 10})
-    @ParameterizedTest
-    void invalidMatchCountTest(int matchCount) {
-        WinningCountMap winningCountMap = new WinningCountMap();
+    @DisplayName("")
+    @Test
+    void name() {
 
-        assertThatIllegalArgumentException().isThrownBy(() ->
-            winningCountMap.toDataSet(matchCount)
-        );
+        WinningCountMap winningCountMap = new WinningCountMap();
+        List<WinningLottoDto> dataSets = winningCountMap.getDataSets();
+        System.out.println(dataSets);
     }
 }

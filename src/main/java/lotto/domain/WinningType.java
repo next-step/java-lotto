@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 public enum WinningType {
 
-
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -20,6 +19,7 @@ public enum WinningType {
 
     private static final Map<Integer, WinningType> CACHE =
         Arrays.stream(values())
+              .filter(type -> type.getMatchCount() != 5)
               .collect(
                   collectingAndThen(toMap(WinningType::getMatchCount, Function.identity()),
                                     Collections::unmodifiableMap));
@@ -32,8 +32,21 @@ public enum WinningType {
         this.prize = prize;
     }
 
-    public static WinningType find(int matchCount) {
+    public static WinningType find(int matchCount, boolean bonusMatched) {
+
+        if (matchCount == 5) {
+            return secondOrThird(bonusMatched);
+        }
+
         return CACHE.getOrDefault(matchCount, NONE);
+    }
+
+    private static WinningType secondOrThird(boolean bonusMatched) {
+        if (bonusMatched) {
+            return SECOND;
+        }
+
+        return THIRD;
     }
 
     public int getMatchCount() {
