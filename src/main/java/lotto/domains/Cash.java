@@ -4,7 +4,7 @@ public class Cash {
     private static final int MINIMUM_AMOUNT = 1000;
     private final int amount;
 
-    public Cash(final int amount) {
+    public Cash(int amount) {
         isGreaterThanZero(amount);
         this.amount = amount;
     }
