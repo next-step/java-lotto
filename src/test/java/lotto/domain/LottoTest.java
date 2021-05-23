@@ -60,6 +60,21 @@ class LottoTest {
                 .hasMessage("중복된 로또 번호는 입력할 수 없습니다.");
     }
 
+    @DisplayName("당첨번호가 중복된 보너스 볼을 입력하면 예외가 발생한다")
+    @Test
+    void validate_bonusNumber() {
+        // given
+        Lotto winnerLotto = Lotto.from(new TestLottoNumberGenerator());
+
+        // when
+        LottoNumber bonusNumber = LottoNumber.from(6);
+
+        // then
+        assertThatThrownBy(() -> winnerLotto.validateBonusNumber(bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스번호는 당첨번호와 중복될 수 없습니다.");
+    }
+
     @DisplayName("당첨 번호를 입력하면 당첨 결과 금액을 반환한다")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,10,11,12:7:5000", "1,2,3,4,10,11:7:50000", "1,2,3,4,5,10:7:1500000",
