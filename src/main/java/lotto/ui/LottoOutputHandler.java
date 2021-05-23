@@ -2,8 +2,6 @@ package lotto.ui;
 
 import lotto.domain.*;
 
-import java.util.Iterator;
-
 public class LottoOutputHandler {
 
     public void printCount(int manualCount, int autoCount) {
@@ -11,9 +9,8 @@ public class LottoOutputHandler {
     }
 
     public void printBought(Lottos lottos) {
-        Iterator<Lotto> it = lottos.iterator();
-        while(it.hasNext()) {
-            System.out.println(it.next().toString());
+        for (Lotto lotto : lottos.values()) {
+            System.out.println(lotto.toString());
         }
         System.out.println();
     }

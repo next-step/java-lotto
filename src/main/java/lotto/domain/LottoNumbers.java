@@ -16,16 +16,18 @@ public class LottoNumbers {
         }
     }
 
+    public LottoNumbers(String[] lottoNumbers) {
+        for (String number : lottoNumbers) {
+            this.lottoNumbers.add(LottoNumber.of(Integer.parseInt(number)));
+        }
+    }
+
     public boolean sizeIsNotSameWith(int lottoNumberCount) {
         return lottoNumbers.size() != lottoNumberCount;
     }
 
     public void add(Integer number) {
         lottoNumbers.add(LottoNumber.of(number));
-    }
-
-    public int get(int index) {
-        return lottoNumbers.get(index).number();
     }
 
     @Override
@@ -39,10 +41,6 @@ public class LottoNumbers {
         return sb.toString();
     }
 
-    public String formattedString() {
-        return lottoNumbers.toString();
-    }
-  
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
