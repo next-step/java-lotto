@@ -20,6 +20,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.First);
     }
@@ -30,6 +31,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "7"));
         Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Second);
     }
@@ -40,6 +42,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "7", "8"));
+
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Third);
     }
@@ -50,6 +53,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "7", "8", "9"));
+
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Fourth);
     }
@@ -60,6 +64,7 @@ public class LottoTest {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "7", "8", "9", "10"));
+
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.None);
     }
@@ -74,6 +79,7 @@ public class LottoTest {
     void 당첨번호_번호_입력시_validation(String input) {
         //given
         List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
+
         //when, then
         assertThatThrownBy(() -> new Lotto(winningNumberList)).isInstanceOf(IllegalArgumentException.class);
     }

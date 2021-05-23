@@ -16,8 +16,10 @@ public class StatisticsTest {
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList("1", "3", "2", "4", "5", "6"));
         Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+
         //when
         statistics.addCountToPlace(place);
+
         //then
         assertThat(statistics.firstPlace()).isEqualTo(1);
     }
@@ -29,8 +31,10 @@ public class StatisticsTest {
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList("4", "3", "2", "1", "5", "10"));
         Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+
         //when
         statistics.addCountToPlace(place);
+
         //then
         assertThat(statistics.secondPlace()).isEqualTo(1);
     }
@@ -76,5 +80,4 @@ public class StatisticsTest {
         //then
         assertThat(benefitRate).isEqualTo(2370d/200d);
     }
-
 }

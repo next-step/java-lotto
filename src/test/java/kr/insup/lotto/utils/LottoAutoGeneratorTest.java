@@ -17,6 +17,8 @@ public class LottoAutoGeneratorTest {
     void 번호_6개_랜덤_생성() {
         //given
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+
+        //when
         List<String> lottoNumbers = lottoAutoGenerator.generateNumber();
 
         //then

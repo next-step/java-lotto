@@ -12,6 +12,7 @@ public class LottosTest {
     void 구입한_개수만큼_로또_게임_생성() {
         //given
         Lottos lottos = new Lottos(10);
+
         //when, then
         assertThat(lottos.size()).isEqualTo(10);
     }
