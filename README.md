@@ -46,35 +46,83 @@
     1. 로또 발급
     2. 당첨 확인
     3. 당첨 통계 계산
-* value object
-    1. Money
-    2. LottoNumbers
-    3. Lotto
 
 ### 실행예시
 ```
+구입금액을 입력해 주세요.
+10000
+10개를 구매했습니다.
+[4, 7, 10, 33, 39, 40]
+[4, 23, 34, 38, 40, 44]
+[6, 21, 32, 40, 44, 45]
+[8, 25, 28, 30, 41, 45]
+[6, 9, 19, 29, 36, 39]
+[12, 18, 21, 26, 41, 43]
+[1, 5, 7, 17, 26, 40]
+[1, 11, 12, 14, 35, 42]
+[5, 7, 8, 18, 41, 42]
+[7, 9, 19, 37, 42, 43]
+지난 주 당첨 번호를 입력해 주세요.
+42,43,37,1,2,3
+
+당첨 통계
+---------
+3개 일치 (5000)-1개
+4개 일치 (50000)-0개
+5개 일치 (1500000)-0개
+6개 일치 (2000000000)-0개
+총 수익률은 0.5입니다.기준이 1이기 때문에 결과적으로 손해라는 의미임
 ```
 
 # 4단계 - 로또(2등)
 
 # 디렉토리 구조
 ```
-│
 └─src
     ├─main
     │  └─java
-    │      └─step2                             2단계 - 문자열 덧셈 계산기
+    │      ├─lotto                                 로또 게임
+    │      │  │  LottoGameApp.java                 게임 애플리케이션
+    │      │  │
+    │      │  ├─common
+    │      │  │      ErrorCode.java                공통 에러 코드
+    │      │  │      WinningType.java              당첨 타입
+    │      │  │
+    │      │  ├─domain
+    │      │  │      LottoNumber.java              로또 번호
+    │      │  │      LottoTicket.java              로또 티켓
+    │      │  │      LottoTicketGenerator.java     로또 티켓 생성기
+    │      │  │      Money.java                    지불 돈
+    │      │  │      ProfitCalculator.java         수익률 계산기
+    │      │  │      WinningNumbers.java           당첨 번호
+    │      │  │
+    │      │  └─view
+    │      │          GameView.java                게임 화면
+    │      │          InputView.java               입력 화면
+    │      │          ResultView.java              결과 화면
+    │      │
+    │      └─step2                                  2단계 - 문자열 덧셈 계산기
     │              Numbers.java
     │              StringAddCalculator.java
     │              StringAddCalculatorApp.java
     │
     └─test
         └─java
-            ├─step1                            1단계 - 학습 테스트 실습
+            ├─lotto
+            │  └─domain
+            │          LottoNumberTest.java
+            │          LottoTicketGeneratorTest.java
+            │          LottoTicketTest.java
+            │          MoneyTest.java
+            │          ProfitCalculatorTest.java
+            │          WinningNumbersTest.java
+            │
+            ├─step1                                  1단계 - 학습 테스트 실습
             │      SetTest.java
             │      StringTest.java
             │
             └─step2
                     NumbersTest.java
                     StringAddCalculatorTest.java
+
 ```
