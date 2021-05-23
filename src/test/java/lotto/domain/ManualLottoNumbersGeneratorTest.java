@@ -29,7 +29,7 @@ public class ManualLottoNumbersGeneratorTest {
     @DisplayName("수동으로 입력한 로또 번호를 발급한다")
     void createManualLottoNumbersTest() {
         int manualLottoCount = 2;
-        ManualLottoNumbersGenerator lottoNumbersGenerator = new ManualLottoNumbersGenerator(manualLottoCount, numbers);
+        LottoNumbersGenerator lottoNumbersGenerator = new ManualLottoNumbersGenerator(manualLottoCount, numbers);
 
         List<LottoNumbers> manualLottoNumbers = lottoNumbersGenerator.generate();
         assertThat(manualLottoNumbers).hasSize(manualLottoCount);
