@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private final int MIN_LOTTO_NUM = 1;
     private final int MAX_LOTTO_NUM = 45;
@@ -15,5 +17,18 @@ public class LottoNumber {
             throw new RuntimeException(OUT_OF_NUMER_RANGE_MESSAGE);
         }
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
