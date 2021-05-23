@@ -25,7 +25,7 @@ public class Lottos {
         return lottos;
     }
 
-    public Statistics statistics(List<String> winningNumber){
+    public Statistics statistics(Lotto winningNumber){
         Statistics statistics = new Statistics(attempt);
         for(Lotto lotto : lottos){
             Place place = lotto.matchWinningNumber(winningNumber);
