@@ -8,7 +8,15 @@ repositories {
     mavenCentral()
 }
 
+def versions = [
+    lombok : '1.16.20'
+]
+
 dependencies {
+    //lombok
+    compileOnly "org.projectlombok:lombok:${versions.lombok}"
+    annotationProcessor "org.projectlombok:lombok:${versions.lombok}"
+
     testCompile('org.junit.jupiter:junit-jupiter:5.6.0')
     testCompile('org.assertj:assertj-core:3.15.0')
 }
