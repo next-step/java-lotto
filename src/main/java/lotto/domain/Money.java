@@ -2,13 +2,13 @@ package lotto.domain;
 
 import static lotto.util.ValidationUtils.*;
 
-class Money {
+public class Money {
 
-	private static final String INVALID_NUMBER_MESSAGE = "유효하지 않은 숫자입니다.";
+	private static final String INVALID_NUMBER_MESSAGE = "숫자만 입력할 수 있습니다.";
 
 	private final int value;
 
-	Money(String money) {
+	public Money(String money) {
 		validate(money);
 
 		value = Integer.parseInt(money.trim());

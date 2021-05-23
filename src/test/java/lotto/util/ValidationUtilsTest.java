@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class ValidationUtilsTest {
 
+	@DisplayName("로또 번호 유효성 체크 테스트")
 	@ParameterizedTest
 	@NullAndEmptySource
 	@ValueSource(strings = {"  ", "1", "11,2,3,4,5,6, ", "1.1.1.1.1.1", "12,23,44,56,87", "1,2,3,4,5,6,",

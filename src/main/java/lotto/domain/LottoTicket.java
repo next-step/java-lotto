@@ -5,6 +5,7 @@ import static lotto.util.ValidationUtils.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,8 +14,8 @@ class LottoTicket {
 
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final String DELIMITER = ",";
-	private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "로또 숫자가 유효하지 않습니다.";
-	private static final String INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE = "로또 번호 문자열이 형식에 맞지 않습니다.";
+	private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "로또 숫자는 %d 자리입니다.";
+	private static final String INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE = "로또 번호 문자열은 숫자와 %s만 가능합니다.";
 
 	private final Set<LottoNumber> lottoNumbers;
 
@@ -30,7 +31,7 @@ class LottoTicket {
 
 	private void validate(Set<LottoNumber> lottoNumbers) {
 		if (!validateCollection(lottoNumbers, LOTTO_NUMBER_COUNT)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
+			throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBERS_MESSAGE, LOTTO_NUMBER_COUNT));
 		}
 	}
 
@@ -46,7 +47,7 @@ class LottoTicket {
 
 	private void validateNumberString(String numbersString) {
 		if (!validateNumbersPattern(numbersString)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE);
+			throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE, DELIMITER));
 		}
 	}
 
@@ -87,7 +88,10 @@ class LottoTicket {
 
 	@Override
 	public String toString() {
-		return lottoNumbers.toString();
+		List<LottoNumber> list = new ArrayList<>(lottoNumbers);
+		Collections.sort(list);
+
+		return list.toString();
 	}
 
 }

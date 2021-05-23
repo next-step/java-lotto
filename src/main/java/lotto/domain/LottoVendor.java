@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoVendor {
+public class LottoVendor {
 
 	private final LottoTicket winningLottoTicket;
 
-	LottoVendor(LottoTicket winningLottoTicket) {
-		this.winningLottoTicket = winningLottoTicket;
+	public LottoVendor(String winningLottoNumbers) {
+		this.winningLottoTicket = new LottoTicket(winningLottoNumbers);
 	}
 
-	LottoReport report(List<LottoTicket> lottoTickets) {
+	public LottoReport report(List<LottoTicket> lottoTickets) {
 		List<LottoRank> lottoRankList = new ArrayList<>();
 		addLottoRanks(lottoTickets, lottoRankList);
 

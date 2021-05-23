@@ -16,7 +16,7 @@ class LottoVendorTest {
 	@Test
 	void report() {
 		// given
-		LottoVendor lottoVendor = new LottoVendor(new LottoTicket("1,2,3,4,5,6"));
+		LottoVendor lottoVendor = new LottoVendor("1,2,3,4,5,6");
 		List<LottoTicket> lottoTicketList = new ArrayList<>();
 		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
 		UserLotto userLotto = new UserLotto(lottoTicketList);

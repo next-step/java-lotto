@@ -46,6 +46,7 @@ class LottoNumberTest {
 			LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
 	}
 
+	@DisplayName("유효성 체크 테스트")
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 46})
 	void invalid(int number) {

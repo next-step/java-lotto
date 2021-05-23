@@ -8,7 +8,7 @@ class LottoNumber implements Comparable<LottoNumber> {
 
 	private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
 	private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
-	private static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호가 유효하지 않습니다.";
+	private static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 %d에서 %d 사이입니다.";
 	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>(LOTTO_NUMBER_UPPER_BOUND);
 
 	static {
@@ -30,7 +30,8 @@ class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void validate(int number) {
 		if (number < LOTTO_NUMBER_LOWER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_MESSAGE);
+			throw new IllegalArgumentException(
+				String.format(INVALID_LOTTO_NUMBER_MESSAGE, LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND));
 		}
 	}
 
