@@ -10,7 +10,9 @@ import java.util.stream.Stream;
 import static java.lang.String.format;
 
 public class ResultView {
-    private static final String BUYING_COUNT_MESSAGE = "%d 개를 구매했습니다.";
+    private static final String BUYING_COUNT_MESSAGE = "수동으로 %d장 자동으로 %d개를 구매했습니다.";
+    private static final String MATCHING_STATISTICS_MESSAGE = "당첨통계";
+    private static final String LINE_DELIMITER = "---------";
     private static final String MATCHING_COUNT_MESSAGE = "%d개 일치 (%d원)-%d개";
     private static final String MATCHING_COUNT_MESSAGE_FOR_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)-%d개";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다 (%s)";
@@ -22,13 +24,16 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         List<Lotto> lottosValues = lottos.getValues();
-        System.out.println(format(BUYING_COUNT_MESSAGE, lottosValues.size()));
+        System.out.println(format(BUYING_COUNT_MESSAGE, lottos.getManuals().size(), lottos.getAutos().size()));
         for (Lotto lotto : lottosValues) {
             System.out.println(lotto.getNumbers());
         }
     }
 
     public static void printStatistics(WinningResults results, ProfitStatistics statistics) {
+        System.out.print(System.lineSeparator());
+        System.out.println(MATCHING_STATISTICS_MESSAGE);
+        System.out.println(LINE_DELIMITER);
         System.out.println(Stream.of(WinningType.values())
                 .filter(type -> !type.equals(WinningType.NOTHING))
                 .sorted(Collections.reverseOrder())
