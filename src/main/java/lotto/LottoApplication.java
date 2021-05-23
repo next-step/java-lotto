@@ -19,9 +19,10 @@ public class LottoApplication {
 
 	public int run() {
 		try {
-			UserLotto userLotto = receiveMoneyAndBuyLotto();
+			sendMessage(requestMoneyMessage());
+			UserLotto userLotto = buyLotto(receiveMoney());
+			viewUserLottoReport(reportUserLotto(userLotto));
 			viewUserLottoState(userLotto);
-			viewLottoReport(userLotto);
 
 			return NORMAL_SIGNAL;
 		} catch (Exception e) {
@@ -33,21 +34,38 @@ public class LottoApplication {
 		}
 	}
 
-	private void viewLottoReport(UserLotto userLotto) {
-		LottoReport lottoReport = lottoController.report(userInterface.receiveWinningLottoNumber(), userLotto);
-		userInterface.send(lottoView.lottoReportView(lottoReport));
+	private String requestMoneyMessage() {
+		return lottoView.inputMoneyView();
+	}
+
+	private void sendMessage(String message) {
+		userInterface.send(message);
+	}
+
+	private String receiveMoney() {
+		return userInterface.receiveMoney();
+	}
+
+	private UserLotto buyLotto(String money) {
+		return lottoController.buyLotto(money);
+	}
+
+	private void viewUserLottoReport(LottoReport lottoReport) {
+		sendMessage(lottoView.lottoReportView(lottoReport));
+	}
+
+	private LottoReport reportUserLotto(UserLotto userLotto) {
+		return lottoController.report(winningLottoNumbers(), userLotto);
+	}
+
+	private String winningLottoNumbers() {
+		return userInterface.receiveWinningLottoNumber();
 	}
 
 	private void viewUserLottoState(UserLotto userLotto) {
-		userInterface.send(lottoView.userLottoCountView(userLotto.count()));
-		userInterface.send(lottoView.userLottoNumberListView(userLotto.lottoNumberMessage()));
-		userInterface.send(lottoView.inputWinningLottoNumbers());
-	}
-
-	private UserLotto receiveMoneyAndBuyLotto() {
-		userInterface.send(lottoView.inputMoneyView());
-
-		return lottoController.buyLotto(userInterface.receiveMoney());
+		sendMessage(lottoView.userLottoCountView(userLotto.count()));
+		sendMessage(lottoView.userLottoNumberListView(userLotto.lottoNumberMessage()));
+		sendMessage(lottoView.inputWinningLottoNumbers());
 	}
 
 	public static void main(String[] args) {
