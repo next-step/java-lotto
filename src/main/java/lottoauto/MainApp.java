@@ -5,21 +5,14 @@ public class MainApp {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        outputView.println("구입금액을 입력해 주세요.");
-        Money money = new Money(inputView.nextInt());
+        outputView.enterPurChaseAmount();
+        User user = new User(new Money(inputView.nextInt()));
 
-        LottoStore lottoStore = new LottoStore();
-
-        User user = new User(money);
-        user.buyLottoTickets(lottoStore);
-
+        user.buyLottoTickets(new LottoStore());
         user.printLottoTickets(outputView);
 
-
-        outputView.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbersContents = inputView.next();
-
-        LottoNumbers winningNumbers = new LottoNumbers(winningNumbersContents);
+        outputView.enterWinningNumber();
+        LottoNumbers winningNumbers = new LottoNumbers(inputView.next());
 
         user.checkHitCount(winningNumbers);
         user.printHitCount(outputView);

@@ -33,13 +33,14 @@ public class User {
     }
 
     public void printHitCount(OutputView outputView) {
-        outputView.println(lottoStatement.toString());
+        outputView.printStatement(lottoStatement);
     }
 
     public void printLottoTickets(OutputView outputView) {
+        outputView.printLottoTicketsCount(lottoTickets.size());
+        
         for(LottoTicket lottoTicket: lottoTickets) {
-            outputView.print(lottoTicket);
-            outputView.print("\n");
+            outputView.printLottoTicket(lottoTicket);
         }
     }
 }
