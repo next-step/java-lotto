@@ -17,4 +17,8 @@ public class Lottos {
 			throw new RuntimeException("the size of lottos can not exceed 100");
 		}
 	}
+
+	public int size() {
+		return this.lottos.size();
+	}
 }
