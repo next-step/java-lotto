@@ -94,13 +94,14 @@ LotteryTicket - 로또
   - [x] 구매자는 일정 금액을 소지할 수 있다.
   - [x] 처음 로또는 0개 가지고 있다.
   - [x] 금액 만큼의 로또를 LotteryStore으로 부터 구매할 수 있다.
-- [ ] 로또를 판매하는 가게(LotteryStore)는 자동으로 숫자를 찍어내 금액만큼 만들어 로또 구매자(LotteryBuyer)에게 전달해준다.
+- [x] 로또를 판매하는 가게(LotteryStore)는 자동으로 숫자를 찍어내 금액만큼 만들어 로또 구매자(LotteryBuyer)에게 전달해준다.
   - [x] LotteryStore은 LotteryBuyer가 제시한 금액만큼의 로또를 전달해준다.
     - [x] LotteryTicket을 LotteryMachine을 통해 발행한다.
     - [x] LotteryStore 는 가격을 계산해서 갯수만큼 구매자에게 티켓을 제공한다.
-  - [ ] 각 로또는 6개의 숫자로 구성된다. (범위: 1- 45)
-  - [ ] 6개의 숫자는 자동으로 랜덤하게 만들어진다. (범위: 1- 45)
-  - [ ] 6개의 숫자는 정렬된 형태를 가진다.
+  - [x] LotteryMachine을 통해 만들어진 Ticket은
+    - [x] 6개의 숫자로 구성된다. (범위: 1- 45)
+    - [x] 자동으로 랜덤하게 만들어진다. (범위: 1- 45)
+    - [x] 마지막으로, 6개의 숫자는 정렬된 형태를 가진다.
   
 - [ ] 로또당첨정보센터(LotteryInfoCenter)은 지난 주 당첨번호로 로또구매자(LotteryBuyer)의 로또 당첨을 확인해준다.
   - [ ] System으로 부터 지난주당첨번호를 제공받는다
@@ -110,6 +111,7 @@ LotteryTicket - 로또
 - [ ] 추후 고려해야하는 사항
   - [ ] TicketList 에 대한 일급 컬렉션 고려하기
   - [ ] View 개발
+  - [ ] Random Number 리스트로 변경하기
 
 # [4단계] 로또(2등)
 
