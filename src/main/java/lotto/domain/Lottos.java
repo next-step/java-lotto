@@ -33,8 +33,4 @@ public class Lottos {
                 .filter(Lotto::isManual)
                 .collect(Collectors.toList());
     }
-
-    public void add(Lottos buyAutoLottos) {
-        this.lottos.addAll(buyAutoLottos.lottos);
-    }
 }
