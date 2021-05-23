@@ -18,7 +18,7 @@ public class LottoStore {
         return lottoTickets;
     }
 
-    public int price() {
-        return LOTTO_TICKET_PRICE;
+    public Money calcInvestment(int ticketCount) {
+        return new Money(LOTTO_TICKET_PRICE * ticketCount);
     }
 }

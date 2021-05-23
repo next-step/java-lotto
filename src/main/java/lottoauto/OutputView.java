@@ -32,4 +32,8 @@ public class OutputView {
     public void printLottoTicketsCount(int size) {
         println(size+"개를 구매했습니다.");
     }
+
+    public void printProceedsRate(double proceedsRate) {
+        println("총 수익률은 " + proceedsRate + "입니다.");
+    }
 }

@@ -22,6 +22,7 @@ public class LottoStoreTest {
     @DisplayName("로또티켓 가격 테스트")
     @Test
     void 로또티켓가격() {
-        assertThat(lottoStore.price()).isEqualTo(1000);
+        assertThat(lottoStore.calcInvestment(14)).isEqualTo(new Money(14000));
+        assertThat(lottoStore.calcInvestment(1)).isEqualTo(new Money(1000));
     }
 }

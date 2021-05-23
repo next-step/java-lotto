@@ -14,6 +14,10 @@ public enum LottoRule {
         this.winningMoney = winningMoney;
     }
 
+    public Money winningMoney() {
+        return winningMoney;
+    }
+
     public boolean isEqualsHitCount(HitCount hitCount) {
         return this.hitCount.equals(hitCount);
     }
@@ -21,5 +25,9 @@ public enum LottoRule {
     @Override
     public String toString() {
         return hitCount.toString() + "개" + "일치 (" + winningMoney.toString() + ")-";
+    }
+
+    public int calcProceed(int count) {
+        return winningMoney.calcProceed(count);
     }
 }

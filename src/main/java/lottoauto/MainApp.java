@@ -8,7 +8,9 @@ public class MainApp {
         outputView.enterPurChaseAmount();
         User user = new User(new Money(inputView.nextInt()));
 
-        user.buyLottoTickets(new LottoStore());
+        LottoStore lottoStore = new LottoStore();
+
+        user.buyLottoTickets(lottoStore);
         user.printLottoTickets(outputView);
 
         outputView.enterWinningNumber();
@@ -16,5 +18,8 @@ public class MainApp {
 
         user.checkHitCount(winningNumbers);
         user.printHitCount(outputView);
+
+        user.calcProceedsRate(lottoStore);
+        user.printProceedsRate(outputView);
     }
 }

@@ -29,6 +29,18 @@ public final class Money {
 
     @Override
     public String toString() {
-        return Integer.toString(money) + MONEY_UNIT;
+        return money + MONEY_UNIT;
+    }
+
+    public int calcProceed(int count) {
+        return this.money * count;
+    }
+
+    public double calcProceedsRate(Money proceeds) {
+        return proceeds.divide(this.money);
+    }
+
+    private double divide(int investment) {
+        return this.money / (double) investment;
     }
 }
