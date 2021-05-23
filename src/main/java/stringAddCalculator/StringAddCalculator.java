@@ -4,9 +4,18 @@ import java.util.List;
 
 public class StringAddCalculator {
     private static InputHandler inputHandler = new InputHandler();
+    private static Divider divider = new Divider();
 
     public static int splitAndSum(String input) {
-        return 0;
+        if (inputHandler.isEmptyInput(input)) return 0;
+        String targetNum = input;
+        List<String> splitInputs = divider.getSplitByCustomDelimiter(input);
+        if (splitInputs.size() > 1) {
+            divider.setCustomDelimiter(splitInputs.get(0));
+            targetNum = splitInputs.get(1);
+        }
+        String[] numArray = divider.getDividedInput(targetNum);
+        return stringAdd(numArray);
     }
 
     private static int stringAdd(String[] numArray) {
