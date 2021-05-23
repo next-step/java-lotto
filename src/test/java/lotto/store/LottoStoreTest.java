@@ -14,10 +14,4 @@ public class LottoStoreTest {
 		assertThat(lottoStore.count()).isEqualTo(10);
 	}
 
-	@Test
-	@DisplayName(value = "구매 가격 만큼의 로또를 생산한다")
-	void produceLotto() {
-		LottoStore lottoStore = new LottoStore(15000, 1000);
-		assertThat(lottoStore.produceLotto().size()).isEqualTo(lottoStore.count());
-	}
 }
