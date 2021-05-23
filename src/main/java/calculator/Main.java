@@ -6,6 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println(new AddCalculatorModel(sc.nextLine()).execute());
+		AddCalculatorModel model = new AddCalculatorModel();
+		System.out.println(model.execute(sc.nextLine()));
 	}
 }
