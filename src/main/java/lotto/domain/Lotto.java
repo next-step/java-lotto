@@ -47,14 +47,18 @@ public class Lotto {
         }
     }
 
-    public Rank getRank(final Lotto winnerLotto) {
-        return Rank.valueOf(getMatchCount(winnerLotto));
+    public Rank getRank(final Lotto winnerLotto, final LottoNumber bonusNumber) {
+        return Rank.valueOf(getMatchCount(winnerLotto), matchBonus(bonusNumber));
     }
 
     private int getMatchCount(final Lotto winnerLotto) {
         return (int) winnerLotto.getLotto().stream()
                 .filter(lottoNumber -> this.lotto.contains(lottoNumber))
                 .count();
+    }
+
+    private boolean matchBonus(final LottoNumber bonusNumber) {
+        return lotto.contains(bonusNumber);
     }
 
     public Set<LottoNumber> getLotto() {
