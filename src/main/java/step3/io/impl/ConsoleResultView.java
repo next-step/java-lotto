@@ -2,20 +2,13 @@ package step3.io.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 import step3.constant.OutputMessage;
 import step3.constant.WinnerPrice;
 import step3.io.ResultView;
 
 public class ConsoleResultView implements ResultView {
-
-    private static Pattern pattern;
-
-    public ConsoleResultView() {
-        pattern = Pattern.compile("(\\{.\\})");
-    }
 
     @Override
     public void showInputPrice() {
@@ -41,12 +34,12 @@ public class ConsoleResultView implements ResultView {
 
     private void showOne(List<Integer> one) {
         List<String> temp = new ArrayList<>();
-        temp.add(OutputMessage.BRACKETS_START.text());
         for (Integer number : one) {
             temp.add(String.valueOf(number));
         }
-        temp.add(OutputMessage.BRACKETS_END.text());
-        System.out.println(String.join(" ", temp));
+        System.out.printf(OutputMessage.ONE_LOTTO.text(),
+            String.join(" ", temp));
+        System.out.println();
     }
 
     @Override
@@ -55,45 +48,25 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void showWinning(List<Integer> winningWithNumbers) {
+    public void showWinning(Map<WinnerPrice, Long> winningWithNumbers) {
         System.out.println(OutputMessage.STATISTICS.text());
         System.out.println(OutputMessage.SEPERATOR.text());
-        showPlace(winningWithNumbers, OutputMessage.THREE_WINNER.text(),
-            WinnerPrice.FOURTH.winnerPrice(), WinnerPrice.THIRD.matchedCount());
-        showPlace(winningWithNumbers, OutputMessage.FOUR_WINNER.text(),
-            WinnerPrice.THIRD.winnerPrice(), WinnerPrice.THIRD.matchedCount());
-        showPlace(winningWithNumbers, OutputMessage.FIVE_WINNER.text(),
-            WinnerPrice.SECOND.winnerPrice(),
-            WinnerPrice.SECOND.matchedCount());
-        showPlace(winningWithNumbers, OutputMessage.SIX_WINNER.text(),
-            WinnerPrice.FIRST.winnerPrice(), WinnerPrice.FIRST.matchedCount());
+        printWinningOne(WinnerPrice.FOURTH, winningWithNumbers);
+        printWinningOne(WinnerPrice.THIRD, winningWithNumbers);
+        printWinningOne(WinnerPrice.SECOND, winningWithNumbers);
+        printWinningOne(WinnerPrice.FIRST, winningWithNumbers);
+
     }
 
-    private void showPlace(List<Integer> winningWithNumbers, String changeText,
-            int winningPrice, int winningCount) {
+    private void printWinningOne(WinnerPrice winnerPrice,
+            Map<WinnerPrice, Long> winningWithNumbers) {
 
-        Matcher matcher = pattern.matcher(changeText);
-        changeText = replacePrice(changeText, matcher, winningPrice);
-        changeText = replaceCount(changeText, matcher, winningWithNumbers,
-            winningCount);
+        System.out.printf(OutputMessage.COUNT.text(),
+            winnerPrice.matchedCount(),
+            winnerPrice.winnerPrice(),
+            winningWithNumbers.getOrDefault(winnerPrice, 0L));
+        System.out.println();
 
-        System.out.println(changeText);
-    }
-
-    private String replaceCount(String changeText, Matcher matcher,
-            List<Integer> winningWithNumbers, int winningCount) {
-
-        matcher.find();
-        return changeText
-            .replace(matcher.group(),
-                String.valueOf(winningWithNumbers.get(winningCount)));
-    }
-
-    private String replacePrice(String changeText, Matcher matcher,
-            int winningPrice) {
-        matcher.find();
-        return changeText
-            .replace(matcher.group(), String.valueOf(winningPrice));
     }
 
     @Override
@@ -103,16 +76,8 @@ public class ConsoleResultView implements ResultView {
 
     @Override
     public void showBenefit(String benefit) {
-        String changeText = OutputMessage.BENEFIT.text();
-        Matcher matcher = pattern.matcher(changeText);
-        System.out.println(replaceBenefit(matcher, changeText, benefit));
-    }
-
-    private String replaceBenefit(Matcher matcher, String changeText,
-            String benefit) {
-        matcher.find();
-        return changeText
-            .replace(matcher.group(), benefit);
+        System.out.printf(OutputMessage.BENEFIT.text(), benefit);
+        System.out.println();
     }
 
 }

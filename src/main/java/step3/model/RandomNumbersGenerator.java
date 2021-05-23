@@ -14,7 +14,7 @@ public class RandomNumbersGenerator {
 
     private static final List<Integer> LOTTO_RANGE = IntStream
         .rangeClosed(START, END).boxed()
-        .collect(Collectors.toList());;
+        .collect(Collectors.toList());
 
     public static List<Integer> createNumbers() {
         Collections.shuffle(LOTTO_RANGE);

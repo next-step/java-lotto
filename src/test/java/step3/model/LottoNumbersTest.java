@@ -1,13 +1,15 @@
 package step3.model;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import step3.constant.WinnerPrice;
 
 public class LottoNumbersTest {
 
@@ -46,31 +48,31 @@ public class LottoNumbersTest {
 
     private void checkSix(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new LottoNumbers(
+            .getWinnerPrice(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))))
-                    .isEqualTo(6);
+                    .isEqualTo(WinnerPrice.FIRST);
     }
 
     private void checkFive(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new LottoNumbers(
+            .getWinnerPrice(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7)))))
-                    .isEqualTo(5);
+                    .isEqualTo(WinnerPrice.SECOND);
     }
 
     private void checkFour(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new LottoNumbers(
+            .getWinnerPrice(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)))))
-                    .isEqualTo(4);
+                    .isEqualTo(WinnerPrice.THIRD);
 
     }
 
     private void checkThree(LottoNumbers numbers) {
         assertThat(numbers
-            .countWinning(new LottoNumbers(
+            .getWinnerPrice(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9)))))
-                    .isEqualTo(3);
+                    .isEqualTo(WinnerPrice.FOURTH);
     }
 
     private void setLottoNumbersOverSix(LottoNumbers lottoNumbers) {

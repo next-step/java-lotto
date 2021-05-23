@@ -1,6 +1,9 @@
 package step3.io;
 
 import java.util.List;
+import java.util.Map;
+
+import step3.constant.WinnerPrice;
 
 public interface ResultView {
 
@@ -16,7 +19,7 @@ public interface ResultView {
 
     void showEmptyLine();
 
-    void showWinning(List<Integer> winningWithNumbers);
+    void showWinning(Map<WinnerPrice, Long> map);
 
     void showBenefit(String benefit);
 

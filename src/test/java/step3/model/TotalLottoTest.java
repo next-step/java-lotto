@@ -4,10 +4,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import step3.constant.WinnerPrice;
 
 public class TotalLottoTest {
 
@@ -48,13 +50,13 @@ public class TotalLottoTest {
         TotalLotto totalLotto = new TotalLotto();
         setLottos(totalLotto);
 
-        List<Integer> winning = totalLotto.getWinningWithNumbers(
+        Map<WinnerPrice, Long> winning = totalLotto.groupByWinnerPrice(
             new LottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
 
-        assertThat(winning.get(3)).isEqualTo(1);
-        assertThat(winning.get(4)).isEqualTo(2);
-        assertThat(winning.get(5)).isEqualTo(1);
-        assertThat(winning.get(6)).isEqualTo(1);
+        assertThat(winning.get(WinnerPrice.FIRST)).isEqualTo(1);
+        assertThat(winning.get(WinnerPrice.SECOND)).isEqualTo(1);
+        assertThat(winning.get(WinnerPrice.THIRD)).isEqualTo(2);
+        assertThat(winning.get(WinnerPrice.FOURTH)).isEqualTo(1);
     }
 
     private void setLottos(TotalLotto totalLotto) {

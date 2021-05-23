@@ -1,8 +1,9 @@
 package step3.game;
 
-import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import step3.constant.WinnerPrice;
 import step3.io.InputView;
 import step3.io.ResultView;
 import step3.model.LottoNumber;
@@ -89,7 +90,7 @@ public class Lotto {
             resultView.showInputVictoryNumber();
             LottoNumbers victoryNumber = getVictoryNumbers(
                 inputView.getVictoryNumbers());
-            showWinning(totalLotto.getWinningWithNumbers(victoryNumber));
+            showWinning(totalLotto.groupByWinnerPrice(victoryNumber));
             showBanefit(totalLotto.getBenefit(victoryNumber, price));
 
         } catch (Exception e) {
@@ -103,8 +104,8 @@ public class Lotto {
         resultView.showBenefit(benefit);
     }
 
-    private void showWinning(List<Integer> winningWithNumbers) {
-        resultView.showWinning(winningWithNumbers);
+    private void showWinning(Map<WinnerPrice, Long> map) {
+        resultView.showWinning(map);
     }
 
     private LottoNumbers getVictoryNumbers(String victoryNumbers) {

@@ -4,13 +4,16 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import step3.constant.WinnerPrice;
 
 public class TotalLotto {
 
-    private static final int MAX_WINNING = 6;
-    private ArrayList<LottoNumbers> totalLotto;
+    private static List<LottoNumbers> totalLotto;
 
     public TotalLotto() {
         totalLotto = new ArrayList<>();
@@ -24,10 +27,6 @@ public class TotalLotto {
         totalLotto.add(new LottoNumbers(list));
     }
 
-    public ArrayList<LottoNumbers> totalLotto() {
-        return totalLotto;
-    }
-
     public List<List<Integer>> lotto() {
         List<List<Integer>> result = new ArrayList<>();
         for (LottoNumbers lottoNumbers : totalLotto) {
@@ -36,62 +35,33 @@ public class TotalLotto {
         return result;
     }
 
-    public List<Integer> getWinningWithNumbers(
-            LottoNumbers victoryNumber) {
-
-        List<Integer> result = initWithNumbers();
-        for (LottoNumbers lotto : totalLotto) {
-            int countWinning = lotto.countWinning(victoryNumber);
-            result.set(countWinning, result.get(countWinning) + 1);
-        }
-
-        return result;
-    }
-
-    private List<Integer> initWithNumbers() {
-        List<Integer> result = new ArrayList<Integer>();
-        for (int index = 0; index < MAX_WINNING + 1; index++) {
-            result.add(0);
-        }
-        return result;
-    }
-
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
-        List<Integer> winning = getWinningWithNumbers(victoryNumber);
 
-        BigDecimal result = addThreePrice(winning);
-        result = addFourPrice(winning, result);
-        result = addFivePrice(winning, result);
-        result = addSixPrice(winning, result);
+        Map<WinnerPrice, Long> lottoResult = groupByWinnerPrice(victoryNumber);
+        BigDecimal result = sumResult(lottoResult);
 
         return result
             .divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN)
             .toString();
     }
 
-    private BigDecimal addSixPrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.FIRST.winnerPrice(), winning,
-            WinnerPrice.FIRST.matchedCount()));
+    public Map<WinnerPrice, Long> groupByWinnerPrice(
+            LottoNumbers victoryNumber) {
+
+        return totalLotto.stream()
+            .map(lottoNumbers -> lottoNumbers.getWinnerPrice(victoryNumber))
+            .collect(Collectors.groupingBy(Function.identity(),
+                Collectors.counting()));
     }
 
-    private BigDecimal addFivePrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.SECOND.winnerPrice(), winning,
-            WinnerPrice.SECOND.matchedCount()));
-    }
+    private BigDecimal sumResult(Map<WinnerPrice, Long> lottoResult) {
+        Set<WinnerPrice> lottoRanks = lottoResult.keySet();
 
-    private BigDecimal addFourPrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.THIRD.winnerPrice(), winning,
-            WinnerPrice.THIRD.matchedCount()));
-    }
-
-    private BigDecimal addThreePrice(List<Integer> winning) {
-        return calculator(WinnerPrice.FOURTH.winnerPrice(), winning,
-            WinnerPrice.FOURTH.matchedCount());
-    }
-
-    private BigDecimal calculator(int price, List<Integer> winning, int index) {
-        return new BigDecimal(price)
-            .multiply(new BigDecimal(winning.get(index)));
+        return lottoRanks.stream()
+            .map(
+                winner -> new BigDecimal(winner.winnerPrice())
+                    .multiply(new BigDecimal(lottoResult.get(winner))))
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import step3.constant.WinnerPrice;
+
 public final class LottoNumbers {
 
     private static final int MAX_SIZE = 7;
@@ -60,36 +62,16 @@ public final class LottoNumbers {
         return result;
     }
 
-    public int countWinning(LottoNumbers victoryNumber) {
-        int result = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            result = compareTwoNumber(victoryNumber, lottoNumber, result);
-        }
-        return result;
+    public WinnerPrice getWinnerPrice(LottoNumbers victoryNumber) {
+        int matchedCount = (int)lottoNumbers.stream()
+            .filter(victoryNumber::contains).count();
+
+        return WinnerPrice.findWinnerPriceBymatchedCount(matchedCount);
     }
 
-    private int compareTwoNumber(LottoNumbers victoryNumber,
-            LottoNumber lottoNumber, int result) {
-
-        return victoryNumber.hasNumber(lottoNumber) ? result + 1 : result;
-    }
-
-    private boolean hasNumber(LottoNumber inputNumber) {
-        boolean result = false;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            result = isEqualsNumber(inputNumber, result, lottoNumber);
-        }
-        return result;
-    }
-
-    private boolean isEqualsNumber(LottoNumber inputNumber, boolean result,
-            LottoNumber lottoNumber) {
-
-        if (!result && lottoNumber.equals(inputNumber)) {
-            result = true;
-        }
-
-        return result;
+    private boolean contains(LottoNumber compare) {
+        return lottoNumbers.stream()
+            .filter(lottoNumber -> lottoNumber.equals(compare)).count() == 1;
     }
 
 }
