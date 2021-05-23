@@ -23,12 +23,20 @@ public class WinningNumbersTest {
         assertThatThrownBy(()->new WinningNumbers(new Integer[] {1, 1, 3, 4, 5, 6}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
+
+        assertThatThrownBy(()->new WinningNumbers("1,1,3,4,5,6"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
     }
 
     @Test
     @DisplayName("당첨 번호 길이 테스트")
     void winningNumbers_shouldThrowInvalidLengthException() {
         assertThatThrownBy(()->new WinningNumbers(new Integer[] {1, 2, 3}))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH.getErrorMessage());
+
+        assertThatThrownBy(()->new WinningNumbers("1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH.getErrorMessage());
     }

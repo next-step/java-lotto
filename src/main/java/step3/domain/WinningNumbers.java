@@ -22,6 +22,7 @@ public class WinningNumbers {
             resultNumbers[i] = Integer.parseInt(textNumbers[i]);
         }
 
+        throwInValidWinningNumbers(resultNumbers);
         this.winningNumbers = parseWinningNumbers(resultNumbers);
     }
 
