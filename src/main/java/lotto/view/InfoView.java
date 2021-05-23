@@ -1,9 +1,9 @@
 package lotto.view;
 
 import lotto.domain.Game;
+import lotto.domain.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.LottoNumber;
 
 import java.util.List;
 import java.util.Set;

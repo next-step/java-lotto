@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.domain.PositiveNumber;
 import lotto.domain.Game;
-import lotto.domain.rank.LottoRanks;
 import lotto.domain.LottoWon;
-import lotto.view.InputView;
+import lotto.domain.PositiveNumber;
+import lotto.domain.rank.LottoRanks;
 import lotto.view.InfoView;
+import lotto.view.InputView;
 import lotto.view.MatchResultView;
 
 public class Application {

@@ -1,11 +1,12 @@
 package lotto.view;
 
-import lotto.domain.PositiveNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWon;
+import lotto.domain.PositiveNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -25,12 +26,24 @@ public class InputView {
     }
 
     public LottoWon wonNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String numbers = scanner.next();
+        return new LottoWon(wonLottoNumbers(), bonusNumber());
+    }
 
-        return new LottoWon(Arrays.stream(numbers.split(LOTTO_WON_DELIMITER))
+    private Set<LottoNumber> wonLottoNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+        return Arrays.stream(
+                scanner.next()
+                        .split(LOTTO_WON_DELIMITER)
+        )
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
+    }
+
+    private LottoNumber bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return LottoNumber.of(Integer.parseInt(scanner.next()));
     }
 }

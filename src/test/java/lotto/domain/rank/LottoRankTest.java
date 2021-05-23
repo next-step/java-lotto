@@ -9,16 +9,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoRankTest {
     @ParameterizedTest
     @CsvSource(value = {
-            "1,MISS",
-            "2,MISS",
-            "3,FOURTH",
-            "4,THIRD",
-            "5,SECOND",
-            "6,FIRST"
+            "1,false,MISS",
+            "1,true,MISS",
+            "2,false,MISS",
+            "2,true,MISS",
+            "3,false,FIFTH",
+            "3,true,FIFTH",
+            "4,false,FOURTH",
+            "4,true,FOURTH",
+            "5,false,THIRD",
+            "5,true,SECOND",
+            "6,false,FIRST"
     })
     @DisplayName("맞은 갯수에 맞게 로또랭킹을 가져와야 한다")
-    public void 맞은_갯수에_맞게_로또랭킹을_가져와야_한다(int countOfMatched, LottoRank except) {
-        assertThat(LottoRank.valueOf(countOfMatched))
+    public void 맞은_갯수에_맞게_로또랭킹을_가져와야_한다(int countOfMatched, boolean bonusMatched, LottoRank except) {
+        assertThat(LottoRank.valueOf(countOfMatched, bonusMatched))
                 .isEqualTo(except);
     }
 }

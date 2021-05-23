@@ -20,13 +20,15 @@ public class LottoRanksTest {
                 LottoRank.FIRST,
                 LottoRank.SECOND,
                 LottoRank.SECOND,
-                LottoRank.SECOND,
-                LottoRank.SECOND,
+                LottoRank.THIRD,
                 LottoRank.THIRD,
                 LottoRank.THIRD,
                 LottoRank.THIRD,
                 LottoRank.FOURTH,
-                LottoRank.FOURTH
+                LottoRank.FOURTH,
+                LottoRank.FOURTH,
+                LottoRank.FIFTH,
+                LottoRank.FIFTH
         );
 
 
@@ -35,10 +37,12 @@ public class LottoRanksTest {
         assertThat(lottoRanks.countOf(LottoRank.FIRST))
                 .isEqualTo(5L);
         assertThat(lottoRanks.countOf(LottoRank.SECOND))
-                .isEqualTo(4L);
+                .isEqualTo(2L);
         assertThat(lottoRanks.countOf(LottoRank.THIRD))
-                .isEqualTo(3L);
+                .isEqualTo(4L);
         assertThat(lottoRanks.countOf(LottoRank.FOURTH))
+                .isEqualTo(3L);
+        assertThat(lottoRanks.countOf(LottoRank.FIFTH))
                 .isEqualTo(2L);
         assertThat(lottoRanks.countOf(LottoRank.MISS))
                 .isEqualTo(0L);
