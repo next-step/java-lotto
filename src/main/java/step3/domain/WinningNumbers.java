@@ -34,9 +34,9 @@ public class WinningNumbers {
         return resultNumbers;
     }
 
-    public WinningType findWinningType(LottoTicket lottoTicketket) {
+    public WinningType findWinningType(LottoTicket lottoTicket) {
         int matchCount = 0;
-        for (LottoNumber lottoNumber : lottoTicketket.toArray()) {
+        for (LottoNumber lottoNumber : lottoTicket.toArray()) {
             matchCount += contains(lottoNumber);
         }
 

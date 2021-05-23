@@ -1,7 +1,6 @@
 package step3.domain;
 
 import step3.common.ErrorCode;
-import step3.common.WinningType;
 
 import java.util.*;
 
@@ -42,5 +41,10 @@ public class LottoTicket {
         if(inputNumbers.length != LOTTO_NUMBERS_LENGTH ) {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH.getErrorMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
     }
 }

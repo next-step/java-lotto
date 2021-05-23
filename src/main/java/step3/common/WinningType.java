@@ -26,6 +26,10 @@ public enum WinningType {
         return SEVENTH;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getPrize() {
         return prize;
     }

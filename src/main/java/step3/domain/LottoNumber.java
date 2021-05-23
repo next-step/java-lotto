@@ -31,4 +31,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
         return super.equals(obj);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.lottoNumber);
+    }
 }
