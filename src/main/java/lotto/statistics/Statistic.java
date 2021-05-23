@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Statistic {
 
-	public Statistic(int matchCount, Earn earn) {
-		this.count = matchCount;
+	public Statistic(int repeatedCount, Earn earn) {
+		this.count = repeatedCount;
 		this.earn = earn;
 	}
 
@@ -19,6 +19,10 @@ public class Statistic {
 	public Statistic plusMatchCount() {
 		count++;
 		return this;
+	}
+
+	public StringBuffer earningMessage() {
+		return earn.message(count);
 	}
 
 	@Override

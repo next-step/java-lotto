@@ -20,7 +20,7 @@ public class StatisticsCalculatorTest {
 	void statistics() {
 		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
-		Map<Integer, Statistic> countByStatic = calculator.statistics();
+		Map<Integer, Statistic> countByStatic = calculator.statisticsMap();
 		assertThat(countByStatic.get(3)).isEqualTo(new Statistic(1, Earn.THREE_MATCHED));
 	}
 
@@ -30,6 +30,20 @@ public class StatisticsCalculatorTest {
 		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
 		assertThat(calculator.sumEarningPrice()).isEqualTo(5000 + 50000 + 1500000 + 2000000000);
+	}
+
+	@Test
+	@DisplayName(value = "출력 메세지를 검증한다")
+	void printMessage() {
+		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
+		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
+		String message = "당첨 통계\n"
+			+ "---------\n"
+			+ "3개 일치 (5000원)- 1개\n"
+			+ "4개 일치 (50000원)- 1개\n"
+			+ "5개 일치 (1500000원)- 1개\n"
+			+ "6개 일치 (2000000000원)- 1개\n";
+		assertThat(calculator.toString()).isEqualTo(message);
 	}
 
 	private Ticket mockTicket() {
