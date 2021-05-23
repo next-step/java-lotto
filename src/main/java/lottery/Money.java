@@ -3,6 +3,7 @@ package lottery;
 import java.util.Objects;
 
 public final class Money {
+	public static final Money ZERO = new Money(0L);
 	private Long amount;
 
 	private Money(Long amount) {
@@ -25,7 +26,7 @@ public final class Money {
 	}
 
 	public Money minus(Money won) {
-		return new Money(Math.subtractExact(won.amount(), amount()));
+		return new Money(Math.subtractExact(amount, won.amount));
 	}
 
 	@Override
@@ -45,5 +46,17 @@ public final class Money {
 
 	public long divide(Money won) {
 		return Math.floorDiv(this.amount, won.amount);
+	}
+
+	public Money multiply(Integer value) {
+		return Money.won(Math.multiplyExact(this.amount, value));
+	}
+
+	public Money add(Money target) {
+		return Money.won(Math.addExact(this.amount, target.amount));
+	}
+
+	public float divideWithFloating(Money result) {
+		return (float)this.amount / result.amount;
 	}
 }

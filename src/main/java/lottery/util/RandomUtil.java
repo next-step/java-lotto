@@ -6,9 +6,9 @@ import java.util.List;
 
 public class RandomUtil {
 
-	public static List<Integer> randomNumber(){
+	public static List<Integer> generateSixNumbers(final int startInclusive, final int endInclusive){
 		List<Integer> numbers = new ArrayList<>();
-		for (int i = 1; i <= 45 ; i++) {
+		for (int i = startInclusive; i <= endInclusive ; i++) {
 			numbers.add(i);
 		}
 		Collections.shuffle(numbers);

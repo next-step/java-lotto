@@ -1,15 +1,19 @@
 package lottery;
 
+import static java.util.Collections.*;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import lottery.exceptions.InvalidTicketSizeException;
 
 public final class Ticket {
 
-	private final static int SIZE_OF_TICKET = 6;
+	public final static int SIZE_OF_TICKET = 6;
 	private List<Integer> numbers;
 
-	public Ticket(List<Integer> numbers) {
+	private Ticket(List<Integer> numbers) {
 		setNumbers(numbers);
 	}
 

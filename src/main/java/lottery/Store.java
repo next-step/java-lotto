@@ -9,24 +9,23 @@ import java.util.List;
  */
 public class Store {
 
-	private LotteryGenerateMachine machine;
+	private GenerateTicketMachine machine;
 
 	private static final Money TICKET_PRICE = Money.won(1000L);
 
-	private Buyer buyer;
-
 	public Store() {
-		machine = new LotteryGenerateMachine();
+		machine = new GenerateTicketMachine();
 	}
 
 	public List<Ticket> getTicket(Buyer buyer) {
 		Money buyerMoney = buyer.money();
 		long ticketCount = buyerMoney.divide(TICKET_PRICE);
-		buyer.minusAmount(Money.won(ticketCount * buyerMoney.amount()));
-		return machine.createTicket(ticketCount);
+		Money rest = buyerMoney.minus(Money.won(ticketCount * TICKET_PRICE.amount()));
+		buyer.setMoney(rest);
+		return machine.create(ticketCount);
 	}
 
-	public LotteryGenerateMachine getMachine() {
+	public GenerateTicketMachine getMachine() {
 		return machine;
 	}
 }

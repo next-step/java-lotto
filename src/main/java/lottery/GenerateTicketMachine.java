@@ -1,17 +1,18 @@
 package lottery;
 
+import static lottery.util.RandomUtil.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import lottery.util.RandomUtil;
 
-public class LotteryGenerateMachine {
+public class GenerateTicketMachine {
 
-	public List<Ticket> createTicket(long count) {
+	public List<Ticket> create(long count) {
 		List<Ticket> tickets = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			Ticket of = Ticket.of(RandomUtil.randomNumber());
-			tickets.add(of);
+			tickets.add(Ticket.of(generateSixNumbers(1, 45)));
 		}
 		return tickets;
 	}

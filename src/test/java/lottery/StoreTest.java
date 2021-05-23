@@ -8,13 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * Store 의 역할을 Buyer가 살수 있는 ticket 의 갯수를 계산한다.
- */
 class StoreTest {
 
-	Store sut;
-	Buyer buyer;
+	private Store sut;
+	private Buyer buyer;
 
 	@BeforeEach
 	void setUp() {
@@ -26,6 +23,7 @@ class StoreTest {
 	void 자동티켓_머신을_가진다() {
 		assertThat(sut.getMachine()).isNotNull();
 	}
+
 
 	@Test
 	void 티켓을_판매한다() {

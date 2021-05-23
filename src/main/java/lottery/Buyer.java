@@ -1,19 +1,21 @@
 package lottery;
 
+import static java.util.Objects.*;
+
 import java.util.Collections;
 import java.util.List;
 
 public final class Buyer {
-	private final Money money;
+	private Money money = Money.ZERO;
 	private List<Ticket> tickets;
 
 	private Buyer(Money money) {
-		this.money = money;
-		this.tickets = Collections.EMPTY_LIST;
+		setMoney(money);
+		this.tickets = Collections.emptyList();
 	}
 
-	public static Buyer of(Money won) {
-		return new Buyer(won);
+	public static Buyer of(Money initial) {
+		return new Buyer(initial);
 	}
 
 	public Money money() {
@@ -28,12 +30,20 @@ public final class Buyer {
 		return tickets.size() > 0;
 	}
 
-	public void minusAmount(Money target){
-		this.money.minus(target);
-	}
-
 	public void buyTicket(Store store) {
+		requireNonNull(store);
 		this.tickets = store.getTicket(this);
 	}
 
+	public Result checkTicket(InfoCenter infoCenter) {
+		requireNonNull(infoCenter);
+		return infoCenter.confirmTicket(this.tickets);
+	}
+
+	public void setMoney(Money rest) {
+		if (isNull(rest)) {
+			throw new IllegalArgumentException("유효하지 않은 값입니다.");
+		}
+		this.money = rest;
+	}
 }

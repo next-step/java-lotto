@@ -8,14 +8,18 @@ import org.junit.jupiter.api.Test;
 
 class BuyerTest {
 
-	Buyer sut;
+	private Buyer sut;
 
 	@Test
 	void createBuyerTest() {
+		assertThatThrownBy(() -> Buyer.of(null))
+			.isInstanceOf(IllegalArgumentException.class).hasMessageContaining("유효하지 않은 값입니다.");
+
 
 		sut = Buyer.of(Money.won(10000L));
 
 		assertThat(sut.money()).isEqualTo(Money.won(10000L));
 		assertThat(sut.lotteryTickets()).isEqualTo(Collections.emptyList());
 	}
+
 }
