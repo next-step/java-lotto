@@ -96,4 +96,12 @@ public class LottoAppOutputTest {
 
 		assertThat(outputStream.toString()).contains(expectedMessage);
 	}
+
+	@Test
+	@DisplayName("보너스볼을 입력 받을때 '보너스 볼을 입력해 주세요.' 라고 출력해야 한다.")
+	public void inputBonusNumberViewTest() {
+		lottoAppOutput.printBonusNumberView();
+
+		assertThat(outputStream.toString()).contains("보너스 볼을 입력해 주세요.");
+	}
 }

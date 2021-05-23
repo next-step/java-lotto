@@ -5,8 +5,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.model.Money;
-
 public class LottoAppInput {
 	private static final String LOTTO_NUMBER_SPLIT_REGEX = ", |,";
 
@@ -16,10 +14,9 @@ public class LottoAppInput {
 		this.scanner = scanner;
 	}
 
-	public Money inputMoney() {
+	public int inputNumber() {
 		String input = scanner.nextLine();
-		int inputMoney = Integer.parseInt(input);
-		return Money.ofWons(inputMoney);
+		return Integer.parseInt(input);
 	}
 
 	public List<Integer> inputWinningNumbers() {

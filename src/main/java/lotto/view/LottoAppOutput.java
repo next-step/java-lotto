@@ -78,4 +78,8 @@ public class LottoAppOutput {
 			profitOrLoss);
 		printStream.println(render);
 	}
+
+	public void printBonusNumberView() {
+		printStream.println("보너스 볼을 입력해 주세요.");
+	}
 }

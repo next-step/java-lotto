@@ -2,6 +2,7 @@ package lotto.controller;
 
 import static lotto.model.LottoNumbersGenerator.*;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
@@ -29,7 +30,7 @@ public class LottoApp {
 
 	private Money inputMoney() {
 		lottoAppOutput.printMoneyInputView();
-		return lottoAppInput.inputMoney();
+		return Money.ofWons(lottoAppInput.inputNumber());
 	}
 
 	private LottoTicket inputLottoTicket(int lottoNumbersCount) {
@@ -41,7 +42,10 @@ public class LottoApp {
 
 	private LottoNumbers inputWinningNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
-		return new LottoNumbers(lottoAppInput.inputWinningNumbers());
+		LottoNumbers lottoNumbers = new LottoNumbers(lottoAppInput.inputWinningNumbers());
+		lottoAppOutput.printBonusNumberView();
+		LottoNumber bonusNumber = LottoNumber.of(lottoAppInput.inputNumber());
+		return lottoNumbers;
 	}
 
 	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {
