@@ -54,6 +54,13 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("당첨번호와 비교하여 일치하는 숫자개수 테스트")
+	void matchCount() {
+		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 6)
+				.matchCount(winningLotto)).isEqualTo(6);
+	}
+
+	@Test
 	@DisplayName("당첨번호와 비교하여 랭킹을 구하는 테스트")
 	void rank() {
 		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 6)
