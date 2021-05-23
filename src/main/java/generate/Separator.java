@@ -1,12 +1,12 @@
 package generate;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Separator {
-	private final String SPLIT_COMMA = ",";
-	private final String SPLIT_COLON= ":";
+	private static final String SPLIT_COMMA_COLON = ",|:";
 
-	public static List<String> split (String s) {
-		return null;
+	public static List<String> split (String input) {
+		return Arrays.asList(input.split(SPLIT_COMMA_COLON));
 	}
 }

@@ -4,6 +4,7 @@ import generate.Separator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,19 +18,19 @@ class SeparatorTest {
 
 		List<String> splitComma = Separator.split("1,2,3");
 
-		assertThat(splitComma).isEqualTo(numbers);
+		assertThat(numbers).isEqualTo(splitComma);
 
 		List<String> splitColon = Separator.split("1:2:3");
 
-		assertThat(splitColon).isEqualTo(numbers);
+		assertThat(numbers).isEqualTo(splitColon);
 
 		List<String> splitCommaAndColon = Separator.split("1:2,3");
 
-		assertThat(splitCommaAndColon).isEqualTo(numbers);
+		assertThat(numbers).isEqualTo(splitCommaAndColon);
 
 		List<String> splitCommaAndColon2 = Separator.split("1,2:3");
 
-		assertThat(splitCommaAndColon2).isEqualTo(numbers);
+		assertThat(numbers).isEqualTo(splitCommaAndColon2);
 	}
 
 	@Test
