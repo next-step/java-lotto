@@ -17,17 +17,17 @@ public class Shop {
         return money.amount() / PURCHASE_PRICE;
     }
 
-    public List<Lotto> selectAuto(int amount) {
-        List<Lotto> lottoBundle = new ArrayList<>();
+    public LottoTicket selectAuto(int amount) {
+        LottoTicket lottoTicket = new LottoTicket();
         for (int i = 0; i < amount; i++) {
-            lottoBundle.add(createAutoLotto());
+            lottoTicket.add(createAutoLotto());
         }
-        return lottoBundle;
+        return lottoTicket;
     }
 
-    public Map<Integer, Integer> matchAnswer(List<Lotto> lottoBundle, Set<Integer> answer) {
+    public Map<Integer, Integer> matchAnswer(LottoTicket lottoTicket, Set<Integer> answer) {
         Map<Integer, Integer> match = new HashMap<>();
-        lottoBundle.forEach(lotto -> {
+        lottoTicket.tickets().forEach(lotto -> {
             lotto.numbers().retainAll(answer);
             int size = lotto.numbers().size();
             int count = match.getOrDefault(size, 0);

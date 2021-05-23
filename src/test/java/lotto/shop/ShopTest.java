@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import lotto.error.ErrorMessage;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,16 +59,16 @@ public class ShopTest {
         Money money = new Money(10000);
         //when
         int amount = shop.buyLotto(money);
-        List<Lotto> lottoBundle = shop.selectAuto(amount);
+        LottoTicket lottoTicket = shop.selectAuto(amount);
         //then
-        assertThat(lottoBundle.size()).isEqualTo(10);
+        assertThat(lottoTicket.tickets().size()).isEqualTo(10);
     }
 
     @Test
     @DisplayName("번호가 맞는지")
     void testAnswer() {
         //given
-        List<Lotto> lottoBundle = new ArrayList<>();
+        LottoTicket lottoTicket = new LottoTicket();
         Set<Integer> answer = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Lotto lotto = new Lotto();
@@ -77,9 +78,9 @@ public class ShopTest {
         lotto.addNumber(10);
         lotto.addNumber(11);
         lotto.addNumber(12);
-        lottoBundle.add(lotto);
+        lottoTicket.add(lotto);
         //when
-        Map<Integer, Integer> match = shop.matchAnswer(lottoBundle, answer);
+        Map<Integer, Integer> match = shop.matchAnswer(lottoTicket, answer);
         //then
         assertThat(match.get(3)).isEqualTo(1);
     }

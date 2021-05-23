@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import lotto.common.ErrorMessage;
 import lotto.common.PrintMessage;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoTicket;
 import lotto.shop.Money;
 
 public class Command {
@@ -41,8 +42,8 @@ public class Command {
         println(MessageEnum.LOTTO_PURCHASE.message(), amount);
     }
 
-    public void printLottoBundle(List<Lotto> lottoBundle) {
-        for(Lotto lotto : lottoBundle) {
+    public void printLottoBundle(LottoTicket lottoTicket) {
+        for(Lotto lotto : lottoTicket.tickets()) {
             printLotto(lotto);
         }
     }

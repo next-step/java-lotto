@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoTicket;
 import lotto.shop.Money;
 import lotto.shop.Shop;
 import lotto.ui.Command;
@@ -19,7 +20,7 @@ public class LottoGame {
         int lottoCount = shop.buyLotto(money);
 
         command.printLottoAmount(lottoCount);
-        List<Lotto> lottoBundle = shop.selectAuto(lottoCount);
+        LottoTicket lottoBundle = shop.selectAuto(lottoCount);
         command.printLottoBundle(lottoBundle);
 
         Set<Integer> answer = command.inputAnswer();
