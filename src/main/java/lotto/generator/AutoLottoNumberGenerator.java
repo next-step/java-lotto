@@ -23,7 +23,7 @@ public class AutoLottoNumberGenerator implements Generator {
 		init();
 	}
 
-	protected AutoLottoNumberGenerator(List<Integer> numbers) {
+	public AutoLottoNumberGenerator(List<Integer> numbers) {
 		LOTTO_RANDOM_SET = numbers;
 	}
 

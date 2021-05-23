@@ -2,8 +2,12 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.generator.AutoLottoNumberGenerator;
 
 public class LottoNumbersTest {
 
@@ -45,5 +49,16 @@ public class LottoNumbersTest {
 		assertThat(lottoNumber.isComplete()).isTrue();
 	}
 
+	@Test
+	@DisplayName(value = "print 에 제공할 lotto 번호 message 검증")
+	void lottoStringMessage() {
+		AutoLottoNumberGenerator generator = new AutoLottoNumberGenerator(Arrays.asList(
+			5, 6, 7, 8, 9, 10
+		));
+		LottoNumbers lotto = new LottoNumbers();
+		generator.generate(lotto);
+		System.out.println(lotto);
+		assertThat(lotto.toString()).isEqualTo("[5, 6, 7, 8, 9, 10]");
+	}
 
 }

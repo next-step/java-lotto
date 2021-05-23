@@ -31,4 +31,18 @@ public class LottoNumbers {
 	public boolean hasWinLottoNumber(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
 	}
+
+	@Override
+	public String toString() {
+		StringBuffer lottoMessage = new StringBuffer("[");
+		for (int i = 0; i < LOTTO_SIZE; i++) {
+			lottoMessage.append(lottoNumbers.get(i).toString());
+			if (i == LOTTO_SIZE-1) {
+				break;
+			}
+			lottoMessage.append(", ");
+		}
+		lottoMessage.append("]");
+		return lottoMessage.toString();
+	}
 }
