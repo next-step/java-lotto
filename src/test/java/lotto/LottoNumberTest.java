@@ -17,6 +17,6 @@ public class LottoNumberTest {
     void throw_exception_when_out_of_range(int input) {
         //Given+When+Then
         assertThatThrownBy(() -> new LottoNumber(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }    
 }

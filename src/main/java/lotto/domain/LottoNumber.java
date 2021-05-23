@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.CustomIllegalArgumentException;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,14 +11,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int number;
 
-    public LottoNumber(int number) throws IllegalArgumentException {
+    public LottoNumber(int number) throws CustomIllegalArgumentException {
         checkValidValue(number);
         this.number = number;
     }
 
-    private void checkValidValue(int number) throws IllegalArgumentException {
+    private void checkValidValue(int number) throws CustomIllegalArgumentException {
         if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_OUT_OF_RANGE,
+                                                    MIN_VALUE, MAX_VALUE);
         }
     }
 

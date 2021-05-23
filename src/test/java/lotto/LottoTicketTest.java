@@ -60,7 +60,7 @@ public class LottoTicketTest {
 
         //When + Then
         assertThatThrownBy(() -> new LottoTicket(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("로또티켓의 번호가 6개인데, 중복이 발생하면 Exception이 발생한다")
@@ -74,6 +74,6 @@ public class LottoTicketTest {
 
         //When + Then
         assertThatThrownBy(() -> new LottoTicket(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }    
 }

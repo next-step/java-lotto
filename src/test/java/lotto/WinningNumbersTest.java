@@ -16,7 +16,7 @@ public class WinningNumbersTest {
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("6개 초과의 숫자를 입력하면 Exception을 발생한다")
@@ -27,7 +27,7 @@ public class WinningNumbersTest {
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("6개 미만의 숫자를 입력하면 Exception을 발생한다")
@@ -38,7 +38,7 @@ public class WinningNumbersTest {
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("빈 문자열을 전달하면 Exception을 발생한다")
@@ -49,6 +49,6 @@ public class WinningNumbersTest {
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 }

@@ -17,7 +17,7 @@ public class LottoTicketsTest {
         int purchaseAmount = 15400;
         //When + Then
         assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("유효하지 않은 값을 구매액으로 입력한 경우, Exception을 발생시킨다")
@@ -29,6 +29,6 @@ public class LottoTicketsTest {
 
         //When + Then
         assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CustomIllegalArgumentException.class);
     }
 }

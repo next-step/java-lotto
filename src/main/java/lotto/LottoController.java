@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
+import lotto.domain.Message;
 import lotto.domain.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
@@ -18,12 +20,13 @@ public class LottoController {
     }
 
     public LottoTickets getTickets() {
-        outputView.printAmountInputRequest();
+        outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
         boolean stopRequestingInput = false;
         while (!stopRequestingInput) {
             stopRequestingInput = requestLottoTicketsInput();
         }
-        outputView.printLottoTickets(lottoTickets);
+        outputView.printMessage(Message.INFO_TOTAL_COUNT, lottoTickets.count());
+        outputView.printInfo(lottoTickets.toString());
         return lottoTickets;
     }
 
@@ -39,16 +42,15 @@ public class LottoController {
     }
 
     public WinningNumbers getWinningNumbers() {
+        outputView.printMessage(Message.REQUEST_INPUT_WINNING_NUMBERS);
         boolean stopRequestingInput = false;
         while (!stopRequestingInput) {
             stopRequestingInput = requestWinningNumbersInput();
         }
         return winningNumbers;
-
     }
 
     private boolean requestWinningNumbersInput() {
-        outputView.printWinningNumbersInputRequest();
         boolean stopRequestingInput = true;
         try {
             winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());

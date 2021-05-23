@@ -1,6 +1,8 @@
 package lotto.ui;
 
 import calculator.SplitUtil;
+import lotto.CustomIllegalArgumentException;
+import lotto.domain.Message;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -10,9 +12,6 @@ import java.util.regex.Pattern;
 public class InputView {
 
     private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^-?[0-9]+$");
-    private final String ERROR_NON_NUMBER = "숫자만 입력해주세요.";
-    private final String ERROR_NON_POSITIVE_NUMBER = "0을 초과하는 숫자를 입력해주세요.";
-    private final String ERROR_EMPTY_INPUT = "빈 값이 입력되었습니다. 다시 입력해주세요.";
 
     private Scanner scanner;
     private OutputView outputView;
@@ -44,24 +43,24 @@ public class InputView {
         return stopReceivingInput;
     }
 
-    private boolean checkPositiveNumber(String input) throws IllegalArgumentException {
+    private boolean checkPositiveNumber(String input) throws CustomIllegalArgumentException {
         if (Integer.parseInt(input) <= 0) {
-            throw new IllegalArgumentException(ERROR_NON_POSITIVE_NUMBER);
+            throw new CustomIllegalArgumentException(Message.ERROR_NON_POSITIVE_NUMBER);
         }
         return true;
     }
 
-    private boolean checkIsNumber(String input) throws IllegalArgumentException {
+    private boolean checkIsNumber(String input) throws CustomIllegalArgumentException {
         Matcher numberMatcher = VALID_NUMBER_PATTERN.matcher(input);
         if (!numberMatcher.find()) {
-            throw new IllegalArgumentException(ERROR_NON_NUMBER);
+            throw new CustomIllegalArgumentException(Message.ERROR_NON_NUMBER);
         }
         return true;
     }
 
-    private boolean checkNotNull(String input) throws IllegalArgumentException {
+    private boolean checkNotNull(String input) throws CustomIllegalArgumentException {
         if (input == null || input.length() == 0) {
-            throw new IllegalArgumentException(ERROR_EMPTY_INPUT);
+            throw new CustomIllegalArgumentException(Message.ERROR_EMPTY_INPUT);
         }
         return true;
     }

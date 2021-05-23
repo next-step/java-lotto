@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.CustomIllegalArgumentException;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -12,22 +14,22 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<LottoNumber> numbers) throws IllegalArgumentException {
+    public LottoTicket(List<LottoNumber> numbers) throws CustomIllegalArgumentException {
         checkNumberCount(numbers);
         checkDuplicated(numbers);
         this.numbers = numbers;
     }
 
-    private void checkDuplicated(List<LottoNumber> numbers) {
+    private void checkDuplicated(List<LottoNumber> numbers) throws CustomIllegalArgumentException {
         HashSet<LottoNumber> collect = new HashSet<>(numbers);
         if (collect.size() < NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_DUPLICATED, NUMBER_COUNT);
         }
     }
 
-    private void checkNumberCount(List<LottoNumber> numbers) throws IllegalArgumentException {
+    private void checkNumberCount(List<LottoNumber> numbers) throws CustomIllegalArgumentException {
         if (numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_WRONG_COUNT, NUMBER_COUNT);
         }
     }
 

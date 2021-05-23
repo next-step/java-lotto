@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.CustomIllegalArgumentException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class LottoTickets {
     private int purchaseAmount;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int amount) throws IllegalArgumentException {
+    public LottoTickets(int amount) throws CustomIllegalArgumentException {
         checkValidInput(amount);
         checkDividable(amount);
         this.purchaseAmount = amount;
@@ -37,16 +39,19 @@ public class LottoTickets {
         return lottoResult;
     }
 
-    private void checkValidInput(int amount) throws IllegalArgumentException {
+    private void checkValidInput(int amount) throws CustomIllegalArgumentException {
         if (amount < MINIMUM_PURCHASE_AMOUNT
                 || amount > MAXIMUM_PURCHASE_AMOUNT) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_AMOUNT_OUT_OF_RANGE,
+                                                    MINIMUM_PURCHASE_AMOUNT,
+                                                    MAXIMUM_PURCHASE_AMOUNT);
         }
     }
 
-    private void checkDividable(int amount) throws IllegalArgumentException {
+    private void checkDividable(int amount) throws CustomIllegalArgumentException {
         if (amount % PRICE_PER_TICKET != 0) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_AMOUNT_CANNOT_BE_DIVIDED,
+                                                    PRICE_PER_TICKET);
         }
     }
 

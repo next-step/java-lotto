@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.CustomIllegalArgumentException;
+
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -9,7 +11,7 @@ public class WinningNumbers {
 
     private final TreeSet<LottoNumber> numbers;
 
-    public WinningNumbers(int[] input) throws IllegalArgumentException {
+    public WinningNumbers(int[] input) throws CustomIllegalArgumentException {
         checkNotNullOrEmpty(input);
         checkNumberCount(input);
         checkDuplicate(input);
@@ -24,25 +26,25 @@ public class WinningNumbers {
         return inputs;
     }
 
-    private void checkNumberCount(int[] input) throws IllegalArgumentException {
+    private void checkNumberCount(int[] input) throws CustomIllegalArgumentException {
         if (input.length != NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_WRONG_COUNT, NUMBER_COUNT);
         }
     }
 
-    private void checkNotNullOrEmpty(int[] input) throws IllegalArgumentException {
+    private void checkNotNullOrEmpty(int[] input) throws CustomIllegalArgumentException {
         if (input == null || input.length == 0) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_EMPTY_INPUT);
         }
     }
 
-    private void checkDuplicate(int[] input) throws IllegalArgumentException {
+    private void checkDuplicate(int[] input) throws CustomIllegalArgumentException {
         HashSet<LottoNumber> inputs = new HashSet<>();
         for (int n : input) {
             inputs.add(new LottoNumber(n));
         }
         if (inputs.size() < NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+            throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_DUPLICATED, NUMBER_COUNT);
         }
     }
 
