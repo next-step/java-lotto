@@ -32,4 +32,16 @@ public class LottoTicketsTest {
         assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
+
+    @DisplayName("WinningNumbers와의 매칭결과를 정확히 리턴하는지 확인")
+    @ParameterizedTest(name = "{displayName} ==> input : {0}")
+    @ValueSource(strings = {"0", "100001", "-1"})
+    void check_lotto_result(String input) {
+        //Given
+        int purchaseAmount = Integer.parseInt(input);
+
+        //When + Then
+        assertThatThrownBy(() -> new LottoTickets(purchaseAmount))
+                .isInstanceOf(CustomIllegalArgumentException.class);
+    }
 }

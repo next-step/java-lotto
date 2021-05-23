@@ -75,5 +75,22 @@ public class LottoTicketTest {
         //When + Then
         assertThatThrownBy(() -> new LottoTicket(numbers))
                 .isInstanceOf(CustomIllegalArgumentException.class);
-    }    
+    }
+
+    @DisplayName("WinningNumbers와의 정확한 비교결과를 내놓는지 확인")
+    @Test
+    void return_right_status_after_matching() {
+        //Given
+        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
+                new LottoNumber(13), new LottoNumber(14),
+                new LottoNumber(15), new LottoNumber(17)
+        );
+
+        //When
+        LottoTicket lottoTicket = new LottoTicket(numbers);
+        MatchStatus matchStatus = lottoTicket.matchingStatusWith(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}));
+
+        //Then
+        assertThat(matchStatus).isEqualTo(MatchStatus.FIVE);
+    }
 }
