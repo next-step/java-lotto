@@ -2,9 +2,9 @@ package kr.insup.lotto.view;
 
 import kr.insup.lotto.domain.Lotto;
 import kr.insup.lotto.domain.Lottos;
+import kr.insup.lotto.domain.Place;
 import kr.insup.lotto.domain.Statistics;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoView {
@@ -37,10 +37,14 @@ public class LottoView {
     public static void showWinningStatistic(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("-------");
-        System.out.println("1등 " + statistics.firstPlace());
-        System.out.println("2등 " + statistics.secondPlace());
-        System.out.println("3등 " + statistics.thirdPlace());
-        System.out.println("4등 " + statistics.fourthPlace());
+        announceWinningStatus(1, Place.First.match(), Place.First.winnings(), statistics.firstPlace());
+        announceWinningStatus(2, Place.Second.match(), Place.Second.winnings(), statistics.secondPlace());
+        announceWinningStatus(3, Place.Third.match(), Place.Third.winnings(), statistics.thirdPlace());
+        announceWinningStatus(4, Place.Fourth.match(), Place.Fourth.winnings(), statistics.fourthPlace());
         System.out.println("수익률은 " + statistics.calculateBenefitRate());
+    }
+
+    private static void announceWinningStatus(int rank, int match, int price, int time){
+        System.out.println(rank + "등 " + match + "개 일치 (" + price + "원) - " + time + "개");
     }
 }

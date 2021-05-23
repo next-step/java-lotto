@@ -32,7 +32,11 @@ public enum Place {
         return None;
     }
 
-    public int getWinnings() {
+    public int winnings() {
         return winnings;
+    }
+
+    public int match() {
+        return match;
     }
 }

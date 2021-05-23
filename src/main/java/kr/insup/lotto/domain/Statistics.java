@@ -37,7 +37,6 @@ public class Statistics {
         }
     }
 
-
     public int firstPlace() {
         return firstPlace;
     }
@@ -59,9 +58,9 @@ public class Statistics {
     }
 
     private int totalWinningPrice() {
-        return firstPlace * Place.First.getWinnings()
-                + secondPlace * Place.Second.getWinnings()
-                + thirdPlace * Place.Third.getWinnings() +
-                +fourthPlace * Place.Fourth.getWinnings();
+        return firstPlace * Place.First.winnings()
+                + secondPlace * Place.Second.winnings()
+                + thirdPlace * Place.Third.winnings() +
+                +fourthPlace * Place.Fourth.winnings();
     }
 }
