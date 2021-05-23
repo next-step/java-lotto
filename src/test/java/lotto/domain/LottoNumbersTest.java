@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,7 +16,7 @@ class LottoNumbersTest {
     @DisplayName("로또번호 생성")
     void create() {
         // given
-        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 42, 43).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 42, 43).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
@@ -40,8 +40,8 @@ class LottoNumbersTest {
     @DisplayName("로또번호 생성 - 유효하지 않은 갯수")
     void crate_invalidNumberCount() {
         // given
-        List<LottoNumber> lottoNumberMoreCount = Stream.of(8, 21, 23, 41, 42, 43, 33).map(LottoNumber::of).collect(Collectors.toList());
-        List<LottoNumber> lottoNumberLessCount = Stream.of(8, 21, 23, 41, 42).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberMoreCount = Stream.of(8, 21, 23, 41, 42, 43, 33).map(LottoNumber::of).collect(Collectors.toSet());
+        Set<LottoNumber> lottoNumberLessCount = Stream.of(8, 21, 23, 41, 42).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when then
         assertThatIllegalArgumentException()
@@ -56,20 +56,20 @@ class LottoNumbersTest {
     @DisplayName("로또번호 생성 - 중복된 숫자")
     void create_duplicateNumber() {
         // given
-        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 43).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 43).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoNumbers(lottoNumberList))
-                .withMessageMatching("중복된 번호가 존재합니다.");
+                .withMessageMatching("로또번호는 6 개의 숫자로 이루어져야 합니다.");
     }
 
     @Test
     @DisplayName("숫자 매칭 - 전체 일치")
     void matchCount() {
         // given
-        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
-        List<LottoNumber> targetNumberList = Stream.of(21, 8, 41, 23, 42, 43).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toSet());
+        Set<LottoNumber> targetNumberList = Stream.of(21, 8, 41, 23, 42, 43).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
@@ -83,8 +83,8 @@ class LottoNumbersTest {
     @DisplayName("숫자 매칭 - 일부 일치")
     void matchCount_someOf() {
         // given
-        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
-        List<LottoNumber> targetNumberList = Stream.of(21, 8, 22, 15, 42, 43).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toSet());
+        Set<LottoNumber> targetNumberList = Stream.of(21, 8, 22, 15, 42, 43).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
@@ -98,8 +98,8 @@ class LottoNumbersTest {
     @DisplayName("숫자 매칭 - 전체 불일치")
     void matchCount_notMatch() {
         // given
-        List<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toList());
-        List<LottoNumber> targetNumberList = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toList());
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toSet());
+        Set<LottoNumber> targetNumberList = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
 
         // when
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);

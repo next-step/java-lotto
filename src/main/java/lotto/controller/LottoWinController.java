@@ -9,6 +9,7 @@ import lotto.service.LottoWinService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoWinController {
@@ -35,9 +36,9 @@ public class LottoWinController {
     }
 
     private LottoNumbers assembleLottoNumbers(LottoNumbersDto numbers) {
-        List<LottoNumber> lottoNumberList = numbers.getLottoNumbers().stream()
+        Set<LottoNumber> lottoNumberList = numbers.getLottoNumbers().stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new LottoNumbers(lottoNumberList);
     }
 
