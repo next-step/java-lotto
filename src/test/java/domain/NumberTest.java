@@ -9,18 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import util.ExceptionMessage;
 
 class NumberTest {
-	@Test
-	public void 빈문자열_또는_null을_입력할_경우_0을_반환해야한다(){
-		Number zeroForNull = new Number();
 
-		assertThat(zeroForNull.equals(new Number("0"))).isTrue();
-		assertThat(0).isEqualTo(zeroForNull.number());
-
-		Number zeroForEmpty = new Number("");
-
-		assertThat(zeroForEmpty.equals(new Number("0"))).isTrue();
-		assertThat(0).isEqualTo(zeroForEmpty.number());
-	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"1", "2", "3", "0"})

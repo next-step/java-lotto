@@ -1,10 +1,20 @@
 package generate;
 
+import domain.Number;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class PlusCalculateTest {
+
+	@Test
+	public void 빈문자열_또는_null을_입력할_경우_0을_반환해야한다(){
+		PlusCalculate zeroForNull = new PlusCalculate();
+
+		assertThat(zeroForNull.excute("")).isEqualTo(0);
+
+		assertThat(zeroForNull.excute(null)).isEqualTo(0);
+	}
 	
 	@Test
 	public void 덧셈연산_GREEN(){

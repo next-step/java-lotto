@@ -21,13 +21,7 @@ public class CalculatorController {
 
 			String input = scanner.nextLine().trim();
 
-			checkInput(input);
-
 			out.println(plusCalculate.excute(input));
 		}
-	}
-
-	private Boolean checkInput(String inputs) {
-		return null;
 	}
 }
