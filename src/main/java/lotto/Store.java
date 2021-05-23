@@ -8,15 +8,12 @@ public class Store {
 
 	public static Lottos buy(Money amount) {
 		List<Lotto> lottos = new ArrayList<>();
-		while (isBuyable(amount)) {
+
+		int count = (int)amount.divide(new Money(LOTTO_PRICE));
+		for (int i = 0; i < count; i++) {
 			Lotto lotto = Lotto.publish();
 			lottos.add(lotto);
-			amount = amount.minus(new Money(LOTTO_PRICE));
 		}
 		return new Lottos(lottos);
-	}
-
-	private static boolean isBuyable(Money amount) {
-		return amount.greaterThan(LOTTO_PRICE);
 	}
 }

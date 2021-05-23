@@ -26,13 +26,6 @@ public class Money {
 		return Objects.hash(money);
 	}
 
-	public Money minus(Money value) {
-		return new Money((money - value.money));
-	}
-
-	public boolean greaterThan(long lottoPrice) {
-		return money >= lottoPrice;
-	}
 
 	public Money multiply(int value) {
 		return new Money(money * value);
