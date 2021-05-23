@@ -9,6 +9,7 @@ import lotto.domain.LottoTickets;
 import lotto.service.LottoPurchaseService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoPurchaseController {
@@ -37,6 +38,7 @@ public class LottoPurchaseController {
         for (LottoNumber lottoNumber : lottoTicket.lottoNumbers()) {
             lottoNumbers.add(lottoNumber.number());
         }
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 }
