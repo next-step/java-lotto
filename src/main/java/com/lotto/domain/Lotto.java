@@ -10,20 +10,20 @@ public final class Lotto {
     public static final int UNIT_PRICE = 1000;
     public static final int LOTTO_COUNT = 6;
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> numbers() {
+    public List<LottoNumber> numbers() {
         return lottoNumbers;
     }
 
     public LottoReward reward(Set<Integer> winningNumbers) {
         int sameCount = 0;
-        for (int number : lottoNumbers) {
-            sameCount += addOneIfContains(winningNumbers, number);
+        for (LottoNumber number : lottoNumbers) {
+            sameCount += addOneIfContains(winningNumbers, number.number());
         }
         return findReward(sameCount);
     }

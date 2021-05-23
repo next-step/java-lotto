@@ -1,8 +1,9 @@
 package com.lotto.controller;
 
-import com.lotto.LottoNumberGenerator;
+import com.lotto.domain.LottoAutoGenerator;
 import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoGroup;
+import com.lotto.domain.LottoNumber;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
@@ -61,11 +62,7 @@ public class LottoManager {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < totalCount; i++) {
-            List<Integer> randomNumbers = new ArrayList<>();
-            randomNumbers.addAll(LottoNumberGenerator.generate());
-
-            Lotto lotto = new Lotto(randomNumbers);
-            lottoList.add(lotto);
+            lottoList.add(LottoAutoGenerator.generate());
         }
 
         return new LottoGroup(lottoList);
