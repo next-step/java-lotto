@@ -38,12 +38,12 @@ public class StringAddCalculator {
 	}
 
 	private static int convertToInteger(String number) {
-		int convNumber = parseInt(number);
+		int convertNumber = parseInt(number);
 
-		if (convNumber < 0) {
+		if (convertNumber < 0) {
 			throw new IllegalArgumentException("Negative number is invalid!");
 		}
 
-		return convNumber;
+		return convertNumber;
 	}
 }
