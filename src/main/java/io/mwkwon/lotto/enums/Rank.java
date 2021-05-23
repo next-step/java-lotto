@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     MISS(0, 0);
 
     private static Map<Integer, Rank> ENUM_MAP;
 
-    private int matchCount;
-    private int reward;
+    private final int matchCount;
+    private final int reward;
 
     static {
         ENUM_MAP = Stream.of(Rank.values()).collect(Collectors.toMap(Rank::getMatchCount, Function.identity()));
