@@ -17,16 +17,6 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    private int[] parseNumbers(String numbers) {
-        String[] textNumbers = numbers.split(",");
-        int[] resultNumbers = new int[textNumbers.length];
-        for(int i=0; i<textNumbers.length; i++) {
-            resultNumbers[i] = Integer.parseInt(textNumbers[i]);
-        }
-
-        return resultNumbers;
-    }
-
     public void close() {
         scanner.close();
     }

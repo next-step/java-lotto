@@ -9,8 +9,8 @@ public enum WinningType {
     SIXTH(1, 0),
     SEVENTH(0, 0);
 
-    private int matchCount;
-    private int prize;
+    private final int matchCount;
+    private final int prize;
 
     WinningType(int matchCount, int prize) {
         this.matchCount = matchCount;
@@ -18,7 +18,7 @@ public enum WinningType {
     }
 
     public static WinningType of(int matchCount) {
-        for(WinningType winningType: WinningType.values()) {
+        for (WinningType winningType : WinningType.values()) {
             if (winningType.matchCount == matchCount) {
                 return winningType;
             }

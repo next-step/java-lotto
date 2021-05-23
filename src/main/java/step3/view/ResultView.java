@@ -1,10 +1,17 @@
 package step3.view;
 
 import step3.common.WinningType;
+import step3.domain.LottoTicket;
 
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
+    }
+
+    public void printLottoTickets(LottoTicket[] lottoTickets) {
+        for (int i=0; i<lottoTickets.length; i++) {
+            System.out.println(lottoTickets[i]);
+        }
     }
 
     public void printResultStatistics(WinningType[] winningTypes) {

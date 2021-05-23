@@ -5,7 +5,7 @@ import step3.common.WinningType;
 public class ProfitCalculator {
     public double calculate(long money, WinningType[] winningTypes) {
         long prizeSum = 0;
-        for(WinningType winningType : winningTypes) {
+        for (WinningType winningType : winningTypes) {
             prizeSum += winningType.getPrize();
         }
 
@@ -13,6 +13,6 @@ public class ProfitCalculator {
     }
 
     private double calculate(long money, long prizeSum) {
-        return Math.floor(((double)prizeSum/money)*100)/100.0;
+        return Math.floor(((double) prizeSum/money)*100)/100.0;
     }
 }

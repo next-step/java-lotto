@@ -1,7 +1,10 @@
 package step3.view;
 
 import step3.common.WinningType;
-import step3.domain.*;
+import step3.domain.LottoTicket;
+import step3.domain.LottoTicketGenerator;
+import step3.domain.Money;
+import step3.domain.WinningNumbers;
 
 public class GameView {
     InputView inputView = new InputView();
@@ -10,29 +13,35 @@ public class GameView {
     public void start() {
         Money money = new Money(inputView.inputMoney());
         int lottoTicketCount = money.countLottoTicket();
-        resultView.printLottoTicketCount(lottoTicketCount);
+        resultView.printLottoTicketCount(money.countLottoTicket());
 
+        LottoTicket[] lottoTickets = generateLottoTickets(lottoTicketCount);
+        resultView.printLottoTickets(lottoTickets);
+
+        WinningType[] winningTypes = generateWinningTypes(lottoTickets);
+        resultView.printResultStatistics(winningTypes);
+        resultView.printResultProfit(money.calculateProfit(winningTypes));
+
+        inputView.close();
+    }
+
+    private LottoTicket[] generateLottoTickets(int lottoTicketCount) {
         LottoTicket[] lottoTickets = new LottoTicket[lottoTicketCount];
-        WinningType[] winningTypes = new WinningType[lottoTicketCount];
-
-        String winningNumberText = inputView.inputWinningNumber();
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberText);
-
         LottoTicketGenerator generator = new LottoTicketGenerator();
-        for (int i=0; i<lottoTicketCount; i++) {
+        for (int i = 0; i < lottoTicketCount; i++) {
             LottoTicket lottoTicket = generator.generate();
             lottoTickets[i] = lottoTicket;
-            System.out.println(lottoTickets[i]);
         }
+        return lottoTickets;
+    }
 
-        for (int i=0; i<lottoTicketCount; i++) {
+    private WinningType[] generateWinningTypes(LottoTicket[] lottoTickets) {
+        WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningNumber());
+        WinningType[] winningTypes = new WinningType[lottoTickets.length];
+        for (int i = 0; i < lottoTickets.length; i++) {
             winningTypes[i] = winningNumbers.findWinningType(lottoTickets[i]);
         }
 
-        double profit = money.calculateProfit(winningTypes);
-
-        resultView.printResultStatistics(winningTypes);
-        resultView.printResultProfit(profit);
-
+        return winningTypes;
     }
 }
