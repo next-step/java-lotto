@@ -33,9 +33,9 @@ public class Lotto {
     }
 
     public int match(List<LottoNumber> winInput) {
-        int matchCount = lottoNumbers.stream()
-            .mapToInt(number -> winInput.contains(number) ? 1 : 0).sum();
-        return matchCount;
+        return (int)lottoNumbers.stream()
+            .filter(lottoNumber -> winInput.contains(lottoNumber))
+            .count();
     }
 
     public List<LottoNumber> lottoNumbers() {
