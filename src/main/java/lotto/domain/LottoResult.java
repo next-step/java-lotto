@@ -13,8 +13,8 @@ public class LottoResult {
 		this.lottoRanks = lottoRanks;
 	}
 
-	public int getTotalReward() {
-		int totalReward = 0;
+	public long getTotalReward() {
+		long totalReward = 0;
 		for (LottoRank lottoRank : lottoRanks) {
 			totalReward += lottoRank.getReward();
 		}

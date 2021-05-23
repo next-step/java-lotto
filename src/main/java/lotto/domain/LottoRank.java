@@ -9,10 +9,10 @@ public enum LottoRank {
 	FOURTH(5000, 3),
 	UNRANKED(0, 0);
 
-	private int reward;
+	private long reward;
 	private int matches;
 
-	LottoRank(final int reward, final int matches) {
+	LottoRank(final long reward, final int matches) {
 		this.reward = reward;
 		this.matches = matches;
 	}
@@ -24,7 +24,7 @@ public enum LottoRank {
 			.orElse(LottoRank.UNRANKED);
 	}
 
-	public int getReward() {
+	public long getReward() {
 		return this.reward;
 	}
 
