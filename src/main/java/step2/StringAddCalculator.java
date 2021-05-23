@@ -35,7 +35,7 @@ public class StringAddCalculator {
 	private static int sumStringArray(String[] numbers) {
 		return Arrays.stream(numbers)
 			.map(PositiveNumber::valueOf)
-			.reduce(PositiveNumber.valueOf(0), PositiveNumber::sum)
+			.reduce(PositiveNumber.ZERO, PositiveNumber::sum)
 			.toInt();
 	}
 }

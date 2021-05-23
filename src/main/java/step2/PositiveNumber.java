@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class PositiveNumber {
 
+	public static final PositiveNumber ZERO = valueOf(0);
+
 	private final int number;
 
 	PositiveNumber(int number) {
