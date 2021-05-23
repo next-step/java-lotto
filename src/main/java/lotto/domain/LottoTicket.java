@@ -18,8 +18,8 @@ class LottoTicket {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	static int compare(LottoTicket source, LottoTicket target) {
-		return source.compare(target.lottoNumbers);
+	static int compare(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
+		return userLottoTicket.compare(winningLottoTicket.lottoNumbers);
 	}
 
 	LottoTicket(Set<LottoNumber> lottoNumbers) {
