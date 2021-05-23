@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketTest {
 
@@ -45,6 +48,14 @@ class LottoTicketTest {
 		lottoNumbers.add(new LottoNumber(6));
 
 		return lottoNumbers;
+	}
+
+	@DisplayName("유효하지 않은 문자열을 전달했을 때, 예외가 발생하는지 테스트")
+	@ParameterizedTest
+	@NullAndEmptySource
+	@ValueSource(strings = {"", " ", "1,2,3", "1,2,3,4,5,6,7", "1,2,3,4,5,5", "1.2.3.4.5.6"})
+	void constructor_invalid_number_string(String input) {
+		assertThatThrownBy(() -> new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 }
