@@ -110,7 +110,7 @@ LotteryTicket - 로또
 
 - [ ] 추후 리팩토링을 고려해볼만 사항
   - [x] TicketList 에 대한 일급 컬렉션 고려하기
-  - [ ] View 개발
+  - [x] View 개발
   - [x] Random Number 리스트로 변경하기
   - [ ] 메소드의 condition을 명확하게 하기 위해서 valid4j 도입
   - [ ] Integer는 사실 Number이지 않을까?
