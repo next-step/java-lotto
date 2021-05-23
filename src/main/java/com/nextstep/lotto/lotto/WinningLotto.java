@@ -1,4 +1,4 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ public class WinningLotto {
 
 	private static final String SPLIT_REGEX = ",";
 	private static final String NUMBER_CHECK_REGEX = "\\d+";
+	private static final String ONLY_NUMBERS_CAN_ENTER = "숫자만 입력가능합니다.";
 	private Lotto winningLotto;
 
 	public WinningLotto(String input) {
@@ -32,7 +33,7 @@ public class WinningLotto {
 
 	private int convertStringToInt(String input) {
 		if (!input.matches(NUMBER_CHECK_REGEX)) {
-			throw new IllegalArgumentException("숫자만 입력가능합니다.");
+			throw new IllegalArgumentException(ONLY_NUMBERS_CAN_ENTER);
 		}
 		return Integer.parseInt(input);
 	}

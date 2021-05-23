@@ -1,4 +1,4 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.utill;
 
 import java.util.Arrays;
 

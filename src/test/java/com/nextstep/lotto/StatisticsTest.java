@@ -1,10 +1,14 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import com.nextstep.lotto.lotto.Lottos;
+import com.nextstep.lotto.lotto.WinningLotto;
+import com.nextstep.lotto.result.Statistics;
 
 public class StatisticsTest {
 

@@ -1,4 +1,4 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;

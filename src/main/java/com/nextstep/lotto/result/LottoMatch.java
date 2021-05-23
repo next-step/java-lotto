@@ -1,4 +1,4 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.result;
 
 public class LottoMatch {
 

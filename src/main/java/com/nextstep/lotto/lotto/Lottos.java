@@ -1,9 +1,11 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
+import com.nextstep.lotto.utill.Printable;
+
+public class Lottos implements Printable {
 
 	private List<Lotto> lottos;
 
@@ -16,5 +18,12 @@ public class Lottos {
 
 	public List<Lotto> getLottos() {
 		return lottos;
+	}
+
+	@Override
+	public void print() {
+		for (Lotto lotto : lottos) {
+			lotto.print();
+		}
 	}
 }

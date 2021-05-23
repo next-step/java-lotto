@@ -1,4 +1,4 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.lotto;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
-public class Lotto {
+import com.nextstep.lotto.utill.Printable;
+
+public class Lotto implements Printable {
 
 	public static final int LOTTO_SIZE = 6;
 	private static final String STRING_DELIMITER = ", ";
+	private static final String LOTTO_NUMBER_CAN_ONLY_6_DIGITS = "로또의 숫자는 6개만 가능합니다.";
 	private List<LottoNumber> lottoNumbers;
 
 	public Lotto() {
@@ -19,7 +22,7 @@ public class Lotto {
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
 		if (lottoNumberSet.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또의 숫자는 6개만 가능합니다.");
+			throw new IllegalArgumentException(LOTTO_NUMBER_CAN_ONLY_6_DIGITS);
 		}
 		this.lottoNumbers = lottoNumbers;
 	}
@@ -32,6 +35,7 @@ public class Lotto {
 		return this.lottoNumbers.size();
 	}
 
+	@Override
 	public void print() {
 		Collections.sort(lottoNumbers);
 		StringJoiner stringJoiner = new StringJoiner(STRING_DELIMITER);

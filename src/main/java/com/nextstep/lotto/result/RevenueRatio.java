@@ -1,8 +1,11 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.result;
 
 import java.util.List;
 
-public class RevenueRatio implements Printable{
+import com.nextstep.lotto.utill.Printable;
+import com.nextstep.lotto.utill.RevenueCalculator;
+
+public class RevenueRatio implements Printable {
 
 	private int money;
 	private List<LottoMatch> lottoMatches;

@@ -1,7 +1,14 @@
-package com.nextstep.lotto.model;
+package com.nextstep.lotto.result;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.nextstep.lotto.utill.Printable;
+import com.nextstep.lotto.lotto.Lotto;
+import com.nextstep.lotto.lotto.LottoNumber;
+import com.nextstep.lotto.lotto.Lottos;
+import com.nextstep.lotto.lotto.WinningLotto;
+import com.nextstep.lotto.utill.RevenueCalculator;
 
 public class Statistics implements Printable {
 
@@ -34,9 +41,9 @@ public class Statistics implements Printable {
 	public void print() {
 		System.out.println(STATISTICS_HEAD_STRING);
 		for (int i = 1; i <= Lotto.LOTTO_SIZE; i++) {
+			/* format : %d개 일치 (%d원)- %d 개 */
 			System.out.println(
-				String.format(
-					NUMBER_MATCH_STRING
+				String.format(NUMBER_MATCH_STRING
 					, i
 					, RevenueCalculator.valueOf(i).getRevenue()
 					, getWinningCount(i)
