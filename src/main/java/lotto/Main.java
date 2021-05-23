@@ -11,5 +11,12 @@ public class Main {
         Output.showLottoCount(lottoCount);
         lottoCreator.makeLottoTicket();
         Output.showLottoTickets(lottoCreator.makeLottoTickets(lottoCount));
+
+        Output.showWinningNumber();
+        String winningNumber = Input.insertWinningNumber();
+        Output.showBonusNumber();
+        int bonusNumber = Input.insertBonusNumber();
+//        lottoCreator.makeWinningNumber(winningNumber, bonusNumber);
+        System.out.println(lottoCreator.makeWinningNumber(winningNumber, bonusNumber));
     }
 }

@@ -10,6 +10,7 @@ public class Input {
     }
 
     public static String insertWinningNumber() {
+        scanner.nextLine();
         return scanner.nextLine();
     }
 

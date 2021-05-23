@@ -8,12 +8,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     public LottoNumber(int number) {
-        validateLottoNumber();
         this.number = number;
+        validateLottoNumber();
     }
 
     private void validateLottoNumber() {
-        if (number < MIN_NUMBER && number > MAX_NUMBER) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }

@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ public class LottoCreator {
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_MIN_COUNT = 0;
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
+    private static final String COMMA = ", ";
 
     private List<LottoNumber> lottoNumbers;
 
@@ -43,5 +45,11 @@ public class LottoCreator {
             lottoTickets.add(makeLottoTicket());
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public WinningNumber makeWinningNumber(String enteredWinningNumber, int bonusNumber) {
+        return new WinningNumber(Arrays.stream(enteredWinningNumber.split(COMMA))
+                .map(value -> new LottoNumber(Integer.parseInt(value)))
+                .collect(Collectors.toList()), new LottoNumber(bonusNumber));
     }
 }
