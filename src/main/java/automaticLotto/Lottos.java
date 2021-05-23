@@ -3,9 +3,9 @@ package automaticLotto;
 import java.util.List;
 
 public class Lottos {
-	public static final int MAXIMUM_LOTTOS_SIZE = 100;
+	private static final int MAXIMUM_LOTTOS_SIZE = 100;
 
-	final List<Lotto> lottos;
+	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
 		this.lottos = lottos;
@@ -20,5 +20,15 @@ public class Lottos {
 
 	public int size() {
 		return this.lottos.size();
+	}
+
+	public WinnerStatics announce(List<Integer> winnerLotto) {
+		WinnerStatics winnerStatics = new WinnerStatics();
+
+		for (Lotto lotto : lottos) {
+			winnerStatics.addMatchedNumberCount(lotto.match(winnerLotto));
+		}
+
+		return winnerStatics;
 	}
 }
