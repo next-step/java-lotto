@@ -49,7 +49,7 @@ public class LottoNumbers {
 		for (LottoNumber lottoNumber : lottoNumbers) {
 			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
 		}
-		return this.findRankByMatchCount(matchCount);
+		return Rank.findRankByMatchCount(matchCount);
 	}
 
 	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
@@ -57,10 +57,6 @@ public class LottoNumbers {
 			return 1;
 		}
 		return 0;
-	}
-
-	protected Rank findRankByMatchCount(int matchCount) {
-		return Rank.findRankByMatchCount(matchCount);
 	}
 
 	@Override
