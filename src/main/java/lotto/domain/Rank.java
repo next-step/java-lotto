@@ -10,21 +10,15 @@ public enum Rank {
     THIRD(5, 1_500_000),
     FIRST(6, 2_000_000_000),
     ;
+
     public int countOfMatch;
-    public int winnings;
-    Function<LottoReport, Integer> lottoReportMatchedNumGetter;
+    public int winningMoney;
 
-    Rank(int countOfMatch, int winnings, Function<LottoReport, Integer> lottoReportMatchedNumGetter) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winnings = winnings;
-        this.lottoReportMatchedNumGetter = lottoReportMatchedNumGetter;
+        this.winningMoney = winningMoney;
     }
 
-    public void ifMatchedThan(int matched, Runnable runnable) {
-        if(this.countOfMatch == matched){
-            runnable.run();
-        }
-    }
     public static Optional<Rank> valueOf(int matchedCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isMatched(matchedCount))

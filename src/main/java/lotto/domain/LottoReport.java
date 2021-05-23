@@ -1,66 +1,48 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
-import static lotto.domain.Rank.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class LottoReport {
-    private int threeMatched;
-    private int fourMatched;
-    private int fiveMatched;
-    private int sixMatched;
-    private double purchasedAmount;
-    private double yield;
-    private long winnings;
+    public static final double PERCENTAGE = 100.0;
 
-    public LottoReport(Lotto winners, List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            updateMatchedNumberMetrics(winners, lotto);
-        }
+    Map<Rank, Integer> countOfMatchByRank = new HashMap<>(Rank.values().length);
+    private double yield;
+
+    public LottoReport(final Lotto winners, final List<Lotto> lottos) {
+        lottos.forEach(lotto -> updateMatchCountMetrics(winners, lotto));
         updateYield(lottos.size());
     }
 
-    private void updateMatchedNumberMetrics(Lotto winners, Lotto test) {
-        int matched = test.matchCountWith(winners);
-        FIFTH.ifMatchedThan(matched, () -> threeMatched++);
-        FOURTH.ifMatchedThan(matched, () -> fourMatched++);
-        THIRD.ifMatchedThan(matched, () -> fiveMatched++);
-        FIRST.ifMatchedThan(matched, () -> sixMatched++);
+    private void updateMatchCountMetrics(Lotto winners, Lotto lotto) {
+            int countOfMatch = lotto.matchCountWith(winners);
+            Rank.valueOf(countOfMatch)
+                    .ifPresent(this::updateCountOfMatchByRank);
+    }
+
+    private void updateCountOfMatchByRank(Rank rank) {
+        countOfMatchByRank.computeIfAbsent(rank, key -> 0);
+        countOfMatchByRank.compute(rank, (key, value) -> value + 1);
     }
 
     private void updateYield(int lottoSize) {
-        purchasedAmount = lottoSize * Lotto.PRICE;
-        updateWinnings();
-        yield = Math.floor((winnings / purchasedAmount) * 100) / 100.0;
+        double purchasedAmount = lottoSize * Lotto.PRICE;
+        long winningMoney = updateWinnings();
+        yield = Math.floor((winningMoney / purchasedAmount) * PERCENTAGE) / PERCENTAGE;
     }
 
-    private void updateWinnings() {
-        this.winnings = threeMatched * FIFTH.winnings +
-                fourMatched * FOURTH.winnings +
-                fiveMatched * THIRD.winnings +
-                sixMatched * FIRST.winnings;
+    private long updateWinnings() {
+        return countOfMatchByRank.keySet()
+                .stream()
+                .map(rank -> (long) rank.winningMoney * countOfMatchByRank.get(rank))
+                .reduce(0L, (a, b) -> a + b);
     }
 
-    public int countWinnings(Rank rank){
-        return rank.lottoReportMatchedNumGetter.apply(this);
-    }
-
-    int threeMatched() {
-        return threeMatched;
-    }
-
-    int fourMatched() {
-        return fourMatched;
-    }
-
-    int fiveMatched() {
-        return fiveMatched;
-    }
-
-    int sixMatched() {
-        return sixMatched;
+    public int countWinnings(Rank rank) {
+        return countOfMatchByRank.getOrDefault(rank, 0);
     }
 
     public double yield() {
