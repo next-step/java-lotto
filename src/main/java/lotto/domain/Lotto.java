@@ -17,7 +17,7 @@ public class Lotto {
 
     public Lotto(String[] numbers) {
         this(Arrays.stream(numbers)
-            .map(i -> LottoNumber.of(i.trim()))
+            .map(number -> LottoNumber.of(number.trim()))
             .collect(toList()));
     }
 
