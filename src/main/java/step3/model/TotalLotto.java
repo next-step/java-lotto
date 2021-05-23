@@ -10,10 +10,6 @@ import step3.constant.WinnerPrice;
 public class TotalLotto {
 
     private static final int MAX_WINNING = 6;
-    private static final int THREE = 3;
-    private static final int FOUR = 4;
-    private static final int FIVE = 5;
-    private static final int SIX = 6;
     private ArrayList<LottoNumbers> totalLotto;
 
     public TotalLotto() {
@@ -74,19 +70,23 @@ public class TotalLotto {
     }
 
     private BigDecimal addSixPrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.SIX.price(), winning, SIX));
+        return result.add(calculator(WinnerPrice.FIRST.winnerPrice(), winning,
+            WinnerPrice.FIRST.matchedCount()));
     }
 
     private BigDecimal addFivePrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.FIVE.price(), winning, FIVE));
+        return result.add(calculator(WinnerPrice.SECOND.winnerPrice(), winning,
+            WinnerPrice.SECOND.matchedCount()));
     }
 
     private BigDecimal addFourPrice(List<Integer> winning, BigDecimal result) {
-        return result.add(calculator(WinnerPrice.FOUR.price(), winning, FOUR));
+        return result.add(calculator(WinnerPrice.THIRD.winnerPrice(), winning,
+            WinnerPrice.THIRD.matchedCount()));
     }
 
     private BigDecimal addThreePrice(List<Integer> winning) {
-        return calculator(WinnerPrice.TREE.price(), winning, THREE);
+        return calculator(WinnerPrice.FOURTH.winnerPrice(), winning,
+            WinnerPrice.FOURTH.matchedCount());
     }
 
     private BigDecimal calculator(int price, List<Integer> winning, int index) {

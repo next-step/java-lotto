@@ -1,19 +1,26 @@
 package step3.constant;
 
 public enum WinnerPrice {
-    TREE(5000),
-    FOUR(50000),
-    FIVE(1500000),
-    SIX(2000000000);
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
+    DEFAULT(0, 0);
 
-    private int price;
+    private Integer matchedCount;
+    private Integer winnerPrice;
 
-    private WinnerPrice(int price) {
-        this.price = price;
+    private WinnerPrice(Integer matchedCount, Integer winnerPrice) {
+        this.matchedCount = matchedCount;
+        this.winnerPrice = winnerPrice;
     }
 
-    public int price() {
-        return price;
+    public Integer matchedCount() {
+        return matchedCount;
+    }
+
+    public Integer winnerPrice() {
+        return winnerPrice;
     }
 
 }

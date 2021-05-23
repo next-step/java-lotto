@@ -59,13 +59,14 @@ public class ConsoleResultView implements ResultView {
         System.out.println(OutputMessage.STATISTICS.text());
         System.out.println(OutputMessage.SEPERATOR.text());
         showPlace(winningWithNumbers, OutputMessage.THREE_WINNER.text(),
-            WinnerPrice.TREE.price(), 3);
+            WinnerPrice.FOURTH.winnerPrice(), WinnerPrice.THIRD.matchedCount());
         showPlace(winningWithNumbers, OutputMessage.FOUR_WINNER.text(),
-            WinnerPrice.FOUR.price(), 4);
+            WinnerPrice.THIRD.winnerPrice(), WinnerPrice.THIRD.matchedCount());
         showPlace(winningWithNumbers, OutputMessage.FIVE_WINNER.text(),
-            WinnerPrice.FIVE.price(), 5);
+            WinnerPrice.SECOND.winnerPrice(),
+            WinnerPrice.SECOND.matchedCount());
         showPlace(winningWithNumbers, OutputMessage.SIX_WINNER.text(),
-            WinnerPrice.SIX.price(), 6);
+            WinnerPrice.FIRST.winnerPrice(), WinnerPrice.FIRST.matchedCount());
     }
 
     private void showPlace(List<Integer> winningWithNumbers, String changeText,
