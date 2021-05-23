@@ -6,10 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.platform.commons.util.ReflectionUtils;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -17,7 +15,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class BankTest {
+public class WinningResultTest {
+
     private Lotto answerLotto;
 
     @BeforeEach
@@ -28,18 +27,35 @@ public class BankTest {
         ));
     }
 
-    @DisplayName("로또번호가 일치하는만큼 LottoWallet에 잘 저장되는지")
+    @DisplayName("당첨번호가 6,5,4,3개 일치했을때 각각 수익률이 상금/투자금 인지")
     @ParameterizedTest
-    @MethodSource("parametersForLottos")
-    void lottos_result(final List<Lotto> lottoList) {
+    @CsvSource({"10000, 6, 200000",
+            "10000, 5, 150",
+            "10000, 4, 5",
+            "10000, 3, 0.5",
+    })
+    void get_profit_rate_when_fourth(final int money, final int matchCount, final float expectedProfitRate) {
         //given
-        Lottos lottos = new Lottos(lottoList);
-        Money money = new Money(6000);
-        Bank bank = new Bank(answerLotto);
+        final WinningResult winningResult = new WinningResult(answerLotto);
 
         //when
-        LottoWallet lottoWallet = bank.matchLottos(lottos, money);
-        Map<LottoResult, Integer> lottoResultCounts = lottoWallet.getLottoResultCounts();
+        winningResult.addLottoResult(LottoResult.findByMatchCount(matchCount));
+        final double profitRate = winningResult.getProfitRate(new Money(money));
+
+        //then
+        assertThat(profitRate).isEqualTo(expectedProfitRate);
+    }
+
+    @DisplayName("WinningResult는 일치하는 로또넘버수에 따라 로또결과를 저장한다.")
+    @ParameterizedTest
+    @MethodSource("parametersForLottos")
+    void lottos_result(final List<Lotto> lottos) {
+        //given
+        final WinningResult winningResult = new WinningResult(answerLotto);
+
+        //when
+        winningResult.matchWinningLotto(lottos);
+        final Map<LottoResult, Integer> lottoResultCounts = winningResult.getLottoResultCounts();
 
         //then
         assertThat(lottoResultCounts.get(LottoResult.FIRST)).isEqualTo(1);
