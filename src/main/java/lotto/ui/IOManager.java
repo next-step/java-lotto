@@ -54,11 +54,20 @@ public class IOManager {
     }
 
     public void printStatistics(List<WinningLottoDto> statistics) {
-        statistics.forEach(data ->
-            output.printLine(data.getMatchCount() + "개 일치(" +
-                                 String.format("%,d", data.getPrize()) + "원)- " +
-                                 data.getWinningCount() + "개")
-        );
+        statistics.forEach(dto -> output.printLine(type(dto)));
+    }
+
+    private String type(WinningLottoDto dto) {
+
+        String bonusMatched = "";
+
+        if (dto.isSecond()) {
+            bonusMatched = ", 보너스 볼 일치";
+        }
+
+        return dto.getMatchCount() + "개 일치" + bonusMatched + "(" +
+            String.format("%,d", dto.getPrize()) + "원)- " +
+            dto.getWinningCount() + "개";
     }
 
     public void printEarningRate(double rate) {

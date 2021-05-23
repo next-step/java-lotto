@@ -60,4 +60,8 @@ public enum WinningType {
     public boolean isWinningLotto() {
         return this != NONE;
     }
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
 }

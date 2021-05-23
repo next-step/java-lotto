@@ -1,28 +1,29 @@
 package lotto.domain;
 
 public class WinningLottoDto {
-    private final int matchCount;
-    private final int prize;
+
+    private final WinningType winningType;
     private final int winningCount;
 
-    public WinningLottoDto(int matchCount, int prize, int winningCount) {
-        this.matchCount = matchCount;
-        this.prize = prize;
+    public WinningLottoDto(WinningType winningType, int winningCount) {
+        this.winningType = winningType;
         this.winningCount = winningCount;
     }
 
     public static WinningLottoDto of(WinningType winningType, int winningCount) {
-        return new WinningLottoDto(winningType.getMatchCount(),
-                                   winningType.getPrize(),
-                                   winningCount);
+        return new WinningLottoDto(winningType, winningCount);
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return winningType.getMatchCount();
     }
 
     public int getPrize() {
-        return prize;
+        return winningType.getPrize();
+    }
+
+    public boolean isSecond() {
+        return winningType.isSecond();
     }
 
     public int getWinningCount() {
