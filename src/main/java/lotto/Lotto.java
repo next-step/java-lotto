@@ -17,11 +17,11 @@ public final class Lotto {
 		validateNumbers(numbers);
 		for (Integer number : numbers) {
 			LottoNo lottoNo = new LottoNo(number);
-			duplicatedNumber(lottoNo);
 			lottoNumbers.add(lottoNo);
 		}
 		sort(lottoNumbers);
 	}
+
 	public Lotto(Set<LottoNo> numbers) {
 		lottoNumbers.addAll(numbers);
 		sort(lottoNumbers);
@@ -39,11 +39,13 @@ public final class Lotto {
 		if (Objects.isNull(numbers) || numbers.size() != NUMBERS_SIZE) {
 			throw new IllegalArgumentException("잘못된 번호 모음입니다.");
 		}
+		duplicatedNumbers(numbers);
 	}
 
-	private void duplicatedNumber(LottoNo lottoNo) {
-		if (lottoNumbers.contains(lottoNo)) {
-			throw new IllegalArgumentException(String.format("중복된 로또 번호가 존재합니다 : %d", lottoNo.number()));
+	private void duplicatedNumbers(List<Integer> numbers) {
+		Set<Integer> numberSet = new HashSet<>(numbers);
+		if (numbers.size() != numberSet.size()) {
+			throw new IllegalArgumentException("중복된 번호가 존재합니다.");
 		}
 	}
 
