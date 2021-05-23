@@ -17,8 +17,7 @@ public class AutoLottoNumberGeneratorTest {
 	@DisplayName(value = "로또 번호 생성기가 만들어주는 번호의 개수는 6개이다")
 	void generateLottoNum() {
 		Generator autoLottoNumberGenerator = new AutoLottoNumberGenerator();
-		LottoNumbers lottoNumbers = new LottoNumbers();
-		autoLottoNumberGenerator.generate(lottoNumbers);
+		LottoNumbers lottoNumbers = autoLottoNumberGenerator.generate();
 		assertThat(lottoNumbers.isComplete()).isTrue();
 	}
 
@@ -27,8 +26,7 @@ public class AutoLottoNumberGeneratorTest {
 	void sameValueLotto() {
 		List<Integer> sample = Arrays.asList(1, 2, 3, 4, 5, 6);
 		Generator lottoNumberGenerator = new AutoLottoNumberGenerator(sample);
-		LottoNumbers result = new LottoNumbers();
-		lottoNumberGenerator.generate(result);
+		LottoNumbers result = lottoNumberGenerator.generate();
 		assertThat(result.hasWinLottoNumber(new LottoNumber(1))).isTrue();
 		assertThat(result.hasWinLottoNumber(new LottoNumber(2))).isTrue();
 		assertThat(result.hasWinLottoNumber(new LottoNumber(3))).isTrue();

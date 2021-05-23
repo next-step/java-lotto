@@ -40,8 +40,7 @@ public class LottoStore {
 		List<LottoNumbers> result = new ArrayList<>();
 		AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
 		for (int i = 0; i < purchaseCount(); i++) {
-			LottoNumbers lotto = new LottoNumbers();
-			autoGenerator.generate(lotto);
+			LottoNumbers lotto = autoGenerator.generate();
 			result.add(lotto);
 		}
 		return new Ticket(result, budget);

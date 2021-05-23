@@ -14,8 +14,7 @@ public class MessageLottoNumberGeneratorTest {
 	@DisplayName(value = "메세지(string)으로 로또 번호를 만든다")
 	void generatedUsingString() {
 		Generator generator = new MessageLottoNumberGenerator("1, 2, 3, 4, 5, 6");
-		LottoNumbers lottoNumbers = new LottoNumbers();
-		generator.generate(lottoNumbers);
+		LottoNumbers lottoNumbers = generator.generate();
 
 		assertThat(lottoNumbers.hasWinLottoNumber(new LottoNumber(1))).isTrue();
 		assertThat(lottoNumbers.hasWinLottoNumber(new LottoNumber(2))).isTrue();

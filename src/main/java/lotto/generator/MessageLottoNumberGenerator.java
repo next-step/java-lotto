@@ -23,10 +23,12 @@ public class MessageLottoNumberGenerator implements Generator {
 	}
 
 	@Override
-	public void generate(LottoNumbers lottoNumbers) {
+	public LottoNumbers generate() {
+		LottoNumbers lottoByMessage = new LottoNumbers();
 		Collections.sort(numbers);
 		List<LottoNumber> lottoNumberList = NumberToLotto.convert(numbers);
-		appendLottoNumber(lottoNumbers, lottoNumberList);
+		appendLottoNumber(lottoByMessage, lottoNumberList);
+		return lottoByMessage;
 	}
 
 	private void appendLottoNumber(LottoNumbers lottoNumbers, List<LottoNumber> lottoNumberList) {

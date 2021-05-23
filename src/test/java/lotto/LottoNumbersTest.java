@@ -56,8 +56,7 @@ public class LottoNumbersTest {
 		AutoLottoNumberGenerator generator = new AutoLottoNumberGenerator(Arrays.asList(
 			5, 6, 7, 8, 9, 10
 		));
-		LottoNumbers lotto = new LottoNumbers();
-		generator.generate(lotto);
+		LottoNumbers lotto = generator.generate();
 		System.out.println(lotto);
 		assertThat(lotto.toString()).isEqualTo("[5, 6, 7, 8, 9, 10]");
 	}

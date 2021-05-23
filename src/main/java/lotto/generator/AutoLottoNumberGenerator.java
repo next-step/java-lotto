@@ -34,11 +34,13 @@ public class AutoLottoNumberGenerator implements Generator {
 	}
 
 	@Override
-	public void generate(LottoNumbers lottoNumbers) {
+	public LottoNumbers generate() {
 		List<Integer> pickedNumbers = pickNumbers();
 		Collections.sort(pickedNumbers);
 		List<LottoNumber> lottoNumberList = NumberToLotto.convert(pickedNumbers);
-		appendLottoNumber(lottoNumbers, lottoNumberList);
+		LottoNumbers pickedLotto = new LottoNumbers();
+		appendLottoNumber(pickedLotto, lottoNumberList);
+		return pickedLotto;
 	}
 
 	private void appendLottoNumber(LottoNumbers lottoNumbers, List<LottoNumber> lottoNumberList) {
