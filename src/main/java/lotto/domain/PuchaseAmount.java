@@ -8,14 +8,10 @@ public class PuchaseAmount {
 	private final int purchaseAmount;
 
 	public PuchaseAmount(int purchaseAmount) {
-		validationPurchaseAmount(purchaseAmount);
-		this.purchaseAmount = purchaseAmount;
-	}
-
-	private void validationPurchaseAmount(int purchaseAmount) {
 		if (purchaseAmount < MINIMUM) {
 			throw new IllegalArgumentException(String.format(MESSAGE_WRONG_AMOUNT, MINIMUM));
 		}
+		this.purchaseAmount = purchaseAmount;
 	}
 
 	public int findNumberOfAvailablePurchases() {
