@@ -38,4 +38,13 @@ public class LottoTest {
 
 		assertThat(acendingLotto.equals(notAcendingLotto)).isTrue();
 	}
+
+	@Test
+	@DisplayName("매치되는 로또 번호의 동일한 숫자의 사이즈를 구함")
+	public void get_size_of_matched_lotto() {
+		List<Integer> randomNumberList1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto1 = new Lotto(randomNumberList1);
+
+		assertThat(lotto1.match(Arrays.asList(1, 2, 3, 4, 5, 7))).isEqualTo(5);
+	}
 }

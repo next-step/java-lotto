@@ -20,6 +20,23 @@ public class Lotto {
 		}
 	}
 
+	public int match(List<Integer> targetNumbers) {
+		int matchedSize = 0;
+
+		for (Integer number : targetNumbers) {
+			matchedSize = getMatchedSize(matchedSize, number);
+		}
+
+		return matchedSize;
+	}
+
+	private int getMatchedSize(int matchedSize, Integer number) {
+		if (lotto.contains(number)) {
+			matchedSize++;
+		}
+		return matchedSize;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
