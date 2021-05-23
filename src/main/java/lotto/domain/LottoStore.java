@@ -4,8 +4,8 @@ import java.util.List;
 
 class LottoStore {
 
+	public static final int PRICE = 1000;
 	private static final String INVALID_MONEY_MESSAGE = "로또 구입 금액이 유효하지 않습니다.";
-	private static final int PRICE = 1000;
 	private static final int LOWER_BOUND = 1;
 
 	private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
