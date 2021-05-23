@@ -2,19 +2,19 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoNumbers {
+public class Lotto {
 
-	public static final int LENGTH = 6;
+	public static final int NUMBER_LENGTH = 6;
 	public static final String MESSAGE_EXIST_DUPLICATE_NUMBER = "로또번호중에서 중복된 숫자가 포함되어 있습니다.";
-	public static final String MESSAGE_LOTTO_NUMBER_MUST_BE_SIX_DIGIT = "로또는 숫자 %d개로 이루어져야 합니다.";
+	public static final String MESSAGE_RULE_LOTTO_NUMBER_COUNT = "로또는 숫자 %d개로 이루어져야 합니다.";
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public LottoNumbers(Integer... numbers) {
+	public Lotto(Integer... numbers) {
 		this(Arrays.asList(numbers));
 	}
 
-	public LottoNumbers(List<Integer> numbers) {
+	public Lotto(List<Integer> numbers) {
 		lottoNumbers = new LinkedHashSet<>();
 		for (Integer number : numbers) {
 			lottoNumbers.add(new LottoNumber(number));
@@ -22,7 +22,7 @@ public class LottoNumbers {
 		validationNumbers(numbers);
 	}
 
-	public LottoNumbers(RandomNumbersGenerator randomNumbersGenerator) {
+	public Lotto(RandomNumbersGenerator randomNumbersGenerator) {
 		this(randomNumbersGenerator.generateNumbers());
 	}
 
@@ -32,14 +32,14 @@ public class LottoNumbers {
 	}
 
 	private void validationDuplicate() {
-		if (this.lottoNumbers.size() != LENGTH) {
+		if (this.lottoNumbers.size() != NUMBER_LENGTH) {
 			throw new IllegalArgumentException(MESSAGE_EXIST_DUPLICATE_NUMBER);
 		}
 	}
 
 	private void validationSize(List<Integer> numbers) {
-		if (numbers == null || numbers.size() != LENGTH) {
-			throw new IllegalArgumentException(String.format(MESSAGE_LOTTO_NUMBER_MUST_BE_SIX_DIGIT, LENGTH));
+		if (numbers == null || numbers.size() != NUMBER_LENGTH) {
+			throw new IllegalArgumentException(String.format(MESSAGE_RULE_LOTTO_NUMBER_COUNT, NUMBER_LENGTH));
 		}
 	}
 
@@ -47,16 +47,16 @@ public class LottoNumbers {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
-	public Rank findRank(LottoNumbers winLottoNumbers) {
+	public Rank findRank(Lotto winningLotto) {
 		int matchCount = 0;
 		for (LottoNumber lottoNumber : lottoNumbers) {
-			matchCount += containLottoNumber(lottoNumber, winLottoNumbers);
+			matchCount += containLottoNumber(lottoNumber, winningLotto);
 		}
 		return Rank.findRankByMatchCount(matchCount);
 	}
 
-	private int containLottoNumber(LottoNumber lottoNumber, LottoNumbers winLottoNumbers) {
-		if (winLottoNumbers.contains(lottoNumber)) {
+	private int containLottoNumber(LottoNumber lottoNumber, Lotto winningLotto) {
+		if (winningLotto.contains(lottoNumber)) {
 			return 1;
 		}
 		return 0;
@@ -66,7 +66,7 @@ public class LottoNumbers {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		LottoNumbers that = (LottoNumbers) o;
+		Lotto that = (Lotto) o;
 		return Objects.equals(lottoNumbers, that.lottoNumbers);
 	}
 

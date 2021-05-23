@@ -8,13 +8,13 @@ public class LottoGame {
 	public static final int PURCHASE_AMOUNT_PER_LOTTO = 1_000;
 	public static final String MESSAGE_MINUMUM_PURCHASE_AMOUNT = "로또를 구입하려면 최소 %,d원 이상 있어야 합니다.";
 
-	public List<LottoNumbers> purchaseLottos(int purchaseAmount, RandomNumbersGenerator randomNumbersGenerator) {
+	public List<Lotto> purchaseLottos(int purchaseAmount, RandomNumbersGenerator randomNumbersGenerator) {
 		validationPurchaseAmount(purchaseAmount);
 
-		List<LottoNumbers> lottos = new ArrayList<>();
+		List<Lotto> lottos = new ArrayList<>();
 		int lottoCount = this.findNumberOfAvailablePurchases(purchaseAmount);
 		for (int i = 0; i < lottoCount; i++) {
-			lottos.add(new LottoNumbers(randomNumbersGenerator));
+			lottos.add(new Lotto(randomNumbersGenerator));
 		}
 		return lottos;
 	}

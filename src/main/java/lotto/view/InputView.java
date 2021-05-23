@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class InputView {
 		return Integer.parseInt(this.scanner.nextLine());
 	}
 
-	public List<Integer> inputWinLottoNumbers() {
+	public List<Integer> inputWinningLottoNumbers() {
 		System.out.println(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
 		String inputNumbers = this.scanner.nextLine();
 		return toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER);
@@ -44,10 +44,10 @@ public class InputView {
 		return inputNumbers.split(delimiter);
 	}
 
-	public static void printPurchaseLottos(List<LottoNumbers> purchaseLottos) {
+	public static void printPurchaseLottos(List<Lotto> purchaseLottos) {
 		System.out.printf(MESSAGE_PURCHAGE_COMPLETE, purchaseLottos.size());
 
-		for (LottoNumbers lotto : purchaseLottos) {
+		for (Lotto lotto : purchaseLottos) {
 			System.out.println(lotto);
 		}
 		System.out.println();

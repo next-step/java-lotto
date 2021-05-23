@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.RandomNumbersGenerator;
 import lotto.view.InputView;
@@ -24,12 +24,12 @@ public class LottoGameController {
 		//로또구입
 		int purchaseAmount = this.inputView.inputPurchaseAmount();
 		LottoGame lottoGame = new LottoGame();
-		List<LottoNumbers> lottos = lottoGame.purchaseLottos(purchaseAmount, this.randomNumbersGenerator);
+		List<Lotto> lottos = lottoGame.purchaseLottos(purchaseAmount, this.randomNumbersGenerator);
 		InputView.printPurchaseLottos(lottos);
 
 		//당첨확인
-		List<Integer> winLottoNumbers = this.inputView.inputWinLottoNumbers();
-		LottoResult lottoResult = new LottoResult(lottos, new LottoNumbers(winLottoNumbers));
+		List<Integer> winningLottoNumbers = this.inputView.inputWinningLottoNumbers();
+		LottoResult lottoResult = new LottoResult(lottos, new Lotto(winningLottoNumbers));
 		ResultView.printLottoResult(lottoResult);
 
 	}

@@ -7,14 +7,14 @@ import java.util.List;
 
 public class LottoResult {
 
-	private final List<LottoNumbers> lottos;
-	private final LottoNumbers winLottoNumbers;
+	private final List<Lotto> lottos;
+	private final Lotto winningLotto;
 	private final int totalPurchases;
 	private final HashMap<Rank, Integer> statMap;
 
-	public LottoResult(List<LottoNumbers> lottos, LottoNumbers winLottoNumbers) {
+	public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
 		this.lottos = lottos;
-		this.winLottoNumbers = winLottoNumbers;
+		this.winningLotto = winningLotto;
 		this.totalPurchases = lottos.size() * LottoGame.PURCHASE_AMOUNT_PER_LOTTO;
 		this.statMap = initRankMap();
 		this.findWinningResult();
@@ -39,8 +39,8 @@ public class LottoResult {
 	}
 
 	private void findWinningResult() {
-		for (LottoNumbers lottoNumbers : lottos) {
-			Rank rank = lottoNumbers.findRank(winLottoNumbers);
+		for (Lotto lotto : lottos) {
+			Rank rank = lotto.findRank(winningLotto);
 			addRank(rank);
 		}
 	}

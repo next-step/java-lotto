@@ -17,7 +17,7 @@ public class LottoRandomNumbersGenerator implements RandomNumbersGenerator {
 
 	@Override
 	public List<Integer> generateNumbers() {
-		List<Integer> numbers = this.generateRandomNumbers(LottoNumbers.LENGTH);
+		List<Integer> numbers = this.generateRandomNumbers(Lotto.NUMBER_LENGTH);
 		Collections.sort(numbers);
 		return numbers;
 	}

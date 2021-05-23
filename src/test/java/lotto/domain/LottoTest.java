@@ -7,35 +7,35 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-@DisplayName("로또번호 (일급콜렉션) 테스트")
-public class LottoNumbersTest {
+@DisplayName("로또(일급콜렉션) 테스트")
+public class LottoTest {
 
-	private LottoNumbers winLottoNumbers;
+	private Lotto winningLotto;
 
 	@BeforeEach
 	void setUp() {
-		winLottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+		winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 	}
 
 	@Test
 	@DisplayName("생성된 로또번호가 6개가 아닐 경우 예외발생 테스트")
-	void createLottoNumbers_sizeCheck() {
-		Assertions.assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5))
+	void createLotto_sizeCheck() {
+		Assertions.assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("중복된 로또번호가 존재할경우 예외발생 테스트")
-	void createLottoNumbers_dupCheck() {
-		Assertions.assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5, 5))
+	void createLotto_dupCheck() {
+		Assertions.assertThatThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 5))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("랜덤생성기를 이용한 로또번호 생성 테스트")
-	void createLottoNumbersByRandomNumberGenerator() {
+	void createLottoByRandomNumberGenerator() {
 		TestRandomNumbersGenerator randomNumbersGenerator = new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6});
-		LottoNumbers lottoNumbers = new LottoNumbers(randomNumbersGenerator);
+		Lotto lottoNumbers = new Lotto(randomNumbersGenerator);
 
 		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
 		Assertions.assertThat(lottoNumbers.contains(new LottoNumber(2))).isTrue();
@@ -50,23 +50,23 @@ public class LottoNumbersTest {
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	@DisplayName("로또번호 리스트에 당첨번호가 포함되어 있는지 테스트")
 	void contains(int number) {
-		Assertions.assertThat(winLottoNumbers.contains(new LottoNumber(number))).isTrue();
+		Assertions.assertThat(winningLotto.contains(new LottoNumber(number))).isTrue();
 	}
 
 	@Test
 	@DisplayName("당첨번호와 비교하여 랭킹을 구하는 테스트")
 	void rank() {
-		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 5, 6)
-				.findRank(winLottoNumbers)).isEqualTo(Rank.FIRST);
+		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 6)
+				.findRank(winningLotto)).isEqualTo(Rank.FIRST);
 
-		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 5, 45)
-				.findRank(winLottoNumbers)).isEqualTo(Rank.SECOND);
+		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 45)
+				.findRank(winningLotto)).isEqualTo(Rank.SECOND);
 
-		Assertions.assertThat(new LottoNumbers(1, 2, 3, 4, 44, 45)
-				.findRank(winLottoNumbers)).isEqualTo(Rank.THIRD);
+		Assertions.assertThat(new Lotto(1, 2, 3, 4, 44, 45)
+				.findRank(winningLotto)).isEqualTo(Rank.THIRD);
 
-		Assertions.assertThat(new LottoNumbers(1, 2, 3, 43, 44, 45)
-				.findRank(winLottoNumbers)).isEqualTo(Rank.FOURTH);
+		Assertions.assertThat(new Lotto(1, 2, 3, 43, 44, 45)
+				.findRank(winningLotto)).isEqualTo(Rank.FOURTH);
 	}
 
 }
