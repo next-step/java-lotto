@@ -16,16 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGamesTest {
 
-  @DisplayName("객체 생성 & 동등성 테스트")
-  @Test
-  void testConstruct() {
-    //given
-    List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    List<LottoGame> expectation = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    //when & then
-    assertThat(new LottoGames(given)).isEqualTo(new LottoGames(expectation));
-  }
-
   @DisplayName("당첨 번호를 맞춰봤을 때 기대하는 총 당첨 결과를 반환한다.")
   @ParameterizedTest
   @MethodSource("provideMatchRankingsSource")
@@ -37,7 +27,7 @@ class LottoGamesTest {
 
   }
 
-  @DisplayName("도메인 객체를 노출시키지 않고 값만 노출 시키는 DTO 객체를 반환한다.")
+  @DisplayName("로또 게임들의 숫자를 반환한다.")
   @Test
   void peekGameInfosTest() {
     List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));

@@ -22,14 +22,7 @@ class AnalysisSheetTest {
     givenTotalRankings = new TotalRankings(givenRankings);
   }
 
-  @DisplayName("객체 생성 & 동등성 테스트")
-  @Test
-  void constructionAndEqualityTest() {
-    //when & then
-    assertThat(new AnalysisSheet(givenTotalRankings, givenPurchasingAmount)).isEqualTo(new AnalysisSheet(givenTotalRankings, givenPurchasingAmount));
-  }
-
-  @DisplayName("당첨결과 출력 테스트")
+  @DisplayName("당첨결과를 정해진 포맷으로 출력한다.")
   @Test
   void toStringPrizeInfosTest() {
     //given
@@ -38,7 +31,7 @@ class AnalysisSheetTest {
     assertThat(new AnalysisSheet(givenTotalRankings, givenPurchasingAmount).toStringPrizeInfos()).hasToString(expectation);
   }
 
-  @DisplayName("손익률 출력 테스트")
+  @DisplayName("손익률을 정해진 포맷으로 출력한다.")
   @Test
   void toStringYieldAnalysis() {
     //given

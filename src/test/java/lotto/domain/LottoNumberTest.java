@@ -9,14 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-  @DisplayName("객체 생성 & 동등성 테스트")
-  @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 5, 10, 45})
-  void testConstruct(int given) {
-    assertThat(new LottoNumber(given)).isEqualTo(new LottoNumber(given));
-  }
-
-  @DisplayName("객체 생성 실패 테스트")
+  @DisplayName("로또 숫자는 1 ~ 45의 값을 가져야만 한다.")
   @ParameterizedTest
   @ValueSource(ints = {Integer.MIN_VALUE, -1, 0, 46, Integer.MAX_VALUE})
   void failTestConstruct(int given) {

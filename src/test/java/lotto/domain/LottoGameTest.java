@@ -18,14 +18,7 @@ class LottoGameTest {
     winningNumbers = new LottoNumbers(getOneToSixLottoNumbers());
   }
 
-  @DisplayName("객체 생성 & 동등성 테스트")
-  @Test
-  void testConstruct() {
-    //when & then
-    assertThat(new LottoGame(winningNumbers)).isEqualTo(new LottoGame(winningNumbers));
-  }
-
-  @DisplayName("winningNumbers와 일치하는 숫자 개수에 따라 알맞은 등수를 리턴한다.")
+  @DisplayName("당첨 번호와 일치하는 갯수에 해당하는 등수를 반환한다.")
   @Test
   void checkWinningTest() {
     //given

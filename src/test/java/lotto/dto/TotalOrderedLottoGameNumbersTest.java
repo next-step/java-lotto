@@ -20,20 +20,14 @@ class TotalOrderedLottoGameNumbersTest {
     givenGames = Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"));
   }
 
-  @DisplayName("객체 생성 & 동등성 테스트")
-  @Test
-  void constructionAndEqualityTest() {
-    assertThat(new TotalOrderedLottoGameNumbers(givenGames)).isEqualTo(new TotalOrderedLottoGameNumbers(givenGames));
-  }
-
-  @DisplayName("주문한 게임 갯수 반환 테스트")
+  @DisplayName("주문한 로또 게임들의 갯수를 반환한다.")
   @Test
   void orderedCountTest() {
     //when & then
     assertThat(new TotalOrderedLottoGameNumbers(givenGames).getOrderedCount()).isEqualTo(2);
   }
 
-  @DisplayName("toString 값 테스트")
+  @DisplayName("주문한 로또 게임들을 정해진 포맷으로 출력한다.")
   @Test
   void toStringTest() {
     //given

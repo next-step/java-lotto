@@ -29,7 +29,7 @@ class LottoMachineTest {
     givenLottoMachine = new LottoMachine(givenGameGenerator);
   }
 
-  @DisplayName("생성된 로또 게임들의 출력을 위한 DTO 객체를 반환 한다.")
+  @DisplayName("생성된 로또 게임들의 번호들 목록을 반환한다.")
   @Test
   void peekOrderedGamesTest() {
     //given
@@ -38,7 +38,7 @@ class LottoMachineTest {
         .isEqualTo(new TotalOrderedLottoGameNumbers(expectGaems));
   }
 
-  @DisplayName("당첨 번호를 맞춰 본 후 당첨 내역과 손익률 출력을 위한 DTO 객체를 반환한다.")
+  @DisplayName("당첨 번호를 맞춰 본 후 당첨 내역 목록과 손익률을 반환한다.")
   @Test
   void confirmPrizeOrderedLottosTest() {
     //given
