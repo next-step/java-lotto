@@ -21,13 +21,13 @@ public class Command {
     }
 
     public Money inputMoneyAmount() {
-        PrintMessage.INPUT_MONEY.print();
+        PrintMessage.INPUT_MONEY.println();
         String input = scanner.nextLine();
         return new Money(toInteger(input));
     }
 
     public Set<Integer> inputAnswer() {
-        PrintMessage.INPUT_LOTTO_ANSWER.print();
+        PrintMessage.INPUT_LOTTO_ANSWER.println();
         String input = scanner.nextLine();
         String[] answer = input.split(NUMBER_DELIMITER);
         checkAnswer(answer);
@@ -38,7 +38,7 @@ public class Command {
     }
 
     public void printLottoAmount(int amount) {
-        PrintMessage.LOTTO_PURCHASE.print(amount);
+        PrintMessage.LOTTO_PURCHASE.println(amount);
     }
 
     public void printLottoBundle(List<Lotto> lottoBundle) {
@@ -48,8 +48,8 @@ public class Command {
     }
 
     public void resultMessage() {
-        PrintMessage.RESULT.print();
-        PrintMessage.LINE.print();
+        PrintMessage.RESULT.println();
+        PrintMessage.LINE.println();
     }
 
     private void printLotto(Lotto lotto) {

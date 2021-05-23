@@ -20,11 +20,11 @@ public enum PrintMessage {
         return message;
     }
 
-    public void print() {
+    public void println() {
         System.out.println(message);
     }
 
-    public void print(int amount) {
+    public void println(int amount) {
         System.out.println(amount + message);
     }
 }
