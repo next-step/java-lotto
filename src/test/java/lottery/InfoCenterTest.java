@@ -21,7 +21,7 @@ class InfoCenterTest {
 	@Test
 	void 지난주_당첨번호를_입력받는다() {
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		assertThat(sut.lastWeekWinningNumbers()).isEqualTo(lastWinningNumber);
 	}
@@ -31,7 +31,7 @@ class InfoCenterTest {
 		Ticket buyerTicket = Ticket.of(Lists.list(1, 2, 3, 11, 12, 13));
 
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Lists.list(buyerTicket));
 		assertThat(result.getThreeMatchNumber()).isEqualTo(1);
@@ -42,7 +42,7 @@ class InfoCenterTest {
 		Ticket buyerTicket = Ticket.of(Lists.list(1, 2, 3, 4, 12, 13));
 
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Lists.list(buyerTicket));
 		assertThat(result.getFourMatchNumber()).isEqualTo(1);
@@ -53,7 +53,7 @@ class InfoCenterTest {
 		Ticket buyerTicket = Ticket.of(Lists.list(1, 2, 3, 4, 5, 13));
 
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Lists.list(buyerTicket));
 		assertThat(result.getFiveMatchNumber()).isEqualTo(1);
@@ -64,7 +64,7 @@ class InfoCenterTest {
 		Ticket buyerTicket = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
 
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Lists.list(buyerTicket));
 		assertThat(result.getSixMatchNumber()).isEqualTo(1);
@@ -78,7 +78,7 @@ class InfoCenterTest {
 		tickets.add(Ticket.of(Lists.list(1, 2, 3, 4, 5, 6)));
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
 
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 		Result result = sut.confirmTicket(tickets);
 		assertThat(result.getSixMatchNumber()).isEqualTo(3);
 	}
@@ -93,7 +93,7 @@ class InfoCenterTest {
 		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
 		Money money = Money.won(3000L);
 
-		sut.setLastWeekWinningNumbers(lastWinningNumber);
+		sut.setLastWeekWinningTicket(lastWinningNumber);
 		Result result = sut.confirmTicket(tickets);
 		assertThat(result.getTotalYield(money)).isEqualTo(5.0f);
 	}

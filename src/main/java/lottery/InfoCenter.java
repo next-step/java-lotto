@@ -4,21 +4,21 @@ import java.util.List;
 
 public class InfoCenter {
 
-	private Ticket lastWeekWinningNumbers;
+	private Ticket lastWeekWinningTicket;
 	private final Result result;
 
 	public InfoCenter() {
 		result = new Result();
 	}
 
-	public void setLastWeekWinningNumbers(Ticket lastWeekWinningNumbers) {
-		this.lastWeekWinningNumbers = lastWeekWinningNumbers;
+	public void setLastWeekWinningTicket(Ticket lastWeekWinningTicket) {
+		this.lastWeekWinningTicket = lastWeekWinningTicket;
 	}
 
 	public Result confirmTicket(List<Ticket> buyerTickets) {
 		for (Ticket ticket : buyerTickets) {
 			List<Integer> buyerNumbers = ticket.numbers();
-			buyerNumbers.removeAll(this.lastWeekWinningNumbers.numbers());
+			buyerNumbers.removeAll(this.lastWeekWinningTicket.numbers());
 			LotteryMatchType lotteryMatchType = LotteryMatchType.fromInteger(Ticket.SIZE_OF_TICKET - buyerNumbers.size());
 			result.addMatchType(lotteryMatchType);
 		}
@@ -26,6 +26,6 @@ public class InfoCenter {
 	}
 
 	public Ticket lastWeekWinningNumbers() {
-		return lastWeekWinningNumbers;
+		return lastWeekWinningTicket;
 	}
 }
