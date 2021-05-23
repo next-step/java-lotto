@@ -9,41 +9,37 @@ import lotto.view.LottoOutputView;
 
 public class LottoGame {
 
-	private LottoUser user;
-	private LottoInputView input;
-	private LottoOutputView output;
-	private Lotto winningLotto;
+	private static LottoUser user = new LottoUser();
+	private static Lotto winningLotto;
 
-	public LottoGame() {
-		this.user = new LottoUser();
-		this.input = new LottoInputView();
-		this.output = new LottoOutputView();
+	private LottoGame() {
+
 	}
 
-	public void start() {
+	public static void start() {
 		inputPurchaseLotto();
 		outputUserLottoStatus();
 		inputLastWeekWinningNumber();
 		outputResult();
 	}
 
-	private void inputPurchaseLotto() {
-		int purchasePrice = this.input.inputPurchaseLottoPrice();
-		this.user.buyGenerateLottos(purchasePrice);
+	private static void inputPurchaseLotto() {
+		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
+		user.buyGenerateLottos(purchasePrice);
 	}
 
-	private void outputUserLottoStatus() {
-		this.output.printPurchaseLottoCount(this.user.getLottoCount());
-		output.printLottos(this.user.getUserLottos());
+	private static void outputUserLottoStatus() {
+		LottoOutputView.printPurchaseLottoCount(user.getLottoCount());
+		LottoOutputView.printLottos(user.getUserLottos());
 	}
 
-	private void inputLastWeekWinningNumber() {
-		this.winningLotto = LottoUtils.getStringToLotto(this.input.inputWinningLotto());
+	private static void inputLastWeekWinningNumber() {
+		winningLotto = LottoUtils.getStringToLotto(LottoInputView.inputWinningLotto());
 	}
 
-	private void outputResult() {
-		LottoResult lottoResult = this.user.getUserLottoResult(this.winningLotto);
-		this.output.printWinningStatistics(lottoResult.getLottoRankCount());
-		this.output.printYield(lottoResult.getYield());
+	private static void outputResult() {
+		LottoResult lottoResult = user.getUserLottoResult(winningLotto);
+		LottoOutputView.printWinningStatistics(lottoResult.getLottoRankCount());
+		LottoOutputView.printYield(lottoResult.getYield());
 	}
 }

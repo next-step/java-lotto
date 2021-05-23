@@ -9,15 +9,19 @@ public class LottoInputView {
 
 	private static Scanner input = new Scanner(System.in);
 
-	public int inputPurchaseLottoPrice() {
-		System.out.println(INPUT_PURCHASE_LOTTO_PRICE_MESSAGE);
-		return this.input.nextInt();
+	private LottoInputView() {
+
 	}
 
-	public String inputWinningLotto() {
+	public static int inputPurchaseLottoPrice() {
+		System.out.println(INPUT_PURCHASE_LOTTO_PRICE_MESSAGE);
+		return input.nextInt();
+	}
+
+	public static String inputWinningLotto() {
 		System.out.println(INPUT_LAST_WEEK_WINNING_LOTTO_NUMBER_MESSAGE);
-		this.input = new Scanner(System.in);
-		return this.input.nextLine();
+		input = new Scanner(System.in);
+		return input.nextLine();
 	}
 
 }
