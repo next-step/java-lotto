@@ -6,6 +6,7 @@ public class LottoNumber {
 	public static final int MIN = 1;
 	public static final int MAX = 45;
 	public static final String MESSAGE_LOTTO_NUMBER_RANGE = "로또번호는 %d~%d 이내의 숫자여야 합니다.";
+
 	private final int number;
 
 	public LottoNumber(int number) {

@@ -13,6 +13,7 @@ public class InputView {
 	public static final String MESSAGE_INPUT_PURCHAGE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String MESSAGE_INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String MESSAGE_PURCHAGE_COMPLETE = "%d개를 구매했습니다.\n";
+
 	private final Scanner scanner;
 
 	public InputView() {
