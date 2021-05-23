@@ -5,6 +5,7 @@ import static lotto.util.ValidationUtils.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,9 +13,32 @@ import java.util.Set;
 class LottoTicket {
 
 	private static final int LOTTO_NUMBER_COUNT = 6;
+	private static final int FROM_INDEX = 0;
+	private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+	private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
 	private static final String DELIMITER = ",";
 	private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "로또 숫자가 유효하지 않습니다.";
 	private static final String INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE = "로또 번호 문자열이 형식에 맞지 않습니다.";
+	private static final List<LottoNumber> LOTTO_NUMBER_LIST = new ArrayList<>(LOTTO_NUMBER_UPPER_BOUND);
+
+	static {
+		initialize();
+	}
+
+	private static void initialize() {
+		for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
+			LOTTO_NUMBER_LIST.add(LottoNumber.of(i));
+		}
+	}
+
+	static LottoTicket generate() {
+		Collections.shuffle(LOTTO_NUMBER_LIST);
+		List<LottoNumber> lottoNumberList = LOTTO_NUMBER_LIST.subList(FROM_INDEX, LOTTO_NUMBER_COUNT);
+		Collections.sort(lottoNumberList);
+		Set<LottoNumber> lottoNumbers = Collections.unmodifiableSet(new HashSet<>(lottoNumberList));
+
+		return new LottoTicket(lottoNumbers);
+	}
 
 	private final Set<LottoNumber> lottoNumbers;
 

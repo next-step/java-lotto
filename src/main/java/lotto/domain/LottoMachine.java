@@ -10,7 +10,7 @@ class LottoMachine {
 		List<LottoTicket> lottoTicketList = new ArrayList<>(count);
 
 		for (int i = 0; i < count; i++) {
-			lottoTicketList.add(LottoNumberPool.generate());
+			lottoTicketList.add(LottoTicket.generate());
 		}
 
 		return Collections.unmodifiableList(lottoTicketList);
