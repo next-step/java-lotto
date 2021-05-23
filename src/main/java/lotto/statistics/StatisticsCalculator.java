@@ -11,11 +11,6 @@ public class StatisticsCalculator {
 	private final Ticket ticket;
 	private final LottoNumbers winnerLotto;
 
-	private final int THREE_MATCHED = 5_000;
-	private final int FOUR_MATCHED = 50_000;
-	private final int FIVE_MATCHED = 1_500_000;
-	private final int SIX_MATCHED = 2_000_000_000;
-
 	public StatisticsCalculator(Ticket ticket, LottoNumbers winnerLotto) {
 		this.ticket = ticket;
 		this.winnerLotto = winnerLotto;
