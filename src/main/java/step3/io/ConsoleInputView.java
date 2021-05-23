@@ -7,6 +7,7 @@ import step3.util.StringUtils;
 public class ConsoleInputView {
 
     private static final String NEED_PRICE = "구입금액을 입력해 주세요.";
+    private static final String NEED_VICTORY_NUMBER_TEXT = "지난 주 당첨 번호를 입력해 주세요.(,구분자로 사용)";
     private Scanner scanner;
 
     public ConsoleInputView() {
@@ -19,6 +20,7 @@ public class ConsoleInputView {
     }
 
     public String getVictoryNumbers() {
+        System.out.println(NEED_VICTORY_NUMBER_TEXT);
         return scanner.nextLine();
     }
 

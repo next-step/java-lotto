@@ -1,11 +1,14 @@
 package step3.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import step3.constant.Rank;
 import step3.io.ConsoleInputView;
 import step3.io.ConsoleResultView;
-import step3.model.LottoNumber;
 import step3.model.LottoNumbers;
 import step3.model.Price;
 import step3.model.RandomNumbersGenerator;
@@ -28,12 +31,13 @@ public class Lotto {
     }
 
     public TotalLotto pickLottoWithPrice(Price price) {
-        TotalLotto totalLotto = new TotalLotto();
+        List<LottoNumbers> lottoList = new ArrayList<>();
         int totalCount = price.getBuyCount();
         for (int index = 0; index < totalCount; index++) {
-            totalLotto.addLottoOne(RandomNumbersGenerator.createNumbers());
+            lottoList.add(new LottoNumbers(RandomNumbersGenerator.createNumbers()));
         }
-        return totalLotto;
+
+        return new TotalLotto(lottoList);
     }
 
     public void start() {
@@ -60,7 +64,7 @@ public class Lotto {
     }
 
     private void showTotalLotto() {
-        resultView.showTotalLotto(totalLotto.lotto());
+        resultView.showText(totalLotto.toString());
     }
 
     private void showCount() {
@@ -69,8 +73,7 @@ public class Lotto {
 
     public void statistics() {
         try {
-            resultView.showInputVictoryNumber();
-            LottoNumbers victoryNumber = getVictoryNumbers(inputView.getVictoryNumbers());
+            LottoNumbers victoryNumber = getVictoryNumbers();
             showWinning(totalLotto.groupByWinnerPrice(victoryNumber));
             showBanefit(totalLotto.getBenefit(victoryNumber, price));
 
@@ -89,20 +92,15 @@ public class Lotto {
         resultView.showWinning(map);
     }
 
-    private LottoNumbers getVictoryNumbers(String victoryNumbers) {
-        LottoNumbers result = new LottoNumbers();
-        String[] numbers = victoryNumbers.split(",");
-        for (String number : numbers) {
-            number = number.trim();
-            result.addNumber(new LottoNumber(StringUtils.parseInt(number)));
-        }
-        validationVictoryInput(result);
-
-        return result;
+    private LottoNumbers getVictoryNumbers() {
+        String[] numbers = inputView.getVictoryNumbers().split(",");
+        validationVictoryInput(numbers);
+        return new LottoNumbers(
+                Arrays.stream(numbers).map(number -> StringUtils.parseInt(number.trim())).collect(Collectors.toList()));
     }
 
-    private void validationVictoryInput(LottoNumbers result) {
-        if (result.size() < VICTORY_SIZE) {
+    private void validationVictoryInput(String[] numbers) {
+        if (numbers.length < VICTORY_SIZE) {
             throw new IllegalArgumentException(VICTORY_SIZE_CHECK);
         }
     }

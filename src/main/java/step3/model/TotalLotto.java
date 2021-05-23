@@ -13,26 +13,14 @@ import step3.constant.Rank;
 
 public class TotalLotto {
 
-    private static List<LottoNumbers> totalLotto;
+    private final List<LottoNumbers> totalLotto;
 
-    public TotalLotto() {
-        totalLotto = new ArrayList<>();
+    public TotalLotto(List<LottoNumbers> totalLotto) {
+        this.totalLotto = totalLotto;
     }
 
     public int size() {
         return totalLotto.size();
-    }
-
-    public void addLottoOne(List<Integer> list) {
-        totalLotto.add(new LottoNumbers(list));
-    }
-
-    public List<List<Integer>> lotto() {
-        List<List<Integer>> result = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : totalLotto) {
-            result.add(lottoNumbers.numbers());
-        }
-        return result;
     }
 
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
@@ -40,29 +28,28 @@ public class TotalLotto {
         Map<Rank, Long> lottoResult = groupByWinnerPrice(victoryNumber);
         BigDecimal result = sumResult(lottoResult);
 
-        return result
-            .divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN)
-            .toString();
+        return result.divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN).toString();
     }
 
-    public Map<Rank, Long> groupByWinnerPrice(
-            LottoNumbers victoryNumber) {
+    public Map<Rank, Long> groupByWinnerPrice(LottoNumbers victoryNumber) {
 
-        return totalLotto.stream()
-            .map(lottoNumbers -> lottoNumbers
-                .getRankWithVictoryNumber(victoryNumber))
-            .collect(Collectors.groupingBy(Function.identity(),
-                Collectors.counting()));
+        return totalLotto.stream().map(lottoNumbers -> lottoNumbers.getRankWithVictoryNumber(victoryNumber))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    @Override
+    public String toString() {
+        List<String> temp = new ArrayList<>();
+        totalLotto.stream().forEach(lottoNumbers -> temp.add(lottoNumbers.toString()));
+        return String.join("\n", temp);
     }
 
     private BigDecimal sumResult(Map<Rank, Long> lottoResult) {
         Set<Rank> lottoRanks = lottoResult.keySet();
 
         return lottoRanks.stream()
-            .map(
-                winner -> new BigDecimal(winner.winnerPrice())
-                    .multiply(new BigDecimal(lottoResult.get(winner))))
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .map(winner -> new BigDecimal(winner.winnerPrice()).multiply(new BigDecimal(lottoResult.get(winner))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

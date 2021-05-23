@@ -1,20 +1,18 @@
 package step3.model;
 
+import java.util.Objects;
+
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final String NOT_IN_RANGE = "1~45까지의 숫자를 입력하세요";
 
-    private int number;
+    private final Integer number;
 
-    public LottoNumber(final int number) {
+    public LottoNumber(Integer number) {
         validation(number);
         this.number = number;
-    }
-
-    public int number() {
-        return number;
     }
 
     private void validation(int number) {
@@ -29,24 +27,16 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + number;
-        return result;
+        return Objects.hashCode(number);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        LottoNumber other = (LottoNumber)obj;
-        if (number != other.number)
-            return false;
-        return true;
+        if (obj instanceof LottoNumber) {
+            LottoNumber other = (LottoNumber) obj;
+            return this.number.equals(other.number);
+        }
+        return false;
     }
 
     @Override
@@ -54,4 +44,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return (number > other.number) ? 1 : -1;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
