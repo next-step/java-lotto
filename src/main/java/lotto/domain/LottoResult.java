@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -9,13 +8,11 @@ public class LottoResult {
 
 	private final List<Lotto> lottos;
 	private final Lotto winningLotto;
-	private final int totalPurchases;
 	private final HashMap<Rank, Integer> statMap;
 
 	public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
 		this.lottos = lottos;
 		this.winningLotto = winningLotto;
-		this.totalPurchases = lottos.size() * PuchaseAmount.MINIMUM;
 		this.statMap = initRankMap();
 		this.findWinningResult();
 	}
@@ -33,7 +30,11 @@ public class LottoResult {
 		if (sumWinAmount == 0) {
 			return 0;
 		}
-		return (double) sumWinAmount / this.totalPurchases;
+		return (double) sumWinAmount / totalPurchaseAmount();
+	}
+
+	private double totalPurchaseAmount() {
+		return lottos.size() * PuchaseAmount.MINIMUM;
 	}
 
 	private void findWinningResult() {
