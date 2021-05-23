@@ -21,13 +21,13 @@ public class Command {
     }
 
     public Money inputMoneyAmount() {
-        PrintMessage.INPUT_MONEY.println();
+        println(MessageEnum.INPUT_MONEY.message());
         String input = scanner.nextLine();
         return new Money(toInteger(input));
     }
 
     public Set<Integer> inputAnswer() {
-        PrintMessage.INPUT_LOTTO_ANSWER.println();
+        println(MessageEnum.INPUT_LOTTO_ANSWER.message());
         String input = scanner.nextLine();
         String[] answer = input.split(NUMBER_DELIMITER);
         checkAnswer(answer);
@@ -38,7 +38,7 @@ public class Command {
     }
 
     public void printLottoAmount(int amount) {
-        PrintMessage.LOTTO_PURCHASE.println(amount);
+        println(MessageEnum.LOTTO_PURCHASE.message(), amount);
     }
 
     public void printLottoBundle(List<Lotto> lottoBundle) {
@@ -48,8 +48,8 @@ public class Command {
     }
 
     public void resultMessage() {
-        PrintMessage.RESULT.println();
-        PrintMessage.LINE.println();
+        println(MessageEnum.RESULT.message());
+        println(MessageEnum.LINE.message());
     }
 
     private void printLotto(Lotto lotto) {
@@ -67,5 +67,13 @@ public class Command {
         if (answer.length != ANSWER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ANSWER);
         }
+    }
+
+    private void println(String message) {
+        System.out.println(message);
+    }
+
+    private void println(String message, int amount) {
+        System.out.println(amount + message);
     }
 }
