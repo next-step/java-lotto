@@ -16,10 +16,10 @@ public class LottoGame {
 
         Shop shop = new Shop();
         Money money = command.inputMoneyAmount();
-        int amount = shop.buyLotto(money);
+        int lottoCount = shop.buyLotto(money);
 
-        command.printLottoAmount(amount);
-        List<Lotto> lottoBundle = shop.selectAuto(amount);
+        command.printLottoAmount(lottoCount);
+        List<Lotto> lottoBundle = shop.selectAuto(lottoCount);
         command.printLottoBundle(lottoBundle);
 
         Set<Integer> answer = command.inputAnswer();
