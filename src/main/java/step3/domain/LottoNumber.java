@@ -20,6 +20,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
+    public int hashCode() {
+        return Integer.hashCode(lottoNumber);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if(obj!=null && obj.getClass() == this.getClass()) {
             return ((LottoNumber)obj).lottoNumber == this.lottoNumber;
