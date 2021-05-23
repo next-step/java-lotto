@@ -3,7 +3,7 @@ package lottoauto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoStore {
+public class LottoTickets {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     public List<LottoTicket> giveLottoTickets(Money money) {

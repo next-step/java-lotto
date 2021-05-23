@@ -1,6 +1,6 @@
 package lottoauto;
 
-public class MainApp {
+public class LottoGame {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
@@ -8,9 +8,9 @@ public class MainApp {
         outputView.enterPurChaseAmount();
         User user = new User(new Money(inputView.nextInt()));
 
-        LottoStore lottoStore = new LottoStore();
+        LottoTickets lottoTickets = new LottoTickets();
 
-        user.buyLottoTickets(lottoStore);
+        user.buyLottoTickets(lottoTickets);
         user.printLottoTickets(outputView);
 
         outputView.enterWinningNumber();
@@ -19,7 +19,7 @@ public class MainApp {
         user.checkHitCount(winningNumbers);
         user.printHitCount(outputView);
 
-        user.calcProceedsRate(lottoStore);
+        user.calcProceedsRate(lottoTickets);
         user.printProceedsRate(outputView);
     }
 }

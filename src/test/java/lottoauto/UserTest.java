@@ -25,7 +25,7 @@ public class UserTest {
     @Test
     void buyLottoTickets() {
         assertThat(user.countLottoTickets()).isEqualTo(0);
-        user.buyLottoTickets(new LottoStore());
+        user.buyLottoTickets(new LottoTickets());
         assertThat(user.countLottoTickets()).isEqualTo(14);
     }
 }

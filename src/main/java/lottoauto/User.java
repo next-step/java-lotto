@@ -18,8 +18,8 @@ public class User {
         return amountForPurchasingLotto;
     }
 
-    public void buyLottoTickets(LottoStore lottoStore) {
-        lottoTickets = lottoStore.giveLottoTickets(amountForPurchasingLotto);
+    public void buyLottoTickets(LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets.giveLottoTickets(amountForPurchasingLotto);
     }
 
     public int countLottoTickets() {
@@ -45,8 +45,8 @@ public class User {
         }
     }
 
-    public void calcProceedsRate(LottoStore lottoStore) {
-        Money investment = lottoStore.calcInvestment(lottoTickets.size());
+    public void calcProceedsRate(LottoTickets lottoTickets) {
+        Money investment = lottoTickets.calcInvestment(this.lottoTickets.size());
         Money proceeds = lottoStatement.calcProceeds();
 
         proceedsRate = investment.calcProceedsRate(proceeds);
