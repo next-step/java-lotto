@@ -22,13 +22,17 @@ public final class Lotto {
 		}
 		sort(lottoNumbers);
 	}
+	public Lotto(Set<LottoNo> numbers) {
+		lottoNumbers.addAll(numbers);
+		sort(lottoNumbers);
+	}
 
 	public static Lotto publish() {
-		Set<Integer> numbers = new HashSet<>();
+		Set<LottoNo> numbers = new HashSet<>();
 		while(numbers.size() < NUMBERS_SIZE) {
-			numbers.add(LottoNo.randomNumber());
+			numbers.add(LottoNo.randomNo());
 		}
-		return new Lotto(new ArrayList<>(numbers));
+		return new Lotto(numbers);
 	}
 
 	private void validateNumbers(List<Integer> numbers) {

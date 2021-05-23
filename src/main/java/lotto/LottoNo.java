@@ -15,8 +15,9 @@ public class LottoNo implements Comparable<LottoNo>{
 		this.number = number;
 	}
 
-	public static int randomNumber() {
-		return (int)(Math.random() * MAX) + MIN;
+	public static LottoNo randomNo() {
+		int randomNo = (int)(Math.random() * MAX) + MIN;
+		return new LottoNo(randomNo);
 	}
 
 	@Override
