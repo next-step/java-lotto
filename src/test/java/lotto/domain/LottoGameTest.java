@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,8 @@ public class LottoGameTest {
 	@Test
 	@DisplayName("구매금액으로 로또를 구매하는 테스트")
 	void purchaseLottos() {
-		assertThat(lottoGame.purchaseLottos(new PuchaseAmount(14000), testRandomNumbersGenerator)).hasSize(14);
+		Lottos lottos = lottoGame.purchaseLottos(new PuchaseAmount(14000), testRandomNumbersGenerator);
+		assertThat(lottos.size()).isEqualTo(14);
 	}
 
 }

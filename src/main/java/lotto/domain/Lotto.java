@@ -45,12 +45,16 @@ public class Lotto {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
-	public Rank findRank(Lotto winningLotto) {
+	public int matchCount(Lotto winningLotto) {
 		int matchCount = lottoNumbers.stream()
-				.filter(lottoNumber -> winningLotto.contains(lottoNumber))
+				.filter(winningLotto::contains)
 				.mapToInt(x -> 1)
 				.sum();
-		return Rank.findRankByMatchCount(matchCount);
+		return matchCount;
+	}
+
+	public Rank findRank(Lotto winningLotto) {
+		return Rank.findRankByMatchCount(matchCount(winningLotto));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,25 +10,20 @@ import java.util.Scanner;
 
 public class InputView {
 
-	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
 	public static final String MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String MESSAGE_INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String MESSAGE_PURCHAGE_COMPLETE = "%d개를 구매했습니다.\n";
+	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
+	private static final Scanner scanner = new Scanner(System.in);
 
-	private final Scanner scanner;
-
-	public InputView() {
-		this.scanner = new Scanner(System.in);
-	}
-
-	public int inputPurchaseAmount() {
+	public static int inputPurchaseAmount() {
 		System.out.println(MESSAGE_INPUT_PURCHASE_AMOUNT);
-		return Integer.parseInt(this.scanner.nextLine());
+		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public List<Integer> inputWinningLottoNumbers() {
+	public static List<Integer> inputWinningLottoNumbers() {
 		System.out.println(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
-		String inputNumbers = this.scanner.nextLine();
+		String inputNumbers = scanner.nextLine();
 		return toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER);
 	}
 
@@ -44,10 +40,10 @@ public class InputView {
 		return inputNumbers.split(delimiter);
 	}
 
-	public static void printPurchaseLottos(List<Lotto> purchaseLottos) {
+	public static void printPurchaseLottos(Lottos purchaseLottos) {
 		System.out.printf(MESSAGE_PURCHAGE_COMPLETE, purchaseLottos.size());
 
-		for (Lotto lotto : purchaseLottos) {
+		for (Lotto lotto : purchaseLottos.getLottos()) {
 			System.out.println(lotto);
 		}
 		System.out.println();
