@@ -15,12 +15,12 @@ public class LottoAppInputTest {
 	private static final String INPUT_NEW_LINE = "\n";
 
 	@Test
-	@DisplayName("당첨 번호는 ',' 또는 ', ' 를 구분자로 입력 받은 후 Integer List 로 리턴한다.")
-	public void inputWinningNumbersTest() {
+	@DisplayName("번호들은 ',' 또는 ', ' 를 구분자로 입력 받은 후 Integer List 로 리턴한다.")
+	public void inputNumbersTest() {
 		String inputWinningNumbers = "1,2, 3,4, 5,6" + INPUT_NEW_LINE;
 		LottoAppInput lottoAppInput = createLottoAppInput(inputWinningNumbers);
 
-		List<Integer> winningNumbers = lottoAppInput.inputWinningNumbers();
+		List<Integer> winningNumbers = lottoAppInput.inputNumbers();
 
 		assertThat(winningNumbers).containsExactly(1, 2, 3, 4, 5, 6);
 	}

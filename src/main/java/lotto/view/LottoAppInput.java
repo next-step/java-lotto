@@ -19,7 +19,7 @@ public class LottoAppInput {
 		return Integer.parseInt(input);
 	}
 
-	public List<Integer> inputWinningNumbers() {
+	public List<Integer> inputNumbers() {
 		String inputNumbers = scanner.nextLine();
 		return splitAndParseInt(inputNumbers);
 	}
