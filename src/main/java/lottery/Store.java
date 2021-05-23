@@ -2,7 +2,7 @@ package lottery;
 
 public class Store {
 
-	private GenerateTicketMachine machine;
+	private final GenerateTicketMachine machine;
 
 	private static final Money TICKET_PRICE = Money.won(1000L);
 
@@ -13,8 +13,7 @@ public class Store {
 	public Tickets getTicket(Buyer buyer) {
 		Money buyerMoney = buyer.money();
 		long ticketCount = buyerMoney.divide(TICKET_PRICE);
-		Money rest = buyerMoney.minus(Money.won(ticketCount * TICKET_PRICE.amount()));
-		buyer.setMoney(rest);
+		buyer.setMoney(buyerMoney.minus(TICKET_PRICE.multiply(ticketCount)));
 		return machine.create(ticketCount);
 	}
 

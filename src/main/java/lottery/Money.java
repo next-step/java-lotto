@@ -52,11 +52,19 @@ public final class Money {
 		return Money.won(Math.multiplyExact(this.amount, value));
 	}
 
+	public Money multiply(Long value) {
+		return Money.won(Math.multiplyExact(this.amount, value));
+	}
+
 	public Money add(Money target) {
 		return Money.won(Math.addExact(this.amount, target.amount));
 	}
 
 	public float divideWithFloating(Money result) {
-		return (float)this.amount / result.amount;
+		float v = (float)this.amount / result.amount;
+		if (Float.isInfinite(v) || Float.isNaN(v) ){
+			throw new IllegalArgumentException("유효하지 않는 값입니다.");
+		}
+		return v;
 	}
 }

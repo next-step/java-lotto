@@ -22,10 +22,6 @@ public final class Buyer {
 		return tickets;
 	}
 
-	public boolean hasTickets() {
-		return tickets.size() > 0;
-	}
-
 	public void buyTicket(Store store) {
 		requireNonNull(store);
 		this.tickets = store.getTicket(this);
@@ -37,7 +33,7 @@ public final class Buyer {
 	}
 
 	public void setMoney(Money money) {
-		if (isNull(money)) {
+		if (isNull(money) || money.amount() < 0) {
 			throw new IllegalArgumentException("유효하지 않은 값입니다.");
 		}
 		this.money = money;
