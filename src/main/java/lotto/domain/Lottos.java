@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoGenerator;
+
 import java.util.*;
 
 import static lotto.domain.LottoGameOptions.*;
@@ -23,6 +25,12 @@ public class Lottos {
 
     public int count() {
         return lottos.size();
+    }
+
+    public void add(Lottos lottos) {
+        for (Lotto lotto : lottos.values()) {
+            this.lottos.add(lotto);
+        }
     }
 
     public void buyManual(List<String> manualLottoStringList) {
@@ -82,4 +90,5 @@ public class Lottos {
     public List<Lotto> values() {
         return this.lottos;
     }
+
 }
