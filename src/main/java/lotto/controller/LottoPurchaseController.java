@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.controller.dto.LottoPurchaseAssembler;
 import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.controller.dto.LottoPurchaseResponse;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoTickets;
 import lotto.service.LottoPurchaseService;
 
@@ -15,7 +16,8 @@ public class LottoPurchaseController {
     }
 
     public LottoPurchaseResponse purchaseTickets(LottoPurchaseRequest request) {
-        LottoTickets lottoTickets = purchaseService.purchaseTickets(request.getPurchaseAmount());
+        LottoMoney purchaseAmount = LottoMoney.of(request.getPurchaseAmount());
+        LottoTickets lottoTickets = purchaseService.purchaseTickets(purchaseAmount);
         return LottoPurchaseAssembler.assemblePurchaseResponse(lottoTickets);
     }
 
