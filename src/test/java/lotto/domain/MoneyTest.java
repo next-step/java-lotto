@@ -1,11 +1,10 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
@@ -15,33 +14,9 @@ public class MoneyTest {
         //given
     void create(final int money) {
         //when
-        int result = new Money(money).getMoney();
+        final int result = new Money(money).getMoney();
 
         //then
         assertThat(result).isEqualTo(money);
-    }
-
-    @DisplayName("1000원 미만 금액을 입력시 exception")
-    @ParameterizedTest
-    @ValueSource(ints = {100, 900, 999})
-        //given
-    void invalid_money_exception(final int money) {
-        //when, then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Money(money));
-    }
-
-    @DisplayName("14000원이면 14개의 lottoCount를 리턴하는지")
-    @Test
-    void how_many_lotto() {
-        //given
-        int inputMoney = 14000;
-        int expected = 14;
-
-        //when
-        Money money = new Money(inputMoney);
-        int result = money.getLottoCount();
-
-        //then
-        assertThat(result).isEqualTo(expected);
     }
 }
