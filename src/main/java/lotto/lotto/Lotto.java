@@ -2,6 +2,9 @@ package lotto.lotto;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import lotto.ui.Command;
 
 public class Lotto {
     private static final int MAX_COUNT = 6;
@@ -17,8 +20,20 @@ public class Lotto {
         return numbers.size() >= MAX_COUNT;
     }
 
-    public Set<LottoNumber> numbers() {
-        return numbers;
+    public void retainAll(Answer answer) {
+        numbers.retainAll(answer.numbers());
+    }
+
+    public int answerCount() {
+        return numbers.size();
+    }
+
+    public String numbersToString() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.joining(Command.NUMBER_DELIMITER));
     }
 
     private boolean isContain(LottoNumber number) {

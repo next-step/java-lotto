@@ -26,8 +26,8 @@ public class Shop {
     public MatchedAnswer matchAnswer(LottoTicket lottoTicket, Answer answer) {
         MatchedAnswer match = new MatchedAnswer();
         lottoTicket.tickets().forEach(lotto -> {
-            lotto.numbers().retainAll(answer.numbers());
-            match.increaseCount(lotto.numbers().size());
+            lotto.retainAll(answer);
+            match.increaseCount(lotto.answerCount());
         });
         return match;
     }

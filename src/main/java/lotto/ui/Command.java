@@ -14,8 +14,8 @@ import lotto.shop.Money;
 
 public class Command {
     private static final int ANSWER_SIZE = 6;
-    private static final String NUMBER_DELIMITER = ",";
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String NUMBER_DELIMITER = ",";
 
     public static Money inputMoneyAmount() {
         println(MessageEnum.INPUT_MONEY.message());
@@ -50,12 +50,7 @@ public class Command {
     }
 
     private static void printLotto(Lotto lotto) {
-        String collect = lotto.numbers().stream()
-                .map(LottoNumber::getNumber)
-                .sorted()
-                .map(String::valueOf)
-                .collect(Collectors.joining(NUMBER_DELIMITER));
-
+        String collect = lotto.numbersToString();
         System.out.println("[" + collect + "]");
     }
 
