@@ -6,7 +6,6 @@ import step3.common.WinningType;
 public class Money {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private long money;
-    private double profit;
 
     public Money(long money) {
         if(money < LOTTO_TICKET_PRICE) {
