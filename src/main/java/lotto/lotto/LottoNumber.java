@@ -1,8 +1,8 @@
 package lotto.lotto;
 
-import lotto.error.ErrorMessage;
-
 import java.util.Objects;
+
+import lotto.error.ErrorMessage;
 
 public class LottoNumber {
     public static final int MIN_NUMBER = 1;
