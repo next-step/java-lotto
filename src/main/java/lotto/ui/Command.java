@@ -54,9 +54,12 @@ public class Command {
     }
 
     private void printLotto(Lotto lotto) {
-        String collect = lotto.numbers().stream().sorted()
-                .map(Object::toString)
+        String collect = lotto.numbers().stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
                 .collect(Collectors.joining(NUMBER_DELIMITER));
+
         System.out.println("[" + collect + "]");
     }
 
