@@ -44,7 +44,7 @@ public class LottoStore {
 			autoGenerator.generate(lotto);
 			result.add(lotto);
 		}
-		return new Ticket(result);
+		return new Ticket(result, budget);
 	}
 
 }
