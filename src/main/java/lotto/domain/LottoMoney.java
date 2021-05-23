@@ -19,10 +19,6 @@ public class LottoMoney {
         }
     }
 
-    public int amount() {
-        return amount;
-    }
-
     public int purchaseCount() {
         return amount / LottoTicket.PRICE;
     }
