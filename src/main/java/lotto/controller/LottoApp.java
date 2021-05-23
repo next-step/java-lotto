@@ -42,10 +42,12 @@ public class LottoApp {
 	}
 
 	private WinningNumbers inputWinningNumbers() {
+		return WinningNumbers.of(inputLottoNumbers(), inputBonusNumber());
+	}
+
+	private LottoNumbers inputLottoNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
-		LottoNumbers winningNumbers = new LottoNumbers(lottoAppInput.inputWinningNumbers());
-		LottoNumber bonusNumber = inputBonusNumber();
-		return WinningNumbers.of(winningNumbers, bonusNumber);
+		return new LottoNumbers(lottoAppInput.inputNumbers());
 	}
 
 	private LottoNumber inputBonusNumber() {
