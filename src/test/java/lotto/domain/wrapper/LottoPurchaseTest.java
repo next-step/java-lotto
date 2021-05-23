@@ -22,6 +22,10 @@ public class LottoPurchaseTest {
         assertThatThrownBy(() ->
                 new LottoPurchase(budget, 4)
         ).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() ->
+                new LottoPurchase(budget, -1)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
     
     @Test
