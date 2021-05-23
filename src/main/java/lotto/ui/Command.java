@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.common.ErrorMessage;
-import lotto.common.PrintMessage;
+import lotto.error.ErrorMessage;
+import lotto.enums.MessageEnum;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;

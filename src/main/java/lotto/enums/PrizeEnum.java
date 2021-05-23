@@ -1,4 +1,4 @@
-package lotto.common;
+package lotto.enums;
 
 import lotto.lotto.MatchedAnswer;
 

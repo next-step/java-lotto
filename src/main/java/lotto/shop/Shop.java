@@ -3,6 +3,9 @@ package lotto.shop;
 import lotto.error.ErrorMessage;
 import lotto.lotto.Answer;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
+import lotto.lotto.LottoTicket;
+import lotto.lotto.MatchedAnswer;
 
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;

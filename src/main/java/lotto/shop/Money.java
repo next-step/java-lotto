@@ -1,6 +1,6 @@
 package lotto.shop;
 
-import lotto.common.ErrorMessage;
+import lotto.error.ErrorMessage;
 
 public class Money {
     private final int amount;

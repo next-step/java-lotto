@@ -1,4 +1,4 @@
-package lotto.game;
+package lotto;
 
 import lotto.lotto.Answer;
 import lotto.lotto.LottoTicket;
