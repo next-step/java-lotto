@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-class LottoGameTest {
+class UserLottoTest {
 
 	@DisplayName("로또 게임 생성 테스트")
 	@Test
@@ -23,10 +23,10 @@ class LottoGameTest {
 		lottoTicketList.add(new LottoTicket(lottoNumbers));
 
 		// then
-		LottoGame lottoGame = new LottoGame(lottoTicketList);
+		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// then
-		assertThat(lottoGame).isNotNull();
+		assertThat(userLotto).isNotNull();
 	}
 
 	private Set<LottoNumber> getLottoNumbers() {
@@ -45,7 +45,7 @@ class LottoGameTest {
 	@ParameterizedTest
 	@NullAndEmptySource
 	void invalid(List<LottoTicket> lottoTicketList) {
-		assertThatThrownBy(() -> new LottoGame(lottoTicketList)).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new UserLotto(lottoTicketList)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("로또 게임 개수 테스트")
@@ -57,10 +57,10 @@ class LottoGameTest {
 		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
 
 		// when
-		LottoGame lottoGame = new LottoGame(lottoTicketList);
+		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// then
-		assertThat(lottoGame.count()).isEqualTo(2);
+		assertThat(userLotto.count()).isEqualTo(2);
 	}
 
 	@DisplayName("로또 번호 목록를 문자열로 받아오는 테스트")
@@ -72,10 +72,10 @@ class LottoGameTest {
 		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
 
 		// when
-		LottoGame lottoGame = new LottoGame(lottoTicketList);
+		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// then
-		assertThat(lottoGame.lottoNumbers()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]\r\n");
+		assertThat(userLotto.lottoNumbers()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]\r\n");
 	}
 
 }

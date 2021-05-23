@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.List;
 
-class LottoGame {
+class UserLotto {
 
 	private static final String INVALID_LOTTO_TICKET_LIST_MESSAGE = "로또 티켓이 유효하지 않습니다.";
 	private static final String LINE_SEPARATOR = "\r\n";
 
 	private final List<LottoTicket> lottoTicketList;
 
-	LottoGame(List<LottoTicket> lottoTicketList) {
+	UserLotto(List<LottoTicket> lottoTicketList) {
 		validate(lottoTicketList);
 
 		this.lottoTicketList = lottoTicketList;

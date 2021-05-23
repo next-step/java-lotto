@@ -10,10 +10,10 @@ class LottoStore {
 
 	private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
 
-	LottoGame buy(Money money) {
+	UserLotto buy(Money money) {
 		validate(money);
 
-		return new LottoGame(generateLottoTickets(money));
+		return new UserLotto(generateLottoTickets(money));
 	}
 
 	private void validate(Money money) {

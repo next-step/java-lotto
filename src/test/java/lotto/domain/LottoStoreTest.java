@@ -16,10 +16,10 @@ class LottoStoreTest {
 		Money money = new Money("10000");
 
 		// when
-		LottoGame lottoGame = lottoStore.buy(money);
+		UserLotto userLotto = lottoStore.buy(money);
 
 		// then
-		assertThat(lottoGame).isNotNull();
+		assertThat(userLotto).isNotNull();
 	}
 
 	@DisplayName("유효성 체크 테스트")
