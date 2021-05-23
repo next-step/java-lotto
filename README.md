@@ -18,6 +18,36 @@
 
 # 로또
 
+## 객체
+
+├── LottoGameManager.java: 로또 게임을 시작하고 종료하는 관리자이다.
+├── calculator
+│   └── StringCalculator.java: 앞선 step1, 2 의 계산기이다. 사용자가 입력한 당첨 번호에 사용한다
+├── interaction : user interface 를 맞는다
+│    ├── InputView.java
+│    └── OutputView.java
+└── lotto
+├── LottoNumber.java: 로또 번호 하나
+├── LottoNumbers.java: 로또 한 세트이다
+├── converter
+│    └── NumberToLotto.java: 숫자를 입력받 로또 번호 하나 혹은 로또 번호들로 변환한다
+├── generator
+│   ├── AutoLottoNumberGenerator.java: 랜덤을 사용해 로또 번호를 생성한다. 가게에서 파는 로또 머신의 역항
+│   ├── Generator.java: 로또 번호 생성기의 interface 이다.
+│   └── MessageLottoNumberGenerator.java: 사용자가 입력한 문자열을 로또 한벌로 만들어주는 역할을 한다
+├── statistics
+│    ├── Earn.java: 로또 번호 매칭이 되었을 때 각 등급별 가격을 명시한다
+│    ├── Statistic.java: 로또 하나에 대해 얼마나 매칭되었는지, 그래서 얼마를 벌었는지 통계를 내어준다
+│    └── StatisticsCalculator.java: 사용자가 구매한 금액의 모든 로또를 계산한다
+└── store
+├── LottoStore.java: 로또를 판매한다, 또한 확장성을 고려해 로또의 가격을 정할 수 있다
+└── Ticket.java: 유저가 한번 구매한 모든 로또는 티켓으로 발급된다
+
+## 고려한 내용
+
+1. `List`, `Map` 에서 initialCapacity 를 명시했다. 사이즈가 늘어나고, re-hasing 을 하면서 발생되는 추가적인 연산을 막고 싶었다.
+
+
 ## 진행 방법
 
 * 로또 요구사항을 파악한다.
