@@ -2,7 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoReport;
-import lotto.domain.Winnings;
+import lotto.domain.Rank;
 
 import java.util.List;
 
@@ -61,8 +61,8 @@ public class PrintView {
     private static String formatLottoReport(LottoReport lottoReport) {
         StringBuilder builder = new StringBuilder();
 
-        for (Winnings winnings : Winnings.values()) {
-            builder.append(formatWinningMetric(winnings, lottoReport));
+        for (Rank rank : Rank.values()) {
+            builder.append(formatWinningMetric(rank, lottoReport));
         }
 
         return builder.toString();
@@ -72,8 +72,8 @@ public class PrintView {
         return yield < YIELD_TIP_THRESHOLD;
     }
 
-    static String formatWinningMetric(Winnings winnings, LottoReport report) {
-        return String.format("%d개 일치 (%d)- %d개\n", winnings.matched, winnings.winnings, report.countWinnings(winnings));
+    static String formatWinningMetric(Rank rank, LottoReport report) {
+        return String.format("%d개 일치 (%d)- %d개\n", rank.countOfMatch, rank.winnings, report.countWinnings(rank));
     }
 
 }

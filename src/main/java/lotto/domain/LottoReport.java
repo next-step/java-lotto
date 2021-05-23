@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static lotto.domain.Winnings.*;
+import static lotto.domain.Rank.*;
 
 public class LottoReport {
     private int threeMatched;
@@ -41,8 +43,8 @@ public class LottoReport {
                 sixMatched * FIRST.winnings;
     }
 
-    public int countWinnings(Winnings winnings){
-        return winnings.lottoReportMatchedNumGetter.apply(this);
+    public int countWinnings(Rank rank){
+        return rank.lottoReportMatchedNumGetter.apply(this);
     }
 
     int threeMatched() {
