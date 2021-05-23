@@ -2,6 +2,8 @@ package lotto.domain;
 
 public class Money {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private final int amount;
 
     public Money(int amount) {
@@ -15,7 +17,7 @@ public class Money {
     }
 
     public int getBuyableLottoSize() {
-        return amount / 1000;
+        return amount / LOTTO_PRICE;
     }
 
     private void validatePositive(int amount) {
@@ -25,7 +27,7 @@ public class Money {
     }
 
     private void validateUnit(int amount) {
-        if (amount % 1000 != 0) {
+        if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("금액은 1,000원 단위로 입력해주세요.");
         }
     }

@@ -4,8 +4,6 @@ import java.util.List;
 
 public class LottoStatistics {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private final WinningLotto winningLotto;
     private final WinningCountMap winningCountMap;
 
@@ -21,7 +19,7 @@ public class LottoStatistics {
     }
 
     public double getEarningsRate(int totalLottoSize) {
-        return winningCountMap.getTotalPrize() / (double) (totalLottoSize * LOTTO_PRICE);
+        return winningCountMap.getTotalPrize() / (double) (totalLottoSize * Money.LOTTO_PRICE);
     }
 
     private void analyzeLottosData(List<Lotto> lottos) {
