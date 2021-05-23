@@ -15,7 +15,9 @@ public class Lotto {
 	}
 
 	public long getMatchesCount(Lotto lotto) {
-		return lotto.numbers.stream().filter(lottoNumber -> containNumber(lottoNumber)).count();
+		return lotto.numbers.stream()
+			.filter(lottoNumber -> containNumber(lottoNumber))
+			.count();
 	}
 
 	@Override
