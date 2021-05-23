@@ -1,6 +1,11 @@
 package lotto.store;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import lotto.LottoNumbers;
+import lotto.generator.AutoLottoNumberGenerator;
 
 public class LottoStore {
 
@@ -29,5 +34,16 @@ public class LottoStore {
 	@Override
 	public int hashCode() {
 		return Objects.hash(budget, price);
+	}
+
+	public List<LottoNumbers> produceLotto() {
+		List<LottoNumbers>  result = new ArrayList<>();
+		AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
+		for (int i = 0; i < count(); i++) {
+			LottoNumbers lotto = new LottoNumbers();
+			autoGenerator.generate(lotto);
+			result.add(lotto);
+		}
+		return result;
 	}
 }
