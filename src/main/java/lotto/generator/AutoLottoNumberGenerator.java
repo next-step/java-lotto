@@ -38,15 +38,15 @@ public class AutoLottoNumberGenerator implements Generator {
 		List<Integer> pickedNumbers = pickNumbers();
 		Collections.sort(pickedNumbers);
 		List<LottoNumber> lottoNumberList = NumberToLotto.convert(pickedNumbers);
-		LottoNumbers pickedLotto = new LottoNumbers();
-		appendLottoNumber(pickedLotto, lottoNumberList);
-		return pickedLotto;
+		return appendLottoNumber(lottoNumberList);
 	}
 
-	private void appendLottoNumber(LottoNumbers lottoNumbers, List<LottoNumber> lottoNumberList) {
+	private LottoNumbers appendLottoNumber(List<LottoNumber> lottoNumberList) {
+		LottoNumbers result = new LottoNumbers();
 		for (LottoNumber lottoNumber : lottoNumberList) {
-			lottoNumbers.add(lottoNumber);
+			result.add(lottoNumber);
 		}
+		return result;
 	}
 
 	private List<Integer> pickNumbers() {
