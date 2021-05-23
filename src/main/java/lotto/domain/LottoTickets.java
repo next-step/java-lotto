@@ -9,6 +9,10 @@ public class LottoTickets implements Iterable<LottoTicket> {
 
     private final List<LottoTicket> lottoTickets;
 
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
     public static LottoTickets autoTickets(int count) {
         validateCount(count);
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -22,10 +26,6 @@ public class LottoTickets implements Iterable<LottoTicket> {
         if (count <= 0) {
             throw new IllegalArgumentException("구매 수량을 입력해 주세요.");
         }
-    }
-
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
     }
 
     public LottoRanks ranks(LottoNumbers winNumbers) {

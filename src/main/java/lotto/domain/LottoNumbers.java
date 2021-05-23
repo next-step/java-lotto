@@ -12,6 +12,11 @@ public class LottoNumbers implements Iterable<LottoNumber> {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public static LottoNumbers generate() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
@@ -21,11 +26,6 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return new LottoNumbers(lottoNumbers.stream()
                 .limit(MAX_LOTTO_COUNT)
                 .collect(Collectors.toList()));
-    }
-
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

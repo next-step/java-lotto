@@ -17,6 +17,10 @@ public class LottoNumber {
 
     private final int number;
 
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
     public static LottoNumber of(int number) {
         validateNumber(number);
         return numberCache.get(number);
@@ -26,10 +30,6 @@ public class LottoNumber {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 숫자는 " + MIN_LOTTO_NUMBER + "과 " + MAX_LOTTO_NUMBER + "사이의 정수 이어야 합니다.");
         }
-    }
-
-    private LottoNumber(int number) {
-        this.number = number;
     }
 
     public int number() {

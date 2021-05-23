@@ -6,12 +6,12 @@ public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
 
-    public static LottoTicket autoTicket() {
-        return new LottoTicket(LottoNumbers.generate());
-    }
-
     public LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket autoTicket() {
+        return new LottoTicket(LottoNumbers.generate());
     }
 
     public LottoNumbers lottoNumbers() {
