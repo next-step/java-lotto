@@ -13,7 +13,7 @@ public class LottoNumbers {
 		lottoNumbers = new ArrayList<>(LOTTO_SIZE);
 	}
 
-	protected LottoNumbers(List<Integer> numbers) {
+	public LottoNumbers(List<Integer> numbers) {
 		this();
 		for (int number : numbers) {
 			this.add(new LottoNumber(number));
