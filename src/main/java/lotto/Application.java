@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumbers;
-import lotto.ui.InputView;
-import lotto.ui.OutputView;
+import lotto.core.LottoController;
 
 public class Application {
 

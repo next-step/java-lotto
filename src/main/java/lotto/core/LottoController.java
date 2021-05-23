@@ -1,6 +1,5 @@
-package lotto;
+package lotto.core;
 
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Message;
 import lotto.domain.WinningNumbers;

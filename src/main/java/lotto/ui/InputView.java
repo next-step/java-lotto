@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import calculator.SplitUtil;
-import lotto.CustomIllegalArgumentException;
+import lotto.exception.CustomIllegalArgumentException;
 import lotto.domain.Message;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.exception;
 
 import lotto.domain.Message;
 
