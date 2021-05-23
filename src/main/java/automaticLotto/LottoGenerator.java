@@ -38,6 +38,9 @@ public class LottoGenerator {
 	}
 
 	private int getPossibleCount(int budget) {
+		if (budget < 1000) {
+			throw new RuntimeException("you can not buy even one lotto");
+		}
 		return budget / 1000;
 	}
 

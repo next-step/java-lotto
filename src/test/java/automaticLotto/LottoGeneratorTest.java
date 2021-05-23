@@ -17,4 +17,17 @@ public class LottoGeneratorTest {
 		boughtLottos = lottoGenerator.buy(14700);
 		assertThat(boughtLottos.size()).isEqualTo(14);
 	}
+
+	@Test
+	@DisplayName("발행할 수 없는 금액이 입력되면 에러를 발생")
+	public void buy_lottos_over_budget_limit() {
+		LottoGenerator lottoGenerator = new LottoGenerator();
+
+		assertThatThrownBy(() -> lottoGenerator.buy(0))
+			.isInstanceOf(RuntimeException.class);
+
+		assertThatThrownBy(() -> lottoGenerator.buy(700))
+			.isInstanceOf(RuntimeException.class);
+
+	}
 }
