@@ -15,7 +15,7 @@ public enum Prize {
 		this.winAmount = winAmount;
 	}
 
-	public static Prize getPrizeByCount(int count) {
+	public static Prize findByCount(int count) {
 		Prize findResult = NOTHING;
 		for (Prize prize : values()) {
 			findResult = (prize.count() == count) ? prize : findResult;

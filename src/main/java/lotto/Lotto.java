@@ -60,7 +60,7 @@ public final class Lotto {
 		for (LottoNo lottoNumber : lottoNumbers) {
 			count = win.contain(lottoNumber) ? count + 1 : count;
 		}
-		return Prize.getPrizeByCount(count);
+		return Prize.findByCount(count);
 	}
 
 
