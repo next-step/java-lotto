@@ -1,7 +1,6 @@
 package step2;
 
-import static java.lang.Integer.*;
-
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,22 +33,9 @@ public class StringAddCalculator {
 	}
 
 	private static int sumStringArray(String[] numbers) {
-		int sum = 0;
-
-		for (String number : numbers) {
-			sum += convertToInteger(number);
-		}
-
-		return sum;
-	}
-
-	private static int convertToInteger(String number) {
-		int convertNumber = parseInt(number);
-
-		if (convertNumber < 0) {
-			throw new IllegalArgumentException("Negative number is invalid!");
-		}
-
-		return convertNumber;
+		return Arrays.stream(numbers)
+			.map(PositiveNumber::valueOf)
+			.reduce(PositiveNumber.valueOf(0), PositiveNumber::sum)
+			.toInt();
 	}
 }
