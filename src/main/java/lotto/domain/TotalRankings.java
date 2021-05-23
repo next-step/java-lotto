@@ -2,14 +2,13 @@ package lotto.domain;
 
 import lotto.dto.PrizeInfo;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TotalRankings {
+
+  private static final long WINNING_FAILED_COUNT = 0L;
 
   private final Map<LottoRanking, Long> winningCountsGroupByLottoRanking;
 
@@ -23,12 +22,11 @@ public class TotalRankings {
   }
 
   public List<PrizeInfo> createPrizeInfos() {
-    return winningCountsGroupByLottoRanking.entrySet()
-        .stream()
-        .filter(entry -> isPrized(entry.getKey()))
-        .sorted(Comparator.comparingInt(entry -> getRankingMatchCount(entry.getKey())))
-        .map(entry -> new PrizeInfo(entry.getKey(), entry.getValue()))
-        .collect(Collectors.toList());
+    return Arrays.stream(LottoRanking.values())
+            .filter(this::isPrized)
+            .sorted(Comparator.comparingInt(this::getRankingMatchCount))
+            .map(lottoRanking -> new PrizeInfo(lottoRanking, winningCountsGroupByLottoRanking.getOrDefault(lottoRanking, WINNING_FAILED_COUNT)))
+            .collect(Collectors.toList());
   }
 
   private boolean isPrized(LottoRanking lottoRanking) {
