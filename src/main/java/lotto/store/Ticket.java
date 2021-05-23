@@ -25,4 +25,14 @@ public class Ticket {
 	public int budget() {
 		return budget;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder message = new StringBuilder();
+		for (LottoNumbers lottoNumbers : lottoList) {
+			message.append(lottoNumbers);
+			message.append("\n");
+		}
+		return message.toString();
+	}
 }
