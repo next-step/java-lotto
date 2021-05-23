@@ -10,10 +10,10 @@ public class OrderedInfos {
 
   private static final String LINE_FORMAT = "[%s]";
 
-  private final List<OrderedInfo> infos;
+  private final List<OrderedLottoGameNumbers> infos;
   public OrderedInfos(List<LottoGame> games) {
     this.infos = games.stream()
-                  .map(lottoGame -> new OrderedInfo(lottoGame.gameNumber()))
+                  .map(lottoGame -> new OrderedLottoGameNumbers(lottoGame.gameNumber()))
                   .collect(Collectors.toList());
   }
 

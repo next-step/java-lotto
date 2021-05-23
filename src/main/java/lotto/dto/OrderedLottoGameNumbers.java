@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class OrderedInfo {
+public class OrderedLottoGameNumbers {
 
   private final List<Integer> purchasedLottoInfos;
 
-  public OrderedInfo(List<Integer> purchasedLottoInfos) {
+  public OrderedLottoGameNumbers(List<Integer> purchasedLottoInfos) {
     this.purchasedLottoInfos = purchasedLottoInfos;
   }
 
@@ -23,7 +23,7 @@ public class OrderedInfo {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    OrderedInfo that = (OrderedInfo) o;
+    OrderedLottoGameNumbers that = (OrderedLottoGameNumbers) o;
     return purchasedLottoInfos.equals(that.purchasedLottoInfos);
   }
 

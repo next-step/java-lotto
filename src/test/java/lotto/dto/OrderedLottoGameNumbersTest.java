@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OrderedInfoTest {
+class OrderedLottoGameNumbersTest {
 
   @DisplayName("객체 생성 & 동등성 테스트")
   @ParameterizedTest
@@ -22,7 +22,7 @@ class OrderedInfoTest {
         .collect(Collectors.toList());
 
     //when & then
-    assertThat(new OrderedInfo(givenNumbers)).isEqualTo(new OrderedInfo(givenNumbers));
+    assertThat(new OrderedLottoGameNumbers(givenNumbers)).isEqualTo(new OrderedLottoGameNumbers(givenNumbers));
   }
 
   @DisplayName("toString 값 테스트")
@@ -35,6 +35,6 @@ class OrderedInfoTest {
         .collect(Collectors.toList());
 
     //when & then
-    assertThat(new OrderedInfo(givenNumbers).toString()).hasToString(given);
+    assertThat(new OrderedLottoGameNumbers(givenNumbers).toString()).hasToString(given);
   }
 }
