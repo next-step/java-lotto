@@ -7,7 +7,7 @@ public class LottoStatistics {
     private static final int MIN_MATCH_COUNT = 0;
     private static final int MAX_MATCH_COUNT = 6;
 
-    private final Map<Integer,LottoStatistic> statisticsMap = new HashMap<>();
+    private final Map<Integer, LottoStatistic> statisticsMap = new HashMap<>();
 
     public LottoStatistics() {
         for (int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++) {
@@ -26,7 +26,7 @@ public class LottoStatistics {
     public int totalPayout() {
         return statisticsMap.values()
                 .stream()
-                .map(LottoStatistic::payout)
-                .reduce(0, Integer::sum);
+                .mapToInt(LottoStatistic::payout)
+                .sum();
     }
 }
