@@ -4,7 +4,7 @@ import step3.exception.inValidLottoNumberException;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<Integer> {
+public class LottoNumber {
 
     private Integer number;
 
@@ -15,14 +15,15 @@ public class LottoNumber implements Comparable<Integer> {
     }
 
     private void checkIfValidLotto(int number) {
-        if(number < LottoConstants.BEG_LOTTO_NUM || number > LottoConstants.END_LOTTO_NUM) {
+        if (number < LottoConstants.BEG_LOTTO_NUM || number > LottoConstants.END_LOTTO_NUM) {
             throw new inValidLottoNumberException();
         }
     }
 
+
     @Override
-    public int compareTo(Integer number) {
-        return this.number.compareTo(number);
+    public String toString() {
+        return String.valueOf(number);
     }
 
     @Override
