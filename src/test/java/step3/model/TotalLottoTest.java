@@ -1,6 +1,6 @@
 package step3.model;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +22,8 @@ public class TotalLottoTest {
     @DisplayName("로또 1개를 add하는 테스트")
     void addTest() {
         TotalLotto totalLotto = new TotalLotto();
-        totalLotto.addLottoOne(new LottoNumbers());
-        totalLotto.addLottoOne(new LottoNumbers());
+        totalLotto.addLottoOne(RandomNumbersGenerator.createNumbers());
+        totalLotto.addLottoOne(RandomNumbersGenerator.createNumbers());
         assertThat(totalLotto.size()).isEqualTo(2);
     }
 
@@ -68,6 +68,6 @@ public class TotalLottoTest {
     }
 
     private void addLotto(TotalLotto totalLotto, ArrayList<Integer> arrayList) {
-        totalLotto.addLottoOne(new LottoNumbers(arrayList));
+        totalLotto.addLottoOne(arrayList);
     }
 }

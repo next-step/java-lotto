@@ -20,8 +20,8 @@ public class TotalLotto {
         return totalLotto.size();
     }
 
-    public void addLottoOne(LottoNumbers lottoNumbers) {
-        totalLotto.add(lottoNumbers);
+    public void addLottoOne(List<Integer> list) {
+        totalLotto.add(new LottoNumbers(list));
     }
 
     public ArrayList<LottoNumbers> totalLotto() {
