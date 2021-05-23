@@ -4,7 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.common.WinningType;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,34 +15,44 @@ public class LottoCheckerTest {
     @DisplayName("로또 티켓 winningType 테스트")
     void checkWinningType() {
         LottoChecker lottoChecker = new LottoChecker();
-        WinningType winningType = null;
+        WinningType winningType;
 
-        LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-        ));
+        Set<LottoNumber> firstLottoNumbers = new HashSet<>();
+        for(int i = 1; i <= 6; i++) {
+            firstLottoNumbers.add(new LottoNumber(i));
+        }
+        LottoTicket winningLottoTicket = new LottoTicket(firstLottoNumbers);
 
         // 6개 모두 일치 시에는 1등
-        LottoTicket userFirstLottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-        ));
+        Set<LottoNumber> userFirstLottoNumbers = new HashSet<>();
+        for(int i = 1; i <= 6; i++) {
+            userFirstLottoNumbers.add(new LottoNumber(i));
+        }
+        LottoTicket userFirstLottoTicket = new LottoTicket(userFirstLottoNumbers);
         winningType = lottoChecker.check(userFirstLottoTicket, winningLottoTicket);
         assertThat(winningType).isEqualTo(WinningType.FIRST);
 
         // 4개 일치 시에는 3등
-        LottoTicket userThirdLottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
-        ));
-        winningType = lottoChecker.check(userThirdLottoTicket, winningLottoTicket);
+        Set<LottoNumber> userForthLottoNumbers = new HashSet<>();
+        userForthLottoNumbers.add(new LottoNumber(1));
+        userForthLottoNumbers.add(new LottoNumber(2));
+        userForthLottoNumbers.add(new LottoNumber(3));
+        userForthLottoNumbers.add(new LottoNumber(14));
+        userForthLottoNumbers.add(new LottoNumber(15));
+        userForthLottoNumbers.add(new LottoNumber(16));
+        LottoTicket userForthLottoTicket = new LottoTicket(userForthLottoNumbers);
+        winningType = lottoChecker.check(userForthLottoTicket, winningLottoTicket);
         assertThat(winningType).isEqualTo(WinningType.FORTH);
 
         // 0개 일치 시에는 7등
-        LottoTicket userSeventhLottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(11), new LottoNumber(12), new LottoNumber(13),
-                new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
-        ));
+        Set<LottoNumber> userSeventhLottoNumbers = new HashSet<>();
+        userSeventhLottoNumbers.add(new LottoNumber(11));
+        userSeventhLottoNumbers.add(new LottoNumber(12));
+        userSeventhLottoNumbers.add(new LottoNumber(13));
+        userSeventhLottoNumbers.add(new LottoNumber(14));
+        userSeventhLottoNumbers.add(new LottoNumber(15));
+        userSeventhLottoNumbers.add(new LottoNumber(16));
+        LottoTicket userSeventhLottoTicket = new LottoTicket(userSeventhLottoNumbers);
         winningType = lottoChecker.check(userSeventhLottoTicket, winningLottoTicket);
         assertThat(winningType).isEqualTo(WinningType.SEVENTH);
 

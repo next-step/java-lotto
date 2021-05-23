@@ -1,11 +1,6 @@
 package step3.domain;
 
-import step3.common.ErrorCode;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicketGenerator {
     private static List<LottoNumber> lottoNumbersCache;
@@ -21,7 +16,7 @@ public class LottoTicketGenerator {
     public LottoTicket generate() {
         Collections.shuffle(lottoNumbersCache);
 
-        return new LottoTicket(lottoNumbersCache.subList(0, 6));
+        return new LottoTicket(new HashSet<>(lottoNumbersCache.subList(0, 6)));
     }
 
     public LottoTicket generate(Set<Integer> lottoNumbers) {
@@ -30,7 +25,7 @@ public class LottoTicketGenerator {
             resultNumbers.add(lottoNumbersCache.get(number));
         }
 
-        return new LottoTicket(resultNumbers);
+        return new LottoTicket(new HashSet<>(resultNumbers));
     }
 
 }
