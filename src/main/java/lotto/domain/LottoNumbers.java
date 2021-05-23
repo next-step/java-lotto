@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-  static final int NUMBER_COUNT_PER_GAME = 6;
+  public static final int NUMBER_COUNT_PER_GAME = 6;
   private static final String INVALID_NUMBER_COUNT_FORMAT = "로또 번호 개수는 %d개 여야 합니다.";
 
   private final Set<LottoNumber> numbers;

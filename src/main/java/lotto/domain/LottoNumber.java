@@ -4,10 +4,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+  public static final int LOTTO_MIN_NUM = 1;
+  public static final int LOTTO_MAX_NUM = 45;
   private static final String OVER_NUMBER_RANGE = "로또 숫자의 범위를 초과했습니다.";
-
-  static final int LOTTO_MIN_NUM = 1;
-  static final int LOTTO_MAX_NUM = 45;
 
   private final int number;
 
