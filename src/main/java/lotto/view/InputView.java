@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class InputView {
 
 	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
-	public static final String MESSAGE_INPUT_PURCHAGE_AMOUNT = "구입금액을 입력해 주세요.";
+	public static final String MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String MESSAGE_INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String MESSAGE_PURCHAGE_COMPLETE = "%d개를 구매했습니다.\n";
 
@@ -21,7 +21,7 @@ public class InputView {
 	}
 
 	public int inputPurchaseAmount() {
-		System.out.println(MESSAGE_INPUT_PURCHAGE_AMOUNT);
+		System.out.println(MESSAGE_INPUT_PURCHASE_AMOUNT);
 		return Integer.parseInt(this.scanner.nextLine());
 	}
 
