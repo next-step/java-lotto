@@ -6,6 +6,7 @@ import com.lotto.domain.LottoReward;
 import java.util.List;
 import java.util.Map;
 
+import static com.lotto.domain.LottoReward.*;
 import static com.lotto.ui.Message.*;
 
 public class OutputView {
@@ -48,13 +49,13 @@ public class OutputView {
     }
 
     private static String getMessage(LottoReward reward) {
-        if (reward == LottoReward.THREE) {
+        if (reward == THREE) {
             return "3";
-        } else if (reward == LottoReward.FOUR) {
+        } else if (reward == FOUR) {
             return "4";
-        } else if (reward == LottoReward.FIVE) {
+        } else if (reward == FIVE) {
             return "5";
-        } else if (reward == LottoReward.SIX) {
+        } else if (reward == SIX) {
             return "6";
         }
         return "";

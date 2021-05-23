@@ -3,23 +3,23 @@ package com.lotto.domain;
 public enum LottoReward {
     THREE(5000) {
         @Override
-        int totalReward(int count) { return count * THREE.reward(); }
+        public int totalReward(int count) { return count * THREE.reward(); }
     },
     FOUR(50000) {
         @Override
-        int totalReward(int count) { return count * FOUR.reward(); }
+        public int totalReward(int count) { return count * FOUR.reward(); }
     },
     FIVE(1500000) {
         @Override
-        int totalReward(int count) { return count * FIVE.reward(); }
+        public int totalReward(int count) { return count * FIVE.reward(); }
     },
     SIX(2000000000) {
         @Override
-        int totalReward(int count) { return count * SIX.reward(); }
+        public int totalReward(int count) { return count * SIX.reward(); }
     },
     NOTHING(0) {
         @Override
-        int totalReward(int count) { return 0; }
+        public int totalReward(int count) { return 0; }
     };
 
     private int reward;
@@ -32,5 +32,18 @@ public enum LottoReward {
         return reward;
     }
 
-    abstract int totalReward(int count);
+    public abstract int totalReward(int count);
+
+    public static LottoReward generateReward(int sameCount) {
+        if (sameCount == 3) {
+            return THREE;
+        } else if (sameCount == 4) {
+            return FOUR;
+        } else if (sameCount == 5) {
+            return FIVE;
+        } else if (sameCount == 6) {
+            return SIX;
+        }
+        return NOTHING;
+    }
 }
