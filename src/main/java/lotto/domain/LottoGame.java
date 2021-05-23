@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
-    public Lottos buyLottos(int count) {
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < count; ++i) {
-            lottos.buyAuto();
+    public Lottos buyManualLottosUsing(List<String> manualLottoStrings) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (String manualLottoString : manualLottoStrings) {
+            lottoList.add(new Lotto(manualLottoString));
         }
-        return lottos;
+        return new Lottos(lottoList);
     }
 
 }

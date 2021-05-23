@@ -104,8 +104,8 @@ public class LottoTest {
     @Test
     void 구매개수만큼_로또_생성_Test() {
         LottoPurchase budget = new LottoPurchase(5000);
-        LottoGame game = new LottoGame();
-        Lottos lottos = game.buyLottos(budget.countOfAvailableAutoLotto());
+        Lottos lottos = new Lottos();
+        lottos.buyAuto(budget.countOfAvailableAutoLotto());
 
         assertThat(lottos.count()).isEqualTo(5);
     }

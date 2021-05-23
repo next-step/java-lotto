@@ -25,7 +25,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void buyAuto() {
+    public void buyAuto(int countOfAvailableAutoLotto) {
+        while (countOfAvailableAutoLotto-- > 0) {
+            buyAuto();
+        }
+    }
+
+    private void buyAuto() {
         lottos.add(new Lotto(generate()));
     }
 

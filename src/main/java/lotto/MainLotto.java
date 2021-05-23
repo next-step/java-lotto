@@ -1,8 +1,11 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.wrapper.LottoPurchase;
 import lotto.ui.LottoInputHandler;
 import lotto.ui.LottoOutputHandler;
+
+import java.util.List;
 
 public class MainLotto {
     static LottoInputHandler input = new LottoInputHandler();
@@ -10,10 +13,15 @@ public class MainLotto {
     static LottoGame game = new LottoGame();
 
     public static void main(String[] args) {
-        LottoPurchaseBudget purchaseBudget = input.scanLottoPurchaseBudget();
-        output.printCount(purchaseBudget.countOfAvailableLotto());
+        LottoPurchase lottoPurchase = new LottoPurchase(input.scanLottoPurchaseBudget(),
+                                                        input.scanCountOfManualLotto());
 
-        Lottos lottos = game.buyLottos(purchaseBudget.countOfAvailableLotto());
+        List<String> manualLottoStrings = input.scanManualLottos(lottoPurchase.manualCount());
+
+        Lottos lottos = game.buyManualLottosUsing(manualLottoStrings);
+        lottos.buyAuto(lottoPurchase.countOfAvailableAutoLotto());
+
+        output.printCount(manualLottoStrings.size(), lottoPurchase.countOfAvailableAutoLotto());
         output.printBought(lottos);
 
         String normalNumbers  = input.scanLottoWinNumbersString();
@@ -23,7 +31,7 @@ public class MainLotto {
         LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
 
         output.printWinnerStatistics(resultPack);
-        output.printProfitRatio(resultPack.calculateProfitRatio(purchaseBudget));
+        output.printProfitRatio(resultPack.calculateProfitRatio(lottoPurchase));
     }
 
 }
