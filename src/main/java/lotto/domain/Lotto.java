@@ -46,18 +46,11 @@ public class Lotto {
 	}
 
 	public Rank findRank(Lotto winningLotto) {
-		int matchCount = 0;
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			matchCount += containLottoNumber(lottoNumber, winningLotto);
-		}
+		int matchCount = lottoNumbers.stream()
+				.filter(lottoNumber -> winningLotto.contains(lottoNumber))
+				.mapToInt(x -> 1)
+				.sum();
 		return Rank.findRankByMatchCount(matchCount);
-	}
-
-	private int containLottoNumber(LottoNumber lottoNumber, Lotto winningLotto) {
-		if (winningLotto.contains(lottoNumber)) {
-			return 1;
-		}
-		return 0;
 	}
 
 	@Override
