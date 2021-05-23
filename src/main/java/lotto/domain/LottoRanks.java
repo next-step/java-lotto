@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 public class LottoRanks implements Iterable<LottoRank> {
+
+    private static final int RETURN_RATE_SCALE = 2;
 
     private final List<LottoRank> lottoRanks;
 
@@ -12,9 +15,10 @@ public class LottoRanks implements Iterable<LottoRank> {
     }
 
     public double totalReturnRate() {
-        double totalWinAmount = totalWinAmount();
-        double purchaseAmount = lottoRanks.size() * LottoTicket.PRICE;
-        return Math.floor(totalWinAmount / purchaseAmount * 100) / 100;
+        BigDecimal totalWinAmount = BigDecimal.valueOf(totalWinAmount());
+        BigDecimal purchaseAmount = BigDecimal.valueOf((long) lottoRanks.size() * LottoTicket.PRICE);
+        BigDecimal totalReturnRate = totalWinAmount.divide(purchaseAmount, RETURN_RATE_SCALE, BigDecimal.ROUND_FLOOR);
+        return totalReturnRate.doubleValue();
     }
 
     private long totalWinAmount() {
