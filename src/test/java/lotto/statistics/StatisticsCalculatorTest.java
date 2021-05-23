@@ -33,7 +33,7 @@ public class StatisticsCalculatorTest {
 	}
 
 	@Test
-	@DisplayName(value = "출력 메세지를 검증한다")
+	@DisplayName(value = "통계 결과에 기반하여(이익, 손해, 본전) 출력 메세지를 검증한다")
 	void printMessage() {
 		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
@@ -42,7 +42,8 @@ public class StatisticsCalculatorTest {
 			+ "3개 일치 (5000원)- 1개\n"
 			+ "4개 일치 (50000원)- 1개\n"
 			+ "5개 일치 (1500000원)- 1개\n"
-			+ "6개 일치 (2000000000원)- 1개\n";
+			+ "6개 일치 (2000000000원)- 1개\n"
+			+ "총 수익률은 500388.75입니다.(기준이 1이기 때문에 결과적으로 이익라는 의미임)";
 		assertThat(calculator.toString()).isEqualTo(message);
 	}
 

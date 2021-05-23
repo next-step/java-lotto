@@ -9,6 +9,9 @@ import lotto.store.Ticket;
 public class StatisticsCalculator {
 
 	private static final int WINNING_TYPE_SIZE = 4;
+	private static final String PROFIT_MESSAGE = "이익";
+	private static final String BREAK_EVENT_MESSAGE = "본전";
+	private static final String LOSS_MESSAGE = "손해";
 
 	private final Ticket ticket;
 	private final LottoNumbers winnerLotto;
@@ -65,10 +68,31 @@ public class StatisticsCalculator {
 			}
 			message.append(findEarnMessage(matchCount));
 		}
+		message.append(ratioResultMessage());
 		return message.toString();
 	}
 
 	public double earningRatio() {
 		return (double) sumEarningPrice() / (double) ticket.budget();
+	}
+
+	private StringBuilder ratioResultMessage() {
+		double ratio = earningRatio();
+		return new StringBuilder()
+			.append("총 수익률은 ")
+			.append(ratio)
+			.append("입니다.(기준이 1이기 때문에 결과적으로 ")
+			.append(messageByRatio(ratio))
+			.append("라는 의미임)");
+	}
+
+	private String messageByRatio(double ratio) {
+		if (ratio > 0) {
+			return PROFIT_MESSAGE;
+		}
+		if (ratio < 0) {
+			return LOSS_MESSAGE;
+		}
+		return BREAK_EVENT_MESSAGE;
 	}
 }
