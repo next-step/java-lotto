@@ -5,16 +5,8 @@ import java.util.Objects;
 public class HitCount {
     private int hitCount;
 
-    public HitCount() {
-        this.hitCount = 0;
-    }
-
     public HitCount(int hitCount) {
         this.hitCount = hitCount;
-    }
-
-    public void accumulate(int containNumber) {
-        hitCount += containNumber;
     }
 
     @Override

@@ -31,6 +31,7 @@ public class User {
     }
 
     public void printHitCount(OutputView outputView) {
+
         for(LottoTicket lottoTicket: lottoTickets) {
             outputView.print(lottoTicket.hitCount());
             outputView.print("\n");
