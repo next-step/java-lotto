@@ -15,7 +15,6 @@ public class LottoTicketTest {
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
     );
 
-
     @Test
     @DisplayName("로또 티켓 길이 테스트")
     void lottoTicket_shouldBeSix() {
@@ -54,7 +53,5 @@ public class LottoTicketTest {
                 new LottoNumber(1), new LottoNumber(1), new LottoNumber(2),
                 new LottoNumber(3), new LottoNumber(4), new LottoNumber(5)
         ))).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
-
-
     }
 }

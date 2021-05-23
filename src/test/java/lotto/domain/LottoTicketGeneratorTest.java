@@ -12,16 +12,4 @@ public class LottoTicketGeneratorTest {
     void generateLottoTicket() {
         assertThat(new LottoTicketGenerator().generate()).isNotNull();
     }
-
-//    @Test
-//    @DisplayName("로또 티켓 입력하여 생성 테스트")
-//    void generateLottoTicket_shouldBeSameInput() {
-//        List<Integer> lottoNumbers = new ArrayList<>();
-//        for(int i = 1; i <= 6; i++) {
-//            lottoNumbers.add(i);
-//        }
-//
-//        // 생성된 lottoTicket은 NULL이 될 수 없다.
-//        assertThat(new LottoTicketGenerator().generate(lottoNumbers)).isNotNull();
-//    }
 }

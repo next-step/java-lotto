@@ -32,6 +32,7 @@ public class GameView {
             LottoTicket lottoTicket = generator.generate();
             lottoTickets[i] = lottoTicket;
         }
+        
         return lottoTickets;
     }
 
