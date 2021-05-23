@@ -14,7 +14,7 @@ public class LottoNumber {
     }
 
     private void validateRange(int lottoNumber) {
-        if(lottoNumber < LOTTO_NUMBER_START || LOTTO_NUMBER_END < lottoNumber) {
+        if (lottoNumber < LOTTO_NUMBER_START || LOTTO_NUMBER_END < lottoNumber) {
             throw new IllegalArgumentException("1과 45 사이의 정수여야 합니다.");
         }
     }

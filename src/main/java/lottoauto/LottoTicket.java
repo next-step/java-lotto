@@ -1,7 +1,5 @@
 package lottoauto;
 
-import java.util.List;
-
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
     private HitCount hitCount;

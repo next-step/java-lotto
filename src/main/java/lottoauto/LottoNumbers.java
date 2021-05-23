@@ -27,7 +27,7 @@ public class LottoNumbers {
 
     public LottoNumbers(String winningNumbersContents) {
         this.lottoNumbers = new ArrayList<>();
-        for(String str: winningNumbersContents.split(SPLIT_REGEX)) {
+        for (String str: winningNumbersContents.split(SPLIT_REGEX)) {
             Integer num = Integer.parseInt(str.trim());
 
             lottoNumbers.add(new LottoNumber(num));
@@ -37,7 +37,7 @@ public class LottoNumbers {
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        if(new HashSet<>(lottoNumbers).size() != LOTTO_NUMBERS_SIZE) {
+        if (new HashSet<>(lottoNumbers).size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("중복은 존재할 수 없습니다.");
         }
     }
@@ -64,7 +64,7 @@ public class LottoNumbers {
     }
 
     public int containNumber(LottoNumber lottoNumber) {
-        if(lottoNumbers.contains(lottoNumber)) {
+        if (lottoNumbers.contains(lottoNumber)) {
             return 1;
         }
 
@@ -74,7 +74,7 @@ public class LottoNumbers {
     public HitCount checkHitCount(LottoNumbers winningNumbers) {
         int result = 0;
 
-        for(LottoNumber lottoNumber: lottoNumbers) {
+        for (LottoNumber lottoNumber: lottoNumbers) {
             result += winningNumbers.containNumber(lottoNumber);
         }
 

@@ -20,7 +20,7 @@ public class LottoStatement {
     }
 
     private void isEqualsHitCount(HitCount hitCount, LottoRule lottoRule) {
-        if(lottoRule.isEqualsHitCount(hitCount)) {
+        if (lottoRule.isEqualsHitCount(hitCount)) {
             int count = hitCountMap.get(lottoRule);
             hitCountMap.put(lottoRule, count + 1);
         }

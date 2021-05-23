@@ -29,7 +29,7 @@ public class LottoStatementTest {
 
     @DisplayName("lotto 당첨금액 테스트")
     @Test
-    void calcProeeds() {
+    void calcProceeds() {
         lottoStatement.judge(new HitCount(2));
         lottoStatement.judge(new HitCount(3));
         lottoStatement.judge(new HitCount(4));

@@ -27,7 +27,7 @@ public class User {
     }
 
     public void checkHitCount(LottoNumbers winningNumbers) {
-        for(LottoTicket lottoTicket: lottoTickets) {
+        for (LottoTicket lottoTicket: lottoTickets) {
             lottoTicket.calcHitCount(winningNumbers);
             lottoStatement.judge(lottoTicket.hitCount());
         }
@@ -40,7 +40,7 @@ public class User {
     public void printLottoTickets(OutputView outputView) {
         outputView.printLottoTicketsCount(lottoTickets.size());
 
-        for(LottoTicket lottoTicket: lottoTickets) {
+        for (LottoTicket lottoTicket: lottoTickets) {
             outputView.printLottoTicket(lottoTicket);
         }
     }
