@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Divider {
     private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-
+    private ArrayList<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
 
     List<String> getSplitByCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
@@ -17,5 +17,8 @@ public class Divider {
         }
         return Arrays.asList(input);
     }
-
+    void setCustomDelimiter(String customDelimiter) {
+        this.DELIMITER.add(customDelimiter);
+    }
+    
 }
