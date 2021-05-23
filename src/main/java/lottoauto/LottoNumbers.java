@@ -36,15 +36,11 @@ public class LottoNumbers {
         }
     }
 
-
-
-
     @Override
     public String toString() {
-        List<LottoNumber> arrayList = new ArrayList<>(lottoNumbers);
-        Collections.sort(arrayList, (a, b)-> a.lottoNumber() - b.lottoNumber() > 0 ? 1 : a.lottoNumber() - b.lottoNumber() < 0 ? -1 : 0  );
+        Collections.sort(lottoNumbers, (a, b)-> a.lottoNumber() - b.lottoNumber() > 0 ? 1 : a.lottoNumber() - b.lottoNumber() < 0 ? -1 : 0  );
 
-        return arrayList.toString();
+        return lottoNumbers.toString();
     }
 
     public int containNumber(LottoNumber lottoNumber) {

@@ -6,20 +6,15 @@ public class LottoGame {
         OutputView outputView = new OutputView();
 
         outputView.enterPurChaseAmount();
-        User user = new User(new Money(inputView.nextInt()));
-
-        LottoTickets lottoTickets = new LottoTickets();
-
-        user.buyLottoTickets(lottoTickets);
-        user.printLottoTickets(outputView);
+        LottoTickets lottoTickets = new LottoTickets(new Money(inputView.nextInt()));
+        outputView.printLottoTickets(lottoTickets);
 
         outputView.enterWinningNumber();
         LottoNumbers winningNumbers = new LottoNumbers(inputView.next());
 
-        user.checkHitCount(winningNumbers);
-        user.printHitCount(outputView);
-
-        user.calcProceedsRate(lottoTickets);
-        user.printProceedsRate(outputView);
+        LottoStatement lottoStatement = new LottoStatement();
+        lottoTickets.checkHitCount(winningNumbers, lottoStatement);
+        outputView.printStatement(lottoStatement);
+        outputView.printProceedsRate(lottoTickets.calcProceedsRate(lottoStatement));
     }
 }
