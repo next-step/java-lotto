@@ -34,7 +34,7 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("매칭 숫자에 해당하는 등수가 존재하지 않습니다."));
     }
 
     private static boolean isLose(int matchCount) {

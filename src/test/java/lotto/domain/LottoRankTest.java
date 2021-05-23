@@ -29,7 +29,8 @@ class LottoRankTest {
     void invalidMatchCount(int matchCount) {
         // given when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.of(matchCount));
+                .isThrownBy(() -> LottoRank.of(matchCount))
+                .withMessageMatching("매칭 숫자에 해당하는 등수가 존재하지 않습니다.");
     }
 
 }
