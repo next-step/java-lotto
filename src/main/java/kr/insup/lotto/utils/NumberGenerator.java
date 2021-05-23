@@ -7,13 +7,15 @@ import java.util.List;
 
 public interface NumberGenerator {
 
-    static List<String> allNumbers() {
-        List<String> allNumbers = new ArrayList<>();
+    static List<Integer> allNumbers() {
+        List<Integer> allNumbers = new ArrayList<>();
+
         for (int i = LottoConfig.MIN_NUMBER; i < LottoConfig.MAX_NUMBER; i++) {
-            allNumbers.add(String.valueOf(i));
+            allNumbers.add(i);
         }
+
         return allNumbers;
     }
 
-    List<String> generateNumber();
+    List<Integer> generateNumber();
 }

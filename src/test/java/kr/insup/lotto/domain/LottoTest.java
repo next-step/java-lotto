@@ -18,67 +18,66 @@ public class LottoTest {
     @Test
     void 당첨_번호_1등_테스트() {
         //given
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when, then
-        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.First);
+        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.First);
     }
 
     @DisplayName("당첨 번호 2등 테스트")
     @Test
     void 당첨_번호_2등_테스트() {
         //given
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "7"));
-        Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when, then
-        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Second);
+        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Second);
     }
 
     @DisplayName("당첨 번호 3등 테스트")
     @Test
     void 당첨_번호_3등_테스트() {
         //given
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "7", "8"));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
 
         //when, then
-        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Third);
+        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Third);
     }
 
     @DisplayName("당첨 번호 4등 테스트")
     @Test
     void 당첨_번호_4등_테스트() {
         //given
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "3", "7", "8", "9"));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
         //when, then
-        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.Fourth);
+        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Fourth);
     }
 
     @DisplayName("아무것도 당첨 안됨 테스트")
     @Test
     void 아무것도_당첨_안됨_테스트() {
         //given
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto winningNumbers = new Lotto(Arrays.asList("1", "2", "7", "8", "9", "10"));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10));
 
         //when, then
-        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(Place.None);
+        assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.None);
     }
 
     @DisplayName("당첨번호 입력 시 validation test")
     @ParameterizedTest
     @ValueSource(strings = {
-            "2, 9, 24, 34, as, df",
             "2, 10, 23, 34, 45",
             "4, 23, 65, 34, 24, 77",
             "22, 22, 43, 21, 1, 2"})
     void 당첨번호_번호_입력시_validation(String input) {
         //given
-        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
+        List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
 
         //when, then
         assertThatThrownBy(() -> new Lotto(winningNumberList)).isInstanceOf(IllegalArgumentException.class);

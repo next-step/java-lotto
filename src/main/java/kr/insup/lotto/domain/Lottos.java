@@ -12,6 +12,7 @@ public class Lottos {
 
     public Lottos(int attempt) {
         this.attempt = attempt;
+
         for (int i = 0; i < attempt; i++) {
             lottos.add(new Lotto(new LottoAutoGenerator()));
         }
@@ -21,16 +22,18 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Lotto> lottoList(){
+    public List<Lotto> lottoList() {
         return lottos;
     }
 
-    public Statistics statistics(Lotto winningNumber){
+    public Statistics statistics(Lotto winningNumber) {
         Statistics statistics = new Statistics(attempt);
-        for(Lotto lotto : lottos){
-            Place place = lotto.matchWinningNumber(winningNumber);
-            statistics.addCountToPlace(place);
+
+        for (Lotto lotto : lottos) {
+            LottoPrize lottoPrize = lotto.matchWinningNumber(winningNumber);
+            statistics.addCountToPlace(lottoPrize);
         }
+
         return statistics;
     }
 }

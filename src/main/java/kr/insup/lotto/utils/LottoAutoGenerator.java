@@ -6,16 +6,17 @@ import java.util.*;
 
 public class LottoAutoGenerator implements NumberGenerator {
 
-    private List<String> lottoAutoNumbers() {
-        List<String> allNumbers = NumberGenerator.allNumbers();
+    private List<Integer> lottoAutoNumbers() {
+        List<Integer> allNumbers = NumberGenerator.allNumbers();
         Collections.shuffle(allNumbers);
-        List<String> lottoAutoNumbers = allNumbers.subList(0, LottoConfig.PICK_NUMBER);
-        Collections.sort(lottoAutoNumbers, Comparator.comparing(Integer::valueOf));
+        List<Integer> lottoAutoNumbers = allNumbers.subList(0, LottoConfig.LOTTO_COUNT);
+        Collections.sort(lottoAutoNumbers, Comparator.naturalOrder());
+
         return lottoAutoNumbers;
     }
 
     @Override
-    public List<String> generateNumber() {
+    public List<Integer> generateNumber() {
         return lottoAutoNumbers();
     }
 }

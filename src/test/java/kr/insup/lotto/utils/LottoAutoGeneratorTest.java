@@ -4,9 +4,7 @@ import kr.insup.lotto.config.LottoConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,9 +17,9 @@ public class LottoAutoGeneratorTest {
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
 
         //when
-        List<String> lottoNumbers = lottoAutoGenerator.generateNumber();
+        List<Integer> lottoNumbers = lottoAutoGenerator.generateNumber();
 
         //then
-        assertThat(lottoNumbers).hasSize(LottoConfig.PICK_NUMBER);
+        assertThat(lottoNumbers).hasSize(LottoConfig.LOTTO_COUNT);
     }
 }

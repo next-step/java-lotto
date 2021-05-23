@@ -22,17 +22,20 @@ public class Statistics {
         this.fourthPlace = fourthPlace;
     }
 
-    public void addCountToPlace(Place place) {
-        if (place == Place.First) {
+    public void addCountToPlace(LottoPrize lottoPrize) {
+        if (lottoPrize == LottoPrize.First) {
             firstPlace++;
         }
-        if (place == Place.Second) {
+
+        if (lottoPrize == LottoPrize.Second) {
             secondPlace++;
         }
-        if (place == Place.Third) {
+
+        if (lottoPrize == LottoPrize.Third) {
             thirdPlace++;
         }
-        if (place == Place.Fourth) {
+
+        if (lottoPrize == LottoPrize.Fourth) {
             fourthPlace++;
         }
     }
@@ -58,9 +61,9 @@ public class Statistics {
     }
 
     private int totalWinningPrice() {
-        return firstPlace * Place.First.winnings()
-                + secondPlace * Place.Second.winnings()
-                + thirdPlace * Place.Third.winnings() +
-                +fourthPlace * Place.Fourth.winnings();
+        return firstPlace * LottoPrize.First.winnings()
+                + secondPlace * LottoPrize.Second.winnings()
+                + thirdPlace * LottoPrize.Third.winnings() +
+                +fourthPlace * LottoPrize.Fourth.winnings();
     }
 }

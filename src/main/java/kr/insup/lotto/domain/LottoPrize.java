@@ -3,7 +3,7 @@ package kr.insup.lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Place {
+public enum LottoPrize {
     First(6, 2000),
     Second(5, 150),
     Third(4, 50),
@@ -12,23 +12,24 @@ public enum Place {
 
     private final int match;
     private final int winnings;
-    private static Map<Integer, Place> placeMap = new HashMap<>();
+    private static Map<Integer, LottoPrize> placeMap = new HashMap<>();
 
     static {
-        for (Place place : values()) {
-            placeMap.put(place.match, place);
+        for (LottoPrize lottoPrize : values()) {
+            placeMap.put(lottoPrize.match, lottoPrize);
         }
     }
 
-    Place(int match, int winnings) {
+    LottoPrize(int match, int winnings) {
         this.match = match;
         this.winnings = winnings;
     }
 
-    public static Place matchPlace(int match) {
+    public static LottoPrize matchLottoPrize(int match) {
         if (placeMap.containsKey(match)) {
             return placeMap.get(match);
         }
+
         return None;
     }
 

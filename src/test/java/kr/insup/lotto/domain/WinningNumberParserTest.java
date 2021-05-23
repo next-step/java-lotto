@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumberParserTest {
 
@@ -19,9 +20,21 @@ public class WinningNumberParserTest {
         String input = "1, 3, 12, 32, 31, 45";
 
         //when
-        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
+        List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
 
         //then
-        assertThat(winningNumberList).containsExactlyElementsOf(Arrays.asList("1", "3", "12", "32", "31", "45"));
+        assertThat(winningNumberList).containsExactlyElementsOf(Arrays.asList(1, 3, 12, 32, 31, 45));
+    }
+
+    @DisplayName("당첨 번호 입력 받은 값 파싱(숫자가 아닌 값 입력)")
+    @Test
+    void 당첨_번호_입력_받은_값_파싱_숫자가_아닌_값_입력() {
+
+        //given
+        String input = "1, 3, 12, 32, 31, as";
+
+        //when, then
+        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumberToList(input))
+                .isInstanceOf(NumberFormatException.class);
     }
 }

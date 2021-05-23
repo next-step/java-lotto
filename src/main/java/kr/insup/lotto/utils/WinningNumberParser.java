@@ -7,13 +7,15 @@ import java.util.List;
 
 public class WinningNumberParser {
 
-    public static List<String> parseWinningNumberToList(String winningNumber) {
+    public static List<Integer> parseWinningNumberToList(String winningNumber) {
         String[] numbers = winningNumber.split(",");
-        List<String> numberList = new ArrayList<>();
-        for(String number : numbers){
+        List<Integer> numberList = new ArrayList<>();
+
+        for (String number : numbers) {
             number = number.trim();
-            numberList.add(number);
+            numberList.add(Integer.valueOf(number));
         }
+
         return numberList;
     }
 }

@@ -14,11 +14,11 @@ public class StatisticsTest {
     void 로또_당첨_통계_확인_1등() {
         //given
         Statistics statistics = new Statistics(1);
-        Lotto lotto = new Lotto(() -> Arrays.asList("1", "3", "2", "4", "5", "6"));
-        Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        Lotto lotto = new Lotto(() -> Arrays.asList(1, 3, 2, 4, 5, 6));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        statistics.addCountToPlace(place);
+        statistics.addCountToPlace(lottoPrize);
 
         //then
         assertThat(statistics.firstPlace()).isEqualTo(1);
@@ -29,11 +29,11 @@ public class StatisticsTest {
     void 로또_당첨_통계_확인_2등() {
         //given
         Statistics statistics = new Statistics(1);
-        Lotto lotto = new Lotto(() -> Arrays.asList("4", "3", "2", "1", "5", "10"));
-        Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 1, 5, 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        statistics.addCountToPlace(place);
+        statistics.addCountToPlace(lottoPrize);
 
         //then
         assertThat(statistics.secondPlace()).isEqualTo(1);
@@ -44,10 +44,10 @@ public class StatisticsTest {
     void 로또_당첨_통계_확인_3등() {
         //given
         Statistics statistics = new Statistics(1);
-        Lotto lotto = new Lotto(() -> Arrays.asList("4", "3", "2", "1", "11", "10"));
-        Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 1, 11, 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         //when
-        statistics.addCountToPlace(place);
+        statistics.addCountToPlace(lottoPrize);
         //then
         assertThat(statistics.thirdPlace()).isEqualTo(1);
     }
@@ -57,10 +57,10 @@ public class StatisticsTest {
     void 로또_당첨_통계_확인_4등() {
         //given
         Statistics statistics = new Statistics(1);
-        Lotto lotto = new Lotto(() -> Arrays.asList("4", "3", "2", "12", "11", "10"));
-        Place place = lotto.matchWinningNumber(new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 12, 11, 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         //when
-        statistics.addCountToPlace(place);
+        statistics.addCountToPlace(lottoPrize);
         //then
         assertThat(statistics.fourthPlace()).isEqualTo(1);
     }
@@ -78,6 +78,6 @@ public class StatisticsTest {
 
         //2000*1 + 150*2 + 50*1 + 5*4 = 2370
         //then
-        assertThat(benefitRate).isEqualTo(2370d/200d);
+        assertThat(benefitRate).isEqualTo(2370d / 200d);
     }
 }
