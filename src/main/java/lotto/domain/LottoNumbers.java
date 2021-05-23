@@ -32,11 +32,9 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     }
 
     public int matchCount(LottoNumbers matchTarget) {
-        int matchCount = 0;
-        for (LottoNumber targetNumber : matchTarget) {
-            matchCount += (int) lottoNumbers.stream().filter(lottoNumber -> lottoNumber.equals(targetNumber)).count();
-        }
-        return matchCount;
+        return (int) lottoNumbers.stream()
+                .filter(matchTarget.lottoNumbers::contains)
+                .count();
     }
 
     @Override
