@@ -67,4 +67,8 @@ public class StatisticsCalculator {
 		}
 		return message.toString();
 	}
+
+	public double earningRatio() {
+		return (double) sumEarningPrice() / (double) ticket.budget();
+	}
 }

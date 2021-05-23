@@ -22,4 +22,7 @@ public class Ticket {
 		return lottoList;
 	}
 
+	public int budget() {
+		return budget;
+	}
 }

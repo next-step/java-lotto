@@ -46,6 +46,14 @@ public class StatisticsCalculatorTest {
 		assertThat(calculator.toString()).isEqualTo(message);
 	}
 
+	@Test
+	@DisplayName(value = "벌어들인 비율을 계산한다")
+	void profitOrNot() {
+		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
+		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
+		assertThat(calculator.earningRatio()).isEqualTo(500388.75);
+	}
+
 	private Ticket mockTicket() {
 		List<LottoNumbers> purchased = new ArrayList() {{
 			add(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
