@@ -12,8 +12,8 @@ public class LottoPurchase {
     public LottoPurchase(int budgetMoney, int manualCount) {
         this.budget = new LottoPurchaseBudget(budgetMoney);
 
-        if (budget.isUnderManualBudgetOf(manualCount)) {
-            throw new IllegalArgumentException("로또 수동구매는 구입금액을 초과할 수 없습니다.");
+        if (budget.isUnderManualBudgetOf(manualCount) || manualCount < 0) {
+            throw new IllegalArgumentException("로또 수동구매 가능 개수가 아닙니다.");
         }
 
         this.manualCount = new LottoPurchaseManualCount(manualCount);
@@ -25,5 +25,9 @@ public class LottoPurchase {
 
     public int budget() {
         return budget.budget();
+    }
+
+    public int manualCount() {
+        return manualCount.count();
     }
 }

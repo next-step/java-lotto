@@ -25,6 +25,12 @@ public class Lottos {
         return lottos.size();
     }
 
+    public void buyManual(List<String> manualLottoStringList) {
+        for (String manualLottoString : manualLottoStringList) {
+            lottos.add(new Lotto(manualLottoString));
+        }
+    }
+
     public void buyAuto(int countOfAvailableAutoLotto) {
         while (countOfAvailableAutoLotto-- > 0) {
             buyAuto();
