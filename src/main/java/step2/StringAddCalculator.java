@@ -3,12 +3,12 @@ package step2;
 import static java.lang.Integer.*;
 
 public class StringAddCalculator {
-	public static int splitAndSum(String input) {
-		if (input == null || input.isEmpty()) {
+	public static int splitAndSum(String text) {
+		if (text == null || text.isEmpty()) {
 			return 0;
 		}
 
-		return sumStringArray(input.split(",|:"));
+		return sumStringArray(text.split(",|:"));
 	}
 
 	private static int sumStringArray(String[] numbers) {
