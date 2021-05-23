@@ -15,7 +15,7 @@ class BuyerTest {
 
 		sut = Buyer.of(Money.won(10000L));
 
-		assertThat(sut.amount()).isEqualTo(Money.won(10000L));
+		assertThat(sut.money()).isEqualTo(Money.won(10000L));
 		assertThat(sut.lotteryTickets()).isEqualTo(Collections.emptyList());
 	}
 }

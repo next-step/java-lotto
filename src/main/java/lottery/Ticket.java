@@ -3,6 +3,9 @@ package lottery;
 import lottery.exceptions.InvalidTicketSizeException;
 
 public final class Ticket {
+
+	public static Ticket NONE_TICKET = new Ticket(new int[6]);
+
 	private final static int SIZE_OF_TICKET = 6;
 	private int[] numbers;
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class Buyer {
 	private final Money money;
-	private final List<Ticket> tickets;
+	private List<Ticket> tickets;
 
 	private Buyer(Money money) {
 		this.money = money;
@@ -16,11 +16,24 @@ public final class Buyer {
 		return new Buyer(won);
 	}
 
-	public Money amount() {
+	public Money money() {
 		return money;
 	}
 
 	public List<Ticket> lotteryTickets() {
 		return tickets;
 	}
+
+	public boolean hasTickets() {
+		return tickets.size() > 0;
+	}
+
+	public void minusAmount(Money target){
+		this.money.minus(target);
+	}
+
+	public void buyTicket(Store store) {
+		this.tickets = store.getTicket(this);
+	}
+
 }

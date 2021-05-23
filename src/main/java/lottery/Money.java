@@ -25,7 +25,7 @@ public final class Money {
 	}
 
 	public Money minus(Money won) {
-		return new Money(Math.subtractExact(amount(), won.amount()));
+		return new Money(Math.subtractExact(won.amount(), amount()));
 	}
 
 	@Override
@@ -41,5 +41,9 @@ public final class Money {
 	@Override
 	public int hashCode() {
 		return Objects.hash(amount);
+	}
+
+	public long divide(Money won) {
+		return Math.floorDiv(this.amount, won.amount);
 	}
 }

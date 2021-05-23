@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class MoneyTest {
 
-	Money sut;
+	private Money sut;
 
 	@Test
 	void create() {
@@ -23,14 +23,19 @@ class MoneyTest {
 
 	@Test
 	void minus() {
-		Long userInputMoney = 10000L;
-		Long _5000 = 5000L;
+		sut = Money.won(10000L);
+		Money won = Money.won(5000L);
 
-		sut = Money.won(userInputMoney);
-		sut = Money.won(userInputMoney);
+		Money rest = sut.minus(won);
 
-		Money rest = sut.minus(Money.won(_5000));
+		assertThat(rest).isEqualTo(won);
+	}
 
-		assertThat(rest).isEqualTo(Money.won(_5000));
+	@Test
+	void divide() {
+		sut = Money.won(10000L);
+		Money _50000won = Money.won(5000L);
+
+		assertThat(sut.divide(_50000won)).isEqualTo(2);
 	}
 }
