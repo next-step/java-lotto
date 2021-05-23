@@ -44,6 +44,7 @@ public class PrintView {
     }
 
     private void showResultBody(WinnerStatistics winnerStatistics) {
+        printBodyLine(LottoRank.FIFTH, winnerStatistics);
         printBodyLine(LottoRank.FOURTH, winnerStatistics);
         printBodyLine(LottoRank.THIRD, winnerStatistics);
         printBodyLine(LottoRank.SECOND, winnerStatistics);
