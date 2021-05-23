@@ -16,16 +16,22 @@ public class LottoRanks implements Iterable<LottoRank> {
     }
 
     public double totalReturnRate() {
-        BigDecimal totalWinAmount = BigDecimal.valueOf(totalWinAmount());
-        BigDecimal purchaseAmount = BigDecimal.valueOf((long) lottoRanks.size() * LottoTicket.PRICE);
+        BigDecimal totalWinAmount = new BigDecimal(totalWinAmount());
+        BigDecimal purchaseAmount = new BigDecimal(purchaseAmount());
         BigDecimal totalReturnRate = totalWinAmount.divide(purchaseAmount, RETURN_RATE_SCALE, RoundingMode.FLOOR);
         return totalReturnRate.doubleValue();
     }
 
-    private long totalWinAmount() {
-        return lottoRanks.stream()
+    private String totalWinAmount() {
+        long totalWinAmount = lottoRanks.stream()
                 .mapToLong(LottoRank::winAmount)
                 .sum();
+        return Long.toString(totalWinAmount);
+    }
+
+    private String purchaseAmount() {
+        long purchaseAmount = (long) lottoRanks.size() * LottoTicket.PRICE;
+        return Long.toString(purchaseAmount);
     }
 
     public int count(LottoRank rank) {
