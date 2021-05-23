@@ -27,9 +27,10 @@ public class WinningResultTest {
         ));
     }
 
-    @DisplayName("당첨번호가 6,5,4,3개 일치했을때 각각 수익률이 상금/투자금 인지")
+    @DisplayName("수익률은 당첨금/구매금액 이다.")
     @ParameterizedTest
-    @CsvSource({"10000, 6, 200000",
+    @CsvSource({
+            "10000, 6, 200000",
             "10000, 5, 150",
             "10000, 4, 5",
             "10000, 3, 0.5",
@@ -46,7 +47,7 @@ public class WinningResultTest {
         assertThat(profitRate).isEqualTo(expectedProfitRate);
     }
 
-    @DisplayName("WinningResult는 일치하는 로또넘버수에 따라 로또결과를 저장한다.")
+    @DisplayName("로또번호가 일치하는 갯수에 따라 상금이 결정된다.")
     @ParameterizedTest
     @MethodSource("parametersForLottos")
     void lottos_result(final List<Lotto> lottos) {

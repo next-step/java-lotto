@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
-    @DisplayName("1000원 이상 생성시 에러없이 생성")
+    @DisplayName("금액을 넣으면 돈이 생성된다.")
     @ParameterizedTest
     @ValueSource(ints = {1000, 1200, 2000})
         //given
