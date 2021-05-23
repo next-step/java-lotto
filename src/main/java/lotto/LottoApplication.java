@@ -11,15 +11,13 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
         LottoPurchaseController lottoPurchaseController = new LottoPurchaseController();
         LottoWinController lottoWinController = new LottoWinController();
 
-        LottoPurchaseResponse lottoPurchaseResponse = lottoPurchaseController.purchaseTickets(inputView.inputPurchaseInfo());
-        outputView.printPurchaseResult(lottoPurchaseResponse);
-        WinInquiryRequest winInquiryRequest = inputView.inputWinNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
+        LottoPurchaseResponse lottoPurchaseResponse = lottoPurchaseController.purchaseTickets(InputView.inputPurchaseInfo());
+        OutputView.printPurchaseResult(lottoPurchaseResponse);
+        WinInquiryRequest winInquiryRequest = InputView.inputWinNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
         WinInquiryResponse winInquiryResponse = lottoWinController.inquiryWin(winInquiryRequest);
-        outputView.printWinResult(winInquiryResponse);
+        OutputView.printWinResult(winInquiryResponse);
     }
 }

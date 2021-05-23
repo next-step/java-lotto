@@ -11,24 +11,24 @@ public class InputView {
 
     private static final String NUMBER_DELIMITER = ",";
 
-    private final Scanner scanner;
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    public InputView() {
-        scanner = new Scanner(System.in);
+    private InputView() {
+        throw new AssertionError();
     }
 
-    public LottoPurchaseRequest inputPurchaseInfo() {
+    public static LottoPurchaseRequest inputPurchaseInfo() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoPurchaseRequest(scanner.nextInt());
+        return new LottoPurchaseRequest(SCANNER.nextInt());
     }
     
-    public WinInquiryRequest inputWinNumbers(List<LottoNumbersDto> purchaseNumbers) {
+    public static WinInquiryRequest inputWinNumbers(List<LottoNumbersDto> purchaseNumbers) {
         System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
-        return new WinInquiryRequest(purchaseNumbers, inputWinNumbers(scanner.nextLine()));
+        SCANNER.nextLine();
+        return new WinInquiryRequest(purchaseNumbers, inputWinNumbers(SCANNER.nextLine()));
     }
 
-    private LottoNumbersDto inputWinNumbers(String winNumbers) {
+    private static LottoNumbersDto inputWinNumbers(String winNumbers) {
         List<Integer> winNumberList = Arrays.stream(winNumbers.split(NUMBER_DELIMITER))
                 .map(winNumber -> new Integer(winNumber.trim()))
                 .collect(Collectors.toList());
