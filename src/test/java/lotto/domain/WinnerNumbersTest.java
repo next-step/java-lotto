@@ -26,7 +26,7 @@ class WinnerNumbersTest {
 
         winnerNumbers = WinnerNumbers.create(lottoNumbers, bonusLottoNumber);
     }
-    
+
     @DisplayName("로또당첨번호의 갯수는 6개여야한다.")
     @Test
     public void invalidWinnerNumberCountTest() {

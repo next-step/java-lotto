@@ -67,7 +67,7 @@ public class PrintView {
     private void printBodyLine(LottoRank lottoRank, WinnerStatistics winnerStatistics) {
         String printMessage = MESSAGE_MATCH;
 
-        if(lottoRank == LottoRank.SECOND) {
+        if (lottoRank == LottoRank.SECOND) {
             printMessage = MESSAGE_MATCH_WITH_BONUS;
         }
 

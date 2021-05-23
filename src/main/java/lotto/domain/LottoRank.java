@@ -23,6 +23,7 @@ public enum LottoRank {
     public boolean hasBonusNumber() {
         return hasBonusNumber;
     }
+
     public int matchCount() {
         return matchCount;
     }

@@ -15,7 +15,7 @@ public class WinnerNumbers extends LottoTicket {
         if (winnerNumbers.size() != NORMAL_COUNT_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 당첨번호의 갯수는 6개여야합니다.");
         }
-        if(winnerNumbers.contains(bonusNumber)) {
+        if (winnerNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("로또 당첨번호에 보너스번호가 포함되서는 안됩니다.");
         }
         return new WinnerNumbers(winnerNumbers, bonusNumber);
