@@ -27,7 +27,7 @@ public class LottoDrawer {
 				.intValue();
 	}
 
-	public Lotto draw() {
+	protected Lotto draw() {
 		Collections.shuffle(lottoNumbers);
 		return new Lotto(lottoNumbers.subList(0, Constants.LOTTO_NUMBERS_LENGTH)
 				.stream()
