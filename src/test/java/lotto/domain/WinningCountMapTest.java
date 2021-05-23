@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningCountMapTest {
@@ -50,12 +51,19 @@ class WinningCountMapTest {
         );
     }
 
-    @DisplayName("")
+    @DisplayName("데이터가 순서대로 뽑히는지 검증")
     @Test
-    void name() {
-
+    void dataSetsTest() {
         WinningCountMap winningCountMap = new WinningCountMap();
         List<WinningLottoDto> dataSets = winningCountMap.getDataSets();
-        System.out.println(dataSets);
+
+        List<WinningType> types = Arrays.stream(WinningType.values())
+                                        .sorted((t1, t2) -> t2.getPrize() - t1.getPrize())
+                                        .filter(type -> type != WinningType.NONE)
+                                        .collect(toList());
+
+        for (int i = 0; i < dataSets.size(); i++) {
+            assertEquals(types.get(i).getPrize(), dataSets.get(i).getPrize());
+        }
     }
 }
