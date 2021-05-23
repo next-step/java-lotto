@@ -11,6 +11,7 @@ public class InputView {
 
     private static final String MESSAGE_QUESTION_HOW_MANY_BUY = "구입금액을 입력해 주세요.";
     private static final String MESSAGE_QUESTION_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MESSAGE_QUESTION_BONUS_NUMBER = "보너스번호를 입력해 주세요.";
 
     private Scanner scanner;
 
@@ -30,5 +31,11 @@ public class InputView {
         String inputWinnerNumber = scanner.nextLine();
         String[] winnerNumbers = StringUtils.split(inputWinnerNumber);
         return Arrays.asList(winnerNumbers);
+    }
+
+    public int inputBonusNumber() {
+        System.out.println(MESSAGE_QUESTION_BONUS_NUMBER);
+        int inputBonusNumber = scanner.nextInt();
+        return inputBonusNumber;
     }
 }
