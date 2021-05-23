@@ -19,20 +19,9 @@ public class LottoNumbers {
         validateDuplication(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
-    //TODO 피드백 : 로또 후보 번호는 변하지 않는 데이터, 한번만 초기화 되도록 개선
-    /*
-        로또를 만들 때마다 매번 로또 후보 번호 목록을 생성하는 구조 입니다 😄
-        로또 후보 번호 (1~45)는 변하지 않는 데이터 입니다 😄
-        이 부분도 한번만 초기화 될 수 있도록 개선되면 좋겠습니다 🙇
-     */
+
     private List<Integer> makeLottoNumbers() {
-        List<Integer> lottoNumberList;
-        List<Integer> numberList = new ArrayList<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            numberList.add(i);
-        }
-        Collections.shuffle(numberList);
-        lottoNumberList = numberList.subList(0,6);
+        List<Integer> lottoNumberList = new ArrayList<>(LottoSubstituteNumbers.sixLottoNumbers());
         Collections.sort(lottoNumberList);
         return lottoNumberList;
     }
