@@ -2,6 +2,7 @@ package automaticLotto;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -18,4 +19,25 @@ public class Lotto {
 		}
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto1 = (Lotto)o;
+		return Objects.equals(lotto, lotto1.lotto);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lotto);
+	}
+
+	@Override
+	public String toString() {
+		return "Lotto{" +
+			"lotto=" + lotto +
+			'}';
+	}
 }

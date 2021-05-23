@@ -27,4 +27,15 @@ public class LottoTest {
 		assertThatThrownBy(() -> new Lotto(randomNumberList))
 			.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	@DisplayName("로또 번호는 오름차순 정렬됨")
+	public void lotto_numbers_are_ascending() {
+		List<Integer> ascendingRandomNumberList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+		List<Integer> notAscendingRandomNumberList = new ArrayList<>(Arrays.asList(2, 1, 3, 4, 5, 6));
+		Lotto acendingLotto = new Lotto(ascendingRandomNumberList);
+		Lotto notAcendingLotto = new Lotto(ascendingRandomNumberList);
+
+		assertThat(acendingLotto.equals(notAcendingLotto)).isTrue();
+	}
 }
