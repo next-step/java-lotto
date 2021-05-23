@@ -63,9 +63,9 @@ class UserLottoTest {
 		assertThat(userLotto.count()).isEqualTo(2);
 	}
 
-	@DisplayName("로또 번호 목록를 문자열로 받아오는 테스트")
+	@DisplayName("로또 번호 목록을 문자열로 받아오는 테스트")
 	@Test
-	void lottoNumbers() {
+	void lottoNumberMessage() {
 		// given
 		List<LottoTicket> lottoTicketList = new ArrayList<>();
 		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
@@ -75,7 +75,22 @@ class UserLottoTest {
 		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// then
-		assertThat(userLotto.lottoNumbers()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]\r\n");
+		assertThat(userLotto.lottoNumberMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]\r\n");
+	}
+
+	@DisplayName("로또 티켓 리스트를 반환하는 테스트")
+	@Test
+	void lottoTickets() {
+		// given
+		List<LottoTicket> lottoTicketList = new ArrayList<>();
+		lottoTicketList.add(new LottoTicket("1,2,3,4,5,6"));
+		UserLotto userLotto = new UserLotto(lottoTicketList);
+
+		// when
+		List<LottoTicket> actual = userLotto.lottoTickets();
+
+		// then
+		assertThat(actual).isEqualTo(lottoTicketList);
 	}
 
 }

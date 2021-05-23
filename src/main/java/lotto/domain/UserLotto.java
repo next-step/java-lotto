@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 class UserLotto {
@@ -12,7 +13,7 @@ class UserLotto {
 	UserLotto(List<LottoTicket> lottoTicketList) {
 		validate(lottoTicketList);
 
-		this.lottoTicketList = lottoTicketList;
+		this.lottoTicketList = Collections.unmodifiableList(lottoTicketList);
 	}
 
 	private void validate(List<LottoTicket> lottoTicketList) {
@@ -25,7 +26,7 @@ class UserLotto {
 		return lottoTicketList.size();
 	}
 
-	String lottoNumbers() {
+	String lottoNumberMessage() {
 		return buildLottoNumberMessage();
 	}
 
@@ -38,6 +39,10 @@ class UserLotto {
 		}
 
 		return build.toString();
+	}
+
+	List<LottoTicket> lottoTickets() {
+		return lottoTicketList;
 	}
 
 }
