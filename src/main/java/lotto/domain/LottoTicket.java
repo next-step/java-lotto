@@ -25,7 +25,7 @@ class LottoTicket {
 	}
 
 	private void validate(Set<LottoNumber> lottoNumbers) {
-		if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+		if (!validateCollection(lottoNumbers, LOTTO_NUMBER_COUNT)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
 		}
 	}
@@ -41,7 +41,7 @@ class LottoTicket {
 	}
 
 	private void validateNumberString(String numbersString) {
-		if (!validateLottoNumberPattern(numbersString)) {
+		if (!validateNumbersPattern(numbersString)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE);
 		}
 	}
@@ -67,7 +67,7 @@ class LottoTicket {
 	}
 
 	private void validateLottoNumberSet(Set<LottoNumber> lottoNumberList) {
-		if (lottoNumberList == null || lottoNumberList.size() != LOTTO_NUMBER_COUNT) {
+		if (!validateCollection(lottoNumberList, LOTTO_NUMBER_COUNT)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
 		}
 	}
