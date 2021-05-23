@@ -1,8 +1,10 @@
 package step3;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,26 +13,25 @@ class SameLottoCheckerTest {
 
 
     @Test
-    void hasSameLotto() {
+    @DisplayName("3개의 일치 하는 로또 번호를 가지는 경우")
+    void hasThreeSameLotto() {
 
-        Lotto given = new Lotto(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+        Lotto given = new Lotto(Arrays.asList(39,19,26,34,36,31));
 
-        Lotto result = new Lotto(Arrays.asList(
-                new LottoNumber(6),
-                new LottoNumber(4),
-                new LottoNumber(2),
-                new LottoNumber(1),
-                new LottoNumber(5),
-                new LottoNumber(3)
-        ));
 
-        assertThat(SameLottoChecker.isSameLotto(given,result)).isTrue();
+        Lotto result = new Lotto(Arrays.asList(1,3,39,19,26,2));
+
+        assertThat(SameLottoChecker.countSameLottoNum(given,result)).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("6개의 일치 하는 로또 번호를 가지는 경우")
+    void hasSixSameLotto() {
+
+        Lotto given = new Lotto(Arrays.asList(40,41,42,43,44,45));
+        Lotto result = new Lotto(Arrays.asList(45,42,43,40,44,41));
+
+        assertThat(SameLottoChecker.countSameLottoNum(given,result)).isEqualTo(6);
+    }
+
 }
