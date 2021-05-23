@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 class Money {
 
-	private static final String NUMBER_REGEX = "^[1-9]\\+";
+	private static final String NUMBER_REGEX = "^[1-9]\\d+";
 	private static final Pattern PATTERN = Pattern.compile(NUMBER_REGEX);
 	private static final String INVALID_NUMBER_MESSAGE = "유효하지 않은 숫자입니다.";
 
@@ -27,6 +27,10 @@ class Money {
 		if (!matcher.find()) {
 			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
+	}
+
+	public int pay(int price) {
+		return value / price;
 	}
 
 }

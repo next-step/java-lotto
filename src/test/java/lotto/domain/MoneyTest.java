@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,4 +17,19 @@ class MoneyTest {
 	void invalid(String money) {
 		assertThatThrownBy(() -> new Money(money)).isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1000:1", "10000:10", "100:0", "1200:1"}, delimiter = ':')
+	void pay(String input, int expected) {
+		// given
+		Money money = new Money(input);
+		int lottoPrice = 1000;
+
+		// when
+		int actual = money.pay(lottoPrice);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
 }
