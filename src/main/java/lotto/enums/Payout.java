@@ -1,5 +1,7 @@
 package lotto.enums;
 
+import java.util.Arrays;
+
 public enum Payout {
     MATCH_ZERO(0, 0),
     MATCH_ONE(1, 0),
@@ -21,17 +23,11 @@ public enum Payout {
         return this.payout;
     }
 
-    public int getMatchNumber() {
-        return this.matchNumber;
-    }
-
-    //TODO 피드백 : 람다식으로 변경
     public static int getPayout(int matchNumber) {
-        for (Payout payout : Payout.values()) {
-            if (payout.getMatchNumber() == matchNumber) {
-                return payout.getPayout();
-            }
-        }
-        throw new IllegalArgumentException("0에서 6까지의 숫자를 넣어주세요");
+        return Arrays.stream(values())
+                .filter(p -> p.matchNumber == matchNumber)
+                .findFirst()
+                .map(Payout::getPayout)
+                .orElseThrow(() -> new IllegalArgumentException("0에서 6까지의 숫자를 넣어주세요"));
     }
 }
