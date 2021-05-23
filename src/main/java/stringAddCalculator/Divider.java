@@ -20,5 +20,10 @@ public class Divider {
     void setCustomDelimiter(String customDelimiter) {
         this.DELIMITER.add(customDelimiter);
     }
-    
+
+    String[] getDividedInput(String num) {
+        String delimiterRegex = "([" + String.join("", DELIMITER) + "])";
+        return num.split(delimiterRegex);
+    }
+
 }
