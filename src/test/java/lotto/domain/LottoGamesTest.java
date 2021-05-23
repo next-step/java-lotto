@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.OrderedInfos;
+import lotto.dto.TotalOrderedLottoGameNumbers;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ class LottoGamesTest {
   @Test
   void peekGameInfosTest() {
     List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    assertThat(new LottoGames(given).peekGameInfos()).isEqualTo(new OrderedInfos(given));
+    assertThat(new LottoGames(given).peekGameInfos()).isEqualTo(new TotalOrderedLottoGameNumbers(given));
   }
 
   private static Stream<Arguments> provideMatchRankingsSource() {

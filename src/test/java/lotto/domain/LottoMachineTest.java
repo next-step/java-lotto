@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.AnalysisSheet;
-import lotto.dto.OrderedInfos;
+import lotto.dto.TotalOrderedLottoGameNumbers;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +35,7 @@ class LottoMachineTest {
   @Test
   void peekOrderedGamesTest() {
     assertThat(LottoMachine.staticFactoryMethodForTestCode(givenPurchasedAmount, givenGames).peekOrderedGames())
-        .isEqualTo(new OrderedInfos(givenGames));
+        .isEqualTo(new TotalOrderedLottoGameNumbers(givenGames));
   }
 
   @DisplayName("당첨 번호를 맞춰 본 후 당첨 내역과 손익률 출력을 위한 DTO 객체를 반환한다.")

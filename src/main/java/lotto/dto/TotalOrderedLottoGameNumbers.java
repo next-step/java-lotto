@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class OrderedInfos {
+public class TotalOrderedLottoGameNumbers {
 
   private static final String LINE_FORMAT = "[%s]";
 
   private final List<OrderedLottoGameNumbers> infos;
-  public OrderedInfos(List<LottoGame> games) {
+  public TotalOrderedLottoGameNumbers(List<LottoGame> games) {
     this.infos = games.stream()
                   .map(lottoGame -> new OrderedLottoGameNumbers(lottoGame.gameNumber()))
                   .collect(Collectors.toList());
@@ -32,7 +32,7 @@ public class OrderedInfos {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    OrderedInfos that = (OrderedInfos) o;
+    TotalOrderedLottoGameNumbers that = (TotalOrderedLottoGameNumbers) o;
     return infos.equals(that.infos);
   }
 

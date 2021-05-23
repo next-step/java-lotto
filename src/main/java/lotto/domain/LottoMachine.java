@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.dto.AnalysisSheet;
 import lotto.dto.OrderSheet;
-import lotto.dto.OrderedInfos;
+import lotto.dto.TotalOrderedLottoGameNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class LottoMachine {
     return new LottoMachine(new OrderSheet(testPurchasingAmount), new LottoGames(testGames));
   }
 
-  public OrderedInfos peekOrderedGames() {
+  public TotalOrderedLottoGameNumbers peekOrderedGames() {
     return orderedGames.peekGameInfos();
   }
 

@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.dto.AnalysisSheet;
-import lotto.dto.OrderedInfos;
+import lotto.dto.TotalOrderedLottoGameNumbers;
 
 public class OutputView {
 
@@ -11,9 +11,9 @@ public class OutputView {
 
   private OutputView() {}
 
-  public static void displayOrderedGames(OrderedInfos orderedInfos) {
-    System.out.println(String.format(ORDERED_N_GAMES_FORMAT, orderedInfos.orderedCount()));
-    System.out.println(orderedInfos.toString());
+  public static void displayOrderedGames(TotalOrderedLottoGameNumbers totalOrderedLottoGameNumbers) {
+    System.out.println(String.format(ORDERED_N_GAMES_FORMAT, totalOrderedLottoGameNumbers.orderedCount()));
+    System.out.println(totalOrderedLottoGameNumbers.toString());
   }
 
 

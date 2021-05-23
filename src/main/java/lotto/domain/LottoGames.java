@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.OrderedInfos;
+import lotto.dto.TotalOrderedLottoGameNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,8 +21,8 @@ public class LottoGames {
     return new TotalRankings(matchResult);
   }
 
-  public OrderedInfos peekGameInfos() {
-    return new OrderedInfos(games);
+  public TotalOrderedLottoGameNumbers peekGameInfos() {
+    return new TotalOrderedLottoGameNumbers(games);
   }
 
   @Override
